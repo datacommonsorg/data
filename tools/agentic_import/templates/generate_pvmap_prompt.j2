@@ -18,27 +18,27 @@ You **MUST** adhere to these rules at all times.
 
 ## Task Management
 
--   **ALWAYS maintain a comprehensive todo list** for the entire workflow and
-    update tasks as they are completed.
+- **ALWAYS maintain a comprehensive todo list** for the entire workflow and
+  update tasks as they are completed.
 
 ## File Handling
 
--   **NEVER alter input data or metadata files.**
--   **NEVER read entire data files**, as they may exceed the context window.
--   **When inspecting data files, limit reads to the first 20 lines.**
--   **ALWAYS read metadata files before data files.**
+- **NEVER alter input data or metadata files.**
+- **NEVER read entire data files**, as they may exceed the context window.
+- **When inspecting data files, limit reads to the first 20 lines.**
+- **ALWAYS read metadata files before data files.**
 
 ## Data Processing Logic
 
--   If the metadata contains a `<structure:Constraints>` section, you **MUST**
-    use these definitions to determine which codes to map. Do not rely on
-    reading the data file.
--   If `<structure:Constraints>` is not present, you may sample the first 10
-    lines of the data file to understand the data.
+- If the metadata contains a `<structure:Constraints>` section, you **MUST**
+  use these definitions to determine which codes to map. Do not rely on
+  reading the data file.
+- If `<structure:Constraints>` is not present, you may sample the first 10
+  lines of the data file to understand the data.
 
 ## Reusability
 
--   **ALWAYS reuse existing Data Commons entities and conventions**
+- **ALWAYS reuse existing Data Commons entities and conventions**
 
 # CORE KNOWLEDGE BASE
 
@@ -68,9 +68,9 @@ and dimensions that apply to a series of observations for different places and
 times. A `StatisticalVariable` should have the following **mandatory
 properties**:
 
-*   `populationType`
-*   `measuredProperty`
-*   `statType`
+- `populationType`
+- `measuredProperty`
+- `statType`
 
 It can have an additional set of constraint properties such as gender, age, etc.
 
@@ -78,39 +78,39 @@ A **StatVarObservation** (also known as `SVObs`) captures the value of the
 `StatisticalVariable` for a given place and time. It has the following
 **mandatory properties**:
 
-*   `observationAbout`
-*   `observationDate`
-*   `variableMeasured`
-*   `value`
+- `observationAbout`
+- `observationDate`
+- `variableMeasured`
+- `value`
 
 It can have the following optional properties:
 
-*   `observationPeriod` -example: “P1Y”, “P1M”
-*   `unit`
-*   `scalingFactor`- Example: 100 for unit:Percent to indicate values are in the
-    range 0-100
-*   `measurementMethod`- a node describing additional considerations for a
-    value, such as base year for indexes and currencies, or if a value is an
-    Estimate or a Projection.
+- `observationPeriod` -example: “P1Y”, “P1M”
+- `unit`
+- `scalingFactor`- Example: 100 for unit:Percent to indicate values are in the
+  range 0-100
+- `measurementMethod`- a node describing additional considerations for a
+  value, such as base year for indexes and currencies, or if a value is an
+  Estimate or a Projection.
 
 ## Statvar processor User Guide
 
-*   The source data is processed into `StatisticalVariable` and
-    `StatVarObservation`.
-*   This processing is done using the `statvar_processor` script, available at:
-    https://raw.githubusercontent.com/datacommonsorg/data/refs/heads/master/tools/statvar_importer/stat_var_processor.py.
-*   The `statvar_processor` script requires a `pvmap` config file.
-*   The `pvmap` config file maps strings found in source data (e.g., column
-    headers and values) to `property:values` in the DataCommons schema.
-*   The `statvar_processor` script collects all applicable `property:values` for
-    a cell by looking up the `pvmap` using:
-    *   The strings in the cell’s content.
-    *   The cell's column or row headers.
-    *   Substrings of these (delimited by spaces).
-*   All collected `property:values` are then segregated into
-    `StatisticalVariable` and `StatVarObservation`.
-*   Any property that cannot be part of a `StatVarObservation` is added to the
-    `StatisticalVariable`.
+- The source data is processed into `StatisticalVariable` and
+  `StatVarObservation`.
+- This processing is done using the `statvar_processor` script, available at:
+  https://raw.githubusercontent.com/datacommonsorg/data/refs/heads/master/tools/statvar_importer/stat_var_processor.py.
+- The `statvar_processor` script requires a `pvmap` config file.
+- The `pvmap` config file maps strings found in source data (e.g., column
+  headers and values) to `property:values` in the DataCommons schema.
+- The `statvar_processor` script collects all applicable `property:values` for
+  a cell by looking up the `pvmap` using:
+  - The strings in the cell’s content.
+  - The cell's column or row headers.
+  - Substrings of these (delimited by spaces).
+- All collected `property:values` are then segregated into
+  `StatisticalVariable` and `StatVarObservation`.
+- Any property that cannot be part of a `StatVarObservation` is added to the
+  `StatisticalVariable`.
 
 ## `stat_var_processor.py` Script
 
@@ -118,11 +118,11 @@ The `stat_var_processor.py` script imports statistical data into Data Commons.
 
 **Function:**
 
-*   Converts source data into `StatisticalVariable` (StatVar) and
-    `StatVarObservation` (SVObs) entities.
-*   Processes input data files based on a set of configurations and a
-    property-value map.
-*   Generates MCF files for StatVars and CSV/TMCF files for SVObs.
+- Converts source data into `StatisticalVariable` (StatVar) and
+  `StatVarObservation` (SVObs) entities.
+- Processes input data files based on a set of configurations and a
+  property-value map.
+- Generates MCF files for StatVars and CSV/TMCF files for SVObs.
 
 ### Usage
 
@@ -137,12 +137,12 @@ python3 stat_var_processor.py --input_data=<path-to-csv-or-other-input> \
 
 This will generate:
 
-*   `<output-prefix>_stat_vars.mcf`: MCF file with StatVar definitions
-    (configurable name via `output_statvar_mcf`).
-*   `<output-prefix>.csv`: CSV file with StatVarObservations (configurable name
-    via `output_csv`).
-*   `<output-prefix>.tmcf`: TMCF file mapping CSV columns to StatVar PVs
-    (configurable name via `output_tmcf_file`).
+- `<output-prefix>_stat_vars.mcf`: MCF file with StatVar definitions
+  (configurable name via `output_statvar_mcf`).
+- `<output-prefix>.csv`: CSV file with StatVarObservations (configurable name
+  via `output_csv`).
+- `<output-prefix>.tmcf`: TMCF file mapping CSV columns to StatVar PVs
+  (configurable name via `output_tmcf_file`).
 
 ### Configuration
 
@@ -169,20 +169,20 @@ file, or a CSV file
 
 **Key Features and Special Properties:**
 
-*   **String Mapping**: Directly map an input string to one or more
-    property-values.
-    *   Example: `'Men': { 'populationType': 'Person', 'gender': 'Male' }`
-*   **Internal Variables for Cell Values**:
-    *   `Data`: The raw string value in a cell
-    *   `Number`: The numeric value if the cell contains a number
-    *   `Key`: The input string that was looked up in the `pv_map`
-    *   Example: `'Age_Column_Header': { 'age': '{Number}' }` (This would map
-        the numeric value from cells under 'Age\_Column\_Header' to the `age`
-        property).
-*   **Variable Substitution**: User-defined variables (capitalized names) can
-    store intermediate values for transformation, but are not emitted in the
-    output.
-    *   Example:
+- **String Mapping**: Directly map an input string to one or more
+  property-values.
+  - Example: `'Men': { 'populationType': 'Person', 'gender': 'Male' }`
+- **Internal Variables for Cell Values**:
+  - `Data`: The raw string value in a cell
+  - `Number`: The numeric value if the cell contains a number
+  - `Key`: The input string that was looked up in the `pv_map`
+  - Example: `'Age_Column_Header': { 'age': '{Number}' }` (This would map
+    the numeric value from cells under 'Age_Column_Header' to the `age`
+    property).
+- **Variable Substitution**: User-defined variables (capitalized names) can
+  store intermediate values for transformation, but are not emitted in the
+  output.
+  - Example:
 
 ```py
 {
@@ -191,17 +191,17 @@ file, or a CSV file
 }
 ```
 
-*   **`#Format`**: Use Python f-string like formatting.
+- **`#Format`**: Use Python f-string like formatting.
 
-    *   Syntax: `'<input-key>': { '#Format': '<prop>=<format-expression>' }`
-    *   Example: `'FipsCode': { '#Format':
-        'observationAbout=dcs:geoId/{Number:02d}' }` (Pads FIPS code to 2
-        digits)
+  - Syntax: `'<input-key>': { '#Format': '<prop>=<format-expression>' }`
+  - Example: `'FipsCode': { '#Format':
+'observationAbout=dcs:geoId/{Number:02d}' }` (Pads FIPS code to 2
+    digits)
 
-*   **`#Regex`**: Use named Python regular expressions to extract parts of an
-    input string.
+- **`#Regex`**: Use named Python regular expressions to extract parts of an
+  input string.
 
-    *   Example (extracting start and end age from "20-25"):
+  - Example (extracting start and end age from "20-25"):
 
 ```py
 'Age-Group': {
@@ -210,9 +210,9 @@ file, or a CSV file
 }
 ```
 
-*   **`#Eval`**: Perform complex transformations using Python expressions.
-    *   Syntax: `<property>=<expression>`
-    *   Example (unit conversion):
+- **`#Eval`**: Perform complex transformations using Python expressions.
+  - Syntax: `<property>=<expression>`
+  - Example (unit conversion):
 
 ```py
 'Weight_Lbs': {
@@ -225,29 +225,29 @@ file, or a CSV file
 (Similar to example provided: `'#Eval': 'value={Number} \* 2.205'`)
 ```
 
-*   **Supported Functions in Eval:**
-    *   `format_date(date_string, output_format_string)`: Parses and formats
-        dates. Default output is YYYY-MM-DD.
-        *   Example: `'DateColumn': { '#Eval':
-            'observationDate=format_date("{Data}")' }`
-    *   `str_to_camel_case(string_value)`: Converts a string to CamelCase.
-        *   Example: `'ProductType': { '#Eval':
-            'productEnum=str_to_camel_case("{Data}")' }`
-*   **`#Filter`**: Conditionally drop SVObs rows. If the expression evaluates to
-    `False`, the SVObs is dropped.
-    *   Example: `'ValueColumn': { 'value': '{Number}', '#Filter': '{Number} >
-        0' }` (Drops rows where 'ValueColumn' is not positive)
-*   **`#ignore`**: If a cell's PV map results in an `#ignore` property, the
-    corresponding SVObs may be dropped or the cell might be treated differently
-    depending on context.
-    *   Example: `'Not Applicable': { '#ignore': 'Value is not applicable' }`
-*   **`#Header`**: Marks a row as a header row or indicates specific properties
-    from a cell should be treated as column headers.
-    *   Example: `PV_MAP = { 'Column A': { '#Header':
-        'property1,property2=defaultValue' } }` This would mean if "Column A" is
-        found, `property1` (value taken from cell if `property1` exists for
-        "Column A" mapping) and `property2` (with `defaultValue`) become header
-        PVs for that column.
+- **Supported Functions in Eval:**
+  - `format_date(date_string, output_format_string)`: Parses and formats
+    dates. Default output is YYYY-MM-DD.
+    - Example: `'DateColumn': { '#Eval':
+'observationDate=format_date("{Data}")' }`
+  - `str_to_camel_case(string_value)`: Converts a string to CamelCase.
+    - Example: `'ProductType': { '#Eval':
+'productEnum=str_to_camel_case("{Data}")' }`
+- **`#Filter`**: Conditionally drop SVObs rows. If the expression evaluates to
+  `False`, the SVObs is dropped.
+  - Example: `'ValueColumn': { 'value': '{Number}', '#Filter': '{Number} >
+0' }` (Drops rows where 'ValueColumn' is not positive)
+- **`#ignore`**: If a cell's PV map results in an `#ignore` property, the
+  corresponding SVObs may be dropped or the cell might be treated differently
+  depending on context.
+  - Example: `'Not Applicable': { '#ignore': 'Value is not applicable' }`
+- **`#Header`**: Marks a row as a header row or indicates specific properties
+  from a cell should be treated as column headers.
+  - Example: `PV_MAP = { 'Column A': { '#Header':
+'property1,property2=defaultValue' } }` This would mean if "Column A" is
+    found, `property1` (value taken from cell if `property1` exists for
+    "Column A" mapping) and `property2` (with `defaultValue`) become header
+    PVs for that column.
 
 #### 2. General Processing Settings (via `--config_file` or command-line flags)
 
@@ -256,231 +256,231 @@ values are often present in the script.
 
 **Input Configuration:**
 
-*   `input_data` (Flag: `--input_data`): Path(s) to input data file(s) (CSV,
-    XLSX, JSON). Wildcards supported.
-*   `data_url` (Flag: `--data_url`): URL(s) to download input data from.
-*   `input_encoding` (Default: `'utf-8'`): Encoding of input files.
-    *   Example: `{'input_encoding': 'latin-1'}`
-*   `input_delimiter` (Default: `','`): Delimiter for CSV files.
-    *   Example: `{'input_delimiter': '\t'}` for TSV files.
-*   `input_xls` (Default: `[]`): List of sheet names to process if input is an
-    XLSX file. If empty, all sheets are processed.
-    *   Example: `{'input_xls': ['Sheet1', 'DataSheet']}`
-*   `header_rows` (Default: `0`): Number of initial rows to be treated strictly
-    as column headers. PVs from these cells apply to the entire column below
-    them.
-    *   Example: `{'header_rows': 2}`
-*   `header_columns` (Default: `0`): Number of initial columns to be treated as
-    row headers. PVs from these cells apply to the entire row to their right.
-*   `mapped_rows` (Default: `0`): Number of initial rows (after `skip_rows`)
-    where all cells are looked up in the `pv_map`. PVs derived from a cell apply
-    to subsequent cells in that row until overridden. Can also be a list of row
-    indices.
-    *   Example: `{'mapped_rows': 1}` or `{'mapped_rows': [1, 3, 5]}`
-*   `mapped_columns` (Default: `0`): Number of initial columns where all cells
-    are looked up in the `pv_map`. PVs derived apply down the column. Can also
-    be a list of column indices (1-based or Excel-style letters like 'A', 'B').
-    *   Example: `{'mapped_columns': ['A', 'C']}`
-*   `skip_rows` (Default: `0`): Number of initial rows to skip entirely from the
-    input file.
-*   `process_rows` (Default: `[0]` i.e., process all): A list of specific row
-    numbers to process. If `[0]`, all rows (after skipping) are processed.
-*   `input_rows` (Default: `sys.maxsize`): Maximum number of rows to process per
-    file (after skipping). Useful for debugging.
-    *   Example: `{'input_rows': 100}`
-*   `input_columns` (Default: `sys.maxsize`): Maximum number of columns to
-    process per row. Useful for debugging. Can also be a list of 1-based column
-    indices to process.
-    *   Example: `{'input_columns': [1, 2, 5]}`
-*   `input_min_columns_per_row` (Default: `2`): Rows with fewer columns than
-    this are ignored.
-*   `use_all_numeric_data_values` (Default: `False`): If `True`, any numeric
-    value found in a cell not otherwise mapped by `pv_map` will be treated as
-    `{'value': <numeric_value>}`. If `False` (default), it's treated as
-    `{self._config.get('numeric_data_key', 'Number'): <numeric_value>}`.
-*   `word_delimiter` (Default: `' '`): Delimiter used for tokenizing file names
-    or headers when looking up in `pv_map`. Can be a regex pattern.
-*   `default_pvs_key` (Default: `'DEFAULT_PV'`): A special key in `pv_map` whose
-    PVs are applied globally. < > DO NOT USE DEFAULT_PV, there is bug in
-    code</IMPORTANT>
-*   `data_key` (Default: `'Data'`): Internal key for the string data of a cell.
-*   `numeric_data_key` (Default: `'Number'`): Internal key for the numeric data
-    of a cell.
-*   `pv_lookup_key` (Default: `'Key'`): Internal key for the matched key from
-    `pv_map`.
-*   `number_decimal` (Default: `'.'`): Decimal character for parsing numbers.
-*   `number_separator` (Default: `', '`): Thousands separator for parsing
-    numbers (can be a space too).
+- `input_data` (Flag: `--input_data`): Path(s) to input data file(s) (CSV,
+  XLSX, JSON). Wildcards supported.
+- `data_url` (Flag: `--data_url`): URL(s) to download input data from.
+- `input_encoding` (Default: `'utf-8'`): Encoding of input files.
+  - Example: `{'input_encoding': 'latin-1'}`
+- `input_delimiter` (Default: `','`): Delimiter for CSV files.
+  - Example: `{'input_delimiter': '\t'}` for TSV files.
+- `input_xls` (Default: `[]`): List of sheet names to process if input is an
+  XLSX file. If empty, all sheets are processed.
+  - Example: `{'input_xls': ['Sheet1', 'DataSheet']}`
+- `header_rows` (Default: `0`): Number of initial rows to be treated strictly
+  as column headers. PVs from these cells apply to the entire column below
+  them.
+  - Example: `{'header_rows': 2}`
+- `header_columns` (Default: `0`): Number of initial columns to be treated as
+  row headers. PVs from these cells apply to the entire row to their right.
+- `mapped_rows` (Default: `0`): Number of initial rows (after `skip_rows`)
+  where all cells are looked up in the `pv_map`. PVs derived from a cell apply
+  to subsequent cells in that row until overridden. Can also be a list of row
+  indices.
+  - Example: `{'mapped_rows': 1}` or `{'mapped_rows': [1, 3, 5]}`
+- `mapped_columns` (Default: `0`): Number of initial columns where all cells
+  are looked up in the `pv_map`. PVs derived apply down the column. Can also
+  be a list of column indices (1-based or Excel-style letters like 'A', 'B').
+  - Example: `{'mapped_columns': ['A', 'C']}`
+- `skip_rows` (Default: `0`): Number of initial rows to skip entirely from the
+  input file.
+- `process_rows` (Default: `[0]` i.e., process all): A list of specific row
+  numbers to process. If `[0]`, all rows (after skipping) are processed.
+- `input_rows` (Default: `sys.maxsize`): Maximum number of rows to process per
+  file (after skipping). Useful for debugging.
+  - Example: `{'input_rows': 100}`
+- `input_columns` (Default: `sys.maxsize`): Maximum number of columns to
+  process per row. Useful for debugging. Can also be a list of 1-based column
+  indices to process.
+  - Example: `{'input_columns': [1, 2, 5]}`
+- `input_min_columns_per_row` (Default: `2`): Rows with fewer columns than
+  this are ignored.
+- `use_all_numeric_data_values` (Default: `False`): If `True`, any numeric
+  value found in a cell not otherwise mapped by `pv_map` will be treated as
+  `{'value': <numeric_value>}`. If `False` (default), it's treated as
+  `{self._config.get('numeric_data_key', 'Number'): <numeric_value>}`.
+- `word_delimiter` (Default: `' '`): Delimiter used for tokenizing file names
+  or headers when looking up in `pv_map`. Can be a regex pattern.
+- `default_pvs_key` (Default: `'DEFAULT_PV'`): A special key in `pv_map` whose
+  PVs are applied globally. < > DO NOT USE DEFAULT_PV, there is bug in
+  code</IMPORTANT>
+- `data_key` (Default: `'Data'`): Internal key for the string data of a cell.
+- `numeric_data_key` (Default: `'Number'`): Internal key for the numeric data
+  of a cell.
+- `pv_lookup_key` (Default: `'Key'`): Internal key for the matched key from
+  `pv_map`.
+- `number_decimal` (Default: `'.'`): Decimal character for parsing numbers.
+- `number_separator` (Default: `', '`): Thousands separator for parsing
+  numbers (can be a space too).
 
 **Output Configuration:**
 
-*   `output_path` (Flag: `--output_path`): Prefix for output files.
-*   `output_statvar_mcf` (Default: `<output_path>_stat_vars.mcf`): Filename for
-    the StatVar MCF.
-*   `output_csv` (Default: `<output_path>.csv`): Filename for the SVObs CSV.
-*   `output_tmcf_file` (Default: `<output_path>.tmcf`): Filename for the SVObs
-    TMCF.
-*   `generate_statvar_mcf` (Default: `True`): Whether to generate the StatVar
-    MCF file.
-*   `generate_csv` (Default: `True`): Whether to generate the SVObs CSV file.
-*   `generate_tmcf` (Default: `True`): Whether to generate the SVObs TMCF file.
-*   `output_columns` (Default: `None`, meaning auto-detected): List of
-    properties to be emitted as columns in the SVObs CSV. If `None`, it includes
-    properties that vary across SVObs.
-    *   Example: `{'output_columns': ['observationAbout', 'observationDate',
-        'variableMeasured', 'value', 'unit']}`
-*   `skip_constant_csv_columns` (Default: `False`): If `True`, SVObs properties
-    that have the same value for all observations are not included as columns in
-    the CSV but are written as constants in the TMCF.
-*   `output_precision_digits` (Default: `5`): Number of decimal places for
-    floating-point numbers in the output CSV.
-*   `output_only_new_statvars` (Default: `False`): If `True`, only StatVars that
-    don't exist or have changed from `existing_statvar_mcf` are written to the
-    output StatVar MCF.
-*   `statvar_diff_config`: Configuration for `output_only_new_statvars` to
-    specify how to compare StatVars.
-    *   Example: `{'statvar_diff_config': {'ignore_property': ['description',
-        'name']}}`
-*   `output_counters` (Default: `<output_path>_counters.txt`): Filename to save
-    processing counters.
-*   `output_schema_mcf` (Default: `<output_path>_schema.mcf` if
-    `generate_schema_mcf` is `True`): Filename for newly generated schema
-    elements.
-*   `output_sanity_check` (Default:
-    `<output_statvar_mcf_filename>_sanity_errors.txt`): File to write schema
-    sanity check errors.
-*   `output_csv_mode` (Default: `'w'`): Mode to open the output CSV file ('w'
-    for write, 'a' for append).
+- `output_path` (Flag: `--output_path`): Prefix for output files.
+- `output_statvar_mcf` (Default: `<output_path>_stat_vars.mcf`): Filename for
+  the StatVar MCF.
+- `output_csv` (Default: `<output_path>.csv`): Filename for the SVObs CSV.
+- `output_tmcf_file` (Default: `<output_path>.tmcf`): Filename for the SVObs
+  TMCF.
+- `generate_statvar_mcf` (Default: `True`): Whether to generate the StatVar
+  MCF file.
+- `generate_csv` (Default: `True`): Whether to generate the SVObs CSV file.
+- `generate_tmcf` (Default: `True`): Whether to generate the SVObs TMCF file.
+- `output_columns` (Default: `None`, meaning auto-detected): List of
+  properties to be emitted as columns in the SVObs CSV. If `None`, it includes
+  properties that vary across SVObs.
+  - Example: `{'output_columns': ['observationAbout', 'observationDate',
+'variableMeasured', 'value', 'unit']}`
+- `skip_constant_csv_columns` (Default: `False`): If `True`, SVObs properties
+  that have the same value for all observations are not included as columns in
+  the CSV but are written as constants in the TMCF.
+- `output_precision_digits` (Default: `5`): Number of decimal places for
+  floating-point numbers in the output CSV.
+- `output_only_new_statvars` (Default: `False`): If `True`, only StatVars that
+  don't exist or have changed from `existing_statvar_mcf` are written to the
+  output StatVar MCF.
+- `statvar_diff_config`: Configuration for `output_only_new_statvars` to
+  specify how to compare StatVars.
+  - Example: `{'statvar_diff_config': {'ignore_property': ['description',
+'name']}}`
+- `output_counters` (Default: `<output_path>_counters.txt`): Filename to save
+  processing counters.
+- `output_schema_mcf` (Default: `<output_path>_schema.mcf` if
+  `generate_schema_mcf` is `True`): Filename for newly generated schema
+  elements.
+- `output_sanity_check` (Default:
+  `<output_statvar_mcf_filename>_sanity_errors.txt`): File to write schema
+  sanity check errors.
+- `output_csv_mode` (Default: `'w'`): Mode to open the output CSV file ('w'
+  for write, 'a' for append).
 
 **StatVar and SVObs Generation:**
 
-*   `schemaless` (Default: `False`): Enables support for schemaless StatVars. If
-    `True`, properties not defined in the DC schema can be used (they might be
-    commented out in MCF). The `measuredProperty` of such StatVars is set to
-    their own DCID.
-*   `statvar_dcid_ignore_values` (Default: `[]`): List of data values (e.g.,
-    'NA', 'X') to ignore when they appear as values for properties used in DCID
-    generation.
-*   `default_statvar_pvs` (Default: `{}`): Dictionary of P:V to apply to all
-    StatVars if not already present.
-    *   Example: `{'default_statvar_pvs': {'typeOf': 'dcs:StatisticalVariable',
-        'statType': 'dcs:measuredValue'}}`
-*   `default_svobs_pvs` (Default: `{}`): Dictionary of P:V to apply to all SVObs
-    if not already present.
-    *   Example: `{'default_svobs_pvs': {'typeOf': 'dcs:StatVarObservation'}}`
-*   `required_statvar_properties` (Default: `[]`): List of mandatory properties
-    for a StatVar to be considered valid.
-    *   Example: `{'required_statvar_properties': ['populationType',
-        'measuredProperty', 'statType']}`
-*   `required_statvarobs_properties` (Default: `[]`): List of mandatory
-    properties for an SVObs.
-    *   Example: `{'required_statvarobs_properties': ['observationAbout',
-        'observationDate', 'variableMeasured', 'value']}`
-*   `statvar_dcid_ignore_properties` (Default list includes 'name',
-    'description', etc.): Properties to ignore when generating a StatVar DCID.
-*   `statvar_dcid_remap_csv`: Path to a CSV file mapping old StatVar DCIDs to
-    new ones. Columns: `old_dcid`, `dcid`.
-*   `existing_statvar_mcf`: Path to an MCF file of existing StatVars. Used for
-    `output_only_new_statvars` and potentially for reusing existing StatVar
-    DCIDs.
-*   `schemaless_statvar_comment_undefined_pvs` (Default: `False`): If `True` and
-    `schemaless` is enabled, valid DC properties that are not yet defined in the
-    DC API are commented out in the StatVar MCF.
-*   `generate_statvar_name` (Default: `False`): If `True`, automatically
-    generates a `name` for StatVars based on their properties if no name is
-    provided.
-*   `llm_generate_statvar_name` (Default: `False`): If `True` and
-    `google_api_key` is set, uses an LLM to generate StatVar names.
-*   `google_api_key`: API key for Google services (e.g., LLM for name
-    generation).
-*   `generate_schema_mcf` (Default: `False`): If `True`, generates an MCF file
-    for new schema elements (properties, enum values) encountered.
-*   `existing_schema_mcf`: Path to an MCF file of existing schema. Used with
-    `generate_schema_mcf` to avoid re-defining existing elements.
-*   `multi_value_properties` (Default: `{}`): A dictionary specifying properties
-    that can have multiple values and how to handle them (e.g., some might be
-    lists, others might generate multiple SVObs). Often includes
-    `constraintProperties`.
-*   `properties_with_statvars` (Default: `['measurementDenominator',
-    'variableMeasured']`): Properties whose values might themselves be StatVars
-    or define how to construct a StatVar.
-*   `input_reference_column` (Default value is likely `__INPUT_REFERENCE__` or
-    similar): Name of the column added to SVObs CSV to store the input file
-    context (filename:line:column).
+- `schemaless` (Default: `False`): Enables support for schemaless StatVars. If
+  `True`, properties not defined in the DC schema can be used (they might be
+  commented out in MCF). The `measuredProperty` of such StatVars is set to
+  their own DCID.
+- `statvar_dcid_ignore_values` (Default: `[]`): List of data values (e.g.,
+  'NA', 'X') to ignore when they appear as values for properties used in DCID
+  generation.
+- `default_statvar_pvs` (Default: `{}`): Dictionary of P:V to apply to all
+  StatVars if not already present.
+  - Example: `{'default_statvar_pvs': {'typeOf': 'dcs:StatisticalVariable',
+'statType': 'dcs:measuredValue'}}`
+- `default_svobs_pvs` (Default: `{}`): Dictionary of P:V to apply to all SVObs
+  if not already present.
+  - Example: `{'default_svobs_pvs': {'typeOf': 'dcs:StatVarObservation'}}`
+- `required_statvar_properties` (Default: `[]`): List of mandatory properties
+  for a StatVar to be considered valid.
+  - Example: `{'required_statvar_properties': ['populationType',
+'measuredProperty', 'statType']}`
+- `required_statvarobs_properties` (Default: `[]`): List of mandatory
+  properties for an SVObs.
+  - Example: `{'required_statvarobs_properties': ['observationAbout',
+'observationDate', 'variableMeasured', 'value']}`
+- `statvar_dcid_ignore_properties` (Default list includes 'name',
+  'description', etc.): Properties to ignore when generating a StatVar DCID.
+- `statvar_dcid_remap_csv`: Path to a CSV file mapping old StatVar DCIDs to
+  new ones. Columns: `old_dcid`, `dcid`.
+- `existing_statvar_mcf`: Path to an MCF file of existing StatVars. Used for
+  `output_only_new_statvars` and potentially for reusing existing StatVar
+  DCIDs.
+- `schemaless_statvar_comment_undefined_pvs` (Default: `False`): If `True` and
+  `schemaless` is enabled, valid DC properties that are not yet defined in the
+  DC API are commented out in the StatVar MCF.
+- `generate_statvar_name` (Default: `False`): If `True`, automatically
+  generates a `name` for StatVars based on their properties if no name is
+  provided.
+- `llm_generate_statvar_name` (Default: `False`): If `True` and
+  `google_api_key` is set, uses an LLM to generate StatVar names.
+- `google_api_key`: API key for Google services (e.g., LLM for name
+  generation).
+- `generate_schema_mcf` (Default: `False`): If `True`, generates an MCF file
+  for new schema elements (properties, enum values) encountered.
+- `existing_schema_mcf`: Path to an MCF file of existing schema. Used with
+  `generate_schema_mcf` to avoid re-defining existing elements.
+- `multi_value_properties` (Default: `{}`): A dictionary specifying properties
+  that can have multiple values and how to handle them (e.g., some might be
+  lists, others might generate multiple SVObs). Often includes
+  `constraintProperties`.
+- `properties_with_statvars` (Default: `['measurementDenominator',
+'variableMeasured']`): Properties whose values might themselves be StatVars
+  or define how to construct a StatVar.
+- `input_reference_column` (Default value is likely `__INPUT_REFERENCE__` or
+  similar): Name of the column added to SVObs CSV to store the input file
+  context (filename:line:column).
 
 **Data Transformation and Processing Logic:**
 
-*   `aggregate_duplicate_svobs` (Default: `None`): If set (e.g., 'sum', 'min',
-    'max', 'mean', 'list'), SVObs with the same place, date, and StatVar but
-    different values will be aggregated using this method. This can also be
-    controlled per-SVObs via the `#Aggregate` key.
-*   `aggregate_key` (Default: `'#Aggregate'`): The property name in PVs that
-    specifies the aggregation method for duplicate SVObs, overriding
-    `aggregate_duplicate_svobs`.
-*   `merged_pvs_property` (Default: `'#MergedSVObs'`): Internal property to
-    store references to SVObs that were aggregated.
-*   `drop_statvars_with_dup_svobs` (Default: `True`): If `True`, StatVars that
-    lead to duplicate SVObs (same place+date+StatVar, different values, and no
-    aggregation specified) are dropped.
-*   `duplicate_statvars_key`: Internal key used to mark statvars with the same
-    DCID but different properties.
-*   `duplicate_svobs_key`: Internal key used to mark SVObs that are duplicates
-    for the same place+year+StatVar but different values, when not aggregated.
-*   `multiply_factor` (Default: `'#Multiply'`): A property key in PVs. If
-    present, its numeric value is used to multiply the SVObs `value`.
-    *   Example: `{'Value_USD': {'value':'{Number}', '#Multiply': 0.85,
-        'unit':'EUR'}}` (Converts USD value to EUR using a 0.85 factor)
-*   `date_format_key` (Default: `'#DateFormat'`): Property name in PVs
-    specifying the input date format string (strptime format) for a date value.
-*   `date_format`: A global input date format string if not specified per value.
-*   `observation_date_format` (Default: auto-detected, aims for ISO YYYY-MM-DD,
-    YYYY-MM, or YYYY): The target format for `observationDate` in the output.
-*   `filter_key` (Default: `'#Filter'`): The property key in PVs used for
-    filtering SVObs via an eval expression.
-*   `eval_globals`: Dictionary of global functions/modules available to `#Eval`
-    and `#Filter` expressions.
-*   `drop_statvars_without_svobs` (Default: `True`): If `True`, StatVars that
-    have no corresponding SVObs generated are dropped from the output MCF.
+- `aggregate_duplicate_svobs` (Default: `None`): If set (e.g., 'sum', 'min',
+  'max', 'mean', 'list'), SVObs with the same place, date, and StatVar but
+  different values will be aggregated using this method. This can also be
+  controlled per-SVObs via the `#Aggregate` key.
+- `aggregate_key` (Default: `'#Aggregate'`): The property name in PVs that
+  specifies the aggregation method for duplicate SVObs, overriding
+  `aggregate_duplicate_svobs`.
+- `merged_pvs_property` (Default: `'#MergedSVObs'`): Internal property to
+  store references to SVObs that were aggregated.
+- `drop_statvars_with_dup_svobs` (Default: `True`): If `True`, StatVars that
+  lead to duplicate SVObs (same place+date+StatVar, different values, and no
+  aggregation specified) are dropped.
+- `duplicate_statvars_key`: Internal key used to mark statvars with the same
+  DCID but different properties.
+- `duplicate_svobs_key`: Internal key used to mark SVObs that are duplicates
+  for the same place+year+StatVar but different values, when not aggregated.
+- `multiply_factor` (Default: `'#Multiply'`): A property key in PVs. If
+  present, its numeric value is used to multiply the SVObs `value`.
+  - Example: `{'Value_USD': {'value':'{Number}', '#Multiply': 0.85,
+'unit':'EUR'}}` (Converts USD value to EUR using a 0.85 factor)
+- `date_format_key` (Default: `'#DateFormat'`): Property name in PVs
+  specifying the input date format string (strptime format) for a date value.
+- `date_format`: A global input date format string if not specified per value.
+- `observation_date_format` (Default: auto-detected, aims for ISO YYYY-MM-DD,
+  YYYY-MM, or YYYY): The target format for `observationDate` in the output.
+- `filter_key` (Default: `'#Filter'`): The property key in PVs used for
+  filtering SVObs via an eval expression.
+- `eval_globals`: Dictionary of global functions/modules available to `#Eval`
+  and `#Filter` expressions.
+- `drop_statvars_without_svobs` (Default: `True`): If `True`, StatVars that
+  have no corresponding SVObs generated are dropped from the output MCF.
 
 **Place Resolution:**
 
-*   `resolve_places` (Default: `False`, but automatically set to `True` if
-    certain place-related configs are provided like `maps_api_key` or
-    `places_csv`): Enables place name to DCID resolution.
-*   `dc_api_key`: API key for Data Commons API (used for place resolution).
-*   `maps_api_key`: API key for Google Maps Geocoding API (used for place
-    resolution).
-*   `places_csv`: Path to a CSV file providing manual place name to DCID
-    mappings (columns: `place_name`, `dcid`, and optional `country`,
-    `administrative_area`).
-*   `places_resolved_csv`: Path to a CSV file where successfully resolved places
-    (name to DCID) are cached/written. This file can be reviewed and manually
-    edited
-*   `place_type` (Flag: `--place_type`): Comma-separated list of DC place types
-    (e.g., 'City', 'County') to filter resolution results.
-    *   Example: `{'place_type': 'AdministrativeArea1,AdministrativeArea2'}`
-*   `maps_api_country` / `places_within` (Flag: `--places_within`): Restrict
-    place resolution to a specific country or administrative area DCID(s).
-    *   Example: `{'maps_api_country': 'USA'}` or `{'places_within':
-        'country/USA'}`
-*   `maps_api_administrative_area`: Further restrict place resolution by
-    administrative area.
+- `resolve_places` (Default: `False`, but automatically set to `True` if
+  certain place-related configs are provided like `maps_api_key` or
+  `places_csv`): Enables place name to DCID resolution.
+- `dc_api_key`: API key for Data Commons API (used for place resolution).
+- `maps_api_key`: API key for Google Maps Geocoding API (used for place
+  resolution).
+- `places_csv`: Path to a CSV file providing manual place name to DCID
+  mappings (columns: `place_name`, `dcid`, and optional `country`,
+  `administrative_area`).
+- `places_resolved_csv`: Path to a CSV file where successfully resolved places
+  (name to DCID) are cached/written. This file can be reviewed and manually
+  edited
+- `place_type` (Flag: `--place_type`): Comma-separated list of DC place types
+  (e.g., 'City', 'County') to filter resolution results.
+  - Example: `{'place_type': 'AdministrativeArea1,AdministrativeArea2'}`
+- `maps_api_country` / `places_within` (Flag: `--places_within`): Restrict
+  place resolution to a specific country or administrative area DCID(s).
+  - Example: `{'maps_api_country': 'USA'}` or `{'places_within':
+'country/USA'}`
+- `maps_api_administrative_area`: Further restrict place resolution by
+  administrative area.
 
 **Execution and Debugging:**
 
-*   `resume` (Flag: `--resume`, Default: `False`): If `True`, skips processing
-    if output files already exist.
-*   `debug` (Flag: `--debug`, Default: `False`): Enables verbose logging for
-    debugging.
-*   `parallelism` (Flag: `--parallelism`, Default: `0` meaning
-    `os.cpu_count()`): Number of parallel processes to use when processing
-    multiple input files or sharded data. If 1, runs serially.
-*   `http_port` (Flag: `--http_port`): If set, launches an HTTP server on this
-    port to provide a web UI for the script.
-*   `shard_input_by_column`: If `parallelism` \> 1, specifies a column name to
-    shard the input CSV by, processing each shard in parallel.
-*   `shard_prefix_length`: When sharding, length of the prefix of the shard
-    column value to group by.
+- `resume` (Flag: `--resume`, Default: `False`): If `True`, skips processing
+  if output files already exist.
+- `debug` (Flag: `--debug`, Default: `False`): Enables verbose logging for
+  debugging.
+- `parallelism` (Flag: `--parallelism`, Default: `0` meaning
+  `os.cpu_count()`): Number of parallel processes to use when processing
+  multiple input files or sharded data. If 1, runs serially.
+- `http_port` (Flag: `--http_port`): If set, launches an HTTP server on this
+  port to provide a web UI for the script.
+- `shard_input_by_column`: If `parallelism` \> 1, specifies a column name to
+  shard the input CSV by, processing each shard in parallel.
+- `shard_prefix_length`: When sharding, length of the prefix of the shard
+  column value to group by.
 
 This guide covers a comprehensive set of configurations. For the most precise
 details on flags and their defaults, referring to the `config_flags.py` file
@@ -498,16 +498,16 @@ The core logic for this aggregation is handled within the `StatVarsMap` class,
 specifically by the `aggregate_value` method This method supports several
 aggregation types:
 
-*   `sum`: Adds the new value to the existing value.
-*   `min`: Takes the minimum of the existing and new values.
-*   `max`: Takes the maximum of the existing and new values.
-*   `mean`: Calculates the running mean of the values. It keeps track of the
-    count of aggregated values using an internal property like
-    `#Count-<aggregate_property>`.
-*   `list`: Appends the new value to a comma-separated list of existing values.
-*   `first`: Keeps the first encountered value.
-*   `last`: Overwrites the existing value with the new value (effectively
-    keeping the last encountered).
+- `sum`: Adds the new value to the existing value.
+- `min`: Takes the minimum of the existing and new values.
+- `max`: Takes the maximum of the existing and new values.
+- `mean`: Calculates the running mean of the values. It keeps track of the
+  count of aggregated values using an internal property like
+  `#Count-<aggregate_property>`.
+- `list`: Appends the new value to a comma-separated list of existing values.
+- `first`: Keeps the first encountered value.
+- `last`: Overwrites the existing value with the new value (effectively
+  keeping the last encountered).
 
 These aggregation types are case-insensitive in the configuration
 
@@ -553,9 +553,9 @@ Date,Product,Location,Sales,RegisterID
 
 **Desired Aggregations:**
 
-*   For "Apples" sales, we want the total sum for the day.
-*   For "Bananas" sales, we want the maximum reported sale for the day (perhaps
-    one register had a correction).
+- For "Apples" sales, we want the total sum for the day.
+- For "Bananas" sales, we want the maximum reported sale for the day (perhaps
+  one register had a correction).
 
 **`pv_map.py`:**
 
@@ -604,31 +604,31 @@ PV_MAP = {
 When processing `data.csv`:
 
 1.  For the first row (`2025-05-01,Apples,Store1,50,Reg1`):
-    *   An SVObs for `dailySales_Apples` with value 50 is created.
+    - An SVObs for `dailySales_Apples` with value 50 is created.
 2.  For the second row (`2025-05-01,Apples,Store1,30,Reg2`):
-    *   The script identifies this as a duplicate SVObs (same `observationDate`,
-        `observationAbout` for `dailySales_Apples`).
-    *   The PVs for "Apples" specify `#Aggregate: 'sum'`.
-    *   The `aggregate_value` method is called. The existing value (50) and the
-        new value (30) are summed, resulting in an updated SVObs value of 80 for
-        `dailySales_Apples` on `2025-05-01` at `Store1`
+    - The script identifies this as a duplicate SVObs (same `observationDate`,
+      `observationAbout` for `dailySales_Apples`).
+    - The PVs for "Apples" specify `#Aggregate: 'sum'`.
+    - The `aggregate_value` method is called. The existing value (50) and the
+      new value (30) are summed, resulting in an updated SVObs value of 80 for
+      `dailySales_Apples` on `2025-05-01` at `Store1`
 3.  For the third row (`2025-05-01,Bananas,Store1,100,Reg1`):
-    *   An SVObs for `dailySales_Bananas` with value 100 is created.
+    - An SVObs for `dailySales_Bananas` with value 100 is created.
 4.  For the fourth row (`2025-05-01,Bananas,Store1,110,Reg2`):
-    *   This is a duplicate for `dailySales_Bananas`.
-    *   The PVs for "Bananas" specify `#Aggregate: 'max'`.
-    *   The `aggregate_value` method takes `max(100, 110)`, resulting in an
-        updated SVObs value of 110\.
+    - This is a duplicate for `dailySales_Bananas`.
+    - The PVs for "Bananas" specify `#Aggregate: 'max'`.
+    - The `aggregate_value` method takes `max(100, 110)`, resulting in an
+      updated SVObs value of 110\.
 
 **Output SVObs (conceptual):**
 
 After processing, the `output/sales_summary.csv` would effectively represent:
 
-observationDate | observationAbout | variableMeasured         | value | unit | measurementMethod        | ...
-:-------------- | :--------------- | :----------------------- | :---- | :--- | :----------------------- | :--
-2025-05-01      | Store1           | dcid:dailySales\_Apples  | 80    | USD  | dcs:DataCommonsAggregate | ...
-2025-05-01      | Store1           | dcid:dailySales\_Bananas | 110   | USD  | dcs:DataCommonsAggregate | ...
-2025-05-02      | Store1           | dcid:dailySales\_Apples  | 45    | USD  |                          | ...
+| observationDate | observationAbout | variableMeasured        | value | unit | measurementMethod        | ...  |
+| :-------------- | :--------------- | :---------------------- | :---- | :--- | :----------------------- | :--- |
+| 2025-05-01      | Store1           | dcid:dailySales_Apples  | 80    | USD  | dcs:DataCommonsAggregate | ...  |
+| 2025-05-01      | Store1           | dcid:dailySales_Bananas | 110   | USD  | dcs:DataCommonsAggregate | ...  |
+| 2025-05-02      | Store1           | dcid:dailySales_Apples  | 45    | USD  |                          | ...  |
 
 The `measurementMethod` property of the SVObs will also be updated to indicate
 that aggregation has occurred (e.g., to `dcs:DataCommonsAggregate` or
@@ -709,8 +709,8 @@ when constructing the mappings.
 
 ### Constriants
 
--   The pvmap should have at least one source string mapped to the following
-    properties:
+- The pvmap should have at least one source string mapped to the following
+  properties:
 
 1.  populationType. Examples populationTypes are Person, EconomicActivity, Debt.
 
@@ -722,10 +722,10 @@ when constructing the mappings.
 
 5.  value: Example: value, {Number}
 
--   Check that each place does not get duplicate values for the same date.
--   Add additional property:values to map such cells to a unique set of
-    StatisticalVariables or unique SatVarObservations with different
-    measurementMethod, unit or observationPeriod.
+- Check that each place does not get duplicate values for the same date.
+- Add additional property:values to map such cells to a unique set of
+  StatisticalVariables or unique SatVarObservations with different
+  measurementMethod, unit or observationPeriod.
 
 ## Few Examples of PV map
 
@@ -739,18 +739,18 @@ This is a **PV Map** (csv format):
 
 key,,,,,,
 
-BIS:WS\_CBPOL(1.0): Central bank policy
+BIS:WS_CBPOL(1.0): Central bank policy
 rates,measuredProperty,interestRate,populationType,FinancialInstrument,instrumentType,CountryCentralBankPolicyRate
 
 M: Monthly,measurementQualifier,Monthly,observationPeriod,P1M,,
 
 D: Daily,measurementQualifier,Daily,observationPeriod,P1D,,
 
-REF\_AREA:Reference area,observationAbout,{Data},,,,
+REF_AREA:Reference area,observationAbout,{Data},,,,
 
-TIME\_PERIOD:Time period or range,observationDate,{Data},,,,
+TIME_PERIOD:Time period or range,observationDate,{Data},,,,
 
-OBS\_VALUE:Observation Value,value,{Number},,,,
+OBS_VALUE:Observation Value,value,{Number},,,,
 
 368: Per cent per year,unit,PercentPerAnnum,,,,
 
@@ -758,19 +758,19 @@ OBS\_VALUE:Observation Value,value,{Number},,,,
 
 **Input CSV Data**
 
--   Above is a the pvmap for an input data like this:
+- Above is a the pvmap for an input data like this:
 
 —-------
 
-STRUCTURE,STRUCTURE\_ID,ACTION,FREQ:Frequency,REF\_AREA:Reference
-area,TIME\_PERIOD:Time period or range,OBS\_VALUE:Observation
-Value,UNIT\_MEASURE:Unit of measure,UNIT\_MULT:Unit Multiplier,TIME\_FORMAT:Time
-Format,COMPILATION:Compilation,DECIMALS:Decimals,SOURCE\_REF:Publication
-Source,SUPP\_INFO\_BREAKS:Supplemental information and
-breaks,TITLE:Title,OBS\_STATUS:Observation Status,OBS\_CONF:Observation
-confidentiality,OBS\_PRE\_BREAK:Pre-Break Observation
+STRUCTURE,STRUCTURE_ID,ACTION,FREQ:Frequency,REF_AREA:Reference
+area,TIME_PERIOD:Time period or range,OBS_VALUE:Observation
+Value,UNIT_MEASURE:Unit of measure,UNIT_MULT:Unit Multiplier,TIME_FORMAT:Time
+Format,COMPILATION:Compilation,DECIMALS:Decimals,SOURCE_REF:Publication
+Source,SUPP_INFO_BREAKS:Supplemental information and
+breaks,TITLE:Title,OBS_STATUS:Observation Status,OBS_CONF:Observation
+confidentiality,OBS_PRE_BREAK:Pre-Break Observation
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1993-04,0.63,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -790,7 +790,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1993-05,0.11,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -810,7 +810,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1993-06,0.53,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -830,7 +830,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1993-07,0.36,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -850,7 +850,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1993-08,0.25,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -870,7 +870,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1993-09,0.59,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -890,7 +890,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1993-10,0.3,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -910,7 +910,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1993-11,0.57,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -930,7 +930,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1993-12,0.73,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -950,7 +950,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1994-01,0.26,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -970,7 +970,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1994-02,0.32,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -990,7 +990,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1994-03,0.45,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -1010,7 +1010,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1994-04,0.66,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -1030,7 +1030,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,M: Monthly,AR:
 Argentina,1994-05,0.81,368: Per cent per year,0: Units,,"From 22 July 2024
 onwards: Liquidity absorption rate for treasury bills; from 18 December 2023 to
 21 July 2024: Overnight Reverse Repos Interest Rate; from 6 January 2022 to 17
@@ -1050,7 +1050,7 @@ the official policy rate as from 15 Dec 2015\. Prior to that, the monetary
 policy was not articulated around interest rate. ", Central bank policy rates \-
 Argentina \- Monthly \- End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
 Kingdom,2009-09-08,0.5,368: Per cent per year,0: Units,,From 3 Aug 2006 onwards:
 official bank rate; from 6 May 1997 to 2 Aug 2006: repo rate; from 20 Aug 1981
 to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
@@ -1058,7 +1058,7 @@ to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
 Four,Bank of England,, Central bank policy rates \- United Kingdom \- Daily \-
 End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
 Kingdom,2009-09-09,0.5,368: Per cent per year,0: Units,,From 3 Aug 2006 onwards:
 official bank rate; from 6 May 1997 to 2 Aug 2006: repo rate; from 20 Aug 1981
 to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
@@ -1066,7 +1066,7 @@ to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
 Four,Bank of England,, Central bank policy rates \- United Kingdom \- Daily \-
 End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
 Kingdom,2009-09-10,0.5,368: Per cent per year,0: Units,,From 3 Aug 2006 onwards:
 official bank rate; from 6 May 1997 to 2 Aug 2006: repo rate; from 20 Aug 1981
 to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
@@ -1074,7 +1074,7 @@ to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
 Four,Bank of England,, Central bank policy rates \- United Kingdom \- Daily \-
 End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
 Kingdom,2009-09-11,0.5,368: Per cent per year,0: Units,,From 3 Aug 2006 onwards:
 official bank rate; from 6 May 1997 to 2 Aug 2006: repo rate; from 20 Aug 1981
 to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
@@ -1082,7 +1082,7 @@ to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
 Four,Bank of England,, Central bank policy rates \- United Kingdom \- Daily \-
 End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
 Kingdom,2009-09-14,0.5,368: Per cent per year,0: Units,,From 3 Aug 2006 onwards:
 official bank rate; from 6 May 1997 to 2 Aug 2006: repo rate; from 20 Aug 1981
 to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
@@ -1090,7 +1090,7 @@ to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
 Four,Bank of England,, Central bank policy rates \- United Kingdom \- Daily \-
 End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
 Kingdom,2009-09-15,0.5,368: Per cent per year,0: Units,,From 3 Aug 2006 onwards:
 official bank rate; from 6 May 1997 to 2 Aug 2006: repo rate; from 20 Aug 1981
 to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
@@ -1098,7 +1098,7 @@ to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
 Four,Bank of England,, Central bank policy rates \- United Kingdom \- Daily \-
 End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
 Kingdom,2009-09-16,0.5,368: Per cent per year,0: Units,,From 3 Aug 2006 onwards:
 official bank rate; from 6 May 1997 to 2 Aug 2006: repo rate; from 20 Aug 1981
 to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
@@ -1106,7 +1106,7 @@ to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
 Four,Bank of England,, Central bank policy rates \- United Kingdom \- Daily \-
 End of period,A: Normal value,F: Free,
 
-dataflow,BIS:WS\_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
+dataflow,BIS:WS_CBPOL(1.0): Central bank policy rates,I,D: Daily,GB: United
 Kingdom,2009-09-17,0.5,368: Per cent per year,0: Units,,From 3 Aug 2006 onwards:
 official bank rate; from 6 May 1997 to 2 Aug 2006: repo rate; from 20 Aug 1981
 to 5 May 1997: minimum Bank of England Band 1 dealing rate; from 16 Oct 1972 to
@@ -1184,7 +1184,7 @@ ladakh,observationAbout,wikidataId/Q200667
 
 **Input CSV Data**
 
--   Above is a the pvmap for an input data like this:
+- Above is a the pvmap for an input data like this:
 
 —-------
 
@@ -1211,33 +1211,19 @@ Jammu And Kashmir 1999 Male 1999 Calendar Year (Jan \- Dec), 1999
 —-------
 
 <!-- TODO : add instruction for place -->
+
 {% if dataset_type == 'sdmx' -%}
 
 ## SDMX-Specific Guidelines
 
 When working with SDMX datasets, follow these additional guidelines:
 
-1. **SDMX Structure Analysis**: The input metadata will contain SDMX structure definitions including:
-   - **Dimensions**: Used to categorize observations (e.g., TIME_PERIOD, REF_AREA, FREQ)
-   - **Attributes**: Provide additional context about observations
-   - **Measures**: The actual statistical values being observed
+### SDMX Structure Overview
+**SDMX Structure Analysis**: The input metadata will contain SDMX structure definitions including:
 
-2. **SDMX to Data Commons Mapping**:
-   - Map SDMX dimensions to appropriate Data Commons properties
-   - Convert SDMX codelists to Data Commons enumerated values
-   - Map SDMX concept schemes to Data Commons property definitions
-   - Ensure SDMX time dimensions map to `observationDate`
-   - Map SDMX reference area dimensions to `observationAbout`
-   - Map SDMX primary measures to `value` with appropriate `measuredProperty`
-
-3. **SDMX Frequency Handling**:
-   - Convert SDMX frequency codes (A=Annual, Q=Quarterly, M=Monthly, etc.) to `observationPeriod`
-   - Use standard ISO 8601 duration format (P1Y, P3M, P1M, etc.)
-
-4. **SDMX Constraint Processing**:
-   - If metadata contains `<structure:Constraints>` sections, use these to determine valid dimension combinations
-   - Do not sample data files when constraints are available in metadata
-   - Map constraint allowable values to appropriate Data Commons enumerations
+- **Dimensions**: Used to categorize observations (e.g., TIME_PERIOD, REF_AREA, FREQ)
+- **Attributes**: Provide additional context about observations
+- **Measures**: The actual statistical values being observed
 
 {%- endif %}
 
@@ -1257,22 +1243,15 @@ Follow these steps sequentially.
 
 **1. Analyze All Inputs**
 
--   Input files and configuration is listed in `INPUT DATA FOR THIS RUN` section
-    below.
--  **Carefully** examine examine sample input data `input_data` and metadata
-    `input_metadata` files to understand the structure and content of the data.
+- Input files and configuration is listed in `INPUT DATA FOR THIS RUN` section
+  below.
+- **Carefully** examine examine sample input data `input_data` and metadata
+  `input_metadata` files to understand the structure and content of the data.
 
 {% if dataset_type == 'sdmx' -%}
--   **SDMX Analysis**: For SDMX datasets, pay special attention to:
-    - SDMX data structure definitions (DSD) in the metadata
-    - Dimension definitions and their codelists
-    - Attribute definitions and their usage
-    - Measure definitions and their statistical concepts
-    - Constraint definitions that specify valid dimension combinations
-    - Frequency and time period specifications
-{%- endif %}
 
-
+- **SDMX Analysis**: For SDMX datasets, pay special attention to: - SDMX data structure definitions (DSD) in the metadata - Dimension definitions and their codelists - Attribute definitions and their usage - Measure definitions and their statistical concepts - Constraint definitions that specify valid dimension combinations - Frequency and time period specifications
+  {%- endif %}
 
 **2. Generate `pvmap.csv` and `metadata.csv`**
 
@@ -1282,21 +1261,24 @@ Follow these steps sequentially.
 **5. Run the Processor**
 
 - Execute the following command to generate the final output:
+
 ```bash
 {{python_interpreter}} {{script_dir}}/stat_var_processor.py \
 --input_data={{input_data}} \
 --pv_map={{working_dir}}/pvmap.csv \
 --config_file={{working_dir}}/metadata.csv \
---output_path={{working_dir}}/output/output 2>&1 | tee {{working_dir}}/.datacommons/statavar_processor_$(date +%Y%m%d_%H%M%S).log 
+--output_path={{working_dir}}/output/output 2>&1 | tee {{working_dir}}/.datacommons/statavar_processor_$(date +%Y%m%d_%H%M%S).log
 ```
+
 <!-- TODO read maps_api_key and dc_api_key from environment variable in statvar processor. can be taken as input in main script and set in env var-->
+
 **6. Validate the Output**
 
--   Ensure the command completes successfully.
--   Verify that the output file `{{working_dir}}/output/output.csv` is not empty.
--   Confirm that all numeric data has been captured into `StatisticalVariable`
-    and `StatVarObservation` objects without creating duplicate entries for the
-    same place, date, and variable.
+- Ensure the command completes successfully.
+- Verify that the output file `{{working_dir}}/output/output.csv` is not empty.
+- Confirm that all numeric data has been captured into `StatisticalVariable`
+  and `StatVarObservation` objects without creating duplicate entries for the
+  same place, date, and variable.
 
 # INPUT DATA FOR THIS RUN
 
@@ -1314,7 +1296,7 @@ Follow these steps sequentially.
 
 - Generate `pvmap.csv` and `metadata.csv`
 - **Adhere to Rules:** Strictly follow all schema rules, property requirements, and formatting guidelines from the
-knowledge base.
+  knowledge base.
 - DO NOT deviate from the documented standards.
 
 # ACTION REQUIRED NOW
