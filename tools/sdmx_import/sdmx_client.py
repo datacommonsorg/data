@@ -24,9 +24,9 @@ class SdmxClient:
         """
         self.agency_id = agency_id
         self.endpoint = endpoint
-        self.client = self._get_sdmx_client()
+        self.client = self._new_sdmx_client()
 
-    def _get_sdmx_client(self) -> sdmx.Client:
+    def _new_sdmx_client(self) -> sdmx.Client:
         """
         Creates and configures an sdmx.Client for the specified endpoint and agency.
         """
@@ -39,7 +39,7 @@ class SdmxClient:
         sdmx.add_source(custom_source, override=True)
         return sdmx.Client(source_id)
 
-    def fetch_and_save_metadata(self, dataflow_id: str, output_path: str):
+    def download_metadata(self, dataflow_id: str, output_path: str):
         """
         Fetches the complete metadata for a dataflow and saves the raw
         SDMX-ML (XML) response to a file.
@@ -75,13 +75,15 @@ class SdmxClient:
             )
             raise
 
-    def fetch_and_save_data_as_csv(self, dataflow_id: str, key: Dict[str, Any],
-                                   params: Dict[str, Any], output_path: str):
+    def download_data_as_csv(self, dataflow_id: str, key: Dict[str, Any],
+                             params: Dict[str, Any], output_path: str):
         """
         Fetches data, converts it to a pandas DataFrame, and saves as CSV.
         """
         try:
-            logging.info(f"Fetching data for key: {key}")
+            logging.info(f"Fetching data for dataflow: {dataflow_id}")
+            logging.info(f"with params: {params}")
+            logging.info(f"and key: {key}")
             data_msg = self.client.data(dataflow_id,
                                         key=key,
                                         params=params,

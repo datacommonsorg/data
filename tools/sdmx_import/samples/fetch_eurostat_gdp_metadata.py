@@ -13,7 +13,7 @@ import os
 sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
 
-from tools.sdmx.dataflow import SdmxClient
+from tools.sdmx_import.sdmx_client import SdmxClient
 
 # Configure logging
 logging.basicConfig(level=logging.INFO,
@@ -36,8 +36,7 @@ def main():
 
     # --- 2. Use the SdmxClient ---
     client = SdmxClient(endpoint, agency_id)
-    client.fetch_and_save_metadata(dataflow_id=dataflow_id,
-                                   output_path=output_path)
+    client.download_metadata(dataflow_id=dataflow_id, output_path=output_path)
     logging.info(f"--- Successfully downloaded metadata to {output_path} ---")
 
 

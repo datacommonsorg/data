@@ -13,7 +13,7 @@ import os
 sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
 
-from tools.sdmx.dataflow import SdmxClient
+from tools.sdmx_import.sdmx_client import SdmxClient
 
 # Configure logging
 logging.basicConfig(level=logging.INFO,
@@ -40,8 +40,8 @@ def main():
     # --- 3. Fetch Metadata ---
     logging.info("--- Step 1: Starting Metadata Download ---")
     try:
-        client.fetch_and_save_metadata(dataflow_id=dataflow_id,
-                                       output_path=metadata_output_path)
+        client.download_metadata(dataflow_id=dataflow_id,
+                                 output_path=metadata_output_path)
         logging.info(
             f"--- Successfully downloaded metadata to {metadata_output_path} ---"
         )
@@ -57,10 +57,10 @@ def main():
     data_params = {}
 
     try:
-        client.fetch_and_save_data_as_csv(dataflow_id=dataflow_id,
-                                          key=data_key,
-                                          params=data_params,
-                                          output_path=data_output_path)
+        client.download_data_as_csv(dataflow_id=dataflow_id,
+                                    key=data_key,
+                                    params=data_params,
+                                    output_path=data_output_path)
         logging.info(
             f"--- Successfully downloaded data to {data_output_path} ---")
     except Exception as e:
