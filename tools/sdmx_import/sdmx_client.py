@@ -49,13 +49,11 @@ class SdmxClient:
                 f"Fetching raw metadata for dataflow: {dataflow_id}...")
             flow_msg = self.client.dataflow(dataflow_id,
                                             agency_id=self.agency_id,
-                                            params={'references': 'all'})
+                                            params={'references': 'all'},
+                                            tofile=output_path)
             logging.info(
                 f"Successfully received response: {flow_msg.response.url}")
 
-            raw_content = flow_msg.response.text
-            with open(output_path, "w", encoding="utf-8") as f:
-                f.write(raw_content)
             logging.info(f"Successfully saved metadata to '{output_path}'")
 
         except HTTPError as e:
