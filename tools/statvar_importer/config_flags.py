@@ -143,7 +143,7 @@ flags.DEFINE_list('spell_check_ignore_props', None,
 
 # Flags for pvmap generation
 flags.DEFINE_bool('generate_pvmap', True, 'Generate PVmap')
-flags.DEFINE_string('google_genai_key', '', 'Google API key for GenAI prompt.')
+flags.DEFINE_string('google_genai_key', os.environ.get('GOOGLE_GENAI_KEY', ''), 'Google API key for GenAI prompt.')
 flags.DEFINE_string('sample_pvmap', os.path.join(_SCRIPT_DIR,
                                                  'sample_pvmap.csv'),
                     'Sample PVmap for gen AI.')
