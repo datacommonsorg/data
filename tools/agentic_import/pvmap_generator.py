@@ -141,7 +141,7 @@ class PVMapGenerator:
 
         # Execute Gemini CLI with the generated prompt file using cat | gemini
         # Redirect stderr to stdout (2>&1) and tee to both file and terminal
-        gemini_command = f"cat '{prompt_file}' | gemini 2>&1 | tee '{output_file}'"
+        gemini_command = f"cat '{prompt_file}' | gemini -y -c 2>&1 | tee '{output_file}'"
         logging.info(
             f"Launching gemini (cwd: {self.working_dir}): {gemini_command} ")
         logging.info(f"Gemini output will be saved to: {output_file}")
