@@ -158,7 +158,7 @@ def create_or_update_import_schedule(absolute_import_name: str,
         # The workflow job runs a CLOUD BATCH job with the specified configuration in the request.
         json_encoded_body = cloud_batch.create_job_request(
             absolute_import_name, config.get_data_refresh_config(), import_spec,
-            resources)
+            resources, timeout)
         cloud_batch_job_url = f'https://workflowexecutions.googleapis.com/v1/projects/{config.gcp_project_id}/locations/{config.scheduler_location}/workflows/{config.cloud_workflow_id}/executions'
         req = cloud_scheduler.cloud_batch_job_request(
             absolute_import_name, schedule, cloud_batch_job_url,
