@@ -1,6 +1,6 @@
 # SDMX Utility Sample Scripts
 
-This directory contains sample scripts demonstrating how to use the functions in the `tools.sdmx.dataflow` module to download data and metadata from different SDMX APIs.
+This directory contains sample scripts demonstrating how to use the SdmxClient in the `tools.sdmx_import.sdmx_client` module to download data and metadata from different SDMX APIs.
 
 ## Scripts
 
@@ -20,7 +20,7 @@ This directory contains sample scripts demonstrating how to use the functions in
 You can execute each script from the root of the repository, for example:
 
 ```bash
-python3 tools/sdmx/samples/fetch_oecd_gdp_metadata.py
+python3 tools/sdmx_import/samples/fetch_oecd_gdp_metadata.py
 ```
 
-The scripts will download the requested data/metadata and save it as `.xml` or `.csv` files in the project's root directory.
+The scripts will download the requested data/metadata and save it as `.xml` or `.csv` files in a new `output` directory inside the `samples` folder.
