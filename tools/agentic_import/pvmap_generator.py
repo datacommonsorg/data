@@ -44,6 +44,9 @@ flags.DEFINE_string('dc_api_key', None, 'Data Commons API key (optional)')
 flags.DEFINE_integer('max_iterations', 10,
                      'Maximum number of attempts for statvar processor.')
 
+flags.DEFINE_boolean('skip_confirmation', False,
+                     'Skip user confirmation before starting PV map generation')
+
 
 @dataclass
 class DataConfig:
@@ -60,6 +63,7 @@ class Config:
     maps_api_key: str = None
     dc_api_key: str = None
     max_iterations: int = 10
+    skip_confirmation: bool = False
 
 
 class PVMapGenerator:
@@ -102,6 +106,38 @@ class PVMapGenerator:
         os.makedirs(dc_dir, exist_ok=True)
         return dc_dir
 
+    def _get_user_confirmation(self, prompt_file: str) -> bool:
+        """Ask user for confirmation before starting PV map generation.
+        
+        Args:
+            prompt_file: Path to the generated prompt file
+            
+        Returns:
+            True if user confirms, False otherwise
+        """
+        print("\n" + "="*60)
+        print("PV MAP GENERATION SUMMARY")
+        print("="*60)
+        print(f"Input data file: {self.config.data_config.input_data[0]}")
+        print(f"Dataset type: {'SDMX' if self.config.data_config.is_sdmx_dataset else 'CSV'}")
+        print(f"Generated prompt: {prompt_file}")
+        print(f"Working directory: {self.working_dir}")
+        print("="*60)
+        
+        while True:
+            try:
+                response = input("Ready to start PV map generation? (y/n): ").strip().lower()
+                if response in ['y', 'yes']:
+                    return True
+                elif response in ['n', 'no']:
+                    print("PV map generation cancelled by user.")
+                    return False
+                else:
+                    print("Please enter 'y' or 'n'.")
+            except KeyboardInterrupt:
+                print("\nPV map generation cancelled by user.")
+                return False
+
     def generate(self):
         """Generate PV map from import configuration."""
         # Set environment variables if API keys are provided in config
@@ -128,8 +164,14 @@ class PVMapGenerator:
         if self.config.dry_run:
             logging.info(
                 "Dry run mode: Prompt file generated at %s. "
-                "Skipping Gemini CLI execution.", prompt_file)
+                "Skipping generation execution.", prompt_file)
             return
+
+        # Get user confirmation before proceeding (unless skipped)
+        if not self.config.skip_confirmation:
+            if not self._get_user_confirmation(prompt_file):
+                logging.info("PV map generation cancelled by user.")
+                return
 
         # Check if Gemini CLI is available
         if not self._check_gemini_cli_available():
@@ -261,7 +303,8 @@ def prepare_config() -> Config:
                   dry_run=FLAGS.dry_run,
                   maps_api_key=FLAGS.maps_api_key,
                   dc_api_key=FLAGS.dc_api_key,
-                  max_iterations=FLAGS.max_iterations)
+                  max_iterations=FLAGS.max_iterations,
+                  skip_confirmation=FLAGS.skip_confirmation)
 
 
 def main(argv):
