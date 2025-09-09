@@ -1515,6 +1515,33 @@ processor tool to produce the final DataCommons artifacts.
 
 # WORKFLOW & INSTRUCTIONS
 
+## 🚨 CRITICAL ITERATION CONTROL 🚨
+
+**MAXIMUM ATTEMPTS ALLOWED**: {{max_iterations}}
+
+### Iteration Rules - READ CAREFULLY:
+
+1. **INITIALIZE**: You will start with "**ATTEMPT 1 of {{max_iterations}}**"
+2. **TRACK STATE**: Before each statvar processor execution, clearly state your current attempt number
+3. **DECISION LOGIC**: After each attempt:
+   ```
+   IF processor succeeds (exit code 0) AND output.csv passes all validation checklist items:
+       → OUTPUT: "SUCCESS: Completed on attempt X of {{max_iterations}}"
+       → STOP IMMEDIATELY - DO NOT **CONTINUE**
+   
+   ELIF current_attempt < {{max_iterations}}:
+       → OUTPUT: "ATTEMPT X FAILED - Starting attempt X+1 of {{max_iterations}}"
+       → Analyze error, fix PV map, increment attempt counter, retry
+   
+   ELSE (current_attempt >= {{max_iterations}}):
+       → OUTPUT: "⛔ ITERATION LIMIT REACHED: Failed after {{max_iterations}} attempts"
+       → OUTPUT: "Final status: FAILED - Manual intervention required"
+       → STOP IMMEDIATELY - DO NOT MAKE ANY MORE ATTEMPTS
+   ```
+
+4. **MANDATORY OUTPUTS**: You MUST clearly output your attempt number and final status
+5. **HARD STOP**: When {{max_iterations}} attempts are reached, you MUST stop completely
+
 **STRICTLY** follow this precise workflow to complete your task. ALWAYS
 maintain a comprehensive todo list for the entire workflow and update tasks as
 they are completed.
@@ -1572,6 +1599,8 @@ Before proceeding to run the processor, validate your SDMX PV map against this c
 
 **5. Run the Processor**
 
+**📋 BEFORE EXECUTION**: Clearly state "**ATTEMPT [X] of {{max_iterations}}**: Running statvar processor"
+
 - Execute the following command to generate the final output:
 
 ```bash
@@ -1582,13 +1611,40 @@ Before proceeding to run the processor, validate your SDMX PV map against this c
 --output_path={{working_dir}}/output/output 2>&1 | tee {{working_dir}}/.datacommons/statavar_processor_$(date +%Y%m%d_%H%M%S).log
 ```
 
-**6. Validate the Output**
+**6. Validate the Output and Apply Iteration Control**
 
-- Ensure the command completes successfully.
-- Verify that the output file `{{working_dir}}/output/output.csv` is not empty.
-- Confirm that all numeric data has been captured into `StatisticalVariable`
-  and `StatVarObservation` objects without creating duplicate entries for the
-  same place, date, and variable.
+**📊 VALIDATION CHECKLIST**:
+- Check the command exit code (0 = success, non-zero = failure)
+- Verify that `{{working_dir}}/output/output.csv` exists and is not empty
+- Confirm no duplicate entries for same place, date, and variable
+
+**🎯 DECISION LOGIC - APPLY THIS EXACTLY**:
+
+```
+CURRENT_ATTEMPT = [Your current attempt number]
+
+IF all items in the VALIDATION CHECKLIST above pass:
+    → OUTPUT: "✅ SUCCESS: PV map generation completed successfully on attempt CURRENT_ATTEMPT of {{max_iterations}}"
+    → STOP EXECUTION IMMEDIATELY
+    → DO NOT PROCEED TO ANY OTHER STEPS
+
+ELIF CURRENT_ATTEMPT < {{max_iterations}}:
+    → OUTPUT: "❌ ATTEMPT CURRENT_ATTEMPT FAILED - Error details: [describe specific error]"
+    → OUTPUT: "🔄 Starting attempt [CURRENT_ATTEMPT + 1] of {{max_iterations}}..."
+    → Analyze the error from logs
+    → Modify pvmap.csv and/or metadata.csv to fix identified issues
+    → INCREMENT ATTEMPT COUNTER
+    → Return to Step 5 (Run the Processor)
+
+ELSE (CURRENT_ATTEMPT >= {{max_iterations}}):
+    → OUTPUT: "⛔ ITERATION LIMIT REACHED: Failed after {{max_iterations}} attempts"
+    → OUTPUT: "📋 Final Status: FAILED - Manual intervention required"
+    → OUTPUT: "📁 Check logs at: {{working_dir}}/.datacommons/ for debugging"
+    → STOP EXECUTION IMMEDIATELY
+    → DO NOT MAKE ANY MORE ATTEMPTS
+```
+
+**⚠️ CRITICAL**: You MUST follow this decision logic exactly. Do not deviate from these rules.
 
 # INPUT DATA FOR THIS RUN
 
@@ -1617,7 +1673,20 @@ CRITICAL: Follow all SDMX-specific guidelines and use metadata for semantic mapp
   knowledge base.
 - DO NOT deviate from the documented standards.
 
+# 🛑 FINAL EXECUTION REMINDERS
+
+**BEFORE YOU START - REMEMBER THESE RULES:**
+
+1. **MAXIMUM ATTEMPTS**: You have exactly {{max_iterations}} attempts
+2. **TRACK YOUR ATTEMPTS**: Always output "ATTEMPT X of {{max_iterations}}" before running processor
+3. **DECISION POINTS**: Follow the exact "🎯 DECISION LOGIC" section above - no exceptions
+4. **SUCCESS = STOP**: If any attempt succeeds, STOP immediately
+5. **FAILURE LIMIT**: If {{max_iterations}} attempts fail, STOP immediately with failure message
+6. **NO INFINITE LOOPS**: The iteration control prevents endless retries
+
 # ACTION REQUIRED NOW
 
 **Execute** the data analysis and generate the `pvmap.csv` and `metadata.csv`
 files now. Follow the primary workflow **WITHOUT** deviation.
+
+**REMEMBER**: You have {{max_iterations}} attempts maximum. Track each attempt and stop when you succeed or reach the limit.

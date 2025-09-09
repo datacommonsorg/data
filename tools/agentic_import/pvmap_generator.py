@@ -41,6 +41,9 @@ flags.DEFINE_string('maps_api_key', None, 'Google Maps API key (optional)')
 
 flags.DEFINE_string('dc_api_key', None, 'Data Commons API key (optional)')
 
+flags.DEFINE_integer('max_iterations', 10,
+                     'Maximum number of attempts for statvar processor.')
+
 
 @dataclass
 class DataConfig:
@@ -56,6 +59,7 @@ class Config:
     dry_run: bool = False
     maps_api_key: str = None
     dc_api_key: str = None
+    max_iterations: int = 10
 
 
 class PVMapGenerator:
@@ -225,7 +229,9 @@ class PVMapGenerator:
                 self.config.data_config.input_metadata or
                 [],  # Handle None case, default to empty list for multiple files support
             'dataset_type':
-                'sdmx' if self.config.data_config.is_sdmx_dataset else 'csv'
+                'sdmx' if self.config.data_config.is_sdmx_dataset else 'csv',
+            'max_iterations':
+                self.config.max_iterations
         }
 
         # Render template with these variables
@@ -254,7 +260,8 @@ def prepare_config() -> Config:
     return Config(data_config=data_config,
                   dry_run=FLAGS.dry_run,
                   maps_api_key=FLAGS.maps_api_key,
-                  dc_api_key=FLAGS.dc_api_key)
+                  dc_api_key=FLAGS.dc_api_key,
+                  max_iterations=FLAGS.max_iterations)
 
 
 def main(argv):
