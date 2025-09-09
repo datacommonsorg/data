@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+set -euo pipefail
 
 # Save original directory at the start
 ORIGINAL_DIR="$(pwd)"
@@ -44,7 +44,7 @@ function setup_python_environment {
     cd "$DATA_REPO_ROOT"
     
     # Setup Python environment unless SKIP_PYTHON_SETUP is true
-    if [ "$SKIP_PYTHON_SETUP" != "true" ]; then
+    if [ "${SKIP_PYTHON_SETUP:-}" != "true" ]; then
         echo "Setting up Python environment..."
         ./run_tests.sh -r
     else

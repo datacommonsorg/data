@@ -707,7 +707,7 @@ when constructing the mappings.
     string, then add the best candidate with the source string and add the
     remaining ones as commented lines following the chosen one.
 
-### Constriants
+### Constraints
 
 - The pvmap should have at least one source string mapped to the following
   properties:
@@ -1130,7 +1130,7 @@ male,gender,Male,,,,,,
 
 female,gender,Female,,,,,,
 
-Total,gender,"""""",,,,,,
+Total,gender,"""",,,,,,, 
 
 srcyear,observationDate,{Number},,,,,,
 
@@ -1608,7 +1608,7 @@ Before proceeding to run the processor, validate your SDMX PV map against this c
 --input_data={{input_data}} \
 --pv_map={{working_dir}}/pvmap.csv \
 --config_file={{working_dir}}/metadata.csv \
---output_path={{working_dir}}/output/output 2>&1 | tee {{working_dir}}/.datacommons/statavar_processor_$(date +%Y%m%d_%H%M%S).log
+--output_path={{working_dir}}/output/output 2>&1 | tee {{working_dir}}/.datacommons/statvar_processor_$(date +%Y%m%d_%H%M%S).log
 ```
 
 **6. Validate the Output and Apply Iteration Control**

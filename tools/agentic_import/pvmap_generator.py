@@ -14,9 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import copy
 import json
 import os
 import platform
+import shutil
 import subprocess
 import sys
 from datetime import datetime
@@ -83,7 +85,7 @@ class PVMapGenerator:
         self.working_dir = os.getcwd()
 
         # Copy config to avoid modifying the original
-        self.config = config
+        self.config = copy.deepcopy(config)
 
         # Convert input_data paths to absolute
         if self.config.data_config.input_data:
@@ -103,11 +105,14 @@ class PVMapGenerator:
 
     def _validate_and_convert_path(self, path: str) -> str:
         """Convert path to absolute and validate it's within working directory."""
-        abs_path = os.path.abspath(path)
-        # Check if path is within working directory using simple string check
-        if not abs_path.startswith(self.working_dir):
-            raise ValueError(f"Path '{path}' is outside working directory")
-        return abs_path
+        real_path = os.path.realpath(path)
+        real_working_dir = os.path.realpath(self.working_dir)
+        # Check if path is within working directory
+        if not real_path.startswith(real_working_dir):
+            raise ValueError(
+                f"Path '{path}' is outside working directory '{real_working_dir}'"
+            )
+        return real_path
 
     def _initialize_datacommons_dir(self) -> str:
         """Initialize and return the .datacommons directory path."""
@@ -133,9 +138,13 @@ class PVMapGenerator:
         )
         print(f"Generated prompt: {prompt_file}")
         print(f"Working directory: {self.working_dir}")
-        print(f"Sandboxing: {'Enabled' if self.config.enable_sandboxing else 'Disabled'}")
+        print(
+            f"Sandboxing: {'Enabled' if self.config.enable_sandboxing else 'Disabled'}"
+        )
         if not self.config.enable_sandboxing:
-            print("⚠️  WARNING: Sandboxing is disabled. Gemini will run without safety restrictions.")
+            print(
+                "⚠️  WARNING: Sandboxing is disabled. Gemini will run without safety restrictions."
+            )
         print("=" * 60)
 
         while True:
@@ -216,14 +225,7 @@ class PVMapGenerator:
 
     def _check_gemini_cli_available(self) -> bool:
         """Check if Gemini CLI is available in PATH."""
-        try:
-            subprocess.run(['which', 'gemini'],
-                           check=True,
-                           stdout=subprocess.DEVNULL,
-                           stderr=subprocess.DEVNULL)
-            return True
-        except subprocess.CalledProcessError:
-            return False
+        return shutil.which('gemini') is not None
 
     def _build_gemini_command(self, prompt_file: str, output_file: str) -> str:
         """Build the gemini CLI command with appropriate flags.
