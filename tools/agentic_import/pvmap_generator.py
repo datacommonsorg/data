@@ -133,6 +133,9 @@ class PVMapGenerator:
         )
         print(f"Generated prompt: {prompt_file}")
         print(f"Working directory: {self.working_dir}")
+        print(f"Sandboxing: {'Enabled' if self.config.enable_sandboxing else 'Disabled'}")
+        if not self.config.enable_sandboxing:
+            print("⚠️  WARNING: Sandboxing is disabled. Gemini will run without safety restrictions.")
         print("=" * 60)
 
         while True:
