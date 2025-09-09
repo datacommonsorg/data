@@ -1217,6 +1217,7 @@ Jammu And Kashmir 1999 Male 1999 Calendar Year (Jan \- Dec), 1999
 ## SDMX-Specific Guidelines
 
 When working with SDMX datasets, follow these additional guidelines:
+<!-- TODO : add details about how to identify and use metadata for sdmx -->
 
 ### SDMX Structure Overview
 **SDMX Structure Analysis**: The input metadata will contain SDMX structure definitions including:
@@ -1224,6 +1225,197 @@ When working with SDMX datasets, follow these additional guidelines:
 - **Dimensions**: Used to categorize observations (e.g., TIME_PERIOD, REF_AREA, FREQ)
 - **Attributes**: Provide additional context about observations
 - **Measures**: The actual statistical values being observed
+
+### Core SDMX Mappings
+
+#### 1. Standard Dimensions
+* **REF_AREA** → `observationAbout`
+  * ISO country codes: `{Data},observationAbout,country/{Data}` -> use **country/{Data}**
+  * Specific: `USA,observationAbout,country/USA`
+  
+* **TIME_PERIOD** → `observationDate`
+  * Annual: `{Data},observationDate,{Data}` (YYYY)
+  * Quarterly: `2024-Q1,observationDate,2024-03` (use period end)
+    * PV example for this conversion   TIME_PERIOD,#Regex,"^(?P<Year>[0-9]{4})-Q(?P<Quarter>[1-4])$",#Eval,"observationDate='{Year}-' + str(int({Quarter})*3).zfill(2)"
+  * Monthly: `{Data},observationDate,{Data}` (YYYY-MM)
+
+* **FREQ** → `observationPeriod`
+  * `A,observationPeriod,P1Y` (Annual)
+  * `Q,observationPeriod,P3M` (Quarterly) 
+  * `M,observationPeriod,P1M` (Monthly)
+  * `D,observationPeriod,P1D` (Daily)
+  * `W,observationPeriod,P1W` (Weekly)
+
+* **INDICATOR/SERIES** → `measuredProperty` and StatVar construction
+  * Example: `GDP_GROWTH,measuredProperty,growthRate,populationType,EconomicActivity`
+
+#### 2. Measures
+The primary observation value in SDMX:
+
+* **OBS_VALUE**: The observation value
+  * Always map to: `OBS_VALUE,value,{Number}`
+  * Or for column headers: `<value_column>,value,{Number}`
+
+#### 3. Attributes
+**IMPORTANT: SDMX attributes should only map to observation-level properties (not StatVar properties):**
+
+* **UNIT_MEASURE**: Unit of measurement
+  * Map to `unit` property with DC-compatible units
+  * Examples:
+    * `USD,unit,USDollar`
+    * `EUR,unit,Euro`
+    * `PERCENT,unit,Percent`
+    * `INDEX,unit,Index`
+    * `PERSONS,unit,Person`
+
+* **UNIT_MULT**: Unit multiplier (scale factor)
+  * Map to `scalingFactor` or use `#Multiply`
+  * Examples:
+    * `3,scalingFactor,1000` (thousands)
+    * `6,scalingFactor,1000000` (millions)
+    * `9,scalingFactor,1000000000` (billions)
+
+* **OBS_STATUS**: Observation status flags
+  * Handle special values:
+    * `E,measurementMethod,Estimated`
+    * `P,measurementMethod,Provisional`
+    * `F,measurementMethod,Forecast`
+    * `M,#ignore,Missing value` (for missing data)
+    * `NA,#ignore,Not applicable`
+
+* **BASE_PER**: Base period for indices
+  * Map to `measurementMethod` with base year
+  * Example: `2015,measurementMethod,BaseYear2015`
+
+#### 4. Dataflow and Dataset Metadata
+
+* **Dataflow identifier**: Use for constructing StatVar names
+  * Example: `BIS:WS_CBPOL,name,"Central Bank Policy Rates {Data}"`
+
+* **Dataset attributes**: Often found in header rows
+  * Map dataset-level attributes to default PVs that apply globally
+
+### SDMX-Specific Mapping Patterns
+
+#### Hierarchical Codes
+SDMX often uses hierarchical classification codes (e.g., NACE, ISIC, CPC):
+
+```
+# Economic activities (NACE)
+A,economicActivity,Agriculture
+A01,economicActivity,CropProduction
+
+# Products (CPC)  
+01,productClassification,AgricultureProducts
+011,productClassification,Cereals
+```
+
+#### Multiple Indicators
+```
+GDP,measuredProperty,grossDomesticProduct,populationType,EconomicActivity
+INFLATION,measuredProperty,inflationRate,populationType,EconomicActivity,statType,growthRate
+UNEMPLOYMENT,measuredProperty,unemploymentRate,populationType,Person,employment,Unemployed
+```
+
+#### Standard Code Lists
+```
+# ISO 4217 Currency
+USD,unit,USDollar
+
+# ISO 3166 Country
+USA,observationAbout,country/USA
+```
+
+#### Time Series Types
+```
+YOY,statType,growthRate,comparisonPeriod,P1Y
+QOQ,statType,growthRate,comparisonPeriod,P3M
+AVG,statType,meanValue
+```
+
+### Critical Processing Rules
+
+1. **Column Selection**: Specify relevant columns in metadata configuration to optimize processing:
+   * Add `input_columns,"REF_AREA,TIME_PERIOD,OBS_VALUE,UNIT_MEASURE"` to focus on essential columns
+   * Exclude metadata or auxiliary columns that don't contribute to StatVars
+
+2. **Constraint Optimization**: When `<structure:Constraints>` is present in metadata:
+   * Use constraint definitions instead of reading entire data files
+   * Map only the codes that actually appear in the data
+   * This significantly reduces processing time for large datasets
+
+3. **Preserve Dimension Combinations**: Ensure each unique combination of dimensions maps to a distinct StatisticalVariable
+
+2. **Handle Missing Values**: Use `#Filter` or `#ignore` for SDMX missing value codes (M, NA, ":", "-")
+
+5. **Frequency Alignment**: When mixing frequencies, ensure proper date formatting:
+   * Annual: YYYY
+   * Quarterly: YYYY-MM (using last month of quarter)
+   * Monthly: YYYY-MM
+   * Daily: YYYY-MM-DD
+
+6. **Multi-lingual Labels**: If dataset has multiple language labels, prioritize English or use `#Eval` to select
+
+7. **Version Management**: For datasets with revisions, use `measurementMethod` to indicate revision status
+
+### Example SDMX PV Map
+
+#### CSV Format:
+```csv
+key,property1,value1,property2,value2,property3,value3
+
+# Metadata configuration
+input_columns,"REF_AREA,TIME_PERIOD,OBS_VALUE,FREQ,CURRENCY,UNIT_MEASURE"
+
+# Dataflow identification  
+ECB:EXR,name,Exchange Rates,populationType,CurrencyExchange,,
+
+# Frequency dimension
+D,observationPeriod,P1D,,,,
+M,observationPeriod,P1M,,,,
+A,observationPeriod,P1Y,,,,
+Q,observationPeriod,P3M,,,,
+W,observationPeriod,P1W,,,,
+
+# Currency dimensions  
+USD,measuredProperty,exchangeRate,fromCurrency,Euro,toCurrency,USDollar
+GBP,measuredProperty,exchangeRate,fromCurrency,Euro,toCurrency,BritishPound
+JPY,measuredProperty,exchangeRate,fromCurrency,Euro,toCurrency,JapaneseYen
+
+# Reference area
+REF_AREA,observationAbout,{Data},,,,
+# Or for specific country codes
+USA,observationAbout,country/USA,,,,
+DEU,observationAbout,country/DEU,,,,
+FRA,observationAbout,country/FRA,,,,
+
+# Time period
+TIME_PERIOD,observationDate,{Data},,,,
+
+# Observation value
+OBS_VALUE,value,{Number},,,,
+
+# Unit of measure
+PURE_NUMB,unit,Number,,,,
+PERCENT,unit,Percent,,,,
+INDEX,unit,Index,,,,
+USD,unit,USDollar,,,,
+EUR,unit,Euro,,,,
+
+# Unit multipliers
+0,scalingFactor,1,,,,
+3,scalingFactor,1000,,,,
+6,scalingFactor,1000000,,,,
+9,scalingFactor,1000000000,,,,
+
+# Observation status
+A,observationStatus,Normal,,,,
+E,measurementMethod,Estimated,,,,
+P,measurementMethod,Provisional,,,,
+F,measurementMethod,Forecast,,,,
+M,#ignore,Missing value,,,,
+NA,#ignore,Not applicable,,,,
+```
 
 {%- endif %}
 
