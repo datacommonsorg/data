@@ -24,6 +24,7 @@ import json
 from absl import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from download_config import DOWNLOAD_CONFIG
+from urllib.parse import urlparse
 
 # --- Configuration ---
 MAX_WORKERS = 5  # Number of concurrent downloads
@@ -144,5 +145,4 @@ def main():
 
 
 if __name__ == "__main__":
-    from urllib.parse import urlparse
     main()
