@@ -20,8 +20,7 @@
                     "cleaned_csv": "gcs_output/output/*.csv"
                 }
             ],
-            "cron_schedule": "0 05 * * 2",
-            "user_script_timeout": 86400
+            "cron_schedule": "0 05 * * 2"
         }
     ]
 }
