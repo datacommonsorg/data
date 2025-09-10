@@ -1,7 +1,6 @@
 parameter,value
 #places_within,country/MNG
-output_columns,"observationAbout,observationDate,value,variableMeasured,#input"
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
 mapped_columns,5
 header_rows,1
 mapped_rows,1
-#input_rows,82

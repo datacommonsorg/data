@@ -2,7 +2,7 @@ key,p1,v1,p2,v2,p3,v3
 Aimag:Total,observationAbout,country/MNG,,,,
 Aimag,observationAbout,{Data},populationType,Person,measuredProperty,count
 labour underutilization,employmentStatus,LaborUnderutilized,,,,
- Unemployed,employmentStatus,Unemployed,,,,
+ Unemployed,#ignore,skip,,,,
  Time-related underemployment,employmentStatus,LaborUnderutilizedTimeRelatedUnderemployed,,,,
  Potential labour force,employmentStatus,LaborUnderutilizedPotentialLaborForce,,,,
 Female,gender,Female,,,,
