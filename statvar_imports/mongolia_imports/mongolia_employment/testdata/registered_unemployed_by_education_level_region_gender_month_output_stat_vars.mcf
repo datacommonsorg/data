@@ -42,14 +42,14 @@ employmentStatus: dcid:Unemployed
 gender: dcid:Male
 schoolGradeLevel: dcid:LowerSecondaryEducation
 
-Node: dcid:Count_Person_Unemployed_Male_SpecializedSecondary
+Node: dcid:Count_Person_Unemployed_Male_SpecializedSecondarySchool
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 employmentStatus: dcid:Unemployed
 gender: dcid:Male
-schoolGradeLevel: dcid:SpecializedSecondary
+schoolGradeLevel: dcid:SpecializedSecondarySchool
 
 Node: dcid:Count_Person_Unemployed_Male_UpperSecondaryEducation
 typeOf: dcid:StatisticalVariable

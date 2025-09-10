@@ -4,9 +4,9 @@ name: "schoolGradeLevel"
 domainIncludes: dcid:Person
 rangeIncludes: dcid:SchoolGradeLevelEnum,dcid:SchoolLevelEnum
 
-Node: dcid:SpecializedSecondary
+Node: dcid:SpecializedSecondarySchool
 typeOf: dcid:ElementarySchool
-name: "Specialized Secondary"
+name: "Specialized Secondary School"
 isProvisional: dcs:True
 
 Node: dcid:BachelorsDegree__Diploma
