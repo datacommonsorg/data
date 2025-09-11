@@ -745,7 +745,8 @@ class ImportExecutor:
                     version=version,
                     import_prefix_list=import_prefix_list)
                 logging.info(
-                    f'Validations completed with status: {validation_status}')
+                    f'Validations for version {version} completed with status: {validation_status}'
+                )
             else:
                 logging.info(
                     'Skipping import validations as per import config.')

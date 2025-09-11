@@ -16,6 +16,9 @@
                     "cleaned_csv": "gender_income_inequality.csv"
                 }
             ],
+            "source_files": [
+                "gender_income_inequality.csv"
+            ],
             "cron_schedule": "0 03 * * 1"
         }
     ]
