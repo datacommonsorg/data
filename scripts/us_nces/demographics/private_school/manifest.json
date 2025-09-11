@@ -1,29 +1,30 @@
 {
-  "import_specifications": [
-    {
-      "import_name": "NCES_PrivateSchoolStats",
-      "curator_emails": ["support@datacommons.org"],
-      "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
-      "provenance_description": "US nces school data for private",
-      "scripts": ["run.sh" ,"process.py"],
-      "source_files": ["gcs_output/input_files/*/*.csv"],
-      "import_inputs": [
+    "import_specifications": [
         {
-          "template_mcf": "gcs_output/output_files/us_nces_demographics_private_school.tmcf",
-          "cleaned_csv": "gcs_output/output_files/us_nces_demographics_private_school.csv"
-                 },
-        {
-        "template_mcf": "gcs_output/output_place/us_nces_demographics_private_place.tmcf",
-        "cleaned_csv": "gcs_output/output_place/us_nces_demographics_private_place.csv"
+            "import_name": "NCES_PrivateSchoolStats",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
+            "provenance_description": "US nces school data for private",
+            "scripts": [
+                "run.sh",
+                "process.py"
+            ],
+            "source_files": [
+                "gcs_output/input_files/*/*.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "gcs_output/output_files/us_nces_demographics_private_school.tmcf",
+                    "cleaned_csv": "gcs_output/output_files/us_nces_demographics_private_school.csv"
+                },
+                {
+                    "template_mcf": "gcs_output/output_place/us_nces_demographics_private_place.tmcf",
+                    "cleaned_csv": "gcs_output/output_place/us_nces_demographics_private_place.csv"
                 }
-      ],
-      "cron_schedule": "30 3 1 3,6,9,12 *"
-    } 
-  ],
-  "config_override":{
-    "invoke_import_tool": false,
-    "invoke_differ_tool": false,
-    "invoke_import_validation": false
-  }
+            ],
+            "cron_schedule": "30 3 1 3,6,9,12 *"
+        }
+    ]
 }
-
