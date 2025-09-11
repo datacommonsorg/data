@@ -33,6 +33,8 @@ To get the necessary data files, you'll need to manually download source files.
 
 All downloaded files will be located into the gcs path `unresolved_mcf/country/mongolia/mongolia_employment/latest/input_files` and can be directly read from it while processing.
 
+#### Autorefresh Type:
+
 This import will be refreshed in a semi-automated manner.
 
 -----
