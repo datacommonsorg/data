@@ -103,6 +103,15 @@ class PVMapGenerator:
 
         self.datacommons_dir = self._initialize_datacommons_dir()
 
+        # Generate gemini_run_id with timestamp for this run
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.gemini_run_id = f"gemini_{timestamp}"
+
+        # Create run directory structure
+        self.run_dir = os.path.join(self.datacommons_dir, 'runs',
+                                    self.gemini_run_id)
+        os.makedirs(self.run_dir, exist_ok=True)
+
     def _validate_and_convert_path(self, path: str) -> str:
         """Convert path to absolute and validate it's within working directory."""
         real_path = os.path.realpath(path)
@@ -181,10 +190,6 @@ class PVMapGenerator:
                 f"Found {len(self.config.data_config.input_data)} files in input_data."
             )
 
-        # Generate gemini_run_id with timestamp for this run
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self.gemini_run_id = f"gemini_{timestamp}"
-
         # Generate the prompt as the first step
         prompt_file = self._generate_prompt()
 
@@ -208,15 +213,14 @@ class PVMapGenerator:
             )
             raise RuntimeError("Gemini CLI not found in PATH")
 
-        # Generate output file path using the gemini_run_id
-        output_file = os.path.join(self.datacommons_dir,
-                                   f'{self.gemini_run_id}.log')
+        # Generate log file path using the run directory
+        log_file = os.path.join(self.run_dir, 'gemini_cli.log')
 
         # Execute Gemini CLI with generated prompt
-        gemini_command = self._build_gemini_command(prompt_file, output_file)
+        gemini_command = self._build_gemini_command(prompt_file, log_file)
         logging.info(
             f"Launching gemini (cwd: {self.working_dir}): {gemini_command} ")
-        logging.info(f"Gemini output will be saved to: {output_file}")
+        logging.info(f"Gemini output will be saved to: {log_file}")
 
         exit_code = self._run_subprocess(gemini_command)
         if exit_code == 0:
@@ -230,7 +234,7 @@ class PVMapGenerator:
         """Check if Gemini CLI is available in PATH."""
         return shutil.which('gemini') is not None
 
-    def _build_gemini_command(self, prompt_file: str, output_file: str) -> str:
+    def _build_gemini_command(self, prompt_file: str, log_file: str) -> str:
         """Build the gemini CLI command with appropriate flags.
         
         Uses cat to pipe prompt file to gemini CLI with:
@@ -241,13 +245,13 @@ class PVMapGenerator:
         
         Args:
             prompt_file: Path to the prompt file
-            output_file: Path to the output log file
+            log_file: Path to the log file for gemini output
             
         Returns:
             Complete gemini command string
         """
         sandbox_flag = "--sandbox " if self.config.enable_sandboxing else ""
-        return f"cat '{prompt_file}' | gemini {sandbox_flag} -y 2>&1 | tee '{output_file}'"
+        return f"cat '{prompt_file}' | gemini {sandbox_flag} -y 2>&1 | tee '{log_file}'"
 
     def _run_subprocess(self, command: str) -> int:
         """Run a subprocess command with real-time output streaming."""
@@ -319,9 +323,8 @@ class PVMapGenerator:
         # Render template with these variables
         rendered_prompt = template.render(**template_vars)
 
-        # Write rendered prompt to .datacommons folder
-        output_file = os.path.join(self.datacommons_dir,
-                                   'generate_pvmap_prompt.md')
+        # Write rendered prompt to run directory
+        output_file = os.path.join(self.run_dir, 'generate_pvmap_prompt.md')
         with open(output_file, 'w') as f:
             f.write(rendered_prompt)
 
