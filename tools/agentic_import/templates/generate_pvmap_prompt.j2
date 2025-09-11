@@ -1604,19 +1604,13 @@ Before proceeding to run the processor, validate your SDMX PV map against this c
 - Execute the following commands to generate the final output and backup:
 
 ```bash
-# Run processor and backup using dedicated script
-{{script_dir}}/agentic_import/run_processor.sh \
+# Run statvar processor using dedicated script
+{{script_dir}}/agentic_import/run_statvar_processor.sh \
   --python "{{python_interpreter}}" \
   --script-dir "{{script_dir}}" \
   --working-dir "{{working_dir}}" \
   --input-data "{{input_data}}" \
   --gemini-run-id "{{gemini_run_id}}"
-```
-
-**After running the script above, read the statvar processor logs to see detailed output:**
-
-```bash
-cat "{{working_dir}}/.datacommons/processor.log"
 ```
 
 **6. Validate the Output and Apply Iteration Control**
@@ -1638,8 +1632,8 @@ IF all items in the VALIDATION CHECKLIST above pass:
 
 ELIF CURRENT_ATTEMPT < {{max_iterations}}:
     → OUTPUT: "❌ ATTEMPT CURRENT_ATTEMPT FAILED - Error details: [describe specific error]"
-    → OUTPUT: "🔄 Starting attempt [CURRENT_ATTEMPT + 1] of {{max_iterations}}..."
-    → Analyze the error from logs
+    → OUTPUT: "🔄 Starting attempt [CURRENT_ATTEMPT + 1] of {{max_iterations}}..."   
+    → Analyze the error from logs. In case statvar procesor failed, read log file at: {{working_dir}}/.datacommons/processor.log
     → Modify pvmap.csv and/or metadata.csv to fix identified issues
     → INCREMENT ATTEMPT COUNTER
     → Return to Step 5 (Run the Processor)
