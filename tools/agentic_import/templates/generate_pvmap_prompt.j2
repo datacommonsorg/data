@@ -608,24 +608,21 @@ Date,Product,Location,Sales,RegisterID
 - For "Bananas" sales, we want the maximum reported sale for the day (perhaps
   one register had a correction).
 
-**`pv_map.py`:**
+**`pvmap.csv`:**
 
-```py
-PV_MAP = {
-  'Date': {'observationDate': '{Data}'},
-  'Location': {'observationAbout': '{Data}'}, // Assuming Store1 maps to a DCID
-  'Sales': {'value': '{Number}'},
-  'RegisterID': {'observationDetails': 'Register_{Data}'}, // Example, not aggregated
+```csv
+key,property,value
+Date,observationDate,{Data}
+Location,observationAbout,{Data}
+# Assuming Store1 maps to a DCID
+Sales,value,{Number}
+RegisterID,observationDetails,Register_{Data}
+# Example, not aggregated
 
-  'Apples': {
-    'variableMeasured': 'dcid:dailySales_Apples', // Hypothetical StatVar DCID
-    '#Aggregate': 'sum' // Aggregate sales for Apples by summing
-  },
-  'Bananas': {
-    'variableMeasured': 'dcid:dailySales_Bananas', // Hypothetical StatVar DCID
-    '#Aggregate': 'max' // Aggregate sales for Bananas by taking the max
-  }
-}
+Apples,variableMeasured,dcid:dailySales_Apples,#Aggregate,sum
+# Hypothetical StatVar DCID - Aggregate sales for Apples by summing
+Bananas,variableMeasured,dcid:dailySales_Bananas,#Aggregate,max
+# Hypothetical StatVar DCID - Aggregate sales for Bananas by taking the max
 ```
 
 **`config.json`:**
@@ -633,7 +630,7 @@ PV_MAP = {
 ```json
 {
   "input_data": "data.csv",
-  "pv_map": "pv_map.py",
+  "pv_map": "pvmap.csv",
   "output_path": "output/sales_summary",
   "header_rows": 1, // Assuming the first row is a header
   "mapped_columns": ["Product"], // The "Product" column determines the StatVar and aggregation
