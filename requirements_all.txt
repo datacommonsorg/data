@@ -18,7 +18,6 @@ google-generativeai
 jinja2
 matplotlib
 netCDF4
-platform
 protobuf
 rasterio
 rdp

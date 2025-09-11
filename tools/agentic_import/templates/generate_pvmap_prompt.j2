@@ -1601,14 +1601,40 @@ Before proceeding to run the processor, validate your SDMX PV map against this c
 
 **📋 BEFORE EXECUTION**: Clearly state "**ATTEMPT [X] of {{max_iterations}}**: Running statvar processor"
 
-- Execute the following command to generate the final output:
+- Execute the following commands to generate the final output and backup:
 
 ```bash
-{{python_interpreter}} {{script_dir}}/stat_var_processor.py \
+# Define paths (script_dir points to tools/ directory)
+GEMINI_RUN_ID="{{gemini_run_id}}"
+PROCESSOR_LOG="{{working_dir}}/.datacommons/processor_temp_$(date +%s).log"
+
+# Run statvar processor
+{{python_interpreter}} {{script_dir}}/statvar_importer/stat_var_processor.py \
 --input_data={{input_data}} \
 --pv_map={{working_dir}}/pvmap.csv \
 --config_file={{working_dir}}/metadata.csv \
---output_path={{working_dir}}/output/output 2>&1 | tee {{working_dir}}/.datacommons/statvar_processor_$(date +%Y%m%d_%H%M%S).log
+--output_path={{working_dir}}/output/output 2>&1 | tee "${PROCESSOR_LOG}"
+
+# Capture exit code
+EXIT_CODE=${PIPESTATUS[0]}
+
+# Backup the run (regardless of success/failure)
+{{python_interpreter}} {{script_dir}}/agentic_import/backup_processor_run.py \
+--working_dir={{working_dir}} \
+--gemini_run_id="${GEMINI_RUN_ID}" \
+--backup_files=pvmap.csv \
+--backup_files=metadata.csv \
+--backup_files=output \
+--backup_files="${PROCESSOR_LOG}"
+
+# Clean up temp log file after backup
+rm -f "${PROCESSOR_LOG}"
+
+# Check the exit code for validation
+if [ ${EXIT_CODE} -ne 0 ]; then
+    echo "❌ Processor failed with exit code: ${EXIT_CODE}"
+    exit ${EXIT_CODE}
+fi
 ```
 
 **6. Validate the Output and Apply Iteration Control**

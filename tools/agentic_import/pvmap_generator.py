@@ -181,6 +181,10 @@ class PVMapGenerator:
                 f"Found {len(self.config.data_config.input_data)} files in input_data."
             )
 
+        # Generate gemini_run_id with timestamp for this run
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.gemini_run_id = f"gemini_{timestamp}"
+
         # Generate the prompt as the first step
         prompt_file = self._generate_prompt()
 
@@ -204,10 +208,9 @@ class PVMapGenerator:
             )
             raise RuntimeError("Gemini CLI not found in PATH")
 
-        # Generate output file path with timestamp
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        # Generate output file path using the gemini_run_id
         output_file = os.path.join(self.datacommons_dir,
-                                   f'gemini_cli_{timestamp}.log')
+                                   f'{self.gemini_run_id}.log')
 
         # Execute Gemini CLI with generated prompt
         gemini_command = self._build_gemini_command(prompt_file, output_file)
@@ -289,8 +292,8 @@ class PVMapGenerator:
 
         # Calculate paths and prepare template variables
         working_dir = self.working_dir  # Use defined working directory
-        script_dir = os.path.abspath(
-            os.path.join(_SCRIPT_DIR, '..', 'statvar_importer'))
+        # Point to tools/ directory (parent of agentic_import)
+        tools_dir = os.path.abspath(os.path.join(_SCRIPT_DIR, '..'))
 
         template_vars = {
             'working_dir':
@@ -298,7 +301,7 @@ class PVMapGenerator:
             'python_interpreter':
                 sys.executable,
             'script_dir':
-                script_dir,
+                tools_dir,
             'input_data':
                 self.config.data_config.input_data[0]
                 if self.config.data_config.input_data else "",
@@ -308,7 +311,9 @@ class PVMapGenerator:
             'dataset_type':
                 'sdmx' if self.config.data_config.is_sdmx_dataset else 'csv',
             'max_iterations':
-                self.config.max_iterations
+                self.config.max_iterations,
+            'gemini_run_id':
+                self.gemini_run_id  # Pass the gemini run ID for backup tracking
         }
 
         # Render template with these variables
