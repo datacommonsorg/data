@@ -1604,37 +1604,19 @@ Before proceeding to run the processor, validate your SDMX PV map against this c
 - Execute the following commands to generate the final output and backup:
 
 ```bash
-# Define paths (script_dir points to tools/ directory)
-GEMINI_RUN_ID="{{gemini_run_id}}"
-PROCESSOR_LOG="{{working_dir}}/.datacommons/processor_temp_$(date +%s).log"
+# Run processor and backup using dedicated script
+{{script_dir}}/agentic_import/run_processor.sh \
+  --python "{{python_interpreter}}" \
+  --script-dir "{{script_dir}}" \
+  --working-dir "{{working_dir}}" \
+  --input-data "{{input_data}}" \
+  --gemini-run-id "{{gemini_run_id}}"
+```
 
-# Run statvar processor
-{{python_interpreter}} {{script_dir}}/statvar_importer/stat_var_processor.py \
---input_data={{input_data}} \
---pv_map={{working_dir}}/pvmap.csv \
---config_file={{working_dir}}/metadata.csv \
---output_path={{working_dir}}/output/output 2>&1 | tee "${PROCESSOR_LOG}"
+**After running the script above, read the statvar processor logs to see detailed output:**
 
-# Capture exit code
-EXIT_CODE=${PIPESTATUS[0]}
-
-# Backup the run (regardless of success/failure)
-{{python_interpreter}} {{script_dir}}/agentic_import/backup_processor_run.py \
---working_dir={{working_dir}} \
---gemini_run_id="${GEMINI_RUN_ID}" \
---backup_files=pvmap.csv \
---backup_files=metadata.csv \
---backup_files=output \
---backup_files="${PROCESSOR_LOG}"
-
-# Clean up temp log file after backup
-rm -f "${PROCESSOR_LOG}"
-
-# Check the exit code for validation
-if [ ${EXIT_CODE} -ne 0 ]; then
-    echo "❌ Processor failed with exit code: ${EXIT_CODE}"
-    exit ${EXIT_CODE}
-fi
+```bash
+cat "{{working_dir}}/.datacommons/processor.log"
 ```
 
 **6. Validate the Output and Apply Iteration Control**
