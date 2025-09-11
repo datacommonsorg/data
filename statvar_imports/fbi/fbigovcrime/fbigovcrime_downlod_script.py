@@ -12,172 +12,83 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from chromedriver_py import binary_path
+import sys
 import time
 from absl import logging
 from absl import flags
 from absl import app
-import zipfile
 import os
 import re
 import pandas as pd
 import shutil
+import subprocess
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('output_folder', 'download_folder', 'download folder name')
-COLLECTION_VALUE = ' Offenses Known to Law Enforcement '
-DOWNLOAD_BUTTON_LOCATOR="//div[@class='col-md-auto']/a[@title='Publication Table Download Button']"
-NB_OPTION = "//nb-option[contains(text()"
-PARENT_DIV_ID = "ciusDownloads"
-LAST_YEAR = 2020
-SOURCE_URL = "https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/downloads"
+
+# --- GCS Configuration ---
+GCS_BUCKET_NAME = "unresolved_mcf"
+GCS_INPUT_PREFIX = "fbi/city/latest/input_files"
+
+# --- Path and Import Configuration ---
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..', '..', '..', '..'))
+sys.path.insert(0, PROJECT_ROOT)
+sys.path.insert(0, os.path.join(PROJECT_ROOT, 'data', 'util'))
+
+try:
+    from data.util import file_util
+except ImportError as e:
+    logging.fatal(f"Failed to import file_util: {e}.")
+
 STATE_COLUMN = 0
 CITY_COLUMN = 1
 COLUMN_VALUES = ['State','City']
 
-def create_chrome_webdriver(DOWNLOAD_DIRECTORY):
-  """Creates a Chrome WebDriver instance."""
-  try:
-    #logic to define the download directory
+def copy_and_process_files_from_gcs(gcs_bucket, gcs_prefix, local_base_dir):
+    """
+    Copies .xlsx files from GCS, then processes them directly.
+    """
+    logging.info("--- Starting GCS File Transfers ---")
     
-    chrome_options = webdriver.ChromeOptions()
-    prefs = {
-        "download.default_directory": DOWNLOAD_DIRECTORY,
-        "download.prompt_for_download": False,  # Disable download prompts
-        "download.directory_upgrade": True,
-        "safebrowsing.enabled": True
-    }
-    chrome_options.add_experimental_option("prefs", prefs)
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--disable-dev-shm-usage")
+    local_input_dir = os.path.join(local_base_dir, 'input_files')
+    os.makedirs(local_input_dir, exist_ok=True)
 
-    svc = webdriver.ChromeService(
-        executable_path=binary_path)
-    driver = webdriver.Chrome(
-        service=svc,
-        options=chrome_options)
-    driver.get(url=SOURCE_URL)
-    return driver
-  except Exception as e:
-     logging.info("Error while creating driver instance: %s",e)
+    gcs_source_path_wildcard = f"gs://{gcs_bucket}/{gcs_prefix}/*.xlsx"
+    logging.info(f"Listing files from: {gcs_source_path_wildcard}")
+    
+    try:
+        result = subprocess.run(['gsutil', 'ls', gcs_source_path_wildcard], capture_output=True, text=True, check=True)
+        gcs_files = result.stdout.strip().split('\n')
+        if not gcs_files or gcs_files == ['']:
+            logging.fatal(f"No .xlsx files found at '{gcs_source_path_wildcard}'")
+            return
+    except subprocess.CalledProcessError as e:
+        logging.fatal(f"Error listing files from GCS with gsutil: {e.stderr}")
+        return
+    except FileNotFoundError:
+        logging.fatal("gsutil command not found. Please ensure the Google Cloud SDK is installed and in your PATH.")
+        return
 
-def get_elements(driver,parent_div_id):
-   try:
-    parent_div = driver.find_element(By.ID, parent_div_id)
-    child_elements = parent_div.find_elements(By.XPATH, ".//*")
-    return child_elements
-   except Exception as e:
-     logging.fatal("Error getting child elements : %s",e)
-     
+    logging.info(f"Found {len(gcs_files)} xlsx files to copy and process.")
 
-def get_years(driver,parent_div_id):
-   child_elements = get_elements(driver,parent_div_id)
-   years = []
-   for child in child_elements:
-    if child.tag_name == 'nb-select' and child.get_attribute("title")== "Year Select":
-       max_year = int(child.text)
-       while max_year >= LAST_YEAR:
-        years.append(max_year)
-        max_year = max_year-1
-       return years
-
-def access_elements(driver, parent_div_id,year):
-  try:
-    child_elements = get_elements(driver,parent_div_id)
-    for child in child_elements:
-        if child.tag_name == 'nb-select' and child.get_attribute("title")== "Year Select":
-            dropdown_element = WebDriverWait(child, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "./descendant::*[contains(@class, 'select-button')]")))
-            dropdown_element.click()
-
-            option_element = WebDriverWait(child, 10).until(
-            EC.element_to_be_clickable((By.XPATH, f"{NB_OPTION}, '{year}')]"))) 
-            option_element.click()
-
-        if child.tag_name == 'nb-select' and child.get_attribute("title") == "Collection Download Select":
-            dropdown_element = WebDriverWait(child, 10).until(
-                EC.element_to_be_clickable((By.XPATH, "./descendant::*[contains(@class, 'select-button placeholder')]")))
-            dropdown_element.click()
-
-            option_element = WebDriverWait(child, 10).until(
-                EC.element_to_be_clickable((By.XPATH, f"{NB_OPTION}, '{COLLECTION_VALUE}')]"))) 
-            option_element.click()
-            time.sleep(3) 
-
-            dropdown_element = WebDriverWait(child, 10).until(
-            EC.element_to_be_clickable((By.XPATH, DOWNLOAD_BUTTON_LOCATOR)))
-            dropdown_element.click()
-            time.sleep(15)
-
-  except Exception as e:
-    logging.info("Error getting child elements: %s",e)
-    return []
-
-def download(DOWNLOAD_DIRECTORY):
-   try: 
-    driver = create_chrome_webdriver(DOWNLOAD_DIRECTORY)
-    years = get_years(driver,PARENT_DIV_ID)
-    logging.info("Data is available for respective years : %s",years)
-    driver.quit()
-    for year in years:
-        driver = create_chrome_webdriver(DOWNLOAD_DIRECTORY)
-        access_elements(driver,PARENT_DIV_ID,year)
-        driver.quit()
-   except Exception as e:
-      logging.info("Error while downloading: %s",e)
-
-extracted_files_path = []
-
-def extract_zip_files(download_directory):
-  zip_file_pattern = 'offenses-known-to-le\\-\\d{4}.zip'  # Pattern for ZIP files
-  try:
-    for filename in os.listdir(download_directory):
-      if filename.endswith(".zip") and zipfile.is_zipfile(os.path.join(download_directory, filename)):
-        if re.match(zip_file_pattern, filename):  # Check for matching pattern using regex
-          zip_file_path = os.path.join(download_directory, filename)
-          extracted_files_path.append(zip_file_path[:-4]) 
-          extract_zip(zip_file_path)   # Function to extract the zip file
-          logging.info(f"zip file extracted {filename}")
-        else:
-          logging.info(f"Skipped (doesn't match pattern): {filename}")
-
-  except Exception as e:
-    logging.fatal(f"Error processing files: {e}")
-
-def extract_zip(zip_file_path):
-  """
-  Extracts the contents of a zip file to the same directory.
-
-  Args:
-    zip_file_path: The path to the zip file.
-  """
-  try:
-    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-      zip_ref.extractall(path=zip_file_path[:-4])  # Extract to the same directory 
-  except zipfile.BadZipFile:
-    logging.fatal(f"Error: Invalid zip file: {zip_file_path}")
-  except Exception as e:
-    logging.fatal(f"Error extracting zip file: {e}")
-
-
-def access_extracted_folder(DESTINATION_PATH):
-
-  for file in extracted_files_path:
-    year = file[-4:]
-    file_to_access = os.path.join(file,f"Table_8_Offenses_Known_to_Law_Enforcement_by_State_by_City_{year}.xlsx")
-    clean_headers(file_to_access)
-    clean_state_column(file_to_access)
-    os.makedirs(DESTINATION_PATH,exist_ok=True)
-    shutil.copy2(file_to_access,DESTINATION_PATH)
+    for gcs_source_path in gcs_files:
+        file_name = os.path.basename(gcs_source_path)
+        local_file_path = os.path.join(local_input_dir, file_name)
+        
+        try:
+            file_util.file_copy(gcs_source_path, local_file_path)
+            logging.info(f"Successfully copied '{gcs_source_path}' to '{local_file_path}'")
+            
+            # --- Directly process the copied file ---
+            logging.info(f"Processing file: {local_file_path}")
+            clean_headers(local_file_path)
+            clean_state_column(local_file_path)
+            
+        except Exception as e:
+            logging.fatal(f"Error copying or processing '{gcs_source_path}': {e}")
+            
+    logging.info("--- GCS File Transfers and Processing Complete ---\n")
 
 def clean_headers(file_to_access):
   try:
@@ -243,29 +154,15 @@ def clean_state_column(file_path):
         logging.fatal(f"An unexpected error occurred: {e}")
 
 def main(unused_argv):
-    folder_path = FLAGS.output_folder
-    destination_folder = folder_path+'/input_files/'
-  
     _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-    DESTINATION_PATH = os.path.join(_SCRIPT_PATH,'download_folder/input_files/')
-    DOWNLOAD_DIRECTORY = (os.path.join(_SCRIPT_PATH, 'download_folder'))
-    if not os.path.exists(DOWNLOAD_DIRECTORY):
-      os.makedirs(DOWNLOAD_DIRECTORY)
-    else:
-    # Folder exists, clear its contents (files and folders)
-      for filename in os.listdir(DOWNLOAD_DIRECTORY):
-        file_path = os.path.join(DOWNLOAD_DIRECTORY, filename)
-        try:
-            if os.path.isfile(file_path) or os.path.islink(file_path):
-                os.unlink(file_path)
-            elif os.path.isdir(file_path):
-                shutil.rmtree(file_path)
-        except Exception as e:
-            logging.fatal(f"Failed to delete {file_path}. Reason: {e}")
+    DOWNLOAD_DIRECTORY = (os.path.join(_SCRIPT_PATH, FLAGS.output_folder))
+    
+    # Clear the local directory before starting
+    if os.path.exists(DOWNLOAD_DIRECTORY):
+        shutil.rmtree(DOWNLOAD_DIRECTORY)
+    os.makedirs(DOWNLOAD_DIRECTORY)
 
-    download(DOWNLOAD_DIRECTORY)
-    extract_zip_files(DOWNLOAD_DIRECTORY)
-    access_extracted_folder(destination_folder)
+    copy_and_process_files_from_gcs(GCS_BUCKET_NAME, GCS_INPUT_PREFIX, DOWNLOAD_DIRECTORY)
 
 
 if __name__ == '__main__':

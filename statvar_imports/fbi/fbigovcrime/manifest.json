@@ -20,7 +20,7 @@
             "source_files": [
                 "download_folder/input_files/*"
             ],
-            "cron_schedule": "30 05 * * 1"
+            "cron_schedule": "30 05 1 * *"
         }
     ]
 }
