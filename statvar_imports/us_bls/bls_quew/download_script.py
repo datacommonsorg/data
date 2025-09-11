@@ -19,41 +19,43 @@ from absl import app
 from absl import logging
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/')) 
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 from download_util_script import download_file
+
+logging.set_verbosity(logging.INFO)
 
 
 def main(_):
+    """
+    Main function to download Quarterly and Annual data from BLS.gov.
+    """
     CURRENT_YEAR = datetime.datetime.now().year
     BASE_DIR = "input_files"
+    # Data is available from 1990
+    START_YEAR = 1990
 
-    #  Quarterly Data download logic 
-    QUARTERLY_URL = "https://data.bls.gov/cew/data/files/{year}/csv/{year}_qtrly_singlefile.zip"
-    quarterly_output_dir = os.path.join(BASE_DIR, "quarterly")
-    # data start from the 1990 in the UI
-    current_year = 1990
-    while current_year <= CURRENT_YEAR:
-        url = QUARTERLY_URL.format(year=current_year)
-        download_file(
-            url=url,
-            output_folder=quarterly_output_dir,
-            unzip=True
-        )
-        current_year += 1
+    datasets_to_download = {
+        "quarterly": "https://data.bls.gov/cew/data/files/{year}/csv/{year}_qtrly_singlefile.zip",
+        "annual": "https://data.bls.gov/cew/data/files/{year}/csv/{year}_annual_singlefile.zip",
+    }
 
-    # Annual Data download logic
-    ANNUAL_URL = "https://data.bls.gov/cew/data/files/{year}/csv/{year}_annual_singlefile.zip"
-    annual_output_dir = os.path.join(BASE_DIR, "annual")
-    
-    current_year = 1990
-    while current_year <= CURRENT_YEAR:
-        url = ANNUAL_URL.format(year=current_year)
-        download_file(
-            url=url,
-            output_folder=annual_output_dir,
-            unzip=True
-        )
-        current_year += 1
+    for name, url_template in datasets_to_download.items():
+        logging.info(f"Starting download for {name} data...")
+        output_dir = os.path.join(BASE_DIR, name)
+        
+        start_year = START_YEAR
+        while start_year <= CURRENT_YEAR:
+            url = url_template.format(year=start_year)
+            logging.info(f"Downloading {name} data for year {start_year} from {url}")
+            if not download_file(
+                url=url,
+                output_folder=output_dir,
+                unzip=True
+            ):
+                logging.error(f"Failed to download data for {name} {start_year} from {url}")
+            start_year += 1
+        logging.info(f"Finished downloading all {name} data.")
+
 
 if __name__ == "__main__":
     app.run(main)
