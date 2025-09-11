@@ -471,7 +471,9 @@ values are often present in the script.
 - `resume` (Flag: `--resume`, Default: `False`): If `True`, skips processing
   if output files already exist.
 - `debug` (Flag: `--debug`, Default: `False`): Enables verbose logging for
-  debugging.
+  debugging. **WARNING**: Use this only in rare cases when troubleshooting specific
+  issues, as it produces extensive logs that may exceed context limits and make
+  output difficult to manage.
 - `parallelism` (Flag: `--parallelism`, Default: `0` meaning
   `os.cpu_count()`): Number of parallel processes to use when processing
   multiple input files or sharded data. If 1, runs serially.
@@ -1642,6 +1644,7 @@ ELSE (CURRENT_ATTEMPT >= {{max_iterations}}):
     → OUTPUT: "⛔ ITERATION LIMIT REACHED: Failed after {{max_iterations}} attempts"
     → OUTPUT: "📋 Final Status: FAILED - Manual intervention required"
     → OUTPUT: "📁 Check logs at: {{working_dir}}/.datacommons/ for debugging"
+    → OUTPUT: "📁 Check backup at: {{working_dir}}/runs/{{gemini_run_id}}/ for debugging"
     → STOP EXECUTION IMMEDIATELY
     → DO NOT MAKE ANY MORE ATTEMPTS
 ```
