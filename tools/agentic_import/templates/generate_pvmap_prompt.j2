@@ -566,14 +566,14 @@ These aggregation types are case-insensitive in the configuration
 
 1.  **Global Configuration (`aggregate_duplicate_svobs`):** You can set a
     default aggregation behavior in your main configuration file (e.g.,
-    `config.json` or via command-line flags).
+    `metadata.csv` or via command-line flags).
 
-```json
-// In your config.json
-{
-  "aggregate_duplicate_svobs": "sum" // e.g., sum, mean, min, max, etc.
-  // ... other configurations
-}
+```csv
+# In your metadata.csv
+parameter,value
+aggregate_duplicate_svobs,sum
+# e.g., sum, mean, min, max, etc.
+# ... other configurations
 ```
 
 This setting will apply to all SVObs that are duplicates (same place, date, and
@@ -625,26 +625,21 @@ Bananas,variableMeasured,dcid:dailySales_Bananas,#Aggregate,max
 # Hypothetical StatVar DCID - Aggregate sales for Bananas by taking the max
 ```
 
-**`config.json`:**
+**`metadata.csv`:**
 
-```json
-{
-  "input_data": "data.csv",
-  "pv_map": "pvmap.csv",
-  "output_path": "output/sales_summary",
-  "header_rows": 1, // Assuming the first row is a header
-  "mapped_columns": ["Product"], // The "Product" column determines the StatVar and aggregation
-  "default_svobs_pvs": {
-    "typeOf": "dcs:StatVarObservation",
-    "unit": "USD" // Assuming sales are in USD
-  },
-  "default_statvar_pvs": {
-    "typeOf": "dcs:StatisticalVariable",
-    "statType": "dcs:measuredValue",
-    "populationType": "RetailGood"
-  }
-  // "aggregate_duplicate_svobs": "sum", // A global default could be set here if desired
-}
+```csv
+parameter,value
+input_data,data.csv
+pv_map,pvmap.csv
+output_path,output/sales_summary
+header_rows,1
+# Assuming the first row is a header
+mapped_columns,"Product"
+# For multiple columns use quotes: mapped_columns,"Product,Location,Date"
+# The "Product" column determines the StatVar and aggregation
+# Note: default_svobs_pvs and default_statvar_pvs contain nested properties
+# and are typically handled separately in the statvar processor
+# aggregate_duplicate_svobs,sum  # A global default could be set here if desired
 ```
 
 **How it works:**
