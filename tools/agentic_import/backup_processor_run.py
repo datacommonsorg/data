@@ -25,6 +25,9 @@ from absl import app
 from absl import flags
 from absl import logging
 
+# Constants
+ATTEMPT_PREFIX = 'attempt_'
+
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string('working_dir', '.',
@@ -41,21 +44,9 @@ flags.DEFINE_multi_string(
 
 
 def get_next_attempt_number(gemini_run_dir: Path) -> int:
-    """Get next attempt number by reading/creating counter file."""
-    counter_file = gemini_run_dir / 'attempt_counter.txt'
-
-    if counter_file.exists():
-        with open(counter_file, 'r') as f:
-            current = int(f.read().strip())
-        next_num = current + 1
-    else:
-        next_num = 1
-
-    # Write back the new number
-    with open(counter_file, 'w') as f:
-        f.write(str(next_num))
-
-    return next_num
+    """Get next attempt number by counting existing attempt directories."""
+    existing_attempts = list(gemini_run_dir.glob(f'{ATTEMPT_PREFIX}*'))
+    return len(existing_attempts) + 1
 
 
 def resolve_path(path_str: str, working_dir: Path) -> Path:
@@ -120,7 +111,7 @@ def backup_run() -> str:
 
     # Get attempt number
     attempt_num = get_next_attempt_number(gemini_run_dir)
-    attempt_dir = gemini_run_dir / f'attempt_{attempt_num:03d}'
+    attempt_dir = gemini_run_dir / f'{ATTEMPT_PREFIX}{attempt_num:03d}'
     attempt_dir.mkdir(parents=True, exist_ok=True)
 
     logging.info(
