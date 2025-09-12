@@ -1,0 +1,23 @@
+Node: dcid:Count_Person_InLaborForce
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:InLaborForce
+
+Node: dcid:Count_Person_InLaborForce_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:InLaborForce
+gender: dcid:Female
+
+Node: dcid:Count_Person_InLaborForce_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:InLaborForce
+gender: dcid:Male
+
