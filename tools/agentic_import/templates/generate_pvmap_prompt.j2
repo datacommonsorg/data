@@ -363,7 +363,7 @@ values are often present in the script.
   numbers (can be a space too).
 
 **Output Configuration:**
-
+<!-- TODO: Keep only required params-->
 - `output_path` (Flag: `--output_path`): Prefix for output files.
 - `output_statvar_mcf` (Default: `<output_path>_stat_vars.mcf`): Filename for
   the StatVar MCF.
@@ -561,7 +561,7 @@ aggregation types:
   keeping the last encountered).
 
 These aggregation types are case-insensitive in the configuration
-
+<!-- remove aggregation -->
 ### Configuration for Aggregation
 
 1.  **Global Configuration (`aggregate_duplicate_svobs`):** You can set a
@@ -634,6 +634,7 @@ pv_map,pvmap.csv
 output_path,output/sales_summary
 header_rows,1
 # Assuming the first row is a header
+<!-- TODO : remove mapped columns for sdmx -->
 mapped_columns,"Product"
 # For multiple columns use quotes: mapped_columns,"Product,Location,Date"
 # The "Product" column determines the StatVar and aggregation
@@ -691,6 +692,54 @@ when constructing the mappings.
 ### Guidelines to create PV map
 
 **Here are guidelines to create a pvmap.**
+
+**CRITICAL GUIDELINES**
+
+**1. Always use column name as namespace to avoid ambiguity**
+
+When mapping column values to properties, ALWAYS qualify the value with its column name using the format `<COLUMN_NAME>:<VALUE>` to prevent conflicts when the same value appears in different columns.
+
+**❌ INCORRECT (causes ambiguity):**
+```csv
+S1,populationType,TotalEconomy
+S1,counterpartSector,TotalEconomy
+```
+Problem: Both mappings use "S1" - it's unclear which column each refers to.
+
+**✅ CORRECT (with column namespace):**
+```csv
+SECTOR:S1,populationType,TotalEconomy
+COUNTERPART_SECTOR:S1,counterpartSector,TotalEconomy
+```
+Solution: Each value is prefixed with its column name, eliminating ambiguity.
+
+**More Examples:**
+
+Example 1 - Geographic codes in multiple columns:
+```csv
+# Incorrect:
+US,originCountry,UnitedStates
+US,destinationCountry,UnitedStates
+
+# Correct:
+ORIGIN:US,originCountry,UnitedStates
+DESTINATION:US,destinationCountry,UnitedStates
+```
+
+Example 2 - Year values in different contexts:
+```csv
+# Incorrect:
+2023,observationDate,2023
+2023,referenceYear,2023
+
+# Correct:
+YEAR_COLUMN:2023,observationDate,2023
+BASE_YEAR:2023,referenceYear,2023
+```
+
+**Why this is critical:** Without column namespacing, the import system cannot distinguish between identical values from different columns, leading to incorrect data mappings and potential data loss or corruption.
+
+**BASIC GUIDELINES**
 
 1.  populationType. Examples populationTypes are Person, EconomicActivity, Debt.
 2.  measuredProperty. Example measuredProperty are count, amount,
@@ -798,6 +847,7 @@ OBS_VALUE:Observation Value,value,{Number},,,,
 368: Per cent per year,unit,PercentPerAnnum,,,,
 
 —-------
+<!-- TODO: change the order for clarity  -->
 
 **Input CSV Data**
 
