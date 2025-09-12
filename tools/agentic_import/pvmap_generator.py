@@ -109,7 +109,7 @@ class PVMapGenerator:
 
         # Create run directory structure
         self._run_dir = os.path.join(self._datacommons_dir, 'runs',
-                                    self._gemini_run_id)
+                                     self._gemini_run_id)
         os.makedirs(self._run_dir, exist_ok=True)
 
     def _validate_and_convert_path(self, path: str) -> str:
@@ -317,7 +317,8 @@ class PVMapGenerator:
             'max_iterations':
                 self._config.max_iterations,
             'gemini_run_id':
-                self._gemini_run_id  # Pass the gemini run ID for backup tracking
+                self.
+                _gemini_run_id  # Pass the gemini run ID for backup tracking
         }
 
         # Render template with these variables
