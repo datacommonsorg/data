@@ -20,10 +20,10 @@ set -euo pipefail
 ORIGINAL_DIR="$(pwd)"
 
 # Get the directory where this script is located
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 
 # Get the root directory of the data repository
-DATA_REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+DATA_REPO_ROOT="$(realpath "$SCRIPT_DIR/../..")"
 
 # Print directory information for debugging
 echo "Current/Original directory: $ORIGINAL_DIR"
