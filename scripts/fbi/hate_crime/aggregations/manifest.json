@@ -1,27 +1,26 @@
 {
     "import_specifications": [
-      {
-        "import_name": "FBIHateCrime",
-        "curator_emails": ["support@datacommons.org"],
-        "provenance_url": "https://cde.ucr.cjis.gov/LATEST/webapp/",
-        "provenance_description": "US Hate Crime Statistics",
-        "scripts": ["../download_fbi_hate_crime_data.py",
-        "../preprocess_aggregations.py"],
-        "import_inputs": [
-          {
-            "template_mcf": "../aggregations.tmcf",
-            "cleaned_csv": "aggregation.csv"
-          }
-        ],
-        "source_files": [
-            "hate_crime_data/*"
-        ],
-        "cron_schedule": "0 10 21 * *"
-      }
-    ],
-    "config_override": {
-        "invoke_import_tool": false,
-        "invoke_differ_tool": false,
-        "invoke_import_validation": false
-    }
-  }
+        {
+            "import_name": "FBIHateCrime",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://cde.ucr.cjis.gov/LATEST/webapp/",
+            "provenance_description": "US Hate Crime Statistics",
+            "scripts": [
+                "../download_fbi_hate_crime_data.py",
+                "../preprocess_aggregations.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "../aggregations.tmcf",
+                    "cleaned_csv": "aggregation.csv"
+                }
+            ],
+            "source_files": [
+                "hate_crime_data/*"
+            ],
+            "cron_schedule": "0 10 21 * *"
+        }
+    ]
+}
