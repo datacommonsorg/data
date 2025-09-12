@@ -3,7 +3,7 @@
 # Script to run statvar processor with clean logging separation
 # This script is called from the Gemini prompt template
 
-set -e
+# Note: Removed set -e to allow backup to run even if processor fails
 
 # Parse command line arguments
 PYTHON_INTERPRETER=""

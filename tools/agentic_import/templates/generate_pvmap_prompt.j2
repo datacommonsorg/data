@@ -158,25 +158,42 @@ This is crucial for mapping strings from your input data to Data Commons
 properties and values. It can be a Python file defining a dictionary, a JSON
 file, or a CSV file
 
-**Format Example (Python dict):**
+**Format Example (CSV notation):**
 
-```py
-{
-  '<input-string1>': { '<property1>': '<value1>', '<property2>': '<value2>' },
-  'Child' : { 'populationType': 'Person', 'age': '[- 15 Years]' }
-}
+```csv
+key,p1,v1,p2,v2
+<input-string1>,<property1>,<value1>,<property2>,<value2>
+Child,populationType,Person,age,[- 15 Years]
 ```
 
 **Key Features and Special Properties:**
 
+**⚠️ CRITICAL: {Data} Variable Quoting Rules ⚠️**
+
+**ALWAYS enclose {Data} in single quotes ('{Data}') when using it in:**
+- **#Eval expressions**
+- **#Filter expressions**  
+- **#Regex patterns**
+
+**This is because {Data} is replaced with the actual string value from your data, and without quotes, Python evaluation will fail.**
+
+**Example of CORRECT usage:**
+- `Status_Column,#Eval,"status='Active' if '{Data}' == 'Y' else 'Inactive'"`
+- `Category,#Filter,"'{Data}' not in ['NA', 'N/A', 'null']"`
+
+**Example of INCORRECT usage (will cause failures):**
+- `Status_Column,#Eval,"status='Active' if {Data} == 'Y' else 'Inactive'"` ❌
+
+---
+
 - **String Mapping**: Directly map an input string to one or more
   property-values.
-  - Example: `'Men': { 'populationType': 'Person', 'gender': 'Male' }`
+  - Example: `Men,populationType,Person,gender,Male`
 - **Internal Variables for Cell Values**:
   - `Data`: The raw string value in a cell
   - `Number`: The numeric value if the cell contains a number
   - `Key`: The input string that was looked up in the `pv_map`
-  - Example: `'Age_Column_Header': { 'age': '{Number}' }` (This would map
+  - Example: `Age_Column_Header,age,{Number}` (This would map
     the numeric value from cells under 'Age_Column_Header' to the `age`
     property).
 - **Variable Substitution**: User-defined variables (capitalized names) can
@@ -184,18 +201,15 @@ file, or a CSV file
   output.
   - Example:
 
-```py
-{
-  'Product_Name_Column': { 'ProductName': '{Data}' },
-  'Product_Code_Column': { 'name': '"Total imports of {ProductName} (code: {Data})"' }
-}
+```csv
+Product_Name_Column,ProductName,{Data}
+Product_Code_Column,name,"Total imports of {ProductName} (code: {Data})"
 ```
 
 - **`#Format`**: Use Python f-string like formatting.
 
-  - Syntax: `'<input-key>': { '#Format': '<prop>=<format-expression>' }`
-  - Example: `'FipsCode': { '#Format':
-'observationAbout=dcs:geoId/{Number:02d}' }` (Pads FIPS code to 2
+  - Syntax: `'<input-key>',#Format,"<prop>=<format-expression>" }`
+  - Example: `FipsCode,#Format,"observationAbout=dcs:geoId/{Number:02d}"` (Pads FIPS code to 2
     digits)
 
 - **`#Regex`**: Use named Python regular expressions to extract parts of an
@@ -203,51 +217,87 @@ file, or a CSV file
 
   - Example (extracting start and end age from "20-25"):
 
-```py
-'Age-Group': {
-  '#Regex': '(?P<StartAge>[0-9]+) *- *(?P<EndAge>[0-9]+)',
-  'age': '[{StartAge} {EndAge} Years]'
-}
+```csv
+Age-Group,#Regex,"(?P<StartAge>[0-9]+) *- *(?P<EndAge>[0-9]+)",age,[{StartAge} {EndAge} Years]
 ```
+
+  - Example using {Data} in regex pattern:
+
+```csv
+Country_Name,#Regex,"(?P<Country>.*) \('{Data}'\)",countryName,{Country}
+```
+
+  **🔴 CRITICAL: Always use '{Data}' (with single quotes) in #Regex patterns! 🔴**
+  
+  Note: #Regex expressions are wrapped in double quotes, and use single quotes for string literals within the expression.
 
 - **`#Eval`**: Perform complex transformations using Python expressions.
   - Syntax: `<property>=<expression>`
   - Example (unit conversion):
 
-```py
-'Weight_Lbs': {
-  '#Eval': 'value={Number} * 0.453592', # Convert pounds to kg
-  'unit': 'dcs:Kilogram'
-}
+```csv
+Weight_Lbs,#Eval,"value={Number} * 0.453592",unit,dcs:Kilogram
 ```
 
+  - Example using {Data} in eval expression:
+
+```csv
+Status_Column,#Eval,"status='Active' if '{Data}' == 'Y' else 'Inactive'",active,{status}
 ```
-(Similar to example provided: `'#Eval': 'value={Number} \* 2.205'`)
+
+  **🔴 CRITICAL: Always use '{Data}' (with single quotes) in #Eval expressions! 🔴**
+  
+  Note: #Eval expressions are wrapped in double quotes, and use single quotes for string literals within the expression.
+
+```
+(Similar format: `SomeKey,#Eval,"value={Number} * 2.205"`)
 ```
 
 - **Supported Functions in Eval:**
   - `format_date(date_string, output_format_string)`: Parses and formats
     dates. Default output is YYYY-MM-DD.
-    - Example: `'DateColumn': { '#Eval':
-'observationDate=format_date("{Data}")' }`
+    - Example: `DateColumn,#Eval,"observationDate=format_date('{Data}')"`
   - `str_to_camel_case(string_value)`: Converts a string to CamelCase.
-    - Example: `'ProductType': { '#Eval':
-'productEnum=str_to_camel_case("{Data}")' }`
+    - Example: `ProductType,#Eval,"productEnum=str_to_camel_case('{Data}')"`
 - **`#Filter`**: Conditionally drop SVObs rows. If the expression evaluates to
   `False`, the SVObs is dropped.
-  - Example: `'ValueColumn': { 'value': '{Number}', '#Filter': '{Number} >
-0' }` (Drops rows where 'ValueColumn' is not positive)
+  - Example: `ValueColumn,value,{Number},#Filter,{Number} > 0` (Drops rows where 'ValueColumn' is not positive)
+  
+  - Example using {Data} in filter expression:
+
+```csv
+Category,value,{Data},#Filter,"'{Data}' not in ['NA', 'N/A', 'null', '']"
+```
+
+  **🔴 CRITICAL: Always use '{Data}' (with single quotes) in #Filter expressions! 🔴**
 - **`#ignore`**: If a cell's PV map results in an `#ignore` property, the
   corresponding SVObs may be dropped or the cell might be treated differently
   depending on context.
-  - Example: `'Not Applicable': { '#ignore': 'Value is not applicable' }`
+  - Example: `Not Applicable,#ignore,Value is not applicable`
 - **`#Header`**: Marks a row as a header row or indicates specific properties
   from a cell should be treated as column headers.
-  - Example: `PV_MAP = { 'Column A': { '#Header':
-'property1,property2=defaultValue' } }` This would mean if "Column A" is
+  - Example: `Column A,#Header,"property1,property2=defaultValue"` This would mean if "Column A" is
     found, `property1` (value taken from cell if `property1` exists for
     "Column A" mapping) and `property2` (with `defaultValue`) become header
     PVs for that column.
+
+---
+
+**🚨 FINAL REMINDER: {Data} Quoting Requirements 🚨**
+
+**Remember these CRITICAL rules when generating PV maps:**
+
+1. **ALWAYS use '{Data}' (with single quotes) in #Eval, #Filter, and #Regex expressions**
+2. **NEVER use bare {Data} without quotes in these expressions**  
+3. **Double-check every expression before submitting**
+
+**Quick Examples:**
+- ✅ CORRECT: `Category,#Filter,"'{Data}' != 'null'"`
+- ❌ WRONG: `Category,#Filter,"{Data} != 'null'"`
+- ✅ CORRECT: `Name,#Eval,"fullName='{Data}'.upper()"`
+- ❌ WRONG: `Name,#Eval,"fullName={Data}.upper()"`
+
+---
 
 #### 2. General Processing Settings (via `--config_file` or command-line flags)
 
@@ -313,7 +363,7 @@ values are often present in the script.
   numbers (can be a space too).
 
 **Output Configuration:**
-
+<!-- TODO: Keep only required params-->
 - `output_path` (Flag: `--output_path`): Prefix for output files.
 - `output_statvar_mcf` (Default: `<output_path>_stat_vars.mcf`): Filename for
   the StatVar MCF.
@@ -428,8 +478,7 @@ values are often present in the script.
   for the same place+year+StatVar but different values, when not aggregated.
 - `multiply_factor` (Default: `'#Multiply'`): A property key in PVs. If
   present, its numeric value is used to multiply the SVObs `value`.
-  - Example: `{'Value_USD': {'value':'{Number}', '#Multiply': 0.85,
-'unit':'EUR'}}` (Converts USD value to EUR using a 0.85 factor)
+  - Example: `Value_USD,value,{Number},#Multiply,0.85,unit,EUR` (Converts USD value to EUR using a 0.85 factor)
 - `date_format_key` (Default: `'#DateFormat'`): Property name in PVs
   specifying the input date format string (strptime format) for a date value.
 - `date_format`: A global input date format string if not specified per value.
@@ -471,7 +520,9 @@ values are often present in the script.
 - `resume` (Flag: `--resume`, Default: `False`): If `True`, skips processing
   if output files already exist.
 - `debug` (Flag: `--debug`, Default: `False`): Enables verbose logging for
-  debugging.
+  debugging. **WARNING**: Use this only in rare cases when troubleshooting specific
+  issues, as it produces extensive logs that may exceed context limits and make
+  output difficult to manage.
 - `parallelism` (Flag: `--parallelism`, Default: `0` meaning
   `os.cpu_count()`): Number of parallel processes to use when processing
   multiple input files or sharded data. If 1, runs serially.
@@ -510,19 +561,19 @@ aggregation types:
   keeping the last encountered).
 
 These aggregation types are case-insensitive in the configuration
-
+<!-- remove aggregation -->
 ### Configuration for Aggregation
 
 1.  **Global Configuration (`aggregate_duplicate_svobs`):** You can set a
     default aggregation behavior in your main configuration file (e.g.,
-    `config.json` or via command-line flags).
+    `metadata.csv` or via command-line flags).
 
-```json
-// In your config.json
-{
-  "aggregate_duplicate_svobs": "sum" // e.g., sum, mean, min, max, etc.
-  // ... other configurations
-}
+```csv
+# In your metadata.csv
+parameter,value
+aggregate_duplicate_svobs,sum
+# e.g., sum, mean, min, max, etc.
+# ... other configurations
 ```
 
 This setting will apply to all SVObs that are duplicates (same place, date, and
@@ -557,46 +608,39 @@ Date,Product,Location,Sales,RegisterID
 - For "Bananas" sales, we want the maximum reported sale for the day (perhaps
   one register had a correction).
 
-**`pv_map.py`:**
+**`pvmap.csv`:**
 
-```py
-PV_MAP = {
-  'Date': {'observationDate': '{Data}'},
-  'Location': {'observationAbout': '{Data}'}, // Assuming Store1 maps to a DCID
-  'Sales': {'value': '{Number}'},
-  'RegisterID': {'observationDetails': 'Register_{Data}'}, // Example, not aggregated
+```csv
+key,property,value
+Date,observationDate,{Data}
+Location,observationAbout,{Data}
+# Assuming Store1 maps to a DCID
+Sales,value,{Number}
+RegisterID,observationDetails,Register_{Data}
+# Example, not aggregated
 
-  'Apples': {
-    'variableMeasured': 'dcid:dailySales_Apples', // Hypothetical StatVar DCID
-    '#Aggregate': 'sum' // Aggregate sales for Apples by summing
-  },
-  'Bananas': {
-    'variableMeasured': 'dcid:dailySales_Bananas', // Hypothetical StatVar DCID
-    '#Aggregate': 'max' // Aggregate sales for Bananas by taking the max
-  }
-}
+Apples,variableMeasured,dcid:dailySales_Apples,#Aggregate,sum
+# Hypothetical StatVar DCID - Aggregate sales for Apples by summing
+Bananas,variableMeasured,dcid:dailySales_Bananas,#Aggregate,max
+# Hypothetical StatVar DCID - Aggregate sales for Bananas by taking the max
 ```
 
-**`config.json`:**
+**`metadata.csv`:**
 
-```json
-{
-  "input_data": "data.csv",
-  "pv_map": "pv_map.py",
-  "output_path": "output/sales_summary",
-  "header_rows": 1, // Assuming the first row is a header
-  "mapped_columns": ["Product"], // The "Product" column determines the StatVar and aggregation
-  "default_svobs_pvs": {
-    "typeOf": "dcs:StatVarObservation",
-    "unit": "USD" // Assuming sales are in USD
-  },
-  "default_statvar_pvs": {
-    "typeOf": "dcs:StatisticalVariable",
-    "statType": "dcs:measuredValue",
-    "populationType": "RetailGood"
-  }
-  // "aggregate_duplicate_svobs": "sum", // A global default could be set here if desired
-}
+```csv
+parameter,value
+input_data,data.csv
+pv_map,pvmap.csv
+output_path,output/sales_summary
+header_rows,1
+# Assuming the first row is a header
+<!-- TODO : remove mapped columns for sdmx -->
+mapped_columns,"Product"
+# For multiple columns use quotes: mapped_columns,"Product,Location,Date"
+# The "Product" column determines the StatVar and aggregation
+# Note: default_svobs_pvs and default_statvar_pvs contain nested properties
+# and are typically handled separately in the statvar processor
+# aggregate_duplicate_svobs,sum  # A global default could be set here if desired
 ```
 
 **How it works:**
@@ -648,6 +692,54 @@ when constructing the mappings.
 ### Guidelines to create PV map
 
 **Here are guidelines to create a pvmap.**
+
+**CRITICAL GUIDELINES**
+
+**1. Always use column name as namespace to avoid ambiguity**
+
+When mapping column values to properties, ALWAYS qualify the value with its column name using the format `<COLUMN_NAME>:<VALUE>` to prevent conflicts when the same value appears in different columns.
+
+**❌ INCORRECT (causes ambiguity):**
+```csv
+S1,populationType,TotalEconomy
+S1,counterpartSector,TotalEconomy
+```
+Problem: Both mappings use "S1" - it's unclear which column each refers to.
+
+**✅ CORRECT (with column namespace):**
+```csv
+SECTOR:S1,populationType,TotalEconomy
+COUNTERPART_SECTOR:S1,counterpartSector,TotalEconomy
+```
+Solution: Each value is prefixed with its column name, eliminating ambiguity.
+
+**More Examples:**
+
+Example 1 - Geographic codes in multiple columns:
+```csv
+# Incorrect:
+US,originCountry,UnitedStates
+US,destinationCountry,UnitedStates
+
+# Correct:
+ORIGIN:US,originCountry,UnitedStates
+DESTINATION:US,destinationCountry,UnitedStates
+```
+
+Example 2 - Year values in different contexts:
+```csv
+# Incorrect:
+2023,observationDate,2023
+2023,referenceYear,2023
+
+# Correct:
+YEAR_COLUMN:2023,observationDate,2023
+BASE_YEAR:2023,referenceYear,2023
+```
+
+**Why this is critical:** Without column namespacing, the import system cannot distinguish between identical values from different columns, leading to incorrect data mappings and potential data loss or corruption.
+
+**BASIC GUIDELINES**
 
 1.  populationType. Examples populationTypes are Person, EconomicActivity, Debt.
 2.  measuredProperty. Example measuredProperty are count, amount,
@@ -755,6 +847,7 @@ OBS_VALUE:Observation Value,value,{Number},,,,
 368: Per cent per year,unit,PercentPerAnnum,,,,
 
 —-------
+<!-- TODO: change the order for clarity  -->
 
 **Input CSV Data**
 
@@ -1604,19 +1697,13 @@ Before proceeding to run the processor, validate your SDMX PV map against this c
 - Execute the following commands to generate the final output and backup:
 
 ```bash
-# Run processor and backup using dedicated script
-{{script_dir}}/agentic_import/run_processor.sh \
+# Run statvar processor using dedicated script
+{{script_dir}}/agentic_import/run_statvar_processor.sh \
   --python "{{python_interpreter}}" \
   --script-dir "{{script_dir}}" \
   --working-dir "{{working_dir}}" \
   --input-data "{{input_data}}" \
   --gemini-run-id "{{gemini_run_id}}"
-```
-
-**After running the script above, read the statvar processor logs to see detailed output:**
-
-```bash
-cat "{{working_dir}}/.datacommons/processor.log"
 ```
 
 **6. Validate the Output and Apply Iteration Control**
@@ -1638,8 +1725,8 @@ IF all items in the VALIDATION CHECKLIST above pass:
 
 ELIF CURRENT_ATTEMPT < {{max_iterations}}:
     → OUTPUT: "❌ ATTEMPT CURRENT_ATTEMPT FAILED - Error details: [describe specific error]"
-    → OUTPUT: "🔄 Starting attempt [CURRENT_ATTEMPT + 1] of {{max_iterations}}..."
-    → Analyze the error from logs
+    → OUTPUT: "🔄 Starting attempt [CURRENT_ATTEMPT + 1] of {{max_iterations}}..."   
+    → Analyze the error from logs. In case statvar procesor failed, read log file at: {{working_dir}}/.datacommons/processor.log
     → Modify pvmap.csv and/or metadata.csv to fix identified issues
     → INCREMENT ATTEMPT COUNTER
     → Return to Step 5 (Run the Processor)
@@ -1648,6 +1735,7 @@ ELSE (CURRENT_ATTEMPT >= {{max_iterations}}):
     → OUTPUT: "⛔ ITERATION LIMIT REACHED: Failed after {{max_iterations}} attempts"
     → OUTPUT: "📋 Final Status: FAILED - Manual intervention required"
     → OUTPUT: "📁 Check logs at: {{working_dir}}/.datacommons/ for debugging"
+    → OUTPUT: "📁 Check backup at: {{working_dir}}/runs/{{gemini_run_id}}/ for debugging"
     → STOP EXECUTION IMMEDIATELY
     → DO NOT MAKE ANY MORE ATTEMPTS
 ```
