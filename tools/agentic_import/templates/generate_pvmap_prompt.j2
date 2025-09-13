@@ -157,27 +157,98 @@ The underlying script supports Python/JSON config files and CLI flags in general
 
 - Format: two columns `parameter,value`
 - Types: Booleans as `True`/`False`; lists as comma-separated strings (quote the whole value if needed); dictionaries/complex values as JSON-encoded strings (quoted)
-- Minimal example:
+- **Comprehensive Example with Common Parameters:**
+
+```csv
+parameter,value
+
+# CRITICAL: Data structure configuration (most important)
+header_rows,1
+mapped_rows,0
+mapped_columns,0
+
+# Input data processing
+input_encoding,utf-8
+skip_rows,0
+input_delimiter,","
+
+# Output control (highly recommended to specify)
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+
+# Date formatting (if data contains dates)
+observation_date_format,YYYY-MM-DD
+date_format,"%Y-%m-%d"
+
+# Column selection (for optimization, especially SDMX)
+input_columns,"REF_AREA,TIME_PERIOD,OBS_VALUE,UNIT_MEASURE"
+
+# Place resolution (for geographic data)
+resolve_places,True
+place_type,"Country,AdministrativeArea1"
+places_within,country/USA
+places_resolved_csv,places_resolved.csv
+
+# Data quality controls
+aggregate_duplicate_svobs,sum
+drop_statvars_without_svobs,True
+use_all_numeric_data_values,False
+
+# Advanced options (use when needed)
+#existing_statvar_mcf,existing_statvars.mcf
+#statvar_dcid_remap_csv,statvar_remapping.csv
+#default_statvar_pvs,"{""statType"": ""dcs:measuredValue""}"
+```
+
+- **Minimal Example for Simple CSV:**
 
 ```csv
 parameter,value
 header_rows,1
-mapped_rows,0
-mapped_columns,0
-output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
-observation_date_format,YYYY-MM
-date_format,"%Y-%m-%d"
-input_columns,"REF_AREA,TIME_PERIOD,OBS_VALUE"
-use_all_numeric_data_values,False
-resolve_places,True
-place_type,"Country,AdministrativeArea1"
-places_resolved_csv,places_resolved.csv
-drop_statvars_without_svobs,True
+output_columns,"observationAbout,observationDate,value,variableMeasured"
 ```
+
+⚠️ **COMMON METADATA.CSV MISTAKES TO AVOID:**
+- **Missing `header_rows`**: Most CSV files have headers, but `header_rows` defaults to 0. Always set to 1 for standard CSV files
+- **Wrong `mapped_rows`/`mapped_columns`**: Use `mapped_rows` for dimensional data where first few rows contain dimension values (not headers). Use `mapped_columns` for transposed data
+- **Using CLI flag names**: Use parameter names like `header_rows`, not CLI flag names like `--header_rows`
+- **Not specifying `output_columns`**: Defaults may not match your needs. Always specify the exact columns you want in output CSV
+- **Missing `input_encoding`**: Non-UTF8 files (especially with international characters) need explicit encoding like `latin-1` or `iso-8859-1`
+- **Forgetting `places_within`**: Geographic data without this constraint can resolve to wrong places (e.g., Paris, Texas instead of Paris, France)
 
 - Common parameters (express in `metadata.csv`, not in `pvmap.csv`): `header_rows`, `header_columns`, `mapped_rows`, `mapped_columns`, `output_columns`, `input_columns`, `date_format`, `observation_date_format`, `date_format_key`, `use_all_numeric_data_values`, `aggregate_duplicate_svobs`, `aggregate_key`, `default_statvar_pvs`, `default_svobs_pvs`, `required_statvar_properties`, `required_statvarobs_properties`, `statvar_dcid_remap_csv`, `existing_statvar_mcf`, `resolve_places`, `place_type`, `maps_api_country`, `places_within`, `places_resolved_csv`.
 
 Policy: Do not embed processor settings in `pvmap.csv` and do not add extra CLI flags—`metadata.csv` is the single source of truth for configuration in this workflow.
+
+#### metadata.csv Debugging Strategy
+
+🔧 **SYSTEMATIC DEBUGGING APPROACH:**
+
+1. **Start Minimal**: Begin with only essential parameters:
+   ```csv
+   parameter,value
+   header_rows,1
+   output_columns,"observationAbout,observationDate,value,variableMeasured"
+   ```
+
+2. **Test with Small Data**: Use first 10-20 rows of input to validate configuration
+
+3. **Add Parameters Incrementally**:
+   - Add `mapped_rows`/`mapped_columns` for dimensional data
+   - Add `input_encoding` if seeing character issues
+   - Add place resolution parameters if needed
+   - Add date formatting if dates are incorrect
+
+4. **Common Error Patterns**:
+   - **"No data in output"**: Check `header_rows`, `mapped_rows`, `skip_rows`
+   - **"Wrong place resolution"**: Add `places_within` constraint
+   - **"Date parsing errors"**: Set `date_format` and `observation_date_format`
+   - **"Encoding issues"**: Set `input_encoding` (try `latin-1`, `iso-8859-1`, `cp1252`)
+   - **"Unexpected columns in output"**: Specify exact `output_columns`
+
+5. **Validation Checks**:
+   - Verify parameter names match documentation (not CLI flag names)
+   - Quote values containing commas: `"value1,value2,value3"`
+   - Use JSON format for complex values: `"{""key"": ""value""}"`
 
 #### 1. Property-Value Map (`pv_map`)
 
@@ -1621,6 +1692,13 @@ ELIF CURRENT_ATTEMPT < {{max_iterations}}:
     → OUTPUT: "❌ ATTEMPT CURRENT_ATTEMPT FAILED - Error details: [describe specific error]"
     → OUTPUT: "🔄 Starting attempt [CURRENT_ATTEMPT + 1] of {{max_iterations}}..."   
     → Analyze the error from logs. In case statvar procesor failed, read log file at: {{working_dir}}/.datacommons/processor.log
+    → **Common metadata.csv issues to check:**
+       • Missing or wrong `header_rows` (should be 1 for standard CSV with headers)
+       • Incorrect `mapped_rows`/`mapped_columns` for dimensional data
+       • Wrong date format parameters (`date_format`, `observation_date_format`)
+       • Missing `input_encoding` for non-UTF8 files
+       • Unspecified `output_columns` causing unexpected output structure
+       • Place resolution issues: missing `places_within` or wrong `place_type`
     → Modify pvmap.csv and/or metadata.csv to fix identified issues
     → INCREMENT ATTEMPT COUNTER
     → Return to Step 5 (Run the Processor)
