@@ -27,6 +27,7 @@ You **MUST** adhere to these rules at all times.
 - **NEVER read entire data files**, as they may exceed the context window.
 - **When inspecting data files, limit reads to the first 20 lines.**
 - **ALWAYS read metadata files before data files.**
+- **Single source of truth for config**: All `statvar_processor` configuration/flags must be declared in `metadata.csv` as `parameter,value` rows. Do not pass flags via CLI and do not embed configuration in `pvmap.csv`; the wrapper will pass only input paths.
 
 ## Data Processing Logic
 
@@ -135,6 +136,8 @@ python3 stat_var_processor.py --input_data=<path-to-csv-or-other-input> \
     --config_file=<path-to-config-file>
 ```
 
+Note: The CLI above is for reference. In this workflow, encode all processor configuration in `metadata.csv` and invoke via the wrapper script; do not add extra CLI flags beyond inputs handled by the wrapper.
+
 This will generate:
 
 - `<output-prefix>_stat_vars.mcf`: MCF file with StatVar definitions
@@ -146,17 +149,43 @@ This will generate:
 
 ### Configuration
 
-Configuration is primarily managed through a config file (specified by
-`--config_file`) and/or command-line flags. The config file can be a Python
-dictionary or a JSON file
+For this workflow, declare all processor configuration in `metadata.csv` (a `parameter,value` CSV). Treat CLI flags as documentation only; the wrapper script supplies input paths. Do not place configuration in `pvmap.csv` and do not rely on additional CLI flags.
 
-Command-line flags generally override config file settings.
+The underlying script supports Python/JSON config files and CLI flags in general, but we standardize on `metadata.csv` for reproducibility and clarity here.
+
+#### metadata.csv: Format and Parameters
+
+- Format: two columns `parameter,value`
+- Types: Booleans as `True`/`False`; lists as comma-separated strings (quote the whole value if needed); dictionaries/complex values as JSON-encoded strings (quoted)
+- Minimal example:
+
+```csv
+parameter,value
+header_rows,1
+mapped_rows,0
+mapped_columns,0
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+observation_date_format,YYYY-MM
+date_format,"%Y-%m-%d"
+input_columns,"REF_AREA,TIME_PERIOD,OBS_VALUE"
+use_all_numeric_data_values,False
+resolve_places,True
+place_type,"Country,AdministrativeArea1"
+places_resolved_csv,places_resolved.csv
+drop_statvars_without_svobs,True
+```
+
+- Common parameters (express in `metadata.csv`, not in `pvmap.csv`): `header_rows`, `header_columns`, `mapped_rows`, `mapped_columns`, `output_columns`, `input_columns`, `date_format`, `observation_date_format`, `date_format_key`, `use_all_numeric_data_values`, `aggregate_duplicate_svobs`, `aggregate_key`, `default_statvar_pvs`, `default_svobs_pvs`, `required_statvar_properties`, `required_statvarobs_properties`, `statvar_dcid_remap_csv`, `existing_statvar_mcf`, `resolve_places`, `place_type`, `maps_api_country`, `places_within`, `places_resolved_csv`.
+
+Policy: Do not embed processor settings in `pvmap.csv` and do not add extra CLI flags—`metadata.csv` is the single source of truth for configuration in this workflow.
 
 #### 1. Property-Value Map (`pv_map`)
 
 This is crucial for mapping strings from your input data to Data Commons
 properties and values. It can be a Python file defining a dictionary, a JSON
 file, or a CSV file
+
+Note: Keep `pvmap.csv` strictly for mapping source strings to Data Commons properties/values. Do not include processor configuration here; put all settings in `metadata.csv`.
 
 **Format Example (CSV notation):**
 
@@ -303,6 +332,8 @@ Category,value,{Data},#Filter,"'{Data}' not in ['NA', 'N/A', 'null', '']"
 
 These settings control various aspects of the data processing pipeline. Default
 values are often present in the script.
+
+Workflow policy: Express these settings in `metadata.csv` as `parameter,value` rows. Do not include them in `pvmap.csv`, and avoid passing them via CLI in this workflow.
 
 **Input Configuration:**
 
@@ -539,149 +570,6 @@ used by the script and the script's `ConfigMap` initializations would be
 beneficial. The provided search result "Stat Var Processor" also serves as a
 good reference for many of these options and their usage patterns.
 
-The `stat_var_processor.py` script provides mechanisms to aggregate
-`StatVarObservation` (SVObs) values when multiple observations for the same
-statistical variable, place, and date are encountered. This is primarily
-controlled by a global configuration option and can be overridden on a per-case
-basis using a special key in the Property-Value (PV) map.
-
-The core logic for this aggregation is handled within the `StatVarsMap` class,
-specifically by the `aggregate_value` method This method supports several
-aggregation types:
-
-- `sum`: Adds the new value to the existing value.
-- `min`: Takes the minimum of the existing and new values.
-- `max`: Takes the maximum of the existing and new values.
-- `mean`: Calculates the running mean of the values. It keeps track of the
-  count of aggregated values using an internal property like
-  `#Count-<aggregate_property>`.
-- `list`: Appends the new value to a comma-separated list of existing values.
-- `first`: Keeps the first encountered value.
-- `last`: Overwrites the existing value with the new value (effectively
-  keeping the last encountered).
-
-These aggregation types are case-insensitive in the configuration
-<!-- remove aggregation -->
-### Configuration for Aggregation
-
-1.  **Global Configuration (`aggregate_duplicate_svobs`):** You can set a
-    default aggregation behavior in your main configuration file (e.g.,
-    `metadata.csv` or via command-line flags).
-
-```csv
-# In your metadata.csv
-parameter,value
-aggregate_duplicate_svobs,sum
-# e.g., sum, mean, min, max, etc.
-# ... other configurations
-```
-
-This setting will apply to all SVObs that are duplicates (same place, date, and
-StatVar) unless overridden.
-
-1.  **Per-SVObs Override (`#Aggregate` key in PV-Map):** You can specify or
-    override the aggregation method for specific StatVars or types of
-    observations directly in your PV-map file. This is done using the
-    `#Aggregate` key (the exact key name can be configured via `aggregate_key`,
-    which defaults to `'#Aggregate'`
-
-### Example Scenario
-
-Let's imagine you have an input CSV file (`data.csv`) with daily sales figures
-for different products, and sometimes multiple entries exist for the same
-product on the same day from different cash registers.
-
-**`data.csv`:**
-
-```
-Date,Product,Location,Sales,RegisterID
-2025-05-01,Apples,Store1,50,Reg1
-2025-05-01,Apples,Store1,30,Reg2
-2025-05-01,Bananas,Store1,100,Reg1
-2025-05-01,Bananas,Store1,110,Reg2
-2025-05-02,Apples,Store1,45,Reg1
-```
-
-**Desired Aggregations:**
-
-- For "Apples" sales, we want the total sum for the day.
-- For "Bananas" sales, we want the maximum reported sale for the day (perhaps
-  one register had a correction).
-
-**`pvmap.csv`:**
-
-```csv
-key,property,value
-Date,observationDate,{Data}
-Location,observationAbout,{Data}
-# Assuming Store1 maps to a DCID
-Sales,value,{Number}
-RegisterID,observationDetails,Register_{Data}
-# Example, not aggregated
-
-Apples,variableMeasured,dcid:dailySales_Apples,#Aggregate,sum
-# Hypothetical StatVar DCID - Aggregate sales for Apples by summing
-Bananas,variableMeasured,dcid:dailySales_Bananas,#Aggregate,max
-# Hypothetical StatVar DCID - Aggregate sales for Bananas by taking the max
-```
-
-**`metadata.csv`:**
-
-```csv
-parameter,value
-input_data,data.csv
-pv_map,pvmap.csv
-output_path,output/sales_summary
-header_rows,1
-# Assuming the first row is a header
-<!-- TODO : remove mapped columns for sdmx -->
-mapped_columns,"Product"
-# For multiple columns use quotes: mapped_columns,"Product,Location,Date"
-# The "Product" column determines the StatVar and aggregation
-# Note: default_svobs_pvs and default_statvar_pvs contain nested properties
-# and are typically handled separately in the statvar processor
-# aggregate_duplicate_svobs,sum  # A global default could be set here if desired
-```
-
-**How it works:**
-
-When processing `data.csv`:
-
-1.  For the first row (`2025-05-01,Apples,Store1,50,Reg1`):
-    - An SVObs for `dailySales_Apples` with value 50 is created.
-2.  For the second row (`2025-05-01,Apples,Store1,30,Reg2`):
-    - The script identifies this as a duplicate SVObs (same `observationDate`,
-      `observationAbout` for `dailySales_Apples`).
-    - The PVs for "Apples" specify `#Aggregate: 'sum'`.
-    - The `aggregate_value` method is called. The existing value (50) and the
-      new value (30) are summed, resulting in an updated SVObs value of 80 for
-      `dailySales_Apples` on `2025-05-01` at `Store1`
-3.  For the third row (`2025-05-01,Bananas,Store1,100,Reg1`):
-    - An SVObs for `dailySales_Bananas` with value 100 is created.
-4.  For the fourth row (`2025-05-01,Bananas,Store1,110,Reg2`):
-    - This is a duplicate for `dailySales_Bananas`.
-    - The PVs for "Bananas" specify `#Aggregate: 'max'`.
-    - The `aggregate_value` method takes `max(100, 110)`, resulting in an
-      updated SVObs value of 110\.
-
-**Output SVObs (conceptual):**
-
-After processing, the `output/sales_summary.csv` would effectively represent:
-
-| observationDate | observationAbout | variableMeasured        | value | unit | measurementMethod        | ...  |
-| :-------------- | :--------------- | :---------------------- | :---- | :--- | :----------------------- | :--- |
-| 2025-05-01      | Store1           | dcid:dailySales_Apples  | 80    | USD  | dcs:DataCommonsAggregate | ...  |
-| 2025-05-01      | Store1           | dcid:dailySales_Bananas | 110   | USD  | dcs:DataCommonsAggregate | ...  |
-| 2025-05-02      | Store1           | dcid:dailySales_Apples  | 45    | USD  |                          | ...  |
-
-The `measurementMethod` property of the SVObs will also be updated to indicate
-that aggregation has occurred (e.g., to `dcs:DataCommonsAggregate` or
-`dcs:dcAggregate/<OriginalMethod>`) If the `merged_pvs_property` (default
-`#MergedSVObs`) is enabled or configured, the aggregated SVObs can also contain
-references to the original SVObs that were merged
-
-This example illustrates how you can use a combination of global settings and
-specific PV-map directives to control the aggregation of SVObs values.
 
 ## ### 1. PV-Map Generation Guide
 
@@ -1545,8 +1433,7 @@ AVG,statType,meanValue
 ```csv
 key,property1,value1,property2,value2,property3,value3
 
-# Metadata configuration
-input_columns,"REF_AREA,TIME_PERIOD,OBS_VALUE,FREQ,CURRENCY,UNIT_MEASURE"
+# Note: Put processor configuration (e.g., input_columns) in metadata.csv, not here
 
 # Dataflow identification  
 ECB:EXR,name,Exchange Rates,populationType,CurrencyExchange,,
@@ -1674,6 +1561,7 @@ Follow these steps sequentially.
 
 - Create the `pvmap.csv` file, mapping the source data columns to DataCommons properties based on your findings.
 - Create the `metadata.csv` file and define the necessary `statvar_processor` configuration parameters within it.
+- Configuration rule: All processor flags/settings must live in `metadata.csv`. Do not embed configuration in `pvmap.csv` and do not rely on extra CLI flags.
 
 {% if dataset_type == 'sdmx' -%}
 
@@ -1687,6 +1575,10 @@ Before proceeding to run the processor, validate your SDMX PV map against this c
 - [ ] **Missing value codes are handled** - Map M, NA, ":", "-" to `#ignore`
 - [ ] **Scaling factors are correctly applied** - UNIT_MULT mapped to `scalingFactor` (3→1000, 6→1000000, 9→1000000000)
 - [ ] **Each dimension combination produces unique StatVars** - No duplicate place/date/variable combinations
+
+- [ ] **metadata.csv covers processor flags** - Includes required parameters (e.g., `header_rows`, `mapped_rows`/`mapped_columns`, `output_columns`, date formats)
+- [ ] **No config in pvmap.csv** - `pvmap.csv` contains only PV mappings, not processor settings
+- [ ] **No extra CLI flags** - Configuration is exclusively in `metadata.csv`; wrapper provides input paths
 
 {%- endif %}
 
@@ -1705,6 +1597,8 @@ Before proceeding to run the processor, validate your SDMX PV map against this c
   --input-data "{{input_data}}" \
   --gemini-run-id "{{gemini_run_id}}"
 ```
+
+The wrapper reads `metadata.csv` for all processor configuration. Do not add extra flags to this command.
 
 **6. Validate the Output and Apply Iteration Control**
 
@@ -1768,6 +1662,7 @@ CRITICAL: Follow all SDMX-specific guidelines and use metadata for semantic mapp
 - **Adhere to Rules:** Strictly follow all schema rules, property requirements, and formatting guidelines from the
   knowledge base.
 - DO NOT deviate from the documented standards.
+- Configuration location: Place all processor flags/settings in `metadata.csv` only. Do not embed settings in `pvmap.csv` and do not propose additional CLI flags.
 
 # 🛑 FINAL EXECUTION REMINDERS
 
