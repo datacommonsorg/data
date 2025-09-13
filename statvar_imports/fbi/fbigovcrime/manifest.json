@@ -8,7 +8,7 @@
             "provenance_url": "https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/downloads",
             "provenance_description": "Federal Bureau of Investigation (FBI), a part of the U.S. Department of Justice, for their nationwide Uniform Crime Reporting (UCR) Program, which compiles and publishes national crime statistics.",
             "scripts": [
-                "fbigovcrime_downlod_script.py",
+                "preprocess.py",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=download_folder/input_files/* --config_file=fbigovcrime_metadata.csv --output_path=output/fbi_gov_crime"
             ],
             "import_inputs": [
@@ -20,7 +20,7 @@
             "source_files": [
                 "download_folder/input_files/*"
             ],
-            "cron_schedule": "30 05 * * 1"
+            "cron_schedule": "30 05 1 * *"
         }
     ]
 }
