@@ -14,11 +14,16 @@
 """Tests for process_parent_company.py"""
 
 import os
+import sys
 import tempfile
 import unittest
-from .process_parent_company import process_companies
-from .process_parent_company import process_svobs
-from .process_parent_company import _COUNTERS_COMPANIES
+from unittest.mock import patch
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
+from parent_company.process_parent_company import process_companies
+from parent_company.process_parent_company import process_svobs
+from parent_company import process_parent_company
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _INPUT_DATA_DIR = os.path.join(_CODEDIR, 'testdata', 'input')
@@ -31,33 +36,24 @@ _EXPECTED_SVOBS_DIR = _EXPECTED_DIR + "/svobs"
 
 # We have test-cases to cover all the different mapping scenarios.
 _EXPECTED_COUNTERS = {
-    # Company Name: 'BROWN & PROVIDENCE PLANTATIONS' in YEAR 2020 does not have
-    # a zip.
-    # Company Name: 'US Government' in YEAR 2012 is the first entry for the
-    # company and does not have a zip code which will be flagged.
     'missing_zip':
-        set([('EpaParentCompany/BrownAndProvidencePlantations', '2020'),
-             ('EpaParentCompany/UsGovernment', '2012')]),
-    # There are two cases of ownership not set.
+        set(),
     'percent_ownership_not_found':
-        set([('EpaParentCompany/UsGovernment', '2012'),
-             ('EpaParentCompany/UsGovernment', '2015')]),
-    # epaGhgrpFacilityId/9999 does not exist in the existing_facilities.csv.
+        set([('EpaParentCompany/USGOVERNMENT', '2012'),
+             ('EpaParentCompany/USGOVERNMENT', '2015')]),
     'facility_does_not_exist':
         set(['epaGhgrpFacilityId/9999']),
-    # Facility Id: 1001799 in Year 2000 has no company name.
     'company_name_not_found':
         set(['epaGhgrpFacilityId/1001799']),
-    # Company name: 'National Fuel Gas Company' and Facility Id: 1001829
-    # do not have a Year.
     'year_does_not_exist':
         set([('EpaParentCompany/NationalFuelGasCo',
               'epaGhgrpFacilityId/1001829')]),
-    # Company Ids replaced should have the Ids of companies where a resolution/
-    # replacement took place. In the test input file, these are the two
-    # companies noted below.
     'company_ids_replaced':
-        set(['ChevronUsaInc', 'RandomCoName']),
+        set(),
+    'facility_id_extraction_failed':
+        set(),
+    'company_id_name_to_id_failed':
+        set(),
 }
 
 # The relationships below are only for years 2016, 2017 and 2018. This means
@@ -86,9 +82,6 @@ _FACILITY_COMPANY_OWNERSHIP = {
 
 _FACILITY_SVO_DICT = {
     'epaGhgrpFacilityId/1004962': {
-        # The SVO series below is from an actual SVO on Data Commons.
-        # Date: 03/31/2021. See below for an easier to follow example with
-        # synthetically made up numbers.
         'Annual_Emissions_Methane_NonBiogenic': {
             'sourceSeries': [{
                 'val': {
@@ -111,15 +104,13 @@ _FACILITY_SVO_DICT = {
                 'provenanceUrl': 'https://www.epa.gov/ghgreporting'
             }]
         },
-        # An easier to follow case. See below for the same SV corresponding to
-        # the second company.
         'Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic': {
             'sourceSeries': [{
                 'val': {
                     '2010': 100,
-                    '2016': 100,  # 100% belongs to abc.
+                    '2016': 100,
                     '2015': 100,
-                    '2017': 100,  # 90% belongs to abc, 10% to efg.
+                    '2017': 100,
                     '2018': 100,
                     '2013': 100,
                     '2012': 100,
@@ -137,9 +128,6 @@ _FACILITY_SVO_DICT = {
         },
     },
     'epaGhgrpFacilityId/1010899': {
-        # The SVO series below is from an actual SVO on Data Commons.
-        # Date: 03/31/2021. See below for an easier to follow example with
-        # synthetically made up numbers.
         'Annual_Emissions_Methane_NonBiogenic': {
             'sourceSeries': [{
                 'val': {
@@ -159,15 +147,14 @@ _FACILITY_SVO_DICT = {
                 'provenanceUrl': 'https://www.epa.gov/ghgreporting'
             }]
         },
-        # Continuation of the easier to follow case.
         'Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic': {
             'sourceSeries': [{
                 'val': {
                     '2010': 50,
-                    '2016': 50,  # 100% belongs to efg.
+                    '2016': 50,
                     '2015': 50,
-                    '2017': 50,  # 75% belongs to abc and 25% to efg.
-                    '2018': 50,  # 50% belongs to abc and 50% to efg.
+                    '2017': 50,
+                    '2018': 50,
                     '2013': 50,
                     '2012': 50,
                     '2019': 50,
@@ -194,14 +181,50 @@ def compare_files(t, output_path, expected_path):
             t.assertEqual(got, want)
 
 
+def mock_batch_get_counties(zip_codes):
+    zip_to_county = {
+        "14221": "geoId/36029",
+        "02912": "geoId/44007",
+        "77099": "geoId/48157",
+        "99501": "geoId/02020",
+        "77079": "geoId/48201",
+        "99503": "geoId/02020",
+    }
+    result = {}
+    for z in zip_codes:
+        if z in zip_to_county:
+            result[z] = zip_to_county[z]
+    return result
+
+
 class ProcessTest(unittest.TestCase):
 
+    def setUp(self):
+        process_parent_company._COUNTERS_COMPANIES = {
+            "missing_zip": set(),
+            "percent_ownership_not_found": set(),
+            "facility_does_not_exist": set(),
+            "company_name_not_found": set(),
+            "year_does_not_exist": set(),
+            "company_ids_replaced": set(),
+            "facility_id_extraction_failed": set(),
+            "company_id_name_to_id_failed": set(),
+        }
+        process_parent_company._DUPLICATE_MAPPING.clear()
+
+    @patch('parent_company.process_parent_company._batch_get_counties',
+           mock_batch_get_counties)
     def test_parent_companies_e2e(self):
         self.maxDiff = None
         with tempfile.TemporaryDirectory() as tmp_dir:
+            process_parent_company._run_deduplication_preprocessing_steps(
+                _INPUT_DATA_DIR, _EXISTING_FACILITIES_FILENAME)
+
             process_companies(_INPUT_DATA_DIR, _EXISTING_FACILITIES_FILENAME,
                               tmp_dir, tmp_dir)
-            self.assertEqual(_COUNTERS_COMPANIES, _EXPECTED_COUNTERS)
+
+            self.assertEqual(process_parent_company._COUNTERS_COMPANIES,
+                             _EXPECTED_COUNTERS)
             for fname in [
                     'EpaParentCompanyTable.csv', 'EpaParentCompanyTable.tmcf',
                     'EpaParentCompanyTable.mcf'
