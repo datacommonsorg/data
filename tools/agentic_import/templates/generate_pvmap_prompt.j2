@@ -29,13 +29,7 @@ You **MUST** adhere to these rules at all times.
 - **ALWAYS read metadata files before data files.**
 - **Single source of truth for config**: All `statvar_processor` configuration/flags must be declared in `metadata.csv` as `parameter,value` rows. Do not pass flags via CLI and do not embed configuration in `pvmap.csv`; the wrapper will pass only input paths.
 
-## Data Processing Logic
 
-- If the metadata contains a `<structure:Constraints>` section, you **MUST**
-  use these definitions to determine which codes to map. Do not rely on
-  reading the data file.
-- If `<structure:Constraints>` is not present, you may sample the first 10
-  lines of the data file to understand the data.
 
 ## Reusability
 
@@ -136,7 +130,7 @@ python3 stat_var_processor.py --input_data=<path-to-csv-or-other-input> \
     --config_file=<path-to-config-file>
 ```
 
-Note: The CLI above is for reference. In this workflow, encode all processor configuration in `metadata.csv` and invoke via the wrapper script; do not add extra CLI flags beyond inputs handled by the wrapper.
+**Note**: The CLI above is for reference. In this workflow, encode all processor configuration in `metadata.csv` and invoke via the wrapper script; do not add extra CLI flags beyond inputs handled by the wrapper.
 
 This will generate:
 
@@ -162,41 +156,16 @@ The underlying script supports Python/JSON config files and CLI flags in general
 ```csv
 parameter,value
 
-# CRITICAL: Data structure configuration (most important)
+# Input configuration
 header_rows,1
-mapped_rows,0
-mapped_columns,0
-
-# Input data processing
-input_encoding,utf-8
 skip_rows,0
-input_delimiter,","
+process_rows,"1,2,5"
+input_rows,100
+input_columns,"1,2,5"
 
-# Output control (highly recommended to specify)
-output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
-
-# Date formatting (if data contains dates)
-observation_date_format,YYYY-MM-DD
-date_format,"%Y-%m-%d"
-
-# Column selection (for optimization, especially SDMX)
-input_columns,"REF_AREA,TIME_PERIOD,OBS_VALUE,UNIT_MEASURE"
-
-# Place resolution (for geographic data)
-resolve_places,True
-place_type,"Country,AdministrativeArea1"
+# Place resolution
+place_type,"AdministrativeArea1,AdministrativeArea2"
 places_within,country/USA
-places_resolved_csv,places_resolved.csv
-
-# Data quality controls
-aggregate_duplicate_svobs,sum
-drop_statvars_without_svobs,True
-use_all_numeric_data_values,False
-
-# Advanced options (use when needed)
-#existing_statvar_mcf,existing_statvars.mcf
-#statvar_dcid_remap_csv,statvar_remapping.csv
-#default_statvar_pvs,"{""statType"": ""dcs:measuredValue""}"
 ```
 
 - **Minimal Example for Simple CSV:**
@@ -204,18 +173,14 @@ use_all_numeric_data_values,False
 ```csv
 parameter,value
 header_rows,1
-output_columns,"observationAbout,observationDate,value,variableMeasured"
 ```
 
 ⚠️ **COMMON METADATA.CSV MISTAKES TO AVOID:**
 - **Missing `header_rows`**: Most CSV files have headers, but `header_rows` defaults to 0. Always set to 1 for standard CSV files
-- **Wrong `mapped_rows`/`mapped_columns`**: Use `mapped_rows` for dimensional data where first few rows contain dimension values (not headers). Use `mapped_columns` for transposed data
 - **Using CLI flag names**: Use parameter names like `header_rows`, not CLI flag names like `--header_rows`
-- **Not specifying `output_columns`**: Defaults may not match your needs. Always specify the exact columns you want in output CSV
-- **Missing `input_encoding`**: Non-UTF8 files (especially with international characters) need explicit encoding like `latin-1` or `iso-8859-1`
 - **Forgetting `places_within`**: Geographic data without this constraint can resolve to wrong places (e.g., Paris, Texas instead of Paris, France)
 
-- Common parameters (express in `metadata.csv`, not in `pvmap.csv`): `header_rows`, `header_columns`, `mapped_rows`, `mapped_columns`, `output_columns`, `input_columns`, `date_format`, `observation_date_format`, `date_format_key`, `use_all_numeric_data_values`, `aggregate_duplicate_svobs`, `aggregate_key`, `default_statvar_pvs`, `default_svobs_pvs`, `required_statvar_properties`, `required_statvarobs_properties`, `statvar_dcid_remap_csv`, `existing_statvar_mcf`, `resolve_places`, `place_type`, `maps_api_country`, `places_within`, `places_resolved_csv`.
+- Common parameters (express in `metadata.csv`, not in `pvmap.csv`): `header_rows`, `skip_rows`, `process_rows`, `input_rows`, `input_columns`, `place_type`, `places_within`.
 
 Policy: Do not embed processor settings in `pvmap.csv` and do not add extra CLI flags—`metadata.csv` is the single source of truth for configuration in this workflow.
 
@@ -227,23 +192,18 @@ Policy: Do not embed processor settings in `pvmap.csv` and do not add extra CLI 
    ```csv
    parameter,value
    header_rows,1
-   output_columns,"observationAbout,observationDate,value,variableMeasured"
    ```
 
 2. **Test with Small Data**: Use first 10-20 rows of input to validate configuration
 
 3. **Add Parameters Incrementally**:
-   - Add `mapped_rows`/`mapped_columns` for dimensional data
-   - Add `input_encoding` if seeing character issues
+   - Add `skip_rows` if initial rows need skipping
+   - Add `input_rows`/`input_columns` for debugging
    - Add place resolution parameters if needed
-   - Add date formatting if dates are incorrect
 
 4. **Common Error Patterns**:
-   - **"No data in output"**: Check `header_rows`, `mapped_rows`, `skip_rows`
+   - **"No data in output"**: Check `header_rows`, `skip_rows`
    - **"Wrong place resolution"**: Add `places_within` constraint
-   - **"Date parsing errors"**: Set `date_format` and `observation_date_format`
-   - **"Encoding issues"**: Set `input_encoding` (try `latin-1`, `iso-8859-1`, `cp1252`)
-   - **"Unexpected columns in output"**: Specify exact `output_columns`
 
 5. **Validation Checks**:
    - Verify parameter names match documentation (not CLI flag names)
@@ -399,247 +359,44 @@ Category,value,{Data},#Filter,"'{Data}' not in ['NA', 'N/A', 'null', '']"
 
 ---
 
-#### 2. General Processing Settings (via `--config_file` or command-line flags)
+#### 2. General Processing Settings
 
 These settings control various aspects of the data processing pipeline. Default
 values are often present in the script.
 
-Workflow policy: Express these settings in `metadata.csv` as `parameter,value` rows. Do not include them in `pvmap.csv`, and avoid passing them via CLI in this workflow.
+**Workflow policy**: Express these settings in `metadata.csv` as `parameter,value` rows. Do not include them in `pvmap.csv`, and avoid passing them via CLI in this workflow.
 
 **Input Configuration:**
 
-- `input_data` (Flag: `--input_data`): Path(s) to input data file(s) (CSV,
-  XLSX, JSON). Wildcards supported.
-- `data_url` (Flag: `--data_url`): URL(s) to download input data from.
-- `input_encoding` (Default: `'utf-8'`): Encoding of input files.
-  - Example: `{'input_encoding': 'latin-1'}`
-- `input_delimiter` (Default: `','`): Delimiter for CSV files.
-  - Example: `{'input_delimiter': '\t'}` for TSV files.
-- `input_xls` (Default: `[]`): List of sheet names to process if input is an
-  XLSX file. If empty, all sheets are processed.
-  - Example: `{'input_xls': ['Sheet1', 'DataSheet']}`
 - `header_rows` (Default: `0`): Number of initial rows to be treated strictly
   as column headers. PVs from these cells apply to the entire column below
   them.
-  - Example: `{'header_rows': 2}`
-- `header_columns` (Default: `0`): Number of initial columns to be treated as
-  row headers. PVs from these cells apply to the entire row to their right.
-- `mapped_rows` (Default: `0`): Number of initial rows (after `skip_rows`)
-  where all cells are looked up in the `pv_map`. PVs derived from a cell apply
-  to subsequent cells in that row until overridden. Can also be a list of row
-  indices.
-  - Example: `{'mapped_rows': 1}` or `{'mapped_rows': [1, 3, 5]}`
-- `mapped_columns` (Default: `0`): Number of initial columns where all cells
-  are looked up in the `pv_map`. PVs derived apply down the column. Can also
-  be a list of column indices (1-based or Excel-style letters like 'A', 'B').
-  - Example: `{'mapped_columns': ['A', 'C']}`
+  - Example: `header_rows,2`
 - `skip_rows` (Default: `0`): Number of initial rows to skip entirely from the
   input file.
 - `process_rows` (Default: `[0]` i.e., process all): A list of specific row
   numbers to process. If `[0]`, all rows (after skipping) are processed.
+  **Note: Use only for debugging, not in final production configurations.**
+  - Example: `process_rows,"1,2,5"`
 - `input_rows` (Default: `sys.maxsize`): Maximum number of rows to process per
   file (after skipping). Useful for debugging.
-  - Example: `{'input_rows': 100}`
+  **Note: Use only for debugging, not in final production configurations.**
+  - Example: `input_rows,100`
 - `input_columns` (Default: `sys.maxsize`): Maximum number of columns to
   process per row. Useful for debugging. Can also be a list of 1-based column
-  indices to process.
-  - Example: `{'input_columns': [1, 2, 5]}`
-- `input_min_columns_per_row` (Default: `2`): Rows with fewer columns than
-  this are ignored.
-- `use_all_numeric_data_values` (Default: `False`): If `True`, any numeric
-  value found in a cell not otherwise mapped by `pv_map` will be treated as
-  `{'value': <numeric_value>}`. If `False` (default), it's treated as
-  `{self._config.get('numeric_data_key', 'Number'): <numeric_value>}`.
-- `word_delimiter` (Default: `' '`): Delimiter used for tokenizing file names
-  or headers when looking up in `pv_map`. Can be a regex pattern.
-- `default_pvs_key` (Default: `'DEFAULT_PV'`): A special key in `pv_map` whose
-  PVs are applied globally. < > DO NOT USE DEFAULT_PV, there is bug in
-  code</IMPORTANT>
-- `data_key` (Default: `'Data'`): Internal key for the string data of a cell.
-- `numeric_data_key` (Default: `'Number'`): Internal key for the numeric data
-  of a cell.
-- `pv_lookup_key` (Default: `'Key'`): Internal key for the matched key from
-  `pv_map`.
-- `number_decimal` (Default: `'.'`): Decimal character for parsing numbers.
-- `number_separator` (Default: `', '`): Thousands separator for parsing
-  numbers (can be a space too).
+  indices to process (not column names or headers).
+  **Note: Use only for debugging, not in final production configurations.**
+  - Example: `input_columns,"1,2,5"` (processes columns 1, 2, and 5 by index)
 
-**Output Configuration:**
-<!-- TODO: Keep only required params-->
-- `output_path` (Flag: `--output_path`): Prefix for output files.
-- `output_statvar_mcf` (Default: `<output_path>_stat_vars.mcf`): Filename for
-  the StatVar MCF.
-- `output_csv` (Default: `<output_path>.csv`): Filename for the SVObs CSV.
-- `output_tmcf_file` (Default: `<output_path>.tmcf`): Filename for the SVObs
-  TMCF.
-- `generate_statvar_mcf` (Default: `True`): Whether to generate the StatVar
-  MCF file.
-- `generate_csv` (Default: `True`): Whether to generate the SVObs CSV file.
-- `generate_tmcf` (Default: `True`): Whether to generate the SVObs TMCF file.
-- `output_columns` (Default: `None`, meaning auto-detected): List of
-  properties to be emitted as columns in the SVObs CSV. If `None`, it includes
-  properties that vary across SVObs.
-  - Example: `{'output_columns': ['observationAbout', 'observationDate',
-'variableMeasured', 'value', 'unit']}`
-- `skip_constant_csv_columns` (Default: `False`): If `True`, SVObs properties
-  that have the same value for all observations are not included as columns in
-  the CSV but are written as constants in the TMCF.
-- `output_precision_digits` (Default: `5`): Number of decimal places for
-  floating-point numbers in the output CSV.
-- `output_only_new_statvars` (Default: `False`): If `True`, only StatVars that
-  don't exist or have changed from `existing_statvar_mcf` are written to the
-  output StatVar MCF.
-- `statvar_diff_config`: Configuration for `output_only_new_statvars` to
-  specify how to compare StatVars.
-  - Example: `{'statvar_diff_config': {'ignore_property': ['description',
-'name']}}`
-- `output_counters` (Default: `<output_path>_counters.txt`): Filename to save
-  processing counters.
-- `output_schema_mcf` (Default: `<output_path>_schema.mcf` if
-  `generate_schema_mcf` is `True`): Filename for newly generated schema
-  elements.
-- `output_sanity_check` (Default:
-  `<output_statvar_mcf_filename>_sanity_errors.txt`): File to write schema
-  sanity check errors.
-- `output_csv_mode` (Default: `'w'`): Mode to open the output CSV file ('w'
-  for write, 'a' for append).
-
-**StatVar and SVObs Generation:**
-
-- `schemaless` (Default: `False`): Enables support for schemaless StatVars. If
-  `True`, properties not defined in the DC schema can be used (they might be
-  commented out in MCF). The `measuredProperty` of such StatVars is set to
-  their own DCID.
-- `statvar_dcid_ignore_values` (Default: `[]`): List of data values (e.g.,
-  'NA', 'X') to ignore when they appear as values for properties used in DCID
-  generation.
-- `default_statvar_pvs` (Default: `{}`): Dictionary of P:V to apply to all
-  StatVars if not already present.
-  - Example: `{'default_statvar_pvs': {'typeOf': 'dcs:StatisticalVariable',
-'statType': 'dcs:measuredValue'}}`
-- `default_svobs_pvs` (Default: `{}`): Dictionary of P:V to apply to all SVObs
-  if not already present.
-  - Example: `{'default_svobs_pvs': {'typeOf': 'dcs:StatVarObservation'}}`
-- `required_statvar_properties` (Default: `[]`): List of mandatory properties
-  for a StatVar to be considered valid.
-  - Example: `{'required_statvar_properties': ['populationType',
-'measuredProperty', 'statType']}`
-- `required_statvarobs_properties` (Default: `[]`): List of mandatory
-  properties for an SVObs.
-  - Example: `{'required_statvarobs_properties': ['observationAbout',
-'observationDate', 'variableMeasured', 'value']}`
-- `statvar_dcid_ignore_properties` (Default list includes 'name',
-  'description', etc.): Properties to ignore when generating a StatVar DCID.
-- `statvar_dcid_remap_csv`: Path to a CSV file mapping old StatVar DCIDs to
-  new ones. Columns: `old_dcid`, `dcid`.
-- `existing_statvar_mcf`: Path to an MCF file of existing StatVars. Used for
-  `output_only_new_statvars` and potentially for reusing existing StatVar
-  DCIDs.
-- `schemaless_statvar_comment_undefined_pvs` (Default: `False`): If `True` and
-  `schemaless` is enabled, valid DC properties that are not yet defined in the
-  DC API are commented out in the StatVar MCF.
-- `generate_statvar_name` (Default: `False`): If `True`, automatically
-  generates a `name` for StatVars based on their properties if no name is
-  provided.
-- `llm_generate_statvar_name` (Default: `False`): If `True` and
-  `google_api_key` is set, uses an LLM to generate StatVar names.
-- `google_api_key`: API key for Google services (e.g., LLM for name
-  generation).
-- `generate_schema_mcf` (Default: `False`): If `True`, generates an MCF file
-  for new schema elements (properties, enum values) encountered.
-- `existing_schema_mcf`: Path to an MCF file of existing schema. Used with
-  `generate_schema_mcf` to avoid re-defining existing elements.
-- `multi_value_properties` (Default: `{}`): A dictionary specifying properties
-  that can have multiple values and how to handle them (e.g., some might be
-  lists, others might generate multiple SVObs). Often includes
-  `constraintProperties`.
-- `properties_with_statvars` (Default: `['measurementDenominator',
-'variableMeasured']`): Properties whose values might themselves be StatVars
-  or define how to construct a StatVar.
-- `input_reference_column` (Default value is likely `__INPUT_REFERENCE__` or
-  similar): Name of the column added to SVObs CSV to store the input file
-  context (filename:line:column).
-
-**Data Transformation and Processing Logic:**
-
-- `aggregate_duplicate_svobs` (Default: `None`): If set (e.g., 'sum', 'min',
-  'max', 'mean', 'list'), SVObs with the same place, date, and StatVar but
-  different values will be aggregated using this method. This can also be
-  controlled per-SVObs via the `#Aggregate` key.
-- `aggregate_key` (Default: `'#Aggregate'`): The property name in PVs that
-  specifies the aggregation method for duplicate SVObs, overriding
-  `aggregate_duplicate_svobs`.
-- `merged_pvs_property` (Default: `'#MergedSVObs'`): Internal property to
-  store references to SVObs that were aggregated.
-- `drop_statvars_with_dup_svobs` (Default: `True`): If `True`, StatVars that
-  lead to duplicate SVObs (same place+date+StatVar, different values, and no
-  aggregation specified) are dropped.
-- `duplicate_statvars_key`: Internal key used to mark statvars with the same
-  DCID but different properties.
-- `duplicate_svobs_key`: Internal key used to mark SVObs that are duplicates
-  for the same place+year+StatVar but different values, when not aggregated.
-- `multiply_factor` (Default: `'#Multiply'`): A property key in PVs. If
-  present, its numeric value is used to multiply the SVObs `value`.
-  - Example: `Value_USD,value,{Number},#Multiply,0.85,unit,EUR` (Converts USD value to EUR using a 0.85 factor)
-- `date_format_key` (Default: `'#DateFormat'`): Property name in PVs
-  specifying the input date format string (strptime format) for a date value.
-- `date_format`: A global input date format string if not specified per value.
-- `observation_date_format` (Default: auto-detected, aims for ISO YYYY-MM-DD,
-  YYYY-MM, or YYYY): The target format for `observationDate` in the output.
-- `filter_key` (Default: `'#Filter'`): The property key in PVs used for
-  filtering SVObs via an eval expression.
-- `eval_globals`: Dictionary of global functions/modules available to `#Eval`
-  and `#Filter` expressions.
-- `drop_statvars_without_svobs` (Default: `True`): If `True`, StatVars that
-  have no corresponding SVObs generated are dropped from the output MCF.
 
 **Place Resolution:**
 
-- `resolve_places` (Default: `False`, but automatically set to `True` if
-  certain place-related configs are provided like `maps_api_key` or
-  `places_csv`): Enables place name to DCID resolution.
-- `dc_api_key`: API key for Data Commons API (used for place resolution).
-- `maps_api_key`: API key for Google Maps Geocoding API (used for place
-  resolution).
-- `places_csv`: Path to a CSV file providing manual place name to DCID
-  mappings (columns: `place_name`, `dcid`, and optional `country`,
-  `administrative_area`).
-- `places_resolved_csv`: Path to a CSV file where successfully resolved places
-  (name to DCID) are cached/written. This file can be reviewed and manually
-  edited
 - `place_type` (Flag: `--place_type`): Comma-separated list of DC place types
   (e.g., 'City', 'County') to filter resolution results.
-  - Example: `{'place_type': 'AdministrativeArea1,AdministrativeArea2'}`
-- `maps_api_country` / `places_within` (Flag: `--places_within`): Restrict
+  - Example: `place_type,"AdministrativeArea1,AdministrativeArea2"`
+- `places_within` (Flag: `--places_within`): Restrict
   place resolution to a specific country or administrative area DCID(s).
-  - Example: `{'maps_api_country': 'USA'}` or `{'places_within':
-'country/USA'}`
-- `maps_api_administrative_area`: Further restrict place resolution by
-  administrative area.
-
-**Execution and Debugging:**
-
-- `resume` (Flag: `--resume`, Default: `False`): If `True`, skips processing
-  if output files already exist.
-- `debug` (Flag: `--debug`, Default: `False`): Enables verbose logging for
-  debugging. **WARNING**: Use this only in rare cases when troubleshooting specific
-  issues, as it produces extensive logs that may exceed context limits and make
-  output difficult to manage.
-- `parallelism` (Flag: `--parallelism`, Default: `0` meaning
-  `os.cpu_count()`): Number of parallel processes to use when processing
-  multiple input files or sharded data. If 1, runs serially.
-- `http_port` (Flag: `--http_port`): If set, launches an HTTP server on this
-  port to provide a web UI for the script.
-- `shard_input_by_column`: If `parallelism` \> 1, specifies a column name to
-  shard the input CSV by, processing each shard in parallel.
-- `shard_prefix_length`: When sharding, length of the prefix of the shard
-  column value to group by.
-
-This guide covers a comprehensive set of configurations. For the most precise
-details on flags and their defaults, referring to the `config_flags.py` file
-used by the script and the script's `ConfigMap` initializations would be
-beneficial. The provided search result "Stat Var Processor" also serves as a
-good reference for many of these options and their usage patterns.
+  - Example: `places_within,"country/USA,country/AUS"`
 
 
 ## ### 1. PV-Map Generation Guide
@@ -1633,6 +1390,7 @@ Follow these steps sequentially.
 - Create the `pvmap.csv` file, mapping the source data columns to DataCommons properties based on your findings.
 - Create the `metadata.csv` file and define the necessary `statvar_processor` configuration parameters within it.
 - Configuration rule: All processor flags/settings must live in `metadata.csv`. Do not embed configuration in `pvmap.csv` and do not rely on extra CLI flags.
+{# - TODO add validation checklist for pv generation - mandatory fields etc. #}
 
 {% if dataset_type == 'sdmx' -%}
 
@@ -1647,7 +1405,7 @@ Before proceeding to run the processor, validate your SDMX PV map against this c
 - [ ] **Scaling factors are correctly applied** - UNIT_MULT mapped to `scalingFactor` (3→1000, 6→1000000, 9→1000000000)
 - [ ] **Each dimension combination produces unique StatVars** - No duplicate place/date/variable combinations
 
-- [ ] **metadata.csv covers processor flags** - Includes required parameters (e.g., `header_rows`, `mapped_rows`/`mapped_columns`, `output_columns`, date formats)
+- [ ] **metadata.csv covers processor flags** - Includes required parameters (e.g., `header_rows`, `skip_rows`, `input_rows`, `input_columns`, `place_type`, `places_within`)
 - [ ] **No config in pvmap.csv** - `pvmap.csv` contains only PV mappings, not processor settings
 - [ ] **No extra CLI flags** - Configuration is exclusively in `metadata.csv`; wrapper provides input paths
 
@@ -1692,12 +1450,11 @@ ELIF CURRENT_ATTEMPT < {{max_iterations}}:
     → OUTPUT: "❌ ATTEMPT CURRENT_ATTEMPT FAILED - Error details: [describe specific error]"
     → OUTPUT: "🔄 Starting attempt [CURRENT_ATTEMPT + 1] of {{max_iterations}}..."   
     → Analyze the error from logs. In case statvar procesor failed, read log file at: {{working_dir}}/.datacommons/processor.log
+    {# TODO move debugging instructions to separate section #}
     → **Common metadata.csv issues to check:**
        • Missing or wrong `header_rows` (should be 1 for standard CSV with headers)
-       • Incorrect `mapped_rows`/`mapped_columns` for dimensional data
-       • Wrong date format parameters (`date_format`, `observation_date_format`)
-       • Missing `input_encoding` for non-UTF8 files
-       • Unspecified `output_columns` causing unexpected output structure
+       • Wrong `skip_rows` value skipping too much data
+       • Debugging parameters left in production (`process_rows`, `input_rows`, `input_columns`)
        • Place resolution issues: missing `places_within` or wrong `place_type`
     → Modify pvmap.csv and/or metadata.csv to fix identified issues
     → INCREMENT ATTEMPT COUNTER
