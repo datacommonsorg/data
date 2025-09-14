@@ -1390,13 +1390,28 @@ Follow these steps sequentially.
 - Create the `pvmap.csv` file, mapping the source data columns to DataCommons properties based on your findings.
 - Create the `metadata.csv` file and define the necessary `statvar_processor` configuration parameters within it.
 - Configuration rule: All processor flags/settings must live in `metadata.csv`. Do not embed configuration in `pvmap.csv` and do not rely on extra CLI flags.
-{# - TODO add validation checklist for pv generation - mandatory fields etc. #}
+### Validation Checklist
+
+While generating the files, ensure:
+{# TODO: clarify observaton and statvar properties, looks like llm is confused . claer;y specify this in knowledgebase #}
+#### PV Map Validation:
+- [ ] **All required fields are mapped** - observationAbout, populationType, measuredProperty, statType, value, observationDate
+- [ ] **Place references use appropriate format** - geoId for known IDs, name for resolution, country/<county code> like country/USA for countries.
+- [ ] **Unit measures follow DC conventions** - Use standard Data Commons units
+- [ ] **Special/missing values mapped appropriately** - Use #ignore for missing data where needed
+
+#### Metadata CSV Validation:
+- [ ] **metadata.csv covers processor flags** - Includes required parameters (e.g., `header_rows`)
+- [ ] **No config in pvmap.csv** - `pvmap.csv` contains only PV mappings, not processor settings
+- [ ] **No extra CLI flags** - Configuration is exclusively in `metadata.csv`; wrapper provides input paths
+- [ ] **Parameter names match documentation** - Not CLI flag names
+- [ ] **Quote values containing commas** - `key,"value1,value2,value3"`
 
 {% if dataset_type == 'sdmx' -%}
 
-### SDMX PV Map Validation Checklist
+#### Additional SDMX-Specific Validations:
 
-Before proceeding to run the processor, validate your SDMX PV map against this checklist:
+For SDMX datasets, also ensure:
 
 - [ ] **All dimension codes are mapped** - Check `<structure:Constraints>` if present, otherwise verify all used codes from data
 - [ ] **Time period format is consistent with frequency** - YYYY (annual), YYYY-MM (monthly/quarterly end), YYYY-MM-DD (daily)
@@ -1404,10 +1419,6 @@ Before proceeding to run the processor, validate your SDMX PV map against this c
 - [ ] **Missing value codes are handled** - Map M, NA, ":", "-" to `#ignore`
 - [ ] **Scaling factors are correctly applied** - UNIT_MULT mapped to `scalingFactor` (3→1000, 6→1000000, 9→1000000000)
 - [ ] **Each dimension combination produces unique StatVars** - No duplicate place/date/variable combinations
-
-- [ ] **metadata.csv covers processor flags** - Includes required parameters (e.g., `header_rows`, `skip_rows`, `input_rows`, `input_columns`, `place_type`, `places_within`)
-- [ ] **No config in pvmap.csv** - `pvmap.csv` contains only PV mappings, not processor settings
-- [ ] **No extra CLI flags** - Configuration is exclusively in `metadata.csv`; wrapper provides input paths
 
 {%- endif %}
 
@@ -1450,7 +1461,7 @@ ELIF CURRENT_ATTEMPT < {{max_iterations}}:
     → OUTPUT: "❌ ATTEMPT CURRENT_ATTEMPT FAILED - Error details: [describe specific error]"
     → OUTPUT: "🔄 Starting attempt [CURRENT_ATTEMPT + 1] of {{max_iterations}}..."   
     → Analyze the error from logs. In case statvar procesor failed, read log file at: {{working_dir}}/.datacommons/processor.log
-    {# TODO move debugging instructions to separate section #}
+    {# TODO: move debugging instructions to separate section #}
     → **Common metadata.csv issues to check:**
        • Missing or wrong `header_rows` (should be 1 for standard CSV with headers)
        • Wrong `skip_rows` value skipping too much data
