@@ -54,13 +54,14 @@ mkdir -p "${WORKING_DIR}/.datacommons"
 # Define log file paths (persistent files that Gemini can read)
 PROCESSOR_LOG="${WORKING_DIR}/.datacommons/processor.log"
 BACKUP_LOG="${WORKING_DIR}/.datacommons/backup.log"
-
+# TODO : Add existing_statvar_mcf, existing_schema_mcf support
 # Run statvar processor with output going to persistent log
 echo "Running statvar processor..."
 "${PYTHON_INTERPRETER}" "${SCRIPT_DIR}/statvar_importer/stat_var_processor.py" \
   --input_data="${INPUT_DATA}" \
   --pv_map="${WORKING_DIR}/pvmap.csv" \
   --config_file="${WORKING_DIR}/metadata.csv" \
+  --output_counters="${WORKING_DIR}/.datacommons/output_counters.log" \
   --output_path="${WORKING_DIR}/output/output" > "${PROCESSOR_LOG}" 2>&1
 
 # Capture the processor exit code
@@ -74,7 +75,8 @@ echo "Backing up run data..."
   --backup_files=pvmap.csv \
   --backup_files=metadata.csv \
   --backup_files=output \
-  --backup_files="${PROCESSOR_LOG}" > "${BACKUP_LOG}" 2>&1
+  --backup_files="${PROCESSOR_LOG}" \
+  --backup_files="${WORKING_DIR}/.datacommons/output_counters.log" > "${BACKUP_LOG}" 2>&1
 
 # Check the processor exit code and exit accordingly
 if [ ${PROCESSOR_EXIT_CODE} -ne 0 ]; then
