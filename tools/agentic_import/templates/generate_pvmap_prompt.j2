@@ -144,40 +144,119 @@ Use these categories to classify your dataset's domain. This helps Data Commons 
 
 ## StatVar Processor: Converting CSV Data to Data Commons Format
 
-The statvar_processor transforms CSV data into Data Commons entities. Each numeric cell in the input CSV becomes a StatVarObservation linked to a StatisticalVariable.
+### Core Function
 
-### Overview
+The StatVar Data Processor is a Python script designed to convert statistical data from tabular formats (like CSV or Excel) into a structure that is easily imported into DataCommons. It achieves this by generating an MCF file for Statistical Variables (StatVars), and a CSV and tMCF file for StatVar Observations (SVObs). The core task is to process a data file using a configuration map to produce these outputs.
 
-**Input**: CSV file with numeric data values
-**Output**: Three files for Data Commons import:
-- MCF file with StatisticalVariable definitions
-- CSV file with observations
-- TMCF file mapping CSV columns to properties
+### The Conversion Process: A Mental Model
 
-**Core Mechanism**: A pvmap (property-value map) in CSV format that maps strings from the input to Data Commons properties.
+The fundamental mechanism of the processor is to associate property-value (PV) pairs with each data cell in an input file. This mapping is defined in a configuration file and is based on the strings found in column headers, row headers, or even the cell values themselves.
 
-### Processing Model: Cell-by-Cell **Transformation**
 
-For each numeric cell, the processor:
+#### **Step 1: Configuration and Input**
 
-1. **Gathers context strings** from:
-   - The cell's column header (split by delimiters like "!!")
-   - The cell's row headers
-   - File-level defaults
-   - The cell value itself
+The script takes two main inputs:
 
-2. **Looks up each string in pvmap** to collect property-value pairs:
-   - Each string can map to multiple properties
-   - Properties from more specific contexts override general ones
-   - Priority: cell → column → row → section → file
+1.  **Input Data File**: A CSV file containing the data in a tabular format.
+2.  **PV Map**: A configuration file (in csv format usually pvmap.csv) that defines how to map strings from the input file to property-value pairs. For example, a mapping could state that the header "FIPS Code" should correspond to the property `observationAbout` with a value constructed from the cell's content.
+3.  **Metadata Configuration**: A configuration file (`metadata.csv`) that contains processor settings and parameters. This file controls how the processor operates and processing options. For example, `header_rows,1` specifies that the first row contains column headers.
 
-3. **Separates properties**:
-   - **Observation properties**: value, observationAbout, observationDate, measurementMethod
-   - **StatVar properties**: Everything else (populationType, measuredProperty, gender, age, etc.)
 
-4. **Generates output**:
-   - Creates/reuses StatVar with unique property combination
-   - Creates observation linking to that StatVar
+#### **Step 2: Processing a Data Cell**
+
+For each individual cell containing a statistical value in the input file, the script performs the following actions:
+
+1.  **Gathers Context**: It collects information from the cell's entire context, including its corresponding column header(s), row header(s), and any section headers that might apply to it.
+
+2.  **Collects Property-Values (PVs)**: It consults the `PVMap` to find PVs that match the strings gathered from the context. All matching PVs are collected. In cases of overlapping properties from different headers, the property from the most specific header is used, following this order of precedence: **cell -> column -> row -> section -> file**.
+
+3.  **Resolves Values**: The values within the collected PVs can be dynamic. The script supports two powerful mechanisms:
+
+    *   **Regex Parsing**: Extract parts of a cell's value using regular expressions with named groups. Each named group becomes a new property that can be referenced elsewhere.
+        - Example: If a cell contains "25-30 years", you can use regex `(?P<StartAge>\d+)-(?P<EndAge>\d+)` to extract:
+          - `StartAge: 25`
+          - `EndAge: 30`
+        - These extracted properties can then be referenced as `{StartAge}` and `{EndAge}` in other property values.
+
+    *   **Value Substitution**: Build complex values by referencing other properties or the cell's own value:
+        - `{<prop>}`: References another property's value. For example, `{@StartAge}` gets replaced with "25"
+        - `{Number}`: References the cell's numeric value
+        - `{Data}`: References the cell's string value
+        - Example: To create a dcid, you might use: `dcid:{StartAge}To{EndAge}Years` which resolves to `dcid:25To30Years`
+
+#### **Step 3: Creating StatVars and SVObs**
+
+After all PVs for a data cell have been collected and resolved, the script separates them into two categories:
+
+*   **StatVarObservation (SVObs) Properties**: A subset of the PVs are identified as belonging to the SVObs. These properties are `value`, `observationDate`, and `observationAbout`, `scalingFactor`, `unit`,  `observationPeriod`, `measurementMethod`.
+*   **StatisticalVariable (StatVar) Properties**: The remaining PVs are used to define the StatVar. This includes:
+    - **Mandatory properties**:  `measuredProperty`, `populationType`, `statType`
+    - **Optional properties**: `measurementQualifier`
+    - **Constraint properties**: Properties that constrain what is being measured (e.g., `age`, `gender`, `educationLevel`, `income`)
+    - **Excluded from StatVar**: Properties with capital first letters are treated as intermediate variables and NOT included in the StatVar definition
+      - Example: If PVs include `{ProductName: "Coffee", productType: "Beverage"}`, only `productType` becomes part of the StatVar; `ProductName` is used for value substitution but excluded from constraints
+
+    **🔑 Key Takeaway - StatVar Uniqueness**:
+    - Any two data cells that share the same set of remaining PVs (after excluding SVObs properties and capitalized variables) will be observations of the same StatVar
+    - **Inference**: The processor automatically deduplicates StatVars - each unique combination of StatVar properties creates exactly ONE StatVar, with multiple cells potentially contributing observations to it
+    - **Example**: If 100 cells all have `{measuredProperty: count, populationType: Person, gender: Female}`, they all map to the single StatVar `Count_Person_Female`, each contributing a different observation (different places/dates)
+
+#### **Step 4: Generating Output Files**
+
+After processing all data cells, the script generates three output files:
+
+1. **StatVar MCF file** (a file with the `_statvars.mcf` suffix, for example, `output_statvars.mcf`):
+   - Contains unique StatisticalVariable definitions
+   - Each StatVar appears only once with its complete set of properties
+   - Example entry:
+     ```mcf
+     Node: dcid:Count_Person_Female_Age25To64Years
+     typeOf: dcs:StatisticalVariable
+     populationType: dcs:Person
+     measuredProperty: dcs:count
+     statType: dcs:measuredValue
+     gender: dcs:Female
+     age: [25 64 Years]
+     ```
+
+2. **Observations CSV file** (e.g `output.csv`):
+   - Contains the actual data values
+   - Each row represents one observation linking to a StatVar
+   - **Mandatory columns**:
+     - `observationAbout`: The entity being observed (e.g., `geoId/06` for California)
+     - `variableMeasured`: Reference to the StatVar (e.g., `Count_Person_Female_Age25To64Years`)
+     - `value`: The observation value (e.g., `8234567`)
+     - `observationDate`: The date of the observation (e.g., `2024-01-01`)
+   - **Optional observation attributes**: Additional columns for metadata like `observationPeriod`, `unit`, `scalingFactor`, etc.   
+   - Example:
+     ```csv
+     observationAbout,variableMeasured,value,observationDate
+     geoId/06,Count_Person_Female_Age25To64Years,8234567,2020
+     ```
+
+3. **Template MCF file** (e.g. `output.tmcf`):
+   - **What is TMCF**: Template MCF is a schema file that maps CSV columns to Data Commons properties
+   - Acts as a bridge between the CSV structure and MCF format
+   - Defines how to interpret each column when creating the final MCF
+   - Contains placeholders (C:columnName) that reference CSV columns
+   - Example:
+     ```mcf
+     Node: E:output->E0
+     typeOf: dcs:StatVarObservation
+     observationAbout: C:output->observationAbout
+     variableMeasured: C:output->variableMeasured
+     value: C:output->value
+     observationDate: C:output->observationDate
+     measurementMethod: dcs:CensusACS5yrSurvey
+     ```
+
+**How the final observation MCF is created**:
+- Data Commons combines the CSV file with the TMCF template
+- For each CSV row, it substitutes column references (C:output->columnName) with actual values
+- Constant values in TMCF (like measurementMethod: "dcs:CensusACS5yrSurvey") are applied to all rows
+- This produces the final MCF with all StatVarObservation nodes
+
+
 
 ### Complete Example: US Census Data
 
@@ -192,7 +271,7 @@ For each numeric cell, the processor:
 
 **PVMap Configuration** (`pvmap.csv`):
 ```csv
-String,Property,Value
+key,propert,value
 "census_data.csv",observationDate,"2020"
 "census_data.csv",measurementMethod,"dcs:CensusACS5yrSurvey"
 "Total:",populationType,"dcs:Person"
@@ -202,7 +281,6 @@ String,Property,Value
 "5 to 9 years",age,"[5 9 Years]"
 "Alabama",observationAbout,"geoId/01"
 "Alaska",observationAbout,"geoId/02"
-"Estimate",_IGNORE_,"true"
 ```
 
 ### Walkthrough: Processing Cell "149,579"
@@ -219,7 +297,6 @@ This cell is at row "Alabama/Estimate", column "Total:!!Male:!!Under 5 years".
 ```
 "census_data.csv" → observationDate="2020", measurementMethod="dcs:CensusACS5yrSurvey"
 "Alabama" → observationAbout="geoId/01"
-"Estimate" → (ignored via _IGNORE_)
 "Total:" → populationType="dcs:Person", measuredProperty="dcs:count"
 "Male:" → gender="dcs:Male"
 "Under 5 years" → age="[- 5 Years]"
@@ -256,7 +333,7 @@ typeOf: dcs:StatVarObservation
 observationAbout: C:output->observationAbout
 value: C:output->value
 variableMeasured: C:output->variableMeasured
-observationDate: "2020"
+observationDate: C:output->observationDate
 measurementMethod: dcs:CensusACS5yrSurvey
 ```
 
