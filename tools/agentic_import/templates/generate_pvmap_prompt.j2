@@ -271,7 +271,9 @@ Alaska,2020,736990,384653,26684,26976
 ```csv
 key,property1,value1,property2,value2,property3,value3
 date,observationDate,{Data},,
-place,measurementMethod,"dcs:CensusACS5yrSurvey",,
+# Column-level properties: 'place' applies to ALL rows with place values
+# These properties are inherited by every observation in the dataset
+place,measurementMethod,"dcs:CensusACS5yrSurvey",statType,"dcs:measuredValue",,
 Total,populationType,"dcs:Person",measuredProperty,"dcs:count",value,{Number}
 Total_Male,gender,"dcs:Male",value,{Number}
 Total_Male_Under5Years,age,"[- 5 Years]",value,{Number}
@@ -293,7 +295,8 @@ This cell is at row "Alabama", column "Total_Male_Under5Years".
 **Step 2: PVMap Lookups**
 ```
 date → observationDate="{Data}" resolves to "2020"
-place → measurementMethod="dcs:CensusACS5yrSurvey"
+place → measurementMethod="dcs:CensusACS5yrSurvey", statType="dcs:measuredValue"
+        (applies to ALL observations because 'place' column exists in every row)
 place:Alabama → observationAbout="geoId/01"
 Total → populationType="dcs:Person", measuredProperty="dcs:count"
 Total_Male → gender="dcs:Male"
@@ -341,6 +344,7 @@ measurementMethod: dcs:CensusACS5yrSurvey
 - **Shared StatVars**: Cells with identical StatVar properties share the same StatVar
 - **Qualified keys**: Column values are qualified with their column name (e.g., "place:Alabama"), while column names are used directly as keys
 - **Universal column keys**: Use a column present in all rows (like "place") for global properties instead of filename
+- **Column-level property inheritance**: When a column name (e.g., "place") is used as a key, its properties apply to ALL observations from ANY row containing that column. This enables setting universal properties like `measurementMethod` that are shared across the entire dataset.
 - **Property precedence**: More specific contexts override general ones
 - **Required for observations**: value, observationAbout, observationDate, variableMeasured
 
