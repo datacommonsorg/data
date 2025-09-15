@@ -686,22 +686,48 @@ BASE_YEAR:2023,referenceYear,2023
 
 **Why this is critical:** Without column namespacing, the import system cannot distinguish between identical values from different columns, leading to incorrect data mappings and potential data loss or corruption.
 
+**2. Place Resolution - Critical for Data Commons Import**
+
+Place resolution is critical in Data Commons. All geographic data must be correctly mapped to place DCIDs via the `observationAbout` property. The StatVar processor will attempt automatic resolution, but proper formatting significantly improves accuracy.
+
+**Step-by-Step Place Resolution Workflow:**
+
+**Step 1: Known DCID** → Use directly
+- country/USA, country/IND (for countries)
+- geoId/06 (FIPS codes for US states/counties)
+- wikidataId/Q1234 (Wikidata entries)
+- Example: California → observationAbout,geoId/06
+
+**Step 2: Country codes/names** → Use country/ prefix
+- For ISO country codes or clear country names
+- Example: USA → observationAbout,country/USA
+
+**Step 3: Complex places** → Provide context for resolution
+- Combine place components using intermediate variables (Capitalized)
+- Format: observationAbout,"{Place_Name}, {State}, {Country}"
+- Example: City,State,Country → observationAbout,"{City}, {State}, {Country}"
+
+**Step 4: Unknown/Ambiguous** → Let processor resolve
+- Use observationAbout,{Data}
+- StatVar processor will attempt automatic resolution
+
+**Important:** Use Capitalized intermediate variables ({Place_Name}, {State}, not {place_name}). These intermediate variables should NOT be added as constraint properties in the StatVar definition.
+
+**Debugging Place Resolution:**
+Configure metadata.csv to improve resolution:
+- place_type,"City,County" (filter by DC place types)
+- places_within,"country/USA" (restrict to specific regions)
+
 **BASIC GUIDELINES**
 
 1.  populationType. Examples populationTypes are Person, EconomicActivity, Debt.
 2.  measuredProperty. Example measuredProperty are count, amount,
-3.  observationAbout. This is used for places. \
-    The property observationAbout should finally contain the place dcid, such as
-    geoId/\<FIPS code\> for US states and counties, eg: geoId/06 for California,
-    or wikidataId/\<Q…\> for places with a wikidata entry. If the place name
-    cannot be mapped to a place dcid easily, set it to {Data}. For example:
-    State \-\> observationAbout, {Data}
-4.  value. This is used for the observed value that goes into the
+3.  value. This is used for the observed value that goes into the
     StatVarObservation. Map the column header containing the numeric data values
     to value,{Number}. If the numeric observation values have a units such as a
     currency, map the source string to unit,\<Currency code\>. Example:
     unit,INR, or unit,Kilogram.
-5.  observationDate. This is used for the date of the observation in the format
+4.  observationDate. This is used for the date of the observation in the format
     YYYY or YYYY-MM or YYYY-MM-DD. For columns that have a date, map the column
     header to observationDate,{Data}. If the columns header has a specific date,
     then set it as the observationDate. Example, if the column names '2025' have
@@ -709,16 +735,16 @@ BASE_YEAR:2023,referenceYear,2023
     observationDate,2025,value,{Number}. If there is a date range, then set the
     observationDate to the end of the range and use observationPeriod to
     indicate the duration, such as P1Y to year or P3M for 3 months
-6.  name: Use this property to set the name of the StatisticalVariable based on
+5.  name: Use this property to set the name of the StatisticalVariable based on
     the source strings.
-7.  Map any additional strings from the source to property,value from data
+6.  Map any additional strings from the source to property,value from data
     commons schema such that the meaning of all the attributes that apply to
     data in a row or column are captured. A property in DataCommons begins with
     a lower case letter. A value in DataCommons is a reference to a node that
     begins with a Capital letter and uses CamelCase without spaces.
-8.  Ensure that each key in the pvmap is unique. If there are multiple
+7.  Ensure that each key in the pvmap is unique. If there are multiple
     property,values for a single key, append them to the same row in the pvmap.
-9.  If a property has no value, set it to an empty string in double quotes. For
+8.  If a property has no value, set it to an empty string in double quotes. For
     example, if a column has gender as strings, 'Male', 'Female', 'Total', then
     the property value 'gender,""' can be used for 'Total'.
 
@@ -1632,7 +1658,8 @@ While generating the files, ensure:
 - [ ] **StatVarObservation mandatory properties mapped** - observationAbout, observationDate, value
 - [ ] **CRITICAL: Do NOT map variableMeasured** - This mandatory property points to StatVar but is auto-constructed by processor from other PV mappings, never map it directly
 - [ ] **StatVarObservation optional properties checked** - observationPeriod, unit, scalingFactor, measurementMethod (if applicable)
-- [ ] **Place references use appropriate format** - geoId for known IDs, name for resolution, country/<county code> like country/USA for countries.
+- [ ] **Place references follow resolution workflow** - Known DCIDs (geoId/06, country/USA), contextual format for complex places ("{City}, {State}"), or {Data} for auto-resolution
+- [ ] **Place resolution metadata configured** - place_type and places_within in metadata.csv if needed for disambiguation
 - [ ] **Unit measures follow DC conventions** - Use standard Data Commons units
 - [ ] **Special/missing values mapped appropriately** - Use #ignore property to skip entire rows with missing/invalid data (any row containing #ignore will be completely skipped)
 
