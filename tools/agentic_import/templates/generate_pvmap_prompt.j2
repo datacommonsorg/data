@@ -693,23 +693,37 @@ Place resolution is critical in Data Commons. All geographic data must be correc
 **Step-by-Step Place Resolution Workflow:**
 
 **Step 1: Known DCID** → Use directly
+⚠️ **ONLY use these when absolutely certain about the entity type**
 - country/USA, country/IND (for countries)
 - geoId/06 (FIPS codes for US states/counties)
 - wikidataId/Q1234 (Wikidata entries)
 - Example: California → observationAbout,geoId/06
+- **WARNING**: The StatVar processor does not validate these - incorrect prefixes will produce wrong output
 
 **Step 2: Country codes/names** → Use country/ prefix
+- **ONLY when certain it's actually a country code or clear country name**
 - For ISO country codes or clear country names
 - Example: USA → observationAbout,country/USA
+- **If unsure whether it's a country**: Use {Data} or contextual format instead
 
 **Step 3: Complex places** → Provide context for resolution
 - Combine place components using intermediate variables (Capitalized)
 - Format: observationAbout,"{Place_Name}, {State}, {Country}"
 - Example: City,State,Country → observationAbout,"{City}, {State}, {Country}"
 
-**Step 4: Unknown/Ambiguous** → Let processor resolve
+**Step 4: Unknown/Ambiguous** → Let processor resolve (RECOMMENDED DEFAULT)
 - Use observationAbout,{Data}
 - StatVar processor will attempt automatic resolution
+- **When in doubt, use {Data}** - the processor's auto-resolution is safer than incorrect prefixes
+
+⚠️ **Critical Warning about Place Prefixes:**
+- Incorrect prefixes (e.g., using country/CityName for a city) will NOT be caught by the processor
+- Wrong prefixes generate invalid output that appears correct but is semantically wrong
+- **Default to {Data} or contextual format unless 100% certain about entity type**
+- Examples of dangerous mistakes:
+  - Using country/California (California is a state, not country)
+  - Using geoId/USA (USA should be country/USA)
+  - Using wikidataId/ without verifying the actual Wikidata ID
 
 **Important:** Use Capitalized intermediate variables ({Place_Name}, {State}, not {place_name}). These intermediate variables should NOT be added as constraint properties in the StatVar definition.
 
