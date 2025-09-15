@@ -37,9 +37,45 @@ You **MUST** adhere to these rules at all times.
 
 # CORE KNOWLEDGE BASE
 
-CSV data is imported into Data Commons. The data is to be converted into
-`StatisticalVariable` and `StatVarObservation`s as described in
-https://docs.datacommons.org/data_model.html#statistical-variable.
+CSV data is imported into Data Commons through StatisticalVariables and StatVarObservations:
+
+**StatisticalVariable (StatVar)** - Defines WHAT is measured (metric schema):
+- **Mandatory properties**:
+  - `populationType` - what's being counted (Person, Household, etc.)
+  - `measuredProperty` - how it's measured (count, median, rate, etc.)
+  - `statType` - statistical method (measuredValue, medianValue, etc.)
+- **Constraint properties**: gender, age, race, educationalAttainment, employment, etc.
+- **Optional properties**: 
+  - `measurementQualifier` - data adjustment method (SeasonallyAdjusted, Nominal, RealValue)
+- **Naming convention**: Base name + constraint suffixes
+  - Simple: `Count_Person` (total population count)
+  - Complex: `Count_Person_Female_Hispanic_Age25To64Years` (counts Hispanic females aged 25-64)
+    - This counts people who are: Female (gender constraint) + Hispanic (race constraint) + Age 25-64 (age constraint)
+
+**StatVarObservation** - The actual data points (WHERE, WHEN, VALUE):
+- **Mandatory properties**:
+  - `observationAbout` - place DCID (country/USA, geoId/06, etc.)
+  - `observationDate` - time period (2020, 2020-01, etc.)
+  - `variableMeasured` - StatVar DCID (Count_Person, etc.)
+  - `value` - measured value
+- **Optional properties** (also called observation attributes):
+  - `observationPeriod` (P1Y=yearly, P1M=monthly)
+  - `unit` (Percent, USD)
+  - `scalingFactor` (100 for percentages 0-100, 1000000 for millions)
+  - `measurementMethod` (CensusACS5yrSurvey, EstimateMethod)
+
+**CSV → Data Commons Transformation**:
+```csv
+Location, Year, Population, MedianIncome
+USA, 2020, 331449281, 65000
+California, 2020, 39538223, 75000
+```
+→ Creates StatVars: `Count_Person`, `Median_Income_Household`
+→ Creates observations with proper DCIDs:
+  - observationAbout=country/USA, observationDate=2020, variableMeasured=Count_Person, value=331449281
+  - observationAbout=geoId/06, observationDate=2020, variableMeasured=Count_Person, value=39538223
+<!-- TODO: improve. this might be wrong -->
+**Key Insight**: Each CSV column becomes a StatVar definition; each data cell becomes a StatVarObservation with proper Data Commons DCIDs and property names.
 
 ## Dataset Categories for Classification
 
@@ -56,37 +92,6 @@ https://docs.datacommons.org/data_model.html#statistical-variable.
 9. **Crime** - Crime incidents, law enforcement, incarceration
 10. **Transportation** - Commute, vehicles, transport modes
 
-## Data Commons Core Entities
-
-A **StatisticalVariable**(also known as `StatVar`) represents a template of data attributes
-and dimensions that apply to a series of observations for different places and
-times. A `StatisticalVariable` should have the following **mandatory
-properties**:
-
-- `populationType`
-- `measuredProperty`
-- `statType`
-
-It can have an additional set of constraint properties such as gender, age, etc.
-
-A **StatVarObservation** (also known as `SVObs`) captures the value of the
-`StatisticalVariable` for a given place and time. It has the following
-**mandatory properties**:
-
-- `observationAbout`
-- `observationDate`
-- `variableMeasured`
-- `value`
-
-It can have the following optional properties:
-
-- `observationPeriod` -example: “P1Y”, “P1M”
-- `unit`
-- `scalingFactor`- Example: 100 for unit:Percent to indicate values are in the
-  range 0-100
-- `measurementMethod`- a node describing additional considerations for a
-  value, such as base year for indexes and currencies, or if a value is an
-  Estimate or a Projection.
 
 ## Statvar processor User Guide
 
