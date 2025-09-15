@@ -532,7 +532,7 @@ Child,populationType,Person,age,[- 15 Years]
 
 ```csv
 Product_Name_Column,ProductName,{Data}
-Product_Code_Column,name,"Total imports of {ProductName} (code: {Data})"
+Product_Code_Column,productClassification,{ProductName}_Code
 ```
 
 - **`#Format`**: Use Python f-string like formatting.
@@ -794,16 +794,14 @@ ROW_TYPE:TEST,#ignore,Test row - exclude completely
     observationDate,2025,value,{Number}. If there is a date range, then set the
     observationDate to the end of the range and use observationPeriod to
     indicate the duration, such as P1Y to year or P3M for 3 months
-5.  name: Use this property to set the name of the StatisticalVariable based on
-    the source strings.
-6.  Map any additional strings from the source to property,value from data
+5.  Map any additional strings from the source to property,value from data
     commons schema such that the meaning of all the attributes that apply to
     data in a row or column are captured. A property in DataCommons begins with
     a lower case letter. A value in DataCommons is a reference to a node that
     begins with a Capital letter and uses CamelCase without spaces.
-7.  Ensure that each key in the pvmap is unique. If there are multiple
+6.  Ensure that each key in the pvmap is unique. If there are multiple
     property,values for a single key, append them to the same row in the pvmap.
-8.  If a property has no value, set it to an empty string in double quotes. For
+7.  If a property has no value, set it to an empty string in double quotes. For
     example, if a column has gender as strings, 'Male', 'Female', 'Total', then
     the property value 'gender,""' can be used for 'Total'.
 
@@ -1484,8 +1482,7 @@ The primary observation value in SDMX:
 
 #### 4. Dataflow and Dataset Metadata
 
-* **Dataflow identifier**: Use for constructing StatVar names
-  * Example: `BIS:WS_CBPOL,name,"Central Bank Policy Rates {Data}"`
+* **Dataflow identifier**: Use for mapping dataflow information to properties
 
 * **Dataset attributes**: Often found in header rows
   * Map dataset-level attributes to default PVs that apply globally
@@ -1579,8 +1576,8 @@ key,property1,value1,property2,value2,property3,value3
 
 # Note: Put processor configuration (e.g., input_columns) in metadata.csv, not here
 
-# Dataflow identification  
-ECB:EXR,name,Exchange Rates,populationType,CurrencyExchange,,
+# Dataflow identification
+ECB:EXR,populationType,CurrencyExchange,,,,
 
 # Frequency dimension
 D,observationPeriod,P1D,,,,

@@ -61,6 +61,7 @@ echo "Running statvar processor..."
   --input_data="${INPUT_DATA}" \
   --pv_map="${WORKING_DIR}/pvmap.csv" \
   --config_file="${WORKING_DIR}/metadata.csv" \
+  --generate_statvar_name=True \
   --output_counters="${WORKING_DIR}/.datacommons/output_counters.log" \
   --output_path="${WORKING_DIR}/output/output" > "${PROCESSOR_LOG}" 2>&1
 
