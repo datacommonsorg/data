@@ -39,28 +39,30 @@ You **MUST** adhere to these rules at all times.
 
 CSV data is imported into Data Commons through StatisticalVariables and StatVarObservations:
 
-**StatisticalVariable (StatVar)** - Defines WHAT is measured (metric schema):
+**StatisticalVariable (StatVar)** - Defines WHAT is measured (metric schema + constraints as integral components):
 - **Mandatory properties**:
   - `populationType` - what's being counted (Person, Household, etc.)
   - `measuredProperty` - how it's measured (count, median, rate, etc.)
   - `statType` - statistical method (measuredValue, medianValue, etc.)
-- **Constraint properties**: gender, age, race, educationalAttainment, employment, etc.
-- **Optional properties**: 
+- **Constraint properties built into StatVar**: gender, age, race, educationalAttainment, employment, etc.
+  - **Key concept**: Constraints are NOT separate entities - they become part of the StatVar definition itself
+- **Optional properties**:
   - `measurementQualifier` - data adjustment method (SeasonallyAdjusted, Nominal, RealValue)
-- **Naming convention**: Base name + constraint suffixes
-  - Simple: `Count_Person` (total population count)
-  - Complex: `Count_Person_Female_Hispanic_Age25To64Years` (counts Hispanic females aged 25-64)
-    - This counts people who are: Female (gender constraint) + Hispanic (race constraint) + Age 25-64 (age constraint)
+- **Naming convention**: Base name + constraint suffixes (constraints embedded in StatVar name)
+  - Simple: `Count_Person` (total population count - no constraints)
+  - Complex: `Count_Person_Female_Hispanic_Age25To64Years` (constraints Female+Hispanic+Age25-64 are part of this single StatVar)
+    - This is ONE StatVar that counts people who are: Female (gender constraint) + Hispanic (race constraint) + Age 25-64 (age constraint)
 
-**StatVar MCF Format**:
+**StatVar MCF Format (showing constraints as integral properties)**:
 ```mcf
 Node: dcid:Count_Person_Female_Hispanic
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measuredProperty: dcs:count
-gender: dcs:Female
-race: dcs:Hispanic
+gender: dcs:Female  # This constraint is part of the StatVar definition
+race: dcs:Hispanic  # This constraint is also part of the StatVar definition
 statType: dcs:measuredValue
+# The above defines ONE StatVar with built-in Female+Hispanic constraints
 ```
 
 **StatVarObservation** - The actual data points (WHERE, WHEN, VALUE):
@@ -97,12 +99,30 @@ California, 2020, 39538223, 75000
 → Creates observations with proper DCIDs:
   - observationAbout=country/USA, observationDate=2020, variableMeasured=Count_Person, value=331449281
   - observationAbout=geoId/06, observationDate=2020, variableMeasured=Count_Person, value=39538223
+
+**Complex Example with Demographic Breakdowns**:
+```csv
+Location, Year, AgeGroup, Gender, Population, MedianIncome
+USA, 2020, 25-64, Female, 85234567, 62000
+USA, 2020, 25-64, Male, 82456789, 68000
+California, 2020, 65+, Female, 3254678, 45000
+```
+→ Creates StatVars with constraints built-in:
+  - `Count_Person_Female_Age25To64Years` - ONE StatVar with Female+Age25-64 constraints embedded
+  - `Count_Person_Male_Age25To64Years` - ONE StatVar with Male+Age25-64 constraints embedded
+  - `Count_Person_Female_Age65OrMoreYears` - ONE StatVar with Female+Age65+ constraints embedded
+  - `Median_Income_Household` - StatVar with no demographic constraints
+→ **Key point**: Constraint columns (AgeGroup, Gender) become integral properties of the StatVar itself, not separate entities
+→ Creates observations referencing these constraint-embedded StatVars:
+  - observationAbout=country/USA, observationDate=2020, variableMeasured=Count_Person_Female_Age25To64Years, value=85234567
+
 **Key Insight**:
 - **CSV metric columns** (Population, MedianIncome) → StatVar definitions
+- **CSV constraint columns** (AgeGroup, Gender) → StatVar properties (age, gender)
 - **CSV location columns** (Location) → observationAbout (place references)
 - **CSV time columns** (Year) → observationDate
 - **Each CSV row** → Multiple StatVarObservations (one per metric column)
-- **Row transformation**: Combines place + time + each metric value with proper DCIDs
+- **Row transformation**: Combines place + time + constraints + each metric value with proper DCIDs
 
 ## Dataset Categories for Classification
 
