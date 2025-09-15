@@ -189,6 +189,7 @@ For each individual cell containing a statistical value in the input file, the s
 After all PVs for a data cell have been collected and resolved, the script separates them into two categories:
 
 *   **StatVarObservation (SVObs) Properties**: A subset of the PVs are identified as belonging to the SVObs. These properties are `value`, `observationDate`, and `observationAbout`, `scalingFactor`, `unit`,  `observationPeriod`, `measurementMethod`.
+    *   **Note**: `variableMeasured` is also mandatory for SVObs but is auto-constructed by the processor, never mapped directly in PVs
 *   **StatisticalVariable (StatVar) Properties**: The remaining PVs are used to define the StatVar. This includes:
     - **Mandatory properties**:  `measuredProperty`, `populationType`, `statType`
     - **Optional properties**: `measurementQualifier`
@@ -605,6 +606,11 @@ values are often present in the script.
   indices to process (not column names or headers).
   **Note: Use only for debugging, not in final production configurations.**
   - Example: `input_columns,"1,2,5"` (processes columns 1, 2, and 5 by index)
+
+**Output Configuration:**
+
+- `output_columns` (Default: None, meaning auto-detected): List of properties to be emitted as columns in the SVObs CSV. If None, it includes properties that vary across SVObs.
+  - Example: `output_columns,"observationAbout,observationDate,variableMeasured,value,unit"`
 
 
 **Place Resolution:**
@@ -1611,12 +1617,17 @@ Follow these steps sequentially.
 ### Validation Checklist
 
 While generating the files, ensure:
-{# TODO: clarify observaton and statvar properties, looks like llm is confused . claer;y specify this in knowledgebase #}
+
 #### PV Map Validation:
-- [ ] **All required fields are mapped** - observationAbout, populationType, measuredProperty, statType, value, observationDate
+- [ ] **StatVar mandatory properties mapped** - populationType, measuredProperty, statType
+- [ ] **StatVar optional properties checked** - measurementQualifier (if applicable)
+- [ ] **Only relevant constraint properties included** - Verify constraint properties are appropriate; intermediate properties with capital first letters excluded from StatVar definition
+- [ ] **StatVarObservation mandatory properties mapped** - observationAbout, observationDate, value
+- [ ] **CRITICAL: Do NOT map variableMeasured** - This mandatory property points to StatVar but is auto-constructed by processor from other PV mappings, never map it directly
+- [ ] **StatVarObservation optional properties checked** - observationPeriod, unit, scalingFactor, measurementMethod (if applicable)
 - [ ] **Place references use appropriate format** - geoId for known IDs, name for resolution, country/<county code> like country/USA for countries.
 - [ ] **Unit measures follow DC conventions** - Use standard Data Commons units
-- [ ] **Special/missing values mapped appropriately** - Use #ignore for missing data where needed
+- [ ] **Special/missing values mapped appropriately** - Use #ignore property to skip entire rows with missing/invalid data (any row containing #ignore will be completely skipped)
 
 #### Metadata CSV Validation:
 - [ ] **metadata.csv covers processor flags** - Includes required parameters (e.g., `header_rows`)
