@@ -262,44 +262,42 @@ After processing all data cells, the script generates three output files:
 
 **Input CSV** (`census_data.csv`):
 ```csv
-"Label (Grouping)","Total:","Total:!!Male:","Total:!!Male:!!Under 5 years","Total:!!Male:!!5 to 9 years"
-"Alabama","","","",""
-"    Estimate","4,893,186","2,365,734","149,579","150,937"
-"Alaska","","","",""
-"    Estimate","736,990","384,653","26,684","26,976"
+place,date,Total,Total_Male,Total_Male_Under5Years,Total_Male_5to9Years
+Alabama,2020,4893186,2365734,149579,150937
+Alaska,2020,736990,384653,26684,26976
 ```
 
 **PVMap Configuration** (`pvmap.csv`):
 ```csv
-key,propert,value
-"census_data.csv",observationDate,"2020"
-"census_data.csv",measurementMethod,"dcs:CensusACS5yrSurvey"
-"Total:",populationType,"dcs:Person"
-"Total:",measuredProperty,"dcs:count"
-"Male:",gender,"dcs:Male"
-"Under 5 years",age,"[- 5 Years]"
-"5 to 9 years",age,"[5 9 Years]"
-"Alabama",observationAbout,"geoId/01"
-"Alaska",observationAbout,"geoId/02"
+key,property1,value1,property2,value2,property3,value3
+date,observationDate,{Data},,
+place,measurementMethod,"dcs:CensusACS5yrSurvey",,
+Total,populationType,"dcs:Person",measuredProperty,"dcs:count",value,{Number}
+Total_Male,gender,"dcs:Male",value,{Number}
+Total_Male_Under5Years,age,"[- 5 Years]",value,{Number}
+Total_Male_5to9Years,age,"[5 9 Years]",value,{Number}
+place:Alabama,observationAbout,"geoId/01",,
+place:Alaska,observationAbout,"geoId/02",,
 ```
 
-### Walkthrough: Processing Cell "149,579"
+### Walkthrough: Processing Cell "149579"
 
-This cell is at row "Alabama/Estimate", column "Total:!!Male:!!Under 5 years".
+This cell is at row "Alabama", column "Total_Male_Under5Years".
 
 **Step 1: Gather Context**
 - File: `census_data.csv`
-- Row headers: "Alabama", "Estimate"
-- Column parts: "Total:", "Male:", "Under 5 years" (split on "!!")
+- Row: "Alabama" (place=Alabama, date=2020)
+- Column: "Total_Male_Under5Years"
 - Cell value: 149579
 
 **Step 2: PVMap Lookups**
 ```
-"census_data.csv" → observationDate="2020", measurementMethod="dcs:CensusACS5yrSurvey"
-"Alabama" → observationAbout="geoId/01"
-"Total:" → populationType="dcs:Person", measuredProperty="dcs:count"
-"Male:" → gender="dcs:Male"
-"Under 5 years" → age="[- 5 Years]"
+date → observationDate="{Data}" resolves to "2020"
+place → measurementMethod="dcs:CensusACS5yrSurvey"
+place:Alabama → observationAbout="geoId/01"
+Total → populationType="dcs:Person", measuredProperty="dcs:count"
+Total_Male → gender="dcs:Male"
+Total_Male_Under5Years → age="[- 5 Years]"
 ```
 
 **Step 3: Collect & Separate Properties**
@@ -322,8 +320,8 @@ age: [- 5 Years]
 
 **Observation (CSV)**:
 ```csv
-observationAbout,value,variableMeasured
-geoId/01,149579,Count_Person_Male_Under5Years
+observationAbout,value,variableMeasured,observationDate
+geoId/01,149579,Count_Person_Male_Under5Years,2020
 ```
 
 **Template (TMCF)**:
@@ -341,7 +339,8 @@ measurementMethod: dcs:CensusACS5yrSurvey
 
 - **Multiple observations per row**: Each numeric column creates a separate observation
 - **Shared StatVars**: Cells with identical StatVar properties share the same StatVar
-- **Delimiter handling**: Headers like "Total:!!Male:!!Under 5 years" split into parts
+- **Qualified keys**: Column values are qualified with their column name (e.g., "place:Alabama"), while column names are used directly as keys
+- **Universal column keys**: Use a column present in all rows (like "place") for global properties instead of filename
 - **Property precedence**: More specific contexts override general ones
 - **Required for observations**: value, observationAbout, observationDate, variableMeasured
 
@@ -351,7 +350,7 @@ measurementMethod: dcs:CensusACS5yrSurvey
 python3 stat_var_processor.py --input_data=<input.csv> \
     --pv_map=<pvmap.csv> \
     --output_path=<output-prefix> \
-    --config_file=<config.json>
+    --config_file=<metadata.csv>
 ```
 
 **Note**: In this workflow, encode all processor configuration in `metadata.csv` and invoke via the wrapper script.
