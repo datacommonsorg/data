@@ -370,64 +370,114 @@ The underlying script supports Python/JSON config files and CLI flags in general
 
 - Format: two columns `parameter,value`
 - Types: Booleans as `True`/`False`; lists as comma-separated strings (quote the whole value if needed); dictionaries/complex values as JSON-encoded strings (quoted)
+
+- **Minimal Example for Simple CSV (MANDATORY FIELDS):**
+
+```csv
+parameter,value
+header_rows,1
+output_columns,"observationAbout,observationDate,variableMeasured,value"
+```
+
 - **Comprehensive Example with Common Parameters:**
 
 ```csv
 parameter,value
 
-# Input configuration
+# Mandatory configuration
 header_rows,1
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit"
+
+# Input configuration (optional)
 skip_rows,0
 process_rows,"1,2,5"
 input_rows,100
 input_columns,"1,2,5"
 
-# Place resolution
+# Place resolution (optional)
 place_type,"AdministrativeArea1,AdministrativeArea2"
 places_within,country/USA
 ```
 
-- **Minimal Example for Simple CSV:**
+#### General Processing Settings
 
-```csv
-parameter,value
-header_rows,1
-```
+These settings control various aspects of the data processing pipeline. Default values are often present in the script.
 
-⚠️ **COMMON METADATA.CSV MISTAKES TO AVOID:**
+**Workflow policy**: Express these settings in `metadata.csv` as `parameter,value` rows. Do not include them in `pvmap.csv`, and avoid passing them via CLI in this workflow.
+
+**🚨 MANDATORY PARAMETERS:**
+
+- `header_rows` (**REQUIRED**): Number of initial rows to be treated strictly as column headers. PVs from these cells apply to the entire column below them. Most CSV files have headers, so this should be set to 1.
+  - Example: `header_rows,1`
+  - **Critical**: Always set this for standard CSV files (defaults to 0 if omitted)
+
+- `output_columns` (**REQUIRED**): List of properties to be emitted as columns in the SVObs CSV. **Must include at minimum**: `observationAbout,observationDate,variableMeasured,value`. If any additional observation properties are mapped in your `pvmap.csv` (such as `unit`, `scalingFactor`, `measurementMethod`, `observationPeriod`, etc.), they **must** also be included here.
+  - Minimal example: `output_columns,"observationAbout,observationDate,variableMeasured,value"`
+  - Extended example: `output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,measurementMethod"`
+
+**Input Configuration (Optional):**
+
+- `skip_rows` (Default: `0`): Number of initial rows to skip entirely from the input file.
+- `process_rows` (Default: `[0]` i.e., process all): A list of specific row numbers to process. If `[0]`, all rows (after skipping) are processed.
+  **Note: Use only for debugging, not in final production configurations.**
+  - Example: `process_rows,"1,2,5"`
+- `input_rows` (Default: `sys.maxsize`): Maximum number of rows to process per file (after skipping). Useful for debugging.
+  **Note: Use only for debugging, not in final production configurations.**
+  - Example: `input_rows,100`
+- `input_columns` (Default: `sys.maxsize`): Maximum number of columns to process per row. Useful for debugging. Can also be a list of 1-based column indices to process (not column names or headers).
+  **Note: Use only for debugging, not in final production configurations.**
+  - Example: `input_columns,"1,2,5"` (processes columns 1, 2, and 5 by index)
+
+**Place Resolution (Optional):**
+
+- `place_type` (Flag: `--place_type`): Comma-separated list of DC place types (e.g., 'City', 'County') to filter resolution results.
+  - Example: `place_type,"AdministrativeArea1,AdministrativeArea2"`
+- `places_within` (Flag: `--places_within`): Restrict place resolution to a specific country or administrative area DCID(s).
+  - Example: `places_within,"country/USA,country/AUS"`
+
+
+# metadata.csv Generation Guide
+
+This section provides troubleshooting guidance and best practices for creating metadata.csv configuration files.
+
+## ⚠️ COMMON METADATA.CSV MISTAKES TO AVOID
+
 - **Missing `header_rows`**: Most CSV files have headers, but `header_rows` defaults to 0. Always set to 1 for standard CSV files
+- **Missing `output_columns`**: This is now **MANDATORY**. Must include at minimum: `observationAbout,observationDate,variableMeasured,value`
+- **Incomplete `output_columns`**: If you map observation properties like `unit`, `scalingFactor`, `measurementMethod` in your pvmap.csv, they **must** also be included in `output_columns`
 - **Using CLI flag names**: Use parameter names like `header_rows`, not CLI flag names like `--header_rows`
 - **Forgetting `places_within`**: Geographic data without this constraint can resolve to wrong places (e.g., Paris, Texas instead of Paris, France)
 
-- Common parameters (express in `metadata.csv`, not in `pvmap.csv`): `header_rows`, `skip_rows`, `process_rows`, `input_rows`, `input_columns`, `place_type`, `places_within`.
+**Policy**: Do not embed processor settings in `pvmap.csv` and do not add extra CLI flags—`metadata.csv` is the single source of truth for configuration in this workflow.
 
-Policy: Do not embed processor settings in `pvmap.csv` and do not add extra CLI flags—`metadata.csv` is the single source of truth for configuration in this workflow.
+## 🔧 metadata.csv Debugging Strategy
 
-#### metadata.csv Debugging Strategy
+**SYSTEMATIC DEBUGGING APPROACH:**
 
-🔧 **SYSTEMATIC DEBUGGING APPROACH:**
-
-1. **Start Minimal**: Begin with only essential parameters:
+1. **Start with Mandatory Fields**: Begin with only essential parameters:
    ```csv
    parameter,value
    header_rows,1
+   output_columns,"observationAbout,observationDate,variableMeasured,value"
    ```
 
-2. **Test with Small Data**: Use first 10-20 rows of input to validate configuration
+2. **Test with Small Data**: Use first 5-10 rows of input to validate configuration using config "input_rows,5"
 
 3. **Add Parameters Incrementally**:
    - Add `skip_rows` if initial rows need skipping
    - Add `input_rows`/`input_columns` for debugging
    - Add place resolution parameters if needed
+   - Add observation properties to `output_columns` as you map them in pvmap.csv
 
 4. **Common Error Patterns**:
    - **"No data in output"**: Check `header_rows`, `skip_rows`
    - **"Wrong place resolution"**: Add `places_within` constraint
+   - **"Missing columns in output"**: Ensure `output_columns` includes all observation properties from pvmap.csv
 
 5. **Validation Checks**:
    - Verify parameter names match documentation (not CLI flag names)
-   - Quote values containing commas: `"value1,value2,value3"`
-   - Use JSON format for complex values: `"{""key"": ""value""}"`
+   - Quote values containing commas: `"value1,value2,value3"`   
+   - Verify `output_columns` completeness against your pvmap.csv mappings
 
 #### 1. Property-Value Map (`pv_map`)
 
@@ -578,49 +628,6 @@ Category,value,{Data},#Filter,"'{Data}' not in ['NA', 'N/A', 'null', '']"
 
 ---
 
-#### 2. General Processing Settings
-
-These settings control various aspects of the data processing pipeline. Default
-values are often present in the script.
-
-**Workflow policy**: Express these settings in `metadata.csv` as `parameter,value` rows. Do not include them in `pvmap.csv`, and avoid passing them via CLI in this workflow.
-
-**Input Configuration:**
-
-- `header_rows` (Default: `0`): Number of initial rows to be treated strictly
-  as column headers. PVs from these cells apply to the entire column below
-  them.
-  - Example: `header_rows,2`
-- `skip_rows` (Default: `0`): Number of initial rows to skip entirely from the
-  input file.
-- `process_rows` (Default: `[0]` i.e., process all): A list of specific row
-  numbers to process. If `[0]`, all rows (after skipping) are processed.
-  **Note: Use only for debugging, not in final production configurations.**
-  - Example: `process_rows,"1,2,5"`
-- `input_rows` (Default: `sys.maxsize`): Maximum number of rows to process per
-  file (after skipping). Useful for debugging.
-  **Note: Use only for debugging, not in final production configurations.**
-  - Example: `input_rows,100`
-- `input_columns` (Default: `sys.maxsize`): Maximum number of columns to
-  process per row. Useful for debugging. Can also be a list of 1-based column
-  indices to process (not column names or headers).
-  **Note: Use only for debugging, not in final production configurations.**
-  - Example: `input_columns,"1,2,5"` (processes columns 1, 2, and 5 by index)
-
-**Output Configuration:**
-
-- `output_columns` (Default: None, meaning auto-detected): List of properties to be emitted as columns in the SVObs CSV. If None, it includes properties that vary across SVObs.
-  - Example: `output_columns,"observationAbout,observationDate,variableMeasured,value,unit"`
-
-
-**Place Resolution:**
-
-- `place_type` (Flag: `--place_type`): Comma-separated list of DC place types
-  (e.g., 'City', 'County') to filter resolution results.
-  - Example: `place_type,"AdministrativeArea1,AdministrativeArea2"`
-- `places_within` (Flag: `--places_within`): Restrict
-  place resolution to a specific country or administrative area DCID(s).
-  - Example: `places_within,"country/USA,country/AUS"`
 
 
 ## ### 1. PV-Map Generation Guide
@@ -1675,6 +1682,9 @@ The wrapper reads `metadata.csv` for all processor configuration. Do not add ext
 - Check the command exit code (0 = success, non-zero = failure)
 - Verify that `{{working_dir}}/output/output.csv` exists and is not empty
 - Confirm no duplicate entries for same place, date, and variable
+- **Verify output.csv contains all required columns**: Must include at minimum `observationAbout`, `observationDate`, `variableMeasured`, `value`
+- **Verify complete column mapping**: Any observation properties mapped in pvmap.csv (like `unit`, `scalingFactor`, `measurementMethod`, `observationPeriod`) must be present as columns in output.csv
+- **Verify `metadata.csv` completeness**: Confirm both `header_rows` and `output_columns` parameters are present and correctly specified
 
 **🎯 DECISION LOGIC - APPLY THIS EXACTLY**:
 
