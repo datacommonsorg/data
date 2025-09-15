@@ -6,13 +6,13 @@
 
 - Import Type: Semi-Automated
 
-- Data Availability: 2019 to 2023
+- Data Availability: 2018 to 2023
 
 - Release Frequency: P1Y, which means every Year.
 
 ### Preprocessing and Data Acquisition
 
--Download: Manuall
+-Download: Manual
 
 To obtain the raw input files, data must be manually downloaded from the source. The download process involves selecting specific criteria from the dropdown menus:
 
@@ -27,7 +27,7 @@ For each download, a specific state must be selected. The desired year range is 
 
 ### Data Processing
 
-After the files are downloaded, the data is processed using the stat_var_processor.py script.The script uses various command-line arguments to specify the input data, pvmap, configuration file, and output path.
+After the files are downloaded, the data is processed using the stat_var_processor.py script. The script uses various command-line arguments to specify the input data, pvmap, configuration file, and output path.
 
 
 ```bash
@@ -39,6 +39,5 @@ After the files are downloaded, the data is processed using the stat_var_process
 
 This import pipeline is configured to run automatically on a monthly schedule.
 
-- Cron Expression: 30 09 25 * *
+- Cron Expression: 30 08 * * 6
 
-Schedule: The script runs at 9:30 AM on the 25th day of every month.
