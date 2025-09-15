@@ -52,6 +52,17 @@ CSV data is imported into Data Commons through StatisticalVariables and StatVarO
   - Complex: `Count_Person_Female_Hispanic_Age25To64Years` (counts Hispanic females aged 25-64)
     - This counts people who are: Female (gender constraint) + Hispanic (race constraint) + Age 25-64 (age constraint)
 
+**StatVar MCF Format**:
+```mcf
+Node: dcid:Count_Person_Female_Hispanic
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+race: dcs:Hispanic
+statType: dcs:measuredValue
+```
+
 **StatVarObservation** - The actual data points (WHERE, WHEN, VALUE):
 - **Mandatory properties**:
   - `observationAbout` - place DCID (country/USA, geoId/06, etc.)
@@ -64,6 +75,18 @@ CSV data is imported into Data Commons through StatisticalVariables and StatVarO
   - `scalingFactor` (100 for percentages 0-100, 1000000 for millions)
   - `measurementMethod` (CensusACS5yrSurvey, EstimateMethod)
 
+**StatVarObservation MCF Format**:
+```mcf
+Node: dcid:USA_2020_Count_Person
+typeOf: dcs:StatVarObservation
+observationAbout: dcid:country/USA
+observationDate: "2020"
+variableMeasured: dcid:Count_Person
+value: 331449281
+observationPeriod: "P1Y"
+measurementMethod: dcs:CensusACS5yrSurvey
+```
+
 **CSV → Data Commons Transformation**:
 ```csv
 Location, Year, Population, MedianIncome
@@ -74,10 +97,16 @@ California, 2020, 39538223, 75000
 → Creates observations with proper DCIDs:
   - observationAbout=country/USA, observationDate=2020, variableMeasured=Count_Person, value=331449281
   - observationAbout=geoId/06, observationDate=2020, variableMeasured=Count_Person, value=39538223
-<!-- TODO: improve. this might be wrong -->
-**Key Insight**: Each CSV column becomes a StatVar definition; each data cell becomes a StatVarObservation with proper Data Commons DCIDs and property names.
+**Key Insight**:
+- **CSV metric columns** (Population, MedianIncome) → StatVar definitions
+- **CSV location columns** (Location) → observationAbout (place references)
+- **CSV time columns** (Year) → observationDate
+- **Each CSV row** → Multiple StatVarObservations (one per metric column)
+- **Row transformation**: Combines place + time + each metric value with proper DCIDs
 
 ## Dataset Categories for Classification
+
+Use these categories to classify your dataset's domain. This helps Data Commons organize and discover your data within the appropriate topic areas.
 
 ### Main Categories and subcategories
 
