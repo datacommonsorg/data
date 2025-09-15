@@ -1,0 +1,10 @@
+Node: dcid:race
+typeOf: dcs:Property
+name: "race"
+domainIncludes: dcid:MortalityEvent
+
+Node: dcid:causeOfDeath
+typeOf: dcs:Property
+name: "causeOfDeath"
+rangeIncludes: dcid:CauseOfDeathAndDisabilityEnum,dcid:Disease,dcid:ICD10_113CausesOfDeath,dcid:MedicalConditionIncidentTypeEnum
+

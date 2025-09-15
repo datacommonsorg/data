@@ -1,0 +1,353 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=../../statvar_imports/us_cdc/single_race/test_data/*.csv --pv_map=../../statvar_imports/us_cdc/single_race/single_race_pvmap.csv --config_file=../../statvar_imports/us_cdc/single_race/single_race_metadata.csv --output_path=../../statvar_imports/us_cdc/single_race/test_data/UnderlyingCauseofDeath2018_2023SingleRace" on 2025-09-15 11:45:12.899543
+
+Node: dcid:Count_MortalityEvent_AcuteMyocardialInfarction_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:AcuteMyocardialInfarction
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_AllOtherAndUnspecifiedMalignantNeoplasms_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:AllOtherAndUnspecifiedMalignantNeoplasms
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_AllOtherFormsOfChronicIschemicHeartDisease_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:AllOtherFormsOfChronicIschemicHeartDisease
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_AllOtherFormsOfHeartDisease_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:AllOtherFormsOfHeartDisease
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_AlzheimersDisease_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:AlzheimersDisease
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_AtheroscleroticCardiovascularDiseaseSoDescribed_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:AtheroscleroticCardiovascularDisease_SoDescribed
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_CerebrovascularDiseases_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:CerebrovascularDiseases
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_ChronicLowerRespiratoryDiseases_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:ChronicLowerRespiratoryDiseases
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_DiabetesMellitus_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:DiabetesMellitus
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_DiseasesOfHeart_Female_Asian
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:DiseasesOfHeart
+gender: dcid:Female
+race: dcid:Asian
+
+Node: dcid:Count_MortalityEvent_DiseasesOfHeart_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:DiseasesOfHeart
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_Essential_Primary_HypertensionAndHypertensiveRenalDisease_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:Essential(Primary)HypertensionAndHypertensiveRenalDisease
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_HeartFailure_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:HeartFailure
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_HumanImmunodeficiencyVirus_Hiv_Disease_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:HumanImmunodeficiencyVirus(Hiv)Disease
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_HypertensiveHeartAndRenalDisease_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:HypertensiveHeartAndRenalDisease
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_HypertensiveHeartDisease_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:HypertensiveHeartDisease
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_InSituNeoplasmsBenignNeoplasmsAndNeoplasmsOfUncertainOrUnknownBehavior_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:InSituNeoplasms_BenignNeoplasmsAndNeoplasmsOfUncertainOrUnknownBehavior
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_InfluenzaAndPneumonia_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:InfluenzaAndPneumonia
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_IschemicHeartDiseases_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:IschemicHeartDiseases
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_Leukemia_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:Leukemia
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_MajorCardiovascularDiseases_Female_Asian
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MajorCardiovascularDiseases
+gender: dcid:Female
+race: dcid:Asian
+
+Node: dcid:Count_MortalityEvent_MajorCardiovascularDiseases_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MajorCardiovascularDiseases
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_MalignantNeoplasmOfBreast_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MalignantNeoplasmOfBreast
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_MalignantNeoplasmOfOvary_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MalignantNeoplasmOfOvary
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_MalignantNeoplasmOfPancreas_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MalignantNeoplasmOfPancreas
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_MalignantNeoplasmsOfColonRectumAndAnus_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MalignantNeoplasmsOfColon_RectumAndAnus
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_MalignantNeoplasmsOfCorpusUteriAndUterusPartUnspecified_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MalignantNeoplasmsOfCorpusUteriAndUterus_PartUnspecified
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_MalignantNeoplasmsOfLiverAndIntrahepaticBileDucts_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MalignantNeoplasmsOfLiverAndIntrahepaticBileDucts
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_MalignantNeoplasmsOfLymphoidHematopoieticAndRelatedTissue_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MalignantNeoplasmsOfLymphoid_HematopoieticAndRelatedTissue
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_MalignantNeoplasmsOfMeningesBrainAndOtherPartsOfCentralNervousSystem_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MalignantNeoplasmsOfMeninges_BrainAndOtherPartsOfCentralNervousSystem
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_MalignantNeoplasmsOfTracheaBronchusAndLung_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MalignantNeoplasmsOfTrachea_BronchusAndLung
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_MalignantNeoplasms_Female_Asian
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MalignantNeoplasms
+gender: dcid:Female
+race: dcid:Asian
+
+Node: dcid:Count_MortalityEvent_MalignantNeoplasms_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MalignantNeoplasms
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_MultipleMyelomaAndImmunoproliferativeNeoplasms_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:MultipleMyelomaAndImmunoproliferativeNeoplasms
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_OtherChronicLowerRespiratoryDiseases_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:OtherChronicLowerRespiratoryDiseases
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_OtherFormsOfChronicIschemicHeartDisease_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:OtherFormsOfChronicIschemicHeartDisease
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_OtherHeartDiseases_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:OtherHeartDiseases
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_Pneumonia_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:Pneumonia
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_MortalityEvent_Septicemia_Female_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:Septicemia
+gender: dcid:Female
+race: dcid:BlackOrAfricanAmericanAlone
+

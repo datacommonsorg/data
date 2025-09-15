@@ -1,0 +1,9 @@
+Node: E:UnderlyingCauseofDeath2018_2023SingleRace->E0
+observationAbout: C:UnderlyingCauseofDeath2018_2023SingleRace->observationAbout
+observationDate: C:UnderlyingCauseofDeath2018_2023SingleRace->observationDate
+observationPeriod: C:UnderlyingCauseofDeath2018_2023SingleRace->observationPeriod
+value: C:UnderlyingCauseofDeath2018_2023SingleRace->value
+unit: C:UnderlyingCauseofDeath2018_2023SingleRace->unit
+variableMeasured: C:UnderlyingCauseofDeath2018_2023SingleRace->variableMeasured
+measurementMethod: C:UnderlyingCauseofDeath2018_2023SingleRace->measurementMethod
+typeOf: dcs:StatVarObservation
