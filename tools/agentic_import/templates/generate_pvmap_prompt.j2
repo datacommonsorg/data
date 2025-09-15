@@ -142,58 +142,142 @@ Use these categories to classify your dataset's domain. This helps Data Commons 
 10. **Transportation** - Commute, vehicles, transport modes
 
 
-## Statvar processor User Guide
+## StatVar Processor: Converting CSV Data to Data Commons Format
 
-- The source data is processed into `StatisticalVariable` and
-  `StatVarObservation`.
-- This processing is done using the `statvar_processor` script, available at:
-  https://raw.githubusercontent.com/datacommonsorg/data/refs/heads/master/tools/statvar_importer/stat_var_processor.py.
-- The `statvar_processor` script requires a `pvmap` config file.
-- The `pvmap` config file maps strings found in source data (e.g., column
-  headers and values) to `property:values` in the DataCommons schema.
-- The `statvar_processor` script collects all applicable `property:values` for
-  a cell by looking up the `pvmap` using:
-  - The strings in the cell’s content.
-  - The cell's column or row headers.
-  - Substrings of these (delimited by spaces).
-- All collected `property:values` are then segregated into
-  `StatisticalVariable` and `StatVarObservation`.
-- Any property that cannot be part of a `StatVarObservation` is added to the
-  `StatisticalVariable`.
+The statvar_processor transforms CSV data into Data Commons entities. Each numeric cell in the input CSV becomes a StatVarObservation linked to a StatisticalVariable.
 
-## `stat_var_processor.py` Script
+### Overview
 
-The `stat_var_processor.py` script imports statistical data into Data Commons.
+**Input**: CSV file with numeric data values
+**Output**: Three files for Data Commons import:
+- MCF file with StatisticalVariable definitions
+- CSV file with observations
+- TMCF file mapping CSV columns to properties
 
-**Function:**
+**Core Mechanism**: A pvmap (property-value map) in CSV format that maps strings from the input to Data Commons properties.
 
-- Converts source data into `StatisticalVariable` (StatVar) and
-  `StatVarObservation` (SVObs) entities.
-- Processes input data files based on a set of configurations and a
-  property-value map.
-- Generates MCF files for StatVars and CSV/TMCF files for SVObs.
+### Processing Model: Cell-by-Cell **Transformation**
 
-### Usage
+For each numeric cell, the processor:
 
-The script is run from the command line:
+1. **Gathers context strings** from:
+   - The cell's column header (split by delimiters like "!!")
+   - The cell's row headers
+   - File-level defaults
+   - The cell value itself
 
-```shell
-python3 stat_var_processor.py --input_data=<path-to-csv-or-other-input> \
-    --pv_map=<column-pv-map-file> \
-    --output_path=<output-prefix> \
-    --config_file=<path-to-config-file>
+2. **Looks up each string in pvmap** to collect property-value pairs:
+   - Each string can map to multiple properties
+   - Properties from more specific contexts override general ones
+   - Priority: cell → column → row → section → file
+
+3. **Separates properties**:
+   - **Observation properties**: value, observationAbout, observationDate, measurementMethod
+   - **StatVar properties**: Everything else (populationType, measuredProperty, gender, age, etc.)
+
+4. **Generates output**:
+   - Creates/reuses StatVar with unique property combination
+   - Creates observation linking to that StatVar
+
+### Complete Example: US Census Data
+
+**Input CSV** (`census_data.csv`):
+```csv
+"Label (Grouping)","Total:","Total:!!Male:","Total:!!Male:!!Under 5 years","Total:!!Male:!!5 to 9 years"
+"Alabama","","","",""
+"    Estimate","4,893,186","2,365,734","149,579","150,937"
+"Alaska","","","",""
+"    Estimate","736,990","384,653","26,684","26,976"
 ```
 
-**Note**: The CLI above is for reference. In this workflow, encode all processor configuration in `metadata.csv` and invoke via the wrapper script; do not add extra CLI flags beyond inputs handled by the wrapper.
+**PVMap Configuration** (`pvmap.csv`):
+```csv
+String,Property,Value
+"census_data.csv",observationDate,"2020"
+"census_data.csv",measurementMethod,"dcs:CensusACS5yrSurvey"
+"Total:",populationType,"dcs:Person"
+"Total:",measuredProperty,"dcs:count"
+"Male:",gender,"dcs:Male"
+"Under 5 years",age,"[- 5 Years]"
+"5 to 9 years",age,"[5 9 Years]"
+"Alabama",observationAbout,"geoId/01"
+"Alaska",observationAbout,"geoId/02"
+"Estimate",_IGNORE_,"true"
+```
 
-This will generate:
+### Walkthrough: Processing Cell "149,579"
 
-- `<output-prefix>_stat_vars.mcf`: MCF file with StatVar definitions
-  (configurable name via `output_statvar_mcf`).
-- `<output-prefix>.csv`: CSV file with StatVarObservations (configurable name
-  via `output_csv`).
-- `<output-prefix>.tmcf`: TMCF file mapping CSV columns to StatVar PVs
-  (configurable name via `output_tmcf_file`).
+This cell is at row "Alabama/Estimate", column "Total:!!Male:!!Under 5 years".
+
+**Step 1: Gather Context**
+- File: `census_data.csv`
+- Row headers: "Alabama", "Estimate"
+- Column parts: "Total:", "Male:", "Under 5 years" (split on "!!")
+- Cell value: 149579
+
+**Step 2: PVMap Lookups**
+```
+"census_data.csv" → observationDate="2020", measurementMethod="dcs:CensusACS5yrSurvey"
+"Alabama" → observationAbout="geoId/01"
+"Estimate" → (ignored via _IGNORE_)
+"Total:" → populationType="dcs:Person", measuredProperty="dcs:count"
+"Male:" → gender="dcs:Male"
+"Under 5 years" → age="[- 5 Years]"
+```
+
+**Step 3: Collect & Separate Properties**
+- **All collected**: observationDate, measurementMethod, observationAbout, populationType, measuredProperty, gender, age, value=149579
+- **Observation properties**: observationDate="2020", measurementMethod="dcs:CensusACS5yrSurvey", observationAbout="geoId/01", value=149579
+- **StatVar properties**: populationType="dcs:Person", measuredProperty="dcs:count", gender="dcs:Male", age="[- 5 Years]"
+
+**Step 4: Generate Output**
+
+**StatVar (MCF)**:
+```mcf
+Node: dcid:Count_Person_Male_Under5Years
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+gender: dcs:Male
+age: [- 5 Years]
+```
+
+**Observation (CSV)**:
+```csv
+observationAbout,value,variableMeasured
+geoId/01,149579,Count_Person_Male_Under5Years
+```
+
+**Template (TMCF)**:
+```mcf
+Node: E:output->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:output->observationAbout
+value: C:output->value
+variableMeasured: C:output->variableMeasured
+observationDate: "2020"
+measurementMethod: dcs:CensusACS5yrSurvey
+```
+
+### Key Concepts
+
+- **Multiple observations per row**: Each numeric column creates a separate observation
+- **Shared StatVars**: Cells with identical StatVar properties share the same StatVar
+- **Delimiter handling**: Headers like "Total:!!Male:!!Under 5 years" split into parts
+- **Property precedence**: More specific contexts override general ones
+- **Required for observations**: value, observationAbout, observationDate, variableMeasured
+
+### Script Usage
+
+```shell
+python3 stat_var_processor.py --input_data=<input.csv> \
+    --pv_map=<pvmap.csv> \
+    --output_path=<output-prefix> \
+    --config_file=<config.json>
+```
+
+**Note**: In this workflow, encode all processor configuration in `metadata.csv` and invoke via the wrapper script.
 
 ### Configuration
 
