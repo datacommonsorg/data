@@ -718,6 +718,51 @@ Configure metadata.csv to improve resolution:
 - place_type,"City,County" (filter by DC place types)
 - places_within,"country/USA" (restrict to specific regions)
 
+**3. Understanding #ignore vs. Empty Mapping for Cell Values**
+
+**CRITICAL WARNING**: `#ignore` drops entire rows containing that property. Use `#ignore` ONLY when you want to completely skip a row from processing.
+
+To skip individual cell values without dropping the entire row, use empty mapping:
+
+**Format for skipping cell values:**
+```
+<COLUMN_NAME>:<VALUE>,<IntermediateProperty>,''
+```
+
+This creates an unused intermediate property, effectively skipping that cell value while preserving the row.
+
+**❌ INCORRECT (drops entire row):**
+```csv
+# This will drop any row where status code is M
+OBS_STATUS:M,#ignore,Missing value
+```
+
+**✅ CORRECT (skips only the cell value):**
+```csv
+# This creates unused MissingValue property, row is preserved
+OBS_STATUS:M,MissingValue,''
+```
+
+**More Examples:**
+
+Skipping missing geographic codes:
+```csv
+# Skip cells with 'N/A' location codes
+LOCATION:N/A,UnknownLocation,''
+```
+
+Skipping placeholder values:
+```csv
+# Skip cells with 'TBD' status
+STATUS:TBD,PendingStatus,''
+```
+
+**When to use `#ignore` (drops entire row):**
+```csv
+# Drop rows marked as test data
+ROW_TYPE:TEST,#ignore,Test row - exclude completely
+```
+
 **BASIC GUIDELINES**
 
 1.  populationType. Examples populationTypes are Person, EconomicActivity, Debt.
@@ -1416,8 +1461,8 @@ The primary observation value in SDMX:
     * `E,measurementMethod,Estimated`
     * `P,measurementMethod,Provisional`
     * `F,measurementMethod,Forecast`
-    * `M,#ignore,Missing value` (for missing data)
-    * `NA,#ignore,Not applicable`
+    * `OBS_STATUS:M,MissingValue,''` (skip cell value - creates unused intermediate property)
+    * `OBS_STATUS:NA,NotApplicable,''` (skip cell value - creates unused intermediate property)
 
 * **BASE_PER**: Base period for indices
   * Map to `measurementMethod` with base year
@@ -1566,8 +1611,8 @@ A,observationStatus,Normal,,,,
 E,measurementMethod,Estimated,,,,
 P,measurementMethod,Provisional,,,,
 F,measurementMethod,Forecast,,,,
-M,#ignore,Missing value,,,,
-NA,#ignore,Not applicable,,,,
+OBS_STATUS:M,MissingValue,'',,,,
+OBS_STATUS:NA,NotApplicable,'',,,,
 ```
 
 {%- endif %}
@@ -1661,7 +1706,7 @@ While generating the files, ensure:
 - [ ] **Place references follow resolution workflow** - Known DCIDs (geoId/06, country/USA), contextual format for complex places ("{City}, {State}"), or {Data} for auto-resolution
 - [ ] **Place resolution metadata configured** - place_type and places_within in metadata.csv if needed for disambiguation
 - [ ] **Unit measures follow DC conventions** - Use standard Data Commons units
-- [ ] **Special/missing values mapped appropriately** - Use #ignore property to skip entire rows with missing/invalid data (any row containing #ignore will be completely skipped)
+- [ ] **Special/missing values mapped appropriately** - Use `#ignore` ONLY to drop entire rows. For skipping individual cell values, use empty mapping: `column:value,IntermediateProperty,''` (preserves row, skips cell)
 
 #### Metadata CSV Validation:
 - [ ] **metadata.csv covers processor flags** - Includes required parameters (e.g., `header_rows`)
@@ -1679,7 +1724,7 @@ For SDMX datasets, also ensure:
 - [ ] **All dimension codes are mapped** - Check `<structure:Constraints>` if present, otherwise verify all used codes from data
 - [ ] **Time period format is consistent with frequency** - YYYY (annual), YYYY-MM (monthly/quarterly end), YYYY-MM-DD (daily)
 - [ ] **Unit measures are DC-compatible** - Use USDollar not USD, Percent not PERCENT, Euro not EUR
-- [ ] **Missing value codes are handled** - Map M, NA, ":", "-" to `#ignore`
+- [ ] **Missing value codes are handled** - Map M, NA, ":", "-" using empty mappings (e.g., `COLUMN:M,MissingValue,''`) to skip cell values without dropping rows
 - [ ] **Scaling factors are correctly applied** - UNIT_MULT mapped to `scalingFactor` (3→1000, 6→1000000, 9→1000000000)
 - [ ] **Each dimension combination produces unique StatVars** - No duplicate place/date/variable combinations
 
