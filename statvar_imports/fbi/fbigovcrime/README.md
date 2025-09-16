@@ -29,7 +29,7 @@ If processing from current import folder :
 Semi Autorefresh:
 Upload final files to:
 
-     * `gs://unresolved_mcf/us_eda/latest/`
+     * `gs://unresolved_mcf/fbi/city/latest`
 Trigger `data/import-automation/executor/run_import.sh` manually for test/prod ingestion 
 
 
