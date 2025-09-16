@@ -15,7 +15,6 @@
 # limitations under the License.
 
 import copy
-import json
 import os
 import platform
 import shutil
@@ -33,9 +32,14 @@ from jinja2 import Environment, FileSystemLoader
 FLAGS = flags.FLAGS
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-flags.DEFINE_string('data_config', None,
-                    'Path to import config JSON file (required)')
-flags.mark_flag_as_required('data_config')
+flags.DEFINE_list('input_data', [], 'List of input data file paths (required)')
+flags.mark_flag_as_required('input_data')
+
+flags.DEFINE_list('input_metadata', [],
+                  'List of input metadata file paths (optional)')
+
+flags.DEFINE_boolean('sdmx_dataset', False,
+                     'Whether the dataset is in SDMX format (default: False)')
 
 flags.DEFINE_boolean('dry_run', False,
                      'Generate prompt only without calling Gemini CLI')
@@ -152,7 +156,7 @@ class PVMapGenerator:
         )
         if not self._config.enable_sandboxing:
             print(
-                "⚠️  WARNING: Sandboxing is disabled. Gemini will run without safety restrictions."
+                "WARNING: Sandboxing is disabled. Gemini will run without safety restrictions."
             )
         print("=" * 60)
 
@@ -333,16 +337,12 @@ class PVMapGenerator:
         return output_file
 
 
-def load_data_config(config_path: str) -> DataConfig:
-    """Load import configuration from JSON file."""
-    with open(config_path, 'r') as f:
-        data = json.load(f)
-    return DataConfig(**data)
-
-
 def prepare_config() -> Config:
-    """Prepare comprehensive configuration from flags and data config file."""
-    data_config = load_data_config(FLAGS.data_config)
+    """Prepare comprehensive configuration from individual flags."""
+    data_config = DataConfig(input_data=FLAGS.input_data or [],
+                             input_metadata=FLAGS.input_metadata or [],
+                             is_sdmx_dataset=FLAGS.sdmx_dataset)
+
     return Config(data_config=data_config,
                   dry_run=FLAGS.dry_run,
                   maps_api_key=FLAGS.maps_api_key,
