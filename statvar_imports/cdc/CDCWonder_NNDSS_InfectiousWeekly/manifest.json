@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "CDCWonder_NNDSS_InfectiousWeekly",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://data.cdc.gov/api/views/x9gk-5huc/rows.csv?accessType=DOWNLOAD&api_foundry=true",
+            "provenance_description": "Notifiable Infectious Diseases Data: Weekly tables from CDC WONDER which has the incident counts of different infectious diseases per week that are reported by the 50 states, New York City, the District of Columbia, and the U.S. territories.",
+            "scripts": [
+                "preprocess.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/rows.csv --pv_map='nndss_weekly_pvmap.csv' --config_file=nndss_weekly_metadata.csv  --output_path=output/nndss_weekly"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/nndss_weekly_output.tmcf",
+                    "cleaned_csv": "output/nndss_weekly_output.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/rows.csv"
+            ],
+            "cron_schedule": "00 11 1,15 * *"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/dhhhanushree/cdc_nndss_weekly/data/statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/testdata/nndss_weekly_input.csv --pv_map=/usr/local/google/home/dhhhanushree/cdc_nndss_weekly/data/statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/nndss_weekly_pvmap.csv --config_file=/usr/local/google/home/dhhhanushree/cdc_nndss_weekly/data/statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/nndss_weekly_metadata.csv --output_path=/usr/local/google/home/dhhhanushree/cdc_nndss_weekly/data/statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/testdata/nnds_weekly_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2025-09-16 07:12:15.243994
+
+Node: dcid:Count_MedicalConditionIncident_ConditionChikungunya
+typeOf: dcid:StatisticalVariable
+name: "Count of Chikungunya virus disease incidents"
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Chikungunya
+
