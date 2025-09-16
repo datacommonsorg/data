@@ -1,36 +1,23 @@
 {
-  {# This block defines how your output.csv file will be processed. #}
+  "includeInputSubdirs": false,  
   "inputFiles": {
-    "output.csv": {
+    "{{ output_filename }}": {
       {# The name of the provenance defined in the "sources" block below. Required. #}
       "provenance": "<YOUR_PROVENANCE_NAME>",
 
       {# Specifies that the CSV is in "variable-per-row" (long) format, which is required for explicit schemas. #}
       "format": "variablePerRow",
 
-      {# Maps your CSV column headers to the standard Data Commons names.
-         Required if your headers are different from the defaults ("entity", "variable", "date", "value"). #}
-      "columnMappings": {
-        "variable": "<COLUMN_HEADER_FOR_VARIABLE_DCID>",
-        "entity": "<COLUMN_HEADER_FOR_ENTITY_DCID>",
-        "date": "<COLUMN_HEADER_FOR_DATE>",
-        "value": "<COLUMN_HEADER_FOR_OBSERVED_VALUE>",
-        "unit": "NAME",
-        "scalingFactor": "NAME",
-        "measurementMethod": "NAME",
-        "observationPeriod": "NAME"
-      }
+      {# Maps your CSV column headers to the standard Data Commons names. #}         
+      "columnMappings": {{ column_mappings | tojson(indent=8) }}
     }
   },
 
-  {# (Recommended) When using an explicit schema, this groups your custom
-     variables together in the Statistical Variable Explorer UI for better organization. #}
   "groupStatVarsByProperty": true,
 
   {# This section defines the sources and provenances for your data. Required. #}
   "sources": {
-    "<YOUR_SOURCE_NAME>": { {# e.g., "My Health Data Inc." #}
-      {# The main URL for the data source. #}
+    "<YOUR_SOURCE_NAME>": {       
       "url": "<URL_OF_YOUR_DATA_SOURCE>",
       "provenances": {
         {# This name must match the "provenance" value in the "inputFiles" block above. #}
