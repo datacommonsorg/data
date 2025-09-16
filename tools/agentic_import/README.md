@@ -89,6 +89,8 @@ export WORKING_DIR=$(pwd)
 # └── ... (other metadata files)
 ```
 
+> **Note**: For downloading SDMX data and metadata files, see the [SDMX CLI documentation](../sdmx_import/README.md).
+
 ## Data Import Process
 
 **IMPORTANT:** Run all the following steps from within your working directory with the Python virtual environment activated.

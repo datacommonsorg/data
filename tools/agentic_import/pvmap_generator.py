@@ -32,7 +32,8 @@ from jinja2 import Environment, FileSystemLoader
 FLAGS = flags.FLAGS
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-flags.DEFINE_list('input_data', [], 'List of input data file paths (required)')
+flags.DEFINE_list('input_data', None,
+                  'List of input data file paths (required)')
 flags.mark_flag_as_required('input_data')
 
 flags.DEFINE_list('input_metadata', [],
