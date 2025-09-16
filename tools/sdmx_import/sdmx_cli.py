@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 sdmx_cli.py
 
@@ -27,7 +26,6 @@ from absl import app
 from absl import flags
 from absl import logging
 from sdmx_client import SdmxClient
-
 
 # Private command to handler mapping - single source of truth for commands
 _COMMAND_HANDLERS = {
@@ -261,8 +259,6 @@ def main(argv) -> None:
 
     # Route to appropriate handler using the mapping
     _COMMAND_HANDLERS[command]()
-
-
 
 
 if __name__ == "__main__":

@@ -36,6 +36,7 @@ flags.DEFINE_list('input_data', None,
                   'List of input data file paths (required)')
 flags.mark_flag_as_required('input_data')
 
+# TODO: Allow users to provide original source path and auto-generate sample data files internally
 flags.DEFINE_list('input_metadata', [],
                   'List of input metadata file paths (optional)')
 
@@ -62,6 +63,10 @@ flags.DEFINE_boolean(
     'Enable sandboxing for Gemini CLI (default: True on macOS, False elsewhere)'
 )
 
+flags.DEFINE_string(
+    'output_path', 'output/output',
+    'Output path prefix for all generated files (default: output/output)')
+
 
 @dataclass
 class DataConfig:
@@ -80,6 +85,7 @@ class Config:
     max_iterations: int = 10
     skip_confirmation: bool = False
     enable_sandboxing: bool = False
+    output_path: str = 'output/output'
 
 
 class PVMapGenerator:
@@ -105,6 +111,16 @@ class PVMapGenerator:
                 self._validate_and_convert_path(path)
                 for path in self._config.data_config.input_metadata
             ]
+
+        # Parse output_path into directory and basename components
+        # Relative directory
+        self._output_dir = os.path.dirname(self._config.output_path) or '.'
+        # Relative name
+        self._output_basename = os.path.basename(self._config.output_path)
+
+        # Create output directory if it doesn't exist
+        output_full_dir = os.path.join(self._working_dir, self._output_dir)
+        os.makedirs(output_full_dir, exist_ok=True)
 
         self._datacommons_dir = self._initialize_datacommons_dir()
 
@@ -152,6 +168,9 @@ class PVMapGenerator:
         )
         print(f"Generated prompt: {prompt_file}")
         print(f"Working directory: {self._working_dir}")
+        print(f"Output path: {self._config.output_path}")
+        print(f"Output directory: {self._output_dir}")
+        print(f"Output basename: {self._output_basename}")
         print(
             f"Sandboxing: {'Enabled' if self._config.enable_sandboxing else 'Disabled'}"
         )
@@ -323,7 +342,13 @@ class PVMapGenerator:
                 self._config.max_iterations,
             'gemini_run_id':
                 self.
-                _gemini_run_id  # Pass the gemini run ID for backup tracking
+                _gemini_run_id,  # Pass the gemini run ID for backup tracking
+            'output_path':
+                self._config.output_path,  # Full path for statvar processor
+            'output_dir':
+                self._output_dir,  # Directory for pvmap/metadata files
+            'output_basename':
+                self._output_basename  # Base name for pvmap/metadata files
         }
 
         # Render template with these variables
@@ -350,10 +375,11 @@ def prepare_config() -> Config:
                   dc_api_key=FLAGS.dc_api_key,
                   max_iterations=FLAGS.max_iterations,
                   skip_confirmation=FLAGS.skip_confirmation,
-                  enable_sandboxing=FLAGS.enable_sandboxing)
+                  enable_sandboxing=FLAGS.enable_sandboxing,
+                  output_path=FLAGS.output_path)
 
 
-def main(argv):
+def main(_):
     """Main function for PV Map generator."""
     config = prepare_config()
     logging.info("Loaded config with %d data files and %d metadata files",
