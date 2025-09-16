@@ -1,4 +1,17 @@
-#!/usr/bin/env python3
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 """
 sdmx_cli.py
 
@@ -7,17 +20,14 @@ Provides a simple interface to fetch data and metadata from SDMX REST APIs.
 """
 
 import os
-import sys
 import urllib.parse
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 
 from absl import app
 from absl import flags
 from absl import logging
 from sdmx_client import SdmxClient
 
-# Private global command variable
-_COMMAND = None
 
 # Private command to handler mapping - single source of truth for commands
 _COMMAND_HANDLERS = {
@@ -212,37 +222,8 @@ def setup_logging() -> None:
 
 def main(argv) -> None:
     """Main entry point for the CLI tool."""
-    # Command has already been extracted from argv
-    if len(argv) > 1:
-        raise ValueError(f"Unexpected arguments: {argv[1:]}")
-
-    # Setup logging
-    setup_logging()
-
-    # Validate command was set
-    if _COMMAND is None:
-        raise ValueError(
-            f"No command specified. Use: {', '.join(_COMMAND_HANDLERS.keys())}")
-
-    # Validate required flags for the command
-    validate_required_flags_for_command(_COMMAND)
-
-    # Route to appropriate handler using the mapping
-    if _COMMAND in _COMMAND_HANDLERS:
-        _COMMAND_HANDLERS[_COMMAND]()
-    else:
-        raise ValueError(f"Unknown command: {_COMMAND}")
-
-
-def extract_command_from_argv() -> Optional[str]:
-    """
-    Extract command from sys.argv before absl processes it.
-    Removes command from argv and returns it.
-
-    Returns:
-        The command string if valid, None if validation fails
-    """
-    if len(sys.argv) < 2:
+    # Check if command was provided
+    if len(argv) < 2:
         usage_msg = (
             "Usage: sdmx_cli.py <command> [flags]\n"
             f"Commands: {', '.join(_COMMAND_HANDLERS.keys())}\n\n"
@@ -262,22 +243,27 @@ def extract_command_from_argv() -> Optional[str]:
             "    --param=startPeriod:2022 \\\n"
             "    --output_path=data.csv")
         print(usage_msg)
-        return None
+        return
 
-    command = sys.argv[1]
+    command = argv[1]
 
+    # Validate command
     if command not in _COMMAND_HANDLERS:
         print(f"Unknown command '{command}'. "
               f"Valid commands: {', '.join(_COMMAND_HANDLERS.keys())}")
-        return None
+        return
 
-    # Remove command from argv so absl.flags doesn't see it
-    sys.argv.pop(1)
-    return command
+    # Setup logging
+    setup_logging()
+
+    # Validate required flags for the command
+    validate_required_flags_for_command(command)
+
+    # Route to appropriate handler using the mapping
+    _COMMAND_HANDLERS[command]()
+
+
 
 
 if __name__ == "__main__":
-    # Extract command before absl.app.run() processes argv
-    _COMMAND = extract_command_from_argv()
-    if _COMMAND is not None:
-        app.run(main)
+    app.run(main)
