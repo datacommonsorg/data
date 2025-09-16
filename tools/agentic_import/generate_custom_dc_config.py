@@ -117,7 +117,7 @@ class ConfigGenerator:
                 return [header.strip() for header in headers]
 
         except Exception as e:
-            raise ValueError(f"Error reading CSV headers: {str(e)}")
+            raise ValueError("Error reading CSV headers") from e
 
     def validate_required_columns(self, headers: List[str]) -> None:
         """Validates that all required columns are present in the CSV."""
@@ -193,7 +193,7 @@ class ConfigGenerator:
                 f"Configuration written to: {self._output_config_path}")
 
         except Exception as e:
-            raise ValueError(f"Error writing config file: {str(e)}")
+            raise ValueError("Error writing config file") from e
 
     def run(self) -> None:
         """Main execution method."""
@@ -228,12 +228,8 @@ def main(argv):
     if len(argv) > 1:
         raise app.UsageError('Too many command-line arguments.')
 
-    try:
-        generator = ConfigGenerator(FLAGS.input_csv, FLAGS.output_config)
-        generator.run()
-
-    except Exception as e:
-        logging.error(f"Error: {str(e)}")
+    generator = ConfigGenerator(FLAGS.input_csv, FLAGS.output_config)
+    generator.run()
 
 
 if __name__ == '__main__':
