@@ -4,22 +4,25 @@ This guide describes the complete process for importing CSV data into Data Commo
 
 ## Table of Contents
 
-- [Prerequisites](#prerequisites)
-- [Setup](#setup)
-- [Directory Structure](#directory-structure)
-- [Data Import Process](#data-import-process)
-  - [Step 1: Repository Setup](#step-1-repository-setup)
-  - [Step 2: Environment Setup](#step-2-environment-setup)
-  - [Step 3: Working Directory Preparation](#step-3-working-directory-preparation)
-  - [Step 4: Data Sampling](#step-4-data-sampling)
-  - [Step 5: Configuration File Creation](#step-5-configuration-file-creation)
-  - [Step 6: PV Map Generation](#step-6-pv-map-generation)
-  - [Step 7: Data Processing](#step-7-data-processing)
-  - [Step 8: Custom DC Configuration (Optional)](#step-8-custom-dc-configuration-optional)
-  - [Step 9: Final Import](#step-9-final-import)
-- [Validation](#validation)
-- [Troubleshooting](#troubleshooting)
-- [Examples](#examples)
+- [Agentic Import Tool for Data Commons](#agentic-import-tool-for-data-commons)
+  - [Table of Contents](#table-of-contents)
+  - [Prerequisites](#prerequisites)
+    - [Required Tools](#required-tools)
+  - [Setup](#setup)
+    - [Step 1: Repository Setup](#step-1-repository-setup)
+    - [Step 2: Environment Setup](#step-2-environment-setup)
+    - [Step 3: Working Directory Preparation](#step-3-working-directory-preparation)
+  - [Data Import Process](#data-import-process)
+    - [Step 4: Data Sampling](#step-4-data-sampling)
+    - [Step 5: PV Map Generation](#step-5-pv-map-generation)
+    - [Step 6: Data Processing](#step-6-data-processing)
+  - [Custom Data Commons Import (Optional)](#custom-data-commons-import-optional)
+    - [Step 7: Generate Custom DC Configuration](#step-7-generate-custom-dc-configuration)
+    - [Step 8: Run Custom DC Import](#step-8-run-custom-dc-import)
+  - [Directory Structure](#directory-structure)
+  - [Debugging](#debugging)
+    - [Gemini CLI Debugging](#gemini-cli-debugging)
+    - [Log Structure](#log-structure)
 
 ## Prerequisites
 
@@ -27,17 +30,16 @@ Before starting the import process, ensure you have the following installed and 
 
 ### Required Tools
 1. **Gemini CLI**: Install the Gemini command-line interface
-   ```bash
-   # Installation instructions vary by platform
-   # Refer to Gemini CLI documentation for your system
-   ```
+   - Installation instructions vary by platform
+   - Refer to: https://github.com/google-gemini/gemini-cli
 
 2. **Data Commons API Key**: Set up your DC_API_KEY environment variable
+   - Refer to: https://docs.datacommons.org/api/#obtain-an-api-key
    ```bash
    export DC_API_KEY="your_data_commons_api_key_here"
    ```
 
-3. **Python Environment**: Python 3.7+ with required dependencies
+3. **Python Environment**: Python 3.11+ with required dependencies
 
 ## Setup
 
@@ -47,7 +49,7 @@ Clone the Data Commons data repository and set up environment variables:
 
 ```bash
 # Clone the repository
-git clone <data-commons-data-repo-url>
+git clone https://github.com/datacommonsorg/data.git
 export DC_DATA_REPO_PATH="/path/to/your/cloned/data/repo"
 cd $DC_DATA_REPO_PATH
 ```
@@ -62,6 +64,9 @@ Set up the Python virtual environment:
 
 # Activate the virtual environment
 source .env/bin/activate
+
+# Note: Use this Python environment for all subsequent commands
+# as it has all required dependencies installed
 ```
 
 ### Step 3: Working Directory Preparation
@@ -79,11 +84,22 @@ export WORKING_DIR=$(pwd)
 # working_directory/
 # ├── input_data.csv
 # ├── metadata_file1.json
-# ├── metadata_file2.yaml
+# ├── metadata_file2.xml
+# ├── metadata_file3.txt
 # └── ... (other metadata files)
 ```
 
 ## Data Import Process
+
+**IMPORTANT:** Run all the following steps from within your working directory with the Python virtual environment activated.
+
+```bash
+# Confirm you are in the working directory
+cd $WORKING_DIR
+
+# Confirm virtual environment is activated
+source $DC_DATA_REPO_PATH/.env/bin/activate
+```
 
 ### Step 4: Data Sampling
 
@@ -102,104 +118,96 @@ python $DC_DATA_REPO_PATH/tools/statvar_importer/data_sampler.py \
 - `--sampler_output`: Path where the sample will be saved
 - `--max_rows`: Maximum number of rows to sample (recommended: 30 for testing)
 
-### Step 5: Configuration File Creation
+### Step 5: PV Map Generation
 
-Create a configuration file for the PV map generator based on the sample data configuration template:
+Generate the PV map and metadata files using the pvmap_generator with command-line flags. This will use Gemini CLI to read sample data, generate pvmap.csv, metadata.csv and convert sample data to Data Commons observations as output.csv:
 
-```bash
-# Copy and modify the sample configuration
-cp $DC_DATA_REPO_PATH/tools/agentic_import/testdata/sample_data_config.json \
-   $WORKING_DIR/data_config.json
-```
+**WARNING:** This will run Gemini CLI in YOLO mode on Linux (unrestricted access), but will use sandboxing on macOS. Be careful when running on Linux systems.
 
-Edit `$WORKING_DIR/data_config.json` to include your actual file paths:
-
-```json
-{
-  "input_data": [
-    "/path/to/working/directory/sample_data.csv"
-  ],
-  "input_metadata": [
-    "/path/to/working/directory/metadata_file1.json",
-    "/path/to/working/directory/metadata_file2.yaml"
-  ],
-  "is_sdmx_dataset": true
-}
-```
-
-### Step 6: PV Map Generation
-
-Generate the PV map and metadata files using the pvmap_generator:
+**NOTE:** For troubleshooting Gemini CLI issues, refer to the [Debugging](#debugging) section.
 
 ```bash
 # Generate PV map and metadata
 python $DC_DATA_REPO_PATH/tools/agentic_import/pvmap_generator.py \
-  --config_file="$WORKING_DIR/data_config.json" \
-  --output_dir="$WORKING_DIR"
+  --input_data="sample_data.csv" \
+  --input_metadata="metadata_file1.json,metadata_file2.xml,metadata_file3.txt" \
+  --is_sdmx_dataset=true 
 ```
+
+**Parameters:**
+- `--input_data`: Path to your sample CSV data file
+- `--input_metadata`: Comma-separated list of metadata file paths
+- `--is_sdmx_dataset`: Set to true if working with SDMX dataset
+
 
 This command will generate:
 - `pvmap.csv`: Property-Value mapping file
 - `metadata.csv`: Metadata configuration file
 - `output/` directory containing:
-  - `output.csv`: Processed data file
+  - `output.csv`: Sample input data converted to Data Commons observations (each row represents one Data Commons observation)
   - `output.tmcf`: Template MCF file
   - `output_stat_vars.mcf`: Statistical variables MCF file
 
-**Validation:** Check that `output.csv` has proper formatting and all required fields.
+**Validation:**
+- Check that `output.csv` contains Data Commons observations with valid format for sample data
+- Validate new StatVar schema in `output_stat_vars.mcf`
 
-### Step 7: Data Processing
 
-Process the actual data using the generated PV map and metadata:
+### Step 6: Data Processing
+
+Process the actual data using the generated PV map and metadata.
+
+**NOTE:** This will generate output in the `final_output/` directory. 
 
 ```bash
-# Set environment variables for the processor
-export INPUT_DATA="$WORKING_DIR/actual_input_data.csv"  # Your full dataset
-export SCRIPT_DIR="$DC_DATA_REPO_PATH/tools/agentic_import"
-export PYTHON_INTERPRETER="python"
-export PROCESSOR_LOG="$WORKING_DIR/processor.log"
-
 # Run the stat var processor
-"$PYTHON_INTERPRETER" "$SCRIPT_DIR/statvar_importer/stat_var_processor.py" \
-  --input_data="$INPUT_DATA" \
-  --pv_map="$WORKING_DIR/pvmap.csv" \
-  --config_file="$WORKING_DIR/metadata.csv" \
-  --generate_statvar_name=True \
-  --output_counters="$WORKING_DIR/.datacommons/output_counters.log" \
-  --output_path="$WORKING_DIR/output/output" > "$PROCESSOR_LOG" 2>&1
+python "$DC_DATA_REPO_PATH/tools/statvar_importer/stat_var_processor.py" \
+  --input_data="input_data.csv" \
+  --pv_map="pvmap.csv" \
+  --config_file="metadata.csv" \
+  --generate_statvar_name=True \  
+  --output_path="final_output/output" > "processor.log" 2>&1
 ```
 
-**Validation:** Verify that `output/output.csv` contains properly formatted data with all required fields.
 
-### Step 8: Custom DC Configuration (Optional)
+**Validation:**
+- Check that `output.csv` contains Data Commons observations with valid format for sample data
+- Validate new StatVar schema in `output_stat_vars.mcf`
 
-If importing to a custom Data Commons instance, generate the custom DC configuration:
+## Custom Data Commons Import (Optional)
+
+If importing to a custom Data Commons instance, follow these steps:
+
+### Step 7: Generate Custom DC Configuration
+
+Generate the custom DC configuration:
 
 ```bash
 # Generate custom DC configuration
 python $DC_DATA_REPO_PATH/tools/agentic_import/generate_custom_dc_config.py \
-  --input_csv="$WORKING_DIR/output/output.csv" \
-  --output_config="$WORKING_DIR/output/config.json"
+  --input_csv="final_output/output.csv" \
+  --output_config="final_output/config.json"
 ```
 
 **Parameters:**
 - `--input_csv`: Path to the processed output CSV file
 - `--output_config`: Path where the custom DC config JSON will be saved
 
-### Step 9: Final Import
+### Step 8: Run Custom DC Import
 
-Execute the final import process:
+1. **Navigate to the final_output directory:**
+   ```bash
+   cd final_output
+   ```
 
-```bash
-# Navigate to output directory
-cd $WORKING_DIR/output
+2. **Prepare the files before importing:**
+   - Update provenance data in config.json
+   - Update name and description of StatVars in output_stat_vars.mcf file
 
-# Run custom DC importer
-# Note: The importer will automatically use output_stat_vars.mcf
-# Specific import command depends on your custom DC setup
-# Example:
-custom_dc_importer --config=config.json --data=output.csv --mcf=output_stat_vars.mcf
-```
+3. **Run the import:**
+   - Follow the instructions at: https://docs.datacommons.org/custom_dc/custom_data.html
+
+**WARNING:** Output files will be overwritten if the previous data processing step is rerun.
 
 ## Directory Structure
 
@@ -217,161 +225,38 @@ working_directory/
 ├── processor.log               # Processing logs
 ├── .datacommons/
 │   └── output_counters.log     # Output counters
-└── output/
+├── output/                     # Sample data output from PV map generation
+│   ├── output.csv              # Sample data converted to Data Commons observations
+│   ├── output.tmcf             # Template MCF file
+│   └── output_stat_vars.mcf    # Statistical variables MCF file
+└── final_output/
     ├── output.csv              # Final processed data
     ├── output.tmcf             # Template MCF
     ├── output_stat_vars.mcf    # Statistical variables MCF
     └── config.json             # Custom DC configuration (if generated)
 ```
 
-## Validation
+## Debugging
 
-### Data Validation Steps
+### Gemini CLI Debugging
 
-1. **Sample Data Validation:**
-   ```bash
-   # Check sample data has expected columns and format
-   head -5 $WORKING_DIR/sample_data.csv
-   ```
+When encountering errors with Gemini CLI:
 
-2. **PV Map Validation:**
-   ```bash
-   # Verify PV map contains proper mappings
-   head -10 $WORKING_DIR/pvmap.csv
-   ```
+1. **Restart the process**: If Gemini CLI fails, simply restart the PV map generation process
+2. **Check run logs**: All Gemini CLI runs are logged in `$WORKING_DIR/.datacommons/runs/<gemini_run_id>/` directory (e.g., `gemini_20250915_163906`)
+3. **Monitor for loops**: Gemini CLI can sometimes get stuck in loops - check logs at `.datacommons/runs/<gemini_run_id>/gemini_cli.log`
+4. **StatVar processor attempts**: Gemini CLI will run the StatVar processor multiple times if needed. Each attempt is logged in `.datacommons/runs/<gemini_run_id>/attempt_<number>/` directory
 
-3. **Output Validation:**
-   ```bash
-   # Check output CSV for proper formatting
-   head -5 $WORKING_DIR/output/output.csv
+### Log Structure
 
-   # Verify required columns exist
-   head -1 $WORKING_DIR/output/output.csv | tr ',' '\n'
-   ```
-
-4. **MCF Validation:**
-   ```bash
-   # Check MCF files are properly formatted
-   head -20 $WORKING_DIR/output/output_stat_vars.mcf
-   ```
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Missing Environment Variables:**
-   ```bash
-   # Ensure all required variables are set
-   echo $DC_API_KEY
-   echo $DC_DATA_REPO_PATH
-   echo $WORKING_DIR
-   ```
-
-2. **Python Environment Issues:**
-   ```bash
-   # Reactivate virtual environment
-   source $DC_DATA_REPO_PATH/.env/bin/activate
-
-   # Verify Python interpreter
-   which python
-   ```
-
-3. **File Permission Issues:**
-   ```bash
-   # Ensure files are readable
-   ls -la $WORKING_DIR/
-   chmod +r $WORKING_DIR/*.csv
-   ```
-
-4. **Data Format Issues:**
-   - Verify CSV files have proper headers
-   - Check for special characters in data
-   - Ensure metadata files are valid JSON/YAML
-
-5. **Processing Errors:**
-   ```bash
-   # Check processing logs
-   tail -50 $WORKING_DIR/processor.log
-
-   # Check output counters
-   cat $WORKING_DIR/.datacommons/output_counters.log
-   ```
-
-### Error Messages
-
-| Error | Solution |
-|-------|----------|
-| "Config file not found" | Verify config file path and permissions |
-| "Invalid CSV format" | Check CSV file encoding and format |
-| "Missing required columns" | Verify input data has all required columns |
-| "PV map generation failed" | Check metadata files are valid |
-| "Processing timeout" | Reduce data size or increase timeout |
-
-## Examples
-
-### Complete Example Workflow
-
-```bash
-# 1. Setup
-export DC_DATA_REPO_PATH="/home/user/data-commons-data"
-export WORKING_DIR="/home/user/import_project"
-export DC_API_KEY="your_api_key_here"
-
-# 2. Environment
-cd $DC_DATA_REPO_PATH
-./run_tests.sh -r
-source .env/bin/activate
-
-# 3. Prepare working directory
-mkdir -p $WORKING_DIR
-cd $WORKING_DIR
-
-# 4. Sample data
-python $DC_DATA_REPO_PATH/tools/statvar_importer/data_sampler.py \
-  --sampler_input="$WORKING_DIR/population_data.csv" \
-  --sampler_output="$WORKING_DIR/sample_population.csv" \
-  --max_rows=30
-
-# 5. Create config
-cat > $WORKING_DIR/data_config.json << EOF
-{
-  "input_data": [
-    "$WORKING_DIR/sample_population.csv"
-  ],
-  "input_metadata": [
-    "$WORKING_DIR/population_metadata.json"
-  ],
-  "is_sdmx_dataset": true
-}
-EOF
-
-# 6. Generate PV map
-python $DC_DATA_REPO_PATH/tools/agentic_import/pvmap_generator.py \
-  --config_file="$WORKING_DIR/data_config.json" \
-  --output_dir="$WORKING_DIR"
-
-# 7. Process full data
-export INPUT_DATA="$WORKING_DIR/population_data.csv"
-export SCRIPT_DIR="$DC_DATA_REPO_PATH/tools/agentic_import"
-export PYTHON_INTERPRETER="python"
-export PROCESSOR_LOG="$WORKING_DIR/processor.log"
-
-"$PYTHON_INTERPRETER" "$SCRIPT_DIR/statvar_importer/stat_var_processor.py" \
-  --input_data="$INPUT_DATA" \
-  --pv_map="$WORKING_DIR/pvmap.csv" \
-  --config_file="$WORKING_DIR/metadata.csv" \
-  --generate_statvar_name=True \
-  --output_counters="$WORKING_DIR/.datacommons/output_counters.log" \
-  --output_path="$WORKING_DIR/output/output" > "$PROCESSOR_LOG" 2>&1
-
-# 8. Generate custom DC config (if needed)
-python $DC_DATA_REPO_PATH/tools/agentic_import/generate_custom_dc_config.py \
-  --input_csv="$WORKING_DIR/output/output.csv" \
-  --output_config="$WORKING_DIR/output/config.json"
-
-# 9. Final import
-cd $WORKING_DIR/output
-# Run your custom DC importer here
+```
+.datacommons/
+├── runs/
+│   └── gemini_20250915_163906/           # Individual run directory (gemini_run_id)
+│       ├── gemini_cli.log                # Main Gemini CLI log
+│       ├── attempt_1/                    # First attempt logs
+│       ├── attempt_2/                    # Second attempt logs (if needed)
+│       └── ...                           # Additional attempts
 ```
 
-This completes the Data Commons CSV import process using the agentic import toolchain.
+These logs contain detailed information for troubleshooting any issues during the PV map generation and data processing steps.
