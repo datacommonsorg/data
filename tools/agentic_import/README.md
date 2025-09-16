@@ -118,7 +118,7 @@ python $DC_DATA_REPO_PATH/tools/statvar_importer/data_sampler.py \
 **Parameters:**
 - `--sampler_input`: Path to your original CSV data file
 - `--sampler_output`: Path where the sample will be saved
-- `--max_rows`: Maximum number of rows to sample (recommended: 30 for testing)
+- `--max_rows`: Maximum number of rows to sample (recommended: 30 for testing). Note: For non-SDMX sources which don't have metadata listing all column values, set this large enough to capture all unique values across all columns.
 
 ### Step 5: PV Map Generation
 
@@ -221,7 +221,6 @@ working_directory/
 ├── sample_data.csv             # Sampled data (30 lines max)
 ├── metadata_file1.json         # Metadata files
 ├── metadata_file2.yaml
-├── data_config.json            # Configuration for PV map generator
 ├── pvmap.csv                   # Generated PV mapping
 ├── metadata.csv                # Generated metadata configuration
 ├── processor.log               # Processing logs
