@@ -131,13 +131,13 @@ Generate the PV map and metadata files using the pvmap_generator with command-li
 python $DC_DATA_REPO_PATH/tools/agentic_import/pvmap_generator.py \
   --input_data="sample_data.csv" \
   --input_metadata="metadata_file1.json,metadata_file2.xml,metadata_file3.txt" \
-  --is_sdmx_dataset=true 
+  --sdmx_dataset
 ```
 
 **Parameters:**
 - `--input_data`: Path to your sample CSV data file
 - `--input_metadata`: Comma-separated list of metadata file paths
-- `--is_sdmx_dataset`: Set to true if working with SDMX dataset
+- `--sdmx_dataset`: Set if working with SDMX dataset
 
 
 This command will generate:
