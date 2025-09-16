@@ -40,6 +40,7 @@ try:
     from data.util import file_util
 except ImportError as e:
     logging.fatal(f"Failed to import file_util: {e}.")
+    raise RuntimeError('Failed to import file_util')
 
 STATE_COLUMN = 0
 CITY_COLUMN = 1
@@ -62,12 +63,15 @@ def copy_and_process_files_from_gcs(gcs_bucket, gcs_prefix, local_base_dir):
         gcs_files = result.stdout.strip().split('\n')
         if not gcs_files or gcs_files == ['']:
             logging.fatal(f"No .xlsx files found at '{gcs_source_path_wildcard}'")
+            raise RuntimeError('No .xlsx files found')
             return
     except subprocess.CalledProcessError as e:
         logging.fatal(f"Error listing files from GCS with gsutil: {e.stderr}")
+        raise RuntimeError('Error listing files from GCS')
         return
     except FileNotFoundError:
         logging.fatal("gsutil command not found. Please ensure the Google Cloud SDK is installed and in your PATH.")
+        raise RuntimeError('gsutil command not found')
         return
 
     logging.info(f"Found {len(gcs_files)} xlsx files to copy and process.")
@@ -87,6 +91,7 @@ def copy_and_process_files_from_gcs(gcs_bucket, gcs_prefix, local_base_dir):
             
         except Exception as e:
             logging.fatal(f"Error copying or processing '{gcs_source_path}': {e}")
+            raise RuntimeError('Error copying or processing')
             
     logging.info("--- GCS File Transfers and Processing Complete ---\n")
 
@@ -104,12 +109,16 @@ def clean_headers(file_to_access):
     df.to_excel(file_to_access,index=False,header=False)
   except FileNotFoundError:
         logging.fatal(f"Error: File '{file_to_access}' not found.")
+        raise RuntimeError('Error File not found')
   except ValueError as e:
         logging.fatal(f"Error: {e}")
+        raise RuntimeError('Error')
   except IndexError:
         logging.fatal("Error: headers not found or file is empty.")
+        raise RuntimeError('Error')
   except Exception as e:
         logging.fatal(f"An unexpected error occurred: {e}")
+        raise RuntimeError('Error')
 
 
 def clean_state_column(file_path):
@@ -146,12 +155,16 @@ def clean_state_column(file_path):
     df_new.to_excel(file_path,index=False,header=False)    
   except FileNotFoundError:
         logging.fatal(f"Error: File '{file_path}' not found.")
+        raise RuntimeError('Error File not found')
   except ValueError as e:
         logging.fatal(f"Error: {e}")
+        raise RuntimeError('Error')
   except IndexError:
         logging.fatal("Error: 'State' or 'City' header not found or file is empty.")
+        raise RuntimeError('Error')
   except Exception as e:
         logging.fatal(f"An unexpected error occurred: {e}")
+        raise RuntimeError('Error')
 
 def main(unused_argv):
     _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
