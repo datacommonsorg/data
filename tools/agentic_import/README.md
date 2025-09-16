@@ -173,8 +173,8 @@ python "$DC_DATA_REPO_PATH/tools/statvar_importer/stat_var_processor.py" \
 
 
 **Validation:**
-- Check that `output.csv` contains Data Commons observations with valid format for sample data
-- Validate new StatVar schema in `output_stat_vars.mcf`
+- Check that `final_output/output.csv` contains Data Commons observations with a valid format for the full input data.
+- Validate new StatVar schema in `final_output/output_stat_vars.mcf`.
 
 ## Custom Data Commons Import (Optional)
 
