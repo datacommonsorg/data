@@ -213,8 +213,6 @@ def main(_):
     # Create the necessary directories if they don't exist
     os.makedirs(SOURCE_DIR, exist_ok=True)
     os.makedirs(INPUT_DIR, exist_ok=True)
-    
-
     datasets = [config_1, config_2, config_3, config_4, config_5, config_6]
     for i, config in enumerate(datasets, 1):
         process_api_data(**config)
