@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mes:Structure xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:xml="http://www.w3.org/XML/1998/namespace"
+               xmlns:mes="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message"
+               xmlns:str="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/structure"
+               xmlns:com="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common"
+               xsi:schemaLocation="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message https://registry.sdmx.org/schemas/v2_1/SDMXMessage.xsd">
+
+    <mes:Header>
+        <mes:ID>TEST_STRUCTURE_MSG</mes:ID>
+        <mes:Test>false</mes:Test>
+        <mes:Prepared>2025-01-01T00:00:00Z</mes:Prepared>
+        <mes:Sender id="TEST_AGENCY"/>
+        <mes:Receiver id="test_receiver"/>
+    </mes:Header>
+
+    <mes:Structures>
+
+        <!-- Concept Schemes -->
+        <str:ConceptSchemes>
+            <str:ConceptScheme urn="urn:sdmx:org.sdmx.infomodel.conceptscheme.ConceptScheme=TEST_AGENCY:SAMPLE_CONCEPTS(1.0)"
+                               isExternalReference="false" agencyID="TEST_AGENCY" id="SAMPLE_CONCEPTS" isFinal="true" version="1.0">
+                <com:Name xml:lang="en">Sample Data Concepts</com:Name>
+                <com:Description xml:lang="en">Conceptual framework for sample statistical data</com:Description>
+
+                <str:Concept urn="urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=TEST_AGENCY:SAMPLE_CONCEPTS(1.0).FREQ" id="FREQ">
+                    <com:Name xml:lang="en">Frequency</com:Name>
+                    <com:Description xml:lang="en">Data collection frequency</com:Description>
+                </str:Concept>
+
+                <str:Concept urn="urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=TEST_AGENCY:SAMPLE_CONCEPTS(1.0).GEO" id="GEO">
+                    <com:Name xml:lang="en">Geographic Area</com:Name>
+                    <com:Description xml:lang="en">Geographic reference area for the data</com:Description>
+                </str:Concept>
+
+                <str:Concept urn="urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=TEST_AGENCY:SAMPLE_CONCEPTS(1.0).INDICATOR" id="INDICATOR">
+                    <com:Name xml:lang="en">Statistical Indicator</com:Name>
+                    <com:Description xml:lang="en">Type of statistical measure</com:Description>
+                </str:Concept>
+
+                <str:Concept urn="urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=TEST_AGENCY:SAMPLE_CONCEPTS(1.0).OBS_VALUE" id="OBS_VALUE">
+                    <com:Name xml:lang="en">Observation Value</com:Name>
+                    <com:Description xml:lang="en">Primary measurement value</com:Description>
+                </str:Concept>
+
+                <str:Concept urn="urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=TEST_AGENCY:SAMPLE_CONCEPTS(1.0).OBS_STATUS" id="OBS_STATUS">
+                    <com:Name xml:lang="en">Observation Status</com:Name>
+                    <com:Description xml:lang="en">Quality flag for the observation</com:Description>
+                </str:Concept>
+            </str:ConceptScheme>
+        </str:ConceptSchemes>
+
+        <!-- Codelists -->
+        <str:Codelists>
+            <str:Codelist urn="urn:sdmx:org.sdmx.infomodel.codelist.Codelist=TEST_AGENCY:CL_FREQ(1.0)"
+                          isExternalReference="false" agencyID="TEST_AGENCY" id="CL_FREQ" isFinal="true" version="1.0">
+                <com:Name xml:lang="en">Frequency</com:Name>
+                <com:Description xml:lang="en">Data frequency classification</com:Description>
+
+                <str:Code urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=TEST_AGENCY:CL_FREQ(1.0).A" id="A">
+                    <com:Name xml:lang="en">Annual</com:Name>
+                    <com:Description xml:lang="en">Data collected annually</com:Description>
+                </str:Code>
+
+                <str:Code urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=TEST_AGENCY:CL_FREQ(1.0).Q" id="Q">
+                    <com:Name xml:lang="en">Quarterly</com:Name>
+                    <com:Description xml:lang="en">Data collected quarterly</com:Description>
+                </str:Code>
+
+                <str:Code urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=TEST_AGENCY:CL_FREQ(1.0).M" id="M">
+                    <com:Name xml:lang="en">Monthly</com:Name>
+                    <com:Description xml:lang="en">Data collected monthly</com:Description>
+                </str:Code>
+            </str:Codelist>
+
+            <str:Codelist urn="urn:sdmx:org.sdmx.infomodel.codelist.Codelist=TEST_AGENCY:CL_GEO(1.0)"
+                          isExternalReference="false" agencyID="TEST_AGENCY" id="CL_GEO" isFinal="true" version="1.0">
+                <com:Name xml:lang="en">Geographic Areas</com:Name>
+                <com:Description xml:lang="en">Standard geographic area codes</com:Description>
+
+                <str:Code urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=TEST_AGENCY:CL_GEO(1.0).WORLD" id="WORLD">
+                    <com:Name xml:lang="en">World</com:Name>
+                    <com:Description xml:lang="en">Global aggregate</com:Description>
+                </str:Code>
+
+                <str:Code urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=TEST_AGENCY:CL_GEO(1.0).REG_A" id="REG_A">
+                    <com:Name xml:lang="en">Region A</com:Name>
+                    <com:Description xml:lang="en">Sample geographic region A</com:Description>
+                </str:Code>
+
+                <str:Code urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=TEST_AGENCY:CL_GEO(1.0).REG_B" id="REG_B">
+                    <com:Name xml:lang="en">Region B</com:Name>
+                    <com:Description xml:lang="en">Sample geographic region B</com:Description>
+                </str:Code>
+            </str:Codelist>
+
+            <str:Codelist urn="urn:sdmx:org.sdmx.infomodel.codelist.Codelist=TEST_AGENCY:CL_INDICATOR(1.0)"
+                          isExternalReference="false" agencyID="TEST_AGENCY" id="CL_INDICATOR" isFinal="true" version="1.0">
+                <com:Name xml:lang="en">Statistical Indicators</com:Name>
+                <com:Description xml:lang="en">Types of statistical measures</com:Description>
+
+                <str:Code urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=TEST_AGENCY:CL_INDICATOR(1.0).GDP" id="GDP">
+                    <com:Name xml:lang="en">Gross Domestic Product</com:Name>
+                    <com:Description xml:lang="en">Total economic output measure</com:Description>
+                </str:Code>
+
+                <str:Code urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=TEST_AGENCY:CL_INDICATOR(1.0).POP" id="POP">
+                    <com:Name xml:lang="en">Population</com:Name>
+                    <com:Description xml:lang="en">Total population count</com:Description>
+                </str:Code>
+            </str:Codelist>
+
+            <str:Codelist urn="urn:sdmx:org.sdmx.infomodel.codelist.Codelist=TEST_AGENCY:CL_OBS_STATUS(1.0)"
+                          isExternalReference="false" agencyID="TEST_AGENCY" id="CL_OBS_STATUS" isFinal="true" version="1.0">
+                <com:Name xml:lang="en">Observation Status</com:Name>
+                <com:Description xml:lang="en">Data quality flags</com:Description>
+
+                <str:Code urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=TEST_AGENCY:CL_OBS_STATUS(1.0).A" id="A">
+                    <com:Name xml:lang="en">Normal</com:Name>
+                    <com:Description xml:lang="en">Normal value</com:Description>
+                </str:Code>
+
+                <str:Code urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=TEST_AGENCY:CL_OBS_STATUS(1.0).E" id="E">
+                    <com:Name xml:lang="en">Estimated</com:Name>
+                    <com:Description xml:lang="en">Estimated value</com:Description>
+                </str:Code>
+            </str:Codelist>
+        </str:Codelists>
+
+        <!-- Data Structure Definition -->
+        <str:DataStructures>
+            <str:DataStructure urn="urn:sdmx:org.sdmx.infomodel.datastructure.DataStructure=TEST_AGENCY:SAMPLE_DSD(1.0)"
+                               isExternalReference="false" agencyID="TEST_AGENCY" id="SAMPLE_DSD" isFinal="true" version="1.0">
+                <com:Name xml:lang="en">Sample Data Structure</com:Name>
+                <com:Description xml:lang="en">Data structure for sample statistical dataset</com:Description>
+
+                <str:DataStructureComponents>
+                    <str:DimensionList>
+                        <str:Dimension urn="urn:sdmx:org.sdmx.infomodel.datastructure.Dimension=TEST_AGENCY:SAMPLE_DSD(1.0).FREQ"
+                                       id="FREQ" position="1">
+                            <str:ConceptIdentity>
+                                <Ref agencyID="TEST_AGENCY" maintainableParentID="SAMPLE_CONCEPTS" maintainableParentVersion="1.0"
+                                     id="FREQ" package="conceptscheme" class="Concept"/>
+                            </str:ConceptIdentity>
+                            <str:LocalRepresentation>
+                                <str:Enumeration>
+                                    <Ref agencyID="TEST_AGENCY" id="CL_FREQ" version="1.0" package="codelist" class="Codelist"/>
+                                </str:Enumeration>
+                            </str:LocalRepresentation>
+                        </str:Dimension>
+
+                        <str:Dimension urn="urn:sdmx:org.sdmx.infomodel.datastructure.Dimension=TEST_AGENCY:SAMPLE_DSD(1.0).GEO"
+                                       id="GEO" position="2">
+                            <str:ConceptIdentity>
+                                <Ref agencyID="TEST_AGENCY" maintainableParentID="SAMPLE_CONCEPTS" maintainableParentVersion="1.0"
+                                     id="GEO" package="conceptscheme" class="Concept"/>
+                            </str:ConceptIdentity>
+                            <str:LocalRepresentation>
+                                <str:Enumeration>
+                                    <Ref agencyID="TEST_AGENCY" id="CL_GEO" version="1.0" package="codelist" class="Codelist"/>
+                                </str:Enumeration>
+                            </str:LocalRepresentation>
+                        </str:Dimension>
+
+                        <str:Dimension urn="urn:sdmx:org.sdmx.infomodel.datastructure.Dimension=TEST_AGENCY:SAMPLE_DSD(1.0).INDICATOR"
+                                       id="INDICATOR" position="3">
+                            <str:ConceptIdentity>
+                                <Ref agencyID="TEST_AGENCY" maintainableParentID="SAMPLE_CONCEPTS" maintainableParentVersion="1.0"
+                                     id="INDICATOR" package="conceptscheme" class="Concept"/>
+                            </str:ConceptIdentity>
+                            <str:LocalRepresentation>
+                                <str:Enumeration>
+                                    <Ref agencyID="TEST_AGENCY" id="CL_INDICATOR" version="1.0" package="codelist" class="Codelist"/>
+                                </str:Enumeration>
+                            </str:LocalRepresentation>
+                        </str:Dimension>
+                    </str:DimensionList>
+
+                    <str:AttributeList>
+                        <str:Attribute urn="urn:sdmx:org.sdmx.infomodel.datastructure.DataAttribute=TEST_AGENCY:SAMPLE_DSD(1.0).OBS_STATUS"
+                                       id="OBS_STATUS" assignmentStatus="Conditional">
+                            <str:ConceptIdentity>
+                                <Ref agencyID="TEST_AGENCY" maintainableParentID="SAMPLE_CONCEPTS" maintainableParentVersion="1.0"
+                                     id="OBS_STATUS" package="conceptscheme" class="Concept"/>
+                            </str:ConceptIdentity>
+                            <str:LocalRepresentation>
+                                <str:Enumeration>
+                                    <Ref agencyID="TEST_AGENCY" id="CL_OBS_STATUS" version="1.0" package="codelist" class="Codelist"/>
+                                </str:Enumeration>
+                            </str:LocalRepresentation>
+                            <str:AttributeRelationship>
+                                <str:PrimaryMeasure>
+                                    <Ref agencyID="TEST_AGENCY" maintainableParentID="SAMPLE_DSD" maintainableParentVersion="1.0"
+                                         id="OBS_VALUE" package="datastructure" class="PrimaryMeasure"/>
+                                </str:PrimaryMeasure>
+                            </str:AttributeRelationship>
+                        </str:Attribute>
+                    </str:AttributeList>
+
+                    <str:MeasureList>
+                        <str:PrimaryMeasure urn="urn:sdmx:org.sdmx.infomodel.datastructure.PrimaryMeasure=TEST_AGENCY:SAMPLE_DSD(1.0).OBS_VALUE"
+                                            id="OBS_VALUE">
+                            <str:ConceptIdentity>
+                                <Ref agencyID="TEST_AGENCY" maintainableParentID="SAMPLE_CONCEPTS" maintainableParentVersion="1.0"
+                                     id="OBS_VALUE" package="conceptscheme" class="Concept"/>
+                            </str:ConceptIdentity>
+                            <str:LocalRepresentation>
+                                <str:TextFormat textType="Decimal"/>
+                            </str:LocalRepresentation>
+                        </str:PrimaryMeasure>
+                    </str:MeasureList>
+                </str:DataStructureComponents>
+            </str:DataStructure>
+        </str:DataStructures>
+
+        <!-- Dataflow -->
+        <str:Dataflows>
+            <str:Dataflow urn="urn:sdmx:org.sdmx.infomodel.datastructure.Dataflow=TEST_AGENCY:SAMPLE_DATA(1.0)"
+                          isExternalReference="false" agencyID="TEST_AGENCY" id="SAMPLE_DATA" isFinal="true" version="1.0">
+                <com:Name xml:lang="en">Sample Statistical Data</com:Name>
+                <com:Description xml:lang="en">Sample dataset for testing purposes</com:Description>
+                <str:Structure>
+                    <Ref agencyID="TEST_AGENCY" id="SAMPLE_DSD" version="1.0" package="datastructure" class="DataStructure"/>
+                </str:Structure>
+            </str:Dataflow>
+        </str:Dataflows>
+
+    </mes:Structures>
+</mes:Structure>

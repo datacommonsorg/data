@@ -207,7 +207,8 @@ def handle_extract_metadata() -> None:
     ensure_output_directory(FLAGS.output_path)
 
     # Extract metadata and save as JSON
-    metadata_dict = extract_dataflow_metadata(FLAGS.endpoint, FLAGS.agency, FLAGS.dataflow)
+    metadata_dict = extract_dataflow_metadata(FLAGS.endpoint, FLAGS.agency,
+                                              FLAGS.dataflow)
 
     with open(FLAGS.output_path, 'w', encoding='utf-8') as f:
         json.dump(metadata_dict, f, indent=2, ensure_ascii=False)

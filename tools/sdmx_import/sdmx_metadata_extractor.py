@@ -28,8 +28,6 @@ import sdmx
 from sdmx.model.internationalstring import InternationalStringDescriptor, DEFAULT_LOCALE
 from sdmx.model.common import FacetType, FacetValueType
 
-from sdmx_client import SdmxClient
-
 
 def get_localized_string(obj) -> str:
     """
@@ -69,7 +67,8 @@ class FacetDetails:
     """Represents a single Facet for non-enumerated representations."""
     type: str  # Corresponds to sdmx.model.common.FacetType, e.g., 'string', 'integer'
     value: Optional[str] = None
-    value_type: Optional[str] = None  # Corresponds to sdmx.model.common.FacetValueType
+    value_type: Optional[
+        str] = None  # Corresponds to sdmx.model.common.FacetValueType
 
 
 @dataclass
@@ -79,8 +78,10 @@ class RepresentationDetails:
     It can be either enumerated (using a Codelist) or non-enumerated (using Facets).
     """
     type: Literal["enumerated", "non-enumerated"]
-    codelist: Optional[CodelistDetails] = None  # Present if type is "enumerated"
-    facets: List[FacetDetails] = field(default_factory=list)  # Present if type is "non-enumerated"
+    codelist: Optional[
+        CodelistDetails] = None  # Present if type is "enumerated"
+    facets: List[FacetDetails] = field(
+        default_factory=list)  # Present if type is "non-enumerated"
 
 
 @dataclass
@@ -89,7 +90,8 @@ class ConceptDetails:
     id: str
     name: str = ""
     description: str = ""
-    concept_scheme_id: Optional[str] = None  # The ID of the ConceptScheme it belongs to
+    concept_scheme_id: Optional[
+        str] = None  # The ID of the ConceptScheme it belongs to
 
 
 @dataclass
@@ -114,9 +116,13 @@ class DataStructureDefinitionDetails:
     id: str
     name: str = ""
     description: str = ""
-    dimensions: List[ComponentDetails] = field(default_factory=list)  # Each is a DimensionComponent
-    attributes: List[ComponentDetails] = field(default_factory=list)  # Each is a DataAttribute
-    measures: List[ComponentDetails] = field(default_factory=list)  # Each is a PrimaryMeasure (v2.1) or Measure (v3.0)
+    dimensions: List[ComponentDetails] = field(
+        default_factory=list)  # Each is a DimensionComponent
+    attributes: List[ComponentDetails] = field(
+        default_factory=list)  # Each is a DataAttribute
+    measures: List[ComponentDetails] = field(
+        default_factory=list
+    )  # Each is a PrimaryMeasure (v2.1) or Measure (v3.0)
 
 
 @dataclass
@@ -137,8 +143,10 @@ class DataflowSomeAttributes:
     version: Optional[str] = None  # A version string
     valid_from: Optional[str] = None  # Date from which the dataflow is valid
     valid_to: Optional[str] = None  # Date from which the dataflow is superseded
-    is_final: Optional[bool] = None  # True if the object is final; otherwise it is in a draft state
-    is_external_reference: Optional[bool] = None  # True if the content of the object is held externally
+    is_final: Optional[
+        bool] = None  # True if the object is final; otherwise it is in a draft state
+    is_external_reference: Optional[
+        bool] = None  # True if the content of the object is held externally
     service_url: Optional[str] = None  # URL of an SDMX-compliant web service
     structure_url: Optional[str] = None  # URL of an SDMX-ML document
 
@@ -154,7 +162,8 @@ class DataflowStructure:
     description: str = ""
     some_attributes: Optional[DataflowSomeAttributes] = None
     data_structure_definition: Optional[DataStructureDefinitionDetails] = None
-    referenced_concept_schemes: List[ReferencedConceptSchemeDetails] = field(default_factory=list)
+    referenced_concept_schemes: List[ReferencedConceptSchemeDetails] = field(
+        default_factory=list)
 
 
 @dataclass
@@ -175,7 +184,8 @@ def get_concept_details(concept) -> Optional[ConceptDetails]:
         elif hasattr(concept, 'scheme') and concept.scheme:
             concept_scheme_id = concept.scheme.id
     except Exception as e:
-        logging.debug(f"Could not get concept scheme for concept {concept.id}: {e}")
+        logging.debug(
+            f"Could not get concept scheme for concept {concept.id}: {e}")
 
     return ConceptDetails(
         id=concept.id,
@@ -185,7 +195,8 @@ def get_concept_details(concept) -> Optional[ConceptDetails]:
     )
 
 
-def get_representation_details(representation) -> Optional[RepresentationDetails]:
+def get_representation_details(
+        representation) -> Optional[RepresentationDetails]:
     """Extract details for a Representation object (enumerated or non-enumerated)."""
     if not representation:
         return None
@@ -194,14 +205,17 @@ def get_representation_details(representation) -> Optional[RepresentationDetails
         codelist = representation.enumerated  # This is a Codelist object
         codes = []
         try:
-            for _, code in codelist.items.items():  # Codelist.items is a DictLike collection of Code objects
-                codes.append(Code(
-                    id=code.id,
-                    name=get_localized_string(code.name),
-                    description=get_localized_string(code.description),
-                ))
+            for _, code in codelist.items.items(
+            ):  # Codelist.items is a DictLike collection of Code objects
+                codes.append(
+                    Code(
+                        id=code.id,
+                        name=get_localized_string(code.name),
+                        description=get_localized_string(code.description),
+                    ))
         except Exception as e:
-            logging.debug(f"Error processing codes for codelist {codelist.id}: {e}")
+            logging.debug(
+                f"Error processing codes for codelist {codelist.id}: {e}")
 
         return RepresentationDetails(
             type="enumerated",
@@ -216,11 +230,16 @@ def get_representation_details(representation) -> Optional[RepresentationDetails
         facets = []
         try:
             for facet in representation.non_enumerated:  # Representation.non_enumerated is a list of Facet objects
-                facets.append(FacetDetails(
-                    type=str(facet.type.name) if isinstance(facet.type, FacetType) else str(facet.type),
-                    value=str(facet.value) if facet.value is not None else None,
-                    value_type=str(facet.value_type.name) if isinstance(facet.value_type, FacetValueType) else str(facet.value_type),
-                ))
+                facets.append(
+                    FacetDetails(
+                        type=str(facet.type.name) if isinstance(
+                            facet.type, FacetType) else str(facet.type),
+                        value=str(facet.value)
+                        if facet.value is not None else None,
+                        value_type=str(facet.value_type.name) if isinstance(
+                            facet.value_type, FacetValueType) else str(
+                                facet.value_type),
+                    ))
         except Exception as e:
             logging.debug(f"Error processing facets: {e}")
 
@@ -232,10 +251,156 @@ def get_representation_details(representation) -> Optional[RepresentationDetails
     return None
 
 
-def extract_dataflow_metadata(endpoint: str, agency_id: str, dataflow_id: str) -> Dict[str, Any]:
+def _process_structure_message(sm, dataflow_id: str) -> Dict[str, Any]:
     """
-    Extracts comprehensive metadata for a given SDMX dataflow and returns it as a dictionary
-    that matches the specified JSON schema.
+    Internal function to process an SDMX StructureMessage and extract metadata.
+
+    Args:
+        sm: The SDMX StructureMessage object containing dataflow and related structures
+        dataflow_id: The ID of the dataflow to extract from the structure message
+
+    Returns:
+        Dictionary representing the dataflow structure in the specified JSON format
+
+    Raises:
+        ValueError: If the dataflow is not found in the structure message
+        Exception: For other errors during extraction
+    """
+    try:
+        if dataflow_id not in sm.dataflow:
+            raise ValueError(
+                f"Dataflow '{dataflow_id}' not found in the structure message.")
+
+        dataflow_obj = sm.dataflow[
+            dataflow_id]  # Retrieve the specific Dataflow object
+        dsd_obj = dataflow_obj.structure  # Get the DataStructureDefinition associated with the dataflow
+
+        # Populate DataflowSomeAttributes
+        some_attrs = DataflowSomeAttributes(
+            version=str(dataflow_obj.version) if dataflow_obj.version else None,
+            valid_from=str(dataflow_obj.valid_from)
+            if dataflow_obj.valid_from else None,
+            valid_to=str(dataflow_obj.valid_to)
+            if dataflow_obj.valid_to else None,
+            is_final=getattr(dataflow_obj, 'is_final', None),
+            is_external_reference=getattr(dataflow_obj, 'is_external_reference',
+                                          None),
+            service_url=getattr(dataflow_obj, 'service_url', None),
+            structure_url=getattr(dataflow_obj, 'structure_url', None),
+        )
+
+        # Populate DataStructureDefinitionDetails
+        dsd_details = DataStructureDefinitionDetails(
+            id=dsd_obj.id,
+            name=get_localized_string(dsd_obj.name),
+            description=get_localized_string(dsd_obj.description),
+        )
+
+        # Populate dimensions
+        if hasattr(dsd_obj, 'dimensions') and dsd_obj.dimensions:
+            for dim_component in dsd_obj.dimensions.components:
+                dsd_details.dimensions.append(
+                    ComponentDetails(
+                        id=dim_component.id,
+                        name=get_localized_string(
+                            dim_component.concept_identity.name)
+                        if dim_component.concept_identity else "",
+                        description=get_localized_string(
+                            dim_component.concept_identity.description)
+                        if dim_component.concept_identity else "",
+                        concept=get_concept_details(
+                            dim_component.concept_identity),
+                        representation=get_representation_details(
+                            dim_component.local_representation),
+                    ))
+
+        # Populate attributes
+        if hasattr(dsd_obj, 'attributes') and dsd_obj.attributes:
+            for attr_component in dsd_obj.attributes.components:
+                dsd_details.attributes.append(
+                    ComponentDetails(
+                        id=attr_component.id,
+                        name=get_localized_string(
+                            attr_component.concept_identity.name)
+                        if attr_component.concept_identity else "",
+                        description=get_localized_string(
+                            attr_component.concept_identity.description)
+                        if attr_component.concept_identity else "",
+                        concept=get_concept_details(
+                            attr_component.concept_identity),
+                        representation=get_representation_details(
+                            attr_component.local_representation),
+                    ))
+
+        # Populate measures
+        if hasattr(dsd_obj, 'measures') and dsd_obj.measures:
+            for measure_component in dsd_obj.measures.components:
+                dsd_details.measures.append(
+                    ComponentDetails(
+                        id=measure_component.id,
+                        name=get_localized_string(
+                            measure_component.concept_identity.name)
+                        if measure_component.concept_identity else "",
+                        description=get_localized_string(
+                            measure_component.concept_identity.description)
+                        if measure_component.concept_identity else "",
+                        concept=get_concept_details(
+                            measure_component.concept_identity),
+                        representation=get_representation_details(
+                            measure_component.local_representation),
+                    ))
+
+        # Populate referenced concept schemes
+        referenced_concept_schemes = []
+        if hasattr(sm, 'concept_scheme') and sm.concept_scheme:
+            for cs_id, concept_scheme in sm.concept_scheme.items():
+                concepts_in_scheme = []
+                try:
+                    for _, concept_item in concept_scheme.items.items():
+                        concepts_in_scheme.append(
+                            ConceptDetails(id=concept_item.id,
+                                           name=get_localized_string(
+                                               concept_item.name),
+                                           description=get_localized_string(
+                                               concept_item.description),
+                                           concept_scheme_id=concept_scheme.id))
+                except Exception as e:
+                    logging.debug(
+                        f"Error processing concepts in scheme {cs_id}: {e}")
+
+                referenced_concept_schemes.append(
+                    ReferencedConceptSchemeDetails(
+                        id=concept_scheme.id,
+                        name=get_localized_string(concept_scheme.name),
+                        description=get_localized_string(
+                            concept_scheme.description),
+                        concepts=concepts_in_scheme,
+                    ))
+
+        # Assemble the final DataflowStructure
+        dataflow_structure = DataflowStructure(
+            id=dataflow_obj.id,
+            name=get_localized_string(dataflow_obj.name),
+            description=get_localized_string(dataflow_obj.description),
+            some_attributes=some_attrs,
+            data_structure_definition=dsd_details,
+            referenced_concept_schemes=referenced_concept_schemes,
+        )
+
+        return asdict(FullDataflowOutput(dataflow=dataflow_structure))
+
+    except Exception as e:
+        logging.error(
+            f"Error processing structure message for dataflow {dataflow_id}: {e}"
+        )
+        raise
+
+
+def extract_dataflow_metadata(endpoint: str, agency_id: str,
+                              dataflow_id: str) -> Dict[str, Any]:
+    """
+    Extracts comprehensive metadata for a given SDMX dataflow from a REST API endpoint
+    and returns it as a dictionary that matches the specified JSON schema.
 
     Args:
         endpoint: The SDMX REST API endpoint URL
@@ -263,101 +428,54 @@ def extract_dataflow_metadata(endpoint: str, agency_id: str, dataflow_id: str) -
             sdmx_client = sdmx.Client(agency_id)
 
         # Request the dataflow with 'references=all' to include all referenced structures
-        logging.info(f"Fetching dataflow metadata for {agency_id}/{dataflow_id} from {endpoint}")
-        sm = sdmx_client.dataflow(dataflow_id, agency_id=agency_id, params={"references": "all"})
-
-        if dataflow_id not in sm.dataflow:
-            raise ValueError(f"Dataflow '{dataflow_id}' not found in the response from {agency_id}.")
-
-        dataflow_obj = sm.dataflow[dataflow_id]  # Retrieve the specific Dataflow object
-        dsd_obj = dataflow_obj.structure  # Get the DataStructureDefinition associated with the dataflow
-
-        # Populate DataflowSomeAttributes
-        some_attrs = DataflowSomeAttributes(
-            version=str(dataflow_obj.version) if dataflow_obj.version else None,
-            valid_from=str(dataflow_obj.valid_from) if dataflow_obj.valid_from else None,
-            valid_to=str(dataflow_obj.valid_to) if dataflow_obj.valid_to else None,
-            is_final=getattr(dataflow_obj, 'is_final', None),
-            is_external_reference=getattr(dataflow_obj, 'is_external_reference', None),
-            service_url=getattr(dataflow_obj, 'service_url', None),
-            structure_url=getattr(dataflow_obj, 'structure_url', None),
+        logging.info(
+            f"Fetching dataflow metadata for {agency_id}/{dataflow_id} from {endpoint}"
         )
+        sm = sdmx_client.dataflow(dataflow_id,
+                                  agency_id=agency_id,
+                                  params={"references": "all"})
 
-        # Populate DataStructureDefinitionDetails
-        dsd_details = DataStructureDefinitionDetails(
-            id=dsd_obj.id,
-            name=get_localized_string(dsd_obj.name),
-            description=get_localized_string(dsd_obj.description),
-        )
-
-        # Populate dimensions
-        if hasattr(dsd_obj, 'dimensions') and dsd_obj.dimensions:
-            for dim_component in dsd_obj.dimensions.components:
-                dsd_details.dimensions.append(ComponentDetails(
-                    id=dim_component.id,
-                    name=get_localized_string(dim_component.concept_identity.name) if dim_component.concept_identity else "",
-                    description=get_localized_string(dim_component.concept_identity.description) if dim_component.concept_identity else "",
-                    concept=get_concept_details(dim_component.concept_identity),
-                    representation=get_representation_details(dim_component.local_representation),
-                ))
-
-        # Populate attributes
-        if hasattr(dsd_obj, 'attributes') and dsd_obj.attributes:
-            for attr_component in dsd_obj.attributes.components:
-                dsd_details.attributes.append(ComponentDetails(
-                    id=attr_component.id,
-                    name=get_localized_string(attr_component.concept_identity.name) if attr_component.concept_identity else "",
-                    description=get_localized_string(attr_component.concept_identity.description) if attr_component.concept_identity else "",
-                    concept=get_concept_details(attr_component.concept_identity),
-                    representation=get_representation_details(attr_component.local_representation),
-                ))
-
-        # Populate measures
-        if hasattr(dsd_obj, 'measures') and dsd_obj.measures:
-            for measure_component in dsd_obj.measures.components:
-                dsd_details.measures.append(ComponentDetails(
-                    id=measure_component.id,
-                    name=get_localized_string(measure_component.concept_identity.name) if measure_component.concept_identity else "",
-                    description=get_localized_string(measure_component.concept_identity.description) if measure_component.concept_identity else "",
-                    concept=get_concept_details(measure_component.concept_identity),
-                    representation=get_representation_details(measure_component.local_representation),
-                ))
-
-        # Populate referenced concept schemes
-        referenced_concept_schemes = []
-        if hasattr(sm, 'concept_scheme') and sm.concept_scheme:
-            for cs_id, concept_scheme in sm.concept_scheme.items():
-                concepts_in_scheme = []
-                try:
-                    for _, concept_item in concept_scheme.items.items():
-                        concepts_in_scheme.append(ConceptDetails(
-                            id=concept_item.id,
-                            name=get_localized_string(concept_item.name),
-                            description=get_localized_string(concept_item.description),
-                            concept_scheme_id=concept_scheme.id
-                        ))
-                except Exception as e:
-                    logging.debug(f"Error processing concepts in scheme {cs_id}: {e}")
-
-                referenced_concept_schemes.append(ReferencedConceptSchemeDetails(
-                    id=concept_scheme.id,
-                    name=get_localized_string(concept_scheme.name),
-                    description=get_localized_string(concept_scheme.description),
-                    concepts=concepts_in_scheme,
-                ))
-
-        # Assemble the final DataflowStructure
-        dataflow_structure = DataflowStructure(
-            id=dataflow_obj.id,
-            name=get_localized_string(dataflow_obj.name),
-            description=get_localized_string(dataflow_obj.description),
-            some_attributes=some_attrs,
-            data_structure_definition=dsd_details,
-            referenced_concept_schemes=referenced_concept_schemes,
-        )
-
-        return asdict(FullDataflowOutput(dataflow=dataflow_structure))
+        return _process_structure_message(sm, dataflow_id)
 
     except Exception as e:
-        logging.error(f"Error extracting metadata for {agency_id}/{dataflow_id}: {e}")
+        logging.error(
+            f"Error extracting metadata for {agency_id}/{dataflow_id}: {e}")
+        raise
+
+
+def extract_dataflow_metadata_from_file(xml_file_path: str,
+                                        dataflow_id: str) -> Dict[str, Any]:
+    """
+    Extracts comprehensive metadata for a given SDMX dataflow from a local XML file
+    and returns it as a dictionary that matches the specified JSON schema.
+
+    This function is useful for testing and offline processing of SDMX metadata.
+
+    Args:
+        xml_file_path: Path to the SDMX XML file containing the dataflow metadata
+        dataflow_id: The ID of the dataflow to extract from the XML
+
+    Returns:
+        Dictionary representing the dataflow structure in the specified JSON format
+
+    Raises:
+        ValueError: If the dataflow is not found in the XML file
+        FileNotFoundError: If the XML file does not exist
+        Exception: For other errors during extraction or XML parsing
+    """
+    try:
+        logging.info(f"Loading SDMX metadata from file: {xml_file_path}")
+
+        # Read the SDMX XML file using the sdmx library
+        sm = sdmx.read_sdmx(xml_file_path)
+
+        return _process_structure_message(sm, dataflow_id)
+
+    except FileNotFoundError:
+        logging.error(f"SDMX XML file not found: {xml_file_path}")
+        raise
+    except Exception as e:
+        logging.error(
+            f"Error extracting metadata from file {xml_file_path} for dataflow {dataflow_id}: {e}"
+        )
         raise
