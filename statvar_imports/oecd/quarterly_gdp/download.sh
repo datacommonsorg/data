@@ -14,6 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Usage:
+#
+# # Run with default start (2020) and end (2025) years from project root
+# bash statvar_imports/oecd/quarterly_gdp/download.sh
+#
+# # Run with custom start and end years from project root
+# START_YEAR=2018 END_YEAR=2022 bash statvar_imports/oecd/quarterly_gdp/download.sh
+
 set -e
 
 # --- Configuration ---
