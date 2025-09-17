@@ -23,7 +23,7 @@
           "cleaned_csv": "OECDQuarterlyGDP.csv"
         }
       ],
-      "cron_schedule": "0 8 * * 1"
+      "cron_schedule": "0 8 1 */3 *"
     }
   ]
 }
