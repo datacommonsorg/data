@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     https://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an 'AS IS' BASIS,
@@ -18,12 +18,18 @@
 import pandas as pd
 import requests
 import numpy as np
+import os
+import json
 from absl import app
 from absl import logging
 
 logging.set_verbosity(logging.INFO)
 
 _API_PAGE_LIMIT = 1000
+# SOURCE_DIR to store the json file 
+SOURCE_DIR = "source_files" 
+#INPUT_DIR to store the preprocessed csv files
+INPUT_DIR = "input_files"
 
 # Configuration of the datasets
 
@@ -134,9 +140,6 @@ def process_api_data(api_url, output_filename, column_mapping, desired_columns, 
 
             offset += _API_PAGE_LIMIT
 
-        except requests.exceptions.RequestException as e:
-            logging.error(f"Failed to retrieve data from {api_url}: {e}")
-            return
         except Exception as e:
             logging.fatal(f"An unexpected error occurred: {e}")
             raise RuntimeError(f"Program terminated due to a fatal error: {e}")
@@ -144,7 +147,16 @@ def process_api_data(api_url, output_filename, column_mapping, desired_columns, 
 
     if all_data:
         try:
+            # Save the raw JSON data to the source_files directory
+            json_filename = os.path.splitext(output_filename)[0] + ".json"
+            json_path = os.path.join(SOURCE_DIR, json_filename)
+            with open(json_path, 'w') as f:
+                json.dump(all_data, f, indent=2)
+            logging.info(f"Successfully saved raw data to '{json_path}'")
+
             dataframe = pd.DataFrame(all_data)
+            raw_csv_path = os.path.join(INPUT_DIR, output_filename)
+            dataframe.to_csv(raw_csv_path, index=False)
 
             # Coordinate Processing based on format type
             if coord_column_name:
@@ -181,7 +193,7 @@ def process_api_data(api_url, output_filename, column_mapping, desired_columns, 
             # Select and reorder the final desired columns
             dataframe = dataframe.reindex(columns=desired_columns)
 
-            # CSV file creation to store the data
+            # CSV file creation to store the cleaned csv file
             dataframe.to_csv(output_filename, index=False)
 
             logging.info(
@@ -198,6 +210,11 @@ def main(_):
     """
     Main function to orchestrate the data download process for all configured datasets.
     """
+    # Create the necessary directories if they don't exist
+    os.makedirs(SOURCE_DIR, exist_ok=True)
+    os.makedirs(INPUT_DIR, exist_ok=True)
+    
+
     datasets = [config_1, config_2, config_3, config_4, config_5, config_6]
     for i, config in enumerate(datasets, 1):
         process_api_data(**config)
