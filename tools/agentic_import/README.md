@@ -14,8 +14,8 @@ This guide describes the complete process for importing CSV data into Data Commo
     - [Step 3: Working Directory Preparation](#step-3-working-directory-preparation)
   - [Data Import Process](#data-import-process)
     - [Step 4: Data Sampling](#step-4-data-sampling)
-    - [Step 5: PV Map Generation](#step-5-pv-map-generation)
-    - [Step 6: Data Processing](#step-6-data-processing)
+    - [Step 5: PV Map Generation for Sample Data](#step-5-pv-map-generation-for-sample-data)
+    - [Step 6: Full Data Processing](#step-6-full-data-processing)
   - [Custom Data Commons Import (Optional)](#custom-data-commons-import-optional)
     - [Step 7: Generate Custom DC Configuration](#step-7-generate-custom-dc-configuration)
     - [Step 8: Run Custom DC Import](#step-8-run-custom-dc-import)
@@ -110,8 +110,8 @@ Create a sample of your data using the data_sampler utility. This helps with ini
 ```bash
 # Sample your input CSV data (maximum 30 lines)
 python $DC_DATA_REPO_PATH/tools/statvar_importer/data_sampler.py \
-  --sampler_input="$WORKING_DIR/input_data.csv" \
-  --sampler_output="$WORKING_DIR/sample_data.csv" \
+  --sampler_input="input_data.csv" \
+  --sampler_output="sample_data.csv" \
   --max_rows=30
 ```
 
@@ -120,7 +120,7 @@ python $DC_DATA_REPO_PATH/tools/statvar_importer/data_sampler.py \
 - `--sampler_output`: Path where the sample will be saved
 - `--max_rows`: Maximum number of rows to sample (recommended: 30 for testing). Note: For non-SDMX sources which don't have metadata listing all column values, set this large enough to capture all unique values across all columns.
 
-### Step 5: PV Map Generation
+### Step 5: PV Map Generation for Sample Data
 
 Generate the PV map and metadata files using the pvmap_generator with command-line flags. This will use Gemini CLI to read sample data, generate pvmap.csv, metadata.csv and convert sample data to Data Commons observations as output.csv:
 
@@ -133,31 +133,33 @@ Generate the PV map and metadata files using the pvmap_generator with command-li
 python $DC_DATA_REPO_PATH/tools/agentic_import/pvmap_generator.py \
   --input_data="sample_data.csv" \
   --input_metadata="metadata_file1.json,metadata_file2.xml,metadata_file3.txt" \
+  --output_path="sample_output/output" \
   --sdmx_dataset
 ```
 
 **Parameters:**
 - `--input_data`: Path to your sample CSV data file
 - `--input_metadata`: Comma-separated list of metadata file paths
+- `--output_path`: Output path prefix for generated files (default: output/output)
 - `--sdmx_dataset`: Set if working with SDMX dataset
 
 
 This command will generate:
-- `pvmap.csv`: Property-Value mapping file
-- `metadata.csv`: Metadata configuration file
-- `output/` directory containing:
+- `sample_output/` directory containing:
+  - `output_pvmap.csv`: Property-Value mapping file
+  - `output_metadata.csv`: Metadata configuration file
   - `output.csv`: Sample input data converted to Data Commons observations (each row represents one Data Commons observation)
   - `output.tmcf`: Template MCF file
   - `output_stat_vars.mcf`: Statistical variables MCF file
 
 **Validation:**
-- Check that `output.csv` contains Data Commons observations with valid format for sample data
-- Validate new StatVar schema in `output_stat_vars.mcf`
+- Check that `sample_output/output.csv` contains Data Commons observations with valid format for sample data
+- Validate new StatVar schema in `sample_output/output_stat_vars.mcf`
 
 
-### Step 6: Data Processing
+### Step 6: Full Data Processing
 
-Process the actual data using the generated PV map and metadata.
+Process the full input data (not sample data) using the PV map and metadata files generated from sample data in previous step  (`sample_output/output_pvmap.csv` and `sample_output/output_metadata.csv`).
 
 **NOTE:** This will generate output in the `final_output/` directory. 
 
@@ -165,9 +167,9 @@ Process the actual data using the generated PV map and metadata.
 # Run the stat var processor
 python "$DC_DATA_REPO_PATH/tools/statvar_importer/stat_var_processor.py" \
   --input_data="input_data.csv" \
-  --pv_map="pvmap.csv" \
-  --config_file="metadata.csv" \
-  --generate_statvar_name=True \  
+  --pv_map="sample_output/output_pvmap.csv" \
+  --config_file="sample_output/output_metadata.csv" \
+  --generate_statvar_name=True \
   --output_path="final_output/output" > "processor.log" 2>&1
 ```
 
@@ -221,12 +223,12 @@ working_directory/
 ├── sample_data.csv             # Sampled data (30 lines max)
 ├── metadata_file1.json         # Metadata files
 ├── metadata_file2.yaml
-├── pvmap.csv                   # Generated PV mapping
-├── metadata.csv                # Generated metadata configuration
 ├── processor.log               # Processing logs
 ├── .datacommons/
 │   └── output_counters.log     # Output counters
-├── output/                     # Sample data output from PV map generation
+├── sample_output/              # Sample data output from PV map generation
+│   ├── output_pvmap.csv        # Generated PV mapping for sample data
+│   ├── output_metadata.csv     # Generated metadata configuration for sample data
 │   ├── output.csv              # Sample data converted to Data Commons observations
 │   ├── output.tmcf             # Template MCF file
 │   └── output_stat_vars.mcf    # Statistical variables MCF file
