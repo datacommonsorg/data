@@ -10,8 +10,8 @@
       "provenance_url": "https://data.oecd.org/gdp/quarterly-gdp.htm",
       "provenance_description": "Quarterly GDP data from the Organisation for Economic Co-operation and Development (OECD). This data is retrieved using the SDMX API.",
       "scripts": [
-        "download.py",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=output/oecd_gdp_full_data.csv --pv_map=pvmap.csv --config_file=metadata.csv --output_path=OECDQuarterlyGDP"
+        "statvar_imports/oecd/quarterly_gdp/download.sh",
+        "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/oecd/quarterly_gdp/output/oecd_gdp_full_data.csv --pv_map=statvar_imports/oecd/quarterly_gdp/pvmap.csv --config_file=statvar_imports/oecd/quarterly_gdp/metadata.csv --output_path=statvar_imports/oecd/quarterly_gdp/OECDQuarterlyGDP"
       ],
       "source_files": [
         "output/oecd_gdp_full_data.csv"
