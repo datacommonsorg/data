@@ -54,7 +54,7 @@ def main():
     logging.info("\n--- Step 2: Starting Full Data Download ---")
     # For the full dataset, we use an empty key and no time parameters
     data_key = {}
-    data_params = {'startPeriod': '2020', 'endPeriod': '2023'}
+    data_params = {'startPeriod': '2020', 'endPeriod': '2025'}
 
     try:
         client.download_data_as_csv(dataflow_id=dataflow_id,
