@@ -9,12 +9,12 @@
             "provenance_description": "Mortality statistics, categorized by demographic factors and specific causes of death, location, race at state level.",
             "scripts": [
                 "download.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.csv --pv_map=single_race_pvmap.csv --config_file=single_race_metadata.csv --output_path=output/UnderlyingCauseofDeath2018_2023SingleRace"
+                "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.csv --pv_map=single_race_pvmap.csv --config_file=single_race_metadata.csv --output_path=output/underlyingcauseofdeath2018_2023singlerace"
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output/UnderlyingCauseofDeath2018_2023SingleRace.tmcf",
-                    "cleaned_csv": "output/UnderlyingCauseofDeath2018_2023SingleRace.csv"
+                    "template_mcf": "output/underlyingcauseofdeath2018_2023singlerace.tmcf",
+                    "cleaned_csv": "output/underlyingcauseofdeath2018_2023singlerace.csv"
                 }
             ],
             "source_files": [
