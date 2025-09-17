@@ -1,8 +1,28 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 """
 download.py
 
 This script downloads the quarterly GDP data from the OECD using the SdmxClient.
+
+Usage:
+  # Run with default start (2020) and end (2025) years
+  python3 download.py
+
+  # Run with custom start and end years
+  START_YEAR=2018 END_YEAR=2022 python3 download.py
 """
 
 import logging
@@ -19,6 +39,8 @@ from tools.sdmx_import.sdmx_client import SdmxClient
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
+START_YEAR = os.environ.get('START_YEAR', '2020')
+END_YEAR = os.environ.get('END_YEAR', '2025')
 
 def main():
     """Downloads the OECD Quarterly GDP Growth dataset and its metadata."""
@@ -47,14 +69,13 @@ def main():
         )
     except Exception as e:
         logging.error(f"Failed to download metadata. Error: {e}")
-        # Exit with a non-zero status code to indicate failure.
         sys.exit(1)
 
-    # --- 4. Fetch Full Data Series ---
+    # --- 4. Fetch Data Series ---
     logging.info("\n--- Step 2: Starting Full Data Download ---")
-    # For the full dataset, we use an empty key and no time parameters
+    # For the full dataset, use an empty key and no time parameters
     data_key = {}
-    data_params = {'startPeriod': '2020', 'endPeriod': '2025'}
+    data_params = {'startPeriod': START_YEAR, 'endPeriod': END_YEAR}
 
     try:
         client.download_data_as_csv(dataflow_id=dataflow_id,
