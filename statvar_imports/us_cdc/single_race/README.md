@@ -27,7 +27,7 @@ For each download, a specific state must be selected. The desired year range is 
 
 ### Data Processing
 
-To get the input files, run the following command. The download.py script will create an input_files folder and copy all the necessary files into it from the GCS:
+To get the input files, run the following command. The download.py script will create an input_files folder and copy all the necessary files into it from the GCS :
 
 ```bash
 
