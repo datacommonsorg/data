@@ -27,12 +27,18 @@ For each download, a specific state must be selected. The desired year range is 
 
 ### Data Processing
 
+To get the input files, run the following command. The download.py script will create an input_files folder and copy all the necessary files into it from the GCS:
+
+```bash
+
+    python3 download.py
+
 After the files are downloaded, the data is processed using the stat_var_processor.py script. The script uses various command-line arguments to specify the input data, pvmap, configuration file, and output path.
 
 
 ```bash
 
-    python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=../../statvar_imports/us_cdc/single_race/test_data/*.csv --pv_map=../../statvar_imports/us_cdc/single_race/single_race_pvmap.csv --config_file=../../statvar_imports/us_cdc/single_race/single_race_metadata.csv --output_path=../../statvar_imports/us_cdc/single_race/output/underlyingcauseofdeath2018_2023singlerace
+    python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=../../statvar_imports/us_cdc/single_race/input_files/*.csv --pv_map=../../statvar_imports/us_cdc/single_race/single_race_pvmap.csv --config_file=../../statvar_imports/us_cdc/single_race/single_race_metadata.csv --output_path=../../statvar_imports/us_cdc/single_race/output/underlyingcauseofdeath2018_2023singlerace
 
 
 ### Automation
