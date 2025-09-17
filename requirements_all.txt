@@ -15,6 +15,7 @@ flask_restful
 geopandas
 geopy
 google-generativeai
+jinja2
 matplotlib
 netCDF4
 protobuf

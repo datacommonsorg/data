@@ -1,0 +1,28 @@
+{
+  "includeInputSubdirs": false,  
+  "inputFiles": {
+    "{{ output_filename }}": {
+      {# The name of the provenance defined in the "sources" block below. Required. #}
+      "provenance": "<YOUR_PROVENANCE_NAME>",
+
+      {# Specifies that the CSV is in "variable-per-row" (long) format, which is required for explicit schemas. #}
+      "format": "variablePerRow",
+
+      {# Maps your CSV column headers to the standard Data Commons names. #}         
+      "columnMappings": {{ column_mappings | tojson(indent=8) }}
+    }
+  },
+
+  "groupStatVarsByProperty": true,
+
+  {# This section defines the sources and provenances for your data. Required. #}
+  "sources": {
+    "<YOUR_SOURCE_NAME>": {       
+      "url": "<URL_OF_YOUR_DATA_SOURCE>",
+      "provenances": {
+        {# This name must match the "provenance" value in the "inputFiles" block above. #}
+        "<YOUR_PROVENANCE_NAME>": "<URL_OF_THE_SPECIFIC_DATASET>"
+      }
+    }
+  }
+}
