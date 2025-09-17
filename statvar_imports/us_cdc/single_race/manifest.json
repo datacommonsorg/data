@@ -8,7 +8,8 @@
             "provenance_url": "https://wonder.cdc.gov/ucd-icd10-expanded.html",
             "provenance_description": "Mortality statistics, categorized by demographic factors and specific causes of death, location, race at state level.",
             "scripts": [
-                "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=gs://unresolved_mcf/cdc/UnderlyingCause/Single_Race/latest/input_files/*.csv --pv_map=single_race_pvmap.csv --config_file=single_race_metadata.csv --output_path=output/UnderlyingCauseofDeath2018_2023SingleRace"
+                "download.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.csv --pv_map=single_race_pvmap.csv --config_file=single_race_metadata.csv --output_path=output/UnderlyingCauseofDeath2018_2023SingleRace"
             ],
             "import_inputs": [
                 {
@@ -17,7 +18,7 @@
                 }
             ],
             "source_files": [
-                "gs://unresolved_mcf/cdc/UnderlyingCause/Single_Race/latest/input_files/*.csv"
+                "input_files/*.csv"
             ],
             "cron_schedule": "30 08 * * 6"
         }

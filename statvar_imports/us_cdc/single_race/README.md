@@ -32,12 +32,12 @@ After the files are downloaded, the data is processed using the stat_var_process
 
 ```bash
 
-    python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=gs://unresolved_mcf/cdc/UnderlyingCause/Single_Race/latest/input_files/*.csv  --pv_map=../../statvar_imports/us_cdc/single_race/single_race_pvmap.csv --config_file=../../statvar_imports/us_cdc/single_race/single_race_metadata.csv --output_path=../../statvar_imports/us_cdc/single_race/output/mortality_underlying_cause_single_race
+    python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=../../statvar_imports/us_cdc/single_race/test_data/*.csv --pv_map=../../statvar_imports/us_cdc/single_race/single_race_pvmap.csv --config_file=../../statvar_imports/us_cdc/single_race/single_race_metadata.csv --output_path=../../statvar_imports/us_cdc/single_race/output/mortality_underlying_cause_single_race
 
 
 ### Automation
 
-This import pipeline is configured to run automatically on a monthly schedule.
+This import pipeline is configured to run Semi-automatic on a monthly schedule.
 
 - Cron Expression: 30 08 * * 6
 
