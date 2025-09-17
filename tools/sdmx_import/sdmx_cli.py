@@ -20,17 +20,20 @@ Provides a simple interface to fetch data and metadata from SDMX REST APIs.
 
 import os
 import urllib.parse
+import json
 from typing import Dict, Any, List
 
 from absl import app
 from absl import flags
 from absl import logging
 from sdmx_client import SdmxClient
+from sdmx_metadata_extractor import extract_dataflow_metadata
 
 # Private command to handler mapping - single source of truth for commands
 _COMMAND_HANDLERS = {
     'download-metadata': lambda: handle_download_metadata(),
     'download-data': lambda: handle_download_data(),
+    'extract-metadata': lambda: handle_extract_metadata(),
 }
 
 # Flag definitions
@@ -180,6 +183,38 @@ def handle_download_data() -> None:
     logging.info(f"Successfully downloaded data to: {FLAGS.output_path}")
 
 
+def handle_extract_metadata() -> None:
+    """
+    Handle the extract-metadata subcommand.
+
+    Extracts comprehensive SDMX dataflow metadata and saves it as JSON.
+
+    Raises:
+        ValueError: If endpoint URL is invalid
+        Exception: If extraction fails
+    """
+    logging.info("Starting metadata extraction...")
+    logging.info(f"Endpoint: {FLAGS.endpoint}")
+    logging.info(f"Agency: {FLAGS.agency}")
+    logging.info(f"Dataflow: {FLAGS.dataflow}")
+    logging.info(f"Output: {FLAGS.output_path}")
+
+    # Validate inputs
+    if not validate_url(FLAGS.endpoint):
+        raise ValueError(f"Invalid endpoint URL: {FLAGS.endpoint}")
+
+    # Ensure output directory exists
+    ensure_output_directory(FLAGS.output_path)
+
+    # Extract metadata and save as JSON
+    metadata_dict = extract_dataflow_metadata(FLAGS.endpoint, FLAGS.agency, FLAGS.dataflow)
+
+    with open(FLAGS.output_path, 'w', encoding='utf-8') as f:
+        json.dump(metadata_dict, f, indent=2, ensure_ascii=False)
+
+    logging.info(f"Successfully extracted metadata to: {FLAGS.output_path}")
+
+
 def validate_required_flags_for_command(command: str) -> None:
     """
     Validate that required flags are provided for the given command.
@@ -226,12 +261,18 @@ def main(argv) -> None:
             "Usage: sdmx_cli.py <command> [flags]\n"
             f"Commands: {', '.join(_COMMAND_HANDLERS.keys())}\n\n"
             "Examples:\n"
-            "  # Download metadata\n"
+            "  # Download metadata (XML format)\n"
             "  sdmx_cli.py download-metadata \\\n"
             "    --endpoint=https://sdmx.oecd.org/public/rest/ \\\n"
             "    --agency=OECD.SDD.NAD \\\n"
             "    --dataflow=DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD \\\n"
             "    --output_path=metadata.xml\n\n"
+            "  # Extract metadata (JSON format)\n"
+            "  sdmx_cli.py extract-metadata \\\n"
+            "    --endpoint=https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/ \\\n"
+            "    --agency=ESTAT \\\n"
+            "    --dataflow=UNE_RT_A \\\n"
+            "    --output_path=metadata.json\n\n"
             "  # Download data with filters\n"
             "  sdmx_cli.py download-data \\\n"
             "    --endpoint=https://sdmx.oecd.org/public/rest/ \\\n"
