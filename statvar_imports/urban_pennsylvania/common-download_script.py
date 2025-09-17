@@ -17,12 +17,13 @@
 
 import pandas as pd
 import requests
-import csv
-import json
+import numpy as np
 from absl import app
 from absl import logging
 
 logging.set_verbosity(logging.INFO)
+
+_API_PAGE_LIMIT = 1000
 
 # Configuration of the datasets
 
@@ -58,7 +59,7 @@ config_3 = {
         'school_year': 'School Year', 'county_code': 'County Code', 'county': 'County', 'gender': 'Gender', 'pre_kindergarten_half_day': 'Pre-Kindergarten Half Day', 'pre_kindergarten_full_day': 'Pre-Kindergarten Full Day', 'k4_half_day': 'K4 Half Day', 'k4_full_day': 'K4 Full Day', 'k5_half_day': 'K5 Half Day', 'k5_full_day': 'K5 Full Day', '_1st_grade': '1st Grade', '_2nd_grade': '2nd Grade', '_3rd_grade': '3rd Grade', '_4th_grade': '4th Grade', '_5th_grade': '5th Grade', '_6th_grade': '6th Grade', '_7th_grade': '7th Grade', '_8th_grade': '8th Grade', '_9th_grade': '9th Grade', '_10th_grade': '10th Grade', '_11th_grade': '11th Grade', '_12th_grade': '12th Grade', 'total': 'Total'
     },
     "desired_columns": ["School Year", "County Code", "County", "Gender", "Pre-Kindergarten Half Day", "Pre-Kindergarten Full Day", "K4 Half Day", "K4 Full Day", "K5 Half Day", "K5 Full Day", "1st Grade", "2nd Grade", "3rd Grade", "4th Grade", "5th Grade", "6th Grade", "7th Grade", "8th Grade", "9th Grade", "10th Grade", "11th Grade", "12th Grade", "Total"],
-    "coord_column_name": None, 
+    "coord_column_name": None,
     "coord_format_type": None
 }
 #Configuration 4: Undergraduate-STEM-Enrollment-at-Publicly-Supporte
@@ -109,12 +110,11 @@ def process_api_data(api_url, output_filename, column_mapping, desired_columns, 
     """
     all_data = []
     offset = 0
-    limit = 1000
-
+    
     logging.info(f"Starting to retrieve data from {api_url}")
 
     while True:
-        params = {'$offset': offset, '$limit': limit}
+        params = {'$offset': offset, '$limit': _API_PAGE_LIMIT}
 
         try:
             response = requests.get(api_url, params=params)
@@ -132,14 +132,15 @@ def process_api_data(api_url, output_filename, column_mapping, desired_columns, 
             logging.info(
                 f"Retrieved {len(data)} records (Offset: {offset}). Total records: {len(all_data)}")
 
-            offset += limit
+            offset += _API_PAGE_LIMIT
 
         except requests.exceptions.RequestException as e:
             logging.error(f"Failed to retrieve data from {api_url}: {e}")
             return
         except Exception as e:
             logging.fatal(f"An unexpected error occurred: {e}")
-            return
+            raise RuntimeError(f"Program terminated due to a fatal error: {e}")
+        
 
     if all_data:
         try:
@@ -151,14 +152,17 @@ def process_api_data(api_url, output_filename, column_mapping, desired_columns, 
                     geo_ref = row.get(coord_column_name)
 
                     if isinstance(geo_ref, dict):
-                        if coord_format_type == "list" and "coordinates" in geo_ref:
-                            coords = geo_ref["coordinates"]
-                            return pd.Series([coords[1], coords[0], f"POINT ({coords[0]} {coords[1]})"])
-                        elif coord_format_type == "dict" and 'latitude' in geo_ref and 'longitude' in geo_ref:
-                            latitude = geo_ref['latitude']
-                            longitude = geo_ref['longitude']
-                            return pd.Series([latitude, longitude, f"({latitude}, {longitude})"])
-                    return pd.Series(["", "", ""])
+                        if coord_format_type == "list":
+                            coords = geo_ref.get("coordinates")
+                            if isinstance(coords, list) and len(coords) == 2:
+                                longitude, latitude = coords[0], coords[1]
+                                return pd.Series([latitude, longitude, f"POINT ({longitude} {latitude})"])
+                        elif coord_format_type == "dict":
+                            latitude = geo_ref.get('latitude')
+                            longitude = geo_ref.get('longitude')
+                            if latitude is not None and longitude is not None:
+                                return pd.Series([latitude, longitude, f"({latitude}, {longitude})"])
+                    return pd.Series([np.nan, np.nan, None])
 
                 if coord_format_type == "list":
                     dataframe[["latitude", "longitude", "geocoded_wkt"]] = dataframe.apply(
@@ -171,7 +175,7 @@ def process_api_data(api_url, output_filename, column_mapping, desired_columns, 
                 if coord_column_name in dataframe.columns:
                     dataframe = dataframe.drop(columns=[coord_column_name])
 
-            # Rename columns  based on the provided mapping
+            # Rename columns based on the provided mapping
             dataframe = dataframe.rename(columns=column_mapping)
 
             # Select and reorder the final desired columns
@@ -197,7 +201,7 @@ def main(_):
     datasets = [config_1, config_2, config_3, config_4, config_5, config_6]
     for i, config in enumerate(datasets, 1):
         process_api_data(**config)
-        logging.info(f"Download of dataset {i} is completed.")
+        logging.info(f"Download for '{config['output_filename']}' is completed.")
 
 
 if __name__ == "__main__":
