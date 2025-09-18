@@ -51,33 +51,24 @@ class TestSdmxV21MetadataExtractor(unittest.TestCase):
 
     def test_complete_metadata_extraction(self):
         """Test complete metadata extraction against expected JSON output."""
-        with tempfile.NamedTemporaryFile(suffix='.json', delete=False) as tmp:
-            temp_output = tmp.name
-        try:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            temp_output = os.path.join(tmpdir, "output.json")
             xml_path = self._get_testdata_path(self.sample_xml_file)
             extract_dataflow_metadata(xml_path, temp_output)
 
             # Load both JSON files and compare
-            with open(temp_output) as f:
+            with open(temp_output, encoding='utf-8') as f:
                 actual_result = json.load(f)
             expected_result = self._load_expected_json()
             self.assertEqual(actual_result, expected_result)
-        finally:
-            os.unlink(temp_output)
 
     def test_file_not_found(self):
         """Test error handling when XML file does not exist."""
         nonexistent_path = self._get_testdata_path("nonexistent.xml")
-        with tempfile.NamedTemporaryFile(suffix='.json', delete=False) as tmp:
-            temp_output = tmp.name
-
-        try:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            temp_output = os.path.join(tmpdir, "output.json")
             with self.assertRaises(FileNotFoundError):
                 extract_dataflow_metadata(nonexistent_path, temp_output)
-        finally:
-            # Clean up temp file if it was created
-            if os.path.exists(temp_output):
-                os.unlink(temp_output)
 
 
 if __name__ == "__main__":
