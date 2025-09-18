@@ -22,9 +22,13 @@ against expected JSON output format using SDMX 2.1 standard.
 
 import json
 import os
+import sys
 import tempfile
 import unittest
 from typing import Dict, Any
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
 
 from sdmx_metadata_extractor import extract_dataflow_metadata
 
