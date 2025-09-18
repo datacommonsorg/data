@@ -1,0 +1,4 @@
+parameter,value
+output_columns,"observationAbout, observationDate, value,observationPeriod, variableMeasured"
+header_rows,1
+mapped_columns,6
