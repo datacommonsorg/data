@@ -25,7 +25,6 @@
 
                 <str:Concept urn="urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=TEST_AGENCY:SAMPLE_CONCEPTS(1.0).FREQ" id="FREQ">
                     <com:Name xml:lang="en">Frequency</com:Name>
-                    <com:Description xml:lang="en">Data collection frequency</com:Description>
                 </str:Concept>
 
                 <str:Concept urn="urn:sdmx:org.sdmx.infomodel.conceptscheme.Concept=TEST_AGENCY:SAMPLE_CONCEPTS(1.0).GEO" id="GEO">
@@ -84,7 +83,6 @@
                 </str:Code>
 
                 <str:Code urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=TEST_AGENCY:CL_GEO(1.0).REG_A" id="REG_A">
-                    <com:Name xml:lang="en">Region A</com:Name>
                     <com:Description xml:lang="en">Sample geographic region A</com:Description>
                 </str:Code>
 
@@ -101,7 +99,6 @@
 
                 <str:Code urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=TEST_AGENCY:CL_INDICATOR(1.0).GDP" id="GDP">
                     <com:Name xml:lang="en">Gross Domestic Product</com:Name>
-                    <com:Description xml:lang="en">Total economic output measure</com:Description>
                 </str:Code>
 
                 <str:Code urn="urn:sdmx:org.sdmx.infomodel.codelist.Code=TEST_AGENCY:CL_INDICATOR(1.0).POP" id="POP">

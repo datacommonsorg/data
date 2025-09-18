@@ -191,7 +191,13 @@ def write_dataclass_to_json(dataclass_obj, output_path: str) -> None:
         output_path: Path to the output JSON file
     """
     with open(output_path, 'w') as f:
-        json.dump(asdict(dataclass_obj), f, indent=2)
+        # Filter out None, empty strings, and empty lists
+        # but preserve False and 0 which may be meaningful
+        clean_dict = asdict(dataclass_obj,
+                            dict_factory=lambda x: {
+                                k: v for k, v in x if v not in (None, '', [])
+                            })
+        json.dump(clean_dict, f, indent=2)
 
 
 def _get_concept_details(concept: Any) -> Optional[ConceptDetails]:
