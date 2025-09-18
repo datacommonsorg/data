@@ -29,6 +29,8 @@ The workflow for this data import involves two main steps: Manually downloading 
 
 To get the necessary data files, you'll need to manually download source files related to education from the KOSA website.
 
+Note: Select only five years to avoid data loss. eg: Spilt like 2017-2022, 2022-2024
+
 **Middle School** : https://kosis.kr/statHtml/statHtml.do?sso=ok&returnurl=https%3A%2F%2Fkosis.kr%3A443%2FstatHtml%2FstatHtml.do%3Flist_id%3DH1_2%26obj_var_id%3D%26seqNo%3D%26tblId%3DDT_1963003_003%26vw_cd%3DMT_ETITLE%26language%3Den%26orgId%3D334%26path%3D%252Feng%252FstatisticsList%252FstatisticsListIndex.do%26conn_path%3DMT_ETITLE%26itm_id%3D%26lang_mode%3Den%26scrId%3D%26
 
 **Kindergarten** :  https://kosis.kr/statHtml/statHtml.do?sso=ok&returnurl=https%3A%2F%2Fkosis.kr%3A443%2FstatHtml%2FstatHtml.do%3Flist_id%3DH1_2%26obj_var_id%3D%26seqNo%3D%26tblId%3DDT_1963003_001%26vw_cd%3DMT_ETITLE%26language%3Den%26orgId%3D334%26path%3D%252Feng%252FstatisticsList%252FstatisticsListIndex.do%26conn_path%3DMT_ETITLE%26itm_id%3D%26lang_mode%3Den%26scrId%3D%26
@@ -59,14 +61,24 @@ You can also run the `stat_var_processor.py` script individually for each file. 
 Here are the specific commands for each file:
 
 ```bash
-python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/source_files/elementary_school_data.csv --pv_map=elementary_school_pvmap.csv --config_file=elementary_school_metadata.csv --places_resolved_csv=elementary_school_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/elementary_school
+To run a Python script, you prepend the `python3` command to the script path. Here are the updated commands with `python3` at the beginning of each line.
 
-python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/source_files/junior_college_data.csv --pv_map=junior_college_pvmap.csv --config_file=junior_college_metadata.csv --places_resolved_csv=junior_college_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/junior_college
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/input_files/Summary_of_Elementary_School_20250821185604.csv --pv_map='elementary_school_pvmap.csv,places_resolved.csv' --config_file=elementary_school_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/elementary_school
 
-python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/source_files/junior_college_data.csv --pv_map=junior_college_pvmap.csv --config_file=junior_college_metadata.csv --places_resolved_csv=junior_college_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/junior_college
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/input_files/Summary_of_High_School_20250821182014.csv --pv_map='high_school_pvmap.csv,places_resolved.csv' --config_file=high_school_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/high_school
 
-python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/source_files/kindergarten_data.csv --pv_map=kindergarten_pvmap.csv --config_file=kindergarten_metadata.csv --places_resolved_csv=kindergarten_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/kindergarten
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/input_files/Summary_of_High_School_20250821184419.csv --pv_map='high_school_pvmap.csv,places_resolved.csv' --config_file=high_school_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/high_school
 
-python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/source_files/middle_school_data.csv --pv_map=middle_school_pvmap.csv --config_file=middle_school_metadata.csv --places_resolved_csv=middle_school_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/middle_school
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/input_files/Summary_of_High_School_20250821184720.csv --pv_map='high_school_pvmap.csv,places_resolved.csv' --config_file=high_school_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/high_school
+
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/input_files/Summary_of_Junior_College_20250822040439.csv --pv_map='junior_college_pvmap.csv,places_resolved.csv' --config_file=junior_college_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/junior_college
+
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/input_files/Summary_of_Junior_College_20250822040842.csv --pv_map='junior_college_pvmap.csv,places_resolved.csv' --config_file=junior_college_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/junior_college
+
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/input_files/Summary_of_Kindergarten_20250821210214.csv --pv_map='kindergarten_pvmap.csv,places_resolved.csv' --config_file=kindergarten_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/kindergarten
+
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/input_files/Summary_of_Middle_School_20250821210556.csv --pv_map='middle_school_pvmap.csv,places_resolved.csv' --config_file=middle_school_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/middle_school
+
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/education/input_files/Summary_of_Middle_School_20250821210706.csv --pv_map='middle_school_pvmap.csv,places_resolved.csv' --config_file=middle_school_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/middle_school
 
 ```
