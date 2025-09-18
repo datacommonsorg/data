@@ -17,7 +17,7 @@
     <mes:Structures>
 
         <!-- Concept Schemes -->
-        <str:ConceptSchemes>
+        <str:Concepts>
             <str:ConceptScheme urn="urn:sdmx:org.sdmx.infomodel.conceptscheme.ConceptScheme=TEST_AGENCY:SAMPLE_CONCEPTS(1.0)"
                                isExternalReference="false" agencyID="TEST_AGENCY" id="SAMPLE_CONCEPTS" isFinal="true" version="1.0">
                 <com:Name xml:lang="en">Sample Data Concepts</com:Name>
@@ -48,7 +48,7 @@
                     <com:Description xml:lang="en">Quality flag for the observation</com:Description>
                 </str:Concept>
             </str:ConceptScheme>
-        </str:ConceptSchemes>
+        </str:Concepts>
 
         <!-- Codelists -->
         <str:Codelists>
@@ -190,8 +190,7 @@
                             </str:LocalRepresentation>
                             <str:AttributeRelationship>
                                 <str:PrimaryMeasure>
-                                    <Ref agencyID="TEST_AGENCY" maintainableParentID="SAMPLE_DSD" maintainableParentVersion="1.0"
-                                         id="OBS_VALUE" package="datastructure" class="PrimaryMeasure"/>
+                                    <Ref id="OBS_VALUE"/>
                                 </str:PrimaryMeasure>
                             </str:AttributeRelationship>
                         </str:Attribute>

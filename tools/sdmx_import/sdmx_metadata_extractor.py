@@ -25,18 +25,18 @@ from dataclasses import dataclass, field, asdict
 from typing import List, Optional, Literal, Dict, Any
 
 import sdmx
-from sdmx.model.internationalstring import InternationalStringDescriptor, DEFAULT_LOCALE
+from sdmx.model.internationalstring import InternationalString, DEFAULT_LOCALE
 from sdmx.model.common import FacetType, FacetValueType
 
 
 def _get_localized_string(obj) -> str:
     """
-    Safely get localized string from an InternationalStringDescriptor object.
+    Safely get localized string from an InternationalString object.
     In the SDMX model, names and descriptions are multilingual.
     This function assumes a default locale like 'en' and returns the string
     for that locale, or an empty string if not available.
     """
-    if isinstance(obj, InternationalStringDescriptor) and obj:
+    if isinstance(obj, InternationalString) and obj:
         try:
             return obj.localized_default(DEFAULT_LOCALE)
         except Exception:

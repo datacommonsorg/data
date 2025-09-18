@@ -14,10 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Unit tests for SDMX metadata extractor.
+Unit tests for SDMX 2.1 metadata extractor.
 
 Tests the extraction of SDMX metadata from XML files and validation
-against expected JSON output format.
+against expected JSON output format using SDMX 2.1 standard.
 """
 
 import json
@@ -28,23 +28,26 @@ from typing import Dict, Any
 from sdmx_metadata_extractor import extract_dataflow_metadata_from_file
 
 
-class TestSdmxMetadataExtractor(unittest.TestCase):
-    """Test cases for SDMX metadata extraction functionality."""
+class TestSdmxV21MetadataExtractor(unittest.TestCase):
+    """Test cases for SDMX 2.1 metadata extraction functionality."""
 
     def setUp(self):
         """Set up test environment."""
         self.test_dir = os.path.dirname(__file__)
-        self.testdata_dir = os.path.join(self.test_dir, "testdata")
-
-    def _load_expected_json(self, filename: str) -> Dict[str, Any]:
-        """Load expected JSON from testdata directory."""
-        filepath = os.path.join(self.testdata_dir, filename)
-        with open(filepath, 'r', encoding='utf-8') as f:
-            return json.load(f)
+        self.testdata_dir = os.path.join(self.test_dir, "testdata", "sdmx_2_1")
+        self.sample_xml_file = "sample_dataflow_sdmx2_1.xml"
+        self.expected_json_file = "expected_sample_dataflow_output.json"
+        self.dataflow_id = "SAMPLE_DATA"
 
     def _get_testdata_path(self, filename: str) -> str:
         """Get full path to test data file."""
         return os.path.join(self.testdata_dir, filename)
+
+    def _load_expected_json(self) -> Dict[str, Any]:
+        """Load expected JSON output from testdata directory."""
+        filepath = self._get_testdata_path(self.expected_json_file)
+        with open(filepath, 'r', encoding='utf-8') as f:
+            return json.load(f)
 
     def assert_json_equal(self,
                           actual: Dict[str, Any],
@@ -91,32 +94,195 @@ class TestSdmxMetadataExtractor(unittest.TestCase):
                     f"Value mismatch at {path}: expected {expected!r}, got {actual!r}"
                 )
 
-    def test_basic_dataflow_extraction(self):
-        """Test extraction of a generic dataflow structure."""
-        # Extract metadata from generic XML file (renamed from ECB but content is generic)
-        xml_path = self._get_testdata_path("generic_full_structure.xml")
-        actual_result = extract_dataflow_metadata_from_file(xml_path, "EXR")
+    def test_complete_metadata_extraction(self):
+        """Test complete metadata extraction against expected JSON output."""
+        xml_path = self._get_testdata_path(self.sample_xml_file)
+        actual_result = extract_dataflow_metadata_from_file(xml_path, self.dataflow_id)
+        expected_result = self._load_expected_json()
+
+        # Compare entire structure against expected output
+        self.assert_json_equal(actual_result, expected_result)
+
+    def test_basic_dataflow_structure(self):
+        """Test basic dataflow structure and properties."""
+        xml_path = self._get_testdata_path(self.sample_xml_file)
+        result = extract_dataflow_metadata_from_file(xml_path, self.dataflow_id)
 
         # Check basic structure
-        self.assertIn("dataflow", actual_result)
-        dataflow = actual_result["dataflow"]
+        self.assertIn("dataflow", result)
+        dataflow = result["dataflow"]
 
         # Check dataflow properties
-        self.assertEqual(dataflow["id"], "EXR")
+        self.assertEqual(dataflow["id"], self.dataflow_id)
         self.assertIn("data_structure_definition", dataflow)
+        self.assertIn("referenced_concept_schemes", dataflow)
 
-        # Check that we have dimensions
+        # Check DSD structure
         dsd = dataflow["data_structure_definition"]
-        self.assertIsInstance(dsd["dimensions"], list)
-        self.assertGreater(len(dsd["dimensions"]), 0)
+        self.assertEqual(dsd["id"], "SAMPLE_DSD")
+        self.assertIn("dimensions", dsd)
+        self.assertIn("attributes", dsd)
+        self.assertIn("measures", dsd)
 
-        # Check that we have concept schemes
-        self.assertIsInstance(dataflow["referenced_concept_schemes"], list)
-        self.assertGreater(len(dataflow["referenced_concept_schemes"]), 0)
+    def test_dimensions_structure(self):
+        """Test that dimensions are correctly extracted."""
+        xml_path = self._get_testdata_path(self.sample_xml_file)
+        result = extract_dataflow_metadata_from_file(xml_path, self.dataflow_id)
+
+        dsd = result["dataflow"]["data_structure_definition"]
+        dimensions = dsd["dimensions"]
+
+        # Should have 3 dimensions: FREQ, GEO, INDICATOR
+        self.assertEqual(len(dimensions), 3)
+
+        # Check dimension IDs
+        dimension_ids = [dim["id"] for dim in dimensions]
+        expected_ids = ["FREQ", "GEO", "INDICATOR"]
+        self.assertEqual(dimension_ids, expected_ids)
+
+        # Check that each dimension has required structure
+        for dim in dimensions:
+            self.assertIn("id", dim)
+            self.assertIn("concept", dim)
+            self.assertIn("representation", dim)
+
+            # Should have concept with correct scheme
+            concept = dim["concept"]
+            self.assertIn("id", concept)
+            self.assertEqual(concept["concept_scheme_id"], "SAMPLE_CONCEPTS")
+
+            # Should have enumerated representation
+            rep = dim["representation"]
+            self.assertEqual(rep["type"], "enumerated")
+            self.assertIn("codelist", rep)
+            self.assertEqual(rep["facets"], [])
+
+    def test_attributes_structure(self):
+        """Test that attributes are correctly extracted."""
+        xml_path = self._get_testdata_path(self.sample_xml_file)
+        result = extract_dataflow_metadata_from_file(xml_path, self.dataflow_id)
+
+        dsd = result["dataflow"]["data_structure_definition"]
+        attributes = dsd["attributes"]
+
+        # Should have 1 attribute: OBS_STATUS
+        self.assertEqual(len(attributes), 1)
+
+        attr = attributes[0]
+        self.assertEqual(attr["id"], "OBS_STATUS")
+        self.assertIn("concept", attr)
+        self.assertIn("representation", attr)
+
+        # Check concept
+        concept = attr["concept"]
+        self.assertEqual(concept["id"], "OBS_STATUS")
+        self.assertEqual(concept["concept_scheme_id"], "SAMPLE_CONCEPTS")
+
+        # Check representation
+        rep = attr["representation"]
+        self.assertEqual(rep["type"], "enumerated")
+        self.assertIn("codelist", rep)
+
+    def test_measures_structure(self):
+        """Test that measures are correctly extracted."""
+        xml_path = self._get_testdata_path(self.sample_xml_file)
+        result = extract_dataflow_metadata_from_file(xml_path, self.dataflow_id)
+
+        dsd = result["dataflow"]["data_structure_definition"]
+        measures = dsd["measures"]
+
+        # Should have 1 measure: OBS_VALUE
+        self.assertEqual(len(measures), 1)
+
+        measure = measures[0]
+        self.assertEqual(measure["id"], "OBS_VALUE")
+        self.assertIn("concept", measure)
+        self.assertIn("representation", measure)
+
+        # Check concept
+        concept = measure["concept"]
+        self.assertEqual(concept["id"], "OBS_VALUE")
+        self.assertEqual(concept["concept_scheme_id"], "SAMPLE_CONCEPTS")
+
+        # Check representation (should be non-enumerated for measures)
+        rep = measure["representation"]
+        self.assertEqual(rep["type"], "non-enumerated")
+        self.assertIsNone(rep["codelist"])
+
+    def test_concept_schemes_structure(self):
+        """Test that concept schemes are correctly extracted."""
+        xml_path = self._get_testdata_path(self.sample_xml_file)
+        result = extract_dataflow_metadata_from_file(xml_path, self.dataflow_id)
+
+        concept_schemes = result["dataflow"]["referenced_concept_schemes"]
+
+        # Should have 1 concept scheme: SAMPLE_CONCEPTS
+        self.assertEqual(len(concept_schemes), 1)
+
+        scheme = concept_schemes[0]
+        self.assertEqual(scheme["id"], "SAMPLE_CONCEPTS")
+        self.assertIn("concepts", scheme)
+
+        # Check concepts in the scheme
+        concepts = scheme["concepts"]
+        self.assertEqual(len(concepts), 5)  # FREQ, GEO, INDICATOR, OBS_VALUE, OBS_STATUS
+
+        concept_ids = [concept["id"] for concept in concepts]
+        expected_concept_ids = ["FREQ", "GEO", "INDICATOR", "OBS_VALUE", "OBS_STATUS"]
+        self.assertEqual(set(concept_ids), set(expected_concept_ids))
+
+        # Check that each concept has required fields
+        for concept in concepts:
+            self.assertIn("id", concept)
+            self.assertEqual(concept["concept_scheme_id"], "SAMPLE_CONCEPTS")
+
+    def test_codelist_structure(self):
+        """Test that codelists are correctly extracted."""
+        xml_path = self._get_testdata_path(self.sample_xml_file)
+        result = extract_dataflow_metadata_from_file(xml_path, self.dataflow_id)
+
+        dsd = result["dataflow"]["data_structure_definition"]
+
+        # Check FREQ dimension codelist
+        freq_dim = next(dim for dim in dsd["dimensions"] if dim["id"] == "FREQ")
+        freq_codelist = freq_dim["representation"]["codelist"]
+
+        self.assertEqual(freq_codelist["id"], "CL_FREQ")
+        self.assertIn("codes", freq_codelist)
+
+        # Should have 3 codes: A, Q, M
+        codes = freq_codelist["codes"]
+        self.assertEqual(len(codes), 3)
+
+        code_ids = [code["id"] for code in codes]
+        expected_code_ids = ["A", "Q", "M"]
+        self.assertEqual(code_ids, expected_code_ids)
+
+    def test_dataclass_serialization(self):
+        """Test that dataclasses are properly serialized to dictionaries."""
+        xml_path = self._get_testdata_path(self.sample_xml_file)
+        result = extract_dataflow_metadata_from_file(xml_path, self.dataflow_id)
+
+        # Check that result is a dictionary (not a dataclass instance)
+        self.assertIsInstance(result, dict)
+
+        # Check main structure
+        self.assertIn("dataflow", result)
+        self.assertIsInstance(result["dataflow"], dict)
+
+        # Check that nested structures are also dictionaries
+        dataflow = result["dataflow"]
+        dsd = dataflow["data_structure_definition"]
+        self.assertIsInstance(dsd, dict)
+
+        # Check dimensions
+        self.assertIsInstance(dsd["dimensions"], list)
+        for dim in dsd["dimensions"]:
+            self.assertIsInstance(dim, dict)
 
     def test_dataflow_not_found(self):
         """Test error handling when dataflow ID is not found in XML."""
-        xml_path = self._get_testdata_path("generic_full_structure.xml")
+        xml_path = self._get_testdata_path(self.sample_xml_file)
 
         with self.assertRaises(ValueError) as context:
             extract_dataflow_metadata_from_file(xml_path, "NONEXISTENT_DF")
@@ -129,106 +295,7 @@ class TestSdmxMetadataExtractor(unittest.TestCase):
         nonexistent_path = self._get_testdata_path("nonexistent.xml")
 
         with self.assertRaises(FileNotFoundError):
-            extract_dataflow_metadata_from_file(nonexistent_path, "EXR")
-
-    def test_dataclass_serialization(self):
-        """Test that dataclasses are properly serialized to dictionaries."""
-        xml_path = self._get_testdata_path("generic_full_structure.xml")
-        result = extract_dataflow_metadata_from_file(xml_path, "EXR")
-
-        # Check that result is a dictionary (not a dataclass instance)
-        self.assertIsInstance(result, dict)
-
-        # Check main structure
-        self.assertIn("dataflow", result)
-        self.assertIsInstance(result["dataflow"], dict)
-
-        # Check that nested structures are also dictionaries
-        dataflow = result["dataflow"]
-        if "data_structure_definition" in dataflow and dataflow[
-                "data_structure_definition"]:
-            dsd = dataflow["data_structure_definition"]
-            self.assertIsInstance(dsd, dict)
-
-            # Check dimensions
-            if "dimensions" in dsd:
-                self.assertIsInstance(dsd["dimensions"], list)
-                for dim in dsd["dimensions"]:
-                    self.assertIsInstance(dim, dict)
-
-    def test_concept_extraction(self):
-        """Test that concepts are correctly extracted from concept schemes."""
-        xml_path = self._get_testdata_path("generic_full_structure.xml")
-        result = extract_dataflow_metadata_from_file(xml_path, "EXR")
-
-        # Check concept schemes
-        dataflow = result["dataflow"]
-        concept_schemes = dataflow["referenced_concept_schemes"]
-
-        self.assertGreater(len(concept_schemes), 0)
-
-        # Check that concepts are present in at least one scheme
-        found_concepts = False
-        for scheme in concept_schemes:
-            if scheme["concepts"]:
-                found_concepts = True
-                concepts = scheme["concepts"]
-                # Check that we have some concepts
-                self.assertGreater(len(concepts), 0)
-                # Check that concepts have required fields
-                for concept in concepts[:3]:  # Check first 3
-                    self.assertIn("id", concept)
-                    self.assertIn("concept_scheme_id", concept)
-                break
-
-        self.assertTrue(found_concepts, "No concepts found in any scheme")
-
-    def test_codelist_extraction(self):
-        """Test that codelists and codes are correctly extracted."""
-        xml_path = self._get_testdata_path("generic_full_structure.xml")
-        result = extract_dataflow_metadata_from_file(xml_path, "EXR")
-
-        # Check dimensions with codelists
-        dsd = result["dataflow"]["data_structure_definition"]
-        dimensions = dsd["dimensions"]
-
-        # Find a dimension with enumerated representation
-        enumerated_dim = None
-        for dim in dimensions:
-            if dim["representation"] and dim["representation"][
-                    "type"] == "enumerated":
-                enumerated_dim = dim
-                break
-
-        self.assertIsNotNone(enumerated_dim, "No enumerated dimension found")
-
-        # Check codelist
-        representation = enumerated_dim["representation"]
-        self.assertEqual(representation["type"], "enumerated")
-
-        codelist = representation["codelist"]
-        self.assertIsNotNone(codelist)
-        self.assertIn("id", codelist)
-
-        # Check codes if they exist
-        if codelist["codes"]:
-            codes = codelist["codes"]
-            self.assertGreater(len(codes), 0)
-            # Check that codes have required fields
-            for code in codes[:3]:  # Check first 3
-                self.assertIn("id", code)
-
-    def test_empty_facets_list(self):
-        """Test that enumerated representations have empty facets list."""
-        xml_path = self._get_testdata_path("generic_full_structure.xml")
-        result = extract_dataflow_metadata_from_file(xml_path, "EXR")
-
-        # Check that enumerated representations have empty facets
-        dsd = result["dataflow"]["data_structure_definition"]
-        for dimension in dsd["dimensions"]:
-            if dimension["representation"] and dimension["representation"][
-                    "type"] == "enumerated":
-                self.assertEqual(dimension["representation"]["facets"], [])
+            extract_dataflow_metadata_from_file(nonexistent_path, self.dataflow_id)
 
 
 if __name__ == "__main__":

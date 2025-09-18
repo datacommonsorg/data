@@ -1,0 +1,220 @@
+{
+  "dataflow": {
+    "id": "SAMPLE_DATA",
+    "name": "Sample Statistical Data",
+    "description": "Sample dataset for testing purposes",
+    "some_attributes": {
+      "version": "1.0",
+      "valid_from": null,
+      "valid_to": null,
+      "is_final": true,
+      "is_external_reference": false,
+      "service_url": null,
+      "structure_url": null
+    },
+    "data_structure_definition": {
+      "id": "SAMPLE_DSD",
+      "name": "Sample Data Structure",
+      "description": "Data structure for sample statistical dataset",
+      "dimensions": [
+        {
+          "id": "FREQ",
+          "name": "Frequency",
+          "description": "Data collection frequency",
+          "concept": {
+            "id": "FREQ",
+            "name": "Frequency",
+            "description": "Data collection frequency",
+            "concept_scheme_id": "SAMPLE_CONCEPTS"
+          },
+          "representation": {
+            "type": "enumerated",
+            "codelist": {
+              "id": "CL_FREQ",
+              "name": "Frequency",
+              "description": "Data frequency classification",
+              "codes": [
+                {
+                  "id": "A",
+                  "name": "Annual",
+                  "description": "Data collected annually"
+                },
+                {
+                  "id": "Q",
+                  "name": "Quarterly",
+                  "description": "Data collected quarterly"
+                },
+                {
+                  "id": "M",
+                  "name": "Monthly",
+                  "description": "Data collected monthly"
+                }
+              ]
+            },
+            "facets": []
+          }
+        },
+        {
+          "id": "GEO",
+          "name": "Geographic Area",
+          "description": "Geographic reference area for the data",
+          "concept": {
+            "id": "GEO",
+            "name": "Geographic Area",
+            "description": "Geographic reference area for the data",
+            "concept_scheme_id": "SAMPLE_CONCEPTS"
+          },
+          "representation": {
+            "type": "enumerated",
+            "codelist": {
+              "id": "CL_GEO",
+              "name": "Geographic Areas",
+              "description": "Standard geographic area codes",
+              "codes": [
+                {
+                  "id": "WORLD",
+                  "name": "World",
+                  "description": "Global aggregate"
+                },
+                {
+                  "id": "REG_A",
+                  "name": "Region A",
+                  "description": "Sample geographic region A"
+                },
+                {
+                  "id": "REG_B",
+                  "name": "Region B",
+                  "description": "Sample geographic region B"
+                }
+              ]
+            },
+            "facets": []
+          }
+        },
+        {
+          "id": "INDICATOR",
+          "name": "Statistical Indicator",
+          "description": "Type of statistical measure",
+          "concept": {
+            "id": "INDICATOR",
+            "name": "Statistical Indicator",
+            "description": "Type of statistical measure",
+            "concept_scheme_id": "SAMPLE_CONCEPTS"
+          },
+          "representation": {
+            "type": "enumerated",
+            "codelist": {
+              "id": "CL_INDICATOR",
+              "name": "Statistical Indicators",
+              "description": "Types of statistical measures",
+              "codes": [
+                {
+                  "id": "GDP",
+                  "name": "Gross Domestic Product",
+                  "description": "Total economic output measure"
+                },
+                {
+                  "id": "POP",
+                  "name": "Population",
+                  "description": "Total population count"
+                }
+              ]
+            },
+            "facets": []
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "id": "OBS_STATUS",
+          "name": "Observation Status",
+          "description": "Quality flag for the observation",
+          "concept": {
+            "id": "OBS_STATUS",
+            "name": "Observation Status",
+            "description": "Quality flag for the observation",
+            "concept_scheme_id": "SAMPLE_CONCEPTS"
+          },
+          "representation": {
+            "type": "enumerated",
+            "codelist": {
+              "id": "CL_OBS_STATUS",
+              "name": "Observation Status",
+              "description": "Data quality flags",
+              "codes": [
+                {
+                  "id": "A",
+                  "name": "Normal",
+                  "description": "Normal value"
+                },
+                {
+                  "id": "E",
+                  "name": "Estimated",
+                  "description": "Estimated value"
+                }
+              ]
+            },
+            "facets": []
+          }
+        }
+      ],
+      "measures": [
+        {
+          "id": "OBS_VALUE",
+          "name": "Observation Value",
+          "description": "Primary measurement value",
+          "concept": {
+            "id": "OBS_VALUE",
+            "name": "Observation Value",
+            "description": "Primary measurement value",
+            "concept_scheme_id": "SAMPLE_CONCEPTS"
+          },
+          "representation": {
+            "type": "non-enumerated",
+            "codelist": null,
+            "facets": []
+          }
+        }
+      ]
+    },
+    "referenced_concept_schemes": [
+      {
+        "id": "SAMPLE_CONCEPTS",
+        "name": "Sample Data Concepts",
+        "description": "Conceptual framework for sample statistical data",
+        "concepts": [
+          {
+            "id": "FREQ",
+            "name": "Frequency",
+            "description": "Data collection frequency",
+            "concept_scheme_id": "SAMPLE_CONCEPTS"
+          },
+          {
+            "id": "GEO",
+            "name": "Geographic Area",
+            "description": "Geographic reference area for the data",
+            "concept_scheme_id": "SAMPLE_CONCEPTS"
+          },
+          {
+            "id": "INDICATOR",
+            "name": "Statistical Indicator",
+            "description": "Type of statistical measure",
+            "concept_scheme_id": "SAMPLE_CONCEPTS"
+          },
+          {
+            "id": "OBS_VALUE",
+            "name": "Observation Value",
+            "description": "Primary measurement value",
+            "concept_scheme_id": "SAMPLE_CONCEPTS"
+          },
+          {
+            "id": "OBS_STATUS",
+            "name": "Observation Status",
+            "description": "Quality flag for the observation",
+            "concept_scheme_id": "SAMPLE_CONCEPTS"
+          }
+        ]
+      }
+    ]
+  }
+}
