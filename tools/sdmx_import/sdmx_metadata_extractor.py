@@ -23,17 +23,17 @@ from SDMX objects.
 import json
 import logging
 from dataclasses import dataclass, field, asdict
-from typing import List, Optional, Literal
+from typing import List, Optional, Literal, Any
+
+from absl import app
+from absl import flags
 
 import sdmx
 from sdmx.model.internationalstring import InternationalString, DEFAULT_LOCALE
 from sdmx.model.common import FacetType, FacetValueType
 
-from absl import app
-from absl import flags
 
-
-def _get_localized_string(obj) -> str:
+def _get_localized_string(obj: Optional[InternationalString]) -> str:
     """
     Safely get localized string from an InternationalString object.
     In the SDMX model, names and descriptions are multilingual.
@@ -194,7 +194,7 @@ def write_dataclass_to_json(dataclass_obj, output_path: str) -> None:
         json.dump(asdict(dataclass_obj), f, indent=2)
 
 
-def _get_concept_details(concept) -> Optional[ConceptDetails]:
+def _get_concept_details(concept: Any) -> Optional[ConceptDetails]:
     """Extract details for a Concept object."""
     if not concept:
         return None
@@ -218,7 +218,7 @@ def _get_concept_details(concept) -> Optional[ConceptDetails]:
 
 
 def _get_representation_details(
-        representation) -> Optional[RepresentationDetails]:
+        representation: Any) -> Optional[RepresentationDetails]:
     """Extract details for a Representation object (enumerated or non-enumerated)."""
     if not representation:
         return None
@@ -273,7 +273,7 @@ def _get_representation_details(
     return None
 
 
-def process_all_dataflows_in_structure_message(sm) -> MultiDataflowOutput:
+def process_all_dataflows_in_structure_message(sm: Any) -> MultiDataflowOutput:
     """
     Process an SDMX StructureMessage and extract metadata for all dataflows.
 
