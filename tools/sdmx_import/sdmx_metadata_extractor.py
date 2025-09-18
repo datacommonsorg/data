@@ -29,7 +29,7 @@ from sdmx.model.internationalstring import InternationalStringDescriptor, DEFAUL
 from sdmx.model.common import FacetType, FacetValueType
 
 
-def get_localized_string(obj) -> str:
+def _get_localized_string(obj) -> str:
     """
     Safely get localized string from an InternationalStringDescriptor object.
     In the SDMX model, names and descriptions are multilingual.
@@ -172,7 +172,7 @@ class FullDataflowOutput:
     dataflow: DataflowStructure
 
 
-def get_concept_details(concept) -> Optional[ConceptDetails]:
+def _get_concept_details(concept) -> Optional[ConceptDetails]:
     """Extract details for a Concept object."""
     if not concept:
         return None
@@ -184,18 +184,18 @@ def get_concept_details(concept) -> Optional[ConceptDetails]:
         elif hasattr(concept, 'scheme') and concept.scheme:
             concept_scheme_id = concept.scheme.id
     except Exception as e:
-        logging.debug(
+        logging.warning(
             f"Could not get concept scheme for concept {concept.id}: {e}")
 
     return ConceptDetails(
         id=concept.id,
-        name=get_localized_string(concept.name),
-        description=get_localized_string(concept.description),
+        name=_get_localized_string(concept.name),
+        description=_get_localized_string(concept.description),
         concept_scheme_id=concept_scheme_id,
     )
 
 
-def get_representation_details(
+def _get_representation_details(
         representation) -> Optional[RepresentationDetails]:
     """Extract details for a Representation object (enumerated or non-enumerated)."""
     if not representation:
@@ -210,19 +210,19 @@ def get_representation_details(
                 codes.append(
                     Code(
                         id=code.id,
-                        name=get_localized_string(code.name),
-                        description=get_localized_string(code.description),
+                        name=_get_localized_string(code.name),
+                        description=_get_localized_string(code.description),
                     ))
         except Exception as e:
-            logging.debug(
+            logging.warning(
                 f"Error processing codes for codelist {codelist.id}: {e}")
 
         return RepresentationDetails(
             type="enumerated",
             codelist=CodelistDetails(
                 id=codelist.id,
-                name=get_localized_string(codelist.name),
-                description=get_localized_string(codelist.description),
+                name=_get_localized_string(codelist.name),
+                description=_get_localized_string(codelist.description),
                 codes=codes,
             ),
         )
@@ -241,7 +241,7 @@ def get_representation_details(
                                 facet.value_type),
                     ))
         except Exception as e:
-            logging.debug(f"Error processing facets: {e}")
+            logging.warning(f"Error processing facets: {e}")
 
         return RepresentationDetails(
             type="non-enumerated",
@@ -251,9 +251,9 @@ def get_representation_details(
     return None
 
 
-def _process_structure_message(sm, dataflow_id: str) -> Dict[str, Any]:
+def process_structure_message(sm, dataflow_id: str) -> Dict[str, Any]:
     """
-    Internal function to process an SDMX StructureMessage and extract metadata.
+    Process an SDMX StructureMessage and extract metadata.
 
     Args:
         sm: The SDMX StructureMessage object containing dataflow and related structures
@@ -292,8 +292,8 @@ def _process_structure_message(sm, dataflow_id: str) -> Dict[str, Any]:
         # Populate DataStructureDefinitionDetails
         dsd_details = DataStructureDefinitionDetails(
             id=dsd_obj.id,
-            name=get_localized_string(dsd_obj.name),
-            description=get_localized_string(dsd_obj.description),
+            name=_get_localized_string(dsd_obj.name),
+            description=_get_localized_string(dsd_obj.description),
         )
 
         # Populate dimensions
@@ -302,15 +302,15 @@ def _process_structure_message(sm, dataflow_id: str) -> Dict[str, Any]:
                 dsd_details.dimensions.append(
                     ComponentDetails(
                         id=dim_component.id,
-                        name=get_localized_string(
+                        name=_get_localized_string(
                             dim_component.concept_identity.name)
                         if dim_component.concept_identity else "",
-                        description=get_localized_string(
+                        description=_get_localized_string(
                             dim_component.concept_identity.description)
                         if dim_component.concept_identity else "",
-                        concept=get_concept_details(
+                        concept=_get_concept_details(
                             dim_component.concept_identity),
-                        representation=get_representation_details(
+                        representation=_get_representation_details(
                             dim_component.local_representation),
                     ))
 
@@ -320,15 +320,15 @@ def _process_structure_message(sm, dataflow_id: str) -> Dict[str, Any]:
                 dsd_details.attributes.append(
                     ComponentDetails(
                         id=attr_component.id,
-                        name=get_localized_string(
+                        name=_get_localized_string(
                             attr_component.concept_identity.name)
                         if attr_component.concept_identity else "",
-                        description=get_localized_string(
+                        description=_get_localized_string(
                             attr_component.concept_identity.description)
                         if attr_component.concept_identity else "",
-                        concept=get_concept_details(
+                        concept=_get_concept_details(
                             attr_component.concept_identity),
-                        representation=get_representation_details(
+                        representation=_get_representation_details(
                             attr_component.local_representation),
                     ))
 
@@ -338,15 +338,15 @@ def _process_structure_message(sm, dataflow_id: str) -> Dict[str, Any]:
                 dsd_details.measures.append(
                     ComponentDetails(
                         id=measure_component.id,
-                        name=get_localized_string(
+                        name=_get_localized_string(
                             measure_component.concept_identity.name)
                         if measure_component.concept_identity else "",
-                        description=get_localized_string(
+                        description=_get_localized_string(
                             measure_component.concept_identity.description)
                         if measure_component.concept_identity else "",
-                        concept=get_concept_details(
+                        concept=_get_concept_details(
                             measure_component.concept_identity),
-                        representation=get_representation_details(
+                        representation=_get_representation_details(
                             measure_component.local_representation),
                     ))
 
@@ -359,20 +359,20 @@ def _process_structure_message(sm, dataflow_id: str) -> Dict[str, Any]:
                     for _, concept_item in concept_scheme.items.items():
                         concepts_in_scheme.append(
                             ConceptDetails(id=concept_item.id,
-                                           name=get_localized_string(
+                                           name=_get_localized_string(
                                                concept_item.name),
-                                           description=get_localized_string(
+                                           description=_get_localized_string(
                                                concept_item.description),
                                            concept_scheme_id=concept_scheme.id))
                 except Exception as e:
-                    logging.debug(
+                    logging.warning(
                         f"Error processing concepts in scheme {cs_id}: {e}")
 
                 referenced_concept_schemes.append(
                     ReferencedConceptSchemeDetails(
                         id=concept_scheme.id,
-                        name=get_localized_string(concept_scheme.name),
-                        description=get_localized_string(
+                        name=_get_localized_string(concept_scheme.name),
+                        description=_get_localized_string(
                             concept_scheme.description),
                         concepts=concepts_in_scheme,
                     ))
@@ -380,8 +380,8 @@ def _process_structure_message(sm, dataflow_id: str) -> Dict[str, Any]:
         # Assemble the final DataflowStructure
         dataflow_structure = DataflowStructure(
             id=dataflow_obj.id,
-            name=get_localized_string(dataflow_obj.name),
-            description=get_localized_string(dataflow_obj.description),
+            name=_get_localized_string(dataflow_obj.name),
+            description=_get_localized_string(dataflow_obj.description),
             some_attributes=some_attrs,
             data_structure_definition=dsd_details,
             referenced_concept_schemes=referenced_concept_schemes,
@@ -390,56 +390,8 @@ def _process_structure_message(sm, dataflow_id: str) -> Dict[str, Any]:
         return asdict(FullDataflowOutput(dataflow=dataflow_structure))
 
     except Exception as e:
-        logging.error(
-            f"Error processing structure message for dataflow {dataflow_id}: {e}"
-        )
-        raise
-
-
-def extract_dataflow_metadata(endpoint: str, agency_id: str,
-                              dataflow_id: str) -> Dict[str, Any]:
-    """
-    Extracts comprehensive metadata for a given SDMX dataflow from a REST API endpoint
-    and returns it as a dictionary that matches the specified JSON schema.
-
-    Args:
-        endpoint: The SDMX REST API endpoint URL
-        agency_id: The ID of the agency providing the data
-        dataflow_id: The ID of the dataflow to retrieve
-
-    Returns:
-        Dictionary representing the dataflow structure in the specified JSON format
-
-    Raises:
-        ValueError: If the dataflow is not found
-        Exception: For other errors during extraction
-    """
-    try:
-        # Create a custom SDMX client and get the structure message
-        sdmx_client = sdmx.Client(agency_id)
-        if endpoint != sdmx_client.source.url:
-            # Add custom source if endpoint differs
-            custom_source = {
-                'id': agency_id,
-                'url': endpoint,
-                'name': f'Custom source for {agency_id}'
-            }
-            sdmx.add_source(custom_source, override=True)
-            sdmx_client = sdmx.Client(agency_id)
-
-        # Request the dataflow with 'references=all' to include all referenced structures
-        logging.info(
-            f"Fetching dataflow metadata for {agency_id}/{dataflow_id} from {endpoint}"
-        )
-        sm = sdmx_client.dataflow(dataflow_id,
-                                  agency_id=agency_id,
-                                  params={"references": "all"})
-
-        return _process_structure_message(sm, dataflow_id)
-
-    except Exception as e:
-        logging.error(
-            f"Error extracting metadata for {agency_id}/{dataflow_id}: {e}")
+        e.add_note(
+            f"Error processing structure message for dataflow {dataflow_id}")
         raise
 
 
@@ -469,13 +421,13 @@ def extract_dataflow_metadata_from_file(xml_file_path: str,
         # Read the SDMX XML file using the sdmx library
         sm = sdmx.read_sdmx(xml_file_path)
 
-        return _process_structure_message(sm, dataflow_id)
+        return process_structure_message(sm, dataflow_id)
 
-    except FileNotFoundError:
-        logging.error(f"SDMX XML file not found: {xml_file_path}")
+    except FileNotFoundError as e:
+        e.add_note(f"SDMX XML file not found: {xml_file_path}")
         raise
     except Exception as e:
-        logging.error(
-            f"Error extracting metadata from file {xml_file_path} for dataflow {dataflow_id}: {e}"
+        e.add_note(
+            f"Failed to extract metadata from {xml_file_path} for dataflow {dataflow_id}"
         )
         raise

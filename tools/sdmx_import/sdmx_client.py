@@ -17,11 +17,14 @@ dataflow.py
 This module provides a client class for interacting with SDMX APIs.
 """
 
+import json
 import logging
 import sdmx
 import pandas as pd
 from requests.exceptions import HTTPError
 from typing import Dict, Any
+
+from sdmx_metadata_extractor import process_structure_message
 
 
 class SdmxClient:
@@ -52,22 +55,52 @@ class SdmxClient:
         sdmx.add_source(custom_source, override=True)
         return sdmx.Client(source_id)
 
-    def download_metadata(self, dataflow_id: str, output_path: str):
+    def download_metadata(self,
+                          dataflow_id: str,
+                          output_path: str,
+                          simplified: bool = False):
         """
-        Fetches the complete metadata for a dataflow and saves the raw
-        SDMX-ML (XML) response to a file.
+        Fetches the complete metadata for a dataflow and saves it to a file.
+
+        Args:
+            dataflow_id: The ID of the dataflow to retrieve
+            output_path: Path where the metadata should be saved
+            simplified: If True, extract and simplify metadata to JSON format;
+                       If False, save raw SDMX-ML (XML) response
         """
         try:
-            logging.info(
-                f"Fetching raw metadata for dataflow: {dataflow_id}...")
-            flow_msg = self.client.dataflow(dataflow_id,
-                                            agency_id=self.agency_id,
-                                            params={'references': 'all'},
-                                            tofile=output_path)
-            logging.info(
-                f"Successfully received response: {flow_msg.response.url}")
+            if simplified:
+                logging.info(
+                    f"Fetching and extracting metadata for dataflow: {dataflow_id}..."
+                )
+                # Get structure message without saving to file
+                flow_msg = self.client.dataflow(dataflow_id,
+                                                agency_id=self.agency_id,
+                                                params={'references': 'all'})
+                logging.info(
+                    f"Successfully received response: {flow_msg.response.url}")
 
-            logging.info(f"Successfully saved metadata to '{output_path}'")
+                # Extract and simplify metadata
+                metadata_dict = process_structure_message(flow_msg, dataflow_id)
+
+                # Save as JSON
+                with open(output_path, 'w', encoding='utf-8') as f:
+                    json.dump(metadata_dict, f, indent=2, ensure_ascii=False)
+
+                logging.info(
+                    f"Successfully saved simplified metadata to '{output_path}'"
+                )
+            else:
+                logging.info(
+                    f"Fetching raw metadata for dataflow: {dataflow_id}...")
+                flow_msg = self.client.dataflow(dataflow_id,
+                                                agency_id=self.agency_id,
+                                                params={'references': 'all'},
+                                                tofile=output_path)
+                logging.info(
+                    f"Successfully received response: {flow_msg.response.url}")
+
+                logging.info(f"Successfully saved metadata to '{output_path}'")
 
         except HTTPError as e:
             logging.error(

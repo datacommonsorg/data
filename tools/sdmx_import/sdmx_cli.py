@@ -20,20 +20,17 @@ Provides a simple interface to fetch data and metadata from SDMX REST APIs.
 
 import os
 import urllib.parse
-import json
 from typing import Dict, Any, List
 
 from absl import app
 from absl import flags
 from absl import logging
 from sdmx_client import SdmxClient
-from sdmx_metadata_extractor import extract_dataflow_metadata
 
 # Private command to handler mapping - single source of truth for commands
 _COMMAND_HANDLERS = {
     'download-metadata': lambda: handle_download_metadata(),
     'download-data': lambda: handle_download_data(),
-    'extract-metadata': lambda: handle_extract_metadata(),
 }
 
 # Flag definitions
@@ -52,6 +49,10 @@ flags.DEFINE_multi_string(
 flags.DEFINE_multi_string(
     'param', [],
     'Query parameters as key:value pairs (e.g., --param=startPeriod:2022)')
+
+# Metadata processing flags
+flags.DEFINE_bool('simplified', False,
+                  'Extract and simplify metadata structure to JSON format')
 
 # Logging flags
 flags.DEFINE_bool('verbose', False, 'Enable verbose logging')
@@ -144,8 +145,15 @@ def handle_download_metadata() -> None:
 
     # Create client and download metadata
     client = SdmxClient(FLAGS.endpoint, FLAGS.agency)
-    client.download_metadata(FLAGS.dataflow, FLAGS.output_path)
-    logging.info(f"Successfully downloaded metadata to: {FLAGS.output_path}")
+    client.download_metadata(FLAGS.dataflow, FLAGS.output_path,
+                             FLAGS.simplified)
+    if FLAGS.simplified:
+        logging.info(
+            f"Successfully extracted simplified metadata to: {FLAGS.output_path}"
+        )
+    else:
+        logging.info(
+            f"Successfully downloaded metadata to: {FLAGS.output_path}")
 
 
 def handle_download_data() -> None:
@@ -181,39 +189,6 @@ def handle_download_data() -> None:
     client.download_data_as_csv(FLAGS.dataflow, data_key, data_params,
                                 FLAGS.output_path)
     logging.info(f"Successfully downloaded data to: {FLAGS.output_path}")
-
-
-def handle_extract_metadata() -> None:
-    """
-    Handle the extract-metadata subcommand.
-
-    Extracts comprehensive SDMX dataflow metadata and saves it as JSON.
-
-    Raises:
-        ValueError: If endpoint URL is invalid
-        Exception: If extraction fails
-    """
-    logging.info("Starting metadata extraction...")
-    logging.info(f"Endpoint: {FLAGS.endpoint}")
-    logging.info(f"Agency: {FLAGS.agency}")
-    logging.info(f"Dataflow: {FLAGS.dataflow}")
-    logging.info(f"Output: {FLAGS.output_path}")
-
-    # Validate inputs
-    if not validate_url(FLAGS.endpoint):
-        raise ValueError(f"Invalid endpoint URL: {FLAGS.endpoint}")
-
-    # Ensure output directory exists
-    ensure_output_directory(FLAGS.output_path)
-
-    # Extract metadata and save as JSON
-    metadata_dict = extract_dataflow_metadata(FLAGS.endpoint, FLAGS.agency,
-                                              FLAGS.dataflow)
-
-    with open(FLAGS.output_path, 'w', encoding='utf-8') as f:
-        json.dump(metadata_dict, f, indent=2, ensure_ascii=False)
-
-    logging.info(f"Successfully extracted metadata to: {FLAGS.output_path}")
 
 
 def validate_required_flags_for_command(command: str) -> None:
@@ -268,12 +243,13 @@ def main(argv) -> None:
             "    --agency=OECD.SDD.NAD \\\n"
             "    --dataflow=DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD \\\n"
             "    --output_path=metadata.xml\n\n"
-            "  # Extract metadata (JSON format)\n"
-            "  sdmx_cli.py extract-metadata \\\n"
+            "  # Extract simplified metadata (JSON format)\n"
+            "  sdmx_cli.py download-metadata \\\n"
             "    --endpoint=https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/ \\\n"
             "    --agency=ESTAT \\\n"
             "    --dataflow=UNE_RT_A \\\n"
-            "    --output_path=metadata.json\n\n"
+            "    --output_path=metadata.json \\\n"
+            "    --simplified\n\n"
             "  # Download data with filters\n"
             "  sdmx_cli.py download-data \\\n"
             "    --endpoint=https://sdmx.oecd.org/public/rest/ \\\n"
