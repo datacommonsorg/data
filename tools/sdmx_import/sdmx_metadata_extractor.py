@@ -43,8 +43,9 @@ def _get_localized_string(obj: Optional[InternationalString]) -> str:
     if isinstance(obj, InternationalString) and obj:
         try:
             return obj.localized_default(DEFAULT_LOCALE)
-        except Exception:
+        except Exception as e:
             # Fallback if localized_default fails
+            logging.warning("Failed to get localized string from %r: %s", obj, e)
             return str(obj) if obj else ""
     return ""
 
