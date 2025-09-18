@@ -45,7 +45,8 @@ def _get_localized_string(obj: Optional[InternationalString]) -> str:
             return obj.localized_default(DEFAULT_LOCALE)
         except Exception as e:
             # Fallback if localized_default fails
-            logging.warning("Failed to get localized string from %r: %s", obj, e)
+            logging.warning("Failed to get localized string from %r: %s", obj,
+                            e)
             return str(obj) if obj else ""
     return ""
 
@@ -274,6 +275,29 @@ def _get_representation_details(
     return None
 
 
+def _extract_component_details(
+        component_container: Any) -> List[ComponentDetails]:
+    """Extract component details from a component container (dimensions/attributes/measures)."""
+    components = []
+    if not component_container:
+        return components
+
+    for component in component_container.components:
+        components.append(
+            ComponentDetails(
+                id=component.id,
+                name=_get_localized_string(component.concept_identity.name)
+                if component.concept_identity else "",
+                description=_get_localized_string(
+                    component.concept_identity.description)
+                if component.concept_identity else "",
+                concept=_get_concept_details(component.concept_identity),
+                representation=_get_representation_details(
+                    component.local_representation),
+            ))
+    return components
+
+
 def process_all_dataflows_in_structure_message(sm: Any) -> MultiDataflowOutput:
     """
     Process an SDMX StructureMessage and extract metadata for all dataflows.
@@ -316,58 +340,19 @@ def process_all_dataflows_in_structure_message(sm: Any) -> MultiDataflowOutput:
             )
 
             # Populate dimensions
-            if hasattr(dsd_obj, 'dimensions') and dsd_obj.dimensions:
-                for dim_component in dsd_obj.dimensions.components:
-                    dsd_details.dimensions.append(
-                        ComponentDetails(
-                            id=dim_component.id,
-                            name=_get_localized_string(
-                                dim_component.concept_identity.name)
-                            if dim_component.concept_identity else "",
-                            description=_get_localized_string(
-                                dim_component.concept_identity.description)
-                            if dim_component.concept_identity else "",
-                            concept=_get_concept_details(
-                                dim_component.concept_identity),
-                            representation=_get_representation_details(
-                                dim_component.local_representation),
-                        ))
+            if hasattr(dsd_obj, 'dimensions'):
+                dsd_details.dimensions = _extract_component_details(
+                    dsd_obj.dimensions)
 
             # Populate attributes
-            if hasattr(dsd_obj, 'attributes') and dsd_obj.attributes:
-                for attr_component in dsd_obj.attributes.components:
-                    dsd_details.attributes.append(
-                        ComponentDetails(
-                            id=attr_component.id,
-                            name=_get_localized_string(
-                                attr_component.concept_identity.name)
-                            if attr_component.concept_identity else "",
-                            description=_get_localized_string(
-                                attr_component.concept_identity.description)
-                            if attr_component.concept_identity else "",
-                            concept=_get_concept_details(
-                                attr_component.concept_identity),
-                            representation=_get_representation_details(
-                                attr_component.local_representation),
-                        ))
+            if hasattr(dsd_obj, 'attributes'):
+                dsd_details.attributes = _extract_component_details(
+                    dsd_obj.attributes)
 
             # Populate measures
-            if hasattr(dsd_obj, 'measures') and dsd_obj.measures:
-                for measure_component in dsd_obj.measures.components:
-                    dsd_details.measures.append(
-                        ComponentDetails(
-                            id=measure_component.id,
-                            name=_get_localized_string(
-                                measure_component.concept_identity.name)
-                            if measure_component.concept_identity else "",
-                            description=_get_localized_string(
-                                measure_component.concept_identity.description)
-                            if measure_component.concept_identity else "",
-                            concept=_get_concept_details(
-                                measure_component.concept_identity),
-                            representation=_get_representation_details(
-                                measure_component.local_representation),
-                        ))
+            if hasattr(dsd_obj, 'measures'):
+                dsd_details.measures = _extract_component_details(
+                    dsd_obj.measures)
 
             # Populate referenced concept schemes (shared across all dataflows)
             referenced_concept_schemes = []
