@@ -172,12 +172,6 @@ class DataflowStructure:
 
 
 @dataclass
-class FullDataflowOutput:
-    """The root object of the entire JSON output, containing the 'dataflow' key."""
-    dataflow: DataflowStructure
-
-
-@dataclass
 class MultiDataflowOutput:
     """The root object for multiple dataflows, containing the 'dataflows' key."""
     dataflows: List[DataflowStructure] = field(default_factory=list)
@@ -456,7 +450,7 @@ def extract_dataflow_metadata(input_metadata: str, output_path: str) -> None:
 
 if __name__ == '__main__':
     # Flag definitions are placed here to avoid conflicts when this module
-    # is imported. When used as a library, callers use extract_dataflow_metadata_from_file()
+    # is imported. When used as a library, callers use extract_dataflow_metadata()
     # directly without needing CLI flags.
     FLAGS = flags.FLAGS
     flags.DEFINE_string('input_metadata', None, 'Path to input SDMX XML file')
