@@ -21,7 +21,7 @@
                 }
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*/*/*"
             ],
             "cron_schedule": "0 06 * * 1"
         }
