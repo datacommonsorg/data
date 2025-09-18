@@ -23,7 +23,7 @@ from SDMX objects.
 import json
 import logging
 from dataclasses import dataclass, field, asdict
-from typing import List, Optional, Literal, Dict, Any
+from typing import List, Optional, Literal
 
 import sdmx
 from sdmx.model.internationalstring import InternationalString, DEFAULT_LOCALE
@@ -31,7 +31,6 @@ from sdmx.model.common import FacetType, FacetValueType
 
 from absl import app
 from absl import flags
-
 
 
 def _get_localized_string(obj) -> str:
@@ -183,6 +182,18 @@ class MultiDataflowOutput:
     dataflows: List[DataflowStructure] = field(default_factory=list)
 
 
+def write_dataclass_to_json(dataclass_obj, output_path: str) -> None:
+    """
+    Write any dataclass to JSON file.
+
+    Args:
+        dataclass_obj: Any dataclass instance to be written to JSON
+        output_path: Path to the output JSON file
+    """
+    with open(output_path, 'w') as f:
+        json.dump(asdict(dataclass_obj), f, indent=2)
+
+
 def _get_concept_details(concept) -> Optional[ConceptDetails]:
     """Extract details for a Concept object."""
     if not concept:
@@ -262,7 +273,7 @@ def _get_representation_details(
     return None
 
 
-def process_all_dataflows_in_structure_message(sm) -> Dict[str, Any]:
+def process_all_dataflows_in_structure_message(sm) -> MultiDataflowOutput:
     """
     Process an SDMX StructureMessage and extract metadata for all dataflows.
 
@@ -270,7 +281,7 @@ def process_all_dataflows_in_structure_message(sm) -> Dict[str, Any]:
         sm: The SDMX StructureMessage object containing dataflows and related structures
 
     Returns:
-        Dictionary representing all dataflows structure in the specified JSON format
+        MultiDataflowOutput dataclass containing all dataflows structure
 
     Raises:
         Exception: For errors during extraction
@@ -283,14 +294,15 @@ def process_all_dataflows_in_structure_message(sm) -> Dict[str, Any]:
 
             # Populate DataflowSomeAttributes
             some_attrs = DataflowSomeAttributes(
-                version=str(dataflow_obj.version) if dataflow_obj.version else None,
+                version=str(dataflow_obj.version)
+                if dataflow_obj.version else None,
                 valid_from=str(dataflow_obj.valid_from)
                 if dataflow_obj.valid_from else None,
                 valid_to=str(dataflow_obj.valid_to)
                 if dataflow_obj.valid_to else None,
                 is_final=getattr(dataflow_obj, 'is_final', None),
-                is_external_reference=getattr(dataflow_obj, 'is_external_reference',
-                                              None),
+                is_external_reference=getattr(dataflow_obj,
+                                              'is_external_reference', None),
                 service_url=getattr(dataflow_obj, 'service_url', None),
                 structure_url=getattr(dataflow_obj, 'structure_url', None),
             )
@@ -364,12 +376,13 @@ def process_all_dataflows_in_structure_message(sm) -> Dict[str, Any]:
                     try:
                         for _, concept_item in concept_scheme.items.items():
                             concepts_in_scheme.append(
-                                ConceptDetails(id=concept_item.id,
-                                               name=_get_localized_string(
-                                                   concept_item.name),
-                                               description=_get_localized_string(
-                                                   concept_item.description),
-                                               concept_scheme_id=concept_scheme.id))
+                                ConceptDetails(
+                                    id=concept_item.id,
+                                    name=_get_localized_string(
+                                        concept_item.name),
+                                    description=_get_localized_string(
+                                        concept_item.description),
+                                    concept_scheme_id=concept_scheme.id))
                     except Exception as e:
                         logging.warning(
                             f"Error processing concepts in scheme {cs_id}: {e}")
@@ -395,189 +408,42 @@ def process_all_dataflows_in_structure_message(sm) -> Dict[str, Any]:
 
             dataflows.append(dataflow_structure)
 
-        return asdict(MultiDataflowOutput(dataflows=dataflows))
+        return MultiDataflowOutput(dataflows=dataflows)
 
     except Exception as e:
         e.add_note("Error processing structure message for all dataflows")
         raise
 
 
-def process_structure_message(sm, dataflow_id: str) -> Dict[str, Any]:
+def extract_dataflow_metadata(input_metadata: str, output_path: str) -> None:
     """
-    Process an SDMX StructureMessage and extract metadata.
-
-    Args:
-        sm: The SDMX StructureMessage object containing dataflow and related structures
-        dataflow_id: The ID of the dataflow to extract from the structure message
-
-    Returns:
-        Dictionary representing the dataflow structure in the specified JSON format
-
-    Raises:
-        ValueError: If the dataflow is not found in the structure message
-        Exception: For other errors during extraction
-    """
-    try:
-        if dataflow_id not in sm.dataflow:
-            raise ValueError(
-                f"Dataflow '{dataflow_id}' not found in the structure message.")
-
-        dataflow_obj = sm.dataflow[
-            dataflow_id]  # Retrieve the specific Dataflow object
-        dsd_obj = dataflow_obj.structure  # Get the DataStructureDefinition associated with the dataflow
-
-        # Populate DataflowSomeAttributes
-        some_attrs = DataflowSomeAttributes(
-            version=str(dataflow_obj.version) if dataflow_obj.version else None,
-            valid_from=str(dataflow_obj.valid_from)
-            if dataflow_obj.valid_from else None,
-            valid_to=str(dataflow_obj.valid_to)
-            if dataflow_obj.valid_to else None,
-            is_final=getattr(dataflow_obj, 'is_final', None),
-            is_external_reference=getattr(dataflow_obj, 'is_external_reference',
-                                          None),
-            service_url=getattr(dataflow_obj, 'service_url', None),
-            structure_url=getattr(dataflow_obj, 'structure_url', None),
-        )
-
-        # Populate DataStructureDefinitionDetails
-        dsd_details = DataStructureDefinitionDetails(
-            id=dsd_obj.id,
-            name=_get_localized_string(dsd_obj.name),
-            description=_get_localized_string(dsd_obj.description),
-        )
-
-        # Populate dimensions
-        if hasattr(dsd_obj, 'dimensions') and dsd_obj.dimensions:
-            for dim_component in dsd_obj.dimensions.components:
-                dsd_details.dimensions.append(
-                    ComponentDetails(
-                        id=dim_component.id,
-                        name=_get_localized_string(
-                            dim_component.concept_identity.name)
-                        if dim_component.concept_identity else "",
-                        description=_get_localized_string(
-                            dim_component.concept_identity.description)
-                        if dim_component.concept_identity else "",
-                        concept=_get_concept_details(
-                            dim_component.concept_identity),
-                        representation=_get_representation_details(
-                            dim_component.local_representation),
-                    ))
-
-        # Populate attributes
-        if hasattr(dsd_obj, 'attributes') and dsd_obj.attributes:
-            for attr_component in dsd_obj.attributes.components:
-                dsd_details.attributes.append(
-                    ComponentDetails(
-                        id=attr_component.id,
-                        name=_get_localized_string(
-                            attr_component.concept_identity.name)
-                        if attr_component.concept_identity else "",
-                        description=_get_localized_string(
-                            attr_component.concept_identity.description)
-                        if attr_component.concept_identity else "",
-                        concept=_get_concept_details(
-                            attr_component.concept_identity),
-                        representation=_get_representation_details(
-                            attr_component.local_representation),
-                    ))
-
-        # Populate measures
-        if hasattr(dsd_obj, 'measures') and dsd_obj.measures:
-            for measure_component in dsd_obj.measures.components:
-                dsd_details.measures.append(
-                    ComponentDetails(
-                        id=measure_component.id,
-                        name=_get_localized_string(
-                            measure_component.concept_identity.name)
-                        if measure_component.concept_identity else "",
-                        description=_get_localized_string(
-                            measure_component.concept_identity.description)
-                        if measure_component.concept_identity else "",
-                        concept=_get_concept_details(
-                            measure_component.concept_identity),
-                        representation=_get_representation_details(
-                            measure_component.local_representation),
-                    ))
-
-        # Populate referenced concept schemes
-        referenced_concept_schemes = []
-        if hasattr(sm, 'concept_scheme') and sm.concept_scheme:
-            for cs_id, concept_scheme in sm.concept_scheme.items():
-                concepts_in_scheme = []
-                try:
-                    for _, concept_item in concept_scheme.items.items():
-                        concepts_in_scheme.append(
-                            ConceptDetails(id=concept_item.id,
-                                           name=_get_localized_string(
-                                               concept_item.name),
-                                           description=_get_localized_string(
-                                               concept_item.description),
-                                           concept_scheme_id=concept_scheme.id))
-                except Exception as e:
-                    logging.warning(
-                        f"Error processing concepts in scheme {cs_id}: {e}")
-
-                referenced_concept_schemes.append(
-                    ReferencedConceptSchemeDetails(
-                        id=concept_scheme.id,
-                        name=_get_localized_string(concept_scheme.name),
-                        description=_get_localized_string(
-                            concept_scheme.description),
-                        concepts=concepts_in_scheme,
-                    ))
-
-        # Assemble the final DataflowStructure
-        dataflow_structure = DataflowStructure(
-            id=dataflow_obj.id,
-            name=_get_localized_string(dataflow_obj.name),
-            description=_get_localized_string(dataflow_obj.description),
-            some_attributes=some_attrs,
-            data_structure_definition=dsd_details,
-            referenced_concept_schemes=referenced_concept_schemes,
-        )
-
-        return asdict(FullDataflowOutput(dataflow=dataflow_structure))
-
-    except Exception as e:
-        e.add_note(
-            f"Error processing structure message for dataflow {dataflow_id}")
-        raise
-
-
-def extract_dataflow_metadata_from_file(xml_file_path: str) -> Dict[str, Any]:
-    """
-    Extracts comprehensive metadata for all SDMX dataflows from a local XML file
-    and returns it as a dictionary that matches the specified JSON schema.
+    Extracts comprehensive metadata for all SDMX dataflows from a local file
+    and writes it to a JSON output file.
 
     This function is useful for testing and offline processing of SDMX metadata.
 
     Args:
-        xml_file_path: Path to the SDMX XML file containing the dataflow metadata
-
-    Returns:
-        Dictionary representing all dataflows structure in the specified JSON format
+        input_metadata: Path to the SDMX file containing the dataflow metadata
+        output_path: Path to the output JSON file
 
     Raises:
-        FileNotFoundError: If the XML file does not exist
-        Exception: For other errors during extraction or XML parsing
+        FileNotFoundError: If the input file does not exist
+        Exception: For other errors during extraction or parsing
     """
     try:
-        logging.info(f"Loading SDMX metadata from file: {xml_file_path}")
+        logging.info(f"Loading SDMX metadata from file: {input_metadata}")
 
-        # Read the SDMX XML file using the sdmx library
-        sm = sdmx.read_sdmx(xml_file_path)
+        # Read the SDMX file using the sdmx library
+        sm = sdmx.read_sdmx(input_metadata)
 
-        return process_all_dataflows_in_structure_message(sm)
+        result = process_all_dataflows_in_structure_message(sm)
+        write_dataclass_to_json(result, output_path)
 
     except FileNotFoundError as e:
-        e.add_note(f"SDMX XML file not found: {xml_file_path}")
+        e.add_note(f"SDMX file not found: {input_metadata}")
         raise
     except Exception as e:
-        e.add_note(
-            f"Failed to extract metadata from {xml_file_path}"
-        )
+        e.add_note(f"Failed to extract metadata from {input_metadata}")
         raise
 
 
@@ -593,9 +459,6 @@ if __name__ == '__main__':
 
     def main(unused_argv) -> None:
         """Main entry point for the SDMX metadata extractor CLI tool."""
-        result = extract_dataflow_metadata_from_file(FLAGS.input_metadata)
-
-        with open(FLAGS.output_path, 'w') as f:
-            json.dump(result, f, indent=2)
+        extract_dataflow_metadata(FLAGS.input_metadata, FLAGS.output_path)
 
     app.run(main)
