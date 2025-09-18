@@ -52,9 +52,7 @@ class SdmxClient:
         sdmx.add_source(custom_source, override=True)
         return sdmx.Client(source_id)
 
-    def download_metadata(self,
-                          dataflow_id: str,
-                          output_path: str):
+    def download_metadata(self, dataflow_id: str, output_path: str):
         """
         Fetches the complete metadata for a dataflow and saves it to a file as raw SDMX-ML (XML).
 

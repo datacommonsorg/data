@@ -50,7 +50,6 @@ flags.DEFINE_multi_string(
     'param', [],
     'Query parameters as key:value pairs (e.g., --param=startPeriod:2022)')
 
-
 # Logging flags
 flags.DEFINE_bool('verbose', False, 'Enable verbose logging')
 flags.DEFINE_bool('quiet', False, 'Only show errors')
