@@ -1,5 +1,6 @@
 {
-  "dataflow": {
+  "dataflows": [
+    {
     "id": "SAMPLE_DATA",
     "name": "Sample Statistical Data",
     "description": "Sample dataset for testing purposes",
@@ -216,5 +217,6 @@
         ]
       }
     ]
-  }
+    }
+  ]
 }

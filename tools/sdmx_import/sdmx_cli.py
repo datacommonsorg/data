@@ -50,9 +50,6 @@ flags.DEFINE_multi_string(
     'param', [],
     'Query parameters as key:value pairs (e.g., --param=startPeriod:2022)')
 
-# Metadata processing flags
-flags.DEFINE_bool('simplified', False,
-                  'Extract and simplify metadata structure to JSON format')
 
 # Logging flags
 flags.DEFINE_bool('verbose', False, 'Enable verbose logging')
@@ -145,15 +142,8 @@ def handle_download_metadata() -> None:
 
     # Create client and download metadata
     client = SdmxClient(FLAGS.endpoint, FLAGS.agency)
-    client.download_metadata(FLAGS.dataflow, FLAGS.output_path,
-                             FLAGS.simplified)
-    if FLAGS.simplified:
-        logging.info(
-            f"Successfully extracted simplified metadata to: {FLAGS.output_path}"
-        )
-    else:
-        logging.info(
-            f"Successfully downloaded metadata to: {FLAGS.output_path}")
+    client.download_metadata(FLAGS.dataflow, FLAGS.output_path)
+    logging.info(f"Successfully downloaded metadata to: {FLAGS.output_path}")
 
 
 def handle_download_data() -> None:
@@ -243,13 +233,10 @@ def main(argv) -> None:
             "    --agency=OECD.SDD.NAD \\\n"
             "    --dataflow=DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD \\\n"
             "    --output_path=metadata.xml\n\n"
-            "  # Extract simplified metadata (JSON format)\n"
-            "  sdmx_cli.py download-metadata \\\n"
-            "    --endpoint=https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/ \\\n"
-            "    --agency=ESTAT \\\n"
-            "    --dataflow=UNE_RT_A \\\n"
-            "    --output_path=metadata.json \\\n"
-            "    --simplified\n\n"
+            "  # Convert XML metadata to simplified JSON format\n"
+            "  python sdmx_metadata_extractor.py \\\n"
+            "    --input_metadata=metadata.xml \\\n"
+            "    --output_path=metadata.json\n\n"
             "  # Download data with filters\n"
             "  sdmx_cli.py download-data \\\n"
             "    --endpoint=https://sdmx.oecd.org/public/rest/ \\\n"
