@@ -21,9 +21,12 @@
 
 set -e
 
-python3 ../../../tools/statvar_importer/stat_var_processor.py \
-  --input_data=input/oecd_gdp_data.csv \
-  --pv_map=pvmap.csv \
-  --config_file=metadata.csv \
-  --output_path=output/oecd_quarterly_gdp \
-  --output_counters=output/oecd_quarterly_gdp/validation/statvar_counters.csv
+SCRIPT_DIR=$(realpath $(dirname "${BASH_SOURCE[0]}"))
+PROJECT_ROOT=$(realpath "$SCRIPT_DIR/../../../")
+
+python3 "$PROJECT_ROOT/tools/statvar_importer/stat_var_processor.py" \
+  --input_data="$SCRIPT_DIR/input/oecd_gdp_data.csv" \
+  --pv_map="$SCRIPT_DIR/pvmap.csv" \
+  --config_file="$SCRIPT_DIR/metadata.csv" \
+  --output_path="$SCRIPT_DIR/output/oecd_quarterly_gdp" \
+  --output_counters="$SCRIPT_DIR/output/oecd_quarterly_gdp/validation/statvar_counters.csv"
