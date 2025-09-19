@@ -29,30 +29,30 @@ AGENCY_ID="OECD.SDD.NAD"
 DATAFLOW_ID="DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD"
 ENDPOINT="https://sdmx.oecd.org/public/rest/"
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-OUTPUT_DIR="$SCRIPT_DIR/output"
+DEST_DIR="$SCRIPT_DIR/input"
 
 # --- Environment Variables ---
 START_YEAR="${START_YEAR:-2020}"
 END_YEAR="${END_YEAR:-2025}"
 
-# --- Create Output Directory ---
-mkdir -p "$OUTPUT_DIR"
+# --- Create Destination Directory ---
+mkdir -p "$DEST_DIR"
 
 # --- Download Metadata ---
 echo "--- Step 1: Starting Metadata Download ---"
-python3 tools/sdmx_import/sdmx_cli.py download-metadata \
+python3 ../../../tools/sdmx_import/sdmx_cli.py download-metadata \
     --endpoint="$ENDPOINT" \
     --agency="$AGENCY_ID" \
     --dataflow="$DATAFLOW_ID" \
-    --output_path="$OUTPUT_DIR/oecd_gdp_full_metadata.xml"
+    --output_path="$DEST_DIR/oecd_gdp_metadata.xml"
 
 # --- Download Data ---
-echo -e "\n--- Step 2: Starting Full Data Download ---"
-python3 tools/sdmx_import/sdmx_cli.py download-data \
+echo -e "\n--- Step 2: Starting Data Download ---"
+python3 ../../../tools/sdmx_import/sdmx_cli.py download-data \
     --endpoint="$ENDPOINT" \
     --agency="$AGENCY_ID" \
     --dataflow="$DATAFLOW_ID" \
-    --output_path="$OUTPUT_DIR/oecd_gdp_full_data.csv" \
+    --output_path="$DEST_DIR/oecd_gdp_data.csv" \
     --param="startPeriod:$START_YEAR" \
     --param="endPeriod:$END_YEAR"
 
