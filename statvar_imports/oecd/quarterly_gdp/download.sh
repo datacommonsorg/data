@@ -16,7 +16,7 @@
 
 # Usage:
 #
-# # Run with default start (2020) and end (2025) years from project root
+# # Run with default start year (2020) and end year (current year)
 # bash statvar_imports/oecd/quarterly_gdp/download.sh
 #
 # # Run with custom start and end years from project root
@@ -28,12 +28,12 @@ set -e
 AGENCY_ID="OECD.SDD.NAD"
 DATAFLOW_ID="DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD"
 ENDPOINT="https://sdmx.oecd.org/public/rest/"
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+SCRIPT_DIR=$(realpath $(dirname "${BASH_SOURCE[0]}"))
 DEST_DIR="$SCRIPT_DIR/input"
 
 # --- Environment Variables ---
 START_YEAR="${START_YEAR:-2020}"
-END_YEAR="${END_YEAR:-2025}"
+END_YEAR="${END_YEAR:-$(date +%Y)}"
 
 # --- Create Destination Directory ---
 mkdir -p "$DEST_DIR"

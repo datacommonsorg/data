@@ -14,10 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Usage:
+#
+# # Run from project root
+# bash statvar_imports/oecd/quarterly_gdp/process.sh
+
 set -e
 
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input/oecd_gdp_data.csv \
   --pv_map=pvmap.csv \
   --config_file=metadata.csv \
-  --output_path=output/oecd_quarterly_gdp
+  --output_path=output/oecd_quarterly_gdp \
+  --output_counters=output/oecd_quarterly_gdp/validation/statvar_counters.csv
