@@ -29,6 +29,7 @@ AGENCY_ID="OECD.SDD.NAD"
 DATAFLOW_ID="DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD"
 ENDPOINT="https://sdmx.oecd.org/public/rest/"
 SCRIPT_DIR=$(realpath $(dirname "${BASH_SOURCE[0]}"))
+PROJECT_ROOT=$(realpath "$SCRIPT_DIR/../../../")
 DEST_DIR="$SCRIPT_DIR/input"
 
 # --- Environment Variables ---
@@ -40,7 +41,7 @@ mkdir -p "$DEST_DIR"
 
 # --- Download Metadata ---
 echo "--- Step 1: Starting Metadata Download ---"
-python3 ../../../tools/sdmx_import/sdmx_cli.py download-metadata \
+python3 "$PROJECT_ROOT/tools/sdmx_import/sdmx_cli.py" download-metadata \
     --endpoint="$ENDPOINT" \
     --agency="$AGENCY_ID" \
     --dataflow="$DATAFLOW_ID" \
@@ -48,11 +49,12 @@ python3 ../../../tools/sdmx_import/sdmx_cli.py download-metadata \
 
 # --- Download Data ---
 echo -e "\n--- Step 2: Starting Data Download ---"
-python3 ../../../tools/sdmx_import/sdmx_cli.py download-data \
+python3 "$PROJECT_ROOT/tools/sdmx_import/sdmx_cli.py" download-data \
     --endpoint="$ENDPOINT" \
     --agency="$AGENCY_ID" \
     --dataflow="$DATAFLOW_ID" \
     --output_path="$DEST_DIR/oecd_gdp_data.csv" \
+    --key="TRANSACTION:B1GQ" \
     --param="startPeriod:$START_YEAR" \
     --param="endPeriod:$END_YEAR"
 
