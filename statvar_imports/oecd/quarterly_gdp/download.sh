@@ -55,6 +55,7 @@ python3 "$PROJECT_ROOT/tools/sdmx_import/sdmx_cli.py" download-data \
     --dataflow="$DATAFLOW_ID" \
     --output_path="$DEST_DIR/oecd_gdp_data.csv" \
     --key="TRANSACTION:B1GQ" \
+    --key="FREQ:Q" \
     --param="startPeriod:$START_YEAR" \
     --param="endPeriod:$END_YEAR"
 
