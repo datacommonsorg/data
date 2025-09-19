@@ -46,5 +46,5 @@ python3 stat_var_processor.py
 --input_data=../../statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/input_files/rows.csv 
 --pv_map=../../statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/nndss_weekly_pvmap.csv 
 --config_file=../../statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/nndss_weekly_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---output_path=../../statvar_imports/dc/CDCWonder_NNDSS_InfectiousWeekly/nndss_weekly/output
+--output_path=../../statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/nndss_weekly/output
 ```
