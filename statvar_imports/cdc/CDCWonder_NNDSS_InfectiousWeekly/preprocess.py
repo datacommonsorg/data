@@ -24,6 +24,7 @@ from download_util_script import download_file
 INPUT_DIR = os.path.join(script_dir, "input_files")
 Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 INPUT_FILE = os.path.join(INPUT_DIR, "rows.csv")
+SOURCE_URL = "https://data.cdc.gov/api/views/x9gk-5huc/rows.csv?accessType=DOWNLOAD&api_foundry=true"
 
 
 
@@ -44,7 +45,7 @@ def _start_date_of_year(year: int) -> datetime.date:
     
     return jan_one + datetime.timedelta(days=diff)
 
-def get_mmwr_week_end_date(year, week) -> datetime.date:
+def get_mmwr_week_start_date(year, week) -> datetime.date:
     """
     Return the start date of an MMWR week (starts at Sunday).
     The provided code originally had 'end_date' in the name but calculated
@@ -52,10 +53,6 @@ def get_mmwr_week_end_date(year, week) -> datetime.date:
     """
     day_one = _start_date_of_year(year)
     diff = 7 * (week - 1)
-    
-    # The original function had a print statement, keeping it for consistency.
-    # In a production environment, this should be removed.
-
     return day_one + datetime.timedelta(days=diff)
 
 def preprocess_data(filepath: str):
@@ -82,7 +79,7 @@ def preprocess_data(filepath: str):
         # Use a vectorized operation with .apply() for better performance.
         # This applies the get_mmwr_week_end_date function to each row.
         df['observationDate'] = df.apply(
-            lambda row: get_mmwr_week_end_date(row['Current MMWR Year'], row['MMWR WEEK']),
+            lambda row: get_mmwr_week_start_date(row['Current MMWR Year'], row['MMWR WEEK']),
             axis=1
         )
 
@@ -107,7 +104,7 @@ def preprocess_data(filepath: str):
 
 def main(argv):
     try:
-        download_file(url="https://data.cdc.gov/api/views/x9gk-5huc/rows.csv?accessType=DOWNLOAD&api_foundry=true",
+        download_file(url=SOURCE_URL,
                   output_folder=INPUT_DIR,
                   unzip=False,
                   headers= None,

@@ -1,4 +1,4 @@
-# Commerce_NTIA
+# CDCWonder_NNDSS_InfectiousWeekly
 
 - source:  `https://data.cdc.gov/api/views/x9gk-5huc/rows.csv?accessType=DOWNLOAD&api_foundry=true`
 
@@ -16,7 +16,7 @@
 ```
 python3 stat_var_processor.py 
 --input_data='../../statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/<input_file.csv>' 
---pv_map='../../statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/<filename of metadata.csv>' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
+--pv_map='../../statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/<filename of pvmap csv>' --config_file=../../statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/<filename of metadata csv> --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
 --output_path='../../statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/<output_folder_name>/<filename>'
 ```
 
