@@ -89,13 +89,11 @@ def preprocess_data(filepath: str):
         # Reorder the columns to place 'observationDate' after 'MMWR WEEK'
         cols = list(df.columns)
         mmwr_week_index = cols.index('MMWR WEEK')
-        
-        # Insert the new column at the desired position
-        cols.insert(mmwr_week_index + 1, 'observationDate')
-        
+        # Move 'observationDate' from the end to its new position
+        observation_date_col = cols.pop()  # It was added as the last column
+        cols.insert(mmwr_week_index + 1, observation_date_col)
         # Reassign the DataFrame with the new column order
         df = df[cols]
-
         # Save the updated DataFrame back to the same CSV file
         df.to_csv(filepath, index=False)
         logging.info(f"Success: File '{filepath}' has been updated and saved.")
