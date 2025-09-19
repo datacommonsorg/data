@@ -14,6 +14,10 @@ REF_AREA:USMCA,#ignore,reason: not a country,,,,
 TRANSACTION:B1GQ,measuredProperty,dcid:grossDomesticProduct,populationType,dcid:EconomicActivity,,
 # QuarterOnChange : instance of ComparisonPeriodEnum,,,,,,
 TRANSFORMATION:G1,statType,growthRate,comparisonPeriod,QuarterOnChange,,
+# YearOnChange : instance of ComparisonPeriodEnum
+TRANSFORMATION:GY,statType,growthRate,comparisonPeriod,YearOnChange,,
+# ContributionToGrowthRate is not a direct GDP growth rate, so ignore it.
+TRANSFORMATION:GCM,#ignore,reason: not a direct GDP growth rate,,,,
 ADJUSTMENT:Y,measurementQualifier,dcid:Adjusted,,,,
 ,,,,,,
 ,,,,,,
