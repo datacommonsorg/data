@@ -410,7 +410,7 @@ def _write_to_mcf_file(data_df: pd.DataFrame, mcf_file_path: str):
 
 
 def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
-                  mcf_file_path: str, tmcf_file_path: str):
+                  mcf_file_path: str):
     """
     Post Processing on the transformed dataframe such as
     1. Create stat-vars
@@ -422,15 +422,11 @@ def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
         data_df (pd.DataFrame): _description_
         cleaned_csv_file_path (str): _description_
         mcf_file_path (str): _description_
-        tmcf_file_path (str): _description_
     """
     logging.info("Starting post-processing.")
     data_df = _generate_prop(data_df)
     data_df = _generate_stat_var_and_mcf(data_df)
     _write_to_mcf_file(data_df, mcf_file_path)
-
-    base_name = os.path.splitext(os.path.basename(cleaned_csv_file_path))[0]
-    _generate_tmcf(tmcf_file_path, base_name)
 
     data_df = _promote_measurement_method(data_df)
     data_df = data_df.sort_values(by=["year", "location", "sv"])
@@ -453,8 +449,7 @@ def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
     return generated_files
 
 
-def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
-            tmcf_file_path: str):
+def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str):
     """
     Process Input Raw Files and apply transformations to generate final
     CSV, MCF and TMCF files.
@@ -479,19 +474,18 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     if not final_df.empty:
         logging.info("Starting post-processing of the final dataframe.")
         generated_csvs = _post_process(final_df, cleaned_csv_file_path,
-                                       mcf_file_path, tmcf_file_path)
+                                       mcf_file_path)
     else:
         logging.warning("Final dataframe is empty. No output files generated.")
     return generated_csvs
 
 
-def _update_manifest(generated_csv_files: list, tmcf_file_path: str):
+def _update_manifest(generated_csv_files: list):
     """
     Updates the manifest.json file with the generated CSV files.
 
     Args:
         generated_csv_files (list): A list of paths to the generated CSV files.
-        tmcf_file_path (str): The path to the TMCF file.
     """
     logging.info("Updating manifest.json")
     manifest_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -537,13 +531,10 @@ def main(_):
     cleaned_csv_path = os.path.join(output_file_path,
                                     "us_transportation_household.csv")
     mcf_path = os.path.join(output_file_path, "us_transportation_household.mcf")
-    tmcf_path = os.path.join(output_file_path,
-                             "us_transportation_household.tmcf")
 
     # Creating Output Directory
     file_util.file_makedirs(cleaned_csv_path)
-    generated_csv_files = process(ip_files, cleaned_csv_path, mcf_path,
-                                  tmcf_path)
+    generated_csv_files = process(ip_files, cleaned_csv_path, mcf_path)
 
     for csv_file in generated_csv_files:
         _upload_to_gcs(csv_file)
@@ -552,7 +543,7 @@ def main(_):
         _generate_tmcf(tmcf_file_path, base_name)
         _upload_to_gcs(tmcf_file_path)
     _upload_to_gcs(mcf_path)
-    _update_manifest(generated_csv_files, tmcf_path)
+    _update_manifest(generated_csv_files)
 
 
 if __name__ == "__main__":
