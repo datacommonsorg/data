@@ -45,7 +45,8 @@ def generate_tmcf():
     output_path = _CONFIG.get("OUTPUT_PATH")
     # The manifest specifies two parts.
     for part_num in range(1, 3):
-        tmcf_file_path = os.path.join(output_path, f"output_part{part_num}.tmcf")
+        tmcf_file_path = os.path.join(output_path,
+                                      f"output_part{part_num}.tmcf")
         with open(tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf_template)
 

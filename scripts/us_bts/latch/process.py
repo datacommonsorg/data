@@ -486,10 +486,8 @@ def _update_manifest(generated_csv_files: list):
             base_name = os.path.basename(csv_file)
             tmcf_name = os.path.splitext(base_name)[0] + ".tmcf"
             import_inputs.append({
-                "template_mcf":
-                    f"output_files/{tmcf_name}",
-                "cleaned_csv":
-                    f"output_files/{base_name}"
+                "template_mcf": f"output_files/{tmcf_name}",
+                "cleaned_csv": f"output_files/{base_name}"
             })
         # The import tool uses the import_specifications section.
         manifest["import_specifications"][0]["import_inputs"] = import_inputs
