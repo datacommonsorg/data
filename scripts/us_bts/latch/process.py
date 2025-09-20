@@ -59,17 +59,6 @@ flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
 _ROWS_PER_FILE = 4000000
 
 
-def _upload_to_gcs(file_path: str):
-    """Uploads a file to the GCS output path."""
-    gcs_file_path = os.path.join(_DEFAULT_OUTPUT_PATH,
-                                 os.path.basename(file_path))
-    try:
-        file_util.file_copy(file_path, gcs_file_path)
-        logging.info(f"Successfully uploaded {file_path} to {gcs_file_path}")
-    except Exception as e:
-        logging.error(f"Failed to upload {file_path} to GCS: {e}")
-
-
 def _promote_measurement_method(data_df: pd.DataFrame) -> pd.DataFrame:
     """
     Promote Measurement method for SV's having two different
@@ -525,8 +514,7 @@ def main(_):
         )
         sys.exit(1)
     ip_files = [os.path.join(input_path, file) for file in ip_files]
-    output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                    "output")
+    output_file_path = _DEFAULT_OUTPUT_PATH
     # Defining Output Files
     cleaned_csv_path = os.path.join(output_file_path,
                                     "us_transportation_household.csv")
@@ -537,12 +525,9 @@ def main(_):
     generated_csv_files = process(ip_files, cleaned_csv_path, mcf_path)
 
     for csv_file in generated_csv_files:
-        _upload_to_gcs(csv_file)
         tmcf_file_path = os.path.splitext(csv_file)[0] + ".tmcf"
         base_name = os.path.splitext(os.path.basename(csv_file))[0]
         _generate_tmcf(tmcf_file_path, base_name)
-        _upload_to_gcs(tmcf_file_path)
-    _upload_to_gcs(mcf_path)
     _update_manifest(generated_csv_files)
 
 
