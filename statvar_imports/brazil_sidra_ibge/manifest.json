@@ -16,19 +16,19 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "brazil_sidra_common.tmcf",
+                    "template_mcf": "output/average_real_income_output.tmcf",
                     "cleaned_csv": "output/average_real_income_output.csv"
                 },
                 {
-                    "template_mcf": "brazil_sidra_common.tmcf",
+                    "template_mcf": "output/mass_income_output.tmcf",
                     "cleaned_csv": "output/mass_income_output.csv"
                 },
                 {
-                    "template_mcf": "brazil_sidra_common.tmcf",
+                    "template_mcf": "output/population_economic_sector_output.tmcf",
                     "cleaned_csv": "output/population_economic_sector_output.csv"
                 },
                 {
-                    "template_mcf": "brazil_sidra_common.tmcf",
+                    "template_mcf": "output/employment_and_unemployment_labor_force_output.tmcf",
                     "cleaned_csv": "output/employment_and_unemployment_labor_force_output.csv"
                 }
             ],

@@ -41,10 +41,15 @@ with open("./config.json", 'r', encoding='utf-8') as config_f:
 def generate_tmcf():
     # Writing Generated TMCF to local path.
     configs = reads_config_file()
-    with open(_CONFIG.get("OUTPUT_PATH") + "/output.tmcf",
+    tmcf_template = configs['TMCF_TEMPLATE'].rstrip('\n')
+    with open(_CONFIG.get("OUTPUT_PATH") + "/output_part1.tmcf",
               'w+',
               encoding='utf-8') as f_out:
-        f_out.write(configs['TMCF_TEMPLATE'].rstrip('\n'))
+        f_out.write(tmcf_template)
+    with open(_CONFIG.get("OUTPUT_PATH") + "/output_part2.tmcf",
+              'w+',
+              encoding='utf-8') as f_out:
+        f_out.write(tmcf_template)
 
 
 def state_resolver(state: str) -> str:

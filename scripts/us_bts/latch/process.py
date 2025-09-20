@@ -51,9 +51,9 @@ import file_util
 # pylint: enable=wrong-import-position
 _FLAGS = flags.FLAGS
 _DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   'gcs_output/input_files')
+                                   'input_files')
 _DEFAULT_OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                    'gcs_output/output_files')
+                                    'output_files')
 flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
                     "Import Data File's List")
 _ROWS_PER_FILE = 4000000
@@ -236,17 +236,18 @@ def _process_household_transportation(input_file: str,
     return data_df
 
 
-def _generate_tmcf(tmcf_file_path: str) -> None:
+def _generate_tmcf(tmcf_file_path: str, filename: str) -> None:
     """
     This method generates TMCF file w.r.t
     dataframe headers and defined TMCF template.
 
     Args:
         tmcf_file_path (str): Output TMCF File Path
+        filename (str): The name of the CSV file.
     """
     logging.info(f"Generating TMCF file: {tmcf_file_path}")
     with open(tmcf_file_path, 'w+', encoding='utf-8') as f_out:
-        f_out.write(TMCF_TEMPLATE.rstrip('\n'))
+        f_out.write(TMCF_TEMPLATE.format(filename=filename).strip())
 
 
 def _apply_regex(data_df: pd.DataFrame, conf: dict, curr_prop_column: str):
@@ -428,7 +429,8 @@ def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
     data_df = _generate_stat_var_and_mcf(data_df)
     _write_to_mcf_file(data_df, mcf_file_path)
 
-    _generate_tmcf(tmcf_file_path)
+    base_name = os.path.splitext(os.path.basename(cleaned_csv_file_path))[0]
+    _generate_tmcf(tmcf_file_path, base_name)
 
     data_df = _promote_measurement_method(data_df)
     data_df = data_df.sort_values(by=["year", "location", "sv"])
@@ -483,12 +485,13 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     return generated_csvs
 
 
-def _update_manifest(generated_csv_files: list):
+def _update_manifest(generated_csv_files: list, tmcf_file_path: str):
     """
     Updates the manifest.json file with the generated CSV files.
 
     Args:
         generated_csv_files (list): A list of paths to the generated CSV files.
+        tmcf_file_path (str): The path to the TMCF file.
     """
     logging.info("Updating manifest.json")
     manifest_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -497,15 +500,18 @@ def _update_manifest(generated_csv_files: list):
         manifest = json.load(f)
         import_inputs = []
         for csv_file in generated_csv_files:
+            base_name = os.path.basename(csv_file)
+            tmcf_name = os.path.splitext(base_name)[0] + ".tmcf"
             import_inputs.append({
                 "template_mcf":
-                    "gcs_output/output_files/us_transportation_household.tmcf",
+                    f"output_files/{tmcf_name}",
                 "cleaned_csv":
-                    f"gcs_output/output_files/{os.path.basename(csv_file)}"
+                    f"output_files/{base_name}"
             })
-        manifest["import_inputs"] = import_inputs
+        # The import tool uses the import_specifications section.
+        manifest["import_specifications"][0]["import_inputs"] = import_inputs
         f.seek(0)
-        json.dump(manifest, f, indent=2)
+        json.dump(manifest, f, indent=4)
         f.truncate()
     logging.info("Successfully updated manifest.json")
 
@@ -541,9 +547,12 @@ def main(_):
 
     for csv_file in generated_csv_files:
         _upload_to_gcs(csv_file)
+        tmcf_file_path = os.path.splitext(csv_file)[0] + ".tmcf"
+        base_name = os.path.splitext(os.path.basename(csv_file))[0]
+        _generate_tmcf(tmcf_file_path, base_name)
+        _upload_to_gcs(tmcf_file_path)
     _upload_to_gcs(mcf_path)
-    _upload_to_gcs(tmcf_path)
-    _update_manifest(generated_csv_files)
+    _update_manifest(generated_csv_files, tmcf_path)
 
 
 if __name__ == "__main__":
