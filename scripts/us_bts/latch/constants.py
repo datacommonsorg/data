@@ -65,7 +65,14 @@ URBAN_RURAL_MCF_NODE = (
     "statType: dcs:measurementResult\n"
     "measuredProperty: dcs:placeOfResidenceClassification\n")
 
-TMCF_TEMPLATE = """Node: E:{filename}->E1
+TMCF_TEMPLATE = """Node: E:{filename}->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Place_Type_PlaceofResidenceClassification
+value: C:{filename}->urban_group
+observationAbout: C:{filename}->location
+observationDate: C:{filename}->year
+
+Node: E:{filename}->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: C:{filename}->sv
 measurementMethod: C:{filename}->measurement_method
