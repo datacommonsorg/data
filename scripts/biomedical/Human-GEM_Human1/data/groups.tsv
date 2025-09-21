@@ -1,0 +1,143 @@
+id	name	kind	sboTerm
+group1	Acyl-CoA hydrolysis	partonomy	SBO:0000633
+group2	Acylglycerides metabolism	partonomy	SBO:0000633
+group3	Alanine, aspartate and glutamate metabolism	partonomy	SBO:0000633
+group4	Alkaloids biosynthesis	partonomy	SBO:0000633
+group5	Amino sugar and nucleotide sugar metabolism	partonomy	SBO:0000633
+group6	Aminoacyl-tRNA biosynthesis	partonomy	SBO:0000633
+group7	Androgen metabolism	partonomy	SBO:0000633
+group8	Arachidonic acid metabolism	partonomy	SBO:0000633
+group9	Arginine and proline metabolism	partonomy	SBO:0000633
+group10	Artificial reactions	partonomy	SBO:0000633
+group11	Ascorbate and aldarate metabolism	partonomy	SBO:0000633
+group12	Beta oxidation of branched-chain fatty acids (mitochondrial)	partonomy	SBO:0000633
+group13	Beta oxidation of di-unsaturated fatty acids (n-6) (mitochondrial)	partonomy	SBO:0000633
+group14	Beta oxidation of di-unsaturated fatty acids (n-6) (peroxisomal)	partonomy	SBO:0000633
+group15	Beta oxidation of even-chain fatty acids (mitochondrial)	partonomy	SBO:0000633
+group16	Beta oxidation of even-chain fatty acids (peroxisomal)	partonomy	SBO:0000633
+group17	Beta oxidation of odd-chain fatty acids (mitochondrial)	partonomy	SBO:0000633
+group18	Beta oxidation of odd-chain fatty acids (peroxisomal)	partonomy	SBO:0000633
+group19	Beta oxidation of phytanic acid (peroxisomal)	partonomy	SBO:0000633
+group20	Beta oxidation of poly-unsaturated fatty acids (mitochondrial)	partonomy	SBO:0000633
+group21	Beta oxidation of unsaturated fatty acids (n-7) (mitochondrial)	partonomy	SBO:0000633
+group22	Beta oxidation of unsaturated fatty acids (n-7) (peroxisomal)	partonomy	SBO:0000633
+group23	Beta oxidation of unsaturated fatty acids (n-9) (mitochondrial)	partonomy	SBO:0000633
+group24	Beta oxidation of unsaturated fatty acids (n-9) (peroxisomal)	partonomy	SBO:0000633
+group25	Beta-alanine metabolism	partonomy	SBO:0000633
+group26	Bile acid biosynthesis	partonomy	SBO:0000633
+group27	Bile acid recycling	partonomy	SBO:0000633
+group28	Biopterin metabolism	partonomy	SBO:0000633
+group29	Biotin metabolism	partonomy	SBO:0000633
+group30	Blood group biosynthesis	partonomy	SBO:0000633
+group31	Butanoate metabolism	partonomy	SBO:0000633
+group32	C5-branched dibasic acid metabolism	partonomy	SBO:0000633
+group33	Carnitine shuttle (cytosolic)	partonomy	SBO:0000633
+group34	Carnitine shuttle (endoplasmic reticular)	partonomy	SBO:0000633
+group35	Carnitine shuttle (mitochondrial)	partonomy	SBO:0000633
+group36	Carnitine shuttle (peroxisomal)	partonomy	SBO:0000633
+group37	Cholesterol biosynthesis 1 (Bloch pathway) 	partonomy	SBO:0000633
+group38	Cholesterol biosynthesis 2	partonomy	SBO:0000633
+group39	Cholesterol biosynthesis 3 (Kandustch-Russell pathway)	partonomy	SBO:0000633
+group40	Cholesterol metabolism	partonomy	SBO:0000633
+group41	Chondroitin / heparan sulfate biosynthesis	partonomy	SBO:0000633
+group42	Chondroitin sulfate degradation	partonomy	SBO:0000633
+group43	CoA catabolism	partonomy	SBO:0000633
+group44	CoA synthesis	partonomy	SBO:0000633
+group45	Cysteine and methionine metabolism	partonomy	SBO:0000633
+group46	Dietary fiber binding	partonomy	SBO:0000633
+group47	Drug metabolism	partonomy	SBO:0000633
+group48	Eicosanoid metabolism	partonomy	SBO:0000633
+group49	Estrogen metabolism	partonomy	SBO:0000633
+group50	Ether lipid metabolism	partonomy	SBO:0000633
+group51	Exchange/demand reactions	partonomy	SBO:0000633
+group52	Fatty acid activation (cytosolic)	partonomy	SBO:0000633
+group53	Fatty acid activation (endoplasmic reticular)	partonomy	SBO:0000633
+group54	Fatty acid biosynthesis	partonomy	SBO:0000633
+group55	Fatty acid biosynthesis (even-chain)	partonomy	SBO:0000633
+group56	Fatty acid biosynthesis (odd-chain)	partonomy	SBO:0000633
+group57	Fatty acid biosynthesis (unsaturated)	partonomy	SBO:0000633
+group58	Fatty acid desaturation (even-chain)	partonomy	SBO:0000633
+group59	Fatty acid desaturation (odd-chain)	partonomy	SBO:0000633
+group60	Fatty acid elongation (even-chain)	partonomy	SBO:0000633
+group61	Fatty acid elongation (odd-chain)	partonomy	SBO:0000633
+group62	Fatty acid oxidation	partonomy	SBO:0000633
+group63	Folate metabolism	partonomy	SBO:0000633
+group64	Formation and hydrolysis of cholesterol esters	partonomy	SBO:0000633
+group65	Fructose and mannose metabolism	partonomy	SBO:0000633
+group66	Galactose metabolism	partonomy	SBO:0000633
+group67	Glucocorticoid biosynthesis	partonomy	SBO:0000633
+group68	Glutathione metabolism	partonomy	SBO:0000633
+group69	Glycerolipid metabolism	partonomy	SBO:0000633
+group70	Glycerophospholipid metabolism	partonomy	SBO:0000633
+group71	Glycine, serine and threonine metabolism	partonomy	SBO:0000633
+group72	Glycolysis / Gluconeogenesis	partonomy	SBO:0000633
+group73	Glycosphingolipid biosynthesis-ganglio series	partonomy	SBO:0000633
+group74	Glycosphingolipid biosynthesis-globo series	partonomy	SBO:0000633
+group75	Glycosphingolipid biosynthesis-lacto and neolacto series	partonomy	SBO:0000633
+group76	Glycosphingolipid metabolism	partonomy	SBO:0000633
+group77	Glycosylphosphatidylinositol (GPI)-anchor biosynthesis	partonomy	SBO:0000633
+group78	Heme degradation	partonomy	SBO:0000633
+group79	Heme synthesis	partonomy	SBO:0000633
+group80	Heparan sulfate degradation	partonomy	SBO:0000633
+group81	Hippurate metabolism	partonomy	SBO:0000633
+group82	Histidine metabolism	partonomy	SBO:0000633
+group83	Inositol phosphate metabolism	partonomy	SBO:0000633
+group84	Isolated	partonomy	SBO:0000633
+group85	Keratan sulfate biosynthesis	partonomy	SBO:0000633
+group86	Keratan sulfate degradation	partonomy	SBO:0000633
+group87	Leukotriene metabolism	partonomy	SBO:0000633
+group88	Linoleate metabolism	partonomy	SBO:0000633
+group89	Lipoic acid metabolism	partonomy	SBO:0000633
+group90	Lysine metabolism	partonomy	SBO:0000633
+group91	Metabolism of other amino acids	partonomy	SBO:0000633
+group92	Miscellaneous	partonomy	SBO:0000633
+group93	N-glycan metabolism	partonomy	SBO:0000633
+group94	Nicotinate and nicotinamide metabolism	partonomy	SBO:0000633
+group95	Nucleotide metabolism	partonomy	SBO:0000633
+group96	O-glycan metabolism	partonomy	SBO:0000633
+group97	Omega-3 fatty acid metabolism	partonomy	SBO:0000633
+group98	Omega-6 fatty acid metabolism	partonomy	SBO:0000633
+group99	Oxidative phosphorylation	partonomy	SBO:0000633
+group100	Pantothenate and CoA biosynthesis	partonomy	SBO:0000633
+group101	Pentose and glucuronate interconversions	partonomy	SBO:0000633
+group102	Pentose phosphate pathway	partonomy	SBO:0000633
+group103	Peptide metabolism	partonomy	SBO:0000633
+group104	Phenylalanine metabolism	partonomy	SBO:0000633
+group105	Phenylalanine, tyrosine and tryptophan biosynthesis	partonomy	SBO:0000633
+group106	Phosphatidylinositol phosphate metabolism	partonomy	SBO:0000633
+group107	Pool reactions	partonomy	SBO:0000633
+group108	Porphyrin metabolism	partonomy	SBO:0000633
+group109	Propanoate metabolism	partonomy	SBO:0000633
+group110	Prostaglandin biosynthesis	partonomy	SBO:0000633
+group111	Protein assembly	partonomy	SBO:0000633
+group112	Protein degradation	partonomy	SBO:0000633
+group113	Protein modification	partonomy	SBO:0000633
+group114	Purine metabolism	partonomy	SBO:0000633
+group115	Pyrimidine metabolism	partonomy	SBO:0000633
+group116	Pyruvate metabolism	partonomy	SBO:0000633
+group117	ROS detoxification	partonomy	SBO:0000633
+group118	Retinol metabolism	partonomy	SBO:0000633
+group119	Riboflavin metabolism	partonomy	SBO:0000633
+group120	Serotonin and melatonin biosynthesis	partonomy	SBO:0000633
+group121	Sphingolipid metabolism	partonomy	SBO:0000633
+group122	Starch and sucrose metabolism	partonomy	SBO:0000633
+group123	Steroid metabolism	partonomy	SBO:0000633
+group124	Sulfur metabolism	partonomy	SBO:0000633
+group125	Terpenoid backbone biosynthesis	partonomy	SBO:0000633
+group126	Thiamine metabolism	partonomy	SBO:0000633
+group127	Transport reactions	partonomy	SBO:0000633
+group128	Triacylglycerol synthesis	partonomy	SBO:0000633
+group129	Tricarboxylic acid cycle and glyoxylate/dicarboxylate metabolism	partonomy	SBO:0000633
+group130	Tryptophan metabolism	partonomy	SBO:0000633
+group131	Tyrosine metabolism	partonomy	SBO:0000633
+group132	Ubiquinone synthesis	partonomy	SBO:0000633
+group133	Urea cycle	partonomy	SBO:0000633
+group134	Valine, leucine, and isoleucine metabolism	partonomy	SBO:0000633
+group135	Vitamin A metabolism	partonomy	SBO:0000633
+group136	Vitamin B12 metabolism	partonomy	SBO:0000633
+group137	Vitamin B2 metabolism	partonomy	SBO:0000633
+group138	Vitamin B6 metabolism	partonomy	SBO:0000633
+group139	Vitamin C metabolism	partonomy	SBO:0000633
+group140	Vitamin D metabolism	partonomy	SBO:0000633
+group141	Vitamin E metabolism	partonomy	SBO:0000633
+group142	Xenobiotics metabolism	partonomy	SBO:0000633
