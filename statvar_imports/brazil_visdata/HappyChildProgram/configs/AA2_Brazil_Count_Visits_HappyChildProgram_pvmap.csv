@@ -1,0 +1,6 @@
+key,prop,value,,,,,,,,,,,,
+Código,observationAbout,{Data},,,,,,,,,,,,
+Referência,observationDate,{Data},,,,,,,,,,,,
+Visitas realizadas para crianças,populationType,Visit,measuredProperty,count,benefitProgram,Brazil_HappyChildProgram,visitationFor,Children,value,{Number},name,"""Number of visits carried out by the Happy Child Program for children""",alternateName,"""Visitas realizadas para crianças@pt"""
+Visitas realizadas para gestantes,populationType,Visit,measuredProperty,count,benefitProgram,Brazil_HappyChildProgram,visitationFor,PregnantWoman,value,{Number},name,"""Number of visits carried out by the Happy Child Program for pregnant women""",alternateName,"""Visitas realizadas para gestantes@pt"""
+Total de visitas realizadas,populationType,Visit,measuredProperty,count,benefitProgram,Brazil_HappyChildProgram,value,{Number},name,"""Total number of visits carried out by the Happy Child Program""",alternateName,"""Total de visitas realizadas@pt""",,
