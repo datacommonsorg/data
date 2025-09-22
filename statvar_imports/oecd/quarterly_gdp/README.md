@@ -5,7 +5,7 @@ This project processes and imports quarterly GDP data from the Organisation for 
 
 - **Source URL**: [https://data.oecd.org/gdp/quarterly-gdp.htm](https://data.oecd.org/gdp/quarterly-gdp.htm)
 - **Import Type**: Fully Automated
-- **Source Data Availability**: Data is available from 2020 to the latest year.
+- **Source Data Availability**: Data is available from 1962 to the latest year (our import fetches from 2020 by default).
 - **Release Frequency**: Quarterly
 - **Type of Place**: Country
 - **StatVars**: Primarily related to quarterly GDP growth rates.
