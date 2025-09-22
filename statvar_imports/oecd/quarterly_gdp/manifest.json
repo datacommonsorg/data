@@ -21,7 +21,7 @@
           "template_mcf": "output/oecd_quarterly_gdp.tmcf",
           "node_mcf": "output/*.mcf",
           "cleaned_csv": "output/oecd_quarterly_gdp.csv",
-          "statvar_counters_csv": "output/oecd_quarterly_gdp/validation/statvar_counters.csv"
+          "statvar_counters_csv": "oecd_quarterly_gdp/validation/statvar_counters.csv"
         }
       ],
       "cron_schedule": "0 8 1 */3 *"
