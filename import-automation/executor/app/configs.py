@@ -42,6 +42,10 @@ class ExecutorConfig:
     # Name of the Cloud Storage bucket to store the generated data files
     # for importing to prod.
     storage_prod_bucket_name: str = 'datcom-prod-imports'
+    # Spanner instance details for import status.
+    spanner_project_id: str = 'datcom-store'
+    spanner_instance_id: str = 'dc-kg-test'
+    spanner_database_id: str = 'dc_graph_import'
     # Name of the Cloud Storage bucket that the Data Commons importer
     # outputs to.
     storage_importer_bucket_name: str = 'resolved_mcf'
