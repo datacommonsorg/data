@@ -1,10 +1,10 @@
-# # Copyright 2025 Google LLC
+# Copyright 2025 Google LLC
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 
-#     https://www.apache.org/licenses/LICENSE-2.0
+#      https://www.apache.org/licenses/LICENSE-2.0
 
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,70 +19,69 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import pandas as pd
 import warnings
+import shutil
+from datetime import date # Import the date class
+from absl import logging
+from absl import app
+
 
 # Suppress pandas FutureWarnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
-from absl import logging
-from absl import app
 
 logging.set_verbosity(logging.INFO)
 
 required_dataset = {
-        'by_race_ethnicity': 'by_race_ethnicity_and_state',
-        'overall': 'overall_by_state',
-        'by_sex': 'by_sex_and_state',
-        'by_age': 'by_age_and_state',
-        'by_race_and_state': 'by_race_ethnicity_and_state',
-        'by_education': 'by_education_and_state',
-        'by_income': 'by_income_and_state',
-    }
+    'by_race_ethnicity': 'by_race_ethnicity_and_state',
+    'overall': 'overall_by_state',
+    'by_sex': 'by_sex_and_state',
+    'by_age': 'by_age_and_state',
+    'by_race_and_state': 'by_race_and_state',
+    'by_education': 'by_education_and_state',
+    'by_income': 'by_income_and_state',
+}
 
-# List of main URLs to process
-urls = [
-    "https://www.cdc.gov/asthma/brfss/99/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/00/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/01/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/02/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/02/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/03/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/03/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/04/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/04/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/05/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/05/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/06/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/06/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/07/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/07/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/08/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/08/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/09/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/09/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/2010/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/2010/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/2011/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/2011/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/2012/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/2012/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/2013/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/2013/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/2014/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/2014/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/2015/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/2015/child/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/2016/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/2016/child/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/2017/brfssdata.htm",
-    "https://www.cdc.gov/asthma/brfss/2017/child/brfsschilddata.htm",
-    "https://www.cdc.gov/asthma/brfss/2018/brfssdata.html",
-    "https://www.cdc.gov/asthma/brfss/2018/child/brfsschilddata.html",
-    "https://www.cdc.gov/asthma/brfss/2019/brfssdata.html",
-    "https://www.cdc.gov/asthma/brfss/2019/child/brfsschilddata.html",
-    "https://www.cdc.gov/asthma/brfss/2020/brfssdata.html",
-    "https://www.cdc.gov/asthma/brfss/2020/child/brfsschilddata.html",
-    "https://www.cdc.gov/asthma/brfss/2021/brfssdata.html",
-    "https://www.cdc.gov/asthma/brfss/2021/child/brfsschilddata.html"
-    ]
+def generate_urls(start_year, end_year):
+    """
+    Generates a list of CDC Asthma BRFSS URLs for a given range of years.
+    
+    Args:
+        start_year (int): The starting year for the URL generation.
+        end_year (int): The ending year (inclusive) for the URL generation.
+        
+    Returns:
+        list: A list of dynamically generated URLs.
+    """
+    generated_urls = []
+    for year in range(start_year, end_year + 1):
+        year_str = str(year)
+        # Handle the transition from 2-digit to 4-digit years in the URL path
+        if year >= 2010:
+            url_year = year_str
+        else:
+            url_year = year_str[2:]
+        
+        # Handle the change from .htm to .html in 2018
+        file_ext = 'html' if year >= 2018 else 'htm'
+        
+        # Handle the change in URL structure for child data in 2015
+        if year >= 2015:
+            adult_url = f"https://www.cdc.gov/asthma/brfss/{url_year}/brfssdata.{file_ext}"
+            child_url = f"https://www.cdc.gov/asthma/brfss/{url_year}/child/brfsschilddata.{file_ext}"
+        elif year == 2002:
+            adult_url = f"https://www.cdc.gov/asthma/brfss/{url_year}/brfssdata.{file_ext}"
+            child_url = f"https://www.cdc.gov/asthma/brfss/{url_year}/brfsschilddata.{file_ext}"
+        else:
+            adult_url = f"https://www.cdc.gov/asthma/brfss/{url_year}/brfssdata.{file_ext}"
+            child_url = f"https://www.cdc.gov/asthma/brfss/{url_year}/brfsschilddata.{file_ext}"
+
+        generated_urls.append(adult_url)
+        if year >= 2002 and year != 2017:
+            generated_urls.append(child_url)
+
+    return generated_urls
+
+current_year = date.today().year
+urls = generate_urls(1999, current_year)
 
 def get_table_links(url):
     """
@@ -96,7 +95,7 @@ def get_table_links(url):
         list: A list of tuples, where each tuple contains (absolute_url, folder_name).
     """
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=30)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
         
@@ -104,8 +103,6 @@ def get_table_links(url):
         for link in soup.find_all('a', href=True):
             href = link['href']
             absolute_url = urllib.parse.urljoin(url, href)
-            
-            # Note: Removed commented out recursive logic for clarity
             
             br_tag = link.find('br')
             folder_name = 'default_folder'
@@ -118,7 +115,7 @@ def get_table_links(url):
                         folder_name = re.sub(r'[^a-zA-Z0-9_]+', '_', sanitized_text)
                         folder_name = folder_name.replace(' ', '_').strip('_')
                 else:
-                    #  Text is in a sibling <div>
+                    # Text is in a sibling <div>
                     next_sibling = link.next_sibling
                     if next_sibling and next_sibling.name == 'div':
                         raw_text = next_sibling.get_text(strip=True)
@@ -126,12 +123,11 @@ def get_table_links(url):
                             sanitized_text = raw_text.lower()
                             folder_name = re.sub(r'[^a-zA-Z0-9_]+', '_', sanitized_text)
                             folder_name = folder_name.replace(' ', '_').strip('_')
-                
-                if (absolute_url, folder_name) not in table_links:
-                    table_links.append((absolute_url, folder_name))
+            
+            if (absolute_url, folder_name) not in table_links:
+                table_links.append((absolute_url, folder_name))
         return table_links
     except requests.exceptions.RequestException as e:
-        # Changed from logging.fatal to logging.error to allow script to continue
         logging.error(f"Error fetching the URL {url}: {e}")
         return []
 
@@ -141,7 +137,6 @@ def generate_filename(folder_name, year, life_stage):
     Generates a dynamic filename based on the folder name (which is now unique), 
     year, and life stage.
     """
-    # Use the specific folder_name extracted from the link text for uniqueness
     return f"{folder_name}_{year}_{life_stage}.csv"
 
 def get_metadata_from_url(url):
@@ -155,6 +150,23 @@ def get_metadata_from_url(url):
     life_stage = 'child' if 'child' in url.lower() else 'adult'
     return year, life_stage
 
+def move_and_remove_files_compact(root_dir):
+    source_folder = os.path.join(root_dir, 'by_race_and_state')
+    destination_folder = os.path.join(root_dir, 'by_race_ethnicity_and_state')
+
+    if not os.path.exists(source_folder):
+        logging.warning(f"Source '{source_folder}' not found. Skipping.")
+        return
+
+    os.makedirs(destination_folder, exist_ok=True)
+    
+    for filename in os.listdir(source_folder):
+        shutil.move(os.path.join(source_folder, filename), destination_folder)
+        logging.info(f"Moved {filename}.")
+
+    os.rmdir(source_folder)
+    logging.info(f"Removed source folder '{source_folder}'.")
+    
 def download_table(url, year, life_stage, save_path):
     """
     Downloads, processes, and saves a single data table.
@@ -171,7 +183,6 @@ def download_table(url, year, life_stage, save_path):
         else:
             logging.warning(f"No tables found on page: {url}")
     except Exception as e:
-        # Changed from logging.fatal/warning to logging.error for robust handling
         logging.error(f"Error processing {url}: {e}")
 
 def main(_):
@@ -185,7 +196,6 @@ def main(_):
         all_urls_and_folders = get_table_links(main_url)
         
         filtered_and_mapped_urls_with_original_name = []
-        # Changed tracking set to track UNIFIED folder names to ensure only the first link per category is processed
         processed_unified_names = set()
         
         for url, original_folder_name in all_urls_and_folders:
@@ -229,6 +239,9 @@ def main(_):
             logging.warning(f"No desired tables found on page: {main_url}.")
 
     logging.info("All URL processing complete.")
+    move_and_remove_files_compact(root_dir)
+    #To  use the common pvmap for race and race_ethinicity
+    logging.info("file moved successfully")
 
 if __name__=="__main__":
     app.run(main)
