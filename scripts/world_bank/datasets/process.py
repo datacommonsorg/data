@@ -2,6 +2,7 @@ import datetime
 import os
 import csv
 import sys
+import json
 from absl import logging, flags, app
 from collections import Counter
 
@@ -128,6 +129,29 @@ def get_unit_by_indicator(target_indicator_code):
         return ""
 
 
+def generate_tmcf_files():
+    tmcf_content = """Node: E:World_Bank_Temp->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:World_Bank_Temp->statvar
+measurementMethod: C:World_Bank_Temp->measurementmethod
+observationDate: C:World_Bank_Temp->observationdate
+observationPeriod: "P1Y"
+observationAbout: C:World_Bank_Temp->observationabout
+value: C:World_Bank_Temp->observationvalue
+unit: C:World_Bank_Temp->unit"""
+    manifest_path = os.path.join(_MODULE_DIR, 'manifest.json')
+    with open(manifest_path, 'r') as f:
+        manifest = json.load(f)
+    for spec in manifest.get('import_specifications', []):
+        for an_input in spec.get('import_inputs', []):
+            tmcf_filename = an_input.get('template_mcf')
+            if tmcf_filename:
+                tmcf_path = os.path.join(_MODULE_DIR, tmcf_filename)
+                with open(tmcf_path, 'w') as f:
+                    f.write(tmcf_content)
+                logging.info(f"Generated {tmcf_filename} file.")
+
+
 def main(_):
     input_files = [
         os.path.join(input_directory, f)
@@ -162,6 +186,7 @@ def main(_):
             logging.fatal("Actual otuput files are not equal to expected files")
         else:
             logging.info("Successfully processed")
+        generate_tmcf_files()
     except Exception as e:
         logging.fatal(f"An error occurred in the main function: {e}")
 
