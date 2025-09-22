@@ -14,12 +14,13 @@
 """ Utility to generate a dataset diff for import analysis."""
 
 import os
-import pandas as pd
 import random
 import sys
 import time
 from enum import Enum
 
+import numpy as np
+import pandas as pd
 from absl import app
 from absl import flags
 from absl import logging
@@ -28,399 +29,496 @@ from googleapiclient.discovery import build
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 
-import differ_utils
+from differ_utils import StorageClient
 
 _SAMPLE_COUNT = 3
 
 _DATAFLOW_TEMPLATE_URL = 'gs://datcom-templates/templates/flex/differ.json'
 
-Diff = Enum('Diff', [
-    ('ADDED', 1),
-    ('DELETED', 2),
-    ('MODIFIED', 3),
-    ('UNMODIFIED', 4),
-])
 
-Column = Enum('Column', [
-    ('variableMeasured', 1),
-    ('observationDate', 2),
-    ('value', 3),
-    ('typeOf', 4),
-    ('dcid', 5),
-    ('diff_type', 6),
-    ('diff_size', 7),
-    ('observationAbout', 8),
-    ('key_combined', 9),
-    ('value_combined', 10),
-])
+class Diff(str, Enum):
+  ADDED = 'ADDED'
+  DELETED = 'DELETED'
+  MODIFIED = 'MODIFIED'
+  UNMODIFIED = 'UNMODIFIED'
+
+
+class Column(str, Enum):
+  VARIABLE_MEASURED = 'variableMeasured'
+  OBSERVATION_DATE = 'observationDate'
+  VALUE = 'value'
+  TYPE_OF = 'typeOf'
+  DCID = 'dcid'
+  DIFF_TYPE = 'diff_type'
+  DIFF_SIZE = 'diff_size'
+  OBSERVATION_ABOUT = 'observationAbout'
+  KEY_COMBINED = 'key_combined'
+  VALUE_COMBINED = 'value_combined'
+  OBSERVATION_PERIOD = 'observationPeriod'
+  MEASUREMENT_METHOD = 'measurementMethod'
+  UNIT = 'unit'
+  SCALING_FACTOR = 'scalingFactor'
+  NODE = 'Node'
+
+
+_OBS_KEY_COLUMNS = [
+    Column.VARIABLE_MEASURED,
+    Column.OBSERVATION_ABOUT,
+    Column.OBSERVATION_DATE,
+    Column.OBSERVATION_PERIOD,
+    Column.MEASUREMENT_METHOD,
+    Column.UNIT,
+    Column.SCALING_FACTOR,
+]
+_OBS_VALUE_COLUMN = Column.VALUE
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
-    'current_data', '', 'Path to the current data \
-  (wildcard on local/GCS supported).')
+    'current_data',
+    '',
+    'Path to the current data (wildcard on local/GCS supported).',
+)
 flags.DEFINE_string(
-    'previous_data', '', 'Path to the previous data \
-  (wildcard on local/GCS supported).')
-flags.DEFINE_string('output_location', 'results', \
-  'Path (local/GCS) to the output data folder.')
-flags.DEFINE_string('file_format', 'mcf',
-                    'Format of the input data (mcf,tfrecord)')
+    'previous_data',
+    '',
+    'Path to the previous data (wildcard on local/GCS supported).',
+)
+flags.DEFINE_string(
+    'output_location', 'results', 'Path (local/GCS) to the output data folder.'
+)
+flags.DEFINE_string(
+    'file_format', 'mcf', 'Format of the input data (mcf,tfrecord)'
+)
 flags.DEFINE_string('runner_mode', 'local', 'Runner mode (local/cloud)')
 flags.DEFINE_string('job_name', 'differ', 'Name of the differ job.')
 flags.DEFINE_string('project_id', '', 'GCP project id for the dataflow job.')
 
 
-class ImportDiffer:
-    """
-  Utility to generate a diff of two versions of a dataset for import analysis. 
+class DataflowRunner:
+  """Handles the execution and monitoring of a Dataflow job."""
 
-  Usage:
-  $ python import_differ.py --current_data=<path> --previous_data=<path> --output_location=<path> \
-    --file_format=<mcf/tfrecord> --runner_mode=<local/cloud> --project_id=<id> --job_name=<name> 
+  def __init__(self, project_id: str):
+    self.project_id = project_id
 
-  Summary output generated is of the form below showing 
-  counts of differences for each variable.  
+  def run(
+      self,
+      job_name: str,
+      current_data: str,
+      previous_data: str,
+      file_format: str,
+      output_location: str,
+  ) -> str:
+    logging.info('Launching differ dataflow job %s', job_name)
+    parameters = {
+        'currentData': current_data,
+        'previousData': previous_data,
+        'outputLocation': output_location,
+    }
+    if file_format == 'tfrecord':
+      logging.info('Using tfrecord file format')
+      parameters['useOptimizedGraphFormat'] = 'true'
+    else:
+      logging.info('Using mcf file format')
 
-  variableMeasured   ADDED  DELETED  MODIFIED
-  0   dcid:var1       1      0       0
-  1   dcid:var2       0      2       1
-  2   dcid:var3       0      0       1
-  3   dcid:var4       0      2       0
-
-  Detailed diff output is written to files for further analysis.
-  - obs_diff_summary.csv: diff summary for observation analysis
-  - obs_diff_samples.csv: sample diff for observation analysis
-  - obs_diff_log.csv: diff log for observations
-  - schema_diff_summary.csv: diff summary for schema analysis
-  - schema_diff_log.csv: diff log for schema nodes 
-
-  """
-
-    def __init__(self,
-                 current_data,
-                 previous_data,
-                 output_location,
-                 project_id='',
-                 job_name='differ',
-                 file_format='mcf',
-                 runner_mode='local'):
-        self.current_data = current_data
-        self.previous_data = previous_data
-        self.output_path = output_location
-        self.project_id = project_id
-        self.job_name = job_name
-        self.file_format = file_format
-        self.runner_mode = runner_mode
-
-    def _cleanup_data(self, df: pd.DataFrame):
-        for column in [Diff.ADDED, Diff.DELETED, Diff.MODIFIED]:
-            df[column.name] = df.get(column.name, 0)
-            df[column.name] = df[column.name].fillna(0).astype(int)
-
-    def _get_samples(self, row):
-        years = sorted(row[Column.observationDate.name])
-        if len(years) > _SAMPLE_COUNT:
-            return [years[0]] + random.sample(years[1:-1],
-                                              _SAMPLE_COUNT - 2) + [years[-1]]
-        else:
-            return years
-
-    # Processes two dataset files to identify changes.
-    def generate_diff(self, previous_df: pd.DataFrame,
-                      current_df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Process previous and current datasets to generate
-        the diff data for identifying changes.
-        Args:
-          current_df: dataframe with current (new) data
-          previous_df: dataframe with previous (old) data
-        Returns:
-          intermediate diff data for analysis
-        """
-        if current_df.empty and not previous_df.empty:
-            result = previous_df.copy()
-            result[Column.diff_type.name] = Diff.DELETED.name
-            return result
-        elif previous_df.empty and not current_df.empty:
-            result = current_df.copy()
-            result[Column.diff_type.name] = Diff.ADDED.name
-            return result
-        elif previous_df.empty and current_df.empty:
-            column_list = [
-                Column.key_combined.name, Column.value_combined.name + '_x',
-                Column.value_combined.name + '_y' + Column.diff_type.name
-            ]
-            return pd.DataFrame(columns=column_list)
-        result = pd.merge(previous_df,
-                          current_df,
-                          on=Column.key_combined.name,
-                          how='outer',
-                          indicator=Column.diff_type.name)
-        result[Column.diff_type.name] = result.apply(
-          lambda row: Diff.ADDED.name if row[Column.diff_type.name] == 'right_only' \
-          else Diff.DELETED.name if row[Column.diff_type.name] == 'left_only' \
-          else Diff.MODIFIED.name if row[Column.value_combined.name + '_x'] != row[Column.value_combined.name + '_y'] \
-          else Diff.UNMODIFIED.name, axis=1)
-        result.drop(
-            result[result[Column.diff_type.name] == Diff.UNMODIFIED.name].index,
-            inplace=True)
-        # result.sort_values(by=[Column.diff_type.name], inplace=True)
-        result.reset_index(drop=True, inplace=True)
-        if result.empty:
-            column_list = [
-                Column.key_combined.name, Column.value_combined.name + '_x',
-                Column.value_combined.name + '_y' + Column.diff_type.name
-            ]
-            return pd.DataFrame(columns=column_list)
-
-        return result
-
-    def split_data(self, mcf_nodes: list) -> (pd.DataFrame, pd.DataFrame):
-        """ 
-        Split mcf nodes into observation and schema nodes based on typeOf property.
-
-        Returns:
-          Dataframes containing observation and schema nodes 
-        """
-        obs_list = []
-        schema_list = []
-        for node in mcf_nodes:
-            if 'StatVarObservation' in node.get(Column.typeOf.name):
-                values_to_combine = []
-                keys_to_combine = []
-                groupby_keys = [
-                    'variableMeasured', 'observationAbout', 'observationDate',
-                    'observationPeriod', 'measurementMethod', 'unit',
-                    'scalingFactor'
-                ]
-                value_keys = [Column.value.name]
-                for key in groupby_keys:
-                    keys_to_combine.append(str(node.get(key, "")))
-                for key in value_keys:
-                    values_to_combine.append(str(node.get(key, "")))
-
-                key_combined = ";".join(keys_to_combine)
-                value_combined = ";".join(values_to_combine)
-
-                obs_list.append({
-                    Column.key_combined.name: key_combined,
-                    Column.value_combined.name: value_combined
-                })
-            else:
-                node_id_key = str(node.get('Node', ""))
-                node_id_key = str(node.get(Column.dcid.name, node_id_key))
-                if not node_id_key:
-                    logging.error(f'Skipping node as dcid is missing {node}.')
-                    continue
-                values_to_combine = []
-                keys_to_combine = [node_id_key]
-                node.pop(Column.dcid.name)
-                node.pop('Node', None)
-                value_keys = sorted(node.keys())
-                for key in value_keys:
-                    values_to_combine.append(key + ":" + str(node.get(key, "")))
-                key_combined = ";".join(keys_to_combine)
-                value_combined = ";".join(values_to_combine)
-                schema_list.append({
-                    Column.key_combined.name: key_combined,
-                    Column.value_combined.name: value_combined
-                })
-
-        schema_df = pd.DataFrame(schema_list)
-        schema_df.drop_duplicates(inplace=True)
-        obs_df = pd.DataFrame(obs_list)
-        return obs_df, schema_df
-
-    def observation_diff_analysis(
-            self, diff: pd.DataFrame) -> (pd.DataFrame, pd.DataFrame):
-        """ 
-        Performs observation diff analysis to identify data point changes.
-
-        Returns:
-          summary and results from the analysis
-        """
-        if diff.empty:
-            return pd.DataFrame(columns=[
-                Column.variableMeasured.name, Diff.ADDED.name,
-                Diff.DELETED.name, Diff.MODIFIED.name
-            ]), pd.DataFrame(columns=[
-                Column.variableMeasured.name, Column.diff_type.name,
-                Column.observationAbout.name, Column.observationDate.name,
-                Column.diff_size.name
-            ])
-
-        split_df = diff[Column.key_combined.name].str.split(';', expand=True)
-        diff[Column.variableMeasured.name] = split_df[0]
-        diff[Column.observationAbout.name] = split_df[1]
-        diff[Column.observationDate.name] = split_df[2]
-
-        samples = diff.groupby(
-            [Column.variableMeasured.name, Column.diff_type.name],
-            observed=True,
-            as_index=False)[[
-                Column.observationAbout.name, Column.observationDate.name
-            ]].agg(lambda x: x.tolist())
-        samples[Column.diff_size.name] = samples.apply(
-            lambda row: len(row[Column.observationAbout.name]), axis=1)
-        samples[Column.observationAbout.name] = samples.apply(
-            lambda row: random.sample(
-                row[Column.observationAbout.name],
-                min(_SAMPLE_COUNT, len(row[Column.observationAbout.name]))),
-            axis=1)
-        samples[Column.observationDate.name] = samples.apply(self._get_samples,
-                                                             axis=1)
-        summary = samples.pivot(
-          index=Column.variableMeasured.name, columns=Column.diff_type.name, values=Column.diff_size.name)\
-          .reset_index().rename_axis(None, axis=1)
-        self._cleanup_data(summary)
-        samples.sort_values(
-            by=[Column.diff_type.name, Column.variableMeasured.name],
-            inplace=True)
-        return summary, samples
-
-    def schema_diff_analysis(self, diff: pd.DataFrame) -> pd.DataFrame:
-        """ 
-        Performs variable diff analysis to identify statvar changes.
-
-        Returns:
-          summary from the analysis
-        """
-        if diff.empty:
-            return pd.DataFrame(columns=[
-                Column.diff_type.name, Diff.ADDED.name, Diff.DELETED.name,
-                Diff.MODIFIED.name
-            ])
-
-        result = diff[Column.diff_type.name].value_counts().reset_index()
-        summary = result.set_index(
-            Column.diff_type.name).transpose().rename_axis(
-                None, axis=1).reset_index(drop=True)
-        self._cleanup_data(summary)
-        return summary
-
-    def run_dataflow_job(self, project: str, job: str, current_data: str,
-                         previous_data: str, file_format: str,
-                         output_location: str) -> str:
-        logging.info('Launching differ dataflow job {self.job_name}')
-        parameters = {
-            'currentData': current_data,
-            'previousData': previous_data,
-            'outputLocation': output_location,
-        }
-        if file_format == 'tfrecord':
-            logging.info('Using tfrecord file format')
-            parameters['useOptimizedGraphFormat'] = 'true'
-        else:
-            logging.info('Using mcf file format')
-
-        template = _DATAFLOW_TEMPLATE_URL
-        dataflow = build("dataflow", "v1b3")
-        request = (dataflow.projects().locations().flexTemplates().launch(
-            projectId=project,
+    template = _DATAFLOW_TEMPLATE_URL
+    dataflow = build('dataflow', 'v1b3')
+    request = (
+        dataflow.projects()
+        .locations()
+        .flexTemplates()
+        .launch(
+            projectId=self.project_id,
             location='us-central1',
             body={
-                "launchParameter": {
-                    "jobName": job,
-                    "containerSpecGcsPath": template,
-                    "parameters": parameters,
+                'launchParameter': {
+                    'jobName': job_name,
+                    'containerSpecGcsPath': template,
+                    'parameters': parameters,
                 },
             },
-        ))
-        response = request.execute()
-        job_id = response['job']['id']
-        url = f'https://pantheon.corp.google.com/dataflow/jobs/{job_id}?project={project}'
-        logging.info('Dataflow job url: %s', url)
-        status = 'JOB_STATE_UNKNOWN'
-        dataflow = build("dataflow", "v1b3")
-        request = (dataflow.projects().locations().jobs().list(
-            projectId=project, location='us-central1', name=job_id))
-        while (status != 'JOB_STATE_DONE' and status != 'JOB_STATE_FAILED' and
-               status != 'JOB_STATE_CANCELLED'):
-            logging.info(
-                f'Waiting for job {self.job_name} to complete. Status:{status}')
-            time.sleep(60)
-            response = request.execute()
-            status = response['jobs'][0]['currentState']
-
-        logging.info(
-            f'Finished differ dataflow job {self.job_name} with status {status}.'
         )
-        return status
+    )
+    response = request.execute()
+    job_id = response['job']['id']
+    url = f'https://pantheon.corp.google.com/dataflow/jobs/{job_id}?project={self.project_id}'
+    logging.info('Dataflow job url: %s', url)
+    status = 'JOB_STATE_UNKNOWN'
+    dataflow = build('dataflow', 'v1b3')
+    request = (
+        dataflow.projects()
+        .locations()
+        .jobs()
+        .list(projectId=self.project_id, location='us-central1', name=job_id)
+    )
+    while (
+        status != 'JOB_STATE_DONE'
+        and status != 'JOB_STATE_FAILED'
+        and status != 'JOB_STATE_CANCELLED'
+    ):
+      logging.info('Waiting for job %s to complete. Status: %s', job_name, status)
+      time.sleep(60)
+      response = request.execute()
+      status = response['jobs'][0]['currentState']
 
-    def run_differ(self):
-        os.makedirs(self.output_path, exist_ok=True)
-        tmp_path = os.path.join(self.output_path, self.job_name)
-        os.makedirs(tmp_path, exist_ok=True)
+    logging.info(
+        'Finished differ dataflow job %s with status %s.', job_name, status
+    )
+    return status
 
-        logging.info('Processing input data to generate diff...')
-        if self.runner_mode == 'cloud':
-            # Runs dataflow job in GCP.
-            logging.info("Invoking dataflow mode for differ")
-            status = self.run_dataflow_job(self.project_id, self.job_name,
-                                           self.current_data,
-                                           self.previous_data, self.file_format,
-                                           self.output_path)
-            if status == 'JOB_STATE_FAILED':
-                raise ExectionError(f'Dataflow job {job_name} failed.')
-            diff_path = os.path.join(self.output_path, 'obs-diff*')
-            logging.info("Loading obs diff data from: %s", diff_path)
-            obs_diff = differ_utils.load_csv_data(diff_path, tmp_path)
-            diff_path = os.path.join(self.output_path, 'schema-diff*')
-            logging.info("Loading schema diff data from: %s", diff_path)
-            schema_diff = differ_utils.load_csv_data(diff_path, tmp_path)
-        else:
-            # Runs local Python differ.
-            current_dir = os.path.join(tmp_path, 'current')
-            previous_dir = os.path.join(tmp_path, 'previous')
-            logging.info(f'Loading current data from {self.current_data}')
-            mcf_nodes = differ_utils.load_data(self.current_data, current_dir)
-            current_df_obs, current_df_schema = self.split_data(mcf_nodes)
-            logging.info(
-                f'Loaded current data with {current_df_obs.shape[0]} observations and {current_df_schema.shape[0]} nodes.'
-            )
-            logging.info(f'Loading previous data from {self.previous_data}')
-            mcf_nodes = differ_utils.load_data(self.previous_data, previous_dir)
-            previous_df_obs, previous_df_schema = self.split_data(mcf_nodes)
-            logging.info(
-                f'Loaded previous data with {previous_df_obs.shape[0]} observations and {previous_df_schema.shape[0]} nodes.'
-            )
-            logging.info('Generating observation diff...')
-            obs_diff = self.generate_diff(previous_df_obs, current_df_obs)
-            logging.info('Generating schema diff...')
-            schema_diff = self.generate_diff(previous_df_schema,
-                                             current_df_schema)
-            differ_utils.write_csv_data(obs_diff, self.output_path,
-                                        'obs_diff_log.csv', tmp_path)
-            differ_utils.write_csv_data(schema_diff, self.output_path,
-                                        'schema_diff_log.csv', tmp_path)
 
-        logging.info(f'Generated observation diff of size {obs_diff.shape[0]}')
-        logging.info(f'Generated schema diff of size {schema_diff.shape[0]}')
+class DiffAnalyzer:
+  """Analyzes diff DataFrames to produce summaries and samples."""
 
-        logging.info(f'Performing schema diff analysis')
-        schema_diff_summary = self.schema_diff_analysis(schema_diff)
-        logging.info('Performing observation diff analysis...')
-        obs_diff_summary, obs_diff_samples = self.observation_diff_analysis(
-            obs_diff)
+  def _cleanup_data(self, df: pd.DataFrame):
+    for column in [Diff.ADDED, Diff.DELETED, Diff.MODIFIED]:
+      df[column.value] = df.get(column.value, 0)
+      df[column.value] = df[column.value].fillna(0).astype(int)
 
-        logging.info(f'Writing differ output to {self.output_path}')
-        differ_utils.write_csv_data(schema_diff_summary, self.output_path,
-                                    'schema_diff_summary.csv', tmp_path)
-        differ_utils.write_csv_data(obs_diff_summary, self.output_path,
-                                    'obs_diff_summary.csv', tmp_path)
-        differ_utils.write_csv_data(obs_diff_samples, self.output_path,
-                                    'obs_diff_samples.csv', tmp_path)
-        logging.info(f'Differ output written to {self.output_path}')
+  def _get_samples(self, row):
+    years = sorted(row[Column.OBSERVATION_DATE])
+    if len(years) > _SAMPLE_COUNT:
+      return (
+          [years[0]]
+          + random.sample(years[1:-1], _SAMPLE_COUNT - 2)
+          + [years[-1]]
+      )
+    else:
+      return years
+
+  def analyze_observation_diff(
+      self, diff: pd.DataFrame
+  ) -> (pd.DataFrame, pd.DataFrame):
+    """
+    Performs observation diff analysis to identify data point changes.
+
+    Returns:
+      A tuple containing the summary and samples DataFrames.
+    """
+    if diff.empty:
+      return pd.DataFrame(
+          columns=[
+              Column.VARIABLE_MEASURED,
+              Diff.ADDED.value,
+              Diff.DELETED.value,
+              Diff.MODIFIED.value,
+          ]
+      ), pd.DataFrame(
+          columns=[
+              Column.VARIABLE_MEASURED,
+              Column.DIFF_TYPE,
+              Column.OBSERVATION_ABOUT,
+              Column.OBSERVATION_DATE,
+              Column.DIFF_SIZE,
+          ]
+      )
+
+    samples = diff.groupby(
+        [Column.VARIABLE_MEASURED, Column.DIFF_TYPE],
+        observed=True,
+        as_index=False,
+    )[[Column.OBSERVATION_ABOUT, Column.OBSERVATION_DATE]].agg(list)
+    samples[Column.DIFF_SIZE] = samples[Column.OBSERVATION_ABOUT].str.len()
+    samples[Column.OBSERVATION_ABOUT] = samples[
+        Column.OBSERVATION_ABOUT
+    ].apply(lambda x: random.sample(x, min(_SAMPLE_COUNT, len(x))))
+    samples[Column.OBSERVATION_DATE] = samples.apply(self._get_samples, axis=1)
+    summary = (
+        samples.pivot(
+            index=Column.VARIABLE_MEASURED,
+            columns=Column.DIFF_TYPE,
+            values=Column.DIFF_SIZE,
+        )
+        .reset_index()
+        .rename_axis(None, axis=1)
+    )
+    self._cleanup_data(summary)
+    samples.sort_values(
+        by=[Column.DIFF_TYPE, Column.VARIABLE_MEASURED], inplace=True
+    )
+    return summary, samples
+
+  def analyze_schema_diff(self, diff: pd.DataFrame) -> pd.DataFrame:
+    """
+    Performs variable diff analysis to identify statvar changes.
+
+    Returns:
+      A summary DataFrame from the analysis.
+    """
+    if diff.empty:
+      return pd.DataFrame(
+          columns=[
+              Column.DIFF_TYPE,
+              Diff.ADDED.value,
+              Diff.DELETED.value,
+              Diff.MODIFIED.value,
+          ]
+      )
+
+    result = diff[Column.DIFF_TYPE].value_counts().reset_index()
+    summary = (
+        result.set_index(Column.DIFF_TYPE)
+        .transpose()
+        .rename_axis(None, axis=1)
+        .reset_index(drop=True)
+    )
+    self._cleanup_data(summary)
+    return summary
+
+
+class ImportDiffer:
+  """
+  Utility to generate a diff of two versions of a dataset for import analysis.
+  """
+
+  def __init__(
+      self,
+      current_data,
+      previous_data,
+      output_location,
+      project_id='',
+      job_name='differ',
+      file_format='mcf',
+      runner_mode='local',
+  ):
+    self.current_data = current_data
+    self.previous_data = previous_data
+    self.output_path = output_location
+    self.project_id = project_id
+    self.job_name = job_name
+    self.file_format = file_format
+    self.runner_mode = runner_mode
+    self.analyzer = DiffAnalyzer()
+
+  def _process_observation_node(self, node: dict) -> dict:
+    obs_node = {}
+    for key in _OBS_KEY_COLUMNS:
+      obs_node[key] = node.get(key)
+    obs_node[_OBS_VALUE_COLUMN] = node.get(_OBS_VALUE_COLUMN)
+    return obs_node
+
+  def _process_schema_node(self, node: dict) -> dict:
+    node_id_key = str(node.get(Column.NODE, ''))
+    node_id_key = str(node.get(Column.DCID, node_id_key))
+    if not node_id_key:
+      logging.error('Skipping node as dcid is missing %s.', node)
+      return None
+    values_to_combine = []
+    keys_to_combine = [node_id_key]
+    node.pop(Column.DCID, None)
+    node.pop(Column.NODE, None)
+    value_keys = sorted(node.keys())
+    for key in value_keys:
+      values_to_combine.append(f'{key}:{node.get(key, "")}')
+    key_combined = ';'.join(keys_to_combine)
+    value_combined = ';'.join(values_to_combine)
+    return {
+        Column.KEY_COMBINED: key_combined,
+        Column.VALUE_COMBINED: value_combined,
+    }
+
+  def generate_diff(
+      self,
+      previous_df: pd.DataFrame,
+      current_df: pd.DataFrame,
+      key_columns: list[str],
+      value_column: str = None,
+  ) -> pd.DataFrame:
+    """
+    Process previous and current datasets to generate
+    the diff data for identifying changes.
+    Args:
+      current_df: dataframe with current (new) data
+      previous_df: dataframe with previous (old) data
+      key_columns: list of columns that uniquely identify a row
+      value_column: column whose value is being compared
+    Returns:
+      intermediate diff data for analysis
+    """
+    if value_column is None:
+      value_column = Column.VALUE_COMBINED
+
+    if current_df.empty and not previous_df.empty:
+      result = previous_df.copy()
+      result[Column.DIFF_TYPE] = Diff.DELETED
+      return result
+    elif previous_df.empty and not current_df.empty:
+      result = current_df.copy()
+      result[Column.DIFF_TYPE] = Diff.ADDED
+      return result
+    elif previous_df.empty and current_df.empty:
+      return pd.DataFrame()
+
+    result = pd.merge(
+        previous_df,
+        current_df,
+        on=key_columns,
+        how='outer',
+        indicator=Column.DIFF_TYPE,
+    )
+
+    value_x = f'{value_column}_x'
+    value_y = f'{value_column}_y'
+
+    conditions = [
+        result[Column.DIFF_TYPE] == 'right_only',
+        result[Column.DIFF_TYPE] == 'left_only',
+        result[value_x] != result[value_y],
+    ]
+    choices = [Diff.ADDED, Diff.DELETED, Diff.MODIFIED]
+    result[Column.DIFF_TYPE] = np.select(
+        conditions, choices, default=Diff.UNMODIFIED
+    )
+
+    return result[result[Column.DIFF_TYPE] != Diff.UNMODIFIED].reset_index(
+        drop=True
+    )
+
+  def split_data(
+      self, mcf_nodes: list[dict]
+  ) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Split mcf nodes into observation and schema nodes based on typeOf property.
+
+    Returns:
+      Dataframes containing observation and schema nodes
+    """
+    obs_list = []
+    schema_list = []
+    for node in mcf_nodes:
+      if 'StatVarObservation' in node.get(Column.TYPE_OF, ''):
+        obs_list.append(self._process_observation_node(node))
+      else:
+        schema_node = self._process_schema_node(node)
+        if schema_node:
+          schema_list.append(schema_node)
+
+    obs_df = pd.DataFrame(obs_list).fillna('')
+    obs_df.drop_duplicates(subset=_OBS_KEY_COLUMNS, inplace=True)
+    schema_df = pd.DataFrame(schema_list)
+    schema_df.drop_duplicates(inplace=True)
+    return obs_df, schema_df
+
+  def _load_and_split_data(
+      self, client: StorageClient
+  ) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Loads data from a client and splits it into observation and schema DataFrames."""
+    logging.info('Loading data from %s', client._strategy._path)
+    mcf_nodes = client.load_mcf_nodes()
+    df_obs, df_schema = self.split_data(mcf_nodes)
+    logging.info(
+        'Loaded data with %s observations and %s nodes.',
+        df_obs.shape[0],
+        df_schema.shape[0],
+    )
+    return df_obs, df_schema
+
+  def _run_local_differ(
+      self, tmp_path: str, output_client: StorageClient
+  ) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Runs the differ process locally."""
+    current_client = StorageClient(
+        self.current_data, tmp_dir=os.path.join(tmp_path, 'current')
+    )
+    previous_client = StorageClient(
+        self.previous_data, tmp_dir=os.path.join(tmp_path, 'previous')
+    )
+
+    current_df_obs, current_df_schema = self._load_and_split_data(current_client)
+    previous_df_obs, previous_df_schema = self._load_and_split_data(
+        previous_client
+    )
+
+    logging.info('Generating observation diff...')
+    obs_diff = self.generate_diff(
+        previous_df_obs,
+        current_df_obs,
+        key_columns=_OBS_KEY_COLUMNS,
+        value_column=_OBS_VALUE_COLUMN,
+    )
+    logging.info('Generating schema diff...')
+    schema_diff = self.generate_diff(
+        previous_df_schema,
+        current_df_schema,
+        key_columns=[Column.KEY_COMBINED],
+    )
+    output_client.write_csv(obs_diff, 'obs_diff_log.csv')
+    output_client.write_csv(schema_diff, 'schema_diff_log.csv')
+    return obs_diff, schema_diff
+
+  def _run_cloud_differ(
+      self, tmp_path: str, output_client: StorageClient
+  ) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Runs the differ process on Dataflow."""
+    logging.info('Invoking dataflow mode for differ')
+    runner = DataflowRunner(self.project_id)
+    status = runner.run(
+        self.job_name,
+        self.current_data,
+        self.previous_data,
+        self.file_format,
+        self.output_path,
+    )
+    if status == 'JOB_STATE_FAILED':
+      raise RuntimeError(f'Dataflow job {self.job_name} failed.')
+
+    logging.info('Loading obs diff data from: %s', self.output_path)
+    obs_diff = output_client.load_csv('obs-diff*')
+    logging.info('Loading schema diff data from: %s', self.output_path)
+    schema_diff = output_client.load_csv('schema-diff*')
+    return obs_diff, schema_diff
+
+  def _analyze_and_write_results(
+      self,
+      obs_diff: pd.DataFrame,
+      schema_diff: pd.DataFrame,
+      output_client: StorageClient,
+  ) -> None:
+    """Analyzes the diff DataFrames and writes the results to CSV files."""
+    logging.info('Generated observation diff of size %s', obs_diff.shape[0])
+    logging.info('Generated schema diff of size %s', schema_diff.shape[0])
+
+    logging.info('Performing schema diff analysis')
+    schema_diff_summary = self.analyzer.analyze_schema_diff(schema_diff)
+    logging.info('Performing observation diff analysis...')
+    (
+        obs_diff_summary,
+        obs_diff_samples,
+    ) = self.analyzer.analyze_observation_diff(obs_diff)
+
+    logging.info('Writing differ output to %s', self.output_path)
+    output_client.write_csv(schema_diff_summary, 'schema_diff_summary.csv')
+    output_client.write_csv(obs_diff_summary, 'obs_diff_summary.csv')
+    output_client.write_csv(obs_diff_samples, 'obs_diff_samples.csv')
+    logging.info('Differ output written to %s', self.output_path)
+
+  def run(self) -> None:
+    os.makedirs(self.output_path, exist_ok=True)
+    tmp_path = os.path.join(self.output_path, self.job_name)
+    os.makedirs(tmp_path, exist_ok=True)
+    output_client = StorageClient(self.output_path, tmp_dir=tmp_path)
+
+    logging.info('Processing input data to generate diff...')
+    if self.runner_mode == 'cloud':
+      obs_diff, schema_diff = self._run_cloud_differ(tmp_path, output_client)
+    else:
+      obs_diff, schema_diff = self._run_local_differ(tmp_path, output_client)
+
+    self._analyze_and_write_results(obs_diff, schema_diff, output_client)
 
 
 def main(_):
-    '''Runs the differ.'''
-    differ = ImportDiffer(_FLAGS.current_data, _FLAGS.previous_data,
-                          _FLAGS.output_location, _FLAGS.project_id,
-                          _FLAGS.job_name, _FLAGS.file_format,
-                          _FLAGS.runner_mode)
-    differ.run_differ()
+  '''Runs the differ.'''
+  differ = ImportDiffer(
+      _FLAGS.current_data,
+      _FLAGS.previous_data,
+      _FLAGS.output_location,
+      _FLAGS.project_id,
+      _FLAGS.job_name,
+      _FLAGS.file_format,
+      _FLAGS.runner_mode,
+  )
+  differ.run()
 
 
 if __name__ == '__main__':
-    app.run(main)
+  app.run(main)
