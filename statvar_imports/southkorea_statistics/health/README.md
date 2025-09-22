@@ -39,19 +39,29 @@ All downloaded files will be located into the gcs path `unresolved_mcf/country/s
 This import will be refreshed in a semi-automated manner.
 
 -----
+### Step 1: Download the files
+
+```bash
+../run.sh gs://unresolved_mcf/country/southkorea/health/source_files/
+```
 
 #### Step 2: Process the Files
 
-After downloading the files, you can process them to generate the final output. There are two ways to do this:
+After downloading the files, you can process them to generate the final output.
 
-**Option B: Manually Execute the Processing Script**
+To download:
+```bash
+../run.sh gs://unresolved_mcf/country/southkorea/health/source_files/
+```
+
+**Manually Execute the Processing Script**
 
 You can also run the `stat_var_processor.py` script individually for each file. This script is located in the `data/tools/statvar_importer/` directory.
 
 Here are the specific commands for each file:
 
 ```bash
-python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/health/source_files/health_data.csv --pv_map=health_pvmap.csv --config_file=health_metadata.csv --places_resolved_csv=health_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/health
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/health_data.csv --pv_map=health_pvmap.csv --config_file=health_metadata.csv --places_resolved_csv=health_places_resolved_csv.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/health
 
-python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/health/source_files/diseasereport_data.csv --pv_map=diseasereport_pvmap.csv --config_file=diseasereport_metadata.csv --places_resolved_csv=diseasereport_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/diseasereport
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/diseasereport_data.csv --pv_map=diseasereport_pvmap.csv --config_file=diseasereport_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/diseasereport
 ```

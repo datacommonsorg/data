@@ -42,19 +42,24 @@ This import will be refreshed in a semi-automated manner.
 -----
 
 #### Step 2: Process the Files
+To download the file:
 
-After downloading the files, you can process them to generate the final output. There are two ways to do this:
+```bash
+../run.sh gs://unresolved_mcf/country/southkorea/demographics/source_files/
+```
 
-**Option B: Manually Execute the Processing Script**
+After downloading the files, you can process them to generate the final output.
+
+**Manually Execute the Processing Script**
 
 You can also run the `stat_var_processor.py` script individually for each file. This script is located in the `data/tools/statvar_importer/` directory.
 
 Here are the specific commands for each file:
 
 ```bash
-python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/demographics/source_files/population_data.csv --pv_map=population_pvmap.csv --config_file=population_metadata.csv --places_resolved_csv=population_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/population
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/population_data.csv --pv_map=population_pvmap.csv --config_file=population_metadata.csv --places_resolved_csv=population_places_resolved_csv.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/population",
 ```
-
 ```bash
-python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/southkorea/demographics/source_files/population_density_data.csv --pv_map=population_density_pvmap.csv --config_file=population_density_metadata.csv --places_resolved_csv=population_density_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/population_density
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/population_density_data.csv --pv_map=population_density_pvmap.csv --config_file=population_density_metadata.csv --places_resolved_csv=population_density_places_resolved_csv.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/population_density"
+      
 ```

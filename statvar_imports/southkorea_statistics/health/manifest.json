@@ -5,7 +5,7 @@
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://kosis.kr/eng/statisticsList/statisticsListIndex.do",
       "provenance_description": "This data is from the South Korea Statistics Agency (KOSA), that describes about the health statistics of South Korea",
-      "scripts": ["../download.py",
+      "scripts": ["../run.sh gs://unresolved_mcf/country/southkorea/health/source_files/",
         "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/health_data.csv --pv_map=health_pvmap.csv --config_file=health_metadata.csv --places_resolved_csv=health_places_resolved_csv.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/health",
         "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/diseasereport_data.csv --pv_map=diseasereport_pvmap.csv --config_file=diseasereport_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/diseasereport"
       ],

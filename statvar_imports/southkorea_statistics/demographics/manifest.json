@@ -5,7 +5,7 @@
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://kosis.kr/eng/statisticsList/statisticsListIndex.do",
       "provenance_description": "This data is from the South Korea Statistics Agency (KOSA), that describes about the demographic statistics of South Korea",
-      "scripts": ["../download.py",
+      "scripts": ["../run.sh gs://unresolved_mcf/country/southkorea/demographics/source_files/",
         "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/population_data.csv --pv_map=population_pvmap.csv --config_file=population_metadata.csv --places_resolved_csv=population_places_resolved_csv.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/population",
         "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/population_density_data.csv --pv_map=population_density_pvmap.csv --config_file=population_density_metadata.csv --places_resolved_csv=population_density_places_resolved_csv.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/population_density"
       ],

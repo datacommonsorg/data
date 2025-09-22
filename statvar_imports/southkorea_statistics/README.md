@@ -33,13 +33,24 @@ A manual download of the raw data is required.
 The data is processed using the stat_var_processor.py script, which is the same process used for the OECD template, to transform it into the final CSV and TMCF formats.
 
 3. Autorefresh Type
-This project is set up for manual or automated refreshes, depending on the dataset's update schedule.
+This project is semi - automated.
+The files are downloaded manually and uploaded in the Google Cloud Bucket and run.sh script downloads it.
+The downloaded files are then processed to get the desired output.
 
 4. Script Execution Details
-Script 1: stat_var_processor.py (Data Processing)
+
+Script 1:
+../run.sh gs://<bucket name>/<folder path>/
+
+example:
+../run.sh gs://unresolved_mcf/country/southkorea/demographics/source_files/
+
+Make sure to run from respective folder paths.
+
+Script 2: stat_var_processor.py (Data Processing)
 Usage:
 
-python3 stat_var_processor.py --input_data=input/raw_data.csv --pv_map=pvmap.csv --config_file=metadata.csv --output_path=output/
+python3 stat_var_processor.py --input_data=source_files/raw_data.csv --pv_map=pvmap.csv --config_file=metadata.csv --output_path=output/
 
 ## Education Data
 
