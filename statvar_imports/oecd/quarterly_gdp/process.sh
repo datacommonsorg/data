@@ -29,4 +29,4 @@ python3 "$PROJECT_ROOT/tools/statvar_importer/stat_var_processor.py" \
   --pv_map="$SCRIPT_DIR/pvmap.csv" \
   --config_file="$SCRIPT_DIR/metadata.csv" \
   --output_path="$SCRIPT_DIR/output/oecd_quarterly_gdp" \
-  --output_counters="$SCRIPT_DIR/output/oecd_quarterly_gdp/validation/statvar_counters.csv"
+  --output_counters="$SCRIPT_DIR/oecd_quarterly_gdp/validation/statvar_counters.csv"
