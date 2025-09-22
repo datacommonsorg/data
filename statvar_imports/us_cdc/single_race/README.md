@@ -33,17 +33,17 @@ To get the input files, run the following command. The `download.sh` script will
 
 	sh download.sh
 ```
-After the files are downloaded, the data is processed using the stat_var_processor.py script. The 	  script uses various command-line arguments to specify the input data, pvmap, configuration file, and  output path.
+After the files are downloaded, the data is processed using the stat_var_processor.py script. The script uses various command-line arguments to specify the input data, pvmap, configuration file, and  output path.
 
 
 ```bash
 
-	python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=../../statvar_imports/us_cdc/single_race/input_files/*.csv --pv_map=../../statvar_imports/us_cdc/single_race/single_race_pvmap.csv --config_file=../../statvar_imports/us_cdc/single_race/single_race_metadata.csv --output_path=../../statvar_imports/us_cdc/single_race/output/underlyingcauseofdeath2018_2023singlerace
+	python3 ../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.csv --pv_map=single_race_pvmap.csv --config_file=single_race_metadata.csv --output_path=output/underlyingcauseofdeath2018_2023singlerace
 ```
 
 ### Automation
 
-This import pipeline is configured to run Semi-automatic on a monthly schedule.
+This import pipeline is configured to run Semi-automatic on the second Saturday of every month schedule.
 
-- Cron Expression: 30 08 * * 6
+- Cron Expression: 30 08 8-14 * 6
 

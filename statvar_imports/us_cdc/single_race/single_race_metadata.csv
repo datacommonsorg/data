@@ -8,7 +8,7 @@ end_date,2023
 release_frequency,P1Y
 process,
 comments,
-output_columns,"observationAbout, observationDate,variableMeasured,observationPeriod, value, unit, measurementMethod"
+output_columns,"observationAbout,observationDate,variableMeasured,observationPeriod,value,unit,measurementMethod"
 mapped_rows,1
 mapped_columns,11
 header_rows,1
