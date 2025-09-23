@@ -265,8 +265,8 @@ class PropertyValueMapper:
         is_modified = False
 
         is_modified |= self._process_regex(key, data, pvs)
-        is_modified |= self._process_format(key, data, pvs)
-        is_modified |= self._process_eval(pvs)
+        is_modified |= self._process_format(key, data, pvs, data_key)
+        is_modified |= self._process_eval(pvs, data_key)
 
         logging.level_debug() and logging.log_every_n(
             2, f'Processed data PVs:{is_modified}:{key}:{pvs}',
@@ -300,13 +300,13 @@ class PropertyValueMapper:
             return True
         return False
 
-    def _process_format(self, key: str, data: str, pvs: dict) -> bool:
+    def _process_format(self, key: str, data: str, pvs: dict,
+                        data_key: str) -> bool:
         """Processes a #Format property and updates pvs."""
         format_key = self._config.get('format_key', '#Format')
         if format_key not in pvs:
             return False
 
-        data_key = self._config.get('data_key', 'Data')
         format_str = pvs[format_key]
         (format_prop, strf) = _get_variable_expr(format_str, data_key)
         try:
@@ -328,13 +328,12 @@ class PropertyValueMapper:
             return True
         return False
 
-    def _process_eval(self, pvs: dict) -> bool:
+    def _process_eval(self, pvs: dict, data_key: str) -> bool:
         """Processes a #Eval property and updates pvs."""
         eval_key = self._config.get('eval_key', '#Eval')
         if eval_key not in pvs:
             return False
 
-        data_key = self._config.get('data_key', 'Data')
         eval_str = pvs[eval_key]
         eval_prop, eval_data = eval_functions.evaluate_statement(
             eval_str,
