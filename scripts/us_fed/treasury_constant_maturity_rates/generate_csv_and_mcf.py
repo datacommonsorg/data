@@ -153,6 +153,5 @@ def main(_):
     if FLAGS.mcf:
         generate_mcf()
 
-
-if __name__ == "__main__":
+if __name__ == "__main__":    
     app.run(main)
