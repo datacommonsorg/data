@@ -31,7 +31,7 @@ The workflow for this data import involves two main steps: Manually downloading 
 To get the necessary data files, you'll need to manually download source files.
 <https://www.1212.mn/en/statcate/table/Labour%2C%20business/Labour>
 
-All downloaded files will be located into the gcs path `unresolved_mcf/country/mongolia/mongolia_employment/latest/input_files` and can be directly read from it while processing.
+All downloaded files will be located into the gcs path `unresolved_mcf/country/mongolia/mongolia_employment/latest/input_files` and by using `run.sh` file, files will be copied into local `input_files` folder and can be directly read from it while processing.
 
 #### Autorefresh Type:
 
@@ -61,7 +61,7 @@ Here are the specific commands for each file:
 
 ```bash
 python3 stat_var_processor.py
---input_data=gs://unresolved_mcf/country/mongolia/mongolia_employment/latest/input_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup.csv
+--input_data=../../statvar_imports/mongolia_imports/mongolia_employment/input_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup.csv
 --pv_map=../../statvar_imports/mongolia_imports/mongolia_employment/employment_by_classification_of_economic_activities_region_gender_and_agegroup_pvmap.csv
 --config_file=../../statvar_imports/mongolia_imports/mongolia_employment/metadata.csv
 --output_path=../../statvar_imports/mongolia_imports/mongolia_employment/output_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup_output
@@ -71,7 +71,7 @@ python3 stat_var_processor.py
 
 ```bash
 python3 stat_var_processor.py
---input_data=gs://unresolved_mcf/country/mongolia/mongolia_employment/latest/input_files/employment_by_occupation_by_region_gender_and_agegroup.csv
+--input_data=../../statvar_imports/mongolia_imports/mongolia_employment/input_files/employment_by_occupation_by_region_gender_and_agegroup.csv
 --pv_map=../../statvar_imports/mongolia_imports/mongolia_employment/employment_by_occupation_by_region_gender_and_agegroup_pvmap.csv
 --config_file=../../statvar_imports/mongolia_imports/mongolia_employment/employment_by_occupation_by_region_gender_and_agegroup_metadata.csv
 --output_path=../../statvar_imports/mongolia_imports/mongolia_employment/output_files/employment_by_occupation_by_region_gender_and_agegroup_output
@@ -81,7 +81,7 @@ python3 stat_var_processor.py
 
 ```bash
 python3 stat_var_processor.py
---input_data=gs://unresolved_mcf/country/mongolia/mongolia_employment/latest/input_files/employment_to_population_ratio_by_region_gender_and_agegroup.csv
+--input_data=../../statvar_imports/mongolia_imports/mongolia_employment/input_files/employment_to_population_ratio_by_region_gender_and_agegroup.csv
 --pv_map=../../statvar_imports/mongolia_imports/mongolia_employment/employment_to_population_ratio_by_region_gender_and_agegroup_pvmap.csv
 --config_file=../../statvar_imports/mongolia_imports/mongolia_employment/employment_to_population_ratio_by_region_gender_and_agegroup_metadata.csv
 --output_path=../../statvar_imports/mongolia_imports/mongolia_employment/output_files/employment_to_population_ratio_by_region_gender_and_agegroup_output
@@ -91,7 +91,7 @@ python3 stat_var_processor.py
 
 ```bash
 python3 stat_var_processor.py
---input_data=gs://unresolved_mcf/country/mongolia/mongolia_employment/latest/input_files/labour_force_by_region_gender_and_agegroup.csv
+--input_data=../../statvar_imports/mongolia_imports/mongolia_employment/input_files/labour_force_by_region_gender_and_agegroup.csv
 --pv_map=../../statvar_imports/mongolia_imports/mongolia_employment/labour_force_by_region_gender_and_agegroup_pvmap.csv
 --config_file=../../statvar_imports/mongolia_imports/mongolia_employment/metadata.csv
 --output_path=../../statvar_imports/mongolia_imports/mongolia_employment/output_files/labour_force_by_region_gender_and_agegroup_output
@@ -101,7 +101,7 @@ python3 stat_var_processor.py
 
 ```bash
 python3 stat_var_processor.py
---input_data=gs://unresolved_mcf/country/mongolia/mongolia_employment/latest/input_files/labour_underutilization_by_region_gender_and_agegroup.csv
+--input_data=../../statvar_imports/mongolia_imports/mongolia_employment/input_files/labour_underutilization_by_region_gender_and_agegroup.csv
 --pv_map=../../statvar_imports/mongolia_imports/mongolia_employment/labour_underutilization_by_region_gender_and_agegroup_pvmap.csv
 --config_file=../../statvar_imports/mongolia_imports/mongolia_employment/metadata.csv
 --output_path=../../statvar_imports/mongolia_imports/mongolia_employment/output_files/labour_underutilization_by_region_gender_and_agegroup_output 
@@ -111,7 +111,7 @@ python3 stat_var_processor.py
 
 ```bash
 python3 stat_var_processor.py
---input_data=gs://unresolved_mcf/country/mongolia/mongolia_employment/latest/input_files/registered_unemployed_by_education_level_region_gender_month.csv
+--input_data=../../statvar_imports/mongolia_imports/mongolia_employment/input_files/registered_unemployed_by_education_level_region_gender_month.csv
 --pv_map=../../statvar_imports/mongolia_imports/mongolia_employment/registered_unemployed_by_education_level_region_gender_month_pvmap.csv
 --config_file=../../statvar_imports/mongolia_imports/mongolia_employment/metadata.csv
 --output_path=../../statvar_imports/mongolia_imports/mongolia_employment/output_files/registered_unemployed_by_education_level_region_gender_month_output
