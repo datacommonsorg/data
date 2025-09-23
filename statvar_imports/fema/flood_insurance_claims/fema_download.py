@@ -33,7 +33,10 @@ flags.DEFINE_string('api_url',
                     'The base URL of the API endpoint to download data from.')
 flags.DEFINE_string('temp_dir', 'temp_fema_data',
                     'The temporary directory to store downloaded chunks.')
-FLAGS = flags.FLAGS
+_FLAGS = flags.FLAGS
+
+# Define the page size for each API request.
+PAGE_SIZE = 1000
 
 
 def get_total_records(api_url):
@@ -65,37 +68,31 @@ def get_total_records(api_url):
         logging.error("Failed to get total record count: %s", e)
         raise RuntimeError(
             'Failed to get total record count.')
-        return None
     except (ValueError, KeyError, TypeError) as e:
         logging.error(
             "Failed to parse the total record count from the response: %s", e)
         raise RuntimeError(
             'Failed to parse the total record count from the response.')
-        return None
 
 
-def main(argv):
+def download_data(api_url: str, temp_dir: str):
     """
-    The main function that handles the data download process.
+    Downloads data from the FEMA API, handling pagination and file merging.
 
     Args:
-        argv: List of command line arguments, as provided by absl.
+        api_url (str): The base URL of the API endpoint.
+        temp_dir (str): The path to the temporary directory for downloaded chunks.
     """
-
-    api_url = FLAGS.api_url
-    temp_dir = FLAGS.temp_dir
     filename = "fema_nfip_claims.csv"
 
     output_dir = "input_file"
     if not os.path.exists(output_dir):
-    	os.makedirs(output_dir)
+        os.makedirs(output_dir)
     filename = os.path.join(output_dir, filename)
-
 
     logging.set_verbosity(logging.INFO)
 
     # Define the page size for each API request.
-    PAGE_SIZE = 1000
     skip_count = 0
     records_downloaded = 0
     final_filepath = filename
@@ -106,7 +103,6 @@ def main(argv):
         logging.fatal("Could not get the total record count. Cannot proceed.")
         raise RuntimeError(
             'Download failed due to could not get the total record count.')
-        return
 
     try:
         # Create a temporary directory for downloaded chunks.
@@ -121,10 +117,11 @@ def main(argv):
             csv_url = f"{api_url}?$format=csv&$skip={skip_count}"
             logging.info("Requesting data from: %s", csv_url)
 
+            # The download utility incorrectly appends an .xlsx extension.
             util_output_filename = "FimaNfipClaims.xlsx"
             util_output_path = os.path.join(temp_dir, util_output_filename)
 
-            chunk_filename = f"FimaNfipClaims_{skip_count}.xlsx"
+            chunk_filename = f"FimaNfipClaims_{skip_count}.csv"
             chunk_filepath = os.path.join(temp_dir, chunk_filename)
 
             download_success = download_file(url=csv_url,
@@ -135,12 +132,14 @@ def main(argv):
                                              backoff=2)
 
             if not download_success or not os.path.exists(util_output_path):
-                logging.error(
+                logging.fatal(
                     "Failed to download chunk or file not found. Exiting.")
                 break
 
             os.rename(util_output_path, chunk_filepath)
 
+            # Open the file in binary mode ('rb') as it is an .xlsx file (a binary format).
+            # Reading as bytes allows us to handle the content directly for merging.
             with open(chunk_filepath, 'rb') as f_chunk:
                 content = f_chunk.read()
 
@@ -151,7 +150,7 @@ def main(argv):
                     split_content = content.split(b'\n', 1)
                     if len(split_content) > 1:
                         content_without_header = split_content[1]
-                        f_final.write(content_without_header)
+                        f_final.write(b'\n' + content_without_header)
 
             num_records_in_chunk = len(content.split(b'\n')) - 1
             records_downloaded += num_records_in_chunk
@@ -176,6 +175,16 @@ def main(argv):
     finally:
         if os.path.exists(temp_dir):
             shutil.rmtree(temp_dir)
+
+
+def main(argv):
+    """
+    The main function that handles the data download process.
+
+    Args:
+        argv: List of command line arguments, as provided by absl.
+    """
+    download_data(_FLAGS.api_url, _FLAGS.temp_dir)
 
 
 if __name__ == "__main__":

@@ -18,7 +18,6 @@ import glob
 import os
 import requests
 import sys
-import pandas as pd
 
 from absl import app
 from absl import flags
@@ -59,8 +58,8 @@ class NFIPStatVarDataProcessor(StatVarDataProcessor):
             self._counters.add_counter('additional-count-svobs', 1)
 
         # Generate settlementAmount totals for Building and Contents.
-        for index in range(len(svobs_pvs_list)):
-            svobs_pvs = svobs_pvs_list[index]
+        new_settlement_svobs = []
+        for svobs_pvs in svobs_pvs_list:
             if strip_namespace(svobs_pvs.get('measuredProperty',
                                              '')) == 'settlementAmount':
                 if strip_namespace(svobs_pvs.get('insuredThing', '')) in [
@@ -69,8 +68,9 @@ class NFIPStatVarDataProcessor(StatVarDataProcessor):
                     settlement_pvs = dict(svobs_pvs)
                     settlement_pvs[
                         'insuredThing'] = 'dcs:BuildingStructureAndContents'
-                    svobs_pvs_list.append(settlement_pvs)
+                    new_settlement_svobs.append(settlement_pvs)
                     self._counters.add_counter('additional-settlement-svobs', 1)
+        svobs_pvs_list.extend(new_settlement_svobs)
         return svobs_pvs_list
 
 
