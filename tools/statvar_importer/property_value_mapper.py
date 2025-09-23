@@ -170,16 +170,19 @@ class PropertyValueMapper:
             config_flags.set_config_value(key, value, self._config)
             return None, None
 
-        # Row is a pv map
-        pvs_list = row[1:]
+        pvs = self._parse_pv_row(row[1:], namespace, filename)
+        return key, pvs
+
+    def _parse_pv_row(self, pvs_list: list[str], namespace: str,
+                      filename: str) -> dict:
         if len(pvs_list) == 1:
             # PVs list has no property, just a value.
             # Use the namespace as the property
             pvs_list = [namespace]
-            pvs_list.append(row[1])
+            pvs_list.append(pvs_list[0])
         if len(pvs_list) % 2 != 0:
             raise RuntimeError(
-                f'Invalid list of property value: {row} in {filename}')
+                f'Invalid list of property value: {pvs_list} in {filename}')
         # Get property,values from the columns
         pvs = {}
         for i in range(0, len(pvs_list), 2):
@@ -205,7 +208,7 @@ class PropertyValueMapper:
                                    self._config.get('multi_value_properties',
                                                     {}),
                                    normalize=normalize)
-        return key, pvs
+        return pvs
 
     def load_pvs_dict(self, pv_map_input: dict, namespace: str = 'GLOBAL'):
         if namespace not in self._pv_map:
