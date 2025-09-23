@@ -155,7 +155,7 @@ class PropertyValueMapper:
         return pv_map_input
 
     def _process_csv_row(self, row: list[str], namespace: str,
-                         filename: str) -> tuple[str, dict]:
+                         filename: str) -> tuple[str | None, dict | None]:
         # Drop trailing empty columns in the row
         last_col = len(row) - 1
         while last_col >= 0 and row[last_col].strip() == '':
@@ -194,8 +194,7 @@ class PropertyValueMapper:
                     # Replace single quote with double quotes
                     # To distinguish quote as delimiter vs value in CSVs
                     # single quote is used instead of double quote in CSV values.
-                    value[0] = '"'
-                    value[-1] = '"'
+                    value = f'"{value[1:-1]}"'
             normalize = True
             if '#' in prop or '=' in value:
                 # Value is a formula. Set value as a string.
