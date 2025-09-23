@@ -138,8 +138,9 @@ def download_data(api_url: str, temp_dir: str):
 
             os.rename(util_output_path, chunk_filepath)
 
-            # Open the file in binary mode ('rb') as it is an .xlsx file (a binary format).
-            # Reading as bytes allows us to handle the content directly for merging.
+            # The file is a plain text CSV, but we read it in binary mode ('rb')
+            # to handle potential issues with different line endings (e.g., '\r\n')
+            # and ensure the bytes are written exactly as they were read.
             with open(chunk_filepath, 'rb') as f_chunk:
                 content = f_chunk.read()
 
