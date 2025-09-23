@@ -159,8 +159,7 @@ class PropertyValueMapper:
                         if len(pvs_list) == 1:
                             # PVs list has no property, just a value.
                             # Use the namespace as the property
-                            pvs_list = [namespace]
-                            pvs_list.append(row[1])
+                            pvs_list = [namespace, pvs_list[0]]
                         if len(pvs_list) % 2 != 0:
                             raise RuntimeError(
                                 f'Invalid list of property value: {row} in {filename}'
@@ -186,8 +185,7 @@ class PropertyValueMapper:
                                     # Replace single quote with double quotes
                                     # To distinguish quote as delimiter vs value in CSVs
                                     # single quote is used instead of double quote in CSV values.
-                                    value[0] = '"'
-                                    value[-1] = '"'
+                                    value = f'"{value[1:-1]}"'
                             #pvs[prop] = value
                             normalize = True
                             if '#' in prop or '=' in value:
