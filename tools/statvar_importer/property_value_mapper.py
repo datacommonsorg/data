@@ -178,8 +178,7 @@ class PropertyValueMapper:
         if len(pvs_list) == 1:
             # PVs list has no property, just a value.
             # Use the namespace as the property
-            pvs_list = [namespace]
-            pvs_list.append(pvs_list[0])
+            pvs_list = [namespace, pvs_list[0]]
         if len(pvs_list) % 2 != 0:
             raise RuntimeError(
                 f'Invalid list of property value: {pvs_list} in {filename}')
