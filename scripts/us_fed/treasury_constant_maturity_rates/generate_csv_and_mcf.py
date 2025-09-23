@@ -119,13 +119,8 @@ def generate_mcf():
         'observationDate: C:{filename}->date\n'
         'value: C:{filename}->{maturity_hyphen}\n')
 
-    if FLAGS.mode == 'test':
-        tmcf_filename = "treasury_constant_maturity_rates_test.tmcf"
-    else:
-        tmcf_filename = "treasury_constant_maturity_rates_prod.tmcf"
-
     with open("treasury_constant_maturity_rates.mcf", "w") as mcf_f, \
-         open(tmcf_filename, "w") as tmcf_f:
+         open("treasury_constant_maturity_rates.tmcf", "w") as tmcf_f:
 
         index = 1
         for maturity, security_type in MATURITIES.items():
