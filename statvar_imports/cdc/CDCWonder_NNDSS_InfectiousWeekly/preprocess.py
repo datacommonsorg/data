@@ -97,10 +97,13 @@ def preprocess_data(filepath: str):
         
     except FileNotFoundError:
         logging.fatal(f"Error: The file '{filepath}' was not found.")
+        raise RuntimeError(f"Error: The file '{filepath}' was not found.")
     except KeyError as e:
         logging.fatal(f"Error: Missing a required column. Details: {e}")
+        raise RuntimeError(f"Error: Missing a required column. Details: {e}")
     except Exception as e:
         logging.fatal(f"An unexpected error occurred: {e}")
+        raise RuntimeError(f"Import job failed An unexpected error occurred: {e}")
 
 def main(argv):
     try:
@@ -113,6 +116,7 @@ def main(argv):
                   backoff= 2)
     except Exception as e:
         logging.fatal(f"Failed to download NNDSS weekly data file,{e}")
+        raise RuntimeError(f"Failed to download NNDSS weekly data file,{e}")
     preprocess_data(INPUT_FILE)
 
 if __name__ == "__main__":
