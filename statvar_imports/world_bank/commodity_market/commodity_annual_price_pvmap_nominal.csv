@@ -6,6 +6,7 @@ Year,observationAbout,dcid:Earth,measuredProperty,price,observationDate,{Number}
 "Crude oil, WTI",commodityType,CrudeOil,geographicalIndicator,WestTexasIntermediate,value,{Number},,,,,,,,
 "Coal, Australian",commodityType,Coal,geographicalIndicator,Australia,value,{Number},,,,,,,,
 "Coal, South African",commodityType,Coal,geographicalIndicator,SouthAfrica,value,{Number},,,,,,,,
+"Coal, South Afican",commodityType,Coal,geographicalIndicator,SouthAfrica,value,{Number},,,,,,,,
 "Natural gas, US",commodityType,NaturalGas,geographicalIndicator,UnitedStates,value,{Number},,,,,,,,
 "Natural gas, Europe",commodityType,NaturalGas,geographicalIndicator,Europe,value,{Number},,,,,,,,
 "Liquefied natural gas, Japan",commodityType,LiquefiedNaturalGas,geographicalIndicator,Japan,value,{Number},,,,,,,,
