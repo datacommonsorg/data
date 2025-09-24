@@ -24,7 +24,6 @@ from retry import retry
 import shutil
 from pathlib import Path
 
-
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
 import file_util
@@ -45,6 +44,7 @@ flags.DEFINE_string(
 
 OUTPUT_DIR = "input_files"
 
+
 def download_and_extract_ejdata(year, config):
     """
     Downloads the yearly files from the Zenodo-like source (Multi-level ZIP extraction),
@@ -53,22 +53,25 @@ def download_and_extract_ejdata(year, config):
     Modified to stream to a temporary file to avoid IncompleteRead errors.
     """
     output_path = f"{OUTPUT_DIR}/{year}.csv"
-    
+
     if file_util.file_get_matching(output_path):
-        logging.info(f"Final CSV file for year {year} already exists in GCS. Skipping download.")
+        logging.info(
+            f"Final CSV file for year {year} already exists in GCS. Skipping download."
+        )
         return
 
     logging.info(f"Starting download for Year {year}")
     max_retries = 3
-    
+
     files_to_process = config["FILES_TO_PROCESS"]
     source_info = files_to_process.get(year)
 
     if not source_info:
-        logging.fatal(f"No file information found in config for year {year}. Skipping.")
+        logging.fatal(
+            f"No file information found in config for year {year}. Skipping.")
         return
-    
-    #  DOWNLOAD LOGIC 
+
+    #  DOWNLOAD LOGIC
     base_url = config["BASE_ZENODO_URL"]
     url_suffix = source_info["url_suffix"]
     internal_zip_name = source_info["internal_zip_name"]
@@ -79,7 +82,9 @@ def download_and_extract_ejdata(year, config):
     temp_internal_zip = Path(f"/tmp/internal_zip_{year}.zip")
 
     for attempt in range(max_retries):
-        logging.info(f"Downloading main ZIP from source: {main_url} (Attempt {attempt + 1}/{max_retries})")
+        logging.info(
+            f"Downloading main ZIP from source: {main_url} (Attempt {attempt + 1}/{max_retries})"
+        )
         try:
             # Use stream=True to handle large files without loading into memory
             with requests.get(main_url, stream=True, timeout=300) as response:
@@ -90,8 +95,10 @@ def download_and_extract_ejdata(year, config):
                     for chunk in response.iter_content(chunk_size=1024 * 1024):
                         if chunk:
                             f_out.write(chunk)
-            
-            logging.info(f"Successfully downloaded main ZIP to temporary file for {year}.")
+
+            logging.info(
+                f"Successfully downloaded main ZIP to temporary file for {year}."
+            )
 
             # Now, open the temporary file for extraction
             with zipfile.ZipFile(temp_main_zip, 'r') as main_zip:
@@ -100,38 +107,48 @@ def download_and_extract_ejdata(year, config):
                 if internal_zip_name not in main_zip.namelist():
                     basename = os.path.basename(internal_zip_name)
                     internal_zip_name = next(
-                        (name for name in main_zip.namelist() if basename in name), None
-                    )
+                        (name for name in main_zip.namelist()
+                         if basename in name), None)
                     if not internal_zip_name:
-                        logging.fatal(f"Error: Internal file matching '{basename}' not found in the main {year} ZIP.")
+                        logging.fatal(
+                            f"Error: Internal file matching '{basename}' not found in the main {year} ZIP."
+                        )
                         # Clean up temp files before returning
                         temp_main_zip.unlink(missing_ok=True)
                         temp_internal_zip.unlink(missing_ok=True)
                         return
 
-                logging.info(f"Found internal ZIP: '{internal_zip_name}'. Reading content...")
-                
+                logging.info(
+                    f"Found internal ZIP: '{internal_zip_name}'. Reading content..."
+                )
+
                 # Extract the inner zip directly to a temporary file
                 with main_zip.open(internal_zip_name, 'r') as inner_zip_file:
                     with temp_internal_zip.open("wb") as f_out:
                         shutil.copyfileobj(inner_zip_file, f_out)
 
                 with zipfile.ZipFile(temp_internal_zip, 'r') as internal_zip:
-                    csv_files = [name for name in internal_zip.namelist() if name.lower().endswith(".csv")]
-                    
+                    csv_files = [
+                        name for name in internal_zip.namelist()
+                        if name.lower().endswith(".csv")
+                    ]
+
                     if not csv_files:
-                        logging.fatal(f"Warning: No CSV files found inside the inner ZIP for {year}. List: {internal_zip.namelist()}")
+                        logging.fatal(
+                            f"Warning: No CSV files found inside the inner ZIP for {year}. List: {internal_zip.namelist()}"
+                        )
                         # Clean up temp files before returning
                         temp_main_zip.unlink(missing_ok=True)
                         temp_internal_zip.unlink(missing_ok=True)
                         return
-                    
+
                     source_file_content = internal_zip.read(csv_files[0])
-                    
+
                     with file_util.FileIO(output_path, "wb") as target:
                         target.write(source_file_content)
 
-                    logging.info(f"  -> Extracted and saved to GCS: {output_path}")
+                    logging.info(
+                        f"  -> Extracted and saved to GCS: {output_path}")
 
                     # Clean up temporary files on success
                     temp_main_zip.unlink(missing_ok=True)
@@ -139,8 +156,11 @@ def download_and_extract_ejdata(year, config):
 
                     return  # Success, break out of retry loop
 
-        except (requests.exceptions.RequestException, zipfile.BadZipFile, OSError) as e:
-            logging.error(f"An error occurred during download/extraction for year {year} (Attempt {attempt + 1}): {e}")
+        except (requests.exceptions.RequestException, zipfile.BadZipFile,
+                OSError) as e:
+            logging.error(
+                f"An error occurred during download/extraction for year {year} (Attempt {attempt + 1}): {e}"
+            )
             # Clean up temp files on failure
             temp_main_zip.unlink(missing_ok=True)
             temp_internal_zip.unlink(missing_ok=True)
@@ -151,6 +171,7 @@ def download_and_extract_ejdata(year, config):
             else:
                 logging.fatal("Max retries exceeded. Skipping this year.")
                 return
+
 
 def write_csv(data, outfilename):
     """
@@ -196,7 +217,7 @@ def write_tmcf(outfilename, TEMPLATE_MCF):
             mcf_content.append(str(TEMPLATE_MCF))
 
     template_content = "\n\n".join(mcf_content)
-    
+
     with file_util.FileIO(outfilename, 'w') as f_out:
         f_out.write(template_content)
 
@@ -212,11 +233,13 @@ def main(_):
         CSV_COLUMNS_BY_YEAR = config.get("CSV_COLUMNS_BY_YEAR", {})
         TEMPLATE_MCF = config.get("TEMPLATE_MCF", [])
         RENAME_COLUMNS_YEARS = config.get("RENAME_COLUMNS_YEARS", [])
-        
+
         files_to_process_from_config = config.get("FILES_TO_PROCESS", {})
-        
+
         if "BASE_ZENODO_URL" not in config or not files_to_process_from_config:
-            logging.fatal("Mandatory configuration keys (BASE_ZENODO_URL or FILES_TO_PROCESS) are missing from config file.")
+            logging.fatal(
+                "Mandatory configuration keys (BASE_ZENODO_URL or FILES_TO_PROCESS) are missing from config file."
+            )
             raise KeyError("Missing mandatory configuration keys.")
 
         dfs = {}
@@ -226,26 +249,34 @@ def main(_):
                 if year in files_to_process_from_config:
                     download_and_extract_ejdata(year, config)
                 else:
-                    logging.warning(f"No download config found for year {year}. Skipping.")
-        
+                    logging.warning(
+                        f"No download config found for year {year}. Skipping.")
+
         if _FLAGS.mode == "" or _FLAGS.mode == "process":
             for year in YEARS:
                 try:
                     logging.info(f"Processing data for year {year}")
                     columns = CSV_COLUMNS_BY_YEAR.get(year)
-                    
+
                     if not columns:
-                        logging.warning(f"No column mapping found for year {year}. Skipping processing.")
+                        logging.warning(
+                            f"No column mapping found for year {year}. Skipping processing."
+                        )
                         continue
 
                     file_path = f"{OUTPUT_DIR}/{year}.csv"
 
                     if not file_util.file_get_matching(file_path):
-                        logging.error(f"Required file for year {year} not found at {file_path}. Skipping processing.")
+                        logging.error(
+                            f"Required file for year {year} not found at {file_path}. Skipping processing."
+                        )
                         continue
-                    
+
                     # Fix: Add the 'encoding' parameter to handle non-UTF-8 characters
-                    dfs[year] = pd.read_csv(file_path, sep=',', usecols=columns, encoding='latin1')
+                    dfs[year] = pd.read_csv(file_path,
+                                            sep=',',
+                                            usecols=columns,
+                                            encoding='latin1')
                     logging.info(f"File processed for {year} successfully")
 
                     if year in RENAME_COLUMNS_YEARS:
@@ -255,19 +286,19 @@ def main(_):
 
                     dfs[year] = dfs[year].rename(columns=cols_renamed)
                     logging.info(f"Columns renamed for {year} successfully")
-            
+
                 except Exception as e:
                     logging.fatal(f"Error processing data for year {year}: {e}")
                     continue
 
             logging.info("Writing data to CSV")
             write_csv(dfs, f"{OUTPUT_DIR}/ejscreen_airpollutants.csv")
-            
+
             logging.info("Writing template to TMCF")
             write_tmcf(f"{OUTPUT_DIR}/ejscreen.tmcf", TEMPLATE_MCF)
-            
+
             logging.info("Process completed successfully")
-            
+
     except Exception as e:
         logging.fatal(f"Unexpected error in the main process: {e}")
         raise RuntimeError(f"Unexpected error in the main process: {e}")
