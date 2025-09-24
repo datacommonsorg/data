@@ -90,11 +90,11 @@ def download_worldbank(url, download_dir):
             EC.element_to_be_clickable((By.XPATH, '//*[@id="panel_SPOP_Time_Dim"]/div[1]/h4/a'))
         )
         time_selection.click()
-        years = WebDriverWait(driver, 10).until(
+        years = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="rowTimeDim"]/div/div/div[2]/div[3]/div[1]/div[1]/div/a[1]'))
         )
         driver.execute_script("arguments[0].click();", years)
-        apply_changes = WebDriverWait(driver, 10).until(
+        apply_changes = WebDriverWait(driver, 25).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="applyChangesNoPreview"]'))
         )
         apply_changes.click()
@@ -113,6 +113,7 @@ def download_worldbank(url, download_dir):
 
     except Exception as e:
         logging.fatal(f"An error occurred while downloading the file: {e}")
+        raise RuntimeError("Failed to download the file") from e
     finally:
         logging.info("Closing WebDriver.")
         driver.quit()
@@ -126,13 +127,14 @@ def unzip_inputfile(inputdir):
                     zip_ref.extractall(inputdir)
         
         for filename in os.listdir(inputdir):
-            if "_Data" in filename and str(filename).endswith(".csv"):
+            if "_Data" in filename and filename.endswith(".csv"):
                 os.rename(os.path.join(inputdir, filename), os.path.join(inputdir, "wb_subnational_input.csv"))
-            elif "Metadata" in filename and str(filename).endswith(".csv"):
+            elif "Metadata" in filename and filename.endswith(".csv"):
                 os.remove(os.path.join(inputdir,filename))
 
     except Exception as e:
         logging.fatal(f"An error occurred while unzipping the file: {e}")
+        raise RuntimeError("Failed to unzip the file") from e
 
 def preprocess(inputdir):
     try:
@@ -141,6 +143,7 @@ def preprocess(inputdir):
         df.to_csv(os.path.join(inputdir, "wb_subnational_input.csv"), index=False, encoding='utf-8')
     except Exception as e:
         logging.fatal(f"An error occurred while preprocessing the file: {e}")
+        raise RuntimeError("Failed to process user data") from e
     
 def main(_):
     worldbank_url = config.world_bank_url
