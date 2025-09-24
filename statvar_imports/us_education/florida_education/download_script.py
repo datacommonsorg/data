@@ -19,8 +19,8 @@ from absl import logging
 
 # Set up module path to access the utility script
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-parent_of_parent_dir = os.path.join(_MODULE_DIR, '..', '..','..')
-sys.path.append(parent_of_parent_dir)
+data_dir = os.path.dirname(os.path.dirname(os.path.dirname(_MODULE_DIR)))
+sys.path.append(data_dir)
 
 from util.download_util_script import download_file
 
