@@ -70,41 +70,41 @@ def download_worldbank(url, download_dir):
         EC.element_to_be_clickable((By.XPATH, '//*[@id="newSelection_SPOP_Country_Dim"]/div/div/div/div/div[1]/div[3]/div[1]/div[1]/div/a[1]'))
         )
         country.click()
-        time.sleep(3)
+        time.sleep(10)
         all = WebDriverWait(driver, 20).until(
         EC.element_to_be_clickable((By.XPATH, '//*[@id="defaultSubnationalTab"]'))
         )
         all.click()
         country.click()
-        time.sleep(3)
-        series = WebDriverWait(driver, 10).until(
+        time.sleep(10)
+        series = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="panel_SPOP_Series_Dim"]/div[1]/h4/a'))
         )
         series.click()
-        population_chkbox = WebDriverWait(driver, 10).until(
+        population_chkbox = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//input[@id="chk[SPOP_Series_Dim].[List].&[SP.POP.TOTL]"]'))
         )
         population_chkbox.click()
-        time.sleep(3)
-        time_selection = WebDriverWait(driver, 10).until(
+        time.sleep(20)
+        time_selection = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="panel_SPOP_Time_Dim"]/div[1]/h4/a'))
         )
         time_selection.click()
         years = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="rowTimeDim"]/div/div/div[2]/div[3]/div[1]/div[1]/div/a[1]'))
         )
-        years.click()
+        driver.execute_script("arguments[0].click();", years)
         apply_changes = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="applyChangesNoPreview"]'))
         )
         apply_changes.click()
-        time.sleep(5)
-        download_options = WebDriverWait(driver, 10).until(
+        time.sleep(20)
+        download_options = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//a[@title="Download options"]'))
         )
         download_options.click()
-        time.sleep(5)
-        csv = WebDriverWait(driver, 10).until(
+        time.sleep(20)
+        csv = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//a[@title="Download CSV Format"]'))
         )
         csv.click()
@@ -128,6 +128,8 @@ def unzip_inputfile(inputdir):
         for filename in os.listdir(inputdir):
             if "_Data" in filename and str(filename).endswith(".csv"):
                 os.rename(os.path.join(inputdir, filename), os.path.join(inputdir, "wb_subnational_input.csv"))
+            elif "Metadata" in filename and str(filename).endswith(".csv"):
+                os.remove(os.path.join(inputdir,filename))
 
     except Exception as e:
         logging.fatal(f"An error occurred while unzipping the file: {e}")
