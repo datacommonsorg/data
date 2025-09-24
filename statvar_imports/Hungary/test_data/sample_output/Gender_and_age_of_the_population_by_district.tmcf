@@ -1,0 +1,8 @@
+Node: E:hungary-Gender_and_age_of_the_population_by_district->E0
+observationAbout: C:hungary-Gender_and_age_of_the_population_by_district->observationAbout
+observationDate: C:hungary-Gender_and_age_of_the_population_by_district->observationDate
+value: C:hungary-Gender_and_age_of_the_population_by_district->value
+variableMeasured: C:hungary-Gender_and_age_of_the_population_by_district->variableMeasured
+unit: C:hungary-Gender_and_age_of_the_population_by_district->unit
+scalingFactor: C:hungary-Gender_and_age_of_the_population_by_district->scalingFactor
+typeOf: dcs:StatVarObservation
