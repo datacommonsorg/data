@@ -26,6 +26,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '.'))  # For soc_codes_names
 
 from soc_codes_names import SOC_MAP
+from util.naics_codes import NAICS_CODES
 # pylint: enable=wrong-import-position
 # pylint: enable=import-error
 
@@ -78,264 +79,6 @@ _MULTIPLE_VALUE_SEPARATOR_REGEX = re.compile(r'__|&')
 # A mapping of NAICS codes to industry topics
 # This map was generated using the code from the _create_naics_map function at
 # https://github.com/datacommonsorg/tools/blob/master/stat_var_renaming/stat_var_renaming_constants.py
-_NAICS_MAP = {
-    '00':
-        'Unclassified',
-    '11':
-        'AgricultureForestryFishingHunting',
-    '21':
-        'MiningQuarryingOilGasExtraction',
-    '22':
-        'Utilities',
-    '23':
-        'Construction',
-    '31':
-        'Manufacturing',
-    '32':
-        'Manufacturing',
-    '33':
-        'Manufacturing',
-    '42':
-        'WholesaleTrade',
-    '44':
-        'RetailTrade',
-    '45':
-        'RetailTrade',
-    '48':
-        'TransportationWarehousing',
-    '49':
-        'TransportationWarehousing',
-    '51':
-        'Information',
-    '52':
-        'FinanceInsurance',
-    '53':
-        'RealEstateRentalLeasing',
-    '54':
-        'ProfessionalScientificTechnicalServices',
-    '55':
-        'ManagementOfCompaniesEnterprises',
-    '56':
-        'AdministrativeSupportWasteManagementRemediationServices',
-    '61':
-        'EducationalServices',
-    '62':
-        'HealthCareSocialAssistance',
-    '71':
-        'ArtsEntertainmentRecreation',
-    '72':
-        'AccommodationFoodServices',
-    '81':
-        'OtherServices',
-    '92':
-        'PublicAdministration',
-    '99':
-        'Nonclassifiable',
-    '10':
-        'TotalAllIndustries',
-    '101':
-        'GoodsProducing',
-    '1011':
-        'NaturalResourcesMining',
-    '1012':
-        'Construction',
-    '1013':
-        'Manufacturing',
-    '102':
-        'ServiceProviding',
-    '1021':
-        'TradeTransportationUtilities',
-    '1022':
-        'Information',
-    '1023':
-        'FinancialActivities',
-    '1024':
-        'ProfessionalBusinessServices',
-    '1025':
-        'EducationHealthServices',
-    '1026':
-        'LeisureHospitality',
-    '1027':
-        'OtherServices',
-    '1028':
-        'PublicAdministration',
-    '1029':
-        'Unclassified',
-    '455':
-        'GeneralMerchandiseRetailers',
-    '441':
-        'MotorVehicleAndPartsDealers',
-    '4412':
-        'OtherMotorVehicleDealers',
-    '4411':
-        'AutomobileDealers',
-    '44111':
-        'NewCarDealers',
-    '44112':
-        'UsedCarDealers',
-    '4413':
-        'AutomotivePartsAccessoriesAndTireStores',
-    '442':
-        'FurnitureFurnishingsStores',
-    '4421':
-        'FurnitureStores',
-    '443':
-        ' ElectronicsApplianceStores',
-    '443141':
-        'HouseholdApplianceStores',
-    '443142':
-        'ElectronicsStores',
-    '444':
-        'BuildingMaterialAndGardenEquipmentAndSuppliesDealers',
-    '4441':
-        'BuildingMaterialAndSuppliesDealers',
-    '44412':
-        'PaintAndWallpaperStores',
-    '44413':
-        'HardwareStores',
-    '445':
-        'FoodAndBeverageStores',
-    '4451':
-        'GroceryStores',
-    '44511':
-        'SupermarketsAndOtherGroceryStores',
-    '4453':
-        'BeerWineAndLiquorStores',
-    '446':
-        'HealthAndPersonalCareStores',
-    '44611':
-        'PharmaciesAndDrugStores',
-    '447':
-        'GasolineStations',
-    '448':
-        'ClothingAndClothingAccessStores',
-    '4481':
-        'ClothingStores',
-    '44812':
-        "WomenClothingStores",
-    '44814':
-        'FamilyClothingStores',
-    '44819':
-        'OtherClothingStores',
-    '4482':
-        'ShoeStores',
-    '451':
-        'SportingGoodsHobbyMusicalInstrumentAndBookStores',
-    '45111':
-        'SportingGoodsStores',
-    '45112':
-        'HobbyToyAndGameStores',
-    '451211':
-        'BookStores',
-    '452':
-        'GeneralMerchandiseStores',
-    '4521':
-        'DepartmentStores',
-    '452111':
-        'DepartmentStoresExcludingDiscountDepartmentStores',
-    '452112':
-        'DiscountDeptStores',
-    '4529':
-        'OtherGeneralMerchandiseStores',
-    '45291':
-        'WarehouseClubsAndSuperstores',
-    '45299':
-        'AllOtherGeneralMerchandiseStores',
-    '453':
-        'MiscellaneousStoreRetailers',
-    '4532':
-        'OfficeSuppliesStationeryAndGiftStores',
-    '45321':
-        'OfficeSuppliesAndStationeryStores',
-    '45322':
-        'GiftNoveltyAndSouvenirStores',
-    '453310':
-        'UsedMerchandiseStores',
-    '454':
-        'NonstoreRetailers',
-    '4541':
-        'ElectronicShoppingAndMailOrderHouses',
-    '45431':
-        'FuelDealers',
-    '722':
-        'FoodServicesAndDrinkingPlaces',
-    '7225':
-        'RestaurantsAndOtherEatingPlaces',
-    '72221':
-        'LimitedServiceEatingPlaces',
-    '722511':
-        'FullServiceRestaurants',
-    '4422':
-        'HomeFurnishingsStores',
-    '44221':
-        'FloorCoveringStores',
-    '442299':
-        'AllOtherHomeFurnishingsStores',
-    '44811':
-        'MensClothingStores',
-    '44831':
-        'JewelryStores',
-    '7224':
-        'DrinkingPlaces',
-    '4523':
-        'GeneralMerchandiseStoresWarehouseClubsAndSupercenters',
-    '21112':
-        'CrudePetroleumExtraction',
-    '211120':
-        'CrudePetroleumExtraction',
-    '21113':
-        'NaturalGasExtraction',
-    '211130':
-        'NaturalGasExtraction',
-    '212230':
-        'CopperNickelLeadAndZincMining',
-    '311213':
-        'MaltManufacturing',
-    '311313':
-        'BeetSugarManufacturing',
-    '32211':
-        'PulpMills',
-    '322110':
-        'PulpMills',
-    '333914':
-        'MeasuringDispensingAndOtherPumpingEquipmentManufacturing',
-    '335220':
-        'MajorHouseholdApplianceManufacturing',
-    '336415':
-        'GuidedMissileAndSpaceVehiclePropulsionUnitAndPropulsionUnitPartsManufacturing',
-    '485112':
-        'CommuterRailSystems',
-    '51225':
-        'RecordProductionAndDistribution',
-    '512250':
-        'RecordProductionAndDistribution',
-    '521':
-        'MonetaryAuthoritiesCentralBank',
-    '5211':
-        'MonetaryAuthoritiesCentralBank',
-    '52111':
-        'MonetaryAuthoritiesCentralBank',
-    '521110':
-        'MonetaryAuthoritiesCentralBank',
-    '53228':
-        'OtherConsumerGoodsRental',
-    '532281':
-        'FormalWearAndCostumeRental',
-    '532282':
-        'VideoTapeAndDiscRental',
-    '532283':
-        'HomeHealthEquipmentRental',
-    '532284':
-        'RecreationalGoodsRental',
-    '532289':
-        'AllOtherConsumerGoodsRental',
-    '541713':
-        'ResearchandDevelopmentInNanotechnology',
-    '541714':
-        'ResearchAndDevelopmentInBiotechnologyExceptNanobiotechnology',
-    '541715':
-        'ResearchAndDevelopmentInthePhysicalEngineeringAndLifeSciencesExceptNanotechnologyAndBiotechnology'
-}
 
 # Regex to match NAICS Codes. These codes could be a single code or a range
 # Example matches: 53-56, 44
@@ -654,9 +397,9 @@ def _naics_code_to_name(naics_val: str) -> str:
         prev_str = None  # To ensure the same industry is not added twice
         for code in range(lower_limit, upper_limit + 1):
             code_str = str(code)
-            if code_str in _NAICS_MAP and prev_str != _NAICS_MAP[code_str]:
-                industry_str = industry_str + _NAICS_MAP[code_str]
-                prev_str = _NAICS_MAP[code_str]
+            if code_str in NAICS_CODES and prev_str != NAICS_CODES[code_str]:
+                industry_str = industry_str + NAICS_CODES[code_str]
+                prev_str = NAICS_CODES[code_str]
             else:
                 continue
 
@@ -679,7 +422,7 @@ def _naics_code_to_name(naics_val: str) -> str:
             if match_str.find('-') != -1:  # Range
                 industry_str = _process_naics_range(match_str)
             else:
-                industry_str = _NAICS_MAP.get(match_str)
+                industry_str = NAICS_CODES.get(match_str)
                 if not industry_str:
                     return None
             processed_str = processed_str + industry_str
