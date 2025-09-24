@@ -80,9 +80,6 @@ def generate_urls(start_year, end_year):
 
     return generated_urls
 
-current_year = date.today().year
-urls = generate_urls(1999, current_year)
-
 def get_table_links(url):
     """
     Fetches a webpage and extracts links to data tables along with associated
@@ -187,7 +184,10 @@ def download_table(url, year, life_stage, save_path):
 
 def main(_):
     
-    root_dir = 'input_files'
+    root_dir = 'iinput_files'
+    # NEW: Change the starting year to 2001
+    current_year = date.today().year
+    urls = generate_urls(2001, current_year)
     # Main loop to process each top-level URL
     for main_url in urls:
         logging.info(f"Processing main URL: {main_url}")
