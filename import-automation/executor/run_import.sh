@@ -30,6 +30,8 @@
 GCP_PROJECT="datcom-ci"
 REGION="us-central1"
 GCS_BUCKET="datcom-import-test"
+SPANNER_INSTANCE="datcom-spanner-test"
+SPANNER_DB="dc-test-db"
 SCRIPT_DIR=$(realpath $(dirname $0))
 DATA_REPO=$(realpath $(dirname $0)/../../)
 DEFAULT_CPU=8
@@ -260,11 +262,9 @@ function get_latest_gcs_import_output {
 
 # Get the config overrides for import executor
 function get_import_config {
-  local options="$1"; shift
-  local config_file="$1"; shift
-
   # Create an import config file based on default configs.
   # Drop any references to local files for cloud jobs
+  options="gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET spanner_project_id:$GCP_PROJECT spanner_instance_id:$SPANNER_INSTANCE spanner_database_id:$SPANNER_DB"
   config_file=${config_file:-"$TMP_DIR/config-overrides-$IMPORT_NAME.json"}
   ignore_params="/tmp"
   [[ "$RUN_MODE" == "executor" ]] && ignore_params="NONE"
@@ -323,7 +323,7 @@ function run_import_cloud {
     run_cmd gcloud --project=$GCP_PROJECT run jobs delete "$job_name" --region=$REGION --quiet
   fi
 
-  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
+  get_import_config
   IMPORT_CONFIG=${IMPORT_CONFIG//\\/}
   run_cmd gcloud --project=$GCP_PROJECT run jobs create $job_name \
     --add-volume name=datcom-volume,type=cloud-storage,bucket=$GCS_BUCKET \
@@ -358,7 +358,7 @@ function run_import_executor {
       -O $TMP_DIR/import-tool/import-tool.jar
   fi
 
-  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
+  get_import_config
 
   run_cmd $SCRIPT_DIR/run_local_executor.sh \
     --import_name=$IMPORT_DIR:$IMPORT_NAME \
@@ -383,7 +383,7 @@ function run_import_docker {
 
   # Run the import within docker container
   export GCLOUD_CONFIG_DIR=$HOME/.config/gcloud
-  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
+  get_import_config
   IMPORT_CONFIG=${IMPORT_CONFIG//\\/}
   run_cmd docker run --mount type=bind,source=$GCLOUD_CONFIG_DIR,target=/root/.config/gcloud \
     --cpus=$CPU --memory=$(add_value_unit $MEMORY "G") $img \
@@ -406,7 +406,7 @@ function get_cloud_batch_config {
   disk_gib=${DISK:-"$(($memory_mib / 1000 * 5))"}
 
   config_file=${config_file:-"$TMP_DIR/cloud-batch-config-$IMPORT_NAME.json"}
-  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
+  get_import_config
   cat > $config_file  <<EOF
 {
   "taskGroups": [
