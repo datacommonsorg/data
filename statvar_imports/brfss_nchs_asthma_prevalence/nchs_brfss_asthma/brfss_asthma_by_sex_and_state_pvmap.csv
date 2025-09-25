@@ -1,4 +1,4 @@
-key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,,
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
 State,observationAbout,{Data},populationType,Person,healthOutcome,Asthma,,,,,,,,
 year,observationDate,{Data},,,,,,,,,,,,
 ,,,,,,,,,,,,,,

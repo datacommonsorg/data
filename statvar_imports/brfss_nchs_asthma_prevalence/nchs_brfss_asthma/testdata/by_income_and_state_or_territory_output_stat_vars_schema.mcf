@@ -4,7 +4,7 @@ name: "healthOutcome"
 rangeIncludes: dcid:CauseOfDeathAndDisabilityEnum,dcid:HealthOutcomeEnum,dcid:ICD10_113CausesOfDeath
 
 Node: dcid:USDollarUpto14999
-typeOf: dcid:Farm
+typeOf: dcid:QuantityRange
 name: "USDollar Upto 14 99 9"
 isProvisional: dcs:True
 

@@ -85,7 +85,7 @@ python3 stat_var_processor.py
 python3 stat_var_processor.py
 --input_data=../../statvar_imports/brfss_nchs_asthma_prevalence/nchs_brfss_asthma/input_files/by_education_and_state/*.csv"
 --pv_map=../../statvar_imports/brfss_nchs_asthma_prevalence/nchs_brfss_asthma/brfss_asthma_by_education_and_state_pvmap.csv"
---config_file=../../statvar_imports/brfss_nchs_asthma_prevalence/nchs_brfss_asthma/mecommon_metadatatadata.csv"
+--config_file=../../statvar_imports/brfss_nchs_asthma_prevalence/nchs_brfss_asthma/common_metadata.csv"
 --output_path=../../statvar_imports/brfss_nchs_asthma_prevalence/nchs_brfss_asthma/output_files/brfss_asthma_by_education_and_state_output"
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 --places_resolved_csv=../../statvar_imports/brfss_nchs_asthma_prevalence/nchs_brfss_asthma/places_resolver.csv"
