@@ -1,0 +1,10 @@
+# gcloud builds submit --config=cloudbuild.yaml . --project=datcom-import-automation-prod 
+
+steps:
+- id: 'spanner-ingestion-workflow'
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['workflows', 'deploy', 'spanner-ingestion-workflow', '--source', 'spanner-ingestion-workflow.yaml']
+
+- id: 'spanner-ingestion-helper'
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['functions', 'deploy', 'spanner-ingestion-helper', '--runtime', 'python312', '--source', 'helper', '--no-allow-unauthenticated', '--trigger-http', '--entry-point', 'ingestion_helper']
