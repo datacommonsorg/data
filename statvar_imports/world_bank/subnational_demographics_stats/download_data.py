@@ -97,7 +97,7 @@ def download_worldbank(url, download_dir):
         apply_changes = WebDriverWait(driver, 25).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="applyChangesNoPreview"]'))
         )
-        apply_changes.click()
+        driver.execute_script("arguments[0].click();",apply_changes)
         time.sleep(20)
         download_options = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//a[@title="Download options"]'))
