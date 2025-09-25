@@ -1,0 +1,36 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "SouthKorea_Employment",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://kosis.kr/eng/statisticsList/statisticsListIndex.do",
+      "provenance_description": "This data is from the South Korea Statistics Agency (KOSA), that describes about the employment statistics of South Korea",
+      "scripts": ["../run.sh gs://unresolved_mcf/country/southkorea/employment/source_files/",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/employmentstatus_data.csv --pv_map=employmentstatus_pvmap.csv --config_file=employmentstatus_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/employmentstatus",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/sexandeducationalattainment_unemploymentstatus_data.csv --pv_map=sexandeducationalattainment_unemploymentstatus_pvmap.csv --config_file=sexandeducationalattainment_unemploymentstatus_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/sexandeducationalattainment_unemploymentstatus",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/unemploymentrate_by_gender_age_data.csv --pv_map=unemploymentrate_by_gender_age_pvmap.csv --config_file=unemploymentrate_by_gender_age_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/unemploymentrate_by_gender_age",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/unemploymentstatus_data.csv --pv_map=unemploymentstatus_pvmap.csv --config_file=unemploymentstatus_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/unemploymentstatus"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/employmentstatus.tmcf",
+          "cleaned_csv": "output/employmentstatus.csv"
+        },
+        {
+          "template_mcf": "output/sexandeducationalattainment_unemploymentstatus.tmcf",
+          "cleaned_csv": "output/sexandeducationalattainment_unemploymentstatus.csv"
+        },
+        {
+          "template_mcf": "output/unemploymentrate_by_gender_age.tmcf",
+          "cleaned_csv": "output/unemploymentrate_by_gender_age.csv"
+        },
+        {
+          "template_mcf": "output/unemploymentstatus.tmcf",
+          "cleaned_csv": "output/unemploymentstatus.csv"
+        }
+      ],
+      "cron_schedule": "0 10 1,15 * *",
+      "source_files": ["source_files/*.csv"]
+    }
+  ]
+}
