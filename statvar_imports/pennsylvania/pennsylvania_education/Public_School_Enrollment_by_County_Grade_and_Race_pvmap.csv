@@ -1,9 +1,9 @@
 key,p1,v1,p2,v2,,,,
-County,observationAbout,{Data},populationType,Student,measuredProperty,count,observationDate,2016
+County,observationAbout,{Data},populationType,Student,measuredProperty,count,observationDate,2017
 Pre-Kindergarten Half Day,schoolGradeLevel,PreKindergarten,schoolDayType,HalfDay,value,{Number},,
 Pre-Kindergarten Full Day,schoolGradeLevel,PreKindergarten,schoolDayType,FullDay,value,{Number},,
-K4 Half Day,schoolGradeLevel,PreKindergartenFullDay,age,[4 Years],schoolDayType,HalfDay,value,{Number}
-K4 Full Day,schoolGradeLevel,PreKindergartenFullDay,age,[4 Years],schoolDayType,FullDay,value,{Number}
+K4 Half Day,schoolGradeLevel,PreKindergarten,age,[4 Years],schoolDayType,HalfDay,value,{Number}
+K4 Full Day,schoolGradeLevel,PreKindergarten,age,[4 Years],schoolDayType,FullDay,value,{Number}
 K5 Half Day,schoolGradeLevel,Kindergarten,age,[5 Years],schoolDayType,HalfDay,value,{Number}
 K5 Full Day,schoolGradeLevel,Kindergarten,age,[5 Years],schoolDayType,FullDay,value,{Number}
 1st Grade,schoolGradeLevel,SchoolGrade1,value,{Number},,,,
