@@ -1,0 +1,34 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "NCHS_BRFSS_Asthma",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://data.pa.gov/",
+      "provenance_description": "Dataset related to the pennsylvania's Education at country level.",
+      "scripts": ["download_script.py", "run.sh"],
+      "source_files": [
+        "input_files/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/Educational_Attainment_by_Age_Range_and_Gender_output.tmcf",
+          "cleaned_csv": "output_files/Educational_Attainment_by_Age_Range_and_Gender_output.csv"
+        },
+        {
+          "template_mcf": "output_files/Post_Secondary_Completions_Total_Awards_Degrees_output.tmcf",
+          "cleaned_csv": "output_files/Post_Secondary_Completions_Total_Awards_Degrees_output.csv"
+        },
+        {
+          "template_mcf": "output_files/Public_School_Enrollment_by_County_Grade_and_Race_output.tmcf",
+          "cleaned_csv": "output_files/Public_School_Enrollment_by_County_Grade_and_Race_output.csv"
+        },
+        {
+          "template_mcf": "output_files/Undergraduate_STEM_Enrollment_at_Publicly_Supported_Institutions_output.tmcf",
+          "cleaned_csv": "output_files/Undergraduate_STEM_Enrollment_at_Publicly_Supported_Institutions_output.csv"
+        }
+      ],
+      "cron_schedule": "0 02 * * 2"
+    }
+  ]
+}
+
