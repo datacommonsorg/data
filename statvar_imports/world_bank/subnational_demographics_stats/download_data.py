@@ -76,7 +76,6 @@ def download_worldbank(url, download_dir):
         )
         all.click()
         country.click()
-        time.sleep(10)
         series = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="panel_SPOP_Series_Dim"]/div[1]/h4/a'))
         )
@@ -85,7 +84,6 @@ def download_worldbank(url, download_dir):
             EC.element_to_be_clickable((By.XPATH, '//input[@id="chk[SPOP_Series_Dim].[List].&[SP.POP.TOTL]"]'))
         )
         population_chkbox.click()
-        time.sleep(20)
         time_selection = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="panel_SPOP_Time_Dim"]/div[1]/h4/a'))
         )
@@ -98,12 +96,10 @@ def download_worldbank(url, download_dir):
             EC.element_to_be_clickable((By.XPATH, '//*[@id="applyChangesNoPreview"]'))
         )
         driver.execute_script("arguments[0].click();",apply_changes)
-        time.sleep(20)
         download_options = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//a[@title="Download options"]'))
         )
         download_options.click()
-        time.sleep(20)
         csv = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//a[@title="Download CSV Format"]'))
         )
