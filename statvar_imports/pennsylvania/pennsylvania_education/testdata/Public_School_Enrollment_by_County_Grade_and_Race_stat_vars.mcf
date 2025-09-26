@@ -1,0 +1,696 @@
+
+
+Node: dcid:Count_Student_4Years_AmericanIndianOrAlaskaNative_FullDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:AmericanIndianOrAlaskaNative
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_4Years_AmericanIndianOrAlaskaNative_HalfDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:AmericanIndianOrAlaskaNative
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_4Years_Asian_FullDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:Asian
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_4Years_Asian_HalfDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:Asian
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_4Years_BlackOrAfricanAmericanAlone_FullDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:BlackOrAfricanAmericanAlone
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_4Years_BlackOrAfricanAmericanAlone_HalfDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:BlackOrAfricanAmericanAlone
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_4Years_HispanicOrLatino_FullDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:HispanicOrLatino
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_4Years_HispanicOrLatino_HalfDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:HispanicOrLatino
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_4Years_NativeHawaiianOrOtherPacificIslanderAlone_FullDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_4Years_NativeHawaiianOrOtherPacificIslanderAlone_HalfDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_4Years_TwoOrMoreRaces_FullDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:TwoOrMoreRaces
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_4Years_TwoOrMoreRaces_HalfDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:TwoOrMoreRaces
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_4Years_WhiteAlone_FullDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:WhiteAlone
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_4Years_WhiteAlone_HalfDay_PreKindergartenFullDay
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 Years]
+race: dcid:WhiteAlone
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergartenFullDay
+
+Node: dcid:Count_Student_5Years_AmericanIndianOrAlaskaNative_FullDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:AmericanIndianOrAlaskaNative
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_5Years_AmericanIndianOrAlaskaNative_HalfDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:AmericanIndianOrAlaskaNative
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_5Years_Asian_FullDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:Asian
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_5Years_Asian_HalfDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:Asian
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_5Years_BlackOrAfricanAmericanAlone_FullDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:BlackOrAfricanAmericanAlone
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_5Years_BlackOrAfricanAmericanAlone_HalfDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:BlackOrAfricanAmericanAlone
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_5Years_HispanicOrLatino_FullDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:HispanicOrLatino
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_5Years_HispanicOrLatino_HalfDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:HispanicOrLatino
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_5Years_NativeHawaiianOrOtherPacificIslanderAlone_FullDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_5Years_NativeHawaiianOrOtherPacificIslanderAlone_HalfDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_5Years_TwoOrMoreRaces_FullDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:TwoOrMoreRaces
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_5Years_TwoOrMoreRaces_HalfDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:TwoOrMoreRaces
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_5Years_WhiteAlone_FullDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:WhiteAlone
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_5Years_WhiteAlone_HalfDay_Kindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+race: dcid:WhiteAlone
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:Kindergarten
+
+Node: dcid:Count_Student_AmericanIndianOrAlaskaNative_FullDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:AmericanIndianOrAlaskaNative
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_AmericanIndianOrAlaskaNative_HalfDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:AmericanIndianOrAlaskaNative
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_Asian_FullDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:Asian
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_Asian_HalfDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:Asian
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_FullDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_HalfDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_SchoolGrade1
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolGradeLevel: dcid:SchoolGrade1
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_SchoolGrade10
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolGradeLevel: dcid:SchoolGrade10
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_SchoolGrade11
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolGradeLevel: dcid:SchoolGrade11
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_SchoolGrade12
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolGradeLevel: dcid:SchoolGrade12
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_SchoolGrade2
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolGradeLevel: dcid:SchoolGrade2
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_SchoolGrade3
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolGradeLevel: dcid:SchoolGrade3
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_SchoolGrade4
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolGradeLevel: dcid:SchoolGrade4
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_SchoolGrade5
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolGradeLevel: dcid:SchoolGrade5
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_SchoolGrade6
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolGradeLevel: dcid:SchoolGrade6
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_SchoolGrade7
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolGradeLevel: dcid:SchoolGrade7
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_SchoolGrade8
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolGradeLevel: dcid:SchoolGrade8
+
+Node: dcid:Count_Student_BlackOrAfricanAmericanAlone_SchoolGrade9
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:BlackOrAfricanAmericanAlone
+schoolGradeLevel: dcid:SchoolGrade9
+
+Node: dcid:Count_Student_HispanicOrLatino_FullDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:HispanicOrLatino
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_HispanicOrLatino_HalfDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:HispanicOrLatino
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_FullDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_HalfDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade1
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade1
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade10
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade10
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade11
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade11
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade12
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade12
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade2
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade2
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade3
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade3
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade4
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade4
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade5
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade5
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade6
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade6
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade7
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade7
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade8
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade8
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade9
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade9
+
+Node: dcid:Count_Student_TwoOrMoreRaces_FullDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:TwoOrMoreRaces
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_TwoOrMoreRaces_HalfDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:TwoOrMoreRaces
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_WhiteAlone_FullDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolDayType: dcid:FullDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_WhiteAlone_HalfDay_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolDayType: dcid:HalfDay
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_WhiteAlone_SchoolGrade1
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolGradeLevel: dcid:SchoolGrade1
+
+Node: dcid:Count_Student_WhiteAlone_SchoolGrade10
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolGradeLevel: dcid:SchoolGrade10
+
+Node: dcid:Count_Student_WhiteAlone_SchoolGrade11
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolGradeLevel: dcid:SchoolGrade11
+
+Node: dcid:Count_Student_WhiteAlone_SchoolGrade12
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolGradeLevel: dcid:SchoolGrade12
+
+Node: dcid:Count_Student_WhiteAlone_SchoolGrade2
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolGradeLevel: dcid:SchoolGrade2
+
+Node: dcid:Count_Student_WhiteAlone_SchoolGrade3
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolGradeLevel: dcid:SchoolGrade3
+
+Node: dcid:Count_Student_WhiteAlone_SchoolGrade4
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolGradeLevel: dcid:SchoolGrade4
+
+Node: dcid:Count_Student_WhiteAlone_SchoolGrade5
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolGradeLevel: dcid:SchoolGrade5
+
+Node: dcid:Count_Student_WhiteAlone_SchoolGrade6
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolGradeLevel: dcid:SchoolGrade6
+
+Node: dcid:Count_Student_WhiteAlone_SchoolGrade7
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolGradeLevel: dcid:SchoolGrade7
+
+Node: dcid:Count_Student_WhiteAlone_SchoolGrade8
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolGradeLevel: dcid:SchoolGrade8
+
+Node: dcid:Count_Student_WhiteAlone_SchoolGrade9
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+schoolGradeLevel: dcid:SchoolGrade9
+
