@@ -43,6 +43,7 @@ flags.DEFINE_string(
 # Define the  path for output files.
 
 OUTPUT_DIR = "input_files"
+OUTPUT_DIR_FINAL = "output_files"
 
 
 def download_and_extract_ejdata(year, config):
@@ -122,39 +123,56 @@ def download_and_extract_ejdata(year, config):
                     f"Found internal ZIP: '{internal_zip_name}'. Reading content..."
                 )
 
-                # Extract the inner zip directly to a temporary file
-                with main_zip.open(internal_zip_name, 'r') as inner_zip_file:
-                    with temp_internal_zip.open("wb") as f_out:
-                        shutil.copyfileobj(inner_zip_file, f_out)
-
-                with zipfile.ZipFile(temp_internal_zip, 'r') as internal_zip:
-                    csv_files = [
-                        name for name in internal_zip.namelist()
-                        if name.lower().endswith(".csv")
-                    ]
-
-                    if not csv_files:
-                        logging.fatal(
-                            f"Warning: No CSV files found inside the inner ZIP for {year}. List: {internal_zip.namelist()}"
-                        )
-                        # Clean up temp files before returning
-                        temp_main_zip.unlink(missing_ok=True)
-                        temp_internal_zip.unlink(missing_ok=True)
-                        return
-
-                    source_file_content = internal_zip.read(csv_files[0])
-
-                    with file_util.FileIO(output_path, "wb") as target:
-                        target.write(source_file_content)
-
+                 # Check if the internal file is a CSV or another ZIP
+                if internal_zip_name.lower().endswith(".zip"):
+                    # This is the original logic for nested ZIP files
                     logging.info(
-                        f"  -> Extracted and saved to GCS: {output_path}")
+                        f"Found nested ZIP file. Extracting from '{internal_zip_name}'."
+                    )
 
-                    # Clean up temporary files on success
-                    temp_main_zip.unlink(missing_ok=True)
-                    temp_internal_zip.unlink(missing_ok=True)
+                # Extract the inner zip directly to a temporary file
+                    with main_zip.open(internal_zip_name, 'r') as inner_zip_file:
+                        with temp_internal_zip.open("wb") as f_out:
+                            shutil.copyfileobj(inner_zip_file, f_out)
 
-                    return  # Success, break out of retry loop
+                    with zipfile.ZipFile(temp_internal_zip, 'r') as internal_zip:
+                        csv_files = [
+                            name for name in internal_zip.namelist()
+                            if name.lower().endswith(".csv")
+                        ]
+
+                        if not csv_files:
+                            logging.fatal(
+                                f"Warning: No CSV files found inside the inner ZIP for {year}. List: {internal_zip.namelist()}"
+                            )
+                            # Clean up temp files before returning
+                            temp_main_zip.unlink(missing_ok=True)
+                            temp_internal_zip.unlink(missing_ok=True)
+                            return
+                        source_file_content = internal_zip.read(csv_files[0])
+                elif internal_zip_name.lower().endswith(".csv"):
+                    # This is the new logic for a direct CSV file
+                    logging.info(
+                        f"Internal file is a CSV. Reading directly from '{internal_zip_name}'."
+                    )
+                    source_file_content = main_zip.read(internal_zip_name)
+                
+                else:
+                    logging.fatal(
+                        f"Error: Internal file '{internal_zip_name}' is not a .zip or .csv. Skipping."
+                    )
+                    return
+                with file_util.FileIO(output_path, "wb") as target:
+                    target.write(source_file_content)
+
+                logging.info(
+                    f"  -> Extracted and saved to GCS: {output_path}")
+
+                # Clean up temporary files on success
+                temp_main_zip.unlink(missing_ok=True)
+                temp_internal_zip.unlink(missing_ok=True)
+
+                return  # Success, break out of retry loop
 
         except (requests.exceptions.RequestException, zipfile.BadZipFile,
                 OSError) as e:
@@ -292,10 +310,10 @@ def main(_):
                     continue
 
             logging.info("Writing data to CSV")
-            write_csv(dfs, f"{OUTPUT_DIR}/ejscreen_airpollutants.csv")
+            write_csv(dfs, f"{OUTPUT_DIR_FINAL}/ejscreen_airpollutants.csv")
 
             logging.info("Writing template to TMCF")
-            write_tmcf(f"{OUTPUT_DIR}/ejscreen.tmcf", TEMPLATE_MCF)
+            write_tmcf(f"{OUTPUT_DIR_FINAL}/ejscreen.tmcf", TEMPLATE_MCF)
 
             logging.info("Process completed successfully")
 
