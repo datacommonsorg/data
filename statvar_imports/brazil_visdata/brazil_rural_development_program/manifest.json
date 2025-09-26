@@ -1,0 +1,79 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "Brazil_RuralDevelopmentProgram",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://aplicacoes.cidadania.gov.br/vis/data3/data-explorer.php",
+      "provenance_description": "Different population benefiting from Brazil Rural Development Program.",
+      "scripts": ["run.sh"] ,
+      "source_files": [
+        "input_files/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/Families_RuralDevelopmentProgram_Gender_Brazil_output.tmcf",
+          "cleaned_csv": "output_files/Families_RuralDevelopmentProgram_Gender_Brazil_output.csv"
+        },
+        {
+          "template_mcf": "output_files/Families_RuralDevelopmentProgram_Gender_Municipality_output.tmcf",
+          "cleaned_csv": "output_files/Families_RuralDevelopmentProgram_Gender_Municipality_output.csv"
+        },
+        {
+          "template_mcf": "output_files/Families_RuralDevelopmentProgram_Gender_State_output.tmcf",
+          "cleaned_csv": "output_files/Families_RuralDevelopmentProgram_Gender_State_output.csv"
+        },
+        {
+          "template_mcf": "output_files/Families_RuralDevelopmentProgram_SpecificPopulation_Brazil_output.tmcf",
+          "cleaned_csv": "output_files/Families_RuralDevelopmentProgram_SpecificPopulation_Brazil_output.csv"
+        },
+        {
+          "template_mcf": "output_files/Families_RuralDevelopmentProgram_SpecificPopulation_Municipality_output.tmcf",
+          "cleaned_csv": "output_files/Families_RuralDevelopmentProgram_SpecificPopulation_Municipality_output.csv"
+        },
+        {
+          "template_mcf": "output_files/Families_RuralDevelopmentProgram_SpecificPopulation_State_output.tmcf",
+          "cleaned_csv": "output_files/Families_RuralDevelopmentProgram_SpecificPopulation_State_output.csv"
+        },
+        {
+          "template_mcf": "output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_output.tmcf",
+          "cleaned_csv": "output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_output.csv"
+        },
+        {
+          "template_mcf": "output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_yearly_output.tmcf",
+          "cleaned_csv": "output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_yearly_output.csv"
+        },
+        {
+          "template_mcf": "output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_Municipality_output.tmcf",
+          "cleaned_csv": "output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_Municipality_output.csv"
+        },
+        {
+          "template_mcf": "output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_State_output.tmcf",
+          "cleaned_csv": "output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_State_output.csv"
+        },
+        {
+          "template_mcf": "output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_State_output.tmcf",
+          "cleaned_csv": "output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_State_output.csv"
+        },
+        {
+          "template_mcf": "output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_yearly_Municipality_output.tmcf",
+          "cleaned_csv": "output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_yearly_Municipality_output.csv"
+        },
+        {
+          "template_mcf": "output_files/TotalFamilies_Rural_Development_Program_Brazil_output.tmcf",
+          "cleaned_csv": "output_files/TotalFamilies_Rural_Development_Program_Brazil_output.csv"
+        },
+        {
+          "template_mcf": "output_files/TotalFamilies_Rural_Development_Program_Municipality_output.tmcf",
+          "cleaned_csv": "output_files/TotalFamilies_Rural_Development_Program_Municipality_output.csv"
+        },
+        {
+          "template_mcf": "output_files/TotalFamilies_Rural_Development_Program_State_output.tmcf",
+          "cleaned_csv": "output_files/TotalFamilies_Rural_Development_Program_State_output.csv"
+        }
+      ],
+      "cron_schedule": "0 06 * * 5",
+      "resource_limits": {"cpu": 8, "memory": 32, "disk": 100}
+    }
+  ]
+}
+

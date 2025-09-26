@@ -1,0 +1,11 @@
+Node: dcid:Annual_Amount_Household_BrazilRuralDevelopmentProgram_FinancialBenefit
+typeOf: dcid:StatisticalVariable
+name: "Financial resources made available to beneficiary families of the Rural Development Program"
+populationType: dcid:Household
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+alternateName: "Recursos financeiros disponibilizados às famílias beneficiárias do Programa Fomento Rural@pt"
+benefitProgram: dcid:Brazil_RuralDevelopmentProgram
+benefitType: dcid:FinancialBenefit
+
