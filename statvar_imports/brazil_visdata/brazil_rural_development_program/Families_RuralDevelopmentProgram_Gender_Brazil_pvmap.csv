@@ -1,0 +1,6 @@
+key,prop,val,p1,v1,p2,v2,,
+Referência,observationDate,{Data},observationAbout,country/BRA,populationType,Person,measuredProperty,count,statType,measuredValue,benefitProgram,Brazil_RuralDevelopmentProgram
+Número de famílias beneficiárias do Programa Fomento Rural com mulheres como responsável familiar,value,{Number},gender,Female,name,"Number of women beneficiaries of the Rural Development Program",alternateName,"Nº de mulheres beneficiárias do Programa Fomento Rural@pt"
+Número de famílias beneficiárias do Programa Fomento Rural com homens como responsável familiar,value,{Number},gender,Male,name,"Number of men benefiting from the Rural Development Program",alternateName,"Nº de homens beneficiários do Programa Fomento Rural@pt"
+Número de famílias beneficiárias do Programa Fomento Rural sem informação do sexo do responsável familiar,value,{Number},gender,GenderUnknownOrNotStated,name,"Number of beneficiaries of the Rural Development Program without gender information",alternateName,"Nº de beneficiários do Programa Fomento Rural sem informação de sexo@pt"
+Número de famílias beneficiárias do Programa Fomento Rural,value,{Number},,,name,"Total number of beneficiaries of the Rural Development Program",alternateName,"Nº total de beneficiários do Programa Fomento Rural@pt"
