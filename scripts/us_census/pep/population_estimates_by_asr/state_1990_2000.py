@@ -16,6 +16,10 @@ This Python Script is for State Level Data 1990-2000.
 '''
 import os
 import pandas as pd
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from api_calls import get_api_response
 from urllib.parse import urlparse
 from common_functions import input_url
 
@@ -29,12 +33,17 @@ def state1990(url_file: str, output_folder: str):
     # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
     for url in _urls:
-        df = pd.read_table(url, skiprows=15, delim_whitespace=True, header=None)
-        #Copying the raw data
         filename = urlparse(url).path.split('/')[-1]
-        df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                               "raw_data", filename),
-                  index=False)
+        file_path = get_api_response(filename, url, 1)
+        df = pd.read_csv(file_path,
+                         engine='python',
+                         skiprows=15,
+                         sep='\s+',
+                         header=None,
+                         encoding='ISO-8859-1')
+        #Writing raw data to csv
+        df.to_csv(file_path, index=False)
+
         df.columns=['Year','geo_ID','Age','NHWM','NHWF','NHBM','NHBF','NHAIANM'\
         ,'NHAIANF','NHAPIM','NHAPIF','HWM','HWF','HBM','HBF','HAIANM','HAIANF',\
         'HAPIM','HAPIF']
