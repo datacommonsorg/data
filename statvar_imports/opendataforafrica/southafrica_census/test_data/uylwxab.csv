@@ -1,0 +1,9 @@
+observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod
+dcid:country/AGO,1990,dcid:Count_Person_Urban,3913,,,
+dcid:country/AGO,1995,dcid:Count_Person_Urban,5418,,,
+dcid:country/AGO,2000,dcid:Count_Person_Urban,6824,,,
+dcid:country/AGO,2005,dcid:Count_Person_Urban,8684,,,
+dcid:country/AGO,2007,dcid:Count_Person_Urban,9505,,,
+dcid:country/AGO,2005,dcid:Count_Person_SlumArea,7756,,,
+dcid:country/AGO,2007,dcid:Count_Person_SlumArea,7466,,,
+dcid:country/AGO,2009,dcid:Count_Person_SlumArea,7019,,,
