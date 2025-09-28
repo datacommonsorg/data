@@ -1,0 +1,54 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/bipina/USDA/data/statvar_imports/usda/agriculture/input_data.csv --config=/usr/local/google/home/bipina/USDA/config.py --pv_map=https://docs.google.com/spreadsheets/d/1FDQz1XM8B8PdsG-4wDksS1LI8K6W66ikAkEZgy4bR-o/edit?resourcekey=0-B4D-6Olxl9s3V3BzJpym1w&gid=0#gid=0 --output_path=/usr/local/google/home/bipina/USDA/data/statvar_imports/usda/agriculture/usda_psd" on 2024-07-09 19:16:41.915847
+
+Node: dcid:Amount_FarmInventory_ShelledAlmonds_Supply
+typeOf: dcid:StatisticalVariable
+populationType: dcid:FarmInventory
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+farmInventoryType: dcid:ShelledAlmonds
+usedFor: dcid:Supply
+
+Node: dcid:Amount_FarmInventory_ShelledAlmonds_TotalDistribution
+typeOf: dcid:StatisticalVariable
+populationType: dcid:FarmInventory
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+farmInventoryType: dcid:ShelledAlmonds
+usedFor: dcid:TotalDistribution
+
+Node: dcid:Consumption_FarmInventory_Domestic_ShelledAlmonds
+typeOf: dcid:StatisticalVariable
+populationType: dcid:FarmInventory
+measuredProperty: dcid:consumption
+statType: dcid:measuredValue
+economicSector: dcid:Domestic
+farmInventoryType: dcid:ShelledAlmonds
+
+Node: dcid:Exports_FarmInventory_ShelledAlmonds
+typeOf: dcid:StatisticalVariable
+populationType: dcid:FarmInventory
+measuredProperty: dcid:exports
+statType: dcid:measuredValue
+farmInventoryType: dcid:ShelledAlmonds
+
+Node: dcid:Imports_FarmInventory_ShelledAlmonds
+typeOf: dcid:StatisticalVariable
+populationType: dcid:FarmInventory
+measuredProperty: dcid:imports
+statType: dcid:measuredValue
+farmInventoryType: dcid:ShelledAlmonds
+
+Node: dcid:Production_FarmInventory_ShelledAlmonds
+typeOf: dcid:StatisticalVariable
+populationType: dcid:FarmInventory
+measuredProperty: dcid:production
+statType: dcid:measuredValue
+farmInventoryType: dcid:ShelledAlmonds
+
+Node: dcid:Stock_FarmInventory_ShelledAlmonds
+typeOf: dcid:StatisticalVariable
+populationType: dcid:FarmInventory
+measuredProperty: dcid:stock
+statType: dcid:measuredValue
+farmInventoryType: dcid:ShelledAlmonds
+
