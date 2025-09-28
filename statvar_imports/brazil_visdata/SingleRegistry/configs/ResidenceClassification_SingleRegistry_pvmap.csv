@@ -1,0 +1,4 @@
+key,prop,val,p1,v1,,,,,,,,,,
+Referência,observationAbout,country/BRA,observationDate,{Data},,,,,,,,,,
+Quantidade de pessoas cadastradas em domicílios rurais,measuredProperty,count,populationType,Person,placeOfResidenceClassification,Rural,value,{Number},name,"""Number of people registered in rural households""",alternateName,"""Quantidade de pessoas cadastradas em domicílios rurais@pt""",registeredIn,Brazil_SingleRegistry
+Quantidade de pessoas cadastradas em domicílios urbanos,measuredProperty,count,populationType,Person,placeOfResidenceClassification,Urban,value,{Number},name,"""Number of people registered in urban households""",alternateName,"""Quantidade de pessoas cadastradas em domicílios urbanos@pt""",registeredIn,Brazil_SingleRegistry
