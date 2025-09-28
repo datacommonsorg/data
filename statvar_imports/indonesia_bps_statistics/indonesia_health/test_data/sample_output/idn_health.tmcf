@@ -1,0 +1,8 @@
+Node: E:Health_Data_Indonesia->E0
+observationAbout: C:Health_Data_Indonesia->observationAbout
+observationDate: C:Health_Data_Indonesia->observationDate
+value: C:Health_Data_Indonesia->value
+variableMeasured: C:Health_Data_Indonesia->variableMeasured
+unit: C:Health_Data_Indonesia->unit
+scalingFactor: C:Health_Data_Indonesia->scalingFactor
+typeOf: dcs:StatVarObservation
