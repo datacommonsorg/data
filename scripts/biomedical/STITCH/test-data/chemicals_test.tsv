@@ -1,0 +1,39 @@
+	id	name	molecular_weight	SMILES_string
+0	CIDs00000001	acetylcarnitine	203.23558	CC(=O)OC(CC(=O)[O-])C[N+](C)(C)C
+1	CIDs00000003	2,3-dihydro-2,3-dihydroxybenzoate	156.13602	C1=CC(C(C(=C1)C(=O)O)O)O
+2	CIDs00000004	1-aminopropan-2-ol	75.10966	CC(CN)O
+3	CIDs00000005	3-amino-2-oxopropyl phosphate	169.073082	C(C(=O)COP(=O)(O)O)N
+4	CIDs00000006	DNCB	202.55202	C1=CC(=C(C=C1[N+](=O)[O-])[N+](=O)[O-])Cl
+5	CIDs00000007	9-ethyladenine	163.17986	CCN1C=NC2=C1N=CN=C2N
+6	CIDs00000008	2,3-dihydroxy-3-methylvalerate	148.15708	CCC(C)(C(C(=O)O)O)O
+7	CIDs00000009	inositol phosphate	260.135782	C1(C(C(C(C(C1O)O)OP(=O)(O)O)O)O)O
+8	CIDs00000010	10-formyltetrahydrofolate	473.43932	C1C(NC2=C(N1)NC(=NC2=O)N)CN(C=O)C3=CC=C(C=C3)C(=O)NC(CCC(=O)O)C(=O)O
+9	CIDs00000011	1,2-dichloroethane	98.95916	C(CCl)Cl
+10	CIDs00000012	1,2,3,5-tetrahydroxybenzene	142.10944	C1=C(C=C(C(=C1O)O)O)O
+11	CIDs00000013	1,2,4-trichlorobenzene	181.44702	C1=CC(=C(C=C1Cl)Cl)Cl
+12	CIDs00000014	15-ketoprostaglandin E1	352.46508	CCCCCC(=O)C=CC1C(CC(=O)C1CCCCCCC(=O)O)O
+13	CIDs00000015	dihydrotestosterone (DHT	290.4403	CC12CCC(=O)CC1CCC3C2CCC4(C3CCC4O)C
+14	CIDs00000016	6-aminohexanoate-cyclic-dimer	226.31528	C1CCC(=O)NCCCCCC(=O)NCC1
+15	CIDs00000017	dihydrodipicolinate	169.13478	C1C=CC(=NC1C(=O)O)C(=O)O
+16	CIDs00000018	AC1L18AJ	192.12352	C(C(C(C(=O)C(=O)C(=O)O)O)O)O
+17	CIDs00000019	2,3-dihydroxybenzoic acid	154.12014	C1=CC(=C(C(=C1)O)O)C(=O)O
+18	CIDs00000020	2,3-dihydroxyphenylpropionate	182.1733	C1=CC(=C(C(=C1)O)O)CCC(=O)O
+0	CIDm00000001	acetylcarnitine	203.23558	CC(=O)OC(CC(=O)[O-])C[N+](C)(C)C
+1	CIDm00000003	2,3-dihydro-2,3-dihydroxybenzoate	156.13602	C1=CC(C(C(=C1)C(=O)O)O)O
+2	CIDm00000004	1-aminopropan-2-ol	75.10966	CC(CN)O
+3	CIDm00000005	3-amino-2-oxopropyl phosphate	169.073082	C(C(=O)COP(=O)(O)O)N
+4	CIDm00000006	DNCB	202.55202	C1=CC(=C(C=C1[N+](=O)[O-])[N+](=O)[O-])Cl
+5	CIDm00000007	9-ethyladenine	163.17986	CCN1C=NC2=C1N=CN=C2N
+6	CIDm00000008	2,3-dihydroxy-3-methylvalerate	148.15708	CCC(C)(C(C(=O)O)O)O
+7	CIDm00000009	inositol phosphate	260.135782	C1(C(C(C(C(C1O)O)OP(=O)(O)O)O)O)O
+8	CIDm00000010	10-formyltetrahydrofolate	473.43932	C1C(NC2=C(N1)NC(=NC2=O)N)CN(C=O)C3=CC=C(C=C3)C(=O)NC(CCC(=O)O)C(=O)O
+9	CIDm00000011	1,2-dichloroethane	98.95916	C(CCl)Cl
+10	CIDm00000012	1,2,3,5-tetrahydroxybenzene	142.10944	C1=C(C=C(C(=C1O)O)O)O
+11	CIDm00000013	1,2,4-trichlorobenzene	181.44702	C1=CC(=C(C=C1Cl)Cl)Cl
+12	CIDm00000014	15-keto-PGE	352.46508	CCCCCC(=O)C=CC1C(CC(=O)C1CCCCCCC(=O)O)O
+13	CIDm00000015	dihydrotestosterone	290.4403	CC12CCC(=O)CC1CCC3C2CCC4(C3CCC4O)C
+14	CIDm00000016	6-aminohexanoate-cyclic-dimer	226.31528	C1CCC(=O)NCCCCCC(=O)NCC1
+15	CIDm00000017	dihydrodipicolinate	169.13478	C1C=CC(=NC1C(=O)O)C(=O)O
+16	CIDm00000018	diketogulonic acid	192.12352	C(C(C(C(=O)C(=O)C(=O)O)O)O)O
+17	CIDm00000019	2,3-dihydroxybenzoic acid	154.12014	C1=CC(=C(C(=C1)O)O)C(=O)O
+18	CIDm00000020	2,3-dihydroxyphenylpropionate	182.1733	C1=CC(=C(C(=C1)O)O)CCC(=O)O
