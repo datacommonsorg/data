@@ -640,7 +640,7 @@ class StatVarsMap:
                                        statvar_dcid)
             return False
         logging.level_debug() and logging.log_every_n(
-            logging.debug, f'Adding statvar {pvs}', self._log_every_n)
+            logging.DEBUG, f'Adding statvar {pvs}', self._log_every_n)
         self._counters.add_counter('generated-statvars', 1, statvar_dcid)
         self._counters.set_counter('generated-unique-statvars',
                                    len(self._statvars_map))
@@ -690,7 +690,7 @@ class StatVarsMap:
         new_value = get_numeric_value(new_pvs.get(aggregate_property, 0))
         if current_value is None or new_value is None:
             logging.log_every_n(
-                logging.error,
+                logging.ERROR,
                 f'Invalid values to aggregate in {current_pvs}, {new_pvs}',
                 self._log_every_n)
             self._counters.add_counter(f'error-aggregate-invalid-values', 1)
