@@ -12,8 +12,8 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output_files/observations.tmcf",
-                    "cleaned_csv": "output_files/all_data.csv"
+                    "template_mcf": "output_files/ejscreen.tmcf",
+                    "cleaned_csv": "output_files/ejscreen_airpollutants.csv"
                 }
             ],
             "cron_schedule": "0 10 1,15 * *",

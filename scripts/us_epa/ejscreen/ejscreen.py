@@ -21,11 +21,15 @@ from absl import logging, flags, app
 import sys
 import time
 from retry import retry
+import requests
 import shutil
 from pathlib import Path
 
-_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
+# Setup path for import from data/util
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+_DATA_DIR = _SCRIPT_DIR.split('/data/')[0]
+sys.path.append(os.path.join(_DATA_DIR, 'data/util'))
 import file_util
 
 logging.set_verbosity(logging.INFO)
@@ -45,7 +49,7 @@ flags.DEFINE_string(
 OUTPUT_DIR = "input_files"
 OUTPUT_DIR_FINAL = "output_files"
 
-
+@retry(requests.exceptions.RequestException, tries=3, delay=10)
 def download_and_extract_ejdata(year, config):
     """
     Downloads the yearly files from the Zenodo-like source (Multi-level ZIP extraction),
@@ -123,19 +127,21 @@ def download_and_extract_ejdata(year, config):
                     f"Found internal ZIP: '{internal_zip_name}'. Reading content..."
                 )
 
-                 # Check if the internal file is a CSV or another ZIP
+                # Check if the internal file is a CSV or another ZIP
                 if internal_zip_name.lower().endswith(".zip"):
                     # This is the original logic for nested ZIP files
                     logging.info(
                         f"Found nested ZIP file. Extracting from '{internal_zip_name}'."
                     )
 
-                # Extract the inner zip directly to a temporary file
-                    with main_zip.open(internal_zip_name, 'r') as inner_zip_file:
+                    # Extract the inner zip directly to a temporary file
+                    with main_zip.open(internal_zip_name,
+                                       'r') as inner_zip_file:
                         with temp_internal_zip.open("wb") as f_out:
                             shutil.copyfileobj(inner_zip_file, f_out)
 
-                    with zipfile.ZipFile(temp_internal_zip, 'r') as internal_zip:
+                    with zipfile.ZipFile(temp_internal_zip,
+                                         'r') as internal_zip:
                         csv_files = [
                             name for name in internal_zip.namelist()
                             if name.lower().endswith(".csv")
@@ -156,7 +162,7 @@ def download_and_extract_ejdata(year, config):
                         f"Internal file is a CSV. Reading directly from '{internal_zip_name}'."
                     )
                     source_file_content = main_zip.read(internal_zip_name)
-                
+
                 else:
                     logging.fatal(
                         f"Error: Internal file '{internal_zip_name}' is not a .zip or .csv. Skipping."
@@ -165,8 +171,7 @@ def download_and_extract_ejdata(year, config):
                 with file_util.FileIO(output_path, "wb") as target:
                     target.write(source_file_content)
 
-                logging.info(
-                    f"  -> Extracted and saved to GCS: {output_path}")
+                logging.info(f"  -> Extracted and saved to GCS: {output_path}")
 
                 # Clean up temporary files on success
                 temp_main_zip.unlink(missing_ok=True)
