@@ -32,13 +32,13 @@ To get the necessary data files, you'll need to run download script `download_sc
 
 All downloaded files will be located in the `input_files` folder. Within this folder, there are six sub-folders, each containing categorized data for both adults and children:
 
-    - Educational_Attainment_by_Age_Range_and_Gender
+    - educational_attainment_by_age_range_and_gender
 
-    - Post_Secondary_Completions_Total_Awards_Degrees
+    - post_secondary_completions_total_awards_degrees
 
-    - Public_School_Enrollment_by_County_Grade_and_Race
+    - public_school_enrollment_by_county_grade_and_race
 
-    - Undergraduate_STEM_Enrollment_at_Publicly_Supported_Institutions
+    - undergraduate_stem_enrollment
 
 
 ### Auto refresh Type
@@ -69,42 +69,42 @@ Here are the specific commands for each file:
 
 ```bash
 python3 stat_var_processor.py
---input_data=../../statvar_imports/pennsylvania/pennsylvania_education/input_files/Educational_Attainment_by_Age_Range_and_Gender/*.csv"
---pv_map=../../statvar_imports/pennsylvania/pennsylvania_education/Educational_Attainment_by_Age_Range_and_Gender_pvmap.csv"
+--input_data=../../statvar_imports/pennsylvania/pennsylvania_education/input_files/educational_attainment_by_age_range_and_gender/*.csv"
+--pv_map=../../statvar_imports/pennsylvania/pennsylvania_education/educational_attainment_by_age_range_and_gender_pvmap.csv"
 --config_file=../../statvar_imports/pennsylvania/pennsylvania_education/common_metadata.csv"
---output_path=../../statvar_imports/pennsylvania/pennsylvania_education/output_files/Educational_Attainment_by_Age_Range_and_Gender_output"
+--output_path=../../statvar_imports/pennsylvania/pennsylvania_education/output_files/educational_attainment_by_age_range_and_gender_output"
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
---places_resolved_csv=../../statvar_imports/pennsylvania/pennsylvania_education/Educational_Attainment_by_Age_Range_and_Gender_places_resolver.csv"
+--places_resolved_csv=../../statvar_imports/pennsylvania/pennsylvania_education/educational_attainment_by_age_range_and_gender_places_resolver.csv"
 
 ```
 
 ```bash
 python3 stat_var_processor.py
---input_data=../../statvar_imports/pennsylvania/pennsylvania_education/input_files/Post_Secondary_Completions_Total_Awards_Degrees/*.csv"
---pv_map=../../statvar_imports/pennsylvania/pennsylvania_education/Post_Secondary_Completions_Total_Awards_Degrees_pvmap.csv"
+--input_data=../../statvar_imports/pennsylvania/pennsylvania_education/input_files/post_secondary_completions_total_awards_degrees/*.csv"
+--pv_map=../../statvar_imports/pennsylvania/pennsylvania_education/post_secondary_completions_total_awards_degrees_pvmap.csv"
 --config_file=../../statvar_imports/pennsylvania/pennsylvania_education/common_metadata.csv"
---output_path=../../statvar_imports/pennsylvania/pennsylvania_education/output_files/Post_Secondary_Completions_Total_Awards_Degrees_output"
+--output_path=../../statvar_imports/pennsylvania/pennsylvania_education/output_files/post_secondary_completions_total_awards_degrees_output"
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
---places_resolved_csv=../../statvar_imports/pennsylvania/pennsylvania_education/Post_Secondary_Completions_Total_Awards_Degrees_places_resolver.csv"
+--places_resolved_csv=../../statvar_imports/pennsylvania/pennsylvania_education/post_secondary_completions_total_awards_degrees_places_resolver.csv"
 ``` 
 
 ```bash
 python3 stat_var_processor.py
---input_data=../../statvar_imports/pennsylvania/pennsylvania_education/input_files/Public_School_Enrollment_by_County_Grade_and_Race/*.csv"
---pv_map=../../statvar_imports/pennsylvania/pennsylvania_education/Public_School_Enrollment_by_County_Grade_and_Race_pvmap.csv"
+--input_data=../../statvar_imports/pennsylvania/pennsylvania_education/input_files/public_school_enrollment_by_county_grade_and_race/*.csv"
+--pv_map=../../statvar_imports/pennsylvania/pennsylvania_education/public_school_enrollment_by_county_grade_and_race_pvmap.csv"
 --config_file=../../statvar_imports/pennsylvania/pennsylvania_education/common_metadata.csv"
---output_path=../../statvar_imports/pennsylvania/pennsylvania_education/output_files/Public_School_Enrollment_by_County_Grade_and_Race_output"
+--output_path=../../statvar_imports/pennsylvania/pennsylvania_education/output_files/public_school_enrollment_by_county_grade_and_race_output"
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
---places_resolved_csv=../../statvar_imports/pennsylvania/pennsylvania_education/Public_School_Enrollment_by_County_Grade_and_Race_places_resolver.csv"
+--places_resolved_csv=../../statvar_imports/pennsylvania/pennsylvania_education/public_school_enrollment_by_county_grade_and_race_places_resolver.csv"
 ``` 
 
 ```bash
 python3 stat_var_processor.py
---input_data=../../statvar_imports/pennsylvania/pennsylvania_education/input_files/Undergraduate_STEM_Enrollment_at_Publicly_Supported_Institutions/*.csv"
---pv_map=../../statvar_imports/pennsylvania/pennsylvania_education/Undergraduate_STEM_Enrollment_at_Publicly_Supported_Institutions_pvmap.csv"
+--input_data=../../statvar_imports/pennsylvania/pennsylvania_education/input_files/undergraduate_stem_enrollment/*.csv"
+--pv_map=../../statvar_imports/pennsylvania/pennsylvania_education/undergraduate_stem_enrollment_pvmap.csv"
 --config_file=../../statvar_imports/pennsylvania/pennsylvania_education/common_metadata.csv"
---output_path=../../statvar_imports/pennsylvania/pennsylvania_education/output_files/Undergraduate_STEM_Enrollment_at_Publicly_Supported_Institutions_output"
+--output_path=../../statvar_imports/pennsylvania/pennsylvania_education/output_files/undergraduate_stem_enrollment_output"
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
---places_resolved_csv=../../statvar_imports/pennsylvania/pennsylvania_education/Undergraduate_STEM_Enrollment_at_Publicly_Supported_Institutions_places_resolver.csv"
+--places_resolved_csv=../../statvar_imports/pennsylvania/pennsylvania_education/undergraduate_stem_enrollment_places_resolver.csv"
 ``` 
 

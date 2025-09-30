@@ -11,20 +11,20 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "output_files/Educational_Attainment_by_Age_Range_and_Gender_output.tmcf",
-          "cleaned_csv": "output_files/Educational_Attainment_by_Age_Range_and_Gender_output.csv"
+          "template_mcf": "output_files/educational_attainment_by_age_range_and_gender_output.tmcf",
+          "cleaned_csv": "output_files/educational_attainment_by_age_range_and_gender_output.csv"
         },
         {
-          "template_mcf": "output_files/Post_Secondary_Completions_Total_Awards_Degrees_output.tmcf",
-          "cleaned_csv": "output_files/Post_Secondary_Completions_Total_Awards_Degrees_output.csv"
+          "template_mcf": "output_files/post_secondary_completions_total_awards_degrees_output.tmcf",
+          "cleaned_csv": "output_files/post_secondary_completions_total_awards_degrees_output.csv"
         },
         {
-          "template_mcf": "output_files/Public_School_Enrollment_by_County_Grade_and_Race_output.tmcf",
-          "cleaned_csv": "output_files/Public_School_Enrollment_by_County_Grade_and_Race_output.csv"
+          "template_mcf": "output_files/public_school_enrollment_by_county_grade_and_race_output.tmcf",
+          "cleaned_csv": "output_files/public_school_enrollment_by_county_grade_and_race_output.csv"
         },
         {
-          "template_mcf": "output_files/Undergraduate_STEM_Enrollment_at_Publicly_Supported_Institutions_output.tmcf",
-          "cleaned_csv": "output_files/Undergraduate_STEM_Enrollment_at_Publicly_Supported_Institutions_output.csv"
+          "template_mcf": "output_files/undergraduate_stem_enrollment_output.tmcf",
+          "cleaned_csv": "output_files/undergraduate_stem_enrollment_output.csv"
         }
       ],
       "cron_schedule": "0 02 * * 2"
