@@ -1,6 +1,6 @@
 # This file is generated from the NAICS codes 2022 CSV file.
 # It contains a dictionary mapping NAICS codes to their titles.
-# source data url to get naics code: https://www.census.gov/naics/?48967
+# source data url to get naics code for future: https://www.census.gov/naics/?48967
 
 NAICS_CODES = {
     '00':
