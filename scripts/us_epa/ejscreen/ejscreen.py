@@ -49,6 +49,7 @@ flags.DEFINE_string(
 OUTPUT_DIR = "input_files"
 OUTPUT_DIR_FINAL = "output_files"
 
+
 @retry(requests.exceptions.RequestException, tries=3, delay=10)
 def download_and_extract_ejdata(year, config):
     """
