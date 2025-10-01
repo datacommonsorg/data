@@ -141,7 +141,7 @@ class ReferencedConceptSchemeDetails:
 
 
 @dataclass
-class DataflowSomeAttributes:
+class DataflowArtefactAttributes:
     """
     A collection of additional attributes for the Dataflow, corresponding to
     properties of a MaintainableArtefact and VersionableArtefact.
@@ -166,7 +166,7 @@ class DataflowStructure:
     id: str
     name: str = ""
     description: str = ""
-    some_attributes: Optional[DataflowSomeAttributes] = None
+    some_attributes: Optional[DataflowArtefactAttributes] = None
     data_structure_definition: Optional[DataStructureDefinitionDetails] = None
     referenced_concept_schemes: List[ReferencedConceptSchemeDetails] = field(
         default_factory=list)
@@ -317,8 +317,8 @@ def process_all_dataflows_in_structure_message(sm: Any) -> MultiDataflowOutput:
         for dataflow_id, dataflow_obj in sm.dataflow.items():
             dsd_obj = dataflow_obj.structure
 
-            # Populate DataflowSomeAttributes
-            some_attrs = DataflowSomeAttributes(
+            # Populate DataflowArtefactAttributes
+            some_attrs = DataflowArtefactAttributes(
                 version=str(dataflow_obj.version)
                 if dataflow_obj.version else None,
                 valid_from=str(dataflow_obj.valid_from)
