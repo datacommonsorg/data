@@ -130,83 +130,84 @@ class PropertyValueMapper:
         # Append new PVs to existing map.
         pv_map_input = {}
         if file_util.file_is_csv(filename):
-            # Load rows into a dict of prop,value
-            # if the first col is a config key, next column is its value
-            logging.log_every_n(
-                logging.INFO,
-                f'Loading PV maps for {namespace} from csv file: {filename}',
-                self._log_every_n)
-            with file_util.FileIO(filename) as csvfile:
-                csv_reader = csv.reader(csvfile,
-                                        skipinitialspace=True,
-                                        escapechar='\\')
-                for row in csv_reader:
-                    # Drop trailing empty columns in the row
-                    last_col = len(row) - 1
-                    while last_col >= 0 and row[last_col].strip() == '':
-                        last_col -= 1
-                    row = row[:last_col + 1]
-                    if not row:
-                        continue
-                    key = row[0].strip()
-                    if key in self._config.get_configs():
-                        # Add value to the config with same type as original.
-                        value = ','.join(row[1:])
-                        config_flags.set_config_value(key, value, self._config)
-                    else:
-                        # Row is a pv map
-                        pvs_list = row[1:]
-                        if len(pvs_list) == 1:
-                            # PVs list has no property, just a value.
-                            # Use the namespace as the property
-                            pvs_list = [namespace]
-                            pvs_list.append(row[1])
-                        if len(pvs_list) % 2 != 0:
-                            raise RuntimeError(
-                                f'Invalid list of property value: {row} in {filename}'
-                            )
-                        # Get property,values from the columns
-                        pvs = {}
-                        for i in range(0, len(pvs_list), 2):
-                            prop = pvs_list[i].strip()
-                            if not prop:
-                                continue
-                            value = pvs_list[i + 1].strip()
-                            if value == '""':
-                                value = ''
-                            # Remove extra quotes around schema values.
-                            # if value and value[0] == '"' and value[-1] == '"':
-                            #  value = value[1:-1].strip()
-                            if value and value[0] != '[' and prop[0] != '#':
-                                # Add quotes around text strings
-                                # with spaces without commas.
-                                # if re.search('[^,] +', value):
-                                #  value = f'"{value}"'
-                                if value[0] == "'" and value[-1] == "'":
-                                    # Replace single quote with double quotes
-                                    # To distinguish quote as delimiter vs value in CSVs
-                                    # single quote is used instead of double quote in CSV values.
-                                    value[0] = '"'
-                                    value[-1] = '"'
-                            #pvs[prop] = value
-                            normalize = True
-                            if '#' in prop or '=' in value:
-                                # Value is a formula. Set value as a string.
-                                normalize = False
-                            pv_utils.add_key_value(prop,
-                                                   value,
-                                                   pvs,
-                                                   self._config.get(
-                                                       'multi_value_properties',
-                                                       {}),
-                                                   normalize=normalize)
-                        pv_map_input[key] = pvs
+            pv_map_input = self._load_pvs_from_csv(filename, namespace)
         else:
             logging.info(
                 f'Loading PV maps for {namespace} from dictionary file: {filename}'
             )
             pv_map_input = read_py_dict_from_file(filename)
         self.load_pvs_dict(pv_map_input, namespace)
+
+    def _load_pvs_from_csv(self, filename: str, namespace: str) -> dict:
+        pv_map_input = {}
+        logging.log_every_n(
+            logging.INFO,
+            f'Loading PV maps for {namespace} from csv file: {filename}',
+            self._log_every_n)
+        with file_util.FileIO(filename) as csvfile:
+            csv_reader = csv.reader(csvfile,
+                                    skipinitialspace=True,
+                                    escapechar='\\')
+            for row in csv_reader:
+                key, pvs = self._process_csv_row(row, namespace, filename)
+                if key:
+                    pv_map_input[key] = pvs
+        return pv_map_input
+
+    def _process_csv_row(self, row: list[str], namespace: str,
+                         filename: str) -> tuple[str | None, dict | None]:
+        # Drop trailing empty columns in the row
+        last_col = len(row) - 1
+        while last_col >= 0 and row[last_col].strip() == '':
+            last_col -= 1
+        row = row[:last_col + 1]
+        if not row:
+            return None, None
+        key = row[0].strip()
+        if key in self._config.get_configs():
+            # Add value to the config with same type as original.
+            value = ','.join(row[1:])
+            config_flags.set_config_value(key, value, self._config)
+            return None, None
+
+        pvs = self._parse_pv_row(row[1:], namespace, filename)
+        return key, pvs
+
+    def _parse_pv_row(self, pvs_list: list[str], namespace: str,
+                      filename: str) -> dict:
+        if len(pvs_list) == 1:
+            # PVs list has no property, just a value.
+            # Use the namespace as the property
+            pvs_list = [namespace, pvs_list[0]]
+        if len(pvs_list) % 2 != 0:
+            raise RuntimeError(
+                f'Invalid list of property value: {pvs_list} in {filename}')
+        # Get property,values from the columns
+        pvs = {}
+        for i in range(0, len(pvs_list), 2):
+            prop = pvs_list[i].strip()
+            if not prop:
+                continue
+            value = pvs_list[i + 1].strip()
+            if value == '""':
+                value = ''
+            if value and value[0] != '[' and prop[0] != '#':
+                if value[0] == "'" and value[-1] == "'":
+                    # Replace single quote with double quotes
+                    # To distinguish quote as delimiter vs value in CSVs
+                    # single quote is used instead of double quote in CSV values.
+                    value = f'"{value[1:-1]}"'
+            normalize = True
+            if '#' in prop or '=' in value:
+                # Value is a formula. Set value as a string.
+                normalize = False
+            pv_utils.add_key_value(prop,
+                                   value,
+                                   pvs,
+                                   self._config.get('multi_value_properties',
+                                                    {}),
+                                   normalize=normalize)
+        return pvs
 
     def load_pvs_dict(self, pv_map_input: dict, namespace: str = 'GLOBAL'):
         if namespace not in self._pv_map:
