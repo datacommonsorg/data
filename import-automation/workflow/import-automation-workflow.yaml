@@ -9,6 +9,8 @@ main:
           - jobId: ${text.substring(args.jobName, 0, 50) + "-" + string(int(sys.now()))}
           - importName: ${args.importName}
           - importConfig: ${args.importConfig}
+          - gcsMountBucket: "datcom-volume-mount"
+          - gcsMountPath: "/tmp/gcs"
     - createAndRunBatchJob:
         call: googleapis.batch.v1.projects.locations.jobs.create
         args:
@@ -26,6 +28,10 @@ main:
                   installOpsAgent: true
               taskGroups:
                 taskSpec:
+                  volumes:
+                    - gcs:
+                        remotePath: ${gcsMountBucket}
+                      mountPath: ${gcsMountPath}
                   computeResource:
                     cpuMilli: ${args.resources.cpu}
                     memoryMib: ${args.resources.memory}
