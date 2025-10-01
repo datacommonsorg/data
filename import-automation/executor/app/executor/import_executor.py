@@ -428,7 +428,8 @@ class ImportExecutor:
             timer = Timer()
             process = _run_user_script(
                 interpreter_path='java',
-                script_path='-jar -Xmx16g ' + self.config.import_tool_path,
+                script_path='-XX:MaxRAMPercentage=50.0 -jar ' +
+                self.config.import_tool_path,
                 timeout=self.config.user_script_timeout,
                 args=import_tool_args,
                 cwd=absolute_import_dir,
