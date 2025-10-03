@@ -77,7 +77,7 @@ def schedule_on_commit(github: github_api.GitHubRepoAPI,
                 logging.info('Scheduling a data update job for %s',
                              absolute_import_name)
                 job = create_or_update_import_schedule(absolute_import_name,
-                                                       spec, config, {})
+                                                       spec, config, {}, {})
                 scheduled.append(job)
             except Exception:
                 raise import_executor.ExecutionError(
@@ -90,7 +90,8 @@ def schedule_on_commit(github: github_api.GitHubRepoAPI,
 def create_or_update_import_schedule(absolute_import_name: str,
                                      import_spec: dict,
                                      config: configs.ExecutorConfig,
-                                     scheduler_config_dict: Dict):
+                                     scheduler_config_dict: dict,
+                                     override_config: dict):
     """Create/Update the import schedule for 1 import."""
     schedule = import_spec.get('cron_schedule')
     if not schedule:
@@ -157,8 +158,8 @@ def create_or_update_import_schedule(absolute_import_name: str,
         # This set up a cloud scheduler job which periodically invokes a GCP workflow job.
         # The workflow job runs a CLOUD BATCH job with the specified configuration in the request.
         json_encoded_body = cloud_batch.create_job_request(
-            absolute_import_name, config.get_data_refresh_config(), import_spec,
-            resources, timeout)
+            absolute_import_name, override_config, import_spec, resources,
+            timeout)
         cloud_batch_job_url = f'https://workflowexecutions.googleapis.com/v1/projects/{config.gcp_project_id}/locations/{config.scheduler_location}/workflows/{config.cloud_workflow_id}/executions'
         req = cloud_scheduler.cloud_batch_job_request(
             absolute_import_name, schedule, cloud_batch_job_url,
