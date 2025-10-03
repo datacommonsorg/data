@@ -327,7 +327,7 @@ function run_import_cloud {
   IMPORT_CONFIG=${IMPORT_CONFIG//\\/}
   run_cmd gcloud --project=$GCP_PROJECT run jobs create $job_name \
     --add-volume name=datcom-volume,type=cloud-storage,bucket=$GCS_BUCKET \
-    --add-volume-mount volume=datcom-volume,mount-path=/mnt \
+    --add-volume-mount volume=datcom-volume,mount-path=/tmp/gcs \
     --region=$REGION \
     --image $DOCKER_REMOTE:latest \
     --args="^|^--import_name=$IMPORT_DIR:$IMPORT_NAME|--import_config=$IMPORT_CONFIG|--enable_cloud_logging" \
