@@ -1,0 +1,9 @@
+Node: E:World_Bank_Temp->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:World_Bank_Temp->statvar
+measurementMethod: C:World_Bank_Temp->measurementmethod
+observationDate: C:World_Bank_Temp->observationdate
+observationPeriod: "P1Y"
+observationAbout: C:World_Bank_Temp->observationabout
+value: C:World_Bank_Temp->observationvalue
+unit: C:World_Bank_Temp->unit

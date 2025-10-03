@@ -17,11 +17,11 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "wb.tmcf",
+                    "template_mcf": "wb_part1.tmcf",
                     "cleaned_csv": "gcs_output/output/transformed_data_for_all_final.csv"
                 },
                 {
-                    "template_mcf": "wb.tmcf",
+                    "template_mcf": "wb_part2.tmcf",
                     "cleaned_csv": "gcs_output/output/bq-results-20250423.csv"
                 }
             ],
