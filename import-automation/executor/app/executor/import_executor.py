@@ -428,7 +428,8 @@ class ImportExecutor:
             timer = Timer()
             process = _run_user_script(
                 interpreter_path='java',
-                script_path='-jar -Xmx16g ' + self.config.import_tool_path,
+                script_path='-XX:MaxRAMPercentage=50.0 -jar ' +
+                self.config.import_tool_path,
                 timeout=self.config.user_script_timeout,
                 args=import_tool_args,
                 cwd=absolute_import_dir,
@@ -585,14 +586,18 @@ class ImportExecutor:
                             cleanup_gcs_volume_mount: bool,
                             absolute_import_dir: str, import_name: str) -> None:
         mount_path = os.path.join(gcs_volume_mount_dir, import_name)
-        out_path = os.path.join(absolute_import_dir, 'gcs_output')
-        logging.info(f'Mount path: {mount_path}, Out path: {out_path}')
+        gcs_path = os.path.join(absolute_import_dir, 'gcs_folder')
+        logging.info(
+            f'GCS mount path: {mount_path}, GCS folder path: {gcs_path}')
         if cleanup_gcs_volume_mount and os.path.exists(mount_path):
             shutil.rmtree(mount_path)
-        if os.path.lexists(out_path):
-            os.unlink(out_path)
+        if os.path.lexists(gcs_path):
+            os.unlink(gcs_path)
         os.makedirs(mount_path, exist_ok=True)
-        os.symlink(mount_path, out_path, target_is_directory=True)
+        os.symlink(mount_path, gcs_path, target_is_directory=True)
+        # TODO: remove gcs_output once migration is complete.
+        os.makedirs(os.path.join(absolute_import_dir, 'gcs_output'),
+                    exist_ok=True)
 
     @log_function_call
     def _invoke_import_job(self, absolute_import_dir: str, import_spec: dict,
