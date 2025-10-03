@@ -26,7 +26,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '.'))  # For soc_codes_names
 
 from soc_codes_names import SOC_MAP
-from util.naics_codes import NAICS_CODES
+from naics_codes import NAICS_CODES
 # pylint: enable=wrong-import-position
 # pylint: enable=import-error
 
