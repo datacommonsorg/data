@@ -23,11 +23,11 @@ from absl import app, logging, flags
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '..', '..', '..', 'util'))
+sys.path.append(os.path.join(_SCRIPT_PATH, '..', '..', '..'))
 
-from statvar_dcid_generator import get_statvar_dcid
-from name_to_alpha2 import USSTATE_MAP_SPACE
-from alpha2_to_dcid import USSTATE_MAP
+from util.statvar_dcid_generator import get_statvar_dcid
+from util.name_to_alpha2 import USSTATE_MAP_SPACE
+from util.alpha2_to_dcid import USSTATE_MAP
 from statvar_remap import STATVAR_REMAP_DICT
 from clean_data import reads_config_file
 
