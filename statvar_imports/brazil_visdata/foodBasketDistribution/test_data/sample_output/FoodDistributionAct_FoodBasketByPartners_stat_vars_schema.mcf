@@ -1,0 +1,73 @@
+Node: dcid:brazilAidDistributionPartner
+typeOf: dcs:Property
+name: "brazilAidDistributionPartner"
+domainIncludes: dcid:FoodBasket
+rangeIncludes: dcid:BrazilAidDistributionPartnerEnum
+isProvisional: dcs:True
+
+Node: dcid:BrazilAidDistributionPartnerEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "BrazilAidDistributionPartnerEnum"
+isProvisional: dcs:True
+
+Node: dcid:NationalConfederationOfAgricultureSENAR
+typeOf: dcid:BrazilAidDistributionPartnerEnum
+name: "National Confederation Of Agriculture SENAR"
+isProvisional: dcs:True
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:FoodBasket
+
+Node: dcid:FoodBasket
+typeOf: dcid:Thing
+name: "Food Basket"
+isProvisional: dcs:True
+
+Node: dcid:OrganizationOfCooperativesOfBrazil
+typeOf: dcid:BrazilAidDistributionPartnerEnum
+name: "Organization Of Cooperatives Of Brazil"
+isProvisional: dcs:True
+
+Node: dcid:NationalAssociationOfGarlicOrOnionProducers
+typeOf: dcid:BrazilAidDistributionPartnerEnum
+name: "National Association Of Garlic Or Onion Producers"
+isProvisional: dcs:True
+
+Node: dcid:NationalConfederationOfCommerceSESC
+typeOf: dcid:BrazilAidDistributionPartnerEnum
+name: "National Confederation Of Commerce SESC"
+isProvisional: dcs:True
+
+Node: dcid:NationalConfederationOfIndustrySESI
+typeOf: dcid:BrazilAidDistributionPartnerEnum
+name: "National Confederation Of Industry SESI"
+isProvisional: dcs:True
+
+Node: dcid:BancoDoBrasilFoundation
+typeOf: dcid:BrazilAidDistributionPartnerEnum
+name: "Banco Do Brasil Foundation"
+isProvisional: dcs:True
+
+Node: dcid:CortevaAgriscience
+typeOf: dcid:BrazilAidDistributionPartnerEnum
+name: "Corteva Agriscience"
+isProvisional: dcs:True
+
+Node: dcid:NutrelliAlimentosECongelattos
+typeOf: dcid:BrazilAidDistributionPartnerEnum
+name: "Nutrelli Alimentos ECongelattos"
+isProvisional: dcs:True
+
+Node: dcid:SaoPauloWarehouseAndWarehouseCompanyCEAGESP
+typeOf: dcid:BrazilAidDistributionPartnerEnum
+name: "Sao Paulo Warehouse And Warehouse Company CEAGESP"
+isProvisional: dcs:True
+
+Node: dcid:DivineCaldoBrazil
+typeOf: dcid:BrazilAidDistributionPartnerEnum
+name: "Divine Caldo Brazil"
+isProvisional: dcs:True
+
