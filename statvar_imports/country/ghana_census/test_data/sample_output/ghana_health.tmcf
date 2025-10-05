@@ -1,0 +1,8 @@
+Node: E:ghana_health->E0
+observationDate: C:ghana_health->observationDate
+observationAbout: C:ghana_health->observationAbout
+value: C:ghana_health->value
+unit: C:ghana_health->unit
+scalingFactor: C:ghana_health->scalingFactor
+variableMeasured: C:ghana_health->variableMeasured
+typeOf: dcs:StatVarObservation
