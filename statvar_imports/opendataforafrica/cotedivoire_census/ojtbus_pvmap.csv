@@ -1,0 +1,11 @@
+key,prop,value,p1,v1,,
+ID_INDICATEUR:I1,employmentStatus,InLaborForce,measuredProperty,count,populationType,Person
+ID_GENRE:GEN1,gender,Male,,,,
+ID_GENRE:GEN2,gender,Female,,,,
+ID_GENRE:GEN4,#ignore,skip,,,,
+ID_GENRE:GEN5,#ignore,skip,,,,
+ID_DEPARTEMENT:D1,observationAbout,wikidataId/Q2870129,,,,
+ID_DEPARTEMENT:D2,observationAbout,wikidataId/Q3768,,,,
+TIME_PERIOD,observationDate,{Number},,,,
+OBS_VALUE,value,{Number},,,,
+FREQ:A,observationPeriod,P1Y,,,,
