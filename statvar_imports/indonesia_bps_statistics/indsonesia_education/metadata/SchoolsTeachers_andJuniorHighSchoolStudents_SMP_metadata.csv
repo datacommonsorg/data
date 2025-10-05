@@ -1,0 +1,17 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/3/ZHpkb1ZtcDNZV2RHTlUweVdFZ3JhVkl3Ym1ScVp6MDkjMw==/number-of-schools--teachers--and-pupils-in-lower-secondary-schools-under-the-ministry-of-education--culture--research--and-technology-by-province.html
+description,"Number of Schools, Teachers and Junior High School Students (SMP) under the Ministry of Education and Culture by Province"
+#place_type,country/IDN
+#places_within,
+start_date,2016
+end_date,2022
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,1
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1I6hmivuFaXrytFpV6urrG9UJP3wMkRhvxwEDhjaXLlw/edit?resourcekey=0-tesPG0GhW4ZYkPeP25PuSw#gid=690434366
+mapped_rows,1
+mapped_columns,1
+pv_map,https://docs.google.com/spreadsheets/d/1I6hmivuFaXrytFpV6urrG9UJP3wMkRhvxwEDhjaXLlw/edit?resourcekey=0-tesPG0GhW4ZYkPeP25PuSw#gid=1353765140

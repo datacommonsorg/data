@@ -1,0 +1,5 @@
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:CriminalActivities
+
