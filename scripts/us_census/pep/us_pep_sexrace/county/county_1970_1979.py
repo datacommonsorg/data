@@ -19,6 +19,13 @@ and Count_person_Female are aggregated for this file.
 
 import pandas as pd
 import os
+import requests
+import sys
+
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from api_calls import get_api_response
+from api_calls import get_api_response
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -36,8 +43,10 @@ def process_county_1970_1979(url: str) -> pd.DataFrame:
         df.columns (pd.dataframe) : Column names of cleaned dataframe
     """
     # reading the csv input file
-    df = pd.read_csv(url, header=None)
-    df.to_csv(_CODEDIR + "/../input_files/" + "county_result_1970_1979.csv")
+    file_path = os.path.join(_CODEDIR + "/../input_files/" +
+                             "county_result_1970_1979.csv")
+    file_path = get_api_response(file_path, url, 0)
+    df = pd.read_csv(file_path, engine='python', encoding='ISO-8859-1')
 
     # listing the columns to be dropped as age gaps are not required
     COLUMNS_TO_SUM = [
