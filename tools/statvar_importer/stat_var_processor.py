@@ -2787,11 +2787,12 @@ class StatVarDataProcessor:
         self._counters.print_counters()
         counters_filename = self._config.get('output_counters',
                                              output_path + '_counters.txt')
-        logging.info(f'Writing counters to {counters_filename}')
-        file_util.file_write_csv_dict(
+        if counters_filename:
+          logging.info(f'Writing counters to {counters_filename}')
+          file_util.file_write_csv_dict(
             OrderedDict(sorted(self._counters.get_counters().items())),
             counters_filename,
-        )
+          )
 
     def get_output_files(self, output_path: str) -> list:
         """Returns the list of output file names."""
