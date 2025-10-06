@@ -45,6 +45,7 @@ CONFIG="$SCRIPT_DIR/config_override_test.json"
 CONFIG_OVERRIDE=""
 TMP_DIR=${TMP_DIR:-"/tmp"}
 CLOUD_JOB_WAIT="--wait"
+NOTES_FILE="notes.txt"
 USAGE="$(basename $0) <import-name> [Options]
 Script to run an import through docker in cloud run or locally.
 Options:
@@ -69,6 +70,7 @@ Options:
   -cfg <config>=<value> Config values for jobs used as overrides.
                See the following for supported config options:
                https://github.com/datacommonsorg/data/blob/master/import-automation/executor/app/configs.py#L32
+  -l <version> Update import's latest_version.txt to given version.
   -h           Show this help message.
 
 
@@ -153,6 +155,8 @@ function parse_options {
       -w) CLOUD_JOB_WAIT="--wait";;
       -nw) CLOUD_JOB_WAIT="";;
       -c*) shift; CONFIG_OVERRIDE="$CONFIG_OVERRIDE, $1";;
+      -l) shift; IMPORT_VERSION="$1";;
+      -no*) shift; NOTE="$1";;
       -h) echo "$USAGE" >&2; exit 1;;
       -x) set -x;;
       *) MANIFEST="$1";;
@@ -250,14 +254,42 @@ function build_docker {
 # Get the latest import output from GCS
 function get_latest_gcs_import_output {
   echo_log "Looking for import files on GCS at $GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME..."
-  latest_version=$(gsutil cat gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/latest_version.txt)
-  if [[ -n "$latest_version" ]]; then
-    echo_log "latest_version.txt: $latest_version"
-    run_cmd gsutil ls -lR gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$latest_version
-    echo_log "View latest import files at: https://pantheon.corp.google.com/storage/browser/$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$latest_version"
+  LATEST_VERSION=$(gsutil cat gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/latest_version.txt)
+  if [[ -n "$LATEST_VERSION" ]]; then
+    echo_log "latest_version.txt: $LATEST_VERSION"
+    run_cmd gsutil ls -lR gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$LATEST_VERSION
+    echo_log "View latest import files at: https://pantheon.corp.google.com/storage/browser/$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$LATEST_VERSION"
   else
     echo_log "No files on GCS at $GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME"
   fi
+}
+
+# Add import version notes on GCS
+function add_import_version_notes {
+  local version="$1"; shift;
+  local notes="$1"; shift
+  local import_name="$1"; shift
+  local import_dir="$1"; shift
+
+  import_name=${import_name:-"$IMPORT_NAME"}
+  import_dir=${import_dir:-"$IMPORT_DIR"}
+
+  # Check if the version exists
+  gcs_ver_dir="gs://$GCS_BUCKET/$import_dir/$import_name/$version"
+  echo_log "Looking for import version: $gcs_ver_dir"
+  dir=$(gsutil ls "$gcs_ver_dir")
+  [[ -z "$dir" ]] && echo_fatal "Unable to find latest version dir $gcs_ver_dir"
+
+  # fetch any existing notes
+  tmp_note_file="$TMP_DIR/import-note-$import_name.txt"
+  gsutil cat "$gcs_ver_dir/$NOTES_FILE" > $tmp_note_file
+
+  # Update notes on GCS
+  new_notes="[$(date +%Y-%m-%d:%H:%M:%S)]: Update by $USER, Note: $notes"
+  echo_log "Adding note to $gcs_ver_dir/$NOTES_FILE: $new_notes"
+  echo "$new_notes" >> $tmp_note_file
+
+  run_cmd gsutil cp $tmp_note_file $gcs_ver_dir/$NOTES_FILE
 }
 
 # Get the config overrides for import executor
@@ -272,12 +304,18 @@ function get_import_config {
 
   # Get config overrides from manifest if any
   # Assumes this is the last part of the manifest.json
-  manifest_overrides=$( echo $MANIFEST | grep config_override | \
-    sed -e 's/.*config_override"[: ]*{//;s/}.*$//')
+  manifest_overrides=$( echo "$MANIFEST" | jq ".config_override" | \
+                        grep ":" | sed -e 's/ *: */:/g;s/"//g')
 
   # Add all config overrides to the config
   config_vals=$(echo "$manifest_overrides" "$CONFIG_OVERRIDE" "$options" | \
                 sed -e 's/ *: */:/;s/"//g;s/,//g')
+  if [[ -n "$IMPORT_VERSION" ]]; then
+    get_latest_gcs_import_output
+    # Add config to update version.
+    add_import_version_notes "$IMPORT_VERSION" "Updating latest $IMPORT_NAME from: $LATEST_VERSION to: $IMPORT_VERSION, $NOTE"
+    config_vals="$config_vals import_version_override:$IMPORT_VERSION"
+  fi
   for c_v in $config_vals; do
     param=$(cut -d: -f1 <<< "$c_v")
     val=$(cut -d: -f2- <<< "$c_v")
@@ -287,7 +325,7 @@ function get_import_config {
     [[ -z "$is_param_valid" ]] && echo_fatal "Unknown import config: '$param':$val"
 
     # Add double quotes for value if not a bool or int
-    is_quoted_val=$(egrep -vi "true|false|^[0-9\.]" <<< $val)
+    is_quoted_val=$(egrep -vi "true|false|^[0-9\.]+$" <<< $val)
     [[ -n "$is_quoted_val" ]] && val=\'$val\'
 
     # Add the param to import config
@@ -474,7 +512,7 @@ function run_import_batch {
   else
     echo_log "ERROR: Job submission failed for $JOB_NAME"
   fi
-  
+
   run_cmd "gcloud --project=$GCP_PROJECT batch jobs describe --location=$REGION $JOB_NAME"
   echo_log "To view the jobs status, run the command:
 gcloud --project=$GCP_PROJECT batch jobs describe --location=$REGION $JOB_NAME"
