@@ -27,7 +27,7 @@ echo "Pushing docker image $1"
 docker push $artifact_registry/$1:latest
 echo "Creating cloud run job $1"
 gcloud --project=$project run jobs delete $1 --region=$region --quiet
-gcloud --project=$project run jobs create $1 --add-volume name=datcom-volume,type=cloud-storage,bucket=$mount_bucket --add-volume-mount volume=datcom-volume,mount-path=/mnt --region=$region --image $artifact_registry/$1:latest --args="^|^--import_name=$2|--import_config=$config|--enable_cloud_logging" --cpu=$cpu --memory=$memory --task-timeout=$timeout --max-retries=1
+gcloud --project=$project run jobs create $1 --add-volume name=datcom-volume,type=cloud-storage,bucket=$mount_bucket --add-volume-mount volume=datcom-volume,mount-path=/tmp/gcs --region=$region --image $artifact_registry/$1:latest --args="^|^--import_name=$2|--import_config=$config|--enable_cloud_logging" --cpu=$cpu --memory=$memory --task-timeout=$timeout --max-retries=1
 echo "Executing cloud run job $1"
 gcloud --project=$project run jobs execute $1 --region=$region
 
