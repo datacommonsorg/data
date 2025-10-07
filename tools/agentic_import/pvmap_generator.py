@@ -29,7 +29,7 @@ from absl import flags
 from absl import logging
 from jinja2 import Environment, FileSystemLoader
 
-FLAGS = flags.FLAGS
+_FLAGS = flags.FLAGS
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 flags.DEFINE_list('input_data', None,
@@ -68,7 +68,7 @@ flags.DEFINE_string(
     'Output path prefix for all generated files (default: output/output)')
 
 flags.DEFINE_string(
-    'gemini_cli', None, 'Custom path or command to invoke Gemini CLI. '
+    'gemini_cli', 'gemini', 'Custom path or command to invoke Gemini CLI. '
     'Example: "/usr/local/bin/gemini". '
     'WARNING: This value is executed in a shell - use only with trusted input.')
 
@@ -374,19 +374,19 @@ class PVMapGenerator:
 
 def prepare_config() -> Config:
     """Prepare comprehensive configuration from individual flags."""
-    data_config = DataConfig(input_data=FLAGS.input_data or [],
-                             input_metadata=FLAGS.input_metadata or [],
-                             is_sdmx_dataset=FLAGS.sdmx_dataset)
+    data_config = DataConfig(input_data=_FLAGS.input_data or [],
+                             input_metadata=_FLAGS.input_metadata or [],
+                             is_sdmx_dataset=_FLAGS.sdmx_dataset)
 
     return Config(data_config=data_config,
-                  dry_run=FLAGS.dry_run,
-                  maps_api_key=FLAGS.maps_api_key,
-                  dc_api_key=FLAGS.dc_api_key,
-                  max_iterations=FLAGS.max_iterations,
-                  skip_confirmation=FLAGS.skip_confirmation,
-                  enable_sandboxing=FLAGS.enable_sandboxing,
-                  output_path=FLAGS.output_path,
-                  gemini_cli=FLAGS.gemini_cli)
+                  dry_run=_FLAGS.dry_run,
+                  maps_api_key=_FLAGS.maps_api_key,
+                  dc_api_key=_FLAGS.dc_api_key,
+                  max_iterations=_FLAGS.max_iterations,
+                  skip_confirmation=_FLAGS.skip_confirmation,
+                  enable_sandboxing=_FLAGS.enable_sandboxing,
+                  output_path=_FLAGS.output_path,
+                  gemini_cli=_FLAGS.gemini_cli)
 
 
 def main(_):
