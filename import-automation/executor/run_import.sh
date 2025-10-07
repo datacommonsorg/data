@@ -305,8 +305,8 @@ function get_import_config {
 
   # Get config overrides from manifest if any
   # Assumes this is the last part of the manifest.json
-  manifest_overrides=$( echo "$MANIFEST" | jq ".config_override" | \
-                        grep ":" | sed -e 's/ *: */:/g;s/"//g')
+  manifest_overrides=$(echo "$MANIFEST" | jq ".config_override" | \
+                       grep ":" | sed -e 's/ *: */:/g;s/"//g')
 
   # Add all config overrides to the config
   config_vals=$(echo "$manifest_overrides" "$CONFIG_OVERRIDE" "$options" | \
@@ -315,7 +315,7 @@ function get_import_config {
     config_vals="$config_vals import_version_override:$IMPORT_VERSION"
   fi
   ver_override=$(grep -o "import_version_override:[^ ]*" <<< "$config_vals")
-  if [[ -n "$ver_override" ]];then
+  if [[ -n "$ver_override" ]]; then
     IMPORT_VERSION=$(cut -d: -f2 <<< "$ver_override")
     get_latest_gcs_import_output
     # Add config to update version.
