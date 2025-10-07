@@ -22,7 +22,7 @@ import subprocess
 import sys
 from datetime import datetime
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 
 from absl import app
 from absl import flags
@@ -68,8 +68,9 @@ flags.DEFINE_string(
     'Output path prefix for all generated files (default: output/output)')
 
 flags.DEFINE_string(
-    'gemini_cli', None, 'Custom command to invoke Gemini CLI. '
-    'Examples: "/usr/local/bin/gemini", "bash -i -c gemini"')
+    'gemini_cli', None, 'Custom path or command to invoke Gemini CLI. '
+    'Example: "/usr/local/bin/gemini". '
+    'WARNING: This value is executed in a shell - use only with trusted input.')
 
 
 @dataclass
@@ -90,7 +91,7 @@ class Config:
     skip_confirmation: bool = False
     enable_sandboxing: bool = False
     output_path: str = 'output/output'
-    gemini_cli: str = None
+    gemini_cli: Optional[str] = None
 
 
 class PVMapGenerator:
@@ -259,7 +260,7 @@ class PVMapGenerator:
                 f"Gemini CLI execution failed with exit code {exit_code}")
 
     def _check_gemini_cli_available(self) -> bool:
-        """Check if Gemini CLI is available in PATH."""
+        """Check if Gemini CLI is available in PATH or a custom command is provided."""
         # Skip check if custom command provided
         if self._config.gemini_cli:
             return True
