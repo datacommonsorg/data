@@ -67,6 +67,10 @@ flags.DEFINE_string(
     'output_path', 'output/output',
     'Output path prefix for all generated files (default: output/output)')
 
+flags.DEFINE_string(
+    'gemini_cli', None, 'Custom command to invoke Gemini CLI. '
+    'Examples: "/usr/local/bin/gemini", "bash -i -c gemini"')
+
 
 @dataclass
 class DataConfig:
@@ -86,6 +90,7 @@ class Config:
     skip_confirmation: bool = False
     enable_sandboxing: bool = False
     output_path: str = 'output/output'
+    gemini_cli: str = None
 
 
 class PVMapGenerator:
@@ -230,12 +235,11 @@ class PVMapGenerator:
                 logging.info("PV map generation cancelled by user.")
                 return
 
-        # Check if Gemini CLI is available
+        # Check if Gemini CLI is available (warning only for aliases)
         if not self._check_gemini_cli_available():
-            logging.error(
-                "Gemini CLI is not available. Please install it before running."
+            logging.warning(
+                "Gemini CLI not found in PATH. Will attempt to run anyway (may work if aliased)."
             )
-            raise RuntimeError("Gemini CLI not found in PATH")
 
         # Generate log file path using the run directory
         log_file = os.path.join(self._run_dir, 'gemini_cli.log')
@@ -256,6 +260,9 @@ class PVMapGenerator:
 
     def _check_gemini_cli_available(self) -> bool:
         """Check if Gemini CLI is available in PATH."""
+        # Skip check if custom command provided
+        if self._config.gemini_cli:
+            return True
         return shutil.which('gemini') is not None
 
     def _build_gemini_command(self, prompt_file: str, log_file: str) -> str:
@@ -274,8 +281,9 @@ class PVMapGenerator:
         Returns:
             Complete gemini command string
         """
+        gemini_cmd = self._config.gemini_cli or 'gemini'
         sandbox_flag = "--sandbox " if self._config.enable_sandboxing else ""
-        return f"cat '{prompt_file}' | gemini {sandbox_flag} -y 2>&1 | tee '{log_file}'"
+        return f"cat '{prompt_file}' | {gemini_cmd} {sandbox_flag} -y 2>&1 | tee '{log_file}'"
 
     def _run_subprocess(self, command: str) -> int:
         """Run a subprocess command with real-time output streaming."""
@@ -376,7 +384,8 @@ def prepare_config() -> Config:
                   max_iterations=FLAGS.max_iterations,
                   skip_confirmation=FLAGS.skip_confirmation,
                   enable_sandboxing=FLAGS.enable_sandboxing,
-                  output_path=FLAGS.output_path)
+                  output_path=FLAGS.output_path,
+                  gemini_cli=FLAGS.gemini_cli)
 
 
 def main(_):
