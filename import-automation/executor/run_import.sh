@@ -312,10 +312,14 @@ function get_import_config {
   config_vals=$(echo "$manifest_overrides" "$CONFIG_OVERRIDE" "$options" | \
                 sed -e 's/ *: */:/;s/"//g;s/,//g')
   if [[ -n "$IMPORT_VERSION" ]]; then
+    config_vals="$config_vals import_version_override:$IMPORT_VERSION"
+  fi
+  ver_override=$(grep -o "import_version_override:[^ ]*" <<< "$config_vals")
+  if [[ -n "$ver_override" ]];then
+    IMPORT_VERSION=$(cut -d: -f2 <<< "$ver_override")
     get_latest_gcs_import_output
     # Add config to update version.
     add_import_version_notes "$IMPORT_VERSION" "Updating latest $IMPORT_NAME from: $LATEST_VERSION to: $IMPORT_VERSION, $NOTE"
-    config_vals="$config_vals import_version_override:$IMPORT_VERSION"
   fi
   for c_v in $config_vals; do
     param=$(cut -d: -f1 <<< "$c_v")
