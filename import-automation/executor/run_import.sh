@@ -283,7 +283,7 @@ function add_import_version_notes {
 
   # fetch any existing notes
   tmp_note_file="$TMP_DIR/import-note-$import_name.txt"
-  gsutil cat "$gcs_ver_dir/$NOTES_FILE" > $tmp_note_file
+  gsutil cat "$gcs_ver_dir/$NOTES_FILE" > $tmp_note_file 2>/dev/null
 
   # Update notes on GCS
   new_notes="[$(date +%Y-%m-%d:%H:%M:%S)]: Update by $USER, Note: $notes"
