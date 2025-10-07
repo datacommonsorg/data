@@ -42,6 +42,10 @@ class ExecutorConfig:
     # Name of the Cloud Storage bucket to store the generated data files
     # for importing to prod.
     storage_prod_bucket_name: str = 'datcom-prod-imports'
+    # Spanner instance details for import status.
+    spanner_project_id: str = 'datcom-store'
+    spanner_instance_id: str = 'dc-kg-test'
+    spanner_database_id: str = 'dc_graph_import'
     # Name of the Cloud Storage bucket that the Data Commons importer
     # outputs to.
     storage_importer_bucket_name: str = 'resolved_mcf'
@@ -112,7 +116,7 @@ class ExecutorConfig:
     # Name of the GCS bucket for volume mount.
     gcs_bucket_volume_mount: str = 'datcom-volume-mount'
     # Location of the GCS bucket volume mount.
-    gcs_volume_mount_dir: str = '/mnt'
+    gcs_volume_mount_dir: str = '/tmp/gcs'
     # Clean up GCS volume mount dir.
     cleanup_gcs_volume_mount: bool = True
     # Location of the local git data repo.
@@ -134,7 +138,7 @@ class ExecutorConfig:
     # Invoke validations before upload.
     invoke_import_validation: bool = True
     # Ignore validation status during import.
-    ignore_validation_status: bool = True
+    ignore_validation_status: bool = False
     # Import validation config file path (relative to data repo).
     validation_config_file: str = 'tools/import_validation/validation_config.json'
     # Latest import version (overwrite)

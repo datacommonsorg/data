@@ -1,3 +1,16 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """
 dataflow.py
 
@@ -41,8 +54,11 @@ class SdmxClient:
 
     def download_metadata(self, dataflow_id: str, output_path: str):
         """
-        Fetches the complete metadata for a dataflow and saves the raw
-        SDMX-ML (XML) response to a file.
+        Fetches the complete metadata for a dataflow and saves it to a file as raw SDMX-ML (XML).
+
+        Args:
+            dataflow_id: The ID of the dataflow to retrieve
+            output_path: Path where the metadata should be saved
         """
         try:
             logging.info(
