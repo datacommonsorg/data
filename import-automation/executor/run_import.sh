@@ -27,11 +27,11 @@
 # Example:
 # ./run_import.sh ../../scripts/us_fed/treasury_constant_maturity_rates/manifest.json
 #
-GCP_PROJECT="datcom-ci"
+GCP_PROJECT=${GCP_PROJECT:-"datcom-ci"}
 REGION="us-central1"
-GCS_BUCKET="datcom-import-test"
-SPANNER_INSTANCE="datcom-spanner-test"
-SPANNER_DB="dc-test-db"
+GCS_BUCKET=${GCS_BUCKET:-"datcom-import-test"}
+SPANNER_INSTANCE=${SPANNER_INSTANCE:-"datcom-spanner-test"}
+SPANNER_DB=${SPANNER_DB:-"dc-test-db"}
 SCRIPT_DIR=$(realpath $(dirname $0))
 DATA_REPO=$(realpath $(dirname $0)/../../)
 DEFAULT_CPU=8
@@ -40,12 +40,12 @@ DEFAULT_DISK=100
 DEFAULT_TIMEOUT=30m
 RUN_MODE="executor"
 DOCKER_IMAGE="dc-import-executor"
-MACHINE_TYPE="n2-standard-8"
+MACHINE_TYPE=${MACHINE_TYPE:-"n2-standard-8"}
 CONFIG="$SCRIPT_DIR/config_override_test.json"
 CONFIG_OVERRIDE=""
 TMP_DIR=${TMP_DIR:-"/tmp"}
 CLOUD_JOB_WAIT="--wait"
-NOTES_FILE="notes.txt"
+NOTES_FILE=${NOTES_FILE:-"notes.txt"}
 USAGE="$(basename $0) <import-name> [Options]
 Script to run an import through docker in cloud run or locally.
 Options:
@@ -71,6 +71,7 @@ Options:
                See the following for supported config options:
                https://github.com/datacommonsorg/data/blob/master/import-automation/executor/app/configs.py#L32
   -l <version> Update import's latest_version.txt to given version.
+  -note '<msg>'  Add a message when updating latest version, recorded in GCS $NOTES_FILE
   -h           Show this help message.
 
 
