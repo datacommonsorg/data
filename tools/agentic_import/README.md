@@ -112,7 +112,7 @@ Create a sample of your data using the data_sampler utility. This helps with ini
 python $DC_DATA_REPO_PATH/tools/statvar_importer/data_sampler.py \
   --sampler_input="input_data.csv" \
   --sampler_output="sample_data.csv" \
-  --max_rows=30
+  --sampler_output_rows=30
 ```
 
 **Parameters:**
