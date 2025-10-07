@@ -2,17 +2,24 @@
     "import_specifications": [
         {
             "import_name": "UNEnergy",
-            "curator_emails": ["support@datacommons.org"],
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
             "provenance_url": "https://unstats.un.org/unsd/energystats/data/",
             "provenance_description": "The data is provided by the United Nations Statistics Division (UNSD) and is based on energy statistics collected through a variety of methods. The primary source for the data is the Annual Questionnaire on Energy Statistics (AQES), which is part of UNSD's regular data collection program. ",
-            "scripts": ["run.sh "],
-            "source_files": ["input_data/un_energy_all.csv"],
-            "import_inputs": [{
-                "template_mcf": "output_data/un_energy_output.tmcf",
-                "cleaned_csv": "output_data/un_energy_output.csv"
-            }
+            "scripts": [
+                "run.sh "
             ],
-        "cron_schedule": "0 4 1,15 * *"
+            "source_files": [
+                "input_data/un_energy_all.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_data/un_energy_output.tmcf",
+                    "cleaned_csv": "output_data/un_energy_output.csv"
+                }
+            ],
+            "cron_schedule": "0 4 1,15 * *"
         }
     ]
 }

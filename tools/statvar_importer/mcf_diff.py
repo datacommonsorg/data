@@ -375,6 +375,7 @@ def diff_mcf_files(file1: str,
         f'Comparing {len(nodes1)} nodes from {file1} with {len(nodes2)} nodes'
         f' from {file2}')
     diff_str = diff_mcf_nodes(nodes1, nodes2, config, counters)
+    counters.print_counters()
     print(f'Diff:{file1} vs {file2}:\n{diff_str}')
     return diff_str
 
