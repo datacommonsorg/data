@@ -75,11 +75,9 @@ flags.DEFINE_string('sampler_output_delimiter', None,
 _FLAGS = flags.FLAGS
 
 import file_util
-import process_http_server
 
 from config_map import ConfigMap
 from counters import Counters
-from config_map import ConfigMap
 
 
 # Class to sample a data file.
@@ -141,7 +139,9 @@ class DataSampler:
         unique_cols_str = self._config.get('sampler_unique_columns', '')
         if unique_cols_str:
             self._unique_column_names = [
-                col.strip() for col in unique_cols_str.split(',') if col.strip()
+                col.strip()
+                for col in unique_cols_str.split(',')
+                if col.strip()
             ]
 
     def __del__(self) -> None:
@@ -195,6 +195,21 @@ class DataSampler:
         # Check if this column is in our unique columns
         return column_index in self._unique_column_indices.values()
 
+    def _process_header_row(self, row: list[str]) -> None:
+        """Process header row to build column name to index mapping.
+
+        Args:
+            row: The header row containing column names.
+        """
+        if not self._unique_column_names:
+            return
+
+        for index, column_name in enumerate(row):
+            if column_name in self._unique_column_names:
+                self._unique_column_indices[column_name] = index
+                logging.level_debug() and logging.debug(
+                    f'Mapped unique column "{column_name}" to index {index}')
+
     def _add_column_header(self, column_index: int, value: str) -> str:
         """Adds the first non-empty value of a column as its header.
 
@@ -209,11 +224,6 @@ class DataSampler:
         if not cur_header and value:
             # This is the first value for the column. Set as header.
             self._column_headers[column_index] = value
-            # Map column names to indices if unique columns are specified
-            if value in self._unique_column_names:
-                self._unique_column_indices[value] = column_index
-                logging.level_debug() and logging.debug(
-                    f'Mapped unique column "{value}" to index {column_index}')
             return value
         return cur_header
 
@@ -279,7 +289,7 @@ class DataSampler:
                 col_counts = self._column_counts.get(index, {})
                 if len(col_counts) < max_uniques_per_col:
                     # Column has few unique values. Select this row for column.
-                    self._counters.add_counter(f'sampler-selected-rows', 1)
+                    self._counters.add_counter('sampler-selected-rows', 1)
                     self._counters.add_counter(
                         f'sampler-selected-column-{index}', 1)
                     return True
@@ -288,7 +298,7 @@ class DataSampler:
         if sample_rate < 0:
             sample_rate = self._config.get('sampler_rate')
         if random.random() <= sample_rate:
-            self._counters.add_counter(f'sampler-sampled-rows', 1)
+            self._counters.add_counter('sampler-sampled-rows', 1)
             return True
         return False
 
@@ -360,13 +370,32 @@ class DataSampler:
                     csv_reader = csv.reader(csv_file, **csv_options)
                     row_index = 0
                     for row in csv_reader:
-                        self._counters.add_counter(f'sampler-input-row', 1)
+                        self._counters.add_counter('sampler-input-row', 1)
                         row_index += 1
+                        # Process header rows to build column mapping
+                        if row_index <= header_rows and input_index == 0:
+                            self._process_header_row(row)
                         # Write headers from first input file to the output.
                         if row_index <= header_rows and input_index == 0:
                             csv_writer.writerow(row)
-                            self._counters.add_counter(f'sampler-header-rows',
-                                                       1)
+                            self._counters.add_counter('sampler-header-rows', 1)
+                            # After processing all header rows, validate that all
+                            # requested unique columns were found
+                            if row_index == header_rows and self._unique_column_names:
+                                missing = set(self._unique_column_names) - set(
+                                    self._unique_column_indices.keys())
+                                if missing:
+                                    found = set(
+                                        self._unique_column_indices.keys())
+                                    logging.error(
+                                        'Failed to map unique columns %s within %d header '
+                                        'row(s). Found: %s. Missing: %s. Increase '
+                                        'header_rows or verify column names.',
+                                        self._unique_column_names, header_rows,
+                                        found or 'none', missing)
+                                    raise ValueError(
+                                        f'Missing unique columns in headers: {missing}'
+                                    )
                             continue
                         # Check if input row has any unique values to be output
                         if self.select_row(row, sample_rate):
