@@ -392,7 +392,7 @@ class PropertyValueMapper:
 
     def get_pvs_for_key_variants(self,
                                  key: str,
-                                 namespace: str = 'GLOBAL') -> list:
+                                 namespace: str = 'GLOBAL') -> Optional[list[dict]]:
         """Return a dict of property-values that are mapped to the given key
      or its variantes with case lower case.
     Args:
@@ -457,7 +457,7 @@ class PropertyValueMapper:
 
     def get_pvs_for_key_substring(self,
                                   value: str,
-                                  namespace: str = 'GLOBAL') -> dict:
+                                  namespace: str = 'GLOBAL') -> list[dict]:
         """Return a dict of property-values for any key is a substring of value
 
     Args:
@@ -577,7 +577,7 @@ class PropertyValueMapper:
         return []
 
     def _process_fragment_match(self, words: list[str], start_index: int,
-                                num_words: int, sub_pvs: list,
+                                num_words: int, sub_pvs: list[dict],
                                 namespace: str, word_joiner: str, sub_value: str) -> list:
         """Processes a matching fragment and recursively finds PVs for before/after parts."""
         pvs_list = []
