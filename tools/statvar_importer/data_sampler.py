@@ -135,6 +135,14 @@ class DataSampler:
         if regex:
             self._column_regex = re.compile(regex)
         self._selected_rows = 0
+        # Parse unique column names from config
+        self._unique_column_names = []
+        self._unique_column_indices = {}
+        unique_cols_str = self._config.get('sampler_unique_columns', '')
+        if unique_cols_str:
+            self._unique_column_names = [
+                col.strip() for col in unique_cols_str.split(',') if col.strip()
+            ]
 
     def __del__(self) -> None:
         """Logs the column headers and counts upon object deletion."""
@@ -154,9 +162,12 @@ class DataSampler:
 
         Returns:
             The number of times the value has been seen before for the column.
-            Returns sys.maxsize if the column value does not match the
-            sampler_column_regex.
+            Returns sys.maxsize if the column should not be tracked or if the
+            column value does not match the sampler_column_regex.
         """
+        # Check if this column should be tracked
+        if not self._should_track_column(column_index):
+            return sys.maxsize
         # Check if column value is to be tracked.
         if self._column_regex:
             if not self._column_regex.search(value):
@@ -167,6 +178,22 @@ class DataSampler:
         if col_values is None:
             return 0
         return col_values.get(value, 0)
+
+    def _should_track_column(self, column_index: int) -> bool:
+        """Determines if a column should be tracked for unique values.
+
+        Args:
+            column_index: The index of the column.
+
+        Returns:
+            True if the column should be tracked (either no unique columns
+            specified or this column is in the unique columns list).
+        """
+        if not self._unique_column_names:
+            # No specific columns specified, track all
+            return True
+        # Check if this column is in our unique columns
+        return column_index in self._unique_column_indices.values()
 
     def _add_column_header(self, column_index: int, value: str) -> str:
         """Adds the first non-empty value of a column as its header.
@@ -182,6 +209,11 @@ class DataSampler:
         if not cur_header and value:
             # This is the first value for the column. Set as header.
             self._column_headers[column_index] = value
+            # Map column names to indices if unique columns are specified
+            if value in self._unique_column_names:
+                self._unique_column_indices[value] = column_index
+                logging.level_debug() and logging.debug(
+                    f'Mapped unique column "{value}" to index {column_index}')
             return value
         return cur_header
 
@@ -194,8 +226,11 @@ class DataSampler:
         Args:
             row: The row that has been selected for the sample.
         """
-        # Update counts for each column value in the row.
+        # Update counts for each tracked column value in the row.
         for index in range(len(row)):
+            # Skip columns not being tracked
+            if not self._should_track_column(index):
+                continue
             value = row[index]
             col_counts = self._column_counts.get(index)
             if col_counts is None:
@@ -234,6 +269,9 @@ class DataSampler:
         max_count = self._config.get('sampler_rows_per_key', 3)
         max_uniques_per_col = self._config.get('sampler_uniques_per_column', 10)
         for index in range(len(row)):
+            # Skip columns not in unique_columns list
+            if not self._should_track_column(index):
+                continue
             value = row[index]
             value_count = self._get_column_count(index, value)
             if value_count == 0 or value_count < max_count:
