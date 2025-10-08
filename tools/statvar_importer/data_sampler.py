@@ -387,11 +387,9 @@ class DataSampler:
                     for row in csv_reader:
                         self._counters.add_counter('sampler-input-row', 1)
                         row_index += 1
-                        # Process header rows to build column mapping
+                        # Process and write header rows from the first input file.
                         if row_index <= header_rows and input_index == 0:
                             self._process_header_row(row)
-                        # Write headers from first input file to the output.
-                        if row_index <= header_rows and input_index == 0:
                             csv_writer.writerow(row)
                             self._counters.add_counter('sampler-header-rows', 1)
                             # After processing all header rows, validate that all
