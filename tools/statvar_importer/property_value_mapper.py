@@ -501,7 +501,7 @@ class PropertyValueMapper:
         self,
         value: str,
         namespace: str = 'GLOBAL',
-        max_fragment_size: int = None) -> Optional[list]:
+        max_fragment_size: int = None) -> list:
         """Return a list of property:value dictionaries for an input string.
 
     Args:
@@ -524,11 +524,11 @@ class PropertyValueMapper:
         word_delimiter = self._config.get('word_delimiter', ' ')
         if not word_delimiter:
             # Splitting of words is disabled. Don't match substrings.
-            return None
+            return []
         word_joiner = pv_utils.get_delimiter_char(word_delimiter)
         words = pv_utils.get_words(value, word_delimiter)
         if len(words) <= 1:
-            return None
+            return []
 
         effective_max_fragment_size = max_fragment_size or self._max_words_in_keys
         num_grams = (len(words) - effective_max_fragment_size)**2
@@ -547,7 +547,7 @@ class PropertyValueMapper:
                                namespace: str,
                                max_fragment_size: int,
                                word_joiner: str,
-                               ) -> Optional[list]:
+                               ) -> list:
         """Recursively find property:value dictionaries for fragments of words.
 
     Args:
@@ -573,18 +573,16 @@ class PropertyValueMapper:
                 if sub_pvs:
                     return self._process_fragment_match(
                         words, start_index, num_words, sub_pvs, namespace,
-                        word_joiner)
-        return None
+                        word_joiner, sub_value)
+        return []
 
     def _process_fragment_match(self, words: list[str], start_index: int,
                                 num_words: int, sub_pvs: list,
-                                namespace: str, word_joiner: str) -> list:
+                                namespace: str, word_joiner: str, sub_value: str) -> list:
         """Processes a matching fragment and recursively finds PVs for before/after parts."""
         pvs_list = []
         before_value = word_joiner.join(words[0:start_index])
         after_value = word_joiner.join(words[start_index + num_words:])
-        sub_value = word_joiner.join(words[start_index:start_index +
-                                               num_words])
         logging.level_debug() and logging.log_every_n(
             3,
             f'Got PVs for {start_index}:{num_words} in {words}:{sub_value}:{sub_pvs}, lookup pvs for {before_value}, {after_value}',
