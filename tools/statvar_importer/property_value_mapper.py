@@ -512,7 +512,7 @@ class PropertyValueMapper:
       a list of dictionary of property:values.
     """
         if not value:
-            return None
+            return []
         logging.level_debug() and logging.log_every_n(
             1, f'Looking up PVs for {namespace}:{value}', self._log_every_n)
         pvs = self.get_pvs_for_key_variants(value, namespace)
@@ -527,17 +527,16 @@ class PropertyValueMapper:
         if len(words) <= 1:
             return None
 
-        mfs = max_fragment_size
-        if not mfs:
-            mfs = self._max_words_in_keys
-        num_grams = (len(words) - mfs)**2
+        effective_max_fragment_size = max_fragment_size or self._max_words_in_keys
+        num_grams = (len(words) - effective_max_fragment_size)**2
         if self._num_pv_map_keys < num_grams:
             # Fewer keys than n-grams in input.
             # Get PVs for keys in pv_map that are a substring of the input value.
             return self.get_pvs_for_key_substring(value, namespace)
         # Fewer n-grams than number of keys in map.
         # Check if any input n-gram matches a key.
-        return self._get_pvs_for_fragments(words, namespace, max_fragment_size)
+        return self._get_pvs_for_fragments(words, namespace,
+                                           effective_max_fragment_size)
 
     def _get_pvs_for_fragments(self,
                                words: list[str],
@@ -557,10 +556,7 @@ class PropertyValueMapper:
         word_delimiter = self._config.get('word_delimiter', ' ')
         word_joiner = pv_utils.get_delimiter_char(word_delimiter)
 
-        max_fragment_words = len(words) - 1
-        if not max_fragment_size:
-            max_fragment_size = self._max_words_in_keys
-        max_fragment_words = min(max_fragment_words, max_fragment_size)
+        max_fragment_words = min(len(words) - 1, max_fragment_size)
 
         logging.level_debug() and logging.log_every_n(
             3, f'Looking up PVs for {max_fragment_words} words in {words}',
@@ -572,17 +568,17 @@ class PropertyValueMapper:
                 sub_pvs = self.get_pvs_for_key_variants(sub_value, namespace)
                 if sub_pvs:
                     return self._process_fragment_match(
-                        words, start_index, num_words, sub_pvs, namespace)
+                        words, start_index, num_words, sub_pvs, namespace,
+                        word_joiner)
         return None
 
     def _process_fragment_match(self, words: list[str], start_index: int,
                                 num_words: int, sub_pvs: list,
-                                namespace: str) -> list:
+                                namespace: str, word_joiner: str) -> list:
         """Processes a matching fragment and recursively finds PVs for before/after parts."""
         pvs_list = []
-        word_delimiter = self._config.get('word_delimiter', ' ')
-        before_value = word_delimiter.join(words[0:start_index])
-        after_value = word_delimiter.join(words[start_index + num_words:])
+        before_value = word_joiner.join(words[0:start_index])
+        after_value = word_joiner.join(words[start_index + num_words:])
         logging.level_debug() and logging.log_every_n(
             3,
             f'Got PVs for {start_index}:{num_words} in {words}, lookup pvs for {before_value}, {after_value}',
