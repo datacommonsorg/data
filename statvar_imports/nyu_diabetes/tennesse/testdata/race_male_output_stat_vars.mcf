@@ -1,0 +1,63 @@
+Node: dcid:AgeAdjusted_Count_MortalityEvent_Male_AsAFractionOf_AgeAdjusted_Count_Person_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+measurementQualifier: dcid:AgeAdjusted
+statType: dcid:measuredValue
+measurementDenominator: dcid:AgeAdjusted_Count_Person_Male
+gender: dcid:Male
+
+Node: dcid:AgeAdjusted_Count_MortalityEvent_Male_Black_AsAFractionOf_AgeAdjusted_Count_Person_Male_Black
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+measurementQualifier: dcid:AgeAdjusted
+statType: dcid:measuredValue
+measurementDenominator: dcid:AgeAdjusted_Count_Person_Male_Black
+gender: dcid:Male
+race: dcid:Black
+
+Node: dcid:AgeAdjusted_Count_MortalityEvent_Male_White_AsAFractionOf_AgeAdjusted_Count_Person_Male_White
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+measurementQualifier: dcid:AgeAdjusted
+statType: dcid:measuredValue
+measurementDenominator: dcid:AgeAdjusted_Count_Person_Male_White
+gender: dcid:Male
+race: dcid:White
+
+Node: dcid:Count_MortalityEvent_Male_Black
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+race: dcid:Black
+
+Node: dcid:Count_MortalityEvent_Male_Black_AsAFractionOf_Count_Person_Male_Black
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Male_Black
+gender: dcid:Male
+race: dcid:Black
+
+Node: dcid:Count_MortalityEvent_Male_White
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+race: dcid:White
+
+Node: dcid:Count_MortalityEvent_Male_White_AsAFractionOf_Count_Person_Male_White
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Male_White
+gender: dcid:Male
+race: dcid:White
+

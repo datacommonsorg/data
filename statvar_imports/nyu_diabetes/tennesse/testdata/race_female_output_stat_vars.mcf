@@ -1,0 +1,63 @@
+Node: dcid:AgeAdjusted_Count_MortalityEvent_Female_AsAFractionOf_AgeAdjusted_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+measurementQualifier: dcid:AgeAdjusted
+statType: dcid:measuredValue
+measurementDenominator: dcid:AgeAdjusted_Count_Person_Female
+gender: dcid:Female
+
+Node: dcid:AgeAdjusted_Count_MortalityEvent_Female_Black_AsAFractionOf_AgeAdjusted_Count_Person_Female_Black
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+measurementQualifier: dcid:AgeAdjusted
+statType: dcid:measuredValue
+measurementDenominator: dcid:AgeAdjusted_Count_Person_Female_Black
+gender: dcid:Female
+race: dcid:Black
+
+Node: dcid:AgeAdjusted_Count_MortalityEvent_Female_White_AsAFractionOf_AgeAdjusted_Count_Person_Female_White
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+measurementQualifier: dcid:AgeAdjusted
+statType: dcid:measuredValue
+measurementDenominator: dcid:AgeAdjusted_Count_Person_Female_White
+gender: dcid:Female
+race: dcid:White
+
+Node: dcid:Count_MortalityEvent_Female_Black
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+race: dcid:Black
+
+Node: dcid:Count_MortalityEvent_Female_Black_AsAFractionOf_Count_Person_Female_Black
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Black
+gender: dcid:Female
+race: dcid:Black
+
+Node: dcid:Count_MortalityEvent_Female_White
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+race: dcid:White
+
+Node: dcid:Count_MortalityEvent_Female_White_AsAFractionOf_Count_Person_Female_White
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_White
+gender: dcid:Female
+race: dcid:White
+

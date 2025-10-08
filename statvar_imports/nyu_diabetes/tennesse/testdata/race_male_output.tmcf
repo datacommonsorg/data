@@ -1,0 +1,7 @@
+Node: E:race_male_output->E0
+observationAbout: C:race_male_output->observationAbout
+observationDate: C:race_male_output->observationDate
+value: C:race_male_output->value
+variableMeasured: C:race_male_output->variableMeasured
+scalingFactor: C:race_male_output->scalingFactor
+typeOf: dcs:StatVarObservation

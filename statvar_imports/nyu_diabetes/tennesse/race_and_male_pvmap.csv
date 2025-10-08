@@ -1,0 +1,10 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+COUNTY,observationAbout,{Data},gender,Male,measuredProperty,count,populationType,MortalityEvent,statType,measuredValue,,
+year,observationDate,{Data},
+NUMBER,value,{Number},,,,,,,,,,
+RATE,value,{Number},measurementDenominator,"-populationType, +populationType=Person",scalingFactor,1000,,,,,,
+AGE ADJUSTED RATE,value,{Number},measurementDenominator,"-populationType, +populationType=Person",scalingFactor,1000,measurementQualifier,AgeAdjusted,,,,
+WHITE,race,White,,,,,,,,,,
+BLACK,race,Black,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,

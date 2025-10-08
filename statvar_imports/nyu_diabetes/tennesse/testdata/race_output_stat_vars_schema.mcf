@@ -1,0 +1,31 @@
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person"
+isProvisional: dcs:True
+
+Node: dcid:race
+typeOf: dcs:Property
+name: "race"
+domainIncludes: dcid:MortalityEvent
+
+Node: dcid:Count_Person_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_Black
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ Black"
+isProvisional: dcs:True
+
