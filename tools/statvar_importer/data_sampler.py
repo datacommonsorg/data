@@ -196,10 +196,15 @@ class DataSampler:
         return column_index in self._unique_column_indices.values()
 
     def _process_header_row(self, row: list[str]) -> None:
-        """Process header row to build column name to index mapping.
+        """Process a header row to build column name to index mapping.
+
+        This method is called for each header row (up to header_rows config) to
+        search for columns specified in sampler_unique_columns. It only maps
+        columns that are in the configured list. If called multiple times with
+        duplicate column names, the last mapping is used.
 
         Args:
-            row: The header row containing column names.
+            row: A header row containing column names.
         """
         if not self._unique_column_names:
             return
@@ -308,6 +313,11 @@ class DataSampler:
         This method reads a CSV file, selects a sample of rows based on the
         configured criteria, and writes the selected rows to an output file.
 
+        When sampler_unique_columns is configured, the method processes all
+        header rows (up to header_rows config) to locate the specified column
+        names. If any requested columns are not found within the header rows,
+        a ValueError is raised.
+
         Args:
             input_file: The path to the input CSV file.
             output_file: The path to the output CSV file. If not provided, a
@@ -315,6 +325,11 @@ class DataSampler:
 
         Returns:
             The path to the output file with the sampled rows.
+
+        Raises:
+            ValueError: If sampler_unique_columns is configured and any of the
+              specified column names are not found within the first header_rows
+              rows of the input file.
 
         Usage:
             sampler = DataSampler()
@@ -432,18 +447,26 @@ def sample_csv_file(input_file: str,
           - sampler_output_rows: The maximum number of rows to include in the
             sample.
           - sampler_rate: The sampling rate to use for random selection.
-          - header_rows: The number of header rows to copy from the input file.
+          - header_rows: The number of header rows to copy from the input file
+            and search for sampler_unique_columns. Increase this if column names
+            appear in later header rows (e.g., after a title row).
           - sampler_rows_per_key: The number of rows to select for each unique
             key.
           - sampler_column_regex: A regular expression to filter column values.
           - sampler_unique_columns: A comma-separated list of column names to
-            use for selecting unique rows.
+            use for selecting unique rows. Column names must appear within the
+            first header_rows rows or ValueError will be raised.
           - input_delimiter: The delimiter used in the input file.
           - output_delimiter: The delimiter to use in the output file.
           - input_encoding: The encoding of the input file.
 
     Returns:
         The path to the output file with the sampled rows.
+
+    Raises:
+        ValueError: If sampler_unique_columns is configured and any of the
+          specified column names are not found within the first header_rows
+          rows of the input file.
 
     Usage:
         # Basic usage with default settings
