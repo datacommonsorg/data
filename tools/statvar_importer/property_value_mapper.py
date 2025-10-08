@@ -22,6 +22,7 @@ from absl import app
 from absl import flags
 from absl import logging
 from collections import OrderedDict
+from typing import Optional, Union
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -496,10 +497,11 @@ class PropertyValueMapper:
             self._log_every_n)
         return pvs_list
 
-    def get_all_pvs_for_value(self,
-                              value: str,
-                              namespace: str = 'GLOBAL',
-                              max_fragment_size: int = None) -> list:
+    def get_all_pvs_for_value(
+        self,
+        value: str,
+        namespace: str = 'GLOBAL',
+        max_fragment_size: int = None) -> Optional[list]:
         """Return a list of property:value dictionaries for an input string.
 
     Args:
@@ -523,6 +525,7 @@ class PropertyValueMapper:
         if not word_delimiter:
             # Splitting of words is disabled. Don't match substrings.
             return None
+        word_joiner = pv_utils.get_delimiter_char(word_delimiter)
         words = pv_utils.get_words(value, word_delimiter)
         if len(words) <= 1:
             return None
@@ -536,12 +539,15 @@ class PropertyValueMapper:
         # Fewer n-grams than number of keys in map.
         # Check if any input n-gram matches a key.
         return self._get_pvs_for_fragments(words, namespace,
-                                           effective_max_fragment_size)
+                                           effective_max_fragment_size,
+                                           word_joiner)
 
     def _get_pvs_for_fragments(self,
                                words: list[str],
-                               namespace: str = 'GLOBAL',
-                               max_fragment_size: int = None) -> list:
+                               namespace: str,
+                               max_fragment_size: int,
+                               word_joiner: str,
+                               ) -> Optional[list]:
         """Recursively find property:value dictionaries for fragments of words.
 
     Args:
@@ -549,13 +555,11 @@ class PropertyValueMapper:
       namespace: context for the input string such as the column header.
       max_fragment_size: the maximum number of words into which value can be
         fragmented when looking for matching keys in the pv_map.
+      word_joiner: the string to use for joining words into a fragment.
 
     Returns:
       a list of dictionary of property:values.
     """
-        word_delimiter = self._config.get('word_delimiter', ' ')
-        word_joiner = pv_utils.get_delimiter_char(word_delimiter)
-
         max_fragment_words = min(len(words) - 1, max_fragment_size)
 
         logging.level_debug() and logging.log_every_n(
@@ -579,9 +583,11 @@ class PropertyValueMapper:
         pvs_list = []
         before_value = word_joiner.join(words[0:start_index])
         after_value = word_joiner.join(words[start_index + num_words:])
+        sub_value = word_joiner.join(words[start_index:start_index +
+                                               num_words])
         logging.level_debug() and logging.log_every_n(
             3,
-            f'Got PVs for {start_index}:{num_words} in {words}, lookup pvs for {before_value}, {after_value}',
+            f'Got PVs for {start_index}:{num_words} in {words}:{sub_value}:{sub_pvs}, lookup pvs for {before_value}, {after_value}',
             self._log_every_n)
         before_pvs = self.get_all_pvs_for_value(
             before_value,
@@ -600,7 +606,7 @@ class PropertyValueMapper:
             pvs_list.extend(after_pvs)
         logging.level_debug() and logging.log_every_n(
             2,
-            f'Got PVs for fragments {before_value}:{before_pvs}, {after_value}:{after_pvs}',
+            f'Got PVs for fragments {before_value}:{before_pvs}, {sub_value}:{sub_pvs}, {after_value}:{after_pvs}',
             self._log_every_n)
         return pvs_list
 
