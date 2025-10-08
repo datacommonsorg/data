@@ -43,9 +43,9 @@ def url_exists(url, timeout=10):
         return False
 
 def download_files(url_dict, save_folder):
-    os.makedirs(save_folder+"/race", exist_ok=True)
-    os.makedirs(save_folder+"/race_male", exist_ok=True)
-    os.makedirs(save_folder+"/race_female", exist_ok=True)
+    os.makedirs(os.path.join(save_folder, "race"), exist_ok=True)
+    os.makedirs(os.path.join(save_folder, "race_male"), exist_ok=True)
+    os.makedirs(os.path.join(save_folder, "race_female"), exist_ok=True)
 
     for url,folder in url_dict.items():
         try:
@@ -54,12 +54,7 @@ def download_files(url_dict, save_folder):
                 continue
             parsed_url = urlparse(url)
             filename = os.path.basename(parsed_url.path)
-            if folder=="race":
-                file_path = os.path.join(save_folder, "race", filename)
-            elif folder=="race_male":
-                file_path = os.path.join(save_folder, "race_male", filename)
-            else:
-                file_path = os.path.join(save_folder, "race_female", filename)
+            file_path = os.path.join(save_folder, folder, filename)
 
             logging.info(f"Downloading: {filename}")
 

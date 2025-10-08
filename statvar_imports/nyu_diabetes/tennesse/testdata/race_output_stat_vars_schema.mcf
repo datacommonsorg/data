@@ -6,7 +6,7 @@ isProvisional: dcs:True
 
 Node: dcid:AgeAdjusted_Count_Person
 typeOf: dcid:MeasurementDenominatorEnum
-name: "Age Adjusted_ Count_ Person"
+name: "Age Adjusted Count Person"
 isProvisional: dcs:True
 
 Node: dcid:race
@@ -16,16 +16,16 @@ domainIncludes: dcid:MortalityEvent
 
 Node: dcid:Count_Person_White
 typeOf: dcid:MeasurementDenominatorEnum
-name: "Count_ Person_ White"
+name: "Count Person White"
 isProvisional: dcs:True
 
 Node: dcid:AgeAdjusted_Count_Person_White
 typeOf: dcid:MeasurementDenominatorEnum
-name: "Age Adjusted_ Count_ Person_ White"
+name: "Age Adjusted Count Person White"
 isProvisional: dcs:True
 
 Node: dcid:AgeAdjusted_Count_Person_Black
 typeOf: dcid:MeasurementDenominatorEnum
-name: "Age Adjusted_ Count_ Person_ Black"
+name: "Age Adjusted Count Person Black"
 isProvisional: dcs:True
 

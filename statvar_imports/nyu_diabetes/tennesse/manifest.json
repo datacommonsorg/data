@@ -1,7 +1,7 @@
 {
   "import_specifications": [
     {
-      "import_name": "NYU_Tennesse_Diabetes",
+      "import_name": "NYU_Tennessee_Diabetes",
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www.tn.gov/health/health-program-areas/statistics/health-data/death-statistics.html",
       "provenance_description": "This import utilizes official mortality data from the Tennessee Department of Health, detailing county-level death statistics categorized by race, and separately, race by sex",
