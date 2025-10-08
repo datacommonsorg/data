@@ -2,10 +2,14 @@
   "import_specifications": [
     {
       "import_name": "Brazil_RuralDevelopmentProgram",
-      "curator_emails": ["support@datacommons.org"],
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
       "provenance_url": "https://aplicacoes.cidadania.gov.br/vis/data3/data-explorer.php",
       "provenance_description": "Different population benefiting from Brazil Rural Development Program.",
-      "scripts": ["run.sh"] ,
+      "scripts": [
+        "run.sh"
+      ],
       "source_files": [
         "input_files/*.csv"
       ],
@@ -71,9 +75,7 @@
           "cleaned_csv": "output_files/TotalFamilies_Rural_Development_Program_State_output.csv"
         }
       ],
-      "cron_schedule": "0 06 * * 5",
-      "resource_limits": {"cpu": 8, "memory": 32, "disk": 100}
+      "cron_schedule": "0 06 * * 5"
     }
   ]
 }
-
