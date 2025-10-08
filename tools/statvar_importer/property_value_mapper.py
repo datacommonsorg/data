@@ -511,6 +511,8 @@ class PropertyValueMapper:
     Returns:
       a list of dictionary of property:values.
     """
+        if not value:
+            return None
         logging.level_debug() and logging.log_every_n(
             1, f'Looking up PVs for {namespace}:{value}', self._log_every_n)
         pvs = self.get_pvs_for_key_variants(value, namespace)
@@ -521,22 +523,45 @@ class PropertyValueMapper:
         if not word_delimiter:
             # Splitting of words is disabled. Don't match substrings.
             return None
-        word_joiner = pv_utils.get_delimiter_char(word_delimiter)
         words = pv_utils.get_words(value, word_delimiter)
         if len(words) <= 1:
             return None
-        max_fragment_words = len(words) - 1
-        if not max_fragment_size:
-            max_fragment_size = self._max_words_in_keys
-        max_fragment_words = min(max_fragment_words, max_fragment_size)
 
-        num_grams = (len(words) - max_fragment_size)**2
+        mfs = max_fragment_size
+        if not mfs:
+            mfs = self._max_words_in_keys
+        num_grams = (len(words) - mfs)**2
         if self._num_pv_map_keys < num_grams:
             # Fewer keys than n-grams in input.
             # Get PVs for keys in pv_map that are a substring of the input value.
             return self.get_pvs_for_key_substring(value, namespace)
         # Fewer n-grams than number of keys in map.
         # Check if any input n-gram matches a key.
+        return self._get_pvs_for_fragments(words, namespace, max_fragment_size)
+
+    def _get_pvs_for_fragments(self,
+                               words: list[str],
+                               namespace: str = 'GLOBAL',
+                               max_fragment_size: int = None) -> list:
+        """Recursively find property:value dictionaries for fragments of words.
+
+    Args:
+      words: a list of words of the input string to be mapped.
+      namespace: context for the input string such as the column header.
+      max_fragment_size: the maximum number of words into which value can be
+        fragmented when looking for matching keys in the pv_map.
+
+    Returns:
+      a list of dictionary of property:values.
+    """
+        word_delimiter = self._config.get('word_delimiter', ' ')
+        word_joiner = pv_utils.get_delimiter_char(word_delimiter)
+
+        max_fragment_words = len(words) - 1
+        if not max_fragment_size:
+            max_fragment_size = self._max_words_in_keys
+        max_fragment_words = min(max_fragment_words, max_fragment_size)
+
         logging.level_debug() and logging.log_every_n(
             3, f'Looking up PVs for {max_fragment_words} words in {words}',
             self._log_every_n)
@@ -546,39 +571,42 @@ class PropertyValueMapper:
                                                    num_words])
                 sub_pvs = self.get_pvs_for_key_variants(sub_value, namespace)
                 if sub_pvs:
-                    # Got PVs for a fragment.
-                    # Also lookup remaining fragments before and after this.
-                    pvs_list = []
-                    before_value = word_delimiter.join(words[0:start_index])
-                    after_value = word_delimiter.join(words[start_index +
-                                                            num_words:])
-                    logging.level_debug() and logging.log_every_n(
-                        3, f'Got PVs for {start_index}:{num_words} in'
-                        f' {words}:{sub_value}:{sub_pvs}, lookup pvs for {before_value},'
-                        f' {after_value}', self._log_every_n)
-                    before_pvs = self.get_all_pvs_for_value(
-                        # before_value, namespace, max_fragment_size=None)
-                        before_value,
-                        namespace,
-                        max_fragment_size=num_words,
-                    )
-                    after_pvs = self.get_all_pvs_for_value(
-                        # after_value, namespace, max_fragment_size=None)
-                        after_value,
-                        namespace,
-                        max_fragment_size=num_words,
-                    )
-                    if before_pvs:
-                        pvs_list.extend(before_pvs)
-                    pvs_list.extend(sub_pvs)
-                    if after_pvs:
-                        pvs_list.extend(after_pvs)
-                    logging.level_debug() and logging.log_every_n(
-                        2, f'Got PVs for fragments {before_value}:{before_pvs},'
-                        f' {sub_value}:{sub_pvs}, {after_value}:{after_pvs}',
-                        self._log_every_n)
-                    return pvs_list
+                    return self._process_fragment_match(
+                        words, start_index, num_words, sub_pvs, namespace)
         return None
+
+    def _process_fragment_match(self, words: list[str], start_index: int,
+                                num_words: int, sub_pvs: list,
+                                namespace: str) -> list:
+        """Processes a matching fragment and recursively finds PVs for before/after parts."""
+        pvs_list = []
+        word_delimiter = self._config.get('word_delimiter', ' ')
+        before_value = word_delimiter.join(words[0:start_index])
+        after_value = word_delimiter.join(words[start_index + num_words:])
+        logging.level_debug() and logging.log_every_n(
+            3,
+            f'Got PVs for {start_index}:{num_words} in {words}, lookup pvs for {before_value}, {after_value}',
+            self._log_every_n)
+        before_pvs = self.get_all_pvs_for_value(
+            before_value,
+            namespace,
+            max_fragment_size=num_words,
+        )
+        after_pvs = self.get_all_pvs_for_value(
+            after_value,
+            namespace,
+            max_fragment_size=num_words,
+        )
+        if before_pvs:
+            pvs_list.extend(before_pvs)
+        pvs_list.extend(sub_pvs)
+        if after_pvs:
+            pvs_list.extend(after_pvs)
+        logging.level_debug() and logging.log_every_n(
+            2,
+            f'Got PVs for fragments {before_value}:{before_pvs}, {after_value}:{after_pvs}',
+            self._log_every_n)
+        return pvs_list
 
 
 # Local utility functions
