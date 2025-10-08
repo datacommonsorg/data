@@ -30,6 +30,7 @@
 GCP_PROJECT=${GCP_PROJECT:-"datcom-ci"}
 REGION="us-central1"
 GCS_BUCKET=${GCS_BUCKET:-"datcom-import-test"}
+GCS_MOUNT_PATH="/tmp/gcs"
 SPANNER_INSTANCE=${SPANNER_INSTANCE:-"datcom-spanner-test"}
 SPANNER_DB=${SPANNER_DB:-"dc-test-db"}
 SCRIPT_DIR=$(realpath $(dirname $0))
@@ -370,7 +371,7 @@ function run_import_cloud {
   IMPORT_CONFIG=${IMPORT_CONFIG//\\/}
   run_cmd gcloud --project=$GCP_PROJECT run jobs create $job_name \
     --add-volume name=datcom-volume,type=cloud-storage,bucket=$GCS_BUCKET \
-    --add-volume-mount volume=datcom-volume,mount-path=/tmp/gcs \
+    --add-volume-mount volume=datcom-volume,mount-path=$GCS_MOUNT_PATH \
     --region=$REGION \
     --image $DOCKER_REMOTE:latest \
     --args="^|^--import_name=$IMPORT_DIR:$IMPORT_NAME|--import_config=$IMPORT_CONFIG|--enable_cloud_logging" \
@@ -470,6 +471,14 @@ function get_cloud_batch_config {
           "cpuMilli": "${cpu_milli}",
           "memoryMib": "${memory_mib}"
         },
+        "volumes": [
+          {
+            "gcs": {
+              "remotePath": "${GCS_BUCKET}"
+            },
+            "mountPath": "${GCS_MOUNT_PATH}"
+          }
+        ]
       },
       "taskCount": 1,
       "parallelism": 1
