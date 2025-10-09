@@ -28,6 +28,8 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(script_dir, "input_files")
 Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 
+YEAR_REGEX = re.compile(r'/death/(\d{4})/')
+
 @retry(tries=3, delay=5, backoff=2)
 def retry_method(url, headers=None):
     response = requests.get(url, headers=headers, timeout=120)
@@ -74,15 +76,18 @@ def generate_urls(start_year, end_year):
             url_dict[formatted_url] = folder
     return url_dict
 
-def extract_year(filename):
+def extract_year(url):
     """Extracts a four-digit year from the filename using regex."""
-    match = re.search(r'(\d{4})', filename)
+    match = YEAR_REGEX.search(url)
     if match:
         return int(match.group(1))
     return None
 
-def process_excel_files(input_dir):
-    """Iterates through downloaded Excel files, adds a 'year' column, and saves them."""
+def process_excel_files(input_dir, file_year_map):
+    """
+    Iterates through downloaded Excel files, uses the provided map to determine 
+    the year, adds a 'year' column, and saves the modified file.
+    """
     logging.info("\nStarting Excel file processing: Adding 'year' column...")
 
     for root, _, files in os.walk(input_dir):
@@ -95,10 +100,16 @@ def process_excel_files(input_dir):
 
         for filename in tqdm(excel_files, desc=f"Adding Year Column to {os.path.basename(root)}"):
             file_path = os.path.join(root, filename)
-            year = extract_year(filename)
+            
+            # Construct the unique identifier used as key in file_year_map: folder/filename
+            folder = os.path.basename(root)
+            relative_key = os.path.join(folder, filename)
+            
+            # Lookup the year using the reliable map
+            year = file_year_map.get(relative_key)
             
             if year is None:
-                logging.warning(f"Could not extract year from filename: {filename}. Skipping processing.")
+                logging.warning(f"Could not find year for file in map: {relative_key}. Skipping processing.")
                 continue
 
             try:
@@ -110,7 +121,6 @@ def process_excel_files(input_dir):
                 logging.error(f"Failed to process and save Excel file {filename}: {e}")
 
     logging.info("\nExcel file processing complete. 'year' column added to all processed files.")
-
 
 def main(_):
     fixed_urls = {
@@ -131,9 +141,21 @@ def main(_):
         if url not in final_url_dict:
             final_url_dict[url] = folder
     
+    file_year_map = {}
+    for url, folder in final_url_dict.items():
+        year = extract_year(url)
+        if year is not None:
+            # Create the key for the map: folder/filename (e.g., 'race/TN%20Deaths%20-%202018.xlsx')
+            parsed_url = urlparse(url)
+            filename = os.path.basename(parsed_url.path)
+            relative_key = os.path.join(folder, filename)
+            file_year_map[relative_key] = year
+        else:
+            logging.error(f"Could not extract year from URL: {url}. This file will not have the 'year' column added.")  
+
     download_files(final_url_dict, save_folder=INPUT_DIR)
 
-    process_excel_files(INPUT_DIR)
+    process_excel_files(INPUT_DIR, file_year_map)
 
 if __name__ == "__main__":
     app.run(main)
