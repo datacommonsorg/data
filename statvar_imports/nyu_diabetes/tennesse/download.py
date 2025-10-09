@@ -30,17 +30,9 @@ Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 
 @retry(tries=3, delay=5, backoff=2)
 def retry_method(url, headers=None):
-    response = requests.get(url, headers=headers, timeout=60)
+    response = requests.get(url, headers=headers, timeout=120)
     response.raise_for_status()
     return response
-
-def url_exists(url, timeout=10):
-    """Check if the URL exists by sending a HEAD request."""
-    try:
-        response = requests.head(url, allow_redirects=True, timeout=timeout)
-        return response.status_code == 200
-    except requests.RequestException:
-        return False
 
 def download_files(url_dict, save_folder):
     os.makedirs(os.path.join(save_folder, "race"), exist_ok=True)
@@ -49,9 +41,6 @@ def download_files(url_dict, save_folder):
 
     for url,folder in url_dict.items():
         try:
-            if not url_exists(url):
-                logging.warning(f"⚠️ Skipping (URL not found or inaccessible): {url}\n")
-                continue
             parsed_url = urlparse(url)
             filename = os.path.basename(parsed_url.path)
             file_path = os.path.join(save_folder, folder, filename)
@@ -59,22 +48,18 @@ def download_files(url_dict, save_folder):
             logging.info(f"Downloading: {filename}")
 
             response = retry_method(url)
-            if response.status_code == 200:
-                with response as r:
-                    total_size = int(r.headers.get('content-length', 0))
-                    block_size = 1024
-                    with open(file_path, 'wb') as f, tqdm(
-                        total=total_size, unit='B', unit_scale=True, desc=filename, leave=False
-                    ) as progress_bar:
-                        for chunk in r.iter_content(block_size):
-                            f.write(chunk)
-                            progress_bar.update(len(chunk))
-                logging.info(f"✅ Saved: {file_path}\n")
-            else:
-                logging.warning(f"URL skipped (Status {response.status_code}): {url}")
-
+            with response as r:
+                total_size = int(r.headers.get('content-length', 0))
+                block_size = 1024
+                with open(file_path, 'wb') as f, tqdm(
+                    total=total_size, unit='B', unit_scale=True, desc=filename, leave=False
+                ) as progress_bar:
+                    for chunk in r.iter_content(block_size):
+                        f.write(chunk)
+                        progress_bar.update(len(chunk))
+            logging.info(f"✅ Saved: {file_path}\n")
         except Exception as e:
-            logging.error(f"❌ Failed to download {url}: {e}\n")
+            logging.error(f"❌ Failed to download {url} after retries: {e}\n")
 
 def generate_urls(start_year, end_year):
     urls = {
