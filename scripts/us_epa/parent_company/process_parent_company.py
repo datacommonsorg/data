@@ -38,10 +38,10 @@ from us_epa.parent_company import static_corrections as sc
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string("input_download_path", "tmp_data", "Input directory")
+flags.DEFINE_string("input_download_path", "parent_company/tmp_data", "Input directory")
 flags.DEFINE_string("existing_facilities_file", "existing_facilities",
                     "Filename for existing facilities ids")
-flags.DEFINE_string("output_base_path", "output",
+flags.DEFINE_string("output_base_path", "parent_company/output",
                     "Output directory for processed data.")
 flags.DEFINE_string("parent_co_output_path", "table",
                     "Output directory for company info.")
@@ -599,8 +599,7 @@ def _batch_get_counties(zip_codes: set) -> dict:
                     type_of_place = place
 
                 if "County" in type_of_place:
-                    county = place.get("dcid", "") if isinstance(place,
-                                                                 dict) else ""
+                    county = place.get("dcid", "") if isinstance(place, dict) else ""
                     if county:
                         break  # Found a county, no need to look further
 
@@ -614,8 +613,7 @@ def _batch_get_counties(zip_codes: set) -> dict:
                     type_of_place = place
 
                 if "County" in type_of_place:
-                    county = place.get("dcid", "") if isinstance(place,
-                                                                 dict) else ""
+                    county = place.get("dcid", "") if isinstance(place, dict) else ""
                     if county:
                         break  # Found a county
 
@@ -847,7 +845,7 @@ def process_companies(input_table_path, existing_facilities_file,
         logging.info(
             f"Main processing loop completed. Produced {rows_written_to_output} rows for output CSVs."
         )
-        logging.info("Geo Resolution Stats: \n" +
+        logging.info("Geo Resolution Stats: \n" + 
                      counters_string(_COUNTERS_COMPANIES))
 
         logging.info(
