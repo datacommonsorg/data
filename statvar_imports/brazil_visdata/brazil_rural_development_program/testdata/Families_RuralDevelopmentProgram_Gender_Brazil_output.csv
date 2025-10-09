@@ -1,0 +1,13 @@
+observationAbout,observationDate,value,variableMeasured,observationPeriod,unit
+country/BRA,2012-01,685,dcid:Count_Person_BrazilRuralDevelopmentProgram,,
+country/BRA,2012-01,387,dcid:Count_Person_BrazilRuralDevelopmentProgram_Female,,
+country/BRA,2012-01,221,dcid:Count_Person_BrazilRuralDevelopmentProgram_Male,,
+country/BRA,2012-01,77,dcid:Count_Person_BrazilRuralDevelopmentProgram_GenderUnknownOrNotStated,,
+country/BRA,2012-02,1134,dcid:Count_Person_BrazilRuralDevelopmentProgram,,
+country/BRA,2012-02,686,dcid:Count_Person_BrazilRuralDevelopmentProgram_Female,,
+country/BRA,2012-02,342,dcid:Count_Person_BrazilRuralDevelopmentProgram_Male,,
+country/BRA,2012-02,106,dcid:Count_Person_BrazilRuralDevelopmentProgram_GenderUnknownOrNotStated,,
+country/BRA,2012-03,993,dcid:Count_Person_BrazilRuralDevelopmentProgram,,
+country/BRA,2012-03,440,dcid:Count_Person_BrazilRuralDevelopmentProgram_Female,,
+country/BRA,2012-03,374,dcid:Count_Person_BrazilRuralDevelopmentProgram_Male,,
+country/BRA,2012-03,179,dcid:Count_Person_BrazilRuralDevelopmentProgram_GenderUnknownOrNotStated,,

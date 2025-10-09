@@ -22,14 +22,14 @@ import subprocess
 import sys
 from datetime import datetime
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 
 from absl import app
 from absl import flags
 from absl import logging
 from jinja2 import Environment, FileSystemLoader
 
-FLAGS = flags.FLAGS
+_FLAGS = flags.FLAGS
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 flags.DEFINE_list('input_data', None,
@@ -67,6 +67,11 @@ flags.DEFINE_string(
     'output_path', 'output/output',
     'Output path prefix for all generated files (default: output/output)')
 
+flags.DEFINE_string(
+    'gemini_cli', 'gemini', 'Custom path or command to invoke Gemini CLI. '
+    'Example: "/usr/local/bin/gemini". '
+    'WARNING: This value is executed in a shell - use only with trusted input.')
+
 
 @dataclass
 class DataConfig:
@@ -86,6 +91,7 @@ class Config:
     skip_confirmation: bool = False
     enable_sandboxing: bool = False
     output_path: str = 'output/output'
+    gemini_cli: Optional[str] = None
 
 
 class PVMapGenerator:
@@ -230,12 +236,11 @@ class PVMapGenerator:
                 logging.info("PV map generation cancelled by user.")
                 return
 
-        # Check if Gemini CLI is available
+        # Check if Gemini CLI is available (warning only for aliases)
         if not self._check_gemini_cli_available():
-            logging.error(
-                "Gemini CLI is not available. Please install it before running."
+            logging.warning(
+                "Gemini CLI not found in PATH. Will attempt to run anyway (may work if aliased)."
             )
-            raise RuntimeError("Gemini CLI not found in PATH")
 
         # Generate log file path using the run directory
         log_file = os.path.join(self._run_dir, 'gemini_cli.log')
@@ -255,7 +260,10 @@ class PVMapGenerator:
                 f"Gemini CLI execution failed with exit code {exit_code}")
 
     def _check_gemini_cli_available(self) -> bool:
-        """Check if Gemini CLI is available in PATH."""
+        """Check if Gemini CLI is available in PATH or a custom command is provided."""
+        # Skip check if custom command provided
+        if self._config.gemini_cli:
+            return True
         return shutil.which('gemini') is not None
 
     def _build_gemini_command(self, prompt_file: str, log_file: str) -> str:
@@ -274,8 +282,9 @@ class PVMapGenerator:
         Returns:
             Complete gemini command string
         """
+        gemini_cmd = self._config.gemini_cli or 'gemini'
         sandbox_flag = "--sandbox " if self._config.enable_sandboxing else ""
-        return f"cat '{prompt_file}' | gemini {sandbox_flag} -y 2>&1 | tee '{log_file}'"
+        return f"cat '{prompt_file}' | {gemini_cmd} {sandbox_flag} -y 2>&1 | tee '{log_file}'"
 
     def _run_subprocess(self, command: str) -> int:
         """Run a subprocess command with real-time output streaming."""
@@ -365,18 +374,19 @@ class PVMapGenerator:
 
 def prepare_config() -> Config:
     """Prepare comprehensive configuration from individual flags."""
-    data_config = DataConfig(input_data=FLAGS.input_data or [],
-                             input_metadata=FLAGS.input_metadata or [],
-                             is_sdmx_dataset=FLAGS.sdmx_dataset)
+    data_config = DataConfig(input_data=_FLAGS.input_data or [],
+                             input_metadata=_FLAGS.input_metadata or [],
+                             is_sdmx_dataset=_FLAGS.sdmx_dataset)
 
     return Config(data_config=data_config,
-                  dry_run=FLAGS.dry_run,
-                  maps_api_key=FLAGS.maps_api_key,
-                  dc_api_key=FLAGS.dc_api_key,
-                  max_iterations=FLAGS.max_iterations,
-                  skip_confirmation=FLAGS.skip_confirmation,
-                  enable_sandboxing=FLAGS.enable_sandboxing,
-                  output_path=FLAGS.output_path)
+                  dry_run=_FLAGS.dry_run,
+                  maps_api_key=_FLAGS.maps_api_key,
+                  dc_api_key=_FLAGS.dc_api_key,
+                  max_iterations=_FLAGS.max_iterations,
+                  skip_confirmation=_FLAGS.skip_confirmation,
+                  enable_sandboxing=_FLAGS.enable_sandboxing,
+                  output_path=_FLAGS.output_path,
+                  gemini_cli=_FLAGS.gemini_cli)
 
 
 def main(_):

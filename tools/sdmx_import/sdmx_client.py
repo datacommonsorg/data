@@ -54,8 +54,11 @@ class SdmxClient:
 
     def download_metadata(self, dataflow_id: str, output_path: str):
         """
-        Fetches the complete metadata for a dataflow and saves the raw
-        SDMX-ML (XML) response to a file.
+        Fetches the complete metadata for a dataflow and saves it to a file as raw SDMX-ML (XML).
+
+        Args:
+            dataflow_id: The ID of the dataflow to retrieve
+            output_path: Path where the metadata should be saved
         """
         try:
             logging.info(
