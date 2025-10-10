@@ -1,27 +1,31 @@
 {
-  "import_specifications": [
-    {
-      "import_name": "CensusSAHIE",
-      "curator_emails": [
-        "support@datacommons.org"
-      ],
-      "provenance_url": "https://www.census.gov/programs-surveys/sahie.html",
-      "provenance_description": "The Small Area Health Insurance Estimates (SAHIE) program provides the only up-to-date, state-based estimates of health insurance coverage for all counties in the United States.",
-      "scripts": [
-        "download_script.py",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=census_sahie_pv_map.csv --config_file=census_sahie_metadata.csv --output_path=output_files/census_sahie --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
-        ],
-      "import_inputs": [
+    "import_specifications": [
         {
-          "template_mcf": "output_files/census_sahie.tmcf",
-          "cleaned_csv": "output_files/census_sahie.csv"
+            "import_name": "CensusSAHIE",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.census.gov/programs-surveys/sahie.html",
+            "provenance_description": "The Small Area Health Insurance Estimates (SAHIE) program provides the only up-to-date, state-based estimates of health insurance coverage for all counties in the United States.",
+            "scripts": [
+                "download_script.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=census_sahie_pv_map.csv --config_file=census_sahie_metadata.csv --output_path=output_files/census_sahie --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/census_sahie.tmcf",
+                    "cleaned_csv": "output_files/census_sahie.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "cron_schedule": "0 0 15 12 *",
+            "resource_limits": {
+                "cpu": 16,
+                "memory": 128,
+                "disk": 100
+            }
         }
-      ],
-      "source_files": [
-        "input_files/*.csv"
-        ],
-      "cron_schedule": "0 0 15 12 *",
-      "resource_limits": {"cpu": 16, "memory": 128, "disk": 100}
-    }
-  ]
+    ]
 }

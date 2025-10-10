@@ -1,0 +1,6 @@
+parameter,value
+header_rows,1
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,observationPeriod,measurementMethod,#input"
+generate_schema_mcf,TRUE
+llm_generate_statvar_name,1
+url,

@@ -1,0 +1,8 @@
+Node: E:ncses_demographics_seh_import_output->E0
+observationAbout: C:ncses_demographics_seh_import_output->observationAbout
+observationDate: C:ncses_demographics_seh_import_output->observationDate
+value: C:ncses_demographics_seh_import_output->value
+variableMeasured: C:ncses_demographics_seh_import_output->variableMeasured
+unit: C:ncses_demographics_seh_import_output->unit
+scalingFactor: C:ncses_demographics_seh_import_output->scalingFactor
+typeOf: dcs:StatVarObservation

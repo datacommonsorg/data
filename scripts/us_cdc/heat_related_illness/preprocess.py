@@ -23,7 +23,9 @@ from absl import app, logging, flags
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '..', '..', '..', 'util'))
+sys.path.append(_SCRIPT_PATH)
+_DATA_DIR = _SCRIPT_PATH.split('/data/')[0]
+sys.path.append(os.path.join(_DATA_DIR, '/data/util'))
 
 from statvar_dcid_generator import get_statvar_dcid
 from name_to_alpha2 import USSTATE_MAP_SPACE

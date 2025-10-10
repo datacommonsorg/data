@@ -13,31 +13,44 @@
 # limitations under the License.
 """
 Integration test for import executor image rollout.
-Runs a test import as a Cloud Run job and verifies output from GCS.
+Runs a test import as a Cloud Batch job and verifies output from GCS.
 """
 import logging
 import os
+import time
 
-from app.executor import cloud_run
+from app.executor import cloud_batch
 from app.executor import file_io
 from test import utils
 
 _PROJECT_ID = 'datcom-ci'
-_JOB_ID = 'dc-import-prober'
+_JOB_ID_PREFIX = 'dc-import-test'
 _LOCATION = 'us-central1'
 _GCS_BUCKET = 'datcom-ci-test'
 _IMPORT_NAME = 'scripts/us_fed/treasury_constant_maturity_rates:USFed_ConstantMaturityRates_Test'
+_IMAGE_URI = 'gcr.io/datcom-ci/dc-import-executor:latest'
+_SPANNER_INSTANCE = 'datcom-spanner-test'
+_SPANNER_DB = 'dc-test-db'
 
 
 def run_test():
     logging.basicConfig(level=logging.INFO)
-    # Execute the cloud run job.
-    logging.info('Running cloud run job: %s', _JOB_ID)
-    job = cloud_run.execute_cloud_run_job(_PROJECT_ID, _LOCATION, _JOB_ID)
+    # Execute the cloud batch job.
+    job_name = f"{_JOB_ID_PREFIX}-{int(time.time())}"
+    logging.info('Running cloud batch job: %s', job_name)
+    job = cloud_batch.execute_cloud_batch_job(
+        project_id=_PROJECT_ID,
+        location=_LOCATION,
+        job_name=job_name,
+        import_name=_IMPORT_NAME,
+        gcs_bucket=_GCS_BUCKET,
+        spanner_instance=_SPANNER_INSTANCE,
+        spanner_db=_SPANNER_DB,
+        image_uri=_IMAGE_URI)
+
     if not job:
-        logging.error('Failed to execute cloud run job: %s', _JOB_ID)
-        raise (AssertionError(f'Failed to execute cloud run job {_JOB_ID}'))
-    logging.info('Completed run: %s', _JOB_ID)
+        raise AssertionError(f'Cloud batch job {job_name} failed.')
+    logging.info('Completed job: %s', job_name)
 
     # Download output data from GCS.
     gcs_path = 'gs://' + _GCS_BUCKET + '/' + _IMPORT_NAME.replace(':',

@@ -27,9 +27,12 @@
 # Example:
 # ./run_import.sh ../../scripts/us_fed/treasury_constant_maturity_rates/manifest.json
 #
-GCP_PROJECT="datcom-ci"
+GCP_PROJECT=${GCP_PROJECT:-"datcom-ci"}
 REGION="us-central1"
-GCS_BUCKET="datcom-import-test"
+GCS_BUCKET=${GCS_BUCKET:-"datcom-import-test"}
+GCS_MOUNT_PATH="/tmp/gcs"
+SPANNER_INSTANCE=${SPANNER_INSTANCE:-"datcom-spanner-test"}
+SPANNER_DB=${SPANNER_DB:-"dc-test-db"}
 SCRIPT_DIR=$(realpath $(dirname $0))
 DATA_REPO=$(realpath $(dirname $0)/../../)
 DEFAULT_CPU=8
@@ -38,11 +41,12 @@ DEFAULT_DISK=100
 DEFAULT_TIMEOUT=30m
 RUN_MODE="executor"
 DOCKER_IMAGE="dc-import-executor"
-MACHINE_TYPE="n2-standard-8"
+MACHINE_TYPE=${MACHINE_TYPE:-"n2-standard-8"}
 CONFIG="$SCRIPT_DIR/config_override_test.json"
 CONFIG_OVERRIDE=""
 TMP_DIR=${TMP_DIR:-"/tmp"}
 CLOUD_JOB_WAIT="--wait"
+NOTES_FILE=${NOTES_FILE:-"notes.txt"}
 USAGE="$(basename $0) <import-name> [Options]
 Script to run an import through docker in cloud run or locally.
 Options:
@@ -67,6 +71,8 @@ Options:
   -cfg <config>=<value> Config values for jobs used as overrides.
                See the following for supported config options:
                https://github.com/datacommonsorg/data/blob/master/import-automation/executor/app/configs.py#L32
+  -l <version> Update import's latest_version.txt to given version.
+  -note '<msg>'  Add a message when updating latest version, recorded in GCS $NOTES_FILE
   -h           Show this help message.
 
 
@@ -151,6 +157,8 @@ function parse_options {
       -w) CLOUD_JOB_WAIT="--wait";;
       -nw) CLOUD_JOB_WAIT="";;
       -c*) shift; CONFIG_OVERRIDE="$CONFIG_OVERRIDE, $1";;
+      -l) shift; IMPORT_VERSION="$1";;
+      -no*) shift; NOTE="$1";;
       -h) echo "$USAGE" >&2; exit 1;;
       -x) set -x;;
       *) MANIFEST="$1";;
@@ -248,23 +256,49 @@ function build_docker {
 # Get the latest import output from GCS
 function get_latest_gcs_import_output {
   echo_log "Looking for import files on GCS at $GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME..."
-  latest_version=$(gsutil cat gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/latest_version.txt)
-  if [[ -n "$latest_version" ]]; then
-    echo_log "latest_version.txt: $latest_version"
-    run_cmd gsutil ls -lR gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$latest_version
-    echo_log "View latest import files at: https://pantheon.corp.google.com/storage/browser/$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$latest_version"
+  LATEST_VERSION=$(gsutil cat gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/latest_version.txt)
+  if [[ -n "$LATEST_VERSION" ]]; then
+    echo_log "latest_version.txt: $LATEST_VERSION"
+    run_cmd gsutil ls -lR gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$LATEST_VERSION
+    echo_log "View latest import files at: https://pantheon.corp.google.com/storage/browser/$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$LATEST_VERSION"
   else
     echo_log "No files on GCS at $GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME"
   fi
 }
 
+# Add import version notes on GCS
+function add_import_version_notes {
+  local version="$1"; shift;
+  local notes="$1"; shift
+  local import_name="$1"; shift
+  local import_dir="$1"; shift
+
+  import_name=${import_name:-"$IMPORT_NAME"}
+  import_dir=${import_dir:-"$IMPORT_DIR"}
+
+  # Check if the version exists
+  gcs_ver_dir="gs://$GCS_BUCKET/$import_dir/$import_name/$version"
+  echo_log "Looking for import version: $gcs_ver_dir"
+  dir=$(gsutil ls "$gcs_ver_dir")
+  [[ -z "$dir" ]] && echo_fatal "Unable to find latest version dir $gcs_ver_dir"
+
+  # fetch any existing notes
+  tmp_note_file="$TMP_DIR/import-note-$import_name.txt"
+  gsutil cat "$gcs_ver_dir/$NOTES_FILE" > $tmp_note_file 2>/dev/null
+
+  # Update notes on GCS
+  new_notes="[$(date +%Y-%m-%d:%H:%M:%S)]: Update by $USER, Note: $notes"
+  echo_log "Adding note to $gcs_ver_dir/$NOTES_FILE: $new_notes"
+  echo "$new_notes" >> $tmp_note_file
+
+  run_cmd gsutil cp $tmp_note_file $gcs_ver_dir/$NOTES_FILE
+}
+
 # Get the config overrides for import executor
 function get_import_config {
-  local options="$1"; shift
-  local config_file="$1"; shift
-
   # Create an import config file based on default configs.
   # Drop any references to local files for cloud jobs
+  options="gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET spanner_project_id:$GCP_PROJECT spanner_instance_id:$SPANNER_INSTANCE spanner_database_id:$SPANNER_DB"
   config_file=${config_file:-"$TMP_DIR/config-overrides-$IMPORT_NAME.json"}
   ignore_params="/tmp"
   [[ "$RUN_MODE" == "executor" ]] && ignore_params="NONE"
@@ -272,12 +306,22 @@ function get_import_config {
 
   # Get config overrides from manifest if any
   # Assumes this is the last part of the manifest.json
-  manifest_overrides=$( echo $MANIFEST | grep config_override | \
-    sed -e 's/.*config_override"[: ]*{//;s/}.*$//')
+  manifest_overrides=$(echo "$MANIFEST" | jq ".config_override" | \
+                       grep ":" | sed -e 's/ *: */:/g;s/"//g')
 
   # Add all config overrides to the config
   config_vals=$(echo "$manifest_overrides" "$CONFIG_OVERRIDE" "$options" | \
                 sed -e 's/ *: */:/;s/"//g;s/,//g')
+  if [[ -n "$IMPORT_VERSION" ]]; then
+    config_vals="$config_vals import_version_override:$IMPORT_VERSION"
+  fi
+  ver_override=$(grep -o "import_version_override:[^ ]*" <<< "$config_vals")
+  if [[ -n "$ver_override" ]]; then
+    IMPORT_VERSION=$(cut -d: -f2 <<< "$ver_override")
+    get_latest_gcs_import_output
+    # Add config to update version.
+    add_import_version_notes "$IMPORT_VERSION" "Updating latest $IMPORT_NAME from: $LATEST_VERSION to: $IMPORT_VERSION, $NOTE"
+  fi
   for c_v in $config_vals; do
     param=$(cut -d: -f1 <<< "$c_v")
     val=$(cut -d: -f2- <<< "$c_v")
@@ -287,7 +331,7 @@ function get_import_config {
     [[ -z "$is_param_valid" ]] && echo_fatal "Unknown import config: '$param':$val"
 
     # Add double quotes for value if not a bool or int
-    is_quoted_val=$(egrep -vi "true|false|^[0-9\.]" <<< $val)
+    is_quoted_val=$(egrep -vi "true|false|^[0-9\.]+$" <<< $val)
     [[ -n "$is_quoted_val" ]] && val=\'$val\'
 
     # Add the param to import config
@@ -323,11 +367,11 @@ function run_import_cloud {
     run_cmd gcloud --project=$GCP_PROJECT run jobs delete "$job_name" --region=$REGION --quiet
   fi
 
-  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
+  get_import_config
   IMPORT_CONFIG=${IMPORT_CONFIG//\\/}
   run_cmd gcloud --project=$GCP_PROJECT run jobs create $job_name \
     --add-volume name=datcom-volume,type=cloud-storage,bucket=$GCS_BUCKET \
-    --add-volume-mount volume=datcom-volume,mount-path=/mnt \
+    --add-volume-mount volume=datcom-volume,mount-path=$GCS_MOUNT_PATH \
     --region=$REGION \
     --image $DOCKER_REMOTE:latest \
     --args="^|^--import_name=$IMPORT_DIR:$IMPORT_NAME|--import_config=$IMPORT_CONFIG|--enable_cloud_logging" \
@@ -358,7 +402,7 @@ function run_import_executor {
       -O $TMP_DIR/import-tool/import-tool.jar
   fi
 
-  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
+  get_import_config
 
   run_cmd $SCRIPT_DIR/run_local_executor.sh \
     --import_name=$IMPORT_DIR:$IMPORT_NAME \
@@ -383,7 +427,7 @@ function run_import_docker {
 
   # Run the import within docker container
   export GCLOUD_CONFIG_DIR=$HOME/.config/gcloud
-  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
+  get_import_config
   IMPORT_CONFIG=${IMPORT_CONFIG//\\/}
   run_cmd docker run --mount type=bind,source=$GCLOUD_CONFIG_DIR,target=/root/.config/gcloud \
     --cpus=$CPU --memory=$(add_value_unit $MEMORY "G") $img \
@@ -406,7 +450,7 @@ function get_cloud_batch_config {
   disk_gib=${DISK:-"$(($memory_mib / 1000 * 5))"}
 
   config_file=${config_file:-"$TMP_DIR/cloud-batch-config-$IMPORT_NAME.json"}
-  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
+  get_import_config
   cat > $config_file  <<EOF
 {
   "taskGroups": [
@@ -427,6 +471,14 @@ function get_cloud_batch_config {
           "cpuMilli": "${cpu_milli}",
           "memoryMib": "${memory_mib}"
         },
+        "volumes": [
+          {
+            "gcs": {
+              "remotePath": "${GCS_BUCKET}"
+            },
+            "mountPath": "${GCS_MOUNT_PATH}"
+          }
+        ]
       },
       "taskCount": 1,
       "parallelism": 1
@@ -474,7 +526,7 @@ function run_import_batch {
   else
     echo_log "ERROR: Job submission failed for $JOB_NAME"
   fi
-  
+
   run_cmd "gcloud --project=$GCP_PROJECT batch jobs describe --location=$REGION $JOB_NAME"
   echo_log "To view the jobs status, run the command:
 gcloud --project=$GCP_PROJECT batch jobs describe --location=$REGION $JOB_NAME"

@@ -18,10 +18,12 @@ geojson
 geopy
 google-api-python-client
 google-auth
+google-cloud-batch
 google-cloud-bigquery
 google-cloud-bigquery-storage
 google-cloud-datastore
 google-cloud-run
+google-cloud-spanner
 google-cloud-storage
 google-cloud-logging
 google-cloud-scheduler
@@ -46,6 +48,7 @@ requests_cache
 retry
 s2sphere
 selenium
+sdmx1
 shapely
 urllib3
 webdriver_manager

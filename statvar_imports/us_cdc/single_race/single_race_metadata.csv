@@ -1,0 +1,15 @@
+parameter,value
+url,https://wonder.cdc.gov/controller/datarequest/D158
+description,"Mortality statistics, categorized by demographic factors and specific causes of death, location, race at state level"
+#place_type,state level
+#places_within,
+start_date,2018
+end_date,2023
+release_frequency,P1Y
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,observationPeriod,value,unit,measurementMethod"
+mapped_rows,1
+mapped_columns,11
+header_rows,1
+debug,0

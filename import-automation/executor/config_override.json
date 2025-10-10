@@ -1,7 +1,5 @@
 {
     "configs":{
-        "executor_type": "CLOUD_BATCH",
-        "user_script_args": [],
-        "user_script_env": {}
+        "gcp_project_id": "datcom-import-automation-prod"
     }
 }

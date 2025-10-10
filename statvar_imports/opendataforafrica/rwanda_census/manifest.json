@@ -21,7 +21,6 @@
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/ztaoyl.csv --pv_map=ztaoyl_pv_map.csv --config_file=ztaoyl_metadata.csv --output_path=gcs_output/output/ztaoyl",
                 "qavhudd_process.py",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/qavhudd_modified.csv --pv_map=qavhudd_pv_map.csv --config_file=qavhudd_metadata.csv --places_resolved_csv=places_resolved_csv.csv --output_path=gcs_output/output/qavhudd"
-                
             ],
             "import_inputs": [
                 {

@@ -1,39 +1,36 @@
 {
-  "import_specifications": [
-    {
-      "import_name": "USCensusPEP_AgeSexRaceHispanicOrigin",
-      "curator_emails": ["support@datacommons.org"],
-      "provenance_url": "https://www.census.gov/en.html",
-      "provenance_description": "US Census PEP by Age, Sex, Race and Hispanic Origin",
-      "scripts": [
-      "pep_asrh_download_script.py",
-      "../../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/county/* --pv_map=pep_asrh_county_pvmap.csv --config_file=pep_asrh_county_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=gcs_output/output/county/pep_asrh_county",
-      "../../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/national/* --pv_map=pep_asrh_national_pvmap.csv --config_file=pep_asrh_national_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=gcs_output/output/national/pep_asrh_national",
-      "../../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/state/* --pv_map=pep_asrh_state_pvmap.csv --config_file=pep_asrh_state_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=gcs_output/output/state/pep_asrh_state"
-      ],
-      "import_inputs": [
+    "import_specifications": [
         {
-          "template_mcf": "gcs_output/output/county/pep_asrh_county.tmcf",
-          "cleaned_csv": "gcs_output/output/county/pep_asrh_county.csv"
-        },
-        {
-          "template_mcf": "gcs_output/output/national/pep_asrh_national.tmcf",
-          "cleaned_csv": "gcs_output/output/national/pep_asrh_national.csv"
-        },
-        {
-          "template_mcf": "gcs_output/output/state/pep_asrh_state.tmcf",
-          "cleaned_csv": "gcs_output/output/state/pep_asrh_state.csv"
-	}
-      ],
-      "source_files": [
-          "gcs_output/input_files/*/*"
-      ],
-      "cron_schedule": "0 05 * * 1"
-    }
-  ],
-      "config_override": {
-        "invoke_import_tool": false,
-        "invoke_differ_tool": false,
-        "invoke_import_validation": false
-    }
+            "import_name": "USCensusPEP_AgeSexRaceHispanicOrigin",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.census.gov/en.html",
+            "provenance_description": "US Census PEP by Age, Sex, Race and Hispanic Origin",
+            "scripts": [
+                "pep_asrh_download_script.py",
+                "../../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/county/* --pv_map=pep_asrh_county_pvmap.csv --config_file=pep_asrh_county_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=gcs_output/output/county/pep_asrh_county",
+                "../../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/national/* --pv_map=pep_asrh_national_pvmap.csv --config_file=pep_asrh_national_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=gcs_output/output/national/pep_asrh_national",
+                "../../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/state/* --pv_map=pep_asrh_state_pvmap.csv --config_file=pep_asrh_state_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=gcs_output/output/state/pep_asrh_state"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "gcs_output/output/county/pep_asrh_county.tmcf",
+                    "cleaned_csv": "gcs_output/output/county/pep_asrh_county.csv"
+                },
+                {
+                    "template_mcf": "gcs_output/output/national/pep_asrh_national.tmcf",
+                    "cleaned_csv": "gcs_output/output/national/pep_asrh_national.csv"
+                },
+                {
+                    "template_mcf": "gcs_output/output/state/pep_asrh_state.tmcf",
+                    "cleaned_csv": "gcs_output/output/state/pep_asrh_state.csv"
+                }
+            ],
+            "source_files": [
+                "gcs_output/input_files/*/*"
+            ],
+            "cron_schedule": "0 05 * * 1"
+        }
+    ]
 }

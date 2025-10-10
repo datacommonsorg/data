@@ -20,7 +20,6 @@ import sys
 
 from absl import app
 from absl import logging
-from property_value_mapper import PropertyValueMapper
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -28,6 +27,8 @@ sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
+
+from property_value_mapper import PropertyValueMapper
 
 
 class PropertyValueMapperTest(unittest.TestCase):

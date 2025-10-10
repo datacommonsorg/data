@@ -41,7 +41,7 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_string('import_name', '', 'Absoluate import name.')
 flags.DEFINE_string('import_config', '', 'Import executor configuration.')
 flags.DEFINE_boolean(
-    'enable_cloud_logging', False,
+    'enable_cloud_logging', True,
     'Enable Google Cloud Logging for proper severity levels in GCP.')
 
 # log_type for capturing status of auto import cloud run jobs.

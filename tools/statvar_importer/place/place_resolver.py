@@ -171,6 +171,7 @@ class PlaceResolver:
         self._maps_api_key = maps_api_key
         self._config = ConfigMap(config_dict)
         self._counters = Counters(counters_dict)
+        self._log_every_n = self._config.get('log_every_n', 10)
         if not self._maps_api_key:
             self._maps_api_key = self._config.get('maps_api_key', '')
         self._place_name_matcher = PlaceNameMatcher(
@@ -212,7 +213,8 @@ class PlaceResolver:
         latitude: approximate latitude for the place
         longitude: approximate longitude for the place
     """
-        logging.debug(f'Resolving places: {places}...')
+        logging.log_every_n(logging.DEBUG, f'Resolving places: {places}...',
+                            self._log_every_n)
         results = {}
         unresolved_places = {}
         results = self.resolve_name_dc_api(places)
@@ -224,7 +226,13 @@ class PlaceResolver:
         country_key = self._config.get('place_country_column', 'country')
         for key, place in unresolved_places.items():
             place_name = self._get_lookup_name(key, place)
-            maps_result = self._get_cache_value(place_name, 'placeId')
+            # Use composite cache key for consistent lookup/storage
+            place_cache_key = self._get_cache_key([
+                place_name,
+                place.get(country_key, None),
+                place.get('administrative_area', None)
+            ])
+            maps_result = self._get_cache_value(place_cache_key, 'placeId')
             if not maps_result:
                 maps_result = self.get_maps_placeid(
                     name=place_name,
@@ -251,7 +259,9 @@ class PlaceResolver:
                     else:
                         # Add place to list of ids to be looked up.
                         places_ids[place_id] = key
-        logging.debug(f'Resolved place dcids from cache: {results}')
+        logging.log_every_n(logging.DEBUG,
+                            f'Resolved place dcids from cache: {results}',
+                            self._log_every_n)
 
         # Lookup dcid for each placeid using the resolve_placeid API
         lookup_placeids = list(places_ids.keys())
@@ -263,7 +273,9 @@ class PlaceResolver:
                 args={},
                 config=self._config.get_configs(),
             )
-            logging.debug(f'Got resolve_placeid response: {recon_resp}')
+            logging.log_every_n(logging.DEBUG,
+                                f'Got resolve_placeid response: {recon_resp}',
+                                self._log_every_n)
             self._counters.add_counter('dc-api-resolve-placeid-lookups',
                                        len(lookup_placeids))
             self._counters.add_counter('dc-api-resolve-placeid-calls', 1)
@@ -283,7 +295,9 @@ class PlaceResolver:
                                 'placeId': place_id,
                                 'dcid': dcid
                             })
-        logging.debug(f'Resolved placeid to dcids: {results}')
+        logging.log_every_n(logging.DEBUG,
+                            f'Resolved placeid to dcids: {results}',
+                            self._log_every_n)
 
         # Lookup wiki ids for any remaining unresolved places
         wiki_results = self.resolve_name_wiki_search(places)
@@ -292,32 +306,43 @@ class PlaceResolver:
         # Resolve any remaining unresolved places using the place name matcher.
         unresolved_places = {}
         self._get_unresolved_places(places, unresolved_places, results)
-        logging.debug(
-            f'Resolving names: {places}, {unresolved_places} into {results}')
+        logging.log_every_n(
+            logging.DEBUG,
+            f'Resolving names: {places}, {unresolved_places} into {results}',
+            self._log_every_n)
         if unresolved_places and self._place_name_matcher:
-            logging.debug(
-                f'Looking up unresolved places in name matcher: {unresolved_places}'
-            )
+            logging.log_every_n(
+                logging.DEBUG,
+                f'Looking up unresolved places in name matcher: {unresolved_places}',
+                self._log_every_n)
             self._counters.add_counter('dc-api-unresolved-places',
                                        len(unresolved_places))
             name_results = self.lookup_names(unresolved_places)
             results.update(name_results)
 
-        logging.debug(f'Resolved names: {results}')
+        logging.log_every_n(logging.DEBUG, f'Resolved names: {results}',
+                            self._log_every_n)
         filtered_results = self.filter_by_pvs(results, place_types,
                                               places_within, filter_pvs)
-        logging.level_debug() and logging.debug(
-            f'Filtered results: {filtered_results}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Filtered results: {filtered_results}',
+            self._log_every_n)
 
         return filtered_results
 
     def resolve_name_dc_api(self, places: dict) -> dict:
         """Returns dictionary with dcids for each place resolved using the DC API."""
         if not self._config.get('dc_api_key', ''):
-            logging.debug(f'Skipping DC API resolve as dc_api_key not set.')
+            logging.log_every_n(
+                logging.DEBUG,
+                f'Skipping DC API resolve as dc_api_key not set.',
+                self._log_every_n)
             return {}
 
-        logging.debug(f'Resolving places using DC API resolve: {places}...')
+        logging.log_every_n(
+            logging.DEBUG,
+            f'Resolving places using DC API resolve: {places}...',
+            self._log_every_n)
         results = {}
         unresolved_places = {}
         self._get_unresolved_places(places, unresolved_places, results)
@@ -347,7 +372,10 @@ class PlaceResolver:
                 self._set_cache_value(place_name, result)
                 results[key] = places[key]
                 results[key].update(result)
-        logging.debug(f'Resolved places using DC API resolve: {results}...')
+        logging.log_every_n(
+            logging.DEBUG,
+            f'Resolved places using DC API resolve: {results}...',
+            self._log_every_n)
         return results
 
     def resolve_name_dc_api_batch(self, place_names: list) -> dict:
@@ -381,7 +409,9 @@ class PlaceResolver:
                                      headers=headers,
                                      params=params,
                                      output='json')
-            logging.debug(f'Got resolve name response: {batch_resp}')
+            logging.log_every_n(logging.DEBUG,
+                                f'Got resolve name response: {batch_resp}',
+                                self._log_every_n)
             # Extract dcids from the resolve response.
             if not batch_resp:
                 self._counters.add_counter('dc-api-resolve-name-call-errors', 1)
@@ -394,7 +424,8 @@ class PlaceResolver:
                                                    1)
             # Move to the next batch of places
             index += dc_api_batch_size
-        logging.debug(f'Resolved names: {resolve_resp}')
+        logging.log_every_n(logging.DEBUG, f'Resolved names: {resolve_resp}',
+                            self._log_every_n)
         return resolve_resp
 
     def resolve_latlng(self, places: dict) -> dict:
@@ -437,14 +468,17 @@ class PlaceResolver:
                     })
                     coords_to_key[place_key] = key
             else:
-                logging.debug(f'Skipping empty lat/lng in {key}:{place}')
+                logging.log_every_n(logging.DEBUG,
+                                    f'Skipping empty lat/lng in {key}:{place}',
+                                    self._log_every_n)
 
         # Resolve any remaining lat/lng places.
         resolved_place_ids = {}
         if resolve_places:
-            logging.debug(
-                f'Resolving {len(resolve_places)} lat/long places {resolve_places}'
-            )
+            logging.log_every_n(
+                logging.DEBUG,
+                f'Resolving {len(resolve_places)} lat/long places {resolve_places}',
+                self._log_every_n)
             self._counters.add_counter(f'dc-api-resolve-latlng-places',
                                        len(resolve_places))
             self._counters.add_counter(f'dc-api-resolve-latlng-calls', 1)
@@ -465,7 +499,9 @@ class PlaceResolver:
                 self._set_cache_value('', resolved_place)
                 if dcids and input_key in results:
                     results[input_key]['placeDcids'] = dcids
-        logging.debug(f'Returning resolved latlngs {results}')
+        logging.log_every_n(logging.DEBUG,
+                            f'Returning resolved latlngs {results}',
+                            self._log_every_n)
         return results
 
     def lookup_names(
@@ -512,16 +548,18 @@ class PlaceResolver:
             property_filters['containedInPlace'] = places_within
 
         # Lookup unresolved places
-        logging.level_debug() and logging.debug(
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG,
             f'Looking up {len(unresolved_places)} places with name-matcher:'
-            f'{unresolved_places} {property_filters}')
+            f'{unresolved_places} {property_filters}', self._log_every_n)
         for key, place in unresolved_places.items():
             place_name = self._get_lookup_name(key, place)
             lookup_results = self._place_name_matcher.lookup(
                 place_name, num_results, property_filters)
-            logging.level_debug() and logging.debug(
+            logging.level_debug() and logging.log_every_n(
+                logging.DEBUG,
                 f'Got name lookup results: {place_name}, {property_filters}:'
-                f' {lookup_results}')
+                f' {lookup_results}', self._log_every_n)
 
             # Add resolved dcids with names matched.
             suffix = ''
@@ -560,7 +598,9 @@ class PlaceResolver:
       dictionary with attributes such as placeId, latitude, and longitude.
     """
         if not name:
-            logging.debug(f'Unable to resolve maps place with empty name')
+            logging.log_every_n(
+                logging.DEBUG, f'Unable to resolve maps place with empty name',
+                self._log_every_n)
             return {}
 
         if self._config.get('maps_api_text_search', True):
@@ -575,8 +615,10 @@ class PlaceResolver:
 
         # Lookup Google Maps API.
         if not self._maps_api_key:
-            logging.error(
-                f'No maps key. Please set --maps_api_key for place lookup.')
+            logging.log_every_n(
+                logging.ERROR,
+                f'No maps key. Please set --maps_api_key for place lookup.',
+                self._log_every_n)
             return {}
         params = {
             'key': self._maps_api_key,
@@ -593,7 +635,8 @@ class PlaceResolver:
         resp_json = request_url(url=_MAPS_URL, params=params, output='json')
         if resp_json:
             # Get placeid from the response.
-            logging.debug(f'Got Maps results: {resp_json}')
+            logging.log_every_n(logging.DEBUG, f'Got Maps results: {resp_json}',
+                                self._log_every_n)
             result = {}
             if 'results' in resp_json:
                 results = resp_json['results']
@@ -636,8 +679,10 @@ class PlaceResolver:
 
         # Lookup Google Maps API.
         if not self._maps_api_key:
-            logging.error(
-                f'No maps key. Please set --maps_api_key for place lookup.')
+            logging.log_every_n(
+                logging.ERROR,
+                f'No maps key. Please set --maps_api_key for place lookup.',
+                self._log_every_n)
             return {}
         query_tokens = [name]
         if admin_area:
@@ -655,7 +700,9 @@ class PlaceResolver:
                                 output='json')
         result = {}
         if resp_json:
-            logging.debug(f'Got Maps TextSearch results: {resp_json}')
+            logging.log_every_n(logging.DEBUG,
+                                f'Got Maps TextSearch results: {resp_json}',
+                                self._log_every_n)
             if 'results' in resp_json:
                 map_results = resp_json['results']
                 for map_result in map_results:
@@ -698,7 +745,10 @@ class PlaceResolver:
         else:
             unresolved_places = places
         if not unresolved_places:
-            logging.debug(f'No unresolved places for wiki props: {wiki_props}')
+            logging.log_every_n(
+                logging.DEBUG,
+                f'No unresolved places for wiki props: {wiki_props}',
+                self._log_every_n)
             return {}
 
         # Lookup wiki ids for places names
@@ -717,8 +767,10 @@ class PlaceResolver:
             return wiki_results
 
         # Resolve wiki ids to dcids in a batch
-        logging.level_debug() and logging.debug(
-            f'Resolving {len(lookup_wikis)} wikidataId:  {lookup_wikis}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG,
+            f'Resolving {len(lookup_wikis)} wikidataId:  {lookup_wikis}',
+            self._log_every_n)
         recon_resp = dc_api_batched_wrapper(
             function=dc_api_resolve_placeid,
             dcids=list(lookup_wikis.keys()),
@@ -729,8 +781,9 @@ class PlaceResolver:
                                    len(lookup_wikis))
         self._counters.add_counter('dc-api-resolve-wikidataId-results',
                                    len(recon_resp))
-        logging.level_debug() and logging.debug(
-            f'Got resolve_wikidataid response: {recon_resp}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Got resolve_wikidataid response: {recon_resp}',
+            self._log_every_n)
 
         for wiki_id, dcid in recon_resp.items():
             key = lookup_wikis.get(wiki_id)
@@ -738,8 +791,9 @@ class PlaceResolver:
             if place:
                 place['dcid'] = dcid
                 self._set_cache_value('', value=place)
-        logging.level_debug() and logging.debug(
-            f'Got wiki place properties: {wiki_results}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Got wiki place properties: {wiki_results}',
+            self._log_every_n)
         return wiki_results
 
     def filter_by_pvs(
@@ -778,9 +832,10 @@ class PlaceResolver:
                                                       set()))
             filter_value_set['containedInPlace'] = places_within
 
-        logging.debug(
+        logging.log_every_n(
+            logging.DEBUG,
             f'Filtering {places} with filter_pvs: {filter_value_set} with config'
-            f' {self._config.get_configs()}')
+            f' {self._config.get_configs()}', self._log_every_n)
         lookup_props = set(filter_value_set.keys())
         if not lookup_props:
             # No property to filter by. Return all results.
@@ -858,16 +913,19 @@ class PlaceResolver:
                         allow_place = False
                         self._counters.add_counter(
                             f'place-prop-filter-{prop}-dropped', 1, dcid)
-                        logging.debug(
+                        logging.log_every_n(
+                            logging.DEBUG,
                             f'Place {place_props} did not match {prop}:{place_values} in'
-                            f' {filter_value_set}')
+                            f' {filter_value_set}', self._log_every_n)
                         break
                     self._counters.add_counter(
                         f'place-prop-filter-{prop}-allowed', 1)
             if allow_place:
                 filtered_places[place_key] = place_props
-        logging.debug(f'Returning {len(filtered_places)} filtered places:'
-                      f' {filtered_places} that match {filter_value_set}')
+        logging.log_every_n(
+            logging.DEBUG, f'Returning {len(filtered_places)} filtered places:'
+            f' {filtered_places} that match {filter_value_set}',
+            self._log_every_n)
         return filtered_places
 
     def _get_lookup_name(self, key: str, values: dict) -> str:
@@ -989,7 +1047,8 @@ class PlaceResolver:
             value = dict(value)
             place_name = re.sub(', *', ' ', cache_key)
             value['place_name'] = place_name
-        logging.level_debug() and logging.debug(f'Adding cache entry: {value}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Adding cache entry: {value}', self._log_every_n)
         self._cache.add(value)
         self._save_cache(self._config.get('cache_save_interval', 30))
         return
@@ -1051,13 +1110,17 @@ class PlaceResolver:
         parents = set()
         if not dcid:
             return parents
-        logging.debug(f'Looking up containedInPlace for {dcid}')
+        logging.log_every_n(logging.DEBUG,
+                            f'Looking up containedInPlace for {dcid}',
+                            self._log_every_n)
         cached_parents = self._get_cache_value(
             dcid, 'containedInPlace').get('containedInPlace')
         parents.update(_get_value_set(cached_parents))
         new_parents = parents
-        logging.debug(
-            f'Got containedInPlace for {dcid} from cache: {new_parents}')
+        logging.log_every_n(
+            logging.DEBUG,
+            f'Got containedInPlace for {dcid} from cache: {new_parents}',
+            self._log_every_n)
         # Get the parents chain for each dcid.
         while new_parents:
             # For each new parent, get the cached parents.
@@ -1070,8 +1133,10 @@ class PlaceResolver:
                 for parent_dcid in cached_parents:
                     if parent_dcid and parent_dcid not in parents:
                         new_parents.add(parent_dcid)
-            logging.debug(f'Got containedInPlace for {dcid}: {new_parents} from'
-                          f' {lookup_parents}')
+            logging.log_every_n(
+                logging.DEBUG,
+                f'Got containedInPlace for {dcid}: {new_parents} from'
+                f' {lookup_parents}', self._log_every_n)
             parents.update(new_parents)
 
         # Cache the parents for a place
@@ -1083,7 +1148,10 @@ class PlaceResolver:
                     'containedInPlace': parents,
                 },
             )
-            logging.debug(f'Setting containedInPlace for {dcid}: {parents}')
+            logging.log_every_n(
+                logging.DEBUG,
+                f'Setting containedInPlace for {dcid}: {parents}',
+                self._log_every_n)
 
         return parents
 
@@ -1145,7 +1213,8 @@ def _get_value_set(values: str) -> set:
     if isinstance(values, str):
         values = values.split(',')
     else:
-        logging.debug(f'flattening into set {values}')
+        logging.log_every_n(logging.DEBUG, f'flattening into set {values}',
+                            self._log_every_n)
         values = ','.join(values).split(',')
     values_set.update(values)
     return values_set
@@ -1197,9 +1266,10 @@ def process(
         with file_util.FileIO(filename) as csvfile:
             reader = csv.DictReader(csvfile)
             columns.extend(reader.fieldnames)
-            logging.info(
+            logging.log_every_n(
+                logging.INFO,
                 f'Loading places from csv file {filename} with columns:'
-                f' {reader.fieldnames}...')
+                f' {reader.fieldnames}...', self._log_every_n)
             for row in reader:
                 num_inputs += 1
                 if num_inputs > config.get('input_rows', sys.maxsize):
@@ -1218,11 +1288,15 @@ def process(
     # Resolve all places in batch.
     resolved_places = {}
     if place_names:
-        logging.debug(f'Resolving {len(place_names)} places names...')
+        logging.log_every_n(logging.DEBUG,
+                            f'Resolving {len(place_names)} places names...',
+                            self._log_every_n)
         resolved_places.update(pr.resolve_name(place_names))
         columns.extend(['dcid', 'placeId', 'lat', 'lng'])
     if place_coords:
-        logging.debug(f'Resolving {len(place_coords)} places coords...')
+        logging.log_every_n(logging.DEBUG,
+                            f'Resolving {len(place_coords)} places coords...',
+                            self._log_every_n)
         resolved_places.update(pr.resolve_latlng(place_coords))
         columns.append('placeDcids')
     counters.print_counters()
@@ -1241,9 +1315,10 @@ def process(
     for col in columns:
         if col not in output_columns:
             output_columns.append(col)
-    logging.info(
+    logging.log_every_n(
+        logging.INFO,
         f'Writing output {len(resolved_places)} rows with columns: {output_columns} into'
-        f' {output_filename}')
+        f' {output_filename}', self._log_every_n)
     with file_util.FileIO(output_filename, mode='w') as output_fp:
         writer = csv.DictWriter(
             output_fp,

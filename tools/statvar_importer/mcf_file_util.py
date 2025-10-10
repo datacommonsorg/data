@@ -88,13 +88,8 @@ _DEFAULT_NODE_PVS = OrderedDict({
 })
 
 _STATVAR_DCID_IGNORE_PROPS = {
-    'name',
-    'description',
-    'descriptionUrl',
-    'alternateName',
-    'nameWithLanguage',
-    'constraintProperties',
-    'memberOf',
+    'name', 'description', 'descriptionUrl', 'alternateName',
+    'nameWithLanguage', 'constraintProperties', 'memberOf', 'provenance'
 }
 
 

@@ -1,0 +1,21 @@
+Node: dcid:schoolGradeLevel
+typeOf: dcs:Property
+name: "schoolGradeLevel"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:SchoolGradeLevelEnum,dcid:SchoolLevelEnum
+
+Node: dcid:SpecializedSecondarySchool
+typeOf: dcid:ElementarySchool
+name: "Specialized Secondary School"
+isProvisional: dcs:True
+
+Node: dcid:BachelorsDegree__Diploma
+typeOf: dcid:EducationalAttainmentEnum
+name: "Bachelors Degree__ Diploma"
+isProvisional: dcs:True
+
+Node: dcid:MastersDegree__DoctorateDegree
+typeOf: dcid:EducationalAttainmentEnum
+name: "Masters Degree__ Doctorate Degree"
+isProvisional: dcs:True
+
