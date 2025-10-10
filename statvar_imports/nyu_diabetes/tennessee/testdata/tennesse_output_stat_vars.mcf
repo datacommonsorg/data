@@ -1,0 +1,17 @@
+Node: dcid:AgeAdjusted_Count_MortalityEvent_DiabetesMellitus_AsAFractionOf_AgeAdjusted_Count_Person_DiabetesMellitus
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+measurementQualifier: dcid:AgeAdjusted
+statType: dcid:measuredValue
+measurementDenominator: dcid:AgeAdjusted_Count_Person_DiabetesMellitus
+causeOfDeath: dcid:DiabetesMellitus
+
+Node: dcid:Count_MortalityEvent_DiabetesMellitus_AsAFractionOf_Count_Person_DiabetesMellitus
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_DiabetesMellitus
+causeOfDeath: dcid:DiabetesMellitus
+

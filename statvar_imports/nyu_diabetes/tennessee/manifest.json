@@ -4,27 +4,17 @@
       "import_name": "NYU_Tennessee_Diabetes",
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www.tn.gov/health/health-program-areas/statistics/health-data/death-statistics.html",
-      "provenance_description": "This import utilizes official mortality data from the Tennessee Department of Health, detailing county-level death statistics categorized by race, and separately, race by sex",
+      "provenance_description": "This import utilizes official diabetes mortality data from the Tennessee Department of Health, detailing county-level death statistics.",
       "scripts": ["download.py",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/race_female/*.xlsx --pv_map=race_and_female_pvmap.csv --config_file=metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=place_resolver.csv --output_path=output_files/race_female_output",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/race_male/*.xlsx --pv_map=race_and_male_pvmap.csv --config_file=metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=place_resolver.csv --output_path=output_files/race_male_output",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/race/*.xlsx --pv_map=race_pvmap.csv --config_file=metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=place_resolver.csv --output_path=output_files/race_output"
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.xlsx --pv_map=pvmap.csv --config_file=metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=place_resolver.csv --output_path=output_files/tennessee_output"
       ] ,
       "source_files": [
-        "input_files/*/*.xlsx"
+        "input_files/*.xlsx"
       ],
       "import_inputs": [
         {
-          "template_mcf": "output_files/race_output.tmcf",
-          "cleaned_csv": "output_files/race_output.csv"
-        },
-        {
-          "template_mcf": "output_files/race_male_output.tmcf",
-          "cleaned_csv": "output_files/race_male_output.csv"
-        },
-        {
-          "template_mcf": "output_files/race_female_output.tmcf",
-          "cleaned_csv": "output_files/race_female_output.csv"
+          "template_mcf": "output_files/tennessee_output.tmcf",
+          "cleaned_csv": "output_files/tennessee_output.csv"
         }
       ],
       "cron_schedule": "0 05 * * 5"
