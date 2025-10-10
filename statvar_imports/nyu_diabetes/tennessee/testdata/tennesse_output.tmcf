@@ -1,0 +1,7 @@
+Node: E:tennesse_output->E0
+observationAbout: C:tennesse_output->observationAbout
+observationDate: C:tennesse_output->observationDate
+value: C:tennesse_output->value
+variableMeasured: C:tennesse_output->variableMeasured
+scalingFactor: C:tennesse_output->scalingFactor
+typeOf: dcs:StatVarObservation
