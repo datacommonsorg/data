@@ -1,0 +1,31 @@
+Node: dcid:healthOutcome
+typeOf: dcs:Property
+name: "healthOutcome"
+rangeIncludes: dcid:CauseOfDeathAndDisabilityEnum,dcid:HealthOutcomeEnum,dcid:ICD10_113CausesOfDeath
+
+Node: dcid:NotHighSchoolGraduateOrAlternative
+typeOf: dcid:EducationalAttainmentEnum
+name: "Not High School Graduate Or Alternative"
+isProvisional: dcs:True
+
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_Years18Onwards_EducationalAttainmentNotHighSchoolGraduateOrAlternative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Years 18 Onwards_ Educational Attainment Not High School Graduate Or Alternative"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_Years18Onwards_EducationalAttainmentHighSchoolGraduateGedOrAlternative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Years 18 Onwards_ Educational Attainment High School Graduate Ged Or Alternative"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_Years18Onwards_EducationalAttainmentCollegeGraduate
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Years 18 Onwards_ Educational Attainment College Graduate"
+isProvisional: dcs:True
+

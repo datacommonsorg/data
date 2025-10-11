@@ -1,0 +1,23 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+State,observationAbout,{Data},populationType,Person,healthOutcome,Asthma,,,,,,
+year,observationDate,{Data},,,,,,,,,,
+,,,,,,,,,,,,
+life_stage:adult,age,Years18Onwards,,,,,,,,,,
+,,,,,,,,,,,,
+Prevalence (Percent),value,{Number},statType,measuredValue,measuredProperty,percent,unit,Percent,,,,
+Prevalence (percent),value,{Number},statType,measuredValue,measuredProperty,percent,unit,Percent,,,,
+Standard Error,value,{Number},statType,stdError,measurementDenominator,"-statType,-healthOutcome",measuredProperty,count,scalingFactor,100,unit,Percent
+Sample Sizec,value,{Number},statType,sampleSize,measuredProperty,count,,,,,,
+Sample Sized,value,{Number},statType,sampleSize,measuredProperty,count,,,,,,
+Sample Size§,value,{Number},statType,sampleSize,measuredProperty,count,,,,,,
+,,,,,,,,,,,,
+HS Nongrad,educationalAttainment,NotHighSchoolGraduateOrAlternative,,,,,,,,,,
+HS Grad,educationalAttainment,HighSchoolGraduateGedOrAlternative,,,,,,,,,,
+Some Coll,#ignore,skip,,,,,,,,,,
+Coll Grad,educationalAttainment,CollegeGraduate,,,,,,,,,,
+Not HS Graduate,educationalAttainment,NotHighSchoolGraduateOrAlternative,,,,,,,,,,
+HS Graduate,educationalAttainment,HighSchoolGraduateGedOrAlternative,,,,,,,,,,
+Some College,#ignore,skip,,,,,,,,,,
+College Graduate,educationalAttainment,CollegeGraduate,,,,,,,,,,
+HS grad,educationalAttainment,HighSchoolGraduateGedOrAlternative,,,,,,,,,,
+

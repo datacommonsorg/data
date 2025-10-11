@@ -1,0 +1,8 @@
+Node: E:overall_by_state_or_territory_output->E0
+observationAbout: C:overall_by_state_or_territory_output->observationAbout
+observationDate: C:overall_by_state_or_territory_output->observationDate
+variableMeasured: C:overall_by_state_or_territory_output->variableMeasured
+value: C:overall_by_state_or_territory_output->value
+unit: C:overall_by_state_or_territory_output->unit
+scalingFactor: C:overall_by_state_or_territory_output->scalingFactor
+typeOf: dcs:StatVarObservation
