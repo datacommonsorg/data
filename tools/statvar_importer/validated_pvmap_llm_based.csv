@@ -1,0 +1,12 @@
+key,property,value
+County,#Column,1,DataType,PLACE,observationAbout,{Data},locationType,County
+Place Fips Code,#Column,2,DataType,VALUE,value,{Number},identifier,FipsCode
+Year,#Column,3,DataType,DATE,observationDate,{Data},timeProperty,Year
+Person Age,#Column,4,DataType,VALUE,value,{Number},age,PersonAge
+Total Persons,#Column,6,DataType,VALUE,value,{Number},populationType,Person,measuredProperty,Count
+Fraction of Population,#Column,7,DataType,VALUE,value,{Number},measuredProperty,fraction,unit,Percent
+Person Race,#Column,5,race,PersonRace
+WH,#Column,5,race,White
+A-PI,#Column,5,race,AsianPacificIslander
+Sample input for StatVarProcessor with headers lines that are ignored.,#Row,1
+The file has columns that map to schema and data values.,#Row,2
