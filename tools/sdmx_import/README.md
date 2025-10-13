@@ -72,3 +72,7 @@ For detailed flag information:
 ```bash
 python sdmx_cli.py <command> --help
 ```
+
+## Programmatic Usage
+
+The SDMX library can also be used programmatically through the `SdmxClient` class available in `sdmx_client.py`. For complete examples, see the `samples/` directory.
