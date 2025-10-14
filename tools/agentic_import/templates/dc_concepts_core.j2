@@ -1,0 +1,133 @@
+## Data Commons Observation Representation
+
+In Data Commons, a statistical observation is represented through a two-part architecture. Consider the example: "USA had a population of 331 million in 2020." This single observation is split into:
+
+1. **StatisticalVariable (StatVar)** - Defines the measurement concept: "Count_Person" (what we're measuring: total population count)
+2. **StatVarObservation** - Captures the actual data point: USA (where), 2020 (when), 331 million (value)
+
+This separation enables reusability: the StatVar "Count_Person" is defined once and referenced by thousands of StatVarObservations across different places (USA, California, Texas...) and times (2020, 2021, 2022...). The StatVar defines WHAT is measured (including schema and constraints), while each StatVarObservation specifies WHERE, WHEN, and the actual VALUE.
+
+CSV data is imported into Data Commons through StatisticalVariables and StatVarObservations:
+
+**StatisticalVariable (StatVar)** - Defines WHAT is measured (metric schema + constraints as integral components):
+- **Mandatory properties**:
+  - `populationType` - what's being counted (Person, Household, etc.)
+  - `measuredProperty` - how it's measured (count, median, rate, etc.)
+  - `statType` - statistical method (measuredValue, medianValue, etc.)
+- **Constraint properties built into StatVar**: gender, age, race, educationalAttainment, employment, comparisonPeriod, etc.
+  - **Key concept**: Constraints are NOT separate entities - they become part of the StatVar definition itself
+  - `comparisonPeriod` - **CRITICAL for growth rates**: Specifies the comparison baseline period
+    - `MonthOnChange`: month-over-month growth (period-on-period for monthly data)
+    - `QuarterOnChange`: quarter-over-quarter growth (period-on-period for quarterly data)
+    - `YearOnChange`: year-over-year growth
+    - **Key point**: A column with "Growth rate, period on period" (SDMX G1) defines BOTH `measuredProperty: GrowthRate` AND `comparisonPeriod: [MonthOnChange|QuarterOnChange]` based on the observation frequency
+- **Optional properties**:
+  - `measurementQualifier` - data adjustment method (SeasonallyAdjusted, Nominal, RealValue)
+- **Naming convention**: Base name + constraint suffixes (constraints embedded in StatVar name)
+  - Simple: `Count_Person` (total population count - no constraints)
+  - Complex: `Count_Person_Female_Hispanic_Age25To64Years` (constraints Female+Hispanic+Age25-64 are part of this single StatVar)
+    - This is ONE StatVar that counts people who are: Female (gender constraint) + Hispanic (race constraint) + Age 25-64 (age constraint)
+
+**StatVar MCF Format (showing constraints as integral properties)**:
+```mcf
+Node: dcid:Count_Person_Female_Hispanic
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female  # This constraint is part of the StatVar definition
+race: dcs:Hispanic  # This constraint is also part of the StatVar definition
+statType: dcs:measuredValue
+# The above defines ONE StatVar with built-in Female+Hispanic constraints
+```
+
+**Growth Rate StatVar Example (showing comparisonPeriod as constraint)**:
+```mcf
+Node: dcid:GrowthRate_ConsumerPriceIndex_EconomicActivity_QuarterOnChange
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+measuredProperty: dcs:ConsumerPriceIndex
+statType: dcs:growthRate
+comparisonPeriod: dcs:QuarterOnChange  # This constraint is part of the StatVar definition
+# This StatVar measures quarter-over-quarter growth rate of CPI
+```
+
+**StatVarObservation** - The actual data points (WHERE, WHEN, VALUE):
+- **Mandatory properties**:
+  - `observationAbout` - place DCID (country/USA, geoId/06, etc.)
+  - `observationDate` - time period (2020, 2020-01, etc.)
+  - `variableMeasured` - StatVar DCID (Count_Person, etc.)
+  - `value` - measured value
+- **Optional properties** (also called **Observation Attributes**):
+  - Linked to each individual observation value and can vary between observations of the same StatVar
+  - Not core to the statistical definition itself, but provide helpful metadata about how the observation was captured
+  - Example: two observations for the same StatVar might have different `unit` (USD vs EUR) or `measurementMethod` (CensusACS5yrSurvey vs EstimateMethod)
+  - **Important**: Anything fundamental to the statistics should be part of the StatVar definition as either core properties or constraint properties
+  - Common observation attributes:
+    - `observationPeriod` (P1Y=yearly, P1M=monthly)
+    - `unit` (Percent, USD)
+    - `scalingFactor` (100 for percentages 0-100, 1000000 for millions)
+    - `measurementMethod` (CensusACS5yrSurvey, EstimateMethod)
+
+**StatVarObservation MCF Format**:
+```mcf
+Node: dcid:USA_2020_Count_Person
+typeOf: dcs:StatVarObservation
+observationAbout: dcid:country/USA
+observationDate: "2020"
+variableMeasured: dcid:Count_Person
+value: 331449281
+observationPeriod: "P1Y"
+measurementMethod: dcs:CensusACS5yrSurvey
+```
+
+**CSV → Data Commons Transformation**:
+```csv
+Location, Year, Population, MedianIncome
+USA, 2020, 331449281, 65000
+California, 2020, 39538223, 75000
+```
+→ Creates StatVars: `Count_Person`, `Median_Income_Household`
+→ Creates observations with proper DCIDs:
+  - observationAbout=country/USA, observationDate=2020, variableMeasured=Count_Person, value=331449281
+  - observationAbout=geoId/06, observationDate=2020, variableMeasured=Count_Person, value=39538223
+
+**Complex Example with Demographic Breakdowns**:
+```csv
+Location, Year, AgeGroup, Gender, Population, MedianIncome
+USA, 2020, 25-64, Female, 85234567, 62000
+USA, 2020, 25-64, Male, 82456789, 68000
+California, 2020, 65+, Female, 3254678, 45000
+```
+→ Creates StatVars with constraints built-in:
+  - `Count_Person_Female_Age25To64Years` - ONE StatVar with Female+Age25-64 constraints embedded
+  - `Count_Person_Male_Age25To64Years` - ONE StatVar with Male+Age25-64 constraints embedded
+  - `Count_Person_Female_Age65OrMoreYears` - ONE StatVar with Female+Age65+ constraints embedded
+  - `Median_Income_Household` - StatVar with no demographic constraints
+→ **Key point**: Constraint columns (AgeGroup, Gender) become integral properties of the StatVar itself, not separate entities
+→ Creates observations referencing these constraint-embedded StatVars:
+  - observationAbout=country/USA, observationDate=2020, variableMeasured=Count_Person_Female_Age25To64Years, value=85234567
+
+**Key Insight**:
+- **CSV metric columns** (Population, MedianIncome) → StatVar definitions
+- **CSV constraint columns** (AgeGroup, Gender) → StatVar properties (age, gender)
+- **CSV location columns** (Location) → observationAbout (place references)
+- **CSV time columns** (Year) → observationDate
+- **Each CSV row** → Multiple StatVarObservations (one per metric column)
+- **Row transformation**: Combines place + time + constraints + each metric value with proper DCIDs
+
+## Dataset Categories for Classification
+
+Use these categories to classify your dataset's domain and help Data Commons organize data within appropriate topic areas.
+
+### Main Categories and Subcategories
+
+1. **Demographics** - Population, age, gender, race, ethnicity, citizenship, migration
+2. **Economy** - Employment, income, poverty, business, trade, prices
+3. **Health** - Disease, mortality, healthcare access, medical conditions, vaccines
+4. **Education** - Enrollment, attainment, schools, teachers, students
+5. **Housing** - Housing units, home values, rents, occupancy, housing conditions
+6. **Environment** - Air quality, water, climate, emissions, natural disasters
+7. **Energy** - Electricity, fuel, renewable energy, consumption
+8. **Agriculture** - Farms, crops, livestock, food production
+9. **Crime** - Crime incidents, law enforcement, incarceration
+10. **Transportation** - Commute, vehicles, transport modes

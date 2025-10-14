@@ -37,109 +37,7 @@ You **MUST** adhere to these rules at all times.
 
 # CORE KNOWLEDGE BASE
 
-CSV data is imported into Data Commons through StatisticalVariables and StatVarObservations:
-
-**StatisticalVariable (StatVar)** - Defines WHAT is measured (metric schema + constraints as integral components):
-- **Mandatory properties**:
-  - `populationType` - what's being counted (Person, Household, etc.)
-  - `measuredProperty` - how it's measured (count, median, rate, etc.)
-  - `statType` - statistical method (measuredValue, medianValue, etc.)
-- **Constraint properties built into StatVar**: gender, age, race, educationalAttainment, employment, etc.
-  - **Key concept**: Constraints are NOT separate entities - they become part of the StatVar definition itself
-- **Optional properties**:
-  - `measurementQualifier` - data adjustment method (SeasonallyAdjusted, Nominal, RealValue)
-- **Naming convention**: Base name + constraint suffixes (constraints embedded in StatVar name)
-  - Simple: `Count_Person` (total population count - no constraints)
-  - Complex: `Count_Person_Female_Hispanic_Age25To64Years` (constraints Female+Hispanic+Age25-64 are part of this single StatVar)
-    - This is ONE StatVar that counts people who are: Female (gender constraint) + Hispanic (race constraint) + Age 25-64 (age constraint)
-
-**StatVar MCF Format (showing constraints as integral properties)**:
-```mcf
-Node: dcid:Count_Person_Female_Hispanic
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:count
-gender: dcs:Female  # This constraint is part of the StatVar definition
-race: dcs:Hispanic  # This constraint is also part of the StatVar definition
-statType: dcs:measuredValue
-# The above defines ONE StatVar with built-in Female+Hispanic constraints
-```
-
-**StatVarObservation** - The actual data points (WHERE, WHEN, VALUE):
-- **Mandatory properties**:
-  - `observationAbout` - place DCID (country/USA, geoId/06, etc.)
-  - `observationDate` - time period (2020, 2020-01, etc.)
-  - `variableMeasured` - StatVar DCID (Count_Person, etc.)
-  - `value` - measured value
-- **Optional properties** (also called observation attributes):
-  - `observationPeriod` (P1Y=yearly, P1M=monthly)
-  - `unit` (Percent, USD)
-  - `scalingFactor` (100 for percentages 0-100, 1000000 for millions)
-  - `measurementMethod` (CensusACS5yrSurvey, EstimateMethod)
-
-**StatVarObservation MCF Format**:
-```mcf
-Node: dcid:USA_2020_Count_Person
-typeOf: dcs:StatVarObservation
-observationAbout: dcid:country/USA
-observationDate: "2020"
-variableMeasured: dcid:Count_Person
-value: 331449281
-observationPeriod: "P1Y"
-measurementMethod: dcs:CensusACS5yrSurvey
-```
-
-**CSV → Data Commons Transformation**:
-```csv
-Location, Year, Population, MedianIncome
-USA, 2020, 331449281, 65000
-California, 2020, 39538223, 75000
-```
-→ Creates StatVars: `Count_Person`, `Median_Income_Household`
-→ Creates observations with proper DCIDs:
-  - observationAbout=country/USA, observationDate=2020, variableMeasured=Count_Person, value=331449281
-  - observationAbout=geoId/06, observationDate=2020, variableMeasured=Count_Person, value=39538223
-
-**Complex Example with Demographic Breakdowns**:
-```csv
-Location, Year, AgeGroup, Gender, Population, MedianIncome
-USA, 2020, 25-64, Female, 85234567, 62000
-USA, 2020, 25-64, Male, 82456789, 68000
-California, 2020, 65+, Female, 3254678, 45000
-```
-→ Creates StatVars with constraints built-in:
-  - `Count_Person_Female_Age25To64Years` - ONE StatVar with Female+Age25-64 constraints embedded
-  - `Count_Person_Male_Age25To64Years` - ONE StatVar with Male+Age25-64 constraints embedded
-  - `Count_Person_Female_Age65OrMoreYears` - ONE StatVar with Female+Age65+ constraints embedded
-  - `Median_Income_Household` - StatVar with no demographic constraints
-→ **Key point**: Constraint columns (AgeGroup, Gender) become integral properties of the StatVar itself, not separate entities
-→ Creates observations referencing these constraint-embedded StatVars:
-  - observationAbout=country/USA, observationDate=2020, variableMeasured=Count_Person_Female_Age25To64Years, value=85234567
-
-**Key Insight**:
-- **CSV metric columns** (Population, MedianIncome) → StatVar definitions
-- **CSV constraint columns** (AgeGroup, Gender) → StatVar properties (age, gender)
-- **CSV location columns** (Location) → observationAbout (place references)
-- **CSV time columns** (Year) → observationDate
-- **Each CSV row** → Multiple StatVarObservations (one per metric column)
-- **Row transformation**: Combines place + time + constraints + each metric value with proper DCIDs
-
-## Dataset Categories for Classification
-
-Use these categories to classify your dataset's domain. This helps Data Commons organize and discover your data within the appropriate topic areas.
-
-### Main Categories and subcategories
-
-1. **Demographics** - Population, age, gender, race, ethnicity, citizenship, migration
-2. **Economy** - Employment, income, poverty, business, trade, prices
-3. **Health** - Disease, mortality, healthcare access, medical conditions, vaccines
-4. **Education** - Enrollment, attainment, schools, teachers, students
-5. **Housing** - Housing units, home values, rents, occupancy, housing conditions
-6. **Environment** - Air quality, water, climate, emissions, natural disasters
-7. **Energy** - Electricity, fuel, renewable energy, consumption
-8. **Agriculture** - Farms, crops, livestock, food production
-9. **Crime** - Crime incidents, law enforcement, incarceration
-10. **Transportation** - Commute, vehicles, transport modes
+{% include 'dc_concepts_core.j2' %}
 
 
 ## StatVar Processor: Converting CSV Data to Data Commons Format
@@ -697,6 +595,7 @@ Place resolution is critical in Data Commons. All geographic data must be correc
 - country/USA, country/IND (for countries)
 - geoId/06 (FIPS codes for US states/counties)
 - wikidataId/Q1234 (Wikidata entries)
+- nuts/DE (European NUTS regional codes)
 - Example: California → observationAbout,geoId/06
 - **WARNING**: The StatVar processor does not validate these - incorrect prefixes will produce wrong output
 
@@ -1341,222 +1240,68 @@ Jammu And Kashmir 1999 Male 1999 Calendar Year (Jan \- Dec), 1999
 
 When working with SDMX datasets, follow these additional guidelines:
 
-### SDMX Structure Overview
-**SDMX Structure Analysis**: The input metadata will contain SDMX structure definitions including:
+{% include 'sdmx_knowledge.j2' %}
 
-- **Dimensions**: Used to categorize observations (e.g., TIME_PERIOD, REF_AREA, FREQ)
-- **Attributes**: Provide additional context about observations
-- **Measures**: The actual statistical values being observed
+### SDMX PVMap Generation Guidelines
 
-### SDMX Metadata Elements for Context Building
+#### Constraint-Based Code Selection for PV Maps
 
-#### Key Metadata Fields
-SDMX metadata provides rich semantic information through `<common:name>` and `<common:description>` elements that appear at multiple levels:
-
-**1. Dataflow Level**
-```xml
-<structure:Dataflow id="WS_CBPOL">
-  <common:name xml:lang="en">Central Bank Policy Rates</common:name>
-  <common:description xml:lang="en">Policy interest rates set by central banks</common:description>
-</structure:Dataflow>
-```
-
-**2. Codelist Level**
-```xml
-<structure:Codelist id="CL_FREQ">
-  <common:name xml:lang="en">Frequency</common:name>
-  <structure:Code id="M">
-    <common:name xml:lang="en">Monthly</common:name>
-    <common:description xml:lang="en">Monthly observations</common:description>
-  </structure:Code>
-</structure:Codelist>
-```
-
-**3. Concept Scheme Level**
-```xml
-<structure:ConceptScheme id="CS_COMMON">
-  <structure:Concept id="FREQ">
-    <common:name xml:lang="en">Frequency of observation</common:name>
-    <common:description xml:lang="en">The time interval at which data is collected</common:description>
-  </structure:Concept>
-</structure:ConceptScheme>
-```
-
-**Note**: Multiple languages may be present (xml:lang="en", xml:lang="fr", etc.). Prioritize English when available.
-
-#### How Metadata Links to Data Structure
-
-**Dimension-to-Concept Linkage**:
-- Dimensions reference concepts via `<structure:ConceptIdentity>`
-- Each dimension inherits semantic meaning from its concept's name/description
-- Codelists provide valid values with their own names/descriptions
-
-**Example**:
-```xml
-<structure:Dimension id="REF_AREA">
-  <structure:ConceptIdentity>
-    <Ref id="REF_AREA"/>  <!-- Links to concept -->
-  </structure:ConceptIdentity>
-  <structure:LocalRepresentation>
-    <structure:Enumeration>
-      <Ref id="CL_AREA"/>  <!-- Links to codelist -->
-    </structure:Enumeration>
-  </structure:LocalRepresentation>
-</structure:Dimension>
-```
-
-#### Additional Metadata Elements
-
-- **`<structure:TextFormat>`**: Specifies data type (e.g., String, Decimal)
-- **`<structure:Enumeration>`**: References codelists for valid values
-- **`<structure:ConceptIdentity>`**: Links dimensions/attributes to concepts
-
-#### Using Metadata for Semantic Mapping
-
-Combine names and descriptions to understand the semantic meaning:
-- Dataflow name → helps identify the dataset's purpose
-- Dimension concept names → understand what each dimension represents
-- Code names/descriptions → map to appropriate Data Commons properties
-- Attribute descriptions → determine if observation-level or statistical variable property
-
-### Core SDMX Mappings
-
-#### 1. Standard Dimensions
-* **REF_AREA** → `observationAbout`
-  * ISO country codes: `{Data},observationAbout,country/{Data}` -> use **country/{Data}**
-  * Specific: `USA,observationAbout,country/USA`
-  
-* **TIME_PERIOD** → `observationDate`
-  * Annual: `{Data},observationDate,{Data}` (YYYY)
-  * Quarterly: `2024-Q1,observationDate,2024-03` (use period end)
-    * PV example for this conversion   TIME_PERIOD,#Regex,"^(?P<Year>[0-9]{4})-Q(?P<Quarter>[1-4])$",#Eval,"observationDate='{Year}-' + str(int({Quarter})*3).zfill(2)"
-  * Monthly: `{Data},observationDate,{Data}` (YYYY-MM)
-
-* **FREQ** → `observationPeriod`
-  * `A,observationPeriod,P1Y` (Annual)
-  * `Q,observationPeriod,P3M` (Quarterly) 
-  * `M,observationPeriod,P1M` (Monthly)
-  * `D,observationPeriod,P1D` (Daily)
-  * `W,observationPeriod,P1W` (Weekly)
-
-* **INDICATOR/SERIES** → `measuredProperty` and StatVar construction
-  * Example: `GDP_GROWTH,measuredProperty,growthRate,populationType,EconomicActivity`
-
-#### 2. Measures
-The primary observation value in SDMX:
-
-* **OBS_VALUE**: The observation value
-  * Always map to: `OBS_VALUE,value,{Number}`
-  * Or for column headers: `<value_column>,value,{Number}`
-
-#### 3. Attributes
-**IMPORTANT: SDMX attributes should only map to observation-level properties (not StatVar properties):**
-
-* **UNIT_MEASURE**: Unit of measurement
-  * Map to `unit` property with DC-compatible units
-  * Examples:
-    * `USD,unit,USDollar`
-    * `EUR,unit,Euro`
-    * `PERCENT,unit,Percent`
-    * `INDEX,unit,Index`
-    * `PERSONS,unit,Person`
-
-* **UNIT_MULT**: Unit multiplier (scale factor)
-  * Map to `scalingFactor` or use `#Multiply`
-  * Examples:
-    * `3,scalingFactor,1000` (thousands)
-    * `6,scalingFactor,1000000` (millions)
-    * `9,scalingFactor,1000000000` (billions)
-
-* **OBS_STATUS**: Observation status flags
-  * Handle special values:
-    * `E,measurementMethod,Estimated`
-    * `P,measurementMethod,Provisional`
-    * `F,measurementMethod,Forecast`
-    * `OBS_STATUS:M,MissingValue,''` (skip cell value - creates unused intermediate property)
-    * `OBS_STATUS:NA,NotApplicable,''` (skip cell value - creates unused intermediate property)
-
-* **BASE_PER**: Base period for indices
-  * Map to `measurementMethod` with base year
-  * Example: `2015,measurementMethod,BaseYear2015`
-
-#### 4. Dataflow and Dataset Metadata
-
-* **Dataflow identifier**: Use for mapping dataflow information to properties
-
-* **Dataset attributes**: Often found in header rows
-  * Map dataset-level attributes to default PVs that apply globally
-
-### SDMX-Specific Mapping Patterns
-
-#### Hierarchical Codes
-SDMX often uses hierarchical classification codes (e.g., NACE, ISIC, CPC):
-
-```
-# Economic activities (NACE)
-A,economicActivity,Agriculture
-A01,economicActivity,CropProduction
-
-# Products (CPC)  
-01,productClassification,AgricultureProducts
-011,productClassification,Cereals
-```
-
-#### Multiple Indicators
-```
-GDP,measuredProperty,grossDomesticProduct,populationType,EconomicActivity
-INFLATION,measuredProperty,inflationRate,populationType,EconomicActivity,statType,growthRate
-UNEMPLOYMENT,measuredProperty,unemploymentRate,populationType,Person,employment,Unemployed
-```
-
-#### Standard Code Lists
-```
-# ISO 4217 Currency
-USD,unit,USDollar
-
-# ISO 3166 Country
-USA,observationAbout,country/USA
-```
-
-#### Time Series Types
-```
-YOY,statType,growthRate,comparisonPeriod,P1Y
-QOQ,statType,growthRate,comparisonPeriod,P3M
-AVG,statType,meanValue
-```
-
-### Critical Processing Rules for SDMX
-
-#### Metadata Extraction and Usage Rules
-
-1. **Parse and Extract Metadata Fields**:
-   * Extract `<common:name>` and `<common:description>` from all levels (dataflow, codelists, concepts)
-   * Use these to build semantic context for better PV mapping generation
-   * Store metadata in comments or use for generating descriptive StatVar names
-
-2. **Language Priority**:
-   * When multiple languages exist (xml:lang attributes), prioritize English ("en")
-   * If English unavailable, select any available language consistently
-   * Use `#Eval` with string manipulation if needed to handle multi-language labels
-
-3. **Constraint-Based Code Selection**:
+1. **Constraint-Based Code Selection**:
    * **CRITICAL**: Check for `<structure:Constraints>` in metadata FIRST
    * If constraints exist, map ONLY the code values specified in constraints (not entire codelist)
    * If no constraints, use full codelist but sample data to verify which codes actually appear
    * This optimization prevents creating unnecessary mappings and reduces processing time
 
-4. **Semantic Context Building**:
+2. **Language Priority for PV Generation**:
+   * When multiple languages exist (xml:lang attributes), prioritize English ("en")
+   * If English unavailable, select any available language consistently
+   * Use `#Eval` with string manipulation if needed to handle multi-language labels
+
+3. **Semantic Context Building**:
    * Combine dataflow name + dimension names + code descriptions to generate meaningful StatVar names
    * Use concept descriptions to determine appropriate Data Commons properties
+   * Store metadata in comments or use for generating descriptive StatVar names
    * Example: "Central Bank Policy Rates" + "Monthly" + "Argentina" → helps map to appropriate properties
+
+#### PV Map Syntax for SDMX Mappings
+
+**Standard Dimension PV Examples**:
+* REF_AREA: `{Data},observationAbout,country/{Data}` or `USA,observationAbout,country/USA`
+* TIME_PERIOD: `{Data},observationDate,{Data}`
+* FREQ: `A,observationPeriod,P1Y`, `Q,observationPeriod,P3M`, `M,observationPeriod,P1M`
+* OBS_VALUE: `OBS_VALUE,value,{Number}`
+
+**Time Period Conversions**:
+* Quarterly to month end: `TIME_PERIOD,#Regex,"^(?P<Year>[0-9]{4})-Q(?P<Quarter>[1-4])$",#Eval,"observationDate='{Year}-' + str(int({Quarter})*3).zfill(2)"`
+
+**Attribute PV Examples**:
+* UNIT_MEASURE: `USD,unit,USDollar`, `EUR,unit,Euro`, `PERCENT,unit,Percent`
+* UNIT_MULT: `3,scalingFactor,1000` (thousands), `6,scalingFactor,1000000` (millions)
+* OBS_STATUS: `E,measurementMethod,Estimated`, `P,measurementMethod,Provisional`
+
+**Observation Status Handling**:
+* Missing values: `OBS_STATUS:M,MissingValue,''` (skip cell value)
+* Not applicable: `OBS_STATUS:NA,NotApplicable,''` (skip cell value)
+
+**Hierarchical Codes**:
+```
+A,economicActivity,Agriculture
+A01,economicActivity,CropProduction
+```
+
+**Multiple Indicators**:
+```
+GDP,measuredProperty,grossDomesticProduct,populationType,EconomicActivity
+INFLATION,measuredProperty,inflationRate,populationType,EconomicActivity,statType,growthRate
+```
 
 #### Data Processing Rules
 
-5. **Column Selection**: Specify relevant columns in metadata configuration to optimize processing:
+1. **Column Selection**: Specify relevant columns in metadata configuration to optimize processing:
    * Add `input_columns,"REF_AREA,TIME_PERIOD,OBS_VALUE,UNIT_MEASURE"` to focus on essential columns
    * Exclude metadata or auxiliary columns that don't contribute to StatVars
 
-6. **Preserve Dimension Combinations**: Ensure each unique combination of dimensions maps to a distinct StatisticalVariable
+2. **Preserve Dimension Combinations**: Ensure each unique combination of dimensions maps to a distinct StatisticalVariable
 
 7. **Handle Missing Values**: Use `#Filter` or `#ignore` for SDMX missing value codes (M, NA, ":", "-")
 
@@ -1718,14 +1463,16 @@ Follow these steps sequentially.
   - **IMPORTANT**: Check for `<structure:Constraints>` - if present, focus ONLY on codes specified there
   - Frequency and time period specifications
   
-- **Extract Semantic Context**: Refer to **"SDMX Metadata Elements for Context Building"** section:
+- **Extract Semantic Context**: Refer to **"SDMX Core Knowledge Base"** section:
   - Extract `<common:name>` and `<common:description>` from dataflows, codelists, and concepts
   - Use these metadata fields to understand the semantic meaning of data elements
   - Build context to help generate accurate PV mappings
+  - Apply standard SDMX to Data Commons mappings as documented
   
-- **Apply SDMX Rules**: Follow **"Critical Processing Rules for SDMX"** section:
+- **Apply SDMX PV Map Rules**: Follow **"SDMX PVMap Generation Guidelines"** section:
   - Prioritize constraint-based code selection
   - Handle multi-language labels appropriately
+  - Use proper PV map syntax for time conversions and special values
   - Use metadata to generate meaningful StatVar names
 
   {%- endif %}
