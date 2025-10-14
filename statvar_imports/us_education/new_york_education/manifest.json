@@ -1,0 +1,32 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NewYork_Education",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://data.cityofnewyork.us/browse?category=Education",
+            "provenance_description": "Official public data from the NYC Department of Education, including student performance (test scores, graduation rates), school quality metrics, and student demographics across all five boroughs",
+            "scripts": [
+                "download.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/english/*.csv --pv_map=NY_common_pvmap_english.csv --config_file=common_metadata.csv --places_resolved_csv=place_resolver.csv --output_path=output/english",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/maths/*.csv --pv_map=NY_common_pvmap_math.csv --config_file=common_metadata.csv --places_resolved_csv=place_resolver.csv --output_path=output/math"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/english.tmcf",
+                    "cleaned_csv": "output/english.csv"
+                },
+                {
+                    "template_mcf": "output/math.tmcf",
+                    "cleaned_csv": "output/math.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/english/*",
+                "input_files/maths/*"
+            ],
+            "cron_schedule": "30 05 14,28 * *"
+        }
+    ]
+}
