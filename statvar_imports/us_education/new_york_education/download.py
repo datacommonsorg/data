@@ -273,18 +273,18 @@ def extract_sheets_from_xlsx(directory_path):
         # Check if the file is a CSV and contains "notes.csv" (case-insensitive)
         if filename.lower().endswith('.csv') and any(s in filename.lower() for s in ["notes.csv", "all_students.csv","all.csv","lookup.csv","profile.csv","02_","econ status.csv","(public)_ell.csv","Regents.csv"]):
             file_path_to_remove = os.path.join(directory_path, filename)
-        try:
-            os.remove(file_path_to_remove)
-            logging.warning(f"Cleanup: Successfully REMOVED generated file: {filename}")
-        except Exception as e:
-            logging.error(f"Cleanup: Failed to remove file {filename}: {e}")
+            try:
+                os.remove(file_path_to_remove)
+                logging.warning(f"Cleanup: Successfully REMOVED generated file: {filename}")
+            except Exception as e:
+                logging.error(f"Cleanup: Failed to remove file {filename}: {e}")
         logging.info("Extraction and cleanup process complete.")
 
 # --- New Function to Process and Save Data ---
 def process_and_save_data(file_paths):
     """
     Processes files by removing duplicates based on the first four columns,
-    keeping the last entry, and replacing 's' values.
+    keeping the first entry, and replacing 's' values.
     Saves the output as a new CSV file, preserving all original columns.
     """
     for file_path in file_paths:
@@ -305,7 +305,7 @@ def process_and_save_data(file_paths):
 
             # Ensure the DataFrame has at least 4 columns
             if df.shape[1] < 4:
-                logging.warning(f"File has less than 4 columns and will not be deduplicated: {file_path}")
+                logging.warning(f"File has less than 4 columns and will not be  duplicated: {file_path}")
             else:
                 # Get the names of the first four columns for deduplication
                 subset_cols = df.columns[:4].tolist()
@@ -318,7 +318,7 @@ def process_and_save_data(file_paths):
         except Exception as e:
             logging.error(f"Failed to process file {file_path}: {e}")
 
-def organize_files(download_dir, math_dir, english_dir, source_dir, math_files, english_files):
+def organize_files(download_dir, math_dir, english_dir, math_files, english_files):
     """
     Organizes downloaded files into math and english directories,
     and copies original files to a source directory.
@@ -383,41 +383,14 @@ if __name__ == "__main__":
     # --- Download and Extract All Files ---
     zip_urls = config.get('zip_urls', [])
     xlsx_urls = config.get('xlsx_urls', [])
+    math_files_to_keep = config.get("math_files_to_keep", [])
+    english_files_to_keep = config.get("english_files_to_keep", [])
     download_and_organize_zip_files(zip_urls, source_files_path)
     download_files(xlsx_urls, metadata_path)
     extract_sheets_from_xlsx(source_files_path)
 
-    # --- Define File Lists ---
-    math_files_to_keep = [
-        "Math_Test_Results_2006-2012_-_Borough_-_Ethnicity.csv",
-        "02_borough-math-results-2013-2023-(public).xlsx",
-        "04_school-math-results-2013-2023-(public).xlsx",
-        "2006_-_2012_Math_Test_Results_-_Borough_-_ELL.csv",
-        "2006_-_2012_Math_Test_Results_-_Borough_-_Gender.csv",
-        "2006_-_2012_Math_Test_Results_-_Borough_-_SWD.csv",
-        "2006_-_2012_Math_Test_Results_-_Charter_Schools.csv",
-        "2006_-_2012_Math_Test_Results_-_School_-_ELL.csv",
-        "2006_-_2012_Math_Test_Results_-_School_-_Gender.csv",
-        "2006_-_2012_Math_Test_Results_-_School_-_SWD.csv",
-        "2006-2012_Math_Test_Results_-_School_-_Ethnicity.csv"
-    ]
-    english_files_to_keep = [
-        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_All_Students.csv",
-        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_ELL.csv",
-        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_Ethnicity.csv",
-        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_Gender.csv",
-        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_SWD.csv",
-        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Charter_Schools.csv",
-        "2006-2012_English_Language_Arts__ELA__Test_Results_-_School_-_ELL.csv",
-        "2006-2012_English_Language_Arts__ELA__Test_Results_-_School_-_Ethnicity.csv",
-        "2006-2012_English_Language_Arts__ELA__Test_Results_-_School_-_Gender.csv",
-        "2006-2012_English_Language_Arts__ELA__Test_Results_-_School_-_SWD.csv",
-        "2006-2012_English_Language_Arts__ELA__Test_Results-_School_-_All_Students.csv",
-        "school-ela-results-2013-2023-(public).xlsx"
-    ]
-
     # --- Organize and Process Files ---
-    organize_files(source_files_path, math_files_path, english_files_path, source_files_path, math_files_to_keep, english_files_to_keep)
+    organize_files(source_files_path, math_files_path, english_files_path, math_files_to_keep, english_files_to_keep)
 
     # Process the organized files
     math_files_to_process = [os.path.join(math_files_path, f) for f in os.listdir(math_files_path)]

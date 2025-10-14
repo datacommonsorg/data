@@ -10,5 +10,32 @@
         "https://data.cityofnewyork.us/api/views/iebs-5yhr/files/914835d0-1430-4616-a784-5cd3ab39d1ef?download=true&filename=DOE_ELA_Results_2013-2023_Data_Dictionary.xlsx",
         "https://data.cityofnewyork.us/api/views/e5c5-ieuv/files/50b26dd0-df82-405a-8826-20dc380aa521?download=true&filename=DOE_Math_Results_2006-2012_Data-Dictionary.xlsx",
         "https://data.cityofnewyork.us/api/views/74kb-55u9/files/8742c948-be88-4028-b90d-a69bb28a4926?download=true&filename=DOE_Math_Results_2013-2023_Data_Dictionary.xlsx"
+    ],
+    "math_files_to_keep" : [
+        "Math_Test_Results_2006-2012_-_Borough_-_Ethnicity.csv",
+        "02_borough-math-results-2013-2023-(public).xlsx",
+        "04_school-math-results-2013-2023-(public).xlsx",
+        "2006_-_2012_Math_Test_Results_-_Borough_-_ELL.csv",
+        "2006_-_2012_Math_Test_Results_-_Borough_-_Gender.csv",
+        "2006_-_2012_Math_Test_Results_-_Borough_-_SWD.csv",
+        "2006_-_2012_Math_Test_Results_-_Charter_Schools.csv",
+        "2006_-_2012_Math_Test_Results_-_School_-_ELL.csv",
+        "2006_-_2012_Math_Test_Results_-_School_-_Gender.csv",
+        "2006_-_2012_Math_Test_Results_-_School_-_SWD.csv",
+        "2006-2012_Math_Test_Results_-_School_-_Ethnicity.csv"
+    ],
+    "english_files_to_keep" : [
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_All_Students.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_ELL.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_Ethnicity.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_Gender.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_SWD.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Charter_Schools.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_School_-_ELL.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_School_-_Ethnicity.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_School_-_Gender.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_School_-_SWD.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results-_School_-_All_Students.csv",
+        "school-ela-results-2013-2023-(public).xlsx"
     ]
 }

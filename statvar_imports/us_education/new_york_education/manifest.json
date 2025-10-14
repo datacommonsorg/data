@@ -26,7 +26,7 @@
                 "input_files/english/*",
                 "input_files/maths/*"
             ],
-            "cron_schedule": "30 05 14,28 * *"
+            "cron_schedule": "0 0 1 1,4,7,10 *"
         }
     ]
 }
