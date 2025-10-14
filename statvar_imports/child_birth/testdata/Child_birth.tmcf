@@ -1,0 +1,6 @@
+Node: E:Child_birth->E0
+observationAbout: C:Child_birth->observationAbout
+observationDate: C:Child_birth->observationDate
+value: C:Child_birth->value
+variableMeasured: C:Child_birth->variableMeasured
+typeOf: dcs:StatVarObservation

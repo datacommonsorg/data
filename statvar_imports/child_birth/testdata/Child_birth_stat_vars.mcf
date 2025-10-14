@@ -1,0 +1,31 @@
+
+Node: dcid:Annual_Count_BirthEvent_LiveBirth
+typeOf: dcid:StatisticalVariable
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+medicalStatus: dcid:LiveBirth
+
+Node: dcid:Annual_Count_MortalityEvent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+
+Node: dcid:Annual_Count_MortalityEvent_YearsUpto1
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+age: dcid:YearsUpto1
+
+Node: dcid:Count_BirthEvent_LiveBirth
+typeOf: dcid:StatisticalVariable
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalStatus: dcid:LiveBirth
+
