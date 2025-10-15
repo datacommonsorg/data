@@ -1,4 +1,3 @@
-
 Node: dcid:Annual_Count_BirthEvent_LiveBirth
 typeOf: dcid:StatisticalVariable
 populationType: dcid:BirthEvent
@@ -28,4 +27,3 @@ populationType: dcid:BirthEvent
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 medicalStatus: dcid:LiveBirth
-

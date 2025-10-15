@@ -1,6 +1,6 @@
 # child_birth
 
-The data set contains usa birth data
+The data set contains USA birth data
 
 Download:
 Data download URL : `https://data.cdc.gov/api/views/hmz2-vwda/rows.csv?accessType=DOWNLOAD`
@@ -17,7 +17,6 @@ Note : The downloaded file will be saved as "input_files/*.csv"
 
 ###How to run:
 
-```
 python3 stat_var_processor.py 
 --input_data=../../statvar_imports/child_birth/input_files/*.csv -
 -pv_map=../../statvar_imports/child_birth/<filename_of_pvmap> 
@@ -25,7 +24,7 @@ python3 stat_var_processor.py
 --config_file=../../statvar_imports/child_birth/<filename_of_metadata> 
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
 --output_path=../../statvar_imports/child_birth/output_files/child_birth
-```
+
 
 
 ###Example
