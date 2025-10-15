@@ -1,0 +1,6 @@
+Node: E:newyork_diabetes_output->E0
+observationAbout: C:newyork_diabetes_output->observationAbout
+observationDate: C:newyork_diabetes_output->observationDate
+value: C:newyork_diabetes_output->value
+variableMeasured: C:newyork_diabetes_output->variableMeasured
+typeOf: dcs:StatVarObservation
