@@ -1,4 +1,4 @@
 key,property1,value1,property2,value2
-unitid,#Format,observationAbout=dcs:ipedsId/{Data},populationType,Student
+unitid,#Format,observationAbout=ipedsId/{Data},populationType,Student
 year,observationDate,{Data},,
 student_faculty_ratio,value,{Number},,

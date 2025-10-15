@@ -33,7 +33,7 @@ completion_rate_6yr,measuredProperty,count,educationalAttainment,Graduate,colleg
 ,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,
 award_cert_8yr,measuredProperty,count,educationalAttainment,Certificate,collegeOrUniversityLevel,EightYear,value,{Number},#Eval,"value=int(MAX({Number}, 0))",,,,,,,,
-award_assoc_8yr,measuredProperty,count,educationalAttainment,AssociatesDegree,collegeOrUniversityLevel,EightYear,value,{Number},#Eval,"value=int(MAX({Number}, 0))",,,,,,,,
+award_assoc_8yr,measuredProperty,count,educationalAttainment,AssociateDegree,collegeOrUniversityLevel,EightYear,value,{Number},#Eval,"value=int(MAX({Number}, 0))",,,,,,,,
 award_bach_8yr,measuredProperty,count,educationalAttainment,BachelorsDegree,collegeOrUniversityLevel,EightYear,value,{Number},#Eval,"value=int(MAX({Number}, 0))",,,,,,,,
 completers_8yr,measuredProperty,count,educationalAttainment,Graduate,collegeOrUniversityLevel,EightYear,value,{Number},#Eval,"value=int(MAX({Number}, 0))",,,,,,,,
 still_enroll_8yr,measuredProperty,count,collegeOrUniversityLevel,EightYear,value,{Number},#Eval,"value=int(MAX({Number}, 0))",,,,,,,,,,
