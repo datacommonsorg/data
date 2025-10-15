@@ -86,8 +86,13 @@ For each individual cell containing a statistical value in the input file, the s
 
 After all PVs for a data cell have been collected and resolved, the script separates them into two categories:
 
-*   **StatVarObservation (SVObs) Properties**: A subset of the PVs are identified as belonging to the SVObs. These properties are `value`, `observationDate`, and `observationAbout`, `scalingFactor`, `unit`,  `observationPeriod`, `measurementMethod`.
+*   **StatVarObservation (SVObs) Properties**: A subset of the PVs are identified as belonging to the SVObs. These properties are `value`, `observationDate`, and `observationAbout`, plus the following **fixed observation attributes** supported by Data Commons:
+    *   `observationPeriod` - Duration of the observation (e.g., P1Y for yearly, P1M for monthly)
+    *   `measurementMethod` - Method used to collect/measure the data
+    *   `unit` - Unit of measurement for the value
+    *   `scalingFactor` - Scaling factor applied to the value (can be omitted if value is 1)
     *   **Note**: `variableMeasured` is also mandatory for SVObs but is auto-constructed by the processor, never mapped directly in PVs
+    *   **Important**: These are the ONLY observation attributes recognized by Data Commons. Any other properties will be treated as StatVar constraint properties.
 *   **StatisticalVariable (StatVar) Properties**: The remaining PVs are used to define the StatVar. This includes:
     - **Mandatory properties**:  `measuredProperty`, `populationType`, `statType`
     - **Optional properties**: `measurementQualifier`
@@ -274,7 +279,6 @@ The underlying script supports Python/JSON config files and CLI flags in general
 ```csv
 parameter,value
 header_rows,1
-output_columns,"observationAbout,observationDate,variableMeasured,value"
 ```
 
 - **Comprehensive Example with Common Parameters:**
@@ -284,7 +288,6 @@ parameter,value
 
 # Mandatory configuration
 header_rows,1
-output_columns,"observationAbout,observationDate,variableMeasured,value,unit"
 
 # Input configuration (optional)
 skip_rows,0
@@ -308,10 +311,6 @@ These settings control various aspects of the data processing pipeline. Default 
 - `header_rows` (**REQUIRED**): Number of initial rows to be treated strictly as column headers. PVs from these cells apply to the entire column below them. Most CSV files have headers, so this should be set to 1.
   - Example: `header_rows,1`
   - **Critical**: Always set this for standard CSV files (defaults to 0 if omitted)
-
-- `output_columns` (**REQUIRED**): List of properties to be emitted as columns in the SVObs CSV. **Must include at minimum**: `observationAbout,observationDate,variableMeasured,value`. If any additional observation properties are mapped in your `pvmap.csv` (such as `unit`, `scalingFactor`, `measurementMethod`, `observationPeriod`, etc.), they **must** also be included here.
-  - Minimal example: `output_columns,"observationAbout,observationDate,variableMeasured,value"`
-  - Extended example: `output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,measurementMethod"`
 
 **Input Configuration (Optional):**
 
@@ -341,8 +340,6 @@ This section provides troubleshooting guidance and best practices for creating m
 ## ⚠️ COMMON METADATA.CSV MISTAKES TO AVOID
 
 - **Missing `header_rows`**: Most CSV files have headers, but `header_rows` defaults to 0. Always set to 1 for standard CSV files
-- **Missing `output_columns`**: This is now **MANDATORY**. Must include at minimum: `observationAbout,observationDate,variableMeasured,value`
-- **Incomplete `output_columns`**: If you map observation properties like `unit`, `scalingFactor`, `measurementMethod` in your pvmap.csv, they **must** also be included in `output_columns`
 - **Using CLI flag names**: Use parameter names like `header_rows`, not CLI flag names like `--header_rows`
 - **Forgetting `places_within`**: Geographic data without this constraint can resolve to wrong places (e.g., Paris, Texas instead of Paris, France)
 
@@ -356,7 +353,6 @@ This section provides troubleshooting guidance and best practices for creating m
    ```csv
    parameter,value
    header_rows,1
-   output_columns,"observationAbout,observationDate,variableMeasured,value"
    ```
 
 2. **Test with Small Data**: Use first 5-10 rows of input to validate configuration using config "input_rows,5"
@@ -365,17 +361,14 @@ This section provides troubleshooting guidance and best practices for creating m
    - Add `skip_rows` if initial rows need skipping
    - Add `input_rows`/`input_columns` for debugging
    - Add place resolution parameters if needed
-   - Add observation properties to `output_columns` as you map them in pvmap.csv
 
 4. **Common Error Patterns**:
    - **"No data in output"**: Check `header_rows`, `skip_rows`
    - **"Wrong place resolution"**: Add `places_within` constraint
-   - **"Missing columns in output"**: Ensure `output_columns` includes all observation properties from pvmap.csv
 
 5. **Validation Checks**:
    - Verify parameter names match documentation (not CLI flag names)
-   - Quote values containing commas: `"value1,value2,value3"`   
-   - Verify `output_columns` completeness against your pvmap.csv mappings
+   - Quote values containing commas: `"value1,value2,value3"`
 
 #### 1. Property-Value Map (`pv_map`)
 
@@ -1547,7 +1540,7 @@ The wrapper reads `metadata.csv` for all processor configuration. Do not add ext
 - Confirm no duplicate entries for same place, date, and variable
 - **Verify output.csv contains all required columns**: Must include at minimum `observationAbout`, `observationDate`, `variableMeasured`, `value`
 - **Verify complete column mapping**: Any observation properties mapped in {{output_dir}}/{{output_basename}}_pvmap.csv (like `unit`, `scalingFactor`, `measurementMethod`, `observationPeriod`) must be present as columns in `{{working_dir}}/{{output_path}}.csv`
-- **Verify `{{output_dir}}/{{output_basename}}_metadata.csv` completeness**: Confirm both `header_rows` and `output_columns` parameters are present and correctly specified
+- **Verify `{{output_dir}}/{{output_basename}}_metadata.csv` completeness**: Confirm `header_rows` parameter is present and correctly specified
 
 **🎯 DECISION LOGIC - APPLY THIS EXACTLY**:
 
