@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "short_desc": "CORN, GRAIN - ACRES HARVESTED",
+      "domaincat_desc": "NOT SPECIFIED",
+      "county_code": "001",
+      "state_fips_code": "45",
+      "year": "2024",
+      "value": "15000"
+    },
+    {
+      "short_desc": "WHEAT - ACRES HARVESTED",
+      "domaincat_desc": "",
+      "county_code": "001",
+      "state_fips_code": "45",
+      "year": "2024",
+      "value": "5000"
+    }
+  ]
+}

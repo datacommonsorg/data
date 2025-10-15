@@ -86,17 +86,16 @@ def _get_import_spec(repo_dir: str, absolute_import_path: str,
     )
 
 
-def _override_configs(override_fp: str, manifest_fp: str,
-                      config: configs.ExecutorConfig) -> configs.ExecutorConfig:
+def _get_override_config(override_fp: str, manifest_fp: str) -> dict:
     # Read configs from the manifest file.
-    d = json.load(open(manifest_fp))
-    new_config = dataclasses.replace(config, **d.get("config_override", {}))
+    with open(manifest_fp, "r") as f:
+        d1 = json.load(f)
     # Read configs from the local file.
-    d = json.load(open(override_fp))
-    # Update config with any fields and values provided in the local file.
-    # In case of any errors, the line below will raise an Exception which will
-    # report the problem which shoud be fixed in the local config json file.
-    return dataclasses.replace(new_config, **d["configs"])
+    with open(override_fp, "r") as f:
+        d2 = json.load(f)
+    # Values from import manifest will overwrite the values from the local override config.
+    override_config = {**d2.get("configs", {}), **d1.get("config_override", {})}
+    return override_config
 
 
 def _get_cloud_config(filename: str) -> Dict:
@@ -261,7 +260,6 @@ def main(_):
     cwd = os.getcwd()
     repo_dir = cwd.split("data")[0] + "data"
     logging.info(f'{mode} called with the following:')
-    logging.info(f'Config Project ID: {_FLAGS.config_project_id}')
     logging.info(f'GCP Project ID: {_FLAGS.gcp_project_id}')
     logging.info(f'Import: {absolute_import_path}')
     logging.info(f'Repo root directory: {repo_dir}')
@@ -281,8 +279,8 @@ def main(_):
     logging.info(
         f'Updating any config fields from local file: {_FLAGS.config_override} \
         and manifest_file {manifest_fp}.')
-
-    cfg = _override_configs(_FLAGS.config_override, manifest_fp, cfg)
+    override_config = _get_override_config(_FLAGS.config_override, manifest_fp)
+    cfg = dataclasses.replace(cfg, **override_config)
 
     logging.info('Reading Cloud scheduler configs from GCS.')
     scheduler_config_dict = _get_cloud_config(_FLAGS.scheduler_config_filename)
@@ -319,7 +317,8 @@ def main(_):
         import_spec = _get_import_spec(repo_dir, absolute_import_path,
                                        cfg.manifest_filename)
         res = scheduler_job_manager.create_or_update_import_schedule(
-            absolute_import_path, import_spec, cfg, scheduler_config_dict)
+            absolute_import_path, import_spec, cfg, scheduler_config_dict,
+            override_config)
         logging.info("*************************************************")
         logging.info("*********** Schedule Operation Complete. ********")
         logging.info("*************************************************")

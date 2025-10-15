@@ -1,0 +1,8 @@
+Node: E:labour_force_by_region_gender_and_agegroup_output->E0
+observationAbout: C:labour_force_by_region_gender_and_agegroup_output->observationAbout
+observationDate: C:labour_force_by_region_gender_and_agegroup_output->observationDate
+value: C:labour_force_by_region_gender_and_agegroup_output->value
+variableMeasured: C:labour_force_by_region_gender_and_agegroup_output->variableMeasured
+unit: C:labour_force_by_region_gender_and_agegroup_output->unit
+scalingFactor: C:labour_force_by_region_gender_and_agegroup_output->scalingFactor
+typeOf: dcs:StatVarObservation

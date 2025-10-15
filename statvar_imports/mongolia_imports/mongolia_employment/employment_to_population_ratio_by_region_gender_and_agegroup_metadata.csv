@@ -1,0 +1,6 @@
+parameter,value
+#places_within,country/MNG
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+header_rows,1
+url,"https://www.1212.mn/en/statcate/table-view/Labour%2C%20business/Labour/DT_NSO_0400_035V7_1.px?subtables=EMPLOYMENT,%20by%20classification%20of%20economic%20activites,%20aimag%20and%20the%20capital,%20gender,%20age%20group"
+mapped_columns,4
