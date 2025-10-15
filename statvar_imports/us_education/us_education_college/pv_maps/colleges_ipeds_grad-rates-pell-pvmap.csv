@@ -1,0 +1,18 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+unitid,observationAbout,ipedsId/{Data},populationType,Student,,,,,,,,
+year,observationDate,{Data},,,,,,,,,,
+cohort_rev,value,{Number},measuredProperty,count,cohortStatus,Applicant,#Eval,"value=int(MAX({Number}, 0))",,,,
+exclusions,value,{Number},cohortStatus,IsExcludedFromCohort,#Eval,"value=int(MAX({Number}, 0))",,,,,,
+cohort_adj,value,{Number},cohortStatus,Enrolled,#Eval,"value=int(MAX({Number}, 0))",,,,,,
+completers_150pct,value,{Number},completionRate,Within150Pct,#Eval,"value=int(MAX({Number}, 0))",,,,,,
+completion_rate_150pct,value,{Number},completionRate,Within150Pct,measurementDenominator,-completionRate,unit,Percent,scalingFactor,100,#Eval,"value=int(MAX({Number}, 0))"
+institution_level:1,educationalAttainment,LessThan2Years,,,,,,,,,,
+institution_level:2,educationalAttainment,2ToLessThan4Years,,,,,,,,,,
+institution_level:3,educationalAttainment,LessThan4Years,,,,,,,,,,
+institution_level:4,educationalAttainment,4PlusYears,,,,,,,,,,
+subcohort:1,studentSubcohort,NonBachelors,,,,,,,,,,
+subcohort:2,studentSubcohort,Bachelors,,,,,,,,,,
+fed_aid_type:1,studentFinancialAid,PellGrant,,,,,,,,,,
+fed_aid_type:2,studentFinancialAid,SubsidizedLoan,,,,,,,,,,
+fed_aid_type:3,studentFinancialAid,NoPellSubLoan,,,,,,,,,,
+fed_aid_type:4,studentFinancialAid,NoPellGrant,,,,,,,,,,

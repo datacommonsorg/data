@@ -1,0 +1,6 @@
+Node: E:colleges_ipeds_headcount_output->E0
+observationAbout: C:colleges_ipeds_headcount_output->observationAbout
+observationDate: C:colleges_ipeds_headcount_output->observationDate
+variableMeasured: C:colleges_ipeds_headcount_output->variableMeasured
+value: C:colleges_ipeds_headcount_output->value
+typeOf: dcs:StatVarObservation

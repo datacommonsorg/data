@@ -1,0 +1,10 @@
+observationAbout,observationDate,variableMeasured,value
+ipedsId/100636,1992,dcid:Count_Student_GeoId98,6369
+ipedsId/100636,1992,dcid:Count_Student_GeoId99,6369
+ipedsId/100636,1992,dcid:Count_Student_Graduate_GeoId98_HighSchool,5250
+ipedsId/100636,1992,dcid:Count_Student_Graduate_GeoId99_HighSchool,5250
+ipedsId/100636,1994,dcid:Count_Student_Graduate_GeoId98_HighSchool,3339
+ipedsId/100636,1994,dcid:Count_Student_Graduate_GeoId99_HighSchool,3339
+ipedsId/100636,1994,dcid:Count_Student_GeoId98,6125
+ipedsId/100636,1994,dcid:Count_Student_GeoId99,6125
+ipedsId/100636,1996,dcid:Count_Student_Graduate_GeoId99_HighSchool,3799

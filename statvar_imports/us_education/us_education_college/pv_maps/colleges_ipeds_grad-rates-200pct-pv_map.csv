@@ -1,0 +1,19 @@
+key,property1,value1,property2,value2,property3,value3,,,,,,,,
+unitid,observationAbout,ipedsId/{Data},populationType,Student,,,,,,,,,,
+year,observationDate,{Data},,,,,,,,,,,,
+cohort_rev,value,{Number},measuredProperty,count,cohortStatus,Applicant,#Eval,"value=int(MAX({Number}, 0))",,,,,,
+completers_100pct,value,{Number},cohortStatus,CompletedDegree,completionRate,Within100PercentOfNormalTime,#Eval,"value=int(MAX({Number}, 0))",,,,,,
+completion_rate_100pct,value,{Number},cohortStatus,CompletedDegree,completionRate,Within100PercentOfNormalTime,measurementDenominator,"-completionRate,-cohortStatus,+cohortStatus=Applicant",unit,Percent,scalingFactor,100,#Eval,"value=int(MAX({Number}, 0))"
+exclusions,value,{Number},cohortStatus,IsExcludedFromCohort,,,,,,,,,,
+cohort_adj_150pct,value,{Number},cohortStatus,Enrolled,completionRate,Within150PercentOfNormalTime,#Eval,"value=int(MAX({Number}, 0))",,,,,,
+completers_150pct,value,{Number},cohortStatus,CompletedDegree,completionRate,Within150PercentOfNormalTime,#Eval,"value=int(MAX({Number}, 0))",,,,,,
+completion_rate_150pct,value,{Number},cohortStatus,CompletedDegree,completionRate,Within150PercentOfNormalTime,measurementDenominator,"-cohortStatus,+cohortStatus=Enrolled",unit,Percent,scalingFactor,100,#Eval,"value=int(MAX({Number}, 0))"
+,,,,,,,,,,,,,,
+cohort_adj_200pct,value,{Number},cohortStatus,Enrolled,completionRate,Within200PercentOfNormalTime,#Eval,"value=int(MAX({Number}, 0))",,,,,,
+completers_200pct,value,{Number},cohortStatus,CompletedDegree,completionRate,Within200PercentOfNormalTime,#Eval,"value=int(MAX({Number}, 0))",,,,,,
+still_enrolled_200pct,#Eval,"value=int(MAX({Number}, 0))",,,,,,,,,,,,
+completion_rate_200pct,value,{Number},cohortStatus,CompletedDegree,completionRate,Within200PercentOfNormalTime,measurementDenominator,"-cohortStatus,+cohortStatus=Enrolled",unit,Percent,scalingFactor,100,#Eval,"value=int(MAX({Number}, 0))"
+institution_level:1,collegeOrUniversityLevel,LessThanTwoYears,,,,,,,,,,,,
+institution_level:2,collegeOrUniversityLevel,TwoToLessThanFourYears,,,,,,,,,,,,
+institution_level:3,collegeOrUniversityLevel,LessThanFourYears,,,,,,,,,,,,
+institution_level:4,collegeOrUniversityLevel,FourOrMoreYears,,,,,,,,,,,,

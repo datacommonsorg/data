@@ -1,0 +1,6 @@
+Node: E:colleges_ipeds_fall-enrollment-age_output->E0
+observationAbout: C:colleges_ipeds_fall-enrollment-age_output->observationAbout
+observationDate: C:colleges_ipeds_fall-enrollment-age_output->observationDate
+variableMeasured: C:colleges_ipeds_fall-enrollment-age_output->variableMeasured
+value: C:colleges_ipeds_fall-enrollment-age_output->value
+typeOf: dcs:StatVarObservation

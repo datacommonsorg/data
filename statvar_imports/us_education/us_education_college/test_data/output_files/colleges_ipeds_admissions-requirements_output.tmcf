@@ -1,0 +1,6 @@
+Node: E:colleges_ipeds_admissions-requirements_output->E0
+observationAbout: C:colleges_ipeds_admissions-requirements_output->observationAbout
+observationDate: C:colleges_ipeds_admissions-requirements_output->observationDate
+variableMeasured: C:colleges_ipeds_admissions-requirements_output->variableMeasured
+value: C:colleges_ipeds_admissions-requirements_output->value
+typeOf: dcs:StatVarObservation

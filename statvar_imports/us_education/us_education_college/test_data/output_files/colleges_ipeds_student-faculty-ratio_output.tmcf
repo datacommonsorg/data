@@ -1,0 +1,6 @@
+Node: E:colleges_ipeds_student-faculty-ratio_output->E0
+observationAbout: C:colleges_ipeds_student-faculty-ratio_output->observationAbout
+observationDate: C:colleges_ipeds_student-faculty-ratio_output->observationDate
+variableMeasured: C:colleges_ipeds_student-faculty-ratio_output->variableMeasured
+value: C:colleges_ipeds_student-faculty-ratio_output->value
+typeOf: dcs:StatVarObservation
