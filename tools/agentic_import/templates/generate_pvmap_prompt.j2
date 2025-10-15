@@ -1296,15 +1296,15 @@ INFLATION,measuredProperty,inflationRate,populationType,EconomicActivity,statTyp
 
 2. **Preserve Dimension Combinations**: Ensure each unique combination of dimensions maps to a distinct StatisticalVariable
 
-7. **Handle Missing Values**: Use `#Filter` or `#ignore` for SDMX missing value codes (M, NA, ":", "-")
+3. **Handle Missing Values**: Use `#Filter` or `#ignore` for SDMX missing value codes (M, NA, ":", "-")
 
-8. **Frequency Alignment**: When mixing frequencies, ensure proper date formatting:
+4. **Frequency Alignment**: When mixing frequencies, ensure proper date formatting:
    * Annual: YYYY
    * Quarterly: YYYY-MM (using last month of quarter)
    * Monthly: YYYY-MM
    * Daily: YYYY-MM-DD
 
-9. **Version Management**: For datasets with revisions, use `measurementMethod` to indicate revision status
+5. **Version Management**: For datasets with revisions, use `measurementMethod` to indicate revision status
 
 ### Example SDMX PV Map
 
