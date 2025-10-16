@@ -41,6 +41,11 @@ flags.DEFINE_multi_string(
     'Files/directories to backup (relative to working_dir or absolute). '
     'Can be specified multiple times. Directories will backup all contents. '
     'Non-existent files will be skipped with a warning.')
+flags.DEFINE_integer(
+    'max_dir_files',
+    30,
+    'Maximum number of files allowed when backing up a directory. '
+    'Directories with more files will be skipped.')
 
 
 def get_next_attempt_number(gemini_run_dir: Path) -> int:
@@ -91,7 +96,17 @@ def backup_path(source_path: Path, dest_dir: Path, path_spec: str) -> bool:
             return True
         elif source_path.is_dir():
             logging.info(f"  Preparing to copy directory: {source_path}")
-            file_count = sum(1 for _ in source_path.rglob('*') if _.is_file())
+            file_count = 0
+            for item in source_path.rglob('*'):
+                if item.is_file():
+                    file_count += 1
+                    if file_count > FLAGS.max_dir_files:
+                        logging.warning(
+                            "  Skipping directory: %s has more than %d files",
+                            path_spec,
+                            FLAGS.max_dir_files,
+                        )
+                        return False
             logging.info(
                 f"  Copying directory ({file_count} files): {source_path} -> "
                 f"{dest_dir / source_path.name}"
@@ -160,7 +175,7 @@ def backup_run() -> str:
             skipped.append(path_spec)
 
     logging.info(
-        "Backup summary: %d items copied, %d items skipped",
+        "Backup summary: %d items copied, %d items skipped (missing or blocked)",
         len(backed_up),
         len(skipped),
     )
@@ -179,13 +194,15 @@ def backup_run() -> str:
         for path_spec in backed_up:
             f.write(f"  ✓ {path_spec}\n")
         if skipped:
-            f.write(f"\nSkipped (not found):\n")
+            f.write(f"\nSkipped (missing or blocked):\n")
             for path_spec in skipped:
                 f.write(f"  ✗ {path_spec}\n")
 
     logging.info(f"Backup completed: {attempt_dir}")
     if skipped:
-        logging.info(f"  Skipped {len(skipped)} non-existent paths")
+        logging.info(
+            f"  Skipped {len(skipped)} paths (missing or blocked)"
+        )
     logging.info(f"Manifest written to: {manifest_file}")
 
     return str(attempt_dir)
