@@ -5,6 +5,6 @@ Number of Infant Deaths,populationType,MortalityEvent,age,YearsUpto1,statType,me
 Month,Month,{Data},,,,,,
 Year,Year,{Data},,,,,,
 Data Value,value,{Number},observationDate,{Month} {Year},,,,
-,,,,,,,,
-12 Month-ending,measurementQualifier,Annual,,,,,,
+Monthly,observationPeriod,P1M,,,,,,
+12 Month-ending,observationPeriod,P1Y,,,,,,
 State,observationAbout,{Data},,,,,,
