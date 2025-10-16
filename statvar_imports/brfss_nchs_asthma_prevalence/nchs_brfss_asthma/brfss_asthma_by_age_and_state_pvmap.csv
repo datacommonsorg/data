@@ -1,0 +1,27 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+State,observationAbout,{Data},populationType,Person,healthOutcome,Asthma,,,,,,
+year,observationDate,{Data},,,,,,,,,,
+,,,,,,,,,,,,
+life_stage:child,age,YearsUpto18,,,,,,,,,,
+life_stage:adult,age,Years18Onwards,,,,,,,,,,
+,,,,,,,,,,,,
+Prevalence (Percent),value,{Number},statType,measuredValue,measuredProperty,percent,unit,Percent,,,,
+Prevalence (percent),value,{Number},statType,measuredValue,measuredProperty,percent,unit,Percent,,,,
+Standard Error,value,{Number},statType,stdError,measurementDenominator,"-statType,-healthOutcome",measuredProperty,count,scalingFactor,100,unit,Percent
+Standard Error>,value,{Number},statType,stdError,measurementDenominator,"-statType,-healthOutcome",measuredProperty,count,scalingFactor,100,unit,Percent
+Sample Sizec,value,{Number},statType,sampleSize,measuredProperty,count,,,,,,
+Sample Sized,value,{Number},statType,sampleSize,measuredProperty,count,,,,,,
+Sample Size,value,{Number},statType,sampleSize,measuredProperty,count,,,,,,
+Sample Size§,value,{Number},statType,sampleSize,measuredProperty,count,,,,,,
+,,,,,,,,,,,,
+0-4,age,[0 4 Years],,,,,,,,,,
+5-9,age,[5 9 Years],,,,,,,,,,
+10-14,age,[10 14 Years],,,,,,,,,,
+15-17,age,[15 17 Years],,,,,,,,,,
+18–24,age,[18 24 Years],,,,,,,,,,
+25–34,age,[25 34 Years],,,,,,,,,,
+35–44,age,[35 44 Years],,,,,,,,,,
+45–54,age,[45 54 Years],,,,,,,,,,
+55–64,age,[55 64 Years],,,,,,,,,,
+65+,age,[65 - Years],,,,,,,,,,
+

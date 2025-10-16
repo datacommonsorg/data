@@ -1,0 +1,9 @@
+State,Race/Ethnicityg,Sample Sizec,Prevalence (Percent),Standard Error,95% CId (Percent),|| ||,Weighted Numbere,95% CId (Weighted Number),year,life_stage
+U.S. Totalf,White NH,321217,14.8,0.13,(14.6–15.1),||,21868907,"(21,469,416–22,268,399)",2021,adult
+U.S. Totalf,Black NH,31805,16.9,0.38,(16.2–17.6),||,4760506,"(4,536,010–4,985,001)",2021,adult
+U.S. Totalf,Other NH,32240,12.9,0.47,(12.0–13.8),||,2814081,"(2,602,891–3,025,272)",2021,adult
+U.S. Totalf,Hispanic,34001,13,0.38,(12.3–13.8),||,5095708,"(4,789,016–5,402,401)",2021,adult
+AL,White NH,3075,15.9,0.92,(14.1–17.7),||,413983,"(363,899–464,067)",2021,adult
+AL,Black NH,1169,17.9,1.63,(14.8–21.1),||,176916,"(142,151–211,681)",2021,adult
+AL,Other NH,190,10.9,2.8,(5.4–16.4),||,15049,"(7,201–22,897)",2021,adult
+AL,Hispanic,84,18.2,5.16,(7.9–28.4),||,28131,"(10,809–45,453)",2021,adult

@@ -1,0 +1,9 @@
+State,Race/Ethnicityg,Sample Sized,Prevalence (Percent),Standard Error,95% CIe (Percent),Weighted Numberc,95% CIe Weighted Numberc,year,life_stage
+Totalf,White NH ***,30647,9.5,0.4,(8.8–10.3),2023440,"(1,853,081–2,193,800)",2020,child
+Totalf,Black NH,3886,19,1.35,(16.5–21.8),1205041,"(1,021,292–1,388,790)",2020,child
+Totalf,Other NH,5249,11,1.26,(8.8–13.7),659375,"(502,324–816,427)",2020,child
+Totalf,Hispanic,7574,10.6,0.76,(9.2–12.2),1533095,"(1,310,745–1,755,446)",2020,child
+CA,White NH,229,8.7,2.4,(5.0–14.7),171363,"(76,989–265,737)",2020,child
+CA,Black NH,43,18.6,6.36,(9.1–34.2),64966,"(18,748–111,185)",2020,child
+CA,Other NH,159,10.9,3.61,(5.6–20.2),189356,"(58,465–320,246)",2020,child
+CA,Hispanic,478,9.5,1.59,(6.8–13.1),449643,"(299,078–600,208)",2020,child
