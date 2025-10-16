@@ -76,7 +76,7 @@
             "resource_limits": {
                 "cpu": 32,
                 "memory": 512,
-                "disk": 100
+                "disk": 1000
             }
         }
     ]

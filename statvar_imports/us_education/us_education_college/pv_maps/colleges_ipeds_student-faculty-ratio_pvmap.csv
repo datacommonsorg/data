@@ -1,4 +1,4 @@
-key,property1,value1,property2,value2
-unitid,#Format,observationAbout=ipedsId/{Data},populationType,Student
+key,property1,value1,property2,value2,property3,value3
+unitid,observationAbout,ipedsId/{Data},populationType,Student,measurementDenominator,Count_Teacher
 year,observationDate,{Data},,
 student_faculty_ratio,value,{Number},,
