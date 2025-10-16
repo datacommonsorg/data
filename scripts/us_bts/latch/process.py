@@ -51,23 +51,12 @@ import file_util
 # pylint: enable=wrong-import-position
 _FLAGS = flags.FLAGS
 _DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   'gcs_output/input_files')
+                                   'input_files')
 _DEFAULT_OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                    'gcs_output/output_files')
+                                    'output_files')
 flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
                     "Import Data File's List")
 _ROWS_PER_FILE = 4000000
-
-
-def _upload_to_gcs(file_path: str):
-    """Uploads a file to the GCS output path."""
-    gcs_file_path = os.path.join(_DEFAULT_OUTPUT_PATH,
-                                 os.path.basename(file_path))
-    try:
-        file_util.file_copy(file_path, gcs_file_path)
-        logging.info(f"Successfully uploaded {file_path} to {gcs_file_path}")
-    except Exception as e:
-        logging.error(f"Failed to upload {file_path} to GCS: {e}")
 
 
 def _promote_measurement_method(data_df: pd.DataFrame) -> pd.DataFrame:
@@ -236,17 +225,18 @@ def _process_household_transportation(input_file: str,
     return data_df
 
 
-def _generate_tmcf(tmcf_file_path: str) -> None:
+def _generate_tmcf(tmcf_file_path: str, filename: str) -> None:
     """
     This method generates TMCF file w.r.t
     dataframe headers and defined TMCF template.
 
     Args:
         tmcf_file_path (str): Output TMCF File Path
+        filename (str): The name of the CSV file.
     """
     logging.info(f"Generating TMCF file: {tmcf_file_path}")
     with open(tmcf_file_path, 'w+', encoding='utf-8') as f_out:
-        f_out.write(TMCF_TEMPLATE.rstrip('\n'))
+        f_out.write(TMCF_TEMPLATE.format(filename=filename).strip())
 
 
 def _apply_regex(data_df: pd.DataFrame, conf: dict, curr_prop_column: str):
@@ -409,7 +399,7 @@ def _write_to_mcf_file(data_df: pd.DataFrame, mcf_file_path: str):
 
 
 def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
-                  mcf_file_path: str, tmcf_file_path: str):
+                  mcf_file_path: str):
     """
     Post Processing on the transformed dataframe such as
     1. Create stat-vars
@@ -421,14 +411,11 @@ def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
         data_df (pd.DataFrame): _description_
         cleaned_csv_file_path (str): _description_
         mcf_file_path (str): _description_
-        tmcf_file_path (str): _description_
     """
     logging.info("Starting post-processing.")
     data_df = _generate_prop(data_df)
     data_df = _generate_stat_var_and_mcf(data_df)
     _write_to_mcf_file(data_df, mcf_file_path)
-
-    _generate_tmcf(tmcf_file_path)
 
     data_df = _promote_measurement_method(data_df)
     data_df = data_df.sort_values(by=["year", "location", "sv"])
@@ -451,8 +438,7 @@ def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
     return generated_files
 
 
-def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
-            tmcf_file_path: str):
+def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str):
     """
     Process Input Raw Files and apply transformations to generate final
     CSV, MCF and TMCF files.
@@ -477,7 +463,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     if not final_df.empty:
         logging.info("Starting post-processing of the final dataframe.")
         generated_csvs = _post_process(final_df, cleaned_csv_file_path,
-                                       mcf_file_path, tmcf_file_path)
+                                       mcf_file_path)
     else:
         logging.warning("Final dataframe is empty. No output files generated.")
     return generated_csvs
@@ -497,15 +483,16 @@ def _update_manifest(generated_csv_files: list):
         manifest = json.load(f)
         import_inputs = []
         for csv_file in generated_csv_files:
+            base_name = os.path.basename(csv_file)
+            tmcf_name = os.path.splitext(base_name)[0] + ".tmcf"
             import_inputs.append({
-                "template_mcf":
-                    "gcs_output/output_files/us_transportation_household.tmcf",
-                "cleaned_csv":
-                    f"gcs_output/output_files/{os.path.basename(csv_file)}"
+                "template_mcf": f"output_files/{tmcf_name}",
+                "cleaned_csv": f"output_files/{base_name}"
             })
-        manifest["import_inputs"] = import_inputs
+        # The import tool uses the import_specifications section.
+        manifest["import_specifications"][0]["import_inputs"] = import_inputs
         f.seek(0)
-        json.dump(manifest, f, indent=2)
+        json.dump(manifest, f, indent=4)
         f.truncate()
     logging.info("Successfully updated manifest.json")
 
@@ -525,24 +512,20 @@ def main(_):
         )
         sys.exit(1)
     ip_files = [os.path.join(input_path, file) for file in ip_files]
-    output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                    "output")
+    output_file_path = _DEFAULT_OUTPUT_PATH
     # Defining Output Files
     cleaned_csv_path = os.path.join(output_file_path,
                                     "us_transportation_household.csv")
     mcf_path = os.path.join(output_file_path, "us_transportation_household.mcf")
-    tmcf_path = os.path.join(output_file_path,
-                             "us_transportation_household.tmcf")
 
     # Creating Output Directory
     file_util.file_makedirs(cleaned_csv_path)
-    generated_csv_files = process(ip_files, cleaned_csv_path, mcf_path,
-                                  tmcf_path)
+    generated_csv_files = process(ip_files, cleaned_csv_path, mcf_path)
 
     for csv_file in generated_csv_files:
-        _upload_to_gcs(csv_file)
-    _upload_to_gcs(mcf_path)
-    _upload_to_gcs(tmcf_path)
+        tmcf_file_path = os.path.splitext(csv_file)[0] + ".tmcf"
+        base_name = os.path.splitext(os.path.basename(csv_file))[0]
+        _generate_tmcf(tmcf_file_path, base_name)
     _update_manifest(generated_csv_files)
 
 
