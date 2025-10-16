@@ -1,68 +1,100 @@
-# Illinois State Board of Education (ISBE) Report Card Data Processing
+# Illinois State Board of Education (ISBE) Report Card Data
 
-## Overview
+## Import Overview
 
-This project provides a semi-automated pipeline for downloading and processing the Illinois State Report Card data from the Illinois State Board of Education (ISBE). It is designed to handle data from different school years.
+This project processes and imports the Illinois School Report Card data from the Illinois State Board of Education (ISBE). The dataset provides annual school level data on various metrics including student demographics and assessment results.
 
-The scripts perform the following actions:
-1.  **Download:** Fetches the dataset directly from the source URLs specified in the configuration.
-2.  **Process:** Cleans and transforms the raw data into a consistent format, generating final CSV, MCF, and TMCF files for import into the Data Commons knowledge graph.
+* **Source URL**: [https://www.isbe.net/Pages/Illinois-State-Report-Card-Data.aspx](https://www.isbe.net/Pages/Illinois-State-Report-Card-Data.aspx)  
+* **Import Type**: Semi Automated  
+* **Source Data Availability**: Annual releases from the Illinois State Board of Education.  
+* **Release Frequency**: Annual  
+* **Notes**: This dataset provides annual school Each row represents a specific demographic breakdown for a given school.
 
-## A Note on Data Source URLs
+---
 
-This import is considered semi-automated due to the nature of the data source. The URLs for the dataset may change when new data is released. As a result, the `import_configs.json` file may need to be manually updated to point to the latest data files.
+## Preprocessing Steps
 
-## Autorefresh Information
+The import process is divided into two main stages: downloading the raw data and then processing it to generate the final artifacts for ingestion.
+
+* **Input files**:  
+    
+  * `download_script.py`: Downloads and performs initial cleaning of the raw data.  
+  * `metadata.csv`: Configuration file for the data processing script.  
+  * `pvmap.csv`: Property-value mapping file used by the processor.  
+  * `schema.mcf`: Statistical variable definitions.
+
+
+* **Transformation pipeline**:  
+    
+  1. `download_script.py` downloads the annual data releases for all years from 2018 to the current year. It downloads xls files and split the each sheet to a csv file, saving the results in the `input_files/` directory.  
+  2. After the download is complete, the `stat_var_processor.py` tool is run on all cleaned CSV files.  
+  3. The processor uses the `metadata.csv` and `pvmap.csv` files to generate the final `output.csv` and `output.tmcf` files, placing them in the `output_files/` directory.
+
+
+* **Data Quality Checks**:  
+    
+  * Linting is performed on the generated output files using the DataCommons import tool.  
+  * There are no known warnings or errors.
+
+---
+
+## Autorefresh
 
 This import is considered semi-automated because the data source URLs are not stable and require manual updates for new releases. To refresh the data, you will need to:
 
-1.  **Check for New Data:** Visit the [ISBE Report Card Data website](https://www.isbe.net/Pages/Illinois-State-Report-Card-Data.aspx) to check for new data releases.
-2.  **Update Configuration:** If new data is available, update the `import_configs.json` file with the new URLs and corresponding year information.
-3.  **Run Scripts:** Execute the download and processing scripts as outlined below.
+* Check for New Data: Visit the ISBE Report Card Data website to check for new data releases.   
+* Update Configuration: If new data is available, update the import\_configs.json file with the new URLs and corresponding year information.   
+* Run Scripts: Execute the download script as outlined below.
 
-## Running the Scripts
+* **Steps**:  
+  1. A Cloud Scheduler job, defined in `manifest.json`, runs annually at 00:00 on December 15th.  
+  2. Download the Data: Execute the download\_script.py script to fetch the raw data files from the URLs specified in import\_configs.json. Then it will split each xlsx sheet to csv sheet.These files will be saved in the input\_files directory.  
+  3. It then runs the `stat_var_processor.py` tool, which processes all the yearly files and generates the final artifacts.  
+  4. The final, validated output files are uploaded to a GCS bucket for ingestion into the Data Commons Knowledge Graph.
 
-Follow these steps to download and process the data:
+---
 
-1.  **Download the Data:**
-    Execute the `download_script.py` script to fetch the raw data files from the URLs specified in `import_configs.json`. The files will be saved in the `input_files` directory.
+## Script Execution Details
 
-    ```bash
-    python3 download_script.py
-    ```
+To run the import manually, follow these steps in order.
 
-2.  **Process the Data:**
-    After the download is complete, run the `process.py` script to clean, transform, and format the data. This script will generate the final output files in the `output` directory.
+### Step 1: Download Data
 
-    ```bash
-    python3 process.py
-    ```
+This script downloads all available annual data files and split them
 
-## Project Structure
+**Usage**:
 
-```
-├── download_script.py          # Main script to download raw data
-├── download.py                 # Utility module for downloading files
-├── import_configs.json         # Configuration for data import with source URLs
-├── process.py                  # Script to process the raw data
-├── output/                     # Directory for multiple processed output files
-│   ├── illinois_education.csv
-│   ├── illinois_education.mcf
-│   └── illinois_education.tmcf
-├── test_data/                  # Contains data for testing purposes
-└── README.md                   # This file
+```shell
+python3 download_script.py
 ```
 
-## Input Data
+The cleaned source files will be located in `input_files/`.
 
-The input data is sourced from the [Illinois State Board of Education (ISBE)](https://www.isbe.net/Pages/Illinois-State-Report-Card-Data.aspx). The URLs for the specific data files are defined in `import_configs.json`. The `download_script.py` script handles the download and storage of these files.
+---
 
-## Output
+### Step 2: Process the Data
 
-The processing script generates the following files in the `output/` directory:
+This script processes all cleaned input files to generate the final `output.csv` and `output.tmcf`.
 
--   `illinois_education_output.csv`: The main cleaned and processed data file.
--   `schema_common.mcf`: The StatisticalVariable nodes for the dataset.
--   `output.tmcf`: The template MCF for importing the CSV data into Data Commons.
+**Usage**:
 
+```shell
+python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/trenddata_data.csv --pv_map=configs/trenddata_pvmap.csv --config_file=trenddata_metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/trenddata_output'
+```
+
+---
+
+### Step 3: Validate the Output Files
+
+This command validates the generated files for formatting and semantic consistency before ingestion.
+
+**Usage**:
+
+```shell
+java -jar /path/to/datacommons-import-tool.jar lint -d 'output_files/'
+```
+
+This step ensures that the generated artifacts are ready for ingestion into Data Commons.
+
+---
 
