@@ -24,7 +24,7 @@ from absl import flags
 from absl import logging
 
 # Constants
-ATTEMPT_PREFIX = 'attempt_'
+_ATTEMPT_PREFIX = 'attempt_'
 
 FLAGS = flags.FLAGS
 
@@ -45,13 +45,13 @@ flags.DEFINE_integer(
     'Directories with more files will be skipped.')
 
 
-def get_next_attempt_number(gemini_run_dir: Path) -> int:
+def _get_next_attempt_number(gemini_run_dir: Path) -> int:
     """Get next attempt number by counting existing attempt directories."""
-    existing_attempts = list(gemini_run_dir.glob(f'{ATTEMPT_PREFIX}*'))
+    existing_attempts = list(gemini_run_dir.glob(f'{_ATTEMPT_PREFIX}*'))
     return len(existing_attempts) + 1
 
 
-def resolve_path(path_str: str, working_dir: Path) -> Path:
+def _resolve_path(path_str: str, working_dir: Path) -> Path:
     """Resolve path relative to working_dir if not absolute."""
     path = Path(path_str)
     if path.is_absolute():
@@ -69,8 +69,8 @@ def _is_relative_to(path: Path, other: Path) -> bool:
         return False
 
 
-def backup_path(source_path: Path, dest_dir: Path, path_spec: str,
-                max_dir_files: int) -> bool:
+def _backup_path(source_path: Path, dest_dir: Path, path_spec: str,
+                 max_dir_files: int) -> bool:
     """Backup a file or directory to destination. Skip if not found.
     
     Args:
@@ -146,8 +146,8 @@ def execute_backup(
     gemini_run_dir.mkdir(parents=True, exist_ok=True)
 
     # Get attempt number
-    attempt_num = get_next_attempt_number(gemini_run_dir)
-    attempt_dir = gemini_run_dir / f'{ATTEMPT_PREFIX}{attempt_num:03d}'
+    attempt_num = _get_next_attempt_number(gemini_run_dir)
+    attempt_dir = gemini_run_dir / f'{_ATTEMPT_PREFIX}{attempt_num:03d}'
     attempt_dir.mkdir(parents=True, exist_ok=True)
 
     logging.info(f"Backing up attempt {attempt_num:03d} for {gemini_run_id}")
@@ -163,7 +163,7 @@ def execute_backup(
     # Backup specified files/directories
     for path_spec in path_specs:
         logging.info(f"Processing: {path_spec}")
-        source_path = resolve_path(path_spec, working_dir)
+        source_path = _resolve_path(path_spec, working_dir)
         resolved_source = source_path.resolve()
         # Skip circular references between source and destination
         if (_is_relative_to(resolved_source, attempt_dir) or
@@ -174,7 +174,7 @@ def execute_backup(
             skipped.append(path_spec)
             continue
 
-        if backup_path(resolved_source, attempt_dir, path_spec, max_dir_files):
+        if _backup_path(resolved_source, attempt_dir, path_spec, max_dir_files):
             backed_up.append(path_spec)
         else:
             skipped.append(path_spec)
@@ -192,14 +192,14 @@ def execute_backup(
         f.write(f"Gemini run ID: {gemini_run_id}\n")
         f.write(f"Attempt number: {attempt_num:03d}\n")
         f.write(f"Working directory: {working_dir}\n")
-        f.write(f"\nRequested files:\n")
+        f.write("\nRequested files:\n")
         for path_spec in path_specs:
             f.write(f"  - {path_spec}\n")
-        f.write(f"\nBacked up successfully:\n")
+        f.write("\nBacked up successfully:\n")
         for path_spec in backed_up:
             f.write(f"  OK {path_spec}\n")
         if skipped:
-            f.write(f"\nSkipped (missing or blocked):\n")
+            f.write("\nSkipped (missing or blocked):\n")
             for path_spec in skipped:
                 f.write(f"  SKIP {path_spec}\n")
 
