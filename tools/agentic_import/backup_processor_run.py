@@ -15,9 +15,7 @@
 # limitations under the License.
 """Backup inputs and outputs from statvar processor run."""
 
-import os
 import shutil
-import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -42,8 +40,7 @@ flags.DEFINE_multi_string(
     'Can be specified multiple times. Directories will backup all contents. '
     'Non-existent files will be skipped with a warning.')
 flags.DEFINE_integer(
-    'max_dir_files',
-    30,
+    'max_dir_files', 30,
     'Maximum number of files allowed when backing up a directory. '
     'Directories with more files will be skipped.')
 
@@ -72,13 +69,15 @@ def _is_relative_to(path: Path, other: Path) -> bool:
         return False
 
 
-def backup_path(source_path: Path, dest_dir: Path, path_spec: str) -> bool:
+def backup_path(source_path: Path, dest_dir: Path, path_spec: str,
+                max_dir_files: int) -> bool:
     """Backup a file or directory to destination. Skip if not found.
     
     Args:
         source_path: Resolved path to backup
         dest_dir: Destination directory for backup
         path_spec: Original path specification (for logging)
+        max_dir_files: Maximum allowed files when copying a directory
     
     Returns:
         True if backup successful, False otherwise
@@ -100,17 +99,16 @@ def backup_path(source_path: Path, dest_dir: Path, path_spec: str) -> bool:
             for item in source_path.rglob('*'):
                 if item.is_file():
                     file_count += 1
-                    if file_count > FLAGS.max_dir_files:
+                    if file_count > max_dir_files:
                         logging.warning(
                             "  Skipping directory: %s has more than %d files",
                             path_spec,
-                            FLAGS.max_dir_files,
+                            max_dir_files,
                         )
                         return False
             logging.info(
                 f"  Copying directory ({file_count} files): {source_path} -> "
-                f"{dest_dir / source_path.name}"
-            )
+                f"{dest_dir / source_path.name}")
             dest_subdir = dest_dir / source_path.name
             if dest_subdir.exists():
                 shutil.rmtree(dest_subdir)
@@ -126,16 +124,25 @@ def backup_path(source_path: Path, dest_dir: Path, path_spec: str) -> bool:
     return False
 
 
-def backup_run() -> str:
+def execute_backup(
+    working_dir: Path,
+    gemini_run_id: str,
+    path_specs: list[str],
+    max_dir_files: int,
+) -> Path:
     """Perform backup of processor run files.
     
+    Args:
+        working_dir: Base directory for the processor run.
+        gemini_run_id: Identifier for the run.
+        path_specs: Paths to backup (relative or absolute).
+        max_dir_files: Maximum file count allowed for directories.
+
     Returns:
         Path to the backup directory
     """
-    # Setup paths
-    working_dir = Path(FLAGS.working_dir).resolve()
     backup_base = working_dir / '.datacommons' / 'runs'
-    gemini_run_dir = backup_base / FLAGS.gemini_run_id
+    gemini_run_dir = backup_base / gemini_run_id
     gemini_run_dir.mkdir(parents=True, exist_ok=True)
 
     # Get attempt number
@@ -143,8 +150,7 @@ def backup_run() -> str:
     attempt_dir = gemini_run_dir / f'{ATTEMPT_PREFIX}{attempt_num:03d}'
     attempt_dir.mkdir(parents=True, exist_ok=True)
 
-    logging.info(
-        f"Backing up attempt {attempt_num:03d} for {FLAGS.gemini_run_id}")
+    logging.info(f"Backing up attempt {attempt_num:03d} for {gemini_run_id}")
     logging.info(f"Working directory: {working_dir}")
     logging.info(f"Attempt directory: {attempt_dir}")
 
@@ -152,7 +158,6 @@ def backup_run() -> str:
     backed_up = []
     skipped = []
 
-    path_specs = list(FLAGS.backup_files)
     logging.info(f"Total items to back up: {len(path_specs)}")
 
     # Backup specified files/directories
@@ -161,15 +166,15 @@ def backup_run() -> str:
         source_path = resolve_path(path_spec, working_dir)
         resolved_source = source_path.resolve()
         # Skip circular references between source and destination
-        if (_is_relative_to(resolved_source, attempt_dir)
-                or _is_relative_to(attempt_dir, resolved_source)):
+        if (_is_relative_to(resolved_source, attempt_dir) or
+                _is_relative_to(attempt_dir, resolved_source)):
             logging.error(
                 "  Skipping circular backup source: %s conflicts with "
                 "destination %s", resolved_source, attempt_dir)
             skipped.append(path_spec)
             continue
 
-        if backup_path(resolved_source, attempt_dir, path_spec):
+        if backup_path(resolved_source, attempt_dir, path_spec, max_dir_files):
             backed_up.append(path_spec)
         else:
             skipped.append(path_spec)
@@ -184,7 +189,7 @@ def backup_run() -> str:
     manifest_file = attempt_dir / 'backup_manifest.txt'
     with open(manifest_file, 'w') as f:
         f.write(f"Backup created: {datetime.now().isoformat()}\n")
-        f.write(f"Gemini run ID: {FLAGS.gemini_run_id}\n")
+        f.write(f"Gemini run ID: {gemini_run_id}\n")
         f.write(f"Attempt number: {attempt_num:03d}\n")
         f.write(f"Working directory: {working_dir}\n")
         f.write(f"\nRequested files:\n")
@@ -192,26 +197,31 @@ def backup_run() -> str:
             f.write(f"  - {path_spec}\n")
         f.write(f"\nBacked up successfully:\n")
         for path_spec in backed_up:
-            f.write(f"  ✓ {path_spec}\n")
+            f.write(f"  OK {path_spec}\n")
         if skipped:
             f.write(f"\nSkipped (missing or blocked):\n")
             for path_spec in skipped:
-                f.write(f"  ✗ {path_spec}\n")
+                f.write(f"  SKIP {path_spec}\n")
 
-    logging.info(f"Backup completed: {attempt_dir}")
+    logging.info("Backup completed: %s", attempt_dir)
     if skipped:
-        logging.info(
-            f"  Skipped {len(skipped)} paths (missing or blocked)"
-        )
-    logging.info(f"Manifest written to: {manifest_file}")
+        logging.info("  Skipped %d paths (missing or blocked)", len(skipped))
+    logging.info("Manifest written to: %s", manifest_file)
 
-    return str(attempt_dir)
+    return attempt_dir
 
 
 def main(argv):
     """Main entry point."""
     del argv  # Unused
-    backup_run()
+    working_dir = Path(FLAGS.working_dir).resolve()
+    attempt_dir = execute_backup(
+        working_dir=working_dir,
+        gemini_run_id=FLAGS.gemini_run_id,
+        path_specs=list(FLAGS.backup_files),
+        max_dir_files=FLAGS.max_dir_files,
+    )
+    return str(attempt_dir)
 
 
 if __name__ == '__main__':
