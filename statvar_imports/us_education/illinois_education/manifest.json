@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "illinois_education",
+            "import_name": "ISBE_Illinois_Education",
             "curator_emails": [
                 "support@datacommons.org"
             ],
