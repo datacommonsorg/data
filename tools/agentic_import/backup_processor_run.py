@@ -37,7 +37,7 @@ flags.DEFINE_string('gemini_run_id', None,
 flags.mark_flag_as_required('gemini_run_id')
 flags.DEFINE_multi_string(
     'backup_files',
-    ['pvmap.csv', 'metadata.csv', 'output'],  # Default files
+    [],  # Explicit list passed by caller
     'Files/directories to backup (relative to working_dir or absolute). '
     'Can be specified multiple times. Directories will backup all contents. '
     'Non-existent files will be skipped with a warning.')
@@ -58,6 +58,15 @@ def resolve_path(path_str: str, working_dir: Path) -> Path:
         return working_dir / path
 
 
+def _is_relative_to(path: Path, other: Path) -> bool:
+    """True if path is the same as or under other."""
+    try:
+        path.relative_to(other)
+        return True
+    except ValueError:
+        return False
+
+
 def backup_path(source_path: Path, dest_dir: Path, path_spec: str) -> bool:
     """Backup a file or directory to destination. Skip if not found.
     
@@ -75,17 +84,22 @@ def backup_path(source_path: Path, dest_dir: Path, path_spec: str) -> bool:
 
     try:
         if source_path.is_file():
+            logging.info(f"  Copying file: {source_path} -> {dest_dir}")
             dest_file = dest_dir / source_path.name
             shutil.copy2(source_path, dest_file)
             logging.info(f"  Backed up file: {source_path.name}")
             return True
         elif source_path.is_dir():
+            logging.info(f"  Preparing to copy directory: {source_path}")
+            file_count = sum(1 for _ in source_path.rglob('*') if _.is_file())
+            logging.info(
+                f"  Copying directory ({file_count} files): {source_path} -> "
+                f"{dest_dir / source_path.name}"
+            )
             dest_subdir = dest_dir / source_path.name
             if dest_subdir.exists():
                 shutil.rmtree(dest_subdir)
             shutil.copytree(source_path, dest_subdir)
-            # Count files in the backed up directory
-            file_count = sum(1 for _ in source_path.rglob('*') if _.is_file())
             logging.info(
                 f"  Backed up directory: {source_path.name}/ ({file_count} files)"
             )
@@ -116,18 +130,40 @@ def backup_run() -> str:
 
     logging.info(
         f"Backing up attempt {attempt_num:03d} for {FLAGS.gemini_run_id}")
+    logging.info(f"Working directory: {working_dir}")
+    logging.info(f"Attempt directory: {attempt_dir}")
 
     # Track what was actually backed up
     backed_up = []
     skipped = []
 
+    path_specs = list(FLAGS.backup_files)
+    logging.info(f"Total items to back up: {len(path_specs)}")
+
     # Backup specified files/directories
-    for path_spec in FLAGS.backup_files:
+    for path_spec in path_specs:
+        logging.info(f"Processing: {path_spec}")
         source_path = resolve_path(path_spec, working_dir)
-        if backup_path(source_path, attempt_dir, path_spec):
+        resolved_source = source_path.resolve()
+        # Skip circular references between source and destination
+        if (_is_relative_to(resolved_source, attempt_dir)
+                or _is_relative_to(attempt_dir, resolved_source)):
+            logging.error(
+                "  Skipping circular backup source: %s conflicts with "
+                "destination %s", resolved_source, attempt_dir)
+            skipped.append(path_spec)
+            continue
+
+        if backup_path(resolved_source, attempt_dir, path_spec):
             backed_up.append(path_spec)
         else:
             skipped.append(path_spec)
+
+    logging.info(
+        "Backup summary: %d items copied, %d items skipped",
+        len(backed_up),
+        len(skipped),
+    )
 
     # Save a manifest of what was backed up
     manifest_file = attempt_dir / 'backup_manifest.txt'
@@ -137,7 +173,7 @@ def backup_run() -> str:
         f.write(f"Attempt number: {attempt_num:03d}\n")
         f.write(f"Working directory: {working_dir}\n")
         f.write(f"\nRequested files:\n")
-        for path_spec in FLAGS.backup_files:
+        for path_spec in path_specs:
             f.write(f"  - {path_spec}\n")
         f.write(f"\nBacked up successfully:\n")
         for path_spec in backed_up:
@@ -150,6 +186,7 @@ def backup_run() -> str:
     logging.info(f"Backup completed: {attempt_dir}")
     if skipped:
         logging.info(f"  Skipped {len(skipped)} non-existent paths")
+    logging.info(f"Manifest written to: {manifest_file}")
 
     return str(attempt_dir)
 
