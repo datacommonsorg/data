@@ -101,10 +101,8 @@ def _backup_path(source_path: Path, dest_dir: Path, path_spec: str,
                     file_count += 1
                     if file_count > max_dir_files:
                         logging.warning(
-                            "  Skipping directory: %s has more than %d files",
-                            path_spec,
-                            max_dir_files,
-                        )
+                            f"  Skipping directory: {path_spec} has more than "
+                            f"{max_dir_files} files")
                         return False
             logging.info(
                 f"  Copying directory ({file_count} files): {source_path} -> "
@@ -169,8 +167,8 @@ def execute_backup(
         if (_is_relative_to(resolved_source, attempt_dir) or
                 _is_relative_to(attempt_dir, resolved_source)):
             logging.error(
-                "  Skipping circular backup source: %s conflicts with "
-                "destination %s", resolved_source, attempt_dir)
+                f"  Skipping circular backup source: {resolved_source} conflicts "
+                f"with destination {attempt_dir}")
             skipped.append(path_spec)
             continue
 
@@ -180,10 +178,8 @@ def execute_backup(
             skipped.append(path_spec)
 
     logging.info(
-        "Backup summary: %d items copied, %d items skipped (missing or blocked)",
-        len(backed_up),
-        len(skipped),
-    )
+        f"Backup summary: {len(backed_up)} items copied, {len(skipped)} items "
+        "skipped (missing or blocked)")
 
     # Save a manifest of what was backed up
     manifest_file = attempt_dir / 'backup_manifest.txt'
@@ -203,10 +199,10 @@ def execute_backup(
             for path_spec in skipped:
                 f.write(f"  SKIP {path_spec}\n")
 
-    logging.info("Backup completed: %s", attempt_dir)
+    logging.info(f"Backup completed: {attempt_dir}")
     if skipped:
-        logging.info("  Skipped %d paths (missing or blocked)", len(skipped))
-    logging.info("Manifest written to: %s", manifest_file)
+        logging.info(f"  Skipped {len(skipped)} paths (missing or blocked)")
+    logging.info(f"Manifest written to: {manifest_file}")
 
     return attempt_dir
 
