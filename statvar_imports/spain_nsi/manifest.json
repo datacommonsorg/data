@@ -1,0 +1,62 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "Spain_Nsi_Census",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.ine.es/en/index.htm",
+      "provenance_description": "population, health, education, and labor statistics data at the province and municipality levels.",
+      "scripts": [
+        "download_script.py",
+        "run.sh"
+      ],
+      "source_files": [
+        "input_files/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/employment_unemployment_output.tmcf",
+          "cleaned_csv": "output_files/employment_unemployment_output.csv"
+        },
+        {
+          "template_mcf": "output_files/education_field_of_study_output.tmcf",
+          "cleaned_csv": "output_files/education_field_of_study_output.csv"
+        },
+        {
+          "template_mcf": "output_files/gross_birth_rate_by_province_output.tmcf",
+          "cleaned_csv": "output_files/gross_birth_rate_by_province_output.csv"
+        },
+        {
+          "template_mcf": "output_files/gross_birth_rate_national_output.tmcf",
+          "cleaned_csv": "output_files/gross_birth_rate_national_output.csv"
+        },
+        {
+          "template_mcf": "output_files/gross_birth_rate_per_municipality_output.tmcf",
+          "cleaned_csv": "output_files/gross_birth_rate_per_municipality_output.csv"
+        },
+        {
+          "template_mcf": "output_files/male_rate_at_birth_by_province_output.tmcf",
+          "cleaned_csv": "output_files/male_rate_at_birth_by_province_output.csv"
+        },
+        {
+          "template_mcf": "output_files/levels_of_education_gender_output.tmcf",
+          "cleaned_csv": "output_files/levels_of_education_gender_output.csv"
+        },
+        {
+          "template_mcf": "output_files/population_by_municipality_and_gender_output.tmcf",
+          "cleaned_csv": "output_files/population_by_municipality_and_gender_output.csv"
+        },
+        {
+          "template_mcf": "output_files/Population_by_province_capitals_and_gender_output.tmcf",
+          "cleaned_csv": "output_files/Population_by_province_capitals_and_gender_output.csv"
+        },
+        {
+          "template_mcf": "output_files/population_by_sex_and_age_group_output.tmcf",
+          "cleaned_csv": "output_files/population_by_sex_and_age_group_output.csv"
+        }
+      ],
+      "cron_schedule": "30 09 27*"
+    }
+  ]
+}

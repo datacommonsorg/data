@@ -1,0 +1,5 @@
+key,prop,value,,,,,,,,,,,,
+Provinces,observationAbout,{Data},measuredProperty,dcs:count,populationType,BirthEvent,statType,measuredValue,gender,Male,measurementDenominator,-gender,observationPeriod,P1Y
+Total,value,{Number},,,,,,,,,,,,
+Periodo,observationDate,{Data},,,,,,,,,,,,
+National Total,observationAbout,country/ESP,,,,,,,,,,,,

@@ -1,0 +1,12 @@
+observationAbout,observationPeriod,observationDate,value,variableMeasured,unit,scalingFactor
+dcid:wikidataId/Q1330796,P1Y,2024,1.525,dcid:Count_Person_Male,,
+dcid:wikidataId/Q1330796,P1Y,2023,1.537,dcid:Count_Person_Male,,
+dcid:wikidataId/Q1330796,P1Y,2022,1.536,dcid:Count_Person_Male,,
+dcid:wikidataId/Q1330796,P1Y,2021,1.518,dcid:Count_Person_Male,,
+dcid:wikidataId/Q1330796,P1Y,2024,1.44,dcid:Count_Person_Female,,
+dcid:wikidataId/Q1330796,P1Y,2023,1.432,dcid:Count_Person_Female,,
+dcid:wikidataId/Q1330796,P1Y,2022,1.433,dcid:Count_Person_Female,,
+dcid:wikidataId/Q1330796,P1Y,2021,1.406,dcid:Count_Person_Female,,
+dcid:wikidataId/Q481760,P1Y,2024,10.312,dcid:Count_Person,,
+dcid:wikidataId/Q481760,P1Y,2023,10.299,dcid:Count_Person,,
+dcid:wikidataId/Q481760,P1Y,2022,10.265,dcid:Count_Person,,
