@@ -6,7 +6,7 @@ enrollment_fall,measuredProperty,count,value,{Number}
 sex:1,gender,Male,,,
 sex:2,gender,Female,,,
 sex:3,gender,TransgenderOrGenderNonConforming,,
-sex:4,#ignore,,
+sex:4,#ignore,ignore,
 sex:9,gender,GenderUnknownOrNotStated,,
 
 ,,,,

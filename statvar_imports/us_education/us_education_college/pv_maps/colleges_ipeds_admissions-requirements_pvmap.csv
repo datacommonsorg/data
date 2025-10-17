@@ -28,19 +28,19 @@ reqt_personal_statement,measuredProperty,count,admissionRequirement,PersonalStat
 reqt_legacy_status,measuredProperty,count,admissionRequirement,LegacyStatus,value,{Number},,
 
 # SAT/ACT scores
-sat_act_report_period:1,measuredProperty,count,standardizedTest,SAT,applicantStatus,Applicant,value,{sat_number_submitting}
-sat_act_report_period:1,measuredProperty,count,standardizedTest,ACT,applicantStatus,Applicant,value,{act_number_submitting}
-sat_act_report_period:2,measuredProperty,count,standardizedTest,SAT,applicantStatus,Admitted,value,{sat_number_submitting}
-sat_act_report_period:2,measuredProperty,count,standardizedTest,ACT,applicantStatus,Admitted,value,{act_number_submitting}
-sat_act_report_period:3,measuredProperty,count,standardizedTest,SAT,applicantStatus,Enrolled,value,{sat_number_submitting}
-sat_act_report_period:3,measuredProperty,count,standardizedTest,ACT,applicantStatus,Enrolled,value,{act_number_submitting}
+sat_act_report_period:1,measuredProperty,count,standardizedTest,SAT,applicantStatus,Applicant,value,{Number}
+sat_act_report_period:1,measuredProperty,count,standardizedTest,ACT,applicantStatus,Applicant,value,{Number}
+sat_act_report_period:2,measuredProperty,count,standardizedTest,SAT,applicantStatus,Admitted,value,{Number}
+sat_act_report_period:2,measuredProperty,count,standardizedTest,ACT,applicantStatus,Admitted,value,{Number}
+sat_act_report_period:3,measuredProperty,count,standardizedTest,SAT,applicantStatus,Enrolled,value,{Number}
+sat_act_report_period:3,measuredProperty,count,standardizedTest,ACT,applicantStatus,Enrolled,value,{Number}
 
-sat_act_report_period:1,measuredProperty,count,standardizedTest,SAT,applicantStatus,Applicant,value,{sat_percent_submitting},unit,Percent
-sat_act_report_period:1,measuredProperty,count,standardizedTest,ACT,applicantStatus,Applicant,value,{act_percent_submitting},unit,Percent
-sat_act_report_period:2,measuredProperty,count,standardizedTest,SAT,applicantStatus,Admitted,value,{sat_percent_submitting},unit,Percent
-sat_act_report_period:2,measuredProperty,count,standardizedTest,ACT,applicantStatus,Admitted,value,{act_percent_submitting},unit,Percent
-sat_act_report_period:3,measuredProperty,count,standardizedTest,SAT,applicantStatus,Enrolled,value,{sat_percent_submitting},unit,Percent
-sat_act_report_period:3,measuredProperty,count,standardizedTest,ACT,applicantStatus,Enrolled,value,{act_percent_submitting},unit,Percent
+sat_act_report_period:1,measuredProperty,count,standardizedTest,SAT,applicantStatus,Applicant,value,{Number},unit,Percent
+sat_act_report_period:1,measuredProperty,count,standardizedTest,ACT,applicantStatus,Applicant,value,{Number},unit,Percent
+sat_act_report_period:2,measuredProperty,count,standardizedTest,SAT,applicantStatus,Admitted,value,{Number},unit,Percent
+sat_act_report_period:2,measuredProperty,count,standardizedTest,ACT,applicantStatus,Admitted,value,{Number},unit,Percent
+sat_act_report_period:3,measuredProperty,count,standardizedTest,SAT,applicantStatus,Enrolled,value,{Number},unit,Percent
+sat_act_report_period:3,measuredProperty,count,standardizedTest,ACT,applicantStatus,Enrolled,value,{Number},unit,Percent
 
 sat_crit_read_25_pctl,measuredProperty,percentile25,standardizedTest,SATCriticalReading,value,{Number},,
 sat_crit_read_75_pctl,measuredProperty,percentile75,standardizedTest,SATCriticalReading,value,{Number},,
