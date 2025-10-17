@@ -18,13 +18,31 @@ import re
 import json
 from absl import app
 from absl import logging
+from absl import flags
+
+FLAGS = flags.FLAGS
+flags.DEFINE_string(
+    "output_file",
+    "kff_birth_data_all_timeframes.csv",
+    "The path to write the output CSV file.",
+)
 
 logging.set_verbosity(logging.INFO)
+_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 
 def extract_data_from_url(url):
+    """Extracts child birth data from a KFF URL.
+
+    Args:
+        url: The URL to fetch and extract data from.
+
+    Returns:
+        A list representing the parsed JSON data, or None if an error occurs.
+    """
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+        'User-Agent': _USER_AGENT
     }
+
     try:
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -45,7 +63,9 @@ def extract_data_from_url(url):
         return None
 
 def main(_):
-    output_file = "kff_birth_data_all_timeframes.csv"
+    """Downloads child birth data for all timeframes and saves it to a CSV file."""
+
+    output_file = FLAGS.output_file
     base_url = "https://www.kff.org/state-health-policy-data/state-indicator/number-of-births/?currentTimeframe={i}&selectedRows=%7B%22states%22:%7B%22all%22:%7B%7D%7D,%22wrapups%22:%7B%22united-states%22:%7B%7D%7D%7D&sortModel=%7B%22colId%22:%22Location%22,%22sort%22:%22asc%22%7D"
 
     with open(output_file, 'w', newline='') as csvfile:
@@ -69,7 +89,10 @@ def main(_):
                         if year_data[0] == "Notes":
                             continue
                         year = year_data[0]
-                        data_rows = year_data[1][2:]
+                        if len(year_data[1]) < 3:
+                            logging.warning(f"Skipping year {year}: Inner data list is too short to contain state data.")
+                            continue
+                        data_rows = year_data[1][2:] 
                         for row in data_rows:
                             writer.writerow([year] + row)
                 except (IndexError) as e:
