@@ -41,6 +41,6 @@ sh run.sh
 
 This import pipeline is configured to run automatically on a monthly schedule.
 
-- Cron Expression: 30 09 27*
+- Cron Expression: 30 09 27 * *
 
 Schedule: The script runs at 9:30 AM on the 27th day of every month.
