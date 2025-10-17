@@ -55,6 +55,7 @@ def _convert_xlsx_to_csv(output_dir):
                 logging.info(f"Successfully removed {xlsx_path}")
             except Exception as e:
                 logging.error(f"Error processing {xlsx_path}: {e}")
+                raise RuntimeError(f"Error processing {xlsx_path}: {e}")
 
 
 def main(_):
@@ -88,6 +89,7 @@ def main(_):
                 logging.info(f"Successfully downloaded {filename}.")
             else:
                 logging.error(f"Failed to download {filename}.")
+                raise RuntimeError(f"Failed to download {filename}.")
         else:
             logging.warning(f"Skipping invalid file info: {file_info}")
 

@@ -18,17 +18,17 @@ The import process is divided into two main stages: downloading the raw data and
 
 * **Input files**:  
     
-  * `download_script.py`: Downloads and performs initial cleaning of the raw data.  
-  * `metadata.csv`: Configuration file for the data processing script.  
-  * `pvmap.csv`: Property-value mapping file used by the processor.  
-  * `schema.mcf`: Statistical variable definitions.
+  * `download_script.py`: Downloads and performs initial cleaning of the raw data.
+  * `import_config.json`: Contains the URLs for the data files to be downloaded.
+  * `configs/*.csv`: Directory containing configuration files for the data processing script, including property-value mappings (`pvmap`) and metadata.
+  * `placeresolver.csv`: Maps location names to DCIDs.
 
 
 * **Transformation pipeline**:  
     
-  1. `download_script.py` downloads the annual data releases for all years from 2018 to the current year. It downloads xls files and split the each sheet to a csv file, saving the results in the `input_files/` directory.  
-  2. After the download is complete, the `stat_var_processor.py` tool is run on all cleaned CSV files.  
-  3. The processor uses the `metadata.csv` and `pvmap.csv` files to generate the final `output.csv` and `output.tmcf` files, placing them in the `output_files/` directory.
+  1. `download_script.py` downloads the annual data releases specified in `import_config.json`. It downloads XLSX files, splits each sheet into a separate CSV file, and saves the results in the `input_files/` directory.  
+  2. After the download is complete, the `stat_var_processor.py` tool is run multiple times, once for each specific dataset (e.g., ELA, Math, Science for a given year).  
+  3. Each run of the processor uses a corresponding configuration file from the `configs/` directory to generate final `output.csv` and `output.tmcf` files, placing them in the `output_files/` directory.
 
 
 * **Data Quality Checks**:  
@@ -43,13 +43,13 @@ The import process is divided into two main stages: downloading the raw data and
 This import is considered semi-automated because the data source URLs are not stable and require manual updates for new releases. To refresh the data, you will need to:
 
 * Check for New Data: Visit the ISBE Report Card Data website to check for new data releases.   
-* Update Configuration: If new data is available, update the import\_configs.json file with the new URLs and corresponding year information.   
-* Run Scripts: Execute the download script as outlined below.
+* Update Configuration: If new data is available, update the `import_config.json` file with the new URLs and corresponding year information.   
+* Run Scripts: Execute the import process as defined in the `manifest.json`.
 
 * **Steps**:  
-  1. A Cloud Scheduler job, defined in `manifest.json`, runs annually at 00:00 on December 15th.  
-  2. Download the Data: Execute the download\_script.py script to fetch the raw data files from the URLs specified in import\_configs.json. Then it will split each xlsx sheet to csv sheet.These files will be saved in the input\_files directory.  
-  3. It then runs the `stat_var_processor.py` tool, which processes all the yearly files and generates the final artifacts.  
+  1. The import process, orchestrated by the `manifest.json`, runs on a schedule.  
+  2. First, it executes `download_script.py` to fetch the raw data files from the URLs specified in `import_config.json`. The script then splits each XLSX sheet into a separate CSV file, which are saved in the `input_files` directory.  
+  3. It then runs the `stat_var_processor.py` tool for each dataset, which processes the corresponding files and generates the final artifacts.  
   4. The final, validated output files are uploaded to a GCS bucket for ingestion into the Data Commons Knowledge Graph.
 
 ---
@@ -74,12 +74,12 @@ The cleaned source files will be located in `input_files/`.
 
 ### Step 2: Process the Data
 
-This script processes all cleaned input files to generate the final `output.csv` and `output.tmcf`.
+This script processes the cleaned input files to generate the final `output.csv` and `output.tmcf` files. It is run multiple times with different configurations, as specified in the `manifest.json`. Below is an example of a single run:
 
 **Usage**:
 
 ```shell
-python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/trenddata_data.csv --pv_map=configs/trenddata_pvmap.csv --config_file=trenddata_metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/trenddata_output'
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/illinois_data_2023_ELA_Math_Science_data.csv --pv_map=configs/ELA_Math_Science_2023_pvmap.csv --config_file=configs/metadata.csv --places_resolved_csv=placeresolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/ela_2023_output
 ```
 
 ---

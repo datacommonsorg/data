@@ -44,131 +44,131 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/dlm_aa_2018_output.tmcf",
                     "cleaned_csv": "output_files/dlm_aa_2018_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/dlm_aa_2019_output.tmcf",
                     "cleaned_csv": "output_files/dlm_aa_2019_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/dlm_aa_2021_output.tmcf",
                     "cleaned_csv": "output_files/dlm_aa_2021_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/dlm_aa_2022_output.tmcf",
                     "cleaned_csv": "output_files/dlm_aa_2022_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/dlm_aa_2023_output.tmcf",
                     "cleaned_csv": "output_files/dlm_aa_2023_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/dlm_aa_2024_output.tmcf",
                     "cleaned_csv": "output_files/dlm_aa_2024_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/dlm_aa2_2022_output.tmcf",
                     "cleaned_csv": "output_files/dlm_aa2_2022_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/dlm_aa2_2023_output.tmcf",
                     "cleaned_csv": "output_files/dlm_aa2_2023_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/dlm_aa2_2024_output.tmcf",
                     "cleaned_csv": "output_files/dlm_aa2_2024_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/ela_2018_output.tmcf",
                     "cleaned_csv": "output_files/ela_2018_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/ela_2019_output.tmcf",
                     "cleaned_csv": "output_files/ela_2019_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/ela_2020_output.tmcf",
                     "cleaned_csv": "output_files/ela_2020_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/ela_2021_output.tmcf",
                     "cleaned_csv": "output_files/ela_2021_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
-                    "cleaned_csv": "output_files/ela_2023_output.csv"
-                },
-                {
-                    "template_mcf": "output_files/output.tmcf",
-                    "cleaned_csv": "output_files/ela_2024_output.csv"
-                },
-                {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/ela_2022_output.tmcf",
                     "cleaned_csv": "output_files/ela_2022_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
-                    "cleaned_csv": "output_files/iar2_IAR2019_output.csv"
+                    "template_mcf": "output_files/ela_2023_output.tmcf",
+                    "cleaned_csv": "output_files/ela_2023_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
-                    "cleaned_csv": "output_files/iar2021_output.csv"
+                    "template_mcf": "output_files/ela_2024_output.tmcf",
+                    "cleaned_csv": "output_files/ela_2024_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/iar_2019_output.tmcf",
+                    "cleaned_csv": "output_files/iar_2019_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/iar_2021_output.tmcf",
+                    "cleaned_csv": "output_files/iar_2021_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/iar_2022_output.tmcf",
                     "cleaned_csv": "output_files/iar_2022_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
-                    "cleaned_csv": "output_files/iar2023_output.csv"
+                    "template_mcf": "output_files/iar_2023_output.tmcf",
+                    "cleaned_csv": "output_files/iar_2023_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
-                    "cleaned_csv": "output_files/iar2024_output.csv"
+                    "template_mcf": "output_files/iar_2024_output.tmcf",
+                    "cleaned_csv": "output_files/iar_2024_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/iar2_2022_output.tmcf",
                     "cleaned_csv": "output_files/iar2_2022_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/iar2_2023_output.tmcf",
                     "cleaned_csv": "output_files/iar2_2023_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/iar2_2024_output.tmcf",
                     "cleaned_csv": "output_files/iar2_2024_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/isa_2018_output.tmcf",
                     "cleaned_csv": "output_files/isa_2018_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/isa_2019_output.tmcf",
                     "cleaned_csv": "output_files/isa_2019_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/isa_2021_output.tmcf",
                     "cleaned_csv": "output_files/isa_2021_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/isa_2022_output.tmcf",
                     "cleaned_csv": "output_files/isa_2022_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/isa_2023_output.tmcf",
                     "cleaned_csv": "output_files/isa_2023_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/isa_2024_output.tmcf",
                     "cleaned_csv": "output_files/isa_2024_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/parcc_2018_output.tmcf",
                     "cleaned_csv": "output_files/parcc_2018_output.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/trenddata_output.tmcf",
                     "cleaned_csv": "output_files/trenddata_output.csv"
                 }
             ],
