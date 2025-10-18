@@ -17,7 +17,7 @@
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/colleges_ipeds_fall-retention.csv --pv_map=pv_maps/colleges_ipeds_fall-retention_pvmap.csv --config_file=pv_maps/colleges_ipeds_fall-retention_metadata.csv --output_path=output_files/colleges_ipeds_fall-retention_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/colleges_ipeds_grad-rates-200pct.csv --pv_map=pv_maps/colleges_ipeds_grad-rates-200pct-pv_map.csv --config_file=pv_maps/colleges_ipeds_grad-rates-200pct_metadata.csv --output_path=output_files/colleges_ipeds_grad-rates-200pct_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/colleges_ipeds_grad-rates-pell.csv --pv_map=pv_maps/colleges_ipeds_grad-rates-pell-pvmap.csv --config_file=pv_maps/colleges_ipeds_grad-rates-pell_metadata.csv --output_path=output_files/colleges_ipeds_grad-rates-pell_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/colleges_ipeds_outcome-measures.csv --pv_map=pv_maps/colleges_ipeds_outcome_measures-pvmap.csv --config_file=pv_maps/colleges_ipeds_outcome_measure_metadata.csv --output_path=out/colleges_ipeds_outcome_measures_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/colleges_ipeds_outcome-measures.csv --pv_map=pv_maps/colleges_ipeds_outcome_measures-pvmap.csv --config_file=pv_maps/colleges_ipeds_outcome_measure_metadata.csv --output_path=output_files/colleges_ipeds_outcome_measures_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/colleges_ipeds_student-faculty-ratio.csv --pv_map=pv_maps/colleges_ipeds_student-faculty-ratio_pvmap.csv --config_file=pv_maps/colleges_ipeds_student-faculty-ratio_metadata.csv --output_path=output_files/colleges_ipeds_student-faculty-ratio_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
             ],
             "import_inputs": [
@@ -54,8 +54,8 @@
                     "cleaned_csv": "output_files/colleges_ipeds_grad-rates-pell_output.csv"
                 },
                 {
-                    "template_mcf": "out/colleges_ipeds_outcome_measures_output.tmcf",
-                    "cleaned_csv": "out/colleges_ipeds_outcome_measures_output.csv"
+                    "template_mcf": "output_files/colleges_ipeds_outcome_measures_output.tmcf",
+                    "cleaned_csv": "output_files/colleges_ipeds_outcome_measures_output.csv"
                 },
                 {
                     "template_mcf": "output_files/colleges_ipeds_student-faculty-ratio_output.tmcf",
