@@ -19,6 +19,10 @@ and Count_person_Female are aggregated for this file.
 
 import pandas as pd
 import os
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from api_calls import get_api_response
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -36,8 +40,13 @@ def process_county_1980_1989(url: str) -> pd.DataFrame:
         df.columns (pd.DataFrame) : Column names of cleaned dataframe
     """
     # reading the csv input file
-    df = pd.read_csv(url, skiprows=5)
-    df.to_csv(_CODEDIR + "/../input_files/" + "county_result_1980_1989.csv")
+    file_path = os.path.join(_CODEDIR + "/../input_files/" +
+                             "county_result_1980_1989.csv")
+    file_path = get_api_response(file_path, url, 0)
+    df = pd.read_csv(file_path,
+                     engine='python',
+                     skiprows=5,
+                     encoding='ISO-8859-1')
     df = df.drop(index=[0])
     df.rename(columns={
         'Year of Estimate': 'Year',

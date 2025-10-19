@@ -19,6 +19,11 @@ from state 2010-2020 file.
 
 import pandas as pd
 import os
+import sys
+
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from api_calls import get_api_response
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -36,9 +41,11 @@ def process_national_2020_2022(url: str) -> pd.DataFrame:
         df.columns (pd.DataFrame) : Column names of cleaned dataframe
     """
     # reading input file to dataframe
-    df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
-    df.to_csv(_CODEDIR + "/../input_files/" + 'nationals_result_2020_2022.csv',
-              index=False)
+    file_path = os.path.join(_CODEDIR + "/../input_files/" +
+                             'nationals_result_2020_2022.csv')
+    file_path = get_api_response(file_path, url, 0)
+    df = pd.read_csv(file_path, engine='python', encoding='ISO-8859-1')
+
     # years having 1 and 2 value are not requried as estimate is for April Month
     # agegrp is only required as it gives total of all ages
     df = df.query("YEAR not in [1]")
