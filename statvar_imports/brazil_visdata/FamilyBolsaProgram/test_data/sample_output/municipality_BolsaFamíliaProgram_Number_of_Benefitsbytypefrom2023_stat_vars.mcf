@@ -1,0 +1,112 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/spateriya/july30_statvar/municipality_brazil_statvar/input_file/municipality_BolsaFamíliaProgram_Number_of_Benefitsbytypefrom2023.csv --pv_map=/usr/local/google/home/spateriya/july30_statvar/municipality_brazil_statvar/input_file/comman_pvmap.csv --places_resolved_csv=/usr/local/google/home/spateriya/july30_statvar/municipality_brazil_statvar/input_file/Brazil_municipality_place_resolver.csv --config=/usr/local/google/home/spateriya/july30_statvar/municipality_brazil_statvar/input_file/metadata.csv --output_path=/usr/local/google/home/spateriya/july30_statvar/Brazil_municipality_op_file/municipality_BolsaFamíliaProgram_Number_of_Benefitsbytypefrom2023 --existing_statvar_mcf=stat_vars.mcf" on 2024-09-17 09:50:05.927532
+
+Node: dcid:Count_EconomicActivity_BrazilBolsaFamilyProgram_AdolescentFamilyVariableBenefit
+typeOf: dcid:StatisticalVariable
+name: "Amount of Adolescent Family Variable Benefits (BVA)"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Quantidade de Benefícios Variáveis Familiares Adolescente (BVA)@pt"
+benefitProgram: dcid:Brazil_BolsaFamilyProgram
+benefitType: dcid:AdolescentFamilyVariableBenefit
+
+Node: dcid:Count_EconomicActivity_BrazilBolsaFamilyProgram_CitizenshipIncomeBenefit
+typeOf: dcid:StatisticalVariable
+name: "Amount of Citizenship Income Benefits (BRC)"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Quantidade de Benefícios de Renda de Cidadania (BRC)@pt"
+benefitProgram: dcid:Brazil_BolsaFamilyProgram
+benefitType: dcid:CitizenshipIncomeBenefit
+
+Node: dcid:Count_EconomicActivity_BrazilBolsaFamilyProgram_ExtraordinaryTransitionBenefit
+typeOf: dcid:StatisticalVariable
+name: "Quantity of Extraordinary Transition Benefits (BET)"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Quantidade de Benefícios Extraordinários de Transição (BET)@pt"
+benefitProgram: dcid:Brazil_BolsaFamilyProgram
+benefitType: dcid:ExtraordinaryTransitionBenefit
+
+Node: dcid:Count_Household_BrazilBolsaFamilyProgram_ChildAndAdolescentFamilyVariableBenefit
+typeOf: dcid:StatisticalVariable
+name: "Number of Child (BV) and Adolescent (BVA) Family Variable Benefits combined"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Quantidade de Benefícios Variáveis Familiares Criança (BV) e Adolescente (BVA) somados@pt"
+benefitProgram: dcid:Brazil_BolsaFamilyProgram
+benefitType: dcid:ChildAndAdolescentFamilyVariableBenefit
+
+Node: dcid:Count_Household_BrazilBolsaFamilyProgram_ChildFamilyVariableBenefit
+typeOf: dcid:StatisticalVariable
+name: "Quantity of Child Family Variable Benefits (BV)"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Quantidade de Benefícios Variáveis Familiares Criança (BV)@pt"
+benefitProgram: dcid:Brazil_BolsaFamilyProgram
+benefitType: dcid:ChildFamilyVariableBenefit
+
+Node: dcid:Count_Household_BrazilBolsaFamilyProgram_ComplementaryBenefit
+typeOf: dcid:StatisticalVariable
+name: "Quantity of Complementary Benefits (BCO)"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Quantidade de Benefícios Complementares (BCO)@pt"
+benefitProgram: dcid:Brazil_BolsaFamilyProgram
+benefitType: dcid:ComplementaryBenefit
+
+Node: dcid:Count_Household_BrazilBolsaFamilyProgram_EarlyChildhoodBenefit
+typeOf: dcid:StatisticalVariable
+name: "Quantity of Early Childhood Benefits (BPI) PBF"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Quantidade de Benefícios Primeira Infância (BPI) PBF@pt"
+benefitProgram: dcid:Brazil_BolsaFamilyProgram
+benefitType: dcid:EarlyChildhoodBenefit
+
+Node: dcid:Count_Household_BrazilBolsaFamilyProgram_FamilyVariableBenefit
+typeOf: dcid:StatisticalVariable
+name: "Quantity of Family Variable Benefits"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Quantidade de Benefícios Variáveis Familiares@pt"
+benefitProgram: dcid:Brazil_BolsaFamilyProgram
+benefitType: dcid:FamilyVariableBenefit
+
+Node: dcid:Count_Household_BrazilBolsaFamilyProgram_NursingFamilyBenefit
+typeOf: dcid:StatisticalVariable
+name: "Quantity of Variable Benefits for Nursing Mothers (BVN)"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Quantidade de Benefícios Variáveis Familiares Nutriz (BVN)@pt"
+benefitProgram: dcid:Brazil_BolsaFamilyProgram
+benefitType: dcid:NursingFamilyBenefit
+
+Node: dcid:Count_Household_BrazilBolsaFamilyProgram_PartialBenefitsSuspensionByDefesoInsurance
+typeOf: dcid:StatisticalVariable
+name: "Number of Families with partial suspension of benefits through Defeso Insurance"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Quantidade de Famílias com suspensão parcial do benefício pelo Seguro Defeso@pt"
+benefitProgram: dcid:Brazil_BolsaFamilyProgram
+benefitType: dcid:PartialBenefitsSuspensionByDefesoInsurance
+
+Node: dcid:Count_Household_BrazilBolsaFamilyProgram_PregnantFamilyBenefit
+typeOf: dcid:StatisticalVariable
+name: "Quantity of Pregnant Family Variable Benefits (BVG)"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Quantidade de Benefícios Variáveis Familiares Gestante (BVG)@pt"
+benefitProgram: dcid:Brazil_BolsaFamilyProgram
+benefitType: dcid:PregnantFamilyBenefit
+
