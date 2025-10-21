@@ -1,0 +1,92 @@
+Notes,Year,Year Code,County,County Code,Sex,Sex Code,Single Race 6,Single Race 6 Code,ICD-10 113 Cause List,ICD-10 113 Cause List Code,Deaths,Population,Crude Rate
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,American Indian or Alaska Native,1002-5,#Malignant neoplasms (C00-C97),GR113-019,20,13586,147.2
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,American Indian or Alaska Native,1002-5,Major cardiovascular diseases (I00-I78),GR113-053,22,13586,161.9
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,American Indian or Alaska Native,1002-5,"#Diseases of heart (I00-I09,I11,I13,I20-I51)",GR113-054,14,13586,Unreliable
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,American Indian or Alaska Native,1002-5,All other diseases (Residual) ,GR113-111,28,13586,206.1
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,American Indian or Alaska Native,1002-5,"#Accidents (unintentional injuries) (V01-X59,Y85-Y86)",GR113-112,17,13586,Unreliable
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,American Indian or Alaska Native,1002-5,"Nontransport accidents (W00-X59,Y86)",GR113-117,13,13586,Unreliable
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,Asian,A,Major cardiovascular diseases (I00-I78),GR113-053,15,15842,Unreliable
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,Black or African American,2054-5,Major cardiovascular diseases (I00-I78),GR113-053,18,8201,Unreliable
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,#Septicemia (A40-A41),GR113-010,10,89307,Unreliable
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,#Malignant neoplasms (C00-C97),GR113-019,118,89307,132.1
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,"Malignant neoplasms of colon, rectum and anus (C18-C21)",GR113-023,10,89307,Unreliable
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,"Malignant neoplasms of trachea, bronchus and lung (C33-C34)",GR113-027,32,89307,35.8
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,Malignant neoplasm of breast (C50),GR113-029,17,89307,Unreliable
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,"Malignant neoplasms of lymphoid, hematopoietic and related tissue (C81-C96)",GR113-037,11,89307,Unreliable
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,"All other and unspecified malignant neoplasms (C17,C23-C24,C26-C31,C37-C41,C44-C49,C51-C52,C57-C60,C62-C63,C66,C68-C69,C73-C80,C97)",GR113-043,15,89307,Unreliable
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,#Diabetes mellitus (E10-E14),GR113-046,10,89307,Unreliable
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,#Alzheimer disease (G30),GR113-052,45,89307,50.4
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,Major cardiovascular diseases (I00-I78),GR113-053,112,89307,125.4
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,"#Diseases of heart (I00-I09,I11,I13,I20-I51)",GR113-054,72,89307,80.6
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,Ischemic heart diseases (I20-I25),GR113-058,37,89307,41.4
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,"Other forms of chronic ischemic heart disease (I20,I25)",GR113-061,30,89307,33.6
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,"Atherosclerotic cardiovascular disease, so described (I25.0)",GR113-062,17,89307,Unreliable
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,"All other forms of chronic ischemic heart disease (I20,I25.1-I25.9)",GR113-063,13,89307,Unreliable
+,2018,2018,"Anchorage Borough, AK",2020,Female,F,White,2106-3,Other heart diseases (I26-I51),GR113-064,27,89307,30.2
+,,,,,,,,,,,,,
+"Dataset: Underlying Cause of Death, 2018-2023, Single Race",,,,,,,,,,,,,
+Query Parameters:,,,,,,,,,,,,,
+States: Alaska (02),,,,,,,,,,,,,
+Group By: Year; County; Sex; Single Race 6; ICD-10 113 Cause List,,,,,,,,,,,,,
+Show Totals: Disabled,,,,,,,,,,,,,
+Show Zero Values: Disabled,,,,,,,,,,,,,
+Show Suppressed: False,,,,,,,,,,,,,
+"Calculate Rates Per: 100,000",,,,,,,,,,,,,
+Rate Options: Default intercensal populations for years 2001-2009 (except Infant Age Groups),,,,,,,,,,,,,
+---,,,,,,,,,,,,,
+Help: See http://wonder.cdc.gov/wonder/help/ucd-expanded.html for more information.,,,,,,,,,,,,,
+---,,,,,,,,,,,,,
+"Query Date: Sep 11, 2025 8:28:54 AM",,,,,,,,,,,,,
+---,,,,,,,,,,,,,
+"Suggested Citation: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics",,,,,,,,,,,,,
+"System, Mortality 2018-2023 on CDC WONDER Online Database, released in 2024. Data are from the Multiple Cause of Death Files,",,,,,,,,,,,,,
+"2018-2023, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative",,,,,,,,,,,,,
+"Program. Accessed at http://wonder.cdc.gov/ucd-icd10-expanded.html on Sep 11, 2025 8:28:54 AM",,,,,,,,,,,,,
+---,,,,,,,,,,,,,
+Messages:,,,,,,,,,,,,,
+"1. The full results are too long to be displayed. Due to suppression constraints rows that are zero, suppressed or a total will",,,,,,,,,,,,,
+not be available.,,,,,,,,,,,,,
+2. Totals and Percent of Total are disabled when data are grouped by 113 or 130 Cause Lists. Check Caveats below for more,,,,,,,,,,,,,
+information.,,,,,,,,,,,,,
+---,,,,,,,,,,,,,
+Caveats:,,,,,,,,,,,,,
+1. Totals and Percent of Total are disabled when data are grouped by a 113 or 130 Cause List because both aggregate and detailed,,,,,,,,,,,,,
+values are displayed in the table. Also be aware that charts and maps containing both aggregate and detail data could be,,,,,,,,,,,,,
+misleading.,,,,,,,,,,,,,
+2. Death rates are flagged as Unreliable when the rate is calculated with a numerator of 20 or less. More information:,,,,,,,,,,,,,
+http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Unreliable.,,,,,,,,,,,,,
+"3. The population figures for years 2023 are single-race estimates of the July 1 resident population, from the Vintage 2023",,,,,,,,,,,,,
+"postcensal series released by the Census Bureau on June 27, 2024. The 2023 series is based on the Modified Blended Base produced",,,,,,,,,,,,,
+"by the US Census Bureau in lieu of the April 1, 2020 decennial population count. The Modified Blended Base consists of the blend",,,,,,,,,,,,,
+"of Vintage 2020 postcensal population estimates for April 1, 2020, 2020 Demographic Analysis Estimates, and 2020 Census data",,,,,,,,,,,,,
+from the internal Census Edited File (CEF). The population figures for years 2022 are single-race estimates of the July 1,,,,,,,,,,,,,
+"resident population, from the Vintage 2022 postcensal series released by the Census Bureau on June 22, 2023. The 2022 series is",,,,,,,,,,,,,
+"based on the Modified Blended Base produced by the US Census Bureau in lieu of the April 1, 2020 decennial population count. The",,,,,,,,,,,,,
+"Modified Blended Base consists of the blend of Vintage 2020 postcensal population estimates for April 1, 2020, 2020 Demographic",,,,,,,,,,,,,
+"Analysis Estimates, and 2020 Census data from the internal Census Edited File (CEF). The population figures for years 2021 are",,,,,,,,,,,,,
+"single-race estimates of the July 1 resident population, based on the Blended Base produced by the US Census Bureau in lieu of",,,,,,,,,,,,,
+"the April 1, 2020 decennial population count, from the Vintage 2021 postcensal series released by the Census Bureau on June 30,",,,,,,,,,,,,,
+"2022. The population figures for year 2020 are single-race estimates of the July 1 resident population, from the Vintage 2020",,,,,,,,,,,,,
+"postcensal series based on April 2010 Census, released by the Census Bureau on July 27, 2021. The population figures for year",,,,,,,,,,,,,
+"2019 are single-race estimates of the July 1 resident population, from the Vintage 2019 postcensal series based on April 2010",,,,,,,,,,,,,
+"Census, released by the Census Bureau on June 25, 2020. The population figures for year 2018 are single-race estimates of the",,,,,,,,,,,,,
+"July 1 resident population, from the Vintage 2018 postcensal series based on April 2010 Census, released by the Census Bureau on",,,,,,,,,,,,,
+"June 20, 2019. More information: http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Population Data.",,,,,,,,,,,,,
+4. The population figures used in the calculation of death rates for the age group 'under 1 year' are the estimates of the,,,,,,,,,,,,,
+resident population that is under one year of age. More information: http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Age,,,,,,,,,,,,,
+Group.,,,,,,,,,,,,,
+"5. Beginning with the 2018 data, changes have been implemented that affect the counts for ICD-10 cause of death codes O00-O99",,,,,,,,,,,,,
+"compared to previous practice. In addition, data for the cause of death codes O00-O99 for 2003 through 2017 reflect differences",,,,,,,,,,,,,
+in information available to individual states and probable errors. Caution should be used in interpreting these data. More,,,,,,,,,,,,,
+information can be found at: https://www.cdc.gov/nchs/maternal-mortality/.,,,,,,,,,,,,,
+"6. Between December 22, 2020 and February 3, 2021, the county-level race-specific population figures and rates reported for year",,,,,,,,,,,,,
+2018 were inaccurate for queries that reported race-specific categories for single race 6 Race groups in combination for any,,,,,,,,,,,,,
+specific County and/or Urbanization categories. The results to such queries erroneously reported inaccurate population values,,,,,,,,,,,,,
+and death rates for specific 6 Race categories at the county level. This problem applied to all queries with County and/or,,,,,,,,,,,,,
+Urbanization categories and the specific 6 Race categories in year 2018. We apologize for this error.,,,,,,,,,,,,,
+"7. After the creation of the final 2023 dataset, North Carolina updated the cause of death information for over 900 death",,,,,,,,,,,,,
+"certificates to include a cause of death code indicating drug overdose (ICD-10 underlying cause-of-death codes: X40-X44,",,,,,,,,,,,,,
+"X60-X64, X85, and Y10-Y14). Jurisdictions can continue to update death certificates after the closing of the mortality file. As",,,,,,,,,,,,,
+"a result, users should consider that the actual death count for drug overdose deaths for North Carolina in 2023 is over 4,400",,,,,,,,,,,,,
+"deaths, with a crude rate of approximately 41.0 per 100,000 population, and an age-adjusted rate of approximately 42.1 per",,,,,,,,,,,,,
+"100,000 population. These deaths will not be updated on the final mortality datasets.",,,,,,,,,,,,,
