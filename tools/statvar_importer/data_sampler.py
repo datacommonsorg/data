@@ -395,11 +395,9 @@ class DataSampler:
                             # After processing all header rows, validate that all
                             # requested unique columns were found
                             if row_index == header_rows and self._unique_column_names:
-                                missing = set(self._unique_column_names) - set(
-                                    self._unique_column_indices.keys())
+                                found = set(self._unique_column_indices.keys())
+                                missing = set(self._unique_column_names) - found
                                 if missing:
-                                    found = set(
-                                        self._unique_column_indices.keys())
                                     logging.error(
                                         'Failed to map unique columns %s within %d header '
                                         'row(s). Found: %s. Missing: %s. Increase '
