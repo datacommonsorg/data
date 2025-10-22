@@ -7,17 +7,12 @@ import tempfile
 import zipfile
 from urllib.parse import urlparse, parse_qs
 import pandas as pd
-
 # --- Constants provided by the user's environment ---
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# Add the correct parent directory to the system path to find the utility script
-# parent_dir = os.path.dirname(_MODULE_DIR)
-# parent_of_parent_dir = os.path.dirname(parent_dir)
-# sys.path.append(parent_of_parent_dir)
+sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
+import file_util
 sys.path.insert(1, '../../../')
 
-# Import download_file from the utility script
 try:
     from util.download_util_script import download_file
 except ImportError:
@@ -60,7 +55,7 @@ def create_directories(dirs):
 def load_config(config_path):
     """Loads a JSON configuration file."""
     try:
-        with open(config_path, 'r') as f:
+       with file_util.FileIO(config_path, 'r') as f:
             return json.load(f)
     except FileNotFoundError:
         logging.error(f"Config file not found: {config_path}")
@@ -68,6 +63,7 @@ def load_config(config_path):
     except json.JSONDecodeError:
         logging.error(f"Error decoding JSON from file: {config_path}")
         return None
+
 
 def download_and_organize_zip_files(urls, output_folder):
     """
@@ -317,6 +313,8 @@ def process_and_save_data(file_paths):
 
         except Exception as e:
             logging.error(f"Failed to process file {file_path}: {e}")
+            raise RuntimeError(f"Critical failure while processing file {file_path}")
+            
 
 def organize_files(download_dir, math_dir, english_dir, math_files, english_files):
     """
@@ -361,7 +359,10 @@ def organize_files(download_dir, math_dir, english_dir, math_files, english_file
 if __name__ == "__main__":
     setup_logging()
 
-    config_file_path = os.path.join(_MODULE_DIR, 'config.json')
+    # config_file_path = os.path.join(_MODULE_DIR, 'config.json')
+    # config = load_config(config_file_path)
+    
+    config_file_path = 'gs://unresolved_mcf/us_edu/urban_new_york_education/latest/config.json'
     config = load_config(config_file_path)
 
     if config is None:
