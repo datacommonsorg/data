@@ -1,0 +1,15 @@
+parameter,value
+header_rows,1
+header_cols,
+parameter,value
+url,us_states
+description,
+#place_type,State
+#places_within,
+start_date,2001
+release_frequency,1Year
+output_columns,"observationAbout,observationDate,variableMeasured,value"
+mapped_rows,1
+mapped_columns,9
+,
+#input_rows,10

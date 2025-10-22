@@ -1,0 +1,12 @@
+key,property1,value1,property2,value2,property3,value3,property4,value4
+unitid,#Format,observationAbout=college/ipedsId/{Data},,,populationType,Student,,
+year,observationDate,{Data},,,,,,
+,,,,,,,,
+ftpt:1,enrollmentLevel,EnrolledFullTime,,,,,,
+ftpt:2,enrollmentLevel,EnrolledPartTime,,,,,,
+,,,,,,,,
+retention_rate,measuredProperty,count,value,{Number},unit,Percent,scalingFactor,100
+returning_students,measuredProperty,count,enrollmentStatus,Returning,value,{Number},,
+prev_cohort,measuredProperty,count,enrollmentStatus,PreviousYear,value,{Number},,
+prev_exclusions,measuredProperty,count,enrollmentStatus,PreviousYear,enrollmentStatus,Excluded,value,{Number}
+prev_cohort_adj,measuredProperty,count,enrollmentStatus,PreviousYear,enrollmentStatus,Adjusted,value,{Number}
