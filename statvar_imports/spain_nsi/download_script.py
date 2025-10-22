@@ -31,22 +31,10 @@ _CONFIG_PATH = os.path.join(_SCRIPT_PATH, 'import_config.json')
 _OUTPUT_DIRECTORY = os.path.join(_SCRIPT_PATH, 'input_files')
 
 
-def rename_total(filepath):
-    """
-    Renames the 'Total' column to 'value' if it exists.
-    """
-    df = pd.read_csv(filepath, sep=',')
-    df.columns = df.columns.str.strip()
-
-    if 'Total' in df.columns:
-        df = df.rename(columns={'Total': 'value'})
-    df.to_csv(filepath, index=False)
-
-
 def clean_and_rename_total(filepath):
     """
-    Efficiently processes a specific CSV file by combining renaming and cleaning
-    operations to read/write only once. Logs errors without halting the script.
+    Efficiently processes a specific CSV file by combining renaming, cleaning,
+    and dropping 'Percentage: 100' rows.
     """
     try:
         # Read the file once
@@ -59,10 +47,31 @@ def clean_and_rename_total(filepath):
 
         # Clean the 'value' column
         if 'value' in df.columns:
-            df['value'] = df['value'].astype(str)
-            df['value'] = df['value'].str.replace('.', '', regex=False)
-            df['value'] = df['value'].str.replace(',', '.', regex=False)
-            df['value'] = pd.to_numeric(df['value'], errors='coerce')
+            # First, clean the value to prepare it for numeric conversion
+            value_col_cleaned = df['value'].astype(str).str.replace('.', '',
+                                                                    regex=False)
+            value_col_cleaned = value_col_cleaned.str.replace(',', '.',
+                                                              regex=False)
+            numeric_values = pd.to_numeric(value_col_cleaned, errors='coerce')
+            
+            # Now, assign the cleaned numeric values back to the 'value' column
+            df['value'] = numeric_values
+        
+        # --- LOGIC TO DROP PERCENTAGE=100 ROWS ---
+        if 'Unit' in df.columns and 'value' in df.columns:
+            
+            # --- MODIFIED LINE ---
+            # Made the 'Unit' check case-insensitive (.str.lower())
+            condition_to_drop = (df['Unit'].str.strip().str.lower() == 'percentage') & \
+                                (df['value'] == 100)
+            # --- END OF MODIFICATION ---
+
+            rows_to_drop = condition_to_drop.sum()
+            if rows_to_drop > 0:
+                logging.info(f"Dropping {rows_to_drop} 'Percentage: 100' rows from {os.path.basename(filepath)}.")
+                # Keep only the rows that DO NOT meet the drop condition
+                df = df[~condition_to_drop]
+        # --- END OF DROP LOGIC ---
 
         # Write the file once
         df.to_csv(filepath, index=False)
@@ -143,15 +152,38 @@ def main(_):
             logging.error(
                 f"Downloaded file not found at {original_filepath}")
 
+    # --- ALL FILE PATHS ---
     activity_file = os.path.join(_OUTPUT_DIRECTORY,
                                  "activity_employment_unemployment_by_sex.csv")
     education_file = os.path.join(_OUTPUT_DIRECTORY,
                                   "Levels_of_education_gender.csv")
     population_file = os.path.join(_OUTPUT_DIRECTORY,
                                    "Population_by_sex_and_age_group.csv")
-    rename_total(activity_file)
-    rename_total(education_file)
-    clean_and_rename_total(population_file)
+    education_field_file = os.path.join(_OUTPUT_DIRECTORY,
+                                      "Education_Field_of_study.csv")
+    
+    # --- CALLING THE CLEAN FUNCTION FOR ALL FILES ---
+    # This will now apply the drop logic to every file
+    
+    if os.path.exists(activity_file):
+        clean_and_rename_total(activity_file)
+    else:
+        logging.warning(f"File not found, skipping: {activity_file}")
+        
+    if os.path.exists(education_file):
+        clean_and_rename_total(education_file)
+    else:
+        logging.warning(f"File not found, skipping: {education_file}")
+        
+    if os.path.exists(population_file):
+        clean_and_rename_total(population_file)
+    else:
+        logging.warning(f"File not found, skipping: {population_file}")
+        
+    if os.path.exists(education_field_file):
+        clean_and_rename_total(education_field_file)
+    else:
+        logging.warning(f"File not found, skipping: {education_field_file}")
 
 
 if __name__ == '__main__':
