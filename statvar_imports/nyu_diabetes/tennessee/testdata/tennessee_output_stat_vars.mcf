@@ -1,3 +1,5 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=testdata/tennessee_input.xlsx --pv_map=pvmap.csv --config_file=metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=place_resolver.csv --output_path=testdata/tennessee_output" on 2025-10-22 07:06:40.566914
+
 Node: dcid:AgeAdjusted_Count_MortalityEvent_DiabetesMellitus_AsAFractionOf_AgeAdjusted_Count_Person_DiabetesMellitus
 typeOf: dcid:StatisticalVariable
 populationType: dcid:MortalityEvent

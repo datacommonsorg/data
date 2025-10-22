@@ -28,8 +28,6 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(script_dir, "input_files")
 Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 
-YEAR_REGEX = re.compile(r'/death/(\d{4})/')
-
 @retry(tries=3, delay=5, backoff=2)
 def retry_method(url, headers=None):
     response = requests.get(url, headers=headers, timeout=120)
@@ -57,9 +55,9 @@ def download_files(url_list, save_folder):
                     for chunk in r.iter_content(block_size):
                         f.write(chunk)
                         progress_bar.update(len(chunk))
-            logging.info(f"✅ Saved: {file_path}\n")
+            logging.info(f"Saved: {file_path}\n")
         except Exception as e:
-            logging.error(f"❌ Failed to download {url} after retries: {e}\n")
+            logging.error(f"Failed to download {url} after retries: {e}\n")
 
 def generate_urls(start_year, end_year, url_template):
     url_list = []
@@ -68,9 +66,9 @@ def generate_urls(start_year, end_year, url_template):
         url_list.append(formatted_url)
     return url_list
 
-def extract_year(url):
+def extract_year(filename):
     """Extracts a four-digit year from the filename using regex."""
-    match = YEAR_REGEX.search(url)
+    match = re.search(r'Diabetes_County_(\d{4}).xlsx', filename)
     if match:
         return int(match.group(1))
     return None
@@ -95,8 +93,7 @@ def process_excel_files(input_dir):
 
             folder = os.path.basename(root)
             relative_key = os.path.join(folder, filename)
-            
-            year = extract_year(url)
+            year = extract_year(filename)
             
             if year is None:
                 logging.warning(f"Could not find year for file in map: {relative_key}. Skipping processing.")
@@ -108,7 +105,7 @@ def process_excel_files(input_dir):
                 df.to_excel(file_path, index=False)
                 
             except Exception as e:
-                logging.error(f"Failed to process and save Excel file {filename}: {e}")
+                raise RuntimeError(f"Failed to process and save Excel file {filename}: {e}")
 
     logging.info("\nExcel file processing complete. 'year' column added to all processed files.")
 
@@ -119,7 +116,6 @@ def main(_):
     final_urls = generate_urls(start_year, current_year,url_template)
     
     download_files(final_urls, save_folder=INPUT_DIR)
-
     process_excel_files(INPUT_DIR)
 
 if __name__ == "__main__":
