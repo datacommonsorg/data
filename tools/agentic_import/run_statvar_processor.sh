@@ -73,14 +73,19 @@ mkdir -p "${WORKING_DIR}/.datacommons"
 # Define log file paths (persistent files that Gemini can read)
 PROCESSOR_LOG="${WORKING_DIR}/.datacommons/processor.log"
 BACKUP_LOG="${WORKING_DIR}/.datacommons/backup.log"
+# Keep CSV column ordering predictable across runs when importing multiple files.
+OUTPUT_COLUMNS="observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor"
 # TODO : Add existing_statvar_mcf, existing_schema_mcf support
 # Run statvar processor with output going to persistent log
+# Keep constant-value columns because custom DC imports read the CSV directly and skip the TMCF.
 echo "Running statvar processor..."
 "${PYTHON_INTERPRETER}" "${SCRIPT_DIR}/statvar_importer/stat_var_processor.py" \
   --input_data="${INPUT_DATA}" \
   --pv_map="${WORKING_DIR}/${OUTPUT_PATH}_pvmap.csv" \
   --config_file="${WORKING_DIR}/${OUTPUT_PATH}_metadata.csv" \
   --generate_statvar_name=True \
+  --skip_constant_csv_columns=False \
+  --output_columns="${OUTPUT_COLUMNS}" \
   --output_counters="${WORKING_DIR}/.datacommons/output_counters.csv" \
   --output_path="${WORKING_DIR}/${OUTPUT_PATH}" > "${PROCESSOR_LOG}" 2>&1
 
