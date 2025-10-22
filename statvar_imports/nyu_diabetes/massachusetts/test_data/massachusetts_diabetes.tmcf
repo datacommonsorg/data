@@ -1,0 +1,6 @@
+Node: E:Massachusetts_ouput->E0
+observationDate: C:Massachusetts_ouput->observationDate
+observationAbout: C:Massachusetts_ouput->observationAbout
+value: C:Massachusetts_ouput->value
+variableMeasured: dcid:Percent_Person_WithDiabetes
+typeOf: dcs:StatVarObservation
