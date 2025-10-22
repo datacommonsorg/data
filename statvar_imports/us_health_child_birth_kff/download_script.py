@@ -48,11 +48,13 @@ def extract_data_from_url(url):
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
         logging.fatal(f"Error fetching URL {url}: {e}")
+        raise RuntimeError(e)
         return None
 
     match = re.search(r'"gdocsObject":(\[\[.*?\]\]),"postBody"', response.text)
     if not match:
         logging.fatal(f"Could not find gdocsObject in {url}.")
+        raise RuntimeError(e)
         return None
     try:
         child_birth_str = match.group(1)
@@ -60,6 +62,7 @@ def extract_data_from_url(url):
         return child_birth_data
     except (json.JSONDecodeError, KeyError) as e:
         logging.fatal(f"Failed to parse gdocsObject from {url}: {e}")
+        raise RuntimeError(e)
         return None
 
 def main(_):
@@ -71,7 +74,7 @@ def main(_):
     with open(output_file, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         header_written = False
-
+        # This dynamic loop automatically fetches all existing and future timeframe data published by KFF without requiring code updates
         for i in range(16):
             url = base_url.format(i=i)
             logging.info(f"Fetching data for timeframe {i} from {url}")
@@ -97,6 +100,7 @@ def main(_):
                             writer.writerow([year] + row)
                 except (IndexError) as e:
                     logging.fatal(f"Error processing data from {url}: {e}")
+                    raise RuntimeError(e)
 
     logging.info(f"Data downloaded and saved to {output_file}")
 
