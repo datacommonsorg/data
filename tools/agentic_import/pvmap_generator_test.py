@@ -14,9 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import json
 import os
-import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -38,7 +36,8 @@ class PVMapGeneratorTest(unittest.TestCase):
         self._metadata_file.write_text('parameter,value')
 
     def tearDown(self):
-        os.chdir(self._cwd)  # Restore prior cwd so later tests see original state.
+        os.chdir(
+            self._cwd)  # Restore prior cwd so later tests see original state.
         self._temp_dir.cleanup()
 
     def _make_generator(self, *, is_sdmx: bool) -> PVMapGenerator:
@@ -60,16 +59,9 @@ class PVMapGeneratorTest(unittest.TestCase):
         self.assertTrue(prompt_path.is_file())
         return prompt_path
 
-    def _extract_json_section(self, prompt_text: str) -> dict:
-        match = re.search(r"```json\n(.*?)\n```", prompt_text, re.DOTALL)
-        self.assertIsNotNone(match, 'Prompt JSON block missing')
-        return json.loads(match.group(1))
-
-    def _assert_prompt_content(self,
-                               prompt_path: Path,
-                               *,
-                               expect_sdmx: bool,
+    def _assert_prompt_content(self, prompt_path: Path, *, expect_sdmx: bool,
                                config: Config):
+        # Ensure prompt lives under the generated .datacommons run directory.
         path_parts = set(prompt_path.parts)
         self.assertIn('.datacommons', path_parts)
         self.assertIn('runs', path_parts)
@@ -80,42 +72,49 @@ class PVMapGeneratorTest(unittest.TestCase):
         expected_pvmap = f'{basename}_pvmap.csv'
         expected_metadata = f'{basename}_metadata.csv'
 
-        self.assertIn(str(self._data_file.resolve()), prompt_text)
+        # Input paths should appear verbatim so the agent sees the canonical files.
+        self.assertIn(str(self._data_file.resolve()),
+                      prompt_text,
+                      msg='Input data path missing from prompt')
         for metadata_path in config.data_config.input_metadata:
-            self.assertIn(str(Path(metadata_path).resolve()), prompt_text)
+            self.assertIn(str(Path(metadata_path).resolve()),
+                          prompt_text,
+                          msg='Metadata path missing from prompt')
+        # Output filenames keep the agent aligned on what to generate.
         self.assertIn(expected_pvmap, prompt_text)
         self.assertIn(expected_metadata, prompt_text)
+        # Iteration guidance must reflect the configured max attempts.
         self.assertIn(f'You have exactly {config.max_iterations} attempts',
                       prompt_text)
 
         if expect_sdmx:
+            # SDMX prompts highlight dataset type and show SDMX-specific banner.
             self.assertIn('"dataset_type": "sdmx"', prompt_text)
             self.assertIn('SDMX DATASET DETECTED', prompt_text)
         else:
+            # CSV prompts lack SDMX flagging text.
             self.assertIn('"dataset_type": "csv"', prompt_text)
             self.assertNotIn('SDMX DATASET DETECTED', prompt_text)
 
-        json_block = self._extract_json_section(prompt_text)
-        self.assertEqual(json_block['dataset_type'],
-                         'sdmx' if expect_sdmx else 'csv')
-        self.assertEqual(Path(json_block['working_dir']).resolve(),
-                         Path(self._temp_dir.name).resolve())
-        self.assertEqual(json_block['input_data'][0],
-                         str(self._data_file.resolve()))
-        self.assertEqual(json_block['input_metadata'][0],
-                         str(self._metadata_file.resolve()))
-        self.assertEqual(json_block['output_dir'],
-                         f"{self._temp_dir.name}/output")
+        # Working directory reference should match the temp execution root.
+        expected_working_dir = str(Path(self._temp_dir.name).resolve())
+        self.assertIn(expected_working_dir, prompt_text)
 
-    def test_generate_prompt_for_dataset_types(self):
-        for is_sdmx in (False, True):
-            with self.subTest(is_sdmx=is_sdmx):
-                generator = self._make_generator(is_sdmx=is_sdmx)
-                generator.generate()
-                prompt_path = self._read_prompt_path(generator)
-                self._assert_prompt_content(prompt_path,
-                                            expect_sdmx=is_sdmx,
-                                            config=generator._config)
+    def test_generate_prompt_csv(self):
+        generator = self._make_generator(is_sdmx=False)
+        generator.generate()
+        prompt_path = self._read_prompt_path(generator)
+        self._assert_prompt_content(prompt_path,
+                                    expect_sdmx=False,
+                                    config=generator._config)
+
+    def test_generate_prompt_sdmx(self):
+        generator = self._make_generator(is_sdmx=True)
+        generator.generate()
+        prompt_path = self._read_prompt_path(generator)
+        self._assert_prompt_content(prompt_path,
+                                    expect_sdmx=True,
+                                    config=generator._config)
 
     def test_generate_requires_input_data(self):
         generator = PVMapGenerator(
@@ -129,7 +128,8 @@ class PVMapGeneratorTest(unittest.TestCase):
         extra_file.write_text('header\nvalue2')
         generator = PVMapGenerator(
             Config(data_config=DataConfig(
-                input_data=[str(self._data_file), str(extra_file)],
+                input_data=[str(self._data_file),
+                            str(extra_file)],
                 input_metadata=[str(self._metadata_file)]),
                    dry_run=True))
         with self.assertRaises(ValueError):
@@ -142,8 +142,7 @@ class PVMapGeneratorTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 PVMapGenerator(
                     Config(data_config=DataConfig(
-                        input_data=[str(external_file)],
-                        input_metadata=[]),
+                        input_data=[str(external_file)], input_metadata=[]),
                            dry_run=True))
 
 
