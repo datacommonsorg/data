@@ -79,7 +79,7 @@ class PVMapGeneratorTest(unittest.TestCase):
         command = result.gemini_command
         self.assertIn(str(result.prompt_path), command)
         self.assertIn(str(result.gemini_log_path), command)
-        self.assertIn('-y',
+        self.assertIn(' -y ',
                       command,
                       msg='Gemini command should auto-confirm runs')
 
@@ -97,7 +97,7 @@ class PVMapGeneratorTest(unittest.TestCase):
 
         prompt_text = prompt_path.read_text()
 
-        basename = os.path.basename(config.output_path)
+        basename = Path(config.output_path).name
         expected_pvmap = f'{basename}_pvmap.csv'
         expected_metadata = f'{basename}_metadata.csv'
 

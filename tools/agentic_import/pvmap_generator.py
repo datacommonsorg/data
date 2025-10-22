@@ -22,9 +22,9 @@ import subprocess
 import sys
 from datetime import datetime
 from dataclasses import dataclass
+from pathlib import Path
 from typing import List, Optional
 
-from pathlib import Path
 from absl import app
 from absl import flags
 from absl import logging
@@ -110,7 +110,7 @@ class PVMapGenerator:
 
     def __init__(self, config: Config):
         # Define working directory once for consistent path resolution
-        self._working_dir = os.getcwd()
+        self._working_dir = Path.cwd()
 
         # Copy config to avoid modifying the original
         self._config = copy.deepcopy(config)
@@ -130,14 +130,13 @@ class PVMapGenerator:
             ]
 
         # Parse output_path into directory and basename components
-        # Relative directory
-        self._output_dir = os.path.dirname(self._config.output_path) or '.'
-        # Relative name
-        self._output_basename = os.path.basename(self._config.output_path)
+        output_path = Path(self._config.output_path)
+        self._output_dir = output_path.parent
+        self._output_basename = output_path.name
 
         # Create output directory if it doesn't exist
-        output_full_dir = os.path.join(self._working_dir, self._output_dir)
-        os.makedirs(output_full_dir, exist_ok=True)
+        output_full_dir = self._working_dir / self._output_dir
+        output_full_dir.mkdir(parents=True, exist_ok=True)
 
         self._datacommons_dir = self._initialize_datacommons_dir()
 
@@ -146,28 +145,27 @@ class PVMapGenerator:
         self._gemini_run_id = f"gemini_{timestamp}"
 
         # Create run directory structure
-        self._run_dir = os.path.join(self._datacommons_dir, 'runs',
-                                     self._gemini_run_id)
-        os.makedirs(self._run_dir, exist_ok=True)
+        self._run_dir = self._datacommons_dir / 'runs' / self._gemini_run_id
+        self._run_dir.mkdir(parents=True, exist_ok=True)
 
-    def _validate_and_convert_path(self, path: str) -> str:
+    def _validate_and_convert_path(self, path: str) -> Path:
         """Convert path to absolute and validate it's within working directory."""
-        real_path = os.path.realpath(path)
-        real_working_dir = os.path.realpath(self._working_dir)
-        # Check if path is within working directory
-        if not real_path.startswith(real_working_dir):
+        real_path = Path(path).expanduser().resolve()
+        working_dir = self._working_dir.resolve()
+        try:
+            real_path.relative_to(working_dir)
+        except ValueError:
             raise ValueError(
-                f"Path '{path}' is outside working directory '{real_working_dir}'"
-            )
+                f"Path '{path}' is outside working directory '{working_dir}'")
         return real_path
 
-    def _initialize_datacommons_dir(self) -> str:
+    def _initialize_datacommons_dir(self) -> Path:
         """Initialize and return the .datacommons directory path."""
-        dc_dir = os.path.join(self._working_dir, '.datacommons')
-        os.makedirs(dc_dir, exist_ok=True)
+        dc_dir = self._working_dir / '.datacommons'
+        dc_dir.mkdir(parents=True, exist_ok=True)
         return dc_dir
 
-    def _get_user_confirmation(self, prompt_file: str) -> bool:
+    def _get_user_confirmation(self, prompt_file: Path) -> bool:
         """Ask user for confirmation before starting PV map generation.
         
         Args:
@@ -233,15 +231,15 @@ class PVMapGenerator:
 
         # Generate the prompt as the first step
         prompt_file = self._generate_prompt()
-        gemini_log_file = os.path.join(self._run_dir, 'gemini_cli.log')
+        gemini_log_file = self._run_dir / 'gemini_cli.log'
         gemini_command = self._build_gemini_command(prompt_file,
                                                     gemini_log_file)
 
         result = GenerationResult(
             run_id=self._gemini_run_id,
-            run_dir=Path(self._run_dir),
-            prompt_path=Path(prompt_file),
-            gemini_log_path=Path(gemini_log_file),
+            run_dir=self._run_dir,
+            prompt_path=prompt_file,
+            gemini_log_path=gemini_log_file,
             gemini_command=gemini_command,
             sandbox_enabled=self._config.enable_sandboxing)
 
@@ -284,7 +282,7 @@ class PVMapGenerator:
             return True
         return shutil.which('gemini') is not None
 
-    def _build_gemini_command(self, prompt_file: str, log_file: str) -> str:
+    def _build_gemini_command(self, prompt_file: Path, log_file: Path) -> str:
         """Build the gemini CLI command with appropriate flags.
         
         Uses cat to pipe prompt file to gemini CLI with:
@@ -300,9 +298,13 @@ class PVMapGenerator:
         Returns:
             Complete gemini command string
         """
+        prompt_path = prompt_file.resolve()
+        log_path = log_file.resolve()
         gemini_cmd = self._config.gemini_cli or 'gemini'
-        sandbox_flag = "--sandbox " if self._config.enable_sandboxing else ""
-        return f"cat '{prompt_file}' | {gemini_cmd} {sandbox_flag} -y 2>&1 | tee '{log_file}'"
+        sandbox_flag = "--sandbox" if self._config.enable_sandboxing else ""
+        return (
+            f"cat '{prompt_path}' | {gemini_cmd} {sandbox_flag} -y 2>&1 | tee '{log_path}'"
+        )
 
     def _run_subprocess(self, command: str) -> int:
         """Run a subprocess command with real-time output streaming."""
@@ -333,7 +335,7 @@ class PVMapGenerator:
             logging.error("Error running subprocess: %s", str(e))
             return 1
 
-    def _generate_prompt(self) -> str:
+    def _generate_prompt(self) -> Path:
         """Generate prompt from Jinja2 template using import configuration.
         
         Returns:
@@ -346,7 +348,7 @@ class PVMapGenerator:
         template = env.get_template('generate_pvmap_prompt.j2')
 
         # Calculate paths and prepare template variables
-        working_dir = self._working_dir  # Use defined working directory
+        working_dir = str(self._working_dir)  # Use defined working directory
         # Point to tools/ directory (parent of agentic_import)
         tools_dir = os.path.abspath(os.path.join(_SCRIPT_DIR, '..'))
 
@@ -358,11 +360,11 @@ class PVMapGenerator:
             'script_dir':
                 tools_dir,
             'input_data':
-                self._config.data_config.input_data[0]
+                str(self._config.data_config.input_data[0])
                 if self._config.data_config.input_data else "",
-            'input_metadata':
-                self._config.data_config.input_metadata or
-                [],  # Handle None case, default to empty list for multiple files support
+            'input_metadata': [
+                str(path) for path in self._config.data_config.input_metadata
+            ] if self._config.data_config.input_metadata else [],
             'dataset_type':
                 'sdmx' if self._config.data_config.is_sdmx_dataset else 'csv',
             'max_iterations':
@@ -373,7 +375,7 @@ class PVMapGenerator:
             'output_path':
                 self._config.output_path,  # Full path for statvar processor
             'output_dir':
-                self._output_dir,  # Directory for pvmap/metadata files
+                str(self._output_dir),  # Directory for pvmap/metadata files
             'output_basename':
                 self._output_basename  # Base name for pvmap/metadata files
         }
@@ -382,7 +384,7 @@ class PVMapGenerator:
         rendered_prompt = template.render(**template_vars)
 
         # Write rendered prompt to run directory
-        output_file = os.path.join(self._run_dir, 'generate_pvmap_prompt.md')
+        output_file = self._run_dir / 'generate_pvmap_prompt.md'
         with open(output_file, 'w') as f:
             f.write(rendered_prompt)
 
