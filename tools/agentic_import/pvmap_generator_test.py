@@ -14,7 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import os
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -53,18 +55,38 @@ class PVMapGeneratorTest(unittest.TestCase):
         )
         return PVMapGenerator(config)
 
-    def _assert_prompt_content(self, prompt_path: Path, *, expect_sdmx: bool):
+    def _read_prompt_path(self, generator: PVMapGenerator) -> Path:
+        prompt_path = Path(generator._run_dir) / 'generate_pvmap_prompt.md'
         self.assertTrue(prompt_path.is_file())
+        return prompt_path
+
+    def _extract_json_section(self, prompt_text: str) -> dict:
+        match = re.search(r"```json\n(.*?)\n```", prompt_text, re.DOTALL)
+        self.assertIsNotNone(match, 'Prompt JSON block missing')
+        return json.loads(match.group(1))
+
+    def _assert_prompt_content(self,
+                               prompt_path: Path,
+                               *,
+                               expect_sdmx: bool,
+                               config: Config):
         path_parts = set(prompt_path.parts)
         self.assertIn('.datacommons', path_parts)
         self.assertIn('runs', path_parts)
 
         prompt_text = prompt_path.read_text()
 
+        basename = os.path.basename(config.output_path)
+        expected_pvmap = f'{basename}_pvmap.csv'
+        expected_metadata = f'{basename}_metadata.csv'
+
         self.assertIn(str(self._data_file.resolve()), prompt_text)
-        self.assertIn('output_file_pvmap.csv', prompt_text)
-        self.assertIn('output_file_metadata.csv', prompt_text)
-        self.assertIn('You have exactly 3 attempts', prompt_text)
+        for metadata_path in config.data_config.input_metadata:
+            self.assertIn(str(Path(metadata_path).resolve()), prompt_text)
+        self.assertIn(expected_pvmap, prompt_text)
+        self.assertIn(expected_metadata, prompt_text)
+        self.assertIn(f'You have exactly {config.max_iterations} attempts',
+                      prompt_text)
 
         if expect_sdmx:
             self.assertIn('"dataset_type": "sdmx"', prompt_text)
@@ -73,15 +95,56 @@ class PVMapGeneratorTest(unittest.TestCase):
             self.assertIn('"dataset_type": "csv"', prompt_text)
             self.assertNotIn('SDMX DATASET DETECTED', prompt_text)
 
-    def test_generate_prompt_for_csv_dataset(self):
-        generator = self._make_generator(is_sdmx=False)
-        prompt_path = Path(generator._generate_prompt())
-        self._assert_prompt_content(prompt_path, expect_sdmx=False)
+        json_block = self._extract_json_section(prompt_text)
+        self.assertEqual(json_block['dataset_type'],
+                         'sdmx' if expect_sdmx else 'csv')
+        self.assertEqual(Path(json_block['working_dir']).resolve(),
+                         Path(self._temp_dir.name).resolve())
+        self.assertEqual(json_block['input_data'][0],
+                         str(self._data_file.resolve()))
+        self.assertEqual(json_block['input_metadata'][0],
+                         str(self._metadata_file.resolve()))
+        self.assertEqual(json_block['output_dir'],
+                         f"{self._temp_dir.name}/output")
 
-    def test_generate_prompt_for_sdmx_dataset(self):
-        generator = self._make_generator(is_sdmx=True)
-        prompt_path = Path(generator._generate_prompt())
-        self._assert_prompt_content(prompt_path, expect_sdmx=True)
+    def test_generate_prompt_for_dataset_types(self):
+        for is_sdmx in (False, True):
+            with self.subTest(is_sdmx=is_sdmx):
+                generator = self._make_generator(is_sdmx=is_sdmx)
+                generator.generate()
+                prompt_path = self._read_prompt_path(generator)
+                self._assert_prompt_content(prompt_path,
+                                            expect_sdmx=is_sdmx,
+                                            config=generator._config)
+
+    def test_generate_requires_input_data(self):
+        generator = PVMapGenerator(
+            Config(data_config=DataConfig(input_data=[], input_metadata=[]),
+                   dry_run=True))
+        with self.assertRaises(ValueError):
+            generator.generate()
+
+    def test_generate_rejects_multiple_input_files(self):
+        extra_file = Path('input2.csv')
+        extra_file.write_text('header\nvalue2')
+        generator = PVMapGenerator(
+            Config(data_config=DataConfig(
+                input_data=[str(self._data_file), str(extra_file)],
+                input_metadata=[str(self._metadata_file)]),
+                   dry_run=True))
+        with self.assertRaises(ValueError):
+            generator.generate()
+
+    def test_rejects_paths_outside_working_directory(self):
+        with tempfile.TemporaryDirectory() as other_dir:
+            external_file = Path(other_dir) / 'external.csv'
+            external_file.write_text('header\nvalue')
+            with self.assertRaises(ValueError):
+                PVMapGenerator(
+                    Config(data_config=DataConfig(
+                        input_data=[str(external_file)],
+                        input_metadata=[]),
+                           dry_run=True))
 
 
 if __name__ == '__main__':
