@@ -1,0 +1,3 @@
+observationAbout,observationPeriod,observationDate,value,variableMeasured,unit,scalingFactor
+country/ESP,P1Y,2021,22.4,dcid:Count_Person_WithDisability_Unemployed,,
+country/ESP,P1Y,2023,26.2,dcid:Count_Person_16To24Years_Employed,,
