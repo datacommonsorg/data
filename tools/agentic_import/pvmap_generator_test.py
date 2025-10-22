@@ -20,6 +20,7 @@ import unittest
 from pathlib import Path
 
 from tools.agentic_import.pvmap_generator import (Config, DataConfig,
+                                                  GenerationResult,
                                                   PVMapGenerator)
 
 
@@ -54,10 +55,38 @@ class PVMapGeneratorTest(unittest.TestCase):
         )
         return PVMapGenerator(config)
 
-    def _read_prompt_path(self, generator: PVMapGenerator) -> Path:
-        prompt_path = Path(generator._run_dir) / 'generate_pvmap_prompt.md'
+    def _read_prompt_path(self, result: GenerationResult) -> Path:
+        prompt_path = result.prompt_path
         self.assertTrue(prompt_path.is_file())
         return prompt_path
+
+    def _assert_generation_result(self, result: GenerationResult):
+        self.assertIsInstance(result, GenerationResult)
+        # Run directory should exist and match the run identifier.
+        self.assertTrue(result.run_dir.is_dir(),
+                        msg='Run directory should be created')
+        self.assertEqual(result.run_dir.name, result.run_id)
+
+        # Prompt and log live inside the run directory.
+        self.assertEqual(result.prompt_path.parent, result.run_dir)
+        self.assertEqual(result.gemini_log_path.parent, result.run_dir)
+
+        # Log file is only created after execution; path should still be absolute.
+        self.assertTrue(result.prompt_path.is_absolute())
+        self.assertTrue(result.gemini_log_path.is_absolute())
+
+        # Command must reference the prompt and log destinations and auto-confirm flag.
+        command = result.gemini_command
+        self.assertIn(str(result.prompt_path), command)
+        self.assertIn(str(result.gemini_log_path), command)
+        self.assertIn('-y',
+                      command,
+                      msg='Gemini command should auto-confirm runs')
+
+        if result.sandbox_enabled:
+            self.assertIn('--sandbox', command)
+        else:
+            self.assertNotIn('--sandbox', command)
 
     def _assert_prompt_content(self, prompt_path: Path, *, expect_sdmx: bool,
                                config: Config):
@@ -102,16 +131,20 @@ class PVMapGeneratorTest(unittest.TestCase):
 
     def test_generate_prompt_csv(self):
         generator = self._make_generator(is_sdmx=False)
-        generator.generate()
-        prompt_path = self._read_prompt_path(generator)
+        result = generator.generate()
+        self._assert_generation_result(result)
+
+        prompt_path = self._read_prompt_path(result)
         self._assert_prompt_content(prompt_path,
                                     expect_sdmx=False,
                                     config=generator._config)
 
     def test_generate_prompt_sdmx(self):
         generator = self._make_generator(is_sdmx=True)
-        generator.generate()
-        prompt_path = self._read_prompt_path(generator)
+        result = generator.generate()
+        self._assert_generation_result(result)
+
+        prompt_path = self._read_prompt_path(result)
         self._assert_prompt_content(prompt_path,
                                     expect_sdmx=True,
                                     config=generator._config)

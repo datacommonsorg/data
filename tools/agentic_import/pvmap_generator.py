@@ -24,6 +24,7 @@ from datetime import datetime
 from dataclasses import dataclass
 from typing import List, Optional
 
+from pathlib import Path
 from absl import app
 from absl import flags
 from absl import logging
@@ -92,6 +93,16 @@ class Config:
     enable_sandboxing: bool = False
     output_path: str = 'output/output'
     gemini_cli: Optional[str] = None
+
+
+@dataclass
+class GenerationResult:
+    run_id: str
+    run_dir: Path
+    prompt_path: Path
+    gemini_log_path: Path
+    gemini_command: str
+    sandbox_enabled: bool
 
 
 class PVMapGenerator:
@@ -222,19 +233,30 @@ class PVMapGenerator:
 
         # Generate the prompt as the first step
         prompt_file = self._generate_prompt()
+        gemini_log_file = os.path.join(self._run_dir, 'gemini_cli.log')
+        gemini_command = self._build_gemini_command(prompt_file,
+                                                    gemini_log_file)
+
+        result = GenerationResult(
+            run_id=self._gemini_run_id,
+            run_dir=Path(self._run_dir),
+            prompt_path=Path(prompt_file),
+            gemini_log_path=Path(gemini_log_file),
+            gemini_command=gemini_command,
+            sandbox_enabled=self._config.enable_sandboxing)
 
         # Check if we're in dry run mode
         if self._config.dry_run:
             logging.info(
                 "Dry run mode: Prompt file generated at %s. "
                 "Skipping generation execution.", prompt_file)
-            return
+            return result
 
         # Get user confirmation before proceeding (unless skipped)
         if not self._config.skip_confirmation:
             if not self._get_user_confirmation(prompt_file):
                 logging.info("PV map generation cancelled by user.")
-                return
+                return result
 
         # Check if Gemini CLI is available (warning only for aliases)
         if not self._check_gemini_cli_available():
@@ -242,22 +264,18 @@ class PVMapGenerator:
                 "Gemini CLI not found in PATH. Will attempt to run anyway (may work if aliased)."
             )
 
-        # Generate log file path using the run directory
-        log_file = os.path.join(self._run_dir, 'gemini_cli.log')
-
-        # Execute Gemini CLI with generated prompt
-        gemini_command = self._build_gemini_command(prompt_file, log_file)
         logging.info(
             f"Launching gemini (cwd: {self._working_dir}): {gemini_command} ")
-        logging.info(f"Gemini output will be saved to: {log_file}")
+        logging.info(f"Gemini output will be saved to: {gemini_log_file}")
 
         exit_code = self._run_subprocess(gemini_command)
         if exit_code == 0:
             logging.info("Gemini CLI completed successfully")
-        else:
-            logging.error("Gemini CLI failed with exit code: %d", exit_code)
-            raise RuntimeError(
-                f"Gemini CLI execution failed with exit code {exit_code}")
+            return result
+
+        logging.error("Gemini CLI failed with exit code: %d", exit_code)
+        raise RuntimeError(
+            f"Gemini CLI execution failed with exit code {exit_code}")
 
     def _check_gemini_cli_available(self) -> bool:
         """Check if Gemini CLI is available in PATH or a custom command is provided."""
