@@ -358,9 +358,6 @@ def organize_files(download_dir, math_dir, english_dir, math_files, english_file
 
 if __name__ == "__main__":
     setup_logging()
-
-    # config_file_path = os.path.join(_MODULE_DIR, 'config.json')
-    # config = load_config(config_file_path)
     
     config_file_path = 'gs://unresolved_mcf/us_edu/urban_new_york_education/latest/config.json'
     config = load_config(config_file_path)
