@@ -92,8 +92,8 @@ class BackupProcessorRunTest(unittest.TestCase):
 
         self.assertFalse((backup_dir / '.datacommons').exists())
         manifest = self._read_manifest(backup_dir)
-        self.assertIn('.datacommons', manifest)
-        self.assertIn('Skipped (missing or blocked):', manifest)
+        self.assertIn('SKIP .datacommons', manifest)
+        self.assertNotIn('OK .datacommons', manifest)
 
 
 if __name__ == '__main__':
