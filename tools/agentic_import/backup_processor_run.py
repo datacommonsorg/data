@@ -147,10 +147,12 @@ def execute_backup(
     attempt_num = _get_next_attempt_number(gemini_run_dir)
     attempt_dir = gemini_run_dir / f'{_ATTEMPT_PREFIX}{attempt_num:03d}'
     attempt_dir.mkdir(parents=True, exist_ok=True)
+    resolved_attempt_dir = attempt_dir.resolve()
 
     logging.info(f"Backing up attempt {attempt_num:03d} for {gemini_run_id}")
     logging.info(f"Working directory: {working_dir}")
     logging.info(f"Attempt directory: {attempt_dir}")
+    logging.info(f"Resolved attempt directory: {resolved_attempt_dir}")
 
     # Track what was actually backed up
     backed_up = []
@@ -164,8 +166,8 @@ def execute_backup(
         source_path = _resolve_path(path_spec, working_dir)
         resolved_source = source_path.resolve()
         # Skip circular references between source and destination
-        if (_is_relative_to(resolved_source, attempt_dir) or
-                _is_relative_to(attempt_dir, resolved_source)):
+        if (_is_relative_to(resolved_source, resolved_attempt_dir) or
+                _is_relative_to(resolved_attempt_dir, resolved_source)):
             logging.error(
                 f"  Skipping circular backup source: {resolved_source} conflicts "
                 f"with destination {attempt_dir}")
