@@ -1,0 +1,24 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_health/test_data/sample_input/idn_contraceptionmethod_2000_2023_.xlsx --pv_map=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_health/pvmap/idn_contraceptionmethod_2000_2023_pvmap.csv --places_resolved_csv=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_place_resolved.csv --config=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_health/metadata/idn_contraceptionmethod_2000_2023_metadata.csv --output_path=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_health/test_data/sample_output/Health_Data_Indonesia" on 2024-06-10 18:10:11.307005
+
+Node: dcid:Count_Person_15To49Year_Female_Married
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Year15To49
+alternateName: "Married Women Aged 15-49 Using Contraception@id"
+gender: dcid:Female
+maritalStatus: dcid:Married
+
+Node: dcid:Count_Person_Year15To49_ContraceptionMethod_Female_Married_AsAFractionOf_Count_Person_15To49Year_Female_Married
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Year_Female_Married
+age: dcid:Year15To49
+alternateName: "Married Women Aged 15-49 Using Contraception@id"
+birthControlMethod: dcid:ContraceptionMethod
+gender: dcid:Female
+maritalStatus: dcid:Married
+
