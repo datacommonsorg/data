@@ -17,6 +17,10 @@ This Python Script is for County Level Data 1990-2000.
 import os
 import numpy as np
 import pandas as pd
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from api_calls import get_api_response
 from common_functions import (replace_age, gender_based_grouping,
                               race_based_grouping)
 
@@ -42,13 +46,19 @@ def county1990(output_folder: str):
                 '/popest/tables/1990-2000/counties/asrh/casrh'+str(j)+'.txt'
             cols=['Year','geo_ID','Race',0,1,2,3,4,5,6,7\
                 ,8,9,10,11,12,13,14,15,16,17]
-            df = pd.read_table(url,index_col=False,delim_whitespace=True\
-                ,skiprows=16,skipfooter=14,engine='python',names=cols,\
-                    encoding='ISO-8859-1')
+            filename = 'raw_data_county_1990_2000.csv'
+            file_path = get_api_response(filename, url, 1)
+            df = pd.read_csv(file_path,
+                             engine='python',
+                             names=cols,
+                             index_col=False,
+                             sep='\s+',
+                             skiprows=16,
+                             skipfooter=14,
+                             encoding='ISO-8859-1')
             #Writing raw data to csv
-            df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   "raw_data", 'raw_data_county_1990_2000.csv'),
-                      index=False)
+            df.to_csv(file_path, index=False)
+
             # Removing the lines that have false symbols.
             num_df = (df.drop(cols, axis=1).join(df[cols]\
                 .apply(pd.to_numeric, errors='coerce')))
