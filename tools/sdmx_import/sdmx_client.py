@@ -117,7 +117,10 @@ class SdmxClient:
         try:
             logging.info(f"Fetching details for dataflow: {dataflow_id}")
             dataflow_msg = self.client.dataflow(dataflow_id)
-            dataflow_series = sdmx.to_pandas(dataflow_msg.dataflow)
+            if dataflow_msg.dataflow:
+                dataflow_series = sdmx.to_pandas(dataflow_msg.dataflow)
+            else:
+                return {}
 
             if isinstance(dataflow_series, pd.Series):
                 return dataflow_series.to_dict()

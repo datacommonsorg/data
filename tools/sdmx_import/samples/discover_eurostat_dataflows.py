@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-discover_eurostat_dataflows_sample.py
+discover_eurostat_dataflows.py
 
 A sample script to demonstrate the data discovery features of the SdmxClient
 with the Eurostat data source.

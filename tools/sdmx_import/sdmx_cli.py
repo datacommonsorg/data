@@ -217,12 +217,12 @@ def handle_discover_dataflows() -> None:
         dataflows = client.list_dataflows()
 
     if not dataflows:
-        print("No dataflows found.")
+        logging.info("No dataflows found.")
         return
 
     # Use pandas to pretty-print the output to the console
     df = pd.DataFrame(dataflows)
-    print(df.to_string())
+    logging.info(f"\n{df.to_string()}")
 
 
 def validate_required_flags_for_command(command: str) -> None:
