@@ -348,13 +348,13 @@ Please set command options: -approver <user> -issue <issue-id>"
 
   # Add notes to the import level notes.txt as well
   echo_log "Adding note to $gcs_import_dir/$NOTES_FILE..."
-  import_notes=$(gsutil ls "$gcs_import_dir/$NOTES_FILE" > $tmp_note_file 2>/dev/null)
-  if [[ -z "$import_notes" ]]; then
-    # No notes.txt for the import. Copy over existing file.
-    run_cmd gsutil cp "$gcs_ver_dir/$NOTES_FILE" "$gcs_import_dir/$NOTES_FILE"
-  else
+  if gsutil -q stat "$gcs_import_dir/$NOTES_FILE"; then
+    # Merge notes with existing file
     run_cmd gsutil compose "$gcs_import_dir/$NOTES_FILE" \
       "$gcs_ver_dir/$NOTES_FILE" "$gcs_import_dir/$NOTES_FILE"
+  else
+    # No notes.txt for the import. Copy over existing file.
+    run_cmd gsutil cp "$gcs_ver_dir/$NOTES_FILE" "$gcs_import_dir/$NOTES_FILE"
   fi
 }
 
@@ -624,7 +624,7 @@ function copy_import_version_data {
     echo_fatal "Unable to find GCS folder $gcs_import_dir for copy"
   if [[ -d "$import_dir/$version" ]]; then
     [[ -z "$FORCE" ]] && \
-      echo_log "Reuisng existing files in $import_dir/$version..." \
+      echo_log "Reusing existing files in $import_dir/$version..." \
       && return
   fi
   echo_log "Copying $gcs_import_dir to $import_dir/$version..."
