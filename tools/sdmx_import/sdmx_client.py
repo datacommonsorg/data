@@ -12,20 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-dataflow.py
+sdmx_client.py
 
-This module provides a client class for interacting with SDMX APIs.
+This module provides a client class for discovering, fetching, and interacting
+with SDMX APIs.
 """
 
 import logging
 import sdmx
 import pandas as pd
 from requests.exceptions import HTTPError
-from typing import Dict, Any
+from typing import Dict, Any, List
 
 
 class SdmxClient:
-    """A client for fetching data and metadata from an SDMX REST API."""
+    """A client for discovering and fetching data and metadata from an SDMX REST API."""
 
     def __init__(self, endpoint: str, agency_id: str):
         """
@@ -51,6 +52,81 @@ class SdmxClient:
         }
         sdmx.add_source(custom_source, override=True)
         return sdmx.Client(source_id)
+
+    def list_dataflows(self) -> List[Dict[str, Any]]:
+        """
+        Lists all available dataflows.
+
+        Returns:
+            A list of dictionaries, where each dictionary represents a dataflow.
+        """
+        try:
+            logging.info(
+                f"Fetching all dataflows from {self.endpoint} for agency {self.agency_id}"
+            )
+            dataflows_msg = self.client.dataflow()
+
+            # Manually construct the list of dicts for a consistent structure
+            result = []
+            for df_id, df in dataflows_msg.dataflow.items():
+                result.append({
+                    'id': df_id,
+                    'name': str(df.name),
+                    'description': str(df.description) if df.description else ''
+                })
+            return result
+        except Exception as e:
+            logging.error(f"Error fetching dataflows: {e}")
+            raise
+
+    def search_dataflows(self, search_term: str) -> List[Dict[str, Any]]:
+        """
+        Searches for dataflows matching a search term.
+
+        Args:
+            search_term: The term to search for in dataflow names and descriptions.
+
+        Returns:
+            A list of dictionaries, where each dictionary represents a matching dataflow.
+        """
+        try:
+            logging.info(f"Searching for dataflows with term: {search_term}")
+            all_dataflows = self.list_dataflows()
+            search_term = search_term.lower()
+
+            results = [
+                df for df in all_dataflows
+                if search_term in df.get('name', '').lower() or \
+                   search_term in df.get('description', '').lower()
+            ]
+            return results
+        except Exception as e:
+            logging.error(f"Error searching dataflows: {e}")
+            raise
+
+    def get_dataflow_details(self, dataflow_id: str) -> Dict[str, Any]:
+        """
+        Gets the details of a specific dataflow.
+
+        Args:
+            dataflow_id: The ID of the dataflow.
+
+        Returns:
+            A dictionary containing the details of the dataflow.
+        """
+        try:
+            logging.info(f"Fetching details for dataflow: {dataflow_id}")
+            dataflow_msg = self.client.dataflow(dataflow_id)
+            dataflow_series = sdmx.to_pandas(dataflow_msg.dataflow)
+
+            if isinstance(dataflow_series, pd.Series):
+                return dataflow_series.to_dict()
+
+            # If we reach here, it means the dataflow was not found or the response was empty.
+            return {}
+        except Exception as e:
+            logging.error(f"Error fetching dataflow details: {e}")
+            raise
 
     def download_metadata(self, dataflow_id: str, output_path: str):
         """
