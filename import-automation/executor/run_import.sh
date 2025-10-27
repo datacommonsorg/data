@@ -74,7 +74,11 @@ Options:
                See the following for supported config options:
                https://github.com/datacommonsorg/data/blob/master/import-automation/executor/app/configs.py#L32
   -l <version> Update import's latest_version.txt to given version.
+                 Add a note or provide an issue with -issue <id> and
+                 approver with -approver <user>
   -note '<msg>'  Add a message when updating latest version, recorded in GCS $NOTES_FILE
+  -diff <old> <new> Run import diff between versions <old> and <new>
+
   -h           Show this help message.
 
 
