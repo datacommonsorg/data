@@ -165,11 +165,14 @@ Process the full input data (not sample data) using the PV map and metadata file
 
 ```bash
 # Run the stat var processor
+OUTPUT_COLUMNS="observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor"
 python "$DC_DATA_REPO_PATH/tools/statvar_importer/stat_var_processor.py" \
   --input_data="input_data.csv" \
   --pv_map="sample_output/output_pvmap.csv" \
   --config_file="sample_output/output_metadata.csv" \
   --generate_statvar_name=True \
+  --skip_constant_csv_columns=False \
+  --output_columns="$OUTPUT_COLUMNS" \
   --output_path="final_output/output" > "processor.log" 2>&1
 ```
 
