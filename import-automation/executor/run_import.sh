@@ -299,6 +299,20 @@ function get_latest_gcs_import_output {
   fi
 }
 
+# Check if an import version exists
+function check_import_version_exists {
+  local version="$1"; shift
+  local import_name="$1"; shift
+
+  import_name=${import_nmae:-"$IMPORT_NAME"}
+  version=${version:-"$IMPORT_VERSION"}
+
+  gcs_exists=$(gsutil ls gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$version)
+  [[ -z "$gcs_exists" ]] && echo_fatal "Unable to find version $version for $import_name in gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$version"
+
+  echo "$version"
+}
+
 # Add import version notes on GCS
 function add_import_version_notes {
   local version="$1"; shift;
@@ -368,6 +382,7 @@ function get_import_config {
   ver_override=$(grep -o "import_version_override:[^ ]*" <<< "$config_vals")
   if [[ -n "$ver_override" ]]; then
     IMPORT_VERSION=$(cut -d: -f2 <<< "$ver_override")
+    check_import_version_exists "$IMPORT_VERSION" "$IMPORT_NAME"
     get_latest_gcs_import_output
     # Add config to update version.
     add_import_version_notes "$IMPORT_VERSION" "Updating latest $IMPORT_NAME from: $LATEST_VERSION to: $IMPORT_VERSION, $NOTE"
@@ -587,7 +602,7 @@ function get_import_latest_version {
   local import_name="$1"; shift
 
   import_name=${import_name:-"$IMPORT_NAME"}
-  gcs_import_dir="gs://$GCS_BUCKET/$IMPORT_DIR/$import_name/$version"
+  gcs_import_dir="gs://$GCS_BUCKET/$IMPORT_DIR/$import_name"
 
   # Get the latest version from version.txt
   version=$(gsutil cat $gcs_import_dir/latest_version.txt)
@@ -635,6 +650,7 @@ function run_import_version_diff {
 
   setup_python
   import_name=${import_name:-"$IMPORT_NAME"}
+  new_version=${new_version-$(get_import_latest_version "$import_name")}
   [[ -z "$old_version" ]] || [[ -z "$new_version" ]] \
     && echo_fatal "Specify old and new versions for import with '-diff <old> <new>'"
 
