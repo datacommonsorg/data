@@ -21,11 +21,11 @@ import pandas as pd
 import sys
 from typing import Tuple
 
-from .validation_config import ValidationConfig
-from .report_generator import ReportGenerator
-from .validator import Validator
-from .util import filter_dataframe
-from .result import ValidationResult, ValidationStatus
+from validation_config import ValidationConfig
+from report_generator import ReportGenerator
+from validator import Validator
+from util import filter_dataframe
+from result import ValidationResult, ValidationStatus
 
 _FLAGS = flags.FLAGS
 

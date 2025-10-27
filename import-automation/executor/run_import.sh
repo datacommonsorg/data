@@ -47,6 +47,8 @@ CONFIG_OVERRIDE=""
 TMP_DIR=${TMP_DIR:-"/tmp"}
 CLOUD_JOB_WAIT="--wait"
 NOTES_FILE=${NOTES_FILE:-"notes.txt"}
+LOCAL_IMPORT_DIR=${LOCAL_IMPORT_DIR:-"$TMP_DIR/import-data"}
+LOG=${LOG:-"$TMP_DIR/run-import-$(date +%Y%m%d).log"}
 USAGE="$(basename $0) <import-name> [Options]
 Script to run an import through docker in cloud run or locally.
 Options:
@@ -125,11 +127,11 @@ function run_cmd {
   echo_log "Running command: $cmd"
   local start_time=$(date +%s)
   $cmd >> $LOG 2>&1
-  local st=$?
+  local status=$?
   local end_time=$(date +%s)
-  [[ "$st" == "0" ]] || echo_fatal "Failed to run command: $cmd"
+  [[ "$status" == "0" ]] || echo_fatal "Failed to run command: $cmd"
   echo_log "Completed $cmd, status:$status, time:$(( $end_time - $start_time ))s"
-  return $st
+  return $status
 }
 
 function parse_options {
@@ -159,16 +161,21 @@ function parse_options {
       -c*) shift; CONFIG_OVERRIDE="$CONFIG_OVERRIDE, $1";;
       -l) shift; IMPORT_VERSION="$1";;
       -no*) shift; NOTE="$1";;
+      -ap*) shift; APPROVER="$1";;
+      -is*) shift; ISSUE="$1";;
+      -di*) shift; RUN_DIFF="1"; OLD_VERSION="$1"; shift; NEW_VERSION="$1";;
+      -f) FORCE="1";;
       -h) echo "$USAGE" >&2; exit 1;;
       -x) set -x;;
-      *) MANIFEST="$1";;
+      *) MANIFEST_FILE="$1";;
     esac
     shift
   done
-  [[ -z "$MANIFEST" ]] && echo_fatal "No manifest specified. $USAGE"
+
+  MANIFEST_FILE=${MANIFEST_FILE:-$(get_manifest_for_import "$IMPORT_NAME")}
+  [[ -z "$MANIFEST_FILE" ]] && echo_fatal "No manifest specified. $USAGE"
   ARTIFACT_REGISTRY=${ARTIFACT_REGISTRY:-"gcr.io/$GCP_PROJECT"}
 
-  LOG=${LOG:-"$TMP_DIR/run-import-$(date +%Y%m%d).log"}
   [[ -f "$LOG" ]] && ( for i in {1..10}; do echo "" >> $LOG; done )
   START_TS=$(date +%s)
   echo_log "Starting run_import: $CMD"
@@ -183,6 +190,21 @@ function setup_gcloud {
     echo_log "Setting up gcloud credentials..."
     run_cmd gcloud auth application-default login
   fi
+}
+
+# Setup git repository for tools
+function setup_python {
+  cwd="$PWD"
+  # Setup python
+  if [[ -z "$PYTHON_SETUP" ]]; then
+    echo_log "Setting up python env for git workspace: $DATA_REPO/.env..."
+    cd $DATA_REPO/..
+    python3 -m venv .env
+    source .env/bin/activate
+    pip install -q -r $DATA_REPO/import-automation/executor/requirements.txt
+    PYTHON_SETUP="1"
+  fi
+  cd "$cwd"
 }
 
 # Returns the value of a parameter from an override or json dictionary or
@@ -204,9 +226,20 @@ function get_param_value_json {
   echo ${value:-"$default"}
 }
 
+# Get the manifest file for an import.
+function get_manifest_for_import {
+  local import_name="$1"; shift
+  import_name=${import_name:-"$IMPORT_NAME"}
+
+  # Get the manifest.json file that has the import name.
+  grep -l -i "\<$import_name\>" $(find "$DATA_REPO" -name manifest.json)
+}
+
 # Load import name and resources from a manifest file
 function load_manifest {
   local manifest_file="$1"; shift
+  manifest_file=${manifest_file:-$(get_manifest_for_import "$IMPORT_NAME")}
+
   if [ ! -f "$manifest_file" ]; then
     echo_fatal "Unable to find file '$manifest_file'"
   fi
@@ -277,7 +310,8 @@ function add_import_version_notes {
   import_dir=${import_dir:-"$IMPORT_DIR"}
 
   # Check if the version exists
-  gcs_ver_dir="gs://$GCS_BUCKET/$import_dir/$import_name/$version"
+  gcs_import_dir="gs://$GCS_BUCKET/$import_dir/$import_name"
+  gcs_ver_dir="$gcs_import_dir/$version"
   echo_log "Looking for import version: $gcs_ver_dir"
   dir=$(gsutil ls "$gcs_ver_dir")
   [[ -z "$dir" ]] && echo_fatal "Unable to find latest version dir $gcs_ver_dir"
@@ -287,11 +321,27 @@ function add_import_version_notes {
   gsutil cat "$gcs_ver_dir/$NOTES_FILE" > $tmp_note_file 2>/dev/null
 
   # Update notes on GCS
-  new_notes="[$(date +%Y-%m-%d:%H:%M:%S)]: Update by $USER, Note: $notes"
+  new_notes="[$(date +%Y-%m-%d:%H:%M:%S)]: Update by $USER, Note: $notes, issue:$ISSUE, approver:$APPROVER"
+  has_issue_approver=$(grep "issue: *[a-z0-9/]+.*approver: *[0-9a-z]+" <<< "new_notes")
+  [[ -z "$has_issue_approver" ]] && \
+    echo_fatal "No issue or approver for version update.
+Please set command options: -approver <user> -issue <issue-id>"
+
   echo_log "Adding note to $gcs_ver_dir/$NOTES_FILE: $new_notes"
   echo "$new_notes" >> $tmp_note_file
 
   run_cmd gsutil cp $tmp_note_file $gcs_ver_dir/$NOTES_FILE
+
+  # Add notes to the import level notes.txt as well
+  echo_log "Adding note to $gcs_import_dir/$NOTES_FILE..."
+  import_notes=$(gsutil ls "$gcs_import_dir/$NOTES_FILE" > $tmp_note_file 2>/dev/null)
+  if [[ -z "$import_notes" ]]; then
+    # No notes.txt for the import. Copy over existing file.
+    run_cmd gsutil cp "$gcs_ver_dir/$NOTES_FILE" "$gcs_import_dir/$NOTES_FILE"
+  else
+    run_cmd gsutil compose "$gcs_import_dir/$NOTES_FILE" \
+      "$gcs_ver_dir/$NOTES_FILE" "$gcs_import_dir/$NOTES_FILE"
+  fi
 }
 
 # Get the config overrides for import executor
@@ -532,6 +582,107 @@ function run_import_batch {
 gcloud --project=$GCP_PROJECT batch jobs describe --location=$REGION $JOB_NAME"
 }
 
+# Get the latest version for an import from GCS
+function get_import_latest_version {
+  local import_name="$1"; shift
+
+  import_name=${import_name:-"$IMPORT_NAME"}
+  gcs_import_dir="gs://$GCS_BUCKET/$IMPORT_DIR/$import_name/$version"
+
+  # Get the latest version from version.txt
+  version=$(gsutil cat $gcs_import_dir/latest_version.txt)
+  echo_log "Latest version of import: $import_name in $gcs_import_dir: $version"
+  echo $version
+}
+
+# Copy files from import version directory in GCS to a local dir
+function copy_import_version_data {
+  local import_name="$1"; shift
+  local version="$1"; shift
+  local import_dir="$1"; shift
+
+  import_dir=${import_dir:-"$LOCAL_IMPORT_DIR/$IMPORT_NAME"}
+  mkdir -p $import_dir/$version
+  gcs_import_dir="gs://$GCS_BUCKET/$IMPORT_DIR/$import_name/$version"
+  is_dir_exists=$(gsutil ls "$gcs_import_dir")
+  [[ -z "$is_dir_exists" ]] && \
+    echo_fatal "Unable to find GCS folder $gcs_import_dir for copy"
+  if [[ -d "$import_dir/$version" ]]; then
+    [[ -z "$FORCE" ]] && \
+      echo_log "Reuisng existing files in $import_dir/$version..." \
+      && return
+  fi
+  echo_log "Copying $gcs_import_dir to $import_dir/$version..."
+  run_cmd gsutil -m cp -r $gcs_import_dir $import_dir
+}
+
+# Get the maximum value in a csv column
+function get_max_csv_column {
+  local column="$1"; shift
+  local csv_file="$1"; shift
+
+  local col_index=$(head -1 "$csv_file" | sed -e 's/,/\n/g' | cat -n | \
+    grep "$column" | egrep -o "[0-9]+" | head -1)
+  max_value=$(tail +2 $csv_file | cut -d, -f$col_index | sort -n | tail -1)
+  echo "$max_value"
+}
+
+# Run differ for two versions for an import
+function run_import_version_diff {
+  local import_name="$1"; shift
+  local old_version="$1"; shift
+  local new_version="$1"; shift
+
+  setup_python
+  import_name=${import_name:-"$IMPORT_NAME"}
+  [[ -z "$old_version" ]] || [[ -z "$new_version" ]] \
+    && echo_fatal "Specify old and new versions for import with '-diff <old> <new>'"
+
+  echo_log "Comparing import: $import_name, version: $old_version with $new_version..."
+  local_import_dir="$LOCAL_IMPORT_DIR/$import_name"
+  copy_import_version_data "$import_name" "$old_version" "$local_import_dir"
+  copy_import_version_data "$import_name" "$new_version" "$local_import_dir"
+
+  # Get all validation folders with MCF files to be compared
+  mcf_dirs=$(ls -d $local_import_dir/$new_version/*/validation | \
+    sed -e "s,.*$new_version/,,")
+  echo_log "Running differs for $import_name, version: $old_version vs $new_version for data:" $mcf_dirs
+  for dir in $mcf_dirs; do
+
+    # Run the differ
+    echo_log "Diffing $import_name/$old_version/$mcf_dir into $local_import_dir/$new_version/diff-$old_version..."
+    tmcf=$(sed -e 's,/.*,,' <<< "$dir")
+    rm -rf $local_import_dir/$new_version/diff-$old_version/$tmcf 2>/dev/null
+    IMPORT_DIFFER=${IMPORT_DIFFER:-"$DATA_REPO/tools/import_differ/import_differ.py"}
+    run_cmd python $IMPORT_DIFFER \
+      --previous_data=$local_import_dir/$old_version/$dir/*.mcf \
+      --current_data=$local_import_dir/$new_version/$dir/*.mcf \
+      --output_location=$local_import_dir/$new_version/diff-$old_version/$tmcf \
+      --file_format=mcf \
+      --runner_mode=local
+
+    # Show sample rows with deletions
+    diff_report="$local_import_dir/$new_version/diff-$old_version/$tmcf/obs_diff_summary.csv"
+    max_deletions=$(get_max_csv_column "DELETED" "$diff_report")
+    echo_log "Import diff: max-deletions:$max_deletions, $diff_report"
+    ( head -1 $diff_report; grep ",$max_deletions," $diff_report ) | \
+      head -10 | column -s, -t
+
+
+    echo_log "Running validation for import $import_name..."
+    validation_report="$local_import_dir/$new_version/diff-$old_version/$tmcf/validation-result.json"
+    IMPORT_VALIDATION=${IMPORT_VALIDATION:-"$DATA_REPO/tools/import_validation/runner.py"}
+    python $IMPORT_VALIDATION \
+      --validation_config=$DATA_REPO/tools/import_validation/validation_config.json \
+      --stats_summary=$local_import_dir/$new_version/$dir/validation/summary_report.csv \
+      --differ_output=$diff_report \
+      --validation_output=$validation_report
+    status=$?
+    echo_log "Validation: status:$? report:$validation_report"
+    cat "$validation_report"
+  done
+}
+
 # Return if script is being sourced
 (return 0 2>/dev/null) && return
 
@@ -540,8 +691,12 @@ trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
 
 parse_options "$@"
 setup_gcloud
-load_manifest "$MANIFEST"
+load_manifest "$MANIFEST_FILE"
 build_docker "$DOCKER_IMAGE"
+if [[ -n "$RUN_DIFF" ]]; then
+  run_import_version_diff "$IMPORT_NAME" "$OLD_VERSION" "$NEW_VERSION"
+  exit 0
+fi
 if [[ "$RUN_MODE" == "executor" ]]; then
   run_import_executor
 fi
