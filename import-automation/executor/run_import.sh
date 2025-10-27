@@ -688,13 +688,13 @@ function run_import_version_diff {
     echo_log "Running validation for import $import_name..."
     validation_report="$local_import_dir/$new_version/diff-$old_version/$tmcf/validation-result.json"
     IMPORT_VALIDATION=${IMPORT_VALIDATION:-"$DATA_REPO/tools/import_validation/runner.py"}
-    python $IMPORT_VALIDATION \
+    run_cmd python $IMPORT_VALIDATION \
       --validation_config=$DATA_REPO/tools/import_validation/validation_config.json \
       --stats_summary=$local_import_dir/$new_version/$dir/validation/summary_report.csv \
       --differ_output=$diff_report \
       --validation_output=$validation_report
     status=$?
-    echo_log "Validation: status:$? report:$validation_report"
+    echo_log "Validation: status:$status report:$validation_report"
     cat "$validation_report"
   done
 }
