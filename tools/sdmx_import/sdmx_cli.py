@@ -21,6 +21,7 @@ Provides a simple interface to fetch data and metadata from SDMX REST APIs.
 import os
 import urllib.parse
 from typing import Dict, Any, List
+import pandas as pd
 
 from absl import app
 from absl import flags
@@ -36,13 +37,17 @@ _COMMAND_HANDLERS = {
     'download-data': {
         'handler': lambda: handle_download_data(),
         'description': 'Download SDMX data with optional filters (CSV format)'
+    },
+    'discover-dataflows': {
+        'handler': lambda: handle_discover_dataflows(),
+        'description': 'Discover available dataflows with optional search'
     }
 }
 
 # Flag definitions
 FLAGS = flags.FLAGS
 
-# Common flags for both commands
+# Common flags for commands
 flags.DEFINE_string('endpoint', None, 'SDMX REST API endpoint URL')
 flags.DEFINE_string('agency', None, 'Agency ID (e.g., OECD.SDD.NAD)')
 flags.DEFINE_string('dataflow', None, 'Dataflow ID')
@@ -55,6 +60,10 @@ flags.DEFINE_multi_string(
 flags.DEFINE_multi_string(
     'param', [],
     'Query parameters as key:value pairs (e.g., --param=startPeriod:2022)')
+
+# Discovery specific flags
+flags.DEFINE_string('search', None,
+                    'Search term to filter dataflows by name or description')
 
 # Logging flags
 flags.DEFINE_bool('verbose', False, 'Enable verbose logging')
@@ -186,6 +195,36 @@ def handle_download_data() -> None:
     logging.info(f"Successfully downloaded data to: {FLAGS.output_path}")
 
 
+def handle_discover_dataflows() -> None:
+    """
+    Handle the discover-dataflows subcommand.
+    """
+    logging.info("Starting dataflow discovery...")
+    logging.info(f"Endpoint: {FLAGS.endpoint}")
+    logging.info(f"Agency: {FLAGS.agency}")
+
+    # Validate inputs
+    if not validate_url(FLAGS.endpoint):
+        raise ValueError(f"Invalid endpoint URL: {FLAGS.endpoint}")
+
+    client = SdmxClient(FLAGS.endpoint, FLAGS.agency)
+
+    if FLAGS.search:
+        logging.info(f"Searching for dataflows with term: '{FLAGS.search}'")
+        dataflows = client.search_dataflows(FLAGS.search)
+    else:
+        logging.info("Listing all available dataflows")
+        dataflows = client.list_dataflows()
+
+    if not dataflows:
+        print("No dataflows found.")
+        return
+
+    # Use pandas to pretty-print the output to the console
+    df = pd.DataFrame(dataflows)
+    print(df.to_string())
+
+
 def validate_required_flags_for_command(command: str) -> None:
     """
     Validate that required flags are provided for the given command.
@@ -196,10 +235,17 @@ def validate_required_flags_for_command(command: str) -> None:
     Raises:
         ValueError: If required flags are missing
     """
-    required_common = ['endpoint', 'agency', 'dataflow', 'output_path']
-    missing_flags = []
+    required = {
+        'download-metadata': ['endpoint', 'agency', 'dataflow', 'output_path'],
+        'download-data': ['endpoint', 'agency', 'dataflow', 'output_path'],
+        'discover-dataflows': ['endpoint', 'agency']
+    }
 
-    for flag_name in required_common:
+    if command not in required:
+        return  # No validation for this command
+
+    missing_flags = []
+    for flag_name in required[command]:
         flag_value = getattr(FLAGS, flag_name)
         if not flag_value:
             missing_flags.append(f"--{flag_name}")
