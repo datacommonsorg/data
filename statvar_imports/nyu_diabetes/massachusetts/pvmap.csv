@@ -1,0 +1,7 @@
+key,prop,val,,,,,,,,
+Report Area,observationAbout,{Data},populationType,Person,measuredProperty,percent,healthOutcome,Diabetes,age,Years18Onwards
+2018,value,{Number},observationDate,2018,,,,,,
+2019,value,{Number},observationDate,2019,,,,,,
+2020,value,{Number},observationDate,2020,,,,,,
+2021,value,{Number},observationDate,2021,,,,,,
+2022,value,{Number},observationDate,2022,,,,,,
