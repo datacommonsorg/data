@@ -1,0 +1,23 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Storm_NOAA",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.ncdc.noaa.gov/",
+            "scripts": [
+                "download_script.py",
+                "shard_noaa_data.py",
+                "process_noaa_data.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/storm_noaa.tmcf",
+                    "cleaned_csv": "noaa_storm_output/cleaned_storm_data.csv"
+                }
+            ],
+            "cron_schedule": "30 05 * * 1"
+        }
+    ]
+}
