@@ -1,0 +1,5 @@
+State,Male Sample Sized,Male Prevalence,Male Standard Error,Male 95% CIe,||,Female Sample Sized,Female Prevalence,Female Standard Error,Female 95% CIe,year,life_stage
+Totalf,26887,10.9,0.42,(10.1–11.8),||,25058,9.5,0.48,(8.6–10.4),2021,child
+CA,754,8.9,1.26,(6.7–11.7),||,666,8.2,1.56,(5.7–11.9),2021,child
+CT,866,15,2.12,(11.3–19.7),||,847,12.2,1.62,(9.4–15.8),2021,child
+DC,256,17.2,3.23,(11.8–24.5),||,216,15.2,3.25,(9.8–22.7),2021,child
