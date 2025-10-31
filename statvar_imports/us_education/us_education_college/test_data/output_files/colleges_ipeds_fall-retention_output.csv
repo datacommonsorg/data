@@ -1,0 +1,8 @@
+observationAbout,observationDate,variableMeasured,value
+college/ipedsId/100654,2003,dcid:Count_Student_EnrolledFullTime,0.75
+college/ipedsId/100654,2003,dcid:Count_Student_EnrolledPartTime,0.57
+college/ipedsId/100663,2003,dcid:Count_Student_EnrolledFullTime,0.75
+college/ipedsId/100663,2003,dcid:Count_Student_EnrolledPartTime,0.54
+college/ipedsId/100706,2003,dcid:Count_Student_EnrolledFullTime,0.76
+college/ipedsId/100706,2003,dcid:Count_Student_EnrolledPartTime,1
+college/ipedsId/100724,2003,dcid:Count_Student_EnrolledFullTime,0.54
