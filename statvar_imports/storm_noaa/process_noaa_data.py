@@ -132,10 +132,17 @@ def process_shard(shard_file, api_key):
             reader = csv.DictReader(f_in)
             for row in reader:
                 try:
-                    if not row.get("BEGIN_LAT") or not row.get("BEGIN_LON"):
+                    if row.get("STATE") == "ATLANTIC NORTH":
                         continue
                     
-                    geoids = ll2p.resolve(row["BEGIN_LAT"], row["BEGIN_LON"])
+                    begin_lat = row.get("BEGIN_LAT")
+                    begin_lon = row.get("BEGIN_LON")
+
+                    if not valid_lat(begin_lat) or not valid_lng(begin_lon):
+                        logging.warning(f"Invalid coordinates for row in {shard_name}: lat={begin_lat}, lon={begin_lon}")
+                        continue
+                    
+                    geoids = ll2p.resolve(begin_lat, begin_lon)
                     if not geoids:
                         logging.warning(f"Could not resolve geoid for lat/lng: {row['BEGIN_LAT']},{row['BEGIN_LON']} in {shard_name}")
                         continue
@@ -172,7 +179,7 @@ def process_shard(shard_file, api_key):
                         startLocation, endLocation = start_loc_str, end_loc_str
 
                     property_damage = cost_to_int(row.get("DAMAGE_PROPERTY", "0"))
-                    crop_damage = cost_to_int(row.get("DAMAGE_CROPS", "0")),
+                    crop_damage = cost_to_int(row.get("DAMAGE_CROPS", "0"))
                     property_damage_value = f"[USDollar {property_damage}]" if property_damage else ""
                     crop_damage_value = f"[USDollar {crop_damage}]" if crop_damage else ""
 
@@ -210,7 +217,7 @@ def process_shard(shard_file, api_key):
                         processed_rows.add(row_tuple)
                         writer.writerow(output_row)
                 except Exception as e:
-                    logging.error(f"Error processing row in {shard_name}: {row}\n{e}")
+                    logging.error(f"Error processing row in {shard_name}: {row}\n{str(e)}")
     
     logging.info(f"Finished processing for shard: {shard_name}")
     return temp_output_file
@@ -261,7 +268,7 @@ def main(argv):
     shard_files = glob.glob(os.path.join(FLAGS.input_dir, "fips_*.csv"))
     if not shard_files:
         logging.error(f"No shard files found in {FLAGS.input_dir}. Did you run shard_noaa_data.py first?")
-        return
+        raise RuntimeError(f"No shard files found in {FLAGS.input_dir}.")
 
     # Use multiprocessing to process shards in parallel
     num_processes = multiprocessing.cpu_count()

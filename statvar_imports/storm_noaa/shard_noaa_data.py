@@ -78,7 +78,7 @@ def main(argv):
     for f in shard_files.values():
         f.close()
 
-    logging.info(f"\n✅ Sharding complete! Total lines processed: {total_lines_processed:,}")
+    logging.info(f"Sharding complete. Total lines processed: {total_lines_processed:,}")
     logging.info(f"Total shard files created: {len(shard_files)} in '{FLAGS.output_dir}/'")
 
 if __name__ == "__main__":

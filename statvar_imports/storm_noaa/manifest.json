@@ -6,6 +6,7 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://www.ncdc.noaa.gov/",
+            "provenance_description": "The Storm Events Database contains data on weather events in the United States, sourced from the National Oceanic and Atmospheric Administration (NOAA)'s National Centers for Environmental Information (NCEI). It includes information on event types, dates, locations, damages, and other related details.",
             "scripts": [
                 "download_script.py",
                 "shard_noaa_data.py",
