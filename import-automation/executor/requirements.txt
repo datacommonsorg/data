@@ -18,6 +18,7 @@ geojson
 geopy
 google-api-python-client
 google-auth
+google-cloud-batch
 google-cloud-bigquery
 google-cloud-bigquery-storage
 google-cloud-datastore
@@ -59,3 +60,4 @@ netCDF4
 xmltodict
 sodapy
 certifi==2025.1.31
+tqdm
