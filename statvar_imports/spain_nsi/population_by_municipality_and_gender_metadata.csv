@@ -1,0 +1,14 @@
+parameter,value
+url,
+description,https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176992&menu=ultiDatos&idp=1254735572981
+process,
+#place_type,Country
+#places_within,country/ESP
+start_date,2002
+end_date,2025
+release_frequency,P1Y
+comments,
+output_columns,"observationAbout, observationPeriod, observationDate, value, variableMeasured, unit, scalingFactor"
+mapped_rows,1
+mapped_columns,4
+header_rows,1
