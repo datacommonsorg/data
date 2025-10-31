@@ -84,6 +84,11 @@ flags.DEFINE_string(
 flags.DEFINE_bool('schemaless', False, 'Allow schemaless StatVars.')
 flags.DEFINE_string('output_path', '',
                     'File prefix for output mcf, csv and tmcf.')
+flags.DEFINE_list(
+    'output_columns',
+    [],
+    'Comma separated list of columns to emit in the SVObs CSV output.',
+)
 flags.DEFINE_string(
     'existing_statvar_mcf',
     '',
@@ -102,9 +107,9 @@ flags.DEFINE_integer('log_level', logging.INFO,
 flags.DEFINE_integer('log_every_n', 1, 'Log one in N messages.')
 
 # Flags for place name resolution
-flags.DEFINE_string('dc_api_key', '',
+flags.DEFINE_string('dc_api_key', os.environ.get('DC_API_KEY', ''),
                     'DataCommons v2 API key used for APIs such as v2/resolve')
-flags.DEFINE_string('maps_api_key', '',
+flags.DEFINE_string('maps_api_key', os.environ.get('MAPS_API_KEY', ''),
                     'Maps API key for place lookup by name.')
 flags.DEFINE_list('places_csv', [],
                   'CSV file with place names and dcids to match.')
@@ -128,6 +133,11 @@ flags.DEFINE_bool(
     False,
     'Resume processing to create output files not yet generated.',
 )
+flags.DEFINE_bool(
+    'skip_constant_csv_columns',
+    True,
+    'Whether to drop CSV columns whose values remain constant.',
+)
 
 # Flags for spell checks
 _DEFAULT_SPELL_ALLOWLIST = os.path.join(_SCRIPT_DIR, 'words_allowlist.txt')
@@ -143,7 +153,8 @@ flags.DEFINE_list('spell_check_ignore_props', None,
 
 # Flags for pvmap generation
 flags.DEFINE_bool('generate_pvmap', True, 'Generate PVmap')
-flags.DEFINE_string('google_genai_key', '', 'Google API key for GenAI prompt.')
+flags.DEFINE_string('google_genai_key', os.environ.get('GOOGLE_GENAI_KEY', ''),
+                    'Google API key for GenAI prompt.')
 flags.DEFINE_string('sample_pvmap', os.path.join(_SCRIPT_DIR,
                                                  'sample_pvmap.csv'),
                     'Sample PVmap for gen AI.')
@@ -343,11 +354,12 @@ def get_default_config() -> dict:
             True,  # Generate CSV with SVObs
         'output_csv_mode':
             'w',  # Overwrite output CSV file.
-        'output_columns': [],  # Emit all SVObs PVs into output csv
+        'output_columns':
+            _FLAGS.output_columns,
         'generate_tmcf':
             True,  # Generate tMCF for CSV columns
         'skip_constant_csv_columns':
-            (True),  # Skip emitting columns with constant values in the csv
+            _FLAGS.skip_constant_csv_columns,
         'output_only_new_statvars':
             True,  # Drop existing statvars from output
         'output_precision_digits':

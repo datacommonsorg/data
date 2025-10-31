@@ -130,83 +130,84 @@ class PropertyValueMapper:
         # Append new PVs to existing map.
         pv_map_input = {}
         if file_util.file_is_csv(filename):
-            # Load rows into a dict of prop,value
-            # if the first col is a config key, next column is its value
-            logging.log_every_n(
-                logging.INFO,
-                f'Loading PV maps for {namespace} from csv file: {filename}',
-                self._log_every_n)
-            with file_util.FileIO(filename) as csvfile:
-                csv_reader = csv.reader(csvfile,
-                                        skipinitialspace=True,
-                                        escapechar='\\')
-                for row in csv_reader:
-                    # Drop trailing empty columns in the row
-                    last_col = len(row) - 1
-                    while last_col >= 0 and row[last_col].strip() == '':
-                        last_col -= 1
-                    row = row[:last_col + 1]
-                    if not row:
-                        continue
-                    key = row[0].strip()
-                    if key in self._config.get_configs():
-                        # Add value to the config with same type as original.
-                        value = ','.join(row[1:])
-                        config_flags.set_config_value(key, value, self._config)
-                    else:
-                        # Row is a pv map
-                        pvs_list = row[1:]
-                        if len(pvs_list) == 1:
-                            # PVs list has no property, just a value.
-                            # Use the namespace as the property
-                            pvs_list = [namespace]
-                            pvs_list.append(row[1])
-                        if len(pvs_list) % 2 != 0:
-                            raise RuntimeError(
-                                f'Invalid list of property value: {row} in {filename}'
-                            )
-                        # Get property,values from the columns
-                        pvs = {}
-                        for i in range(0, len(pvs_list), 2):
-                            prop = pvs_list[i].strip()
-                            if not prop:
-                                continue
-                            value = pvs_list[i + 1].strip()
-                            if value == '""':
-                                value = ''
-                            # Remove extra quotes around schema values.
-                            # if value and value[0] == '"' and value[-1] == '"':
-                            #  value = value[1:-1].strip()
-                            if value and value[0] != '[' and prop[0] != '#':
-                                # Add quotes around text strings
-                                # with spaces without commas.
-                                # if re.search('[^,] +', value):
-                                #  value = f'"{value}"'
-                                if value[0] == "'" and value[-1] == "'":
-                                    # Replace single quote with double quotes
-                                    # To distinguish quote as delimiter vs value in CSVs
-                                    # single quote is used instead of double quote in CSV values.
-                                    value[0] = '"'
-                                    value[-1] = '"'
-                            #pvs[prop] = value
-                            normalize = True
-                            if '#' in prop or '=' in value:
-                                # Value is a formula. Set value as a string.
-                                normalize = False
-                            pv_utils.add_key_value(prop,
-                                                   value,
-                                                   pvs,
-                                                   self._config.get(
-                                                       'multi_value_properties',
-                                                       {}),
-                                                   normalize=normalize)
-                        pv_map_input[key] = pvs
+            pv_map_input = self._load_pvs_from_csv(filename, namespace)
         else:
             logging.info(
                 f'Loading PV maps for {namespace} from dictionary file: {filename}'
             )
             pv_map_input = read_py_dict_from_file(filename)
         self.load_pvs_dict(pv_map_input, namespace)
+
+    def _load_pvs_from_csv(self, filename: str, namespace: str) -> dict:
+        pv_map_input = {}
+        logging.log_every_n(
+            logging.INFO,
+            f'Loading PV maps for {namespace} from csv file: {filename}',
+            self._log_every_n)
+        with file_util.FileIO(filename) as csvfile:
+            csv_reader = csv.reader(csvfile,
+                                    skipinitialspace=True,
+                                    escapechar='\\')
+            for row in csv_reader:
+                key, pvs = self._process_csv_row(row, namespace, filename)
+                if key:
+                    pv_map_input[key] = pvs
+        return pv_map_input
+
+    def _process_csv_row(self, row: list[str], namespace: str,
+                         filename: str) -> tuple[str | None, dict | None]:
+        # Drop trailing empty columns in the row
+        last_col = len(row) - 1
+        while last_col >= 0 and row[last_col].strip() == '':
+            last_col -= 1
+        row = row[:last_col + 1]
+        if not row:
+            return None, None
+        key = row[0].strip()
+        if key in self._config.get_configs():
+            # Add value to the config with same type as original.
+            value = ','.join(row[1:])
+            config_flags.set_config_value(key, value, self._config)
+            return None, None
+
+        pvs = self._parse_pv_row(row[1:], namespace, filename)
+        return key, pvs
+
+    def _parse_pv_row(self, pvs_list: list[str], namespace: str,
+                      filename: str) -> dict:
+        if len(pvs_list) == 1:
+            # PVs list has no property, just a value.
+            # Use the namespace as the property
+            pvs_list = [namespace, pvs_list[0]]
+        if len(pvs_list) % 2 != 0:
+            raise RuntimeError(
+                f'Invalid list of property value: {pvs_list} in {filename}')
+        # Get property,values from the columns
+        pvs = {}
+        for i in range(0, len(pvs_list), 2):
+            prop = pvs_list[i].strip()
+            if not prop:
+                continue
+            value = pvs_list[i + 1].strip()
+            if value == '""':
+                value = ''
+            if value and value[0] != '[' and prop[0] != '#':
+                if value[0] == "'" and value[-1] == "'":
+                    # Replace single quote with double quotes
+                    # To distinguish quote as delimiter vs value in CSVs
+                    # single quote is used instead of double quote in CSV values.
+                    value = f'"{value[1:-1]}"'
+            normalize = True
+            if '#' in prop or '=' in value:
+                # Value is a formula. Set value as a string.
+                normalize = False
+            pv_utils.add_key_value(prop,
+                                   value,
+                                   pvs,
+                                   self._config.get('multi_value_properties',
+                                                    {}),
+                                   normalize=normalize)
+        return pvs
 
     def load_pvs_dict(self, pv_map_input: dict, namespace: str = 'GLOBAL'):
         if namespace not in self._pv_map:
@@ -264,78 +265,94 @@ class PropertyValueMapper:
         data = pvs.get(data_key, key)
         is_modified = False
 
+        is_modified |= self._process_regex(key, data, pvs)
+        is_modified |= self._process_format(key, data, pvs, data_key)
+        is_modified |= self._process_eval(pvs, data_key)
+
+        logging.level_debug() and logging.log_every_n(
+            2, f'Processed data PVs:{is_modified}:{key}:{pvs}',
+            self._log_every_n)
+        return is_modified
+
+    def _process_regex(self, key: str, data: str, pvs: dict) -> bool:
+        """Processes a #Regex property and updates pvs."""
         # Process regular expression and add named group matches to the PV.
         # Regex PV is of the form: '#Regex': '(?P<Start>[0-9]+) *- *(?P<End>[0-9])'
         # Parses 'Data': '10 - 20' to generate PVs:
         # { 'Start': '10', 'End': '20' }
         regex_key = self._config.get('regex_key', '#Regex')
-        if regex_key in pvs and data:
-            re_pattern = pvs[regex_key]
-            re_matches = re.finditer(re_pattern, data)
-            regex_pvs = {}
-            for match in re_matches:
-                regex_pvs.update(match.groupdict())
-            logging.level_debug() and logging.log_every_n(
-                2,
-                f'Processed regex: {re_pattern} on {key}:{data} to get {regex_pvs}',
-                self._log_every_n)
-            if regex_pvs:
-                self._counters.add_counter('processed-regex', 1, re_pattern)
-                pv_utils.pvs_update(
-                    regex_pvs, pvs,
-                    self._config.get('multi_value_properties', {}))
-                pvs.pop(regex_key)
-                is_modified = True
+        if regex_key not in pvs or not data:
+            return False
 
-        # Format the data substituting properties with values.
-        format_key = self._config.get('format_key', '#Format')
-        if format_key in pvs:
-            format_str = pvs[format_key]
-            (format_prop, strf) = _get_variable_expr(format_str, data_key)
-            try:
-                format_data = strf.format(**pvs)
-                logging.level_debug() and logging.log_every_n(
-                    2,
-                    f'Processed format {format_prop}={strf} on {key}:{data} to get'
-                    f' {format_data}', self._log_every_n)
-            except (KeyError, ValueError) as e:
-                format_data = format_str
-                self._counters.add_counter('error-process-format', 1,
-                                           format_str)
-                logging.level_debug() and logging.log_every_n(
-                    2,
-                    f'Failed to format {format_prop}={strf} on {key}:{data} with'
-                    f' {pvs}, {e}', self._log_every_n)
-            if format_prop != data_key and format_data != format_str:
-                pvs[format_prop] = format_data
-                self._counters.add_counter('processed-format', 1, format_str)
-                pvs.pop(format_key)
-                is_modified = True
-
-        # Evaluate the expression properties as local variables.
-        eval_key = self._config.get('eval_key', '#Eval')
-        if eval_key in pvs:
-            eval_str = pvs[eval_key]
-            eval_prop, eval_data = eval_functions.evaluate_statement(
-                eval_str,
-                pvs,
-                self._config.get('eval_globals', eval_functions.EVAL_GLOBALS),
-            )
-            logging.level_debug() and logging.log_every_n(
-                2,
-                f'Processed eval {eval_str} with {pvs} to get {eval_prop}:{eval_data}',
-                self._log_every_n)
-            if not eval_prop:
-                eval_prop = data_key
-            if eval_data and eval_data != eval_str:
-                pvs[eval_prop] = eval_data
-                self._counters.add_counter('processed-eval', 1, eval_str)
-                pvs.pop(eval_key)
-                is_modified = True
+        re_pattern = pvs[regex_key]
+        re_matches = re.finditer(re_pattern, data)
+        regex_pvs = {}
+        for match in re_matches:
+            regex_pvs.update(match.groupdict())
         logging.level_debug() and logging.log_every_n(
-            2, f'Processed data PVs:{is_modified}:{key}:{pvs}',
+            2,
+            f'Processed regex: {re_pattern} on {key}:{data} to get {regex_pvs}',
             self._log_every_n)
-        return is_modified
+        if regex_pvs:
+            self._counters.add_counter('processed-regex', 1, re_pattern)
+            pv_utils.pvs_update(regex_pvs, pvs,
+                                self._config.get('multi_value_properties', {}))
+            pvs.pop(regex_key)
+            return True
+        return False
+
+    def _process_format(self, key: str, data: str, pvs: dict,
+                        data_key: str) -> bool:
+        """Processes a #Format property and updates pvs."""
+        format_key = self._config.get('format_key', '#Format')
+        if format_key not in pvs:
+            return False
+
+        format_str = pvs[format_key]
+        (format_prop, strf) = _get_variable_expr(format_str, data_key)
+        try:
+            format_data = strf.format(**pvs)
+            logging.level_debug() and logging.log_every_n(
+                2,
+                f'Processed format {format_prop}={strf} on {key}:{data} to get'
+                f' {format_data}', self._log_every_n)
+        except (KeyError, ValueError) as e:
+            format_data = format_str
+            self._counters.add_counter('error-process-format', 1, format_str)
+            logging.level_debug() and logging.log_every_n(
+                2, f'Failed to format {format_prop}={strf} on {key}:{data} with'
+                f' {pvs}, {e}', self._log_every_n)
+        if format_prop != data_key and format_data != format_str:
+            pvs[format_prop] = format_data
+            self._counters.add_counter('processed-format', 1, format_str)
+            pvs.pop(format_key)
+            return True
+        return False
+
+    def _process_eval(self, pvs: dict, data_key: str) -> bool:
+        """Processes a #Eval property and updates pvs."""
+        eval_key = self._config.get('eval_key', '#Eval')
+        if eval_key not in pvs:
+            return False
+
+        eval_str = pvs[eval_key]
+        eval_prop, eval_data = eval_functions.evaluate_statement(
+            eval_str,
+            pvs,
+            self._config.get('eval_globals', eval_functions.EVAL_GLOBALS),
+        )
+        logging.level_debug() and logging.log_every_n(
+            2,
+            f'Processed eval {eval_str} with {pvs} to get {eval_prop}:{eval_data}',
+            self._log_every_n)
+        if not eval_prop:
+            eval_prop = data_key
+        if eval_data and eval_data != eval_str:
+            pvs[eval_prop] = eval_data
+            self._counters.add_counter('processed-eval', 1, eval_str)
+            pvs.pop(eval_key)
+            return True
+        return False
 
     def get_pvs_for_key(self, key: str, namespace: str = 'GLOBAL') -> dict:
         """Return a dict of property-values that are mapped to the given key
