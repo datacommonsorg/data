@@ -36,9 +36,9 @@ MELT_VAR_COL = "householdSize_numberOfVehicles"
 
 MELT_OBV_COL = "observation"
 
-_HOUSEHOLD_PV = "[dcs:Person {person}]"
+_HOUSEHOLD_PV = "dcs:{person}Person"
 
-_NUM_OF_VEHICLES_PV = "[dcs:AvailableVehicles {vehicle}]"
+_NUM_OF_VEHICLES_PV = "dcs:{vehicle}AvailableVehicles"
 
 # pylint: disable=unnecessary-lambda-assignment
 # pylint: disable=line-too-long

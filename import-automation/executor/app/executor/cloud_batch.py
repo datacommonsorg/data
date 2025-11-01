@@ -206,8 +206,14 @@ def execute_cloud_batch_job(project_id: str, location: str, job_name: str,
     resources.cpu_milli = 4000  # 4 CPUs
     resources.memory_mib = 32768  # 32 GB
 
+    # Mount gcs bucket as a volume.
+    volume = batch_v1.Volume()
+    volume.gcs.remote_path = gcs_bucket
+    volume.mount_path = '/tmp/gcs'
+
     task = batch_v1.TaskSpec()
     task.runnables = [runnable]
+    task.volumes = [volume]
     task.compute_resource = resources
     task.max_retry_count = 1
     task.max_run_duration = "1800s"
