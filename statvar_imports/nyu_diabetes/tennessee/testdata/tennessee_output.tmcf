@@ -1,0 +1,7 @@
+Node: E:tennessee_output->E0
+observationAbout: C:tennessee_output->observationAbout
+observationDate: C:tennessee_output->observationDate
+value: C:tennessee_output->value
+variableMeasured: C:tennessee_output->variableMeasured
+unit: C:tennessee_output->unit
+typeOf: dcs:StatVarObservation
