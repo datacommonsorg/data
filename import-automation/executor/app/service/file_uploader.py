@@ -102,12 +102,10 @@ class GCSFileUploader(FileUploader):
         """
         _strings_not_empty(dest)
         dest = self._fix_path(dest)
-        logging.info('GCSFileUploader.upload_string: Uploading %s to %s',
-                     string, dest)
+        logging.info('GCSFileUploader.upload_string: Uploading to %s', dest)
         blob = self.bucket.blob(dest)
         blob.upload_from_string(string)
-        logging.info('GCSFileUploader.upload_string: Uploaded %s to %s', string,
-                     dest)
+        logging.info('GCSFileUploader.upload_string: Uploaded to %s', dest)
 
     def _fix_path(self, path):
         """Returns {self.path_prefix}/{path}."""
