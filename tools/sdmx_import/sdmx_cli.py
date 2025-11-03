@@ -27,10 +27,16 @@ from absl import flags
 from absl import logging
 from sdmx_client import SdmxClient
 
-# Private command to handler mapping - single source of truth for commands
+# Command registry - single source of truth for commands and descriptions
 _COMMAND_HANDLERS = {
-    'download-metadata': lambda: handle_download_metadata(),
-    'download-data': lambda: handle_download_data(),
+    'download-metadata': {
+        'handler': lambda: handle_download_metadata(),
+        'description': 'Download SDMX metadata (XML format)'
+    },
+    'download-data': {
+        'handler': lambda: handle_download_data(),
+        'description': 'Download SDMX data with optional filters (CSV format)'
+    }
 }
 
 # Flag definitions
@@ -218,29 +224,26 @@ def setup_logging() -> None:
     logging.set_stderrthreshold(level)
 
 
+def generate_usage_message() -> str:
+    """
+    Generate usage message dynamically from command handlers.
+
+    Returns:
+        Formatted usage string
+    """
+    msg = "Usage: sdmx_cli.py <command> [flags]\n\n"
+    msg += "Commands:\n"
+    for cmd, info in _COMMAND_HANDLERS.items():
+        msg += f"  {cmd:<20} {info['description']}\n"
+    msg += "\nUse --help for flag details\n"
+    return msg
+
+
 def main(argv) -> None:
     """Main entry point for the CLI tool."""
     # Check if command was provided
     if len(argv) < 2:
-        usage_msg = (
-            "Usage: sdmx_cli.py <command> [flags]\n"
-            f"Commands: {', '.join(_COMMAND_HANDLERS.keys())}\n\n"
-            "Examples:\n"
-            "  # Download metadata\n"
-            "  sdmx_cli.py download-metadata \\\n"
-            "    --endpoint=https://sdmx.oecd.org/public/rest/ \\\n"
-            "    --agency=OECD.SDD.NAD \\\n"
-            "    --dataflow=DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD \\\n"
-            "    --output_path=metadata.xml\n\n"
-            "  # Download data with filters\n"
-            "  sdmx_cli.py download-data \\\n"
-            "    --endpoint=https://sdmx.oecd.org/public/rest/ \\\n"
-            "    --agency=OECD.SDD.NAD \\\n"
-            "    --dataflow=DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD \\\n"
-            "    --key=FREQ:Q --key=REF_AREA:USA \\\n"
-            "    --param=startPeriod:2022 \\\n"
-            "    --output_path=data.csv")
-        print(usage_msg)
+        print(generate_usage_message())
         return
 
     command = argv[1]
@@ -258,7 +261,7 @@ def main(argv) -> None:
     validate_required_flags_for_command(command)
 
     # Route to appropriate handler using the mapping
-    _COMMAND_HANDLERS[command]()
+    _COMMAND_HANDLERS[command]['handler']()
 
 
 if __name__ == "__main__":

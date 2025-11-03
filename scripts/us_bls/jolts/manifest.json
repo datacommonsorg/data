@@ -20,7 +20,7 @@
                     "node_mcf": "output_files/BLSJolts_StatisticalVariables.mcf"
                 }
             ],
-            "cron_schedule": "0 01 15 * *"
+            "cron_schedule": "30 02 * * 5"
         }
     ]
 }

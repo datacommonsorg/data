@@ -1,0 +1,8 @@
+Node: E:by_education_and_state_or_territory_output->E0
+observationAbout: C:by_education_and_state_or_territory_output->observationAbout
+value: C:by_education_and_state_or_territory_output->value
+unit: C:by_education_and_state_or_territory_output->unit
+scalingFactor: C:by_education_and_state_or_territory_output->scalingFactor
+variableMeasured: C:by_education_and_state_or_territory_output->variableMeasured
+typeOf: dcs:StatVarObservation
+observationDate: 2021
