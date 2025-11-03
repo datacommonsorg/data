@@ -1,0 +1,27 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+State,observationAbout,{Data},populationType,Person,healthOutcome,Asthma,,,,,,,,
+year,observationDate,{Data},,,,,,,,,,,,
+,,,,,,,,,,,,,,
+life_stage:child,age,YearsUpto18,,,,,,,,,,,,
+life_stage:adult,age,Years18Onwards,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+Male Prevalence (Percent),value,{Number},statType,measuredValue,measuredProperty,percent,unit,Percent,gender,Male,,,,
+Male Standard Error,value,{Number},statType,stdError,measurementDenominator,"-statType,-healthOutcome",measuredProperty,count,scalingFactor,100,unit,Percent,gender,Male
+Male Sample Sizec,value,{Number},statType,sampleSize,measuredProperty,count,gender,Male,,,,,,
+Female Prevalence (Percent),value,{Number},statType,measuredValue,measuredProperty,percent,unit,Percent,gender,Female,,,,
+Female Standard Error,value,{Number},statType,stdError,measurementDenominator,"-statType,-healthOutcome",measuredProperty,count,scalingFactor,100,unit,Percent,gender,Female
+Female Sample Sizec,value,{Number},statType,sampleSize,measuredProperty,count,gender,Female,,,,,,
+Male Standard Error (percent),value,{Number},statType,stdError,measurementDenominator,"-statType,-healthOutcome",measuredProperty,count,scalingFactor,100,unit,Percent,gender,Male
+Sample Size.1,value,{Number},statType,sampleSize,measuredProperty,count,gender,Female,,,,,,
+Prevalence (percent).1,value,{Number},statType,measuredValue,measuredProperty,percent,unit,Percent,gender,Female,,,,
+Sample Size,value,{Number},statType,sampleSize,measuredProperty,count,gender,Male,,,,,,
+Prevalence (percent),value,{Number},statType,measuredValue,measuredProperty,percent,unit,Percent,gender,Male,,,,
+Male Prevalence,value,{Number},statType,measuredValue,measuredProperty,percent,unit,Percent,gender,Male,,,,
+Male Sample Sized,value,{Number},statType,sampleSize,measuredProperty,count,gender,Male,,,,,,
+Female Prevalence,value,{Number},statType,measuredValue,measuredProperty,percent,unit,Percent,gender,Female,,,,
+Female Sample Sized,value,{Number},statType,sampleSize,measuredProperty,count,gender,Female,,,,,,
+Male Sample Size§,value,{Number},statType,sampleSize,measuredProperty,count,gender,Male,,,,,,
+Female Sample Size§,value,{Number},statType,sampleSize,measuredProperty,count,gender,Female,,,,,,
+Male Unweighted Number,value,{Number},statType,sampleSize,measuredProperty,count,gender,Male,,,,,,
+Female Unweighted Number,value,{Number},statType,sampleSize,measuredProperty,count,gender,Female,,,,,,
+

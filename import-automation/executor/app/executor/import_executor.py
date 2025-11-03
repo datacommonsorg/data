@@ -585,7 +585,8 @@ class ImportExecutor:
     def _create_mount_point(self, gcs_volume_mount_dir: str,
                             cleanup_gcs_volume_mount: bool,
                             absolute_import_dir: str, import_name: str) -> None:
-        mount_path = os.path.join(gcs_volume_mount_dir, import_name)
+        mount_path = os.path.join(gcs_volume_mount_dir, 'import_cache',
+                                  import_name)
         gcs_path = os.path.join(absolute_import_dir, 'gcs_folder')
         logging.info(
             f'GCS mount path: {mount_path}, GCS folder path: {gcs_path}')
