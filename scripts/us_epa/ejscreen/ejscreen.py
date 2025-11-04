@@ -30,8 +30,6 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 _DATA_DIR = os.path.abspath(os.path.join(_SCRIPT_DIR, '../../..'))
 sys.path.append(os.path.join(_DATA_DIR, 'util'))
-print(_SCRIPT_DIR)
-print(_DATA_DIR)
 import file_util
 
 logging.set_verbosity(logging.INFO)
