@@ -26,7 +26,7 @@
 
 `python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/WHO-COVID-19-global-monthly-death-by-age-data.csv --pv_map=pvmap/WHO-COVID-19-global-monthly-death-by-age-data_pvmap.csv  --config_file=common_metadata.csv --statvar_dcid_remap_csv=remap/WHO-COVID-19-global-monthly-death-by-age-data_remap.csv --output_path=output/death_by_age`
 
-`python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/WHO-COVID-19-global-daily-data.csv --pv_map=pvmap/WHO-COVID-19-global-daily-data_pvmap.csv --existing_statvar_mcf=stat_vars.mcf --places_resolved_csv=place_resolver.xlsx --config_file=common_metadata.csv  --output_path=output/global_daily_data`
+`python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/WHO-COVID-19-global-daily-data.csv --pv_map=pvmap/WHO-COVID-19-global-daily-data_pvmap.csv --existing_statvar_mcf=stat_vars.mcf --places_resolved_csv=place_resolver.csv --config_file=common_metadata.csv  --output_path=output/global_daily_data`
 
 `python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/WHO-COVID-19-global-hosp-icu-data.csv --pv_map=pvmap/WHO-COVID-19-global-hosp-icu-data_pvmap.csv --existing_statvar_mcf=stat_vars.mcf --config_file=common_metadata.csv --statvar_dcid_remap_csv=remap/WHO-COVID-19-global-hosp-icu-data_remap.csv --output_path=output/global_hosp_icu_data`
     
