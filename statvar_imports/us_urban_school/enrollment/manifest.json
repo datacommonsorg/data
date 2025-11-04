@@ -1,0 +1,55 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "US_UrbanSchool_Enrollment",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://civilrightsdata.ed.gov/data",
+      "provenance_description": "This import utilizes US Urban School Enrollment data for student enrollment counts, broken down by gender, race, Limited English Proficiency, and disability status (Section 504 and Individualized Education Program).",
+      "scripts": ["download.py","run.sh"],
+      "source_files": [
+        "input_files/*.xlsx",
+        "input_files/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/enrollment_by_race_and_sex_2010_2014_output.tmcf",
+          "cleaned_csv": "output_files/enrollment_by_race_and_sex_2010_2014_output.csv"
+        },
+        {
+          "template_mcf": "output_files/enrollment_by_race_and_sex_2016_output.tmcf",
+          "cleaned_csv": "output_files/enrollment_by_race_and_sex_2016_output.csv"
+        },
+        {
+          "template_mcf": "output_files/enrollment_by_race_and_sex_2018_2022_output.tmcf",
+          "cleaned_csv": "output_files/enrollment_by_race_and_sex_2018_2022_output.csv"
+        },
+        {
+          "template_mcf": "output_files/enrollment_by_disability_and_sex_2010_2014_output.tmcf",
+          "cleaned_csv": "output_files/enrollment_by_disability_and_sex_2010_2014_output.csv"
+        },
+        {
+          "template_mcf": "output_files/enrollment_by_disability_and_sex_2016_output.tmcf",
+          "cleaned_csv": "output_files/enrollment_by_disability_and_sex_2016_output.csv"
+        },
+        {
+          "template_mcf": "output_files/enrollment_by_disability_and_sex_2018_2022_output.tmcf",
+          "cleaned_csv": "output_files/enrollment_by_disability_and_sex_2018_2022_output.csv"
+        },
+        {
+          "template_mcf": "output_files/enrollment_by_lep_and_sex_2010_2014_output.tmcf",
+          "cleaned_csv": "output_files/enrollment_by_lep_and_sex_2010_2014_output.csv"
+        },
+        {
+          "template_mcf": "output_files/enrollment_by_lep_and_sex_2016_output.tmcf",
+          "cleaned_csv": "output_files/enrollment_by_lep_and_sex_2016_output.csv"
+        },
+        {
+          "template_mcf": "output_files/enrollment_by_lep_and_sex_2018_2022_output.tmcf",
+          "cleaned_csv": "output_files/enrollment_by_lep_and_sex_2018_2022_output.csv"
+        }
+      ],
+      "cron_schedule": "0 05 * * 5"
+    }
+  ]
+}
+
