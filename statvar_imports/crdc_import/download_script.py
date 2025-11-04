@@ -1,7 +1,6 @@
 import os
 import sys
-from absl import app
-from absl import logging
+from absl import app, logging
 import datetime
 import glob
 import shutil
@@ -9,7 +8,6 @@ import pandas as pd
 import re
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-import json
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../util/'))
