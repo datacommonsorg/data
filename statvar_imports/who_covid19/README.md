@@ -16,7 +16,7 @@
 
 - To download the input file
 
-    `bash download.sh`
+   `bash download.sh`
 
 - StatVar Script
 
