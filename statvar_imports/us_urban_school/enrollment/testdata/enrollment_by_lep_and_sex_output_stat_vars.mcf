@@ -1,0 +1,154 @@
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Female_LimitedEnglishProficient_EnglishLearner_AmericanIndianOrAlaskaNativeAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Female
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:AmericanIndianOrAlaskaNativeAlone
+
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Female_LimitedEnglishProficient_EnglishLearner_AsianAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Female
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:AsianAlone
+
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Female_LimitedEnglishProficient_EnglishLearner_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Female
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Female_LimitedEnglishProficient_EnglishLearner_HispanicOrLatino
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Female
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:HispanicOrLatino
+
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Female_LimitedEnglishProficient_EnglishLearner_NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Female
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Female_LimitedEnglishProficient_EnglishLearner_TwoOrMoreRaces
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Female
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:TwoOrMoreRaces
+
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Female_LimitedEnglishProficient_EnglishLearner_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Female
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:WhiteAlone
+
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Male_LimitedEnglishProficient_EnglishLearner_AmericanIndianOrAlaskaNativeAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Male
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:AmericanIndianOrAlaskaNativeAlone
+
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Male_LimitedEnglishProficient_EnglishLearner_AsianAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Male
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:AsianAlone
+
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Male_LimitedEnglishProficient_EnglishLearner_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Male
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Male_LimitedEnglishProficient_EnglishLearner_HispanicOrLatino
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Male
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:HispanicOrLatino
+
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Male_LimitedEnglishProficient_EnglishLearner_NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Male
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Male_LimitedEnglishProficient_EnglishLearner_TwoOrMoreRaces
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Male
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:TwoOrMoreRaces
+
+Node: dcid:Count_Student_EnrolledInEducationOrTraining_Male_LimitedEnglishProficient_EnglishLearner_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentStatus: dcid:EnrolledInEducationOrTraining
+gender: dcid:Male
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+race: dcid:WhiteAlone
+

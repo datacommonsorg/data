@@ -1,0 +1,6 @@
+Node: dcid:race
+typeOf: dcs:Property
+name: "race"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EthnicityEnum,dcid:RaceCodeEnum
+

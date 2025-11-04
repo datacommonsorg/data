@@ -1,0 +1,44 @@
+Node: dcid:educationPlan
+typeOf: dcs:Property
+name: "educationPlan"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EducationPlanEnum
+isProvisional: dcs:True
+
+Node: dcid:EducationPlanEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "EducationPlanEnum"
+isProvisional: dcs:True
+
+Node: dcid:IndividualizedEducationProgram
+typeOf: dcid:EducationPlanEnum
+name: "Individualized Education Program"
+isProvisional: dcs:True
+
+Node: dcid:age
+typeOf: dcs:Property
+name: "age"
+domainIncludes: dcid:Student
+
+Node: dcid:Years3To21
+typeOf: dcid:AgeStatusEnum
+name: "Years 3To 21"
+isProvisional: dcs:True
+
+Node: dcid:disabilityStatus
+typeOf: dcs:Property
+name: "disabilityStatus"
+domainIncludes: dcid:Student
+
+Node: dcid:Section504AccommodationPlan
+typeOf: dcid:EducationPlanEnum
+name: "Section 50 4Accommodation Plan"
+isProvisional: dcs:True
+
+Node: dcid:race
+typeOf: dcs:Property
+name: "race"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EthnicityEnum,dcid:RaceCodeEnum
+
