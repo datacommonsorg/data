@@ -123,12 +123,3 @@ python3 download_script_test.py
 
 ---
 
-
-### Handling Future Data Releases
-
-The `rename_headers` function in `download_script.py` uses a configuration file, `column_map.json`, to handle changes in column names across different data releases. This makes the script adaptable to future data releases without requiring code changes.
-
-When a new year of CRDC data is released, you may need to update `column_map.json`.
-
-1.  **Identify the new year**: The script uses the end year of the school year range (e.g., for `2021-22`, the year is `2022`).
-2.  **Add a new entry to `column_map.json`**: Add a new key to the JSON file with the new year. The value should be a dictionary mapping the new column names in the source file to the standardized column names used by the import process.
