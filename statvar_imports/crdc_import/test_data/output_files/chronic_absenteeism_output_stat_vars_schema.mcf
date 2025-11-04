@@ -1,0 +1,35 @@
+Node: dcid:race
+typeOf: dcs:Property
+name: "race"
+domainIncludes: dcid:Student
+
+Node: dcid:disabilityStatus
+typeOf: dcs:Property
+name: "disabilityStatus"
+domainIncludes: dcid:Student
+
+Node: dcid:englishProficiency
+typeOf: dcs:Property
+name: "englishProficiency"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EnglishProficiencyEnum
+isProvisional: dcs:True
+
+Node: dcid:EnglishProficiencyEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "EnglishProficiencyEnum"
+isProvisional: dcs:True
+
+Node: dcid:Limited
+typeOf: dcid:EnglishProficiencyEnum
+name: "Limited"
+isProvisional: dcs:True
+
+Node: dcid:homeless
+typeOf: dcs:Property
+name: "homeless"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:Boolean
+isProvisional: dcs:True
+
