@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "crdc_education_discipline_and_attendance",
+            "import_name": "CRDC_Education_Discipline_Attendance",
             "curator_emails": [
                 "support@datacommons.org"
             ],
