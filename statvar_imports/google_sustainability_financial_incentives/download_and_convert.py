@@ -13,6 +13,7 @@
 # limitations under the License.
 """Script to download and convert sustainability financial incentives data from GCS."""
 
+import hashlib
 import json
 import os
 import sys
@@ -173,6 +174,19 @@ def convert_json_to_csv(json_path: str, csv_path: str) -> bool:
         logging.info(
             f"Found {len(incentive_summaries)} incentive summaries in JSON file"
         )
+
+        for summary in incentive_summaries:
+            extraction_config = summary.get('extractionConfig')
+            if not isinstance(extraction_config, dict):
+                continue
+            url = extraction_config.get('url')
+            if not isinstance(url, str):
+                continue
+            # Use BLAKE2s with 8-byte digest for a stable, shorter hash.
+            # Increase digest_size here if future collisions are observed.
+            hash_value = hashlib.blake2s(url.encode('utf-8'),
+                                         digest_size=8).hexdigest()
+            extraction_config['url_stable_hash'] = hash_value
 
         # Create temporary JSON file in same directory as original
         json_dir = os.path.dirname(json_path)
