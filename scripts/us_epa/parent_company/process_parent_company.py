@@ -38,7 +38,7 @@ from us_epa.parent_company import static_corrections as sc
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string("input_download_path", "parent_company/tmp_data", "Input directory")
+flags.DEFINE_string("input_download_path", "tmp_data", "Input directory")
 flags.DEFINE_string("existing_facilities_file", "existing_facilities",
                     "Filename for existing facilities ids")
 flags.DEFINE_string("output_base_path", "parent_company/output",
@@ -225,8 +225,7 @@ def _add_static_duplicates(static_mappings, company_id_count):
 
         _add_to_duplicate_mapping(k, v, company_id_count)
     logging.info(
-        f"Static mappings added. Current duplicate map size: {len(_DUPLICATE_MAPPING)}"
-    )
+        f"Static mappings added. Current duplicate map size: {len(_DUPLICATE_MAPPING)}")
 
 
 def _insert_overlaps(loc_map, company_id_count):
@@ -273,8 +272,7 @@ def _resolve_multiple_indirections():
         while v_loc in _DUPLICATE_MAPPING:
             if v_loc in path:
                 logging.error(
-                    f"Cycle detected in duplicate mapping starting from {k}. Path: {path + [v_loc]}"
-                )
+                    f"Cycle detected in duplicate mapping starting from {k}. Path: {path + [v_loc]}")
                 break
             path.append(v_loc)
             v_loc = _DUPLICATE_MAPPING[v_loc]
@@ -359,8 +357,7 @@ def _run_deduplication_preprocessing_steps(input_table_path,
     It populates the global _DUPLICATE_MAPPING and _COUNTERS_COMPANIES.
     """
     logging.info(
-        f"Starting deduplication preprocessing steps. Input path: {input_table_path}"
-    )
+        f"Starting deduplication preprocessing steps. Input path: {input_table_path}")
 
     existing_facilities_path = os.path.join(input_table_path,
                                             existing_facilities_file + ".csv")
@@ -415,21 +412,20 @@ def _run_deduplication_preprocessing_steps(input_table_path,
             logging.fatal(
                 f"FATAL: One or more critical CSV columns not found or could not be resolved. "
                 f"Expected but missing: "
-                f"{'facility_id' if not CSV_FACILITY_ID_COL else ''}, "
-                f"{'parent_company_name' if not CSV_PARENT_COMPANY_NAME_COL else ''}, "
-                f"{'year' if not CSV_YEAR_COL else ''}, "
-                f"{'parent_co_percent_own' if not CSV_PARENT_CO_PERCENT_OWN_COL else ''}, "
-                f"{'parent_co_street_address' if not CSV_PARENT_CO_STREET_ADDRESS_COL else ''}, "
-                f"{'parent_co_city' if not CSV_PARENT_CO_CITY_COL else ''}, "
-                f"{'parent_co_state' if not CSV_PARENT_CO_STATE_COL else ''}, "
-                f"{'parent_co_zip' if not CSV_PARENT_CO_ZIP_COL else ''}. "
+                f"{'' if CSV_FACILITY_ID_COL else 'facility_id'}, "
+                f"{'' if CSV_PARENT_COMPANY_NAME_COL else 'parent_company_name'}, "
+                f"{'' if CSV_YEAR_COL else 'year'}, "
+                f"{'' if CSV_PARENT_CO_PERCENT_OWN_COL else 'parent_co_percent_own'}, "
+                f"{'' if CSV_PARENT_CO_STREET_ADDRESS_COL else 'parent_co_street_address'}, "
+                f"{'' if CSV_PARENT_CO_CITY_COL else 'parent_co_city'}, "
+                f"{'' if CSV_PARENT_CO_STATE_COL else 'parent_co_state'}, "
+                f"{'' if CSV_PARENT_CO_ZIP_COL else 'parent_co_zip'}. "
                 f"Actual CSV headers found: {cr.fieldnames}. Script cannot proceed."
             )
             sys.exit(1)
 
         logging.info(
-            f"Resolved CSV column mappings: Facility ID: '{CSV_FACILITY_ID_COL}', Company Name: '{CSV_PARENT_COMPANY_NAME_COL}', etc. from headers: {cr.fieldnames}"
-        )
+            f"Resolved CSV column mappings: Facility ID: '{CSV_FACILITY_ID_COL}', Company Name: '{CSV_PARENT_COMPANY_NAME_COL}', etc. from headers: {cr.fieldnames}")
 
         for i, in_row in enumerate(cr):
             if i % 500 == 0:
@@ -439,8 +435,7 @@ def _run_deduplication_preprocessing_steps(input_table_path,
             facility_id = in_row.get(CSV_FACILITY_ID_COL, '').strip()
             if not facility_id:
                 logging.warning(
-                    f" Skipping preprocessing of row {i+1}: Mandatory FACILITY_ID is empty or blank. Row: {in_row}"
-                )
+                    f" Skipping preprocessing of row {i+1}: Mandatory FACILITY_ID is empty or blank. Row: {in_row}")
                 _COUNTERS_COMPANIES["facility_id_extraction_failed"].add(
                     str(in_row))
                 continue
@@ -449,8 +444,7 @@ def _run_deduplication_preprocessing_steps(input_table_path,
 
             if ghg_id not in relevant_facility_ids:
                 logging.debug(
-                    f"Skipping preprocessing of row {i+1}: '{ghg_id}' not found in relevant_facility_ids."
-                )
+                    f"Skipping preprocessing of row {i+1}: '{ghg_id}' not found in relevant_facility_ids.")
                 _COUNTERS_COMPANIES["facility_does_not_exist"].add(ghg_id)
                 continue
 
@@ -459,16 +453,14 @@ def _run_deduplication_preprocessing_steps(input_table_path,
             company_name = company_name_raw.replace("\"", "").replace("'", "")
             if not company_name:
                 logging.warning(
-                    f" Skipping preprocessing of row {i+1}: 'PARENT_COMPANY_NAME' not found or empty for {ghg_id}. Row: {in_row}"
-                )
+                    f" Skipping preprocessing of row {i+1}: 'PARENT_COMPANY_NAME' not found or empty for {ghg_id}. Row: {in_row}")
                 _COUNTERS_COMPANIES["company_name_not_found"].add(ghg_id)
                 continue
 
             company_id = fh.name_to_id(company_name)
             if not company_id:
                 logging.warning(
-                    f" Skipping preprocessing of row {i+1}: Mandatory company_id is empty (from name_to_id) for {company_name}. Row: {in_row}"
-                )
+                    f" Skipping preprocessing of row {i+1}: Mandatory company_id is empty (from name_to_id) for {company_name}. Row: {in_row}")
                 _COUNTERS_COMPANIES["company_id_name_to_id_failed"].add(
                     str(in_row))
                 continue
@@ -501,8 +493,7 @@ def _run_deduplication_preprocessing_steps(input_table_path,
             company_id_count[company_id] += 1
 
     logging.info(
-        "Completed reading Table Info data and building maps for duplicate detection."
-    )
+        "Completed reading Table Info data and building maps for duplicate detection.")
     logging.info("Determining Address duplicates...")
     (count_dupe_addr,
      address_id_contained_count) = _insert_overlaps(address_map,
@@ -533,19 +524,16 @@ def _run_deduplication_preprocessing_steps(input_table_path,
 
     logging.info("****************")
     logging.info(
-        f"Num Rows Written (Duplicate Mappings) = {rows_written_to_duplicates_csv}"
-    )
+        f"Num Rows Written (Duplicate Mappings) = {rows_written_to_duplicates_csv}")
     logging.info(
-        f"Number records (from existing_facilities_path): {len(relevant_facility_ids)}"
-    )
+        f"Number records (from existing_facilities_path): {len(relevant_facility_ids)}")
     logging.info(f"Unique Facilities: {len(relevant_facility_ids)}")
     logging.info(f"Unique Company Names: {len(unique_company_names)}")
 
     logging.info(f"Duplicate Keys: {len(_DUPLICATE_MAPPING)}")
     logging.info(f"Unique (before) Company Ids: {len(unique_company_ids)}")
     logging.info(
-        f"Unique (after) Company Ids: {len(unique_company_ids) - len(_DUPLICATE_MAPPING)}"
-    )
+        f"Unique (after) Company Ids: {len(unique_company_ids) - len(_DUPLICATE_MAPPING)}")
     logging.info("****************")
     logging.info(f"duplicate address = {count_dupe_addr}")
     logging.info(
@@ -555,8 +543,7 @@ def _run_deduplication_preprocessing_steps(input_table_path,
         f"duplicate facility, id match found = {facility_id_contained_count}")
 
     logging.info(
-        "\n--- Detailed Preprocessing Counters (from _run_deduplication_preprocessing_steps) ---"
-    )
+        "\n--- Detailed Preprocessing Counters (from _run_deduplication_preprocessing_steps) ---")
     for k, v in _COUNTERS_COMPANIES.items():
         if isinstance(v, set) and v:
             logging.info(f"{k}: {len(v)} entries. Sample: {list(v)[:5]}")
@@ -644,8 +631,7 @@ def process_companies(input_table_path, existing_facilities_file,
             for row in cr:
                 dupes[row['Id']] = row['MappedTo']
         logging.info(
-            f"Loaded {len(dupes)} duplicate ID mappings from {dupes_filepath} for main processing."
-        )
+            f"Loaded {len(dupes)} duplicate ID mappings from {dupes_filepath} for main processing.")
     else:
         logging.fatal(
             f"FATAL: DuplicateIdMappings.csv not found at {dupes_filepath}. "
@@ -693,13 +679,13 @@ def process_companies(input_table_path, existing_facilities_file,
         tableWriter = csv.DictWriter(twfp,
                                      _TABLE_CLEAN_CSV_HDR,
                                      doublequote=False,
-                                     escapechar="\")
+                                     escapechar="\\")
         tableWriter.writeheader()
 
         ownershipWriter = csv.DictWriter(owfp,
                                          _OWNERSHIP_CLEAN_CSV_HDR,
                                          doublequote=False,
-                                         escapechar="\")
+                                         escapechar="\\")
         ownershipWriter.writeheader()
 
         existing_facilities_path = os.path.join(
@@ -711,8 +697,7 @@ def process_companies(input_table_path, existing_facilities_file,
         rows_written_to_output = 0
 
         logging.info(
-            f"Starting main processing loop from memory (generating output CSVs)..."
-        )
+            f"Starting main processing loop from memory (generating output CSVs)...")
         if not all_rows:
             logging.warning("No data to process from input file.")
         else:
@@ -757,8 +742,7 @@ def process_companies(input_table_path, existing_facilities_file,
                 facility_id = in_row.get(CSV_FACILITY_ID_COL, '').strip()
                 if not facility_id:
                     logging.warning(
-                        f" Skipping row {i+1} (output generation): Mandatory FACILITY_ID is empty. Row: {in_row}"
-                    )
+                        f" Skipping row {i+1} (output generation): Mandatory FACILITY_ID is empty. Row: {in_row}")
                     _COUNTERS_COMPANIES["facility_id_extraction_failed"].add(
                         str(in_row))
                     continue
@@ -767,8 +751,7 @@ def process_companies(input_table_path, existing_facilities_file,
 
                 if ghg_id not in facility_ids_from_existing:
                     logging.debug(
-                        f"Skipping row {i+1} (output generation): '{ghg_id}' not found in relevant_facility_ids. Row: {in_row}"
-                    )
+                        f"Skipping row {i+1} (output generation): '{ghg_id}' not found in relevant_facility_ids. Row: {in_row}")
                     _COUNTERS_COMPANIES["facility_does_not_exist"].add(ghg_id)
                     continue
 
@@ -778,16 +761,14 @@ def process_companies(input_table_path, existing_facilities_file,
                                                         "").replace("'", "")
                 if not company_name:
                     logging.warning(
-                        f" Skipping row {i+1} (output generation): 'PARENT_COMPANY_NAME' not found or empty for {ghg_id}. Row: {in_row}"
-                    )
+                        f" Skipping row {i+1} (output generation): 'PARENT_COMPANY_NAME' not found or empty for {ghg_id}. Row: {in_row}")
                     _COUNTERS_COMPANIES["company_name_not_found"].add(ghg_id)
                     continue
 
                 company_id = fh.name_to_id(company_name)
                 if not company_id:
                     logging.warning(
-                        f" Skipping row {i+1} (output generation): Mandatory company_id is empty (from name_to_id) for {company_name}. Row: {in_row}"
-                    )
+                        f" Skipping row {i+1} (output generation): Mandatory company_id is empty (from name_to_id) for {company_name}. Row: {in_row}")
                     _COUNTERS_COMPANIES["company_id_name_to_id_failed"].add(
                         str(in_row))
                     continue
@@ -800,8 +781,7 @@ def process_companies(input_table_path, existing_facilities_file,
                 year = in_row.get(CSV_YEAR_COL, '').strip()
                 if not year:
                     logging.warning(
-                        f" Skipping row {i+1} (output generation): 'YEAR' is empty for {ghg_id}. Row: {in_row}"
-                    )
+                        f" Skipping row {i+1} (output generation): 'YEAR' is empty for {ghg_id}. Row: {in_row}")
                     _COUNTERS_COMPANIES["year_does_not_exist"].add(
                         (company_id, ghg_id))
 
@@ -809,8 +789,7 @@ def process_companies(input_table_path, existing_facilities_file,
                                          '').strip()
                 if not percent_own:
                     logging.warning(
-                        f" Skipping row {i+1} (output generation): 'PARENT_CO_PERCENT_OWN' is empty for {ghg_id}. Row: {in_row}"
-                    )
+                        f" Skipping row {i+1} (output generation): 'PARENT_CO_PERCENT_OWN' is empty for {ghg_id}. Row: {in_row}")
                     _COUNTERS_COMPANIES["percent_ownership_not_found"].add(
                         (company_id, year))
                     percent_own = 100
@@ -856,14 +835,12 @@ def process_companies(input_table_path, existing_facilities_file,
                     processed_companies.add(company_id.lower())
 
         logging.info(
-            f"Main processing loop completed. Produced {rows_written_to_output} rows for output CSVs."
-        )
+            f"Main processing loop completed. Produced {rows_written_to_output} rows for output CSVs.")
         logging.info("Geo Resolution Stats: \n" +
                      counters_string(_COUNTERS_COMPANIES))
 
         logging.info(
-            f"Company ID duplicated replaced (from COUNTERS_COMPANIES) = {len(_COUNTERS_COMPANIES['company_ids_replaced'])}"
-        )
+            f"Company ID duplicated replaced (from COUNTERS_COMPANIES) = {len(_COUNTERS_COMPANIES['company_ids_replaced'])}")
 
     logging.info("Generating MCF and TMCF files...")
     table_mcf_path = os.path.join(output_path_info,
@@ -1006,21 +983,19 @@ def main(argv):
     svobs_path_info = os.path.join(FLAGS.output_base_path,
                                    FLAGS.svobs_output_path)
 
-    pathlib.Path(FLAGS.output_base_path).mkdir(exist_ok=True)
-    pathlib.Path(output_path_info).mkdir(exist_ok=True)
-    pathlib.Path(output_path_ownership).mkdir(exist_ok=True)
-    pathlib.Path(svobs_path_info).mkdir(exist_ok=True)
+    pathlib.Path(FLAGS.output_base_path).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(output_path_info).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(output_path_ownership).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(svobs_path_info).mkdir(parents=True, exist_ok=True)
 
     logging.info(
-        "Running deduplication preprocessing steps (populating _DUPLICATE_MAPPING)..."
-    )
+        "Running deduplication preprocessing steps (populating _DUPLICATE_MAPPING)...")
     _run_deduplication_preprocessing_steps(FLAGS.input_download_path,
                                            FLAGS.existing_facilities_file)
     logging.info("Deduplication preprocessing completed. Mappings generated.")
 
     logging.info(
-        "Beginning main company data processing (generating Table.csv and Ownership.csv)..."
-    )
+        "Beginning main company data processing (generating Table.csv and Ownership.csv)...")
     process_companies(FLAGS.input_download_path, FLAGS.existing_facilities_file,
                       output_path_info, output_path_ownership)
     logging.info("Main company data processing completed.")
