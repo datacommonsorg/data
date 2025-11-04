@@ -1,0 +1,11 @@
+key,property1,value1,property2,value2,property3,value3,,,,,,
+COUNTRY,#Format,observationAbout=country/{Data},,,statType,measuredValue,incidentType,COVID_19,,,,
+DATE,observationDate,{Data},,,,,,,,,,
+COVID_VACCINE_ADM_TOT_A1D,value,{Number},,,vaccinationDose,AtLeastOneDose,populationType,MedicalConditionIncident,,,,
+COVID_VACCINE_ADM_TOT_BOOST,value,{Number},,,vaccinationDose,BoosterDose,populationType,MedicalConditionIncident,,,,
+COVID_VACCINE_ADM_TOT_CPS,value,{Number},,,vaccinationStatus,CompletedPrimarySeries,populationType,MedicalConditionIncident,,,,
+COVID_VACCINE_ADM_TOT_DOSES,value,{Number},,,vaccinationDose,AnyDose,populationType,MedicalConditionIncident,,,,
+COVID_VACCINE_ADM_TOT_DOSES_PER100,value,{Number},,,unit,Per100People,populationType,MedicalConditionIncident,,,,
+COVID_VACCINE_COV_TOT_A1D,value,{Number},unit,Percent,scalingFactor,100,vaccinationDose,AtLeastOneDose,measurementDenominator,-vaccinationDose,populationType,MedicalConditionIncident
+COVID_VACCINE_COV_TOT_BOOST,value,{Number},unit,Percent,scalingFactor,100,vaccinationDose,BoosterDose,measurementDenominator,-vaccinationDose,populationType,MedicalConditionIncident
+COVID_VACCINE_COV_TOT_CPS,value,{Number},unit,Percent,scalingFactor,100,vaccinationStatus,CompletedPrimarySeries,measurementDenominator,-vaccinationStatus,populationType,MedicalConditionIncident
