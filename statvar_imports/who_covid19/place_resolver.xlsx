@@ -20,7 +20,7 @@ Bermuda,country/BMU
 Bosnia and Herzegovina,country/BIH
 Bangladesh,country/BGD
 Australia,country/AUS
-"Bonaire, Sint Eustatius and Saba",country/BES
+Bonaire, Sint Eustatius and Saba,country/BES
 British Virgin Islands,country/VGB
 Barbados,country/BRB
 Belarus,country/BLR
@@ -150,7 +150,7 @@ Norway,country/NOR
 Luxembourg,country/LUX
 Northern Mariana Islands,country/MNP
 Russian Federation,country/RUS
-"occupied Palestinian territory, including east Jerusalem",country/PSE
+occupied Palestinian territory, including east Jerusalem,country/PSE
 Malawi,country/MWI
 Panama,country/PAN
 Saint Kitts and Nevis,country/KNA
@@ -252,7 +252,7 @@ BERMUDA,country/BMU
 BOSNIA AND HERZEGOVINA,country/BIH
 BANGLADESH,country/BGD
 AUSTRALIA,country/AUS
-"BONAIRE, SINT EUSTATIUS AND SABA",country/BES
+BONAIRE, SINT EUSTATIUS AND SABA,country/BES
 BRITISH VIRGIN ISLANDS,country/VGB
 BARBADOS,country/BRB
 BELARUS,country/BLR
@@ -382,7 +382,7 @@ NORWAY,country/NOR
 LUXEMBOURG,country/LUX
 NORTHERN MARIANA ISLANDS,country/MNP
 RUSSIAN FEDERATION,country/RUS
-"OCCUPIED PALESTINIAN TERRITORY, INCLUDING EAST JERUSALEM",country/PSE
+OCCUPIED PALESTINIAN TERRITORY, INCLUDING EAST JERUSALEM,country/PSE
 MALAWI,country/MWI
 PANAMA,country/PAN
 SAINT KITTS AND NEVIS,country/KNA
@@ -470,5 +470,5 @@ R�union,country/REU
 Cura�ao,country/CUW
 Saint Eustatius and Saba,country/BES
 T�rkiye,country/TUR
-Lao People's Democratic Republic ,country/LAO
+Lao People's Democratic Republic,country/LAO
 Martinique,country/MTQ

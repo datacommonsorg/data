@@ -2,7 +2,7 @@ key,property1,value1,property2,value2,property3,value3
 # Place and Date,,,,,,
 Country_code,#Format,observationAbout=country/{Data},,,,
 Year,Year,{Data},,,,
-Month,Month,{Data},#Eval,"observationDate=format_date(Year + '-' + Month + '-01', '%Y-%m')",,
+Month,Month,{Data},#Eval,"observationDate=format_date(Year + '-' + Month + '-01', '%Y-%m-%d')",,
 # Age Group Mappings,,,,,,
 Agegroup:0_4,age,[0 4 Years],,,,
 Agegroup:5_14,age,[5 14 Years],,,,

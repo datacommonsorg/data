@@ -1,7 +1,6 @@
 key,property1,value1,property2,value2,property3,value3,property4,value4,property5,value5
 Date_reported,observationDate,{Data},,,,,,,,
 Country,observationAbout,{Data},,,,,,,,
-,,,,,,,,,,
 New_cases,measuredProperty,count,populationType,MedicalConditionIncident,incidentType,COVID_19,value,{Number},,
 Cumulative_cases,measuredProperty,cumulativeCount,populationType,MedicalConditionIncident,incidentType,COVID_19,value,{Number},,
 New_deaths,measuredProperty,count,populationType,MortalityEvent,incidentType,COVID_19,value,{Number},,
