@@ -13,53 +13,53 @@
         "purchaseType": "PURCHASE_TYPE_CONSUMPTION",
         "redemptionType": "REDEMPTION_TYPE_REBATE_OR_SUBSIDY",
         "name": "DEWA Shams Dubai",
-        "providerName": "Dubai Electricity and Water Authority"
+        "providerName": "Dubai Electricity and Water Authority (DEWA)"
       },
       "groundingInfo": {}
     },
     {
       "extractionConfig": {
-        "url": "https://chbp.com.au/the-cheaper-home-batteries-program-policy-paper/",
+        "url": "https://re.gaf.am/index7kom.html",
         "locale": {
           "language": "en",
-          "countryIso": "AU"
+          "countryIso": "AM"
+        },
+        "incentiveCategory": "INCENTIVE_CATEGORY_SOLAR"
+      },
+      "incentive": {
+        "purchaseType": "PURCHASE_TYPE_INSTALLATION",
+        "redemptionType": "REDEMPTION_TYPE_LOAN",
+        "name": "German-Armenian Fund Promotion of Renewable Energies Program Green Loans",
+        "providerName": "German-Armenian Fund"
+      },
+      "groundingInfo": {}
+    },
+    {
+      "extractionConfig": {
+        "url": "https://www.mission-solar.at/tirol",
+        "locale": {
+          "language": "en",
+          "countryIso": "AT"
         },
         "incentiveCategory": "INCENTIVE_CATEGORY_SOLAR"
       },
       "incentive": {
         "purchaseType": "PURCHASE_TYPE_INSTALLATION",
         "redemptionType": "REDEMPTION_TYPE_REBATE_OR_SUBSIDY",
+        "maximumAmount": {
+          "currencyCode": "EUR",
+          "units": "5000"
+        },
         "perUnitAmount": {
           "amount": {
-            "currencyCode": "AUD",
-            "units": "9",
-            "nanos": 300000000
+            "currencyCode": "EUR",
+            "units": "250"
           },
-          "unit": "CREDIT_UNITS_KILOWATT_HOURS"
+          "unit": "CREDIT_UNITS_KILOWATTS"
         },
-        "name": "Cheaper Home Batteries Program",
-        "providerName": "Australian Government",
-        "percentageOfCostsCovered": 0.3
-      },
-      "groundingInfo": {}
-    },
-    {
-      "extractionConfig": {
-        "url": "https://portalfazenda.cuiaba.mt.gov.br/test",
-        "locale": {
-          "language": "pt",
-          "countryIso": "BR",
-          "adminArea1": "Mato Grosso"
-        },
-        "incentiveCategory": "INCENTIVE_CATEGORY_SOLAR"
-      },
-      "incentive": {
-        "purchaseType": "PURCHASE_TYPE_INSTALLATION",
-        "redemptionType": "REDEMPTION_TYPE_TAX_WAIVER",
-        "name": "Programa IPTU Sustentável",
-        "providerName": "Câmara Municipal de Cuiabá",
-        "percentageOfCostsCovered": 0.25,
-        "taxWaiverType": "TAX_WAIVER_TYPE_PARTIAL_REDUCTION"
+        "name": "Land Tirol PV-Anlagen Förderung",
+        "providerName": "Bundesland Tirol",
+        "percentageOfCostsCovered": 0.5
       },
       "groundingInfo": {}
     }
