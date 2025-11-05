@@ -678,8 +678,9 @@ class ImportExecutor:
             ]
             values = [
                 import_summary.import_name, import_summary.status,
-                os.getenv('BATCH_JOB_UID'), import_summary.execution_time,
-                spanner.COMMIT_TIMESTAMP
+                os.getenv('BATCH_JOB_NAME',
+                          os.getenv('BATCH_JOB_UID', 'local-run')),
+                import_summary.execution_time, spanner.COMMIT_TIMESTAMP
             ]
             # Update LatestVersion path only if import completed successfully.
             if import_summary.status == 'READY':
@@ -739,9 +740,9 @@ class ImportExecutor:
         output_dir = f'{relative_import_dir}/{import_name}'
         version = self.config.import_version_override if self.config.import_version_override else _clean_time(
             utils.pacific_time())
-        import_summary.latest_version = os.path.join(
-            self.config.storage_prod_bucket_name, output_dir, version, '*',
-            'validation')
+        import_summary.latest_version = 'gs://' + os.path.join(
+            self.config.storage_prod_bucket_name, output_dir, version, '*', '*',
+            '*.mcf')
         if self.config.import_version_override:
             logging.info(f'Import version override {version}')
             import_summary.status = 'READY'
