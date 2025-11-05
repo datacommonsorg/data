@@ -34,7 +34,6 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 { echo "Error: Processing lep_and_sex for the year 2010 to 2014 failed!"; exit 1; }
 
 # --- 2. Process 2016 File (Separate CSV) ---
-# Inputs: 2016_Enrollment.csv (processed separately as requested)
 SINGLE_2016_FILE="$SCRIPT_PATH/input_files/2016_Enrollment.csv"
 
 # Race and Sex (2016)
