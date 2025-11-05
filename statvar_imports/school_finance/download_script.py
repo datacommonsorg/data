@@ -112,7 +112,6 @@ def main(_):
         # Define the target category
         category_name = "school finance"
         category_dir = _OUTPUT_DIRECTORY
-        os.makedirs(category_dir, exist_ok=True)
 
         for item_path in glob.glob(search_pattern, recursive=True):
             if not os.path.isfile(item_path):

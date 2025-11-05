@@ -19,7 +19,7 @@
           "cleaned_csv": "output/school_finance_output.csv"
         }
       ],
-      "cron_schedule": "30 09 27 * *"
+      "cron_schedule": "30 08 25 * *"
     }
   ]
 }

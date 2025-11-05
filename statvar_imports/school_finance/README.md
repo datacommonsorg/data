@@ -16,7 +16,7 @@
 
 ## US_UrbanSchool_Finances Import
 
-This import focuses on urban school finance this dataset contains financial and identifying information for educational institutions, including details on salaries and expenditures of teachers.
+This import focuses on urban school finance. This dataset contains financial and identifying information for educational institutions, including details on salaries and expenditures of teachers.
 
 -----
 - source: https://ocrdata.ed.gov/data
@@ -37,7 +37,7 @@ To acquire the necessary data files, execute the download script `download_scrip
 
 All downloaded files will be stored in the directory `input_files`.
 
-## Step 2: Process the Data
+#### Step 2: Process the Data
 
 Once the data is downloaded run the `stat_var_processor.py` script to process the files and generate the final output artifacts (CSV, TMCF, MCF).
 
