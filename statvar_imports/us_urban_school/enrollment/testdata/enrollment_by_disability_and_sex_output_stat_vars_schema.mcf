@@ -23,7 +23,7 @@ domainIncludes: dcid:Student
 
 Node: dcid:Years3To21
 typeOf: dcid:AgeStatusEnum
-name: "Years 3To 21"
+name: "Years 3 To 21"
 isProvisional: dcs:True
 
 Node: dcid:disabilityStatus
@@ -33,7 +33,7 @@ domainIncludes: dcid:Student
 
 Node: dcid:Section504AccommodationPlan
 typeOf: dcid:EducationPlanEnum
-name: "Section 50 4Accommodation Plan"
+name: "Section 504 Accommodation Plan"
 isProvisional: dcs:True
 
 Node: dcid:race

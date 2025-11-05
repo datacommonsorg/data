@@ -1,6 +1,5 @@
 YEAR,observationDate,{Data},,,,,,,,,,,,,,,,,,
 ncesid,observationAbout,nces/{Data},,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
 SCH_ELENR_HI_M,value,{Number},#Filter,Allow=int(value) >= 0,race,HispanicOrLatino,gender,Male,enrollmentStatus,EnrolledInEducationOrTraining,populationType,Student,measuredProperty,count,statType,measuredValue,languageFluencyLevel,LimitedEnglishProficient,languageLearned,EnglishLearner
 SCH_ELENR_HI_F,value,{Number},#Filter,Allow=int(value) >= 0,race,HispanicOrLatino,gender,Female,enrollmentStatus,EnrolledInEducationOrTraining,populationType,Student,measuredProperty,count,statType,measuredValue,languageFluencyLevel,LimitedEnglishProficient,languageLearned,EnglishLearner
 SCH_ELENR_AM_M,value,{Number},#Filter,Allow=int(value) >= 0,race,AmericanIndianOrAlaskaNativeAlone,gender,Male,enrollmentStatus,EnrolledInEducationOrTraining,populationType,Student,measuredProperty,count,statType,measuredValue,languageFluencyLevel,LimitedEnglishProficient,languageLearned,EnglishLearner

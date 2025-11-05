@@ -1,5 +1,5 @@
-YEAR,observationDate,{Data},,,,,,,,,,,,,,,,,,,,
-ncesid,observationAbout,nces/{Data},,,,,,,,,,,,,,,,,,,,
+YEAR,observationDate,{Data},,,,,,,,,,,,,,,,,,,,,,
+ncesid,observationAbout,nces/{Data},,,,,,,,,,,,,,,,,,,,,,
 SCH_IDEAENR_HI_M,value,{Number},#Filter,Allow=int(value) >= 0,race,HispanicOrLatino,gender,Male,age,Years3To21,educationPlan,IndividualizedEducationProgram,enrollmentStatus,EnrolledInEducationOrTraining,populationType,Student,measuredProperty,count,statType,measuredValue,disabilityStatus,WithDisability
 SCH_IDEAENR_HI_F,value,{Number},#Filter,Allow=int(value) >= 0,race,HispanicOrLatino,gender,Female,age,Years3To21,educationPlan,IndividualizedEducationProgram,enrollmentStatus,EnrolledInEducationOrTraining,populationType,Student,measuredProperty,count,statType,measuredValue,disabilityStatus,WithDisability
 SCH_IDEAENR_AM_M,value,{Number},#Filter,Allow=int(value) >= 0,race,AmericanIndianOrAlaskaNativeAlone,gender,Male,age,Years3To21,educationPlan,IndividualizedEducationProgram,enrollmentStatus,EnrolledInEducationOrTraining,populationType,Student,measuredProperty,count,statType,measuredValue,disabilityStatus,WithDisability
