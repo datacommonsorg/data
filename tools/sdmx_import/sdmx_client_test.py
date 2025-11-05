@@ -19,7 +19,8 @@ Unit tests for SdmxClient.
 
 import unittest
 from unittest.mock import patch, MagicMock
-from sdmx_client import SdmxClient
+from requests.exceptions import HTTPError
+from .sdmx_client import SdmxClient
 import pandas as pd
 
 
@@ -85,10 +86,10 @@ class SdmxClientTest(unittest.TestCase):
         self.assertEqual(len(result), 2)
 
     @patch('sdmx.to_pandas')
-    def test_get_dataflow_details_success_series(self, mock_to_pandas):
-        # Mock the response as a Series
-        mock_series = pd.Series({'name': 'Dataflow 1', 'version': '1.0'})
-        mock_to_pandas.return_value = mock_series
+    def test_get_dataflow_details_success(self, mock_to_pandas):
+        # Mock the response as a DataFrame with one row.
+        mock_df = pd.DataFrame([{'name': 'Dataflow 1', 'version': '1.0'}])
+        mock_to_pandas.return_value = mock_df
 
         # Call the method
         result = self.client.get_dataflow_details('DF1')
@@ -97,17 +98,17 @@ class SdmxClientTest(unittest.TestCase):
         self.assertEqual(result['name'], 'Dataflow 1')
         self.mock_client.dataflow.assert_called_once_with('DF1')
 
-    @patch('sdmx.to_pandas')
-    def test_get_dataflow_details_not_found(self, mock_to_pandas):
-        # Mock the response as an empty DataFrame
-        mock_df = pd.DataFrame()
-        mock_to_pandas.return_value = mock_df
+    def test_get_dataflow_details_not_found(self):
+        # Mock the client.dataflow to raise an HTTPError
+        self.mock_client.dataflow.side_effect = HTTPError(
+            "404 Client Error: Not Found")
 
         # Call the method
         result = self.client.get_dataflow_details('DF_NONEXISTENT')
 
         # Assert the result is an empty dictionary
         self.assertEqual(result, {})
+        self.mock_client.dataflow.assert_called_once_with('DF_NONEXISTENT')
 
 
 if __name__ == '__main__':

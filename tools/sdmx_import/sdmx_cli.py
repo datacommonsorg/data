@@ -220,9 +220,9 @@ def handle_discover_dataflows() -> None:
         logging.info("No dataflows found.")
         return
 
-    # Use pandas to pretty-print the output to the console
+    # Print the DataFrame to standard output using pandas' default formatting.
     df = pd.DataFrame(dataflows)
-    logging.info(f"\n{df.to_string()}")
+    print(df)
 
 
 def validate_required_flags_for_command(command: str) -> None:
