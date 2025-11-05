@@ -5,7 +5,7 @@
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://civilrightsdata.ed.gov/data",
       "provenance_description": "This import utilizes US Urban School Enrollment data for student enrollment counts, broken down by gender, race, Limited English Proficiency, and disability status (Section 504 and Individualized Education Program).",
-      "scripts": ["download.py","run.sh"],
+      "scripts": ["../download.py --data_type=enrollment","run.sh"],
       "source_files": [
         "input_files/*.xlsx",
         "input_files/*.csv"
