@@ -117,15 +117,20 @@ class SdmxClient:
         try:
             logging.info(f"Fetching details for dataflow: {dataflow_id}")
             dataflow_msg = self.client.dataflow(dataflow_id)
-            if dataflow_msg.dataflow:
-                dataflow_series = sdmx.to_pandas(dataflow_msg.dataflow)
-            else:
+            if not dataflow_msg.dataflow:
                 return {}
 
-            if isinstance(dataflow_series, pd.Series):
-                return dataflow_series.to_dict()
+            dataflow_pd = sdmx.to_pandas(dataflow_msg.dataflow)
 
-            # If we reach here, it means the dataflow was not found or the response was empty.
+            if isinstance(dataflow_pd, pd.DataFrame) and not dataflow_pd.empty:
+                return dataflow_pd.iloc[0].to_dict()
+            elif isinstance(dataflow_pd, pd.Series):
+                return dataflow_pd.to_dict()
+
+            return {}
+        except HTTPError as e:
+            logging.error(
+                f"Dataflow '{dataflow_id}' not found or network error: {e}")
             return {}
         except Exception as e:
             logging.error(f"Error fetching dataflow details: {e}")
