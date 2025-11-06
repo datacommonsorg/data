@@ -57,10 +57,13 @@ def download_and_convert_excel_to_csv():
                 except Exception as e:
                     logging.fatal(
                         f"Failed to process the sheet '{sheet_name}' : {e}")
+                    raise RuntimeError(e)
+                    
 
     except requests.exceptions.RequestException as e:
         logging.fatal(f"Failed to download Mexico Census data file: {e}")
-        return None
+        raise RuntimeError(e)
+        
 
 
 def main(argv):
