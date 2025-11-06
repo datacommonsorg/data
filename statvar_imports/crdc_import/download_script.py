@@ -39,7 +39,8 @@ def add_year_column(filepath: str, year: int):
             f"Added 'year' column with value {year} to {os.path.basename(filepath)}"
         )
     except Exception as e:
-        logging.error(f"Could not add year column to {filepath}: {e}")
+        logging.warning(
+            f"Could not add year column to {filepath}: {e}")
 
 
 
@@ -49,6 +50,9 @@ def main(_):
     os.makedirs(_OUTPUT_DIRECTORY, exist_ok=True)
     logging.info(f"Base output directory '{_OUTPUT_DIRECTORY}' ensured to exist.")
 
+    # The 2018-19 CRDC data was not collected due to the COVID-19 pandemic.
+    # The 2020-21 CRDC data was delayed and released later.
+    # This script is adapted to handle the available data years.
     years_to_try = list(range(_START_YEAR, 2018, 2)) + list(
         range(2020, _CURRENT_YEAR + 1, 2))
 
