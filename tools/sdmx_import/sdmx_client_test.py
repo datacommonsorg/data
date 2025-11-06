@@ -21,6 +21,8 @@ import unittest
 from unittest.mock import patch, MagicMock
 from requests.exceptions import HTTPError
 from .sdmx_client import SdmxClient
+import sdmx
+from sdmx import message, model
 import pandas as pd
 
 
@@ -109,6 +111,54 @@ class SdmxClientTest(unittest.TestCase):
         # Assert the result is an empty dictionary
         self.assertEqual(result, {})
         self.mock_client.dataflow.assert_called_once_with('DF_NONEXISTENT')
+
+    @patch('sdmx.to_pandas')
+    def test_get_dataflow_series_success(self, mock_to_pandas):
+        # Mock the response from sdmx.to_pandas to simulate multiple series
+        mock_data = {
+            'FREQ': ['A', 'A', 'M', 'M'],
+            'REF_AREA': ['AUS', 'CAN', 'AUS', 'CAN'],
+            'INDICATOR': ['GDP', 'GDP', 'CPI', 'CPI'],
+            'TIME_PERIOD': ['2020', '2020', '2021-01', '2021-01'],
+            'OBS_VALUE': [100.0, 200.0, 1.5, 2.0]
+        }
+        mock_df = pd.DataFrame(mock_data)
+        mock_to_pandas.return_value = mock_df
+
+        expected_series = [
+            {
+                'FREQ': 'A',
+                'REF_AREA': 'AUS',
+                'INDICATOR': 'GDP'
+            },
+            {
+                'FREQ': 'A',
+                'REF_AREA': 'CAN',
+                'INDICATOR': 'GDP'
+            },
+            {
+                'FREQ': 'M',
+                'REF_AREA': 'AUS',
+                'INDICATOR': 'CPI'
+            },
+            {
+                'FREQ': 'M',
+                'REF_AREA': 'CAN',
+                'INDICATOR': 'CPI'
+            },
+        ]
+
+        # Call the method
+        result = self.client.get_dataflow_series('DF_MULTI_SERIES')
+
+        # Assert the result
+        self.assertEqual(len(result), len(expected_series))
+        self.assertListEqual(sorted(result, key=lambda x: str(x)),
+                             sorted(expected_series, key=lambda x: str(x)))
+        self.mock_client.data.assert_called_once_with('DF_MULTI_SERIES',
+                                                      key=None,
+                                                      params=None,
+                                                      agency_id='TEST')
 
 
 if __name__ == '__main__':
