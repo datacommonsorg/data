@@ -171,7 +171,7 @@ class SdmxClient:
             df_reset = df.reset_index()
 
             # Identify columns that represent series dimensions (all columns except observation value and time period)
-            # 'OBS_VALUE' is the default name for the Series values when converted from sdmx.to_pandas
+            # 'value' is the default name for the Series values when converted from sdmx.to_pandas
             series_columns = [
                 col for col in df_reset.columns
                 if col not in ['value', 'TIME_PERIOD', 'index']
