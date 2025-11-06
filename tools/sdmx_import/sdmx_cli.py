@@ -19,9 +19,18 @@ Provides a simple interface to fetch data and metadata from SDMX REST APIs.
 """
 
 import os
+import sys
+
+# Add project directories to the Python path
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.dirname(_SCRIPT_DIR))
+sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
+
 import urllib.parse
 from typing import Dict, Any, List
 import pandas as pd
+from dataclasses import asdict
 
 from absl import app
 from absl import flags
@@ -224,8 +233,8 @@ def handle_discover_dataflows() -> None:
         logging.info("No dataflows found.")
         return
 
-    # Print the DataFrame to standard output using pandas' default formatting.
-    df = pd.DataFrame(dataflows)
+    # Convert to list of dicts for DataFrame creation and print
+    df = pd.DataFrame([asdict(df) for df in dataflows])
     print(df)
 
 

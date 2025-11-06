@@ -23,10 +23,11 @@ import sdmx
 import pandas as pd
 from requests.exceptions import HTTPError
 from typing import Dict, Any, List
+from tools.sdmx_import.sdmx_models import Dataflow
 
 
 class SdmxClient:
-    """A client for discovering and fetching data and metadata from an SDMX REST API."""
+    """A client for performing operations against an SDMX REST API."""
 
     def __init__(self, endpoint: str, agency_id: str):
         """
@@ -53,12 +54,15 @@ class SdmxClient:
         sdmx.add_source(custom_source, override=True)
         return sdmx.Client(source_id)
 
-    def list_dataflows(self) -> List[Dict[str, Any]]:
+    def list_dataflows(self) -> List[Dataflow]:
         """
         Lists all available dataflows.
 
+        # TODO: Check if sub-agency dataflows are also listed.
+        # For example, agency=OECD should also list dataflows for OECD.ORG1.
+
         Returns:
-            A list of dictionaries, where each dictionary represents a dataflow.
+            A list of Dataflow objects.
         """
         try:
             logging.info(
@@ -66,20 +70,21 @@ class SdmxClient:
             )
             dataflows_msg = self.client.dataflow()
 
-            # Manually construct the list of dicts for a consistent structure
             result = []
             for df_id, df in dataflows_msg.dataflow.items():
-                result.append({
-                    'id': df_id,
-                    'name': str(df.name),
-                    'description': str(df.description) if df.description else ''
-                })
+                result.append(
+                    Dataflow(id=df_id,
+                             name=str(df.name),
+                             description=str(df.description)
+                             if df.description else '',
+                             agency_id=str(df.maintainer.id),
+                             version=str(df.version)))
             return result
         except Exception as e:
             logging.error(f"Error fetching dataflows: {e}")
             raise
 
-    def search_dataflows(self, search_term: str) -> List[Dict[str, Any]]:
+    def search_dataflows(self, search_term: str) -> List[Dataflow]:
         """
         Searches for dataflows matching a search term.
 
@@ -87,7 +92,7 @@ class SdmxClient:
             search_term: The term to search for in dataflow names and descriptions.
 
         Returns:
-            A list of dictionaries, where each dictionary represents a matching dataflow.
+            A list of matching Dataflow objects.
         """
         try:
             logging.info(f"Searching for dataflows with term: {search_term}")
@@ -96,8 +101,8 @@ class SdmxClient:
 
             results = [
                 df for df in all_dataflows
-                if search_term in df.get('name', '').lower() or \
-                   search_term in df.get('description', '').lower()
+                if search_term in df.name.lower() or \
+                   search_term in df.description.lower()
             ]
             return results
         except Exception as e:
