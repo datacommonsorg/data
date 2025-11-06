@@ -120,7 +120,7 @@ class SdmxClientTest(unittest.TestCase):
             'REF_AREA': ['AUS', 'CAN', 'AUS', 'CAN'],
             'INDICATOR': ['GDP', 'GDP', 'CPI', 'CPI'],
             'TIME_PERIOD': ['2020', '2020', '2021-01', '2021-01'],
-            'OBS_VALUE': [100.0, 200.0, 1.5, 2.0]
+            'value': [100.0, 200.0, 1.5, 2.0]
         }
         mock_df = pd.DataFrame(mock_data)
         mock_to_pandas.return_value = mock_df
@@ -157,7 +157,7 @@ class SdmxClientTest(unittest.TestCase):
                              sorted(expected_series, key=lambda x: str(x)))
         self.mock_client.data.assert_called_once_with('DF_MULTI_SERIES',
                                                       key=None,
-                                                      params=None,
+                                                      params={},
                                                       agency_id='TEST')
 
 

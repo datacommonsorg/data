@@ -174,7 +174,7 @@ class SdmxClient:
             # 'OBS_VALUE' is the default name for the Series values when converted from sdmx.to_pandas
             series_columns = [
                 col for col in df_reset.columns
-                if col not in ['OBS_VALUE', 'TIME_PERIOD', 'index']
+                if col not in ['value', 'TIME_PERIOD', 'index']
             ]
             series_df = df_reset[series_columns].drop_duplicates()
 
