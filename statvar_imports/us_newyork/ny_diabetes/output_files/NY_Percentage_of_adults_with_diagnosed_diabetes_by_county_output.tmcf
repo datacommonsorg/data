@@ -1,7 +1,0 @@
-Node: E:NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output->E0
-observationAbout: C:NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output->observationAbout
-observationDate: C:NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output->observationDate
-value: C:NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output->value
-variableMeasured: C:NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output->variableMeasured
-typeOf: dcs:StatVarObservation
-unit: Percent
