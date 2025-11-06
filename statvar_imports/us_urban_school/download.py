@@ -223,8 +223,8 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
             logging.info(f"Successfully extracted and saved: {output_path.name}")
 
     except Exception as e:
-        raise RuntimeError(f"An unhandled error occurred during extraction/processing for {config_key}: {e}")
-
+        logging.error(f"An unhandled error occurred during extraction/processing for {config_key}: {e}")
+        return None
 
 def main(_):
     """Main function to run the download process for the specified data type."""
