@@ -42,9 +42,9 @@ All downloaded files will be stored in the directory `input_files`.
 Once the data is downloaded run the `stat_var_processor.py` script to process the files and generate the final output artifacts (CSV, TMCF, MCF).
 
 The script is located in the `data/tools/statvar_importer/` directory. Run the following command
-    ```bash
+```bash
     python3 stat_var_processor.py --input_data=../../statvar_imports/school_finance/input_files/*.xlsx --pv_map=../../statvar_imports/school_finance/school_finance_pvmap.csv --config_file=../../statvar_imports/school_finance/school_finance_metadata.csv --output_path=../../statvar_imports/school_finance/output/school_finance_output
-    ```
+```
 
 ### Autorefresh type
 
