@@ -44,6 +44,7 @@ main:
                       environment:
                         variables:
                           IMPORT_NAME: ${importName}
+                          BATCH_JOB_NAME: ${jobId}
                 taskCount: 1
                 parallelism: 1
               logsPolicy:

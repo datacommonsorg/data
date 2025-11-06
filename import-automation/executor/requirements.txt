@@ -60,3 +60,4 @@ netCDF4
 xmltodict
 sodapy
 certifi==2025.1.31
+tqdm
