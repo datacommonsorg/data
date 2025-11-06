@@ -70,16 +70,15 @@ class SdmxClient:
             )
             dataflows_msg = self.client.dataflow()
 
-            result = []
-            for df_id, df in dataflows_msg.dataflow.items():
-                result.append(
-                    Dataflow(id=df_id,
-                             name=str(df.name),
-                             description=str(df.description)
-                             if df.description else '',
-                             agency_id=str(df.maintainer.id),
-                             version=str(df.version)))
-            return result
+            return [
+                Dataflow(
+                    id=df_id,
+                    name=str(df.name),
+                    description=str(df.description) if df.description else '',
+                    agency_id=str(df.maintainer.id),
+                    version=str(df.version))
+                for df_id, df in dataflows_msg.dataflow.items()
+            ]
         except Exception as e:
             logging.error(f"Error fetching dataflows: {e}")
             raise
