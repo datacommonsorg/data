@@ -37,36 +37,42 @@ class SdmxClient:
         """
         self.agency_id = agency_id
         self.endpoint = endpoint
-        self.client = self._new_sdmx_client()
 
-    def _new_sdmx_client(self) -> sdmx.Client:
+    def _new_sdmx_client(self, agency_id: str) -> sdmx.Client:
         """
         Creates and configures an sdmx.Client for the specified endpoint and agency.
         """
-        source_id = self.agency_id
         custom_source = {
-            'id': source_id,
+            'id': agency_id,
             'url': self.endpoint,
-            'name': f'Custom source for {self.agency_id}'
+            'name': f'Custom source for {agency_id}'
         }
         sdmx.add_source(custom_source, override=True)
-        return sdmx.Client(source_id)
+        return sdmx.Client(agency_id)
 
-    def download_metadata(self, dataflow_id: str, output_path: str):
+    def download_metadata(self,
+                          dataflow_id: str,
+                          output_path: str,
+                          agency_id: str = None):
         """
         Fetches the complete metadata for a dataflow and saves it to a file as raw SDMX-ML (XML).
 
         Args:
             dataflow_id: The ID of the dataflow to retrieve
             output_path: Path where the metadata should be saved
+            agency_id: Optional. The ID of the agency providing the data. If
+                provided, this will override the agency_id set during client
+                initialization.
         """
         try:
             logging.info(
                 f"Fetching raw metadata for dataflow: {dataflow_id}...")
-            flow_msg = self.client.dataflow(dataflow_id,
-                                            agency_id=self.agency_id,
-                                            params={'references': 'all'},
-                                            tofile=output_path)
+            effective_agency_id = agency_id or self.agency_id
+            client = self._new_sdmx_client(effective_agency_id)
+            flow_msg = client.dataflow(dataflow_id,
+                                       agency_id=effective_agency_id,
+                                       params={'references': 'all'},
+                                       tofile=output_path)
             logging.info(
                 f"Successfully received response: {flow_msg.response.url}")
 
@@ -89,19 +95,34 @@ class SdmxClient:
             )
             raise
 
-    def download_data_as_csv(self, dataflow_id: str, key: Dict[str, Any],
-                             params: Dict[str, Any], output_path: str):
+    def download_data_as_csv(self,
+                             dataflow_id: str,
+                             key: Dict[str, Any],
+                             params: Dict[str, Any],
+                             output_path: str,
+                             agency_id: str = None):
         """
         Fetches data, converts it to a pandas DataFrame, and saves as CSV.
+
+        Args:
+            dataflow_id: The ID of the dataflow to retrieve
+            key: A dictionary specifying the data key for filtering.
+            params: A dictionary of additional parameters for the SDMX API request.
+            output_path: Path where the data should be saved as a CSV file.
+            agency_id: Optional. The ID of the agency providing the data. If
+                provided, this will override the agency_id set during client
+                initialization.
         """
         try:
             logging.info(f"Fetching data for dataflow: {dataflow_id}")
             logging.info(f"with params: {params}")
             logging.info(f"and key: {key}")
-            data_msg = self.client.data(dataflow_id,
-                                        key=key,
-                                        params=params,
-                                        agency_id=self.agency_id)
+            effective_agency_id = agency_id or self.agency_id
+            client = self._new_sdmx_client(effective_agency_id)
+            data_msg = client.data(dataflow_id,
+                                   key=key,
+                                   params=params,
+                                   agency_id=effective_agency_id)
             logging.info(
                 f"Successfully received response: {data_msg.response.url}")
 
