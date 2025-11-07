@@ -101,14 +101,19 @@ class ExecutionError(Exception):
 
 @dataclasses.dataclass
 class ImportStatusSummary:
-    """Holds a set of monitoring stats for an import."""
+    """Holds a set of summary stats for an import."""
     import_name: str
-    # PENDING: Import yet to be run.
-    # VALIDATION: Data validation failure.
-    # READY: Import completed successfully.
     status: str = 'PENDING'
+    '''
+    Possible status values:
+    - PENDING: Import yet to be run.
+    - VALIDATION: Data validation failure.
+    - READY: Import job completed, ready for ingestion.
+    - FAILED: Import job failed.
+    - DONE: Data ingestion completed (Dataflow).
+    '''
     latest_version: str = ''
-    execution_time: int = 0
+    execution_time: int = 0  # seconds
 
 
 class ImportExecutor:
