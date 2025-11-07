@@ -12,7 +12,9 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --pv_map=$SCRIPT_PATH/race_and_sex_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/enrollment_by_race_and_sex_2010_2014_output || \
+--output_path=$SCRIPT_PATH/output_files/enrollment_by_race_and_sex_2010_2014_output \
+--log_level=-2 \
+--log_every_n=1000 || \
 { echo "Error: Processing race_and_sex files for the year 2010 to 2014 failed!"; exit 1; }
 
 # Disability and Sex (2010-2014)
@@ -21,7 +23,9 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --pv_map=$SCRIPT_PATH/disability_and_sex_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/enrollment_by_disability_and_sex_2010_2014_output || \
+--output_path=$SCRIPT_PATH/output_files/enrollment_by_disability_and_sex_2010_2014_output \
+--log_level=-2 \
+--log_every_n=1000 || \
 { echo "Error: Processing disability_and_sex for the year 2010 to 2014 failed!"; exit 1; }
 
 # LEP and Sex (2010-2014)
@@ -30,7 +34,9 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --pv_map=$SCRIPT_PATH/lep_and_sex_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/enrollment_by_lep_and_sex_2010_2014_output || \
+--output_path=$SCRIPT_PATH/output_files/enrollment_by_lep_and_sex_2010_2014_output \
+--log_level=-2 \
+--log_every_n=1000 || \
 { echo "Error: Processing lep_and_sex for the year 2010 to 2014 failed!"; exit 1; }
 
 # --- 2. Process 2016 File (Separate CSV) ---
@@ -42,7 +48,9 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --pv_map=$SCRIPT_PATH/race_and_sex_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/enrollment_by_race_and_sex_2016_output || \
+--output_path=$SCRIPT_PATH/output_files/enrollment_by_race_and_sex_2016_output \
+--log_level=-2 \
+--log_every_n=1000 || \
 { echo "Error: Processing race_and_sex for the year 2016 failed!"; exit 1; }
 
 # Disability and Sex (2016)
@@ -51,7 +59,9 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --pv_map=$SCRIPT_PATH/disability_and_sex_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/enrollment_by_disability_and_sex_2016_output || \
+--output_path=$SCRIPT_PATH/output_files/enrollment_by_disability_and_sex_2016_output \
+--log_level=-2 \
+--log_every_n=1000 || \
 { echo "Error: Processing disability_and_sex for the year 2016 failed!"; exit 1; }
 
 # LEP and Sex (2016)
@@ -60,7 +70,9 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --pv_map=$SCRIPT_PATH/lep_and_sex_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/enrollment_by_lep_and_sex_2016_output || \
+--output_path=$SCRIPT_PATH/output_files/enrollment_by_lep_and_sex_2016_output \
+--log_level=-2 \
+--log_every_n=1000 || \
 { echo "Error: Processing lep_and_sex for the year 2016 failed!"; exit 1; }
 
 # --- 3. Process 2018 onwards Files (Combined CSVs, excluding 2016) ---
@@ -74,7 +86,9 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --pv_map=$SCRIPT_PATH/race_and_sex_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/enrollment_by_race_and_sex_2018_2022_output || \
+--output_path=$SCRIPT_PATH/output_files/enrollment_by_race_and_sex_2018_2022_output \
+--log_level=-2 \
+--log_every_n=1000 || \
 { echo "Error: Processing race_and_sex for the year 2018 to 2022 failed!"; exit 1; }
 
 # Disability and Sex (2018 onwards)
@@ -83,7 +97,9 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --pv_map=$SCRIPT_PATH/disability_and_sex_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/enrollment_by_disability_and_sex_2018_2022_output || \
+--output_path=$SCRIPT_PATH/output_files/enrollment_by_disability_and_sex_2018_2022_output \
+--log_level=-2 \
+--log_every_n=1000 || \
 { echo "Error: Processing disability_and_sex for the year 2018 to 2022 failed!"; exit 1; }
 
 # LEP and Sex (2018 onwards)
@@ -92,7 +108,9 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --pv_map=$SCRIPT_PATH/lep_and_sex_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/enrollment_by_lep_and_sex_2018_2022_output || \
+--output_path=$SCRIPT_PATH/output_files/enrollment_by_lep_and_sex_2018_2022_output \
+--log_level=-2 \
+--log_every_n=1000 || \
 { echo "Error: Processing lep_and_sex for the year 2018 to 2022 failed!"; exit 1; }
 
 echo "All processing steps completed successfully."
