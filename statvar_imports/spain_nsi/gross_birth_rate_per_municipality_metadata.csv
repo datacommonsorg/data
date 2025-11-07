@@ -13,3 +13,5 @@ mapped_rows,1
 mapped_columns,2
 header_rows,1
 word_delimiter,""""""
+number_decimal,","
+statvar_dcid_ignore_properties,"typeOf,description,name,nameWIthlanguage,descriptionUrl,alternateName,observationAbout"

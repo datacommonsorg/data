@@ -12,3 +12,4 @@ output_columns,"observationAbout, observationPeriod, observationDate, value, var
 mapped_rows,1
 mapped_columns,3
 header_rows,1
+number_separator,.

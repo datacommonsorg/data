@@ -48,8 +48,8 @@
           "cleaned_csv": "output/population_by_municipality_and_gender_output.csv"
         },
         {
-          "template_mcf": "output/Population_by_province_capitals_and_gender_output.tmcf",
-          "cleaned_csv": "output/Population_by_province_capitals_and_gender_output.csv"
+          "template_mcf": "output/population_by_province_capitals_and_gender_output.tmcf",
+          "cleaned_csv": "output/population_by_province_capitals_and_gender_output.csv"
         },
         {
           "template_mcf": "output/population_by_sex_and_age_group_output.tmcf",

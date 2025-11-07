@@ -12,3 +12,5 @@ output_columns,"observationAbout, observationPeriod, observationDate, value, var
 mapped_rows,1
 mapped_columns,4
 header_rows,1
+number_separator,.
+statvar_dcid_ignore_properties,"typeOf,description,name,nameWIthlanguage,descriptionUrl,alternateName,observationAbout"

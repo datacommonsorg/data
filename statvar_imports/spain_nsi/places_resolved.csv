@@ -1,4 +1,211 @@
 place_name,dcid
+02 Albacete,nuts/ES421
+03 Alicante/Alacant,nuts/ES521
+04 Almería,nuts/ES611
+01 Araba/Álava,nuts/ES211
+33 Asturias,nuts/ES120
+05 Ávila,nuts/ES411
+06 Badajoz,nuts/ES431
+"07 Balears, Illes",wikidataId/Q1606474
+08 Barcelona,
+48 Bizkaia,nuts/ES213
+09 Burgos,nuts/ES412
+10 Cáceres,nuts/ES432
+11 Cádiz,nuts/ES612
+39 Cantabria,nuts/ES13
+12 Castellón/Castelló,nuts/ES522
+13 Ciudad Real,nuts/ES422
+14 Córdoba,nuts/ES613
+"15 Coruña, A",nuts/ES111
+16 Cuenca,nuts/ES423
+20 Gipuzkoa,nuts/ES212
+17 Girona,nuts/ES512
+18 Granada,nuts/ES614
+19 Guadalajara,nuts/ES424
+21 Huelva,nuts/ES615
+22 Huesca,nuts/ES241
+23 Jaén,nuts/ES616
+24 León,nuts/ES413
+25 Lleida,wikidataId/Q15090
+27 Lugo,nuts/ES112
+28 Madrid,nuts/ES3
+29 Málaga,nuts/ES617
+30 Murcia,nuts/ES62
+31 Navarra,nuts/ES22
+32 Ourense,nuts/ES113
+34 Palencia,wikidataId/Q24011703
+"35 Palmas, Las",nuts/ES701
+36 Pontevedra,nuts/ES114
+"26 Rioja, La",nuts/ES23
+37 Salamanca,nuts/ES415
+38 Santa Cruz de Tenerife,wikidataId/Q24014650
+40 Segovia,nuts/ES416
+41 Sevilla,nuts/ES618
+42 Soria,nuts/ES417
+43 Tarragona,nuts/ES514
+44 Teruel,nuts/ES242
+45 Toledo,nuts/ES425
+46 Valencia/València,nuts/ES523
+47 Valladolid,nuts/ES418
+49 Zamora,nuts/ES419
+50 Zaragoza,nuts/ES243
+51 Ceuta,nuts/ES63
+52 Melilla,
+02003 Albacete,wikidataId/Q15095
+41004 Alcalá de Guadaíra,wikidataId/Q494781
+28005 Alcalá de Henares,wikidataId/Q46940
+28006 Alcobendas,wikidataId/Q487679
+28007 Alcorcón,wikidataId/Q10372
+03009 Alcoi/Alcoy,wikidataId/Q494777
+11004 Algeciras,wikidataId/Q484552
+03014 Alacant/Alicante,wikidataId/Q11959
+04013 Almería,wikidataId/Q10400
+28013 Aranjuez,wikidataId/Q486792
+28014 Arganda del Rey,wikidataId/Q497692
+38006 Arona,wikidataId/Q698246
+35004 Arrecife,wikidataId/Q647543
+05019 Ávila,wikidataId/Q15688
+33004 Avilés,wikidataId/Q14649
+06015 Badajoz,wikidataId/Q15679
+08015 Badalona,wikidataId/Q15468
+48013 Barakaldo,wikidataId/Q487801
+08019 Barcelona,wikidataId/Q1492
+48015 Basauri,wikidataId/Q765496
+29025 Benalmádena,wikidataId/Q488869
+03031 Benidorm,wikidataId/Q487981
+48020 Bilbao,wikidataId/Q8692
+28022 Boadilla del Monte,wikidataId/Q1641013
+09059 Burgos,wikidataId/Q9580
+10037 Cáceres,wikidataId/Q15678
+11012 Cádiz,wikidataId/Q15682
+07011 Calvià,wikidataId/Q491786
+30016 Cartagena,wikidataId/Q162615
+08056 Castelldefels,wikidataId/Q15597
+12040 Castelló de la Plana,wikidataId/Q15092
+08266 Cerdanyola del Vallès,wikidataId/Q13922
+51001 Ceuta,
+11015 Chiclana de la Frontera,wikidataId/Q277302
+13034 Ciudad Real,wikidataId/Q15093
+28047 Collado Villalba,wikidataId/Q735759
+28045 Colmenar Viejo,wikidataId/Q55480
+14021 Córdoba,wikidataId/Q5818
+08073 Cornellà de Llobregat,wikidataId/Q15602
+"15030 Coruña, A",wikidataId/Q8757
+28049 Coslada,wikidataId/Q164197
+16078 Cuenca,wikidataId/Q15098
+20069 Donostia/San Sebastián,wikidataId/Q10313
+41038 Dos Hermanas,wikidataId/Q489205
+07026 Eivissa,wikidataId/Q473914
+"04902 Ejido, El",wikidataId/Q493933
+03065 Elx/Elche,wikidataId/Q10509
+03066 Elda,wikidataId/Q608985
+29051 Estepona,wikidataId/Q492748
+15036 Ferrol,wikidataId/Q485329
+29054 Fuengirola,wikidataId/Q492735
+28058 Fuenlabrada,wikidataId/Q54902
+46131 Gandia,wikidataId/Q33532
+28065 Getafe,wikidataId/Q8802
+48044 Getxo,wikidataId/Q492420
+33024 Gijón,wikidataId/Q12273
+17079 Girona,wikidataId/Q7038
+18087 Granada,wikidataId/Q8810
+38017 Granadilla de Abona,wikidataId/Q943431
+08096 Granollers,wikidataId/Q15420
+19130 Guadalajara,wikidataId/Q11953
+"08101 Hospitalet de Llobregat, L'",wikidataId/Q15470
+21041 Huelva,wikidataId/Q12246
+22125 Huesca,wikidataId/Q11967
+20045 Irun,wikidataId/Q200201
+23050 Jaén,wikidataId/Q15681
+11020 Jerez de la Frontera,wikidataId/Q12303
+28074 Leganés,wikidataId/Q77433
+24089 León,wikidataId/Q15699
+23055 Linares,wikidataId/Q281272
+"11022 Línea de la Concepción, La",wikidataId/Q13148
+25120 Lleida,wikidataId/Q23995898
+26089 Logroño,wikidataId/Q14325
+30024 Lorca,wikidataId/Q47571
+27028 Lugo,wikidataId/Q1069100
+28079 Madrid,wikidataId/Q2807
+28080 Majadahonda,wikidataId/Q427505
+29067 Málaga,wikidataId/Q8851
+08113 Manresa,wikidataId/Q16697
+29069 Marbella,wikidataId/Q484799
+08121 Mataró,wikidataId/Q11492
+52001 Melilla,wikidataId/Q23984135
+06083 Mérida,wikidataId/Q14323
+29070 Mijas,wikidataId/Q492744
+30027 Molina de Segura,wikidataId/Q917883
+08124 Mollet del Vallès,wikidataId/Q15430
+28092 Móstoles,wikidataId/Q187826
+18140 Motril,wikidataId/Q210093
+30030 Murcia,wikidataId/Q12225
+03099 Orihuela,wikidataId/Q24008496
+32054 Ourense,wikidataId/Q99151
+33044 Oviedo,wikidataId/Q14317
+34120 Palencia,wikidataId/Q8378
+07040 Palma,wikidataId/Q8826
+"35016 Palmas de Gran Canaria, Las",wikidataId/Q11974
+31201 Pamplona/Iruña,wikidataId/Q10282
+28106 Parla,wikidataId/Q824651
+46190 Paterna,wikidataId/Q23042
+28113 Pinto,wikidataId/Q909718
+24115 Ponferrada,wikidataId/Q12164
+36038 Pontevedra,wikidataId/Q12411
+28115 Pozuelo de Alarcón,wikidataId/Q639422
+"08169 Prat de Llobregat, El",wikidataId/Q15619
+"11027 Puerto de Santa María, El",wikidataId/Q203040
+13071 Puertollano,wikidataId/Q215822
+43123 Reus,wikidataId/Q487096
+29082 Rincón de la Victoria,wikidataId/Q1248474
+28123 Rivas-Vaciamadrid,wikidataId/Q644481
+04079 Roquetas de Mar,wikidataId/Q499184
+"28127 Rozas de Madrid, Las",wikidataId/Q592747
+08184 Rubí,wikidataId/Q13934
+08187 Sabadell,wikidataId/Q12258
+46220 Sagunt/Sagunto,wikidataId/Q47483
+37274 Salamanca,wikidataId/Q15695
+35019 San Bartolomé de Tirajana,wikidataId/Q693258
+38023 San Cristóbal de La Laguna,wikidataId/Q54898
+11031 San Fernando,wikidataId/Q741765
+28134 San Sebastián de los Reyes,wikidataId/Q484717
+03122 Sant Vicent del Raspeig/San Vicente del Raspeig,wikidataId/Q491667
+11032 Sanlúcar de Barrameda,wikidataId/Q210887
+08200 Sant Boi de Llobregat,wikidataId/Q15635
+08205 Sant Cugat del Vallès,wikidataId/Q13936
+08245 Santa Coloma de Gramenet,wikidataId/Q15473
+38038 Santa Cruz de Tenerife,wikidataId/Q14328
+35022 Santa Lucía de Tirajana,wikidataId/Q738674
+39075 Santander,wikidataId/Q12233
+15078 Santiago de Compostela,wikidataId/Q14314
+48082 Santurtzi,wikidataId/Q917886
+40194 Segovia,wikidataId/Q15684
+41091 Sevilla,wikidataId/Q8717
+33066 Siero,wikidataId/Q744130
+42173 Soria,wikidataId/Q12155
+45165 Talavera de la Reina,wikidataId/Q181359
+43148 Tarragona,wikidataId/Q15088
+35026 Telde,wikidataId/Q55845
+08279 Terrassa,wikidataId/Q13939
+44216 Teruel,wikidataId/Q14336
+45168 Toledo,wikidataId/Q5836
+28148 Torrejón de Ardoz,wikidataId/Q489839
+39087 Torrelavega,wikidataId/Q494693
+29901 Torremolinos,wikidataId/Q492737
+46244 Torrent,
+03133 Torrevieja,wikidataId/Q221749
+41095 Utrera,wikidataId/Q753825
+28161 Valdemoro,wikidataId/Q840373
+46250 València,wikidataId/Q8818
+47186 Valladolid,wikidataId/Q8356
+29094 Vélez-Málaga,wikidataId/Q492741
+36057 Vigo,wikidataId/Q8745
+08301 Viladecans,wikidataId/Q15652
+08307 Vilanova i la Geltrú,wikidataId/Q15553
+12135 Vila-real,wikidataId/Q12292
+01059 Vitoria-Gasteiz,wikidataId/Q14318
+49275 Zamora,wikidataId/Q15696
+50297 Zaragoza,wikidataId/Q10305
 01001 Alegría-Dulantzi,wikidataId/Q1330796
 01002 Amurrio,wikidataId/Q481760
 01003 Aramaio,wikidataId/Q976743
@@ -43,7 +250,6 @@ place_name,dcid
 01056 Harana/Valle de Arana,wikidataId/Q1382230
 01057 Villabuena de Álava/Eskuernaga,wikidataId/Q1443518
 01058 Legutio,wikidataId/Q1611490
-01059 Vitoria-Gasteiz,wikidataId/Q14318
 01060 Yécora/Iekora,wikidataId/Q1443585
 01061 Zalduondo,wikidataId/Q1443609
 01062 Zambrana,wikidataId/Q24008390
@@ -52,7 +258,6 @@ place_name,dcid
 01902 Lantarón,wikidataId/Q1447382
 02001 Abengibre,wikidataId/Q559227
 02002 Alatoz,wikidataId/Q24008387
-02003 Albacete,wikidataId/Q15095
 02004 Albatana,wikidataId/Q559221
 02005 Alborea,wikidataId/Q559216
 02006 Alcadozo,wikidataId/Q559134
@@ -63,12 +268,12 @@ place_name,dcid
 02011 Ayna,wikidataId/Q1606086
 02012 Balazote,wikidataId/Q574364
 02013 Balsa de Ves,wikidataId/Q1606095
-02014 Ballestero,wikidataId/Q575814
+"02014 Ballestero, El",wikidataId/Q575814
 02015 Barrax,wikidataId/Q24008375
 02016 Bienservida,wikidataId/Q574369
 02017 Bogarra,wikidataId/Q1606133
 02018 Bonete,wikidataId/Q31913839
-02019 Bonillo,wikidataId/Q54883
+"02019 Bonillo, El",wikidataId/Q54883
 02020 Carcelén,wikidataId/Q24008371
 02021 Casas de Juan Núñez,wikidataId/Q574366
 02022 Casas de Lázaro,wikidataId/Q574370
@@ -84,10 +289,10 @@ place_name,dcid
 02032 Fuensanta,wikidataId/Q1635176
 02033 Fuente-Álamo,wikidataId/Q599774
 02034 Fuentealbilla,wikidataId/Q389171
-02035 Gineta,wikidataId/Q1614683
+"02035 Gineta, La",wikidataId/Q1614683
 02036 Golosalvo,wikidataId/Q1373963
 02037 Hellín,wikidataId/Q842652
-02038 Herrera,wikidataId/Q582784
+"02038 Herrera, La",wikidataId/Q582784
 02039 Higueruela,wikidataId/Q1615193
 02040 Hoya-Gonzalo,wikidataId/Q1623088
 02041 Jorquera,wikidataId/Q1633451
@@ -115,10 +320,10 @@ place_name,dcid
 02063 Pozohondo,wikidataId/Q1623146
 02064 Pozo-Lorente,wikidataId/Q605229
 02065 Pozuelo,wikidataId/Q605218
-02066 Recueja,wikidataId/Q582911
+"02066 Recueja, La",wikidataId/Q582911
 02067 Riópar,wikidataId/Q605263
 02068 Robledo,wikidataId/Q1615209
-02069 Roda,wikidataId/Q630706
+"02069 Roda, La",wikidataId/Q630706
 02070 Salobre,wikidataId/Q24008449
 02071 San Pedro,
 02072 Socovos,wikidataId/Q652654
@@ -137,7 +342,7 @@ place_name,dcid
 02085 Viveros,wikidataId/Q24008436
 02086 Yeste,wikidataId/Q618586
 02901 Pozo Cañada,wikidataId/Q605265
-03001 Atzúbia,wikidataId/Q618588
+"03001 Atzúbia, l'",wikidataId/Q618588
 03002 Agost,wikidataId/Q1228383
 03003 Agres,wikidataId/Q1753479
 03004 Aigües,wikidataId/Q618657
@@ -145,15 +350,13 @@ place_name,dcid
 03006 Alcalalí,wikidataId/Q619496
 03007 Alcosser,wikidataId/Q619130
 03008 Alcoleja,wikidataId/Q619123
-03009 Alcoi/Alcoy,wikidataId/Q494777
 03010 Alfafara,wikidataId/Q619122
-03011 Alfàs del Pi,wikidataId/Q619126
+"03011 Alfàs del Pi, l'",wikidataId/Q619126
 03012 Algorfa,wikidataId/Q954749
 03013 Algueña,wikidataId/Q620867
-03014 Alacant/Alicante,wikidataId/Q11959
 03015 Almoradí,wikidataId/Q620600
 03016 Almudaina,wikidataId/Q5403649
-03017 Alqueria d'Asnar,wikidataId/Q621092
+"03017 Alqueria d'Asnar, l'",wikidataId/Q621092
 03018 Altea,wikidataId/Q436491
 03019 Aspe,wikidataId/Q24008424
 03020 Balones,wikidataId/Q24008423
@@ -167,7 +370,6 @@ place_name,dcid
 03028 Beniarrés,wikidataId/Q621839
 03029 Benigembla,wikidataId/Q1763714
 03030 Benidoleig,wikidataId/Q1753061
-03031 Benidorm,wikidataId/Q487981
 03032 Benifallim,wikidataId/Q930303
 03033 Benifato,wikidataId/Q370955
 03034 Benijófar,wikidataId/Q24008418
@@ -178,7 +380,7 @@ place_name,dcid
 03039 Benimassot,wikidataId/Q1770191
 03040 Benimeli,wikidataId/Q1637136
 03041 Benissa,wikidataId/Q1649406
-03042 Poble Nou de Benitatxell/Benitachell,wikidataId/Q817349
+"03042 Poble Nou de Benitatxell, el/Benitachell",wikidataId/Q817349
 03043 Biar,wikidataId/Q1763764
 03044 Bigastro,wikidataId/Q1763754
 03045 Bolulla,wikidataId/Q891663
@@ -186,8 +388,8 @@ place_name,dcid
 03047 Calp,wikidataId/Q671272
 03048 Callosa d'en Sarrià,wikidataId/Q1770160
 03049 Callosa de Segura,wikidataId/Q1750915
-03050 Campello,wikidataId/Q842224
-03051 Camp de Mirra/Campo de Mirra,wikidataId/Q1553410
+"03050 Campello, el",wikidataId/Q842224
+"03051 Camp de Mirra, el/Campo de Mirra",wikidataId/Q1553410
 03052 Cañada,
 03053 Castalla,wikidataId/Q1646122
 03054 Castell de Castells,wikidataId/Q1753070
@@ -201,8 +403,6 @@ place_name,dcid
 03062 Daya Vieja,wikidataId/Q1768811
 03063 Dénia,wikidataId/Q646725
 03064 Dolores,wikidataId/Q782158
-03065 Elx/Elche,wikidataId/Q10509
-03066 Elda,wikidataId/Q608985
 03067 Fageca,wikidataId/Q426123
 03068 Famorca,wikidataId/Q1751994
 03069 Finestrat,wikidataId/Q1646107
@@ -211,16 +411,16 @@ place_name,dcid
 03072 Gaianes,wikidataId/Q1768853
 03073 Gorga,wikidataId/Q1769746
 03074 Granja de Rocamora,wikidataId/Q1769353
-03075 Castell de Guadalest,wikidataId/Q984526
+"03075 Castell de Guadalest, el",wikidataId/Q984526
 03076 Guardamar del Segura,wikidataId/Q927965
-03077 Fondó de les Neus/Hondón de las Nieves,wikidataId/Q1768905
+"03077 Fondó de les Neus, el/Hondón de las Nieves",wikidataId/Q1768905
 03078 Hondón de los Frailes,wikidataId/Q1985343
 03079 Ibi,wikidataId/Q24008508
 03080 Jacarilla,wikidataId/Q1768912
 03081 Xaló,wikidataId/Q1752098
 03082 Xàbia/Jávea,wikidataId/Q851020
 03083 Xixona/Jijona,wikidataId/Q747527
-03084 Orxa/Lorcha,wikidataId/Q1770128
+"03084 Orxa, l'/Lorcha",wikidataId/Q1770128
 03085 Llíber,wikidataId/Q533769
 03086 Millena,wikidataId/Q24008503
 03088 Monforte del Cid,wikidataId/Q1769358
@@ -229,26 +429,25 @@ place_name,dcid
 03091 Murla,wikidataId/Q1985301
 03092 Muro de Alcoy,wikidataId/Q1768714
 03093 Novelda,wikidataId/Q983473
-03094 Nucia,wikidataId/Q984403
+"03094 Nucia, la",wikidataId/Q984403
 03095 Ondara,wikidataId/Q290824
 03096 Onil,wikidataId/Q587785
 03097 Orba,wikidataId/Q983550
 03098 Orxeta,wikidataId/Q1768824
-03099 Orihuela,wikidataId/Q24008496
 03100 Parcent,wikidataId/Q984818
 03101 Pedreguer,wikidataId/Q1750923
 03102 Pego,wikidataId/Q102835
 03103 Penàguila,wikidataId/Q1995277
 03104 Petrer,wikidataId/Q1751353
-03105 Pinós/Pinoso,wikidataId/Q1751965
+"03105 Pinós, el/Pinoso",wikidataId/Q1751965
 03106 Planes,wikidataId/Q24008492
 03107 Polop,wikidataId/Q1768847
 03109 Rafal,wikidataId/Q24008490
-03110 Ràfol d'Almúnia,wikidataId/Q1983198
+"03110 Ràfol d'Almúnia, el",wikidataId/Q1983198
 03111 Redován,wikidataId/Q24008547
 03112 Relleu,wikidataId/Q1751262
 03113 Rojales,wikidataId/Q606240
-03114 Romana,wikidataId/Q1752019
+"03114 Romana, la",wikidataId/Q1752019
 03115 Sagra,wikidataId/Q1995214
 03116 Salinas,wikidataId/Q1993759
 03117 Sanet y Negrals,wikidataId/Q1983216
@@ -256,7 +455,6 @@ place_name,dcid
 03119 Sant Joan d'Alacant,wikidataId/Q740204
 03120 San Miguel de Salinas,wikidataId/Q984531
 03121 Santa Pola,wikidataId/Q257707
-03122 Sant Vicent del Raspeig/San Vicente del Raspeig,wikidataId/Q491667
 03123 Sax,wikidataId/Q1553513
 03124 Sella,wikidataId/Q24008541
 03125 Senija,wikidataId/Q1983238
@@ -265,18 +463,17 @@ place_name,dcid
 03129 Tibi,wikidataId/Q24009382
 03130 Tollos,wikidataId/Q1750925
 03131 Tormos,wikidataId/Q578908
-03132 Torre de les Maçanes/Torremanzanas,wikidataId/Q1641908
-03133 Torrevieja,wikidataId/Q221749
-03134 Vall d'Alcalà,wikidataId/Q1770167
-03135 Vall d'Ebo,wikidataId/Q1983371
-03136 Vall de Gallinera,wikidataId/Q1768862
-03137 Vall de Laguar,wikidataId/Q1983231
-03138 Verger,wikidataId/Q1751998
-03139 Vila Joiosa/Villajoyosa,wikidataId/Q935589
+"03132 Torre de les Maçanes, la/Torremanzanas",wikidataId/Q1641908
+"03134 Vall d'Alcalà, la",wikidataId/Q1770167
+"03135 Vall d'Ebo, la",wikidataId/Q1983371
+"03136 Vall de Gallinera, la",wikidataId/Q1768862
+"03137 Vall de Laguar, la",wikidataId/Q1983231
+"03138 Verger, el",wikidataId/Q1751998
+"03139 Vila Joiosa, la/Villajoyosa",wikidataId/Q935589
 03140 Villena,wikidataId/Q502249
-03901 Pobletss,wikidataId/Q987444
+"03901 Poblets, els",wikidataId/Q987444
 03902 Pilar de la Horadada,wikidataId/Q956513
-03903 Montesinos,wikidataId/Q1983327
+"03903 Montesinos, Los",wikidataId/Q1983327
 03904 San Isidro,wikidataId/Q6118924
 04001 Abla,wikidataId/Q322064
 04002 Abrucena,wikidataId/Q1110408
@@ -290,7 +487,6 @@ place_name,dcid
 04010 Alhabia,wikidataId/Q1444015
 04011 Alhama de Almería,wikidataId/Q583010
 04012 Alicún,wikidataId/Q24009354
-04013 Almería,wikidataId/Q10400
 04014 Almócita,wikidataId/Q736985
 04015 Alsodux,wikidataId/Q1444197
 04016 Antas,wikidataId/Q1444119
@@ -321,7 +517,7 @@ place_name,dcid
 04045 Fiñana,wikidataId/Q1157964
 04046 Fondón,wikidataId/Q1358351
 04047 Gádor,wikidataId/Q940842
-04048 Gallardos,wikidataId/Q1407152
+"04048 Gallardos, Los",wikidataId/Q1407152
 04049 Garrucha,wikidataId/Q1407478
 04050 Gérgal,wikidataId/Q1358171
 04051 Huécija,wikidataId/Q695550
@@ -352,7 +548,6 @@ place_name,dcid
 04076 Purchena,wikidataId/Q1445232
 04077 Rágol,wikidataId/Q1601826
 04078 Rioja,wikidataId/Q1444073
-04079 Roquetas de Mar,wikidataId/Q499184
 04080 Santa Cruz de Marchena,wikidataId/Q1611733
 04081 Santa Fe de Mondújar,wikidataId/Q1611790
 04082 Senés,wikidataId/Q1628441
@@ -377,36 +572,35 @@ place_name,dcid
 04101 Viator,wikidataId/Q1444040
 04102 Vícar,wikidataId/Q1110397
 04103 Zurgena,wikidataId/Q1110365
-04901 Tres Villas,wikidataId/Q1447770
-04902 Ejido,wikidataId/Q493933
-04903 Mojonera,wikidataId/Q1407170
+"04901 Tres Villas, Las",wikidataId/Q1447770
+"04903 Mojonera, La",wikidataId/Q1407170
 04904 Balanegra,wikidataId/Q5717072
 05001 Adanero,wikidataId/Q1404668
-05002 Adrada,wikidataId/Q1606366
+"05002 Adrada, La",wikidataId/Q1606366
 05005 Albornos,wikidataId/Q24009289
 05007 Aldeanueva de Santa Cruz,wikidataId/Q1606518
 05008 Aldeaseca,wikidataId/Q1606067
-05010 Aldehuela,wikidataId/Q931524
+"05010 Aldehuela, La",wikidataId/Q931524
 05012 Amavida,wikidataId/Q24009281
-05013 Arenal,wikidataId/Q355580
+"05013 Arenal, El",wikidataId/Q355580
 05014 Arenas de San Pedro,wikidataId/Q641669
 05015 Arevalillo,wikidataId/Q1606604
 05016 Arévalo,wikidataId/Q476793
 05017 Aveinte,wikidataId/Q1445425
 05018 Avellaneda,wikidataId/Q1638099
-05021 Barco de Ávila,wikidataId/Q1381880
-05022 Barraco,wikidataId/Q1618246
+"05021 Barco de Ávila, El",wikidataId/Q1381880
+"05022 Barraco, El",wikidataId/Q1618246
 05023 Barromán,wikidataId/Q1606213
 05024 Becedas,wikidataId/Q24009261
 05025 Becedillas,wikidataId/Q1606676
 05026 Bercial de Zapardiel,wikidataId/Q1620352
-05027 Berlanas,wikidataId/Q1632805
+"05027 Berlanas, Las",wikidataId/Q1632805
 05029 Bernuy-Zapardiel,wikidataId/Q1606710
 05030 Berrocalejo de Aragona,wikidataId/Q1601818
 05033 Blascomillán,wikidataId/Q1620327
 05034 Blasconuño de Matacabras,wikidataId/Q1601802
 05035 Blascosancho,wikidataId/Q1606949
-05036 Bohodón,wikidataId/Q1606791
+"05036 Bohodón, El",wikidataId/Q1606791
 05037 Bohoyo,wikidataId/Q1620302
 05038 Bonilla de la Sierra,wikidataId/Q1606930
 05039 Brabos,wikidataId/Q1606658
@@ -420,7 +614,7 @@ place_name,dcid
 05047 Candeleda,wikidataId/Q1442696
 05048 Cantiveros,wikidataId/Q24009223
 05049 Cardeñosa,wikidataId/Q24009222
-05051 Carrera,wikidataId/Q1775460
+"05051 Carrera, La",wikidataId/Q1775460
 05052 Casas del Puerto,wikidataId/Q658732
 05053 Casasola,wikidataId/Q1757653
 05054 Casavieja,wikidataId/Q1445437
@@ -430,7 +624,7 @@ place_name,dcid
 05058 Cepeda la Mora,wikidataId/Q818921
 05059 Cillán,wikidataId/Q24009215
 05060 Cisla,wikidataId/Q24009214
-05061 Colilla,wikidataId/Q1632389
+"05061 Colilla, La",wikidataId/Q1632389
 05062 Collado de Contreras,wikidataId/Q680439
 05063 Collado del Mirón,wikidataId/Q1607852
 05064 Constanzana,wikidataId/Q1618221
@@ -443,7 +637,7 @@ place_name,dcid
 05073 Flores de Ávila,wikidataId/Q1618199
 05074 Fontiveros,wikidataId/Q1442826
 05075 Fresnedilla,wikidataId/Q1632633
-05076 Fresno,wikidataId/Q1618234
+"05076 Fresno, El",wikidataId/Q1618234
 05077 Fuente el Saúz,wikidataId/Q1632710
 05078 Fuentes de Año,wikidataId/Q1632373
 05079 Gallegos de Altamiros,wikidataId/Q1611017
@@ -462,12 +656,12 @@ place_name,dcid
 05093 Herradón de Pinares,wikidataId/Q664178
 05094 Herreros de Suso,wikidataId/Q538501
 05095 Higuera de las Dueñas,wikidataId/Q1632728
-05096 Hija de Dios,wikidataId/Q1610974
-05097 Horcajada,wikidataId/Q1632783
+"05096 Hija de Dios, La",wikidataId/Q1610974
+"05097 Horcajada, La",wikidataId/Q1632783
 05099 Horcajo de las Torres,wikidataId/Q1632712
-05100 Hornillo,wikidataId/Q1632606
+"05100 Hornillo, El",wikidataId/Q1632606
 05101 Hoyocasero,wikidataId/Q1632400
-05102 Hoyo de Pinares,wikidataId/Q1606989
+"05102 Hoyo de Pinares, El",wikidataId/Q1606989
 05103 Hoyorredondo,wikidataId/Q1606975
 05104 Hoyos del Collado,wikidataId/Q1607083
 05105 Hoyos del Espino,wikidataId/Q1632480
@@ -476,8 +670,8 @@ place_name,dcid
 05108 Junciana,wikidataId/Q1632758
 05109 Langa,wikidataId/Q1752868
 05110 Lanzahíta,wikidataId/Q1606445
-05112 Losar del Barco,wikidataId/Q508195
-05113 Llanos de Tormes,wikidataId/Q926033
+"05112 Losar del Barco, El",wikidataId/Q508195
+"05113 Llanos de Tormes, Los",wikidataId/Q926033
 05114 Madrigal de las Altas Torres,wikidataId/Q1406727
 05115 Maello,wikidataId/Q1606813
 05116 Malpartida de Corneja,wikidataId/Q1632316
@@ -493,7 +687,7 @@ place_name,dcid
 05126 Mesegar de Corneja,wikidataId/Q784095
 05127 Mijares,wikidataId/Q1645649
 05128 Mingorría,wikidataId/Q764795
-05129 Mirón,wikidataId/Q520376
+"05129 Mirón, El",wikidataId/Q520376
 05130 Mironcillo,wikidataId/Q1632344
 05131 Mirueña de los Infanzones,wikidataId/Q1632379
 05132 Mombeltrán,wikidataId/Q1445660
@@ -529,19 +723,19 @@ place_name,dcid
 05165 Navarredonda de Gredos,wikidataId/Q1601807
 05166 Navarredondilla,wikidataId/Q1631128
 05167 Navarrevisca,wikidataId/Q1632336
-05168 Navas del Marqués,wikidataId/Q1752883
+"05168 Navas del Marqués, Las",wikidataId/Q1752883
 05169 Navatalgordo,wikidataId/Q1632355
 05170 Navatejares,wikidataId/Q1606881
 05171 Neila de San Miguel,wikidataId/Q1606857
 05172 Niharra,wikidataId/Q1632453
 05173 Ojos-Albos,wikidataId/Q1614718
 05174 Orbita,wikidataId/Q585929
-05175 Oso,wikidataId/Q1450476
+"05175 Oso, El",wikidataId/Q1450476
 05176 Padiernos,wikidataId/Q1632331
 05177 Pajares de Adaja,wikidataId/Q1632431
 05178 Palacios de Goda,wikidataId/Q1631156
 05179 Papatrigo,wikidataId/Q1650949
-05180 Parral,wikidataId/Q1633541
+"05180 Parral, El",wikidataId/Q1633541
 05181 Pascualcobo,wikidataId/Q1607800
 05182 Pedro Bernardo,wikidataId/Q1606399
 05183 Pedro-Rodríguez,wikidataId/Q1752877
@@ -590,7 +784,7 @@ place_name,dcid
 05229 Santo Domingo de las Posadas,wikidataId/Q385629
 05230 Santo Tomé de Zabarcos,wikidataId/Q749685
 05231 San Vicente de Arévalo,wikidataId/Q1628864
-05232 Serrada,wikidataId/Q1645664
+"05232 Serrada, La",wikidataId/Q1645664
 05233 Serranillos,wikidataId/Q766377
 05234 Sigeres,wikidataId/Q1607058
 05235 Sinlabajos,wikidataId/Q1628122
@@ -599,13 +793,13 @@ place_name,dcid
 05238 Solosancho,wikidataId/Q1610933
 05239 Sotalbo,wikidataId/Q1768457
 05240 Sotillo de la Adrada,wikidataId/Q1609922
-05241 Tiemblo,wikidataId/Q842675
+"05241 Tiemblo, El",wikidataId/Q842675
 05242 Tiñosillos,wikidataId/Q1610960
 05243 Tolbaños,wikidataId/Q1628112
 05244 Tormellas,wikidataId/Q1607010
 05245 Tornadizos de Ávila,wikidataId/Q1627969
 05246 Tórtoles,wikidataId/Q1606741
-05247 Torre,wikidataId/Q1752857
+"05247 Torre, La",wikidataId/Q1752857
 05249 Umbrías,wikidataId/Q1645654
 05251 Vadillo de la Sierra,wikidataId/Q1614699
 05252 Valdecasa,wikidataId/Q670740
@@ -632,7 +826,7 @@ place_name,dcid
 06002 Aceuchal,wikidataId/Q616785
 06003 Ahillones,wikidataId/Q389434
 06004 Alange,wikidataId/Q996175
-06005 Albuera,wikidataId/Q144268
+"06005 Albuera, La",wikidataId/Q144268
 06006 Alburquerque,wikidataId/Q493370
 06007 Alconchel,wikidataId/Q24008867
 06008 Alconera,wikidataId/Q1368859
@@ -642,7 +836,6 @@ place_name,dcid
 06012 Arroyo de San Serván,wikidataId/Q1113385
 06013 Atalaya,wikidataId/Q14193114
 06014 Azuaga,wikidataId/Q1368982
-06015 Badajoz,wikidataId/Q15679
 06016 Barcarrota,wikidataId/Q534483
 06017 Baterno,wikidataId/Q1372568
 06018 Benquerencia de la Serena,wikidataId/Q1606077
@@ -659,14 +852,14 @@ place_name,dcid
 06029 Campillo de Llerena,wikidataId/Q1372581
 06030 Capilla,wikidataId/Q24008824
 06031 Carmonita,wikidataId/Q24008822
-06032 Carrascalejo,wikidataId/Q971549
+"06032 Carrascalejo, El",wikidataId/Q971549
 06033 Casas de Don Pedro,wikidataId/Q1100425
 06034 Casas de Reina,wikidataId/Q1157670
 06035 Castilblanco,wikidataId/Q780375
 06036 Castuera,wikidataId/Q515016
-06037 Codosera,wikidataId/Q743708
+"06037 Codosera, La",wikidataId/Q743708
 06038 Cordobilla de Lácara,wikidataId/Q1404680
-06039 Coronada,wikidataId/Q1447677
+"06039 Coronada, La",wikidataId/Q1447677
 06040 Corte de Peleas,wikidataId/Q1372541
 06041 Cristina,wikidataId/Q1777641
 06042 Cheles,wikidataId/Q24008800
@@ -685,10 +878,10 @@ place_name,dcid
 06055 Fuentes de León,wikidataId/Q1098694
 06056 Garbayuela,wikidataId/Q1447660
 06057 Garlitos,wikidataId/Q24008781
-06058 Garrovilla,wikidataId/Q587063
+"06058 Garrovilla, La",wikidataId/Q587063
 06059 Granja de Torrehermosa,wikidataId/Q1372757
 06060 Guareña,wikidataId/Q23986395
-06061 Haba,wikidataId/Q1387033
+"06061 Haba, La",wikidataId/Q1387033
 06062 Helechosa de los Montes,wikidataId/Q1446273
 06063 Herrera del Duque,wikidataId/Q1407162
 06064 Higuera de la Serena,wikidataId/Q1446402
@@ -698,7 +891,7 @@ place_name,dcid
 06068 Hinojosa del Valle,wikidataId/Q1446338
 06069 Hornachos,wikidataId/Q1446441
 06070 Jerez de los Caballeros,wikidataId/Q1153945
-06071 Lapa,wikidataId/Q617435
+"06071 Lapa, La",wikidataId/Q617435
 06072 Lobón,wikidataId/Q1098700
 06073 Llera,wikidataId/Q24008768
 06074 Llerena,wikidataId/Q686184
@@ -710,14 +903,13 @@ place_name,dcid
 06080 Medellín,wikidataId/Q23984122
 06081 Medina de las Torres,wikidataId/Q1406716
 06082 Mengabril,wikidataId/Q1455235
-06083 Mérida,wikidataId/Q14323
 06084 Mirandilla,wikidataId/Q24008759
 06085 Monesterio,wikidataId/Q733580
 06086 Montemolín,wikidataId/Q1372801
 06087 Monterrubio de la Serena,wikidataId/Q587935
 06088 Montijo,wikidataId/Q1387091
-06089 Morera,wikidataId/Q662761
-06090 Nava de Santiago,wikidataId/Q970535
+"06089 Morera, La",wikidataId/Q662761
+"06090 Nava de Santiago, La",wikidataId/Q970535
 06091 Navalvillar de Pela,wikidataId/Q649045
 06092 Nogales,wikidataId/Q1616230
 06093 Oliva de la Frontera,wikidataId/Q947183
@@ -726,7 +918,7 @@ place_name,dcid
 06096 Orellana de la Sierra,wikidataId/Q1615456
 06097 Orellana la Vieja,wikidataId/Q1446374
 06098 Palomas,wikidataId/Q549949
-06099 Parra,wikidataId/Q1446328
+"06099 Parra, La",wikidataId/Q1446328
 06100 Peñalsordo,wikidataId/Q1455254
 06101 Peraleda del Zaucejo,wikidataId/Q1446260
 06102 Puebla de Alcocer,wikidataId/Q1605886
@@ -742,14 +934,14 @@ place_name,dcid
 06112 Retamal de Llerena,wikidataId/Q539117
 06113 Ribera del Fresno,wikidataId/Q1442520
 06114 Risco,wikidataId/Q1998809
-06115 Roca de la Sierra,wikidataId/Q1372861
+"06115 Roca de la Sierra, La",wikidataId/Q1372861
 06116 Salvaleón,wikidataId/Q1443665
 06117 Salvatierra de los Barros,wikidataId/Q1443754
 06118 Sancti-Spíritus,wikidataId/Q1443675
 06119 San Pedro de Mérida,wikidataId/Q1443685
 06120 Santa Amalia,wikidataId/Q24009468
 06121 Santa Marta,wikidataId/Q1629459
-06122 Santos de Maimona,wikidataId/Q1372555
+"06122 Santos de Maimona, Los",wikidataId/Q1372555
 06123 San Vicente de Alcántara,wikidataId/Q1442479
 06124 Segura de León,wikidataId/Q1354528
 06125 Siruela,wikidataId/Q24009464
@@ -789,7 +981,7 @@ place_name,dcid
 06159 Zahínos,wikidataId/Q1641406
 06160 Zalamea de la Serena,wikidataId/Q1613344
 06161 Zarza-Capilla,wikidataId/Q1647547
-06162 Zarza,wikidataId/Q1605997
+"06162 Zarza, La",wikidataId/Q1605997
 06901 Valdelacalzada,wikidataId/Q1246417
 06902 Pueblonuevo del Guadiana,wikidataId/Q1387053
 06903 Guadiana,wikidataId/Q3822025
@@ -803,7 +995,6 @@ place_name,dcid
 07008 Binissalem,wikidataId/Q837121
 07009 Búger,wikidataId/Q24019649
 07010 Bunyola,wikidataId/Q837125
-07011 Calvià,wikidataId/Q491786
 07012 Campanet,wikidataId/Q850989
 07013 Campos,wikidataId/Q12385106
 07014 Capdepera,wikidataId/Q920971
@@ -818,7 +1009,6 @@ place_name,dcid
 07023 Ferreries,wikidataId/Q983461
 07024 Formentera,wikidataId/Q52626
 07025 Fornalutx,wikidataId/Q950901
-07026 Eivissa,wikidataId/Q473914
 07027 Inca,wikidataId/Q988688
 07028 Lloret de Vistalegre,wikidataId/Q988714
 07029 Lloseta,wikidataId/Q847317
@@ -829,14 +1019,13 @@ place_name,dcid
 07034 Mancor de la Vall,wikidataId/Q988696
 07035 Maria de la Salut,wikidataId/Q669078
 07036 Marratxí,wikidataId/Q11935634
-07037 Mercadal,wikidataId/Q945653
+"07037 Mercadal, Es",wikidataId/Q945653
 07038 Montuïri,wikidataId/Q983467
 07039 Muro,wikidataId/Q595424
-07040 Palma,wikidataId/Q8826
 07041 Petra,wikidataId/Q611123
 07042 Pollença,wikidataId/Q601112
 07043 Porreres,wikidataId/Q925773
-07044 Pobla,wikidataId/Q984493
+"07044 Pobla, Sa",wikidataId/Q984493
 07045 Puigpunyent,wikidataId/Q983625
 07046 Sant Antoni de Portmany,wikidataId/Q11145023
 07047 Sencelles,wikidataId/Q987394
@@ -851,20 +1040,20 @@ place_name,dcid
 07056 Santa María del Camí,wikidataId/Q943948
 07057 Santanyí,wikidataId/Q24019235
 07058 Selva,wikidataId/Q23979299
-07059 Salines,wikidataId/Q783498
+"07059 Salines, Ses",wikidataId/Q783498
 07060 Sineu,wikidataId/Q943922
 07061 Sóller,wikidataId/Q832991
 07062 Son Servera,wikidataId/Q610838
 07063 Valldemossa,wikidataId/Q832967
-07064 Castell,wikidataId/Q941533
+"07064 Castell, Es",wikidataId/Q941533
 07065 Vilafranca de Bonany,wikidataId/Q975679
 07901 Ariany,wikidataId/Q656449
-07902 Migjorn Gran,wikidataId/Q984485
+"07902 Migjorn Gran, Es",wikidataId/Q984485
 08001 Abrera,wikidataId/Q15593
 08002 Aguilar de Segarra,wikidataId/Q16675
 08003 Alella,wikidataId/Q12034
 08004 Alpens,wikidataId/Q13777
-08005 Ametlla del Vallès,wikidataId/Q15397
+"08005 Ametlla del Vallès, L'",wikidataId/Q15397
 08006 Arenys de Mar,wikidataId/Q12110
 08007 Arenys de Munt,wikidataId/Q12101
 08008 Argençola,wikidataId/Q15936
@@ -874,7 +1063,6 @@ place_name,dcid
 08012 Avinyó,wikidataId/Q16678
 08013 Avinyonet del Penedès,wikidataId/Q791068
 08014 Aiguafreda,wikidataId/Q24003063
-08015 Badalona,wikidataId/Q15468
 08016 Bagà,wikidataId/Q24003084
 08017 Balenyà,wikidataId/Q13776
 08018 Balsareny,wikidataId/Q24009584
@@ -883,9 +1071,9 @@ place_name,dcid
 08022 Berga,wikidataId/Q24002636
 08023 Bigues i Riells del Fai,wikidataId/Q15398
 08024 Borredà,wikidataId/Q15488
-08025 Bruc,wikidataId/Q15938
-08026 Brull,wikidataId/Q13775
-08027 Cabanyes,wikidataId/Q1228790
+"08025 Bruc, El",wikidataId/Q15938
+"08026 Brull, El",wikidataId/Q13775
+"08027 Cabanyes, Les",wikidataId/Q1228790
 08028 Cabrera d'Anoia,wikidataId/Q15939
 08029 Cabrera de Mar,wikidataId/Q19278399
 08030 Cabrils,wikidataId/Q12083
@@ -914,7 +1102,6 @@ place_name,dcid
 08053 Castellbell i el Vilar,wikidataId/Q16684
 08054 Castellbisbal,wikidataId/Q24009582
 08055 Castellcir,wikidataId/Q15407
-08056 Castelldefels,wikidataId/Q15597
 08057 Castell de l'Areny,wikidataId/Q15492
 08058 Castellet i la Gornal,wikidataId/Q1228799
 08059 Castellfollit del Boix,wikidataId/Q16685
@@ -931,39 +1118,36 @@ place_name,dcid
 08070 Collsuspina,wikidataId/Q13779
 08071 Copons,wikidataId/Q15947
 08072 Corbera de Llobregat,wikidataId/Q24002211
-08073 Cornellà de Llobregat,wikidataId/Q15602
 08074 Cubelles,wikidataId/Q15558
 08075 Dosrius,wikidataId/Q11968
 08076 Esparreguera,wikidataId/Q24001286
 08077 Esplugues de Llobregat,wikidataId/Q24001303
-08078 Espunyola,wikidataId/Q15506
-08079 Estany,wikidataId/Q16694
+"08078 Espunyola, L'",wikidataId/Q15506
+"08079 Estany, L'",wikidataId/Q16694
 08080 Fígols,wikidataId/Q15508
 08081 Fogars de Montclús,wikidataId/Q15411
 08082 Fogars de la Selva,wikidataId/Q13083
 08083 Folgueroles,wikidataId/Q13782
 08084 Fonollosa,wikidataId/Q16695
 08085 Font-rubí,wikidataId/Q984398
-08086 Franqueses del Vallès,wikidataId/Q15412
+"08086 Franqueses del Vallès, Les",wikidataId/Q15412
 08087 Gallifa,wikidataId/Q13928
-08088 Garriga,wikidataId/Q15415
+"08088 Garriga, La",wikidataId/Q15415
 08089 Gavà,wikidataId/Q15622
 08090 Gaià,wikidataId/Q16696
 08091 Gelida,wikidataId/Q763729
 08092 Gironella,wikidataId/Q24001095
 08093 Gisclareny,wikidataId/Q15511
-08094 Granada,wikidataId/Q1228808
+"08094 Granada, La",wikidataId/Q1228808
 08095 Granera,wikidataId/Q15418
-08096 Granollers,wikidataId/Q15420
 08097 Gualba,wikidataId/Q15421
 08098 Sant Salvador de Guardiola,wikidataId/Q16733
 08099 Guardiola de Berguedà,wikidataId/Q15519
 08100 Gurb,wikidataId/Q24001640
-08101 Hospitalet de Llobregat,wikidataId/Q15470
 08102 Igualada,wikidataId/Q15950
 08103 Jorba,wikidataId/Q24009576
-08104 Llacuna,wikidataId/Q15952
-08105 Llagosta,wikidataId/Q15422
+"08104 Llacuna, La",wikidataId/Q15952
+"08105 Llagosta, La",wikidataId/Q15422
 08106 Llinars del Vallès,wikidataId/Q15423
 08107 Lliçà d'Amunt,wikidataId/Q15425
 08108 Lliçà de Vall,wikidataId/Q15428
@@ -971,18 +1155,15 @@ place_name,dcid
 08110 Malgrat de Mar,wikidataId/Q12590
 08111 Malla,wikidataId/Q13805
 08112 Manlleu,wikidataId/Q13804
-08113 Manresa,wikidataId/Q16697
 08114 Martorell,wikidataId/Q15623
 08115 Martorelles,wikidataId/Q15429
-08116 Masies de Roda,wikidataId/Q13803
-08117 Masies de Voltregà,wikidataId/Q13801
-08118 Masnou,wikidataId/Q12039
+"08116 Masies de Roda, Les",wikidataId/Q13803
+"08117 Masies de Voltregà, Les",wikidataId/Q13801
+"08118 Masnou, El",wikidataId/Q12039
 08119 Masquefa,wikidataId/Q15954
 08120 Matadepera,wikidataId/Q13929
-08121 Mataró,wikidataId/Q11492
 08122 Mediona,wikidataId/Q686790
 08123 Molins de Rei,wikidataId/Q23994793
-08124 Mollet del Vallès,wikidataId/Q15430
 08125 Montcada i Reixac,wikidataId/Q13927
 08126 Montgat,wikidataId/Q12022
 08127 Monistrol de Montserrat,wikidataId/Q16704
@@ -1000,7 +1181,7 @@ place_name,dcid
 08139 Mura,wikidataId/Q16722
 08140 Navarcles,wikidataId/Q16723
 08141 Navàs,wikidataId/Q16724
-08142 Nou de Berguedà,wikidataId/Q15524
+"08142 Nou de Berguedà, La",wikidataId/Q15524
 08143 Òdena,wikidataId/Q15957
 08144 Olvan,wikidataId/Q15527
 08145 Olèrdola,wikidataId/Q1228441
@@ -1016,34 +1197,31 @@ place_name,dcid
 08155 Palafolls,wikidataId/Q12595
 08156 Palau-solità i Plegamans,wikidataId/Q13926
 08157 Pallejà,wikidataId/Q15627
-08158 Papiol,wikidataId/Q15631
+"08158 Papiol, El",wikidataId/Q15631
 08159 Parets del Vallès,wikidataId/Q15437
 08160 Perafita,wikidataId/Q23993749
 08161 Piera,wikidataId/Q15959
-08162 Hostalets de Pierolas,wikidataId/Q15949
+"08162 Hostalets de Pierola, Els",wikidataId/Q15949
 08163 Pineda de Mar,wikidataId/Q12552
-08164 Pla del Penedès,wikidataId/Q1312464
-08165 Pobla de Claramunt,wikidataId/Q15960
-08166 Pobla de Lillet,wikidataId/Q15529
+"08164 Pla del Penedès, El",wikidataId/Q1312464
+"08165 Pobla de Claramunt, La",wikidataId/Q15960
+"08166 Pobla de Lillet, La",wikidataId/Q15529
 08167 Polinyà,wikidataId/Q24009561
 08168 Pontons,wikidataId/Q1229275
-08169 Prat de Llobregat,wikidataId/Q15619
-08170 Prats de Reis,wikidataId/Q15961
+"08170 Prats de Rei, Els",wikidataId/Q15961
 08171 Prats de Lluçanès,wikidataId/Q13814
 08172 Premià de Mar,wikidataId/Q12046
 08174 Puigdàlber,wikidataId/Q1230115
 08175 Puig-reig,wikidataId/Q15534
 08176 Pujalt,wikidataId/Q15962
-08177 Quar,wikidataId/Q15535
+"08177 Quar, La",wikidataId/Q15535
 08178 Rajadell,wikidataId/Q24009557
 08179 Rellinars,wikidataId/Q13932
 08180 Ripollet,wikidataId/Q13933
-08181 Roca del Vallès,wikidataId/Q15439
-08182 Pont de Vilomara i Rocafort,wikidataId/Q16726
+"08181 Roca del Vallès, La",wikidataId/Q15439
+"08182 Pont de Vilomara i Rocafort, El",wikidataId/Q16726
 08183 Roda de Ter,wikidataId/Q13815
-08184 Rubí,wikidataId/Q13934
 08185 Rubió,wikidataId/Q15963
-08187 Sabadell,wikidataId/Q12258
 08188 Sagàs,wikidataId/Q15536
 08189 Sant Pere Sallavinera,wikidataId/Q15967
 08190 Saldes,wikidataId/Q15537
@@ -1056,12 +1234,10 @@ place_name,dcid
 08197 Sant Andreu de Llavaneres,wikidataId/Q12093
 08198 Sant Antoni de Vilamajor,wikidataId/Q15440
 08199 Sant Bartomeu del Grau,wikidataId/Q13818
-08200 Sant Boi de Llobregat,wikidataId/Q15635
 08201 Sant Boi de Lluçanès,wikidataId/Q13819
 08202 Sant Celoni,wikidataId/Q15441
 08203 Sant Cebrià de Vallalta,wikidataId/Q12520
 08204 Sant Climent de Llobregat,wikidataId/Q15636
-08205 Sant Cugat del Vallès,wikidataId/Q13936
 08206 Sant Cugat Sesgarrigues,wikidataId/Q584252
 08207 Sant Esteve de Palautordera,wikidataId/Q15442
 08208 Sant Esteve Sesrovires,wikidataId/Q15638
@@ -1101,7 +1277,6 @@ place_name,dcid
 08242 Marganell,wikidataId/Q16698
 08243 Santa Cecília de Voltregà,wikidataId/Q13832
 08244 Santa Coloma de Cervelló,wikidataId/Q15632
-08245 Santa Coloma de Gramenet,wikidataId/Q15473
 08246 Santa Eugènia de Berga,wikidataId/Q13834
 08247 Santa Eulàlia de Riuprimer,wikidataId/Q13836
 08248 Santa Eulàlia de Ronçana,wikidataId/Q15454
@@ -1110,7 +1285,7 @@ place_name,dcid
 08251 Santa Margarida i els Monjos,wikidataId/Q660350
 08252 Barberà del Vallès,wikidataId/Q13916
 08253 Santa Maria de Besora,wikidataId/Q13835
-08254 Esquirol,wikidataId/Q13837
+"08254 Esquirol, L'",wikidataId/Q13837
 08255 Santa Maria de Merlès,wikidataId/Q15541
 08256 Santa Maria de Martorelles,wikidataId/Q15455
 08257 Santa Maria de Miralles,wikidataId/Q15970
@@ -1122,7 +1297,6 @@ place_name,dcid
 08263 Sant Vicenç dels Horts,wikidataId/Q15649
 08264 Sant Vicenç de Montalt,wikidataId/Q12095
 08265 Sant Vicenç de Torelló,wikidataId/Q13833
-08266 Cerdanyola del Vallès,wikidataId/Q13922
 08267 Sentmenat,wikidataId/Q13943
 08268 Cercs,wikidataId/Q15504
 08269 Seva,wikidataId/Q13839
@@ -1135,14 +1309,13 @@ place_name,dcid
 08276 Tagamanent,wikidataId/Q24012019
 08277 Talamanca,wikidataId/Q24012018
 08278 Taradell,wikidataId/Q13850
-08279 Terrassa,wikidataId/Q13939
 08280 Tavertet,wikidataId/Q13852
 08281 Teià,wikidataId/Q12028
 08282 Tiana,wikidataId/Q12026
 08283 Tona,wikidataId/Q23991164
 08284 Tordera,wikidataId/Q12596
 08285 Torelló,wikidataId/Q13854
-08286 Torre de Claramunt,wikidataId/Q15971
+"08286 Torre de Claramunt, La",wikidataId/Q15971
 08287 Torrelavit,wikidataId/Q1228768
 08288 Torrelles de Foix,wikidataId/Q984393
 08289 Torrelles de Llobregat,wikidataId/Q15650
@@ -1157,19 +1330,17 @@ place_name,dcid
 08298 Vic,wikidataId/Q13855
 08299 Vilada,wikidataId/Q15544
 08300 Viladecavalls,wikidataId/Q13946
-08301 Viladecans,wikidataId/Q15652
 08302 Vilanova del Camí,wikidataId/Q23990468
 08303 Vilanova de Sau,wikidataId/Q13859
 08304 Vilobí del Penedès,wikidataId/Q1228795
 08305 Vilafranca del Penedès,wikidataId/Q835012
 08306 Vilalba Sasserra,wikidataId/Q15461
-08307 Vilanova i la Geltrú,wikidataId/Q15553
 08308 Viver i Serrateix,wikidataId/Q15545
 08901 Rupit i Pruit,wikidataId/Q7380413
 08902 Vilanova del Vallès,wikidataId/Q15463
 08903 Sant Julià de Cerdanyola,wikidataId/Q23992371
 08904 Badia del Vallès,wikidataId/Q13913
-08905 Palma de Cervelló,wikidataId/Q15630
+"08905 Palma de Cervelló, La",wikidataId/Q15630
 09001 Abajas,wikidataId/Q664319
 09003 Adrada de Haza,wikidataId/Q1113505
 09006 Aguas Cándidas,wikidataId/Q1448064
@@ -1179,7 +1350,7 @@ place_name,dcid
 09011 Alfoz de Bricia,wikidataId/Q523803
 09012 Alfoz de Santa Gadea,wikidataId/Q1614676
 09013 Altable,wikidataId/Q1447939
-09014 Altos,wikidataId/Q1778599
+"09014 Altos, Los",wikidataId/Q1778599
 09016 Ameyugo,wikidataId/Q1614781
 09017 Anguix,wikidataId/Q24013981
 09018 Aranda de Duero,wikidataId/Q495380
@@ -1193,17 +1364,17 @@ place_name,dcid
 09026 Arlanzón,wikidataId/Q1614748
 09027 Arraya de Oca,wikidataId/Q384380
 09029 Atapuerca,wikidataId/Q753459
-09030 Ausines,wikidataId/Q1643808
+"09030 Ausines, Los",wikidataId/Q1643808
 09032 Avellanosa de Muñó,wikidataId/Q610874
 09033 Bahabón de Esgueva,wikidataId/Q1447967
-09034 Balbases,wikidataId/Q1628772
+"09034 Balbases, Los",wikidataId/Q1628772
 09035 Baños de Valdearados,wikidataId/Q929461
 09036 Bañuelos de Bureba,wikidataId/Q285235
 09037 Barbadillo de Herreros,wikidataId/Q1614687
 09038 Barbadillo del Mercado,wikidataId/Q1614740
 09039 Barbadillo del Pez,wikidataId/Q1447953
 09041 Barrio de Muñó,wikidataId/Q628122
-09043 Barrios de Bureba,wikidataId/Q1643815
+"09043 Barrios de Bureba, Los",wikidataId/Q1643815
 09044 Barrios de Colina,wikidataId/Q1448007
 09045 Basconcillos del Tozo,wikidataId/Q648723
 09046 Bascuñana,wikidataId/Q1447919
@@ -1217,7 +1388,6 @@ place_name,dcid
 09056 Briviesca,wikidataId/Q1391501
 09057 Bugedo,wikidataId/Q386872
 09058 Buniel,wikidataId/Q1614638
-09059 Burgos,wikidataId/Q9580
 09060 Busto de Bureba,wikidataId/Q1623172
 09061 Cabañes de Esgueva,wikidataId/Q1633997
 09062 Cabezón de la Sierra,wikidataId/Q1633987
@@ -1262,7 +1432,7 @@ place_name,dcid
 09113 Covarrubias,wikidataId/Q1109944
 09114 Cubillo del Campo,wikidataId/Q1765331
 09115 Cubo de Bureba,wikidataId/Q1656771
-09117 Cueva de Roa,wikidataId/Q939628
+"09117 Cueva de Roa, La",wikidataId/Q939628
 09119 Cuevas de San Clemente,wikidataId/Q1633302
 09120 Encío,wikidataId/Q1607299
 09122 Espinosa de Cervera,wikidataId/Q1650262
@@ -1285,7 +1455,7 @@ place_name,dcid
 09140 Fuentenebro,wikidataId/Q1643049
 09141 Fuentespina,wikidataId/Q1633201
 09143 Galbarros,wikidataId/Q951812
-09144 Gallega,wikidataId/Q1637095
+"09144 Gallega, La",wikidataId/Q1637095
 09148 Grijalba,wikidataId/Q1650272
 09149 Grisaleña,wikidataId/Q1609765
 09151 Gumiel de Izán,wikidataId/Q1628693
@@ -1297,9 +1467,9 @@ place_name,dcid
 09162 Hontoria de la Cantera,wikidataId/Q1751514
 09163 Hontoria del Pinar,wikidataId/Q970273
 09164 Hontoria de Valdearados,wikidataId/Q1643872
-09166 Hormazas,wikidataId/Q1751517
+"09166 Hormazas, Las",wikidataId/Q1751517
 09167 Hornillos del Camino,wikidataId/Q958987
-09168 Horra,wikidataId/Q1633269
+"09168 Horra, La",wikidataId/Q1633269
 09169 Hortigüela,wikidataId/Q1643581
 09170 Hoyales de Roa,wikidataId/Q1633415
 09172 Huérmeces,wikidataId/Q24010489
@@ -1383,7 +1553,7 @@ place_name,dcid
 09273 Prádanos de Bureba,wikidataId/Q1643553
 09274 Pradoluengo,wikidataId/Q932730
 09275 Presencio,wikidataId/Q1643670
-09276 Puebla de Arganzón,wikidataId/Q24010416
+"09276 Puebla de Arganzón, La",wikidataId/Q24010416
 09277 Puentedura,wikidataId/Q1643994
 09279 Quemada,wikidataId/Q24010413
 09280 Quintanabureba,wikidataId/Q1642712
@@ -1395,7 +1565,7 @@ place_name,dcid
 09292 Quintanavides,wikidataId/Q1751255
 09294 Quintanilla de la Mata,wikidataId/Q1643009
 09295 Quintanilla del Coco,wikidataId/Q1630639
-09297 Quintanillas,wikidataId/Q1751519
+"09297 Quintanillas, Las",wikidataId/Q1751519
 09298 Quintanilla San García,wikidataId/Q1751244
 09301 Quintanilla Vivar,wikidataId/Q1642746
 09302 Rabanera del Pinar,wikidataId/Q510140
@@ -1407,7 +1577,7 @@ place_name,dcid
 09309 Regumiel de la Sierra,wikidataId/Q1642738
 09310 Reinoso,wikidataId/Q1751268
 09311 Retuerta,wikidataId/Q1642553
-09312 Revilla y Ahedo,wikidataId/Q1643541
+"09312 Revilla y Ahedo, La",wikidataId/Q1643541
 09314 Revilla del Campo,wikidataId/Q1656647
 09315 Revillarruz,wikidataId/Q1642576
 09316 Revilla Vallejera,wikidataId/Q1751238
@@ -1445,7 +1615,7 @@ place_name,dcid
 09361 Sargentes de la Lora,wikidataId/Q302600
 09362 Sarracín,wikidataId/Q1641316
 09363 Sasamón,wikidataId/Q1628353
-09365 Sequera de Haza,wikidataId/Q1633257
+"09365 Sequera de Haza, La",wikidataId/Q1633257
 09366 Solarana,wikidataId/Q627922
 09368 Sordillos,wikidataId/Q1641185
 09369 Sotillo de la Ribera,wikidataId/Q1628395
@@ -1487,8 +1657,8 @@ place_name,dcid
 09417 Vallejera,wikidataId/Q1642688
 09418 Valles de Palenzuela,wikidataId/Q1642622
 09419 Valluércanes,wikidataId/Q1630713
-09421 Vid y Barrios,wikidataId/Q1643567
-09422 Vid de Bureba,wikidataId/Q1643756
+"09421 Vid y Barrios, La",wikidataId/Q1643567
+"09422 Vid de Bureba, La",wikidataId/Q1643756
 09423 Vileña,wikidataId/Q1642451
 09424 Viloria de Rioja,wikidataId/Q956438
 09425 Vilviestre del Pinar,wikidataId/Q1641339
@@ -1553,7 +1723,7 @@ place_name,dcid
 10010 Alcuéscar,wikidataId/Q1630122
 10011 Aldeacentenera,wikidataId/Q1637525
 10012 Aldea del Cano,wikidataId/Q1643848
-10013 Aldea del Obispo,wikidataId/Q1643840
+"10013 Aldea del Obispo, La",wikidataId/Q1643840
 10014 Aldeanueva de la Vera,wikidataId/Q1630535
 10015 Aldeanueva del Camino,wikidataId/Q24010258
 10016 Aldehuela de Jerte,wikidataId/Q1646374
@@ -1577,7 +1747,6 @@ place_name,dcid
 10034 Cabezabellosa,wikidataId/Q1648618
 10035 Cabezuela del Valle,wikidataId/Q726538
 10036 Cabrero,wikidataId/Q1776883
-10037 Cáceres,wikidataId/Q15678
 10038 Cachorrilla,wikidataId/Q640211
 10039 Cadalso,wikidataId/Q24002231
 10040 Calzadilla,wikidataId/Q24010234
@@ -1609,7 +1778,7 @@ place_name,dcid
 10066 Conquista de la Sierra,wikidataId/Q920677
 10067 Coria,wikidataId/Q142778
 10068 Cuacos de Yuste,wikidataId/Q1615595
-10069 Cumbre,wikidataId/Q1630485
+"10069 Cumbre, La",wikidataId/Q1630485
 10070 Deleitosa,wikidataId/Q24010205
 10071 Descargamaría,wikidataId/Q1638600
 10072 Eljas,wikidataId/Q1613259
@@ -1617,15 +1786,15 @@ place_name,dcid
 10075 Fresnedoso de Ibor,wikidataId/Q1643018
 10076 Galisteo,wikidataId/Q24010199
 10077 Garciaz,wikidataId/Q1643863
-10078 Garganta,wikidataId/Q1643616
+"10078 Garganta, La",wikidataId/Q1643616
 10079 Garganta la Olla,wikidataId/Q253672
 10080 Gargantilla,wikidataId/Q24010195
 10081 Gargüera,wikidataId/Q1648608
 10082 Garrovillas de Alconétar,wikidataId/Q904768
 10083 Garvín,wikidataId/Q24010192
 10084 Gata,wikidataId/Q1645238
-10085 Gordo,wikidataId/Q1769611
-10086 Granja,wikidataId/Q1647866
+"10085 Gordo, El",wikidataId/Q1769611
+"10086 Granja, La",wikidataId/Q1647866
 10087 Guadalupe,wikidataId/Q695504
 10088 Guijo de Coria,wikidataId/Q1646335
 10089 Guijo de Galisteo,wikidataId/Q1630130
@@ -1683,7 +1852,7 @@ place_name,dcid
 10141 Peraleda de San Román,wikidataId/Q1658590
 10142 Perales del Puerto,wikidataId/Q1630915
 10143 Pescueza,wikidataId/Q24010133
-10144 Pesga,wikidataId/Q728401
+"10144 Pesga, La",wikidataId/Q728401
 10145 Piedras Albas,wikidataId/Q1643042
 10146 Pinofranqueado,wikidataId/Q1611575
 10147 Piornal,wikidataId/Q1613446
@@ -1723,7 +1892,7 @@ place_name,dcid
 10181 Tejeda de Tiétar,wikidataId/Q1750981
 10182 Toril,wikidataId/Q1647870
 10183 Tornavacas,wikidataId/Q1626858
-10184 Torno,wikidataId/Q27968708
+"10184 Torno, El",wikidataId/Q27968708
 10185 Torrecilla de los Ángeles,wikidataId/Q1628823
 10186 Torrecillas de la Tiesa,wikidataId/Q1628401
 10187 Torre de Don Miguel,wikidataId/Q24011986
@@ -1767,35 +1936,27 @@ place_name,dcid
 11001 Alcalá de los Gazules,wikidataId/Q203042
 11002 Alcalá del Valle,wikidataId/Q1379651
 11003 Algar,wikidataId/Q818936
-11004 Algeciras,wikidataId/Q484552
 11005 Algodonales,wikidataId/Q818386
 11006 Arcos de la Frontera,wikidataId/Q637863
 11007 Barbate,wikidataId/Q13154
-11008 Barrios,wikidataId/Q925913
+"11008 Barrios, Los",wikidataId/Q925913
 11009 Benaocaz,wikidataId/Q741812
 11010 Bornos,wikidataId/Q1451570
-11011 Bosque,wikidataId/Q653914
-11012 Cádiz,wikidataId/Q15682
+"11011 Bosque, El",wikidataId/Q653914
 11013 Castellar de la Frontera,wikidataId/Q1610266
 11014 Conil de la Frontera,wikidataId/Q832984
-11015 Chiclana de la Frontera,wikidataId/Q277302
 11016 Chipiona,wikidataId/Q741749
 11017 Espera,wikidataId/Q24011944
-11018 Gastor,wikidataId/Q1444358
+"11018 Gastor, El",wikidataId/Q1444358
 11019 Grazalema,wikidataId/Q832949
-11020 Jerez de la Frontera,wikidataId/Q12303
 11021 Jimena de la Frontera,wikidataId/Q916664
-11022 Línea de la Concepción,wikidataId/Q13148
 11023 Medina Sidonia,wikidataId/Q642200
 11024 Olvera,wikidataId/Q662224
 11025 Paterna de Rivera,wikidataId/Q1631804
 11026 Prado del Rey,wikidataId/Q1448460
-11027 Puerto de Santa María,wikidataId/Q203040
 11028 Puerto Real,wikidataId/Q846159
 11029 Puerto Serrano,wikidataId/Q1630881
 11030 Rota,wikidataId/Q24011932
-11031 San Fernando,wikidataId/Q741765
-11032 Sanlúcar de Barrameda,wikidataId/Q210887
 11033 San Roque,wikidataId/Q846153
 11034 Setenil de las Bodegas,wikidataId/Q918623
 11035 Tarifa,wikidataId/Q222702
@@ -1813,7 +1974,7 @@ place_name,dcid
 12002 Aín,wikidataId/Q735833
 12003 Albocàsser,wikidataId/Q1606574
 12004 Alcalà de Xivert,wikidataId/Q1635204
-12005 Alcora,wikidataId/Q1635385
+"12005 Alcora, l'",wikidataId/Q1635385
 12006 Alcudia de Veo,wikidataId/Q1772279
 12007 Alfondeguilla,wikidataId/Q24011917
 12008 Algimia de Almonacid,wikidataId/Q1635917
@@ -1844,7 +2005,6 @@ place_name,dcid
 12037 Castell de Cabres,wikidataId/Q1645962
 12038 Castellfort,wikidataId/Q1778143
 12039 Castellnovo,wikidataId/Q1635733
-12040 Castelló de la Plana,wikidataId/Q15092
 12041 Castillo de Villamalefa,wikidataId/Q932479
 12042 Catí,wikidataId/Q1645833
 12043 Caudiel,wikidataId/Q1645781
@@ -1853,7 +2013,7 @@ place_name,dcid
 12046 Cirat,wikidataId/Q1769924
 12048 Cortes de Arenoso,wikidataId/Q1647013
 12049 Costur,wikidataId/Q1645737
-12050 Coves de Vinromà,wikidataId/Q24011892
+"12050 Coves de Vinromà, les",wikidataId/Q24011892
 12051 Culla,wikidataId/Q24011891
 12052 Xert,wikidataId/Q1983359
 12053 Chilches/Xilxes,wikidataId/Q1768727
@@ -1870,12 +2030,12 @@ place_name,dcid
 12067 Geldo,wikidataId/Q24011879
 12068 Herbers,wikidataId/Q1769760
 12069 Higueras,wikidataId/Q1983382
-12070 Jana,wikidataId/Q1768937
+"12070 Jana, la",wikidataId/Q1768937
 12071 Jérica,wikidataId/Q1645723
 12072 Llucena/Lucena del Cid,wikidataId/Q601999
 12073 Ludiente,wikidataId/Q1769737
-12074 Llosa,wikidataId/Q1900688
-12075 Mata de Morella,wikidataId/Q1901661
+"12074 Llosa, la",wikidataId/Q1900688
+"12075 Mata de Morella, la",wikidataId/Q1901661
 12076 Matet,wikidataId/Q24011873
 12077 Moncofa,wikidataId/Q1635650
 12078 Montán,wikidataId/Q24011872
@@ -1892,17 +2052,17 @@ place_name,dcid
 12090 Pina de Montalgrao,wikidataId/Q1900145
 12091 Portell de Morella,wikidataId/Q1900715
 12092 Puebla de Arenoso,wikidataId/Q1767485
-12093 Pobla de Benifassà,wikidataId/Q744088
-12094 Pobla Tornesa,wikidataId/Q1769146
+"12093 Pobla de Benifassà, la",wikidataId/Q744088
+"12094 Pobla Tornesa, la",wikidataId/Q1769146
 12095 Ribesalbes,wikidataId/Q24011859
 12096 Rossell,wikidataId/Q67150251
 12097 Sacañet,wikidataId/Q1645715
-12098 Salzadella,wikidataId/Q1900762
+"12098 Salzadella, la",wikidataId/Q1900762
 12099 Sant Jordi/San Jorge,wikidataId/Q2045712
 12100 Sant Mateu,wikidataId/Q984823
 12101 San Rafael del Río,wikidataId/Q613582
 12102 Santa Magdalena de Pulpis,wikidataId/Q1765443
-12103 Serratella,wikidataId/Q1766247
+"12103 Serratella, la",wikidataId/Q1766247
 12104 Segorbe,wikidataId/Q750968
 12105 Sierra Engarcerán,wikidataId/Q1635361
 12106 Soneja,wikidataId/Q1645719
@@ -1914,18 +2074,18 @@ place_name,dcid
 12112 Todolella,wikidataId/Q1766256
 12113 Toga,wikidataId/Q1992572
 12114 Torás,wikidataId/Q1983317
-12115 Toro,wikidataId/Q1635936
+"12115 Toro, El",wikidataId/Q1635936
 12116 Torralba del Pinar,wikidataId/Q1646877
 12117 Torreblanca,wikidataId/Q1635372
 12118 Torrechiva,wikidataId/Q1765434
-12119 Torre d'en Besora,wikidataId/Q1769731
-12120 Torre d'en Doménec,wikidataId/Q1646184
+"12119 Torre d'en Besora, la",wikidataId/Q1769731
+"12120 Torre d'en Doménec, la",wikidataId/Q1646184
 12121 Traiguera,wikidataId/Q1645728
-12122 Useres/Useras,wikidataId/Q1983352
+"12122 Useres, les/Useras",wikidataId/Q1983352
 12123 Vallat,wikidataId/Q1767475
 12124 Vall d'Alba,wikidataId/Q1646881
 12125 Vall de Almonacid,wikidataId/Q780982
-12126 Vall d'Uixó,wikidataId/Q1637512
+"12126 Vall d'Uixó, la",wikidataId/Q1637512
 12127 Vallibona,wikidataId/Q1767567
 12128 Vilafamés,wikidataId/Q1116829
 12129 Vilafranca/Villafranca del Cid,wikidataId/Q537017
@@ -1934,15 +2094,14 @@ place_name,dcid
 12132 Vilanova d'Alcolea,wikidataId/Q1646170
 12133 Villanueva de Viver,wikidataId/Q1646187
 12134 Vilar de Canes,wikidataId/Q1767537
-12135 Vila-real,wikidataId/Q12292
-12136 Vilavella,wikidataId/Q1768916
+"12136 Vilavella, la",wikidataId/Q1768916
 12137 Villores,wikidataId/Q1767507
 12138 Vinaròs,wikidataId/Q917888
 12139 Vistabella del Maestrat,wikidataId/Q1767446
 12140 Viver,wikidataId/Q47544
 12141 Zorita del Maestrazgo,wikidataId/Q1901668
 12142 Zucaina,wikidataId/Q1766532
-12901 Alqueries/Alquerías del Niño Perdido,wikidataId/Q1646869
+"12901 Alqueries, les/Alquerías del Niño Perdido",wikidataId/Q1646869
 12902 Sant Joan de Moró,wikidataId/Q627890
 13001 Abenójar,wikidataId/Q1614505
 13002 Agudo,wikidataId/Q1632598
@@ -1977,9 +2136,8 @@ place_name,dcid
 13031 Carrión de Calatrava,wikidataId/Q1614497
 13032 Carrizosa,wikidataId/Q1642284
 13033 Castellar de Santiago,wikidataId/Q1644848
-13034 Ciudad Real,wikidataId/Q15093
 13035 Corral de Calatrava,wikidataId/Q1644258
-13036 Cortijos,wikidataId/Q1642127
+"13036 Cortijos, Los",wikidataId/Q1642127
 13037 Cózar,wikidataId/Q659398
 13038 Chillón,wikidataId/Q1631224
 13039 Daimiel,wikidataId/Q24011798
@@ -1993,7 +2151,7 @@ place_name,dcid
 13047 Herencia,wikidataId/Q1632508
 13048 Hinojosas de Calatrava,wikidataId/Q24011784
 13049 Horcajo de los Montes,wikidataId/Q1642272
-13050 Labores,wikidataId/Q1644968
+"13050 Labores, Las",wikidataId/Q1644968
 13051 Luciana,wikidataId/Q1632160
 13052 Malagón,wikidataId/Q1613270
 13053 Manzanares,wikidataId/Q1372697
@@ -2010,11 +2168,10 @@ place_name,dcid
 13064 Poblete,wikidataId/Q24011770
 13065 Porzuna,wikidataId/Q1643639
 13066 Pozuelo de Calatrava,wikidataId/Q644491
-13067 Pozuelos de Calatrava,wikidataId/Q23982943
+"13067 Pozuelos de Calatrava, Los",wikidataId/Q23982943
 13068 Puebla de Don Rodrigo,wikidataId/Q24011766
 13069 Puebla del Príncipe,wikidataId/Q1643644
 13070 Puerto Lápice,wikidataId/Q1630316
-13071 Puertollano,wikidataId/Q215822
 13072 Retuerta del Bullaque,wikidataId/Q268999
 13073 Saceruela,wikidataId/Q1657948
 13074 San Carlos del Valle,wikidataId/Q1628769
@@ -2022,7 +2179,7 @@ place_name,dcid
 13076 Santa Cruz de los Cáñamos,wikidataId/Q948096
 13077 Santa Cruz de Mudela,wikidataId/Q958776
 13078 Socuéllamos,wikidataId/Q1614556
-13079 Solana,wikidataId/Q1607352
+"13079 Solana, La",wikidataId/Q1607352
 13080 Solana del Pino,wikidataId/Q1658741
 13081 Terrinches,wikidataId/Q1657914
 13082 Tomelloso,wikidataId/Q820229
@@ -2042,7 +2199,7 @@ place_name,dcid
 13096 Villarrubia de los Ojos,wikidataId/Q1641422
 13097 Villarta de San Juan,wikidataId/Q1641398
 13098 Viso del Marqués,wikidataId/Q1641553
-13901 Robledo,wikidataId/Q643808
+"13901 Robledo, El",wikidataId/Q643808
 13902 Ruidera,wikidataId/Q1657922
 13903 Arenales de San Gregorio,wikidataId/Q533905
 13904 Llanos del Caudillo,wikidataId/Q585451
@@ -2056,17 +2213,16 @@ place_name,dcid
 14008 Belalcázar,wikidataId/Q854373
 14009 Belmez,wikidataId/Q970766
 14010 Benamejí,wikidataId/Q24011732
-14011 Blázquez,wikidataId/Q967365
+"14011 Blázquez, Los",wikidataId/Q967365
 14012 Bujalance,wikidataId/Q975711
 14013 Cabra,wikidataId/Q927931
 14014 Cañete de las Torres,wikidataId/Q1447425
 14015 Carcabuey,wikidataId/Q842679
 14016 Cardeña,wikidataId/Q1645727
-14017 Carlota,wikidataId/Q749022
-14018 Carpio,wikidataId/Q1448408
+"14017 Carlota, La",wikidataId/Q749022
+"14018 Carpio, El",wikidataId/Q1448408
 14019 Castro del Río,wikidataId/Q1447412
 14020 Conquista,wikidataId/Q1616129
-14021 Córdoba,wikidataId/Q5818
 14022 Doña Mencía,wikidataId/Q1406756
 14023 Dos Torres,wikidataId/Q1373904
 14024 Encinas Reales,wikidataId/Q1444282
@@ -2077,9 +2233,9 @@ place_name,dcid
 14029 Fuente Obejuna,wikidataId/Q1443636
 14030 Fuente Palmera,wikidataId/Q1443622
 14031 Fuente-Tójar,wikidataId/Q339790
-14032 Granjuela,wikidataId/Q1443651
+"14032 Granjuela, La",wikidataId/Q1443651
 14033 Guadalcázar,wikidataId/Q854460
-14034 Guijo,wikidataId/Q1451119
+"14034 Guijo, El",wikidataId/Q1451119
 14035 Hinojosa del Duque,wikidataId/Q657396
 14036 Hornachuelos,wikidataId/Q1443790
 14037 Iznájar,wikidataId/Q904793
@@ -2102,7 +2258,7 @@ place_name,dcid
 14054 Pozoblanco,wikidataId/Q24011698
 14055 Priego de Córdoba,wikidataId/Q301437
 14056 Puente Genil,wikidataId/Q589053
-14057 Rambla,wikidataId/Q1645517
+"14057 Rambla, La",wikidataId/Q1645517
 14058 Rute,wikidataId/Q24011694
 14059 San Sebastián de los Ballesteros,wikidataId/Q1613327
 14060 Santaella,wikidataId/Q24011692
@@ -2110,7 +2266,7 @@ place_name,dcid
 14062 Torrecampo,wikidataId/Q24011690
 14063 Valenzuela,wikidataId/Q586705
 14064 Valsequillo,wikidataId/Q975678
-14065 Victoria,wikidataId/Q970724
+"14065 Victoria, La",wikidataId/Q970724
 14066 Villa del Río,wikidataId/Q970738
 14067 Villafranca de Córdoba,wikidataId/Q546596
 14068 Villaharta,wikidataId/Q24011687
@@ -2119,17 +2275,17 @@ place_name,dcid
 14071 Villanueva del Rey,wikidataId/Q879487
 14072 Villaralto,wikidataId/Q878593
 14073 Villaviciosa de Córdoba,wikidataId/Q878655
-14074 Viso,wikidataId/Q879483
+"14074 Viso, El",wikidataId/Q879483
 14075 Zuheros,wikidataId/Q228599
 14901 Fuente Carreteros,wikidataId/Q576030
-14902 Guijarrosa,wikidataId/Q5963722
+"14902 Guijarrosa, La",wikidataId/Q5963722
 15001 Abegondo,wikidataId/Q318323
 15002 Ames,wikidataId/Q1353997
 15003 Aranga,wikidataId/Q1113417
 15004 Ares,wikidataId/Q17416
 15005 Arteixo,wikidataId/Q996161
 15006 Arzúa,wikidataId/Q651676
-15007 Baña,wikidataId/Q1183411
+"15007 Baña, A",wikidataId/Q1183411
 15008 Bergondo,wikidataId/Q644018
 15009 Betanzos,wikidataId/Q671341
 15010 Boimorto,wikidataId/Q692787
@@ -2140,7 +2296,7 @@ place_name,dcid
 15015 Cabanas,wikidataId/Q974129
 15016 Camariñas,wikidataId/Q1373985
 15017 Cambre,wikidataId/Q1113375
-15018 Capela,wikidataId/Q581926
+"15018 Capela, A",wikidataId/Q581926
 15019 Carballo,wikidataId/Q11010492
 15020 Carnota,wikidataId/Q1368813
 15021 Carral,wikidataId/Q601352
@@ -2156,12 +2312,11 @@ place_name,dcid
 15033 Dodro,wikidataId/Q1368913
 15034 Dumbría,wikidataId/Q549319
 15035 Fene,wikidataId/Q1374025
-15036 Ferrol,wikidataId/Q485329
 15037 Fisterra,wikidataId/Q732090
 15038 Frades,wikidataId/Q1616172
 15039 Irixoa,wikidataId/Q1620170
 15040 Laxe,wikidataId/Q1620185
-15041 Laracha,wikidataId/Q924043
+"15041 Laracha, A",wikidataId/Q924043
 15042 Lousame,wikidataId/Q1450842
 15043 Malpica de Bergantiños,wikidataId/Q596761
 15044 Mañón,wikidataId/Q613832
@@ -2185,11 +2340,11 @@ place_name,dcid
 15062 Outes,wikidataId/Q12396893
 15064 Paderne,wikidataId/Q426243
 15065 Padrón,wikidataId/Q500494
-15066 Pino,wikidataId/Q14915678
-15067 Pobra do Caramiñal,wikidataId/Q300525
+"15066 Pino, O",wikidataId/Q14915678
+"15067 Pobra do Caramiñal, A",wikidataId/Q300525
 15068 Ponteceso,wikidataId/Q1450823
 15069 Pontedeume,wikidataId/Q765283
-15070 Pontes de García Rodríguezs,wikidataId/Q1442761
+"15070 Pontes de García Rodríguez, As",wikidataId/Q1442761
 15071 Porto do Son,wikidataId/Q1450836
 15072 Rianxo,wikidataId/Q10950216
 15073 Ribeira,wikidataId/Q904130
@@ -2197,10 +2352,9 @@ place_name,dcid
 15075 Sada,wikidataId/Q633493
 15076 San Sadurniño,wikidataId/Q1442511
 15077 Santa Comba,wikidataId/Q20548250
-15078 Santiago de Compostela,wikidataId/Q14314
 15079 Santiso,wikidataId/Q1442623
 15080 Sobrado,wikidataId/Q1990944
-15081 Somozass,wikidataId/Q1442802
+"15081 Somozas, As",wikidataId/Q1442802
 15082 Teo,wikidataId/Q24011652
 15083 Toques,wikidataId/Q517889
 15084 Tordoia,wikidataId/Q837056
@@ -2216,12 +2370,12 @@ place_name,dcid
 15901 Cariño,wikidataId/Q1403988
 15902 Oza-Cesuras,wikidataId/Q13423086
 16001 Abia de la Obispalía,wikidataId/Q1772319
-16002 Acebrón,wikidataId/Q666630
+"16002 Acebrón, El",wikidataId/Q666630
 16003 Alarcón,wikidataId/Q1020522
 16004 Albaladejo del Cuende,wikidataId/Q1771922
 16005 Albalate de las Nogueras,wikidataId/Q581613
 16006 Albendea,wikidataId/Q1772286
-16007 Alberca de Záncara,wikidataId/Q1769754
+"16007 Alberca de Záncara, La",wikidataId/Q1769754
 16008 Alcalá de la Vega,wikidataId/Q1904513
 16009 Alcantud,wikidataId/Q1770927
 16010 Alcázar del Rey,wikidataId/Q1904673
@@ -2229,7 +2383,7 @@ place_name,dcid
 16012 Alconchel de la Estrella,wikidataId/Q1904560
 16013 Algarra,wikidataId/Q520427
 16014 Aliaguilla,wikidataId/Q1904528
-16015 Almarcha,wikidataId/Q1769651
+"16015 Almarcha, La",wikidataId/Q1769651
 16016 Almendros,wikidataId/Q1904575
 16017 Almodóvar del Pinar,wikidataId/Q1904614
 16018 Almonacid del Marquesado,wikidataId/Q580931
@@ -2260,7 +2414,7 @@ place_name,dcid
 16046 Cañada del Hoyo,wikidataId/Q1771107
 16047 Cañada Juncosa,wikidataId/Q1902591
 16048 Cañamares,wikidataId/Q2269620
-16049 Cañavate,wikidataId/Q1919975
+"16049 Cañavate, El",wikidataId/Q1919975
 16050 Cañaveras,wikidataId/Q1771178
 16051 Cañaveruelas,wikidataId/Q24011603
 16052 Cañete,wikidataId/Q1840938
@@ -2282,13 +2436,13 @@ place_name,dcid
 16071 Castillo-Albaráñez,wikidataId/Q1769832
 16072 Castillo de Garcimuñoz,wikidataId/Q1903518
 16073 Cervera del Llano,wikidataId/Q1902690
-16074 Cierva,wikidataId/Q1648798
+"16074 Cierva, La",wikidataId/Q1648798
 16079 Cueva del Hierro,wikidataId/Q738589
 16081 Chumillas,wikidataId/Q1903475
 16082 Enguídanos,wikidataId/Q1771149
 16083 Fresneda de Altarejos,wikidataId/Q1903504
 16084 Fresneda de la Sierra,wikidataId/Q932674
-16085 Frontera,wikidataId/Q1916240
+"16085 Frontera, La",wikidataId/Q1916240
 16086 Fuente de Pedro Naharro,wikidataId/Q1903594
 16087 Fuentelespino de Haro,wikidataId/Q1920039
 16088 Fuentelespino de Moya,wikidataId/Q1916233
@@ -2300,10 +2454,10 @@ place_name,dcid
 16095 Graja de Campalbo,wikidataId/Q1769859
 16096 Graja de Iniesta,wikidataId/Q1768941
 16097 Henarejos,wikidataId/Q1903548
-16098 Herrumblar,wikidataId/Q1920048
-16099 Hinojosa,wikidataId/Q1916246
-16100 Hinojosos,wikidataId/Q1768772
-16101 Hito,wikidataId/Q1920027
+"16098 Herrumblar, El",wikidataId/Q1920048
+"16099 Hinojosa, La",wikidataId/Q1916246
+"16100 Hinojosos, Los",wikidataId/Q1768772
+"16101 Hito, El",wikidataId/Q1920027
 16102 Honrubia,wikidataId/Q574076
 16103 Hontanaya,wikidataId/Q606095
 16104 Hontecillas,wikidataId/Q1768923
@@ -2320,10 +2474,10 @@ place_name,dcid
 16117 Landete,wikidataId/Q24011549
 16118 Ledaña,wikidataId/Q1648815
 16119 Leganiel,wikidataId/Q1648802
-16121 Majadas,wikidataId/Q1903998
+"16121 Majadas, Las",wikidataId/Q1903998
 16122 Mariana,wikidataId/Q1993921
 16123 Masegosa,wikidataId/Q1768930
-16124 Mesas,wikidataId/Q1769818
+"16124 Mesas, Las",wikidataId/Q1769818
 16125 Minglanilla,wikidataId/Q682640
 16126 Mira,wikidataId/Q1902619
 16128 Monreal del Llano,wikidataId/Q541302
@@ -2347,13 +2501,13 @@ place_name,dcid
 16149 Palomera,wikidataId/Q1768723
 16150 Paracuellos,
 16151 Paredes,wikidataId/Q24012161
-16152 Parra de las Vegas,wikidataId/Q1638589
-16153 Pedernoso,wikidataId/Q1768717
-16154 Pedroñeras,wikidataId/Q1647629
-16155 Peral,wikidataId/Q1902350
-16156 Peraleja,wikidataId/Q384879
-16157 Pesquera,wikidataId/Q1902672
-16158 Picazo,wikidataId/Q1903585
+"16152 Parra de las Vegas, La",wikidataId/Q1638589
+"16153 Pedernoso, El",wikidataId/Q1768717
+"16154 Pedroñeras, Las",wikidataId/Q1647629
+"16155 Peral, El",wikidataId/Q1902350
+"16156 Peraleja, La",wikidataId/Q384879
+"16157 Pesquera, La",wikidataId/Q1902672
+"16158 Picazo, El",wikidataId/Q1903585
 16159 Pinarejo,wikidataId/Q980666
 16160 Pineda de Gigüela,wikidataId/Q1647578
 16161 Piqueras del Castillo,wikidataId/Q1647590
@@ -2362,11 +2516,11 @@ place_name,dcid
 16165 Poyatos,wikidataId/Q781994
 16166 Pozoamargo,wikidataId/Q1647135
 16167 Pozorrubio de Santiago,wikidataId/Q1640415
-16169 Pozuelo,wikidataId/Q728804
+"16169 Pozuelo, El",wikidataId/Q728804
 16170 Priego,wikidataId/Q24011697
-16171 Provencio,wikidataId/Q1768685
+"16171 Provencio, El",wikidataId/Q1768685
 16172 Puebla de Almenara,wikidataId/Q283217
-16173 Valle de Altomira,wikidataId/Q1766345
+"16173 Valle de Altomira, El",wikidataId/Q1766345
 16174 Puebla del Salvador,wikidataId/Q1649795
 16175 Quintanar del Rey,wikidataId/Q1647678
 16176 Rada de Haro,wikidataId/Q282510
@@ -2445,10 +2599,10 @@ place_name,dcid
 16280 Zarzuela,wikidataId/Q1901803
 16901 Campos del Paraíso,wikidataId/Q1637282
 16902 Valdetórtola,wikidataId/Q1767488
-16903 Valeras,wikidataId/Q1769796
+"16903 Valeras, Las",wikidataId/Q1769796
 16904 Fuentenava de Jábaga,wikidataId/Q1903571
 16905 Arcas,wikidataId/Q1904496
-16906 Valdecolmenas,wikidataId/Q1768766
+"16906 Valdecolmenas, Los",wikidataId/Q1768766
 16908 Pozorrubielos de la Mancha,wikidataId/Q595223
 16909 Sotorribas,wikidataId/Q195680
 16910 Villar y Velasco,wikidataId/Q1648864
@@ -2456,23 +2610,23 @@ place_name,dcid
 17002 Aiguaviva,wikidataId/Q13412
 17003 Albanyà,wikidataId/Q10973
 17004 Albons,wikidataId/Q13463
-17005 Far d'Empordà,wikidataId/Q11309
+"17005 Far d'Empordà, El",wikidataId/Q11309
 17006 Alp,wikidataId/Q13731
 17007 Amer,wikidataId/Q13022
 17008 Anglès,wikidataId/Q13027
 17009 Arbúcies,wikidataId/Q13010
 17010 Argelaguer,wikidataId/Q12582
-17011 Armentera,wikidataId/Q11200
+"17011 Armentera, L'",wikidataId/Q11200
 17012 Avinyonet de Puigventós,wikidataId/Q11227
 17013 Begur,wikidataId/Q13462
-17014 Vajol,wikidataId/Q6657
+"17014 Vajol, La",wikidataId/Q6657
 17015 Banyoles,wikidataId/Q13614
 17016 Bàscara,wikidataId/Q11232
 17018 Bellcaire d'Empordà,wikidataId/Q13461
 17019 Besalú,wikidataId/Q12586
 17020 Bescanó,wikidataId/Q13417
 17021 Beuda,wikidataId/Q12593
-17022 Bisbal d'Empordà,wikidataId/Q13460
+"17022 Bisbal d'Empordà, La",wikidataId/Q13460
 17023 Blanes,wikidataId/Q12991
 17024 Bolvir,wikidataId/Q13733
 17025 Bordils,wikidataId/Q13419
@@ -2509,7 +2663,7 @@ place_name,dcid
 17058 Crespià,wikidataId/Q13610
 17060 Darnius,wikidataId/Q6677
 17061 Das,wikidataId/Q13734
-17062 Escala,wikidataId/Q23996010
+"17062 Escala, L'",wikidataId/Q23996010
 17063 Espinelves,wikidataId/Q13780
 17064 Espolla,wikidataId/Q7079
 17065 Esponellà,wikidataId/Q13611
@@ -2525,14 +2679,13 @@ place_name,dcid
 17076 Garrigoles,wikidataId/Q13474
 17077 Garriguella,wikidataId/Q24019202
 17078 Ger,wikidataId/Q13749
-17079 Girona,wikidataId/Q7038
 17080 Gombrèn,wikidataId/Q12251
 17081 Gualta,wikidataId/Q13472
 17082 Guils de Cerdanya,wikidataId/Q13748
 17083 Hostalric,wikidataId/Q13643
 17084 Isòvol,wikidataId/Q13747
 17085 Jafre,wikidataId/Q13471
-17086 Jonquera,wikidataId/Q7113
+"17086 Jonquera, La",wikidataId/Q7113
 17087 Juià,wikidataId/Q13432
 17088 Lladó,wikidataId/Q24019196
 17089 Llagostera,wikidataId/Q23995170
@@ -2542,7 +2695,7 @@ place_name,dcid
 17093 Llers,wikidataId/Q11342
 17094 Llívia,wikidataId/Q13745
 17095 Lloret de Mar,wikidataId/Q12977
-17096 Llosses,wikidataId/Q12275
+"17096 Llosses, Les",wikidataId/Q12275
 17097 Madremanya,wikidataId/Q13441
 17098 Maià de Montcal,wikidataId/Q12601
 17099 Meranges,wikidataId/Q13754
@@ -2571,16 +2724,16 @@ place_name,dcid
 17126 Parlavà,wikidataId/Q13516
 17128 Pau,wikidataId/Q24024948
 17129 Pedret i Marzà,wikidataId/Q11935746
-17130 Pera,wikidataId/Q23996093
+"17130 Pera, La",wikidataId/Q23996093
 17132 Peralada,wikidataId/Q11803
-17133 Planes d'Hostoles,wikidataId/Q12625
+"17133 Planes d'Hostoles, Les",wikidataId/Q12625
 17134 Planoles,wikidataId/Q12318
 17135 Pont de Molins,wikidataId/Q11804
 17136 Pontós,wikidataId/Q24022114
 17137 Porqueres,wikidataId/Q13607
 17138 Portbou,wikidataId/Q7165
-17139 Preses,wikidataId/Q12629
-17140 Port de la Selva,wikidataId/Q11811
+"17139 Preses, Les",wikidataId/Q12629
+"17140 Port de la Selva, El",wikidataId/Q11811
 17141 Puigcerdà,wikidataId/Q13765
 17142 Quart,wikidataId/Q13443
 17143 Rabós,wikidataId/Q24024946
@@ -2626,14 +2779,14 @@ place_name,dcid
 17185 Sant Joan les Fonts,wikidataId/Q23992518
 17186 Sarrià de Ter,wikidataId/Q13456
 "17187 Saus, Camallera i Llampaies",wikidataId/Q11865
-17188 Selva de Mar,wikidataId/Q11886
-17189 Cellera de Ter,wikidataId/Q13641
+"17188 Selva de Mar, La",wikidataId/Q11886
+"17189 Cellera de Ter, La",wikidataId/Q13641
 17190 Serinyà,wikidataId/Q13621
 17191 Serra de Daró,wikidataId/Q13570
 17192 Setcases,wikidataId/Q12348
 17193 Sils,wikidataId/Q23992676
 17194 Susqueda,wikidataId/Q13642
-17195 Tallada d'Empordà,wikidataId/Q13571
+"17195 Tallada d'Empordà, La",wikidataId/Q13571
 17196 Terrades,wikidataId/Q11897
 17197 Torrent,
 17198 Torroella de Fluvià,wikidataId/Q23991222
@@ -2645,8 +2798,8 @@ place_name,dcid
 17204 Ullà,wikidataId/Q13592
 17205 Ullastret,wikidataId/Q13589
 17206 Urús,wikidataId/Q13761
-17207 Vall d'en Bas,wikidataId/Q12710
-17208 Vall de Bianya,wikidataId/Q12701
+"17207 Vall d'en Bas, La",wikidataId/Q12710
+"17208 Vall de Bianya, La",wikidataId/Q12701
 17209 Vall-llobrega,wikidataId/Q13587
 17210 Ventalló,wikidataId/Q11908
 17211 Verges,wikidataId/Q13586
@@ -2745,7 +2898,6 @@ place_name,dcid
 18084 Gójar,wikidataId/Q574347
 18085 Gor,wikidataId/Q574434
 18086 Gorafe,wikidataId/Q372531
-18087 Granada,wikidataId/Q8810
 18088 Guadahortuna,wikidataId/Q575658
 18089 Guadix,wikidataId/Q244324
 18093 Gualchos,wikidataId/Q575639
@@ -2766,7 +2918,7 @@ place_name,dcid
 18109 Jete,wikidataId/Q531740
 18111 Jun,wikidataId/Q1751788
 18112 Juviles,wikidataId/Q951930
-18114 Calahorra,wikidataId/Q558147
+"18114 Calahorra, La",wikidataId/Q558147
 18115 Láchar,wikidataId/Q484981
 18116 Lanjarón,wikidataId/Q582995
 18117 Lanteira,wikidataId/Q581165
@@ -2776,7 +2928,7 @@ place_name,dcid
 18122 Loja,wikidataId/Q332989
 18123 Lugros,wikidataId/Q1635929
 18124 Lújar,wikidataId/Q582901
-18126 Malahá,wikidataId/Q583023
+"18126 Malahá, La",wikidataId/Q583023
 18127 Maracena,wikidataId/Q583032
 18128 Marchal,wikidataId/Q581216
 18132 Moclín,wikidataId/Q593637
@@ -2786,7 +2938,6 @@ place_name,dcid
 18136 Montejícar,wikidataId/Q593505
 18137 Montillana,wikidataId/Q593679
 18138 Moraleda de Zafayona,wikidataId/Q426844
-18140 Motril,wikidataId/Q210093
 18141 Murtas,wikidataId/Q593658
 18143 Nigüelas,wikidataId/Q606160
 18144 Nívar,wikidataId/Q605349
@@ -2799,7 +2950,7 @@ place_name,dcid
 18151 Pampaneira,wikidataId/Q605273
 18152 Pedro Martínez,wikidataId/Q611237
 18153 Peligros,wikidataId/Q24011325
-18154 Peza,wikidataId/Q611223
+"18154 Peza, La",wikidataId/Q611223
 18157 Pinos Genil,wikidataId/Q609907
 18158 Pinos Puente,wikidataId/Q611199
 18159 Píñar,wikidataId/Q611308
@@ -2829,18 +2980,18 @@ place_name,dcid
 18188 Villanueva Mesía,wikidataId/Q619685
 18189 Víznar,wikidataId/Q619528
 18192 Zafarraya,wikidataId/Q140149
-18193 Zubia,wikidataId/Q619692
+"18193 Zubia, La",wikidataId/Q619692
 18194 Zújar,wikidataId/Q619524
-18901 Taha,wikidataId/Q618383
-18902 Valle,wikidataId/Q618366
+"18901 Taha, La",wikidataId/Q618383
+"18902 Valle, El",wikidataId/Q618366
 18903 Nevada,wikidataId/Q605280
 18904 Alpujarra de la Sierra,wikidataId/Q550949
-18905 Gabias,wikidataId/Q574340
-18906 Guájares,wikidataId/Q575644
+"18905 Gabias, Las",wikidataId/Q574340
+"18906 Guájares, Los",wikidataId/Q575644
 18907 Valle del Zalabí,wikidataId/Q617892
 18908 Villamena,wikidataId/Q619842
 18909 Morelábor,wikidataId/Q593725
-18910 Pinar,wikidataId/Q67131154
+"18910 Pinar, El",wikidataId/Q67131154
 18911 Vegas del Genil,wikidataId/Q618377
 18912 Cuevas del Campo,wikidataId/Q558119
 18913 Zagra,wikidataId/Q24011291
@@ -2890,7 +3041,7 @@ place_name,dcid
 19049 Bañuelos,wikidataId/Q1655094
 19050 Barriopedro,wikidataId/Q1655045
 19051 Berninches,wikidataId/Q1656062
-19052 Bodera,wikidataId/Q1654352
+"19052 Bodera, La",wikidataId/Q1654352
 19053 Brihuega,wikidataId/Q52615
 19054 Budia,wikidataId/Q24011247
 19055 Bujalaro,wikidataId/Q1656423
@@ -2902,9 +3053,9 @@ place_name,dcid
 19064 Canredondo,wikidataId/Q950807
 19065 Cantalojas,wikidataId/Q1656094
 19066 Cañizar,wikidataId/Q1656474
-19067 Cardoso de la Sierra,wikidataId/Q1654705
+"19067 Cardoso de la Sierra, El",wikidataId/Q1654705
 19070 Casa de Uceda,wikidataId/Q1656506
-19071 Casar,wikidataId/Q1641917
+"19071 Casar, El",wikidataId/Q1641917
 19073 Casas de San Galindo,wikidataId/Q1655931
 19074 Caspueñas,wikidataId/Q939792
 19075 Castejón de Henares,wikidataId/Q1656265
@@ -2926,7 +3077,7 @@ place_name,dcid
 19097 Congostrina,wikidataId/Q1653806
 19098 Copernal,wikidataId/Q1653762
 19099 Corduente,wikidataId/Q1653755
-19102 Cubillo de Uceda,wikidataId/Q1644069
+"19102 Cubillo de Uceda, El",wikidataId/Q1644069
 19103 Checa,wikidataId/Q24011217
 19104 Chequilla,wikidataId/Q1655358
 19105 Chiloeches,wikidataId/Q1655103
@@ -2953,7 +3104,6 @@ place_name,dcid
 19126 Galápagos,wikidataId/Q954018
 19127 Galve de Sorbe,wikidataId/Q1653637
 19129 Gascueña de Bornova,wikidataId/Q1654686
-19130 Guadalajara,wikidataId/Q11953
 19132 Henche,wikidataId/Q24011193
 19133 Heras de Ayuso,wikidataId/Q1654782
 19134 Herrería,wikidataId/Q1769433
@@ -2964,14 +3114,14 @@ place_name,dcid
 19142 Hontoba,wikidataId/Q1645004
 19143 Horche,wikidataId/Q1654899
 19145 Hortezuela de Océn,wikidataId/Q1654910
-19146 Huerce,wikidataId/Q1654502
+"19146 Huerce, La",wikidataId/Q1654502
 19147 Huérmeces del Cerro,wikidataId/Q1654390
 19148 Huertahernando,wikidataId/Q978946
 19150 Hueva,wikidataId/Q1929347
 19151 Humanes,wikidataId/Q1654677
 19152 Illana,wikidataId/Q678050
 19153 Iniéstola,wikidataId/Q1654718
-19154 Inviernas,wikidataId/Q1653771
+"19154 Inviernas, Las",wikidataId/Q1653771
 19155 Irueste,wikidataId/Q1653829
 19156 Jadraque,wikidataId/Q1653873
 19157 Jirueque,wikidataId/Q1654725
@@ -2996,10 +3146,10 @@ place_name,dcid
 19178 Megina,wikidataId/Q1653778
 19179 Membrillera,wikidataId/Q654834
 19181 Miedes de Atienza,wikidataId/Q1644244
-19182 Mierla,wikidataId/Q1654488
+"19182 Mierla, La",wikidataId/Q1654488
 19183 Milmarcos,wikidataId/Q1654930
 19184 Millana,wikidataId/Q1654826
-19185 Miñosa,wikidataId/Q1653628
+"19185 Miñosa, La",wikidataId/Q1653628
 19186 Mirabueno,wikidataId/Q1654496
 19187 Miralrío,wikidataId/Q1654832
 19188 Mochales,wikidataId/Q1654316
@@ -3011,20 +3161,20 @@ place_name,dcid
 19194 Moratilla de los Meleros,wikidataId/Q1654917
 19195 Morenilla,wikidataId/Q1654736
 19196 Muduex,wikidataId/Q1654730
-19197 Navas de Jadraque,wikidataId/Q955917
+"19197 Navas de Jadraque, Las",wikidataId/Q955917
 19198 Negredo,wikidataId/Q548734
 19199 Ocentejo,wikidataId/Q1655900
-19200 Olivar,wikidataId/Q1653664
+"19200 Olivar, El",wikidataId/Q1653664
 19201 Olmeda de Cobeta,wikidataId/Q1656434
-19202 Olmeda de Jadraque,wikidataId/Q1653651
-19203 Ordial,wikidataId/Q1654482
+"19202 Olmeda de Jadraque, La",wikidataId/Q1653651
+"19203 Ordial, El",wikidataId/Q1654482
 19204 Orea,wikidataId/Q1655068
 19208 Pálmaces de Jadraque,wikidataId/Q1655947
 19209 Pardos,wikidataId/Q2000595
 19210 Paredes de Sigüenza,wikidataId/Q1994172
 19211 Pareja,wikidataId/Q1655323
 19212 Pastrana,wikidataId/Q1655081
-19213 Pedregal,wikidataId/Q1653693
+"19213 Pedregal, El",wikidataId/Q1653693
 19214 Peñalén,wikidataId/Q1907648
 19215 Peñalver,wikidataId/Q965727
 19216 Peralejos de las Truchas,wikidataId/Q1655959
@@ -3033,7 +3183,7 @@ place_name,dcid
 19219 Pinilla de Molina,wikidataId/Q1649402
 19220 Pioz,wikidataId/Q956606
 19221 Piqueras,wikidataId/Q541954
-19222 Pobo de Dueñas,wikidataId/Q1654744
+"19222 Pobo de Dueñas, El",wikidataId/Q1654744
 19223 Poveda de la Sierra,wikidataId/Q509857
 19224 Pozo de Almoguera,wikidataId/Q1649421
 19225 Pozo de Guadalajara,wikidataId/Q671098
@@ -3043,7 +3193,7 @@ place_name,dcid
 19229 Puebla de Valles,wikidataId/Q1656051
 19230 Quer,wikidataId/Q1766541
 19231 Rebollosa de Jadraque,wikidataId/Q1655911
-19232 Recuenco,wikidataId/Q282236
+"19232 Recuenco, El",wikidataId/Q282236
 19233 Renera,wikidataId/Q1655627
 19234 Retiendas,wikidataId/Q1655645
 19235 Riba de Saelices,wikidataId/Q951950
@@ -3069,7 +3219,7 @@ place_name,dcid
 19257 Sigüenza,wikidataId/Q47475
 19258 Solanillos del Extremo,wikidataId/Q1655874
 19259 Somolinos,wikidataId/Q1656299
-19260 Sotillo,wikidataId/Q1908271
+"19260 Sotillo, El",wikidataId/Q1908271
 19261 Sotodosos,wikidataId/Q1656288
 19262 Tamajón,wikidataId/Q1656074
 19263 Taragudo,wikidataId/Q1750917
@@ -3078,7 +3228,7 @@ place_name,dcid
 19266 Tendilla,wikidataId/Q1120060
 19267 Terzaga,wikidataId/Q1656858
 19268 Tierzo,wikidataId/Q593530
-19269 Toba,wikidataId/Q1654302
+"19269 Toba, La",wikidataId/Q1654302
 19270 Tordelrábano,wikidataId/Q1658074
 19271 Tordellego,wikidataId/Q584623
 19272 Tordesilos,wikidataId/Q1656949
@@ -3130,7 +3280,7 @@ place_name,dcid
 19329 Yélamos de Abajo,wikidataId/Q1657933
 19330 Yélamos de Arriba,wikidataId/Q673023
 19331 Yunquera de Henares,wikidataId/Q1640925
-19332 Yunta,wikidataId/Q1653703
+"19332 Yunta, La",wikidataId/Q1653703
 19333 Zaorejas,wikidataId/Q1750979
 19334 Zarzuela de Jadraque,wikidataId/Q1657845
 19335 Zorita de los Canes,wikidataId/Q1657998
@@ -3179,7 +3329,6 @@ place_name,dcid
 20042 Ibarra,wikidataId/Q1618296
 20043 Idiazabal,wikidataId/Q24011003
 20044 Ikaztegieta,wikidataId/Q616464
-20045 Irun,wikidataId/Q200201
 20046 Irura,wikidataId/Q537215
 20047 Itsasondo,wikidataId/Q1639397
 20048 Larraul,wikidataId/Q1639443
@@ -3203,7 +3352,6 @@ place_name,dcid
 20066 Errezil,wikidataId/Q964114
 20067 Errenteria,wikidataId/Q681893
 20068 Leintz-Gatzaga,wikidataId/Q1649621
-20069 Donostia/San Sebastián,wikidataId/Q10313
 20070 Segura,wikidataId/Q24011997
 20071 Tolosa,wikidataId/Q497801
 20072 Urnieta,wikidataId/Q1633844
@@ -3225,7 +3373,7 @@ place_name,dcid
 20907 Gaztelu,wikidataId/Q1641862
 21001 Alájar,wikidataId/Q450906
 21002 Aljaraque,wikidataId/Q913254
-21003 Almendro,wikidataId/Q1635937
+"21003 Almendro, El",wikidataId/Q1635937
 21004 Almonaster la Real,wikidataId/Q533277
 21005 Almonte,wikidataId/Q24013515
 21006 Alosno,wikidataId/Q1615027
@@ -3240,12 +3388,12 @@ place_name,dcid
 21015 Cabezas Rubias,wikidataId/Q1635899
 21016 Cala,wikidataId/Q913228
 21017 Calañas,wikidataId/Q913249
-21018 Campillo,wikidataId/Q1645087
+"21018 Campillo, El",wikidataId/Q1645087
 21019 Campofrío,wikidataId/Q1615055
 21020 Cañaveral de León,wikidataId/Q983430
 21021 Cartaya,wikidataId/Q846156
 21022 Castaño del Robledo,wikidataId/Q1635991
-21023 Cerro de Andévalo,wikidataId/Q1445364
+"21023 Cerro de Andévalo, El",wikidataId/Q1445364
 21024 Corteconcepción,wikidataId/Q1635886
 21025 Cortegana,wikidataId/Q1615043
 21026 Cortelazor,wikidataId/Q957544
@@ -3258,25 +3406,24 @@ place_name,dcid
 21033 Fuenteheridos,wikidataId/Q1632851
 21034 Galaroza,wikidataId/Q1615091
 21035 Gibraleón,wikidataId/Q913215
-21036 Granada de Río-Tinto,wikidataId/Q1635876
-21037 Granado,wikidataId/Q508038
+"21036 Granada de Río-Tinto, La",wikidataId/Q1635876
+"21037 Granado, El",wikidataId/Q508038
 21038 Higuera de la Sierra,wikidataId/Q1615134
 21039 Hinojales,wikidataId/Q1635892
 21040 Hinojos,wikidataId/Q1615013
-21041 Huelva,wikidataId/Q12246
 21042 Isla Cristina,wikidataId/Q736926
 21043 Jabugo,wikidataId/Q913504
 21044 Lepe,wikidataId/Q501077
 21045 Linares de la Sierra,wikidataId/Q1635955
 21046 Lucena del Puerto,wikidataId/Q1614539
 21047 Manzanilla,wikidataId/Q24013483
-21048 Marines,wikidataId/Q1635946
+"21048 Marines, Los",wikidataId/Q1635946
 21049 Minas de Riotinto,wikidataId/Q923830
 21050 Moguer,wikidataId/Q785888
-21051 Nava,wikidataId/Q1635906
+"21051 Nava, La",wikidataId/Q1635906
 21052 Nerva,wikidataId/Q23982169
 21053 Niebla,wikidataId/Q828723
-21054 Palma del Condado,wikidataId/Q904245
+"21054 Palma del Condado, La",wikidataId/Q904245
 21055 Palos de la Frontera,wikidataId/Q622030
 21056 Paterna del Campo,wikidataId/Q1615103
 21057 Paymogo,wikidataId/Q1611820
@@ -3302,7 +3449,7 @@ place_name,dcid
 21077 Villarrasa,wikidataId/Q1618166
 21078 Zalamea la Real,wikidataId/Q1611833
 21079 Zufre,wikidataId/Q228243
-21902 Zarza-Perrunal,wikidataId/Q5965624
+"21902 Zarza-Perrunal, La",wikidataId/Q5965624
 22001 Abiego,wikidataId/Q1643833
 22002 Abizanda,wikidataId/Q1656410
 22003 Adahuesca,wikidataId/Q1651346
@@ -3393,15 +3540,14 @@ place_name,dcid
 22110 Fonz,wikidataId/Q24013377
 22111 Foradada del Toscar,wikidataId/Q984617
 22112 Fraga,wikidataId/Q904212
-22113 Fueva,wikidataId/Q1769349
+"22113 Fueva, La",wikidataId/Q1769349
 22114 Gistaín,wikidataId/Q1769369
-22115 Grado,wikidataId/Q1644415
+"22115 Grado, El",wikidataId/Q1644415
 22116 Grañén,wikidataId/Q658838
 22117 Graus,wikidataId/Q937763
 22119 Gurrea de Gállego,wikidataId/Q984633
 22122 Hoz de Jaca,wikidataId/Q646914
 22124 Huerto,wikidataId/Q24004401
-22125 Huesca,wikidataId/Q11967
 22126 Ibieca,wikidataId/Q650724
 22127 Igriés,wikidataId/Q2047681
 22128 Ilche,wikidataId/Q1651332
@@ -3433,7 +3579,7 @@ place_name,dcid
 22168 Palo,wikidataId/Q1995192
 22170 Panticosa,wikidataId/Q1644079
 22172 Peñalba,wikidataId/Q984662
-22173 Peñas de Riglos,wikidataId/Q1768883
+"22173 Peñas de Riglos, Las",wikidataId/Q1768883
 22174 Peralta de Alcofea,wikidataId/Q1651339
 22175 Peralta de Calasanz,wikidataId/Q984640
 22176 Peraltilla,wikidataId/Q24013343
@@ -3443,10 +3589,10 @@ place_name,dcid
 22182 Plan,wikidataId/Q943293
 22184 Poleñino,wikidataId/Q984585
 22186 Pozán de Vero,wikidataId/Q1651290
-22187 Puebla de Castro,wikidataId/Q984583
+"22187 Puebla de Castro, La",wikidataId/Q984583
 22188 Puente de Montañana,wikidataId/Q963830
 22189 Puértolas,wikidataId/Q1767803
-22190 Pueyo de Araguás,wikidataId/Q1648705
+"22190 Pueyo de Araguás, El",wikidataId/Q1648705
 22193 Pueyo de Santa Cruz,wikidataId/Q1842660
 22195 Quicena,wikidataId/Q2000611
 22197 Robres,wikidataId/Q987412
@@ -3499,7 +3645,7 @@ place_name,dcid
 22901 Valle de Hecho,wikidataId/Q1766550
 22902 Puente la Reina de Jaca,wikidataId/Q984505
 22903 San Miguel del Cinca,wikidataId/Q1906780
-22904 Sotonera,wikidataId/Q1769672
+"22904 Sotonera, La",wikidataId/Q1769672
 22905 Lupiñén-Ortilla,wikidataId/Q680583
 22906 Santa María de Dulcis,wikidataId/Q1651315
 22907 Aínsa-Sobrarbe,wikidataId/Q673876
@@ -3525,7 +3671,7 @@ place_name,dcid
 23019 Campillo de Arenas,wikidataId/Q780608
 23020 Canena,wikidataId/Q1611920
 23021 Carboneros,wikidataId/Q24013278
-23024 Carolina,wikidataId/Q649981
+"23024 Carolina, La",wikidataId/Q649981
 23025 Castellar,wikidataId/Q1986588
 23026 Castillo de Locubín,wikidataId/Q1611707
 23027 Cazalilla,wikidataId/Q24013275
@@ -3538,7 +3684,7 @@ place_name,dcid
 23034 Fuensanta de Martos,wikidataId/Q1751769
 23035 Fuerte del Rey,wikidataId/Q24013269
 23037 Génave,wikidataId/Q1756716
-23038 Guardia de Jaén,wikidataId/Q1645543
+"23038 Guardia de Jaén, La",wikidataId/Q1645543
 23039 Guarromán,wikidataId/Q1313369
 23040 Lahiguera,wikidataId/Q788551
 23041 Higuera de Calatrava,wikidataId/Q1657580
@@ -3547,15 +3693,13 @@ place_name,dcid
 23044 Huelma,wikidataId/Q1641746
 23045 Huesa,wikidataId/Q961110
 23046 Ibros,wikidataId/Q1641651
-23047 Iruela,wikidataId/Q1645527
+"23047 Iruela, La",wikidataId/Q1645527
 23048 Iznatoraf,wikidataId/Q1756730
 23049 Jabalquinto,wikidataId/Q1114768
-23050 Jaén,wikidataId/Q15681
 23051 Jamilena,wikidataId/Q1756724
 23052 Jimena,wikidataId/Q1657521
 23053 Jódar,wikidataId/Q1641632
 23054 Larva,wikidataId/Q24013253
-23055 Linares,wikidataId/Q281272
 23056 Lopera,wikidataId/Q24013252
 23057 Lupión,wikidataId/Q1641680
 23058 Mancha Real,wikidataId/Q936886
@@ -3571,7 +3715,7 @@ place_name,dcid
 23069 Porcuna,wikidataId/Q375851
 23070 Pozo Alcón,wikidataId/Q1641619
 23071 Puente de Génave,wikidataId/Q24013238
-23072 Puerta de Segura,wikidataId/Q1642144
+"23072 Puerta de Segura, La",wikidataId/Q1642144
 23073 Quesada,wikidataId/Q1866847
 23074 Rus,wikidataId/Q10992701
 23075 Sabiote,wikidataId/Q1641690
@@ -3595,7 +3739,7 @@ place_name,dcid
 23096 Villanueva de la Reina,wikidataId/Q1641608
 23097 Villanueva del Arzobispo,wikidataId/Q1641667
 23098 Villardompardo,wikidataId/Q24013218
-23099 Villares,wikidataId/Q279502
+"23099 Villares, Los",wikidataId/Q279502
 23101 Villarrodrigo,wikidataId/Q983655
 23901 Cárcheles,wikidataId/Q1646055
 23902 Bedmar y Garcíez,wikidataId/Q1631814
@@ -3606,14 +3750,14 @@ place_name,dcid
 24002 Algadefe,wikidataId/Q26438
 24003 Alija del Infantado,wikidataId/Q26604
 24004 Almanza,wikidataId/Q26449
-24005 Antigua,wikidataId/Q26447
+"24005 Antigua, La",wikidataId/Q26447
 24006 Ardón,wikidataId/Q26437
 24007 Arganza,wikidataId/Q1607162
 24008 Astorga,wikidataId/Q465078
 24009 Balboa,wikidataId/Q1650484
-24010 Bañeza,wikidataId/Q1442670
+"24010 Bañeza, La",wikidataId/Q1442670
 24011 Barjas,wikidataId/Q1605971
-24012 Barrios de Luna,wikidataId/Q26442
+"24012 Barrios de Luna, Los",wikidataId/Q26442
 24014 Bembibre,wikidataId/Q1157834
 24015 Benavides,wikidataId/Q1641158
 24016 Benuza,wikidataId/Q972909
@@ -3624,7 +3768,7 @@ place_name,dcid
 24021 Boñar,wikidataId/Q26602
 24022 Borrenes,wikidataId/Q1605911
 24023 Brazuelo,wikidataId/Q26606
-24024 Burgo Ranero,wikidataId/Q26585
+"24024 Burgo Ranero, El",wikidataId/Q26585
 24025 Burón,wikidataId/Q26640
 24026 Bustillo del Páramo,wikidataId/Q26594
 24027 Cabañas Raras,wikidataId/Q26436
@@ -3665,7 +3809,7 @@ place_name,dcid
 24065 Chozas de Abajo,wikidataId/Q141270
 24066 Destriana,wikidataId/Q1622295
 24067 Encinedo,wikidataId/Q1618261
-24068 Ercina,wikidataId/Q58341
+"24068 Ercina, La",wikidataId/Q58341
 24069 Escobar de Campos,wikidataId/Q1622282
 24070 Fabero,wikidataId/Q1442838
 24071 Folgoso de la Ribera,wikidataId/Q44919
@@ -3683,7 +3827,6 @@ place_name,dcid
 24086 Joarilla de las Matas,wikidataId/Q1635235
 24087 Laguna Dalga,wikidataId/Q1625895
 24088 Laguna de Negrillos,wikidataId/Q1615442
-24089 León,wikidataId/Q15699
 24090 Lucillo,wikidataId/Q137116
 24091 Luyego,wikidataId/Q141204
 24092 Llamas de la Ribera,wikidataId/Q137174
@@ -3698,7 +3841,7 @@ place_name,dcid
 24101 Murias de Paredes,wikidataId/Q137211
 24102 Noceda del Bierzo,wikidataId/Q44799
 24103 Oencia,wikidataId/Q1617652
-24104 Omañas,wikidataId/Q519749
+"24104 Omañas, Las",wikidataId/Q519749
 24105 Onzonilla,wikidataId/Q780266
 24106 Oseja de Sajambre,wikidataId/Q1640150
 24107 Pajares de los Oteros,wikidataId/Q24013145
@@ -3707,8 +3850,7 @@ place_name,dcid
 24110 Páramo del Sil,wikidataId/Q44852
 24112 Peranzanes,wikidataId/Q1615372
 24113 Pobladura de Pelayo García,wikidataId/Q1635308
-24114 Pola de Gordón,wikidataId/Q1605928
-24115 Ponferrada,wikidataId/Q12164
+"24114 Pola de Gordón, La",wikidataId/Q1605928
 24116 Posada de Valdeón,wikidataId/Q1635220
 24117 Pozuelo del Páramo,wikidataId/Q138262
 24118 Prado de la Guzpeña,wikidataId/Q138268
@@ -3725,7 +3867,7 @@ place_name,dcid
 24131 Riego de la Vega,wikidataId/Q956251
 24132 Riello,wikidataId/Q5195453
 24133 Rioseco de Tapia,wikidataId/Q137219
-24134 Robla,wikidataId/Q60979
+"24134 Robla, La",wikidataId/Q60979
 24136 Roperuelos del Páramo,wikidataId/Q141278
 24137 Sabero,wikidataId/Q1615381
 24139 Sahagún,wikidataId/Q821860
@@ -3778,7 +3920,7 @@ place_name,dcid
 24189 Valverde de la Virgen,wikidataId/Q918087
 24190 Valverde-Enrique,wikidataId/Q1640137
 24191 Vallecillo,wikidataId/Q19690502
-24193 Vecilla,wikidataId/Q1615474
+"24193 Vecilla, La",wikidataId/Q1615474
 24194 Vegacervera,wikidataId/Q1635326
 24196 Vega de Espinareda,wikidataId/Q1605960
 24197 Vega de Infanzones,wikidataId/Q1615360
@@ -3816,12 +3958,12 @@ place_name,dcid
 25001 Abella de la Conca,wikidataId/Q18257
 25002 Àger,wikidataId/Q24003992
 25003 Agramunt,wikidataId/Q1778278
-25004 Alamúss,wikidataId/Q1902061
+"25004 Alamús, Els",wikidataId/Q1902061
 25005 Alàs i Cerc,wikidataId/Q1647251
-25006 Albagés,wikidataId/Q1902147
+"25006 Albagés, L'",wikidataId/Q1902147
 25007 Albatàrrec,wikidataId/Q1646558
 25008 Albesa,wikidataId/Q1770869
-25009 Albi,wikidataId/Q284698
+"25009 Albi, L'",wikidataId/Q284698
 25010 Alcanó,wikidataId/Q966636
 25011 Alcarràs,wikidataId/Q1772290
 25012 Alcoletge,wikidataId/Q1772295
@@ -3839,20 +3981,20 @@ place_name,dcid
 25025 Naut Aran,wikidataId/Q985682
 25027 Anglesola,wikidataId/Q1778184
 25029 Arbeca,wikidataId/Q372836
-25030 Pont de Bar,wikidataId/Q1645028
+"25030 Pont de Bar, El",wikidataId/Q1645028
 25031 Arres,wikidataId/Q12611
 25032 Arsèguel,wikidataId/Q1645033
 25033 Artesa de Lleida,wikidataId/Q1648857
 25034 Artesa de Segre,wikidataId/Q969200
-25035 Sentiu de Sió,wikidataId/Q1769666
+"25035 Sentiu de Sió, La",wikidataId/Q1769666
 25036 Aspa,wikidataId/Q1770861
-25037 Avellanes i Santa Linya,wikidataId/Q1648087
+"25037 Avellanes i Santa Linya, Les",wikidataId/Q1648087
 25038 Aitona,wikidataId/Q1646588
 25039 Baix Pallars,wikidataId/Q12693
 25040 Balaguer,wikidataId/Q696797
 25041 Barbens,wikidataId/Q604286
-25042 Baronia de Rialb,wikidataId/Q492548
-25043 Vall de Boí,wikidataId/Q12711
+"25042 Baronia de Rialb, La",wikidataId/Q492548
+"25043 Vall de Boí, La",wikidataId/Q12711
 25044 Bassella,wikidataId/Q810494
 25045 Bausen,wikidataId/Q12613
 25046 Belianes,wikidataId/Q1902089
@@ -3865,8 +4007,8 @@ place_name,dcid
 25053 Benavent de Segrià,wikidataId/Q1769713
 25055 Biosca,wikidataId/Q1901345
 25056 Bovera,wikidataId/Q1770843
-25057 Bòrdes,wikidataId/Q12624
-25058 Borges Blanques,wikidataId/Q928006
+"25057 Bòrdes, Es",wikidataId/Q12624
+"25058 Borges Blanques, Les",wikidataId/Q928006
 25059 Bossòst,wikidataId/Q12615
 25060 Cabanabona,wikidataId/Q1770856
 25061 Cabó,wikidataId/Q1752450
@@ -3882,27 +4024,27 @@ place_name,dcid
 25073 Cervià de les Garrigues,wikidataId/Q1769645
 25074 Ciutadilla,wikidataId/Q1769563
 25075 Clariana de Cardener,wikidataId/Q539389
-25076 Cogul,wikidataId/Q1769580
+"25076 Cogul, El",wikidataId/Q1769580
 25077 Coll de Nargó,wikidataId/Q969224
 25078 Corbins,wikidataId/Q1646595
 25079 Cubells,wikidataId/Q1769656
-25081 Espluga Calba,wikidataId/Q988836
+"25081 Espluga Calba, L'",wikidataId/Q988836
 25082 Espot,wikidataId/Q24001304
 25085 Estaràs,wikidataId/Q1905552
 25086 Esterri d'Àneu,wikidataId/Q12662
 25087 Esterri de Cardós,wikidataId/Q12669
 25088 Estamariu,wikidataId/Q1641450
 25089 Farrera,wikidataId/Q24013021
-25092 Floresta,wikidataId/Q2302200
+"25092 Floresta, La",wikidataId/Q2302200
 25093 Fondarella,wikidataId/Q1900676
 25094 Foradada,wikidataId/Q1769624
-25096 Fuliola,wikidataId/Q1769687
+"25096 Fuliola, La",wikidataId/Q1769687
 25097 Fulleda,wikidataId/Q1650308
 25098 Gavet de la Conca,wikidataId/Q18260
 25099 Golmés,wikidataId/Q631603
 25100 Gósol,wikidataId/Q15518
-25101 Granadella,wikidataId/Q1902138
-25102 Granja d'Escarp,wikidataId/Q585795
+"25101 Granadella, La",wikidataId/Q1902138
+"25102 Granja d'Escarp, La",wikidataId/Q585795
 25103 Granyanella,wikidataId/Q1905584
 25104 Granyena de Segarra,wikidataId/Q1901194
 25105 Granyena de les Garrigues,wikidataId/Q1769597
@@ -3915,7 +4057,6 @@ place_name,dcid
 25115 Isona i Conca Dellà,wikidataId/Q18261
 25118 Juncosa,wikidataId/Q11929462
 25119 Juneda,wikidataId/Q1769576
-25120 Lleida,wikidataId/Q23995898
 25121 Les,wikidataId/Q12633
 25122 Linyola,wikidataId/Q605232
 25123 Lladorre,wikidataId/Q12668
@@ -3931,7 +4072,7 @@ place_name,dcid
 25133 Maials,wikidataId/Q1637381
 25134 Menàrguens,wikidataId/Q1769588
 25135 Miralcamp,wikidataId/Q1769676
-25136 Molsosa,wikidataId/Q1901411
+"25136 Molsosa, La",wikidataId/Q1901411
 25137 Mollerussa,wikidataId/Q676132
 25138 Montgai,wikidataId/Q1769567
 25139 Montellà i Martinet,wikidataId/Q13756
@@ -3945,26 +4086,26 @@ place_name,dcid
 25149 Oliana,wikidataId/Q23994098
 25150 Oliola,wikidataId/Q1769572
 25151 Olius,wikidataId/Q23994103
-25152 Oluges,wikidataId/Q1917585
-25153 Omellonss,wikidataId/Q1900647
-25154 Omells de na Gaias,wikidataId/Q1900768
+"25152 Oluges, Les",wikidataId/Q1917585
+"25153 Omellons, Els",wikidataId/Q1900647
+"25154 Omells de na Gaia, Els",wikidataId/Q1900768
 25155 Organyà,wikidataId/Q983476
 25156 Os de Balaguer,wikidataId/Q1646906
 25157 Ossó de Sió,wikidataId/Q1905594
-25158 Palau d'Anglesola,wikidataId/Q1769556
+"25158 Palau d'Anglesola, El",wikidataId/Q1769556
 25161 Conca de Dalt,wikidataId/Q18259
-25163 Coma i la Pedra,wikidataId/Q1901364
+"25163 Coma i la Pedra, La",wikidataId/Q1901364
 25164 Penelles,wikidataId/Q1769551
 25165 Peramola,wikidataId/Q1637517
 25166 Pinell de Solsonès,wikidataId/Q1767532
 25167 Pinós,wikidataId/Q1905542
-25168 Poal,wikidataId/Q1905512
-25169 Pobla de Cérvoles,wikidataId/Q286122
+"25168 Poal, El",wikidataId/Q1905512
+"25169 Pobla de Cérvoles, La",wikidataId/Q286122
 25170 Bellaguarda,wikidataId/Q1769697
-25171 Pobla de Segur,wikidataId/Q17172
+"25171 Pobla de Segur, La",wikidataId/Q17172
 25172 Ponts,wikidataId/Q742473
-25173 Pont de Suert,wikidataId/Q12708
-25174 Portella,wikidataId/Q1902101
+"25173 Pont de Suert, El",wikidataId/Q12708
+"25174 Portella, La",wikidataId/Q1902101
 25175 Prats i Sansor,wikidataId/Q13757
 25176 Preixana,wikidataId/Q1902046
 25177 Preixens,wikidataId/Q1766616
@@ -3986,10 +4127,10 @@ place_name,dcid
 25200 Sarroca de Lleida,wikidataId/Q1901336
 25201 Sarroca de Bellera,wikidataId/Q18268
 25202 Senterada,wikidataId/Q18269
-25203 Seu d'Urgell,wikidataId/Q673412
+"25203 Seu d'Urgell, La",wikidataId/Q673412
 25204 Seròs,wikidataId/Q599367
 25205 Sidamon,wikidataId/Q1916315
-25206 Soleràs,wikidataId/Q783127
+"25206 Soleràs, El",wikidataId/Q783127
 25207 Solsona,wikidataId/Q507621
 25208 Soriguera,wikidataId/Q12687
 25209 Sort,wikidataId/Q12690
@@ -4005,10 +4146,10 @@ place_name,dcid
 25221 Tírvia,wikidataId/Q12678
 25222 Tiurana,wikidataId/Q1766639
 25223 Torà,wikidataId/Q1766628
-25224 Tormss,wikidataId/Q1769629
+"25224 Torms, Els",wikidataId/Q1769629
 25225 Tornabous,wikidataId/Q785963
 25226 Torrebesses,wikidataId/Q1766657
-25227 Torre de Cabdella,wikidataId/Q18271
+"25227 Torre de Cabdella, La",wikidataId/Q18271
 25228 Torrefarrera,wikidataId/Q987375
 25230 Torregrossa,wikidataId/Q1765412
 25231 Torrelameu,wikidataId/Q1765384
@@ -4016,7 +4157,7 @@ place_name,dcid
 25233 Torre-serona,wikidataId/Q577261
 25234 Tremp,wikidataId/Q11953033
 25238 Vallbona de les Monges,wikidataId/Q1905685
-25239 Valls de Valira,wikidataId/Q942294
+"25239 Valls de Valira, Les",wikidataId/Q942294
 25240 Vallfogona de Balaguer,wikidataId/Q955140
 25242 Verdú,wikidataId/Q1766980
 25243 Vielha e Mijaran,wikidataId/Q12647
@@ -4028,20 +4169,20 @@ place_name,dcid
 25250 Vilanova de Meià,wikidataId/Q1766727
 25251 Vilanova de Segrià,wikidataId/Q614685
 25252 Vila-sana,wikidataId/Q12145
-25253 Vilosell,wikidataId/Q1769601
+"25253 Vilosell, El",wikidataId/Q1769601
 25254 Vilanova de la Barca,wikidataId/Q1646584
 25255 Vinaixa,wikidataId/Q23990522
 25901 Vall de Cardós,wikidataId/Q12666
 25902 Sant Martí de Riucorb,wikidataId/Q1905529
-25903 Guingueta d'Àneu,wikidataId/Q12664
+"25903 Guingueta d'Àneu, La",wikidataId/Q12664
 25904 Castell de Mur,wikidataId/Q18258
 25905 Ribera d'Ondara,wikidataId/Q1916289
-25906 Valls d'Aguilar,wikidataId/Q1769546
+"25906 Valls d'Aguilar, Les",wikidataId/Q1769546
 25907 Torrefeta i Florejacs,wikidataId/Q1765399
 25908 Fígols i Alinyà,wikidataId/Q984431
-25909 Vansa i Fórnols,wikidataId/Q576923
+"25909 Vansa i Fórnols, La",wikidataId/Q576923
 25910 Josa i Tuixén,wikidataId/Q984429
-25911 Plans de Siós,wikidataId/Q1900803
+"25911 Plans de Sió, Els",wikidataId/Q1900803
 25912 Gimenells i el Pla de la Font,wikidataId/Q522934
 25913 Riu de Cerdanya,wikidataId/Q13764
 26001 Ábalos,wikidataId/Q582970
@@ -4131,7 +4272,6 @@ place_name,dcid
 26086 Ledesma de la Cogolla,wikidataId/Q935939
 26087 Leiva,wikidataId/Q1647017
 26088 Leza de Río Leza,wikidataId/Q1636954
-26089 Logroño,wikidataId/Q14325
 26091 Lumbreras de Cameros,wikidataId/Q1646969
 26092 Manjarrés,wikidataId/Q24012896
 26093 Mansilla de la Sierra,wikidataId/Q1637476
@@ -4161,8 +4301,8 @@ place_name,dcid
 26119 Préjano,wikidataId/Q1645880
 26120 Quel,wikidataId/Q24012875
 26121 Rabanera,wikidataId/Q975296
-26122 Rasillo de Cameros,wikidataId/Q1647625
-26123 Redal,wikidataId/Q1647009
+"26122 Rasillo de Cameros, El",wikidataId/Q1647625
+"26123 Redal, El",wikidataId/Q1647009
 26124 Ribafrecha,wikidataId/Q1637656
 26125 Rincón de Soto,wikidataId/Q771336
 26126 Robres del Castillo,wikidataId/Q1636274
@@ -4205,7 +4345,7 @@ place_name,dcid
 26167 Villalobar de Rioja,wikidataId/Q1637502
 26168 Villamediana de Iregua,wikidataId/Q1606588
 26169 Villanueva de Cameros,wikidataId/Q1646911
-26170 Villar de Arnedo,wikidataId/Q1646947
+"26170 Villar de Arnedo, El",wikidataId/Q1646947
 26171 Villar de Torre,wikidataId/Q24012831
 26172 Villarejo,wikidataId/Q24008883
 26173 Villarroya,wikidataId/Q1645956
@@ -4231,21 +4371,20 @@ place_name,dcid
 27011 Castroverde,wikidataId/Q1368794
 27012 Cervantes,wikidataId/Q1603003
 27013 Cervo,wikidataId/Q1616622
-27014 Corgo,wikidataId/Q680745
+"27014 Corgo, O",wikidataId/Q680745
 27015 Cospeito,wikidataId/Q1445401
 27016 Chantada,wikidataId/Q1447512
 27017 Folgoso do Courel,wikidataId/Q1447369
-27018 Fonsagrada,wikidataId/Q1465213
+"27018 Fonsagrada, A",wikidataId/Q1465213
 27019 Foz,wikidataId/Q917878
 27020 Friol,wikidataId/Q576916
 27021 Xermade,wikidataId/Q577144
 27022 Guitiriz,wikidataId/Q1602975
 27023 Guntín,wikidataId/Q1605449
-27024 Incio,wikidataId/Q592681
+"27024 Incio, O",wikidataId/Q592681
 27025 Xove,wikidataId/Q1111013
 27026 Láncara,wikidataId/Q1445304
 27027 Lourenzá,wikidataId/Q1447358
-27028 Lugo,wikidataId/Q1069100
 27029 Meira,wikidataId/Q1618958
 27030 Mondoñedo,wikidataId/Q840362
 27031 Monforte de Lemos,wikidataId/Q818341
@@ -4253,18 +4392,18 @@ place_name,dcid
 27033 Muras,wikidataId/Q1605428
 27034 Navia de Suarna,wikidataId/Q1445393
 27035 Negueira de Muñiz,wikidataId/Q1603054
-27037 Nogaiss,wikidataId/Q1605418
+"27037 Nogais, As",wikidataId/Q1605418
 27038 Ourol,wikidataId/Q1445352
 27039 Outeiro de Rei,wikidataId/Q643709
 27040 Palas de Rei,wikidataId/Q842216
 27041 Pantón,wikidataId/Q1447446
 27042 Paradela,wikidataId/Q20547133
-27043 Páramo,wikidataId/Q1617334
-27044 Pastoriza,wikidataId/Q1465187
+"27043 Páramo, O",wikidataId/Q1617334
+"27044 Pastoriza, A",wikidataId/Q1465187
 27045 Pedrafita do Cebreiro,wikidataId/Q967734
 27046 Pol,wikidataId/Q1445717
-27047 Pobra do Brollón,wikidataId/Q920774
-27048 Pontenova,wikidataId/Q1465219
+"27047 Pobra do Brollón, A",wikidataId/Q920774
+"27048 Pontenova, A",wikidataId/Q1465219
 27049 Portomarín,wikidataId/Q849319
 27050 Quiroga,wikidataId/Q969128
 27051 Ribadeo,wikidataId/Q824076
@@ -4274,47 +4413,41 @@ place_name,dcid
 27055 Samos,wikidataId/Q1018150
 27056 Rábade,wikidataId/Q1444243
 27057 Sarria,wikidataId/Q3043699
-27058 Saviñao,wikidataId/Q1447399
+"27058 Saviñao, O",wikidataId/Q1447399
 27059 Sober,wikidataId/Q24012791
 27060 Taboada,wikidataId/Q578118
 27061 Trabada,wikidataId/Q581483
 27062 Triacastela,wikidataId/Q636874
-27063 Valadouro,wikidataId/Q1605462
-27064 Vicedo,wikidataId/Q944524
+"27063 Valadouro, O",wikidataId/Q1605462
+"27064 Vicedo, O",wikidataId/Q944524
 27065 Vilalba,wikidataId/Q1605437
 27066 Viveiro,wikidataId/Q641221
 27901 Baralla,wikidataId/Q1633465
 27902 Burela,wikidataId/Q1619456
-28001 Acebeda,wikidataId/Q1621071
+"28001 Acebeda, La",wikidataId/Q1621071
 28002 Ajalvir,wikidataId/Q855674
 28003 Alameda del Valle,wikidataId/Q1648402
-28004 Álamo,wikidataId/Q1984836
-28005 Alcalá de Henares,wikidataId/Q46940
-28006 Alcobendas,wikidataId/Q487679
-28007 Alcorcón,wikidataId/Q10372
+"28004 Álamo, El",wikidataId/Q1984836
 28008 Aldea del Fresno,wikidataId/Q607467
 28009 Algete,wikidataId/Q472604
 28010 Alpedrete,wikidataId/Q947926
 28011 Ambite,wikidataId/Q457605
 28012 Anchuelo,wikidataId/Q1647116
-28013 Aranjuez,wikidataId/Q486792
-28014 Arganda del Rey,wikidataId/Q497692
 28015 Arroyomolinos,wikidataId/Q24010250
-28016 Atazar,wikidataId/Q1772153
+"28016 Atazar, El",wikidataId/Q1772153
 28017 Batres,wikidataId/Q1647095
 28018 Becerril de la Sierra,wikidataId/Q655675
 28019 Belmonte de Tajo,wikidataId/Q1752454
 28020 Berzosa del Lozoya,wikidataId/Q1772302
-28021 Berrueco,wikidataId/Q645201
-28022 Boadilla del Monte,wikidataId/Q1641013
-28023 Boalo,wikidataId/Q1772163
+"28021 Berrueco, El",wikidataId/Q645201
+"28023 Boalo, El",wikidataId/Q1772163
 28024 Braojos,wikidataId/Q1915186
 28025 Brea de Tajo,wikidataId/Q1772144
 28026 Brunete,wikidataId/Q1647090
 28027 Buitrago del Lozoya,wikidataId/Q1648730
 28028 Bustarviejo,wikidataId/Q55487
 28029 Cabanillas de la Sierra,wikidataId/Q1772200
-28030 Cabrera,wikidataId/Q509056
+"28030 Cabrera, La",wikidataId/Q509056
 28031 Cadalso de los Vidrios,wikidataId/Q1648736
 28032 Camarma de Esteruelas,wikidataId/Q1648727
 28033 Campo Real,wikidataId/Q1999732
@@ -4329,52 +4462,43 @@ place_name,dcid
 28042 Colmenar del Arroyo,wikidataId/Q1751939
 28043 Colmenar de Oreja,wikidataId/Q686674
 28044 Colmenarejo,wikidataId/Q24012754
-28045 Colmenar Viejo,wikidataId/Q55480
 28046 Collado Mediano,wikidataId/Q1751903
-28047 Collado Villalba,wikidataId/Q735759
 28048 Corpa,wikidataId/Q1915174
-28049 Coslada,wikidataId/Q164197
 28050 Cubas de la Sagra,wikidataId/Q1751926
 28051 Chapinería,wikidataId/Q1772178
 28052 Chinchón,wikidataId/Q915395
 28053 Daganzo de Arriba,wikidataId/Q1772173
-28054 Escorial,wikidataId/Q985269
+"28054 Escorial, El",wikidataId/Q985269
 28055 Estremera,wikidataId/Q1615876
 28056 Fresnedillas de la Oliva,wikidataId/Q739480
 28057 Fresno de Torote,wikidataId/Q1772191
-28058 Fuenlabrada,wikidataId/Q54902
 28059 Fuente el Saz de Jarama,wikidataId/Q770809
 28060 Fuentidueña de Tajo,wikidataId/Q1228889
 28061 Galapagar,wikidataId/Q1615953
 28062 Garganta de los Montes,wikidataId/Q1752777
 28063 Gargantilla del Lozoya y Pinilla de Buitrago,wikidataId/Q1984845
 28064 Gascones,wikidataId/Q1772211
-28065 Getafe,wikidataId/Q8802
 28066 Griñón,wikidataId/Q1772237
 28067 Guadalix de la Sierra,wikidataId/Q55482
 28068 Guadarrama,wikidataId/Q517450
-28069 Hiruela,wikidataId/Q1751945
+"28069 Hiruela, La",wikidataId/Q1751945
 28070 Horcajo de la Sierra-Aoslos,wikidataId/Q1985367
 28071 Horcajuelo de la Sierra,wikidataId/Q768730
 28072 Hoyo de Manzanares,wikidataId/Q664769
 28073 Humanes de Madrid,wikidataId/Q281632
-28074 Leganés,wikidataId/Q77433
 28075 Loeches,wikidataId/Q1646206
 28076 Lozoya,wikidataId/Q599830
 28078 Madarcos,wikidataId/Q985048
-28079 Madrid,wikidataId/Q2807
-28080 Majadahonda,wikidataId/Q427505
 28082 Manzanares el Real,wikidataId/Q55483
 28083 Meco,wikidataId/Q1646210
 28084 Mejorada del Campo,wikidataId/Q1984852
 28085 Miraflores de la Sierra,wikidataId/Q55481
-28086 Molar,wikidataId/Q1915119
-28087 Molinos,wikidataId/Q88385103
+"28086 Molar, El",wikidataId/Q1915119
+"28087 Molinos, Los",wikidataId/Q88385103
 28088 Montejo de la Sierra,wikidataId/Q1772215
 28089 Moraleja de Enmedio,wikidataId/Q965208
 28090 Moralzarzal,wikidataId/Q1646201
 28091 Morata de Tajuña,wikidataId/Q1772158
-28092 Móstoles,wikidataId/Q187826
 28093 Navacerrada,wikidataId/Q1648718
 28094 Navalafuente,wikidataId/Q55486
 28095 Navalagamella,wikidataId/Q1751933
@@ -4385,7 +4509,6 @@ place_name,dcid
 28101 Olmeda de las Fuentes,wikidataId/Q958675
 28102 Orusco de Tajuña,wikidataId/Q520988
 28104 Paracuellos de Jarama,wikidataId/Q2046249
-28106 Parla,wikidataId/Q824651
 28107 Patones,wikidataId/Q1999704
 28108 Pedrezuela,wikidataId/Q1647820
 28109 Pelayos de la Presa,wikidataId/Q1772205
@@ -4393,7 +4516,6 @@ place_name,dcid
 28111 Pezuela de las Torres,wikidataId/Q1772226
 28112 Pinilla del Valle,wikidataId/Q1980517
 28114 Piñuécar-Gandullas,wikidataId/Q579372
-28115 Pozuelo de Alarcón,wikidataId/Q639422
 28116 Pozuelo del Rey,wikidataId/Q1751919
 28117 Prádena del Rincón,wikidataId/Q2046216
 28118 Puebla de la Sierra,wikidataId/Q1980510
@@ -4401,22 +4523,19 @@ place_name,dcid
 28120 Rascafría,wikidataId/Q985042
 28121 Redueña,wikidataId/Q939207
 28122 Ribatejada,wikidataId/Q1647102
-28123 Rivas-Vaciamadrid,wikidataId/Q644481
 28124 Robledillo de la Jara,wikidataId/Q1980536
 28125 Robledo de Chavela,wikidataId/Q734136
 28126 Robregordo,wikidataId/Q1772196
-28127 Rozas de Madrid,wikidataId/Q592747
 28128 Rozas de Puerto Real,wikidataId/Q770499
 28129 San Agustín del Guadalix,wikidataId/Q985045
 28130 San Fernando de Henares,wikidataId/Q842211
 28131 San Lorenzo de El Escorial,wikidataId/Q371748
 28132 San Martín de la Vega,wikidataId/Q959612
 28133 San Martín de Valdeiglesias,wikidataId/Q1751908
-28134 San Sebastián de los Reyes,wikidataId/Q484717
 28135 Santa María de la Alameda,wikidataId/Q1769405
 28136 Santorcaz,wikidataId/Q1765587
-28137 Santos de la Humosa,wikidataId/Q1648733
-28138 Serna del Monte,wikidataId/Q584772
+"28137 Santos de la Humosa, Los",wikidataId/Q1648733
+"28138 Serna del Monte, La",wikidataId/Q584772
 28140 Serranillos del Valle,wikidataId/Q1772168
 28141 Sevilla la Nueva,wikidataId/Q1641045
 28143 Somosierra,wikidataId/Q1016225
@@ -4424,7 +4543,6 @@ place_name,dcid
 28145 Talamanca de Jarama,wikidataId/Q1641021
 28146 Tielmes,wikidataId/Q1766203
 28147 Titulcia,wikidataId/Q1647106
-28148 Torrejón de Ardoz,wikidataId/Q489839
 28149 Torrejón de la Calzada,wikidataId/Q960213
 28150 Torrejón de Velasco,wikidataId/Q919911
 28151 Torrelaguna,wikidataId/Q1641236
@@ -4437,14 +4555,13 @@ place_name,dcid
 28158 Valdemanco,wikidataId/Q1915163
 28159 Valdemaqueda,wikidataId/Q785005
 28160 Valdemorillo,wikidataId/Q10783
-28161 Valdemoro,wikidataId/Q840373
 28162 Valdeolmos-Alalpardo,wikidataId/Q771347
 28163 Valdepiélagos,wikidataId/Q1980542
 28164 Valdetorres de Jarama,wikidataId/Q969446
 28165 Valdilecha,wikidataId/Q524941
 28166 Valverde de Alcalá,wikidataId/Q2003388
 28167 Velilla de San Antonio,wikidataId/Q1999742
-28168 Vellón,wikidataId/Q1647849
+"28168 Vellón, El",wikidataId/Q1647849
 28169 Venturada,wikidataId/Q1647121
 28170 Villaconejos,wikidataId/Q966101
 28171 Villa del Prado,wikidataId/Q320398
@@ -4487,13 +4604,12 @@ place_name,dcid
 29022 Benadalid,wikidataId/Q1630147
 29023 Benahavís,wikidataId/Q816672
 29024 Benalauría,wikidataId/Q816675
-29025 Benalmádena,wikidataId/Q488869
 29026 Benamargosa,wikidataId/Q970721
 29027 Benamocarra,wikidataId/Q24012623
 29028 Benaoján,wikidataId/Q816694
 29029 Benarrabá,wikidataId/Q24012621
-29030 Borge,wikidataId/Q1630208
-29031 Burgo,wikidataId/Q1623964
+"29030 Borge, El",wikidataId/Q1630208
+"29031 Burgo, El",wikidataId/Q1623964
 29032 Campillos,wikidataId/Q944101
 29033 Canillas de Aceituno,wikidataId/Q1647722
 29034 Canillas de Albaida,wikidataId/Q1647757
@@ -4513,10 +4629,8 @@ place_name,dcid
 29048 Cuevas del Becerro,wikidataId/Q1647740
 29049 Cuevas de San Marcos,wikidataId/Q1647751
 29050 Cútar,wikidataId/Q385419
-29051 Estepona,wikidataId/Q492748
 29052 Faraján,wikidataId/Q377954
 29053 Frigiliana,wikidataId/Q944137
-29054 Fuengirola,wikidataId/Q492735
 29055 Fuente de Piedra,wikidataId/Q922378
 29056 Gaucín,wikidataId/Q944119
 29057 Genalguacil,wikidataId/Q1630292
@@ -4529,10 +4643,7 @@ place_name,dcid
 29064 Jubrique,wikidataId/Q1630392
 29065 Júzcar,wikidataId/Q911202
 29066 Macharaviaya,wikidataId/Q1630462
-29067 Málaga,wikidataId/Q8851
 29068 Manilva,wikidataId/Q913492
-29069 Marbella,wikidataId/Q484799
-29070 Mijas,wikidataId/Q492744
 29071 Moclinejo,wikidataId/Q13152
 29072 Mollina,wikidataId/Q1630374
 29073 Monda,wikidataId/Q24012584
@@ -4543,7 +4654,6 @@ place_name,dcid
 29079 Periana,wikidataId/Q732206
 29080 Pizarra,wikidataId/Q1657599
 29081 Pujerra,wikidataId/Q1624046
-29082 Rincón de la Victoria,wikidataId/Q1248474
 29083 Riogordo,wikidataId/Q1630306
 29084 Ronda,wikidataId/Q13153
 29085 Salares,wikidataId/Q1647747
@@ -4555,7 +4665,6 @@ place_name,dcid
 29091 Torrox,wikidataId/Q13150
 29092 Totalán,wikidataId/Q973594
 29093 Valle de Abdalajís,wikidataId/Q1647735
-29094 Vélez-Málaga,wikidataId/Q492741
 29095 Villanueva de Algaidas,wikidataId/Q1647726
 29096 Villanueva del Rosario,wikidataId/Q643724
 29097 Villanueva del Trabuco,wikidataId/Q1624040
@@ -4580,7 +4689,6 @@ place_name,dcid
 30013 Calasparra,wikidataId/Q1313139
 30014 Campos del Río,wikidataId/Q1989395
 30015 Caravaca de la Cruz,wikidataId/Q230368
-30016 Cartagena,wikidataId/Q162615
 30017 Cehegín,wikidataId/Q1757489
 30018 Ceutí,wikidataId/Q599932
 30019 Cieza,
@@ -4590,10 +4698,8 @@ place_name,dcid
 30023 Librilla,wikidataId/Q1010250
 30025 Lorquí,wikidataId/Q1982966
 30026 Mazarrón,wikidataId/Q913277
-30027 Molina de Segura,wikidataId/Q917883
 30028 Moratalla,wikidataId/Q987450
 30029 Mula,wikidataId/Q1983986
-30030 Murcia,wikidataId/Q12225
 30031 Ojós,wikidataId/Q1998972
 30032 Pliego,wikidataId/Q2000462
 30033 Puerto Lumbreras,wikidataId/Q613784
@@ -4601,14 +4707,14 @@ place_name,dcid
 30035 San Javier,wikidataId/Q987453
 30036 San Pedro del Pinatar,wikidataId/Q743996
 30037 Torre-Pacheco,wikidataId/Q949880
-30038 Torres de Cotillas,wikidataId/Q762427
+"30038 Torres de Cotillas, Las",wikidataId/Q762427
 30039 Totana,wikidataId/Q24012535
 30040 Ulea,wikidataId/Q24012534
-30041 Unión,wikidataId/Q1228759
+"30041 Unión, La",wikidataId/Q1228759
 30042 Villanueva del Río Segura,wikidataId/Q1972508
 30043 Yecla,wikidataId/Q931116
 30901 Santomera,wikidataId/Q1765918
-30902 Alcázares,wikidataId/Q1982975
+"30902 Alcázares, Los",wikidataId/Q1982975
 31001 Abáigar,wikidataId/Q1635742
 31002 Abárzuza/Abartzuza,wikidataId/Q1636186
 31003 Abaurregaina/Abaurrea Alta,wikidataId/Q968727
@@ -4637,7 +4743,7 @@ place_name,dcid
 31026 Aras,wikidataId/Q24012514
 31027 Arbizu,wikidataId/Q1645754
 31028 Arce/Artzi,wikidataId/Q890585
-31029 Arcos,
+"31029 Arcos, Los",
 31030 Arellano,wikidataId/Q608818
 31031 Areso,wikidataId/Q24012509
 31032 Arguedas,wikidataId/Q1763705
@@ -4669,7 +4775,7 @@ place_name,dcid
 31058 Auritz/Burguete,wikidataId/Q5431
 31059 Burgui/Burgi,wikidataId/Q1637042
 31060 Burlada/Burlata,wikidataId/Q732730
-31061 Busto,wikidataId/Q673453
+"31061 Busto, El",wikidataId/Q673453
 31062 Cabanillas,wikidataId/Q1648451
 31063 Cabredo,wikidataId/Q24012485
 31064 Cadreita,wikidataId/Q1648483
@@ -4809,7 +4915,6 @@ place_name,dcid
 31198 Oronz/Orontze,wikidataId/Q2329544
 31199 Oroz-Betelu/Orotz-Betelu,wikidataId/Q1647421
 31200 Oteiza,wikidataId/Q682821
-31201 Pamplona/Iruña,wikidataId/Q10282
 31202 Peralta/Azkoien,wikidataId/Q984865
 31203 Petilla de Aragón,wikidataId/Q984872
 31204 Piedramillera,wikidataId/Q1647923
@@ -4883,23 +4988,23 @@ place_name,dcid
 31908 Lekunberri,wikidataId/Q1773037
 32001 Allariz,wikidataId/Q1438879
 32002 Amoeiro,wikidataId/Q1627616
-32003 Arnoia,wikidataId/Q1631832
+"32003 Arnoia, A",wikidataId/Q1631832
 32004 Avión,wikidataId/Q791209
 32005 Baltar,wikidataId/Q1627554
 32006 Bande,wikidataId/Q1645000
 32007 Baños de Molgas,wikidataId/Q1632922
 32008 Barbadás,wikidataId/Q1627578
-32009 Barco de Valdeorras,wikidataId/Q1607428
+"32009 Barco de Valdeorras, O",wikidataId/Q1607428
 32010 Beade,wikidataId/Q1644988
 32011 Beariz,wikidataId/Q1627591
-32012 Blancoss,wikidataId/Q1627544
+"32012 Blancos, Os",wikidataId/Q1627544
 32013 Boborás,wikidataId/Q1627596
-32014 Bola,wikidataId/Q523929
-32015 Bolo,wikidataId/Q1617349
+"32014 Bola, A",wikidataId/Q523929
+"32015 Bolo, O",wikidataId/Q1617349
 32016 Calvos de Randín,wikidataId/Q777044
 32017 Carballeda de Valdeorras,wikidataId/Q1607709
 32018 Carballeda de Avia,wikidataId/Q940960
-32019 Carballiño,wikidataId/Q1194949
+"32019 Carballiño, O",wikidataId/Q1194949
 32020 Cartelle,wikidataId/Q1606020
 32021 Castrelo do Val,wikidataId/Q1607748
 32022 Castrelo de Miño,wikidataId/Q1605406
@@ -4914,8 +5019,8 @@ place_name,dcid
 32031 Esgos,wikidataId/Q1607520
 32032 Xinzo de Limia,wikidataId/Q918637
 32033 Gomesende,wikidataId/Q1631823
-32034 Gudiña,wikidataId/Q677485
-32035 Irixo,wikidataId/Q663077
+"32034 Gudiña, A",wikidataId/Q677485
+"32035 Irixo, O",wikidataId/Q663077
 32036 Xunqueira de Ambía,wikidataId/Q1607462
 32037 Xunqueira de Espadanedo,wikidataId/Q1596784
 32038 Larouco,wikidataId/Q1631787
@@ -4927,23 +5032,22 @@ place_name,dcid
 32044 Manzaneda,wikidataId/Q20543047
 32045 Maside,wikidataId/Q1605484
 32046 Melón,wikidataId/Q1644993
-32047 Merca,wikidataId/Q1607660
-32048 Mezquita,wikidataId/Q1627569
+"32047 Merca, A",wikidataId/Q1607660
+"32048 Mezquita, A",wikidataId/Q1627569
 32049 Montederramo,wikidataId/Q1606231
 32050 Monterrei,wikidataId/Q1452663
 32051 Muíños,wikidataId/Q1607719
 32052 Nogueira de Ramuín,wikidataId/Q577578
 32053 Oímbra,wikidataId/Q523774
-32054 Ourense,wikidataId/Q99151
 32055 Paderne de Allariz,wikidataId/Q1445723
 32056 Padrenda,wikidataId/Q24012305
 32057 Parada de Sil,wikidataId/Q1632841
-32058 Pereiro de Aguiar,wikidataId/Q1603774
-32059 Peroxa,wikidataId/Q2819855
+"32058 Pereiro de Aguiar, O",wikidataId/Q1603774
+"32059 Peroxa, A",wikidataId/Q2819855
 32060 Petín,wikidataId/Q670366
 32061 Piñor,wikidataId/Q934212
 32062 Porqueira,wikidataId/Q1631352
-32063 Pobra de Trives,wikidataId/Q1453218
+"32063 Pobra de Trives, A",wikidataId/Q1453218
 32064 Pontedeva,wikidataId/Q1628449
 32065 Punxín,wikidataId/Q605311
 32066 Quintela de Leirado,wikidataId/Q1630324
@@ -4952,7 +5056,7 @@ place_name,dcid
 32069 Ribadavia,wikidataId/Q917180
 32070 San Xoán de Río,wikidataId/Q1641513
 32071 Riós,wikidataId/Q1645023
-32072 Rúa,wikidataId/Q1607619
+"32072 Rúa, A",wikidataId/Q1607619
 32073 Rubiá,wikidataId/Q516631
 32074 San Amaro,wikidataId/Q1606281
 32075 San Cibrao das Viñas,wikidataId/Q973465
@@ -4960,10 +5064,10 @@ place_name,dcid
 32077 Sandiás,wikidataId/Q910396
 32078 Sarreaus,wikidataId/Q1607778
 32079 Taboadela,wikidataId/Q970921
-32080 Teixeira,wikidataId/Q973967
+"32080 Teixeira, A",wikidataId/Q973967
 32081 Toén,wikidataId/Q24012288
 32082 Trasmiras,wikidataId/Q917185
-32083 Veiga,wikidataId/Q2511834
+"32083 Veiga, A",wikidataId/Q2511834
 32084 Verea,wikidataId/Q24012285
 32085 Verín,wikidataId/Q176504
 32086 Viana do Bolo,wikidataId/Q1627561
@@ -4994,8 +5098,7 @@ place_name,dcid
 33020 Corvera de Asturias,wikidataId/Q6046174
 33021 Cudillero,wikidataId/Q818372
 33022 Degaña,wikidataId/Q695519
-33023 Franco,wikidataId/Q736022
-33024 Gijón,wikidataId/Q12273
+"33023 Franco, El",wikidataId/Q736022
 33025 Gozón,wikidataId/Q818366
 33026 Grado,wikidataId/Q5198431
 33027 Grandas de Salime,wikidataId/Q828997
@@ -5015,7 +5118,6 @@ place_name,dcid
 33041 Navia,wikidataId/Q5195449
 33042 Noreña,wikidataId/Q3776056
 33043 Onís,wikidataId/Q946233
-33044 Oviedo,wikidataId/Q14317
 33045 Parres,wikidataId/Q818327
 33046 Peñamellera Alta,wikidataId/Q740381
 33047 Peñamellera Baja,wikidataId/Q842694
@@ -5025,7 +5127,7 @@ place_name,dcid
 33051 Pravia,wikidataId/Q820469
 33052 Proaza,wikidataId/Q904816
 33053 Quirós,wikidataId/Q842688
-33054 Regueras,wikidataId/Q842644
+"33054 Regueras, Las",wikidataId/Q842644
 33055 Ribadedeva,wikidataId/Q842638
 33056 Ribadesella,wikidataId/Q591580
 33057 Ribera de Arriba,wikidataId/Q842661
@@ -5037,7 +5139,6 @@ place_name,dcid
 33063 San Tirso de Abres,wikidataId/Q842655
 33064 Santo Adriano,wikidataId/Q932781
 33065 Sariego,wikidataId/Q911122
-33066 Siero,wikidataId/Q744130
 33067 Sobrescobio,wikidataId/Q911078
 33068 Somiedo,wikidataId/Q842668
 33069 Soto del Barco,wikidataId/Q7564018
@@ -5123,7 +5224,7 @@ place_name,dcid
 34089 Itero de la Vega,wikidataId/Q988840
 34091 Lagartos,wikidataId/Q24012182
 34092 Lantadilla,wikidataId/Q1918829
-34093 Vid de Ojeda,wikidataId/Q1919374
+"34093 Vid de Ojeda, La",wikidataId/Q1919374
 34094 Ledigos,wikidataId/Q956367
 34096 Lomas,wikidataId/Q2269961
 34098 Magaz de Pisuerga,wikidataId/Q660256
@@ -5142,7 +5243,6 @@ place_name,dcid
 34113 Olea de Boedo,wikidataId/Q1907635
 34114 Olmos de Ojeda,wikidataId/Q1919129
 34116 Osornillo,wikidataId/Q1916539
-34120 Palencia,wikidataId/Q8378
 34121 Palenzuela,wikidataId/Q24012163
 34122 Páramo de Boedo,wikidataId/Q1918847
 34123 Paredes de Nava,wikidataId/Q919652
@@ -5160,7 +5260,7 @@ place_name,dcid
 34136 Poza de la Vega,wikidataId/Q1918458
 34137 Pozo de Urama,wikidataId/Q1767816
 34139 Prádanos de Ojeda,wikidataId/Q1919141
-34140 Puebla de Valdavia,wikidataId/Q1918776
+"34140 Puebla de Valdavia, La",wikidataId/Q1918776
 34141 Quintana del Puente,wikidataId/Q24012146
 34143 Quintanilla de Onsoña,wikidataId/Q486593
 34146 Reinoso de Cerrato,wikidataId/Q925614
@@ -5184,7 +5284,7 @@ place_name,dcid
 34170 Santibáñez de Ecla,wikidataId/Q1906868
 34171 Santibáñez de la Peña,wikidataId/Q1766448
 34174 Santoyo,wikidataId/Q24012125
-34175 Serna,wikidataId/Q2314294
+"34175 Serna, La",wikidataId/Q2314294
 34176 Sotobañado y Priorato,wikidataId/Q1949169
 34177 Soto de Cerrato,wikidataId/Q1918481
 34178 Tabanera de Cerrato,wikidataId/Q1918812
@@ -5240,11 +5340,10 @@ place_name,dcid
 34901 Osorno la Mayor,wikidataId/Q1657059
 34902 Valle del Retortillo,wikidataId/Q1918785
 34903 Loma de Ucieza,wikidataId/Q1918575
-34904 Pernía,wikidataId/Q1918857
+"34904 Pernía, La",wikidataId/Q1918857
 35001 Agaete,wikidataId/Q390069
 35002 Agüimes,wikidataId/Q399702
 35003 Antigua,wikidataId/Q575670
-35004 Arrecife,wikidataId/Q647543
 35005 Artenara,wikidataId/Q706892
 35006 Arucas,wikidataId/Q716384
 35007 Betancuria,wikidataId/Q830969
@@ -5254,19 +5353,15 @@ place_name,dcid
 35011 Ingenio,wikidataId/Q985599
 35012 Mogán,wikidataId/Q628446
 35013 Moya,
-35014 Oliva,wikidataId/Q594892
+"35014 Oliva, La",wikidataId/Q594892
 35015 Pájara,wikidataId/Q661198
-35016 Palmas de Gran Canaria,wikidataId/Q11974
 35017 Puerto del Rosario,wikidataId/Q540185
 35018 San Bartolomé,wikidataId/Q962773
-35019 San Bartolomé de Tirajana,wikidataId/Q693258
-35020 Aldea de San Nicolás,wikidataId/Q986727
+"35020 Aldea de San Nicolás, La",wikidataId/Q986727
 35021 Santa Brígida,wikidataId/Q984488
-35022 Santa Lucía de Tirajana,wikidataId/Q738674
 35023 Santa María de Guía de Gran Canaria,wikidataId/Q986359
 35024 Teguise,wikidataId/Q737440
 35025 Tejeda,wikidataId/Q986361
-35026 Telde,wikidataId/Q55845
 35027 Teror,wikidataId/Q430147
 35028 Tías,wikidataId/Q2244278
 35029 Tinajo,wikidataId/Q638013
@@ -5283,21 +5378,21 @@ place_name,dcid
 36006 Cambados,wikidataId/Q695477
 36007 Campo Lameiro,wikidataId/Q1607577
 36008 Cangas,wikidataId/Q1628188
-36009 Cañiza,wikidataId/Q969445
+"36009 Cañiza, A",wikidataId/Q969445
 36010 Catoira,wikidataId/Q377244
 36013 Covelo,wikidataId/Q305392
 36014 Crecente,wikidataId/Q1627605
 36015 Cuntis,wikidataId/Q1631860
 36016 Dozón,wikidataId/Q1614585
-36017 Estrada,wikidataId/Q1621191
+"36017 Estrada, A",wikidataId/Q1621191
 36018 Forcarei,wikidataId/Q385667
 36019 Fornelos de Montes,wikidataId/Q525124
 36020 Agolada,wikidataId/Q395225
 36021 Gondomar,wikidataId/Q10740748
-36022 Grove,wikidataId/Q929161
-36023 Guarda,wikidataId/Q300433
+"36022 Grove, O",wikidataId/Q929161
+"36023 Guarda, A",wikidataId/Q300433
 36024 Lalín,wikidataId/Q1374736
-36025 Lama,wikidataId/Q1644983
+"36025 Lama, A",wikidataId/Q1644983
 36026 Marín,wikidataId/Q23995594
 36027 Meaño,wikidataId/Q1607447
 36028 Meis,wikidataId/Q32438
@@ -5306,12 +5401,11 @@ place_name,dcid
 36031 Mondariz-Balneario,wikidataId/Q1614339
 36032 Moraña,wikidataId/Q1607494
 36033 Mos,wikidataId/Q1596023
-36034 Nevess,wikidataId/Q1634850
+"36034 Neves, As",wikidataId/Q1634850
 36035 Nigrán,wikidataId/Q1617562
 36036 Oia,wikidataId/Q1655349
 36037 Pazos de Borbén,wikidataId/Q1614595
-36038 Pontevedra,wikidataId/Q12411
-36039 Porriño,wikidataId/Q1616392
+"36039 Porriño, O",wikidataId/Q1616392
 36040 Portas,wikidataId/Q1631280
 36041 Poio,wikidataId/Q1631776
 36042 Ponteareas,wikidataId/Q617119
@@ -5320,7 +5414,7 @@ place_name,dcid
 36045 Redondela,wikidataId/Q833032
 36046 Ribadumia,wikidataId/Q1631321
 36047 Rodeiro,wikidataId/Q1627583
-36048 Rosal,wikidataId/Q603015
+"36048 Rosal, O",wikidataId/Q603015
 36049 Salceda de Caselas,wikidataId/Q1629594
 36050 Salvaterra de Miño,wikidataId/Q1629539
 36051 Sanxenxo,wikidataId/Q840355
@@ -5329,24 +5423,23 @@ place_name,dcid
 36054 Tomiño,wikidataId/Q1628263
 36055 Tui,wikidataId/Q824122
 36056 Valga,wikidataId/Q1628179
-36057 Vigo,wikidataId/Q8745
 36058 Vilaboa,wikidataId/Q12401911
 36059 Vila de Cruces,wikidataId/Q1607479
 36060 Vilagarcía de Arousa,wikidataId/Q23991995
 36061 Vilanova de Arousa,wikidataId/Q739495
-36901 Illa de Arousa,wikidataId/Q300446
+"36901 Illa de Arousa, A",wikidataId/Q300446
 36902 Cerdedo-Cotobade,wikidataId/Q27949267
 37001 Abusejo,wikidataId/Q1634871
 37002 Agallas,wikidataId/Q1634860
 37003 Ahigal de los Aceiteros,wikidataId/Q1628726
 37004 Ahigal de Villarino,wikidataId/Q1628684
-37005 Alameda de Gardón,wikidataId/Q1777798
-37006 Alamedilla,wikidataId/Q1777808
+"37005 Alameda de Gardón, La",wikidataId/Q1777798
+"37006 Alamedilla, La",wikidataId/Q1777808
 37007 Alaraz,wikidataId/Q1625907
 37008 Alba de Tormes,wikidataId/Q946344
 37009 Alba de Yeltes,wikidataId/Q1650536
-37010 Alberca,wikidataId/Q1012961
-37011 Alberguería de Argañán,wikidataId/Q1777895
+"37010 Alberca, La",wikidataId/Q1012961
+"37011 Alberguería de Argañán, La",wikidataId/Q1777895
 37012 Alconada,wikidataId/Q1648532
 37013 Aldeacipreste,wikidataId/Q1648494
 37014 Aldeadávila de la Ribera,wikidataId/Q1625925
@@ -5369,43 +5462,43 @@ place_name,dcid
 37031 Arabayona de Mógica,wikidataId/Q428433
 37032 Arapiles,wikidataId/Q31910940
 37033 Arcediano,wikidataId/Q24013992
-37034 Arco,wikidataId/Q1917818
+"37034 Arco, El",wikidataId/Q1917818
 37035 Armenteros,wikidataId/Q1651814
 37036 San Miguel del Robledo,wikidataId/Q1648205
-37037 Atalaya,wikidataId/Q1994164
+"37037 Atalaya, La",wikidataId/Q1994164
 37038 Babilafuente,wikidataId/Q1606563
 37039 Bañobárez,wikidataId/Q1640483
 37040 Barbadillo,wikidataId/Q24010590
 37041 Barbalos,wikidataId/Q919413
 37042 Barceo,wikidataId/Q1628733
 37044 Barruecopardo,wikidataId/Q1640512
-37045 Bastida,wikidataId/Q1768761
+"37045 Bastida, La",wikidataId/Q1768761
 37046 Béjar,wikidataId/Q695375
 37047 Beleña,wikidataId/Q1989333
 37049 Bermellar,wikidataId/Q683499
 37050 Berrocal de Huebra,wikidataId/Q1640878
 37051 Berrocal de Salvatierra,wikidataId/Q1651966
 37052 Boada,wikidataId/Q67151355
-37054 Bodón,wikidataId/Q613473
+"37054 Bodón, El",wikidataId/Q613473
 37055 Bogajo,wikidataId/Q1648226
-37056 Bouza,wikidataId/Q584647
+"37056 Bouza, La",wikidataId/Q584647
 37057 Bóveda del Río Almar,wikidataId/Q1640620
 37058 Brincones,wikidataId/Q1625911
 37059 Buenamadre,wikidataId/Q1650519
 37060 Buenavista,wikidataId/Q24014661
-37061 Cabaco,wikidataId/Q1640774
+"37061 Cabaco, El",wikidataId/Q1640774
 37062 Cabezabellosa de la Calzada,wikidataId/Q1651906
-37063 Cabeza de Béjar,wikidataId/Q1777821
+"37063 Cabeza de Béjar, La",wikidataId/Q1777821
 37065 Cabeza del Caballo,wikidataId/Q1639363
 37067 Cabrerizos,wikidataId/Q1628707
 37068 Cabrillas,wikidataId/Q1640871
 37069 Calvarrasa de Abajo,wikidataId/Q1640886
 37070 Calvarrasa de Arriba,wikidataId/Q430748
-37071 Calzada de Béjar,wikidataId/Q655115
+"37071 Calzada de Béjar, La",wikidataId/Q655115
 37072 Calzada de Don Diego,wikidataId/Q1648516
 37073 Calzada de Valdunciel,wikidataId/Q369301
 37074 Campillo de Azaba,wikidataId/Q1648490
-37077 Campo de Peñaranda,wikidataId/Q585510
+"37077 Campo de Peñaranda, El",wikidataId/Q585510
 37078 Candelario,wikidataId/Q1777917
 37079 Canillas de Abajo,wikidataId/Q1640649
 37080 Cantagallo,wikidataId/Q1939628
@@ -5417,7 +5510,7 @@ place_name,dcid
 37087 Carrascal de Barregas,wikidataId/Q1648479
 37088 Carrascal del Obispo,wikidataId/Q1640566
 37089 Casafranca,wikidataId/Q1628754
-37090 Casas del Conde,wikidataId/Q1640703
+"37090 Casas del Conde, Las",wikidataId/Q1640703
 37091 Casillas de Flores,wikidataId/Q1628765
 37092 Castellanos de Moriscos,wikidataId/Q1628745
 37096 Castillejo de Martín Viejo,wikidataId/Q1640598
@@ -5426,7 +5519,7 @@ place_name,dcid
 37099 Cereceda de la Sierra,wikidataId/Q1606686
 37100 Cerezal de Peñahorcada,wikidataId/Q1637672
 37101 Cerralbo,wikidataId/Q1633616
-37102 Cerro,wikidataId/Q1770005
+"37102 Cerro, El",wikidataId/Q1770005
 37103 Cespedosa de Tormes,wikidataId/Q1640854
 37104 Cilleros de la Bastida,wikidataId/Q1640895
 37106 Cipérez,wikidataId/Q1640795
@@ -5435,13 +5528,13 @@ place_name,dcid
 37109 Colmenar de Montemayor,wikidataId/Q1640815
 37110 Cordovilla,wikidataId/Q24012203
 37112 Cristóbal,wikidataId/Q1651917
-37113 Cubo de Don Sancho,wikidataId/Q255252
+"37113 Cubo de Don Sancho, El",wikidataId/Q255252
 37114 Chagarcía Medianero,wikidataId/Q1651955
 37115 Dios le Guarde,wikidataId/Q1650163
 37116 Doñinos de Ledesma,wikidataId/Q1640625
 37117 Doñinos de Salamanca,wikidataId/Q1640688
 37118 Ejeme,wikidataId/Q1648510
-37119 Encina,wikidataId/Q594765
+"37119 Encina, La",wikidataId/Q594765
 37120 Encina de San Silvestre,wikidataId/Q1640631
 37121 Encinas de Abajo,wikidataId/Q1651897
 37122 Encinas de Arriba,wikidataId/Q1651833
@@ -5454,10 +5547,10 @@ place_name,dcid
 37129 Florida de Liébana,wikidataId/Q1768634
 37130 Forfoleda,wikidataId/Q976425
 37131 Frades de la Sierra,wikidataId/Q609783
-37132 Fregeneda,wikidataId/Q1768874
+"37132 Fregeneda, La",wikidataId/Q1768874
 37133 Fresnedoso,wikidataId/Q1768614
 37134 Fresno Alhándiga,wikidataId/Q1768628
-37135 Fuente de San Esteban,wikidataId/Q1637591
+"37135 Fuente de San Esteban, La",wikidataId/Q1637591
 37136 Fuenteguinaldo,wikidataId/Q1640604
 37137 Fuenteliante,wikidataId/Q1651789
 37138 Fuenterroble de Salvatierra,wikidataId/Q1650181
@@ -5484,7 +5577,7 @@ place_name,dcid
 37160 Hinojosa de Duero,wikidataId/Q1651850
 37161 Horcajo de Montemayor,wikidataId/Q1751962
 37162 Horcajo Medianero,wikidataId/Q1777903
-37163 Hoya,wikidataId/Q1777869
+"37163 Hoya, La",wikidataId/Q1777869
 37164 Huerta,wikidataId/Q2047711
 37165 Iruelos,wikidataId/Q1640609
 37166 Ituero de Azaba,wikidataId/Q258043
@@ -5498,21 +5591,21 @@ place_name,dcid
 37174 Macotera,wikidataId/Q570936
 37175 Machacón,wikidataId/Q1911047
 37176 Madroñal,wikidataId/Q11934538
-37177 Maíllo,wikidataId/Q1648527
+"37177 Maíllo, El",wikidataId/Q1648527
 37178 Malpartida,wikidataId/Q930465
 37179 Mancera de Abajo,wikidataId/Q1769823
-37180 Manzano,wikidataId/Q385056
+"37180 Manzano, El",wikidataId/Q385056
 37181 Martiago,wikidataId/Q1769438
 37182 Martinamor,wikidataId/Q1910968
 37183 Martín de Yeltes,wikidataId/Q1910944
 37184 Masueco,wikidataId/Q1640520
 37185 Castellanos de Villiquera,wikidataId/Q1640666
-37186 Mata de Ledesma,wikidataId/Q1910988
+"37186 Mata de Ledesma, La",wikidataId/Q1910988
 37187 Matilla de los Caños del Río,wikidataId/Q389043
-37188 Maya,wikidataId/Q1911038
+"37188 Maya, La",wikidataId/Q1911038
 37189 Membribe de la Sierra,wikidataId/Q1911024
 37190 Mieza,wikidataId/Q1770832
-37191 Milano,wikidataId/Q1648672
+"37191 Milano, El",wikidataId/Q1648672
 37192 Miranda de Azán,wikidataId/Q1911063
 37193 Miranda del Castañar,wikidataId/Q1769783
 37194 Mogarraz,wikidataId/Q1910893
@@ -5543,7 +5636,7 @@ place_name,dcid
 37221 Navasfrías,wikidataId/Q1646357
 37222 Negrilla de Palencia,wikidataId/Q530228
 37223 Olmedo de Camaces,wikidataId/Q1651764
-37224 Orbada,wikidataId/Q1651931
+"37224 Orbada, La",wikidataId/Q1651931
 37225 Pajares de la Laguna,wikidataId/Q1768506
 37226 Palacios del Arzobispo,wikidataId/Q1904682
 37228 Palaciosrubios,wikidataId/Q1768274
@@ -5552,16 +5645,16 @@ place_name,dcid
 37231 Parada de Rubiales,wikidataId/Q1768531
 37232 Paradinas de San Juan,wikidataId/Q1768542
 37233 Pastores,wikidataId/Q2198933
-37234 Payo,wikidataId/Q1646351
+"37234 Payo, El",wikidataId/Q1646351
 37235 Pedraza de Alba,wikidataId/Q1768537
 37236 Pedrosillo de Alba,wikidataId/Q1985323
 37237 Pedrosillo de los Aires,wikidataId/Q969988
 37238 Pedrosillo el Ralo,wikidataId/Q1768227
-37239 Pedroso de la Armuña,wikidataId/Q1768261
+"37239 Pedroso de la Armuña, El",wikidataId/Q1768261
 37240 Pelabravo,wikidataId/Q1768237
 37241 Pelarrodríguez,wikidataId/Q1983146
 37242 Pelayos,wikidataId/Q1983137
-37243 Peña,wikidataId/Q2265894
+"37243 Peña, La",wikidataId/Q2265894
 37244 Peñacaballera,wikidataId/Q1990929
 37245 Peñaparda,wikidataId/Q1764574
 37246 Peñaranda de Bracamonte,wikidataId/Q679766
@@ -5571,7 +5664,7 @@ place_name,dcid
 37250 Pereña de la Ribera,wikidataId/Q1755979
 37251 Peromingo,wikidataId/Q1990970
 37252 Pinedas,wikidataId/Q987409
-37253 Pino de Tormes,wikidataId/Q1769953
+"37253 Pino de Tormes, El",wikidataId/Q1769953
 37254 Pitiegua,wikidataId/Q1766589
 37255 Pizarral,wikidataId/Q1766748
 37256 Poveda de las Cintas,wikidataId/Q1766338
@@ -5584,15 +5677,14 @@ place_name,dcid
 37263 Puerto de Béjar,wikidataId/Q1904694
 37264 Puerto Seguro,wikidataId/Q1766763
 37265 Rágama,wikidataId/Q1769997
-37266 Redonda,wikidataId/Q1768833
+"37266 Redonda, La",wikidataId/Q1768833
 37267 Retortillo,wikidataId/Q1915106
-37268 Rinconada de la Sierra,wikidataId/Q1651943
+"37268 Rinconada de la Sierra, La",wikidataId/Q1651943
 37269 Robleda,wikidataId/Q1646395
 37270 Robliza de Cojos,wikidataId/Q1767853
 37271 Rollán,wikidataId/Q612729
 37272 Saelices el Chico,wikidataId/Q1766606
-37273 Sagrada,wikidataId/Q1910921
-37274 Salamanca,wikidataId/Q15695
+"37273 Sagrada, La",wikidataId/Q1910921
 37275 Saldeana,wikidataId/Q1904304
 37276 Salmoral,wikidataId/Q1766739
 37277 Salvatierra de Tormes,wikidataId/Q1766309
@@ -5617,31 +5709,31 @@ place_name,dcid
 37297 Santibáñez de Béjar,wikidataId/Q1766216
 37298 Santibáñez de la Sierra,wikidataId/Q1770816
 37299 Santiz,wikidataId/Q1906411
-37300 Santos,wikidataId/Q523428
+"37300 Santos, Los",wikidataId/Q523428
 37301 Sardón de los Frailes,wikidataId/Q1766065
 37302 Saucelle,wikidataId/Q1650196
-37303 Sahugo,wikidataId/Q1640123
+"37303 Sahugo, El",wikidataId/Q1640123
 37304 Sepulcro-Hilario,wikidataId/Q1990956
 37305 Sequeros,wikidataId/Q1766219
 37306 Serradilla del Arroyo,wikidataId/Q1766084
 37307 Serradilla del Llano,wikidataId/Q1905309
-37309 Sierpe,wikidataId/Q1020530
+"37309 Sierpe, La",wikidataId/Q1020530
 37310 Sieteiglesias de Tormes,wikidataId/Q1985314
 37311 Sobradillo,wikidataId/Q1905498
 37312 Sorihuela,wikidataId/Q24013230
 37313 Sotoserrano,wikidataId/Q1650210
 37314 Tabera de Abajo,wikidataId/Q1766858
-37315 Tala,wikidataId/Q1778027
+"37315 Tala, La",wikidataId/Q1778027
 37316 Tamames,wikidataId/Q1640615
 37317 Tarazona de Guareña,wikidataId/Q1648232
 37318 Tardáguila,wikidataId/Q1648252
-37319 Tejado,wikidataId/Q1648448
+"37319 Tejado, El",wikidataId/Q1648448
 37320 Tejeda y Segoyuela,wikidataId/Q1648391
 37321 Tenebrón,wikidataId/Q1766869
 37322 Terradillos,wikidataId/Q24010344
 37323 Topas,wikidataId/Q706558
 37324 Tordillos,wikidataId/Q1648261
-37325 Tornadizo,wikidataId/Q1640753
+"37325 Tornadizo, El",wikidataId/Q1640753
 37327 Torresmenudas,wikidataId/Q1648697
 37328 Trabanca,wikidataId/Q1648369
 37329 Tremedal de Tormes,wikidataId/Q519470
@@ -5661,10 +5753,10 @@ place_name,dcid
 37343 Vallejera de Riofrío,wikidataId/Q1766730
 37344 Vecinos,wikidataId/Q2047621
 37345 Vega de Tirados,wikidataId/Q1910902
-37346 Veguillas,wikidataId/Q1910932
-37347 Vellés,wikidataId/Q1769424
+"37346 Veguillas, Las",wikidataId/Q1910932
+"37347 Vellés, La",wikidataId/Q1769424
 37348 Ventosa del Río Almar,wikidataId/Q1766784
-37349 Vídola,wikidataId/Q1769454
+"37349 Vídola, La",wikidataId/Q1769454
 37350 Vilvestre,wikidataId/Q908671
 37351 Villaflores,wikidataId/Q636002
 37352 Villagonzalo de Tormes,wikidataId/Q1904710
@@ -5696,14 +5788,13 @@ place_name,dcid
 37378 Zamarra,wikidataId/Q1766933
 37379 Zamayón,wikidataId/Q2047612
 37380 Zarapicos,wikidataId/Q1767288
-37381 Zarza de Pumareda,wikidataId/Q1755960
+"37381 Zarza de Pumareda, La",wikidataId/Q1755960
 37382 Zorita de la Frontera,wikidataId/Q1766713
 38001 Adeje,wikidataId/Q353618
 38002 Agulo,wikidataId/Q398588
 38003 Alajeró,wikidataId/Q932914
 38004 Arafo,wikidataId/Q624967
 38005 Arico,wikidataId/Q657738
-38006 Arona,wikidataId/Q698246
 38007 Barlovento,wikidataId/Q433918
 38008 Breña Alta,wikidataId/Q433958
 38009 Breña Baja,wikidataId/Q433986
@@ -5714,44 +5805,41 @@ place_name,dcid
 38014 Fuencaliente de la Palma,wikidataId/Q434019
 38015 Garachico,wikidataId/Q612815
 38016 Garafía,wikidataId/Q24019147
-38017 Granadilla de Abona,wikidataId/Q943431
-38018 Guancha,wikidataId/Q983556
+"38018 Guancha, La",wikidataId/Q983556
 38019 Guía de Isora,wikidataId/Q765879
 38020 Güímar,wikidataId/Q983433
 38021 Hermigua,wikidataId/Q1260011
 38022 Icod de los Vinos,wikidataId/Q572542
-38023 San Cristóbal de La Laguna,wikidataId/Q54898
-38024 Llanos de Aridane,wikidataId/Q366948
-38025 Matanza de Acentejo,wikidataId/Q983577
-38026 Orotava,wikidataId/Q920391
-38027 Paso,wikidataId/Q434123
+"38024 Llanos de Aridane, Los",wikidataId/Q366948
+"38025 Matanza de Acentejo, La",wikidataId/Q983577
+"38026 Orotava, La",wikidataId/Q920391
+"38027 Paso, El",wikidataId/Q434123
 38028 Puerto de la Cruz,wikidataId/Q623549
 38029 Puntagorda,wikidataId/Q434150
 38030 Puntallana,wikidataId/Q434173
-38031 Realejos,wikidataId/Q953876
-38032 Rosario,wikidataId/Q11100824
+"38031 Realejos, Los",wikidataId/Q953876
+"38032 Rosario, El",wikidataId/Q11100824
 38033 San Andrés y Sauces,wikidataId/Q434192
 38034 San Juan de la Rambla,wikidataId/Q986364
 38035 San Miguel de Abona,wikidataId/Q677038
 38036 San Sebastián de la Gomera,wikidataId/Q512009
 38037 Santa Cruz de la Palma,wikidataId/Q433632
-38038 Santa Cruz de Tenerife,wikidataId/Q14328
 38039 Santa Úrsula,wikidataId/Q657800
 38040 Santiago del Teide,wikidataId/Q915283
-38041 Sauzal,wikidataId/Q782910
-38042 Silos,wikidataId/Q682964
+"38041 Sauzal, El",wikidataId/Q782910
+"38042 Silos, Los",wikidataId/Q682964
 38043 Tacoronte,wikidataId/Q944264
-38044 Tanque,wikidataId/Q770882
+"38044 Tanque, El",wikidataId/Q770882
 38045 Tazacorte,wikidataId/Q426350
 38046 Tegueste,wikidataId/Q985603
 38047 Tijarafe,wikidataId/Q434286
 38048 Valverde,wikidataId/Q1853429
 38049 Valle Gran Rey,wikidataId/Q584446
 38050 Vallehermoso,wikidataId/Q6122685
-38051 Victoria de Acentejo,wikidataId/Q985601
+"38051 Victoria de Acentejo, La",wikidataId/Q985601
 38052 Vilaflor de Chasna,wikidataId/Q985693
 38053 Villa de Mazo,wikidataId/Q434321
-38901 Pinar de El Hierro,wikidataId/Q1324548
+"38901 Pinar de El Hierro, El",wikidataId/Q1324548
 39001 Alfoz de Lloredo,wikidataId/Q1391437
 39002 Ampuero,wikidataId/Q1391463
 39003 Anievas,wikidataId/Q1443879
@@ -5759,7 +5847,7 @@ place_name,dcid
 39005 Argoños,wikidataId/Q1443853
 39006 Arnuero,wikidataId/Q1443906
 39007 Arredondo,wikidataId/Q949206
-39008 Astillero,wikidataId/Q1443915
+"39008 Astillero, El",wikidataId/Q1443915
 39009 Bárcena de Cicero,wikidataId/Q1443842
 39010 Bárcena de Pie de Concha,wikidataId/Q1606550
 39011 Bareyo,wikidataId/Q1443992
@@ -5776,7 +5864,7 @@ place_name,dcid
 39022 Cillorigo de Liébana,wikidataId/Q1443976
 39023 Colindres,wikidataId/Q1443892
 39024 Comillas,wikidataId/Q847329
-39025 Corrales de Buelna,wikidataId/Q1443867
+"39025 Corrales de Buelna, Los",wikidataId/Q1443867
 39026 Corvera de Toranzo,wikidataId/Q1606038
 39027 Campoo de Enmedio,wikidataId/Q1606639
 39028 Entrambasaguas,wikidataId/Q1635146
@@ -5816,7 +5904,7 @@ place_name,dcid
 39062 Ribamontán al Monte,wikidataId/Q1602418
 39063 Rionansa,wikidataId/Q1637447
 39064 Riotuerto,wikidataId/Q1643624
-39065 Rozas de Valdearroyo,wikidataId/Q1641165
+"39065 Rozas de Valdearroyo, Las",wikidataId/Q1641165
 39066 Ruente,wikidataId/Q644891
 39067 Ruesga,wikidataId/Q1637416
 39068 Ruiloba,wikidataId/Q1637406
@@ -5826,7 +5914,6 @@ place_name,dcid
 39072 San Roque de Riomiera,wikidataId/Q1641193
 39073 Santa Cruz de Bezana,wikidataId/Q950156
 39074 Santa María de Cayón,wikidataId/Q1603040
-39075 Santander,wikidataId/Q12233
 39076 Santillana del Mar,wikidataId/Q493817
 39077 Santiurde de Reinosa,wikidataId/Q1751777
 39078 Santiurde de Toranzo,wikidataId/Q1607337
@@ -5837,8 +5924,7 @@ place_name,dcid
 39083 Soba,wikidataId/Q1637400
 39084 Solórzano,wikidataId/Q944551
 39085 Suances,wikidataId/Q1615223
-39086 Tojos,wikidataId/Q1641160
-39087 Torrelavega,wikidataId/Q494693
+"39086 Tojos, Los",wikidataId/Q1641160
 39088 Tresviso,wikidataId/Q1623031
 39089 Tudanca,wikidataId/Q1984002
 39090 Udías,wikidataId/Q527241
@@ -5920,7 +6006,7 @@ place_name,dcid
 40073 Escalona del Prado,wikidataId/Q708381
 40074 Escarabajosa de Cabezas,wikidataId/Q1939129
 40075 Escobar de Polendos,wikidataId/Q1939245
-40076 Espinar,wikidataId/Q986735
+"40076 Espinar, El",wikidataId/Q986735
 40077 Espirdo,wikidataId/Q1939048
 40078 Fresneda de Cuéllar,wikidataId/Q1939012
 40079 Fresno de Cantespino,wikidataId/Q1939147
@@ -5942,7 +6028,7 @@ place_name,dcid
 40099 Honrubia de la Cuesta,wikidataId/Q1906382
 40100 Hontalbilla,wikidataId/Q1939207
 40101 Hontanares de Eresma,wikidataId/Q1919704
-40103 Huertos,wikidataId/Q24014513
+"40103 Huertos, Los",wikidataId/Q24014513
 40104 Ituero y Lama,wikidataId/Q1919261
 40105 Juarros de Riomoros,wikidataId/Q1905416
 40106 Juarros de Voltoya,wikidataId/Q1919336
@@ -5951,8 +6037,8 @@ place_name,dcid
 40109 Languilla,wikidataId/Q1948824
 40110 Lastras de Cuéllar,wikidataId/Q1948569
 40111 Lastras del Pozo,wikidataId/Q1919746
-40112 Lastrilla,wikidataId/Q1919663
-40113 Losa,wikidataId/Q2249245
+"40112 Lastrilla, La",wikidataId/Q1919663
+"40113 Losa, La",wikidataId/Q2249245
 40115 Maderuelo,wikidataId/Q1948893
 40118 Marazuela,wikidataId/Q1919615
 40119 Martín Miguel,wikidataId/Q1948760
@@ -5961,7 +6047,7 @@ place_name,dcid
 40122 Marugán,wikidataId/Q1948746
 40123 Matabuena,wikidataId/Q2249259
 40124 Mata de Cuéllar,wikidataId/Q1948843
-40125 Matilla,wikidataId/Q2359762
+"40125 Matilla, La",wikidataId/Q2359762
 40126 Melque de Cercos,wikidataId/Q508457
 40127 Membibre de la Hoz,wikidataId/Q1919709
 40128 Migueláñez,wikidataId/Q784611
@@ -6022,7 +6108,6 @@ place_name,dcid
 40191 Santo Tomé del Puerto,wikidataId/Q1917504
 40192 Sauquillo de Cabezas,wikidataId/Q1938346
 40193 Sebúlcor,wikidataId/Q1917492
-40194 Segovia,wikidataId/Q15684
 40195 Sepúlveda,wikidataId/Q1246441
 40196 Sequera de Fresno,wikidataId/Q945595
 40198 Sotillo,wikidataId/Q606669
@@ -6066,10 +6151,9 @@ place_name,dcid
 41001 Aguadulce,wikidataId/Q1623054
 41002 Alanís,wikidataId/Q254699
 41003 Albaida del Aljarafe,wikidataId/Q1465129
-41004 Alcalá de Guadaíra,wikidataId/Q494781
 41005 Alcalá del Río,wikidataId/Q1386351
 41006 Alcolea del Río,wikidataId/Q516549
-41007 Algaba,wikidataId/Q904151
+"41007 Algaba, La",wikidataId/Q904151
 41008 Algámitas,wikidataId/Q1605713
 41009 Almadén de la Plata,wikidataId/Q1605533
 41010 Almensilla,wikidataId/Q1623078
@@ -6082,9 +6166,9 @@ place_name,dcid
 41017 Bormujos,wikidataId/Q1605629
 41018 Brenes,wikidataId/Q24014391
 41019 Burguillos,wikidataId/Q1633443
-41020 Cabezas de San Juan,wikidataId/Q63052
+"41020 Cabezas de San Juan, Las",wikidataId/Q63052
 41021 Camas,wikidataId/Q24014388
-41022 Campana,wikidataId/Q63031
+"41022 Campana, La",wikidataId/Q63031
 41023 Cantillana,wikidataId/Q683023
 41024 Carmona,wikidataId/Q23986680
 41025 Carrión de los Céspedes,wikidataId/Q1447344
@@ -6093,19 +6177,18 @@ place_name,dcid
 41028 Castilleja de Guzmán,wikidataId/Q1628350
 41029 Castilleja de la Cuesta,wikidataId/Q24014381
 41030 Castilleja del Campo,wikidataId/Q1628373
-41031 Castillo de las Guardas,wikidataId/Q1447317
+"41031 Castillo de las Guardas, El",wikidataId/Q1447317
 41032 Cazalla de la Sierra,wikidataId/Q1445283
 41033 Constantina,wikidataId/Q949381
 41034 Coria del Río,wikidataId/Q1445412
 41035 Coripe,wikidataId/Q1605547
-41036 Coronil,wikidataId/Q1447700
-41037 Corrales,wikidataId/Q1627519
-41038 Dos Hermanas,wikidataId/Q489205
+"41036 Coronil, El",wikidataId/Q1447700
+"41037 Corrales, Los",wikidataId/Q1627519
 41039 Écija,wikidataId/Q273413
 41040 Espartinas,wikidataId/Q24014372
 41041 Estepa,wikidataId/Q966470
 41042 Fuentes de Andalucía,wikidataId/Q383897
-41043 Garrobo,wikidataId/Q972275
+"41043 Garrobo, El",wikidataId/Q972275
 41044 Gelves,wikidataId/Q24014368
 41045 Gerena,wikidataId/Q24014367
 41046 Gilena,wikidataId/Q24014366
@@ -6118,57 +6201,55 @@ place_name,dcid
 41053 Lebrija,wikidataId/Q261085
 41054 Lora de Estepa,wikidataId/Q1605597
 41055 Lora del Río,wikidataId/Q1161395
-41056 Luisiana,wikidataId/Q958972
-41057 Madroño,wikidataId/Q431308
+"41056 Luisiana, La",wikidataId/Q958972
+"41057 Madroño, El",wikidataId/Q431308
 41058 Mairena del Alcor,wikidataId/Q1628379
 41059 Mairena del Aljarafe,wikidataId/Q24014354
 41060 Marchena,wikidataId/Q929481
 41061 Marinaleda,wikidataId/Q671610
 41062 Martín de la Jara,wikidataId/Q1605621
-41063 Molares,wikidataId/Q1146804
+"41063 Molares, Los",wikidataId/Q1146804
 41064 Montellano,wikidataId/Q1605609
 41065 Morón de la Frontera,wikidataId/Q609094
-41066 Navas de la Concepción,wikidataId/Q595005
+"41066 Navas de la Concepción, Las",wikidataId/Q595005
 41067 Olivares,wikidataId/Q24014347
 41068 Osuna,wikidataId/Q24014346
-41069 Palacios y Villafranca,wikidataId/Q428954
+"41069 Palacios y Villafranca, Los",wikidataId/Q428954
 41070 Palomares del Río,wikidataId/Q1605692
 41071 Paradas,wikidataId/Q1146813
 41072 Pedrera,wikidataId/Q24014343
-41073 Pedroso,wikidataId/Q1445311
+"41073 Pedroso, El",wikidataId/Q1445311
 41074 Peñaflor,wikidataId/Q1637576
 41075 Pilas,wikidataId/Q1616138
 41076 Pruna,wikidataId/Q1605586
-41077 Puebla de Cazalla,wikidataId/Q1146831
-41078 Puebla de los Infantes,wikidataId/Q733989
-41079 Puebla del Río,wikidataId/Q1605737
-41080 Real de la Jara,wikidataId/Q1605678
-41081 Rinconada,wikidataId/Q1146785
-41082 Roda de Andalucía,wikidataId/Q1601705
-41083 Ronquillo,wikidataId/Q645364
-41084 Rubio,wikidataId/Q1445292
+"41077 Puebla de Cazalla, La",wikidataId/Q1146831
+"41078 Puebla de los Infantes, La",wikidataId/Q733989
+"41079 Puebla del Río, La",wikidataId/Q1605737
+"41080 Real de la Jara, El",wikidataId/Q1605678
+"41081 Rinconada, La",wikidataId/Q1146785
+"41082 Roda de Andalucía, La",wikidataId/Q1601705
+"41083 Ronquillo, El",wikidataId/Q645364
+"41084 Rubio, El",wikidataId/Q1445292
 41085 Salteras,wikidataId/Q1629807
 41086 San Juan de Aznalfarache,wikidataId/Q24014331
 41087 Sanlúcar la Mayor,wikidataId/Q1446577
 41088 San Nicolás del Puerto,wikidataId/Q943968
 41089 Santiponce,wikidataId/Q568278
-41090 Saucejo,wikidataId/Q1605562
-41091 Sevilla,wikidataId/Q8717
+"41090 Saucejo, El",wikidataId/Q1605562
 41092 Tocina,wikidataId/Q63004
 41093 Tomares,wikidataId/Q1447544
 41094 Umbrete,wikidataId/Q602485
-41095 Utrera,wikidataId/Q753825
 41096 Valencina de la Concepción,wikidataId/Q1603015
 41097 Villamanrique de la Condesa,wikidataId/Q1601699
 41098 Villanueva del Ariscal,wikidataId/Q1146794
 41099 Villanueva del Río y Minas,wikidataId/Q63041
 41100 Villanueva de San Juan,wikidataId/Q1442251
 41101 Villaverde del Río,wikidataId/Q63038
-41102 Viso del Alcor,wikidataId/Q969581
+"41102 Viso del Alcor, El",wikidataId/Q969581
 41901 Cañada Rosal,wikidataId/Q62859
 41902 Isla Mayor,wikidataId/Q1605575
-41903 Cuervo de Sevilla,wikidataId/Q62705
-41904 Palmar de Troya,wikidataId/Q1011422
+"41903 Cuervo de Sevilla, El",wikidataId/Q62705
+"41904 Palmar de Troya, El",wikidataId/Q1011422
 42001 Abejar,wikidataId/Q829271
 42003 Adradas,wikidataId/Q829225
 42004 Ágreda,wikidataId/Q39856
@@ -6180,7 +6261,7 @@ place_name,dcid
 42011 Aldealpozo,wikidataId/Q829635
 42012 Aldealseñor,wikidataId/Q829730
 42013 Aldehuela de Periáñez,wikidataId/Q830175
-42014 Aldehuelas,wikidataId/Q831729
+"42014 Aldehuelas, Las",wikidataId/Q831729
 42015 Alentisque,wikidataId/Q829197
 42016 Aliud,wikidataId/Q483532
 42017 Almajano,wikidataId/Q829600
@@ -6260,7 +6341,7 @@ place_name,dcid
 42100 Hinojosa del Campo,wikidataId/Q985573
 42103 Langa de Duero,wikidataId/Q835092
 42105 Liceras,wikidataId/Q834141
-42106 Losilla,wikidataId/Q837352
+"42106 Losilla, La",wikidataId/Q837352
 42107 Magaña,wikidataId/Q653876
 42108 Maján,wikidataId/Q830282
 42110 Matalebreras,wikidataId/Q834234
@@ -6286,22 +6367,22 @@ place_name,dcid
 42135 Oncala,wikidataId/Q832001
 42139 Pinilla del Campo,wikidataId/Q833342
 42140 Portillo de Soria,wikidataId/Q835212
-42141 Póveda de Soria,wikidataId/Q836392
+"42141 Póveda de Soria, La",wikidataId/Q836392
 42142 Pozalmuro,wikidataId/Q831210
 42144 Quintana Redonda,wikidataId/Q834281
 42145 Quintanas de Gormaz,wikidataId/Q836511
 42148 Quiñonería,wikidataId/Q835114
-42149 Rábanos,wikidataId/Q836396
+"42149 Rábanos, Los",wikidataId/Q836396
 42151 Rebollar,wikidataId/Q1764579
 42152 Recuerda,wikidataId/Q837567
 42153 Rello,wikidataId/Q1046930
 42154 Renieblas,wikidataId/Q836868
 42155 Retortillo de Soria,wikidataId/Q837197
 42156 Reznos,wikidataId/Q835537
-42157 Riba de Escalote,wikidataId/Q837301
+"42157 Riba de Escalote, La",wikidataId/Q837301
 42158 Rioseco de Soria,wikidataId/Q837702
 42159 Rollamienta,wikidataId/Q832706
-42160 Royo,wikidataId/Q56222
+"42160 Royo, El",wikidataId/Q56222
 42161 Salduero,wikidataId/Q832188
 42162 San Esteban de Gormaz,wikidataId/Q487352
 42163 San Felices,wikidataId/Q836806
@@ -6312,7 +6393,6 @@ place_name,dcid
 42168 Santa María de las Hoyas,wikidataId/Q837624
 42171 Serón de Nágima,wikidataId/Q833410
 42172 Soliedra,wikidataId/Q830913
-42173 Soria,wikidataId/Q12155
 42174 Sotillo del Rincón,wikidataId/Q834303
 42175 Suellacabras,wikidataId/Q486017
 42176 Tajahuerce,wikidataId/Q837609
@@ -6344,7 +6424,7 @@ place_name,dcid
 42207 Villar del Ala,wikidataId/Q832757
 42208 Villar del Campo,wikidataId/Q835134
 42209 Villar del Río,wikidataId/Q834010
-42211 Villares de Soria,wikidataId/Q836967
+"42211 Villares de Soria, Los",wikidataId/Q836967
 42212 Villasayas,wikidataId/Q831346
 42213 Villaseca de Arciel,wikidataId/Q835443
 42215 Vinuesa,wikidataId/Q830571
@@ -6354,21 +6434,21 @@ place_name,dcid
 42219 Yelo,wikidataId/Q834855
 43001 Aiguamúrcia,wikidataId/Q775757
 43002 Albinyana,wikidataId/Q1229289
-43003 Albiol,wikidataId/Q1229669
+"43003 Albiol, L'",wikidataId/Q1229669
 43004 Alcanar,wikidataId/Q24003535
 43005 Alcover,wikidataId/Q24015239
 43006 Aldover,wikidataId/Q24003552
-43007 Aleixar,wikidataId/Q1233410
+"43007 Aleixar, L'",wikidataId/Q1233410
 43008 Alfara de Carles,wikidataId/Q1228602
 43009 Alforja,wikidataId/Q771036
 43010 Alió,wikidataId/Q983582
 43011 Almoster,wikidataId/Q542633
 43012 Altafulla,wikidataId/Q24003596
-43013 Ametlla de Mar,wikidataId/Q54780
+"43013 Ametlla de Mar, L'",wikidataId/Q54780
 43014 Amposta,wikidataId/Q477311
 43015 Arbolí,wikidataId/Q1232065
-43016 Arboç,wikidataId/Q1233527
-43017 Argentera,wikidataId/Q1231311
+"43016 Arboç, L'",wikidataId/Q1233527
+"43017 Argentera, L'",wikidataId/Q1231311
 43018 Arnes,wikidataId/Q24002984
 43019 Ascó,wikidataId/Q723440
 43020 Banyeres del Penedès,wikidataId/Q1228578
@@ -6378,11 +6458,11 @@ place_name,dcid
 43024 Bellvei,wikidataId/Q1230086
 43025 Benifallet,wikidataId/Q1228593
 43026 Benissanet,wikidataId/Q607737
-43027 Bisbal de Falset,wikidataId/Q651003
-43028 Bisbal del Penedès,wikidataId/Q1229658
+"43027 Bisbal de Falset, La",wikidataId/Q651003
+"43028 Bisbal del Penedès, La",wikidataId/Q1229658
 43029 Blancafort,wikidataId/Q654198
 43030 Bonastre,wikidataId/Q24002695
-43031 Borges del Camp,wikidataId/Q1230160
+"43031 Borges del Camp, Les",wikidataId/Q1230160
 43032 Bot,wikidataId/Q24015230
 43033 Botarell,wikidataId/Q1248482
 43034 Bràfim,wikidataId/Q680718
@@ -6394,8 +6474,8 @@ place_name,dcid
 43040 Capçanes,wikidataId/Q509226
 43041 Caseres,wikidataId/Q771963
 43042 Castellvell del Camp,wikidataId/Q1230080
-43043 Catllar,wikidataId/Q594741
-43044 Sénia,wikidataId/Q704847
+"43043 Catllar, El",wikidataId/Q594741
+"43044 Sénia, La",wikidataId/Q704847
 43045 Colldejou,wikidataId/Q24002154
 43046 Conesa,wikidataId/Q1248512
 43047 Constantí,wikidataId/Q550210
@@ -6405,25 +6485,25 @@ place_name,dcid
 43051 Cunit,wikidataId/Q474489
 43052 Xerta,wikidataId/Q746392
 43053 Duesaigües,wikidataId/Q537265
-43054 Espluga de Francolí,wikidataId/Q1229283
+"43054 Espluga de Francolí, L'",wikidataId/Q1229283
 43055 Falset,wikidataId/Q24001351
-43056 Fatarella,wikidataId/Q985590
-43057 Febró,wikidataId/Q374761
-43058 Figuera,wikidataId/Q985602
+"43056 Fatarella, La",wikidataId/Q985590
+"43057 Febró, La",wikidataId/Q374761
+"43058 Figuera, La",wikidataId/Q985602
 43059 Figuerola del Camp,wikidataId/Q367969
 43060 Flix,wikidataId/Q24001404
 43061 Forès,wikidataId/Q1230137
 43062 Freginals,wikidataId/Q1247246
-43063 Galera,wikidataId/Q531755
+"43063 Galera, La",wikidataId/Q531755
 43064 Gandesa,wikidataId/Q773369
 43065 Garcia,wikidataId/Q24001026
-43066 Garidellss,wikidataId/Q1228586
+"43066 Garidells, Els",wikidataId/Q1228586
 43067 Ginestar,wikidataId/Q683434
 43068 Godall,wikidataId/Q24001105
 43069 Gratallops,wikidataId/Q1233563
-43070 Guiametss,wikidataId/Q1230107
+"43070 Guiamets, Els",wikidataId/Q1230107
 43071 Horta de Sant Joan,wikidataId/Q603155
-43072 Lloar,wikidataId/Q1233519
+"43072 Lloar, El",wikidataId/Q1233519
 43073 Llorac,wikidataId/Q770259
 43074 Llorenç del Penedès,wikidataId/Q653309
 43075 Margalef,wikidataId/Q23995578
@@ -6431,39 +6511,39 @@ place_name,dcid
 43077 Mas de Barberans,wikidataId/Q659333
 43078 Masdenverge,wikidataId/Q766912
 43079 Masllorenç,wikidataId/Q1230125
-43080 Masó,wikidataId/Q23996055
+"43080 Masó, La",wikidataId/Q23996055
 43081 Maspujols,wikidataId/Q534007
-43082 Masroig,wikidataId/Q667949
-43083 Milà,wikidataId/Q490
+"43082 Masroig, El",wikidataId/Q667949
+"43083 Milà, El",wikidataId/Q490
 43084 Miravet,wikidataId/Q24015211
-43085 Molar,wikidataId/Q37419614
+"43085 Molar, El",wikidataId/Q37419614
 43086 Montblanc,wikidataId/Q761735
 43088 Montbrió del Camp,wikidataId/Q1242365
 43089 Montferri,wikidataId/Q983580
-43090 Montmell,wikidataId/Q389164
+"43090 Montmell, El",wikidataId/Q389164
 43091 Mont-ral,wikidataId/Q745771
 43092 Mont-roig del Camp,wikidataId/Q929794
 43093 Móra d'Ebre,wikidataId/Q926784
 43094 Móra la Nova,wikidataId/Q1233555
-43095 Morell,wikidataId/Q545317
-43096 Morera de Montsant,wikidataId/Q936670
-43097 Nou de Gaià,wikidataId/Q1248501
+"43095 Morell, El",wikidataId/Q545317
+"43096 Morera de Montsant, La",wikidataId/Q936670
+"43097 Nou de Gaià, La",wikidataId/Q1248501
 43098 Nulles,wikidataId/Q23994070
-43099 Palma d'Ebre,wikidataId/Q1233435
-43100 Pallaresoss,wikidataId/Q596705
+"43099 Palma d'Ebre, La",wikidataId/Q1233435
+"43100 Pallaresos, Els",wikidataId/Q596705
 43101 Passanant i Belltall,wikidataId/Q1248489
 43102 Paüls,wikidataId/Q746275
 43103 Perafort,wikidataId/Q531967
-43104 Perelló,wikidataId/Q23993769
-43105 Piles,wikidataId/Q1248557
-43106 Pinell de Brai,wikidataId/Q985597
+"43104 Perelló, El",wikidataId/Q23993769
+"43105 Piles, Les",wikidataId/Q1248557
+"43106 Pinell de Brai, El",wikidataId/Q985597
 43107 Pira,wikidataId/Q1248551
-43108 Pla de Santa Maria,wikidataId/Q267805
-43109 Pobla de Mafumet,wikidataId/Q1248541
-43110 Pobla de Massaluca,wikidataId/Q1233513
-43111 Pobla de Montornès,wikidataId/Q638814
+"43108 Pla de Santa Maria, El",wikidataId/Q267805
+"43109 Pobla de Mafumet, La",wikidataId/Q1248541
+"43110 Pobla de Massaluca, La",wikidataId/Q1233513
+"43111 Pobla de Montornès, La",wikidataId/Q638814
 43112 Poboleda,wikidataId/Q549598
-43113 Pont d'Armentera,wikidataId/Q983585
+"43113 Pont d'Armentera, El",wikidataId/Q983585
 43114 Porrera,wikidataId/Q1248500
 43115 Pradell de la Teixeta,wikidataId/Q1233450
 43116 Prades,wikidataId/Q67131289
@@ -6473,10 +6553,9 @@ place_name,dcid
 43120 Querol,wikidataId/Q927992
 43121 Rasquera,wikidataId/Q1233548
 43122 Renau,wikidataId/Q23992937
-43123 Reus,wikidataId/Q487096
-43124 Riba,wikidataId/Q280721
+"43124 Riba, La",wikidataId/Q280721
 43125 Riba-roja d'Ebre,wikidataId/Q1229607
-43126 Riera de Gaià,wikidataId/Q1917540
+"43126 Riera de Gaià, La",wikidataId/Q1917540
 43127 Riudecanyes,wikidataId/Q913304
 43128 Riudecols,wikidataId/Q24024957
 43129 Riudoms,wikidataId/Q679015
@@ -6484,9 +6563,9 @@ place_name,dcid
 43131 Roda de Berà,wikidataId/Q23993083
 43132 Rodonyà,wikidataId/Q668502
 43133 Roquetes,wikidataId/Q762516
-43134 Rourell,wikidataId/Q1229633
+"43134 Rourell, El",wikidataId/Q1229633
 43135 Salomó,wikidataId/Q779424
-43136 Ràpita,wikidataId/Q767011
+"43136 Ràpita, La",wikidataId/Q767011
 43137 Sant Jaume dels Domenys,wikidataId/Q1228543
 43138 Santa Bàrbara,
 43139 Santa Coloma de Queralt,wikidataId/Q669570
@@ -6494,15 +6573,14 @@ place_name,dcid
 43141 Pontils,wikidataId/Q1248581
 43142 Sarral,wikidataId/Q1995219
 43143 Savallà del Comtat,wikidataId/Q739975
-43144 Secuita,wikidataId/Q1230093
-43145 Selva del Camp,wikidataId/Q1230100
+"43144 Secuita, La",wikidataId/Q1230093
+"43145 Selva del Camp, La",wikidataId/Q1230100
 43146 Senan,wikidataId/Q33197
 43147 Solivella,wikidataId/Q1248497
-43148 Tarragona,wikidataId/Q15088
 43149 Tivenys,wikidataId/Q23991151
 43150 Tivissa,wikidataId/Q1230055
-43151 Torre de Fontaubella,wikidataId/Q1917548
-43152 Torre de l'Espanyol,wikidataId/Q1233485
+"43151 Torre de Fontaubella, La",wikidataId/Q1917548
+"43152 Torre de l'Espanyol, La",wikidataId/Q1233485
 43153 Torredembarra,wikidataId/Q995637
 43154 Torroja del Priorat,wikidataId/Q745357
 43155 Tortosa,wikidataId/Q12812
@@ -6513,7 +6591,7 @@ place_name,dcid
 43160 Vallmoll,wikidataId/Q576658
 43161 Valls,wikidataId/Q23991860
 43162 Vandellòs i l'Hospitalet de l'Infant,wikidataId/Q983564
-43163 Vendrell,wikidataId/Q929759
+"43163 Vendrell, El",wikidataId/Q929759
 43164 Vespella de Gaià,wikidataId/Q1233504
 43165 Vilabella,wikidataId/Q23990461
 43166 Vilallonga del Camp,wikidataId/Q1189985
@@ -6523,8 +6601,8 @@ place_name,dcid
 43170 Vila-rodona,wikidataId/Q651853
 43171 Vila-seca,wikidataId/Q23991984
 43172 Vilaverd,wikidataId/Q931134
-43173 Vilella Alta,wikidataId/Q761878
-43174 Vilella Baixa,wikidataId/Q1233422
+"43173 Vilella Alta, La",wikidataId/Q761878
+"43174 Vilella Baixa, La",wikidataId/Q1233422
 43175 Vilalba dels Arcs,wikidataId/Q676746
 43176 Vimbodí i Poblet,wikidataId/Q776730
 43177 Vinebre,wikidataId/Q1248533
@@ -6532,10 +6610,10 @@ place_name,dcid
 43901 Deltebre,wikidataId/Q24015201
 43902 Sant Jaume d'Enveja,wikidataId/Q1010257
 43903 Camarles,wikidataId/Q1229298
-43904 Aldea,wikidataId/Q983575
+"43904 Aldea, L'",wikidataId/Q983575
 43905 Salou,wikidataId/Q662789
-43906 Ampolla,wikidataId/Q23999646
-43907 Canonja,wikidataId/Q1245507
+"43906 Ampolla, L'",wikidataId/Q23999646
+"43907 Canonja, La",wikidataId/Q1245507
 44001 Ababuj,wikidataId/Q594888
 44002 Abejuela,wikidataId/Q692805
 44003 Aguatón,wikidataId/Q1657152
@@ -6592,7 +6670,7 @@ place_name,dcid
 44056 Caminreal,wikidataId/Q1653275
 44059 Cantavieja,wikidataId/Q633345
 44060 Cañada de Benatanduz,wikidataId/Q378331
-44061 Cañada de Verich,wikidataId/Q1553963
+"44061 Cañada de Verich, La",wikidataId/Q1553963
 44062 Cañada Vellida,wikidataId/Q1653436
 44063 Cañizar del Olivar,wikidataId/Q1651612
 44064 Cascante del Río,wikidataId/Q1652429
@@ -6600,22 +6678,22 @@ place_name,dcid
 44066 Castel de Cabra,wikidataId/Q1653519
 44067 Castelnou,wikidataId/Q1641444
 44068 Castelserás,wikidataId/Q932738
-44070 Castellar,wikidataId/Q1651555
+"44070 Castellar, El",wikidataId/Q1651555
 44071 Castellote,wikidataId/Q1653421
 44074 Cedrillas,wikidataId/Q1653295
 44075 Celadas,wikidataId/Q1653414
 44076 Cella,wikidataId/Q1651638
-44077 Cerollera,wikidataId/Q1651537
-44080 Codoñera,wikidataId/Q1651558
+"44077 Cerollera, La",wikidataId/Q1651537
+"44080 Codoñera, La",wikidataId/Q1651558
 44082 Corbalán,wikidataId/Q1653320
 44084 Cortes de Aragón,wikidataId/Q2047697
 44085 Cosa,wikidataId/Q1765419
 44086 Cretas,wikidataId/Q1652414
 44087 Crivillén,wikidataId/Q24015133
-44088 Cuba,wikidataId/Q164133
+"44088 Cuba, La",wikidataId/Q164133
 44089 Cubla,wikidataId/Q1644054
 44090 Cucalón,wikidataId/Q632938
-44092 Cuervo,wikidataId/Q1651621
+"44092 Cuervo, El",wikidataId/Q1651621
 44093 Cuevas de Almudén,wikidataId/Q1652401
 44094 Cuevas Labradas,wikidataId/Q1910978
 44096 Ejulve,wikidataId/Q512992
@@ -6628,7 +6706,7 @@ place_name,dcid
 44105 Fórnoles,wikidataId/Q2409408
 44106 Fortanete,wikidataId/Q1768071
 44107 Foz-Calanda,wikidataId/Q1768500
-44108 Fresneda,wikidataId/Q1651574
+"44108 Fresneda, La",wikidataId/Q1651574
 44109 Frías de Albarracín,wikidataId/Q1653290
 44110 Fuenferrada,wikidataId/Q1653283
 44111 Fuentes Calientes,wikidataId/Q1653451
@@ -6638,15 +6716,15 @@ place_name,dcid
 44115 Galve,wikidataId/Q24015111
 44116 Gargallo,wikidataId/Q1651564
 44117 Gea de Albarracín,wikidataId/Q1651465
-44118 Ginebrosa,wikidataId/Q1651455
+"44118 Ginebrosa, La",wikidataId/Q1651455
 44119 Griegos,wikidataId/Q1768867
 44120 Guadalaviar,wikidataId/Q369450
 44121 Gúdar,wikidataId/Q1651459
 44122 Híjar,wikidataId/Q1228427
 44123 Hinojosa de Jarque,wikidataId/Q1651546
-44124 Hoz de la Vieja,wikidataId/Q1651561
+"44124 Hoz de la Vieja, La",wikidataId/Q1651561
 44125 Huesa del Común,wikidataId/Q736928
-44126 Iglesuela del Cid,wikidataId/Q1651517
+"44126 Iglesuela del Cid, La",wikidataId/Q1651517
 44127 Jabaloyas,wikidataId/Q1651551
 44128 Jarque de la Val,wikidataId/Q1651542
 44129 Jatiel,wikidataId/Q1632887
@@ -6663,7 +6741,7 @@ place_name,dcid
 44143 Manzanera,wikidataId/Q24015089
 44144 Martín del Río,wikidataId/Q24015088
 44145 Mas de las Matas,wikidataId/Q1651220
-44146 Mata de los Olmos,wikidataId/Q978004
+"44146 Mata de los Olmos, La",wikidataId/Q978004
 44147 Mazaleón,wikidataId/Q1651159
 44148 Mezquita de Jarque,wikidataId/Q1650810
 44149 Mirambel,wikidataId/Q24004400
@@ -6687,24 +6765,24 @@ place_name,dcid
 44169 Ojos Negros,wikidataId/Q1651233
 44171 Olba,wikidataId/Q1768253
 44172 Oliete,wikidataId/Q675071
-44173 Olmos,wikidataId/Q1651475
+"44173 Olmos, Los",wikidataId/Q1651475
 44174 Orihuela del Tremedal,wikidataId/Q574951
 44175 Orrios,wikidataId/Q1651042
 44176 Palomar de Arroyos,wikidataId/Q960386
 44177 Pancrudo,wikidataId/Q543479
-44178 Parras de Castellote,wikidataId/Q1651577
+"44178 Parras de Castellote, Las",wikidataId/Q1651577
 44179 Peñarroya de Tastavins,wikidataId/Q539588
 44180 Peracense,wikidataId/Q1651273
 44181 Peralejos,wikidataId/Q591930
 44182 Perales del Alfambra,wikidataId/Q1644096
 44183 Pitarque,wikidataId/Q1767398
 44184 Plou,wikidataId/Q963212
-44185 Pobo,wikidataId/Q1651647
-44187 Portellada,wikidataId/Q1651470
+"44185 Pobo, El",wikidataId/Q1651647
+"44187 Portellada, La",wikidataId/Q1651470
 44189 Pozondón,wikidataId/Q1552403
 44190 Pozuel del Campo,wikidataId/Q1651254
-44191 Puebla de Híjar,wikidataId/Q1644852
-44192 Puebla de Valverde,wikidataId/Q513918
+"44191 Puebla de Híjar, La",wikidataId/Q1644852
+"44192 Puebla de Valverde, La",wikidataId/Q513918
 44193 Puertomingalvo,wikidataId/Q1651188
 44194 Ráfales,wikidataId/Q1651261
 44195 Rillo,wikidataId/Q1651270
@@ -6726,7 +6804,6 @@ place_name,dcid
 44212 Seno,wikidataId/Q1910912
 44213 Singra,wikidataId/Q1908280
 44215 Terriente,wikidataId/Q1650823
-44216 Teruel,wikidataId/Q14336
 44217 Toril y Masegoso,wikidataId/Q1651247
 44218 Tormón,wikidataId/Q1641534
 44219 Tornos,wikidataId/Q24015030
@@ -6756,7 +6833,7 @@ place_name,dcid
 44245 Valdeltormo,wikidataId/Q1650770
 44246 Valderrobres,wikidataId/Q1641285
 44247 Valjunquera,wikidataId/Q1651425
-44249 Vallecillo,wikidataId/Q1641145
+"44249 Vallecillo, El",wikidataId/Q1641145
 44250 Veguillas de la Sierra,wikidataId/Q1650911
 44251 Villafranca del Campo,wikidataId/Q960090
 44252 Villahermosa del Campo,wikidataId/Q302820
@@ -6771,7 +6848,7 @@ place_name,dcid
 44265 Vinaceite,wikidataId/Q1641492
 44266 Visiedo,wikidataId/Q1651431
 44267 Vivel del Río Martín,wikidataId/Q1650738
-44268 Zoma,wikidataId/Q774593
+"44268 Zoma, La",wikidataId/Q774593
 45001 Ajofrín,wikidataId/Q1607371
 45002 Alameda de la Sagra,wikidataId/Q1610119
 45003 Albarreal de Tajo,wikidataId/Q1641519
@@ -6804,21 +6881,21 @@ place_name,dcid
 45030 Calzada de Oropesa,wikidataId/Q979973
 45031 Camarena,wikidataId/Q763344
 45032 Camarenilla,wikidataId/Q969339
-45033 Campillo de la Jara,wikidataId/Q1750768
+"45033 Campillo de la Jara, El",wikidataId/Q1750768
 45034 Camuñas,wikidataId/Q1628637
 45035 Cardiel de los Montes,wikidataId/Q1642068
 45036 Carmena,wikidataId/Q1641218
-45037 Carpio de Tajo,wikidataId/Q956538
+"45037 Carpio de Tajo, El",wikidataId/Q956538
 45038 Carranque,wikidataId/Q1642057
 45039 Carriches,wikidataId/Q1644871
-45040 Casar de Escalona,wikidataId/Q1644302
+"45040 Casar de Escalona, El",wikidataId/Q1644302
 45041 Casarrubios del Monte,wikidataId/Q1628648
 45042 Casasbuenas,wikidataId/Q427980
 45043 Castillo de Bayuela,wikidataId/Q1641508
 45045 Cazalegas,wikidataId/Q1631908
 45046 Cebolla,wikidataId/Q1641230
 45047 Cedillo del Condado,wikidataId/Q1628809
-45048 Cerralbos,wikidataId/Q14969
+"45048 Cerralbos, Los",wikidataId/Q14969
 45049 Cervera de los Montes,wikidataId/Q1632182
 45050 Ciruelos,wikidataId/Q1769619
 45051 Cobeja,wikidataId/Q1631925
@@ -6835,21 +6912,21 @@ place_name,dcid
 45062 Escalonilla,wikidataId/Q1630044
 45063 Espinoso del Rey,wikidataId/Q1656589
 45064 Esquivias,wikidataId/Q1630025
-45065 Estrella,wikidataId/Q520287
+"45065 Estrella, La",wikidataId/Q520287
 45066 Fuensalida,wikidataId/Q1630082
 45067 Gálvez,wikidataId/Q1757664
 45068 Garciotum,wikidataId/Q1641310
 45069 Gerindote,wikidataId/Q371770
 45070 Guadamur,wikidataId/Q1628564
-45071 Guardia,wikidataId/Q1632869
-45072 Herencias,wikidataId/Q1641578
+"45071 Guardia, La",wikidataId/Q1632869
+"45072 Herencias, Las",wikidataId/Q1641578
 45073 Herreruela de Oropesa,wikidataId/Q1641932
 45074 Hinojosa de San Vicente,wikidataId/Q1642024
 45075 Hontanar,wikidataId/Q1632967
 45076 Hormigos,wikidataId/Q776190
 45077 Huecas,wikidataId/Q1642044
 45078 Huerta de Valdecarábanos,wikidataId/Q269384
-45079 Iglesuela del Tiétar,wikidataId/Q608199
+"45079 Iglesuela del Tiétar, La",wikidataId/Q608199
 45080 Illán de Vacas,wikidataId/Q1381577
 45081 Illescas,wikidataId/Q1606474
 45082 Lagartera,wikidataId/Q1631982
@@ -6865,7 +6942,7 @@ place_name,dcid
 45092 Marjaliza,wikidataId/Q1641298
 45093 Marrupe,wikidataId/Q1641320
 45094 Mascaraque,wikidataId/Q923358
-45095 Mata,wikidataId/Q1990945
+"45095 Mata, La",wikidataId/Q1990945
 45096 Mazarambroz,wikidataId/Q1630055
 45097 Mejorada,wikidataId/Q1629664
 45098 Menasalbas,wikidataId/Q1628818
@@ -6878,12 +6955,12 @@ place_name,dcid
 45105 Montesclaros,wikidataId/Q922095
 45106 Mora,wikidataId/Q1641529
 45107 Nambroca,wikidataId/Q1628866
-45108 Nava de Ricomalillo,wikidataId/Q366953
+"45108 Nava de Ricomalillo, La",wikidataId/Q366953
 45109 Navahermosa,wikidataId/Q1752306
 45110 Navalcán,wikidataId/Q1628839
 45111 Navalmoralejo,wikidataId/Q1628828
-45112 Navalmorales,wikidataId/Q1610108
-45113 Navalucillos,wikidataId/Q1628574
+"45112 Navalmorales, Los",wikidataId/Q1610108
+"45113 Navalucillos, Los",wikidataId/Q1628574
 45114 Navamorcuende,wikidataId/Q634207
 45115 Noblejas,wikidataId/Q1610115
 45116 Noez,wikidataId/Q1641701
@@ -6905,21 +6982,21 @@ place_name,dcid
 45132 Pepino,wikidataId/Q1983979
 45133 Polán,wikidataId/Q1628547
 45134 Portillo de Toledo,wikidataId/Q1445321
-45135 Puebla de Almoradiel,wikidataId/Q662180
-45136 Puebla de Montalbán,wikidataId/Q537779
-45137 Pueblanueva,wikidataId/Q1628882
-45138 Puente del Arzobispo,wikidataId/Q1628788
+"45135 Puebla de Almoradiel, La",wikidataId/Q662180
+"45136 Puebla de Montalbán, La",wikidataId/Q537779
+"45137 Pueblanueva, La",wikidataId/Q1628882
+"45138 Puente del Arzobispo, El",wikidataId/Q1628788
 45139 Puerto de San Vicente,wikidataId/Q1630986
 45140 Pulgar,wikidataId/Q23983027
 45141 Quero,wikidataId/Q1769410
 45142 Quintanar de la Orden,wikidataId/Q1628531
 45143 Quismondo,wikidataId/Q929656
-45144 Real de San Vicente,wikidataId/Q542936
+"45144 Real de San Vicente, El",wikidataId/Q542936
 45145 Recas,wikidataId/Q686635
 45146 Retamoso de la Jara,wikidataId/Q1751205
 45147 Rielves,wikidataId/Q1642096
 45148 Robledo del Mazo,wikidataId/Q1641989
-45149 Romeral,wikidataId/Q1656613
+"45149 Romeral, El",wikidataId/Q1656613
 45150 San Bartolomé de las Abiertas,wikidataId/Q1641133
 45151 San Martín de Montalbán,wikidataId/Q1640784
 45152 San Martín de Pusa,wikidataId/Q1641416
@@ -6935,13 +7012,11 @@ place_name,dcid
 45162 Sevilleja de la Jara,wikidataId/Q1628453
 45163 Sonseca,wikidataId/Q1628387
 45164 Sotillo de las Palomas,wikidataId/Q1641964
-45165 Talavera de la Reina,wikidataId/Q181359
 45166 Tembleque,wikidataId/Q1313265
-45167 Toboso,wikidataId/Q1628505
-45168 Toledo,wikidataId/Q5836
+"45167 Toboso, El",wikidataId/Q1628505
 45169 Torralba de Oropesa,wikidataId/Q589950
 45170 Torrecilla de la Jara,wikidataId/Q1641481
-45171 Torre de Esteban Hambrán,wikidataId/Q948677
+"45171 Torre de Esteban Hambrán, La",wikidataId/Q948677
 45172 Torrico,wikidataId/Q524598
 45173 Torrijos,wikidataId/Q919055
 45174 Totanés,wikidataId/Q923282
@@ -6951,11 +7026,11 @@ place_name,dcid
 45179 Valdeverdeja,wikidataId/Q728504
 45180 Valmojado,wikidataId/Q1630794
 45181 Velada,wikidataId/Q1628847
-45182 Ventas con Peña Aguilera,wikidataId/Q1631954
-45183 Ventas de Retamosa,wikidataId/Q1644829
-45184 Ventas de San Julián,wikidataId/Q1632890
+"45182 Ventas con Peña Aguilera, Las",wikidataId/Q1631954
+"45183 Ventas de Retamosa, Las",wikidataId/Q1644829
+"45184 Ventas de San Julián, Las",wikidataId/Q1632890
 45185 Villacañas,wikidataId/Q659416
-45186 Villa de Don Fadrique,wikidataId/Q1631965
+"45186 Villa de Don Fadrique, La",wikidataId/Q1631965
 45187 Villafranca de los Caballeros,wikidataId/Q1629782
 45188 Villaluenga de la Sagra,wikidataId/Q584333
 45189 Villamiel de Toledo,wikidataId/Q1629276
@@ -6968,8 +7043,8 @@ place_name,dcid
 45196 Villaseca de la Sagra,wikidataId/Q1628513
 45197 Villasequilla,wikidataId/Q1610090
 45198 Villatobas,wikidataId/Q616392
-45199 Viso de San Juan,wikidataId/Q547904
-45200 Yébenes,wikidataId/Q1631881
+"45199 Viso de San Juan, El",wikidataId/Q547904
+"45200 Yébenes, Los",wikidataId/Q1631881
 45201 Yeles,wikidataId/Q1629195
 45202 Yepes,wikidataId/Q1442903
 45203 Yuncler,wikidataId/Q1628522
@@ -6994,8 +7069,8 @@ place_name,dcid
 46016 Alcàntera de Xúquer,wikidataId/Q664697
 46017 Alzira,wikidataId/Q931780
 46018 Alcublas,wikidataId/Q603269
-46019 Alcúdia,wikidataId/Q2044406
-46020 Alcúdia de Crespins,wikidataId/Q1905388
+"46019 Alcúdia, l'",wikidataId/Q2044406
+"46020 Alcúdia de Crespins, l'",wikidataId/Q1905388
 46021 Aldaia,wikidataId/Q368431
 46022 Alfafar,wikidataId/Q1648851
 46023 Alfauir,wikidataId/Q1917880
@@ -7012,7 +7087,7 @@ place_name,dcid
 46034 Almoines,wikidataId/Q1650138
 46035 Almussafes,wikidataId/Q1770040
 46036 Alpuente,wikidataId/Q23988889
-46037 Alqueria de la Comtessa,wikidataId/Q1919237
+"46037 Alqueria de la Comtessa, l'",wikidataId/Q1919237
 46038 Andilla,wikidataId/Q1917947
 46039 Anna,wikidataId/Q1824255
 46040 Antella,wikidataId/Q1437249
@@ -7091,10 +7166,10 @@ place_name,dcid
 46113 Daimús,wikidataId/Q974889
 46114 Domeño,wikidataId/Q1998540
 46115 Dos Aguas,wikidataId/Q680697
-46116 Eliana,wikidataId/Q1998520
+"46116 Eliana, l'",wikidataId/Q1998520
 46117 Emperador,wikidataId/Q2045916
 46118 Enguera,wikidataId/Q24017179
-46119 Énova,wikidataId/Q2264712
+"46119 Énova, l'",wikidataId/Q2264712
 46120 Estivella,wikidataId/Q1989401
 46121 Estubeny,wikidataId/Q1998575
 46122 Faura,wikidataId/Q762373
@@ -7102,17 +7177,16 @@ place_name,dcid
 46124 Fontanars dels Alforins,wikidataId/Q1998529
 46125 Fortaleny,wikidataId/Q2264681
 46126 Foios,wikidataId/Q668117
-46127 Font d'en Carròs,wikidataId/Q2041807
-46128 Font de la Figuera,wikidataId/Q24017173
+"46127 Font d'en Carròs, la",wikidataId/Q2041807
+"46128 Font de la Figuera, la",wikidataId/Q24017173
 46129 Fuenterrobles,wikidataId/Q1993414
 46130 Gavarda,wikidataId/Q957982
-46131 Gandia,wikidataId/Q33532
-46132 Genovés,wikidataId/Q1993407
+"46132 Genovés, el",wikidataId/Q1993407
 46133 Gestalgar,wikidataId/Q574179
 46134 Gilet,wikidataId/Q55839
 46135 Godella,wikidataId/Q1982756
 46136 Godelleta,wikidataId/Q104483
-46137 Granja de la Costera,wikidataId/Q2269606
+"46137 Granja de la Costera, la",wikidataId/Q2269606
 46138 Guadasséquies,wikidataId/Q2264659
 46139 Guadassuar,wikidataId/Q1312621
 46140 Guardamar de la Safor,wikidataId/Q2264723
@@ -7132,7 +7206,7 @@ place_name,dcid
 46154 Llanera de Ranes,wikidataId/Q1807484
 46155 Llaurí,wikidataId/Q2041947
 46156 Llombai,wikidataId/Q23984666
-46157 Llosa de Ranes,wikidataId/Q524464
+"46157 Llosa de Ranes, la",wikidataId/Q524464
 46158 Macastre,wikidataId/Q23068
 46159 Manises,wikidataId/Q1648590
 46160 Manuel,wikidataId/Q2264689
@@ -7158,13 +7232,13 @@ place_name,dcid
 46180 Novetlè,wikidataId/Q2041843
 46181 Oliva,wikidataId/Q55526462
 46182 Olocau,wikidataId/Q122208
-46183 Olleria,wikidataId/Q1993458
+"46183 Olleria, l'",wikidataId/Q1993458
 46184 Ontinyent,wikidataId/Q973641
 46185 Otos,wikidataId/Q2041954
 46186 Paiporta,wikidataId/Q102848
 46187 Palma de Gandía,wikidataId/Q1992985
 46188 Palmera,wikidataId/Q2356806
-46189 Palomar,wikidataId/Q2264671
+"46189 Palomar, el",wikidataId/Q2264671
 46191 Pedralba,wikidataId/Q23071
 46192 Petrés,wikidataId/Q24020093
 46193 Picanya,wikidataId/Q1982763
@@ -7173,19 +7247,19 @@ place_name,dcid
 46196 Pinet,wikidataId/Q2041815
 46197 Polinyà de Xúquer,wikidataId/Q1552685
 46198 Potries,wikidataId/Q2041797
-46199 Pobla de Farnals,wikidataId/Q1992972
-46200 Pobla del Duc,wikidataId/Q1992977
+"46199 Pobla de Farnals, la",wikidataId/Q1992972
+"46200 Pobla del Duc, la",wikidataId/Q1992977
 46201 Puebla de San Miguel,wikidataId/Q574254
-46202 Pobla de Vallbona,wikidataId/Q1982982
-46203 Pobla Llarga,wikidataId/Q283163
-46204 Puig de Santa Maria,wikidataId/Q2040100
+"46202 Pobla de Vallbona, la",wikidataId/Q1982982
+"46203 Pobla Llarga, la",wikidataId/Q283163
+"46204 Puig de Santa Maria, el",wikidataId/Q2040100
 46205 Puçol,wikidataId/Q23028
 46206 Quesa,wikidataId/Q24017141
 46207 Rafelbunyol,wikidataId/Q1982774
 46208 Rafelcofer,wikidataId/Q1313084
 46209 Rafelguaraf,wikidataId/Q1901075
 46210 Ráfol de Salem,wikidataId/Q2046233
-46211 Real de Gandia,wikidataId/Q1945950
+"46211 Real de Gandia, el",wikidataId/Q1945950
 46212 Real,
 46213 Requena,wikidataId/Q302099
 46214 Riba-roja de Túria,wikidataId/Q23701
@@ -7194,7 +7268,6 @@ place_name,dcid
 46217 Rotglà i Corberà,wikidataId/Q788768
 46218 Ròtova,wikidataId/Q1993001
 46219 Rugat,wikidataId/Q24017134
-46220 Sagunt/Sagunto,wikidataId/Q47483
 46221 Salem,wikidataId/Q737734
 46222 Sant Joanet,wikidataId/Q2269982
 46223 Sedaví,wikidataId/Q102862
@@ -7218,13 +7291,11 @@ place_name,dcid
 46241 Titaguas,wikidataId/Q2041464
 46242 Torrebaja,wikidataId/Q80114
 46243 Torrella,wikidataId/Q2041864
-46244 Torrent,
 46245 Torres Torres,wikidataId/Q1812748
 46246 Tous,wikidataId/Q1993044
 46247 Tuéjar,wikidataId/Q1993055
 46248 Turís,wikidataId/Q1993027
 46249 Utiel,wikidataId/Q115572
-46250 València,wikidataId/Q8818
 46251 Vallada,wikidataId/Q24017119
 46252 Vallanca,wikidataId/Q934397
 46253 Vallés,wikidataId/Q377446
@@ -7236,7 +7307,7 @@ place_name,dcid
 46259 Villargordo del Cabriel,wikidataId/Q515843
 46260 Vinalesa,wikidataId/Q1982784
 46261 Yátova,wikidataId/Q23069
-46262 Yesa,wikidataId/Q2046237
+"46262 Yesa, La",wikidataId/Q2046237
 46263 Zarra,wikidataId/Q2302191
 46902 Gátova,wikidataId/Q52622
 46903 San Antonio de Benagéber,wikidataId/Q944381
@@ -7271,7 +7342,7 @@ place_name,dcid
 47028 Cabezón de Valderaduey,wikidataId/Q1916529
 47029 Cabreros del Monte,wikidataId/Q1907065
 47030 Campaspero,wikidataId/Q10699
-47031 Campillo,wikidataId/Q2046733
+"47031 Campillo, El",wikidataId/Q2046733
 47032 Camporredondo,wikidataId/Q2476584
 47033 Canalejas de Peñafiel,wikidataId/Q607434
 47034 Canillas de Esgueva,wikidataId/Q1907128
@@ -7338,7 +7409,7 @@ place_name,dcid
 47096 Morales de Campos,wikidataId/Q1919453
 47097 Mota del Marqués,wikidataId/Q1929288
 47098 Mucientes,wikidataId/Q1919532
-47099 Mudarra,wikidataId/Q1919502
+"47099 Mudarra, La",wikidataId/Q1919502
 47100 Muriel,wikidataId/Q2314319
 47101 Nava del Rey,wikidataId/Q1640915
 47102 Nueva Villa de las Torres,wikidataId/Q1907386
@@ -7347,8 +7418,8 @@ place_name,dcid
 47105 Olmos de Esgueva,wikidataId/Q302606
 47106 Olmos de Peñafiel,wikidataId/Q1651715
 47109 Palazuelo de Vedija,wikidataId/Q1919479
-47110 Parrilla,wikidataId/Q1908312
-47111 Pedraja de Portillo,wikidataId/Q1651735
+"47110 Parrilla, La",wikidataId/Q1908312
+"47111 Pedraja de Portillo, La",wikidataId/Q1651735
 47112 Pedrajas de San Esteban,wikidataId/Q1651727
 47113 Pedrosa del Rey,wikidataId/Q1921056
 47114 Peñafiel,wikidataId/Q667682
@@ -7393,7 +7464,7 @@ place_name,dcid
 47155 Santovenia de Pisuerga,wikidataId/Q968763
 47156 San Vicente del Palacio,wikidataId/Q1908571
 47157 Sardón de Duero,wikidataId/Q24016894
-47158 Seca,wikidataId/Q1771162
+"47158 Seca, La",wikidataId/Q1771162
 47159 Serrada,wikidataId/Q1281509
 47160 Siete Iglesias de Trabancos,wikidataId/Q1907055
 47161 Simancas,wikidataId/Q24016890
@@ -7411,7 +7482,7 @@ place_name,dcid
 47173 Traspinedo,wikidataId/Q24016877
 47174 Trigueros del Valle,wikidataId/Q1907256
 47175 Tudela de Duero,wikidataId/Q1651692
-47176 Unión de Campos,wikidataId/Q1922918
+"47176 Unión de Campos, La",wikidataId/Q1922918
 47177 Urones de Castroponce,wikidataId/Q1919568
 47178 Urueña,wikidataId/Q609581
 47179 Valbuena de Duero,wikidataId/Q749388
@@ -7421,7 +7492,6 @@ place_name,dcid
 47183 Valdunquillo,wikidataId/Q1908545
 47184 Valoria la Buena,wikidataId/Q1907435
 47185 Valverde de Campos,wikidataId/Q1919588
-47186 Valladolid,wikidataId/Q8356
 47187 Vega de Ruiponce,wikidataId/Q1929334
 47188 Vega de Valdetronco,wikidataId/Q1922901
 47189 Velascálvaro,wikidataId/Q1907096
@@ -7465,7 +7535,7 @@ place_name,dcid
 47229 Villavicencio de los Caballeros,wikidataId/Q1908295
 47230 Wamba,wikidataId/Q644732
 47231 Zaratán,wikidataId/Q24016821
-47232 Zarza,wikidataId/Q2269912
+"47232 Zarza, La",wikidataId/Q2269912
 48001 Abadiño,wikidataId/Q744893
 48002 Abanto y Ciérvana-Abanto Zierbena,wikidataId/Q1242411
 48003 Amorebieta-Etxano,wikidataId/Q474080
@@ -7478,14 +7548,11 @@ place_name,dcid
 48010 Arrieta,wikidataId/Q699830
 48011 Arrigorriaga,wikidataId/Q283607
 48012 Bakio,wikidataId/Q804466
-48013 Barakaldo,wikidataId/Q487801
 48014 Barrika,wikidataId/Q4481
-48015 Basauri,wikidataId/Q765496
 48016 Berango,wikidataId/Q1242343
 48017 Bermeo,wikidataId/Q695444
 48018 Berriatua,wikidataId/Q1228064
 48019 Berriz,wikidataId/Q747628
-48020 Bilbao,wikidataId/Q8692
 48021 Busturia,wikidataId/Q1242317
 48022 Karrantza Harana/Valle de Carranza,wikidataId/Q686837
 48023 Artea,wikidataId/Q1242330
@@ -7509,7 +7576,6 @@ place_name,dcid
 48041 Gautegiz Arteaga,wikidataId/Q1228053
 48042 Gordexola,wikidataId/Q1228097
 48043 Gorliz,wikidataId/Q763669
-48044 Getxo,wikidataId/Q492420
 48045 Güeñes,wikidataId/Q596305
 48046 Gernika-Lumo,wikidataId/Q24016799
 48047 Gizaburuaga,wikidataId/Q1228089
@@ -7547,7 +7613,6 @@ place_name,dcid
 48079 Errigoiti,wikidataId/Q1228030
 48080 Valle de Trápaga-Trapagaran,wikidataId/Q1228787
 48081 Lezama,wikidataId/Q946068
-48082 Santurtzi,wikidataId/Q917886
 48083 Ortuella,wikidataId/Q4474
 48084 Sestao,wikidataId/Q909707
 48085 Sopela,wikidataId/Q657407
@@ -7601,7 +7666,7 @@ place_name,dcid
 49021 Benavente,wikidataId/Q951778
 49022 Benegiles,wikidataId/Q1650421
 49023 Bermillo de Sayago,wikidataId/Q1650457
-49024 Bóveda de Toro,wikidataId/Q1769446
+"49024 Bóveda de Toro, La",wikidataId/Q1769446
 49025 Bretó,wikidataId/Q24016750
 49026 Bretocino,wikidataId/Q1765324
 49027 Brime de Sog,wikidataId/Q1765309
@@ -7632,7 +7697,7 @@ place_name,dcid
 49055 Cotanes del Monte,wikidataId/Q1769108
 49056 Cubillos,wikidataId/Q1657043
 49057 Cubo de Benavente,wikidataId/Q24016716
-49058 Cubo de Tierra del Vino,wikidataId/Q1771173
+"49058 Cubo de Tierra del Vino, El",wikidataId/Q1771173
 49059 Cuelgamures,wikidataId/Q1765213
 49061 Entrala,wikidataId/Q1652387
 49062 Espadañedo,wikidataId/Q1769076
@@ -7663,14 +7728,14 @@ place_name,dcid
 49092 Granucillo,wikidataId/Q1646399
 49093 Guarrate,wikidataId/Q1777876
 49094 Hermisende,wikidataId/Q1646367
-49095 Hiniesta,wikidataId/Q1765234
+"49095 Hiniesta, La",wikidataId/Q1765234
 49096 Jambrina,wikidataId/Q24016684
 49097 Justel,wikidataId/Q1777850
 49098 Losacino,wikidataId/Q931686
 49099 Losacio,wikidataId/Q961848
 49100 Lubián,wikidataId/Q24016680
 49101 Luelmo,wikidataId/Q24016679
-49102 Maderal,wikidataId/Q430056
+"49102 Maderal, El",wikidataId/Q430056
 49103 Madridanos,wikidataId/Q1652345
 49104 Mahide,wikidataId/Q1768988
 49105 Maire de Castroponce,wikidataId/Q1652181
@@ -7711,19 +7776,19 @@ place_name,dcid
 49142 Palacios del Pan,wikidataId/Q1752366
 49143 Palacios de Sanabria,wikidataId/Q1769120
 49145 Pedralba de la Pradería,wikidataId/Q1649608
-49146 Pego,
+"49146 Pego, El",
 49147 Peleagonzalo,wikidataId/Q1752397
 49148 Peleas de Abajo,wikidataId/Q539343
 49149 Peñausende,wikidataId/Q907416
 49150 Peque,wikidataId/Q744207
-49151 Perdigón,wikidataId/Q1646326
+"49151 Perdigón, El",wikidataId/Q1646326
 49152 Pereruela,wikidataId/Q24016628
 49153 Perilla de Castro,wikidataId/Q1768981
 49154 Pías,wikidataId/Q1752402
 49155 Piedrahita de Castro,wikidataId/Q1769069
 49156 Pinilla de Toro,wikidataId/Q1652324
 49157 Pino del Oro,wikidataId/Q373832
-49158 Piñero,wikidataId/Q1652304
+"49158 Piñero, El",wikidataId/Q1652304
 49159 Pobladura del Valle,wikidataId/Q1766912
 49160 Pobladura de Valderaduey,wikidataId/Q1646373
 49162 Porto,
@@ -7774,7 +7839,7 @@ place_name,dcid
 49214 Tábara,wikidataId/Q1752406
 49216 Tapioles,wikidataId/Q1766884
 49219 Toro,wikidataId/Q836948
-49220 Torre del Valle,wikidataId/Q1765178
+"49220 Torre del Valle, La",wikidataId/Q1765178
 49221 Torregamones,wikidataId/Q1766483
 49222 Torres del Carrizal,wikidataId/Q1652967
 49223 Trabazos,wikidataId/Q936798
@@ -7826,7 +7891,6 @@ place_name,dcid
 49271 Villaveza del Agua,wikidataId/Q946312
 49272 Villaveza de Valverde,wikidataId/Q1922089
 49273 Viñas,wikidataId/Q1657203
-49275 Zamora,wikidataId/Q15696
 50001 Abanto,wikidataId/Q1645485
 50002 Acered,wikidataId/Q24016524
 50003 Agón,wikidataId/Q931369
@@ -7848,10 +7912,10 @@ place_name,dcid
 50019 Alforque,wikidataId/Q1644856
 50020 Alhama de Aragón,wikidataId/Q1642171
 50021 Almochuel,wikidataId/Q1631917
-50022 Almolda,wikidataId/Q1639154
+"50022 Almolda, La",wikidataId/Q1639154
 50023 Almonacid de la Cuba,wikidataId/Q1645672
 50024 Almonacid de la Sierra,wikidataId/Q1650591
-50025 Almunia de Doña Godina,wikidataId/Q935575
+"50025 Almunia de Doña Godina, La",wikidataId/Q935575
 50026 Alpartir,wikidataId/Q24016498
 50027 Ambel,wikidataId/Q24016497
 50028 Anento,wikidataId/Q1639608
@@ -7887,8 +7951,8 @@ place_name,dcid
 50059 Bujaraloz,wikidataId/Q526133
 50060 Bulbuente,wikidataId/Q24016467
 50061 Bureta,wikidataId/Q1770009
-50062 Burgo de Ebro,wikidataId/Q1641115
-50063 Buste,wikidataId/Q649386
+"50062 Burgo de Ebro, El",wikidataId/Q1641115
+"50063 Buste, El",wikidataId/Q649386
 50064 Cabañas de Ebro,wikidataId/Q1650854
 50065 Cabolafuente,wikidataId/Q1641779
 50066 Cadrete,wikidataId/Q1639202
@@ -7916,7 +7980,7 @@ place_name,dcid
 50088 Cosuenda,wikidataId/Q599787
 50089 Cuarte de Huerva,wikidataId/Q1629930
 50090 Cubel,wikidataId/Q24019984
-50091 Cuerlas,wikidataId/Q1638839
+"50091 Cuerlas, Las",wikidataId/Q1638839
 50092 Chiprana,wikidataId/Q509039
 50093 Chodes,wikidataId/Q24019981
 50094 Daroca,wikidataId/Q978587
@@ -7929,11 +7993,11 @@ place_name,dcid
 50102 Fabara,wikidataId/Q956450
 50104 Farlete,wikidataId/Q24019971
 50105 Fayón,wikidataId/Q1639270
-50106 Fayos,wikidataId/Q1639179
+"50106 Fayos, Los",wikidataId/Q1639179
 50107 Figueruelas,wikidataId/Q1650603
 50108 Fombuena,wikidataId/Q672176
-50109 Frago,wikidataId/Q1650363
-50110 Frasno,wikidataId/Q1911195
+"50109 Frago, El",wikidataId/Q1650363
+"50110 Frasno, El",wikidataId/Q1911195
 50111 Fréscano,wikidataId/Q1639221
 50113 Fuendejalón,wikidataId/Q541606
 50114 Fuendetodos,wikidataId/Q1372769
@@ -7953,7 +8017,7 @@ place_name,dcid
 50129 Jaraba,wikidataId/Q24019945
 50130 Jarque de Moncayo,wikidataId/Q1641014
 50131 Jaulín,wikidataId/Q24019944
-50132 Joyosa,wikidataId/Q974758
+"50132 Joyosa, La",wikidataId/Q974758
 50133 Lagata,wikidataId/Q1641046
 50134 Langa del Castillo,wikidataId/Q1628164
 50135 Layana,wikidataId/Q24019940
@@ -8001,7 +8065,7 @@ place_name,dcid
 50179 Moyuela,wikidataId/Q1640188
 50180 Mozota,wikidataId/Q24019899
 50181 Muel,wikidataId/Q967136
-50182 Muela,wikidataId/Q1639365
+"50182 Muela, La",wikidataId/Q1639365
 50183 Munébrega,wikidataId/Q1650485
 50184 Murero,wikidataId/Q1650345
 50185 Murillo de Gállego,wikidataId/Q983554
@@ -8024,12 +8088,12 @@ place_name,dcid
 50202 Paracuellos de la Ribera,wikidataId/Q1650679
 50203 Pastriz,wikidataId/Q1641053
 50204 Pedrola,wikidataId/Q24019874
-50205 Pedrosas,wikidataId/Q1650711
+"50205 Pedrosas, Las",wikidataId/Q1650711
 50206 Perdiguera,wikidataId/Q1639503
 50207 Piedratajada,wikidataId/Q1650724
 50208 Pina de Ebro,wikidataId/Q1641099
 50209 Pinseque,wikidataId/Q1640990
-50210 Pintanos,wikidataId/Q1639451
+"50210 Pintanos, Los",wikidataId/Q1639451
 50211 Plasencia de Jalón,wikidataId/Q1650559
 50212 Pleitas,wikidataId/Q1641078
 50213 Plenas,wikidataId/Q24019864
@@ -8038,7 +8102,7 @@ place_name,dcid
 50216 Pozuelo de Aragón,wikidataId/Q1641025
 50217 Pradilla de Ebro,wikidataId/Q1650590
 50218 Puebla de Albortón,wikidataId/Q1639637
-50219 Puebla de Alfindén,wikidataId/Q1640155
+"50219 Puebla de Alfindén, La",wikidataId/Q1640155
 50220 Puendeluna,wikidataId/Q1641036
 50221 Purujosa,wikidataId/Q1640038
 50222 Quinto,wikidataId/Q6022667
@@ -8100,7 +8164,7 @@ place_name,dcid
 50279 Velilla de Jiloca,wikidataId/Q764206
 50280 Vera de Moncayo,wikidataId/Q1639252
 50281 Vierlas,wikidataId/Q594134
-50282 Vilueña,wikidataId/Q976798
+"50282 Vilueña, La",wikidataId/Q976798
 50283 Villadoz,wikidataId/Q1639196
 50284 Villafeliche,wikidataId/Q1650316
 50285 Villafranca de Ebro,wikidataId/Q1638846
@@ -8114,103 +8178,8 @@ place_name,dcid
 50293 Villarroya de la Sierra,wikidataId/Q1650310
 50294 Villarroya del Campo,wikidataId/Q1639234
 50295 Vistabella,wikidataId/Q6163993
-50296 Zaida,wikidataId/Q1650377
-50297 Zaragoza,wikidataId/Q10305
+"50296 Zaida, La",wikidataId/Q1650377
 50298 Zuera,wikidataId/Q1605519
 50901 Biel,wikidataId/Q31913731
 50902 Marracos,wikidataId/Q1769840
 50903 Villamayor de Gállego,wikidataId/Q2333861
-52001 Melilla,wikidataId/Q23984135
-02 Albacete,nuts/ES421
-03 Alicante/Alacant,nuts/ES521
-04 Almería,nuts/ES611
-01 Araba/Álava,nuts/ES211
-33 Asturias,nuts/ES120
-05 Ávila,nuts/ES411
-06 Badajoz,nuts/ES431
-07 Balears,wikidataId/Q1606474
-15030 Coruña,wikidataId/Q8757
-48 Bizkaia,nuts/ES213
-09 Burgos,nuts/ES412
-10 Cáceres,nuts/ES432
-11 Cádiz,nuts/ES612
-39 Cantabria,nuts/ES13
-12 Castellón/Castelló,nuts/ES522
-13 Ciudad Real,nuts/ES422
-14 Córdoba,nuts/ES613
-15 Coruña,nuts/ES111
-16 Cuenca,nuts/ES423
-20 Gipuzkoa,nuts/ES212
-17 Girona,nuts/ES512
-18 Granada,nuts/ES614
-19 Guadalajara,nuts/ES424
-21 Huelva,nuts/ES615
-22 Huesca,nuts/ES241
-23 Jaén,nuts/ES616
-24 León,nuts/ES413
-25 Lleida,wikidataId/Q15090
-27 Lugo,nuts/ES112
-28 Madrid,nuts/ES3
-29 Málaga,nuts/ES617
-30 Murcia,nuts/ES62
-31 Navarra,nuts/ES22
-32 Ourense,nuts/ES113
-34 Palencia,wikidataId/Q24011703
-35 Palmas,nuts/ES701
-36 Pontevedra,nuts/ES114
-37 Salamanca,nuts/ES415
-38 Santa Cruz de Tenerife,wikidataId/Q24014650
-40 Segovia,nuts/ES416
-41 Sevilla,nuts/ES618
-42 Soria,nuts/ES417
-43 Tarragona,nuts/ES514
-44 Teruel,nuts/ES242
-45 Toledo,nuts/ES425
-46 Valencia/València,nuts/ES523
-47 Valladolid,nuts/ES418
-49 Zamora,nuts/ES419
-50 Zaragoza,nuts/ES243
-51 Ceuta,nuts/ES63
-52 Melilla,
-05019 Ávila,wikidataId/Q15688
-33004 Avilés,wikidataId/Q14649
-08019 Barcelona,wikidataId/Q1492
-51001 Ceuta,
-16078 Cuenca,wikidataId/Q15098
-30024 Lorca,wikidataId/Q47571
-27028 Lugo,wikidataId/Q1069100
-46190 Paterna,wikidataId/Q23042
-28113 Pinto,wikidataId/Q909718
-29901 Torremolinos,wikidataId/Q492737
-46244 Torrent,wikidataId/Q161945
-47186 Valladolid,wikidataId/Q8356
-01 Andalucía,nuts/ES61
-02 Aragón,nuts/ES24
-03 Asturias,nuts/ES12
-04 Balears,nuts/ES53
-05 Canarias,nuts/ES7
-06 Cantabria,nuts/ES13
-07 Castilla y León,nuts/ES41
-08 Castilla - La Mancha,nuts/ES42
-09 Cataluña,nuts/ES51
-10 Comunitat Valenciana,nuts/ES52
-11 Extremadura,nuts/ES43
-12 Galicia,nuts/ES11
-"13 Madrid, Comunidad de",nuts/ES3
-"14 Murcia, Región de",nuts/ES620
-"15 Navarra, Comunidad Foral de",nuts/ES220
-16 País Vasco,nuts/ES21
-17 Rioja,nuts/ES23
-18 Ceuta,nuts/ES63
-19 Melilla,nuts/ES64
-26 Rioja,nuts/ES23
-07 Balears,wikidataId/Q1606474
-26 Rioja,
-04902 Ejido,wikidataId/Q493933
-08101 Hospitalet de Llobregat',wikidataId/Q15470
-11022 Línea de la Concepción,wikidataId/Q13148
-35016 Palmas de Gran Canaria,wikidataId/Q11974
-08169 Prat de Llobregat,wikidataId/Q15619
-11027 Puerto de Santa María,wikidataId/Q203040
-28127 Rozas de Madrid,wikidataId/Q592747
-04 Balears,nuts/ES53

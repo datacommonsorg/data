@@ -1,9 +1,0 @@
-Node: E:Population_by_province_capitals_and_gender_output->E0
-observationAbout: C:Population_by_province_capitals_and_gender_output->observationAbout
-observationPeriod: C:Population_by_province_capitals_and_gender_output->observationPeriod
-observationDate: C:Population_by_province_capitals_and_gender_output->observationDate
-value: C:Population_by_province_capitals_and_gender_output->value
-variableMeasured: C:Population_by_province_capitals_and_gender_output->variableMeasured
-unit: C:Population_by_province_capitals_and_gender_output->unit
-scalingFactor: C:Population_by_province_capitals_and_gender_output->scalingFactor
-typeOf: dcs:StatVarObservation

@@ -1,3 +1,9 @@
 observationAbout,observationPeriod,observationDate,value,variableMeasured,unit,scalingFactor
-country/ESP,P1Y,2021,22.4,dcid:Count_Person_WithDisability_Unemployed,,
-country/ESP,P1Y,2023,26.2,dcid:Count_Person_16To24Years_Employed,,
+country/ESP,P1Y,2023,262,dcid:Count_Person_16To24Years_Employed,,
+country/ESP,P1Y,2021,227,dcid:Count_Person_16To24Years_Employed,,
+country/ESP,P1Y,2023,266,dcid:Count_Person_16To24Years_NoDisability_Employed,,
+country/ESP,P1Y,2021,231,dcid:Count_Person_16To24Years_NoDisability_Employed,,
+country/ESP,P1Y,2023,119,dcid:Count_Person_16To24Years_WithDisability_Employed,,
+country/ESP,P1Y,2022,126,dcid:Count_Person_16To24Years_WithDisability_Employed,,
+country/ESP,P1Y,2021,82,dcid:Count_Person_16To24Years_WithDisability_Employed,,
+country/ESP,P1Y,2023,285,dcid:Count_Person_16To24Years_Unemployed,,
