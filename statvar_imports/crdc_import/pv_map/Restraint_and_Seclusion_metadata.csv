@@ -1,5 +1,0 @@
-parameter,value
-header_rows,1
-output_columns,"observationAbout,observationDate,variableMeasured,value"
-place_type,School
-places_within,country/USA

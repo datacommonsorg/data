@@ -1,6 +1,0 @@
-Node: E:chronic_absenteeism_output->E0
-observationAbout: C:chronic_absenteeism_output->observationAbout
-observationDate: C:chronic_absenteeism_output->observationDate
-variableMeasured: C:chronic_absenteeism_output->variableMeasured
-value: C:chronic_absenteeism_output->value
-typeOf: dcs:StatVarObservation

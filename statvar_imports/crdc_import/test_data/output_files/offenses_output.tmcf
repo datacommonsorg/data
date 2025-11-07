@@ -1,6 +1,0 @@
-Node: E:offenses_output->E0
-observationAbout: C:offenses_output->observationAbout
-observationDate: C:offenses_output->observationDate
-variableMeasured: C:offenses_output->variableMeasured
-value: C:offenses_output->value
-typeOf: dcs:StatVarObservation
