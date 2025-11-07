@@ -1,0 +1,33 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "US_UrbanSchool_Algebra1",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://ocrdata.ed.gov/data",
+      "provenance_description": "School Finance dataset contains financial and identifying information for educational institutions, including details on salaries and expenditures for teachers.",
+      "scripts": [
+        "download_script.py",
+        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.xlsx --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_2009_14",
+        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*algebra_i.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_2018_22",
+        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*school_data.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_2016"
+      ],
+      "source_files": [
+        "input_files/*.xlsx","input_files/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/algebra1_output_2009_14.tmcf",
+          "cleaned_csv": "output/*.csv"
+        }
+      ],
+      "cron_schedule": "30 08 25 * *",
+      "resource_limits": {
+            "cpu": 8,
+            "memory": 256,
+            "disk": 200
+        }
+    }
+  ]
+}
