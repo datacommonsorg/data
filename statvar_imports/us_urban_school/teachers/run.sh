@@ -12,7 +12,9 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --pv_map=$SCRIPT_PATH/teachers_and_staff_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/teachers_and_staff_2010_2014_output || \
+--output_path=$SCRIPT_PATH/output_files/teachers_and_staff_2010_2014_output \
+--log_level=-2 \
+--log_every_n=1000 || \
 { echo "Error: Processing teachers_and_staff files for the year 2010 to 2014 failed!"; exit 1; }
 
 # --- 2. Process 2016 File (Separate CSV) ---
@@ -23,7 +25,9 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --pv_map=$SCRIPT_PATH/teachers_and_staff_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/teachers_and_staff_2016_output || \
+--output_path=$SCRIPT_PATH/output_files/teachers_and_staff_2016_output \
+--log_level=-2 \
+--log_every_n=1000 || \
 { echo "Error: Processing teachers_and_staff files for the year 2016 failed!"; exit 1; }
 
 # --- 3. Process 2018 onwards Files (Combined CSVs, excluding 2016) ---
@@ -36,7 +40,9 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --pv_map=$SCRIPT_PATH/teachers_and_staff_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/teachers_and_staff_2018_2022_output || \
+--output_path=$SCRIPT_PATH/output_files/teachers_and_staff_2018_2022_output \
+--log_level=-2 \
+--log_every_n=1000 || \
 { echo "Error: Processing teachers_and_staff files for the year 2018 to 2022 failed!"; exit 1; }
 
 echo "All processing steps completed successfully."
