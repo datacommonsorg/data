@@ -16,7 +16,7 @@
 
 ## US_UrbanSchool_Algebra1 Import
 
-This import focuses on urban school Algeba1. This dataset contains contains information about enrollment and passed data of student in algebra1 and also at different grade level.
+This import focuses on urban school Algebra1. This dataset contains information about enrollment and passed data of students in Algebra1 and also at different grade level.
 
 -----
 - source: https://ocrdata.ed.gov/data
@@ -25,7 +25,7 @@ This import focuses on urban school Algeba1. This dataset contains contains info
 
 - statvars: Education
 
-- years: 2010 and 2012
+- years: 2009 and 2022
 
 ### ⚙️ Workflow
 

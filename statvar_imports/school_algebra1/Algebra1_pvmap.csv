@@ -147,7 +147,6 @@ SCH_ALGENR_G08_LEP_M,enrollmentStatus,EnrolledInEducationOrTraining,schoolGradeL
 SCH_ALGENR_G08_LEP_F,enrollmentStatus,EnrolledInEducationOrTraining,schoolGradeLevel,SchoolGrade8,languageLearned,EnglishLearner,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0
 SCH_ALGENR_G08_IDEA_M,enrollmentStatus,EnrolledInEducationOrTraining,schoolGradeLevel,SchoolGrade8,disabilityStatus,WithDisability,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0
 SCH_ALGENR_G08_IDEA_F,enrollmentStatus,EnrolledInEducationOrTraining,schoolGradeLevel,SchoolGrade8,disabilityStatus,WithDisability,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0
-SCH_MATHCERT_ALG,,,,,,,,,,,,
 SCH_ALGENR_GS0910_LEP_M,enrollmentStatus,EnrolledInEducationOrTraining,schoolGradeLevel,SchoolGrade9To10,languageLearned,EnglishLearner,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0
 SCH_ALGENR_GS0910_LEP_F,enrollmentStatus,EnrolledInEducationOrTraining,schoolGradeLevel,SchoolGrade9To10,languageLearned,EnglishLearner,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0
 SCH_ALGENR_GS1112_LEP_M,enrollmentStatus,EnrolledInEducationOrTraining,schoolGradeLevel,SchoolGrade11To12,languageLearned,EnglishLearner,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0
@@ -179,7 +178,6 @@ SCH_ALGPASS_GS1112_LEP_M,studentPerformanceLevel,Pass,schoolGradeLevel,SchoolGra
 SCH_ALGPASS_GS1112_LEP_F,studentPerformanceLevel,Pass,schoolGradeLevel,SchoolGrade11To12,languageLearned,EnglishLearner,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0
 ,,,,,,,,,,,,
 #2013-14,,,,,,,,,,,,
-SCH_ALGCLASSES_GS0712,,,,,,,,,,,,
 SCH_ALGENR_GS0708_HI_M,enrollmentStatus,EnrolledInEducationOrTraining,schoolGradeLevel,SchoolGrade7To8,race,HispanicOrLatino,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0
 SCH_ALGENR_GS0708_HI_F,enrollmentStatus,EnrolledInEducationOrTraining,schoolGradeLevel,SchoolGrade7To8,race,HispanicOrLatino,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0
 SCH_ALGENR_GS0708_AM_M,enrollmentStatus,EnrolledInEducationOrTraining,schoolGradeLevel,SchoolGrade7To8,race,AmericanIndianOrAlaskaNative,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0

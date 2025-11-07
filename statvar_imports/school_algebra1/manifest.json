@@ -6,12 +6,12 @@
         "support@datacommons.org"
       ],
       "provenance_url": "https://ocrdata.ed.gov/data",
-      "provenance_description": "School Finance dataset contains financial and identifying information for educational institutions, including details on salaries and expenditures for teachers.",
+      "provenance_description": "This dataset from the Civil Rights Data Collection (CRDC) contains information about student enrollment and passing rates in Algebra 1 courses in US schools, disaggregated by grade level, race, gender, and other demographics.",
       "scripts": [
         "download_script.py",
-        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.xlsx --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_2009_14",
-        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*algebra_i.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_2018_22",
-        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*school_data.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_2016"
+        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.xlsx --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_2009_14 --log_level=-2 --log_every_n=1000",
+        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*algebra_i.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_2018_22 --log_level=-2 --log_every_n=1000",
+        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*school_data.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_2016 --log_level=-2 --log_every_n=1000"
       ],
       "source_files": [
         "input_files/*.xlsx","input_files/*.csv"
@@ -19,7 +19,15 @@
       "import_inputs": [
         {
           "template_mcf": "output/algebra1_output_2009_14.tmcf",
-          "cleaned_csv": "output/*.csv"
+          "cleaned_csv": "output/algebra1_output_2009_14.csv"
+        },
+        {
+          "template_mcf": "output/algebra1_output_2018_22.tmcf",
+          "cleaned_csv": "output/algebra1_output_2018_22.csv"
+        },
+        {
+          "template_mcf": "output/algebra1_output_2016.tmcf",
+          "cleaned_csv": "output/algebra1_output_2016.csv"
         }
       ],
       "cron_schedule": "30 08 25 * *",
