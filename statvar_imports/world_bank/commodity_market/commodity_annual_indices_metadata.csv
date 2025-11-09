@@ -9,9 +9,8 @@ release_frequency,
 process,
 comments,
 #places_resolved_csv,
-output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod"
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,measurementMethod,observationPeriod"
 header_rows,1
 drop_statvars_without_svobs,0
 mapped_rows,1
-mapped_columns,1
-word_delimiter,“”
+mapped_columns,2
