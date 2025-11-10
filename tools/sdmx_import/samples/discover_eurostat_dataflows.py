@@ -26,6 +26,7 @@ import pandas as pd
 sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
 
+import logging
 from tools.sdmx_import.sdmx_client import SdmxClient
 
 
@@ -50,16 +51,11 @@ def main():
     else:
         print("No dataflows found.")
 
-    # 2. Search for dataflows
-    search_term = "unemployment"
-    print(f"\n--- Searching for dataflows with term: '{search_term}' ---")
-    search_results_msg = client.search_dataflows(search_term)
-    if search_results_msg.dataflows:
-        df_search = pd.DataFrame(
-            [vars(df) for df in search_results_msg.dataflows])
-        print(df_search)
-    else:
-        print(f"No dataflows found matching '{search_term}'.")
+    # List all dataflows
+    all_dataflows_msg = client.list_dataflows()
+    logging.info(f"Found {len(all_dataflows_msg.dataflows)} dataflows.")
+    for df in all_dataflows_msg.dataflows:
+        logging.info(f"  - {df.id}: {df.name}")
 
 
 if __name__ == "__main__":

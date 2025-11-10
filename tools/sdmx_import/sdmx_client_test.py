@@ -65,42 +65,6 @@ class SdmxClientTest(unittest.TestCase):
         self.assertEqual(result.dataflows[0].version, '1.0')
         self.mock_client.dataflow.assert_called_once_with()
 
-    def test_search_dataflows(self):
-        # Mock list_dataflows to return a known list of Dataflow objects
-        self.client.list_dataflows = MagicMock(return_value=StructureMessage(
-            dataflows=[
-                Dataflow(id='DF1',
-                         name='Alpha Beta',
-                         description='Gamma',
-                         agency_id='TEST',
-                         version='1.0'),
-                Dataflow(id='DF2',
-                         name='Charlie',
-                         description='Delta Alpha',
-                         agency_id='TEST',
-                         version='1.0'),
-                Dataflow(id='DF3',
-                         name='Epsilon',
-                         description='Foxtrot',
-                         agency_id='TEST',
-                         version='1.0')
-            ]))
-
-        # Search for a term in the name
-        result = self.client.search_dataflows('beta')
-        self.assertIsInstance(result, StructureMessage)
-        self.assertEqual(len(result.dataflows), 1)
-        self.assertEqual(result.dataflows[0].id, 'DF1')
-
-        # Search for a term in the description
-        result = self.client.search_dataflows('delta')
-        self.assertEqual(len(result.dataflows), 1)
-        self.assertEqual(result.dataflows[0].id, 'DF2')
-
-        # Search for a term that appears in multiple dataflows
-        result = self.client.search_dataflows('alpha')
-        self.assertEqual(len(result.dataflows), 2)
-
     @patch('sdmx.to_pandas')
     def test_get_dataflow_series_success(self, mock_to_pandas):
         # Mock the response from sdmx.to_pandas to simulate multiple series

@@ -74,10 +74,6 @@ flags.DEFINE_multi_string(
     'param', [],
     'Query parameters as key:value pairs (e.g., --param=startPeriod:2022)')
 
-# Discovery specific flags
-flags.DEFINE_string('search', None,
-                    'Search term to filter dataflows by name or description')
-
 # Logging flags
 flags.DEFINE_bool('verbose', False, 'Enable verbose logging')
 flags.DEFINE_bool('quiet', False, 'Only show errors')
@@ -222,12 +218,8 @@ def handle_discover_dataflows() -> None:
 
     client = SdmxClient(FLAGS.endpoint, FLAGS.agency)
 
-    if FLAGS.search:
-        logging.info(f"Searching for dataflows with term: '{FLAGS.search}'")
-        dataflows_msg = client.search_dataflows(FLAGS.search)
-    else:
-        logging.info("Listing all available dataflows")
-        dataflows_msg = client.list_dataflows()
+    logging.info("Listing all available dataflows")
+    dataflows_msg = client.list_dataflows()
 
     if not dataflows_msg.dataflows:
         logging.info("No dataflows found.")

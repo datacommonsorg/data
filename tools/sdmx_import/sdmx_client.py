@@ -84,31 +84,6 @@ class SdmxClient:
             logging.error(f"Error fetching dataflows: {e}")
             raise
 
-    def search_dataflows(self, search_term: str) -> StructureMessage:
-        """
-        Searches for dataflows matching a search term.
-
-        Args:
-            search_term: The term to search for in dataflow names and descriptions.
-
-        Returns:
-            A StructureMessage object containing a list of matching Dataflow objects.
-        """
-        try:
-            logging.info(f"Searching for dataflows with term: {search_term}")
-            all_dataflows_msg = self.list_dataflows()
-            search_term = search_term.lower()
-
-            results = [
-                df for df in all_dataflows_msg.dataflows
-                if search_term in df.name.lower() or \
-                   search_term in df.description.lower()
-            ]
-            return StructureMessage(dataflows=results)
-        except Exception as e:
-            logging.error(f"Error searching dataflows: {e}")
-            raise
-
     def get_dataflow_series(
             self,
             dataflow_id: str,
