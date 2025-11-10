@@ -108,38 +108,6 @@ class SdmxClient:
             logging.error(f"Error searching dataflows: {e}")
             raise
 
-    def get_dataflow_details(self, dataflow_id: str) -> Dict[str, Any]:
-        """
-        Gets the details of a specific dataflow.
-
-        Args:
-            dataflow_id: The ID of the dataflow.
-
-        Returns:
-            A dictionary containing the details of the dataflow.
-        """
-        try:
-            logging.info(f"Fetching details for dataflow: {dataflow_id}")
-            dataflow_msg = self.client.dataflow(dataflow_id)
-            if not dataflow_msg.dataflow:
-                return {}
-
-            dataflow_pd = sdmx.to_pandas(dataflow_msg.dataflow)
-
-            if isinstance(dataflow_pd, pd.DataFrame) and not dataflow_pd.empty:
-                return dataflow_pd.iloc[0].to_dict()
-            elif isinstance(dataflow_pd, pd.Series):
-                return dataflow_pd.to_dict()
-
-            return {}
-        except HTTPError as e:
-            logging.error(
-                f"Dataflow '{dataflow_id}' not found or network error: {e}")
-            return {}
-        except Exception as e:
-            logging.error(f"Error fetching dataflow details: {e}")
-            raise
-
     def get_dataflow_series(
             self,
             dataflow_id: str,

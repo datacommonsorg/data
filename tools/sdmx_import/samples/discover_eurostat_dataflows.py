@@ -60,24 +60,6 @@ def main():
     else:
         print(f"No dataflows found matching '{search_term}'.")
 
-    # 3. Get details for a specific dataflow
-    if search_results:
-        # Get the ID of the first search result
-        dataflow_id_to_get = search_results[0].get('id')
-        if dataflow_id_to_get:
-            print(
-                f"\n--- Getting details for dataflow: '{dataflow_id_to_get}' ---"
-            )
-            details = client.get_dataflow_details(dataflow_id_to_get)
-            if details:
-                # Pretty print the details dictionary
-                for key, value in details.items():
-                    print(f"{key}: {value}")
-            else:
-                print(
-                    f"Could not retrieve details for dataflow '{dataflow_id_to_get}'."
-                )
-
 
 if __name__ == "__main__":
     main()
