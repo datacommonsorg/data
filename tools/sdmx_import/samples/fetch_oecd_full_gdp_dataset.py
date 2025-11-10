@@ -40,8 +40,8 @@ def main():
     # --- 3. Fetch Metadata ---
     logging.info("--- Step 1: Starting Metadata Download ---")
     try:
-        client.get_dataflow_metadata(dataflow_id=dataflow_id,
-                                     output_path=metadata_output_path)
+        client.download_metadata(dataflow_id=dataflow_id,
+                                 output_path=metadata_output_path)
         logging.info(
             f"--- Successfully downloaded metadata to {metadata_output_path} ---"
         )

@@ -161,7 +161,7 @@ class SdmxClient:
             logging.error(f"An unexpected error occurred: {e}")
             raise
 
-    def get_dataflow_metadata(self, dataflow_id: str, output_path: str):
+    def download_metadata(self, dataflow_id: str, output_path: str):
         """
         Fetches the complete metadata for a dataflow and saves it to a file as raw SDMX-ML (XML).
 

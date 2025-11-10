@@ -36,8 +36,7 @@ def main():
 
     # --- 2. Use the SdmxClient ---
     client = SdmxClient(endpoint, agency_id)
-    client.get_dataflow_metadata(dataflow_id=dataflow_id,
-                                 output_path=output_path)
+    client.download_metadata(dataflow_id=dataflow_id, output_path=output_path)
     logging.info(f"--- Successfully downloaded metadata to {output_path} ---")
 
 
