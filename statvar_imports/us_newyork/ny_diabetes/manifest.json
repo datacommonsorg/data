@@ -15,15 +15,15 @@
             ],
             "import_inputs": [
                  {
-                    "template_mcf": "output_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output.tmcf",
+                    "template_mcf": "output_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output_2016.tmcf",
                     "cleaned_csv": "output_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output_2016.csv"
                 },
                 {
-                    "template_mcf": "output_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output.tmcf",
+                    "template_mcf": "output_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output_2018.tmcf",
                     "cleaned_csv": "output_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output_2018.csv"
                 },
                 {
-                    "template_mcf": "output_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output.tmcf",
+                    "template_mcf": "output_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output_2021.tmcf",
                     "cleaned_csv": "output_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output_2021.csv"
                 }
             ],
