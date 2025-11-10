@@ -13,8 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-"""Unit tests for the Phase 1 JSON state callback."""
+"""Unit tests for SDMX pipeline helpers."""
 
 from __future__ import annotations
 
@@ -33,14 +32,10 @@ for path in (_PROJECT_ROOT,):
         sys.path.append(path)
 
 from tools.agentic_import.pipeline import (  # pylint: disable=import-error
-    BaseStep,
-    Pipeline,
-    PipelineRunner,
-    RunnerConfig,
+    BaseStep, Pipeline, PipelineRunner, RunnerConfig,
 )
 from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=import-error
-    JSONStateCallback,
-)
+    JSONStateCallback,)
 
 
 class _IncrementingClock:
@@ -91,7 +86,8 @@ class JSONStateCallbackTest(unittest.TestCase):
             timedelta(seconds=5))
         with tempfile.TemporaryDirectory() as tmpdir:
             callback = self._build_callback(tmpdir=tmpdir, clock=clock)
-            pipeline = Pipeline(steps=[_RecordingStep("download.download-data")])
+            pipeline = Pipeline(
+                steps=[_RecordingStep("download.download-data")])
             runner = PipelineRunner(RunnerConfig())
             runner.run(pipeline, callback)
 
@@ -116,8 +112,9 @@ class JSONStateCallbackTest(unittest.TestCase):
             timedelta(seconds=7))
         with tempfile.TemporaryDirectory() as tmpdir:
             callback = self._build_callback(tmpdir=tmpdir, clock=clock)
-            pipeline = Pipeline(
-                steps=[_RecordingStep("sample.create-sample", should_fail=True)])
+            pipeline = Pipeline(steps=[
+                _RecordingStep("sample.create-sample", should_fail=True)
+            ])
             runner = PipelineRunner(RunnerConfig())
 
             with self.assertRaisesRegex(ValueError, "boom"):

@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Helpers for the SDMX agentic import pipeline."""
 
 from __future__ import annotations
@@ -105,7 +104,8 @@ class JSONStateCallback(PipelineCallback):
         return self._now_fn()
 
     def _write_state(self) -> None:
-        temp_path = self._state_path.with_suffix(self._state_path.suffix + ".tmp")
+        temp_path = self._state_path.with_suffix(self._state_path.suffix +
+                                                 ".tmp")
         with temp_path.open("w", encoding="utf-8") as fp:
             json.dump(asdict(self._state), fp, indent=2, sort_keys=True)
             fp.write("\n")
