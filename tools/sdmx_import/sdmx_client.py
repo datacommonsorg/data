@@ -23,7 +23,7 @@ import sdmx
 import pandas as pd
 from requests.exceptions import HTTPError
 from typing import Dict, Any, List
-from tools.sdmx_import.sdmx_models import Dataflow
+from tools.sdmx_import.sdmx_models import Dataflow, StructureMessage
 
 
 class SdmxClient:
@@ -54,7 +54,7 @@ class SdmxClient:
         sdmx.add_source(custom_source, override=True)
         return sdmx.Client(source_id)
 
-    def list_dataflows(self) -> List[Dataflow]:
+    def list_dataflows(self) -> StructureMessage:
         """
         Lists all available dataflows.
 
@@ -62,7 +62,7 @@ class SdmxClient:
         # For example, agency=OECD should also list dataflows for OECD.ORG1.
 
         Returns:
-            A list of Dataflow objects.
+            A StructureMessage object containing a list of Dataflow objects.
         """
         try:
             logging.info(
@@ -70,7 +70,7 @@ class SdmxClient:
             )
             dataflows_msg = self.client.dataflow()
 
-            return [
+            dataflows = [
                 Dataflow(
                     id=df_id,
                     name=str(df.name),
@@ -79,11 +79,12 @@ class SdmxClient:
                     version=str(df.version))
                 for df_id, df in dataflows_msg.dataflow.items()
             ]
+            return StructureMessage(dataflows=dataflows)
         except Exception as e:
             logging.error(f"Error fetching dataflows: {e}")
             raise
 
-    def search_dataflows(self, search_term: str) -> List[Dataflow]:
+    def search_dataflows(self, search_term: str) -> StructureMessage:
         """
         Searches for dataflows matching a search term.
 
@@ -91,19 +92,19 @@ class SdmxClient:
             search_term: The term to search for in dataflow names and descriptions.
 
         Returns:
-            A list of matching Dataflow objects.
+            A StructureMessage object containing a list of matching Dataflow objects.
         """
         try:
             logging.info(f"Searching for dataflows with term: {search_term}")
-            all_dataflows = self.list_dataflows()
+            all_dataflows_msg = self.list_dataflows()
             search_term = search_term.lower()
 
             results = [
-                df for df in all_dataflows
+                df for df in all_dataflows_msg.dataflows
                 if search_term in df.name.lower() or \
                    search_term in df.description.lower()
             ]
-            return results
+            return StructureMessage(dataflows=results)
         except Exception as e:
             logging.error(f"Error searching dataflows: {e}")
             raise

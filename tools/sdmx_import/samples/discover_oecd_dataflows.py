@@ -43,10 +43,10 @@ def main():
 
     # 1. List all dataflows
     print("\n--- Listing all dataflows (first 5) ---")
-    all_dataflows = client.list_dataflows()
-    if all_dataflows:
+    all_dataflows_msg = client.list_dataflows()
+    if all_dataflows_msg.dataflows:
         # Use pandas to format the output nicely
-        df_all = pd.DataFrame(all_dataflows)
+        df_all = pd.DataFrame([vars(df) for df in all_dataflows_msg.dataflows])
         print(df_all.head())
     else:
         print("No dataflows found.")
@@ -54,9 +54,10 @@ def main():
     # 2. Search for dataflows
     search_term = "GDP"
     print(f"\n--- Searching for dataflows with term: '{search_term}' ---")
-    search_results = client.search_dataflows(search_term)
-    if search_results:
-        df_search = pd.DataFrame(search_results)
+    search_results_msg = client.search_dataflows(search_term)
+    if search_results_msg.dataflows:
+        df_search = pd.DataFrame(
+            [vars(df) for df in search_results_msg.dataflows])
         print(df_search)
     else:
         print(f"No dataflows found matching '{search_term}'.")

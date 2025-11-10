@@ -21,7 +21,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 from requests.exceptions import HTTPError
 from tools.sdmx_import.sdmx_client import SdmxClient
-from tools.sdmx_import.sdmx_models import Dataflow
+from tools.sdmx_import.sdmx_models import Dataflow, StructureMessage
 import sdmx
 from sdmx import message, model
 import pandas as pd
@@ -57,46 +57,49 @@ class SdmxClientTest(unittest.TestCase):
         result = self.client.list_dataflows()
 
         # Assert the result
-        self.assertEqual(len(result), 2)
-        self.assertIsInstance(result[0], Dataflow)
-        self.assertEqual(result[0].name, 'Dataflow 1')
-        self.assertEqual(result[1].id, 'DF2')
-        self.assertEqual(result[0].version, '1.0')
+        self.assertIsInstance(result, StructureMessage)
+        self.assertEqual(len(result.dataflows), 2)
+        self.assertIsInstance(result.dataflows[0], Dataflow)
+        self.assertEqual(result.dataflows[0].name, 'Dataflow 1')
+        self.assertEqual(result.dataflows[1].id, 'DF2')
+        self.assertEqual(result.dataflows[0].version, '1.0')
         self.mock_client.dataflow.assert_called_once_with()
 
     def test_search_dataflows(self):
         # Mock list_dataflows to return a known list of Dataflow objects
-        self.client.list_dataflows = MagicMock(return_value=[
-            Dataflow(id='DF1',
-                     name='Alpha Beta',
-                     description='Gamma',
-                     agency_id='TEST',
-                     version='1.0'),
-            Dataflow(id='DF2',
-                     name='Charlie',
-                     description='Delta Alpha',
-                     agency_id='TEST',
-                     version='1.0'),
-            Dataflow(id='DF3',
-                     name='Epsilon',
-                     description='Foxtrot',
-                     agency_id='TEST',
-                     version='1.0')
-        ])
+        self.client.list_dataflows = MagicMock(return_value=StructureMessage(
+            dataflows=[
+                Dataflow(id='DF1',
+                         name='Alpha Beta',
+                         description='Gamma',
+                         agency_id='TEST',
+                         version='1.0'),
+                Dataflow(id='DF2',
+                         name='Charlie',
+                         description='Delta Alpha',
+                         agency_id='TEST',
+                         version='1.0'),
+                Dataflow(id='DF3',
+                         name='Epsilon',
+                         description='Foxtrot',
+                         agency_id='TEST',
+                         version='1.0')
+            ]))
 
         # Search for a term in the name
         result = self.client.search_dataflows('beta')
-        self.assertEqual(len(result), 1)
-        self.assertEqual(result[0].id, 'DF1')
+        self.assertIsInstance(result, StructureMessage)
+        self.assertEqual(len(result.dataflows), 1)
+        self.assertEqual(result.dataflows[0].id, 'DF1')
 
         # Search for a term in the description
         result = self.client.search_dataflows('delta')
-        self.assertEqual(len(result), 1)
-        self.assertEqual(result[0].id, 'DF2')
+        self.assertEqual(len(result.dataflows), 1)
+        self.assertEqual(result.dataflows[0].id, 'DF2')
 
         # Search for a term that appears in multiple dataflows
         result = self.client.search_dataflows('alpha')
-        self.assertEqual(len(result), 2)
+        self.assertEqual(len(result.dataflows), 2)
 
     @patch('sdmx.to_pandas')
     def test_get_dataflow_series_success(self, mock_to_pandas):

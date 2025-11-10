@@ -17,7 +17,8 @@ sdmx_models.py
 This module defines the data models for SDMX artifacts.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from typing import List
 
 
 @dataclass
@@ -28,3 +29,9 @@ class Dataflow:
     description: str
     agency_id: str
     version: str
+
+
+@dataclass
+class StructureMessage:
+    """A container for structured metadata from the SDMX client."""
+    dataflows: List[Dataflow] = field(default_factory=list)

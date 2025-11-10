@@ -224,17 +224,17 @@ def handle_discover_dataflows() -> None:
 
     if FLAGS.search:
         logging.info(f"Searching for dataflows with term: '{FLAGS.search}'")
-        dataflows = client.search_dataflows(FLAGS.search)
+        dataflows_msg = client.search_dataflows(FLAGS.search)
     else:
         logging.info("Listing all available dataflows")
-        dataflows = client.list_dataflows()
+        dataflows_msg = client.list_dataflows()
 
-    if not dataflows:
+    if not dataflows_msg.dataflows:
         logging.info("No dataflows found.")
         return
 
     # Convert to list of dicts for DataFrame creation and print
-    df = pd.DataFrame([asdict(df) for df in dataflows])
+    df = pd.DataFrame([asdict(df) for df in dataflows_msg.dataflows])
     print(df)
 
 
