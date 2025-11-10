@@ -40,7 +40,7 @@ from sdmx_client import SdmxClient
 # Command registry - single source of truth for commands and descriptions
 _COMMAND_HANDLERS = {
     'download-metadata': {
-        'handler': lambda: handle_download_metadata(),
+        'handler': lambda: handle_get_dataflow_metadata(),
         'description': 'Download SDMX metadata (XML format)'
     },
     'download-data': {
@@ -146,7 +146,7 @@ def ensure_output_directory(file_path: str) -> None:
         logging.info(f"Created output directory: {directory}")
 
 
-def handle_download_metadata() -> None:
+def handle_get_dataflow_metadata() -> None:
     """
     Handle the download-metadata subcommand.
 
@@ -169,7 +169,7 @@ def handle_download_metadata() -> None:
 
     # Create client and download metadata
     client = SdmxClient(FLAGS.endpoint, FLAGS.agency)
-    client.download_metadata(FLAGS.dataflow, FLAGS.output_path)
+    client.get_dataflow_metadata(FLAGS.dataflow, FLAGS.output_path)
     logging.info(f"Successfully downloaded metadata to: {FLAGS.output_path}")
 
 
