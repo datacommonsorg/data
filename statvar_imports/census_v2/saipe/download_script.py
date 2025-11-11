@@ -65,6 +65,7 @@ def _process_xls(filepath: Path, year: int) -> None:
             logging.warning(f"Header not found in {filepath}")
     except Exception as e:
         logging.error(f"Error processing file {filepath}: {e}")
+        raise RuntimeError(f"Error processing file {filepath}: {e}")
 
 
 def main(_: List[str]) -> None:
