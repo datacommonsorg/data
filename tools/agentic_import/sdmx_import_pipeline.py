@@ -15,14 +15,17 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Callable
+from typing import Callable, Sequence
 
 from absl import logging
 
-from tools.agentic_import.pipeline import (CompositeCallback, PipelineAbort,
-                                           PipelineCallback, Step)
-from tools.agentic_import.state_handler import StateHandler, StepState
+from tools.agentic_import.pipeline import (CompositeCallback, Pipeline,
+                                           PipelineAbort, PipelineCallback,
+                                           Step)
+from tools.agentic_import.state_handler import (PipelineState, StateHandler,
+                                                StepState)
 
 
 def _format_time(value: datetime) -> str:
@@ -123,3 +126,139 @@ def build_pipeline_callback(
         return json_callback
     interactive = InteractiveCallback()
     return CompositeCallback([interactive, json_callback])
+
+
+@dataclass(frozen=True)
+class SdmxPipelineConfig:
+    """User-configurable inputs that mimic planned CLI flags.
+
+    This is a lightweight container; CLI parsing will be added in a later
+    phase. Defaults are intentionally minimal.
+    """
+
+    endpoint: str | None = None
+    agency: str | None = None
+    dataflow: str | None = None
+    key: str | None = None
+    dataset_prefix: str | None = None
+    working_dir: str | None = None
+    run_only: str | None = None
+    force: bool = False
+    verbose: bool = False
+    skip_confirmation: bool = False
+
+
+class SdmxStep(Step):
+    """Base class for SDMX steps that carries immutable config and version."""
+
+    def __init__(self, *, name: str, version: int,
+                 config: SdmxPipelineConfig) -> None:
+        if not name:
+            raise ValueError("step requires a name")
+        self._name = name
+        self._version = version
+        self._config = config
+
+    @property
+    def name(self) -> str:
+        return self._name
+
+    @property
+    def version(self) -> int:
+        return self._version
+
+    # Subclasses must implement run() and dry_run().
+
+
+@dataclass(frozen=True)
+class StepSpec:
+    phase: str
+    name: str
+    version: int
+    factory: Callable[[SdmxPipelineConfig], Step]
+
+    @property
+    def full_name(self) -> str:
+        return f"{self.phase}.{self.name}"
+
+
+@dataclass(frozen=True)
+class PhaseSpec:
+    name: str
+    steps: Sequence[StepSpec]
+
+
+@dataclass(frozen=True)
+class SdmxPhaseRegistry:
+    phases: Sequence[PhaseSpec]
+
+    def flatten(self) -> list[StepSpec]:
+        flattened: list[StepSpec] = []
+        for phase in self.phases:
+            flattened.extend(phase.steps)
+        return flattened
+
+
+class SdmxPipelineBuilder:
+
+    def __init__(self, *, config: SdmxPipelineConfig, state: PipelineState,
+                 registry: SdmxPhaseRegistry) -> None:
+        self._config = config
+        self._state = state
+        self._registry = registry
+        self._specs = registry.flatten()
+
+    def build(self) -> Pipeline:
+        planned = self._plan_steps()
+        steps = [spec.factory(self._config) for spec in planned]
+        logging.info("Built SDMX pipeline with %d steps", len(steps))
+        return Pipeline(steps=steps)
+
+    def _plan_steps(self) -> list[StepSpec]:
+        specs = self._select_specs(self._specs, self._config.run_only)
+        if not specs:
+            return []
+        force_all = bool(self._config.force and not self._config.run_only)
+        if force_all:
+            return list(specs)
+        scheduled: list[StepSpec] = []
+        downstream = False
+        for spec in specs:
+            needs_run = self._should_run(spec)
+            if needs_run and not downstream:
+                downstream = True
+            if downstream:
+                scheduled.append(spec)
+        if not scheduled:
+            logging.info("No steps scheduled; all steps current")
+        return scheduled
+
+    def _select_specs(self, specs: Sequence[StepSpec],
+                      run_only: str | None) -> list[StepSpec]:
+        if not run_only:
+            return list(specs)
+        if "." in run_only:
+            scoped = [s for s in specs if s.full_name == run_only]
+            if not scoped:
+                raise ValueError(f"run_only target not found: {run_only}")
+            return scoped
+        scoped = [s for s in specs if s.phase == run_only]
+        if not scoped:
+            raise ValueError(f"run_only phase not found: {run_only}")
+        return scoped
+
+    def _should_run(self, spec: StepSpec) -> bool:
+        prev = self._state.steps.get(spec.full_name)
+        if prev is None:
+            return True
+        if prev.status != "succeeded":
+            return True
+        if prev.version < spec.version:
+            return True
+        return False
+
+
+def build_sdmx_pipeline(*, config: SdmxPipelineConfig, state: PipelineState,
+                        registry: SdmxPhaseRegistry) -> Pipeline:
+    builder = SdmxPipelineBuilder(config=config, state=state, registry=registry)
+    return builder.build()

@@ -39,8 +39,11 @@ from tools.agentic_import.pipeline import (  # pylint: disable=import-error
     RunnerConfig,
 )
 from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=import-error
-    InteractiveCallback, JSONStateCallback, build_pipeline_callback)
-from tools.agentic_import.state_handler import StateHandler  # pylint: disable=import-error
+    InteractiveCallback, JSONStateCallback, SdmxPipelineBuilder,
+    SdmxPipelineConfig, SdmxPhaseRegistry, PhaseSpec, StepSpec, SdmxStep,
+    build_pipeline_callback, build_sdmx_pipeline)
+from tools.agentic_import.state_handler import (  # pylint: disable=import-error
+    PipelineState, StateHandler, StepState)
 
 
 class _IncrementingClock:
@@ -260,6 +263,139 @@ class CallbackFactoryTest(unittest.TestCase):
                     skip_confirmation=False,
                 )
         self.assertIsInstance(callback, CompositeCallback)
+
+
+class _TestStep(SdmxStep):
+
+    def run(self) -> None:
+        pass
+
+    def dry_run(self) -> None:
+        logging.info("noop")
+
+
+class PlanningTest(unittest.TestCase):
+
+    def _mk_spec(self, phase: str, name: str, version: int) -> StepSpec:
+        full = f"{phase}.{name}"
+
+        def _factory(cfg: SdmxPipelineConfig) -> _TestStep:
+            return _TestStep(name=full, version=version, config=cfg)
+
+        return StepSpec(phase=phase,
+                        name=name,
+                        version=version,
+                        factory=_factory)
+
+    def _mk_registry(self) -> SdmxPhaseRegistry:
+        download = PhaseSpec(
+            name="download",
+            steps=[
+                self._mk_spec("download", "fetch", 1),
+                self._mk_spec("download", "preview", 1)
+            ],
+        )
+        process = PhaseSpec(
+            name="process",
+            steps=[self._mk_spec("process", "clean", 1)],
+        )
+        export = PhaseSpec(
+            name="export",
+            steps=[self._mk_spec("export", "write", 1)],
+        )
+        return SdmxPhaseRegistry(phases=[download, process, export])
+
+    def _empty_state(self) -> PipelineState:
+        return PipelineState(run_id="demo",
+                             critical_input_hash="",
+                             command="",
+                             updated_at="",
+                             steps={})
+
+    def _state_with(self, versions: dict[str, tuple[int,
+                                                    str]]) -> PipelineState:
+        steps = {
+            name:
+                StepState(version=v,
+                          status=st,
+                          started_at="t",
+                          ended_at="t",
+                          duration_s=0.0) for name, (v, st) in versions.items()
+        }
+        return PipelineState(run_id="demo",
+                             critical_input_hash="",
+                             command="",
+                             updated_at="",
+                             steps=steps)
+
+    def _names_from_builder(self,
+                            cfg: SdmxPipelineConfig,
+                            reg: SdmxPhaseRegistry,
+                            state: PipelineState | None = None) -> list[str]:
+        builder = SdmxPipelineBuilder(config=cfg,
+                                      state=state or self._empty_state(),
+                                      registry=reg)
+        pipeline = builder.build()
+        return [step.name for step in pipeline.get_steps()]
+
+    def test_run_only_phase_and_step(self) -> None:
+        reg = self._mk_registry()
+        cfg_phase = SdmxPipelineConfig(run_only="download")
+        names_phase = self._names_from_builder(cfg_phase, reg)
+        self.assertEqual(names_phase, ["download.fetch", "download.preview"])
+
+        cfg_step = SdmxPipelineConfig(run_only="download.fetch")
+        names_step = self._names_from_builder(cfg_step, reg)
+        self.assertEqual(names_step, ["download.fetch"])
+
+        with self.assertRaisesRegex(ValueError, "run_only phase not found"):
+            self._names_from_builder(SdmxPipelineConfig(run_only="nope"), reg)
+        with self.assertRaisesRegex(ValueError, "run_only target not found"):
+            self._names_from_builder(
+                SdmxPipelineConfig(run_only="download.nope"), reg)
+
+    def test_force_semantics(self) -> None:
+        reg = self._mk_registry()
+        cfg_all = SdmxPipelineConfig(force=True)
+        names_all = self._names_from_builder(cfg_all, reg)
+        self.assertEqual(names_all, [
+            "download.fetch",
+            "download.preview",
+            "process.clean",
+            "export.write",
+        ])
+
+        cfg_phase = SdmxPipelineConfig(run_only="download", force=True)
+        names_phase = self._names_from_builder(cfg_phase, reg)
+        self.assertEqual(names_phase, ["download.fetch", "download.preview"])
+
+    def test_version_bump_schedules_downstream(self) -> None:
+        # Make process.clean a new version while others remain the same.
+        download = PhaseSpec(
+            name="download",
+            steps=[self._mk_spec("download", "fetch", 1)],
+        )
+        process = PhaseSpec(
+            name="process",
+            steps=[self._mk_spec("process", "clean", 2)],
+        )
+        export = PhaseSpec(
+            name="export",
+            steps=[self._mk_spec("export", "write", 1)],
+        )
+        reg = SdmxPhaseRegistry(phases=[download, process, export])
+        state = self._state_with({
+            "download.fetch": (1, "succeeded"),
+            "process.clean": (1, "succeeded"),
+            "export.write": (1, "succeeded"),
+        })
+        cfg = SdmxPipelineConfig()
+        names = self._names_from_builder(cfg, reg, state)
+        self.assertEqual(names, ["process.clean", "export.write"])
+
+        pipeline = build_sdmx_pipeline(config=cfg, state=state, registry=reg)
+        self.assertEqual([s.name for s in pipeline.get_steps()],
+                         ["process.clean", "export.write"])
 
 
 if __name__ == "__main__":
