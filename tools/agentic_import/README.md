@@ -13,12 +13,13 @@ This guide describes the complete process for importing CSV data into Data Commo
     - [Step 2: Environment Setup](#step-2-environment-setup)
     - [Step 3: Working Directory Preparation](#step-3-working-directory-preparation)
   - [Data Import Process](#data-import-process)
-    - [Step 4: Data Sampling](#step-4-data-sampling)
-    - [Step 5: PV Map Generation for Sample Data](#step-5-pv-map-generation-for-sample-data)
-    - [Step 6: Full Data Processing](#step-6-full-data-processing)
+    - [Step 4: Data Download](#step-4-data-download)
+    - [Step 5: Data Sampling](#step-5-data-sampling)
+    - [Step 6: PV Map Generation for Sample Data](#step-6-pv-map-generation-for-sample-data)
+    - [Step 7: Full Data Processing](#step-7-full-data-processing)
   - [Custom Data Commons Import (Optional)](#custom-data-commons-import-optional)
-    - [Step 7: Generate Custom DC Configuration](#step-7-generate-custom-dc-configuration)
-    - [Step 8: Run Custom DC Import](#step-8-run-custom-dc-import)
+    - [Step 8: Generate Custom DC Configuration](#step-8-generate-custom-dc-configuration)
+    - [Step 9: Run Custom DC Import](#step-9-run-custom-dc-import)
   - [Directory Structure](#directory-structure)
   - [Debugging](#debugging)
     - [Gemini CLI Debugging](#gemini-cli-debugging)
@@ -79,23 +80,14 @@ mkdir -p /path/to/working/directory
 cd /path/to/working/directory
 export WORKING_DIR=$(pwd)
 
-# Ensure you have your input data and metadata files in this directory
-# Expected structure:
-# working_directory/
-# ├── input_data.csv
-# ├── metadata_file1.json
-# ├── metadata_file2.xml
-# ├── metadata_file3.txt
-# └── ... (other metadata files)
-```
 
-> **Note**: For downloading SDMX data and metadata files, see the [SDMX CLI documentation](../sdmx_import/README.md).
+```
 
 ## Data Import Process
 
 **IMPORTANT:** Run all the following steps from within your working directory with the Python virtual environment activated.
 
-```bash
+```**bash**
 # Confirm you are in the working directory
 cd $WORKING_DIR
 
@@ -103,7 +95,24 @@ cd $WORKING_DIR
 source $DC_DATA_REPO_PATH/.env/bin/activate
 ```
 
-### Step 4: Data Sampling
+### Step 4: Data Download
+
+Download your input data and metadata into this working directory; the expected structure is:
+
+```text
+working_directory/
+├── input_data.csv
+├── metadata_file1.json
+├── metadata_file2.xml
+├── metadata_file3.txt
+└── ... (other metadata files)
+```
+
+#### SDMX Downloads
+
+Refer to the [SDMX CLI documentation](../sdmx_import/README.md) for details on downloading SDMX data and metadata files.
+
+### Step 5: Data Sampling
 
 Create a sample of your data using the data_sampler utility. This helps with initial testing and validation:
 
@@ -120,7 +129,7 @@ python $DC_DATA_REPO_PATH/tools/statvar_importer/data_sampler.py \
 - `--sampler_output`: Path where the sample will be saved
 - `--sampler_output_rows`: Maximum number of rows to sample (recommended: 30 for testing). Note: For non-SDMX sources which don't have metadata listing all column values, set this large enough to capture all unique values across all columns.
 
-### Step 5: PV Map Generation for Sample Data
+### Step 6: PV Map Generation for Sample Data
 
 Generate the PV map and metadata files using the pvmap_generator with command-line flags. This will use Gemini CLI to read sample data, generate pvmap.csv, metadata.csv and convert sample data to Data Commons observations as output.csv:
 
@@ -157,7 +166,7 @@ This command will generate:
 - Validate new StatVar schema in `sample_output/output_stat_vars.mcf`
 
 
-### Step 6: Full Data Processing
+### Step 7: Full Data Processing
 
 Process the full input data (not sample data) using the PV map and metadata files generated from sample data in previous step  (`sample_output/output_pvmap.csv` and `sample_output/output_metadata.csv`).
 
@@ -185,7 +194,7 @@ python "$DC_DATA_REPO_PATH/tools/statvar_importer/stat_var_processor.py" \
 
 If importing to a custom Data Commons instance, follow these steps:
 
-### Step 7: Generate Custom DC Configuration
+### Step 8: Generate Custom DC Configuration
 
 Generate the custom DC configuration:
 
@@ -200,7 +209,7 @@ python $DC_DATA_REPO_PATH/tools/agentic_import/generate_custom_dc_config.py \
 - `--input_csv`: Path to the processed output CSV file
 - `--output_config`: Path where the custom DC config JSON will be saved
 
-### Step 8: Run Custom DC Import
+### Step 9: Run Custom DC Import
 
 1. **Navigate to the final_output directory:**
    ```bash
