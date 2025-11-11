@@ -1,0 +1,3 @@
+parameter,value
+output_columns,"observationAbout, observationDate, value, variableMeasured"
+header_rows,1

@@ -1,0 +1,8 @@
+key,,,,,,,,,,,,
+LEA_STATE,observationAbout,{Data},,,,,,,,,,
+SCH_CRED-ITRECOVERY_IND:1,statType,measuredValue,measuredProperty,count,populationType,School,schoolSubject,CreditRecoveryProgram,#Aggregate,sum,value,1,subjectOfferStatus,SubjectOffered
+SCH_CREDITRECOVERY_IND:0,statType,measuredValue,measuredProperty,count,populationType,School,schoolSubject,CreditRecoveryProgram,#Aggregate,sum,value,1,subjectOfferStatus,SubjectNotOffered
+SCH_CREDITRECOVERYENR,value,{Number},statType,measuredValue,measuredProperty,count,populationType,Student,schoolSubject,CreditRecoveryProgram,enrollmentStatus,Enrolled,,
+JJ:0,juvenileJusticeFacilityStatus,NotJuvenileJusticeFacility,,,,,,,,,,
+JJ:1,juvenileJusticeFacilityStatus,JuvenileJusticeFacility,,,,,,,,,,
+year,observationDate,{Data},,,,,,,,,,
