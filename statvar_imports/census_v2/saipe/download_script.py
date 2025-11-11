@@ -47,21 +47,24 @@ def _process_xls(filepath: Path, year: int) -> None:
     Processes a downloaded XLS file, extracts data, adds a year column,
     and saves it as an XLSX file.
     """
-    df = pd.read_excel(filepath, header=None)
-    header_row_index = _find_header_row(df)
+    try:
+        df = pd.read_excel(filepath, header=None)
+        header_row_index = _find_header_row(df)
 
-    if header_row_index != -1:
-        # Set the found row as header and get data from the next row onwards
-        df.columns = df.iloc[header_row_index]
-        df = df.iloc[header_row_index + 1:]
-        df['Year'] = year
+        if header_row_index != -1:
+            # Set the found row as header and get data from the next row onwards
+            df.columns = df.iloc[header_row_index]
+            df = df.iloc[header_row_index + 1:]
+            df['Year'] = year
 
-        new_filepath = filepath.with_suffix(".xlsx")
-        df.to_excel(new_filepath, index=False)
-        filepath.unlink()  # Remove the original .xls file
-        logging.info(f"Processed {filepath} and saved as {new_filepath}")
-    else:
-        logging.warning(f"Header not found in {filepath}")
+            new_filepath = filepath.with_suffix(".xlsx")
+            df.to_excel(new_filepath, index=False)
+            filepath.unlink()  # Remove the original .xls file
+            logging.info(f"Processed {filepath} and saved as {new_filepath}")
+        else:
+            logging.warning(f"Header not found in {filepath}")
+    except Exception as e:
+        logging.error(f"Error processing file {filepath}: {e}")
 
 
 def main(_: List[str]) -> None:
