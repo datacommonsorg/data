@@ -1,4 +1,4 @@
-key,prop,value,,,,,,,,
+key,,,,,,,,,,
 YEAR,observationDate,{Data},populationType,PublicSchool,measuredProperty,count,statType,measuredValue,medicalCondition,COVID19
 LEA_STATE,observationAbout,{Data},,,,,,,,
 SCH_DIND_INSTRUCTIONTYPE:A,instructionMode,InstructionInPerson ,"#Aggregate
