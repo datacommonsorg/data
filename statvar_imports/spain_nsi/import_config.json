@@ -2,15 +2,15 @@
   "imports": [
     {
       "url": "https://www.ine.es/jaxiT3/files/t/en/csv_bd/67991.csv?nocab=1",
-      "filename": "Population_by_province_capitals_and_gender.csv"
+      "filename": "Population_by_province_capitals_and_gender"
     },
     {
       "url": "https://www.ine.es/jaxiT3/files/t/en/csv_bd/68065.csv?nocab=1",
-      "filename": "Population_by_municipality_and_gender.csv"
+      "filename": "Population_by_municipality_and_gender"
     },
     {
       "url": "https://www.ine.es/jaxiT3/files/t/en/csv_bd/65061.csv?nocab=1",
-      "filename": "Population_by_sex_and_age_group.csv"
+      "filename": "Population_by_sex_and_age_group"
     },
     {
       "url": "https://www.ine.es/jaxiT3/files/t/en/csv_bd/25201.csv?nocab=1",
@@ -38,7 +38,7 @@
     },
     {
       "url": "https://www.ine.es/jaxi/files/_px/en/csv_bd/tpx/MercadoLaboral_1403/EPD_12096/l1/03002.csv_bd?nocab=1",
-      "filename": "activity_employment_unemployment_by_sex.csv"
+      "filename": "activity_employment_unemployment_by_sex"
     }
   ]
 }

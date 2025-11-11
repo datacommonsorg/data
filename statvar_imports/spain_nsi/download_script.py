@@ -79,8 +79,10 @@ def clean_and_rename_total(filepath):
     except pd.errors.ParserError as e:
         logging.error(
             f"Error parsing the CSV file: {e}. Please check the file format.")
+        raise RuntimeError(f"Failed to parse CSV file: {filepath}") from e
     except Exception as e:
         logging.error(f"An unexpected error occurred in {filepath}: {e}")
+        raise RuntimeError(f"Unexpected error processing file: {filepath}") from e
 
 
 def convert_tsv_to_csv(file_path):
@@ -152,38 +154,30 @@ def main(_):
             logging.error(
                 f"Downloaded file not found at {original_filepath}")
 
-    # --- ALL FILE PATHS ---
-    activity_file = os.path.join(_OUTPUT_DIRECTORY,
-                                 "activity_employment_unemployment_by_sex.csv")
-    education_file = os.path.join(_OUTPUT_DIRECTORY,
-                                  "Levels_of_education_gender.csv")
-    population_file = os.path.join(_OUTPUT_DIRECTORY,
-                                   "Population_by_sex_and_age_group.csv")
-    education_field_file = os.path.join(_OUTPUT_DIRECTORY,
-                                      "Education_Field_of_study.csv")
-    
-    # --- CALLING THE CLEAN FUNCTION FOR ALL FILES ---
-    # This will now apply the drop logic to every file
-    
-    if os.path.exists(activity_file):
-        clean_and_rename_total(activity_file)
-    else:
-        logging.warning(f"File not found, skipping: {activity_file}")
+    # --- Define all files to be cleaned ---
+    files_to_clean = [
+        "activity_employment_unemployment_by_sex.csv",
+        "Levels_of_education_gender.csv",
+        "Population_by_sex_and_age_group.csv",
+        "Education_Field_of_study.csv"
+    ]
+
+    logging.info("Starting post-download cleaning...")
+
+    # --- Loop through each file and process it ---
+    for filename in files_to_clean:
+        file_path = os.path.join(_OUTPUT_DIRECTORY, filename)
         
-    if os.path.exists(education_file):
-        clean_and_rename_total(education_file)
-    else:
-        logging.warning(f"File not found, skipping: {education_file}")
-        
-    if os.path.exists(population_file):
-        clean_and_rename_total(population_file)
-    else:
-        logging.warning(f"File not found, skipping: {population_file}")
-        
-    if os.path.exists(education_field_file):
-        clean_and_rename_total(education_field_file)
-    else:
-        logging.warning(f"File not found, skipping: {education_field_file}")
+        if os.path.exists(file_path):
+            try:
+                # Call the cleaning function
+                clean_and_rename_total(file_path)
+            except Exception as e:
+                # Log errors but continue processing other files
+                logging.error(f"Failed to clean {filename}: {e}")
+        else:
+            # Log a warning if a file is missing
+            logging.warning(f"File not found, skipping: {file_path}")
 
 
 if __name__ == '__main__':
