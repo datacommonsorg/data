@@ -23,6 +23,9 @@ import sys
 import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
+from unittest import mock
+
+from absl import logging
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.dirname(_SCRIPT_DIR)
@@ -32,10 +35,11 @@ for path in (_PROJECT_ROOT,):
         sys.path.append(path)
 
 from tools.agentic_import.pipeline import (  # pylint: disable=import-error
-    BaseStep, Pipeline, PipelineAbort, PipelineRunner, RunnerConfig,
+    BaseStep, CompositeCallback, Pipeline, PipelineAbort, PipelineRunner,
+    RunnerConfig,
 )
 from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=import-error
-    JSONStateCallback,)
+    InteractiveCallback, JSONStateCallback, build_pipeline_callback)
 from tools.agentic_import.state_handler import StateHandler  # pylint: disable=import-error
 
 
@@ -178,6 +182,84 @@ class JSONStateCallbackTest(unittest.TestCase):
                 state = json.load(fp)
 
         self.assertEqual(state, previous)
+
+
+class InteractiveCallbackTest(unittest.TestCase):
+
+    def test_prompt_accepts_and_runs_step(self) -> None:
+        callback = InteractiveCallback()
+        pipeline = Pipeline(steps=[_RecordingStep("download.preview")])
+        runner = PipelineRunner(RunnerConfig())
+
+        with mock.patch("builtins.input", return_value="y"):
+            with self.assertLogs(logging.get_absl_logger(),
+                                 level="INFO") as logs:
+                runner.run(pipeline, callback)
+
+        self.assertTrue(
+            any("Dry run for download.preview" in entry
+                for entry in logs.output))
+
+    def test_prompt_decline_aborts_pipeline(self) -> None:
+        events: list[str] = []
+
+        class _TrackingStep(_RecordingStep):
+
+            def __init__(self) -> None:
+                super().__init__("sample.interactive")
+                self.executed = False
+
+            def run(self) -> None:
+                self.executed = True
+                super().run()
+
+            def dry_run(self) -> str:
+                events.append("dry_run")
+                return "noop"
+
+        callback = InteractiveCallback()
+        step = _TrackingStep()
+        pipeline = Pipeline(steps=[step])
+        runner = PipelineRunner(RunnerConfig())
+
+        with mock.patch("builtins.input", return_value="n"):
+            with self.assertLogs(logging.get_absl_logger(), level="INFO"):
+                runner.run(pipeline, callback)
+
+        self.assertFalse(step.executed)
+        self.assertTrue(events)
+
+
+class CallbackFactoryTest(unittest.TestCase):
+
+    def _state_handler_for_tmpdir(self, tmpdir: str) -> StateHandler:
+        path = os.path.join(tmpdir, ".datacommons", "demo.state.json")
+        return StateHandler(state_path=path, dataset_prefix="demo")
+
+    def test_skip_confirmation_returns_json_callback(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            handler = self._state_handler_for_tmpdir(tmpdir)
+            callback = build_pipeline_callback(
+                state_handler=handler,
+                run_id="demo",
+                critical_input_hash="abc",
+                command="python run",
+                skip_confirmation=True,
+            )
+        self.assertIsInstance(callback, JSONStateCallback)
+
+    def test_interactive_mode_returns_composite(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            handler = self._state_handler_for_tmpdir(tmpdir)
+            with mock.patch("builtins.input", return_value="y"):
+                callback = build_pipeline_callback(
+                    state_handler=handler,
+                    run_id="demo",
+                    critical_input_hash="abc",
+                    command="python run",
+                    skip_confirmation=False,
+                )
+        self.assertIsInstance(callback, CompositeCallback)
 
 
 if __name__ == "__main__":

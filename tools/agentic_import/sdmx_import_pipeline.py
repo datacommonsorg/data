@@ -20,7 +20,8 @@ from typing import Callable
 
 from absl import logging
 
-from tools.agentic_import.pipeline import PipelineAbort, PipelineCallback, Step
+from tools.agentic_import.pipeline import (CompositeCallback, PipelineAbort,
+                                           PipelineCallback, Step)
 from tools.agentic_import.state_handler import StateHandler, StepState
 
 
@@ -28,6 +29,20 @@ def _format_time(value: datetime) -> str:
     if value.tzinfo is None:
         value = value.replace(tzinfo=timezone.utc)
     return value.isoformat()
+
+
+class InteractiveCallback(PipelineCallback):
+    """Prompts the user before each step runs."""
+
+    def before_step(self, step: Step) -> None:
+        preview = step.dry_run()
+        logging.info(f"Dry run for {step.name} (v{step.version}):")
+        if preview:
+            logging.info(preview)
+        prompt = f"Run step {step.name} (v{step.version})? [Y/n] "
+        response = input(prompt).strip().lower()
+        if response in ("n", "no"):
+            raise PipelineAbort("user declined interactive prompt")
 
 
 class JSONStateCallback(PipelineCallback):
@@ -89,3 +104,24 @@ class JSONStateCallback(PipelineCallback):
 
     def _now(self) -> datetime:
         return self._now_fn()
+
+
+def build_pipeline_callback(
+    *,
+    state_handler: StateHandler,
+    run_id: str,
+    critical_input_hash: str,
+    command: str,
+    skip_confirmation: bool,
+    now_fn: Callable[[], datetime] | None = None,
+) -> PipelineCallback:
+    """Constructs the pipeline callback stack for the SDMX runner."""
+    json_callback = JSONStateCallback(state_handler=state_handler,
+                                      run_id=run_id,
+                                      critical_input_hash=critical_input_hash,
+                                      command=command,
+                                      now_fn=now_fn)
+    if skip_confirmation:
+        return json_callback
+    interactive = InteractiveCallback()
+    return CompositeCallback([interactive, json_callback])

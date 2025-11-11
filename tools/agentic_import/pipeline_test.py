@@ -23,8 +23,8 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 
 from pipeline import (  # pylint: disable=import-error
-    BaseStep, Pipeline, PipelineAbort, PipelineCallback, PipelineRunner,
-    RunnerConfig, Step,
+    BaseStep, CompositeCallback, Pipeline, PipelineAbort, PipelineCallback,
+    PipelineRunner, RunnerConfig, Step,
 )
 
 
@@ -144,6 +144,45 @@ class PipelineRunnerTest(unittest.TestCase):
             PipelineRunner(RunnerConfig()).run(pipeline, callback)
 
         self.assertEqual(callback.after_calls, [("fail-step", "ValueError")])
+
+
+class CompositeCallbackTest(unittest.TestCase):
+
+    def test_callbacks_run_in_order_for_each_hook(self) -> None:
+        events: list[str] = []
+
+        class RecordingCallback(PipelineCallback):
+
+            def __init__(self, label: str) -> None:
+                self._label = label
+
+            def before_step(self, step: Step) -> None:
+                events.append(f"{self._label}:before:{step.name}")
+
+            def after_step(self,
+                           step: Step,
+                           *,
+                           error: Exception | None = None) -> None:
+                del error
+                events.append(f"{self._label}:after:{step.name}")
+
+        composite = CompositeCallback(
+            [RecordingCallback("first"),
+             RecordingCallback("second")])
+        step = _TrackingStep("composite", events)
+
+        composite.before_step(step)
+        composite.after_step(step)
+
+        self.assertEqual(
+            events,
+            [
+                "first:before:composite",
+                "second:before:composite",
+                "first:after:composite",
+                "second:after:composite",
+            ],
+        )
 
 
 if __name__ == "__main__":

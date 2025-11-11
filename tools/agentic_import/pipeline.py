@@ -87,6 +87,21 @@ class PipelineCallback:
         del step, error
 
 
+class CompositeCallback(PipelineCallback):
+    """Fans out events to child callbacks in order."""
+
+    def __init__(self, callbacks: Sequence[PipelineCallback]) -> None:
+        self._callbacks = list(callbacks)
+
+    def before_step(self, step: Step) -> None:
+        for callback in self._callbacks:
+            callback.before_step(step)
+
+    def after_step(self, step: Step, *, error: Exception | None = None) -> None:
+        for callback in self._callbacks:
+            callback.after_step(step, error=error)
+
+
 @dataclass(frozen=True)
 class RunnerConfig:
     """Placeholder for future runner toggles."""
