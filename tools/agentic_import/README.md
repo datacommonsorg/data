@@ -88,7 +88,7 @@ export WORKING_DIR=$(pwd)
 
 **IMPORTANT:** Run all the following steps from within your working directory with the Python virtual environment activated.
 
-```**bash**
+```bash
 # Confirm you are in the working directory
 cd $WORKING_DIR
 
