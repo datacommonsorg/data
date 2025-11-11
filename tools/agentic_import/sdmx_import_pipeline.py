@@ -15,15 +15,13 @@
 
 from __future__ import annotations
 
-import json
-from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
-from pathlib import Path
 from typing import Callable
 
 from absl import logging
 
-from tools.agentic_import.pipeline import PipelineCallback, Step
+from tools.agentic_import.pipeline import PipelineAbort, PipelineCallback, Step
+from tools.agentic_import.state_handler import StateHandler, StepState
 
 
 def _format_time(value: datetime) -> str:
@@ -32,51 +30,29 @@ def _format_time(value: datetime) -> str:
     return value.isoformat()
 
 
-@dataclass
-class StepState:
-    version: int
-    status: str
-    started_at: str
-    ended_at: str
-    duration_s: float
-    message: str | None = None
-
-
-@dataclass
-class PipelineState:
-    run_id: str
-    critical_input_hash: str
-    command: str
-    updated_at: str
-    steps: dict[str, StepState] = field(default_factory=dict)
-
-
 class JSONStateCallback(PipelineCallback):
-    """Persists pipeline progress to the SDMX state file.
+    """Persists pipeline progress to the SDMX state file via StateHandler.
 
-    The callback is intentionally unaware of planning concerns. The CLI computes
-    identifiers such as run_id and critical_input_hash before invoking the
-    runner, then instantiates this callback with the desired destination file.
+    This callback assumes a single process owns the state file for the lifetime
+    of the run. The CLI or builder sets run metadata up-front; this class only
+    mutates state after a step executes.
     """
 
     def __init__(self,
                  *,
-                 state_path: str | Path,
+                 state_handler: StateHandler,
                  run_id: str,
                  critical_input_hash: str,
                  command: str,
                  now_fn: Callable[[], datetime] | None = None) -> None:
-        self._state_path = Path(state_path)
+        self._handler = state_handler
         self._now_fn = now_fn or (lambda: datetime.now(timezone.utc))
-        self._state = PipelineState(
-            run_id=run_id,
-            critical_input_hash=critical_input_hash,
-            command=command,
-            updated_at=_format_time(self._now()),
-        )
+        self._state = self._handler.get_state()
+        self._state.run_id = run_id
+        self._state.critical_input_hash = critical_input_hash
+        self._state.command = command
         self._step_start_times: dict[str, datetime] = {}
-        self._state_path.parent.mkdir(parents=True, exist_ok=True)
-        logging.info("JSON state will be written to %s", self._state_path)
+        logging.info(f"JSON state will be written to {self._handler.path}")
 
     def before_step(self, step: Step) -> None:
         started_at = self._now()
@@ -88,25 +64,28 @@ class JSONStateCallback(PipelineCallback):
         if started_at is None:
             started_at = ended_at
         duration = max(0.0, (ended_at - started_at).total_seconds())
+        if isinstance(error, PipelineAbort):
+            logging.info(
+                f"Skipping state update for {step.name} due to pipeline abort")
+            return
+        if error:
+            message = str(error) or error.__class__.__name__
+        else:
+            message = None
+        # Step stats are persisted only after the step finishes; steps can still
+        # be skipped after their before_step callback runs, so we leave skipped
+        # steps untouched to preserve prior state.
         step_state = StepState(
             version=step.version,
             status="failed" if error else "succeeded",
             started_at=_format_time(started_at),
             ended_at=_format_time(ended_at),
             duration_s=duration,
-            message=str(error) or error.__class__.__name__ if error else None,
+            message=message,
         )
         self._state.steps[step.name] = step_state
         self._state.updated_at = step_state.ended_at
-        self._write_state()
+        self._handler.save_state()
 
     def _now(self) -> datetime:
         return self._now_fn()
-
-    def _write_state(self) -> None:
-        temp_path = self._state_path.with_suffix(self._state_path.suffix +
-                                                 ".tmp")
-        with temp_path.open("w", encoding="utf-8") as fp:
-            json.dump(asdict(self._state), fp, indent=2, sort_keys=True)
-            fp.write("\n")
-        temp_path.replace(self._state_path)

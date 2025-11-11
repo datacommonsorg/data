@@ -79,9 +79,11 @@ class PipelineCallback:
     """Lifecycle hooks consumed by the runner; defaults are no-ops."""
 
     def before_step(self, step: Step) -> None:
+        """Called immediately before `step.run()`; raising an error skips execution."""
         del step
 
     def after_step(self, step: Step, *, error: Exception | None = None) -> None:
+        """Runs once per step after `step.run()` succeeds or raises."""
         del step, error
 
 
@@ -100,28 +102,25 @@ class PipelineRunner:
             callback: PipelineCallback | None = None) -> None:
         current_step: Step | None = None
         steps = pipeline.get_steps()
-        logging.info("Starting pipeline with %d steps", len(steps))
+        logging.info(f"Starting pipeline with {len(steps)} steps")
         try:
             for step in steps:
                 current_step = step
-                logging.info("Preparing step %s (v%d)", step.name, step.version)
+                logging.info(f"Preparing step {step.name} (v{step.version})")
                 if callback:
                     callback.before_step(step)
+                error: Exception | None = None
                 try:
                     step.run()
-                except PipelineAbort as exc:
-                    if callback:
-                        callback.after_step(step, error=exc)
-                    raise
                 except Exception as exc:  # pylint: disable=broad-except
-                    if callback:
-                        callback.after_step(step, error=exc)
-                    logging.exception("Step %s failed", step.name)
+                    error = exc
+                    logging.exception(f"Step {step.name} failed")
                     raise
-                if callback:
-                    callback.after_step(step)
-                logging.info("Finished step %s", step.name)
+                finally:
+                    if callback:
+                        callback.after_step(step, error=error)
+                logging.info(f"Finished step {step.name}")
             logging.info("Pipeline completed")
-        except PipelineAbort as exc:
+        except PipelineAbort:
             name = current_step.name if current_step else "<none>"
-            logging.info("Pipeline aborted at %s", name)
+            logging.info(f"Pipeline aborted at {name}")

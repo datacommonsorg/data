@@ -32,10 +32,11 @@ for path in (_PROJECT_ROOT,):
         sys.path.append(path)
 
 from tools.agentic_import.pipeline import (  # pylint: disable=import-error
-    BaseStep, Pipeline, PipelineRunner, RunnerConfig,
+    BaseStep, Pipeline, PipelineAbort, PipelineRunner, RunnerConfig,
 )
 from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=import-error
     JSONStateCallback,)
+from tools.agentic_import.state_handler import StateHandler  # pylint: disable=import-error
 
 
 class _IncrementingClock:
@@ -69,30 +70,32 @@ class _RecordingStep(BaseStep):
 
 class JSONStateCallbackTest(unittest.TestCase):
 
-    def _build_callback(self, *, tmpdir: str,
-                        clock: _IncrementingClock) -> JSONStateCallback:
+    def _build_callback(
+            self, *, tmpdir: str, clock: _IncrementingClock
+    ) -> tuple[JSONStateCallback, StateHandler]:
         state_path = os.path.join(tmpdir, ".datacommons", "demo.state.json")
-        return JSONStateCallback(
-            state_path=state_path,
+        handler = StateHandler(state_path=state_path, dataset_prefix="demo")
+        callback = JSONStateCallback(
+            state_handler=handler,
             run_id="demo",
             critical_input_hash="abc123",
             command="python run",
             now_fn=clock,
         )
+        return callback, handler
 
     def test_successful_step_persists_expected_schema(self) -> None:
         clock = _IncrementingClock(
             datetime(2025, 1, 1, 0, 0, tzinfo=timezone.utc),
             timedelta(seconds=5))
         with tempfile.TemporaryDirectory() as tmpdir:
-            callback = self._build_callback(tmpdir=tmpdir, clock=clock)
+            callback, handler = self._build_callback(tmpdir=tmpdir, clock=clock)
             pipeline = Pipeline(
                 steps=[_RecordingStep("download.download-data")])
             runner = PipelineRunner(RunnerConfig())
             runner.run(pipeline, callback)
 
-            state_path = os.path.join(tmpdir, ".datacommons", "demo.state.json")
-            with open(state_path, encoding="utf-8") as fp:
+            with open(handler.path, encoding="utf-8") as fp:
                 state = json.load(fp)
 
         step_state = state["steps"]["download.download-data"]
@@ -111,7 +114,7 @@ class JSONStateCallbackTest(unittest.TestCase):
             datetime(2025, 1, 2, 0, 0, tzinfo=timezone.utc),
             timedelta(seconds=7))
         with tempfile.TemporaryDirectory() as tmpdir:
-            callback = self._build_callback(tmpdir=tmpdir, clock=clock)
+            callback, handler = self._build_callback(tmpdir=tmpdir, clock=clock)
             pipeline = Pipeline(steps=[
                 _RecordingStep("sample.create-sample", should_fail=True)
             ])
@@ -120,14 +123,61 @@ class JSONStateCallbackTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "boom"):
                 runner.run(pipeline, callback)
 
-            state_path = os.path.join(tmpdir, ".datacommons", "demo.state.json")
-            with open(state_path, encoding="utf-8") as fp:
+            with open(handler.path, encoding="utf-8") as fp:
                 state = json.load(fp)
 
         step_state = state["steps"]["sample.create-sample"]
         self.assertEqual(step_state["status"], "failed")
         self.assertIn("boom", step_state["message"])
         self.assertAlmostEqual(step_state["duration_s"], 7.0)
+
+    def test_abort_skips_state_persistence(self) -> None:
+        clock = _IncrementingClock(
+            datetime(2025, 1, 3, 0, 0, tzinfo=timezone.utc),
+            timedelta(seconds=3))
+        with tempfile.TemporaryDirectory() as tmpdir:
+            state_dir = os.path.join(tmpdir, ".datacommons")
+            os.makedirs(state_dir, exist_ok=True)
+            state_path = os.path.join(state_dir, "demo.state.json")
+            previous = {
+                "run_id": "previous",
+                "critical_input_hash": "old",
+                "command": "old command",
+                "updated_at": "2025-01-01T00:00:00Z",
+                "steps": {
+                    "existing.step": {
+                        "version": 1,
+                        "status": "succeeded",
+                        "started_at": "2025-01-01T00:00:00Z",
+                        "ended_at": "2025-01-01T00:05:00Z",
+                        "duration_s": 300.0,
+                        "message": None,
+                    }
+                },
+            }
+            with open(state_path, "w", encoding="utf-8") as fp:
+                json.dump(previous, fp)
+            callback, handler = self._build_callback(tmpdir=tmpdir, clock=clock)
+
+            class _AbortStep(BaseStep):
+
+                def __init__(self) -> None:
+                    super().__init__(name="download.download-data", version=1)
+
+                def run(self) -> None:
+                    raise PipelineAbort("user requested stop")
+
+                def dry_run(self) -> str:
+                    return "noop"
+
+            pipeline = Pipeline(steps=[_AbortStep()])
+            runner = PipelineRunner(RunnerConfig())
+            runner.run(pipeline, callback)
+
+            with open(handler.path, encoding="utf-8") as fp:
+                state = json.load(fp)
+
+        self.assertEqual(state, previous)
 
 
 if __name__ == "__main__":
