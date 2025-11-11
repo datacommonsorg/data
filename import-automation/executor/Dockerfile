@@ -44,7 +44,7 @@ RUN apt-get update && \
 
 
 ENV JAVA_HOME=/usr/local/openjdk-17
-COPY --from=openjdk:17-slim $JAVA_HOME $JAVA_HOME
+COPY --from=openjdk:17.0.1-slim $JAVA_HOME $JAVA_HOME
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 # Google Cloud Logging configuration
