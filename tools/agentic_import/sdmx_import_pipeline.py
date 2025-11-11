@@ -129,7 +129,7 @@ def build_pipeline_callback(
 
 
 @dataclass(frozen=True)
-class SdmxPipelineConfig:
+class PipelineConfig:
     """User-configurable inputs that mimic planned CLI flags.
 
     This is a lightweight container; CLI parsing will be added in a later
@@ -152,7 +152,7 @@ class SdmxStep(Step):
     """Base class for SDMX steps that carries immutable config and version."""
 
     def __init__(self, *, name: str, version: int,
-                 config: SdmxPipelineConfig) -> None:
+                 config: PipelineConfig) -> None:
         if not name:
             raise ValueError("step requires a name")
         self._name = name
@@ -170,12 +170,110 @@ class SdmxStep(Step):
     # Subclasses must implement run() and dry_run().
 
 
+class DownloadDataStep(SdmxStep):
+    """Downloads SDMX data payloads."""
+
+    VERSION = 1
+
+    def __init__(self, *, name: str, config: PipelineConfig) -> None:
+        super().__init__(name=name, version=self.VERSION, config=config)
+
+    def run(self) -> None:
+        logging.info(
+            f"{self.name}: no-op implementation for VERSION={self.VERSION}")
+
+    def dry_run(self) -> None:
+        logging.info(f"{self.name} (dry run): previewing data download inputs")
+
+
+class DownloadMetadataStep(SdmxStep):
+    """Downloads SDMX metadata payloads."""
+
+    VERSION = 1
+
+    def __init__(self, *, name: str, config: PipelineConfig) -> None:
+        super().__init__(name=name, version=self.VERSION, config=config)
+
+    def run(self) -> None:
+        logging.info(
+            f"{self.name}: no-op implementation for VERSION={self.VERSION}")
+
+    def dry_run(self) -> None:
+        logging.info(
+            f"{self.name} (dry run): previewing metadata download inputs")
+
+
+class CreateSampleStep(SdmxStep):
+    """Creates a sample dataset from downloaded data."""
+
+    VERSION = 1
+
+    def __init__(self, *, name: str, config: PipelineConfig) -> None:
+        super().__init__(name=name, version=self.VERSION, config=config)
+
+    def run(self) -> None:
+        logging.info(
+            f"{self.name}: no-op implementation for VERSION={self.VERSION}")
+
+    def dry_run(self) -> None:
+        logging.info(f"{self.name} (dry run): previewing sample generation")
+
+
+class CreateSchemaMapStep(SdmxStep):
+    """Builds schema mappings for transformed data."""
+
+    VERSION = 1
+
+    def __init__(self, *, name: str, config: PipelineConfig) -> None:
+        super().__init__(name=name, version=self.VERSION, config=config)
+
+    def run(self) -> None:
+        logging.info(
+            f"{self.name}: no-op implementation for VERSION={self.VERSION}")
+
+    def dry_run(self) -> None:
+        logging.info(
+            f"{self.name} (dry run): previewing schema mapping outputs")
+
+
+class ProcessFullDataStep(SdmxStep):
+    """Processes full SDMX data into DC artifacts."""
+
+    VERSION = 1
+
+    def __init__(self, *, name: str, config: PipelineConfig) -> None:
+        super().__init__(name=name, version=self.VERSION, config=config)
+
+    def run(self) -> None:
+        logging.info(
+            f"{self.name}: no-op implementation for VERSION={self.VERSION}")
+
+    def dry_run(self) -> None:
+        logging.info(f"{self.name} (dry run): previewing full-data processing")
+
+
+class CreateDcConfigStep(SdmxStep):
+    """Generates Datacommons configuration artifacts."""
+
+    VERSION = 1
+
+    def __init__(self, *, name: str, config: PipelineConfig) -> None:
+        super().__init__(name=name, version=self.VERSION, config=config)
+
+    def run(self) -> None:
+        logging.info(
+            f"{self.name}: no-op implementation for VERSION={self.VERSION}")
+
+    def dry_run(self) -> None:
+        logging.info(f"{self.name} (dry run): previewing DC config creation")
+
+
 @dataclass(frozen=True)
 class StepSpec:
     phase: str
     name: str
     version: int
-    factory: Callable[[SdmxPipelineConfig], Step]
+    factory: Callable[[PipelineConfig], Step]
 
     @property
     def full_name(self) -> str:
@@ -189,7 +287,7 @@ class PhaseSpec:
 
 
 @dataclass(frozen=True)
-class SdmxPhaseRegistry:
+class PhaseRegistry:
     phases: Sequence[PhaseSpec]
 
     def flatten(self) -> list[StepSpec]:
@@ -199,10 +297,10 @@ class SdmxPhaseRegistry:
         return flattened
 
 
-class SdmxPipelineBuilder:
+class PipelineBuilder:
 
-    def __init__(self, *, config: SdmxPipelineConfig, state: PipelineState,
-                 registry: SdmxPhaseRegistry) -> None:
+    def __init__(self, *, config: PipelineConfig, state: PipelineState,
+                 registry: PhaseRegistry) -> None:
         self._config = config
         self._state = state
         self._registry = registry
@@ -258,7 +356,7 @@ class SdmxPipelineBuilder:
         return False
 
 
-def build_sdmx_pipeline(*, config: SdmxPipelineConfig, state: PipelineState,
-                        registry: SdmxPhaseRegistry) -> Pipeline:
-    builder = SdmxPipelineBuilder(config=config, state=state, registry=registry)
+def build_sdmx_pipeline(*, config: PipelineConfig, state: PipelineState,
+                        registry: PhaseRegistry) -> Pipeline:
+    builder = PipelineBuilder(config=config, state=state, registry=registry)
     return builder.build()
