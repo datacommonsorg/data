@@ -1,0 +1,30 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "CRDC_Education_Discipline_Attendance",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://civilrightsdata.ed.gov/data",
+            "provenance_description": "The Civil Rights Data Collection (CRDC) provides data on key education and civil rights issues in our nation's public schools. This import focuses on chronic absenteeism, offenses, and restraint and seclusion data.",
+            "scripts": [
+                "download.py","preprocess.py","run.sh"
+                        ],
+            "import_inputs": [
+                {
+                    "template_mcf": "processed_output/*.tmcf",
+                    "cleaned_csv": "processed_output/*.csv"
+                }
+                ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "cron_schedule": "0 0 15 7 *",
+            "resource_limits": {
+                "cpu": 32,
+                "memory": 128,
+                "disk": 100
+            }
+        }
+    ]
+}
