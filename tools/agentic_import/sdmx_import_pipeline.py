@@ -304,7 +304,7 @@ class PipelineBuilder:
         self._config = config
         self._state = state
         self._registry = registry
-        self._specs = registry.flatten()
+        self._specs = self._registry.flatten()
 
     def build(self) -> Pipeline:
         planned = self._plan_steps()
@@ -356,7 +356,49 @@ class PipelineBuilder:
         return False
 
 
-def build_sdmx_pipeline(*, config: PipelineConfig, state: PipelineState,
-                        registry: PhaseRegistry) -> Pipeline:
+
+
+
+def build_registry() -> PhaseRegistry:
+    """Constructs the hard-coded Phase 2 registry with canonical steps."""
+    def _spec(phase: str, step: str, cls: type[SdmxStep]) -> StepSpec:
+        full = f"{phase}.{step}"
+        return StepSpec(
+            phase=phase,
+            name=step,
+            version=cls.VERSION,
+            factory=lambda cfg, full_name=full, ctor=cls: ctor(name=full_name, config=cfg),
+        )
+
+    download = PhaseSpec(
+        name="download",
+        steps=[
+            _spec("download", "download-data", DownloadDataStep),
+            _spec("download", "download-metadata", DownloadMetadataStep),
+        ],
+    )
+    sample = PhaseSpec(
+        name="sample",
+        steps=[
+            _spec("sample", "create-sample", CreateSampleStep),
+        ],
+    )
+    schema_map = PhaseSpec(
+        name="schema_map",
+        steps=[
+            _spec("schema_map", "create-schema-mapping", CreateSchemaMapStep),
+        ],
+    )
+    transform = PhaseSpec(
+        name="transform",
+        steps=[
+            _spec("transform", "process-full-data", ProcessFullDataStep),
+            _spec("transform", "create-dc-config", CreateDcConfigStep),
+        ],
+    )
+    return PhaseRegistry(phases=[download, sample, schema_map, transform])
+
+def build_sdmx_pipeline(*, config: PipelineConfig, state: PipelineState, registry: PhaseRegistry) -> Pipeline:
     builder = PipelineBuilder(config=config, state=state, registry=registry)
     return builder.build()
+

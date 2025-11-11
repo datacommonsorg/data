@@ -39,9 +39,10 @@ from tools.agentic_import.pipeline import (  # pylint: disable=import-error
     RunnerConfig,
 )
 from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=import-error
+    CreateDcConfigStep, DownloadDataStep, ProcessFullDataStep,
     InteractiveCallback, JSONStateCallback, PipelineBuilder, PipelineConfig,
     PhaseRegistry, PhaseSpec, StepSpec, SdmxStep, build_pipeline_callback,
-    build_sdmx_pipeline)
+    build_registry, build_sdmx_pipeline)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
 
@@ -265,45 +266,10 @@ class CallbackFactoryTest(unittest.TestCase):
         self.assertIsInstance(callback, CompositeCallback)
 
 
-class _TestStep(SdmxStep):
-
-    def run(self) -> None:
-        pass
-
-    def dry_run(self) -> None:
-        logging.info("noop")
-
-
 class PlanningTest(unittest.TestCase):
 
-    def _mk_spec(self, phase: str, name: str, version: int) -> StepSpec:
-        full = f"{phase}.{name}"
-
-        def _factory(cfg: PipelineConfig) -> _TestStep:
-            return _TestStep(name=full, version=version, config=cfg)
-
-        return StepSpec(phase=phase,
-                        name=name,
-                        version=version,
-                        factory=_factory)
-
     def _mk_registry(self) -> PhaseRegistry:
-        download = PhaseSpec(
-            name="download",
-            steps=[
-                self._mk_spec("download", "fetch", 1),
-                self._mk_spec("download", "preview", 1)
-            ],
-        )
-        process = PhaseSpec(
-            name="process",
-            steps=[self._mk_spec("process", "clean", 1)],
-        )
-        export = PhaseSpec(
-            name="export",
-            steps=[self._mk_spec("export", "write", 1)],
-        )
-        return PhaseRegistry(phases=[download, process, export])
+        return build_registry()
 
     def _empty_state(self) -> PipelineState:
         return PipelineState(run_id="demo",
@@ -342,11 +308,11 @@ class PlanningTest(unittest.TestCase):
         reg = self._mk_registry()
         cfg_phase = PipelineConfig(run_only="download")
         names_phase = self._names_from_builder(cfg_phase, reg)
-        self.assertEqual(names_phase, ["download.fetch", "download.preview"])
+        self.assertEqual(names_phase, ["download.download-data", "download.download-metadata"])
 
-        cfg_step = PipelineConfig(run_only="download.fetch")
+        cfg_step = PipelineConfig(run_only="download.download-data")
         names_step = self._names_from_builder(cfg_step, reg)
-        self.assertEqual(names_step, ["download.fetch"])
+        self.assertEqual(names_step, ["download.download-data"])
 
         with self.assertRaisesRegex(ValueError, "run_only phase not found"):
             self._names_from_builder(PipelineConfig(run_only="nope"), reg)
@@ -359,43 +325,64 @@ class PlanningTest(unittest.TestCase):
         cfg_all = PipelineConfig(force=True)
         names_all = self._names_from_builder(cfg_all, reg)
         self.assertEqual(names_all, [
-            "download.fetch",
-            "download.preview",
-            "process.clean",
-            "export.write",
+            "download.download-data",
+            "download.download-metadata",
+            "sample.create-sample",
+            "schema_map.create-schema-mapping",
+            "transform.process-full-data",
+            "transform.create-dc-config",
         ])
 
         cfg_phase = PipelineConfig(run_only="download", force=True)
         names_phase = self._names_from_builder(cfg_phase, reg)
-        self.assertEqual(names_phase, ["download.fetch", "download.preview"])
+        self.assertEqual(names_phase,
+                         ["download.download-data", "download.download-metadata"])
 
     def test_version_bump_schedules_downstream(self) -> None:
-        # Make process.clean a new version while others remain the same.
-        download = PhaseSpec(
-            name="download",
-            steps=[self._mk_spec("download", "fetch", 1)],
-        )
-        process = PhaseSpec(
-            name="process",
-            steps=[self._mk_spec("process", "clean", 2)],
-        )
-        export = PhaseSpec(
-            name="export",
-            steps=[self._mk_spec("export", "write", 1)],
-        )
-        reg = PhaseRegistry(phases=[download, process, export])
+        reg = PhaseRegistry(phases=[
+            PhaseSpec(
+                name="download",
+                steps=[
+                    StepSpec(
+                        phase="download",
+                        name="download-data",
+                        version=1,
+                        factory=lambda cfg: DownloadDataStep(
+                            name="download.download-data", config=cfg)),
+                ]
+            ),
+            PhaseSpec(
+                name="transform",
+                steps=[
+                    StepSpec(
+                        phase="transform",
+                        name="process-full-data",
+                        version=2,
+                        factory=lambda cfg: ProcessFullDataStep(
+                            name="transform.process-full-data", config=cfg)),
+                    StepSpec(
+                        phase="transform",
+                        name="create-dc-config",
+                        version=1,
+                        factory=lambda cfg: CreateDcConfigStep(
+                            name="transform.create-dc-config", config=cfg)),
+                ]
+            )
+        ])
         state = self._state_with({
-            "download.fetch": (1, "succeeded"),
-            "process.clean": (1, "succeeded"),
-            "export.write": (1, "succeeded"),
+            "download.download-data": (1, "succeeded"),
+            "transform.process-full-data": (1, "succeeded"),
+            "transform.create-dc-config": (1, "succeeded"),
         })
         cfg = PipelineConfig()
         names = self._names_from_builder(cfg, reg, state)
-        self.assertEqual(names, ["process.clean", "export.write"])
+        self.assertEqual(names, [
+            "transform.process-full-data", "transform.create-dc-config"
+        ])
 
         pipeline = build_sdmx_pipeline(config=cfg, state=state, registry=reg)
         self.assertEqual([s.name for s in pipeline.get_steps()],
-                         ["process.clean", "export.write"])
+                         ["transform.process-full-data", "transform.create-dc-config"])
 
 
 if __name__ == "__main__":
