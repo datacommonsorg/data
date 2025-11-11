@@ -14,6 +14,7 @@ This guide describes the complete process for importing CSV data into Data Commo
     - [Step 3: Working Directory Preparation](#step-3-working-directory-preparation)
   - [Data Import Process](#data-import-process)
     - [Step 4: Data Download](#step-4-data-download)
+      - [SDMX Downloads](#sdmx-downloads)
     - [Step 5: Data Sampling](#step-5-data-sampling)
     - [Step 6: PV Map Generation for Sample Data](#step-6-pv-map-generation-for-sample-data)
     - [Step 7: Full Data Processing](#step-7-full-data-processing)
@@ -112,6 +113,15 @@ working_directory/
 
 Refer to the [SDMX CLI documentation](../sdmx_import/README.md) for details on downloading SDMX data and metadata files.
 
+Extract a simplified, token-efficient JSON metadata copy from `metadata.xml`, retaining the original XML for later PV map generation.
+
+```bash
+# Extract SDMX structural metadata to JSON (keep metadata.xml)
+python $DC_DATA_REPO_PATH/tools/agentic_import/sdmx_metadata_extractor.py \
+  --input_metadata="metadata.xml" \
+  --output_path="sdmx_metadata.json"
+```
+
 ### Step 5: Data Sampling
 
 Create a sample of your data using the data_sampler utility. This helps with initial testing and validation:
@@ -142,6 +152,16 @@ Generate the PV map and metadata files using the pvmap_generator with command-li
 python $DC_DATA_REPO_PATH/tools/agentic_import/pvmap_generator.py \
   --input_data="sample_data.csv" \
   --input_metadata="metadata_file1.json,metadata_file2.xml,metadata_file3.txt" \
+  --output_path="sample_output/output"
+```
+
+For **SDMX datasets**, use the extracted JSON metadata (not the XML file) and set the SDMX flag during PV map generation:
+
+```bash
+# Generate PV map and metadata for SDMX
+python $DC_DATA_REPO_PATH/tools/agentic_import/pvmap_generator.py \
+  --input_data="sample_data.csv" \
+  --input_metadata="sdmx_metadata.json" \
   --output_path="sample_output/output" \
   --sdmx_dataset
 ```
