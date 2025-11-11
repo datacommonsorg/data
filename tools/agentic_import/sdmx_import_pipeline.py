@@ -35,10 +35,8 @@ class InteractiveCallback(PipelineCallback):
     """Prompts the user before each step runs."""
 
     def before_step(self, step: Step) -> None:
-        preview = step.dry_run()
         logging.info(f"Dry run for {step.name} (v{step.version}):")
-        if preview:
-            logging.info(preview)
+        step.dry_run()
         prompt = f"Run step {step.name} (v{step.version})? [Y/n] "
         response = input(prompt).strip().lower()
         if response in ("n", "no"):

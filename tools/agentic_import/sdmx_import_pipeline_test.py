@@ -68,8 +68,8 @@ class _RecordingStep(BaseStep):
         if self._should_fail:
             raise ValueError("boom")
 
-    def dry_run(self) -> str:
-        return "noop"
+    def dry_run(self) -> None:
+        logging.info("noop")
 
 
 class JSONStateCallbackTest(unittest.TestCase):
@@ -171,8 +171,8 @@ class JSONStateCallbackTest(unittest.TestCase):
                 def run(self) -> None:
                     raise PipelineAbort("user requested stop")
 
-                def dry_run(self) -> str:
-                    return "noop"
+                def dry_run(self) -> None:
+                    logging.info("noop")
 
             pipeline = Pipeline(steps=[_AbortStep()])
             runner = PipelineRunner(RunnerConfig())
@@ -213,9 +213,9 @@ class InteractiveCallbackTest(unittest.TestCase):
                 self.executed = True
                 super().run()
 
-            def dry_run(self) -> str:
+            def dry_run(self) -> None:
                 events.append("dry_run")
-                return "noop"
+                logging.info("noop")
 
         callback = InteractiveCallback()
         step = _TrackingStep()

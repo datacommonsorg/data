@@ -45,8 +45,8 @@ class Step(abc.ABC):
         """Execute the step."""
 
     @abc.abstractmethod
-    def dry_run(self) -> str:
-        """Return a read-only preview of the work to be done."""
+    def dry_run(self) -> None:
+        """Log a read-only preview of the work to be done."""
 
 
 class BaseStep(Step, abc.ABC):

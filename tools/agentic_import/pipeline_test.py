@@ -39,8 +39,8 @@ class _TrackingStep(BaseStep):
         self.executed = True
         self._events.append(f"run:{self.name}")
 
-    def dry_run(self) -> str:
-        return ""
+    def dry_run(self) -> None:
+        return None
 
 
 class _FailingStep(BaseStep):
@@ -51,8 +51,8 @@ class _FailingStep(BaseStep):
     def run(self) -> None:
         raise ValueError("boom")
 
-    def dry_run(self) -> str:
-        return ""
+    def dry_run(self) -> None:
+        return None
 
 
 class PipelineRunnerTest(unittest.TestCase):
