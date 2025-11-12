@@ -281,7 +281,7 @@ def main(argv):
     # Combine results from temporary files
     logging.info("Combining results from all processed shards.")
     header = [
-        "stormEvent", "stormEpisode", "stromEpisodeName", "observationAbout", "observationDate", "eventType", "directInjuries",
+        "stormEvent", "stormEpisode", "stormEpisodeName", "observationAbout", "observationDate", "eventType", "directInjuries",
         "indirectInjuries", "directDeaths", "indirectDeaths", "propertyDamage", "cropDamage", "propertyDamageValue", "cropDamageValue",
         "startDate", "endDate", "location", "startLocation", "endLocation", "BEGIN_LAT", "BEGIN_LON", "END_LAT", "END_LON",
         "unit", "windSpeed", "windSpeedType", "cause", "description", "precipitationAccumulation", "precipitationType",
