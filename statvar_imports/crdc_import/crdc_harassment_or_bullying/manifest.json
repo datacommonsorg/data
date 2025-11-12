@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "CRDC_Education_Discipline_Attendance",
+            "import_name": "CRDC_Education_School_HarassmentOrBullting",
             "curator_emails": [
                 "support@datacommons.org"
             ],

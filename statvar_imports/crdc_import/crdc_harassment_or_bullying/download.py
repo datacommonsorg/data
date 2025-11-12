@@ -21,7 +21,7 @@ _BASE_URL = "https://civilrightsdata.ed.gov/assets/ocr/docs/{year_range}-crdc-da
 _BASE_DOWNLOAD_DIRECTORY = "source_files" 
 # Final destination for the collected files
 _SOURCE_FILES_DIRECTORY = "input_files" 
-_START_YEAR = 2009
+_START_YEAR = 2011
 _CURRENT_YEAR = datetime.datetime.now().year
 
 # --- File Collection and Renaming Logic (Updated) ---
