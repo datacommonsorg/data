@@ -386,8 +386,7 @@ def build_registry() -> PhaseRegistry:
             phase=phase,
             name=step,
             version=cls.VERSION,
-            factory=lambda cfg, full_name=full, ctor=cls: ctor(name=full_name,
-                                                               config=cfg),
+            factory=lambda cfg: cls(name=full, config=cfg),
         )
 
     download = PhaseSpec(
