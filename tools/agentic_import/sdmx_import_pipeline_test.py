@@ -116,6 +116,13 @@ class JSONStateCallbackTest(unittest.TestCase):
         self.assertIn("message", step_state)
         self.assertIsNone(step_state["message"])
         self.assertEqual(state["updated_at"], step_state["ended_at"])
+        ended_at_dt = datetime.fromisoformat(step_state["ended_at"])
+        started_at_dt = datetime.fromisoformat(step_state["started_at"])
+        self.assertEqual(step_state["ended_at_ts"],
+                         int(ended_at_dt.timestamp() * 1000))
+        self.assertEqual(step_state["started_at_ts"],
+                         int(started_at_dt.timestamp() * 1000))
+        self.assertEqual(state["updated_at_ts"], step_state["ended_at_ts"])
 
     def test_failed_step_records_error_and_persists_file(self) -> None:
         clock = _IncrementingClock(
@@ -138,6 +145,8 @@ class JSONStateCallbackTest(unittest.TestCase):
         self.assertEqual(step_state["status"], "failed")
         self.assertIn("boom", step_state["message"])
         self.assertAlmostEqual(step_state["duration_s"], 7.0)
+        self.assertIn("ended_at_ts", step_state)
+        self.assertIn("started_at_ts", step_state)
 
     def test_abort_skips_state_persistence(self) -> None:
         clock = _IncrementingClock(
@@ -152,12 +161,15 @@ class JSONStateCallbackTest(unittest.TestCase):
                 "critical_input_hash": "old",
                 "command": "old command",
                 "updated_at": "2025-01-01T00:00:00Z",
+                "updated_at_ts": 1,
                 "steps": {
                     "existing.step": {
                         "version": 1,
                         "status": "succeeded",
                         "started_at": "2025-01-01T00:00:00Z",
+                        "started_at_ts": 0,
                         "ended_at": "2025-01-01T00:05:00Z",
+                        "ended_at_ts": 300000,
                         "duration_s": 300.0,
                         "message": None,
                     }
@@ -278,20 +290,26 @@ class PlanningTest(unittest.TestCase):
                              updated_at="",
                              steps={})
 
-    def _state_with(self, versions: dict[str, tuple[int,
-                                                    str]]) -> PipelineState:
+    def _state_with(
+            self, versions: dict[str, tuple[int, str,
+                                            int | None]]) -> PipelineState:
         steps = {
             name:
                 StepState(version=v,
                           status=st,
                           started_at="t",
                           ended_at="t",
-                          duration_s=0.0) for name, (v, st) in versions.items()
+                          duration_s=0.0,
+                          started_at_ts=ts,
+                          ended_at_ts=ts,
+                          message=None)
+            for name, (v, st, ts) in versions.items()
         }
         return PipelineState(run_id="demo",
                              critical_input_hash="",
                              command="",
                              updated_at="",
+                             updated_at_ts=None,
                              steps=steps)
 
     def _names_from_builder(self,
@@ -308,7 +326,9 @@ class PlanningTest(unittest.TestCase):
         reg = self._mk_registry()
         cfg_phase = PipelineConfig(run_only="download")
         names_phase = self._names_from_builder(cfg_phase, reg)
-        self.assertEqual(names_phase, ["download.download-data", "download.download-metadata"])
+        self.assertEqual(
+            names_phase,
+            ["download.download-data", "download.download-metadata"])
 
         cfg_step = PipelineConfig(run_only="download.download-data")
         names_step = self._names_from_builder(cfg_step, reg)
@@ -316,7 +336,7 @@ class PlanningTest(unittest.TestCase):
 
         with self.assertRaisesRegex(ValueError, "run_only phase not found"):
             self._names_from_builder(PipelineConfig(run_only="nope"), reg)
-        with self.assertRaisesRegex(ValueError, "run_only target not found"):
+        with self.assertRaisesRegex(ValueError, "run_only step not found"):
             self._names_from_builder(PipelineConfig(run_only="download.nope"),
                                      reg)
 
@@ -335,54 +355,87 @@ class PlanningTest(unittest.TestCase):
 
         cfg_phase = PipelineConfig(run_only="download", force=True)
         names_phase = self._names_from_builder(cfg_phase, reg)
-        self.assertEqual(names_phase,
-                         ["download.download-data", "download.download-metadata"])
+        self.assertEqual(
+            names_phase,
+            ["download.download-data", "download.download-metadata"])
 
-    def test_version_bump_schedules_downstream(self) -> None:
-        reg = PhaseRegistry(phases=[
-            PhaseSpec(
-                name="download",
-                steps=[
-                    StepSpec(
-                        phase="download",
-                        name="download-data",
-                        version=1,
-                        factory=lambda cfg: DownloadDataStep(
-                            name="download.download-data", config=cfg)),
-                ]
-            ),
-            PhaseSpec(
-                name="transform",
-                steps=[
-                    StepSpec(
-                        phase="transform",
-                        name="process-full-data",
-                        version=2,
-                        factory=lambda cfg: ProcessFullDataStep(
-                            name="transform.process-full-data", config=cfg)),
-                    StepSpec(
-                        phase="transform",
-                        name="create-dc-config",
-                        version=1,
-                        factory=lambda cfg: CreateDcConfigStep(
-                            name="transform.create-dc-config", config=cfg)),
-                ]
-            )
-        ])
+    def test_timestamp_chaining_triggers_next_step(self) -> None:
+        reg = self._mk_registry()
+        newer = 2_000
+        older = 1_000
         state = self._state_with({
-            "download.download-data": (1, "succeeded"),
-            "transform.process-full-data": (1, "succeeded"),
-            "transform.create-dc-config": (1, "succeeded"),
+            "download.download-data": (1, "succeeded", newer),
+            "download.download-metadata": (1, "succeeded", older),
+            "sample.create-sample": (1, "succeeded", older),
+            "schema_map.create-schema-mapping": (1, "succeeded", older),
+            "transform.process-full-data": (1, "succeeded", older),
+            "transform.create-dc-config": (1, "succeeded", older),
         })
         cfg = PipelineConfig()
         names = self._names_from_builder(cfg, reg, state)
         self.assertEqual(names, [
-            "transform.process-full-data", "transform.create-dc-config"
+            "download.download-metadata",
+            "sample.create-sample",
+            "schema_map.create-schema-mapping",
+            "transform.process-full-data",
+            "transform.create-dc-config",
         ])
 
+    def test_run_only_ignores_timestamp_chaining(self) -> None:
+        reg = self._mk_registry()
+        newer = 4_000
+        older = 3_000
+        state = self._state_with({
+            "download.download-data": (1, "succeeded", newer),
+            "download.download-metadata": (1, "succeeded", older),
+        })
+        cfg = PipelineConfig(run_only="download")
+        names = self._names_from_builder(cfg, reg, state)
+        self.assertEqual(
+            names, ["download.download-data", "download.download-metadata"])
+
+    def test_version_bump_schedules_downstream(self) -> None:
+        reg = PhaseRegistry(phases=[
+            PhaseSpec(name="download",
+                      steps=[
+                          StepSpec(
+                              phase="download",
+                              name="download-data",
+                              version=1,
+                              factory=lambda cfg: DownloadDataStep(
+                                  name="download.download-data", config=cfg)),
+                      ]),
+            PhaseSpec(name="transform",
+                      steps=[
+                          StepSpec(phase="transform",
+                                   name="process-full-data",
+                                   version=2,
+                                   factory=lambda cfg: ProcessFullDataStep(
+                                       name="transform.process-full-data",
+                                       config=cfg)),
+                          StepSpec(phase="transform",
+                                   name="create-dc-config",
+                                   version=1,
+                                   factory=lambda cfg: CreateDcConfigStep(
+                                       name="transform.create-dc-config",
+                                       config=cfg)),
+                      ])
+        ])
+        state = self._state_with({
+            "download.download-data": (1, "succeeded", 1000),
+            "transform.process-full-data": (1, "succeeded", 1000),
+            "transform.create-dc-config": (1, "succeeded", 1000),
+        })
+        cfg = PipelineConfig()
+        names = self._names_from_builder(cfg, reg, state)
+        self.assertEqual(
+            names,
+            ["transform.process-full-data", "transform.create-dc-config"])
+
         pipeline = build_sdmx_pipeline(config=cfg, state=state, registry=reg)
-        self.assertEqual([s.name for s in pipeline.get_steps()],
-                         ["transform.process-full-data", "transform.create-dc-config"])
+        self.assertEqual(
+            [s.name for s in pipeline.get_steps()],
+            ["transform.process-full-data", "transform.create-dc-config"])
 
 
 if __name__ == "__main__":

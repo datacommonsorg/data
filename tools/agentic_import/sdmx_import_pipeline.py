@@ -80,6 +80,8 @@ class JSONStateCallback(PipelineCallback):
         if started_at is None:
             started_at = ended_at
         duration = max(0.0, (ended_at - started_at).total_seconds())
+        started_at_ts = int(started_at.timestamp() * 1000)
+        ended_at_ts = int(ended_at.timestamp() * 1000)
         if isinstance(error, PipelineAbort):
             logging.info(
                 f"Skipping state update for {step.name} due to pipeline abort")
@@ -97,10 +99,13 @@ class JSONStateCallback(PipelineCallback):
             started_at=_format_time(started_at),
             ended_at=_format_time(ended_at),
             duration_s=duration,
+            started_at_ts=started_at_ts,
+            ended_at_ts=ended_at_ts,
             message=message,
         )
         self._state.steps[step.name] = step_state
         self._state.updated_at = step_state.ended_at
+        self._state.updated_at_ts = ended_at_ts
         self._handler.save_state()
 
     def _now(self) -> datetime:
@@ -277,7 +282,7 @@ class StepSpec:
 
     @property
     def full_name(self) -> str:
-        return f"{self.phase}.{self.name}"
+        return _format_full_name(self.phase, self.name)
 
 
 @dataclass(frozen=True)
@@ -313,36 +318,39 @@ class PipelineBuilder:
         return Pipeline(steps=steps)
 
     def _plan_steps(self) -> list[StepSpec]:
-        specs = self._select_specs(self._specs, self._config.run_only)
-        if not specs:
-            return []
-        force_all = bool(self._config.force and not self._config.run_only)
-        if force_all:
-            return list(specs)
+        if self._config.run_only:
+            return self._filter_run_only(self._specs, self._config.run_only)
+        if self._config.force:
+            return list(self._specs)
         scheduled: list[StepSpec] = []
-        downstream = False
-        for spec in specs:
-            needs_run = self._should_run(spec)
-            if needs_run and not downstream:
-                downstream = True
-            if downstream:
+        schedule_all_remaining = False
+        previous: StepSpec | None = None
+        for spec in self._specs:
+            if schedule_all_remaining:
                 scheduled.append(spec)
+            else:
+                needs_run = self._should_run(spec)
+                if not needs_run and previous is not None:
+                    needs_run = self._predecessor_newer(previous, spec)
+                if needs_run:
+                    scheduled.append(spec)
+                    schedule_all_remaining = True
+            previous = spec
         if not scheduled:
-            logging.info("No steps scheduled; all steps current")
+            logging.info("No steps scheduled.")
         return scheduled
 
-    def _select_specs(self, specs: Sequence[StepSpec],
-                      run_only: str | None) -> list[StepSpec]:
-        if not run_only:
-            return list(specs)
-        if "." in run_only:
+    def _filter_run_only(self, specs: Sequence[StepSpec],
+                         run_only: str) -> list[StepSpec]:
+        is_step = "." in run_only
+        if is_step:
             scoped = [s for s in specs if s.full_name == run_only]
-            if not scoped:
-                raise ValueError(f"run_only target not found: {run_only}")
-            return scoped
-        scoped = [s for s in specs if s.phase == run_only]
+        else:
+            scoped = [s for s in specs if s.phase == run_only]
+
         if not scoped:
-            raise ValueError(f"run_only phase not found: {run_only}")
+            entity = "step" if is_step else "phase"
+            raise ValueError(f"run_only {entity} not found: {run_only}")
         return scoped
 
     def _should_run(self, spec: StepSpec) -> bool:
@@ -355,19 +363,31 @@ class PipelineBuilder:
             return True
         return False
 
-
-
+    def _predecessor_newer(self, prev_spec: StepSpec, spec: StepSpec) -> bool:
+        prev_state = self._state.steps.get(prev_spec.full_name)
+        curr_state = self._state.steps.get(spec.full_name)
+        if prev_state is None or prev_state.ended_at_ts is None:
+            return False
+        if curr_state is None:
+            return True
+        if curr_state.status != "succeeded":
+            return True
+        if curr_state.ended_at_ts is None:
+            return True
+        return prev_state.ended_at_ts > curr_state.ended_at_ts
 
 
 def build_registry() -> PhaseRegistry:
     """Constructs the hard-coded Phase 2 registry with canonical steps."""
+
     def _spec(phase: str, step: str, cls: type[SdmxStep]) -> StepSpec:
-        full = f"{phase}.{step}"
+        full = _format_full_name(phase, step)
         return StepSpec(
             phase=phase,
             name=step,
             version=cls.VERSION,
-            factory=lambda cfg, full_name=full, ctor=cls: ctor(name=full_name, config=cfg),
+            factory=lambda cfg, full_name=full, ctor=cls: ctor(name=full_name,
+                                                               config=cfg),
         )
 
     download = PhaseSpec(
@@ -398,7 +418,12 @@ def build_registry() -> PhaseRegistry:
     )
     return PhaseRegistry(phases=[download, sample, schema_map, transform])
 
-def build_sdmx_pipeline(*, config: PipelineConfig, state: PipelineState, registry: PhaseRegistry) -> Pipeline:
+
+def build_sdmx_pipeline(*, config: PipelineConfig, state: PipelineState,
+                        registry: PhaseRegistry) -> Pipeline:
     builder = PipelineBuilder(config=config, state=state, registry=registry)
     return builder.build()
 
+
+def _format_full_name(phase: str, step: str) -> str:
+    return f"{phase}.{step}"

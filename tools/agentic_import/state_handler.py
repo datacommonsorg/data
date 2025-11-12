@@ -37,6 +37,8 @@ class StepState:
     started_at: str
     ended_at: str
     duration_s: float
+    started_at_ts: int | None = None
+    ended_at_ts: int | None = None
     message: str | None = None
 
 
@@ -47,6 +49,7 @@ class PipelineState:
     critical_input_hash: str
     command: str
     updated_at: str
+    updated_at_ts: int | None = None
     steps: dict[str, StepState] = field(default_factory=dict)
 
 
@@ -108,6 +111,7 @@ class StateHandler:
             critical_input_hash="",
             command="",
             updated_at="",
+            updated_at_ts=None,
         )
 
     def _backup_bad_file(self) -> None:
