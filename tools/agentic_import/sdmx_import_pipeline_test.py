@@ -39,10 +39,8 @@ from tools.agentic_import.pipeline import (  # pylint: disable=import-error
     RunnerConfig,
 )
 from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=import-error
-    CreateDcConfigStep, DownloadDataStep, ProcessFullDataStep,
     InteractiveCallback, JSONStateCallback, PipelineBuilder, PipelineConfig,
-    StepSpec, SdmxStep, build_pipeline_callback, build_step_specs,
-    build_sdmx_pipeline)
+    build_pipeline_callback, build_sdmx_pipeline, build_steps)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
 
@@ -71,6 +69,18 @@ class _RecordingStep(BaseStep):
     def run(self) -> None:
         if self._should_fail:
             raise ValueError("boom")
+
+    def dry_run(self) -> None:
+        logging.info("noop")
+
+
+class _VersionedStep(BaseStep):
+
+    def __init__(self, name: str, version: int) -> None:
+        super().__init__(name=name, version=version)
+
+    def run(self) -> None:
+        logging.info("noop")
 
     def dry_run(self) -> None:
         logging.info("noop")
@@ -280,9 +290,6 @@ class CallbackFactoryTest(unittest.TestCase):
 
 class PlanningTest(unittest.TestCase):
 
-    def _mk_steps(self) -> list[StepSpec]:
-        return build_step_specs()
-
     def _empty_state(self) -> PipelineState:
         return PipelineState(run_id="demo",
                              critical_input_hash="",
@@ -314,30 +321,28 @@ class PlanningTest(unittest.TestCase):
 
     def _names_from_builder(self,
                             cfg: PipelineConfig,
-                            steps: list[StepSpec],
+                            steps: list[BaseStep] | None = None,
                             state: PipelineState | None = None) -> list[str]:
+        builder_steps = steps or build_steps(cfg)
         builder = PipelineBuilder(config=cfg,
                                   state=state or self._empty_state(),
-                                  steps=steps)
+                                  steps=builder_steps)
         pipeline = builder.build()
         return [step.name for step in pipeline.get_steps()]
 
     def test_run_only_step(self) -> None:
-        steps = self._mk_steps()
         cfg_step = PipelineConfig(run_only="download-data")
-        names_step = self._names_from_builder(cfg_step, steps)
+        names_step = self._names_from_builder(cfg_step)
         self.assertEqual(names_step, ["download-data"])
 
         with self.assertRaisesRegex(ValueError, "run_only step not found"):
-            self._names_from_builder(PipelineConfig(run_only="nope"), steps)
+            self._names_from_builder(PipelineConfig(run_only="nope"))
         with self.assertRaisesRegex(ValueError, "run_only step not found"):
-            self._names_from_builder(PipelineConfig(run_only="download.nope"),
-                                     steps)
+            self._names_from_builder(PipelineConfig(run_only="download.nope"))
 
     def test_force_semantics(self) -> None:
-        steps = self._mk_steps()
         cfg_all = PipelineConfig(force=True)
-        names_all = self._names_from_builder(cfg_all, steps)
+        names_all = self._names_from_builder(cfg_all)
         self.assertEqual(names_all, [
             "download-data",
             "download-metadata",
@@ -348,7 +353,6 @@ class PlanningTest(unittest.TestCase):
         ])
 
     def test_timestamp_chaining_triggers_next_step(self) -> None:
-        steps = self._mk_steps()
         newer = 2_000
         older = 1_000
         state = self._state_with({
@@ -360,7 +364,7 @@ class PlanningTest(unittest.TestCase):
             "create-dc-config": (1, "succeeded", older),
         })
         cfg = PipelineConfig()
-        names = self._names_from_builder(cfg, steps, state)
+        names = self._names_from_builder(cfg, state=state)
         self.assertEqual(names, [
             "download-metadata",
             "create-sample",
@@ -370,7 +374,6 @@ class PlanningTest(unittest.TestCase):
         ])
 
     def test_run_only_ignores_timestamp_chaining(self) -> None:
-        steps = self._mk_steps()
         newer = 4_000
         older = 3_000
         state = self._state_with({
@@ -378,23 +381,14 @@ class PlanningTest(unittest.TestCase):
             "download-metadata": (1, "succeeded", older),
         })
         cfg = PipelineConfig(run_only="download-data")
-        names = self._names_from_builder(cfg, steps, state)
+        names = self._names_from_builder(cfg, state=state)
         self.assertEqual(names, ["download-data"])
 
     def test_version_bump_schedules_downstream(self) -> None:
         steps = [
-            StepSpec(name="download-data",
-                     version=1,
-                     factory=lambda cfg: DownloadDataStep(name="download-data",
-                                                          config=cfg)),
-            StepSpec(name="process-full-data",
-                     version=2,
-                     factory=lambda cfg: ProcessFullDataStep(
-                         name="process-full-data", config=cfg)),
-            StepSpec(name="create-dc-config",
-                     version=1,
-                     factory=lambda cfg: CreateDcConfigStep(
-                         name="create-dc-config", config=cfg)),
+            _VersionedStep("download-data", 1),
+            _VersionedStep("process-full-data", 2),
+            _VersionedStep("create-dc-config", 1),
         ]
         state = self._state_with({
             "download-data": (1, "succeeded", 1000),

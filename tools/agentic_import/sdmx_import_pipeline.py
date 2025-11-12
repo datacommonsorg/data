@@ -273,70 +273,62 @@ class CreateDcConfigStep(SdmxStep):
         logging.info(f"{self.name} (dry run): previewing DC config creation")
 
 
-@dataclass(frozen=True)
-class StepSpec:
-    name: str
-    version: int
-    factory: Callable[[PipelineConfig], Step]
-
-
 class PipelineBuilder:
 
     def __init__(self, *, config: PipelineConfig, state: PipelineState,
-                 steps: Sequence[StepSpec]) -> None:
+                 steps: Sequence[Step]) -> None:
         self._config = config
         self._state = state
-        self._specs = steps
+        self._steps = steps
 
     def build(self) -> Pipeline:
         planned = self._plan_steps()
-        steps = [spec.factory(self._config) for spec in planned]
-        logging.info("Built SDMX pipeline with %d steps", len(steps))
-        return Pipeline(steps=steps)
+        logging.info("Built SDMX pipeline with %d steps", len(planned))
+        return Pipeline(steps=planned)
 
-    def _plan_steps(self) -> list[StepSpec]:
+    def _plan_steps(self) -> list[Step]:
         if self._config.run_only:
-            return self._filter_run_only(self._specs, self._config.run_only)
+            return self._filter_run_only(self._steps, self._config.run_only)
         if self._config.force:
-            return list(self._specs)
-        scheduled: list[StepSpec] = []
+            return list(self._steps)
+        scheduled: list[Step] = []
         schedule_all_remaining = False
-        previous: StepSpec | None = None
-        for spec in self._specs:
+        previous: Step | None = None
+        for step in self._steps:
             if schedule_all_remaining:
-                scheduled.append(spec)
+                scheduled.append(step)
             else:
-                needs_run = self._should_run(spec)
+                needs_run = self._should_run(step)
                 if not needs_run and previous is not None:
-                    needs_run = self._predecessor_newer(previous, spec)
+                    needs_run = self._predecessor_newer(previous, step)
                 if needs_run:
-                    scheduled.append(spec)
+                    scheduled.append(step)
                     schedule_all_remaining = True
-            previous = spec
+            previous = step
         if not scheduled:
             logging.info("No steps scheduled.")
         return scheduled
 
-    def _filter_run_only(self, specs: Sequence[StepSpec],
-                         run_only: str) -> list[StepSpec]:
-        scoped = [s for s in specs if s.name == run_only]
+    def _filter_run_only(self, steps: Sequence[Step],
+                         run_only: str) -> list[Step]:
+        scoped = [s for s in steps if s.name == run_only]
         if not scoped:
             raise ValueError(f"run_only step not found: {run_only}")
         return scoped
 
-    def _should_run(self, spec: StepSpec) -> bool:
-        prev = self._state.steps.get(spec.name)
+    def _should_run(self, step: Step) -> bool:
+        prev = self._state.steps.get(step.name)
         if prev is None:
             return True
         if prev.status != "succeeded":
             return True
-        if prev.version < spec.version:
+        if prev.version < step.version:
             return True
         return False
 
-    def _predecessor_newer(self, prev_spec: StepSpec, spec: StepSpec) -> bool:
-        prev_state = self._state.steps.get(prev_spec.name)
-        curr_state = self._state.steps.get(spec.name)
+    def _predecessor_newer(self, prev_step: Step, step: Step) -> bool:
+        prev_state = self._state.steps.get(prev_step.name)
+        curr_state = self._state.steps.get(step.name)
         if prev_state is None or prev_state.ended_at_ts is None:
             return False
         if curr_state is None:
@@ -348,27 +340,22 @@ class PipelineBuilder:
         return prev_state.ended_at_ts > curr_state.ended_at_ts
 
 
-def build_step_specs() -> list[StepSpec]:
+def build_steps(config: PipelineConfig) -> list[Step]:
     """Constructs the hard-coded list of canonical steps."""
-
-    def _spec(name: str, cls: type[SdmxStep]) -> StepSpec:
-        return StepSpec(
-            name=name,
-            version=cls.VERSION,
-            factory=lambda cfg: cls(name=name, config=cfg),
-        )
-
     return [
-        _spec("download-data", DownloadDataStep),
-        _spec("download-metadata", DownloadMetadataStep),
-        _spec("create-sample", CreateSampleStep),
-        _spec("create-schema-mapping", CreateSchemaMapStep),
-        _spec("process-full-data", ProcessFullDataStep),
-        _spec("create-dc-config", CreateDcConfigStep),
+        DownloadDataStep(name="download-data", config=config),
+        DownloadMetadataStep(name="download-metadata", config=config),
+        CreateSampleStep(name="create-sample", config=config),
+        CreateSchemaMapStep(name="create-schema-mapping", config=config),
+        ProcessFullDataStep(name="process-full-data", config=config),
+        CreateDcConfigStep(name="create-dc-config", config=config),
     ]
 
 
-def build_sdmx_pipeline(*, config: PipelineConfig, state: PipelineState,
-                        steps: Sequence[StepSpec]) -> Pipeline:
-    builder = PipelineBuilder(config=config, state=state, steps=steps)
+def build_sdmx_pipeline(*,
+                        config: PipelineConfig,
+                        state: PipelineState,
+                        steps: Sequence[Step] | None = None) -> Pipeline:
+    builder_steps = steps if steps is not None else build_steps(config)
+    builder = PipelineBuilder(config=config, state=state, steps=builder_steps)
     return builder.build()
