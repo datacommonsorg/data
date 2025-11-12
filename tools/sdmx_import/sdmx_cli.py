@@ -51,10 +51,6 @@ _COMMAND_HANDLERS = {
         'handler': lambda: handle_discover_dataflows(),
         'description': 'Discover available dataflows with optional search'
     },
-    'discover-series': {
-        'handler': lambda: handle_discover_series(),
-        'description': 'Discover available series within a dataflow'
-    }
 }
 
 # Flag definitions
@@ -230,36 +226,6 @@ def handle_discover_dataflows() -> None:
     print(df)
 
 
-def handle_discover_series() -> None:
-    """
-    Handle the discover-series subcommand.
-    """
-    logging.info("Starting series discovery...")
-    logging.info(f"Endpoint: {FLAGS.endpoint}")
-    logging.info(f"Agency: {FLAGS.agency}")
-    logging.info(f"Dataflow: {FLAGS.dataflow}")
-
-    # Validate inputs
-    if not validate_url(FLAGS.endpoint):
-        raise ValueError(f"Invalid endpoint URL: {FLAGS.endpoint}")
-
-    client = SdmxClient(FLAGS.endpoint, FLAGS.agency)
-
-    # Parse key and params from multi-value flags
-    data_key = parse_key_value_pairs(FLAGS.key) if FLAGS.key else None
-    data_params = parse_key_value_pairs(FLAGS.param)
-
-    series = client.get_dataflow_series(FLAGS.dataflow, data_key, data_params)
-
-    if not series:
-        logging.info("No series found.")
-        return
-
-    # Print the DataFrame to standard output
-    df = pd.DataFrame(series)
-    print(df)
-
-
 def validate_required_flags_for_command(command: str) -> None:
     """
     Validate that required flags are provided for the given command.
@@ -274,7 +240,6 @@ def validate_required_flags_for_command(command: str) -> None:
         'download-metadata': ['endpoint', 'agency', 'dataflow', 'output_path'],
         'download-data': ['endpoint', 'agency', 'dataflow', 'output_path'],
         'discover-dataflows': ['endpoint', 'agency'],
-        'discover-series': ['endpoint', 'agency', 'dataflow']
     }
 
     if command not in required:

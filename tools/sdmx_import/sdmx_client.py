@@ -84,58 +84,6 @@ class SdmxClient:
             logging.error(f"Error fetching dataflows: {e}")
             raise
 
-    def get_dataflow_series(
-            self,
-            dataflow_id: str,
-            key: Dict[str, Any] = None,
-            params: Dict[str, Any] = None) -> List[Dict[str, Any]]:
-        """
-        Fetches data for a dataflow and returns the series as a list of dictionaries.
-
-        Args:
-            dataflow_id: The ID of the dataflow.
-            key: Optional data filters as key:value pairs.
-            params: Optional query parameters as key:value pairs.
-
-        Returns:
-            A list of dictionaries, where each dictionary represents a data series.
-        """
-        try:
-            logging.info(f"Fetching series for dataflow: {dataflow_id}")
-
-            # Ensure params is a dict to avoid downstream errors in the sdmx library
-            if params is None:
-                params = {}
-
-            data_msg = self.client.data(dataflow_id,
-                                        key=key,
-                                        params=params,
-                                        agency_id=self.agency_id)
-
-            # Convert the entire data message to a pandas object. This will be a Series with a MultiIndex.
-            df = sdmx.to_pandas(data_msg)
-
-            # Reset the index to turn MultiIndex levels into regular columns
-            df_reset = df.reset_index()
-
-            # Identify columns that represent series dimensions (all columns except observation value and time period)
-            # 'value' is the default name for the Series values when converted from sdmx.to_pandas
-            series_columns = [
-                col for col in df_reset.columns
-                if col not in ['value', 'TIME_PERIOD', 'index']
-            ]
-            series_df = df_reset[series_columns].drop_duplicates()
-
-            # Convert each unique series (row) to a dictionary
-            series_list = series_df.to_dict(orient='records')
-            return series_list
-        except HTTPError as e:
-            logging.error(f"Error fetching series for '{dataflow_id}': {e}")
-            return []
-        except Exception as e:
-            logging.error(f"An unexpected error occurred: {e}")
-            raise
-
     def download_metadata(self, dataflow_id: str, output_path: str):
         """
         Fetches the complete metadata for a dataflow and saves it to a file as raw SDMX-ML (XML).
