@@ -42,14 +42,25 @@ def process_credit_files():
             # Add year column
             df['year'] = year
             
-            modified = False
             if 'JJ' in df.columns:
                 df['JJ'] = df['JJ'].replace({r'(?i)^\s*Yes\s*$': 1, r'(?i)^\s*No\s*$': 0}, regex=True)
-                modified = True
 
             if 'SCH_CREDITRECOVERY_IND' in df.columns:
                 df['SCH_CREDITRECOVERY_IND'] = df['SCH_CREDITRECOVERY_IND'].replace({r'(?i)^\s*Yes\s*$': 1, r'(?i)^\s*No\s*$': 0}, regex=True)
-                modified = True
+
+            # Ensure consistent columns
+            if 'LEA_STATE_NAME' not in df.columns:
+                df['LEA_STATE_NAME'] = ""
+            
+            if 'SCH_CREDITRECOVERYENR' not in df.columns:
+                df['SCH_CREDITRECOVERYENR'] = 0
+
+            # Coerce to numeric and drop rows with negative or non-numeric values
+            for col in ['SCH_CREDITRECOVERY_IND', 'SCH_CREDITRECOVERYENR']:
+                if col in df.columns:
+                    df[col] = pd.to_numeric(df[col], errors='coerce')
+                    df.dropna(subset=[col], inplace=True)
+                    df = df[df[col] >= 0]
             
             # Construct output path and save
             output_filename = Path(filename).stem + ".csv"

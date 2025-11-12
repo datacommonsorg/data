@@ -18,7 +18,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/credit_output.tmcf",
-                    "cleaned_csv": "output_files/credit_output.csv"
+                    "cleaned_csv": "output/credit_output.csv"
                 }
                 
             ],
