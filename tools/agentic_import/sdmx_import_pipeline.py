@@ -275,41 +275,18 @@ class CreateDcConfigStep(SdmxStep):
 
 @dataclass(frozen=True)
 class StepSpec:
-    phase: str
     name: str
     version: int
     factory: Callable[[PipelineConfig], Step]
-
-    @property
-    def full_name(self) -> str:
-        return _format_full_name(self.phase, self.name)
-
-
-@dataclass(frozen=True)
-class PhaseSpec:
-    name: str
-    steps: Sequence[StepSpec]
-
-
-@dataclass(frozen=True)
-class PhaseRegistry:
-    phases: Sequence[PhaseSpec]
-
-    def flatten(self) -> list[StepSpec]:
-        flattened: list[StepSpec] = []
-        for phase in self.phases:
-            flattened.extend(phase.steps)
-        return flattened
 
 
 class PipelineBuilder:
 
     def __init__(self, *, config: PipelineConfig, state: PipelineState,
-                 registry: PhaseRegistry) -> None:
+                 steps: Sequence[StepSpec]) -> None:
         self._config = config
         self._state = state
-        self._registry = registry
-        self._specs = self._registry.flatten()
+        self._specs = steps
 
     def build(self) -> Pipeline:
         planned = self._plan_steps()
@@ -342,19 +319,13 @@ class PipelineBuilder:
 
     def _filter_run_only(self, specs: Sequence[StepSpec],
                          run_only: str) -> list[StepSpec]:
-        is_step = "." in run_only
-        if is_step:
-            scoped = [s for s in specs if s.full_name == run_only]
-        else:
-            scoped = [s for s in specs if s.phase == run_only]
-
+        scoped = [s for s in specs if s.name == run_only]
         if not scoped:
-            entity = "step" if is_step else "phase"
-            raise ValueError(f"run_only {entity} not found: {run_only}")
+            raise ValueError(f"run_only step not found: {run_only}")
         return scoped
 
     def _should_run(self, spec: StepSpec) -> bool:
-        prev = self._state.steps.get(spec.full_name)
+        prev = self._state.steps.get(spec.name)
         if prev is None:
             return True
         if prev.status != "succeeded":
@@ -364,8 +335,8 @@ class PipelineBuilder:
         return False
 
     def _predecessor_newer(self, prev_spec: StepSpec, spec: StepSpec) -> bool:
-        prev_state = self._state.steps.get(prev_spec.full_name)
-        curr_state = self._state.steps.get(spec.full_name)
+        prev_state = self._state.steps.get(prev_spec.name)
+        curr_state = self._state.steps.get(spec.name)
         if prev_state is None or prev_state.ended_at_ts is None:
             return False
         if curr_state is None:
@@ -377,52 +348,27 @@ class PipelineBuilder:
         return prev_state.ended_at_ts > curr_state.ended_at_ts
 
 
-def build_registry() -> PhaseRegistry:
-    """Constructs the hard-coded Phase 2 registry with canonical steps."""
+def build_step_specs() -> list[StepSpec]:
+    """Constructs the hard-coded list of canonical steps."""
 
-    def _spec(phase: str, step: str, cls: type[SdmxStep]) -> StepSpec:
-        full = _format_full_name(phase, step)
+    def _spec(name: str, cls: type[SdmxStep]) -> StepSpec:
         return StepSpec(
-            phase=phase,
-            name=step,
+            name=name,
             version=cls.VERSION,
-            factory=lambda cfg: cls(name=full, config=cfg),
+            factory=lambda cfg: cls(name=name, config=cfg),
         )
 
-    download = PhaseSpec(
-        name="download",
-        steps=[
-            _spec("download", "download-data", DownloadDataStep),
-            _spec("download", "download-metadata", DownloadMetadataStep),
-        ],
-    )
-    sample = PhaseSpec(
-        name="sample",
-        steps=[
-            _spec("sample", "create-sample", CreateSampleStep),
-        ],
-    )
-    schema_map = PhaseSpec(
-        name="schema_map",
-        steps=[
-            _spec("schema_map", "create-schema-mapping", CreateSchemaMapStep),
-        ],
-    )
-    transform = PhaseSpec(
-        name="transform",
-        steps=[
-            _spec("transform", "process-full-data", ProcessFullDataStep),
-            _spec("transform", "create-dc-config", CreateDcConfigStep),
-        ],
-    )
-    return PhaseRegistry(phases=[download, sample, schema_map, transform])
+    return [
+        _spec("download-data", DownloadDataStep),
+        _spec("download-metadata", DownloadMetadataStep),
+        _spec("create-sample", CreateSampleStep),
+        _spec("create-schema-mapping", CreateSchemaMapStep),
+        _spec("process-full-data", ProcessFullDataStep),
+        _spec("create-dc-config", CreateDcConfigStep),
+    ]
 
 
 def build_sdmx_pipeline(*, config: PipelineConfig, state: PipelineState,
-                        registry: PhaseRegistry) -> Pipeline:
-    builder = PipelineBuilder(config=config, state=state, registry=registry)
+                        steps: Sequence[StepSpec]) -> Pipeline:
+    builder = PipelineBuilder(config=config, state=state, steps=steps)
     return builder.build()
-
-
-def _format_full_name(phase: str, step: str) -> str:
-    return f"{phase}.{step}"
