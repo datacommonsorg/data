@@ -19,18 +19,54 @@ import hashlib
 import json
 import os
 import re
+import shlex
+import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable, Sequence
 
-from absl import logging
+from absl import app, flags, logging
 
 from tools.agentic_import.pipeline import (CompositeCallback, Pipeline,
                                            PipelineAbort, PipelineCallback,
                                            PipelineRunner, RunnerConfig, Step)
 from tools.agentic_import.state_handler import (PipelineState, StateHandler,
                                                 StepState)
+
+FLAGS = flags.FLAGS
+
+
+def _define_flags() -> None:
+    flags.DEFINE_string("endpoint", None, "SDMX service endpoint.")
+    flags.mark_flag_as_required("endpoint")
+
+    flags.DEFINE_string("agency", None, "Owning SDMX agency identifier.")
+    flags.mark_flag_as_required("agency")
+
+    flags.DEFINE_string("dataflow", None, "Target SDMX dataflow identifier.")
+    flags.mark_flag_as_required("dataflow")
+
+    flags.DEFINE_string("dataflow_key", None, "Optional SDMX key or filter.")
+    flags.DEFINE_alias("key", "dataflow_key")
+
+    flags.DEFINE_string(
+        "dataflow_param", None,
+        "Optional SDMX parameter appended to the dataflow query.")
+
+    flags.DEFINE_string(
+        "dataset_prefix", None,
+        "Optional dataset prefix to override auto-derived values.")
+
+    flags.DEFINE_string("run_only", None,
+                        "Execute only a specific pipeline step by name.")
+
+    flags.DEFINE_boolean("force", False, "Force all steps to run.")
+
+    flags.DEFINE_boolean("verbose", False, "Enable verbose logging.")
+
+    flags.DEFINE_boolean("skip_confirmation", False,
+                         "Skip interactive confirmation prompts.")
 
 
 def _format_time(value: datetime) -> str:
@@ -150,14 +186,14 @@ class PipelineConfig:
     endpoint: str | None = None
     agency: str | None = None
     dataflow: str | None = None
-    key: str | None = None
+    dataflow_key: str | None = None
+    dataflow_param: str | None = None
     dataset_prefix: str | None = None
-    working_dir: str | None = None
+    working_dir: str | None = None  # TODO: Add CLI flag once semantics stabilize.
     run_only: str | None = None
     force: bool = False
     verbose: bool = False
     skip_confirmation: bool = False
-
 
 class SdmxStep(Step):
     """Base class for SDMX steps that carries immutable config and version."""
@@ -391,7 +427,8 @@ def _compute_critical_input_hash(config: PipelineConfig) -> str:
         "agency": config.agency,
         "dataflow": config.dataflow,
         "endpoint": config.endpoint,
-        "key": config.key,
+        "dataflow_key": config.dataflow_key,
+        "dataflow_param": config.dataflow_param,
     }
     serialized = json.dumps(payload, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
@@ -439,3 +476,34 @@ def run_sdmx_pipeline(
         logging.set_verbosity(logging.DEBUG)
     runner = PipelineRunner(RunnerConfig())
     runner.run(pipeline, callback)
+
+
+def prepare_config() -> PipelineConfig:
+    """Builds PipelineConfig from CLI flags."""
+    command = shlex.join(sys.argv) if sys.argv else "python"
+    return PipelineConfig(
+        command=command,
+        endpoint=FLAGS.endpoint,
+        agency=FLAGS.agency,
+        dataflow=FLAGS.dataflow,
+        dataflow_key=FLAGS.dataflow_key,
+        dataflow_param=FLAGS.dataflow_param,
+        dataset_prefix=FLAGS.dataset_prefix,
+        working_dir=None,
+        run_only=FLAGS.run_only,
+        force=FLAGS.force,
+        verbose=FLAGS.verbose,
+        skip_confirmation=FLAGS.skip_confirmation,
+    )
+
+
+def main(_: list[str]) -> int:
+    config = prepare_config()
+    logging.info(f"SDMX pipeline configuration: {config}")
+    run_sdmx_pipeline(config=config)
+    return 0
+
+
+if __name__ == "__main__":
+    _define_flags()
+    app.run(main)
