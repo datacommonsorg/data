@@ -747,7 +747,7 @@ class ImportExecutor:
         version = self.config.import_version_override if self.config.import_version_override else _clean_time(
             utils.pacific_time())
         if version == 'DATE_VERSION_PLACEHOLDER':
-            version = datetime.datetime.now(datetime.URC).strftime("%Y-%m-%d")
+            version = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
         import_summary.latest_version = 'gs://' + os.path.join(
             self.config.storage_prod_bucket_name, output_dir, version, '*', '*',
             '*.mcf')
