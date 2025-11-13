@@ -30,6 +30,7 @@ import time
 import traceback
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
 from google.cloud import spanner
+import datetime
 
 REPO_DIR = os.path.dirname(
     os.path.dirname(
@@ -745,10 +746,12 @@ class ImportExecutor:
         output_dir = f'{relative_import_dir}/{import_name}'
         version = self.config.import_version_override if self.config.import_version_override else _clean_time(
             utils.pacific_time())
+        if version == 'DATE_VERSION_PLACEHOLDER':
+            version = datetime.datetime.now(datetime.URC).strftime("%Y-%m-%d")
         import_summary.latest_version = 'gs://' + os.path.join(
             self.config.storage_prod_bucket_name, output_dir, version, '*', '*',
             '*.mcf')
-        if self.config.import_version_override:
+        if self.config.import_version_override and self.config.import_version_override != 'DATE_VERSION_PLACEHOLDER':
             logging.info(f'Import version override {version}')
             import_summary.status = 'READY'
             self._update_latest_version(version, output_dir, import_spec)
