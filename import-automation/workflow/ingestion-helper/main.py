@@ -4,7 +4,7 @@ from flask import jsonify
 
 _PROJECT_ID = 'datcom-store'
 _SPANNER_INSTANCE_ID = 'dc-kg-test'
-_SPANNER_DATABASE_ID = 'dc_graph_import'
+_SPANNER_DATABASE_ID = 'dc_graph_stable'
 
 
 def _validate_params(request_json, required_params):
