@@ -21,7 +21,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 from requests.exceptions import HTTPError
 from tools.sdmx_import.sdmx_client import SdmxClient
-from tools.sdmx_import.sdmx_models import Dataflow, StructureMessage
+from tools.sdmx_import.sdmx_models import SdmxDataflow, SdmxStructureMessage
 import sdmx
 from sdmx import message, model
 import pandas as pd
@@ -57,9 +57,9 @@ class SdmxClientTest(unittest.TestCase):
         result = self.client.list_dataflows()
 
         # Assert the result
-        self.assertIsInstance(result, StructureMessage)
+        self.assertIsInstance(result, SdmxStructureMessage)
         self.assertEqual(len(result.dataflows), 2)
-        self.assertIsInstance(result.dataflows[0], Dataflow)
+        self.assertIsInstance(result.dataflows[0], SdmxDataflow)
         self.assertEqual(result.dataflows[0].name, 'Dataflow 1')
         self.assertEqual(result.dataflows[1].id, 'DF2')
         self.assertEqual(result.dataflows[0].version, '1.0')

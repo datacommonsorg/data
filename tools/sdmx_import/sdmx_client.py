@@ -23,7 +23,7 @@ import sdmx
 import pandas as pd
 from requests.exceptions import HTTPError
 from typing import Dict, Any, List
-from tools.sdmx_import.sdmx_models import Dataflow, StructureMessage
+from tools.sdmx_import.sdmx_models import SdmxDataflow, SdmxStructureMessage
 
 
 class SdmxClient:
@@ -54,7 +54,7 @@ class SdmxClient:
         sdmx.add_source(custom_source, override=True)
         return sdmx.Client(source_id)
 
-    def list_dataflows(self) -> StructureMessage:
+    def list_dataflows(self) -> SdmxStructureMessage:
         """
         Lists all available dataflows.
 
@@ -71,7 +71,7 @@ class SdmxClient:
             dataflows_msg = self.client.dataflow()
 
             dataflows = [
-                Dataflow(
+                SdmxDataflow(
                     id=df_id,
                     name=str(df.name),
                     description=str(df.description) if df.description else '',
@@ -79,7 +79,7 @@ class SdmxClient:
                     version=str(df.version))
                 for df_id, df in dataflows_msg.dataflow.items()
             ]
-            return StructureMessage(dataflows=dataflows)
+            return SdmxStructureMessage(dataflows=dataflows)
         except Exception as e:
             logging.error(f"Error fetching dataflows: {e}")
             raise

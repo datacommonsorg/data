@@ -22,7 +22,7 @@ from typing import List
 
 
 @dataclass
-class Dataflow:
+class SdmxDataflow:
     """Represents a single SDMX dataflow with its essential metadata."""
     id: str
     name: str
@@ -32,6 +32,6 @@ class Dataflow:
 
 
 @dataclass
-class StructureMessage:
+class SdmxStructureMessage:
     """A container for structured metadata from the SDMX client."""
-    dataflows: List[Dataflow] = field(default_factory=list)
+    dataflows: List[SdmxDataflow] = field(default_factory=list)
