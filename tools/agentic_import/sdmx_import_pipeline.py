@@ -15,15 +15,20 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
+import os
+import re
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Callable, Sequence
 
 from absl import logging
 
 from tools.agentic_import.pipeline import (CompositeCallback, Pipeline,
                                            PipelineAbort, PipelineCallback,
-                                           Step)
+                                           PipelineRunner, RunnerConfig, Step)
 from tools.agentic_import.state_handler import (PipelineState, StateHandler,
                                                 StepState)
 
@@ -57,14 +62,14 @@ class JSONStateCallback(PipelineCallback):
     def __init__(self,
                  *,
                  state_handler: StateHandler,
-                 run_id: str,
+                 dataset_prefix: str,
                  critical_input_hash: str,
                  command: str,
                  now_fn: Callable[[], datetime] | None = None) -> None:
         self._handler = state_handler
         self._now_fn = now_fn or (lambda: datetime.now(timezone.utc))
         self._state = self._handler.get_state()
-        self._state.run_id = run_id
+        self._state.dataset_prefix = dataset_prefix
         self._state.critical_input_hash = critical_input_hash
         self._state.command = command
         self._step_start_times: dict[str, datetime] = {}
@@ -115,7 +120,7 @@ class JSONStateCallback(PipelineCallback):
 def build_pipeline_callback(
     *,
     state_handler: StateHandler,
-    run_id: str,
+    dataset_prefix: str,
     critical_input_hash: str,
     command: str,
     skip_confirmation: bool,
@@ -123,7 +128,7 @@ def build_pipeline_callback(
 ) -> PipelineCallback:
     """Constructs the pipeline callback stack for the SDMX runner."""
     json_callback = JSONStateCallback(state_handler=state_handler,
-                                      run_id=run_id,
+                                      dataset_prefix=dataset_prefix,
                                       critical_input_hash=critical_input_hash,
                                       command=command,
                                       now_fn=now_fn)
@@ -141,6 +146,7 @@ class PipelineConfig:
     phase. Defaults are intentionally minimal.
     """
 
+    command: str
     endpoint: str | None = None
     agency: str | None = None
     dataflow: str | None = None
@@ -359,3 +365,77 @@ def build_sdmx_pipeline(*,
     builder_steps = steps if steps is not None else build_steps(config)
     builder = PipelineBuilder(config=config, state=state, steps=builder_steps)
     return builder.build()
+
+
+def _sanitize_run_id(dataflow: str) -> str:
+    normalized = dataflow.lower()
+    normalized = re.sub(r"[^a-z0-9_]+", "_", normalized)
+    normalized = re.sub(r"_+", "_", normalized)
+    return normalized.strip("_")
+
+
+def _resolve_dataset_prefix(config: PipelineConfig) -> str:
+    if config.dataset_prefix:
+        return config.dataset_prefix
+    if not config.dataflow:
+        raise ValueError(
+            "dataflow or dataset_prefix is required to derive dataset prefix")
+    sanitized = _sanitize_run_id(config.dataflow)
+    if not sanitized:
+        raise ValueError("dataflow value is invalid after sanitization")
+    return sanitized
+
+
+def _compute_critical_input_hash(config: PipelineConfig) -> str:
+    payload = {
+        "agency": config.agency,
+        "dataflow": config.dataflow,
+        "endpoint": config.endpoint,
+        "key": config.key,
+    }
+    serialized = json.dumps(payload, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
+
+
+def _resolve_working_dir(config: PipelineConfig) -> Path:
+    directory = Path(config.working_dir or os.getcwd())
+    if directory.exists():
+        if not directory.is_dir():
+            raise ValueError(f"working_dir is not a directory: {directory}")
+    else:
+        directory.mkdir(parents=True, exist_ok=True)
+    return directory
+
+
+def run_sdmx_pipeline(
+    *,
+    config: PipelineConfig,
+    now_fn: Callable[[], datetime] | None = None,
+) -> None:
+    """Orchestrates the SDMX pipeline for the provided configuration."""
+    working_dir = _resolve_working_dir(config)
+    dataset_prefix = _resolve_dataset_prefix(config)
+    state_handler = StateHandler(
+        state_path=working_dir / ".datacommons" /
+        f"{dataset_prefix}.state.json",
+        dataset_prefix=dataset_prefix,
+    )
+    state = state_handler.get_state()
+    critical_hash = _compute_critical_input_hash(config)
+    state.dataset_prefix = dataset_prefix
+    state.command = config.command
+    state.critical_input_hash = critical_hash
+    state_handler.save_state()
+    pipeline = build_sdmx_pipeline(config=config, state=state)
+    callback = build_pipeline_callback(
+        state_handler=state_handler,
+        dataset_prefix=dataset_prefix,
+        critical_input_hash=critical_hash,
+        command=config.command,
+        skip_confirmation=config.skip_confirmation,
+        now_fn=now_fn,
+    )
+    if config.verbose:
+        logging.set_verbosity(logging.DEBUG)
+    runner = PipelineRunner(RunnerConfig())
+    runner.run(pipeline, callback)

@@ -40,12 +40,12 @@ class StateHandlerTest(unittest.TestCase):
             state = handler.get_state()
 
             self.assertTrue(os.path.exists(path))
-            self.assertEqual(state.run_id, "demo")
+            self.assertEqual(state.dataset_prefix, "demo")
             self.assertEqual(state.steps, {})
 
             with open(path, encoding="utf-8") as fp:
                 data = json.load(fp)
-            self.assertEqual(data["run_id"], "demo")
+            self.assertEqual(data["dataset_prefix"], "demo")
             self.assertEqual(data["steps"], {})
             self.assertIsNone(data["updated_at_ts"])
 

@@ -17,12 +17,15 @@
 
 from __future__ import annotations
 
+import hashlib
+import dataclasses
 import json
 import os
 import sys
 import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from unittest import mock
 
 from absl import logging
@@ -34,13 +37,16 @@ for path in (_PROJECT_ROOT,):
     if path not in sys.path:
         sys.path.append(path)
 
+_TEST_COMMAND = "sdmx pipeline test"
+
 from tools.agentic_import.pipeline import (  # pylint: disable=import-error
     BaseStep, CompositeCallback, Pipeline, PipelineAbort, PipelineRunner,
     RunnerConfig,
 )
 from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=import-error
     InteractiveCallback, JSONStateCallback, PipelineBuilder, PipelineConfig,
-    build_pipeline_callback, build_sdmx_pipeline, build_steps)
+    build_pipeline_callback, build_sdmx_pipeline, build_steps,
+    run_sdmx_pipeline)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
 
@@ -95,7 +101,7 @@ class JSONStateCallbackTest(unittest.TestCase):
         handler = StateHandler(state_path=state_path, dataset_prefix="demo")
         callback = JSONStateCallback(
             state_handler=handler,
-            run_id="demo",
+            dataset_prefix="demo",
             critical_input_hash="abc123",
             command="python run",
             now_fn=clock,
@@ -117,7 +123,7 @@ class JSONStateCallbackTest(unittest.TestCase):
                 state = json.load(fp)
 
         step_state = state["steps"]["download.download-data"]
-        self.assertEqual(state["run_id"], "demo")
+        self.assertEqual(state["dataset_prefix"], "demo")
         self.assertEqual(state["critical_input_hash"], "abc123")
         self.assertEqual(step_state["status"], "succeeded")
         self.assertIn("started_at", step_state)
@@ -167,7 +173,7 @@ class JSONStateCallbackTest(unittest.TestCase):
             os.makedirs(state_dir, exist_ok=True)
             state_path = os.path.join(state_dir, "demo.state.json")
             previous = {
-                "run_id": "previous",
+                "dataset_prefix": "previous",
                 "critical_input_hash": "old",
                 "command": "old command",
                 "updated_at": "2025-01-01T00:00:00Z",
@@ -267,7 +273,7 @@ class CallbackFactoryTest(unittest.TestCase):
             handler = self._state_handler_for_tmpdir(tmpdir)
             callback = build_pipeline_callback(
                 state_handler=handler,
-                run_id="demo",
+                dataset_prefix="demo",
                 critical_input_hash="abc",
                 command="python run",
                 skip_confirmation=True,
@@ -280,7 +286,7 @@ class CallbackFactoryTest(unittest.TestCase):
             with mock.patch("builtins.input", return_value="y"):
                 callback = build_pipeline_callback(
                     state_handler=handler,
-                    run_id="demo",
+                    dataset_prefix="demo",
                     critical_input_hash="abc",
                     command="python run",
                     skip_confirmation=False,
@@ -291,7 +297,7 @@ class CallbackFactoryTest(unittest.TestCase):
 class PlanningTest(unittest.TestCase):
 
     def _empty_state(self) -> PipelineState:
-        return PipelineState(run_id="demo",
+        return PipelineState(dataset_prefix="demo",
                              critical_input_hash="",
                              command="",
                              updated_at="",
@@ -312,7 +318,7 @@ class PlanningTest(unittest.TestCase):
                           message=None)
             for name, (v, st, ts) in versions.items()
         }
-        return PipelineState(run_id="demo",
+        return PipelineState(dataset_prefix="demo",
                              critical_input_hash="",
                              command="",
                              updated_at="",
@@ -331,17 +337,20 @@ class PlanningTest(unittest.TestCase):
         return [step.name for step in pipeline.get_steps()]
 
     def test_run_only_step(self) -> None:
-        cfg_step = PipelineConfig(run_only="download-data")
+        cfg_step = PipelineConfig(command=_TEST_COMMAND,
+                                  run_only="download-data")
         names_step = self._names_from_builder(cfg_step)
         self.assertEqual(names_step, ["download-data"])
 
         with self.assertRaisesRegex(ValueError, "run_only step not found"):
-            self._names_from_builder(PipelineConfig(run_only="nope"))
+            self._names_from_builder(
+                PipelineConfig(command=_TEST_COMMAND, run_only="nope"))
         with self.assertRaisesRegex(ValueError, "run_only step not found"):
-            self._names_from_builder(PipelineConfig(run_only="download.nope"))
+            self._names_from_builder(
+                PipelineConfig(command=_TEST_COMMAND, run_only="download.nope"))
 
     def test_force_semantics(self) -> None:
-        cfg_all = PipelineConfig(force=True)
+        cfg_all = PipelineConfig(command=_TEST_COMMAND, force=True)
         names_all = self._names_from_builder(cfg_all)
         self.assertEqual(names_all, [
             "download-data",
@@ -363,7 +372,7 @@ class PlanningTest(unittest.TestCase):
             "process-full-data": (1, "succeeded", older),
             "create-dc-config": (1, "succeeded", older),
         })
-        cfg = PipelineConfig()
+        cfg = PipelineConfig(command=_TEST_COMMAND)
         names = self._names_from_builder(cfg, state=state)
         self.assertEqual(names, [
             "download-metadata",
@@ -380,7 +389,7 @@ class PlanningTest(unittest.TestCase):
             "download-data": (1, "succeeded", newer),
             "download-metadata": (1, "succeeded", older),
         })
-        cfg = PipelineConfig(run_only="download-data")
+        cfg = PipelineConfig(command=_TEST_COMMAND, run_only="download-data")
         names = self._names_from_builder(cfg, state=state)
         self.assertEqual(names, ["download-data"])
 
@@ -395,13 +404,98 @@ class PlanningTest(unittest.TestCase):
             "process-full-data": (1, "succeeded", 1000),
             "create-dc-config": (1, "succeeded", 1000),
         })
-        cfg = PipelineConfig()
+        cfg = PipelineConfig(command=_TEST_COMMAND)
         names = self._names_from_builder(cfg, steps, state)
         self.assertEqual(names, ["process-full-data", "create-dc-config"])
 
         pipeline = build_sdmx_pipeline(config=cfg, state=state, steps=steps)
         self.assertEqual([s.name for s in pipeline.get_steps()],
                          ["process-full-data", "create-dc-config"])
+
+
+class RunPipelineTest(unittest.TestCase):
+
+    def _build_config(self, *, dataset_prefix: str | None, dataflow: str | None,
+                      command: str) -> PipelineConfig:
+        return PipelineConfig(endpoint="https://api.example.com",
+                              agency="TEST_AGENCY",
+                              dataflow=dataflow,
+                              key="test-key",
+                              dataset_prefix=dataset_prefix,
+                              working_dir=self._tmpdir,
+                              skip_confirmation=True,
+                              command=command)
+
+    def setUp(self) -> None:
+        self._tmpdir_obj = tempfile.TemporaryDirectory()
+        self.addCleanup(self._tmpdir_obj.cleanup)
+        self._tmpdir = self._tmpdir_obj.name
+
+    def test_run_pipeline_updates_state_and_hash(self) -> None:
+        command = "sdmx run pipeline"
+        config = self._build_config(dataset_prefix="demo",
+                                    dataflow="df.1",
+                                    command=command)
+        clock = _IncrementingClock(datetime(2025, 1, 2, tzinfo=timezone.utc),
+                                   timedelta(seconds=2))
+
+        run_sdmx_pipeline(config=config, now_fn=clock)
+
+        state_path = Path(self._tmpdir) / ".datacommons" / "demo.state.json"
+        self.assertTrue(state_path.exists())
+        with state_path.open(encoding="utf-8") as fp:
+            state = json.load(fp)
+
+        expected_hash = hashlib.sha256(
+            json.dumps(
+                {
+                    "agency": config.agency,
+                    "dataflow": config.dataflow,
+                    "endpoint": config.endpoint,
+                    "key": config.key,
+                },
+                sort_keys=True,
+                separators=(",", ":")).encode("utf-8")).hexdigest()
+
+        self.assertEqual(state["dataset_prefix"], "demo")
+        self.assertEqual(state["command"], command)
+        self.assertEqual(state["critical_input_hash"], expected_hash)
+        self.assertEqual(len(state["steps"]), 6)
+
+        for step_name in [
+                "download-data", "download-metadata", "create-sample",
+                "create-schema-mapping", "process-full-data", "create-dc-config"
+        ]:
+            self.assertIn(step_name, state["steps"])
+            self.assertEqual(state["steps"][step_name]["status"], "succeeded")
+
+    def test_run_id_sanitizes_dataflow_when_prefix_missing(self) -> None:
+        dataflow = "My Flow-Name 2025!!!"
+        config = self._build_config(dataset_prefix=None,
+                                    dataflow=dataflow,
+                                    command="sdmx run sanitized")
+        run_sdmx_pipeline(config=config,
+                          now_fn=_IncrementingClock(
+                              datetime(2025, 1, 3, tzinfo=timezone.utc),
+                              timedelta(seconds=2)))
+
+        expected_run_id = "my_flow_name_2025"
+        state_path = Path(
+            self._tmpdir) / ".datacommons" / f"{expected_run_id}.state.json"
+        self.assertTrue(state_path.exists())
+        with state_path.open(encoding="utf-8") as fp:
+            state = json.load(fp)
+        self.assertEqual(state["dataset_prefix"], expected_run_id)
+
+    def test_invalid_working_dir_raises(self) -> None:
+        path = Path(self._tmpdir) / "not_a_dir"
+        path.write_text("content")
+        config = dataclasses.replace(self._build_config(
+            dataset_prefix="demo", dataflow="df", command="sdmx run invalid"),
+                                     working_dir=str(path))
+        with self.assertRaisesRegex(ValueError,
+                                    "working_dir is not a directory"):
+            run_sdmx_pipeline(config=config)
 
 
 if __name__ == "__main__":

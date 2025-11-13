@@ -45,7 +45,7 @@ class StepState:
 @dataclass_json
 @dataclass
 class PipelineState:
-    run_id: str
+    dataset_prefix: str
     critical_input_hash: str
     command: str
     updated_at: str
@@ -87,8 +87,9 @@ class StateHandler:
             with path.open("r", encoding="utf-8") as fp:
                 data = json.load(fp)
             state = PipelineState.from_dict(data)
-            if not state.run_id:
-                state.run_id = self._dataset_prefix
+            if not state.dataset_prefix:
+                # Ensure a manual or corrupted state file still has prefix metadata.
+                state.dataset_prefix = self._dataset_prefix
             return state
         except (OSError, json.JSONDecodeError, ValueError, TypeError) as exc:
             logging.warning(f"Failed to load state file {path}: {exc}")
@@ -107,7 +108,7 @@ class StateHandler:
 
     def _empty_state(self) -> PipelineState:
         return PipelineState(
-            run_id=self._dataset_prefix,
+            dataset_prefix=self._dataset_prefix,
             critical_input_hash="",
             command="",
             updated_at="",
