@@ -11,8 +11,8 @@
                 "run_download_process.sh"
             ],
             "source_files": [
-                "input_files/*.xlsx",
-                "input_files/*.csv"
+                "input_files_school/*.xlsx",
+                "input_files_school/*.csv"
             ],
             "import_inputs": [
                 {
