@@ -22,6 +22,6 @@ import-automation/executor/config_override.json
 *prompt.md
 .datacommons/
 
-
+.venv/
 
 

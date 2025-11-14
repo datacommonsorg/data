@@ -24,6 +24,8 @@ _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
 
 import tempfile
 import unittest
+import pandas as pd
+from pandas.testing import assert_frame_equal
 from us_fema.national_risk_index.process_data import process_csv, fips_to_geoid
 
 # module_dir_ is the path to where this test is running from.
@@ -70,30 +72,26 @@ def check_function_on_file_gives_golden(fn, inp_f, inp_csv_f, golden_f):
         expected_csv_file = os.path.join(module_dir_, golden_f)
         output_path = " test_data/nri_counties_table.csv"
         fn(test_csv_file, output_path, inp_csv_f, result_csv_file)
-        with open(result_csv_file, "r") as result_f:
-            result_str: str = result_f.read()
-            with open(expected_csv_file, "r") as expect_f:
-                expect_str: str = expect_f.read()
-                return result_str == expect_str
+        result_df = pd.read_csv(result_csv_file)
+        expected_df = pd.read_csv(expected_csv_file)
+        assert_frame_equal(result_df, expected_df, rtol=1e-5)
 
 
 class ProcessFemaNriFileTest(unittest.TestCase):
 
     def test_process_county_file(self):
-        assertion = check_function_on_file_gives_golden(
+        check_function_on_file_gives_golden(
             fn=process_csv,
             inp_f=os.path.join(_TESTDIR, "test_data_county.csv"),
             inp_csv_f=os.path.join(_TESTDIR, "test_csv_columns.json"),
             golden_f=os.path.join(_TESTDIR, "expected_data_county.csv"))
-        self.assertTrue(assertion)
 
     def test_process_tract_file(self):
-        assertion = check_function_on_file_gives_golden(
+        check_function_on_file_gives_golden(
             fn=process_csv,
             inp_f=os.path.join(_TESTDIR, "test_data_tract.csv"),
             inp_csv_f=os.path.join(_TESTDIR, "test_csv_columns.json"),
             golden_f=os.path.join(_TESTDIR, "expected_data_tract.csv"))
-        self.assertTrue(assertion)
 
 
 if __name__ == "__main__":

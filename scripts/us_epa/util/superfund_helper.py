@@ -17,9 +17,15 @@ import numpy as np
 import pandas as pd
 import json
 import requests
+import os
+import sys
+
+# Allows the following module imports to work when running as a script
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(_SCRIPT_PATH, '../../..'))  # for util
+from util.dc_api_wrapper import dc_api_resolve_latlng
 
 _GEO_COORDS = []
-_DC_RECON_API = "https://api.datacommons.org/v1/recon/resolve/coordinate"
 
 
 def make_list_of_geos_to_resolve(latitude: np.float64,
@@ -46,10 +52,7 @@ def resolve_with_recon(output_path: str,
 
     # for each chunk resolve the coords to geoIds
     for chunk in coords_chunk_list:
-        payload = {"coordinates": chunk}
-        response_json = requests.post(_DC_RECON_API,
-                                      data=json.dumps(payload),
-                                      timeout=100.000).json()
+        response_json = dc_api_resolve_latlng(chunk, return_v1_response=True)
         for response_elem in response_json['placeCoordinates']:
             try:
                 place_dcid = [
