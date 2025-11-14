@@ -29,6 +29,10 @@ from typing import Callable, Sequence
 
 from absl import app, flags, logging
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 from tools.agentic_import.pipeline import (CompositeCallback, Pipeline,
                                            PipelineAbort, PipelineCallback,
                                            PipelineRunner, RunnerConfig, Step)
