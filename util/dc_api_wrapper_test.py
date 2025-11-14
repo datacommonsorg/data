@@ -90,3 +90,76 @@ class TestDCAPIWrapper(unittest.TestCase):
         self.assertTrue('populationType' in statvar_pvs)
         self.assertTrue('measuredProperty' in statvar_pvs)
         self.assertEqual('StatisticalVariable', statvar_pvs['typeOf'])
+
+    def test_dc_api_resolve_latlng(self):
+        """Test API wrapper for latlng resolution."""
+        latlngs = [{'latitude': 37.42, 'longitude': -122.08}]
+        response = dc_api.dc_api_resolve_latlng(latlngs)
+
+        # Truncate the dynamic parts of the response for a stable test.
+        place_response = response.get('37.42-122.08', {})
+        if place_response.get('placeDcids'):
+            place_response['placeDcids'] = place_response['placeDcids'][:1]
+        if place_response.get('places'):
+            place_response['places'] = place_response['places'][:1]
+
+        expected_response = {
+            "37.42-122.08": {
+                "latitude": 37.42,
+                "longitude": -122.08,
+                "placeDcids": ["geoId/0649670"],
+                "places": [{
+                    "dcid": "geoId/0649670",
+                    "dominantType": "City"
+                }]
+            }
+        }
+        self.assertEqual(response, expected_response)
+
+    def test_convert_v2_to_v1_coordinate_response(self):
+        """Test coordinate response conversion from v2 to v1."""
+        v2_response = {
+            "entities": [{
+                "node":
+                    "37.42#-122.08",
+                "candidates": [{
+                    "dcid": "geoId/0649670",
+                    "dominantType": "City"
+                }, {
+                    "dcid": "geoId/06085",
+                    "dominantType": "County"
+                }]
+            }]
+        }
+        expected_v1_response = {
+            "placeCoordinates": [{
+                "latitude":
+                    37.42,
+                "longitude":
+                    -122.08,
+                "placeDcids": [
+                    "geoId/0649670",
+                    "geoId/06085",
+                ],
+                "places": [{
+                    "dcid": "geoId/0649670",
+                    "dominantType": "City"
+                },
+                {
+                    "dcid": "geoId/06085",
+                    "dominantType": "County"
+                }]
+            }]
+        }
+        v1_response = dc_api._convert_v2_to_v1_coordinate_response(v2_response)
+        self.assertEqual(v1_response, expected_v1_response)
+
+    def test_convert_v1_to_v2_coordinate_request(self):
+        """Test coordinate request conversion from v1 to v2."""
+        v1_request = {"coordinates": [{"latitude": 37.42, "longitude": -122.08}]}
+        expected_v2_request = {
+            "nodes": ["37.42#-122.08"],
+            "property": "<-geoCoordinate->dcid"
+        }
+        v2_request = dc_api._convert_v1_to_v2_coordinate_request(v1_request)
+        self.assertEqual(v2_request, expected_v2_request)

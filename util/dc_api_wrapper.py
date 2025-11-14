@@ -35,8 +35,8 @@ from download_util import request_url
 # https://api.datacommons.org/v1/recon/resolve/id
 _DC_API_PATH_RESOLVE_ID = '/v1/recon/resolve/id'
 # Resolve latlng coordinate
-# https://api.datacommons.org/v1/recon/resolve/coordinate
-_DC_API_PATH_RESOLVE_COORD = '/v1/recon/resolve/coordinate'
+# https://api.datacommons.org/v2/resolve
+_DC_API_PATH_RESOLVE_COORD = '/v2/resolve'
 
 
 def dc_api_wrapper(
@@ -304,36 +304,126 @@ def dc_api_resolve_placeid(dcids: list, in_prop: str = 'placeId') -> dict:
     return results
 
 
-def dc_api_resolve_latlng(dcids: list) -> dict:
-    """Returns the resolved dcid for each of the placeid.
+def dc_api_resolve_latlng(latlngs: list, *, return_v1_response: bool = False) -> dict:
+    """Returns the resolved dcid for each lat-lng.
+
+    Each object in the list is of the form:
+
+    {
+        'latitude': lat,
+        'longitude': lng,
+    }
+
+    if return_v1_response is True, a v1 response of this form is returned:
+    
+    {
+      "placeCoordinates": [
+          {
+              "latitude": 37.42,
+              "longitude": -122.08,
+              "placeDcids": [
+                  "geoId/0649670"
+              ],
+              "places": [
+                  {
+                      "dcid": "geoId/0649670",
+                      "dominantType": "City"
+                  }
+              ]
+          }
+      ]
+    }
+
+    Otherwise, it returns a response of this form:
+
+    {
+        "37.42-122.08": {
+            "latitude": 37.42,
+            "longitude": -122.08,
+            "placeDcids": ["geoId/0649670"],
+            "places": [{
+                "dcid": "geoId/0649670",
+                "dominantType": "City"
+            }]
+        }
+    }
 
   Args:
-    dcids: list of placeids to be resolved.
+    latlngs: list of latlngs to be resolved.
 
   Returns:
     dictionary keyed by input placeid with reoslved dcid as value.
   """
-    data = {}
-    data['coordinates'] = dcids
-    num_ids = len(dcids)
+    v1_data = {}
+    v1_data['coordinates'] = latlngs
+    num_ids = len(latlngs)
     api_url = dc.utils._API_ROOT + _DC_API_PATH_RESOLVE_COORD
     logging.debug(
-        f'Looking up {api_url} coordinates for {num_ids} placeids: {data}')
-    recon_resp = request_url(url=api_url,
-                             params=data,
+        f'Looking up {api_url} coordinates for {num_ids} placeids: {v1_data}')
+    v2_data = _convert_v1_to_v2_coordinate_request(v1_data)
+    v2_resp = request_url(url=api_url,
+                             params=v2_data,
                              method='POST',
                              output='json')
     # Extract the dcids for each place from the response
     results = {}
-    if recon_resp:
-        for entity in recon_resp.get('placeCoordinates', []):
-            dcids = entity.get('placeDcids', '')
+    if v2_resp:
+        v1_resp = _convert_v2_to_v1_coordinate_response(v2_resp)
+        
+        if return_v1_response:
+            return v1_resp
+        
+        for entity in v1_resp.get('placeCoordinates', []):
+            latlngs = entity.get('placeDcids', '')
             lat = entity.get('latitude', '')
             lng = entity.get('longitude', '')
             place_id = f'{lat}{lng}'
-            if place_id and dcids:
+            if place_id and latlngs:
                 results[place_id] = entity
     return results
+
+
+def _convert_v2_to_v1_coordinate_response(v2_response: dict) -> dict:
+    """Converts a v2 coordinate resolution response to a v1 response.
+    """
+    v1_response = {'placeCoordinates': []}
+    for entity in v2_response.get('entities', []):
+        node = entity.get('node', '')
+        if '#' not in node:
+            continue
+        lat_str, lng_str = node.split('#')
+        try:
+            lat = float(lat_str)
+            lng = float(lng_str)
+        except ValueError:
+            continue
+
+        place_coordinate = {
+            'latitude':
+                lat,
+            'longitude':
+                lng,
+            'placeDcids': [
+                candidate.get('dcid')
+                for candidate in entity.get('candidates', [])
+            ],
+            'places':
+                entity.get('candidates', [])
+        }
+        v1_response['placeCoordinates'].append(place_coordinate)
+    return v1_response
+
+
+def _convert_v1_to_v2_coordinate_request(v1_request: dict) -> dict:
+    """Converts a v1 coordinate resolution request to a v2 request.
+    """
+    v2_request = {'nodes': [], 'property': '<-geoCoordinate->dcid'}
+    for coordinate in v1_request.get('coordinates', []):
+        lat = coordinate.get('latitude')
+        lng = coordinate.get('longitude')
+        if lat is not None and lng is not None:
+            v2_request['nodes'].append(f'{lat}#{lng}')
+    return v2_request
 
 
 def _add_namespace(value: str, namespace: str = 'dcid') -> str:
