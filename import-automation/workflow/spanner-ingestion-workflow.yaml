@@ -83,7 +83,7 @@ spanner_ingestion_workflow:
           auth:
             type: OIDC
           body:
-            actionType: update_import_status
+            actionType: update_ingestion_status
             workflowId: '${sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
             importList: '${import_status.body}'
         result: function_response
