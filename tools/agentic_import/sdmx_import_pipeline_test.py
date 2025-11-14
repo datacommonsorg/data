@@ -499,6 +499,53 @@ class RunPipelineTest(unittest.TestCase):
                                     "working_dir is not a directory"):
             run_sdmx_pipeline(config=config)
 
+    def test_hash_change_forces_full_rerun(self) -> None:
+        config = self._build_config(dataset_prefix="demo",
+                                    dataflow="df.2",
+                                    command="sdmx rerun force")
+        first_clock = _IncrementingClock(
+            datetime(2025, 1, 4, tzinfo=timezone.utc), timedelta(seconds=1))
+        run_sdmx_pipeline(config=config, now_fn=first_clock)
+
+        state_path = Path(self._tmpdir) / ".datacommons" / "demo.state.json"
+        with state_path.open(encoding="utf-8") as fp:
+            first_state = json.load(fp)
+
+        updated_config = dataclasses.replace(config, dataflow_key="changed-key")
+        second_clock = _IncrementingClock(
+            datetime(2025, 1, 5, tzinfo=timezone.utc), timedelta(seconds=1))
+        run_sdmx_pipeline(config=updated_config, now_fn=second_clock)
+
+        with state_path.open(encoding="utf-8") as fp:
+            second_state = json.load(fp)
+
+        self.assertNotEqual(first_state["critical_input_hash"],
+                            second_state["critical_input_hash"])
+        self.assertGreater(
+            second_state["steps"]["download-data"]["ended_at_ts"],
+            first_state["steps"]["download-data"]["ended_at_ts"])
+
+    def test_hash_unchanged_skips_rerun(self) -> None:
+        config = self._build_config(dataset_prefix="demo",
+                                    dataflow="df.3",
+                                    command="sdmx rerun noop")
+        initial_clock = _IncrementingClock(
+            datetime(2025, 1, 6, tzinfo=timezone.utc), timedelta(seconds=1))
+        run_sdmx_pipeline(config=config, now_fn=initial_clock)
+
+        state_path = Path(self._tmpdir) / ".datacommons" / "demo.state.json"
+        with state_path.open(encoding="utf-8") as fp:
+            first_state = json.load(fp)
+
+        later_clock = _IncrementingClock(
+            datetime(2025, 1, 7, tzinfo=timezone.utc), timedelta(seconds=1))
+        run_sdmx_pipeline(config=config, now_fn=later_clock)
+
+        with state_path.open(encoding="utf-8") as fp:
+            second_state = json.load(fp)
+
+        self.assertEqual(first_state, second_state)
+
 
 if __name__ == "__main__":
     unittest.main()

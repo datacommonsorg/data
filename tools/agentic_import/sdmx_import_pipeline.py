@@ -15,6 +15,7 @@
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import os
@@ -195,6 +196,7 @@ class PipelineConfig:
     verbose: bool = False
     skip_confirmation: bool = False
 
+
 class SdmxStep(Step):
     """Base class for SDMX steps that carries immutable config and version."""
 
@@ -317,22 +319,32 @@ class CreateDcConfigStep(SdmxStep):
 
 class PipelineBuilder:
 
-    def __init__(self, *, config: PipelineConfig, state: PipelineState,
-                 steps: Sequence[Step]) -> None:
+    def __init__(self,
+                 *,
+                 config: PipelineConfig,
+                 state: PipelineState,
+                 steps: Sequence[Step],
+                 critical_input_hash: str | None = None) -> None:
         self._config = config
         self._state = state
         self._steps = steps
+        self._critical_input_hash = critical_input_hash
 
     def build(self) -> Pipeline:
-        planned = self._plan_steps()
+        if self._config.run_only:
+            planned = self._filter_run_only(self._steps, self._config.run_only)
+        elif self._config.force:
+            logging.info("Force flag set; scheduling all SDMX steps")
+            planned = list(self._steps)
+        elif self._hash_changed():
+            logging.info("Critical inputs changed; scheduling all SDMX steps")
+            planned = list(self._steps)
+        else:
+            planned = self._plan_steps()
         logging.info("Built SDMX pipeline with %d steps", len(planned))
         return Pipeline(steps=planned)
 
     def _plan_steps(self) -> list[Step]:
-        if self._config.run_only:
-            return self._filter_run_only(self._steps, self._config.run_only)
-        if self._config.force:
-            return list(self._steps)
         scheduled: list[Step] = []
         schedule_all_remaining = False
         previous: Step | None = None
@@ -357,6 +369,14 @@ class PipelineBuilder:
         if not scoped:
             raise ValueError(f"run_only step not found: {run_only}")
         return scoped
+
+    def _hash_changed(self) -> bool:
+        if not self._critical_input_hash:
+            return False
+        previous = self._state.critical_input_hash
+        if not previous:
+            return True
+        return previous != self._critical_input_hash
 
     def _should_run(self, step: Step) -> bool:
         prev = self._state.steps.get(step.name)
@@ -397,9 +417,13 @@ def build_steps(config: PipelineConfig) -> list[Step]:
 def build_sdmx_pipeline(*,
                         config: PipelineConfig,
                         state: PipelineState,
-                        steps: Sequence[Step] | None = None) -> Pipeline:
+                        steps: Sequence[Step] | None = None,
+                        critical_input_hash: str | None = None) -> Pipeline:
     builder_steps = steps if steps is not None else build_steps(config)
-    builder = PipelineBuilder(config=config, state=state, steps=builder_steps)
+    builder = PipelineBuilder(config=config,
+                              state=state,
+                              steps=builder_steps,
+                              critical_input_hash=critical_input_hash)
     return builder.build()
 
 
@@ -458,12 +482,12 @@ def run_sdmx_pipeline(
         dataset_prefix=dataset_prefix,
     )
     state = state_handler.get_state()
+    # Snapshot state for planning so callback mutations do not affect scheduling.
+    state_snapshot = copy.deepcopy(state)
     critical_hash = _compute_critical_input_hash(config)
-    state.dataset_prefix = dataset_prefix
-    state.command = config.command
-    state.critical_input_hash = critical_hash
-    state_handler.save_state()
-    pipeline = build_sdmx_pipeline(config=config, state=state)
+    pipeline = build_sdmx_pipeline(config=config,
+                                   state=state_snapshot,
+                                   critical_input_hash=critical_hash)
     callback = build_pipeline_callback(
         state_handler=state_handler,
         dataset_prefix=dataset_prefix,
