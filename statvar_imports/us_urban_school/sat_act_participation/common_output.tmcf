@@ -1,0 +1,6 @@
+Node: E:common->E0
+observationDate: C:common_output->observationDate
+observationAbout: C:common_output->observationAbout
+variableMeasured: C:common_output->variableMeasured
+value: C:common_output->value
+typeOf: dcs:StatVarObservation
