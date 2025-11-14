@@ -304,8 +304,8 @@ def dc_api_resolve_placeid(dcids: list, in_prop: str = 'placeId') -> dict:
     return results
 
 
-def dc_api_resolve_latlng(latlngs: list, *, return_v1_response: bool = False) -> dict:
-    """Returns the resolved dcid for each lat-lng.
+def dc_api_resolve_latlng(lat_lngs: list, *, return_v1_response: bool = False) -> dict:
+    """Resolves geographic coordinates to Data Commons places.
 
     Each object in the list is of the form:
 
@@ -352,11 +352,11 @@ def dc_api_resolve_latlng(latlngs: list, *, return_v1_response: bool = False) ->
     latlngs: list of latlngs to be resolved.
 
   Returns:
-    dictionary keyed by input placeid with reoslved dcid as value.
+    dictionary containing the resolved place information.
   """
     v1_data = {}
-    v1_data['coordinates'] = latlngs
-    num_ids = len(latlngs)
+    v1_data['coordinates'] = lat_lngs
+    num_ids = len(lat_lngs)
     api_url = dc.utils._API_ROOT + _DC_API_PATH_RESOLVE_COORD
     logging.debug(
         f'Looking up {api_url} coordinates for {num_ids} placeids: {v1_data}')
@@ -369,7 +369,7 @@ def dc_api_resolve_latlng(latlngs: list, *, return_v1_response: bool = False) ->
     results = {}
     if v2_resp:
         v1_resp = _convert_v2_to_v1_coordinate_response(v2_resp)
-        
+
         if return_v1_response:
             return v1_resp
         
