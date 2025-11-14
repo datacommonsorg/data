@@ -42,10 +42,10 @@ class LatlngReconServiceTest(unittest.TestCase):
         }
         idmap_out = latlng_recon_service.latlng2places(idmap_in)
         self.assert_list_contains(idmap_out['cascal_mtv'], [
-            'zip/94041', 'ipcc_50/37.25_-122.25_USA',
-            'geoId/sch0626280', 'geoId/0649670', 'geoId/0618',
-            'geoId/0608592830', 'geoId/060855096001', 'geoId/06085509600',
-            'geoId/06085', 'geoId/06', 'country/USA'
+            'zip/94041', 'ipcc_50/37.25_-122.25_USA', 'geoId/sch0626280',
+            'geoId/0649670', 'geoId/0618', 'geoId/0608592830',
+            'geoId/060855096001', 'geoId/06085509600', 'geoId/06085',
+            'geoId/06', 'country/USA'
         ])
         self.assert_list_contains(idmap_out['besant_beach_chennai'], [
             'wikidataId/Q15116', 'wikidataId/Q1445', 'ipcc_50/12.75_80.25_IND',

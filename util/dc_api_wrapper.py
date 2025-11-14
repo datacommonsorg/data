@@ -304,7 +304,9 @@ def dc_api_resolve_placeid(dcids: list, in_prop: str = 'placeId') -> dict:
     return results
 
 
-def dc_api_resolve_latlng(lat_lngs: list, *, return_v1_response: bool = False) -> dict:
+def dc_api_resolve_latlng(lat_lngs: list,
+                          *,
+                          return_v1_response: bool = False) -> dict:
     """Resolves geographic coordinates to Data Commons places.
 
     Each object in the list is of the form:
@@ -362,9 +364,9 @@ def dc_api_resolve_latlng(lat_lngs: list, *, return_v1_response: bool = False) -
         f'Looking up {api_url} coordinates for {num_ids} placeids: {v1_data}')
     v2_data = _convert_v1_to_v2_coordinate_request(v1_data)
     v2_resp = request_url(url=api_url,
-                             params=v2_data,
-                             method='POST',
-                             output='json')
+                          params=v2_data,
+                          method='POST',
+                          output='json')
     # Extract the dcids for each place from the response
     results = {}
     if v2_resp:
@@ -372,7 +374,7 @@ def dc_api_resolve_latlng(lat_lngs: list, *, return_v1_response: bool = False) -
 
         if return_v1_response:
             return v1_resp
-        
+
         for entity in v1_resp.get('placeCoordinates', []):
             latlngs = entity.get('placeDcids', '')
             lat = entity.get('latitude', '')
@@ -399,16 +401,13 @@ def _convert_v2_to_v1_coordinate_response(v2_response: dict) -> dict:
             continue
 
         place_coordinate = {
-            'latitude':
-                lat,
-            'longitude':
-                lng,
+            'latitude': lat,
+            'longitude': lng,
             'placeDcids': [
                 candidate.get('dcid')
                 for candidate in entity.get('candidates', [])
             ],
-            'places':
-                entity.get('candidates', [])
+            'places': entity.get('candidates', [])
         }
         v1_response['placeCoordinates'].append(place_coordinate)
     return v1_response

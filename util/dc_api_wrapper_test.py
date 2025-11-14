@@ -144,8 +144,7 @@ class TestDCAPIWrapper(unittest.TestCase):
                 "places": [{
                     "dcid": "geoId/0649670",
                     "dominantType": "City"
-                },
-                {
+                }, {
                     "dcid": "geoId/06085",
                     "dominantType": "County"
                 }]
@@ -156,7 +155,12 @@ class TestDCAPIWrapper(unittest.TestCase):
 
     def test_convert_v1_to_v2_coordinate_request(self):
         """Test coordinate request conversion from v1 to v2."""
-        v1_request = {"coordinates": [{"latitude": 37.42, "longitude": -122.08}]}
+        v1_request = {
+            "coordinates": [{
+                "latitude": 37.42,
+                "longitude": -122.08
+            }]
+        }
         expected_v2_request = {
             "nodes": ["37.42#-122.08"],
             "property": "<-geoCoordinate->dcid"
