@@ -15,7 +15,7 @@
 
 import duckdb
 import pandas as pd
-from .result import ValidationResult, ValidationStatus
+from result import ValidationResult, ValidationStatus
 
 
 class Validator:

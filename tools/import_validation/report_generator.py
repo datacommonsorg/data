@@ -15,7 +15,7 @@
 
 import csv
 import json
-from .result import ValidationResult
+from result import ValidationResult
 
 
 class ReportGenerator:
