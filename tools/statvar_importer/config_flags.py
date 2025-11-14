@@ -89,6 +89,7 @@ flags.DEFINE_list(
     [],
     'Comma separated list of columns to emit in the SVObs CSV output.',
 )
+flags.DEFINE_string('output_data_pvs', '', 'CSV file with PVs per input cell.')
 flags.DEFINE_string(
     'existing_statvar_mcf',
     '',
@@ -368,6 +369,8 @@ def get_default_config() -> dict:
             True,
         'generate_provisional_schema':
             True,
+        'output_data_pvs':
+            _FLAGS.output_data_pvs,
         # Settings for DC API.
         'dc_api_root':
             'http://autopush.api.datacommons.org',
