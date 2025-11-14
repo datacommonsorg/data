@@ -1,0 +1,6 @@
+Node: E:teachers_and_staff_output->E0
+observationDate: C:teachers_and_staff_output->observationDate
+observationAbout: C:teachers_and_staff_output->observationAbout
+variableMeasured: C:teachers_and_staff_output->variableMeasured
+value: C:teachers_and_staff_output->value
+typeOf: dcs:StatVarObservation
