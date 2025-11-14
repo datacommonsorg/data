@@ -1,0 +1,18 @@
+parameter,value
+url,https://ghana.opendataforafrica.org/RSG2016/regional-statistics-of-ghana-1988-2010
+description,Regional Statistics of Ghana
+#place_type,Ghana
+start_date,1990
+end_date,2009
+release_frequency,
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,1
+mapped_rows,1
+mapped_columns,2
+drop_statvars_without_svobs,0
+#input_rows,3
+debug,1
+existing_statvar_mcf,""""""
+statvar_dcid_remap_csv,https://docs.google.com/spreadsheets/d/1BSbyaxUOMbwU3NRtk1NLfsfCqzCKZO89N_Hd2xslGKU/edit?resourcekey=0-HO6pQ-Kd8WT3Ag77k4jdww&gid=1708060913#gid=1708060913
