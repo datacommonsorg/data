@@ -155,7 +155,7 @@ def convert_tsv_to_csv(file_path):
         logging.error(f"Error converting file {file_path}: {e}")
         if os.path.exists(temp_file_path):
             os.remove(temp_file_path)
-        raise
+        raise RuntimeError(f"Failed to convert file {file_path}") from e
 
 
 def main(_):
@@ -185,7 +185,7 @@ def main(_):
 
         if not download_file(url, _OUTPUT_DIRECTORY, False):
             logging.error(f"Failed to download {filename} from {url}.")
-            continue
+            raise RuntimeError(f"Failed to download {filename} from {url}.")
 
         original_filename = os.path.basename(urlparse(url).path)
         original_filepath = os.path.join(_OUTPUT_DIRECTORY, original_filename)
@@ -202,9 +202,11 @@ def main(_):
                 convert_tsv_to_csv(output_path)
             except Exception as e:
                 logging.error(f"Failed to convert {csv_filename}: {e}")
+                raise RuntimeError(f"Failed to convert {csv_filename}") from e
         else:
             logging.error(
                 f"Downloaded file not found at {original_filepath}")
+            raise RuntimeError(f"Downloaded file not found at {original_filepath}")
 
         # Add the successfully downloaded/converted file to our list
         # for processing.
@@ -224,6 +226,7 @@ def main(_):
             except Exception as e:
                 # Log errors but continue processing other files
                 logging.error(f"Failed to clean {os.path.basename(file_path)}: {e}")
+                raise RuntimeError(f"Failed to clean {os.path.basename(file_path)}") from e
         else:
             logging.warning(f"File not found, skipping: {file_path}")
 
