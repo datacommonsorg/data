@@ -1,0 +1,11 @@
+Node: dcid:race
+typeOf: dcs:Property
+name: "race"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EthnicityEnum,dcid:RaceCodeEnum
+
+Node: dcid:LimitedEnglishProficient
+typeOf: dcid:LanguageFluencyLevelEnum
+name: "Limited English Proficient"
+isProvisional: dcs:True
+
