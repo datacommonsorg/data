@@ -1,7 +1,7 @@
 key,prop,value,,,,,,
-Spain and EU:Spain,observationAbout,country/ESP,populationType,Person,measuredProperty,dcs:count,observationPeriod,P1Y
-Males,gender,Male,,,,,,
-Females,gender,Female,,,,,,
+Spain and EU:Spain,observationAbout,country/ESP,populationType,Person,measuredProperty,count,observationPeriod,P1Y
+Males,gender,Male,populationType,Person,,,,
+Females,gender,Female,populationType,Person,,,,
 value,value,{Number},,,,,,
 Periodo,observationDate,{Data},,,,,,
 "Prep school, primary and 1st stage of secondary education (level 0-2)",schoolGradeLevel,PreKindergartenAndKindergarten__PrePrimaryAndPrimaryEducation__LowerSecondaryEducation,populationType,Person,,,,

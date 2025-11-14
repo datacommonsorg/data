@@ -1,6 +1,6 @@
 key,prop,value,,,,,,
 Municipalities,observationAbout,{Data},measuredProperty,dcs:count,populationType,dcs:Person,observationPeriod,P1Y
-Total,value,{Number},,,,,,
+value,value,{Number},,,,,,
 Males,gender,Male,,,,,,
 Females,gender,Female,,,,,,
 Periodo,observationDate,{Data},,,,,,

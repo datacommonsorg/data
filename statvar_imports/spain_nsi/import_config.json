@@ -2,43 +2,53 @@
   "imports": [
     {
       "url": "https://www.ine.es/jaxiT3/files/t/en/csv_bd/67991.csv?nocab=1",
-      "filename": "Population_by_province_capitals_and_gender"
+      "filename": "Population_by_province_capitals_and_gender",
+      "decimal_style": ","
     },
     {
       "url": "https://www.ine.es/jaxiT3/files/t/en/csv_bd/68065.csv?nocab=1",
-      "filename": "Population_by_municipality_and_gender"
+      "filename": "Population_by_municipality_and_gender",
+      "decimal_style": ","
     },
     {
       "url": "https://www.ine.es/jaxiT3/files/t/en/csv_bd/65061.csv?nocab=1",
-      "filename": "Population_by_sex_and_age_group"
+      "filename": "Population_by_sex_and_age_group",
+      "decimal_style": ","
     },
     {
       "url": "https://www.ine.es/jaxiT3/files/t/en/csv_bd/25201.csv?nocab=1",
-      "filename": "Education_Field_of_study"
+      "filename": "Education_Field_of_study",
+      "decimal_style": ","
     },
     {
       "url": "https://www.ine.es/jaxiT3/files/t/en/csv_bd/10889.csv?nocab=1",
-      "filename": "Levels_of_education_gender"
+      "filename": "Levels_of_education_gender",
+      "decimal_style": ","
     },
     {
       "url": "https://www.ine.es/jaxiT3/files/t/en/csv_bd/1381.csv?nocab=1",
-      "filename": "Gross_Birth_Rate_national"
+      "filename": "Gross_Birth_Rate_national",
+      "decimal_style": ","
     },
     {
       "url": "https://www.ine.es/jaxiT3/files/t/en/csv_bd/1470.csv?nocab=1",
-      "filename": "Gross_Birth_Rate_by_province"
+      "filename": "Gross_Birth_Rate_by_province",
+      "decimal_style": ","
     },
     {
       "url": "https://www.ine.es/jaxiT3/files/t/en/csv_bd/1522.csv?nocab=1",
-      "filename": "Male_rate_at_birth_by_province"
+      "filename": "Male_rate_at_birth_by_province",
+      "decimal_style": ","
     },
     {
       "url": "https://www.ine.es/jaxiT3/files/t/en/csv_bd/30664.csv?nocab=1",
-      "filename": "Gross_Birth_Rate_per_municipality"
+      "filename": "Gross_Birth_Rate_per_municipality",
+      "decimal_style": ","
     },
     {
       "url": "https://www.ine.es/jaxi/files/_px/en/csv_bd/tpx/MercadoLaboral_1403/EPD_12096/l1/03002.csv_bd?nocab=1",
-      "filename": "activity_employment_unemployment_by_sex"
+      "filename": "activity_employment_unemployment_by_sex",
+      "decimal_style": "."
     }
   ]
 }

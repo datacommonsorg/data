@@ -8,13 +8,19 @@ Field of study,Countries,Periodo,value
 01 Education,Spain,2017,8.9
 01 Education,Spain,2016,9
 01 Education,Spain,2015,9
-01 Education,Spain,2014,9.2
-01 Education,EU-28,2023,
-01 Education,EU-28,2022,
-01 Education,EU-28,2021,
-01 Education,EU-28,2020,
-01 Education,EU-28,2019,5.7
-01 Education,EU-28,2018,5.8
-01 Education,EU-28,2017,
-01 Education,EU-28,2016,
-01 Education,EU-28,2015,
+"02 Arts, humanities and languages",Spain,2023,6.1
+"02 Arts, humanities and languages",Spain,2022,6.3
+"02 Arts, humanities and languages",Spain,2021,6.3
+"02 Arts, humanities and languages",Spain,2020,6.4
+"02 Arts, humanities and languages",Spain,2019,6.5
+"02 Arts, humanities and languages",Spain,2018,6.4
+"02 Arts, humanities and languages",Spain,2017,6.4
+"02 Arts, humanities and languages",Spain,2016,6.5
+"02 Arts, humanities and languages",Spain,2015,6.4
+"02 Arts, humanities and languages",Spain,2014,6.4
+"03 Social sciences, journalism and documentation",Spain,2023,6.3
+"03 Social sciences, journalism and documentation",Spain,2022,6.2
+"03 Social sciences, journalism and documentation",Spain,2021,6.3
+"03 Social sciences, journalism and documentation",Spain,2020,6.1
+"03 Social sciences, journalism and documentation",Spain,2019,6.1
+"03 Social sciences, journalism and documentation",Spain,2018,5.9

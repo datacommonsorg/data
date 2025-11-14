@@ -1,5 +1,5 @@
 key,prop,value,,,,,,,,,,,,
-Spain,observationAbout,country/ESP,gender,Female,populationType,Person,measuredProperty,dcs:count,unit,Percent,measurementDenominator,-gender,observationPeriod,P1Y
+Spain,observationAbout,country/ESP,gender,Female,populationType,Person,measuredProperty,count,unit,Percent,measurementDenominator,-gender,observationPeriod,P1Y
 value,value,{Number},,,,,,,,,,,,
 Periodo,observationDate,{Data},populationType,Person,,,,,,,,,,
 01 Education,educationalAttainment,Graduate,populationType,Person,,,,,,,,,,
