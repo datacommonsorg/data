@@ -8,12 +8,7 @@
             "provenance_url": "https://civilrightsdata.ed.gov/data",
             "provenance_description": "This dataset contains participation in Scholastic Assessment Test or American College Testing for each school by students' race and sex,  Limited English Proficiency status and sex, and disability status and sex.",
             "scripts": [
-                "download_schoollevel.py --data_type=sat_act",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files_school/2012_SAT_ACT_Participation.xlsx --pv_map=config/sat_act_participation_college_pvmap.csv --config_file=config/sat_act_participation_college_metadata.csv --output_path=output_files/output_2012 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files_school/2014_SAT_ACT_Participation.xlsx --pv_map=config/sat_act_participation_college_pvmap.csv --config_file=config/sat_act_participation_college_metadata.csv --output_path=output_files/output_2014 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files_school/2018_SAT_ACT_Participation.csv --pv_map=config/sat_act_participation_college_pvmap.csv --config_file=config/sat_act_participation_college_metadata.csv --output_path=output_files/output_2018 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files_school/2021_SAT_ACT_Participation.csv --pv_map=config/sat_act_participation_college_pvmap.csv --config_file=config/sat_act_participation_college_metadata.csv --output_path=output_files/output_2021 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files_school/2022_SAT_ACT_Participation.csv --pv_map=config/sat_act_participation_college_pvmap.csv --config_file=config/sat_act_participation_college_metadata.csv --output_path=output_files/output_2022 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+                "run_download_process.sh"
             ],
             "source_files": [
                 "input_files/*.xlsx",
@@ -21,24 +16,8 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output_files/output_2012.tmcf",
-                    "cleaned_csv": "output_files/output_2012.csv"
-                },
-                {
-                    "template_mcf": "output_files/output_2014.tmcf",
-                    "cleaned_csv": "output_files/output_2014.csv"
-                },
-                {
-                    "template_mcf": "output_files/output_2018.tmcf",
-                    "cleaned_csv": "output_files/output_2018.csv"
-                },
-                {
-                    "template_mcf": "output_files/output_2021.tmcf",
-                    "cleaned_csv": "output_files/output_2021.csv"
-                },
-                {
-                    "template_mcf": "output_files/output_2022.tmcf",
-                    "cleaned_csv": "output_files/output_2022.csv"
+                    "template_mcf": "common_output.tmcf",
+                    "cleaned_csv": "output_files/output_*.csv"
                 }
             ],
             "cron_schedule": "0 05 8,23 * *"

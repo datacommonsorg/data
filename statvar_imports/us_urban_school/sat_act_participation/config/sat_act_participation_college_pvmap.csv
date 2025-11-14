@@ -1,10 +1,10 @@
 key,,,,,,,,,,
 YEAR,observationDate,{Data},assessmentType,ScholasticAssessmentTest__AmericanCollegeTesting,populationType,Student,,,,
 ncesid,observationAbout,nces/{Data},,,,,,,,
-Z,juvenileJusticeFacilityStatus,JuvenileJusticeLongTermSecureFacility
-X,juvenileJusticeFacilityStatus,OtherJuvenileJusticeFacility
-Yes,juvenileJusticeFacilityStatus,WithJuvenileJusticeFacility
-No,juvenileJusticeFacilityStatus,NoJuvenileJusticeFacility
+Z,juvenileJusticeFacilityStatus,JuvenileJusticeLongTermSecureFacility,,,,,,,,
+X,juvenileJusticeFacilityStatus,OtherJuvenileJusticeFacility,,,,,,,,
+Yes,juvenileJusticeFacilityStatus,WithJuvenileJusticeFacility,,,,,,,,
+No,juvenileJusticeFacilityStatus,NoJuvenileJusticeFacility,,,,,,,,
 UG_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,enrollmentLevel,UnderGraduate,,,,
 M_AME_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,AmericanIndianOrAlaskaNative,,
 M_ASI_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,Asian,,
@@ -13,9 +13,9 @@ M_BLA_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,Bl
 M_WHI_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,White,,
 M_HI_PAC_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,NativeHawaiianOrOtherPacificIslanderAlone,,
 M_2_OR_MORE_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,TwoOrMoreRaces,,
-M_TOT_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,languageFluencyLevel,LimitedEnglishProficient,languageLearned,EnglishLearner
+M_TOT_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,,,,
 M_DIS_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,disabilityStatus,WithDisability,,
-M_LEP_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,languageLearned,EnglishLearner,,
+M_LEP_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,languageLearned,EnglishLearner,languageFluencyLevel,LimitedEnglishProficient
 F_AME_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,AmericanIndianOrAlaskaNative,,
 F_ASI_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,Asian,,
 F_HIS_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,HispanicOrLatino,,
@@ -23,9 +23,9 @@ F_BLA_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,
 F_WHI_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,White,,
 F_HI_PAC_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,NativeHawaiianOrOtherPacificIslanderAlone,,
 F_2_OR_MORE_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,TwoOrMoreRaces,,
-F_TOT_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,languageFluencyLevel,LimitedEnglishProficient,languageLearned,EnglishLearner
+F_TOT_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,,,,
 F_DIS_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,disabilityStatus,WithDisability,,
-F_LEP_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,languageLearned,EnglishLearner,,
+F_LEP_7_SAT_ACT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,languageLearned,EnglishLearner,languageFluencyLevel,LimitedEnglishProficient
 ,,,,,,,,,,
 SCH_SATACT_HI_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,HispanicOrLatino,,
 SCH_SATACT_HI_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,HispanicOrLatino,,
