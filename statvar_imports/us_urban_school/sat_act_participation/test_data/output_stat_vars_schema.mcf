@@ -1,0 +1,44 @@
+Node: dcid:race
+typeOf: dcs:Property
+name: "race"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EthnicityEnum,dcid:RaceCodeEnum
+
+Node: dcid:ScholasticAssessmentTest__AmericanCollegeTesting
+typeOf: dcid:AcademicAssessmentTypeEnum
+name: "Scholastic Assessment Test__ American College Testing"
+isProvisional: dcs:True
+
+Node: dcid:juvenileJusticeFacilityStatus
+typeOf: dcs:Property
+name: "juvenileJusticeFacilityStatus"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:JuvenileJusticeFacilityStatusEnum
+isProvisional: dcs:True
+
+Node: dcid:JuvenileJusticeFacilityStatusEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "JuvenileJusticeFacilityStatusEnum"
+isProvisional: dcs:True
+
+Node: dcid:WithJuvenileJusticeFacility
+typeOf: dcid:JuvenileJusticeFacilityStatusEnum
+name: "With Juvenile Justice Facility"
+isProvisional: dcs:True
+
+Node: dcid:LimitedEnglishProficient
+typeOf: dcid:LanguageFluencyLevelEnum
+name: "Limited English Proficient"
+isProvisional: dcs:True
+
+Node: dcid:disabilityStatus
+typeOf: dcs:Property
+name: "disabilityStatus"
+domainIncludes: dcid:Student
+
+Node: dcid:NoJuvenileJusticeFacility
+typeOf: dcid:JuvenileJusticeFacilityStatusEnum
+name: "No Juvenile Justice Facility"
+isProvisional: dcs:True
+

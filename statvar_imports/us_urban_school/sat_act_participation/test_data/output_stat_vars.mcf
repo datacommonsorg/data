@@ -1,0 +1,402 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/chharish/SAT_ACT/data/statvar_imports/us_urban_school/sat_act_participation/input_files_school/2021_SAT_ACT_Participation.csv --pv_map=/usr/local/google/home/chharish/SAT_ACT/data/statvar_imports/us_urban_school/sat_act_participation/config/sat_act_participation_college_pvmap.csv --config_file=/usr/local/google/home/chharish/SAT_ACT/data/statvar_imports/us_urban_school/sat_act_participation/config/sat_act_participation_college_metadata.csv --output_path=/usr/local/google/home/chharish/SAT_ACT/data/statvar_imports/us_urban_school/sat_act_participation/test_data/output --input_rows=100" on 2025-11-14 09:41:37.056954
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_NoJuvenileJusticeFacility
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_NoJuvenileJusticeFacility_AmericanIndianOrAlaskaNative
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:AmericanIndianOrAlaskaNative
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_NoJuvenileJusticeFacility_Asian
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:Asian
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_NoJuvenileJusticeFacility_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_NoJuvenileJusticeFacility_HispanicOrLatino
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:HispanicOrLatino
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_NoJuvenileJusticeFacility_LimitedEnglishProficient_EnglishLearner
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_NoJuvenileJusticeFacility_NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_NoJuvenileJusticeFacility_TwoOrMoreRaces
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:TwoOrMoreRaces
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_NoJuvenileJusticeFacility_White
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:White
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_WithJuvenileJusticeFacility
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_WithJuvenileJusticeFacility_AmericanIndianOrAlaskaNative
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:AmericanIndianOrAlaskaNative
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_WithJuvenileJusticeFacility_Asian
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:Asian
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_WithJuvenileJusticeFacility_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_WithJuvenileJusticeFacility_HispanicOrLatino
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:HispanicOrLatino
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_WithJuvenileJusticeFacility_LimitedEnglishProficient_EnglishLearner
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_WithJuvenileJusticeFacility_NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_WithJuvenileJusticeFacility_TwoOrMoreRaces
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:TwoOrMoreRaces
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Female_WithJuvenileJusticeFacility_White
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:White
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_NoJuvenileJusticeFacility
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_NoJuvenileJusticeFacility_AmericanIndianOrAlaskaNative
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:AmericanIndianOrAlaskaNative
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_NoJuvenileJusticeFacility_Asian
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:Asian
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_NoJuvenileJusticeFacility_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_NoJuvenileJusticeFacility_HispanicOrLatino
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:HispanicOrLatino
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_NoJuvenileJusticeFacility_LimitedEnglishProficient_EnglishLearner
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_NoJuvenileJusticeFacility_NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_NoJuvenileJusticeFacility_TwoOrMoreRaces
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:TwoOrMoreRaces
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_NoJuvenileJusticeFacility_White
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+race: dcid:White
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_WithJuvenileJusticeFacility
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_WithJuvenileJusticeFacility_AmericanIndianOrAlaskaNative
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:AmericanIndianOrAlaskaNative
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_WithJuvenileJusticeFacility_Asian
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:Asian
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_WithJuvenileJusticeFacility_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_WithJuvenileJusticeFacility_HispanicOrLatino
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:HispanicOrLatino
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_WithJuvenileJusticeFacility_LimitedEnglishProficient_EnglishLearner
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+languageFluencyLevel: dcid:LimitedEnglishProficient
+languageLearned: dcid:EnglishLearner
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_WithJuvenileJusticeFacility_NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_WithJuvenileJusticeFacility_TwoOrMoreRaces
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:TwoOrMoreRaces
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_Male_WithJuvenileJusticeFacility_White
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+race: dcid:White
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_WithDisability_Female_NoJuvenileJusticeFacility
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+disabilityStatus: dcid:WithDisability
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_WithDisability_Female_WithJuvenileJusticeFacility
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+disabilityStatus: dcid:WithDisability
+gender: dcid:Female
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_WithDisability_Male_NoJuvenileJusticeFacility
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+disabilityStatus: dcid:WithDisability
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:NoJuvenileJusticeFacility
+
+Node: dcid:Count_Student_ScholasticAssessmentTestOrAmericanCollegeTesting_WithDisability_Male_WithJuvenileJusticeFacility
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+assessmentType: dcid:AmericanCollegeTesting__ScholasticAssessmentTest
+disabilityStatus: dcid:WithDisability
+gender: dcid:Male
+juvenileJusticeFacilityStatus: dcid:WithJuvenileJusticeFacility
+
