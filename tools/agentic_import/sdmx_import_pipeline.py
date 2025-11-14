@@ -25,7 +25,7 @@ import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Callable, Sequence
+from typing import Callable, ClassVar, Sequence
 
 from absl import app, flags, logging
 
@@ -201,6 +201,26 @@ class PipelineConfig:
     skip_confirmation: bool = False
 
 
+@dataclass(frozen=True)
+class StepDecision:
+    """Represents whether a step will run and why."""
+
+    RUN: ClassVar[str] = "RUN"
+    SKIP: ClassVar[str] = "SKIP"
+
+    step_name: str
+    decision: str
+    reason: str
+
+
+@dataclass(frozen=True)
+class BuildResult:
+    """Output of planning that includes the pipeline and per-step decisions."""
+
+    pipeline: Pipeline
+    decisions: list[StepDecision]
+
+
 class SdmxStep(Step):
     """Base class for SDMX steps that carries immutable config and version."""
 
@@ -334,45 +354,120 @@ class PipelineBuilder:
         self._steps = steps
         self._critical_input_hash = critical_input_hash
 
-    def build(self) -> Pipeline:
+    def build(self) -> BuildResult:
         if self._config.run_only:
-            planned = self._filter_run_only(self._steps, self._config.run_only)
+            planned, decisions = self._plan_run_only(self._config.run_only)
         elif self._config.force:
             logging.info("Force flag set; scheduling all SDMX steps")
-            planned = list(self._steps)
+            planned, decisions = self._plan_all_steps(
+                "Force flag set; scheduling this step")
         elif self._hash_changed():
             logging.info("Critical inputs changed; scheduling all SDMX steps")
-            planned = list(self._steps)
+            planned, decisions = self._plan_all_steps(
+                "Critical inputs changed; scheduling this step")
         else:
-            planned = self._plan_steps()
+            planned, decisions = self._plan_incremental()
         logging.info("Built SDMX pipeline with %d steps", len(planned))
-        return Pipeline(steps=planned)
+        return BuildResult(pipeline=Pipeline(steps=planned),
+                           decisions=decisions)
 
-    def _plan_steps(self) -> list[Step]:
-        scheduled: list[Step] = []
+    def _plan_run_only(self,
+                       run_only: str) -> tuple[list[Step], list[StepDecision]]:
+        planned: list[Step] = []
+        decisions: list[StepDecision] = []
+        for step in self._steps:
+            if step.name == run_only:
+                planned.append(step)
+                decisions.append(
+                    StepDecision(
+                        step_name=step.name,
+                        decision=StepDecision.RUN,
+                        reason=(f"run_only={run_only} requested; running only "
+                                "this step"),
+                    ))
+            else:
+                decisions.append(
+                    StepDecision(
+                        step_name=step.name,
+                        decision=StepDecision.SKIP,
+                        reason=(f"run_only={run_only} requested; skipping "
+                                "this step"),
+                    ))
+        if not planned:
+            raise ValueError(f"run_only step not found: {run_only}")
+        return planned, decisions
+
+    def _plan_all_steps(self,
+                        reason: str) -> tuple[list[Step], list[StepDecision]]:
+        planned: list[Step] = []
+        decisions: list[StepDecision] = []
+        for step in self._steps:
+            planned.append(step)
+            decisions.append(
+                StepDecision(step_name=step.name,
+                             decision=StepDecision.RUN,
+                             reason=reason))
+        return planned, decisions
+
+    def _plan_incremental(self) -> tuple[list[Step], list[StepDecision]]:
+        planned: list[Step] = []
+        decisions: list[StepDecision] = []
         schedule_all_remaining = False
         previous: Step | None = None
         for step in self._steps:
             if schedule_all_remaining:
-                scheduled.append(step)
-            else:
-                needs_run = self._should_run(step)
-                if not needs_run and previous is not None:
-                    needs_run = self._predecessor_newer(previous, step)
-                if needs_run:
-                    scheduled.append(step)
-                    schedule_all_remaining = True
-            previous = step
-        if not scheduled:
-            logging.info("No steps scheduled.")
-        return scheduled
+                planned.append(step)
+                decisions.append(
+                    StepDecision(
+                        step_name=step.name,
+                        decision=StepDecision.RUN,
+                        reason=("Upstream step triggered rerun for remaining "
+                                "steps"),
+                    ))
+                previous = step
+                continue
 
-    def _filter_run_only(self, steps: Sequence[Step],
-                         run_only: str) -> list[Step]:
-        scoped = [s for s in steps if s.name == run_only]
-        if not scoped:
-            raise ValueError(f"run_only step not found: {run_only}")
-        return scoped
+            prev_state = self._state.steps.get(step.name)
+            if prev_state is None:
+                needs_run = True
+                reason = "No previous state recorded; scheduling step"
+            elif prev_state.status != "succeeded":
+                needs_run = True
+                reason = (f"Previous run status was {prev_state.status}; "
+                          "rerunning step")
+            elif prev_state.version < step.version:
+                needs_run = True
+                reason = (
+                    f"Step version increased from {prev_state.version} to "
+                    f"{step.version}; rerunning step")
+            else:
+                needs_run = False
+                reason = ("Previous run succeeded with same version; step is "
+                          "up-to-date")
+
+            if not needs_run and previous is not None:
+                if self._predecessor_newer(previous, step):
+                    needs_run = True
+                    reason = (f"Previous step {previous.name} finished more "
+                              "recently; rerunning downstream steps")
+
+            if needs_run:
+                planned.append(step)
+                decisions.append(
+                    StepDecision(step_name=step.name,
+                                 decision=StepDecision.RUN,
+                                 reason=reason))
+                schedule_all_remaining = True
+            else:
+                decisions.append(
+                    StepDecision(step_name=step.name,
+                                 decision=StepDecision.SKIP,
+                                 reason=reason))
+            previous = step
+
+        if not planned:
+            logging.info("No steps scheduled.")
+        return planned, decisions
 
     def _hash_changed(self) -> bool:
         if not self._critical_input_hash:
@@ -381,16 +476,6 @@ class PipelineBuilder:
         if not previous:
             return True
         return previous != self._critical_input_hash
-
-    def _should_run(self, step: Step) -> bool:
-        prev = self._state.steps.get(step.name)
-        if prev is None:
-            return True
-        if prev.status != "succeeded":
-            return True
-        if prev.version < step.version:
-            return True
-        return False
 
     def _predecessor_newer(self, prev_step: Step, step: Step) -> bool:
         prev_state = self._state.steps.get(prev_step.name)
@@ -418,6 +503,12 @@ def build_steps(config: PipelineConfig) -> list[Step]:
     ]
 
 
+def _log_step_decisions(decisions: Sequence[StepDecision]) -> None:
+    for decision in decisions:
+        logging.info("step=%s decision=%s reason=%s", decision.step_name,
+                     decision.decision, decision.reason)
+
+
 def build_sdmx_pipeline(*,
                         config: PipelineConfig,
                         state: PipelineState,
@@ -428,7 +519,9 @@ def build_sdmx_pipeline(*,
                               state=state,
                               steps=builder_steps,
                               critical_input_hash=critical_input_hash)
-    return builder.build()
+    result = builder.build()
+    _log_step_decisions(result.decisions)
+    return result.pipeline
 
 
 def _sanitize_run_id(dataflow: str) -> str:

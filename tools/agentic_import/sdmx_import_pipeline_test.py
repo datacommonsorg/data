@@ -45,7 +45,7 @@ from tools.agentic_import.pipeline import (  # pylint: disable=import-error
 )
 from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=import-error
     InteractiveCallback, JSONStateCallback, PipelineBuilder, PipelineConfig,
-    build_pipeline_callback, build_sdmx_pipeline, build_steps,
+    StepDecision, build_pipeline_callback, build_sdmx_pipeline, build_steps,
     run_sdmx_pipeline)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
@@ -333,7 +333,8 @@ class PlanningTest(unittest.TestCase):
         builder = PipelineBuilder(config=cfg,
                                   state=state or self._empty_state(),
                                   steps=builder_steps)
-        pipeline = builder.build()
+        result = builder.build()
+        pipeline = result.pipeline
         return [step.name for step in pipeline.get_steps()]
 
     def test_run_only_step(self) -> None:
@@ -382,6 +383,18 @@ class PlanningTest(unittest.TestCase):
             "create-dc-config",
         ])
 
+    def test_force_branch_records_decisions(self) -> None:
+        cfg = PipelineConfig(command=_TEST_COMMAND, force=True)
+        steps = build_steps(cfg)
+        builder = PipelineBuilder(config=cfg,
+                                  state=self._empty_state(),
+                                  steps=steps)
+        result = builder.build()
+        self.assertEqual(len(result.decisions), len(steps))
+        for decision in result.decisions:
+            self.assertEqual(decision.decision, StepDecision.RUN)
+            self.assertIn("Force flag set", decision.reason)
+
     def test_run_only_ignores_timestamp_chaining(self) -> None:
         newer = 4_000
         older = 3_000
@@ -411,6 +424,25 @@ class PlanningTest(unittest.TestCase):
         pipeline = build_sdmx_pipeline(config=cfg, state=state, steps=steps)
         self.assertEqual([s.name for s in pipeline.get_steps()],
                          ["process-full-data", "create-dc-config"])
+
+    def test_incremental_records_skip_reasons(self) -> None:
+        state = self._state_with({
+            "download-data": (1, "succeeded", 1_000),
+            "download-metadata": (1, "succeeded", 1_000),
+            "create-sample": (1, "succeeded", 1_000),
+            "create-schema-mapping": (1, "succeeded", 1_000),
+            "process-full-data": (1, "succeeded", 1_000),
+            "create-dc-config": (1, "succeeded", 1_000),
+        })
+        cfg = PipelineConfig(command=_TEST_COMMAND)
+        steps = build_steps(cfg)
+        builder = PipelineBuilder(config=cfg, state=state, steps=steps)
+        result = builder.build()
+        self.assertFalse(result.pipeline.get_steps())
+        self.assertEqual(len(result.decisions), len(steps))
+        for decision in result.decisions:
+            self.assertEqual(decision.decision, StepDecision.SKIP)
+            self.assertIn("up-to-date", decision.reason)
 
 
 class RunPipelineTest(unittest.TestCase):

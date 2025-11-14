@@ -121,7 +121,7 @@ class PipelineRunner:
         try:
             for step in steps:
                 current_step = step
-                logging.info(f"Preparing step {step.name} (v{step.version})")
+                logging.info(f"[STEP START] {step.name} (v{step.version})")
                 if callback:
                     callback.before_step(step)
                 error: Exception | None = None
@@ -129,13 +129,17 @@ class PipelineRunner:
                     step.run()
                 except Exception as exc:  # pylint: disable=broad-except
                     error = exc
-                    logging.exception(f"Step {step.name} failed")
+                    logging.exception(
+                        f"[STEP END] {step.name} (v{step.version}) status=failed"
+                    )
                     raise
                 finally:
                     if callback:
                         callback.after_step(step, error=error)
-                logging.info(f"Finished step {step.name}")
+                logging.info(
+                    f"[STEP END] {step.name} (v{step.version}) status=succeeded"
+                )
             logging.info("Pipeline completed")
         except PipelineAbort:
             name = current_step.name if current_step else "<none>"
-            logging.info(f"Pipeline aborted at {name}")
+            logging.info(f"[STEP END] {name} status=aborted; pipeline aborted")
