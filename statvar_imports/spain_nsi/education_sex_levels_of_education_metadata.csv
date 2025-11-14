@@ -1,0 +1,14 @@
+parameter,value
+url,
+description,https://www.ine.es/jaxiT3/dlgExport.htm?t=10889&nocab=1
+process,
+#place_type,Country
+#places_within,country/ESP
+start_date,2009
+end_date,2024
+release_frequency,P1Y
+comments,
+output_columns,"observationAbout, observationPeriod, observationDate, value, variableMeasured, unit, scalingFactor"
+mapped_rows,1
+mapped_columns,4
+header_rows,1
