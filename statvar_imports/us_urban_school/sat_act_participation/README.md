@@ -24,7 +24,25 @@ This dataset contains participation in Scholastic Assessment Test or American Co
 
 The workflow for this data import involves two main steps: downloading the necessary files and then processing them.
 
-### Step 1: Download the Source Data
+### Autorefresh type
+
+This import uses a fully automated refresh process.
+
+-----
+
+### Single execution
+
+To download and process in one go, run the following script
+
+```bash
+sh run_download_process.sh
+```
+
+### Individual Execution
+
+To execute the command file by file, here are the following steps
+
+#### Step 1: Download the Source Data
 
 To acquire the necessary data files, execute the download script `download_schoollevel.py`.
 
@@ -34,13 +52,7 @@ python3 download_schoollevel.py --data_type=sat_act
 
 All downloaded files will be stored in the directory `/input_files`.
 
-### Autorefresh type
-
-This import uses a fully automated refresh process.
-
------
-
-### Step 2: Process the Files
+#### Step 2: Process the Files
 
 After successfully downloading the files, run the processing script to generate the final output artifacts. There are two ways to do this:
 
