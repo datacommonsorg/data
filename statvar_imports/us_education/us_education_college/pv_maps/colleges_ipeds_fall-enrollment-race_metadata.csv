@@ -1,0 +1,5 @@
+parameter,value
+header_rows,1
+output_columns,"observationAbout,observationDate,variableMeasured,value"
+#input_rows,10
+#drop_statvars_without_svobs,1

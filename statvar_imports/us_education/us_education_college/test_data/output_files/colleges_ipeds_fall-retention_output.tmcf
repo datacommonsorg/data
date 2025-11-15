@@ -1,0 +1,8 @@
+Node: E:colleges_ipeds_fall-retention_output->E0
+observationAbout: C:colleges_ipeds_fall-retention_output->observationAbout
+observationDate: C:colleges_ipeds_fall-retention_output->observationDate
+variableMeasured: C:colleges_ipeds_fall-retention_output->variableMeasured
+value: C:colleges_ipeds_fall-retention_output->value
+typeOf: dcs:StatVarObservation
+unit: Percent
+scalingFactor: 100
