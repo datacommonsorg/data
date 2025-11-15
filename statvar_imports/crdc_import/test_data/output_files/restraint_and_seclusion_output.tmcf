@@ -1,0 +1,6 @@
+Node: E:restraint_and_seclusion_output->E0
+observationAbout: C:restraint_and_seclusion_output->observationAbout
+observationDate: C:restraint_and_seclusion_output->observationDate
+variableMeasured: C:restraint_and_seclusion_output->variableMeasured
+value: C:restraint_and_seclusion_output->value
+typeOf: dcs:StatVarObservation
