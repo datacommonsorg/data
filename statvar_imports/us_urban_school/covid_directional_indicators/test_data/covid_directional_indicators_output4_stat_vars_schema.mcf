@@ -1,0 +1,132 @@
+Node: dcid:remoteInstructionPercent
+typeOf: dcs:Property
+name: "remoteInstructionPercent"
+domainIncludes: dcid:PublicSchool
+rangeIncludes: dcid:RemoteInstructionPercentEnum,dcid:QuantityRange
+isProvisional: dcs:True
+
+Node: dcid:RemoteInstructionPercentEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "RemoteInstructionPercentEnum"
+isProvisional: dcs:True
+
+Node: dcid:Above75PercentStudents
+typeOf: dcid:RemoteInstructionPercentEnum
+name: "Above 75 Percent Students"
+isProvisional: dcs:True
+
+Node: dcid:instructionMode
+typeOf: dcs:Property
+name: "instructionMode"
+domainIncludes: dcid:PublicSchool
+rangeIncludes: dcid:InstructionModeEnum
+isProvisional: dcs:True
+
+Node: dcid:InstructionModeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "InstructionModeEnum"
+isProvisional: dcs:True
+
+Node: dcid:InstructionInHybrid
+typeOf: dcid:InstructionModeEnum
+name: "Instruction In Hybrid"
+isProvisional: dcs:True
+
+Node: dcid:studentAvailabilityMode
+typeOf: dcs:Property
+name: "studentAvailabilityMode"
+domainIncludes: dcid:PublicSchool
+rangeIncludes: dcid:StudentAvailabilityModeEnum
+isProvisional: dcs:True
+
+Node: dcid:StudentAvailabilityModeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "StudentAvailabilityModeEnum"
+isProvisional: dcs:True
+
+Node: dcid:StudentInPersonAndRemote
+typeOf: dcid:StudentAvailabilityModeEnum
+name: "Student In Person And Remote"
+isProvisional: dcs:True
+
+Node: dcid:teacherInstructionMode
+typeOf: dcs:Property
+name: "teacherInstructionMode"
+domainIncludes: dcid:PublicSchool
+rangeIncludes: dcid:TeacherInstructionModeEnum
+isProvisional: dcs:True
+
+Node: dcid:TeacherInstructionModeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "TeacherInstructionModeEnum"
+isProvisional: dcs:True
+
+Node: dcid:TeachersInRemote
+typeOf: dcid:TeacherInstructionModeEnum
+name: "Teachers In Remote"
+isProvisional: dcs:True
+
+Node: dcid:remoteInstructionTime
+typeOf: dcs:Property
+name: "remoteInstructionTime"
+domainIncludes: dcid:PublicSchool
+rangeIncludes: dcid:RemoteInstructionTimeEnum
+isProvisional: dcs:True
+
+Node: dcid:RemoteInstructionTimeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "RemoteInstructionTimeEnum"
+isProvisional: dcs:True
+
+Node: dcid:5OrMoreHours
+typeOf: dcid:RemoteInstructionTimeEnum
+name: "5 Or More Hours"
+isProvisional: dcs:True
+
+Node: dcid:medicalCondition
+typeOf: dcs:Property
+name: "medicalCondition"
+domainIncludes: dcid:PublicSchool
+
+Node: dcid:StudentInRemote
+typeOf: dcid:StudentAvailabilityModeEnum
+name: "Student In Remote"
+isProvisional: dcs:True
+
+Node: dcid:1To2Hours
+typeOf: dcid:RemoteInstructionTimeEnum
+name: "1 To 2Hours"
+isProvisional: dcs:True
+
+Node: dcid:3To4Hours
+typeOf: dcid:RemoteInstructionTimeEnum
+name: "3 To 4Hours"
+isProvisional: dcs:True
+
+Node: dcid:LessThan1Hour
+typeOf: dcid:RemoteInstructionTimeEnum
+name: "Less Than 1Hour"
+isProvisional: dcs:True
+
+Node: dcid:InstructionInRemote
+typeOf: dcid:InstructionModeEnum
+name: "Instruction In Remote"
+isProvisional: dcs:True
+
+Node: dcid:StudentInPerson
+typeOf: dcid:StudentAvailabilityModeEnum
+name: "Student In Person"
+isProvisional: dcs:True
+
+Node: dcid:prop
+typeOf: dcs:Property
+name: "prop"
+domainIncludes: dcid:PublicSchool
+rangeIncludes: dcid:Property
+isProvisional: dcs:True
+
