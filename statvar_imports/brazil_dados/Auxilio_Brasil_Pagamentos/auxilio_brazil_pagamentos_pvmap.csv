@@ -1,0 +1,10 @@
+key,prop,value,,,,,,,,
+MÊS COMPETÊNCIA,observationDate,{YEAR}-{MONTH},#Regex,(?P<YEAR>[0-9]{4})(?P<MONTH>[0-9]{2}),observationPeriod,P1M,,,,
+#MÊS REFERÊNCIA,,,,,,,,,,
+#UF,Its is a state,,,,,,,,,
+#CÓDIGO MUNICÍPIO SIAFI,,,,,,,,,,
+NOME MUNICÍPIO,observationAbout,{Data},populationType,Person,benefitsStatus,AuxilioBrasil,,,,
+#CPF FAVORECIDO,,,,,,,,,,
+#NIS FAVORECIDO,,,,,,,,,,
+NOME FAVORECIDO,value ,1,#Aggregate,sum,measuredProperty,count,,,,
+VALOR PARCELA,value,{Number},#Aggregate,sum,measuredProperty,amount,unit,BRL,measurementQualifier,Monthly
