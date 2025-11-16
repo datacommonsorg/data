@@ -1,0 +1,16 @@
+parameter,value
+url,https://egypt.opendataforafrica.org/behvqtc
+description,Egyptian Population by  Age Groups (5 years) _census 2017
+#place_type,Country
+#places_within,country/EGY
+start_date,2017
+end_date,2017
+release_frequency,P1Y
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod"
+header_rows,1
+#drop_statvars_without_svobs,0
+mapped_columns,15
+mapped_rows,1
+places_resolved_csv,https://docs.google.com/spreadsheets/d/17Ylzp-oIylXqQ7fI7BZvSXyYFeDxPTpTHlcmRbF0lTg/edit?pli=1&resourcekey=0-T04xCUk4e4kil5SO8v-UhA&gid=1979353771#gid=1979353771
