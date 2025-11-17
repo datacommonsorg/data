@@ -1,0 +1,60 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "US_Urban_MathsAndScience_Course_Enrollment",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://civilrightsdata.ed.gov/data",
+      "provenance_description": "This import contains data on enrollment in Biology, Chemistry, Advanced Math, Calculus, Algebra II, Physics, and Geometry courses.",
+      "scripts": ["download.py","run.sh"],
+      "source_files": [
+        "input_files/*.xlsx",
+        "input_files/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/maths_and_science_2010_2012_output.tmcf",
+          "cleaned_csv": "output_files/maths_and_science_2010_2012_output.csv"
+        },
+        {
+          "template_mcf": "output_files/maths_and_science_2016_output.tmcf",
+          "cleaned_csv": "output_files/maths_and_science_2016_output.csv"
+        },
+        {
+          "template_mcf": "output_files/advanced_mathematics_2018_onwards_output.tmcf",
+          "cleaned_csv": "output_files/advanced_mathematics_2018_onwards_output.csv"
+        },
+        {
+          "template_mcf": "output_files/algebra2_2018_onwards_output.tmcf",
+          "cleaned_csv": "output_files/algebra2_2018_onwards_output.csv"
+        }
+        ,
+        {
+          "template_mcf": "output_files/biology_2018_onwards_output.tmcf",
+          "cleaned_csv": "output_files/biology_2018_onwards_output.csv"
+        }
+        ,
+        {
+          "template_mcf": "output_files/calculus_2018_onwards_output.tmcf",
+          "cleaned_csv": "output_files/calculus_2018_onwards_output.csv"
+        }
+        ,
+        {
+          "template_mcf": "output_files/chemistry_2018_onwards_output.tmcf",
+          "cleaned_csv": "output_files/chemistry_2018_onwards_output.csv"
+        }
+        ,
+        {
+          "template_mcf": "output_files/geometry_2018_onwards_output.tmcf",
+          "cleaned_csv": "output_files/geometry_2018_onwards_output.csv"
+        },
+        {
+          "template_mcf": "output_files/physics_2018_onwards_output.tmcf",
+          "cleaned_csv": "output_files/physics_2018_onwards_output.csv"
+        }
+      ],
+      "cron_schedule": "0 04 * * 5"
+    }
+  ]
+}
+
+
