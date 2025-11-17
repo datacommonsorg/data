@@ -3,9 +3,7 @@ set -e
 
 SCRIPT_PATH=$(realpath "$(dirname "$0")")
 
---- 1. Process 2010 and 2012 Files (Older XLSX format) ---
-
-# maths_and_science (2010-2012)
+# --- 1. Process 2010 and 2012 Files (Older XLSX format) ---
 python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --input_data="$SCRIPT_PATH/input_files/*.xlsx" \
 --pv_map=$SCRIPT_PATH/maths_and_science_pvmap.csv \

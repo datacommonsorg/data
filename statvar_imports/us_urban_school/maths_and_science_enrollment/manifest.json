@@ -26,23 +26,19 @@
         {
           "template_mcf": "output_files/algebra2_2018_onwards_output.tmcf",
           "cleaned_csv": "output_files/algebra2_2018_onwards_output.csv"
-        }
-        ,
+        },
         {
           "template_mcf": "output_files/biology_2018_onwards_output.tmcf",
           "cleaned_csv": "output_files/biology_2018_onwards_output.csv"
-        }
-        ,
+        },
         {
           "template_mcf": "output_files/calculus_2018_onwards_output.tmcf",
           "cleaned_csv": "output_files/calculus_2018_onwards_output.csv"
-        }
-        ,
+        },
         {
           "template_mcf": "output_files/chemistry_2018_onwards_output.tmcf",
           "cleaned_csv": "output_files/chemistry_2018_onwards_output.csv"
-        }
-        ,
+        },
         {
           "template_mcf": "output_files/geometry_2018_onwards_output.tmcf",
           "cleaned_csv": "output_files/geometry_2018_onwards_output.csv"
@@ -56,5 +52,4 @@
     }
   ]
 }
-
 

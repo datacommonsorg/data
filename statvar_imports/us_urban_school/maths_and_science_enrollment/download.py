@@ -62,7 +62,7 @@ def add_year_ncesid_column(file_path: str, year: int):
             df["SCHID"] = df["SCHID"].astype(str).str.zfill(5)
             df["ncesid"] = df["LEAID"] + df["SCHID"]
         else:
-            logging.warning(f"Warning: Missing LEAID or SCHID columns for NCESID creation in {file_path.name}")
+            logging.warning(f"Warning: Missing LEAID or SCHID columns for NCESID creation in {os.path.basename(file_path)}")
 
         df.to_csv(file_path, index=False) if file_path.lower().endswith(".csv") else df.to_excel(file_path, index=False)
         logging.info(f"YEAR column added ({year}) → {os.path.basename(file_path)}")
@@ -81,7 +81,7 @@ def download_url_with_retry(zip_url):
         return response
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 404:
-            raise requests.exceptions.FileExistsError(f"URL returned 404: {zip_url}") from e
+            raise FileNotFoundError(f"URL returned 404: {zip_url}") from e
         raise
 
 def download_and_extract_zip(start_year: int, end_year: int):
