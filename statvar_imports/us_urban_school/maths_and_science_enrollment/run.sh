@@ -16,7 +16,7 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 
 # --- 2. Process 2016 File (Separate CSV) ---
 python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
---input_data="$SCRIPT_PATH/input_files/2016_CRDC 2015-16 School Data.csv" \
+--input_data="$SCRIPT_PATH/input_files/2016_School_data.csv" \
 --pv_map=$SCRIPT_PATH/maths_and_science_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
@@ -30,7 +30,7 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 
 # Advanced mathematics (2018 onwards)
 python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
---input_data="$SCRIPT_PATH/input_files/*_Advanced Mathematics.csv" \
+--input_data="$SCRIPT_PATH/input_files/*_Advanced_Mathematics.csv" \
 --pv_map=$SCRIPT_PATH/maths_and_science_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
@@ -41,7 +41,7 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 
 # Algebra II (2018 onwards)
 python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
---input_data="$SCRIPT_PATH/input_files/*_Algebra II.csv" \
+--input_data="$SCRIPT_PATH/input_files/*_Algebra_II.csv" \
 --pv_map=$SCRIPT_PATH/maths_and_science_pvmap.csv \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \

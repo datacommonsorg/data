@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 import os
 import re
 import io
@@ -25,25 +24,38 @@ from retry import retry
 
 # Base URL template
 BASE_URL_TEMPLATE = "https://civilrightsdata.ed.gov/assets/ocr/docs/{}-{}-crdc-data.zip"
-
 SCRIPT_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
 SAVE_FOLDER = os.path.join(SCRIPT_DIR, "input_files")
 
-# Keyword patterns
-KEYWORDS = [
-    r'Advanced Mathematics\.(csv|xlsx)$',
-    r'Physics\.(csv|xlsx)$',
-    r'Calculus\.(csv|xlsx)$',
-    r'School Data\.csv$',
-    r'Geometry\.(csv|xlsx)$',
-    r'Chemistry\.(csv|xlsx)$',
-    r'Biology\.(csv|xlsx)$',
-    r'Algebra II\.(csv|xlsx)$'
-]
+# Keyword patterns (case-insensitive)
+KEYWORDS = {
+    'Advanced Mathematics': r'Advanced Mathematics\.(csv|xlsx)$',
+    'Physics': r'Physics\.(csv|xlsx)$',
+    'Calculus': r'Calculus\.(csv|xlsx)$',
+    'Geometry': r'Geometry\.(csv|xlsx)$',
+    'Algebra II': r'Algebra II\.(csv|xlsx)$',
+    'Chemistry': r'Chemistry\.(csv|xlsx)$',
+    'Biology': r'Biology\.(csv|xlsx)$',
+    'School Data': r'School Data\.csv$'
+}
 
-def matches_keywords(filename: str) -> bool:
-    """Return True if filename matches any of the target patterns."""
-    return any(re.search(pattern, filename, re.IGNORECASE) for pattern in KEYWORDS)
+filename_configs = {
+  'Advanced Mathematics': 'Advanced_Mathematics',
+  'Physics': 'Physics',
+  'Calculus': 'Calculus',
+  'Geometry': 'Geometry',
+  'Algebra II': 'Algebra_II',
+  'Chemistry': 'Chemistry',
+  'Biology': 'Biology',
+  'School Data': 'School_data'  
+}
+
+def detect_subject(filename: str):
+    """Return the subject key that matches the filename."""
+    for subject, pattern in KEYWORDS.items():
+        if re.search(pattern, filename, re.IGNORECASE):
+            return subject
+    return None
 
 def add_year_ncesid_column(file_path: str, year: int):
     """Open CSV/XLSX, add YEAR column, and overwrite."""
@@ -65,7 +77,7 @@ def add_year_ncesid_column(file_path: str, year: int):
             logging.warning(f"Warning: Missing LEAID or SCHID columns for NCESID creation in {os.path.basename(file_path)}")
 
         df.to_csv(file_path, index=False) if file_path.lower().endswith(".csv") else df.to_excel(file_path, index=False)
-        logging.info(f"YEAR column added ({year}) → {os.path.basename(file_path)}")
+        logging.info(f"YEAR and nces id columns are added ({year}) → {os.path.basename(file_path)}")
 
     except Exception as e:
         raise RuntimeError(f"Failed to add YEAR and nces id columns to {file_path}: {e}")
@@ -97,23 +109,24 @@ def download_and_extract_zip(start_year: int, end_year: int):
             return
 
         with zipfile.ZipFile(io.BytesIO(response.content)) as z:
-            matched_files = [f for f in z.namelist() if matches_keywords(f)]
+            for file_name in z.namelist():
 
-            if not matched_files:
-                logging.warning(f"No matching files found in {zip_name}")
-                return
+                subject = detect_subject(file_name)
+                if not subject:
+                    continue
 
-            os.makedirs(SAVE_FOLDER, exist_ok=True)
-
-            for file_name in matched_files:
-                output_filename = f"{end_year}_{os.path.basename(file_name)}"
+                base_output = filename_configs[subject]
+                ext = os.path.splitext(file_name)[1]
+                output_filename = f"{end_year}_{base_output}{ext}"
                 output_path = os.path.join(SAVE_FOLDER, output_filename)
+
+                os.makedirs(SAVE_FOLDER, exist_ok=True)
 
                 with z.open(file_name) as source, open(output_path, "wb") as target:
                     target.write(source.read())
-
                 logging.info(f"Extracted: {output_filename}")
                 add_year_ncesid_column(output_path, end_year)
+
         logging.info("Downloading completed...!")
 
     except Exception as e:
@@ -124,7 +137,7 @@ def main(_):
     start_year = 2010
     current_year = datetime.now().year
 
-    for year in range(start_year, current_year):
+    for year in range(start_year, current_year+1):
         download_and_extract_zip(year - 1, year)
 
 if __name__ == '__main__':

@@ -73,7 +73,7 @@ python3 stat_var_processor.py \
 #### --- 2. Process 2016 File (Separate CSV) ---
 ```bash
 python3 stat_var_processor.py \
---input_data=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/input_files/2016_CRDC 2015-16 School Data.csv \
+--input_data=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/input_files/2016_School_data.csv \
 --pv_map=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/maths_and_science_pvmap.csv \
 --config_file=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
@@ -83,7 +83,7 @@ python3 stat_var_processor.py \
 #### --- 3. Process 2018 onwards Files (Combined CSVs for each course) ---
 ```bash
 python3 stat_var_processor.py \
---input_data=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/input_files/*_Advanced Mathematics.csv \
+--input_data=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/input_files/*_Advanced_Mathematics.csv \
 --pv_map=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/maths_and_science_pvmap.csv \
 --config_file=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
@@ -92,7 +92,7 @@ python3 stat_var_processor.py \
 
 ```bash
 python3 stat_var_processor.py \
---input_data=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/input_files/*_Algebra II.csv \
+--input_data=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/input_files/*_Algebra_II.csv \
 --pv_map=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/maths_and_science_pvmap.csv \
 --config_file=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
