@@ -72,4 +72,4 @@ python3 stat_var_processor.py \
 
 ### Autorefresh type
 
-This import uses a fully automated refresh process, configured to run every Friday at 5:00 AM UTC.
+This import uses a fully automated refresh process, configured to run every month, at 5:00 AM, on the 1st and 15th day of the month.

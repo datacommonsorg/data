@@ -4,7 +4,7 @@
       "import_name": "US_Urban_Schools_Teachers_And_Staff",
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://civilrightsdata.ed.gov/data",
-      "provenance_description": "This import contains data on the number of FTE teachers and staff at each school.",
+      "provenance_description": "This import contains US data on the number of FTE teachers and staff at each school.",
       "scripts": ["../download.py --data_type=teachers","run.sh"],
       "source_files": [
         "input_files/*.xlsx",
@@ -24,7 +24,7 @@
           "cleaned_csv": "output_files/teachers_and_staff_2018_2022_output.csv"
         }
       ],
-      "cron_schedule": "0 05 * * 5"
+      "cron_schedule": "0 5 1,15 * *"
     }
   ]
 }
