@@ -1,7 +1,7 @@
 {
   "import_specifications": [
     {
-      "import_name": "US_Urban_SchoolSupport_And_Staff",
+      "import_name": "US_Urban_Schools_Teachers_And_Staff",
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://civilrightsdata.ed.gov/data",
       "provenance_description": "This import contains data on the number of FTE teachers and staff at each school.",

@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e
 
+# ----------------------------------------------------------------------------------------------------------------------------------------------------
+# This Bash script automates the full data processing pipeline for the Teachers and Staff dataset by strategically grouping input files. 
+# First, it combines all older XLSX files (2010, 2012, and 2014) for processing into a single legacy output file. 
+# Next, it isolates the 2016 CSV file to generate a separate output for that specific year. 
+# Finally, it locates and processes all remaining CSV files (2018 onwards) together to create one combined, up-to-date output file, 
+# ensuring the processing tool runs successfully for each major historical format and grouping while providing clear error messages if any step fails.
+# ----------------------------------------------------------------------------------------------------------------------------------------------------
+
 SCRIPT_PATH=$(realpath "$(dirname "$0")")
 
 # --- 1. Process 2010 and 2014 Files (Older XLSX format) ---
