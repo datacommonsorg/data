@@ -6,13 +6,13 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://civilrightsdata.ed.gov/data",
-            "provenance_description": "The Civil Rights Data Collection (CRDC) provides data on key education and civil rights issues in our nation's public schools. This import focuses on chronic absenteeism, offenses, and restraint and seclusion data.",
+            "provenance_description": "The Civil Rights Data Collection (CRDC) provides data on key education and civil rights issues in our nation's public schools. This import focuses on harassment or bullying data.",
             "scripts": [
                 "download.py","preprocess.py","run.sh"
                         ],
             "import_inputs": [
                 {
-                    "template_mcf": "processed_output/*.tmcf",
+                    "template_mcf": "processed_output/crdc_harassment_or_bullying_2022.tmcf",
                     "cleaned_csv": "processed_output/*.csv"
                 }
                 ],
@@ -22,8 +22,8 @@
             "cron_schedule": "0 0 15 7 *",
             "resource_limits": {
                 "cpu": 32,
-                "memory": 128,
-                "disk": 100
+                "memory": 256,
+                "disk": 1000
             }
         }
     ]

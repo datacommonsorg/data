@@ -9,7 +9,7 @@ INPUT_DIR="./input_files"
 
 # Set the paths for the arguments that are common to all runs.
 # !!! IMPORTANT: Replace these placeholder values with your actual file paths. !!!
-PV_MAP_FILE="harssment_and_bullying_pv_map.csv"
+PV_MAP_FILE="harassment_and_bullying_pvmap.csv"
 CONFIG_FILE="harassment_or_bullying_metadata.csv"
 OUTPUT_DIR="processed_output" # Make sure this directory exists!
 
@@ -46,7 +46,7 @@ for input_file in "$INPUT_DIR"/*; do
         file_extension="${base_name##*.}"
         filename_only="${base_name%.*}"
         
-        output_file="$OUTPUT_DIR/${filename_only}.mcf"
+        output_file="$OUTPUT_DIR/${filename_only}"
         
         echo "Launching job for: $input_file (Output: $output_file)"
         
