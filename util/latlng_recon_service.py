@@ -19,11 +19,11 @@ See latlng_recon_service_test.py for usage example.
 import concurrent.futures
 import requests
 from typing import Callable, Dict, List, NewType, TypeVar, Tuple
+from .dc_api_wrapper import dc_api_resolve_latlng
 
 LatLngType = NewType('LatLngType', Tuple[float, float])
 ResolvedLatLngType = NewType('ResolvedLatLngType', Dict[str, List[str]])
 
-_RECON_ROOT = "https://api.datacommons.org/v1/recon/resolve/coordinate"
 _RECON_COORD_BATCH_SIZE = 50
 
 LatLng = NewType('LatLng', Tuple[float, float])
@@ -66,11 +66,10 @@ def _call_resolve_coordinates(id2latlon: Dict[LatLngType, Tuple[str]],
     result = {}
     if verbose:
         print('Calling recon API with a lat/lon list of', len(id2latlon))
-    resp = _session().post(_RECON_ROOT, json={'coordinates': coords})
-    resp.raise_for_status()
+    resp = dc_api_resolve_latlng(coords, return_v1_response=True)
     if verbose:
         print('Got successful recon API response')
-    for coord in resp.json()['placeCoordinates']:
+    for coord in resp['placeCoordinates']:
         # Zero lat/lons are missing
         # (https://github.com/datacommonsorg/mixer/issues/734)
         if 'latitude' not in coord:
