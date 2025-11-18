@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "internet_access",
+            "curator_emails": [
+                "support@datacommons.org" 
+            ],
+            "provenance_url": "https://civilrightsdata.ed.gov/data",
+            "provenance_description": "The Civil Rights Data Collection (CRDC) has released data concerning the total number of devices (computers, laptops, tablets, etc.) that can connect via Wi-Fi and are used by students for instructional purposes",
+            "scripts": [
+                "python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=common_pvmap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf  --config_file=common_metadata.csv  --output_path=output/internet_access"
+            ],
+            "import_inputs": [
+                  {
+                      "template_mcf": "output/internet_access.tmcf",
+                      "cleaned_csv": "output/internet_access.csv"
+                  }
+                          ],
+            "source_files": [
+                "Internet_Access_and_Devices_2021.csv",
+                "Internet_Access_and_Devices_2022.csv"
+            ],
+            "cron_schedule": "0 0 1 */2 *"
+        }
+    ]
+}

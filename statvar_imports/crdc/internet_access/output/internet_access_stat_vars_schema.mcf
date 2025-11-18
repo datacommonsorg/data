@@ -1,0 +1,33 @@
+Node: dcid:internetSubscriptionType
+typeOf: dcs:Property
+name: "internetSubscriptionType"
+domainIncludes: dcid:School
+
+Node: dcid:WifiEnabledDevice
+typeOf: dcid:USC_InternetSubscriptionTypeEnum
+name: "Wifi Enabled Device"
+isProvisional: dcs:True
+
+Node: dcid:juvenileJusticeFacilityStatus
+typeOf: dcs:Property
+name: "juvenileJusticeFacilityStatus"
+domainIncludes: dcid:School
+rangeIncludes: dcid:JuvenileJusticeFacilityStatusEnum
+isProvisional: dcs:True
+
+Node: dcid:JuvenileJusticeFacilityStatusEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "JuvenileJusticeFacilityStatusEnum"
+isProvisional: dcs:True
+
+Node: dcid:WithJuvenileJusticeFacility
+typeOf: dcid:JuvenileJusticeFacilityStatusEnum
+name: "With Juvenile Justice Facility"
+isProvisional: dcs:True
+
+Node: dcid:NoJuvenileJusticeFacility
+typeOf: dcid:JuvenileJusticeFacilityStatusEnum
+name: "No Juvenile Justice Facility"
+isProvisional: dcs:True
+
