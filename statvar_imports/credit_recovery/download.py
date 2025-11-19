@@ -96,6 +96,7 @@ def clean_destination_folders():
                     logging.info(f"Deleted: {item}")
                 except OSError as e:
                     logging.error(f"Error deleting {item}: {e}")
+                    raise RuntimeError(f"Error deleting {item}") from e
     logging.info("Successfully cleaned destination folders.")
 
 def main():
