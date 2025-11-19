@@ -8,7 +8,7 @@
             "provenance_url": "https://civilrightsdata.ed.gov/data",
             "provenance_description": "This dataset contains participation in Scholastic Assessment Test or American College Testing for each school by students' race and sex,  Limited English Proficiency status and sex, and disability status and sex.",
             "scripts": [
-                "run_download_process.sh"
+                "run_download_process_school.sh"
             ],
             "source_files": [
                 "input_files_school/*.xlsx",
@@ -17,7 +17,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "common_output.tmcf",
-                    "cleaned_csv": "output_files/output_*.csv"
+                    "cleaned_csv": "output_files_school/output_*.csv"
                 }
             ],
             "cron_schedule": "0 05 8,23 * *"
