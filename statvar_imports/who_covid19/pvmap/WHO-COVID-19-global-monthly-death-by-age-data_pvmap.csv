@@ -1,6 +1,6 @@
 key,property1,value1,property2,value2,property3,value3
 # Place and Date,,,,,,
-Country_code,#Format,observationAbout=country/{Data},,,,
+Country_code,#Format,observationAbout=country/{Data},incidentType,COVID_19,,
 Year,Year,{Data},,,,
 Month,Month,{Data},#Eval,"observationDate=format_date(Year + '-' + Month + '-01', '%Y-%m-%d')",,
 # Age Group Mappings,,,,,,
