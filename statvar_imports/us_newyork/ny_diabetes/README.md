@@ -4,7 +4,7 @@
 
 This project processes and imports data on the percentage of adults with diagnosed diabetes in New York, provided by the New York State Department of Health. The dataset provides annual county-level estimates for the years 2016, 2018, and 2021.
 
-*   **Source URL**: [https://www.health.ny.gov/statistics/brfss/](https://www.health.ny.gov/statistics/brfss/)
+*   **Source URL**: [https://www.health.ny.gov/statistics/prevention/injury_prevention/information_for_action/](https://www.health.ny.gov/statistics/prevention/injury_prevention/information_for_action/)
 *   **Import Type**: Manual
 *   **Source Data Availability**: Data is available for 2016, 2018, and 2021.
 *   **Release Frequency**: No fixed frequency.
@@ -49,25 +49,28 @@ These scripts process the input files for each year to generate the final `_outp
 **Usage**:
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
-  --input_data=input_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_2016-data.csv \
-  --pv_map=NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_2016_pv_map.csv \
-  --config_file=NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_2016_metadata.csv \
-  --places_resolved_csv=NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_2016_place_resolver.csv \
-  --output_path=output_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output_2016
+  --input_data=input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2016_data.csv \
+  --pv_map=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2016_pv_map.csv \
+  --config_file=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2016_metadata.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --places_resolved_csv=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2016_place_resolver.csv \
+  --output_path=output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2016
 
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
-  --input_data=input_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_2018_data.csv \
-  --pv_map=NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_2018_pv_map.csv \
-  --config_file=NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_2018_meta_data.csv \
-  --places_resolved_csv=NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_2018_place_resolver.csv \
-  --output_path=output_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output_2018
+  --input_data=input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2018_data.csv \
+  --pv_map=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2018_pv_map.csv \
+  --config_file=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2018_metadata.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --places_resolved_csv=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2018_place_resolver.csv \
+  --output_path=output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2018
 
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
-  --input_data=input_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_2021_data.csv \
-  --pv_map=NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_2021_pv_map.csv \
-  --config_file=NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_2021_metadata.csv \
-  --places_resolved_csv=NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_2021_place_resolver.csv \
-  --output_path=output_files/NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_output_2021
+  --input_data=input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2021_data.csv \
+  --pv_map=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2021_pv_map.csv \
+  --config_file=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2021_metadata.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --places_resolved_csv=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2021_place_resolver.csv \
+  --output_path=output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2021
 ```
 
 ---
