@@ -10,7 +10,7 @@
             "scripts": [
                 "download.py",
                 "creditprocess.py",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_credit/*.csv --pv_map=pvmap.csv --config_file=metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/credit_output"
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_credit/*.csv --pv_map=pvmap.csv --config_file=metadata.csv  --output_path=output/credit_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf "
             ],
             "source_files": [
                 "input_credit/*.csv"
