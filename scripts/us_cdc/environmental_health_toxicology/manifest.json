@@ -21,19 +21,19 @@
             },
             "import_inputs": [
                 {
-                    "template_mcf": "PM25CensusTractPollution.tmcf",
+                    "template_mcf": "PM25CensusTractPollution_part1.tmcf",
                     "cleaned_csv": "output/PM2.5CensusTract_0.csv"
                 },
                 {
-                    "template_mcf": "PM25CensusTractPollution.tmcf",
+                    "template_mcf": "PM25CensusTractPollution_part2.tmcf",
                     "cleaned_csv": "output/PM2.5CensusTract_1.csv"
                 },
                 {
-                    "template_mcf": "PM25CensusTractPollution.tmcf",
+                    "template_mcf": "PM25CensusTractPollution_part3.tmcf",
                     "cleaned_csv": "output/PM2.5CensusTract_2.csv"
                 },
                 {
-                    "template_mcf": "PM25CensusTractPollution.tmcf",
+                    "template_mcf": "PM25CensusTractPollution_part4.tmcf",
                     "cleaned_csv": "output/PM2.5CensusTract_3.csv"
                 }
             ],
@@ -60,19 +60,19 @@
             },
             "import_inputs": [
                 {
-                    "template_mcf": "OzoneCensusTractPollution.tmcf",
+                    "template_mcf": "OzoneCensusTractPollution_part1.tmcf",
                     "cleaned_csv": "output/Census_Tract_Level_Ozone_Concentrations_0.csv"
                 },
                 {
-                    "template_mcf": "OzoneCensusTractPollution.tmcf",
+                    "template_mcf": "OzoneCensusTractPollution_part2.tmcf",
                     "cleaned_csv": "output/Census_Tract_Level_Ozone_Concentrations_1.csv"
                 },
                 {
-                    "template_mcf": "OzoneCensusTractPollution.tmcf",
+                    "template_mcf": "OzoneCensusTractPollution_part3.tmcf",
                     "cleaned_csv": "output/Census_Tract_Level_Ozone_Concentrations_2.csv"
                 },
                 {
-                    "template_mcf": "OzoneCensusTractPollution.tmcf",
+                    "template_mcf": "OzoneCensusTractPollution_part4.tmcf",
                     "cleaned_csv": "output/Census_Tract_Level_Ozone_Concentrations_3.csv"
                 }
             ],
@@ -127,7 +127,7 @@
             ],
             "resource_limits": {
                 "cpu": 8,
-                "memory": 64,
+                "memory": 128,
                 "disk": 100
             },
             "cron_schedule": "0 1  5 * *"

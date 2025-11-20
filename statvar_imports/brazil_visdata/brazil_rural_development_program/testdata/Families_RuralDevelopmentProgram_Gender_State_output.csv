@@ -1,0 +1,11 @@
+observationAbout,observationDate,value,variableMeasured,observationPeriod,unit
+dcid:wikidataId/Q40942,2012-01,2,dcid:Count_Person_BrazilRuralDevelopmentProgram,,
+dcid:wikidataId/Q40942,2012-01,2,dcid:Count_Person_BrazilRuralDevelopmentProgram_Female,,
+dcid:wikidataId/Q40430,2012-01,241,dcid:Count_Person_BrazilRuralDevelopmentProgram,,
+dcid:wikidataId/Q40430,2012-01,150,dcid:Count_Person_BrazilRuralDevelopmentProgram_Female,,
+dcid:wikidataId/Q40430,2012-01,66,dcid:Count_Person_BrazilRuralDevelopmentProgram_Male,,
+dcid:wikidataId/Q40430,2012-01,25,dcid:Count_Person_BrazilRuralDevelopmentProgram_GenderUnknownOrNotStated,,
+dcid:wikidataId/Q39109,2012-01,239,dcid:Count_Person_BrazilRuralDevelopmentProgram,,
+dcid:wikidataId/Q39109,2012-01,139,dcid:Count_Person_BrazilRuralDevelopmentProgram_Female,,
+dcid:wikidataId/Q39109,2012-01,75,dcid:Count_Person_BrazilRuralDevelopmentProgram_Male,,
+dcid:wikidataId/Q39109,2012-01,25,dcid:Count_Person_BrazilRuralDevelopmentProgram_GenderUnknownOrNotStated,,

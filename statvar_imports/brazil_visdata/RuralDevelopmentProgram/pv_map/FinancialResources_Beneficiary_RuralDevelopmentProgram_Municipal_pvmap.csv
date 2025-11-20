@@ -1,4 +1,0 @@
-key,prop,val,p1,v1,p2,v2,,,,,,
-Referência,observationDate,{Data},populationType,Household,benefitProgram,Brazil_RuralDevelopmentProgram,measurementQualifier,Annual,measuredProperty,amount,,
-Código,observationAbout,{Data},,,,,,,,,,
-Recursos financeiros disponibilizados às famílias beneficiárias do Programa Fomento Rural,value,{Number},observationPeriod,P1Y,name,"""Financial resources made available to beneficiary families of the Rural Development Program""",alternateName,"""Recursos financeiros disponibilizados às famílias beneficiárias do Programa Fomento Rural@pt""",benefitType,FinancialBenefit,unit,BRL

@@ -19,7 +19,12 @@
             "source_files": [
                 "input_files/*"
             ],
-            "cron_schedule": "0 05 * * 1"
+            "cron_schedule": "0 05 * * 1",
+            "resource_limits": {
+                "cpu": 16,
+                "memory": 256,
+                "disk": 100
+            }
         }
     ]
 }

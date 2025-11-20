@@ -23,7 +23,9 @@ from absl import app, logging, flags
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '..', '..', '..', 'util'))
+sys.path.append(_SCRIPT_PATH)
+_DATA_DIR = _SCRIPT_PATH.split('/data/')[0]
+sys.path.append(os.path.join(_DATA_DIR, '/data/util'))
 
 from statvar_dcid_generator import get_statvar_dcid
 from name_to_alpha2 import USSTATE_MAP_SPACE
@@ -41,10 +43,14 @@ with open("./config.json", 'r', encoding='utf-8') as config_f:
 def generate_tmcf():
     # Writing Generated TMCF to local path.
     configs = reads_config_file()
-    with open(_CONFIG.get("OUTPUT_PATH") + "/output.tmcf",
-              'w+',
-              encoding='utf-8') as f_out:
-        f_out.write(configs['TMCF_TEMPLATE'].rstrip('\n'))
+    tmcf_template = configs['TMCF_TEMPLATE'].rstrip('\n')
+    output_path = _CONFIG.get("OUTPUT_PATH")
+    # The manifest specifies two parts.
+    for part_num in range(1, 3):
+        tmcf_file_path = os.path.join(output_path,
+                                      f"output_part{part_num}.tmcf")
+        with open(tmcf_file_path, 'w+', encoding='utf-8') as f_out:
+            f_out.write(tmcf_template)
 
 
 def state_resolver(state: str) -> str:
