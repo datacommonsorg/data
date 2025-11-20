@@ -1,8 +1,8 @@
 key,,,,,,,,,,,,,,
 year,observationDate,{Number},,,,,,,,,,,,
-COMBOKEY,#Format,observationAbout=nces/{Data},populationType,Student,measuredProperty,count,,,,,,,,
-JJ:Yes,juvenileJusticeFacilityStatus,JuvenileJusticeFacility,,,,,,,,,,,,
-JJ:No,juvenileJusticeFacilityStatus,NotJuvenileJusticeFacility,,,,,,,,,,,,
+COMBOKEY,#Format,observationAbout=nces/{Data:0>12},populationType,Student,measuredProperty,count,,,,,,,,
+JJ:Yes,educationalInstitutionType,JuvenileJusticeFacility,,,,,,,,,,,,
+JJ:No,educationalInstitutionType,NotJuvenileJusticeFacility,,,,,,,,,,,,
 SCH_RS_NONIDEA_MECH_HI_M,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RS_NONIDEA_MECH_HI_F,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RS_NONIDEA_MECH_AM_M,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,AmericanIndianOrAlaskaNative,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
@@ -19,8 +19,8 @@ SCH_RS_NONIDEA_MECH_TR_M,restraintOrSeclusionType,MechanicalRestraint,educationP
 SCH_RS_NONIDEA_MECH_TR_F,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,TwoOrMoreRaces,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 TOT_RS_NONIDEA_MECH_M,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,,,
 TOT_RS_NONIDEA_MECH_F,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,,,
-SCH_RS_NONIDEA_MECH_LEP_M,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,englishProficiency,Limited,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
-SCH_RS_NONIDEA_MECH_LEP_F,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,englishProficiency,Limited,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
+SCH_RS_NONIDEA_MECH_LEP_M,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
+SCH_RS_NONIDEA_MECH_LEP_F,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RS_NONIDEA_MECH_504_M,restraintOrSeclusionType,MechanicalRestraint,educationProgram,Section504Plan,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,,,
 SCH_RS_NONIDEA_MECH_504_F,restraintOrSeclusionType,MechanicalRestraint,educationProgram,Section504Plan,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,,,
 SCH_RS_NONIDEA_PHYS_HI_M,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
@@ -39,8 +39,8 @@ SCH_RS_NONIDEA_PHYS_TR_M,restraintOrSeclusionType,PhysicalRestraint,educationPro
 SCH_RS_NONIDEA_PHYS_TR_F,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,TwoOrMoreRaces,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 TOT_RS_NONIDEA_PHYS_M,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,,,
 TOT_RS_NONIDEA_PHYS_F,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,,,
-SCH_RS_NONIDEA_PHYS_LEP_M,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,englishProficiency,Limited,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
-SCH_RS_NONIDEA_PHYS_LEP_F,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,englishProficiency,Limited,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
+SCH_RS_NONIDEA_PHYS_LEP_M,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
+SCH_RS_NONIDEA_PHYS_LEP_F,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RS_NONIDEA_PHYS_504_M,restraintOrSeclusionType,PhysicalRestraint,educationProgram,Section504Plan,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,,,
 SCH_RS_NONIDEA_PHYS_504_F,restraintOrSeclusionType,PhysicalRestraint,educationProgram,Section504Plan,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,,,
 SCH_RS_NONIDEA_SECL_HI_M,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
@@ -61,8 +61,8 @@ TOT_RS_NONIDEA_SECL_M,restraintOrSeclusionType,Seclusion,educationProgram,NonIDE
 TOT_RS_NONIDEA_SECL_F,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,,,
 SCH_RS_NONIDEA_SECL_504_M,restraintOrSeclusionType,Seclusion,educationProgram,Section504Plan,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,,,
 SCH_RS_NONIDEA_SECL_504_F,restraintOrSeclusionType,Seclusion,educationProgram,Section504Plan,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,,,
-SCH_RS_NONIDEA_SECL_LEP_M,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,englishProficiency,Limited,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
-SCH_RS_NONIDEA_SECL_LEP_F,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,englishProficiency,Limited,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
+SCH_RS_NONIDEA_SECL_LEP_M,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
+SCH_RS_NONIDEA_SECL_LEP_F,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RS_IDEA_MECH_HI_M,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,HispanicOrLatino,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RS_IDEA_MECH_HI_F,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,HispanicOrLatino,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RS_IDEA_MECH_AM_M,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
@@ -79,8 +79,8 @@ SCH_RS_IDEA_MECH_TR_M,restraintOrSeclusionType,MechanicalRestraint,educationProg
 SCH_RS_IDEA_MECH_TR_F,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,TwoOrMoreRaces,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 TOT_RS_IDEA_MECH_M,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,,,
 TOT_RS_IDEA_MECH_F,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,,,
-SCH_RS_IDEA_MECH_LEP_M,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,englishProficiency,Limited,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
-SCH_RS_IDEA_MECH_LEP_F,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,englishProficiency,Limited,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
+SCH_RS_IDEA_MECH_LEP_M,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
+SCH_RS_IDEA_MECH_LEP_F,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RS_IDEA_PHYS_HI_M,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,HispanicOrLatino,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RS_IDEA_PHYS_HI_F,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,HispanicOrLatino,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RS_IDEA_PHYS_AM_M,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
@@ -97,8 +97,8 @@ SCH_RS_IDEA_PHYS_TR_M,restraintOrSeclusionType,PhysicalRestraint,educationProgra
 SCH_RS_IDEA_PHYS_TR_F,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,TwoOrMoreRaces,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 TOT_RS_IDEA_PHYS_M,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,,,
 TOT_RS_IDEA_PHYS_F,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,,,
-SCH_RS_IDEA_PHYS_LEP_M,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,englishProficiency,Limited,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
-SCH_RS_IDEA_PHYS_LEP_F,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,englishProficiency,Limited,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
+SCH_RS_IDEA_PHYS_LEP_M,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
+SCH_RS_IDEA_PHYS_LEP_F,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RS_IDEA_SECL_HI_M,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,HispanicOrLatino,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RS_IDEA_SECL_HI_F,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,HispanicOrLatino,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RS_IDEA_SECL_AM_M,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
@@ -115,8 +115,8 @@ SCH_RS_IDEA_SECL_TR_M,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,r
 SCH_RS_IDEA_SECL_TR_F,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,TwoOrMoreRaces,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 TOT_RS_IDEA_SECL_M,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,,,
 TOT_RS_IDEA_SECL_F,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,,,
-SCH_RS_IDEA_SECL_LEP_M,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,englishProficiency,Limited,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
-SCH_RS_IDEA_SECL_LEP_F,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,englishProficiency,Limited,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
+SCH_RS_IDEA_SECL_LEP_M,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,value,{Number},#Filter,Allow=int(value) >= 0,,
+SCH_RS_IDEA_SECL_LEP_F,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,value,{Number},#Filter,Allow=int(value) >= 0,,
 SCH_RSINSTANCES_MECH_WODIS,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,value,{Number},#Filter,Allow=int(value) >= 0,,,,,,
 SCH_RSINSTANCES_MECH_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,value,{Number},#Filter,Allow=int(value) >= 0,,,,,,
 SCH_RSINSTANCES_MECH_504,restraintOrSeclusionType,MechanicalRestraint,educationProgram,Section504Plan,value,{Number},#Filter,Allow=int(value) >= 0,,,,,,
@@ -153,8 +153,8 @@ M_TOT_7_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonID
 F_TOT_7_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
 M_DIS_504_7_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,Section504Plan,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
 F_DIS_504_7_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,Section504Plan,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
-M_LEP_7_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,englishProficiency,Limited,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
-F_LEP_7_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,englishProficiency,Limited,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
+M_LEP_7_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
+F_LEP_7_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_HIS_7_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,HispanicOrLatino,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_HIS_7_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,HispanicOrLatino,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_AME_7_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
@@ -171,8 +171,8 @@ M_2_OR_MORE_7_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDE
 F_2_OR_MORE_7_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,TwoOrMoreRaces,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_TOT_7_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
 F_TOT_7_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
-M_LEP_7_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,englishProficiency,Limited,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
-F_LEP_7_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,englishProficiency,Limited,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
+M_LEP_7_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
+F_LEP_7_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_AME_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,race,AmericanIndianOrAlaskaNative,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_ASI_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,race,Asian,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_HIS_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
@@ -180,7 +180,7 @@ M_BLA_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonID
 M_WHI_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,race,White,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_TOT_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
 M_DIS_504_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,Section504Plan,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
-M_LEP_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,englishProficiency,Limited,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
+M_LEP_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_AME_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,race,AmericanIndianOrAlaskaNative,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_ASI_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,race,Asian,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_HIS_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
@@ -188,21 +188,21 @@ F_BLA_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonID
 F_WHI_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,race,White,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_TOT_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
 F_DIS_504_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,Section504Plan,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
-F_LEP_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,englishProficiency,Limited,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
+F_LEP_5_SECLU_NON_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_AME_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_ASI_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,Asian,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_HIS_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,HispanicOrLatino,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_BLA_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,BlackOrAfricanAmericanAlone,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_WHI_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,White,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_TOT_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
-M_LEP_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,englishProficiency,Limited,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
+M_LEP_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_AME_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_ASI_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,Asian,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_HIS_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,HispanicOrLatino,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_BLA_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,BlackOrAfricanAmericanAlone,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_WHI_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,White,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_TOT_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
-F_LEP_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,englishProficiency,Limited,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
+F_LEP_5_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_AME_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_ASI_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,Asian,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_HIS_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,HispanicOrLatino,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
@@ -211,7 +211,7 @@ M_WHI_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationPro
 M_HI_PAC_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,NativeHawaiianOrOtherPacificIslanderAlone,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_2_OR_MORE_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,TwoOrMoreRaces,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_TOT_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
-M_LEP_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,englishProficiency,Limited,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
+M_LEP_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_AME_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_ASI_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,Asian,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_HIS_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,HispanicOrLatino,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
@@ -220,7 +220,7 @@ F_WHI_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationPro
 F_HI_PAC_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,NativeHawaiianOrOtherPacificIslanderAlone,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_2_OR_MORE_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,race,TwoOrMoreRaces,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_TOT_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
-F_LEP_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,englishProficiency,Limited,gender,Female,#Filter,Allow=int(value) >= 0,schoolGradeLevel,SchoolGrade7,value,{Number}
+F_LEP_7_MECH_REST_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,#Filter,Allow=int(value) >= 0,schoolGradeLevel,SchoolGrade7,value,{Number}
 M_AME_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,AmericanIndianOrAlaskaNative,gender,Male,#Filter,Allow=int(value) >= 0,schoolGradeLevel,SchoolGrade5,value,{Number}
 M_ASI_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,Asian,gender,Male,#Filter,Allow=int(value) >= 0,schoolGradeLevel,SchoolGrade5,value,{Number}
 M_HIS_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Male,#Filter,Allow=int(value) >= 0,schoolGradeLevel,SchoolGrade5,value,{Number}
@@ -228,7 +228,7 @@ M_BLA_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationP
 M_WHI_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,White,gender,Male,#Filter,Allow=int(value) >= 0,schoolGradeLevel,SchoolGrade5,value,{Number}
 M_TOT_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
 M_DIS_504_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,Section504Plan,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
-M_LEP_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,englishProficiency,Limited,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
+M_LEP_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_AME_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,AmericanIndianOrAlaskaNative,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_ASI_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,Asian,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_HIS_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
@@ -236,7 +236,7 @@ F_BLA_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationP
 F_WHI_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,White,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_TOT_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
 F_DIS_504_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,Section504Plan,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
-F_LEP_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,englishProficiency,Limited,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
+F_LEP_5_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_AME_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,AmericanIndianOrAlaskaNative,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_ASI_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,Asian,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_HIS_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
@@ -246,7 +246,7 @@ M_HI_PAC_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educati
 M_2_OR_MORE_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,TwoOrMoreRaces,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_TOT_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
 M_DIS_504_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,Section504Plan,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
-M_LEP_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,englishProficiency,Limited,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
+M_LEP_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_AME_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,AmericanIndianOrAlaskaNative,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_ASI_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,Asian,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_HIS_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
@@ -256,35 +256,35 @@ F_HI_PAC_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educati
 F_2_OR_MORE_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,race,TwoOrMoreRaces,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_TOT_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
 F_DIS_504_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,Section504Plan,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
-F_LEP_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,englishProficiency,Limited,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
+F_LEP_7_PHYS_REST_NON_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_AME_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_ASI_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,Asian,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_HIS_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,HispanicOrLatino,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_BLA_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,BlackOrAfricanAmericanAlone,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_WHI_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,White,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_TOT_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
-M_LEP_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,englishProficiency,Limited,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
+M_LEP_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_AME_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_ASI_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,Asian,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_HIS_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,HispanicOrLatino,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_BLA_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,BlackOrAfricanAmericanAlone,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_WHI_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,race,White,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_TOT_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
-F_LEP_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,englishProficiency,Limited,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
+F_LEP_5_SECLU_IDEA,restraintOrSeclusionType,Seclusion,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_AME_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_ASI_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,Asian,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_HIS_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,HispanicOrLatino,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_BLA_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,BlackOrAfricanAmericanAlone,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_WHI_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,White,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_TOT_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
-M_LEP_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,englishProficiency,Limited,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
+M_LEP_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_AME_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_ASI_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,Asian,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_HIS_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,HispanicOrLatino,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_BLA_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,BlackOrAfricanAmericanAlone,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_WHI_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,White,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_TOT_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
-F_LEP_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,englishProficiency,Limited,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
+F_LEP_5_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_AME_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_ASI_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,Asian,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_HIS_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,HispanicOrLatino,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
@@ -293,7 +293,7 @@ M_WHI_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgr
 M_HI_PAC_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,NativeHawaiianOrOtherPacificIslanderAlone,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_2_OR_MORE_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,TwoOrMoreRaces,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_TOT_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
-M_LEP_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,englishProficiency,Limited,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
+M_LEP_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_AME_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,AmericanIndianOrAlaskaNative,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_ASI_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,Asian,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_HIS_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,HispanicOrLatino,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
@@ -302,7 +302,7 @@ F_WHI_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgr
 F_HI_PAC_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,NativeHawaiianOrOtherPacificIslanderAlone,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_2_OR_MORE_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,race,TwoOrMoreRaces,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_TOT_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
-F_LEP_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,englishProficiency,Limited,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
+F_LEP_7_PHYS_REST_IDEA,restraintOrSeclusionType,PhysicalRestraint,educationProgram,IDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_AME_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,AmericanIndianOrAlaskaNative,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_ASI_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,Asian,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_HIS_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
@@ -310,7 +310,7 @@ M_BLA_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educatio
 M_WHI_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,White,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_TOT_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
 M_DIS_504_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,Section504Plan,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
-M_LEP_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,englishProficiency,Limited,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
+M_LEP_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_AME_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,AmericanIndianOrAlaskaNative,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_ASI_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,Asian,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_HIS_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
@@ -318,7 +318,7 @@ F_BLA_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educatio
 F_WHI_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,White,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 F_TOT_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
 F_DIS_504_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,Section504Plan,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0,,
-F_LEP_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,englishProficiency,Limited,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
+F_LEP_5_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,schoolGradeLevel,SchoolGrade5,value,{Number},#Filter,Allow=int(value) >= 0
 M_AME_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,AmericanIndianOrAlaskaNative,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_ASI_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,Asian,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_HIS_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
@@ -328,7 +328,7 @@ M_HI_PAC_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educa
 M_2_OR_MORE_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,TwoOrMoreRaces,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 M_TOT_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
 M_DIS_504_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,Section504Plan,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
-M_LEP_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,englishProficiency,Limited,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
+M_LEP_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Male,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_AME_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,AmericanIndianOrAlaskaNative,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_ASI_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,Asian,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_HIS_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,HispanicOrLatino,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
@@ -338,4 +338,4 @@ F_HI_PAC_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educa
 F_2_OR_MORE_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,race,TwoOrMoreRaces,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
 F_TOT_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
 F_DIS_504_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,Section504Plan,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0,,
-F_LEP_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,englishProficiency,Limited,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
+F_LEP_7_MECH_REST_NON_IDEA,restraintOrSeclusionType,MechanicalRestraint,educationProgram,NonIDEA,englishProficiency,LimitedEnglishProficiency,gender,Female,schoolGradeLevel,SchoolGrade7,value,{Number},#Filter,Allow=int(value) >= 0
