@@ -36,6 +36,13 @@ The import process involves running a processing script on manually downloaded s
 
 This import is **not** designed to be autorefreshed. The data is downloaded and processed manually. Any future updates will require repeating the manual download and processing steps.
 
+### Manual Steps
+1. From the source URL, manually download the PDF files containing the data.
+2. Extract the relevant tables/data from the PDF files (e.g., by copy-pasting the data).
+3. Place the extracted input files in the `input_files/` directory( in gcs bucket).
+4. Run the `run.sh` script to download the data from gcs bucket.
+5. The downloaded data will be available in the `input_files/` directory in local.
+
 ---
 
 ## 4. Script Execution Details
@@ -50,26 +57,26 @@ These scripts process the input files for each year to generate the final `_outp
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2016_data.csv \
-  --pv_map=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2016_pv_map.csv \
-  --config_file=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2016_metadata.csv \
+  --pv_map=ny_diabetes_pv_map.csv \
+  --config_file=ny_diabetes_metadata.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-  --places_resolved_csv=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2016_place_resolver.csv \
+  --places_resolved_csv=ny_diabetes_place_resolver.csv \
   --output_path=output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2016
 
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2018_data.csv \
-  --pv_map=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2018_pv_map.csv \
-  --config_file=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2018_metadata.csv \
+  --pv_map=ny_diabetes_pv_map.csv \
+  --config_file=ny_diabetes_metadata.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-  --places_resolved_csv=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2018_place_resolver.csv \
+  --places_resolved_csv=ny_diabetes_place_resolver.csv \
   --output_path=output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2018
 
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2021_data.csv \
-  --pv_map=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2021_pv_map.csv \
-  --config_file=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2021_metadata.csv \
+  --pv_map=ny_diabetes_pv_map.csv \
+  --config_file=ny_diabetes_metadata.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-  --places_resolved_csv=ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2021_place_resolver.csv \
+  --places_resolved_csv=ny_diabetes_place_resolver.csv \
   --output_path=output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2021
 ```
 
