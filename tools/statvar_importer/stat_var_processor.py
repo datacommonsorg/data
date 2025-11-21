@@ -1656,12 +1656,18 @@ class StatVarDataProcessor:
         """Return the dict for column headers if any."""
         return self._section_column_pvs.get(column_index, {})
 
-    def should_copy_header_pvs(self, pvs: dict) -> bool:
+    def should_copy_header_pvs(self, pvs: dict, original_col_index: int,
+                               current_col_index: int) -> bool:
         """Returns true if the PVs can be copied to next merged column."""
-        merged_cell = pvs.get('#MergedCell', None)
+        merged_cell = pvs.get('#MergedCell', self._config.get('merged_cells'))
         if merged_cell is not None:
+            # Check if merge cells enabled for limited adjacent columns.
+            merged_cell_count = get_numeric_value(merged_cell)
+            if merged_cell_count and (current_col_index -
+                                      original_col_index) <= merged_cell_count:
+                return True
             return config_flags.get_value_type(merged_cell, True)
-        return self._config.get('merged_cells')
+        return merged_cell
 
     def add_column_header_pvs(self, row_index: int, row_col_pvs: dict,
                               columns: list):
@@ -1678,9 +1684,11 @@ class StatVarDataProcessor:
             column_headers = self._section_column_pvs
         # Save the column header PVs.
         prev_col_pvs = {}
+        prev_col_index = 0
         for col_index in range(0, len(columns)):
             # Get all PVs for the column from the pv-map.
             col_pvs = dict(row_col_pvs.get(col_index, {}))
+            is_merged_cell = False
             # Remove any empty @Data PVs.
             data_key = self._config.get('data_key', 'Data')
             if data_key in col_pvs and not col_pvs[data_key]:
@@ -1689,11 +1697,15 @@ class StatVarDataProcessor:
             if not col_pvs and not column_value:
                 # Empty column without any PVs could be a multi-column-span
                 # header. Carry over previous column PVs if merged cells
-                if self.should_copy_header_pvs(prev_col_pvs):
+                if self.should_copy_header_pvs(prev_col_pvs, prev_col_index,
+                                               col_index):
                     col_pvs = prev_col_pvs
+                    is_merged_cell = True
             self.set_column_header_pvs(row_index, col_index, column_value,
                                        col_pvs, column_headers)
-            prev_col_pvs = col_pvs
+            if col_pvs and not is_merged_cell:
+                prev_col_pvs = col_pvs
+                prev_col_index = col_index
         logging.level_debug() and logging.log_every_n(
             logging.DEBUG, f'Setting column headers: {column_headers}',
             self._log_every_n)
@@ -2359,12 +2371,13 @@ class StatVarDataProcessor:
                     'descriptionUrl', 'alternateName'
                 ],
             ))
+        multi_value_props = self._config.get('multi_value_properties', {})
         for prop, value in pvs.items():
             if prop in statvar_singular_props:
                 singular_pvs[prop] = value
                 continue
             value = pv_utils.get_value_as_list(value)
-            if isinstance(value, list):
+            if isinstance(value, list) and prop in multi_value_props:
                 pvs[prop] = value
                 list_keys.append(prop)
             else:

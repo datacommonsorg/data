@@ -15,7 +15,13 @@
 
 import csv
 import json
-from .result import ValidationResult
+import os
+import sys
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.append(_SCRIPT_DIR)
+
+from result import ValidationResult
 
 
 class ReportGenerator:

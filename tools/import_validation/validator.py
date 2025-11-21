@@ -15,7 +15,13 @@
 
 import duckdb
 import pandas as pd
-from .result import ValidationResult, ValidationStatus
+import os
+import sys
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.append(_SCRIPT_DIR)
+
+from result import ValidationResult, ValidationStatus
 
 
 class Validator:
