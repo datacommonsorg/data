@@ -1,0 +1,6 @@
+parameter,value
+url,https://www.health.ny.gov/statistics/prevention/injury_prevention/information_for_action/
+output_columns,"observationAbout,observationDate,value,variableMeasured"
+header_rows,1
+mapped_columns,1
+places_resolved_csv,NY_Percentage_of_adults_with_diagnosed_diabetes_by_county_2018_place_resolver.csv
