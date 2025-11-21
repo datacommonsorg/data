@@ -7,17 +7,40 @@
 #             https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the Apache License, Version 2.0 (the 'License');
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#             https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an 'AS IS' BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+"""
+This script downloads and processes the Civil Rights Data Collection (CRDC) data.
+
+The main function (`main`) iterates through available school years, downloads the
+corresponding data zip file from the CRDC website, and extracts it. It then
+searches for specific data files related to chronic absenteeism, offenses, and
+restraint/seclusion.
+
+These identified files are renamed for clarity, moved into categorized
+subdirectories within the 'input_files' directory, and processed by the
+`add_year_column` function.
+
+The `add_year_column` function takes a file path and a year, adding a 'year'
+column to the CSV or XLSX file to standardize the data.
+
+The script is designed to handle the biennial release schedule and skips years
+where data was not collected (e.g., 2018-19).
+
+Inputs:
+- None. The script fetches data directly from a base URL.
+
+Outputs:
+- A directory structure under 'input_files/' containing:
+  - 'chronic_absenteeism/': Processed CSV/XLSX files for this category.
+  - 'offenses/': Processed CSV/XLSX files for this category.
+  - 'restraint_and_seclusion/': Processed CSV/XLSX files for this category.
+- Each output file is a modified version of the original, containing an
+  additional 'year' column.
+"""
 
 import os
 import sys
