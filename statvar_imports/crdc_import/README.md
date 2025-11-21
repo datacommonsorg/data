@@ -18,12 +18,12 @@ The import process is divided into two main stages: downloading the raw data and
 
 * **Input files**:
   * `download_script.py`: Downloads, unzips, filters, renames, and preprocesses the raw data.
-  * `pv_map/ChronicAbsenteeism_metadata.csv`: Configuration file for the chronic absenteeism data processing script.
-  * `pv_map/ChronicAbsenteeism_pvmap.csv`: Property-value mapping file used by the processor for chronic absenteeism.
-  * `pv_map/Offenses_metadata.csv`: Configuration file for the offenses data processing script.
-  * `pv_map/Offenses_pvmap.csv`: Property-value mapping file used by the processor for offenses.
-  * `pv_map/Restraint_and_Seclusion_metadata.csv`: Configuration file for the restraint and seclusion data processing script.
-  * `pv_map/Restraint_and_Seclusion_pvmap.csv`: Property-value mapping file used by the processor for restraint and seclusion.
+  * `pv_map/chronic_absenteeism_metadata.csv`: Configuration file for the chronic absenteeism data processing script.
+  * `pv_map/chronic_absenteeism_pvmap.csv`: Property-value mapping file used by the processor for chronic absenteeism.
+  * `pv_map/offenses_metadata.csv`: Configuration file for the offenses data processing script.
+  * `pv_map/offenses_pvmap.csv`: Property-value mapping file used by the processor for offenses.
+  * `pv_map/restraint_and_seclusion_metadata.csv`: Configuration file for the restraint and seclusion data processing script.
+  * `pv_map/restraint_and_seclusion_pvmap.csv`: Property-value mapping file used by the processor for restraint and seclusion.
 
 * **Transformation pipeline**:
   1. `download_script.py` downloads the biennial data releases for all available years, unzips them, filters for relevant files, renames them, and adds 'year'.
@@ -73,8 +73,8 @@ This script processes all cleaned input files to generate the final CSV and TMCF
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data='input_files/*_chronic_absenteeism.csv' \
-  --pv_map='pv_map/ChronicAbsenteeism_pvmap.csv' \
-  --config_file='pv_map/ChronicAbsenteeism_metadata.csv' \
+  --pv_map='pv_map/chronic_absenteeism_pvmap.csv' \
+  --config_file='pv_map/chronic_absenteeism_metadata.csv' \
   --output_path='output/crdc_chronic_absenteeism'
 ```
 
@@ -82,8 +82,8 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data='input_files/*_offenses.csv' \
-  --pv_map='pv_map/Offenses_pvmap.csv' \
-  --config_file='pv_map/Offenses_metadata.csv' \
+  --pv_map='pv_map/offenses_pvmap.csv' \
+  --config_file='pv_map/offenses_metadata.csv' \
   --output_path='output/crdc_offenses'
 ```
 
@@ -91,8 +91,8 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data='input_files/*_restraint_and_seclusion.csv' \
-  --pv_map='pv_map/Restraint_and_Seclusion_pvmap.csv' \
-  --config_file='pv_map/Restraint_and_Seclusion_metadata.csv' \
+  --pv_map='pv_map/restraint_and_seclusion_pvmap.csv' \
+  --config_file='pv_map/restraint_and_seclusion_metadata.csv' \
   --output_path='output/crdc_restraint_and_seclusion'
 ```
 
