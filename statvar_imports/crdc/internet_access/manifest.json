@@ -18,8 +18,7 @@
                   }
                           ],
             "source_files": [
-                "Internet_Access_and_Devices_2021.csv",
-                "Internet_Access_and_Devices_2022.csv"
+                "input_files/*.csv"
             ],
             "cron_schedule": "0 0 1 */2 *"
         }
