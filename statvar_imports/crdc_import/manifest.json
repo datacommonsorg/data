@@ -15,16 +15,16 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output/chronic_absenteeism_output.tmcf",
-                    "cleaned_csv": "output/chronic_absenteeism_output.csv"
+                    "template_mcf": "output_files/chronic_absenteeism_output.tmcf",
+                    "cleaned_csv": "output_files/chronic_absenteeism_output.csv"
                 },
                 {
-                    "template_mcf": "output/offenses_output.tmcf",
-                    "cleaned_csv": "output/offenses_output.csv"
+                    "template_mcf": "output_files/offenses_output.tmcf",
+                    "cleaned_csv": "output_files/offenses_output.csv"
                 },
                 {
-                    "template_mcf": "output/restraint_and_seclusion_output.tmcf",
-                    "cleaned_csv": "output/restraint_and_seclusion_output.csv"
+                    "template_mcf": "output_files/restraint_and_seclusion_output.tmcf",
+                    "cleaned_csv": "output_files/restraint_and_seclusion_output.csv"
                 }
             ],
             "source_files": [
