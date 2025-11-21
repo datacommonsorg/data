@@ -723,8 +723,6 @@ class ImportExecutor:
             self.uploader.upload_string('\n'.join(versions_history),
                                         history_filename)
         logging.info(f'Updated import latest version {version}')
-        import_summary.next_refresh_date = utils.next_utc_date(
-            import_spec.get('cron_schedule'))
         self._update_import_status_table(import_summary)
 
     @log_function_call
@@ -758,6 +756,8 @@ class ImportExecutor:
         import_summary.latest_version = 'gs://' + os.path.join(
             self.config.storage_prod_bucket_name, output_dir, version, '*', '*',
             '*.mcf')
+        import_summary.next_refresh_date = utils.next_utc_date(
+            import_spec.get('cron_schedule'))
         if self.config.import_version_override and self.config.import_version_override != 'DATE_VERSION_PLACEHOLDER':
             logging.info(f'Import version override {version}')
             import_summary.status = 'READY'
@@ -922,7 +922,7 @@ class ImportExecutor:
         ]
         source_files = file_util.file_get_matching(source_files)
         for file in source_files:
-            dest = f'{output_dir}/{version}/source_files/{os.path.basename(file)}'
+            dest = f'{output_dir}/{version}/source_files/{os.path.relpath(file, import_dir)}'
             self._upload_file_helper(
                 src=file,
                 dest=dest,
