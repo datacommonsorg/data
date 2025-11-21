@@ -522,6 +522,9 @@ def load_mcf_nodes(
         ...
       }
   """
+    if nodes is None:
+        nodes = _get_new_node(normalize)
+
     if not filenames:
         return nodes
 
@@ -534,8 +537,6 @@ def load_mcf_nodes(
         filenames = filenames.split(',')
     for file in filenames:
         files.extend(file_util.file_get_matching(file))
-    if nodes is None:
-        nodes = _get_new_node(normalize)
     for file in files:
         if not file:
             continue
