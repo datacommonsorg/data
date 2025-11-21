@@ -1665,7 +1665,14 @@ class StatVarDataProcessor:
             merged_cell_count = get_numeric_value(merged_cell)
             if merged_cell_count and (current_col_index -
                                       original_col_index) <= merged_cell_count:
+                logging.level_debug() and logging.log_every_n(
+                    logging.DEBUG,
+                    f'Merging columns: {original_col_index} - {current_col_index}',
+                    self._log_every_n)
+
                 return True
+            else:
+                return False
             return config_flags.get_value_type(merged_cell, True)
         return merged_cell
 
