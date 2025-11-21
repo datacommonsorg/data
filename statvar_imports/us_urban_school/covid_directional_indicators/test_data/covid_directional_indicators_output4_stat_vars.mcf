@@ -1,0 +1,1385 @@
+# Auto generated using command: "/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/../../../tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/input_files/2021_COVID_Directional_Indicators.csv,/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/input_files/2022_COVID_Directional_Indicators.csv --pv_map=/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/covid_directional_indicators_pv_map4.csv --config_file=/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/covid_directional_indicators_metadata.csv --places_resolved_csv=/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/place_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/output_files/covid_directional_indicators_output4" on 2025-11-10 10:53:15.210898
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_1To25PercentStudents_1To2Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_1To25PercentStudents_1To2Hours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_1To25PercentStudents_1To2Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_1To25PercentStudents_3To4Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_1To25PercentStudents_3To4Hours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_1To25PercentStudents_3To4Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_1To25PercentStudents_5OrMoreHours
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_1To25PercentStudents_5OrMoreHours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_1To25PercentStudents_5OrMoreHours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_1To25PercentStudents_5OrMoreHours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_1To25PercentStudents_LessThan1Hour_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_1To25PercentStudents_LessThan1Hour_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_1To25PercentStudents_LessThan1Hour_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_26To50PercentStudents_3To4Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_26To50PercentStudents_3To4Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_26To50PercentStudents_5OrMoreHours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_26To50PercentStudents_5OrMoreHours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_26To50PercentStudents_LessThan1Hour_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_26To50PercentStudents_LessThan1Hour_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_51To75PercentStudents_1To2Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_51To75PercentStudents_3To4Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_51To75PercentStudents_3To4Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_51To75PercentStudents_5OrMoreHours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_51To75PercentStudents_5OrMoreHours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_51To75PercentStudents_LessThan1Hour_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_Above75PercentStudents_1To2Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_Above75PercentStudents_1To2Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_Above75PercentStudents_3To4Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_Above75PercentStudents_3To4Hours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_Above75PercentStudents_3To4Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_Above75PercentStudents_5OrMoreHours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_Above75PercentStudents_5OrMoreHours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_Above75PercentStudents_5OrMoreHours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_Above75PercentStudents_LessThan1Hour_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_Above75PercentStudents_LessThan1Hour_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_1To25PercentStudents_1To2Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_1To25PercentStudents_1To2Hours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_1To25PercentStudents_1To2Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_1To25PercentStudents_3To4Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_1To25PercentStudents_3To4Hours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_1To25PercentStudents_3To4Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_1To25PercentStudents_5OrMoreHours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_1To25PercentStudents_5OrMoreHours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_1To25PercentStudents_5OrMoreHours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_1To25PercentStudents_LessThan1Hour_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_1To25PercentStudents_LessThan1Hour_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_1To25PercentStudents_LessThan1Hour_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_26To50PercentStudents_1To2Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_26To50PercentStudents_1To2Hours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_26To50PercentStudents_1To2Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_26To50PercentStudents_3To4Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_26To50PercentStudents_3To4Hours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_26To50PercentStudents_3To4Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_26To50PercentStudents_5OrMoreHours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_26To50PercentStudents_5OrMoreHours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_26To50PercentStudents_5OrMoreHours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_26To50PercentStudents_LessThan1Hour_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_26To50PercentStudents_LessThan1Hour_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_26To50PercentStudents_LessThan1Hour_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_51To75PercentStudents_1To2Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_51To75PercentStudents_1To2Hours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_51To75PercentStudents_1To2Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_51To75PercentStudents_3To4Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_51To75PercentStudents_3To4Hours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_51To75PercentStudents_3To4Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_51To75PercentStudents_5OrMoreHours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_51To75PercentStudents_5OrMoreHours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_51To75PercentStudents_5OrMoreHours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_51To75PercentStudents_LessThan1Hour_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_51To75PercentStudents_LessThan1Hour_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Above75PercentStudents_1To2Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Above75PercentStudents_1To2Hours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Above75PercentStudents_1To2Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Above75PercentStudents_3To4Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Above75PercentStudents_3To4Hours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Above75PercentStudents_3To4Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Above75PercentStudents_5OrMoreHours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Above75PercentStudents_5OrMoreHours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Above75PercentStudents_5OrMoreHours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Above75PercentStudents_LessThan1Hour_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Above75PercentStudents_LessThan1Hour_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Above75PercentStudents_LessThan1Hour_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Value_1To25PercentStudents_3To4Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+prop: dcid:value
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Value_1To25PercentStudents_5OrMoreHours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+prop: dcid:value
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Value_1To25PercentStudents_5OrMoreHours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+prop: dcid:value
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Value_1To25PercentStudents_LessThan1Hour_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+prop: dcid:value
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_1To25PercentStudents_1To2Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_1To25PercentStudents_1To2Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_1To25PercentStudents_3To4Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_1To25PercentStudents_3To4Hours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_1To25PercentStudents_3To4Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_1To25PercentStudents_5OrMoreHours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_1To25PercentStudents_5OrMoreHours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_1To25PercentStudents_5OrMoreHours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_1To25PercentStudents_LessThan1Hour_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_1To25PercentStudents_LessThan1Hour_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [1 25 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_26To50PercentStudents_1To2Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_26To50PercentStudents_3To4Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_26To50PercentStudents_3To4Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_26To50PercentStudents_5OrMoreHours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_26To50PercentStudents_5OrMoreHours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_26To50PercentStudents_LessThan1Hour_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [26 50 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_51To75PercentStudents_1To2Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_51To75PercentStudents_1To2Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_51To75PercentStudents_3To4Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_51To75PercentStudents_3To4Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_51To75PercentStudents_5OrMoreHours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_51To75PercentStudents_LessThan1Hour_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: [51 75 PercentStudents]
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_Above75PercentStudents_1To2Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_Above75PercentStudents_1To2Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:1To2Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_Above75PercentStudents_3To4Hours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_Above75PercentStudents_3To4Hours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_Above75PercentStudents_3To4Hours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:3To4Hours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_Above75PercentStudents_5OrMoreHours_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_Above75PercentStudents_5OrMoreHours_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_Above75PercentStudents_5OrMoreHours_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:5OrMoreHours
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_Above75PercentStudents_LessThan1Hour_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_Above75PercentStudents_LessThan1Hour_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+remoteInstructionPercent: dcid:Above75PercentStudents
+remoteInstructionTime: dcid:LessThan1Hour
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
