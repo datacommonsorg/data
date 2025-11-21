@@ -28,7 +28,7 @@ The import process is divided into two main stages: downloading the raw data and
 * **Transformation pipeline**:
   1. `download_script.py` downloads the biennial data releases for all available years, unzips them, filters for relevant files, renames them, and adds 'year'.
   2. After the download is complete, the `stat_var_processor.py` tool is run on the cleaned CSV files for Chronic Absenteeism, Offenses, and Restraint and Seclusion separately.
-  3. The processor uses the metadata and pv_map files to generate the final `crdc_chronic_absenteeism.csv`, `crdc_chronic_absenteeism.tmcf`, `crdc_offenses.csv`, `crdc_offenses.tmcf`, `crdc_restraint_and_seclusion.csv`, and `crdc_restraint_and_seclusion.tmcf` files, placing them in the `output/` directory.
+  3. The processor uses the metadata and pv_map files to generate the final `crdc_chronic_absenteeism.csv`, `crdc_chronic_absenteeism.tmcf`, `crdc_offenses.csv`, `crdc_offenses.tmcf`, `crdc_restraint_and_seclusion.csv`, and `crdc_restraint_and_seclusion.tmcf` files, placing them in the `output_files/` directory.
 
 * **Data Quality Checks**:
   * Linting is performed on the generated output files using the DataCommons import tool.
@@ -75,7 +75,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data='input_files/*_chronic_absenteeism.csv' \
   --pv_map='pv_map/chronic_absenteeism_pvmap.csv' \
   --config_file='pv_map/chronic_absenteeism_metadata.csv' \
-  --output_path='output/crdc_chronic_absenteeism'
+  --output_path='output_files/crdc_chronic_absenteeism'
 ```
 
 **Usage for Offenses**:
@@ -84,7 +84,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data='input_files/*_offenses.csv' \
   --pv_map='pv_map/offenses_pvmap.csv' \
   --config_file='pv_map/offenses_metadata.csv' \
-  --output_path='output/crdc_offenses'
+  --output_path='output_files/crdc_offenses'
 ```
 
 **Usage for Restraint and Seclusion**:
@@ -93,7 +93,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data='input_files/*_restraint_and_seclusion.csv' \
   --pv_map='pv_map/restraint_and_seclusion_pvmap.csv' \
   --config_file='pv_map/restraint_and_seclusion_metadata.csv' \
-  --output_path='output/crdc_restraint_and_seclusion'
+  --output_path='output_files/crdc_restraint_and_seclusion'
 ```
 
 ---
