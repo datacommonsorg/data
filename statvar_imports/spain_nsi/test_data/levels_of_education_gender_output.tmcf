@@ -1,0 +1,9 @@
+Node: E:levels_of_education_gender_output->E0
+observationAbout: C:levels_of_education_gender_output->observationAbout
+observationPeriod: C:levels_of_education_gender_output->observationPeriod
+observationDate: C:levels_of_education_gender_output->observationDate
+value: C:levels_of_education_gender_output->value
+variableMeasured: C:levels_of_education_gender_output->variableMeasured
+unit: C:levels_of_education_gender_output->unit
+scalingFactor: C:levels_of_education_gender_output->scalingFactor
+typeOf: dcs:StatVarObservation
