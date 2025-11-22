@@ -1,0 +1,10 @@
+Node: E:output-jgngifg->E0
+observationAbout: C:output-jgngifg->observationAbout
+observationDate: C:output-jgngifg->observationDate
+variableMeasured: C:output-jgngifg->variableMeasured
+value: C:output-jgngifg->value
+unit: C:output-jgngifg->unit
+scalingFactor: C:output-jgngifg->scalingFactor
+observationPeriod: C:output-jgngifg->observationPeriod
+measurementMethod: C:output-jgngifg->measurementMethod
+typeOf: dcs:StatVarObservation
