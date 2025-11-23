@@ -1,0 +1,17 @@
+key,prop,value,p1,v1,,,,,,
+Indice Synthétique de Fécondité (ISF),#ignore,skip,,,,,,,,
+Taux Brut de Reproduction (TBR),#ignore,skip,,,,,,,,
+Taux Net de Reproduction (TNR),#ignore,skip,,,,,,,,
+Age moyen de procréation,measuredProperty,mothersAge,populationType,BirthEvent,statType,meanValue,,,,
+Espérance de Vie hommes,measuredProperty,lifeExpectancy,populationType,Person,unit,Years,gender,Male,,
+Espérance de Vie femmes,measuredProperty,lifeExpectancy,populationType,Person,unit,Years,gender,Female,,
+Espérance de Vie totale,measuredProperty,lifeExpectancy,populationType,Person,unit,Years,,,,
+Taux de mortalité Infantile (TMI),measuredProperty,count,populationType,MortalityEvent,ageGroupClassification,Infant,measurementDenominator,Count_BirthEvent_LiveBirth,unit,Per1000LiveBirths
+Taux de Mortalité des populations de moins de 5 ans,measuredProperty,count,populationType,MortalityEvent,age,[5 - Years],measurementDenominator,Count_BirthEvent_LiveBirth,unit,Per1000LiveBirths
+Taux Brut de Natalité (TBN) pour 1000 femmes,#ignore,skip,,,,,,,,
+Taux Brut de Mortalité (TBM) pour 1000 individus,measuredProperty,count,populationType,MortalityEvent,,,measurementDenominator,Count_Person,unit,Per1000Persons
+Taux de Croissance (TC),measuredProperty,count,populationType,Person,statType,growthRate,unit,Percent,,
+TIME_PERIOD,observationDate,{Number},,,,,,,,
+OBS_VALUE,value,{Number},,,,,,,,
+ID_INDICATOR,observationAbout,country/CIV,,,,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,,,

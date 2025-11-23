@@ -1,0 +1,12 @@
+key,,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+ID_DÉPARTEMENT,,observationAbout,{Data},populationType,Teacher,measuredProperty,count,,,,
+CEN6,College Teacher (1st Cycle),facultyType,UniversityAndCollegeTeacher,,,,,,,,
+CEN7,High School Teacher (2nd Cycle),facultyType,HighSchool,,,,,,,,
+CEN8,Contractual,facultyType,ContractTeacher,,,,,,,,
+CEN9,Teachers Men,#ignore,ignore,,,,,,,,
+G1,Women Teachers,gender,Male,,,,,,,,
+G2,Total Teachers,gender,Female,,,,,,,,
+G3,Total,populationType,Teacher,,,,,,,,
+TIME_PERIOD,,observationDate,{Number},,,,,,,,
+OBS_VALUE,,value,{Number},,,,,,,,
+FREQ:A,,observationPeriod,P1Y,,,,,,,,

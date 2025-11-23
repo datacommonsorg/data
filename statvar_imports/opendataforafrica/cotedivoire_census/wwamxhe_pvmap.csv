@@ -1,0 +1,8 @@
+key,prop,value,p1,v1
+NOM_INDICATOR,measuredProperty,count,populationType,Person
+NOM_REGION,observationAbout,{Data},,
+NOM_SEXE:Masculin,gender,Male,,
+NOM_SEXE:Féminin,gender,Female,,
+TIME_PERIOD,observationDate,{Number},,
+OBS_VALUE,value,{Number},,
+FREQ:A,observationPeriod,P1Y,,
