@@ -1,0 +1,11 @@
+key,prop,val,p1,v1,,,,,,
+Código,observationAbout,{Data},,,,,,,,
+Referência,observationDate,{Data},,,,,,,,
+Terra,populationType,Household,measuredProperty,count,floorMaterial,TerraFloorMaterial,value,{Number},registeredIn,Brazil_SingleRegistry
+Cimento,populationType,Household,measuredProperty,count,floorMaterial,CementFloor,value,{Number},registeredIn,Brazil_SingleRegistry
+Madeira  aproveitada,populationType,Household,measuredProperty,count,floorMaterial,UtilizedWoodFloorMaterial,value,{Number},registeredIn,Brazil_SingleRegistry
+Madeira aparelhada,populationType,Household,measuredProperty,count,floorMaterial,EquippedWoodFloorMaterial,value,{Number},registeredIn,Brazil_SingleRegistry
+Ceramica,populationType,Household,measuredProperty,count,floorMaterial,CeramicFloor,value,{Number},registeredIn,Brazil_SingleRegistry
+Carpete,populationType,Household,measuredProperty,count,floorMaterial,CarpetFloor,value,{Number},registeredIn,Brazil_SingleRegistry
+Outro  material,populationType,Household,measuredProperty,count,floorMaterial,VISDATA_OtherFloorMaterial,value,{Number},registeredIn,Brazil_SingleRegistry
+Sem resposta,populationType,Household,measuredProperty,count,floorMaterial,VISDATA_UnknownFloorMaterial,value,{Number},registeredIn,Brazil_SingleRegistry
