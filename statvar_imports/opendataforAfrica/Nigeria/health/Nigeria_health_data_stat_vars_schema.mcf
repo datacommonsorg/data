@@ -1,0 +1,134 @@
+Node: dcid:gender
+typeOf: dcid:Property
+name: "gender"
+rangeIncludes: dcid:GenderType
+
+Node: dcid:Nigerian
+typeOf: dcid:RaceCodeEnum
+name: "Nigerian"
+isProvisional: dcid:True
+
+Node: dcid:NonNigerian
+typeOf: dcid:RaceCodeEnum
+name: "Non Nigerian"
+isProvisional: dcid:True
+
+Node: dcid:occupation
+typeOf: dcid:Property
+name: "occupation"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:Class
+
+Node: dcid:Nurse
+typeOf: dcid:SOCv2018Enum
+name: "Nurse"
+isProvisional: dcid:True
+
+Node: dcid:specialization
+typeOf: dcid:Property
+name: "specialization"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:SpecializationEnum,MedicalSpecialty
+isProvisional: dcid:True
+
+Node: dcid:SpecializationEnum
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+name: "SpecializationEnum"
+isProvisional: dcid:True
+
+Node: dcid:MidwifeEducators
+typeOf: dcid:SpecializationEnum
+name: "Midwife Educators"
+isProvisional: dcid:True
+
+Node: dcid:MedicalPractitioner
+typeOf: dcid:SOCv2018Enum
+name: "Medical Practitioner"
+isProvisional: dcid:True
+
+Node: dcid:GeneralNurse
+typeOf: dcid:SpecializationEnum
+name: "General Nurse"
+isProvisional: dcid:True
+
+Node: dcid:Midwives
+typeOf: dcid:SpecializationEnum
+name: "Midwives"
+isProvisional: dcid:True
+
+Node: dcid:Perioperative
+typeOf: dcid:SpecializationEnum
+name: "Perioperative"
+isProvisional: dcid:True
+
+Node: dcid:CardioThoracicNurses
+typeOf: dcid:SpecializationEnum
+name: "Cardio Thoracic Nurses"
+isProvisional: dcid:True
+
+Node: dcid:IntensiveCareNurse
+typeOf: dcid:SpecializationEnum
+name: "Intensive Care Nurse"
+isProvisional: dcid:True
+
+Node: dcid:ENT
+typeOf: dcid:SpecializationEnum
+name: "ENT"
+isProvisional: dcid:True
+
+Node: dcid:BurnsAndPlastic
+typeOf: dcid:SpecializationEnum
+name: "Burns And Plastic"
+isProvisional: dcid:True
+
+Node: dcid:Orthopedic
+typeOf: dcid:SpecializationEnum
+name: "Orthopedic"
+isProvisional: dcid:True
+
+Node: dcid:Anasthetic
+typeOf: dcid:SpecializationEnum
+name: "Anasthetic"
+isProvisional: dcid:True
+
+Node: dcid:Administrator
+typeOf: dcid:SpecializationEnum
+name: "Administrator"
+isProvisional: dcid:True
+
+Node: dcid:Pediatric
+typeOf: dcid:SpecializationEnum
+name: "Pediatric"
+isProvisional: dcid:True
+
+Node: dcid:Educator
+typeOf: dcid:SpecializationEnum
+name: "Educator"
+isProvisional: dcid:True
+
+Node: dcid:PublicHealthNurseEducators
+typeOf: dcid:SpecializationEnum
+name: "Public Health Nurse Educators"
+isProvisional: dcid:True
+
+Node: dcid:Psychatric
+typeOf: dcid:SpecializationEnum
+name: "Psychatric"
+isProvisional: dcid:True
+
+Node: dcid:Ophthalmic
+typeOf: dcid:SpecializationEnum
+name: "Ophthalmic"
+isProvisional: dcid:True
+
+Node: dcid:AccidentAndEmergency
+typeOf: dcid:SpecializationEnum
+name: "Accident And Emergency"
+isProvisional: dcid:True
+
+Node: dcid:OccupationalHealth
+typeOf: dcid:SpecializationEnum
+name: "Occupational Health"
+isProvisional: dcid:True
+
