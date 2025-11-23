@@ -1,0 +1,12 @@
+key,prop,val,p1,v1,p2,v2,,
+TIME_PERIOD,observationDate,{Number},,,,,,
+OBS_VALUE,value,{Number},observationAbout,country/EGY,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,
+ID_ESTABLESHEMENTS:1,,HealthEstablishment,healthEstablishmentType,HealthFacility,name ,"""Number of treatment facilities""",populationType,HealthEstablishment
+ID_ESTABLESHEMENTS:2,occupation,Doctor,gender,Male,name ,"""Number of doctors (Male)""",populationType,Person
+ID_ESTABLESHEMENTS:3,occupation,Doctor,gender,Female,name ,"""Number of doctors (Female)""",populationType,Person
+ID_ESTABLESHEMENTS:4,occupation,Nurse,gender,Male,name ,"""Number of nursing staff members (Male)""",populationType,Person
+ID_ESTABLESHEMENTS:5,occupation,Nurse,gender,Female,name ,"""Number of nursing staff members (Female)""",populationType,Person
+ID_SECTORS:1,employmentStatus,Employed,,,,,,
+ID_SECTORS:2,establishmentOwnership,PrivatelyOwned__GovernmentOwned,,,,,,
+ID_SECTORS:3,establishmentOwnership,PrivatelyOwned,,,,,,
