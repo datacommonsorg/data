@@ -1,0 +1,227 @@
+place_name,dcid
+Magyarország,country/HUN
+Budapest,nuts/HU101
+Budapest 01. ker.,wikidataId/Q1094308
+Budapest 02. ker.,wikidataId/Q1068701
+Budapest 03. ker.,wikidataId/Q580770
+Budapest 04. ker.,wikidataId/Q330195
+Budapest 05. ker.,wikidataId/Q1042732
+Budapest 06. ker.,wikidataId/Q697679
+Budapest 07. ker.,wikidataId/Q284541
+Budapest 08. ker.,wikidataId/Q597182
+Budapest 09. ker.,wikidataId/Q301411
+Budapest 10. ker.,wikidataId/Q249498
+Budapest 11. ker.,wikidataId/Q330026
+Budapest 12. ker.,wikidataId/Q974038
+Budapest 13. ker.,wikidataId/Q851023
+Budapest 14. ker.,wikidataId/Q228445
+Budapest 15. ker.,wikidataId/Q858351
+Budapest 16. ker.,wikidataId/Q851040
+Budapest 17. ker.,wikidataId/Q851045
+Budapest 18. ker.,wikidataId/Q11384977
+Budapest 19. ker.,wikidataId/Q857943
+Budapest 20. ker.,wikidataId/Q851057
+Budapest 21. ker.,wikidataId/Q613220
+Budapest 22. ker.,wikidataId/Q370152
+Budapest 23. ker.,wikidataId/Q851062
+Budapest kerületre nem bontható adatai,
+Pest,wikidataId/Q210205
+Pest vármegye,wikidataId/Q188612
+Aszódi járás,wikidataId/Q779802
+Budakeszi járás,wikidataId/Q376273
+Ceglédi járás,wikidataId/Q851960
+Dabasi járás,wikidataId/Q854287
+Dunakeszi járás,wikidataId/Q853136
+Érdi járás,wikidataId/Q722573
+Gödöllői járás,wikidataId/Q853188
+Gyáli járás,wikidataId/Q853181
+Monori járás,wikidataId/Q612006
+Nagykátai járás,wikidataId/Q831162
+Nagykőrösi járás,wikidataId/Q16522077
+Pilisvörösvári járás,wikidataId/Q853874
+Ráckevei járás,wikidataId/Q538324
+Szentendrei járás,wikidataId/Q854326
+Szigetszentmiklósi járás,wikidataId/Q14942540
+Szobi járás,wikidataId/Q853088
+Váci járás,wikidataId/Q742957
+Vecsési járás,wikidataId/Q16523679
+Közép-Dunántúl régió,nuts/HU21
+Fejér vármegye,wikidataId/Q187693
+Bicskei járás,wikidataId/Q794634
+Dunaújvárosi járás,wikidataId/Q187812
+Enyingi járás,wikidataId/Q659118
+Gárdonyi járás,wikidataId/Q853097
+Martonvásári járás,wikidataId/Q852256
+Móri járás,wikidataId/Q659414
+Sárbogárdi járás,wikidataId/Q852250
+Székesfehérvári járás,wikidataId/Q853167
+Komárom-Esztergom vármegye,wikidataId/Q190018
+Esztergomi járás,wikidataId/Q509653
+Kisbéri járás,wikidataId/Q15708845
+Komáromi járás,wikidataId/Q586056
+Oroszlányi járás,wikidataId/Q921248
+Tatabányai járás,wikidataId/Q784421
+Tatai járás,wikidataId/Q921300
+Veszprém vármegye,wikidataId/Q188890
+Ajkai járás,wikidataId/Q554544
+Balatonalmádi járás,wikidataId/Q789244
+Balatonfüredi járás,wikidataId/Q3030968
+Devecseri járás,wikidataId/Q853744
+Pápai járás,wikidataId/Q238748
+Sümegi járás,wikidataId/Q176677
+Tapolcai járás,wikidataId/Q830847
+Várpalotai járás,wikidataId/Q668436
+Veszprémi járás,wikidataId/Q585975
+Zirci járás,wikidataId/Q3032015
+Nyugat-Dunántúl régió,nuts/HU22
+Győr-Moson-Sopron vármegye,wikidataId/Q187753
+Csornai járás,wikidataId/Q874532
+Győri járás,wikidataId/Q1030726
+Kapuvári járás,wikidataId/Q681098
+Mosonmagyaróvári járás,wikidataId/Q921261
+Pannonhalmi járás,wikidataId/Q15275777
+Soproni járás,wikidataId/Q694723
+Téti járás,wikidataId/Q266289
+Vas vármegye,wikidataId/Q187677
+Celldömölki járás,wikidataId/Q3031098
+Körmendi járás,wikidataId/Q536394
+Kőszegi járás,wikidataId/Q831516
+Sárvári járás,wikidataId/Q831501
+Szentgotthárdi járás,wikidataId/Q830857
+Szombathelyi járás,wikidataId/Q830871
+Vasvári járás,wikidataId/Q774552
+Zala vármegye,wikidataId/Q185374
+Keszthelyi járás,wikidataId/Q15075381
+Lenti járás,wikidataId/Q262110
+Letenyei járás,wikidataId/Q656097
+Nagykanizsai járás,wikidataId/Q388398
+Zalaegerszegi járás,wikidataId/Q656093
+Zalaszentgróti járás,wikidataId/Q3032008
+Dél-Dunántúl régió,nuts/HU23
+Baranya vármegye,wikidataId/Q186195
+Bólyi járás,wikidataId/Q854943
+Hegyháti járás,wikidataId/Q3031288
+Komlói járás,wikidataId/Q1070048
+Mohácsi járás,wikidataId/Q948656
+Pécsi járás,wikidataId/Q594019
+Pécsváradi járás,wikidataId/Q615758
+Sellyei járás,wikidataId/Q1070194
+Siklósi járás,wikidataId/Q667734
+Szentlőrinci járás,wikidataId/Q923858
+Szigetvári járás,wikidataId/Q1070189
+Somogy vármegye,wikidataId/Q190522
+Barcsi járás,wikidataId/Q790369
+Csurgói járás,wikidataId/Q548991
+Fonyódi járás,wikidataId/Q47515
+Kaposvári járás,wikidataId/Q385784
+Marcali járás,wikidataId/Q598885
+Nagyatádi járás,wikidataId/Q853205
+Siófoki járás,wikidataId/Q853254
+Tabi járás,wikidataId/Q853866
+Tolna vármegye,wikidataId/Q191625
+Bonyhádi járás,wikidataId/Q831093
+Dombóvári járás,wikidataId/Q831508
+Szekszárdi járás,wikidataId/Q668323
+Tamási járás,wikidataId/Q606365
+Tolnai járás,wikidataId/Q14948493
+Észak-Magyarország régió,nuts/HU31
+Borsod-Abaúj-Zemplén vármegye,wikidataId/Q188895
+Cigándi járás,wikidataId/Q642533
+Edelényi járás,wikidataId/Q987635
+Encsi járás,wikidataId/Q921237
+Gönci járás,wikidataId/Q15037608
+Kazincbarcikai járás,wikidataId/Q1043071
+Mezőcsáti járás,wikidataId/Q14630100
+Mezőkövesdi járás,wikidataId/Q14630116
+Miskolci járás,wikidataId/Q14630137
+Ózdi járás,wikidataId/Q265020
+Putnoki járás,wikidataId/Q14371286
+Sárospataki járás,wikidataId/Q853145
+Sátoraljaújhelyi járás,wikidataId/Q630821
+Szerencsi járás,wikidataId/Q633324
+Szikszói járás,wikidataId/Q854336
+Tiszaújvárosi járás,wikidataId/Q853879
+Tokaji járás,wikidataId/Q547193
+Heves vármegye,wikidataId/Q191604
+Bélapátfalvai járás,wikidataId/Q831098
+Egri járás,wikidataId/Q854361
+Füzesabonyi járás,wikidataId/Q853176
+Gyöngyösi járás,wikidataId/Q853127
+Hatvani járás,wikidataId/Q16629260
+Hevesi járás,wikidataId/Q854348
+Pétervásárai járás,wikidataId/Q733824
+Nógrád vármegye,wikidataId/Q194273
+Balassagyarmati járás,wikidataId/Q630403
+Bátonyterenyei járás,wikidataId/Q853741
+Pásztói járás,wikidataId/Q921286
+Rétsági járás,wikidataId/Q776225
+Salgótarjáni járás,wikidataId/Q285489
+Szécsényi járás,wikidataId/Q667225
+Észak-Alföld régió,nuts/HU32
+Hajdú-Bihar vármegye,wikidataId/Q185368
+Balmazújvárosi járás,wikidataId/Q15129766
+Berettyóújfalui járás,wikidataId/Q793389
+Debreceni járás,wikidataId/Q903107
+Derecskei járás,wikidataId/Q635166
+Hajdúböszörményi járás,wikidataId/Q831062
+Hajdúhadházi járás,wikidataId/Q15275629
+Hajdúnánási járás,wikidataId/Q739304
+Hajdúszoboszlói járás,wikidataId/Q831178
+Nyíradonyi járás,wikidataId/Q14424877
+Püspökladányi járás,wikidataId/Q831002
+Jász-Nagykun-Szolnok vármegye,wikidataId/Q189655
+Jászapáti járás,wikidataId/Q1102512
+Jászberényi járás,wikidataId/Q854302
+Karcagi járás,wikidataId/Q853885
+Kunhegyesi járás,wikidataId/Q933645
+Kunszentmártoni járás,wikidataId/Q853199
+Mezőtúri járás,wikidataId/Q831151
+Szolnoki járás,wikidataId/Q831079
+Tiszafüredi járás,wikidataId/Q628690
+Törökszentmiklósi járás,wikidataId/Q16629364
+Szabolcs-Szatmár-Bereg vármegye,wikidataId/Q190518
+Baktalórántházai járás,wikidataId/Q657548
+Csengeri járás,wikidataId/Q694024
+Fehérgyarmati járás,wikidataId/Q694044
+Ibrányi járás,wikidataId/Q714943
+Kemecsei járás,wikidataId/Q16521198
+Kisvárdai járás,wikidataId/Q282774
+Mátészalkai járás,wikidataId/Q694051
+Nagykállói járás,wikidataId/Q694064
+Nyírbátori járás,wikidataId/Q570468
+Nyíregyházi járás,wikidataId/Q694056
+Tiszavasvári járás,wikidataId/Q265901
+Vásárosnaményi járás,wikidataId/Q831234
+Záhonyi járás,wikidataId/Q1413457
+Dél-Alföld régió,nuts/HU33
+Bács-Kiskun vármegye,wikidataId/Q181018
+Bácsalmási járás,wikidataId/Q852582
+Bajai járás,wikidataId/Q788679
+Jánoshalmai járás,wikidataId/Q1070352
+Kalocsai járás,wikidataId/Q912473
+Kecskeméti járás,wikidataId/Q1070345
+Kiskőrösi járás,wikidataId/Q1070417
+Kiskunfélegyházi járás,wikidataId/Q692204
+Kiskunhalasi járás,wikidataId/Q594485
+Kiskunmajsai járás,wikidataId/Q1070041
+Kunszentmiklósi járás,wikidataId/Q1121984
+Tiszakécskei járás,wikidataId/Q841603
+Békés vármegye,wikidataId/Q191616
+Békéscsabai járás,wikidataId/Q378295
+Békési járás,wikidataId/Q14301653
+Gyomaendrődi járás,wikidataId/Q14301659
+Gyulai járás,wikidataId/Q14629767
+Mezőkovácsházai járás,wikidataId/Q14301645
+Orosházi járás,wikidataId/Q14629781
+Sarkadi járás,wikidataId/Q14629787
+Szarvasi járás,wikidataId/Q637560
+Szeghalmi járás,wikidataId/Q588967
+Csongrád-Csanád vármegye,wikidataId/Q193031
+Csongrádi járás,wikidataId/Q853114
+Hódmezővásárhelyi járás,wikidataId/Q853858
+Kisteleki járás,wikidataId/Q853898
+Makói járás,wikidataId/Q920588
+Mórahalmi járás,wikidataId/Q268820
+Szegedi járás,wikidataId/Q260215
+Szentesi járás,wikidataId/Q921275
+Paksi járás,wikidataId/Q830865

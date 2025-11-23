@@ -1,0 +1,17 @@
+parameter,value
+url,https://nepszamlalas2022.ksh.hu/en/database/#/table/WBC001/N4IgFgpghgJiBcBtEAVAkgWQKIH0AKWASmgPIAiIANKkQKoAyOKW96eATFSAMIDKAUtxwA1AIwgAutQDOASxgQEyZoQY4A4lhIBmLn3UBNLLwBaIztT4lepkbqkhpEAMYAXWQHsAdkocAzWQAbVwgAJ2kEUABrWS84eBAMKAAHLggvV1DZCAikZUxcAmJyKmjY-JBeCFcuADcoQIBXHKUQdgAGdgs29tFxag7eyQBfKWU6Rk0dUpAYuIRK6rqG5tzkAAlaLk2-7do-9r3Rbp2OvfZ-kE2Ly-vj89FdamuT2i7bt67z9iert9_rtoPj9Xj8AbQgXsgR8ga8geDtHCLlCvs8IT8oQjIWjtIjMfZRpRkHwUABBdQkADSOF4ADEAHL9MrzBJVGrUepNFpIVAkMn0PS8bp8X58AAsgoArILNAA2EZjHi8ay2YRPZkVNnLLlrJUqsyPQX6nDSyzKmxmeXUFB80kCs3G9gSiSE4m8QzGMzCCwahZajkrbnKW32pWGHCHM3hzSXfQGHCx93x4VJnCi1OaZ2umiqRjMVhoDgzOaapYBnWtYRcSkKolKwQiJmzcp-ssgTmrVp8HAkADq9MFOEIWHpKEHfPWXBt_IVLuGQA
+description,"Family data by county and settlement type of Hungary  2001, 2011, 2022. "
+process,"To download data:
+Click on the url -> Dimensions drag them to columns,rows or sections"", -> In columns drag ""Census year"" and ""Types of settlement"", ""Families by tenure status "", and In rows drag  ""county, region"" and  ""Family, with children"", ""Family status"" -> accordingly it creates table  -> click download."
+#place_type,"Country,AdministrativeArea1,AdministrativeArea2"
+#places_within,country/HUN
+start_date,2001
+end_date,2022
+release_frequency,10
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor"
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1vBeu3kdYKWVO7t7Pig6CtbUlk3hIT0GirtF7t3-uJgE/edit#gid=146237755
+mapped_rows,4
+mapped_columns,3
+header_rows,4
+#input_rows,50
