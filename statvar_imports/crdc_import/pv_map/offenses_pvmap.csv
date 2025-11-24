@@ -1,0 +1,24 @@
+key,,,,,,
+COMBOKEY,#Format,observationAbout=nces/{Data:0>12},populationType,Student,measuredProperty,count
+,,,,,,
+SCH_FIREARM_IND:Yes,firearmPossessionStatus,FirearmPresent,,,,
+SCH_FIREARM_IND:No,firearmPossessionStatus,FirearmNotPresent,,,,
+SCH_HOMICIDE_IND:Yes,homicideOccurrence,HomicideOccurred,,,,
+SCH_HOMICIDE_IND:No,homicideOccurrence,HomicideNotOccurred,,,,
+,,,,,,
+JJ:Yes,educationalInstitutionType,JuvenileJusticeFacility,,,,
+JJ:No,educationalInstitutionType,NotJuvenileJusticeFacility,,,,
+,,,,,,
+SCH_OFFENSE_RAPE,crimeType,Rape,#Filter,Allow=int(value) >= 0,,
+SCH_OFFENSE_BATT,crimeType,Battery,#Filter,Allow=int(value) >= 0,,
+SCH_OFFENSE_ROBWW,crimeType,RobberyWithWeapon,value,{Number},#Filter,Allow=int(value) >= 0
+SCH_OFFENSE_ROBWX,crimeType,RobberyWithFirearmOrExplosive,value,{Number},#Filter,Allow=int(value) >= 0
+SCH_OFFENSE_ROBWOW,crimeType,RobberyWithoutWeapon,value,{Number},#Filter,Allow=int(value) >= 0
+SCH_OFFENSE_ATTWW,crimeType,AttemptedRobberyWithWeapon,value,{Number},#Filter,Allow=int(value) >= 0
+SCH_OFFENSE_ATTWX,crimeType,AttemptedRobberyWithFirearmOrExplosive,value,{Number},#Filter,Allow=int(value) >= 0
+SCH_OFFENSE_ATTWOW,crimeType,AttemptedRobberyWithoutWeapon,value,{Number},#Filter,Allow=int(value) >= 0
+SCH_OFFENSE_THRWW,crimeType,ThreatOfAttackWithWeapon,value,{Number},#Filter,Allow=int(value) >= 0
+SCH_OFFENSE_THRWX,crimeType,ThreatOfAttackWithFirearmOrExplosive,value,{Number},#Filter,Allow=int(value) >= 0
+SCH_OFFENSE_THRWOW,crimeType,ThreatOfAttackWithoutWeapon,value,{Number},#Filter,Allow=int(value) >= 0
+SCH_OFFENSE_POSSWX,crimeType,PossessionOfFirearmOrExplosive,value,{Number},#Filter,Allow=int(value) >= 0
+year,observationDate,{Number},,,,

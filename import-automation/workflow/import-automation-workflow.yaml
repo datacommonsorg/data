@@ -11,9 +11,11 @@ main:
           - importConfig: ${args.importConfig}
           - gcsMountBucket: "datcom-volume-mount"
           - gcsMountPath: "/tmp/gcs"
+          - function_url: 'https://spanner-ingestion-helper-965988403328.us-central1.run.app'
     - createAndRunBatchJob:
-        call: googleapis.batch.v1.projects.locations.jobs.create
-        args:
+        try:
+          call: googleapis.batch.v1.projects.locations.jobs.create
+          args:
             parent: ${"projects/" + projectId + "/locations/" + region}
             jobId: ${jobId}
             body:
@@ -44,13 +46,35 @@ main:
                       environment:
                         variables:
                           IMPORT_NAME: ${importName}
+                          BATCH_JOB_NAME: ${jobId}
                 taskCount: 1
                 parallelism: 1
               logsPolicy:
                 destination: CLOUD_LOGGING
             connector_params:
-                skip_polling: true
-        result: createAndRunBatchJobResponse
+              timeout: 604800 #7 days
+              polling_policy:
+                initial_delay: 60
+                multiplier: 2
+                max_delay: 600
+          result: createAndRunBatchJobResponse
+        except:
+          as: e
+          steps:
+            - update_import_status:
+                call: http.post
+                args:
+                  url: ${function_url}
+                  auth:
+                    type: OIDC
+                  body:
+                    actionType: update_import_status
+                    jobId: ${jobId}
+                    importName: ${text.split(args.importName, ":")[1]}
+                    status: 'FAILED'
+                result: function_response
+            - fail_workflow:
+                raise: ${e}
     - returnResult:
         return:
           jobId: ${jobId}

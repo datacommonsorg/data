@@ -1,0 +1,8 @@
+State,Education,Sample Sizec,Prevalence (Percent),Standard Error,95% CId (Percent),|| ||,Weighted Numbere,95% CId (Weighted Number),year,life_stage
+U.S. Totalf,Not HS Graduate,24992,15.4,0.42,(14.6–16.2),||,4378207,"(4,126,827–4,629,588)",2021,adult
+U.S. Totalf,HS Graduate,109107,13.9,0.22,(13.5–14.4),||,9231979,"(8,932,662–9,531,295)",2021,adult
+U.S. Totalf,Some College,118060,16.1,0.24,(15.7–16.6),||,11854997,"(11,486,745–12,223,249)",2021,adult
+U.S. Totalf,College Graduate,175451,13.4,0.18,(13.1–13.8),||,9742576,"(9,478,330–10,006,821)",2021,adult
+AL,Not HS Graduate,356,25.3,3.05,(19.3–31.3),||,135580,"(98,375–172,785)",2021,adult
+AL,HS Graduate,1243,15.9,1.44,(13.1–18.7),||,192812,"(155,576–230,047)",2021,adult
+AL,Some College,1286,15.6,1.25,(13.2–18.1),||,194260,"(161,674–226,846)",2021,adult

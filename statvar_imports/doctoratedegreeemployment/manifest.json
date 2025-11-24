@@ -9,7 +9,7 @@
             "provenance_description": "Science,engineering and health doctorate holders employed in universities and 4-year colleges by broad occupation,sex,race,ethnicity and tenure status",
             "scripts": [
                 "download_script.py",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/wmpd19-sr-tab09-026.csv --pv_map=pv_map.csv --config_file=metadata.csv --output_path=output/doctoratedegreeemployment"
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/wmpd19-sr-tab09-026.csv --pv_map=pv_map.csv --config_file=metadata.csv --output_path=output/doctoratedegreeemployment --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
             ],
             "import_inputs": [
                 {

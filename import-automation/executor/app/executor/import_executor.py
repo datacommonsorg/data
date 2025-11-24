@@ -30,6 +30,7 @@ import time
 import traceback
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
 from google.cloud import spanner
+import datetime
 
 REPO_DIR = os.path.dirname(
     os.path.dirname(
@@ -97,6 +98,24 @@ class ExecutionError(Exception):
     def __init__(self, execution_result: ExecutionResult):
         super().__init__()
         self.result = execution_result
+
+
+@dataclasses.dataclass
+class ImportStatusSummary:
+    """Holds a set of summary stats for an import."""
+    import_name: str
+    status: str = 'PENDING'
+    '''
+    Possible status values:
+    - PENDING: Import yet to be run.
+    - VALIDATION: Data validation failure.
+    - READY: Import job completed, ready for ingestion.
+    - FAILED: Import job failed.
+    - DONE: Data ingestion completed (Dataflow).
+    '''
+    latest_version: str = ''
+    execution_time: int = 0  # seconds
+    next_refresh_date: str = ''
 
 
 class ImportExecutor:
@@ -318,7 +337,6 @@ class ImportExecutor:
             relative_import_dir, import_name)
         curator_emails = import_spec['curator_emails']
         dc_email_aliases = [_ALERT_EMAIL_ADDR, _DEBUG_EMAIL_ADDR]
-        time_start = time.time()
         try:
             self._import_one_helper(
                 repo_dir=repo_dir,
@@ -326,9 +344,7 @@ class ImportExecutor:
                 absolute_import_dir=absolute_import_dir,
                 import_spec=import_spec,
             )
-            time_taken = '{0:.2f}'.format(time.time() - time_start)
             logging.info(f'Import Automation Success - {import_name}')
-            logging.info(f'Script execution time taken = {time_taken}s')
 
         except Exception as exc:
             if self.notifier and not self.config.disable_email_notifications:
@@ -651,26 +667,44 @@ class ImportExecutor:
                              })
                 process.check_returncode()
 
-    def _update_import_status_table(self, import_name: str,
-                                    gcs_path: str) -> None:
+    def _update_import_status_table(
+            self, import_summary: ImportStatusSummary) -> None:
         """Updates import job status table in spanner."""
-        logging.info(f'Updating {import_name} status in spanner.')
+        logging.info(
+            f'Updating {import_summary.import_name} status to {import_summary.status} in spanner.'
+        )
         spanner_client = spanner.Client(
             project=self.config.spanner_project_id,
             client_options={'quota_project_id': self.config.spanner_project_id})
         instance = spanner_client.instance(self.config.spanner_instance_id)
         database = instance.database(self.config.spanner_database_id)
-        with database.batch() as batch:
-            batch.insert_or_update(table="ImportStatus",
-                                   columns=("ImportName", "LatestVersion",
-                                            "State", "JobId",
-                                            "UpdateTimestamp"),
-                                   values=[(import_name, gcs_path, "PENDING",
-                                            os.getenv('BATCH_JOB_UID'),
-                                            spanner.COMMIT_TIMESTAMP)])
-        logging.info(f'Updated {import_name} status in spanner.')
 
-    def _update_latest_version(self, version, output_dir, import_spec):
+        with database.batch() as batch:
+            columns = [
+                "ImportName", "State", "JobId", "ExecutionTime",
+                "StatusUpdateTimestamp", "NextRefreshDate"
+            ]
+            values = [
+                import_summary.import_name, import_summary.status,
+                os.getenv('BATCH_JOB_NAME',
+                          os.getenv('BATCH_JOB_UID', 'local-run')),
+                import_summary.execution_time, spanner.COMMIT_TIMESTAMP,
+                import_summary.next_refresh_date
+            ]
+            # Update LatestVersion path only if import completed successfully.
+            if import_summary.status == 'READY':
+                columns.extend(["LatestVersion", "DataImportTimestamp"])
+                values.extend(
+                    [import_summary.latest_version, spanner.COMMIT_TIMESTAMP])
+
+            batch.insert_or_update(table="ImportStatus",
+                                   columns=tuple(columns),
+                                   values=[tuple(values)])
+
+        logging.info(f'Updated {import_summary.import_name} status in spanner.')
+
+    def _update_latest_version(self, version, output_dir, import_spec,
+                               import_summary):
         logging.info(f'Updating import latest version {version}')
         self.uploader.upload_string(
             version,
@@ -689,9 +723,7 @@ class ImportExecutor:
             self.uploader.upload_string('\n'.join(versions_history),
                                         history_filename)
         logging.info(f'Updated import latest version {version}')
-        gcs_path = os.path.join(self.config.storage_prod_bucket_name,
-                                output_dir, version, '*', 'validation')
-        self._update_import_status_table(import_spec['import_name'], gcs_path)
+        self._update_import_status_table(import_summary)
 
     @log_function_call
     def _import_one_helper(
@@ -705,7 +737,10 @@ class ImportExecutor:
 
     Args: See _import_one.
     """
+        start_time = time.time()
         import_name = import_spec['import_name']
+        import_summary = ImportStatusSummary(import_name=import_name,
+                                             status='PENDING')
         self.counters.add_counter(f'import-{import_name}', 1)
         urls = import_spec.get('data_download_url')
         if urls:
@@ -714,12 +749,22 @@ class ImportExecutor:
                                     self.config.file_download_timeout)
 
         output_dir = f'{relative_import_dir}/{import_name}'
-        if version := self.config.import_version_override:
+        version = self.config.import_version_override if self.config.import_version_override else _clean_time(
+            utils.pacific_time())
+        if version == 'DATE_VERSION_PLACEHOLDER':
+            version = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
+        import_summary.latest_version = 'gs://' + os.path.join(
+            self.config.storage_prod_bucket_name, output_dir, version, '*', '*',
+            '*.mcf')
+        import_summary.next_refresh_date = utils.next_utc_date(
+            import_spec.get('cron_schedule'))
+        if self.config.import_version_override and self.config.import_version_override != 'DATE_VERSION_PLACEHOLDER':
             logging.info(f'Import version override {version}')
-            self._update_latest_version(version, output_dir, import_spec)
+            import_summary.status = 'READY'
+            self._update_latest_version(version, output_dir, import_spec,
+                                        import_summary)
             return
 
-        version = _clean_time(utils.pacific_time())
         with tempfile.TemporaryDirectory() as tmpdir:
             requirements_path = os.path.join(absolute_import_dir,
                                              self.config.requirements_filename)
@@ -779,18 +824,20 @@ class ImportExecutor:
                 logging.info(
                     'Skipping import validations as per import config.')
 
+            import_summary.execution_time = int(time.time() - start_time)
             if self.config.ignore_validation_status or validation_status:
+                import_summary.status = 'READY'
                 if not self.config.skip_gcs_upload:
                     self._update_latest_version(version, output_dir,
-                                                import_spec)
+                                                import_spec, import_summary)
                 else:
                     logging.warning(
                         "Skipping latest version update as per import config.")
             else:
                 logging.error(
                     "Skipping latest version update due to validation failure.")
-                raise RuntimeError(
-                    'Import job failed due to data validation failure.')
+                import_summary.status = 'VALIDATION'
+                self._update_import_status_table(import_summary)
 
         if self.importer:
             self.importer.delete_previous_output(relative_import_dir,
@@ -814,6 +861,7 @@ class ImportExecutor:
                 block=True,
                 timeout=self.config.importer_import_timeout,
             )
+        logging.info(f'Import status summary: {import_summary}')
         logging.info(f'Import workflow completed successfully!')
 
     @log_function_call
@@ -874,7 +922,7 @@ class ImportExecutor:
         ]
         source_files = file_util.file_get_matching(source_files)
         for file in source_files:
-            dest = f'{output_dir}/{version}/source_files/{os.path.basename(file)}'
+            dest = f'{output_dir}/{version}/source_files/{os.path.relpath(file, import_dir)}'
             self._upload_file_helper(
                 src=file,
                 dest=dest,
