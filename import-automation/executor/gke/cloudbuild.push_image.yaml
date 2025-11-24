@@ -21,7 +21,7 @@ steps:
       - |
         set -e
         DOCKER_BUILDKIT=1
-        docker build -f Dockerfile \
+        docker build -f Dockerfile --build-arg CACHE_BUSTER=$(date +%s) \
           --tag gcr.io/datcom-ci/datacommons-import-automation-executor:${_TAG} \
           --tag gcr.io/datcom-ci/datacommons-import-automation-executor:prod \
           .
