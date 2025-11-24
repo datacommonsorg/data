@@ -1,0 +1,39 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Schema",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://datacommons.org",
+            "provenance_description": "Schema nodes for Data Commons",
+            "scripts": [
+                "process.py --entity=Schema"
+            ],
+            "import_inputs": [],
+            "source_files": [],
+            "cron_schedule": "15 3 * * *"
+        },
+        {
+            "import_name": "Place",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://datacommons.org",
+            "provenance_description": "Place nodes for Data Commons",
+            "scripts": [
+                "process.py --entity=Place"
+            ],
+            "import_inputs": [],
+            "source_files": [],
+            "cron_schedule": "15 3 * * 1"
+        }
+    ],
+
+    "config_override":{
+        "import_version_override": "DATE_VERSION_PLACEHOLDER",
+        "invoke_import_validation": false,
+        "invoke_import_tool": false,
+        "invoke_differ_tool": false
+   }
+}

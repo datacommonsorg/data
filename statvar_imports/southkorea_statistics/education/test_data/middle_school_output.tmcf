@@ -1,0 +1,6 @@
+Node: E:middle_school_output->E0
+observationAbout: C:middle_school_output->observationAbout
+observationDate: C:middle_school_output->observationDate
+value: C:middle_school_output->value
+variableMeasured: C:middle_school_output->variableMeasured
+typeOf: dcs:StatVarObservation
