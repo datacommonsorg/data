@@ -53,7 +53,8 @@ ENV GOOGLE_CLOUD_LOGGING_MAX_LATENCY=5.0
 ENV GOOGLE_CLOUD_LOGGING_GRACE_PERIOD=30.0
 ENV GRPC_VERBOSITY=ERROR
 
-RUN wget https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar
+ARG CACHE_BUSTER=1
+RUN echo "Cache buster: $CACHE_BUSTER" && wget https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
@@ -63,7 +64,8 @@ COPY --from=data . /data
 
 # build_type: cloud (clone github data repo) 
 FROM base as cloud
-RUN git clone https://github.com/datacommonsorg/data.git
+ARG CACHE_BUSTER=1
+RUN echo "Cache buster: $CACHE_BUSTER" && git clone https://github.com/datacommonsorg/data.git
 
 # build the final image
 FROM ${build_type} as final
