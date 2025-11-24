@@ -1674,6 +1674,7 @@ class StatVarDataProcessor:
                     return True
                 else:
                     return False
+            # MergedCell is set as a boolean value.
             return config_flags.get_value_type(merged_cell, True)
         return False
 
