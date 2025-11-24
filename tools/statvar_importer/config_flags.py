@@ -307,7 +307,7 @@ def get_default_config() -> dict:
             ' ',
         # Enable merged cells that inherit PVs from previous column.
         'merged_cells':
-           sys.maxsize,
+            sys.maxsize,
         # List of default PVS maps to lookup column values if there is no map for a
         # column name.
         'default_pv_maps': ['GLOBAL'],
