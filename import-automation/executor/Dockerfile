@@ -53,8 +53,7 @@ ENV GOOGLE_CLOUD_LOGGING_MAX_LATENCY=5.0
 ENV GOOGLE_CLOUD_LOGGING_GRACE_PERIOD=30.0
 ENV GRPC_VERBOSITY=ERROR
 
-ARG CACHE_BUSTER=1
-RUN echo "Cache buster: $CACHE_BUSTER" && wget https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar
+ADD https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar /import-tool.jar
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
