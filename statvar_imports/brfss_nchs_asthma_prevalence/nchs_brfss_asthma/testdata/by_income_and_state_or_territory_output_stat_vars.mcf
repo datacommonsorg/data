@@ -1,0 +1,126 @@
+
+Node: dcid:Percent_Person_WithAsthma_IncomeOfUSDollar15000To24999
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+healthOutcome: dcid:Asthma
+income: dcid:USDollar15000To24999
+
+Node: dcid:Percent_Person_WithAsthma_IncomeOfUSDollar25000To49999
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+healthOutcome: dcid:Asthma
+income: dcid:USDollar25000To49999
+
+Node: dcid:Percent_Person_WithAsthma_IncomeOfUSDollar50000To74999
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+healthOutcome: dcid:Asthma
+income: dcid:USDollar50000To74999
+
+Node: dcid:Percent_Person_WithAsthma_IncomeOfUSDollar75000Onwards
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+healthOutcome: dcid:Asthma
+income: dcid:USDollar75000Onwards
+
+Node: dcid:Percent_Person_WithAsthma_IncomeOfUSDollarUpto14999
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+healthOutcome: dcid:Asthma
+income: dcid:USDollarUpto14999
+
+Node: dcid:SampleSize_Count_Person_WithAsthma_IncomeOfUSDollar15000To24999
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+healthOutcome: dcid:Asthma
+income: dcid:USDollar15000To24999
+
+Node: dcid:SampleSize_Count_Person_WithAsthma_IncomeOfUSDollar25000To49999
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+healthOutcome: dcid:Asthma
+income: dcid:USDollar25000To49999
+
+Node: dcid:SampleSize_Count_Person_WithAsthma_IncomeOfUSDollar50000To74999
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+healthOutcome: dcid:Asthma
+income: dcid:USDollar50000To74999
+
+Node: dcid:SampleSize_Count_Person_WithAsthma_IncomeOfUSDollar75000Onwards
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+healthOutcome: dcid:Asthma
+income: dcid:USDollar75000Onwards
+
+Node: dcid:SampleSize_Count_Person_WithAsthma_IncomeOfUSDollarUpto14999
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+healthOutcome: dcid:Asthma
+income: dcid:USDollarUpto14999
+
+Node: dcid:StdError_Count_Person_WithAsthma_IncomeOfUSDollar15000To24999
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_IncomeOfUSDollar15000To24999
+healthOutcome: dcid:Asthma
+income: dcid:USDollar15000To24999
+
+Node: dcid:StdError_Count_Person_WithAsthma_IncomeOfUSDollar25000To49999
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_IncomeOfUSDollar25000To49999
+healthOutcome: dcid:Asthma
+income: dcid:USDollar25000To49999
+
+Node: dcid:StdError_Count_Person_WithAsthma_IncomeOfUSDollar50000To74999
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_IncomeOfUSDollar50000To74999
+healthOutcome: dcid:Asthma
+income: dcid:USDollar50000To74999
+
+Node: dcid:StdError_Count_Person_WithAsthma_IncomeOfUSDollar75000Onwards
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_IncomeOfUSDollar75000Onwards
+healthOutcome: dcid:Asthma
+income: dcid:USDollar75000Onwards
+
+Node: dcid:StdError_Count_Person_WithAsthma_IncomeOfUSDollarUpto14999
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_IncomeOfUSDollarUpto14999
+healthOutcome: dcid:Asthma
+income: dcid:USDollarUpto14999
+

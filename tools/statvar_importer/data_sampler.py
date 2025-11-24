@@ -75,11 +75,9 @@ flags.DEFINE_string('sampler_output_delimiter', None,
 _FLAGS = flags.FLAGS
 
 import file_util
-import process_http_server
 
 from config_map import ConfigMap
 from counters import Counters
-from config_map import ConfigMap
 
 
 # Class to sample a data file.
@@ -135,6 +133,16 @@ class DataSampler:
         if regex:
             self._column_regex = re.compile(regex)
         self._selected_rows = 0
+        # Parse unique column names from config
+        self._unique_column_names = []
+        self._unique_column_indices = {}
+        unique_cols_str = self._config.get('sampler_unique_columns', '')
+        if unique_cols_str:
+            self._unique_column_names = [
+                col.strip()
+                for col in unique_cols_str.split(',')
+                if col.strip()
+            ]
 
     def __del__(self) -> None:
         """Logs the column headers and counts upon object deletion."""
@@ -154,9 +162,12 @@ class DataSampler:
 
         Returns:
             The number of times the value has been seen before for the column.
-            Returns sys.maxsize if the column value does not match the
-            sampler_column_regex.
+            Returns sys.maxsize if the column should not be tracked or if the
+            column value does not match the sampler_column_regex.
         """
+        # Check if this column should be tracked
+        if not self._should_track_column(column_index):
+            return sys.maxsize
         # Check if column value is to be tracked.
         if self._column_regex:
             if not self._column_regex.search(value):
@@ -167,6 +178,42 @@ class DataSampler:
         if col_values is None:
             return 0
         return col_values.get(value, 0)
+
+    def _should_track_column(self, column_index: int) -> bool:
+        """Determines if a column should be tracked for unique values.
+
+        Args:
+            column_index: The index of the column.
+
+        Returns:
+            True if the column should be tracked (either no unique columns
+            specified or this column is in the unique columns list).
+        """
+        if not self._unique_column_names:
+            # No specific columns specified, track all
+            return True
+        # Check if this column is in our unique columns
+        return column_index in self._unique_column_indices.values()
+
+    def _process_header_row(self, row: list[str]) -> None:
+        """Process a header row to build column name to index mapping.
+
+        This method is called for each header row (up to header_rows config) to
+        search for columns specified in sampler_unique_columns. It only maps
+        columns that are in the configured list. If called multiple times with
+        duplicate column names, the last mapping is used.
+
+        Args:
+            row: A header row containing column names.
+        """
+        if not self._unique_column_names:
+            return
+
+        for index, column_name in enumerate(row):
+            if column_name in self._unique_column_names:
+                self._unique_column_indices[column_name] = index
+                logging.level_debug() and logging.debug(
+                    f'Mapped unique column "{column_name}" to index {index}')
 
     def _add_column_header(self, column_index: int, value: str) -> str:
         """Adds the first non-empty value of a column as its header.
@@ -194,8 +241,11 @@ class DataSampler:
         Args:
             row: The row that has been selected for the sample.
         """
-        # Update counts for each column value in the row.
+        # Update counts for each tracked column value in the row.
         for index in range(len(row)):
+            # Skip columns not being tracked
+            if not self._should_track_column(index):
+                continue
             value = row[index]
             col_counts = self._column_counts.get(index)
             if col_counts is None:
@@ -234,6 +284,9 @@ class DataSampler:
         max_count = self._config.get('sampler_rows_per_key', 3)
         max_uniques_per_col = self._config.get('sampler_uniques_per_column', 10)
         for index in range(len(row)):
+            # Skip columns not in unique_columns list
+            if not self._should_track_column(index):
+                continue
             value = row[index]
             value_count = self._get_column_count(index, value)
             if value_count == 0 or value_count < max_count:
@@ -241,7 +294,7 @@ class DataSampler:
                 col_counts = self._column_counts.get(index, {})
                 if len(col_counts) < max_uniques_per_col:
                     # Column has few unique values. Select this row for column.
-                    self._counters.add_counter(f'sampler-selected-rows', 1)
+                    self._counters.add_counter('sampler-selected-rows', 1)
                     self._counters.add_counter(
                         f'sampler-selected-column-{index}', 1)
                     return True
@@ -250,7 +303,7 @@ class DataSampler:
         if sample_rate < 0:
             sample_rate = self._config.get('sampler_rate')
         if random.random() <= sample_rate:
-            self._counters.add_counter(f'sampler-sampled-rows', 1)
+            self._counters.add_counter('sampler-sampled-rows', 1)
             return True
         return False
 
@@ -260,6 +313,11 @@ class DataSampler:
         This method reads a CSV file, selects a sample of rows based on the
         configured criteria, and writes the selected rows to an output file.
 
+        When sampler_unique_columns is configured, the method processes all
+        header rows (up to header_rows config) to locate the specified column
+        names. If any requested columns are not found within the header rows,
+        a ValueError is raised.
+
         Args:
             input_file: The path to the input CSV file.
             output_file: The path to the output CSV file. If not provided, a
@@ -267,6 +325,11 @@ class DataSampler:
 
         Returns:
             The path to the output file with the sampled rows.
+
+        Raises:
+            ValueError: If sampler_unique_columns is configured and any of the
+              specified column names are not found within the first header_rows
+              rows of the input file.
 
         Usage:
             sampler = DataSampler()
@@ -322,13 +385,28 @@ class DataSampler:
                     csv_reader = csv.reader(csv_file, **csv_options)
                     row_index = 0
                     for row in csv_reader:
-                        self._counters.add_counter(f'sampler-input-row', 1)
+                        self._counters.add_counter('sampler-input-row', 1)
                         row_index += 1
-                        # Write headers from first input file to the output.
+                        # Process and write header rows from the first input file.
                         if row_index <= header_rows and input_index == 0:
+                            self._process_header_row(row)
                             csv_writer.writerow(row)
-                            self._counters.add_counter(f'sampler-header-rows',
-                                                       1)
+                            self._counters.add_counter('sampler-header-rows', 1)
+                            # After processing all header rows, validate that all
+                            # requested unique columns were found
+                            if row_index == header_rows and self._unique_column_names:
+                                found = set(self._unique_column_indices.keys())
+                                missing = set(self._unique_column_names) - found
+                                if missing:
+                                    logging.error(
+                                        'Failed to map unique columns %s within %d header '
+                                        'row(s). Found: %s. Missing: %s. Increase '
+                                        'header_rows or verify column names.',
+                                        self._unique_column_names, header_rows,
+                                        found or 'none', missing)
+                                    raise ValueError(
+                                        f'Missing unique columns in headers: {missing}'
+                                    )
                             continue
                         # Check if input row has any unique values to be output
                         if self.select_row(row, sample_rate):
@@ -365,18 +443,26 @@ def sample_csv_file(input_file: str,
           - sampler_output_rows: The maximum number of rows to include in the
             sample.
           - sampler_rate: The sampling rate to use for random selection.
-          - header_rows: The number of header rows to copy from the input file.
+          - header_rows: The number of header rows to copy from the input file
+            and search for sampler_unique_columns. Increase this if column names
+            appear in later header rows (e.g., after a title row).
           - sampler_rows_per_key: The number of rows to select for each unique
             key.
           - sampler_column_regex: A regular expression to filter column values.
           - sampler_unique_columns: A comma-separated list of column names to
-            use for selecting unique rows.
+            use for selecting unique rows. Column names must appear within the
+            first header_rows rows or ValueError will be raised.
           - input_delimiter: The delimiter used in the input file.
           - output_delimiter: The delimiter to use in the output file.
           - input_encoding: The encoding of the input file.
 
     Returns:
         The path to the output file with the sampled rows.
+
+    Raises:
+        ValueError: If sampler_unique_columns is configured and any of the
+          specified column names are not found within the first header_rows
+          rows of the input file.
 
     Usage:
         # Basic usage with default settings

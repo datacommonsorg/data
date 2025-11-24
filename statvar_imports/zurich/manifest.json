@@ -16,7 +16,7 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "zurich_population_common.tmcf",
+                    "template_mcf": "wir_2552_wiki/output/zurich_population_wir_2552_wiki.tmcf",
                     "cleaned_csv": "wir_2552_wiki/output/zurich_population_wir_2552_wiki.csv"
                 }
             ],
@@ -38,7 +38,7 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "zurich_population_common.tmcf",
+                    "template_mcf": "bev_3903_age10_wiki/output/zurich_population_bev_3903_age10_wiki.tmcf",
                     "cleaned_csv": "bev_3903_age10_wiki/output/zurich_population_bev_3903_age10_wiki.csv"
                 }
             ],
@@ -127,7 +127,7 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "zurich_population_common.tmcf",
+                    "template_mcf": "bev_3903_hel_wiki/output/zurich_population_bev_3903_hel_wiki.tmcf",
                     "cleaned_csv": "bev_3903_hel_wiki/output/zurich_population_bev_3903_hel_wiki.csv"
                 }
             ],
@@ -171,7 +171,7 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "zurich_population_common.tmcf",
+                    "template_mcf": "bev_3903_sex_wiki/output/zurich_population_bev_3903_sex_wiki.tmcf",
                     "cleaned_csv": "bev_3903_sex_wiki/output/zurich_population_bev_3903_sex_wiki.csv"
                 }
             ],

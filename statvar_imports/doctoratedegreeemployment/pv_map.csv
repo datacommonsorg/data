@@ -11,9 +11,9 @@ American Indian or Alaska Native,race,AmericanIndianOrAlaskaNative,,,,,,,,,,,,,,
 Native Hawaiian or Other Pacific Islander,race,NativeHawaiianOrOtherPacificIslanderAlone,,,,,,,,,,,,,,
 More than one raceb,race,TwoOrMoreRaces,,,,,,,,,,,,,,
 Tenured,tenureStatus,Tenured,populationType,Person,measuredProperty,count,value,{Number},observationAbout,country/USA,educationalAttainment,DoctorateDegree,doctorateDegreeMajor,ScienceAndEngineeringRelatedMajor,facultyType,UniversityAndCollegeTeacher
-On Tenure Track,tenureStatus,OnTenureTrack,populationType,Person,measuredProperty,count,value,{Number},observationAbout,country/USA,educationalAttainment,DoctorateDegree,doctorateDegreeMajor,ScienceAndEngineeringRelatedMajor,facultyType,UniversityAndCollegeTeacher
-Not On Tenure Track,tenureStatus,NotOnTenureTrack,populationType,Person,measuredProperty,count,value,{Number},observationAbout,country/USA,educationalAttainment,DoctorateDegree,doctorateDegreeMajor,ScienceAndEngineeringRelatedMajor,facultyType,UniversityAndCollegeTeacher
-Tenure Not Applicable,tenureStatus,TenureNotApplicable,populationType,Person,measuredProperty,count,value,{Number},observationAbout,country/USA,educationalAttainment,DoctorateDegree,doctorateDegreeMajor,ScienceAndEngineeringRelatedMajor,facultyType,UniversityAndCollegeTeacher
+On tenure track,tenureStatus,OnTenureTrack,populationType,Person,measuredProperty,count,value,{Number},observationAbout,country/USA,educationalAttainment,DoctorateDegree,doctorateDegreeMajor,ScienceAndEngineeringRelatedMajor,facultyType,UniversityAndCollegeTeacher
+Not on tenure track,tenureStatus,NotOnTenureTrack,populationType,Person,measuredProperty,count,value,{Number},observationAbout,country/USA,educationalAttainment,DoctorateDegree,doctorateDegreeMajor,ScienceAndEngineeringRelatedMajor,facultyType,UniversityAndCollegeTeacher
+Tenure not applicable,tenureStatus,TenureNotApplicable,populationType,Person,measuredProperty,count,value,{Number},observationAbout,country/USA,educationalAttainment,DoctorateDegree,doctorateDegreeMajor,ScienceAndEngineeringRelatedMajor,facultyType,UniversityAndCollegeTeacher
 Scientist,occupation,SOCv2018/19-0000,gender,"""""",#Header,occupation,,,,,,,,,,
 Biological/life scientist,occupation,SOCv2018/19-1000,gender,"""""",#Header,occupation,,,,,,,,,,
 Computer and information scientist,occupation,SOCv2018/15-0000,gender,"""""",#Header,occupation,,,,,,,,,,

@@ -16,11 +16,11 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/output_part1.tmcf",
                     "cleaned_csv": "output_files/cleaned.csv"
                 },
                 {
-                    "template_mcf": "output_files/output.tmcf",
+                    "template_mcf": "output_files/output_part2.tmcf",
                     "cleaned_csv": "output_files/country_output.csv"
                 }
             ],
