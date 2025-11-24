@@ -101,7 +101,7 @@ def clean_destination_folders():
 
 def main():
     """Main function to orchestrate the download and organization."""
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    
     logging.info("Starting CRDC data download and organization process...")
     
     FILES_DIRECTORY.mkdir(exist_ok=True)
