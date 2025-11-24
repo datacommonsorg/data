@@ -7,7 +7,13 @@
 steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '--build-arg', 'CACHE_BUSTER=${COMMIT_SHA}', '-t', '${_DOCKER_IMAGE}:${COMMIT_SHA}', '-t', '${_DOCKER_IMAGE}:latest', '.']
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        # Use current timestamp to bust cache for import-tool.jar download, 
+        # as it can change independently of the commit.
+        docker build --build-arg CACHE_BUSTER=$(date +%s) -t ${_DOCKER_IMAGE}:${COMMIT_SHA} -t ${_DOCKER_IMAGE}:latest .
     dir: 'import-automation/executor'
     env: ['DOCKER_BUILDKIT=1']
 
