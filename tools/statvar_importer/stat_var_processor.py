@@ -1711,7 +1711,8 @@ class StatVarDataProcessor:
                     is_merged_cell = True
             self.set_column_header_pvs(row_index, col_index, column_value,
                                        col_pvs, column_headers)
-            if col_pvs and not is_merged_cell:
+            if not is_merged_cell:
+                # Retain the current column PVs in case the next cell is empty.
                 prev_col_pvs = col_pvs
                 prev_col_index = col_index
         logging.level_debug() and logging.log_every_n(
