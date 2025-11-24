@@ -11,8 +11,7 @@ steps:
     args:
       - '-c'
       - |
-        # Use current timestamp to bust cache for import-tool.jar download, 
-        # as it can change independently of the commit.
+        # Use current timestamp to bust cache for git clone and other external dependencies.
         docker build --build-arg CACHE_BUSTER=$(date +%s) -t ${_DOCKER_IMAGE}:${COMMIT_SHA} -t ${_DOCKER_IMAGE}:latest .
     dir: 'import-automation/executor'
     env: ['DOCKER_BUILDKIT=1']
