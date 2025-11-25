@@ -648,14 +648,14 @@ class SdmxStepTest(unittest.TestCase):
         )
         step = DownloadMetadataStep(name="test-step", config=config)
 
-        # First call creates plan
-        plan1 = step._prepare_command()
-        self.assertIn("download-metadata", plan1.full_command)
-        self.assertIn("--endpoint=https://example.com", plan1.full_command)
+        # First call creates context
+        context1 = step._prepare_command()
+        self.assertIn("download-metadata", context1.full_command)
+        self.assertIn("--endpoint=https://example.com", context1.full_command)
 
         # Second call returns same object
-        plan2 = step._prepare_command()
-        self.assertIs(plan1, plan2)
+        context2 = step._prepare_command()
+        self.assertIs(context1, context2)
 
     def test_download_metadata_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(
@@ -713,16 +713,16 @@ class SdmxStepTest(unittest.TestCase):
         )
         step = DownloadDataStep(name="test-step", config=config)
 
-        # First call creates plan
-        plan1 = step._prepare_command()
-        self.assertIn("download-data", plan1.full_command)
-        self.assertIn("--endpoint=https://example.com", plan1.full_command)
-        self.assertIn("--key=test-key", plan1.full_command)
-        self.assertIn("--param=area=US", plan1.full_command)
+        # First call creates context
+        context1 = step._prepare_command()
+        self.assertIn("download-data", context1.full_command)
+        self.assertIn("--endpoint=https://example.com", context1.full_command)
+        self.assertIn("--key=test-key", context1.full_command)
+        self.assertIn("--param=area=US", context1.full_command)
 
         # Second call returns same object
-        plan2 = step._prepare_command()
-        self.assertIs(plan1, plan2)
+        context2 = step._prepare_command()
+        self.assertIs(context1, context2)
 
     def test_download_data_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(
@@ -776,14 +776,14 @@ class SdmxStepTest(unittest.TestCase):
         input_path = Path(self._tmpdir) / "demo_data.csv"
         input_path.write_text("header\nrow1")
 
-        # First call creates plan
-        plan1 = step._prepare_command()
-        self.assertIn("data_sampler.py", plan1.full_command[1])
-        self.assertIn("--sampler_output_rows=500", plan1.full_command)
+        # First call creates context
+        context1 = step._prepare_command()
+        self.assertIn("data_sampler.py", context1.full_command[1])
+        self.assertIn("--sampler_output_rows=500", context1.full_command)
 
         # Second call returns same object
-        plan2 = step._prepare_command()
-        self.assertIs(plan1, plan2)
+        context2 = step._prepare_command()
+        self.assertIs(context1, context2)
 
     def test_create_sample_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(

@@ -61,13 +61,6 @@ def _require_config_field(value: str | None, field: str, step_name: str) -> str:
     raise ValueError(f"{step_name} requires config.{field}")
 
 
-@dataclass(frozen=True)
-class CommandPlan:
-    """Holds a constructed command and its expected output path."""
-    full_command: list[str]
-    output_path: Path
-
-
 def _run_command(command: Sequence[str], *, verbose: bool) -> None:
     if verbose:
         logging.debug(f"Running command: {' '.join(command)}")
@@ -310,13 +303,18 @@ class DownloadDataStep(SdmxStep):
 
     VERSION = 1
 
+    @dataclass(frozen=True)
+    class _StepContext:
+        full_command: list[str]
+        output_path: Path
+
     def __init__(self, *, name: str, config: PipelineConfig) -> None:
         super().__init__(name=name, version=self.VERSION, config=config)
-        self._plan: CommandPlan | None = None
+        self._context: DownloadDataStep._StepContext | None = None
 
-    def _prepare_command(self) -> CommandPlan:
-        if self._plan:
-            return self._plan
+    def _prepare_command(self) -> _StepContext:
+        if self._context:
+            return self._context
         endpoint = _require_config_field(self._config.sdmx.endpoint,
                                          _FLAG_SDMX_ENDPOINT, self.name)
         agency = _require_config_field(self._config.sdmx.agency,
@@ -340,24 +338,25 @@ class DownloadDataStep(SdmxStep):
         if self._config.run.verbose:
             args.append("--verbose")
         full_command = [sys.executable, str(SDMX_CLI_PATH)] + args
-        self._plan = CommandPlan(full_command=full_command,
-                                 output_path=output_path)
-        return self._plan
+        self._context = DownloadDataStep._StepContext(full_command=full_command,
+                                                      output_path=output_path)
+        return self._context
 
     def run(self) -> None:
-        plan = self._prepare_command()
+        context = self._prepare_command()
         if self._config.run.verbose:
             logging.info(
-                f"Starting SDMX data download: {' '.join(plan.full_command)} -> {plan.output_path}"
+                f"Starting SDMX data download: {' '.join(context.full_command)} -> {context.output_path}"
             )
         else:
-            logging.info(f"Downloading SDMX data to {plan.output_path}")
-        _run_command(plan.full_command, verbose=self._config.run.verbose)
+            logging.info(f"Downloading SDMX data to {context.output_path}")
+        _run_command(context.full_command, verbose=self._config.run.verbose)
 
     def dry_run(self) -> None:
-        plan = self._prepare_command()
+        context = self._prepare_command()
         logging.info(
-            f"{self.name} (dry run): would run {' '.join(plan.full_command)}")
+            f"{self.name} (dry run): would run {' '.join(context.full_command)}"
+        )
 
 
 class DownloadMetadataStep(SdmxStep):
@@ -365,13 +364,18 @@ class DownloadMetadataStep(SdmxStep):
 
     VERSION = 1
 
+    @dataclass(frozen=True)
+    class _StepContext:
+        full_command: list[str]
+        output_path: Path
+
     def __init__(self, *, name: str, config: PipelineConfig) -> None:
         super().__init__(name=name, version=self.VERSION, config=config)
-        self._plan: CommandPlan | None = None
+        self._context: DownloadMetadataStep._StepContext | None = None
 
-    def _prepare_command(self) -> CommandPlan:
-        if self._plan:
-            return self._plan
+    def _prepare_command(self) -> _StepContext:
+        if self._context:
+            return self._context
         endpoint = _require_config_field(self._config.sdmx.endpoint,
                                          _FLAG_SDMX_ENDPOINT, self.name)
         agency = _require_config_field(self._config.sdmx.agency,
@@ -391,24 +395,25 @@ class DownloadMetadataStep(SdmxStep):
         if self._config.run.verbose:
             args.append("--verbose")
         full_command = [sys.executable, str(SDMX_CLI_PATH)] + args
-        self._plan = CommandPlan(full_command=full_command,
-                                 output_path=output_path)
-        return self._plan
+        self._context = DownloadMetadataStep._StepContext(
+            full_command=full_command, output_path=output_path)
+        return self._context
 
     def run(self) -> None:
-        plan = self._prepare_command()
+        context = self._prepare_command()
         if self._config.run.verbose:
             logging.info(
-                f"Starting SDMX metadata download: {' '.join(plan.full_command)} -> {plan.output_path}"
+                f"Starting SDMX metadata download: {' '.join(context.full_command)} -> {context.output_path}"
             )
         else:
-            logging.info(f"Downloading SDMX metadata to {plan.output_path}")
-        _run_command(plan.full_command, verbose=self._config.run.verbose)
+            logging.info(f"Downloading SDMX metadata to {context.output_path}")
+        _run_command(context.full_command, verbose=self._config.run.verbose)
 
     def dry_run(self) -> None:
-        plan = self._prepare_command()
+        context = self._prepare_command()
         logging.info(
-            f"{self.name} (dry run): would run {' '.join(plan.full_command)}")
+            f"{self.name} (dry run): would run {' '.join(context.full_command)}"
+        )
 
 
 class CreateSampleStep(SdmxStep):
