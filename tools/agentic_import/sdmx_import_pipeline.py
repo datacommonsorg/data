@@ -277,13 +277,51 @@ class DownloadDataStep(SdmxStep):
 
     def __init__(self, *, name: str, config: PipelineConfig) -> None:
         super().__init__(name=name, version=self.VERSION, config=config)
+        self._plan: CommandPlan | None = None
+
+    def _prepare_command(self) -> CommandPlan:
+        if self._plan:
+            return self._plan
+        endpoint = _require_config_field(self._config.endpoint, "endpoint",
+                                         self.name)
+        agency = _require_config_field(self._config.agency, "agency", self.name)
+        dataflow = _require_config_field(self._config.dataflow, "dataflow",
+                                         self.name)
+        dataset_prefix = _resolve_dataset_prefix(self._config)
+        working_dir = _resolve_working_dir(self._config)
+        output_path = working_dir / f"{dataset_prefix}_data.csv"
+        args = [
+            "download-data",
+            f"--endpoint={endpoint}",
+            f"--agency={agency}",
+            f"--dataflow={dataflow}",
+            f"--output_path={output_path}",
+        ]
+        if self._config.dataflow_key:
+            args.append(f"--key={self._config.dataflow_key}")
+        if self._config.dataflow_param:
+            args.append(f"--param={self._config.dataflow_param}")
+        if self._config.verbose:
+            args.append("--verbose")
+        full_command = [sys.executable, str(SDMX_CLI_PATH)] + args
+        self._plan = CommandPlan(full_command=full_command,
+                                 output_path=output_path)
+        return self._plan
 
     def run(self) -> None:
-        logging.info(
-            f"{self.name}: no-op implementation for VERSION={self.VERSION}")
+        plan = self._prepare_command()
+        if self._config.verbose:
+            logging.info(
+                f"Starting SDMX data download: {' '.join(plan.full_command)} -> {plan.output_path}"
+            )
+        else:
+            logging.info(f"Downloading SDMX data to {plan.output_path}")
+        _run_command(plan.full_command, verbose=self._config.verbose)
 
     def dry_run(self) -> None:
-        logging.info(f"{self.name} (dry run): previewing data download inputs")
+        plan = self._prepare_command()
+        logging.info(
+            f"{self.name} (dry run): would run {' '.join(plan.full_command)}")
 
 
 class DownloadMetadataStep(SdmxStep):

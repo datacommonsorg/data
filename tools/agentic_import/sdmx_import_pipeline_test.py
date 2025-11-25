@@ -46,7 +46,7 @@ from tools.agentic_import.pipeline import (  # pylint: disable=import-error
 from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=import-error
     InteractiveCallback, JSONStateCallback, PipelineBuilder, PipelineConfig,
     StepDecision, build_pipeline_callback, build_sdmx_pipeline, build_steps,
-    run_sdmx_pipeline, DownloadMetadataStep, _run_command)
+    run_sdmx_pipeline, DownloadMetadataStep, DownloadDataStep, _run_command)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
 
@@ -649,6 +649,59 @@ class SdmxStepTest(unittest.TestCase):
             mock_run_cmd.assert_called_once()
             args, kwargs = mock_run_cmd.call_args
             self.assertIn("download-metadata", args[0])
+            self.assertTrue(kwargs["verbose"])
+
+    def test_download_data_step_caches_plan(self) -> None:
+        config = PipelineConfig(command="test",
+                                endpoint="https://example.com",
+                                agency="AGENCY",
+                                dataflow="FLOW",
+                                dataflow_key="test-key",
+                                dataflow_param="area=US",
+                                dataset_prefix="demo",
+                                working_dir=self._tmpdir,
+                                verbose=True)
+        step = DownloadDataStep(name="test-step", config=config)
+
+        # First call creates plan
+        plan1 = step._prepare_command()
+        self.assertIn("download-data", plan1.full_command)
+        self.assertIn("--endpoint=https://example.com", plan1.full_command)
+        self.assertIn("--key=test-key", plan1.full_command)
+        self.assertIn("--param=area=US", plan1.full_command)
+
+        # Second call returns same object
+        plan2 = step._prepare_command()
+        self.assertIs(plan1, plan2)
+
+    def test_download_data_step_run_and_dry_run_use_same_plan(self) -> None:
+        config = PipelineConfig(command="test",
+                                endpoint="https://example.com",
+                                agency="AGENCY",
+                                dataflow="FLOW",
+                                dataset_prefix="demo",
+                                working_dir=self._tmpdir,
+                                verbose=True)
+        step = DownloadDataStep(name="test-step", config=config)
+
+        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
+                       ) as mock_run_cmd:
+            with self.assertLogs(logging.get_absl_logger(),
+                                 level="INFO") as logs:
+                step.dry_run()
+                step.run()
+
+            # Verify dry_run logged the command
+            self.assertTrue(
+                any("test-step (dry run): would run" in entry
+                    for entry in logs.output))
+            self.assertTrue(
+                any("download-data" in entry for entry in logs.output))
+
+            # Verify run called the command with the same args
+            mock_run_cmd.assert_called_once()
+            args, kwargs = mock_run_cmd.call_args
+            self.assertIn("download-data", args[0])
             self.assertTrue(kwargs["verbose"])
 
 
