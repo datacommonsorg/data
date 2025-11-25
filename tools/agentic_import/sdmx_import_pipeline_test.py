@@ -46,7 +46,7 @@ from tools.agentic_import.pipeline import (  # pylint: disable=import-error
 from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=import-error
     InteractiveCallback, JSONStateCallback, PipelineBuilder, PipelineConfig,
     StepDecision, build_pipeline_callback, build_sdmx_pipeline, build_steps,
-    run_sdmx_pipeline)
+    run_sdmx_pipeline, DownloadMetadataStep, _run_command)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
 
@@ -463,6 +463,11 @@ class RunPipelineTest(unittest.TestCase):
         self._tmpdir_obj = tempfile.TemporaryDirectory()
         self.addCleanup(self._tmpdir_obj.cleanup)
         self._tmpdir = self._tmpdir_obj.name
+        # Mock _run_command to avoid actual execution during pipeline tests
+        self._run_command_patcher = mock.patch(
+            "tools.agentic_import.sdmx_import_pipeline._run_command")
+        self._mock_run_command = self._run_command_patcher.start()
+        self.addCleanup(self._run_command_patcher.stop)
 
     def test_run_pipeline_updates_state_and_hash(self) -> None:
         command = "sdmx run pipeline"
@@ -577,6 +582,74 @@ class RunPipelineTest(unittest.TestCase):
             second_state = json.load(fp)
 
         self.assertEqual(first_state, second_state)
+
+
+class SdmxStepTest(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self._tmpdir_obj = tempfile.TemporaryDirectory()
+        self.addCleanup(self._tmpdir_obj.cleanup)
+        self._tmpdir = self._tmpdir_obj.name
+
+    def test_run_command_logs_and_executes(self) -> None:
+        with mock.patch("subprocess.run") as mock_run:
+            with self.assertLogs(logging.get_absl_logger(),
+                                 level="DEBUG") as logs:
+                _run_command(["echo", "hello"], verbose=True)
+
+            mock_run.assert_called_once_with(["echo", "hello"], check=True)
+            self.assertTrue(
+                any("Running command: echo hello" in entry
+                    for entry in logs.output))
+
+    def test_download_metadata_step_caches_plan(self) -> None:
+        config = PipelineConfig(command="test",
+                                endpoint="https://example.com",
+                                agency="AGENCY",
+                                dataflow="FLOW",
+                                dataset_prefix="demo",
+                                working_dir=self._tmpdir,
+                                verbose=True)
+        step = DownloadMetadataStep(name="test-step", config=config)
+
+        # First call creates plan
+        plan1 = step._prepare_command()
+        self.assertIn("download-metadata", plan1.full_command)
+        self.assertIn("--endpoint=https://example.com", plan1.full_command)
+
+        # Second call returns same object
+        plan2 = step._prepare_command()
+        self.assertIs(plan1, plan2)
+
+    def test_download_metadata_step_run_and_dry_run_use_same_plan(self) -> None:
+        config = PipelineConfig(command="test",
+                                endpoint="https://example.com",
+                                agency="AGENCY",
+                                dataflow="FLOW",
+                                dataset_prefix="demo",
+                                working_dir=self._tmpdir,
+                                verbose=True)
+        step = DownloadMetadataStep(name="test-step", config=config)
+
+        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
+                       ) as mock_run_cmd:
+            with self.assertLogs(logging.get_absl_logger(),
+                                 level="INFO") as logs:
+                step.dry_run()
+                step.run()
+
+            # Verify dry_run logged the command
+            self.assertTrue(
+                any("test-step (dry run): would run" in entry
+                    for entry in logs.output))
+            self.assertTrue(
+                any("download-metadata" in entry for entry in logs.output))
+
+            # Verify run called the command with the same args
+            mock_run_cmd.assert_called_once()
+            args, kwargs = mock_run_cmd.call_args
+            self.assertIn("download-metadata", args[0])
+            self.assertTrue(kwargs["verbose"])
 
 
 if __name__ == "__main__":

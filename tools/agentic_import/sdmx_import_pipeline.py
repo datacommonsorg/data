@@ -23,7 +23,7 @@ import re
 import shlex
 import subprocess
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable, ClassVar, Sequence
@@ -45,18 +45,28 @@ from tools.agentic_import.state_handler import (PipelineState, StateHandler,
 FLAGS = flags.FLAGS
 
 
-def _require_config_field(value: str | None, field: str,
-                          step_name: str) -> str:
+def _require_config_field(value: str | None, field: str, step_name: str) -> str:
     if value:
         return value
     raise ValueError(f"{step_name} requires config.{field}")
 
 
+@dataclass(frozen=True)
+class CommandPlan:
+    """Holds a constructed command and its expected output path."""
+    full_command: list[str]
+    output_path: Path
+
+
+def _run_command(command: Sequence[str], *, verbose: bool) -> None:
+    if verbose:
+        logging.debug(f"Running command: {' '.join(command)}")
+    subprocess.run(command, check=True)
+
+
 def _run_sdmx_cli(args: Sequence[str], *, verbose: bool) -> None:
     command = [sys.executable, str(SDMX_CLI_PATH), *args]
-    if verbose:
-        logging.debug(f"Running SDMX CLI command: {' '.join(command)}")
-    subprocess.run(command, check=True)
+    _run_command(command, verbose=verbose)
 
 
 def _define_flags() -> None:
@@ -283,23 +293,19 @@ class DownloadMetadataStep(SdmxStep):
 
     def __init__(self, *, name: str, config: PipelineConfig) -> None:
         super().__init__(name=name, version=self.VERSION, config=config)
+        self._plan: CommandPlan | None = None
 
-    def run(self) -> None:
+    def _prepare_command(self) -> CommandPlan:
+        if self._plan:
+            return self._plan
         endpoint = _require_config_field(self._config.endpoint, "endpoint",
                                          self.name)
-        agency = _require_config_field(self._config.agency, "agency",
-                                       self.name)
+        agency = _require_config_field(self._config.agency, "agency", self.name)
         dataflow = _require_config_field(self._config.dataflow, "dataflow",
                                          self.name)
         dataset_prefix = _resolve_dataset_prefix(self._config)
         working_dir = _resolve_working_dir(self._config)
         output_path = working_dir / f"{dataset_prefix}_metadata.xml"
-        if self._config.verbose:
-            logging.info(
-                f"Starting SDMX metadata download: endpoint={endpoint} "
-                f"agency={agency} dataflow={dataflow} -> {output_path}")
-        else:
-            logging.info(f"Downloading SDMX metadata to {output_path}")
         args = [
             "download-metadata",
             f"--endpoint={endpoint}",
@@ -309,19 +315,25 @@ class DownloadMetadataStep(SdmxStep):
         ]
         if self._config.verbose:
             args.append("--verbose")
-        _run_sdmx_cli(args, verbose=self._config.verbose)
+        full_command = [sys.executable, str(SDMX_CLI_PATH)] + args
+        self._plan = CommandPlan(full_command=full_command,
+                                 output_path=output_path)
+        return self._plan
+
+    def run(self) -> None:
+        plan = self._prepare_command()
+        if self._config.verbose:
+            logging.info(
+                f"Starting SDMX metadata download: {' '.join(plan.full_command)} -> {plan.output_path}"
+            )
+        else:
+            logging.info(f"Downloading SDMX metadata to {plan.output_path}")
+        _run_command(plan.full_command, verbose=self._config.verbose)
 
     def dry_run(self) -> None:
-        dataset_prefix = _resolve_dataset_prefix(self._config)
-        working_dir = Path(self._config.working_dir
-                           or os.getcwd()).resolve()
-        output_path = working_dir / f"{dataset_prefix}_metadata.xml"
-        endpoint = self._config.endpoint or "<missing>"
-        agency = self._config.agency or "<missing>"
-        dataflow = self._config.dataflow or "<missing>"
+        plan = self._prepare_command()
         logging.info(
-            f"{self.name} (dry run): would fetch endpoint={endpoint} "
-            f"agency={agency} dataflow={dataflow} -> {output_path}")
+            f"{self.name} (dry run): would run {' '.join(plan.full_command)}")
 
 
 class CreateSampleStep(SdmxStep):
