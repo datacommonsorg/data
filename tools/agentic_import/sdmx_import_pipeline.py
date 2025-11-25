@@ -21,6 +21,7 @@ import json
 import os
 import re
 import shlex
+import subprocess
 import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -33,6 +34,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+SDMX_CLI_PATH = REPO_ROOT / "tools" / "sdmx_import" / "sdmx_cli.py"
+
 from tools.agentic_import.pipeline import (CompositeCallback, Pipeline,
                                            PipelineAbort, PipelineCallback,
                                            PipelineRunner, RunnerConfig, Step)
@@ -40,6 +43,20 @@ from tools.agentic_import.state_handler import (PipelineState, StateHandler,
                                                 StepState)
 
 FLAGS = flags.FLAGS
+
+
+def _require_config_field(value: str | None, field: str,
+                          step_name: str) -> str:
+    if value:
+        return value
+    raise ValueError(f"{step_name} requires config.{field}")
+
+
+def _run_sdmx_cli(args: Sequence[str], *, verbose: bool) -> None:
+    command = [sys.executable, str(SDMX_CLI_PATH), *args]
+    if verbose:
+        logging.debug(f"Running SDMX CLI command: {' '.join(command)}")
+    subprocess.run(command, check=True)
 
 
 def _define_flags() -> None:
@@ -268,12 +285,43 @@ class DownloadMetadataStep(SdmxStep):
         super().__init__(name=name, version=self.VERSION, config=config)
 
     def run(self) -> None:
-        logging.info(
-            f"{self.name}: no-op implementation for VERSION={self.VERSION}")
+        endpoint = _require_config_field(self._config.endpoint, "endpoint",
+                                         self.name)
+        agency = _require_config_field(self._config.agency, "agency",
+                                       self.name)
+        dataflow = _require_config_field(self._config.dataflow, "dataflow",
+                                         self.name)
+        dataset_prefix = _resolve_dataset_prefix(self._config)
+        working_dir = _resolve_working_dir(self._config)
+        output_path = working_dir / f"{dataset_prefix}_metadata.xml"
+        if self._config.verbose:
+            logging.info(
+                f"Starting SDMX metadata download: endpoint={endpoint} "
+                f"agency={agency} dataflow={dataflow} -> {output_path}")
+        else:
+            logging.info(f"Downloading SDMX metadata to {output_path}")
+        args = [
+            "download-metadata",
+            f"--endpoint={endpoint}",
+            f"--agency={agency}",
+            f"--dataflow={dataflow}",
+            f"--output_path={output_path}",
+        ]
+        if self._config.verbose:
+            args.append("--verbose")
+        _run_sdmx_cli(args, verbose=self._config.verbose)
 
     def dry_run(self) -> None:
+        dataset_prefix = _resolve_dataset_prefix(self._config)
+        working_dir = Path(self._config.working_dir
+                           or os.getcwd()).resolve()
+        output_path = working_dir / f"{dataset_prefix}_metadata.xml"
+        endpoint = self._config.endpoint or "<missing>"
+        agency = self._config.agency or "<missing>"
+        dataflow = self._config.dataflow or "<missing>"
         logging.info(
-            f"{self.name} (dry run): previewing metadata download inputs")
+            f"{self.name} (dry run): would fetch endpoint={endpoint} "
+            f"agency={agency} dataflow={dataflow} -> {output_path}")
 
 
 class CreateSampleStep(SdmxStep):
