@@ -1,0 +1,26 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "US_UrbanSchool_Retention",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://ocrdata.ed.gov/data",
+      "provenance_description": "This data provides an overview of student retention rates, categorized by gender, race/ethnicity, disability status, and language fluency, specifically for School Grade 1 to 12.",
+      "scripts": [
+        "download_script.py",
+        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/* --pv_map=retention_pvmap.csv --config_file=retention_metadata.csv --output_path=output/retention_output"
+      ],
+      "source_files": [
+        "input_files/*"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/retention_output.tmcf",
+          "cleaned_csv": "output/retention_output.csv"
+        }
+      ],
+      "cron_schedule": "30 07 27 * *"
+    }
+  ]
+}
