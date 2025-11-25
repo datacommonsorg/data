@@ -416,54 +416,53 @@ class CreateSampleStep(SdmxStep):
 
     VERSION = 1
 
+    @dataclass(frozen=True)
+    class _StepContext:
+        input_path: Path
+        full_command: list[str]
+        output_path: Path
+
     def __init__(self, *, name: str, config: PipelineConfig) -> None:
         super().__init__(name=name, version=self.VERSION, config=config)
-        self._plan: CommandPlan | None = None
+        self._context: CreateSampleStep._StepContext | None = None
 
-    def _prepare_command(self) -> CommandPlan:
-        if self._plan:
-            return self._plan
+    def _prepare_command(self) -> _StepContext:
+        if self._context:
+            return self._context
         dataset_prefix = self._config.run.dataset_prefix
         working_dir = Path(self._config.run.working_dir)
         input_path = working_dir / f"{dataset_prefix}_data.csv"
         output_path = working_dir / f"{dataset_prefix}_sample.csv"
 
-        # Check input file existence before running, but allow plan creation.
-        # In a real run, this will fail early if download-data didn't run.
+        if not input_path.is_file():
+            raise RuntimeError(f"Input file missing for sampling: {input_path}")
+
         args = [
             f"--sampler_input={input_path}",
             f"--sampler_output={output_path}",
             f"--sampler_output_rows={self._config.sample.rows}",
         ]
         full_command = [sys.executable, str(DATA_SAMPLER_PATH)] + args
-        self._plan = CommandPlan(full_command=full_command,
-                                 output_path=output_path)
-        return self._plan
+        self._context = CreateSampleStep._StepContext(input_path=input_path,
+                                                      full_command=full_command,
+                                                      output_path=output_path)
+        return self._context
 
     def run(self) -> None:
-        plan = self._prepare_command()
-        # Find input path from command args
-        input_path_arg = next((arg for arg in plan.full_command
-                               if arg.startswith("--sampler_input=")), None)
-        if not input_path_arg:
-            raise RuntimeError("Could not find sampler_input in command")
-        input_path = Path(input_path_arg.split("=")[1])
-
-        if not input_path.is_file():
-            raise RuntimeError(f"Input file missing for sampling: {input_path}")
-
+        context = self._prepare_command()
         if self._config.run.verbose:
             logging.info(
-                f"Starting data sampling: {' '.join(plan.full_command)} -> {plan.output_path}"
+                f"Starting data sampling: {' '.join(context.full_command)} -> {context.output_path}"
             )
         else:
-            logging.info(f"Sampling data to {plan.output_path}")
-        _run_command(plan.full_command, verbose=self._config.run.verbose)
+            logging.info(f"Sampling data to {context.output_path}")
+        _run_command(context.full_command, verbose=self._config.run.verbose)
 
     def dry_run(self) -> None:
-        plan = self._prepare_command()
+        context = self._prepare_command()
         logging.info(
-            f"{self.name} (dry run): would run {' '.join(plan.full_command)}")
+            f"{self.name} (dry run): would run {' '.join(context.full_command)}"
+        )
 
 
 class CreateSchemaMapStep(SdmxStep):

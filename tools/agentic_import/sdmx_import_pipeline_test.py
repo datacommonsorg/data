@@ -772,6 +772,10 @@ class SdmxStepTest(unittest.TestCase):
         )
         step = CreateSampleStep(name="test-step", config=config)
 
+        # Create dummy input file to satisfy validation
+        input_path = Path(self._tmpdir) / "demo_data.csv"
+        input_path.write_text("header\nrow1")
+
         # First call creates plan
         plan1 = step._prepare_command()
         self.assertIn("data_sampler.py", plan1.full_command[1])
@@ -816,6 +820,23 @@ class SdmxStepTest(unittest.TestCase):
             args, kwargs = mock_run_cmd.call_args
             self.assertIn("data_sampler.py", args[0][1])
             self.assertTrue(kwargs["verbose"])
+
+    def test_create_sample_step_dry_run_fails_if_input_missing(self) -> None:
+        config = PipelineConfig(
+            run=RunConfig(
+                command="test",
+                dataset_prefix="demo",
+                working_dir=self._tmpdir,
+                verbose=True,
+            ),
+            sample=SampleConfig(rows=500),
+        )
+        step = CreateSampleStep(name="test-step", config=config)
+        # No input file created
+
+        with self.assertRaisesRegex(RuntimeError,
+                                    "Input file missing for sampling"):
+            step.dry_run()
 
 
 if __name__ == "__main__":
