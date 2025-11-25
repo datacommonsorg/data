@@ -15,6 +15,7 @@
 
 from __future__ import annotations
 
+import abc
 import copy
 import hashlib
 import json
@@ -119,8 +120,9 @@ class InteractiveCallback(PipelineCallback):
     """Prompts the user before each step runs."""
 
     def before_step(self, step: Step) -> None:
-        logging.info(f"Dry run for {step.name} (v{step.version}):")
-        step.dry_run()
+        if isinstance(step, SdmxStep):
+            logging.info(f"Dry run for {step.name} (v{step.version}):")
+            step.dry_run()
         prompt = f"Run step {step.name} (v{step.version})? [Y/n] "
         response = input(prompt).strip().lower()
         if response in ("n", "no"):
@@ -295,7 +297,9 @@ class SdmxStep(Step):
     def version(self) -> int:
         return self._version
 
-    # Subclasses must implement run() and dry_run().
+    @abc.abstractmethod
+    def dry_run(self) -> None:
+        """Log a read-only preview of the work to be done."""
 
 
 class DownloadDataStep(SdmxStep):

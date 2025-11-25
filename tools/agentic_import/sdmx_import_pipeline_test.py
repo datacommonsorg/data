@@ -47,9 +47,12 @@ from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=impor
     InteractiveCallback, JSONStateCallback, PipelineBuilder, PipelineConfig,
     StepDecision, build_pipeline_callback, build_sdmx_pipeline, build_steps,
     run_sdmx_pipeline, DownloadMetadataStep, DownloadDataStep, CreateSampleStep,
-    _run_command, SdmxConfig, SampleConfig, RunConfig, SdmxDataflowConfig)
+    _run_command, SdmxConfig, SampleConfig, RunConfig, SdmxDataflowConfig,
+    SdmxStep)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
+
+_DUMMY_CONFIG = PipelineConfig(run=RunConfig(command="test"))
 
 
 class _IncrementingClock:
@@ -67,10 +70,10 @@ class _IncrementingClock:
         return self._value
 
 
-class _RecordingStep(BaseStep):
+class _RecordingStep(SdmxStep):
 
     def __init__(self, name: str, *, should_fail: bool = False) -> None:
-        super().__init__(name=name, version=1)
+        super().__init__(name=name, version=1, config=_DUMMY_CONFIG)
         self._should_fail = should_fail
 
     def run(self) -> None:
@@ -81,10 +84,10 @@ class _RecordingStep(BaseStep):
         logging.info("noop")
 
 
-class _VersionedStep(BaseStep):
+class _VersionedStep(SdmxStep):
 
     def __init__(self, name: str, version: int) -> None:
-        super().__init__(name=name, version=version)
+        super().__init__(name=name, version=version, config=_DUMMY_CONFIG)
 
     def run(self) -> None:
         logging.info("noop")
@@ -196,10 +199,12 @@ class JSONStateCallbackTest(unittest.TestCase):
                 json.dump(previous, fp)
             callback, handler = self._build_callback(tmpdir=tmpdir, clock=clock)
 
-            class _AbortStep(BaseStep):
+            class _AbortStep(SdmxStep):
 
                 def __init__(self) -> None:
-                    super().__init__(name="download.download-data", version=1)
+                    super().__init__(name="download.download-data",
+                                     version=1,
+                                     config=_DUMMY_CONFIG)
 
                 def run(self) -> None:
                     raise PipelineAbort("user requested stop")

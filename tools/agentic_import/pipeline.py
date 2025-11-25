@@ -44,10 +44,6 @@ class Step(abc.ABC):
     def run(self) -> None:
         """Execute the step."""
 
-    @abc.abstractmethod
-    def dry_run(self) -> None:
-        """Log a read-only preview of the work to be done."""
-
 
 class BaseStep(Step, abc.ABC):
     """Helper base class that stores mandatory metadata."""
