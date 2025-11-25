@@ -46,7 +46,8 @@ from tools.agentic_import.pipeline import (  # pylint: disable=import-error
 from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=import-error
     InteractiveCallback, JSONStateCallback, PipelineBuilder, PipelineConfig,
     StepDecision, build_pipeline_callback, build_sdmx_pipeline, build_steps,
-    run_sdmx_pipeline, DownloadMetadataStep, DownloadDataStep, _run_command)
+    run_sdmx_pipeline, DownloadMetadataStep, DownloadDataStep, CreateSampleStep,
+    _run_command, SdmxConfig, SampleConfig, RunConfig, SdmxDataflowConfig)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
 
@@ -338,20 +339,23 @@ class PlanningTest(unittest.TestCase):
         return [step.name for step in pipeline.get_steps()]
 
     def test_run_only_step(self) -> None:
-        cfg_step = PipelineConfig(command=_TEST_COMMAND,
-                                  run_only="download-data")
+        cfg_step = PipelineConfig(
+            run=RunConfig(command=_TEST_COMMAND, run_only="download-data"))
         names_step = self._names_from_builder(cfg_step)
         self.assertEqual(names_step, ["download-data"])
 
         with self.assertRaisesRegex(ValueError, "run_only step not found"):
             self._names_from_builder(
-                PipelineConfig(command=_TEST_COMMAND, run_only="nope"))
+                PipelineConfig(
+                    run=RunConfig(command=_TEST_COMMAND, run_only="nope")))
         with self.assertRaisesRegex(ValueError, "run_only step not found"):
             self._names_from_builder(
-                PipelineConfig(command=_TEST_COMMAND, run_only="download.nope"))
+                PipelineConfig(run=RunConfig(command=_TEST_COMMAND,
+                                             run_only="download.nope")))
 
     def test_force_semantics(self) -> None:
-        cfg_all = PipelineConfig(command=_TEST_COMMAND, force=True)
+        cfg_all = PipelineConfig(
+            run=RunConfig(command=_TEST_COMMAND, force=True))
         names_all = self._names_from_builder(cfg_all)
         self.assertEqual(names_all, [
             "download-data",
@@ -373,7 +377,7 @@ class PlanningTest(unittest.TestCase):
             "process-full-data": (1, "succeeded", older),
             "create-dc-config": (1, "succeeded", older),
         })
-        cfg = PipelineConfig(command=_TEST_COMMAND)
+        cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND))
         names = self._names_from_builder(cfg, state=state)
         self.assertEqual(names, [
             "download-metadata",
@@ -384,7 +388,7 @@ class PlanningTest(unittest.TestCase):
         ])
 
     def test_force_branch_records_decisions(self) -> None:
-        cfg = PipelineConfig(command=_TEST_COMMAND, force=True)
+        cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND, force=True))
         steps = build_steps(cfg)
         builder = PipelineBuilder(config=cfg,
                                   state=self._empty_state(),
@@ -402,7 +406,8 @@ class PlanningTest(unittest.TestCase):
             "download-data": (1, "succeeded", newer),
             "download-metadata": (1, "succeeded", older),
         })
-        cfg = PipelineConfig(command=_TEST_COMMAND, run_only="download-data")
+        cfg = PipelineConfig(
+            run=RunConfig(command=_TEST_COMMAND, run_only="download-data"))
         names = self._names_from_builder(cfg, state=state)
         self.assertEqual(names, ["download-data"])
 
@@ -417,7 +422,7 @@ class PlanningTest(unittest.TestCase):
             "process-full-data": (1, "succeeded", 1000),
             "create-dc-config": (1, "succeeded", 1000),
         })
-        cfg = PipelineConfig(command=_TEST_COMMAND)
+        cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND))
         names = self._names_from_builder(cfg, steps, state)
         self.assertEqual(names, ["process-full-data", "create-dc-config"])
 
@@ -434,7 +439,7 @@ class PlanningTest(unittest.TestCase):
             "process-full-data": (1, "succeeded", 1_000),
             "create-dc-config": (1, "succeeded", 1_000),
         })
-        cfg = PipelineConfig(command=_TEST_COMMAND)
+        cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND))
         steps = build_steps(cfg)
         builder = PipelineBuilder(config=cfg, state=state, steps=steps)
         result = builder.build()
@@ -449,15 +454,23 @@ class RunPipelineTest(unittest.TestCase):
 
     def _build_config(self, *, dataset_prefix: str | None, dataflow: str | None,
                       command: str) -> PipelineConfig:
-        return PipelineConfig(endpoint="https://api.example.com",
-                              agency="TEST_AGENCY",
-                              dataflow=dataflow,
-                              dataflow_key="test-key",
-                              dataflow_param="area=US",
-                              dataset_prefix=dataset_prefix,
-                              working_dir=self._tmpdir,
-                              skip_confirmation=True,
-                              command=command)
+        return PipelineConfig(
+            sdmx=SdmxConfig(
+                endpoint="https://api.example.com",
+                agency="TEST_AGENCY",
+                dataflow=SdmxDataflowConfig(
+                    id=dataflow,
+                    key="test-key",
+                    param="area=US",
+                ),
+            ),
+            run=RunConfig(
+                dataset_prefix=dataset_prefix,
+                working_dir=self._tmpdir,
+                skip_confirmation=True,
+                command=command,
+            ),
+        )
 
     def setUp(self) -> None:
         self._tmpdir_obj = tempfile.TemporaryDirectory()
@@ -477,6 +490,9 @@ class RunPipelineTest(unittest.TestCase):
         clock = _IncrementingClock(datetime(2025, 1, 2, tzinfo=timezone.utc),
                                    timedelta(seconds=2))
 
+        # Create dummy input file for sampling
+        (Path(self._tmpdir) / "demo_data.csv").write_text("header\nrow1")
+
         run_sdmx_pipeline(config=config, now_fn=clock)
 
         state_path = Path(self._tmpdir) / ".datacommons" / "demo.state.json"
@@ -487,11 +503,11 @@ class RunPipelineTest(unittest.TestCase):
         expected_hash = hashlib.sha256(
             json.dumps(
                 {
-                    "agency": config.agency,
-                    "dataflow": config.dataflow,
-                    "endpoint": config.endpoint,
-                    "dataflow_key": config.dataflow_key,
-                    "dataflow_param": config.dataflow_param,
+                    "sdmx.agency": config.sdmx.agency,
+                    "sdmx.dataflow.id": config.sdmx.dataflow.id,
+                    "sdmx.endpoint": config.sdmx.endpoint,
+                    "sdmx.dataflow.key": config.sdmx.dataflow.key,
+                    "sdmx.dataflow.param": config.sdmx.dataflow.param,
                 },
                 sort_keys=True,
                 separators=(",", ":")).encode("utf-8")).hexdigest()
@@ -513,6 +529,9 @@ class RunPipelineTest(unittest.TestCase):
         config = self._build_config(dataset_prefix=None,
                                     dataflow=dataflow,
                                     command="sdmx run sanitized")
+        # Create dummy input file for sampling (sanitized name)
+        (Path(self._tmpdir) /
+         "my_flow_name_2025_data.csv").write_text("header\nrow1")
         run_sdmx_pipeline(config=config,
                           now_fn=_IncrementingClock(
                               datetime(2025, 1, 3, tzinfo=timezone.utc),
@@ -529,9 +548,12 @@ class RunPipelineTest(unittest.TestCase):
     def test_invalid_working_dir_raises(self) -> None:
         path = Path(self._tmpdir) / "not_a_dir"
         path.write_text("content")
-        config = dataclasses.replace(self._build_config(
-            dataset_prefix="demo", dataflow="df", command="sdmx run invalid"),
-                                     working_dir=str(path))
+        base_config = self._build_config(dataset_prefix="demo",
+                                         dataflow="df",
+                                         command="sdmx run invalid")
+        updated_run = dataclasses.replace(base_config.run,
+                                          working_dir=str(path))
+        config = dataclasses.replace(base_config, run=updated_run)
         with self.assertRaisesRegex(ValueError,
                                     "working_dir is not a directory"):
             run_sdmx_pipeline(config=config)
@@ -542,13 +564,19 @@ class RunPipelineTest(unittest.TestCase):
                                     command="sdmx rerun force")
         first_clock = _IncrementingClock(
             datetime(2025, 1, 4, tzinfo=timezone.utc), timedelta(seconds=1))
+        # Create dummy input file for sampling
+        (Path(self._tmpdir) / "demo_data.csv").write_text("header\nrow1")
         run_sdmx_pipeline(config=config, now_fn=first_clock)
 
         state_path = Path(self._tmpdir) / ".datacommons" / "demo.state.json"
         with state_path.open(encoding="utf-8") as fp:
             first_state = json.load(fp)
 
-        updated_config = dataclasses.replace(config, dataflow_key="changed-key")
+        updated_dataflow = dataclasses.replace(config.sdmx.dataflow,
+                                               key="changed-key")
+        updated_sdmx = dataclasses.replace(config.sdmx,
+                                           dataflow=updated_dataflow)
+        updated_config = dataclasses.replace(config, sdmx=updated_sdmx)
         second_clock = _IncrementingClock(
             datetime(2025, 1, 5, tzinfo=timezone.utc), timedelta(seconds=1))
         run_sdmx_pipeline(config=updated_config, now_fn=second_clock)
@@ -568,6 +596,8 @@ class RunPipelineTest(unittest.TestCase):
                                     command="sdmx rerun noop")
         initial_clock = _IncrementingClock(
             datetime(2025, 1, 6, tzinfo=timezone.utc), timedelta(seconds=1))
+        # Create dummy input file for sampling
+        (Path(self._tmpdir) / "demo_data.csv").write_text("header\nrow1")
         run_sdmx_pipeline(config=config, now_fn=initial_clock)
 
         state_path = Path(self._tmpdir) / ".datacommons" / "demo.state.json"
@@ -603,13 +633,19 @@ class SdmxStepTest(unittest.TestCase):
                     for entry in logs.output))
 
     def test_download_metadata_step_caches_plan(self) -> None:
-        config = PipelineConfig(command="test",
-                                endpoint="https://example.com",
-                                agency="AGENCY",
-                                dataflow="FLOW",
-                                dataset_prefix="demo",
-                                working_dir=self._tmpdir,
-                                verbose=True)
+        config = PipelineConfig(
+            sdmx=SdmxConfig(
+                endpoint="https://example.com",
+                agency="AGENCY",
+                dataflow=SdmxDataflowConfig(id="FLOW"),
+            ),
+            run=RunConfig(
+                command="test",
+                dataset_prefix="demo",
+                working_dir=self._tmpdir,
+                verbose=True,
+            ),
+        )
         step = DownloadMetadataStep(name="test-step", config=config)
 
         # First call creates plan
@@ -622,13 +658,19 @@ class SdmxStepTest(unittest.TestCase):
         self.assertIs(plan1, plan2)
 
     def test_download_metadata_step_run_and_dry_run_use_same_plan(self) -> None:
-        config = PipelineConfig(command="test",
-                                endpoint="https://example.com",
-                                agency="AGENCY",
-                                dataflow="FLOW",
-                                dataset_prefix="demo",
-                                working_dir=self._tmpdir,
-                                verbose=True)
+        config = PipelineConfig(
+            sdmx=SdmxConfig(
+                endpoint="https://example.com",
+                agency="AGENCY",
+                dataflow=SdmxDataflowConfig(id="FLOW"),
+            ),
+            run=RunConfig(
+                command="test",
+                dataset_prefix="demo",
+                working_dir=self._tmpdir,
+                verbose=True,
+            ),
+        )
         step = DownloadMetadataStep(name="test-step", config=config)
 
         with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
@@ -652,15 +694,23 @@ class SdmxStepTest(unittest.TestCase):
             self.assertTrue(kwargs["verbose"])
 
     def test_download_data_step_caches_plan(self) -> None:
-        config = PipelineConfig(command="test",
-                                endpoint="https://example.com",
-                                agency="AGENCY",
-                                dataflow="FLOW",
-                                dataflow_key="test-key",
-                                dataflow_param="area=US",
-                                dataset_prefix="demo",
-                                working_dir=self._tmpdir,
-                                verbose=True)
+        config = PipelineConfig(
+            sdmx=SdmxConfig(
+                endpoint="https://example.com",
+                agency="AGENCY",
+                dataflow=SdmxDataflowConfig(
+                    id="FLOW",
+                    key="test-key",
+                    param="area=US",
+                ),
+            ),
+            run=RunConfig(
+                command="test",
+                dataset_prefix="demo",
+                working_dir=self._tmpdir,
+                verbose=True,
+            ),
+        )
         step = DownloadDataStep(name="test-step", config=config)
 
         # First call creates plan
@@ -675,13 +725,19 @@ class SdmxStepTest(unittest.TestCase):
         self.assertIs(plan1, plan2)
 
     def test_download_data_step_run_and_dry_run_use_same_plan(self) -> None:
-        config = PipelineConfig(command="test",
-                                endpoint="https://example.com",
-                                agency="AGENCY",
-                                dataflow="FLOW",
-                                dataset_prefix="demo",
-                                working_dir=self._tmpdir,
-                                verbose=True)
+        config = PipelineConfig(
+            sdmx=SdmxConfig(
+                endpoint="https://example.com",
+                agency="AGENCY",
+                dataflow=SdmxDataflowConfig(id="FLOW"),
+            ),
+            run=RunConfig(
+                command="test",
+                dataset_prefix="demo",
+                working_dir=self._tmpdir,
+                verbose=True,
+            ),
+        )
         step = DownloadDataStep(name="test-step", config=config)
 
         with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
@@ -702,6 +758,63 @@ class SdmxStepTest(unittest.TestCase):
             mock_run_cmd.assert_called_once()
             args, kwargs = mock_run_cmd.call_args
             self.assertIn("download-data", args[0])
+            self.assertTrue(kwargs["verbose"])
+
+    def test_create_sample_step_caches_plan(self) -> None:
+        config = PipelineConfig(
+            run=RunConfig(
+                command="test",
+                dataset_prefix="demo",
+                working_dir=self._tmpdir,
+                verbose=True,
+            ),
+            sample=SampleConfig(rows=500),
+        )
+        step = CreateSampleStep(name="test-step", config=config)
+
+        # First call creates plan
+        plan1 = step._prepare_command()
+        self.assertIn("data_sampler.py", plan1.full_command[1])
+        self.assertIn("--sampler_output_rows=500", plan1.full_command)
+
+        # Second call returns same object
+        plan2 = step._prepare_command()
+        self.assertIs(plan1, plan2)
+
+    def test_create_sample_step_run_and_dry_run_use_same_plan(self) -> None:
+        config = PipelineConfig(
+            run=RunConfig(
+                command="test",
+                dataset_prefix="demo",
+                working_dir=self._tmpdir,
+                verbose=True,
+            ),
+            sample=SampleConfig(rows=500),
+        )
+        step = CreateSampleStep(name="test-step", config=config)
+
+        # Create dummy input file
+        input_path = Path(self._tmpdir) / "demo_data.csv"
+        input_path.write_text("header\nrow1")
+
+        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
+                       ) as mock_run_cmd:
+            with self.assertLogs(logging.get_absl_logger(),
+                                 level="INFO") as logs:
+                step.dry_run()
+                step.run()
+
+            # Verify dry_run logged the command
+            self.assertTrue(
+                any("test-step (dry run): would run" in entry
+                    for entry in logs.output))
+            self.assertTrue(
+                any("data_sampler.py" in entry for entry in logs.output))
+
+            # Verify run called the command with the same args
+            mock_run_cmd.assert_called_once()
+            args, kwargs = mock_run_cmd.call_args
+            self.assertIn("data_sampler.py", args[0][1])
             self.assertTrue(kwargs["verbose"])
 
 

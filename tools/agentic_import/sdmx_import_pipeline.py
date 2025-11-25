@@ -23,6 +23,7 @@ import re
 import shlex
 import subprocess
 import sys
+import dataclasses
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -35,6 +36,15 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 SDMX_CLI_PATH = REPO_ROOT / "tools" / "sdmx_import" / "sdmx_cli.py"
+DATA_SAMPLER_PATH = REPO_ROOT / "tools" / "statvar_importer" / "data_sampler.py"
+
+# Flag names
+_FLAG_SDMX_ENDPOINT = "sdmx.endpoint"
+_FLAG_SDMX_AGENCY = "sdmx.agency"
+_FLAG_SDMX_DATAFLOW_ID = "sdmx.dataflow.id"
+_FLAG_SDMX_DATAFLOW_KEY = "sdmx.dataflow.key"
+_FLAG_SDMX_DATAFLOW_PARAM = "sdmx.dataflow.param"
+_FLAG_SAMPLE_ROWS = "sample.rows"
 
 from tools.agentic_import.pipeline import (CompositeCallback, Pipeline,
                                            PipelineAbort, PipelineCallback,
@@ -70,21 +80,26 @@ def _run_sdmx_cli(args: Sequence[str], *, verbose: bool) -> None:
 
 
 def _define_flags() -> None:
-    flags.DEFINE_string("endpoint", None, "SDMX service endpoint.")
-    flags.mark_flag_as_required("endpoint")
+    flags.DEFINE_string(_FLAG_SDMX_ENDPOINT, None, "SDMX service endpoint.")
+    flags.mark_flag_as_required(_FLAG_SDMX_ENDPOINT)
 
-    flags.DEFINE_string("agency", None, "Owning SDMX agency identifier.")
-    flags.mark_flag_as_required("agency")
+    flags.DEFINE_string(_FLAG_SDMX_AGENCY, None,
+                        "Owning SDMX agency identifier.")
+    flags.mark_flag_as_required(_FLAG_SDMX_AGENCY)
 
-    flags.DEFINE_string("dataflow", None, "Target SDMX dataflow identifier.")
-    flags.mark_flag_as_required("dataflow")
+    flags.DEFINE_string(_FLAG_SDMX_DATAFLOW_ID, None,
+                        "Target SDMX dataflow identifier.")
+    flags.mark_flag_as_required(_FLAG_SDMX_DATAFLOW_ID)
 
-    flags.DEFINE_string("dataflow_key", None, "Optional SDMX key or filter.")
-    flags.DEFINE_alias("key", "dataflow_key")
+    flags.DEFINE_string(_FLAG_SDMX_DATAFLOW_KEY, None,
+                        "Optional SDMX key or filter.")
 
     flags.DEFINE_string(
-        "dataflow_param", None,
+        _FLAG_SDMX_DATAFLOW_PARAM, None,
         "Optional SDMX parameter appended to the dataflow query.")
+
+    flags.DEFINE_integer(_FLAG_SAMPLE_ROWS, 1000,
+                         "Number of rows to sample from downloaded data.")
 
     flags.DEFINE_string(
         "dataset_prefix", None,
@@ -207,25 +222,45 @@ def build_pipeline_callback(
 
 
 @dataclass(frozen=True)
-class PipelineConfig:
-    """User-configurable inputs that mimic planned CLI flags.
+class SdmxDataflowConfig:
+    """Configuration for SDMX dataflow."""
+    id: str | None = None
+    key: str | None = None
+    param: str | None = None
 
-    This is a lightweight container; CLI parsing will be added in a later
-    phase. Defaults are intentionally minimal.
-    """
 
-    command: str
+@dataclass(frozen=True)
+class SdmxConfig:
+    """Configuration for SDMX data access."""
     endpoint: str | None = None
     agency: str | None = None
-    dataflow: str | None = None
-    dataflow_key: str | None = None
-    dataflow_param: str | None = None
+    dataflow: SdmxDataflowConfig = field(default_factory=SdmxDataflowConfig)
+
+
+@dataclass(frozen=True)
+class SampleConfig:
+    """Configuration for data sampling."""
+    rows: int = 1000
+
+
+@dataclass(frozen=True)
+class RunConfig:
+    """Configuration for pipeline execution."""
+    command: str
     dataset_prefix: str | None = None
-    working_dir: str | None = None  # TODO: Add CLI flag once semantics stabilize.
+    working_dir: str | None = None
     run_only: str | None = None
     force: bool = False
     verbose: bool = False
     skip_confirmation: bool = False
+
+
+@dataclass(frozen=True)
+class PipelineConfig:
+    """Aggregated configuration for the pipeline."""
+    sdmx: SdmxConfig = field(default_factory=SdmxConfig)
+    sample: SampleConfig = field(default_factory=SampleConfig)
+    run: RunConfig = field(default_factory=lambda: RunConfig(command="python"))
 
 
 @dataclass(frozen=True)
@@ -282,13 +317,14 @@ class DownloadDataStep(SdmxStep):
     def _prepare_command(self) -> CommandPlan:
         if self._plan:
             return self._plan
-        endpoint = _require_config_field(self._config.endpoint, "endpoint",
-                                         self.name)
-        agency = _require_config_field(self._config.agency, "agency", self.name)
-        dataflow = _require_config_field(self._config.dataflow, "dataflow",
-                                         self.name)
-        dataset_prefix = _resolve_dataset_prefix(self._config)
-        working_dir = _resolve_working_dir(self._config)
+        endpoint = _require_config_field(self._config.sdmx.endpoint,
+                                         _FLAG_SDMX_ENDPOINT, self.name)
+        agency = _require_config_field(self._config.sdmx.agency,
+                                       _FLAG_SDMX_AGENCY, self.name)
+        dataflow = _require_config_field(self._config.sdmx.dataflow.id,
+                                         _FLAG_SDMX_DATAFLOW_ID, self.name)
+        dataset_prefix = self._config.run.dataset_prefix
+        working_dir = Path(self._config.run.working_dir)
         output_path = working_dir / f"{dataset_prefix}_data.csv"
         args = [
             "download-data",
@@ -297,11 +333,11 @@ class DownloadDataStep(SdmxStep):
             f"--dataflow={dataflow}",
             f"--output_path={output_path}",
         ]
-        if self._config.dataflow_key:
-            args.append(f"--key={self._config.dataflow_key}")
-        if self._config.dataflow_param:
-            args.append(f"--param={self._config.dataflow_param}")
-        if self._config.verbose:
+        if self._config.sdmx.dataflow.key:
+            args.append(f"--key={self._config.sdmx.dataflow.key}")
+        if self._config.sdmx.dataflow.param:
+            args.append(f"--param={self._config.sdmx.dataflow.param}")
+        if self._config.run.verbose:
             args.append("--verbose")
         full_command = [sys.executable, str(SDMX_CLI_PATH)] + args
         self._plan = CommandPlan(full_command=full_command,
@@ -310,13 +346,13 @@ class DownloadDataStep(SdmxStep):
 
     def run(self) -> None:
         plan = self._prepare_command()
-        if self._config.verbose:
+        if self._config.run.verbose:
             logging.info(
                 f"Starting SDMX data download: {' '.join(plan.full_command)} -> {plan.output_path}"
             )
         else:
             logging.info(f"Downloading SDMX data to {plan.output_path}")
-        _run_command(plan.full_command, verbose=self._config.verbose)
+        _run_command(plan.full_command, verbose=self._config.run.verbose)
 
     def dry_run(self) -> None:
         plan = self._prepare_command()
@@ -336,13 +372,14 @@ class DownloadMetadataStep(SdmxStep):
     def _prepare_command(self) -> CommandPlan:
         if self._plan:
             return self._plan
-        endpoint = _require_config_field(self._config.endpoint, "endpoint",
-                                         self.name)
-        agency = _require_config_field(self._config.agency, "agency", self.name)
-        dataflow = _require_config_field(self._config.dataflow, "dataflow",
-                                         self.name)
-        dataset_prefix = _resolve_dataset_prefix(self._config)
-        working_dir = _resolve_working_dir(self._config)
+        endpoint = _require_config_field(self._config.sdmx.endpoint,
+                                         _FLAG_SDMX_ENDPOINT, self.name)
+        agency = _require_config_field(self._config.sdmx.agency,
+                                       _FLAG_SDMX_AGENCY, self.name)
+        dataflow = _require_config_field(self._config.sdmx.dataflow.id,
+                                         _FLAG_SDMX_DATAFLOW_ID, self.name)
+        dataset_prefix = self._config.run.dataset_prefix
+        working_dir = Path(self._config.run.working_dir)
         output_path = working_dir / f"{dataset_prefix}_metadata.xml"
         args = [
             "download-metadata",
@@ -351,7 +388,7 @@ class DownloadMetadataStep(SdmxStep):
             f"--dataflow={dataflow}",
             f"--output_path={output_path}",
         ]
-        if self._config.verbose:
+        if self._config.run.verbose:
             args.append("--verbose")
         full_command = [sys.executable, str(SDMX_CLI_PATH)] + args
         self._plan = CommandPlan(full_command=full_command,
@@ -360,13 +397,13 @@ class DownloadMetadataStep(SdmxStep):
 
     def run(self) -> None:
         plan = self._prepare_command()
-        if self._config.verbose:
+        if self._config.run.verbose:
             logging.info(
                 f"Starting SDMX metadata download: {' '.join(plan.full_command)} -> {plan.output_path}"
             )
         else:
             logging.info(f"Downloading SDMX metadata to {plan.output_path}")
-        _run_command(plan.full_command, verbose=self._config.verbose)
+        _run_command(plan.full_command, verbose=self._config.run.verbose)
 
     def dry_run(self) -> None:
         plan = self._prepare_command()
@@ -381,13 +418,52 @@ class CreateSampleStep(SdmxStep):
 
     def __init__(self, *, name: str, config: PipelineConfig) -> None:
         super().__init__(name=name, version=self.VERSION, config=config)
+        self._plan: CommandPlan | None = None
+
+    def _prepare_command(self) -> CommandPlan:
+        if self._plan:
+            return self._plan
+        dataset_prefix = self._config.run.dataset_prefix
+        working_dir = Path(self._config.run.working_dir)
+        input_path = working_dir / f"{dataset_prefix}_data.csv"
+        output_path = working_dir / f"{dataset_prefix}_sample.csv"
+
+        # Check input file existence before running, but allow plan creation.
+        # In a real run, this will fail early if download-data didn't run.
+        args = [
+            f"--sampler_input={input_path}",
+            f"--sampler_output={output_path}",
+            f"--sampler_output_rows={self._config.sample.rows}",
+        ]
+        full_command = [sys.executable, str(DATA_SAMPLER_PATH)] + args
+        self._plan = CommandPlan(full_command=full_command,
+                                 output_path=output_path)
+        return self._plan
 
     def run(self) -> None:
-        logging.info(
-            f"{self.name}: no-op implementation for VERSION={self.VERSION}")
+        plan = self._prepare_command()
+        # Find input path from command args
+        input_path_arg = next((arg for arg in plan.full_command
+                               if arg.startswith("--sampler_input=")), None)
+        if not input_path_arg:
+            raise RuntimeError("Could not find sampler_input in command")
+        input_path = Path(input_path_arg.split("=")[1])
+
+        if not input_path.is_file():
+            raise RuntimeError(f"Input file missing for sampling: {input_path}")
+
+        if self._config.run.verbose:
+            logging.info(
+                f"Starting data sampling: {' '.join(plan.full_command)} -> {plan.output_path}"
+            )
+        else:
+            logging.info(f"Sampling data to {plan.output_path}")
+        _run_command(plan.full_command, verbose=self._config.run.verbose)
 
     def dry_run(self) -> None:
-        logging.info(f"{self.name} (dry run): previewing sample generation")
+        plan = self._prepare_command()
+        logging.info(
+            f"{self.name} (dry run): would run {' '.join(plan.full_command)}")
 
 
 class CreateSchemaMapStep(SdmxStep):
@@ -453,9 +529,9 @@ class PipelineBuilder:
         self._critical_input_hash = critical_input_hash
 
     def build(self) -> BuildResult:
-        if self._config.run_only:
-            planned, decisions = self._plan_run_only(self._config.run_only)
-        elif self._config.force:
+        if self._config.run.run_only:
+            planned, decisions = self._plan_run_only(self._config.run.run_only)
+        elif self._config.run.force:
             logging.info("Force flag set; scheduling all SDMX steps")
             planned, decisions = self._plan_all_steps(
                 "Force flag set; scheduling this step")
@@ -630,12 +706,13 @@ def _sanitize_run_id(dataflow: str) -> str:
 
 
 def _resolve_dataset_prefix(config: PipelineConfig) -> str:
-    if config.dataset_prefix:
-        return config.dataset_prefix
-    if not config.dataflow:
+    if config.run.dataset_prefix:
+        return config.run.dataset_prefix
+    if not config.sdmx.dataflow.id:
         raise ValueError(
-            "dataflow or dataset_prefix is required to derive dataset prefix")
-    sanitized = _sanitize_run_id(config.dataflow)
+            "dataflow.id or dataset_prefix is required to derive dataset prefix"
+        )
+    sanitized = _sanitize_run_id(config.sdmx.dataflow.id)
     if not sanitized:
         raise ValueError("dataflow value is invalid after sanitization")
     return sanitized
@@ -643,18 +720,18 @@ def _resolve_dataset_prefix(config: PipelineConfig) -> str:
 
 def _compute_critical_input_hash(config: PipelineConfig) -> str:
     payload = {
-        "agency": config.agency,
-        "dataflow": config.dataflow,
-        "endpoint": config.endpoint,
-        "dataflow_key": config.dataflow_key,
-        "dataflow_param": config.dataflow_param,
+        _FLAG_SDMX_AGENCY: config.sdmx.agency,
+        _FLAG_SDMX_DATAFLOW_ID: config.sdmx.dataflow.id,
+        _FLAG_SDMX_ENDPOINT: config.sdmx.endpoint,
+        _FLAG_SDMX_DATAFLOW_KEY: config.sdmx.dataflow.key,
+        _FLAG_SDMX_DATAFLOW_PARAM: config.sdmx.dataflow.param,
     }
     serialized = json.dumps(payload, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
 
 
 def _resolve_working_dir(config: PipelineConfig) -> Path:
-    directory = Path(config.working_dir or os.getcwd())
+    directory = Path(config.run.working_dir or os.getcwd())
     if directory.exists():
         if not directory.is_dir():
             raise ValueError(f"working_dir is not a directory: {directory}")
@@ -663,14 +740,25 @@ def _resolve_working_dir(config: PipelineConfig) -> Path:
     return directory
 
 
+def _resolve_config(config: PipelineConfig) -> PipelineConfig:
+    """Resolves dynamic configuration values and returns a new config."""
+    dataset_prefix = _resolve_dataset_prefix(config)
+    working_dir = _resolve_working_dir(config)
+    new_run = dataclasses.replace(config.run,
+                                  dataset_prefix=dataset_prefix,
+                                  working_dir=str(working_dir))
+    return dataclasses.replace(config, run=new_run)
+
+
 def run_sdmx_pipeline(
     *,
     config: PipelineConfig,
     now_fn: Callable[[], datetime] | None = None,
 ) -> None:
     """Orchestrates the SDMX pipeline for the provided configuration."""
-    working_dir = _resolve_working_dir(config)
-    dataset_prefix = _resolve_dataset_prefix(config)
+    resolved_config = _resolve_config(config)
+    working_dir = Path(resolved_config.run.working_dir)
+    dataset_prefix = resolved_config.run.dataset_prefix
     state_handler = StateHandler(
         state_path=working_dir / ".datacommons" /
         f"{dataset_prefix}.state.json",
@@ -679,19 +767,19 @@ def run_sdmx_pipeline(
     state = state_handler.get_state()
     # Snapshot state for planning so callback mutations do not affect scheduling.
     state_snapshot = copy.deepcopy(state)
-    critical_hash = _compute_critical_input_hash(config)
-    pipeline = build_sdmx_pipeline(config=config,
+    critical_hash = _compute_critical_input_hash(resolved_config)
+    pipeline = build_sdmx_pipeline(config=resolved_config,
                                    state=state_snapshot,
                                    critical_input_hash=critical_hash)
     callback = build_pipeline_callback(
         state_handler=state_handler,
         dataset_prefix=dataset_prefix,
         critical_input_hash=critical_hash,
-        command=config.command,
-        skip_confirmation=config.skip_confirmation,
+        command=resolved_config.run.command,
+        skip_confirmation=resolved_config.run.skip_confirmation,
         now_fn=now_fn,
     )
-    if config.verbose:
+    if resolved_config.run.verbose:
         logging.set_verbosity(logging.DEBUG)
     runner = PipelineRunner(RunnerConfig())
     runner.run(pipeline, callback)
@@ -699,20 +787,29 @@ def run_sdmx_pipeline(
 
 def prepare_config() -> PipelineConfig:
     """Builds PipelineConfig from CLI flags."""
+    # absl.flags doesn't support dots in attribute access easily,
+    # so we access the flag values directly from the flag names.
     command = shlex.join(sys.argv) if sys.argv else "python"
     return PipelineConfig(
-        command=command,
-        endpoint=FLAGS.endpoint,
-        agency=FLAGS.agency,
-        dataflow=FLAGS.dataflow,
-        dataflow_key=FLAGS.dataflow_key,
-        dataflow_param=FLAGS.dataflow_param,
-        dataset_prefix=FLAGS.dataset_prefix,
-        working_dir=None,
-        run_only=FLAGS.run_only,
-        force=FLAGS.force,
-        verbose=FLAGS.verbose,
-        skip_confirmation=FLAGS.skip_confirmation,
+        sdmx=SdmxConfig(
+            endpoint=FLAGS[_FLAG_SDMX_ENDPOINT].value,
+            agency=FLAGS[_FLAG_SDMX_AGENCY].value,
+            dataflow=SdmxDataflowConfig(
+                id=FLAGS[_FLAG_SDMX_DATAFLOW_ID].value,
+                key=FLAGS[_FLAG_SDMX_DATAFLOW_KEY].value,
+                param=FLAGS[_FLAG_SDMX_DATAFLOW_PARAM].value,
+            ),
+        ),
+        sample=SampleConfig(rows=FLAGS[_FLAG_SAMPLE_ROWS].value,),
+        run=RunConfig(
+            command=command,
+            dataset_prefix=FLAGS.dataset_prefix,
+            working_dir=None,
+            run_only=FLAGS.run_only,
+            force=FLAGS.force,
+            verbose=FLAGS.verbose,
+            skip_confirmation=FLAGS.skip_confirmation,
+        ),
     )
 
 
