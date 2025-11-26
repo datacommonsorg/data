@@ -36,6 +36,12 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from tools.agentic_import.pipeline import (CompositeCallback, Pipeline,
+                                           PipelineAbort, PipelineCallback,
+                                           PipelineRunner, RunnerConfig, Step)
+from tools.agentic_import.state_handler import (PipelineState, StateHandler,
+                                                StepState)
+
 SDMX_CLI_PATH = REPO_ROOT / "tools" / "sdmx_import" / "sdmx_cli.py"
 DATA_SAMPLER_PATH = REPO_ROOT / "tools" / "statvar_importer" / "data_sampler.py"
 STAT_VAR_PROCESSOR_PATH = (REPO_ROOT / "tools" / "statvar_importer" /
@@ -54,12 +60,6 @@ _FLAG_SDMX_DATAFLOW_ID = "sdmx.dataflow.id"
 _FLAG_SDMX_DATAFLOW_KEY = "sdmx.dataflow.key"
 _FLAG_SDMX_DATAFLOW_PARAM = "sdmx.dataflow.param"
 _FLAG_SAMPLE_ROWS = "sample.rows"
-
-from tools.agentic_import.pipeline import (CompositeCallback, Pipeline,
-                                           PipelineAbort, PipelineCallback,
-                                           PipelineRunner, RunnerConfig, Step)
-from tools.agentic_import.state_handler import (PipelineState, StateHandler,
-                                                StepState)
 
 FLAGS = flags.FLAGS
 
@@ -878,9 +878,9 @@ def build_sdmx_pipeline(*,
                         critical_input_hash: str | None = None) -> Pipeline:
     builder_steps = steps if steps is not None else build_steps(config)
     builder = PipelineBuilder(config=config,
-                               state=state,
-                               steps=builder_steps,
-                               critical_input_hash=critical_input_hash)
+                              state=state,
+                              steps=builder_steps,
+                              critical_input_hash=critical_input_hash)
     result = builder.build()
     _log_step_decisions(result.decisions)
     return result.pipeline
