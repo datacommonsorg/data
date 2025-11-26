@@ -64,6 +64,69 @@ from tools.agentic_import.state_handler import (PipelineState, StateHandler,
 FLAGS = flags.FLAGS
 
 
+@dataclass(frozen=True)
+class SdmxDataflowConfig:
+    """Configuration for SDMX dataflow."""
+    id: str | None = None
+    key: str | None = None
+    param: str | None = None
+
+
+@dataclass(frozen=True)
+class SdmxConfig:
+    """Configuration for SDMX data access."""
+    endpoint: str | None = None
+    agency: str | None = None
+    dataflow: SdmxDataflowConfig = field(default_factory=SdmxDataflowConfig)
+
+
+@dataclass(frozen=True)
+class SampleConfig:
+    """Configuration for data sampling."""
+    rows: int = 1000
+
+
+@dataclass(frozen=True)
+class RunConfig:
+    """Configuration for pipeline execution."""
+    command: str
+    dataset_prefix: str | None = None
+    working_dir: str | None = None
+    run_only: str | None = None
+    force: bool = False
+    verbose: bool = False
+    skip_confirmation: bool = False
+    gemini_cli: str | None = None
+
+
+@dataclass(frozen=True)
+class PipelineConfig:
+    """Aggregated configuration for the pipeline."""
+    sdmx: SdmxConfig = field(default_factory=SdmxConfig)
+    sample: SampleConfig = field(default_factory=SampleConfig)
+    run: RunConfig = field(default_factory=lambda: RunConfig(command="python"))
+
+
+@dataclass(frozen=True)
+class StepDecision:
+    """Represents whether a step will run and why."""
+
+    RUN: ClassVar[str] = "RUN"
+    SKIP: ClassVar[str] = "SKIP"
+
+    step_name: str
+    decision: str
+    reason: str
+
+
+@dataclass(frozen=True)
+class BuildResult:
+    """Output of planning that includes the pipeline and per-step decisions."""
+
+    pipeline: Pipeline
+    decisions: list[StepDecision]
+
+
 def _require_config_field(value: str | None, field: str, step_name: str) -> str:
     if value:
         return value
@@ -81,50 +144,62 @@ def _run_sdmx_cli(args: Sequence[str], *, verbose: bool) -> None:
     _run_command(command, verbose=verbose)
 
 
-def _define_flags() -> None:
-    flags.DEFINE_string(_FLAG_SDMX_ENDPOINT, None, "SDMX service endpoint.")
-    flags.mark_flag_as_required(_FLAG_SDMX_ENDPOINT)
-
-    flags.DEFINE_string(_FLAG_SDMX_AGENCY, None,
-                        "Owning SDMX agency identifier.")
-    flags.mark_flag_as_required(_FLAG_SDMX_AGENCY)
-
-    flags.DEFINE_string(_FLAG_SDMX_DATAFLOW_ID, None,
-                        "Target SDMX dataflow identifier.")
-    flags.mark_flag_as_required(_FLAG_SDMX_DATAFLOW_ID)
-
-    flags.DEFINE_string(_FLAG_SDMX_DATAFLOW_KEY, None,
-                        "Optional SDMX key or filter.")
-
-    flags.DEFINE_string(
-        _FLAG_SDMX_DATAFLOW_PARAM, None,
-        "Optional SDMX parameter appended to the dataflow query.")
-
-    flags.DEFINE_integer(_FLAG_SAMPLE_ROWS, 1000,
-                         "Number of rows to sample from downloaded data.")
-
-    flags.DEFINE_string(
-        "dataset_prefix", None,
-        "Optional dataset prefix to override auto-derived values.")
-
-    flags.DEFINE_string("run_only", None,
-                        "Execute only a specific pipeline step by name.")
-
-    flags.DEFINE_boolean("force", False, "Force all steps to run.")
-
-    flags.DEFINE_boolean("verbose", False, "Enable verbose logging.")
-
-    flags.DEFINE_boolean("skip_confirmation", False,
-                         "Skip interactive confirmation prompts.")
-
-    flags.DEFINE_string("gemini_cli", "gemini",
-                        "Path to Gemini CLI executable.")
-
-
 def _format_time(value: datetime) -> str:
     if value.tzinfo is None:
         value = value.replace(tzinfo=timezone.utc)
     return value.isoformat()
+
+
+def _sanitize_run_id(dataflow: str) -> str:
+    normalized = dataflow.lower()
+    normalized = re.sub(r"[^a-z0-9_]+", "_", normalized)
+    normalized = re.sub(r"_+", "_", normalized)
+    return normalized.strip("_")
+
+
+def _resolve_dataset_prefix(config: PipelineConfig) -> str:
+    if config.run.dataset_prefix:
+        return config.run.dataset_prefix
+    if not config.sdmx.dataflow.id:
+        raise ValueError(
+            "dataflow.id or dataset_prefix is required to derive dataset prefix"
+        )
+    sanitized = _sanitize_run_id(config.sdmx.dataflow.id)
+    if not sanitized:
+        raise ValueError("dataflow value is invalid after sanitization")
+    return sanitized
+
+
+def _compute_critical_input_hash(config: PipelineConfig) -> str:
+    payload = {
+        _FLAG_SDMX_AGENCY: config.sdmx.agency,
+        _FLAG_SDMX_DATAFLOW_ID: config.sdmx.dataflow.id,
+        _FLAG_SDMX_ENDPOINT: config.sdmx.endpoint,
+        _FLAG_SDMX_DATAFLOW_KEY: config.sdmx.dataflow.key,
+        _FLAG_SDMX_DATAFLOW_PARAM: config.sdmx.dataflow.param,
+    }
+    serialized = json.dumps(payload, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
+
+
+def _resolve_working_dir(config: PipelineConfig) -> Path:
+    directory = Path(config.run.working_dir or os.getcwd())
+    if directory.exists():
+        if not directory.is_dir():
+            raise ValueError(f"working_dir is not a directory: {directory}")
+    else:
+        directory.mkdir(parents=True, exist_ok=True)
+    return directory
+
+
+def _resolve_config(config: PipelineConfig) -> PipelineConfig:
+    """Resolves dynamic configuration values and returns a new config."""
+    dataset_prefix = _resolve_dataset_prefix(config)
+    working_dir = _resolve_working_dir(config)
+    new_run = dataclasses.replace(config.run,
+                                  dataset_prefix=dataset_prefix,
+                                  working_dir=str(working_dir))
+    return dataclasses.replace(config, run=new_run)
 
 
 class InteractiveCallback(PipelineCallback):
@@ -225,69 +300,6 @@ def build_pipeline_callback(
         return json_callback
     interactive = InteractiveCallback()
     return CompositeCallback([interactive, json_callback])
-
-
-@dataclass(frozen=True)
-class SdmxDataflowConfig:
-    """Configuration for SDMX dataflow."""
-    id: str | None = None
-    key: str | None = None
-    param: str | None = None
-
-
-@dataclass(frozen=True)
-class SdmxConfig:
-    """Configuration for SDMX data access."""
-    endpoint: str | None = None
-    agency: str | None = None
-    dataflow: SdmxDataflowConfig = field(default_factory=SdmxDataflowConfig)
-
-
-@dataclass(frozen=True)
-class SampleConfig:
-    """Configuration for data sampling."""
-    rows: int = 1000
-
-
-@dataclass(frozen=True)
-class RunConfig:
-    """Configuration for pipeline execution."""
-    command: str
-    dataset_prefix: str | None = None
-    working_dir: str | None = None
-    run_only: str | None = None
-    force: bool = False
-    verbose: bool = False
-    skip_confirmation: bool = False
-    gemini_cli: str | None = None
-
-
-@dataclass(frozen=True)
-class PipelineConfig:
-    """Aggregated configuration for the pipeline."""
-    sdmx: SdmxConfig = field(default_factory=SdmxConfig)
-    sample: SampleConfig = field(default_factory=SampleConfig)
-    run: RunConfig = field(default_factory=lambda: RunConfig(command="python"))
-
-
-@dataclass(frozen=True)
-class StepDecision:
-    """Represents whether a step will run and why."""
-
-    RUN: ClassVar[str] = "RUN"
-    SKIP: ClassVar[str] = "SKIP"
-
-    step_name: str
-    decision: str
-    reason: str
-
-
-@dataclass(frozen=True)
-class BuildResult:
-    """Output of planning that includes the pipeline and per-step decisions."""
-
-    pipeline: Pipeline
-    decisions: list[StepDecision]
 
 
 class SdmxStep(Step):
@@ -866,64 +878,12 @@ def build_sdmx_pipeline(*,
                         critical_input_hash: str | None = None) -> Pipeline:
     builder_steps = steps if steps is not None else build_steps(config)
     builder = PipelineBuilder(config=config,
-                              state=state,
-                              steps=builder_steps,
-                              critical_input_hash=critical_input_hash)
+                               state=state,
+                               steps=builder_steps,
+                               critical_input_hash=critical_input_hash)
     result = builder.build()
     _log_step_decisions(result.decisions)
     return result.pipeline
-
-
-def _sanitize_run_id(dataflow: str) -> str:
-    normalized = dataflow.lower()
-    normalized = re.sub(r"[^a-z0-9_]+", "_", normalized)
-    normalized = re.sub(r"_+", "_", normalized)
-    return normalized.strip("_")
-
-
-def _resolve_dataset_prefix(config: PipelineConfig) -> str:
-    if config.run.dataset_prefix:
-        return config.run.dataset_prefix
-    if not config.sdmx.dataflow.id:
-        raise ValueError(
-            "dataflow.id or dataset_prefix is required to derive dataset prefix"
-        )
-    sanitized = _sanitize_run_id(config.sdmx.dataflow.id)
-    if not sanitized:
-        raise ValueError("dataflow value is invalid after sanitization")
-    return sanitized
-
-
-def _compute_critical_input_hash(config: PipelineConfig) -> str:
-    payload = {
-        _FLAG_SDMX_AGENCY: config.sdmx.agency,
-        _FLAG_SDMX_DATAFLOW_ID: config.sdmx.dataflow.id,
-        _FLAG_SDMX_ENDPOINT: config.sdmx.endpoint,
-        _FLAG_SDMX_DATAFLOW_KEY: config.sdmx.dataflow.key,
-        _FLAG_SDMX_DATAFLOW_PARAM: config.sdmx.dataflow.param,
-    }
-    serialized = json.dumps(payload, sort_keys=True, separators=(",", ":"))
-    return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
-
-
-def _resolve_working_dir(config: PipelineConfig) -> Path:
-    directory = Path(config.run.working_dir or os.getcwd())
-    if directory.exists():
-        if not directory.is_dir():
-            raise ValueError(f"working_dir is not a directory: {directory}")
-    else:
-        directory.mkdir(parents=True, exist_ok=True)
-    return directory
-
-
-def _resolve_config(config: PipelineConfig) -> PipelineConfig:
-    """Resolves dynamic configuration values and returns a new config."""
-    dataset_prefix = _resolve_dataset_prefix(config)
-    working_dir = _resolve_working_dir(config)
-    new_run = dataclasses.replace(config.run,
-                                  dataset_prefix=dataset_prefix,
-                                  working_dir=str(working_dir))
-    return dataclasses.replace(config, run=new_run)
 
 
 def run_sdmx_pipeline(
@@ -988,6 +948,46 @@ def prepare_config() -> PipelineConfig:
             gemini_cli=FLAGS.gemini_cli,
         ),
     )
+
+
+def _define_flags() -> None:
+    flags.DEFINE_string(_FLAG_SDMX_ENDPOINT, None, "SDMX service endpoint.")
+    flags.mark_flag_as_required(_FLAG_SDMX_ENDPOINT)
+
+    flags.DEFINE_string(_FLAG_SDMX_AGENCY, None,
+                        "Owning SDMX agency identifier.")
+    flags.mark_flag_as_required(_FLAG_SDMX_AGENCY)
+
+    flags.DEFINE_string(_FLAG_SDMX_DATAFLOW_ID, None,
+                        "Target SDMX dataflow identifier.")
+    flags.mark_flag_as_required(_FLAG_SDMX_DATAFLOW_ID)
+
+    flags.DEFINE_string(_FLAG_SDMX_DATAFLOW_KEY, None,
+                        "Optional SDMX key or filter.")
+
+    flags.DEFINE_string(
+        _FLAG_SDMX_DATAFLOW_PARAM, None,
+        "Optional SDMX parameter appended to the dataflow query.")
+
+    flags.DEFINE_integer(_FLAG_SAMPLE_ROWS, 1000,
+                         "Number of rows to sample from downloaded data.")
+
+    flags.DEFINE_string(
+        "dataset_prefix", None,
+        "Optional dataset prefix to override auto-derived values.")
+
+    flags.DEFINE_string("run_only", None,
+                        "Execute only a specific pipeline step by name.")
+
+    flags.DEFINE_boolean("force", False, "Force all steps to run.")
+
+    flags.DEFINE_boolean("verbose", False, "Enable verbose logging.")
+
+    flags.DEFINE_boolean("skip_confirmation", False,
+                         "Skip interactive confirmation prompts.")
+
+    flags.DEFINE_string("gemini_cli", "gemini",
+                        "Path to Gemini CLI executable.")
 
 
 def main(_: list[str]) -> int:
