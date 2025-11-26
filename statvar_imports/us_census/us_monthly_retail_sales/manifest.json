@@ -17,7 +17,7 @@
                     "cleaned_csv": "output/monthly_retail.csv"
                 }
             ],
-            "source_file": [
+            "source_files": [
                 "input_file/monthly_retail.xlsx"
             ],
             "cron_schedule": "30 05 * * 1"
