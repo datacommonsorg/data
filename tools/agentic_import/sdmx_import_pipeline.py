@@ -41,6 +41,8 @@ DATA_SAMPLER_PATH = REPO_ROOT / "tools" / "statvar_importer" / "data_sampler.py"
 STAT_VAR_PROCESSOR_PATH = (REPO_ROOT / "tools" / "statvar_importer" /
                            "stat_var_processor.py")
 PVMAP_GENERATOR_PATH = REPO_ROOT / "tools" / "agentic_import" / "pvmap_generator.py"
+DC_CONFIG_GENERATOR_PATH = (REPO_ROOT / "tools" / "agentic_import" /
+                            "generate_custom_dc_config.py")
 
 SAMPLE_OUTPUT_DIR = Path("sample_output")
 FINAL_OUTPUT_DIR = Path("output")
@@ -627,15 +629,66 @@ class CreateDcConfigStep(SdmxStep):
 
     VERSION = 1
 
+    @dataclass(frozen=True)
+    class _StepContext:
+        input_csv: Path
+        output_config: Path
+        full_command: list[str]
+
     def __init__(self, *, name: str, config: PipelineConfig) -> None:
         super().__init__(name=name, version=self.VERSION, config=config)
+        self._context: CreateDcConfigStep._StepContext | None = None
+
+    def _prepare_command(self) -> _StepContext:
+        if self._context:
+            return self._context
+        dataset_prefix = self._config.run.dataset_prefix
+        working_dir = Path(self._config.run.working_dir)
+        input_csv = working_dir / FINAL_OUTPUT_DIR / f"{dataset_prefix}.csv"
+        output_config = (working_dir / FINAL_OUTPUT_DIR /
+                         f"{dataset_prefix}_config.json")
+
+        endpoint = _require_config_field(self._config.sdmx.endpoint,
+                                         _FLAG_SDMX_ENDPOINT, self.name)
+        agency = _require_config_field(self._config.sdmx.agency,
+                                       _FLAG_SDMX_AGENCY, self.name)
+        dataflow = _require_config_field(self._config.sdmx.dataflow.id,
+                                         _FLAG_SDMX_DATAFLOW_ID, self.name)
+
+        dataset_url = (f"{endpoint.rstrip('/')}/data/"
+                       f"{agency},{dataflow},")
+
+        args = [
+            f"--input_csv={input_csv}",
+            f"--output_config={output_config}",
+            f"--provenance_name={dataflow}",
+            f"--source_name={agency}",
+            f"--data_source_url={endpoint}",
+            f"--dataset_url={dataset_url}",
+        ]
+        full_command = [sys.executable, str(DC_CONFIG_GENERATOR_PATH)] + args
+        self._context = CreateDcConfigStep._StepContext(
+            input_csv=input_csv,
+            output_config=output_config,
+            full_command=full_command)
+        return self._context
 
     def run(self) -> None:
+        context = self._prepare_command()
+        if not context.input_csv.is_file():
+            raise RuntimeError(
+                f"{self.name} requires existing input: {context.input_csv}")
+
         logging.info(
-            f"{self.name}: no-op implementation for VERSION={self.VERSION}")
+            f"Starting custom DC config generation: input={context.input_csv} -> {context.output_config}"
+        )
+        _run_command(context.full_command, verbose=self._config.run.verbose)
 
     def dry_run(self) -> None:
-        logging.info(f"{self.name} (dry run): previewing DC config creation")
+        context = self._prepare_command()
+        logging.info(
+            f"{self.name} (dry run): would run {' '.join(context.full_command)}"
+        )
 
 
 class PipelineBuilder:

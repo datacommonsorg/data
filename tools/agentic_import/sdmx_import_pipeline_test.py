@@ -47,8 +47,8 @@ from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=impor
     InteractiveCallback, JSONStateCallback, PipelineBuilder, PipelineConfig,
     StepDecision, build_pipeline_callback, build_sdmx_pipeline, build_steps,
     run_sdmx_pipeline, DownloadMetadataStep, DownloadDataStep, CreateSampleStep,
-    CreateSchemaMapStep, ProcessFullDataStep, _run_command, SdmxConfig,
-    SampleConfig, RunConfig, SdmxDataflowConfig, SdmxStep)
+    CreateSchemaMapStep, ProcessFullDataStep, CreateDcConfigStep, _run_command,
+    SdmxConfig, SampleConfig, RunConfig, SdmxDataflowConfig, SdmxStep)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
 
@@ -507,6 +507,10 @@ class RunPipelineTest(unittest.TestCase):
 
         # Create dummy files for ProcessFullDataStep
         self._create_test_input_files("demo")
+        # Create dummy output for ProcessFullDataStep to satisfy CreateDcConfigStep
+        output_dir = Path(self._tmpdir) / "output"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        (output_dir / "demo.csv").write_text("data")
 
         run_sdmx_pipeline(config=config, now_fn=clock)
 
@@ -548,6 +552,10 @@ class RunPipelineTest(unittest.TestCase):
         # Create test files for ProcessFullDataStep with sanitized name
         sanitized_prefix = "my_flow_name_2025"
         self._create_test_input_files(sanitized_prefix)
+        # Create dummy output for ProcessFullDataStep to satisfy CreateDcConfigStep
+        output_dir = Path(self._tmpdir) / "output"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        (output_dir / f"{sanitized_prefix}.csv").write_text("data")
 
         run_sdmx_pipeline(config=config,
                           now_fn=_IncrementingClock(
@@ -584,6 +592,10 @@ class RunPipelineTest(unittest.TestCase):
 
         # Create dummy files for ProcessFullDataStep
         self._create_test_input_files("demo")
+        # Create dummy output for ProcessFullDataStep to satisfy CreateDcConfigStep
+        output_dir = Path(self._tmpdir) / "output"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        (output_dir / "demo.csv").write_text("data")
 
         # Run 1 with original config
         run_sdmx_pipeline(config=config, now_fn=first_clock)
@@ -619,6 +631,10 @@ class RunPipelineTest(unittest.TestCase):
 
         # Create dummy files for ProcessFullDataStep
         self._create_test_input_files("demo")
+        # Create dummy output for ProcessFullDataStep to satisfy CreateDcConfigStep
+        output_dir = Path(self._tmpdir) / "output"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        (output_dir / "demo.csv").write_text("data")
 
         # Run 1
         run_sdmx_pipeline(config=config, now_fn=initial_clock)
@@ -643,6 +659,29 @@ class SdmxStepTest(unittest.TestCase):
         self._tmpdir_obj = tempfile.TemporaryDirectory()
         self.addCleanup(self._tmpdir_obj.cleanup)
         self._tmpdir = self._tmpdir_obj.name
+
+    def _create_test_input_files(self, prefix: str) -> None:
+        (Path(self._tmpdir) / f"{prefix}_data.csv").write_text("data")
+        (Path(self._tmpdir) / f"{prefix}_sample.csv").write_text("sample")
+        (Path(self._tmpdir) / f"{prefix}_metadata.xml").write_text("metadata")
+
+        sample_output_dir = Path(self._tmpdir) / "sample_output"
+        sample_output_dir.mkdir(parents=True, exist_ok=True)
+        (sample_output_dir / f"{prefix}_pvmap.csv").write_text("pvmap")
+        (sample_output_dir / f"{prefix}_metadata.csv").write_text("metadata")
+
+    def _build_config(self,
+                      dataset_prefix: str | None,
+                      endpoint: str = "https://example.com",
+                      agency: str = "AGENCY",
+                      dataflow: str = "FLOW") -> PipelineConfig:
+        return PipelineConfig(sdmx=SdmxConfig(
+            endpoint=endpoint,
+            agency=agency,
+            dataflow=SdmxDataflowConfig(id=dataflow)),
+                              run=RunConfig(command="test",
+                                            dataset_prefix=dataset_prefix,
+                                            working_dir=self._tmpdir))
 
     def _create_test_input_files(self, prefix: str) -> None:
         (Path(self._tmpdir) / f"{prefix}_data.csv").write_text("data")
@@ -1004,6 +1043,50 @@ class SdmxStepTest(unittest.TestCase):
             step.run()
         with self.assertRaises(RuntimeError):
             step.dry_run()
+
+    def test_create_dc_config_step_caches_plan(self) -> None:
+        config = self._build_config(dataset_prefix="demo",
+                                    endpoint="https://example.com",
+                                    agency="AGENCY",
+                                    dataflow="FLOW")
+        step = CreateDcConfigStep(name="test-step", config=config)
+        context1 = step._prepare_command()
+        context2 = step._prepare_command()
+        self.assertIs(context1, context2)
+
+    def test_create_dc_config_step_run_and_dry_run_use_same_plan(self) -> None:
+        config = self._build_config(dataset_prefix="demo",
+                                    endpoint="https://example.com",
+                                    agency="AGENCY",
+                                    dataflow="FLOW")
+        step = CreateDcConfigStep(name="test-step", config=config)
+
+        # Create test files
+        self._create_test_input_files("demo")
+        # Create final output dir and input csv
+        final_output_dir = Path(self._tmpdir) / "output"
+        final_output_dir.mkdir(parents=True, exist_ok=True)
+        (final_output_dir / "demo.csv").write_text("data")
+
+        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
+                       ) as mock_run_cmd:
+            step.run()
+            mock_run_cmd.assert_called_once()
+            args, kwargs = mock_run_cmd.call_args
+            command = args[0]
+            self.assertIn("generate_custom_dc_config.py", command[1])
+            self.assertIn(f"--input_csv={final_output_dir}/demo.csv", command)
+            self.assertIn(
+                f"--output_config={final_output_dir}/demo_config.json", command)
+            self.assertIn("--provenance_name=FLOW", command)
+            self.assertIn("--source_name=AGENCY", command)
+            self.assertIn("--data_source_url=https://example.com", command)
+            self.assertIn("--dataset_url=https://example.com/data/AGENCY,FLOW,",
+                          command)
+
+        with self.assertLogs(logging.get_absl_logger(), level="INFO") as cm:
+            step.dry_run()
+            self.assertTrue(any("would run" in msg for msg in cm.output))
 
 
 if __name__ == "__main__":
