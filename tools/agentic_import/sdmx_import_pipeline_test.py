@@ -826,11 +826,7 @@ class SdmxStepTest(unittest.TestCase):
         )
         step = CreateSampleStep(name="test-step", config=config)
 
-        # Create test input file to satisfy validation
-        input_path = Path(self._tmpdir) / "demo_data.csv"
-        input_path.write_text("header\nrow1")
-
-        # First call creates context
+        # No input file created, dry run should still succeed
         context1 = step._prepare_command()
         self.assertIn("data_sampler.py", context1.full_command[1])
         self.assertIn("--sampler_output_rows=500", context1.full_command)
@@ -851,7 +847,7 @@ class SdmxStepTest(unittest.TestCase):
         )
         step = CreateSampleStep(name="test-step", config=config)
 
-        # Create test input file
+        # Create test input file for run()
         input_path = Path(self._tmpdir) / "demo_data.csv"
         input_path.write_text("header\nrow1")
 
@@ -875,7 +871,9 @@ class SdmxStepTest(unittest.TestCase):
             self.assertIn("data_sampler.py", args[0][1])
             self.assertTrue(kwargs["verbose"])
 
-    def test_create_sample_step_dry_run_fails_if_input_missing(self) -> None:
+            self.assertTrue(kwargs["verbose"])
+
+    def test_create_sample_step_dry_run_succeeds_if_input_missing(self) -> None:
         config = PipelineConfig(
             run=RunConfig(
                 command="test",
@@ -886,11 +884,24 @@ class SdmxStepTest(unittest.TestCase):
             sample=SampleConfig(rows=500),
         )
         step = CreateSampleStep(name="test-step", config=config)
-        # No input file created
+        # No input file created, dry run should still succeed
+        step.dry_run()
 
+    def test_create_sample_step_run_fails_if_input_missing(self) -> None:
+        config = PipelineConfig(
+            run=RunConfig(
+                command="test",
+                dataset_prefix="demo",
+                working_dir=self._tmpdir,
+                verbose=True,
+            ),
+            sample=SampleConfig(rows=500),
+        )
+        step = CreateSampleStep(name="test-step", config=config)
+        # No input file created, run should fail
         with self.assertRaisesRegex(RuntimeError,
                                     "Input file missing for sampling"):
-            step.dry_run()
+            step.run()
 
     def test_create_schema_map_step_caches_plan(self) -> None:
         config = PipelineConfig(run=RunConfig(
@@ -903,9 +914,7 @@ class SdmxStepTest(unittest.TestCase):
         ),)
         step = CreateSchemaMapStep(name="test-step", config=config)
 
-        # Create test input files to satisfy validation
-        (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
-        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+        # No input files created, dry run should still succeed
 
         # First call creates context
         context1 = step._prepare_command()
@@ -926,7 +935,7 @@ class SdmxStepTest(unittest.TestCase):
         ),)
         step = CreateSchemaMapStep(name="test-step", config=config)
 
-        # Create test input files
+        # Create test input files for run()
         (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
         (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
 
@@ -950,7 +959,9 @@ class SdmxStepTest(unittest.TestCase):
             self.assertIn("pvmap_generator.py", args[0][1])
             self.assertTrue(kwargs["verbose"])
 
-    def test_create_schema_map_step_dry_run_fails_if_input_missing(
+            self.assertTrue(kwargs["verbose"])
+
+    def test_create_schema_map_step_dry_run_succeeds_if_input_missing(
             self) -> None:
         config = PipelineConfig(run=RunConfig(
             command="test",
@@ -959,9 +970,20 @@ class SdmxStepTest(unittest.TestCase):
             verbose=True,
         ),)
         step = CreateSchemaMapStep(name="test-step", config=config)
-        # No input files created
+        # No input files created, dry run should still succeed
+        step.dry_run()
+
+    def test_create_schema_map_step_run_fails_if_input_missing(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = CreateSchemaMapStep(name="test-step", config=config)
+        # No input files created, run should fail
         with self.assertRaises(RuntimeError):
-            step.dry_run()
+            step.run()
 
     def test_process_full_data_step_caches_plan(self) -> None:
         config = PipelineConfig(run=RunConfig(
@@ -972,8 +994,7 @@ class SdmxStepTest(unittest.TestCase):
         ),)
         step = ProcessFullDataStep(name="test-step", config=config)
 
-        # Create test files to satisfy validation
-        self._create_test_input_files("demo")
+        # No input files created, dry run should still succeed
 
         context1 = step._prepare_command()
         context2 = step._prepare_command()
@@ -1012,6 +1033,21 @@ class SdmxStepTest(unittest.TestCase):
             self.assertIn("--input_data=", args[0][2])
             self.assertTrue(kwargs["verbose"])
 
+            self.assertIn("--input_data=", args[0][2])
+            self.assertTrue(kwargs["verbose"])
+
+    def test_process_full_data_step_dry_run_succeeds_if_input_missing(
+            self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = ProcessFullDataStep(name="test-step", config=config)
+        # Missing input files, dry run should still succeed
+        step.dry_run()
+
     def test_process_full_data_step_run_fails_if_input_missing(self) -> None:
         config = PipelineConfig(run=RunConfig(
             command="test",
@@ -1020,11 +1056,9 @@ class SdmxStepTest(unittest.TestCase):
             verbose=True,
         ),)
         step = ProcessFullDataStep(name="test-step", config=config)
-        # Missing input files
+        # Missing input files, run should fail
         with self.assertRaises(RuntimeError):
             step.run()
-        with self.assertRaises(RuntimeError):
-            step.dry_run()
 
     def test_create_dc_config_step_caches_plan(self) -> None:
         config = self._build_config(dataset_prefix="demo",

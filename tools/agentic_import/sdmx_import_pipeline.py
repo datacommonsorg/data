@@ -467,9 +467,6 @@ class CreateSampleStep(SdmxStep):
         input_path = working_dir / f"{dataset_prefix}_data.csv"
         output_path = working_dir / f"{dataset_prefix}_sample.csv"
 
-        if not input_path.is_file():
-            raise RuntimeError(f"Input file missing for sampling: {input_path}")
-
         args = [
             f"--sampler_input={input_path}",
             f"--sampler_output={output_path}",
@@ -483,6 +480,9 @@ class CreateSampleStep(SdmxStep):
 
     def run(self) -> None:
         context = self._prepare_command()
+        if not context.input_path.is_file():
+            raise RuntimeError(
+                f"Input file missing for sampling: {context.input_path}")
         if self._config.run.verbose:
             logging.info(
                 f"Starting data sampling: {' '.join(context.full_command)} -> {context.output_path}"
@@ -523,11 +523,6 @@ class CreateSchemaMapStep(SdmxStep):
         metadata_path = working_dir / f"{dataset_prefix}_metadata.xml"
         output_prefix = working_dir / SAMPLE_OUTPUT_DIR / dataset_prefix
 
-        if not sample_path.is_file():
-            raise RuntimeError(f"Sample file missing: {sample_path}")
-        if not metadata_path.is_file():
-            raise RuntimeError(f"Metadata file missing: {metadata_path}")
-
         args = [
             f"--input_data={sample_path}",
             f"--input_metadata={metadata_path}",
@@ -549,6 +544,11 @@ class CreateSchemaMapStep(SdmxStep):
 
     def run(self) -> None:
         context = self._prepare_command()
+        if not context.sample_path.is_file():
+            raise RuntimeError(f"Sample file missing: {context.sample_path}")
+        if not context.metadata_path.is_file():
+            raise RuntimeError(
+                f"Metadata file missing: {context.metadata_path}")
         context.output_prefix.parent.mkdir(parents=True, exist_ok=True)
         logging.info(
             f"Starting PV map generation: {' '.join(context.full_command)} -> {context.output_prefix}"
@@ -595,11 +595,6 @@ class ProcessFullDataStep(SdmxStep):
                          f"{dataset_prefix}_metadata.csv")
         output_prefix = working_dir / FINAL_OUTPUT_DIR / dataset_prefix
 
-        for required in (input_data_path, pv_map_path, metadata_path):
-            if not required.is_file():
-                raise RuntimeError(
-                    f"{self.name} requires existing input: {required}")
-
         args = [
             f"--input_data={input_data_path}",
             f"--pv_map={pv_map_path}",
@@ -621,6 +616,11 @@ class ProcessFullDataStep(SdmxStep):
 
     def run(self) -> None:
         context = self._prepare_command()
+        for required in (context.input_data_path, context.pv_map_path,
+                         context.metadata_path):
+            if not required.is_file():
+                raise RuntimeError(
+                    f"{self.name} requires existing input: {required}")
         # Ensure output directory exists
         context.output_prefix.parent.mkdir(parents=True, exist_ok=True)
         logging.info(
