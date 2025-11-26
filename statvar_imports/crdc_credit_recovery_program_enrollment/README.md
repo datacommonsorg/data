@@ -1,4 +1,4 @@
-# US Urban Education School Autorefresh: Credit Recovery Data Import
+# US Urban Education School Autorefresh: Crdc_Credit_Recovery_Program_Enrollment Import
 
 This directory contains the scripts and data for importing credit recovery statistics from the Civil Rights Data Collection (CRDC).
 

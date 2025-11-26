@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "Credit_Recovery",
+            "import_name": "Crdc_Credit_Recovery_Program_Enrollment",
             "curator_emails": [
                 "support@datacommons.org"
             ],
