@@ -1,0 +1,54 @@
+Node: dcid:Algebra2
+typeOf: dcid:LanguageLearnedEnum
+name: "Algebra 2"
+isProvisional: dcs:True
+
+Node: dcid:race
+typeOf: dcs:Property
+name: "race"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EthnicityEnum,dcid:RaceCodeEnum
+
+Node: dcid:juvenileJusticeFacilityStatus
+typeOf: dcs:Property
+name: "juvenileJusticeFacilityStatus"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:JuvenileJusticeFacilityStatusEnum
+isProvisional: dcs:True
+
+Node: dcid:JuvenileJusticeFacilityStatusEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "JuvenileJusticeFacilityStatusEnum"
+isProvisional: dcs:True
+
+Node: dcid:JuvenileJusticeFacility
+typeOf: dcid:JuvenileJusticeFacilityStatusEnum
+name: "Juvenile Justice Facility"
+isProvisional: dcs:True
+
+Node: dcid:disabilityStatus
+typeOf: dcs:Property
+name: "disabilityStatus"
+domainIncludes: dcid:Student
+
+Node: dcid:educationalMethod
+typeOf: dcs:Property
+name: "educationalMethod"
+domainIncludes: dcid:Student
+
+Node: dcid:IndividualizedEducationProgram
+typeOf: dcid:EducationalMethodEnum
+name: "Individualized Education Program"
+isProvisional: dcs:True
+
+Node: dcid:schoolSubject
+typeOf: dcs:Property
+name: "schoolSubject"
+rangeIncludes: dcid:CourseSpecializationEnum
+
+Node: dcid:Geometry
+typeOf: dcid:LanguageLearnedEnum
+name: "Geometry"
+isProvisional: dcs:True
+
