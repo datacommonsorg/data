@@ -35,18 +35,7 @@ SAVE_FOLDER = os.path.join(SCRIPT_DIR, "input_files")
 # Regex Patterns to identify required files
 KEYWORDS = [
     r'.*09-2 Retention.*',
-    r'Retention of Students.*grade 01\.xlsx$',
-    r'Retention of Students.*grade 02\.xlsx$',
-    r'Retention of Students.*grade 03\.xlsx$',
-    r'Retention of Students.*grade 04\.xlsx$',
-    r'Retention of Students.*grade 05\.xlsx$',
-    r'Retention of Students.*grade 06\.xlsx$',
-    r'Retention of Students.*grade 07\.xlsx$',
-    r'Retention of Students.*grade 08\.xlsx$',
-    r'Retention of Students.*grade 09\.xlsx$',
-    r'Retention of Students.*grade 10\.xlsx$',
-    r'Retention of Students.*grade 11\.xlsx$',
-    r'Retention of Students.*grade 12\.xlsx$',
+    r'Retention of Students.*grade (0[1-9]|1[0-2])\.xlsx$',
     r'Retention of Students.*kindergarten\.xlsx$',
     r'Retention\.csv$',
     r'Retention\.xlsx$',
@@ -79,61 +68,65 @@ def get_urls_for_year(start_year, end_year):
         f"https://civilrightsdata.ed.gov/assets/ocr/docs/{start_year}-{short_end}-crdc-csv.zip"
     ]
 
+def transform_crdc_data(df: pd.DataFrame, year: int, filename: str) -> pd.DataFrame:
+    """
+    Applies common transformations: Adds YEAR, generates NCESID, 
+    cleans Yes/No values, and reorders columns.
+    """
+    # --- 1. ADD YEAR & NCESID ---
+    df["YEAR"] = year
+    df.columns = [x.upper() for x in df.columns]
+
+    if "LEAID" in df.columns and "SCHID" in df.columns:
+        df["NCESID"] = (
+            df["LEAID"].astype(str).str.zfill(7) +
+            df["SCHID"].astype(str).str.zfill(5))
+    elif "COMBOKEY" in df.columns:
+        df["NCESID"] = df["COMBOKEY"].astype(str).str.replace("'", "")
+    else:
+        logging.warning(f"Missing LEAID/SCHID in {filename}")
+
+    # --- 2. CLEAN YES/NO (Excluding JJ) ---
+    exclude_upper = [c.upper() for c in EXCLUDE_COLS]
+    target_cols = [col for col in df.columns if col not in exclude_upper]
+    
+    # Map Yes/No to 1/0
+    df[target_cols] = df[target_cols].replace(REPLACEMENT_MAP)
+
+    # Convert numeric columns efficiently (Vectorized)
+    # Using errors='coerce' turns bad data into NaN instead of crashing or ignoring
+    df[target_cols] = df[target_cols].apply(pd.to_numeric, errors='coerce')
+
+    # --- 3. REORDER COLUMNS ---
+    priority_cols = ['YEAR', 'NCESID']
+    existing_priority = [c for c in priority_cols if c in df.columns]
+    other_cols = [c for c in df.columns if c not in existing_priority]
+    
+    return df[existing_priority + other_cols]
+
 def process_dataframe(file_path: str, year: int):
     """
     Loads, Cleans (Yes/No), Adds Columns, and Saves the file.
     Handles multi-sheet Excel files by processing only the first sheet.
     """
     try:
-        # --- 1. LOAD DATA ---
+        filename = os.path.basename(file_path)
+
+        # --- CSV HANDLING ---
         if file_path.lower().endswith(".csv"):
             try:
-                df = pd.read_csv(file_path,
-                                 dtype=str,
-                                 low_memory=False,
-                                 encoding='latin1')
-            except:
+                # Try reading with Latin1 first
+                df = pd.read_csv(file_path, dtype=str, low_memory=False, encoding='latin1')
+            except UnicodeDecodeError:
+                # Fallback to default (usually UTF-8) if Latin1 fails
                 df = pd.read_csv(file_path, dtype=str, low_memory=False)
 
-            # --- 2. ADD YEAR & NCESID ---
-            df["YEAR"] = year
-            df.columns = [x.upper() for x in df.columns]
-
-            if "LEAID" in df.columns and "SCHID" in df.columns:
-                df["NCESID"] = (
-                    df["LEAID"].astype(str).str.zfill(7) +
-                    df["SCHID"].astype(str).str.zfill(5))
-            elif "COMBOKEY" in df.columns:
-                df["NCESID"] = df["COMBOKEY"].astype(str).str.replace("'", "")
-            else:
-                logging.warning(
-                    f"Missing LEAID/SCHID in {os.path.basename(file_path)}")
-
-            # --- 3. CLEAN YES/NO (Excluding JJ) ---
-            exclude_upper = [c.upper() for c in EXCLUDE_COLS]
-            target_cols = [
-                col for col in df.columns if col not in exclude_upper
-            ]
-            df[target_cols] = df[target_cols].replace(REPLACEMENT_MAP)
-
-            for col in target_cols:
-                try:
-                    df[col] = pd.to_numeric(df[col])
-                except (ValueError, TypeError):
-                    pass
-
-            # --- 4. REORDER COLUMNS ---
-            priority_cols = ['YEAR', 'NCESID']
-            existing_priority = [c for c in priority_cols if c in df.columns]
-            other_cols = [c for c in df.columns if c not in existing_priority]
-            df = df[existing_priority + other_cols]
-
-            # --- 5. SAVE DATA ---
+            df = transform_crdc_data(df, year, filename)
             df.to_csv(file_path, index=False)
 
+        # --- XLSX HANDLING ---
         elif file_path.lower().endswith(".xlsx"):
-            # 1. Read ALL sheets into a dictionary
-            # e.g., {'Data': df1, 'Definitions': df2}
+            # Read ALL sheets into a dictionary
             all_sheets = pd.read_excel(file_path,
                                        dtype=str,
                                        engine='openpyxl',
@@ -141,61 +134,24 @@ def process_dataframe(file_path: str, year: int):
 
             # Get the name of the first sheet (the "Data" sheet)
             data_sheet_name = list(all_sheets.keys())[0]
-            df = all_sheets[data_sheet_name]  # Get the data DataFrame
+            df = all_sheets[data_sheet_name]
 
-            # --- 2. ADD YEAR & NCESID (to the data sheet) ---
-            df["YEAR"] = year
-            df.columns = [x.upper() for x in df.columns]
+            df = transform_crdc_data(df, year, filename)
 
-            if "LEAID" in df.columns and "SCHID" in df.columns:
-                df["NCESID"] = (
-                    df["LEAID"].astype(str).str.zfill(7) +
-                    df["SCHID"].astype(str).str.zfill(5))
-            elif "COMBOKEY" in df.columns:
-                df["NCESID"] = df["COMBOKEY"].astype(str).str.replace("'", "")
-            else:
-                logging.warning(
-                    f"Missing LEAID/SCHID in {os.path.basename(file_path)}")
-
-            # --- 3. CLEAN YES/NO (on the data sheet) ---
-            exclude_upper = [c.upper() for c in EXCLUDE_COLS]
-            target_cols = [
-                col for col in df.columns if col not in exclude_upper
-            ]
-            df[target_cols] = df[target_cols].replace(REPLACEMENT_MAP)
-
-            for col in target_cols:
-                try:
-                    df[col] = pd.to_numeric(df[col])
-                except (ValueError, TypeError):
-                    pass
-
-            # --- 4. REORDER COLUMNS (on the data sheet) ---
-            priority_cols = ['YEAR', 'NCESID']
-            existing_priority = [c for c in priority_cols if c in df.columns]
-            other_cols = [c for c in df.columns if c not in existing_priority]
-            df = df[existing_priority + other_cols]
-
-            # --- 5. SAVE ALL SHEETS BACK ---
-            # This uses ExcelWriter to save *all* sheets,
-            # replacing the data sheet with our processed one.
+            # Save all sheets back
             with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
                 for sheet_name, original_sheet_df in all_sheets.items():
                     if sheet_name == data_sheet_name:
                         # Write the *processed* data frame
-                        df.to_excel(writer,
-                                    sheet_name=sheet_name,
-                                    index=False)
+                        df.to_excel(writer, sheet_name=sheet_name, index=False)
                     else:
                         # Write the *original, untouched* definitions/other frames
-                        original_sheet_df.to_excel(writer,
-                                                   sheet_name=sheet_name,
-                                                   index=False)
+                        original_sheet_df.to_excel(writer, sheet_name=sheet_name, index=False)
 
         else:
             return
 
-        logging.info(f"Processed & Cleaned: {os.path.basename(file_path)}")
+        logging.info(f"Processed & Cleaned: {filename}")
 
     except Exception as e:
         logging.error(f"Failed to process DataFrame {file_path}: {e}")
@@ -203,13 +159,24 @@ def process_dataframe(file_path: str, year: int):
 
 @retry(tries=2, delay=2)
 def try_download_url(url, temp_file):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
     try:
-        with requests.get(url, stream=True, timeout=120) as r:
+        with requests.get(url, headers=headers, stream=True, timeout=120) as r:
             if r.status_code == 200:
+                # Security Check: Ensure we didn't just download an HTML error page
+                content_type = r.headers.get('Content-Type', '').lower()
+                if 'html' in content_type:
+                    logging.warning(f"URL {url} returned HTML instead of ZIP. Skipping.")
+                    return False
+                
                 shutil.copyfileobj(r.raw, temp_file)
                 return True
-    except Exception:
-        pass
+            else:
+                logging.warning(f"URL {url} returned status {r.status_code}")
+    except Exception as e:
+        logging.warning(f"Failed to download {url}: {e}")
     return False
 
 # ==========================================
@@ -253,7 +220,6 @@ def process_year_data(start_year: int, end_year: int):
                     with z.open(file_name) as source, open(output_path, "wb") as target:
                         shutil.copyfileobj(source, target)
 
-                    # Process the file immediately after extraction
                     process_dataframe(output_path, end_year)
 
         except zipfile.BadZipFile:

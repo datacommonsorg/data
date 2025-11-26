@@ -16,16 +16,16 @@
 
 ## US_UrbanSchool_Retention Import
 
-This data provides an overview of student retention rates, categorized by gender, race/ethnicity, disability status, and language fluency, specifically for School Grade 1 to 12.
+This data provides an overview of student retention rates, categorized by gender, race/ethnicity, disability status, and language fluency, specifically for School Grades 1 to 12.
 
 -----
 - source: https://ocrdata.ed.gov/data
 
-- type of place: Country
+- type of place: School
 
 - statvars: Education
 
-- years: 2010 and 2022
+- years: 2010 - 2022
 
 ### ⚙️ Workflow
 
