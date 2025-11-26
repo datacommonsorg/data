@@ -25,5 +25,5 @@
 
 - To process the data
 
-    `python3 stat_var_processor.py --input_data=../../statvar_imports/ccd/enrollment/input_files/ccd_enrollment_input.csv --pv_map=../../statvar_imports/ccd/enrollment/CCD_Enrollment_pvmap.csv --config_file=../../statvar_imports/ccd/enrollment/CCD_Enrollment_metadata.csv --output_path=../../statvar_imports/ccd/enrollment/output/CCD_Enrollment_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`
+    `python3 stat_var_processor.py --input_data=../../statvar_imports/ccd/enrollment/input_files/ccd_input.csv --pv_map=../../statvar_imports/ccd/enrollment/CCD_Enrollment_pvmap.csv --config_file=../../statvar_imports/ccd/enrollment/CCD_Enrollment_metadata.csv --output_path=../../statvar_imports/ccd/enrollment/output/CCD_Enrollment_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`
 

@@ -1,37 +1,37 @@
-key,prop,val,,,,,,,,
-2013,observationDate,2013,#Header,observationDate,,,,,,
-2015,observationDate,2015,#Header,observationDate,,,,,,
-2017,observationDate,2017,#Header,observationDate,,,,,,
-2019,observationDate,2019,#Header,observationDate,,,,,,
-2021,observationDate,2021,#Header,observationDate,,,,,,
-2023,observationDate,2023,#Header,observationDate,,,,,,
-2025,observationDate,2025,#Header,observationDate,,,,,,
-2027,observationDate,2027,#Header,observationDate,,,,,,
-2029,observationDate,2029,#Header,observationDate,,,,,,
-Prekindergarten through grade 8:Total,value,{Number},schoolGradeLevel,SchoolGradePKTo8,observationAbout,country/USA,populationType,Student,#Multiply,1000
-All grades,value,{Number},,,observationAbout,country/USA,populationType,Student,#Multiply,1000
-Prekindergarten,value,{Number},schoolGradeLevel,PreKindergarten,observationAbout,country/USA,populationType,Student,#Multiply,1000
-Kindergarten,value,{Number},schoolGradeLevel,Kindergarten,observationAbout,country/USA,populationType,Student,#Multiply,1000
-1st grade,value,{Number},schoolGradeLevel,SchoolGrade1,observationAbout,country/USA,populationType,Student,#Multiply,1000
-2nd grade,value,{Number},schoolGradeLevel,SchoolGrade2,observationAbout,country/USA,populationType,Student,#Multiply,1000
-3rd grade,value,{Number},schoolGradeLevel,SchoolGrade3,observationAbout,country/USA,populationType,Student,#Multiply,1000
-4th grade,value,{Number},schoolGradeLevel,SchoolGrade4,observationAbout,country/USA,populationType,Student,#Multiply,1000
-5th grade,value,{Number},schoolGradeLevel,SchoolGrade5,observationAbout,country/USA,populationType,Student,#Multiply,1000
-6th grade,value,{Number},schoolGradeLevel,SchoolGrade6,observationAbout,country/USA,populationType,Student,#Multiply,1000
-7th grade,value,{Number},schoolGradeLevel,SchoolGrade7,observationAbout,country/USA,populationType,Student,#Multiply,1000
-8th grade,value,{Number},schoolGradeLevel,SchoolGrade8,observationAbout,country/USA,populationType,Student,#Multiply,1000
-Ungraded_1,value,{Number},schoolGradeLevel,Ungraded__GradeNotSpecified,observationAbout,country/USA,populationType,Student,#Multiply,1000
-Ungraded1_2,value,{Number},schoolGradeLevel,GradeNotSpecified__SchoolGrade13,observationAbout,country/USA,populationType,Student,#Multiply,1000
-Grades 9 through 12:Total,value,{Number},schoolGradeLevel,SchoolGrade9To12,observationAbout,country/USA,populationType,Student,#Multiply,1000
-9th grade,value,{Number},schoolGradeLevel,SchoolGrade9,observationAbout,country/USA,populationType,Student,#Multiply,1000
-10th grade,value,{Number},schoolGradeLevel,SchoolGrade10,observationAbout,country/USA,populationType,Student,#Multiply,1000
-11th grade,value,{Number},schoolGradeLevel,SchoolGrade11,observationAbout,country/USA,populationType,Student,#Multiply,1000
-12th grade,value,{Number},schoolGradeLevel,SchoolGrade12,observationAbout,country/USA,populationType,Student,#Multiply,1000
-American Indian/Alaska,race,AmericanIndianAndAlaskaNativeAlone,,,,,,,,
-American Indian/Alaska Native,race,AmericanIndianAndAlaskaNativeAlone,,,,,,,,
-Asian,race,AsianAlone,,,,,,,,
-Black,race,Black,,,,,,,,
-Hispanic,race,HispanicOrLatino,,,,,,,,
-Pacific Islander,race,NativeHawaiianOrOtherPacificIslanderAlone,,,,,,,,
-White,race,WhiteAlone,,,,,,,,
-Two or more races,race,TwoOrMoreRaces,,,,,,,,
+key,prop,val,,,,,,,,,,,,
+2013,observationDate,2013,#Header,observationDate,,,,,,,,,,
+2015,observationDate,2015,#Header,observationDate,,,,,,,,,,
+2017,observationDate,2017,#Header,observationDate,,,,,,,,,,
+2019,observationDate,2019,#Header,observationDate,,,,,,,,,,
+2021,observationDate,2021,#Header,observationDate,,,,,,,,,,
+2023,observationDate,2023,#Header,observationDate,,,,,,,,,,
+2025,observationDate,2025,#Header,observationDate,,,,,,,,,,
+2027,observationDate,2027,#Header,observationDate,,,,,,,,,,
+2029,observationDate,2029,#Header,observationDate,,,,,,,,,,
+Prekindergarten through grade 8:Total,value,{Number},schoolGradeLevel,SchoolGradePreKindergartenTo8,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+All grades,value,{Number},,,observationAbout,country/USA,populationType,Student,#Multiply,1000,typeOfSchool,PublicSchool,,
+Prekindergarten,value,{Number},enrollmentLevel,PreKindergarten,observationAbout,country/USA,populationType,Student,#Multiply,1000,typeOfSchool,PublicSchool,,
+Kindergarten,value,{Number},schoolGradeLevel,Kindergarten,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,typeOfSchool,PublicSchool
+1st grade,value,{Number},schoolGradeLevel,SchoolGrade1,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+2nd grade,value,{Number},schoolGradeLevel,SchoolGrade2,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+3rd grade,value,{Number},schoolGradeLevel,SchoolGrade3,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+4th grade,value,{Number},schoolGradeLevel,SchoolGrade4,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+5th grade,value,{Number},schoolGradeLevel,SchoolGrade5,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+6th grade,value,{Number},schoolGradeLevel,SchoolGrade6,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+7th grade,value,{Number},schoolGradeLevel,SchoolGrade7,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+8th grade,value,{Number},schoolGradeLevel,SchoolGrade8,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+Ungraded_1,value,{Number},schoolGradeLevel,Ungraded__GradeNotSpecified,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+Ungraded1_2,value,{Number},schoolGradeLevel,GradeNotSpecified__SchoolGrade13,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+Grades 9 through 12:Total,value,{Number},schoolGradeLevel,SchoolGrade9To12,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+9th grade,value,{Number},schoolGradeLevel,SchoolGrade9,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+10th grade,value,{Number},schoolGradeLevel,SchoolGrade10,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+11th grade,value,{Number},schoolGradeLevel,SchoolGrade11,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+12th grade,value,{Number},schoolGradeLevel,SchoolGrade12,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool,,
+American Indian/Alaska,race,AmericanIndianAndAlaskaNativeAlone,,,,,,,,,,,,
+American Indian/Alaska Native,race,AmericanIndianAndAlaskaNativeAlone,,,,,,,,,,,,
+Asian,race,AsianAlone,,,,,,,,,,,,
+Black,race,Black,,,,,,,,,,,,
+Hispanic,race,HispanicOrLatino,,,,,,,,,,,,
+Pacific Islander,race,NativeHawaiianOrOtherPacificIslanderAlone,,,,,,,,,,,,
+White,race,WhiteAlone,,,,,,,,,,,,
+Two or more races,race,TwoOrMoreRaces,,,,,,,,,,,,
