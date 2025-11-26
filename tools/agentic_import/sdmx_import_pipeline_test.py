@@ -47,8 +47,8 @@ from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=impor
     InteractiveCallback, JSONStateCallback, PipelineBuilder, PipelineConfig,
     StepDecision, build_pipeline_callback, build_sdmx_pipeline, build_steps,
     run_sdmx_pipeline, DownloadMetadataStep, DownloadDataStep, CreateSampleStep,
-    CreateSchemaMapStep, _run_command, SdmxConfig, SampleConfig, RunConfig,
-    SdmxDataflowConfig, SdmxStep)
+    CreateSchemaMapStep, ProcessFullDataStep, _run_command, SdmxConfig,
+    SampleConfig, RunConfig, SdmxDataflowConfig, SdmxStep)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
 
@@ -487,19 +487,26 @@ class RunPipelineTest(unittest.TestCase):
         self._mock_run_command = self._run_command_patcher.start()
         self.addCleanup(self._run_command_patcher.stop)
 
+    def _create_test_input_files(self, prefix: str) -> None:
+        (Path(self._tmpdir) / f"{prefix}_data.csv").write_text("data")
+        (Path(self._tmpdir) / f"{prefix}_sample.csv").write_text("sample")
+        (Path(self._tmpdir) / f"{prefix}_metadata.xml").write_text("metadata")
+
+        sample_output_dir = Path(self._tmpdir) / "sample_output"
+        sample_output_dir.mkdir(parents=True, exist_ok=True)
+        (sample_output_dir / f"{prefix}_pvmap.csv").write_text("pvmap")
+        (sample_output_dir / f"{prefix}_metadata.csv").write_text("metadata")
+
     def test_run_pipeline_updates_state_and_hash(self) -> None:
         command = "sdmx run pipeline"
         config = self._build_config(dataset_prefix="demo",
                                     dataflow="df.1",
                                     command=command)
-        clock = _IncrementingClock(datetime(2025, 1, 2, tzinfo=timezone.utc),
-                                   timedelta(seconds=2))
+        clock = _IncrementingClock(datetime(2025, 1, 1, tzinfo=timezone.utc),
+                                   timedelta(seconds=1))
 
-        # Create dummy input file for sampling
-        (Path(self._tmpdir) / "demo_data.csv").write_text("header\nrow1")
-        # Create dummy sample and metadata files for schema mapping
-        (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
-        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+        # Create dummy files for ProcessFullDataStep
+        self._create_test_input_files("demo")
 
         run_sdmx_pipeline(config=config, now_fn=clock)
 
@@ -537,17 +544,14 @@ class RunPipelineTest(unittest.TestCase):
         config = self._build_config(dataset_prefix=None,
                                     dataflow=dataflow,
                                     command="sdmx run sanitized")
-        # Create dummy input file for sampling (sanitized name)
-        (Path(self._tmpdir) /
-         "my_flow_name_2025_data.csv").write_text("header\nrow1")
-        # Create dummy sample and metadata files for schema mapping
-        (Path(self._tmpdir) /
-         "my_flow_name_2025_sample.csv").write_text("header\nrow1")
-        (Path(self._tmpdir) /
-         "my_flow_name_2025_metadata.xml").write_text("<xml/>")
+
+        # Create test files for ProcessFullDataStep with sanitized name
+        sanitized_prefix = "my_flow_name_2025"
+        self._create_test_input_files(sanitized_prefix)
+
         run_sdmx_pipeline(config=config,
                           now_fn=_IncrementingClock(
-                              datetime(2025, 1, 3, tzinfo=timezone.utc),
+                              datetime(2025, 1, 2, tzinfo=timezone.utc),
                               timedelta(seconds=2)))
 
         expected_run_id = "my_flow_name_2025"
@@ -576,12 +580,12 @@ class RunPipelineTest(unittest.TestCase):
                                     dataflow="df.2",
                                     command="sdmx rerun force")
         first_clock = _IncrementingClock(
-            datetime(2025, 1, 4, tzinfo=timezone.utc), timedelta(seconds=1))
-        # Create dummy input file for sampling
-        (Path(self._tmpdir) / "demo_data.csv").write_text("header\nrow1")
-        # Create dummy sample and metadata files for schema mapping
-        (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
-        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+            datetime(2025, 1, 2, tzinfo=timezone.utc), timedelta(seconds=1))
+
+        # Create dummy files for ProcessFullDataStep
+        self._create_test_input_files("demo")
+
+        # Run 1 with original config
         run_sdmx_pipeline(config=config, now_fn=first_clock)
 
         state_path = Path(self._tmpdir) / ".datacommons" / "demo.state.json"
@@ -594,7 +598,7 @@ class RunPipelineTest(unittest.TestCase):
                                            dataflow=updated_dataflow)
         updated_config = dataclasses.replace(config, sdmx=updated_sdmx)
         second_clock = _IncrementingClock(
-            datetime(2025, 1, 5, tzinfo=timezone.utc), timedelta(seconds=1))
+            datetime(2025, 1, 3, tzinfo=timezone.utc), timedelta(seconds=1))
         run_sdmx_pipeline(config=updated_config, now_fn=second_clock)
 
         with state_path.open(encoding="utf-8") as fp:
@@ -611,12 +615,12 @@ class RunPipelineTest(unittest.TestCase):
                                     dataflow="df.3",
                                     command="sdmx rerun noop")
         initial_clock = _IncrementingClock(
-            datetime(2025, 1, 6, tzinfo=timezone.utc), timedelta(seconds=1))
-        # Create dummy input file for sampling
-        (Path(self._tmpdir) / "demo_data.csv").write_text("header\nrow1")
-        # Create dummy sample and metadata files for schema mapping
-        (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
-        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+            datetime(2025, 1, 3, tzinfo=timezone.utc), timedelta(seconds=1))
+
+        # Create dummy files for ProcessFullDataStep
+        self._create_test_input_files("demo")
+
+        # Run 1
         run_sdmx_pipeline(config=config, now_fn=initial_clock)
 
         state_path = Path(self._tmpdir) / ".datacommons" / "demo.state.json"
@@ -639,6 +643,16 @@ class SdmxStepTest(unittest.TestCase):
         self._tmpdir_obj = tempfile.TemporaryDirectory()
         self.addCleanup(self._tmpdir_obj.cleanup)
         self._tmpdir = self._tmpdir_obj.name
+
+    def _create_test_input_files(self, prefix: str) -> None:
+        (Path(self._tmpdir) / f"{prefix}_data.csv").write_text("data")
+        (Path(self._tmpdir) / f"{prefix}_sample.csv").write_text("sample")
+        (Path(self._tmpdir) / f"{prefix}_metadata.xml").write_text("metadata")
+
+        sample_output_dir = Path(self._tmpdir) / "sample_output"
+        sample_output_dir.mkdir(parents=True, exist_ok=True)
+        (sample_output_dir / f"{prefix}_pvmap.csv").write_text("pvmap")
+        (sample_output_dir / f"{prefix}_metadata.csv").write_text("metadata")
 
     def test_run_command_logs_and_executes(self) -> None:
         with mock.patch("subprocess.run") as mock_run:
@@ -925,8 +939,70 @@ class SdmxStepTest(unittest.TestCase):
         ),)
         step = CreateSchemaMapStep(name="test-step", config=config)
         # No input files created
+        with self.assertRaises(RuntimeError):
+            step.dry_run()
 
-        with self.assertRaisesRegex(RuntimeError, "Sample file missing"):
+    def test_process_full_data_step_caches_plan(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = ProcessFullDataStep(name="test-step", config=config)
+
+        # Create test files to satisfy validation
+        self._create_test_input_files("demo")
+
+        context1 = step._prepare_command()
+        context2 = step._prepare_command()
+        self.assertIs(context1, context2)
+
+    def test_process_full_data_step_run_and_dry_run_use_same_plan(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = ProcessFullDataStep(name="test-step", config=config)
+
+        # Create test files
+        self._create_test_input_files("demo")
+
+        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
+                       ) as mock_run_cmd:
+            with self.assertLogs(logging.get_absl_logger(),
+                                 level="INFO") as logs:
+                step.dry_run()
+                step.run()
+
+            # Verify dry_run logged the command
+            self.assertTrue(
+                any("test-step (dry run): would run" in entry
+                    for entry in logs.output))
+            self.assertTrue(
+                any("stat_var_processor.py" in entry for entry in logs.output))
+
+            # Verify run called the command with the same args
+            mock_run_cmd.assert_called_once()
+            args, kwargs = mock_run_cmd.call_args
+            self.assertIn("stat_var_processor.py", args[0][1])
+            self.assertIn("--input_data=", args[0][2])
+            self.assertTrue(kwargs["verbose"])
+
+    def test_process_full_data_step_run_fails_if_input_missing(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = ProcessFullDataStep(name="test-step", config=config)
+        # Missing input files
+        with self.assertRaises(RuntimeError):
+            step.run()
+        with self.assertRaises(RuntimeError):
             step.dry_run()
 
 

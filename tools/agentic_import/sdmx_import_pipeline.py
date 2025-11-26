@@ -38,7 +38,12 @@ if str(REPO_ROOT) not in sys.path:
 
 SDMX_CLI_PATH = REPO_ROOT / "tools" / "sdmx_import" / "sdmx_cli.py"
 DATA_SAMPLER_PATH = REPO_ROOT / "tools" / "statvar_importer" / "data_sampler.py"
+STAT_VAR_PROCESSOR_PATH = (REPO_ROOT / "tools" / "statvar_importer" /
+                           "stat_var_processor.py")
 PVMAP_GENERATOR_PATH = REPO_ROOT / "tools" / "agentic_import" / "pvmap_generator.py"
+
+SAMPLE_OUTPUT_DIR = Path("sample_output")
+FINAL_OUTPUT_DIR = Path("output")
 
 # Flag names
 _FLAG_SDMX_ENDPOINT = "sdmx.endpoint"
@@ -502,7 +507,7 @@ class CreateSchemaMapStep(SdmxStep):
         working_dir = Path(self._config.run.working_dir)
         sample_path = working_dir / f"{dataset_prefix}_sample.csv"
         metadata_path = working_dir / f"{dataset_prefix}_metadata.xml"
-        output_prefix = working_dir / dataset_prefix
+        output_prefix = working_dir / SAMPLE_OUTPUT_DIR / dataset_prefix
 
         if not sample_path.is_file():
             raise RuntimeError(f"Sample file missing: {sample_path}")
@@ -530,6 +535,7 @@ class CreateSchemaMapStep(SdmxStep):
 
     def run(self) -> None:
         context = self._prepare_command()
+        context.output_prefix.parent.mkdir(parents=True, exist_ok=True)
         logging.info(
             f"Starting PV map generation: {' '.join(context.full_command)} -> {context.output_prefix}"
         )
@@ -547,15 +553,73 @@ class ProcessFullDataStep(SdmxStep):
 
     VERSION = 1
 
+    RUN_OUTPUT_COLUMNS: ClassVar[str] = (
+        "observationDate,observationAbout,variableMeasured,value,"
+        "observationPeriod,measurementMethod,unit,scalingFactor")
+
+    @dataclass(frozen=True)
+    class _StepContext:
+        input_data_path: Path
+        pv_map_path: Path
+        metadata_path: Path
+        full_command: list[str]
+        output_prefix: Path
+
     def __init__(self, *, name: str, config: PipelineConfig) -> None:
         super().__init__(name=name, version=self.VERSION, config=config)
+        self._context: ProcessFullDataStep._StepContext | None = None
+
+    def _prepare_command(self) -> _StepContext:
+        if self._context:
+            return self._context
+        dataset_prefix = self._config.run.dataset_prefix
+        working_dir = Path(self._config.run.working_dir)
+        input_data_path = working_dir / f"{dataset_prefix}_data.csv"
+        pv_map_path = (working_dir / SAMPLE_OUTPUT_DIR /
+                       f"{dataset_prefix}_pvmap.csv")
+        metadata_path = (working_dir / SAMPLE_OUTPUT_DIR /
+                         f"{dataset_prefix}_metadata.csv")
+        output_prefix = working_dir / FINAL_OUTPUT_DIR / dataset_prefix
+
+        for required in (input_data_path, pv_map_path, metadata_path):
+            if not required.is_file():
+                raise RuntimeError(
+                    f"{self.name} requires existing input: {required}")
+
+        args = [
+            f"--input_data={input_data_path}",
+            f"--pv_map={pv_map_path}",
+            f"--config_file={metadata_path}",
+            "--generate_statvar_name=True",
+            "--skip_constant_csv_columns=False",
+            f"--output_columns={self.RUN_OUTPUT_COLUMNS}",
+            f"--output_path={output_prefix}",
+        ]
+        full_command = [sys.executable, str(STAT_VAR_PROCESSOR_PATH)] + args
+        self._context = ProcessFullDataStep._StepContext(
+            input_data_path=input_data_path,
+            pv_map_path=pv_map_path,
+            metadata_path=metadata_path,
+            full_command=full_command,
+            output_prefix=output_prefix,
+        )
+        return self._context
 
     def run(self) -> None:
+        context = self._prepare_command()
+        # Ensure output directory exists
+        context.output_prefix.parent.mkdir(parents=True, exist_ok=True)
         logging.info(
-            f"{self.name}: no-op implementation for VERSION={self.VERSION}")
+            f"Starting stat_var_processor: input={context.input_data_path} "
+            f"pvmap={context.pv_map_path} metadata={context.metadata_path} -> "
+            f"{context.output_prefix}")
+        _run_command(context.full_command, verbose=self._config.run.verbose)
 
     def dry_run(self) -> None:
-        logging.info(f"{self.name} (dry run): previewing full-data processing")
+        context = self._prepare_command()
+        logging.info(
+            f"{self.name} (dry run): would run {' '.join(context.full_command)}"
+        )
 
 
 class CreateDcConfigStep(SdmxStep):
