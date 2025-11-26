@@ -38,6 +38,7 @@ if str(REPO_ROOT) not in sys.path:
 
 SDMX_CLI_PATH = REPO_ROOT / "tools" / "sdmx_import" / "sdmx_cli.py"
 DATA_SAMPLER_PATH = REPO_ROOT / "tools" / "statvar_importer" / "data_sampler.py"
+PVMAP_GENERATOR_PATH = REPO_ROOT / "tools" / "agentic_import" / "pvmap_generator.py"
 
 # Flag names
 _FLAG_SDMX_ENDPOINT = "sdmx.endpoint"
@@ -108,6 +109,9 @@ def _define_flags() -> None:
 
     flags.DEFINE_boolean("skip_confirmation", False,
                          "Skip interactive confirmation prompts.")
+
+    flags.DEFINE_string("gemini_cli", "gemini",
+                        "Path to Gemini CLI executable.")
 
 
 def _format_time(value: datetime) -> str:
@@ -248,6 +252,7 @@ class RunConfig:
     force: bool = False
     verbose: bool = False
     skip_confirmation: bool = False
+    gemini_cli: str | None = None
 
 
 @dataclass(frozen=True)
@@ -479,16 +484,62 @@ class CreateSchemaMapStep(SdmxStep):
 
     VERSION = 1
 
+    @dataclass(frozen=True)
+    class _StepContext:
+        sample_path: Path
+        metadata_path: Path
+        output_prefix: Path
+        full_command: list[str]
+
     def __init__(self, *, name: str, config: PipelineConfig) -> None:
         super().__init__(name=name, version=self.VERSION, config=config)
+        self._context: CreateSchemaMapStep._StepContext | None = None
+
+    def _prepare_command(self) -> _StepContext:
+        if self._context:
+            return self._context
+        dataset_prefix = self._config.run.dataset_prefix
+        working_dir = Path(self._config.run.working_dir)
+        sample_path = working_dir / f"{dataset_prefix}_sample.csv"
+        metadata_path = working_dir / f"{dataset_prefix}_metadata.xml"
+        output_prefix = working_dir / dataset_prefix
+
+        if not sample_path.is_file():
+            raise RuntimeError(f"Sample file missing: {sample_path}")
+        if not metadata_path.is_file():
+            raise RuntimeError(f"Metadata file missing: {metadata_path}")
+
+        args = [
+            f"--input_data={sample_path}",
+            f"--input_metadata={metadata_path}",
+            "--sdmx_dataset",
+            f"--output_path={output_prefix}",
+        ]
+        if self._config.run.skip_confirmation:
+            args.append("--skip_confirmation")
+        if self._config.run.gemini_cli:
+            args.append(f"--gemini_cli={self._config.run.gemini_cli}")
+
+        full_command = [sys.executable, str(PVMAP_GENERATOR_PATH)] + args
+        self._context = CreateSchemaMapStep._StepContext(
+            sample_path=sample_path,
+            metadata_path=metadata_path,
+            output_prefix=output_prefix,
+            full_command=full_command)
+        return self._context
 
     def run(self) -> None:
+        context = self._prepare_command()
         logging.info(
-            f"{self.name}: no-op implementation for VERSION={self.VERSION}")
+            f"Starting PV map generation: {' '.join(context.full_command)} -> {context.output_prefix}"
+        )
+        _run_command(context.full_command, verbose=self._config.run.verbose)
 
     def dry_run(self) -> None:
+        context = self._prepare_command()
         logging.info(
-            f"{self.name} (dry run): previewing schema mapping outputs")
+            f"{self.name} (dry run): would run {' '.join(context.full_command)}"
+        )
 
 
 class ProcessFullDataStep(SdmxStep):
@@ -817,6 +868,7 @@ def prepare_config() -> PipelineConfig:
             force=FLAGS.force,
             verbose=FLAGS.verbose,
             skip_confirmation=FLAGS.skip_confirmation,
+            gemini_cli=FLAGS.gemini_cli,
         ),
     )
 

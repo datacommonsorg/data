@@ -47,8 +47,8 @@ from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=impor
     InteractiveCallback, JSONStateCallback, PipelineBuilder, PipelineConfig,
     StepDecision, build_pipeline_callback, build_sdmx_pipeline, build_steps,
     run_sdmx_pipeline, DownloadMetadataStep, DownloadDataStep, CreateSampleStep,
-    _run_command, SdmxConfig, SampleConfig, RunConfig, SdmxDataflowConfig,
-    SdmxStep)
+    CreateSchemaMapStep, _run_command, SdmxConfig, SampleConfig, RunConfig,
+    SdmxDataflowConfig, SdmxStep)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
 
@@ -497,6 +497,9 @@ class RunPipelineTest(unittest.TestCase):
 
         # Create dummy input file for sampling
         (Path(self._tmpdir) / "demo_data.csv").write_text("header\nrow1")
+        # Create dummy sample and metadata files for schema mapping
+        (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
+        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
 
         run_sdmx_pipeline(config=config, now_fn=clock)
 
@@ -537,6 +540,11 @@ class RunPipelineTest(unittest.TestCase):
         # Create dummy input file for sampling (sanitized name)
         (Path(self._tmpdir) /
          "my_flow_name_2025_data.csv").write_text("header\nrow1")
+        # Create dummy sample and metadata files for schema mapping
+        (Path(self._tmpdir) /
+         "my_flow_name_2025_sample.csv").write_text("header\nrow1")
+        (Path(self._tmpdir) /
+         "my_flow_name_2025_metadata.xml").write_text("<xml/>")
         run_sdmx_pipeline(config=config,
                           now_fn=_IncrementingClock(
                               datetime(2025, 1, 3, tzinfo=timezone.utc),
@@ -571,6 +579,9 @@ class RunPipelineTest(unittest.TestCase):
             datetime(2025, 1, 4, tzinfo=timezone.utc), timedelta(seconds=1))
         # Create dummy input file for sampling
         (Path(self._tmpdir) / "demo_data.csv").write_text("header\nrow1")
+        # Create dummy sample and metadata files for schema mapping
+        (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
+        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
         run_sdmx_pipeline(config=config, now_fn=first_clock)
 
         state_path = Path(self._tmpdir) / ".datacommons" / "demo.state.json"
@@ -603,6 +614,9 @@ class RunPipelineTest(unittest.TestCase):
             datetime(2025, 1, 6, tzinfo=timezone.utc), timedelta(seconds=1))
         # Create dummy input file for sampling
         (Path(self._tmpdir) / "demo_data.csv").write_text("header\nrow1")
+        # Create dummy sample and metadata files for schema mapping
+        (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
+        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
         run_sdmx_pipeline(config=config, now_fn=initial_clock)
 
         state_path = Path(self._tmpdir) / ".datacommons" / "demo.state.json"
@@ -841,6 +855,78 @@ class SdmxStepTest(unittest.TestCase):
 
         with self.assertRaisesRegex(RuntimeError,
                                     "Input file missing for sampling"):
+            step.dry_run()
+
+    def test_create_schema_map_step_caches_plan(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+            gemini_cli="custom-gemini",
+            skip_confirmation=True,
+        ),)
+        step = CreateSchemaMapStep(name="test-step", config=config)
+
+        # Create dummy input files to satisfy validation
+        (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
+        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+
+        # First call creates context
+        context1 = step._prepare_command()
+        self.assertIn("pvmap_generator.py", context1.full_command[1])
+        self.assertIn("--gemini_cli=custom-gemini", context1.full_command)
+        self.assertIn("--skip_confirmation", context1.full_command)
+
+        # Second call returns same object
+        context2 = step._prepare_command()
+        self.assertIs(context1, context2)
+
+    def test_create_schema_map_step_run_and_dry_run_use_same_plan(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = CreateSchemaMapStep(name="test-step", config=config)
+
+        # Create dummy input files
+        (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
+        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+
+        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
+                       ) as mock_run_cmd:
+            with self.assertLogs(logging.get_absl_logger(),
+                                 level="INFO") as logs:
+                step.dry_run()
+                step.run()
+
+            # Verify dry_run logged the command
+            self.assertTrue(
+                any("test-step (dry run): would run" in entry
+                    for entry in logs.output))
+            self.assertTrue(
+                any("pvmap_generator.py" in entry for entry in logs.output))
+
+            # Verify run called the command with the same args
+            mock_run_cmd.assert_called_once()
+            args, kwargs = mock_run_cmd.call_args
+            self.assertIn("pvmap_generator.py", args[0][1])
+            self.assertTrue(kwargs["verbose"])
+
+    def test_create_schema_map_step_dry_run_fails_if_input_missing(
+            self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = CreateSchemaMapStep(name="test-step", config=config)
+        # No input files created
+
+        with self.assertRaisesRegex(RuntimeError, "Sample file missing"):
             step.dry_run()
 
 
