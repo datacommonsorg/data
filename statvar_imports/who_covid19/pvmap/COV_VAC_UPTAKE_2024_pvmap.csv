@@ -8,6 +8,6 @@ GROUP:female,gender,Female,,,,,,,,,,,,,,
 GROUP:male,gender,Male,,,,,,,,,,,,,,
 GROUP:old,ageGroupClassification,OlderAdults,,,,,,,,,,,,,,
 GROUP:other,gender,Other,,,,,,,,,,,,,,
-COVID_VACCINE_ADM_1D,populationType,Person,measuredProperty,count,value,{Number},vaccineDoseReceived,AtLeastOneDose,incidentType,COVID_19,,,,,,
-COVID_VACCINE_COV_1D,populationType,Person,statType,measuredValue,value,{Number},vaccineDoseReceived,AtLeastOneDose,incidentType,COVID_19,measurementDenominator,-vaccineDoseReceived,unit,Percent,scalingFactor,100
+COVID_VACCINE_ADM_1D,populationType,Person,measuredProperty,count,value,{Number},vaccineDoseReceived,AtLeastOneVaccineDose,incidentType,COVID_19,,,,,,
+COVID_VACCINE_COV_1D,populationType,Person,statType,measuredValue,value,{Number},vaccineDoseReceived,AtLeastOneVaccineDose,incidentType,COVID_19,measurementDenominator,-vaccineDoseReceived,unit,Percent,scalingFactor,100
 POPULATION,populationType,Person,measuredProperty,count,value,{Number},incidentType,COVID_19,,,,,,,,

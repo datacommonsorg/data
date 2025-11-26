@@ -1,4 +1,4 @@
-# covid_Covid_19 Dataset
+# WHO_COVID19 Dataset
 
 - source: https://data.who.int/dashboards/covid19/cases?n=c
     
