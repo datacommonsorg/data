@@ -52,7 +52,7 @@ from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=impor
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
 
-_DUMMY_CONFIG = PipelineConfig(run=RunConfig(command="test"))
+_TEST_CONFIG = PipelineConfig(run=RunConfig(command="test"))
 
 
 class _IncrementingClock:
@@ -73,7 +73,7 @@ class _IncrementingClock:
 class _RecordingStep(SdmxStep):
 
     def __init__(self, name: str, *, should_fail: bool = False) -> None:
-        super().__init__(name=name, version=1, config=_DUMMY_CONFIG)
+        super().__init__(name=name, version=1, config=_TEST_CONFIG)
         self._should_fail = should_fail
 
     def run(self) -> None:
@@ -87,7 +87,7 @@ class _RecordingStep(SdmxStep):
 class _VersionedStep(SdmxStep):
 
     def __init__(self, name: str, version: int) -> None:
-        super().__init__(name=name, version=version, config=_DUMMY_CONFIG)
+        super().__init__(name=name, version=version, config=_TEST_CONFIG)
 
     def run(self) -> None:
         logging.info("noop")
@@ -204,7 +204,7 @@ class JSONStateCallbackTest(unittest.TestCase):
                 def __init__(self) -> None:
                     super().__init__(name="download.download-data",
                                      version=1,
-                                     config=_DUMMY_CONFIG)
+                                     config=_TEST_CONFIG)
 
                 def run(self) -> None:
                     raise PipelineAbort("user requested stop")
@@ -497,6 +497,10 @@ class RunPipelineTest(unittest.TestCase):
         (sample_output_dir / f"{prefix}_pvmap.csv").write_text("pvmap")
         (sample_output_dir / f"{prefix}_metadata.csv").write_text("metadata")
 
+        output_dir = Path(self._tmpdir) / "output"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        (output_dir / f"{prefix}.csv").write_text("output")
+
     def test_run_pipeline_updates_state_and_hash(self) -> None:
         command = "sdmx run pipeline"
         config = self._build_config(dataset_prefix="demo",
@@ -505,12 +509,8 @@ class RunPipelineTest(unittest.TestCase):
         clock = _IncrementingClock(datetime(2025, 1, 1, tzinfo=timezone.utc),
                                    timedelta(seconds=1))
 
-        # Create dummy files for ProcessFullDataStep
+        # Create test files for ProcessFullDataStep
         self._create_test_input_files("demo")
-        # Create dummy output for ProcessFullDataStep to satisfy CreateDcConfigStep
-        output_dir = Path(self._tmpdir) / "output"
-        output_dir.mkdir(parents=True, exist_ok=True)
-        (output_dir / "demo.csv").write_text("data")
 
         run_sdmx_pipeline(config=config, now_fn=clock)
 
@@ -552,10 +552,6 @@ class RunPipelineTest(unittest.TestCase):
         # Create test files for ProcessFullDataStep with sanitized name
         sanitized_prefix = "my_flow_name_2025"
         self._create_test_input_files(sanitized_prefix)
-        # Create dummy output for ProcessFullDataStep to satisfy CreateDcConfigStep
-        output_dir = Path(self._tmpdir) / "output"
-        output_dir.mkdir(parents=True, exist_ok=True)
-        (output_dir / f"{sanitized_prefix}.csv").write_text("data")
 
         run_sdmx_pipeline(config=config,
                           now_fn=_IncrementingClock(
@@ -590,12 +586,8 @@ class RunPipelineTest(unittest.TestCase):
         first_clock = _IncrementingClock(
             datetime(2025, 1, 2, tzinfo=timezone.utc), timedelta(seconds=1))
 
-        # Create dummy files for ProcessFullDataStep
+        # Create test files for ProcessFullDataStep
         self._create_test_input_files("demo")
-        # Create dummy output for ProcessFullDataStep to satisfy CreateDcConfigStep
-        output_dir = Path(self._tmpdir) / "output"
-        output_dir.mkdir(parents=True, exist_ok=True)
-        (output_dir / "demo.csv").write_text("data")
 
         # Run 1 with original config
         run_sdmx_pipeline(config=config, now_fn=first_clock)
@@ -629,12 +621,8 @@ class RunPipelineTest(unittest.TestCase):
         initial_clock = _IncrementingClock(
             datetime(2025, 1, 3, tzinfo=timezone.utc), timedelta(seconds=1))
 
-        # Create dummy files for ProcessFullDataStep
+        # Create test files for ProcessFullDataStep
         self._create_test_input_files("demo")
-        # Create dummy output for ProcessFullDataStep to satisfy CreateDcConfigStep
-        output_dir = Path(self._tmpdir) / "output"
-        output_dir.mkdir(parents=True, exist_ok=True)
-        (output_dir / "demo.csv").write_text("data")
 
         # Run 1
         run_sdmx_pipeline(config=config, now_fn=initial_clock)
@@ -670,6 +658,10 @@ class SdmxStepTest(unittest.TestCase):
         (sample_output_dir / f"{prefix}_pvmap.csv").write_text("pvmap")
         (sample_output_dir / f"{prefix}_metadata.csv").write_text("metadata")
 
+        output_dir = Path(self._tmpdir) / "output"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        (output_dir / f"{prefix}.csv").write_text("output")
+
     def _build_config(self,
                       dataset_prefix: str | None,
                       endpoint: str = "https://example.com",
@@ -682,16 +674,6 @@ class SdmxStepTest(unittest.TestCase):
                               run=RunConfig(command="test",
                                             dataset_prefix=dataset_prefix,
                                             working_dir=self._tmpdir))
-
-    def _create_test_input_files(self, prefix: str) -> None:
-        (Path(self._tmpdir) / f"{prefix}_data.csv").write_text("data")
-        (Path(self._tmpdir) / f"{prefix}_sample.csv").write_text("sample")
-        (Path(self._tmpdir) / f"{prefix}_metadata.xml").write_text("metadata")
-
-        sample_output_dir = Path(self._tmpdir) / "sample_output"
-        sample_output_dir.mkdir(parents=True, exist_ok=True)
-        (sample_output_dir / f"{prefix}_pvmap.csv").write_text("pvmap")
-        (sample_output_dir / f"{prefix}_metadata.csv").write_text("metadata")
 
     def test_run_command_logs_and_executes(self) -> None:
         with mock.patch("subprocess.run") as mock_run:
@@ -844,7 +826,7 @@ class SdmxStepTest(unittest.TestCase):
         )
         step = CreateSampleStep(name="test-step", config=config)
 
-        # Create dummy input file to satisfy validation
+        # Create test input file to satisfy validation
         input_path = Path(self._tmpdir) / "demo_data.csv"
         input_path.write_text("header\nrow1")
 
@@ -869,7 +851,7 @@ class SdmxStepTest(unittest.TestCase):
         )
         step = CreateSampleStep(name="test-step", config=config)
 
-        # Create dummy input file
+        # Create test input file
         input_path = Path(self._tmpdir) / "demo_data.csv"
         input_path.write_text("header\nrow1")
 
@@ -921,7 +903,7 @@ class SdmxStepTest(unittest.TestCase):
         ),)
         step = CreateSchemaMapStep(name="test-step", config=config)
 
-        # Create dummy input files to satisfy validation
+        # Create test input files to satisfy validation
         (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
         (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
 
@@ -944,7 +926,7 @@ class SdmxStepTest(unittest.TestCase):
         ),)
         step = CreateSchemaMapStep(name="test-step", config=config)
 
-        # Create dummy input files
+        # Create test input files
         (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
         (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
 
