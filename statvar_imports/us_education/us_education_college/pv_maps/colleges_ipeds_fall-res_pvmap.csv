@@ -1,0 +1,16 @@
+key,p1,v1,p2,v2,p3,v3
+,,,,,,
+enrollment_fall,measuredProperty,count,populationType,Student,value,{Number}
+unitid,observationAbout,ipedsId/{Data},,,,
+year,observationDate,{Number},,,,
+,,,,,,
+,,,,,,
+,,,,,,
+type_of_freshman:1,enrollmentLevel,Graduate,schoolGradeLevel,HighSchool,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+state_of_residence,placeOfOrigin,geoId/{Data},,,,
+state_of_residence:98,#ignore,,,,,,
+state_of_residence:99,#ignore,,,,,,

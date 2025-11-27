@@ -1,0 +1,10 @@
+unitid,year,fips,reqt_hs_diploma,reqt_hs_rank,reqt_test_scores,reqt_sat_scores,reqt_other_test,reqt_residence,reqt_ability_to_benefit,reqt_age,reqt_toefl,reqt_other,years_college_reqd,no_entering_freshmen,open_admissions_policy,reqt_hs_gpa,reqt_hs_record,reqt_college_prep,reqt_recommendations,reqt_competencies,sat_act_report_period,sat_number_submitting,sat_percent_submitting,act_number_submitting,act_percent_submitting,sat_crit_read_25_pctl,sat_crit_read_75_pctl,sat_math_25_pctl,sat_math_75_pctl,act_composite_25_pctl,act_composite_75_pctl,act_english_25_pctl,act_english_75_pctl,act_math_25_pctl,act_math_75_pctl,sat_writing_25_pctl,sat_writing_75_pctl,act_writing_25_pctl,act_writing_75_pctl,reqt_work,reqt_personal_statement,reqt_legacy_status,sat_crit_read_50_pctl,sat_math_50_pctl,act_composite_50_pctl,act_english_50_pctl,act_math_50_pctl
+100636,1990,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+100636,1991,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+100636,1992,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+100636,1993,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+100636,1994,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+100636,1995,1,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+100636,1996,1,-1,-1,1,-1,1,-1,-1,-1,-1,1,-1,-1,-1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+100636,1997,1,,,1,,1,,,,,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+100636,1998,1,0,0,1,0,1,0,0,0,0,1,-2,0,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
