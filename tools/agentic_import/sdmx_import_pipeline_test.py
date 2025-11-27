@@ -455,37 +455,12 @@ class PlanningTest(unittest.TestCase):
             self.assertIn("up-to-date", decision.reason)
 
 
-class RunPipelineTest(unittest.TestCase):
-
-    def _build_config(self, *, dataset_prefix: str | None, dataflow: str | None,
-                      command: str) -> PipelineConfig:
-        return PipelineConfig(
-            sdmx=SdmxConfig(
-                endpoint="https://api.example.com",
-                agency="TEST_AGENCY",
-                dataflow=SdmxDataflowConfig(
-                    id=dataflow,
-                    key="test-key",
-                    param="area=US",
-                ),
-            ),
-            run=RunConfig(
-                dataset_prefix=dataset_prefix,
-                working_dir=self._tmpdir,
-                skip_confirmation=True,
-                command=command,
-            ),
-        )
+class SdmxTestBase(unittest.TestCase):
 
     def setUp(self) -> None:
         self._tmpdir_obj = tempfile.TemporaryDirectory()
         self.addCleanup(self._tmpdir_obj.cleanup)
         self._tmpdir = self._tmpdir_obj.name
-        # Mock _run_command to avoid actual execution during pipeline tests
-        self._run_command_patcher = mock.patch(
-            "tools.agentic_import.sdmx_import_pipeline._run_command")
-        self._mock_run_command = self._run_command_patcher.start()
-        self.addCleanup(self._run_command_patcher.stop)
 
     def _create_test_input_files(self, prefix: str) -> None:
         (Path(self._tmpdir) / f"{prefix}_data.csv").write_text("data")
@@ -500,6 +475,41 @@ class RunPipelineTest(unittest.TestCase):
         output_dir = Path(self._tmpdir) / "output"
         output_dir.mkdir(parents=True, exist_ok=True)
         (output_dir / f"{prefix}.csv").write_text("output")
+
+    def _build_config(self,
+                      dataset_prefix: str | None,
+                      dataflow: str | None = "FLOW",
+                      command: str = "test",
+                      endpoint: str = "https://example.com",
+                      agency: str = "AGENCY") -> PipelineConfig:
+        return PipelineConfig(
+            sdmx=SdmxConfig(
+                endpoint=endpoint,
+                agency=agency,
+                dataflow=SdmxDataflowConfig(
+                    id=dataflow,
+                    key="test-key",
+                    param="area=US",
+                ),
+            ),
+            run=RunConfig(
+                dataset_prefix=dataset_prefix,
+                working_dir=self._tmpdir,
+                skip_confirmation=True,
+                command=command,
+            ),
+        )
+
+
+class RunPipelineTest(SdmxTestBase):
+
+    def setUp(self) -> None:
+        super().setUp()
+        # Mock _run_command to avoid actual execution during pipeline tests
+        self._run_command_patcher = mock.patch(
+            "tools.agentic_import.sdmx_import_pipeline._run_command")
+        self._mock_run_command = self._run_command_patcher.start()
+        self.addCleanup(self._run_command_patcher.stop)
 
     def test_run_pipeline_updates_state_and_hash(self) -> None:
         command = "sdmx run pipeline"
@@ -641,39 +651,7 @@ class RunPipelineTest(unittest.TestCase):
         self.assertEqual(first_state, second_state)
 
 
-class SdmxStepTest(unittest.TestCase):
-
-    def setUp(self) -> None:
-        self._tmpdir_obj = tempfile.TemporaryDirectory()
-        self.addCleanup(self._tmpdir_obj.cleanup)
-        self._tmpdir = self._tmpdir_obj.name
-
-    def _create_test_input_files(self, prefix: str) -> None:
-        (Path(self._tmpdir) / f"{prefix}_data.csv").write_text("data")
-        (Path(self._tmpdir) / f"{prefix}_sample.csv").write_text("sample")
-        (Path(self._tmpdir) / f"{prefix}_metadata.xml").write_text("metadata")
-
-        sample_output_dir = Path(self._tmpdir) / "sample_output"
-        sample_output_dir.mkdir(parents=True, exist_ok=True)
-        (sample_output_dir / f"{prefix}_pvmap.csv").write_text("pvmap")
-        (sample_output_dir / f"{prefix}_metadata.csv").write_text("metadata")
-
-        output_dir = Path(self._tmpdir) / "output"
-        output_dir.mkdir(parents=True, exist_ok=True)
-        (output_dir / f"{prefix}.csv").write_text("output")
-
-    def _build_config(self,
-                      dataset_prefix: str | None,
-                      endpoint: str = "https://example.com",
-                      agency: str = "AGENCY",
-                      dataflow: str = "FLOW") -> PipelineConfig:
-        return PipelineConfig(sdmx=SdmxConfig(
-            endpoint=endpoint,
-            agency=agency,
-            dataflow=SdmxDataflowConfig(id=dataflow)),
-                              run=RunConfig(command="test",
-                                            dataset_prefix=dataset_prefix,
-                                            working_dir=self._tmpdir))
+class SdmxStepTest(SdmxTestBase):
 
     def test_run_command_logs_and_executes(self) -> None:
         with mock.patch("subprocess.run") as mock_run:
@@ -830,7 +808,8 @@ class SdmxStepTest(unittest.TestCase):
 
         # No input file created, dry run should still succeed
         context1 = step._prepare_command()
-        self.assertIn("data_sampler.py", context1.full_command[1])
+        self.assertTrue(
+            any("data_sampler.py" in arg for arg in context1.full_command))
         self.assertIn("--sampler_output_rows=500", context1.full_command)
 
         # Second call returns same object
@@ -871,7 +850,7 @@ class SdmxStepTest(unittest.TestCase):
             # Verify run called the command with the same args
             mock_run_cmd.assert_called_once()
             args, kwargs = mock_run_cmd.call_args
-            self.assertIn("data_sampler.py", args[0][1])
+            self.assertTrue(any("data_sampler.py" in arg for arg in args[0]))
             self.assertTrue(kwargs["verbose"])
 
             self.assertTrue(kwargs["verbose"])
@@ -921,7 +900,8 @@ class SdmxStepTest(unittest.TestCase):
 
         # First call creates context
         context1 = step._prepare_command()
-        self.assertIn("pvmap_generator.py", context1.full_command[1])
+        self.assertTrue(
+            any("pvmap_generator.py" in arg for arg in context1.full_command))
         self.assertIn("--gemini_cli=custom-gemini", context1.full_command)
         self.assertIn("--skip_confirmation", context1.full_command)
 
@@ -962,7 +942,7 @@ class SdmxStepTest(unittest.TestCase):
             # Verify run called the command with the same args
             mock_run_cmd.assert_called_once()
             args, kwargs = mock_run_cmd.call_args
-            self.assertIn("pvmap_generator.py", args[0][1])
+            self.assertTrue(any("pvmap_generator.py" in arg for arg in args[0]))
             self.assertTrue(kwargs["verbose"])
 
             self.assertTrue(kwargs["verbose"])
@@ -1039,11 +1019,10 @@ class SdmxStepTest(unittest.TestCase):
             # Verify run called the command with the same args
             mock_run_cmd.assert_called_once()
             args, kwargs = mock_run_cmd.call_args
-            self.assertIn("stat_var_processor.py", args[0][1])
-            self.assertIn("--input_data=", args[0][2])
-            self.assertTrue(kwargs["verbose"])
-
-            self.assertIn("--input_data=", args[0][2])
+            self.assertTrue(
+                any("stat_var_processor.py" in arg for arg in args[0]))
+            self.assertTrue(
+                any(arg.startswith("--input_data=") for arg in args[0]))
             self.assertTrue(kwargs["verbose"])
 
     def test_process_full_data_step_dry_run_succeeds_if_input_missing(
@@ -1102,7 +1081,8 @@ class SdmxStepTest(unittest.TestCase):
             mock_run_cmd.assert_called_once()
             args, kwargs = mock_run_cmd.call_args
             command = args[0]
-            self.assertIn("generate_custom_dc_config.py", command[1])
+            self.assertTrue(
+                any("generate_custom_dc_config.py" in arg for arg in command))
             self.assertIn(f"--input_csv={final_output_dir}/demo.csv", command)
             self.assertIn(
                 f"--output_config={final_output_dir}/demo_config.json", command)
