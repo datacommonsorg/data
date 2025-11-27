@@ -701,6 +701,13 @@ class SdmxStepTest(SdmxTestBase):
                 self.assertTrue(
                     any(expected in arg for arg in context1.full_command))
 
+    def _assert_dry_run_succeeds_without_input(self, step) -> None:
+        step.dry_run()
+
+    def _assert_run_fails_without_input(self, step, error_pattern: str) -> None:
+        with self.assertRaisesRegex(RuntimeError, error_pattern):
+            step.run()
+
     def test_run_command_logs_and_executes(self) -> None:
         with mock.patch("subprocess.run") as mock_run:
             with self.assertLogs(logging.get_absl_logger(),
@@ -855,7 +862,7 @@ class SdmxStepTest(SdmxTestBase):
         )
         step = CreateSampleStep(name="test-step", config=config)
         # No input file created, dry run should still succeed
-        step.dry_run()
+        self._assert_dry_run_succeeds_without_input(step)
 
     def test_create_sample_step_run_fails_if_input_missing(self) -> None:
         config = PipelineConfig(
@@ -869,9 +876,8 @@ class SdmxStepTest(SdmxTestBase):
         )
         step = CreateSampleStep(name="test-step", config=config)
         # No input file created, run should fail
-        with self.assertRaisesRegex(RuntimeError,
-                                    "Input file missing for sampling"):
-            step.run()
+        self._assert_run_fails_without_input(
+            step, "Input file missing for sampling")
 
     def test_create_schema_map_step_caches_plan(self) -> None:
         config = PipelineConfig(run=RunConfig(
@@ -921,7 +927,7 @@ class SdmxStepTest(SdmxTestBase):
         ),)
         step = CreateSchemaMapStep(name="test-step", config=config)
         # No input files created, dry run should still succeed
-        step.dry_run()
+        self._assert_dry_run_succeeds_without_input(step)
 
     def test_create_schema_map_step_run_fails_if_input_missing(self) -> None:
         config = PipelineConfig(run=RunConfig(
@@ -932,8 +938,7 @@ class SdmxStepTest(SdmxTestBase):
         ),)
         step = CreateSchemaMapStep(name="test-step", config=config)
         # No input files created, run should fail
-        with self.assertRaises(RuntimeError):
-            step.run()
+        self._assert_run_fails_without_input(step, ".*")
 
     def test_process_full_data_step_caches_plan(self) -> None:
         config = PipelineConfig(run=RunConfig(
@@ -984,7 +989,7 @@ class SdmxStepTest(SdmxTestBase):
         ),)
         step = ProcessFullDataStep(name="test-step", config=config)
         # Missing input files, dry run should still succeed
-        step.dry_run()
+        self._assert_dry_run_succeeds_without_input(step)
 
     def test_process_full_data_step_run_fails_if_input_missing(self) -> None:
         config = PipelineConfig(run=RunConfig(
@@ -995,8 +1000,7 @@ class SdmxStepTest(SdmxTestBase):
         ),)
         step = ProcessFullDataStep(name="test-step", config=config)
         # Missing input files, run should fail
-        with self.assertRaises(RuntimeError):
-            step.run()
+        self._assert_run_fails_without_input(step, ".*")
 
     def test_create_dc_config_step_caches_plan(self) -> None:
         config = self._build_config(dataset_prefix="demo",
