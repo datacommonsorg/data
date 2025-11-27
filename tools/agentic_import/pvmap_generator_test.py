@@ -178,6 +178,54 @@ class PVMapGeneratorTest(unittest.TestCase):
                         input_data=[str(external_file)], input_metadata=[]),
                            dry_run=True))
 
+    def test_generate_prompt_with_relative_working_dir(self):
+        # Create a subdirectory for the relative working directory test
+        sub_dir_name = 'sub_working_dir'
+        sub_dir = Path(self._temp_dir.name) / sub_dir_name
+        sub_dir.mkdir()
+
+        # Create input files inside the subdirectory
+        data_file = sub_dir / 'input.csv'
+        data_file.write_text('header\nvalue')
+        metadata_file = sub_dir / 'metadata.csv'
+        metadata_file.write_text('parameter,value')
+
+        # Use relative path for working_dir
+        config = Config(
+            data_config=DataConfig(
+                input_data=[
+                    str(data_file.relative_to(Path(self._temp_dir.name)))
+                ],  # Relative to PWD
+                input_metadata=[
+                    str(metadata_file.relative_to(Path(self._temp_dir.name)))
+                ],  # Relative to PWD
+                is_sdmx_dataset=False,
+            ),
+            dry_run=True,
+            max_iterations=3,
+            output_path='output/output_file',
+            working_dir=sub_dir_name,  # Relative path
+        )
+
+        # We need to run from the parent directory so the relative path is valid
+        # The setUp already changed to self._temp_dir.name, so we are in the right place
+
+        generator = PVMapGenerator(config)
+        result = generator.generate()
+
+        self._assert_generation_result(result)
+        prompt_path = self._read_prompt_path(result)
+        prompt_text = prompt_path.read_text()
+
+        # Verify that the working directory in the prompt is the absolute path of the subdirectory
+        expected_working_dir = str(sub_dir.resolve())
+        self.assertIn(expected_working_dir, prompt_text)
+        self.assertIn(f'"working_dir": "{expected_working_dir}"', prompt_text)
+
+        # Verify input paths are also absolute in the prompt
+        self.assertIn(str(data_file.resolve()), prompt_text)
+        self.assertIn(str(metadata_file.resolve()), prompt_text)
+
 
 if __name__ == '__main__':
     unittest.main()

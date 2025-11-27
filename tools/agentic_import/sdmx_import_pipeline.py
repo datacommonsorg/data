@@ -183,12 +183,10 @@ def _compute_critical_input_hash(config: PipelineConfig) -> str:
 
 
 def _resolve_working_dir(config: PipelineConfig) -> Path:
-    directory = Path(config.run.working_dir or os.getcwd())
-    if directory.exists():
-        if not directory.is_dir():
-            raise ValueError(f"working_dir is not a directory: {directory}")
-    else:
-        directory.mkdir(parents=True, exist_ok=True)
+    directory = Path(config.run.working_dir or os.getcwd()).resolve()
+    if directory.exists() and not directory.is_dir():
+        raise ValueError(f"working_dir is not a directory: {directory}")
+    directory.mkdir(parents=True, exist_ok=True)
     return directory
 
 
@@ -350,7 +348,7 @@ class DownloadDataStep(SdmxStep):
         dataflow = _require_config_field(self._config.sdmx.dataflow.id,
                                          _FLAG_SDMX_DATAFLOW_ID, self.name)
         dataset_prefix = self._config.run.dataset_prefix
-        working_dir = Path(self._config.run.working_dir)
+        working_dir = Path(self._config.run.working_dir).resolve()
         output_path = working_dir / f"{dataset_prefix}_data.csv"
         args = [
             "download-data",
@@ -411,7 +409,7 @@ class DownloadMetadataStep(SdmxStep):
         dataflow = _require_config_field(self._config.sdmx.dataflow.id,
                                          _FLAG_SDMX_DATAFLOW_ID, self.name)
         dataset_prefix = self._config.run.dataset_prefix
-        working_dir = Path(self._config.run.working_dir)
+        working_dir = Path(self._config.run.working_dir).resolve()
         output_path = working_dir / f"{dataset_prefix}_metadata.xml"
         args = [
             "download-metadata",
@@ -463,7 +461,7 @@ class CreateSampleStep(SdmxStep):
         if self._context:
             return self._context
         dataset_prefix = self._config.run.dataset_prefix
-        working_dir = Path(self._config.run.working_dir)
+        working_dir = Path(self._config.run.working_dir).resolve()
         input_path = working_dir / f"{dataset_prefix}_data.csv"
         output_path = working_dir / f"{dataset_prefix}_sample.csv"
 
@@ -518,7 +516,7 @@ class CreateSchemaMapStep(SdmxStep):
         if self._context:
             return self._context
         dataset_prefix = self._config.run.dataset_prefix
-        working_dir = Path(self._config.run.working_dir)
+        working_dir = Path(self._config.run.working_dir).resolve()
         sample_path = working_dir / f"{dataset_prefix}_sample.csv"
         metadata_path = working_dir / f"{dataset_prefix}_metadata.xml"
         output_prefix = working_dir / SAMPLE_OUTPUT_DIR / dataset_prefix
@@ -533,6 +531,7 @@ class CreateSchemaMapStep(SdmxStep):
             args.append("--skip_confirmation")
         if self._config.run.gemini_cli:
             args.append(f"--gemini_cli={self._config.run.gemini_cli}")
+        args.append(f"--working_dir={working_dir}")
 
         full_command = [sys.executable, str(PVMAP_GENERATOR_PATH)] + args
         self._context = CreateSchemaMapStep._StepContext(
@@ -587,7 +586,7 @@ class ProcessFullDataStep(SdmxStep):
         if self._context:
             return self._context
         dataset_prefix = self._config.run.dataset_prefix
-        working_dir = Path(self._config.run.working_dir)
+        working_dir = Path(self._config.run.working_dir).resolve()
         input_data_path = working_dir / f"{dataset_prefix}_data.csv"
         pv_map_path = (working_dir / SAMPLE_OUTPUT_DIR /
                        f"{dataset_prefix}_pvmap.csv")
@@ -655,7 +654,7 @@ class CreateDcConfigStep(SdmxStep):
         if self._context:
             return self._context
         dataset_prefix = self._config.run.dataset_prefix
-        working_dir = Path(self._config.run.working_dir)
+        working_dir = Path(self._config.run.working_dir).resolve()
         input_csv = working_dir / FINAL_OUTPUT_DIR / f"{dataset_prefix}.csv"
         output_config = (working_dir / FINAL_OUTPUT_DIR /
                          f"{dataset_prefix}_config.json")

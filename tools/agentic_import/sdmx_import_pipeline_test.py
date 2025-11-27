@@ -710,6 +710,7 @@ class SdmxStepTest(unittest.TestCase):
         # Second call returns same object
         context2 = step._prepare_command()
         self.assertIs(context1, context2)
+        self.assertTrue(context1.output_path.is_absolute())
 
     def test_download_metadata_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(
@@ -777,6 +778,7 @@ class SdmxStepTest(unittest.TestCase):
         # Second call returns same object
         context2 = step._prepare_command()
         self.assertIs(context1, context2)
+        self.assertTrue(context1.output_path.is_absolute())
 
     def test_download_data_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(
@@ -834,6 +836,7 @@ class SdmxStepTest(unittest.TestCase):
         # Second call returns same object
         context2 = step._prepare_command()
         self.assertIs(context1, context2)
+        self.assertTrue(context1.output_path.is_absolute())
 
     def test_create_sample_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(
@@ -925,6 +928,9 @@ class SdmxStepTest(unittest.TestCase):
         # Second call returns same object
         context2 = step._prepare_command()
         self.assertIs(context1, context2)
+        self.assertTrue(context1.sample_path.is_absolute())
+        self.assertTrue(context1.metadata_path.is_absolute())
+        self.assertTrue(context1.output_prefix.is_absolute())
 
     def test_create_schema_map_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(run=RunConfig(
@@ -999,6 +1005,10 @@ class SdmxStepTest(unittest.TestCase):
         context1 = step._prepare_command()
         context2 = step._prepare_command()
         self.assertIs(context1, context2)
+        self.assertTrue(context1.input_data_path.is_absolute())
+        self.assertTrue(context1.pv_map_path.is_absolute())
+        self.assertTrue(context1.metadata_path.is_absolute())
+        self.assertTrue(context1.output_prefix.is_absolute())
 
     def test_process_full_data_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(run=RunConfig(
@@ -1069,6 +1079,8 @@ class SdmxStepTest(unittest.TestCase):
         context1 = step._prepare_command()
         context2 = step._prepare_command()
         self.assertIs(context1, context2)
+        self.assertTrue(context1.input_csv.is_absolute())
+        self.assertTrue(context1.output_config.is_absolute())
 
     def test_create_dc_config_step_run_and_dry_run_use_same_plan(self) -> None:
         config = self._build_config(dataset_prefix="demo",
