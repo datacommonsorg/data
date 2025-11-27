@@ -150,8 +150,7 @@ class PVMapGenerator:
                 for path in self._config.data_config.input_metadata
             ]
 
-        # Parse output_path into directory and basename components
-        # Parse output_path, handling relative paths and ~ expansion
+        # Parse output_path into directory and basename components, handling relative paths and ~ expansion
         output_path = Path(self._config.output_path).expanduser()
         if not output_path.is_absolute():
             output_path = self._working_dir / output_path
