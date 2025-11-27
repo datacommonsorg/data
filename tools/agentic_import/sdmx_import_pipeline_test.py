@@ -653,14 +653,14 @@ class RunPipelineTest(SdmxTestBase):
 
 class SdmxStepTest(SdmxTestBase):
 
-    def _assert_run_and_dry_run_use_same_plan(self,
-                                              step,
-                                              *,
-                                              log_contains: str,
-                                              cmd_contains: str,
-                                              extra_cmd_checks=None,
-                                              expect_verbose: bool = True
-                                              ) -> None:
+    def _assert_run_and_dry_run_use_same_plan(
+            self,
+            step,
+            *,
+            log_contains: str,
+            cmd_contains: str,
+            extra_cmd_checks=None,
+            expect_verbose: bool = True) -> None:
         extra_cmd_checks = extra_cmd_checks or []
         with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
                        ) as mock_run_cmd:
@@ -736,7 +736,9 @@ class SdmxStepTest(SdmxTestBase):
         step = DownloadMetadataStep(name="test-step", config=config)
         self._assert_step_caches_plan(
             step,
-            command_contains=["download-metadata", "--endpoint=https://example.com"],
+            command_contains=[
+                "download-metadata", "--endpoint=https://example.com"
+            ],
             path_attrs=["output_path"],
         )
 
@@ -876,8 +878,8 @@ class SdmxStepTest(SdmxTestBase):
         )
         step = CreateSampleStep(name="test-step", config=config)
         # No input file created, run should fail
-        self._assert_run_fails_without_input(
-            step, "Input file missing for sampling")
+        self._assert_run_fails_without_input(step,
+                                             "Input file missing for sampling")
 
     def test_create_schema_map_step_caches_plan(self) -> None:
         config = PipelineConfig(run=RunConfig(
@@ -1036,8 +1038,8 @@ class SdmxStepTest(SdmxTestBase):
                 lambda command: self.assertIn(
                     f"--output_config={final_output_dir}/demo_config.json",
                     command),
-                lambda command: self.assertIn("--provenance_name=FLOW",
-                                              command),
+                lambda command: self.assertIn("--provenance_name=FLOW", command
+                                             ),
                 lambda command: self.assertIn("--source_name=AGENCY", command),
                 lambda command: self.assertIn(
                     "--data_source_url=https://example.com", command),
