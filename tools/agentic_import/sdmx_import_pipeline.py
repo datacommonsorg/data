@@ -37,41 +37,44 @@ from tools.agentic_import.pipeline import (CompositeCallback, PipelineAbort,
                                            PipelineCallback, PipelineRunner,
                                            RunnerConfig, Step)
 from tools.agentic_import.sdmx_pipeline_builder import build_sdmx_pipeline
-from tools.agentic_import.sdmx_pipeline_config import (PipelineConfig,
-                                                       RunConfig, SampleConfig,
-                                                       SdmxConfig,
-                                                       SdmxDataflowConfig)
+from tools.agentic_import.sdmx_pipeline_config import (
+    FLAG_SDMX_AGENCY,
+    FLAG_SDMX_DATAFLOW_ID,
+    FLAG_SDMX_DATAFLOW_KEY,
+    FLAG_SDMX_DATAFLOW_PARAM,
+    FLAG_SDMX_ENDPOINT,
+    PipelineConfig,
+    RunConfig,
+    SampleConfig,
+    SdmxConfig,
+    SdmxDataflowConfig,
+)
 from tools.agentic_import.sdmx_pipeline_steps import SdmxStep
 from tools.agentic_import.state_handler import StateHandler, StepState
 
 # Flag names
-_FLAG_SDMX_ENDPOINT = "sdmx.endpoint"
-_FLAG_SDMX_AGENCY = "sdmx.agency"
-_FLAG_SDMX_DATAFLOW_ID = "sdmx.dataflow.id"
-_FLAG_SDMX_DATAFLOW_KEY = "sdmx.dataflow.key"
-_FLAG_SDMX_DATAFLOW_PARAM = "sdmx.dataflow.param"
 _FLAG_SAMPLE_ROWS = "sample.rows"
 
 FLAGS = flags.FLAGS
 
 
 def _define_flags() -> None:
-    flags.DEFINE_string(_FLAG_SDMX_ENDPOINT, None, "SDMX service endpoint.")
-    flags.mark_flag_as_required(_FLAG_SDMX_ENDPOINT)
+    flags.DEFINE_string(FLAG_SDMX_ENDPOINT, None, "SDMX service endpoint.")
+    flags.mark_flag_as_required(FLAG_SDMX_ENDPOINT)
 
-    flags.DEFINE_string(_FLAG_SDMX_AGENCY, None,
+    flags.DEFINE_string(FLAG_SDMX_AGENCY, None,
                         "Owning SDMX agency identifier.")
-    flags.mark_flag_as_required(_FLAG_SDMX_AGENCY)
+    flags.mark_flag_as_required(FLAG_SDMX_AGENCY)
 
-    flags.DEFINE_string(_FLAG_SDMX_DATAFLOW_ID, None,
+    flags.DEFINE_string(FLAG_SDMX_DATAFLOW_ID, None,
                         "Target SDMX dataflow identifier.")
-    flags.mark_flag_as_required(_FLAG_SDMX_DATAFLOW_ID)
+    flags.mark_flag_as_required(FLAG_SDMX_DATAFLOW_ID)
 
-    flags.DEFINE_string(_FLAG_SDMX_DATAFLOW_KEY, None,
+    flags.DEFINE_string(FLAG_SDMX_DATAFLOW_KEY, None,
                         "Optional SDMX key or filter.")
 
     flags.DEFINE_string(
-        _FLAG_SDMX_DATAFLOW_PARAM, None,
+        FLAG_SDMX_DATAFLOW_PARAM, None,
         "Optional SDMX parameter appended to the dataflow query.")
 
     flags.DEFINE_integer(_FLAG_SAMPLE_ROWS, 1000,
@@ -126,11 +129,11 @@ def _resolve_dataset_prefix(config: PipelineConfig) -> str:
 
 def _compute_critical_input_hash(config: PipelineConfig) -> str:
     payload = {
-        _FLAG_SDMX_AGENCY: config.sdmx.agency,
-        _FLAG_SDMX_DATAFLOW_ID: config.sdmx.dataflow.id,
-        _FLAG_SDMX_ENDPOINT: config.sdmx.endpoint,
-        _FLAG_SDMX_DATAFLOW_KEY: config.sdmx.dataflow.key,
-        _FLAG_SDMX_DATAFLOW_PARAM: config.sdmx.dataflow.param,
+        FLAG_SDMX_AGENCY: config.sdmx.agency,
+        FLAG_SDMX_DATAFLOW_ID: config.sdmx.dataflow.id,
+        FLAG_SDMX_ENDPOINT: config.sdmx.endpoint,
+        FLAG_SDMX_DATAFLOW_KEY: config.sdmx.dataflow.key,
+        FLAG_SDMX_DATAFLOW_PARAM: config.sdmx.dataflow.param,
     }
     serialized = json.dumps(payload, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
@@ -296,12 +299,12 @@ def prepare_config() -> PipelineConfig:
     command = shlex.join(sys.argv) if sys.argv else "python"
     return PipelineConfig(
         sdmx=SdmxConfig(
-            endpoint=FLAGS[_FLAG_SDMX_ENDPOINT].value,
-            agency=FLAGS[_FLAG_SDMX_AGENCY].value,
+            endpoint=FLAGS[FLAG_SDMX_ENDPOINT].value,
+            agency=FLAGS[FLAG_SDMX_AGENCY].value,
             dataflow=SdmxDataflowConfig(
-                id=FLAGS[_FLAG_SDMX_DATAFLOW_ID].value,
-                key=FLAGS[_FLAG_SDMX_DATAFLOW_KEY].value,
-                param=FLAGS[_FLAG_SDMX_DATAFLOW_PARAM].value,
+                id=FLAGS[FLAG_SDMX_DATAFLOW_ID].value,
+                key=FLAGS[FLAG_SDMX_DATAFLOW_KEY].value,
+                param=FLAGS[FLAG_SDMX_DATAFLOW_PARAM].value,
             ),
         ),
         sample=SampleConfig(rows=FLAGS[_FLAG_SAMPLE_ROWS].value,),

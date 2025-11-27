@@ -17,6 +17,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+# SDMX flag names shared across pipeline modules.
+FLAG_SDMX_ENDPOINT = "sdmx.endpoint"
+FLAG_SDMX_AGENCY = "sdmx.agency"
+FLAG_SDMX_DATAFLOW_ID = "sdmx.dataflow.id"
+FLAG_SDMX_DATAFLOW_KEY = "sdmx.dataflow.key"
+FLAG_SDMX_DATAFLOW_PARAM = "sdmx.dataflow.param"
+
 
 @dataclass(frozen=True)
 class SdmxDataflowConfig:

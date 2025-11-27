@@ -25,7 +25,12 @@ from typing import ClassVar, Sequence
 from absl import logging
 
 from tools.agentic_import.pipeline import Step
-from tools.agentic_import.sdmx_pipeline_config import PipelineConfig
+from tools.agentic_import.sdmx_pipeline_config import (
+    FLAG_SDMX_AGENCY,
+    FLAG_SDMX_DATAFLOW_ID,
+    FLAG_SDMX_ENDPOINT,
+    PipelineConfig,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -40,12 +45,6 @@ DC_CONFIG_GENERATOR_PATH = (REPO_ROOT / "tools" / "agentic_import" /
 SAMPLE_OUTPUT_DIR = Path("sample_output")
 FINAL_OUTPUT_DIR = Path("output")
 
-# Flag names (copied for reference/usage in steps if needed,
-# though they are mostly used in main for flag definition)
-_FLAG_SDMX_ENDPOINT = "sdmx.endpoint"
-_FLAG_SDMX_AGENCY = "sdmx.agency"
-_FLAG_SDMX_DATAFLOW_ID = "sdmx.dataflow.id"
-
 
 def _require_config_field(value: str | None, field_name: str,
                           step_name: str) -> str:
@@ -58,11 +57,6 @@ def _run_command(command: Sequence[str], *, verbose: bool) -> None:
     if verbose:
         logging.debug(f"Running command: {' '.join(command)}")
     subprocess.run(command, check=True)
-
-
-def _run_sdmx_cli(args: Sequence[str], *, verbose: bool) -> None:
-    command = [sys.executable, str(SDMX_CLI_PATH), *args]
-    _run_command(command, verbose=verbose)
 
 
 class SdmxStep(Step):
@@ -107,11 +101,11 @@ class DownloadDataStep(SdmxStep):
         if self._context:
             return self._context
         endpoint = _require_config_field(self._config.sdmx.endpoint,
-                                         _FLAG_SDMX_ENDPOINT, self.name)
+                                         FLAG_SDMX_ENDPOINT, self.name)
         agency = _require_config_field(self._config.sdmx.agency,
-                                       _FLAG_SDMX_AGENCY, self.name)
+                                       FLAG_SDMX_AGENCY, self.name)
         dataflow = _require_config_field(self._config.sdmx.dataflow.id,
-                                         _FLAG_SDMX_DATAFLOW_ID, self.name)
+                                         FLAG_SDMX_DATAFLOW_ID, self.name)
         dataset_prefix = self._config.run.dataset_prefix
         working_dir = Path(self._config.run.working_dir).resolve()
         output_path = working_dir / f"{dataset_prefix}_data.csv"
@@ -168,11 +162,11 @@ class DownloadMetadataStep(SdmxStep):
         if self._context:
             return self._context
         endpoint = _require_config_field(self._config.sdmx.endpoint,
-                                         _FLAG_SDMX_ENDPOINT, self.name)
+                                         FLAG_SDMX_ENDPOINT, self.name)
         agency = _require_config_field(self._config.sdmx.agency,
-                                       _FLAG_SDMX_AGENCY, self.name)
+                                       FLAG_SDMX_AGENCY, self.name)
         dataflow = _require_config_field(self._config.sdmx.dataflow.id,
-                                         _FLAG_SDMX_DATAFLOW_ID, self.name)
+                                         FLAG_SDMX_DATAFLOW_ID, self.name)
         dataset_prefix = self._config.run.dataset_prefix
         working_dir = Path(self._config.run.working_dir).resolve()
         output_path = working_dir / f"{dataset_prefix}_metadata.xml"
@@ -425,11 +419,11 @@ class CreateDcConfigStep(SdmxStep):
                          f"{dataset_prefix}_config.json")
 
         endpoint = _require_config_field(self._config.sdmx.endpoint,
-                                         _FLAG_SDMX_ENDPOINT, self.name)
+                                         FLAG_SDMX_ENDPOINT, self.name)
         agency = _require_config_field(self._config.sdmx.agency,
-                                       _FLAG_SDMX_AGENCY, self.name)
+                                       FLAG_SDMX_AGENCY, self.name)
         dataflow = _require_config_field(self._config.sdmx.dataflow.id,
-                                         _FLAG_SDMX_DATAFLOW_ID, self.name)
+                                         FLAG_SDMX_DATAFLOW_ID, self.name)
 
         dataset_url = (f"{endpoint.rstrip('/')}/data/"
                        f"{agency},{dataflow},")
