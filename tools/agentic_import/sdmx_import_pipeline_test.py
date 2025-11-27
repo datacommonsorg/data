@@ -681,6 +681,26 @@ class SdmxStepTest(SdmxTestBase):
         for check in extra_cmd_checks:
             check(command)
 
+    def _assert_step_caches_plan(self,
+                                 step,
+                                 *,
+                                 command_contains=None,
+                                 path_attrs=None) -> None:
+        command_contains = command_contains or []
+        path_attrs = path_attrs or []
+
+        context1 = step._prepare_command()
+        context2 = step._prepare_command()
+        self.assertIs(context1, context2)
+
+        for attr in path_attrs:
+            self.assertTrue(getattr(context1, attr).is_absolute())
+
+        if command_contains:
+            for expected in command_contains:
+                self.assertTrue(
+                    any(expected in arg for arg in context1.full_command))
+
     def test_run_command_logs_and_executes(self) -> None:
         with mock.patch("subprocess.run") as mock_run:
             with self.assertLogs(logging.get_absl_logger(),
@@ -707,16 +727,11 @@ class SdmxStepTest(SdmxTestBase):
             ),
         )
         step = DownloadMetadataStep(name="test-step", config=config)
-
-        # First call creates context
-        context1 = step._prepare_command()
-        self.assertIn("download-metadata", context1.full_command)
-        self.assertIn("--endpoint=https://example.com", context1.full_command)
-
-        # Second call returns same object
-        context2 = step._prepare_command()
-        self.assertIs(context1, context2)
-        self.assertTrue(context1.output_path.is_absolute())
+        self._assert_step_caches_plan(
+            step,
+            command_contains=["download-metadata", "--endpoint=https://example.com"],
+            path_attrs=["output_path"],
+        )
 
     def test_download_metadata_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(
@@ -758,18 +773,16 @@ class SdmxStepTest(SdmxTestBase):
             ),
         )
         step = DownloadDataStep(name="test-step", config=config)
-
-        # First call creates context
-        context1 = step._prepare_command()
-        self.assertIn("download-data", context1.full_command)
-        self.assertIn("--endpoint=https://example.com", context1.full_command)
-        self.assertIn("--key=test-key", context1.full_command)
-        self.assertIn("--param=area=US", context1.full_command)
-
-        # Second call returns same object
-        context2 = step._prepare_command()
-        self.assertIs(context1, context2)
-        self.assertTrue(context1.output_path.is_absolute())
+        self._assert_step_caches_plan(
+            step,
+            command_contains=[
+                "download-data",
+                "--endpoint=https://example.com",
+                "--key=test-key",
+                "--param=area=US",
+            ],
+            path_attrs=["output_path"],
+        )
 
     def test_download_data_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(
@@ -803,17 +816,11 @@ class SdmxStepTest(SdmxTestBase):
             sample=SampleConfig(rows=500),
         )
         step = CreateSampleStep(name="test-step", config=config)
-
-        # No input file created, dry run should still succeed
-        context1 = step._prepare_command()
-        self.assertTrue(
-            any("data_sampler.py" in arg for arg in context1.full_command))
-        self.assertIn("--sampler_output_rows=500", context1.full_command)
-
-        # Second call returns same object
-        context2 = step._prepare_command()
-        self.assertIs(context1, context2)
-        self.assertTrue(context1.output_path.is_absolute())
+        self._assert_step_caches_plan(
+            step,
+            command_contains=["data_sampler.py", "--sampler_output_rows=500"],
+            path_attrs=["output_path"],
+        )
 
     def test_create_sample_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(
@@ -876,22 +883,15 @@ class SdmxStepTest(SdmxTestBase):
             skip_confirmation=True,
         ),)
         step = CreateSchemaMapStep(name="test-step", config=config)
-
-        # No input files created, dry run should still succeed
-
-        # First call creates context
-        context1 = step._prepare_command()
-        self.assertTrue(
-            any("pvmap_generator.py" in arg for arg in context1.full_command))
-        self.assertIn("--gemini_cli=custom-gemini", context1.full_command)
-        self.assertIn("--skip_confirmation", context1.full_command)
-
-        # Second call returns same object
-        context2 = step._prepare_command()
-        self.assertIs(context1, context2)
-        self.assertTrue(context1.sample_path.is_absolute())
-        self.assertTrue(context1.metadata_path.is_absolute())
-        self.assertTrue(context1.output_prefix.is_absolute())
+        self._assert_step_caches_plan(
+            step,
+            command_contains=[
+                "pvmap_generator.py",
+                "--gemini_cli=custom-gemini",
+                "--skip_confirmation",
+            ],
+            path_attrs=["sample_path", "metadata_path", "output_prefix"],
+        )
 
     def test_create_schema_map_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(run=RunConfig(
@@ -943,16 +943,15 @@ class SdmxStepTest(SdmxTestBase):
             verbose=True,
         ),)
         step = ProcessFullDataStep(name="test-step", config=config)
-
-        # No input files created, dry run should still succeed
-
-        context1 = step._prepare_command()
-        context2 = step._prepare_command()
-        self.assertIs(context1, context2)
-        self.assertTrue(context1.input_data_path.is_absolute())
-        self.assertTrue(context1.pv_map_path.is_absolute())
-        self.assertTrue(context1.metadata_path.is_absolute())
-        self.assertTrue(context1.output_prefix.is_absolute())
+        self._assert_step_caches_plan(
+            step,
+            path_attrs=[
+                "input_data_path",
+                "pv_map_path",
+                "metadata_path",
+                "output_prefix",
+            ],
+        )
 
     def test_process_full_data_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(run=RunConfig(
@@ -1005,11 +1004,10 @@ class SdmxStepTest(SdmxTestBase):
                                     agency="AGENCY",
                                     dataflow="FLOW")
         step = CreateDcConfigStep(name="test-step", config=config)
-        context1 = step._prepare_command()
-        context2 = step._prepare_command()
-        self.assertIs(context1, context2)
-        self.assertTrue(context1.input_csv.is_absolute())
-        self.assertTrue(context1.output_config.is_absolute())
+        self._assert_step_caches_plan(
+            step,
+            path_attrs=["input_csv", "output_config"],
+        )
 
     def test_create_dc_config_step_run_and_dry_run_use_same_plan(self) -> None:
         config = self._build_config(dataset_prefix="demo",
