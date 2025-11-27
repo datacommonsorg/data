@@ -13,143 +13,62 @@
 # limitations under the License.
 
 import os
-import time, config, zipfile
-from absl import logging, app
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
-from retry import retry
+import sys
 import pandas as pd
+from absl import logging, app
+import zipfile
 
-@retry(
-    tries=3,
-    delay=1000, 
-    backoff=2
-)
-def download_worldbank(url, download_dir):
+# Set up module path to access the utility script
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+data_dir = os.path.dirname(os.path.dirname(os.path.dirname(_MODULE_DIR)))
+sys.path.append(data_dir)
+
+from util.download_util_script import download_file
+
+# The API URL to download the subnational population data as a CSV zip archive.
+_API_URL = "http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?downloadformat=csv"
+
+def unzip_file(inputdir):
     """
-    Downloads data from the World Bank Databank URL by using Selenium.
-
-    Args:
-        url (str): The URL of the World Bank Databank page.
-        download_dir (str): The directory where the downloaded file will be saved.
+    Unzips the downloaded file.
     """
-  
-    if not os.path.exists(download_dir):
-        os.makedirs(download_dir)
-        logging.info(f"Created download directory: {download_dir}")
-
-    chrome_options = ChromeOptions()
-    chrome_options.add_argument("--headless")  
-    chrome_options.add_argument("--no-sandbox") 
-    chrome_options.add_argument("--disable-dev-shm-usage") 
-    chrome_options.add_argument("--window-size=1920,1080") 
-    chrome_options.add_argument("--disable-gpu")
-    
-    prefs = {
-        "download.default_directory": download_dir,
-        "download.prompt_for_download": False,
-        "download.directory_upgrade": True,
-        "safebrowsing.enabled": True
-    }
-
-    chrome_options.add_experimental_option("prefs", prefs)
-    driver = webdriver.Chrome(options=chrome_options)
     try:
-        logging.info(f"Navigating to URL: {url}")
-        driver.get(url)
+        zip_path = os.path.join(inputdir, "SP.POP.TOTL.zip")
+        os.rename(os.path.join(inputdir, "SP.POP.TOTL"), zip_path)
+        logging.info(f"Renamed downloaded file to '{zip_path}'.")
 
-        subnational = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="SubNAtionalButtonGrp"]/div/label[3]'))
-        )
-        subnational.click()
-        country = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="newSelection_SPOP_Country_Dim"]/div/div/div/div/div[1]/div[3]/div[1]/div[1]/div/a[1]'))
-        )
-        country.click()
-        time.sleep(10)
-        all = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="defaultSubnationalTab"]'))
-        )
-        all.click()
-        country.click()
-        series = WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, '//*[@id="panel_SPOP_Series_Dim"]/div[1]/h4/a'))
-        )
-        series.click()
-        population_chkbox = WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, '//input[@id="chk[SPOP_Series_Dim].[List].&[SP.POP.TOTL]"]'))
-        )
-        population_chkbox.click()
-        time_selection = WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, '//*[@id="panel_SPOP_Time_Dim"]/div[1]/h4/a'))
-        )
-        time_selection.click()
-        years = WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, '//*[@id="rowTimeDim"]/div/div/div[2]/div[3]/div[1]/div[1]/div/a[1]'))
-        )
-        driver.execute_script("arguments[0].click();", years)
-        apply_changes = WebDriverWait(driver, 25).until(
-            EC.element_to_be_clickable((By.XPATH, '//*[@id="applyChangesNoPreview"]'))
-        )
-        driver.execute_script("arguments[0].click();",apply_changes)
-        download_options = WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, '//a[@title="Download options"]'))
-        )
-        download_options.click()
-        csv = WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, '//a[@title="Download CSV Format"]'))
-        )
-        csv.click()
-        time.sleep(30)
-        logging.info(f"File was Successfully downloaded into the directory '{download_dir}'.")
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(inputdir)
+        logging.info(f"Successfully unzipped '{zip_path}'.")
+        os.remove(zip_path)
+        logging.info(f"Removed '{zip_path}'.")
 
     except Exception as e:
-        logging.fatal(f"An error occurred while downloading the file: {e}")
-        raise RuntimeError("Failed to download the file") from e
-    finally:
-        logging.info("Closing WebDriver.")
-        driver.quit()
+        logging.fatal(f"An error occurred while processing the downloaded file: {e}")
+        raise RuntimeError("Failed to process downloaded files.") from e
 
-def unzip_inputfile(inputdir):
-    try:
-        logging.info(f"Unzip the files from the directory {inputdir}.")
-        for filename in os.listdir(inputdir):
-            if str(filename).endswith(".zip"):
-                with zipfile.ZipFile(os.path.join(inputdir, filename), 'r') as zip_ref:
-                    zip_ref.extractall(inputdir)
-        
-        for filename in os.listdir(inputdir):
-            if "_Data" in filename and filename.endswith(".csv"):
-                os.rename(os.path.join(inputdir, filename), os.path.join(inputdir, "wb_subnational_input.csv"))
-            elif "Metadata" in filename and filename.endswith(".csv"):
-                os.remove(os.path.join(inputdir,filename))
-
-    except Exception as e:
-        logging.fatal(f"An error occurred while unzipping the file: {e}")
-        raise RuntimeError("Failed to unzip the file") from e
-
-def preprocess(inputdir):
-    try:
-        df = pd.read_csv(os.path.join(inputdir, "wb_subnational_input.csv"), encoding='latin1')
-        df['Country Name'] = df["Country Name"].str.replace(",","-")
-        df.to_csv(os.path.join(inputdir, "wb_subnational_input.csv"), index=False, encoding='utf-8')
-    except Exception as e:
-        logging.fatal(f"An error occurred while preprocessing the file: {e}")
-        raise RuntimeError("Failed to process user data") from e
-    
 def main(_):
-    worldbank_url = config.world_bank_url
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    input_dir = os.path.join(script_dir, "input_files")
-    
-    download_worldbank(worldbank_url, input_dir)
-    unzip_inputfile(input_dir)
-    preprocess(input_dir)
+    source_dir = os.path.join(script_dir, "source")
+
+    if not os.path.exists(source_dir):
+        os.makedirs(source_dir)
+        logging.info(f"Created source directory: {source_dir}")
+
+    logging.info("Downloading World Bank subnational population data via API...")
+    download_success = download_file(
+        url=_API_URL,
+        output_folder=source_dir,
+        unzip=False  # We will handle unzipping manually
+    )
+
+    if download_success:
+        logging.info("Download complete. Unzipping files...")
+        unzip_file(source_dir)
+        logging.info("Script finished successfully. Raw files are in the 'source' directory.")
+    else:
+        logging.fatal("Failed to download the data file.")
+        raise RuntimeError("Download failed.")
 
 if __name__ == "__main__":
    app.run(main)
-
