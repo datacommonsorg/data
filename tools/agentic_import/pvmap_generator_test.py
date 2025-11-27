@@ -116,6 +116,9 @@ class PVMapGeneratorTest(unittest.TestCase):
         self.assertIn(f'You have exactly {config.max_iterations} attempts',
                       prompt_text)
 
+        # Output path should be absolute in the prompt
+        self.assertIn(f'--output-path "{config.output_path}"', prompt_text)
+
         if expect_sdmx:
             # SDMX prompts highlight dataset type and show SDMX-specific banner.
             self.assertIn('"dataset_type": "sdmx"', prompt_text)

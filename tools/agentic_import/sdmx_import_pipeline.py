@@ -939,7 +939,7 @@ def prepare_config() -> PipelineConfig:
         run=RunConfig(
             command=command,
             dataset_prefix=FLAGS.dataset_prefix,
-            working_dir=None,
+            working_dir=FLAGS.working_dir,
             run_only=FLAGS.run_only,
             force=FLAGS.force,
             verbose=FLAGS.verbose,
@@ -987,6 +987,9 @@ def _define_flags() -> None:
 
     flags.DEFINE_string("gemini_cli", "gemini",
                         "Path to Gemini CLI executable.")
+
+    flags.DEFINE_string("working_dir", None,
+                        "Working directory for the pipeline.")
 
 
 def main(_: list[str]) -> int:

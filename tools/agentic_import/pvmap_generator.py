@@ -158,6 +158,7 @@ class PVMapGenerator:
 
         self._output_dir = output_path.parent
         self._output_basename = output_path.name
+        self._config.output_path = str(output_path)
 
         # Create output directory if it doesn't exist
         self._output_dir.mkdir(parents=True, exist_ok=True)
