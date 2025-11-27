@@ -193,12 +193,8 @@ class PVMapGeneratorTest(unittest.TestCase):
         # Use relative path for working_dir
         config = Config(
             data_config=DataConfig(
-                input_data=[
-                    str(data_file.relative_to(Path(self._temp_dir.name)))
-                ],  # Relative to PWD
-                input_metadata=[
-                    str(metadata_file.relative_to(Path(self._temp_dir.name)))
-                ],  # Relative to PWD
+                input_data=['input.csv'],  # Relative to working_dir
+                input_metadata=['metadata.csv'],  # Relative to working_dir
                 is_sdmx_dataset=False,
             ),
             dry_run=True,
@@ -225,6 +221,36 @@ class PVMapGeneratorTest(unittest.TestCase):
         # Verify input paths are also absolute in the prompt
         self.assertIn(str(data_file.resolve()), prompt_text)
         self.assertIn(str(metadata_file.resolve()), prompt_text)
+
+    def test_relative_paths_resolved_against_working_dir(self):
+        # Create a separate working directory
+        with tempfile.TemporaryDirectory() as work_dir:
+            work_path = Path(work_dir)
+            # Create input files inside the working directory
+            data_file = work_path / 'input.csv'
+            data_file.write_text('header\nvalue')
+
+            # Run from a different directory (current temp dir)
+            # Use relative path to input file, which should be resolved against work_dir
+            config = Config(
+                data_config=DataConfig(
+                    input_data=['input.csv'],  # Relative to work_dir
+                    input_metadata=[],
+                    is_sdmx_dataset=False,
+                ),
+                dry_run=True,
+                working_dir=work_dir,
+            )
+
+            # This should not raise ValueError because input.csv is found in work_dir
+            generator = PVMapGenerator(config)
+            result = generator.generate()
+            self._assert_generation_result(result)
+            self.assertEqual(str(generator._config.data_config.input_data[0]),
+                             str(data_file.resolve()))
+            # Verify output directory is also under working_dir
+            self.assertTrue(
+                str(generator._output_dir).startswith(str(work_path.resolve())))
 
 
 if __name__ == '__main__':

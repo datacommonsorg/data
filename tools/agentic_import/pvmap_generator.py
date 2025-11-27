@@ -151,13 +151,16 @@ class PVMapGenerator:
             ]
 
         # Parse output_path into directory and basename components
-        output_path = Path(self._config.output_path)
+        # Parse output_path, handling relative paths and ~ expansion
+        output_path = Path(self._config.output_path).expanduser()
+        if not output_path.is_absolute():
+            output_path = self._working_dir / output_path
+
         self._output_dir = output_path.parent
         self._output_basename = output_path.name
 
         # Create output directory if it doesn't exist
-        output_full_dir = self._working_dir / self._output_dir
-        output_full_dir.mkdir(parents=True, exist_ok=True)
+        self._output_dir.mkdir(parents=True, exist_ok=True)
 
         self._datacommons_dir = self._initialize_datacommons_dir()
 
@@ -171,7 +174,10 @@ class PVMapGenerator:
 
     def _validate_and_convert_path(self, path: str) -> Path:
         """Convert path to absolute and validate it's within working directory."""
-        real_path = Path(path).expanduser().resolve()
+        p = Path(path).expanduser()
+        if not p.is_absolute():
+            p = self._working_dir / p
+        real_path = p.resolve()
         working_dir = self._working_dir.resolve()
         try:
             real_path.relative_to(working_dir)
