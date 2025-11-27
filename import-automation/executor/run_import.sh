@@ -242,7 +242,7 @@ function build_docker {
   img=$DOCKER_IMAGE
   [[ "$RUN_MODE" != "docker" ]] && img="$ARTIFACT_REGISTRY/$DOCKER_IMAGE"
   run_cmd docker buildx build --build-context data=$DATA_REPO \
-    --build-arg build_type=local -f Dockerfile . \
+    --build-arg build_type=local --build-arg CACHE_BUSTER=$(date +%s) -f Dockerfile . \
     -t $img
 
   if [[ "$RUN_MODE" != "docker" ]]; then

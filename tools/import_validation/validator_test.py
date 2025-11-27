@@ -12,12 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+import sys
 import pandas as pd
 import unittest
 from datetime import datetime
 
-from tools.import_validation.validator import Validator
-from tools.import_validation.result import ValidationStatus
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _SCRIPT_DIR)
+
+from validator import Validator
+from result import ValidationStatus
 
 
 class TestMaxDateLatestValidation(unittest.TestCase):
