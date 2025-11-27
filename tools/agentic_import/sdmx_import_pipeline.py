@@ -64,6 +64,49 @@ _FLAG_SAMPLE_ROWS = "sample.rows"
 FLAGS = flags.FLAGS
 
 
+def _define_flags() -> None:
+    flags.DEFINE_string(_FLAG_SDMX_ENDPOINT, None, "SDMX service endpoint.")
+    flags.mark_flag_as_required(_FLAG_SDMX_ENDPOINT)
+
+    flags.DEFINE_string(_FLAG_SDMX_AGENCY, None,
+                        "Owning SDMX agency identifier.")
+    flags.mark_flag_as_required(_FLAG_SDMX_AGENCY)
+
+    flags.DEFINE_string(_FLAG_SDMX_DATAFLOW_ID, None,
+                        "Target SDMX dataflow identifier.")
+    flags.mark_flag_as_required(_FLAG_SDMX_DATAFLOW_ID)
+
+    flags.DEFINE_string(_FLAG_SDMX_DATAFLOW_KEY, None,
+                        "Optional SDMX key or filter.")
+
+    flags.DEFINE_string(
+        _FLAG_SDMX_DATAFLOW_PARAM, None,
+        "Optional SDMX parameter appended to the dataflow query.")
+
+    flags.DEFINE_integer(_FLAG_SAMPLE_ROWS, 1000,
+                         "Number of rows to sample from downloaded data.")
+
+    flags.DEFINE_string(
+        "dataset_prefix", None,
+        "Optional dataset prefix to override auto-derived values.")
+
+    flags.DEFINE_string("run_only", None,
+                        "Execute only a specific pipeline step by name.")
+
+    flags.DEFINE_boolean("force", False, "Force all steps to run.")
+
+    flags.DEFINE_boolean("verbose", False, "Enable verbose logging.")
+
+    flags.DEFINE_boolean("skip_confirmation", False,
+                         "Skip interactive confirmation prompts.")
+
+    flags.DEFINE_string("gemini_cli", "gemini",
+                        "Path to Gemini CLI executable.")
+
+    flags.DEFINE_string("working_dir", None,
+                        "Working directory for the pipeline.")
+
+
 @dataclass(frozen=True)
 class SdmxDataflowConfig:
     """Configuration for SDMX dataflow."""
@@ -947,49 +990,6 @@ def prepare_config() -> PipelineConfig:
             gemini_cli=FLAGS.gemini_cli,
         ),
     )
-
-
-def _define_flags() -> None:
-    flags.DEFINE_string(_FLAG_SDMX_ENDPOINT, None, "SDMX service endpoint.")
-    flags.mark_flag_as_required(_FLAG_SDMX_ENDPOINT)
-
-    flags.DEFINE_string(_FLAG_SDMX_AGENCY, None,
-                        "Owning SDMX agency identifier.")
-    flags.mark_flag_as_required(_FLAG_SDMX_AGENCY)
-
-    flags.DEFINE_string(_FLAG_SDMX_DATAFLOW_ID, None,
-                        "Target SDMX dataflow identifier.")
-    flags.mark_flag_as_required(_FLAG_SDMX_DATAFLOW_ID)
-
-    flags.DEFINE_string(_FLAG_SDMX_DATAFLOW_KEY, None,
-                        "Optional SDMX key or filter.")
-
-    flags.DEFINE_string(
-        _FLAG_SDMX_DATAFLOW_PARAM, None,
-        "Optional SDMX parameter appended to the dataflow query.")
-
-    flags.DEFINE_integer(_FLAG_SAMPLE_ROWS, 1000,
-                         "Number of rows to sample from downloaded data.")
-
-    flags.DEFINE_string(
-        "dataset_prefix", None,
-        "Optional dataset prefix to override auto-derived values.")
-
-    flags.DEFINE_string("run_only", None,
-                        "Execute only a specific pipeline step by name.")
-
-    flags.DEFINE_boolean("force", False, "Force all steps to run.")
-
-    flags.DEFINE_boolean("verbose", False, "Enable verbose logging.")
-
-    flags.DEFINE_boolean("skip_confirmation", False,
-                         "Skip interactive confirmation prompts.")
-
-    flags.DEFINE_string("gemini_cli", "gemini",
-                        "Path to Gemini CLI executable.")
-
-    flags.DEFINE_string("working_dir", None,
-                        "Working directory for the pipeline.")
 
 
 def main(_: list[str]) -> int:
