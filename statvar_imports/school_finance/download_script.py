@@ -63,17 +63,18 @@ def add_year_column(filepath: str, year: int):
         if filepath.endswith('.csv'):
             df.to_csv(filepath, index=False)
         elif filepath.endswith('.xlsx'):
-            # Use ExcelWriter for robust handling
-            with pd.ExcelWriter(filepath, engine='xlsxwriter') as writer:
+            with pd.ExcelWriter(filepath) as writer:
                 df.to_excel(writer, index=False, sheet_name='Sheet1')
             
         logging.info(
             f"Added 'year' column with value {year} as the FIRST column to {os.path.basename(filepath)}"
         )
     except Exception as e:
-        logging.fatal(f"Could not add year column to {filepath}: {e}")
+        # Log the error so you see the filename
+        logging.error(f"Could not add year column to {filepath}: {e}")
+        # Kill the script immediately so you don't get bad data
         raise RuntimeError(e)
-        return None
+        
 
 
 
