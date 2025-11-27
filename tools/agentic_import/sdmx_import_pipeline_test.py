@@ -44,11 +44,15 @@ from tools.agentic_import.pipeline import (  # pylint: disable=import-error
     RunnerConfig,
 )
 from tools.agentic_import.sdmx_import_pipeline import (  # pylint: disable=import-error
-    InteractiveCallback, JSONStateCallback, PipelineBuilder, PipelineConfig,
-    StepDecision, build_pipeline_callback, build_sdmx_pipeline, build_steps,
-    run_sdmx_pipeline, DownloadMetadataStep, DownloadDataStep, CreateSampleStep,
-    CreateSchemaMapStep, ProcessFullDataStep, CreateDcConfigStep, _run_command,
-    SdmxConfig, SampleConfig, RunConfig, SdmxDataflowConfig, SdmxStep)
+    InteractiveCallback, JSONStateCallback, build_pipeline_callback,
+    run_sdmx_pipeline)
+from tools.agentic_import.sdmx_pipeline_builder import (  # pylint: disable=import-error
+    PipelineBuilder, StepDecision, build_sdmx_pipeline, build_steps)
+from tools.agentic_import.sdmx_pipeline_config import (  # pylint: disable=import-error
+    PipelineConfig, RunConfig, SampleConfig, SdmxConfig, SdmxDataflowConfig)
+from tools.agentic_import.sdmx_pipeline_steps import (  # pylint: disable=import-error
+    CreateDcConfigStep, CreateSampleStep, CreateSchemaMapStep, DownloadDataStep,
+    DownloadMetadataStep, ProcessFullDataStep, SdmxStep, _run_command)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
 
@@ -507,7 +511,7 @@ class RunPipelineTest(SdmxTestBase):
         super().setUp()
         # Mock _run_command to avoid actual execution during pipeline tests
         self._run_command_patcher = mock.patch(
-            "tools.agentic_import.sdmx_import_pipeline._run_command")
+            "tools.agentic_import.sdmx_pipeline_steps._run_command")
         self._mock_run_command = self._run_command_patcher.start()
         self.addCleanup(self._run_command_patcher.stop)
 
@@ -662,7 +666,7 @@ class SdmxStepTest(SdmxTestBase):
             extra_cmd_checks=None,
             expect_verbose: bool = True) -> None:
         extra_cmd_checks = extra_cmd_checks or []
-        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
+        with mock.patch("tools.agentic_import.sdmx_pipeline_steps._run_command"
                        ) as mock_run_cmd:
             with self.assertLogs(logging.get_absl_logger(),
                                  level="INFO") as logs:
