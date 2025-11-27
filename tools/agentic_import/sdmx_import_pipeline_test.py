@@ -653,6 +653,34 @@ class RunPipelineTest(SdmxTestBase):
 
 class SdmxStepTest(SdmxTestBase):
 
+    def _assert_run_and_dry_run_use_same_plan(self,
+                                              step,
+                                              *,
+                                              log_contains: str,
+                                              cmd_contains: str,
+                                              extra_cmd_checks=None,
+                                              expect_verbose: bool = True
+                                              ) -> None:
+        extra_cmd_checks = extra_cmd_checks or []
+        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
+                       ) as mock_run_cmd:
+            with self.assertLogs(logging.get_absl_logger(),
+                                 level="INFO") as logs:
+                step.dry_run()
+                step.run()
+
+        self.assertTrue(
+            any("test-step (dry run): would run" in entry
+                for entry in logs.output))
+        self.assertTrue(any(log_contains in entry for entry in logs.output))
+        mock_run_cmd.assert_called_once()
+        args, kwargs = mock_run_cmd.call_args
+        command = args[0]
+        self.assertTrue(any(cmd_contains in arg for arg in command))
+        self.assertEqual(kwargs["verbose"], expect_verbose)
+        for check in extra_cmd_checks:
+            check(command)
+
     def test_run_command_logs_and_executes(self) -> None:
         with mock.patch("subprocess.run") as mock_run:
             with self.assertLogs(logging.get_absl_logger(),
@@ -705,26 +733,11 @@ class SdmxStepTest(SdmxTestBase):
             ),
         )
         step = DownloadMetadataStep(name="test-step", config=config)
-
-        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
-                       ) as mock_run_cmd:
-            with self.assertLogs(logging.get_absl_logger(),
-                                 level="INFO") as logs:
-                step.dry_run()
-                step.run()
-
-            # Verify dry_run logged the command
-            self.assertTrue(
-                any("test-step (dry run): would run" in entry
-                    for entry in logs.output))
-            self.assertTrue(
-                any("download-metadata" in entry for entry in logs.output))
-
-            # Verify run called the command with the same args
-            mock_run_cmd.assert_called_once()
-            args, kwargs = mock_run_cmd.call_args
-            self.assertIn("download-metadata", args[0])
-            self.assertTrue(kwargs["verbose"])
+        self._assert_run_and_dry_run_use_same_plan(
+            step,
+            log_contains="download-metadata",
+            cmd_contains="download-metadata",
+        )
 
     def test_download_data_step_caches_plan(self) -> None:
         config = PipelineConfig(
@@ -773,26 +786,11 @@ class SdmxStepTest(SdmxTestBase):
             ),
         )
         step = DownloadDataStep(name="test-step", config=config)
-
-        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
-                       ) as mock_run_cmd:
-            with self.assertLogs(logging.get_absl_logger(),
-                                 level="INFO") as logs:
-                step.dry_run()
-                step.run()
-
-            # Verify dry_run logged the command
-            self.assertTrue(
-                any("test-step (dry run): would run" in entry
-                    for entry in logs.output))
-            self.assertTrue(
-                any("download-data" in entry for entry in logs.output))
-
-            # Verify run called the command with the same args
-            mock_run_cmd.assert_called_once()
-            args, kwargs = mock_run_cmd.call_args
-            self.assertIn("download-data", args[0])
-            self.assertTrue(kwargs["verbose"])
+        self._assert_run_and_dry_run_use_same_plan(
+            step,
+            log_contains="download-data",
+            cmd_contains="download-data",
+        )
 
     def test_create_sample_step_caches_plan(self) -> None:
         config = PipelineConfig(
@@ -832,28 +830,11 @@ class SdmxStepTest(SdmxTestBase):
         # Create test input file for run()
         input_path = Path(self._tmpdir) / "demo_data.csv"
         input_path.write_text("header\nrow1")
-
-        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
-                       ) as mock_run_cmd:
-            with self.assertLogs(logging.get_absl_logger(),
-                                 level="INFO") as logs:
-                step.dry_run()
-                step.run()
-
-            # Verify dry_run logged the command
-            self.assertTrue(
-                any("test-step (dry run): would run" in entry
-                    for entry in logs.output))
-            self.assertTrue(
-                any("data_sampler.py" in entry for entry in logs.output))
-
-            # Verify run called the command with the same args
-            mock_run_cmd.assert_called_once()
-            args, kwargs = mock_run_cmd.call_args
-            self.assertTrue(any("data_sampler.py" in arg for arg in args[0]))
-            self.assertTrue(kwargs["verbose"])
-
-            self.assertTrue(kwargs["verbose"])
+        self._assert_run_and_dry_run_use_same_plan(
+            step,
+            log_contains="data_sampler.py",
+            cmd_contains="data_sampler.py",
+        )
 
     def test_create_sample_step_dry_run_succeeds_if_input_missing(self) -> None:
         config = PipelineConfig(
@@ -924,28 +905,11 @@ class SdmxStepTest(SdmxTestBase):
         # Create test input files for run()
         (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
         (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
-
-        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
-                       ) as mock_run_cmd:
-            with self.assertLogs(logging.get_absl_logger(),
-                                 level="INFO") as logs:
-                step.dry_run()
-                step.run()
-
-            # Verify dry_run logged the command
-            self.assertTrue(
-                any("test-step (dry run): would run" in entry
-                    for entry in logs.output))
-            self.assertTrue(
-                any("pvmap_generator.py" in entry for entry in logs.output))
-
-            # Verify run called the command with the same args
-            mock_run_cmd.assert_called_once()
-            args, kwargs = mock_run_cmd.call_args
-            self.assertTrue(any("pvmap_generator.py" in arg for arg in args[0]))
-            self.assertTrue(kwargs["verbose"])
-
-            self.assertTrue(kwargs["verbose"])
+        self._assert_run_and_dry_run_use_same_plan(
+            step,
+            log_contains="pvmap_generator.py",
+            cmd_contains="pvmap_generator.py",
+        )
 
     def test_create_schema_map_step_dry_run_succeeds_if_input_missing(
             self) -> None:
@@ -1001,29 +965,15 @@ class SdmxStepTest(SdmxTestBase):
 
         # Create test files
         self._create_test_input_files("demo")
-
-        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
-                       ) as mock_run_cmd:
-            with self.assertLogs(logging.get_absl_logger(),
-                                 level="INFO") as logs:
-                step.dry_run()
-                step.run()
-
-            # Verify dry_run logged the command
-            self.assertTrue(
-                any("test-step (dry run): would run" in entry
-                    for entry in logs.output))
-            self.assertTrue(
-                any("stat_var_processor.py" in entry for entry in logs.output))
-
-            # Verify run called the command with the same args
-            mock_run_cmd.assert_called_once()
-            args, kwargs = mock_run_cmd.call_args
-            self.assertTrue(
-                any("stat_var_processor.py" in arg for arg in args[0]))
-            self.assertTrue(
-                any(arg.startswith("--input_data=") for arg in args[0]))
-            self.assertTrue(kwargs["verbose"])
+        self._assert_run_and_dry_run_use_same_plan(
+            step,
+            log_contains="stat_var_processor.py",
+            cmd_contains="stat_var_processor.py",
+            extra_cmd_checks=[
+                lambda command: self.assertTrue(
+                    any(arg.startswith("--input_data=") for arg in command)),
+            ],
+        )
 
     def test_process_full_data_step_dry_run_succeeds_if_input_missing(
             self) -> None:
@@ -1074,27 +1024,27 @@ class SdmxStepTest(SdmxTestBase):
         final_output_dir = Path(self._tmpdir) / "output"
         final_output_dir.mkdir(parents=True, exist_ok=True)
         (final_output_dir / "demo.csv").write_text("data")
-
-        with mock.patch("tools.agentic_import.sdmx_import_pipeline._run_command"
-                       ) as mock_run_cmd:
-            step.run()
-            mock_run_cmd.assert_called_once()
-            args, kwargs = mock_run_cmd.call_args
-            command = args[0]
-            self.assertTrue(
-                any("generate_custom_dc_config.py" in arg for arg in command))
-            self.assertIn(f"--input_csv={final_output_dir}/demo.csv", command)
-            self.assertIn(
-                f"--output_config={final_output_dir}/demo_config.json", command)
-            self.assertIn("--provenance_name=FLOW", command)
-            self.assertIn("--source_name=AGENCY", command)
-            self.assertIn("--data_source_url=https://example.com", command)
-            self.assertIn("--dataset_url=https://example.com/data/AGENCY,FLOW,",
-                          command)
-
-        with self.assertLogs(logging.get_absl_logger(), level="INFO") as cm:
-            step.dry_run()
-            self.assertTrue(any("would run" in msg for msg in cm.output))
+        self._assert_run_and_dry_run_use_same_plan(
+            step,
+            log_contains="generate_custom_dc_config.py",
+            cmd_contains="generate_custom_dc_config.py",
+            extra_cmd_checks=[
+                lambda command: self.assertIn(
+                    f"--input_csv={final_output_dir}/demo.csv", command),
+                lambda command: self.assertIn(
+                    f"--output_config={final_output_dir}/demo_config.json",
+                    command),
+                lambda command: self.assertIn("--provenance_name=FLOW",
+                                              command),
+                lambda command: self.assertIn("--source_name=AGENCY", command),
+                lambda command: self.assertIn(
+                    "--data_source_url=https://example.com", command),
+                lambda command: self.assertIn(
+                    "--dataset_url=https://example.com/data/AGENCY,FLOW,",
+                    command),
+            ],
+            expect_verbose=False,
+        )
 
 
 if __name__ == "__main__":
