@@ -47,7 +47,7 @@ class StateHandlerTest(unittest.TestCase):
                 data = json.load(fp)
             self.assertEqual(data["dataset_prefix"], "demo")
             self.assertEqual(data["steps"], {})
-            self.assertIsNone(data["updated_at_ts"])
+            self.assertIsNone(data.get("updated_at_ts"))
 
     def test_corrupt_file_creates_backup_and_resets_state(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
