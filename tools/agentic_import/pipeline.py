@@ -67,9 +67,6 @@ class BaseStep(Step, abc.ABC):
 class Pipeline:
     steps: Sequence[Step]
 
-    def get_steps(self) -> list[Step]:
-        return list(self.steps)
-
 
 class PipelineCallback:
     """Lifecycle hooks consumed by the runner; defaults are no-ops."""
@@ -112,7 +109,7 @@ class PipelineRunner:
             pipeline: Pipeline,
             callback: PipelineCallback | None = None) -> None:
         current_step: Step | None = None
-        steps = pipeline.get_steps()
+        steps = pipeline.steps
         logging.info(f"Starting pipeline with {len(steps)} steps")
         try:
             for step in steps:

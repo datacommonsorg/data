@@ -341,7 +341,7 @@ class PlanningTest(unittest.TestCase):
                                   steps=builder_steps)
         result = builder.build()
         pipeline = result.pipeline
-        return [step.name for step in pipeline.get_steps()]
+        return [step.name for step in pipeline.steps]
 
     def test_run_only_step(self) -> None:
         cfg_step = PipelineConfig(
@@ -432,7 +432,7 @@ class PlanningTest(unittest.TestCase):
         self.assertEqual(names, ["process-full-data", "create-dc-config"])
 
         pipeline = build_sdmx_pipeline(config=cfg, state=state, steps=steps)
-        self.assertEqual([s.name for s in pipeline.get_steps()],
+        self.assertEqual([s.name for s in pipeline.steps],
                          ["process-full-data", "create-dc-config"])
 
     def test_incremental_records_skip_reasons(self) -> None:
@@ -448,7 +448,7 @@ class PlanningTest(unittest.TestCase):
         steps = build_steps(cfg)
         builder = PipelineBuilder(config=cfg, state=state, steps=steps)
         result = builder.build()
-        self.assertFalse(result.pipeline.get_steps())
+        self.assertFalse(result.pipeline.steps)
         self.assertEqual(len(result.decisions), len(steps))
         for decision in result.decisions:
             self.assertEqual(decision.decision, StepDecision.SKIP)
