@@ -150,17 +150,18 @@ class PVMapGenerator:
                 for path in self._config.data_config.input_metadata
             ]
 
-        # Parse output_path into directory and basename components, handling relative paths and ~ expansion
+        # Parse output_path into absolute path, handling relative paths and ~ expansion
         output_path = Path(self._config.output_path).expanduser()
         if not output_path.is_absolute():
             output_path = self._working_dir / output_path
+        self._output_path_abs = output_path.resolve()
 
-        self._output_dir = output_path.parent
-        self._output_basename = output_path.name
-        self._config.output_path = str(output_path)
+        self._output_dir_abs = self._output_path_abs.parent
+        self._output_basename = self._output_path_abs.name
+        self._config.output_path = str(self._output_path_abs)
 
         # Create output directory if it doesn't exist
-        self._output_dir.mkdir(parents=True, exist_ok=True)
+        self._output_dir_abs.mkdir(parents=True, exist_ok=True)
 
         self._datacommons_dir = self._initialize_datacommons_dir()
 
@@ -211,7 +212,7 @@ class PVMapGenerator:
         print(f"Generated prompt: {prompt_file}")
         print(f"Working directory: {self._working_dir}")
         print(f"Output path: {self._config.output_path}")
-        print(f"Output directory: {self._output_dir}")
+        print(f"Output directory: {self._output_dir_abs}")
         print(f"Output basename: {self._output_basename}")
         print(
             f"Sandboxing: {'Enabled' if self._config.enable_sandboxing else 'Disabled'}"
@@ -376,21 +377,21 @@ class PVMapGenerator:
         template = env.get_template('generate_pvmap_prompt.j2')
 
         # Calculate paths and prepare template variables
-        working_dir = str(self._working_dir)  # Use defined working directory
+        working_dir = str(self._working_dir)  # Absolute working directory
         # Point to tools/ directory (parent of agentic_import)
-        tools_dir = os.path.abspath(os.path.join(_SCRIPT_DIR, '..'))
+        tools_dir = os.path.abspath(os.path.join(_SCRIPT_DIR, '..'))  # Absolute
 
         template_vars = {
-            'working_dir':
+            'working_dir_abs':
                 working_dir,
             'python_interpreter':
                 sys.executable,
-            'script_dir':
+            'script_dir_abs':
                 tools_dir,
-            'input_data':
+            'input_data_abs':
                 str(self._config.data_config.input_data[0])
                 if self._config.data_config.input_data else "",
-            'input_metadata': [
+            'input_metadata_abs': [
                 str(path) for path in self._config.data_config.input_metadata
             ] if self._config.data_config.input_metadata else [],
             'dataset_type':
@@ -400,10 +401,10 @@ class PVMapGenerator:
             'gemini_run_id':
                 self.
                 _gemini_run_id,  # Pass the gemini run ID for backup tracking
-            'output_path':
-                self._config.output_path,  # Full path for statvar processor
-            'output_dir':
-                str(self._output_dir),  # Directory for pvmap/metadata files
+            'output_path_abs':
+                str(self._output_path_abs),  # Absolute path prefix for outputs
+            'output_dir_abs':
+                str(self._output_dir_abs),  # Directory for pvmap/metadata files
             'output_basename':
                 self._output_basename  # Base name for pvmap/metadata files
         }

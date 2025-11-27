@@ -253,7 +253,8 @@ class PVMapGeneratorTest(unittest.TestCase):
                              str(data_file.resolve()))
             # Verify output directory is also under working_dir
             self.assertTrue(
-                str(generator._output_dir).startswith(str(work_path.resolve())))
+                str(generator._output_dir_abs).startswith(
+                    str(work_path.resolve())))
 
 
 if __name__ == '__main__':
