@@ -1,3 +1,17 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import os
 import sys
 from absl import app, logging
@@ -14,7 +28,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 from download_util_script import download_file
 
-logging.set_verbosity(logging.INFO)
+logging.set_verbosity(logging.info)
 
 _BASE_URL = "https://civilrightsdata.ed.gov/assets/ocr/docs/{year_range}-crdc-data.zip"
 # Base directory where all year-wise data is downloaded
@@ -69,7 +83,7 @@ def _find_and_collect_files(year_range: str):
     # 3. Process, Convert, and Rename the collected files
     
     if not file_paths:
-        logging.warning(f"No Harassment data files found for {year_range}.")
+        logging.info(f"No Harassment data files found for {year_range}.")
         return
 
     # Prepare for renaming
@@ -80,7 +94,7 @@ def _find_and_collect_files(year_range: str):
         target_year = first_year + 1
         target_year_str = str(target_year)
     except ValueError:
-        logging.error(f"Could not parse year from range: {year_range}. Using default prefix.")
+        logging.fatal(f"Could not parse year from range: {year_range}. Using default prefix.")
         target_year_str = year_range.replace('-', '_') # Fallback
         
     base_name = f"crdc_harassment_or_bullying_{target_year_str}"
@@ -114,7 +128,7 @@ def _find_and_collect_files(year_range: str):
                 # Read the first sheet of the Excel file
                 df = pd.read_excel(old_filepath, sheet_name=0)
             else:
-                logging.warning(f"Skipping {old_filepath}: Unsupported original format {original_extension}.")
+                logging.info(f"Skipping {old_filepath}: Unsupported original format {original_extension}.")
                 continue
 
             # Step 2: Save the DataFrame as a CSV file
@@ -122,10 +136,10 @@ def _find_and_collect_files(year_range: str):
             df.to_csv(new_filepath, index=False)
             
         except ImportError:
-             logging.error(f"Failed to read Excel file {old_filepath}. Please ensure 'openpyxl' is installed (pip install openpyxl).")
+             logging.fatal(f"Failed to read Excel file {old_filepath}. Please ensure 'openpyxl' is installed (pip install openpyxl).")
              continue
         except Exception as e:
-            logging.error(f"Failed to process and save file {old_filepath} as CSV: {e}")
+            logging.fatal(f"Failed to process and save file {old_filepath} as CSV: {e}")
             continue
 
     logging.info(f"Collection and conversion complete for {year_range}. Collected **{len(file_paths)}** file(s) and saved them as CSV.")
@@ -161,7 +175,7 @@ def main(_):
                                 unzip=True)
 
         if not success:
-            logging.warning(
+            logging.info(
                 f"Failed to download data for year {year_range}. It might not be available yet or the URL is incorrect."
             )
             # Clean up empty directory if download failed
