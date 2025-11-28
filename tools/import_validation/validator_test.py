@@ -110,6 +110,28 @@ class TestDeletedCountValidation(unittest.TestCase):
         self.assertIn('missing required column', result.message)
 
 
+class TestMissingRefsCountValidation(unittest.TestCase):
+    '''Test Class for the MISSING_REFS_COUNT validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_missing_refs_count_fails_when_over_threshold(self):
+        report = {
+            'levelSummary': {
+                'LEVEL_WARNING': {
+                    'counters': {
+                        'Existence_MissingReference': 5
+                    }
+                }
+            }
+        }
+        params = {'threshold': 4}
+        result = self.validator.validate_missing_refs_count(report, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['missing_refs_count'], 5)
+
+
 class TestModifiedCountValidation(unittest.TestCase):
     '''Test Class for the MODIFIED_COUNT validation rule.'''
 
