@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "CensusSAIPE",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.census.gov/programs-surveys/saipe.html",
+            "provenance_description": "The Small Area Income and Poverty Estimates (SAIPE) program provides the only up-to-date, state-based estimates of poverty for school districts for all counties in the United States.",
+            "scripts": [
+                "download_script.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.xlsx --pv_map=saipe_pvmap.csv --config_file=saipe_metadata.csv --output_path=output_files/census_saipe_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --log_level=-2 --log_every_n=1000"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/census_saipe_output.tmcf",
+                    "cleaned_csv": "output_files/census_saipe_output.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*.xlsx"
+            ],
+            "cron_schedule": "0 5 3,17 * *"
+        }
+    ]
+}

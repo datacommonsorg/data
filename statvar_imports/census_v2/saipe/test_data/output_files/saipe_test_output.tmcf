@@ -1,0 +1,6 @@
+Node: E:saipe_test_output->E0
+observationAbout: C:saipe_test_output->observationAbout
+observationDate: C:saipe_test_output->observationDate
+variableMeasured: C:saipe_test_output->variableMeasured
+value: C:saipe_test_output->value
+typeOf: dcs:StatVarObservation
