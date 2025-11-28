@@ -20,7 +20,7 @@
             "source_files": [
                 "input_files/*.xlsx"
             ],
-            "cron_schedule": "0 5 1,15 * *"
+            "cron_schedule": "0 5 3,17 * *"
         }
     ]
 }

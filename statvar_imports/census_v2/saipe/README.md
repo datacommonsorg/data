@@ -37,7 +37,7 @@ The import process is divided into two main stages: downloading the raw data and
 This import is designed to be autorefreshed.
 
 * **Steps**:
-  1. A Cloud Scheduler job, defined in `manifest.json`, runs on a schedule of "`0 5 1,15 * *`" (05:00 AM on the 1st and 15th of every month).
+  1. A Cloud Scheduler job, defined in `manifest.json`, runs on a schedule of "`0 5 3,17 * *`" (05:00 AM on the 3rd and 17th of every month).
   2. The job first executes `download_script.py` to automatically download the latest annual data release.
   3. It then runs the `stat_var_processor.py` tool, which processes the yearly files and generates the final artifacts.
   4. The final, validated output files are uploaded to a GCS bucket for ingestion into the Data Commons Knowledge Graph.
