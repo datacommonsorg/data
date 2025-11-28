@@ -1,0 +1,4 @@
+key,property,,,,,,,,,,,,,
+UNITID,#Format,observationAbout=ipedsId/{Data},,,,,,,,,,,,
+Year,observationDate,{Number},,,,,,,,,,,,
+STUFACR,populationType,Student,measurementDenominator,Count_Faculty,measuredProperty,count,unit,Percent,value,{Number},name,"""Student to Faculty Ratio""",scalingFactor,100
