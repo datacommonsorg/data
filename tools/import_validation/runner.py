@@ -21,11 +21,14 @@ import pandas as pd
 import sys
 from typing import Tuple
 
-from .validation_config import ValidationConfig
-from .report_generator import ReportGenerator
-from .validator import Validator
-from .util import filter_dataframe
-from .result import ValidationResult, ValidationStatus
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _SCRIPT_DIR)
+
+from validation_config import ValidationConfig
+from report_generator import ReportGenerator
+from validator import Validator
+from result import ValidationResult, ValidationStatus
+from util import filter_dataframe
 
 _FLAGS = flags.FLAGS
 

@@ -115,6 +115,7 @@ class ImportStatusSummary:
     '''
     latest_version: str = ''
     execution_time: int = 0  # seconds
+    next_refresh_date: str = ''
 
 
 class ImportExecutor:
@@ -677,16 +678,18 @@ class ImportExecutor:
             client_options={'quota_project_id': self.config.spanner_project_id})
         instance = spanner_client.instance(self.config.spanner_instance_id)
         database = instance.database(self.config.spanner_database_id)
+
         with database.batch() as batch:
             columns = [
                 "ImportName", "State", "JobId", "ExecutionTime",
-                "StatusUpdateTimestamp"
+                "StatusUpdateTimestamp", "NextRefreshDate"
             ]
             values = [
                 import_summary.import_name, import_summary.status,
                 os.getenv('BATCH_JOB_NAME',
                           os.getenv('BATCH_JOB_UID', 'local-run')),
-                import_summary.execution_time, spanner.COMMIT_TIMESTAMP
+                import_summary.execution_time, spanner.COMMIT_TIMESTAMP,
+                import_summary.next_refresh_date
             ]
             # Update LatestVersion path only if import completed successfully.
             if import_summary.status == 'READY':
@@ -700,7 +703,8 @@ class ImportExecutor:
 
         logging.info(f'Updated {import_summary.import_name} status in spanner.')
 
-    def _update_latest_version(self, version, output_dir, import_spec):
+    def _update_latest_version(self, version, output_dir, import_spec,
+                               import_summary):
         logging.info(f'Updating import latest version {version}')
         self.uploader.upload_string(
             version,
@@ -719,6 +723,7 @@ class ImportExecutor:
             self.uploader.upload_string('\n'.join(versions_history),
                                         history_filename)
         logging.info(f'Updated import latest version {version}')
+        self._update_import_status_table(import_summary)
 
     @log_function_call
     def _import_one_helper(
@@ -747,15 +752,17 @@ class ImportExecutor:
         version = self.config.import_version_override if self.config.import_version_override else _clean_time(
             utils.pacific_time())
         if version == 'DATE_VERSION_PLACEHOLDER':
-            version = datetime.datetime.now(datetime.URC).strftime("%Y-%m-%d")
+            version = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
         import_summary.latest_version = 'gs://' + os.path.join(
             self.config.storage_prod_bucket_name, output_dir, version, '*', '*',
             '*.mcf')
+        import_summary.next_refresh_date = utils.next_utc_date(
+            import_spec.get('cron_schedule'))
         if self.config.import_version_override and self.config.import_version_override != 'DATE_VERSION_PLACEHOLDER':
             logging.info(f'Import version override {version}')
             import_summary.status = 'READY'
-            self._update_latest_version(version, output_dir, import_spec)
-            self._update_import_status_table(import_summary)
+            self._update_latest_version(version, output_dir, import_spec,
+                                        import_summary)
             return
 
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -822,8 +829,7 @@ class ImportExecutor:
                 import_summary.status = 'READY'
                 if not self.config.skip_gcs_upload:
                     self._update_latest_version(version, output_dir,
-                                                import_spec)
-                    self._update_import_status_table(import_summary)
+                                                import_spec, import_summary)
                 else:
                     logging.warning(
                         "Skipping latest version update as per import config.")
@@ -916,7 +922,7 @@ class ImportExecutor:
         ]
         source_files = file_util.file_get_matching(source_files)
         for file in source_files:
-            dest = f'{output_dir}/{version}/source_files/{os.path.basename(file)}'
+            dest = f'{output_dir}/{version}/source_files/{os.path.relpath(file, import_dir)}'
             self._upload_file_helper(
                 src=file,
                 dest=dest,
