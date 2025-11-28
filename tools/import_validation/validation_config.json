@@ -21,6 +21,16 @@
             "params": {
                 "threshold": 0
             }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "validator": "LINT_ERROR_COUNT",
+            "scope": {
+                "data_source": "lint"
+            },
+            "params": {
+                "threshold": 0
+            }
         }
     ]
 }

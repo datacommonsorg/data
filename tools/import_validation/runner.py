@@ -60,6 +60,8 @@ class ValidationRunner:
             'DELETED_COUNT': (self.validator.validate_deleted_count, 'differ'),
             'MISSING_REFS_COUNT':
                 (self.validator.validate_missing_refs_count, 'lint'),
+            'LINT_ERROR_COUNT':
+                (self.validator.validate_lint_error_count, 'lint'),
             'MODIFIED_COUNT':
                 (self.validator.validate_modified_count, 'differ'),
             'ADDED_COUNT': (self.validator.validate_added_count, 'differ'),
@@ -120,8 +122,13 @@ class ValidationRunner:
 
         if lint_report and os.path.exists(lint_report) and os.path.getsize(
                 lint_report) > 0:
-            with open(lint_report, 'r') as f:
-                self.data_sources['lint'] = json.load(f)
+            try:
+                with open(lint_report, 'r') as f:
+                    self.data_sources['lint'] = json.load(f)
+            except Exception as e:
+                logging.error(
+                    "JSON parse error while reading lint report at {lint_report}: {e}"
+                )
         elif lint_report and os.path.exists(lint_report):
             logging.warning("lint_report file exists but is empty: %s",
                             lint_report)
