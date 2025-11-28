@@ -155,7 +155,9 @@ python $DC_DATA_REPO_PATH/tools/agentic_import/pvmap_generator.py \
   --output_path="sample_output/output"
 ```
 
-For **SDMX datasets**, use the extracted JSON metadata (not the XML file) and set the SDMX flag during PV map generation:
+For **SDMX datasets**:
+*   Set the `--sdmx_dataset` flag during PV map generation.
+*   Use the extracted JSON metadata (not the XML file). Refer to [SDMX Downloads](#sdmx-downloads) for more details.
 
 ```bash
 # Generate PV map and metadata for SDMX

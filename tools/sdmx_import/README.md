@@ -42,6 +42,9 @@ python sdmx_cli.py download-metadata \
   --output_path=metadata.xml
 ```
 
+> [!NOTE]
+> For **Agentic Import**, the downloaded XML metadata is typically converted to a simplified JSON format. Refer to the [Agentic Import documentation](../agentic_import/README.md#sdmx-downloads) for instructions on using `sdmx_metadata_extractor.py`.
+
 ### Download Data
 
 - Downloads data from a dataflow
