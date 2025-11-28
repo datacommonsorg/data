@@ -1,0 +1,9 @@
+Node: E:employment_unemployment_output->E0
+observationAbout: C:employment_unemployment_output->observationAbout
+observationPeriod: C:employment_unemployment_output->observationPeriod
+observationDate: C:employment_unemployment_output->observationDate
+value: C:employment_unemployment_output->value
+variableMeasured: C:employment_unemployment_output->variableMeasured
+unit: C:employment_unemployment_output->unit
+scalingFactor: C:employment_unemployment_output->scalingFactor
+typeOf: dcs:StatVarObservation
