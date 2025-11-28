@@ -202,6 +202,36 @@ class Validator:
                                     'rows_failed': 0
                                 })
 
+    def validate_missing_refs_count(self, report: dict,
+                                    params: dict) -> ValidationResult:
+        """Checks if the total number of missing references is within a threshold.
+
+    Args:
+      report: A json object containing the lint report
+      params: A dictionary containing the validation parameters, which may
+        have a 'threshold' key.
+
+    Returns:
+      A ValidationResult object.
+    """
+        missing_refs_count = 0
+        if report:
+            missing_refs_count = report.get('levelSummary', {}).get(
+                'LEVEL_WARNING',
+                {}).get('counters', {}).get('Existence_MissingReference', 0)
+            threshold = params.get('threshold', 0)
+            if missing_refs_count > threshold:
+                return ValidationResult(
+                    ValidationStatus.FAILED,
+                    'SCHEMA_MISSING_REFERENCES',
+                    message=
+                    f"Found {missing_refs_count} missing references, which is over the threshold of {threshold}.",
+                    details={'missing_refs_count': missing_refs_count})
+        return ValidationResult(
+            ValidationStatus.PASSED,
+            'SCHEMA_MISSING_REFERENCES',
+            details={'missing_refs_count': missing_refs_count})
+
     def validate_modified_count(self, differ_df: pd.DataFrame,
                                 params: dict) -> ValidationResult:
         """Checks if the number of modified points is the same for all StatVars.
