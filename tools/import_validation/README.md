@@ -148,6 +148,7 @@ The following validations are currently supported:
 | `SQL_VALIDATOR`           | Runs a user-defined SQL query to perform complex validations.            | `stats`, `differ` | `query` (string), `condition` (string)                 |
 | `MAX_DATE_LATEST`         | Checks that the latest date in the data is from the current year.        | `stats`           | None                                                   |
 | `MAX_DATE_CONSISTENT`     | Checks that the latest date is the same for all StatVars.                | `stats`           | None                                                   |
+| `MISSING_REFS_COUNT`           | Checks that the total number of missing references is within a threshold.    | `lint`          | `threshold` (integer, defaults to 0)                   |
 | `DELETED_COUNT`           | Checks that the total number of deleted points is within a threshold.    | `differ`          | `threshold` (integer, defaults to 0)                   |
 | `MODIFIED_COUNT`          | Checks that the number of modified points is the same for all StatVars.  | `differ`          | None                                                   |
 | `ADDED_COUNT`             | Checks that the number of added points is the same for all StatVars.     | `differ`          | None                                                   |
