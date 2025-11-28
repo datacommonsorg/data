@@ -31,7 +31,7 @@ class TestValidationRunner(unittest.TestCase):
         self.test_dir = tempfile.TemporaryDirectory()
         self.config_path = os.path.join(self.test_dir.name, 'config.json')
         self.stats_path = os.path.join(self.test_dir.name, 'stats.csv')
-        self.report_path = os.path.join(self.test_dir.name, 'report.csv')
+        self.report_path = os.path.join(self.test_dir.name, 'report.json')
         self.differ_path = os.path.join(self.test_dir.name, 'differ.csv')
         self.output_path = os.path.join(self.test_dir.name, 'output.csv')
 

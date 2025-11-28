@@ -121,7 +121,7 @@ class TestMissingRefsCountValidation(unittest.TestCase):
             'levelSummary': {
                 'LEVEL_WARNING': {
                     'counters': {
-                        'Existence_MissingReference': 5
+                        'Existence_MissingReference': "5"
                     }
                 }
             }
@@ -130,6 +130,29 @@ class TestMissingRefsCountValidation(unittest.TestCase):
         result = self.validator.validate_missing_refs_count(report, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.details['missing_refs_count'], 5)
+
+
+class TestLintErrorCountValidation(unittest.TestCase):
+    '''Test Class for the LINT_ERROR_COUNT validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_lint_error_count_fails_when_over_threshold(self):
+        report = {
+            'levelSummary': {
+                'LEVEL_ERROR': {
+                    'counters': {
+                        'CSV_TmcfCheckFailure': "2",
+                        'MCF_QuantityMalformedValue': "3"
+                    }
+                }
+            }
+        }
+        params = {'threshold': 4}
+        result = self.validator.validate_lint_error_count(report, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['lint_error_count'], 5)
 
 
 class TestModifiedCountValidation(unittest.TestCase):

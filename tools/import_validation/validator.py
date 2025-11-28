@@ -216,21 +216,53 @@ class Validator:
     """
         missing_refs_count = 0
         if report:
-            missing_refs_count = report.get('levelSummary', {}).get(
-                'LEVEL_WARNING',
-                {}).get('counters', {}).get('Existence_MissingReference', 0)
+            counters = report.get('levelSummary',
+                                  {}).get('LEVEL_WARNING',
+                                          {}).get('counters', {})
+            missing_refs_count = int(
+                counters.get('Existence_MissingReference', '0'))
             threshold = params.get('threshold', 0)
             if missing_refs_count > threshold:
                 return ValidationResult(
                     ValidationStatus.FAILED,
-                    'SCHEMA_MISSING_REFERENCES',
+                    'MISSING_REFS_COUNT',
                     message=
                     f"Found {missing_refs_count} missing references, which is over the threshold of {threshold}.",
                     details={'missing_refs_count': missing_refs_count})
         return ValidationResult(
             ValidationStatus.PASSED,
-            'SCHEMA_MISSING_REFERENCES',
+            'MISSING_REFS_COUNT',
             details={'missing_refs_count': missing_refs_count})
+
+    def validate_lint_error_count(self, report: dict,
+                                  params: dict) -> ValidationResult:
+        """Checks if the total number of lint errors is within a threshold.
+
+    Args:
+      report: A json object containing the lint report
+      params: A dictionary containing the validation parameters, which may
+        have a 'threshold' key.
+
+    Returns:
+      A ValidationResult object.
+    """
+        lint_error_count = 0
+        if report:
+            counters = report.get('levelSummary',
+                                  {}).get('LEVEL_ERROR',
+                                          {}).get('counters', {})
+            lint_error_count = sum(int(value) for value in counters.values())
+            threshold = params.get('threshold', 0)
+            if lint_error_count > threshold:
+                return ValidationResult(
+                    ValidationStatus.FAILED,
+                    'LINT_ERROR_COUNT',
+                    message=
+                    f"Found {lint_error_count} lint errors, which is over the threshold of {threshold}.",
+                    details={'lint_error_count': lint_error_count})
+        return ValidationResult(ValidationStatus.PASSED,
+                                'LINT_ERROR_COUNT',
+                                details={'lint_error_count': lint_error_count})
 
     def validate_modified_count(self, differ_df: pd.DataFrame,
                                 params: dict) -> ValidationResult:
