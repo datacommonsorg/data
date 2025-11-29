@@ -1,0 +1,25 @@
+LEA_STATE,LEA_STATE_NAME,LEAID,LEA_NAME,SCHID,SCH_NAME,COMBOKEY,JJ,SCH_DIND_INSTRUCTIONTYPE,SCH_DIND_REMOTETYPE,SCH_DIND_REMOTEAMOUNT,SCH_DIND_REMOTEPERCT,YEAR
+AL,ALABAMA,100002,Alabama Youth Services,99995,AUTAUGA CAMPUS,10000299995,Yes,A,-9,-9,-9,2022
+AL,ALABAMA,100005,Albertville City,870,Albertville Middle School,10000500870,No,A,-9,-9,-9,2022
+AL,ALABAMA,100005,Albertville City,871,Albertville High School,10000500871,No,A,-9,-9,-9,2022
+AL,ALABAMA,100005,Albertville City,879,Albertville Intermediate School,10000500879,No,A,-9,-9,-9,2022
+AL,ALABAMA,100005,Albertville City,889,Albertville Elementary School,10000500889,No,A,-9,-9,-9,2022
+AL,ALABAMA,100005,Albertville City,1616,Albertville Kindergarten and PreK,10000501616,No,A,-9,-9,-9,2022
+AL,ALABAMA,100005,Albertville City,2150,Albertville Primary School,10000502150,No,A,-9,-9,-9,2022
+AL,ALABAMA,100006,Marshall County,193,Kate Duncan Smith DAR Middle,10000600193,No,A,-9,-9,-9,2022
+AL,ALABAMA,100006,Marshall County,872,Asbury High School,10000600872,No,A,-9,-9,-9,2022
+AL,ALABAMA,100006,Marshall County,877,Douglas Elementary School,10000600877,No,A,-9,-9,-9,2022
+AL,ALABAMA,100006,Marshall County,878,Douglas High School,10000600878,No,A,-9,-9,-9,2022
+AL,ALABAMA,100006,Marshall County,880,Brindlee Mountain Elementary School,10000600880,No,A,-9,-9,-9,2022
+AL,ALABAMA,100006,Marshall County,883,Kate D Smith DAR High School,10000600883,No,A,-9,-9,-9,2022
+AL,ALABAMA,100006,Marshall County,887,Brindlee Mountain Primary School,10000600887,No,A,-9,-9,-9,2022
+AL,ALABAMA,100006,Marshall County,1413,Robert D Sloman Primary,10000601413,No,A,-9,-9,-9,2022
+AL,ALABAMA,100006,Marshall County,1585,Brindlee Mountain High School,10000601585,No,A,-9,-9,-9,2022
+AL,ALABAMA,100006,Marshall County,1685,Kate D Smith DAR Elementary School,10000601685,No,A,-9,-9,-9,2022
+AL,ALABAMA,100006,Marshall County,1812,Douglas Middle School,10000601812,No,A,-9,-9,-9,2022
+AL,ALABAMA,100006,Marshall County,2209,Asbury Elementary School,10000602209,No,A,-9,-9,-9,2022
+AL,ALABAMA,100007,Hoover City,91,Trace Crossings Elementary School,10000700091,No,A,-9,-9,-9,2022
+AL,ALABAMA,100007,Hoover City,248,Greystone Elementary School,10000700248,No,A,-9,-9,-9,2022
+AL,ALABAMA,100007,Hoover City,251,Hoover High School,10000700251,No,A,-9,-9,-9,2022
+AL,ALABAMA,100007,Hoover City,337,Berry Middle School,10000700337,No,A,-9,-9,-9,2022
+AL,ALABAMA,100007,Hoover City,342,South Shades Crest Elementary School,10000700342,No,A,-9,-9,-9,2022
