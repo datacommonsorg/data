@@ -18,6 +18,11 @@ This Python Script is for County Level Data 2000-2010.
 import os
 import pandas as pd
 import numpy as np
+import requests
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from api_calls import get_api_response
 from common_functions import replace_agegrp
 
 
@@ -28,6 +33,9 @@ def county2000(output_folder: str):
     """
     # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
+    raw_data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "raw_data")
+    os.makedirs(raw_data_dir, exist_ok=True)
     # The numbers 1 to 57 signify the available files as per state numbers
     # The [3, 7, 14, 43, 52] signify the state numbers absent
     for i in range(1, 57):
@@ -35,13 +43,11 @@ def county2000(output_folder: str):
             j = f'{i:02}'
             url = 'https://www2.census.gov/programs-surveys/popest/datasets/2'+\
                 '000-2010/intercensal/county/co-est00int-alldata-'+str(j)+'.csv'
-            df = pd.read_csv(url, encoding='ISO-8859-1')
+            filename = 'raw_data_county_2000_2009_file_' + str(i) + '.csv'
+            file_path = get_api_response(filename, url, 1)
+            df = pd.read_csv(file_path, engine='python', encoding='ISO-8859-1')
             #Writing raw data to csv
-            df.to_csv(os.path.join(
-                os.path.dirname(os.path.abspath(__file__)), "raw_data",
-                'raw_data_county_2000_2009_file_' + str(i) + '.csv'),
-                      index=False)
-            # Filter years 1 - 12.
+            df.to_csv(file_path, index=False)
             df['Year'] = df['YEAR']
             df.drop(columns=['YEAR'], inplace=True)
             df = df.query("Year not in [1,12,13]")
