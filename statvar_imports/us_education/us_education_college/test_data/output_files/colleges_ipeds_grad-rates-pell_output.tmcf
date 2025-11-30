@@ -1,0 +1,6 @@
+Node: E:colleges_ipeds_grad-rates-pell_output->E0
+observationAbout: C:colleges_ipeds_grad-rates-pell_output->observationAbout
+observationDate: C:colleges_ipeds_grad-rates-pell_output->observationDate
+variableMeasured: C:colleges_ipeds_grad-rates-pell_output->variableMeasured
+value: C:colleges_ipeds_grad-rates-pell_output->value
+typeOf: dcs:StatVarObservation
