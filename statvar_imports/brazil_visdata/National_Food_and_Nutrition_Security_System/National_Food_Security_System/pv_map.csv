@@ -1,0 +1,4 @@
+key,prop,val,p1,v1,p2,v2,,,,,,,,
+Referência,observationDate,{Data},observationPeriod,P1Y,,,,,,,,,,
+Código,observationAbout,{Number},,,,,,,,,,,,
+Municípios que aderiram ao Sistema Nacional de Segurança Alimentar (SISAN) - Acumulado,measuredProperty,count,populationType,Municipality,value,1,name,"""Municipalities that joined the National Food Security System (SISAN) - Accumulated""",alternateName,"""Municípios que aderiram ao Sistema Nacional de Segurança Alimentar (SISAN) - Acumulado@pt""",#Aggregate,sum,benefitProgram,NationalFoodSecuritySystem
