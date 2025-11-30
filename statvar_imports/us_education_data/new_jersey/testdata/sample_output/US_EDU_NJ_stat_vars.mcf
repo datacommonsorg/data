@@ -1,0 +1,53 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/kuru/DC_13_june/data/statvar_imports/us_education_data/new_jersey/testdata/sample_input/US_EDU_NJ - data.csv --pv_map=/usr/local/google/home/kuru/DC_13_june/data/statvar_imports/us_education_data/new_jersey/testdata/sample_input/US_EDU_NJ-pvmap.csv --places_resolved_csv=/usr/local/google/home/kuru/DC_13_june/data/statvar_imports/us_education_data/new_jersey/testdata/sample_input/US_EDU_NJ - places_resolved.csv --config=/usr/local/google/home/kuru/DC_13_june/data/statvar_imports/us_education_data/new_jersey/testdata/sample_input/US_EDU_NJ-metadata.csv --output_path=/usr/local/google/home/kuru/DC_13_june/data/statvar_imports/us_education_data/new_jersey/testdata/sample_output/US_EDU_NJ" on 2024-06-14 05:55:05.927513
+
+Node: dcid:Count_Student_EnrolledInSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+schoolEnrollment: dcid:EnrolledInSchool
+
+Node: dcid:Count_Student_Female_EnrolledInSchool_AsAFractionOf_Count_Student_EnrolledInSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Student_EnrolledInSchool
+gender: dcid:Female
+schoolEnrollment: dcid:EnrolledInSchool
+
+Node: dcid:Count_Student_HalfDay_EnrolledInSchool_PreKindergarten
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+kindergartenProgram: dcid:HalfDay
+schoolEnrollment: dcid:EnrolledInSchool
+schoolGradeLevel: dcid:PreKindergarten
+
+Node: dcid:Count_Student_HispanicOrLatino_EnrolledInSchool_AsAFractionOf_Count_Student_EnrolledInSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Student_EnrolledInSchool
+race: dcid:HispanicOrLatino
+schoolEnrollment: dcid:EnrolledInSchool
+
+Node: dcid:Count_Student_SharedTime_EnrolledInSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+enrollmentType: dcid:SharedTime
+schoolEnrollment: dcid:EnrolledInSchool
+
+Node: dcid:Count_Student_White_EnrolledInSchool_AsAFractionOf_Count_Student_EnrolledInSchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Student_EnrolledInSchool
+race: dcid:White
+schoolEnrollment: dcid:EnrolledInSchool
+
