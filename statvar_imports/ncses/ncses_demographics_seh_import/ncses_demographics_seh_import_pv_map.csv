@@ -35,6 +35,6 @@ Doctorate-holding nonfaculty researchers,occupation,NonFacultyResearcher,educati
 "Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2029",observationDate,2029,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
 "Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2030",observationDate,2030,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
 Number,unit,"",scalingFactor,"",statType,measuredValue,value,{Number},,,,,,
-Percent,unit,Percent,scalingFactor,100,measurementDenominator,"-race,-gender,-ethnicity, -citizenship",#MergedCell,FALSE,value,{Number},,
+Percent,unit,Percent,scalingFactor,100,measurementDenominator,"-race,-gender,-ethnicity, -citizenship",#MergedCell,0,value,{Number},,
 Percent:100,#ignore,Ignoring 100%,,,,,,,,,,
 "Sex, citizenship, ethnicity, and race",observationAbout,country/USA,,,,,,,,,,
