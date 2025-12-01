@@ -73,6 +73,19 @@ def preprocess_files(inputdir):
             # The downloaded CSV from World Bank API has 4 lines of metadata at the top.
             df = pd.read_csv(data_file_path, skiprows=4, encoding='latin1')
             df['Country Name'] = df["Country Name"].str.replace(",", "-")
+
+            # Filter columns to keep only years from 2000 onwards
+            cols_to_keep = ['Country Name', 'Country Code', 'Indicator Name', 'Indicator Code']
+            for year in range(2000, 2032):
+                year_col = str(year)
+                if year_col in df.columns:
+                    cols_to_keep.append(year_col)
+            df = df[cols_to_keep]
+
+            # Rename year columns to the format 'YYYY [YRYYYY]'
+            rename_dict = {str(year): f"{year} [YR{year}]" for year in range(2000, 2032) if str(year) in df.columns}
+            df.rename(columns=rename_dict, inplace=True)
+
             df.to_csv(data_file_path, index=False, encoding='utf-8')
             logging.info("Preprocessing complete.")
         else:
