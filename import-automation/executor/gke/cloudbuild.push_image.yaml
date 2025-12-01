@@ -20,8 +20,9 @@ steps:
       - -c
       - |
         set -e
+        # Use current timestamp to bust cache for git clone and other external dependencies.
         DOCKER_BUILDKIT=1
-        docker build -f Dockerfile \
+        docker build -f Dockerfile --build-arg CACHE_BUSTER=$(date +%s) \
           --tag gcr.io/datcom-ci/datacommons-import-automation-executor:${_TAG} \
           --tag gcr.io/datcom-ci/datacommons-import-automation-executor:prod \
           .
