@@ -192,10 +192,12 @@ def write_sv_mcf(output_path: str, sv_dict: dict, sv_list: list) -> None:
 
 
 def clean_dataset(row: pd.Series, column_list: list, sv_map: dict) -> None:
-    clean_csv = pd.DataFrame(columns=[
-        'observationAbout', 'observationDate', 'variableMeasured', 'value',
-        'units'
-    ])
+    clean_csv = [
+        pd.DataFrame(columns=[
+            'observationAbout', 'observationDate', 'variableMeasured', 'value',
+            'units'
+        ])
+    ]
 
     ignore_list = ['-', ' - ', 'NaN', 'n.a.', np.nan]
     ignore_columns = ['observationAbout', 'observationDate', 'contaminantType']
@@ -205,19 +207,20 @@ def clean_dataset(row: pd.Series, column_list: list, sv_map: dict) -> None:
             if row[column] not in ignore_list:
                 sv_key = column + '_' + row['contaminantType']
 
-                ## add data to clean csv
-                clean_csv = clean_csv.append(
-                    {
-                        'observationAbout': row['observationAbout'],
-                        'observationDate': row['observationDate'],
-                        'variableMeasured': 'dcid:' + sv_map[sv_key],
-                        'value': row[column],
-                        'units': _UNIT_MAP[column]
-                    },
-                    ignore_index=True)
+                # add data to clean csv
+                clean_csv.append(
+                    pd.DataFrame(
+                        {
+                            'observationAbout': row['observationAbout'],
+                            'observationDate': row['observationDate'],
+                            'variableMeasured': 'dcid:' + sv_map[sv_key],
+                            'value': row[column],
+                            'units': _UNIT_MAP[column]
+                        },
+                        index=[0]))
 
     ## append to a list of dataframes
-    _CLEAN_CSV_FRAMES.append(clean_csv)
+    _CLEAN_CSV_FRAMES.append(pd.concat(clean_csv))
 
 
 def process_intermediate_csv(input_file: str, output_path: str) -> None:

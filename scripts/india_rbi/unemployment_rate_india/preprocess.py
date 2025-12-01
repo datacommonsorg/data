@@ -172,7 +172,7 @@ class UnempolymentRateIndiaLoader:
             df["statisticalVariable"] = self.statisticalVariable
             # Rename columns
             df.columns = self.COLUMN_HEADERS
-            self.clean_df = self.clean_df.append(df, ignore_index=True)
+            self.clean_df = pd.concat([self.clean_df, df])
 
         self._make_column_numerical("value")
         # Setup place ISO codes

@@ -1,0 +1,56 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "FBIHateCrimePublications",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://cde.ucr.cjis.gov/LATEST/webapp/",
+            "provenance_description": "US Hate Crime Statistics",
+            "scripts": [
+                "download_fbi_publication_data.py",
+                "table1/preprocess.py",
+                "table2/preprocess.py",
+                "table3/preprocess.py",
+                "table4/preprocess.py",
+                "table5/preprocess.py",
+                "table6/preprocess.py",
+                "table7/preprocess.py",
+                "table8/preprocess.py",
+                "table9/preprocess.py",
+                "table10/preprocess.py",
+                "table11/preprocess.py",
+                "table12/preprocess.py",
+                "table13/preprocess.py",
+                "table14/preprocess.py",
+                "run.sh"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "tables1-10/t1tot10.tmcf",
+                    "cleaned_csv": "tables1-10/t1tot10_combined.csv"
+                },
+                {
+                    "template_mcf": "table11/table11_output.tmcf",
+                    "cleaned_csv": "table11/table11_output.csv"
+                },
+                {
+                    "template_mcf": "table12/table12_output.tmcf",
+                    "cleaned_csv": "table12/table12_output.csv"
+                },
+                {
+                    "template_mcf": "table13/table13_output.tmcf",
+                    "cleaned_csv": "table13/table13_output.csv"
+                },
+                {
+                    "template_mcf": "table14/table14_output.tmcf",
+                    "cleaned_csv": "table14/table14_output.csv"
+                }
+            ],
+            "source_files": [
+                "hate_crime_publication_data/*/*"
+            ],
+            "cron_schedule": "0 10 21 * *"
+        }
+    ]
+}

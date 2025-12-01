@@ -28,6 +28,11 @@ def state1970(url_file: str, output_folder: str):
 
     _url = input_url(url_file, "1970-79")
     df = pd.read_csv(_url, skiprows=5, encoding='ISO-8859-1')
+    #Writing raw data to csv
+    df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "raw_data", 'raw_data_state_1970_1979.csv'),
+              index=False)
+
     df.insert(1, 'geo_ID', 'geoId/', True)
     df['geo_ID'] = 'geoId/' + (df['FIPS State Code'].map(str)).str.zfill(2)
     # Dropping the old unwanted columns.
@@ -83,17 +88,16 @@ def state1970(url_file: str, output_folder: str):
     # and df_ar for aggregated age/race output.
     final_df = pd.DataFrame()
     df_ar = pd.DataFrame()
+    df.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     final_df = pd.concat([final_df, df])
     df_ar = pd.concat([df_ar, df])
-    final_df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
     # DF sent to an external function for aggregation based on gender.
     df = gender_based_grouping(df)
-    df.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     # DF sent to an external function for aggregation based on race.
     df_ar = race_based_grouping(df_ar)
-    df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     final_df = pd.concat([final_df, df_ar, df])
     final_df = final_df[~final_df.SVs.str.contains('OtherRaces')]
+
     final_df.to_csv(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
                      'state_1970_1979.csv'))

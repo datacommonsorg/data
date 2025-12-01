@@ -36,13 +36,9 @@ class TestPreprocess(unittest.TestCase):
     mcf_file_path = OP_DATA_FOLDER
     tmcf_file_path = OP_DATA_FOLDER
 
-    ip_files = os.listdir(os.path.join(TEST_DATA_FOLDER, "test_files"))
-    ip_data_path = [
-        os.path.join(os.path.join(TEST_DATA_FOLDER, "test_files"), file_name)
-        for file_name in ip_files
-    ]
+    ip_files = os.path.join(TEST_DATA_FOLDER, "test_files")
 
-    base = CensusUSAPopulationByRace(ip_data_path, cleaned_csv_file_path,
+    base = CensusUSAPopulationByRace(ip_files, cleaned_csv_file_path,
                                      mcf_file_path, tmcf_file_path)
     base.process()
 
@@ -113,3 +109,7 @@ class TestPreprocess(unittest.TestCase):
                 csv_data = csv_file.read()
 
             self.assertEqual(expected_csv_data.strip(), csv_data.strip())
+
+
+if __name__ == "__main__":
+    unittest.main()

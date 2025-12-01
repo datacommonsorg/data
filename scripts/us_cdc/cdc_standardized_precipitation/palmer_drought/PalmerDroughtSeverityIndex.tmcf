@@ -1,0 +1,7 @@
+Node: E:CDC_PalmerDroughtSeverityIndex->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PalmerDroughtSeverityIndex_Atmosphere
+observationAbout: C:CDC_PalmerDroughtSeverityIndex->dcid
+observationDate: C:CDC_PalmerDroughtSeverityIndex->date
+value: C:CDC_PalmerDroughtSeverityIndex->Value
+observationPeriod: "P1M"

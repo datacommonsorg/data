@@ -16,6 +16,7 @@ This Python Script is for State Level Data 1990-2000.
 '''
 import os
 import pandas as pd
+from urllib.parse import urlparse
 from common_functions import input_url
 
 
@@ -29,6 +30,11 @@ def state1990(url_file: str, output_folder: str):
     final_df = pd.DataFrame()
     for url in _urls:
         df = pd.read_table(url, skiprows=15, delim_whitespace=True, header=None)
+        #Copying the raw data
+        filename = urlparse(url).path.split('/')[-1]
+        df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               "raw_data", filename),
+                  index=False)
         df.columns=['Year','geo_ID','Age','NHWM','NHWF','NHBM','NHBF','NHAIANM'\
         ,'NHAIANF','NHAPIM','NHAPIF','HWM','HWF','HBM','HBF','HAIANM','HAIANF',\
         'HAPIM','HAPIF']
@@ -77,6 +83,7 @@ def state1990(url_file: str, output_folder: str):
     final_df['geo_ID'] = 'country/USA'
     final_df = final_df.groupby(['geo_ID','Year','Measurement_Method','SVs'])\
         .sum()
+
     final_df.to_csv(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
                      'national_1990_2000.csv'))

@@ -11,16 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""
-Configurations for the executor.
+"""Configurations for the executor.
 
 The app endpoints accept a configs field that allows customization of all the
 configurations. See main.py.
 """
 
+import dataclasses
 import os
 from typing import List
-import dataclasses
 
 from google.cloud import logging
 
@@ -32,9 +31,10 @@ def _production():
 @dataclasses.dataclass
 class ExecutorConfig:
     """Configurations for the executor."""
+
     # ID of the Google Cloud project that hosts the executor. The project
     # needs to enable App Engine and Cloud Scheduler.
-    gcp_project_id: str = 'google.com:datcom-data'
+    gcp_project_id: str = 'datcom-import-automation'
     # ID of the Google Cloud project that stores generated CSVs and MCFs. The
     # project needs to enable Cloud Storage and gives the service account the
     # executor uses sufficient permissions to read and write the bucket below.
@@ -42,6 +42,10 @@ class ExecutorConfig:
     # Name of the Cloud Storage bucket to store the generated data files
     # for importing to prod.
     storage_prod_bucket_name: str = 'datcom-prod-imports'
+    # Spanner instance details for import status.
+    spanner_project_id: str = 'datcom-store'
+    spanner_instance_id: str = 'dc-kg-test'
+    spanner_database_id: str = 'dc_graph_import'
     # Name of the Cloud Storage bucket that the Data Commons importer
     # outputs to.
     storage_importer_bucket_name: str = 'resolved_mcf'
@@ -70,9 +74,15 @@ class ExecutorConfig:
     # The content of latest_version.txt would be a single line of
     # '2020_07_15T12_07_17_365264_07_00'.
     storage_version_filename: str = 'latest_version.txt'
+    # File with list of historical versions with the most recent at the top
+    storage_version_history_filename: str = 'version_history.txt'
+    # Name of the file that contains the import_metadata_mcf for the import.
+    # These files are stored at the same level as the storage_version_filename.
+    import_metadata_mcf_filename: str = 'import_metadata_mcf.mcf'
     # Types of inputs accepted by the Data Commons importer. These are
     # also the accepted fields of an import_inputs value in the manifest.
     import_input_types: List[str] = ('template_mcf', 'cleaned_csv', 'node_mcf')
+    # DEPRECATED
     # Oauth Client ID used to authenticate with the import progress dashboard.
     # which is protected by Identity-Aware Proxy. This can be found by going
     # to the Identity-Aware Proxy of the Google Cloud project that hosts
@@ -80,6 +90,8 @@ class ExecutorConfig:
     dashboard_oauth_client_id: str = ''
     # Oauth Client ID used to authenticate with the proxy.
     importer_oauth_client_id: str = ''
+    # URL for the import executor container image.
+    importer_docker_image: str = 'gcr.io/datcom-ci/dc-import-executor:stable'
     # Access token of the account used to authenticate with GitHub. This is not
     # the account password. See
     # https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token.
@@ -101,10 +113,38 @@ class ExecutorConfig:
     requirements_filename: str = 'requirements.txt'
     # ID of the location where Cloud Scheduler is hosted.
     scheduler_location: str = 'us-central1'
+    # Name of the GCS bucket for volume mount.
+    gcs_bucket_volume_mount: str = 'datcom-volume-mount'
+    # Location of the GCS bucket volume mount.
+    gcs_volume_mount_dir: str = '/tmp/gcs'
+    # Clean up GCS volume mount dir.
+    cleanup_gcs_volume_mount: bool = False
+    # Location of the local git data repo.
+    local_repo_dir: str = '/data'
+    # Location of the import tool jar.
+    import_tool_path: str = '/import-tool.jar'
+    # Cloud workflow id.
+    cloud_workflow_id: str = 'import-automation-workflow'
     # Maximum time a user script can run for in seconds.
-    user_script_timeout: float = 600
+    user_script_timeout: float = 86400
+    # Arguments for the user script
+    user_script_args: List[str] = ()
+    # Environment variables for the user script
+    user_script_env: dict = None
+    # Invoke import tool genmcf.
+    invoke_import_tool: bool = True
+    # Invoke differ tool.
+    invoke_differ_tool: bool = True
+    # Invoke validations before upload.
+    invoke_import_validation: bool = True
+    # Ignore validation status during import.
+    ignore_validation_status: bool = False
+    # Import validation config file path (relative to data repo).
+    validation_config_file: str = 'tools/import_validation/validation_config.json'
+    # Latest import version (overwrite)
+    import_version_override: str = ''
     # Maximum time venv creation can take in seconds.
-    venv_create_timeout: float = 600
+    venv_create_timeout: float = 3600
     # Maximum time downloading a file can take in seconds.
     file_download_timeout: float = 600
     # Maximum time downloading the repo can take in seconds.
@@ -113,6 +153,10 @@ class ExecutorConfig:
     email_account: str = ''
     # The corresponding password, app password, or access token.
     email_token: str = ''
+    # Email alerts are disabled by default. Cloud Run jobs use GCP alerting.
+    disable_email_notifications: bool = True
+    # Skip uploading the data to GCS (for local testing).
+    skip_gcs_upload: bool = False
     # Maximum time a blocking call to the importer to
     # perform an import can take in seconds.
     importer_import_timeout: float = 20 * 60
@@ -120,26 +164,12 @@ class ExecutorConfig:
     # delete an import can take in seconds.
     importer_delete_timeout: float = 10 * 60
     # Executor type depends on where the executor runs
-    # Suppports one of: "GKE", "GAE"
-    executor_type: str = 'GAE'
+    # Suppports one of: "GKE", "GAE", "CLOUD_RUN", "CLOUD_BATCH"
+    executor_type: str = 'CLOUD_BATCH'
 
     def get_data_refresh_config(self):
         """Returns the config used for Cloud Scheduler data refresh jobs."""
-        fields = set([
-            'github_repo_name',
-            'github_repo_owner_username',
-            'github_auth_username',
-            'github_auth_access_token',
-            'dashboard_oauth_client_id',
-            'importer_oauth_client_id',
-            'email_account',
-            'email_token',
-            'gcs_project_id',
-            'storage_prod_bucket_name',
-        ])
-        return {
-            k: v for k, v in dataclasses.asdict(self).items() if k in fields
-        }
+        return {k: v for k, v in dataclasses.asdict(self).items()}
 
 
 def _setup_logging():

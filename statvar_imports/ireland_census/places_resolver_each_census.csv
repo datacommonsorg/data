@@ -1,0 +1,49 @@
+place_name,dcid
+State,country/IRL
+Carlow,wikidataId/Q181882
+Dublin,wikidataId/Q1761
+Kildare,wikidataId/Q173332
+Kilkenny,wikidataId/Q180231
+Laois,wikidataId/Q55299
+Longford,wikidataId/Q186220
+Louth,wikidataId/Q183539
+Meath,wikidataId/Q183544
+Offaly,wikidataId/Q184445
+Westmeath,wikidataId/Q182633
+Wexford,wikidataId/Q184599
+Wicklow,wikidataId/Q182591
+Clare,wikidataId/Q181862
+Cork,wikidataId/Q162475
+Kerry,wikidataId/Q184469
+Limerick,wikidataId/Q178283
+Tipperary,wikidataId/Q184618
+Waterford,wikidataId/Q184594
+Galway,wikidataId/Q169923
+Leitrim,wikidataId/Q107397
+Mayo,wikidataId/Q178626
+Roscommon,wikidataId/Q179437
+Sligo,wikidataId/Q179325
+Cavan,wikidataId/Q187402
+Donegal,wikidataId/Q179424
+Monaghan,wikidataId/Q184760
+Fingal,wikidataId/Q520000
+Dun Laoghaire-Rathdown,wikidataId/Q538417
+Border,nuts/IE041
+Midland,nuts/IE063
+West,nuts/IE042
+Dublin,wikidataId/Q1761
+Mid-East,nuts/IE062
+Mid-West,nuts/IE051
+South-East,nuts/IE052
+South-West,nuts/IE053
+Dublin City,wikidataId/Q4169280
+South Dublin,wikidataId/Q822865
+Cork City,wikidataId/Q36647
+,
+Limerick City,wikidataId/Q133315
+,
+North Tipperary,wikidataId/Q1076424
+South Tipperary,wikidataId/Q1076415
+Waterford City,wikidataId/Q183551
+,
+Galway City,wikidataId/Q129610

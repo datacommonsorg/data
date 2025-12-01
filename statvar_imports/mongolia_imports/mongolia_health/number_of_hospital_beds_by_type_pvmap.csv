@@ -1,0 +1,57 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4
+Aimag,observationAbout,country/MNG,,,,,,
+Internal medicine,healthDepartmentType,InternalMedicine,,,,,,
+Beds per 1000 population,measurementDenominator,Count_Person,unit,Per1000Persons,,,,
+Surgery and traumatology,healthDepartmentType,SurgeryAndTraumatology,,,,,,
+Ophtalmology,healthDepartmentType,Ophthalmology,,,,,,
+Otolaryngology,healthDepartmentType,Otolaryngology,,,,,,
+Obstetrics,healthDepartmentType,Obstetrics,,,,,,
+Gyneacology,healthDepartmentType,Gynecology,,,,,,
+Neurology,healthDepartmentType,Neurology,,,,,,
+Psychiatry and narcology,healthDepartmentType,PsychiatryAndNarcology,,,,,,
+Pediatrics,healthDepartmentType,Pediatrics,,,,,,
+,,,,,,,,
+1989,observationDate,1989,value,{Number},populationType,HospitalBed,measuredProperty,count
+1990,observationDate,1990,value,{Number},populationType,HospitalBed,measuredProperty,count
+1991,observationDate,1991,value,{Number},populationType,HospitalBed,measuredProperty,count
+1992,observationDate,1992,value,{Number},populationType,HospitalBed,measuredProperty,count
+1993,observationDate,1993,value,{Number},populationType,HospitalBed,measuredProperty,count
+1994,observationDate,1994,value,{Number},populationType,HospitalBed,measuredProperty,count
+1995,observationDate,1995,value,{Number},populationType,HospitalBed,measuredProperty,count
+1996,observationDate,1996,value,{Number},populationType,HospitalBed,measuredProperty,count
+1997,observationDate,1997,value,{Number},populationType,HospitalBed,measuredProperty,count
+1998,observationDate,1998,value,{Number},populationType,HospitalBed,measuredProperty,count
+1999,observationDate,1999,value,{Number},populationType,HospitalBed,measuredProperty,count
+2000,observationDate,2000,value,{Number},populationType,HospitalBed,measuredProperty,count
+2001,observationDate,2001,value,{Number},populationType,HospitalBed,measuredProperty,count
+2002,observationDate,2002,value,{Number},populationType,HospitalBed,measuredProperty,count
+2003,observationDate,2003,value,{Number},populationType,HospitalBed,measuredProperty,count
+2004,observationDate,2004,value,{Number},populationType,HospitalBed,measuredProperty,count
+2005,observationDate,2005,value,{Number},populationType,HospitalBed,measuredProperty,count
+2006,observationDate,2006,value,{Number},populationType,HospitalBed,measuredProperty,count
+2007,observationDate,2007,value,{Number},populationType,HospitalBed,measuredProperty,count
+2008,observationDate,2008,value,{Number},populationType,HospitalBed,measuredProperty,count
+2009,observationDate,2009,value,{Number},populationType,HospitalBed,measuredProperty,count
+2010,observationDate,2010,value,{Number},populationType,HospitalBed,measuredProperty,count
+2011,observationDate,2011,value,{Number},populationType,HospitalBed,measuredProperty,count
+2012,observationDate,2012,value,{Number},populationType,HospitalBed,measuredProperty,count
+2013,observationDate,2013,value,{Number},populationType,HospitalBed,measuredProperty,count
+2014,observationDate,2014,value,{Number},populationType,HospitalBed,measuredProperty,count
+2015,observationDate,2015,value,{Number},populationType,HospitalBed,measuredProperty,count
+2016,observationDate,2016,value,{Number},populationType,HospitalBed,measuredProperty,count
+2017,observationDate,2017,value,{Number},populationType,HospitalBed,measuredProperty,count
+2018,observationDate,2018,value,{Number},populationType,HospitalBed,measuredProperty,count
+2019,observationDate,2019,value,{Number},populationType,HospitalBed,measuredProperty,count
+2020,observationDate,2020,value,{Number},populationType,HospitalBed,measuredProperty,count
+2021,observationDate,2021,value,{Number},populationType,HospitalBed,measuredProperty,count
+2022,observationDate,2022,value,{Number},populationType,HospitalBed,measuredProperty,count
+2023,observationDate,2023,value,{Number},populationType,HospitalBed,measuredProperty,count
+2024,observationDate,2024,value,{Number},populationType,HospitalBed,measuredProperty,count
+2025,observationDate,2025,value,{Number},populationType,HospitalBed,measuredProperty,count
+2026,observationDate,2026,value,{Number},populationType,HospitalBed,measuredProperty,count
+2027,observationDate,2027,value,{Number},populationType,HospitalBed,measuredProperty,count
+2028,observationDate,2028,value,{Number},populationType,HospitalBed,measuredProperty,count
+2029,observationDate,2029,value,{Number},populationType,HospitalBed,measuredProperty,count
+2030,observationDate,2030,value,{Number},populationType,HospitalBed,measuredProperty,count
+2031,observationDate,2031,value,{Number},populationType,HospitalBed,measuredProperty,count
+2032,observationDate,2032,value,{Number},populationType,HospitalBed,measuredProperty,count

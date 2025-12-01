@@ -1,0 +1,43 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "CDC500",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.cdc.gov/places/index.html",
+            "provenance_description": "Variables related to health from the CDC",
+            "scripts": [
+                "download_bulk.py",
+                "parse_cdc_places.py"
+            ],
+            "source_files": [
+                "gcs_output/input_files/*.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "cdc_places.tmcf",
+                    "cleaned_csv": "gcs_output/cleaned_csv/County.csv"
+                },
+                {
+                    "template_mcf": "cdc_places_city.tmcf",
+                    "cleaned_csv": "gcs_output/cleaned_csv/City.csv"
+                },
+                {
+                    "template_mcf": "cdc_places_zipcode.tmcf",
+                    "cleaned_csv": "gcs_output/cleaned_csv/ZipCode.csv"
+                },
+                {
+                    "template_mcf": "cdc_places_censustract.tmcf",
+                    "cleaned_csv": "gcs_output/cleaned_csv/CensusTract.csv"
+                }
+            ],
+            "cron_schedule": "0 4 * * 5",
+            "resource_limits": {
+                "cpu": 16,
+                "memory": 128,
+                "disk": 500
+            }
+        }
+    ]
+}

@@ -51,6 +51,7 @@ _STATES = {
     'Virginia': 'VA',
     'Washington': 'WA',
     'WestVirginia': 'WV',
+    'West Virginia': 'WV',
     'Wisconsin': 'WI',
     'Wyoming': 'WY',
     'UnitedStates': 'US',

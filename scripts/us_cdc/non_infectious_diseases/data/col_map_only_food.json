@@ -2492,6 +2492,9 @@
         "Animal Contact": {
             "modeOfTransmission": "AnimalContact"
         },
+        "Animal contact": {
+            "modeOfTransmission": "AnimalContact"
+        },
         "Water": {
             "modeOfTransmission": "Water"
         },

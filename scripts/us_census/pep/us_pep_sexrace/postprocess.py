@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ and generate final CSV, MCF, TMCF file.
 """
 
 import pandas as pd
+from absl import logging
 import os
 from common import Outputfiles, _OUTPUTFINAL, _OUTPUTINTERMEDIATE
 
@@ -40,114 +41,145 @@ def write_to_mcf(filename: str, final_mcf_template: str):
 
 
 def process_national_before_2000(df: pd.DataFrame):
-    # coverting year values to int
-    df['Year'] = df['Year'].astype(float).astype(int)
+    logging.info("Start process_national_before_2000")
+    try:
+        # coverting year values to int
+        df['Year'] = df['Year'].astype(float).astype(int)
 
-    # dropping unwanted column
-    df = df.drop(columns=['Unnamed: 0','Count_Person_Male',\
-        'Count_Person_Female'])
+        # dropping unwanted column
+        df = df.drop(columns=['Unnamed: 0','Count_Person_Male',\
+            'Count_Person_Female'])
 
-    # making geoid uniform
-    df['geo_ID'] = df['geo_ID'].str.strip()
+        # making geoid uniform
+        df['geo_ID'] = df['geo_ID'].str.strip()
 
-    # sorting the values based on year and geoid
-    df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
+        # sorting the values based on year and geoid
+        df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
 
-    df = df.replace('nan', '')
-    # writing output to final csv
-    df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL, "national_before_2000.csv"),
-              index=False)
+        df = df.replace('nan', '')
+        # writing output to final csv
+        df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL,
+                               "national_before_2000.csv"),
+                  index=False)
 
-    # collecting all the column headers
-    columns_of_national_before_2000 = df.columns.to_list()
-    return columns_of_national_before_2000
+        # collecting all the column headers
+        columns_of_national_before_2000 = df.columns.to_list()
+        logging.info("End process_national_before_2000")
+        return columns_of_national_before_2000
+
+    except Exception as e:
+        logging.fatal(f"Error while processing process_national_before_2000{e}")
 
 
 def process_state_county_before_2000(df: pd.DataFrame):
-    # coverting year values to int
-    df['Year'] = df['Year'].astype(float).astype(int)
+    logging.info("Start process_state_county_before_2000")
+    try:
+        # coverting year values to int
+        df['Year'] = df['Year'].astype(float).astype(int)
 
-    # dropping unwanted column
-    df = df.drop(columns=['Count_Person_Male', 'Count_Person_Female'])
+        # dropping unwanted column
+        df = df.drop(columns=['Count_Person_Male', 'Count_Person_Female'])
 
-    # making geoid uniform
-    df['geo_ID'] = df['geo_ID'].str.strip()
+        # making geoid uniform
+        df['geo_ID'] = df['geo_ID'].str.strip()
 
-    # sorting the values based on year and geoid
-    df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
+        # sorting the values based on year and geoid
+        df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
 
-    # writing output to final csv
-    df = df[[
-        'Year', 'geo_ID', 'Count_Person_Male_WhiteAlone',
-        'Count_Person_Female_WhiteAlone',
-        'Count_Person_Male_BlackOrAfricanAmericanAlone',
-        'Count_Person_Female_BlackOrAfricanAmericanAlone',
-        'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
-        'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
-        'Count_Person_Male_AsianOrPacificIslander',
-        'Count_Person_Female_AsianOrPacificIslander'
-    ]]
+        # writing output to final csv
+        df = df[[
+            'Year', 'geo_ID', 'Count_Person_Male_WhiteAlone',
+            'Count_Person_Female_WhiteAlone',
+            'Count_Person_Male_BlackOrAfricanAmericanAlone',
+            'Count_Person_Female_BlackOrAfricanAmericanAlone',
+            'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
+            'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
+            'Count_Person_Male_AsianOrPacificIslander',
+            'Count_Person_Female_AsianOrPacificIslander'
+        ]]
 
-    df = df.replace('nan', '')
-    float_col = df.select_dtypes(include=['float64'])
-    for col in float_col.columns.values:
-        df[col] = df[col].astype('int64')
+        df = df.replace('nan', '')
+        float_col = df.select_dtypes(include=['float64'])
+        for col in float_col.columns.values:
+            df[col] = df[col].astype('int64')
 
-    df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL,
-                           "state_county_before_2000.csv"),
-              index=False)
+        df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL,
+                               "state_county_before_2000.csv"),
+                  index=False)
 
-    # collecting all the column headers
-    columns_of_state_county_before_2000 = df.columns.to_list()
-    return columns_of_state_county_before_2000
+        # collecting all the column headers
+        columns_of_state_county_before_2000 = df.columns.to_list()
+        logging.info("End process_state_county_before_2000")
+        return columns_of_state_county_before_2000
+
+    except Exception as e:
+        logging.fatal(
+            f"Error while processing process_state_county_before_2000{e}")
 
 
 def process_state_county_after_2000(df: pd.DataFrame):
+    logging.info("Started process_state_county_after_2000")
     # coverting year values to int
     df['Year'] = df['Year'].astype(float).astype(int)
+    try:
+        # dropping unwanted column
+        df = df.drop(columns=['Unnamed: 0','Count_Person_Male',\
+            'Count_Person_Female'])
 
-    # dropping unwanted column
-    df = df.drop(columns=['Unnamed: 0','Count_Person_Male',\
-        'Count_Person_Female'])
+        # making geoid uniform
+        df['geo_ID'] = df['geo_ID'].str.strip()
 
-    # making geoid uniform
-    df['geo_ID'] = df['geo_ID'].str.strip()
+        # sorting the values based on year and geoid
+        df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
 
-    # sorting the values based on year and geoid
-    df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
+        df = df.replace('nan', '')
+        #Year,geo_ID
+        df = df.drop_duplicates(subset=['Year', 'geo_ID'], keep='last')
+        # writing output to final csv
+        df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL,
+                               "state_county_after_2000.csv"),
+                  index=False)
 
-    df = df.replace('nan', '')
-    # writing output to final csv
-    df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL,
-                           "state_county_after_2000.csv"),
-              index=False)
+        # collecting all the column headers
+        columns_of_state_county_after_2000 = df.columns.to_list()
+        logging.info("End process_state_county_after_2000")
+        return columns_of_state_county_after_2000
 
-    # collecting all the column headers
-    columns_of_state_county_after_2000 = df.columns.to_list()
-    return columns_of_state_county_after_2000
+    except Exception as e:
+        logging.fatal(
+            f"Error while processing process_state_county_after_2000{e}")
 
 
 def process_national_after_2000(df: pd.DataFrame):
-    # coverting year values to int
-    df['Year'] = df['Year'].astype(float).astype(int)
+    logging.info("Start process_national_after_2000")
+    try:
+        # coverting year values to int
+        df['Year'] = df['Year'].astype(float).astype(int)
 
-    # making geoid uniform
-    df['geo_ID'] = df['geo_ID'].str.strip()
+        # making geoid uniform
+        df['geo_ID'] = df['geo_ID'].str.strip()
 
-    # sorting the values based on year and geoid
-    df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
+        # sorting the values based on year and geoid
+        df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
 
-    # dropping unwanted column
-    df = df.drop(columns=['Unnamed: 0','Count_Person_Male',\
-        'Count_Person_Female'])
+        # dropping unwanted column
+        df = df.drop(columns=['Unnamed: 0','Count_Person_Male',\
+            'Count_Person_Female'])
 
-    # writing output to final csv
-    df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL, "national_after_2000.csv"),
-              index=False)
+        #Added to resolve 2020 inconsistent data remove
+        df = df.drop_duplicates(subset=['geo_ID', 'Year'], keep='last')
+        # writing output to final csv
+        df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL,
+                               "national_after_2000.csv"),
+                  index=False)
 
-    # collecting all the column headers
-    columns_of_national_after_2000 = df.columns.to_list()
-    return columns_of_national_after_2000
+        # collecting all the column headers
+        columns_of_national_after_2000 = df.columns.to_list()
+        logging.info("End process_national_after_2000")
+        return columns_of_national_after_2000
+
+    except Exception as e:
+        logging.fatal(f"Error while processing process_national_after_2000{e}")
 
 
 def create_single_csv(output_files_names: list):
@@ -166,12 +198,12 @@ def create_single_csv(output_files_names: list):
     Return:
         column_name (List) : list of all the column names.
     """
+    logging.info("Started create_single_csv")
     df1 = pd.DataFrame()
     df3 = pd.DataFrame()
     df5 = pd.DataFrame()
     df7 = pd.DataFrame()
     column_names = {}
-
     # list of output files for national before the year 2000
     national_before_2000 = output_files_names[
         Outputfiles.NationalBefore2000.value]
@@ -187,49 +219,57 @@ def create_single_csv(output_files_names: list):
 
     # aggregating the files which are having national data before the year 2000
     # to final output csv
-    if len(national_before_2000) > 0:
-        for i in national_before_2000:
-            #os.path.join(_CODEDIR, _OUTPUTFINAL, "national_after_2000.csv")
-            df = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i),
-                             header=0)
-            for col in df.columns:
-                df[col] = df[col].astype("str")
-            df1 = pd.concat([df, df1], ignore_index=True)
-        column_names[1] = process_national_before_2000(df1)
+    try:
+        if len(national_before_2000) > 0:
+            for i in national_before_2000:
+                #os.path.join(_CODEDIR, _OUTPUTFINAL, "national_after_2000.csv")
+                df = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i),
+                                 header=0)
+                for col in df.columns:
+                    df[col] = df[col].astype("str")
+                df1 = pd.concat([df, df1], ignore_index=True)
+            column_names[1] = process_national_before_2000(df1)
 
-    # aggregating the files which are having state and county data before the
-    # year 2000 to final output csv
-    if len(state_county_before_2000) > 0:
-        for i in state_county_before_2000:
-            df2 = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i),
-                              header=0)
-            for col in df2.columns:
-                df2[col] = df2[col].astype("str")
-            df3 = pd.concat([df2, df3], ignore_index=True)
-        column_names[2] = process_state_county_before_2000(df3)
+        # aggregating the files which are having state and county data before the
+        # year 2000 to final output csv
+        if len(state_county_before_2000) > 0:
+            for i in state_county_before_2000:
+                df2 = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE,
+                                               i),
+                                  header=0)
+                for col in df2.columns:
+                    df2[col] = df2[col].astype("str")
+                df3 = pd.concat([df2, df3], ignore_index=True)
+            column_names[2] = process_state_county_before_2000(df3)
 
-    # aggregating the files which are having state and county data after the
-    # year 2000 to final output csv
-    if len(state_county_after_2000) > 0:
-        for i in state_county_after_2000:
-            df6 = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i),
-                              header=0)
-            for col in df6.columns:
-                df6[col] = df6[col].astype("str")
-            df7 = pd.concat([df6, df7], ignore_index=True)
-        column_names[3] = process_state_county_after_2000(df7)
+        # aggregating the files which are having state and county data after the
+        # year 2000 to final output csv
+        if len(state_county_after_2000) > 0:
+            for i in state_county_after_2000:
+                df6 = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE,
+                                               i),
+                                  header=0)
+                for col in df6.columns:
+                    df6[col] = df6[col].astype("str")
+                df7 = pd.concat([df6, df7], ignore_index=True)
+            column_names[3] = process_state_county_after_2000(df7)
 
-    # aggregating the files which are having national data after the year 2000
-    # to final output csv
-    if len(national_after_2000) > 0:
-        for i in national_after_2000:
-            df4 = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i),
-                              header=0)
-            for col in df4.columns:
-                df4[col] = df4[col].astype("str")
-            df5 = pd.concat([df4, df5], ignore_index=True)
-        column_names[4] = process_national_after_2000(df5)
-    return column_names
+        # aggregating the files which are having national data after the year 2000
+        # to final output csv
+        if len(national_after_2000) > 0:
+            for i in national_after_2000:
+                df4 = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE,
+                                               i),
+                                  header=0)
+                for col in df4.columns:
+                    df4[col] = df4[col].astype("str")
+                df5 = pd.concat([df4, df5], ignore_index=True)
+            column_names[4] = process_national_after_2000(df5)
+        logging.info("End create_single_csv")
+        return column_names
+
+    except Exception as e:
+        logging.fatal(f"Error while processing create_single_csv{e}")
 
 
 def generate_mcf(statvar_names: list, mcfflag: Outputfiles) -> None:
@@ -249,6 +289,7 @@ def generate_mcf(statvar_names: list, mcfflag: Outputfiles) -> None:
     Returns:
         None
     """
+    logging.info("Started generate_mcf")
     mcf_template = """Node: dcid:{}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -258,33 +299,37 @@ measuredProperty: dcs:count
 """
 
     final_mcf_template = ""
-    for sv in statvar_names:
-        if "Total" in sv:
-            continue
-        if "Year" in sv:
-            continue
-        if "geo_ID" in sv:
-            continue
-        gender = ''
-        race = ''
-        sv_prop = sv.split("_")
-        for prop in sv_prop:
-            if prop in ["Count", "Person"]:
+    try:
+        for sv in statvar_names:
+            if "Total" in sv:
                 continue
-            if "Male" in prop or "Female" in prop:
-                gender = "gender: dcs:" + prop
-            else:
-                race = "race: dcs:" + prop + "\n"
-        final_mcf_template += mcf_template.format(sv, race, gender) + "\n"
-    # Writing Genereated MCF to local path.
-    if mcfflag == Outputfiles.NationalBefore2000.value:
-        write_to_mcf("national_before_2000", final_mcf_template)
-    elif mcfflag == Outputfiles.StateCountyBefore2000.value:
-        write_to_mcf("state_county_before_2000", final_mcf_template)
-    elif mcfflag == Outputfiles.StateCountyAfter2000.value:
-        write_to_mcf("state_county_after_2000", final_mcf_template)
-    else:
-        write_to_mcf("national_after_2000", final_mcf_template)
+            if "Year" in sv:
+                continue
+            if "geo_ID" in sv:
+                continue
+            gender = ''
+            race = ''
+            sv_prop = sv.split("_")
+            for prop in sv_prop:
+                if prop in ["Count", "Person"]:
+                    continue
+                if "Male" in prop or "Female" in prop:
+                    gender = "gender: dcs:" + prop
+                else:
+                    race = "race: dcs:" + prop + "\n"
+            final_mcf_template += mcf_template.format(sv, race, gender) + "\n"
+        # Writing Genereated MCF to local path.
+        if mcfflag == Outputfiles.NationalBefore2000.value:
+            write_to_mcf("national_before_2000", final_mcf_template)
+        elif mcfflag == Outputfiles.StateCountyBefore2000.value:
+            write_to_mcf("state_county_before_2000", final_mcf_template)
+        elif mcfflag == Outputfiles.StateCountyAfter2000.value:
+            write_to_mcf("state_county_after_2000", final_mcf_template)
+        else:
+            write_to_mcf("national_after_2000", final_mcf_template)
+        logging.info("End generate_mcf")
+    except Exception as e:
+        logging.fatal(f"Error while generating mcf file{e}")
 
 
 def generate_tmcf(df_cols: list, tmcfflag: Outputfiles) -> None:
@@ -315,44 +360,49 @@ observationPeriod: "P1Y"
 value: C:postprocess->{} 
 
 """
-    j = 0
-    mmethod = ""
-    tmcf = ""
-    for cols in df_cols:
-        if "Year" in cols:
-            continue
-        if "geo_ID" in cols:
-            continue
+    logging.info("Started generate_tmcf")
+    try:
+        j = 0
+        mmethod = ""
+        tmcf = ""
+        for cols in df_cols:
+            if "Year" in cols:
+                continue
+            if "geo_ID" in cols:
+                continue
+            if tmcfflag == Outputfiles.NationalBefore2000.value:
+                if cols.lower().endswith('male'):
+                    mmethod = "dcAggregate/CensusPEPSurvey_PartialAggregate"
+                elif cols.lower().endswith('nonwhite'):
+                    mmethod = "CensusPEPSurvey_RaceUpto1999"
+                else:
+                    mmethod = "dcAggregate/CensusPEPSurvey_PartialAggregate_RaceUpto1999"
+            elif tmcfflag == Outputfiles.StateCountyBefore2000.value:
+                if cols.lower().endswith('male'):
+                    mmethod = "dcAggregate/CensusPEPSurvey_PartialAggregate"
+                else:
+                    mmethod = "CensusPEPSurvey_RaceUpto1999"
+            elif tmcfflag == Outputfiles.StateCountyAfter2000.value:
+                if cols.lower().endswith('male'):
+                    mmethod = "dcAggregate/CensusPEPSurvey_PartialAggregate"
+                else:
+                    mmethod = "CensusPEPSurvey_Race2000Onwards"
+            else:
+                if cols.lower().endswith('male'):
+                    mmethod = "dcAggregate/CensusPEPSurvey_PartialAggregate"
+                else:
+                    mmethod = "dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards"
+            tmcf = tmcf + tmcf_template.format(j, cols, mmethod, cols) + "\n"
+            j = j + 1
+        # Writing Genereated TMCF to local path.
         if tmcfflag == Outputfiles.NationalBefore2000.value:
-            if cols.lower().endswith('male'):
-                mmethod = "dcAggregate/CensusPEPSurvey_PartialAggregate"
-            elif cols.lower().endswith('nonwhite'):
-                mmethod = "CensusPEPSurvey_RaceUpto1999"
-            else:
-                mmethod = "dcAggregate/CensusPEPSurvey_PartialAggregate_RaceUpto1999"
+            write_to_tmcf("national_before_2000", tmcf)
         elif tmcfflag == Outputfiles.StateCountyBefore2000.value:
-            if cols.lower().endswith('male'):
-                mmethod = "dcAggregate/CensusPEPSurvey_PartialAggregate"
-            else:
-                mmethod = "CensusPEPSurvey_RaceUpto1999"
+            write_to_tmcf("state_county_before_2000", tmcf)
         elif tmcfflag == Outputfiles.StateCountyAfter2000.value:
-            if cols.lower().endswith('male'):
-                mmethod = "dcAggregate/CensusPEPSurvey_PartialAggregate"
-            else:
-                mmethod = "CensusPEPSurvey_Race2000Onwards"
+            write_to_tmcf("state_county_after_2000", tmcf)
         else:
-            if cols.lower().endswith('male'):
-                mmethod = "dcAggregate/CensusPEPSurvey_PartialAggregate"
-            else:
-                mmethod = "dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards"
-        tmcf = tmcf + tmcf_template.format(j, cols, mmethod, cols) + "\n"
-        j = j + 1
-    # Writing Genereated TMCF to local path.
-    if tmcfflag == Outputfiles.NationalBefore2000.value:
-        write_to_tmcf("national_before_2000", tmcf)
-    elif tmcfflag == Outputfiles.StateCountyBefore2000.value:
-        write_to_tmcf("state_county_before_2000", tmcf)
-    elif tmcfflag == Outputfiles.StateCountyAfter2000.value:
-        write_to_tmcf("state_county_after_2000", tmcf)
-    else:
-        write_to_tmcf("national_after_2000", tmcf)
+            write_to_tmcf("national_after_2000", tmcf)
+        logging.info("End generate_tmcf")
+    except Exception as e:
+        logging.fatal(f"Error while generating generate_tmcf{e}")

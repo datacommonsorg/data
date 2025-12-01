@@ -14,7 +14,7 @@ This dataset reports life expectancy by age, gender in countries, NUTS1 and NUTS
 
 ### Download URL
 
-tsv file is available for download from https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_mlifexp.tsv.gz.
+[TSV] file is available for [download](https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_mlifexp/?format=TSV&compressed=true).
 
 ### License
 
@@ -48,12 +48,26 @@ See parent README.
 
 To generate the cleaned csv `demo_r_mlifexp_cleaned.csv`, run
 
+This script offers three modes of operation: download, process, or both download and process.
+
 ```bash
-python3 preprocess.py
+1. Download and Process (python3 preprocess.py or no mode flag):
+2. Download Only (python3 preprocess.py --mode=download):
+3. Process Only (python3 preprocess.py --mode=process):
 ```
 
 To generate `demo_r_mlifexp.tmcf` and `demo_r_mlifexp_statvar.mcf`, run:
 
 ```bash
 python3 generate_mcf.py
+```
+### Testing Procedure
+
+How to Create Sample Data: Extract a subset of rows from your source input file to generate sample input and output CSV files.
+
+To test import procedure, run the following command:
+
+```
+python3 preprocess_test.py
+
 ```

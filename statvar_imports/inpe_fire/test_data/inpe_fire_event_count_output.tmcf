@@ -1,0 +1,8 @@
+Node: E:inpe_fire_event_count_output->E0
+observationAbout: C:inpe_fire_event_count_output->observationAbout
+observationDate: C:inpe_fire_event_count_output->observationDate
+value: C:inpe_fire_event_count_output->value
+observationPeriod: C:inpe_fire_event_count_output->observationPeriod
+variableMeasured: C:inpe_fire_event_count_output->variableMeasured
+#Aggregate: sum
+typeOf: dcs:StatVarObservation

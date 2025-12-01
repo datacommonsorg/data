@@ -1,0 +1,67 @@
+{
+  "incentiveSummaries": [
+    {
+      "extractionConfig": {
+        "url": "https://www.dewa.gov.ae/en/consumer/solar-community/shams-dubai",
+        "locale": {
+          "language": "en",
+          "countryIso": "AE"
+        },
+        "incentiveCategory": "INCENTIVE_CATEGORY_SOLAR"
+      },
+      "incentive": {
+        "purchaseType": "PURCHASE_TYPE_CONSUMPTION",
+        "redemptionType": "REDEMPTION_TYPE_REBATE_OR_SUBSIDY",
+        "name": "DEWA Shams Dubai",
+        "providerName": "Dubai Electricity and Water Authority (DEWA)"
+      },
+      "groundingInfo": {}
+    },
+    {
+      "extractionConfig": {
+        "url": "https://re.gaf.am/index7kom.html",
+        "locale": {
+          "language": "en",
+          "countryIso": "AM"
+        },
+        "incentiveCategory": "INCENTIVE_CATEGORY_SOLAR"
+      },
+      "incentive": {
+        "purchaseType": "PURCHASE_TYPE_INSTALLATION",
+        "redemptionType": "REDEMPTION_TYPE_LOAN",
+        "name": "German-Armenian Fund Promotion of Renewable Energies Program Green Loans",
+        "providerName": "German-Armenian Fund"
+      },
+      "groundingInfo": {}
+    },
+    {
+      "extractionConfig": {
+        "url": "https://www.mission-solar.at/tirol",
+        "locale": {
+          "language": "en",
+          "countryIso": "AT"
+        },
+        "incentiveCategory": "INCENTIVE_CATEGORY_SOLAR"
+      },
+      "incentive": {
+        "purchaseType": "PURCHASE_TYPE_INSTALLATION",
+        "redemptionType": "REDEMPTION_TYPE_REBATE_OR_SUBSIDY",
+        "maximumAmount": {
+          "currencyCode": "EUR",
+          "units": "5000"
+        },
+        "perUnitAmount": {
+          "amount": {
+            "currencyCode": "EUR",
+            "units": "250"
+          },
+          "unit": "CREDIT_UNITS_KILOWATTS"
+        },
+        "name": "Land Tirol PV-Anlagen Förderung",
+        "providerName": "Bundesland Tirol",
+        "percentageOfCostsCovered": 0.5
+      },
+      "groundingInfo": {}
+    }
+  ]
+}

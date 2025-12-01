@@ -1,0 +1,223 @@
+Node: dcid:Count_Person_3OrMoreYears_Civilian
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_AmericanIndianOrAlaskaNative
+typeOf: dcid:StatisticalVariable
+name: "American Indian or Alaska Native","Not Active-Duty Military","Person Aged 3 and above"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+race: dcid:AmericanIndianOrAlaskaNative
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_Asian
+typeOf: dcid:StatisticalVariable
+name: "Asian American","Not Active-Duty Military","Person Aged 3 and above"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+race: dcid:Asian
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+name: "African American","Not Active-Duty Military","Person Aged 3 and above"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_EnrolledInSchool
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","School-Aged Child at Home"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+schoolEnrollment: dcid:EnrolledInSchool
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_Female
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","female"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+gender: dcid:Female
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_HispanicOrLatino
+typeOf: dcid:StatisticalVariable
+name: "Hispanic","Not Active-Duty Military","Person Aged 3 and above"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+ethnicity: dcid:HispanicOrLatino
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_Male
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","male"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+gender: dcid:Male
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_Nonveteran
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Not Veteran","Person Aged 3 and above"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+veteranStatus: dcid:Nonveteran
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_NotEnrolledInSchool
+typeOf: dcid:StatisticalVariable
+name: "No School-Aged Child at Home","Not Active-Duty Military","Person Aged 3 and above"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+schoolEnrollment: dcid:NotEnrolledInSchool
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_NotHispanicOrLatino_NTIAOtherRace
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Other non-Hispanic","Person Aged 3 and above"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+ethnicity: dcid:NotHispanicOrLatino
+race: dcid:NTIA_OtherRace
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_Rural
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","Rural"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_UnknownPlaceOfResidence
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","Unknown place of residence"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+placeOfResidenceClassification: dcid:UnknownPlaceOfResidence
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_Urban
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","Urban"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_Veteran
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","Veteran"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+veteranStatus: dcid:Veteran
+
+Node: dcid:Count_Person_3OrMoreYears_Civilian_WhiteAloneNotHispanicOrLatino
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","White non-Hispanic"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 - Years]
+armedForcesStatus: dcid:Civilian
+race: dcid:WhiteAloneNotHispanicOrLatino
+
+Node: dcid:Count_Person_Civilian_EducationalAttainmentCollegeGraduate
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","education up to college Graduate"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+armedForcesStatus: dcid:Civilian
+educationalAttainment: dcid:CollegeGraduate
+
+Node: dcid:Count_Person_Civilian_EducationalAttainmentHighSchoolGraduate
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","education up to Higher Secondary Graduate"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+armedForcesStatus: dcid:Civilian
+educationalAttainment: dcid:HighSchoolGraduate
+
+Node: dcid:Count_Person_Civilian_EducationalAttainmentNoDiploma
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","education without Diploma"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+armedForcesStatus: dcid:Civilian
+educationalAttainment: dcid:NoDiploma
+
+Node: dcid:Count_Person_Civilian_EducationalAttainmentSomeCollegeOrAssociatesDegree
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","education up to some college"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+armedForcesStatus: dcid:Civilian
+educationalAttainment: dcid:SomeCollegeOrAssociatesDegree
+
+Node: dcid:Count_Person_Civilian_Employed
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","employed"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+armedForcesStatus: dcid:Civilian
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_Civilian_NotInLaborForce
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","not in Labour Force"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+armedForcesStatus: dcid:Civilian
+employmentStatus: dcid:NotInLaborForce
+
+Node: dcid:Count_Person_Civilian_Unemployed
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","unemployed"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+armedForcesStatus: dcid:Civilian
+employmentStatus: dcid:Unemployed
+

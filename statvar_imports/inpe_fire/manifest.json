@@ -1,0 +1,27 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "INPE_Fire_Event_Count",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://ndap.niti.gov.in/dataset/7375",
+            "provenance_description": "Life expectancy of a person in India based on gender at state level.",
+            "scripts": [
+                "download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input.csv --pv_map=pvmap.csv --places_resolved_csv=places_resolved.csv'    --config_file=metadata.csv'   --output_path=output_inpe"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_inpe.tmcf",
+                    "cleaned_csv": "output_inpe.csv"
+                }
+            ],
+            "source_files": [
+                "input.csv"
+            ],
+            "cron_schedule": "00 11 1,15 * *",
+            "cleanup_gcs_volume_mount": false
+        }
+    ]
+}

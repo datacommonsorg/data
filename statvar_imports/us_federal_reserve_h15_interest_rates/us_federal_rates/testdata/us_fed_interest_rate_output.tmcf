@@ -1,0 +1,8 @@
+Node: E:us_fed_interest_rate_output->E0
+observationAbout: C:us_fed_interest_rate_output->observationAbout
+observationDate: C:us_fed_interest_rate_output->observationDate
+value: C:us_fed_interest_rate_output->value
+variableMeasured: C:us_fed_interest_rate_output->variableMeasured
+unit: C:us_fed_interest_rate_output->unit
+scalingFactor: C:us_fed_interest_rate_output->scalingFactor
+typeOf: dcs:StatVarObservation

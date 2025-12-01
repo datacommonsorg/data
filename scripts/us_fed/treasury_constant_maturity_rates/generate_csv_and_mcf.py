@@ -27,8 +27,9 @@ Run "python3 generate_csv_and_mcf.py --help" for usage.
 
 from absl import app
 from absl import flags
+from absl import logging
+from datetime import datetime, timedelta
 import pandas as pd
-from frozendict import frozendict
 
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean("csv", True, "Whether or not to generate the csv.")
@@ -38,11 +39,12 @@ flags.DEFINE_boolean(
     "instance MCFs.")
 flags.DEFINE_string("path", "FRB_H15.csv",
                     "Path to the raw csv containing rates at all maturities.")
+flags.DEFINE_string("mode", "prod", "Processing mode (test/prod).")
 
 # Maturities for which interest rates are provided by BEA.
 # Treasury bills have maturities of a year or less, notes greater than 1 year up
 # to 10 years, and bonds greater than 10 years.
-MATURITIES = frozendict({
+MATURITIES = {
     "1-month": "Bill",
     "3-month": "Bill",
     "6-month": "Bill",
@@ -54,12 +56,14 @@ MATURITIES = frozendict({
     "10-year": "Note",
     "20-year": "Bond",
     "30-year": "Bond"
-})
+}
 
 # URL of the raw csv
 CSV_URL = "https://www.federalreserve.gov/datadownload/Output.aspx?rel=H15&"\
           "series=bf17364827e38702b42a58cf8eaa3f78&lastobs=&from=&to="\
           "&filetype=csv&label=include&layout=seriescolumn&type=package"
+CSV_PATH = "FRB_H15.csv"
+MIN_ROWS = 1000
 
 
 def generate_csv():
@@ -68,15 +72,27 @@ def generate_csv():
 
     out_df = pd.DataFrame()
     header_rows = 5
-    name_template = "Market yield on U.S. Treasury securities at {}   constant"\
+    name_template = "Market yield on U.S. Treasury securities at {}  constant"\
                     " maturity, quoted on investment basis"
 
-    in_df = pd.read_csv(CSV_URL, na_values="ND")
+    if FLAGS.mode == 'test':
+        in_df = pd.read_csv(CSV_PATH, na_values="ND")
+        logging.info(f'Got {in_df.shape} rows from {CSV_PATH}')
+    else:
+        in_df = pd.read_csv(CSV_URL,
+                            na_values="ND",
+                            storage_options={"User-Agent": "Python-Pandas"})
+        logging.info(f'Got {in_df.shape} rows from {CSV_URL}')
 
     out_df["date"] = in_df["Series Description"][header_rows:]
     for maturity in MATURITIES:
         column_name = name_template.format(maturity)
         out_df[maturity.title()] = in_df[column_name][header_rows:]
+
+    # Check if there are enough rows with latest date
+    out_rows = out_df.shape[0]
+    if out_rows < MIN_ROWS:
+        logging.fatal(f'Got only {in_rows},  not enough rows in url: {CSV_URL}')
 
     out_df.to_csv("treasury_constant_maturity_rates.csv", index=False)
 

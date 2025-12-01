@@ -1,0 +1,250 @@
+Country or Area	M49 code	ISO-alpha3 code
+Afghanistan	004	AFG
+Åland Islands	248	ALA
+Albania	008	ALB
+Algeria	012	DZA
+American Samoa	016	ASM
+Andorra	020	AND
+Angola	024	AGO
+Anguilla	660	AIA
+Antarctica	010	ATA
+Antigua and Barbuda	028	ATG
+Argentina	032	ARG
+Armenia	051	ARM
+Aruba	533	ABW
+Australia	036	AUS
+Austria	040	AUT
+Azerbaijan	031	AZE
+Bahamas	044	BHS
+Bahrain	048	BHR
+Bangladesh	050	BGD
+Barbados	052	BRB
+Belarus	112	BLR
+Belgium	056	BEL
+Belize	084	BLZ
+Benin	204	BEN
+Bermuda	060	BMU
+Bhutan	064	BTN
+Bolivia (Plurinational State of)	068	BOL
+Bonaire, Sint Eustatius and Saba	535	BES
+Bosnia and Herzegovina	070	BIH
+Botswana	072	BWA
+Bouvet Island	074	BVT
+Brazil	076	BRA
+British Indian Ocean Territory	086	IOT
+British Virgin Islands	092	VGB
+Brunei Darussalam	096	BRN
+Bulgaria	100	BGR
+Burkina Faso	854	BFA
+Burundi	108	BDI
+Cabo Verde	132	CPV
+Cambodia	116	KHM
+Cameroon	120	CMR
+Canada	124	CAN
+Cayman Islands	136	CYM
+Central African Republic	140	CAF
+Chad	148	TCD
+Chile	152	CHL
+China	156	CHN
+China, Hong Kong Special Administrative Region	344	HKG
+China, Macao Special Administrative Region	446	MAC
+Christmas Island	162	CXR
+Cocos (Keeling) Islands	166	CCK
+Colombia	170	COL
+Comoros	174	COM
+Congo	178	COG
+Cook Islands	184	COK
+Costa Rica	188	CRI
+Côte d’Ivoire	384	CIV
+Croatia	191	HRV
+Cuba	192	CUB
+Curaçao	531	CUW
+Cyprus	196	CYP
+Czechia	203	CZE
+Democratic People's Republic of Korea	408	PRK
+Democratic Republic of the Congo	180	COD
+Denmark	208	DNK
+Djibouti	262	DJI
+Dominica	212	DMA
+Dominican Republic	214	DOM
+Ecuador	218	ECU
+Egypt	818	EGY
+El Salvador	222	SLV
+Equatorial Guinea	226	GNQ
+Eritrea	232	ERI
+Estonia	233	EST
+Eswatini	748	SWZ
+Ethiopia	231	ETH
+Falkland Islands (Malvinas)	238	FLK
+Faroe Islands	234	FRO
+Fiji	242	FJI
+Finland	246	FIN
+France	250	FRA
+French Guiana	254	GUF
+French Polynesia	258	PYF
+French Southern Territories	260	ATF
+Gabon	266	GAB
+Gambia	270	GMB
+Georgia	268	GEO
+Germany	276	DEU
+Ghana	288	GHA
+Gibraltar	292	GIB
+Greece	300	GRC
+Greenland	304	GRL
+Grenada	308	GRD
+Guadeloupe	312	GLP
+Guam	316	GUM
+Guatemala	320	GTM
+Guernsey	831	GGY
+Guinea	324	GIN
+Guinea-Bissau	624	GNB
+Guyana	328	GUY
+Haiti	332	HTI
+Heard Island and McDonald Islands	334	HMD
+Holy See	336	VAT
+Honduras	340	HND
+Hungary	348	HUN
+Iceland	352	ISL
+India	356	IND
+Indonesia	360	IDN
+Iran (Islamic Republic of)	364	IRN
+Iraq	368	IRQ
+Ireland	372	IRL
+Isle of Man	833	IMN
+Israel	376	ISR
+Italy	380	ITA
+Jamaica	388	JAM
+Japan	392	JPN
+Jersey	832	JEY
+Jordan	400	JOR
+Kazakhstan	398	KAZ
+Kenya	404	KEN
+Kiribati	296	KIR
+Kuwait	414	KWT
+Kyrgyzstan	417	KGZ
+Lao People's Democratic Republic	418	LAO
+Latvia	428	LVA
+Lebanon	422	LBN
+Lesotho	426	LSO
+Liberia	430	LBR
+Libya	434	LBY
+Liechtenstein	438	LIE
+Lithuania	440	LTU
+Luxembourg	442	LUX
+Madagascar	450	MDG
+Malawi	454	MWI
+Malaysia	458	MYS
+Maldives	462	MDV
+Mali	466	MLI
+Malta	470	MLT
+Marshall Islands	584	MHL
+Martinique	474	MTQ
+Mauritania	478	MRT
+Mauritius	480	MUS
+Mayotte	175	MYT
+Mexico	484	MEX
+Micronesia (Federated States of)	583	FSM
+Monaco	492	MCO
+Mongolia	496	MNG
+Montenegro	499	MNE
+Montserrat	500	MSR
+Morocco	504	MAR
+Mozambique	508	MOZ
+Myanmar	104	MMR
+Namibia	516	NAM
+Nauru	520	NRU
+Nepal	524	NPL
+Netherlands	528	NLD
+New Caledonia	540	NCL
+New Zealand	554	NZL
+Nicaragua	558	NIC
+Niger	562	NER
+Nigeria	566	NGA
+Niue	570	NIU
+Norfolk Island	574	NFK
+North Macedonia	807	MKD
+Northern Mariana Islands	580	MNP
+Norway	578	NOR
+Oman	512	OMN
+Pakistan	586	PAK
+Palau	585	PLW
+Panama	591	PAN
+Papua New Guinea	598	PNG
+Paraguay	600	PRY
+Peru	604	PER
+Philippines	608	PHL
+Pitcairn	612	PCN
+Poland	616	POL
+Portugal	620	PRT
+Puerto Rico	630	PRI
+Qatar	634	QAT
+Republic of Korea	410	KOR
+Republic of Moldova	498	MDA
+Réunion	638	REU
+Romania	642	ROU
+Russian Federation	643	RUS
+Rwanda	646	RWA
+Saint Barthélemy	652	BLM
+Saint Helena	654	SHN
+Saint Kitts and Nevis	659	KNA
+Saint Lucia	662	LCA
+Saint Martin (French Part)	663	MAF
+Saint Pierre and Miquelon	666	SPM
+Saint Vincent and the Grenadines	670	VCT
+Samoa	882	WSM
+San Marino	674	SMR
+Sao Tome and Principe	678	STP
+Sark	680	
+Saudi Arabia	682	SAU
+Senegal	686	SEN
+Serbia	688	SRB
+Seychelles	690	SYC
+Sierra Leone	694	SLE
+Singapore	702	SGP
+Sint Maarten (Dutch part)	534	SXM
+Slovakia	703	SVK
+Slovenia	705	SVN
+Solomon Islands	090	SLB
+Somalia	706	SOM
+South Africa	710	ZAF
+South Georgia and the South Sandwich Islands	239	SGS
+South Sudan	728	SSD
+Spain	724	ESP
+Sri Lanka	144	LKA
+State of Palestine	275	PSE
+Sudan	729	SDN
+Suriname	740	SUR
+Svalbard and Jan Mayen Islands	744	SJM
+Sweden	752	SWE
+Switzerland	756	CHE
+Syrian Arab Republic	760	SYR
+Tajikistan	762	TJK
+Thailand	764	THA
+Timor-Leste	626	TLS
+Togo	768	TGO
+Tokelau	772	TKL
+Tonga	776	TON
+Trinidad and Tobago	780	TTO
+Tunisia	788	TUN
+Türkiye	792	TUR
+Turkmenistan	795	TKM
+Turks and Caicos Islands	796	TCA
+Tuvalu	798	TUV
+Uganda	800	UGA
+Ukraine	804	UKR
+United Arab Emirates	784	ARE
+United Kingdom of Great Britain and Northern Ireland	826	GBR
+United Republic of Tanzania	834	TZA
+United States Minor Outlying Islands	581	UMI
+United States of America	840	USA
+United States Virgin Islands	850	VIR
+Uruguay	858	URY
+Uzbekistan	860	UZB
+Vanuatu	548	VUT
+Venezuela (Bolivarian Republic of)	862	VEN
+Viet Nam	704	VNM
+Wallis and Futuna Islands	876	WLF
+Western Sahara	732	ESH
+Yemen	887	YEM
+Zambia	894	ZMB
+Zimbabwe	716	ZWE

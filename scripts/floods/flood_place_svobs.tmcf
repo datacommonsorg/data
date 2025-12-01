@@ -1,0 +1,16 @@
+Node: E:EventPlaces->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Area_FloodEvent
+observationAbout: C:EventPlaces->observationAbout
+observationDate: C:EventPlaces->observationDate
+observationPeriod: C:EventPlaces->observationPeriod
+value: C:EventPlaces->area
+unit: SquareKilometer
+
+Node: E:EventPlaces->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_FloodEvent
+observationAbout: C:EventPlaces->observationAbout
+observationDate: C:EventPlaces->observationDate
+observationPeriod: C:EventPlaces->observationPeriod
+value: C:EventPlaces->count

@@ -21,7 +21,7 @@ Author: fpernice-google
 
 ### Download URL
 
-ZIP file is available for download from [here](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/nama_10r_3gdp.tsv.gz).
+ZIP file is available for download from [here](https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nama_10r_3gdp/?format=TSV&compressed=true).
 
 ### License
 
@@ -64,6 +64,22 @@ See parent README.
 
 To import Eurostat GDP data, run the following command:
 
+
+This script offers three modes of operation: download, process, or both download and process.
+
+```bash
+1. Download and Process (python3 import_data.py or no mode flag):
+2. Download Only (python3 import_data.py --mode=download):
+3. Process Only (python3 import_data.py --mode=process):
 ```
-python3 import_data.py
+
+### Testing Procedure
+
+How to Create Sample Data: Extract a subset of rows from your source input file to generate sample input and output CSV files.
+
+To test import procedure, run the following command:
+
+```
+python3 import_data_test.py
+
 ```

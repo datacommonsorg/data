@@ -11,15 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Class to run the events pipeline stage to download files from a URL.
-"""
+"""Class to run the events pipeline stage to download files from a URL."""
 
 import os
+import re
 import sys
+import time
 
 from absl import logging
 
-_SCRIPTS_DIR = os.path.dirname(__file__)
+_SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
@@ -35,7 +36,7 @@ from pipeline_stage_runner import StageRunner, register_stage_runner
 
 
 class DownloadRunner(StageRunner):
-    '''Class to download data files from URL source.'''
+    """Class to download data files from URL source."""
 
     def __init__(self,
                  config_dicts: list = [],
@@ -43,18 +44,26 @@ class DownloadRunner(StageRunner):
                  counters=None):
         self.set_up('download', config_dicts, state, counters)
 
-    def run(self,
-            input_files: list = None,
-            config_dict: dict = {},
-            counters: Counters = None) -> list:
-        '''Returns the list of files downloaded from the URL in the config.
-        URLs are downloaded for each time period until the current date.'''
+    def run(
+        self,
+        input_files: list = None,
+        config_dict: dict = {},
+        counters: Counters = None,
+    ) -> list:
+        """Returns the list of files downloaded from the URL in the config.
+
+    URLs are downloaded for each time period until the current date.
+    """
         # Download data from start_date up to end_date
         # advancing date by the time_period.
         start_date = self.get_config('start_date', '', config_dict)
-        end_date = self.get_config('end_date', '', config_dict)
-        if not end_date:
-            end_date = utils.date_yesterday()
+        yesterday = utils.date_yesterday()
+        end_date = self.get_config('end_date', yesterday, config_dict)
+        if end_date > yesterday:
+            end_date = yesterday
+        logging.info(
+            f'Running download with start_date: {start_date}, end_date:{end_date}'
+        )
         data_files = []
         while start_date and start_date <= end_date:
             # Download data for the start_date
@@ -70,7 +79,7 @@ class DownloadRunner(StageRunner):
         return data_files
 
     def download_file_with_config(self, config_dict: dict = {}) -> list:
-        '''Returns list of files downloaded for config.'''
+        """Returns list of files downloaded for config."""
         logging.info(f'Downloading data for config: {config_dict}')
         downloaded_files = []
         urls = config_dict.get('url', [])
@@ -98,7 +107,8 @@ class DownloadRunner(StageRunner):
                     output=config_dict.get('response_type', 'text'),
                     timeout=config_dict.get('timeout', 60),
                     retries=config_dict.get('retry_count', 3),
-                    retry_secs=retry_secs)
+                    retry_secs=retry_secs,
+                )
                 if download_content:
                     # Check if the downloaded content matches the regex.
                     regex = config_dict.get('successful_response_regex', '')
@@ -124,8 +134,8 @@ class DownloadRunner(StageRunner):
             with file_util.FileIO(filename, mode='w') as file:
                 file.write(download_content)
             logging.info(
-                f'Downloaded {len(download_content)} bytes from {url} into file: {filename}'
-            )
+                f'Downloaded {len(download_content)} bytes from {url} into file:'
+                f' {filename}')
             downloaded_files.append(filename)
 
         return downloaded_files

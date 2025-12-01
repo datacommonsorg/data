@@ -93,6 +93,8 @@ _DURATION = {
 _C_BIRTH = {
     'EU28_FOR': 'ForeignBornWithinEU28',
     'NEU28_FOR': 'ForeignBornOutsideEU28',
+    'EU27_2020_FOR': 'ForeignBornWithinEU27',
+    'NEU27_2020_FOR': 'ForeignBornOutsideEU27',
     'FOR': 'ForeignBorn',
     'NAT': 'Native'
 }
@@ -100,6 +102,8 @@ _C_BIRTH = {
 _CITIZEN = {
     'EU28_FOR': 'WithinEU28AndNotACitizen',
     'NEU28_FOR': 'CitizenOutsideEU28',
+    'EU27_2020_FOR': 'WithinEU27AndNotACitizen',
+    'NEU27_2020_FOR': 'CitizenOutsideEU27',
     'FOR': 'NotACitizen',
     'NAT': 'Citizen'
 }

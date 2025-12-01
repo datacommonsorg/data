@@ -1,0 +1,27 @@
+# Requirements for all Python code in this repo, except for import-automation
+
+# Add new modules to one of:
+# - import-automation/executor/requirements.txt: if the script is used in import automation.
+# - script-folder/requirements.txt: the module is only needed for that script.
+# - requirements_all.txt (here): anything not related to import automation.
+
+-r import-automation/executor/requirements.txt
+
+absl-py
+chembl-webresource-client
+deepdiff
+earthengine-api
+flask_restful
+geopandas
+geopy
+google-generativeai
+jinja2
+matplotlib
+netCDF4
+protobuf
+rasterio
+rdp
+s2sphere
+sentence-transformers
+tabula-py
+yapf

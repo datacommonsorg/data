@@ -1,0 +1,35 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NCES_PublicSchool",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
+            "provenance_description": "US nces school data for public",
+            "scripts": [
+                "run.sh",
+                "process.py"
+            ],
+            "source_files": [
+                "gcs_output/input_files/*/*.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "gcs_output/output_files/us_nces_demographics_public_school.tmcf",
+                    "cleaned_csv": "gcs_output/output_files/us_nces_demographics_public_school.csv"
+                },
+                {
+                    "template_mcf": "gcs_output/output_place/us_nces_demographics_public_place.tmcf",
+                    "cleaned_csv": "gcs_output/output_place/us_nces_demographics_public_place.csv"
+                }
+            ],
+            "cron_schedule": "30 3 2 3,6,9,12 *",
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 64,
+                "disk": 200
+            }
+        }
+    ]
+}

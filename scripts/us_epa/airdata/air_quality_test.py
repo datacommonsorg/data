@@ -16,10 +16,13 @@ Unit tests for air_quality.py
 
 Usage: python3 -m unittest discover -v -s ../ -p "air_quality_test.py"
 '''
-import unittest, csv, os, tempfile
-from .air_quality import create_csv, write_csv, write_tmcf
+import unittest, csv, os, sys, tempfile
 
 module_dir_ = os.path.dirname(__file__)
+
+sys.path.append(module_dir_)
+
+from air_quality import create_csv, write_csv, write_tmcf
 
 
 class TestCriteriaGasesTest(unittest.TestCase):

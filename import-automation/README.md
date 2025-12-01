@@ -3,9 +3,6 @@
 The import automation system has three components:
 1. [Cloud Build configuration file](cloudbuild/README.md)
 2. [Executor](executor/README.md)
-3. Import Progress Dashboard
-   - [Import Progress Dashboard API](import-progress-dashboard-api/README.md)
-   - [Import Progress Dashboard Frontend](import-progress-dashboard-frontend/README.md)
 
 ## User Manual
 
@@ -120,7 +117,6 @@ directories:
    specify the import targets in the commit message
    (see [Specifying Import Targets](#specifying-import-targets)). If no tag
    is found, no imports will be executed.
-5. Check the [Import Progress Dashboard](https://dashboard-frontend-dot-datcom-data.uc.r.appspot.com/)
 
 ### Scheduling Updates
 
@@ -134,8 +130,6 @@ directories:
 
 1. Check in the `import-automation` directory to the repository.
 2. [Configure](executor/README.md#configuring-the-executor) and [deploy](executor/README.md#deploying-on-app-engine) the executor
-3. [Deploy the import progress dashboard API](import-progress-dashboard-api/README.md#deploying-to-app-engine)
-4. [Deploy the import progress dashboard frontend](import-progress-dashboard-frontend/README.md#deploying-to-app-engine)
 5. [Create a Cloud Tasks queue](#creating-cloud-task-queue)
 6. [Connect the repository to Cloud Build and set up Cloud Build triggers](#setting-up-cloud-build)
 
@@ -162,7 +156,6 @@ directories:
        - **File type**: `Cloud Build configuration file (yaml or json)`
        - **Cloud Build configuration file location**:  `/import-automation/cloudbuild/cloudbuild.yaml`
        - **Substitution variables**
-         - **_DASHBOARD_OAUTH_CLIENT_ID**: `<OAuth client ID used to authenticate with the import progress dashboard>` (This can be found by going to the Identity-Aware Proxy of the Google Cloud project that hosts the dashboard and clicking 'Edit OAuth Client.)
          - **_EMAIL_ACCOUNT**: `<email account used for sending notifications>`;
          - **_EMAIL_TOKEN**: `<password, app password, or access token of the email account>`
          - **_GITHUB_AUTH_USERNAME**: `<GitHub username to authenticate with GitHub API>`
@@ -171,7 +164,7 @@ directories:
          - **_GITHUB_REPO_OWNER_USERNAME**: `<username of the owner of the repository, e.g., datacommonsorg>`
          - **_HANDLER_SERVICE**: `<service the executor is deployed to, e.g., default>`
          - **_HANDLER_URI**: `<URI of the executor's endpoint that imports to dev, e.g., />`
-         - **_IMPORTER_OAUTH_CLIENT_ID**: `<OAuth client ID used to authenticate with the proxy for the importer>` (This can be found similarly as **_DASHBOARD_OAUTH_CLIENT_ID**)
+         - **_IMPORTER_OAUTH_CLIENT_ID**: `<OAuth client ID used to authenticate with the proxy for the importer>`
          - **_TASK_LOCATION_ID**: `<location ID of the Cloud Tasks queue, e.g., us-central1>` (This can be found by going to the Cloud Tasks control panel and look at the "Location" column.)
          - **_TASK_PROJECT_ID**: `<ID of the Google Cloud project that hosts the task queue, e.g., google.com:datcom-data>`
          - **_TASK_QUEUE_NAME**: `<Name of the task queue>`

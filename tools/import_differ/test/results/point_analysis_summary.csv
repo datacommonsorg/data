@@ -1,0 +1,4 @@
+variableMeasured,ADDED,DELETED,MODIFIED
+dcid:InterestRate_TreasuryBill_3Month,0,2,0
+dcid:InterestRate_TreasuryBond_20Year,0,0,1
+dcid:InterestRate_TreasuryNote_10Year,1,0,0

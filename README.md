@@ -113,7 +113,7 @@ Install requirements and setup a virtual environment to isolate python developme
 python3 -m venv .env
 source .env/bin/activate
 
-pip3 install -r requirements.txt
+pip3 install -r requirements_all.txt
 ```
 
 ##### Testing
@@ -153,8 +153,8 @@ you import modules and run tests, as below.
 
 ##### Guidelines
 
-*   Any additional package required must be specified in the requirements.txt
-    in the top-level folder. No other requirements.txt files are allowed.
+*   Any additional package required must be specified in the `requirements_all.txt`
+    file in the top-level folder. No other `requirements.txt` files are allowed.
 *   Code must be formatted according to the
     [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
     according to the [yapf formatter](https://github.com/google/yapf).
@@ -167,7 +167,7 @@ you import modules and run tests, as below.
 
 Consider automating coding to satisfy some of these requirements.
 
-*   [Integrate pylint](http://pylint.pycqa.org/en/latest/user_guide/ide-integration.html)
+*   [Integrate pylint](https://pylint.readthedocs.io/en/stable/user_guide/installation/ide_integration/index.html#ide-integration)
     with your editor.
 *   Integrate yapf with
     [Visual Studio](https://code.visualstudio.com/docs/python/editing#_formatting),
