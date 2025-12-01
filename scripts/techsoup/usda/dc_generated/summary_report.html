@@ -1,0 +1,128 @@
+<html>
+  <head>
+    <title>Summary Report</title>
+  </head>
+  <body>
+    <style>
+      table,
+      td,
+      th {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+      }
+      td, th {
+        max-width: 25rem;
+        word-wrap: break-word;
+        vertical-align: top;
+      }
+      tbody tr:hover {
+        background-color: #ccc;
+      }
+      summary {
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding-bottom: 1rem;
+      }
+      details {
+        padding-bottom: 1rem;
+      }
+    </style>
+    <h1>Summary Report</h1>
+    <div>
+      <h2>Import Run Details</h2>
+      <table>
+        <tr>
+          <td>Existence Checks Enabled</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Resolution Mode</td>
+          <td>RESOLUTION_MODE_LOCAL</td>
+        </tr>
+        <tr>
+          <td>Num Threads</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Stat Checks Enabled</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Sample Places Entered</td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <h2>Counters</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Counter Name</th>
+              <th>Num Occurences</th>
+            </tr>
+          </thead>
+              <tbody>
+                <tr>
+                  <th colspan="2" align="left">LEVEL_INFO</th>
+                </tr>
+                  <tr>
+                    <td>NumRowSuccesses</td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <td>NumPVSuccesses</td>
+                    <td>66</td>
+                  </tr>
+                  <tr>
+                    <td>Existence_NumChecks</td>
+                    <td>78</td>
+                  </tr>
+                  <tr>
+                    <td>NumNodeSuccesses</td>
+                    <td>8</td>
+                  </tr>
+                  <tr>
+                    <td>Existence_NumDcCalls</td>
+                    <td>1</td>
+                  </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <th colspan="2" align="left">LEVEL_WARNING</th>
+                </tr>
+                  <tr>
+                    <td>Existence_MissingReference_mealSite</td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <td>StrSplit_EmptyToken_morningSnackHours</td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <td>StrSplit_EmptyToken_dinnerHours</td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <td>StrSplit_EmptyToken_afternoonSnackHours</td>
+                    <td>3</td>
+                  </tr>
+                  <tr>
+                    <td>StrSplit_EmptyToken_breakfastHours</td>
+                    <td>3</td>
+                  </tr>
+                  <tr>
+                    <td>Existence_MissingReference_Property</td>
+                    <td>22</td>
+                  </tr>
+                  <tr>
+                    <td>Existence_MissingReference_typeOf</td>
+                    <td>8</td>
+                  </tr>
+              </tbody>
+        </table>
+    </div>
+  </body>
+</html>
