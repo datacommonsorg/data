@@ -116,9 +116,9 @@ class ExecutorConfig:
     # Name of the GCS bucket for volume mount.
     gcs_bucket_volume_mount: str = 'datcom-volume-mount'
     # Location of the GCS bucket volume mount.
-    gcs_volume_mount_dir: str = '/mnt'
+    gcs_volume_mount_dir: str = '/tmp/gcs'
     # Clean up GCS volume mount dir.
-    cleanup_gcs_volume_mount: bool = True
+    cleanup_gcs_volume_mount: bool = False
     # Location of the local git data repo.
     local_repo_dir: str = '/data'
     # Location of the import tool jar.

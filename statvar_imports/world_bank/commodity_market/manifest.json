@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "WB_CommodityMarket",
+            "import_name": "WorldBank_CommodityMarket",
             "curator_emails": [
                 "support@datacommons.org"
             ],
@@ -18,27 +18,27 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "commodity.tmcf",
+                    "template_mcf": "output/commodity_monthly_price.tmcf",
                     "cleaned_csv": "output/commodity_monthly_price.csv"
                 },
                 {
-                    "template_mcf": "commodity.tmcf",
+                    "template_mcf": "output/commodity_annual_real_price.tmcf",
                     "cleaned_csv": "output/commodity_annual_real_price.csv"
                 },
                 {
-                    "template_mcf": "commodity.tmcf",
+                    "template_mcf": "output/commodity_annual_nominal_price.tmcf",
                     "cleaned_csv": "output/commodity_annual_nominal_price.csv"
                 },
                 {
-                    "template_mcf": "commodity.tmcf",
+                    "template_mcf": "output/commodity_monthly_indices.tmcf",
                     "cleaned_csv": "output/commodity_monthly_indices.csv"
                 },
                 {
-                    "template_mcf": "commodity.tmcf",
+                    "template_mcf": "output/commodity_annual_real_indices.tmcf",
                     "cleaned_csv": "output/commodity_annual_real_indices.csv"
                 },
                 {
-                    "template_mcf": "commodity.tmcf",
+                    "template_mcf": "output/commodity_annual_nominal_indices.tmcf",
                     "cleaned_csv": "output/commodity_annual_nominal_indices.csv"
                 }
             ],
