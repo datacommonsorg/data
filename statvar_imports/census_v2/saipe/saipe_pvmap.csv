@@ -4,5 +4,5 @@ District ID,#Format,DISTRICT={Data:0>4},,,,,,,,,,
 Name,observationAbout,geoId/sch{FIPS}{DISTRICT},,,,,,,,,,
 Estimated Total Population,populationType,Person,measuredProperty,count,value,{Number},,,,,,
 Estimated Population 5-17,populationType,Person,measuredProperty,count,age,[5 17 Years],value,{Number},,,,
-Estimated number of relevant children 5 to 17 years old in poverty who are related to the householder,populationType,Person,measuredProperty,count,age,[5 17 Years],familyPovertyStatus,Poor,relationshipToHouseholder,RelatedChild,value,{Number}
+Estimated number of relevant children 5 to 17 years old in poverty,populationType,Person,measuredProperty,count,age,"[5 17 Years]",familyPovertyStatus,Poor,value,{Number}
 Year,observationDate,{Number},,,,,,,,,,
