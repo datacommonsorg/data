@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "NCES_PrivateSchoolStats",
+            "import_name": "NCES_PrivateSchool",
             "curator_emails": [
                 "support@datacommons.org"
             ],
