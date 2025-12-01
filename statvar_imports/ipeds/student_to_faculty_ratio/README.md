@@ -4,7 +4,7 @@ This project processes and imports the Student to Faculty Ratio data from the In
 
 # Import Name: IPEDS_StudentToFacultyRatio
 
-Source URL: ``https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true&sid=859539d0-db09-4d03-a36a-eabf93d07355&rtid=`
+Source URL: ``https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true&sid=859539d0-db09-4d03-a36a-eabf93d07355&rtid=7`
 
 Provenance Description: Integrated Postsecondary Education Data System (IPEDS) is the official online home for the primary federal source of data on U.S. colleges, universities, and technical/vocational institutions. This import focuses on Student to Faculty Ratio data.
 
@@ -15,7 +15,7 @@ Provenance Description: Integrated Postsecondary Education Data System (IPEDS) i
 2. **Preprocessing Steps**
 The import process is divided into two main stages: downloading the raw data, preprocessing and then processing it to generate the final artifacts for ingestion.
 
-# Input files: `download.py`: Downloads, unzips, filters, renames, and preprocesses the raw data.
+# Input files: `download.py`: Downloads, unzips the raw data.
 
 `preprocess.py`: Further cleans the downloaded data (rename the input files and adds a year column)
 
@@ -93,7 +93,7 @@ A generic command for the processor looks like:
 
 ```Bash
 
-python3 ../../../../tools/statvar_importer/stat_var_processor.py --input_data="input/IPEDS_Data_<year>.csv" --pv_map="student_faculty_ratio_pvmap.csv" --config_file="student_faculty_ratio_metadata.csv" --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path="output/student_to_faculty_ratio_<year>"
+python3 ../../../../tools/statvar_importer/stat_var_processor.py --input_data="input/student_faculty_ratio_data_<year>.csv" --pv_map="student_faculty_ratio_pvmap.csv" --config_file="student_faculty_ratio_metadata.csv" --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path="output/student_to_faculty_ratio_<year>"
 ```
 
 **Step 3:** 

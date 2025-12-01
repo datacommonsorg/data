@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#       http://www.apache.org/licenses/LICENSE-2.0
+#        http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,11 +17,13 @@ import sys
 import re
 import zipfile
 import time
+from datetime import date 
 from absl import logging
 
 # --- Configuration ---
 START_YEAR = 2009
-END_YEAR = 2024
+# Set END_YEAR dynamically to the current calendar year
+END_YEAR = date.today().year
 BASE_URL = "https://nces.ed.gov/ipeds/datacenter/data/EF{}D.zip"
 DOWNLOAD_DIR = "input_files"
 # Pattern to match files ending in '_rv' followed by a file extension
@@ -40,11 +42,13 @@ try:
 except ImportError as e:
     # Use logging.fatal for critical import errors and exit
     logging.fatal("Could not import 'download_file'. Please ensure the utility script is accessible. Original error: %s", e)
+    raise RuntimeError(f"FATAL: Missing utility script dependency: {e}")
 
 
 def process_and_filter_zip(zip_path: str, output_dir: str, filter_pattern: re.Pattern) -> bool:
     """
     Handles the custom unzipping, RV-pattern filtering, and cleanup.
+    If extraction fails unexpectedly, it is treated as a fatal error.
     """
     zip_filename = os.path.basename(zip_path)
     logging.info("  Unzipping and filtering contents (keeping only files matching pattern: %s)...", filter_pattern.pattern)
@@ -64,8 +68,9 @@ def process_and_filter_zip(zip_path: str, output_dir: str, filter_pattern: re.Pa
                     files_to_extract.append(file_name)
 
             if not files_to_extract:
-                logging.info("  Warning: No files matching the pattern found in %s. Skipping extraction.", zip_filename)
-                extraction_successful = True # Treat as successful if no relevant files, but the process was clean
+                # This is a warning, not a failure, as the process was clean.
+                logging.fatal("  Warning: No files matching the pattern found in %s. Skipping extraction.", zip_filename)
+                extraction_successful = True
 
             # Extract the filtered files
             for file_name in files_to_extract:
@@ -77,12 +82,16 @@ def process_and_filter_zip(zip_path: str, output_dir: str, filter_pattern: re.Pa
             extraction_successful = True
 
     except zipfile.BadZipFile:
-        logging.info("  Warning: %s is a corrupted or empty zip file. Skipping.", zip_filename)
+        # FATAL: Corrupted zip file means data is unavailable, and we must stop processing this file.
+        logging.fatal("  FATAL ERROR: %s is a corrupted or empty zip file. Cannot proceed.", zip_filename)
+        raise RuntimeError(f"Corrupted or empty zip file encountered: {zip_filename}")
     except Exception as e:
-        # Catch unexpected errors during unzipping/extraction
-        logging.info("  An unexpected error occurred during unzipping/extraction of %s: %s", zip_filename, e)
+        # FATAL: Any unexpected extraction error means partial data, which must be avoided.
+        logging.fatal("  FATAL ERROR: An unexpected error occurred during unzipping/extraction of %s: %s", zip_filename, e)
+        # Raise an error to stop the script from proceeding with potentially partial unzipped files
+        raise RuntimeError(f"Extraction failed for {zip_filename}: {e}")
     finally:
-        # 2. Clean up the downloaded zip file manually, regardless of success
+        # 2. Clean up the downloaded zip file manually, regardless of success or failure
         if os.path.exists(zip_path):
             try:
                 os.remove(zip_path)
@@ -97,6 +106,8 @@ def process_and_filter_zip(zip_path: str, output_dir: str, filter_pattern: re.Pa
 def main():
     """
     Downloads IPEDS zip files using the utility, then handles custom unzipping/filtering locally.
+    Download failure is logged as a warning, allowing the script to proceed to the next year.
+    Extraction failure is logged as FATAL, which will stop the script for that year's file.
     """
 
     # 1. Create the target directory if it doesn't exist
@@ -107,6 +118,7 @@ def main():
         except OSError as e:
             # Use logging.fatal for critical directory creation errors
             logging.fatal("FATAL ERROR: Could not create directory %s: %s", DOWNLOAD_DIR, e)
+            raise RuntimeError(f"FATAL: Directory creation failed for {DOWNLOAD_DIR}: {e}")
 
     # 2. Iterate through the required year range
     for year in range(START_YEAR, END_YEAR + 1):
@@ -129,24 +141,28 @@ def main():
 
             if download_success:
                 # 4. Handle custom processing (unzip, filter, and cleanup) locally
+                # If process_and_filter_zip encounters a fatal error, it will raise an exception
                 process_and_filter_zip(download_path, DOWNLOAD_DIR, RV_PATTERN)
 
             else:
-                logging.info("Warning: Download failed for year %d. Skipping filtering.", year)
+                # Not available/download failed: Log as a warning and skip, as requested
+                logging.info("Warning: Download failed for year %d. Skipping processing for this year.", year)
 
         except Exception as e:
-            # Catch unexpected errors during the main execution loop for a specific year
-            logging.info("An unexpected error occurred for year %d during execution: %s", year, e)
+            # Catch errors that process_and_filter_zip explicitly raises (BadZipFile, Extraction Error)
+            # or any other unexpected error during the loop. The error is already logged as FATAL.
+            logging.info("Execution failed for year %d, continuing to next year (if possible). Error: %s", year, e)
+            # The script will now proceed to the next iteration unless the error is outside the loop
 
         # Optional: Add a pause between years to respect NCES server requests
         time.sleep(5)
 
 
 if __name__ == "__main__":
-    logging.set_verbosity(logging.INFO) # This line might be needed depending on environment setup
+    logging.set_verbosity(logging.INFO)
     try:
         main()
         logging.info("\nScript finished. Filtered files extracted to the '%s' folder.", DOWNLOAD_DIR)
     except Exception as e:
-        # Catch errors outside the main loop, although 'main' should handle most
+        # Catch errors that prevent main from starting or critical errors like directory creation
         logging.fatal("\nFATAL ERROR in main execution: %s", e)
