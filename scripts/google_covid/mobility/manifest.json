@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "Google_CovidMobility",
+            "import_name": "Google_COVID19Mobility",
             "curator_emails": [
                 "support@datacommons.org"
             ],
