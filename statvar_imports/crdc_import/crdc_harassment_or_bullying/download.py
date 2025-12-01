@@ -137,10 +137,10 @@ def _find_and_collect_files(year_range: str):
             
         except ImportError:
              logging.fatal(f"Failed to read Excel file {old_filepath}. Please ensure 'openpyxl' is installed (pip install openpyxl).")
-             continue
+             
         except Exception as e:
             logging.fatal(f"Failed to process and save file {old_filepath} as CSV: {e}")
-            continue
+            
 
     logging.info(f"Collection and conversion complete for {year_range}. Collected **{len(file_paths)}** file(s) and saved them as CSV.")
 
