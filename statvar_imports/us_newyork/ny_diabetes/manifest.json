@@ -1,0 +1,38 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NYU_NewYork_Diabetes",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+             "provenance_url": "https://www.health.ny.gov/statistics/prevention/injury_prevention/information_for_action/",
+            "provenance_description": "The Behavioral Risk Factor Surveillance System (BRFSS) is an annual statewide telephone survey of adults developed by the Centers for Disease Control and Prevention (CDC) and administered by the New York State Department of Health. This data represents the percentage of adults with diagnosed diabetes by county in New York for the years 2016, 2018, and 2021.",
+            "scripts": [
+            "run.sh",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2016_data.csv --pv_map=ny_diabetes_pv_map.csv --config_file=ny_diabetes_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=ny_diabetes_place_resolver.csv --output_path=output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2016",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2018_data.csv --pv_map=ny_diabetes_pv_map.csv --config_file=ny_diabetes_metadata.csv  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=ny_diabetes_place_resolver.csv --output_path=output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2018",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2021_data.csv --pv_map=ny_diabetes_pv_map.csv --config_file=ny_diabetes_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=ny_diabetes_place_resolver.csv --output_path=output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2021"
+            ],
+            "import_inputs": [
+                 {
+                    "template_mcf": "output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2016.tmcf",
+                    "cleaned_csv": "output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2016.csv"
+                },
+                {
+                    "template_mcf": "output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2018.tmcf",
+                    "cleaned_csv": "output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2018.csv"
+                },
+                {
+                    "template_mcf": "output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2021.tmcf",
+                    "cleaned_csv": "output_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_output_2021.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2016_data.csv",
+                "input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2018_data.csv",
+                "input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2021_data.csv"
+            ]
+
+        }
+    ]
+}
