@@ -9,21 +9,21 @@ name: "race"
 domainIncludes: dcid:Student
 rangeIncludes: dcid:EthnicityEnum,dcid:RaceCodeEnum
 
-Node: dcid:juvenileJusticeFacilityStatus
+Node: dcid:educationalInstitutionType
 typeOf: dcs:Property
-name: "juvenileJusticeFacilityStatus"
+name: "educationalInstitutionType"
 domainIncludes: dcid:Student
-rangeIncludes: dcid:JuvenileJusticeFacilityStatusEnum
+rangeIncludes: dcid:EducationalInstitutionTypeEnum
 isProvisional: dcs:True
 
-Node: dcid:JuvenileJusticeFacilityStatusEnum
+Node: dcid:EducationalInstitutionTypeEnum
 typeOf: schema:Class
 subClassOf: dcs:Enumeration
-name: "JuvenileJusticeFacilityStatusEnum"
+name: "EducationalInstitutionTypeEnum"
 isProvisional: dcs:True
 
 Node: dcid:JuvenileJusticeFacility
-typeOf: dcid:JuvenileJusticeFacilityStatusEnum
+typeOf: dcid:EducationalInstitutionTypeEnum
 name: "Juvenile Justice Facility"
 isProvisional: dcs:True
 
@@ -32,14 +32,22 @@ typeOf: dcs:Property
 name: "disabilityStatus"
 domainIncludes: dcid:Student
 
-Node: dcid:educationalMethod
+Node: dcid:educationProgram
 typeOf: dcs:Property
-name: "educationalMethod"
+name: "educationProgram"
 domainIncludes: dcid:Student
+rangeIncludes: dcid:EducationProgramEnum
+isProvisional: dcs:True
 
-Node: dcid:IndividualizedEducationProgram
-typeOf: dcid:EducationalMethodEnum
-name: "Individualized Education Program"
+Node: dcid:EducationProgramEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "EducationProgramEnum"
+isProvisional: dcs:True
+
+Node: dcid:IDEA
+typeOf: dcid:EducationProgramEnum
+name: "IDEA"
 isProvisional: dcs:True
 
 Node: dcid:schoolSubject
