@@ -1,29 +1,19 @@
-Node: dcid:educationPlan
+Node: dcid:educationProgram
 typeOf: dcs:Property
-name: "educationPlan"
+name: "educationProgram"
 domainIncludes: dcid:Student
-rangeIncludes: dcid:EducationPlanEnum
+rangeIncludes: dcid:EducationProgramEnum
 isProvisional: dcs:True
 
-Node: dcid:EducationPlanEnum
+Node: dcid:EducationProgramEnum
 typeOf: schema:Class
 subClassOf: dcs:Enumeration
-name: "EducationPlanEnum"
+name: "EducationProgramEnum"
 isProvisional: dcs:True
 
-Node: dcid:IndividualizedEducationProgram
-typeOf: dcid:EducationPlanEnum
-name: "Individualized Education Program"
-isProvisional: dcs:True
-
-Node: dcid:age
-typeOf: dcs:Property
-name: "age"
-domainIncludes: dcid:Student
-
-Node: dcid:Years3To21
-typeOf: dcid:AgeStatusEnum
-name: "Years 3 To 21"
+Node: dcid:IDEA
+typeOf: dcid:EducationProgramEnum
+name: "IDEA"
 isProvisional: dcs:True
 
 Node: dcid:disabilityStatus
@@ -31,9 +21,27 @@ typeOf: dcs:Property
 name: "disabilityStatus"
 domainIncludes: dcid:Student
 
-Node: dcid:Section504AccommodationPlan
-typeOf: dcid:EducationPlanEnum
-name: "Section 504 Accommodation Plan"
+Node: dcid:educationalInstitutionType
+typeOf: dcs:Property
+name: "educationalInstitutionType"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EducationalInstitutionTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:EducationalInstitutionTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "EducationalInstitutionTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:JuvenileJusticeFacility
+typeOf: dcid:EducationalInstitutionTypeEnum
+name: "Juvenile Justice Facility"
+isProvisional: dcs:True
+
+Node: dcid:Section504Plan
+typeOf: dcid:EducationProgramEnum
+name: "Section 50 4Plan"
 isProvisional: dcs:True
 
 Node: dcid:race
@@ -41,4 +49,9 @@ typeOf: dcs:Property
 name: "race"
 domainIncludes: dcid:Student
 rangeIncludes: dcid:EthnicityEnum,dcid:RaceCodeEnum
+
+Node: dcid:NotJuvenileJusticeFacility
+typeOf: dcid:EducationalInstitutionTypeEnum
+name: "Not Juvenile Justice Facility"
+isProvisional: dcs:True
 

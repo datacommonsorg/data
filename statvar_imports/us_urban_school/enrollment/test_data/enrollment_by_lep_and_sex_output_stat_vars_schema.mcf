@@ -4,8 +4,39 @@ name: "race"
 domainIncludes: dcid:Student
 rangeIncludes: dcid:EthnicityEnum,dcid:RaceCodeEnum
 
-Node: dcid:LimitedEnglishProficient
-typeOf: dcid:LanguageFluencyLevelEnum
-name: "Limited English Proficient"
+Node: dcid:englishProficiency
+typeOf: dcs:Property
+name: "englishProficiency"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EnglishProficiencyEnum
+isProvisional: dcs:True
+
+Node: dcid:EnglishProficiencyEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "EnglishProficiencyEnum"
+isProvisional: dcs:True
+
+Node: dcid:LimitedEnglishProficiency
+typeOf: dcid:EnglishProficiencyEnum
+name: "Limited English Proficiency"
+isProvisional: dcs:True
+
+Node: dcid:educationalInstitutionType
+typeOf: dcs:Property
+name: "educationalInstitutionType"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EducationalInstitutionTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:EducationalInstitutionTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "EducationalInstitutionTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:NotJuvenileJusticeFacility
+typeOf: dcid:EducationalInstitutionTypeEnum
+name: "Not Juvenile Justice Facility"
 isProvisional: dcs:True
 

@@ -33,9 +33,16 @@ BASE_URL_TEMPLATE = "https://civilrightsdata.ed.gov/assets/ocr/docs/{}.zip"
 DATA_CONFIGS = {
     # Enrollment Data Keywords
     "enrollment": {
-        "keywords": [r'Enrollment\.(csv|xlsx)$', r'Pt 1-Enrollment\.xlsx$', r'School Data\.csv$'],
+        "keywords": [
+            # r'[\/\\]Enrollment\.(csv|xlsx)$',
+            r'Pt 1-Enrollment\.xlsx$',
+            r'School Data\.csv$', 
+            # r'[\/\\](?!Dual\s)Enrollment\.(csv|xlsx)$'
+            r'Enrollment\.(csv|xlsx)$'
+        ],
         "search_constraint": {
-            "2011-12": "05 - Overall Enrollment.xlsx"
+            "2009-10": "1-Overall Enrollment.xlsx",
+            "2011-12": "05 - Overall Enrollment.xlsx",
         },
         "output_name_fragment": "Enrollment",
     },
@@ -188,6 +195,9 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
                 general_match = False
                 for pattern in keywords:
                     if re.search(pattern, name, re.IGNORECASE):
+                        if 'dual enrollment.csv' in normalized_name:
+                            logging.warning(f"-> Veto: Skipping '{name}' due to 'Dual Enrollment.csv' exclusion rule.")
+                            continue
                         general_match = True
                         break
 
