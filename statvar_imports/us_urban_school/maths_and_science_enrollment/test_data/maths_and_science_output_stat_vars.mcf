@@ -1,5 +1,3 @@
-# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/*_input.csv --pv_map=maths_and_science_pvmap.csv --config_file=metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=test_data/maths_and_science_output" on 2025-12-01 07:28:17.826097
-
 Node: dcid:Count_Student_JuvenileJusticeFacility_Enrolled_Female_Algebra2
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Student
