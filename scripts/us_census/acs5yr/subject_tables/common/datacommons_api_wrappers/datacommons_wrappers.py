@@ -128,15 +128,17 @@ def fetch_dcid_properties_enums(dcid: str,
     if force_fetch or not os.path.isfile(
             os.path.join(cache_path, f'{dcid}_dc_props.json')):
         data_ = {}
-        data_["dcids"] = [dcid]
-        data_["property"] = "domainIncludes"
-        data_["direction"] = "in"
+        data_["nodes"] = [dcid]
+        data_["property"] = "<-domainIncludes"
         population_props = request_post_json(
-            f'https://{api_prefix}api.datacommons.org/node/property-values',
+            f'https://{api_prefix}api.datacommons.org/v2/node',
             data_)
-            # TODO(rk): migrate
-        dc_population_pvs = population_props['payload']
-        dc_population_pvs = ast.literal_eval(dc_population_pvs)
+        dc_population_pvs = {}
+        node_data = population_props.get('data', {}).get(dcid, {})
+        arcs = node_data.get('arcs', {})
+        domain_includes = arcs.get('domainIncludes', {})
+        nodes_list = domain_includes.get('nodes', [])
+        dc_population_pvs[dcid] = {'in': nodes_list}
 
         if dc_population_pvs[dcid]:
             dc_props = {}
@@ -153,16 +155,20 @@ def fetch_dcid_properties_enums(dcid: str,
     if force_fetch or not os.path.isfile(
             os.path.join(cache_path, f'{dcid}_dc_props_types.json')):
         data_ = {}
-        data_['dcids'] = list(dc_props.keys())
-        data_['property'] = 'rangeIncludes'
-        data_['direction'] = 'out'
-        if data_['dcids']:
-            population_props_types = request_post_json(
-                # TODO(rk): migrate
-                f'https://{api_prefix}api.datacommons.org/node/property-values',
+        data_['nodes'] = list(dc_props.keys())
+        data_['property'] = '->rangeIncludes'
+        if data_['nodes']:
+            population_props_types_resp = request_post_json(
+                f'https://{api_prefix}api.datacommons.org/v2/node',
                 data_)
-            population_props_types = ast.literal_eval(
-                population_props_types['payload'])
+            population_props_types = {}
+            for property_name in data_['nodes']:
+                node_data = population_props_types_resp.get('data', {}).get(
+                    property_name, {})
+                arcs = node_data.get('arcs', {})
+                range_includes = arcs.get('rangeIncludes', {})
+                nodes_list = range_includes.get('nodes', [])
+                population_props_types[property_name] = {'out': nodes_list}
             for property_name in population_props_types:
                 if population_props_types[property_name]:
                     for temp_dict in population_props_types[property_name][
@@ -184,14 +190,18 @@ def fetch_dcid_properties_enums(dcid: str,
             for type_name in new_dict[property_name]:
                 if 'enum' in type_name.lower():
                     data_ = {}
-                    data_['dcids'] = [type_name]
-                    data_['property'] = 'typeOf'
-                    data_['direction'] = 'in'
-                    # TODO(rk): migrate
+                    data_['nodes'] = [type_name]
+                    data_['property'] = '<-typeOf'
                     enum_values = request_post_json(
-                        f'https://{api_prefix}api.datacommons.org/node/property-values',
+                        f'https://{api_prefix}api.datacommons.org/v2/node',
                         data_)
-                    enum_values = ast.literal_eval(enum_values['payload'])
+                    enum_values_processed = {}
+                    node_data = enum_values.get('data', {}).get(type_name, {})
+                    arcs = node_data.get('arcs', {})
+                    type_of = arcs.get('typeOf', {})
+                    nodes_list = type_of.get('nodes', [])
+                    enum_values_processed[type_name] = {'in': nodes_list}
+                    enum_values = enum_values_processed
                     if enum_values[type_name]:
                         for temp_dict in enum_values[type_name]['in']:
                             dc_props[property_name].append(temp_dict['dcid'])
