@@ -74,7 +74,7 @@ def dc_check_existence(dcid_list: list,
         for i in range(0, len(dcid_list), chunk_size)
     ]
 
-# TODO(rk): migrate
+    # TODO(rk): migrate
     for dcid_chunk in dcid_list_chunked:
         data_["dcids"] = dcid_chunk
         req = request_post_json(
@@ -131,8 +131,7 @@ def fetch_dcid_properties_enums(dcid: str,
         data_["nodes"] = [dcid]
         data_["property"] = "<-domainIncludes"
         population_props = request_post_json(
-            f'https://{api_prefix}api.datacommons.org/v2/node',
-            data_)
+            f'https://{api_prefix}api.datacommons.org/v2/node', data_)
         dc_population_pvs = {}
         node_data = population_props.get('data', {}).get(dcid, {})
         arcs = node_data.get('arcs', {})
@@ -159,8 +158,7 @@ def fetch_dcid_properties_enums(dcid: str,
         data_['property'] = '->rangeIncludes'
         if data_['nodes']:
             population_props_types_resp = request_post_json(
-                f'https://{api_prefix}api.datacommons.org/v2/node',
-                data_)
+                f'https://{api_prefix}api.datacommons.org/v2/node', data_)
             population_props_types = {}
             for property_name in data_['nodes']:
                 node_data = population_props_types_resp.get('data', {}).get(
