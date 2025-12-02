@@ -7,7 +7,12 @@
 steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', '${_DOCKER_IMAGE}:${COMMIT_SHA}', '-t', '${_DOCKER_IMAGE}:latest', '.']
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        # Use current timestamp to bust cache for git clone and other external dependencies.
+        docker build --build-arg CACHE_BUSTER=$(date +%s) -t ${_DOCKER_IMAGE}:${COMMIT_SHA} -t ${_DOCKER_IMAGE}:latest .
     dir: 'import-automation/executor'
     env: ['DOCKER_BUILDKIT=1']
 
