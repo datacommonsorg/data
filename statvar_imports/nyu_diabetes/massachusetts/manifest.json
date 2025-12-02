@@ -1,0 +1,27 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NYU_Massachusetts_Diabetes",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://healthdatatool.mass.gov/report-tool/?REPORT=%7B%22name%22%3A%22Massachusetts%20County%20Health%20Assessment%22%2C%22style%22%3A%22MADPH%22%2C%22contentId%22%3A%22%23cdt-report-content%22%2C%22output%22%3A%7B%22countylist%22%3Atrue%2C%22statelist%22%3Atrue%2C%22ziplist%22%3Afalse%2C%22tractlist%22%3Afalse%2C%22map%22%3Atrue%2C%22breakout%22%3Atrue%7D%2C%22indicatorUid%22%3A%5B%22285%22%5D%2C%22indicator%22%3A%5B50%5D%2C%",
+            "provenance_description": "This import contains Massachusetts County Health Assessment data on diabetes, sourced from self-reported surveys of adults (aged 18 and older)",
+            "scripts": [
+            "run.sh",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Massachusetts-Diabetes-data.csv --pv_map=pvmap.csv --config_file=metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=place_resolver.csv --output_path=output_files/massachusetts_output"
+                
+            ],
+            "import_inputs": [
+                 {
+                    "template_mcf": "output_files/massachusetts_output.tmcf",
+                    "cleaned_csv": "output_files/massachusetts_output.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/Massachusetts-Diabetes-data.csv"
+            ]
+
+        }
+    ]
+}
