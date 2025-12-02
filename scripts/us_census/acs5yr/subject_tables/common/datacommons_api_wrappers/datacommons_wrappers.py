@@ -73,6 +73,8 @@ def dc_check_existence(dcid_list: list,
         dcid_list[i:i + chunk_size]
         for i in range(0, len(dcid_list), chunk_size)
     ]
+
+# TODO(rk): migrate
     for dcid_chunk in dcid_list_chunked:
         data_["dcids"] = dcid_chunk
         req = request_post_json(
@@ -132,6 +134,7 @@ def fetch_dcid_properties_enums(dcid: str,
         population_props = request_post_json(
             f'https://{api_prefix}api.datacommons.org/node/property-values',
             data_)
+            # TODO(rk): migrate
         dc_population_pvs = population_props['payload']
         dc_population_pvs = ast.literal_eval(dc_population_pvs)
 
@@ -155,6 +158,7 @@ def fetch_dcid_properties_enums(dcid: str,
         data_['direction'] = 'out'
         if data_['dcids']:
             population_props_types = request_post_json(
+                # TODO(rk): migrate
                 f'https://{api_prefix}api.datacommons.org/node/property-values',
                 data_)
             population_props_types = ast.literal_eval(
@@ -183,6 +187,7 @@ def fetch_dcid_properties_enums(dcid: str,
                     data_['dcids'] = [type_name]
                     data_['property'] = 'typeOf'
                     data_['direction'] = 'in'
+                    # TODO(rk): migrate
                     enum_values = request_post_json(
                         f'https://{api_prefix}api.datacommons.org/node/property-values',
                         data_)
