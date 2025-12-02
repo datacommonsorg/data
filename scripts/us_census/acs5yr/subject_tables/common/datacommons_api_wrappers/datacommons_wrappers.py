@@ -92,6 +92,14 @@ def dc_check_existence(dcid_list: list,
     return ret_dict
 
 
+def _get_arc_nodes(response: dict, node_id: str, arc_label: str) -> list:
+    """Extracts nodes list for a given arc from a v2/node response."""
+    node_data = response.get('data', {}).get(node_id, {})
+    arcs = node_data.get('arcs', {})
+    arc_data = arcs.get(arc_label, {})
+    return arc_data.get('nodes', [])
+
+
 # fetch pvs from dc, enums from dc
 
 
@@ -138,10 +146,7 @@ def fetch_dcid_properties_enums(dcid: str,
             f'https://{api_prefix}api.datacommons.org/v2/node',
             data_,
             headers=headers)
-        node_data = population_props.get('data', {}).get(dcid, {})
-        arcs = node_data.get('arcs', {})
-        domain_includes = arcs.get('domainIncludes', {})
-        nodes_list = domain_includes.get('nodes', [])
+        nodes_list = _get_arc_nodes(population_props, dcid, 'domainIncludes')
 
         dc_props = {}
         for prop_dict in nodes_list:
@@ -165,11 +170,8 @@ def fetch_dcid_properties_enums(dcid: str,
                 data_,
                 headers=headers)
             for property_name in data_['nodes']:
-                node_data = population_props_types_resp.get('data', {}).get(
-                    property_name, {})
-                arcs = node_data.get('arcs', {})
-                range_includes = arcs.get('rangeIncludes', {})
-                nodes_list = range_includes.get('nodes', [])
+                nodes_list = _get_arc_nodes(population_props_types_resp,
+                                            property_name, 'rangeIncludes')
                 for temp_dict in nodes_list:
                     dc_props[property_name].append(temp_dict['dcid'])
             with open(os.path.join(cache_path, f'{dcid}_dc_props_types.json'),
@@ -194,10 +196,8 @@ def fetch_dcid_properties_enums(dcid: str,
                         f'https://{api_prefix}api.datacommons.org/v2/node',
                         data_,
                         headers=headers)
-                    node_data = enum_values.get('data', {}).get(type_name, {})
-                    arcs = node_data.get('arcs', {})
-                    type_of = arcs.get('typeOf', {})
-                    nodes_list = type_of.get('nodes', [])
+                    nodes_list = _get_arc_nodes(enum_values, type_name,
+                                                'typeOf')
                     for temp_dict in nodes_list:
                         dc_props[property_name].append(temp_dict['dcid'])
 
