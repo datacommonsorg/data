@@ -5,6 +5,7 @@ from absl import app, flags, logging
 import re
 from pathlib import Path
 import tempfile
+import datetime
 
 # --- Configuration ---
 SCRIPT_DIRECTORY = Path(__file__).parent.resolve()
@@ -17,15 +18,22 @@ try:
     from download_util_script import download_file
 except ImportError:
     logging.error("Could not import 'download_file' from '%s/download_util_script.py'.", UTIL_DIRECTORY)
-    sys.exit(1)
+    raise RuntimeError(f"Could not import 'download_file' from '{UTIL_DIRECTORY}/download_util_script.py'.")
 
 BASE_URL = "https://civilrightsdata.ed.gov/assets/ocr/docs/"
 KEYWORD = "dual enrollment"
 
 def generate_urls():
-    """Generates the list of URLs to download."""
+    """
+    Generates the list of URLs to download.
+    The end year is dynamic, based on the current year, and includes one future year
+    to proactively check for new data.
+    """
     urls = []
-    for year in range(2012, 2025):
+    # The end year is set to the next calendar year to ensure we check for data
+    # from the most recently completed school year.
+    end_year = datetime.date.today().year + 1
+    for year in range(2012, end_year):
         year_str = f"{year}-{str(year + 1)[-2:]}"
         zip_file_name = f"{year_str}-crdc-data.zip"
         urls.append((f"{BASE_URL}{zip_file_name}", year_str))
@@ -49,6 +57,7 @@ def organize_files(source_dir, year):
                     logging.info("Moved '%s' to '%s'", filename, destination_path)
                 except shutil.Error as e:
                     logging.error("Could not move file %s: %s", source_path, e)
+                    raise RuntimeError(f"Could not move file {source_path}: {e}")
     logging.info("Successfully moved %d files for year %s.", moved_count, year)
 
 def process_url(url, year):
@@ -71,6 +80,7 @@ def process_url(url, year):
                 organize_files(temp_dir, year)
         except Exception as e:
             logging.error("An unexpected error occurred while processing %s: %s", url, e)
+            raise RuntimeError(f"An unexpected error occurred while processing {url}: {e}")
 
 def create_source_folder():
     """Creates the folder to organize the data into."""
@@ -91,6 +101,7 @@ def clean_source_folder():
                 logging.info("Deleted: %s", item)
             except OSError as e:
                 logging.error("Error deleting %s: %s", item, e)
+                raise RuntimeError(f"Error deleting {item}: {e}")
     logging.info("Successfully cleaned source folder.")
 
 def main(argv):
