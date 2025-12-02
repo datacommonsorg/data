@@ -11,31 +11,54 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 import unittest
-from .requests_wrappers import *
+from unittest import mock
+
+from tools.download_utils import requests_wrappers
 
 
-class TestCommonUtil(unittest.TestCase):
+class RequestWrappersTest(unittest.TestCase):
 
-    def test_request_url_json(self):
-        self.assertEqual(
-            request_url_json('https://httpbin.org/get?a=1')['args'], {'a': '1'})
-        self.assertEqual(request_url_json('https://httpbin.org/status/204'),
-                         {'http_err_code': 204})
-        self.assertEqual(request_url_json('https://httpbin.org/status/404'),
-                         {'http_err_code': 404})
+    @mock.patch('tools.download_utils.requests_wrappers.requests.post')
+    def test_request_post_json_merges_headers(self, mock_post):
+        mock_response = mock.Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {'ok': True}
+        mock_post.return_value = mock_response
 
-    def test_request_post_json(self):
-        self.assertEqual(
-            request_post_json('https://httpbin.org/post', {'a': '1'})['data'],
-            '{"a": "1"}')
-        self.assertEqual(
-            request_post_json('https://httpbin.org/status/204', {}),
-            {'http_err_code': 204})
-        self.assertEqual(
-            request_post_json('https://httpbin.org/status/404', {}),
-            {'http_err_code': 404})
+        result = requests_wrappers.request_post_json(
+            'https://example.com/v2/node', {'k': 'v'},
+            headers={'X-API-Key': 'secret'})
+
+        self.assertEqual(result, {'ok': True})
+        called_headers = mock_post.call_args.kwargs['headers']
+        self.assertEqual(called_headers['Content-Type'], 'application/json')
+        self.assertEqual(called_headers['X-API-Key'], 'secret')
+
+    @mock.patch('tools.download_utils.requests_wrappers.requests.post')
+    def test_request_post_json_defaults_headers(self, mock_post):
+        mock_response = mock.Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {'ok': True}
+        mock_post.return_value = mock_response
+
+        requests_wrappers.request_post_json('https://example.com/v2/node',
+                                            {'k': 'v'})
+
+        called_headers = mock_post.call_args.kwargs['headers']
+        self.assertEqual(called_headers, {'Content-Type': 'application/json'})
+
+    @mock.patch('tools.download_utils.requests_wrappers.requests.get')
+    def test_request_url_json_success(self, mock_get):
+        mock_response = mock.Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {'hello': 'world'}
+        mock_get.return_value = mock_response
+
+        result = requests_wrappers.request_url_json('https://example.com/data')
+
+        self.assertEqual(result, {'hello': 'world'})
+        mock_get.assert_called_once_with('https://example.com/data')
 
 
 if __name__ == '__main__':

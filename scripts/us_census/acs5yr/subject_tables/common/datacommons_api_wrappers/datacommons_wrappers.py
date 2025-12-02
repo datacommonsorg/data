@@ -18,7 +18,6 @@ Wrappers for fetching schema from DataCommons API.
 import ast
 import copy
 import json
-import logging
 import os
 from absl import app
 from absl import flags
@@ -119,8 +118,14 @@ def fetch_dcid_properties_enums(dcid: str,
 
     if use_autopush:
         api_prefix = 'autopush.'
+        api_key = os.environ.get('AUTOPUSH_DC_API_KEY')
     else:
         api_prefix = ''
+        api_key = os.environ.get('DC_API_KEY')
+
+    headers = {}
+    if api_key:
+        headers['X-API-Key'] = api_key
 
     dc_props = {}
 
@@ -131,7 +136,9 @@ def fetch_dcid_properties_enums(dcid: str,
         data_["nodes"] = [dcid]
         data_["property"] = "<-domainIncludes"
         population_props = request_post_json(
-            f'https://{api_prefix}api.datacommons.org/v2/node', data_)
+            f'https://{api_prefix}api.datacommons.org/v2/node',
+            data_,
+            headers=headers)
         node_data = population_props.get('data', {}).get(dcid, {})
         arcs = node_data.get('arcs', {})
         domain_includes = arcs.get('domainIncludes', {})
@@ -155,7 +162,9 @@ def fetch_dcid_properties_enums(dcid: str,
         data_['property'] = '->rangeIncludes'
         if data_['nodes']:
             population_props_types_resp = request_post_json(
-                f'https://{api_prefix}api.datacommons.org/v2/node', data_)
+                f'https://{api_prefix}api.datacommons.org/v2/node',
+                data_,
+                headers=headers)
             for property_name in data_['nodes']:
                 node_data = population_props_types_resp.get('data', {}).get(
                     property_name, {})
@@ -184,7 +193,8 @@ def fetch_dcid_properties_enums(dcid: str,
                     data_['property'] = '<-typeOf'
                     enum_values = request_post_json(
                         f'https://{api_prefix}api.datacommons.org/v2/node',
-                        data_)
+                        data_,
+                        headers=headers)
                     node_data = enum_values.get('data', {}).get(type_name, {})
                     arcs = node_data.get('arcs', {})
                     type_of = arcs.get('typeOf', {})

@@ -17,8 +17,10 @@ Wrapper functions for easy use of requests library.
 
 import json
 import logging
-import requests
 import time
+from typing import Optional
+
+import requests
 
 
 def request_url_json(url: str,
@@ -56,7 +58,8 @@ def request_url_json(url: str,
 def request_post_json(url: str,
                       data_: dict,
                       max_retries: int = 3,
-                      retry_interval: int = 5) -> dict:
+                      retry_interval: int = 5,
+                      headers: Optional[dict] = None) -> dict:
     """Get JSON object version of reponse to POST request to given URL.
 
   Args:
@@ -64,18 +67,23 @@ def request_post_json(url: str,
     data_: payload for the POST request
     max_retries: Number of timeout retries to be made before returning empty dict.
     retry_interval: Wait interval in seconds before retying.
+    headers: Additional headers to include in the POST request.
 
   Returns:
     JSON decoded response from the POST call.
       Empty dict is returned in case the call fails.
   """
-    headers = {'Content-Type': 'application/json'}
+    base_headers = {'Content-Type': 'application/json'}
+    if headers:
+        base_headers.update(headers)
     req = None
     response_data = {}
     retry = 0
     while req is None and retry < max_retries:
         try:
-            req = requests.post(url, data=json.dumps(data_), headers=headers)
+            req = requests.post(url,
+                                data=json.dumps(data_),
+                                headers=base_headers)
             logging.info('Post request url: %s', req.request.url)
         except requests.exceptions.ConnectionError:
             logging.warning(
