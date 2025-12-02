@@ -73,7 +73,6 @@ def dc_check_existence(dcid_list: list,
         for i in range(0, len(dcid_list), chunk_size)
     ]
 
-    # TODO(rk): migrate
     for dcid_chunk in dcid_list_chunked:
         data_["dcids"] = dcid_chunk
         req = request_post_json(
