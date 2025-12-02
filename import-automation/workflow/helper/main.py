@@ -53,14 +53,28 @@ def ingestion_helper(request):
         if not status:
             return ('Failed to release lock', 500)
         return ('Lock released', 200)
-    elif actionType == 'update_import_status':
+    elif actionType == 'update_ingestion_status':
         validation_error = _validate_params(request_json,
                                             ['importList', 'workflowId'])
         if validation_error:
             return (validation_error, 400)
-        imports = request_json['importList']
-        workflow = request_json['workflowId']
-        spanner.update_import_status(workflow, imports)
+        import_list = request_json['importList']
+        workflow_id = request_json['workflowId']
+        result = spanner.update_ingestion_status(import_list, workflow_id)
+        if not result:
+            return ('Failed to update ingestion status', 500)
+        return ('Updated ingestion status', 200)
+    elif actionType == 'update_import_status':
+        validation_error = _validate_params(request_json,
+                                            ['importName', 'jobId', 'status'])
+        if validation_error:
+            return (validation_error, 400)
+        import_name = request_json['importName']
+        status = request_json['status']
+        job_id = request_json['jobId']
+        result = spanner.update_import_status(import_name, status, job_id)
+        if not result:
+            return ('Failed to update import status', 500)
         return ('Updated import status', 200)
     else:
         return (f'Unknown actionType: {actionType}', 400)
