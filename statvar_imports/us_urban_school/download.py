@@ -34,10 +34,8 @@ DATA_CONFIGS = {
     # Enrollment Data Keywords
     "enrollment": {
         "keywords": [
-            # r'[\/\\]Enrollment\.(csv|xlsx)$',
             r'Pt 1-Enrollment\.xlsx$',
             r'School Data\.csv$', 
-            # r'[\/\\](?!Dual\s)Enrollment\.(csv|xlsx)$'
             r'Enrollment\.(csv|xlsx)$'
         ],
         "search_constraint": {
