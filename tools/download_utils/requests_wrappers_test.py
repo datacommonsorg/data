@@ -48,6 +48,17 @@ class RequestWrappersTest(unittest.TestCase):
         called_headers = mock_post.call_args.kwargs['headers']
         self.assertEqual(called_headers, {'Content-Type': 'application/json'})
 
+    @mock.patch('tools.download_utils.requests_wrappers.requests.post')
+    def test_request_post_json_http_error(self, mock_post):
+        mock_response = mock.Mock()
+        mock_response.status_code = 404
+        mock_post.return_value = mock_response
+
+        result = requests_wrappers.request_post_json(
+            'https://example.com/v2/node', {})
+
+        self.assertEqual(result, {'http_err_code': 404})
+
     @mock.patch('tools.download_utils.requests_wrappers.requests.get')
     def test_request_url_json_success(self, mock_get):
         mock_response = mock.Mock()
@@ -59,6 +70,16 @@ class RequestWrappersTest(unittest.TestCase):
 
         self.assertEqual(result, {'hello': 'world'})
         mock_get.assert_called_once_with('https://example.com/data')
+
+    @mock.patch('tools.download_utils.requests_wrappers.requests.get')
+    def test_request_url_json_http_error(self, mock_get):
+        mock_response = mock.Mock()
+        mock_response.status_code = 404
+        mock_get.return_value = mock_response
+
+        result = requests_wrappers.request_url_json('https://example.com/data')
+
+        self.assertEqual(result, {'http_err_code': 404})
 
 
 if __name__ == '__main__':
