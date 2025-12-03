@@ -84,6 +84,11 @@ flags.DEFINE_string(
 flags.DEFINE_bool('schemaless', False, 'Allow schemaless StatVars.')
 flags.DEFINE_string('output_path', '',
                     'File prefix for output mcf, csv and tmcf.')
+flags.DEFINE_list(
+    'output_columns',
+    [],
+    'Comma separated list of columns to emit in the SVObs CSV output.',
+)
 flags.DEFINE_string(
     'existing_statvar_mcf',
     '',
@@ -127,6 +132,11 @@ flags.DEFINE_bool(
     'resume',
     False,
     'Resume processing to create output files not yet generated.',
+)
+flags.DEFINE_bool(
+    'skip_constant_csv_columns',
+    True,
+    'Whether to drop CSV columns whose values remain constant.',
 )
 
 # Flags for spell checks
@@ -297,7 +307,7 @@ def get_default_config() -> dict:
             ' ',
         # Enable merged cells that inherit PVs from previous column.
         'merged_cells':
-            True,
+            sys.maxsize,
         # List of default PVS maps to lookup column values if there is no map for a
         # column name.
         'default_pv_maps': ['GLOBAL'],
@@ -344,11 +354,12 @@ def get_default_config() -> dict:
             True,  # Generate CSV with SVObs
         'output_csv_mode':
             'w',  # Overwrite output CSV file.
-        'output_columns': [],  # Emit all SVObs PVs into output csv
+        'output_columns':
+            _FLAGS.output_columns,
         'generate_tmcf':
             True,  # Generate tMCF for CSV columns
         'skip_constant_csv_columns':
-            (True),  # Skip emitting columns with constant values in the csv
+            _FLAGS.skip_constant_csv_columns,
         'output_only_new_statvars':
             True,  # Drop existing statvars from output
         'output_precision_digits':

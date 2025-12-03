@@ -70,20 +70,22 @@ fi
 # Create .datacommons directory if it doesn't exist
 mkdir -p "${WORKING_DIR}/.datacommons"
 
-# Extract output directory for backup purposes
-OUTPUT_DIR=$(dirname "${OUTPUT_PATH}")
-
 # Define log file paths (persistent files that Gemini can read)
 PROCESSOR_LOG="${WORKING_DIR}/.datacommons/processor.log"
 BACKUP_LOG="${WORKING_DIR}/.datacommons/backup.log"
+# Keep CSV column ordering predictable across runs when importing multiple files.
+OUTPUT_COLUMNS="observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor"
 # TODO : Add existing_statvar_mcf, existing_schema_mcf support
 # Run statvar processor with output going to persistent log
+# Keep constant-value columns because custom DC imports read the CSV directly and skip the TMCF.
 echo "Running statvar processor..."
 "${PYTHON_INTERPRETER}" "${SCRIPT_DIR}/statvar_importer/stat_var_processor.py" \
   --input_data="${INPUT_DATA}" \
   --pv_map="${WORKING_DIR}/${OUTPUT_PATH}_pvmap.csv" \
   --config_file="${WORKING_DIR}/${OUTPUT_PATH}_metadata.csv" \
   --generate_statvar_name=True \
+  --skip_constant_csv_columns=False \
+  --output_columns="${OUTPUT_COLUMNS}" \
   --output_counters="${WORKING_DIR}/.datacommons/output_counters.csv" \
   --output_path="${WORKING_DIR}/${OUTPUT_PATH}" > "${PROCESSOR_LOG}" 2>&1
 
@@ -92,12 +94,21 @@ PROCESSOR_EXIT_CODE=${PIPESTATUS[0]}
 
 # Run backup script silently (redirect output to backup log)
 echo "Backing up run data..."
+OUTPUT_PREFIX="${WORKING_DIR}/${OUTPUT_PATH}"
+declare -a BACKUP_ARGS=(
+  "--working_dir=${WORKING_DIR}"
+  "--gemini_run_id=${GEMINI_RUN_ID}"
+  "--backup_files=${PROCESSOR_LOG}"
+  "--backup_files=${WORKING_DIR}/.datacommons/output_counters.csv"
+  "--backup_files=${OUTPUT_PREFIX}_pvmap.csv"
+  "--backup_files=${OUTPUT_PREFIX}_metadata.csv"
+  "--backup_files=${OUTPUT_PREFIX}.csv"
+  "--backup_files=${OUTPUT_PREFIX}.tmcf"
+  "--backup_files=${OUTPUT_PREFIX}_stat_vars.mcf"
+  "--backup_files=${OUTPUT_PREFIX}_stat_vars_schema.mcf"
+)
 "${PYTHON_INTERPRETER}" "${SCRIPT_DIR}/agentic_import/backup_processor_run.py" \
-  --working_dir="${WORKING_DIR}" \
-  --gemini_run_id="${GEMINI_RUN_ID}" \
-  --backup_files="${OUTPUT_DIR}" \
-  --backup_files="${PROCESSOR_LOG}" \
-  --backup_files="${WORKING_DIR}/.datacommons/output_counters.csv" > "${BACKUP_LOG}" 2>&1
+  "${BACKUP_ARGS[@]}" > "${BACKUP_LOG}" 2>&1
 
 # Check the processor exit code and exit accordingly
 if [ ${PROCESSOR_EXIT_CODE} -ne 0 ]; then

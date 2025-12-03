@@ -45,8 +45,10 @@ def download_data_to_file_and_df(url,
     if is_download_required and filename:
         logging.info("Downloading from url %s", url)
         response = download_retry(url)
+        CHUNK_SIZE = 1024 * 1024
         with open(filename, 'wb') as f:
-            f.write(response.content)
+            for chunk in response.iter_content(chunk_size=CHUNK_SIZE):
+                f.write(chunk)
         logging.info("Downloaded input file to %s", filename)
         df = pd.read_csv(filename, low_memory=False)
         return df
