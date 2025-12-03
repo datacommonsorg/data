@@ -517,6 +517,7 @@ class ImportExecutor:
             previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
             summary_stats = os.path.join(genmcf_output_path,
                                          'summary_report.csv')
+            report_json = os.path.join(genmcf_output_path, 'report.json')
             validation_output_file = os.path.join(validation_output_path,
                                                   'validation_output.csv')
             differ_output = os.path.join(validation_output_path,
@@ -567,6 +568,7 @@ class ImportExecutor:
             try:
                 validation = ValidationRunner(config_file_path,
                                               differ_output_file, summary_stats,
+                                              report_json,
                                               validation_output_file)
                 overall_status, _ = validation.run_validations()
                 if validation_status:
