@@ -36,11 +36,12 @@ def download_data(output_dir: str):
     download_file_from_url(_SV_INDEX_URL, output_file=excel_file_path)
 
     # Read the Excel file, skipping the first two rows
-    df = pd.read_excel(excel_file_path, skiprows=2)
+    df = pd.read_excel(excel_file_path, skiprows=3)
 
-    df.drop(columns=["Unnamed: 2","Unnamed: 4","Prekindergarten through grade 8.2"], inplace=True)
+    df.drop(columns=["Unnamed: 2","Unnamed: 4","Prekindergarten.1"], inplace=True)
 
     # Replace specified strings in the DataFrame
+    df.rename(columns={"Unnamed: 1": "All grades","Total":"Total_PK_8","Total.1":"Total_9_12"}, inplace=True)
     df.replace(to_replace=r'Ungraded\\1\\', value='Ungraded_1', regex=True, inplace=True)
     df.replace(to_replace=r'Ungraded\\1,2\\', value='Ungraded1_2', regex=True, inplace=True)
 
@@ -52,4 +53,4 @@ def download_data(output_dir: str):
 if __name__ == "__main__":
     script_dir = os.path.dirname(__file__)
     download_output_dir = os.path.join(script_dir, "input_files")
-    download_data(download_output_dir)        
+    download_data(download_output_dir)
