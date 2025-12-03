@@ -77,7 +77,7 @@ Ghana,country/GHA
 Greece,country/GRC
 Georgia,country/GEO
 Gabon,country/GAB
-Gibraltar,country/GIB
+"SHN (Saint Helena, Ascension and Tristan da Cunha)",country/GIB
 Grenada,country/GRD
 Guatemala,country/GTM
 Germany,country/DEU
@@ -102,7 +102,6 @@ Kiribati,country/KIR
 Indonesia,country/IDN
 Italy,country/ITA
 Madagascar,country/MDG
-Kosovo (in accordance with UN Security Council Resolution 1244 (1999)),country/XKX
 India,country/IND
 Kenya,country/KEN
 Micronesia (Federated States of),country/FSM
@@ -228,6 +227,7 @@ Venezuela (Bolivarian Republic of),country/VEN
 Côte d'Ivoire,country/CIV
 Curaçao,country/CUW
 Réunion,country/REU
+R�union,country/REU
 Türkiye,country/TUR
 AFGHANISTAN,country/AFG
 ALGERIA,country/DZA
@@ -288,6 +288,7 @@ CZECHIA,country/CZE
 DJIBOUTI,country/DJI
 EQUATORIAL GUINEA,country/GNQ
 CURAÇAO,country/CUW
+Cura�ao,country/CUW
 EL SALVADOR,country/SLV
 ESWATINI,country/SWZ
 ESTONIA,country/EST
@@ -332,7 +333,6 @@ KIRIBATI,country/KIR
 INDONESIA,country/IDN
 ITALY,country/ITA
 MADAGASCAR,country/MDG
-KOSOVO (IN ACCORDANCE WITH UN SECURITY COUNCIL RESOLUTION 1244 (1999)),country/XKX
 INDIA,country/IND
 KENYA,country/KEN
 MICRONESIA (FEDERATED STATES OF),country/FSM
@@ -458,12 +458,22 @@ VENEZUELA (BOLIVARIAN REPUBLIC OF),country/VEN
 CÔTE D'IVOIRE,country/CIV
 CURAÇAO,country/CUW
 RÉUNION,country/REU
+R�union,country/REU
 TÜRKIYE,country/TUR
 Côte d’Ivoire,country/CIV
 Iran (Islamic Republic of),country/IRN
 Saint Barthelemy,country/BLM
 Réunion,country/REU
-Saint Eustatius and Saba,country/BES
+"Bonaire, Sint Eustatius and Saba",country/BES
+"Bonaire, Sint Eustatius and Saba",country/BES
 Türkiye,country/TUR
 Lao People's Democratic Republic,country/LAO
 Martinique,country/MTQ
+"occupied Palestinian territory, including east Jerusalem",country/PSE
+International conveyance (Kiribati),country/KIR
+International conveyance (Vanuatu),country/VUT
+International conveyance (American Samoa),country/ASM
+International conveyance (Diamond Princess),country/XDP
+International commercial vessel,country/MSZ
+International conveyance (Solomon Islands),country/SLB
+Kosovo (in accordance with UN Security Council Resolution 1244 (1999)),country/XKS

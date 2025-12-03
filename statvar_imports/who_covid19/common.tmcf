@@ -7,3 +7,4 @@ unit: C:data->unit
 scalingFactor: C:data->scalingFactor
 variableMeasured: C:data->variableMeasured
 typeOf: dcs:StatVarObservation
+measurementMethod: dcs:WHO_COVID19
