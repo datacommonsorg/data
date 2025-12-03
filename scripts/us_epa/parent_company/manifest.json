@@ -5,7 +5,7 @@
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=V_PARENT_COMPANY_INFO",
       "provenance_description": "We use the existing epaGhgrpFacility Ids which already exist in Data Commons to create an ownership mapping (EpaOrganizationOwnership) between the facility and Parent Companies for each year. Note that the ownership is expressed via a percentage and if no percentage is provided it is assumed to be 100.",
-      "scripts": ["./generate.sh"],
+      "scripts": ["generate.sh"],
       "import_inputs": [
         {
           "template_mcf": "output/ownership/EpaParentCompanyOwnership.tmcf",
