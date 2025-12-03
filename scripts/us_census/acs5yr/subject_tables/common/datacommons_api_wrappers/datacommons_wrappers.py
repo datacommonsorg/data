@@ -35,6 +35,7 @@ _MODULE_DIR = os.path.dirname(os.path.realpath(__file__))
 path.insert(1, os.path.join(_MODULE_DIR, '../../../../../../'))
 
 from tools.download_utils.requests_wrappers import request_post_json
+from util.dc_api_wrapper import dc_api_is_defined_dcid
 
 # logging.basicConfig() # you need to initialize logging, otherwise you will not see anything from requests
 # logging.getLogger().setLevel(logging.DEBUG)
@@ -60,36 +61,14 @@ def dc_check_existence(dcid_list: list,
     Returns:
         Dict object with dcids as key values and boolean values signifying existence as values.
     """
-    data_ = {}
-    ret_dict = {}
-    if use_autopush:
-        url_prefix = 'autopush.'
-    else:
-        url_prefix = ''
-
-    chunk_size = max_items
-    dcid_list_chunked = [
-        dcid_list[i:i + chunk_size]
-        for i in range(0, len(dcid_list), chunk_size)
-    ]
-
-    for dcid_chunk in dcid_list_chunked:
-        data_["dcids"] = dcid_chunk
-        req = request_post_json(
-            f'https://{url_prefix}api.datacommons.org/node/property-labels',
-            data_)
-        resp_dicts = req['payload']
-        resp_dicts = ast.literal_eval(resp_dicts)
-        for cur_dcid in resp_dicts:
-            if not resp_dicts[cur_dcid]:
-                ret_dict[cur_dcid] = False
-            elif not resp_dicts[cur_dcid]['inLabels'] and not resp_dicts[
-                    cur_dcid]['outLabels']:
-                ret_dict[cur_dcid] = False
-            else:
-                ret_dict[cur_dcid] = True
-
-    return ret_dict
+    wrapper_config = {
+        'dc_api_batch_size':
+            max_items,
+        'dc_api_root':
+            'https://autopush.api.datacommons.org'
+            if use_autopush else 'https://api.datacommons.org'
+    }
+    return dc_api_is_defined_dcid(dcid_list, wrapper_config)
 
 
 def _get_arc_nodes(response: dict, node_id: str, arc_label: str) -> list:

@@ -29,6 +29,24 @@ class TestDCWrappers(unittest.TestCase):
             'node1': False
         })
 
+    @mock.patch('datacommons_wrappers.dc_api_is_defined_dcid')
+    def test_dc_check_existence_mock(self, mock_is_defined):
+        # Test 1: Default (use_autopush=True by default in function signature)
+        mock_is_defined.return_value = {'node1': True}
+        dc_check_existence(['node1'])
+        mock_is_defined.assert_called_with(
+            ['node1'], {
+                'dc_api_batch_size': 450,
+                'dc_api_root': 'https://autopush.api.datacommons.org'
+            })
+
+        # Test 2: use_autopush=False
+        dc_check_existence(['node2'], use_autopush=False, max_items=10)
+        mock_is_defined.assert_called_with(['node2'], {
+            'dc_api_batch_size': 10,
+            'dc_api_root': 'https://api.datacommons.org'
+        })
+
     @mock.patch('datacommons_wrappers.request_post_json')
     def test_fetch_dcid_properties_enums_mapping_v2(self, mock_post):
         mock_post.side_effect = [
