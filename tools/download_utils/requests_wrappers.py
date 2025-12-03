@@ -98,5 +98,9 @@ def request_post_json(url: str,
         response_data = req.json()
     else:
         response_data = {'http_err_code': req.status_code}
-        logging.error('Error: HTTP status code: %s', str(req.status_code))
+        if req.status_code == 401:
+            logging.error(
+                'Authentication failed. Please check or set your API key.')
+        else:
+            logging.error('Error: HTTP status code: %s', str(req.status_code))
     return response_data

@@ -104,10 +104,12 @@ def fetch_dcid_properties_enums(dcid: str,
 
     if use_autopush:
         api_prefix = 'autopush.'
-        api_key = os.environ.get('AUTOPUSH_DC_API_KEY')
+        api_key_env = 'AUTOPUSH_DC_API_KEY'
+        api_key = os.environ.get(api_key_env)
     else:
         api_prefix = ''
-        api_key = os.environ.get('DC_API_KEY')
+        api_key_env = 'DC_API_KEY'
+        api_key = os.environ.get(api_key_env)
 
     headers = {}
     if api_key:
@@ -125,6 +127,10 @@ def fetch_dcid_properties_enums(dcid: str,
             f'https://{api_prefix}api.datacommons.org/v2/node',
             data_,
             headers=headers)
+        if population_props.get('http_err_code') == 401:
+            raise ValueError(
+                f'Authentication failed. Please set the {api_key_env} environment variable.'
+            )
         nodes_list = _get_arc_nodes(population_props, dcid, 'domainIncludes')
 
         dc_props = {}
@@ -148,6 +154,10 @@ def fetch_dcid_properties_enums(dcid: str,
                 f'https://{api_prefix}api.datacommons.org/v2/node',
                 data_,
                 headers=headers)
+            if population_props_types_resp.get('http_err_code') == 401:
+                raise ValueError(
+                    f'Authentication failed. Please set the {api_key_env} environment variable.'
+                )
             for property_name in data_['nodes']:
                 nodes_list = _get_arc_nodes(population_props_types_resp,
                                             property_name, 'rangeIncludes')
@@ -175,6 +185,10 @@ def fetch_dcid_properties_enums(dcid: str,
                         f'https://{api_prefix}api.datacommons.org/v2/node',
                         data_,
                         headers=headers)
+                    if enum_values.get('http_err_code') == 401:
+                        raise ValueError(
+                            f'Authentication failed. Please set the {api_key_env} environment variable.'
+                        )
                     nodes_list = _get_arc_nodes(enum_values, type_name,
                                                 'typeOf')
                     for temp_dict in nodes_list:
