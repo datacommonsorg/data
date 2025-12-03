@@ -19,13 +19,10 @@ set -e
 # Array of top-level folders with Python code.
 PYTHON_FOLDERS="util/ tools/ import-automation/executor scripts/"
 
-# Flag used signal if Python requirements have already been installed.
-PYTHON_REQUIREMENTS_INSTALLED=false
+# Allow overriding via environment; default to false when unset.
+PYTHON_REQUIREMENTS_INSTALLED="${PYTHON_REQUIREMENTS_INSTALLED:-false}"
 
 function setup_python {
-  if [[ "${SKIP_PYTHON_SETUP:-false}" == "true" ]]; then
-    return
-  fi
   python3 -m venv .env
   source .env/bin/activate
   if [[ "$PYTHON_REQUIREMENTS_INSTALLED" = false ]]
