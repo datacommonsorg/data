@@ -37,7 +37,8 @@
                       "cleaned_csv": "output/global_hosp_icu_data.csv"
                   }
                           ],
-            "source_files": [input_files/*.csv
+            "source_files": [
+                "input_files/*.csv"
             ],
             "cron_schedule": "0 9 1 * *"
         }
