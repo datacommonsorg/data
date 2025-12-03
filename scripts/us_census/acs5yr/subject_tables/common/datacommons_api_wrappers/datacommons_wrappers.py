@@ -82,6 +82,18 @@ def _get_arc_nodes(response: dict, node_id: str, arc_label: str) -> list:
 # fetch pvs from dc, enums from dc
 
 
+def _validate_response(response: dict, url: str, api_key_env: str):
+    """Checks for HTTP errors in the response and raises appropriate exceptions."""
+    if 'http_err_code' in response:
+        err_code = response['http_err_code']
+        if err_code == 401:
+            raise ValueError(
+                f'Authentication failed for {url}. Please set the {api_key_env} environment variable.'
+            )
+        else:
+            raise ValueError(f'HTTP error {err_code} for {url}')
+
+
 def fetch_dcid_properties_enums(dcid: str,
                                 cache_path: str = _MODULE_DIR +
                                 '/prefetched_outputs',
@@ -123,14 +135,9 @@ def fetch_dcid_properties_enums(dcid: str,
         data_ = {}
         data_["nodes"] = [dcid]
         data_["property"] = "<-domainIncludes"
-        population_props = request_post_json(
-            f'https://{api_prefix}api.datacommons.org/v2/node',
-            data_,
-            headers=headers)
-        if population_props.get('http_err_code') == 401:
-            raise ValueError(
-                f'Authentication failed. Please set the {api_key_env} environment variable.'
-            )
+        url = f'https://{api_prefix}api.datacommons.org/v2/node'
+        population_props = request_post_json(url, data_, headers=headers)
+        _validate_response(population_props, url, api_key_env)
         nodes_list = _get_arc_nodes(population_props, dcid, 'domainIncludes')
 
         dc_props = {}
@@ -150,14 +157,11 @@ def fetch_dcid_properties_enums(dcid: str,
         data_['nodes'] = list(dc_props.keys())
         data_['property'] = '->rangeIncludes'
         if data_['nodes']:
-            population_props_types_resp = request_post_json(
-                f'https://{api_prefix}api.datacommons.org/v2/node',
-                data_,
-                headers=headers)
-            if population_props_types_resp.get('http_err_code') == 401:
-                raise ValueError(
-                    f'Authentication failed. Please set the {api_key_env} environment variable.'
-                )
+            url = f'https://{api_prefix}api.datacommons.org/v2/node'
+            population_props_types_resp = request_post_json(url,
+                                                            data_,
+                                                            headers=headers)
+            _validate_response(population_props_types_resp, url, api_key_env)
             for property_name in data_['nodes']:
                 nodes_list = _get_arc_nodes(population_props_types_resp,
                                             property_name, 'rangeIncludes')
@@ -181,14 +185,9 @@ def fetch_dcid_properties_enums(dcid: str,
                     data_ = {}
                     data_['nodes'] = [type_name]
                     data_['property'] = '<-typeOf'
-                    enum_values = request_post_json(
-                        f'https://{api_prefix}api.datacommons.org/v2/node',
-                        data_,
-                        headers=headers)
-                    if enum_values.get('http_err_code') == 401:
-                        raise ValueError(
-                            f'Authentication failed. Please set the {api_key_env} environment variable.'
-                        )
+                    url = f'https://{api_prefix}api.datacommons.org/v2/node'
+                    enum_values = request_post_json(url, data_, headers=headers)
+                    _validate_response(enum_values, url, api_key_env)
                     nodes_list = _get_arc_nodes(enum_values, type_name,
                                                 'typeOf')
                     for temp_dict in nodes_list:
