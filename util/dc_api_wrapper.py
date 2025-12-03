@@ -18,6 +18,7 @@ import os
 import sys
 import time
 import urllib
+import threading
 
 from absl import logging
 import datacommons as dc
@@ -37,6 +38,8 @@ _DC_API_PATH_RESOLVE_ID = '/v1/recon/resolve/id'
 # Resolve latlng coordinate
 # https://api.datacommons.org/v1/recon/resolve/coordinate
 _DC_API_PATH_RESOLVE_COORD = '/v1/recon/resolve/coordinate'
+
+_API_ROOT_LOCK = threading.Lock()
 
 
 def dc_api_wrapper(
@@ -66,9 +69,6 @@ def dc_api_wrapper(
   Returns:
     The response from the DataCommons API call.
   """
-    if api_root:
-        dc.utils._API_ROOT = api_root
-        logging.debug(f'Setting DC API root to {api_root} for {function}')
     if not retries or retries <= 0:
         retries = 1
     # Setup request cache
@@ -87,7 +87,22 @@ def dc_api_wrapper(
                 logging.debug(
                     f'Invoking DC API {function}, #{attempt} with {args},'
                     f' retries={retries}')
-                response = function(**args)
+
+                response = None
+                # Lock to prevent race condition when setting global API root
+                with _API_ROOT_LOCK:
+                    original_api_root = dc.utils._API_ROOT
+                    if api_root:
+                        dc.utils._API_ROOT = api_root
+                        logging.debug(
+                            f'Setting DC API root to {api_root} for {function}')
+
+                    try:
+                        response = function(**args)
+                    finally:
+                        if api_root:
+                            dc.utils._API_ROOT = original_api_root
+
                 logging.debug(
                     f'Got API response {response} for {function}, {args}')
                 return response
