@@ -2,14 +2,12 @@
 # Licensed under the Apache License, Version 2.0
 
 """
-CRDC Data Downloader & Processor (Merged)
------------------------------------------
-1. Downloads CRDC data (2010-Present) with parallel processing.
-2. Extracts only specific files based on keywords.
-3. Process Data:
-   - Adds 'YEAR' and 'NCESID' columns to the START.
-   - Converts 'Yes' -> 1 and 'No' -> 0 (Excluding 'JJ').
-   - Converts numeric strings to actual numbers.
+CRDC Data Downloader & Processor (Clean All IDs)
+------------------------------------------------
+1. Downloads CRDC data.
+2. Fixes IDs: Cleans COMBOKEY, LEAID, SCHID, and NCESID.
+3. Removes all quotes and forces 12-digit format.
+4. Saves only the data sheet.
 """
 
 import os
@@ -32,7 +30,6 @@ MAX_WORKERS = 5
 SCRIPT_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
 SAVE_FOLDER = os.path.join(SCRIPT_DIR, "input_files")
 
-# Regex Patterns to identify required files
 KEYWORDS = [
     r'.*09-2 Retention.*',
     r'Retention of Students.*grade (0[1-9]|1[0-2])\.xlsx$',
@@ -42,10 +39,12 @@ KEYWORDS = [
     r'School Data\.csv$'
 ]
 
-# Columns to SKIP during Yes/No conversion
-EXCLUDE_COLS = ['JJ', 'LEA_STATE', 'LEA_STATE_NAME', 'LEA_NAME', 'SCH_NAME']
+# ID columns excluded from numeric conversion
+EXCLUDE_COLS = [
+    'JJ', 'LEA_STATE', 'LEA_STATE_NAME', 'LEA_NAME', 'SCH_NAME',
+    'NCESID', 'LEAID', 'SCHID', 'COMBOKEY', 'observationDate'
+]
 
-# Replacement Map
 REPLACEMENT_MAP = {
     "Yes": 1, "No": 0,
     "yes": 1, "no": 0,
@@ -68,37 +67,58 @@ def get_urls_for_year(start_year, end_year):
         f"https://civilrightsdata.ed.gov/assets/ocr/docs/{start_year}-{short_end}-crdc-csv.zip"
     ]
 
+def clean_id_column(series):
+    """
+    Helper to clean any ID column: removes non-digits, strips spaces.
+    """
+    return (series.astype(str)
+            .str.replace(r'\D', '', regex=True) # Delete quotes, dots, letters
+            .str.strip())
+
 def transform_crdc_data(df: pd.DataFrame, year: int, filename: str) -> pd.DataFrame:
     """
-    Applies common transformations: Adds YEAR, generates NCESID, 
-    cleans Yes/No values, and reorders columns.
+    Applies transformations: Adds observationDate, cleans ALL IDs, generates NCESID.
     """
-    # --- 1. ADD YEAR & NCESID ---
-    df["YEAR"] = year
+    # Uppercase columns first
     df.columns = [x.upper() for x in df.columns]
 
-    if "LEAID" in df.columns and "SCHID" in df.columns:
-        df["NCESID"] = (
-            df["LEAID"].astype(str).str.zfill(7) +
-            df["SCHID"].astype(str).str.zfill(5))
-    elif "COMBOKEY" in df.columns:
-        df["NCESID"] = df["COMBOKEY"].astype(str).str.replace("'", "")
-    else:
-        logging.warning(f"Missing LEAID/SCHID in {filename}")
+    # Add Date
+    df["observationDate"] = year
 
-    # --- 2. CLEAN YES/NO (Excluding JJ) ---
-    exclude_upper = [c.upper() for c in EXCLUDE_COLS]
-    target_cols = [col for col in df.columns if col not in exclude_upper]
+    # --- 1. CLEAN SOURCE COLUMNS FIRST ---
+    # This ensures the original columns in the file don't have quotes either.
+    if "COMBOKEY" in df.columns:
+        df["COMBOKEY"] = clean_id_column(df["COMBOKEY"])
     
-    # Map Yes/No to 1/0
-    df[target_cols] = df[target_cols].replace(REPLACEMENT_MAP)
+    if "LEAID" in df.columns:
+        df["LEAID"] = clean_id_column(df["LEAID"]).str.zfill(7)
+    
+    if "SCHID" in df.columns:
+        df["SCHID"] = clean_id_column(df["SCHID"]).str.zfill(5)
 
-    # Convert numeric columns efficiently (Vectorized)
-    # Using errors='coerce' turns bad data into NaN instead of crashing or ignoring
+    # --- 2. CREATE AND PAD NCESID ---
+    if "COMBOKEY" in df.columns:
+        # Use the now-clean COMBOKEY
+        df["NCESID"] = df["COMBOKEY"].str.zfill(12)
+    elif "LEAID" in df.columns and "SCHID" in df.columns:
+        # Use the now-clean LEAID and SCHID
+        df["NCESID"] = df["LEAID"] + df["SCHID"]
+    else:
+        logging.warning(f"Missing LEAID/SCHID or COMBOKEY in {filename}")
+
+    # Final check on NCESID just in case
+    if "NCESID" in df.columns:
+        df["NCESID"] = clean_id_column(df["NCESID"]).str.zfill(12)
+
+    # --- 3. CLEAN YES/NO ---
+    exclude_upper = [c.upper() for c in EXCLUDE_COLS]
+    target_cols = [col for col in df.columns if col not in exclude_upper and col != 'observationDate']
+    
+    df[target_cols] = df[target_cols].replace(REPLACEMENT_MAP)
     df[target_cols] = df[target_cols].apply(pd.to_numeric, errors='coerce')
 
-    # --- 3. REORDER COLUMNS ---
-    priority_cols = ['YEAR', 'NCESID']
+    # --- 4. REORDER COLUMNS ---
+    priority_cols = ['observationDate', 'NCESID']
     existing_priority = [c for c in priority_cols if c in df.columns]
     other_cols = [c for c in df.columns if c not in existing_priority]
     
@@ -106,8 +126,7 @@ def transform_crdc_data(df: pd.DataFrame, year: int, filename: str) -> pd.DataFr
 
 def process_dataframe(file_path: str, year: int):
     """
-    Loads, Cleans (Yes/No), Adds Columns, and Saves the file.
-    Handles multi-sheet Excel files by processing only the first sheet.
+    Loads, cleans, and saves ONLY the data sheet.
     """
     try:
         filename = os.path.basename(file_path)
@@ -115,10 +134,8 @@ def process_dataframe(file_path: str, year: int):
         # --- CSV HANDLING ---
         if file_path.lower().endswith(".csv"):
             try:
-                # Try reading with Latin1 first
                 df = pd.read_csv(file_path, dtype=str, low_memory=False, encoding='latin1')
             except UnicodeDecodeError:
-                # Fallback to default (usually UTF-8) if Latin1 fails
                 df = pd.read_csv(file_path, dtype=str, low_memory=False)
 
             df = transform_crdc_data(df, year, filename)
@@ -126,28 +143,18 @@ def process_dataframe(file_path: str, year: int):
 
         # --- XLSX HANDLING ---
         elif file_path.lower().endswith(".xlsx"):
-            # Read ALL sheets into a dictionary
-            all_sheets = pd.read_excel(file_path,
-                                       dtype=str,
-                                       engine='openpyxl',
-                                       sheet_name=None)
-
-            # Get the name of the first sheet (the "Data" sheet)
+            all_sheets = pd.read_excel(file_path, dtype=str, sheet_name=None)
+            
+            # Identify the Data Sheet (usually the first one)
             data_sheet_name = list(all_sheets.keys())[0]
             df = all_sheets[data_sheet_name]
 
             df = transform_crdc_data(df, year, filename)
 
-            # Save all sheets back
-            with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
-                for sheet_name, original_sheet_df in all_sheets.items():
-                    if sheet_name == data_sheet_name:
-                        # Write the *processed* data frame
-                        df.to_excel(writer, sheet_name=sheet_name, index=False)
-                    else:
-                        # Write the *original, untouched* definitions/other frames
-                        original_sheet_df.to_excel(writer, sheet_name=sheet_name, index=False)
-
+            # Save only the DATA sheet
+            with pd.ExcelWriter(file_path) as writer:
+                df.to_excel(writer, sheet_name=data_sheet_name, index=False)
+                
         else:
             return
 
@@ -165,7 +172,7 @@ def try_download_url(url, temp_file):
     try:
         with requests.get(url, headers=headers, stream=True, timeout=120) as r:
             if r.status_code == 200:
-                # Security Check: Ensure we didn't just download an HTML error page
+                # Security Check: Prevent downloading HTML error pages as Zips
                 content_type = r.headers.get('Content-Type', '').lower()
                 if 'html' in content_type:
                     logging.warning(f"URL {url} returned HTML instead of ZIP. Skipping.")
@@ -173,10 +180,8 @@ def try_download_url(url, temp_file):
                 
                 shutil.copyfileobj(r.raw, temp_file)
                 return True
-            else:
-                logging.warning(f"URL {url} returned status {r.status_code}")
-    except Exception as e:
-        logging.warning(f"Failed to download {url}: {e}")
+    except Exception:
+        pass
     return False
 
 # ==========================================
@@ -186,12 +191,10 @@ def try_download_url(url, temp_file):
 def process_year_data(start_year: int, end_year: int):
     possible_urls = get_urls_for_year(start_year, end_year)
     zip_label = f"{start_year}-{str(end_year)[-2:]}"
-    
     logging.info(f"Processing {zip_label}...")
 
     with tempfile.NamedTemporaryFile(delete=True) as tmp_zip:
         downloaded = False
-        
         for url in possible_urls:
             tmp_zip.seek(0)
             tmp_zip.truncate()
@@ -204,11 +207,9 @@ def process_year_data(start_year: int, end_year: int):
             return
 
         tmp_zip.flush()
-        
         try:
             with zipfile.ZipFile(tmp_zip.name) as z:
                 matched_files = [f for f in z.namelist() if matches_keywords(f)]
-                
                 if not matched_files:
                     logging.info(f"Downloaded {zip_label}, but no files matched keywords.")
                     return
@@ -216,10 +217,8 @@ def process_year_data(start_year: int, end_year: int):
                 for file_name in matched_files:
                     output_filename = f"{end_year}_{os.path.basename(file_name)}"
                     output_path = os.path.join(SAVE_FOLDER, output_filename)
-
                     with z.open(file_name) as source, open(output_path, "wb") as target:
                         shutil.copyfileobj(source, target)
-
                     process_dataframe(output_path, end_year)
 
         except zipfile.BadZipFile:
@@ -232,10 +231,8 @@ def process_year_data(start_year: int, end_year: int):
 def main(_):
     start_year = 2010
     current_year = datetime.now().year
-    
     os.makedirs(SAVE_FOLDER, exist_ok=True)
     year_pairs = [(y - 1, y) for y in range(start_year, current_year)]
-
     logging.info(f"Starting processing with {MAX_WORKERS} workers...")
     
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
