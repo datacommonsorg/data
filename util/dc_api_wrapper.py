@@ -40,6 +40,7 @@ _DC_API_PATH_RESOLVE_ID = '/v1/recon/resolve/id'
 _DC_API_PATH_RESOLVE_COORD = '/v2/resolve'
 
 _API_ROOT_LOCK = threading.Lock()
+_DEFAULT_API_ROOT = 'https://api.datacommons.org'
 
 
 def dc_api_wrapper(
@@ -89,7 +90,8 @@ def dc_api_wrapper(
                     f' retries={retries}')
 
                 response = None
-                # Lock to prevent race condition when setting global API root
+                # All calls serialize here to prevent races while updating the
+                # global Data Commons API root.
                 with _API_ROOT_LOCK:
                     original_api_root = dc.utils._API_ROOT
                     if api_root:
@@ -100,8 +102,7 @@ def dc_api_wrapper(
                     try:
                         response = function(**args)
                     finally:
-                        if api_root:
-                            dc.utils._API_ROOT = original_api_root
+                        dc.utils._API_ROOT = original_api_root
 
                 logging.debug(
                     f'Got API response {response} for {function}, {args}')
@@ -289,11 +290,14 @@ def dc_api_get_node_property_values(dcids: list,
     return predefined_nodes
 
 
-def dc_api_resolve_placeid(dcids: list, in_prop: str = 'placeId') -> dict:
+def dc_api_resolve_placeid(dcids: list,
+                           in_prop: str = 'placeId',
+                           api_root: str = _DEFAULT_API_ROOT) -> dict:
     """Returns the resolved dcid for each of the placeid.
 
   Args:
     dcids: list of placeids to be resolved.
+    api_root: Optional API server to use for the request.
 
   Returns:
     dictionary keyed by input placeid with reoslved dcid as value.
@@ -301,7 +305,7 @@ def dc_api_resolve_placeid(dcids: list, in_prop: str = 'placeId') -> dict:
     data = {'in_prop': in_prop, 'out_prop': 'dcid'}
     data['ids'] = dcids
     num_ids = len(dcids)
-    api_url = dc.utils._API_ROOT + _DC_API_PATH_RESOLVE_ID
+    api_url = api_root + _DC_API_PATH_RESOLVE_ID
     logging.debug(
         f'Looking up {api_url} dcids for {num_ids} placeids: {data["ids"]}')
     recon_resp = request_url(url=api_url,
@@ -321,7 +325,8 @@ def dc_api_resolve_placeid(dcids: list, in_prop: str = 'placeId') -> dict:
 
 def dc_api_resolve_latlng(lat_lngs: list,
                           *,
-                          return_v1_response: bool = False) -> dict:
+                          return_v1_response: bool = False,
+                          api_root: str = _DEFAULT_API_ROOT) -> dict:
     """Resolves geographic coordinates to Data Commons places.
 
     Each object in the list is of the form:
@@ -367,6 +372,7 @@ def dc_api_resolve_latlng(lat_lngs: list,
 
   Args:
     latlngs: list of latlngs to be resolved.
+    api_root: Optional API server to use for the request.
 
   Returns:
     dictionary containing the resolved place information.
@@ -374,7 +380,7 @@ def dc_api_resolve_latlng(lat_lngs: list,
     v1_data = {}
     v1_data['coordinates'] = lat_lngs
     num_ids = len(lat_lngs)
-    api_url = dc.utils._API_ROOT + _DC_API_PATH_RESOLVE_COORD
+    api_url = api_root + _DC_API_PATH_RESOLVE_COORD
     logging.debug(
         f'Looking up {api_url} coordinates for {num_ids} placeids: {v1_data}')
     v2_data = _convert_v1_to_v2_coordinate_request(v1_data)
