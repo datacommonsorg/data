@@ -3,7 +3,7 @@
         "executor_type": "CLOUD_BATCH",
         "user_script_args": [],
         "user_script_env": {
-            "EXISTING_STATVAR_MCF": "gs: //unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            "EXISTING_STATVAR_MCF": "gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
         },
         "user_script_timeout": 3600,
         "disable_email_notifications": true,
