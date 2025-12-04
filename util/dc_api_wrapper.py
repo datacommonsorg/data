@@ -292,16 +292,21 @@ def dc_api_get_node_property_values(dcids: list,
 
 def dc_api_resolve_placeid(dcids: list,
                            in_prop: str = 'placeId',
-                           api_root: str = _DEFAULT_API_ROOT) -> dict:
+                           *,
+                           config: dict = None) -> dict:
     """Returns the resolved dcid for each of the placeid.
 
   Args:
     dcids: list of placeids to be resolved.
-    api_root: Optional API server to use for the request.
+    config: optional dictionary with DC API settings (uses 'dc_api_root' when
+      provided).
 
   Returns:
     dictionary keyed by input placeid with reoslved dcid as value.
   """
+    if not config:
+        config = {}
+    api_root = config.get('dc_api_root', _DEFAULT_API_ROOT)
     data = {'in_prop': in_prop, 'out_prop': 'dcid'}
     data['ids'] = dcids
     num_ids = len(dcids)
@@ -326,7 +331,7 @@ def dc_api_resolve_placeid(dcids: list,
 def dc_api_resolve_latlng(lat_lngs: list,
                           *,
                           return_v1_response: bool = False,
-                          api_root: str = _DEFAULT_API_ROOT) -> dict:
+                          config: dict = None) -> dict:
     """Resolves geographic coordinates to Data Commons places.
 
     Each object in the list is of the form:
@@ -372,11 +377,15 @@ def dc_api_resolve_latlng(lat_lngs: list,
 
   Args:
     latlngs: list of latlngs to be resolved.
-    api_root: Optional API server to use for the request.
+    config: optional dictionary with DC API settings (uses 'dc_api_root' when
+      provided).
 
   Returns:
     dictionary containing the resolved place information.
   """
+    if not config:
+        config = {}
+    api_root = config.get('dc_api_root', _DEFAULT_API_ROOT)
     v1_data = {}
     v1_data['coordinates'] = lat_lngs
     num_ids = len(lat_lngs)
