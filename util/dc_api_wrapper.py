@@ -260,25 +260,25 @@ def get_datacommons_client(config: dict = None) -> DataCommonsClient:
     return DataCommonsClient(api_key=api_key, dc_instance=dc_instance, url=url)
 
 
-def dc_api_is_defined_dcid(dcids: list, wrapper_config: dict = {}) -> dict:
+def dc_api_is_defined_dcid(dcids: list, config: dict = {}) -> dict:
     """Returns a dictionary with dcids mapped to True/False based on whether
   the dcid is defined in the API and has a 'typeOf' property.
      Uses the property_value() DC API to lookup 'typeOf' for each dcid.
      dcids not defined in KG get a value of False.
   Args:
     dcids: List of dcids. The namespace is stripped from the dcid.
-    wrapper_config: dictionary of configurationparameters for the wrapper. See
+    config: dictionary of configurationparameters for the wrapper. See
       dc_api_batched_wrapper and dc_api_wrapper for details.
 
   Returns:
     dictionary with each input dcid mapped to a True/False value.
   """
     # Set parameters for V2 node API.
-    client = get_datacommons_client(wrapper_config)
+    client = get_datacommons_client(config)
     api_function = client.node.fetch_property_values
     args = {'properties': 'typeOf'}
     dcid_arg_kw = 'node_dcids'
-    if wrapper_config.get('dc_api_version', 'V2') != 'V2':
+    if config.get('dc_api_version', 'V2') != 'V2':
         # Set parameters for V1 API.
         api_function = dc.get_property_values
         args = {
@@ -291,7 +291,7 @@ def dc_api_is_defined_dcid(dcids: list, wrapper_config: dict = {}) -> dict:
                                         dcids=dcids,
                                         args=args,
                                         dcid_arg_kw=dcid_arg_kw,
-                                        config=wrapper_config)
+                                        config=config)
     response = {}
     for dcid in dcids:
         dcid_stripped = _strip_namespace(dcid)
@@ -304,22 +304,22 @@ def dc_api_is_defined_dcid(dcids: list, wrapper_config: dict = {}) -> dict:
 
 def dc_api_get_node_property(dcids: list,
                              prop: str,
-                             wrapper_config: dict = {}) -> dict:
+                             config: dict = {}) -> dict:
     """Returns a dictionary keyed by dcid with { prop:value } for each dcid.
 
      Uses the get_property_values() DC API to lookup the property for each dcid.
 
   Args:
     dcids: List of dcids. The namespace is stripped from the dcid.
-    wrapper_config: dictionary of configurationparameters for the wrapper. See
+    config: dictionary of configurationparameters for the wrapper. See
       dc_api_batched_wrapper and dc_api_wrapper for details.
 
   Returns:
     dictionary with each input dcid mapped to a True/False value.
   """
-    is_v2 = wrapper_config.get('dc_api_version', 'V2') == 'V2'
+    is_v2 = config.get('dc_api_version', 'V2') == 'V2'
     # Set parameters for V2 node API.
-    client = get_datacommons_client(wrapper_config)
+    client = get_datacommons_client(config)
     api_function = client.node.fetch_property_values
     args = {'properties': prop}
     dcid_arg_kw = 'node_dcids'
@@ -335,7 +335,7 @@ def dc_api_get_node_property(dcids: list,
                                         dcids=dcids,
                                         args=args,
                                         dcid_arg_kw=dcid_arg_kw,
-                                        config=wrapper_config)
+                                        config=config)
     response = {}
     for dcid in dcids:
         dcid_stripped = _strip_namespace(dcid)
@@ -364,22 +364,22 @@ def dc_api_get_node_property(dcids: list,
 
 
 def dc_api_get_node_property_values(dcids: list,
-                                    wrapper_config: dict = {}) -> dict:
+                                    config: dict = {}) -> dict:
     """Returns all the property values for a set of dcids from the DC API.
 
   Args:
     dcids: list of dcids to lookup
-    wrapper_config: configuration parameters for the wrapper. See
+    config: configuration parameters for the wrapper. See
       dc_api_batched_wrapper() and dc_api_wrapper() for details.
 
   Returns:
     dictionary with each dcid with the namspace 'dcid:' as the key
     mapped to a dictionary of property:value.
   """
-    if wrapper_config.get('dc_api_version', 'V2') != 'V2':
-        return dc_api_v1_get_node_property_values(dcids, wrapper_config)
+    if config.get('dc_api_version', 'V2') != 'V2':
+        return dc_api_v1_get_node_property_values(dcids, config)
     # Lookup node properties using V2 node API
-    client = get_datacommons_client(wrapper_config)
+    client = get_datacommons_client(config)
     api_function = client.node.fetch
     args = {'expression': '->*'}
     dcid_arg_kw = 'node_dcids'
@@ -387,7 +387,7 @@ def dc_api_get_node_property_values(dcids: list,
                                         dcids=dcids,
                                         args=args,
                                         dcid_arg_kw=dcid_arg_kw,
-                                        config=wrapper_config)
+                                        config=config)
     response = {}
     for dcid, arcs in api_result.items():
         pvs = {}
@@ -412,12 +412,12 @@ def dc_api_get_node_property_values(dcids: list,
 
 
 def dc_api_v1_get_node_property_values(dcids: list,
-                                       wrapper_config: dict = {}) -> dict:
+                                       config: dict = {}) -> dict:
     """Returns all the property values for a set of dcids from the DC V1 API.
 
   Args:
     dcids: list of dcids to lookup
-    wrapper_config: configuration parameters for the wrapper. See
+    config: configuration parameters for the wrapper. See
       dc_api_batched_wrapper() and dc_api_wrapper() for details.
 
   Returns:
@@ -428,7 +428,7 @@ def dc_api_v1_get_node_property_values(dcids: list,
     api_function = dc.get_triples
     api_triples = dc_api_batched_wrapper(api_function,
                                          dcids, {},
-                                         config=wrapper_config)
+                                         config=config)
     if api_triples:
         for dcid, triples in api_triples.items():
             if (_strip_namespace(dcid) not in dcids and
