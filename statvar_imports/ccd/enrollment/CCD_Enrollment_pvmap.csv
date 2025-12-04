@@ -12,7 +12,7 @@ Prekindergarten through grade 8.3,typeOfSchool,"""""",,,,,,,,,,
 Total_PK_8,value,{Number},schoolGradeLevel,SchoolGradePreKindergartenTo8,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool
 All grades,value,{Number},,,observationAbout,country/USA,populationType,Student,#Multiply,1000,typeOfSchool,PublicSchool
 Prekindergarten,value,{Number},enrollmentLevel,PreKindergarten,observationAbout,country/USA,populationType,Student,#Multiply,1000,typeOfSchool,PublicSchool
-Kindergarten,value,{Number},schoolGradeLevel,Kindergarten,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool
+Kindergarten,value,{Number},schoolGradeLevel,Kindergarten,observationAbout,country/USA,populationType,Student,#Multiply,1000,typeOfSchool,PublicSchool
 1st grade,value,{Number},schoolGradeLevel,SchoolGrade1,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool
 2nd grade,value,{Number},schoolGradeLevel,SchoolGrade2,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool
 3rd grade,value,{Number},schoolGradeLevel,SchoolGrade3,observationAbout,country/USA,populationType,Student,#Multiply,1000,schoolType,PublicSchool
