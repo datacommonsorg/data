@@ -1,0 +1,2 @@
+config,value
+output_columns,"observationDate,observationAbout,value,variableMeasured"
