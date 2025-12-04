@@ -1,0 +1,20 @@
+YEAR,observationDate,{Data},,,,,,,,,,,,,,,,
+ncesid,observationAbout,nces/{Data},,,,,,,,,,,,,,,,
+JJ:Yes,educationalInstitutionType,JuvenileJusticeFacility,,,,,,,,,,,,,,,,
+JJ:No,educationalInstitutionType,NotJuvenileJusticeFacility,,,,,,,,,,,,,,,,
+SCH_ELENR_HI_M,value,{Number},#Filter,Allow=int(value) >= 0,race,HispanicOrLatino,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+SCH_ELENR_HI_F,value,{Number},#Filter,Allow=int(value) >= 0,race,HispanicOrLatino,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+SCH_ELENR_AM_M,value,{Number},#Filter,Allow=int(value) >= 0,race,AmericanIndianOrAlaskaNativeAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+SCH_ELENR_AM_F,value,{Number},#Filter,Allow=int(value) >= 0,race,AmericanIndianOrAlaskaNativeAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+SCH_ELENR_AS_M,value,{Number},#Filter,Allow=int(value) >= 0,race,AsianAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+SCH_ELENR_AS_F,value,{Number},#Filter,Allow=int(value) >= 0,race,AsianAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+SCH_ELENR_HP_M,value,{Number},#Filter,Allow=int(value) >= 0,race,NativeHawaiianOrOtherPacificIslanderAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+SCH_ELENR_HP_F,value,{Number},#Filter,Allow=int(value) >= 0,race,NativeHawaiianOrOtherPacificIslanderAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+SCH_ELENR_BL_M,value,{Number},#Filter,Allow=int(value) >= 0,race,BlackOrAfricanAmericanAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+SCH_ELENR_BL_F,value,{Number},#Filter,Allow=int(value) >= 0,race,BlackOrAfricanAmericanAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+SCH_ELENR_WH_M,value,{Number},#Filter,Allow=int(value) >= 0,race,WhiteAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+SCH_ELENR_WH_F,value,{Number},#Filter,Allow=int(value) >= 0,race,WhiteAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+SCH_ELENR_TR_M,value,{Number},#Filter,Allow=int(value) >= 0,race,TwoOrMoreRaces,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+SCH_ELENR_TR_F,value,{Number},#Filter,Allow=int(value) >= 0,race,TwoOrMoreRaces,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency
+M_LEP_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency,,
+F_LEP_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,englishProficiency,LimitedEnglishProficiency,,
