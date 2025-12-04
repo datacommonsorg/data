@@ -45,18 +45,19 @@ def get_name(table, row, col_name, table_prefix=""):
 
 
 def name_to_id(s):
+    s = s.title()
     s = s.replace('&', 'And')
     s = s.replace('U.S.', 'US')
     s = s.replace('U. S.', 'US')
     s = s.replace('United States', 'US')
     s = sub(r'\W+', '', s)
-    s = s.replace(' Llc', ' LLC')
+    s = s.replace('Llc', 'LLC')
 
     s = s.replace('Corporation', 'Corp')
     s = s.replace('Company', 'Co')
     s = s.replace('Incorportated', 'Inc')
     s = s.replace('Lp', 'LP')
-    return ''.join([s[0].upper(), s[1:]])
+    return ''.join([s[0], s[1:]])
 
 
 def get_address(table, row, table_prefix=""):
