@@ -560,9 +560,9 @@ def process(indicator_codes, worldbank_dataframe, saveOutput=True):
         worldbank_dataframe['Value'] = pd.to_numeric(
             worldbank_dataframe['Value'])
         worldbank_dataframe['ISO3166Alpha3'] = (
-            worldbank_dataframe['ISO3166Alpha3'].apply(
+            worldbank_dataframe['ISO3166Alpha3'].replace({'XKX': 'XKS'}).apply(
                 lambda code: "dcid:Earth"
-                if code == "WLD" else "dcid:country/" + ("XKS" if code == "XKX" else code)))
+                if code == "WLD" else "dcid:country/" + code))
         worldbank_dataframe['StatisticalVariable'] = \
             worldbank_dataframe['StatisticalVariable'].apply(
                 lambda code: "dcs:" + code)
