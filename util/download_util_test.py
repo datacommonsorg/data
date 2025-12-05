@@ -46,12 +46,15 @@ class TestCounters(unittest.TestCase):
             },
             output='JSON')
         self.assertTrue(isinstance(countries, dict))
-        nodes = countries.get('data',
-                              {}).get('Earth',
-                                      {}).get('arcs',
-                                              {}).get('containedInPlace+',
-                                                      {}).get('nodes', [])
-        self.assertIn('country/IND', [node.get('dcid', '') for node in nodes])
+        try:
+            nodes = countries['data']['Earth']['arcs']['containedInPlace+'][
+                'nodes']
+        except (KeyError, TypeError) as e:
+            self.fail(
+                f'Failed to parse nodes from API response. Check response structure. Error: {e}. Response: {countries}'
+            )
+        country_dcids = [node.get('dcid', '') for node in nodes]
+        self.assertIn('country/IND', country_dcids)
 
     def test_prefilled_url(self):
         test_response = download_util.request_url(url='http://test.case.com/',
