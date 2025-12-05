@@ -91,7 +91,7 @@ flags.DEFINE_list(
 )
 flags.DEFINE_string(
     'existing_statvar_mcf',
-    '',
+    os.environ.get('EXISTING_STATVAR_MCF', ''),
     'StatVar MCF files for any existing stat var nodes to be resused.',
 )
 flags.DEFINE_string(

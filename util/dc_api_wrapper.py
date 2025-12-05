@@ -18,6 +18,7 @@ import os
 import sys
 import time
 import urllib
+import threading
 
 from absl import logging
 import datacommons as dc
@@ -37,6 +38,9 @@ _DC_API_PATH_RESOLVE_ID = '/v1/recon/resolve/id'
 # Resolve latlng coordinate
 # https://api.datacommons.org/v2/resolve
 _DC_API_PATH_RESOLVE_COORD = '/v2/resolve'
+
+_API_ROOT_LOCK = threading.Lock()
+_DEFAULT_API_ROOT = 'https://api.datacommons.org'
 
 
 def dc_api_wrapper(
@@ -66,9 +70,6 @@ def dc_api_wrapper(
   Returns:
     The response from the DataCommons API call.
   """
-    if api_root:
-        dc.utils._API_ROOT = api_root
-        logging.debug(f'Setting DC API root to {api_root} for {function}')
     if not retries or retries <= 0:
         retries = 1
     # Setup request cache
@@ -87,7 +88,22 @@ def dc_api_wrapper(
                 logging.debug(
                     f'Invoking DC API {function}, #{attempt} with {args},'
                     f' retries={retries}')
-                response = function(**args)
+
+                response = None
+                # All calls serialize here to prevent races while updating the
+                # global Data Commons API root.
+                with _API_ROOT_LOCK:
+                    original_api_root = dc.utils._API_ROOT
+                    if api_root:
+                        dc.utils._API_ROOT = api_root
+                        logging.debug(
+                            f'Setting DC API root to {api_root} for {function}')
+
+                    try:
+                        response = function(**args)
+                    finally:
+                        dc.utils._API_ROOT = original_api_root
+
                 logging.debug(
                     f'Got API response {response} for {function}, {args}')
                 return response
@@ -274,19 +290,27 @@ def dc_api_get_node_property_values(dcids: list,
     return predefined_nodes
 
 
-def dc_api_resolve_placeid(dcids: list, in_prop: str = 'placeId') -> dict:
+def dc_api_resolve_placeid(dcids: list,
+                           in_prop: str = 'placeId',
+                           *,
+                           config: dict = None) -> dict:
     """Returns the resolved dcid for each of the placeid.
 
   Args:
     dcids: list of placeids to be resolved.
+    config: optional dictionary with DC API settings (uses 'dc_api_root' when
+      provided).
 
   Returns:
     dictionary keyed by input placeid with reoslved dcid as value.
   """
+    if not config:
+        config = {}
+    api_root = config.get('dc_api_root', _DEFAULT_API_ROOT)
     data = {'in_prop': in_prop, 'out_prop': 'dcid'}
     data['ids'] = dcids
     num_ids = len(dcids)
-    api_url = dc.utils._API_ROOT + _DC_API_PATH_RESOLVE_ID
+    api_url = api_root + _DC_API_PATH_RESOLVE_ID
     logging.debug(
         f'Looking up {api_url} dcids for {num_ids} placeids: {data["ids"]}')
     recon_resp = request_url(url=api_url,
@@ -306,7 +330,8 @@ def dc_api_resolve_placeid(dcids: list, in_prop: str = 'placeId') -> dict:
 
 def dc_api_resolve_latlng(lat_lngs: list,
                           *,
-                          return_v1_response: bool = False) -> dict:
+                          return_v1_response: bool = False,
+                          config: dict = None) -> dict:
     """Resolves geographic coordinates to Data Commons places.
 
     Each object in the list is of the form:
@@ -352,14 +377,19 @@ def dc_api_resolve_latlng(lat_lngs: list,
 
   Args:
     latlngs: list of latlngs to be resolved.
+    config: optional dictionary with DC API settings (uses 'dc_api_root' when
+      provided).
 
   Returns:
     dictionary containing the resolved place information.
   """
+    if not config:
+        config = {}
+    api_root = config.get('dc_api_root', _DEFAULT_API_ROOT)
     v1_data = {}
     v1_data['coordinates'] = lat_lngs
     num_ids = len(lat_lngs)
-    api_url = dc.utils._API_ROOT + _DC_API_PATH_RESOLVE_COORD
+    api_url = api_root + _DC_API_PATH_RESOLVE_COORD
     logging.debug(
         f'Looking up {api_url} coordinates for {num_ids} placeids: {v1_data}')
     v2_data = _convert_v1_to_v2_coordinate_request(v1_data)
