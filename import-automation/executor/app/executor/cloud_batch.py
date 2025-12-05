@@ -151,6 +151,7 @@ def create_job_request(import_name: str, import_config: dict, import_spec: dict,
 
     resources["cpu"] = resources["cpu"] * 1000
     resources["memory"] = resources["memory"] * 1024
+    schedule = import_spec.get('cron_schedule')
     import_config_string = json.dumps(import_config)
     job_name = import_name.split(':')[1]
     job_name = job_name.replace("_", "-").lower()
@@ -159,7 +160,8 @@ def create_job_request(import_name: str, import_config: dict, import_spec: dict,
         "importName": import_name,
         "importConfig": import_config_string,
         "resources": resources,
-        "timeout": timeout
+        "timeout": timeout,
+        "schedule": schedule
     }
     argument_string = json.dumps(argument_payload)
     final_payload = {

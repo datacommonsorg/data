@@ -1,3 +1,4 @@
+
 import functions_framework
 from spanner_client import SpannerClient
 from flask import jsonify
@@ -30,8 +31,8 @@ def ingestion_helper(request):
     actionType = request_json['actionType']
     spanner = SpannerClient(_PROJECT_ID, _SPANNER_INSTANCE_ID,
                             _SPANNER_DATABASE_ID)
-    if actionType == 'get_import_status':
-        imports = spanner.get_import_status()
+    if actionType == 'get_import_list':
+        imports = spanner.get_import_list()
         return jsonify(imports)
     elif actionType == 'acquire_ingestion_lock':
         validation_error = _validate_params(request_json,
@@ -66,13 +67,15 @@ def ingestion_helper(request):
         return ('Updated ingestion status', 200)
     elif actionType == 'update_import_status':
         validation_error = _validate_params(request_json,
-                                            ['importName', 'jobId', 'status'])
+                                            ['importName', 'jobId', 'status', 'schedule', 'duration'])
         if validation_error:
             return (validation_error, 400)
         import_name = request_json['importName']
         status = request_json['status']
         job_id = request_json['jobId']
-        result = spanner.update_import_status(import_name, status, job_id)
+        duration = request_json['duration']
+        schedule = request_json['schedule']
+        result = spanner.update_import_status(import_name, status, job_id, duration, schedule)
         if not result:
             return ('Failed to update import status', 500)
         return ('Updated import status', 200)
