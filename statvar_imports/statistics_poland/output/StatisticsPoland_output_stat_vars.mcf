@@ -1,4 +1,4 @@
-# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/Statistics_Poland/input/StatisticsPoland_input_*.csv --pv_map=statvar_imports/Statistics_Poland/StatisticsPoland_pvmap.csv --output_path=statvar_imports/Statistics_Poland/output/StatisticsPoland_output --config_file=statvar_imports/Statistics_Poland/Statistics_Poland_metadata.csv --existing_statvar_mcf=/Users/abhishekjaiswal/Downloads/scripts_statvar_stat_vars.mcf" on 2025-11-24 10:10:54.645668
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/statistics_poland/input/StatisticsPoland_input_*.csv --pv_map=statvar_imports/statistics_poland/StatisticsPoland_pvmap.csv --output_path=statvar_imports/statistics_poland/output/StatisticsPoland_output --config_file=statvar_imports/statistics_poland/Statistics_Poland_metadata.csv --existing_statvar_mcf=scripts_statvar_stat_vars.mcf" on 2025-12-05 15:26:05.398053
 
 Node: dcid:Count_Person_0To2Years
 typeOf: dcid:StatisticalVariable
