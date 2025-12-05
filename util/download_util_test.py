@@ -39,14 +39,19 @@ class TestCounters(unittest.TestCase):
     def test_request_url(self):
         # Download URL with GET parameters
         countries = download_util.request_url(
-            url='https://api.datacommons.org/node/places-in',
+            url='https://api.datacommons.org/v2/node',
             params={
-                'dcids': 'Earth',
-                'placeType': 'Country'
+                'nodes': ['Earth'],
+                'property': '<-containedInPlace+{typeOf:Country}'
             },
             output='JSON')
         self.assertTrue(isinstance(countries, dict))
-        self.assertTrue('country/IND' in countries['payload'])
+        nodes = countries.get('data',
+                              {}).get('Earth',
+                                      {}).get('arcs',
+                                              {}).get('containedInPlace+',
+                                                      {}).get('nodes', [])
+        self.assertIn('country/IND', [node.get('dcid', '') for node in nodes])
 
     def test_prefilled_url(self):
         test_response = download_util.request_url(url='http://test.case.com/',
