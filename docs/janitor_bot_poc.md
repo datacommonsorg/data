@@ -23,6 +23,10 @@ For this Proof of Concept, we will focus on the following personas:
     *   **Goal:** Cleanup code.
     *   **Action:** Detects and removes unused imports and dead code paths.
 
+    3.  **The Typer:**
+        *   **Goal:** Improve type safety.
+        *   **Action:** Adds PEP 484 type hints to function signatures and includes necessary imports.
+
 ## Proof of Concept Scope
 
 *   **Target Directory:** `tools/statvar_importer` (Contains a mix of utilities and logic suitable for testing).
@@ -43,8 +47,12 @@ For this Proof of Concept, we will focus on the following personas:
         ```bash
         python3 -m tools.janitor_bot.main --mode dead_code_remover --target tools/statvar_importer/some_file.py --apply
         ```
+    4.  **The Typer:**
+        ```bash
+        python3 -m tools.janitor_bot.main --mode typer --target tools/statvar_importer/some_file.py --apply
+        ```
 
 ## Future Vision
 *   Integration as a GitHub Action triggering on schedule.
-*   Expansion to other personas (The Typer, The Modernizer, etc.).
+*   Expansion to other personas (The Modernizer, The Refactorer, etc.).
 *   Automatic Pull Request creation.

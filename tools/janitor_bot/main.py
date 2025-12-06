@@ -16,6 +16,7 @@
 import argparse
 from .librarian import TheLibrarian
 from .cleaners import TheImportCleaner, TheDeadCodeRemover
+from .typer import TheTyper
 
 # Configuration
 PROJECT_ID = "stuniki-runtimes-dev"
@@ -28,7 +29,7 @@ if __name__ == "__main__":
         "--mode",
         type=str,
         default="librarian",
-        choices=["librarian", "import_cleaner", "dead_code_remover"],
+        choices=["librarian", "import_cleaner", "dead_code_remover", "typer"],
         help="Bot persona to run",
     )
     parser.add_argument(
@@ -57,4 +58,7 @@ if __name__ == "__main__":
         bot.run(args.target, args.apply, args.limit)
     elif args.mode == "dead_code_remover":
         bot = TheDeadCodeRemover(args.project, LOCATION, MODEL_NAME)
+        bot.run(args.target, args.apply, args.limit)
+    elif args.mode == "typer":
+        bot = TheTyper(args.project, LOCATION, MODEL_NAME)
         bot.run(args.target, args.apply, args.limit)
