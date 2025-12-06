@@ -1,0 +1,52 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "no_deletions_for_monthly_rate",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT * FROM differ WHERE StatVar = 'Monthly_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate'",
+                "condition": "DELETED = 0"
+            }
+        },
+        {
+            "rule_id": "100_deletions_for_daily_rate",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT * FROM differ WHERE StatVar = 'Daily_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate'",
+                "condition": "DELETED <= 100"
+            }
+        },
+        {
+            "rule_id": "check_deleted_count",
+            "description": "Checks that the number of deleted points is within the threshold.",
+            "validator": "DELETED_COUNT",
+            "scope": {
+                "data_source": "differ"
+            },
+            "params": {
+                "threshold": 100
+            }
+        },
+        {
+            "rule_id": "check_missing_refs_count",
+            "validator": "MISSING_REFS_COUNT",
+            "scope": {
+                "data_source": "lint"
+            },
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "validator": "LINT_ERROR_COUNT",
+            "scope": {
+                "data_source": "lint"
+            },
+            "params": {
+                "threshold": 0
+            }
+        }
+    ]
+}
