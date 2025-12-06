@@ -14,6 +14,7 @@
 """The Librarian persona."""
 
 import ast
+import json
 from .vertex_client import VertexClient
 
 class TheLibrarian:
@@ -31,25 +32,14 @@ class TheLibrarian:
 You are a senior Google software engineer. Your task is to write a comprehensive Google-style docstring for the following Python function.
 
 **CRITICAL INSTRUCTION:**
-You MUST include 'Args:', 'Returns:', and 'Examples:' sections. Do not skip them.
+1. You MUST include 'Args:', 'Returns:', and 'Examples:' sections.
+2. Return ONLY a valid JSON object with the key "docstring".
+3. The "docstring" value should NOT contain outer triple quotes, but SHOULD contain newlines.
 
-**Required Format:**
-Summary line.
-
-Detailed description of the function logic...
-
-Args:
-    arg_name (type): Description...
-
-Returns:
-    type: Description...
-
-Raises:
-    ErrorType: Description... (if applicable)
-
-Examples:
-    >>> function_call()
-    result
+**Required JSON Structure:**
+{{
+    "docstring": "Summary line.\n\nDetailed description...\n\nArgs:\n    arg1 (type): ...\n"
+}}
 
 **Function Name:** {function_name}
 **Code:**
@@ -60,23 +50,27 @@ Examples:
                 prompt,
                 generation_config={
                     "temperature": 0.2,
-                    "max_output_tokens": 8192
+                    "max_output_tokens": 8192,
+                    "response_mime_type": "application/json"
                 },
             )
-            return response.text.strip()
+            return json.loads(response.text).get("docstring")
         except Exception as e:
             print(f"Error generating docstring for {function_name}: {e}")
             return None
 
     def _format_docstring(self, raw_docstring, indentation):
         """Formats the generated docstring with correct indentation."""
-        docstring = raw_docstring.replace("```python", "").replace("```",
-                                                                   "").strip()
+        # raw_docstring comes from JSON, so it's clean text (no markdown)
+        docstring = raw_docstring.strip()
+        
+        # Ensure it is wrapped in triple quotes
         if not docstring.startswith('"""'):
             docstring = '"""' + docstring
         if not docstring.endswith('"""'):
             docstring = docstring + '"""'
 
+        # Apply indentation
         docstring_lines = docstring.splitlines()
         indented_docstring = [indentation + line for line in docstring_lines]
         return "\n".join(indented_docstring)

@@ -13,6 +13,7 @@
 # limitations under the License.
 """Code cleaners (The Import Cleaner, The Dead Code Remover)."""
 
+import json
 from .vertex_client import VertexClient
 
 class TheImportCleaner:
@@ -31,8 +32,12 @@ You are a senior Python engineer. Your task is to remove UNUSED imports from the
 1. Remove only import statements that are not used in the code.
 2. Do NOT change any other logic, comments, or docstrings.
 3. Do NOT remove dead code (that is a separate task).
-4. Return the FULL code with imports cleaned.
-5. Do not wrap output in markdown.
+4. Return a JSON object with a single key "code" containing the FULL modified source code.
+
+**Required JSON Structure:**
+{{
+    "code": "import os\n\n..."
+}}
 
 **Code:**
 {source}
@@ -40,9 +45,13 @@ You are a senior Python engineer. Your task is to remove UNUSED imports from the
         try:
             response = self.client.model.generate_content(
                 prompt,
-                generation_config={"temperature": 0.1, "max_output_tokens": 8192},
+                generation_config={
+                    "temperature": 0.1, 
+                    "max_output_tokens": 8192,
+                    "response_mime_type": "application/json"
+                },
             )
-            return response.text.strip().replace("```python", "").replace("```", "")
+            return json.loads(response.text).get("code")
         except Exception as e:
             print(f"Error cleaning imports: {e}")
             return None
@@ -63,8 +72,12 @@ You are a senior Python engineer. Your task is to remove UNREACHABLE/DEAD code f
 1. Remove code that can never be executed (e.g., statements after a return/raise in the same block).
 2. Do NOT remove unused imports (that is a separate task).
 3. Do NOT change logic that is reachable.
-4. Return the FULL cleaned code.
-5. Do not wrap output in markdown.
+4. Return a JSON object with a single key "code" containing the FULL modified source code.
+
+**Required JSON Structure:**
+{{
+    "code": "def func():\n    return 1\n"
+}}
 
 **Code:**
 {source}
@@ -72,9 +85,13 @@ You are a senior Python engineer. Your task is to remove UNREACHABLE/DEAD code f
         try:
             response = self.client.model.generate_content(
                 prompt,
-                generation_config={"temperature": 0.1, "max_output_tokens": 8192},
+                generation_config={
+                    "temperature": 0.1, 
+                    "max_output_tokens": 8192,
+                    "response_mime_type": "application/json"
+                },
             )
-            return response.text.strip().replace("```python", "").replace("```", "")
+            return json.loads(response.text).get("code")
         except Exception as e:
             print(f"Error removing dead code: {e}")
             return None

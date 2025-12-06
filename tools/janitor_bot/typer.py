@@ -13,6 +13,7 @@
 # limitations under the License.
 """The Typer persona."""
 
+import json
 from .vertex_client import VertexClient
 
 class TheTyper:
@@ -33,8 +34,12 @@ You are a senior Python engineer. Your task is to add PEP 484 type hints to the 
 3. If specific types are ambiguous, use `Any` or `Optional` as appropriate.
 4. Ensure necessary imports (e.g., `from typing import List, Dict, Any, Optional`) are added at the top if missing.
 5. Do NOT change any other logic, comments, or docstrings.
-6. Return the FULL code with type hints.
-7. Do not wrap output in markdown.
+6. Return a JSON object with a single key "code" containing the FULL modified source code.
+
+**Required JSON Structure:**
+{{
+    "code": "import typing\n\ndef func(a: int) -> int:\n..."
+}}
 
 **Code:**
 {source}
@@ -42,9 +47,13 @@ You are a senior Python engineer. Your task is to add PEP 484 type hints to the 
         try:
             response = self.client.model.generate_content(
                 prompt,
-                generation_config={"temperature": 0.1, "max_output_tokens": 8192},
+                generation_config={
+                    "temperature": 0.1, 
+                    "max_output_tokens": 8192,
+                    "response_mime_type": "application/json"
+                },
             )
-            return response.text.strip().replace("```python", "").replace("```", "")
+            return json.loads(response.text).get("code")
         except Exception as e:
             print(f"Error adding type hints: {e}")
             return None

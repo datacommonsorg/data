@@ -107,11 +107,6 @@ class BotRunner:
             tofile="Modified",
             lineterm=""
         )
-        # Print first few lines of diff
-        count = 0
+        # Print full diff
         for line in diff:
-            if count > 10:
-                print("    ...")
-                break
             print(f"    {line}")
-            count += 1
