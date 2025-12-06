@@ -13,7 +13,6 @@
 # limitations under the License.
 """The Typer persona."""
 
-import os
 from .vertex_client import VertexClient
 
 class TheTyper:
@@ -22,8 +21,9 @@ class TheTyper:
     def __init__(self, project_id, location, model_name):
         self.client = VertexClient(project_id, location, model_name)
 
-    def add_type_hints(self, source_code):
+    def transform(self, source, file_path="unknown", limit=None):
         """Generates code with type hints added."""
+        # limit is currently ignored for Typer (full file rewrite)
         prompt = f"""
 You are a senior Python engineer. Your task is to add PEP 484 type hints to the following Python code.
 
@@ -37,7 +37,7 @@ You are a senior Python engineer. Your task is to add PEP 484 type hints to the 
 7. Do not wrap output in markdown.
 
 **Code:**
-{source_code}
+{source}
 """
         try:
             response = self.client.model.generate_content(
@@ -48,30 +48,3 @@ You are a senior Python engineer. Your task is to add PEP 484 type hints to the 
         except Exception as e:
             print(f"Error adding type hints: {e}")
             return None
-
-    def run(self, target_path, apply_changes=False, limit=None):
-        """Runs the typer on a file or directory."""
-        if os.path.isfile(target_path):
-            self._process_file(target_path, apply_changes)
-        else:
-            for root, _, files in os.walk(target_path):
-                for file in files:
-                    if file.endswith(".py"):
-                        self._process_file(os.path.join(root, file), apply_changes)
-
-    def _process_file(self, file_path, apply_changes):
-        print(f"Scanning {file_path} for missing type hints...")
-        with open(file_path, "r", encoding="utf-8") as f:
-            source = f.read()
-        
-        typed_code = self.add_type_hints(source)
-        if typed_code and typed_code.strip() != source.strip():
-            if apply_changes:
-                with open(file_path, "w", encoding="utf-8") as f:
-                    f.write(typed_code)
-                print(f"  Added type hints to {file_path}")
-            else:
-                print("  [Dry Run] Type hints added (preview):")
-                print("\n".join(typed_code.splitlines()[:10]))
-        else:
-            print("  No changes made (types might already be present or error occurred).")

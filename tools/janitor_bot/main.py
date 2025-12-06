@@ -17,6 +17,7 @@ import argparse
 from .librarian import TheLibrarian
 from .cleaners import TheImportCleaner, TheDeadCodeRemover
 from .typer import TheTyper
+from .runner import BotRunner
 
 # Configuration
 PROJECT_ID = "stuniki-runtimes-dev"
@@ -42,6 +43,12 @@ if __name__ == "__main__":
         "--apply", action="store_true", help="Apply changes to files"
     )
     parser.add_argument(
+        "--verify", 
+        action=argparse.BooleanOptionalAction, 
+        default=True, 
+        help="Verify syntax before applying (default: True)"
+    )
+    parser.add_argument(
         "--project", type=str, default=PROJECT_ID, help="GCP Project ID"
     )
     parser.add_argument(
@@ -50,15 +57,18 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    # Initialize Persona
     if args.mode == "librarian":
-        bot = TheLibrarian(args.project, LOCATION, MODEL_NAME)
-        bot.run(args.target, args.apply, args.limit)
+        persona = TheLibrarian(args.project, LOCATION, MODEL_NAME)
     elif args.mode == "import_cleaner":
-        bot = TheImportCleaner(args.project, LOCATION, MODEL_NAME)
-        bot.run(args.target, args.apply, args.limit)
+        persona = TheImportCleaner(args.project, LOCATION, MODEL_NAME)
     elif args.mode == "dead_code_remover":
-        bot = TheDeadCodeRemover(args.project, LOCATION, MODEL_NAME)
-        bot.run(args.target, args.apply, args.limit)
+        persona = TheDeadCodeRemover(args.project, LOCATION, MODEL_NAME)
     elif args.mode == "typer":
-        bot = TheTyper(args.project, LOCATION, MODEL_NAME)
-        bot.run(args.target, args.apply, args.limit)
+        persona = TheTyper(args.project, LOCATION, MODEL_NAME)
+
+    # Initialize Runner (The Safety Net)
+    runner = BotRunner(apply_changes=args.apply, verify=args.verify)
+    
+    # Execute
+    runner.run(persona, args.target, args.limit)

@@ -14,7 +14,6 @@
 """The Librarian persona."""
 
 import ast
-import os
 from .vertex_client import VertexClient
 
 class TheLibrarian:
@@ -82,40 +81,44 @@ Examples:
         indented_docstring = [indentation + line for line in docstring_lines]
         return "\n".join(indented_docstring)
 
-    def process_file(self, file_path, apply_changes=False, limit=None):
-        """Scans a file for missing docstrings and optionally applies fixes."""
-        print(f"Scanning {file_path}...")
-        with open(file_path, "r", encoding="utf-8") as f:
-            source = f.read()
+    def transform(self, source, file_path="unknown", limit=None):
+        """Transforms source code by adding docstrings.
 
+        Args:
+            source (str): Original source code.
+            file_path (str): File path for logging.
+            limit (int): Max functions to process.
+
+        Returns:
+            str: Modified source code, or None if no changes.
+        """
         try:
             tree = ast.parse(source)
         except SyntaxError:
             print(f"Skipping {file_path}: SyntaxError")
-            return
+            return None
 
         functions_to_document = []
-
-        # Traverse AST to find functions without docstrings
         for node in ast.walk(tree):
             if isinstance(node, ast.FunctionDef):
                 if not ast.get_docstring(node):
                     functions_to_document.append(node)
 
         if not functions_to_document:
-            return
+            return None
 
         print(
             f"Found {len(functions_to_document)} functions missing "
             f"docstrings in {file_path}"
         )
 
-        # Reverse order to apply changes from bottom to top
+        # Process bottom-up to keep line numbers valid during insertion
         functions_to_document.sort(key=lambda x: x.lineno, reverse=True)
 
         modified_lines = source.splitlines()
-
+        changes_made = False
         count = 0
+
         for node in functions_to_document:
             if limit is not None and count >= limit:
                 break
@@ -123,13 +126,12 @@ Examples:
             try:
                 func_source = ast.get_source_segment(source, node)
             except AttributeError:
-                print("  Skipping: Cannot extract source segment.")
                 continue
 
             if not func_source:
                 continue
 
-            print(f"  generating docstring for '{node.name}'...")
+            print(f"  Generating docstring for '{node.name}'...")
             raw_docstring = self.generate_docstring(func_source, node.name)
 
             if raw_docstring:
@@ -137,27 +139,12 @@ Examples:
                 formatted_docstring = self._format_docstring(
                     raw_docstring, indentation)
 
-                if apply_changes:
-                    insert_line_index = node.body[0].lineno - 1
-                    modified_lines.insert(insert_line_index,
-                                          formatted_docstring)
-                    print(f"  Applied docstring for {node.name}")
-                else:
-                    print(f"  [Dry Run] Generated:\n{formatted_docstring}")
-                
+                # Insert into modified_lines
+                insert_line_index = node.body[0].lineno - 1
+                modified_lines.insert(insert_line_index, formatted_docstring)
+                changes_made = True
                 count += 1
 
-        if apply_changes and count > 0:
-            with open(file_path, "w", encoding="utf-8") as f:
-                f.write("\n".join(modified_lines))
-            print(f"Saved changes to {file_path}")
-
-    def run(self, target_path, apply_changes=False, limit=None):
-        """Runs the docstring generation process on a file or directory."""
-        if os.path.isfile(target_path):
-            self.process_file(target_path, apply_changes, limit)
-        else:
-            for root, _, files in os.walk(target_path):
-                for file in files:
-                    if file.endswith(".py"):
-                        self.process_file(os.path.join(root, file), apply_changes, limit)
+        if changes_made:
+            return "\n".join(modified_lines)
+        return None
