@@ -130,7 +130,8 @@ def process_df(df):
     # convert epoch time in milliseconds to datetime
     def epoch_to_datetime(date_val):
         if not pd.isna(date_val):
-            return datetime.datetime.fromtimestamp(date_val / 1000)
+            return datetime.datetime.fromtimestamp(date_val / 1000,
+                                                   datetime.timezone.utc)
         else:
             return None
 
