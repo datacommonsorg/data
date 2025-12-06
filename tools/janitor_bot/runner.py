@@ -82,6 +82,37 @@ class BotRunner:
             return True
         except py_compile.PyCompileError as e:
             print(f"    Syntax Error: {e}")
+            # Try to extract line number from the error string or attributes
+            # PyCompileError often wraps SyntaxError.
+            # Let's print the relevant lines from the file.
+            print("    [DEBUG] Context around error:")
+            try:
+                with open(tmp_path, 'r') as f:
+                    lines = f.readlines()
+                
+                # e.args often contains the inner SyntaxError
+                # Check for lineno in exception details if possible, otherwise print all
+                # For simplicity in this CLI, print the whole file with line numbers if small, 
+                # or just the error message which usually contains the line number.
+                
+                # Parse line number from string like "File '...', line 10"
+                import re
+                match = re.search(r"line (\d+)", str(e))
+                if match:
+                    lineno = int(match.group(1))
+                    start = max(0, lineno - 5)
+                    end = min(len(lines), lineno + 5)
+                    for i in range(start, end):
+                        marker = ">>" if i + 1 == lineno else "  "
+                        print(f"    {marker} {i + 1}: {lines[i].rstrip()}")
+                else:
+                    print("    (Could not parse line number, printing last 20 lines)")
+                    for i, line in enumerate(lines[-20:]):
+                        print(f"    {len(lines)-20+i+1}: {line.rstrip()}")
+
+            except Exception as debug_err:
+                print(f"    Error reading temp file for debug: {debug_err}")
+
             return False
         except Exception as e:
             print(f"    Verification Error: {e}")

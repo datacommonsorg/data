@@ -64,11 +64,20 @@ You are a senior Google software engineer. Your task is to write a comprehensive
         # raw_docstring comes from JSON, so it's clean text (no markdown)
         docstring = raw_docstring.strip()
         
+        # Escape internal triple quotes to prevent syntax errors
+        # Replacing """ with ''' is a safe strategy for Python docstrings
+        docstring = docstring.replace('"""', "'''")
+        
         # Ensure it is wrapped in triple quotes
         if not docstring.startswith('"""'):
             docstring = '"""' + docstring
         if not docstring.endswith('"""'):
-            docstring = docstring + '"""'
+            # Ensure the closing quotes are on a new line if the content ends with a quote
+            # or just for better formatting in general.
+            if docstring.strip().endswith('"'):
+                 docstring = docstring + '\n"""'
+            else:
+                 docstring = docstring + '"""'
 
         # Apply indentation
         docstring_lines = docstring.splitlines()
@@ -133,8 +142,19 @@ You are a senior Google software engineer. Your task is to write a comprehensive
                 formatted_docstring = self._format_docstring(
                     raw_docstring, indentation)
 
+                # Determine insertion point
+                first_stmt = node.body[0]
+                start_lineno = first_stmt.lineno
+                
+                # If the first statement is a function/class with decorators, 
+                # we must insert BEFORE the decorators.
+                if isinstance(first_stmt, (ast.FunctionDef, ast.ClassDef, ast.AsyncFunctionDef)):
+                    if first_stmt.decorator_list:
+                        # Use the line number of the first decorator
+                        start_lineno = first_stmt.decorator_list[0].lineno
+
                 # Insert into modified_lines
-                insert_line_index = node.body[0].lineno - 1
+                insert_line_index = start_lineno - 1
                 modified_lines.insert(insert_line_index, formatted_docstring)
                 changes_made = True
                 count += 1
