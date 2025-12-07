@@ -1,0 +1,8 @@
+Node: E:IAR->E0
+observationAbout: C:IAR->observationAbout
+observationDate: C:IAR->observationDate
+value: C:IAR->value
+variableMeasured: C:IAR->variableMeasured
+unit: C:IAR->unit
+scalingFactor: C:IAR->scalingFactor
+typeOf: dcs:StatVarObservation
