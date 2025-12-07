@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#        http://www.apache.org/licenses/LICENSE-2.0
+#         http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -207,35 +207,38 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
     try:
         response = session.post(url, headers=headers, data=json.dumps(data))
 
-        # CONDITION 1: Check response size
-        if len(response.content) < 20:
-            logging.warning(
-                f"Skipping {table_id}: Response content size ({len(response.content)} bytes) is less than 20 bytes. No data found in the source.\n"
-            )
-            return
-
+        # Check status code first
         if response.status_code == 200:
-            # CONDITION 2: Check if response_data is empty
-            try:
-                response_data = response.json()
-            except json.JSONDecodeError:
-                logging.warning(
-                    f"Skipping {table_id}: Failed to decode JSON response. No data found in the source.\n"
-                )
-                return
+            response_data = response.json()
 
             if not response_data:
-                # Checks if the dictionary is empty
-                logging.warning(
-                    f"Skipping {table_id}: Parsed JSON response is empty. No data found in the source.\n"
-                )
-                return
+                # Checks if the dictionary is empty[from the source we are getting data in dictionary fomate]
+                error_msg = f"FATAL ERROR for {table_id}: No data found in the source. Aborting script."
+                logging.fatal(error_msg)
+                raise RuntimeError(error_msg)
 
             logging.info("Success! Response data received.")
 
             if "DataList" in response_data and isinstance(
                     response_data["DataList"], list):
                 data_list = response_data["DataList"]
+
+                # Check for empty DataList and log the finding before aborting
+                if not data_list:
+                    logging.info(
+                        f"Found 'DataList' structure in source, but it is empty: {table_id}."
+                    )
+                    error_msg = f"FATAL ERROR for {table_id}: 'DataList' is present but contains zero records. No data found from the Source"
+                    logging.fatal(error_msg)
+                    raise RuntimeError(error_msg)
+                if len(data_list) < 40:  # Updated threshold to 40 records
+                    logging.info(
+                        f"Found 'DataList' structure in source, but it is empty or too small: {table_id}. DataList length: {len(data_list)}"
+                    )
+                    error_msg = f"FATAL ERROR for {table_id}: 'DataList' contains less than 40 records. Data is not sufficient."
+                    logging.fatal(error_msg)
+                    raise RuntimeError(error_msg)
+
                 pivoted_data = {}
                 all_periods = set()
 
@@ -275,9 +278,9 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
                     logging.info(
                         f"Successfully created CSV file: {csv_filepath}\n")
                 except IOError as e:
-                    logging.fatal(
-                        f"Failed to write CSV file {csv_filepath}: {e}")
-                    sys.exit(1)
+                    error_msg = f"Failed to write CSV file {csv_filepath}: {e}"
+                    logging.fatal(error_msg)
+                    raise RuntimeError(error_msg)
             else:
                 logging.warning(
                     f"Error for {table_id}: 'DataList' not found in the API response.\n"
@@ -288,10 +291,9 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
             )
 
     except requests.exceptions.RequestException as e:
-        logging.fatal(
-            f"FATAL ERROR for {table_id}: An unrecoverable error occurred during the API request: {e}\n"
-        )
-        sys.exit(1)
+        error_msg = f"FATAL ERROR for {table_id}: An unrecoverable error occurred during the API request: {e}"
+        logging.fatal(error_msg)
+        raise RuntimeError(error_msg)
 
 
 def main(_):
