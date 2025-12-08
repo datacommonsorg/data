@@ -73,11 +73,9 @@ class PipelineCallback:
 
     def before_step(self, step: Step) -> None:
         """Called immediately before `step.run()`; raising an error skips execution."""
-        del step
 
     def after_step(self, step: Step, *, error: Exception | None = None) -> None:
         """Runs once per step after `step.run()` succeeds or raises."""
-        del step, error
 
 
 class CompositeCallback(PipelineCallback):
