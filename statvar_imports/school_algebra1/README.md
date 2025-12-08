@@ -43,9 +43,7 @@ Once the data is downloaded run the `stat_var_processor.py` script to process th
 
 The script is located in the `data/tools/statvar_importer/` directory. Run the following command
 ```bash
-    python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.xlsx --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_2009_14,
-    python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*algebra_i.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_2018_22,
-    python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*school_data.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_2016
+    python3 ../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.xlsx,input_files/*algebra_i.csv,input_files/*school_data.csv --pv_map=Algebra1_pvmap.csv --config_file=Algebra1_metadata.csv --output_path=output/algebra1_output_ --log_level=-2 --log_every_n=1000
 ```
 
 ### Autorefresh type
