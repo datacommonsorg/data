@@ -20,7 +20,12 @@
           "cleaned_csv": "output/retention_output.csv"
         }
       ],
-      "cron_schedule": "30 07 27 * *"
+      "cron_schedule": "30 07 27 * *",
+      "resource_limits": {
+        "cpu": 16,
+        "memory": 128,
+        "disk": 500
+      }
     }
   ]
 }
