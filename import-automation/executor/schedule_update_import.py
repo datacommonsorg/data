@@ -41,11 +41,9 @@ flags.DEFINE_string('mode', '', 'Options: update or schedule.')
 flags.DEFINE_string('gcp_project_id', '',
                     'GCP Project where import executor runs.')
 flags.DEFINE_string('config_project_id', 'datcom-import-automation-prod',
-                    'GCS Project for the config secrets.')
-flags.DEFINE_string('import_config_secret', 'import_config',
-                    'GCP secret for the import config.')
+                    'GCP Project for the config secrets.')
 flags.DEFINE_string('scheduler_config_secret', 'scheduler_config',
-                    'GCS secret for the Scheduler config.')
+                    'GCP secret for the Scheduler config.')
 
 flags.DEFINE_string(
     'absolute_import_path', '',
@@ -85,20 +83,7 @@ def _get_import_spec(repo_dir: str, absolute_import_path: str,
     )
 
 
-def _get_override_config(override_fp: str, manifest_fp: str) -> dict:
-    # Read configs from the manifest file.
-    with open(manifest_fp, "r") as f:
-        d1 = json.load(f)
-    # Read configs from the local file.
-    with open(override_fp, "r") as f:
-        d2 = json.load(f)
-    # Values from import manifest will overwrite the values from the local override config.
-    override_config = {**d2.get("configs", {}), **d1.get("config_override", {})}
-    return override_config
-
-
-def _get_cloud_config(secret_name: str) -> Dict:
-    project_id = _FLAGS.config_project_id
+def _get_scheduler_config(project_id: str, secret_name: str) -> Dict:
     version_id = 'latest'
     client = secretmanager.SecretManagerServiceClient()
     secret_id = f"projects/{project_id}/secrets/{secret_name}/versions/{version_id}"
@@ -258,28 +243,10 @@ def main(_):
     logging.info(f'GCP Project ID: {_FLAGS.gcp_project_id}')
     logging.info(f'Import: {absolute_import_path}')
     logging.info(f'Repo root directory: {repo_dir}')
-
-    # Loading configs from GCS and then using _CONFIG_OVERRIDE_FILE to
-    # override any fields provided in the file.
-    logging.info('Reading configs from GCS.')
-    config_dict = _get_cloud_config(_FLAGS.import_config_secret)
-    cfg = configs.ExecutorConfig(**config_dict['configs'])
-
-    # Update the GCP project id to use with the configs.
-    cfg.gcp_project_id = _FLAGS.gcp_project_id
-
-    manifest_fp = os.path.join(repo_dir,
-                               absolute_import_path.split(":")[0],
-                               cfg.manifest_filename)
-    logging.info(
-        f'Updating any config fields from local file: {_FLAGS.config_override} \
-        and manifest_file {manifest_fp}.')
-    override_config = _get_override_config(_FLAGS.config_override, manifest_fp)
-    cfg = dataclasses.replace(cfg, **override_config)
-
-    logging.info('Reading Cloud scheduler configs from GCS.')
-    scheduler_config_dict = _get_cloud_config(_FLAGS.scheduler_config_secret)
-
+    cfg = configs.ExecutorConfig()
+    logging.info(f'Reading Cloud scheduler configs from secret manager.')
+    scheduler_config_dict = _get_scheduler_config(
+        _FLAGS.config_project_id, _FLAGS.scheduler_config_secret)
     if mode == 'update':
         logging.info("*************************************************")
         logging.info("***** Beginning Update. Can take a while. *******")
