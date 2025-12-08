@@ -90,7 +90,8 @@ def main(_):
         range(2020, _CURRENT_YEAR + 1, 1))
 
     for year in years_to_try:
-        year_range = f"{year}-{str(year+1)[-2:]}"
+        end_year = year + 1
+        year_range = f"{year}-{str(end_year)[-2:]}"
         url = _BASE_URL.format(year_range=year_range)
 
         # Download to a temporary sub-folder
@@ -152,7 +153,6 @@ def main(_):
                     continue
 
                 # Add the year column (using the end year of the range)
-                end_year = int(f"20{year_range.split('-')[1]}")
                 preprocess_file(new_filepath, end_year)
 
         # Clean up the temporary directory for the year
