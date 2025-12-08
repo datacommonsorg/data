@@ -132,7 +132,7 @@ def dc_api_wrapper(
             except (DCConnectionError, requests.exceptions.Timeout,
                     requests.exceptions.ChunkedEncodingError) as e:
                 # Retry network errors
-                if should_retry_status_code(None, attempt, retries):
+                if _should_retry_status_code(None, attempt, retries):
                     logging.debug(
                         f'Got exception {e}, retrying API {function} after'
                         f' {retry_secs}...')
@@ -146,7 +146,7 @@ def dc_api_wrapper(
                 # Retry 5xx and 429, but not other 4xx
                 status_code = getattr(e, 'code', None) or getattr(
                     e, 'status_code', None)
-                if should_retry_status_code(status_code, attempt, retries):
+                if _should_retry_status_code(status_code, attempt, retries):
                     logging.debug(
                         f'Got exception {e}, retrying API {function} after'
                         f' {retry_secs}...')
@@ -158,8 +158,8 @@ def dc_api_wrapper(
     return None
 
 
-def should_retry_status_code(status_code: int, attempt: int,
-                             max_retries: int) -> bool:
+def _should_retry_status_code(status_code: int, attempt: int,
+                              max_retries: int) -> bool:
     """Returns True if the request should be retried.
     Request can be retried for HTTP status codes like 429 or 5xx
     if the number of attempts is less than max_retries."""
