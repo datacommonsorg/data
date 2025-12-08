@@ -96,6 +96,8 @@ def dc_api_wrapper(
         logging.debug(f'Using requests_cache for DC API {function}')
     else:
         cache_context = requests_cache.disabled()
+        logging.debug(f'Using requests_cache for DC API {function}')
+    with cache_context:
         for attempt in range(retries):
             try:
                 logging.debug(
@@ -103,19 +105,22 @@ def dc_api_wrapper(
                     f' retries={retries}')
 
                 response = None
-                # All calls serialize here to prevent races while updating the
-                # global Data Commons API root.
-                with _API_ROOT_LOCK:
-                    original_api_root = dc.utils._API_ROOT
-                    if api_root:
-                        dc.utils._API_ROOT = api_root
-                        logging.debug(
-                            f'Setting DC API root to {api_root} for {function}')
-
-                    try:
-                        response = function(**args)
-                    finally:
-                        dc.utils._API_ROOT = original_api_root
+                if api_root:
+                    # All calls serialize here to prevent races while updating the
+                    # global Data Commons API root.
+                    with _API_ROOT_LOCK:
+                        original_api_root = dc.utils._API_ROOT
+                        if api_root:
+                            dc.utils._API_ROOT = api_root
+                            logging.debug(
+                                f'Setting DC API root to {api_root} for {function}'
+                            )
+                        try:
+                            response = function(**args)
+                        finally:
+                            dc.utils._API_ROOT = original_api_root
+                else:
+                    response = function(**args)
 
                 logging.debug(
                     f'Got API response {response} for {function}, {args}')
@@ -124,22 +129,50 @@ def dc_api_wrapper(
                 # Exception in case of missing dcid. Don't retry.
                 logging.error(f'Got exception for api: {function}, {e}')
                 return None
-            except (urllib.error.URLError, urllib.error.HTTPError, ValueError,
-                    DCConnectionError, DCStatusError, APIError,
-                    requests.exceptions.Timeout,
+            except (DCConnectionError, requests.exceptions.Timeout,
                     requests.exceptions.ChunkedEncodingError) as e:
-                # Exception when server is overloaded, retry after a delay
-                if attempt >= retries:
-                    logging.error(
-                        f'Got exception for api: {function}, {e}, no more retries'
-                    )
-                    raise e
-                else:
+                # Retry network errors
+                if should_retry_status_code(None, attempt, retries):
                     logging.debug(
                         f'Got exception {e}, retrying API {function} after'
                         f' {retry_secs}...')
                     time.sleep(retry_secs)
+                else:
+                    logging.error(
+                        f'Got exception for api: {function}, {e}, no more retries'
+                    )
+                    raise e
+            except (urllib.error.HTTPError, DCStatusError, APIError) as e:
+                # Retry 5xx and 429, but not other 4xx
+                status_code = getattr(e, 'code', None) or getattr(
+                    e, 'status_code', None)
+                if should_retry_status_code(status_code, attempt, retries):
+                    logging.debug(
+                        f'Got exception {e}, retrying API {function} after'
+                        f' {retry_secs}...')
+                    time.sleep(retry_secs)
+                else:
+                    # Don't retry other errors (e.g. 400, 404, 401)
+                    logging.error(f'Got exception for api: {function}, {e}')
+                    raise e
     return None
+
+
+def should_retry_status_code(status_code: int, attempt: int,
+                             max_retries: int) -> bool:
+    """Returns True if the request should be retried.
+    Request can be retried for HTTP status codes like 429 or 5xx
+    if the number of attempts is less than max_retries."""
+    if status_code:
+        if (status_code != 429 and status_code < 500):
+            # Do no retry for error codes like 401
+            logging.error(f'Got status: {status_code}, not retrying.')
+            return False
+    if attempt >= max_retries:
+        logging.error(
+            f'Got status: {status_code} after {attempt} retries, not retrying.')
+        return False
+    return True
 
 
 def dc_api_batched_wrapper(
@@ -178,6 +211,10 @@ def dc_api_batched_wrapper(
     api_result = {}
     index = 0
     num_dcids = len(dcids)
+    dc_api_root = config.get('dc_api_root', None)
+    if config.get('dc_api_version', 'V2') == 'V2':
+        # V2 API assumes api root is set in the function's client
+        dc_api_root = None
     api_batch_size = config.get('dc_api_batch_size', dc.utils._MAX_LIMIT)
     logging.debug(
         f'Calling DC API {function} on {len(dcids)} dcids in batches of'
@@ -195,18 +232,18 @@ def dc_api_batched_wrapper(
             config.get('dc_api_retries', 3),
             config.get('dc_api_retry_secs', 5),
             config.get('dc_api_use_cache', False),
-            config.get('dc_api_root', None),
+            dc_api_root,
         )
         if batch_result:
-            _dc_api_merge_results(api_result, batch_result)
+            dc_api_merge_results(api_result, batch_result)
             logging.debug(f'Got DC API result for {function}: {batch_result}')
     logging.debug(
         f'Returning response {api_result} for {function}, {dcids}, {args}')
     return api_result
 
 
-def _dc_api_merge_results(results: dict, new_result: dict) -> dict:
-    """Returns the merged dictionary from the results and new_result."""
+def dc_api_merge_results(results: dict, new_result: dict) -> dict:
+    """Returns the merged dictionary with new_result added into results."""
     if results is None:
         results = {}
     if not new_result:
@@ -217,13 +254,23 @@ def _dc_api_merge_results(results: dict, new_result: dict) -> dict:
         if 'data' in new_result:
             new_result = new_result['data']
     # Update new_result into results if keys are different.
-    if len(results) != len(new_result) or results.keys() != new_result.keys():
-        results.update(new_result)
-        return results
-    else:
-        # Both have the same nested dicts. Merged the nested dicts.
-        for key in new_result.keys():
-            results[key] = _dc_api_merge_results(results[key], new_result[key])
+    for key, value in new_result.items():
+        old_value = results.get(key)
+        if not old_value:
+            # New key, add it.
+            results[key] = value
+        else:
+            if isinstance(old_value, dict) and isinstance(value, dict):
+                # Merge the nested dicts.
+                dc_api_merge_results(old_value, value)
+            elif isinstance(old_value, list) and isinstance(value, list):
+                # Append new list
+                old_value.extend(value)
+            else:
+                # Replace with new value
+                old_value = value
+            results[key] = old_value
+
     return results
 
 
@@ -302,9 +349,7 @@ def dc_api_is_defined_dcid(dcids: list, config: dict = {}) -> dict:
     return response
 
 
-def dc_api_get_node_property(dcids: list,
-                             prop: str,
-                             config: dict = {}) -> dict:
+def dc_api_get_node_property(dcids: list, prop: str, config: dict = {}) -> dict:
     """Returns a dictionary keyed by dcid with { prop:value } for each dcid.
 
      Uses the get_property_values() DC API to lookup the property for each dcid.
@@ -363,8 +408,7 @@ def dc_api_get_node_property(dcids: list,
     return response
 
 
-def dc_api_get_node_property_values(dcids: list,
-                                    config: dict = {}) -> dict:
+def dc_api_get_node_property_values(dcids: list, config: dict = {}) -> dict:
     """Returns all the property values for a set of dcids from the DC API.
 
   Args:
@@ -411,8 +455,7 @@ def dc_api_get_node_property_values(dcids: list,
     return response
 
 
-def dc_api_v1_get_node_property_values(dcids: list,
-                                       config: dict = {}) -> dict:
+def dc_api_v1_get_node_property_values(dcids: list, config: dict = {}) -> dict:
     """Returns all the property values for a set of dcids from the DC V1 API.
 
   Args:
@@ -426,9 +469,7 @@ def dc_api_v1_get_node_property_values(dcids: list,
   """
     predefined_nodes = OrderedDict()
     api_function = dc.get_triples
-    api_triples = dc_api_batched_wrapper(api_function,
-                                         dcids, {},
-                                         config=config)
+    api_triples = dc_api_batched_wrapper(api_function, dcids, {}, config=config)
     if api_triples:
         for dcid, triples in api_triples.items():
             if (_strip_namespace(dcid) not in dcids and
