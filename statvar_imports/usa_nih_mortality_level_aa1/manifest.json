@@ -1,10 +1,8 @@
 {
     "import_specifications": [
         {
-            "import_name": "USA_NIH_Mortality_Level_AA1"
-",
-            "curator_emails": [
-                "support@datacommons.org"
+            "import_name": "USA_NIH_Mortality_Level_AA1",
+            "curator_emails": [ "support@datacommons.org"
             ],
             "provenance_url": "https://www.nimhd.nih.gov/",
             "provenance_description": "Data on mortality rates and trends, focusing on health disparities based on factors such as age, sex, race/ethnicity, and geographic location at state level",
@@ -22,7 +20,7 @@
             "source_files": [
                 "input_files/*.csv"
             ],
-            "cron_schedule": "0 5 3,17 * *",
+            "cron_schedule": "0 5 3,17 * *"
         }
     ]
 }
