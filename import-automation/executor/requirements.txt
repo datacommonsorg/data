@@ -28,6 +28,7 @@ google-cloud-spanner
 google-cloud-storage
 google-cloud-logging
 google-cloud-scheduler
+google-cloud-secret-manager
 gspread
 gunicorn
 legacy-cgi
