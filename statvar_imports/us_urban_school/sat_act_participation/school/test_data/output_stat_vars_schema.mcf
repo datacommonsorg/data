@@ -9,22 +9,27 @@ typeOf: dcid:AcademicAssessmentTypeEnum
 name: "Scholastic Assessment Test__ American College Testing"
 isProvisional: dcs:True
 
-Node: dcid:juvenileJusticeFacilityStatus
+Node: dcid:schoolType
 typeOf: dcs:Property
-name: "juvenileJusticeFacilityStatus"
+name: "schoolType"
+rangeIncludes: dcid:Class,dcid:SchoolTypeEnum,dcid:USC_TypeOfSchoolEnum
+
+Node: dcid:educationalInstitutionType
+typeOf: dcs:Property
+name: "educationalInstitutionType"
 domainIncludes: dcid:Student
-rangeIncludes: dcid:JuvenileJusticeFacilityStatusEnum
+rangeIncludes: dcid:EducationalInstitutionTypeEnum
 isProvisional: dcs:True
 
-Node: dcid:JuvenileJusticeFacilityStatusEnum
+Node: dcid:EducationalInstitutionTypeEnum
 typeOf: schema:Class
 subClassOf: dcs:Enumeration
-name: "JuvenileJusticeFacilityStatusEnum"
+name: "EducationalInstitutionTypeEnum"
 isProvisional: dcs:True
 
-Node: dcid:WithJuvenileJusticeFacility
-typeOf: dcid:JuvenileJusticeFacilityStatusEnum
-name: "With Juvenile Justice Facility"
+Node: dcid:JuvenileJusticeFacility
+typeOf: dcid:EducationalInstitutionTypeEnum
+name: "Juvenile Justice Facility"
 isProvisional: dcs:True
 
 Node: dcid:LimitedEnglishProficient
@@ -37,8 +42,8 @@ typeOf: dcs:Property
 name: "disabilityStatus"
 domainIncludes: dcid:Student
 
-Node: dcid:NoJuvenileJusticeFacility
-typeOf: dcid:JuvenileJusticeFacilityStatusEnum
-name: "No Juvenile Justice Facility"
+Node: dcid:NotJuvenileJusticeFacility
+typeOf: dcid:EducationalInstitutionTypeEnum
+name: "Not Juvenile Justice Facility"
 isProvisional: dcs:True
 

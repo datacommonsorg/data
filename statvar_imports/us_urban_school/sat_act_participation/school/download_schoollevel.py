@@ -18,6 +18,7 @@ import zipfile
 import io
 import pandas as pd
 import re
+import shutil
 from absl import logging, app, flags
 from pathlib import Path
 from datetime import date
@@ -47,7 +48,8 @@ HARDCODED_CONFIGS = {
     "2017-18": {"final_year": 2018},
     "2015-16": {"final_year": 2016},
     "2013-14": {"final_year": 2014},
-    "2011-12": {"final_year": 2012}
+    "2011-12": {"final_year": 2012},
+    "2009-10": {"final_year": 2010} # Added for local file processing
 }
 
 SCRIPT_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
@@ -69,6 +71,10 @@ def add_year_column(file_path, year):
                 return
         else:
             logging.info(f"Skipping year column addition for unsupported file format: {file_path.suffix}")
+            return
+
+        if df.empty:
+            logging.warning(f"Warning: DataFrame is empty for {file_path.name}. Skipping file.")
             return
 
         # Add YEAR column
@@ -129,7 +135,9 @@ def generate_future_configs(start_year):
 
 @retry(tries=3, delay=5, backoff=2)
 def download_url_with_retry(zip_url):
-    """Handles downloading the ZIP content with retries and status checks."""
+    """
+    Handles downloading the ZIP content with retries and status checks.
+    """
     try:
         head_response = requests.head(zip_url, allow_redirects=True, timeout=10)
         head_response.raise_for_status() 
@@ -142,7 +150,9 @@ def download_url_with_retry(zip_url):
         raise
 
 def get_file_keywords(data_type, config_key):
-    """Retrieves the relevant keywords and constraints for the file extraction."""
+    """
+    Retrieves the relevant keywords and constraints for the file extraction.
+    """
     config = DATA_CONFIGS.get(data_type, {})
     keywords = config.get("keywords", [])
     search_constraints = config.get("search_constraint", {})
@@ -159,6 +169,31 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
     """
     final_year = config_data["final_year"]
     
+    # Special handling for 2009-10 local file
+    if config_key == "2009-10":
+        local_source_path = Path("/usr/local/google/home/chharish/Downloads/2009-10-crdc-data (1)/2009-12 Public Use File/CRDC -collected data/School/Pt 2-SAT and ACT Test Participation/CRDC-data_SCH_Pt 2-SAT and ACT Test Part_pt 2-students who took the sat or act anytime during the 2009-10 SY.xlsx")
+        destination_name = f"{final_year}_SAT_ACT_Participation.xlsx"
+        destination_path = output_dir / destination_name
+        
+        logging.info(f"--- Processing local file for 2009-10 data (Final Year: {final_year}) ---")
+        if destination_path.exists():
+            logging.info(f"'{destination_path.name}' already exists. Skipping copy for 2009-10.")
+            return
+
+        if not local_source_path.exists():
+            logging.error(f"Error: Local source file not found at {local_source_path}. Cannot process 2009-10 data.")
+            return
+
+        try:
+            shutil.copy2(local_source_path, destination_path)
+            logging.info(f"Successfully copied {local_source_path.name} to {destination_path.name}")
+            add_year_column(destination_path, final_year)
+            logging.info(f"Successfully processed local 2009-10 data: {destination_path.name}")
+        except Exception as e:
+            raise RuntimeError(f"Failed to copy or process local 2009-10 file: {e}")
+        return # Skip the rest of the function for 2009-10
+
+
     keywords, search_constraint, output_name_fragment = get_file_keywords(data_type, config_key)
 
     url_fragment = f"{config_key}-crdc-data"
@@ -184,8 +219,34 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
     try:
         zip_content = io.BytesIO(response.content)
         with zipfile.ZipFile(zip_content) as zip_ref:
+            if config_key == "2015-16":
+                special_output_dir = SCRIPT_DIR / 'input_files_school'
+                special_output_dir.mkdir(parents=True, exist_ok=True)
+                special_output_name = "2016_SAT_ACT_Participation.csv"
+                special_output_path = special_output_dir / special_output_name
+
+                if special_output_path.exists():
+                    logging.info(f"'{special_output_path.name}' already exists. Skipping download for 2015-16.")
+                    return
+
+                logging.info("--- Applying special handling for 2015-16 data ---")
+                main_csv_path = 'Data Files and Layouts/CRDC 2015-16 School Data.csv'
+                if main_csv_path not in zip_ref.namelist():
+                    logging.warning(f"Could not find '{main_csv_path}' in archive {config_key}. Skipping.")
+                    return
+
+                logging.info(f"Extracting full file: {main_csv_path} to {special_output_path}")
+                with zip_ref.open(main_csv_path) as source_file:
+                    target_content = source_file.read()
+                
+                with open(special_output_path, 'wb') as f:
+                    f.write(target_content)
+
+                add_year_column(special_output_path, final_year)
+                logging.info(f"Successfully extracted and processed: {special_output_path.name}")
+                return
+
             target_member = None
-            
             for name in zip_ref.namelist():
                 normalized_name = name.replace('\\', '/').lower()
                 
@@ -234,7 +295,9 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
 
 
 def main(_):
-    """Main function to run the download process for the specified data type."""
+    """
+    Main function to run the download process for the specified data type.
+    """
     data_type = FLAGS.data_type.lower()
 
     OUTPUT_DIR = SCRIPT_DIR / "input_files_school"
