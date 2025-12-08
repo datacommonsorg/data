@@ -303,7 +303,6 @@ def get_datacommons_client(config: dict = None) -> DataCommonsClient:
                 # Set the URL to v2 prod endpoint.
                 url = urllib.parse.urljoin(dc_instance, 'v2')
                 dc_instance = None
-    logging.info(f'DEL: using {dc_instance}, {url}')
     return DataCommonsClient(api_key=api_key, dc_instance=dc_instance, url=url)
 
 
