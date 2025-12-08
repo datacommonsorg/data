@@ -517,6 +517,7 @@ class ImportExecutor:
             previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
             summary_stats = os.path.join(genmcf_output_path,
                                          'summary_report.csv')
+            report_json = os.path.join(genmcf_output_path, 'report.json')
             validation_output_file = os.path.join(validation_output_path,
                                                   'validation_output.csv')
             differ_output = os.path.join(validation_output_path,
@@ -567,6 +568,7 @@ class ImportExecutor:
             try:
                 validation = ValidationRunner(config_file_path,
                                               differ_output_file, summary_stats,
+                                              report_json,
                                               validation_output_file)
                 overall_status, _ = validation.run_validations()
                 if validation_status:
@@ -682,20 +684,19 @@ class ImportExecutor:
         with database.batch() as batch:
             columns = [
                 "ImportName", "State", "JobId", "ExecutionTime",
-                "StatusUpdateTimestamp", "NextRefreshDate"
+                "StatusUpdateTimestamp", "NextRefreshDate", "LatestVersion"
             ]
             values = [
                 import_summary.import_name, import_summary.status,
                 os.getenv('BATCH_JOB_NAME',
                           os.getenv('BATCH_JOB_UID', 'local-run')),
                 import_summary.execution_time, spanner.COMMIT_TIMESTAMP,
-                import_summary.next_refresh_date
+                import_summary.next_refresh_date, import_summary.latest_version
             ]
-            # Update LatestVersion path only if import completed successfully.
+            # Update import timestamp only if import completed successfully.
             if import_summary.status == 'READY':
-                columns.extend(["LatestVersion", "DataImportTimestamp"])
-                values.extend(
-                    [import_summary.latest_version, spanner.COMMIT_TIMESTAMP])
+                columns.extend(["DataImportTimestamp"])
+                values.extend([spanner.COMMIT_TIMESTAMP])
 
             batch.insert_or_update(table="ImportStatus",
                                    columns=tuple(columns),
