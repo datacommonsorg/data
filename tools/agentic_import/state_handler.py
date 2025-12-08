@@ -32,7 +32,7 @@ from dataclasses_json import dataclass_json
 @dataclass_json
 @dataclass
 class StepState:
-    version: int
+    version: str
     status: str
     started_at: str
     ended_at: str

@@ -31,7 +31,7 @@ from pipeline import (  # pylint: disable=import-error
 class _TrackingStep(BaseStep):
 
     def __init__(self, name: str, events: list[str]) -> None:
-        super().__init__(name=name, version=1)
+        super().__init__(name=name, version="1")
         self._events = events
         self.executed = False
 
@@ -42,7 +42,7 @@ class _TrackingStep(BaseStep):
 
 class _FailingStep(BaseStep):
 
-    def __init__(self, *, name: str, version: int) -> None:
+    def __init__(self, *, name: str, version: str) -> None:
         super().__init__(name=name, version=version)
 
     def run(self) -> None:
@@ -132,7 +132,7 @@ class PipelineRunnerTest(unittest.TestCase):
                 self.after_calls.append((name, error_name))
 
         callback = RecordingCallback()
-        pipeline = Pipeline(steps=[_FailingStep(name="fail-step", version=1)])
+        pipeline = Pipeline(steps=[_FailingStep(name="fail-step", version="1")])
 
         with self.assertRaises(ValueError):
             PipelineRunner(RunnerConfig()).run(pipeline, callback)

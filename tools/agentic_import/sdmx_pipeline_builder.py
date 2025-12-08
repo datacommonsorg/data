@@ -142,11 +142,10 @@ class PipelineBuilder:
                 needs_run = True
                 reason = (f"Previous run status was {prev_state.status}; "
                           "rerunning step")
-            elif prev_state.version < step.version:
+            elif prev_state.version != step.version:
                 needs_run = True
-                reason = (
-                    f"Step version increased from {prev_state.version} to "
-                    f"{step.version}; rerunning step")
+                reason = (f"Step version changed from {prev_state.version} to "
+                          f"{step.version}; rerunning step")
             else:
                 needs_run = False
                 reason = ("Previous run succeeded with same version; step is "

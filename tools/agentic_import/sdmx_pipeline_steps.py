@@ -62,7 +62,7 @@ def _run_command(command: Sequence[str], *, verbose: bool) -> None:
 class SdmxStep(Step):
     """Base class for SDMX steps that carries immutable config and version."""
 
-    def __init__(self, *, name: str, version: int,
+    def __init__(self, *, name: str, version: str,
                  config: PipelineConfig) -> None:
         if not name:
             raise ValueError("step requires a name")
@@ -75,7 +75,7 @@ class SdmxStep(Step):
         return self._name
 
     @property
-    def version(self) -> int:
+    def version(self) -> str:
         return self._version
 
     @abc.abstractmethod
@@ -86,7 +86,7 @@ class SdmxStep(Step):
 class DownloadDataStep(SdmxStep):
     """Downloads SDMX data payloads."""
 
-    VERSION = 1
+    VERSION = "1"
 
     @dataclass(frozen=True)
     class _StepContext:
@@ -147,7 +147,7 @@ class DownloadDataStep(SdmxStep):
 class DownloadMetadataStep(SdmxStep):
     """Downloads SDMX metadata payloads."""
 
-    VERSION = 1
+    VERSION = "1"
 
     @dataclass(frozen=True)
     class _StepContext:
@@ -204,7 +204,7 @@ class DownloadMetadataStep(SdmxStep):
 class CreateSampleStep(SdmxStep):
     """Creates a sample dataset from downloaded data."""
 
-    VERSION = 1
+    VERSION = "1"
 
     @dataclass(frozen=True)
     class _StepContext:
@@ -258,7 +258,7 @@ class CreateSampleStep(SdmxStep):
 class CreateSchemaMapStep(SdmxStep):
     """Builds schema mappings for transformed data."""
 
-    VERSION = 1
+    VERSION = "1"
 
     @dataclass(frozen=True)
     class _StepContext:
@@ -323,7 +323,7 @@ class CreateSchemaMapStep(SdmxStep):
 class ProcessFullDataStep(SdmxStep):
     """Processes full SDMX data into DC artifacts."""
 
-    VERSION = 1
+    VERSION = "1"
 
     RUN_OUTPUT_COLUMNS: ClassVar[str] = (
         "observationDate,observationAbout,variableMeasured,value,"
@@ -397,7 +397,7 @@ class ProcessFullDataStep(SdmxStep):
 class CreateDcConfigStep(SdmxStep):
     """Generates Datacommons configuration artifacts."""
 
-    VERSION = 1
+    VERSION = "1"
 
     @dataclass(frozen=True)
     class _StepContext:

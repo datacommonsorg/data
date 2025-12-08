@@ -37,8 +37,8 @@ class Step(abc.ABC):
 
     @property
     @abc.abstractmethod
-    def version(self) -> int:
-        """Version used for invalidation decisions."""
+    def version(self) -> str:
+        """Version string used for invalidation decisions."""
 
     @abc.abstractmethod
     def run(self) -> None:
@@ -48,7 +48,7 @@ class Step(abc.ABC):
 class BaseStep(Step, abc.ABC):
     """Helper base class that stores mandatory metadata."""
 
-    def __init__(self, *, name: str, version: int) -> None:
+    def __init__(self, *, name: str, version: str) -> None:
         if not name:
             raise ValueError("step requires a name")
         self._name = name
@@ -59,7 +59,7 @@ class BaseStep(Step, abc.ABC):
         return self._name
 
     @property
-    def version(self) -> int:
+    def version(self) -> str:
         return self._version
 
 

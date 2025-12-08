@@ -77,7 +77,7 @@ class _IncrementingClock:
 class _RecordingStep(SdmxStep):
 
     def __init__(self, name: str, *, should_fail: bool = False) -> None:
-        super().__init__(name=name, version=1, config=_TEST_CONFIG)
+        super().__init__(name=name, version="1", config=_TEST_CONFIG)
         self._should_fail = should_fail
 
     def run(self) -> None:
@@ -90,7 +90,7 @@ class _RecordingStep(SdmxStep):
 
 class _VersionedStep(SdmxStep):
 
-    def __init__(self, name: str, version: int) -> None:
+    def __init__(self, name: str, version: str) -> None:
         super().__init__(name=name, version=version, config=_TEST_CONFIG)
 
     def run(self) -> None:
@@ -188,7 +188,7 @@ class JSONStateCallbackTest(unittest.TestCase):
                 "updated_at_ts": 1,
                 "steps": {
                     "existing.step": {
-                        "version": 1,
+                        "version": "1",
                         "status": "succeeded",
                         "started_at": "2025-01-01T00:00:00Z",
                         "started_at_ts": 0,
@@ -207,7 +207,7 @@ class JSONStateCallbackTest(unittest.TestCase):
 
                 def __init__(self) -> None:
                     super().__init__(name="download.download-data",
-                                     version=1,
+                                     version="1",
                                      config=_TEST_CONFIG)
 
                 def run(self) -> None:
@@ -314,7 +314,7 @@ class PlanningTest(unittest.TestCase):
                              steps={})
 
     def _state_with(
-            self, versions: dict[str, tuple[int, str,
+            self, versions: dict[str, tuple[str, str,
                                             int | None]]) -> PipelineState:
         steps = {
             name:
@@ -379,12 +379,12 @@ class PlanningTest(unittest.TestCase):
         newer = 2_000
         older = 1_000
         state = self._state_with({
-            "download-data": (1, "succeeded", newer),
-            "download-metadata": (1, "succeeded", older),
-            "create-sample": (1, "succeeded", older),
-            "create-schema-mapping": (1, "succeeded", older),
-            "process-full-data": (1, "succeeded", older),
-            "create-dc-config": (1, "succeeded", older),
+            "download-data": ("1", "succeeded", newer),
+            "download-metadata": ("1", "succeeded", older),
+            "create-sample": ("1", "succeeded", older),
+            "create-schema-mapping": ("1", "succeeded", older),
+            "process-full-data": ("1", "succeeded", older),
+            "create-dc-config": ("1", "succeeded", older),
         })
         cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND))
         names = self._names_from_builder(cfg, state=state)
@@ -412,8 +412,8 @@ class PlanningTest(unittest.TestCase):
         newer = 4_000
         older = 3_000
         state = self._state_with({
-            "download-data": (1, "succeeded", newer),
-            "download-metadata": (1, "succeeded", older),
+            "download-data": ("1", "succeeded", newer),
+            "download-metadata": ("1", "succeeded", older),
         })
         cfg = PipelineConfig(
             run=RunConfig(command=_TEST_COMMAND, run_only="download-data"))
@@ -422,14 +422,14 @@ class PlanningTest(unittest.TestCase):
 
     def test_version_bump_schedules_downstream(self) -> None:
         steps = [
-            _VersionedStep("download-data", 1),
-            _VersionedStep("process-full-data", 2),
-            _VersionedStep("create-dc-config", 1),
+            _VersionedStep("download-data", "1"),
+            _VersionedStep("process-full-data", "2"),
+            _VersionedStep("create-dc-config", "1"),
         ]
         state = self._state_with({
-            "download-data": (1, "succeeded", 1000),
-            "process-full-data": (1, "succeeded", 1000),
-            "create-dc-config": (1, "succeeded", 1000),
+            "download-data": ("1", "succeeded", 1000),
+            "process-full-data": ("1", "succeeded", 1000),
+            "create-dc-config": ("1", "succeeded", 1000),
         })
         cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND))
         names = self._names_from_builder(cfg, steps, state)
@@ -441,12 +441,12 @@ class PlanningTest(unittest.TestCase):
 
     def test_incremental_records_skip_reasons(self) -> None:
         state = self._state_with({
-            "download-data": (1, "succeeded", 1_000),
-            "download-metadata": (1, "succeeded", 1_000),
-            "create-sample": (1, "succeeded", 1_000),
-            "create-schema-mapping": (1, "succeeded", 1_000),
-            "process-full-data": (1, "succeeded", 1_000),
-            "create-dc-config": (1, "succeeded", 1_000),
+            "download-data": ("1", "succeeded", 1_000),
+            "download-metadata": ("1", "succeeded", 1_000),
+            "create-sample": ("1", "succeeded", 1_000),
+            "create-schema-mapping": ("1", "succeeded", 1_000),
+            "process-full-data": ("1", "succeeded", 1_000),
+            "create-dc-config": ("1", "succeeded", 1_000),
         })
         cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND))
         steps = build_steps(cfg)
