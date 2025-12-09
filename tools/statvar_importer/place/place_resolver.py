@@ -65,7 +65,8 @@ flags.DEFINE_list(
 )
 flags.DEFINE_string('resolve_output_csv', '', 'Output csv with place dcids.')
 flags.DEFINE_list('resolve_place_names', [], 'List of place names to resolve.')
-flags.DEFINE_string('maps_key', os.environ.get('MAPS_API_KEY', ''), 'Google Maps API key')
+flags.DEFINE_string('maps_key', os.environ.get('MAPS_API_KEY', ''),
+                    'Google Maps API key')
 flags.DEFINE_string(
     'resolve_config',
     '',
@@ -110,7 +111,8 @@ flags.DEFINE_string(
     'https://autopush.api.datacommons.org/v2/resolve',
     'DC API URL for resolve.',
 )
-flags.DEFINE_string('resolve_api_key', os.environ.get('DC_API_KEY', ''), 'DC API key for resolve.')
+flags.DEFINE_string('resolve_api_key', os.environ.get('DC_API_KEY', ''),
+                    'DC API key for resolve.')
 flags.DEFINE_integer(
     'dc_api_batch_size',
     3,
@@ -173,7 +175,8 @@ class PlaceResolver:
         self._counters = Counters(counters_dict)
         self._log_every_n = self._config.get('log_every_n', 10)
         if not self._maps_api_key:
-            self._maps_api_key = self._config.get('maps_api_key', os.environ.get('MAPS_API_KEY'))
+            self._maps_api_key = self._config.get(
+                'maps_api_key', os.environ.get('MAPS_API_KEY'))
         self._place_name_matcher = PlaceNameMatcher(
             config=self._config.get_configs())
         self._load_cache()
