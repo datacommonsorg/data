@@ -48,6 +48,33 @@ _DEFAULT_CONFIG = {
 class NgramMatcher:
 
     def __init__(self, config: dict = {}):
+        """Initializes a new NgramMatcher instance.
+        
+        The matcher can be configured with various parameters to control the matching
+        behavior. Any parameters not provided in the config will use the default
+        settings.
+        
+        Args:
+            config (dict, optional): A dictionary of configuration parameters to
+                override the defaults. Defaults to {}. Supported keys are:
+                'ngram_size' (int): The character length of ngrams to use for
+                    indexing and lookup.
+                'ignore_non_alphanum' (bool): If True, non-alphanumeric
+                    characters are removed during string normalization.
+                'min_match_fraction' (float): The minimum fraction of a query's
+                    ngrams that must match a stored key for it to be considered
+                    a candidate match.
+        
+        Returns:
+            None
+        
+        Examples:
+            >>> # Initialize with default settings.
+            >>> default_matcher = NgramMatcher()
+        
+            >>> # Initialize with a custom ngram size.
+            >>> custom_config = {'ngram_size': 3}
+            >>> custom_matcher = NgramMatcher(config=custom_config)"""
         self._config = dict(_DEFAULT_CONFIG)
         if config:
             self._config.update(config)
@@ -59,12 +86,74 @@ class NgramMatcher:
         self._ngram_dict = {}
 
     def get_tuples_count(self):
+        """Gets the number of key-value tuples stored in the matcher.
+        
+        This method provides a count of all the key-value pairs that have been
+        added to the NgramMatcher instance.
+        
+        Args:
+            None.
+        
+        Returns:
+            int: The total number of key-value tuples.
+        
+        Examples:
+            >>> matcher = NgramMatcher()
+            >>> matcher.get_tuples_count()
+            0
+            >>> matcher.add_key_value('California', 'dcid:geoId/06')
+            >>> matcher.add_key_value('San Jose', 'dcid:geoId/0668000')
+            >>> matcher.get_tuples_count()
+            2"""
         return len(self._key_values)
 
     def get_key_values(self):
+        """Retrieves all key-value pairs stored in the matcher.
+        
+        This method returns a dictionary containing all the keys and their
+        corresponding values that have been added to the NgramMatcher instance.
+        The returned dictionary is a copy; modifications to it will not affect the
+        internal state of the matcher.
+        
+        Args:
+            None.
+        
+        Returns:
+            dict[str, any]: A dictionary mapping each added key to its associated value.
+        
+        Examples:
+            >>> matcher = NgramMatcher()
+            >>> matcher.add_key_value('CA', 'dcid:geoId/06')
+            >>> matcher.add_key_value('USA', 'dcid:country/USA')
+            >>> key_values = matcher.get_key_values()
+            >>> print(key_values)
+            {'CA': 'dcid:geoId/06', 'USA': 'dcid:country/USA'}"""
         return dict(self._key_values)
 
     def add_keys_values(self, kvs: dict[str, any]) -> None:
+        """Adds multiple key-value pairs to the matcher's index.
+        
+        This method is a convenience wrapper for adding a batch of key-value pairs
+        from a dictionary. Each key is indexed for future lookups, and its
+        corresponding value is stored to be returned upon a match.
+        
+        Args:
+            kvs (dict[str, any]): A dictionary where keys are the strings to be
+                indexed for matching and values are the corresponding data to be
+                returned upon a successful lookup.
+        
+        Returns:
+            None
+        
+        Examples:
+            >>> matcher = NgramMatcher()
+            >>> places_to_add = {
+            ...     'California': 'dcid:geoId/06',
+            ...     'San Jose California': 'dcid:geoId/0668000',
+            ... }
+            >>> matcher.add_keys_values(places_to_add)
+            >>> matcher.get_tuples_count()
+            2"""
         for key, value in kvs.items():
             self.add_key_value(key, value)
 
@@ -165,7 +254,30 @@ class NgramMatcher:
         return results
 
     def _get_ngrams(self, key: str) -> list:
-        """Returns a list of ngrams for the key."""
+        """Generates a list of unique tokens and n-grams from a string.
+        
+        This method produces a list of features used for matching. It first normalizes
+        the input string via `self._normalize_string`. It then uses the space-separated
+        words from the normalized string as initial tokens. Finally, it generates
+        sliding-window character n-grams of size `self._ngram_size` across the entire
+        normalized string and adds any unique n-grams to the list of tokens.
+        
+        Args:
+            key (str): The string to generate n-grams from.
+        
+        Returns:
+            list: A list of unique strings, containing both space-separated words (if
+                any exist after normalization) and character n-grams.
+        
+        Examples:
+            The example demonstrates the default behavior where non-alphanumeric
+            characters are removed before n-gram generation.
+        
+            >>> matcher = NgramMatcher()  # Uses default config with ngram_size=4
+            >>> # Note: _get_ngrams is a private method, called here for illustration.
+            >>> # The default _normalize_string("San Jose") returns "sanjose".
+            >>> matcher._get_ngrams("San Jose")
+            ['sanjose', 'sanj', 'anjo', 'njos', 'jose']"""
         normalized_key = self._normalize_string(key)
         ngrams = normalized_key.split(' ')
         max_index = max(len(normalized_key) - self._ngram_size, 0) + 1
@@ -176,8 +288,33 @@ class NgramMatcher:
         return ngrams
 
     def _add_key_index(self, key: str, key_index: int):
-        """Adds the key into the ngrams index."""
-        # Remove extra characters and convert to lower case.
+        """Indexes a key by its ngrams for the internal lookup dictionary.
+        
+        This method normalizes the provided key, generates all unique ngrams from it,
+        and then populates the internal `_ngram_dict`. This dictionary maps each
+        ngram to a set of `(key_index, position)` tuples, allowing for efficient
+        retrieval of keys that contain a specific ngram.
+        
+        Args:
+            key (str): The string key to be processed and indexed.
+            key_index (int): The index of the key in the `_key_values` list, used
+                to reference the original key-value pair.
+        
+        Returns:
+            None.
+        
+        Examples:
+            If an `NgramMatcher` instance `m` with `ngram_size=4` calls this
+            method with `key='Test Key'` and `key_index=5`, the internal
+            `_ngram_dict` is updated. The normalized key would be 'testkey'.
+            Ngrams like 'test', 'estk', 'stke', and 'tkey' would be added
+            to `_ngram_dict`.
+        
+            For the ngram 'test', the dictionary would be updated like so:
+            `m._ngram_dict['test'].add((5, 0))`
+        
+            For the ngram 'estk', the update would be:
+            `m._ngram_dict['estk'].add((5, 1))`"""
         normalized_key = self._normalize_string(key)
         # index by all unique ngrams in the key
         ngrams = self._get_ngrams(normalized_key)
