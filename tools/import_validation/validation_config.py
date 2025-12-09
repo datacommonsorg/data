@@ -22,7 +22,7 @@ scopes or variable sets.
 import copy
 import json
 import os
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from absl import logging
 from omegaconf import OmegaConf
@@ -30,11 +30,6 @@ from omegaconf import OmegaConf
 
 def _load_json_config(path: str) -> Dict[str, Any]:
     """Loads a JSON config if present."""
-    if not path:
-        return {}
-    if not os.path.exists(path):
-        logging.warning("Validation config file not found: %s", path)
-        return {}
     with open(path, encoding='utf-8') as f:
         return json.load(f)
 
@@ -82,13 +77,10 @@ def _merge_configs(base_config: Dict[str, Any],
     }
 
 
-def merge_config_files(base_path: str,
-                       override_path: Optional[str] = None) -> Dict[str, Any]:
+def merge_config_files(base_path: str, override_path: str) -> Dict[str, Any]:
     """Returns merged config dict from base and optional override files."""
     base_config = _load_json_config(base_path)
     override_config = _load_json_config(override_path)
-    if not override_config:
-        return base_config
     return _merge_configs(base_config, override_config)
 
 

@@ -41,6 +41,12 @@ class ValidationConfigTest(unittest.TestCase):
                         "params": {
                             "threshold": 0
                         }
+                    }, {
+                        "rule_id": "keep_original",
+                        "validator": "NO_NULLS",
+                        "params": {
+                            "fields": ["a"]
+                        }
                     }]
                 }, f)
         with open(override_path, "w", encoding="utf-8") as f:
@@ -52,13 +58,49 @@ class ValidationConfigTest(unittest.TestCase):
                         "params": {
                             "threshold": 5
                         }
+                    }, {
+                        "rule_id": "new_rule",
+                        "validator": "ROW_COUNT",
+                        "params": {
+                            "min": 1
+                        }
                     }]
                 }, f)
 
         config = merge_config_files(base_path, override_path)
 
-        self.assertEqual(len(config["rules"]), 1)
-        self.assertEqual(config["rules"][0]["params"]["threshold"], 5)
+        expected_rules_json = """
+        {
+            "rules": [
+                {
+                    "rule_id": "check_deleted_count",
+                    "validator": "DELETED_COUNT",
+                    "params": {
+                        "threshold": 5
+                    }
+                },
+                {
+                    "rule_id": "keep_original",
+                    "validator": "NO_NULLS",
+                    "params": {
+                        "fields": ["a"]
+                    }
+                },
+                {
+                    "rule_id": "new_rule",
+                    "validator": "ROW_COUNT",
+                    "params": {
+                        "min": 1
+                    }
+                }
+            ]
+        }
+        """
+
+        actual_rules = sorted(config["rules"], key=lambda rule: rule["rule_id"])
+        expected_rules = sorted(json.loads(expected_rules_json)["rules"],
+                                key=lambda rule: rule["rule_id"])
+        self.assertEqual(actual_rules, expected_rules)
 
     def test_definitions_are_deep_merged(self):
         base_path = os.path.join(self.tmp.name, "base_defs.json")
@@ -97,11 +139,28 @@ class ValidationConfigTest(unittest.TestCase):
         config = merge_config_files(base_path, override_path)
 
         scopes = config.get("definitions", {}).get("scopes", {})
-        self.assertIn("foo", scopes)
-        self.assertIn("bar", scopes)
-        self.assertEqual(scopes["foo"]["data_source"], "stats")
-        self.assertEqual(scopes["foo"]["filters"]["dcids"], ["a"])
-        self.assertEqual(scopes["foo"]["filters"]["contains_all"], ["b"])
+        expected_scopes_json = """
+        {
+            "foo": {
+                "data_source": "stats",
+                "filters": {
+                    "dcids": ["a"],
+                    "contains_all": ["b"]
+                }
+            },
+            "bar": {
+                "data_source": "differ"
+            }
+        }
+        """
+        self.assertEqual(scopes, json.loads(expected_scopes_json))
+
+    def test_both_missing_files_raise(self):
+        missing_base = os.path.join(self.tmp.name, "no_base.json")
+        missing_override = os.path.join(self.tmp.name, "no_override.json")
+
+        with self.assertRaises(FileNotFoundError):
+            merge_config_files(missing_base, missing_override)
 
 
 if __name__ == "__main__":
