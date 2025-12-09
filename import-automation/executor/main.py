@@ -44,10 +44,6 @@ flags.DEFINE_boolean(
     'enable_cloud_logging', True,
     'Enable Google Cloud Logging for proper severity levels in GCP.')
 
-# log_type for capturing status of auto import cloud run jobs.
-# Required fields - log_type, message, status, latency_secs.
-AUTO_IMPORT_JOB_STATUS_LOG_TYPE = "auto-import-job-status"
-
 
 def _override_configs(import_name: str, import_dir: str,
                       config: configs.ExecutorConfig) -> configs.ExecutorConfig:
@@ -94,13 +90,10 @@ def run_import_job(absolute_import_name: str, import_config: str):
     message = (f"Import Job [{absolute_import_name}] completed with status= "
                f"[{result.status}] in [{elapsed_time_secs}] seconds.)")
 
-    log_util.log_metric(
-        AUTO_IMPORT_JOB_STATUS_LOG_TYPE,
-        "INFO" if result.status == 'succeeded' else "ERROR", message, {
-            "status": result.status,
-            "latency_secs": elapsed_time_secs,
-            "import_name": import_name,
-        })
+    status = 'SUCCESS' if not result.status == 'succeeded' else 'ERROR'
+    import_executor.log_import_status(
+        import_name, 'DONE', status, elapsed_time_secs, 0, message,
+        "INFO" if result.status == 'succeeded' else "ERROR")
     if result.status == 'failed':
         return 1
     return 0
