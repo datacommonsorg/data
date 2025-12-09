@@ -74,7 +74,7 @@ flags.DEFINE_list(
     'List of wiki place property codes, such as P31',
 )
 flags.DEFINE_string(
-    'custom_search_key', '', 'API key for Google custom search API.'
+    'custom_search_key', os.environ.get('SEARCH_API_KEY', ''), 'API key for Google custom search API.'
     'Get an API key at https://developers.google.com/custom-search/v1/introduction.'
 )
 flags.DEFINE_integer('wiki_place_pprof_port', 0,
