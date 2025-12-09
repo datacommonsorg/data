@@ -48,33 +48,6 @@ _DEFAULT_CONFIG = {
 class NgramMatcher:
 
     def __init__(self, config: dict = {}):
-        """Initializes a new NgramMatcher instance.
-        
-        The matcher can be configured with various parameters to control the matching
-        behavior. Any parameters not provided in the config will use the default
-        settings.
-        
-        Args:
-            config (dict, optional): A dictionary of configuration parameters to
-                override the defaults. Defaults to {}. Supported keys are:
-                'ngram_size' (int): The character length of ngrams to use for
-                    indexing and lookup.
-                'ignore_non_alphanum' (bool): If True, non-alphanumeric
-                    characters are removed during string normalization.
-                'min_match_fraction' (float): The minimum fraction of a query's
-                    ngrams that must match a stored key for it to be considered
-                    a candidate match.
-        
-        Returns:
-            None
-        
-        Examples:
-            >>> # Initialize with default settings.
-            >>> default_matcher = NgramMatcher()
-        
-            >>> # Initialize with a custom ngram size.
-            >>> custom_config = {'ngram_size': 3}
-            >>> custom_matcher = NgramMatcher(config=custom_config)"""
         self._config = dict(_DEFAULT_CONFIG)
         if config:
             self._config.update(config)
@@ -86,74 +59,12 @@ class NgramMatcher:
         self._ngram_dict = {}
 
     def get_tuples_count(self):
-        """Gets the number of key-value tuples stored in the matcher.
-        
-        This method provides a count of all the key-value pairs that have been
-        added to the NgramMatcher instance.
-        
-        Args:
-            None.
-        
-        Returns:
-            int: The total number of key-value tuples.
-        
-        Examples:
-            >>> matcher = NgramMatcher()
-            >>> matcher.get_tuples_count()
-            0
-            >>> matcher.add_key_value('California', 'dcid:geoId/06')
-            >>> matcher.add_key_value('San Jose', 'dcid:geoId/0668000')
-            >>> matcher.get_tuples_count()
-            2"""
         return len(self._key_values)
 
     def get_key_values(self):
-        """Retrieves all key-value pairs stored in the matcher.
-        
-        This method returns a dictionary containing all the keys and their
-        corresponding values that have been added to the NgramMatcher instance.
-        The returned dictionary is a copy; modifications to it will not affect the
-        internal state of the matcher.
-        
-        Args:
-            None.
-        
-        Returns:
-            dict[str, any]: A dictionary mapping each added key to its associated value.
-        
-        Examples:
-            >>> matcher = NgramMatcher()
-            >>> matcher.add_key_value('CA', 'dcid:geoId/06')
-            >>> matcher.add_key_value('USA', 'dcid:country/USA')
-            >>> key_values = matcher.get_key_values()
-            >>> print(key_values)
-            {'CA': 'dcid:geoId/06', 'USA': 'dcid:country/USA'}"""
         return dict(self._key_values)
 
     def add_keys_values(self, kvs: dict[str, any]) -> None:
-        """Adds multiple key-value pairs to the matcher's index.
-        
-        This method is a convenience wrapper for adding a batch of key-value pairs
-        from a dictionary. Each key is indexed for future lookups, and its
-        corresponding value is stored to be returned upon a match.
-        
-        Args:
-            kvs (dict[str, any]): A dictionary of key-value pairs to add. The keys
-                are the strings to be indexed and matched against, and the values
-                are the data to be returned.
-        
-        Returns:
-            None
-        
-        Examples:
-            >>> matcher = NgramMatcher()
-            >>> places_to_add = {
-            ...     'California': 'dcid:geoId/06',
-            ...     'San Jose California': 'dcid:geoId/0668000',
-            ... }
-            >>> matcher.add_keys_values(places_to_add)
-            >>> matcher.get_tuples_count()
-            2"""
         for key, value in kvs.items():
             self.add_key_value(key, value)
 
