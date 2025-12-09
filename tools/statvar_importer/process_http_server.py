@@ -66,6 +66,7 @@ import subprocess
 import sys
 import threading
 import time
+from typing import Any, Dict, List, Optional, Tuple, Type
 from urllib import parse
 
 from absl import app
@@ -126,7 +127,7 @@ _HTTP_CONFIG = {
 # Class for a Web server wrapper for a python script.
 class ProcessHandler(server.SimpleHTTPRequestHandler):
 
-    def do_GET(self):
+    def do_GET(self) -> None:
         """Returns a HTML form to the client."""
         # Send the HTML form
         logging.info(f'HTTP GET: Generating form for config: {_HTTP_CONFIG}')
@@ -136,7 +137,7 @@ class ProcessHandler(server.SimpleHTTPRequestHandler):
         form_config = _HTTP_CONFIG.get('forms', [{}])[0]
         self.wfile.write(bytes(self.get_html_form(form_config), 'utf-8'))
 
-    def do_POST(self):
+    def do_POST(self) -> None:
         """Returns a HTML page with output from the script invoked for the form parameters."""
         # Get the form inputs to be used as command line arguments.
         form_config = _HTTP_CONFIG.get('forms', [{}])[0]
@@ -188,7 +189,7 @@ class ProcessHandler(server.SimpleHTTPRequestHandler):
         self.wfile.write(bytes(end_msg, 'utf-8'))
         logging.info(end_msg)
 
-    def get_html_form(self, form_config: dict = {}) -> str:
+    def get_html_form(self, form_config: Dict[str, Any] = {}) -> str:
         """Returns the HTML form for the config."""
         form_title = form_config.get('form_title', '')
         if not form_title:
@@ -231,7 +232,7 @@ class ProcessHandler(server.SimpleHTTPRequestHandler):
 </html>"""
         return form_html
 
-    def parse_form_data(self, form_config: dict = {}):
+    def parse_form_data(self, form_config: Dict[str, Any] = {}) -> Dict[str, Any]:
         """Returns a dictionary with form input name as key and value from POST data
 
     for all the form inputs in the form_config.
@@ -255,7 +256,9 @@ class ProcessHandler(server.SimpleHTTPRequestHandler):
 # requests.
 class ThreadedHTTPListner(threading.Thread):
 
-    def __init__(self, sock, thread_num, addr, handler):
+    def __init__(self, sock: socket.socket, thread_num: int,
+                 addr: Tuple[str, int],
+                 handler: Type[server.BaseHTTPRequestHandler]) -> None:
         threading.Thread.__init__(self)
         self._sock = sock
         self._thread_num = thread_num
@@ -265,7 +268,7 @@ class ThreadedHTTPListner(threading.Thread):
         self._httpd = None
         self.start()
 
-    def run(self):
+    def run(self) -> None:
         self._httpd = server.HTTPServer(self._addr, self._handler, False)
         # Prevent the HTTP server from re-binding every handler.
         # https://stackoverflow.com/questions/46210672/
@@ -276,7 +279,7 @@ class ThreadedHTTPListner(threading.Thread):
             f' address {self._addr}')
         self._httpd.serve_forever()
 
-    def shutdown(self):
+    def shutdown(self) -> None:
         if self._httpd is not None:
             logging.info(f'Shutting down listener {self._thread_num}')
             self._httpd.shutdown()
@@ -287,7 +290,8 @@ class ThreadedHTTPListner(threading.Thread):
 # WebServer with multiple threads to handle requests in parallel.
 class ThreadedHTTPServer:
 
-    def __init__(self, http_port, handler, num_threads: int = 10):
+    def __init__(self, http_port: int, handler: Type[server.BaseHTTPRequestHandler],
+                 num_threads: int = 10) -> None:
         self._num_threads = num_threads
         self._handler = handler
         # Create a single socket for all threads.
@@ -297,7 +301,7 @@ class ThreadedHTTPServer:
         self._sock.bind(self._addr)
         self._sock.listen(5)
 
-    def serve_forever(self, timeout: int = sys.maxsize):
+    def serve_forever(self, timeout: int = sys.maxsize) -> None:
         """Launch the server with listener threads and block."""
         threads = []
         for i in range(self._num_threads):
@@ -314,7 +318,7 @@ class ThreadedHTTPServer:
             thread.shutdown()
 
 
-def _get_form_config(config: dict = None) -> dict:
+def _get_form_config(config: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """Returns the config for the form."""
     if not config:
         config = _HTTP_CONFIG
@@ -327,8 +331,8 @@ def run_http_server(
     http_port: int = 0,
     script: str = '',
     module: str = '__main__',
-    config: dict = {},
-):
+    config: Dict[str, Any] = {},
+) -> bool:
     """Runs a HTTP server that accepts a form for the given config.
 
   This is a blocking call that doesn't return to the caller.
@@ -347,7 +351,7 @@ def run_http_server(
 
     # Add form inputs for all flags for the module.
     if not module:
-        module = basename(sys.argv[0]).split('.py')[0]
+        module = os.path.basename(sys.argv[0]).split('.py')[0]
     logging.info(f'Getting flags for module: {module}')
     form_config = _get_form_config(config)
     form_inputs = form_config.get('form_input', [])
@@ -373,7 +377,7 @@ def run_http_server(
     return True
 
 
-def main(_):
+def main(_: List[str]) -> None:
     run_http_server()
 
 
