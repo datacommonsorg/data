@@ -1,0 +1,1981 @@
+State,Year,Month,Period,Indicator,Data Value
+UNITED STATES,2023,January,Monthly,Number of Live Births,299000
+UNITED STATES,2023,February,Monthly,Number of Live Births,271000
+UNITED STATES,2023,March,Monthly,Number of Live Births,299000
+UNITED STATES,2023,April,Monthly,Number of Live Births,279000
+UNITED STATES,2023,May,Monthly,Number of Live Births,299000
+UNITED STATES,2023,June,Monthly,Number of Live Births,303000
+UNITED STATES,2023,July,Monthly,Number of Live Births,312000
+UNITED STATES,2023,August,Monthly,Number of Live Births,322000
+UNITED STATES,2023,September,Monthly,Number of Live Births,305000
+UNITED STATES,2023,October,Monthly,Number of Live Births,309000
+UNITED STATES,2023,November,Monthly,Number of Live Births,298000
+UNITED STATES,2023,December,Monthly,Number of Live Births,297000
+UNITED STATES,2024,January,Monthly,Number of Live Births,297000
+UNITED STATES,2024,February,Monthly,Number of Live Births,283000
+UNITED STATES,2024,March,Monthly,Number of Live Births,298000
+UNITED STATES,2024,April,Monthly,Number of Live Births,289000
+UNITED STATES,2024,May,Monthly,Number of Live Births,302000
+UNITED STATES,2024,June,Monthly,Number of Live Births,291000
+UNITED STATES,2023,January,Monthly,Number of Deaths,289000
+UNITED STATES,2023,February,Monthly,Number of Deaths,249000
+UNITED STATES,2023,March,Monthly,Number of Deaths,269000
+UNITED STATES,2023,April,Monthly,Number of Deaths,252000
+UNITED STATES,2023,May,Monthly,Number of Deaths,253000
+UNITED STATES,2023,June,Monthly,Number of Deaths,241000
+UNITED STATES,2023,July,Monthly,Number of Deaths,247000
+UNITED STATES,2023,August,Monthly,Number of Deaths,250000
+UNITED STATES,2023,September,Monthly,Number of Deaths,245000
+UNITED STATES,2023,October,Monthly,Number of Deaths,259000
+UNITED STATES,2023,November,Monthly,Number of Deaths,258000
+UNITED STATES,2023,December,Monthly,Number of Deaths,284000
+UNITED STATES,2024,January,Monthly,Number of Deaths,295000
+UNITED STATES,2024,February,Monthly,Number of Deaths,255000
+UNITED STATES,2024,March,Monthly,Number of Deaths,263000
+UNITED STATES,2024,April,Monthly,Number of Deaths,249000
+UNITED STATES,2024,May,Monthly,Number of Deaths,249000
+UNITED STATES,2024,June,Monthly,Number of Deaths,239000
+UNITED STATES,2023,January,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,February,Monthly,Number of Infant Deaths,1500
+UNITED STATES,2023,March,Monthly,Number of Infant Deaths,1800
+UNITED STATES,2023,April,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,May,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,June,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,July,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,August,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,September,Monthly,Number of Infant Deaths,1600
+UNITED STATES,2023,October,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,November,Monthly,Number of Infant Deaths,1600
+UNITED STATES,2023,December,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2024,January,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2024,February,Monthly,Number of Infant Deaths,1600
+UNITED STATES,2024,March,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2024,April,Monthly,Number of Infant Deaths,1600
+UNITED STATES,2024,May,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2024,June,Monthly,Number of Infant Deaths,1600
+UNITED STATES,2023,January,12 Month-ending,Number of Live Births,3673000
+UNITED STATES,2023,February,12 Month-ending,Number of Live Births,3668000
+UNITED STATES,2023,March,12 Month-ending,Number of Live Births,3661000
+UNITED STATES,2023,April,12 Month-ending,Number of Live Births,3650000
+UNITED STATES,2023,May,12 Month-ending,Number of Live Births,3652000
+UNITED STATES,2023,June,12 Month-ending,Number of Live Births,3649000
+UNITED STATES,2023,July,12 Month-ending,Number of Live Births,3639000
+UNITED STATES,2023,August,12 Month-ending,Number of Live Births,3626000
+UNITED STATES,2023,September,12 Month-ending,Number of Live Births,3619000
+UNITED STATES,2023,October,12 Month-ending,Number of Live Births,3621000
+UNITED STATES,2023,November,12 Month-ending,Number of Live Births,3612000
+UNITED STATES,2023,December,12 Month-ending,Number of Live Births,3594000
+UNITED STATES,2024,January,12 Month-ending,Number of Live Births,3591000
+UNITED STATES,2024,February,12 Month-ending,Number of Live Births,3603000
+UNITED STATES,2024,March,12 Month-ending,Number of Live Births,3601000
+UNITED STATES,2024,April,12 Month-ending,Number of Live Births,3612000
+UNITED STATES,2024,May,12 Month-ending,Number of Live Births,3615000
+UNITED STATES,2024,June,12 Month-ending,Number of Live Births,3603000
+UNITED STATES,2023,January,12 Month-ending,Number of Deaths,3198000
+UNITED STATES,2023,February,12 Month-ending,Number of Deaths,3158000
+UNITED STATES,2023,March,12 Month-ending,Number of Deaths,3159000
+UNITED STATES,2023,April,12 Month-ending,Number of Deaths,3165000
+UNITED STATES,2023,May,12 Month-ending,Number of Deaths,3164000
+UNITED STATES,2023,June,12 Month-ending,Number of Deaths,3157000
+UNITED STATES,2023,July,12 Month-ending,Number of Deaths,3144000
+UNITED STATES,2023,August,12 Month-ending,Number of Deaths,3136000
+UNITED STATES,2023,September,12 Month-ending,Number of Deaths,3130000
+UNITED STATES,2023,October,12 Month-ending,Number of Deaths,3123000
+UNITED STATES,2023,November,12 Month-ending,Number of Deaths,3113000
+UNITED STATES,2023,December,12 Month-ending,Number of Deaths,3097000
+UNITED STATES,2024,January,12 Month-ending,Number of Deaths,3103000
+UNITED STATES,2024,February,12 Month-ending,Number of Deaths,3109000
+UNITED STATES,2024,March,12 Month-ending,Number of Deaths,3103000
+UNITED STATES,2024,April,12 Month-ending,Number of Deaths,3099000
+UNITED STATES,2024,May,12 Month-ending,Number of Deaths,3095000
+UNITED STATES,2024,June,12 Month-ending,Number of Deaths,3094000
+UNITED STATES,2023,January,12 Month-ending,Number of Infant Deaths,20400
+UNITED STATES,2023,February,12 Month-ending,Number of Infant Deaths,20500
+UNITED STATES,2023,March,12 Month-ending,Number of Infant Deaths,20600
+UNITED STATES,2023,April,12 Month-ending,Number of Infant Deaths,20600
+UNITED STATES,2023,May,12 Month-ending,Number of Infant Deaths,20600
+UNITED STATES,2023,June,12 Month-ending,Number of Infant Deaths,20600
+UNITED STATES,2023,July,12 Month-ending,Number of Infant Deaths,20400
+UNITED STATES,2023,August,12 Month-ending,Number of Infant Deaths,20300
+UNITED STATES,2023,September,12 Month-ending,Number of Infant Deaths,20300
+UNITED STATES,2023,October,12 Month-ending,Number of Infant Deaths,20100
+UNITED STATES,2023,November,12 Month-ending,Number of Infant Deaths,20000
+UNITED STATES,2023,December,12 Month-ending,Number of Infant Deaths,20100
+UNITED STATES,2024,January,12 Month-ending,Number of Infant Deaths,20000
+UNITED STATES,2024,February,12 Month-ending,Number of Infant Deaths,20100
+UNITED STATES,2024,March,12 Month-ending,Number of Infant Deaths,20000
+UNITED STATES,2024,April,12 Month-ending,Number of Infant Deaths,19900
+UNITED STATES,2024,May,12 Month-ending,Number of Infant Deaths,19900
+UNITED STATES,2024,June,12 Month-ending,Number of Infant Deaths,19800
+ALABAMA,2023,January,Monthly,Number of Deaths,5459
+ALASKA,2023,January,Monthly,Number of Deaths,508
+ARIZONA,2023,January,Monthly,Number of Deaths,6446
+ARKANSAS,2023,January,Monthly,Number of Deaths,3358
+CALIFORNIA,2023,January,Monthly,Number of Deaths,28009
+COLORADO,2023,January,Monthly,Number of Deaths,4037
+CONNECTICUT,2023,January,Monthly,Number of Deaths,3111
+DELAWARE,2023,January,Monthly,Number of Deaths,992
+DISTRICT OF COLUMBIA,2023,January,Monthly,Number of Deaths,447
+FLORIDA,2023,January,Monthly,Number of Deaths,21746
+GEORGIA,2023,January,Monthly,Number of Deaths,9149
+HAWAII,2023,January,Monthly,Number of Deaths,1171
+IDAHO,2023,January,Monthly,Number of Deaths,1443
+ILLINOIS,2023,January,Monthly,Number of Deaths,10452
+INDIANA,2023,January,Monthly,Number of Deaths,6372
+IOWA,2023,January,Monthly,Number of Deaths,3050
+KANSAS,2023,January,Monthly,Number of Deaths,3417
+KENTUCKY,2023,January,Monthly,Number of Deaths,4981
+LOUISIANA,2023,January,Monthly,Number of Deaths,4578
+MAINE,2023,January,Monthly,Number of Deaths,1575
+MARYLAND,2023,January,Monthly,Number of Deaths,5015
+MASSACHUSETTS,2023,January,Monthly,Number of Deaths,5842
+MICHIGAN,2023,January,Monthly,Number of Deaths,9526
+MINNESOTA,2023,January,Monthly,Number of Deaths,4432
+MISSISSIPPI,2023,January,Monthly,Number of Deaths,3244
+MISSOURI,2023,January,Monthly,Number of Deaths,6074
+MONTANA,2023,January,Monthly,Number of Deaths,997
+NEBRASKA,2023,January,Monthly,Number of Deaths,1639
+NEVADA,2023,January,Monthly,Number of Deaths,2681
+NEW HAMPSHIRE,2023,January,Monthly,Number of Deaths,1371
+NEW JERSEY,2023,January,Monthly,Number of Deaths,7008
+NEW MEXICO,2023,January,Monthly,Number of Deaths,2083
+NEW YORK,2023,January,Monthly,Number of Deaths,15563
+NORTH CAROLINA,2023,January,Monthly,Number of Deaths,10027
+NORTH DAKOTA,2023,January,Monthly,Number of Deaths,657
+OHIO,2023,January,Monthly,Number of Deaths,11787
+OKLAHOMA,2023,January,Monthly,Number of Deaths,4193
+OREGON,2023,January,Monthly,Number of Deaths,3908
+PENNSYLVANIA,2023,January,Monthly,Number of Deaths,13010
+RHODE ISLAND,2023,January,Monthly,Number of Deaths,1001
+SOUTH CAROLINA,2023,January,Monthly,Number of Deaths,5363
+SOUTH DAKOTA,2023,January,Monthly,Number of Deaths,750
+TENNESSEE,2023,January,Monthly,Number of Deaths,7385
+TEXAS,2023,January,Monthly,Number of Deaths,21289
+UTAH,2023,January,Monthly,Number of Deaths,1967
+VERMONT,2023,January,Monthly,Number of Deaths,625
+VIRGINIA,2023,January,Monthly,Number of Deaths,7302
+WASHINGTON,2023,January,Monthly,Number of Deaths,6143
+WEST VIRGINIA,2023,January,Monthly,Number of Deaths,2372
+WISCONSIN,2023,January,Monthly,Number of Deaths,5308
+WYOMING,2023,January,Monthly,Number of Deaths,503
+PUERTO RICO,2023,January,Monthly,Number of Deaths,3197
+ALABAMA,2023,February,Monthly,Number of Deaths,4864
+ALASKA,2023,February,Monthly,Number of Deaths,426
+ARIZONA,2023,February,Monthly,Number of Deaths,5690
+ARKANSAS,2023,February,Monthly,Number of Deaths,2871
+CALIFORNIA,2023,February,Monthly,Number of Deaths,24546
+COLORADO,2023,February,Monthly,Number of Deaths,3536
+CONNECTICUT,2023,February,Monthly,Number of Deaths,2678
+DELAWARE,2023,February,Monthly,Number of Deaths,886
+DISTRICT OF COLUMBIA,2023,February,Monthly,Number of Deaths,390
+FLORIDA,2023,February,Monthly,Number of Deaths,18461
+GEORGIA,2023,February,Monthly,Number of Deaths,7681
+HAWAII,2023,February,Monthly,Number of Deaths,995
+IDAHO,2023,February,Monthly,Number of Deaths,1247
+ILLINOIS,2023,February,Monthly,Number of Deaths,9046
+INDIANA,2023,February,Monthly,Number of Deaths,5438
+IOWA,2023,February,Monthly,Number of Deaths,2628
+KANSAS,2023,February,Monthly,Number of Deaths,2956
+KENTUCKY,2023,February,Monthly,Number of Deaths,4365
+LOUISIANA,2023,February,Monthly,Number of Deaths,4077
+MAINE,2023,February,Monthly,Number of Deaths,1353
+MARYLAND,2023,February,Monthly,Number of Deaths,4320
+MASSACHUSETTS,2023,February,Monthly,Number of Deaths,4988
+MICHIGAN,2023,February,Monthly,Number of Deaths,8244
+MINNESOTA,2023,February,Monthly,Number of Deaths,3867
+MISSISSIPPI,2023,February,Monthly,Number of Deaths,2806
+MISSOURI,2023,February,Monthly,Number of Deaths,5297
+MONTANA,2023,February,Monthly,Number of Deaths,861
+NEBRASKA,2023,February,Monthly,Number of Deaths,1457
+NEVADA,2023,February,Monthly,Number of Deaths,2319
+NEW HAMPSHIRE,2023,February,Monthly,Number of Deaths,1102
+NEW JERSEY,2023,February,Monthly,Number of Deaths,6117
+NEW MEXICO,2023,February,Monthly,Number of Deaths,1702
+NEW YORK,2023,February,Monthly,Number of Deaths,13051
+NORTH CAROLINA,2023,February,Monthly,Number of Deaths,8513
+NORTH DAKOTA,2023,February,Monthly,Number of Deaths,487
+OHIO,2023,February,Monthly,Number of Deaths,10164
+OKLAHOMA,2023,February,Monthly,Number of Deaths,3486
+OREGON,2023,February,Monthly,Number of Deaths,3456
+PENNSYLVANIA,2023,February,Monthly,Number of Deaths,11150
+RHODE ISLAND,2023,February,Monthly,Number of Deaths,831
+SOUTH CAROLINA,2023,February,Monthly,Number of Deaths,4567
+SOUTH DAKOTA,2023,February,Monthly,Number of Deaths,635
+TENNESSEE,2023,February,Monthly,Number of Deaths,6273
+TEXAS,2023,February,Monthly,Number of Deaths,18596
+UTAH,2023,February,Monthly,Number of Deaths,1600
+VERMONT,2023,February,Monthly,Number of Deaths,540
+VIRGINIA,2023,February,Monthly,Number of Deaths,6313
+WASHINGTON,2023,February,Monthly,Number of Deaths,5244
+WEST VIRGINIA,2023,February,Monthly,Number of Deaths,2074
+WISCONSIN,2023,February,Monthly,Number of Deaths,4543
+WYOMING,2023,February,Monthly,Number of Deaths,448
+PUERTO RICO,2023,February,Monthly,Number of Deaths,2754
+ALABAMA,2023,March,Monthly,Number of Deaths,5055
+ALASKA,2023,March,Monthly,Number of Deaths,449
+ARIZONA,2023,March,Monthly,Number of Deaths,6150
+ARKANSAS,2023,March,Monthly,Number of Deaths,3086
+CALIFORNIA,2023,March,Monthly,Number of Deaths,26450
+COLORADO,2023,March,Monthly,Number of Deaths,3843
+CONNECTICUT,2023,March,Monthly,Number of Deaths,2720
+DELAWARE,2023,March,Monthly,Number of Deaths,967
+DISTRICT OF COLUMBIA,2023,March,Monthly,Number of Deaths,434
+FLORIDA,2023,March,Monthly,Number of Deaths,20058
+GEORGIA,2023,March,Monthly,Number of Deaths,8237
+HAWAII,2023,March,Monthly,Number of Deaths,1187
+IDAHO,2023,March,Monthly,Number of Deaths,1413
+ILLINOIS,2023,March,Monthly,Number of Deaths,9732
+INDIANA,2023,March,Monthly,Number of Deaths,6024
+IOWA,2023,March,Monthly,Number of Deaths,2875
+KANSAS,2023,March,Monthly,Number of Deaths,3305
+KENTUCKY,2023,March,Monthly,Number of Deaths,4636
+LOUISIANA,2023,March,Monthly,Number of Deaths,4224
+MAINE,2023,March,Monthly,Number of Deaths,1422
+MARYLAND,2023,March,Monthly,Number of Deaths,4581
+MASSACHUSETTS,2023,March,Monthly,Number of Deaths,5193
+MICHIGAN,2023,March,Monthly,Number of Deaths,8976
+MINNESOTA,2023,March,Monthly,Number of Deaths,4257
+MISSISSIPPI,2023,March,Monthly,Number of Deaths,2939
+MISSOURI,2023,March,Monthly,Number of Deaths,5952
+MONTANA,2023,March,Monthly,Number of Deaths,1006
+NEBRASKA,2023,March,Monthly,Number of Deaths,1620
+NEVADA,2023,March,Monthly,Number of Deaths,2515
+NEW HAMPSHIRE,2023,March,Monthly,Number of Deaths,1212
+NEW JERSEY,2023,March,Monthly,Number of Deaths,6527
+NEW MEXICO,2023,March,Monthly,Number of Deaths,1942
+NEW YORK,2023,March,Monthly,Number of Deaths,13954
+NORTH CAROLINA,2023,March,Monthly,Number of Deaths,9309
+NORTH DAKOTA,2023,March,Monthly,Number of Deaths,581
+OHIO,2023,March,Monthly,Number of Deaths,11315
+OKLAHOMA,2023,March,Monthly,Number of Deaths,3834
+OREGON,2023,March,Monthly,Number of Deaths,3709
+PENNSYLVANIA,2023,March,Monthly,Number of Deaths,12066
+RHODE ISLAND,2023,March,Monthly,Number of Deaths,907
+SOUTH CAROLINA,2023,March,Monthly,Number of Deaths,5061
+SOUTH DAKOTA,2023,March,Monthly,Number of Deaths,707
+TENNESSEE,2023,March,Monthly,Number of Deaths,6886
+TEXAS,2023,March,Monthly,Number of Deaths,19652
+UTAH,2023,March,Monthly,Number of Deaths,1789
+VERMONT,2023,March,Monthly,Number of Deaths,595
+VIRGINIA,2023,March,Monthly,Number of Deaths,6715
+WASHINGTON,2023,March,Monthly,Number of Deaths,5751
+WEST VIRGINIA,2023,March,Monthly,Number of Deaths,2154
+WISCONSIN,2023,March,Monthly,Number of Deaths,4928
+WYOMING,2023,March,Monthly,Number of Deaths,489
+PUERTO RICO,2023,March,Monthly,Number of Deaths,2889
+ALABAMA,2023,April,Monthly,Number of Deaths,4735
+ALASKA,2023,April,Monthly,Number of Deaths,452
+ARIZONA,2023,April,Monthly,Number of Deaths,5965
+ARKANSAS,2023,April,Monthly,Number of Deaths,2882
+CALIFORNIA,2023,April,Monthly,Number of Deaths,24315
+COLORADO,2023,April,Monthly,Number of Deaths,3794
+CONNECTICUT,2023,April,Monthly,Number of Deaths,2592
+DELAWARE,2023,April,Monthly,Number of Deaths,915
+DISTRICT OF COLUMBIA,2023,April,Monthly,Number of Deaths,370
+FLORIDA,2023,April,Monthly,Number of Deaths,18716
+GEORGIA,2023,April,Monthly,Number of Deaths,7803
+HAWAII,2023,April,Monthly,Number of Deaths,1026
+IDAHO,2023,April,Monthly,Number of Deaths,1371
+ILLINOIS,2023,April,Monthly,Number of Deaths,9261
+INDIANA,2023,April,Monthly,Number of Deaths,5764
+IOWA,2023,April,Monthly,Number of Deaths,2641
+KANSAS,2023,April,Monthly,Number of Deaths,3074
+KENTUCKY,2023,April,Monthly,Number of Deaths,4294
+LOUISIANA,2023,April,Monthly,Number of Deaths,3938
+MAINE,2023,April,Monthly,Number of Deaths,1354
+MARYLAND,2023,April,Monthly,Number of Deaths,4160
+MASSACHUSETTS,2023,April,Monthly,Number of Deaths,4853
+MICHIGAN,2023,April,Monthly,Number of Deaths,8506
+MINNESOTA,2023,April,Monthly,Number of Deaths,4016
+MISSISSIPPI,2023,April,Monthly,Number of Deaths,2677
+MISSOURI,2023,April,Monthly,Number of Deaths,5411
+MONTANA,2023,April,Monthly,Number of Deaths,946
+NEBRASKA,2023,April,Monthly,Number of Deaths,1574
+NEVADA,2023,April,Monthly,Number of Deaths,2472
+NEW HAMPSHIRE,2023,April,Monthly,Number of Deaths,1111
+NEW JERSEY,2023,April,Monthly,Number of Deaths,6070
+NEW MEXICO,2023,April,Monthly,Number of Deaths,1926
+NEW YORK,2023,April,Monthly,Number of Deaths,12884
+NORTH CAROLINA,2023,April,Monthly,Number of Deaths,8596
+NORTH DAKOTA,2023,April,Monthly,Number of Deaths,575
+OHIO,2023,April,Monthly,Number of Deaths,10580
+OKLAHOMA,2023,April,Monthly,Number of Deaths,3572
+OREGON,2023,April,Monthly,Number of Deaths,3522
+PENNSYLVANIA,2023,April,Monthly,Number of Deaths,11199
+RHODE ISLAND,2023,April,Monthly,Number of Deaths,905
+SOUTH CAROLINA,2023,April,Monthly,Number of Deaths,4632
+SOUTH DAKOTA,2023,April,Monthly,Number of Deaths,712
+TENNESSEE,2023,April,Monthly,Number of Deaths,6469
+TEXAS,2023,April,Monthly,Number of Deaths,18394
+UTAH,2023,April,Monthly,Number of Deaths,1717
+VERMONT,2023,April,Monthly,Number of Deaths,574
+VIRGINIA,2023,April,Monthly,Number of Deaths,6277
+WASHINGTON,2023,April,Monthly,Number of Deaths,5545
+WEST VIRGINIA,2023,April,Monthly,Number of Deaths,2045
+WISCONSIN,2023,April,Monthly,Number of Deaths,4646
+WYOMING,2023,April,Monthly,Number of Deaths,498
+PUERTO RICO,2023,April,Monthly,Number of Deaths,2619
+ALABAMA,2023,May,Monthly,Number of Deaths,5013
+ALASKA,2023,May,Monthly,Number of Deaths,443
+ARIZONA,2023,May,Monthly,Number of Deaths,5687
+ARKANSAS,2023,May,Monthly,Number of Deaths,2904
+CALIFORNIA,2023,May,Monthly,Number of Deaths,23737
+COLORADO,2023,May,Monthly,Number of Deaths,3678
+CONNECTICUT,2023,May,Monthly,Number of Deaths,2612
+DELAWARE,2023,May,Monthly,Number of Deaths,832
+DISTRICT OF COLUMBIA,2023,May,Monthly,Number of Deaths,445
+FLORIDA,2023,May,Monthly,Number of Deaths,18749
+GEORGIA,2023,May,Monthly,Number of Deaths,7885
+HAWAII,2023,May,Monthly,Number of Deaths,1022
+IDAHO,2023,May,Monthly,Number of Deaths,1385
+ILLINOIS,2023,May,Monthly,Number of Deaths,9406
+INDIANA,2023,May,Monthly,Number of Deaths,5786
+IOWA,2023,May,Monthly,Number of Deaths,2670
+KANSAS,2023,May,Monthly,Number of Deaths,2895
+KENTUCKY,2023,May,Monthly,Number of Deaths,4268
+LOUISIANA,2023,May,Monthly,Number of Deaths,4079
+MAINE,2023,May,Monthly,Number of Deaths,1357
+MARYLAND,2023,May,Monthly,Number of Deaths,4276
+MASSACHUSETTS,2023,May,Monthly,Number of Deaths,4880
+MICHIGAN,2023,May,Monthly,Number of Deaths,8682
+MINNESOTA,2023,May,Monthly,Number of Deaths,3934
+MISSISSIPPI,2023,May,Monthly,Number of Deaths,2887
+MISSOURI,2023,May,Monthly,Number of Deaths,5462
+MONTANA,2023,May,Monthly,Number of Deaths,899
+NEBRASKA,2023,May,Monthly,Number of Deaths,1465
+NEVADA,2023,May,Monthly,Number of Deaths,2356
+NEW HAMPSHIRE,2023,May,Monthly,Number of Deaths,1152
+NEW JERSEY,2023,May,Monthly,Number of Deaths,6109
+NEW MEXICO,2023,May,Monthly,Number of Deaths,1783
+NEW YORK,2023,May,Monthly,Number of Deaths,13290
+NORTH CAROLINA,2023,May,Monthly,Number of Deaths,8692
+NORTH DAKOTA,2023,May,Monthly,Number of Deaths,591
+OHIO,2023,May,Monthly,Number of Deaths,10533
+OKLAHOMA,2023,May,Monthly,Number of Deaths,3600
+OREGON,2023,May,Monthly,Number of Deaths,3279
+PENNSYLVANIA,2023,May,Monthly,Number of Deaths,11304
+RHODE ISLAND,2023,May,Monthly,Number of Deaths,835
+SOUTH CAROLINA,2023,May,Monthly,Number of Deaths,4624
+SOUTH DAKOTA,2023,May,Monthly,Number of Deaths,712
+TENNESSEE,2023,May,Monthly,Number of Deaths,6511
+TEXAS,2023,May,Monthly,Number of Deaths,18696
+UTAH,2023,May,Monthly,Number of Deaths,1706
+VERMONT,2023,May,Monthly,Number of Deaths,530
+VIRGINIA,2023,May,Monthly,Number of Deaths,6333
+WASHINGTON,2023,May,Monthly,Number of Deaths,5308
+WEST VIRGINIA,2023,May,Monthly,Number of Deaths,1986
+WISCONSIN,2023,May,Monthly,Number of Deaths,4863
+WYOMING,2023,May,Monthly,Number of Deaths,461
+PUERTO RICO,2023,May,Monthly,Number of Deaths,2732
+ALABAMA,2023,June,Monthly,Number of Deaths,4513
+ALASKA,2023,June,Monthly,Number of Deaths,439
+ARIZONA,2023,June,Monthly,Number of Deaths,5324
+ARKANSAS,2023,June,Monthly,Number of Deaths,2762
+CALIFORNIA,2023,June,Monthly,Number of Deaths,22840
+COLORADO,2023,June,Monthly,Number of Deaths,3496
+CONNECTICUT,2023,June,Monthly,Number of Deaths,2461
+DELAWARE,2023,June,Monthly,Number of Deaths,835
+DISTRICT OF COLUMBIA,2023,June,Monthly,Number of Deaths,375
+FLORIDA,2023,June,Monthly,Number of Deaths,18157
+GEORGIA,2023,June,Monthly,Number of Deaths,7468
+HAWAII,2023,June,Monthly,Number of Deaths,997
+IDAHO,2023,June,Monthly,Number of Deaths,1315
+ILLINOIS,2023,June,Monthly,Number of Deaths,8810
+INDIANA,2023,June,Monthly,Number of Deaths,5521
+IOWA,2023,June,Monthly,Number of Deaths,2545
+KANSAS,2023,June,Monthly,Number of Deaths,2771
+KENTUCKY,2023,June,Monthly,Number of Deaths,4127
+LOUISIANA,2023,June,Monthly,Number of Deaths,3844
+MAINE,2023,June,Monthly,Number of Deaths,1290
+MARYLAND,2023,June,Monthly,Number of Deaths,4072
+MASSACHUSETTS,2023,June,Monthly,Number of Deaths,4746
+MICHIGAN,2023,June,Monthly,Number of Deaths,7963
+MINNESOTA,2023,June,Monthly,Number of Deaths,3862
+MISSISSIPPI,2023,June,Monthly,Number of Deaths,2749
+MISSOURI,2023,June,Monthly,Number of Deaths,5265
+MONTANA,2023,June,Monthly,Number of Deaths,884
+NEBRASKA,2023,June,Monthly,Number of Deaths,1404
+NEVADA,2023,June,Monthly,Number of Deaths,2211
+NEW HAMPSHIRE,2023,June,Monthly,Number of Deaths,1075
+NEW JERSEY,2023,June,Monthly,Number of Deaths,5838
+NEW MEXICO,2023,June,Monthly,Number of Deaths,1756
+NEW YORK,2023,June,Monthly,Number of Deaths,12372
+NORTH CAROLINA,2023,June,Monthly,Number of Deaths,8449
+NORTH DAKOTA,2023,June,Monthly,Number of Deaths,524
+OHIO,2023,June,Monthly,Number of Deaths,9952
+OKLAHOMA,2023,June,Monthly,Number of Deaths,3450
+OREGON,2023,June,Monthly,Number of Deaths,3364
+PENNSYLVANIA,2023,June,Monthly,Number of Deaths,10770
+RHODE ISLAND,2023,June,Monthly,Number of Deaths,833
+SOUTH CAROLINA,2023,June,Monthly,Number of Deaths,4605
+SOUTH DAKOTA,2023,June,Monthly,Number of Deaths,634
+TENNESSEE,2023,June,Monthly,Number of Deaths,6224
+TEXAS,2023,June,Monthly,Number of Deaths,18340
+UTAH,2023,June,Monthly,Number of Deaths,1643
+VERMONT,2023,June,Monthly,Number of Deaths,498
+VIRGINIA,2023,June,Monthly,Number of Deaths,6019
+WASHINGTON,2023,June,Monthly,Number of Deaths,5101
+WEST VIRGINIA,2023,June,Monthly,Number of Deaths,1852
+WISCONSIN,2023,June,Monthly,Number of Deaths,4516
+WYOMING,2023,June,Monthly,Number of Deaths,429
+PUERTO RICO,2023,June,Monthly,Number of Deaths,2917
+ALABAMA,2023,July,Monthly,Number of Deaths,4853
+ALASKA,2023,July,Monthly,Number of Deaths,427
+ARIZONA,2023,July,Monthly,Number of Deaths,5913
+ARKANSAS,2023,July,Monthly,Number of Deaths,2901
+CALIFORNIA,2023,July,Monthly,Number of Deaths,23352
+COLORADO,2023,July,Monthly,Number of Deaths,3546
+CONNECTICUT,2023,July,Monthly,Number of Deaths,2589
+DELAWARE,2023,July,Monthly,Number of Deaths,854
+DISTRICT OF COLUMBIA,2023,July,Monthly,Number of Deaths,404
+FLORIDA,2023,July,Monthly,Number of Deaths,19057
+GEORGIA,2023,July,Monthly,Number of Deaths,7618
+HAWAII,2023,July,Monthly,Number of Deaths,1029
+IDAHO,2023,July,Monthly,Number of Deaths,1348
+ILLINOIS,2023,July,Monthly,Number of Deaths,8974
+INDIANA,2023,July,Monthly,Number of Deaths,5505
+IOWA,2023,July,Monthly,Number of Deaths,2530
+KANSAS,2023,July,Monthly,Number of Deaths,2730
+KENTUCKY,2023,July,Monthly,Number of Deaths,4251
+LOUISIANA,2023,July,Monthly,Number of Deaths,3900
+MAINE,2023,July,Monthly,Number of Deaths,1339
+MARYLAND,2023,July,Monthly,Number of Deaths,4114
+MASSACHUSETTS,2023,July,Monthly,Number of Deaths,4803
+MICHIGAN,2023,July,Monthly,Number of Deaths,8232
+MINNESOTA,2023,July,Monthly,Number of Deaths,3903
+MISSISSIPPI,2023,July,Monthly,Number of Deaths,2761
+MISSOURI,2023,July,Monthly,Number of Deaths,5198
+MONTANA,2023,July,Monthly,Number of Deaths,927
+NEBRASKA,2023,July,Monthly,Number of Deaths,1471
+NEVADA,2023,July,Monthly,Number of Deaths,2439
+NEW HAMPSHIRE,2023,July,Monthly,Number of Deaths,1175
+NEW JERSEY,2023,July,Monthly,Number of Deaths,5829
+NEW MEXICO,2023,July,Monthly,Number of Deaths,1801
+NEW YORK,2023,July,Monthly,Number of Deaths,12607
+NORTH CAROLINA,2023,July,Monthly,Number of Deaths,8515
+NORTH DAKOTA,2023,July,Monthly,Number of Deaths,560
+OHIO,2023,July,Monthly,Number of Deaths,10070
+OKLAHOMA,2023,July,Monthly,Number of Deaths,3508
+OREGON,2023,July,Monthly,Number of Deaths,3478
+PENNSYLVANIA,2023,July,Monthly,Number of Deaths,10754
+RHODE ISLAND,2023,July,Monthly,Number of Deaths,796
+SOUTH CAROLINA,2023,July,Monthly,Number of Deaths,4688
+SOUTH DAKOTA,2023,July,Monthly,Number of Deaths,716
+TENNESSEE,2023,July,Monthly,Number of Deaths,6294
+TEXAS,2023,July,Monthly,Number of Deaths,18755
+UTAH,2023,July,Monthly,Number of Deaths,1678
+VERMONT,2023,July,Monthly,Number of Deaths,542
+VIRGINIA,2023,July,Monthly,Number of Deaths,6143
+WASHINGTON,2023,July,Monthly,Number of Deaths,5247
+WEST VIRGINIA,2023,July,Monthly,Number of Deaths,1982
+WISCONSIN,2023,July,Monthly,Number of Deaths,4545
+WYOMING,2023,July,Monthly,Number of Deaths,487
+PUERTO RICO,2023,July,Monthly,Number of Deaths,2821
+ALABAMA,2023,August,Monthly,Number of Deaths,4920
+ALASKA,2023,August,Monthly,Number of Deaths,456
+ARIZONA,2023,August,Monthly,Number of Deaths,5515
+ARKANSAS,2023,August,Monthly,Number of Deaths,2889
+CALIFORNIA,2023,August,Monthly,Number of Deaths,23449
+COLORADO,2023,August,Monthly,Number of Deaths,3686
+CONNECTICUT,2023,August,Monthly,Number of Deaths,2611
+DELAWARE,2023,August,Monthly,Number of Deaths,796
+DISTRICT OF COLUMBIA,2023,August,Monthly,Number of Deaths,422
+FLORIDA,2023,August,Monthly,Number of Deaths,18968
+GEORGIA,2023,August,Monthly,Number of Deaths,8223
+HAWAII,2023,August,Monthly,Number of Deaths,1178
+IDAHO,2023,August,Monthly,Number of Deaths,1371
+ILLINOIS,2023,August,Monthly,Number of Deaths,9029
+INDIANA,2023,August,Monthly,Number of Deaths,5634
+IOWA,2023,August,Monthly,Number of Deaths,2589
+KANSAS,2023,August,Monthly,Number of Deaths,2819
+KENTUCKY,2023,August,Monthly,Number of Deaths,4167
+LOUISIANA,2023,August,Monthly,Number of Deaths,4070
+MAINE,2023,August,Monthly,Number of Deaths,1376
+MARYLAND,2023,August,Monthly,Number of Deaths,4412
+MASSACHUSETTS,2023,August,Monthly,Number of Deaths,4957
+MICHIGAN,2023,August,Monthly,Number of Deaths,8344
+MINNESOTA,2023,August,Monthly,Number of Deaths,3899
+MISSISSIPPI,2023,August,Monthly,Number of Deaths,2970
+MISSOURI,2023,August,Monthly,Number of Deaths,5367
+MONTANA,2023,August,Monthly,Number of Deaths,848
+NEBRASKA,2023,August,Monthly,Number of Deaths,1544
+NEVADA,2023,August,Monthly,Number of Deaths,2383
+NEW HAMPSHIRE,2023,August,Monthly,Number of Deaths,1134
+NEW JERSEY,2023,August,Monthly,Number of Deaths,6062
+NEW MEXICO,2023,August,Monthly,Number of Deaths,1802
+NEW YORK,2023,August,Monthly,Number of Deaths,13002
+NORTH CAROLINA,2023,August,Monthly,Number of Deaths,8748
+NORTH DAKOTA,2023,August,Monthly,Number of Deaths,572
+OHIO,2023,August,Monthly,Number of Deaths,10021
+OKLAHOMA,2023,August,Monthly,Number of Deaths,3551
+OREGON,2023,August,Monthly,Number of Deaths,3381
+PENNSYLVANIA,2023,August,Monthly,Number of Deaths,10765
+RHODE ISLAND,2023,August,Monthly,Number of Deaths,747
+SOUTH CAROLINA,2023,August,Monthly,Number of Deaths,4656
+SOUTH DAKOTA,2023,August,Monthly,Number of Deaths,723
+TENNESSEE,2023,August,Monthly,Number of Deaths,6456
+TEXAS,2023,August,Monthly,Number of Deaths,18905
+UTAH,2023,August,Monthly,Number of Deaths,1732
+VERMONT,2023,August,Monthly,Number of Deaths,567
+VIRGINIA,2023,August,Monthly,Number of Deaths,6371
+WASHINGTON,2023,August,Monthly,Number of Deaths,5293
+WEST VIRGINIA,2023,August,Monthly,Number of Deaths,1996
+WISCONSIN,2023,August,Monthly,Number of Deaths,4622
+WYOMING,2023,August,Monthly,Number of Deaths,476
+PUERTO RICO,2023,August,Monthly,Number of Deaths,2842
+ALABAMA,2023,September,Monthly,Number of Deaths,4653
+ALASKA,2023,September,Monthly,Number of Deaths,484
+ARIZONA,2023,September,Monthly,Number of Deaths,5189
+ARKANSAS,2023,September,Monthly,Number of Deaths,2921
+CALIFORNIA,2023,September,Monthly,Number of Deaths,22795
+COLORADO,2023,September,Monthly,Number of Deaths,3637
+CONNECTICUT,2023,September,Monthly,Number of Deaths,2609
+DELAWARE,2023,September,Monthly,Number of Deaths,834
+DISTRICT OF COLUMBIA,2023,September,Monthly,Number of Deaths,423
+FLORIDA,2023,September,Monthly,Number of Deaths,18199
+GEORGIA,2023,September,Monthly,Number of Deaths,7620
+HAWAII,2023,September,Monthly,Number of Deaths,966
+IDAHO,2023,September,Monthly,Number of Deaths,1303
+ILLINOIS,2023,September,Monthly,Number of Deaths,9054
+INDIANA,2023,September,Monthly,Number of Deaths,5573
+IOWA,2023,September,Monthly,Number of Deaths,2535
+KANSAS,2023,September,Monthly,Number of Deaths,2910
+KENTUCKY,2023,September,Monthly,Number of Deaths,4121
+LOUISIANA,2023,September,Monthly,Number of Deaths,3970
+MAINE,2023,September,Monthly,Number of Deaths,1318
+MARYLAND,2023,September,Monthly,Number of Deaths,4203
+MASSACHUSETTS,2023,September,Monthly,Number of Deaths,4837
+MICHIGAN,2023,September,Monthly,Number of Deaths,8206
+MINNESOTA,2023,September,Monthly,Number of Deaths,3907
+MISSISSIPPI,2023,September,Monthly,Number of Deaths,2835
+MISSOURI,2023,September,Monthly,Number of Deaths,5283
+MONTANA,2023,September,Monthly,Number of Deaths,909
+NEBRASKA,2023,September,Monthly,Number of Deaths,1422
+NEVADA,2023,September,Monthly,Number of Deaths,2232
+NEW HAMPSHIRE,2023,September,Monthly,Number of Deaths,1126
+NEW JERSEY,2023,September,Monthly,Number of Deaths,5850
+NEW MEXICO,2023,September,Monthly,Number of Deaths,1685
+NEW YORK,2023,September,Monthly,Number of Deaths,12676
+NORTH CAROLINA,2023,September,Monthly,Number of Deaths,8693
+NORTH DAKOTA,2023,September,Monthly,Number of Deaths,530
+OHIO,2023,September,Monthly,Number of Deaths,10222
+OKLAHOMA,2023,September,Monthly,Number of Deaths,3483
+OREGON,2023,September,Monthly,Number of Deaths,3432
+PENNSYLVANIA,2023,September,Monthly,Number of Deaths,10689
+RHODE ISLAND,2023,September,Monthly,Number of Deaths,853
+SOUTH CAROLINA,2023,September,Monthly,Number of Deaths,4686
+SOUTH DAKOTA,2023,September,Monthly,Number of Deaths,709
+TENNESSEE,2023,September,Monthly,Number of Deaths,6560
+TEXAS,2023,September,Monthly,Number of Deaths,18212
+UTAH,2023,September,Monthly,Number of Deaths,1734
+VERMONT,2023,September,Monthly,Number of Deaths,557
+VIRGINIA,2023,September,Monthly,Number of Deaths,6134
+WASHINGTON,2023,September,Monthly,Number of Deaths,5309
+WEST VIRGINIA,2023,September,Monthly,Number of Deaths,1893
+WISCONSIN,2023,September,Monthly,Number of Deaths,4513
+WYOMING,2023,September,Monthly,Number of Deaths,425
+PUERTO RICO,2023,September,Monthly,Number of Deaths,2795
+ALABAMA,2023,October,Monthly,Number of Deaths,4765
+ALASKA,2023,October,Monthly,Number of Deaths,463
+ARIZONA,2023,October,Monthly,Number of Deaths,5595
+ARKANSAS,2023,October,Monthly,Number of Deaths,3042
+CALIFORNIA,2023,October,Monthly,Number of Deaths,23858
+COLORADO,2023,October,Monthly,Number of Deaths,3864
+CONNECTICUT,2023,October,Monthly,Number of Deaths,2841
+DELAWARE,2023,October,Monthly,Number of Deaths,893
+DISTRICT OF COLUMBIA,2023,October,Monthly,Number of Deaths,434
+FLORIDA,2023,October,Monthly,Number of Deaths,18703
+GEORGIA,2023,October,Monthly,Number of Deaths,7946
+HAWAII,2023,October,Monthly,Number of Deaths,1003
+IDAHO,2023,October,Monthly,Number of Deaths,1412
+ILLINOIS,2023,October,Monthly,Number of Deaths,9378
+INDIANA,2023,October,Monthly,Number of Deaths,5900
+IOWA,2023,October,Monthly,Number of Deaths,2687
+KANSAS,2023,October,Monthly,Number of Deaths,2994
+KENTUCKY,2023,October,Monthly,Number of Deaths,4456
+LOUISIANA,2023,October,Monthly,Number of Deaths,4092
+MAINE,2023,October,Monthly,Number of Deaths,1432
+MARYLAND,2023,October,Monthly,Number of Deaths,4642
+MASSACHUSETTS,2023,October,Monthly,Number of Deaths,5200
+MICHIGAN,2023,October,Monthly,Number of Deaths,8673
+MINNESOTA,2023,October,Monthly,Number of Deaths,4239
+MISSISSIPPI,2023,October,Monthly,Number of Deaths,2924
+MISSOURI,2023,October,Monthly,Number of Deaths,5642
+MONTANA,2023,October,Monthly,Number of Deaths,979
+NEBRASKA,2023,October,Monthly,Number of Deaths,1531
+NEVADA,2023,October,Monthly,Number of Deaths,2223
+NEW HAMPSHIRE,2023,October,Monthly,Number of Deaths,1215
+NEW JERSEY,2023,October,Monthly,Number of Deaths,6449
+NEW MEXICO,2023,October,Monthly,Number of Deaths,1860
+NEW YORK,2023,October,Monthly,Number of Deaths,14100
+NORTH CAROLINA,2023,October,Monthly,Number of Deaths,8981
+NORTH DAKOTA,2023,October,Monthly,Number of Deaths,569
+OHIO,2023,October,Monthly,Number of Deaths,10916
+OKLAHOMA,2023,October,Monthly,Number of Deaths,3685
+OREGON,2023,October,Monthly,Number of Deaths,3695
+PENNSYLVANIA,2023,October,Monthly,Number of Deaths,11880
+RHODE ISLAND,2023,October,Monthly,Number of Deaths,911
+SOUTH CAROLINA,2023,October,Monthly,Number of Deaths,4771
+SOUTH DAKOTA,2023,October,Monthly,Number of Deaths,769
+TENNESSEE,2023,October,Monthly,Number of Deaths,6531
+TEXAS,2023,October,Monthly,Number of Deaths,18642
+UTAH,2023,October,Monthly,Number of Deaths,1893
+VERMONT,2023,October,Monthly,Number of Deaths,568
+VIRGINIA,2023,October,Monthly,Number of Deaths,6528
+WASHINGTON,2023,October,Monthly,Number of Deaths,5550
+WEST VIRGINIA,2023,October,Monthly,Number of Deaths,1979
+WISCONSIN,2023,October,Monthly,Number of Deaths,4848
+WYOMING,2023,October,Monthly,Number of Deaths,450
+PUERTO RICO,2023,October,Monthly,Number of Deaths,2792
+ALABAMA,2023,November,Monthly,Number of Deaths,4781
+ALASKA,2023,November,Monthly,Number of Deaths,490
+ARIZONA,2023,November,Monthly,Number of Deaths,5555
+ARKANSAS,2023,November,Monthly,Number of Deaths,2860
+CALIFORNIA,2023,November,Monthly,Number of Deaths,24407
+COLORADO,2023,November,Monthly,Number of Deaths,3777
+CONNECTICUT,2023,November,Monthly,Number of Deaths,2772
+DELAWARE,2023,November,Monthly,Number of Deaths,879
+DISTRICT OF COLUMBIA,2023,November,Monthly,Number of Deaths,424
+FLORIDA,2023,November,Monthly,Number of Deaths,18169
+GEORGIA,2023,November,Monthly,Number of Deaths,7800
+HAWAII,2023,November,Monthly,Number of Deaths,997
+IDAHO,2023,November,Monthly,Number of Deaths,1368
+ILLINOIS,2023,November,Monthly,Number of Deaths,9824
+INDIANA,2023,November,Monthly,Number of Deaths,5887
+IOWA,2023,November,Monthly,Number of Deaths,2788
+KANSAS,2023,November,Monthly,Number of Deaths,2956
+KENTUCKY,2023,November,Monthly,Number of Deaths,4410
+LOUISIANA,2023,November,Monthly,Number of Deaths,4057
+MAINE,2023,November,Monthly,Number of Deaths,1415
+MARYLAND,2023,November,Monthly,Number of Deaths,4516
+MASSACHUSETTS,2023,November,Monthly,Number of Deaths,5186
+MICHIGAN,2023,November,Monthly,Number of Deaths,8556
+MINNESOTA,2023,November,Monthly,Number of Deaths,4367
+MISSISSIPPI,2023,November,Monthly,Number of Deaths,3001
+MISSOURI,2023,November,Monthly,Number of Deaths,5460
+MONTANA,2023,November,Monthly,Number of Deaths,963
+NEBRASKA,2023,November,Monthly,Number of Deaths,1522
+NEVADA,2023,November,Monthly,Number of Deaths,2479
+NEW HAMPSHIRE,2023,November,Monthly,Number of Deaths,1164
+NEW JERSEY,2023,November,Monthly,Number of Deaths,6286
+NEW MEXICO,2023,November,Monthly,Number of Deaths,1892
+NEW YORK,2023,November,Monthly,Number of Deaths,13566
+NORTH CAROLINA,2023,November,Monthly,Number of Deaths,9038
+NORTH DAKOTA,2023,November,Monthly,Number of Deaths,587
+OHIO,2023,November,Monthly,Number of Deaths,10706
+OKLAHOMA,2023,November,Monthly,Number of Deaths,3723
+OREGON,2023,November,Monthly,Number of Deaths,3534
+PENNSYLVANIA,2023,November,Monthly,Number of Deaths,11840
+RHODE ISLAND,2023,November,Monthly,Number of Deaths,879
+SOUTH CAROLINA,2023,November,Monthly,Number of Deaths,4807
+SOUTH DAKOTA,2023,November,Monthly,Number of Deaths,759
+TENNESSEE,2023,November,Monthly,Number of Deaths,6588
+TEXAS,2023,November,Monthly,Number of Deaths,18955
+UTAH,2023,November,Monthly,Number of Deaths,1821
+VERMONT,2023,November,Monthly,Number of Deaths,573
+VIRGINIA,2023,November,Monthly,Number of Deaths,6607
+WASHINGTON,2023,November,Monthly,Number of Deaths,5466
+WEST VIRGINIA,2023,November,Monthly,Number of Deaths,2020
+WISCONSIN,2023,November,Monthly,Number of Deaths,4925
+WYOMING,2023,November,Monthly,Number of Deaths,480
+PUERTO RICO,2023,November,Monthly,Number of Deaths,2857
+ALABAMA,2023,December,Monthly,Number of Deaths,5559
+ALASKA,2023,December,Monthly,Number of Deaths,495
+ARIZONA,2023,December,Monthly,Number of Deaths,6239
+ARKANSAS,2023,December,Monthly,Number of Deaths,3245
+CALIFORNIA,2023,December,Monthly,Number of Deaths,27100
+COLORADO,2023,December,Monthly,Number of Deaths,4069
+CONNECTICUT,2023,December,Monthly,Number of Deaths,2958
+DELAWARE,2023,December,Monthly,Number of Deaths,971
+DISTRICT OF COLUMBIA,2023,December,Monthly,Number of Deaths,425
+FLORIDA,2023,December,Monthly,Number of Deaths,20014
+GEORGIA,2023,December,Monthly,Number of Deaths,9017
+HAWAII,2023,December,Monthly,Number of Deaths,1060
+IDAHO,2023,December,Monthly,Number of Deaths,1482
+ILLINOIS,2023,December,Monthly,Number of Deaths,10745
+INDIANA,2023,December,Monthly,Number of Deaths,6507
+IOWA,2023,December,Monthly,Number of Deaths,3078
+KANSAS,2023,December,Monthly,Number of Deaths,3234
+KENTUCKY,2023,December,Monthly,Number of Deaths,5027
+LOUISIANA,2023,December,Monthly,Number of Deaths,4558
+MAINE,2023,December,Monthly,Number of Deaths,1541
+MARYLAND,2023,December,Monthly,Number of Deaths,4995
+MASSACHUSETTS,2023,December,Monthly,Number of Deaths,5701
+MICHIGAN,2023,December,Monthly,Number of Deaths,9368
+MINNESOTA,2023,December,Monthly,Number of Deaths,4515
+MISSISSIPPI,2023,December,Monthly,Number of Deaths,3246
+MISSOURI,2023,December,Monthly,Number of Deaths,6056
+MONTANA,2023,December,Monthly,Number of Deaths,971
+NEBRASKA,2023,December,Monthly,Number of Deaths,1655
+NEVADA,2023,December,Monthly,Number of Deaths,2596
+NEW HAMPSHIRE,2023,December,Monthly,Number of Deaths,1227
+NEW JERSEY,2023,December,Monthly,Number of Deaths,7121
+NEW MEXICO,2023,December,Monthly,Number of Deaths,2054
+NEW YORK,2023,December,Monthly,Number of Deaths,15119
+NORTH CAROLINA,2023,December,Monthly,Number of Deaths,10263
+NORTH DAKOTA,2023,December,Monthly,Number of Deaths,605
+OHIO,2023,December,Monthly,Number of Deaths,11527
+OKLAHOMA,2023,December,Monthly,Number of Deaths,4075
+OREGON,2023,December,Monthly,Number of Deaths,3801
+PENNSYLVANIA,2023,December,Monthly,Number of Deaths,12583
+RHODE ISLAND,2023,December,Monthly,Number of Deaths,966
+SOUTH CAROLINA,2023,December,Monthly,Number of Deaths,5451
+SOUTH DAKOTA,2023,December,Monthly,Number of Deaths,748
+TENNESSEE,2023,December,Monthly,Number of Deaths,7421
+TEXAS,2023,December,Monthly,Number of Deaths,20632
+UTAH,2023,December,Monthly,Number of Deaths,1965
+VERMONT,2023,December,Monthly,Number of Deaths,584
+VIRGINIA,2023,December,Monthly,Number of Deaths,7330
+WASHINGTON,2023,December,Monthly,Number of Deaths,5891
+WEST VIRGINIA,2023,December,Monthly,Number of Deaths,2366
+WISCONSIN,2023,December,Monthly,Number of Deaths,5202
+WYOMING,2023,December,Monthly,Number of Deaths,495
+PUERTO RICO,2023,December,Monthly,Number of Deaths,2924
+ALABAMA,2024,January,Monthly,Number of Deaths,5797
+ALASKA,2024,January,Monthly,Number of Deaths,518
+ARIZONA,2024,January,Monthly,Number of Deaths,6734
+ARKANSAS,2024,January,Monthly,Number of Deaths,3469
+CALIFORNIA,2024,January,Monthly,Number of Deaths,27452
+COLORADO,2024,January,Monthly,Number of Deaths,4038
+CONNECTICUT,2024,January,Monthly,Number of Deaths,3094
+DELAWARE,2024,January,Monthly,Number of Deaths,1020
+DISTRICT OF COLUMBIA,2024,January,Monthly,Number of Deaths,455
+FLORIDA,2024,January,Monthly,Number of Deaths,21517
+GEORGIA,2024,January,Monthly,Number of Deaths,9566
+HAWAII,2024,January,Monthly,Number of Deaths,1255
+IDAHO,2024,January,Monthly,Number of Deaths,1545
+ILLINOIS,2024,January,Monthly,Number of Deaths,10562
+INDIANA,2024,January,Monthly,Number of Deaths,6640
+IOWA,2024,January,Monthly,Number of Deaths,3115
+KANSAS,2024,January,Monthly,Number of Deaths,3458
+KENTUCKY,2024,January,Monthly,Number of Deaths,5094
+LOUISIANA,2024,January,Monthly,Number of Deaths,4821
+MAINE,2024,January,Monthly,Number of Deaths,1500
+MARYLAND,2024,January,Monthly,Number of Deaths,5175
+MASSACHUSETTS,2024,January,Monthly,Number of Deaths,5794
+MICHIGAN,2024,January,Monthly,Number of Deaths,9652
+MINNESOTA,2024,January,Monthly,Number of Deaths,4508
+MISSISSIPPI,2024,January,Monthly,Number of Deaths,3569
+MISSOURI,2024,January,Monthly,Number of Deaths,6393
+MONTANA,2024,January,Monthly,Number of Deaths,1112
+NEBRASKA,2024,January,Monthly,Number of Deaths,1739
+NEVADA,2024,January,Monthly,Number of Deaths,2658
+NEW HAMPSHIRE,2024,January,Monthly,Number of Deaths,1366
+NEW JERSEY,2024,January,Monthly,Number of Deaths,7356
+NEW MEXICO,2024,January,Monthly,Number of Deaths,2073
+NEW YORK,2024,January,Monthly,Number of Deaths,15793
+NORTH CAROLINA,2024,January,Monthly,Number of Deaths,10222
+NORTH DAKOTA,2024,January,Monthly,Number of Deaths,639
+OHIO,2024,January,Monthly,Number of Deaths,12195
+OKLAHOMA,2024,January,Monthly,Number of Deaths,4408
+OREGON,2024,January,Monthly,Number of Deaths,3966
+PENNSYLVANIA,2024,January,Monthly,Number of Deaths,13107
+RHODE ISLAND,2024,January,Monthly,Number of Deaths,969
+SOUTH CAROLINA,2024,January,Monthly,Number of Deaths,5443
+SOUTH DAKOTA,2024,January,Monthly,Number of Deaths,827
+TENNESSEE,2024,January,Monthly,Number of Deaths,7707
+TEXAS,2024,January,Monthly,Number of Deaths,22035
+UTAH,2024,January,Monthly,Number of Deaths,2087
+VERMONT,2024,January,Monthly,Number of Deaths,655
+VIRGINIA,2024,January,Monthly,Number of Deaths,7574
+WASHINGTON,2024,January,Monthly,Number of Deaths,6089
+WEST VIRGINIA,2024,January,Monthly,Number of Deaths,2285
+WISCONSIN,2024,January,Monthly,Number of Deaths,5353
+WYOMING,2024,January,Monthly,Number of Deaths,552
+PUERTO RICO,2024,January,Monthly,Number of Deaths,3030
+ALABAMA,2024,February,Monthly,Number of Deaths,4866
+ALASKA,2024,February,Monthly,Number of Deaths,487
+ARIZONA,2024,February,Monthly,Number of Deaths,5610
+ARKANSAS,2024,February,Monthly,Number of Deaths,3043
+CALIFORNIA,2024,February,Monthly,Number of Deaths,23495
+COLORADO,2024,February,Monthly,Number of Deaths,3607
+CONNECTICUT,2024,February,Monthly,Number of Deaths,2703
+DELAWARE,2024,February,Monthly,Number of Deaths,867
+DISTRICT OF COLUMBIA,2024,February,Monthly,Number of Deaths,405
+FLORIDA,2024,February,Monthly,Number of Deaths,19305
+GEORGIA,2024,February,Monthly,Number of Deaths,8046
+HAWAII,2024,February,Monthly,Number of Deaths,1062
+IDAHO,2024,February,Monthly,Number of Deaths,1317
+ILLINOIS,2024,February,Monthly,Number of Deaths,9251
+INDIANA,2024,February,Monthly,Number of Deaths,5744
+IOWA,2024,February,Monthly,Number of Deaths,2742
+KANSAS,2024,February,Monthly,Number of Deaths,3034
+KENTUCKY,2024,February,Monthly,Number of Deaths,4355
+LOUISIANA,2024,February,Monthly,Number of Deaths,4101
+MAINE,2024,February,Monthly,Number of Deaths,1374
+MARYLAND,2024,February,Monthly,Number of Deaths,4467
+MASSACHUSETTS,2024,February,Monthly,Number of Deaths,4996
+MICHIGAN,2024,February,Monthly,Number of Deaths,8451
+MINNESOTA,2024,February,Monthly,Number of Deaths,4071
+MISSISSIPPI,2024,February,Monthly,Number of Deaths,2884
+MISSOURI,2024,February,Monthly,Number of Deaths,5493
+MONTANA,2024,February,Monthly,Number of Deaths,955
+NEBRASKA,2024,February,Monthly,Number of Deaths,1466
+NEVADA,2024,February,Monthly,Number of Deaths,2399
+NEW HAMPSHIRE,2024,February,Monthly,Number of Deaths,1183
+NEW JERSEY,2024,February,Monthly,Number of Deaths,6320
+NEW MEXICO,2024,February,Monthly,Number of Deaths,1763
+NEW YORK,2024,February,Monthly,Number of Deaths,13441
+NORTH CAROLINA,2024,February,Monthly,Number of Deaths,8831
+NORTH DAKOTA,2024,February,Monthly,Number of Deaths,587
+OHIO,2024,February,Monthly,Number of Deaths,10719
+OKLAHOMA,2024,February,Monthly,Number of Deaths,3800
+OREGON,2024,February,Monthly,Number of Deaths,3460
+PENNSYLVANIA,2024,February,Monthly,Number of Deaths,11250
+RHODE ISLAND,2024,February,Monthly,Number of Deaths,901
+SOUTH CAROLINA,2024,February,Monthly,Number of Deaths,4819
+SOUTH DAKOTA,2024,February,Monthly,Number of Deaths,724
+TENNESSEE,2024,February,Monthly,Number of Deaths,6519
+TEXAS,2024,February,Monthly,Number of Deaths,19054
+UTAH,2024,February,Monthly,Number of Deaths,1720
+VERMONT,2024,February,Monthly,Number of Deaths,547
+VIRGINIA,2024,February,Monthly,Number of Deaths,6475
+WASHINGTON,2024,February,Monthly,Number of Deaths,5329
+WEST VIRGINIA,2024,February,Monthly,Number of Deaths,2045
+WISCONSIN,2024,February,Monthly,Number of Deaths,4801
+WYOMING,2024,February,Monthly,Number of Deaths,449
+PUERTO RICO,2024,February,Monthly,Number of Deaths,2699
+ALABAMA,2024,March,Monthly,Number of Deaths,4962
+ALASKA,2024,March,Monthly,Number of Deaths,444
+ARIZONA,2024,March,Monthly,Number of Deaths,5991
+ARKANSAS,2024,March,Monthly,Number of Deaths,3084
+CALIFORNIA,2024,March,Monthly,Number of Deaths,24285
+COLORADO,2024,March,Monthly,Number of Deaths,3784
+CONNECTICUT,2024,March,Monthly,Number of Deaths,2892
+DELAWARE,2024,March,Monthly,Number of Deaths,872
+DISTRICT OF COLUMBIA,2024,March,Monthly,Number of Deaths,401
+FLORIDA,2024,March,Monthly,Number of Deaths,19992
+GEORGIA,2024,March,Monthly,Number of Deaths,8083
+HAWAII,2024,March,Monthly,Number of Deaths,1067
+IDAHO,2024,March,Monthly,Number of Deaths,1428
+ILLINOIS,2024,March,Monthly,Number of Deaths,9683
+INDIANA,2024,March,Monthly,Number of Deaths,6049
+IOWA,2024,March,Monthly,Number of Deaths,2755
+KANSAS,2024,March,Monthly,Number of Deaths,3171
+KENTUCKY,2024,March,Monthly,Number of Deaths,4584
+LOUISIANA,2024,March,Monthly,Number of Deaths,4106
+MAINE,2024,March,Monthly,Number of Deaths,1457
+MARYLAND,2024,March,Monthly,Number of Deaths,4579
+MASSACHUSETTS,2024,March,Monthly,Number of Deaths,5241
+MICHIGAN,2024,March,Monthly,Number of Deaths,8997
+MINNESOTA,2024,March,Monthly,Number of Deaths,4244
+MISSISSIPPI,2024,March,Monthly,Number of Deaths,2973
+MISSOURI,2024,March,Monthly,Number of Deaths,5585
+MONTANA,2024,March,Monthly,Number of Deaths,972
+NEBRASKA,2024,March,Monthly,Number of Deaths,1627
+NEVADA,2024,March,Monthly,Number of Deaths,2549
+NEW HAMPSHIRE,2024,March,Monthly,Number of Deaths,1181
+NEW JERSEY,2024,March,Monthly,Number of Deaths,6443
+NEW MEXICO,2024,March,Monthly,Number of Deaths,1900
+NEW YORK,2024,March,Monthly,Number of Deaths,13593
+NORTH CAROLINA,2024,March,Monthly,Number of Deaths,8978
+NORTH DAKOTA,2024,March,Monthly,Number of Deaths,577
+OHIO,2024,March,Monthly,Number of Deaths,10994
+OKLAHOMA,2024,March,Monthly,Number of Deaths,3709
+OREGON,2024,March,Monthly,Number of Deaths,3584
+PENNSYLVANIA,2024,March,Monthly,Number of Deaths,11748
+RHODE ISLAND,2024,March,Monthly,Number of Deaths,826
+SOUTH CAROLINA,2024,March,Monthly,Number of Deaths,4921
+SOUTH DAKOTA,2024,March,Monthly,Number of Deaths,727
+TENNESSEE,2024,March,Monthly,Number of Deaths,6804
+TEXAS,2024,March,Monthly,Number of Deaths,19469
+UTAH,2024,March,Monthly,Number of Deaths,1780
+VERMONT,2024,March,Monthly,Number of Deaths,593
+VIRGINIA,2024,March,Monthly,Number of Deaths,6658
+WASHINGTON,2024,March,Monthly,Number of Deaths,5534
+WEST VIRGINIA,2024,March,Monthly,Number of Deaths,2149
+WISCONSIN,2024,March,Monthly,Number of Deaths,4796
+WYOMING,2024,March,Monthly,Number of Deaths,462
+PUERTO RICO,2024,March,Monthly,Number of Deaths,2776
+ALABAMA,2024,April,Monthly,Number of Deaths,4830
+ALASKA,2024,April,Monthly,Number of Deaths,419
+ARIZONA,2024,April,Monthly,Number of Deaths,5713
+ARKANSAS,2024,April,Monthly,Number of Deaths,2864
+CALIFORNIA,2024,April,Monthly,Number of Deaths,23286
+COLORADO,2024,April,Monthly,Number of Deaths,3717
+CONNECTICUT,2024,April,Monthly,Number of Deaths,2692
+DELAWARE,2024,April,Monthly,Number of Deaths,868
+DISTRICT OF COLUMBIA,2024,April,Monthly,Number of Deaths,391
+FLORIDA,2024,April,Monthly,Number of Deaths,18522
+GEORGIA,2024,April,Monthly,Number of Deaths,7561
+HAWAII,2024,April,Monthly,Number of Deaths,1015
+IDAHO,2024,April,Monthly,Number of Deaths,1341
+ILLINOIS,2024,April,Monthly,Number of Deaths,9018
+INDIANA,2024,April,Monthly,Number of Deaths,5524
+IOWA,2024,April,Monthly,Number of Deaths,2644
+KANSAS,2024,April,Monthly,Number of Deaths,2809
+KENTUCKY,2024,April,Monthly,Number of Deaths,4263
+LOUISIANA,2024,April,Monthly,Number of Deaths,3938
+MAINE,2024,April,Monthly,Number of Deaths,1331
+MARYLAND,2024,April,Monthly,Number of Deaths,4390
+MASSACHUSETTS,2024,April,Monthly,Number of Deaths,4998
+MICHIGAN,2024,April,Monthly,Number of Deaths,8326
+MINNESOTA,2024,April,Monthly,Number of Deaths,4108
+MISSISSIPPI,2024,April,Monthly,Number of Deaths,2795
+MISSOURI,2024,April,Monthly,Number of Deaths,5328
+MONTANA,2024,April,Monthly,Number of Deaths,932
+NEBRASKA,2024,April,Monthly,Number of Deaths,1454
+NEVADA,2024,April,Monthly,Number of Deaths,2374
+NEW HAMPSHIRE,2024,April,Monthly,Number of Deaths,1151
+NEW JERSEY,2024,April,Monthly,Number of Deaths,6097
+NEW MEXICO,2024,April,Monthly,Number of Deaths,1811
+NEW YORK,2024,April,Monthly,Number of Deaths,12852
+NORTH CAROLINA,2024,April,Monthly,Number of Deaths,8671
+NORTH DAKOTA,2024,April,Monthly,Number of Deaths,549
+OHIO,2024,April,Monthly,Number of Deaths,10398
+OKLAHOMA,2024,April,Monthly,Number of Deaths,3590
+OREGON,2024,April,Monthly,Number of Deaths,3362
+PENNSYLVANIA,2024,April,Monthly,Number of Deaths,11030
+RHODE ISLAND,2024,April,Monthly,Number of Deaths,805
+SOUTH CAROLINA,2024,April,Monthly,Number of Deaths,4743
+SOUTH DAKOTA,2024,April,Monthly,Number of Deaths,739
+TENNESSEE,2024,April,Monthly,Number of Deaths,6411
+TEXAS,2024,April,Monthly,Number of Deaths,18260
+UTAH,2024,April,Monthly,Number of Deaths,1728
+VERMONT,2024,April,Monthly,Number of Deaths,546
+VIRGINIA,2024,April,Monthly,Number of Deaths,6258
+WASHINGTON,2024,April,Monthly,Number of Deaths,5251
+WEST VIRGINIA,2024,April,Monthly,Number of Deaths,1911
+WISCONSIN,2024,April,Monthly,Number of Deaths,4641
+WYOMING,2024,April,Monthly,Number of Deaths,462
+PUERTO RICO,2024,April,Monthly,Number of Deaths,2660
+ALABAMA,2024,May,Monthly,Number of Deaths,4629
+ALASKA,2024,May,Monthly,Number of Deaths,464
+ARIZONA,2024,May,Monthly,Number of Deaths,5853
+ARKANSAS,2024,May,Monthly,Number of Deaths,2855
+CALIFORNIA,2024,May,Monthly,Number of Deaths,23461
+COLORADO,2024,May,Monthly,Number of Deaths,3746
+CONNECTICUT,2024,May,Monthly,Number of Deaths,2588
+DELAWARE,2024,May,Monthly,Number of Deaths,847
+DISTRICT OF COLUMBIA,2024,May,Monthly,Number of Deaths,399
+FLORIDA,2024,May,Monthly,Number of Deaths,18768
+GEORGIA,2024,May,Monthly,Number of Deaths,7584
+HAWAII,2024,May,Monthly,Number of Deaths,1005
+IDAHO,2024,May,Monthly,Number of Deaths,1336
+ILLINOIS,2024,May,Monthly,Number of Deaths,9050
+INDIANA,2024,May,Monthly,Number of Deaths,5595
+IOWA,2024,May,Monthly,Number of Deaths,2614
+KANSAS,2024,May,Monthly,Number of Deaths,2801
+KENTUCKY,2024,May,Monthly,Number of Deaths,4145
+LOUISIANA,2024,May,Monthly,Number of Deaths,3908
+MAINE,2024,May,Monthly,Number of Deaths,1373
+MARYLAND,2024,May,Monthly,Number of Deaths,4293
+MASSACHUSETTS,2024,May,Monthly,Number of Deaths,4872
+MICHIGAN,2024,May,Monthly,Number of Deaths,8344
+MINNESOTA,2024,May,Monthly,Number of Deaths,4046
+MISSISSIPPI,2024,May,Monthly,Number of Deaths,2859
+MISSOURI,2024,May,Monthly,Number of Deaths,5276
+MONTANA,2024,May,Monthly,Number of Deaths,968
+NEBRASKA,2024,May,Monthly,Number of Deaths,1479
+NEVADA,2024,May,Monthly,Number of Deaths,2476
+NEW HAMPSHIRE,2024,May,Monthly,Number of Deaths,1158
+NEW JERSEY,2024,May,Monthly,Number of Deaths,6001
+NEW MEXICO,2024,May,Monthly,Number of Deaths,1830
+NEW YORK,2024,May,Monthly,Number of Deaths,12768
+NORTH CAROLINA,2024,May,Monthly,Number of Deaths,8516
+NORTH DAKOTA,2024,May,Monthly,Number of Deaths,582
+OHIO,2024,May,Monthly,Number of Deaths,10241
+OKLAHOMA,2024,May,Monthly,Number of Deaths,3597
+OREGON,2024,May,Monthly,Number of Deaths,3478
+PENNSYLVANIA,2024,May,Monthly,Number of Deaths,10985
+RHODE ISLAND,2024,May,Monthly,Number of Deaths,801
+SOUTH CAROLINA,2024,May,Monthly,Number of Deaths,4669
+SOUTH DAKOTA,2024,May,Monthly,Number of Deaths,722
+TENNESSEE,2024,May,Monthly,Number of Deaths,6422
+TEXAS,2024,May,Monthly,Number of Deaths,18611
+UTAH,2024,May,Monthly,Number of Deaths,1695
+VERMONT,2024,May,Monthly,Number of Deaths,545
+VIRGINIA,2024,May,Monthly,Number of Deaths,6139
+WASHINGTON,2024,May,Monthly,Number of Deaths,5400
+WEST VIRGINIA,2024,May,Monthly,Number of Deaths,2059
+WISCONSIN,2024,May,Monthly,Number of Deaths,4676
+WYOMING,2024,May,Monthly,Number of Deaths,449
+PUERTO RICO,2024,May,Monthly,Number of Deaths,2764
+ALABAMA,2024,June,Monthly,Number of Deaths,4520
+ALASKA,2024,June,Monthly,Number of Deaths,411
+ARIZONA,2024,June,Monthly,Number of Deaths,5570
+ARKANSAS,2024,June,Monthly,Number of Deaths,2834
+CALIFORNIA,2024,June,Monthly,Number of Deaths,22839
+COLORADO,2024,June,Monthly,Number of Deaths,3505
+CONNECTICUT,2024,June,Monthly,Number of Deaths,2521
+DELAWARE,2024,June,Monthly,Number of Deaths,840
+DISTRICT OF COLUMBIA,2024,June,Monthly,Number of Deaths,378
+FLORIDA,2024,June,Monthly,Number of Deaths,17895
+GEORGIA,2024,June,Monthly,Number of Deaths,7068
+HAWAII,2024,June,Monthly,Number of Deaths,1017
+IDAHO,2024,June,Monthly,Number of Deaths,1431
+ILLINOIS,2024,June,Monthly,Number of Deaths,8599
+INDIANA,2024,June,Monthly,Number of Deaths,5332
+IOWA,2024,June,Monthly,Number of Deaths,2478
+KANSAS,2024,June,Monthly,Number of Deaths,2781
+KENTUCKY,2024,June,Monthly,Number of Deaths,3967
+LOUISIANA,2024,June,Monthly,Number of Deaths,3629
+MAINE,2024,June,Monthly,Number of Deaths,1270
+MARYLAND,2024,June,Monthly,Number of Deaths,4241
+MASSACHUSETTS,2024,June,Monthly,Number of Deaths,4676
+MICHIGAN,2024,June,Monthly,Number of Deaths,7769
+MINNESOTA,2024,June,Monthly,Number of Deaths,3833
+MISSISSIPPI,2024,June,Monthly,Number of Deaths,2735
+MISSOURI,2024,June,Monthly,Number of Deaths,5019
+MONTANA,2024,June,Monthly,Number of Deaths,943
+NEBRASKA,2024,June,Monthly,Number of Deaths,1418
+NEVADA,2024,June,Monthly,Number of Deaths,2437
+NEW HAMPSHIRE,2024,June,Monthly,Number of Deaths,1102
+NEW JERSEY,2024,June,Monthly,Number of Deaths,5684
+NEW MEXICO,2024,June,Monthly,Number of Deaths,1675
+NEW YORK,2024,June,Monthly,Number of Deaths,12391
+NORTH CAROLINA,2024,June,Monthly,Number of Deaths,8192
+NORTH DAKOTA,2024,June,Monthly,Number of Deaths,589
+OHIO,2024,June,Monthly,Number of Deaths,9918
+OKLAHOMA,2024,June,Monthly,Number of Deaths,3538
+OREGON,2024,June,Monthly,Number of Deaths,3304
+PENNSYLVANIA,2024,June,Monthly,Number of Deaths,10562
+RHODE ISLAND,2024,June,Monthly,Number of Deaths,813
+SOUTH CAROLINA,2024,June,Monthly,Number of Deaths,4631
+SOUTH DAKOTA,2024,June,Monthly,Number of Deaths,640
+TENNESSEE,2024,June,Monthly,Number of Deaths,6153
+TEXAS,2024,June,Monthly,Number of Deaths,18133
+UTAH,2024,June,Monthly,Number of Deaths,1679
+VERMONT,2024,June,Monthly,Number of Deaths,531
+VIRGINIA,2024,June,Monthly,Number of Deaths,5877
+WASHINGTON,2024,June,Monthly,Number of Deaths,5236
+WEST VIRGINIA,2024,June,Monthly,Number of Deaths,1914
+WISCONSIN,2024,June,Monthly,Number of Deaths,4399
+WYOMING,2024,June,Monthly,Number of Deaths,458
+PUERTO RICO,2024,June,Monthly,Number of Deaths,2883
+ALABAMA,2023,January,Monthly,Number of Live Births,5000
+ALASKA,2023,January,Monthly,Number of Live Births,756
+ARIZONA,2023,January,Monthly,Number of Live Births,6563
+ARKANSAS,2023,January,Monthly,Number of Live Births,3008
+CALIFORNIA,2023,January,Monthly,Number of Live Births,33782
+COLORADO,2023,January,Monthly,Number of Live Births,4889
+CONNECTICUT,2023,January,Monthly,Number of Live Births,2752
+DELAWARE,2023,January,Monthly,Number of Live Births,885
+DISTRICT OF COLUMBIA,2023,January,Monthly,Number of Live Births,651
+FLORIDA,2023,January,Monthly,Number of Live Births,18815
+GEORGIA,2023,January,Monthly,Number of Live Births,10743
+HAWAII,2023,January,Monthly,Number of Live Births,1317
+IDAHO,2023,January,Monthly,Number of Live Births,1839
+ILLINOIS,2023,January,Monthly,Number of Live Births,10074
+INDIANA,2023,January,Monthly,Number of Live Births,6617
+IOWA,2023,January,Monthly,Number of Live Births,2951
+KANSAS,2023,January,Monthly,Number of Live Births,2877
+KENTUCKY,2023,January,Monthly,Number of Live Births,4339
+LOUISIANA,2023,January,Monthly,Number of Live Births,4885
+MAINE,2023,January,Monthly,Number of Live Births,977
+MARYLAND,2023,January,Monthly,Number of Live Births,5567
+MASSACHUSETTS,2023,January,Monthly,Number of Live Births,5294
+MICHIGAN,2023,January,Monthly,Number of Live Births,8028
+MINNESOTA,2023,January,Monthly,Number of Live Births,5083
+MISSISSIPPI,2023,January,Monthly,Number of Live Births,3049
+MISSOURI,2023,January,Monthly,Number of Live Births,5598
+MONTANA,2023,January,Monthly,Number of Live Births,854
+NEBRASKA,2023,January,Monthly,Number of Live Births,1978
+NEVADA,2023,January,Monthly,Number of Live Births,2739
+NEW HAMPSHIRE,2023,January,Monthly,Number of Live Births,906
+NEW JERSEY,2023,January,Monthly,Number of Live Births,8290
+NEW MEXICO,2023,January,Monthly,Number of Live Births,1756
+NEW YORK,2023,January,Monthly,Number of Live Births,9138
+NORTH CAROLINA,2023,January,Monthly,Number of Live Births,10153
+NORTH DAKOTA,2023,January,Monthly,Number of Live Births,798
+OHIO,2023,January,Monthly,Number of Live Births,10647
+OKLAHOMA,2023,January,Monthly,Number of Live Births,4093
+OREGON,2023,January,Monthly,Number of Live Births,3077
+PENNSYLVANIA,2023,January,Monthly,Number of Live Births,10365
+RHODE ISLAND,2023,January,Monthly,Number of Live Births,822
+SOUTH CAROLINA,2023,January,Monthly,Number of Live Births,4859
+SOUTH DAKOTA,2023,January,Monthly,Number of Live Births,911
+TENNESSEE,2023,January,Monthly,Number of Live Births,6930
+TEXAS,2023,January,Monthly,Number of Live Births,32433
+UTAH,2023,January,Monthly,Number of Live Births,3502
+VERMONT,2023,January,Monthly,Number of Live Births,395
+VIRGINIA,2023,January,Monthly,Number of Live Births,7724
+WASHINGTON,2023,January,Monthly,Number of Live Births,6597
+WEST VIRGINIA,2023,January,Monthly,Number of Live Births,1405
+WISCONSIN,2023,January,Monthly,Number of Live Births,4786
+WYOMING,2023,January,Monthly,Number of Live Births,459
+PUERTO RICO,2023,January,Monthly,Number of Live Births,1599
+ALABAMA,2023,February,Monthly,Number of Live Births,4420
+ALASKA,2023,February,Monthly,Number of Live Births,683
+ARIZONA,2023,February,Monthly,Number of Live Births,6022
+ARKANSAS,2023,February,Monthly,Number of Live Births,2669
+CALIFORNIA,2023,February,Monthly,Number of Live Births,30534
+COLORADO,2023,February,Monthly,Number of Live Births,4645
+CONNECTICUT,2023,February,Monthly,Number of Live Births,2619
+DELAWARE,2023,February,Monthly,Number of Live Births,773
+DISTRICT OF COLUMBIA,2023,February,Monthly,Number of Live Births,612
+FLORIDA,2023,February,Monthly,Number of Live Births,16663
+GEORGIA,2023,February,Monthly,Number of Live Births,9543
+HAWAII,2023,February,Monthly,Number of Live Births,1162
+IDAHO,2023,February,Monthly,Number of Live Births,1634
+ILLINOIS,2023,February,Monthly,Number of Live Births,9274
+INDIANA,2023,February,Monthly,Number of Live Births,6088
+IOWA,2023,February,Monthly,Number of Live Births,2750
+KANSAS,2023,February,Monthly,Number of Live Births,2500
+KENTUCKY,2023,February,Monthly,Number of Live Births,3903
+LOUISIANA,2023,February,Monthly,Number of Live Births,4201
+MAINE,2023,February,Monthly,Number of Live Births,894
+MARYLAND,2023,February,Monthly,Number of Live Births,4895
+MASSACHUSETTS,2023,February,Monthly,Number of Live Births,4937
+MICHIGAN,2023,February,Monthly,Number of Live Births,7609
+MINNESOTA,2023,February,Monthly,Number of Live Births,4667
+MISSISSIPPI,2023,February,Monthly,Number of Live Births,2585
+MISSOURI,2023,February,Monthly,Number of Live Births,5032
+MONTANA,2023,February,Monthly,Number of Live Births,838
+NEBRASKA,2023,February,Monthly,Number of Live Births,1794
+NEVADA,2023,February,Monthly,Number of Live Births,2462
+NEW HAMPSHIRE,2023,February,Monthly,Number of Live Births,851
+NEW JERSEY,2023,February,Monthly,Number of Live Births,7676
+NEW MEXICO,2023,February,Monthly,Number of Live Births,1623
+NEW YORK,2023,February,Monthly,Number of Live Births,8088
+NORTH CAROLINA,2023,February,Monthly,Number of Live Births,8981
+NORTH DAKOTA,2023,February,Monthly,Number of Live Births,718
+OHIO,2023,February,Monthly,Number of Live Births,9675
+OKLAHOMA,2023,February,Monthly,Number of Live Births,3624
+OREGON,2023,February,Monthly,Number of Live Births,2774
+PENNSYLVANIA,2023,February,Monthly,Number of Live Births,9609
+RHODE ISLAND,2023,February,Monthly,Number of Live Births,672
+SOUTH CAROLINA,2023,February,Monthly,Number of Live Births,4273
+SOUTH DAKOTA,2023,February,Monthly,Number of Live Births,813
+TENNESSEE,2023,February,Monthly,Number of Live Births,6351
+TEXAS,2023,February,Monthly,Number of Live Births,28941
+UTAH,2023,February,Monthly,Number of Live Births,3461
+VERMONT,2023,February,Monthly,Number of Live Births,342
+VIRGINIA,2023,February,Monthly,Number of Live Births,6991
+WASHINGTON,2023,February,Monthly,Number of Live Births,5982
+WEST VIRGINIA,2023,February,Monthly,Number of Live Births,1312
+WISCONSIN,2023,February,Monthly,Number of Live Births,4420
+WYOMING,2023,February,Monthly,Number of Live Births,449
+PUERTO RICO,2023,February,Monthly,Number of Live Births,1366
+ALABAMA,2023,March,Monthly,Number of Live Births,4898
+ALASKA,2023,March,Monthly,Number of Live Births,756
+ARIZONA,2023,March,Monthly,Number of Live Births,6420
+ARKANSAS,2023,March,Monthly,Number of Live Births,2850
+CALIFORNIA,2023,March,Monthly,Number of Live Births,33052
+COLORADO,2023,March,Monthly,Number of Live Births,5244
+CONNECTICUT,2023,March,Monthly,Number of Live Births,2880
+DELAWARE,2023,March,Monthly,Number of Live Births,892
+DISTRICT OF COLUMBIA,2023,March,Monthly,Number of Live Births,649
+FLORIDA,2023,March,Monthly,Number of Live Births,18181
+GEORGIA,2023,March,Monthly,Number of Live Births,10316
+HAWAII,2023,March,Monthly,Number of Live Births,1238
+IDAHO,2023,March,Monthly,Number of Live Births,1926
+ILLINOIS,2023,March,Monthly,Number of Live Births,10615
+INDIANA,2023,March,Monthly,Number of Live Births,6761
+IOWA,2023,March,Monthly,Number of Live Births,3087
+KANSAS,2023,March,Monthly,Number of Live Births,2851
+KENTUCKY,2023,March,Monthly,Number of Live Births,4407
+LOUISIANA,2023,March,Monthly,Number of Live Births,4353
+MAINE,2023,March,Monthly,Number of Live Births,954
+MARYLAND,2023,March,Monthly,Number of Live Births,5487
+MASSACHUSETTS,2023,March,Monthly,Number of Live Births,5505
+MICHIGAN,2023,March,Monthly,Number of Live Births,8429
+MINNESOTA,2023,March,Monthly,Number of Live Births,5299
+MISSISSIPPI,2023,March,Monthly,Number of Live Births,2819
+MISSOURI,2023,March,Monthly,Number of Live Births,5548
+MONTANA,2023,March,Monthly,Number of Live Births,929
+NEBRASKA,2023,March,Monthly,Number of Live Births,2101
+NEVADA,2023,March,Monthly,Number of Live Births,2602
+NEW HAMPSHIRE,2023,March,Monthly,Number of Live Births,998
+NEW JERSEY,2023,March,Monthly,Number of Live Births,8384
+NEW MEXICO,2023,March,Monthly,Number of Live Births,1815
+NEW YORK,2023,March,Monthly,Number of Live Births,9531
+NORTH CAROLINA,2023,March,Monthly,Number of Live Births,9804
+NORTH DAKOTA,2023,March,Monthly,Number of Live Births,821
+OHIO,2023,March,Monthly,Number of Live Births,10850
+OKLAHOMA,2023,March,Monthly,Number of Live Births,3984
+OREGON,2023,March,Monthly,Number of Live Births,3147
+PENNSYLVANIA,2023,March,Monthly,Number of Live Births,10848
+RHODE ISLAND,2023,March,Monthly,Number of Live Births,793
+SOUTH CAROLINA,2023,March,Monthly,Number of Live Births,4825
+SOUTH DAKOTA,2023,March,Monthly,Number of Live Births,942
+TENNESSEE,2023,March,Monthly,Number of Live Births,6847
+TEXAS,2023,March,Monthly,Number of Live Births,31437
+UTAH,2023,March,Monthly,Number of Live Births,3940
+VERMONT,2023,March,Monthly,Number of Live Births,412
+VIRGINIA,2023,March,Monthly,Number of Live Births,7650
+WASHINGTON,2023,March,Monthly,Number of Live Births,6709
+WEST VIRGINIA,2023,March,Monthly,Number of Live Births,1430
+WISCONSIN,2023,March,Monthly,Number of Live Births,5132
+WYOMING,2023,March,Monthly,Number of Live Births,534
+PUERTO RICO,2023,March,Monthly,Number of Live Births,1541
+ALABAMA,2023,April,Monthly,Number of Live Births,4391
+ALASKA,2023,April,Monthly,Number of Live Births,708
+ARIZONA,2023,April,Monthly,Number of Live Births,5961
+ARKANSAS,2023,April,Monthly,Number of Live Births,2675
+CALIFORNIA,2023,April,Monthly,Number of Live Births,30920
+COLORADO,2023,April,Monthly,Number of Live Births,5089
+CONNECTICUT,2023,April,Monthly,Number of Live Births,2778
+DELAWARE,2023,April,Monthly,Number of Live Births,806
+DISTRICT OF COLUMBIA,2023,April,Monthly,Number of Live Births,623
+FLORIDA,2023,April,Monthly,Number of Live Births,16971
+GEORGIA,2023,April,Monthly,Number of Live Births,9268
+HAWAII,2023,April,Monthly,Number of Live Births,1193
+IDAHO,2023,April,Monthly,Number of Live Births,1788
+ILLINOIS,2023,April,Monthly,Number of Live Births,9750
+INDIANA,2023,April,Monthly,Number of Live Births,6141
+IOWA,2023,April,Monthly,Number of Live Births,2892
+KANSAS,2023,April,Monthly,Number of Live Births,2629
+KENTUCKY,2023,April,Monthly,Number of Live Births,3877
+LOUISIANA,2023,April,Monthly,Number of Live Births,4003
+MAINE,2023,April,Monthly,Number of Live Births,975
+MARYLAND,2023,April,Monthly,Number of Live Births,5160
+MASSACHUSETTS,2023,April,Monthly,Number of Live Births,5371
+MICHIGAN,2023,April,Monthly,Number of Live Births,7894
+MINNESOTA,2023,April,Monthly,Number of Live Births,5027
+MISSISSIPPI,2023,April,Monthly,Number of Live Births,2539
+MISSOURI,2023,April,Monthly,Number of Live Births,5179
+MONTANA,2023,April,Monthly,Number of Live Births,889
+NEBRASKA,2023,April,Monthly,Number of Live Births,1950
+NEVADA,2023,April,Monthly,Number of Live Births,2463
+NEW HAMPSHIRE,2023,April,Monthly,Number of Live Births,970
+NEW JERSEY,2023,April,Monthly,Number of Live Births,7750
+NEW MEXICO,2023,April,Monthly,Number of Live Births,1624
+NEW YORK,2023,April,Monthly,Number of Live Births,8877
+NORTH CAROLINA,2023,April,Monthly,Number of Live Births,9206
+NORTH DAKOTA,2023,April,Monthly,Number of Live Births,819
+OHIO,2023,April,Monthly,Number of Live Births,10156
+OKLAHOMA,2023,April,Monthly,Number of Live Births,3620
+OREGON,2023,April,Monthly,Number of Live Births,3073
+PENNSYLVANIA,2023,April,Monthly,Number of Live Births,9891
+RHODE ISLAND,2023,April,Monthly,Number of Live Births,798
+SOUTH CAROLINA,2023,April,Monthly,Number of Live Births,4407
+SOUTH DAKOTA,2023,April,Monthly,Number of Live Births,901
+TENNESSEE,2023,April,Monthly,Number of Live Births,6343
+TEXAS,2023,April,Monthly,Number of Live Births,28878
+UTAH,2023,April,Monthly,Number of Live Births,3600
+VERMONT,2023,April,Monthly,Number of Live Births,439
+VIRGINIA,2023,April,Monthly,Number of Live Births,7044
+WASHINGTON,2023,April,Monthly,Number of Live Births,6522
+WEST VIRGINIA,2023,April,Monthly,Number of Live Births,1203
+WISCONSIN,2023,April,Monthly,Number of Live Births,4829
+WYOMING,2023,April,Monthly,Number of Live Births,521
+PUERTO RICO,2023,April,Monthly,Number of Live Births,1375
+ALABAMA,2023,May,Monthly,Number of Live Births,4635
+ALASKA,2023,May,Monthly,Number of Live Births,768
+ARIZONA,2023,May,Monthly,Number of Live Births,6162
+ARKANSAS,2023,May,Monthly,Number of Live Births,2894
+CALIFORNIA,2023,May,Monthly,Number of Live Births,32764
+COLORADO,2023,May,Monthly,Number of Live Births,5283
+CONNECTICUT,2023,May,Monthly,Number of Live Births,2918
+DELAWARE,2023,May,Monthly,Number of Live Births,902
+DISTRICT OF COLUMBIA,2023,May,Monthly,Number of Live Births,671
+FLORIDA,2023,May,Monthly,Number of Live Births,18014
+GEORGIA,2023,May,Monthly,Number of Live Births,10143
+HAWAII,2023,May,Monthly,Number of Live Births,1212
+IDAHO,2023,May,Monthly,Number of Live Births,1860
+ILLINOIS,2023,May,Monthly,Number of Live Births,10487
+INDIANA,2023,May,Monthly,Number of Live Births,6628
+IOWA,2023,May,Monthly,Number of Live Births,3119
+KANSAS,2023,May,Monthly,Number of Live Births,2808
+KENTUCKY,2023,May,Monthly,Number of Live Births,4294
+LOUISIANA,2023,May,Monthly,Number of Live Births,4616
+MAINE,2023,May,Monthly,Number of Live Births,1007
+MARYLAND,2023,May,Monthly,Number of Live Births,5520
+MASSACHUSETTS,2023,May,Monthly,Number of Live Births,5731
+MICHIGAN,2023,May,Monthly,Number of Live Births,8421
+MINNESOTA,2023,May,Monthly,Number of Live Births,5287
+MISSISSIPPI,2023,May,Monthly,Number of Live Births,2781
+MISSOURI,2023,May,Monthly,Number of Live Births,5639
+MONTANA,2023,May,Monthly,Number of Live Births,964
+NEBRASKA,2023,May,Monthly,Number of Live Births,2004
+NEVADA,2023,May,Monthly,Number of Live Births,2552
+NEW HAMPSHIRE,2023,May,Monthly,Number of Live Births,989
+NEW JERSEY,2023,May,Monthly,Number of Live Births,8565
+NEW MEXICO,2023,May,Monthly,Number of Live Births,1766
+NEW YORK,2023,May,Monthly,Number of Live Births,9700
+NORTH CAROLINA,2023,May,Monthly,Number of Live Births,9985
+NORTH DAKOTA,2023,May,Monthly,Number of Live Births,853
+OHIO,2023,May,Monthly,Number of Live Births,10549
+OKLAHOMA,2023,May,Monthly,Number of Live Births,4000
+OREGON,2023,May,Monthly,Number of Live Births,3279
+PENNSYLVANIA,2023,May,Monthly,Number of Live Births,10606
+RHODE ISLAND,2023,May,Monthly,Number of Live Births,849
+SOUTH CAROLINA,2023,May,Monthly,Number of Live Births,4725
+SOUTH DAKOTA,2023,May,Monthly,Number of Live Births,1057
+TENNESSEE,2023,May,Monthly,Number of Live Births,6779
+TEXAS,2023,May,Monthly,Number of Live Births,31650
+UTAH,2023,May,Monthly,Number of Live Births,3890
+VERMONT,2023,May,Monthly,Number of Live Births,463
+VIRGINIA,2023,May,Monthly,Number of Live Births,7805
+WASHINGTON,2023,May,Monthly,Number of Live Births,6996
+WEST VIRGINIA,2023,May,Monthly,Number of Live Births,1436
+WISCONSIN,2023,May,Monthly,Number of Live Births,5193
+WYOMING,2023,May,Monthly,Number of Live Births,511
+PUERTO RICO,2023,May,Monthly,Number of Live Births,1527
+ALABAMA,2023,June,Monthly,Number of Live Births,4850
+ALASKA,2023,June,Monthly,Number of Live Births,774
+ARIZONA,2023,June,Monthly,Number of Live Births,6173
+ARKANSAS,2023,June,Monthly,Number of Live Births,2960
+CALIFORNIA,2023,June,Monthly,Number of Live Births,32663
+COLORADO,2023,June,Monthly,Number of Live Births,5228
+CONNECTICUT,2023,June,Monthly,Number of Live Births,2888
+DELAWARE,2023,June,Monthly,Number of Live Births,873
+DISTRICT OF COLUMBIA,2023,June,Monthly,Number of Live Births,660
+FLORIDA,2023,June,Monthly,Number of Live Births,18146
+GEORGIA,2023,June,Monthly,Number of Live Births,10583
+HAWAII,2023,June,Monthly,Number of Live Births,1233
+IDAHO,2023,June,Monthly,Number of Live Births,1931
+ILLINOIS,2023,June,Monthly,Number of Live Births,10809
+INDIANA,2023,June,Monthly,Number of Live Births,6735
+IOWA,2023,June,Monthly,Number of Live Births,3123
+KANSAS,2023,June,Monthly,Number of Live Births,2935
+KENTUCKY,2023,June,Monthly,Number of Live Births,4470
+LOUISIANA,2023,June,Monthly,Number of Live Births,4414
+MAINE,2023,June,Monthly,Number of Live Births,975
+MARYLAND,2023,June,Monthly,Number of Live Births,5663
+MASSACHUSETTS,2023,June,Monthly,Number of Live Births,5967
+MICHIGAN,2023,June,Monthly,Number of Live Births,8619
+MINNESOTA,2023,June,Monthly,Number of Live Births,5380
+MISSISSIPPI,2023,June,Monthly,Number of Live Births,2984
+MISSOURI,2023,June,Monthly,Number of Live Births,5605
+MONTANA,2023,June,Monthly,Number of Live Births,953
+NEBRASKA,2023,June,Monthly,Number of Live Births,2115
+NEVADA,2023,June,Monthly,Number of Live Births,2636
+NEW HAMPSHIRE,2023,June,Monthly,Number of Live Births,1052
+NEW JERSEY,2023,June,Monthly,Number of Live Births,8676
+NEW MEXICO,2023,June,Monthly,Number of Live Births,1771
+NEW YORK,2023,June,Monthly,Number of Live Births,9758
+NORTH CAROLINA,2023,June,Monthly,Number of Live Births,9950
+NORTH DAKOTA,2023,June,Monthly,Number of Live Births,825
+OHIO,2023,June,Monthly,Number of Live Births,10788
+OKLAHOMA,2023,June,Monthly,Number of Live Births,4072
+OREGON,2023,June,Monthly,Number of Live Births,3265
+PENNSYLVANIA,2023,June,Monthly,Number of Live Births,10802
+RHODE ISLAND,2023,June,Monthly,Number of Live Births,907
+SOUTH CAROLINA,2023,June,Monthly,Number of Live Births,4981
+SOUTH DAKOTA,2023,June,Monthly,Number of Live Births,933
+TENNESSEE,2023,June,Monthly,Number of Live Births,6982
+TEXAS,2023,June,Monthly,Number of Live Births,32162
+UTAH,2023,June,Monthly,Number of Live Births,3918
+VERMONT,2023,June,Monthly,Number of Live Births,440
+VIRGINIA,2023,June,Monthly,Number of Live Births,7878
+WASHINGTON,2023,June,Monthly,Number of Live Births,6910
+WEST VIRGINIA,2023,June,Monthly,Number of Live Births,1473
+WISCONSIN,2023,June,Monthly,Number of Live Births,5168
+WYOMING,2023,June,Monthly,Number of Live Births,545
+PUERTO RICO,2023,June,Monthly,Number of Live Births,1500
+ALABAMA,2023,July,Monthly,Number of Live Births,4885
+ALASKA,2023,July,Monthly,Number of Live Births,774
+ARIZONA,2023,July,Monthly,Number of Live Births,6603
+ARKANSAS,2023,July,Monthly,Number of Live Births,3016
+CALIFORNIA,2023,July,Monthly,Number of Live Births,34228
+COLORADO,2023,July,Monthly,Number of Live Births,5271
+CONNECTICUT,2023,July,Monthly,Number of Live Births,3068
+DELAWARE,2023,July,Monthly,Number of Live Births,871
+DISTRICT OF COLUMBIA,2023,July,Monthly,Number of Live Births,681
+FLORIDA,2023,July,Monthly,Number of Live Births,18857
+GEORGIA,2023,July,Monthly,Number of Live Births,10816
+HAWAII,2023,July,Monthly,Number of Live Births,1211
+IDAHO,2023,July,Monthly,Number of Live Births,1953
+ILLINOIS,2023,July,Monthly,Number of Live Births,10930
+INDIANA,2023,July,Monthly,Number of Live Births,6895
+IOWA,2023,July,Monthly,Number of Live Births,3160
+KANSAS,2023,July,Monthly,Number of Live Births,2934
+KENTUCKY,2023,July,Monthly,Number of Live Births,4480
+LOUISIANA,2023,July,Monthly,Number of Live Births,4814
+MAINE,2023,July,Monthly,Number of Live Births,1084
+MARYLAND,2023,July,Monthly,Number of Live Births,5755
+MASSACHUSETTS,2023,July,Monthly,Number of Live Births,5921
+MICHIGAN,2023,July,Monthly,Number of Live Births,8845
+MINNESOTA,2023,July,Monthly,Number of Live Births,5320
+MISSISSIPPI,2023,July,Monthly,Number of Live Births,2957
+MISSOURI,2023,July,Monthly,Number of Live Births,5888
+MONTANA,2023,July,Monthly,Number of Live Births,1029
+NEBRASKA,2023,July,Monthly,Number of Live Births,2044
+NEVADA,2023,July,Monthly,Number of Live Births,2653
+NEW HAMPSHIRE,2023,July,Monthly,Number of Live Births,1055
+NEW JERSEY,2023,July,Monthly,Number of Live Births,8934
+NEW MEXICO,2023,July,Monthly,Number of Live Births,1846
+NEW YORK,2023,July,Monthly,Number of Live Births,10079
+NORTH CAROLINA,2023,July,Monthly,Number of Live Births,10492
+NORTH DAKOTA,2023,July,Monthly,Number of Live Births,839
+OHIO,2023,July,Monthly,Number of Live Births,11169
+OKLAHOMA,2023,July,Monthly,Number of Live Births,4172
+OREGON,2023,July,Monthly,Number of Live Births,3413
+PENNSYLVANIA,2023,July,Monthly,Number of Live Births,11024
+RHODE ISLAND,2023,July,Monthly,Number of Live Births,881
+SOUTH CAROLINA,2023,July,Monthly,Number of Live Births,4807
+SOUTH DAKOTA,2023,July,Monthly,Number of Live Births,979
+TENNESSEE,2023,July,Monthly,Number of Live Births,7261
+TEXAS,2023,July,Monthly,Number of Live Births,33165
+UTAH,2023,July,Monthly,Number of Live Births,3954
+VERMONT,2023,July,Monthly,Number of Live Births,416
+VIRGINIA,2023,July,Monthly,Number of Live Births,7992
+WASHINGTON,2023,July,Monthly,Number of Live Births,7011
+WEST VIRGINIA,2023,July,Monthly,Number of Live Births,1446
+WISCONSIN,2023,July,Monthly,Number of Live Births,5343
+WYOMING,2023,July,Monthly,Number of Live Births,525
+PUERTO RICO,2023,July,Monthly,Number of Live Births,1463
+ALABAMA,2023,August,Monthly,Number of Live Births,5138
+ALASKA,2023,August,Monthly,Number of Live Births,749
+ARIZONA,2023,August,Monthly,Number of Live Births,7156
+ARKANSAS,2023,August,Monthly,Number of Live Births,3180
+CALIFORNIA,2023,August,Monthly,Number of Live Births,35937
+COLORADO,2023,August,Monthly,Number of Live Births,5557
+CONNECTICUT,2023,August,Monthly,Number of Live Births,3134
+DELAWARE,2023,August,Monthly,Number of Live Births,971
+DISTRICT OF COLUMBIA,2023,August,Monthly,Number of Live Births,689
+FLORIDA,2023,August,Monthly,Number of Live Births,19383
+GEORGIA,2023,August,Monthly,Number of Live Births,11260
+HAWAII,2023,August,Monthly,Number of Live Births,1317
+IDAHO,2023,August,Monthly,Number of Live Births,1936
+ILLINOIS,2023,August,Monthly,Number of Live Births,11054
+INDIANA,2023,August,Monthly,Number of Live Births,7075
+IOWA,2023,August,Monthly,Number of Live Births,3280
+KANSAS,2023,August,Monthly,Number of Live Births,2991
+KENTUCKY,2023,August,Monthly,Number of Live Births,4605
+LOUISIANA,2023,August,Monthly,Number of Live Births,5058
+MAINE,2023,August,Monthly,Number of Live Births,1047
+MARYLAND,2023,August,Monthly,Number of Live Births,5743
+MASSACHUSETTS,2023,August,Monthly,Number of Live Births,6019
+MICHIGAN,2023,August,Monthly,Number of Live Births,8819
+MINNESOTA,2023,August,Monthly,Number of Live Births,5508
+MISSISSIPPI,2023,August,Monthly,Number of Live Births,3178
+MISSOURI,2023,August,Monthly,Number of Live Births,6135
+MONTANA,2023,August,Monthly,Number of Live Births,964
+NEBRASKA,2023,August,Monthly,Number of Live Births,2103
+NEVADA,2023,August,Monthly,Number of Live Births,2886
+NEW HAMPSHIRE,2023,August,Monthly,Number of Live Births,1097
+NEW JERSEY,2023,August,Monthly,Number of Live Births,8968
+NEW MEXICO,2023,August,Monthly,Number of Live Births,1887
+NEW YORK,2023,August,Monthly,Number of Live Births,10003
+NORTH CAROLINA,2023,August,Monthly,Number of Live Births,10760
+NORTH DAKOTA,2023,August,Monthly,Number of Live Births,841
+OHIO,2023,August,Monthly,Number of Live Births,11143
+OKLAHOMA,2023,August,Monthly,Number of Live Births,4179
+OREGON,2023,August,Monthly,Number of Live Births,3389
+PENNSYLVANIA,2023,August,Monthly,Number of Live Births,11379
+RHODE ISLAND,2023,August,Monthly,Number of Live Births,926
+SOUTH CAROLINA,2023,August,Monthly,Number of Live Births,5187
+SOUTH DAKOTA,2023,August,Monthly,Number of Live Births,986
+TENNESSEE,2023,August,Monthly,Number of Live Births,7671
+TEXAS,2023,August,Monthly,Number of Live Births,35428
+UTAH,2023,August,Monthly,Number of Live Births,4112
+VERMONT,2023,August,Monthly,Number of Live Births,480
+VIRGINIA,2023,August,Monthly,Number of Live Births,8407
+WASHINGTON,2023,August,Monthly,Number of Live Births,7225
+WEST VIRGINIA,2023,August,Monthly,Number of Live Births,1455
+WISCONSIN,2023,August,Monthly,Number of Live Births,5302
+WYOMING,2023,August,Monthly,Number of Live Births,538
+PUERTO RICO,2023,August,Monthly,Number of Live Births,1714
+ALABAMA,2023,September,Monthly,Number of Live Births,4985
+ALASKA,2023,September,Monthly,Number of Live Births,779
+ARIZONA,2023,September,Monthly,Number of Live Births,6879
+ARKANSAS,2023,September,Monthly,Number of Live Births,2992
+CALIFORNIA,2023,September,Monthly,Number of Live Births,34409
+COLORADO,2023,September,Monthly,Number of Live Births,5189
+CONNECTICUT,2023,September,Monthly,Number of Live Births,2897
+DELAWARE,2023,September,Monthly,Number of Live Births,875
+DISTRICT OF COLUMBIA,2023,September,Monthly,Number of Live Births,642
+FLORIDA,2023,September,Monthly,Number of Live Births,18956
+GEORGIA,2023,September,Monthly,Number of Live Births,10703
+HAWAII,2023,September,Monthly,Number of Live Births,1214
+IDAHO,2023,September,Monthly,Number of Live Births,1878
+ILLINOIS,2023,September,Monthly,Number of Live Births,10626
+INDIANA,2023,September,Monthly,Number of Live Births,6557
+IOWA,2023,September,Monthly,Number of Live Births,2940
+KANSAS,2023,September,Monthly,Number of Live Births,2941
+KENTUCKY,2023,September,Monthly,Number of Live Births,4238
+LOUISIANA,2023,September,Monthly,Number of Live Births,4623
+MAINE,2023,September,Monthly,Number of Live Births,990
+MARYLAND,2023,September,Monthly,Number of Live Births,5466
+MASSACHUSETTS,2023,September,Monthly,Number of Live Births,5668
+MICHIGAN,2023,September,Monthly,Number of Live Births,8264
+MINNESOTA,2023,September,Monthly,Number of Live Births,5120
+MISSISSIPPI,2023,September,Monthly,Number of Live Births,2955
+MISSOURI,2023,September,Monthly,Number of Live Births,5621
+MONTANA,2023,September,Monthly,Number of Live Births,917
+NEBRASKA,2023,September,Monthly,Number of Live Births,1946
+NEVADA,2023,September,Monthly,Number of Live Births,2706
+NEW HAMPSHIRE,2023,September,Monthly,Number of Live Births,958
+NEW JERSEY,2023,September,Monthly,Number of Live Births,8647
+NEW MEXICO,2023,September,Monthly,Number of Live Births,1746
+NEW YORK,2023,September,Monthly,Number of Live Births,9410
+NORTH CAROLINA,2023,September,Monthly,Number of Live Births,10271
+NORTH DAKOTA,2023,September,Monthly,Number of Live Births,759
+OHIO,2023,September,Monthly,Number of Live Births,10755
+OKLAHOMA,2023,September,Monthly,Number of Live Births,3957
+OREGON,2023,September,Monthly,Number of Live Births,3163
+PENNSYLVANIA,2023,September,Monthly,Number of Live Births,10810
+RHODE ISLAND,2023,September,Monthly,Number of Live Births,775
+SOUTH CAROLINA,2023,September,Monthly,Number of Live Births,5040
+SOUTH DAKOTA,2023,September,Monthly,Number of Live Births,912
+TENNESSEE,2023,September,Monthly,Number of Live Births,6983
+TEXAS,2023,September,Monthly,Number of Live Births,33679
+UTAH,2023,September,Monthly,Number of Live Births,3774
+VERMONT,2023,September,Monthly,Number of Live Births,423
+VIRGINIA,2023,September,Monthly,Number of Live Births,7817
+WASHINGTON,2023,September,Monthly,Number of Live Births,6807
+WEST VIRGINIA,2023,September,Monthly,Number of Live Births,1426
+WISCONSIN,2023,September,Monthly,Number of Live Births,5075
+WYOMING,2023,September,Monthly,Number of Live Births,500
+PUERTO RICO,2023,September,Monthly,Number of Live Births,1676
+ALABAMA,2023,October,Monthly,Number of Live Births,4957
+ALASKA,2023,October,Monthly,Number of Live Births,756
+ARIZONA,2023,October,Monthly,Number of Live Births,6846
+ARKANSAS,2023,October,Monthly,Number of Live Births,3115
+CALIFORNIA,2023,October,Monthly,Number of Live Births,34800
+COLORADO,2023,October,Monthly,Number of Live Births,5174
+CONNECTICUT,2023,October,Monthly,Number of Live Births,2984
+DELAWARE,2023,October,Monthly,Number of Live Births,864
+DISTRICT OF COLUMBIA,2023,October,Monthly,Number of Live Births,674
+FLORIDA,2023,October,Monthly,Number of Live Births,19489
+GEORGIA,2023,October,Monthly,Number of Live Births,10837
+HAWAII,2023,October,Monthly,Number of Live Births,1276
+IDAHO,2023,October,Monthly,Number of Live Births,1881
+ILLINOIS,2023,October,Monthly,Number of Live Births,10649
+INDIANA,2023,October,Monthly,Number of Live Births,6657
+IOWA,2023,October,Monthly,Number of Live Births,2923
+KANSAS,2023,October,Monthly,Number of Live Births,2885
+KENTUCKY,2023,October,Monthly,Number of Live Births,4472
+LOUISIANA,2023,October,Monthly,Number of Live Births,4750
+MAINE,2023,October,Monthly,Number of Live Births,941
+MARYLAND,2023,October,Monthly,Number of Live Births,5639
+MASSACHUSETTS,2023,October,Monthly,Number of Live Births,5647
+MICHIGAN,2023,October,Monthly,Number of Live Births,8058
+MINNESOTA,2023,October,Monthly,Number of Live Births,5205
+MISSISSIPPI,2023,October,Monthly,Number of Live Births,2980
+MISSOURI,2023,October,Monthly,Number of Live Births,5776
+MONTANA,2023,October,Monthly,Number of Live Births,968
+NEBRASKA,2023,October,Monthly,Number of Live Births,2007
+NEVADA,2023,October,Monthly,Number of Live Births,2739
+NEW HAMPSHIRE,2023,October,Monthly,Number of Live Births,1047
+NEW JERSEY,2023,October,Monthly,Number of Live Births,8656
+NEW MEXICO,2023,October,Monthly,Number of Live Births,1711
+NEW YORK,2023,October,Monthly,Number of Live Births,9501
+NORTH CAROLINA,2023,October,Monthly,Number of Live Births,10290
+NORTH DAKOTA,2023,October,Monthly,Number of Live Births,795
+OHIO,2023,October,Monthly,Number of Live Births,10708
+OKLAHOMA,2023,October,Monthly,Number of Live Births,4124
+OREGON,2023,October,Monthly,Number of Live Births,3334
+PENNSYLVANIA,2023,October,Monthly,Number of Live Births,10850
+RHODE ISLAND,2023,October,Monthly,Number of Live Births,838
+SOUTH CAROLINA,2023,October,Monthly,Number of Live Births,4892
+SOUTH DAKOTA,2023,October,Monthly,Number of Live Births,932
+TENNESSEE,2023,October,Monthly,Number of Live Births,7053
+TEXAS,2023,October,Monthly,Number of Live Births,34044
+UTAH,2023,October,Monthly,Number of Live Births,3809
+VERMONT,2023,October,Monthly,Number of Live Births,402
+VIRGINIA,2023,October,Monthly,Number of Live Births,8065
+WASHINGTON,2023,October,Monthly,Number of Live Births,6804
+WEST VIRGINIA,2023,October,Monthly,Number of Live Births,1429
+WISCONSIN,2023,October,Monthly,Number of Live Births,5053
+WYOMING,2023,October,Monthly,Number of Live Births,499
+PUERTO RICO,2023,October,Monthly,Number of Live Births,1693
+ALABAMA,2023,November,Monthly,Number of Live Births,4798
+ALASKA,2023,November,Monthly,Number of Live Births,760
+ARIZONA,2023,November,Monthly,Number of Live Births,6595
+ARKANSAS,2023,November,Monthly,Number of Live Births,2933
+CALIFORNIA,2023,November,Monthly,Number of Live Births,33310
+COLORADO,2023,November,Monthly,Number of Live Births,4990
+CONNECTICUT,2023,November,Monthly,Number of Live Births,2792
+DELAWARE,2023,November,Monthly,Number of Live Births,860
+DISTRICT OF COLUMBIA,2023,November,Monthly,Number of Live Births,666
+FLORIDA,2023,November,Monthly,Number of Live Births,18883
+GEORGIA,2023,November,Monthly,Number of Live Births,10434
+HAWAII,2023,November,Monthly,Number of Live Births,1211
+IDAHO,2023,November,Monthly,Number of Live Births,1882
+ILLINOIS,2023,November,Monthly,Number of Live Births,10353
+INDIANA,2023,November,Monthly,Number of Live Births,6472
+IOWA,2023,November,Monthly,Number of Live Births,3005
+KANSAS,2023,November,Monthly,Number of Live Births,2820
+KENTUCKY,2023,November,Monthly,Number of Live Births,4264
+LOUISIANA,2023,November,Monthly,Number of Live Births,4602
+MAINE,2023,November,Monthly,Number of Live Births,902
+MARYLAND,2023,November,Monthly,Number of Live Births,5290
+MASSACHUSETTS,2023,November,Monthly,Number of Live Births,5578
+MICHIGAN,2023,November,Monthly,Number of Live Births,8052
+MINNESOTA,2023,November,Monthly,Number of Live Births,4973
+MISSISSIPPI,2023,November,Monthly,Number of Live Births,2845
+MISSOURI,2023,November,Monthly,Number of Live Births,5599
+MONTANA,2023,November,Monthly,Number of Live Births,854
+NEBRASKA,2023,November,Monthly,Number of Live Births,2014
+NEVADA,2023,November,Monthly,Number of Live Births,2644
+NEW HAMPSHIRE,2023,November,Monthly,Number of Live Births,962
+NEW JERSEY,2023,November,Monthly,Number of Live Births,8173
+NEW MEXICO,2023,November,Monthly,Number of Live Births,1691
+NEW YORK,2023,November,Monthly,Number of Live Births,9238
+NORTH CAROLINA,2023,November,Monthly,Number of Live Births,9973
+NORTH DAKOTA,2023,November,Monthly,Number of Live Births,800
+OHIO,2023,November,Monthly,Number of Live Births,10091
+OKLAHOMA,2023,November,Monthly,Number of Live Births,3983
+OREGON,2023,November,Monthly,Number of Live Births,3191
+PENNSYLVANIA,2023,November,Monthly,Number of Live Births,10195
+RHODE ISLAND,2023,November,Monthly,Number of Live Births,837
+SOUTH CAROLINA,2023,November,Monthly,Number of Live Births,4897
+SOUTH DAKOTA,2023,November,Monthly,Number of Live Births,906
+TENNESSEE,2023,November,Monthly,Number of Live Births,6810
+TEXAS,2023,November,Monthly,Number of Live Births,33223
+UTAH,2023,November,Monthly,Number of Live Births,3561
+VERMONT,2023,November,Monthly,Number of Live Births,412
+VIRGINIA,2023,November,Monthly,Number of Live Births,7480
+WASHINGTON,2023,November,Monthly,Number of Live Births,6662
+WEST VIRGINIA,2023,November,Monthly,Number of Live Births,1389
+WISCONSIN,2023,November,Monthly,Number of Live Births,4641
+WYOMING,2023,November,Monthly,Number of Live Births,479
+PUERTO RICO,2023,November,Monthly,Number of Live Births,1545
+ALABAMA,2023,December,Monthly,Number of Live Births,4858
+ALASKA,2023,December,Monthly,Number of Live Births,738
+ARIZONA,2023,December,Monthly,Number of Live Births,6627
+ARKANSAS,2023,December,Monthly,Number of Live Births,2937
+CALIFORNIA,2023,December,Monthly,Number of Live Births,33377
+COLORADO,2023,December,Monthly,Number of Live Births,4921
+CONNECTICUT,2023,December,Monthly,Number of Live Births,2817
+DELAWARE,2023,December,Monthly,Number of Live Births,810
+DISTRICT OF COLUMBIA,2023,December,Monthly,Number of Live Births,620
+FLORIDA,2023,December,Monthly,Number of Live Births,19018
+GEORGIA,2023,December,Monthly,Number of Live Births,10500
+HAWAII,2023,December,Monthly,Number of Live Births,1201
+IDAHO,2023,December,Monthly,Number of Live Births,1856
+ILLINOIS,2023,December,Monthly,Number of Live Births,10150
+INDIANA,2023,December,Monthly,Number of Live Births,6512
+IOWA,2023,December,Monthly,Number of Live Births,2879
+KANSAS,2023,December,Monthly,Number of Live Births,2830
+KENTUCKY,2023,December,Monthly,Number of Live Births,4423
+LOUISIANA,2023,December,Monthly,Number of Live Births,4482
+MAINE,2023,December,Monthly,Number of Live Births,923
+MARYLAND,2023,December,Monthly,Number of Live Births,5288
+MASSACHUSETTS,2023,December,Monthly,Number of Live Births,5446
+MICHIGAN,2023,December,Monthly,Number of Live Births,7995
+MINNESOTA,2023,December,Monthly,Number of Live Births,4892
+MISSISSIPPI,2023,December,Monthly,Number of Live Births,2795
+MISSOURI,2023,December,Monthly,Number of Live Births,5492
+MONTANA,2023,December,Monthly,Number of Live Births,889
+NEBRASKA,2023,December,Monthly,Number of Live Births,1959
+NEVADA,2023,December,Monthly,Number of Live Births,2694
+NEW HAMPSHIRE,2023,December,Monthly,Number of Live Births,945
+NEW JERSEY,2023,December,Monthly,Number of Live Births,8317
+NEW MEXICO,2023,December,Monthly,Number of Live Births,1719
+NEW YORK,2023,December,Monthly,Number of Live Births,8811
+NORTH CAROLINA,2023,December,Monthly,Number of Live Births,9906
+NORTH DAKOTA,2023,December,Monthly,Number of Live Births,771
+OHIO,2023,December,Monthly,Number of Live Births,10221
+OKLAHOMA,2023,December,Monthly,Number of Live Births,4065
+OREGON,2023,December,Monthly,Number of Live Births,3133
+PENNSYLVANIA,2023,December,Monthly,Number of Live Births,10404
+RHODE ISLAND,2023,December,Monthly,Number of Live Births,773
+SOUTH CAROLINA,2023,December,Monthly,Number of Live Births,4802
+SOUTH DAKOTA,2023,December,Monthly,Number of Live Births,894
+TENNESSEE,2023,December,Monthly,Number of Live Births,6926
+TEXAS,2023,December,Monthly,Number of Live Births,32689
+UTAH,2023,December,Monthly,Number of Live Births,3468
+VERMONT,2023,December,Monthly,Number of Live Births,416
+VIRGINIA,2023,December,Monthly,Number of Live Births,7852
+WASHINGTON,2023,December,Monthly,Number of Live Births,6740
+WEST VIRGINIA,2023,December,Monthly,Number of Live Births,1312
+WISCONSIN,2023,December,Monthly,Number of Live Births,4735
+WYOMING,2023,December,Monthly,Number of Live Births,471
+PUERTO RICO,2023,December,Monthly,Number of Live Births,1554
+ALABAMA,2024,January,Monthly,Number of Live Births,4932
+ALASKA,2024,January,Monthly,Number of Live Births,753
+ARIZONA,2024,January,Monthly,Number of Live Births,6522
+ARKANSAS,2024,January,Monthly,Number of Live Births,2984
+CALIFORNIA,2024,January,Monthly,Number of Live Births,32790
+COLORADO,2024,January,Monthly,Number of Live Births,5123
+CONNECTICUT,2024,January,Monthly,Number of Live Births,2726
+DELAWARE,2024,January,Monthly,Number of Live Births,857
+DISTRICT OF COLUMBIA,2024,January,Monthly,Number of Live Births,625
+FLORIDA,2024,January,Monthly,Number of Live Births,18432
+GEORGIA,2024,January,Monthly,Number of Live Births,10496
+HAWAII,2024,January,Monthly,Number of Live Births,1233
+IDAHO,2024,January,Monthly,Number of Live Births,1803
+ILLINOIS,2024,January,Monthly,Number of Live Births,10210
+INDIANA,2024,January,Monthly,Number of Live Births,6422
+IOWA,2024,January,Monthly,Number of Live Births,3040
+KANSAS,2024,January,Monthly,Number of Live Births,2812
+KENTUCKY,2024,January,Monthly,Number of Live Births,4425
+LOUISIANA,2024,January,Monthly,Number of Live Births,4433
+MAINE,2024,January,Monthly,Number of Live Births,931
+MARYLAND,2024,January,Monthly,Number of Live Births,5473
+MASSACHUSETTS,2024,January,Monthly,Number of Live Births,5441
+MICHIGAN,2024,January,Monthly,Number of Live Births,7973
+MINNESOTA,2024,January,Monthly,Number of Live Births,4772
+MISSISSIPPI,2024,January,Monthly,Number of Live Births,2841
+MISSOURI,2024,January,Monthly,Number of Live Births,5691
+MONTANA,2024,January,Monthly,Number of Live Births,888
+NEBRASKA,2024,January,Monthly,Number of Live Births,2047
+NEVADA,2024,January,Monthly,Number of Live Births,2585
+NEW HAMPSHIRE,2024,January,Monthly,Number of Live Births,951
+NEW JERSEY,2024,January,Monthly,Number of Live Births,8298
+NEW MEXICO,2024,January,Monthly,Number of Live Births,1761
+NEW YORK,2024,January,Monthly,Number of Live Births,9150
+NORTH CAROLINA,2024,January,Monthly,Number of Live Births,10160
+NORTH DAKOTA,2024,January,Monthly,Number of Live Births,778
+OHIO,2024,January,Monthly,Number of Live Births,10219
+OKLAHOMA,2024,January,Monthly,Number of Live Births,3914
+OREGON,2024,January,Monthly,Number of Live Births,3107
+PENNSYLVANIA,2024,January,Monthly,Number of Live Births,10642
+RHODE ISLAND,2024,January,Monthly,Number of Live Births,823
+SOUTH CAROLINA,2024,January,Monthly,Number of Live Births,4898
+SOUTH DAKOTA,2024,January,Monthly,Number of Live Births,960
+TENNESSEE,2024,January,Monthly,Number of Live Births,6724
+TEXAS,2024,January,Monthly,Number of Live Births,32376
+UTAH,2024,January,Monthly,Number of Live Births,3718
+VERMONT,2024,January,Monthly,Number of Live Births,403
+VIRGINIA,2024,January,Monthly,Number of Live Births,7719
+WASHINGTON,2024,January,Monthly,Number of Live Births,6623
+WEST VIRGINIA,2024,January,Monthly,Number of Live Births,1392
+WISCONSIN,2024,January,Monthly,Number of Live Births,4664
+WYOMING,2024,January,Monthly,Number of Live Births,492
+PUERTO RICO,2024,January,Monthly,Number of Live Births,1582
+ALABAMA,2024,February,Monthly,Number of Live Births,4485
+ALASKA,2024,February,Monthly,Number of Live Births,735
+ARIZONA,2024,February,Monthly,Number of Live Births,6120
+ARKANSAS,2024,February,Monthly,Number of Live Births,2790
+CALIFORNIA,2024,February,Monthly,Number of Live Births,31146
+COLORADO,2024,February,Monthly,Number of Live Births,5013
+CONNECTICUT,2024,February,Monthly,Number of Live Births,2732
+DELAWARE,2024,February,Monthly,Number of Live Births,802
+DISTRICT OF COLUMBIA,2024,February,Monthly,Number of Live Births,607
+FLORIDA,2024,February,Monthly,Number of Live Births,17527
+GEORGIA,2024,February,Monthly,Number of Live Births,9986
+HAWAII,2024,February,Monthly,Number of Live Births,1216
+IDAHO,2024,February,Monthly,Number of Live Births,1730
+ILLINOIS,2024,February,Monthly,Number of Live Births,9672
+INDIANA,2024,February,Monthly,Number of Live Births,6334
+IOWA,2024,February,Monthly,Number of Live Births,2733
+KANSAS,2024,February,Monthly,Number of Live Births,2652
+KENTUCKY,2024,February,Monthly,Number of Live Births,4167
+LOUISIANA,2024,February,Monthly,Number of Live Births,4252
+MAINE,2024,February,Monthly,Number of Live Births,901
+MARYLAND,2024,February,Monthly,Number of Live Births,5145
+MASSACHUSETTS,2024,February,Monthly,Number of Live Births,5326
+MICHIGAN,2024,February,Monthly,Number of Live Births,7707
+MINNESOTA,2024,February,Monthly,Number of Live Births,4861
+MISSISSIPPI,2024,February,Monthly,Number of Live Births,2684
+MISSOURI,2024,February,Monthly,Number of Live Births,5377
+MONTANA,2024,February,Monthly,Number of Live Births,916
+NEBRASKA,2024,February,Monthly,Number of Live Births,2012
+NEVADA,2024,February,Monthly,Number of Live Births,2587
+NEW HAMPSHIRE,2024,February,Monthly,Number of Live Births,991
+NEW JERSEY,2024,February,Monthly,Number of Live Births,7899
+NEW MEXICO,2024,February,Monthly,Number of Live Births,1664
+NEW YORK,2024,February,Monthly,Number of Live Births,8847
+NORTH CAROLINA,2024,February,Monthly,Number of Live Births,9504
+NORTH DAKOTA,2024,February,Monthly,Number of Live Births,734
+OHIO,2024,February,Monthly,Number of Live Births,9980
+OKLAHOMA,2024,February,Monthly,Number of Live Births,3703
+OREGON,2024,February,Monthly,Number of Live Births,2931
+PENNSYLVANIA,2024,February,Monthly,Number of Live Births,9817
+RHODE ISLAND,2024,February,Monthly,Number of Live Births,738
+SOUTH CAROLINA,2024,February,Monthly,Number of Live Births,4496
+SOUTH DAKOTA,2024,February,Monthly,Number of Live Births,884
+TENNESSEE,2024,February,Monthly,Number of Live Births,6520
+TEXAS,2024,February,Monthly,Number of Live Births,30204
+UTAH,2024,February,Monthly,Number of Live Births,3620
+VERMONT,2024,February,Monthly,Number of Live Births,383
+VIRGINIA,2024,February,Monthly,Number of Live Births,7409
+WASHINGTON,2024,February,Monthly,Number of Live Births,6398
+WEST VIRGINIA,2024,February,Monthly,Number of Live Births,1338
+WISCONSIN,2024,February,Monthly,Number of Live Births,4747
+WYOMING,2024,February,Monthly,Number of Live Births,470
+PUERTO RICO,2024,February,Monthly,Number of Live Births,1416
+ALABAMA,2024,March,Monthly,Number of Live Births,4640
+ALASKA,2024,March,Monthly,Number of Live Births,771
+ARIZONA,2024,March,Monthly,Number of Live Births,6669
+ARKANSAS,2024,March,Monthly,Number of Live Births,2764
+CALIFORNIA,2024,March,Monthly,Number of Live Births,33199
+COLORADO,2024,March,Monthly,Number of Live Births,5311
+CONNECTICUT,2024,March,Monthly,Number of Live Births,2865
+DELAWARE,2024,March,Monthly,Number of Live Births,841
+DISTRICT OF COLUMBIA,2024,March,Monthly,Number of Live Births,647
+FLORIDA,2024,March,Monthly,Number of Live Births,17953
+GEORGIA,2024,March,Monthly,Number of Live Births,10456
+HAWAII,2024,March,Monthly,Number of Live Births,1201
+IDAHO,2024,March,Monthly,Number of Live Births,1880
+ILLINOIS,2024,March,Monthly,Number of Live Births,10257
+INDIANA,2024,March,Monthly,Number of Live Births,6738
+IOWA,2024,March,Monthly,Number of Live Births,3113
+KANSAS,2024,March,Monthly,Number of Live Births,2820
+KENTUCKY,2024,March,Monthly,Number of Live Births,4300
+LOUISIANA,2024,March,Monthly,Number of Live Births,4281
+MAINE,2024,March,Monthly,Number of Live Births,973
+MARYLAND,2024,March,Monthly,Number of Live Births,5526
+MASSACHUSETTS,2024,March,Monthly,Number of Live Births,5688
+MICHIGAN,2024,March,Monthly,Number of Live Births,8378
+MINNESOTA,2024,March,Monthly,Number of Live Births,5067
+MISSISSIPPI,2024,March,Monthly,Number of Live Births,2731
+MISSOURI,2024,March,Monthly,Number of Live Births,5498
+MONTANA,2024,March,Monthly,Number of Live Births,955
+NEBRASKA,2024,March,Monthly,Number of Live Births,2001
+NEVADA,2024,March,Monthly,Number of Live Births,2637
+NEW HAMPSHIRE,2024,March,Monthly,Number of Live Births,965
+NEW JERSEY,2024,March,Monthly,Number of Live Births,8463
+NEW MEXICO,2024,March,Monthly,Number of Live Births,1770
+NEW YORK,2024,March,Monthly,Number of Live Births,9297
+NORTH CAROLINA,2024,March,Monthly,Number of Live Births,9988
+NORTH DAKOTA,2024,March,Monthly,Number of Live Births,816
+OHIO,2024,March,Monthly,Number of Live Births,10445
+OKLAHOMA,2024,March,Monthly,Number of Live Births,3900
+OREGON,2024,March,Monthly,Number of Live Births,3269
+PENNSYLVANIA,2024,March,Monthly,Number of Live Births,10727
+RHODE ISLAND,2024,March,Monthly,Number of Live Births,855
+SOUTH CAROLINA,2024,March,Monthly,Number of Live Births,4746
+SOUTH DAKOTA,2024,March,Monthly,Number of Live Births,959
+TENNESSEE,2024,March,Monthly,Number of Live Births,6816
+TEXAS,2024,March,Monthly,Number of Live Births,30759
+UTAH,2024,March,Monthly,Number of Live Births,3909
+VERMONT,2024,March,Monthly,Number of Live Births,436
+VIRGINIA,2024,March,Monthly,Number of Live Births,7814
+WASHINGTON,2024,March,Monthly,Number of Live Births,6964
+WEST VIRGINIA,2024,March,Monthly,Number of Live Births,1381
+WISCONSIN,2024,March,Monthly,Number of Live Births,4941
+WYOMING,2024,March,Monthly,Number of Live Births,522
+PUERTO RICO,2024,March,Monthly,Number of Live Births,1429
+ALABAMA,2024,April,Monthly,Number of Live Births,4544
+ALASKA,2024,April,Monthly,Number of Live Births,704
+ARIZONA,2024,April,Monthly,Number of Live Births,6081
+ARKANSAS,2024,April,Monthly,Number of Live Births,2821
+CALIFORNIA,2024,April,Monthly,Number of Live Births,31787
+COLORADO,2024,April,Monthly,Number of Live Births,5167
+CONNECTICUT,2024,April,Monthly,Number of Live Births,2828
+DELAWARE,2024,April,Monthly,Number of Live Births,906
+DISTRICT OF COLUMBIA,2024,April,Monthly,Number of Live Births,598
+FLORIDA,2024,April,Monthly,Number of Live Births,17373
+GEORGIA,2024,April,Monthly,Number of Live Births,9851
+HAWAII,2024,April,Monthly,Number of Live Births,1211
+IDAHO,2024,April,Monthly,Number of Live Births,1954
+ILLINOIS,2024,April,Monthly,Number of Live Births,10200
+INDIANA,2024,April,Monthly,Number of Live Births,6517
+IOWA,2024,April,Monthly,Number of Live Births,2963
+KANSAS,2024,April,Monthly,Number of Live Births,2762
+KENTUCKY,2024,April,Monthly,Number of Live Births,4275
+LOUISIANA,2024,April,Monthly,Number of Live Births,4080
+MAINE,2024,April,Monthly,Number of Live Births,964
+MARYLAND,2024,April,Monthly,Number of Live Births,5244
+MASSACHUSETTS,2024,April,Monthly,Number of Live Births,5562
+MICHIGAN,2024,April,Monthly,Number of Live Births,8212
+MINNESOTA,2024,April,Monthly,Number of Live Births,5140
+MISSISSIPPI,2024,April,Monthly,Number of Live Births,2456
+MISSOURI,2024,April,Monthly,Number of Live Births,5447
+MONTANA,2024,April,Monthly,Number of Live Births,935
+NEBRASKA,2024,April,Monthly,Number of Live Births,2069
+NEVADA,2024,April,Monthly,Number of Live Births,2521
+NEW HAMPSHIRE,2024,April,Monthly,Number of Live Births,937
+NEW JERSEY,2024,April,Monthly,Number of Live Births,8156
+NEW MEXICO,2024,April,Monthly,Number of Live Births,1721
+NEW YORK,2024,April,Monthly,Number of Live Births,9200
+NORTH CAROLINA,2024,April,Monthly,Number of Live Births,9767
+NORTH DAKOTA,2024,April,Monthly,Number of Live Births,809
+OHIO,2024,April,Monthly,Number of Live Births,10328
+OKLAHOMA,2024,April,Monthly,Number of Live Births,3858
+OREGON,2024,April,Monthly,Number of Live Births,3201
+PENNSYLVANIA,2024,April,Monthly,Number of Live Births,10276
+RHODE ISLAND,2024,April,Monthly,Number of Live Births,804
+SOUTH CAROLINA,2024,April,Monthly,Number of Live Births,4572
+SOUTH DAKOTA,2024,April,Monthly,Number of Live Births,979
+TENNESSEE,2024,April,Monthly,Number of Live Births,6562
+TEXAS,2024,April,Monthly,Number of Live Births,30016
+UTAH,2024,April,Monthly,Number of Live Births,3887
+VERMONT,2024,April,Monthly,Number of Live Births,428
+VIRGINIA,2024,April,Monthly,Number of Live Births,7565
+WASHINGTON,2024,April,Monthly,Number of Live Births,6649
+WEST VIRGINIA,2024,April,Monthly,Number of Live Births,1331
+WISCONSIN,2024,April,Monthly,Number of Live Births,4894
+WYOMING,2024,April,Monthly,Number of Live Births,512
+PUERTO RICO,2024,April,Monthly,Number of Live Births,1441
+ALABAMA,2024,May,Monthly,Number of Live Births,4752
+ALASKA,2024,May,Monthly,Number of Live Births,767
+ARIZONA,2024,May,Monthly,Number of Live Births,6182
+ARKANSAS,2024,May,Monthly,Number of Live Births,2875
+CALIFORNIA,2024,May,Monthly,Number of Live Births,32892
+COLORADO,2024,May,Monthly,Number of Live Births,5495
+CONNECTICUT,2024,May,Monthly,Number of Live Births,3049
+DELAWARE,2024,May,Monthly,Number of Live Births,890
+DISTRICT OF COLUMBIA,2024,May,Monthly,Number of Live Births,662
+FLORIDA,2024,May,Monthly,Number of Live Births,17826
+GEORGIA,2024,May,Monthly,Number of Live Births,10275
+HAWAII,2024,May,Monthly,Number of Live Births,1224
+IDAHO,2024,May,Monthly,Number of Live Births,2094
+ILLINOIS,2024,May,Monthly,Number of Live Births,10698
+INDIANA,2024,May,Monthly,Number of Live Births,6666
+IOWA,2024,May,Monthly,Number of Live Births,3104
+KANSAS,2024,May,Monthly,Number of Live Births,2801
+KENTUCKY,2024,May,Monthly,Number of Live Births,4462
+LOUISIANA,2024,May,Monthly,Number of Live Births,4186
+MAINE,2024,May,Monthly,Number of Live Births,975
+MARYLAND,2024,May,Monthly,Number of Live Births,5558
+MASSACHUSETTS,2024,May,Monthly,Number of Live Births,5858
+MICHIGAN,2024,May,Monthly,Number of Live Births,8701
+MINNESOTA,2024,May,Monthly,Number of Live Births,5393
+MISSISSIPPI,2024,May,Monthly,Number of Live Births,2666
+MISSOURI,2024,May,Monthly,Number of Live Births,5685
+MONTANA,2024,May,Monthly,Number of Live Births,1048
+NEBRASKA,2024,May,Monthly,Number of Live Births,2206
+NEVADA,2024,May,Monthly,Number of Live Births,2583
+NEW HAMPSHIRE,2024,May,Monthly,Number of Live Births,994
+NEW JERSEY,2024,May,Monthly,Number of Live Births,8554
+NEW MEXICO,2024,May,Monthly,Number of Live Births,1636
+NEW YORK,2024,May,Monthly,Number of Live Births,9687
+NORTH CAROLINA,2024,May,Monthly,Number of Live Births,10222
+NORTH DAKOTA,2024,May,Monthly,Number of Live Births,856
+OHIO,2024,May,Monthly,Number of Live Births,10809
+OKLAHOMA,2024,May,Monthly,Number of Live Births,3981
+OREGON,2024,May,Monthly,Number of Live Births,3338
+PENNSYLVANIA,2024,May,Monthly,Number of Live Births,10727
+RHODE ISLAND,2024,May,Monthly,Number of Live Births,879
+SOUTH CAROLINA,2024,May,Monthly,Number of Live Births,4831
+SOUTH DAKOTA,2024,May,Monthly,Number of Live Births,1025
+TENNESSEE,2024,May,Monthly,Number of Live Births,7082
+TEXAS,2024,May,Monthly,Number of Live Births,31507
+UTAH,2024,May,Monthly,Number of Live Births,3976
+VERMONT,2024,May,Monthly,Number of Live Births,451
+VIRGINIA,2024,May,Monthly,Number of Live Births,7870
+WASHINGTON,2024,May,Monthly,Number of Live Births,7207
+WEST VIRGINIA,2024,May,Monthly,Number of Live Births,1384
+WISCONSIN,2024,May,Monthly,Number of Live Births,5233
+WYOMING,2024,May,Monthly,Number of Live Births,512
+PUERTO RICO,2024,May,Monthly,Number of Live Births,1354
+ALABAMA,2024,June,Monthly,Number of Live Births,4518
+ALASKA,2024,June,Monthly,Number of Live Births,696
+ARIZONA,2024,June,Monthly,Number of Live Births,6045
+ARKANSAS,2024,June,Monthly,Number of Live Births,2748
+CALIFORNIA,2024,June,Monthly,Number of Live Births,32268
+COLORADO,2024,June,Monthly,Number of Live Births,5217
+CONNECTICUT,2024,June,Monthly,Number of Live Births,2689
+DELAWARE,2024,June,Monthly,Number of Live Births,889
+DISTRICT OF COLUMBIA,2024,June,Monthly,Number of Live Births,627
+FLORIDA,2024,June,Monthly,Number of Live Births,16949
+GEORGIA,2024,June,Monthly,Number of Live Births,9897
+HAWAII,2024,June,Monthly,Number of Live Births,1141
+IDAHO,2024,June,Monthly,Number of Live Births,1970
+ILLINOIS,2024,June,Monthly,Number of Live Births,10455
+INDIANA,2024,June,Monthly,Number of Live Births,6494
+IOWA,2024,June,Monthly,Number of Live Births,2979
+KANSAS,2024,June,Monthly,Number of Live Births,2681
+KENTUCKY,2024,June,Monthly,Number of Live Births,4329
+LOUISIANA,2024,June,Monthly,Number of Live Births,4060
+MAINE,2024,June,Monthly,Number of Live Births,933
+MARYLAND,2024,June,Monthly,Number of Live Births,5322
+MASSACHUSETTS,2024,June,Monthly,Number of Live Births,5652
+MICHIGAN,2024,June,Monthly,Number of Live Births,8526
+MINNESOTA,2024,June,Monthly,Number of Live Births,5083
+MISSISSIPPI,2024,June,Monthly,Number of Live Births,2705
+MISSOURI,2024,June,Monthly,Number of Live Births,5468
+MONTANA,2024,June,Monthly,Number of Live Births,933
+NEBRASKA,2024,June,Monthly,Number of Live Births,2024
+NEVADA,2024,June,Monthly,Number of Live Births,2633
+NEW HAMPSHIRE,2024,June,Monthly,Number of Live Births,1003
+NEW JERSEY,2024,June,Monthly,Number of Live Births,8094
+NEW MEXICO,2024,June,Monthly,Number of Live Births,1534
+NEW YORK,2024,June,Monthly,Number of Live Births,9197
+NORTH CAROLINA,2024,June,Monthly,Number of Live Births,9747
+NORTH DAKOTA,2024,June,Monthly,Number of Live Births,806
+OHIO,2024,June,Monthly,Number of Live Births,10574
+OKLAHOMA,2024,June,Monthly,Number of Live Births,3775
+OREGON,2024,June,Monthly,Number of Live Births,3235
+PENNSYLVANIA,2024,June,Monthly,Number of Live Births,10478
+RHODE ISLAND,2024,June,Monthly,Number of Live Births,884
+SOUTH CAROLINA,2024,June,Monthly,Number of Live Births,4767
+SOUTH DAKOTA,2024,June,Monthly,Number of Live Births,930
+TENNESSEE,2024,June,Monthly,Number of Live Births,6837
+TEXAS,2024,June,Monthly,Number of Live Births,30467
+UTAH,2024,June,Monthly,Number of Live Births,3928
+VERMONT,2024,June,Monthly,Number of Live Births,413
+VIRGINIA,2024,June,Monthly,Number of Live Births,7471
+WASHINGTON,2024,June,Monthly,Number of Live Births,6906
+WEST VIRGINIA,2024,June,Monthly,Number of Live Births,1324
+WISCONSIN,2024,June,Monthly,Number of Live Births,5008
+WYOMING,2024,June,Monthly,Number of Live Births,514
+PUERTO RICO,2024,June,Monthly,Number of Live Births,1255
