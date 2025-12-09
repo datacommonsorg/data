@@ -1078,11 +1078,9 @@ class PlaceResolver:
                     parent_dcids.update(_get_value_set(parents))
 
         if lookup_dcids:
-            dc_api_args = {'prop': 'containedInPlace', 'out': True}
-            dc_api_resp = dc_api_batched_wrapper(
-                function=dc.get_property_values,
+            dc_api_resp = dc_api_get_node_property(
                 dcids=lookup_dcids,
-                args=dc_api_args,
+                prop='containedInPlace',
                 config=self._config.get_configs(),
             )
             self._counters.add_counter(
@@ -1090,8 +1088,9 @@ class PlaceResolver:
                 len(lookup_dcids))
             # Cache the property:value for the response.
             for dcid, prop_values in dc_api_resp.items():
-                if prop_values:
-                    values_set = _get_value_set(prop_values)
+                val = prop_values.get('containedInPlace')
+                if val:
+                    values_set = _get_value_set(val)
                     self._set_cache_value(
                         '',
                         {
