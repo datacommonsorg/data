@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "US_SAT_ACT_Participation",
+            "import_name": "US_SAT_ACT_Participation_state",
             "curator_emails": [
                 "support@datacommons.org"
             ],
