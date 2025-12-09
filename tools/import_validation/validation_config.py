@@ -38,16 +38,10 @@ def _merge_rules(base_rules: List[Dict[str, Any]],
                  override_rules: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """Merges rules keyed by rule_id; override replaces base entirely."""
     merged: Dict[str, Dict[str, Any]] = {}
-    for rule in base_rules:
+    for rule in base_rules + override_rules:
         rule_id = rule.get('rule_id')
-        if not rule_id:
-            continue
-        merged[rule_id] = copy.deepcopy(rule)
-    for rule in override_rules:
-        rule_id = rule.get('rule_id')
-        if not rule_id:
-            continue
-        merged[rule_id] = copy.deepcopy(rule)
+        if rule_id:
+            merged[rule_id] = copy.deepcopy(rule)
     return list(merged.values())
 
 
@@ -82,6 +76,22 @@ def merge_config_files(base_path: str, override_path: str) -> Dict[str, Any]:
     base_config = _load_json_config(base_path)
     override_config = _load_json_config(override_path)
     return _merge_configs(base_config, override_config)
+
+
+def merge_and_save_config(base_path: str, override_path: str,
+                          output_dir: str) -> str:
+    """Merges configs, saves to output_dir, and enables detailed logging."""
+    logging.info('Merging validation configs: base=%s override=%s', base_path,
+                 override_path)
+    merged = merge_config_files(base_path, override_path)
+    os.makedirs(output_dir, exist_ok=True)
+    merged_path = os.path.join(output_dir, 'merged_validation_config.json')
+    with open(merged_path, 'w', encoding='utf-8') as tmp_file:
+        json.dump(merged, tmp_file, ensure_ascii=False, indent=2)
+    logging.info('Merged validation config saved to %s', merged_path)
+    logging.info('Merged validation config content: %s',
+                 json.dumps(merged, ensure_ascii=False))
+    return merged_path
 
 
 class ValidationConfig:

@@ -25,7 +25,7 @@ from typing import Tuple
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _SCRIPT_DIR)
 
-from validation_config import ValidationConfig, merge_config_files
+from validation_config import ValidationConfig, merge_and_save_config
 from report_generator import ReportGenerator
 from validator import Validator
 from result import ValidationResult, ValidationStatus
@@ -209,23 +209,15 @@ class ValidationRunner:
 def main(_):
     try:
         config_path = _FLAGS.validation_config
-        if _FLAGS.override_validation_config:
-            if not os.path.exists(_FLAGS.override_validation_config):
+        override_config_path = _FLAGS.override_validation_config
+        if override_config_path:
+            if not os.path.exists(override_config_path):
                 raise ValueError(
-                    f"Override validation config not found: {_FLAGS.override_validation_config}"
+                    f"Override validation config not found: {override_config_path}"
                 )
-            merged = merge_config_files(config_path,
-                                        _FLAGS.override_validation_config)
-            merged_path = os.path.join(os.path.dirname(config_path),
-                                       'merged_validation_config.json')
-            with open(merged_path, 'w', encoding='utf-8') as tmp_file:
-                json.dump(merged, tmp_file, ensure_ascii=False, indent=2)
-            logging.info('Merged validation configs: base=%s override=%s -> %s',
-                         config_path, _FLAGS.override_validation_config,
-                         merged_path)
-            logging.info('Merged validation config content: %s',
-                         json.dumps(merged, ensure_ascii=False))
-            config_path = merged_path
+            config_path = merge_and_save_config(
+                config_path, override_config_path,
+                os.path.dirname(override_config_path))
 
         runner = ValidationRunner(validation_config_path=config_path,
                                   differ_output=_FLAGS.differ_output,
