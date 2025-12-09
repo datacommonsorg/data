@@ -20,12 +20,12 @@ from absl import logging
 import pandas as pd
 import json
 import sys
-from typing import Tuple, Optional
+from typing import Tuple
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _SCRIPT_DIR)
 
-from validation_config import ValidationConfig
+from validation_config import ValidationConfig, merge_config_files
 from report_generator import ReportGenerator
 from validator import Validator
 from result import ValidationResult, ValidationStatus
@@ -39,15 +39,9 @@ class ValidationRunner:
   Orchestrates the validation process based on the new schema.
   """
 
-    def __init__(self,
-                 validation_config_path: str,
-                 differ_output: str,
-                 stats_summary: str,
-                 lint_report: str,
-                 validation_output: str,
-                 override_validation_config_path: Optional[str] = None):
-        self.config = ValidationConfig(validation_config_path,
-                                       override_validation_config_path)
+    def __init__(self, validation_config_path: str, differ_output: str,
+                 stats_summary: str, lint_report: str, validation_output: str):
+        self.config = ValidationConfig(validation_config_path)
         self.validation_output = validation_output
         self.validator = Validator()
         self.validation_results = []
@@ -214,13 +208,30 @@ class ValidationRunner:
 
 def main(_):
     try:
-        runner = ValidationRunner(
-            validation_config_path=_FLAGS.validation_config,
-            differ_output=_FLAGS.differ_output,
-            stats_summary=_FLAGS.stats_summary,
-            lint_report=_FLAGS.lint_report,
-            validation_output=_FLAGS.validation_output,
-            override_validation_config_path=_FLAGS.override_validation_config)
+        config_path = _FLAGS.validation_config
+        if _FLAGS.override_validation_config:
+            if not os.path.exists(_FLAGS.override_validation_config):
+                raise ValueError(
+                    f"Override validation config not found: {_FLAGS.override_validation_config}"
+                )
+            merged = merge_config_files(config_path,
+                                        _FLAGS.override_validation_config)
+            merged_path = os.path.join(os.path.dirname(config_path),
+                                       'merged_validation_config.json')
+            with open(merged_path, 'w', encoding='utf-8') as tmp_file:
+                json.dump(merged, tmp_file, ensure_ascii=False, indent=2)
+            logging.info('Merged validation configs: base=%s override=%s -> %s',
+                         config_path, _FLAGS.override_validation_config,
+                         merged_path)
+            logging.info('Merged validation config content: %s',
+                         json.dumps(merged, ensure_ascii=False))
+            config_path = merged_path
+
+        runner = ValidationRunner(validation_config_path=config_path,
+                                  differ_output=_FLAGS.differ_output,
+                                  stats_summary=_FLAGS.stats_summary,
+                                  lint_report=_FLAGS.lint_report,
+                                  validation_output=_FLAGS.validation_output)
         overall_status, _ = runner.run_validations()
         if not overall_status:
             sys.exit(1)

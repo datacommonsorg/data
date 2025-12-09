@@ -47,6 +47,7 @@ from counters import Counters
 from timer import Timer
 from import_differ.import_differ import ImportDiffer
 from tools.import_validation.runner import ValidationRunner
+from tools.import_validation.validation_config import merge_config_files
 from app import configs
 from app import utils
 from app.executor import cloud_run_simple_import
@@ -154,6 +155,23 @@ class ImportExecutor:
         self.importer = importer
         self.local_repo_dir: str = local_repo_dir
         self.counters = Counters()
+
+    def _merged_validation_config(self, base_config_path: str,
+                                  override_config_path: str,
+                                  validation_output_path: str) -> str:
+        """Merges configs and writes result under validation_output_path."""
+        logging.info('Merging validation configs: base=%s override=%s',
+                     base_config_path, override_config_path)
+        merged = merge_config_files(base_config_path, override_config_path)
+        os.makedirs(validation_output_path, exist_ok=True)
+        merged_path = os.path.join(validation_output_path,
+                                   'merged_validation_config.json')
+        with open(merged_path, 'w', encoding='utf-8') as tmp_file:
+            json.dump(merged, tmp_file, ensure_ascii=False, indent=2)
+        logging.info('Merged validation config saved to %s', merged_path)
+        logging.info('Merged validation config content: %s',
+                     json.dumps(merged, ensure_ascii=False))
+        return merged_path
 
     def execute_imports_on_commit(self, commit_sha: str) -> ExecutionResult:
         """Executes imports upon a GitHub commit.
@@ -564,14 +582,20 @@ class ImportExecutor:
                 logging.error(
                     'Skipping differ tool due to missing latest mcf file')
 
-            logging.info(
-                f'Invoking validation script with config: {config_file_path}, differ:{differ_output_file}, summary:{summary_stats}...'
-            )
             timer = Timer()
             try:
+                if override_config_path and os.path.exists(
+                        override_config_path):
+                    config_file_path = self._merged_validation_config(
+                        base_config_path, override_config_path,
+                        validation_output_path)
+                else:
+                    config_file_path = base_config_path
+                logging.info(
+                    f'Invoking validation script with config: {config_file_path}, differ:{differ_output_file}, summary:{summary_stats}...'
+                )
                 validation = ValidationRunner(
-                    validation_config_path=base_config_path,
-                    override_validation_config_path=override_config_path,
+                    validation_config_path=config_file_path,
                     differ_output=differ_output_file,
                     stats_summary=summary_stats,
                     lint_report=report_json,

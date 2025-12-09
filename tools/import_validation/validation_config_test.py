@@ -18,7 +18,7 @@ import os
 import tempfile
 import unittest
 
-from tools.import_validation.validation_config import ValidationConfig
+from tools.import_validation.validation_config import merge_config_files
 
 
 class ValidationConfigTest(unittest.TestCase):
@@ -55,10 +55,10 @@ class ValidationConfigTest(unittest.TestCase):
                     }]
                 }, f)
 
-        config = ValidationConfig(base_path, override_path)
+        config = merge_config_files(base_path, override_path)
 
-        self.assertEqual(len(config.rules), 1)
-        self.assertEqual(config.rules[0]["params"]["threshold"], 5)
+        self.assertEqual(len(config["rules"]), 1)
+        self.assertEqual(config["rules"][0]["params"]["threshold"], 5)
 
     def test_definitions_are_deep_merged(self):
         base_path = os.path.join(self.tmp.name, "base_defs.json")
@@ -94,9 +94,9 @@ class ValidationConfigTest(unittest.TestCase):
                     }
                 }, f)
 
-        config = ValidationConfig(base_path, override_path)
+        config = merge_config_files(base_path, override_path)
 
-        scopes = config.definitions.get("scopes", {})
+        scopes = config.get("definitions", {}).get("scopes", {})
         self.assertIn("foo", scopes)
         self.assertIn("bar", scopes)
         self.assertEqual(scopes["foo"]["data_source"], "stats")

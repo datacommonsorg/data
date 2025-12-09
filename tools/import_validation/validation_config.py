@@ -64,9 +64,9 @@ def _merge_configs(base_config: Dict[str, Any],
     """Merges base and override configs."""
     merged_schema_version = override_config.get(
         "schema_version", base_config.get("schema_version", "1.0"))
-    merged_definitions = _merge_definitions(base_config.get("definitions", {}),
-                                            override_config.get(
-                                                "definitions", {}))
+    merged_definitions = _merge_definitions(
+        base_config.get("definitions", {}),
+        override_config.get("definitions", {}))
     merged_rules = _merge_rules(base_config.get("rules", []),
                                 override_config.get("rules", []))
     return {
@@ -76,15 +76,21 @@ def _merge_configs(base_config: Dict[str, Any],
     }
 
 
-class ValidationConfig:
-    """Loads and merges validation configurations."""
+def merge_config_files(base_path: str,
+                       override_path: Optional[str] = None) -> Dict[str, Any]:
+    """Returns merged config dict from base and optional override files."""
+    base_config = _load_json_config(base_path)
+    override_config = _load_json_config(override_path)
+    if not override_config:
+        return base_config
+    return _merge_configs(base_config, override_config)
 
-    def __init__(self,
-                 base_config_path: str,
-                 override_config_path: Optional[str] = None):
-        base_config = _load_json_config(base_config_path)
-        override_config = _load_json_config(override_config_path)
-        self.config = _merge_configs(base_config, override_config)
+
+class ValidationConfig:
+    """Loads a single validation configuration file."""
+
+    def __init__(self, config_path: str):
+        self.config = _load_json_config(config_path)
 
         self.schema_version: str = self.config.get("schema_version", "1.0")
         self.definitions: Dict[str, Any] = self.config.get("definitions", {})
