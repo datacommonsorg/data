@@ -26,7 +26,7 @@ class TheLibrarian:
     def __init__(self, project_id, location, model_name):
         self.client = VertexClient(project_id, location, model_name)
 
-    def generate_docstring(self, code_snippet, function_name):
+    def generate_docstring(self, code_snippet, function_name, full_file_source):
         """Generates a Google-style docstring for a given function."""
         prompt = f"""
 You are a senior Google software engineer. Your task is to write a comprehensive Google-style docstring for the following Python function.
@@ -35,6 +35,7 @@ You are a senior Google software engineer. Your task is to write a comprehensive
 1. You MUST include 'Args:', 'Returns:', and 'Examples:' sections.
 2. Return ONLY a valid JSON object with the key "docstring".
 3. The "docstring" value should NOT contain outer triple quotes, but SHOULD contain newlines.
+4. Focus solely on the function's observable behavior, its inputs, outputs, and any side effects. Do NOT describe internal implementation details, algorithms, or how the function achieves its results.
 
 **Required JSON Structure:**
 {{
@@ -42,8 +43,11 @@ You are a senior Google software engineer. Your task is to write a comprehensive
 }}
 
 **Function Name:** {function_name}
-**Code:**
+**Function Code:**
 {code_snippet}
+
+**Full File Context (for understanding dependencies and types):**
+{full_file_source}
 """
         try:
             response = self.client.model.generate_content(
@@ -135,7 +139,7 @@ You are a senior Google software engineer. Your task is to write a comprehensive
                 continue
 
             print(f"  Generating docstring for '{node.name}'...")
-            raw_docstring = self.generate_docstring(func_source, node.name)
+            raw_docstring = self.generate_docstring(func_source, node.name, source)
 
             if raw_docstring:
                 indentation = " " * (node.body[0].col_offset)
