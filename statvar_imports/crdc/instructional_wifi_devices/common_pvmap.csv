@@ -7,5 +7,5 @@ SCH_INTERNET_SCHDEV,#ignore,ignore,value,{Number},,,,
 SCH_INTERNET_STUDDEV,#ignore,ignore,value,{Number},,,,
 SCH_INTERNET_WIFIENDEV,populationType,School,measuredProperty,count,internetSubscriptionType,WifiEnabledDevice,value,{Number}
 ,,,,,,,,
-JJ:Yes,juvenileJusticeFacilityStatus,WithJuvenileJusticeFacility,,,,,,
-JJ:No,juvenileJusticeFacilityStatus,NoJuvenileJusticeFacility,,,,,,
+JJ:Yes,educationalInstitutionType,JuvenileJusticeFacility,,,,,,
+JJ:No,educationalInstitutionType,NotJuvenileJusticeFacility,,,,,,
