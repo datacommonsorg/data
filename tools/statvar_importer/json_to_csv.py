@@ -13,10 +13,8 @@
 # limitations under the License.
 """Script to process data sets from OpenDataAfrica."""
 
-import json
 import os
 import sys
-from typing import Union
 
 from absl import app
 from absl import flags
