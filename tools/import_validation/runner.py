@@ -20,7 +20,7 @@ from absl import logging
 import pandas as pd
 import json
 import sys
-from typing import Tuple
+from typing import Tuple, Optional
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _SCRIPT_DIR)
@@ -39,9 +39,15 @@ class ValidationRunner:
   Orchestrates the validation process based on the new schema.
   """
 
-    def __init__(self, validation_config_path: str, differ_output: str,
-                 stats_summary: str, lint_report: str, validation_output: str):
-        self.config = ValidationConfig(validation_config_path)
+    def __init__(self,
+                 validation_config_path: str,
+                 differ_output: str,
+                 stats_summary: str,
+                 lint_report: str,
+                 validation_output: str,
+                 override_validation_config_path: Optional[str] = None):
+        self.config = ValidationConfig(validation_config_path,
+                                       override_validation_config_path)
         self.validation_output = validation_output
         self.validator = Validator()
         self.validation_results = []
@@ -208,9 +214,13 @@ class ValidationRunner:
 
 def main(_):
     try:
-        runner = ValidationRunner(_FLAGS.validation_config,
-                                  _FLAGS.differ_output, _FLAGS.stats_summary,
-                                  _FLAGS.lint_report, _FLAGS.validation_output)
+        runner = ValidationRunner(
+            validation_config_path=_FLAGS.validation_config,
+            differ_output=_FLAGS.differ_output,
+            stats_summary=_FLAGS.stats_summary,
+            lint_report=_FLAGS.lint_report,
+            validation_output=_FLAGS.validation_output,
+            override_validation_config_path=_FLAGS.override_validation_config)
         overall_status, _ = runner.run_validations()
         if not overall_status:
             sys.exit(1)
@@ -222,6 +232,8 @@ def main(_):
 if __name__ == '__main__':
     flags.DEFINE_string('validation_config', 'validation_config.json',
                         'Path to the validation config file.')
+    flags.DEFINE_string('override_validation_config', None,
+                        'Optional path to a per-import validation config.')
     flags.DEFINE_string('differ_output', None,
                         'Path to the differ output data file.')
     flags.DEFINE_string('stats_summary', None,

@@ -11,26 +11,80 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This module defines the Config class, which is responsible for loading and
-parsing the main validation configuration file.
+"""Utilities for loading and merging validation configurations."""
 
-The configuration file is expected to be in JSON format and defines the set of
-validation rules to be executed, along with any shared definitions for data
-scopes or variable sets.
-"""
-
+import copy
 import json
-from typing import Any, Dict, List
+import os
+from typing import Any, Dict, List, Optional
+
+from absl import logging
+from omegaconf import OmegaConf
+
+
+def _load_json_config(path: str) -> Dict[str, Any]:
+    """Loads a JSON config if present."""
+    if not path:
+        return {}
+    if not os.path.exists(path):
+        logging.warning("Validation config file not found: %s", path)
+        return {}
+    with open(path, encoding='utf-8') as f:
+        return json.load(f)
+
+
+def _merge_rules(base_rules: List[Dict[str, Any]],
+                 override_rules: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Merges rules keyed by rule_id; override replaces base entirely."""
+    merged: Dict[str, Dict[str, Any]] = {}
+    for rule in base_rules:
+        rule_id = rule.get('rule_id')
+        if not rule_id:
+            continue
+        merged[rule_id] = copy.deepcopy(rule)
+    for rule in override_rules:
+        rule_id = rule.get('rule_id')
+        if not rule_id:
+            continue
+        merged[rule_id] = copy.deepcopy(rule)
+    return list(merged.values())
+
+
+def _merge_definitions(base_defs: Dict[str, Any],
+                       override_defs: Dict[str, Any]) -> Dict[str, Any]:
+    """Merges definitions dictionaries using OmegaConf deep merge."""
+    base_cfg = OmegaConf.create(base_defs or {})
+    override_cfg = OmegaConf.create(override_defs or {})
+    merged = OmegaConf.merge(base_cfg, override_cfg)
+    return OmegaConf.to_object(merged)
+
+
+def _merge_configs(base_config: Dict[str, Any],
+                   override_config: Dict[str, Any]) -> Dict[str, Any]:
+    """Merges base and override configs."""
+    merged_schema_version = override_config.get(
+        "schema_version", base_config.get("schema_version", "1.0"))
+    merged_definitions = _merge_definitions(base_config.get("definitions", {}),
+                                            override_config.get(
+                                                "definitions", {}))
+    merged_rules = _merge_rules(base_config.get("rules", []),
+                                override_config.get("rules", []))
+    return {
+        "schema_version": merged_schema_version,
+        "definitions": merged_definitions,
+        "rules": merged_rules,
+    }
 
 
 class ValidationConfig:
-    """
-    A class to handle the loading and parsing of the validation configuration.
-    """
+    """Loads and merges validation configurations."""
 
-    def __init__(self, config_path: str):
-        with open(config_path, encoding='utf-8') as f:
-            self.config = json.load(f)
+    def __init__(self,
+                 base_config_path: str,
+                 override_config_path: Optional[str] = None):
+        base_config = _load_json_config(base_config_path)
+        override_config = _load_json_config(override_config_path)
+        self.config = _merge_configs(base_config, override_config)
 
         self.schema_version: str = self.config.get("schema_version", "1.0")
         self.definitions: Dict[str, Any] = self.config.get("definitions", {})

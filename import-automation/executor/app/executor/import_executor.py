@@ -487,13 +487,16 @@ class ImportExecutor:
         """
         import_name = import_spec['import_name']
         validation_status = True
-        config_file = import_spec.get('validation_config_file', '')
-        if config_file:
-            config_file_path = os.path.join(absolute_import_dir, config_file)
+        base_config_path = os.path.join(repo_dir,
+                                        self.config.validation_config_file)
+        override_config = import_spec.get('validation_config_file', '')
+        if override_config:
+            override_config_path = os.path.join(absolute_import_dir,
+                                                override_config)
         else:
-            config_file_path = os.path.join(repo_dir,
-                                            self.config.validation_config_file)
-        logging.info(f'Validation config file: {config_file_path}')
+            override_config_path = ''
+        logging.info('Validation config base: %s override: %s',
+                     base_config_path, override_config_path or 'None')
 
         import_dir = f'{relative_import_dir}/{import_spec["import_name"]}'
         latest_version = self._get_latest_version(import_dir)
@@ -566,10 +569,13 @@ class ImportExecutor:
             )
             timer = Timer()
             try:
-                validation = ValidationRunner(config_file_path,
-                                              differ_output_file, summary_stats,
-                                              report_json,
-                                              validation_output_file)
+                validation = ValidationRunner(
+                    validation_config_path=base_config_path,
+                    override_validation_config_path=override_config_path,
+                    differ_output=differ_output_file,
+                    stats_summary=summary_stats,
+                    lint_report=report_json,
+                    validation_output=validation_output_file)
                 overall_status, _ = validation.run_validations()
                 if validation_status:
                     validation_status = overall_status
