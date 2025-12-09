@@ -77,7 +77,7 @@ def _merge_configs(base_config: Dict[str, Any],
     }
 
 
-def merge_config_files(base_path: str, override_path: str) -> Dict[str, Any]:
+def _merge_config_files(base_path: str, override_path: str) -> Dict[str, Any]:
     """Returns merged config dict from base and optional override files."""
     base_config = _load_json_config(base_path)
     override_config = _load_json_config(override_path)
@@ -89,14 +89,14 @@ def merge_and_save_config(base_path: str, override_path: str,
     """Merges configs, saves to output_dir, and enables detailed logging."""
     logging.info('Merging validation configs: base=%s override=%s', base_path,
                  override_path)
-    merged = merge_config_files(base_path, override_path)
+    merged_config = _merge_config_files(base_path, override_path)
     os.makedirs(output_dir, exist_ok=True)
     merged_path = os.path.join(output_dir, 'merged_validation_config.json')
     with open(merged_path, 'w', encoding='utf-8') as tmp_file:
-        json.dump(merged, tmp_file, ensure_ascii=False, indent=2)
+        json.dump(merged_config, tmp_file, ensure_ascii=False, indent=2)
     logging.info('Merged validation config saved to %s', merged_path)
     logging.info('Merged validation config content: %s',
-                 json.dumps(merged, ensure_ascii=False))
+                 json.dumps(merged_config, ensure_ascii=False))
     return merged_path
 
 

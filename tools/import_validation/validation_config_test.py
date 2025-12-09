@@ -18,7 +18,7 @@ import os
 import tempfile
 import unittest
 
-from tools.import_validation.validation_config import merge_config_files
+from tools.import_validation.validation_config import _merge_config_files
 
 
 class ValidationConfigTest(unittest.TestCase):
