@@ -90,7 +90,7 @@ def run_import_job(absolute_import_name: str, import_config: str):
     message = (f"Import Job [{absolute_import_name}] completed with status= "
                f"[{result.status}] in [{elapsed_time_secs}] seconds.)")
 
-    status = 'SUCCESS' if not result.status == 'succeeded' else 'ERROR'
+    status = 'SUCCESS' if result.status == 'succeeded' else 'ERROR'
     import_executor.log_import_status(
         import_name, 'DONE', status, elapsed_time_secs, 0, message,
         "INFO" if result.status == 'succeeded' else "ERROR")
