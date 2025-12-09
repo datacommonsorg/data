@@ -36,12 +36,18 @@ def _load_json_config(path: str) -> Dict[str, Any]:
 
 def _merge_rules(base_rules: List[Dict[str, Any]],
                  override_rules: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Merges rules keyed by rule_id; override replaces base entirely."""
+    """Merges rules keyed by rule_id; override deep merges into base."""
     merged: Dict[str, Dict[str, Any]] = {}
     for rule in base_rules + override_rules:
         rule_id = rule.get('rule_id')
         if rule_id:
-            merged[rule_id] = copy.deepcopy(rule)
+            if rule_id in merged:
+                base_cfg = OmegaConf.create(merged[rule_id])
+                override_cfg = OmegaConf.create(rule)
+                merged_cfg = OmegaConf.merge(base_cfg, override_cfg)
+                merged[rule_id] = OmegaConf.to_object(merged_cfg)
+            else:
+                merged[rule_id] = copy.deepcopy(rule)
     return list(merged.values())
 
 

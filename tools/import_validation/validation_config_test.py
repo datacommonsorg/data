@@ -29,7 +29,7 @@ class ValidationConfigTest(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
-    def test_rules_override_replaces_base(self):
+    def test_rules_are_deep_merged_by_rule_id(self):
         base_path = os.path.join(self.tmp.name, "base.json")
         override_path = os.path.join(self.tmp.name, "override.json")
         with open(base_path, "w", encoding="utf-8") as f:
@@ -39,7 +39,9 @@ class ValidationConfigTest(unittest.TestCase):
                         "rule_id": "check_deleted_count",
                         "validator": "DELETED_COUNT",
                         "params": {
-                            "threshold": 0
+                            "threshold": 0,
+                            "warn_only": True,
+                            "fields": ["a", "b"]
                         }
                     }, {
                         "rule_id": "keep_original",
@@ -56,7 +58,9 @@ class ValidationConfigTest(unittest.TestCase):
                         "rule_id": "check_deleted_count",
                         "validator": "DELETED_COUNT",
                         "params": {
-                            "threshold": 5
+                            "threshold": 5,
+                            "new_param": "keep-me",
+                            "fields": ["c"]
                         }
                     }, {
                         "rule_id": "new_rule",
@@ -76,7 +80,10 @@ class ValidationConfigTest(unittest.TestCase):
                     "rule_id": "check_deleted_count",
                     "validator": "DELETED_COUNT",
                     "params": {
-                        "threshold": 5
+                        "threshold": 5,
+                        "warn_only": true,
+                        "new_param": "keep-me",
+                        "fields": ["c"]
                     }
                 },
                 {
@@ -100,6 +107,7 @@ class ValidationConfigTest(unittest.TestCase):
         actual_rules = sorted(config["rules"], key=lambda rule: rule["rule_id"])
         expected_rules = sorted(json.loads(expected_rules_json)["rules"],
                                 key=lambda rule: rule["rule_id"])
+        # Lists are replaced (OmegaConf default), scalars and maps are merged.
         self.assertEqual(actual_rules, expected_rules)
 
     def test_definitions_are_deep_merged(self):
@@ -154,6 +162,50 @@ class ValidationConfigTest(unittest.TestCase):
         }
         """
         self.assertEqual(scopes, json.loads(expected_scopes_json))
+
+    def test_rule_list_params_are_replaced(self):
+        """Lists should follow OmegaConf default: override list replaces base."""
+        base_path = os.path.join(self.tmp.name, "base_list.json")
+        override_path = os.path.join(self.tmp.name, "override_list.json")
+        with open(base_path, "w", encoding="utf-8") as f:
+            json.dump(
+                {
+                    "rules": [{
+                        "rule_id": "list_rule",
+                        "validator": "NO_NULLS",
+                        "params": {
+                            "fields": ["a", "b"]
+                        }
+                    }]
+                }, f)
+        with open(override_path, "w", encoding="utf-8") as f:
+            json.dump(
+                {
+                    "rules": [{
+                        "rule_id": "list_rule",
+                        "validator": "NO_NULLS",
+                        "params": {
+                            "fields": ["c"]
+                        }
+                    }]
+                }, f)
+
+        config = merge_config_files(base_path, override_path)
+        expected_rules_json = """
+        {
+            "rules": [
+                {
+                    "rule_id": "list_rule",
+                    "validator": "NO_NULLS",
+                    "params": {
+                        "fields": ["c"]
+                    }
+                }
+            ]
+        }
+        """
+        self.assertEqual(config["rules"],
+                         json.loads(expected_rules_json)["rules"])
 
     def test_both_missing_files_raise(self):
         missing_base = os.path.join(self.tmp.name, "no_base.json")
