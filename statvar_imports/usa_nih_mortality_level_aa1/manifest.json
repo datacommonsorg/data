@@ -2,14 +2,14 @@
     "import_specifications": [
         {
             "import_name": "USA_NIH_Mortality_Level_AA1",
-            "curator_emails": [ "support@datacommons.org"
+            "curator_emails": [
+                "support@datacommons.org"
             ],
             "provenance_url": "https://www.nimhd.nih.gov/",
             "provenance_description": "Data on mortality rates and trends, focusing on health disparities based on factors such as age, sex, race/ethnicity, and geographic location at state level",
             "scripts": [
-                "download_script.py",
-                "pre_process_script.py",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=scripts/scripts_statvar_stat_vars.mcf --input_data=input_files/*csv --pv_map=pvmap.csv --config_file=metadata.csv --output_path=output_files/output --statvar_dcid_remap_csv=statvar_remapped.csv"
+                "run.sh",                
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=scripts/scripts_statvar_stat_vars.mcf --input_data=input_files/*.csv --pv_map=pvmap.csv --config_file=metadata.csv --output_path=output_files/output --statvar_dcid_remap_csv=statvar_remapped.csv"
             ],
             "import_inputs": [
                 {

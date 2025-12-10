@@ -161,7 +161,7 @@ def fetch_api_data(api_url, referer_url):
     except requests.exceptions.RequestException as e:
         error_message = f"FATAL ERROR: Error fetching API URL: {e}. Terminating script."
         logging.warning(error_message)
-        # raise RuntimeError(error_message) from e
+        raise RuntimeError(error_message) from e
   
 
 def process_nih_json(raw_data, cod_name, race_name, sex_name, age_name, ruralurban_name):
