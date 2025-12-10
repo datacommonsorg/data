@@ -71,7 +71,7 @@ class ValidationConfigTest(unittest.TestCase):
                     }]
                 }, f)
 
-        config = merge_config_files(base_path, override_path)
+        config = _merge_config_files(base_path, override_path)
 
         expected_rules_json = """
         {
@@ -144,7 +144,7 @@ class ValidationConfigTest(unittest.TestCase):
                     }
                 }, f)
 
-        config = merge_config_files(base_path, override_path)
+        config = _merge_config_files(base_path, override_path)
 
         scopes = config.get("definitions", {}).get("scopes", {})
         expected_scopes_json = """
@@ -190,7 +190,7 @@ class ValidationConfigTest(unittest.TestCase):
                     }]
                 }, f)
 
-        config = merge_config_files(base_path, override_path)
+        config = _merge_config_files(base_path, override_path)
         expected_rules_json = """
         {
             "rules": [
@@ -212,7 +212,7 @@ class ValidationConfigTest(unittest.TestCase):
         missing_override = os.path.join(self.tmp.name, "no_override.json")
 
         with self.assertRaises(FileNotFoundError):
-            merge_config_files(missing_base, missing_override)
+            _merge_config_files(missing_base, missing_override)
 
 
 if __name__ == "__main__":
