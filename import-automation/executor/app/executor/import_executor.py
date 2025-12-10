@@ -47,6 +47,7 @@ from counters import Counters
 from timer import Timer
 from import_differ.import_differ import ImportDiffer
 from tools.import_validation.runner import ValidationRunner
+from tools.import_validation.validation_config import merge_and_save_config
 from app import configs
 from app import utils
 from app.executor import cloud_run_simple_import
@@ -482,6 +483,39 @@ class ImportExecutor:
                           start_timer.time(), data_size)
         return import_prefix_list
 
+    def _get_validation_config_file(self, repo_dir: str,
+                                    absolute_import_dir: str, import_spec: dict,
+                                    validation_output_path: str) -> str:
+        """Determines and prepares the validation config file to use.
+
+        If a validation_config_file is specified in import_spec, it is merged
+        with the base validation config and saved to validation_output_path.
+        Otherwise, the base validation config is returned.
+
+        Args:
+            repo_dir: Absolute path to the repository.
+            absolute_import_dir: Absolute path to the import directory.
+            import_spec: Specification of the import.
+            validation_output_path: Path to the validation output directory.
+
+        Returns:
+            Path to the validation config file to use.
+        """
+        base_config_path = os.path.join(repo_dir,
+                                        self.config.validation_config_file)
+        override_config_path = import_spec.get('validation_config_file', '')
+        if override_config_path:
+            override_config_path = os.path.join(absolute_import_dir,
+                                                override_config_path)
+
+        logging.info('Validation config base: %s override: %s',
+                     base_config_path, override_config_path or 'None')
+
+        if override_config_path and os.path.exists(override_config_path):
+            return merge_and_save_config(base_config_path, override_config_path,
+                                         validation_output_path)
+        return base_config_path
+
     @log_function_call
     def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
                                   absolute_import_dir: str, import_spec: dict,
@@ -495,13 +529,6 @@ class ImportExecutor:
         data_size = 0
         import_name = import_spec['import_name']
         validation_status = True
-        config_file = import_spec.get('validation_config_file', '')
-        if config_file:
-            config_file_path = os.path.join(absolute_import_dir, config_file)
-        else:
-            config_file_path = os.path.join(repo_dir,
-                                            self.config.validation_config_file)
-        logging.info(f'Validation config file: {config_file_path}')
 
         import_dir = f'{relative_import_dir}/{import_spec["import_name"]}'
         latest_version = self._get_latest_version(import_dir)
@@ -569,15 +596,20 @@ class ImportExecutor:
                 logging.error(
                     'Skipping differ tool due to missing latest mcf file')
 
-            logging.info(
-                f'Invoking validation script with config: {config_file_path}, differ:{differ_output_file}, summary:{summary_stats}...'
-            )
             timer = Timer()
             try:
-                validation = ValidationRunner(config_file_path,
-                                              differ_output_file, summary_stats,
-                                              report_json,
-                                              validation_output_file)
+                config_file_path = self._get_validation_config_file(
+                    repo_dir, absolute_import_dir, import_spec,
+                    validation_output_path)
+                logging.info(
+                    f'Invoking validation script with config: {config_file_path}, differ:{differ_output_file}, summary:{summary_stats}...'
+                )
+                validation = ValidationRunner(
+                    validation_config_path=config_file_path,
+                    differ_output=differ_output_file,
+                    stats_summary=summary_stats,
+                    lint_report=report_json,
+                    validation_output=validation_output_file)
                 overall_status, _ = validation.run_validations()
                 if validation_status:
                     validation_status = overall_status
