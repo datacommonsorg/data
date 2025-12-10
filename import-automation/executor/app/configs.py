@@ -57,6 +57,8 @@ class ExecutorConfig:
     storage_dev_bucket_name: str = 'unresolved_mcf'
     # DataCommons API key
     dc_api_key: str = ''
+    # Gemini API key
+    gemini_api_key: str = ''
     # Executor output prefix in the storage_dev_bucket_name bucket.
     storage_executor_output_prefix: str = 'datcom-dev-imports'
     # Name of the file that specifies the most recently generated data files
@@ -76,10 +78,10 @@ class ExecutorConfig:
     # The content of latest_version.txt would be a single line of
     # '2020_07_15T12_07_17_365264_07_00'.
     storage_version_filename: str = 'latest_version.txt'
-    # GCP secret name containg import config
-    import_config_secret: str = 'import_config'
-    # Config override file
-    config_override_file: str = 'import-automation/executor/config_override.json'
+    # GCP secret name containg import config.
+    import_config_secret: str = 'import-config'
+    # Config override file.
+    config_override_file: str = ''
     # File with list of historical versions with the most recent at the top
     storage_version_history_filename: str = 'version_history.txt'
     # Name of the file that contains the import_metadata_mcf for the import.

@@ -40,9 +40,7 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_string('mode', '', 'Options: update or schedule.')
 flags.DEFINE_string('gcp_project_id', '',
                     'GCP Project where import executor runs.')
-flags.DEFINE_string('config_project_id', 'datcom-import-automation-prod',
-                    'GCP Project for the config secrets.')
-flags.DEFINE_string('scheduler_config_secret', 'scheduler_config',
+flags.DEFINE_string('scheduler_config_secret', 'import-scheduler-config',
                     'GCP secret for the Scheduler config.')
 
 flags.DEFINE_string(
@@ -244,9 +242,10 @@ def main(_):
     logging.info(f'Import: {absolute_import_path}')
     logging.info(f'Repo root directory: {repo_dir}')
     cfg = configs.ExecutorConfig()
+    override_config = {}
     logging.info(f'Reading Cloud scheduler configs from secret manager.')
     scheduler_config_dict = _get_scheduler_config(
-        _FLAGS.config_project_id, _FLAGS.scheduler_config_secret)
+        _FLAGS.gcp_project_id, _FLAGS.scheduler_config_secret)
     if mode == 'update':
         logging.info("*************************************************")
         logging.info("***** Beginning Update. Can take a while. *******")
