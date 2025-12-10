@@ -83,20 +83,22 @@ def run_import_job(absolute_import_name: str, import_config: str):
         local_repo_dir=config.local_repo_dir)
     logging.info('Import config:')
     logging.info(config)
+    import_executor.log_import_status(import_name, 'INIT', 'SUCCESS')
     result = executor.execute_imports_on_update(absolute_import_name)
-    logging.info('Import result:')
     logging.info(result)
     elapsed_time_secs = int(time.time() - start_time)
     message = (f"Import Job [{absolute_import_name}] completed with status= "
                f"[{result.status}] in [{elapsed_time_secs}] seconds.)")
-
-    status = 'SUCCESS' if result.status == 'succeeded' else 'ERROR'
-    import_executor.log_import_status(
-        import_name, 'DONE', status, elapsed_time_secs, 0, message,
-        "INFO" if result.status == 'succeeded' else "ERROR")
-    if result.status == 'failed':
+    logging.info(message)
+    if result.status != 'succeeded':
+        import_executor.log_import_status(import_name, 'FINISH', 'FAILURE',
+                                          elapsed_time_secs, 0, message,
+                                          'ERROR')
         return 1
-    return 0
+    else:
+        import_executor.log_import_status(import_name, 'FINISH', 'SUCCESS',
+                                          elapsed_time_secs, 0, message, 'INFO')
+        return 0
 
 
 def main(_):
