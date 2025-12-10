@@ -25,7 +25,7 @@ from typing import Tuple
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _SCRIPT_DIR)
 
-from validation_config import ValidationConfig, merge_and_save_config
+from validation_config import ValidationConfig
 from report_generator import ReportGenerator
 from validator import Validator
 from result import ValidationResult, ValidationStatus
@@ -209,16 +209,6 @@ class ValidationRunner:
 def main(_):
     try:
         config_path = _FLAGS.validation_config
-        override_config_path = _FLAGS.override_validation_config
-        if override_config_path:
-            if not os.path.exists(override_config_path):
-                raise ValueError(
-                    f"Override validation config not found: {override_config_path}"
-                )
-            config_path = merge_and_save_config(
-                config_path, override_config_path,
-                os.path.dirname(override_config_path))
-
         runner = ValidationRunner(validation_config_path=config_path,
                                   differ_output=_FLAGS.differ_output,
                                   stats_summary=_FLAGS.stats_summary,
@@ -235,8 +225,6 @@ def main(_):
 if __name__ == '__main__':
     flags.DEFINE_string('validation_config', 'validation_config.json',
                         'Path to the validation config file.')
-    flags.DEFINE_string('override_validation_config', None,
-                        'Optional path to a per-import validation config.')
     flags.DEFINE_string('differ_output', None,
                         'Path to the differ output data file.')
     flags.DEFINE_string('stats_summary', None,
