@@ -168,22 +168,21 @@ class SpannerClient:
         """Updates the status for the specified import job."""
         logging.info(f"Updating import status for {import_name} to {status}")
 
-        nextRefreshDate = datetime.today().strftime('%Y-%m-%d')
+        nextRefresh = datetime.now(timezone.utc)
         try:
-            nextRefreshDate = croniter(schedule, datetime.now(
-                timezone.utc)).get_next(datetime).date().isoformat()
-            logging.info(f"Next refresh date: {nextRefreshDate} {duration}")
+            nextRefresh = croniter(schedule, datetime.now(
+                timezone.utc)).get_next(datetime)
         except Exception as e:
-            logging.error(f"Error calculating next date: {e}")
+            logging.error(f"Error calculating next refresh: {e}")
 
         def _record(transaction: Transaction) -> bool:
             columns = [
                 "ImportName", "State", "JobId", "ExecutionTime",
-                "NextRefreshDate", "LatestVersion", "StatusUpdateTimestamp"
+                "NextRefreshTimestamp", "LatestVersion", "StatusUpdateTimestamp"
             ]
 
             values = [[
-                import_name, status, job_id, duration, nextRefreshDate, version,
+                import_name, status, job_id, duration, nextRefresh, version,
                 spanner.COMMIT_TIMESTAMP
             ]]
 

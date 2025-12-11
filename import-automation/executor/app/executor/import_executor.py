@@ -31,6 +31,7 @@ import traceback
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
 from google.cloud import spanner
 import datetime
+from enum import Enum
 
 REPO_DIR = os.path.dirname(
     os.path.dirname(
@@ -76,12 +77,30 @@ AUTO_IMPORT_JOB_STAGE = "auto-import-job-stage"
 AUTO_IMPORT_JOB_STATUS = "auto-import-job-status"
 
 
+class ImportStatus(Enum):
+    SUCCESS = 1
+    FAILURE = 2
+    ERROR = 3
+    SKIP = 4
+    READY = 5
+    VALIDATION = 6
+
+
+class ImportStage(Enum):
+    INIT = 1
+    SCRIPT = 2
+    GENMCF = 3
+    VALIDATION = 4
+    DIFFER = 5
+    FINISH = 6
+
+
 @dataclasses.dataclass
 class ExecutionResult:
     """Describes the result of the execution of an import."""
 
-    # Status of the execution, one of 'succeeded', 'failed', or 'pass'
-    status: str
+    # Status of the execution, one of 'SUCCESS', 'FAILURE', or 'SKIP'
+    status: ImportStatus
     # Absolute import names of the imports executed
     imports_executed: List[str]
     # Description of the result
@@ -106,19 +125,11 @@ class ExecutionError(Exception):
 class ImportStatusSummary:
     """Holds a set of summary stats for an import."""
     import_name: str
-    '''
-    Status: Possible values:
-    - PENDING: Import yet to be run.
-    - VALIDATION: Data validation failure.
-    - READY: Import job completed, ready for ingestion.
-    - FAILED: Import job failed.
-    - DONE: Data ingestion completed (Dataflow).
-    '''
-    status: str = 'PENDING'
+    status: ImportStatus = None
     latest_version: str = ''
     execution_time: int = 0  # seconds
     data_volume: int = 0  # bytes
-    next_refresh_date: str = ''
+    next_refresh: datetime = None
     """Holds a set of monitoring stats for an import."""
     import_stats: dict = dataclasses.field(default_factory=dict)
 
@@ -250,14 +261,16 @@ class ImportExecutor:
                         )
                     except Exception:
                         raise ExecutionError(
-                            ExecutionResult('failed', executed_imports,
+                            ExecutionResult(ImportStatus.FAILURE,
+                                            executed_imports,
                                             traceback.format_exc()))
                     executed_imports.append(
                         import_target.get_absolute_import_name(
                             import_dir, import_name_in_spec))
 
         logging.info('%s: END', absolute_import_name)
-        return ExecutionResult('succeeded', executed_imports, 'No issues')
+        return ExecutionResult(ImportStatus.SUCCESS, executed_imports,
+                               'No issues')
 
     def _execute_imports_on_commit_helper(
         self,
@@ -280,7 +293,8 @@ class ImportExecutor:
                                                        self.github)
         if not targets:
             return ExecutionResult(
-                'pass', [], 'No import target specified in commit message')
+                ImportStatus.SKIP, [],
+                'No import target specified in commit message')
         # Relative paths to directories having files changed by the commit
         # containing manifests, e.g. 'scripts/us_fed/treasury'.
         manifest_dirs = self.github.find_dirs_in_commit_containing_file(
@@ -311,13 +325,14 @@ class ImportExecutor:
 
                 except Exception:
                     raise ExecutionError(
-                        ExecutionResult('failed', executed_imports,
+                        ExecutionResult(ImportStatus.FAILURE, executed_imports,
                                         traceback.format_exc()))
                 absolute_name = import_target.get_absolute_import_name(
                     relative_dir, spec['import_name'])
                 executed_imports.append(absolute_name)
 
-            return ExecutionResult('succeeded', executed_imports, 'No issues')
+            return ExecutionResult(ImportStatus.SUCCESS, executed_imports,
+                                   'No issues')
 
     @log_function_call
     def _import_one(
@@ -430,7 +445,7 @@ class ImportExecutor:
         start_timer = Timer()
         data_size = 0
         num_rows = 0
-        stage_name = 'GENMCF'
+        import_stage = ImportStage.GENMCF
         import_name = import_spec['import_name']
         import_inputs = import_spec.get('import_inputs', [])
         import_prefix_list = []
@@ -464,7 +479,7 @@ class ImportExecutor:
             _log_process(process=process,
                          import_name=import_name,
                          metrics={
-                             "stage": "GENMCF",
+                             "stage": import_stage.name,
                              "latency": timer.time(),
                              "input_index": input_index,
                              "import_input": import_prefix,
@@ -478,8 +493,9 @@ class ImportExecutor:
                     report = json.load(f)
                 num_rows += int(report['levelSummary']['LEVEL_INFO']['counters']
                                 ['NumRowSuccesses'])
-            except:
-                logging.error(f'Error reading report.json file {report_json}')
+            except Exception as e:
+                logging.error(
+                    f'Error reading report.json {report_json} file: {e}')
             if os.path.exists(output_path):
                 # Upload output to GCS.
                 gcs_output = f'{relative_import_dir}/{import_spec["import_name"]}/{version}/{import_prefix}/validation'
@@ -497,7 +513,7 @@ class ImportExecutor:
         import_summary.import_stats['genmcf_execution_time'] = start_timer.time(
         )
         log_import_status(
-            import_name, stage_name, 'SUCCESS',
+            import_name, import_stage, ImportStatus.SUCCESS,
             import_summary.import_stats.get('genmcf_execution_time', 0),
             import_summary.import_stats.get('mcf_data_size', 0))
         return import_prefix_list
@@ -544,7 +560,7 @@ class ImportExecutor:
         Performs validations on import data.
         """
         start_timer = Timer()
-        stage_name = 'VALIDATION'
+        import_stage = ImportStage.VALIDATION
         data_size = 0
         import_name = import_spec['import_name']
         validation_status = True
@@ -597,7 +613,7 @@ class ImportExecutor:
                     AUTO_IMPORT_JOB_STAGE, "INFO",
                     f"Import: {import_name}, differ for {import_prefix} {latest_version} vs {version}",
                     {
-                        "stage": "DIFFER",
+                        "stage": ImportStage.DIFFER.name,
                         "latency": timer.time(),
                         "import_input": import_prefix,
                         "input_index": input_index,
@@ -638,9 +654,13 @@ class ImportExecutor:
             log_metric(
                 AUTO_IMPORT_JOB_STAGE, "INFO" if validation_status else "ERROR",
                 f"Import: {import_name}, validation: {validation_status}", {
-                    "stage": "VALIDATION",
-                    "latency": timer.time(),
-                    "status": 0 if validation_status else 1,
+                    "stage":
+                        import_stage.name,
+                    "latency":
+                        timer.time(),
+                    "status":
+                        ImportStatus.SUCCESS.name
+                        if validation_status else ImportStatus.FAILURE.name,
                 })
 
             if os.path.exists(validation_output_path):
@@ -659,8 +679,8 @@ class ImportExecutor:
             'validation_execution_time'] = start_timer.time()
         import_summary.import_stats['validation_data_size'] = data_size
         log_import_status(
-            import_name, stage_name,
-            'SUCCESS' if validation_status else 'FAILURE',
+            import_name, import_stage,
+            ImportStatus.SUCCESS if validation_status else ImportStatus.FAILURE,
             import_summary.import_stats.get('validation_execution_time', 0),
             import_summary.import_stats.get('validation_data_size', 0))
         return validation_status
@@ -692,7 +712,7 @@ class ImportExecutor:
         script_paths = import_spec.get('scripts')
         import_name = import_spec['import_name']
         start_timer = Timer()
-        stage_name = 'SCRIPT'
+        import_stage = ImportStage.SCRIPT
         self._create_mount_point(self.config.gcs_volume_mount_dir,
                                  self.config.cleanup_gcs_volume_mount,
                                  absolute_import_dir, import_name)
@@ -731,7 +751,7 @@ class ImportExecutor:
                 _log_process(process=process,
                              import_name=import_name,
                              metrics={
-                                 "stage": "USER_SCRIPT",
+                                 "stage": import_stage.name,
                                  "latency_secs": timer.time(),
                                  "script_index": script_index,
                                  "script_path": path,
@@ -748,7 +768,7 @@ class ImportExecutor:
             import_summary=import_summary)
 
         log_import_status(
-            import_name, stage_name, 'SUCCESS',
+            import_name, import_stage, ImportStatus.SUCCESS,
             import_summary.import_stats.get('script_execution_time', 0),
             import_summary.import_stats.get('source_data_size', 0))
         return inputs
@@ -759,6 +779,8 @@ class ImportExecutor:
         logging.info(
             f'Updating {import_summary.import_name} status to {import_summary.status} in spanner.'
         )
+        if not self.config.spanner_project_id or not self.config.spanner_instance_id or not self.config.spanner_database_id:
+            return
         spanner_client = spanner.Client(
             project=self.config.spanner_project_id,
             client_options={'quota_project_id': self.config.spanner_project_id})
@@ -768,18 +790,18 @@ class ImportExecutor:
         with database.batch() as batch:
             columns = [
                 "ImportName", "State", "JobId", "ExecutionTime", "DataVolume",
-                "StatusUpdateTimestamp", "NextRefreshDate", "LatestVersion"
+                "StatusUpdateTimestamp", "NextRefreshTimestamp", "LatestVersion"
             ]
             values = [
-                import_summary.import_name, import_summary.status,
+                import_summary.import_name, import_summary.status.name,
                 os.getenv('BATCH_JOB_NAME',
                           os.getenv('BATCH_JOB_UID', 'local-run')),
                 import_summary.execution_time, import_summary.data_volume,
-                spanner.COMMIT_TIMESTAMP, import_summary.next_refresh_date,
+                spanner.COMMIT_TIMESTAMP, import_summary.next_refresh,
                 import_summary.latest_version
             ]
             # Update import timestamp only if import completed successfully.
-            if import_summary.status == 'READY':
+            if import_summary.status == ImportStatus.READY:
                 columns.extend(["DataImportTimestamp"])
                 values.extend([spanner.COMMIT_TIMESTAMP])
 
@@ -841,11 +863,11 @@ class ImportExecutor:
         import_summary.latest_version = 'gs://' + os.path.join(
             self.config.storage_prod_bucket_name, output_dir, version, '*', '*',
             '*.mcf')
-        import_summary.next_refresh_date = utils.next_utc_date(
+        import_summary.next_refresh = utils.next_utc_timestamp(
             import_spec.get('cron_schedule'))
         if self.config.import_version_override and self.config.import_version_override != 'DATE_VERSION_PLACEHOLDER':
             logging.info(f'Import version override {version}')
-            import_summary.status = 'READY'
+            import_summary.status = ImportStatus.READY
             self._update_latest_version(version, output_dir, import_spec,
                                         import_summary)
             return
@@ -866,7 +888,7 @@ class ImportExecutor:
             _log_process(process=process,
                          import_name=import_name,
                          metrics={
-                             "stage": "SETUP",
+                             "stage": ImportStage.INIT.name,
                              "latency_secs": timer.time(),
                          })
             process.check_returncode()
@@ -914,7 +936,7 @@ class ImportExecutor:
                 import_summary.import_stats.get('validation_data_size', 0))
             logging.info(import_summary)
             if self.config.ignore_validation_status or validation_status:
-                import_summary.status = 'READY'
+                import_summary.status = ImportStatus.READY
                 if not self.config.skip_gcs_upload:
                     self._update_latest_version(version, output_dir,
                                                 import_spec, import_summary)
@@ -924,7 +946,7 @@ class ImportExecutor:
             else:
                 logging.error(
                     "Skipping latest version update due to validation failure.")
-                import_summary.status = 'VALIDATION'
+                import_summary.status = ImportStatus.VALIDATION
                 self._update_import_status_table(import_summary)
 
         if self.importer:
@@ -1097,7 +1119,7 @@ def run_and_handle_exception(
     except Exception:
         logging.exception('An unexpected exception was thrown')
         message = traceback.format_exc()
-        return ExecutionResult('failed', [], message)
+        return ExecutionResult(ImportStatus.FAILURE, [], message)
 
 
 @log_function_call
@@ -1382,9 +1404,10 @@ def _log_process(process: subprocess.CompletedProcess,
     message = _construct_process_message(process_message, process)
     logging.info(message)
 
+    status = ImportStatus.FAILURE if process.returncode else ImportStatus.SUCCESS
     if import_name:
         metrics["import_name"] = import_name
-    metrics["status"] = process.returncode
+    metrics["status"] = status.name
 
     log_metric(
         AUTO_IMPORT_JOB_STAGE, "INFO" if process.returncode == 0 else "ERROR",
@@ -1393,8 +1416,8 @@ def _log_process(process: subprocess.CompletedProcess,
 
 
 def log_import_status(import_name: str,
-                      stage_name: str,
-                      status: str,
+                      import_stage: ImportStage,
+                      status: ImportStatus,
                       latency_secs: int = 0,
                       data_size: int = 0,
                       message: str = '',
@@ -1403,11 +1426,11 @@ def log_import_status(import_name: str,
   """
     import_metrics = {
         "import_name": import_name,
-        "stage_name": stage_name,
-        "status": status,
+        "stage_name": import_stage.name,
+        "status": status.name,
         "latency_secs": int(latency_secs),
         "data_bytes": data_size
     }
     if not message:
-        message = f'Import: {import_name} stage: {stage_name} status: {status}'
+        message = f'Import: {import_name} stage: {import_stage.name} status: {status.name}'
     log_metric(AUTO_IMPORT_JOB_STATUS, level, message, import_metrics)

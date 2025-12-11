@@ -34,6 +34,7 @@ from app.service import file_uploader
 from app.service import github_api
 from app.service import email_notifier
 import dataclasses
+from app.executor.import_executor import ImportStatus, ImportStage
 
 import log_util
 
@@ -83,22 +84,19 @@ def run_import_job(absolute_import_name: str, import_config: str):
         local_repo_dir=config.local_repo_dir)
     logging.info('Import config:')
     logging.info(config)
-    import_executor.log_import_status(import_name, 'INIT', 'SUCCESS')
+    import_executor.log_import_status(import_name, ImportStage.INIT,
+                                      ImportStatus.SUCCESS)
     result = executor.execute_imports_on_update(absolute_import_name)
-    logging.info(result)
+    logging.info(f'Import result: {result}')
+    import_executor.log_import_status(import_name, ImportStage.FINISH,
+                                      result.status, elapsed_time_secs),
     elapsed_time_secs = int(time.time() - start_time)
     message = (f"Import Job [{absolute_import_name}] completed with status= "
                f"[{result.status}] in [{elapsed_time_secs}] seconds.)")
     logging.info(message)
-    if result.status != 'succeeded':
-        import_executor.log_import_status(import_name, 'FINISH', 'FAILURE',
-                                          elapsed_time_secs, 0, message,
-                                          'ERROR')
+    if result.status != ImportStatus.SUCCESS:
         return 1
-    else:
-        import_executor.log_import_status(import_name, 'FINISH', 'SUCCESS',
-                                          elapsed_time_secs, 0, message, 'INFO')
-        return 0
+    return 0
 
 
 def main(_):
