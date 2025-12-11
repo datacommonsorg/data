@@ -1,0 +1,283 @@
+# Auto generated using command: "../stat_var_processor.py --input_data=input1.csv --config_file=config.csv --pv_map=pvmap.csv --output_path=output" on 2025-12-08 09:43:10.630902
+
+Node: dcid:Age_dependency_ratio_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: "Age dependency ratio"
+statType: dcid:measuredValue
+
+Node: dcid:Count_Person_FinnishSpokenAtHome
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Finnish
+
+Node: dcid:Count_Person_ForeignBackground
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+citizenship: dcid:ForeignBackground
+
+Node: dcid:Count_Person_ForeignCitizen
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+citizenship: dcid:ForeignCitizen
+
+Node: dcid:Count_Person_LanguageOtherThanFinnishAndSwedishAndSamiSpokenAtHome
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanFinnishAndSwedishAndSami
+
+Node: dcid:Count_Person_PlaceOfBirthBornInAreaOfPopulation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+placeOfBirth: dcid:BornInAreaOfPopulation
+
+Node: dcid:Count_Person_PlaceOfBirthBornInStateOfResidence
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+placeOfBirth: dcid:BornInStateOfResidence
+
+Node: dcid:Count_Person_PlaceOfBirthBornNotInStateOfResidence
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+placeOfBirth: dcid:BornNotInStateOfResidence
+
+Node: dcid:Count_Person_PlaceOfBirthForeignBorn
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+placeOfBirth: dcid:ForeignBorn
+
+Node: dcid:Count_Person_SamiSpokenAtHome
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Sami
+
+Node: dcid:Count_Person_SwedishSpokenAtHome
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Swedish
+
+Node: dcid:Economic_dependency_ratio_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: "Economic dependency ratio"
+statType: dcid:measuredValue
+
+Node: dcid:GrowthRate_Percentage_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:growthRate
+
+Node: dcid:Land_area_LandCover
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: "Land area"
+statType: dcid:measuredValue
+
+Node: dcid:Mean_Age_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:age
+statType: dcid:meanValue
+
+Node: dcid:Mean_Age_Person_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:age
+statType: dcid:meanValue
+gender: dcid:Female
+
+Node: dcid:Mean_Age_Person_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:age
+statType: dcid:meanValue
+gender: dcid:Male
+
+Node: dcid:Percentage_Person_AreaOfBirth
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:AreaOfBirth
+
+Node: dcid:Percentage_Person_FinnishSpokenAtHome
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Finnish
+
+Node: dcid:Percentage_Person_ForeignBackground
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+citizenship: dcid:ForeignBackground
+
+Node: dcid:Percentage_Person_ForeignCitizen
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+citizenship: dcid:ForeignCitizen
+
+Node: dcid:Percentage_Person_InnerUrban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:InnerUrban
+
+Node: dcid:Percentage_Person_Irreligion
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+religion: dcid:Irreligion
+
+Node: dcid:Percentage_Person_LanguageOtherThanFinnishAndSwedishAndSamiSpokenAtHome
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:LanguageOtherThanFinnishAndSwedishAndSami
+
+Node: dcid:Percentage_Person_LocalCentreRural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:LocalCentreRural
+
+Node: dcid:Percentage_Person_Lutheran_Church_Missouri_Synod
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+religiousOrientation: "Lutheran Church – Missouri Synod"
+
+Node: dcid:Percentage_Person_OuterUrban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:OuterUrban
+
+Node: dcid:Percentage_Person_PeriUrban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:PeriUrban
+
+Node: dcid:Percentage_Person_PlaceOfBirthBornInStateOfResidence
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+placeOfBirth: dcid:BornInStateOfResidence
+
+Node: dcid:Percentage_Person_PlaceOfBirthForeignBorn
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+placeOfBirth: dcid:ForeignBorn
+
+Node: dcid:Percentage_Person_ReligionNotStated
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+religion: dcid:ReligionNotStated
+
+Node: dcid:Percentage_Person_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Percentage_Person_RuralCloseToUrban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:RuralCloseToUrban
+
+Node: dcid:Percentage_Person_RuralHeartland
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:RuralHeartland
+
+Node: dcid:Percentage_Person_SparseRural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:SparseRural
+
+Node: dcid:Percentage_Person_SwedishSpokenAtHome
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Swedish
+
+Node: dcid:Percentage_Person_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Percentage_Person_Years_15_To_64
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+age: "Years 15 To 64"
+
+Node: dcid:Percentage_Person_Years_65_Onwards
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+age: "Years 65 Onwards"
+
+Node: dcid:Percentage_Person_Years_UpTo_15
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percentage
+statType: dcid:measuredValue
+age: "Years UpTo 15"
+
+Node: dcid:Population_density_Thing
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Thing
+measuredProperty: "Population density"
+statType: dcid:measuredValue
+

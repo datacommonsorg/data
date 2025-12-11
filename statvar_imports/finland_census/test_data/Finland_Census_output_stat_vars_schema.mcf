@@ -1,0 +1,142 @@
+Node: dcid:Years UpTo 15
+typeOf: dcid:AgeStatusEnum
+name: "Years  Up To  15"
+isProvisional: dcs:True
+
+Node: dcid:Years 15 To 64
+typeOf: dcid:AgeStatusEnum
+name: "Years  15  To  64"
+isProvisional: dcs:True
+
+Node: dcid:Years 65 Onwards
+typeOf: dcid:AgeStatusEnum
+name: "Years  65  Onwards"
+isProvisional: dcs:True
+
+Node: dcid:MeasuredPropertyEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasuredPropertyEnum"
+isProvisional: dcs:True
+
+Node: dcid:Age dependency ratio
+typeOf: dcid:MeasuredPropertyEnum
+name: "Age dependency ratio"
+isProvisional: dcs:True
+
+Node: dcid:Economic dependency ratio
+typeOf: dcid:MeasuredPropertyEnum
+name: "Economic dependency ratio"
+isProvisional: dcs:True
+
+Node: dcid:Finnish
+typeOf: dcid:USC_LanguageSpokenAtHomeEnum
+name: "Finnish"
+isProvisional: dcs:True
+
+Node: dcid:Swedish
+typeOf: dcid:USC_LanguageSpokenAtHomeEnum
+name: "Swedish"
+isProvisional: dcs:True
+
+Node: dcid:Sami
+typeOf: dcid:USC_LanguageSpokenAtHomeEnum
+name: "Sami"
+isProvisional: dcs:True
+
+Node: dcid:LanguageOtherThanFinnishAndSwedishAndSami
+typeOf: dcid:USC_LanguageSpokenAtHomeEnum
+name: "Language Other Than Finnish And Swedish And Sami"
+isProvisional: dcs:True
+
+Node: dcid:ForeignCitizen
+typeOf: dcid:CitizenshipEnum
+name: "Foreign Citizen"
+isProvisional: dcs:True
+
+Node: dcid:placeOfBirth
+typeOf: dcs:Property
+name: "placeOfBirth"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:NativityEnum,dcid:USC_PlaceOfBirthEnum
+
+Node: dcid:ForeignBackground
+typeOf: dcid:CitizenshipEnum
+name: "Foreign Background"
+isProvisional: dcs:True
+
+Node: dcid:religiousOrientation
+typeOf: dcs:Property
+name: "religiousOrientation"
+domainIncludes: dcid:Person
+
+Node: dcid:Lutheran Church – Missouri Synod
+typeOf: dcid:ReligionEnum
+name: "Lutheran  Church –  Missouri  Synod"
+isProvisional: dcs:True
+
+Node: dcid:Land area
+typeOf: dcid:MeasuredPropertyEnum
+name: "Land area"
+isProvisional: dcs:True
+
+Node: dcid:Population density
+typeOf: dcid:MeasuredPropertyEnum
+name: "Population density"
+isProvisional: dcs:True
+
+Node: dcid:BornInAreaOfPopulation
+typeOf: dcid:NativityEnum
+name: "Born In Area Of Population"
+isProvisional: dcs:True
+
+Node: dcid:BornNotInStateOfResidence
+typeOf: dcid:NativityEnum
+name: "Born Not In State Of Residence"
+isProvisional: dcs:True
+
+Node: dcid:AreaOfBirth
+typeOf: dcid:CountyClassificationEnum
+name: "Area Of Birth"
+isProvisional: dcs:True
+
+Node: dcid:InnerUrban
+typeOf: dcid:CountyClassificationEnum
+name: "Inner Urban"
+isProvisional: dcs:True
+
+Node: dcid:OuterUrban
+typeOf: dcid:CountyClassificationEnum
+name: "Outer Urban"
+isProvisional: dcs:True
+
+Node: dcid:PeriUrban
+typeOf: dcid:CountyClassificationEnum
+name: "Peri Urban"
+isProvisional: dcs:True
+
+Node: dcid:placeOfResidenceClassification
+typeOf: dcs:Property
+name: "placeOfResidenceClassification"
+rangeIncludes: dcid:HumanSettlementClassificationEnum,dcid:LocationClassificationEnum
+
+Node: dcid:LocalCentreRural
+typeOf: dcid:CountyClassificationEnum
+name: "Local Centre Rural"
+isProvisional: dcs:True
+
+Node: dcid:RuralCloseToUrban
+typeOf: dcid:CountyClassificationEnum
+name: "Rural Close To Urban"
+isProvisional: dcs:True
+
+Node: dcid:RuralHeartland
+typeOf: dcid:CountyClassificationEnum
+name: "Rural Heartland"
+isProvisional: dcs:True
+
+Node: dcid:SparseRural
+typeOf: dcid:CountyClassificationEnum
+name: "Sparse Rural"
+isProvisional: dcs:True
+
