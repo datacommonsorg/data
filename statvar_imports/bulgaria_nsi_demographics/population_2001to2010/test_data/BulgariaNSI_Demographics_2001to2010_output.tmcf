@@ -1,0 +1,6 @@
+Node: E:BulgariaNSI_Demographics_2001to2010_output->E0
+observationDate: C:BulgariaNSI_Demographics_2001to2010_output->observationDate
+observationAbout: C:BulgariaNSI_Demographics_2001to2010_output->observationAbout
+value: C:BulgariaNSI_Demographics_2001to2010_output->value
+variableMeasured: C:BulgariaNSI_Demographics_2001to2010_output->variableMeasured
+typeOf: dcs:StatVarObservation
