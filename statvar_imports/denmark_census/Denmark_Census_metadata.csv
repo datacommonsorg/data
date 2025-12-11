@@ -1,0 +1,7 @@
+parameter,value
+place_type,Country
+place_within,country/DNK
+mapped_rows,7
+mapped_columns,4
+word_delimiter,""""""
+output_columns,"observationDate,value,observationAbout,variableMeasured"
