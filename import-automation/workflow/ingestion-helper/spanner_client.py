@@ -3,6 +3,7 @@ from google.cloud import spanner
 from google.cloud.spanner_v1 import Transaction
 from google.cloud.spanner_v1.param_types import STRING, TIMESTAMP, Array
 from datetime import datetime, timezone
+from croniter import croniter
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -101,7 +102,7 @@ class SpannerClient:
 
         return self.database.run_in_transaction(_release)
 
-    def get_import_status(self) -> list:
+    def get_import_list(self) -> list:
         """Get the list of imports ready to ingest."""
         pending_imports = []
         sql = "SELECT ImportName, LatestVersion FROM ImportStatus WHERE State = 'READY'"
@@ -122,25 +123,24 @@ class SpannerClient:
         """Marks the ingested imports as DONE and records the ingestion event."""
         logging.info(f"Marking import status for {import_list_json} as DONE.")
         succeeded_imports = []
-        if not import_list_json:
-            return
         for import_json in import_list_json:
             succeeded_imports.append(import_json['importName'])
 
-        def _record(transaction: Transaction) -> True:
+        def _record(transaction: Transaction) -> bool:
             # 1. Update the ImportStatus table
-            update_sql = "UPDATE ImportStatus SET State = 'DONE', WorkflowId = @workflowId, StatusUpdateTimestamp = PENDING_COMMIT_TIMESTAMP() WHERE ImportName IN UNNEST(@importNames)"
-            updated_rows = transaction.execute_update(
-                update_sql,
-                params={
-                    "importNames": succeeded_imports,
-                    "workflowId": workflow_id
-                },
-                param_types={
-                    "importNames": Array(STRING),
-                    "workflowId": STRING
-                })
-            logging.info(f"Marked {updated_rows} import jobs as DONE.")
+            if succeeded_imports:
+                update_sql = "UPDATE ImportStatus SET State = 'DONE', WorkflowId = @workflowId, StatusUpdateTimestamp = PENDING_COMMIT_TIMESTAMP() WHERE ImportName IN UNNEST(@importNames)"
+                updated_rows = transaction.execute_update(
+                    update_sql,
+                    params={
+                        "importNames": succeeded_imports,
+                        "workflowId": workflow_id
+                    },
+                    param_types={
+                        "importNames": Array(STRING),
+                        "workflowId": STRING
+                    })
+                logging.info(f"Marked {updated_rows} import jobs as DONE.")
 
             # 2. Insert into the IngestionHistory table
             insert_sql = """
@@ -162,15 +162,30 @@ class SpannerClient:
 
         return self.database.run_in_transaction(_record)
 
-    def update_import_status(self, import_name: str, status: str,
-                             job_id: str) -> bool:
+    def update_import_status(self, import_name: str, status: str, job_id: str,
+                             duration: int, version: str,
+                             schedule: str) -> bool:
         """Updates the status for the specified import job."""
         logging.info(f"Updating import status for {import_name} to {status}")
 
-        def _record(transaction: Transaction) -> bool:
-            columns = ["ImportName", "State", "JobId", "StatusUpdateTimestamp"]
+        nextRefreshDate = datetime.today().strftime('%Y-%m-%d')
+        try:
+            nextRefreshDate = croniter(schedule, datetime.now(
+                timezone.utc)).get_next(datetime).date().isoformat()
+            logging.info(f"Next refresh date: {nextRefreshDate} {duration}")
+        except Exception as e:
+            logging.error(f"Error calculating next date: {e}")
 
-            values = [[import_name, status, job_id, spanner.COMMIT_TIMESTAMP]]
+        def _record(transaction: Transaction) -> bool:
+            columns = [
+                "ImportName", "State", "JobId", "ExecutionTime",
+                "NextRefreshDate", "LatestVersion", "StatusUpdateTimestamp"
+            ]
+
+            values = [[
+                import_name, status, job_id, duration, nextRefreshDate, version,
+                spanner.COMMIT_TIMESTAMP
+            ]]
 
             transaction.insert_or_update(table="ImportStatus",
                                          columns=columns,
