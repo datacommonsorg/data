@@ -1,0 +1,29 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "OECDQuarterlyGDP",
+      "import_type": "statvar_processor",
+      "gcs_bucket": "datcom-prod-imports",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://data.oecd.org/gdp/quarterly-gdp.htm",
+      "provenance_description": "Quarterly GDP data from the Organisation for Economic Co-operation and Development (OECD). This data is retrieved using the SDMX API.",
+      "scripts": [
+        "download.sh",
+        "process.sh"
+      ],
+      "source_files": [
+        "input/*"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/oecd_quarterly_gdp.tmcf",
+          "node_mcf": "output/*.mcf",
+          "cleaned_csv": "output/oecd_quarterly_gdp.csv"
+        }
+      ],
+      "cron_schedule": "0 8 1 */3 *"
+    }
+  ]
+}

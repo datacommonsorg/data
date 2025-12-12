@@ -1,0 +1,40 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+Male,gender,Male,,,,,,,,,,
+Female,gender,Female,,,,,,,,,,
+U.S. citizens and permanent residentsa,citizenship,Citizen,#Header,citizenship,ethnicity,"""""",,,,,,
+Hispanic or Latino,ethnicity,HispanicOrLatino,citizenship,Citizen,,,,,,,,
+Not Hispanic or Latino,ethnicity,NotHispanicOrLatino,#MergedCell,0,,,,,,,,
+American Indian or Alaska Native,race,AmericanIndianOrAlaskaNativeAlone,citizenship,Citizen,ethnicity,NotHispanicOrLatino,,,,,,
+Asian,race,Asian,citizenship,Citizen,ethnicity,NotHispanicOrLatino,,,,,,
+Black or African American,race,BlackOrAfricanAmericanAlone,citizenship,Citizen,ethnicity,NotHispanicOrLatino,,,,,,
+Native Hawaiian or Other Pacific Islander,race,NativeHawaiianOrOtherPacificIslanderAlone,citizenship,Citizen,ethnicity,NotHispanicOrLatino,,,,,,
+White,race,WhiteAlone,citizenship,Citizen,ethnicity,NotHispanicOrLatino,,,,,,
+More than one race,race,TwoOrMoreRaces,citizenship,Citizen,ethnicity,NotHispanicOrLatino,,,,,,
+Unknown ethnicity and race,race,UnknownRace,citizenship,Citizen,ethnicity,UnknownEthnicity,,,,,,
+Temporary visa holders,citizenship,VisaHolder,ethnicity,"""""",,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+All graduate students,educationalProgram,MastersDegree__DoctorateDegree,populationType,Student,value,{Number},,,,,,
+Master's,educationalProgram,MastersDegree,populationType,Student,value,{Number},,,,,,
+Doctoral,value,{Number},#MergeCell,0,,,,,,,,
+Graduate students					,educationalProgram,DoctorateDegree,populationType,Student,,,,,,,,
+Postdoctoral appointees,populationType,Person,occupation,PostDoctoralAppointee,educationalAttainment,DoctorateDegree,educationalProgram,"""""",value,{Number},,
+Doctorate-holding nonfaculty researchers,occupation,NonFacultyResearcher,educationalAttainment,DoctorateDegree,value,{Number},populationType,Person,educationalProgram,"""""",,
+"Table 2-1. Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2017",observationDate,2017,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+"Table 2-1. Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2018",observationDate,2018,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2019",observationDate,2019,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2020",observationDate,2020,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2021",observationDate,2021,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2022",observationDate,2022,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2023",observationDate,2023,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2024",observationDate,2024,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2025",observationDate,2025,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2026",observationDate,2026,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2027",observationDate,2027,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2028",observationDate,2028,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2029",observationDate,2029,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2030",observationDate,2030,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,Science__Engineering__Health
+Number,unit,"",scalingFactor,"",statType,measuredValue,value,{Number},,,,,,
+Percent,unit,Percent,scalingFactor,100,measurementDenominator,"-race,-gender,-ethnicity, -citizenship",#MergedCell,0,value,{Number},,
+Percent:100,#ignore,Ignoring 100%,,,,,,,,,,
+"Sex, citizenship, ethnicity, and race",observationAbout,country/USA,,,,,,,,,,

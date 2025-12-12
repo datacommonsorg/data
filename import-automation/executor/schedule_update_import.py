@@ -31,22 +31,17 @@ from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
 from google.cloud import storage
+from google.cloud import secretmanager
 
 _CONFIG_OVERRIDE_FILE: str = 'config_override.json'
 
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('mode', '', 'Options: update or schedule.')
-flags.DEFINE_string('gke_project_id', '',
+flags.DEFINE_string('gcp_project_id', '',
                     'GCP Project where import executor runs.')
-flags.DEFINE_string('config_project_id', 'datcom-204919',
-                    'GCS Project for the config file.')
-flags.DEFINE_string('config_bucket', 'import-automation-configs',
-                    'GCS bucket name for the config file.')
-flags.DEFINE_string('config_filename', 'configs.json',
-                    'GCS filename for the config file.')
-flags.DEFINE_string('scheduler_config_filename', 'cloud_scheduler_configs.json',
-                    'GCS filename for the Cloud Scheduler config file.')
+flags.DEFINE_string('scheduler_config_secret', 'import-scheduler-config',
+                    'GCP secret for the Scheduler config.')
 
 flags.DEFINE_string(
     'absolute_import_path', '',
@@ -86,29 +81,13 @@ def _get_import_spec(repo_dir: str, absolute_import_path: str,
     )
 
 
-def _override_configs(filename: str,
-                      config: configs.ExecutorConfig) -> configs.ExecutorConfig:
-    # Read configs from the local file.
-    d = json.load(open(filename))
-
-    # Update config with any fields and values provided in the local file.
-    # In case of any errors, the line below will raise an Exception which will
-    # report the problem which shoud be fixed in the local config json file.
-    return dataclasses.replace(config, **d["configs"])
-
-
-def _get_cloud_config(filename: str) -> Dict:
-    logging.info('Getting cloud config.')
-    config_project_id = _FLAGS.config_project_id
-    bucket_name = _FLAGS.config_bucket
-    logging.info(
-        f'\nProject ID: {config_project_id}\nBucket: {bucket_name}\nConfig Filename: {filename}'
-    )
-
-    bucket = storage.Client(config_project_id).bucket(
-        bucket_name, user_project=config_project_id)
-    blob = bucket.blob(filename)
-    config_dict = json.loads(blob.download_as_string(client=None))
+def _get_scheduler_config(project_id: str, secret_name: str) -> Dict:
+    version_id = 'latest'
+    client = secretmanager.SecretManagerServiceClient()
+    secret_id = f"projects/{project_id}/secrets/{secret_name}/versions/{version_id}"
+    response = client.access_secret_version(name=secret_id)
+    secret_value = response.payload.data.decode("UTF-8")
+    config_dict = json.loads(secret_value)
     return config_dict
 
 
@@ -243,8 +222,8 @@ def main(_):
     mode = _FLAGS.mode
     absolute_import_path = _FLAGS.absolute_import_path
 
-    if not _FLAGS.gke_project_id:
-        raise Exception("Flag: gke_project_id must be provided.")
+    if not _FLAGS.gcp_project_id:
+        raise Exception("Flag: gcp_project_id must be provided.")
 
     if not mode or (mode not in ['update', 'schedule']):
         raise Exception('Flag: mode must be set to \'update\' or \'schedule\'')
@@ -259,28 +238,14 @@ def main(_):
     cwd = os.getcwd()
     repo_dir = cwd.split("data")[0] + "data"
     logging.info(f'{mode} called with the following:')
-    logging.info(f'Config Project ID: {_FLAGS.config_project_id}')
-    logging.info(f'GKE (Import Executor) Project ID: {_FLAGS.gke_project_id}')
+    logging.info(f'GCP Project ID: {_FLAGS.gcp_project_id}')
     logging.info(f'Import: {absolute_import_path}')
     logging.info(f'Repo root directory: {repo_dir}')
-
-    # Loading configs from GCS and then using _CONFIG_OVERRIDE_FILE to
-    # override any fields provided in the file.
-    logging.info('Reading configs from GCS.')
-    config_dict = _get_cloud_config(_FLAGS.config_filename)
-    cfg = configs.ExecutorConfig(**config_dict['configs'])
-
-    # Update the GCP project id to use with the configs.
-    cfg.gcp_project_id = _FLAGS.gke_project_id
-
-    logging.info(
-        f'Updating any config fields from local file: {_FLAGS.config_override}.'
-    )
-    cfg = _override_configs(_FLAGS.config_override, cfg)
-
-    logging.info('Reading Cloud scheduler configs from GCS.')
-    scheduler_config_dict = _get_cloud_config(_FLAGS.scheduler_config_filename)
-
+    cfg = configs.ExecutorConfig()
+    override_config = {}
+    logging.info(f'Reading Cloud scheduler configs from secret manager.')
+    scheduler_config_dict = _get_scheduler_config(
+        _FLAGS.gcp_project_id, _FLAGS.scheduler_config_secret)
     if mode == 'update':
         logging.info("*************************************************")
         logging.info("***** Beginning Update. Can take a while. *******")
@@ -313,7 +278,8 @@ def main(_):
         import_spec = _get_import_spec(repo_dir, absolute_import_path,
                                        cfg.manifest_filename)
         res = scheduler_job_manager.create_or_update_import_schedule(
-            absolute_import_path, import_spec, cfg, scheduler_config_dict)
+            absolute_import_path, import_spec, cfg, scheduler_config_dict,
+            override_config)
         logging.info("*************************************************")
         logging.info("*********** Schedule Operation Complete. ********")
         logging.info("*************************************************")

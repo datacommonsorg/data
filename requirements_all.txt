@@ -7,6 +7,7 @@
 
 -r import-automation/executor/requirements.txt
 
+absl-py
 chembl-webresource-client
 deepdiff
 earthengine-api
@@ -14,8 +15,10 @@ flask_restful
 geopandas
 geopy
 google-generativeai
+jinja2
 matplotlib
 netCDF4
+protobuf
 rasterio
 rdp
 s2sphere

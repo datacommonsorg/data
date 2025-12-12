@@ -1,0 +1,6 @@
+parameter,value
+url,"https://data.cso.ie/table/FY002, https://data.cso.ie/table/VSD30, https://data.cso.ie/table/VSD31, https://data.cso.ie/table/VSA30, https://data.cso.ie/table/VSA09, https://data.cso.ie/table/VSD24, https://data.cso.ie/table/VSA03, https://data.cso.ie/table/FY003B, https://data.cso.ie/table/FY001, https://data.cso.ie/table/FY031, https://data.cso.ie/table/CNA22"
+description,Population by religion at county and country level
+release_frequency,5 Year
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+header_rows,1

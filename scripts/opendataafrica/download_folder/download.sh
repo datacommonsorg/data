@@ -14,10 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+set -xe
 COUNTRY=""
 DATASETS=()
 SELECTED_DATASETS=()
+MAX_RETRIES=5                     # Maximum number of retries
+RETRY_DELAY=15                    # Seconds to wait between retries
 
 function download_key_families() {
   if [ -f "$WORKING_DIR/key_family.xml" ] && [ $(stat -c%s "$WORKING_DIR/key_family.xml") -gt 0 ]; then
@@ -38,37 +40,49 @@ function extract_key_families() {
 
 function download_and_convert_dataset() {
   local dataset="$1" # Pass dataset as an argument
-  curl -s --location "http://${COUNTRY}.opendataforafrica.org/api/1.0/sdmx/data/${dataset}" \
-    --header 'Accept: text/html,application/xhtml+xml,application/xml' \
-    --header 'Accept-Encoding: gzip, deflate, br, zstd' \
-    --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' \
-    --output "$WORKING_DIR/${dataset}.xml" \
-    --compressed
-  
-  if [ $? -ne 0 ]; then
-    echo "Error: Failed to download dataset $dataset"
-    return 1
-  fi
-
-  local json_output_file="$WORKING_DIR/${dataset}.json"
-  local csv_output_file="$WORKING_DIR/${dataset}.csv"
-    
-  local xml_to_json_script_path="../../../util/xml_to_json.py"
-  local json_to_csv_script_path="../../../scripts/opendataafrica/download_folder/json_to_csv.py"
-
-  if python3 "$xml_to_json_script_path" "$WORKING_DIR/${dataset}.xml" "$json_output_file"; then
-    if python3 "$json_to_csv_script_path" "$json_output_file" "$csv_output_file"; then
-      rm -f "$WORKING_DIR/${dataset}.xml"
-      rm -f "$WORKING_DIR/${dataset}.json"
-      return 0
+  for i in $(seq 1 $((MAX_RETRIES + 1))); do
+    echo "Attempt $dataset $i of $((MAX_RETRIES + 1))..."
+    if curl -s --location "http://${COUNTRY}.opendataforafrica.org/api/1.0/sdmx/data/${dataset}" \
+      --header 'Accept: text/html,application/xhtml+xml,application/xml' \
+      --header 'Accept-Encoding: gzip, deflate, br, zstd' \
+      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' \
+      --output "$WORKING_DIR/${dataset}.xml" \
+      --compressed; then
+      echo "Download completed for $dataset"
+      local json_output_file="$WORKING_DIR/${dataset}.json"
+      local csv_output_file="$WORKING_DIR/${dataset}.csv"
+        
+      local xml_to_json_script_path="../../../util/xml_to_json.py"
+      local json_to_csv_script_path="../../../scripts/opendataafrica/download_folder/json_to_csv.py"
+      if python3 "$xml_to_json_script_path" "$WORKING_DIR/${dataset}.xml" "$json_output_file"; then
+        echo "XML conversion completed for $dataset"
+        if python3 "$json_to_csv_script_path" "$json_output_file" "$csv_output_file"; then
+          echo "Json conversion completed for $dataset"
+          echo "$RETRY_DELAY wait time between downloads"
+          sleep "$RETRY_DELAY"
+          break
+        else
+          echo "Error: JSON conversion failed for dataset: $dataset."
+          exit 1
+        fi
+      else
+        echo "Error: XML conversion failed for dataset: $dataset."
+        exit 1
+      fi
     else
-      echo "Error: Failed to convert JSON files to CSV files for dataset $dataset."
-      return 1
+      EXIT_CODE=$? # Capture the exit code of curl
+      echo "Curl failed for $dataset on attempt $i with exit code: $EXIT_CODE."
+      if [ $i -le $MAX_RETRIES ]; then
+        echo "Retrying in $RETRY_DELAY seconds..."
+        sleep "$RETRY_DELAY"
+      else
+        echo "Max retries reached. Curl failed permanently."
+        exit 1 # Exit with an error status
+      fi
     fi
-  else
-    echo "Error: Failed to convert ${dataset}.xml to ${dataset}.json for dataset $dataset."
-    return 1
-  fi
+    echo "$RETRY_DELAY wait time between downloads"
+    sleep "$RETRY_DELAY"
+  done
 }
 
 function download_datasets_for_country() {

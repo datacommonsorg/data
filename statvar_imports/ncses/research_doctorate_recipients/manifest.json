@@ -1,0 +1,31 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NCSES_Research_Doctorate_Recipients_Import",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://ncses.nsf.gov/pubs/nsf23300/data-tables",
+            "provenance_description": "Research doctorate recipients by ethnicity, race and citizenship status",
+            "scripts": [
+                "download_and_process.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/nsf23300-tab001-009.xlsx --pv_map=config/research_doctorate_male_pvmap.csv --config_file=common_metadata.csv --output_path=output_path/research_doctorate_male --statvar_dcid_remap_csv=config/statvar_remap.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/nsf23300-tab001-010.xlsx --pv_map=config/research_doctorate_female_pvmap.csv --config_file=common_metadata.csv --output_path=output_path/research_doctorate_female --statvar_dcid_remap_csv=config/statvar_remap.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_path/research_doctorate_male.tmcf",
+                    "cleaned_csv": "output_path/research_doctorate_male.csv"
+                },
+                {
+                    "template_mcf": "output_path/research_doctorate_female.tmcf",
+                    "cleaned_csv": "output_path/research_doctorate_female.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*"
+            ],
+            "cron_schedule": "30 05 12,26 * *"
+        }
+    ]
+}

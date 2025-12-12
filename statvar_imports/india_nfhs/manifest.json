@@ -1,0 +1,38 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "India_NFHS",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://ndap.niti.gov.in/dataset/6821",
+            "provenance_description": "India National Family Health Survey - Data on population dynamics and health indicators as well as data on emerging issues in health and family welfare and associated domains in District Level. National Data and Analytics Platform (NDAP).(2022 January 02). Datasets. Retrieved October, 10 2023 from National Data and Analytics Platform (NDAP): https://ndap.niti.gov.in/",
+            "scripts": [
+                "download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/NFHS_state.csv --pv_map=nfhsStatepvmap.csv --config_file=metadata.csv --places_resolved_csv=nfhsPlaceResolver.csv --output_path=output/NFHS_output",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/NFHS_Survey4.csv --pv_map=nfhs4pvmap.csv  --config_file=metadata.csv  --output_path=output/NFHS4_output",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/NFHS_Survey5.csv --pv_map=nfhs5pvmap.csv  --config_file=metadata.csv --places_resolved_csv=nfhs5placeresolver.csv --output_path=output/NFHS5_output"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/NFHS_output.tmcf",
+                    "cleaned_csv": "output/NFHS_output.csv"
+                },
+                {
+                    "template_mcf": "output/NFHS4_output.tmcf",
+                    "cleaned_csv": "output/NFHS4_output.csv"
+                },
+                {
+                    "template_mcf": "output/NFHS5_output.tmcf",
+                    "cleaned_csv": "output/NFHS5_output.csv"
+                }
+            ],
+            "source_file": [
+                "gcs_output/NFHS_Survey4.csv",
+                "gcs_output/NFHS_state.csv",
+                "gcs_output/NFHS_Survey5.csv"
+            ],
+            "cron_schedule": "30 05 * * 1"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+Node: E:common_tmcf->E0
+observationAbout: C:common_tmcf->observationAbout
+observationDate: C:common_tmcf->observationDate
+value: C:common_tmcf->value
+variableMeasured: C:common_tmcf->variableMeasured
+unit: C:common_tmcf->unit
+scalingFactor: C:common_tmcf->scalingFactor
+measurementMethod: C:common_tmcf->measurementMethod
+observationPeriod: C:common_tmcf->observationPeriod
+typeOf: dcs:StatVarObservation

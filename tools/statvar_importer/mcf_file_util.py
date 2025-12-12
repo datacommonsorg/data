@@ -72,6 +72,8 @@ sys.path.append(
 
 import file_util
 
+from counters import Counters
+
 _DEFAULT_NODE_PVS = OrderedDict({
     'Node': '',
     'typeOf': '',
@@ -84,6 +86,11 @@ _DEFAULT_NODE_PVS = OrderedDict({
     'statType': '',
     'measurementDenominator': '',
 })
+
+_STATVAR_DCID_IGNORE_PROPS = {
+    'name', 'description', 'descriptionUrl', 'alternateName',
+    'nameWithLanguage', 'constraintProperties', 'memberOf', 'provenance'
+}
 
 
 def add_namespace(value: str, namespace: str = 'dcid') -> str:
@@ -206,6 +213,10 @@ def add_pv_to_node(
   """
     if node is None:
         node = {}
+    if value is None:
+        return node
+    if isinstance(value, int) or isinstance(value, float):
+        value = str(value)
     if value and isinstance(value, str):
         if strip_namespaces:
             value = strip_namespace(value)
@@ -309,13 +320,90 @@ def get_node_dcid(pvs: dict) -> str:
     return strip_namespace(dcid)
 
 
+def get_non_name_props(pvs: dict,
+                       ignore_props: list = _STATVAR_DCID_IGNORE_PROPS) -> set:
+    """Returns the properties of the node ignoring name/descriptions.
+
+    Args:
+      pvs: dictionary of property:values in the statvar
+
+    Returns:
+      properties for the node excluding ignored properties and comments.
+    """
+    props = set()
+    if not pvs:
+        return props
+    for prop in pvs.keys():
+        if prop and not prop in ignore_props and prop[0] != '#':
+            props.add(prop)
+    return props
+
+
+def check_nodes_can_merge(node1: dict, node2: dict) -> bool:
+    """Returns True if two nodes can be merged.
+    Statvars can't be merged if there are any updates to constraint properties.
+
+    Args:
+      node1: dictionary of property:values
+      node2: dictionary of property values
+
+    Returns:
+      True if property:values from node2 can be added into node1.
+      StatVar can't have new constraint values or properties with multiple
+      values.
+    """
+    # Check dcid for conflict
+    dcid1 = get_node_dcid(node1)
+    dcid2 = get_node_dcid(node2)
+    if dcid1 and dcid2 and dcid1 != dcid2:
+        logging.error(
+            f'Cannot merge nodes with different dcids: {node1}, {node2}')
+        return False
+
+    typeof1 = strip_namespace(node1.get('typeOf', ''))
+    typeof2 = strip_namespace(node2.get('typeOf', ''))
+
+    if typeof1 == 'StatisticalVariable' or typeof2 == 'StatisticalVariable':
+        # Additional checks for statistical variable
+        # 1. Constraint properties should not be added/modified
+        # 2. Constraint properties should have a single value
+        if typeof1 and typeof2 and typeof1 != typeof2:
+            logging.error(f'Cannot merge {dcid1} of type: {typeof1}, {typeof2}')
+            return False
+
+        cprops1 = get_non_name_props(node1)
+        cprops2 = get_non_name_props(node2)
+        if cprops1 != cprops2:
+            logging.error(
+                f'Conflict in merging statvar props for {dcid1}: {cprops1}, {cprops2}'
+            )
+            return False
+        for prop in cprops1:
+            val1 = normalize_value(node1.get(prop, ''))
+            val2 = normalize_value(node2.get(prop, ''))
+            if ',' in val1 or ',' in val2:
+                logging.error(
+                    f'Statvar {dcid1} has multiple values for {prop}: {node1}, {node2}'
+                )
+                return False
+            if val1 and val2 and val1 != val2:
+                logging.error(
+                    f'Statvar {dcid1} has conflicting values for {prop}: {node1}, {node2}'
+                )
+                return False
+
+    # No conflicts, nodes can be merged
+    return True
+
+
 def add_mcf_node(
     pvs: dict,
     nodes: dict,
     strip_namespaces: bool = False,
     append_values: bool = True,
     normalize: bool = True,
-) -> dict:
+    counters: Counters = None,
+) -> bool:
     """Add a node with property values into the nodes dict
 
   If the node exists, the PVs are added to the existing node.
@@ -326,12 +414,15 @@ def add_mcf_node(
     strip_namespaces: if True, strip namespace from the dcid key and values.
     append_values: if True, append new value for an exsting property, else
       replace with new value.
+    normalize: if True, the property values are normalized
+      for a consistent namespace like 'dcid:'
+    counters: update any counters
 
   Returns
-    nodes dictionary to which the new node is added.
+    True if the node was added
   """
     if pvs is None or len(pvs) == 0:
-        return None
+        return False
     dcid = get_node_dcid(pvs)
     if dcid == '':
         logging.warning(f'Ignoring node without a dcid: {pvs}')
@@ -341,13 +432,21 @@ def add_mcf_node(
         dcid = add_namespace(dcid)
     if dcid not in nodes:
         nodes[dcid] = {}
+    else:
+        node = nodes[dcid]
+        can_merge = check_nodes_can_merge(node, pvs)
+        if not can_merge:
+            logging.error(f'Cannot merge {dcid}: {node} with {pvs}')
+            if counters is not None:
+                counters.add_counter(f'error-mcf-node-merge', 1, dcid)
+            return False
     node = nodes[dcid]
     for prop, value in pvs.items():
         add_pv_to_node(prop, value, node, append_values, strip_namespaces,
                        normalize)
     logging.level_debug() and logging.log(
         2, f'Added node {dcid} with properties: {pvs.keys()}')
-    return nodes
+    return True
 
 
 def update_mcf_nodes(
@@ -356,6 +455,7 @@ def update_mcf_nodes(
     strip_namespaces: bool = False,
     append_values: bool = True,
     normalize: bool = True,
+    counters: Counters = None,
 ) -> dict:
     """Returns output_nodes with Property:values from nodes added.
 
@@ -367,6 +467,7 @@ def update_mcf_nodes(
     append_values: if True, append new value for an exsting property, else
       replace with new value.
     normalize: if True, values are normalized.
+    counters: counters to be updated
 
   Returns:
     dictionary of output_nodes updated with property:values from nodes.
@@ -382,7 +483,7 @@ def update_mcf_nodes(
             node['Node'] = add_namespace(dcid)
         # Add PVs from node to output_nodes
         add_mcf_node(node, output_nodes, strip_namespaces, append_values,
-                     normalize)
+                     normalize, counters)
     return output_nodes
 
 
@@ -392,6 +493,7 @@ def load_mcf_nodes(
     strip_namespaces: bool = False,
     append_values: bool = True,
     normalize: bool = True,
+    counters: Counters = None,
 ) -> dict:
     """Return a dict of nodes from the MCF file with the key as the dcid
 
@@ -404,7 +506,7 @@ def load_mcf_nodes(
     strip_namespace: if True, strips namespace from the value for node
       properties as well as the dcid key for the nodes dict.
     append_values: if True, appends new values for existing properties into a
-      comma seperated list, else replaces existing value.
+      comma separated list, else replaces existing value.
 
   Returns:
     dictionary with dcid as the key and a values as a dict of property:values
@@ -420,19 +522,25 @@ def load_mcf_nodes(
         ...
       }
   """
+    if nodes is None:
+        nodes = _get_new_node(normalize)
+
     if not filenames:
         return nodes
+
+    if counters == None:
+        counters = Counters()
+
     # Load files in order of input
     files = []
     if isinstance(filenames, str):
         filenames = filenames.split(',')
     for file in filenames:
         files.extend(file_util.file_get_matching(file))
-    if nodes is None:
-        nodes = _get_new_node(normalize)
     for file in files:
         if not file:
             continue
+        counters.add_counter('mcf-files-loaded', 1)
         num_nodes = 0
         num_props = 0
         if file.endswith('.csv'):
@@ -442,14 +550,17 @@ def load_mcf_nodes(
                 if 'Node' not in pvs:
                     pvs['Node'] = key
                 num_props += len(pvs)
-                add_mcf_node(pvs, nodes, strip_namespaces, append_values,
-                             normalize)
+                if not add_mcf_node(pvs, nodes, strip_namespaces, append_values,
+                                    normalize, counters):
+                    logging.error(f'Unable to add node from {file}: {pvs}')
             num_nodes = len(file_nodes)
         else:
             # Load nodes from MCF file.
+            line_number = 0
             with file_util.FileIO(file, 'r', errors='ignore') as input_f:
                 pvs = _get_new_node(normalize)
                 for line in input_f:
+                    line_number += 1
                     # Strip leading trailing whitespaces
                     line = re.sub(r'\s+$', '', re.sub(r'^\s+', '', line))
                     if line and line[0] == '"' and line[-1] == '"':
@@ -462,9 +573,14 @@ def load_mcf_nodes(
                         line = line.replace('""', '"')
                     if line == '':
                         if pvs:
-                            add_mcf_node(pvs, nodes, strip_namespaces,
-                                         append_values, normalize)
-                            num_nodes += 1
+                            if not add_mcf_node(pvs, nodes, strip_namespaces,
+                                                append_values, normalize,
+                                                counters):
+                                logging.error(
+                                    f'Unable to add node from {file}:{line_number}: {pvs}'
+                                )
+                            else:
+                                num_nodes += 1
                             pvs = _get_new_node(normalize)
                     elif line[0] == '#':
                         add_comment_to_node(line, pvs)
@@ -476,12 +592,17 @@ def load_mcf_nodes(
                                        strip_namespace, normalize)
                         num_props += 1
                 if pvs:
-                    add_mcf_node(pvs, nodes, strip_namespaces, append_values,
-                                 normalize)
+                    if not add_mcf_node(pvs, nodes, strip_namespaces,
+                                        append_values, normalize, counters):
+
+                        logging.error(
+                            f'Unable to add node from {file}:{line_number}: {pvs}'
+                        )
                     num_nodes += 1
         logging.info(
             f'Loaded {num_nodes} nodes with {num_props} properties from file {file}'
         )
+        counters.add_counter('mcf-nodes-loaded', num_nodes)
     return nodes
 
 
@@ -602,8 +723,8 @@ def get_quoted_value(value: str, is_quoted: bool = None) -> str:
     value = value.strip()
     if value.startswith('[') and value.endswith(']'):
         return normalize_range(value)
-    if ' ' in value or ',' in value or is_quoted:
-        if value[0] != '"':
+    if value and (' ' in value or ',' in value or is_quoted):
+        if value and value[0] != '"':
             return '"' + value + '"'
     return value
 

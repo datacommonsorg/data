@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,30 +18,39 @@ import sys
 import json
 import csv
 import copy
-
-from absl import app
-from absl import flags
+import pandas as pd
+from absl import app, logging, flags
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '..', '..', '..', 'util'))
+sys.path.append(_SCRIPT_PATH)
+_DATA_DIR = _SCRIPT_PATH.split('/data/')[0]
+sys.path.append(os.path.join(_DATA_DIR, '/data/util'))
 
 from statvar_dcid_generator import get_statvar_dcid
 from name_to_alpha2 import USSTATE_MAP_SPACE
 from alpha2_to_dcid import USSTATE_MAP
-
-flags.DEFINE_string('input_path', None,
-                    'Path to directory with files to process')
-flags.DEFINE_string('config_path', None, 'Path to config file')
-flags.DEFINE_string('output_path', None,
-                    'Path to directory where CSV, MCF will be written')
-
-_FLAGS = flags.FLAGS
+from statvar_remap import STATVAR_REMAP_DICT
+from clean_data import reads_config_file
 
 _CONFIG = None
+_OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity', 'Geo', 'measurementMethod')
 
-# Columns in cleaned CSV
-_OUTPUT_COLUMNS = ('Year', 'Geo', 'StatVar', 'Quantity')
+with open("./config.json", 'r', encoding='utf-8') as config_f:
+    _CONFIG = json.load(config_f)
+
+
+def generate_tmcf():
+    # Writing Generated TMCF to local path.
+    configs = reads_config_file()
+    tmcf_template = configs['TMCF_TEMPLATE'].rstrip('\n')
+    output_path = _CONFIG.get("OUTPUT_PATH")
+    # The manifest specifies two parts.
+    for part_num in range(1, 3):
+        tmcf_file_path = os.path.join(output_path,
+                                      f"output_part{part_num}.tmcf")
+        with open(tmcf_file_path, 'w+', encoding='utf-8') as f_out:
+            f_out.write(tmcf_template)
 
 
 def state_resolver(state: str) -> str:
@@ -80,18 +89,27 @@ def _process_file(file_name: str, csv_reader: csv.DictReader,
             age_group = row['Age Group']
             row_statvar.update(_CONFIG['pvs']['Age Group'][age_group])
 
-        if 'Gender' in row:
-            gender = row['Gender']
-            row_statvar.update(_CONFIG['pvs']['Gender'][gender])
+        if 'Sex' in row:
+            sex = row['Sex']
+            row_statvar.update(_CONFIG['pvs']['Sex'][sex])
 
         row_statvar['Node'] = get_statvar_dcid(row_statvar)
+        for key in STATVAR_REMAP_DICT:
+            if str(row_statvar['Node']) == str(key):
+                row_statvar['Node'] = STATVAR_REMAP_DICT[key]
 
         processed_dict = {
             'Year': year_with_month,
-            'Geo': geo_dcid,
             'StatVar': row_statvar['Node'],
-            'Quantity': quantity
+            'Quantity': quantity,
+            'Geo': geo_dcid,
         }
+        """
+        Country data is derived by aggregating state-level data. 
+        State data is coming from the source, hence setting the measurementMethod value as empty.
+        Therefore, country SVs are assigned the measurementMethod 'dcs:DataCommonsAggregate'.
+        """
+        processed_dict['measurementMethod'] = ""
         csv_writer.writerow(processed_dict)
         statvars.append(row_statvar)
 
@@ -127,34 +145,63 @@ def write_to_mcf(sv_list: list, mcf_path: str):
                 f.write(statvar_mcf)
 
 
-def main(argv):
-    global _CONFIG
-    with open(_FLAGS.config_path, 'r', encoding='utf-8') as config_f:
-        _CONFIG = json.load(config_f)
+def aggregate():
+    """Method to aggregate EPH Heat Illness data from state level data."""
+    df = pd.read_csv(_CONFIG.get('OUTPUT_PATH') + "/cleaned.csv",
+                     dtype={'Quantity': 'float64'})
 
-    cleaned_csv_path = os.path.join(_FLAGS.output_path, 'cleaned.csv')
-    output_mcf_path = os.path.join(_FLAGS.output_path, 'output.mcf')
+    # Aggregating all stat vars
+    df.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
+                       keep='first',
+                       inplace=True)
+    country_df = df.groupby(by=['Year', 'StatVar'],
+                            as_index=False).agg({'Quantity': 'sum'})
+    country_df['Geo'] = "country/USA"
+    country_df['measurementMethod'] = "dcs:DataCommonsAggregate"
+    country_df.to_csv(_CONFIG.get('OUTPUT_PATH') + "/country_output.csv",
+                      index=False)
 
+
+def process(cleaned_csv_path, output_mcf_path, input_path):
     with open(cleaned_csv_path, 'w', encoding='utf-8') as cleaned_f:
-
         f_writer = csv.DictWriter(cleaned_f, fieldnames=_OUTPUT_COLUMNS)
         f_writer.writeheader()
-
         statvar_list = []
-        for file_name in os.listdir(_FLAGS.input_path):
+        for file_name in os.listdir(input_path):
             if file_name.endswith('.csv'):
-                file_path = os.path.join(_FLAGS.input_path, file_name)
+                file_path = os.path.join(input_path, file_name)
                 with open(file_path, 'r', encoding='utf-8') as csv_f:
                     f_reader = csv.DictReader(csv_f,
                                               delimiter=',',
                                               quotechar='"')
                     statvars = _process_file(file_name, f_reader, f_writer)
+
                     if statvars:
                         statvar_list.extend(statvars)
 
         write_to_mcf(statvar_list, output_mcf_path)
 
 
+def main(_):
+    try:
+        os.makedirs(_CONFIG.get('OUTPUT_PATH'), exist_ok=True)
+        cleaned_csv_path = os.path.join(_CONFIG.get('OUTPUT_PATH'),
+                                        'cleaned.csv')
+        output_mcf_path = os.path.join(_CONFIG.get('OUTPUT_PATH'), 'output.mcf')
+        try:
+            os.listdir(_CONFIG.get('COMBINED_INPUT_CSV_FILE'))
+        except:
+            logging.error(
+                "\n\nData not found!!!!!! Please run the script clean_data.py to download source data\n"
+            )
+        process(cleaned_csv_path, output_mcf_path,
+                _CONFIG.get('COMBINED_INPUT_CSV_FILE'))
+        generate_tmcf()
+        aggregate()
+        logging.info("Processing completed!")
+    except Exception as e:
+        logging.fatal(f"Encountered issue with process - {e}")
+
+
 if __name__ == "__main__":
-    flags.mark_flags_as_required(['input_path', 'config_path', 'output_path'])
     app.run(main)

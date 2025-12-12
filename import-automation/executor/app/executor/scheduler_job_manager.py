@@ -34,6 +34,7 @@ import traceback
 import tempfile
 from typing import Dict
 import cloud_run
+import cloud_batch
 
 from app import configs
 from app.service import github_api
@@ -76,7 +77,7 @@ def schedule_on_commit(github: github_api.GitHubRepoAPI,
                 logging.info('Scheduling a data update job for %s',
                              absolute_import_name)
                 job = create_or_update_import_schedule(absolute_import_name,
-                                                       spec, config, {})
+                                                       spec, config, {}, {})
                 scheduled.append(job)
             except Exception:
                 raise import_executor.ExecutionError(
@@ -89,15 +90,15 @@ def schedule_on_commit(github: github_api.GitHubRepoAPI,
 def create_or_update_import_schedule(absolute_import_name: str,
                                      import_spec: dict,
                                      config: configs.ExecutorConfig,
-                                     scheduler_config_dict: Dict):
+                                     scheduler_config_dict: dict,
+                                     override_config: dict):
     """Create/Update the import schedule for 1 import."""
     schedule = import_spec.get('cron_schedule')
     if not schedule:
         raise KeyError(
             f'cron_schedule not found in manifest for {absolute_import_name}')
-    resources = {"cpu": "2", "memory": "8G"}  # default resources.
-    if 'resource_limits' in import_spec:
-        resources.update(import_spec['resource_limits'])
+    # Default resources (disk/mem in Gi).
+    resources = {'cpu': 8, 'memory': 32, 'disk': 100}
     timeout = config.user_script_timeout
     if 'user_script_timeout' in import_spec:
         timeout = import_spec['user_script_timeout']
@@ -133,13 +134,18 @@ def create_or_update_import_schedule(absolute_import_name: str,
         json_encoded_config = json.dumps(config.get_data_refresh_config())
         args = [
             f'--import_name={absolute_import_name}',
-            f'--import_config={json_encoded_config}'
+            f'--import_config={json_encoded_config}', '--enable_cloud_logging'
         ]
         env_vars = {}
+        if 'resource_limits' in import_spec:
+            resources.update(import_spec['resource_limits'])
+        resources["cpu"] = f'{resources["cpu"]}'
+        resources["memory"] = f'{resources["memory"]}Gi'
+        del resources["disk"]
         job = cloud_run.create_or_update_cloud_run_job(
             config.gcp_project_id, config.scheduler_location, job_name,
-            docker_image, config.gcs_bucket_volume_mount, env_vars, args,
-            resources, timeout)
+            docker_image, config.gcs_bucket_volume_mount,
+            config.gcs_volume_mount_dir, env_vars, args, resources, timeout)
         job_id = job.name.rsplit('/', 1)[1]
         if not job:
             logging.error(
@@ -148,9 +154,22 @@ def create_or_update_import_schedule(absolute_import_name: str,
         req = cloud_scheduler.cloud_run_job_request(
             absolute_import_name, schedule, cloud_run_job_url,
             scheduler_config_dict[_GKE_SERVICE_ACCOUNT_KEY])
+    elif config.executor_type == "CLOUD_BATCH":
+        # This set up a cloud scheduler job which periodically invokes a GCP workflow job.
+        # The workflow job runs a CLOUD BATCH job with the specified configuration in the request.
+        json_encoded_body = cloud_batch.create_job_request(
+            absolute_import_name, override_config, import_spec, resources,
+            timeout)
+        cloud_batch_job_url = f'https://workflowexecutions.googleapis.com/v1/projects/{config.gcp_project_id}/locations/{config.scheduler_location}/workflows/{config.cloud_workflow_id}/executions'
+        req = cloud_scheduler.cloud_batch_job_request(
+            absolute_import_name, schedule, cloud_batch_job_url,
+            json_encoded_body.encode('utf-8'),
+            scheduler_config_dict[_GKE_SERVICE_ACCOUNT_KEY])
+        logging.info('Setting up a cloud batch job with config:')
+        logging.info(req)
     else:
         raise Exception(
-            "Invalid executor_type %s, expects one of ('GKE', 'GAE', 'CLOUD_RUN')",
+            "Invalid executor_type %s, expects one of ('GKE', 'GAE', 'CLOUD_RUN', 'CLOUD_BATCH')",
             config.executor_type)
 
     return cloud_scheduler.create_or_update_job(config.gcp_project_id,

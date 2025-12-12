@@ -1,0 +1,60 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+Aimag,observationAbout,{Data},,,,,,,,
+Aimag:Total,observationAbout,country/MNG,,,,,,,,
+,,,,,,,,,,
+Male,gender,Male,,,,,,,,
+Female,gender,Female,,,,,,,,
+15-19,age,[15 19 Years],,,,,,,,
+20-24,age,[20 24 Years],,,,,,,,
+25-29,age,[25 29 Years],,,,,,,,
+30-34,age,[30 34 Years],,,,,,,,
+35-39,age,[35 39 Years],,,,,,,,
+40-44,age,[40 44 Years],,,,,,,,
+45-49,age,[45 49 Years],,,,,,,,
+50-54,age,[50 54 Years],,,,,,,,
+55-59,age,[55 59 Years],,,,,,,,
+60-64,age,[60 64 Years],,,,,,,,
+65-69,age,[65 69 Years],,,,,,,,
+70+,age,[70 - Years],,,,,,,,
+,,,,,,,,,,
+1992,observationDate,1992,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+1993,observationDate,1993,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+1994,observationDate,1994,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+1995,observationDate,1995,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+1996,observationDate,1996,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+1997,observationDate,1997,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+1998,observationDate,1998,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+1999,observationDate,1999,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2000,observationDate,2000,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2001,observationDate,2001,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2002,observationDate,2002,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2003,observationDate,2003,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2004,observationDate,2004,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2005,observationDate,2005,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2006,observationDate,2006,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2007,observationDate,2007,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2008,observationDate,2008,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2009,observationDate,2009,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2010,observationDate,2010,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2011,observationDate,2011,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2012,observationDate,2012,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2013,observationDate,2013,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2014,observationDate,2014,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2015,observationDate,2015,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2016,observationDate,2016,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2017,observationDate,2017,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2018,observationDate,2018,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2019,observationDate,2019,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2020,observationDate,2020,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2021,observationDate,2021,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2022,observationDate,2022,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2023,observationDate,2023,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2024,observationDate,2024,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2025,observationDate,2025,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2026,observationDate,2026,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2027,observationDate,2027,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2028,observationDate,2028,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2029,observationDate,2029,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2030,observationDate,2030,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2031,observationDate,2031,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
+2032,observationDate,2032,populationType,Person,measuredProperty,count,value,{Number},employmentStatus,InLaborForce
