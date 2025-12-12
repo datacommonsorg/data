@@ -23,7 +23,7 @@ from util.download_util import download_file_from_url
 
 _SV_INDEX_URL = "https://nces.ed.gov/programs/digest/d24/tables/xls/tabn203.65.xlsx"
 _SV_INDEX_FILE_NAME = "tabn203.65.xlsx"
-_SV_INDEX_CSV_FILE_NAME = "ccd_input.csv"
+_SV_INDEX_CSV_FILE_NAME = "ccd_enrollment_input.csv"
 
 def download_data(output_dir: str):
     """Downloads the Enrollment in public elementary and secondary schools, by level, grade, and race/ethnicity data and processes it."""

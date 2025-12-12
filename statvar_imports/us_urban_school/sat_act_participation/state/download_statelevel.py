@@ -15,6 +15,7 @@ import os
 import sys
 from absl import app
 from absl import logging
+from urllib.parse import urlparse
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -27,31 +28,31 @@ logging.set_verbosity(logging.INFO)
 data_sources = [
     {
         "year":
-            "2020-2021",
+            "2021",
         "url":
             "https://docs.google.com/spreadsheets/d/1ovFJ2T0ZIpIcOZCUutE-aXiqGnXNgF1a/export?format=xlsx",
     },
     {
         "year":
-            "2017-2018",
+            "2018",
         "url":
             "https://civilrightsdata.ed.gov/assets/downloads/2017-2018/College-Prepatory-Exams/SAT-ACT/SAT-or-ACT-Participation-by-state.xlsx",
     },
     {
         "year":
-            "2015-2016",
+            "2016",
         "url":
             "https://civilrightsdata.ed.gov/assets/downloads/2015-2016/SAT-or-ACT-Participation-by-State.xlsx",
     },
     {
         "year":
-            "2013-2014",
+            "2014",
         "url":
             "https://civilrightsdata.ed.gov/assets/downloads/2013-2014/SAT-or-ACT-Participation-by-state.xlsx",
     },
     {
         "year":
-            "2011-2012",
+            "2012",
         "url":
             "https://civilrightsdata.ed.gov/assets/downloads/2011-2012/SAT%20or%20ACT/SAT-or-ACT-Participation-by-state.xlsx",
     },
@@ -71,13 +72,23 @@ def main(_):
         # Create a unique subfolder for each download
         unique_folder = f"{BASE_DOWNLOAD_DIR}"
         
-        file_name = f"{item['year'].replace('-','_')}_sat_act_participation.xlsx"
+        file_name = f"{item['year']}_sat_act_participation.xlsx"
 
         logging.info(
             f"Attempting download for {item['year']} data into '{unique_folder}'..."
         )
 
-        download_file(url=item["url"], output_folder=unique_folder, unzip=False, output_file_name=file_name)
+        download_file(url=item["url"], output_folder=unique_folder, unzip=False)
+        
+        # Rename the downloaded file
+        if "google.com" in item["url"]:
+            downloaded_file_path = os.path.join(unique_folder, "export.xlsx")
+        else:
+            parsed_url = urlparse(item["url"])
+            downloaded_file_path = os.path.join(unique_folder, os.path.basename(parsed_url.path))
+        
+        renamed_file_path = os.path.join(unique_folder, file_name)
+        os.rename(downloaded_file_path, renamed_file_path)
 
     logging.info("Download process complete.")
 
