@@ -67,6 +67,13 @@ if [[ -z "$PYTHON_INTERPRETER" || -z "$SCRIPT_DIR" || -z "$WORKING_DIR" || -z "$
   exit 1
 fi
 
+# Normalize output prefix: respect absolute paths, otherwise anchor under working dir.
+if [[ "${OUTPUT_PATH}" = /* ]]; then
+  OUTPUT_PREFIX="${OUTPUT_PATH}"
+else
+  OUTPUT_PREFIX="${WORKING_DIR}/${OUTPUT_PATH}"
+fi
+
 # Create .datacommons directory if it doesn't exist
 mkdir -p "${WORKING_DIR}/.datacommons"
 
@@ -81,20 +88,19 @@ OUTPUT_COLUMNS="observationDate,observationAbout,variableMeasured,value,observat
 echo "Running statvar processor..."
 "${PYTHON_INTERPRETER}" "${SCRIPT_DIR}/statvar_importer/stat_var_processor.py" \
   --input_data="${INPUT_DATA}" \
-  --pv_map="${WORKING_DIR}/${OUTPUT_PATH}_pvmap.csv" \
-  --config_file="${WORKING_DIR}/${OUTPUT_PATH}_metadata.csv" \
+  --pv_map="${OUTPUT_PREFIX}_pvmap.csv" \
+  --config_file="${OUTPUT_PREFIX}_metadata.csv" \
   --generate_statvar_name=True \
   --skip_constant_csv_columns=False \
   --output_columns="${OUTPUT_COLUMNS}" \
   --output_counters="${WORKING_DIR}/.datacommons/output_counters.csv" \
-  --output_path="${WORKING_DIR}/${OUTPUT_PATH}" > "${PROCESSOR_LOG}" 2>&1
+  --output_path="${OUTPUT_PREFIX}" > "${PROCESSOR_LOG}" 2>&1
 
 # Capture the processor exit code
 PROCESSOR_EXIT_CODE=${PIPESTATUS[0]}
 
 # Run backup script silently (redirect output to backup log)
 echo "Backing up run data..."
-OUTPUT_PREFIX="${WORKING_DIR}/${OUTPUT_PATH}"
 declare -a BACKUP_ARGS=(
   "--working_dir=${WORKING_DIR}"
   "--gemini_run_id=${GEMINI_RUN_ID}"
