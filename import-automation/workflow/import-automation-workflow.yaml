@@ -10,8 +10,10 @@ main:
           - importName: ${args.importName}
           - importConfig: ${args.importConfig}
           - gcsMountBucket: "datcom-volume-mount"
+          - gcsImportBucket: "datcom-prod-imports"
           - gcsMountPath: "/tmp/gcs"
           - function_url: 'https://spanner-ingestion-helper-965988403328.us-central1.run.app'
+          - startTime: ${sys.now()}
     - createAndRunBatchJob:
         try:
           call: googleapis.batch.v1.projects.locations.jobs.create
@@ -72,6 +74,9 @@ main:
                     jobId: ${jobId}
                     importName: ${text.split(args.importName, ":")[1]}
                     status: 'FAILED'
+                    duration: ${int(sys.now() - startTime)}
+                    version: ${"gs://" + gcsImportBucket + "/" + text.replace_all(args.importName, ":", "/")}
+                    schedule: ${default(map.get(args, "schedule"), "")}
                 result: function_response
             - fail_workflow:
                 raise: ${e}
