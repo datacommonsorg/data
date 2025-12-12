@@ -1,7 +1,7 @@
 key,,,,,,,,,,
 GeoName,observationAbout,{Data},measuredProperty,percent,populationType,EconomicActivity,grossDomesticProductType,RealGDP,statType,growthRate
-Unit:Percent change,unit,Percent,,,,,,,,
-Unit:Percentage points,unit,PercentagePoint,,,,,,,,
+Unit:Percent change,unit,dcid:Percent,,,,,,,,
+Unit:Percentage points,unit,dcid:PercentagePoint,,,,,,,,
 Description:All industry total,economicSector,AllIndustry,,,,,,,,
 Description:Private industries,economicSector,PrivateSector,,,,,,,,
 "Description:Agriculture, forestry, fishing and hunting",naics,NAICS/11,,,,,,,,
