@@ -1,0 +1,10 @@
+ValidationName,Status,Message,Details,ValidationParams
+check_max_date_latest,FAILED,"Latest date found was 2023, expected 2025.","{""latest_date_found"": 2023, ""expected_latest_date"": 2025, ""rows_processed"": 4, ""rows_succeeded"": 0, ""rows_failed"": 4}",
+check_max_date_consistent,PASSED,,"{""rows_processed"": 4, ""rows_succeeded"": 4, ""rows_failed"": 0}",
+check_deleted_count,PASSED,,"{""rows_processed"": 3, ""rows_succeeded"": 3, ""rows_failed"": 0}","{""threshold"": 5}"
+check_num_places_consistent,PASSED,,"{""rows_processed"": 2, ""rows_succeeded"": 2, ""rows_failed"": 0}",
+check_min_value,PASSED,,"{""rows_processed"": 4, ""rows_succeeded"": 4, ""rows_failed"": 0}","{""minimum"": 0}"
+check_max_value_for_percent,FAILED,1 out of 1 StatVars failed the maximum value check.,"{""failed_rows"": [{""stat_var"": ""UnemploymentRate_Person_Percent"", ""actual_max_value"": 105, ""maximum"": 100}], ""rows_processed"": 1, ""rows_succeeded"": 0, ""rows_failed"": 1}","{""maximum"": 100}"
+check_max_value_for_percent_sql,FAILED,1 rows failed the SQL validation.,"{""failing_rows"": [{""StatVar"": ""UnemploymentRate_Person_Percent"", ""NumPlaces"": 1, ""NumObservations"": 1, ""MinValue"": 5, ""MaxValue"": 105, ""NumObservationsDates"": 1, ""MinDate"": ""2023-01-01"", ""MaxDate"": ""2023-01-01 00:00:00"", ""MeasurementMethods"": ""[]"", ""Units"": ""Percent"", ""ScalingFactors"": ""[]"", ""observationPeriods"": ""[]""}]}","{""query"": ""SELECT * FROM stats WHERE Units = 'Percent'"", ""condition"": ""MaxValue <= 100""}"
+check_num_observations,PASSED,,"{""rows_processed"": 4, ""rows_succeeded"": 4, ""rows_failed"": 0}","{""minimum"": 1}"
+check_unit_consistency,FAILED,Found 2 unique units where 1 was expected.,"{""unique_units"": [""[]"", ""Percent""], ""rows_processed"": 4, ""rows_succeeded"": 0, ""rows_failed"": 4}",

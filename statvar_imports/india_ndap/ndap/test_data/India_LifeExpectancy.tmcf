@@ -1,0 +1,8 @@
+Node: E:India_LifeExpectancy->E0
+observationAbout: C:India_LifeExpectancy->observationAbout
+observationDate: C:India_LifeExpectancy->observationDate
+value: C:India_LifeExpectancy->value
+variableMeasured: C:India_LifeExpectancy->variableMeasured
+unit: C:India_LifeExpectancy->unit
+typeOf: dcs:StatVarObservation
+observationPeriod: P4Y

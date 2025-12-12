@@ -1,0 +1,27 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "OECD_Waste_Water_Treatment",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://stats.oecd.org/Index.aspx?DataSetCode=WATER_TREAT",
+            "provenance_description": "Data on wastewater treatment from the OECD.",
+            "scripts": [
+                "../../../util/download_util_script.py --download_url='https://sdmx.oecd.org/public/rest/data/OECD.ENV.EPI,DSD_WATER_TREAT@DF_WATER_TREAT,/all?dimensionAtObservation=AllDimensions&format=csvfilewithlabels' --output_folder=input",
+                "preprocess.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/oecd_wastewatertreatment_data.csv --pv_map=oecd_wastewatertreatment_pvmap.csv --config_file=oecd_wastewatertreatment_metadata.csv --places_resolved_csv=oecd_wastewatertreatment_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/oecd_wastewatertreatment"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/oecd_wastewatertreatment.tmcf",
+                    "cleaned_csv": "output/oecd_wastewatertreatment.csv"
+                }
+            ],
+            "cron_schedule": "0 10 1,15 * *",
+            "source_files": [
+                "input/*.csv"
+            ]
+        }
+    ]
+}

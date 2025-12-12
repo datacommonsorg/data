@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "BEAGDPv2",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://apps.bea.gov/regional/zip/CAGDP9.zip",
+            "provenance_description": "The data set contains GDP by  county, Metro, and Other Areas",
+            "scripts": [
+                "bea_download.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/CAGDP9__ALL_AREAS_*.csv --pv_map=bea_pv_map.py --config_file=bea_metadata.py --places_resolved_csv=bea_place_mapping.csv --statvar_dcid_remap_csv=bea_statvar_remap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/bea_gdp_output"
+            ],
+            "source_files": [
+                "input_files/CAGDP9.zip"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/bea_gdp_output.tmcf",
+                    "cleaned_csv": "output_files/bea_gdp_output.csv"
+                }
+            ],
+            "cron_schedule": "0 07 * * 2"
+        }
+    ]
+}

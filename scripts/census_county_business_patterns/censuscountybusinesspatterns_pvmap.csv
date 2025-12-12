@@ -1,0 +1,9 @@
+key,prop,value,,,,,,,,
+geoId,observationAbout,dcid:{Data},,,,,,,,
+year,observationDate,{Number},measurementMethod,CensusCBPSurvey,,,,,,
+NAICS,Naics,{Number},#Eval,Pop="BLSWorker" if Data else "USCWorker",,,,,,
+Establishments,populationType,USCEstablishment,measuredProperty,count,naics,NAICS/{Naics},value,{Number},,
+Employees,populationType,{Pop},naics,NAICS/{Naics},value,{Number},,,,
+Employee Noise Flag,,,,,,,,,,
+Annual Payroll,populationType,USCEstablishment,measuredProperty,wagesAnnual,naics,NAICS/{Naics},value,{Number},unit,USDollar
+AP Noise Flag,,,,,,,,,,

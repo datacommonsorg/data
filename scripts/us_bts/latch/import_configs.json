@@ -1,0 +1,22 @@
+[
+  {
+    "import_name": "USBTS_2017",
+    "files": [
+      {
+        "url": "https://data.bts.gov/resource/va72-z8hz.csv",
+        "input_file_name": "usbts_tract_household_transportation_2017_input.csv",
+        "output_file_name": "USBTS_Tract_Household_Transportation_2017_output.csv"
+      }
+    ]
+  },
+  {
+    "import_name": "USBTS_2009",
+    "files": [
+      {
+        "url": "https://data.bts.gov/resource/frme-pssc.csv",
+        "input_file_name": "usbts_tract_household_transportation_2009_input.csv",
+        "output_file_name": "USBTS_Tract_Household_Transportation_2009_output.csv"
+      }
+    ]
+  }
+]

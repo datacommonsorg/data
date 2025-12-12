@@ -1,0 +1,71 @@
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrDiploma_Unemployed_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationalAttainment: dcid:BachelorsDegree__Diploma
+employmentStatus: dcid:Unemployed
+gender: dcid:Male
+
+Node: dcid:Count_Person_EducationalAttainmentMastersDegreeOrDoctorateDegree_Unemployed_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationalAttainment: dcid:DoctorateDegree__MastersDegree
+employmentStatus: dcid:Unemployed
+gender: dcid:Male
+
+Node: dcid:Count_Person_EducationalAttainmentNoEducation_Unemployed_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationalAttainment: dcid:NoEducation
+employmentStatus: dcid:Unemployed
+gender: dcid:Male
+
+Node: dcid:Count_Person_Unemployed_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:Unemployed
+gender: dcid:Male
+
+Node: dcid:Count_Person_Unemployed_Male_LowerSecondaryEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:Unemployed
+gender: dcid:Male
+schoolGradeLevel: dcid:LowerSecondaryEducation
+
+Node: dcid:Count_Person_Unemployed_Male_SpecializedSecondarySchool
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:Unemployed
+gender: dcid:Male
+schoolGradeLevel: dcid:SpecializedSecondarySchool
+
+Node: dcid:Count_Person_Unemployed_Male_UpperSecondaryEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:Unemployed
+gender: dcid:Male
+schoolGradeLevel: dcid:UpperSecondaryEducation
+
+Node: dcid:Count_Person_Unemployed_PrimaryEducation_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:Unemployed
+enrollmentLevel: dcid:PrimaryEducation
+gender: dcid:Male
+

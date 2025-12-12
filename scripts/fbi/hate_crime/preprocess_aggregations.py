@@ -20,12 +20,24 @@ import pandas as pd
 import numpy as np
 import copy
 from utils import flatten_by_column, make_time_place_aggregation
+from absl import flags
+from absl import logging
+from absl import app
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
-
+import file_util
 from statvar_dcid_generator import get_statvar_dcid, _PREPEND_APPEND_REPLACE_MAP
+
+_FLAGS = flags.FLAGS
+flags.DEFINE_string(
+    'input_file',
+    os.path.join(_SCRIPT_PATH, 'aggregations/hate_crime_data/hate_crime.csv'),
+    'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#'
+)
+flags.DEFINE_string('config_file', os.path.join(_SCRIPT_PATH, 'config.json'),
+                    'Input config file')
 
 _CACHE_DIR = os.path.join(_SCRIPT_PATH, 'cache')
 
@@ -33,7 +45,7 @@ _CACHE_DIR = os.path.join(_SCRIPT_PATH, 'cache')
 _INPUT_COLUMNS = [
     'INCIDENT_ID', 'DATA_YEAR', 'OFFENDER_RACE', 'OFFENDER_ETHNICITY',
     'STATE_ABBR', 'OFFENSE_NAME', 'BIAS_DESC', 'AGENCY_TYPE_NAME',
-    'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS', 'PUB_AGENCY_NAME',
+    'MULTIPLE_OFFENSE', 'MULTIPLE_BIAS', 'PUG_AGENCY_NAME',
     'TOTAL_OFFENDER_COUNT', 'ADULT_OFFENDER_COUNT', 'JUVENILE_OFFENDER_COUNT',
     'INCIDENT_DATE', 'VICTIM_TYPES', 'LOCATION_NAME', 'VICTIM_COUNT',
     'ADULT_VICTIM_COUNT', 'JUVENILE_VICTIM_COUNT'
@@ -68,6 +80,8 @@ _BIAS_CATEGORY_MAP = {
     'Anti-Jehovah\'s Witness':
         'religion',
     'Anti-Mormon':
+        'religion',
+    'Anti-Church of Jesus Christ':
         'religion',
     'Anti-Buddhist':
         'religion',
@@ -159,6 +173,7 @@ _OFFENSE_CATEGORY_MAP = {
     "Bribery": "CrimeAgainstProperty",
     "Identity Theft": "CrimeAgainstProperty",
     "Human Trafficking, Commercial Sex Acts": "CrimeAgainstPerson",
+    "Human Trafficking, Involuntary Servitude": "CrimeAgainstPerson",
     "Hacking/Computer Invasion": "CrimeAgainstProperty",
     "Betting/Wagering": "CrimeAgainstSociety",
     "Animal Cruelty": "CrimeAgainstSociety",
@@ -1722,6 +1737,9 @@ def _write_to_csv(df: pd.DataFrame, csv_file_name: str):
     """
     df['Place'].replace('', np.nan, inplace=True)
     df.dropna(subset=['Place'], inplace=True)
+    df = df.sort_values("Value")  #Getting error Sanity_InconsistentSvObsValues
+    df = df.drop_duplicates(subset=['DATA_YEAR', 'Place', 'StatVar'],
+                            keep='last')
     df.to_csv(csv_file_name, index=False)
 
 
@@ -1729,14 +1747,19 @@ def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
                                         'hate_crime.csv'),
                  output_path=os.path.join(_SCRIPT_PATH, 'aggregations')):
     global _SCRIPT_PATH, _INPUT_COLUMNS, _AGGREGATIONS
-    input_csv = os.path.expanduser(input_csv)
     output_path = os.path.expanduser(output_path)
-
-    df = pd.read_csv(input_csv, usecols=_INPUT_COLUMNS)
-
-    with open('config.json', 'r') as f:
+    logging.info(f'Processing input: {_FLAGS.input_file}')
+    #with file_util.FileIO(_FLAGS.input_file, 'r') as input_f:
+    print(f"Loading input file into df : {_FLAGS.input_file}")
+    df = pd.read_csv(_FLAGS.input_file)
+    df.columns = df.columns.str.upper()
+    missing_cols = set(_INPUT_COLUMNS) - set(df.columns)
+    if missing_cols:
+        raise ValueError(f"Missing required columns: {missing_cols}")
+    df = df[_INPUT_COLUMNS]
+    logging.info(f'Loading config: {_FLAGS.config_file}')
+    with open(_FLAGS.config_file, 'r', encoding='utf-8') as f:
         config = json.load(f)
-
     config_old = copy.deepcopy(config)
     config_old['_COMMON_']['isHateCrime'] = 'True'
     config_old['BIAS_CATEGORY']['TransgenderOrGenderNonConforming'] = {
@@ -1754,7 +1777,6 @@ def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
 
     all_aggr = []
     for file_name, aggregations in _AGGREGATIONS.items():
-        print(file_name)
         aggr_list = []
         for aggr_map in aggregations:
             aggr_df = df_dict[aggr_map['df']]
@@ -1776,4 +1798,4 @@ def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
 
 
 if __name__ == '__main__':
-    process_main()
+    app.run(process_main)

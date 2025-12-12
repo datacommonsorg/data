@@ -66,6 +66,10 @@ sys.path.append(os.path.join(_SCRIPT_DIR, 'place'))
 sys.path.append(os.path.join(_SCRIPT_DIR, 'schema'))
 
 import eval_functions
+from log_util import configure_cloud_logging, running_on_cloud
+from utils import (capitalize_first_char, is_place_dcid,
+                   get_observation_date_format, get_observation_period_for_date,
+                   pvs_has_any_prop, str_from_number, prepare_input_data)
 import file_util
 import config_flags
 import data_annotator
@@ -93,14 +97,6 @@ from download_util import download_file_from_url
 from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
-
-
-# Local utility functions
-def _capitalize_first_char(string: str) -> str:
-    """Returns a string with the first letter capitalized."""
-    if not string or not isinstance(string, str):
-        return string
-    return string[0].upper() + string[1:]
 
 
 class StatVarsMap:
@@ -180,8 +176,11 @@ class StatVarsMap:
             filename=self._config.get('statvar_dcid_remap_csv', ''),
             value_column='dcid',
         )
+        # Logging settings.
+        self._log_every_n = self._config.get('log_every_n', 10)
         logging.info(
-            f'Loaded remapped statvar dcid: {self._statvar_dcid_remap}')
+            f'Loaded {len(self._statvar_dcid_remap)} remapped statvar dcids: {str(self._statvar_dcid_remap)[:200]}'
+        )
 
     def add_default_pvs(self, default_pvs: dict, pvs: dict) -> dict:
         """Add default values for any missing PVs.
@@ -257,8 +256,10 @@ class StatVarsMap:
             if allow_equal_pvs and not has_diff:
                 return True
             else:
-                logging.level_debug() and logging.debug(
-                    f'Duplicate entry {key} in map for {pvs}, diff: {diff_str}')
+                logging.level_debug() and logging.log_every_n(
+                    logging.DEBUG,
+                    f'Duplicate entry {key} in map for {pvs}, diff: {diff_str}',
+                    self._log_every_n)
                 if duplicate_prop:
                     map_pvs = pv_map[key]
                     if duplicate_prop not in map_pvs:
@@ -281,11 +282,11 @@ class StatVarsMap:
     Otherwise the term is constructed from the value.
     """
         if not value:
-            return _capitalize_first_char(prop)
+            return capitalize_first_char(prop)
 
         if not isinstance(value, str):
             # For numeric values use the property and value.
-            return _capitalize_first_char(
+            return capitalize_first_char(
                 re.sub(r'[^A-Za-z0-9_/]', '_',
                        f'{prop}_{value}').replace('__', '_'))
         prefix = ''
@@ -297,7 +298,7 @@ class StatVarsMap:
                         prop, schemaless=True):
                 prop = prop.removeprefix('# ')
                 if prop != value:
-                    prefix = _capitalize_first_char(f'{prop}_')
+                    prefix = capitalize_first_char(f'{prop}_')
         if value[0] == '[':
             # Generate term for quantity range with start and optional end, unit.
             quantity_pat = (
@@ -326,7 +327,7 @@ class StatVarsMap:
                         value_term = f'{start}To{end}'
                     value_term += unit
                     return prefix + value_term
-        return prefix + _capitalize_first_char(value)
+        return prefix + capitalize_first_char(value)
 
     def _get_schemaless_statvar_props(self, pvs: dict) -> list:
         """Returns a list of schemaless properties from the dictionary of property:values.
@@ -363,8 +364,9 @@ class StatVarsMap:
         pvs = self._get_exisisting_statvar(pvs)
         dcid = pvs.get('dcid', pvs.get('Node', ''))
         if dcid:
-            logging.level_debug() and logging.log(
-                2, f'Reusing existing statvar {dcid} for {pvs}')
+            logging.level_debug() and logging.log_every_n(
+                logging.DEBUG, f'Reusing existing statvar {dcid} for {pvs}',
+                self._log_every_n)
             return dcid
 
         # Use the statvar_dcid_generator for statvars with defined properties.
@@ -382,8 +384,10 @@ class StatVarsMap:
                 dcid = get_statvar_dcid(pvs, ignore_props=dcid_ignore_props)
                 dcid = re.sub(r'[^A-Za-z_0-9/_\.-]+', '_', dcid)
             except TypeError as e:
-                logging.error(
-                    f'Failed to generate dcid for statvar:{pvs}, error: {e}')
+                logging.log_every_n(
+                    logging.ERROR,
+                    f'Failed to generate dcid for statvar:{pvs}, error: {e}',
+                    self._log_every_n)
                 dcid = ''
         if not dcid:
             # Create a new dcid from PVs.
@@ -418,13 +422,14 @@ class StatVarsMap:
         # Check if the dcid is remapped.
         remap_dcid = self._statvar_dcid_remap.get(strip_namespace(dcid), '')
         if remap_dcid:
-            logging.level_debug() and logging.log(
-                2, f'Remapped {dcid} to {remap_dcid} for {pvs}')
+            logging.level_debug() and logging.log_every_n(
+                2, f'Remapped {dcid} to {remap_dcid} for {pvs}',
+                self._log_every_n)
             self._counters.add_counter(f'remapped-statvar-dcid', 1, remap_dcid)
             dcid = remap_dcid
         pvs['Node'] = add_namespace(dcid)
-        logging.level_debug() and logging.log(
-            2, f'Generated dcid {dcid} for {pvs}')
+        logging.level_debug() and logging.log_every_n(
+            2, f'Generated dcid {dcid} for {pvs}', self._log_every_n)
         return dcid
 
     def remove_undefined_properties(
@@ -479,18 +484,18 @@ class StatVarsMap:
                 if dcid not in self._dc_api_ids_cache
             ]
             if api_lookup_dcids:
-                logging.level_debug() and logging.log(
+                logging.level_debug() and logging.log_every_n(
                     2,
-                    f'Looking up DC API for dcids: {api_lookup_dcids} from PV map.'
-                )
+                    f'Looking up DC API for dcids: {api_lookup_dcids} from PV map.',
+                    self._log_every_n)
                 schema_nodes = dc_api_is_defined_dcid(
                     api_lookup_dcids, self._config.get_configs())
                 # Update cache
                 self._dc_api_ids_cache.update(schema_nodes)
-                logging.level_debug() and logging.log(
+                logging.level_debug() and logging.log_every_n(
                     2,
                     f'Got {len(schema_nodes)} of {len(api_lookup_dcids)} dcids from DC'
-                    ' API.')
+                    ' API.', self._log_every_n)
 
         # Remove any PVs not in schema.
         counter_prefix = 'error-pvmap-dropped'
@@ -505,9 +510,11 @@ class StatVarsMap:
                     # Remove property looked up in schema but not defined.
                     if prop in lookup_dcids and not self._dc_api_ids_cache.get(
                             prop, False):
-                        logging.error(
+                        logging.log_every_n(
+                            logging.ERROR,
                             f'Removing undefined property "{prop}" from PV'
-                            f' Map:{namespace}:{key}:{prop}:{value}')
+                            f' Map:{namespace}:{key}:{prop}:{value}',
+                            self._log_every_n)
                         value = pvs.pop(prop)
                         if comment_removed_props:
                             pvs[f'# {prop}: '] = value
@@ -516,9 +523,11 @@ class StatVarsMap:
                     # Remove value looked up in schema but not defined.
                     if value in lookup_dcids and not self._dc_api_ids_cache.get(
                             value, False):
-                        logging.error(
+                        logging.log_every_n(
+                            logging.ERROR,
                             f'Removing undefined value "{value}" from PV'
-                            f' Map:{namespace}:{key}:{prop}:{value}')
+                            f' Map:{namespace}:{key}:{prop}:{value}',
+                            self._log_every_n)
                         if prop in pvs:
                             pvs.pop(prop)
                         if comment_removed_props:
@@ -541,8 +550,8 @@ class StatVarsMap:
     Returns:
       True if the pvs were converted to schemaless.
     """
-        logging.level_debug() and logging.log(
-            2, f'Converting to schemaless statvar {pvs}')
+        logging.level_debug() and logging.log_every_n(
+            2, f'Converting to schemaless statvar {pvs}', self._log_every_n)
         schemaless_props = self._get_schemaless_statvar_props(pvs)
 
         # Got some capitalized properties.
@@ -569,8 +578,8 @@ class StatVarsMap:
             if 'measuredProperty' in pvs:
                 pvs['# measuredProperty:'] = pvs.pop('measuredProperty')
             pvs['measuredProperty'] = add_namespace(dcid)
-        logging.level_debug() and logging.log(
-            2, f'Generated schemaless statvar {pvs}')
+        logging.level_debug() and logging.log_every_n(
+            2, f'Generated schemaless statvar {pvs}', self._log_every_n)
         return len(schemaless_props) > 0
 
     def add_statvar(self, statvar_dcid: str, statvar_pvs: dict) -> bool:
@@ -597,8 +606,10 @@ class StatVarsMap:
                 self._config.get('required_statvar_properties',
                                  [])).difference(set(pvs.keys()))
             if missing_props:
-                logging.error(
-                    f'Missing statvar properties {missing_props} in {pvs}')
+                logging.log_every_n(
+                    logging.ERROR,
+                    f'Missing statvar properties {missing_props} in {pvs}',
+                    self._log_every_n)
                 self._counters.add_counter(
                     f'error-statvar-missing-property',
                     1,
@@ -620,13 +631,16 @@ class StatVarsMap:
                     ],
                 ),
         ):
-            logging.error(
+            logging.log_every_n(
+                logging.ERROR,
                 f'Cannot add duplicate statvars for {statvar_dcid}: old:'
-                f' {self._statvars_map[statvar_dcid]}, new: {pvs}')
+                f' {self._statvars_map[statvar_dcid]}, new: {pvs}',
+                self._log_every_n)
             self._counters.add_counter(f'error-duplicate-statvars', 1,
                                        statvar_dcid)
             return False
-        logging.level_debug() and logging.debug(f'Adding statvar {pvs}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Adding statvar {pvs}', self._log_every_n)
         self._counters.add_counter('generated-statvars', 1, statvar_dcid)
         self._counters.set_counter('generated-unique-statvars',
                                    len(self._statvars_map))
@@ -675,8 +689,10 @@ class StatVarsMap:
             aggregate_property, 0))
         new_value = get_numeric_value(new_pvs.get(aggregate_property, 0))
         if current_value is None or new_value is None:
-            logging.error(
-                f'Invalid values to aggregate in {current_pvs}, {new_pvs}')
+            logging.log_every_n(
+                logging.ERROR,
+                f'Invalid values to aggregate in {current_pvs}, {new_pvs}',
+                self._log_every_n)
             self._counters.add_counter(f'error-aggregate-invalid-values', 1)
             return False
         aggregation_funcs = {
@@ -702,9 +718,10 @@ class StatVarsMap:
                                                                 new_value)
             current_pvs[aggregate_property] = updated_value
         else:
-            logging.error(
+            logging.log_every_n(
+                logging.ERROR,
                 f'Unsupported aggregation {aggregation_type} for {current_pvs},'
-                f' {new_pvs}')
+                f' {new_pvs}', self._log_every_n)
             self._counters.add_counter(
                 f'error-aggregate-unsupported-{aggregation_type}', 1)
             return False
@@ -719,7 +736,8 @@ class StatVarsMap:
         if not mmethod:
             current_pvs['measurementMethod'] = 'dcs:DataCommonsAggregate'
         elif not mmethod.startswith(
-                'dcAggregate/') and mmethod != 'DataCommonsAggregate':
+                'dcAggregate/'
+        ) and mmethod != 'DataCommonsAggregate' and aggregation_type != 'last' and aggregation_type != 'first':
             current_pvs['measurementMethod'] = f'dcs:dcAggregate/{mmethod}'
         dup_svobs_key = self._config.get('duplicate_svobs_key')
         if dup_svobs_key in current_pvs:
@@ -727,10 +745,10 @@ class StatVarsMap:
             # Remove #Error tag so it is not flagged as an error.
             current_pvs.pop(dup_svobs_key)
         self._counters.add_counter(f'aggregated-pvs-{aggregation_type}', 1)
-        logging.level_debug() and logging.log(
+        logging.level_debug() and logging.log_every_n(
             2, f'Aggregation: {aggregation_type}:{aggregate_property}: ' +
             f'value {current_value}, {new_value} into {updated_value} ' +
-            f'from {current_pvs} and {new_pvs}')
+            f'from {current_pvs} and {new_pvs}', self._log_every_n)
         return True
 
     def set_statvar_dup_svobs(self, svobs_key: str, svobs: dict):
@@ -748,7 +766,9 @@ class StatVarsMap:
             return
         existing_svobs = self._statvar_obs_map.get(svobs_key, None)
         if not existing_svobs:
-            logging.error(f'Missing duplicate svobs for key {svobs_key}')
+            logging.log_every_n(logging.ERROR,
+                                f'Missing duplicate svobs for key {svobs_key}',
+                                self._log_every_n)
             return
         dup_svobs_key = self._config.get('duplicate_svobs_key')
         if dup_svobs_key not in existing_svobs:
@@ -757,13 +777,18 @@ class StatVarsMap:
         existing_svobs[dup_svobs_key].append(svobs)
         statvar_dcid = strip_namespace(svobs.get('variableMeasured', None))
         if not statvar_dcid:
-            logging.error(f'Missing Statvar dcid for duplicate svobs {svobs}')
+            logging.log_every_n(
+                logging.ERROR,
+                f'Missing Statvar dcid for duplicate svobs {svobs}',
+                self._log_every_n)
             self._counters.add_counter(
                 'error-statvar-dcid-missing-for-dup-svobs', 1, statvar_dcid)
             return
         if statvar_dcid not in self._statvars_map:
-            logging.error(
-                f'Missing Statvar {statvar_dcid} for duplicate svobs {svobs}')
+            logging.log_every_n(
+                logging.ERROR,
+                f'Missing Statvar {statvar_dcid} for duplicate svobs {svobs}',
+                self._log_every_n)
             self._counters.add_counter('error-statvar-missing-for-dup-svobs', 1,
                                        statvar_dcid)
             return
@@ -777,9 +802,9 @@ class StatVarsMap:
             if not svobs_key:
                 svobs_key = self.get_svobs_key(svobs)
             statvar[dup_svobs_key].append(svobs_key)
-            logging.level_debug() and logging.log(
+            logging.level_debug() and logging.log_every_n(
                 2, f'Added duplicate SVObs to statvar {statvar_dcid}:'
-                f' {statvar[dup_svobs_key]}')
+                f' {statvar[dup_svobs_key]}', self._log_every_n)
 
     def add_statvar_obs(self, pvs: dict, has_output_column: bool = False):
         # Check if the required properties are present.
@@ -787,7 +812,10 @@ class StatVarsMap:
             self._config.get('required_statvarobs_properties',
                              [])).difference(set(pvs.keys()))
         if missing_props and not has_output_column:
-            logging.error(f'Missing SVObs properties {missing_props} in {pvs}')
+            logging.log_every_n(
+                logging.ERROR,
+                f'Missing SVObs properties {missing_props} in {pvs}',
+                self._log_every_n)
             self._counters.add_counter(f'error-svobs-missing-property', 1,
                                        f'{missing_props}')
             return False
@@ -809,7 +837,10 @@ class StatVarsMap:
         ):
             existing_svobs = self._statvar_obs_map.get(svobs_key, None)
             if not existing_svobs:
-                logging.error(f'Missing duplicate svobs for key {svobs_key}')
+                logging.log_every_n(
+                    logging.ERROR,
+                    f'Missing duplicate svobs for key {svobs_key}',
+                    self._log_every_n)
                 return False
             if svobs_aggregation and self.aggregate_value(
                     svobs_aggregation, existing_svobs, pvs, 'value'):
@@ -820,8 +851,10 @@ class StatVarsMap:
                 )
                 return True
 
-            logging.error('Duplicate SVObs with mismatched values:'
-                          f' {self._statvar_obs_map[svobs_key]} != {pvs}')
+            logging.log_every_n(
+                logging.ERROR, 'Duplicate SVObs with mismatched values:'
+                f' {self._statvar_obs_map[svobs_key]} != {pvs}',
+                self._log_every_n)
             self._counters.add_counter(f'error-mismatched-svobs', 1,
                                        pvs.get('variableMeasured', ''))
             self.set_statvar_dup_svobs(svobs_key, pvs)
@@ -847,10 +880,14 @@ class StatVarsMap:
         dup_statvars_key = self._config.get('duplicate_statvars_key')
         for prop in pvs.keys():
             if prop in [dup_svobs_key, dup_statvars_key]:
-                logging.error(f'Error duplicate property {prop} in {pvs}')
+                logging.log_every_n(
+                    logging.ERROR, f'Error duplicate property {prop} in {pvs}',
+                    self._log_every_n)
                 return False
             if prop.startswith('#Error'):
-                logging.error(f'Error property {prop} in {pvs}')
+                logging.log_every_n(logging.ERROR,
+                                    f'Error property {prop} in {pvs}',
+                                    self._log_every_n)
                 return False
         return True
 
@@ -858,14 +895,17 @@ class StatVarsMap:
         """Returns True if the statvar is valid."""
         # Check if there are any duplicate StatVars or SVObs or errors.
         if not self.is_valid_pvs(pvs):
-            logging.error(f'Invalid StatVar: {pvs}')
+            logging.log_every_n(logging.ERROR, f'Invalid StatVar: {pvs}',
+                                self._log_every_n)
             return False
         # Check if the statvar has all mandatory properties.
         missing_props = set(self._config.get('required_statvar_properties',
                                              [])).difference(set(pvs.keys()))
         if missing_props:
-            logging.error(
-                f'Missing properties {missing_props} for statvar {pvs}')
+            logging.log_every_n(
+                logging.ERROR,
+                f'Missing properties {missing_props} for statvar {pvs}',
+                self._log_every_n)
             return False
 
         statvar_dcid = pvs.get('Node', None)
@@ -873,7 +913,9 @@ class StatVarsMap:
         if not statvar_dcid:
             statvar_dcid = self.generate_statvar_dcid(pvs)
         if not statvar_dcid:
-            logging.error(f'Missing dcid for statvar {pvs}')
+            logging.log_every_n(logging.ERROR,
+                                f'Missing dcid for statvar {pvs}',
+                                self._log_every_n)
             return False
         pvs['Node'] = add_namespace(statvar_dcid)
 
@@ -882,7 +924,10 @@ class StatVarsMap:
             f'{p}:{v}' for p, v in pvs.items() if p.startswith('#Err')
         ]
         if error_props:
-            logging.error(f'Statvar {pvs} with error properties {error_props}')
+            logging.log_every_n(
+                logging.ERROR,
+                f'Statvar {pvs} with error properties {error_props}',
+                self._log_every_n)
             return False
 
         # TODO: Check if the statvar has any blocked properties
@@ -891,24 +936,30 @@ class StatVarsMap:
     def is_valid_svobs(self, pvs: dict) -> bool:
         """Returns True if the SVObs is valid and refers to an existing StatVar."""
         if not self.is_valid_pvs(pvs):
-            logging.error(f'Invalid SVObs: {pvs}')
+            logging.log_every_n(logging.ERROR, f'Invalid SVObs: {pvs}',
+                                self._log_every_n)
             return False
         # Check if the StatVar exists.
         statvar_dcid = strip_namespace(pvs.get('variableMeasured', ''))
-        if not statvar_dcid and not _pvs_has_any_prop(
+        if not statvar_dcid and not pvs_has_any_prop(
                 pvs, self._config.get('output_columns')):
-            logging.error(f'Missing statvar_dcid for SVObs {pvs}')
+            logging.log_every_n(logging.ERROR,
+                                f'Missing statvar_dcid for SVObs {pvs}',
+                                self._log_every_n)
             return False
         if statvar_dcid not in self._statvars_map:
-            logging.log(
-                2, f'Missing {statvar_dcid} in StatVarMap for SVObs {pvs}')
+            logging.log_every_n(
+                2, f'Missing {statvar_dcid} in StatVarMap for SVObs {pvs}',
+                self._log_every_n)
         # Check if the statvarobs has any error properties.
         error_props = [
             f'{p}:{v}' for p, v in pvs.items() if p.startswith('#Err')
         ]
         if error_props:
-            logging.error(
-                f'StatvarObs {pvs} with error properties {error_props}')
+            logging.log_every_n(
+                logging.ERROR,
+                f'StatvarObs {pvs} with error properties {error_props}',
+                self._log_every_n)
         return True
 
     def drop_statvars_without_svobs(self):
@@ -931,8 +982,10 @@ class StatVarsMap:
             self._statvars_map.keys()).difference(statvars_with_obs)
         for statvar_dcid in drop_statvars:
             pvs = self._statvars_map.pop(statvar_dcid)
-            logging.error(
-                f'Dropping statvar {statvar_dcid} without SVObs {pvs}')
+            logging.log_every_n(
+                logging.ERROR,
+                f'Dropping statvar {statvar_dcid} without SVObs {pvs}',
+                self._log_every_n)
             self._counters.add_counter('dropped-statvars-without-svobs', 1,
                                        statvar_dcid)
         return
@@ -1001,8 +1054,9 @@ class StatVarsMap:
             removed_statvars = num_statvars - len(stat_var_nodes)
             self._counters.add_counter('dropped-output-statvars-mcf',
                                        removed_statvars)
-            logging.info(f'Removed {removed_statvars} existing nodes from'
-                         f' {num_statvars} statvars')
+            logging.log_every_n(
+                logging.INFO, f'Removed {removed_statvars} existing nodes from'
+                f' {num_statvars} statvars', self._log_every_n)
 
         if not stat_var_nodes:
             # No new statvars to output.
@@ -1028,8 +1082,10 @@ class StatVarsMap:
         if not header:
             header = (f'# Auto generated using command: "{commandline}" on'
                       f' {datetime.datetime.now()}\n')
-        logging.info(
-            f'Generating {len(stat_var_nodes)} statvars into {filename}')
+        logging.log_every_n(
+            logging.INFO,
+            f'Generating {len(stat_var_nodes)} statvars into {filename}',
+            self._log_every_n)
 
         write_mcf_nodes(
             [stat_var_nodes],
@@ -1064,9 +1120,10 @@ class StatVarsMap:
                 self._config.get_configs(),
             )
             if new_schema_nodes:
-                logging.info(
+                logging.log_every_n(
+                    logging.INFO,
                     f'Generating new schema for {len(new_schema_nodes)} nodes into'
-                    f' {schema_mcf_file}')
+                    f' {schema_mcf_file}', self._log_every_n)
                 write_mcf_nodes([new_schema_nodes],
                                 filename=schema_mcf_file,
                                 mode='w')
@@ -1088,9 +1145,14 @@ class StatVarsMap:
                 file_util.file_get_name(filename, '_sanity_errors', '.txt'))
             num_errors = len(sanity_errors)
             if not error_output:
-                logging.info(f'Got {num_errors} errors: {sanity_errors}')
+                logging.log_every_n(
+                    logging.INFO, f'Got {num_errors} errors: {sanity_errors}',
+                    self._log_every_n)
             else:
-                logging.info(f'Writing {num_errors} errors into {error_output}')
+                logging.log_every_n(
+                    logging.INFO,
+                    f'Writing {num_errors} errors into {error_output}',
+                    self._log_every_n)
                 file_util.file_write_py_dict(sanity_errors, error_output)
 
     def get_constant_svobs_pvs(self) -> dict:
@@ -1149,7 +1211,7 @@ class StatVarsMap:
             formatted_value = value
             numeric_value = get_numeric_value(value)
             if numeric_value:
-                formatted_value = _str_from_number(
+                formatted_value = str_from_number(
                     numeric_value,
                     precision_digits=self._config.get('output_precision_digits',
                                                       5),
@@ -1178,9 +1240,10 @@ class StatVarsMap:
         if not columns:
             columns = self.get_statvar_obs_columns()
 
-        logging.info(
+        logging.log_every_n(
+            logging.INFO,
             f'Writing {len(self._statvar_obs_map)} SVObs  into {output_csv} with'
-            f' {columns}')
+            f' {columns}', self._log_every_n)
         svobs_unique_values = {}
         with file_util.FileIO(output_csv, mode, newline='') as f_out_csv:
             csv_writer = csv.DictWriter(
@@ -1234,9 +1297,10 @@ class StatVarsMap:
                     'skip_constant_csv_columns', True):
                 constant_pvs = self.get_constant_svobs_pvs()
 
-            logging.info(
-                f'Writing SVObs tmcf {filename} with {columns} into {filename}.'
-            )
+            logging.log_every_n(
+                logging.INFO,
+                f'Writing SVObs tmcf {filename} with {columns} into {filename}.',
+                self._log_every_n)
 
             tmcf = [f'Node: E:{dataset_name}->E0']
             default_svobs_pvs = dict(self._config.get('default_svobs_pvs', {}))
@@ -1270,8 +1334,10 @@ class StatVarsMap:
                 self._config.get('statvar_fingerprint_ignore_props', []),
                 self._config.get('statvar_fingerprint_include_props', []),
             )
-            logging.info(
-                f'Loaded {len(fp_nodes)} existing statvars from {mcf_file}')
+            logging.log_every_n(
+                logging.INFO,
+                f'Loaded {len(fp_nodes)} existing statvars from {mcf_file}',
+                self._log_every_n)
         return fp_nodes
 
     def _get_exisisting_statvar(self, pvs: dict) -> dict:
@@ -1285,16 +1351,17 @@ class StatVarsMap:
     """
         existing_node = self._statvar_resolver.resolve_node(pvs)
         if existing_node:
-            logging.level_debug() and logging.log(
-                2, f'Reusing existing statvar {existing_node} for {pvs}')
+            logging.level_debug() and logging.log_every_n(
+                2, f'Reusing existing statvar {existing_node} for {pvs}',
+                self._log_every_n)
             for prop, value in existing_node.items():
                 if prop not in pvs:
                     pvs[prop] = value
             self._counters.add_counter(f'existing-statvars-from-mcf', 1,
                                        pvs.get('dcid'))
         else:
-            logging.level_debug() and logging.log(
-                2, f'No existing statvar for :{pvs}')
+            logging.level_debug() and logging.log_every_n(
+                2, f'No existing statvar for :{pvs}', self._log_every_n)
         return pvs
 
 
@@ -1318,9 +1385,10 @@ class StatVarDataProcessor:
         )
         if not pv_mapper:
             pv_map_files = self._config.get('pv_map', [])
-            logging.level_debug() and logging.debug(
+            logging.level_debug() and logging.log_every_n(
+                logging.DEBUG,
                 f'Creating PropertyValueMapper with {pv_map_files}, config:'
-                f' {config_dict}')
+                f' {config_dict}', self._log_every_n)
             self._pv_mapper = PropertyValueMapper(
                 pv_map_files,
                 config_dict=config_dict,
@@ -1360,7 +1428,9 @@ class StatVarDataProcessor:
         input_data = self._config.get('input_data', '')
         input_files = file_util.file_get_matching(input_data)
         if not input_files:
-            logging.info(f'Skipping pvmap generation without input data')
+            logging.log_every_n(
+                logging.INFO, f'Skipping pvmap generation without input data',
+                self._log_every_n)
             return
         pv_map_files = file_util.file_get_matching(
             self._config.get('pv_map', ''))
@@ -1375,9 +1445,14 @@ class StatVarDataProcessor:
                                                       suffix='-pvmap',
                                                       file_ext='.csv')
         if not pv_map_file:
-            logging.info(f'Skipping pvmap generation without pvmap file')
+            logging.log_every_n(
+                logging.INFO, f'Skipping pvmap generation without pvmap file',
+                self._log_every_n)
             return
-        logging.info(f'Generating PV map from {input_data} into {pv_map_file}')
+        logging.log_every_n(
+            logging.INFO,
+            f'Generating PV map from {input_data} into {pv_map_file}',
+            self._log_every_n)
         pvmap = data_annotator.generate_pvmap(input_data, pv_map_file,
                                               self._config, self._counters)
         self._pv_mapper.load_pvs_dict(pvmap)
@@ -1402,6 +1477,7 @@ class StatVarDataProcessor:
     def setup_config(self, config_dict: dict = {}):
         """Setup the config."""
         self._config = ConfigMap(config_dict=config_dict)
+        self._log_every_n = self._config.get('log_every_n', 10)
         # Convert mapped columns from letters to int
         mapped_columns = self._config.get('mapped_columns', 0)
         if mapped_columns:
@@ -1426,8 +1502,10 @@ class StatVarDataProcessor:
                 mapped_columns_indices = list(
                     range(1, mapped_columns_indices[0] + 1))
             self._config.set_config('mapped_columns', mapped_columns_indices)
-            logging.debug(
-                f'Setting mapped columns to: {mapped_columns_indices}')
+            logging.log_every_n(
+                logging.DEBUG,
+                f'Setting mapped columns to: {mapped_columns_indices}',
+                self._log_every_n)
 
         # Convert config values from strings to lists.
         for prop, default_value in config_flags.get_default_config().items():
@@ -1437,18 +1515,23 @@ class StatVarDataProcessor:
                 if value and isinstance(value, str):
                     value_list = value.split(',')
                     self._config.set_config(prop, value_list)
-                    logging.log(2,
-                                f'Setting config to list: {prop}={value_list}')
+                    logging.log_every_n(
+                        2, f'Setting config to list: {prop}={value_list}',
+                        self._log_every_n)
 
         # Enable place resolution if place_csv is provided.
         if (self._config.get('dc_api_key', '') or
                 self._config.get('maps_api_key', '') or
                 self._config.get('places_csv', '') or
                 self._config.get('places_resolved_csv', '')):
-            logging.info(f'Enabling place name resolution: resolve_places=True')
+            logging.log_every_n(
+                logging.INFO,
+                f'Enabling place name resolution: resolve_places=True',
+                self._log_every_n)
             self._config.set_config('resolve_places', True)
-        logging.level_debug() and logging.debug(
-            f'Updated configs: {self._config.get_configs()}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Updated configs: {self._config.get_configs()}',
+            self._log_every_n)
 
     def init_file_state(self, filename: str):
         # State while processing data files.
@@ -1507,20 +1590,24 @@ class StatVarDataProcessor:
         word_delimiter = self._config.get('word_delimiter', ' ')
         word_joiner = word_delimiter.split('|')[0]
         normalize_filename = re.sub(r'[^A-Za-z0-9_\.-]', word_joiner, filename)
-        logging.level_debug() and logging.log(
-            2, f'Getting PVs for filename {normalize_filename}')
-        pvs_list = self._pv_mapper.get_all_pvs_for_value(normalize_filename)
+        logging.level_debug() and logging.log_every_n(
+            2, f'Getting PVs for filename {normalize_filename}',
+            self._log_every_n)
+        pvs_list = self._pv_mapper.get_all_pvs_for_value(
+            normalize_filename) or []
         default_pv_string = self._config.get('default_pvs_key', 'DEFAULT_PV')
-        default_pvs = self._pv_mapper.get_all_pvs_for_value(normalize_filename)
-        logging.level_debug() and logging.log(
-            2, f'Got default PVs for {default_pv_string}: {default_pvs}')
+        default_pvs = self._pv_mapper.get_all_pvs_for_value(default_pv_string)
+        logging.level_debug() and logging.log_every_n(
+            2, f'Got default PVs for {default_pv_string}: {default_pvs}',
+            self._log_every_n)
         if default_pvs:
             pvs_list.extend(default_pvs)
         return self.resolve_value_references(pvs_list)
 
     def set_file_header_pvs(self, pvs: dict):
-        logging.level_debug() and logging.debug(
-            f'Setting file header PVs to {pvs}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Setting file header PVs to {pvs}',
+            self._log_every_n)
         self._file_pvs = dict(pvs)
 
     def get_file_header_pvs(self):
@@ -1541,10 +1628,10 @@ class StatVarDataProcessor:
         if column_index not in header_pvs:
             header_pvs[column_index] = {}
         header_pvs[column_index].update(column_pvs)
-        logging.level_debug() and logging.debug(
-            'Setting header for'
-            f' column:{row_index}:{column_index}:{column_key}:{header_pvs[column_index]}'
-        )
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, 'Setting header for'
+            f' column:{row_index}:{column_index}:{column_key}:{header_pvs[column_index]}',
+            self._log_every_n)
 
     def get_column_header_pvs(self, column_index: int) -> dict:
         """Return the dict for column headers if any."""
@@ -1569,12 +1656,27 @@ class StatVarDataProcessor:
         """Return the dict for column headers if any."""
         return self._section_column_pvs.get(column_index, {})
 
-    def should_copy_header_pvs(self, pvs: dict) -> bool:
+    def should_copy_header_pvs(self, pvs: dict, original_col_index: int,
+                               current_col_index: int) -> bool:
         """Returns true if the PVs can be copied to next merged column."""
-        merged_cell = pvs.get('#MergedCell', None)
+        merged_cell = pvs.get('#MergedCell', self._config.get('merged_cells'))
         if merged_cell is not None:
+            # Check if merge cells enabled for limited adjacent columns.
+            merged_cell_count = get_numeric_value(merged_cell)
+            if merged_cell_count:
+                if (current_col_index -
+                        original_col_index) <= merged_cell_count:
+                    logging.level_debug() and logging.log_every_n(
+                        logging.DEBUG,
+                        f'Merging columns: {original_col_index} - {current_col_index}',
+                        self._log_every_n)
+
+                    return True
+                else:
+                    return False
+            # MergedCell is set as a boolean value.
             return config_flags.get_value_type(merged_cell, True)
-        return self._config.get('merged_cells')
+        return False
 
     def add_column_header_pvs(self, row_index: int, row_col_pvs: dict,
                               columns: list):
@@ -1591,9 +1693,11 @@ class StatVarDataProcessor:
             column_headers = self._section_column_pvs
         # Save the column header PVs.
         prev_col_pvs = {}
+        prev_col_index = 0
         for col_index in range(0, len(columns)):
             # Get all PVs for the column from the pv-map.
             col_pvs = dict(row_col_pvs.get(col_index, {}))
+            is_merged_cell = False
             # Remove any empty @Data PVs.
             data_key = self._config.get('data_key', 'Data')
             if data_key in col_pvs and not col_pvs[data_key]:
@@ -1602,13 +1706,19 @@ class StatVarDataProcessor:
             if not col_pvs and not column_value:
                 # Empty column without any PVs could be a multi-column-span
                 # header. Carry over previous column PVs if merged cells
-                if self.should_copy_header_pvs(prev_col_pvs):
+                if self.should_copy_header_pvs(prev_col_pvs, prev_col_index,
+                                               col_index):
                     col_pvs = prev_col_pvs
+                    is_merged_cell = True
             self.set_column_header_pvs(row_index, col_index, column_value,
                                        col_pvs, column_headers)
-            prev_col_pvs = col_pvs
-        logging.level_debug() and logging.debug(
-            f'Setting column headers: {column_headers}')
+            if not is_merged_cell:
+                # Retain the current column PVs in case the next cell is empty.
+                prev_col_pvs = col_pvs
+                prev_col_index = col_index
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Setting column headers: {column_headers}',
+            self._log_every_n)
 
     def get_reference_names(self, value: str) -> str:
         """Return any named references, such as '@var' or '{@var}' in the value."""
@@ -1649,10 +1759,10 @@ class StatVarDataProcessor:
                             elif ref_key in d:
                                 replacement = str(d[ref_key])
                         if replacement is not None:
-                            logging.level_debug() and logging.log(
+                            logging.level_debug() and logging.log_every_n(
                                 2,
                                 f'Replacing reference {ref} with {replacement} for'
-                                f' {prop}:{value}')
+                                f' {prop}:{value}', self._log_every_n)
                             value = (value.replace('{' + ref + '}',
                                                    replacement).replace(
                                                        '{@' + ref + '}',
@@ -1663,10 +1773,11 @@ class StatVarDataProcessor:
                             value_unresolved_refs[ref] = {prop: value}
                     if value_unresolved_refs:
                         unresolved_refs.update(value_unresolved_refs)
-                        logging.level_debug() and logging.log(
+                        logging.level_debug() and logging.log_every_n(
                             2,
                             f'Unresolved refs {value_unresolved_refs} remain in'
-                            f' {prop}:{value} at {self._file_context}')
+                            f' {prop}:{value} at {self._file_context}',
+                            self._log_every_n)
                         self._counters.add_counter(
                             'warning-unresolved-value-ref',
                             1,
@@ -1679,21 +1790,24 @@ class StatVarDataProcessor:
                         prop,
                         value,
                         pvs,
-                        self._config.get('multi_value_properties', {}),
+                        multi_value_keys=self._config.get(
+                            'multi_value_properties', {}),
                         overwrite=False,
+                        normalize=False,
                     )
-                    logging.level_debug() and logging.log(
-                        2, f'Adding {value} for {prop}:{pvs.get(prop)}')
-        logging.level_debug() and logging.log(
+                    logging.level_debug() and logging.log_every_n(
+                        2, f'Adding {value} for {prop}:{pvs.get(prop)}',
+                        self._log_every_n)
+        logging.level_debug() and logging.log_every_n(
             2, f'Resolved references in {pvs_list} into {pvs} with unresolved:'
-            f' {unresolved_refs}')
+            f' {unresolved_refs}', self._log_every_n)
         resolvable_refs = resolved_props.intersection(unresolved_refs.keys())
         if resolvable_refs:
             # Additional unresolved props can be resolved.
-            logging.level_debug() and logging.log(
+            logging.level_debug() and logging.log_every_n(
                 2,
                 f'Re-resolving references {resolvable_refs} in {pvs} for unresolved'
-                f' pvs: {unresolved_refs}')
+                f' pvs: {unresolved_refs}', self._log_every_n)
             resolve_pvs_list = []
             for ref in resolvable_refs:
                 resolve_pvs_list.append(unresolved_refs[ref])
@@ -1717,7 +1831,9 @@ class StatVarDataProcessor:
                 file for file in outputs if not os.path.exists(file)
             ]
             if not missing_outputs:
-                logging.info(f'Skipping processing as {outputs} exist')
+                logging.log_every_n(logging.INFO,
+                                    f'Skipping processing as {outputs} exist',
+                                    self._log_every_n)
                 return
         # Expand any wildcard in filenames
         encoding = self._config.get('input_encoding', 'utf-8')
@@ -1727,13 +1843,16 @@ class StatVarDataProcessor:
                                        file_util.file_estimate_num_rows(file))
         # Process all input data files, one at a time.
         for filename in files:
-            logging.info(
-                f'Processing input data file {filename} with encoding:{encoding}...'
-            )
+            logging.log_every_n(
+                logging.INFO,
+                f'Processing input data file {filename} with encoding:{encoding}...',
+                self._log_every_n)
             file_start_time = time.perf_counter()
             if filename.endswith('.json'):
                 # Convert json to csv file.
-                logging.info(f'Converting json file {filename} into csv')
+                logging.log_every_n(
+                    logging.INFO, f'Converting json file {filename} into csv',
+                    self._log_every_n)
                 filename = file_json_to_csv(filename)
             fileio = file_util.FileIO(filename, newline='', encoding=encoding)
             with fileio as csvfile:
@@ -1767,21 +1886,23 @@ class StatVarDataProcessor:
                     self._counters.add_counter('processed', 1, filename)
                     line_number += 1
                     if line_number <= skip_rows:
-                        logging.level_debug() and logging.log(
-                            2, f'Skipping row {filename}:{line_number}:{row}')
+                        logging.level_debug() and logging.log_every_n(
+                            2, f'Skipping row {filename}:{line_number}:{row}',
+                            self._log_every_n)
                         self._counters.add_counter('input-rows-skipped', 1,
                                                    self.get_current_filename())
                         continue
                     if max_rows_per_file >= 0 and line_number > max_rows_per_file:
-                        logging.level_debug() and logging.log(
+                        logging.level_debug() and logging.log_every_n(
                             2,
-                            f'Stopping at input {filename}:{line_number}:{row}')
+                            f'Stopping at input {filename}:{line_number}:{row}',
+                            self._log_every_n)
                         break
                     if not self.should_process_row(row, line_number):
-                        logging.level_debug() and logging.log(
+                        logging.level_debug() and logging.log_every_n(
                             2,
-                            f'Skipping unprocessed row {filename}:{line_number}:{row}'
-                        )
+                            f'Skipping unprocessed row {filename}:{line_number}:{row}',
+                            self._log_every_n)
                         self._counters.add_counter('input-rows-ignored', 1,
                                                    self.get_current_filename())
                         continue
@@ -1796,8 +1917,9 @@ class StatVarDataProcessor:
                                        filename)
             line_rate = line_number / (time_end - file_start_time)
             self._counters.print_counters()
-            logging.info(f'Processed {line_number} lines from {filename} @'
-                         f' {line_rate:.2f} lines/sec.')
+            logging.log_every_n(
+                logging.INFO, f'Processed {line_number} lines from {filename} @'
+                f' {line_rate:.2f} lines/sec.', self._log_every_n)
             self._counters.set_counter(f'processing-input-rows-rate', line_rate,
                                        filename)
 
@@ -1809,9 +1931,10 @@ class StatVarDataProcessor:
         rows_processed = self._counters.get_counter('input-rows-processed')
         time_taken = time_end - time_start
         input_rate = rows_processed / time_taken
-        logging.info(
+        logging.log_every_n(
+            logging.INFO,
             f'Processed {rows_processed} rows from {len(files)} files @'
-            f' {input_rate:.2f} rows/sec.')
+            f' {input_rate:.2f} rows/sec.', self._log_every_n)
         self._counters.set_counter(f'processing-input-rows-rate', input_rate)
 
     def should_lookup_pv_for_row_column(self, row_index: int,
@@ -1881,6 +2004,30 @@ class StatVarDataProcessor:
             return False
         return True
 
+    def get_pvs_for_cell(self, value: str, row_index: int,
+                         col_index: int) -> list:
+        """Returns a list of PVs for the cell.
+        If the value has pvs mapped, that is used.
+        Else, lookup PVs by row and colmn index."""
+
+        # Create a list of keys to be looked up in pvmap in order
+        # starting with the cell value followed by cell index.
+        # If any key resturns a pvmap, use that.
+        keys = [value]
+        keys.append(f'Cell:{row_index}:{col_index+1}')
+        keys.append(f'Column:{col_index+1}')
+        keys.append(f'Row:{row_index}')
+        for key in keys:
+            pv_list = self._pv_mapper.get_all_pvs_for_value(
+                key, self.get_last_column_header_key(col_index))
+            if pv_list:
+                logging.level_debug() and logging.log_every_n(
+                    logging.DEBUG,
+                    f'Got PVs for row:{row_index}:{col_index+1}:"{key}": {pv_list}',
+                    self._log_every_n)
+                return pv_list
+        return None
+
     def process_row_header_pvs(
         self,
         row: list,
@@ -1895,15 +2042,19 @@ class StatVarDataProcessor:
                 self.is_possible_header_index(row_index,
                                               len(row) + 1)):
             # Any column with PVs must be a header applicable to entire column.
-            logging.level_debug() and logging.debug(
-                f'Setting column header PVs for row:{row_index}:{row_col_pvs}')
+            logging.level_debug() and logging.log_every_n(
+                logging.DEBUG,
+                f'Setting column header PVs for row:{row_index}:{row_col_pvs}',
+                self._log_every_n)
             self.add_column_header_pvs(row_index, row_col_pvs, row)
             self._counters.add_counter(f'input-header-rows', 1,
                                        self.get_current_filename())
             return True
 
         # Look for any PVs with '#Header' property for any column
-        logging.log(2, f'Looking for headers in row:{row_index}:{row_col_pvs}')
+        logging.log_every_n(
+            2, f'Looking for headers in row:{row_index}:{row_col_pvs}',
+            self._log_every_n)
         col_headers = {}
         header_prop = self._config.get('header_property', '#Header')
         for col_index, col_pvs in row_col_pvs.items():
@@ -1917,18 +2068,18 @@ class StatVarDataProcessor:
                 for prop in col_header_props:
                     # Use any property=value in the header tag or
                     # get the value from the column PVs
-                    value = col_pvs.get(prop, '')
+                    value = col_pvs.get(prop, None)
                     if '=' in prop:
                         prop, value = prop.split('=', 1)
-                    if value:
+                    if value is not None:
                         col_header_pvs[prop] = value
                 if col_header_pvs:
                     col_headers[col_index] = col_header_pvs
         if col_headers:
-            logging.level_debug() and logging.log(
+            logging.level_debug() and logging.log_every_n(
                 2,
-                f'Setting column header tagged PVs for row:{row_index}:{col_headers}'
-            )
+                f'Setting column header tagged PVs for row:{row_index}:{col_headers}',
+                self._log_every_n)
             self.add_column_header_pvs(row_index, col_headers, row)
             self._counters.add_counter(f'input-header-rows', 1,
                                        self.get_current_filename())
@@ -1941,19 +2092,22 @@ class StatVarDataProcessor:
     The row cold be a file header or a section header with SVObs or the row
     could have SVObs in some columns.
     """
-        logging.level_debug() and logging.debug(
-            f'Processing row:{row_index}: {row}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Processing row:{row_index}: {row}',
+            self._log_every_n)
         row = self.preprocess_row(row, row_index)
         if not row:
-            logging.level_debug() and logging.debug(
-                f'Preprocess dropping row {row_index}')
+            logging.level_debug() and logging.log_every_n(
+                logging.DEBUG, f'Preprocess dropping row {row_index}',
+                self._log_every_n)
             self._counters.add_counter('input-rows-ignored-preprocess', 1,
                                        self.get_current_filename())
             return
         if not row or len(row) < self._config.get('input_min_columns_per_row',
                                                   2):
-            logging.level_debug() and logging.debug(
-                f'Ignoring row with too few columns: {row}')
+            logging.level_debug() and logging.log_every_n(
+                logging.DEBUG, f'Ignoring row with too few columns: {row}',
+                self._log_every_n)
             self._counters.add_counter('input-rows-ignored-too-few-columns', 1,
                                        self.get_current_filename())
             return
@@ -1965,12 +2119,12 @@ class StatVarDataProcessor:
             col_pvs = {}
             if self.should_lookup_pv_for_row_column(row_index, col_index + 1):
                 self._set_input_context(column_number=col_index)
-                logging.level_debug() and logging.log(
+                logging.level_debug() and logging.log_every_n(
                     2,
-                    f'Getting PVs for column:{row_index}:{col_index}:{col_value}'
-                )
-                pvs_list = self._pv_mapper.get_all_pvs_for_value(
-                    col_value, self.get_last_column_header_key(col_index))
+                    f'Getting PVs for column:{row_index}:{col_index}:{col_value}',
+                    self._log_every_n)
+                pvs_list = self.get_pvs_for_cell(col_value, row_index,
+                                                 col_index)
                 # if pvs_list:
                 #    pvs_list.append(
                 #        {self._config.get('data_key', '@Data'): col_value})
@@ -1984,8 +2138,10 @@ class StatVarDataProcessor:
                 # It could be a header or be applied to other values in the row.
                 row_col_pvs[col_index] = col_pvs
                 cols_with_pvs += 1
-                logging.level_debug() and logging.debug(
-                    f'Got pvs for column:{row_index}:{col_index}:{col_pvs}')
+                logging.level_debug() and logging.log_every_n(
+                    logging.DEBUG,
+                    f'Got pvs for column:{row_index}:{col_index}:{col_pvs}',
+                    self._log_every_n)
             else:
                 # Column has no PVs. Check if it has a value.
                 col_numeric_val = get_numeric_value(
@@ -2001,22 +2157,24 @@ class StatVarDataProcessor:
                             self._config.get('numeric_data_key', 'Number'):
                                 col_numeric_val
                         }
-                    logging.level_debug() and logging.log(
+                    logging.level_debug() and logging.log_every_n(
                         2, f'Got PVs for column:{row_index}:{col_index}:'
-                        f' value:{row[col_index]}, PVS: {row_col_pvs[col_index]}'
-                    )
+                        f' value:{row[col_index]}, PVS: {row_col_pvs[col_index]}',
+                        self._log_every_n)
                 else:
-                    logging.level_debug() and logging.log(
+                    logging.level_debug() and logging.log_every_n(
                         2, f'Got no PVs for column:{row_index}:{col_index}:'
-                        f' value:{row[col_index]}')
+                        f' value:{row[col_index]}', self._log_every_n)
 
-        logging.level_debug() and logging.debug(
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG,
             f'Processing row:{row_index}:{row}: into PVs: {row_col_pvs} in'
-            f' {self._file_context}')
+            f' {self._file_context}', self._log_every_n)
         if not row_col_pvs:
             # No interesting data or PVs in the row. Ignore it.
-            logging.level_debug() and logging.log(
-                2, f'Ignoring row without PVs: {row} in {self._file_context}')
+            logging.level_debug() and logging.log_every_n(
+                2, f'Ignoring row without PVs: {row} in {self._file_context}',
+                self._log_every_n)
             self._counters.add_counter('input-rows-ignored', 1,
                                        self.get_current_filename())
             return
@@ -2047,10 +2205,10 @@ class StatVarDataProcessor:
             # Collect resolved PVs for the cell from row and column headers.
             cell_pvs = self.resolve_value_references(
                 [merged_row_pvs, merged_col_pvs])
-            logging.level_debug() and logging.log(
+            logging.level_debug() and logging.log_every_n(
                 2,
                 f'Merged PVs for column:{row_index}:{col_index}: {col_pvs_list} and'
-                f' {row_pvs} into {cell_pvs}')
+                f' {row_pvs} into {cell_pvs}', self._log_every_n)
             self._set_input_context(column_number=col_index)
             cell_pvs[self._config.get(
                 'input_reference_column')] = self._file_context
@@ -2068,27 +2226,31 @@ class StatVarDataProcessor:
                             prop,
                             value,
                             row_pvs,
-                            self._config.get('multi_value_properties', {}),
-                        )
+                            multi_value_keys=self._config.get(
+                                'multi_value_properties', {}),
+                            normalize=False)
                 for prop, value in row_col_pvs.get(col_index, {}).items():
                     if value is not None and prop not in self._internal_reference_keys:
                         pv_utils.add_key_value(
                             prop,
                             value,
                             row_pvs,
-                            self._config.get('multi_value_properties', {}),
-                        )
+                            multi_value_keys=self._config.get(
+                                'multi_value_properties', {}),
+                            normalize=False)
         if config_flags.get_value_type(row_pvs.get('#IgnoreRow'), False):
-            logging.level_debug() and logging.log(
-                2, f'Ignoring row: {row} in {self._file_context}')
+            logging.level_debug() and logging.log_every_n(
+                2, f'Ignoring row: {row} in {self._file_context}',
+                self._log_every_n)
             self._counters.add_counter('input-rows-ignored', 1,
                                        self.get_current_filename())
             return
         # Process per-column PVs after merging with row-wide PVs.
         # If a cell has a statvar obs, save the svobs and the statvar.
-        logging.level_debug() and logging.debug(
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG,
             f'Looking for SVObs in row:{row_index}: with row PVs: {row_pvs}, column'
-            f' PVs: {column_pvs}')
+            f' PVs: {column_pvs}', self._log_every_n)
         row_svobs = 0
         resolved_col_pvs = dict()
         for col_index, col_pvs in column_pvs.items():
@@ -2106,8 +2268,9 @@ class StatVarDataProcessor:
                                     cols_with_pvs)
         # If row has no SVObs but has PVs, it must be a header.
         if row_svobs:
-            logging.level_debug() and logging.debug(
-                f'Found {row_svobs} SVObs in row:{row_index}')
+            logging.level_debug() and logging.log_every_n(
+                logging.DEBUG, f'Found {row_svobs} SVObs in row:{row_index}',
+                self._log_every_n)
             self._counters.add_counter(f'input-data-rows', 1,
                                        self.get_current_filename())
         self._counters.add_counter('input-rows-processed', 1,
@@ -2131,8 +2294,10 @@ class StatVarDataProcessor:
                 if multiply_factor is not None:
                     pvs['value'] = numeric_value * multiply_factor
                 else:
-                    logging.error(
-                        f'Invalid multiply factor: {pvs[multiply_prop]}')
+                    logging.log_every_n(
+                        logging.ERROR,
+                        f'Invalid multiply factor: {pvs[multiply_prop]}',
+                        self._log_every_n)
                     self._counters.add_counter('error-invalid-multiply-factor',
                                                1)
                 pvs.pop(multiply_prop)
@@ -2175,10 +2340,10 @@ class StatVarDataProcessor:
                     self._config.get('eval_globals',
                                      eval_functions.EVAL_GLOBALS),
                 )
-                logging.level_debug() and logging.log(
+                logging.level_debug() and logging.log_every_n(
                     2,
-                    f'Evaluated filter {filter_prop}={filter_result} for {prop}:{value} with {pvs}'
-                )
+                    f'Evaluated filter {filter_prop}={filter_result} for {prop}:{value} with {pvs}',
+                    self._log_every_n)
                 if filter_result is not None:
                     # Filter eval returned a valid result. Check if it passed the filter.
                     if filter_prop:
@@ -2193,9 +2358,10 @@ class StatVarDataProcessor:
     def process_stat_var_obs_pvs(self, pvs: dict, row_index: int,
                                  col_index: int) -> bool:
         """Process a set of SVObs PVs flattening list values."""
-        logging.level_debug() and logging.debug(
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG,
             f'Processing SVObs PVs for:{row_index}:{col_index}: {pvs} for'
-            f' {self._file_context}')
+            f' {self._file_context}', self._log_every_n)
 
         # Add SVObs PVS for observationAbout
         self._statvars_map.add_default_pvs(
@@ -2215,12 +2381,13 @@ class StatVarDataProcessor:
                     'descriptionUrl', 'alternateName'
                 ],
             ))
+        multi_value_props = self._config.get('multi_value_properties', {})
         for prop, value in pvs.items():
             if prop in statvar_singular_props:
                 singular_pvs[prop] = value
                 continue
             value = pv_utils.get_value_as_list(value)
-            if isinstance(value, list):
+            if isinstance(value, list) and prop in multi_value_props:
                 pvs[prop] = value
                 list_keys.append(prop)
             else:
@@ -2230,9 +2397,10 @@ class StatVarDataProcessor:
             return self.process_stat_var_obs(pvs)
 
         # Flatten all list PVs.
-        logging.level_debug() and logging.debug(
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG,
             f'Flattening list values for keys: {list_keys} in PVs:{pvs} for'
-            f' {self._file_context}')
+            f' {self._file_context}', self._log_every_n)
         status = True
         list_values = [pvs[key] for key in list_keys]
         for items in itertools.product(*list_values):
@@ -2247,12 +2415,15 @@ class StatVarDataProcessor:
         self.resolve_svobs_place(pvs)
         svobs_pvs_list = self.preprocess_stat_var_obs_pvs(pvs)
         if not svobs_pvs_list:
-            logging.level_debug() and logging.debug(
-                f'Preprocess dropping SVObs PVs for {self._file_context}')
+            logging.level_debug() and logging.log_every_n(
+                logging.DEBUG,
+                f'Preprocess dropping SVObs PVs for {self._file_context}',
+                self._log_every_n)
             return False
-        logging.level_debug() and logging.debug(
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG,
             f'Got {len(svobs_pvs_list)} SVObs pvs after preprocess:'
-            f' {svobs_pvs_list} for {self._file_context}')
+            f' {svobs_pvs_list} for {self._file_context}', self._log_every_n)
         status = True
         for svobs_pvs in svobs_pvs_list:
             status &= self.process_single_stat_var_obs(svobs_pvs)
@@ -2264,33 +2435,42 @@ class StatVarDataProcessor:
             has_output_column = self.pvs_has_output_columns(pvs)
             if not has_output_column:
                 # No values in this data cell. May be a header.
-                logging.level_debug() and logging.debug(
-                    f'No SVObs value in dict {pvs} in {self._file_context}')
+                logging.level_debug() and logging.log_every_n(
+                    logging.DEBUG,
+                    f'No SVObs value in dict {pvs} in {self._file_context}',
+                    self._log_every_n)
                 return False
 
         if self.should_ignore_stat_var_obs_pvs(pvs):
             # Ignore these PVs,
-            logging.level_debug() and logging.debug(
-                f'Ignoring SVObs PVs {pvs} in {self._file_context}')
+            logging.level_debug() and logging.log_every_n(
+                logging.DEBUG,
+                f'Ignoring SVObs PVs {pvs} in {self._file_context}',
+                self._log_every_n)
             self._counters.add_counter(f'ignored-svobs-pvs', 1)
             # Return True so the cell with value is not treated as a header
             return True
 
         if not self.resolve_svobs_date(pvs) and not has_output_column:
-            logging.error(f'Unable to resolve SVObs date in {pvs}')
+            logging.log_every_n(logging.ERROR,
+                                f'Unable to resolve SVObs date in {pvs}',
+                                self._log_every_n)
             self._counters.add_counter(f'dropped-svobs-unresolved-date', 1)
             return False
 
         if not self.should_allow_stat_var_obs_pvs(pvs):
             # PVs did not pass filters. Drop this.
-            logging.level_debug() and logging.debug(
-                f'Filtering out SVObs PVs {pvs} in {self._file_context}')
+            logging.level_debug() and logging.log_every_n(
+                logging.DEBUG,
+                f'Filtering out SVObs PVs {pvs} in {self._file_context}',
+                self._log_every_n)
             self._counters.add_counter(f'filter-dropped-svobs-pvs', 1)
             # Return True so the cell with value is not treated as a header
             return True
 
-        logging.level_debug() and logging.debug(
-            f'Creating SVObs for {pvs} in {self._file_context}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Creating SVObs for {pvs} in {self._file_context}',
+            self._log_every_n)
         # Separate out PVs for StatVar and StatvarObs
         statvar_pvs = {}
         svobs_pvs = {}
@@ -2308,7 +2488,10 @@ class StatVarDataProcessor:
                 else:
                     statvar_pvs[prop] = value
         if not svobs_pvs:
-            logging.error(f'No SVObs PVs in {pvs} in file:{self._file_context}')
+            logging.log_every_n(
+                logging.ERROR,
+                f'No SVObs PVs in {pvs} in file:{self._file_context}',
+                self._log_every_n)
             return False
         # Remove internal PVs
         for p in [
@@ -2329,9 +2512,10 @@ class StatVarDataProcessor:
             if not statvar_dcid:
                 if not variable_measured:
                     # No statvar or variable measured in obs, drop it.
-                    logging.error(
+                    logging.log_every_n(
+                        logging.ERROR,
                         f'Dropping SVObs {svobs_pvs} for invalid statvar {statvar_pvs} in'
-                        f' {self._file_context}')
+                        f' {self._file_context}', self._log_every_n)
                     self._counters.add_counter(
                         f'dropped-svobs-with-invalid-statvar', 1, statvar_dcid)
                     return False
@@ -2344,14 +2528,17 @@ class StatVarDataProcessor:
         self._statvars_map.add_default_pvs(
             self._config.get('default_svobs_pvs', {}), svobs_pvs)
         if not self.resolve_svobs_place(svobs_pvs) and not has_output_column:
-            logging.error(f'Unable to resolve SVObs place in {pvs}')
+            logging.log_every_n(logging.ERROR,
+                                f'Unable to resolve SVObs place in {pvs}',
+                                self._log_every_n)
             self._counters.add_counter(f'dropped-svobs-unresolved-place', 1,
                                        statvar_dcid)
             return False
         if not self._statvars_map.add_statvar_obs(svobs_pvs, has_output_column):
-            logging.error(
+            logging.log_every_n(
+                logging.ERROR,
                 f'Dropping invalid SVObs {svobs_pvs} for statvar {statvar_pvs} in'
-                f' {self._file_context}')
+                f' {self._file_context}', self._log_every_n)
             self._counters.add_counter(f'dropped-svobs-invalid', 1,
                                        statvar_dcid)
             return False
@@ -2359,8 +2546,9 @@ class StatVarDataProcessor:
         self._counters.add_counter(
             'generated-svobs-' + self.get_current_filename(), 1)
         self._section_svobs += 1
-        logging.level_debug() and logging.debug(
-            f'Added SVObs {svobs_pvs} in {self._file_context}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Added SVObs {svobs_pvs} in {self._file_context}',
+            self._log_every_n)
         return True
 
     def generate_dependant_stat_vars(self, statvar_pvs: dict, svobs_pvs: dict):
@@ -2388,9 +2576,10 @@ class StatVarDataProcessor:
                         continue
                     # Property has a reference to other properties.
                     # Get a set of selected properties to generate DCID.
-                    logging.level_debug() and logging.debug(
-                        f'Processing dependant statvar {statvar_prop} for {pvs}'
-                    )
+                    logging.level_debug() and logging.log_every_n(
+                        logging.DEBUG,
+                        f'Processing dependant statvar {statvar_prop} for {pvs}',
+                        self._log_every_n)
                     selected_props = set()
                     additional_props = set()
                     exclude_props = set(statvar_ref_props)
@@ -2435,10 +2624,10 @@ class StatVarDataProcessor:
                     else:
                         self._counters.add_counter(
                             f'error_generating_statvar_dcid_{statvar_prop}', 1)
-                    logging.level_debug() and logging.debug(
-                        f'Generated statvar {statvar_dcid} for '
+                    logging.level_debug() and logging.log_every_n(
+                        logging.DEBUG, f'Generated statvar {statvar_dcid} for '
                         f'{statvar_prop}:{prop_value} with '
-                        f'{new_statvar_pvs} from {pvs}')
+                        f'{new_statvar_pvs} from {pvs}', self._log_every_n)
                     if statvar_prop == 'variableMeasured':
                         # Reset statvar pvs in the caller to the new PVs computed.
                         statvar_pvs.update(new_statvar_pvs)
@@ -2471,23 +2660,25 @@ class StatVarDataProcessor:
         """Resolve any references in the StatVarObs PVs, such as places."""
         place = pvs.get('observationAbout', None)
         if not place:
-            logging.warning(f'No place in SVObs {pvs}')
+            logging.log_every_n(logging.WARNING, f'No place in SVObs {pvs}',
+                                self._log_every_n)
             self._counters.add_counter(f'warning-svobs-missing-place', 1,
                                        pvs.get('variableMeasured', ''))
             return False
-        if _is_place_dcid(place):
+        if is_place_dcid(place):
             # Place is a resolved dcid or a place property.
             return True
 
-        logging.level_debug() and logging.debug(
-            f'Resolving place: {place} in {pvs}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Resolving place: {place} in {pvs}',
+            self._log_every_n)
         # Lookup dcid for the place.
         place_dcid = place
         place_pvs = self.resolve_value_references(
             self._pv_mapper.get_all_pvs_for_value(place, 'observationAbout'))
         if place_pvs:
             place_dcid = place_pvs.get('observationAbout', '')
-        if not _is_place_dcid(place_dcid):
+        if not is_place_dcid(place_dcid):
             # Place is not resolved yet. Try resolving through Maps API.
             if self._config.get('resolve_places', False):
                 resolved_place = self._place_resolver.resolve_name({
@@ -2507,19 +2698,22 @@ class StatVarDataProcessor:
                 })
                 resolved_dcid = resolved_place.get(place_dcid,
                                                    {}).get('dcid', None)
-                logging.level_debug() and logging.log(
+                logging.level_debug() and logging.log_every_n(
                     2, f'Got place dcid: {resolved_dcid} for place {place} from'
-                    f' {resolved_place}')
+                    f' {resolved_place}', self._log_every_n)
                 if resolved_dcid:
                     place_dcid = add_namespace(resolved_dcid)
-        if _is_place_dcid(place_dcid):
+        if is_place_dcid(place_dcid):
             pvs['observationAbout'] = place_dcid
-            logging.level_debug() and logging.debug(
-                f'Resolved place {place} to {place_dcid}')
+            logging.level_debug() and logging.log_every_n(
+                logging.DEBUG, f'Resolved place {place} to {place_dcid}',
+                self._log_every_n)
             self._counters.add_counter(f'resolved-places', 1)
             return True
 
-        logging.warning(f'Unable to resolve place {place} in {pvs}')
+        logging.log_every_n(logging.WARNING,
+                            f'Unable to resolve place {place} in {pvs}',
+                            self._log_every_n)
         self._counters.add_counter(f'error-unresolved-place', 1, place_dcid)
         return False
 
@@ -2534,8 +2728,7 @@ class StatVarDataProcessor:
         output_date_format = self._config.get('observation_date_format', '')
         obs_period = pvs.get('observationPeriod')
         if not output_date_format:
-            output_date_format = _get_observation_date_format(
-                date_normalized, obs_period)
+            output_date_format = get_observation_date_format(date_normalized)
         # Check if date is already formatted as expected
         try:
             resolved_date = datetime.datetime.strptime(
@@ -2543,7 +2736,9 @@ class StatVarDataProcessor:
                 output_date_format).strftime(output_date_format)
         except ValueError as e:
             # Date is not in expected format. Try formatting it.
-            logging.log(2, f'Formatting date {date} into {output_date_format}')
+            logging.log_every_n(
+                2, f'Formatting date {date} into {output_date_format}',
+                self._log_every_n)
             resolved_date = ''
         if not resolved_date:
             # If input has a date format, parse date string by input format
@@ -2556,14 +2751,15 @@ class StatVarDataProcessor:
                     resolved_date = datetime.datetime.strptime(
                         date_normalized,
                         input_date_format).strftime(output_date_format)
-                    logging.log(
+                    logging.log_every_n(
                         2,
-                        f'Formatted date {date} as {input_date_format} into {resolved_date}'
-                    )
+                        f'Formatted date {date} as {input_date_format} into {resolved_date}',
+                        self._log_every_n)
                 except ValueError as e:
-                    logging.error(
-                        f'Unable to parse date {date_normalized} as {input_date_format}'
-                    )
+                    logging.log_every_n(
+                        logging.ERROR,
+                        f'Unable to parse date {date_normalized} as {input_date_format}',
+                        self._log_every_n)
                     resolved_date = ''
         if not resolved_date:
             # Try formatting date into output format
@@ -2577,13 +2773,14 @@ class StatVarDataProcessor:
 
         # Set the observation period based on date, if empty
         if obs_period == '':
-            period = _get_observation_period_for_date(resolved_date,
-                                                      pvs['observationPeriod'])
+            period = get_observation_period_for_date(resolved_date,
+                                                     pvs['observationPeriod'])
             if period:
                 pvs['observationPeriod'] = period
-                logging.level_debug() and logging.debug(
-                    f'Setting observationPeriod for {resolved_date} to {period}'
-                )
+                logging.level_debug() and logging.log_every_n(
+                    logging.DEBUG,
+                    f'Setting observationPeriod for {resolved_date} to {period}',
+                    self._log_every_n)
 
         return True
 
@@ -2632,219 +2829,6 @@ class StatVarDataProcessor:
         if self._config.get('generate_tmcf', True):
             outputs.append(output_path + '.tmcf')
         return outputs
-
-
-def _is_place_dcid(place: str) -> bool:
-    """Returns True if the input string is a dcid without extra characters."""
-    if place and isinstance(place, str):
-        # Check if all characters are alpha or digits.
-        if place.startswith('dcid:') or place.startswith('dcs:'):
-            return True
-        for c in place:
-            if not c.isalnum():
-                if c != '/' and c != ':' and c != '_':
-                    return False
-        return '/' in place
-    return False
-
-
-def _str_from_number(number: Union[int, float],
-                     precision_digits: int = None) -> str:
-    """Returns the number converted to string.
-
-  Ints and floats with 0 decimal parts get int strings. Floats get precision
-  digits.
-  """
-    # Check if number is an integer or float without any decimals.
-    if int(number) == number:
-        number_int = int(number)
-        return f'{number_int}'
-    # Return float rounded to precision digits.
-    if precision_digits:
-        number = round(number, precision_digits)
-    return f'{number}'
-
-
-def _pvs_has_any_prop(pvs: dict, columns: list = None) -> bool:
-    if pvs and columns:
-        for prop, value in pvs.items():
-            if value and prop in columns:
-                return True
-    return False
-
-
-def _get_observation_period_for_date(date_str: str,
-                                     default_period: str = '') -> str:
-    '''Returns the observation period for date string.'''
-    date_parts = date_str.count('-')
-    if date_parts == 0:
-        return 'P1Y'
-    if date_parts == 1:
-        return 'P1M'
-    if date_parts == 2:
-        return 'P1D'
-    return default_period
-
-
-def _get_observation_date_format(date_str: str, obs_period: str = '') -> str:
-    '''Returns the date format for the given date and observation periodn.'''
-    # Get the date format based on number of tokens in date string.
-    date_format = '%Y'
-    date_tokens = date_str.split('-')
-    num_tokens = len(date_tokens)
-    if num_tokens > 1:
-        date_format += '-%m'
-    if num_tokens > 2:
-        date_format += '-%d'
-
-    return date_format
-
-
-def _get_filename_for_url(url: str, path: str) -> str:
-    """Returns the filename to be used for the URL to be downloaded.
-
-    If there is an existing file of the name, adds a unique suffix.
-    """
-    # Remove URL arguments separated by '?' or '#'
-    url_path = url.split('?', maxsplit=1)[0].split('#', maxsplit=1)[0]
-    # Get the last component URL as the filename
-    filename = url_path[url_path.rfind('/') + 1:]
-    filename, ext = os.path.splitext(filename)
-    existing_files = file_util.file_get_matching(os.path.join(path, '*'))
-    count = 0
-    file = os.path.join(path, filename + ext)
-    while file in existing_files:
-        count += 1
-        file = os.path.join(path, f'{filename}-{count}{ext}')
-    return file
-
-
-def download_csv_from_url(urls: list, download_files: list) -> list:
-    """Download data from the URL into the given file.
-
-  Returns a list of files downloaded.
-  """
-    data_files = []
-    if not isinstance(urls, list):
-        urls = [urls]
-    if download_files and not isinstance(download_files, list):
-        download_files = [download_files]
-    if download_files:
-        data_path = os.path.dirname(download_files[0])
-    else:
-        data_path = './'
-    for index in range(len(urls)):
-        url = urls[index]
-        if download_files and index < len(download_files):
-            filename = download_files[index]
-        else:
-            filename = _get_filename_for_url(url, data_path)
-        logging.info(f'Downloading {url} into {filename}')
-        output_file = download_file_from_url(url=url,
-                                             output_file=filename,
-                                             overwrite=False)
-        if output_file:
-            data_files.append(output_file)
-    logging.info(f'Downloaded {urls} into {data_files}.')
-    return data_files
-
-
-def shard_csv_data(
-    files: list,
-    column: str = None,
-    prefix_len: int = sys.maxsize,
-    keep_existing_files: bool = True,
-) -> list:
-    """Shard CSV file by unique values in column.
-
-  Returns the list of output files.
-  """
-    logging.info(
-        f'Loading data files: {files} for sharding by column: {column}...')
-    dfs = []
-    for file in files:
-        dfs.append(
-            pd.read_csv(file_util.FileIO(file), dtype=str, na_filter=False))
-    df = pd.concat(dfs)
-    if not column:
-        # Pick the first column.
-        column = list(df.columns)[0]
-    # Convert nan to empty string so sharding doesn't drop any rows.
-    # df[column] = df[column].fillna('')
-    # Get unique shard prefix values from column.
-    shards = list(
-        sorted(set([str(x)[:prefix_len] for x in df[column].unique()])))
-    if file_util.file_is_local(file):
-        (file_prefix, file_ext) = os.path.splitext(file)
-    else:
-        fd, file_prefix = tempfile.mkstemp()
-        file_ext = '.csv'
-    column_suffix = re.sub(r'[^A-Za-z0-9_-]', '-', column)
-    output_path = f'{file_prefix}-{column_suffix}'
-    logging.info(f'Sharding {files} into {len(shards)} shards by column'
-                 f' {column}:{shards} into {output_path}-*.csv.')
-    output_files = []
-    num_shards = len(shards)
-    for shard_index in range(num_shards):
-        shard_value = shards[shard_index]
-        output_file = f'{output_path}-{shard_index:05d}-of-{num_shards:05d}.csv'
-        logging.info(
-            f'Sharding by {column}:{shard_value} into {output_file}...')
-        if not os.path.exists(output_file) or not keep_existing_files:
-            if shard_value:
-                df[df[column].str.startswith(shard_value)].to_csv(output_file,
-                                                                  index=False)
-            else:
-                df[df[column] == ''].to_csv(output_file, index=False)
-        output_files.append(output_file)
-    return output_files
-
-
-def convert_xls_to_csv(filenames: list, sheets: list) -> list:
-    """Returns a list of csv files extracted from the sheets within the xls."""
-    csv_files = []
-    for file in filenames:
-        filename, ext = os.path.splitext(file)
-        logging.info(f'Converting {filename}{ext} into csv for {sheets}')
-        if '.xls' in ext:
-            # Convert the xls file into csv file per sheet.
-            xls = pd.ExcelFile(file)
-            for sheet in xls.sheet_names:
-                # Read each sheet as a Pandas DataFrame and save it as csv
-                if not sheets or sheet in sheets:
-                    df = pd.read_excel(xls, sheet_name=sheet, dtype=str)
-                    csv_filename = re.sub('[^A-Za-z0-9_.-]+', '_',
-                                          f'{filename}_{sheet}.csv')
-                    df.to_csv(csv_filename, index=False)
-                    logging.info(
-                        f'Converted {file}:{sheet} into csv {csv_filename}')
-                    csv_files.append(csv_filename)
-        else:
-            csv_files.append(file)
-    return csv_files
-
-
-def prepare_input_data(config: dict) -> bool:
-    """Prepare the input data, download and shard if needed."""
-    input_data = config.get('input_data', '')
-    input_files = file_util.file_get_matching(input_data)
-    if not input_files:
-        # Download input data from the URL.
-        data_url = config.get('data_url', '')
-        if not data_url:
-            raise RuntimeError(f'Provide data with --data_url or --input_data.')
-            return False
-        input_files = download_csv_from_url(data_url, input_data)
-    input_files = convert_xls_to_csv(input_files, config.get('input_xls', []))
-    shard_column = config.get('shard_input_by_column', '')
-    if config.get('parallelism', 0) > 0 and shard_column:
-        return shard_csv_data(
-            input_files,
-            shard_column,
-            config.get('shard_prefix_length', sys.maxsize),
-            True,
-        )
-    return input_files
 
 
 def parallel_process(
@@ -2979,6 +2963,19 @@ def process(
 
 
 def main(_):
+    # Configure cloud logging if running on Cloud
+    if running_on_cloud():
+        logging.info("Running under Cloud detected.")
+        if _FLAGS.enable_cloud_logging:
+            configure_cloud_logging()
+            logging.info("Google Cloud Logging configured.")
+        else:
+            logging.info(
+                "Cloud logging is disabled via the 'enable_cloud_logging' flag."
+            )
+    else:
+        logging.info("Not running under Cloud")
+
     # uncomment to run pprof
     # start_pprof_server(port=8123)
 
