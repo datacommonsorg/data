@@ -11,5 +11,9 @@ steps:
 
 - id: 'spanner-ingestion-helper'
   name: 'gcr.io/cloud-builders/gcloud'
-  args: ['functions', 'deploy', 'spanner-ingestion-helper', '--runtime', 'python312', '--source', 'helper', '--no-allow-unauthenticated', '--trigger-http', '--entry-point', 'ingestion_helper']
+  args: ['functions', 'deploy', 'spanner-ingestion-helper', '--runtime', 'python312', '--source', 'ingestion-helper', '--no-allow-unauthenticated', '--trigger-http', '--entry-point', 'ingestion_helper']
+
+- id: 'import-automation-helper'
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['functions', 'deploy', 'import-automation-helper', '--runtime', 'python312', '--source', 'automation-helper', '--trigger-topic', 'import-automation-trigger' , '--entry-point', 'handle_feed_event']
 
