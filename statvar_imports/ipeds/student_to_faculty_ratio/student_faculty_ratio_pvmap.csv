@@ -1,0 +1,4 @@
+key,property,,,,,,,
+UNITID,#Format,observationAbout=ipedsId/{Data},,,,,,
+Year,observationDate,{Number},,,,,,
+STUFACR,populationType,Student,measurementDenominator,Count_Teacher,measuredProperty,count,value,{Number}
