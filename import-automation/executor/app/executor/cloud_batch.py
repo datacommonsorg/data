@@ -200,7 +200,7 @@ def execute_cloud_batch_job(project_id: str, location: str, job_name: str,
     runnable.container.image_uri = image_uri
     runnable.container.commands = [
         f"--import_name={import_name}",
-        f'--import_config={json.dumps({"gcs_project_id": project_id, "storage_prod_bucket_name": gcs_bucket, "spanner_project_id": project_id, "spanner_instance_id": spanner_instance, "spanner_database_id": spanner_db})}'
+        f'--import_config={json.dumps({"gcp_project_id": project_id, "gcs_project_id": project_id, "storage_prod_bucket_name": gcs_bucket, "spanner_project_id": project_id, "spanner_instance_id": spanner_instance, "spanner_database_id": spanner_db})}'
     ]
 
     # We can specify what resources are requested by a task.
