@@ -13,13 +13,16 @@
 # limitations under the License.
 
 import os
-import sys
 import pandas as pd
+import requests
 
-# Add the project root to the Python path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
 
-from util.download_util import download_file_from_url
+def download_file_from_url(url: str, output_file: str):
+    """Downloads a file from a URL to a local file."""
+    response = requests.get(url)
+    response.raise_for_status()  # Raise an HTTPError for bad responses (4xx or 5xx)
+    with open(output_file, "wb") as f:
+        f.write(response.content)
 
 _SV_INDEX_URL = "https://nces.ed.gov/programs/digest/d24/tables/xls/tabn203.65.xlsx"
 _SV_INDEX_FILE_NAME = "tabn203.65.xlsx"
