@@ -15,7 +15,6 @@ import os
 import sys
 from absl import app
 from absl import logging
-from urllib.parse import urlparse
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -68,10 +67,15 @@ def main(_):
     """
     logging.info(f"Starting download process for {len(data_sources)} files...")
 
+    if not os.path.exists(BASE_DOWNLOAD_DIR):
+        os.makedirs(BASE_DOWNLOAD_DIR)
+
     for item in data_sources:
-        # Create a unique subfolder for each download
-        unique_folder = f"{BASE_DOWNLOAD_DIR}"
-        
+        # Create a unique subfolder for each download to isolate the downloaded file
+        unique_folder = os.path.join(BASE_DOWNLOAD_DIR, item["year"])
+        if not os.path.exists(unique_folder):
+            os.makedirs(unique_folder)
+
         file_name = f"{item['year']}_sat_act_participation.xlsx"
 
         logging.info(
@@ -79,16 +83,21 @@ def main(_):
         )
 
         download_file(url=item["url"], output_folder=unique_folder, unzip=False)
-        
-        # Rename the downloaded file
-        if "google.com" in item["url"]:
-            downloaded_file_path = os.path.join(unique_folder, "export.xlsx")
+
+        # Identify the downloaded file and rename it
+        downloaded_files = os.listdir(unique_folder)
+        if len(downloaded_files) == 1:
+            downloaded_file_name = downloaded_files[0]
+            downloaded_file_path = os.path.join(unique_folder,
+                                                downloaded_file_name)
+            renamed_file_path = os.path.join(BASE_DOWNLOAD_DIR, file_name)
+            os.rename(downloaded_file_path, renamed_file_path)
+            os.rmdir(unique_folder)  # Clean up the temporary unique folder
         else:
-            parsed_url = urlparse(item["url"])
-            downloaded_file_path = os.path.join(unique_folder, os.path.basename(parsed_url.path))
-        
-        renamed_file_path = os.path.join(unique_folder, file_name)
-        os.rename(downloaded_file_path, renamed_file_path)
+            logging.error(
+                f"Could not determine the downloaded file for year {item['year']}. "
+                f"Expected 1 file, but found {len(downloaded_files)} in '{unique_folder}'."
+            )
 
     logging.info("Download process complete.")
 
