@@ -1,0 +1,168 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""The Librarian persona."""
+
+import ast
+import json
+from .vertex_client import VertexClient
+
+class TheLibrarian:
+    """The Librarian persona for Janitor Bot.
+
+    Identifies functions missing docstrings and generates them using Vertex AI.
+    """
+
+    def __init__(self, project_id, location, model_name):
+        self.client = VertexClient(project_id, location, model_name)
+
+    def generate_docstring(self, code_snippet, function_name, full_file_source):
+        """Generates a Google-style docstring for a given function."""
+        prompt = f"""
+You are a senior Google software engineer. Your task is to write a comprehensive Google-style docstring for the following Python function.
+
+**CRITICAL INSTRUCTION:**
+1. You MUST include 'Args:', 'Returns:', and 'Examples:' sections.
+2. Return ONLY a valid JSON object with the key "docstring".
+3. The "docstring" value should NOT contain outer triple quotes, but SHOULD contain newlines.
+4. Focus solely on the function's observable behavior, its inputs, outputs, and any side effects. Do NOT describe internal implementation details, algorithms, or how the function achieves its results.
+
+**Required JSON Structure:**
+{{
+    "docstring": "Summary line.\n\nDetailed description...\n\nArgs:\n    arg1 (type): ...\n"
+}}
+
+**Function Name:** {function_name}
+**Function Code:**
+{code_snippet}
+
+**Full File Context (for understanding dependencies and types):**
+{full_file_source}
+"""
+        try:
+            response = self.client.model.generate_content(
+                prompt,
+                generation_config={
+                    "temperature": 0.2,
+                    "max_output_tokens": 8192,
+                    "response_mime_type": "application/json"
+                },
+            )
+            return json.loads(response.text).get("docstring")
+        except Exception as e:
+            print(f"Error generating docstring for {function_name}: {e}")
+            return None
+
+    def _format_docstring(self, raw_docstring, indentation):
+        """Formats the generated docstring with correct indentation."""
+        # raw_docstring comes from JSON, so it's clean text (no markdown)
+        docstring = raw_docstring.strip()
+        
+        # Escape internal triple quotes to prevent syntax errors
+        # Replacing """ with ''' is a safe strategy for Python docstrings
+        docstring = docstring.replace('"""', "'''")
+        
+        # Ensure it is wrapped in triple quotes
+        if not docstring.startswith('"""'):
+            docstring = '"""' + docstring
+        if not docstring.endswith('"""'):
+            # Ensure the closing quotes are on a new line if the content ends with a quote
+            # or just for better formatting in general.
+            if docstring.strip().endswith('"'):
+                 docstring = docstring + '\n"""'
+            else:
+                 docstring = docstring + '"""'
+
+        # Apply indentation
+        docstring_lines = docstring.splitlines()
+        indented_docstring = [indentation + line for line in docstring_lines]
+        return "\n".join(indented_docstring)
+
+    def transform(self, source, file_path="unknown", limit=None):
+        """Transforms source code by adding docstrings.
+
+        Args:
+            source (str): Original source code.
+            file_path (str): File path for logging.
+            limit (int): Max functions to process.
+
+        Returns:
+            str: Modified source code, or None if no changes.
+        """
+        try:
+            tree = ast.parse(source)
+        except SyntaxError:
+            print(f"Skipping {file_path}: SyntaxError")
+            return None
+
+        functions_to_document = []
+        for node in ast.walk(tree):
+            if isinstance(node, ast.FunctionDef):
+                if not ast.get_docstring(node):
+                    functions_to_document.append(node)
+
+        if not functions_to_document:
+            return None
+
+        print(
+            f"Found {len(functions_to_document)} functions missing "
+            f"docstrings in {file_path}"
+        )
+
+        # Process bottom-up to keep line numbers valid during insertion
+        functions_to_document.sort(key=lambda x: x.lineno, reverse=True)
+
+        modified_lines = source.splitlines()
+        changes_made = False
+        count = 0
+
+        for node in functions_to_document:
+            if limit is not None and count >= limit:
+                break
+
+            try:
+                func_source = ast.get_source_segment(source, node)
+            except AttributeError:
+                continue
+
+            if not func_source:
+                continue
+
+            print(f"  Generating docstring for '{node.name}'...")
+            raw_docstring = self.generate_docstring(func_source, node.name, source)
+
+            if raw_docstring:
+                indentation = " " * (node.body[0].col_offset)
+                formatted_docstring = self._format_docstring(
+                    raw_docstring, indentation)
+
+                # Determine insertion point
+                first_stmt = node.body[0]
+                start_lineno = first_stmt.lineno
+                
+                # If the first statement is a function/class with decorators, 
+                # we must insert BEFORE the decorators.
+                if isinstance(first_stmt, (ast.FunctionDef, ast.ClassDef, ast.AsyncFunctionDef)):
+                    if first_stmt.decorator_list:
+                        # Use the line number of the first decorator
+                        start_lineno = first_stmt.decorator_list[0].lineno
+
+                # Insert into modified_lines
+                insert_line_index = start_lineno - 1
+                modified_lines.insert(insert_line_index, formatted_docstring)
+                changes_made = True
+                count += 1
+
+        if changes_made:
+            return "\n".join(modified_lines)
+        return None
