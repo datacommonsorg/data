@@ -8,7 +8,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 cd "$SCRIPT_DIR"
 
 # Run the Python download script to fetch the latest files.
-# python3 download_schoollevel.py --data_type=sat_act
+python3 download_schoollevel.py --data_type=sat_act
 echo "--- Download complete ---"
 echo ""
 
