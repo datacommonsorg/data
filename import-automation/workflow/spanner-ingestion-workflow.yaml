@@ -42,7 +42,7 @@ spanner_ingestion_workflow:
           - dataflow_job_name: 'ingestion-job'
           - dataflow_gcs_path: 'gs://datcom-templates/templates/flex/ingestion.json'
           - dataflow_location: 'us-central1'
-          - spanner_database_id: 'dc_graph_import'
+          - spanner_database_id: 'dc_graph_stable'
           - function_url: 'https://spanner-ingestion-helper-965988403328.us-central1.run.app'
     - acquire_ingestion_lock:
         call: http.post
