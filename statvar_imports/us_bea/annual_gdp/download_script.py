@@ -30,7 +30,6 @@ import os
 import sys
 import zipfile
 import pandas as pd
-from typing import NoReturn
 from absl import app
 from absl import logging
 
@@ -48,7 +47,7 @@ _OUTPUT_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "input_files")
 
 
-def clean_up_files(directory: str) -> NoReturn:
+def clean_up_files(directory: str) -> None:
   """
     Removes files from a specified directory that do not contain 'ALL_AREAS' in their filenames.
 
@@ -67,7 +66,7 @@ def clean_up_files(directory: str) -> NoReturn:
         logging.error(f"Error removing file {file_path}: {e}")
 
 
-def _process_csv_data(directory: str) -> NoReturn:
+def _process_csv_data(directory: str) -> None:
     """
     Processes all CSV files in the specified directory to remove spaces from specific columns.
     """
@@ -88,10 +87,16 @@ def _process_csv_data(directory: str) -> NoReturn:
                 df.to_csv(file_path, index=False)
                 logging.info(f"Successfully processed {filename}")
 
-            except Exception as e:
+            except FileNotFoundError:
+                logging.error(f"Error: File not found at {file_path}")
+            except pd.errors.EmptyDataError:
+                logging.warning(f"Warning: {filename} is empty and was skipped.")
+            except (pd.errors.ParserError, KeyError) as e:
                 logging.error(f"Error processing {filename}: {e}")
+            except OSError as e:
+                logging.error(f"An OS error occurred while processing {filename}: {e}")
 
-def download_and_extract_data() -> NoReturn:
+def download_and_extract_data() -> None:
   """
     Downloads and extracts the BEA annual GDP data.
 
@@ -147,7 +152,7 @@ def download_and_extract_data() -> NoReturn:
   else:
     logging.error("Failed to download the file.")
 
-def main() -> NoReturn:
+def main() -> None:
   """
     Main function to orchestrate the download and extraction process.
     """
