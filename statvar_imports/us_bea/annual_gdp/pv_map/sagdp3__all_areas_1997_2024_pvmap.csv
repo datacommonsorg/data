@@ -1,5 +1,5 @@
 key,,,,,,,,
-GeoName,observationAbout,{Data},measuredProperty,amount,populationType,EconomicActivity,grossDomesticProductType,TaxesOnProductionAndImportsLessSubsidies
+GeoName,observationAbout,{Data},measuredProperty,amount,populationType,EconomicActivity,grossDomesticProductType,TaxesOnProductionAndImportsLessSubsidies,unit,USDollar
 Description:All industry total,unit,USDollar,economicSector,AllIndustry,,,,
 Description:Private industries,unit,USDollar,economicSector,PrivateSector,,,,
 "Description:Agriculture, forestry, fishing and hunting",unit,USDollar,naics,NAICS/11,,,,
@@ -89,6 +89,8 @@ Description:Natural resources and mining,unit,USDollar,naics,NAICS/1011,,,,
 Description:Trade,unit,USDollar,economicSector,TradeSector,,,,
 Description:Transportation and utilities,unit,USDollar,naics,NAICS/1021,,,,
 Description:Manufacturing and information,unit,USDollar,economicSector,ManufacturingAndInformation,,,,
+Description:Private goods-producing industries 2/,unit,USDollar,economicSector,PrivateGoodsProducingIndustries2,,,,
+Description:Private services-providing industries 3/,unit,USDollar,economicSector,PrivateServicesProvidingIndustries3,,,,
 Description:Private goods-producing industries 2/,unit,USDollar,economicSector,PrivateGoodsProducingIndustries2,,,,
 Description:Private services-providing industries 3/,unit,USDollar,economicSector,PrivateGoodsProducingIndustries3,,,,
 "Description:All industry total, overseas activity",unit,USDollar,economicSector,AllIndustryTotalOverseasActivity,,,,

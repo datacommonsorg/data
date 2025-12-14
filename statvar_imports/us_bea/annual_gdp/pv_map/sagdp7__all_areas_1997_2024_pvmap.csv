@@ -1,5 +1,5 @@
 key,,,,,,,,
-GeoName,observationAbout,{Data},measuredProperty,Amount,populationType,EconomicActivity,grossDomesticProductType,GrossOperatingSurplus
+GeoName,observationAbout,{Data},measuredProperty,amount,populationType,EconomicActivity,grossDomesticProductType,GrossOperatingSurplus,unit,USDollar
 Description:All industry total,unit,USDollar,economicSector,AllIndustry,,,,
 Description:Private industries,unit,USDollar,economicSector,PrivateSector,,,,
 "Description:Agriculture, forestry, fishing and hunting",unit,USDollar,naics,NAICS/11,,,,
