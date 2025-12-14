@@ -4,13 +4,16 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#         https://www.apache.org/licenses/LICENSE-2.0
+#             https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an 'AS IS' BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+# How to run the script to download the files:
+# python3 download_script.py
 """
 This script downloads and processes the annual GDP data from the Bureau of Economic Analysis (BEA).
 
@@ -26,17 +29,16 @@ This script relies on a shared 'download_util' module for handling file download
 import os
 import sys
 import zipfile
-import logging
 import pandas as pd
-
 from typing import NoReturn
+from absl import app
+from absl import logging
 
-# Add the project root to the Python path to enable imports from the 'util' directory.
-sys.path.append(
-    os.path.dirname(
-        os.path.dirname(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../'))
 from util import download_util
+
+logging.set_verbosity(logging.INFO)
 
 # URL for the BEA annual GDP data zip file.
 _DOWNLOAD_URL = "https://apps.bea.gov/regional/zip/SAGDP.zip"
@@ -81,18 +83,13 @@ def _process_csv_data(directory: str) -> NoReturn:
                 for col in columns_to_process:
                     if col in df.columns:
                         # Ensure the column is of string type before applying string operations
-                        df[col] = df[col].astype(str).str.strip()
-                        #df[col] = df[col].str.replace(" ", "", regex=False)
-                
+                        df[col] = df[col].astype(str).str.strip() 
                 # Save the modified dataframe back to the CSV
                 df.to_csv(file_path, index=False)
                 logging.info(f"Successfully processed {filename}")
 
             except Exception as e:
                 logging.error(f"Error processing {filename}: {e}")
-
-
-
 
 def download_and_extract_data() -> NoReturn:
   """
@@ -140,8 +137,6 @@ def download_and_extract_data() -> NoReturn:
 
       _process_csv_data(_OUTPUT_DIR)
       
-
-
     except zipfile.BadZipFile:
       logging.error(
           f"Error: Downloaded file '{downloaded_file}' is not a valid zip file."
@@ -152,15 +147,12 @@ def download_and_extract_data() -> NoReturn:
   else:
     logging.error("Failed to download the file.")
 
-
 def main() -> NoReturn:
   """
     Main function to orchestrate the download and extraction process.
     """
-  logging.basicConfig(level=logging.INFO,
-                      format='%(asctime)s - %(levelname)s - %(message)s')
-  download_and_extract_data()
 
+  download_and_extract_data()
 
 if __name__ == "__main__":
   main()
