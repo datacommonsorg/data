@@ -46,7 +46,7 @@ from download_files_details import PUBLIC_COLUMNS
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
-_GCS_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
+_GCS_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'gcs_folder')
 import file_util
 
 _FLAGS = flags.FLAGS
