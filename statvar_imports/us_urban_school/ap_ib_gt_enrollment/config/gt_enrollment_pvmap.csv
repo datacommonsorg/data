@@ -1,0 +1,48 @@
+key,prop,val,,,,,,
+YEAR,observationDate,{Number},populationType,Student,educationalProgram,GiftedAndTalented,enrollmentStatus,EnrolledInEducationOrTraining
+ncesid,observationAbout,ncesId/{Data},,,,,,
+,,,,,,,,
+,,,,,,,,
+M_AME_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,AmericanIndianOrAlaskaNative
+M_ASI_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,Asian
+M_HIS_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,HispanicOrLatino
+M_BLA_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,BlackOrAfricanAmericanAlone
+M_WHI_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,White
+M_HI_PAC_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,NativeHawaiianOrOtherPacificIslanderAlone
+M_2_OR_MORE_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,TwoOrMoreRaces
+M_TOT_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,,
+M_DIS_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,diabilityStatus,WithDisability
+M_LEP_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,languageFluencyLevel,LimitedEnglishProficient
+F_AME_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,AmericanIndianOrAlaskaNative
+F_ASI_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,Asian
+F_HIS_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,HispanicOrLatino
+F_BLA_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,BlackOrAfricanAmericanAlone
+F_WHI_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,White
+F_HI_PAC_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,NativeHawaiianOrOtherPacificIslanderAlone
+F_2_OR_MORE_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,TwoOrMoreRaces
+F_TOT_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,,
+F_DIS_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,disabilityStatus,WithDisability
+F_LEP_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,languageFluencyLevel,LimitedEnglishProficient
+Incomplete,,,,,,,,
+,,,,,,,,
+SCH_GT_IND,,,,,,,,
+SCH_GTENR_HI_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,HispanicOrLatino
+SCH_GTENR_HI_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,HispanicOrLatino
+SCH_GTENR_AM_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,AmericanIndianOrAlaskaNative
+SCH_GTENR_AM_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,AmericanIndianOrAlaskaNative
+SCH_GTENR_AS_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,Asian
+SCH_GTENR_AS_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,Asian
+SCH_GTENR_HP_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,NativeHawaiianOrOtherPacificIslanderAlone
+SCH_GTENR_HP_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,NativeHawaiianOrOtherPacificIslanderAlone
+SCH_GTENR_BL_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,BlackOrAfricanAmericanAlone
+SCH_GTENR_BL_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,BlackOrAfricanAmericanAlone
+SCH_GTENR_WH_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,White
+SCH_GTENR_WH_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,White
+SCH_GTENR_TR_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,TwoOrMoreRaces
+SCH_GTENR_TR_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,TwoOrMoreRaces
+TOT_GTENR_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,,
+TOT_GTENR_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,,
+SCH_GTENR_LEP_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,languageFluencyLevel,LimitedEnglishProficient
+SCH_GTENR_LEP_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,languageFluencyLevel,LimitedEnglishProficient
+SCH_GTENR_IDEA_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,disabilityStatus,WithDisability
+SCH_GTENR_IDEA_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,disabilityStatus,WithDisability

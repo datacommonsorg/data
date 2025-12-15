@@ -1,0 +1,31 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "US_IB_ENROLLMENT",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://civilrightsdata.ed.gov/data",
+            "provenance_description": "This dataset contains enrollment in International Baccalaureate (IB) for each school by students' race and sex,  Limited English Proficiency status and sex, and disability status and sex.",
+            "scripts": [
+                "run_process.sh"
+            ],
+            "source_files": [
+                "input_files/*.xlsx",
+                "input_files/*.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "common_output.tmcf",
+                    "cleaned_csv": "output_files/output_*.csv"
+                }
+            ],
+            "cron_schedule": "0 05 8,23 * *",
+            "resource_limits": {
+                "cpu": 16,
+                "memory": 256,
+                "disk": 500
+            }
+        }
+    ]
+}
