@@ -56,7 +56,7 @@ if __name__ == '__main__':
         logging.set_verbosity(1)
         logging.info("Main Method Starts For School District ")
         gcs_output_dir_local = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "gcs_output")
+            os.path.dirname(os.path.abspath(__file__)), "gcs_folder")
         input_path_base = os.path.join(gcs_output_dir_local, "input_files")
         os.makedirs(input_path_base, exist_ok=True)
         input_files_to_process = []
@@ -92,9 +92,12 @@ if __name__ == '__main__':
         loader = NCESDistrictSchool(input_files_to_process, cleaned_csv_path,
                                     mcf_path, tmcf_path, csv_path_place,
                                     duplicate_csv_place, tmcf_path_place)
-        loader.generate_csv()
-        loader.generate_mcf()
-        loader.generate_tmcf()
+        try:
+            loader.generate_csv()
+            loader.generate_mcf()
+            loader.generate_tmcf()
+        except Exception as e:
+            print(e)
 
     except Exception as e:
         logging.fatal(f"Error While Running District School Process: {e} ")
