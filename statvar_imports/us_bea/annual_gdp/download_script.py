@@ -89,6 +89,7 @@ def _process_csv_data(directory: str) -> None:
 
             except FileNotFoundError:
                 logging.error(f"Error: File not found at {file_path}")
+                raise RuntimeError(f"File not found: {file_path}")
             except pd.errors.EmptyDataError:
                 logging.warning(f"Warning: {filename} is empty and was skipped.")
             except (pd.errors.ParserError, KeyError) as e:
