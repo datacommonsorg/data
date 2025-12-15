@@ -156,7 +156,6 @@ def main() -> None:
   """
     Main function to orchestrate the download and extraction process.
     """
-
   download_and_extract_data()
 
 if __name__ == "__main__":
