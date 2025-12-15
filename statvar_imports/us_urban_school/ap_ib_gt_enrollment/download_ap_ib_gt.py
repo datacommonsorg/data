@@ -298,33 +298,41 @@ def generate_future_configs(start_year):
 
 @retry(tries=3, delay=5, backoff=2)
 
+
+
 def download_url_with_retry(zip_url):
 
+
+
     """
+
+
 
     Handles downloading the ZIP content with retries and status checks.
 
+
+
     """
 
-    try:
 
-        head_response = requests.head(zip_url, allow_redirects=True, timeout=10)
 
-        head_response.raise_for_status() 
+    head_response = requests.head(zip_url, allow_redirects=True, timeout=10)
 
-        response = requests.get(zip_url, stream=True, timeout=180)
 
-        response.raise_for_status() 
 
-        return response
+    head_response.raise_for_status()
 
-    except requests.exceptions.HTTPError as e:
 
-        if e.response.status_code == 404:
 
-            raise requests.exceptions.FileExistsError(f"URL returned 404: {zip_url}") from e
+    response = requests.get(zip_url, stream=True, timeout=180)
 
-        raise
+
+
+    response.raise_for_status()
+
+
+
+    return response
 
 
 
@@ -418,9 +426,11 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
         logging.info(f"Source URL: {zip_url}")
         logging.info("Attempting to download ZIP archive...")
         response = download_url_with_retry(zip_url)
-    except requests.exceptions.FileExistsError:
-        logging.info(f"File not found (404) for {config_key}. Assuming release is not yet available and skipping.")
-        return
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 404:
+            logging.info(f"File not found (404) for {config_key}. Assuming release is not yet available and skipping.")
+            return
+        raise
     except Exception as e:
         raise RuntimeError(f"Failed to connect/download archive after retries for {config_key}: {e}")
 

@@ -50,9 +50,11 @@ def download_and_extract_2015_16(data_type, output_dir):
         logging.info(f"Source URL: {zip_url}")
         logging.info("Attempting to download ZIP archive...")
         response = download_url_with_retry(zip_url)
-    except requests.exceptions.FileExistsError:
-        logging.info(f"File not found (404) for {config_key}. Assuming release is not yet available and skipping.")
-        return
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 404:
+            logging.info(f"File not found (404) for {config_key}. Assuming release is not yet available and skipping.")
+            return
+        raise
     except Exception as e:
         raise RuntimeError(f"Failed to connect/download archive after retries for {config_key}: {e}")
 
