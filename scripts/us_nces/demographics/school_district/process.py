@@ -92,12 +92,10 @@ if __name__ == '__main__':
         loader = NCESDistrictSchool(input_files_to_process, cleaned_csv_path,
                                     mcf_path, tmcf_path, csv_path_place,
                                     duplicate_csv_place, tmcf_path_place)
-        try:
-            loader.generate_csv()
-            loader.generate_mcf()
-            loader.generate_tmcf()
-        except Exception as e:
-            print(e)
+        loader.generate_csv()
+        loader.generate_mcf()
+        loader.generate_tmcf()
+        logging.info("Main Method Completed For District School ")
 
     except Exception as e:
         logging.fatal(f"Error While Running District School Process: {e} ")
