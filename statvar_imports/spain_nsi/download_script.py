@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#         https://www.apache.org/licenses/LICENSE-2.0
+#          https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an 'AS IS' BASIS,
@@ -15,7 +15,6 @@
 import json
 import os
 import sys
-import csv
 import shutil
 from absl import app
 from absl import logging
@@ -33,76 +32,47 @@ _OUTPUT_DIRECTORY = os.path.join(_SCRIPT_PATH, 'input_files')
 
 def clean_and_rename_total(filepath, decimal_style='.'):
     """
-    Efficiently processes a specific CSV file by combining renaming, cleaning,
-    and dropping 'Percentage: 100' rows.
+    Efficiently processes a specific CSV or TSV file by reading as text to handle
+    number formatting safely, renaming columns, and dropping 'Percentage: 100' rows.
 
     Args:
-        filepath: Path to the CSV file.
+        filepath: Path to the file.
         decimal_style: The character used as a decimal separator (',' or '.').
     """
     try:
-        # --- Set pandas read_csv parameters based on the style ---
-        thousands_char = None
-        decimal_char = '.'
-        
-        if decimal_style == ',':
-            # European-style: "1.234,56"
-            thousands_char = '.'
-            decimal_char = ','
-            logging.debug(f"Reading {os.path.basename(filepath)} with decimal=',' and thousands='.'")
-        
-        elif decimal_style == '.':
-            # American-style: "1,234.56"
-            thousands_char = ','
-            decimal_char = '.'
-            logging.debug(f"Reading {os.path.basename(filepath)} with decimal='.' and thousands=','")
-        
-        # --- Optimistic Read ---
-        # Try to read the file, letting pandas handle number formats
+        logging.debug(f"Processing {os.path.basename(filepath)} with decimal_style='{decimal_style}'")
+
+        # Read as String (dtype=str) with Auto-Detected Separator (sep=None)
+        # This prevents pandas from misinterpreting "76,3" as 763 before we can fix it.
         df = pd.read_csv(filepath, 
-                         thousands=thousands_char, 
-                         decimal=decimal_char, 
-                         low_memory=False)
+                         sep=None, 
+                         engine='python', 
+                         dtype=str)
 
         df.columns = df.columns.str.strip()
 
-        # Perform the logic from rename_total in memory
+        # Rename Total -> value
         if 'Total' in df.columns:
             df = df.rename(columns={'Total': 'value'})
 
-        # Clean the 'value' column
+        # Manual Number Cleaning
         if 'value' in df.columns:
+            value_col = df['value'].str.strip()
             
-            # If read_csv failed to parse (e.g., mixed types), 
-            # the column will be 'object'. We must manually clean.
-            if df['value'].dtype == 'object':
-                logging.debug(f"'value' column in {os.path.basename(filepath)} is 'object', applying manual cleaning...")
-                
-                # Convert to string to be safe
-                value_col_str = df['value'].astype(str)
-                value_col_cleaned = None
-                
-                if decimal_style == ',':
-                    # European-style: "8,9" -> 8.9 | "1.234" -> 1234
-                    # 1. Remove thousand separators ('.')
-                    value_col_cleaned = value_col_str.str.replace('.', '', regex=False)
-                    # 2. Replace the comma decimal separator with a period ('.')
-                    value_col_cleaned = value_col_cleaned.str.replace(',', '.', regex=False)
-                
-                elif decimal_style == '.':
-                    # American-style: "8.9" -> 8.9 | "1,234" -> 1234
-                    # 1. Remove thousand separators (',')
-                    value_col_cleaned = value_col_str.str.replace(',', '', regex=False)
-                
-                else:
-                    value_col_cleaned = value_col_str # Should not happen
+            if decimal_style == ',':
+                # European: Remove thousands dot, replace decimal comma
+                value_col = value_col.str.replace('.', '', regex=False)
+                value_col = value_col.str.replace(',', '.', regex=False)
+            
+            elif decimal_style == '.':
+                # American: Remove thousands comma
+                value_col = value_col.str.replace(',', '', regex=False)
 
-                # Now, convert the fully cleaned string to numeric
-                df['value'] = pd.to_numeric(value_col_cleaned, errors='coerce')
-            
-        # Logic to drop 'Percentage: 100' rows
+            # Convert to numeric now that the string is clean
+            df['value'] = pd.to_numeric(value_col, errors='coerce')
+
+        # Drop 'Percentage: 100' rows
         if 'Unit' in df.columns and 'value' in df.columns:
-            
             condition_to_drop = (df['Unit'].str.strip().str.lower() == 'percentage') & \
                                 (df['value'] == 100)
 
@@ -111,51 +81,12 @@ def clean_and_rename_total(filepath, decimal_style='.'):
                 logging.info(f"Dropping {rows_to_drop} 'Percentage: 100' rows from {os.path.basename(filepath)}.")
                 df = df[~condition_to_drop]
 
-        # Write the file, formatting floats to 3 decimal places
-        df.to_csv(filepath, index=False, float_format='%.3f')
+        # Write output as standard CSV
+        df.to_csv(filepath, index=False, sep=',', float_format='%.3f')
 
-    except pd.errors.ParserError as e:
-        logging.error(
-            f"Error parsing the CSV file: {e}. Please check the file format.")
-        raise RuntimeError(f"Failed to parse CSV file: {filepath}") from e
     except Exception as e:
-        logging.error(f"An unexpected error occurred in {filepath}: {e}")
-        raise RuntimeError(f"Unexpected error processing file: {filepath}") from e
-
-
-def convert_tsv_to_csv(file_path):
-    """
-    Converts a tab-separated file to CSV. Skips if the file does not appear
-    to be a TSV.
-    """
-    temp_file_path = file_path + ".tmp"
-    try:
-        with open(file_path, 'r', encoding='utf-8') as infile:
-            first_line = infile.readline()
-            # Check for tabs in the header to guess if it's a TSV
-            if '\t' not in first_line:
-                logging.info(
-                    f"Skipping conversion for {os.path.basename(file_path)} as it doesn't appear to be a TSV."
-                )
-                return
-            # Reset file pointer to the beginning to read the whole file
-            infile.seek(0)
-
-            with open(temp_file_path, 'w', encoding='utf-8',
-                      newline='') as outfile:
-                reader = csv.reader(infile, delimiter='\t')
-                writer = csv.writer(outfile, delimiter=',')
-                for row in reader:
-                    writer.writerow(row)
-
-        shutil.move(temp_file_path, file_path)
-        logging.info(
-            f"Successfully converted {os.path.basename(file_path)} to CSV.")
-    except Exception as e:
-        logging.error(f"Error converting file {file_path}: {e}")
-        if os.path.exists(temp_file_path):
-            os.remove(temp_file_path)
-        raise RuntimeError(f"Failed to convert file {file_path}") from e
+        logging.error(f"Error processing {filepath}: {e}")
+        raise RuntimeError(f"Error processing {filepath}") from e
 
 
 def main(_):
@@ -166,17 +97,12 @@ def main(_):
     with open(_CONFIG_PATH, 'r') as f:
         config = json.load(f)
 
-    # This list will store files to be cleaned after download
-    # It will be a list of tuples: (full_filepath, decimal_style)
     files_to_process = []
 
-    # --- Primary Download and Conversion Loop ---
+    # --- Primary Download Loop ---
     for item in config.get('imports', []):
         url = item.get('url')
-        filename = item.get('filename') # This is the .tsv filename from config
-        
-        # Get the new decimal_style from the config.
-        # It defaults to '.' if you forget to add it.
+        filename = item.get('filename')
         decimal_style = item.get('decimal_style', '.') 
         
         if not url or not filename:
@@ -187,44 +113,28 @@ def main(_):
             logging.error(f"Failed to download {filename} from {url}.")
             raise RuntimeError(f"Failed to download {filename} from {url}.")
 
-        original_filename = os.path.basename(urlparse(url).path)
-        original_filepath = os.path.join(_OUTPUT_DIRECTORY, original_filename)
-        
-        # This is the final name, e.g., "activity_employment_unemployment_by_sex.csv"
-        csv_filename = os.path.splitext(filename)[0] + '.csv'
-        # This is the full path to that file
-        output_path = os.path.join(_OUTPUT_DIRECTORY, csv_filename)
+        original_download_name = os.path.basename(urlparse(url).path)
+        downloaded_filepath = os.path.join(_OUTPUT_DIRECTORY, original_download_name)
+        final_filepath = os.path.join(_OUTPUT_DIRECTORY, filename)
 
-        if os.path.exists(original_filepath):
-            os.rename(original_filepath, output_path)
-            logging.info(f"Downloaded and renamed to {csv_filename}.")
-            try:
-                convert_tsv_to_csv(output_path)
-            except Exception as e:
-                logging.error(f"Failed to convert {csv_filename}: {e}")
-                raise RuntimeError(f"Failed to convert {csv_filename}") from e
+        if os.path.exists(downloaded_filepath):
+            os.rename(downloaded_filepath, final_filepath)
+            logging.info(f"Downloaded and renamed to {filename}.")
         else:
-            logging.error(
-                f"Downloaded file not found at {original_filepath}")
-            raise RuntimeError(f"Downloaded file not found at {original_filepath}")
+            logging.error(f"Downloaded file not found at {downloaded_filepath}")
+            raise RuntimeError(f"Downloaded file not found at {downloaded_filepath}")
 
-        # Add the successfully downloaded/converted file to our list
-        # for processing.
-        if os.path.exists(output_path):
-            files_to_process.append( (output_path, decimal_style) )
+        if os.path.exists(final_filepath):
+            files_to_process.append((final_filepath, decimal_style))
 
     # --- Post-Processing and Cleaning Loop ---
     logging.info("Starting post-download cleaning...")
 
     for file_path, style in files_to_process:
-        # A final check to ensure the file exists
         if os.path.exists(file_path):
             try:
-                # Call the cleaning function, passing the correct style
-                # for this specific file.
                 clean_and_rename_total(file_path, decimal_style=style)
             except Exception as e:
-                # Log errors but continue processing other files
                 logging.error(f"Failed to clean {os.path.basename(file_path)}: {e}")
                 raise RuntimeError(f"Failed to clean {os.path.basename(file_path)}") from e
         else:

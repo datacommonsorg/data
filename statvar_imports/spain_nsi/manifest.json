@@ -5,7 +5,7 @@
       "curator_emails": [
         "support@datacommons.org"
       ],
-      "provenance_url": "https://www.ine.es/en/index.htm",
+      "provenance_url": "https://www.ine.es/dyngs/INEbase/en/listaoperaciones.htm",
       "provenance_description": "population, health, education, and labor statistics data at the province and municipality levels.",
       "scripts": [
         "download_script.py",
@@ -16,8 +16,8 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "output/employment_unemployment_output.tmcf",
-          "cleaned_csv": "output/employment_unemployment_output.csv"
+          "template_mcf": "output/activity_employment_unemployment_by_sex_output.tmcf",
+          "cleaned_csv": "output/activity_employment_unemployment_by_sex_output.csv"
         },
         {
           "template_mcf": "output/education_field_of_study_output.tmcf",
@@ -39,10 +39,7 @@
           "template_mcf": "output/male_rate_at_birth_by_province_output.tmcf",
           "cleaned_csv": "output/male_rate_at_birth_by_province_output.csv"
         },
-        {
-          "template_mcf": "output/levels_of_education_gender_output.tmcf",
-          "cleaned_csv": "output/levels_of_education_gender_output.csv"
-        },
+
         {
           "template_mcf": "output/population_by_municipality_and_gender_output.tmcf",
           "cleaned_csv": "output/population_by_municipality_and_gender_output.csv"

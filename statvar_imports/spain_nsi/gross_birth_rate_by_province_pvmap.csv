@@ -1,5 +1,5 @@
-key,prop,value,,,,,,,,,,,,
-Provinces,observationAbout,{Data},measuredProperty,count,populationType,BirthEvent,medicalStatus,LiveBirth,statType,measuredValue,measurementDenominator,Count_Person,observationPeriod,P1Y
-value,value,{Number},,,,,,,,,,,,
-Periodo,observationDate,{Data},,,,,,,,,,,,
-Provinces:National Total,observationAbout,country/ESP,,,,,,,,,,,,
+key,prop,value,,,,,,,,,,,,,,
+Provinces,observationAbout,{Data},measuredProperty,count,populationType,BirthEvent,medicalStatus,LiveBirth,statType,measuredValue,measurementDenominator,Count_Person,observationPeriod,P1Y,unit,Per1000Persons
+value,value,{Number},,,,,,,,,,,,,,
+Periodo,observationDate,{Data},,,,,,,,,,,,,,
+Provinces:National Total,observationAbout,country/ESP,,,,,,,,,,,,,,

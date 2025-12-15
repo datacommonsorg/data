@@ -21,7 +21,7 @@ From 65 to 69 years old,age,[65 69 Years],,,,
 ,,,,,,
 Males,gender,Male,populationType,Person,,
 Females,gender,Female,populationType,Person,,
-Percentage,unit,Percent,measurementDenominator,-age,,
+Percentage,unit,Percent,measurementDenominator,-age,scalingFactor,100
 value:100,value,{Number},#ignore,ignore,,
 2002QI,observationDate,2002-03,,,,
 2002QII,observationDate,2002-06,,,,
