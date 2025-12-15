@@ -11,7 +11,7 @@ M_WHI_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,White
 M_HI_PAC_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,NativeHawaiianOrOtherPacificIslanderAlone
 M_2_OR_MORE_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,TwoOrMoreRaces
 M_TOT_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,,
-M_DIS_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,diabilityStatus,WithDisability
+M_DIS_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,disabilityStatus,WithDisability
 M_LEP_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,languageFluencyLevel,LimitedEnglishProficient
 F_AME_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,AmericanIndianOrAlaskaNative
 F_ASI_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,Asian

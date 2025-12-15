@@ -61,17 +61,16 @@ process_files() {
             output_path="output_files/output_${year}_ap"
 
             # Construct the command for the current year
-            CMD="python3 ../../../tools/statvar_importer/stat_var_processor.py \
-                --input_data=${input_data_glob} \
+            CMD_ARRAY=(python3 ../../../tools/statvar_importer/stat_var_processor.py \
+                --input_data="${input_data_glob}" \
                 --pv_map=../config/ap_enrollment_pvmap.csv \
                 --config_file=../config/common_metadata.csv \
-                --output_path=${output_path} \
-                --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
-
+                --output_path="${output_path}" \
+                --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf)
             # Print and execute the command.
             echo "Executing command for year ${year}:"
-            echo "$CMD"
-            eval "$CMD"
+            printf "%q " "${CMD_ARRAY[@]}"; echo
+            "${CMD_ARRAY[@]}"
             echo "--- Finished processing for year ${year} ---"
         fi
     done

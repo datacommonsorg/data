@@ -65,11 +65,7 @@ The data is downloaded from the Civil Rights Data Collection (CRDC).
 
 ## Processing Steps
 
-
-
 The scripts perform the following processing steps:
-
-
 
 1.  Download the data from the CRDC website.
 
@@ -80,42 +76,22 @@ The scripts perform the following processing steps:
 4.  Save the processed data as a CSV or XLSX file.
 
 
-
 ## Processing the downloaded data
 
-
-
 After downloading the data, you can process it by running the `run_process.sh` script in each of the data directories.
-
-
-
 For example, to process the Advanced Placement data, run the following command:
 
-
-
 ```bash
-
 bash statvar_imports/us_urban_school/ap_ib_gt_enrollment/advanced_placements/run_process.sh
-
 ```
-
-
 
 You can also download and process the data in one step by using the `--download` flag:
 
-
-
 ```bash
-
 bash statvar_imports/us_urban_school/ap_ib_gt_enrollment/advanced_placements/run_process.sh --download
-
 ```
 
-
-
 The processing script will:
-
-
 
 1.  Create an `output_files` directory.
 
