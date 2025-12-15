@@ -18,7 +18,6 @@ Wrappers for fetching schema from DataCommons API.
 import ast
 import copy
 import json
-import logging
 import os
 from absl import app
 from absl import flags
@@ -36,6 +35,7 @@ _MODULE_DIR = os.path.dirname(os.path.realpath(__file__))
 path.insert(1, os.path.join(_MODULE_DIR, '../../../../../../'))
 
 from tools.download_utils.requests_wrappers import request_post_json
+from util.dc_api_wrapper import dc_api_is_defined_dcid
 
 # logging.basicConfig() # you need to initialize logging, otherwise you will not see anything from requests
 # logging.getLogger().setLevel(logging.DEBUG)
@@ -61,38 +61,37 @@ def dc_check_existence(dcid_list: list,
     Returns:
         Dict object with dcids as key values and boolean values signifying existence as values.
     """
-    data_ = {}
-    ret_dict = {}
-    if use_autopush:
-        url_prefix = 'autopush.'
-    else:
-        url_prefix = ''
+    wrapper_config = {
+        'dc_api_batch_size':
+            max_items,
+        'dc_api_root':
+            'https://autopush.api.datacommons.org'
+            if use_autopush else 'https://api.datacommons.org'
+    }
+    return dc_api_is_defined_dcid(dcid_list, wrapper_config)
 
-    chunk_size = max_items
-    dcid_list_chunked = [
-        dcid_list[i:i + chunk_size]
-        for i in range(0, len(dcid_list), chunk_size)
-    ]
-    for dcid_chunk in dcid_list_chunked:
-        data_["dcids"] = dcid_chunk
-        req = request_post_json(
-            f'https://{url_prefix}api.datacommons.org/node/property-labels',
-            data_)
-        resp_dicts = req['payload']
-        resp_dicts = ast.literal_eval(resp_dicts)
-        for cur_dcid in resp_dicts:
-            if not resp_dicts[cur_dcid]:
-                ret_dict[cur_dcid] = False
-            elif not resp_dicts[cur_dcid]['inLabels'] and not resp_dicts[
-                    cur_dcid]['outLabels']:
-                ret_dict[cur_dcid] = False
-            else:
-                ret_dict[cur_dcid] = True
 
-    return ret_dict
+def _get_arc_nodes(response: dict, node_id: str, arc_label: str) -> list:
+    """Extracts nodes list for a given arc from a v2/node response."""
+    node_data = response.get('data', {}).get(node_id, {})
+    arcs = node_data.get('arcs', {})
+    arc_data = arcs.get(arc_label, {})
+    return arc_data.get('nodes', [])
 
 
 # fetch pvs from dc, enums from dc
+
+
+def _validate_response(response: dict, url: str, api_key_env: str):
+    """Checks for HTTP errors in the response and raises appropriate exceptions."""
+    if 'http_err_code' in response:
+        err_code = response['http_err_code']
+        if err_code == 401:
+            raise ValueError(
+                f'Authentication failed for {url}. Please set the {api_key_env} environment variable.'
+            )
+        else:
+            raise ValueError(f'HTTP error {err_code} for {url}')
 
 
 def fetch_dcid_properties_enums(dcid: str,
@@ -117,8 +116,16 @@ def fetch_dcid_properties_enums(dcid: str,
 
     if use_autopush:
         api_prefix = 'autopush.'
+        api_key_env = 'AUTOPUSH_DC_API_KEY'
+        api_key = os.environ.get(api_key_env)
     else:
         api_prefix = ''
+        api_key_env = 'DC_API_KEY'
+        api_key = os.environ.get(api_key_env)
+
+    headers = {}
+    if api_key:
+        headers['X-API-Key'] = api_key
 
     dc_props = {}
 
@@ -126,19 +133,16 @@ def fetch_dcid_properties_enums(dcid: str,
     if force_fetch or not os.path.isfile(
             os.path.join(cache_path, f'{dcid}_dc_props.json')):
         data_ = {}
-        data_["dcids"] = [dcid]
-        data_["property"] = "domainIncludes"
-        data_["direction"] = "in"
-        population_props = request_post_json(
-            f'https://{api_prefix}api.datacommons.org/node/property-values',
-            data_)
-        dc_population_pvs = population_props['payload']
-        dc_population_pvs = ast.literal_eval(dc_population_pvs)
+        data_["nodes"] = [dcid]
+        data_["property"] = "<-domainIncludes"
+        url = f'https://{api_prefix}api.datacommons.org/v2/node'
+        population_props = request_post_json(url, data_, headers=headers)
+        _validate_response(population_props, url, api_key_env)
+        nodes_list = _get_arc_nodes(population_props, dcid, 'domainIncludes')
 
-        if dc_population_pvs[dcid]:
-            dc_props = {}
-            for prop_dict in dc_population_pvs[dcid]['in']:
-                dc_props[prop_dict['dcid']] = []
+        dc_props = {}
+        for prop_dict in nodes_list:
+            dc_props[prop_dict['dcid']] = []
 
         with open(os.path.join(cache_path, f'{dcid}_dc_props.json'), 'w') as fp:
             json.dump(dc_props, fp, indent=2)
@@ -150,20 +154,19 @@ def fetch_dcid_properties_enums(dcid: str,
     if force_fetch or not os.path.isfile(
             os.path.join(cache_path, f'{dcid}_dc_props_types.json')):
         data_ = {}
-        data_['dcids'] = list(dc_props.keys())
-        data_['property'] = 'rangeIncludes'
-        data_['direction'] = 'out'
-        if data_['dcids']:
-            population_props_types = request_post_json(
-                f'https://{api_prefix}api.datacommons.org/node/property-values',
-                data_)
-            population_props_types = ast.literal_eval(
-                population_props_types['payload'])
-            for property_name in population_props_types:
-                if population_props_types[property_name]:
-                    for temp_dict in population_props_types[property_name][
-                            'out']:
-                        dc_props[property_name].append(temp_dict['dcid'])
+        data_['nodes'] = list(dc_props.keys())
+        data_['property'] = '->rangeIncludes'
+        if data_['nodes']:
+            url = f'https://{api_prefix}api.datacommons.org/v2/node'
+            population_props_types_resp = request_post_json(url,
+                                                            data_,
+                                                            headers=headers)
+            _validate_response(population_props_types_resp, url, api_key_env)
+            for property_name in data_['nodes']:
+                nodes_list = _get_arc_nodes(population_props_types_resp,
+                                            property_name, 'rangeIncludes')
+                for temp_dict in nodes_list:
+                    dc_props[property_name].append(temp_dict['dcid'])
             with open(os.path.join(cache_path, f'{dcid}_dc_props_types.json'),
                       'w') as fp:
                 json.dump(dc_props, fp, indent=2)
@@ -180,16 +183,15 @@ def fetch_dcid_properties_enums(dcid: str,
             for type_name in new_dict[property_name]:
                 if 'enum' in type_name.lower():
                     data_ = {}
-                    data_['dcids'] = [type_name]
-                    data_['property'] = 'typeOf'
-                    data_['direction'] = 'in'
-                    enum_values = request_post_json(
-                        f'https://{api_prefix}api.datacommons.org/node/property-values',
-                        data_)
-                    enum_values = ast.literal_eval(enum_values['payload'])
-                    if enum_values[type_name]:
-                        for temp_dict in enum_values[type_name]['in']:
-                            dc_props[property_name].append(temp_dict['dcid'])
+                    data_['nodes'] = [type_name]
+                    data_['property'] = '<-typeOf'
+                    url = f'https://{api_prefix}api.datacommons.org/v2/node'
+                    enum_values = request_post_json(url, data_, headers=headers)
+                    _validate_response(enum_values, url, api_key_env)
+                    nodes_list = _get_arc_nodes(enum_values, type_name,
+                                                'typeOf')
+                    for temp_dict in nodes_list:
+                        dc_props[property_name].append(temp_dict['dcid'])
 
         with open(os.path.join(cache_path, f'{dcid}_dc_props_enum_values.json'),
                   'w') as fp:

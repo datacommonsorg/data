@@ -8,6 +8,7 @@ chromedriver_py
 croniter
 dataclasses
 datacommons
+datacommons_client
 db-dtypes
 duckdb
 frozendict
@@ -27,6 +28,7 @@ google-cloud-spanner
 google-cloud-storage
 google-cloud-logging
 google-cloud-scheduler
+google-cloud-secret-manager
 gspread
 gunicorn
 legacy-cgi
@@ -34,6 +36,7 @@ lxml
 numpy
 openpyxl
 pandas
+omegaconf
 prettytable
 protobuf
 psutil
