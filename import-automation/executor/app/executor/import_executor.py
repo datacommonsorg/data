@@ -75,6 +75,8 @@ lastDataRefreshDate: "{last_data_refresh_date}"
 
 AUTO_IMPORT_JOB_STAGE = "auto-import-job-stage"
 AUTO_IMPORT_JOB_STATUS = "auto-import-job-status"
+IMPORT_SUMMARY_FILE = "import_summary.txt"
+STAGING_PATH = "staging"
 
 
 class ImportStatus(Enum):
@@ -129,6 +131,7 @@ class ImportStatusSummary:
     latest_version: str = ''
     execution_time: int = 0  # seconds
     data_volume: int = 0  # bytes
+    job_id: str = ''
     next_refresh: datetime = None
     """Holds a set of monitoring stats for an import."""
     import_stats: dict = dataclasses.field(default_factory=dict)
@@ -794,11 +797,9 @@ class ImportExecutor:
             ]
             values = [
                 import_summary.import_name, import_summary.status.name,
-                os.getenv('BATCH_JOB_NAME',
-                          os.getenv('BATCH_JOB_UID', 'local-run')),
-                import_summary.execution_time, import_summary.data_volume,
-                spanner.COMMIT_TIMESTAMP, import_summary.next_refresh,
-                import_summary.latest_version
+                import_summary.job_id, import_summary.execution_time,
+                import_summary.data_volume, spanner.COMMIT_TIMESTAMP,
+                import_summary.next_refresh, import_summary.latest_version
             ]
             # Update import timestamp only if import completed successfully.
             if import_summary.status == ImportStatus.READY:
@@ -813,6 +814,10 @@ class ImportExecutor:
 
     def _update_latest_version(self, version, output_dir, import_spec,
                                import_summary):
+        if self.config.skip_gcs_upload:
+            logging.warning(
+                "Skipping latest version update as per import config.")
+            return
         logging.info(f'Updating import latest version {version}')
         self.uploader.upload_string(
             version,
@@ -820,8 +825,11 @@ class ImportExecutor:
         self.uploader.upload_string(
             self._import_metadata_mcf_helper(import_spec),
             os.path.join(output_dir, self.config.import_metadata_mcf_filename))
-        if self.config.storage_version_history_filename:
-            # Add current version to the history of versions.
+        self.uploader.upload_string(
+            json.dumps(dataclasses.asdict(import_summary), default=str),
+            os.path.join(output_dir, IMPORT_SUMMARY_FILE))
+        # Add current version to the history of versions if import was successful.
+        if self.config.storage_version_history_filename and import_summary.status == ImportStatus.READY:
             history_filename = os.path.join(
                 output_dir, self.config.storage_version_history_filename)
             versions_history = [version]
@@ -847,7 +855,11 @@ class ImportExecutor:
     """
         start_time = time.time()
         import_name = import_spec['import_name']
-        import_summary = ImportStatusSummary(import_name=import_name)
+        job_id = os.getenv('BATCH_JOB_NAME',
+                           os.getenv('BATCH_JOB_UID', 'local-run'))
+        import_summary = ImportStatusSummary(import_name=import_name,
+                                             job_id=job_id)
+
         self.counters.add_counter(f'import-{import_name}', 1)
         urls = import_spec.get('data_download_url')
         if urls:
@@ -935,19 +947,19 @@ class ImportExecutor:
                 import_summary.import_stats.get('mcf_data_size', 0) +
                 import_summary.import_stats.get('validation_data_size', 0))
             logging.info(import_summary)
+
             if self.config.ignore_validation_status or validation_status:
                 import_summary.status = ImportStatus.READY
-                if not self.config.skip_gcs_upload:
-                    self._update_latest_version(version, output_dir,
-                                                import_spec, import_summary)
-                else:
-                    logging.warning(
-                        "Skipping latest version update as per import config.")
             else:
                 logging.error(
-                    "Skipping latest version update due to validation failure.")
+                    "Staging latest version update due to validation failure.")
                 import_summary.status = ImportStatus.VALIDATION
-                self._update_import_status_table(import_summary)
+
+            # Update version and metadata files in staging folder for failed imports
+            version_dir = output_dir if import_summary.status == ImportStatus.READY else os.path.join(
+                output_dir, STAGING_PATH)
+            self._update_latest_version(version, version_dir, import_spec,
+                                        import_summary)
 
         if self.importer:
             self.importer.delete_previous_output(relative_import_dir,
