@@ -70,7 +70,7 @@ if __name__ == '__main__':
         logging.set_verbosity(1)
         logging.info("Main Method Starts For Private School District ")
         gcs_output_dir_local = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "gcs_output")
+            os.path.dirname(os.path.abspath(__file__)), "gcs_folder")
         input_path_base = os.path.join(gcs_output_dir_local, "input_files")
         os.makedirs(input_path_base, exist_ok=True)
         input_files_to_process = []
