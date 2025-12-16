@@ -47,7 +47,7 @@ class TestCounters(unittest.TestCase):
             output='JSON')
         self.assertTrue(isinstance(response, dict))
         try:
-          nodes = response['entities'][0]['candidates']
+            nodes = response['entities'][0]['candidates']
         except (KeyError, TypeError) as e:
             self.fail(
                 f'Failed to parse nodes from API response. Check response structure. Error: {e}. Response: {response}'
