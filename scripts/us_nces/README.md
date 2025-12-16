@@ -31,7 +31,7 @@ This dataset has Population Estimates for the National Center for Education Stat
         gsutil cp -r /scripts/us_nces/demographics/school_district/input_files gs://unresolved_mcf/us_nces/demographics/school_district/semi_automation_input_files/
 
 ### Note:
-    The only manual part here is after downloading the input files and then uploading them to gcp bucket. Once they're uploaded, Each import requires its own sh command to copy the files from Google Cloud to a local folder called gcs_output/input_files. From there, a script automatically picks up these files to process them. Finally, it generates the output and saves it in gcs_output/output_files
+    The only manual part here is after downloading the input files and then uploading them to gcp bucket. Once they're uploaded, Each import requires its own sh command to copy the files from Google Cloud to a local folder called gcs_folder/input_files. From there, a script automatically picks up these files to process them. Finally, it generates the output and saves it in gcs_folder/output_files
 
 ### Script Execution Details
     private    :  python3 private_school/process.py
@@ -152,16 +152,16 @@ The attributes used for the import are as follows
      - The download.py script is the main script. It considers the import_name and year to be downloaded. It downloads, extracts and places the input csv in "input_files" folder under the desired school directory.
 
 #### MCFs and Template MCFs
-- private_school -> [private_school/gcs_output/output_files/us_nces_demographics_private_school.mcf]
-                    [private_school/gcs_output/output_files/us_nces_demographics_private_school.tmcf]
+- private_school -> [private_school/gcs_folder/output_files/us_nces_demographics_private_school.mcf]
+                    [private_school/gcs_folder/output_files/us_nces_demographics_private_school.tmcf]
 
 
-- district_school -> [school_district/gcs_output/output_files/us_nces_demographics_district_school.mcf],
-                     [school_district/gcs_output/output_files/us_nces_demographics_district_school.tmcf]
+- district_school -> [school_district/gcs_folder/output_files/us_nces_demographics_district_school.mcf],
+                     [school_district/gcs_folder/output_files/us_nces_demographics_district_school.tmcf]
 
 
-- public_school ->  [public_school/gcs_output/output_files/us_nces_demographics_public_school.mcf],
-                    [public_school/gcs_output/output_files/us_nces_demographics_public_school.tmcf]
+- public_school ->  [public_school/gcs_folder/output_files/us_nces_demographics_public_school.mcf],
+                    [public_school/gcs_folder/output_files/us_nces_demographics_public_school.tmcf]
 
 
 #### Cleaned Place
@@ -175,11 +175,11 @@ The attributes used for the import are as follows
 Cleaned data will be inside as a CSV file with the following paths.
 step 1 :
 - private_school:
-[private_school/gcs_output/output_place/us_nces_demographics_private_place.csv]
+[private_school/gcs_folder/output_place/us_nces_demographics_private_place.csv]
 - district_school:
-[school_district/gcs_output/output_place/us_nces_demographics_district_place.csv]
+[school_district/gcs_folder/output_place/us_nces_demographics_district_place.csv]
 - public_school:
-[public_school/gcs_output/output_place/us_nces_demographics_public_place.csv]
+[public_school/gcs_folder/output_place/us_nces_demographics_public_place.csv]
 
 step 2 : Use the command-line tool to do genmcf using the CSV and TMCF files.
 
@@ -189,18 +189,18 @@ step 3 : Update the file path in the textproto files for NCES_PrivateSchool, NCE
 
 
 If there are Duplicate School IDs present in School Place, they will be saved inside the same output path as that of csv and tmcf file.
-- [scripts/us_nces/demographics/private_school/gcs_output/output_place/dulicate_id_us_nces_demographics_private_place.csv]
-- [scripts/us_nces/demographics/school_district/gcs_output/output_place/dulicate_id_us_nces_demographics_district_place.csv]
-- [scripts/us_nces/demographics/public_school/gcs_output/output_place/dulicate_id_us_nces_demographics_public_place.csv]
+- [scripts/us_nces/demographics/private_school/gcs_folder/output_place/dulicate_id_us_nces_demographics_private_place.csv]
+- [scripts/us_nces/demographics/school_district/gcs_folder/output_place/dulicate_id_us_nces_demographics_district_place.csv]
+- [scripts/us_nces/demographics/public_school/gcs_folder/output_place/dulicate_id_us_nces_demographics_public_place.csv]
 
 
 #### Template MCFs Place
 - private_school:
-[private_school/gcs_output/output_place/us_nces_demographics_private_place.tmcf]
+[private_school/gcs_folder/output_place/us_nces_demographics_private_place.tmcf]
 - district_school:
-[school_district/gcs_output/output_place/us_nces_demographics_district_place.tmcf]
+[school_district/gcs_folder/output_place/us_nces_demographics_district_place.tmcf]
 - public_school:
-[public_school/gcs_output/output_place/us_nces_demographics_public_place.tmcf]
+[public_school/gcs_folder/output_place/us_nces_demographics_public_place.tmcf]
 
 ### Running Tests
 

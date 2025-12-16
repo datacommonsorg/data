@@ -27,31 +27,31 @@ logging.set_verbosity(logging.INFO)
 data_sources = [
     {
         "year":
-            "2020-2021",
+            "2021",
         "url":
             "https://docs.google.com/spreadsheets/d/1ovFJ2T0ZIpIcOZCUutE-aXiqGnXNgF1a/export?format=xlsx",
     },
     {
         "year":
-            "2017-2018",
+            "2018",
         "url":
             "https://civilrightsdata.ed.gov/assets/downloads/2017-2018/College-Prepatory-Exams/SAT-ACT/SAT-or-ACT-Participation-by-state.xlsx",
     },
     {
         "year":
-            "2015-2016",
+            "2016",
         "url":
             "https://civilrightsdata.ed.gov/assets/downloads/2015-2016/SAT-or-ACT-Participation-by-State.xlsx",
     },
     {
         "year":
-            "2013-2014",
+            "2014",
         "url":
             "https://civilrightsdata.ed.gov/assets/downloads/2013-2014/SAT-or-ACT-Participation-by-state.xlsx",
     },
     {
         "year":
-            "2011-2012",
+            "2012",
         "url":
             "https://civilrightsdata.ed.gov/assets/downloads/2011-2012/SAT%20or%20ACT/SAT-or-ACT-Participation-by-state.xlsx",
     },
@@ -67,17 +67,37 @@ def main(_):
     """
     logging.info(f"Starting download process for {len(data_sources)} files...")
 
+    if not os.path.exists(BASE_DOWNLOAD_DIR):
+        os.makedirs(BASE_DOWNLOAD_DIR)
+
     for item in data_sources:
-        # Create a unique subfolder for each download
-        unique_folder = f"{BASE_DOWNLOAD_DIR}"
-        
-        file_name = f"{item['year'].replace('-','_')}_sat_act_participation.xlsx"
+        # Create a unique subfolder for each download to isolate the downloaded file
+        unique_folder = os.path.join(BASE_DOWNLOAD_DIR, item["year"])
+        if not os.path.exists(unique_folder):
+            os.makedirs(unique_folder)
+
+        file_name = f"{item['year']}_sat_act_participation.xlsx"
 
         logging.info(
             f"Attempting download for {item['year']} data into '{unique_folder}'..."
         )
 
-        download_file(url=item["url"], output_folder=unique_folder, unzip=False, output_file_name=file_name)
+        download_file(url=item["url"], output_folder=unique_folder, unzip=False)
+
+        # Identify the downloaded file and rename it
+        downloaded_files = os.listdir(unique_folder)
+        if len(downloaded_files) == 1:
+            downloaded_file_name = downloaded_files[0]
+            downloaded_file_path = os.path.join(unique_folder,
+                                                downloaded_file_name)
+            renamed_file_path = os.path.join(BASE_DOWNLOAD_DIR, file_name)
+            os.rename(downloaded_file_path, renamed_file_path)
+            os.rmdir(unique_folder)  # Clean up the temporary unique folder
+        else:
+            logging.error(
+                f"Could not determine the downloaded file for year {item['year']}. "
+                f"Expected 1 file, but found {len(downloaded_files)} in '{unique_folder}'."
+            )
 
     logging.info("Download process complete.")
 

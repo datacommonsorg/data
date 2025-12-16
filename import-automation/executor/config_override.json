@@ -1,8 +1,5 @@
 {
     "configs":{
-        "gcp_project_id": "datcom-import-automation-prod",
-        "user_script_env": {
-            "EXISTING_STATVAR_MCF": "gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
-        }
+        "gcp_project_id": "datcom-import-automation-prod"
     }
 }

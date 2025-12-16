@@ -29,7 +29,7 @@ process_files() {
         year=$(echo "$filename" | cut -d'_' -f1)
 
         # Define the output path based on the year.
-        output_path="output_files/output_${year}"
+        output_path="output_files_state/output_${year}"
 
         # Construct the command from the manifest.
         CMD="python3 ../../../../tools/statvar_importer/stat_var_processor.py \
