@@ -75,7 +75,7 @@ lastDataRefreshDate: "{last_data_refresh_date}"
 
 AUTO_IMPORT_JOB_STAGE = "auto-import-job-stage"
 AUTO_IMPORT_JOB_STATUS = "auto-import-job-status"
-IMPORT_SUMMARY_FILE = "import_summary.txt"
+IMPORT_SUMMARY_FILE = "import_summary.json"
 STAGING_PATH = "staging"
 
 
@@ -829,7 +829,7 @@ class ImportExecutor:
             json.dumps(dataclasses.asdict(import_summary), default=str),
             os.path.join(output_dir, IMPORT_SUMMARY_FILE))
         # Add current version to the history of versions if import was successful.
-        if self.config.storage_version_history_filename and import_summary.status == ImportStatus.READY:
+        if self.config.storage_version_history_filename:
             history_filename = os.path.join(
                 output_dir, self.config.storage_version_history_filename)
             versions_history = [version]
@@ -947,6 +947,9 @@ class ImportExecutor:
                 import_summary.import_stats.get('mcf_data_size', 0) +
                 import_summary.import_stats.get('validation_data_size', 0))
             logging.info(import_summary)
+            self.uploader.upload_string(
+                json.dumps(dataclasses.asdict(import_summary), default=str),
+                os.path.join(output_dir, version, IMPORT_SUMMARY_FILE))
 
             if self.config.ignore_validation_status or validation_status:
                 import_summary.status = ImportStatus.READY
