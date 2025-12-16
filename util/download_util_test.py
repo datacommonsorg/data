@@ -38,20 +38,19 @@ class TestCounters(unittest.TestCase):
 
     def test_request_url(self):
         # Download URL with GET parameters
-        countries = download_util.request_url(
-            url='https://api.datacommons.org/v2/node',
+        response = download_util.request_url(
+            url='https://api.datacommons.org/v2/resolve',
             params={
-                'nodes': ['Earth'],
-                'property': '<-containedInPlace+{typeOf:Country}'
+                'nodes': ['india'],
+                'property': '<-description->dcid'
             },
             output='JSON')
-        self.assertTrue(isinstance(countries, dict))
+        self.assertTrue(isinstance(response, dict))
         try:
-            nodes = countries['data']['Earth']['arcs']['containedInPlace+'][
-                'nodes']
+          nodes = response['entities'][0]['candidates']
         except (KeyError, TypeError) as e:
             self.fail(
-                f'Failed to parse nodes from API response. Check response structure. Error: {e}. Response: {countries}'
+                f'Failed to parse nodes from API response. Check response structure. Error: {e}. Response: {response}'
             )
         country_dcids = [node.get('dcid', '') for node in nodes]
         self.assertIn('country/IND', country_dcids)
