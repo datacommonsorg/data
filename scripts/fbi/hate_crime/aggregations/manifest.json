@@ -20,7 +20,12 @@
             "source_files": [
                 "hate_crime_data/*"
             ],
-            "cron_schedule": "0 10 21 * *"
+            "cron_schedule": "0 10 21 * *",
+            "resource_limits": {
+                "cpu": 16,
+                "memory": 256,
+                "disk": 300
+            }
         }
     ]
 }
