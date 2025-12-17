@@ -17,7 +17,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "common_output.tmcf",
-                    "cleaned_csv": "output_files/output_*.csv"
+                    "cleaned_csv": "output_files_state/output_*.csv"
                 }
             ],
             "cron_schedule": "0 05 8,23 * *"

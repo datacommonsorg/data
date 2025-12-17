@@ -12,19 +12,24 @@
                 "process.py"
             ],
             "source_files": [
-                "gcs_output/input_files/*/*.csv"
+                "gcs_folder/input_files/*/*.csv"
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "gcs_output/output_files/us_nces_demographics_district_school.tmcf",
-                    "cleaned_csv": "gcs_output/output_files/us_nces_demographics_district_school.csv"
+                    "template_mcf": "gcs_folder/output_files/us_nces_demographics_district_school.tmcf",
+                    "cleaned_csv": "gcs_folder/output_files/us_nces_demographics_district_school.csv"
                 },
                 {
-                    "template_mcf": "gcs_output/output_place/us_nces_demographics_district_place.tmcf",
-                    "cleaned_csv": "gcs_output/output_place/us_nces_demographics_district_place.csv"
+                    "template_mcf": "gcs_folder/output_place/us_nces_demographics_district_place.tmcf",
+                    "cleaned_csv": "gcs_folder/output_place/us_nces_demographics_district_place.csv"
                 }
             ],
-            "cron_schedule": "30 3 3 3,6,9,12 *"
+            "cron_schedule": "30 3 3 3,6,9,12 *",
+            "resource_limits": {
+                "cpu": 16,
+                "memory": 256,
+                "disk": 300
+            }
         }
     ]
 }
