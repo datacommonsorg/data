@@ -80,6 +80,18 @@ main:
                 result: function_response
             - fail_workflow:
                 raise: ${e}
+    - update_import_version:
+        call: http.post
+        args:
+          url: ${function_url}
+          auth:
+            type: OIDC
+          body:
+            actionType: update_import_version
+            importName: ${args.importName}
+            version: 'staging'
+            reason: 'import-automation'
+        result: function_response
     - returnResult:
         return:
           jobId: ${jobId}
