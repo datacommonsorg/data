@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "IndiaNSS_HealthAilments",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://ndap.niti.gov.in/dataset/7300",
+            "provenance_description": "A quantitative dataset from the NSS Report No. 556 on Health in India, providing a profile of ailments, healthcare facility usage, and expenditures based on a survey",
+            "scripts": [
+                "download_script.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=indian_nss_health_ailments.csv --pv_map=indian_nss_health_ailments_pvmap.csv --places_resolved_csv=indian_nss_health_ailments_place_resolved.csv --config_file=indian_nss_health_ailments_metadata.csv --output_path=output/indianss_health_ailments_output"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/indianss_health_ailments_output.tmcf",
+                    "cleaned_csv": "output/indianss_health_ailments_output.csv"
+                }
+            ],
+            "source_files": [
+                "indian_nss_health_ailments.csv"
+            ],
+            "cron_schedule": "0 0 1 1 *"
+        }
+    ]
+}
