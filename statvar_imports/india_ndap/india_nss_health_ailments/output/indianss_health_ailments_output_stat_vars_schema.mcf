@@ -1,0 +1,16 @@
+Node: dcid:placeOfResidenceClassification
+typeOf: dcs:Property
+name: "placeOfResidenceClassification"
+domainIncludes: dcid:MedicalConditionIncident
+rangeIncludes: dcid:HumanSettlementClassificationEnum,dcid:LocationClassificationEnum
+
+Node: dcid:gender
+typeOf: dcs:Property
+name: "gender"
+domainIncludes: dcid:MedicalConditionIncident
+
+Node: dcid:medicalCondition
+typeOf: dcs:Property
+name: "medicalCondition"
+rangeIncludes: dcid:HealthOutcomeEnum,dcid:MedicalConditionIncidentTypeEnum,dcid:PollutantHealthRiskEnum
+
