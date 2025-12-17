@@ -42,7 +42,7 @@ class Step(abc.ABC):
 
     @abc.abstractmethod
     def run(self) -> None:
-        """Execute the step."""
+        """Execute the step. Raise an exception to signal failure."""
 
 
 class BaseStep(Step, abc.ABC):
