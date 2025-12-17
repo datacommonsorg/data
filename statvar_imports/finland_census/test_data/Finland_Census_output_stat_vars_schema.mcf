@@ -1,32 +1,17 @@
-Node: dcid:Years UpTo 15
-typeOf: dcid:AgeStatusEnum
-name: "Years  Up To  15"
-isProvisional: dcs:True
+Node: dcid:age
+typeOf: dcs:Property
+name: "age"
+rangeIncludes: dcid:ProvisionalNode
 
-Node: dcid:Years 15 To 64
-typeOf: dcid:AgeStatusEnum
-name: "Years  15  To  64"
-isProvisional: dcs:True
-
-Node: dcid:Years 65 Onwards
-typeOf: dcid:AgeStatusEnum
-name: "Years  65  Onwards"
-isProvisional: dcs:True
-
-Node: dcid:MeasuredPropertyEnum
+Node: dcid:MeasurementDenominatorEnum
 typeOf: schema:Class
 subClassOf: dcs:Enumeration
-name: "MeasuredPropertyEnum"
+name: "MeasurementDenominatorEnum"
 isProvisional: dcs:True
 
-Node: dcid:Age dependency ratio
-typeOf: dcid:MeasuredPropertyEnum
-name: "Age dependency ratio"
-isProvisional: dcs:True
-
-Node: dcid:Economic dependency ratio
-typeOf: dcid:MeasuredPropertyEnum
-name: "Economic dependency ratio"
+Node: dcid:Count_Person_15To64Years_Employed
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 15 To 64 Years_ Employed"
 isProvisional: dcs:True
 
 Node: dcid:Finnish
@@ -44,24 +29,32 @@ typeOf: dcid:USC_LanguageSpokenAtHomeEnum
 name: "Sami"
 isProvisional: dcs:True
 
-Node: dcid:LanguageOtherThanFinnishAndSwedishAndSami
+Node: dcid:FIN_OtherLanguages
 typeOf: dcid:USC_LanguageSpokenAtHomeEnum
-name: "Language Other Than Finnish And Swedish And Sami"
-isProvisional: dcs:True
-
-Node: dcid:ForeignCitizen
-typeOf: dcid:CitizenshipEnum
-name: "Foreign Citizen"
+name: "FIN_ Other Languages"
 isProvisional: dcs:True
 
 Node: dcid:placeOfBirth
 typeOf: dcs:Property
 name: "placeOfBirth"
 domainIncludes: dcid:Person
-rangeIncludes: dcid:NativityEnum,dcid:USC_PlaceOfBirthEnum
+rangeIncludes: dcid:Country,dcid:NativityEnum,dcid:USC_PlaceOfBirthEnum
+
+Node: dcid:originBackgroundType
+typeOf: dcs:Property
+name: "originBackgroundType"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:OriginBackgroundTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:OriginBackgroundTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "OriginBackgroundTypeEnum"
+isProvisional: dcs:True
 
 Node: dcid:ForeignBackground
-typeOf: dcid:CitizenshipEnum
+typeOf: dcid:OriginBackgroundTypeEnum
 name: "Foreign Background"
 isProvisional: dcs:True
 
@@ -70,29 +63,19 @@ typeOf: dcs:Property
 name: "religiousOrientation"
 domainIncludes: dcid:Person
 
-Node: dcid:Lutheran Church – Missouri Synod
+Node: dcid:FIN_OtherReligiousGroup
 typeOf: dcid:ReligionEnum
-name: "Lutheran  Church –  Missouri  Synod"
+name: "FIN_ Other Religious Group"
 isProvisional: dcs:True
 
-Node: dcid:Land area
-typeOf: dcid:MeasuredPropertyEnum
-name: "Land area"
+Node: dcid:NoReligiousAffiliation
+typeOf: dcid:ReligionEnum
+name: "No Religious Affiliation"
 isProvisional: dcs:True
 
-Node: dcid:Population density
-typeOf: dcid:MeasuredPropertyEnum
-name: "Population density"
-isProvisional: dcs:True
-
-Node: dcid:BornInAreaOfPopulation
-typeOf: dcid:NativityEnum
-name: "Born In Area Of Population"
-isProvisional: dcs:True
-
-Node: dcid:BornNotInStateOfResidence
-typeOf: dcid:NativityEnum
-name: "Born Not In State Of Residence"
+Node: dcid:NotBornInStateOfResidence
+typeOf: dcid:Country
+name: "Not Born In State Of Residence"
 isProvisional: dcs:True
 
 Node: dcid:AreaOfBirth
@@ -114,11 +97,6 @@ Node: dcid:PeriUrban
 typeOf: dcid:CountyClassificationEnum
 name: "Peri Urban"
 isProvisional: dcs:True
-
-Node: dcid:placeOfResidenceClassification
-typeOf: dcs:Property
-name: "placeOfResidenceClassification"
-rangeIncludes: dcid:HumanSettlementClassificationEnum,dcid:LocationClassificationEnum
 
 Node: dcid:LocalCentreRural
 typeOf: dcid:CountyClassificationEnum
