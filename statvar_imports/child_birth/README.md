@@ -2,7 +2,8 @@
 
 The data set contains USA birth data.
 
-Download:
+###Download:
+
 Data download URL : `https://data.cdc.gov/api/views/hmz2-vwda/rows.csv?accessType=DOWNLOAD`
 
 ###Execution steps :
@@ -12,6 +13,13 @@ To Download, run:
 `python3 download_util_script.py --download_url=https://data.cdc.gov/api/views/hmz2-vwda/rows.csv?accessType=DOWNLOAD --output_folder=input_files/`
 
 Note : The downloaded file will be saved as "input_files/*.csv"
+
+### Autorefresh type
+
+This import uses a fully automated refresh process.
+
+-----
+
 
 ###How to run:
 
