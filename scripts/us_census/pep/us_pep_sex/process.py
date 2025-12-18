@@ -1092,9 +1092,11 @@ class PopulationEstimateBySex:
                 value_vars=['Count_Person_Male', 'Count_Person_Female'],
                 var_name="SV",
                 value_name="Observation")
-            subset_cols = ['Year', 'geo_ID', 'Measurement_Method','SV']
-	    # 2. Drop duplicates based on those columns, keeping the first occurrence
-            final_df.drop_duplicates(subset=subset_cols, keep='first', inplace=True)
+            subset_cols = ['Year', 'geo_ID', 'Measurement_Method', 'SV']
+            # 2. Drop duplicates based on those columns, keeping the first occurrence
+            final_df.drop_duplicates(subset=subset_cols,
+                                     keep='first',
+                                     inplace=True)
             final_df.to_csv(self._cleaned_csv_file_path, index=False)
             sv_list = ['Count_Person_Female', 'Count_Person_Male']
             self._generate_mcf(sv_list)
