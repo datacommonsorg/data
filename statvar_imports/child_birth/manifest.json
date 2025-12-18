@@ -20,7 +20,7 @@
                     "cleaned_csv": "output_files/Child_birth.csv"
                 }
             ],
-            "cron_schedule": "0 07 * * 2"
+            "cron_schedule": "0 07 1,15 * *"
         }
     ]
 }
