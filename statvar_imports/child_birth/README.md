@@ -24,9 +24,9 @@ This import uses a fully automated refresh process.
 ###How to run:
 
 python3 stat_var_processor.py 
---input_data=../../statvar_imports/child_birth/input_files/*.csv -
--pv_map=../../statvar_imports/child_birth/<filename_of_pvmap> 
---places_resolved_csv=../../statvar_imports/child_birth/place_mapping.csv 
+--input_data=../../statvar_imports/child_birth/input_files/*.csv 
+--pv_map=../../statvar_imports/child_birth/<filename_of_pvmap> 
+--places_resolved_csv=../../statvar_imports/child_birth/places_resolved.csv 
 --config_file=../../statvar_imports/child_birth/<filename_of_metadata> 
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
 --output_path=../../statvar_imports/child_birth/output_files/child_birth
