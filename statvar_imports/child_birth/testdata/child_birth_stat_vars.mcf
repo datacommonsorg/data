@@ -1,0 +1,9 @@
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=pvmap.csv --config_file=metadata.csv --places_resolved_csv=places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/child_birth" on 2025-12-18 15:26:28.918979
+
+Node: dcid:Count_BirthEvent_LiveBirth
+typeOf: dcid:StatisticalVariable
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalStatus: dcid:LiveBirth
+
