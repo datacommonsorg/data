@@ -5,7 +5,7 @@
             "rule_id": "no_deletions_for_monthly_rate",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT * FROM differ WHERE StatVar = 'Monthly_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate'",
+                "query": "SELECT * FROM differ WHERE variableMeasured = 'Monthly_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate'",
                 "condition": "DELETED = 0"
             }
         },
@@ -13,7 +13,7 @@
             "rule_id": "100_deletions_for_daily_rate",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT * FROM differ WHERE StatVar = 'Daily_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate'",
+                "query": "SELECT * FROM differ WHERE variableMeasured = 'Daily_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate'",
                 "condition": "DELETED <= 100"
             }
         },

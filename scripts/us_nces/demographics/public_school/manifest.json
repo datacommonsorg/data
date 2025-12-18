@@ -26,9 +26,9 @@
             ],
             "cron_schedule": "30 3 2 3,6,9,12 *",
             "resource_limits": {
-                "cpu": 8,
-                "memory": 128,
-                "disk": 200
+                "cpu": 32,
+                "memory": 512,
+                "disk": 300
             }
         }
     ]
