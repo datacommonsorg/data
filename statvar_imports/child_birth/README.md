@@ -29,7 +29,7 @@ python3 stat_var_processor.py
 --places_resolved_csv=../../statvar_imports/child_birth/places_resolved.csv 
 --config_file=../../statvar_imports/child_birth/<filename_of_metadata> 
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---output_path=../../statvar_imports/child_birth/output_files/child_birth
+--output_path=../../statvar_imports/child_birth/output_files/Child_birth
 
 
 ###Example
@@ -45,5 +45,5 @@ python3 stat_var_processor.py
 --places_resolved_csv=../../statvar_imports/child_birth/places_resolved.csv 
 --config_file=../../statvar_imports/child_birth/metadata.csv 
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---output_path=../../statvar_imports/child_birth/output_files/child_birth
+--output_path=../../statvar_imports/child_birth/output_files/Child_birth
 ```
