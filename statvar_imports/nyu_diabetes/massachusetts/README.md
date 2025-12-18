@@ -30,8 +30,8 @@ The workflow for this data import involves one step: Processing file.
 This import is **not** designed to be autorefreshed. The data is downloaded manually. Any future updates will require repeating the manual download steps.
 
 1. From the source URL, manually extract the relevant tables/data (e.g., by copy-pasting the data).
-3. Place the extracted input files in the `input_files/` directory( in gcs bucket).
-4. Run the `run.sh` script to download the data from gcs bucket.
+3. Place the extracted input files in the `unresolved_mcf/nyu_diabetes/massachusetts/input_files/` directory( in gcs bucket).
+4. Run the `download.sh` script to download the data from gcs bucket.
 5. The downloaded data will be available in the `input_files/` directory in local.
 
 #### Step 2: Process the Files

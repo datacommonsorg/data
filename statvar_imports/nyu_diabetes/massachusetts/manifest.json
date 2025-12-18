@@ -20,7 +20,13 @@
             ],
             "source_files": [
                 "input_files/Massachusetts-Diabetes-data.csv"
-            ]
+            ],
+            "cron_schedule": "0 1 6 * *",
+            "resource_limits": {
+                "cpu": 16,
+                "memory": 128,
+                "disk": 300
+            }
 
         }
     ]
