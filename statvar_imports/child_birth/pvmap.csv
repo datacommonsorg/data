@@ -1,0 +1,10 @@
+key,p1,v1,p2,v2,,,,
+Number of Live Births,medicalStatus,LiveBirth,populationType,BirthEvent,measuredProperty,count,statType,measuredValue
+Number of Deaths,populationType,MortalityEvent,statType,measuredValue,measuredProperty,count,,
+Number of Infant Deaths,populationType,MortalityEvent,age,YearsUpto1,statType,measuredValue,measuredProperty,count
+Month,Month,{Data},,,,,,
+Year,Year,{Data},,,,,,
+Data Value,value,{Number},observationDate,{Month} {Year},,,,
+Monthly,observationPeriod,P1M,,,,,,
+12 Month-ending,observationPeriod,P1Y,,,,,,
+State,observationAbout,{Data},,,,,,
