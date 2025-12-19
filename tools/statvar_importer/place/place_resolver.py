@@ -65,7 +65,8 @@ flags.DEFINE_list(
 )
 flags.DEFINE_string('resolve_output_csv', '', 'Output csv with place dcids.')
 flags.DEFINE_list('resolve_place_names', [], 'List of place names to resolve.')
-flags.DEFINE_string('maps_key', '', 'Google Maps API key')
+flags.DEFINE_string('maps_key', os.environ.get('MAPS_API_KEY', ''),
+                    'Google Maps API key')
 flags.DEFINE_string(
     'resolve_config',
     '',
@@ -110,7 +111,8 @@ flags.DEFINE_string(
     'https://autopush.api.datacommons.org/v2/resolve',
     'DC API URL for resolve.',
 )
-flags.DEFINE_string('resolve_api_key', '', 'DC API key for resolve.')
+flags.DEFINE_string('resolve_api_key', os.environ.get('DC_API_KEY', ''),
+                    'DC API key for resolve.')
 flags.DEFINE_integer(
     'dc_api_batch_size',
     3,
@@ -132,7 +134,7 @@ from counters import Counters
 from config_map import ConfigMap
 from download_util import request_url
 from dc_api_wrapper import dc_api_batched_wrapper, dc_api_resolve_placeid
-from dc_api_wrapper import dc_api_resolve_latlng
+from dc_api_wrapper import dc_api_resolve_latlng, dc_api_get_node_property
 from place_name_matcher import PlaceNameMatcher
 from property_value_cache import PropertyValueCache
 
@@ -173,7 +175,8 @@ class PlaceResolver:
         self._counters = Counters(counters_dict)
         self._log_every_n = self._config.get('log_every_n', 10)
         if not self._maps_api_key:
-            self._maps_api_key = self._config.get('maps_api_key', '')
+            self._maps_api_key = self._config.get(
+                'maps_api_key', os.environ.get('MAPS_API_KEY'))
         self._place_name_matcher = PlaceNameMatcher(
             config=self._config.get_configs())
         self._load_cache()
@@ -871,11 +874,9 @@ class PlaceResolver:
 
         # Lookup property values for the dcids from DC API.
         for prop, dcids in lookup_dcids_by_prop.items():
-            dc_api_args = {'prop': prop, 'out': True}
-            dc_api_resp = dc_api_batched_wrapper(
-                function=dc.get_property_values,
+            dc_api_resp = dc_api_get_node_property(
                 dcids=dcids,
-                args=dc_api_args,
+                prop=prop,
                 config=self._config.get_configs(),
             )
             self._counters.add_counter(f'dc-api-prop-value-{prop}-lookups',
@@ -883,7 +884,7 @@ class PlaceResolver:
             # Cache the property:value for the response.
             for dcid, prop_values in dc_api_resp.items():
                 if prop_values:
-                    self._set_cache_value('', {'dcid': dcid, prop: prop_values})
+                    self._set_cache_value('', {'dcid': dcid, **prop_values})
 
         # Check if the values match the filter.
         filtered_places = {}
@@ -1077,11 +1078,9 @@ class PlaceResolver:
                     parent_dcids.update(_get_value_set(parents))
 
         if lookup_dcids:
-            dc_api_args = {'prop': 'containedInPlace', 'out': True}
-            dc_api_resp = dc_api_batched_wrapper(
-                function=dc.get_property_values,
+            dc_api_resp = dc_api_get_node_property(
                 dcids=lookup_dcids,
-                args=dc_api_args,
+                prop='containedInPlace',
                 config=self._config.get_configs(),
             )
             self._counters.add_counter(
@@ -1089,8 +1088,9 @@ class PlaceResolver:
                 len(lookup_dcids))
             # Cache the property:value for the response.
             for dcid, prop_values in dc_api_resp.items():
-                if prop_values:
-                    values_set = _get_value_set(prop_values)
+                val = prop_values.get('containedInPlace')
+                if val:
+                    values_set = _get_value_set(val)
                     self._set_cache_value(
                         '',
                         {

@@ -30,7 +30,12 @@
             "source_files": [
                 "gcs_output/input_files/*/*"
             ],
-            "cron_schedule": "0 05 * * 1"
+            "cron_schedule": "0 05 * * 1",
+            "resource_limits": {
+                "cpu": 16,
+                "memory": 128,
+                "disk": 500
+            }
         }
     ]
 }
