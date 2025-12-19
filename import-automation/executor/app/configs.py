@@ -34,7 +34,7 @@ class ExecutorConfig:
 
     # ID of the Google Cloud project that hosts the executor. The project
     # needs to enable App Engine and Cloud Scheduler.
-    gcp_project_id: str = 'datcom-import-automation'
+    gcp_project_id: str = 'datcom-import-automation-prod'
     # ID of the Google Cloud project that stores generated CSVs and MCFs. The
     # project needs to enable Cloud Storage and gives the service account the
     # executor uses sufficient permissions to read and write the bucket below.
@@ -55,6 +55,10 @@ class ExecutorConfig:
     # Name of the Cloud Storage bucket to store the generated data files
     # for importing to dev.
     storage_dev_bucket_name: str = 'unresolved_mcf'
+    # DataCommons API key
+    dc_api_key: str = ''
+    # Gemini API key
+    gemini_api_key: str = ''
     # Executor output prefix in the storage_dev_bucket_name bucket.
     storage_executor_output_prefix: str = 'datcom-dev-imports'
     # Name of the file that specifies the most recently generated data files
@@ -74,6 +78,10 @@ class ExecutorConfig:
     # The content of latest_version.txt would be a single line of
     # '2020_07_15T12_07_17_365264_07_00'.
     storage_version_filename: str = 'latest_version.txt'
+    # GCP secret name containg import config.
+    import_config_secret: str = 'import-config'
+    # Config override file.
+    config_override_file: str = ''
     # File with list of historical versions with the most recent at the top
     storage_version_history_filename: str = 'version_history.txt'
     # Name of the file that contains the import_metadata_mcf for the import.
@@ -118,7 +126,7 @@ class ExecutorConfig:
     # Location of the GCS bucket volume mount.
     gcs_volume_mount_dir: str = '/tmp/gcs'
     # Clean up GCS volume mount dir.
-    cleanup_gcs_volume_mount: bool = True
+    cleanup_gcs_volume_mount: bool = False
     # Location of the local git data repo.
     local_repo_dir: str = '/data'
     # Location of the import tool jar.
@@ -130,7 +138,10 @@ class ExecutorConfig:
     # Arguments for the user script
     user_script_args: List[str] = ()
     # Environment variables for the user script
-    user_script_env: dict = None
+    user_script_env: dict = dataclasses.field(default_factory=lambda: {
+        "EXISTING_STATVAR_MCF":
+            "gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+    })
     # Invoke import tool genmcf.
     invoke_import_tool: bool = True
     # Invoke differ tool.

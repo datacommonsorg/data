@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "USCensus_GenderIncomeInequality",
+            "import_name": "GenderIncomeInequality",
             "curator_emails": [
                 "support@datacommons.org"
             ],

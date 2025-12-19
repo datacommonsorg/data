@@ -151,6 +151,7 @@ def create_job_request(import_name: str, import_config: dict, import_spec: dict,
 
     resources["cpu"] = resources["cpu"] * 1000
     resources["memory"] = resources["memory"] * 1024
+    schedule = import_spec.get('cron_schedule')
     import_config_string = json.dumps(import_config)
     job_name = import_name.split(':')[1]
     job_name = job_name.replace("_", "-").lower()
@@ -159,7 +160,8 @@ def create_job_request(import_name: str, import_config: dict, import_spec: dict,
         "importName": import_name,
         "importConfig": import_config_string,
         "resources": resources,
-        "timeout": timeout
+        "timeout": timeout,
+        "schedule": schedule
     }
     argument_string = json.dumps(argument_payload)
     final_payload = {
@@ -198,7 +200,7 @@ def execute_cloud_batch_job(project_id: str, location: str, job_name: str,
     runnable.container.image_uri = image_uri
     runnable.container.commands = [
         f"--import_name={import_name}",
-        f'--import_config={json.dumps({"gcs_project_id": project_id, "storage_prod_bucket_name": gcs_bucket, "spanner_project_id": project_id, "spanner_instance_id": spanner_instance, "spanner_database_id": spanner_db})}'
+        f'--import_config={json.dumps({"gcp_project_id": project_id, "gcs_project_id": project_id, "storage_prod_bucket_name": gcs_bucket, "spanner_project_id": project_id, "spanner_instance_id": spanner_instance, "spanner_database_id": spanner_db})}'
     ]
 
     # We can specify what resources are requested by a task.
@@ -206,8 +208,14 @@ def execute_cloud_batch_job(project_id: str, location: str, job_name: str,
     resources.cpu_milli = 4000  # 4 CPUs
     resources.memory_mib = 32768  # 32 GB
 
+    # Mount gcs bucket as a volume.
+    volume = batch_v1.Volume()
+    volume.gcs.remote_path = gcs_bucket
+    volume.mount_path = '/tmp/gcs'
+
     task = batch_v1.TaskSpec()
     task.runnables = [runnable]
+    task.volumes = [volume]
     task.compute_resource = resources
     task.max_retry_count = 1
     task.max_run_duration = "1800s"

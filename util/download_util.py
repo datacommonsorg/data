@@ -26,10 +26,13 @@ This contains the following utilities to download data from URLS:
   Example:
   To download a list of all countries in DataCommons:
      import download_util
-     countries_dcid = download_util.request_url(
-                          url='https://api.datacommons.org/node/places-in',
-                          params={'dcids': 'Earth', 'placeType': 'Country'},
-                          output='JSON')
+     countries = download_util.request_url(
+            url='https://api.datacommons.org/v2/node',
+            params={
+                'nodes': ['Earth'],
+                'property': '<-containedInPlace+{typeOf:Country}'
+            },
+            output='JSON')
 
   To download a list of all countries in DataCommons:
      response_json = download_util.request_url(

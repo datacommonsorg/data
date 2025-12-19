@@ -30,6 +30,7 @@
 GCP_PROJECT=${GCP_PROJECT:-"datcom-ci"}
 REGION="us-central1"
 GCS_BUCKET=${GCS_BUCKET:-"datcom-import-test"}
+GCS_MOUNT_PATH="/tmp/gcs"
 SPANNER_INSTANCE=${SPANNER_INSTANCE:-"datcom-spanner-test"}
 SPANNER_DB=${SPANNER_DB:-"dc-test-db"}
 SCRIPT_DIR=$(realpath $(dirname $0))
@@ -241,7 +242,7 @@ function build_docker {
   img=$DOCKER_IMAGE
   [[ "$RUN_MODE" != "docker" ]] && img="$ARTIFACT_REGISTRY/$DOCKER_IMAGE"
   run_cmd docker buildx build --build-context data=$DATA_REPO \
-    --build-arg build_type=local -f Dockerfile . \
+    --build-arg build_type=local --build-arg CACHE_BUSTER=$(date +%s) -f Dockerfile . \
     -t $img
 
   if [[ "$RUN_MODE" != "docker" ]]; then
@@ -297,7 +298,7 @@ function add_import_version_notes {
 function get_import_config {
   # Create an import config file based on default configs.
   # Drop any references to local files for cloud jobs
-  options="gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET spanner_project_id:$GCP_PROJECT spanner_instance_id:$SPANNER_INSTANCE spanner_database_id:$SPANNER_DB"
+  options="gcp_project_id:$GCP_PROJECT gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET spanner_project_id:$GCP_PROJECT spanner_instance_id:$SPANNER_INSTANCE spanner_database_id:$SPANNER_DB"
   config_file=${config_file:-"$TMP_DIR/config-overrides-$IMPORT_NAME.json"}
   ignore_params="/tmp"
   [[ "$RUN_MODE" == "executor" ]] && ignore_params="NONE"
@@ -370,7 +371,7 @@ function run_import_cloud {
   IMPORT_CONFIG=${IMPORT_CONFIG//\\/}
   run_cmd gcloud --project=$GCP_PROJECT run jobs create $job_name \
     --add-volume name=datcom-volume,type=cloud-storage,bucket=$GCS_BUCKET \
-    --add-volume-mount volume=datcom-volume,mount-path=/tmp/gcs \
+    --add-volume-mount volume=datcom-volume,mount-path=$GCS_MOUNT_PATH \
     --region=$REGION \
     --image $DOCKER_REMOTE:latest \
     --args="^|^--import_name=$IMPORT_DIR:$IMPORT_NAME|--import_config=$IMPORT_CONFIG|--enable_cloud_logging" \
@@ -470,6 +471,14 @@ function get_cloud_batch_config {
           "cpuMilli": "${cpu_milli}",
           "memoryMib": "${memory_mib}"
         },
+        "volumes": [
+          {
+            "gcs": {
+              "remotePath": "${GCS_BUCKET}"
+            },
+            "mountPath": "${GCS_MOUNT_PATH}"
+          }
+        ]
       },
       "taskCount": 1,
       "parallelism": 1
