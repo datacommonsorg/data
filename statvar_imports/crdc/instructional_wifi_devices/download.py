@@ -8,7 +8,7 @@ from pathlib import Path
 import time
 import datetime
 import logging # Import the logging module
-
+import sys
 # --- NEW: Simplified Logging Configuration ---
 # Configure logging to output ONLY to the console (StreamHandler)
 # and set the log format.
@@ -29,7 +29,7 @@ try:
     logging.info(f"Output directory created/verified: {OUTPUT_DIR.resolve()}")
 except Exception as e:
     logging.fatal(f"FATAL: Could not create output directory {OUTPUT_DIR.resolve()}. Exiting. Error: {e}")
-    exit(1)
+    sys.exit(1)
 
 
 # --- Configuration ---
@@ -153,5 +153,4 @@ for year in YEAR_STRINGS:
     process_crdc_data(year)
     # Be polite to the server by adding a small delay between large downloads
     time.sleep(2)
-
 logging.info("\nAll tasks complete.")

@@ -22,5 +22,5 @@
 
 `python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=common_pvmap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --config_file=common_metadata.csv  --output_path=output/instructional_wifi_devices`
 
-#### Refresh type: Fully Autorefresh 
+#### Refresh type: Fully Autorefresh
 

@@ -16,7 +16,7 @@
                       "template_mcf": "output/instructional_wifi_devices.tmcf",
                       "cleaned_csv": "output/instructional_wifi_devices.csv"
                   }
-                          ],
+                ],
             "source_files": [
                 "input_files/*.csv"
             ],
