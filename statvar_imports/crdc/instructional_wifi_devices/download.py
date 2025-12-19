@@ -19,6 +19,14 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+OUTPUT_DIR = Path("input_files")
+# Create the output directory if it doesn't exist
+try:
+    OUTPUT_DIR.mkdir(exist_ok=True)
+    logging.info(f"Output directory created/verified: {OUTPUT_DIR.resolve()}")
+except Exception as e:
+    logging.fatal(f"FATAL: Could not create output directory {OUTPUT_DIR.resolve()}. Exiting. Error: {e}")
+    exit(1)
 
 # --- Configuration ---
 BASE_URL = "https://civilrightsdata.ed.gov/assets/ocr/docs/"
@@ -52,19 +60,6 @@ def generate_year_strings(start_year=2020):
     return list(reversed(year_strings))
 
 YEAR_STRINGS = generate_year_strings()
-
-OUTPUT_DIR = Path("input_files")
-
-# Create the output directory if it doesn't exist
-try:
-    OUTPUT_DIR.mkdir(exist_ok=True)
-    logging.info(f"Output directory created/verified: {OUTPUT_DIR.resolve()}")
-except Exception as e:
-    logging.fatal(f"FATAL: Could not create output directory {OUTPUT_DIR.resolve()}. Exiting. Error: {e}")
-    exit(1)
-
-logging.info(f"Checking for data from academic years (newest first): {', '.join(YEAR_STRINGS)}")
-
 
 def get_full_year(year_string):
     """
