@@ -8,3 +8,4 @@ places_within,country/POL
 #word_delimiter,''
 skip_rows,1
 header_rows,5
+dc_api_root,https://api.datacommons.org
