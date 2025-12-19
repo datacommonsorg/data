@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 import os
 import re
 import io
@@ -86,6 +87,7 @@ def add_year_ncesid_column(file_path: str, year: int):
 def download_url_with_retry(zip_url):
     """Handles downloading the ZIP content with retries and status checks."""
     try:
+        logging.info(f"URL: {zip_url}")
         head_response = requests.head(zip_url, allow_redirects=True, timeout=10)
         head_response.raise_for_status() 
         response = requests.get(zip_url, stream=True, timeout=180)
@@ -127,7 +129,7 @@ def download_and_extract_zip(start_year: int, end_year: int):
                 logging.info(f"Extracted: {output_filename}")
                 add_year_ncesid_column(output_path, end_year)
 
-        logging.info("Downloading completed...!")
+        logging.info(f"Downloading completed for the Url: {url} and saved into the {output_path}.")
 
     except Exception as e:
         logging.error(f"Error downloading {zip_name}: {e}")
