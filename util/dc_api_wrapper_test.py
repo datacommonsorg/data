@@ -69,7 +69,6 @@ class TestDCAPIWrapper(unittest.TestCase):
             dcids,
             {
                 'dc_api_batch_size': 2,
-                'dc_api_root': 'http://autopush.api.datacommons.org/',
             },
         )
         self.assertTrue(response is not None)
