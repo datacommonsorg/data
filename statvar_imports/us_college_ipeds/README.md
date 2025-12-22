@@ -20,16 +20,14 @@ The import process involves downloading raw data, preprocessing it to remove des
 *   **Input files**:
     *   Raw data files are downloaded from the source and stored in a GCP bucket.
     *   `run.sh`: Downloads the raw data files from the GCP bucket into the `input_files/` directory.
-    *   `preprocess.py`: A Python script that preprocesses the raw CSV files by removing the first 3 (header description) and last 3 (footer description) rows from each file.
     *   `metadata.csv`: Configuration file for the data processing script.
     *   `pvmap.csv`: Property-value mapping files used by the processor.
 
 *   **Transformation pipeline**:
     1.  Raw data files are downloaded from the source to a GCP bucket.
-    2.  `run.sh` script is executed to download these files to the `input_files/` directory.
-    3.  `preprocess.py` is run on each raw CSV file in `input_files/` to remove descriptive header and footer rows.
-    4.  The `stat_var_processor.py` tool (from the parent `tools` directory) is run on each cleaned CSV file, as specified in `manifest.json`.
-    5.  The processor uses the `metadata.csv` and respective `pvmap.csv` files to generate the final `output.csv` and `output.tmcf` files, placing them in the `output/` directory.
+    2.  `run.sh` script is executed to download these files to the `input_files/` directory and remove descriptive header rows
+    3.  The `stat_var_processor.py` tool is run on each cleaned CSV file, as specified in `manifest.json`.
+    4.  The processor uses the `metadata.csv` and respective `pvmap.csv` files to generate the final `output.csv` and `output.tmcf` files, placing them in the `output/` directory.
 
 *   **Data Quality Checks**:
     *   Linting is performed on the generated output files using the DataCommons import tool.
@@ -43,7 +41,7 @@ This import is considered semi-automated because the initial data download to th
 
 *   **Steps**:
     1.  Ensure raw data files are in the specified GCP bucket.
-    2.  Execute `run.sh` to fetch the raw data files into `input_files/` and then preprocess them using `preprocess.py`.
+    2.  Execute `run.sh` to fetch the raw data files into `input_files/` and then it preprocess the input files to remove descriptive header rows
     3.  The `stat_var_processor.py` tool is then run (as defined in `manifest.json`) on the preprocessed files to generate the final artifacts for ingestion.
 
 ---
@@ -54,7 +52,7 @@ To run the import manually, follow these steps in order.
 
 ### Step 1: Download Raw Data (via `run.sh`)
 
-This script downloads the raw data from the GCP bucket to the `input_files/` directory and then preprocesses them using `preprocess.py`.
+This script downloads the raw data from the GCP bucket to the `input_files/` directory and then preprocesses them to remove descriptive header rows
 
 **Usage**:
 
