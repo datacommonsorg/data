@@ -1,0 +1,27 @@
+Node: dcid:Count_Person_Female_ConventionalTeachingCatholic_TechnicalGraduateDegree
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+schoolManagementRegime: dcid:ConventionalTeachingCatholic
+teachingExperience: dcid:TechnicalGraduateDegree
+
+Node: dcid:Count_Person_Male_ConventionalTeachingBrotherhood_4Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+schoolManagementRegime: dcid:ConventionalTeachingBrotherhood
+teachingExperience: [4 Years]
+
+Node: dcid:Qualifications_Count_Teacher_Male_4OrLessYears
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+measurementQualifier: dcid:Qualifications
+statType: dcid:measuredValue
+gender: dcid:Male
+teachingExperience: [- 4 Years]
+
