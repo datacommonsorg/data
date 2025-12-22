@@ -18,8 +18,8 @@ import os
 import csv
 import difflib
 import pandas as pd
-from india.geo.states import IndiaStatesMapper
-from india.formatters import CodeFormatter
+from scripts.india.geo.states import IndiaStatesMapper
+from scripts.india.formatters import CodeFormatter
 # Some of the names don't match correctly while using
 # difflib library. This is used to force the match manually.
 
@@ -43,16 +43,6 @@ MANUAL_OVERRIDE = {
         "jangoan": "jangaon",
         "hanumakonda": "hanamkonda"
     },
-}
-
-# On Wikidata for some of the districts they
-# have created a new entity. Since our DCID
-# is based on the WikidataId, we cant use the new ones
-# as it will change the mapping and hence this override.
-
-WIKIDATAID_DCID_OVERRIDE_MAPPING = {
-    "Q15399": "Q28169759",
-    "Q107016021": "Q1470987"
 }
 
 
@@ -90,7 +80,7 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         lgdCensus2011Code = lgddata_row["LGDCensus2011Code"]
 
         # Lets match them based on census code 2011 first
-        if lgdCensus2011Code is not None and lgdCensus2011Code != "":
+        if lgdCensus2011Code is not None and lgdCensus2011Code is not "":
             wikidata_df_row = self.wikidata_df.loc[
                 self.wikidata_df["census2011Code"] == lgdCensus2011Code]
             if wikidata_df_row.empty:
@@ -162,10 +152,6 @@ class LocalGovermentDirectoryDistrictsDataLoader:
             axis=1)
 
     def _get_district_dcid(self, row):
-        # checkif there is override, then use it
-        if row["WikiDataId"] in WIKIDATAID_DCID_OVERRIDE_MAPPING:
-            return "wikidataId/{0}".format(
-                WIKIDATAID_DCID_OVERRIDE_MAPPING[row["WikiDataId"]])
         return "wikidataId/{0}".format(row["WikiDataId"])
 
     def _get_state_dcid(self, row):
