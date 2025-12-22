@@ -2,7 +2,7 @@ key,,,,,,,,,,
 YEAR,observationDate,{Number},populationType,Student,assessmentType,AdvancedPlacement,enrollmentStatus,EnrolledInEducationOrTraining,,
 ncesid,observationAbout,ncesId/{Data},,,,,,,,
 SCH_APENR_IND,,,,,,,,,,
-SCH_APCOURSES,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Course,enrollmentStatus,"""""",juvenileJusticeFacilityStatus,""""""
+SCH_APCOURSES,,,,,,,,,,
 SCH_APSEL,,,,,,,,,,
 SCH_APENR_HI_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,HispanicOrLatino,,
 SCH_APENR_HI_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,HispanicOrLatino,,
@@ -67,26 +67,26 @@ SCH_APSCIENR_LEP_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,la
 SCH_APSCIENR_IDEA_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,disabilityStatus,WithDisability,schoolSubject,Science
 SCH_APSCIENR_IDEA_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,disabilityStatus,WithDisability,schoolSubject,Science
 SCH_APCOMPENR_IND,,,,,,,,,,
-SCH_APCOMPENR_HI_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,HispanicOrLatino,schoolSubject,ComputerScience
-SCH_APCOMPENR_HI_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,HispanicOrLatino,schoolSubject,ComputerScience
-SCH_APCOMPENR_AM_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,AmericanIndianOrAlaskaNative,schoolSubject,ComputerScience
-SCH_APCOMPENR_AM_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,AmericanIndianOrAlaskaNative,schoolSubject,ComputerScience
-SCH_APCOMPENR_AS_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,Asian,schoolSubject,ComputerScience
-SCH_APCOMPENR_AS_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,Asian,schoolSubject,ComputerScience
-SCH_APCOMPENR_HP_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,NativeHawaiianOrOtherPacificIslanderAlone,schoolSubject,ComputerScience
-SCH_APCOMPENR_HP_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,NativeHawaiianOrOtherPacificIslanderAlone,schoolSubject,ComputerScience
-SCH_APCOMPENR_BL_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,BlackOrAfricanAmericanAlone,schoolSubject,ComputerScience
-SCH_APCOMPENR_BL_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,BlackOrAfricanAmericanAlone,schoolSubject,ComputerScience
-SCH_APCOMPENR_WH_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,White,schoolSubject,ComputerScience
-SCH_APCOMPENR_WH_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,White,schoolSubject,ComputerScience
-SCH_APCOMPENR_TR_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,TwoOrMoreRaces,schoolSubject,ComputerScience
-SCH_APCOMPENR_TR_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,TwoOrMoreRaces,schoolSubject,ComputerScience
-TOT_APCOMPENR_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,,,schoolSubject,ComputerScience
-TOT_APCOMPENR_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,,,schoolSubject,ComputerScience
-SCH_APCOMPENR_LEP_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,languageFluencyLevel,LimitedEnglishProficient,schoolSubject,ComputerScience
-SCH_APCOMPENR_LEP_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,languageFluencyLevel,LimitedEnglishProficient,schoolSubject,ComputerScience
-SCH_APCOMPENR_IDEA_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,disabilityStatus,WithDisability,schoolSubject,ComputerScience
-SCH_APCOMPENR_IDEA_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,disabilityStatus,WithDisability,schoolSubject,ComputerScience
+SCH_APCOMPENR_HI_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,HispanicOrLatino,schoolSubject,Computer
+SCH_APCOMPENR_HI_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,HispanicOrLatino,schoolSubject,Computer
+SCH_APCOMPENR_AM_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,AmericanIndianOrAlaskaNative,schoolSubject,Computer
+SCH_APCOMPENR_AM_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,AmericanIndianOrAlaskaNative,schoolSubject,Computer
+SCH_APCOMPENR_AS_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,Asian,schoolSubject,Computer
+SCH_APCOMPENR_AS_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,Asian,schoolSubject,Computer
+SCH_APCOMPENR_HP_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,NativeHawaiianOrOtherPacificIslanderAlone,schoolSubject,Computer
+SCH_APCOMPENR_HP_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,NativeHawaiianOrOtherPacificIslanderAlone,schoolSubject,Computer
+SCH_APCOMPENR_BL_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,BlackOrAfricanAmericanAlone,schoolSubject,Computer
+SCH_APCOMPENR_BL_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,BlackOrAfricanAmericanAlone,schoolSubject,Computer
+SCH_APCOMPENR_WH_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,White,schoolSubject,Computer
+SCH_APCOMPENR_WH_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,White,schoolSubject,Computer
+SCH_APCOMPENR_TR_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,TwoOrMoreRaces,schoolSubject,Computer
+SCH_APCOMPENR_TR_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,TwoOrMoreRaces,schoolSubject,Computer
+TOT_APCOMPENR_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,,,schoolSubject,Computer
+TOT_APCOMPENR_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,,,schoolSubject,Computer
+SCH_APCOMPENR_LEP_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,languageFluencyLevel,LimitedEnglishProficient,schoolSubject,Computer
+SCH_APCOMPENR_LEP_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,languageFluencyLevel,LimitedEnglishProficient,schoolSubject,Computer
+SCH_APCOMPENR_IDEA_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,disabilityStatus,WithDisability,schoolSubject,Computer
+SCH_APCOMPENR_IDEA_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,disabilityStatus,WithDisability,schoolSubject,Computer
 ,,,,,,,,,,
 M_AME_7_MATH_AP,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,AmericanIndianOrAlaskaNative,schoolSubject,Mathematics
 M_ASI_7_MATH_AP,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,Asian,schoolSubject,Mathematics
@@ -129,3 +129,24 @@ F_2_OR_MORE_7_SCIENCE_AP,value,{Number},#Filter,Allow=int(value) >= 0,gender,Fem
 F_TOT_7_SCIENCE_AP,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,,,schoolSubject,Science
 F_DIS_7_SCIENCE_AP,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,disabilityStatus,WithDisability,schoolSubject,Science
 F_LEP_7_SCIENCE_AP,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,languageFluencyLevel,LimitedEnglishProficient,schoolSubject,Science
+,,,,,,,,,,
+M_AME_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,AmericanIndianOrAlaskaNative,schoolSubject,Mathematics
+M_ASI_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,Asian,schoolSubject,Mathematics
+M_HIS_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,HispanicOrLatino,schoolSubject,Mathematics
+M_BLA_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,BlackOrAfricanAmericanAlone,schoolSubject,Mathematics
+M_WHI_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,White,schoolSubject,Mathematics
+M_HI_PAC_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,NativeHawaiianOrOtherPacificIslanderAlone,schoolSubject,Mathematics
+M_2_OR_MORE_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,TwoOrMoreRaces,schoolSubject,Mathematics
+M_TOT_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,,,schoolSubject,Mathematics
+M_DIS_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,disabilityStatus,WithDisability,schoolSubject,Mathematics
+M_LEP_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,languageFluencyLevel,LimitedEnglishProficient,schoolSubject,Mathematics
+F_AME_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,AmericanIndianOrAlaskaNative,schoolSubject,Mathematics
+F_ASI_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,Asian,schoolSubject,Mathematics
+F_HIS_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,HispanicOrLatino,schoolSubject,Mathematics
+F_BLA_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,BlackOrAfricanAmericanAlone,schoolSubject,Mathematics
+F_WHI_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,White,schoolSubject,Mathematics
+F_HI_PAC_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,NativeHawaiianOrOtherPacificIslanderAlone,schoolSubject,Mathematics
+F_2_OR_MORE_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,TwoOrMoreRaces,schoolSubject,Mathematics
+F_TOT_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,,,schoolSubject,Mathematics
+F_DIS_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,disabilityStatus,WithDisability,schoolSubject,Mathematics
+F_LEP_7_MATH_ENR,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,languageFluencyLevel,LimitedEnglishProficient,schoolSubject,Mathematics

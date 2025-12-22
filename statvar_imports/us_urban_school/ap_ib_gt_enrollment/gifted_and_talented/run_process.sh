@@ -7,17 +7,11 @@ set -e
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 cd "$SCRIPT_DIR"
 
-# Default to not downloading
-DOWNLOAD=false
-
-# Parse command line arguments
-while [[ "$#" -gt 0 ]]; do
-    case $1 in
-        --download) DOWNLOAD=true ;;
-        *) echo "Unknown parameter passed: $1"; exit 1 ;;
-    esac
-    shift
-done
+# Always download data
+echo "--- Starting download of GT data ---"
+python3 ../download_ap_ib_gt.py --gt
+python3 ../download_2015_16.py --gt
+echo "--- Download complete ---"
 
 # Function to process each downloaded data file.
 process_files() {
@@ -39,28 +33,21 @@ process_files() {
         output_path="output_files/output_${year}_gt"
 
         # Construct the command from the manifest.
-        CMD_ARRAY=(python3 ../../../tools/statvar_importer/stat_var_processor.py \
-            --input_data="${input_file}" \
-            --pv_map=../config/gt_enrollment_pvmap.csv \
-            --config_file=../config/common_metadata.csv \
-            --output_path="${output_path}" \
-            --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf)
+        CMD="python3 ../../../../../data/tools/statvar_importer/stat_var_processor.py"
+        CMD+=" --input_data=\"${input_file}\""
+        CMD+=" --pv_map=../config/gt_enrollment_pvmap.csv"
+        CMD+=" --config_file=../config/common_metadata.csv"
+        CMD+=" --output_path=\"${output_path}\""
+        CMD+=" --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+
         # Print and execute the command.
         echo "Executing command for year ${year}:"
-        printf "%q " "${CMD_ARRAY[@]}"; echo
-        "${CMD_ARRAY[@]}"
+        echo "$CMD"
+        eval "$CMD"
         echo "--- Finished processing for year ${year} ---"
     done
 }
 
-if [ "$DOWNLOAD" = true ]; then
-    echo "--- Starting download of GT data ---"
-    python3 ../download_ap_ib_gt.py --gt
-    python3 ../download_2015_16.py --gt
-    echo "--- Download complete ---"
-fi
-
 echo "--- Starting processing of files ---"
 process_files
 echo "--- All processing complete ---"
-

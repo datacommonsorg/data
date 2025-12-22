@@ -27,9 +27,7 @@ from download_ap_ib_gt import DATA_CONFIGS, SCRIPT_DIR, add_year_column, get_fil
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_boolean('ap', False, 'Download Advanced Placement data for 2015-16 only.')
-flags.DEFINE_boolean('ib', False, 'Download International Baccalaureate data for 2015-16 only.')
-flags.DEFINE_boolean('gt', False, 'Download Gifted and Talented data for 2015-16 only.')
+
 
 
 def download_and_extract_2015_16(data_type, output_dir):

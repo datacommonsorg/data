@@ -441,43 +441,38 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
         with zipfile.ZipFile(zip_content) as zip_ref:
             if data_type == 'ap' and config_key in ["2009-10", "2011-12"]:
                 logging.info(f"--- Applying special AP subject handling for {config_key} data ---")
-                subjects_to_find = ["Mathematics", "Science"]
-                found_files = 0
                 
+                math_file_name, science_file_name = None, None
+                
+                # Find the math and science files in the zip
                 for name in zip_ref.namelist():
                     normalized_name = name.lower()
-                    
-                    is_ap_file = False
-                    for pattern in keywords:
-                        if re.search(pattern, name, re.IGNORECASE):
-                            is_ap_file = True
-                            break
-                    
-                    if not is_ap_file or '$' in name:
-                        continue
-
-                    for subject in subjects_to_find:
-                        if subject.lower() in normalized_name:
-                            logging.info(f"Found AP {subject} file: {name}")
-                            
-                            output_name = f"{final_year}_{output_name_fragment}_{subject}.xlsx"
-                            if not name.lower().endswith(".xlsx"):
-                                output_name = f"{final_year}_{output_name_fragment}_{subject}.csv"
-                                
-                            output_path = output_dir / output_name
-
-                            with zip_ref.open(name) as source_file:
-                                with open(output_path, 'wb') as f:
-                                    f.write(source_file.read())
-                            
-                            add_year_column(output_path, final_year)
-                            logging.info(f"Successfully extracted and saved: {output_path.name}")
-                            found_files += 1
-                            break
+                    # For 2011-12, the files are more specific, e.g., "...Students who are taking AP Science.xlsx"
+                    if 'ap' in normalized_name and 'mathematics' in normalized_name and 'students' in normalized_name and not '$' in name:
+                        math_file_name = name
+                    elif 'ap' in normalized_name and 'science' in normalized_name and 'students' in normalized_name and not '$' in name:
+                        science_file_name = name
                 
-                if found_files == 0:
-                    logging.warning(f"Could not find any AP Mathematics or Science files for {config_key}.")
+                if not math_file_name or not science_file_name:
+                    logging.warning(f"Could not find both AP Mathematics and Science files for {config_key}.")
+                    return
+                    
+                # Read both files into pandas dataframes
+                with zip_ref.open(math_file_name) as math_file:
+                    df_math = pd.read_excel(math_file)
+                with zip_ref.open(science_file_name) as science_file:
+                    df_science = pd.read_excel(science_file)
                 
+                # Merge the dataframes
+                merged_df = pd.merge(df_math, df_science, on=['LEAID', 'SCHID'], how='outer')
+                
+                # Save the merged dataframe
+                output_name = f"{final_year}_{output_name_fragment}.xlsx"
+                output_path = output_dir / output_name
+                merged_df.to_excel(output_path, index=False)
+                
+                add_year_column(output_path, final_year)
+                logging.info(f"Successfully extracted, merged, and saved: {output_path.name}")
                 return
 
             output_name = f"{final_year}_{output_name_fragment}.csv"
