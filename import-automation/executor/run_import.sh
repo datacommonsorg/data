@@ -242,7 +242,7 @@ function build_docker {
   img=$DOCKER_IMAGE
   [[ "$RUN_MODE" != "docker" ]] && img="$ARTIFACT_REGISTRY/$DOCKER_IMAGE"
   run_cmd docker buildx build --build-context data=$DATA_REPO \
-    --build-arg build_type=local -f Dockerfile . \
+    --build-arg build_type=local --build-arg CACHE_BUSTER=$(date +%s) -f Dockerfile . \
     -t $img
 
   if [[ "$RUN_MODE" != "docker" ]]; then
@@ -298,7 +298,7 @@ function add_import_version_notes {
 function get_import_config {
   # Create an import config file based on default configs.
   # Drop any references to local files for cloud jobs
-  options="gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET spanner_project_id:$GCP_PROJECT spanner_instance_id:$SPANNER_INSTANCE spanner_database_id:$SPANNER_DB"
+  options="gcp_project_id:$GCP_PROJECT gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET spanner_project_id:$GCP_PROJECT spanner_instance_id:$SPANNER_INSTANCE spanner_database_id:$SPANNER_DB"
   config_file=${config_file:-"$TMP_DIR/config-overrides-$IMPORT_NAME.json"}
   ignore_params="/tmp"
   [[ "$RUN_MODE" == "executor" ]] && ignore_params="NONE"
