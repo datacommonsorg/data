@@ -1,4 +1,4 @@
-key,p1,v1,p2,v2,,,,
+key,p1,v1,p2,v2,p3,v3,p4,v4
 Number of Live Births,medicalStatus,LiveBirth,populationType,BirthEvent,measuredProperty,count,statType,measuredValue
 Number of Deaths,populationType,MortalityEvent,statType,measuredValue,measuredProperty,count,,
 Number of Infant Deaths,populationType,MortalityEvent,age,YearsUpto1,statType,measuredValue,measuredProperty,count
