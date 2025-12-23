@@ -69,7 +69,7 @@ This step involves running the `stat_var_processor.py` for each input file as sp
 **Usage**:
 
 ```shell
-python3 ../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=scripts_statvar_stat_vars.mcf --input_data=input_files/controlOfInstitution_data.csv --pv_map=controlOfInstitution_pvmap.csv --config_file=metadata.csv --output_path=output/ControlOfInstitution_output
+python3 ../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=scripts_statvar_stat_vars.mcf --input_data=input_files/controlOfInstitution_data.csv --pv_map=pvmap/controlOfInstitution_pvmap.csv --config_file=metadata.csv --output_path=output/ControlOfInstitution_output
 ```
 
 _Note: This command needs to be executed for all 10 input files as defined in `manifest.json` under the `scripts` tag._

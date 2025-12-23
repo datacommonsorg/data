@@ -11,7 +11,7 @@
             "run.sh",
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=scripts_statvar_stat_vars.mcf --input_data=input_files/controlOfInstitution_data.csv --pv_map=pvmap/controlOfInstitution_pvmap.csv --config_file=metadata.csv --output_path=output/ControlOfInstitution_output",
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=scripts_statvar_stat_vars.mcf --input_data=input_files/degreeOfUrbanization_data.csv --pv_map=pvmap/degreeOfUrbanization_pvmap.csv --config_file=metadata.csv --output_path=output/DegreeOfUrbanization_output",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=scripts_statvar_stat_vars.mcf --input_data=input_files/highestDegreeOffered_data.csv --pv_map=pvmap/highestDegreeOffered_pvmap.csv --config_file=metadata.csv --output_path=output/HIghestDegreeOffered_output",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=scripts_statvar_stat_vars.mcf --input_data=input_files/highestDegreeOffered_data.csv --pv_map=pvmap/highestDegreeOffered_pvmap.csv --config_file=metadata.csv --output_path=output/HighestDegreeOffered_output",
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=scripts_statvar_stat_vars.mcf --input_data=input_files/historicallyBlackCollegeOrUniversity_data.csv --pv_map=pvmap/historicallyBlackCollegeOrUniversity_pvmap.csv --config_file=metadata.csv --output_path=output/HistoricallyBlackCollegeOrUniversity_output",
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=scripts_statvar_stat_vars.mcf --input_data=input_files/institutionalCategory_data.csv --pv_map=pvmap/institutionalCategory_pvmap.csv --config_file=metadata.csv --output_path=output/institutionalCategory_output",
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=scripts_statvar_stat_vars.mcf --input_data=input_files/levelOfInstitution_data.csv --pv_map=pvmap/levelOfInstitution_pvmap.csv --config_file=metadata.csv --output_path=output/LevelOfInstitution_output",
@@ -31,7 +31,7 @@
                 },
                 {
                     "template_mcf": "output/highestDegreeOffered_output.tmcf",
-                    "cleaned_csv": "output/HIghestDegreeOffered_output.csv"
+                    "cleaned_csv": "output/HighestDegreeOffered_output.csv"
                 },
                 {
                     "template_mcf": "output/HistoricallyBlackCollegeOrUniversity_output.tmcf",
