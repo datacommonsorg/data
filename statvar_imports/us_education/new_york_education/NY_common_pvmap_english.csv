@@ -7,7 +7,7 @@ Grade:7,schoolGradeLevel,SchoolGrade7,,,,,,
 Grade:8,schoolGradeLevel,SchoolGrade8,,,,,,
 Grade:All Grades,#ignore,ignore,,,,,,
 Number Tested,value,{Number},populationType,Student,assessmentType,AcademicAssessmentEvent,,
-Mean Scale Score,value,{Number},populationType,Student,statType,meanValue,,
+Mean Scale Score,value,{Number},populationType,Student,statType,meanValue,measuredProperty,score
 Num Level 1,value,{Number},populationType,Student,assessmentScoreLevel,AssessmentLevel1,,
 Pct Level 1,value,{Number},populationType,Student,assessmentScoreLevel,AssessmentLevel1,measurementDenominator,-assessmentScoreLevel
 Num Level 2,value,{Number},populationType,Student,assessmentScoreLevel,AssessmentLevel2,,
