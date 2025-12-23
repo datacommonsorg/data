@@ -34,7 +34,12 @@
                 "input_files/usbts_tract_household_transportation_2017_input.csv",
                 "input_files/usbts_tract_household_transportation_2009_input.csv"
             ],
-            "cron_schedule": "0 1 6 * *"
+            "cron_schedule": "0 1 6 * *",
+            "resource_limits": {
+                "cpu": 16,
+                "memory": 128,
+                "disk": 300
+            }
         }
     ]
 }

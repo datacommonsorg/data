@@ -15,12 +15,16 @@
 
 import unittest
 import os
+import sys
 import tempfile
 import pandas as pd
 import json
 
-from tools.import_validation.report_generator import ReportGenerator
-from tools.import_validation.result import ValidationResult, ValidationStatus
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _SCRIPT_DIR)
+
+from report_generator import ReportGenerator
+from result import ValidationResult, ValidationStatus
 
 
 class TestReportGenerator(unittest.TestCase):
