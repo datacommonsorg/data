@@ -518,7 +518,11 @@ def _clean_county_2022_csv_file(df: pd.DataFrame,
             '3': '2021',
             '4': '2022',
             '5': '2023',
-            '6': '2024'
+            '6': '2024',
+            '7': '2025',
+            '8': '2026',
+            '9': '2027',
+            '10': '2028'
         }
         df = df.replace({'YEAR': conversion_of_year_to_value})
         df.insert(6, 'geo_ID', 'geoId/', True)
