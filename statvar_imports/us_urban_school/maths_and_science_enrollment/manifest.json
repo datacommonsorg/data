@@ -48,6 +48,11 @@
           "cleaned_csv": "output_files/physics_2018_onwards_output.csv"
         }
       ],
+      "resource_limits": {
+                "cpu": 16,
+                "memory": 64,
+                "disk": 500
+      },
       "cron_schedule": "0 04 * * 5"
     }
   ]
