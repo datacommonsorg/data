@@ -91,7 +91,7 @@ flags.DEFINE_list(
 )
 flags.DEFINE_string(
     'existing_statvar_mcf',
-    '',
+    os.environ.get('EXISTING_STATVAR_MCF', ''),
     'StatVar MCF files for any existing stat var nodes to be resused.',
 )
 flags.DEFINE_string(
@@ -307,7 +307,7 @@ def get_default_config() -> dict:
             ' ',
         # Enable merged cells that inherit PVs from previous column.
         'merged_cells':
-            True,
+            sys.maxsize,
         # List of default PVS maps to lookup column values if there is no map for a
         # column name.
         'default_pv_maps': ['GLOBAL'],
@@ -370,7 +370,7 @@ def get_default_config() -> dict:
             True,
         # Settings for DC API.
         'dc_api_root':
-            'http://autopush.api.datacommons.org',
+            'http://api.datacommons.org',
         'dc_api_use_cache':
             False,
         'dc_api_batch_size':
