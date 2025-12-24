@@ -9,16 +9,21 @@
             "provenance_description": "The Storm Events Database contains data on weather events in the United States, sourced from the National Oceanic and Atmospheric Administration (NOAA)'s National Centers for Environmental Information (NCEI). It includes information on event types, dates, locations, damages, and other related details.",
             "scripts": [
                 "download_script.py",
-                "shard_noaa_data.py",
-                "process_noaa_data.py"
+                "process_noaa_data_withoutapi.py",
+                "add_geoids_to_storm_data.py"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "output/storm_noaa.tmcf",
-                    "cleaned_csv": "noaa_storm_output/cleaned_storm_data.csv"
+                    "cleaned_csv": "cleaned_storm_data_with_geoids.csv"
                 }
             ],
-            "cron_schedule": "30 05 * * 1"
+            "cron_schedule": "30 05 * * 1",
+            "resource_limits": {
+                "cpu": 16,
+                "memory": 256,
+                "disk": 300
+            }
         }
     ]
 }
