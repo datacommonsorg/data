@@ -1,0 +1,81 @@
+Node: dcid:studentAvailabilityMode
+typeOf: dcs:Property
+name: "studentAvailabilityMode"
+domainIncludes: dcid:PublicSchool
+rangeIncludes: dcid:StudentAvailabilityModeEnum
+isProvisional: dcs:True
+
+Node: dcid:StudentAvailabilityModeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "StudentAvailabilityModeEnum"
+isProvisional: dcs:True
+
+Node: dcid:StudentInRemote
+typeOf: dcid:StudentAvailabilityModeEnum
+name: "Student In Remote"
+isProvisional: dcs:True
+
+Node: dcid:teacherInstructionMode
+typeOf: dcs:Property
+name: "teacherInstructionMode"
+domainIncludes: dcid:PublicSchool
+rangeIncludes: dcid:TeacherInstructionModeEnum
+isProvisional: dcs:True
+
+Node: dcid:TeacherInstructionModeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "TeacherInstructionModeEnum"
+isProvisional: dcs:True
+
+Node: dcid:TeachersInRemote
+typeOf: dcid:TeacherInstructionModeEnum
+name: "Teachers In Remote"
+isProvisional: dcs:True
+
+Node: dcid:instructionMode
+typeOf: dcs:Property
+name: "instructionMode"
+domainIncludes: dcid:PublicSchool
+rangeIncludes: dcid:InstructionModeEnum
+isProvisional: dcs:True
+
+Node: dcid:InstructionModeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "InstructionModeEnum"
+isProvisional: dcs:True
+
+Node: dcid:InstructionInHybrid
+typeOf: dcid:InstructionModeEnum
+name: "Instruction In Hybrid"
+isProvisional: dcs:True
+
+Node: dcid:medicalCondition
+typeOf: dcs:Property
+name: "medicalCondition"
+domainIncludes: dcid:PublicSchool
+
+Node: dcid:StudentInPersonAndRemote
+typeOf: dcid:StudentAvailabilityModeEnum
+name: "Student In Person And Remote"
+isProvisional: dcs:True
+
+Node: dcid:InstructionInRemote
+typeOf: dcid:InstructionModeEnum
+name: "Instruction In Remote"
+isProvisional: dcs:True
+
+Node: dcid:StudentInPerson
+typeOf: dcid:StudentAvailabilityModeEnum
+name: "Student In Person"
+isProvisional: dcs:True
+
+Node: dcid:prop
+typeOf: dcs:Property
+name: "prop"
+domainIncludes: dcid:PublicSchool
+rangeIncludes: dcid:Property
+isProvisional: dcs:True
+
