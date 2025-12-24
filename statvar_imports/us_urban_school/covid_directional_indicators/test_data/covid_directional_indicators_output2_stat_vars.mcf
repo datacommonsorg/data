@@ -1,0 +1,144 @@
+# Auto generated using command: "/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/../../../tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/input_files/2021_COVID_Directional_Indicators.csv,/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/input_files/2022_COVID_Directional_Indicators.csv --pv_map=/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/covid_directional_indicators_pv_map2.csv --config_file=/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/covid_directional_indicators_metadata.csv --places_resolved_csv=/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/place_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=/usr/local/google/home/dhhhanushree/urban_org_covid/data/statvar_imports/us_urban_school/covid_directional_indicators/output_files/covid_directional_indicators_output2" on 2025-11-10 10:27:13.749049
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_ConditionCOVID19_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:COVID19
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Value_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+prop: dcid:value
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Value_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+prop: dcid:value
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInHybrid_ConditionCOVID19_Value_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInHybrid
+medicalCondition: dcid:COVID19
+prop: dcid:value
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_StudentInPerson_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+studentAvailabilityMode: dcid:StudentInPerson
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_Value_StudentInPersonAndRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+prop: dcid:value
+studentAvailabilityMode: dcid:StudentInPersonAndRemote
+teacherInstructionMode: dcid:TeachersInRemote
+
+Node: dcid:Count_PublicSchool_InstructionInRemote_ConditionCOVID19_Value_StudentInRemote_TeachersInRemote
+typeOf: dcid:StatisticalVariable
+populationType: dcid:PublicSchool
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+instructionMode: dcid:InstructionInRemote
+medicalCondition: dcid:COVID19
+prop: dcid:value
+studentAvailabilityMode: dcid:StudentInRemote
+teacherInstructionMode: dcid:TeachersInRemote
+

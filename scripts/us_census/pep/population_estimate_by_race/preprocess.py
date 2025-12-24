@@ -517,7 +517,12 @@ def _clean_county_2022_csv_file(df: pd.DataFrame,
             '2': '2020',
             '3': '2021',
             '4': '2022',
-            '5': '2023'
+            '5': '2023',
+            '6': '2024',
+            '7': '2025',
+            '8': '2026',
+            '9': '2027',
+            '10': '2028'
         }
         df = df.replace({'YEAR': conversion_of_year_to_value})
         df.insert(6, 'geo_ID', 'geoId/', True)
@@ -1006,12 +1011,15 @@ class CensusUSAPopulationByRace:
                 "Count_Person_AsianOrPacificIslander",\
                 "Count_Person_TwoOrMoreRaces","Count_Person_NonWhite"]]
             df_before_2000 = self.df[self.df["Year"] < 2000]
-            df_county_after_2000 = self.df[(self.df["Year"] >= 2000) &
-                                           (self.df["geo_ID"] != "country/USA")
-                                           & (self.df["geo_ID"].str.len() > 9)]
+            df_county_after_2000 = self.df[
+                (self.df["Year"] >= 2000) &
+                (self.df["geo_ID"] != "country/USA") &
+                (self.df["geo_ID"].str.len() > 9)].drop_duplicates(
+                    subset=['Year', 'geo_ID'], keep='last')
             df_national_state_2000 = self.df[(self.df["Year"] >= 2000) & (
                 (self.df["geo_ID"].str.len() <= 9) |
-                (self.df["geo_ID"] == "country/USA"))]
+                (self.df["geo_ID"] == "country/USA"))].drop_duplicates(
+                    subset=['Year', 'geo_ID'], keep='last')
             df_before_2000.to_csv(os.path.join(
                 self.cleaned_csv_file_path,
                 "USA_Population_Count_by_Race_before_2000.csv"),

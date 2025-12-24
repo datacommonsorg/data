@@ -1,0 +1,100 @@
+State,Year,Month,Period,Indicator,Data Value
+UNITED STATES,2023,January,Monthly,Number of Live Births,299000
+UNITED STATES,2023,February,Monthly,Number of Live Births,271000
+UNITED STATES,2023,March,Monthly,Number of Live Births,299000
+UNITED STATES,2023,April,Monthly,Number of Live Births,279000
+UNITED STATES,2023,May,Monthly,Number of Live Births,299000
+UNITED STATES,2023,June,Monthly,Number of Live Births,303000
+UNITED STATES,2023,July,Monthly,Number of Live Births,312000
+UNITED STATES,2023,August,Monthly,Number of Live Births,322000
+UNITED STATES,2023,September,Monthly,Number of Live Births,305000
+UNITED STATES,2023,October,Monthly,Number of Live Births,309000
+UNITED STATES,2023,November,Monthly,Number of Live Births,298000
+UNITED STATES,2023,December,Monthly,Number of Live Births,297000
+UNITED STATES,2024,January,Monthly,Number of Live Births,297000
+UNITED STATES,2024,February,Monthly,Number of Live Births,283000
+UNITED STATES,2024,March,Monthly,Number of Live Births,298000
+UNITED STATES,2024,April,Monthly,Number of Live Births,289000
+UNITED STATES,2024,May,Monthly,Number of Live Births,302000
+UNITED STATES,2024,June,Monthly,Number of Live Births,291000
+UNITED STATES,2023,January,Monthly,Number of Deaths,289000
+UNITED STATES,2023,February,Monthly,Number of Deaths,249000
+UNITED STATES,2023,March,Monthly,Number of Deaths,269000
+UNITED STATES,2023,April,Monthly,Number of Deaths,252000
+UNITED STATES,2023,May,Monthly,Number of Deaths,253000
+UNITED STATES,2023,June,Monthly,Number of Deaths,241000
+UNITED STATES,2023,July,Monthly,Number of Deaths,247000
+UNITED STATES,2023,August,Monthly,Number of Deaths,250000
+UNITED STATES,2023,September,Monthly,Number of Deaths,245000
+UNITED STATES,2023,October,Monthly,Number of Deaths,259000
+UNITED STATES,2023,November,Monthly,Number of Deaths,258000
+UNITED STATES,2023,December,Monthly,Number of Deaths,284000
+UNITED STATES,2024,January,Monthly,Number of Deaths,295000
+UNITED STATES,2024,February,Monthly,Number of Deaths,255000
+UNITED STATES,2024,March,Monthly,Number of Deaths,263000
+UNITED STATES,2024,April,Monthly,Number of Deaths,249000
+UNITED STATES,2024,May,Monthly,Number of Deaths,249000
+UNITED STATES,2024,June,Monthly,Number of Deaths,239000
+UNITED STATES,2023,January,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,February,Monthly,Number of Infant Deaths,1500
+UNITED STATES,2023,March,Monthly,Number of Infant Deaths,1800
+UNITED STATES,2023,April,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,May,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,June,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,July,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,August,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,September,Monthly,Number of Infant Deaths,1600
+UNITED STATES,2023,October,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2023,November,Monthly,Number of Infant Deaths,1600
+UNITED STATES,2023,December,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2024,January,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2024,February,Monthly,Number of Infant Deaths,1600
+UNITED STATES,2024,March,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2024,April,Monthly,Number of Infant Deaths,1600
+UNITED STATES,2024,May,Monthly,Number of Infant Deaths,1700
+UNITED STATES,2024,June,Monthly,Number of Infant Deaths,1600
+UNITED STATES,2023,January,12 Month-ending,Number of Live Births,3673000
+UNITED STATES,2023,February,12 Month-ending,Number of Live Births,3668000
+UNITED STATES,2023,March,12 Month-ending,Number of Live Births,3661000
+UNITED STATES,2023,April,12 Month-ending,Number of Live Births,3650000
+UNITED STATES,2023,May,12 Month-ending,Number of Live Births,3652000
+UNITED STATES,2023,June,12 Month-ending,Number of Live Births,3649000
+UNITED STATES,2023,July,12 Month-ending,Number of Live Births,3639000
+UNITED STATES,2023,August,12 Month-ending,Number of Live Births,3626000
+UNITED STATES,2023,September,12 Month-ending,Number of Live Births,3619000
+UNITED STATES,2023,October,12 Month-ending,Number of Live Births,3621000
+UNITED STATES,2023,November,12 Month-ending,Number of Live Births,3612000
+UNITED STATES,2023,December,12 Month-ending,Number of Live Births,3594000
+UNITED STATES,2024,January,12 Month-ending,Number of Live Births,3591000
+UNITED STATES,2024,February,12 Month-ending,Number of Live Births,3603000
+UNITED STATES,2024,March,12 Month-ending,Number of Live Births,3601000
+UNITED STATES,2024,April,12 Month-ending,Number of Live Births,3612000
+UNITED STATES,2024,May,12 Month-ending,Number of Live Births,3615000
+UNITED STATES,2024,June,12 Month-ending,Number of Live Births,3603000
+UNITED STATES,2023,January,12 Month-ending,Number of Deaths,3198000
+UNITED STATES,2023,February,12 Month-ending,Number of Deaths,3158000
+UNITED STATES,2023,March,12 Month-ending,Number of Deaths,3159000
+UNITED STATES,2023,April,12 Month-ending,Number of Deaths,3165000
+UNITED STATES,2023,May,12 Month-ending,Number of Deaths,3164000
+UNITED STATES,2023,June,12 Month-ending,Number of Deaths,3157000
+UNITED STATES,2023,July,12 Month-ending,Number of Deaths,3144000
+UNITED STATES,2023,August,12 Month-ending,Number of Deaths,3136000
+UNITED STATES,2023,September,12 Month-ending,Number of Deaths,3130000
+UNITED STATES,2023,October,12 Month-ending,Number of Deaths,3123000
+UNITED STATES,2023,November,12 Month-ending,Number of Deaths,3113000
+UNITED STATES,2023,December,12 Month-ending,Number of Deaths,3097000
+UNITED STATES,2024,January,12 Month-ending,Number of Deaths,3103000
+UNITED STATES,2024,February,12 Month-ending,Number of Deaths,3109000
+UNITED STATES,2024,March,12 Month-ending,Number of Deaths,3103000
+UNITED STATES,2024,April,12 Month-ending,Number of Deaths,3099000
+UNITED STATES,2024,May,12 Month-ending,Number of Deaths,3095000
+UNITED STATES,2024,June,12 Month-ending,Number of Deaths,3094000
+UNITED STATES,2023,January,12 Month-ending,Number of Infant Deaths,20400
+UNITED STATES,2023,February,12 Month-ending,Number of Infant Deaths,20500
+UNITED STATES,2023,March,12 Month-ending,Number of Infant Deaths,20600
+UNITED STATES,2023,April,12 Month-ending,Number of Infant Deaths,20600
+UNITED STATES,2023,May,12 Month-ending,Number of Infant Deaths,20600
+UNITED STATES,2023,June,12 Month-ending,Number of Infant Deaths,20600
+UNITED STATES,2023,July,12 Month-ending,Number of Infant Deaths,20400
+UNITED STATES,2023,August,12 Month-ending,Number of Infant Deaths,20300
+UNITED STATES,2023,September,12 Month-ending,Number of Infant Deaths,20300

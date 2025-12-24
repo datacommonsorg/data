@@ -53,7 +53,7 @@ class NCESDistrictSchool(USEducation):
 
 if __name__ == '__main__':
     try:
-        logging.set_verbosity(2)
+        logging.set_verbosity(logging.INFO)
         logging.info("Main Method Starts For School District ")
         gcs_output_dir_local = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "gcs_folder")

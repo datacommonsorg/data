@@ -318,7 +318,7 @@ class CensusUSACountryPopulation:
                                  ascending=False,
                                  inplace=True)
             # Data for 2020 exists in two sources, causing overlap. We'll eliminate duplicates
-            #self._df.drop_duplicates("Date", keep="last", inplace=True)
+            self._df.drop_duplicates("Date", keep="last", inplace=True)
             self._df.drop(['date_range'], axis=1, inplace=True)
             float_col = self._df.select_dtypes(include=['float64'])
             for col in float_col.columns.values:

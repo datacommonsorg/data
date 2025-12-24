@@ -10,7 +10,7 @@
             "scripts": [
                 "download.sh",
                 "preprocess.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_data/final_input_data.csv --pv_map=CurrencyFAO_pv_map.csv --config_file=CurrencyFAO_metadata.csv --places_resolved_csv=CurrencyFAO_place_map.csv --output_path=output_files/CurrencyFAO_output"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_data/final_input_data.csv --pv_map=CurrencyFAO_pv_map.csv --config_file=CurrencyFAO_metadata.csv --places_resolved_csv=CurrencyFAO_place_map.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/CurrencyFAO_output"
             ],
             "source_files": [
                 "input_data/Exchange_rate_E_All_Data.csv"
