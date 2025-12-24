@@ -27,9 +27,6 @@ from download_ap_ib_gt import DATA_CONFIGS, SCRIPT_DIR, add_year_column, get_fil
 
 FLAGS = flags.FLAGS
 
-
-
-
 def download_and_extract_2015_16(data_type, output_dir):
     """
     Downloads the ZIP archive for 2015-16 and extracts the target file.

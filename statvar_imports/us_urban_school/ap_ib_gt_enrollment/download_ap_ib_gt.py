@@ -96,44 +96,26 @@ DATA_CONFIGS = {
 
 }
 
-
-
 HARDCODED_CONFIGS = {
-
     "2021-22": {"final_year": 2022},
-
     "2020-21": {"final_year": 2021},
-
     "2017-18": {"final_year": 2018},
-
     "2015-16": {"final_year": 2016},
-
     "2013-14": {"final_year": 2014},
-
     "2011-12": {"final_year": 2012},
-
     "2009-10": {"final_year": 2010}
 
 }
 
-
-
 SCRIPT_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
-
-
 
 def add_year_column(file_path, year):
 
     """
-
     Reads the file (CSV or XLSX), adds the 'YEAR' and 'ncesid' columns,
-
     and saves it back, using 'latin1' encoding for robustness.
-
     If the file is empty or contains no data rows, it is deleted.
-
     """
-
     logging.info(f"-> Starting post-processing for {file_path.name}")
 
     df = pd.DataFrame()
@@ -164,8 +146,6 @@ def add_year_column(file_path, year):
 
             return
 
-
-
         if df.empty:
 
             logging.warning(f"Warning: DataFrame is empty after reading {file_path.name}. Deleting empty file.")
@@ -174,13 +154,9 @@ def add_year_column(file_path, year):
 
             return
 
-
-
         # Add YEAR column
 
         df['YEAR'] = year
-
-
 
         # Create NCESID column
 
@@ -196,8 +172,6 @@ def add_year_column(file_path, year):
 
             logging.warning(f"-> Warning: Missing LEAID or SCHID columns for NCESID creation in {file_path.name}")
 
-
-
         # Reorder columns to place 'YEAR', 'ncesid', and 'JJ' (if present) at the beginning
 
         cols = df.columns.tolist()
@@ -208,25 +182,17 @@ def add_year_column(file_path, year):
 
             desired_first_cols.append('JJ')
 
-
-
         # Remove desired_first_cols from their original positions
 
         for col in desired_first_cols:
-
             if col in cols:
-
                 cols.remove(col)
-
-
 
         # Construct the new column order
 
         new_column_order = desired_first_cols + cols
 
         df = df[new_column_order]
-
-
 
         if file_path.suffix == '.xlsx':
 
@@ -236,11 +202,7 @@ def add_year_column(file_path, year):
 
             df.to_csv(file_path, index=False)
 
-            
-
         logging.info(f"-> Successfully added 'YEAR' and 'ncesid' columns to {file_path.name}")
-
-
 
     except Exception as e:
 
@@ -254,87 +216,40 @@ def add_year_column(file_path, year):
 
         raise RuntimeError(f"Failed to add year/ncesid column to {file_path.name}: {e}")
 
-
-
 def generate_future_configs(start_year):
 
     """
-
     Generates configuration dictionaries for future biennial CRDC years.
-
     """
-
     current_calendar_year = date.today().year
 
     generated_configs = {}
 
-    
-
     for year in range(start_year, current_calendar_year + 1):
-
         end_year = year + 1
-
         year_range_key = f"{year}-{end_year % 100:02d}"
 
-        
-
         if year_range_key in HARDCODED_CONFIGS:
-
             continue
-
-
 
         generated_configs[year_range_key] = {
 
             "final_year": end_year
-
         }
-
-        
 
     return generated_configs
 
-
-
 @retry(tries=3, delay=5, backoff=2)
 
-
-
 def download_url_with_retry(zip_url):
-
-
-
     """
-
-
-
     Handles downloading the ZIP content with retries and status checks.
-
-
-
     """
-
-
-
     head_response = requests.head(zip_url, allow_redirects=True, timeout=10)
-
-
-
     head_response.raise_for_status()
-
-
-
     response = requests.get(zip_url, stream=True, timeout=180)
-
-
-
     response.raise_for_status()
-
-
-
     return response
-
-
 
 def get_file_keywords(data_type, config_key):
 
@@ -360,44 +275,26 @@ def get_file_keywords(data_type, config_key):
 
     return keywords, specific_constraint, output_name_fragment, pvmap_config
 
-
-
-
-
 def get_req_cols_from_config(config_path):
 
     """
-
     Reads a CSV config file to extract a list of required column names.
-
     It takes the first column, filters out specific values ('YEAR', 'ncesid', ''),
-
     and adds 'LEAID' and 'SCHID'.
-
     """
 
     try:
 
         df = pd.read_csv(config_path, header=None, usecols=[0], on_bad_lines='skip')
-
         # Get first column as a list
-
         req_cols = df[0].tolist()
-
         # Remove header 'key'
-
         if 'key' in req_cols:
-
             req_cols.remove('key')
-
         # Filter out values
-
         req_cols = [col for col in req_cols if col not in ['YEAR', 'ncesid', ''] and pd.notna(col)]
-
         # Add necessary columns for ncesid creation
-
         req_cols.extend(['LEAID', 'SCHID'])
-
         return req_cols
 
     except Exception as e:
@@ -405,8 +302,6 @@ def get_req_cols_from_config(config_path):
         logging.error(f"Failed to read or process config file {config_path}: {e}")
 
         return None
-
-
 
 def download_and_extract(config_key, config_data, data_type, output_dir):
     """
@@ -525,10 +420,6 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
     except Exception as e:
         raise RuntimeError(f"An unhandled error occurred during extraction/processing for {config_key}: {e}")
 
-
-
-
-
 def main(_):
     """
     Main function to run the download process for AP, IB, and GT data.
@@ -564,8 +455,6 @@ def main(_):
             download_and_extract(year_range, config_data, data_type, OUTPUT_DIR)
             
     logging.info(f"\n--- All downloads complete ---")
-
-
 
 if __name__ == '__main__':
 

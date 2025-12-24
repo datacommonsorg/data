@@ -78,23 +78,18 @@ The scripts perform the following processing steps:
 
 ## Processing the downloaded data
 
-After downloading the data, you can process it by running the `run_process.sh` script in each of the data directories.
-For example, to process the Advanced Placement data, run the following command:
+To process the data, you can run the `run_process.sh` script in each of the data directories. This script first downloads the relevant data and then processes it.
+
+For example, to process the Advanced Placement data, change into the directory and then run the script:
 
 ```bash
-bash statvar_imports/us_urban_school/ap_ib_gt_enrollment/advanced_placements/run_process.sh
-```
-
-You can also download and process the data in one step by using the `--download` flag:
-
-```bash
-bash statvar_imports/us_urban_school/ap_ib_gt_enrollment/advanced_placements/run_process.sh --download
+cd statvar_imports/us_urban_school/ap_ib_gt_enrollment/advanced_placements/
+bash run_process.sh
 ```
 
 The processing script will:
 
-1.  Create an `output_files` directory.
-
-2.  Process the downloaded data for each year.
-
-3.  Generate statistical variables using the `stat_var_processor.py` script.
+1.  **Download the data** using `download_ap_ib_gt.py` and `download_2015_16.py`.
+2.  Create an `output_files` directory.
+3.  Process the downloaded data for each year.
+4.  Generate statistical variables using the `stat_var_processor.py` script.
