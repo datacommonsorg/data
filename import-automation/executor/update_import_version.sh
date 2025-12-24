@@ -12,6 +12,7 @@ if [ "$#" -ne 3 ]; then
     exit 1
 fi
 
+# Deployed using import-automation/workflow/cloudbuild.yaml
 FUNCTION_URL="https://spanner-ingestion-helper-965988403328.us-central1.run.app"
 IMPORT_NAME=$1
 VERSION=$2
