@@ -15,7 +15,7 @@
 
 ### How to run:
 
-`python3 stat_var_processor.py --input_data='/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/input_data/<input_file.csv>' --pv_map='/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/<filename of pv_map.csv> --places_resolved_csv='/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/<filename of place_map.csv>' --config_file='/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/<filename of metadata.csv>' --output_path='/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/<output_folder_name>/<filename>`
+`python3 stat_var_processor.py --input_data='/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/input_data/<input_file.csv>' --pv_map='/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/<filename of pv_map.csv> --places_resolved_csv='/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/<filename of place_map.csv>' --config_file='/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/<filename of metadata.csv>' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/<output_folder_name>/<filename>`
 
 #### Download the data: 
 
@@ -29,5 +29,5 @@ Notes: Files will be downloaded inside "input_data" folder (final_input_data.csv
 
 #### Processing the data:
 
-`python3 stat_var_processor.py --input_data=/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/input_data/final_input_data.csv --pv_map=/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/CurrencyFAO_pv_map.csv --config=/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/CurrencyFAO_metadata.csv --places_resolved_csv=/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/CurrencyFAO_place_map.csv --output_path='/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/output_files/CurrencyFAO_output'`
+`python3 stat_var_processor.py --input_data=../../statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/input_data/final_input_data.csv --pv_map=../../statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/CurrencyFAO_pv_map.csv --config=../../statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/CurrencyFAO_metadata.csv --places_resolved_csv=../../statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/CurrencyFAO_place_map.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='../../statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/output_files/CurrencyFAO_output'`
 
