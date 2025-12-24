@@ -9,7 +9,7 @@ His- panic,race,HispanicOrLatino,populationType,Person,measuredProperty,count,va
 Asian/Pacific Islander,race,AsianOrPacificIslander,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,educationalAttainment,BachelorsDegree,gender,Male,,,,
 ,,,,,,,,,,,,,,,,,,
 Asian,race,Asian,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,educationalAttainment,BachelorsDegree,gender,Male,,,,
-Pacific Islander,race,HawaiianNativeOrPacificIslander,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,educationalAttainment,BachelorsDegree,gender,Male,#MergedCell,FALSE,,
+Pacific Islander,race,HawaiianNativeOrPacificIslander,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,educationalAttainment,BachelorsDegree,gender,Male,#MergedCell,0,,
 American Indian/Alaska Native,race,AmericanIndianOrAlaskaNative,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,educationalAttainment,BachelorsDegree,gender,Male,,,,
 American Indian/ Alaska Native,race,AmericanIndianOrAlaskaNative,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,educationalAttainment,BachelorsDegree,gender,Male,,,,
 Two or more races,race,TwoOrMoreRaces,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,educationalAttainment,BachelorsDegree,gender,Male,,,,
