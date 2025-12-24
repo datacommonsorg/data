@@ -1,0 +1,7 @@
+parameter,value
+header_rows,1
+output_columns,"observationDate,observationAbout,variableMeasured,value"
+#comments,manually added YEAR column for resolving observationDate
+url,https://civilrightsdata.ed.gov/data
+#multi_value_properties,"observationDate, observationAbout"
+#input_rows,150
