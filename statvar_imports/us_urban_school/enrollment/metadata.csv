@@ -1,0 +1,4 @@
+parameter,value
+header_rows,1
+output_columns,"observationDate,observationAbout,variableMeasured,value"
+url,https://civilrightsdata.ed.gov/data
