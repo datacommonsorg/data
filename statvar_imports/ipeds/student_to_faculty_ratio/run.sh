@@ -1,72 +1,109 @@
 #!/bin/bash
 
 # =================================================================
-# CONFIGURATION SECTION - PLEASE EDIT THESE PATHS
+# CONFIGURATION SECTION
 # =================================================================
-
-# Define the directory containing the input files (as requested, this is 'source_files')
 INPUT_DIR="./input_files"
-
-# Set the paths for the arguments that are common to all runs.
-# !!! IMPORTANT: Replace these placeholder values with your actual file paths. !!!
 PV_MAP_FILE="student_faculty_ratio_pvmap.csv"
 CONFIG_FILE="student_faculty_ratio_metadata.csv"
-OUTPUT_DIR="processed_output" # Make sure this directory exists!
-
-# The fixed argument for the existing statvar MCF file
+OUTPUT_DIR="processed_output"
 EXISTING_MCF="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
-
-# The name of the Python script
 PYTHON_SCRIPT="../../../tools/statvar_importer/stat_var_processor.py"
+
+# TODO: Limit the concurrency to a defined number of jobs
+MAX_CONCURRENT_JOBS=4  
 
 # =================================================================
 # EXECUTION LOGIC
 # =================================================================
 
-# Create the output directory if it doesn't exist
 mkdir -p "$OUTPUT_DIR"
 
-# Check if the input directory exists
 if [ ! -d "$INPUT_DIR" ]; then
     echo "Error: Input directory '$INPUT_DIR' not found."
     exit 1
 fi
 
-echo "Starting parallel processing of files in $INPUT_DIR..."
+echo "Starting parallel processing..."
+
+PIDS=()
 JOB_COUNT=0
 
-# Loop through all files in the source_files directory
 for input_file in "$INPUT_DIR"/*; do
-    # Check if the item is a regular file before processing
     if [ -f "$input_file" ]; then
         
-        # 1. Determine the output path for the current file
-        # We derive the output filename from the input filename (e.g., file.csv -> file.mcf)
+        # TODO: Concurrency control logic to prevent system overload
+        while [ "$(jobs -rp | wc -l)" -ge "$MAX_CONCURRENT_JOBS" ]; do
+            wait -n
+        done
+
         base_name=$(basename "$input_file")
-        file_extension="${base_name##*.}"
         filename_only="${base_name%.*}"
         
-        output_file="$OUTPUT_DIR/${filename_only}"
+        # Remove "_data" from the filename for the output base
+        # Example: student_faculty_ratio_data_2009 -> student_faculty_ratio_2009
+        clean_base="${filename_only/_data/}" 
         
-        echo "Launching job for: $input_file (Output: $output_file)"
+        # We pass the base path; the tool usually appends extensions
+        output_base_path="$OUTPUT_DIR/${clean_base}"
         
-        # 2. Run the Python script in the background using the '&' operator
+        echo "[$(date +%T)] Processing: $base_name"
+
         python3 "$PYTHON_SCRIPT" \
             --input_data="$input_file" \
             --pv_map="$PV_MAP_FILE" \
             --config_file="$CONFIG_FILE" \
             --existing_statvar_mcf="$EXISTING_MCF" \
-            --output_path="$output_file" &
+            --output_path="$output_base_path" &
         
+        PIDS+=($!) 
         JOB_COUNT=$((JOB_COUNT + 1))
     fi
 done
 
 echo "---"
-echo "Launched $JOB_COUNT jobs in the background."
-echo "Waiting for all parallel processing jobs to complete..."
+echo "Waiting for background jobs to complete..."
 
-# 3. Use 'wait' to pause the script until all background processes have finished
-wait
+# TODO: Check for exit codes of background processes
+EXIT_STATUS=0
+for pid in "${PIDS[@]}"; do
+    wait "$pid"
+    STATUS=$?
+    if [ $STATUS -ne 0 ]; then
+        echo "Error: Job PID $pid failed (Exit Code: $STATUS)"
+        EXIT_STATUS=1
+    fi
+done
 
-echo "All parallel processing jobs are complete. Output files are in $OUTPUT_DIR"
+# =================================================================
+# POST-PROCESSING: CLEANUP & RENAME
+# =================================================================
+if [ $EXIT_STATUS -eq 0 ]; then
+    echo "Processing successful. Finalizing file names..."
+
+    # 1. Delete all .tmcf files EXCEPT the 2009 one
+    find "$OUTPUT_DIR" -type f -name "*.tmcf" ! -name "*2009*" -delete
+
+    # 2. Rename the 2009 tmcf file to exactly student_faculty_ratio.tmcf
+    # Note: If the script appended .csv.tmcf, this finds and fixes it
+    TMCF_2009=$(find "$OUTPUT_DIR" -type f -name "*2009*.tmcf" | head -n 1)
+    if [ -n "$TMCF_2009" ]; then
+        mv "$TMCF_2009" "$OUTPUT_DIR/student_faculty_ratio.tmcf"
+    fi
+
+    # 3. Ensure CSV files are named correctly (removing any double extensions like .csv.csv)
+    # This specifically looks for the 2009 csv output
+    CSV_2009=$(find "$OUTPUT_DIR" -type f -name "*2009*.csv" | head -n 1)
+    if [ -n "$CSV_2009" ]; then
+        mv "$CSV_2009" "$OUTPUT_DIR/student_faculty_ratio_2009.csv"
+    fi
+
+    echo "Cleanup complete."
+    echo "Results: "
+    echo "  - $OUTPUT_DIR/student_faculty_ratio.tmcf"
+    echo "  - $OUTPUT_DIR/student_faculty_ratio_2009.csv"
+else
+    echo "Cleanup skipped due to job failures."
+fi
+
+exit $EXIT_STATUS

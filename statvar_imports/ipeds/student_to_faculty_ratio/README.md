@@ -1,5 +1,5 @@
 # IPEDS Student to Faculty Ratio
-1. **Import Overview**
+**Import Overview**
 This project processes and imports the Student to Faculty Ratio data from the Integrated Postsecondary Education Data System (IPEDS). IPEDS is the primary federal source of data on U.S. colleges, universities, and technical/vocational institutions.
 
 # Import Name: IPEDS_StudentToFacultyRatio
@@ -12,7 +12,7 @@ Provenance Description: Integrated Postsecondary Education Data System (IPEDS) i
 
 # Notes: This import focuses exclusively on the Student to Faculty Ratio.
 
-2. **Preprocessing Steps**
+**Preprocessing Steps**
 The import process is divided into two main stages: downloading the raw data, preprocessing and then processing it to generate the final artifacts for ingestion.
 
 # Input files: `download.py`: Downloads, unzips the raw data.
@@ -41,7 +41,7 @@ The processor uses `metadata and pv_map` files (not explicitly named for IPEDS h
 
 Linting is performed on the generated output files using the DataCommons import tool.
 
-3. # Autorefresh 
+# Autorefresh 
 This import is designed to be autorefreshed via a Cloud Scheduler job.
 
 # Scripts Executed: `download.py, preprocess.py, run.sh`
@@ -60,7 +60,7 @@ The shell script run.sh then runs the `stat_var_processor.py` tool to process th
 
 The final, validated output files are uploaded to a GCS bucket for ingestion into the Data Commons Knowledge Graph.
 
-4. # Script Execution Details
+# pre   Script Execution Details
 To run the import manually, follow these steps in order.
 
 **Step 1:** Download and Preprocess Raw Data
