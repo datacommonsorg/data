@@ -1,8 +1,8 @@
-Node: E:output_2021->E0
-observationAbout: C:output_2021->observationAbout
-observationDate: C:output_2021->observationDate
-value: C:output_2021->value
-variableMeasured: C:output_2021->variableMeasured
-unit: C:output_2021->unit
-scalingFactor: C:output_2021->scalingFactor
+Node: E:output->E0
+observationAbout: C:output->observationAbout
+observationDate: C:output->observationDate
+value: C:output->value
+variableMeasured: C:output->variableMeasured
+unit: C:output->unit
+scalingFactor: C:output->scalingFactor
 typeOf: dcs:StatVarObservation
