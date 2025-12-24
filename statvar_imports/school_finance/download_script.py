@@ -49,19 +49,15 @@ def add_year_column(filepath: str, year: int):
             return
 
         # Added the 'year' column
-        df['year'] = year
-
-        # Reordered the columns to put 'year' first
-        cols = list(df.columns)
-        if 'year' in cols:
-            cols.remove('year')
-            new_cols = ['year'] + cols
-            df = df[new_cols]
+        if 'year' in df.columns:
+            df['year'] = year
+            cols = ['year'] + [c for c in df.columns if c != 'year']
+            df = df[cols]
         else:
-            logging.warning(f"'year' column not found for reordering in {filepath}.")
+            df.insert(0, 'year', year)
 
         if filepath.endswith('.csv'):
-            df.to_csv(filepath, index=False)
+            df.to_csv(filepath, index=False, encoding='utf-8')
         elif filepath.endswith('.xlsx'):
             with pd.ExcelWriter(filepath) as writer:
                 df.to_excel(writer, index=False, sheet_name='Sheet1')
@@ -93,6 +89,8 @@ def main(_):
         # Download to a temporary sub-folder
         temp_output_dir = os.path.join(_OUTPUT_DIRECTORY, f"{year_range}")
         os.makedirs(temp_output_dir, exist_ok=True)
+        logging.info(f"Starting download process for year range {year_range}")
+        logging.info(f"Download Params: url={url}, "f"output_dir='{temp_output_dir}'")
 
         success = download_file(url=url,
                                 output_folder=temp_output_dir,
@@ -100,8 +98,10 @@ def main(_):
 
         if not success:
             logging.warning(
-                f"Failed to download or process data for year {year}. Skipping cleanup and continuing."
+                f"Failed to download or process data for year {year}. "
+                f"Cleaning up temporary directory and continuing to next year."
             )
+            # This is the 'cleanup' action being performed
             shutil.rmtree(temp_output_dir, ignore_errors=True)
             continue
 
