@@ -1011,12 +1011,15 @@ class CensusUSAPopulationByRace:
                 "Count_Person_AsianOrPacificIslander",\
                 "Count_Person_TwoOrMoreRaces","Count_Person_NonWhite"]]
             df_before_2000 = self.df[self.df["Year"] < 2000]
-            df_county_after_2000 = self.df[(self.df["Year"] >= 2000) &
-                                           (self.df["geo_ID"] != "country/USA")
-                                           & (self.df["geo_ID"].str.len() > 9)].drop_duplicates(subset=['Year', 'geo_ID'], keep='last')
+            df_county_after_2000 = self.df[
+                (self.df["Year"] >= 2000) &
+                (self.df["geo_ID"] != "country/USA") &
+                (self.df["geo_ID"].str.len() > 9)].drop_duplicates(
+                    subset=['Year', 'geo_ID'], keep='last')
             df_national_state_2000 = self.df[(self.df["Year"] >= 2000) & (
                 (self.df["geo_ID"].str.len() <= 9) |
-                (self.df["geo_ID"] == "country/USA"))].drop_duplicates(subset=['Year', 'geo_ID'], keep='last')
+                (self.df["geo_ID"] == "country/USA"))].drop_duplicates(
+                    subset=['Year', 'geo_ID'], keep='last')
             df_before_2000.to_csv(os.path.join(
                 self.cleaned_csv_file_path,
                 "USA_Population_Count_by_Race_before_2000.csv"),
