@@ -1,0 +1,6 @@
+parameter,value
+#places_within,country/USA
+output_columns,"observationAbout,observationDate,value,variableMeasured,observationPeriod"
+header_rows,1
+mapped_columns,5
+dc_api_root,https://api.datacommons.org
