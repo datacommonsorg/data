@@ -822,9 +822,10 @@ class ImportExecutor:
                                     self.config.file_download_timeout)
 
         output_dir = f'{relative_import_dir}/{import_name}'
-        version = _clean_time(utils.pacific_time())
         if version == 'DATE_VERSION_PLACEHOLDER':
             version = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
+        else:
+            version = _clean_time(utils.pacific_time())
         import_summary.latest_version = 'gs://' + os.path.join(
             self.config.storage_prod_bucket_name, output_dir, version, '*', '*',
             '*.mcf')
