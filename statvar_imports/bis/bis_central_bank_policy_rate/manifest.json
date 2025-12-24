@@ -20,7 +20,8 @@
                     "cleaned_csv": "output/central_bank_policy_rate.csv"
                 }
             ],
-            "cron_schedule": "0 05 * * 6"
+            "cron_schedule": "0 05 * * 6",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }
