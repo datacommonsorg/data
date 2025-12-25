@@ -20,7 +20,12 @@
           "cleaned_csv": "output/school_finance_output.csv"
         }
       ],
-      "cron_schedule": "30 08 25 * *"
+      "cron_schedule": "30 08 25 * *",
+      "resource_limits": {
+        "cpu": 16,
+        "memory": 128,
+        "disk": 500
+      }
     }
   ]
 }
