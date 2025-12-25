@@ -20,7 +20,7 @@
 # =================================================================
 
 INPUT_DIR="./input_files"
-PV_MAP_FILE="harassment_and_bullying_pvmap.csv"
+PV_MAP_FILE="harassment_or_bullying_pvmap.csv"
 CONFIG_FILE="harassment_or_bullying_metadata.csv"
 OUTPUT_DIR="processed_output" 
 EXISTING_MCF="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
