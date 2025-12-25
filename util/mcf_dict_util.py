@@ -65,7 +65,7 @@ from collections import OrderedDict
 _MODULE_DIR = os.path.dirname(os.path.realpath(__file__))
 path.insert(1, os.path.join(_MODULE_DIR, '../'))
 
-from scripts.us_census.acs5yr.subject_tables.common.datacommons_api_wrappers.datacommons_wrappers import dc_check_existence
+from dc_api_wrapper import dc_api_is_defined_dcid
 
 PREFIX_LIST = ['dcs', 'dcid', 'l', 'schema']
 
@@ -298,7 +298,7 @@ def node_list_check_existence_dc(node_list: list) -> dict:
         Dict object with dcids as key values and boolean values signifying existence as values.
     """
     dcid_list = get_dcids_node_list(node_list)
-    return dc_check_existence(dcid_list)
+    return dc_api_is_defined_dcid(dcid_list)
 
 
 def node_list_check_existence_node_list(node_list: list,

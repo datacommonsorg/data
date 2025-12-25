@@ -1,0 +1,204 @@
+LEA_STATE,LEA_STATE_NAME,LEAID,LEA_NAME,SCHID,SCH_NAME,COMBOKEY,JJ,SCH_INTERNET_FIBER,SCH_INTERNET_WIFI,SCH_INTERNET_SCHDEV,SCH_INTERNET_STUDDEV,SCH_INTERNET_WIFIENDEV,YEAR
+AL,Alabama,100002,Alabama Youth Services,1705,Wallace Sch - Mt Meigs Campus,10000201705,Yes,Yes,Yes,No,No,15,2021
+AL,Alabama,100002,Alabama Youth Services,1706,Mcneel Sch - Vacca Campus,10000201706,Yes,Yes,Yes,No,No,30,2021
+AL,Alabama,100002,Alabama Youth Services,99995,Autauga Campus,10000299995,Yes,Yes,Yes,No,No,31,2021
+AL,Alabama,100005,Albertville City,870,Albertville Middle School,10000500870,No,Yes,Yes,Yes,No,908,2021
+AL,Alabama,100005,Albertville City,871,Albertville High School,10000500871,No,Yes,Yes,Yes,Yes,1606,2021
+AL,Alabama,100005,Albertville City,879,Albertville Intermediate School,10000500879,No,Yes,Yes,Yes,No,891,2021
+AL,Alabama,100005,Albertville City,889,Albertville Elementary School,10000500889,No,Yes,Yes,Yes,No,906,2021
+AL,Alabama,100005,Albertville City,1616,Albertville Kindergarten And Prek,10000501616,No,Yes,Yes,No,No,442,2021
+AL,Alabama,100005,Albertville City,2150,Albertville Primary School,10000502150,No,Yes,Yes,Yes,No,973,2021
+AL,Alabama,100006,Marshall County,193,Kate Duncan Smith Dar Middle,10000600193,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100006,Marshall County,872,Asbury High School,10000600872,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100006,Marshall County,876,Claysville School,10000600876,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100006,Marshall County,877,Douglas Elementary School,10000600877,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100006,Marshall County,878,Douglas High School,10000600878,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100006,Marshall County,880,Brindlee Mountain Elementary School,10000600880,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100006,Marshall County,883,Kate D Smith Dar High School,10000600883,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100006,Marshall County,887,Brindlee Mountain Primary School,10000600887,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100006,Marshall County,1413,Robert D Sloman Primary,10000601413,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100006,Marshall County,1585,Brindlee Mountain High School,10000601585,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100006,Marshall County,1685,Kate D Smith Dar Elementary School,10000601685,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100006,Marshall County,1812,Douglas Middle School,10000601812,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100006,Marshall County,2209,Asbury Elementary School,10000602209,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100007,Hoover City,91,Trace Crossings Elementary School,10000700091,No,Yes,Yes,No,Yes,756,2021
+AL,Alabama,100007,Hoover City,248,Greystone Elementary School,10000700248,No,Yes,Yes,No,Yes,447,2021
+AL,Alabama,100007,Hoover City,251,Hoover High School,10000700251,No,Yes,Yes,No,Yes,2707,2021
+AL,Alabama,100007,Hoover City,337,Berry Middle School,10000700337,No,Yes,Yes,No,Yes,0,2021
+AL,Alabama,100007,Hoover City,342,South Shades Crest Elementary School,10000700342,No,Yes,Yes,No,Yes,496,2021
+AL,Alabama,100007,Hoover City,1422,Robert F Bumpus Middle School,10000701422,No,Yes,Yes,No,Yes,1158,2021
+AL,Alabama,100007,Hoover City,1456,Spain Park High School,10000701456,No,Yes,Yes,No,Yes,1550,2021
+AL,Alabama,100007,Hoover City,1483,Deer Valley Elementary School,10000701483,No,Yes,Yes,No,Yes,757,2021
+AL,Alabama,100007,Hoover City,1738,Bluff Park Elementary School,10000701738,No,Yes,Yes,No,Yes,609,2021
+AL,Alabama,100007,Hoover City,1739,Green Valley Elementary School,10000701739,No,Yes,Yes,No,Yes,440,2021
+AL,Alabama,100007,Hoover City,1740,Gwin Elementary School,10000701740,No,Yes,Yes,No,Yes,541,2021
+AL,Alabama,100007,Hoover City,1741,Ira F Simmons Middle School,10000701741,No,Yes,Yes,No,Yes,974,2021
+AL,Alabama,100007,Hoover City,1742,Rocky Ridge Elementary School,10000701742,No,Yes,Yes,No,Yes,594,2021
+AL,Alabama,100007,Hoover City,1743,Shades Mountain Elementary School,10000701743,No,Yes,Yes,No,Yes,303,2021
+AL,Alabama,100007,Hoover City,2091,Riverchase Elementary School,10000702091,No,Yes,Yes,No,Yes,665,2021
+AL,Alabama,100007,Hoover City,2186,Brocks Gap Intermediate School,10000702186,No,Yes,Yes,No,Yes,475,2021
+AL,Alabama,100008,Madison City,303,Horizon Elementary School,10000800303,No,Yes,Yes,Yes,Yes,599,2021
+AL,Alabama,100008,Madison City,495,Discovery Middle School,10000800495,No,Yes,Yes,Yes,Yes,1315,2021
+AL,Alabama,100008,Madison City,831,Bob Jones High School,10000800831,No,Yes,Yes,Yes,Yes,1877,2021
+AL,Alabama,100008,Madison City,839,Madison Elementary School,10000800839,No,Yes,Yes,Yes,Yes,511,2021
+AL,Alabama,100008,Madison City,851,West Madison Elementary School,10000800851,No,Yes,Yes,Yes,Yes,542,2021
+AL,Alabama,100008,Madison City,1423,Heritage Elementary School,10000801423,No,Yes,Yes,Yes,Yes,841,2021
+AL,Alabama,100008,Madison City,1485,Rainbow Elementary School,10000801485,No,Yes,Yes,Yes,Yes,869,2021
+AL,Alabama,100008,Madison City,1798,Liberty Middle School,10000801798,No,Yes,Yes,Yes,Yes,1317,2021
+AL,Alabama,100008,Madison City,2097,Columbia Elementary School,10000802097,No,Yes,Yes,Yes,Yes,846,2021
+AL,Alabama,100008,Madison City,2133,Mill Creek Elementary School,10000802133,No,Yes,Yes,Yes,Yes,948,2021
+AL,Alabama,100008,Madison City,2198,James Clemens High School,10000802198,No,Yes,Yes,Yes,Yes,2154,2021
+AL,Alabama,100009,Al Inst Deaf And Blind,1403,Alabama School For Deaf,10000901403,No,Yes,Yes,Yes,Yes,1,2021
+AL,Alabama,100009,Al Inst Deaf And Blind,1404,Alabama School For Blind,10000901404,No,Yes,Yes,Yes,Yes,1,2021
+AL,Alabama,100009,Al Inst Deaf And Blind,1405,Helen Keller School,10000901405,No,Yes,Yes,Yes,Yes,1,2021
+AL,Alabama,100011,Leeds City,2094,Leeds Elementary School,10001102094,No,Yes,Yes,Yes,Yes,500,2021
+AL,Alabama,100011,Leeds City,2095,Leeds Middle School,10001102095,No,Yes,Yes,Yes,Yes,375,2021
+AL,Alabama,100011,Leeds City,2096,Leeds High School,10001102096,No,Yes,Yes,Yes,Yes,600,2021
+AL,Alabama,100011,Leeds City,2430,Leeds Primary School,10001102430,No,Yes,Yes,Yes,Yes,627,2021
+AL,Alabama,100012,Boaz City,123,Boaz Middle School,10001200123,No,Yes,Yes,Yes,Yes,650,2021
+AL,Alabama,100012,Boaz City,874,Boaz High School,10001200874,No,Yes,Yes,Yes,Yes,900,2021
+AL,Alabama,100012,Boaz City,884,Corley Elementary School,10001200884,No,Yes,Yes,No,Yes,400,2021
+AL,Alabama,100012,Boaz City,1630,Boaz Intermediate School,10001201630,No,Yes,Yes,No,Yes,415,2021
+AL,Alabama,100012,Boaz City,1781,Boaz Elementary School,10001201781,No,Yes,Yes,No,Yes,500,2021
+AL,Alabama,100013,Trussville City,714,Hewitttrussville Middle School,10001300714,No,Yes,Yes,Yes,Yes,1202,2021
+AL,Alabama,100013,Trussville City,1498,Paine Elementary School,10001301498,No,Yes,Yes,Yes,Yes,1220,2021
+AL,Alabama,100013,Trussville City,1682,Hewitttrussville High School,10001301682,No,Yes,Yes,Yes,Yes,1552,2021
+AL,Alabama,100013,Trussville City,2401,Magnolia Elementary School,10001302401,No,Yes,Yes,Yes,Yes,383,2021
+AL,Alabama,100013,Trussville City,2402,Cahaba Elementary School,10001302402,No,Yes,Yes,Yes,Yes,501,2021
+AL,Alabama,100018,Alabama School Of Fine Arts,2104,Alabama School Of Fine Arts,10001802104,No,-13,-13,-13,-13,60,2021
+AL,Alabama,100019,United Ability,1830,United Ability,10001901830,No,Yes,Yes,No,Yes,0,2021
+AL,Alabama,100020,Boyd School,1831,The Boyd School,10002001831,No,No,Yes,No,No,6,2021
+AL,Alabama,100021,Brewerporch Childrens Center,1832,Brewerporch Childrens Center,10002101832,No,Yes,Yes,No,No,20,2021
+AL,Alabama,100030,Alexander City,1,Alexander City Middle School,10003000001,No,Yes,Yes,Yes,Yes,441,2021
+AL,Alabama,100030,Alexander City,3,Benjamin Russell High School,10003000003,No,Yes,Yes,Yes,Yes,719,2021
+AL,Alabama,100030,Alexander City,4,Jim Pearson Elementary School,10003000004,No,Yes,Yes,Yes,No,760,2021
+AL,Alabama,100030,Alexander City,5,Nathaniel H Stephens Elementary School,10003000005,No,Yes,Yes,Yes,No,450,2021
+AL,Alabama,100030,Alexander City,6,William L Radney Elementary School,10003000006,No,Yes,Yes,Yes,Yes,477,2021
+AL,Alabama,100033,Glenwood Mental Health Service,99998,Allan Cott,10003399998,No,Yes,Yes,Yes,Yes,25,2021
+AL,Alabama,100033,Glenwood Mental Health Service,99999,Lakeview,10003399999,No,Yes,Yes,Yes,No,15,2021
+AL,Alabama,100035,The Little Tree Preschool  Auburn,1845,Learning Tree Inc Mobile,10003501845,No,Yes,Yes,No,Yes,0,2021
+AL,Alabama,100035,The Little Tree Preschool  Auburn,1846,Learning Tree Inc Webb,10003501846,No,Yes,Yes,Yes,No,51,2021
+AL,Alabama,100035,The Little Tree Preschool  Auburn,2105,Learning Tree Inc Tallassee,10003502105,No,Yes,Yes,No,No,23,2021
+AL,Alabama,100035,The Little Tree Preschool  Auburn,2370,The Learning Tree  Birmingham,10003502370,No,Yes,Yes,Yes,Yes,5,2021
+AL,Alabama,100036,Lee County Youth Development Center,2451,Lee Co Youth Detention Ctr,10003602451,No,Yes,Yes,No,No,12,2021
+AL,Alabama,100038,Pathway Inc,1849,Pathway Inc,10003801849,No,Yes,Yes,No,No,30,2021
+AL,Alabama,100038,Pathway Inc,2468,Pathway At Baldwin,10003802468,No,Yes,Yes,No,No,12,2021
+AL,Alabama,100039,Presbyterian Home For Children,1850,Presbyterian Home For Children,10003901850,No,Yes,Yes,Yes,Yes,23,2021
+AL,Alabama,100041,Developing Alabama Youth Prog,1852,Developing Alabama Youth Prog,10004101852,No,Yes,Yes,Yes,No,50,2021
+AL,Alabama,100042,Laurel Oaks Behavioral Health Center,1853,Laurel Oaks Behavioral Health Center,10004201853,No,No,Yes,No,No,32,2021
+AL,Alabama,100060,Andalusia City,7,Andalusia High School,10006000007,No,Yes,Yes,No,No,3278,2021
+AL,Alabama,100060,Andalusia City,8,Andalusia Junior High,10006000008,No,Yes,Yes,No,No,3278,2021
+AL,Alabama,100060,Andalusia City,1467,Andalusia Elementary School,10006001467,No,Yes,Yes,No,No,3278,2021
+AL,Alabama,100090,Anniston City,11,Anniston High School,10009000011,No,Yes,Yes,Yes,No,427,2021
+AL,Alabama,100090,Anniston City,17,Golden Springs Elementary School,10009000017,No,Yes,Yes,Yes,No,265,2021
+AL,Alabama,100090,Anniston City,20,Randolph Park Elementary School,10009000020,No,Yes,Yes,Yes,No,241,2021
+AL,Alabama,100090,Anniston City,21,Tenth Street Elementary School,10009000021,No,Yes,Yes,Yes,No,241,2021
+AL,Alabama,100090,Anniston City,1246,Anniston City Boot Camp School,10009001246,Yes,Yes,Yes,Yes,No,41,2021
+AL,Alabama,100090,Anniston City,1725,Anniston Middle School,10009001725,No,Yes,Yes,Yes,No,389,2021
+AL,Alabama,100090,Anniston City,1782,Cobb Preparatory Academy,10009001782,No,Yes,Yes,Yes,No,328,2021
+AL,Alabama,100100,Arab City,22,Arab Elementary School,10010000022,No,Yes,Yes,No,No,0,2021
+AL,Alabama,100100,Arab City,25,Arab Primary School,10010000025,No,Yes,Yes,No,No,0,2021
+AL,Alabama,100100,Arab City,27,Arab Junior High School,10010000027,No,Yes,Yes,Yes,No,631,2021
+AL,Alabama,100100,Arab City,28,Arab High School,10010000028,No,Yes,Yes,Yes,No,757,2021
+AL,Alabama,100120,Athens City,522,Athens Intermediate School,10012000522,No,Yes,Yes,Yes,No,610,2021
+AL,Alabama,100120,Athens City,1471,Athens Elementary School,10012001471,No,No,Yes,No,No,320,2021
+AL,Alabama,100120,Athens City,1472,Athens High School,10012001472,No,Yes,Yes,Yes,No,0,2021
+AL,Alabama,100120,Athens City,1473,Athens Middle School,10012001473,No,No,Yes,Yes,No,967,2021
+AL,Alabama,100120,Athens City,1474,James L Cowart Elementary School,10012001474,No,Yes,Yes,Yes,No,277,2021
+AL,Alabama,100120,Athens City,1475,Julian Newman Elementary School,10012001475,No,Yes,Yes,No,No,350,2021
+AL,Alabama,100120,Athens City,1758,Brookhill Elementary School,10012001758,No,Yes,Yes,No,No,300,2021
+AL,Alabama,100120,Athens City,2417,Athens Renaissance School,10012002417,No,Yes,Yes,Yes,Yes,592,2021
+AL,Alabama,100178,Higdon Hill School,2113,Higdon Hill School,10017802113,No,Yes,Yes,No,No,60,2021
+AL,Alabama,100180,Attalla City,33,Etowah High School,10018000033,No,Yes,Yes,Yes,Yes,499,2021
+AL,Alabama,100180,Attalla City,34,Etowah Middle School,10018000034,No,Yes,Yes,Yes,Yes,351,2021
+AL,Alabama,100180,Attalla City,35,Attalla Elementary School,10018000035,No,Yes,Yes,Yes,No,567,2021
+AL,Alabama,100183,Alabama Clinical Schools,2114,Alabama Clinical Schools,10018302114,Yes,Yes,Yes,Yes,No,60,2021
+AL,Alabama,100185,Saraland City,893,Saraland Middle Schooladams Campus,10018500893,No,Yes,Yes,Yes,No,820,2021
+AL,Alabama,100185,Saraland City,952,Saraland Elementary School,10018500952,No,Yes,Yes,Yes,No,870,2021
+AL,Alabama,100185,Saraland City,2137,Saraland High School,10018502137,No,Yes,Yes,Yes,No,1440,2021
+AL,Alabama,100185,Saraland City,2427,Saraland Early Education Center,10018502427,No,Yes,Yes,Yes,No,649,2021
+AL,Alabama,100188,Chickasaw City,2193,Chickasaw City Elementary School,10018802193,No,Yes,Yes,Yes,No,256,2021
+AL,Alabama,100188,Chickasaw City,2194,Chickasaw City High School,10018802194,No,Yes,Yes,Yes,Yes,231,2021
+AL,Alabama,100188,Chickasaw City,2428,Chickasaw Middle School,10018802428,No,Yes,Yes,Yes,Yes,156,2021
+AL,Alabama,100188,Chickasaw City,99999,Chickasaw Early Learning Center,10018899999,No,Yes,Yes,No,No,20,2021
+AL,Alabama,100189,Satsuma City,2195,Satsuma High School,10018902195,No,Yes,Yes,Yes,Yes,800,2021
+AL,Alabama,100189,Satsuma City,2196,Robert E Lee Elementary,10018902196,No,Yes,Yes,Yes,Yes,800,2021
+AL,Alabama,100190,Alabaster City,1182,Thompson Intermediate School,10019001182,No,-13,-13,-13,-13,202,2021
+AL,Alabama,100190,Alabaster City,1183,Thompson High School,10019001183,No,Yes,Yes,Yes,Yes,900,2021
+AL,Alabama,100190,Alabaster City,1184,Thompson Middle School,10019001184,No,Yes,Yes,Yes,No,800,2021
+AL,Alabama,100190,Alabaster City,1460,Meadow View  Elementary School,10019001460,No,Yes,Yes,No,No,988,2021
+AL,Alabama,100190,Alabaster City,1815,Creek View Elementary School,10019001815,No,Yes,Yes,Yes,No,573,2021
+AL,Alabama,100194,Pelham City,2395,Pelham Oaks Elementary School,10019402395,No,Yes,Yes,Yes,No,663,2021
+AL,Alabama,100194,Pelham City,2396,Pelham Ridge Elementary School,10019402396,No,Yes,Yes,Yes,No,843,2021
+AL,Alabama,100194,Pelham City,2398,Pelham Park Middle School,10019402398,No,Yes,Yes,Yes,No,823,2021
+AL,Alabama,100194,Pelham City,2399,Pelham High School,10019402399,No,Yes,Yes,Yes,No,1066,2021
+AL,Alabama,100195,Pike Road City,2407,Pike Road Elementary School,10019502407,No,Yes,Yes,No,No,872,2021
+AL,Alabama,100195,Pike Road City,2424,Pike Road Intermediate School,10019502424,No,Yes,Yes,No,No,586,2021
+AL,Alabama,100195,Pike Road City,2441,Pike Road High School,10019502441,No,Yes,Yes,Yes,No,467,2021
+AL,Alabama,100195,Pike Road City,2498,Pike Road Jr High School,10019502498,No,Yes,Yes,Yes,No,601,2021
+AL,Alabama,100197,Acceleration Day And Evening Academy,2432,Acceleration Day And Evening Academy,10019702432,No,Yes,Yes,Yes,Yes,275,2021
+AL,Alabama,100199,University Charter School,2452,University Charter School,10019902452,No,Yes,Yes,Yes,No,526,2021
+AL,Alabama,100201,Legacy Prep,2472,Legacy Prep,10020102472,No,Yes,Yes,Yes,No,240,2021
+AL,Alabama,100202,Gulf Shores City,2469,Gulf Shores Elementary School,10020202469,No,Yes,Yes,No,No,1300,2021
+AL,Alabama,100202,Gulf Shores City,2471,Gulf Shores Middle School,10020202471,No,Yes,Yes,Yes,No,600,2021
+AL,Alabama,100202,Gulf Shores City,2473,Gulf Shores High School,10020202473,No,Yes,Yes,Yes,No,900,2021
+AL,Alabama,100203,Lead Academy,2470,Lead Academy,10020302470,No,Yes,Yes,Yes,No,425,2021
+AL,Alabama,100204,I3 Academy,2476,I3 Academy,10020402476,No,Yes,Yes,Yes,No,420,2021
+AL,Alabama,100210,Auburn City,36,Auburn High School,10021000036,No,Yes,Yes,Yes,No,1982,2021
+AL,Alabama,100210,Auburn City,37,Auburn Junior High School,10021000037,No,Yes,Yes,Yes,No,1525,2021
+AL,Alabama,100210,Auburn City,39,Cary Woods Elementary School,10021000039,No,Yes,Yes,No,No,699,2021
+AL,Alabama,100210,Auburn City,40,Dean Road Elementary School,10021000040,No,Yes,Yes,No,No,543,2021
+AL,Alabama,100210,Auburn City,41,Drake Middle School,10021000041,No,Yes,Yes,No,No,830,2021
+AL,Alabama,100210,Auburn City,42,Wrights Mill Road Elementary School,10021000042,No,Yes,Yes,No,No,540,2021
+AL,Alabama,100210,Auburn City,53,Auburn Early Education Center,10021000053,No,Yes,Yes,No,No,472,2021
+AL,Alabama,100210,Auburn City,1254,Ogletree Elementary School,10021001254,No,Yes,Yes,No,No,581,2021
+AL,Alabama,100210,Auburn City,1259,Margaret Yarbrough Elementary School,10021001259,No,Yes,Yes,No,No,759,2021
+AL,Alabama,100210,Auburn City,1879,Richland Elementary School,10021001879,No,Yes,Yes,No,No,818,2021
+AL,Alabama,100210,Auburn City,2363,Pick Elementary School,10021002363,No,Yes,Yes,No,No,670,2021
+AL,Alabama,100210,Auburn City,2440,East Samford School,10021002440,No,Yes,Yes,Yes,No,794,2021
+AL,Alabama,100210,Auburn City,2454,Creekside Elementary School,10021002454,No,Yes,Yes,No,No,628,2021
+AL,Alabama,100240,Autauga County,45,Billingsley High School,10024000045,No,Yes,Yes,Yes,No,530,2021
+AL,Alabama,100240,Autauga County,46,Marbury High School,10024000046,No,Yes,Yes,Yes,No,600,2021
+AL,Alabama,100240,Autauga County,47,Prattville Elementary School,10024000047,No,Yes,Yes,Yes,No,586,2021
+AL,Alabama,100240,Autauga County,48,Prattville High School,10024000048,No,Yes,Yes,Yes,Yes,1863,2021
+AL,Alabama,100240,Autauga County,49,Prattville Junior High School,10024000049,No,Yes,Yes,Yes,No,406,2021
+AL,Alabama,100240,Autauga County,50,Prattville Intermediate School,10024000050,No,Yes,Yes,Yes,No,675,2021
+AL,Alabama,100240,Autauga County,51,Prattville Primary School,10024000051,No,-13,-13,-13,-13,599,2021
+AL,Alabama,100240,Autauga County,543,Pine Level Elementary School,10024000543,No,Yes,Yes,Yes,No,798,2021
+AL,Alabama,100240,Autauga County,546,Daniel Pratt Elementary School,10024000546,No,Yes,No,Yes,No,1280,2021
+AL,Alabama,100240,Autauga County,587,Autauga County Alternative School,10024000587,No,Yes,Yes,Yes,No,30,2021
+AL,Alabama,100240,Autauga County,1408,Autaugaville School,10024001408,No,Yes,Yes,Yes,No,224,2021
+AL,Alabama,100240,Autauga County,1639,Prattville Kindergarten School,10024001639,No,Yes,Yes,Yes,No,880,2021
+AL,Alabama,100240,Autauga County,2159,Marbury Middle School,10024002159,No,Yes,No,Yes,No,435,2021
+AL,Alabama,100270,Baldwin County,13,Daphne Middle School,10027000013,No,Yes,Yes,Yes,No,683,2021
+AL,Alabama,100270,Baldwin County,24,Robertsdale High School,10027000024,No,Yes,Yes,Yes,No,1167,2021
+AL,Alabama,100270,Baldwin County,56,W J Carroll Intermediate School,10027000056,No,Yes,Yes,Yes,No,367,2021
+AL,Alabama,100270,Baldwin County,57,Elberta High School,10027000057,No,Yes,Yes,Yes,No,578,2021
+AL,Alabama,100270,Baldwin County,58,Elsanor School,10027000058,No,Yes,Yes,Yes,No,308,2021
+AL,Alabama,100270,Baldwin County,59,Fairhope Middle School,10027000059,No,Yes,Yes,Yes,No,690,2021
+AL,Alabama,100270,Baldwin County,60,Foley Middle School,10027000060,No,Yes,Yes,Yes,No,747,2021
+AL,Alabama,100270,Baldwin County,62,Perdido Elementary School,10027000062,No,Yes,Yes,Yes,No,540,2021
+AL,Alabama,100270,Baldwin County,65,Rosinton School,10027000065,No,Yes,Yes,Yes,No,267,2021
+AL,Alabama,100270,Baldwin County,66,Silverhill School,10027000066,No,Yes,Yes,Yes,No,418,2021
+AL,Alabama,100270,Baldwin County,67,Spanish Fort Elementary School,10027000067,No,Yes,Yes,Yes,No,629,2021
+AL,Alabama,100270,Baldwin County,68,Stapleton School,10027000068,No,Yes,Yes,Yes,No,187,2021
+AL,Alabama,100270,Baldwin County,69,Summerdale School,10027000069,No,Yes,Yes,Yes,No,527,2021
+AL,Alabama,100270,Baldwin County,70,Swift Elementary School,10027000070,No,Yes,Yes,Yes,No,92,2021
+AL,Alabama,100270,Baldwin County,100,Fairhope High School,10027000100,No,Yes,Yes,Yes,No,1475,2021
+AL,Alabama,100270,Baldwin County,162,Central Baldwin Middle School,10027000162,No,Yes,Yes,Yes,No,665,2021
+AL,Alabama,100270,Baldwin County,549,Orange Beach Elementary School,10027000549,No,Yes,Yes,Yes,No,564,2021
+AL,Alabama,100270,Baldwin County,550,Rockwell Elementary School,10027000550,No,Yes,Yes,Yes,No,936,2021
+AL,Alabama,100270,Baldwin County,625,Elberta Elementary School,10027000625,No,Yes,Yes,Yes,No,756,2021
+AL,Alabama,100270,Baldwin County,648,Magnolia School,10027000648,No,Yes,Yes,Yes,No,779,2021
+AL,Alabama,100270,Baldwin County,660,J Larry Newton School,10027000660,No,Yes,Yes,Yes,No,713,2021
+AL,Alabama,100270,Baldwin County,1708,Bay Minette Elementary School,10027001708,No,Yes,Yes,Yes,No,720,2021
+AL,Alabama,100270,Baldwin County,1709,Daphne Elementary School,10027001709,No,Yes,Yes,Yes,No,592,2021
+AL,Alabama,100270,Baldwin County,1710,Fairhope East Elementary,10027001710,No,Yes,Yes,Yes,No,677,2021
+AL,Alabama,100270,Baldwin County,1711,Fairhope West Elementary,10027001711,No,Yes,Yes,Yes,No,928,2021
+AL,Alabama,100270,Baldwin County,1712,Foley Elementary School,10027001712,No,Yes,Yes,Yes,No,908,2021
+AL,Alabama,100270,Baldwin County,1713,Florence B Mathis Elementary,10027001713,No,Yes,Yes,Yes,No,834,2021
+AL,Alabama,100270,Baldwin County,1714,Loxley Elementary School,10027001714,No,Yes,Yes,Yes,No,458,2021
+AL,Alabama,100270,Baldwin County,1715,Pine Grove Elementary School,10027001715,No,Yes,Yes,Yes,No,419,2021
+AL,Alabama,100270,Baldwin County,1716,Robertsdale Elementary School,10027001716,No,Yes,Yes,Yes,No,963,2021
+AL,Alabama,100270,Baldwin County,1759,Daphne High School,10027001759,No,Yes,Yes,Yes,No,1302,2021
+AL,Alabama,100270,Baldwin County,1783,Delta Elementary School,10027001783,No,Yes,Yes,Yes,No,195,2021
