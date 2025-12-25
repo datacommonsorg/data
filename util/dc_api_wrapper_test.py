@@ -50,8 +50,8 @@ class TestDCAPIWrapper(unittest.TestCase):
             'dcid:NewStatVar_NotInDC',  # new statvar missing in DC
         ]
         args = {'prop': 'typeOf'}
-        response = dc_api.dc_api_batched_wrapper(api_function, dcids, args,
-                                                 {'dc_api_batch_size': 2})
+        response = dc_api.dc_api_batched_wrapper(
+            api_function, dcids, args, config={'dc_api_batch_size': 2})
         self.assertTrue(response is not None)
         self.assertEqual(response['Count_Person'], ['StatisticalVariable'])
         self.assertEqual(response['Count_Person_Male'], ['StatisticalVariable'])
@@ -69,7 +69,6 @@ class TestDCAPIWrapper(unittest.TestCase):
             dcids,
             {
                 'dc_api_batch_size': 2,
-                'dc_api_root': 'http://autopush.api.datacommons.org',
             },
         )
         self.assertTrue(response is not None)
@@ -90,6 +89,27 @@ class TestDCAPIWrapper(unittest.TestCase):
         self.assertTrue('populationType' in statvar_pvs)
         self.assertTrue('measuredProperty' in statvar_pvs)
         self.assertEqual('StatisticalVariable', statvar_pvs['typeOf'])
+
+    def test_dc_api_get_node_property(self):
+        """Test API wrapper to get a single property for a node."""
+        dcids = ['Count_Person']
+        prop = 'name'
+        response_v2 = dc_api.dc_api_get_node_property(dcids, prop,
+                                                      {'dc_api_version': 'V2'})
+        self.assertTrue(response_v2)
+        self.assertIn('Count_Person', response_v2)
+        # Note: The name of Count_Person is "Total population"
+        self.assertEqual(response_v2['Count_Person'],
+                         {'name': '"Total population"'})
+
+    def test_dc_api_resolve_placeid(self):
+        """Test API wrapper to resolve entity using a placeid."""
+        placeids = ['ChIJT3IGqvxznW4Rqgw7pv9zYz8']
+        response = dc_api.dc_api_resolve_placeid(placeids)
+        self.assertTrue(response)
+        self.assertIn('ChIJT3IGqvxznW4Rqgw7pv9zYz8', response)
+        self.assertEqual(response['ChIJT3IGqvxznW4Rqgw7pv9zYz8'],
+                         'wikidataId/Q9727')
 
     def test_dc_api_resolve_latlng(self):
         """Test API wrapper for latlng resolution."""

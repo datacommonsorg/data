@@ -53,10 +53,10 @@ class NCESDistrictSchool(USEducation):
 
 if __name__ == '__main__':
     try:
-        logging.set_verbosity(1)
+        logging.set_verbosity(logging.INFO)
         logging.info("Main Method Starts For School District ")
         gcs_output_dir_local = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "gcs_output")
+            os.path.dirname(os.path.abspath(__file__)), "gcs_folder")
         input_path_base = os.path.join(gcs_output_dir_local, "input_files")
         os.makedirs(input_path_base, exist_ok=True)
         input_files_to_process = []
@@ -95,6 +95,10 @@ if __name__ == '__main__':
         loader.generate_csv()
         loader.generate_mcf()
         loader.generate_tmcf()
+        logging.info("Main Method Completed For District School ")
 
     except Exception as e:
-        logging.fatal(f"Error While Running District School Process: {e} ")
+        # Only log the first 1000 characters of the error message
+        error_msg = str(e)[:1000]
+        logging.fatal(
+            f"Error While Running District School Process: {error_msg}")

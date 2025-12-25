@@ -208,9 +208,12 @@ class ValidationRunner:
 
 def main(_):
     try:
-        runner = ValidationRunner(_FLAGS.validation_config,
-                                  _FLAGS.differ_output, _FLAGS.stats_summary,
-                                  _FLAGS.lint_report, _FLAGS.validation_output)
+        config_path = _FLAGS.validation_config
+        runner = ValidationRunner(validation_config_path=config_path,
+                                  differ_output=_FLAGS.differ_output,
+                                  stats_summary=_FLAGS.stats_summary,
+                                  lint_report=_FLAGS.lint_report,
+                                  validation_output=_FLAGS.validation_output)
         overall_status, _ = runner.run_validations()
         if not overall_status:
             sys.exit(1)
