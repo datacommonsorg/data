@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "US_SAT_ACT_Participation_state",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://civilrightsdata.ed.gov/data",
+            "provenance_description": "This dataset contains participation in Scholastic Assessment Test or American College Testing for each state by students' race and sex,  Limited English Proficiency status and sex, and disability status and sex.",
+            "scripts": [
+                "run_download_process_state.sh"
+            ],
+            "source_files": [
+                "input_files_state/*.xlsx",
+                "input_files_state/*.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "common_output.tmcf",
+                    "cleaned_csv": "output_files_state/output_*.csv"
+                }
+            ],
+            "cron_schedule": "0 05 8,23 * *"
+        }
+    ]
+}
