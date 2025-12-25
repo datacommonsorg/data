@@ -23,7 +23,7 @@ The import process is divided into two main stages: downloading the raw data, pr
 
 * **Transformation pipeline**:
   1. `download.py` downloads the biennial data releases for all available years in the `source_files` directory, unzips them, filters for relevant files, renames them, and save it as csv files in the `input_files` directory.
-  2. `preprocess.py` adds the 
+  2. `preprocess.py` adds the year column and rename the files.
   3. After the download is complete, the `stat_var_processor.py` tool is run on the cleaned CSV files in the `input_files` directory using the shell script `run.sh`
   4. The processor uses the metadata and pv_map files to generate the final `.csv`,`.tmcf` files, placing them in the `processed_output/` directory.
 
@@ -81,7 +81,7 @@ python3 ../../../../tools/statvar_importer/stat_var_processor.py --input_data="i
 To check the processing with the test data, run the below command from the project directory:
 
 ```bash
-python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data="test_data/harassment_or_bullying_data.csv" --pv_map="harssment_and_bullying_pv_map.csv" --config_file="harassment_or_bullying_metadata.csv" --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path="test_data/expected_output/harassment_or_bullying"
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data="test_data/harassment_or_bullying_data.csv" --pv_map="harssment_or_bullying_pv_map.csv" --config_file="harassment_or_bullying_metadata.csv" --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path="test_data/expected_output/harassment_or_bullying"
 ```
 ---
 

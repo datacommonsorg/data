@@ -19,12 +19,7 @@
             "source_files": [
                 "input_files/*.csv"
             ],
-            "cron_schedule": "0 0 15 7 *",
-            "resource_limits": {
-                "cpu": 32,
-                "memory": 256,
-                "disk": 1000
-            }
+            "cron_schedule": "0 0 15 7 *"
         }
     ]
 }
