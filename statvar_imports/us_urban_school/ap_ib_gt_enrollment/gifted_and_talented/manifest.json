@@ -20,7 +20,7 @@
                     "cleaned_csv": "output_files/output_*.csv"
                 }
             ],
-            "cron_schedule": "0 05 8,23 * *",
+            "cron_schedule": "0 11 8,23 * *",
             "resource_limits": {
                 "cpu": 16,
                 "memory": 256,
