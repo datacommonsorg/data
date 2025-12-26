@@ -1,0 +1,10 @@
+Node: E:data->E0
+observationDate: C:data->observationDate
+observationAbout: C:data->observationAbout
+observationPeriod: C:data->observationPeriod
+value: C:data->value
+unit: C:data->unit
+scalingFactor: C:data->scalingFactor
+variableMeasured: C:data->variableMeasured
+typeOf: dcs:StatVarObservation
+measurementMethod: dcs:WHO_COVID19
