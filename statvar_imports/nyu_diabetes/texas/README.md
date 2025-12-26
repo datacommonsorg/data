@@ -24,8 +24,16 @@ This import utilizes official mortality data from the Texas Department of Health
 
 The workflow for this data import involves one step: Processing file.
 
+#### Step 1: Download the File
+Select the following options from the website
+1. Data Table Builder
+2. Select a Year - All
+3. Geographic Level -County
+4. Geographic Area - All
+5. Breakdown Category - Leading Cause of Death+
+6. Breakdown Details - Diabetes mellitus
 
-#### Step 1: Process the Files
+#### Step 2: Process the Files
 
 Run the processing script to generate the final output artifacts.
 
