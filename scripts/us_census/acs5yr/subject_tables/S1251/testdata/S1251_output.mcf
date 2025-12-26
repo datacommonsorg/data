@@ -1,0 +1,1016 @@
+Node: dcid:Count_Person_15OrMoreYears_Male_MarriedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15OrMoreYears_Male_MarriedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_Male_MarriedInThePast12Months
+statType: dcs:medianValue
+measuredProperty: dcs:age
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrMoreYears_Male_MarriedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrMoreYears_Male_MarriedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Male_MarriedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Male_MarriedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_Male_MarriedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_Male_MarriedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_InLaborForce_Male_MarriedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+employmentStatus: dcs:BLS_InLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_InLaborForce_Male_MarriedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+employmentStatus: dcs:BLS_InLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NotInLaborForce_Male_MarriedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+employmentStatus: dcs:BLS_NotInLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NotInLaborForce_Male_MarriedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+employmentStatus: dcs:BLS_NotInLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_MarriedInThePast12Months_PovertyStatusDetermined
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_MarriedInThePast12Months_PovertyStatusDetermined
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_MarriedInThePast12Months_BelowPovertyLevelInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_MarriedInThePast12Months_BelowPovertyLevelInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_MarriedInThePast12Months_ResidesInHousehold
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+residenceType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_MarriedInThePast12Months_ResidesInHousehold
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+residenceType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_MarriedInThePast12Months_ResidesInHousehold
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+residenceType: dcs:Household
+childrenStatus: dcs:WithOwnChildrenUnder18
+householdType: dcs:FamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_MarriedInThePast12Months_ResidesInHousehold
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+residenceType: dcs:Household
+childrenStatus: dcs:WithOwnChildrenUnder18
+householdType: dcs:FamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrMoreYears_Male_MarriedInThePast12Months_OccupiedHousingUnit_ResidesInHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+age: [15 - Years]
+residenceType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15OrMoreYears_Male_MarriedInThePast12Months_OccupiedHousingUnit_ResidesInHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+age: [15 - Years]
+residenceType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_MarriedInThePast12Months_OwnerOccupied_ResidesInHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+occupancyTenure: dcs:OwnerOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_MarriedInThePast12Months_OwnerOccupied_ResidesInHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+occupancyTenure: dcs:OwnerOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_MarriedInThePast12Months_RenterOccupied_ResidesInHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+occupancyTenure: dcs:RenterOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_MarriedInThePast12Months_RenterOccupied_ResidesInHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Male
+occupancyTenure: dcs:RenterOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrMoreYears_Female_MarriedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15OrMoreYears_Female_MarriedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_Female_MarriedInThePast12Months
+statType: dcs:medianValue
+measuredProperty: dcs:age
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrMoreYears_Female_MarriedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrMoreYears_Female_MarriedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Female_MarriedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Female_MarriedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_Female_MarriedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_Female_MarriedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_InLaborForce_Female_MarriedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+employmentStatus: dcs:BLS_InLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_InLaborForce_Female_MarriedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+employmentStatus: dcs:BLS_InLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NotInLaborForce_Female_MarriedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+employmentStatus: dcs:BLS_NotInLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NotInLaborForce_Female_MarriedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+employmentStatus: dcs:BLS_NotInLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_MarriedInThePast12Months_PovertyStatusDetermined
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_MarriedInThePast12Months_PovertyStatusDetermined
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_MarriedInThePast12Months_BelowPovertyLevelInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_MarriedInThePast12Months_BelowPovertyLevelInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_MarriedInThePast12Months_ResidesInHousehold
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+residenceType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_MarriedInThePast12Months_ResidesInHousehold
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+residenceType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithOwnChildrenUnder18_Female_FamilyHousehold_MarriedInThePast12Months_ResidesInHousehold
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+residenceType: dcs:Household
+childrenStatus: dcs:WithOwnChildrenUnder18
+householdType: dcs:FamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithOwnChildrenUnder18_Female_FamilyHousehold_MarriedInThePast12Months_ResidesInHousehold
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+residenceType: dcs:Household
+childrenStatus: dcs:WithOwnChildrenUnder18
+householdType: dcs:FamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrMoreYears_Female_MarriedInThePast12Months_OccupiedHousingUnit_ResidesInHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+age: [15 - Years]
+residenceType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15OrMoreYears_Female_MarriedInThePast12Months_OccupiedHousingUnit_ResidesInHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+age: [15 - Years]
+residenceType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_MarriedInThePast12Months_OwnerOccupied_ResidesInHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+occupancyTenure: dcs:OwnerOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_MarriedInThePast12Months_OwnerOccupied_ResidesInHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+occupancyTenure: dcs:OwnerOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_MarriedInThePast12Months_RenterOccupied_ResidesInHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+occupancyTenure: dcs:RenterOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_MarriedInThePast12Months_RenterOccupied_ResidesInHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:MarriedInThePast12Months
+gender: dcs:Female
+occupancyTenure: dcs:RenterOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrMoreYears_Male_DivorcedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15OrMoreYears_Male_DivorcedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_Male_DivorcedInThePast12Months
+statType: dcs:medianValue
+measuredProperty: dcs:age
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrMoreYears_Male_DivorcedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrMoreYears_Male_DivorcedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Male_DivorcedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Male_DivorcedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_Male_DivorcedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_Male_DivorcedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_InLaborForce_Male_DivorcedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+employmentStatus: dcs:BLS_InLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_InLaborForce_Male_DivorcedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+employmentStatus: dcs:BLS_InLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NotInLaborForce_Male_DivorcedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+employmentStatus: dcs:BLS_NotInLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NotInLaborForce_Male_DivorcedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+employmentStatus: dcs:BLS_NotInLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_DivorcedInThePast12Months_PovertyStatusDetermined
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_DivorcedInThePast12Months_PovertyStatusDetermined
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_DivorcedInThePast12Months_BelowPovertyLevelInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_DivorcedInThePast12Months_BelowPovertyLevelInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_DivorcedInThePast12Months_ResidesInHousehold
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+residenceType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_DivorcedInThePast12Months_ResidesInHousehold
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+residenceType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_DivorcedInThePast12Months_ResidesInHousehold
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+residenceType: dcs:Household
+childrenStatus: dcs:WithOwnChildrenUnder18
+householdType: dcs:FamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithOwnChildrenUnder18_Male_FamilyHousehold_DivorcedInThePast12Months_ResidesInHousehold
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+residenceType: dcs:Household
+childrenStatus: dcs:WithOwnChildrenUnder18
+householdType: dcs:FamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrMoreYears_Male_DivorcedInThePast12Months_OccupiedHousingUnit_ResidesInHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+age: [15 - Years]
+residenceType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15OrMoreYears_Male_DivorcedInThePast12Months_OccupiedHousingUnit_ResidesInHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+age: [15 - Years]
+residenceType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_DivorcedInThePast12Months_OwnerOccupied_ResidesInHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+occupancyTenure: dcs:OwnerOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_DivorcedInThePast12Months_OwnerOccupied_ResidesInHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+occupancyTenure: dcs:OwnerOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_DivorcedInThePast12Months_RenterOccupied_ResidesInHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+occupancyTenure: dcs:RenterOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_DivorcedInThePast12Months_RenterOccupied_ResidesInHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Male
+occupancyTenure: dcs:RenterOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrMoreYears_Female_DivorcedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15OrMoreYears_Female_DivorcedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_Female_DivorcedInThePast12Months
+statType: dcs:medianValue
+measuredProperty: dcs:age
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrMoreYears_Female_DivorcedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrMoreYears_Female_DivorcedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Female_DivorcedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Female_DivorcedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_Female_DivorcedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_Female_DivorcedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_InLaborForce_Female_DivorcedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+employmentStatus: dcs:BLS_InLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_InLaborForce_Female_DivorcedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+employmentStatus: dcs:BLS_InLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NotInLaborForce_Female_DivorcedInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+employmentStatus: dcs:BLS_NotInLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NotInLaborForce_Female_DivorcedInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+employmentStatus: dcs:BLS_NotInLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_DivorcedInThePast12Months_PovertyStatusDetermined
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_DivorcedInThePast12Months_PovertyStatusDetermined
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_DivorcedInThePast12Months_BelowPovertyLevelInThePast12Months
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_DivorcedInThePast12Months_BelowPovertyLevelInThePast12Months
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_DivorcedInThePast12Months_ResidesInHousehold
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+residenceType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_DivorcedInThePast12Months_ResidesInHousehold
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+residenceType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithOwnChildrenUnder18_Female_FamilyHousehold_DivorcedInThePast12Months_ResidesInHousehold
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+residenceType: dcs:Household
+childrenStatus: dcs:WithOwnChildrenUnder18
+householdType: dcs:FamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithOwnChildrenUnder18_Female_FamilyHousehold_DivorcedInThePast12Months_ResidesInHousehold
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+residenceType: dcs:Household
+childrenStatus: dcs:WithOwnChildrenUnder18
+householdType: dcs:FamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrMoreYears_Female_DivorcedInThePast12Months_OccupiedHousingUnit_ResidesInHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+age: [15 - Years]
+residenceType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15OrMoreYears_Female_DivorcedInThePast12Months_OccupiedHousingUnit_ResidesInHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+age: [15 - Years]
+residenceType: dcs:HousingUnit
+occupancyStatus: dcs:OccupiedHousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_DivorcedInThePast12Months_OwnerOccupied_ResidesInHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+occupancyTenure: dcs:OwnerOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_DivorcedInThePast12Months_OwnerOccupied_ResidesInHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+occupancyTenure: dcs:OwnerOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_DivorcedInThePast12Months_RenterOccupied_ResidesInHousingUnit
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+occupancyTenure: dcs:RenterOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_DivorcedInThePast12Months_RenterOccupied_ResidesInHousingUnit
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+maritalStatus: dcs:DivorcedInThePast12Months
+gender: dcs:Female
+occupancyTenure: dcs:RenterOccupied
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
