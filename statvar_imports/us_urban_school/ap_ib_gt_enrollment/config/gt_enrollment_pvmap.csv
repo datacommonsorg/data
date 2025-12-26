@@ -1,8 +1,6 @@
 key,prop,val,,,,,,
 YEAR,observationDate,{Number},populationType,Student,educationalProgram,GiftedAndTalented,enrollmentStatus,EnrolledInEducationOrTraining
 ncesid,observationAbout,ncesId/{Data},,,,,,
-,,,,,,,,
-,,,,,,,,
 M_AME_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,AmericanIndianOrAlaskaNative
 M_ASI_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,Asian
 M_HIS_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,HispanicOrLatino
@@ -23,9 +21,6 @@ F_2_OR_MORE_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race
 F_TOT_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,,
 F_DIS_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,disabilityStatus,WithDisability
 F_LEP_7_GT,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,languageFluencyLevel,LimitedEnglishProficient
-Incomplete,,,,,,,,
-,,,,,,,,
-SCH_GT_IND,,,,,,,,
 SCH_GTENR_HI_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,HispanicOrLatino
 SCH_GTENR_HI_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,race,HispanicOrLatino
 SCH_GTENR_AM_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,race,AmericanIndianOrAlaskaNative

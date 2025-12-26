@@ -35,63 +35,39 @@ BASE_URL_TEMPLATE = "https://civilrightsdata.ed.gov/assets/ocr/docs/{}.zip"
 DATA_CONFIGS = {
 
     # Advanced Placement Data Keywords
-
     "ap": {
-
         "keywords": [r'AP', r'Advanced Placement'],
-
         "search_constraint": {
-
             "2009-10": "CRDC-data_SCH_Pt 1-Advanced Placement.xlsx"
-
         },
 
         "output_name_fragment": "AP_Enrollment",
-
         "output_dir_name": "advanced_placements/input_files",
-
         "pvmap_config": "ap_enrollment_pvmap.csv"
-
     },
 
     # International Baccalaureate Data Keywords
-
     "ib": {
-
         "keywords": [r'IB', r'International Baccalaureate'],
-
         "search_constraint": {
-
             "2009-10": "CRDC-data_SCH_Pt 1-Enrollment_Pt 1-Students enrolled in IB Diploma Programme.xlsx"
-
         },
 
         "output_name_fragment": "IB_Enrollment",
-
         "output_dir_name": "international_baccalaureate/input_files",
-
         "pvmap_config": "ib_enrollment_pvmap.csv"
-
     },
 
     # Gifted and Talented Data Keywords
-
     "gt": {
-
         "keywords": [r'Gifted', r'Talented'],
-
         "search_constraint": {
-
             "2009-10": "CRDC-data_SCH_Pt 1-Enrollment_Pt 1-Students enrolled in Gifted-Talented Programs.xlsx"
-
         },
 
         "output_name_fragment": "GT_Enrollment",
-
         "output_dir_name": "gifted_and_talented/input_files",
-
         "pvmap_config": "gt_enrollment_pvmap.csv"
-
     }
 
 }
@@ -110,96 +86,65 @@ HARDCODED_CONFIGS = {
 SCRIPT_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
 
 def add_year_column(file_path, year):
-
     """
     Reads the file (CSV or XLSX), adds the 'YEAR' and 'ncesid' columns,
     and saves it back, using 'latin1' encoding for robustness.
     If the file is empty or contains no data rows, it is deleted.
     """
     logging.info(f"-> Starting post-processing for {file_path.name}")
-
     df = pd.DataFrame()
 
     try:
-
         if file_path.suffix == '.xlsx':
-
             df = pd.read_excel(file_path, engine='openpyxl')
-
         elif file_path.suffix == '.csv':
-
             try:
-
                 df = pd.read_csv(file_path, low_memory=False, encoding='latin1')
-
             except pd.errors.EmptyDataError:
-
                 logging.warning(f"Warning: No data found in {file_path.name}. Deleting empty file.")
-
                 os.remove(file_path) # Delete the empty file
-
                 return
-
         else:
 
             logging.info(f"Skipping year column addition for unsupported file format: {file_path.suffix}")
-
             return
 
         if df.empty:
-
             logging.warning(f"Warning: DataFrame is empty after reading {file_path.name}. Deleting empty file.")
-
             os.remove(file_path) # Delete the empty file
-
             return
 
         # Add YEAR column
-
         df['YEAR'] = year
 
         # Create NCESID column
-
         if all(col in df.columns for col in ["LEAID", "SCHID"]):
-
             df["LEAID"] = df["LEAID"].astype(str).str.zfill(7)
-
             df["SCHID"] = df["SCHID"].astype(str).str.zfill(5)
-
             df["ncesid"] = df["LEAID"] + df["SCHID"]
 
         else:
-
             logging.warning(f"-> Warning: Missing LEAID or SCHID columns for NCESID creation in {file_path.name}")
 
         # Reorder columns to place 'YEAR', 'ncesid', and 'JJ' (if present) at the beginning
-
         cols = df.columns.tolist()
-
         desired_first_cols = ['YEAR', 'ncesid']
 
         if 'JJ' in cols:
-
             desired_first_cols.append('JJ')
 
         # Remove desired_first_cols from their original positions
-
         for col in desired_first_cols:
             if col in cols:
                 cols.remove(col)
 
         # Construct the new column order
-
         new_column_order = desired_first_cols + cols
-
         df = df[new_column_order]
-
         if file_path.suffix == '.xlsx':
-
             df.to_excel(file_path, index=False)
 
         elif file_path.suffix == '.csv':
-
             df.to_csv(file_path, index=False)
 
         logging.info(f"-> Successfully added 'YEAR' and 'ncesid' columns to {file_path.name}")
@@ -207,22 +152,17 @@ def add_year_column(file_path, year):
     except Exception as e:
 
         # If an error occurs during processing but after the file was created, attempt to delete it.
-
         if file_path.exists():
-
             os.remove(file_path)
-
             logging.error(f"Deleted incomplete/corrupted file {file_path.name} due to error: {e}")
 
         raise RuntimeError(f"Failed to add year/ncesid column to {file_path.name}: {e}")
 
 def generate_future_configs(start_year):
-
     """
     Generates configuration dictionaries for future biennial CRDC years.
     """
     current_calendar_year = date.today().year
-
     generated_configs = {}
 
     for year in range(start_year, current_calendar_year + 1):
@@ -233,10 +173,8 @@ def generate_future_configs(start_year):
             continue
 
         generated_configs[year_range_key] = {
-
             "final_year": end_year
         }
-
     return generated_configs
 
 @retry(tries=3, delay=5, backoff=2)
@@ -252,39 +190,25 @@ def download_url_with_retry(zip_url):
     return response
 
 def get_file_keywords(data_type, config_key):
-
     """
-
     Retrieves the relevant keywords and constraints for the file extraction.
-
     """
-
     config = DATA_CONFIGS.get(data_type, {})
-
     keywords = config.get("keywords", [])
-
     search_constraints = config.get("search_constraint", {})
-
     specific_constraint = search_constraints.get(config_key, None)
-
     # Get output name fragment (e.g., "Enrollment" or "Teachers")
-
     output_name_fragment = config.get("output_name_fragment", "Data")
-
     pvmap_config = config.get("pvmap_config")
-
     return keywords, specific_constraint, output_name_fragment, pvmap_config
 
 def get_req_cols_from_config(config_path):
-
     """
     Reads a CSV config file to extract a list of required column names.
     It takes the first column, filters out specific values ('YEAR', 'ncesid', ''),
     and adds 'LEAID' and 'SCHID'.
     """
-
     try:
-
         df = pd.read_csv(config_path, header=None, usecols=[0], on_bad_lines='skip')
         # Get first column as a list
         req_cols = df[0].tolist()
@@ -298,9 +222,7 @@ def get_req_cols_from_config(config_path):
         return req_cols
 
     except Exception as e:
-
         logging.error(f"Failed to read or process config file {config_path}: {e}")
-
         return None
 
 def download_and_extract(config_key, config_data, data_type, output_dir):
@@ -309,12 +231,9 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
     then adds the year column and ncesid.
     """
     final_year = config_data["final_year"]
-    
     keywords, search_constraint, output_name_fragment, pvmap_config = get_file_keywords(data_type, config_key)
-
     url_fragment = f"{config_key}-crdc-data"
     zip_url = BASE_URL_TEMPLATE.format(url_fragment)
-
     logging.info(f"\n--- Processing {config_key} data ({data_type.capitalize()}) (Final Year: {final_year}) ---")
 
     try:
@@ -457,5 +376,4 @@ def main(_):
     logging.info(f"\n--- All downloads complete ---")
 
 if __name__ == '__main__':
-
     app.run(main)
