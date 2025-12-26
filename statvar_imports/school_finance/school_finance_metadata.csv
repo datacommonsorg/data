@@ -1,0 +1,5 @@
+parameter,value
+url,https://ocrdata.ed.gov/data
+header_rows,1
+output_columns,"observationAbout, observationDate, value, variableMeasured, unit, scalingFactor"
+#input_rows,15

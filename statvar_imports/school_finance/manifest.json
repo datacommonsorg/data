@@ -1,0 +1,31 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "US_UrbanSchool_Finances",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://ocrdata.ed.gov/data",
+      "provenance_description": "School Finance dataset contains financial and identifying information for educational institutions, including details on salaries and expenditures for teachers.",
+      "scripts": [
+        "download_script.py",
+        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/* --pv_map=school_finance_pvmap.csv --config_file=school_finance_metadata.csv --output_path=output/school_finance_output"
+      ],
+      "source_files": [
+        "input_files/*"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/school_finance_output.tmcf",
+          "cleaned_csv": "output/school_finance_output.csv"
+        }
+      ],
+      "cron_schedule": "30 08 25 * *",
+      "resource_limits": {
+        "cpu": 16,
+        "memory": 128,
+        "disk": 500
+      }
+    }
+  ]
+}
