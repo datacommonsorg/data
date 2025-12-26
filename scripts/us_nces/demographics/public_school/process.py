@@ -53,7 +53,7 @@ class NCESPublicSchool(USEducation):
 
 if __name__ == '__main__':
     try:
-        logging.set_verbosity(1)
+        logging.set_verbosity(logging.INFO)
         logging.info("Main Method Starts For Public School")
         gcs_output_dir_local = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "gcs_folder")
@@ -98,4 +98,6 @@ if __name__ == '__main__':
         logging.info("Main Method Completed For Public School District ")
 
     except Exception as e:
-        logging.fatal(f"Error While Running Public School Process: {e} ")
+        # Only log the first 1000 characters of the error message
+        error_msg = str(e)[:1000]
+        logging.fatal(f"Error While Running Public School Process: {error_msg}")

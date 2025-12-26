@@ -1,0 +1,7 @@
+Node: E:covid_directional_indicators_output4->E0
+observationDate: C:covid_directional_indicators_output4->observationDate
+observationAbout: C:covid_directional_indicators_output4->observationAbout
+variableMeasured: C:covid_directional_indicators_output4->variableMeasured
+value: C:covid_directional_indicators_output4->value
+#Aggregate: sum
+typeOf: dcs:StatVarObservation
