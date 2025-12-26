@@ -9,8 +9,8 @@
             "provenance_description": "Official public data from the NYC Department of Education, including student performance (test scores, graduation rates), school quality metrics, and student demographics across all five boroughs",
             "scripts": [
                 "download.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/english/*.csv --pv_map=NY_common_pvmap_english.csv --config_file=common_metadata.csv --places_resolved_csv=place_resolver.csv --output_path=output/english",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/maths/*.csv --pv_map=NY_common_pvmap_math.csv --config_file=common_metadata.csv --places_resolved_csv=place_resolver.csv --output_path=output/math"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/english/*.csv --pv_map=NY_common_pvmap_english.csv --config_file=NY_common_metadata.csv --places_resolved_csv=place_resolver.csv --output_path=output/english",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/maths/*.csv --pv_map=NY_common_pvmap_math.csv --config_file=NY_common_metadata.csv --places_resolved_csv=place_resolver.csv --output_path=output/math"
             ],
             "import_inputs": [
                 {

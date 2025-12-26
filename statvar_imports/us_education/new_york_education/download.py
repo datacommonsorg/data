@@ -1,3 +1,4 @@
+# Copyright 2025 Google LLC
 import os
 import sys
 import json
