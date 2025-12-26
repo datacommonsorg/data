@@ -5,8 +5,8 @@
 CRDC Data Downloader & Processor (Clean All IDs)
 ------------------------------------------------
 1. Downloads CRDC data.
-2. Fixes IDs: Cleans COMBOKEY, LEAID, SCHID, and NCESID.
-3. Removes all quotes and forces 12-digit format.
+2. Fixes IDs: Cleans LEAID (7 digits) and SCHID (5 digits).
+3. Generates NCESID by combining LEAID + SCHID (Total 12 digits).
 4. Saves only the data sheet.
 """
 
@@ -77,7 +77,8 @@ def clean_id_column(series):
 
 def transform_crdc_data(df: pd.DataFrame, year: int, filename: str) -> pd.DataFrame:
     """
-    Applies transformations: Adds observationDate, cleans ALL IDs, generates NCESID.
+    Applies transformations: Adds observationDate, cleans IDs, 
+    and generates NCESID by strictly combining LEAID + SCHID.
     """
     # Uppercase columns first
     df.columns = [x.upper() for x in df.columns]
@@ -85,36 +86,43 @@ def transform_crdc_data(df: pd.DataFrame, year: int, filename: str) -> pd.DataFr
     # Add Date
     df["observationDate"] = year
 
-    # --- 1. CLEAN SOURCE COLUMNS FIRST ---
-    # This ensures the original columns in the file don't have quotes either.
-    if "COMBOKEY" in df.columns:
-        df["COMBOKEY"] = clean_id_column(df["COMBOKEY"])
+    # --- 1. CLEAN & PAD SOURCE COLUMNS ---
+    # We must ensure LEAID is 7 chars and SCHID is 5 chars to build a valid 12-char NCESID.
     
     if "LEAID" in df.columns:
+        # Remove non-digits, then pad to 7 (e.g., "100005" -> "0100005")
         df["LEAID"] = clean_id_column(df["LEAID"]).str.zfill(7)
     
     if "SCHID" in df.columns:
+        # Remove non-digits, then pad to 5 (e.g., "879" -> "00879")
         df["SCHID"] = clean_id_column(df["SCHID"]).str.zfill(5)
-
-    # --- 2. CREATE AND PAD NCESID ---
+        
     if "COMBOKEY" in df.columns:
-        # Use the now-clean COMBOKEY
-        df["NCESID"] = df["COMBOKEY"].str.zfill(12)
-    elif "LEAID" in df.columns and "SCHID" in df.columns:
-        # Use the now-clean LEAID and SCHID
+        df["COMBOKEY"] = clean_id_column(df["COMBOKEY"])
+
+    # --- 2. GENERATE NCESID (STRICT LOGIC) ---
+    # Logic: Ignore the source COMBOKEY because it is often corrupt (missing zeros).
+    # Instead, construct it: NCESID = LEAID (7) + SCHID (5)
+    
+    if "LEAID" in df.columns and "SCHID" in df.columns:
         df["NCESID"] = df["LEAID"] + df["SCHID"]
+    elif "COMBOKEY" in df.columns:
+        # Fallback ONLY if LEAID or SCHID is missing
+        logging.warning(f"Using raw COMBOKEY fallback for {filename}")
+        df["NCESID"] = df["COMBOKEY"].str.zfill(12)
     else:
         logging.warning(f"Missing LEAID/SCHID or COMBOKEY in {filename}")
-
-    # Final check on NCESID just in case
-    if "NCESID" in df.columns:
-        df["NCESID"] = clean_id_column(df["NCESID"]).str.zfill(12)
+        df["NCESID"] = ""
 
     # --- 3. CLEAN YES/NO ---
     exclude_upper = [c.upper() for c in EXCLUDE_COLS]
+    # target columns are those NOT in the exclude list and NOT observationDate
     target_cols = [col for col in df.columns if col not in exclude_upper and col != 'observationDate']
     
+    # Replace Yes/No with 1/0
     df[target_cols] = df[target_cols].replace(REPLACEMENT_MAP)
+    
+    # Convert numeric columns, turning errors into NaN (blank)
     df[target_cols] = df[target_cols].apply(pd.to_numeric, errors='coerce')
 
     # --- 4. REORDER COLUMNS ---
