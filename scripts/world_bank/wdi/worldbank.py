@@ -563,7 +563,7 @@ def process(indicator_codes, worldbank_dataframe, saveOutput=True):
             worldbank_dataframe['ISO3166Alpha3'].replace({
                 'XKX': 'XKS'
             }).apply(lambda code: "dcid:Earth"
-                     if code == "WLD" else "dcid:country/" + code))
+                     if code == "WLD" else ("dcid:ChannelIslands" if code == "CHI" else "dcid:country/" + code)))
         worldbank_dataframe['StatisticalVariable'] = \
             worldbank_dataframe['StatisticalVariable'].apply(
                 lambda code: "dcs:" + code)
