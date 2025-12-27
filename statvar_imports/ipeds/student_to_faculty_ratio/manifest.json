@@ -1,0 +1,25 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "IPEDS_StudentToFacultyRatio",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true&sid=859539d0-db09-4d03-a36a-eabf93d07355&rtid=7",
+            "provenance_description": "Integrated Postsecondary Education Data System (IPEDS) is the official online home for the primary federal source of data on U.S. colleges, universities, and technical/vocational institutions.. This import focuses on Student to Faculty Ratio data.",
+            "scripts": [
+                "download.py","preprocess.py","run.sh"
+                        ],
+            "import_inputs": [
+                {
+                    "template_mcf": "processed_output/student_faculty_ratio_data_2009.tmcf",
+                    "cleaned_csv": "processed_output/*.csv"
+                }
+                ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "cron_schedule": "0 0 15 7 *"
+        }
+    ]
+}
