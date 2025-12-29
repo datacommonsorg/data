@@ -1,0 +1,71 @@
+Node: dcid:Count_Faculty_FullTimeEmployee_LawEnforcementOfficer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Faculty
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:FullTimeEmployee
+facultyType: dcid:LawEnforcementOfficer
+
+Node: dcid:Count_Faculty_FullTimeEmployee_Nurse
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Faculty
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:FullTimeEmployee
+facultyType: dcid:Nurse
+
+Node: dcid:Count_Faculty_FullTimeEmployee_SchoolCounselor
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Faculty
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:FullTimeEmployee
+facultyType: dcid:SchoolCounselor
+
+Node: dcid:Count_Faculty_FullTimeEmployee_SchoolPsychologist
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Faculty
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:FullTimeEmployee
+facultyType: dcid:SchoolPsychologist
+
+Node: dcid:Count_Faculty_FullTimeEmployee_SecurityGuard
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Faculty
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:FullTimeEmployee
+facultyType: dcid:SecurityGuard
+
+Node: dcid:Count_Faculty_FullTimeEmployee_SocialWorker
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Faculty
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:FullTimeEmployee
+facultyType: dcid:SocialWorker
+
+Node: dcid:Count_Teacher_Certified_FullTimeEmployee
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+certificationStatus: dcid:Certified
+employmentStatus: dcid:FullTimeEmployee
+
+Node: dcid:Count_Teacher_FullTimeEmployee
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:FullTimeEmployee
+
+Node: dcid:Count_Teacher_NotCertified_FullTimeEmployee
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+certificationStatus: dcid:NotCertified
+employmentStatus: dcid:FullTimeEmployee
+

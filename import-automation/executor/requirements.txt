@@ -8,6 +8,7 @@ chromedriver_py
 croniter
 dataclasses
 datacommons
+datacommons_client
 db-dtypes
 duckdb
 frozendict
@@ -18,6 +19,7 @@ geojson
 geopy
 google-api-python-client
 google-auth
+google-cloud-batch
 google-cloud-bigquery
 google-cloud-bigquery-storage
 google-cloud-datastore
@@ -26,6 +28,7 @@ google-cloud-spanner
 google-cloud-storage
 google-cloud-logging
 google-cloud-scheduler
+google-cloud-secret-manager
 gspread
 gunicorn
 legacy-cgi
@@ -33,6 +36,7 @@ lxml
 numpy
 openpyxl
 pandas
+omegaconf
 prettytable
 protobuf
 psutil
@@ -59,3 +63,4 @@ netCDF4
 xmltodict
 sodapy
 certifi==2025.1.31
+tqdm

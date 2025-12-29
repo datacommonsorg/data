@@ -1,0 +1,3 @@
+parameter,value
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+dc_api_root,https://api.datacommons.org

@@ -1,0 +1,24 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "NYU_Tennessee_Diabetes",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.tn.gov/health/health-program-areas/statistics/health-data/death-statistics.html",
+      "provenance_description": "This import utilizes official diabetes mortality data from the Tennessee Department of Health, detailing county-level death statistics.",
+      "scripts": ["download.py",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.xlsx --pv_map=pvmap.csv --config_file=metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=place_resolver.csv --output_path=output_files/tennessee_output"
+      ] ,
+      "source_files": [
+        "input_files/*.xlsx"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/tennessee_output.tmcf",
+          "cleaned_csv": "output_files/tennessee_output.csv"
+        }
+      ],
+      "cron_schedule": "0 05 * * 5"
+    }
+  ]
+}
+

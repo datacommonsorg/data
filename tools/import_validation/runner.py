@@ -18,14 +18,18 @@ from absl import app
 from absl import flags
 from absl import logging
 import pandas as pd
+import json
 import sys
 from typing import Tuple
 
-from .validation_config import ValidationConfig
-from .report_generator import ReportGenerator
-from .validator import Validator
-from .util import filter_dataframe
-from .result import ValidationResult, ValidationStatus
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _SCRIPT_DIR)
+
+from validation_config import ValidationConfig
+from report_generator import ReportGenerator
+from validator import Validator
+from result import ValidationResult, ValidationStatus
+from util import filter_dataframe
 
 _FLAGS = flags.FLAGS
 
@@ -36,14 +40,16 @@ class ValidationRunner:
   """
 
     def __init__(self, validation_config_path: str, differ_output: str,
-                 stats_summary: str, validation_output: str):
+                 stats_summary: str, lint_report: str, validation_output: str):
         self.config = ValidationConfig(validation_config_path)
         self.validation_output = validation_output
         self.validator = Validator()
         self.validation_results = []
-        self.dataframes = {'stats': pd.DataFrame(), 'differ': pd.DataFrame()}
-
-        self._initialize_data_sources(stats_summary, differ_output)
+        self.data_sources = {
+            'stats': pd.DataFrame(),
+            'differ': pd.DataFrame(),
+            'lint': {}
+        }
 
         self.validation_dispatch = {
             'SQL_VALIDATOR': (self.validator.validate_sql, 'sql'),
@@ -52,6 +58,10 @@ class ValidationRunner:
             'MAX_DATE_CONSISTENT':
                 (self.validator.validate_max_date_consistent, 'stats'),
             'DELETED_COUNT': (self.validator.validate_deleted_count, 'differ'),
+            'MISSING_REFS_COUNT':
+                (self.validator.validate_missing_refs_count, 'lint'),
+            'LINT_ERROR_COUNT':
+                (self.validator.validate_lint_error_count, 'lint'),
             'MODIFIED_COUNT':
                 (self.validator.validate_modified_count, 'differ'),
             'ADDED_COUNT': (self.validator.validate_added_count, 'differ'),
@@ -69,53 +79,71 @@ class ValidationRunner:
                 (self.validator.validate_max_value_check, 'stats'),
         }
 
-    def _initialize_data_sources(self, stats_summary: str, differ_output: str):
+        self._initialize_data_sources(stats_summary, lint_report, differ_output)
+
+    def _initialize_data_sources(self, stats_summary: str, lint_report: str,
+                                 differ_output: str):
         """
     Checks for and loads the required data sources based on the config.
     """
-        stats_required, differ_required = self._determine_required_sources()
+        req_sources = self._determine_required_sources()
 
-        if stats_required and (not stats_summary or
-                               not os.path.exists(stats_summary)):
+        if 'stats' in req_sources and (not stats_summary or
+                                       not os.path.exists(stats_summary)):
             raise ValueError(
                 f"A validation rule requires the 'stats' data source, but the --stats_summary file was not provided or does not exist. Path: {stats_summary}"
             )
 
-        if differ_required:
+        if 'differ' in req_sources:
             if not differ_output or not os.path.exists(differ_output):
                 logging.warning(
                     f"A validation rule requires the 'differ' data source, but the --differ_output file was not provided or does not exist. Path: {differ_output}"
                 )
 
+        if 'lint' in req_sources and (not lint_report or
+                                      not os.path.exists(lint_report)):
+            raise ValueError(
+                f"A validation rule requires the 'lint' data source, but the --lint_report file was not provided or does not exist. Path: {lint_report}"
+            )
+
         if stats_summary and os.path.exists(stats_summary) and os.path.getsize(
                 stats_summary) > 0:
-            self.dataframes['stats'] = pd.read_csv(stats_summary)
+            self.data_sources['stats'] = pd.read_csv(stats_summary)
         elif stats_summary and os.path.exists(stats_summary):
             logging.warning("stats_summary file exists but is empty: %s",
                             stats_summary)
 
         if differ_output and os.path.exists(differ_output) and os.path.getsize(
                 differ_output) > 0:
-            self.dataframes['differ'] = pd.read_csv(differ_output)
+            self.data_sources['differ'] = pd.read_csv(differ_output)
         elif differ_output and os.path.exists(differ_output):
             logging.warning("differ_output file exists but is empty: %s",
                             differ_output)
 
-    def _determine_required_sources(self) -> Tuple[bool, bool]:
+        if lint_report and os.path.exists(lint_report) and os.path.getsize(
+                lint_report) > 0:
+            try:
+                with open(lint_report, 'r') as f:
+                    self.data_sources['lint'] = json.load(f)
+            except Exception as e:
+                logging.error(
+                    "JSON parse error while reading lint report at {lint_report}: {e}"
+                )
+        elif lint_report and os.path.exists(lint_report):
+            logging.warning("lint_report file exists but is empty: %s",
+                            lint_report)
+
+    def _determine_required_sources(self) -> set[str]:
         """
     Parses the validation config to determine which data sources are required.
     """
-        stats_required = False
-        differ_required = False
+        req_sources = set()
         for rule in self.config.rules:
             if not rule.get('enabled', True):
                 continue
             if 'scope' in rule and 'data_source' in rule['scope']:
-                if rule['scope']['data_source'] == 'stats':
-                    stats_required = True
-                elif rule['scope']['data_source'] == 'differ':
-                    differ_required = True
-        return stats_required, differ_required
+                req_sources.add(rule['scope']['data_source'])
+        return req_sources
 
     def run_validations(self) -> tuple[bool, list[ValidationResult]]:
         """Runs all validations specified in the config.
@@ -139,16 +167,15 @@ class ValidationRunner:
                 validator_name]
 
             if validator_name == 'SQL_VALIDATOR':
-                result = validation_func(self.dataframes['stats'],
-                                         self.dataframes['differ'],
+                result = validation_func(self.data_sources['stats'],
+                                         self.data_sources['differ'],
                                          rule['params'])
             else:
                 scope = rule['scope']
                 if isinstance(scope, str):
                     scope = self.config.get_scope(scope)
 
-                data_source = scope['data_source']
-                df = self.dataframes[data_source]
+                df = self.data_sources[data_source_key]
 
                 if 'variables' in scope:
                     variables_config = scope['variables']
@@ -181,9 +208,12 @@ class ValidationRunner:
 
 def main(_):
     try:
-        runner = ValidationRunner(_FLAGS.validation_config,
-                                  _FLAGS.differ_output, _FLAGS.stats_summary,
-                                  _FLAGS.validation_output)
+        config_path = _FLAGS.validation_config
+        runner = ValidationRunner(validation_config_path=config_path,
+                                  differ_output=_FLAGS.differ_output,
+                                  stats_summary=_FLAGS.stats_summary,
+                                  lint_report=_FLAGS.lint_report,
+                                  validation_output=_FLAGS.validation_output)
         overall_status, _ = runner.run_validations()
         if not overall_status:
             sys.exit(1)
@@ -199,6 +229,8 @@ if __name__ == '__main__':
                         'Path to the differ output data file.')
     flags.DEFINE_string('stats_summary', None,
                         'Path to the stats summary report file.')
+    flags.DEFINE_string('lint_report', None,
+                        'Path to the mcf lint report file.')
     flags.DEFINE_string('validation_output', None,
                         'Path to the validation output file.')
     flags.mark_flag_as_required('validation_output')

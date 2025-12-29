@@ -40,6 +40,27 @@ def pacific_time():
     return datetime.datetime.now(pytz.timezone(_PACIFIC_TIME)).isoformat()
 
 
+def next_utc_timestamp(cron_expression: str, from_time: str = None) -> datetime:
+    """Returns the next refresh timestamp from today with timezone UTC+0,
+    given a cron schedule.
+
+    Args:
+        cron_expression: Expression for cron schedule.
+        from_time: Optional time to start from. Default is now.
+    
+    Returns:
+        The next refresh timestamp based on the schedule.
+    """
+    try:
+        if not from_time:
+            from_time = datetime.datetime.now(datetime.timezone.utc)
+        iter = croniter(cron_expression, from_time)
+        return iter.get_next(datetime.datetime)
+    except Exception as e:
+        print(f"Error calculating next date: {e}")
+        return None
+
+
 def next_utc_date(cron_expression: str, from_time: str = None) -> str:
     """Returns the next date from today in ISO8601 with timezone UTC+0,
     given a cron schedule.
@@ -52,10 +73,7 @@ def next_utc_date(cron_expression: str, from_time: str = None) -> str:
         The next date based on the schedule.
     """
     try:
-        if not from_time:
-            from_time = datetime.datetime.now(datetime.timezone.utc)
-        iter = croniter(cron_expression, from_time)
-        return iter.get_next(datetime.datetime).date().isoformat()
+        return next_utc_timestamp(cron_expression, from_time).date().isoformat()
     except Exception as e:
         print(f"Error calculating next date: {e}")
         return ""
