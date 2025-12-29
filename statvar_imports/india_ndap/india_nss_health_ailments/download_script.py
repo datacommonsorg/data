@@ -129,8 +129,7 @@ def preprocess_and_save(data: List[Tuple], output_dir: str) -> None:
   df = pd.DataFrame(data, columns=_OUTPUT_COLUMNS)
 
   os.makedirs(output_dir, exist_ok=True)
-  output_path = os.path.join(output_dir, 'indian_nss_health_ailments.csv')
-  df.to_csv(output_path, index=False)
+      output_path = os.path.join(output_dir, 'india_nss_health_ailments.csv')  df.to_csv(output_path, index=False)
   logging.info('Data saved to %s', output_path)
 
 

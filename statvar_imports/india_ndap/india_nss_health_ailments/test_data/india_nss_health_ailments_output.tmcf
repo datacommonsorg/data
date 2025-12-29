@@ -1,8 +1,8 @@
-Node: E:IndiaNSS_HealthAilments_output->E0
-observationAbout: C:IndiaNSS_HealthAilments_output->observationAbout
-observationDate: C:IndiaNSS_HealthAilments_output->observationDate
-value: C:IndiaNSS_HealthAilments_output->value
-variableMeasured: C:IndiaNSS_HealthAilments_output->variableMeasured
-unit: C:IndiaNSS_HealthAilments_output->unit
-scalingFactor: C:IndiaNSS_HealthAilments_output->scalingFactor
+Node: E:india_nss_health_ailments_output->E0
+observationAbout: C:india_nss_health_ailments_output->observationAbout
+observationDate: C:india_nss_health_ailments_output->observationDate
+value: C:india_nss_health_ailments_output->value
+variableMeasured: C:india_nss_health_ailments_output->variableMeasured
+unit: C:india_nss_health_ailments_output->unit
+scalingFactor: C:india_nss_health_ailments_output->scalingFactor
 typeOf: dcs:StatVarObservation
