@@ -1,18 +1,48 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import functions_framework
 from spanner_client import SpannerClient
 from storage_client import StorageClient
 from flask import jsonify
 import logging
 import import_utils
+import os
+import sys
+from absl import flags
 
 logging.getLogger().setLevel(logging.INFO)
 
-_PROJECT_ID = 'datcom-import-automation-prod'
-_SPANNER_PROJECT_ID = 'datcom-store'
-_SPANNER_INSTANCE_ID = 'dc-kg-test'
-_SPANNER_DATABASE_ID = 'dc_graph_import'
-_GCS_BUCKET_ID = 'datcom-prod-imports'
-_LOCATION = 'us-central1'
+FLAGS = flags.FLAGS
+
+flags.DEFINE_string(
+    'project_id', os.environ.get('PROJECT_ID', 'datcom-import-automation-prod'),
+    'GCP Project ID')
+flags.DEFINE_string('spanner_project_id',
+                    os.environ.get('SPANNER_PROJECT_ID', 'datcom-store'),
+                    'Spanner Project ID')
+flags.DEFINE_string('spanner_instance_id',
+                    os.environ.get('SPANNER_INSTANCE_ID', 'dc-kg-test'),
+                    'Spanner Instance ID')
+flags.DEFINE_string('spanner_database_id',
+                    os.environ.get('SPANNER_DATABASE_ID', 'dc_graph_import'),
+                    'Spanner Database ID')
+flags.DEFINE_string('gcs_bucket_id',
+                    os.environ.get('GCS_BUCKET_ID', 'datcom-prod-imports'),
+                    'GCS Bucket ID')
+flags.DEFINE_string('location', os.environ.get('LOCATION', 'us-central1'),
+                    'GCP Location')
 
 
 def _validate_params(request_json, required_params):
@@ -36,9 +66,9 @@ def ingestion_helper(request):
         return (validation_error, 400)
 
     actionType = request_json['actionType']
-    spanner = SpannerClient(_SPANNER_PROJECT_ID, _SPANNER_INSTANCE_ID,
-                            _SPANNER_DATABASE_ID)
-    storage = StorageClient(_GCS_BUCKET_ID)
+    spanner = SpannerClient(FLAGS.spanner_project_id, FLAGS.spanner_instance_id,
+                            FLAGS.spanner_database_id)
+    storage = StorageClient(FLAGS.gcs_bucket_id)
 
     if actionType == 'get_import_list':
         # Gets the list of imports that are ready for ingestion.
@@ -76,8 +106,8 @@ def ingestion_helper(request):
         import_list = request_json['importList']
         workflow_id = request_json['workflowId']
         job_id = request_json['jobId']
-        metrics = import_utils.get_ingestion_metrics(_PROJECT_ID, _LOCATION,
-                                                     job_id)
+        metrics = import_utils.get_ingestion_metrics(FLAGS.project_id,
+                                                     FLAGS.location, job_id)
         spanner.update_ingestion_status(import_list, workflow_id, job_id,
                                         metrics)
         return ('Updated ingestion status', 200)
