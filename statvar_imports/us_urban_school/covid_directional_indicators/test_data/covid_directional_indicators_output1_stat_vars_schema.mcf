@@ -1,0 +1,45 @@
+Node: dcid:instructionMode
+typeOf: dcs:Property
+name: "instructionMode"
+domainIncludes: dcid:PublicSchool
+rangeIncludes: dcid:InstructionModeEnum
+isProvisional: dcs:True
+
+Node: dcid:InstructionModeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "InstructionModeEnum"
+isProvisional: dcs:True
+
+Node: dcid:InstructionInPerson
+typeOf: dcid:InstructionModeEnum
+name: "Instruction In Person"
+isProvisional: dcs:True
+
+Node: dcid:medicalCondition
+typeOf: dcs:Property
+name: "medicalCondition"
+domainIncludes: dcid:PublicSchool
+
+Node: dcid:InstructionInHybrid
+typeOf: dcid:InstructionModeEnum
+name: "Instruction In Hybrid"
+isProvisional: dcs:True
+
+Node: dcid:InstructionInRemote
+typeOf: dcid:InstructionModeEnum
+name: "Instruction In Remote"
+isProvisional: dcs:True
+
+Node: dcid:NoEffect
+typeOf: dcid:InstructionModeEnum
+name: "No Effect"
+isProvisional: dcs:True
+
+Node: dcid:prop
+typeOf: dcs:Property
+name: "prop"
+domainIncludes: dcid:PublicSchool
+rangeIncludes: dcid:Property
+isProvisional: dcs:True
+
