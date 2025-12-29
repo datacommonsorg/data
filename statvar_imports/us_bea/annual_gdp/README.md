@@ -15,7 +15,7 @@ This project processes and imports the Annual Gross Domestic Product (GDP) data 
 
 The import process is divided into two main stages: downloading the raw data and then processing it to generate the final artifacts for ingestion.
 
-*   **Input files**:
+*   **Input files**: 
     *   `download_script.py`: Script to download and preprocess the raw data.
     *   `input_files/sagdpX__all_areas_YYYY_2024.csv`: Raw data files after download and initial cleanup.
     *   `pv_map/sagdpX__all_areas_1997_2024_pvmap.csv`: Property-value mapping files.
@@ -84,3 +84,20 @@ This script runs unit tests for the `download_script.py` to verify its functiona
 ```bash
 python3 download_script_test.py
 ```
+
+## SAGDP File Descriptions
+
+The following table provides a brief description of each SAGDP file included in this import.
+
+| File Suffix | Description |
+|---|---|
+| SAGDP1 | State annual gross domestic product (GDP) summary |
+| SAGDP2 | Gross domestic product (GDP) by state |
+| SAGDP3 | Taxes on production and imports less subsidies |
+| SAGDP4 | Compensation of employees |
+| SAGDP5 | Subsidies |
+| SAGDP6 | Taxes on production and imports |
+| SAGDP7 | Gross operating surplus |
+| SAGDP8 | Chain-type quantity indexes for real GDP by state (2017=100.0) |
+| SAGDP9 | Real GDP by state |
+| SAGDP11 | Contributions to percent change in real GDP |
