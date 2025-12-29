@@ -1,3 +1,16 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """Utility functions for the ingestion helper."""
 
 import logging
@@ -22,15 +35,13 @@ def get_caller_identity(request):
             unverified_claims = {}
             try:
                 unverified_claims = jwt.decode(token, verify=False)
-                #logging.info(f"Token claims (unverified): iss={unverified_claims.get('iss')}, aud={unverified_claims.get('aud')}, email={unverified_claims.get('email')}")
-                logging.warning(
-                    f"Could not decode unverified token for debugging: {debug_e}"
-                )
                 id_info = id_token.verify_oauth2_token(token,
                                                        requests.Request())
                 return id_info.get('email', 'unknown_email')
             except Exception as e:
                 if unverified_claims:
+                    logging.warning(
+                        f"Could not decode unverified token for debugging: {e}")
                     email = unverified_claims.get('email', 'unknown_email')
                     return f"{email} (unverified)"
                 return 'decode_error'
@@ -111,7 +122,7 @@ def create_import_params(summary) -> dict:
 
 
 def get_ingestion_metrics(project_id, location, job_id):
-    """Fetches graph metrics (nodes, edges, observations) from a Dataflow job.
+    """Fetches graph metrics (nodes, edges, observations) and execution time from a Dataflow job.
 
     Args:
         project_id: The GCP project ID.
@@ -119,15 +130,32 @@ def get_ingestion_metrics(project_id, location, job_id):
         job_id: The Dataflow job ID.
 
     Returns:
-        A dictionary containing 'obs_count', 'node_count', and 'edge_count'.
+        A dictionary containing 'obs_count', 'node_count', 'edge_count', and 'execution_time'.
     """
     dataflow = build('dataflow', 'v1b3', cache_discovery=False)
     # Fetch Dataflow metrics
     node_count = 0
     edge_count = 0
     obs_count = 0
+    execution_time = 0
     if project_id and job_id:
         try:
+            # Fetch Job details for execution time
+            job = dataflow.projects().locations().jobs().get(
+                projectId=project_id, location=location,
+                jobId=job_id).execute()
+
+            start_time_str = job.get('startTime')
+            current_state_time_str = job.get('currentStateTime')
+
+            if start_time_str and current_state_time_str:
+                # Handle potential 'Z' suffix by replacing it with '+00:00' for compatibility
+                start_time = datetime.fromisoformat(
+                    start_time_str.replace('Z', '+00:00'))
+                end_time = datetime.fromisoformat(
+                    current_state_time_str.replace('Z', '+00:00'))
+                execution_time = int((end_time - start_time).total_seconds())
+
             metrics = dataflow.projects().locations().jobs().getMetrics(
                 projectId=project_id, location=location,
                 jobId=job_id).execute()
@@ -145,5 +173,6 @@ def get_ingestion_metrics(project_id, location, job_id):
     return {
         'obs_count': obs_count,
         'node_count': node_count,
-        'edge_count': edge_count
+        'edge_count': edge_count,
+        'execution_time': execution_time
     }
