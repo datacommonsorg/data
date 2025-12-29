@@ -35,8 +35,8 @@
             "cron_schedule": "0 8 1,15 * *",
             "resource_limits": {
                 "cpu": 32,
-                "memory": 256,
-                "disk": 200
+                "memory": 512,
+                "disk": 400
             }
         }
     ]
