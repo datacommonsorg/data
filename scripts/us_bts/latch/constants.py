@@ -36,9 +36,9 @@ MELT_VAR_COL = "householdSize_numberOfVehicles"
 
 MELT_OBV_COL = "observation"
 
-_HOUSEHOLD_PV = "{person}"
+_HOUSEHOLD_PV = "With{person}Person"
 
-_NUM_OF_VEHICLES_PV = "{vehicle}"
+_NUM_OF_VEHICLES_PV = "With{vehicle}AvailableVehicles"
 
 # pylint: disable=unnecessary-lambda-assignment
 # pylint: disable=line-too-long
@@ -199,15 +199,10 @@ DF_DEFAULT_MCF_PROP = [
 SV_PROP_ORDER = [
     "typeOf", "populationType", "statType", "measurementQualifier",
     "measuredProperty", "householdSize", "numberOfVehicles",
-    "transportationType", "placeOfResidenceClassification"
+    "transportationType"
 ]
 
 FORM_STATVAR = {
-    "placeOfResidenceClassification": {
-        "column": "urban_group",
-        "update_value": _DEFAULT_PROP,
-        "pv_format": _PV_FORMAT
-    },
     "numberOfVehicles": {
         "column": MELT_VAR_COL,
         "regex": {
