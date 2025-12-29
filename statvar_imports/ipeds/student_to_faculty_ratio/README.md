@@ -33,7 +33,7 @@ The processor uses `metadata and pv_map` files (not explicitly named for IPEDS h
 
 # Output Files:
 
-`processed_output/student_faculty_ratio_data_2009.tmcf (Template MCF)`
+`processed_output/student_faculty_ratio.tmcf (Template MCF)`
 
 `processed_output/*.csv (Cleaned CSV data files)`
 
@@ -47,8 +47,6 @@ This import is designed to be autorefreshed via a Cloud Scheduler job.
 # Scripts Executed: `download.py, preprocess.py, run.sh`
 
 Schedule: 0 0 15 7 * (Runs at 00:00 on day 15 of July, i.e., annually on July 15th).
-
-Resource Limits: CPU: 32, Memory: 256, Disk: 1000
 
 ## Steps:
 
