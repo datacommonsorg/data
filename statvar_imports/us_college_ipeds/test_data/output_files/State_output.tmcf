@@ -1,7 +1,0 @@
-Node: E:State_output->E0
-observationAbout: C:State_output->observationAbout
-observationDate: C:State_output->observationDate
-value: C:State_output->value
-variableMeasured: C:State_output->variableMeasured
-typeOf: dcs:StatVarObservation
-observationPeriod: 1Y

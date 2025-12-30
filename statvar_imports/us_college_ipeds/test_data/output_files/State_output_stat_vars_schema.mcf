@@ -1,6 +1,0 @@
-Node: dcid:collegeOrGraduateSchoolEnrollment
-typeOf: dcs:Property
-name: "collegeOrGraduateSchoolEnrollment"
-domainIncludes: dcid:Student
-rangeIncludes: dcid:USC_CollegeOrGraduateSchoolEnrollmentEnum,dcid:USC_LevelOfSchoolEnum
-

@@ -1,7 +1,0 @@
-Node: E:totalStudents_output->E0
-observationAbout: C:totalStudents_output->observationAbout
-observationDate: C:totalStudents_output->observationDate
-value: C:totalStudents_output->value
-variableMeasured: C:totalStudents_output->variableMeasured
-observationPeriod: 1Y
-typeOf: dcs:StatVarObservation
