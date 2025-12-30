@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+from absl import logging
 
 def clean_csv(file_path):
     with open(file_path, 'r') as f:
@@ -15,13 +16,13 @@ def clean_csv(file_path):
         cleaned_content = lines[start_index:]
         with open(file_path, 'w') as f:
             f.writelines(cleaned_content)
-        print(f"Cleaned {file_path} successfully, removed {start_index} initial rows.")
+        logging.info("Cleaned %s successfully, removed %s initial rows.", file_path, start_index)
     else:
-        print(f"Could not find 'Year' in {file_path}. No changes made.")
+        logging.info("Could not find 'Year' in %s. No changes made.", file_path)
 
 def clean_csv_in_directory(directory):
     if not os.path.isdir(directory):
-        print(f"Directory '{directory}' not found.")
+        logging.error("Directory %s not found.", directory)
         return
 
     csv_files = [f for f in os.listdir(directory) if f.endswith('.csv')]
