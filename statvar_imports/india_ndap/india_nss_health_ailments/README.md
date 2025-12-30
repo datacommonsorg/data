@@ -19,7 +19,7 @@ Before ingestion, the following preprocessing is done:
 
 * **Input files**:
 
-  * `india_nss_health.csv`: Raw input data
+  * `india_nss_health_ailments.csv`: Raw input data
   * `pvmap.csv`: Property-value mapping
   * `place_resolved.csv`: Geo resolution data for Indian states/UTs
   * `metadata.csv`: StatVar metadata (used by `stat_var_processor.py`)
@@ -27,7 +27,7 @@ Before ingestion, the following preprocessing is done:
 
   * Columns are cleaned and standardized to match StatVar expectations.
   * StatVars are generated using `stat_var_processor.py`.
-  * Output is written to `IndiaNSS_HealthAilments.csv` and corresponding `IndiaNSS_HealthAilments.tmcf`.
+  * Output is written to `india_nss_health_ailments.csv` and corresponding `india_nss_health_ailments.tmcf`.
 * **Data Quality Checks**:
 
   * Linting is performed using the DataCommons import tool JAR
@@ -63,7 +63,7 @@ Before ingestion, the following preprocessing is done:
 
 ```bash
 python3 stat_var_processor.py \
-  --input_data='/path/to/india_nss_health.csv' \
+  --input_data='/path/to/india_nss_health_ailments.csv' \
   --pv_map='/path/to/pvmap.csv' \
   --places_resolved_csv='/path/to/place_resolved.csv' \
   --config_file='/path/to/metadata.csv' \
@@ -71,7 +71,7 @@ python3 stat_var_processor.py \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
-**Purpose**: Generates StatVar MCF and cleaned observation CSV (`IndiaNSS_HealthAilments.csv`, `IndiaNSS_HealthAilments.tmcf`)
+**Purpose**: Generates StatVar MCF and cleaned observation CSV (`india_nss_health_ailments.csv`, `india_nss_health_ailments.tmcf`)
 
 ---
 
@@ -81,8 +81,8 @@ python3 stat_var_processor.py \
 
 ```bash
 java -jar '/path/to/datacommons-import-tool.jar' lint \
-  '/path/to/IndiaNSS_HealthAilments.csv' \
-  '/path/to/IndiaNSS_HealthAilments.tmcf'
+  '/path/to/india_nss_health_ailments.csv' \
+  '/path/to/india_nss_health_ailments.tmcf'
 ```
 
 **Purpose**: Validates final CSV+TMCF for formatting and semantic consistency before ingestion
@@ -96,7 +96,7 @@ java -jar '/path/to/datacommons-import-tool.jar' lint \
 ```bash
 python3 download_script.py
 ```
-**Output**: `IndiaNSS_HealthAilments.csv`
+**Output**: `india_nss_health_ailments.csv`
 
-**Purpose**: Downloads the raw data from the NDAP API and saves it as `IndiaNSS_HealthAilments.csv`.
+**Purpose**: Downloads the raw data from the NDAP API and saves it as `india_nss_health_ailments.csv`.
 

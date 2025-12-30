@@ -9,16 +9,16 @@
             "provenance_description": "A quantitative dataset from the NSS Report No. 556 on Health in India, providing a profile of ailments, healthcare facility usage, and expenditures based on a survey",
             "scripts": [
                 "download_script.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=IndiaNSS_HealthAilments.csv --pv_map=IndiaNSS_HealthAilments_pvmap.csv --places_resolved_csv=IndiaNSS_HealthAilments_place_resolved.csv --config_file=IndiaNSS_HealthAilments_metadata.csv  --output_path=output/IndiaNSS_HealthAilments_output"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=india_nss_health_ailments.csv --pv_map=india_nss_health_ailments_pvmap.csv --places_resolved_csv=india_nss_health_ailments_place_resolved.csv --config_file=india_nss_health_ailments_metadata.csv --output_path=output/india_nss_health_ailments_output"
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output/IndiaNSS_HealthAilments_output.tmcf",
-                    "cleaned_csv": "output/IndiaNSS_HealthAilments_output.csv"
+                    "template_mcf": "output/india_nss_health_ailments_output.tmcf",
+                    "cleaned_csv": "output/india_nss_health_ailments_output.csv"
                 }
             ],
             "source_files": [
-                "IndiaNSS_HealthAilments.csv"
+                "india_nss_health_ailments.csv"
             ],
             "cron_schedule": "0 0 1 1 *"
         }
