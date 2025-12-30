@@ -1,0 +1,7 @@
+Node: E:newyor_diabetes_ouput->E0
+observationAbout: C:newyor_diabetes_ouput->observationAbout
+value: C:newyor_diabetes_ouput->value
+typeOf: dcs:StatVarObservation
+unit: Percent
+observationDate: 2016
+variableMeasured: dcid:Percent_Person_WithDiabetes
