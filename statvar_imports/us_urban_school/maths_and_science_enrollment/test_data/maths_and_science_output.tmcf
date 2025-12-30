@@ -1,0 +1,6 @@
+Node: E:maths_and_science_output->E0
+observationDate: C:maths_and_science_output->observationDate
+observationAbout: C:maths_and_science_output->observationAbout
+variableMeasured: C:maths_and_science_output->variableMeasured
+value: C:maths_and_science_output->value
+typeOf: dcs:StatVarObservation
