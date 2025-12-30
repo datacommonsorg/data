@@ -16,15 +16,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/NFHS4_output.tmcf",
-                    "cleaned_csv": "output/NFHS_output.csv"
-                },
-                {
-                    "template_mcf": "output/NFHS4_output.tmcf",
-                    "cleaned_csv": "output/NFHS4_output.csv"
-                },
-                {
-                    "template_mcf": "output/NFHS4_output.tmcf",
-                    "cleaned_csv": "output/NFHS5_output.csv"
+                    "cleaned_csv": "output/*.csv"
                 }
             ],
             "source_file": [
