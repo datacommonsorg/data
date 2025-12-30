@@ -9,6 +9,7 @@
             "provenance_description": "Data focuses on Full-Time Equivalent (FTE) enrollment across U.S. postsecondary institutions",
             "scripts": [
             "run.sh",
+            "preprocess.py",
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/controlOfInstitution_data.csv --pv_map=pvmap/controlOfInstitution_pvmap.csv --config_file=metadata.csv --output_path=output/ControlOfInstitution_output",
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/degreeOfUrbanization_data.csv --pv_map=pvmap/degreeOfUrbanization_pvmap.csv --config_file=metadata.csv --output_path=output/DegreeOfUrbanization_output",
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/highestDegreeOffered_data.csv --pv_map=pvmap/highestDegreeOffered_pvmap.csv --config_file=metadata.csv --output_path=output/HighestDegreeOffered_output",
