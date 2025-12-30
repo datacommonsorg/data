@@ -35,7 +35,13 @@ The workflow for this data import involves two main steps: downloading the neces
 
 To acquire the necessary data files, execute the download script `download_script.py`.
 
-All downloaded files will be stored in the directory `input_files`.
+# This script performs the following:
+
+- Downloads the original source files into raw_input_files/ (keeping them unmodified).
+
+- Transforms the data (cleaning IDs, standardizing formats) and saves the results to input_files/ with the prefix transformed_.
+
+- Uploads the transformed files to GCS.
 
 #### Step 2: Process the Data
 
