@@ -92,8 +92,7 @@ class DownloadScriptTest(unittest.TestCase):
             
             # Check that to_csv was called on our instance
             df_instance.to_csv.assert_called_once_with(
-                '/fake/output/IndiaNSS_HealthAilments.csv', index=False
-            )
+                            '/fake/output/india_nss_health_ailments.csv', index=False)
             
             # Now we can check the data that was passed to the constructor
             constructor_args = mock_df_constructor.call_args
