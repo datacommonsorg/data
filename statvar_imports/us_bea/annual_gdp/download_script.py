@@ -20,7 +20,7 @@ This script downloads and processes the annual GDP data from the Bureau of Econo
 It performs the following steps:
 1. Downloads a zip file containing GDP data from a specified URL.
 2. Extracts the contents of the zip file into an 'input_files' directory.
-3. Removes the downloaded zip file.
+3. Retains the downloaded zip file.
 4. Filters the extracted files, retaining only those that contain 'ALL_AREAS' in their filenames.
 
 This script relies on a shared 'download_util' module for handling file downloads.
@@ -56,7 +56,7 @@ def clean_up_files(directory: str) -> None:
     """
   logging.info(f"Cleaning up files in directory: {directory}")
   for filename in os.listdir(directory):
-    if "ALL_AREAS" not in filename:
+    if "ALL_AREAS" not in filename and not filename.endswith(".zip"):
       file_path = os.path.join(directory, filename)
       try:
         if os.path.isfile(file_path):
@@ -123,23 +123,24 @@ def download_and_extract_data() -> None:
         zip_ref.extractall(_OUTPUT_DIR)
       logging.info(f"Successfully extracted zip file to: {_OUTPUT_DIR}")
 
-      # Clean up by removing the downloaded zip file.
-      os.remove(downloaded_file)
-      logging.info(f"Removed temporary zip file: {downloaded_file}")
+      # The downloaded zip file is retained in the input_files directory.
+      # os.remove(downloaded_file)
+      # logging.info(f"Removed temporary zip file: {downloaded_file}")
 
       # Remove any files that do not contain "ALL_AREAS".
       clean_up_files(_OUTPUT_DIR)
 
       # Convert all filenames in _OUTPUT_DIR to lowercase
       for filename in os.listdir(_OUTPUT_DIR):
-          old_file_path = os.path.join(_OUTPUT_DIR, filename)
-          new_file_path = os.path.join(_OUTPUT_DIR, filename.lower())
-          if old_file_path != new_file_path:
-              try:
-                  os.rename(old_file_path, new_file_path)
-                  logging.info(f"Renamed: {old_file_path} -> {new_file_path}")
-              except OSError as e:
-                  logging.error(f"Error renaming file {old_file_path}: {e}")
+          if not filename.endswith(".zip"):
+              old_file_path = os.path.join(_OUTPUT_DIR, filename)
+              new_file_path = os.path.join(_OUTPUT_DIR, filename.lower())
+              if old_file_path != new_file_path:
+                  try:
+                      os.rename(old_file_path, new_file_path)
+                      logging.info(f"Renamed: {old_file_path} -> {new_file_path}")
+                  except OSError as e:
+                      logging.error(f"Error renaming file {old_file_path}: {e}")
 
       _process_csv_data(_OUTPUT_DIR)
       
