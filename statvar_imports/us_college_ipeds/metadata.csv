@@ -1,8 +1,0 @@
-parameter,value
-url,https://nces.ed.gov/ipeds/trendgenerator/app/answer/2/43
-output_columns,"observationAbout,observationDate,value,variableMeasured,#input"
-header_rows,1
-mapped_columns,
-mapped_rows,
-word_delimiter,""""""
-dc_api_root,https://api.datacommons.org
