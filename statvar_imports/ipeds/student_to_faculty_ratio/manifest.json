@@ -12,7 +12,7 @@
                         ],
             "import_inputs": [
                 {
-                    "template_mcf": "processed_output/student_faculty_ratio_data_2009.tmcf",
+                    "template_mcf": "processed_output/student_faculty_ratio.tmcf",
                     "cleaned_csv": "processed_output/*.csv"
                 }
                 ],

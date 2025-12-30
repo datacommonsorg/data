@@ -68,7 +68,9 @@ for input_file in "$INPUT_DIR"/*; do
             --pv_map="$PV_MAP_FILE" \
             --config_file="$CONFIG_FILE" \
             --existing_statvar_mcf="$EXISTING_MCF" \
-            --output_path="$output_base_path" &
+            --output_path="$output_base_path" \
+            --log_level=-2 \
+            --log_every_n=1000 &
         
         PIDS+=($!) 
         JOB_COUNT=$((JOB_COUNT + 1))
