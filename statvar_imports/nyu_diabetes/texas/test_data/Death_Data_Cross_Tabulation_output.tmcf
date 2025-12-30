@@ -1,0 +1,7 @@
+Node: E:Texas_Diabetes->E0
+observationAbout: C:Texas_Diabetes->observationAbout
+observationDate: C:Texas_Diabetes->observationDate
+variableMeasured: C:Texas_Diabetes->variableMeasured
+value: C:Texas_Diabetes->value
+unit: C:Texas_Diabetes->unit
+typeOf: dcs:StatVarObservation
