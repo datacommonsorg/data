@@ -1,5 +1,5 @@
 key,,,,,,,,,,
-GeoName,observationAbout,{Data},measuredProperty,percent,populationType,EconomicActivity,grossDomesticProductType,RealGDP,statType,growthRate
+GeoName,observationAbout,{Data},measuredProperty,grossDomesticProduction,measurementQualifier,RealValue,unit,Percent,populationType,EconomicActivity,statType,growthRate
 Unit:Percent change,unit,dcid:Percent,,,,,,,,
 Unit:Percentage points,unit,dcid:Percent,,,,,,,,
 Description:All industry total,economicSector,AllIndustry,,,,,,,,

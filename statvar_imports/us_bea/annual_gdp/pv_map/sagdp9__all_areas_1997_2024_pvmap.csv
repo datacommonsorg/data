@@ -1,5 +1,5 @@
 key,,,,,,,,,,
-GeoName,observationAbout,{Data},measuredProperty,amount,populationType,EconomicActivity,grossDomesticProductType,RealGDP,unit,ChainedUSDollarBaseYr2017
+GeoName,observationAbout,{Data},measuredProperty,amount,populationType,EconomicActivity,measurementQualifier,RealValue,unit,ChainedUSDollarBaseYr2017
 Description:All industry total,economicSector,AllIndustry,,,,,,,,
 Description:Private industries,economicSector,PrivateSector,,,,,,,,
 "Description:Agriculture, forestry, fishing and hunting",naics,NAICS/11,,,,,,,,
