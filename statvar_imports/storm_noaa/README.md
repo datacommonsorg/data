@@ -24,3 +24,7 @@ To run the full import process, execute the scripts in the following order:
 1.  `python3 download_script.py`
 2.  `python3 process_noaa_data_withoutapi.py`
 3.  `python3 add_geoids_to_storm_data.py`
+
+## Autorefresh
+
+This import is configured for semi-monthly autorefresh.

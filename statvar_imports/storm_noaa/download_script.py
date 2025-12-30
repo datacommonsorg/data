@@ -87,6 +87,8 @@ def download_and_unzip_data(data_dir, existing_files):
                 logging.error(f"Download incomplete. Expected {len(filenames)} files, but only downloaded {downloaded_count}.")
                 if failed_downloads:
                     logging.error(f"The following files failed to download: {', '.join(failed_downloads)}")
+                    raise RuntimeError(
+                        "Failed to download files after multiple retries.")
             else:
                 logging.info("Download and extraction completed successfully.")
 
@@ -142,5 +144,3 @@ if __name__ == "__main__":
     existing_files = get_existing_files(DATA_DIR)
     download_and_unzip_data(DATA_DIR, existing_files)
     create_missing_location_files(DATA_DIR)
-    logging.info(
-        f"\nSetup complete. Data is available in the '{DATA_DIR}' directory.")
