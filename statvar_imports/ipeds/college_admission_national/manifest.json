@@ -1,0 +1,41 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "College_Admissions_IPEDS_National",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://nces.ed.gov/ipeds/search/",
+            "provenance_description": "Data on student applications, admissions, and enrollment for postsecondary institutions across the United States.",
+            "scripts": [
+                "download_script.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=admissions_stat_vars_common.mcf --input_data=input_files/college_admissions_2014.csv --pv_map=pv_map/college_admissions_ipeds_pv_map_2014.csv --config_file=college_admissions_ipeds_metadata.csv --output_path=output_files/admissions_output_2014",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=admissions_stat_vars_common.mcf --input_data=input_files/college_admissions_2015.csv --pv_map=pv_map/college_admissions_ipeds_pv_map_2015.csv --config_file=college_admissions_ipeds_metadata.csv --output_path=output_files/admissions_output_2015",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=admissions_stat_vars_common.mcf --input_data=input_files/college_admissions_2016.csv --pv_map=pv_map/college_admissions_ipeds_pv_map_2016.csv --config_file=college_admissions_ipeds_metadata.csv --output_path=output_files/admissions_output_2016",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=admissions_stat_vars_common.mcf --input_data=input_files/college_admissions_2017.csv --pv_map=pv_map/college_admissions_ipeds_pv_map_2017.csv --config_file=college_admissions_ipeds_metadata.csv --output_path=output_files/admissions_output_2017",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=admissions_stat_vars_common.mcf --input_data=input_files/college_admissions_2018.csv --pv_map=pv_map/college_admissions_ipeds_pv_map_2018.csv --config_file=college_admissions_ipeds_metadata.csv --output_path=output_files/admissions_output_2018",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=admissions_stat_vars_common.mcf --input_data=input_files/college_admissions_2019.csv --pv_map=pv_map/college_admissions_ipeds_pv_map_2019.csv --config_file=college_admissions_ipeds_metadata.csv --output_path=output_files/admissions_output_2019",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=admissions_stat_vars_common.mcf --input_data=input_files/college_admissions_2020.csv --pv_map=pv_map/college_admissions_ipeds_pv_map_2020.csv --config_file=college_admissions_ipeds_metadata.csv --output_path=output_files/admissions_output_2020",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=admissions_stat_vars_common.mcf --input_data=input_files/college_admissions_2021.csv --pv_map=pv_map/college_admissions_ipeds_pv_map_2021.csv --config_file=college_admissions_ipeds_metadata.csv --output_path=output_files/admissions_output_2021",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=admissions_stat_vars_common.mcf --input_data=input_files/college_admissions_2022.csv --pv_map=pv_map/college_admissions_ipeds_pv_map_2022.csv --config_file=college_admissions_ipeds_metadata.csv --output_path=output_files/admissions_output_2022",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=admissions_stat_vars_common.mcf --input_data=input_files/college_admissions_2023.csv --pv_map=pv_map/college_admissions_ipeds_pv_map_2023.csv --config_file=college_admissions_ipeds_metadata.csv --output_path=output_files/admissions_output_2023"
+            ],
+            "import_inputs": [
+                {"template_mcf": "output_files/admissions_output_2014.tmcf", "cleaned_csv": "output_files/admissions_output_2014.csv"},
+                {"template_mcf": "output_files/admissions_output_2015.tmcf", "cleaned_csv": "output_files/admissions_output_2015.csv"},
+                {"template_mcf": "output_files/admissions_output_2016.tmcf", "cleaned_csv": "output_files/admissions_output_2016.csv"},
+                {"template_mcf": "output_files/admissions_output_2017.tmcf", "cleaned_csv": "output_files/admissions_output_2017.csv"},
+                {"template_mcf": "output_files/admissions_output_2018.tmcf", "cleaned_csv": "output_files/admissions_output_2018.csv"},
+                {"template_mcf": "output_files/admissions_output_2019.tmcf", "cleaned_csv": "output_files/admissions_output_2019.csv"},
+                {"template_mcf": "output_files/admissions_output_2020.tmcf", "cleaned_csv": "output_files/admissions_output_2020.csv"},
+                {"template_mcf": "output_files/admissions_output_2021.tmcf", "cleaned_csv": "output_files/admissions_output_2021.csv"},
+                {"template_mcf": "output_files/admissions_output_2022.tmcf", "cleaned_csv": "output_files/admissions_output_2022.csv"},
+                {"template_mcf": "output_files/admissions_output_2023.tmcf", "cleaned_csv": "output_files/admissions_output_2023.csv"}
+            ],
+            "source_files": [
+                "input_files/college_admissions_*.csv"
+            ],
+            "cron_schedule": "0 5 3,17 * *"
+        }
+    ]
+}
