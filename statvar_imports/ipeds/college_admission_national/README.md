@@ -27,7 +27,7 @@ The import process involves downloading raw data, preprocessing it to remove des
 
 *   **Transformation pipeline**:
     1.  The `download_script.py` is executed to download the raw data from the source, convert it from XLSX to CSV, and place the cleaned CSVs into the `input_files/` directory.
-    2.  The `stat_var_processor.py` tool is run for each year's data file, as specified in `admissions_manifest.json`.
+    2.  The `stat_var_processor.py` tool is run for each year's data file, as specified in `manifest.json`.
     3.  The processor uses the `college_admissions_ipeds_metadata.csv`, the corresponding year's `pv_map/*.csv`, and the `admissions_stat_vars_common.mcf` to generate the final artifacts.
     4.  The output files (`.csv`, `.tmcf`, and `.mcf` files) are placed in the `output_files/` directory.
 
@@ -43,7 +43,7 @@ This import is considered automated due to the inclusion of `download_script.py`
 
 *   **Steps**:
     1.  Execute `download_script.py` to fetch the raw data files into `input_files/`.
-    2.  The `stat_var_processor.py` tool is then run (as defined in `admissions_manifest.json`) on the preprocessed files to generate the final artifacts for ingestion.
+    2.  The `stat_var_processor.py` tool is then run (as defined in `manifest.json`) on the preprocessed files to generate the final artifacts for ingestion.
     3.  A corresponding `college_admissions_ipeds_pv_map_YYYY.csv` file should be available in the `pv_map/` directory for each year.
 
 ---
@@ -66,7 +66,7 @@ python3 download_script.py
 
 ### Step 2: Process the Data for Final Output
 
-This step involves running the `stat_var_processor.py` for each input file as specified in `admissions_manifest.json`. An example command for the 2014 data is shown below:
+This step involves running the `stat_var_processor.py` for each input file as specified in `manifest.json`. An example command for the 2014 data is shown below:
 
 **Usage**:
 
