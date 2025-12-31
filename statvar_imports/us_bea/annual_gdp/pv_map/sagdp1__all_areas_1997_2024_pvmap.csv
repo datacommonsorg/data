@@ -1,10 +1,10 @@
 key,,,,,,,,,,,,
 GeoName,observationAbout,{Data},measurementQualifier,Annual,,,,,,,,
-Description:Real GDP (millions of chained 2017 dollars) 1/,activitySource,GrossDomesticProduct,unit,ChainedUSDollarBaseYr2017,measuredProperty,amount,populationType,EconomicActivity,measurementQualifier,RealValue,#Multiplier,1000000,#Filter,Allow=int(value) >= 0
+Description:Real GDP (millions of chained 2017 dollars) 1/,activitySource,GrossDomesticProduct,unit,ChainedUSDollarBaseYr2017,measuredProperty,amount,populationType,EconomicActivity,measurementQualifier,RealValue,#Multiply,1000000,#Filter,Allow=int(value) >= 0
 Description:Chain-type quantity indexes for real GDP,activitySource,GrossDomesticProduct,measuredProperty,chainedQuantityIndex,populationType,EconomicActivity,unit,USDollar,#Filter,Allow=int(value) >= 0,,
-Description:Current-dollar GDP (millions of current dollars),measuredProperty,grossDomesticProduct,unit,USDollar,statType,measuredValue,measurementQualifier,Nominal,populationType,EconomicActivity,#Multiplier,1000000,#Filter,Allow=int(value) >= 0
-Description:Compensation (millions of dollars),measuredProperty,amount,unit,USDollar,activitySource,ExpenditureActivity,populationType,EconomicActivity,#Multiplier,1000000,#Filter,Allow=int(value) >= 0,expenditureType,Compensation
-Description:Gross operating surplus (millions of dollars),activitySource,GrossOperatingSurplus,unit,USDollar,measuredProperty,amount,populationType,EconomicActivity,#Multiplier,1000000,#Filter,Allow=int(value) >= 0,,
+Description:Current-dollar GDP (millions of current dollars),measuredProperty,grossDomesticProduct,unit,USDollar,statType,measuredValue,measurementQualifier,Nominal,populationType,EconomicActivity,#Multiply,1000000,#Filter,Allow=int(value) >= 0
+Description:Compensation (millions of dollars),measuredProperty,amount,unit,USDollar,activitySource,ExpenditureActivity,populationType,EconomicActivity,#Multiply,1000000,#Filter,Allow=int(value) >= 0,expenditureType,Compensation
+Description:Gross operating surplus (millions of dollars),activitySource,GrossOperatingSurplus,unit,USDollar,measuredProperty,amount,populationType,EconomicActivity,#Multiply,1000000,#Filter,Allow=int(value) >= 0,,
 1997,observationDate,1997,value,{Number},,,,,,,,
 1998,observationDate,1998,value,{Number},,,,,,,,
 1999,observationDate,1999,value,{Number},,,,,,,,
