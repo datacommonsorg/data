@@ -8,6 +8,7 @@ chromedriver_py
 croniter
 dataclasses
 datacommons
+datacommons_client
 db-dtypes
 duckdb
 frozendict
@@ -35,6 +36,7 @@ lxml
 numpy
 openpyxl
 pandas
+omegaconf
 prettytable
 protobuf
 psutil

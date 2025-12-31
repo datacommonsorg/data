@@ -1,0 +1,14 @@
+parameter,value
+url,
+description,
+process,
+#place_type,Country
+#places_within,country/USA
+start_date,2009
+end_date,2010
+release_frequency,P1Y
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured"
+mapped_rows,1
+mapped_columns,7
+header_rows,1

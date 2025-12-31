@@ -1,0 +1,2174 @@
+Node: dcid:Count_Person_15To50Years_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To19Years_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 19]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To19Years_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 19]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_20To34Years_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 20 34]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_20To34Years_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 20 34]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To50Years_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 35 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To50Years_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 35 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_OneRace
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:OneRace
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_OneRace
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:OneRace
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:WhiteAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_WhiteAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:WhiteAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_BlackOrAfricanAmericanAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_AmericanIndianOrAlaskaNativeAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_AmericanIndianOrAlaskaNativeAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_AsianAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:AsianAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_AsianAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:AsianAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_NativeHawaiianOrOtherPacificIslanderAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_NativeHawaiianOrOtherPacificIslanderAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_SomeOtherRaceAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:SomeOtherRaceAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_SomeOtherRaceAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:SomeOtherRaceAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_TwoOrMoreRaces
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:TwoOrMoreRaces
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_TwoOrMoreRaces
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:TwoOrMoreRaces
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_HispanicOrLatino
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:HispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_HispanicOrLatino
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:HispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_WhiteAloneNotHispanicOrLatino
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:WhiteAloneNotHispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_WhiteAloneNotHispanicOrLatino
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+race: dcs:WhiteAloneNotHispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_Native
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+nativity: dcs:USC_Native
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_Native
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+nativity: dcs:USC_Native
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_ForeignBorn
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+nativity: dcs:USC_ForeignBorn
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_ForeignBorn
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+nativity: dcs:USC_ForeignBorn
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_EducationalAttainmentLessThanHighSchoolGraduate_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_EducationalAttainmentLessThanHighSchoolGraduate_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_EducationalAttainmentSomeCollegeOrAssociatesDegree_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_EducationalAttainmentSomeCollegeOrAssociatesDegree_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_EducationalAttainmentBachelorsDegreeOrHigher_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_EducationalAttainmentBachelorsDegreeOrHigher_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_EducationalAttainmentGraduateOrProfessionalDegree_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_EducationalAttainmentGraduateOrProfessionalDegree_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_PovertyStatusDetermined
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+povertyStatus: dcs:PovertyStatusDetermined
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_PovertyStatusDetermined
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+povertyStatus: dcs:PovertyStatusDetermined
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_1.0OrLessRatioToPovertyLine
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+povertyStatus: [- 1.0 RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_1.0OrLessRatioToPovertyLine
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+povertyStatus: [- 1.0 RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_1To1.99RatioToPovertyLine
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+povertyStatus: [1 1.99 RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_1To1.99RatioToPovertyLine
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+povertyStatus: [1 1.99 RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_Female_2OrMoreRatioToPovertyLine
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+povertyStatus: [2 - RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_Female_2OrMoreRatioToPovertyLine
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 15 50]
+povertyStatus: [2 - RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To50Years_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 16 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To50Years_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 16 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To50Years_InLaborForce_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 16 50]
+employmentStatus: dcs:BLS_InLaborForce
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To50Years_InLaborForce_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+age: [Years 16 50]
+employmentStatus: dcs:BLS_InLaborForce
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To19Years_BirthInThePast12Months_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 19]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To19Years_BirthInThePast12Months_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 19]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_20To34Years_BirthInThePast12Months_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 20 34]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_20To34Years_BirthInThePast12Months_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 20 34]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To50Years_BirthInThePast12Months_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 35 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To50Years_BirthInThePast12Months_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 35 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_OneRace
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:OneRace
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_OneRace
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:OneRace
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:WhiteAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_WhiteAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:WhiteAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_BlackOrAfricanAmericanAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_AmericanIndianOrAlaskaNativeAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_AmericanIndianOrAlaskaNativeAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_AsianAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:AsianAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_AsianAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:AsianAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_NativeHawaiianOrOtherPacificIslanderAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_NativeHawaiianOrOtherPacificIslanderAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_SomeOtherRaceAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:SomeOtherRaceAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_SomeOtherRaceAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:SomeOtherRaceAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_TwoOrMoreRaces
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:TwoOrMoreRaces
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_TwoOrMoreRaces
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:TwoOrMoreRaces
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_HispanicOrLatino
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:HispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_HispanicOrLatino
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:HispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_WhiteAloneNotHispanicOrLatino
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:WhiteAloneNotHispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_WhiteAloneNotHispanicOrLatino
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:WhiteAloneNotHispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Native
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+nativity: dcs:USC_Native
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Native
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+nativity: dcs:USC_Native
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_ForeignBorn
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+nativity: dcs:USC_ForeignBorn
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_ForeignBorn
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+nativity: dcs:USC_ForeignBorn
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentLessThanHighSchoolGraduate_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentLessThanHighSchoolGraduate_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentSomeCollegeOrAssociatesDegree_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentSomeCollegeOrAssociatesDegree_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentBachelorsDegreeOrHigher_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentBachelorsDegreeOrHigher_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentGraduateOrProfessionalDegree_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentGraduateOrProfessionalDegree_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_PovertyStatusDetermined
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: dcs:PovertyStatusDetermined
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_PovertyStatusDetermined
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: dcs:PovertyStatusDetermined
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_1.0OrLessRatioToPovertyLine
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: [- 1.0 RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_1.0OrLessRatioToPovertyLine
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: [- 1.0 RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_1To1.99RatioToPovertyLine
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: [1 1.99 RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_1To1.99RatioToPovertyLine
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: [1 1.99 RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_2OrMoreRatioToPovertyLine
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: [2 - RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_2OrMoreRatioToPovertyLine
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: [2 - RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To50Years_BirthInThePast12Months_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 16 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To50Years_BirthInThePast12Months_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 16 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To50Years_BirthInThePast12Months_InLaborForce_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 16 50]
+employmentStatus: dcs:BLS_InLaborForce
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To50Years_BirthInThePast12Months_InLaborForce_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 16 50]
+employmentStatus: dcs:BLS_InLaborForce
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_AsAFractionOf_Count_Person_15To50Years_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+measurementDenominator: dcid:Count_Person_15To50Years_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To19Years_BirthInThePast12Months_Female_AsAFractionOf_Count_Person_15To19Years_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 19]
+measurementDenominator: dcid:Count_Person_15To19Years_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To19Years_BirthInThePast12Months_Female_AsAFractionOf_MarginOfError_Count_Person_15To19Years_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 19]
+measurementDenominator: dcid:MarginOfError_Count_Person_15To19Years_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_20To34Years_BirthInThePast12Months_Female_AsAFractionOf_Count_Person_20To34Years_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 20 34]
+measurementDenominator: dcid:Count_Person_20To34Years_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_20To34Years_BirthInThePast12Months_Female_AsAFractionOf_MarginOfError_Count_Person_20To34Years_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 20 34]
+measurementDenominator: dcid:MarginOfError_Count_Person_20To34Years_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To50Years_BirthInThePast12Months_Female_AsAFractionOf_Count_Person_35To50Years_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 35 50]
+measurementDenominator: dcid:Count_Person_35To50Years_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To50Years_BirthInThePast12Months_Female_AsAFractionOf_MarginOfError_Count_Person_35To50Years_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 35 50]
+measurementDenominator: dcid:MarginOfError_Count_Person_35To50Years_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_OneRace_AsAFractionOf_Count_Person_15To50Years_Female_OneRace
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:OneRace
+measurementDenominator: dcid:Count_Person_15To50Years_Female_OneRace
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_OneRace_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_OneRace
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:OneRace
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_OneRace
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_WhiteAlone_AsAFractionOf_Count_Person_15To50Years_Female_WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:WhiteAlone
+measurementDenominator: dcid:Count_Person_15To50Years_Female_WhiteAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_WhiteAlone_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_WhiteAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:WhiteAlone
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_WhiteAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_BlackOrAfricanAmericanAlone_AsAFractionOf_Count_Person_15To50Years_Female_BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:BlackOrAfricanAmericanAlone
+measurementDenominator: dcid:Count_Person_15To50Years_Female_BlackOrAfricanAmericanAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_BlackOrAfricanAmericanAlone_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_BlackOrAfricanAmericanAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:BlackOrAfricanAmericanAlone
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_BlackOrAfricanAmericanAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_AmericanIndianOrAlaskaNativeAlone_AsAFractionOf_Count_Person_15To50Years_Female_AmericanIndianOrAlaskaNativeAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+measurementDenominator: dcid:Count_Person_15To50Years_Female_AmericanIndianOrAlaskaNativeAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_AmericanIndianOrAlaskaNativeAlone_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_AmericanIndianOrAlaskaNativeAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_AmericanIndianOrAlaskaNativeAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_AsianAlone_AsAFractionOf_Count_Person_15To50Years_Female_AsianAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:AsianAlone
+measurementDenominator: dcid:Count_Person_15To50Years_Female_AsianAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_AsianAlone_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_AsianAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:AsianAlone
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_AsianAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_NativeHawaiianOrOtherPacificIslanderAlone_AsAFractionOf_Count_Person_15To50Years_Female_NativeHawaiianOrOtherPacificIslanderAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+measurementDenominator: dcid:Count_Person_15To50Years_Female_NativeHawaiianOrOtherPacificIslanderAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_NativeHawaiianOrOtherPacificIslanderAlone_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_NativeHawaiianOrOtherPacificIslanderAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_NativeHawaiianOrOtherPacificIslanderAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_SomeOtherRaceAlone_AsAFractionOf_Count_Person_15To50Years_Female_SomeOtherRaceAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:SomeOtherRaceAlone
+measurementDenominator: dcid:Count_Person_15To50Years_Female_SomeOtherRaceAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_SomeOtherRaceAlone_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_SomeOtherRaceAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:SomeOtherRaceAlone
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_SomeOtherRaceAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_TwoOrMoreRaces_AsAFractionOf_Count_Person_15To50Years_Female_TwoOrMoreRaces
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:TwoOrMoreRaces
+measurementDenominator: dcid:Count_Person_15To50Years_Female_TwoOrMoreRaces
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_TwoOrMoreRaces_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_TwoOrMoreRaces
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:TwoOrMoreRaces
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_TwoOrMoreRaces
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_HispanicOrLatino_AsAFractionOf_Count_Person_15To50Years_Female_HispanicOrLatino
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:HispanicOrLatino
+measurementDenominator: dcid:Count_Person_15To50Years_Female_HispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_HispanicOrLatino_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_HispanicOrLatino
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:HispanicOrLatino
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_HispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_WhiteAloneNotHispanicOrLatino_AsAFractionOf_Count_Person_15To50Years_Female_WhiteAloneNotHispanicOrLatino
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:WhiteAloneNotHispanicOrLatino
+measurementDenominator: dcid:Count_Person_15To50Years_Female_WhiteAloneNotHispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_WhiteAloneNotHispanicOrLatino_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_WhiteAloneNotHispanicOrLatino
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+race: dcs:WhiteAloneNotHispanicOrLatino
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_WhiteAloneNotHispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Native_AsAFractionOf_Count_Person_15To50Years_Female_Native
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+nativity: dcs:USC_Native
+measurementDenominator: dcid:Count_Person_15To50Years_Female_Native
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Native_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_Native
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+nativity: dcs:USC_Native
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_Native
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_ForeignBorn_AsAFractionOf_Count_Person_15To50Years_Female_ForeignBorn
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+nativity: dcs:USC_ForeignBorn
+measurementDenominator: dcid:Count_Person_15To50Years_Female_ForeignBorn
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_ForeignBorn_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_ForeignBorn
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+nativity: dcs:USC_ForeignBorn
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_ForeignBorn
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentLessThanHighSchoolGraduate_Female_AsAFractionOf_Count_Person_15To50Years_EducationalAttainmentLessThanHighSchoolGraduate_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+measurementDenominator: dcid:Count_Person_15To50Years_EducationalAttainmentLessThanHighSchoolGraduate_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentLessThanHighSchoolGraduate_Female_AsAFractionOf_MarginOfError_Count_Person_15To50Years_EducationalAttainmentLessThanHighSchoolGraduate_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_EducationalAttainmentLessThanHighSchoolGraduate_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Female_AsAFractionOf_Count_Person_15To50Years_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+measurementDenominator: dcid:Count_Person_15To50Years_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Female_AsAFractionOf_MarginOfError_Count_Person_15To50Years_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentSomeCollegeOrAssociatesDegree_Female_AsAFractionOf_Count_Person_15To50Years_EducationalAttainmentSomeCollegeOrAssociatesDegree_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+measurementDenominator: dcid:Count_Person_15To50Years_EducationalAttainmentSomeCollegeOrAssociatesDegree_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentSomeCollegeOrAssociatesDegree_Female_AsAFractionOf_MarginOfError_Count_Person_15To50Years_EducationalAttainmentSomeCollegeOrAssociatesDegree_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_EducationalAttainmentSomeCollegeOrAssociatesDegree_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentBachelorsDegreeOrHigher_Female_AsAFractionOf_Count_Person_15To50Years_EducationalAttainmentBachelorsDegreeOrHigher_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+measurementDenominator: dcid:Count_Person_15To50Years_EducationalAttainmentBachelorsDegreeOrHigher_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentBachelorsDegreeOrHigher_Female_AsAFractionOf_MarginOfError_Count_Person_15To50Years_EducationalAttainmentBachelorsDegreeOrHigher_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_EducationalAttainmentBachelorsDegreeOrHigher_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentGraduateOrProfessionalDegree_Female_AsAFractionOf_Count_Person_15To50Years_EducationalAttainmentGraduateOrProfessionalDegree_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+measurementDenominator: dcid:Count_Person_15To50Years_EducationalAttainmentGraduateOrProfessionalDegree_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentGraduateOrProfessionalDegree_Female_AsAFractionOf_MarginOfError_Count_Person_15To50Years_EducationalAttainmentGraduateOrProfessionalDegree_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_EducationalAttainmentGraduateOrProfessionalDegree_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_PovertyStatusDetermined_AsAFractionOf_Count_Person_15To50Years_Female_PovertyStatusDetermined
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: dcs:PovertyStatusDetermined
+measurementDenominator: dcid:Count_Person_15To50Years_Female_PovertyStatusDetermined
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_PovertyStatusDetermined_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_PovertyStatusDetermined
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: dcs:PovertyStatusDetermined
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_PovertyStatusDetermined
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_1.0OrLessRatioToPovertyLine_AsAFractionOf_Count_Person_15To50Years_Female_1.0OrLessRatioToPovertyLine
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: [- 1.0 RatioToPovertyLine]
+measurementDenominator: dcid:Count_Person_15To50Years_Female_1.0OrLessRatioToPovertyLine
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_1.0OrLessRatioToPovertyLine_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_1.0OrLessRatioToPovertyLine
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: [- 1.0 RatioToPovertyLine]
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_1.0OrLessRatioToPovertyLine
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_1To1.99RatioToPovertyLine_AsAFractionOf_Count_Person_15To50Years_Female_1To1.99RatioToPovertyLine
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: [1 1.99 RatioToPovertyLine]
+measurementDenominator: dcid:Count_Person_15To50Years_Female_1To1.99RatioToPovertyLine
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_1To1.99RatioToPovertyLine_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_1To1.99RatioToPovertyLine
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: [1 1.99 RatioToPovertyLine]
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_1To1.99RatioToPovertyLine
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_2OrMoreRatioToPovertyLine_AsAFractionOf_Count_Person_15To50Years_Female_2OrMoreRatioToPovertyLine
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: [2 - RatioToPovertyLine]
+measurementDenominator: dcid:Count_Person_15To50Years_Female_2OrMoreRatioToPovertyLine
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_2OrMoreRatioToPovertyLine_AsAFractionOf_MarginOfError_Count_Person_15To50Years_Female_2OrMoreRatioToPovertyLine
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 15 50]
+povertyStatus: [2 - RatioToPovertyLine]
+measurementDenominator: dcid:MarginOfError_Count_Person_15To50Years_Female_2OrMoreRatioToPovertyLine
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To50Years_BirthInThePast12Months_Female_AsAFractionOf_Count_Person_16To50Years_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 16 50]
+measurementDenominator: dcid:Count_Person_16To50Years_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To50Years_BirthInThePast12Months_Female_AsAFractionOf_MarginOfError_Count_Person_16To50Years_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 16 50]
+measurementDenominator: dcid:MarginOfError_Count_Person_16To50Years_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To50Years_BirthInThePast12Months_InLaborForce_Female_AsAFractionOf_Count_Person_16To50Years_InLaborForce_Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 16 50]
+employmentStatus: dcs:BLS_InLaborForce
+measurementDenominator: dcid:Count_Person_16To50Years_InLaborForce_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To50Years_BirthInThePast12Months_InLaborForce_Female_AsAFractionOf_MarginOfError_Count_Person_16To50Years_InLaborForce_Female
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+age: [Years 16 50]
+employmentStatus: dcs:BLS_InLaborForce
+measurementDenominator: dcid:MarginOfError_Count_Person_16To50Years_InLaborForce_Female
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To19Years_BirthInThePast12Months_Female_Unmarried
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 19]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To19Years_BirthInThePast12Months_Female_Unmarried
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 19]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_20To34Years_BirthInThePast12Months_Female_Unmarried
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 20 34]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_20To34Years_BirthInThePast12Months_Female_Unmarried
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 20 34]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To50Years_BirthInThePast12Months_Female_Unmarried
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 35 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To50Years_BirthInThePast12Months_Female_Unmarried
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 35 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_OneRace
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:OneRace
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_OneRace
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:OneRace
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:WhiteAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_WhiteAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:WhiteAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_BlackOrAfricanAmericanAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_AmericanIndianOrAlaskaNativeAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_AmericanIndianOrAlaskaNativeAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_AsianAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:AsianAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_AsianAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:AsianAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_NativeHawaiianOrOtherPacificIslanderAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_NativeHawaiianOrOtherPacificIslanderAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_SomeOtherRaceAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:SomeOtherRaceAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_SomeOtherRaceAlone
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:SomeOtherRaceAlone
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_TwoOrMoreRaces
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:TwoOrMoreRaces
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_TwoOrMoreRaces
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:TwoOrMoreRaces
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_HispanicOrLatino
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:HispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_HispanicOrLatino
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:HispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_WhiteAloneNotHispanicOrLatino
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:WhiteAloneNotHispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_WhiteAloneNotHispanicOrLatino
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+race: dcs:WhiteAloneNotHispanicOrLatino
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_Native
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+nativity: dcs:USC_Native
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_Native
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+nativity: dcs:USC_Native
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_ForeignBorn
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+nativity: dcs:USC_ForeignBorn
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_ForeignBorn
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+nativity: dcs:USC_ForeignBorn
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentLessThanHighSchoolGraduate_Female_Unmarried
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentLessThanHighSchoolGraduate_Female_Unmarried
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Female_Unmarried
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Female_Unmarried
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentSomeCollegeOrAssociatesDegree_Female_Unmarried
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentSomeCollegeOrAssociatesDegree_Female_Unmarried
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentBachelorsDegreeOrHigher_Female_Unmarried
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentBachelorsDegreeOrHigher_Female_Unmarried
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+educationalAttainment: dcs:BachelorsDegreeOrHigher
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentGraduateOrProfessionalDegree_Female_Unmarried
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_EducationalAttainmentGraduateOrProfessionalDegree_Female_Unmarried
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_PovertyStatusDetermined
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+povertyStatus: dcs:PovertyStatusDetermined
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_PovertyStatusDetermined
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+povertyStatus: dcs:PovertyStatusDetermined
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_1.0OrLessRatioToPovertyLine
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+povertyStatus: [- 1.0 RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_1.0OrLessRatioToPovertyLine
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+povertyStatus: [- 1.0 RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_1To1.99RatioToPovertyLine
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+povertyStatus: [1 1.99 RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_1To1.99RatioToPovertyLine
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+povertyStatus: [1 1.99 RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_2OrMoreRatioToPovertyLine
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+povertyStatus: [2 - RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15To50Years_BirthInThePast12Months_Female_Unmarried_2OrMoreRatioToPovertyLine
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 15 50]
+povertyStatus: [2 - RatioToPovertyLine]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To50Years_BirthInThePast12Months_Female_Unmarried
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 16 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To50Years_BirthInThePast12Months_Female_Unmarried
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 16 50]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To50Years_BirthInThePast12Months_InLaborForce_Female_Unmarried
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 16 50]
+employmentStatus: dcs:BLS_InLaborForce
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To50Years_BirthInThePast12Months_InLaborForce_Female_Unmarried
+statType: dcs:marginOfError
+measuredProperty: dcs:count
+populationType: schema:Person
+birthEventStatus: dcs:BirthInThePast12Months
+maritalStatus: dcs:Unmarried
+age: [Years 16 50]
+employmentStatus: dcs:BLS_InLaborForce
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
