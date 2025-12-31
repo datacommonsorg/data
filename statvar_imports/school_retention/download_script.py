@@ -21,7 +21,6 @@ CRDC Data Downloader & Processor (Clean All IDs)
 4. Saves only the data sheet.
 """
 
-# Copyright 2025 Google LLC
 import os
 import re
 import shutil
@@ -177,6 +176,7 @@ def process_year_data(start_year: int, end_year: int):
     possible_urls = get_urls_for_year(start_year, end_year)
     zip_label = f"{start_year}-{str(end_year)[-2:]}"
 
+    # TODO: Preserve the downloaded zip file and not keep it as a tmp file.
     with tempfile.NamedTemporaryFile(delete=True) as tmp_zip:
         downloaded = False
         for url in possible_urls:
