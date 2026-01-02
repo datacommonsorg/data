@@ -1,10 +1,10 @@
-key,,,,,,,,
+key,p1,v1,p2,v2,,,,
 COMBOKEY,#Format,observationAbout=nces/{Data:0>12},statType,measuredValue,,,,
 YEAR,observationDate,{Data},,,,,,
-SCH_INTERNET_FIBER,#ignore,ignore
-SCH_INTERNET_WIFI,#ignore,ignore
-SCH_INTERNET_SCHDEV,#ignore,ignore
-SCH_INTERNET_STUDDEV,#ignore,ignore
+SCH_INTERNET_FIBER,#ignore,ignore,value,{Number},,,,
+SCH_INTERNET_WIFI,#ignore,ignore,value,{Number},,,,
+SCH_INTERNET_SCHDEV,#ignore,ignore,value,{Number},,,,
+SCH_INTERNET_STUDDEV,#ignore,ignore,value,{Number},,,,
 SCH_INTERNET_WIFIENDEV,populationType,School,measuredProperty,count,internetSubscriptionType,WifiEnabledDevice,value,{Number}
 ,,,,,,,,
 JJ:Yes,educationalInstitutionType,JuvenileJusticeFacility,,,,,,

@@ -111,6 +111,8 @@ def run_import_job(absolute_import_name: str, import_config: str):
     logging.info(f'Import config: {config}')
     if config.dc_api_key:
         os.environ['DC_API_KEY'] = config.dc_api_key
+    if config.autopush_dc_api_key:
+        os.environ['AUTOPUSH_DC_API_KEY'] = config.autopush_dc_api_key
     executor = import_executor.ImportExecutor(
         uploader=file_uploader.GCSFileUploader(
             project_id=config.gcs_project_id,

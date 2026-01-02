@@ -1,0 +1,30 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "CRDC_EducationSchool_HarassmentOrBullying",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://civilrightsdata.ed.gov/data",
+            "provenance_description": "The Civil Rights Data Collection (CRDC) provides data on key education and civil rights issues in our nation's public schools. This import focuses on harassment or bullying data.",
+            "scripts": [
+                "download.py","preprocess.py","run.sh"
+                        ],
+            "import_inputs": [
+                {
+                    "template_mcf": "processed_output/crdc_harassment_or_bullying_2022.tmcf",
+                    "cleaned_csv": "processed_output/*.csv"
+                }
+                ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "cron_schedule": "0 0 15 7 *",
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 64,
+                "disk": 100
+            }
+        }
+    ]
+}

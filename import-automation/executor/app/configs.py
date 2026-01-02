@@ -57,6 +57,7 @@ class ExecutorConfig:
     storage_dev_bucket_name: str = 'unresolved_mcf'
     # DataCommons API key
     dc_api_key: str = ''
+    autopush_dc_api_key: str = ''
     # Gemini API key
     gemini_api_key: str = ''
     # Executor output prefix in the storage_dev_bucket_name bucket.

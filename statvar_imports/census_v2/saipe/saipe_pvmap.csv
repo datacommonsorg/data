@@ -1,6 +1,6 @@
 key,,,,,,,,,#End,#value,,
 State FIPS Code,#Format,FIPS={Data:0>1},,,,,,,,,,
-District ID,#Format,DISTRICT={Data:0>4},,,,,,,,,,
+District ID,#Format,DISTRICT={Data:0>5},,,,,,,,,,
 Name,observationAbout,geoId/sch{FIPS}{DISTRICT},,,,,,,,,,
 Estimated Total Population,populationType,Person,measuredProperty,count,value,{Number},,,,,,
 Estimated Population 5-17,populationType,Person,measuredProperty,count,age,[5 17 Years],value,{Number},,,,

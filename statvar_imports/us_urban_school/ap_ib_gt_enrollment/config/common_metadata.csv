@@ -1,0 +1,6 @@
+parameter,value
+mapped_rows,1
+output_columns,"observationDate,observationAbout,variableMeasured,value"
+#input_rows,10
+mapped_columns,2
+dc_api_root,https://api.datacommons.org

@@ -36,9 +36,9 @@ MELT_VAR_COL = "householdSize_numberOfVehicles"
 
 MELT_OBV_COL = "observation"
 
-_HOUSEHOLD_PV = "dcs:{person}Person"
+_HOUSEHOLD_PV = "With{person}Person"
 
-_NUM_OF_VEHICLES_PV = "dcs:{vehicle}AvailableVehicles"
+_NUM_OF_VEHICLES_PV = "With{vehicle}AvailableVehicles"
 
 # pylint: disable=unnecessary-lambda-assignment
 # pylint: disable=line-too-long
@@ -65,14 +65,7 @@ URBAN_RURAL_MCF_NODE = (
     "statType: dcs:measurementResult\n"
     "measuredProperty: dcs:placeOfResidenceClassification\n")
 
-TMCF_TEMPLATE = """Node: E:{filename}->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Place_Type_PlaceofResidenceClassification
-value: C:{filename}->urban_group
-observationAbout: C:{filename}->location
-observationDate: C:{filename}->year
-
-Node: E:{filename}->E1
+TMCF_TEMPLATE = """Node: E:{filename}->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: C:{filename}->sv
 measurementMethod: C:{filename}->measurement_method
@@ -210,11 +203,6 @@ SV_PROP_ORDER = [
 ]
 
 FORM_STATVAR = {
-    # "placeOfResidenceClassification": {
-    #     "column": "urban_group",
-    #     "update_value": _DEFAULT_PROP,
-    #     "pv_format": _PV_FORMAT
-    # },
     "numberOfVehicles": {
         "column": MELT_VAR_COL,
         "regex": {

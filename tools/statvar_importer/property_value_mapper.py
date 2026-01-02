@@ -347,7 +347,7 @@ class PropertyValueMapper:
             self._log_every_n)
         if not eval_prop:
             eval_prop = data_key
-        if eval_data and eval_data != eval_str:
+        if eval_data is not None and eval_data != eval_str:
             pvs[eval_prop] = eval_data
             self._counters.add_counter('processed-eval', 1, eval_str)
             pvs.pop(eval_key)

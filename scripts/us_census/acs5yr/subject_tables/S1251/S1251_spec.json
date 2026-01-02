@@ -1,0 +1,489 @@
+{
+	"preprocess": {
+		"find_and_replace": {
+			"Estimate!!Married in the last 12 months!!Male!!Population 15 years and over!!AGE!!Median age": "Estimate!!Married in the last 12 months!!Male!!AGE!!Median age",
+			"Estimate!!Male!!Married in the last 12 months!!Population 15 years and over!!AGE!!Median age": "Estimate!!Male!!Married in the last 12 months!!AGE!!Median age",
+			"Estimate!!Married in the last 12 months!!Female!!Population 15 years and over!!AGE!!Median age": "Estimate!!Married in the last 12 months!!Female!!AGE!!Median age",
+			"Estimate!!Female!!Married in the last 12 months!!Population 15 years and over!!AGE!!Median age": "Estimate!!Female!!Married in the last 12 months!!AGE!!Median age",
+			"Estimate!!Divorced in the last 12 months!!Male!!Population 15 years and over!!AGE!!Median age": "Estimate!!Divorced in the last 12 months!!Male!!AGE!!Median age",
+			"Estimate!!Male!!Divorced in the last 12 months!!Population 15 years and over!!AGE!!Median age": "Estimate!!Male!!Divorced in the last 12 months!!AGE!!Median age",
+			"Estimate!!Divorced in the last 12 months!!Female!!Population 15 years and over!!AGE!!Median age": "Estimate!!Divorced in the last 12 months!!Female!!AGE!!Median age",
+			"Estimate!!Female!!Divorced in the last 12 months!!Population 15 years and over!!AGE!!Median age": "Estimate!!Female!!Divorced in the last 12 months!!AGE!!Median age",
+			"Married in the last 12 months!!Male!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years": "Married in the last 12 months!!Male!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+			"Married in the last 12 months!!Male!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years": "Married in the last 12 months!!Male!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+		"Married in the last 12 months!!Female!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years": "Married in the last 12 months!!Female!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+		"Married in the last 12 months!!Female!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years":"Married in the last 12 months!!Female!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+		"Divorced in the last 12 months!!Male!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years": "Divorced in the last 12 months!!Male!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+		"Divorced in the last 12 months!!Male!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years": "Divorced in the last 12 months!!Male!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+		"Divorced in the last 12 months!!Female!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years": "Divorced in the last 12 months!!Female!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+		"Divorced in the last 12 months!!Female!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years": "Divorced in the last 12 months!!Female!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years"
+		}
+	},
+	"populationType": {
+		"_DEFAULT": "schema:Person"
+	},
+	"measurement": {
+		"_DEFAULT": {
+			"statType": "measuredValue",
+			"measuredProperty": "count"
+		},
+		"Margin of Error": {
+			"statType": "marginOfError",
+			"measuredProperty": "count"
+		},
+		"Median age": {
+			"statType": "medianValue",
+			"measuredProperty": "age",
+			"unit": "Years"
+		}
+	},
+	"pvs": {
+		"age": {
+			"Population 15 years and over": "[15 - Years]",
+			"Population 18 years and over": "[18 - Years]",
+			"Population 16 years and over": "[16 - Years]",
+			"Population 15 years and over in occupied housing units": "[15 - Years]"
+		},
+		"gender": {
+			"Male": "Male",
+			"Female": "Female",
+			"Male MOE": "Male",
+			"Female MOE": "Female"
+		},
+		"maritalStatus": {
+			"Married in the last 12 months": "MarriedInThePast12Months",
+			"Divorced in the last 12 months": "DivorcedInThePast12Months"
+		},
+		"educationalAttainment": {
+			"Bachelor's degree or higher": "BachelorsDegreeOrHigher"
+		},
+		"employmentStatus": {
+			"In labor force": "BLS_InLaborForce",
+			"Not in labor force": "BLS_NotInLaborForce"
+		},
+		"povertyStatus": {
+			"Population for whom poverty status is determined": "PovertyStatusDetermined",
+			"Below poverty": "BelowPovertyLevelInThePast12Months"
+		},
+		"residenceType": {
+			"Population in households": "Household",
+			"Population 15 years and over in occupied housing units": "HousingUnit"
+		},
+		"childrenStatus": {
+			"With an own child of the householder under 18 years": "WithOwnChildrenUnder18",
+			"With an own child under 18 years": "WithOwnChildrenUnder18"
+		},
+		"occupancyTenure": {
+			"Owner-occupied housing units": "OwnerOccupied",
+			"Renter-occupied housing units": "RenterOccupied"
+		},
+		"occupancyStatus":{
+			"Population 15 years and over in occupied housing units": "OccupiedHousingUnit"
+		}
+	},
+	"inferredSpec":{
+		"occupancyTenure": {
+			"residenceType": "HousingUnit"
+		},
+		"childrenStatus": {
+			"residenceType": "Household",
+			"householdType": "FamilyHousehold"
+		}
+	},
+	"universePVs":[{
+	    "populationType": "Person",
+	    "constraintProperties": ["maritalStatus", "educationalAttainment"],
+	    "dependentPVs": {
+		"age": "[18 - Years]"
+	    }
+	},
+	{
+		"populationType": "Person",
+		"constraintProperties": ["maritalStatus", "employmentStatus"],
+		"dependentPVs": {
+			"age": "[16 - Years]"
+		}
+	},
+	{
+		"populationType": "Person",
+		"constraintProperties": ["maritalStatus", "occupancyTenure"],
+		"dependentPVs": {
+			"age": "[15 - Years]",
+			"occupancyStatus": "OccupiedHousingUnit",
+			"residenceType": "HousingUnit"
+		}
+	}],
+	"ignoreColumns": [
+		"id",
+		"Geographic Area Name",
+		"Total",
+		"Total MOE",
+		"Married in the last 12 months!!Male!!Margin of Error!!AGE!!Median age",
+		"Margin of Error!!Married in the last 12 months!!Male MOE!!Population 15 years and over!!AGE!!Median age",
+		"Margin of Error!!Male!!Married in the last 12 months!!Population 15 years and over!!AGE!!Median age",
+		"Married in the last 12 months!!Female!!Margin of Error!!AGE!!Median age",
+		"Margin of Error!!Married in the last 12 months!!Female MOE!!Population 15 years and over!!AGE!!Median age",
+		"Margin of Error!!Female!!Married in the last 12 months!!Population 15 years and over!!AGE!!Median age",
+		"Divorced in the last 12 months!!Male!!Margin of Error!!AGE!!Median age",
+		"Margin of Error!!Divorced in the last 12 months!!Male MOE!!Population 15 years and over!!AGE!!Median age",
+		"Margin of Error!!Male!!Divorced in the last 12 months!!Population 15 years and over!!AGE!!Median age",
+		"Divorced in the last 12 months!!Female!!Margin of Error!!AGE!!Median age",
+		"Margin of Error!!Divorced in the last 12 months!!Female MOE!!Population 15 years and over!!AGE!!Median age",
+		"Margin of Error!!Female!!Divorced in the last 12 months!!Population 15 years and over!!AGE!!Median age"
+	],
+	"denominators": {
+    "Married in the last 12 months!!Male!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 18 years and over":[
+      "Married in the last 12 months!!Male!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "Married in the last 12 months!!Male!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "Married in the last 12 months!!Male!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher",
+      "Married in the last 12 months!!Male!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher"
+    ],
+    "Estimate!!Married in the last 12 months!!Male!!EDUCATIONAL ATTAINMENT!!Population 18 years and over":[
+      "Estimate!!Married in the last 12 months!!Male!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Married in the last 12 months!!Male MOE!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher"
+    ],
+    "Estimate!!Male!!Married in the last 12 months!!EDUCATIONAL ATTAINMENT!!Population 18 years and over":[
+      "Estimate!!Male!!Married in the last 12 months!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Male!!Married in the last 12 months!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher"
+    ],
+    "Married in the last 12 months!!Male!!Estimate!!LABOR FORCE PARTICIPATION!!Population 16 years and over":[
+      "Married in the last 12 months!!Male!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force",
+      "Married in the last 12 months!!Male!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force",
+      "Married in the last 12 months!!Male!!Estimate!!LABOR FORCE PARTICIPATION!!Not in labor force",
+      "Married in the last 12 months!!Male!!Margin of Error!!LABOR FORCE PARTICIPATION!!Not in labor force",
+      "Married in the last 12 months!!Male!!Estimate!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Married in the last 12 months!!Male!!Margin of Error!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Married in the last 12 months!!Male!!Estimate!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force",
+      "Married in the last 12 months!!Male!!Margin of Error!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force"
+    ],
+    "Estimate!!Married in the last 12 months!!Male!!LABOR FORCE PARTICIPATION!!Population 16 years and over":[
+      "Estimate!!Married in the last 12 months!!Male!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Married in the last 12 months!!Male MOE!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Estimate!!Married in the last 12 months!!Male!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Married in the last 12 months!!Male MOE!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force"
+    ],
+    "Estimate!!Male!!Married in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over":[
+      "Estimate!!Male!!Married in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Male!!Married in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Estimate!!Male!!Married in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Male!!Married in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force"
+    ],
+    "Married in the last 12 months!!Male!!Estimate!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined":[
+      "Married in the last 12 months!!Male!!Estimate!!POVERTY STATUS IN PAST 12 MONTHS!!Below poverty",
+      "Married in the last 12 months!!Male!!Margin of Error!!POVERTY STATUS IN PAST 12 MONTHS!!Below poverty",
+      "Married in the last 12 months!!Male!!Estimate!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty",
+      "Married in the last 12 months!!Male!!Margin of Error!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty"
+    ],
+    "Estimate!!Married in the last 12 months!!Male!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined":[
+      "Estimate!!Married in the last 12 months!!Male!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty",
+      "Margin of Error!!Married in the last 12 months!!Male MOE!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty"
+    ],
+    "Estimate!!Male!!Married in the last 12 months!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined":[
+      "Estimate!!Male!!Married in the last 12 months!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty",
+      "Margin of Error!!Male!!Married in the last 12 months!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty"
+    ],
+    "Married in the last 12 months!!Male!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households":[
+      "Married in the last 12 months!!Male!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years",
+      "Married in the last 12 months!!Male!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years",
+      "Married in the last 12 months!!Male!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+      "Married in the last 12 months!!Male!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+      "Married in the last 12 months!!Male!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years",
+      "Married in the last 12 months!!Male!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years"
+    ],
+    "Estimate!!Married in the last 12 months!!Male!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households":[
+      "Estimate!!Married in the last 12 months!!Male!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years",
+      "Margin of Error!!Married in the last 12 months!!Male MOE!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years"
+    ],
+    "Estimate!!Male!!Married in the last 12 months!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households":[
+      "Estimate!!Male!!Married in the last 12 months!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years",
+      "Margin of Error!!Male!!Married in the last 12 months!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years"
+    ],
+    "Married in the last 12 months!!Male!!Estimate!!HOUSING TENURE!!Population 15 years and over in occupied housing units":[
+      "Married in the last 12 months!!Male!!Estimate!!HOUSING TENURE!!Owner-occupied housing units",
+      "Married in the last 12 months!!Male!!Margin of Error!!HOUSING TENURE!!Owner-occupied housing units",
+      "Married in the last 12 months!!Male!!Estimate!!HOUSING TENURE!!Renter-occupied housing units",
+      "Married in the last 12 months!!Male!!Margin of Error!!HOUSING TENURE!!Renter-occupied housing units",
+      "Married in the last 12 months!!Male!!Estimate!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Married in the last 12 months!!Male!!Margin of Error!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Married in the last 12 months!!Male!!Estimate!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units",
+      "Married in the last 12 months!!Male!!Margin of Error!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units"
+    ],
+    "Estimate!!Married in the last 12 months!!Male!!HOUSING TENURE!!Population 15 years and over in occupied housing units":[
+        "Estimate!!Married in the last 12 months!!Male!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+        "Margin of Error!!Married in the last 12 months!!Male MOE!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+        "Estimate!!Married in the last 12 months!!Male!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units",
+        "Margin of Error!!Married in the last 12 months!!Male MOE!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units"
+    ],
+    "Estimate!!Male!!Married in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units":[
+      "Estimate!!Male!!Married in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Margin of Error!!Male!!Married in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Estimate!!Male!!Married in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units",
+      "Margin of Error!!Male!!Married in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units"
+    ],
+    "Married in the last 12 months!!Female!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 18 years and over":[
+      "Married in the last 12 months!!Female!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "Married in the last 12 months!!Female!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "Married in the last 12 months!!Female!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher",
+      "Married in the last 12 months!!Female!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher"
+    ],
+    "Estimate!!Married in the last 12 months!!Female!!EDUCATIONAL ATTAINMENT!!Population 18 years and over":[
+      "Estimate!!Married in the last 12 months!!Female!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Married in the last 12 months!!Female MOE!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher"
+    ],
+    "Estimate!!Female!!Married in the last 12 months!!EDUCATIONAL ATTAINMENT!!Population 18 years and over":[
+      "Estimate!!Female!!Married in the last 12 months!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Female!!Married in the last 12 months!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher"
+    ],
+    "Married in the last 12 months!!Female!!Estimate!!LABOR FORCE PARTICIPATION!!Population 16 years and over":[
+      "Married in the last 12 months!!Female!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force",
+      "Married in the last 12 months!!Female!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force",
+      "Married in the last 12 months!!Female!!Estimate!!LABOR FORCE PARTICIPATION!!Not in labor force",
+      "Married in the last 12 months!!Female!!Margin of Error!!LABOR FORCE PARTICIPATION!!Not in labor force",
+      "Married in the last 12 months!!Female!!Estimate!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Married in the last 12 months!!Female!!Margin of Error!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Married in the last 12 months!!Female!!Estimate!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force",
+      "Married in the last 12 months!!Female!!Margin of Error!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force"
+    ],
+    "Estimate!!Married in the last 12 months!!Female!!LABOR FORCE PARTICIPATION!!Population 16 years and over":[
+      "Estimate!!Married in the last 12 months!!Female!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Married in the last 12 months!!Female MOE!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Estimate!!Married in the last 12 months!!Female!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Married in the last 12 months!!Female MOE!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force"
+    ],
+    "Estimate!!Female!!Married in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over":[
+      "Estimate!!Female!!Married in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Female!!Married in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Estimate!!Female!!Married in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Female!!Married in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force"
+    ],
+    "Married in the last 12 months!!Female!!Estimate!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined":[
+      "Married in the last 12 months!!Female!!Estimate!!POVERTY STATUS IN PAST 12 MONTHS!!Below poverty",
+      "Married in the last 12 months!!Female!!Margin of Error!!POVERTY STATUS IN PAST 12 MONTHS!!Below poverty",
+      "Married in the last 12 months!!Female!!Estimate!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty",
+      "Married in the last 12 months!!Female!!Margin of Error!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty"
+    ],
+    "Estimate!!Married in the last 12 months!!Female!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined":[
+      "Estimate!!Married in the last 12 months!!Female!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty",
+      "Margin of Error!!Married in the last 12 months!!Female MOE!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty"
+    ],
+    "Estimate!!Female!!Married in the last 12 months!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined":[
+      "Estimate!!Female!!Married in the last 12 months!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty",
+      "Margin of Error!!Female!!Married in the last 12 months!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty"
+    ],
+    "Married in the last 12 months!!Female!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households":[
+      "Married in the last 12 months!!Female!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years",
+      "Married in the last 12 months!!Female!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years",
+      "Married in the last 12 months!!Female!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+      "Married in the last 12 months!!Female!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+      "Married in the last 12 months!!Female!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years",
+      "Married in the last 12 months!!Female!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years"
+    ],
+    "Estimate!!Married in the last 12 months!!Female!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households":[
+      "Estimate!!Married in the last 12 months!!Female!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years",
+      "Margin of Error!!Married in the last 12 months!!Female MOE!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years"
+    ],
+    "Estimate!!Female!!Married in the last 12 months!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households":[
+      "Estimate!!Female!!Married in the last 12 months!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years",
+      "Margin of Error!!Female!!Married in the last 12 months!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years"
+    ],
+    "Married in the last 12 months!!Female!!Estimate!!HOUSING TENURE!!Population 15 years and over in occupied housing units":[
+      "Married in the last 12 months!!Female!!Estimate!!HOUSING TENURE!!Owner-occupied housing units",
+      "Married in the last 12 months!!Female!!Margin of Error!!HOUSING TENURE!!Owner-occupied housing units",
+      "Married in the last 12 months!!Female!!Estimate!!HOUSING TENURE!!Renter-occupied housing units",
+      "Married in the last 12 months!!Female!!Margin of Error!!HOUSING TENURE!!Renter-occupied housing units",
+      "Married in the last 12 months!!Female!!Estimate!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Married in the last 12 months!!Female!!Margin of Error!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Married in the last 12 months!!Female!!Estimate!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units",
+      "Married in the last 12 months!!Female!!Margin of Error!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units"
+    ],
+    "Estimate!!Married in the last 12 months!!Female!!HOUSING TENURE!!Population 15 years and over in occupied housing units":[
+        "Estimate!!Married in the last 12 months!!Female!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+        "Margin of Error!!Married in the last 12 months!!Female MOE!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+        "Estimate!!Married in the last 12 months!!Female!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units",
+        "Margin of Error!!Married in the last 12 months!!Female MOE!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units"
+    ],
+    "Estimate!!Female!!Married in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units":[
+      "Estimate!!Female!!Married in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Margin of Error!!Female!!Married in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Estimate!!Female!!Married in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units",
+      "Margin of Error!!Female!!Married in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units"
+    ],
+    "Divorced in the last 12 months!!Male!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 18 years and over":[
+      "Divorced in the last 12 months!!Male!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "Divorced in the last 12 months!!Male!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher"
+    ],
+    "Estimate!!Divorced in the last 12 months!!Male!!EDUCATIONAL ATTAINMENT!!Population 18 years and over":[
+      "Estimate!!Divorced in the last 12 months!!Male!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Divorced in the last 12 months!!Male MOE!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher"
+    ],
+    "Estimate!!Male!!Divorced in the last 12 months!!EDUCATIONAL ATTAINMENT!!Population 18 years and over":[
+      "Estimate!!Male!!Divorced in the last 12 months!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Male!!Divorced in the last 12 months!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher"
+    ],
+    "Divorced in the last 12 months!!Male!!Estimate!!LABOR FORCE PARTICIPATION!!Population 16 years and over":[
+      "Divorced in the last 12 months!!Male!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force",
+      "Divorced in the last 12 months!!Male!!Estimate!!LABOR FORCE PARTICIPATION!!Not in labor force",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!LABOR FORCE PARTICIPATION!!Not in labor force",
+      "Divorced in the last 12 months!!Male!!Estimate!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Divorced in the last 12 months!!Male!!Estimate!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force"
+    ],
+    "Estimate!!Divorced in the last 12 months!!Male!!LABOR FORCE PARTICIPATION!!Population 16 years and over":[
+      "Estimate!!Divorced in the last 12 months!!Male!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Divorced in the last 12 months!!Male MOE!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Estimate!!Divorced in the last 12 months!!Male!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Divorced in the last 12 months!!Male MOE!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force"
+    ],
+    "Estimate!!Male!!Divorced in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over":[
+      "Estimate!!Male!!Divorced in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Male!!Divorced in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Estimate!!Male!!Divorced in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Male!!Divorced in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force"
+    ],
+    "Divorced in the last 12 months!!Male!!Estimate!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined":[
+      "Divorced in the last 12 months!!Male!!Estimate!!POVERTY STATUS IN PAST 12 MONTHS!!Below poverty",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!POVERTY STATUS IN PAST 12 MONTHS!!Below poverty",
+      "Divorced in the last 12 months!!Male!!Estimate!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty"
+    ],
+    "Estimate!!Divorced in the last 12 months!!Male!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined":[
+      "Estimate!!Divorced in the last 12 months!!Male!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty",
+      "Margin of Error!!Divorced in the last 12 months!!Male MOE!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty"
+    ],
+    "Estimate!!Male!!Divorced in the last 12 months!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined":[
+      "Estimate!!Male!!Divorced in the last 12 months!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty",
+      "Margin of Error!!Male!!Divorced in the last 12 months!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty"
+    ],
+    "Divorced in the last 12 months!!Male!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households":[
+      "Divorced in the last 12 months!!Male!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years",
+      "Divorced in the last 12 months!!Male!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+      "Divorced in the last 12 months!!Male!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years"
+    ],
+    "Estimate!!Divorced in the last 12 months!!Male!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households":[
+      "Estimate!!Divorced in the last 12 months!!Male!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years",
+      "Margin of Error!!Divorced in the last 12 months!!Male MOE!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years"
+    ],
+    "Estimate!!Male!!Divorced in the last 12 months!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households":[
+      "Estimate!!Male!!Divorced in the last 12 months!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years",
+      "Margin of Error!!Male!!Divorced in the last 12 months!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years"
+    ],
+    "Divorced in the last 12 months!!Male!!Estimate!!HOUSING TENURE!!Population 15 years and over in occupied housing units":[
+      "Divorced in the last 12 months!!Male!!Estimate!!HOUSING TENURE!!Owner-occupied housing units",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!HOUSING TENURE!!Owner-occupied housing units",
+      "Divorced in the last 12 months!!Male!!Estimate!!HOUSING TENURE!!Renter-occupied housing units",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!HOUSING TENURE!!Renter-occupied housing units",
+      "Divorced in the last 12 months!!Male!!Estimate!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Divorced in the last 12 months!!Male!!Estimate!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units",
+      "Divorced in the last 12 months!!Male!!Margin of Error!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units"
+    ],
+    "Estimate!!Divorced in the last 12 months!!Male!!HOUSING TENURE!!Population 15 years and over in occupied housing units":[
+        "Estimate!!Divorced in the last 12 months!!Male!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+        "Margin of Error!!Divorced in the last 12 months!!Male MOE!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+        "Estimate!!Divorced in the last 12 months!!Male!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units",
+        "Margin of Error!!Divorced in the last 12 months!!Male MOE!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units"
+    ],
+    "Estimate!!Male!!Divorced in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units":[
+      "Estimate!!Male!!Divorced in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Margin of Error!!Male!!Divorced in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Estimate!!Male!!Divorced in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units",
+      "Margin of Error!!Male!!Divorced in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units"
+    ],
+    "Divorced in the last 12 months!!Female!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 18 years and over":[
+      "Divorced in the last 12 months!!Female!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher",
+      "Divorced in the last 12 months!!Female!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher"
+    ],
+    "Estimate!!Divorced in the last 12 months!!Female!!EDUCATIONAL ATTAINMENT!!Population 18 years and over":[
+      "Estimate!!Divorced in the last 12 months!!Female!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Divorced in the last 12 months!!Female MOE!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher"
+    ],
+    "Estimate!!Female!!Divorced in the last 12 months!!EDUCATIONAL ATTAINMENT!!Population 18 years and over":[
+      "Estimate!!Female!!Divorced in the last 12 months!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher",
+      "Margin of Error!!Female!!Divorced in the last 12 months!!EDUCATIONAL ATTAINMENT!!Population 18 years and over!!Bachelor's degree or higher"
+    ],
+    "Divorced in the last 12 months!!Female!!Estimate!!LABOR FORCE PARTICIPATION!!Population 16 years and over":[
+      "Divorced in the last 12 months!!Female!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force",
+      "Divorced in the last 12 months!!Female!!Estimate!!LABOR FORCE PARTICIPATION!!Not in labor force",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!LABOR FORCE PARTICIPATION!!Not in labor force",
+      "Divorced in the last 12 months!!Female!!Estimate!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Divorced in the last 12 months!!Female!!Estimate!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force"
+    ],
+    "Estimate!!Divorced in the last 12 months!!Female!!LABOR FORCE PARTICIPATION!!Population 16 years and over":[
+      "Estimate!!Divorced in the last 12 months!!Female!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Divorced in the last 12 months!!Female MOE!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Estimate!!Divorced in the last 12 months!!Female!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Divorced in the last 12 months!!Female MOE!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force"
+    ],
+    "Estimate!!Female!!Divorced in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over":[
+      "Estimate!!Female!!Divorced in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Margin of Error!!Female!!Divorced in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!In labor force",
+      "Estimate!!Female!!Divorced in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force",
+      "Margin of Error!!Female!!Divorced in the last 12 months!!LABOR FORCE PARTICIPATION!!Population 16 years and over!!Not in labor force"
+    ],
+    "Divorced in the last 12 months!!Female!!Estimate!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined":[
+      "Divorced in the last 12 months!!Female!!Estimate!!POVERTY STATUS IN PAST 12 MONTHS!!Below poverty",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!POVERTY STATUS IN PAST 12 MONTHS!!Below poverty",
+      "Divorced in the last 12 months!!Female!!Estimate!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty"
+    ],
+    "Estimate!!Divorced in the last 12 months!!Female!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined":[
+      "Estimate!!Divorced in the last 12 months!!Female!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty",
+      "Margin of Error!!Divorced in the last 12 months!!Female MOE!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty"
+    ],
+    "Estimate!!Female!!Divorced in the last 12 months!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined":[
+      "Estimate!!Female!!Divorced in the last 12 months!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty",
+      "Margin of Error!!Female!!Divorced in the last 12 months!!POVERTY STATUS IN PAST 12 MONTHS!!Population for whom poverty status is determined!!Below poverty"
+    ],
+    "Divorced in the last 12 months!!Female!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households":[
+      "Divorced in the last 12 months!!Female!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!With an own child under 18 years",
+      "Divorced in the last 12 months!!Female!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child under 18 years",
+      "Divorced in the last 12 months!!Female!!Estimate!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years"
+    ],
+    "Estimate!!Divorced in the last 12 months!!Female!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households":[
+      "Estimate!!Divorced in the last 12 months!!Female!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years",
+      "Margin of Error!!Divorced in the last 12 months!!Female MOE!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years"
+    ],
+    "Estimate!!Female!!Divorced in the last 12 months!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households":[
+      "Estimate!!Female!!Divorced in the last 12 months!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years",
+      "Margin of Error!!Female!!Divorced in the last 12 months!!PRESENCE OF OWN CHILD UNDER 18 YEARS!!Population in households!!With an own child of the householder under 18 years"
+    ],
+    "Divorced in the last 12 months!!Female!!Estimate!!HOUSING TENURE!!Population 15 years and over in occupied housing units":[
+      "Divorced in the last 12 months!!Female!!Estimate!!HOUSING TENURE!!Owner-occupied housing units",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!HOUSING TENURE!!Owner-occupied housing units",
+      "Divorced in the last 12 months!!Female!!Estimate!!HOUSING TENURE!!Renter-occupied housing units",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!HOUSING TENURE!!Renter-occupied housing units",
+      "Divorced in the last 12 months!!Female!!Estimate!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Divorced in the last 12 months!!Female!!Estimate!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units",
+      "Divorced in the last 12 months!!Female!!Margin of Error!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units"
+    ],
+    "Estimate!!Divorced in the last 12 months!!Female!!HOUSING TENURE!!Population 15 years and over in occupied housing units":[
+        "Estimate!!Divorced in the last 12 months!!Female!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+        "Margin of Error!!Divorced in the last 12 months!!Female MOE!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+        "Estimate!!Divorced in the last 12 months!!Female!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units",
+        "Margin of Error!!Divorced in the last 12 months!!Female MOE!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units"
+    ],
+    "Estimate!!Female!!Divorced in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units":[
+      "Estimate!!Female!!Divorced in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Margin of Error!!Female!!Divorced in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Owner-occupied housing units",
+      "Estimate!!Female!!Divorced in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units",
+      "Margin of Error!!Female!!Divorced in the last 12 months!!HOUSING TENURE!!Population 15 years and over in occupied housing units!!Renter-occupied housing units"
+    ]
+	}
+}
+
