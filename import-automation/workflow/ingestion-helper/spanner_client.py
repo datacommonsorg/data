@@ -197,8 +197,8 @@ class SpannerClient:
         """Updates the status for the specified import job."""
         import_name = params['import_name']
         job_id = params['job_id']
-        duration = params['duration']
-        data = params['data']
+        exec_time = params['exec_time']
+        data_volume = params['data_volume']
         status = params['status']
         version = params['version']
         next_refresh = params['next_refresh']
@@ -211,8 +211,8 @@ class SpannerClient:
             ]
 
             row_values = [
-                import_name, status, job_id, duration, data, next_refresh,
-                version, spanner.COMMIT_TIMESTAMP
+                import_name, status, job_id, exec_time, data_volume,
+                next_refresh, version, spanner.COMMIT_TIMESTAMP
             ]
 
             if status == 'READY':
@@ -230,4 +230,32 @@ class SpannerClient:
         except Exception as e:
             logging.error(
                 f'Error updating import status for {import_name}: {e}')
+            raise
+
+    def update_version_history(self, import_name: str, version: str,
+                               comment: str):
+        """Updates the version history table.
+
+        Args:
+            import_name: The name of the import.
+            version: The version string.
+            comment: The comment for the update.
+        """
+        logging.info(f"Updating version history for {import_name} to {version}")
+
+        def _record(transaction: Transaction):
+            columns = ["ImportName", "Version", "UpdateTimestamp", "Comment"]
+            values = [[
+                import_name, version, spanner.COMMIT_TIMESTAMP, comment
+            ]]
+            transaction.insert(table="ImportVersionHistory",
+                               columns=columns,
+                               values=values)
+            logging.info(f"Added version history entry for {import_name}")
+
+        try:
+            self.database.run_in_transaction(_record)
+        except Exception as e:
+            logging.error(
+                f'Error updating version history for {import_name}: {e}')
             raise

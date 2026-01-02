@@ -149,6 +149,8 @@ class ExecutorConfig:
     ignore_validation_status: bool = False
     # Import validation config file path (relative to data repo).
     validation_config_file: str = 'tools/import_validation/validation_config.json'
+    # Latest import version (overwrite)
+    import_version_override: str = ''
     # Maximum time venv creation can take in seconds.
     venv_create_timeout: float = 3600
     # Maximum time downloading a file can take in seconds.

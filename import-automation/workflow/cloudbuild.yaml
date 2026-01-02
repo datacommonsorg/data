@@ -1,7 +1,7 @@
 # gcloud builds submit --config=cloudbuild.yaml . --project=datcom-import-automation-prod 
 
 substitutions:
-  _PROJECT_ID: 'datcom-import-automation-prod'
+  _PROJECT_ID: 'datcom-import-automation-prod' 
   _SPANNER_PROJECT_ID: 'datcom-store'
   _SPANNER_INSTANCE_ID: 'dc-kg-test'
   _SPANNER_DATABASE_ID: 'dc_graph_import'
@@ -12,11 +12,11 @@ substitutions:
 steps:
 - id: 'import-automation-workflow'
   name: 'gcr.io/cloud-builders/gcloud'
-  args: ['workflows', 'deploy', 'import-automation-workflow', '--source', 'import-automation-workflow.yaml', '--set-env-vars', 'LOCATION=${_LOCATION},GCS_BUCKET_ID=${_GCS_BUCKET_ID},GCS_MOUNT_BUCKET=${_GCS_MOUNT_BUCKET}']
+  args: ['workflows', 'deploy', 'vishg-test-workflow', '--source', 'import-automation-workflow.yaml', '--set-env-vars', 'LOCATION=${_LOCATION},GCS_BUCKET_ID=${_GCS_BUCKET_ID},GCS_MOUNT_BUCKET=${_GCS_MOUNT_BUCKET}']
 
 - id: 'spanner-ingestion-workflow'
   name: 'gcr.io/cloud-builders/gcloud'
-  args: ['workflows', 'deploy', 'spanner-ingestion-workflow', '--source', 'spanner-ingestion-workflow.yaml', '--set-env-vars', 'PROJECT_ID=${_PROJECT_ID},SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID}']
+  args: ['workflows', 'deploy', 'spanner-ingestion-workflow', '--source', 'spanner-ingestion-workflow.yaml', '--set-env-vars', 'LOCATION=${_LOCATION},PROJECT_ID=${_PROJECT_ID},SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID}']
 
 - id: 'spanner-ingestion-helper'
   name: 'gcr.io/cloud-builders/gcloud'

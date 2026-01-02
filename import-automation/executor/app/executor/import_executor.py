@@ -75,7 +75,7 @@ lastDataRefreshDate: "{last_data_refresh_date}"
 AUTO_IMPORT_JOB_STAGE = "auto-import-job-stage"
 AUTO_IMPORT_JOB_STATUS = "auto-import-job-status"
 IMPORT_SUMMARY_FILE = "import_summary.json"
-STAGING_PATH = "staging"
+STAGING_VERSION_FILE = "staging_version.txt"
 
 
 class ImportStatus(Enum):
@@ -783,9 +783,7 @@ class ImportExecutor:
             return
         logging.info(f'Updating import latest version {version}')
         self.uploader.upload_string(
-            version,
-            os.path.join(output_dir, STAGING_PATH,
-                         self.config.storage_version_filename))
+            version, os.path.join(output_dir, STAGING_VERSION_FILE))
         self.uploader.upload_string(
             self._import_metadata_mcf_helper(import_spec),
             os.path.join(output_dir, version,
@@ -822,10 +820,12 @@ class ImportExecutor:
                                     self.config.file_download_timeout)
 
         output_dir = f'{relative_import_dir}/{import_name}'
+        version = self.config.import_version_override if self.config.import_version_override else _clean_time(
+            utils.pacific_time())
+        # Used for imports using CDA feed tranfers with a date placeholder in the GCS path,
+        # thus, we can determine the path using the current date (instead of a variable timestamp).
         if version == 'DATE_VERSION_PLACEHOLDER':
             version = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
-        else:
-            version = _clean_time(utils.pacific_time())
         import_summary.latest_version = 'gs://' + os.path.join(
             self.config.storage_prod_bucket_name, output_dir, version, '*', '*',
             '*.mcf')

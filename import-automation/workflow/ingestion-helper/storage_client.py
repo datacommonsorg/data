@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Storage client for the ingestion helper."""
 
 import logging
@@ -22,7 +21,7 @@ import os
 
 logging.getLogger().setLevel(logging.INFO)
 
-_STAGING_PATH = 'staging'
+_STAGING_VERSION_FILE = 'staging_version.txt'
 
 
 class StorageClient:
@@ -66,8 +65,7 @@ class StorageClient:
             The version string, or an empty string if not found.
         """
         output_dir = import_name.replace(':', '/')
-        version_file = os.path.join(output_dir, _STAGING_PATH,
-                                    'latest_version.txt')
+        version_file = os.path.join(output_dir, _STAGING_VERSION_FILE)
         logging.info(f'Reading version file {version_file}')
         try:
             blob = self.bucket.blob(version_file)
@@ -77,10 +75,10 @@ class StorageClient:
             return ''
 
     def update_version_file(self, import_name: str, version: str):
-        """Updates the version file and history in GCS.
+        """Updates the version file in GCS.
 
         Copies the latest version file and import metadata from staging to the
-        output directory and appends the new version to the history file.
+        output directory.
 
         Args:
             import_name: The name of the import.
@@ -96,18 +94,6 @@ class StorageClient:
                     os.path.join(output_dir, version,
                                  'import_metadata_mcf.mcf')), self.bucket,
                 os.path.join(output_dir, 'import_metadata_mcf.mcf'))
-
-            history_filename = os.path.join(output_dir,
-                                            'latest_version_history.txt')
-            logging.info(f'Updating version history file {history_filename}')
-            versions_history = [version]
-            history_blob = self.bucket.blob(history_filename)
-            if history_blob.exists():
-                history = history_blob.download_as_text()
-                if history:
-                    versions_history.append(history)
-            history_blob.upload_from_string('\n'.join(versions_history))
-            logging.info(f'Updated version history file {history_filename}')
         except exceptions.NotFound as e:
             logging.error(f'Error updating version file for {import_name}: {e}')
             raise
