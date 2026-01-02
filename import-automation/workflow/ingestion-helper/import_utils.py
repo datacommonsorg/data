@@ -16,9 +16,7 @@
 import logging
 import croniter
 from datetime import datetime, timezone
-import base64
 from googleapiclient.discovery import build
-import json
 from googleapiclient.errors import HttpError
 from google.oauth2 import id_token
 from google.auth.transport import requests
@@ -60,13 +58,13 @@ def get_import_params(request_json) -> dict:
         request_json: A dictionary containing request parameters.
 
     Returns:
-        A dictionary with keys: job_id, duration, data, version, next_refresh, status.
+        A dictionary with import params.
     """
     import_name = request_json.get('importName', '')
     status = request_json.get('status', '')
     job_id = request_json.get('jobId', '')
-    duration = request_json.get('duration', 0)
-    data = request_json.get('data', 0)
+    exec_time = request_json.get('execTime', 0)
+    data_volume = request_json.get('dataVolume', 0)
     version = request_json.get('version', '')
     schedule = request_json.get('schedule', '')
     next_refresh = datetime.now(timezone.utc)
@@ -80,8 +78,8 @@ def get_import_params(request_json) -> dict:
         'import_name': import_name,
         'status': status,
         'job_id': job_id,
-        'duration': duration,
-        'data': data,
+        'exec_time': exec_time,
+        'data_volume': data_volume,
         'version': version,
         'next_refresh': next_refresh
     }
@@ -94,13 +92,13 @@ def create_import_params(summary) -> dict:
         summary: A dictionary containing import summary details.
 
     Returns:
-        A dictionary with keys: job_id, duration, data, version, next_refresh, status.
+        A dictionary with import params.
     """
     import_name = summary.get('import_name', '')
     status = summary.get('status', '').removeprefix('ImportStatus.')
     job_id = summary.get('job_id', '')
-    duration = summary.get('execution_time', 0)
-    data = summary.get('data_volume', 0)
+    exec_time = summary.get('execution_time', 0)
+    data_volume = summary.get('data_volume', 0)
     version = summary.get('latest_version', '')
     next_refresh_str = summary.get('next_refresh', '')
     next_refresh = None
@@ -114,8 +112,8 @@ def create_import_params(summary) -> dict:
         'import_name': import_name,
         'status': status,
         'job_id': job_id,
-        'duration': duration,
-        'data': data,
+        'exec_time': exec_time,
+        'data_volume': data_volume,
         'version': version,
         'next_refresh': next_refresh,
     }

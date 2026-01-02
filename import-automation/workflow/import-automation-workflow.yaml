@@ -75,7 +75,7 @@ main:
                     jobId: ${jobId}
                     importName: ${text.split(args.importName, ":")[1]}
                     status: 'FAILED'
-                    duration: ${int(sys.now() - startTime)}
+                    execTime: ${int(sys.now() - startTime)}
                     version: ${"gs://" + gcsImportBucket + "/" + text.replace_all(args.importName, ":", "/")}
                     schedule: ${default(map.get(args, "schedule"), "")}
                 result: functionResponse
@@ -91,7 +91,7 @@ main:
             actionType: 'update_import_version'
             importName: ${args.importName}
             version: 'staging'
-            reason: 'import-automation'
+            comment: 'import-automation'
         result: functionResponse
     - returnResult:
         return:
