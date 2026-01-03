@@ -15,7 +15,7 @@ Total expenses,measuredProperty,expenditure,expenditureType,TotalExpenses
 grants and contracts,measuredProperty,revenue,revenueSource,GrantsAndContracts
 Appropriations,measuredProperty,revenue,revenueType,Appropriations,#Header,revenueType
 Nonoperating grants,measuredProperty,revenue,revenueType,NonOperatingGrants,#Header,revenueType
-Tuition and fees (net of allowances and discounts),measuredProperty,revenue,revenueSource,TuitionAndFees
+Tuition and fees,measuredProperty,revenue,revenueSource,TuitionAndFees
 Federal (excludes FDSL loans),measuredProperty,revenue,revenueSource,FederalFundingExcludesFDSLLoans
 State,measuredProperty,revenue,revenueSource,StateFunding
 Local,measuredProperty,revenue,revenueSource,LocalFunding
@@ -43,7 +43,6 @@ Scholarships and fellowships,measuredProperty,expenditure,expenditureType,Schola
 Auxiliary enterprises,measuredProperty,expenditure,expenditureType,AuxiliaryEnterprises,,,,
 Hospital services,measuredProperty,expenditure,expenditureType,HospitalServices,,,,
 Other expenses and deductions,measuredProperty,expenditure,expenditureType,OtherExpensesAndDeductions,,,,
-Tuition and fees,measuredProperty,revenue,revenueSource,TuitionAndFees,,,,
 Government appropriations,measuredProperty,revenue,revenueType,GovernmentAppropriations,#Header,revenueType,,
 Government grants and contracts,measuredProperty,revenue,revenueType,GovernmentGrantsAndContracts,#Header,revenueType,,
 Private gifts,measuredProperty,revenue,revenueSource,Gifts,,,,

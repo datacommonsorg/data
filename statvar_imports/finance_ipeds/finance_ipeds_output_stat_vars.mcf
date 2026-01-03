@@ -1,4 +1,4 @@
-# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/* --pv_map=finance_ipeds_pvmap.csv --config_file=finance_ipeds_metadata.csv --output_path=finance_ipeds_output --debug" on 2026-01-03 18:46:35.546375
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/* --pv_map=finance_ipeds_pvmap.csv --config_file=finance_ipeds_metadata.csv --output_path=finance_ipeds_output --debug" on 2026-01-03 19:48:05.440617
 
 Node: dcid:Count_ExpenditureActivity_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
 typeOf: dcid:StatisticalVariable
