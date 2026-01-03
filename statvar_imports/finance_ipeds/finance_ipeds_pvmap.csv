@@ -1,0 +1,67 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4
+4-year,institutionLevel,FourYear,populationType,ExpenditureActivity
+2-year,institutionLevel,TwoYear,populationType,ExpenditureActivity
+Less-than-2-year,institutionLevel,LessThanTwoYear,populationType,ExpenditureActivity
+in thousands,value,{Number},#Eval,"value=1000*int(re.sub(r'[$,—#]', '', Data))",unit,USDollar
+Percent,value,{Number},unit,Percent
+Public institutions,institutionControl,PublicInstitution,#Header,institutionControl
+nonprofit institutions,institutionControl,PrivateNonProfitInstitution,#Header,institutionControl
+for-profit institutions,institutionControl,PrivateForProfitInstitution,#Header,institutionControl
+Total revenues and investment return,measuredProperty,revenue,revenueSource,TotalRevenueInvestmentReturn
+Operating revenues,measuredProperty,revenue,revenueType,Operating,revenueSource,TotalOperatingRevenues,#Header,revenueType
+Nonoperating revenues,measuredProperty,revenue,revenueType,NonOperating,revenueSource,TotalNonOperatingRevenues,#Header,revenueType
+Total other revenues and additions2,measuredProperty,revenue,revenueSource,TotalOtherRevenues
+Total expenses,measuredProperty,expenditure,expenditureType,TotalExpenses
+grants and contracts,measuredProperty,revenue,revenueSource,GrantsAndContracts
+Appropriations,measuredProperty,revenue,revenueType,Appropriations,#Header,revenueType
+Nonoperating grants,measuredProperty,revenue,revenueType,NonOperatingGrants,#Header,revenueType
+Tuition and fees (net of allowances and discounts),measuredProperty,revenue,revenueSource,TuitionAndFees
+Federal (excludes FDSL loans),measuredProperty,revenue,revenueSource,FederalFundingExcludesFDSLLoans
+State,measuredProperty,revenue,revenueSource,StateFunding
+Local,measuredProperty,revenue,revenueSource,LocalFunding
+Operating revenues:Private,measuredProperty,revenue,revenueSource,PrivateFunding
+Sales and services of auxiliary enterprises,measuredProperty,revenue,revenueSource,SalesAndServicesOfAuxiliaryEnterprises,,,,
+Sales and services of hospitals,measuredProperty,revenue,revenueSource,HospitalSales,,,,
+Sales and services of educational activities,measuredProperty,revenue,revenueSource,EducationalSales,,,,
+Independent operations,measuredProperty,revenue,revenueSource,IndependentOperations,,,,
+Other operating revenues,measuredProperty,revenue,revenueSource,OtherOperatingRevenues,,,,
+Federal,measuredProperty,revenue,revenueSource,FederalFunding,,,,
+Gifts,measuredProperty,revenue,revenueSource,Gifts,,,,
+Investment income,measuredProperty,revenue,revenueSource,InvestmentIncome,,,,
+Other nonoperating revenues,measuredProperty,revenue,revenueSource,OtherNonOperatingRevenue,,,,
+Capital appropriations,measuredProperty,revenue,revenueSource,CapitalAppropriations,,,,
+Capital grants and gifts,measuredProperty,revenue,revenueSource,CapitalGrantsGifts,,,,
+Additions to permanent endowments,measuredProperty,revenue,revenueSource,AdditionsPermanent,,,,
+Other revenues and additions,measuredProperty,revenue,revenueSource,OtherRevenues,,,,
+Instruction,measuredProperty,expenditure,expenditureType,Instruction,,,,
+Research,measuredProperty,expenditure,expenditureType,Research,,,,
+Public service,measuredProperty,expenditure,expenditureType,PublicService,,,,
+Academic support,measuredProperty,expenditure,expenditureType,AcademicSupport,,,,
+Student services,measuredProperty,expenditure,expenditureType,StudentServices,,,,
+Institutional support,measuredProperty,expenditure,expenditureType,InstitutionalSupport,,,,
+Scholarships and fellowships,measuredProperty,expenditure,expenditureType,ScholarshipFelllowships,,,,
+Auxiliary enterprises,measuredProperty,expenditure,expenditureType,AuxiliaryEnterprises,,,,
+Hospital services,measuredProperty,expenditure,expenditureType,HospitalServices,,,,
+Other expenses and deductions,measuredProperty,expenditure,expenditureType,OtherExpensesAndDeductions,,,,
+Tuition and fees,measuredProperty,revenue,revenueSource,TuitionAndFees,,,,
+Government appropriations,measuredProperty,revenue,revenueType,GovernmentAppropriations,#Header,revenueType,,
+Government grants and contracts,measuredProperty,revenue,revenueType,GovernmentGrantsAndContracts,#Header,revenueType,,
+Private gifts,measuredProperty,revenue,revenueSource,Gifts,,,,
+Private grants and contracts,measuredProperty,revenue,revenueSource,PrivateGrantsAndContracts,,,,
+Contributions from affiliated entities,measuredProperty,revenue,revenueSource,AffiliatedEntities,,,,
+Investment return,measuredProperty,revenue,revenueSource,InvestmentReturn,,,,
+Independent operations revenue,measuredProperty,revenue,revenueSource,IndependentOperationsRevenue,,,,
+Other revenue3,measuredProperty,revenue,revenueSource,OtherRevenues,,,,
+Net grant aid to students,measuredProperty,expenditure,expenditureType,GrantAid,,,,
+Other expenses,measuredProperty,expenditure,expenditureType,OtherExpenses,,,,
+Investment income and investment gains (losses),measuredProperty,revenue,revenueSource,InvestmentIncomeAndGains,,,,
+Hospital revenue,measuredProperty,revenue,revenueSource,HospitalRevenue,,,,
+"United States, fiscal year 2015",observationAbout,country/USA,observationDate,2015
+"United States, fiscal year 2016",observationAbout,country/USA,observationDate,2016
+"United States, fiscal year 2017",observationAbout,country/USA,observationDate,2017
+"United States, fiscal year 2018",observationAbout,country/USA,observationDate,2018
+"United States, fiscal year 2019",observationAbout,country/USA,observationDate,2019
+"United States, fiscal year 2020",observationAbout,country/USA,observationDate,2020
+"United States, fiscal year 2021",observationAbout,country/USA,observationDate,2021
+"United States, fiscal year 2022",observationAbout,country/USA,observationDate,2022
+"United States, fiscal year 2023",observationAbout,country/USA,observationDate,2023
