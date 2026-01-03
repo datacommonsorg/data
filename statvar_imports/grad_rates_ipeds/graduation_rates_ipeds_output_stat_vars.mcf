@@ -1,4 +1,4 @@
-# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/*.csv --pv_map=pvmap.csv --config_file=metadata.csv --output_path=graduation_rates_ipeds_output --debug" on 2025-12-29 10:17:27.368662
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/* --pv_map=graduation_rates_ipeds_pvmap.csv --config_file=graduation_rates_ipeds_metadata.csv --output_path=graduation_rates_ipeds_output --debug" on 2026-01-03 19:16:18.320768
 
 Node: dcid:GraduationRate_Person_EducationalAttainmentAssociateDegreeOrCertificate
 typeOf: dcid:StatisticalVariable
