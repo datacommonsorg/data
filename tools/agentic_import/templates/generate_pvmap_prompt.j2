@@ -1242,7 +1242,7 @@ When working with SDMX datasets, follow these additional guidelines:
 # CORE TASK
 
 Your primary goal is to analyze the provided CSV data and generate a complete
-and valid `{{output_dir}}/{{output_basename}}_pvmap.csv` and `{{output_dir}}/{{output_basename}}_metadata.csv` files which can be used with Statvar
+and valid `{{output_path_abs}}_pvmap.csv` and `{{output_path_abs}}_metadata.csv` files which can be used with Statvar
 processor tool to produce the final DataCommons artifacts.
 
 ## 📌 IMPORTANT: FILE NAMING CONVENTION
@@ -1262,18 +1262,18 @@ This naming convention allows multiple datasets to be processed in the same work
 - ✅ No file conflicts or overwrites
 - ✅ Easy to organize outputs by topic or date
 
-**Current Task**: For this specific run, your output path is `{{output_path}}`.
+**Current Task**: For this specific run, your output path is `{{output_path_abs}}`.
 
 Throughout this documentation, you will see references to generic file names.
 **You MUST use the following specific file names for this task:**
 
 | Documentation Reference | Actual File You Must Create |
 |------------------------|----------------------------|
-| `pvmap.csv` | `{{output_dir}}/{{output_basename}}_pvmap.csv` |
-| `metadata.csv` | `{{output_dir}}/{{output_basename}}_metadata.csv` |
-| `output.csv` | `{{output_path}}.csv` |
+| `pvmap.csv` | `{{output_path_abs}}_pvmap.csv` |
+| `metadata.csv` | `{{output_path_abs}}_metadata.csv` |
+| `output.csv` | `{{output_path_abs}}.csv` |
 
-**Example**: When the documentation says "create pvmap.csv", you must actually create `{{output_dir}}/{{output_basename}}_pvmap.csv`
+**Example**: When the documentation says "create pvmap.csv", you must actually create `{{output_path_abs}}_pvmap.csv`
 
 **REMEMBER**: Whenever you see generic file names in the instructions, always use the specific names with the output path prefix.
 
@@ -1343,11 +1343,11 @@ Follow these steps sequentially.
 
   {%- endif %}
 
-**2. Generate `{{output_dir}}/{{output_basename}}_pvmap.csv` and `{{output_dir}}/{{output_basename}}_metadata.csv`**
+**2. Generate `{{output_path_abs}}_pvmap.csv` and `{{output_path_abs}}_metadata.csv`**
 
-- Create the `{{output_dir}}/{{output_basename}}_pvmap.csv` file, mapping the source data columns to DataCommons properties based on your findings.
-- Create the `{{output_dir}}/{{output_basename}}_metadata.csv` file and define the necessary `statvar_processor` configuration parameters within it.
-- Configuration rule: All processor flags/settings must live in `{{output_dir}}/{{output_basename}}_metadata.csv`. Do not embed configuration in `{{output_dir}}/{{output_basename}}_pvmap.csv` and do not rely on extra CLI flags.
+- Create the `{{output_path_abs}}_pvmap.csv` file, mapping the source data columns to DataCommons properties based on your findings.
+- Create the `{{output_path_abs}}_metadata.csv` file and define the necessary `statvar_processor` configuration parameters within it.
+- Configuration rule: All processor flags/settings must live in `{{output_path_abs}}_metadata.csv`. Do not embed configuration in `{{output_path_abs}}_pvmap.csv` and do not rely on extra CLI flags.
 ### Validation Checklist
 
 While generating the files, ensure:
@@ -1365,9 +1365,9 @@ While generating the files, ensure:
 - [ ] **Special/missing values mapped appropriately** - Use `#ignore` ONLY to drop entire rows. For skipping individual cell values, use empty mapping: `column:value,IntermediateProperty,''` (preserves row, skips cell)
 
 #### Metadata CSV Validation:
-- [ ] **{{output_dir}}/{{output_basename}}_metadata.csv covers processor flags** - Includes required parameters (e.g., `header_rows`)
-- [ ] **No config in {{output_dir}}/{{output_basename}}_pvmap.csv** - `{{output_dir}}/{{output_basename}}_pvmap.csv` contains only PV mappings, not processor settings
-- [ ] **No extra CLI flags** - Configuration is exclusively in `{{output_dir}}/{{output_basename}}_metadata.csv`; wrapper provides input paths
+- [ ] **{{output_path_abs}}_metadata.csv covers processor flags** - Includes required parameters (e.g., `header_rows`)
+- [ ] **No config in {{output_path_abs}}_pvmap.csv** - `{{output_path_abs}}_pvmap.csv` contains only PV mappings, not processor settings
+- [ ] **No extra CLI flags** - Configuration is exclusively in `{{output_path_abs}}_metadata.csv`; wrapper provides input paths
 - [ ] **Parameter names match documentation** - Not CLI flag names
 - [ ] **Quote values containing commas** - `key,"value1,value2,value3"`
 
@@ -1394,13 +1394,13 @@ For SDMX datasets, also ensure:
 
 ```bash
 # Run statvar processor using dedicated script
-{{script_dir}}/agentic_import/run_statvar_processor.sh \
+{{script_dir_abs}}/agentic_import/run_statvar_processor.sh \
   --python "{{python_interpreter}}" \
-  --script-dir "{{script_dir}}" \
-  --working-dir "{{working_dir}}" \
-  --input-data "{{input_data}}" \
+  --script-dir "{{script_dir_abs}}" \
+  --working-dir "{{working_dir_abs}}" \
+  --input-data "{{input_data_abs}}" \
   --gemini-run-id "{{gemini_run_id}}" \
-  --output-path "{{output_path}}"
+  --output-path "{{output_path_abs}}"
 ```
 
 The wrapper reads `metadata.csv` for all processor configuration. Do not add extra flags to this command.
@@ -1409,11 +1409,11 @@ The wrapper reads `metadata.csv` for all processor configuration. Do not add ext
 
 **📊 VALIDATION CHECKLIST**:
 - Check the command exit code (0 = success, non-zero = failure)
-- Verify that `{{working_dir}}/{{output_path}}.csv` exists and is not empty
+- Verify that `{{output_path_abs}}.csv` exists and is not empty
 - Confirm no duplicate entries for same place, date, and variable
 - **Verify output.csv contains all required columns**: Must include at minimum `observationAbout`, `observationDate`, `variableMeasured`, `value`
-- **Verify complete column mapping**: Any observation properties mapped in {{output_dir}}/{{output_basename}}_pvmap.csv (like `unit`, `scalingFactor`, `measurementMethod`, `observationPeriod`) must be present as columns in `{{working_dir}}/{{output_path}}.csv`
-- **Verify `{{output_dir}}/{{output_basename}}_metadata.csv` completeness**: Confirm `header_rows` parameter is present and correctly specified
+- **Verify complete column mapping**: Any observation properties mapped in {{output_path_abs}}_pvmap.csv (like `unit`, `scalingFactor`, `measurementMethod`, `observationPeriod`) must be present as columns in `{{output_path_abs}}.csv`
+- **Verify `{{output_path_abs}}_metadata.csv` completeness**: Confirm `header_rows` parameter is present and correctly specified
 
 **🎯 DECISION LOGIC - APPLY THIS EXACTLY**:
 
@@ -1428,22 +1428,22 @@ IF all items in the VALIDATION CHECKLIST above pass:
 ELIF CURRENT_ATTEMPT < {{max_iterations}}:
     → OUTPUT: "❌ ATTEMPT CURRENT_ATTEMPT FAILED - Error details: [describe specific error]"
     → OUTPUT: "🔄 Starting attempt [CURRENT_ATTEMPT + 1] of {{max_iterations}}..."   
-    → Analyze the error from logs. In case statvar processor failed, read log file at: {{working_dir}}/.datacommons/processor.log
+    → Analyze the error from logs. In case statvar processor failed, read log file at: {{working_dir_abs}}/.datacommons/processor.log
     {# TODO: move debugging instructions to separate section #}
-    → **Common {{output_dir}}/{{output_basename}}_metadata.csv issues to check:**
+    → **Common {{output_path_abs}}_metadata.csv issues to check:**
        • Missing or wrong `header_rows` (should be 1 for standard CSV with headers)
        • Wrong `skip_rows` value skipping too much data
        • Debugging parameters left in production (`process_rows`, `input_rows`, `input_columns`)
        • Place resolution issues: missing `places_within` or wrong `place_type`
-    → Modify {{output_dir}}/{{output_basename}}_pvmap.csv and/or {{output_dir}}/{{output_basename}}_metadata.csv to fix identified issues
+    → Modify {{output_path_abs}}_pvmap.csv and/or {{output_path_abs}}_metadata.csv to fix identified issues
     → INCREMENT ATTEMPT COUNTER
     → Return to Step 5 (Run the Processor)
 
 ELSE (CURRENT_ATTEMPT >= {{max_iterations}}):
     → OUTPUT: "⛔ ITERATION LIMIT REACHED: Failed after {{max_iterations}} attempts"
     → OUTPUT: "📋 Final Status: FAILED - Manual intervention required"
-    → OUTPUT: "📁 Check logs at: {{working_dir}}/.datacommons/ for debugging"
-    → OUTPUT: "📁 Check backup at: {{working_dir}}/runs/{{gemini_run_id}}/ for debugging"
+    → OUTPUT: "📁 Check logs at: {{working_dir_abs}}/.datacommons/ for debugging"
+    → OUTPUT: "📁 Check backup at: {{working_dir_abs}}/runs/{{gemini_run_id}}/ for debugging"
     → STOP EXECUTION IMMEDIATELY
     → DO NOT MAKE ANY MORE ATTEMPTS
 ```
@@ -1462,21 +1462,21 @@ CRITICAL: Follow all SDMX-specific guidelines and use metadata for semantic mapp
 
 ```json
 {
-  "input_data": ["{{input_data}}"],
-  "input_metadata": {{input_metadata | tojson}},
-  "working_dir": "{{working_dir}}",
-  "output_dir": "{{working_dir}}/{{output_dir}}",
+  "input_data": ["{{input_data_abs}}"],
+  "input_metadata": {{input_metadata_abs | tojson}},
+  "working_dir": "{{working_dir_abs}}",
+  "output_dir": "{{output_dir_abs}}",
   "dataset_type": "{{dataset_type}}"
 }
 ```
 
 # OUTPUT REQUIREMENTS & FINAL INSTRUCTION
 
-- Generate `{{output_dir}}/{{output_basename}}_pvmap.csv` and `{{output_dir}}/{{output_basename}}_metadata.csv`
+- Generate `{{output_path_abs}}_pvmap.csv` and `{{output_path_abs}}_metadata.csv`
 - **Adhere to Rules:** Strictly follow all schema rules, property requirements, and formatting guidelines from the
   knowledge base.
 - DO NOT deviate from the documented standards.
-- Configuration location: Place all processor flags/settings in `{{output_dir}}/{{output_basename}}_metadata.csv` only. Do not embed settings in `{{output_dir}}/{{output_basename}}_pvmap.csv` and do not propose additional CLI flags.
+- Configuration location: Place all processor flags/settings in `{{output_path_abs}}_metadata.csv` only. Do not embed settings in `{{output_path_abs}}_pvmap.csv` and do not propose additional CLI flags.
 
 # 🛑 FINAL EXECUTION REMINDERS
 
@@ -1491,7 +1491,7 @@ CRITICAL: Follow all SDMX-specific guidelines and use metadata for semantic mapp
 
 # ACTION REQUIRED NOW
 
-**Execute** the data analysis and generate the `{{output_dir}}/{{output_basename}}_pvmap.csv` and `{{output_dir}}/{{output_basename}}_metadata.csv`
+**Execute** the data analysis and generate the `{{output_path_abs}}_pvmap.csv` and `{{output_path_abs}}_metadata.csv`
 files now. Follow the primary workflow **WITHOUT** deviation.
 
 **REMEMBER**: You have {{max_iterations}} attempts maximum. Track each attempt and stop when you succeed or reach the limit.
