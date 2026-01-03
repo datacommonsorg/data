@@ -1,0 +1,95 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/*.csv --pv_map=pvmap.csv --config_file=metadata.csv --output_path=graduation_rates_ipeds_output --debug" on 2025-12-29 10:17:27.368662
+
+Node: dcid:GraduationRate_Person_EducationalAttainmentAssociateDegreeOrCertificate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:graduationRate
+statType: dcid:measuredValue
+educationalAttainment: dcid:AssociateDegreeOrCertificate
+
+Node: dcid:GraduationRate_Person_EducationalAttainmentAssociateDegreeOrCertificate_PrivatelyOwnedForProfitEstablishment
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:graduationRate
+statType: dcid:measuredValue
+educationalAttainment: dcid:AssociateDegreeOrCertificate
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+
+Node: dcid:GraduationRate_Person_EducationalAttainmentAssociateDegreeOrCertificate_PrivatelyOwnedNotForProfitEstablishment
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:graduationRate
+statType: dcid:measuredValue
+educationalAttainment: dcid:AssociateDegreeOrCertificate
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+
+Node: dcid:GraduationRate_Person_EducationalAttainmentAssociateDegreeOrCertificate_PubliclyOwnedEstablishment
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:graduationRate
+statType: dcid:measuredValue
+educationalAttainment: dcid:AssociateDegreeOrCertificate
+establishmentOwnership: dcid:PubliclyOwned
+
+Node: dcid:GraduationRate_Person_EducationalAttainmentBachelorsDegree
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:graduationRate
+statType: dcid:measuredValue
+educationalAttainment: dcid:BachelorsDegree
+
+Node: dcid:GraduationRate_Person_EducationalAttainmentBachelorsDegree_PrivatelyOwnedForProfitEstablishment
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:graduationRate
+statType: dcid:measuredValue
+educationalAttainment: dcid:BachelorsDegree
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+
+Node: dcid:GraduationRate_Person_EducationalAttainmentBachelorsDegree_PrivatelyOwnedNotForProfitEstablishment
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:graduationRate
+statType: dcid:measuredValue
+educationalAttainment: dcid:BachelorsDegree
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+
+Node: dcid:GraduationRate_Person_EducationalAttainmentBachelorsDegree_PubliclyOwnedEstablishment
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:graduationRate
+statType: dcid:measuredValue
+educationalAttainment: dcid:BachelorsDegree
+establishmentOwnership: dcid:PubliclyOwned
+
+Node: dcid:GraduationRate_Person_EducationalAttainmentPostSecondaryCertificate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:graduationRate
+statType: dcid:measuredValue
+educationalAttainment: dcid:PostSecondaryCertificate
+
+Node: dcid:GraduationRate_Person_EducationalAttainmentPostSecondaryCertificate_PrivatelyOwnedForProfitEstablishment
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:graduationRate
+statType: dcid:measuredValue
+educationalAttainment: dcid:PostSecondaryCertificate
+establishmentOwnership: dcid:PrivatelyOwnedForProfit
+
+Node: dcid:GraduationRate_Person_EducationalAttainmentPostSecondaryCertificate_PrivatelyOwnedNotForProfitEstablishment
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:graduationRate
+statType: dcid:measuredValue
+educationalAttainment: dcid:PostSecondaryCertificate
+establishmentOwnership: dcid:PrivatelyOwnedNotForProfit
+
+Node: dcid:GraduationRate_Person_EducationalAttainmentPostSecondaryCertificate_PubliclyOwnedEstablishment
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:graduationRate
+statType: dcid:measuredValue
+educationalAttainment: dcid:PostSecondaryCertificate
+establishmentOwnership: dcid:PubliclyOwned
+

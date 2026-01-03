@@ -1,0 +1,10 @@
+Node: dcid:AssociateDegreeOrCertificate
+typeOf: dcid:EducationalAttainmentEnum
+name: "Associate Degree Or Certificate"
+isProvisional: dcs:True
+
+Node: dcid:PostSecondaryCertificate
+typeOf: dcid:EducationalAttainmentEnum
+name: "Post Secondary Certificate"
+isProvisional: dcs:True
+
