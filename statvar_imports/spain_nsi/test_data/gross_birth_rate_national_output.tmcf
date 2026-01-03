@@ -1,0 +1,9 @@
+Node: E:gross_birth_rate_national_output->E0
+observationAbout: C:gross_birth_rate_national_output->observationAbout
+observationPeriod: C:gross_birth_rate_national_output->observationPeriod
+observationDate: C:gross_birth_rate_national_output->observationDate
+value: C:gross_birth_rate_national_output->value
+variableMeasured: C:gross_birth_rate_national_output->variableMeasured
+unit: C:gross_birth_rate_national_output->unit
+scalingFactor: C:gross_birth_rate_national_output->scalingFactor
+typeOf: dcs:StatVarObservation
