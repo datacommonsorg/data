@@ -1,4 +1,4 @@
-# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/* --pv_map=pvmap.csv --config_file=metadata.csv --output_path=finance_ipeds_output --debug" on 2026-01-03 17:54:33.815412
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/* --pv_map=finance_ipeds_pvmap.csv --config_file=finance_ipeds_metadata.csv --output_path=finance_ipeds_output --debug" on 2026-01-03 18:46:35.546375
 
 Node: dcid:Count_ExpenditureActivity_PrivateForProfitInstitution_FourYear_GovernmentGrantsAndContracts
 typeOf: dcid:StatisticalVariable
@@ -811,32 +811,32 @@ institutionControl: dcid:PublicInstitution
 institutionLevel: dcid:TwoYear
 revenueType: dcid:NonOperatingGrants
 
-Node: dcid:Expenditure_ExpenditureActivity_ScholarshipFelllowships_PublicInstitution_FourYear_NonOperatingGrants
+Node: dcid:Expenditure_ExpenditureActivity_ScholarshipFellowships_PublicInstitution_FourYear_NonOperatingGrants
 typeOf: dcid:StatisticalVariable
 populationType: dcid:ExpenditureActivity
 measuredProperty: dcid:expenditure
 statType: dcid:measuredValue
-expenditureType: dcid:ScholarshipFelllowships
+expenditureType: dcid:ScholarshipFellowships
 institutionControl: dcid:PublicInstitution
 institutionLevel: dcid:FourYear
 revenueType: dcid:NonOperatingGrants
 
-Node: dcid:Expenditure_ExpenditureActivity_ScholarshipFelllowships_PublicInstitution_LessThanTwoYear_NonOperatingGrants
+Node: dcid:Expenditure_ExpenditureActivity_ScholarshipFellowships_PublicInstitution_LessThanTwoYear_NonOperatingGrants
 typeOf: dcid:StatisticalVariable
 populationType: dcid:ExpenditureActivity
 measuredProperty: dcid:expenditure
 statType: dcid:measuredValue
-expenditureType: dcid:ScholarshipFelllowships
+expenditureType: dcid:ScholarshipFellowships
 institutionControl: dcid:PublicInstitution
 institutionLevel: dcid:LessThanTwoYear
 revenueType: dcid:NonOperatingGrants
 
-Node: dcid:Expenditure_ExpenditureActivity_ScholarshipFelllowships_PublicInstitution_TwoYear_NonOperatingGrants
+Node: dcid:Expenditure_ExpenditureActivity_ScholarshipFellowships_PublicInstitution_TwoYear_NonOperatingGrants
 typeOf: dcid:StatisticalVariable
 populationType: dcid:ExpenditureActivity
 measuredProperty: dcid:expenditure
 statType: dcid:measuredValue
-expenditureType: dcid:ScholarshipFelllowships
+expenditureType: dcid:ScholarshipFellowships
 institutionControl: dcid:PublicInstitution
 institutionLevel: dcid:TwoYear
 revenueType: dcid:NonOperatingGrants
