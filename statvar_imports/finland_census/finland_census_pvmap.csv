@@ -1,5 +1,5 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
-Population 31 Dec,,,measuredProperty,count,populationType,Person,,,,,,,,
+Population 31 Dec,,,measuredProperty,count,populationType,Person,,,,,,,,,,,
 Increase of population,,,measuredProperty,incrementalCount,populationType,Person,,,,,,,,
 "Increase of population, %",statType,growthRate,measuredProperty,count,populationType,Person,unit,Percent,,,,,,
 "Share of persons aged under 15, %",,,measuredProperty,count,populationType,Person,age,[- 15 Years],unit,Percent,measurementDenominator,Count_Person,,
