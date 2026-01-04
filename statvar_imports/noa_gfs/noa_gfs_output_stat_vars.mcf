@@ -1,0 +1,422 @@
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output --debug" on 2026-01-04 18:05:18.150247
+
+Node: dcid:AbsoluteVorticity_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+
+Node: dcid:ApparentTemperature_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:apparentTemperature
+statType: dcid:measuredValue
+
+Node: dcid:Area_Place_Vegetation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:area
+statType: dcid:measuredValue
+landCoverType: dcid:Vegetation
+
+Node: dcid:BestLiftedIndex_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:BestLiftedIndex
+statType: dcid:measuredValue
+
+Node: dcid:CloudCover_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+
+Node: dcid:CloudWaterContent_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:cloudWaterContent
+statType: dcid:measuredValue
+
+Node: dcid:CloudWater_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudWater
+statType: dcid:measuredValue
+
+Node: dcid:Cloud_MixingRatio_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+
+Node: dcid:Concentration_Atmosphere_Ozone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:concentration
+statType: dcid:measuredValue
+pollutant: dcid:Ozone
+
+Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:convectiveAvailablePotentialEnergy
+statType: dcid:measuredValue
+
+Node: dcid:ConvectiveInhibition_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:convectiveInhibition
+statType: dcid:measuredValue
+
+Node: dcid:Count_Graupel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_IceCover
+typeOf: dcid:StatisticalVariable
+populationType: dcid:IceCover
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_LandCover
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Depth_Snow
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:depth
+statType: dcid:measuredValue
+
+Node: dcid:DewPointTemperature_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:dewPointTemperature
+statType: dcid:measuredValue
+
+Node: dcid:FieldCapacity_Soil
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:fieldCapacity
+statType: dcid:measuredValue
+
+Node: dcid:FrictionalVelocity_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:frictionalVelocity
+statType: dcid:measuredValue
+
+Node: dcid:FrozenPrecipitation_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:frozenPrecipitation
+statType: dcid:measuredValue
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+
+Node: dcid:GeopotentialHeight_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+
+Node: dcid:GrowthRate_Count_Ice
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:count
+statType: dcid:growthRate
+
+Node: dcid:HainesIndex_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:hainesIndex
+statType: dcid:measuredValue
+
+Node: dcid:Humidity_Place_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:ICAOStandardAtmosphere_Height_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:height
+measurementQualifier: dcid:ICAOStandardAtmosphere
+statType: dcid:measuredValue
+
+Node: dcid:Ice_MixingRatio_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+
+Node: dcid:LiftedParcelLevel_Pressure_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:pressure
+measurementQualifier: dcid:LiftedParcelLevel
+statType: dcid:measuredValue
+
+Node: dcid:LiquidWaterContent_Soil
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:liquidWaterContent
+statType: dcid:measuredValue
+
+Node: dcid:MSLPEtaReduction_Pressure_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:pressure
+measurementQualifier: dcid:MSLPEtaReduction
+statType: dcid:measuredValue
+
+Node: dcid:Max_CompositeReflectivity_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:compositeReflectivity
+statType: dcid:maxValue
+
+Node: dcid:Max_WindSpeed_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:maxValue
+
+Node: dcid:Occurrence_Place_FreezingRain
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:occurrence
+statType: dcid:measuredValue
+precipitationType: dcid:FreezingRain
+
+Node: dcid:Occurrence_Place_IcePellets
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:occurrence
+statType: dcid:measuredValue
+precipitationType: dcid:IcePellets
+
+Node: dcid:Occurrence_Place_Rain
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:occurrence
+statType: dcid:measuredValue
+precipitationType: dcid:Rain
+
+Node: dcid:Occurrence_Place_Snow
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:occurrence
+statType: dcid:measuredValue
+precipitationType: dcid:Snow
+
+Node: dcid:Ozone_MixingRatio_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+
+Node: dcid:PlanetaryBoundaryLayer_Height_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:height
+measurementQualifier: dcid:PlanetaryBoundaryLayer
+statType: dcid:measuredValue
+
+Node: dcid:PotentialTemperature_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:potentialTemperature
+statType: dcid:measuredValue
+
+Node: dcid:PrecipitableWater_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:precipitableWater
+statType: dcid:measuredValue
+
+Node: dcid:PrecipitationRate_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:precipitationRate
+statType: dcid:measuredValue
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+
+Node: dcid:Pressure_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:pressure
+statType: dcid:measuredValue
+
+Node: dcid:Pressure_Place_MeanSeaLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:pressure
+statType: dcid:measuredValue
+height: dcid:MeanSeaLevel
+
+Node: dcid:Rainwater_MixingRatio_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+
+Node: dcid:Reflectivity_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:reflectivity
+statType: dcid:measuredValue
+
+Node: dcid:SnowWaterEquivalent_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:snowWaterEquivalent
+statType: dcid:measuredValue
+
+Node: dcid:Snow_MixingRatio_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+
+Node: dcid:SoilType_Soil
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:soilType
+statType: dcid:measuredValue
+
+Node: dcid:StormMotion_Atmosphere_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:stormMotion
+statType: dcid:measuredValue
+windComponent: dcid:UComponent
+
+Node: dcid:StormMotion_Atmosphere_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:stormMotion
+statType: dcid:measuredValue
+windComponent: dcid:VComponent
+
+Node: dcid:StormRelativeHelicity_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:stormRelativeHelicity
+statType: dcid:measuredValue
+
+Node: dcid:SunshineDuration_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:sunshineDuration
+statType: dcid:measuredValue
+
+Node: dcid:SurfaceLiftedIndex_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:surfaceLiftedIndex
+statType: dcid:measuredValue
+
+Node: dcid:SurfaceRoughness_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:surfaceRoughness
+statType: dcid:measuredValue
+
+Node: dcid:Temperature_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+
+Node: dcid:Temperature_SeaIce
+typeOf: dcid:StatisticalVariable
+populationType: dcid:SeaIce
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+
+Node: dcid:Temperature_Soil
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+
+Node: dcid:Thickness_Ice
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:thickness
+statType: dcid:measuredValue
+
+Node: dcid:VentilationRate_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:ventilationRate
+statType: dcid:measuredValue
+
+Node: dcid:Visibility_Place
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:visibility
+statType: dcid:measuredValue
+
+Node: dcid:VolumetricSoilMoisture_Soil
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:volumetricSoilMoisture
+statType: dcid:measuredValue
+
+Node: dcid:WiltingPoint_Soil
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:wiltingPoint
+statType: dcid:measuredValue
+
+Node: dcid:WindShear_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:windShear
+statType: dcid:measuredValue
+
+Node: dcid:WindSpeed_Place_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+windComponent: dcid:VComponent
+

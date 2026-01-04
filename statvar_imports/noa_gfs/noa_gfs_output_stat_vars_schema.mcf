@@ -1,0 +1,299 @@
+Node: dcid:pressure
+typeOf: dcs:Property
+name: "pressure"
+rangeIncludes: dcid:PressureEnum
+isProvisional: dcs:True
+
+Node: dcid:height
+typeOf: dcs:Property
+name: "height"
+domainIncludes: dcid:Place
+
+Node: dcid:MeanSeaLevel
+typeOf: dcid:Distance
+name: "Mean Sea Level"
+isProvisional: dcs:True
+
+Node: dcid:mixingRatio
+typeOf: dcs:Property
+name: "mixingRatio"
+rangeIncludes: dcid:MixingRatioEnum
+isProvisional: dcs:True
+
+Node: dcid:MeasurementQualifierEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementQualifierEnum"
+isProvisional: dcs:True
+
+Node: dcid:Cloud
+typeOf: dcid:MeasurementQualifierEnum
+name: "Cloud"
+isProvisional: dcs:True
+
+Node: dcid:Ice
+typeOf: dcid:MeasurementQualifierEnum
+name: "Ice"
+isProvisional: dcs:True
+
+Node: dcid:Rainwater
+typeOf: dcid:MeasurementQualifierEnum
+name: "Rainwater"
+isProvisional: dcs:True
+
+Node: dcid:Graupel
+typeOf: dcid:Thing
+name: "Graupel"
+isProvisional: dcs:True
+
+Node: dcid:reflectivity
+typeOf: dcs:Property
+name: "reflectivity"
+rangeIncludes: dcid:ReflectivityEnum
+isProvisional: dcs:True
+
+Node: dcid:compositeReflectivity
+typeOf: dcs:Property
+name: "compositeReflectivity"
+rangeIncludes: dcid:CompositeReflectivityEnum
+isProvisional: dcs:True
+
+Node: dcid:ventilationRate
+typeOf: dcs:Property
+name: "ventilationRate"
+rangeIncludes: dcid:VentilationRateEnum
+isProvisional: dcs:True
+
+Node: dcid:geopotentialHeight
+typeOf: dcs:Property
+name: "geopotentialHeight"
+rangeIncludes: dcid:GeopotentialHeightEnum
+isProvisional: dcs:True
+
+Node: dcid:velocity
+typeOf: dcs:Property
+name: "velocity"
+rangeIncludes: dcid:VelocityEnum
+isProvisional: dcs:True
+
+Node: dcid:PressureVerticalVelocity
+typeOf: dcid:MeasurementQualifierEnum
+name: "Pressure Vertical Velocity"
+isProvisional: dcs:True
+
+Node: dcid:GeometricVerticalVelocity
+typeOf: dcid:MeasurementQualifierEnum
+name: "Geometric Vertical Velocity"
+isProvisional: dcs:True
+
+Node: dcid:absoluteVorticity
+typeOf: dcs:Property
+name: "absoluteVorticity"
+rangeIncludes: dcid:AbsoluteVorticityEnum
+isProvisional: dcs:True
+
+Node: dcid:hainesIndex
+typeOf: dcs:Property
+name: "hainesIndex"
+rangeIncludes: dcid:HainesIndexEnum
+isProvisional: dcs:True
+
+Node: dcid:MSLPEtaReduction
+typeOf: dcid:MeasurementQualifierEnum
+name: "MSLPEta Reduction"
+isProvisional: dcs:True
+
+Node: dcid:volumetricSoilMoisture
+typeOf: dcs:Property
+name: "volumetricSoilMoisture"
+rangeIncludes: dcid:VolumetricSoilMoistureEnum
+isProvisional: dcs:True
+
+Node: dcid:liquidWaterContent
+typeOf: dcs:Property
+name: "liquidWaterContent"
+rangeIncludes: dcid:LiquidWaterContentEnum
+isProvisional: dcs:True
+
+Node: dcid:cloudWaterContent
+typeOf: dcs:Property
+name: "cloudWaterContent"
+rangeIncludes: dcid:CloudWaterContentEnum
+isProvisional: dcs:True
+
+Node: dcid:snowWaterEquivalent
+typeOf: dcs:Property
+name: "snowWaterEquivalent"
+rangeIncludes: dcid:SnowWaterEquivalentEnum
+isProvisional: dcs:True
+
+Node: dcid:thickness
+typeOf: dcs:Property
+name: "thickness"
+rangeIncludes: dcid:ThicknessEnum
+isProvisional: dcs:True
+
+Node: dcid:apparentTemperature
+typeOf: dcs:Property
+name: "apparentTemperature"
+rangeIncludes: dcid:ApparentTemperatureEnum
+isProvisional: dcs:True
+
+Node: dcid:frozenPrecipitation
+typeOf: dcs:Property
+name: "frozenPrecipitation"
+rangeIncludes: dcid:FrozenPrecipitationEnum
+isProvisional: dcs:True
+
+Node: dcid:occurrence
+typeOf: dcs:Property
+name: "occurrence"
+rangeIncludes: dcid:OccurrenceEnum
+isProvisional: dcs:True
+
+Node: dcid:precipitationType
+typeOf: dcs:Property
+name: "precipitationType"
+domainIncludes: dcid:Place
+rangeIncludes: dcid:NOAA_WeatherConditionEnum,dcid:WeatherConditionEnum
+
+Node: dcid:IcePellets
+typeOf: dcid:PrecipitationTypeEnum
+name: "Ice Pellets"
+isProvisional: dcs:True
+
+Node: dcid:surfaceRoughness
+typeOf: dcs:Property
+name: "surfaceRoughness"
+rangeIncludes: dcid:SurfaceRoughnessEnum
+isProvisional: dcs:True
+
+Node: dcid:frictionalVelocity
+typeOf: dcs:Property
+name: "frictionalVelocity"
+rangeIncludes: dcid:FrictionalVelocityEnum
+isProvisional: dcs:True
+
+Node: dcid:landCoverType
+typeOf: dcs:Property
+name: "landCoverType"
+domainIncludes: dcid:Place
+
+Node: dcid:Vegetation
+typeOf: dcid:FarmTypeEnum
+name: "Vegetation"
+isProvisional: dcs:True
+
+Node: dcid:soilType
+typeOf: dcs:Property
+name: "soilType"
+rangeIncludes: dcid:SoilTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:wiltingPoint
+typeOf: dcs:Property
+name: "wiltingPoint"
+rangeIncludes: dcid:WiltingPointEnum
+isProvisional: dcs:True
+
+Node: dcid:fieldCapacity
+typeOf: dcs:Property
+name: "fieldCapacity"
+rangeIncludes: dcid:FieldCapacityEnum
+isProvisional: dcs:True
+
+Node: dcid:sunshineDuration
+typeOf: dcs:Property
+name: "sunshineDuration"
+rangeIncludes: dcid:SunshineDurationEnum
+isProvisional: dcs:True
+
+Node: dcid:surfaceLiftedIndex
+typeOf: dcs:Property
+name: "surfaceLiftedIndex"
+rangeIncludes: dcid:SurfaceLiftedIndexEnum
+isProvisional: dcs:True
+
+Node: dcid:convectiveAvailablePotentialEnergy
+typeOf: dcs:Property
+name: "convectiveAvailablePotentialEnergy"
+rangeIncludes: dcid:ConvectiveAvailablePotentialEnergyEnum
+isProvisional: dcs:True
+
+Node: dcid:convectiveInhibition
+typeOf: dcs:Property
+name: "convectiveInhibition"
+rangeIncludes: dcid:ConvectiveInhibitionEnum
+isProvisional: dcs:True
+
+Node: dcid:cloudWater
+typeOf: dcs:Property
+name: "cloudWater"
+rangeIncludes: dcid:CloudWaterEnum
+isProvisional: dcs:True
+
+Node: dcid:stormRelativeHelicity
+typeOf: dcs:Property
+name: "stormRelativeHelicity"
+rangeIncludes: dcid:StormRelativeHelicityEnum
+isProvisional: dcs:True
+
+Node: dcid:stormMotion
+typeOf: dcs:Property
+name: "stormMotion"
+rangeIncludes: dcid:StormMotionEnum
+isProvisional: dcs:True
+
+Node: dcid:windComponent
+typeOf: dcs:Property
+name: "windComponent"
+domainIncludes: dcid:Atmosphere
+
+Node: dcid:ICAOStandardAtmosphere
+typeOf: dcid:MeasurementQualifierEnum
+name: "ICAOStandard Atmosphere"
+isProvisional: dcs:True
+
+Node: dcid:windShear
+typeOf: dcs:Property
+name: "windShear"
+rangeIncludes: dcid:WindShearEnum
+isProvisional: dcs:True
+
+Node: dcid:MeasuredPropertyEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasuredPropertyEnum"
+isProvisional: dcs:True
+
+Node: dcid:BestLiftedIndex
+typeOf: dcid:MeasuredPropertyEnum
+name: "Best Lifted Index"
+isProvisional: dcs:True
+
+Node: dcid:PlanetaryBoundaryLayer
+typeOf: dcid:MeasurementQualifierEnum
+name: "Planetary Boundary Layer"
+isProvisional: dcs:True
+
+Node: dcid:potentialTemperature
+typeOf: dcs:Property
+name: "potentialTemperature"
+rangeIncludes: dcid:PotentialTemperatureEnum
+isProvisional: dcs:True
+
+Node: dcid:LiftedParcelLevel
+typeOf: dcid:MeasurementQualifierEnum
+name: "Lifted Parcel Level"
+isProvisional: dcs:True
+
+Node: dcid:IceCover
+typeOf: dcid:Thing
+name: "Ice Cover"
+isProvisional: dcs:True
+
+Node: dcid:SeaIce
+typeOf: dcid:Thing
+name: "Sea Ice"
+isProvisional: dcs:True
+

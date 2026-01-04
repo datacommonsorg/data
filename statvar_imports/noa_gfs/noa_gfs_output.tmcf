@@ -1,0 +1,9 @@
+Node: E:noa_gfs_output->E0
+observationDate: C:noa_gfs_output->observationDate
+value: C:noa_gfs_output->value
+observationAbout: C:noa_gfs_output->observationAbout
+variableMeasured: C:noa_gfs_output->variableMeasured
+unit: C:noa_gfs_output->unit
+typeOf: dcs:StatVarObservation
+referenceTime: 2025-12-24T00:00:00Z
+validTime: 2025-12-24T00:00:00Z
