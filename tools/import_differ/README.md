@@ -15,6 +15,7 @@ python import_differ.py \
   --output_location=<path> \
   --file_format=<mcf/tfrecord> \
   --runner_mode=<local/cloud> \
+  --project_id=<id> \
   --job_name=<name>
 ```
 
