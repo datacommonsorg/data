@@ -1,279 +1,3413 @@
-# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output --debug" on 2026-01-04 18:05:18.150247
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output --debug" on 2026-01-06 11:08:40.345350
 
-Node: dcid:AbsoluteVorticity_Place
+Node: dcid:AbsoluteVorticity_Place_0.01mb
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
+height: dcid:0.01mb
 
-Node: dcid:ApparentTemperature_Place
+Node: dcid:AbsoluteVorticity_Place_0.02mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:0.02mb
+
+Node: dcid:AbsoluteVorticity_Place_0.04mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:0.04mb
+
+Node: dcid:AbsoluteVorticity_Place_0.07mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:0.07mb
+
+Node: dcid:AbsoluteVorticity_Place_0.1mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:0.1mb
+
+Node: dcid:AbsoluteVorticity_Place_0.2mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:0.2mb
+
+Node: dcid:AbsoluteVorticity_Place_0.4mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:0.4mb
+
+Node: dcid:AbsoluteVorticity_Place_0.7mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:0.7mb
+
+Node: dcid:AbsoluteVorticity_Place_1000mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:1000mb
+
+Node: dcid:AbsoluteVorticity_Place_100mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:100mb
+
+Node: dcid:AbsoluteVorticity_Place_10mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:10mb
+
+Node: dcid:AbsoluteVorticity_Place_150mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:150mb
+
+Node: dcid:AbsoluteVorticity_Place_15mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:15mb
+
+Node: dcid:AbsoluteVorticity_Place_1mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:1mb
+
+Node: dcid:AbsoluteVorticity_Place_200mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:200mb
+
+Node: dcid:AbsoluteVorticity_Place_20mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:20mb
+
+Node: dcid:AbsoluteVorticity_Place_250mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:250mb
+
+Node: dcid:AbsoluteVorticity_Place_2mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:2mb
+
+Node: dcid:AbsoluteVorticity_Place_300mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:300mb
+
+Node: dcid:AbsoluteVorticity_Place_30mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:30mb
+
+Node: dcid:AbsoluteVorticity_Place_350mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:350mb
+
+Node: dcid:AbsoluteVorticity_Place_3mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:3mb
+
+Node: dcid:AbsoluteVorticity_Place_400mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:400mb
+
+Node: dcid:AbsoluteVorticity_Place_40mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:40mb
+
+Node: dcid:AbsoluteVorticity_Place_450mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:450mb
+
+Node: dcid:AbsoluteVorticity_Place_500mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:500mb
+
+Node: dcid:AbsoluteVorticity_Place_50mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:50mb
+
+Node: dcid:AbsoluteVorticity_Place_550mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:550mb
+
+Node: dcid:AbsoluteVorticity_Place_5mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:5mb
+
+Node: dcid:AbsoluteVorticity_Place_600mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:600mb
+
+Node: dcid:AbsoluteVorticity_Place_650mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:650mb
+
+Node: dcid:AbsoluteVorticity_Place_700mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:700mb
+
+Node: dcid:AbsoluteVorticity_Place_70mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:70mb
+
+Node: dcid:AbsoluteVorticity_Place_750mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:750mb
+
+Node: dcid:AbsoluteVorticity_Place_7mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:7mb
+
+Node: dcid:AbsoluteVorticity_Place_800mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:800mb
+
+Node: dcid:AbsoluteVorticity_Place_850mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:850mb
+
+Node: dcid:AbsoluteVorticity_Place_900mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:900mb
+
+Node: dcid:AbsoluteVorticity_Place_925mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:925mb
+
+Node: dcid:AbsoluteVorticity_Place_950mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:950mb
+
+Node: dcid:AbsoluteVorticity_Place_975mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:absoluteVorticity
+statType: dcid:measuredValue
+height: dcid:975mb
+
+Node: dcid:ApparentTemperature_Place_2mAboveGround
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:apparentTemperature
 statType: dcid:measuredValue
+height: dcid:2mAboveGround
 
-Node: dcid:Area_Place_Vegetation
+Node: dcid:Area_Place_SurfaceLevel_Vegetation
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:area
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 landCoverType: dcid:Vegetation
 
-Node: dcid:BestLiftedIndex_Atmosphere
+Node: dcid:BestLiftedIndex_Atmosphere_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:BestLiftedIndex
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:CloudCover_Place
+Node: dcid:CloudCover_Place_1000mb
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
+height: dcid:1000mb
 
-Node: dcid:CloudWaterContent_Atmosphere
+Node: dcid:CloudCover_Place_100mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:100mb
+
+Node: dcid:CloudCover_Place_150mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:150mb
+
+Node: dcid:CloudCover_Place_200mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:200mb
+
+Node: dcid:CloudCover_Place_250mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:250mb
+
+Node: dcid:CloudCover_Place_300mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:300mb
+
+Node: dcid:CloudCover_Place_350mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:350mb
+
+Node: dcid:CloudCover_Place_400mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:400mb
+
+Node: dcid:CloudCover_Place_450mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:450mb
+
+Node: dcid:CloudCover_Place_500mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:500mb
+
+Node: dcid:CloudCover_Place_50mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:50mb
+
+Node: dcid:CloudCover_Place_550mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:550mb
+
+Node: dcid:CloudCover_Place_600mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:600mb
+
+Node: dcid:CloudCover_Place_650mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:650mb
+
+Node: dcid:CloudCover_Place_700mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:700mb
+
+Node: dcid:CloudCover_Place_750mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:750mb
+
+Node: dcid:CloudCover_Place_800mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:800mb
+
+Node: dcid:CloudCover_Place_850mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:850mb
+
+Node: dcid:CloudCover_Place_900mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:900mb
+
+Node: dcid:CloudCover_Place_925mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:925mb
+
+Node: dcid:CloudCover_Place_950mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:950mb
+
+Node: dcid:CloudCover_Place_975mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:975mb
+
+Node: dcid:CloudCover_Place_Atmosphere
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:Atmosphere
+
+Node: dcid:CloudCover_Place_HighCloudLayer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:HighCloudLayer
+
+Node: dcid:CloudCover_Place_LowCloudLayer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:LowCloudLayer
+
+Node: dcid:CloudCover_Place_MiddleCloudLayer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+height: dcid:MiddleCloudLayer
+
+Node: dcid:CloudWaterContent_Atmosphere_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:cloudWaterContent
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:CloudWater_Place
+Node: dcid:CloudWater_Place_Atmosphere
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:cloudWater
 statType: dcid:measuredValue
+height: dcid:Atmosphere
 
-Node: dcid:Cloud_MixingRatio_Place
+Node: dcid:Cloud_MixingRatio_Place_1000mb
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
+height: dcid:1000mb
 
-Node: dcid:Concentration_Atmosphere_Ozone
+Node: dcid:Cloud_MixingRatio_Place_100mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:100mb
+
+Node: dcid:Cloud_MixingRatio_Place_150mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:150mb
+
+Node: dcid:Cloud_MixingRatio_Place_1HybridLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:1HybridLevel
+
+Node: dcid:Cloud_MixingRatio_Place_200mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:200mb
+
+Node: dcid:Cloud_MixingRatio_Place_250mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:250mb
+
+Node: dcid:Cloud_MixingRatio_Place_300mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:300mb
+
+Node: dcid:Cloud_MixingRatio_Place_350mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:350mb
+
+Node: dcid:Cloud_MixingRatio_Place_400mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:400mb
+
+Node: dcid:Cloud_MixingRatio_Place_450mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:450mb
+
+Node: dcid:Cloud_MixingRatio_Place_500mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:500mb
+
+Node: dcid:Cloud_MixingRatio_Place_50mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:50mb
+
+Node: dcid:Cloud_MixingRatio_Place_550mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:550mb
+
+Node: dcid:Cloud_MixingRatio_Place_600mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:600mb
+
+Node: dcid:Cloud_MixingRatio_Place_650mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:650mb
+
+Node: dcid:Cloud_MixingRatio_Place_700mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:700mb
+
+Node: dcid:Cloud_MixingRatio_Place_750mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:750mb
+
+Node: dcid:Cloud_MixingRatio_Place_800mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:800mb
+
+Node: dcid:Cloud_MixingRatio_Place_850mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:850mb
+
+Node: dcid:Cloud_MixingRatio_Place_900mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:900mb
+
+Node: dcid:Cloud_MixingRatio_Place_925mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:925mb
+
+Node: dcid:Cloud_MixingRatio_Place_950mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:950mb
+
+Node: dcid:Cloud_MixingRatio_Place_975mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Cloud
+statType: dcid:measuredValue
+height: dcid:975mb
+
+Node: dcid:Concentration_Atmosphere_Atmosphere_Ozone
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:concentration
 statType: dcid:measuredValue
+height: dcid:Atmosphere
 pollutant: dcid:Ozone
 
-Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere
+Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere_1800mbAboveGround
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:convectiveAvailablePotentialEnergy
 statType: dcid:measuredValue
+height: dcid:180_0mbAboveGround
 
-Node: dcid:ConvectiveInhibition_Atmosphere
+Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere_2550mbAboveGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:convectiveAvailablePotentialEnergy
+statType: dcid:measuredValue
+height: dcid:255_0mbAboveGround
+
+Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere_900mbAboveGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:convectiveAvailablePotentialEnergy
+statType: dcid:measuredValue
+height: dcid:90_0mbAboveGround
+
+Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere_SurfaceLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:convectiveAvailablePotentialEnergy
+statType: dcid:measuredValue
+height: dcid:SurfaceLevel
+
+Node: dcid:ConvectiveInhibition_Atmosphere_1800mbAboveGround
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:convectiveInhibition
 statType: dcid:measuredValue
+height: dcid:180_0mbAboveGround
 
-Node: dcid:Count_Graupel
+Node: dcid:ConvectiveInhibition_Atmosphere_2550mbAboveGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:convectiveInhibition
+statType: dcid:measuredValue
+height: dcid:255_0mbAboveGround
+
+Node: dcid:ConvectiveInhibition_Atmosphere_900mbAboveGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:convectiveInhibition
+statType: dcid:measuredValue
+height: dcid:90_0mbAboveGround
+
+Node: dcid:ConvectiveInhibition_Atmosphere_SurfaceLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:convectiveInhibition
+statType: dcid:measuredValue
+height: dcid:SurfaceLevel
+
+Node: dcid:Count_Graupel_1000mb
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
+height: dcid:1000mb
 
-Node: dcid:Count_IceCover
+Node: dcid:Count_Graupel_100mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:100mb
+
+Node: dcid:Count_Graupel_150mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:150mb
+
+Node: dcid:Count_Graupel_1HybridLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:1HybridLevel
+
+Node: dcid:Count_Graupel_200mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:200mb
+
+Node: dcid:Count_Graupel_250mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:250mb
+
+Node: dcid:Count_Graupel_300mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:300mb
+
+Node: dcid:Count_Graupel_350mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:350mb
+
+Node: dcid:Count_Graupel_400mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:400mb
+
+Node: dcid:Count_Graupel_450mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:450mb
+
+Node: dcid:Count_Graupel_500mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:500mb
+
+Node: dcid:Count_Graupel_50mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:50mb
+
+Node: dcid:Count_Graupel_550mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:550mb
+
+Node: dcid:Count_Graupel_600mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:600mb
+
+Node: dcid:Count_Graupel_650mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:650mb
+
+Node: dcid:Count_Graupel_700mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:700mb
+
+Node: dcid:Count_Graupel_750mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:750mb
+
+Node: dcid:Count_Graupel_800mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:800mb
+
+Node: dcid:Count_Graupel_850mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:850mb
+
+Node: dcid:Count_Graupel_900mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:900mb
+
+Node: dcid:Count_Graupel_925mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:925mb
+
+Node: dcid:Count_Graupel_950mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:950mb
+
+Node: dcid:Count_Graupel_975mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Graupel
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+height: dcid:975mb
+
+Node: dcid:Count_IceCover_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:IceCover
 measuredProperty: dcid:count
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:Count_LandCover
+Node: dcid:Count_LandCover_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:LandCover
 measuredProperty: dcid:count
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:Depth_Snow
+Node: dcid:Depth_Snow_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Snow
 measuredProperty: dcid:depth
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:DewPointTemperature_Atmosphere
+Node: dcid:DewPointTemperature_Atmosphere_2mAboveGround
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:dewPointTemperature
 statType: dcid:measuredValue
+height: dcid:2mAboveGround
 
-Node: dcid:FieldCapacity_Soil
+Node: dcid:FieldCapacity_Soil_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:fieldCapacity
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:FrictionalVelocity_Place
+Node: dcid:FrictionalVelocity_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:frictionalVelocity
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:FrozenPrecipitation_Place
+Node: dcid:FrozenPrecipitation_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:frozenPrecipitation
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.01mb
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
+height: dcid:0.01mb
 
-Node: dcid:GeopotentialHeight_Place
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.02mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.02mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.04mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.04mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.07mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.07mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.1mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.1mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.2mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.2mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.4mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.4mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.7mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.7mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_1000mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:1000mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_100mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:100mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_10mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:10mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_150mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:150mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_15mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:15mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_1mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:1mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_200mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:200mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_20mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:20mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_250mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:250mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_2mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:2mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_300mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:300mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_30mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:30mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_350mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:350mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_3mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:3mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_400mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:400mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_40mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:40mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_450mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:450mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_500mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:500mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_50mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:50mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_550mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:550mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_5mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:5mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_600mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:600mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_650mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:650mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_700mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:700mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_70mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:70mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_750mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:750mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_7mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:7mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_800mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:800mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_850mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:850mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_900mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:900mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_925mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:925mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_950mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:950mb
+
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_975mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:GeometricVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:975mb
+
+Node: dcid:GeopotentialHeight_Place_0.01mb
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
+height: dcid:0.01mb
 
-Node: dcid:GrowthRate_Count_Ice
+Node: dcid:GeopotentialHeight_Place_0.02mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:0.02mb
+
+Node: dcid:GeopotentialHeight_Place_0.04mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:0.04mb
+
+Node: dcid:GeopotentialHeight_Place_0.07mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:0.07mb
+
+Node: dcid:GeopotentialHeight_Place_0.1mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:0.1mb
+
+Node: dcid:GeopotentialHeight_Place_0.2mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:0.2mb
+
+Node: dcid:GeopotentialHeight_Place_0.4mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:0.4mb
+
+Node: dcid:GeopotentialHeight_Place_0.7mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:0.7mb
+
+Node: dcid:GeopotentialHeight_Place_1000mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:1000mb
+
+Node: dcid:GeopotentialHeight_Place_100mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:100mb
+
+Node: dcid:GeopotentialHeight_Place_10mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:10mb
+
+Node: dcid:GeopotentialHeight_Place_150mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:150mb
+
+Node: dcid:GeopotentialHeight_Place_15mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:15mb
+
+Node: dcid:GeopotentialHeight_Place_1mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:1mb
+
+Node: dcid:GeopotentialHeight_Place_200mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:200mb
+
+Node: dcid:GeopotentialHeight_Place_20mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:20mb
+
+Node: dcid:GeopotentialHeight_Place_250mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:250mb
+
+Node: dcid:GeopotentialHeight_Place_2mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:2mb
+
+Node: dcid:GeopotentialHeight_Place_300mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:300mb
+
+Node: dcid:GeopotentialHeight_Place_30mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:30mb
+
+Node: dcid:GeopotentialHeight_Place_350mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:350mb
+
+Node: dcid:GeopotentialHeight_Place_3mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:3mb
+
+Node: dcid:GeopotentialHeight_Place_400mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:400mb
+
+Node: dcid:GeopotentialHeight_Place_40mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:40mb
+
+Node: dcid:GeopotentialHeight_Place_450mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:450mb
+
+Node: dcid:GeopotentialHeight_Place_500mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:500mb
+
+Node: dcid:GeopotentialHeight_Place_50mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:50mb
+
+Node: dcid:GeopotentialHeight_Place_550mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:550mb
+
+Node: dcid:GeopotentialHeight_Place_5mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:5mb
+
+Node: dcid:GeopotentialHeight_Place_600mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:600mb
+
+Node: dcid:GeopotentialHeight_Place_650mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:650mb
+
+Node: dcid:GeopotentialHeight_Place_700mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:700mb
+
+Node: dcid:GeopotentialHeight_Place_70mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:70mb
+
+Node: dcid:GeopotentialHeight_Place_750mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:750mb
+
+Node: dcid:GeopotentialHeight_Place_7mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:7mb
+
+Node: dcid:GeopotentialHeight_Place_800mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:800mb
+
+Node: dcid:GeopotentialHeight_Place_850mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:850mb
+
+Node: dcid:GeopotentialHeight_Place_900mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:900mb
+
+Node: dcid:GeopotentialHeight_Place_925mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:925mb
+
+Node: dcid:GeopotentialHeight_Place_950mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:950mb
+
+Node: dcid:GeopotentialHeight_Place_975mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:975mb
+
+Node: dcid:GeopotentialHeight_Place_CloudCeiling
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:CloudCeiling
+
+Node: dcid:GeopotentialHeight_Place_HighestTroposphericFreezingLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:HighestTroposphericFreezingLevel
+
+Node: dcid:GeopotentialHeight_Place_Isotherm0C
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:Isotherm0C
+
+Node: dcid:GeopotentialHeight_Place_MaxWind
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:MaxWind
+
+Node: dcid:GeopotentialHeight_Place_PotentialVorticity2PVU
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:PotentialVorticity2PVU
+
+Node: dcid:GeopotentialHeight_Place_PotentialVorticityNeg2PVU
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:PotentialVorticityNeg2PVU
+
+Node: dcid:GeopotentialHeight_Place_SurfaceLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:SurfaceLevel
+
+Node: dcid:GeopotentialHeight_Place_Tropopause
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:Tropopause
+
+Node: dcid:GrowthRate_Count_Ice_10mAboveMeanSeaLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Ice
 measuredProperty: dcid:count
 statType: dcid:growthRate
+height: dcid:10mAboveMeanSeaLevel
 
-Node: dcid:HainesIndex_Place
+Node: dcid:HainesIndex_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:hainesIndex
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:Humidity_Place_RelativeHumidity
+Node: dcid:Humidity_Place_0.01mb_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
+height: dcid:0.01mb
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_SpecificHumidity
+Node: dcid:Humidity_Place_0.01mb_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
+height: dcid:0.01mb
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:ICAOStandardAtmosphere_Height_Atmosphere
+Node: dcid:Humidity_Place_0.02mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.02mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_0.02mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.02mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_0.04mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.04mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_0.04mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.04mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_0.07mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.07mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_0.07mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.07mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_0.1mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.1mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_0.1mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.1mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_0.2mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.2mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_0.2mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.2mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_0.331SigmaLayer_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.33_1SigmaLayer
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_0.4mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.4mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_0.4mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.4mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_0.7mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.7mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_0.7mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.7mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_0.995SigmaLevel_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.995SigmaLevel
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_1000mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:1000mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_1000mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:1000mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_100mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:100mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_100mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:100mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_10mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:10mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_10mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:10mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_150mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:150mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_150mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:150mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_15mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:15mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_15mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:15mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_1mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:1mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_1mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:1mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_200mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:200mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_200mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:200mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_20mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:20mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_20mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:20mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_250mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:250mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_250mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:250mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_2mAboveGround_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:2mAboveGround
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_2mAboveGround_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:2mAboveGround
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_2mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:2mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_2mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:2mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_300mbAboveGround_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:30_0mbAboveGround
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_300mbAboveGround_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:30_0mbAboveGround
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_300mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:300mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_300mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:300mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_30mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:30mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_30mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:30mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_350mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:350mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_350mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:350mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_3mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:3mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_3mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:3mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_400mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:400mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_400mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:400mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_40mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:40mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_40mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:40mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_450mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:450mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_450mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:450mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_500mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:500mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_500mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:500mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_50mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:50mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_50mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:50mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_550mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:550mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_550mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:550mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_5mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:5mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_5mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:5mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_600mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:600mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_600mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:600mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_650mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:650mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_650mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:650mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_700mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:700mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_700mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:700mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_70mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:70mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_70mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:70mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_750mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:750mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_750mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:750mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_7mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:7mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_7mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:7mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_800mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:800mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_800mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:800mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_80mAboveGround_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:80mAboveGround
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_850mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:850mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_850mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:850mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_900mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:900mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_900mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:900mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_925mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:925mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_925mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:925mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_950mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:950mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_950mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:950mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_975mb_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:975mb
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_975mb_SpecificHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:975mb
+humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_Atmosphere_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:Atmosphere
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_HighestTroposphericFreezingLevel_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:HighestTroposphericFreezingLevel
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place_Isotherm0C_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:Isotherm0C
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:ICAOStandardAtmosphere_Height_Atmosphere_MaxWind
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:height
 measurementQualifier: dcid:ICAOStandardAtmosphere
 statType: dcid:measuredValue
+height: dcid:MaxWind
 
-Node: dcid:Ice_MixingRatio_Place
+Node: dcid:ICAOStandardAtmosphere_Height_Atmosphere_Tropopause
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:height
+measurementQualifier: dcid:ICAOStandardAtmosphere
+statType: dcid:measuredValue
+height: dcid:Tropopause
+
+Node: dcid:Ice_MixingRatio_Place_1000mb
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
+height: dcid:1000mb
 
-Node: dcid:LiftedParcelLevel_Pressure_Atmosphere
+Node: dcid:Ice_MixingRatio_Place_100mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:100mb
+
+Node: dcid:Ice_MixingRatio_Place_150mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:150mb
+
+Node: dcid:Ice_MixingRatio_Place_1HybridLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:1HybridLevel
+
+Node: dcid:Ice_MixingRatio_Place_200mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:200mb
+
+Node: dcid:Ice_MixingRatio_Place_250mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:250mb
+
+Node: dcid:Ice_MixingRatio_Place_300mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:300mb
+
+Node: dcid:Ice_MixingRatio_Place_350mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:350mb
+
+Node: dcid:Ice_MixingRatio_Place_400mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:400mb
+
+Node: dcid:Ice_MixingRatio_Place_450mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:450mb
+
+Node: dcid:Ice_MixingRatio_Place_500mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:500mb
+
+Node: dcid:Ice_MixingRatio_Place_50mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:50mb
+
+Node: dcid:Ice_MixingRatio_Place_550mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:550mb
+
+Node: dcid:Ice_MixingRatio_Place_600mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:600mb
+
+Node: dcid:Ice_MixingRatio_Place_650mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:650mb
+
+Node: dcid:Ice_MixingRatio_Place_700mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:700mb
+
+Node: dcid:Ice_MixingRatio_Place_750mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:750mb
+
+Node: dcid:Ice_MixingRatio_Place_800mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:800mb
+
+Node: dcid:Ice_MixingRatio_Place_850mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:850mb
+
+Node: dcid:Ice_MixingRatio_Place_900mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:900mb
+
+Node: dcid:Ice_MixingRatio_Place_925mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:925mb
+
+Node: dcid:Ice_MixingRatio_Place_950mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:950mb
+
+Node: dcid:Ice_MixingRatio_Place_975mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ice
+statType: dcid:measuredValue
+height: dcid:975mb
+
+Node: dcid:LiftedParcelLevel_Pressure_Atmosphere_2550mbAboveGround
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:pressure
 measurementQualifier: dcid:LiftedParcelLevel
 statType: dcid:measuredValue
+height: dcid:255_0mbAboveGround
 
-Node: dcid:LiquidWaterContent_Soil
+Node: dcid:LiquidWaterContent_Soil_0.10.4mBelowGround
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:liquidWaterContent
 statType: dcid:measuredValue
+depth: dcid:0.1_0.4mBelowGround
 
-Node: dcid:MSLPEtaReduction_Pressure_Atmosphere
+Node: dcid:LiquidWaterContent_Soil_0.41mBelowGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:liquidWaterContent
+statType: dcid:measuredValue
+depth: dcid:0.4_1mBelowGround
+
+Node: dcid:LiquidWaterContent_Soil_00.1mBelowGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:liquidWaterContent
+statType: dcid:measuredValue
+depth: dcid:0_0.1mBelowGround
+
+Node: dcid:LiquidWaterContent_Soil_12mBelowGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:liquidWaterContent
+statType: dcid:measuredValue
+depth: dcid:1_2mBelowGround
+
+Node: dcid:MSLPEtaReduction_Pressure_Atmosphere_MeanSeaLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:pressure
 measurementQualifier: dcid:MSLPEtaReduction
 statType: dcid:measuredValue
+height: dcid:MeanSeaLevel
 
-Node: dcid:Max_CompositeReflectivity_Place
+Node: dcid:Max_CompositeReflectivity_Place_Atmosphere
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:compositeReflectivity
 statType: dcid:maxValue
+height: dcid:Atmosphere
 
-Node: dcid:Max_WindSpeed_Place
+Node: dcid:Max_WindSpeed_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:maxValue
+height: dcid:SurfaceLevel
 
-Node: dcid:Occurrence_Place_FreezingRain
+Node: dcid:Occurrence_Place_SurfaceLevel_FreezingRain
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:occurrence
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 precipitationType: dcid:FreezingRain
 
-Node: dcid:Occurrence_Place_IcePellets
+Node: dcid:Occurrence_Place_SurfaceLevel_IcePellets
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:occurrence
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 precipitationType: dcid:IcePellets
 
-Node: dcid:Occurrence_Place_Rain
+Node: dcid:Occurrence_Place_SurfaceLevel_Rain
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:occurrence
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 precipitationType: dcid:Rain
 
-Node: dcid:Occurrence_Place_Snow
+Node: dcid:Occurrence_Place_SurfaceLevel_Snow
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:occurrence
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 precipitationType: dcid:Snow
 
-Node: dcid:Ozone_MixingRatio_Atmosphere
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.01mb
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
+height: dcid:0.01mb
 
-Node: dcid:PlanetaryBoundaryLayer_Height_Atmosphere
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.02mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:0.02mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.04mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:0.04mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.07mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:0.07mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.1mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:0.1mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.2mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:0.2mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.4mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:0.4mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.7mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:0.7mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_1000mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:1000mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_100mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:100mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_10mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:10mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_150mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:150mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_15mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:15mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_1mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:1mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_200mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:200mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_20mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:20mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_250mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:250mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_2mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:2mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_300mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:300mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_30mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:30mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_350mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:350mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_3mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:3mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_400mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:400mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_40mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:40mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_450mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:450mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_500mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:500mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_50mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:50mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_550mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:550mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_5mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:5mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_600mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:600mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_650mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:650mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_700mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:700mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_70mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:70mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_750mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:750mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_7mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:7mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_800mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:800mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_850mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:850mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_900mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:900mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_925mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:925mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_950mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:950mb
+
+Node: dcid:Ozone_MixingRatio_Atmosphere_975mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Ozone
+statType: dcid:measuredValue
+height: dcid:975mb
+
+Node: dcid:PlanetaryBoundaryLayer_Height_Atmosphere_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:height
 measurementQualifier: dcid:PlanetaryBoundaryLayer
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:PotentialTemperature_Atmosphere
+Node: dcid:PotentialTemperature_Atmosphere_0.995SigmaLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:potentialTemperature
 statType: dcid:measuredValue
+height: dcid:0.995SigmaLevel
 
-Node: dcid:PrecipitableWater_Place
+Node: dcid:PrecipitableWater_Place_Atmosphere
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:precipitableWater
 statType: dcid:measuredValue
+height: dcid:Atmosphere
 
-Node: dcid:PrecipitationRate_Place
+Node: dcid:PrecipitationRate_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:precipitationRate
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.01mb
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
+height: dcid:0.01mb
 
-Node: dcid:Pressure_Atmosphere
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.02mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.02mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.04mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.04mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.07mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.07mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.1mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.1mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.2mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.2mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.4mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.4mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.7mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.7mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.995SigmaLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.995SigmaLevel
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_1000mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:1000mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_100mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:100mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_10mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:10mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_150mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:150mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_15mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:15mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_1mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:1mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_200mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:200mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_20mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:20mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_250mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:250mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_2mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:2mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_300mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:300mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_30mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:30mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_350mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:350mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_3mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:3mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_400mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:400mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_40mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:40mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_450mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:450mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_500mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:500mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_50mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:50mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_550mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:550mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_5mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:5mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_600mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:600mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_650mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:650mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_700mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:700mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_70mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:70mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_750mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:750mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_7mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:7mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_800mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:800mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_850mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:850mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_900mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:900mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_925mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:925mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_950mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:950mb
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_975mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:975mb
+
+Node: dcid:Pressure_Atmosphere_80mAboveGround
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:pressure
 statType: dcid:measuredValue
+height: dcid:80mAboveGround
+
+Node: dcid:Pressure_Atmosphere_MaxWind
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:pressure
+statType: dcid:measuredValue
+height: dcid:MaxWind
+
+Node: dcid:Pressure_Atmosphere_PotentialVorticity2PVU
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:pressure
+statType: dcid:measuredValue
+height: dcid:PotentialVorticity2PVU
+
+Node: dcid:Pressure_Atmosphere_PotentialVorticityNeg2PVU
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:pressure
+statType: dcid:measuredValue
+height: dcid:PotentialVorticityNeg2PVU
+
+Node: dcid:Pressure_Atmosphere_SurfaceLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:pressure
+statType: dcid:measuredValue
+height: dcid:SurfaceLevel
+
+Node: dcid:Pressure_Atmosphere_Tropopause
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:pressure
+statType: dcid:measuredValue
+height: dcid:Tropopause
 
 Node: dcid:Pressure_Place_MeanSeaLevel
 typeOf: dcid:StatisticalVariable
@@ -282,141 +3416,1861 @@ measuredProperty: dcid:pressure
 statType: dcid:measuredValue
 height: dcid:MeanSeaLevel
 
-Node: dcid:Rainwater_MixingRatio_Place
+Node: dcid:Rainwater_MixingRatio_Place_1000mb
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
+height: dcid:1000mb
 
-Node: dcid:Reflectivity_Place
+Node: dcid:Rainwater_MixingRatio_Place_100mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:100mb
+
+Node: dcid:Rainwater_MixingRatio_Place_150mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:150mb
+
+Node: dcid:Rainwater_MixingRatio_Place_1HybridLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:1HybridLevel
+
+Node: dcid:Rainwater_MixingRatio_Place_200mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:200mb
+
+Node: dcid:Rainwater_MixingRatio_Place_250mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:250mb
+
+Node: dcid:Rainwater_MixingRatio_Place_300mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:300mb
+
+Node: dcid:Rainwater_MixingRatio_Place_350mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:350mb
+
+Node: dcid:Rainwater_MixingRatio_Place_400mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:400mb
+
+Node: dcid:Rainwater_MixingRatio_Place_450mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:450mb
+
+Node: dcid:Rainwater_MixingRatio_Place_500mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:500mb
+
+Node: dcid:Rainwater_MixingRatio_Place_50mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:50mb
+
+Node: dcid:Rainwater_MixingRatio_Place_550mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:550mb
+
+Node: dcid:Rainwater_MixingRatio_Place_600mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:600mb
+
+Node: dcid:Rainwater_MixingRatio_Place_650mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:650mb
+
+Node: dcid:Rainwater_MixingRatio_Place_700mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:700mb
+
+Node: dcid:Rainwater_MixingRatio_Place_750mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:750mb
+
+Node: dcid:Rainwater_MixingRatio_Place_800mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:800mb
+
+Node: dcid:Rainwater_MixingRatio_Place_850mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:850mb
+
+Node: dcid:Rainwater_MixingRatio_Place_900mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:900mb
+
+Node: dcid:Rainwater_MixingRatio_Place_925mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:925mb
+
+Node: dcid:Rainwater_MixingRatio_Place_950mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:950mb
+
+Node: dcid:Rainwater_MixingRatio_Place_975mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Rainwater
+statType: dcid:measuredValue
+height: dcid:975mb
+
+Node: dcid:Reflectivity_Place_1HybridLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:reflectivity
 statType: dcid:measuredValue
+height: dcid:1HybridLevel
 
-Node: dcid:SnowWaterEquivalent_Place
+Node: dcid:Reflectivity_Place_4000mAboveGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:reflectivity
+statType: dcid:measuredValue
+height: dcid:4000mAboveGround
+
+Node: dcid:SnowWaterEquivalent_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:snowWaterEquivalent
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:Snow_MixingRatio_Place
+Node: dcid:Snow_MixingRatio_Place_1000mb
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
+height: dcid:1000mb
 
-Node: dcid:SoilType_Soil
+Node: dcid:Snow_MixingRatio_Place_100mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:100mb
+
+Node: dcid:Snow_MixingRatio_Place_150mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:150mb
+
+Node: dcid:Snow_MixingRatio_Place_1HybridLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:1HybridLevel
+
+Node: dcid:Snow_MixingRatio_Place_200mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:200mb
+
+Node: dcid:Snow_MixingRatio_Place_250mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:250mb
+
+Node: dcid:Snow_MixingRatio_Place_300mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:300mb
+
+Node: dcid:Snow_MixingRatio_Place_350mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:350mb
+
+Node: dcid:Snow_MixingRatio_Place_400mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:400mb
+
+Node: dcid:Snow_MixingRatio_Place_450mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:450mb
+
+Node: dcid:Snow_MixingRatio_Place_500mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:500mb
+
+Node: dcid:Snow_MixingRatio_Place_50mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:50mb
+
+Node: dcid:Snow_MixingRatio_Place_550mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:550mb
+
+Node: dcid:Snow_MixingRatio_Place_600mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:600mb
+
+Node: dcid:Snow_MixingRatio_Place_650mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:650mb
+
+Node: dcid:Snow_MixingRatio_Place_700mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:700mb
+
+Node: dcid:Snow_MixingRatio_Place_750mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:750mb
+
+Node: dcid:Snow_MixingRatio_Place_800mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:800mb
+
+Node: dcid:Snow_MixingRatio_Place_850mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:850mb
+
+Node: dcid:Snow_MixingRatio_Place_900mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:900mb
+
+Node: dcid:Snow_MixingRatio_Place_925mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:925mb
+
+Node: dcid:Snow_MixingRatio_Place_950mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:950mb
+
+Node: dcid:Snow_MixingRatio_Place_975mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:mixingRatio
+measurementQualifier: dcid:Snow
+statType: dcid:measuredValue
+height: dcid:975mb
+
+Node: dcid:SoilType_Soil_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:soilType
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:StormMotion_Atmosphere_UComponent
+Node: dcid:StormMotion_Atmosphere_06000mAboveGroundLayer_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:stormMotion
 statType: dcid:measuredValue
+height: dcid:0_6000mAboveGroundLayer
 windComponent: dcid:UComponent
 
-Node: dcid:StormMotion_Atmosphere_VComponent
+Node: dcid:StormMotion_Atmosphere_06000mAboveGroundLayer_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:stormMotion
 statType: dcid:measuredValue
+height: dcid:0_6000mAboveGroundLayer
 windComponent: dcid:VComponent
 
-Node: dcid:StormRelativeHelicity_Atmosphere
+Node: dcid:StormRelativeHelicity_Atmosphere_03000mAboveGroundLayer
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:stormRelativeHelicity
 statType: dcid:measuredValue
+height: dcid:0_3000mAboveGroundLayer
 
-Node: dcid:SunshineDuration_Place
+Node: dcid:SunshineDuration_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:sunshineDuration
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:SurfaceLiftedIndex_Atmosphere
+Node: dcid:SurfaceLiftedIndex_Atmosphere_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:surfaceLiftedIndex
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:SurfaceRoughness_Place
+Node: dcid:SurfaceRoughness_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:surfaceRoughness
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:Temperature_Place
+Node: dcid:Temperature_Place_0.01mb
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
+height: dcid:0.01mb
 
-Node: dcid:Temperature_SeaIce
+Node: dcid:Temperature_Place_0.02mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:0.02mb
+
+Node: dcid:Temperature_Place_0.04mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:0.04mb
+
+Node: dcid:Temperature_Place_0.07mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:0.07mb
+
+Node: dcid:Temperature_Place_0.1mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:0.1mb
+
+Node: dcid:Temperature_Place_0.2mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:0.2mb
+
+Node: dcid:Temperature_Place_0.4mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:0.4mb
+
+Node: dcid:Temperature_Place_0.7mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:0.7mb
+
+Node: dcid:Temperature_Place_0.995SigmaLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:0.995SigmaLevel
+
+Node: dcid:Temperature_Place_1000mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:1000mb
+
+Node: dcid:Temperature_Place_100mAboveGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:100mAboveGround
+
+Node: dcid:Temperature_Place_100mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:100mb
+
+Node: dcid:Temperature_Place_10mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:10mb
+
+Node: dcid:Temperature_Place_150mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:150mb
+
+Node: dcid:Temperature_Place_15mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:15mb
+
+Node: dcid:Temperature_Place_1829mAboveMeanSeaLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:1829mAboveMeanSeaLevel
+
+Node: dcid:Temperature_Place_1mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:1mb
+
+Node: dcid:Temperature_Place_200mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:200mb
+
+Node: dcid:Temperature_Place_20mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:20mb
+
+Node: dcid:Temperature_Place_250mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:250mb
+
+Node: dcid:Temperature_Place_2743mAboveMeanSeaLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:2743mAboveMeanSeaLevel
+
+Node: dcid:Temperature_Place_2mAboveGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:2mAboveGround
+
+Node: dcid:Temperature_Place_2mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:2mb
+
+Node: dcid:Temperature_Place_300mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:300mb
+
+Node: dcid:Temperature_Place_300mbAboveGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:30_0mbAboveGround
+
+Node: dcid:Temperature_Place_30mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:30mb
+
+Node: dcid:Temperature_Place_350mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:350mb
+
+Node: dcid:Temperature_Place_3658mAboveMeanSeaLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:3658mAboveMeanSeaLevel
+
+Node: dcid:Temperature_Place_3mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:3mb
+
+Node: dcid:Temperature_Place_400mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:400mb
+
+Node: dcid:Temperature_Place_40mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:40mb
+
+Node: dcid:Temperature_Place_450mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:450mb
+
+Node: dcid:Temperature_Place_500mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:500mb
+
+Node: dcid:Temperature_Place_50mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:50mb
+
+Node: dcid:Temperature_Place_550mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:550mb
+
+Node: dcid:Temperature_Place_5mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:5mb
+
+Node: dcid:Temperature_Place_600mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:600mb
+
+Node: dcid:Temperature_Place_650mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:650mb
+
+Node: dcid:Temperature_Place_700mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:700mb
+
+Node: dcid:Temperature_Place_70mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:70mb
+
+Node: dcid:Temperature_Place_750mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:750mb
+
+Node: dcid:Temperature_Place_7mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:7mb
+
+Node: dcid:Temperature_Place_800mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:800mb
+
+Node: dcid:Temperature_Place_80mAboveGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:80mAboveGround
+
+Node: dcid:Temperature_Place_850mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:850mb
+
+Node: dcid:Temperature_Place_900mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:900mb
+
+Node: dcid:Temperature_Place_925mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:925mb
+
+Node: dcid:Temperature_Place_950mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:950mb
+
+Node: dcid:Temperature_Place_975mb
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:975mb
+
+Node: dcid:Temperature_Place_MaxWind
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:MaxWind
+
+Node: dcid:Temperature_Place_PotentialVorticity2PVU
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:PotentialVorticity2PVU
+
+Node: dcid:Temperature_Place_PotentialVorticityNeg2PVU
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:PotentialVorticityNeg2PVU
+
+Node: dcid:Temperature_Place_SurfaceLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:SurfaceLevel
+
+Node: dcid:Temperature_Place_Tropopause
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:Tropopause
+
+Node: dcid:Temperature_SeaIce_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:SeaIce
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:Temperature_Soil
+Node: dcid:Temperature_Soil_0.10.4mBelowGround
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
+depth: dcid:0.1_0.4mBelowGround
 
-Node: dcid:Thickness_Ice
+Node: dcid:Temperature_Soil_0.41mBelowGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+depth: dcid:0.4_1mBelowGround
+
+Node: dcid:Temperature_Soil_00.1mBelowGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+depth: dcid:0_0.1mBelowGround
+
+Node: dcid:Temperature_Soil_12mBelowGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+depth: dcid:1_2mBelowGround
+
+Node: dcid:Thickness_Ice_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Ice
 measuredProperty: dcid:thickness
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:VentilationRate_Place
+Node: dcid:VentilationRate_Place_PlanetaryBoundaryLayer
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:ventilationRate
 statType: dcid:measuredValue
+height: dcid:PlanetaryBoundaryLayer
 
-Node: dcid:Visibility_Place
+Node: dcid:Visibility_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:visibility
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:VolumetricSoilMoisture_Soil
+Node: dcid:VolumetricSoilMoisture_Soil_0.10.4mBelowGround
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:volumetricSoilMoisture
 statType: dcid:measuredValue
+depth: dcid:0.1_0.4mBelowGround
 
-Node: dcid:WiltingPoint_Soil
+Node: dcid:VolumetricSoilMoisture_Soil_0.41mBelowGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:volumetricSoilMoisture
+statType: dcid:measuredValue
+depth: dcid:0.4_1mBelowGround
+
+Node: dcid:VolumetricSoilMoisture_Soil_00.1mBelowGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:volumetricSoilMoisture
+statType: dcid:measuredValue
+depth: dcid:0_0.1mBelowGround
+
+Node: dcid:VolumetricSoilMoisture_Soil_12mBelowGround
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Soil
+measuredProperty: dcid:volumetricSoilMoisture
+statType: dcid:measuredValue
+depth: dcid:1_2mBelowGround
+
+Node: dcid:WiltingPoint_Soil_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:wiltingPoint
 statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
-Node: dcid:WindShear_Atmosphere
+Node: dcid:WindShear_Atmosphere_PotentialVorticity2PVU
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:windShear
 statType: dcid:measuredValue
+height: dcid:PotentialVorticity2PVU
 
-Node: dcid:WindSpeed_Place_UComponent
+Node: dcid:WindShear_Atmosphere_PotentialVorticityNeg2PVU
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:windShear
+statType: dcid:measuredValue
+height: dcid:PotentialVorticityNeg2PVU
+
+Node: dcid:WindShear_Atmosphere_Tropopause
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Atmosphere
+measuredProperty: dcid:windShear
+statType: dcid:measuredValue
+height: dcid:Tropopause
+
+Node: dcid:WindSpeed_Place_0.01mb_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
+height: dcid:0.01mb
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_VComponent
+Node: dcid:WindSpeed_Place_0.01mb_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
+height: dcid:0.01mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_0.02mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.02mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_0.02mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.02mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_0.04mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.04mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_0.04mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.04mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_0.07mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.07mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_0.07mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.07mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_0.1mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.1mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_0.1mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.1mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_0.2mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.2mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_0.2mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.2mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_0.4mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.4mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_0.4mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.4mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_0.7mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.7mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_0.7mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.7mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_0.995SigmaLevel_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.995SigmaLevel
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_0.995SigmaLevel_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.995SigmaLevel
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_1000mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:1000mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_1000mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:1000mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_100mAboveGround_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:100mAboveGround
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_100mAboveGround_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:100mAboveGround
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_100mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:100mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_100mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:100mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_10mAboveGround_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:10mAboveGround
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_10mAboveGround_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:10mAboveGround
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_10mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:10mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_10mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:10mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_150mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:150mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_150mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:150mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_15mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:15mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_15mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:15mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_1829mAboveMeanSeaLevel_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:1829mAboveMeanSeaLevel
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_1829mAboveMeanSeaLevel_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:1829mAboveMeanSeaLevel
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_1mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:1mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_1mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:1mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_200mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:200mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_200mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:200mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_20mAboveGround_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:20mAboveGround
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_20mAboveGround_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:20mAboveGround
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_20mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:20mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_20mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:20mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_250mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:250mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_250mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:250mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_2743mAboveMeanSeaLevel_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:2743mAboveMeanSeaLevel
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_2743mAboveMeanSeaLevel_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:2743mAboveMeanSeaLevel
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_2mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:2mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_2mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:2mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_300mbAboveGround_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:30_0mbAboveGround
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_300mbAboveGround_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:30_0mbAboveGround
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_300mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:300mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_300mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:300mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_30mAboveGround_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:30mAboveGround
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_30mAboveGround_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:30mAboveGround
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_30mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:30mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_30mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:30mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_350mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:350mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_350mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:350mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_3658mAboveMeanSeaLevel_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:3658mAboveMeanSeaLevel
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_3658mAboveMeanSeaLevel_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:3658mAboveMeanSeaLevel
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_3mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:3mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_3mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:3mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_400mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:400mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_400mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:400mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_40mAboveGround_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:40mAboveGround
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_40mAboveGround_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:40mAboveGround
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_40mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:40mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_40mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:40mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_450mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:450mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_450mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:450mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_500mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:500mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_500mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:500mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_50mAboveGround_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:50mAboveGround
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_50mAboveGround_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:50mAboveGround
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_50mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:50mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_50mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:50mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_550mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:550mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_550mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:550mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_5mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:5mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_5mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:5mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_600mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:600mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_600mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:600mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_650mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:650mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_650mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:650mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_700mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:700mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_700mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:700mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_70mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:70mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_70mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:70mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_750mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:750mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_750mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:750mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_7mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:7mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_7mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:7mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_800mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:800mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_800mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:800mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_80mAboveGround_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:80mAboveGround
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_80mAboveGround_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:80mAboveGround
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_850mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:850mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_850mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:850mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_900mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:900mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_900mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:900mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_925mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:925mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_925mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:925mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_950mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:950mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_950mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:950mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_975mb_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:975mb
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_975mb_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:975mb
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_MaxWind_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:MaxWind
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_MaxWind_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:MaxWind
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_PlanetaryBoundaryLayer_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:PlanetaryBoundaryLayer
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_PlanetaryBoundaryLayer_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:PlanetaryBoundaryLayer
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_PotentialVorticity2PVU_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:PotentialVorticity2PVU
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_PotentialVorticity2PVU_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:PotentialVorticity2PVU
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_PotentialVorticityNeg2PVU_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:PotentialVorticityNeg2PVU
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_PotentialVorticityNeg2PVU_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:PotentialVorticityNeg2PVU
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_Tropopause_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:Tropopause
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_Tropopause_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:Tropopause
 windComponent: dcid:VComponent
 

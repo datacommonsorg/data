@@ -7,7 +7,8 @@ isProvisional: dcs:True
 Node: dcid:height
 typeOf: dcs:Property
 name: "height"
-domainIncludes: dcid:Place
+domainIncludes: dcid:Atmosphere,dcid:Graupel,dcid:Ice,dcid:IceCover,dcid:LandCover,dcid:Place,dcid:SeaIce,dcid:Snow,dcid:Soil
+rangeIncludes: dcid:Class,dcid:DepthClassificationEnum
 
 Node: dcid:MeanSeaLevel
 typeOf: dcid:Distance
@@ -29,6 +30,11 @@ isProvisional: dcs:True
 Node: dcid:Cloud
 typeOf: dcid:MeasurementQualifierEnum
 name: "Cloud"
+isProvisional: dcs:True
+
+Node: dcid:1HybridLevel
+typeOf: dcid:Distance
+name: "1 Hybrid Level"
 isProvisional: dcs:True
 
 Node: dcid:Ice
@@ -58,6 +64,11 @@ name: "compositeReflectivity"
 rangeIncludes: dcid:CompositeReflectivityEnum
 isProvisional: dcs:True
 
+Node: dcid:PlanetaryBoundaryLayer
+typeOf: dcid:Distance
+name: "Planetary Boundary Layer"
+isProvisional: dcs:True
+
 Node: dcid:ventilationRate
 typeOf: dcs:Property
 name: "ventilationRate"
@@ -68,6 +79,11 @@ Node: dcid:geopotentialHeight
 typeOf: dcs:Property
 name: "geopotentialHeight"
 rangeIncludes: dcid:GeopotentialHeightEnum
+isProvisional: dcs:True
+
+Node: dcid:0.01mb
+typeOf: dcid:Distance
+name: "0. 01mb"
 isProvisional: dcs:True
 
 Node: dcid:velocity
@@ -92,15 +108,230 @@ name: "absoluteVorticity"
 rangeIncludes: dcid:AbsoluteVorticityEnum
 isProvisional: dcs:True
 
+Node: dcid:0.02mb
+typeOf: dcid:Distance
+name: "0. 02mb"
+isProvisional: dcs:True
+
+Node: dcid:0.04mb
+typeOf: dcid:Distance
+name: "0. 04mb"
+isProvisional: dcs:True
+
+Node: dcid:0.07mb
+typeOf: dcid:Distance
+name: "0. 07mb"
+isProvisional: dcs:True
+
+Node: dcid:0.1mb
+typeOf: dcid:Distance
+name: "0. 1mb"
+isProvisional: dcs:True
+
+Node: dcid:0.2mb
+typeOf: dcid:Distance
+name: "0. 2mb"
+isProvisional: dcs:True
+
+Node: dcid:0.4mb
+typeOf: dcid:Distance
+name: "0. 4mb"
+isProvisional: dcs:True
+
+Node: dcid:0.7mb
+typeOf: dcid:Distance
+name: "0. 7mb"
+isProvisional: dcs:True
+
+Node: dcid:1mb
+typeOf: dcid:Distance
+name: "1mb"
+isProvisional: dcs:True
+
+Node: dcid:2mb
+typeOf: dcid:Distance
+name: "2mb"
+isProvisional: dcs:True
+
+Node: dcid:3mb
+typeOf: dcid:Distance
+name: "3mb"
+isProvisional: dcs:True
+
+Node: dcid:5mb
+typeOf: dcid:Distance
+name: "5mb"
+isProvisional: dcs:True
+
+Node: dcid:7mb
+typeOf: dcid:Distance
+name: "7mb"
+isProvisional: dcs:True
+
+Node: dcid:10mb
+typeOf: dcid:Distance
+name: "1 0mb"
+isProvisional: dcs:True
+
+Node: dcid:15mb
+typeOf: dcid:Distance
+name: "1 5mb"
+isProvisional: dcs:True
+
+Node: dcid:20mb
+typeOf: dcid:Distance
+name: "2 0mb"
+isProvisional: dcs:True
+
+Node: dcid:30mb
+typeOf: dcid:Distance
+name: "3 0mb"
+isProvisional: dcs:True
+
+Node: dcid:40mb
+typeOf: dcid:Distance
+name: "4 0mb"
+isProvisional: dcs:True
+
+Node: dcid:50mb
+typeOf: dcid:Distance
+name: "5 0mb"
+isProvisional: dcs:True
+
+Node: dcid:70mb
+typeOf: dcid:Distance
+name: "7 0mb"
+isProvisional: dcs:True
+
+Node: dcid:100mb
+typeOf: dcid:Distance
+name: "1 00mb"
+isProvisional: dcs:True
+
+Node: dcid:150mb
+typeOf: dcid:Distance
+name: "1 50mb"
+isProvisional: dcs:True
+
+Node: dcid:200mb
+typeOf: dcid:Distance
+name: "2 00mb"
+isProvisional: dcs:True
+
+Node: dcid:250mb
+typeOf: dcid:Distance
+name: "2 50mb"
+isProvisional: dcs:True
+
+Node: dcid:300mb
+typeOf: dcid:Distance
+name: "3 00mb"
+isProvisional: dcs:True
+
+Node: dcid:350mb
+typeOf: dcid:Distance
+name: "3 50mb"
+isProvisional: dcs:True
+
+Node: dcid:400mb
+typeOf: dcid:Distance
+name: "4 00mb"
+isProvisional: dcs:True
+
+Node: dcid:450mb
+typeOf: dcid:Distance
+name: "4 50mb"
+isProvisional: dcs:True
+
+Node: dcid:500mb
+typeOf: dcid:Distance
+name: "5 00mb"
+isProvisional: dcs:True
+
+Node: dcid:550mb
+typeOf: dcid:Distance
+name: "5 50mb"
+isProvisional: dcs:True
+
+Node: dcid:600mb
+typeOf: dcid:Distance
+name: "6 00mb"
+isProvisional: dcs:True
+
+Node: dcid:650mb
+typeOf: dcid:Distance
+name: "6 50mb"
+isProvisional: dcs:True
+
+Node: dcid:700mb
+typeOf: dcid:Distance
+name: "7 00mb"
+isProvisional: dcs:True
+
+Node: dcid:750mb
+typeOf: dcid:Distance
+name: "7 50mb"
+isProvisional: dcs:True
+
+Node: dcid:800mb
+typeOf: dcid:Distance
+name: "8 00mb"
+isProvisional: dcs:True
+
+Node: dcid:850mb
+typeOf: dcid:Distance
+name: "8 50mb"
+isProvisional: dcs:True
+
+Node: dcid:900mb
+typeOf: dcid:Distance
+name: "9 00mb"
+isProvisional: dcs:True
+
+Node: dcid:925mb
+typeOf: dcid:Distance
+name: "9 25mb"
+isProvisional: dcs:True
+
+Node: dcid:950mb
+typeOf: dcid:Distance
+name: "9 50mb"
+isProvisional: dcs:True
+
 Node: dcid:hainesIndex
 typeOf: dcs:Property
 name: "hainesIndex"
 rangeIncludes: dcid:HainesIndexEnum
 isProvisional: dcs:True
 
+Node: dcid:975mb
+typeOf: dcid:Distance
+name: "9 75mb"
+isProvisional: dcs:True
+
+Node: dcid:1000mb
+typeOf: dcid:Distance
+name: "1 00 0mb"
+isProvisional: dcs:True
+
 Node: dcid:MSLPEtaReduction
 typeOf: dcid:MeasurementQualifierEnum
 name: "MSLPEta Reduction"
+isProvisional: dcs:True
+
+Node: dcid:4000mAboveGround
+typeOf: dcid:Distance
+name: "4 00 0m Above Ground"
+isProvisional: dcs:True
+
+Node: dcid:depth
+typeOf: dcs:Property
+name: "depth"
+domainIncludes: dcid:Soil
+
+Node: dcid:0_0.1mBelowGround
+typeOf: dcid:Distance
+name: "0_ 0. 1m Below Ground"
 isProvisional: dcs:True
 
 Node: dcid:volumetricSoilMoisture
@@ -113,6 +344,21 @@ Node: dcid:liquidWaterContent
 typeOf: dcs:Property
 name: "liquidWaterContent"
 rangeIncludes: dcid:LiquidWaterContentEnum
+isProvisional: dcs:True
+
+Node: dcid:0.1_0.4mBelowGround
+typeOf: dcid:Distance
+name: "0. 1_ 0. 4m Below Ground"
+isProvisional: dcs:True
+
+Node: dcid:0.4_1mBelowGround
+typeOf: dcid:Distance
+name: "0. 4_ 1m Below Ground"
+isProvisional: dcs:True
+
+Node: dcid:1_2mBelowGround
+typeOf: dcid:Distance
+name: "1_ 2m Below Ground"
 isProvisional: dcs:True
 
 Node: dcid:cloudWaterContent
@@ -133,10 +379,25 @@ name: "thickness"
 rangeIncludes: dcid:ThicknessEnum
 isProvisional: dcs:True
 
+Node: dcid:2mAboveGround
+typeOf: dcid:Distance
+name: "2m Above Ground"
+isProvisional: dcs:True
+
 Node: dcid:apparentTemperature
 typeOf: dcs:Property
 name: "apparentTemperature"
 rangeIncludes: dcid:ApparentTemperatureEnum
+isProvisional: dcs:True
+
+Node: dcid:10mAboveGround
+typeOf: dcid:Distance
+name: "1 0m Above Ground"
+isProvisional: dcs:True
+
+Node: dcid:10mAboveMeanSeaLevel
+typeOf: dcid:Distance
+name: "1 0m Above Mean Sea Level"
 isProvisional: dcs:True
 
 Node: dcid:frozenPrecipitation
@@ -232,10 +493,35 @@ name: "cloudWater"
 rangeIncludes: dcid:CloudWaterEnum
 isProvisional: dcs:True
 
+Node: dcid:LowCloudLayer
+typeOf: dcid:Distance
+name: "Low Cloud Layer"
+isProvisional: dcs:True
+
+Node: dcid:MiddleCloudLayer
+typeOf: dcid:Distance
+name: "Middle Cloud Layer"
+isProvisional: dcs:True
+
+Node: dcid:HighCloudLayer
+typeOf: dcid:Distance
+name: "High Cloud Layer"
+isProvisional: dcs:True
+
+Node: dcid:CloudCeiling
+typeOf: dcid:Distance
+name: "Cloud Ceiling"
+isProvisional: dcs:True
+
 Node: dcid:stormRelativeHelicity
 typeOf: dcs:Property
 name: "stormRelativeHelicity"
 rangeIncludes: dcid:StormRelativeHelicityEnum
+isProvisional: dcs:True
+
+Node: dcid:0_3000mAboveGroundLayer
+typeOf: dcid:Distance
+name: "0_ 30 00m Above Ground Layer"
 isProvisional: dcs:True
 
 Node: dcid:stormMotion
@@ -249,6 +535,16 @@ typeOf: dcs:Property
 name: "windComponent"
 domainIncludes: dcid:Atmosphere
 
+Node: dcid:0_6000mAboveGroundLayer
+typeOf: dcid:Distance
+name: "0_ 60 00m Above Ground Layer"
+isProvisional: dcs:True
+
+Node: dcid:Tropopause
+typeOf: dcid:Distance
+name: "Tropopause"
+isProvisional: dcs:True
+
 Node: dcid:ICAOStandardAtmosphere
 typeOf: dcid:MeasurementQualifierEnum
 name: "ICAOStandard Atmosphere"
@@ -258,6 +554,71 @@ Node: dcid:windShear
 typeOf: dcs:Property
 name: "windShear"
 rangeIncludes: dcid:WindShearEnum
+isProvisional: dcs:True
+
+Node: dcid:MaxWind
+typeOf: dcid:Distance
+name: "Max Wind"
+isProvisional: dcs:True
+
+Node: dcid:20mAboveGround
+typeOf: dcid:Distance
+name: "2 0m Above Ground"
+isProvisional: dcs:True
+
+Node: dcid:30mAboveGround
+typeOf: dcid:Distance
+name: "3 0m Above Ground"
+isProvisional: dcs:True
+
+Node: dcid:40mAboveGround
+typeOf: dcid:Distance
+name: "4 0m Above Ground"
+isProvisional: dcs:True
+
+Node: dcid:50mAboveGround
+typeOf: dcid:Distance
+name: "5 0m Above Ground"
+isProvisional: dcs:True
+
+Node: dcid:80mAboveGround
+typeOf: dcid:Distance
+name: "8 0m Above Ground"
+isProvisional: dcs:True
+
+Node: dcid:100mAboveGround
+typeOf: dcid:Distance
+name: "1 00m Above Ground"
+isProvisional: dcs:True
+
+Node: dcid:1829mAboveMeanSeaLevel
+typeOf: dcid:Distance
+name: "1 82 9m Above Mean Sea Level"
+isProvisional: dcs:True
+
+Node: dcid:2743mAboveMeanSeaLevel
+typeOf: dcid:Distance
+name: "2 74 3m Above Mean Sea Level"
+isProvisional: dcs:True
+
+Node: dcid:3658mAboveMeanSeaLevel
+typeOf: dcid:Distance
+name: "3 65 8m Above Mean Sea Level"
+isProvisional: dcs:True
+
+Node: dcid:Isotherm0C
+typeOf: dcid:Distance
+name: "Isotherm 0C"
+isProvisional: dcs:True
+
+Node: dcid:HighestTroposphericFreezingLevel
+typeOf: dcid:Distance
+name: "Highest Tropospheric Freezing Level"
+isProvisional: dcs:True
+
+Node: dcid:30_0mbAboveGround
+typeOf: dcid:Distance
+name: "3 0_ 0mb Above Ground"
 isProvisional: dcs:True
 
 Node: dcid:MeasuredPropertyEnum
@@ -271,15 +632,35 @@ typeOf: dcid:MeasuredPropertyEnum
 name: "Best Lifted Index"
 isProvisional: dcs:True
 
-Node: dcid:PlanetaryBoundaryLayer
-typeOf: dcid:MeasurementQualifierEnum
-name: "Planetary Boundary Layer"
+Node: dcid:180_0mbAboveGround
+typeOf: dcid:Distance
+name: "1 80_ 0mb Above Ground"
+isProvisional: dcs:True
+
+Node: dcid:0.33_1SigmaLayer
+typeOf: dcid:Distance
+name: "0. 33_ 1Sigma Layer"
+isProvisional: dcs:True
+
+Node: dcid:0.995SigmaLevel
+typeOf: dcid:Distance
+name: "0. 99 5Sigma Level"
 isProvisional: dcs:True
 
 Node: dcid:potentialTemperature
 typeOf: dcs:Property
 name: "potentialTemperature"
 rangeIncludes: dcid:PotentialTemperatureEnum
+isProvisional: dcs:True
+
+Node: dcid:90_0mbAboveGround
+typeOf: dcid:Distance
+name: "9 0_ 0mb Above Ground"
+isProvisional: dcs:True
+
+Node: dcid:255_0mbAboveGround
+typeOf: dcid:Distance
+name: "2 55_ 0mb Above Ground"
 isProvisional: dcs:True
 
 Node: dcid:LiftedParcelLevel
@@ -295,5 +676,15 @@ isProvisional: dcs:True
 Node: dcid:SeaIce
 typeOf: dcid:Thing
 name: "Sea Ice"
+isProvisional: dcs:True
+
+Node: dcid:PotentialVorticity2PVU
+typeOf: dcid:Distance
+name: "Potential Vorticity 2PVU"
+isProvisional: dcs:True
+
+Node: dcid:PotentialVorticityNeg2PVU
+typeOf: dcid:Distance
+name: "Potential Vorticity Neg 2PVU"
 isProvisional: dcs:True
 
