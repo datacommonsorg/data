@@ -5,5 +5,5 @@ observationAbout: C:noa_gfs_output->observationAbout
 variableMeasured: C:noa_gfs_output->variableMeasured
 unit: C:noa_gfs_output->unit
 referenceTime: 2025-12-24T00:00:00Z
-validTime: 2025-12-24T00:00:00Z
 typeOf: dcs:StatVarObservation
+validTime: 2025-12-24T00:00:00Z
