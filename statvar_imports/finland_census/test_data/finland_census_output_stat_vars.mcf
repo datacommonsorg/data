@@ -1,4 +1,4 @@
-# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./test_data/Finland_Census_input.csv --pv_map=Finland_Census_pvmap.csv --config_file=Finland_Census_metadata.csv --output_path=output" on 2025-12-16 11:25:11.948730
+# Auto generated using command: "../stat_var_processor.py --input_data=Finland_Census_input.csv --pv_map=Finland_Census_pvmap.csv --config_file=Finland_Census_metadata.csv --output_path=finland_census_output --debug --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-07 18:09:55.852862
 
 Node: dcid:Count_Person_15To64Years_AsAFractionOf_Count_Person
 typeOf: dcid:StatisticalVariable
@@ -101,6 +101,14 @@ statType: dcid:measuredValue
 measurementDenominator: dcid:Count_Person
 religiousOrientation: dcid:NoReligiousAffiliation
 
+Node: dcid:Count_Person_NotACitizen
+typeOf: dcid:StatisticalVariable
+name: "Population of non-citizens"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+citizenship: dcid:NotACitizen
+
 Node: dcid:Count_Person_NotACitizen_AsAFractionOf_Count_Person
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
@@ -125,13 +133,6 @@ statType: dcid:measuredValue
 measurementDenominator: dcid:Count_Person
 placeOfResidenceClassification: dcid:PeriUrban
 
-Node: dcid:Count_Person_PlaceOfBirthBornInStateOfResidence
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-placeOfBirth: dcid:BornInStateOfResidence
-
 Node: dcid:Count_Person_PlaceOfBirthBornInStateOfResidence_AsAFractionOf_Count_Person
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
@@ -146,13 +147,6 @@ populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 placeOfBirth: dcid:country/FIN
-
-Node: dcid:Count_Person_PlaceOfBirthForeignBorn
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-placeOfBirth: dcid:ForeignBorn
 
 Node: dcid:Count_Person_PlaceOfBirthForeignBorn_AsAFractionOf_Count_Person
 typeOf: dcid:StatisticalVariable
@@ -231,6 +225,13 @@ statType: dcid:measuredValue
 measurementDenominator: dcid:Count_Person_15To64Years_Employed
 age: dcid:Years65Onwards__YearsUpto14
 employmentStatus: dcid:Unemployed
+
+Node: dcid:GrowthRate_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Population growth rate"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:growthRate
 
 Node: dcid:Mean_Age_Person
 typeOf: dcid:StatisticalVariable
