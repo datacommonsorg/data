@@ -1,4 +1,4 @@
-# Auto generated using command: "../stat_var_processor.py --input_data=Finland_Census_input.csv --pv_map=Finland_Census_pvmap.csv --config_file=Finland_Census_metadata.csv --output_path=finland_census_output --debug --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-07 18:09:55.852862
+# Auto generated using command: "../stat_var_processor.py --input_data=finland_census_input.csv --pv_map=finland_census_pvmap.csv --config_file=finland_census_metadata.csv --output_path=finland_census_output --debug --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-07 18:35:33.933883
 
 Node: dcid:Count_Person_15To64Years_AsAFractionOf_Count_Person
 typeOf: dcid:StatisticalVariable
