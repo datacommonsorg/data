@@ -27,6 +27,7 @@ class SpannerClient:
     and getting/updating import statuses.
     """
     _LOCK_ID = "global_ingestion_lock"
+    _DEFAULT_GRAPH_PATH = "/*/*/*.mcf"
 
     def __init__(self, project_id: str, instance_id: str, database_id: str):
         """Initializes a Spanner client and connects to a specific database."""
@@ -126,7 +127,7 @@ class SpannerClient:
     def get_import_list(self, import_list: list) -> list:
         """Get the list of imports ready to ingest."""
         pending_imports = []
-        sql = "SELECT ImportName, LatestVersion FROM ImportStatus WHERE State = 'READY'"
+        sql = "SELECT ImportName, LatestVersion, GraphDataPaths FROM ImportStatus WHERE State = 'READY'"
         # Use a read-only snapshot for this query
         try:
             with self.database.snapshot() as snapshot:
@@ -136,6 +137,7 @@ class SpannerClient:
                         import_json = {}
                         import_json['importName'] = row[0]
                         import_json['latestVersion'] = row[1]
+                        import_json['graphDataPaths'] = row[2]
                         pending_imports.append(import_json)
 
             logging.info(f"Found {len(pending_imports)} import jobs as READY.")
@@ -200,19 +202,21 @@ class SpannerClient:
         exec_time = params['exec_time']
         data_volume = params['data_volume']
         status = params['status']
-        version = params['version']
+        version = params['version'].removesuffix(self._DEFAULT_GRAPH_PATH)
         next_refresh = params['next_refresh']
+        graph_paths = params.get('graph_paths', [self._DEFAULT_GRAPH_PATH])
         logging.info(f"Updating import status for {import_name} to {status}")
 
         def _record(transaction: Transaction):
             columns = [
                 "ImportName", "State", "JobId", "ExecutionTime", "DataVolume",
-                "NextRefreshTimestamp", "LatestVersion", "StatusUpdateTimestamp"
+                "NextRefreshTimestamp", "LatestVersion", "GraphDataPaths",
+                "StatusUpdateTimestamp"
             ]
 
             row_values = [
                 import_name, status, job_id, exec_time, data_volume,
-                next_refresh, version, spanner.COMMIT_TIMESTAMP
+                next_refresh, version, graph_paths, spanner.COMMIT_TIMESTAMP
             ]
 
             if status == 'READY':
@@ -245,9 +249,7 @@ class SpannerClient:
 
         def _record(transaction: Transaction):
             columns = ["ImportName", "Version", "UpdateTimestamp", "Comment"]
-            values = [[
-                import_name, version, spanner.COMMIT_TIMESTAMP, comment
-            ]]
+            values = [[import_name, version, spanner.COMMIT_TIMESTAMP, comment]]
             transaction.insert(table="ImportVersionHistory",
                                columns=columns,
                                values=values)

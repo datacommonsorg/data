@@ -142,15 +142,17 @@ class ExecutorConfig:
     # Invoke import tool genmcf.
     invoke_import_tool: bool = True
     # Invoke differ tool.
-    invoke_differ_tool: bool = True
+    invoke_differ_tool: bool = True 
     # Invoke validations before upload.
-    invoke_import_validation: bool = True
+    invoke_import_validation: bool = True 
     # Ignore validation status during import.
     ignore_validation_status: bool = False
     # Import validation config file path (relative to data repo).
     validation_config_file: str = 'tools/import_validation/validation_config.json'
     # Latest import version (overwrite)
     import_version_override: str = ''
+    # Relative path to version folder for graph files.
+    graph_data_paths: List[str] = dataclasses.field(default_factory=lambda: ['/*/*/*.mcf'])
     # Maximum time venv creation can take in seconds.
     venv_create_timeout: float = 3600
     # Maximum time downloading a file can take in seconds.

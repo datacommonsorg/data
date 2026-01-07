@@ -39,6 +39,8 @@ flags.DEFINE_string('gcs_bucket_id', os.environ.get('GCS_BUCKET_ID'),
                     'GCS Bucket ID')
 flags.DEFINE_string('location', os.environ.get('LOCATION'), 'Location')
 
+if not FLAGS.is_parsed():
+    FLAGS(['ingestion_helper'])
 
 def _validate_params(request_json, required_params):
     for param in required_params:
