@@ -66,6 +66,7 @@ def get_import_params(request_json) -> dict:
     exec_time = request_json.get('execTime', 0)
     data_volume = request_json.get('dataVolume', 0)
     version = request_json.get('version', '')
+    graph_paths = request_json.get('graph_paths', [])
     schedule = request_json.get('schedule', '')
     next_refresh = datetime.now(timezone.utc)
     try:
@@ -81,6 +82,7 @@ def get_import_params(request_json) -> dict:
         'exec_time': exec_time,
         'data_volume': data_volume,
         'version': version,
+        'graph_paths': graph_paths,
         'next_refresh': next_refresh
     }
 
@@ -100,6 +102,7 @@ def create_import_params(summary) -> dict:
     exec_time = summary.get('execution_time', 0)
     data_volume = summary.get('data_volume', 0)
     version = summary.get('latest_version', '')
+    graph_paths = summary.get('graph_paths', [])
     next_refresh_str = summary.get('next_refresh', '')
     next_refresh = None
     if next_refresh_str:
@@ -115,9 +118,9 @@ def create_import_params(summary) -> dict:
         'exec_time': exec_time,
         'data_volume': data_volume,
         'version': version,
+        'graph_paths': graph_paths,
         'next_refresh': next_refresh,
     }
-
 
 def get_ingestion_metrics(project_id, location, job_id):
     """Fetches graph metrics (nodes, edges, observations) and execution time from a Dataflow job.

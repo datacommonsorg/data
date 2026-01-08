@@ -35,7 +35,6 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     id: 'push'
     args: ['push', '${_DOCKER_IMAGE}', '--all-tags']
-    waitFor: ['build']
 
   # Run import executor integration test
   - name: '${_DOCKER_IMAGE}:${COMMIT_SHA}'
@@ -56,7 +55,7 @@ steps:
       - |
         ./run_tests.sh -a
     entrypoint: bash
-    waitFor: ['build']
+    waitFor: ['push']
   
   # Tag image as stable and push
   - name: 'gcr.io/cloud-builders/docker'
