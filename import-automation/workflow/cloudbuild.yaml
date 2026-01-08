@@ -24,5 +24,5 @@ steps:
 
 - id: 'import-automation-helper'
   name: 'gcr.io/cloud-builders/gcloud'
-  args: ['functions', 'deploy', 'import-automation-helper', '--runtime', 'python312', '--source', 'automation-helper', '--trigger-topic', 'import-automation-trigger' , '--entry-point', 'handle_feed_event']
+  args: ['functions', 'deploy', 'import-automation-helper', '--runtime', 'python312', '--source', 'import-helper', '--trigger-topic', 'import-automation-trigger' , '--entry-point', 'handle_feed_event', '--set-env-vars', 'PROJECT_ID=${_PROJECT_ID},LOCATION=${_LOCATION},SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},WORKFLOW_ID=spanner-ingestion-workflow']
 
