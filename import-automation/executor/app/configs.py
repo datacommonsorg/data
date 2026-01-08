@@ -42,10 +42,6 @@ class ExecutorConfig:
     # Name of the Cloud Storage bucket to store the generated data files
     # for importing to prod.
     storage_prod_bucket_name: str = 'datcom-prod-imports'
-    # Spanner instance details for import status.
-    spanner_project_id: str = 'datcom-store'
-    spanner_instance_id: str = 'dc-kg-test'
-    spanner_database_id: str = 'dc_graph_import'
     # Name of the Cloud Storage bucket that the Data Commons importer
     # outputs to.
     storage_importer_bucket_name: str = 'resolved_mcf'
@@ -155,6 +151,9 @@ class ExecutorConfig:
     validation_config_file: str = 'tools/import_validation/validation_config.json'
     # Latest import version (overwrite)
     import_version_override: str = ''
+    # Relative path to version folder for graph files.
+    graph_data_paths: List[str] = dataclasses.field(
+        default_factory=lambda: ['/*/*/*.mcf'])
     # Maximum time venv creation can take in seconds.
     venv_create_timeout: float = 3600
     # Maximum time downloading a file can take in seconds.
