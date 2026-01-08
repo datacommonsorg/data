@@ -29,8 +29,6 @@ _LOCATION = 'us-central1'
 _GCS_BUCKET = 'datcom-ci-test'
 _IMPORT_NAME = 'scripts/us_fed/treasury_constant_maturity_rates:USFed_ConstantMaturityRates_Test'
 _IMAGE_URI = 'gcr.io/datcom-ci/dc-import-executor:latest'
-_SPANNER_INSTANCE = 'datcom-spanner-test'
-_SPANNER_DB = 'dc-test-db'
 
 
 def run_test():
@@ -38,15 +36,12 @@ def run_test():
     # Execute the cloud batch job.
     job_name = f"{_JOB_ID_PREFIX}-{int(time.time())}"
     logging.info('Running cloud batch job: %s', job_name)
-    job = cloud_batch.execute_cloud_batch_job(
-        project_id=_PROJECT_ID,
-        location=_LOCATION,
-        job_name=job_name,
-        import_name=_IMPORT_NAME,
-        gcs_bucket=_GCS_BUCKET,
-        spanner_instance=_SPANNER_INSTANCE,
-        spanner_db=_SPANNER_DB,
-        image_uri=_IMAGE_URI)
+    job = cloud_batch.execute_cloud_batch_job(project_id=_PROJECT_ID,
+                                              location=_LOCATION,
+                                              job_name=job_name,
+                                              import_name=_IMPORT_NAME,
+                                              gcs_bucket=_GCS_BUCKET,
+                                              image_uri=_IMAGE_URI)
 
     if not job:
         raise AssertionError(f'Cloud batch job {job_name} failed.')
