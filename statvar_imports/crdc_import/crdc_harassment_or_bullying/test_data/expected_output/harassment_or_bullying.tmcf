@@ -1,0 +1,6 @@
+Node: E:harassment_or_bullying->E0
+observationAbout: C:harassment_or_bullying->observationAbout
+observationDate: C:harassment_or_bullying->observationDate
+value: C:harassment_or_bullying->value
+variableMeasured: C:harassment_or_bullying->variableMeasured
+typeOf: dcs:StatVarObservation

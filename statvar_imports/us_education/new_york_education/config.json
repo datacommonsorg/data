@@ -1,0 +1,41 @@
+{
+    "zip_urls": [
+        "https://data.cityofnewyork.us/api/views/9uqq-k6t8/files/6cb21873-4c19-42ab-aa31-13573b47ed45?download=true&filename=2006-2012%20ELA%20Test%20Results.zip",
+        "https://data.cityofnewyork.us/api/views/iebs-5yhr/files/33712362-a710-4640-a740-f6dc2c8ac991?download=true&filename=2013-2023%20ELA%20Test%20Results%20(Excel%20files).zip",
+        "https://data.cityofnewyork.us/api/views/74kb-55u9/files/ca3b8584-9b64-472c-ace4-683e795c12e2?download=true&filename=2013-2023%20Math%20Test%20Results%20(Excel%20files).zip",
+        "https://data.cityofnewyork.us/api/views/e5c5-ieuv/files/93fd3270-8d2e-47ac-878d-04d96e411168?download=true&filename=2006-2012%20Math%20Test%20Results.zip"
+    ],
+    "xlsx_urls": [
+        "https://data.cityofnewyork.us/api/views/9uqq-k6t8/files/59239f21-04fe-4527-b5f1-818e7d4e1b3c?download=true&filename=DOE_ELA_Results_2006-2012_Data-Dictionary.xlsx",
+        "https://data.cityofnewyork.us/api/views/iebs-5yhr/files/914835d0-1430-4616-a784-5cd3ab39d1ef?download=true&filename=DOE_ELA_Results_2013-2023_Data_Dictionary.xlsx",
+        "https://data.cityofnewyork.us/api/views/e5c5-ieuv/files/50b26dd0-df82-405a-8826-20dc380aa521?download=true&filename=DOE_Math_Results_2006-2012_Data-Dictionary.xlsx",
+        "https://data.cityofnewyork.us/api/views/74kb-55u9/files/8742c948-be88-4028-b90d-a69bb28a4926?download=true&filename=DOE_Math_Results_2013-2023_Data_Dictionary.xlsx"
+    ],
+    "math_files_to_keep" : [
+        "Math_Test_Results_2006-2012_-_Borough_-_Ethnicity.csv",
+        "02_borough-math-results-2013-2023-(public).xlsx",
+        "04_school-math-results-2013-2023-(public).xlsx",
+        "2006_-_2012_Math_Test_Results_-_Borough_-_ELL.csv",
+        "2006_-_2012_Math_Test_Results_-_Borough_-_Gender.csv",
+        "2006_-_2012_Math_Test_Results_-_Borough_-_SWD.csv",
+        "2006_-_2012_Math_Test_Results_-_Charter_Schools.csv",
+        "2006_-_2012_Math_Test_Results_-_School_-_ELL.csv",
+        "2006_-_2012_Math_Test_Results_-_School_-_Gender.csv",
+        "2006_-_2012_Math_Test_Results_-_School_-_SWD.csv",
+        "2006-2012_Math_Test_Results_-_School_-_Ethnicity.csv"
+    ],
+    "english_files_to_keep" : [
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_All_Students.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_ELL.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_Ethnicity.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_Gender.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Borough_-_SWD.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_Charter_Schools.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_School_-_ELL.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_School_-_Ethnicity.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_School_-_Gender.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results_-_School_-_SWD.csv",
+        "2006-2012_English_Language_Arts__ELA__Test_Results-_School_-_All_Students.csv",
+        "school-ela-results-2013-2023-(public).xlsx"
+    ]
+}
