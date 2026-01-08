@@ -29,7 +29,6 @@ import tempfile
 import time
 import traceback
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
-from google.cloud import spanner
 import datetime
 from enum import Enum
 
@@ -76,7 +75,7 @@ lastDataRefreshDate: "{last_data_refresh_date}"
 AUTO_IMPORT_JOB_STAGE = "auto-import-job-stage"
 AUTO_IMPORT_JOB_STATUS = "auto-import-job-status"
 IMPORT_SUMMARY_FILE = "import_summary.json"
-STAGING_PATH = "staging"
+STAGING_VERSION_FILE = "staging_version.txt"
 
 
 class ImportStatus(Enum):
@@ -129,6 +128,7 @@ class ImportStatusSummary:
     import_name: str
     status: ImportStatus = None
     latest_version: str = ''
+    graph_paths: list = dataclasses.field(default_factory=list)
     execution_time: int = 0  # seconds
     data_volume: int = 0  # bytes
     job_id: str = ''
@@ -776,42 +776,6 @@ class ImportExecutor:
             import_summary.import_stats.get('source_data_size', 0))
         return inputs
 
-    def _update_import_status_table(
-            self, import_summary: ImportStatusSummary) -> None:
-        """Updates import job status table in spanner."""
-        logging.info(
-            f'Updating {import_summary.import_name} status to {import_summary.status} in spanner.'
-        )
-        if not self.config.spanner_project_id or not self.config.spanner_instance_id or not self.config.spanner_database_id:
-            return
-        spanner_client = spanner.Client(
-            project=self.config.spanner_project_id,
-            client_options={'quota_project_id': self.config.spanner_project_id})
-        instance = spanner_client.instance(self.config.spanner_instance_id)
-        database = instance.database(self.config.spanner_database_id)
-
-        with database.batch() as batch:
-            columns = [
-                "ImportName", "State", "JobId", "ExecutionTime", "DataVolume",
-                "StatusUpdateTimestamp", "NextRefreshTimestamp", "LatestVersion"
-            ]
-            values = [
-                import_summary.import_name, import_summary.status.name,
-                import_summary.job_id, import_summary.execution_time,
-                import_summary.data_volume, spanner.COMMIT_TIMESTAMP,
-                import_summary.next_refresh, import_summary.latest_version
-            ]
-            # Update import timestamp only if import completed successfully.
-            if import_summary.status == ImportStatus.READY:
-                columns.extend(["DataImportTimestamp"])
-                values.extend([spanner.COMMIT_TIMESTAMP])
-
-            batch.insert_or_update(table="ImportStatus",
-                                   columns=tuple(columns),
-                                   values=[tuple(values)])
-
-        logging.info(f'Updated {import_summary.import_name} status in spanner.')
-
     def _update_latest_version(self, version, output_dir, import_spec,
                                import_summary):
         if self.config.skip_gcs_upload:
@@ -820,26 +784,15 @@ class ImportExecutor:
             return
         logging.info(f'Updating import latest version {version}')
         self.uploader.upload_string(
-            version,
-            os.path.join(output_dir, self.config.storage_version_filename))
+            version, os.path.join(output_dir, STAGING_VERSION_FILE))
         self.uploader.upload_string(
             self._import_metadata_mcf_helper(import_spec),
-            os.path.join(output_dir, self.config.import_metadata_mcf_filename))
+            os.path.join(output_dir, version,
+                         self.config.import_metadata_mcf_filename))
         self.uploader.upload_string(
             json.dumps(dataclasses.asdict(import_summary), default=str),
-            os.path.join(output_dir, IMPORT_SUMMARY_FILE))
-        # Add current version to the history of versions if import was successful.
-        if self.config.storage_version_history_filename:
-            history_filename = os.path.join(
-                output_dir, self.config.storage_version_history_filename)
-            versions_history = [version]
-            history = self._get_blob_content(history_filename)
-            if history:
-                versions_history.append(history)
-            self.uploader.upload_string('\n'.join(versions_history),
-                                        history_filename)
+            os.path.join(output_dir, version, IMPORT_SUMMARY_FILE))
         logging.info(f'Updated import latest version {version}')
-        self._update_import_status_table(import_summary)
 
     @log_function_call
     def _import_one_helper(
@@ -870,19 +823,15 @@ class ImportExecutor:
         output_dir = f'{relative_import_dir}/{import_name}'
         version = self.config.import_version_override if self.config.import_version_override else _clean_time(
             utils.pacific_time())
+        # Used for imports using CDA feed tranfers with a date placeholder in the GCS path,
+        # thus, we can determine the path using the current date (instead of a variable timestamp).
         if version == 'DATE_VERSION_PLACEHOLDER':
             version = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
         import_summary.latest_version = 'gs://' + os.path.join(
-            self.config.storage_prod_bucket_name, output_dir, version, '*', '*',
-            '*.mcf')
+            self.config.storage_prod_bucket_name, output_dir, version)
+        import_summary.graph_paths = self.config.graph_data_paths
         import_summary.next_refresh = utils.next_utc_timestamp(
             import_spec.get('cron_schedule'))
-        if self.config.import_version_override and self.config.import_version_override != 'DATE_VERSION_PLACEHOLDER':
-            logging.info(f'Import version override {version}')
-            import_summary.status = ImportStatus.READY
-            self._update_latest_version(version, output_dir, import_spec,
-                                        import_summary)
-            return
 
         with tempfile.TemporaryDirectory() as tmpdir:
             requirements_path = os.path.join(absolute_import_dir,
@@ -947,9 +896,6 @@ class ImportExecutor:
                 import_summary.import_stats.get('mcf_data_size', 0) +
                 import_summary.import_stats.get('validation_data_size', 0))
             logging.info(import_summary)
-            self.uploader.upload_string(
-                json.dumps(dataclasses.asdict(import_summary), default=str),
-                os.path.join(output_dir, version, IMPORT_SUMMARY_FILE))
 
             if self.config.ignore_validation_status or validation_status:
                 import_summary.status = ImportStatus.READY
@@ -958,10 +904,7 @@ class ImportExecutor:
                     "Staging latest version update due to validation failure.")
                 import_summary.status = ImportStatus.VALIDATION
 
-            # Update version and metadata files in staging folder for failed imports
-            version_dir = output_dir if import_summary.status == ImportStatus.READY else os.path.join(
-                output_dir, STAGING_PATH)
-            self._update_latest_version(version, version_dir, import_spec,
+            self._update_latest_version(version, output_dir, import_spec,
                                         import_summary)
 
         if self.importer:
