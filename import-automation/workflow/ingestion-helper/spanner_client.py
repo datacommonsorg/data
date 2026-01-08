@@ -27,7 +27,6 @@ class SpannerClient:
     and getting/updating import statuses.
     """
     _LOCK_ID = "global_ingestion_lock"
-    _DEFAULT_GRAPH_PATH = "/*/*/*.mcf"
 
     def __init__(self, project_id: str, instance_id: str, database_id: str):
         """Initializes a Spanner client and connects to a specific database."""
@@ -202,9 +201,9 @@ class SpannerClient:
         exec_time = params['exec_time']
         data_volume = params['data_volume']
         status = params['status']
-        version = params['version'].removesuffix(self._DEFAULT_GRAPH_PATH)
+        version = params['version']
         next_refresh = params['next_refresh']
-        graph_paths = params.get('graph_paths', [self._DEFAULT_GRAPH_PATH])
+        graph_paths = params['graph_paths']
         logging.info(f"Updating import status for {import_name} to {status}")
 
         def _record(transaction: Transaction):
@@ -237,7 +236,7 @@ class SpannerClient:
             raise
 
     def update_version_history(self, import_name: str, version: str,
-                               comment: str):
+                               caller: str, comment: str):
         """Updates the version history table.
 
         Args:
@@ -248,8 +247,12 @@ class SpannerClient:
         logging.info(f"Updating version history for {import_name} to {version}")
 
         def _record(transaction: Transaction):
-            columns = ["ImportName", "Version", "UpdateTimestamp", "Comment"]
-            values = [[import_name, version, spanner.COMMIT_TIMESTAMP, comment]]
+            columns = [
+                "ImportName", "Version", "UpdateTimestamp", "Caller", "Comment"
+            ]
+            values = [[
+                import_name, version, spanner.COMMIT_TIMESTAMP, caller, comment
+            ]]
             transaction.insert(table="ImportVersionHistory",
                                columns=columns,
                                values=values)

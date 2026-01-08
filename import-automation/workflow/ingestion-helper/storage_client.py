@@ -88,12 +88,12 @@ class StorageClient:
             output_dir = import_name.replace(':', '/')
             version_file = self.bucket.blob(
                 os.path.join(output_dir, 'latest_version.txt'))
-            version_file.upload_from_string(version)
             self.bucket.copy_blob(
                 self.bucket.blob(
                     os.path.join(output_dir, version,
                                  'import_metadata_mcf.mcf')), self.bucket,
                 os.path.join(output_dir, 'import_metadata_mcf.mcf'))
+            version_file.upload_from_string(version)
         except exceptions.NotFound as e:
             logging.error(f'Error updating version file for {import_name}: {e}')
             raise

@@ -42,6 +42,7 @@ flags.DEFINE_string('location', os.environ.get('LOCATION'), 'Location')
 if not FLAGS.is_parsed():
     FLAGS(['ingestion_helper'])
 
+
 def _validate_params(request_json, required_params):
     for param in required_params:
         if param not in request_json:
@@ -135,7 +136,7 @@ def ingestion_helper(request):
             return (validation_error, 400)
         import_name = request_json['importName']
         status = request_json['status']
-        logging.info(f'Updating {import_name} {status}')
+        logging.info(f'Updating import {import_name} to status {status}')
         params = import_utils.get_import_params(request_json)
         spanner.update_import_status(params)
         return (f"Updated import {import_name} to status {params['status']}",
@@ -153,9 +154,10 @@ def ingestion_helper(request):
         import_name = request_json['importName']
         version = request_json['version']
         comment = request_json['comment']
+        short_import_name = import_name.split(':')[-1]
         caller = import_utils.get_caller_identity(request)
         logging.info(
-            f"[ImportVersionAuditLog] Import {import_name} version {version} caller: {caller} comment: {comment}"
+            f"Import {short_import_name} version {version} caller: {caller} comment: {comment}"
         )
         if version == 'staging':
             version = storage.get_staging_version(import_name)
@@ -163,8 +165,8 @@ def ingestion_helper(request):
         params = import_utils.create_import_params(summary)
         params['status'] = 'READY'
         storage.update_version_file(import_name, version)
-        spanner.update_version_history(import_name, version, comment)
+        spanner.update_version_history(import_name, version, caller, comment)
         spanner.update_import_status(params)
-        return (f'Updated import {import_name} to version {version}', 200)
+        return (f'Updated import {short_import_name} to version {version}', 200)
     else:
         return (f'Unknown actionType: {actionType}', 400)
