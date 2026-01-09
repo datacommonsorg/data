@@ -33,22 +33,26 @@ flags.DEFINE_string("historical_file", "bq-results-20250423.csv",
 DCID_MAP = {}
 IGNORE_DCIDS = set()
 
-try:
-    with open(places_csv, 'r', newline='', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            DCID_MAP[row['country code'].strip()] = row['dcid'].strip()
-except Exception as e:
-    logging.fatal(f"Failed to load dcid mapping csv: {e}")
+def _load_place_mapping():
+    try:
+        with open(places_csv, 'r', newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                DCID_MAP[row['country code'].strip()] = row['dcid'].strip()
+    except FileNotFoundError:
+        logging.fatal(f"File not found: {places_csv}")
+    except csv.Error as e:
+        logging.fatal(f"Error reading CSV {places_csv}: {e}")  
 
-try:
-    with open(skip_places_csv, 'r', newline='', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            IGNORE_DCIDS.add(row['country code'].strip())
-except Exception as e:
-    logging.fatal(f"Failed to load ignore csv: {e}")
-
+    try:
+        with open(skip_places_csv, 'r', newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                IGNORE_DCIDS.add(row['country code'].strip())
+    except FileNotFoundError:
+        logging.fatal(f"File not found: {skip_places_csv}")
+    except csv.Error as e:
+        logging.fatal(f"Error reading CSV {skip_places_csv}: {e}")
 
 def transform_worldbank_csv(input_filename,
                             writer,
@@ -93,35 +97,41 @@ def transform_worldbank_csv(input_filename,
                 elif i >= data_start_row:
                     if header and indicator_code_column_index is not None and \
                             country_code_column_index is not None and year_columns_start_index is not None:
-                        indicator_code = row[indicator_code_column_index].strip(
-                        )
-                        raw_country_code = "country/" + row[
-                            country_code_column_index].strip()
+                        indicator_code = row[indicator_code_column_index].strip()
+                        code_from_csv = row[country_code_column_index].strip()
+                        raw_country_code = "country/" + code_from_csv
 
-                        if raw_country_code in IGNORE_DCIDS:
+                        if code_from_csv in IGNORE_DCIDS:
                             continue
-
-                        if raw_country_code in DCID_MAP:
-                            country_code = DCID_MAP[raw_country_code]
+                        if code_from_csv in DCID_MAP:
+                            country_code = DCID_MAP[code_from_csv]
                         else:
                             country_code = raw_country_code
 
-                        stat_var = "worldBank/" + indicator_code.replace(
-                            '.', '_')
+                        stat_var = "worldBank/" + indicator_code.replace('.', '_')
 
                         unit_value = get_unit_by_indicator(indicator_code)
                         for j in range(year_columns_start_index, len(row)):
                             year = header[j]
                             value = row[j].strip()
                             if value:
-                                duplicate_key = (indicator_code, stat_var,
-                                                 MEASUREMENT_METHOD,
-                                                 country_code, year, unit_value)
+                                duplicate_key = (
+                                    indicator_code,
+                                    stat_var,
+                                    MEASUREMENT_METHOD,
+                                    country_code,
+                                    year,
+                                    unit_value
+                                )
                                 if duplicate_key not in processed_rows:
                                     writer.writerow([
-                                        indicator_code, stat_var,
-                                        MEASUREMENT_METHOD, country_code, year,
-                                        value, unit_value
+                                        indicator_code,
+                                        stat_var,
+                                        MEASUREMENT_METHOD,
+                                        country_code,
+                                        year,
+                                        value,
+                                        unit_value
                                     ])
                                     processed_rows.add(duplicate_key)
 
@@ -153,11 +163,12 @@ def get_unit_by_indicator(target_indicator_code):
             return ""
     except FileNotFoundError:
         return ""
-    except Exception:
+    except Exception as e:
+        logging.warning(f"Error while reading unit for indicator {target_indicator_code}: {e}")
         return ""
 
-
 def main(_):
+    _load_place_mapping()
     input_files = [
         os.path.join(input_directory, f)
         for f in os.listdir(input_directory)
@@ -165,27 +176,31 @@ def main(_):
     ]
     try:
         os.makedirs(output, exist_ok=True)
-        with open(output_file_path, 'w', newline='',
-                  encoding='utf-8') as outfile:
+        with open(output_file_path, 'w', newline='', encoding='utf-8') as outfile:
             writer = csv.writer(outfile)
             first_file_processed = False
 
             for input_file in input_files:
                 logging.info(f"Processing: {input_file}")
-                transform_worldbank_csv(input_file,
-                                        writer,
-                                        write_header=not first_file_processed)
+                transform_worldbank_csv(
+                    input_file,
+                    writer,
+                    write_header=not first_file_processed
+                )
                 first_file_processed = True
 
         logging.info(
             f"\nSuccessfully processed {len(input_files)} files. Combined output written to '{output_file_path}'"
         )
 
-        file_util.file_copy(f'{FLAGS.gs_path}{FLAGS.historical_file}',
-                            f'{output}/{FLAGS.historical_file}')
+        file_util.file_copy(
+            f'{FLAGS.gs_path}{FLAGS.historical_file}',
+            f'{output}/{FLAGS.historical_file}'
+        )
 
         expected_output_files = [
-            FLAGS.historical_file, 'transformed_data_for_all_final.csv'
+            FLAGS.historical_file,
+            'transformed_data_for_all_final.csv'
         ]
         actual_files = os.listdir(output)
         if Counter(expected_output_files) != Counter(actual_files):
@@ -198,3 +213,5 @@ def main(_):
 
 if __name__ == "__main__":
     app.run(main)
+
+
