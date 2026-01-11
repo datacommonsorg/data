@@ -1,4 +1,4 @@
-# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/*.csv --pv_map=population_1_jan_avg_median_age_pvmap.csv --config_file=population_1_jan_avg_median_age_metadata.csv --output_path=population_1_jan_avg_median_age_output" on 2026-01-11 11:09:59.485089
+# Auto generated using command: "../../../../tools/statvar_importer/stat_var_processor.py --input_data=./*.csv --pv_map=../population_1_jan_avg_median_age_pvmap.csv --config_file=../population_1_jan_avg_median_age_metadata.csv --output_path=population_1_jan_avg_median_age_output" on 2026-01-11 18:50:10.348378
 
 Node: dcid:Mean_Age_Person
 typeOf: dcid:StatisticalVariable

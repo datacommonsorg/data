@@ -1,6 +1,6 @@
 key,p1,v1,p2,v2,p3,v3
 "Population on 1st January by sex and age group (in completed years), France",observationAbout,country/FRA,populationType,Person,measuredProperty,count,,
-"Population on 1st January by sex and age group (in completed years), metropolitan France ",observationAbout,country/FXX,populationType,Person,measuredProperty,count,,
+"Population on 1st January by sex and age group (in completed years), metropolitan France",observationAbout,country/FXX,populationType,Person,measuredProperty,count,,
 Year,observationDate,{Year},#Eval,"Year = re.sub(r'\\D', '',Data)"
 All,gender,"",#Header,gender
 Males,gender,Male,#Header,gender
