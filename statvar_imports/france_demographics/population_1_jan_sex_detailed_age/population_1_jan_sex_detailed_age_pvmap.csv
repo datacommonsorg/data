@@ -1,0 +1,245 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4
+Metropolitan France,observationAbout,country/FRX,#Header,observationAbout,,,,
+France,observationAbout,country/FRA,#Header,observationAbout,,,,
+All,gender,"""""",value,{Number},,,,
+Males,gender,Male,value,{Number},,,,
+Females,gender,Female,value,{Number},,,,
+Age in completed years:0,age,Years0,,,,,,
+Age in completed years:1,age,Years1,,,,,,
+Age in completed years:2,age,Years2,,,,,,
+Age in completed years:3,age,Years3,,,,,,
+Age in completed years:4,age,Years4,,,,,,
+Age in completed years:5,age,Years5,,,,,,
+Age in completed years:6,age,Years6,,,,,,
+Age in completed years:7,age,Years7,,,,,,
+Age in completed years:8,age,Years8,,,,,,
+Age in completed years:9,age,Years9,,,,,,
+Age in completed years:10,age,Years10,,,,,,
+Age in completed years:11,age,Years11,,,,,,
+Age in completed years:12,age,Years12,,,,,,
+Age in completed years:13,age,Years13,,,,,,
+Age in completed years:14,age,Years14,,,,,,
+Age in completed years:15,age,Years15,,,,,,
+Age in completed years:16,age,Years16,,,,,,
+Age in completed years:17,age,Years17,,,,,,
+Age in completed years:18,age,Years18,,,,,,
+Age in completed years:19,age,Years19,,,,,,
+Age in completed years:20,age,Years20,,,,,,
+Age in completed years:21,age,Years21,,,,,,
+Age in completed years:22,age,Years22,,,,,,
+Age in completed years:23,age,Years23,,,,,,
+Age in completed years:24,age,Years24,,,,,,
+Age in completed years:25,age,Years25,,,,,,
+Age in completed years:26,age,Years26,,,,,,
+Age in completed years:27,age,Years27,,,,,,
+Age in completed years:28,age,Years28,,,,,,
+Age in completed years:29,age,Years29,,,,,,
+Age in completed years:30,age,Years30,,,,,,
+Age in completed years:31,age,Years31,,,,,,
+Age in completed years:32,age,Years32,,,,,,
+Age in completed years:33,age,Years33,,,,,,
+Age in completed years:34,age,Years34,,,,,,
+Age in completed years:35,age,Years35,,,,,,
+Age in completed years:36,age,Years36,,,,,,
+Age in completed years:37,age,Years37,,,,,,
+Age in completed years:38,age,Years38,,,,,,
+Age in completed years:39,age,Years39,,,,,,
+Age in completed years:40,age,Years40,,,,,,
+Age in completed years:41,age,Years41,,,,,,
+Age in completed years:42,age,Years42,,,,,,
+Age in completed years:43,age,Years43,,,,,,
+Age in completed years:44,age,Years44,,,,,,
+Age in completed years:45,age,Years45,,,,,,
+Age in completed years:46,age,Years46,,,,,,
+Age in completed years:47,age,Years47,,,,,,
+Age in completed years:48,age,Years48,,,,,,
+Age in completed years:49,age,Years49,,,,,,
+Age in completed years:50,age,Years50,,,,,,
+Age in completed years:51,age,Years51,,,,,,
+Age in completed years:52,age,Years52,,,,,,
+Age in completed years:53,age,Years53,,,,,,
+Age in completed years:54,age,Years54,,,,,,
+Age in completed years:55,age,Years55,,,,,,
+Age in completed years:56,age,Years56,,,,,,
+Age in completed years:57,age,Years57,,,,,,
+Age in completed years:58,age,Years58,,,,,,
+Age in completed years:59,age,Years59,,,,,,
+Age in completed years:60,age,Years60,,,,,,
+Age in completed years:61,age,Years61,,,,,,
+Age in completed years:62,age,Years62,,,,,,
+Age in completed years:63,age,Years63,,,,,,
+Age in completed years:64,age,Years64,,,,,,
+Age in completed years:65,age,Years65,,,,,,
+Age in completed years:66,age,Years66,,,,,,
+Age in completed years:67,age,Years67,,,,,,
+Age in completed years:68,age,Years68,,,,,,
+Age in completed years:69,age,Years69,,,,,,
+Age in completed years:70,age,Years70,,,,,,
+Age in completed years:71,age,Years71,,,,,,
+Age in completed years:72,age,Years72,,,,,,
+Age in completed years:73,age,Years73,,,,,,
+Age in completed years:74,age,Years74,,,,,,
+Age in completed years:75,age,Years75,,,,,,
+Age in completed years:76,age,Years76,,,,,,
+Age in completed years:77,age,Years77,,,,,,
+Age in completed years:78,age,Years78,,,,,,
+Age in completed years:79,age,Years79,,,,,,
+Age in completed years:80,age,Years80,,,,,,
+Age in completed years:81,age,Years81,,,,,,
+Age in completed years:82,age,Years82,,,,,,
+Age in completed years:83,age,Years83,,,,,,
+Age in completed years:84,age,Years84,,,,,,
+Age in completed years:85,age,Years85,,,,,,
+Age in completed years:86,age,Years86,,,,,,
+Age in completed years:87,age,Years87,,,,,,
+Age in completed years:88,age,Years88,,,,,,
+Age in completed years:89,age,Years89,,,,,,
+Age in completed years:90,age,Years90,,,,,,
+Age in completed years:91,age,Years91,,,,,,
+Age in completed years:92,age,Years92,,,,,,
+Age in completed years:93,age,Years93,,,,,,
+Age in completed years:94,age,Years94,,,,,,
+Age in completed years:95,age,Years95,,,,,,
+Age in completed years:96,age,Years96,,,,,,
+Age in completed years:97,age,Years97,,,,,,
+Age in completed years:98,age,Years98,,,,,,
+Age in completed years:99,age,Years99,,,,,,
+Age in completed years:99 or over,age,Years99Onwards,,,,,,
+Age in completed years:100,age,Years100,,,,,,
+Age in completed years:100 or over,age,Years100Onwards,,,,,,
+Age in completed years:101,age,Years101,,,,,,
+Age in completed years:101 or over,age,Years101Onwards,,,,,,
+Age in completed years:102,age,Years102,,,,,,
+Age in completed years:102 or over,age,Years102Onwards,,,,,,
+Age in completed years:103,age,Years103,,,,,,
+Age in completed years:103 or over,age,Years103Onwards,,,,,,
+Age in completed years:104,age,Years104,,,,,,
+Age in completed years:104 or over,age,Years104Onwards,,,,,,
+Age in completed years:105,age,Years105,,,,,,
+Age in completed years:105 or over,age,Years105Onwards,,,,,,
+Total population,#ignore,aggregrated value,,,,,,
+Population on 1st January by sex and detailed age (in completed years) - Year  1901,observationDate,1901,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1902,observationDate,1902,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1903,observationDate,1903,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1904,observationDate,1904,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1905,observationDate,1905,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1906,observationDate,1906,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1907,observationDate,1907,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1908,observationDate,1908,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1909,observationDate,1909,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1910,observationDate,1910,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1911,observationDate,1911,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1912,observationDate,1912,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1913,observationDate,1913,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1914,observationDate,1914,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1915,observationDate,1915,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1916,observationDate,1916,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1917,observationDate,1917,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1918,observationDate,1918,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1919,observationDate,1919,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1920,observationDate,1920,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1921,observationDate,1921,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1922,observationDate,1922,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1923,observationDate,1923,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1924,observationDate,1924,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1925,observationDate,1925,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1926,observationDate,1926,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1927,observationDate,1927,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1928,observationDate,1928,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1929,observationDate,1929,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1930,observationDate,1930,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1931,observationDate,1931,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1932,observationDate,1932,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1933,observationDate,1933,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1934,observationDate,1934,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1935,observationDate,1935,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1936,observationDate,1936,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1937,observationDate,1937,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1938,observationDate,1938,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1939,observationDate,1939,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1940,observationDate,1940,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1941,observationDate,1941,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1942,observationDate,1942,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1943,observationDate,1943,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1944,observationDate,1944,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1945,observationDate,1945,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1946,observationDate,1946,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1947,observationDate,1947,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1948,observationDate,1948,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1949,observationDate,1949,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1950,observationDate,1950,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1951,observationDate,1951,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1952,observationDate,1952,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1953,observationDate,1953,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1954,observationDate,1954,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1955,observationDate,1955,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1956,observationDate,1956,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1957,observationDate,1957,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1958,observationDate,1958,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1959,observationDate,1959,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1960,observationDate,1960,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1961,observationDate,1961,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1962,observationDate,1962,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1963,observationDate,1963,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1964,observationDate,1964,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1965,observationDate,1965,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1966,observationDate,1966,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1967,observationDate,1967,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1968,observationDate,1968,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1969,observationDate,1969,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1970,observationDate,1970,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1971,observationDate,1971,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1972,observationDate,1972,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1973,observationDate,1973,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1974,observationDate,1974,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1975,observationDate,1975,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1976,observationDate,1976,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1977,observationDate,1977,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1978,observationDate,1978,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1979,observationDate,1979,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1980,observationDate,1980,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1981,observationDate,1981,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1982,observationDate,1982,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1983,observationDate,1983,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1984,observationDate,1984,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1985,observationDate,1985,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1986,observationDate,1986,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1987,observationDate,1987,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1988,observationDate,1988,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1989,observationDate,1989,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1990,observationDate,1990,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1991,observationDate,1991,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1992,observationDate,1992,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1993,observationDate,1993,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1994,observationDate,1994,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1995,observationDate,1995,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1996,observationDate,1996,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1997,observationDate,1997,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1998,observationDate,1998,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  1999,observationDate,1999,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2000,observationDate,2000,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2001,observationDate,2001,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2002,observationDate,2002,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2003,observationDate,2003,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2004,observationDate,2004,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2005,observationDate,2005,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2006,observationDate,2006,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2007,observationDate,2007,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2008,observationDate,2008,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2009,observationDate,2009,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2010,observationDate,2010,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2011,observationDate,2011,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2012,observationDate,2012,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2013,observationDate,2013,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2014,observationDate,2014,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2015,observationDate,2015,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2016,observationDate,2016,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2017,observationDate,2017,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2018,observationDate,2018,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2019,observationDate,2019,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2020,observationDate,2020,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2021,observationDate,2021,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2022,observationDate,2022,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2023,observationDate,2023,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year  2024,observationDate,2024,populationType,Person,measuredProperty,count,observationAbout,country/FRA
+Population on 1st January by sex and detailed age (in completed years) - Year 2025,observationDate,2025,populationType,Person,measuredProperty,count,observationAbout,country/FRA

@@ -1,0 +1,8 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/*.csv --pv_map=annual_population_pvmap.csv --config_file=annual_population_metadata.csv --output_path=annual_population_output" on 2026-01-11 11:23:11.741794
+
+Node: dcid:Count_MortalityEvent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
