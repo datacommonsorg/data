@@ -33,45 +33,60 @@ from jinja2 import Environment, FileSystemLoader
 _FLAGS = flags.FLAGS
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-flags.DEFINE_list('input_data', None,
-                  'List of input data file paths (required)')
-flags.mark_flag_as_required('input_data')
 
-# TODO: Allow users to provide original source path and auto-generate sample data files internally
-flags.DEFINE_list('input_metadata', [],
-                  'List of input metadata file paths (optional)')
+def _define_flags():
+    try:
+        flags.DEFINE_list('input_data', None,
+                          'List of input data file paths (required)')
+        flags.mark_flag_as_required('input_data')
 
-flags.DEFINE_boolean('sdmx_dataset', False,
-                     'Whether the dataset is in SDMX format (default: False)')
+        flags.DEFINE_list('input_metadata', [],
+                          'List of input metadata file paths (optional)')
 
-flags.DEFINE_boolean('dry_run', False,
-                     'Generate prompt only without calling Gemini CLI')
+        flags.DEFINE_boolean(
+            'sdmx_dataset', False,
+            'Whether the dataset is in SDMX format (default: False)')
 
-flags.DEFINE_string('maps_api_key', None, 'Google Maps API key (optional)')
+        flags.DEFINE_boolean('dry_run', False,
+                             'Generate prompt only without calling Gemini CLI')
 
-flags.DEFINE_string('dc_api_key', None, 'Data Commons API key (optional)')
+        flags.DEFINE_string('maps_api_key', None,
+                            'Google Maps API key (optional)')
 
-flags.DEFINE_integer('max_iterations', 10,
-                     'Maximum number of attempts for statvar processor.')
+        flags.DEFINE_string('dc_api_key', None,
+                            'Data Commons API key (optional)')
 
-flags.DEFINE_boolean(
-    'skip_confirmation', False,
-    'Skip user confirmation before starting PV map generation')
+        flags.DEFINE_integer(
+            'max_iterations', 10,
+            'Maximum number of attempts for statvar processor.')
 
-flags.DEFINE_boolean(
-    'enable_sandboxing',
-    platform.system() == 'Darwin',
-    'Enable sandboxing for Gemini CLI (default: True on macOS, False elsewhere)'
-)
+        flags.DEFINE_boolean(
+            'skip_confirmation', False,
+            'Skip user confirmation before starting PV map generation')
 
-flags.DEFINE_string(
-    'output_path', 'output/output',
-    'Output path prefix for all generated files (default: output/output)')
+        flags.DEFINE_boolean(
+            'enable_sandboxing',
+            platform.system() == 'Darwin',
+            'Enable sandboxing for Gemini CLI (default: True on macOS, False elsewhere)'
+        )
 
-flags.DEFINE_string(
-    'gemini_cli', 'gemini', 'Custom path or command to invoke Gemini CLI. '
-    'Example: "/usr/local/bin/gemini". '
-    'WARNING: This value is executed in a shell - use only with trusted input.')
+        flags.DEFINE_string(
+            'output_path', 'output/output',
+            'Output path prefix for all generated files (default: output/output)'
+        )
+
+        flags.DEFINE_string(
+            'gemini_cli', 'gemini',
+            'Custom path or command to invoke Gemini CLI. '
+            'Example: "/usr/local/bin/gemini". '
+            'WARNING: This value is executed in a shell - use only with trusted input.'
+        )
+
+        flags.DEFINE_string(
+            'working_dir', None,
+            'Working directory for the generator (default: current directory)')
+    except flags.DuplicateFlagError:
+        pass
 
 
 @dataclass
@@ -93,6 +108,7 @@ class Config:
     enable_sandboxing: bool = False
     output_path: str = 'output/output'
     gemini_cli: Optional[str] = None
+    working_dir: Optional[str] = None
 
 
 @dataclass
@@ -110,7 +126,12 @@ class PVMapGenerator:
 
     def __init__(self, config: Config):
         # Define working directory once for consistent path resolution
-        self._working_dir = Path.cwd()
+        self._working_dir = Path(
+            config.working_dir).resolve() if config.working_dir else Path.cwd()
+        if self._working_dir.exists() and not self._working_dir.is_dir():
+            raise ValueError(
+                f"working_dir is not a directory: {self._working_dir}")
+        self._working_dir.mkdir(parents=True, exist_ok=True)
 
         # Copy config to avoid modifying the original
         self._config = copy.deepcopy(config)
@@ -129,14 +150,18 @@ class PVMapGenerator:
                 for path in self._config.data_config.input_metadata
             ]
 
-        # Parse output_path into directory and basename components
-        output_path = Path(self._config.output_path)
-        self._output_dir = output_path.parent
-        self._output_basename = output_path.name
+        # Parse output_path into absolute path, handling relative paths and ~ expansion
+        output_path = Path(self._config.output_path).expanduser()
+        if not output_path.is_absolute():
+            output_path = self._working_dir / output_path
+        self._output_path_abs = output_path.resolve()
+
+        self._output_dir_abs = self._output_path_abs.parent
+        self._output_basename = self._output_path_abs.name
+        self._config.output_path = str(self._output_path_abs)
 
         # Create output directory if it doesn't exist
-        output_full_dir = self._working_dir / self._output_dir
-        output_full_dir.mkdir(parents=True, exist_ok=True)
+        self._output_dir_abs.mkdir(parents=True, exist_ok=True)
 
         self._datacommons_dir = self._initialize_datacommons_dir()
 
@@ -150,7 +175,10 @@ class PVMapGenerator:
 
     def _validate_and_convert_path(self, path: str) -> Path:
         """Convert path to absolute and validate it's within working directory."""
-        real_path = Path(path).expanduser().resolve()
+        p = Path(path).expanduser()
+        if not p.is_absolute():
+            p = self._working_dir / p
+        real_path = p.resolve()
         working_dir = self._working_dir.resolve()
         try:
             real_path.relative_to(working_dir)
@@ -184,7 +212,7 @@ class PVMapGenerator:
         print(f"Generated prompt: {prompt_file}")
         print(f"Working directory: {self._working_dir}")
         print(f"Output path: {self._config.output_path}")
-        print(f"Output directory: {self._output_dir}")
+        print(f"Output directory: {self._output_dir_abs}")
         print(f"Output basename: {self._output_basename}")
         print(
             f"Sandboxing: {'Enabled' if self._config.enable_sandboxing else 'Disabled'}"
@@ -314,6 +342,7 @@ class PVMapGenerator:
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,  # Combine stderr with stdout
                 shell=True,  # Using shell to support pipe operations
+                cwd=self._working_dir,  # Run in the specified working directory
                 encoding='utf-8',
                 errors='replace',
                 bufsize=1,  # Line buffered
@@ -348,21 +377,21 @@ class PVMapGenerator:
         template = env.get_template('generate_pvmap_prompt.j2')
 
         # Calculate paths and prepare template variables
-        working_dir = str(self._working_dir)  # Use defined working directory
+        working_dir = str(self._working_dir)  # Absolute working directory
         # Point to tools/ directory (parent of agentic_import)
-        tools_dir = os.path.abspath(os.path.join(_SCRIPT_DIR, '..'))
+        tools_dir = os.path.abspath(os.path.join(_SCRIPT_DIR, '..'))  # Absolute
 
         template_vars = {
-            'working_dir':
+            'working_dir_abs':
                 working_dir,
             'python_interpreter':
                 sys.executable,
-            'script_dir':
+            'script_dir_abs':
                 tools_dir,
-            'input_data':
+            'input_data_abs':
                 str(self._config.data_config.input_data[0])
                 if self._config.data_config.input_data else "",
-            'input_metadata': [
+            'input_metadata_abs': [
                 str(path) for path in self._config.data_config.input_metadata
             ] if self._config.data_config.input_metadata else [],
             'dataset_type':
@@ -372,10 +401,10 @@ class PVMapGenerator:
             'gemini_run_id':
                 self.
                 _gemini_run_id,  # Pass the gemini run ID for backup tracking
-            'output_path':
-                self._config.output_path,  # Full path for statvar processor
-            'output_dir':
-                str(self._output_dir),  # Directory for pvmap/metadata files
+            'output_path_abs':
+                str(self._output_path_abs),  # Absolute path prefix for outputs
+            'output_dir_abs':
+                str(self._output_dir_abs),  # Directory for pvmap/metadata files
             'output_basename':
                 self._output_basename  # Base name for pvmap/metadata files
         }
@@ -406,7 +435,8 @@ def prepare_config() -> Config:
                   skip_confirmation=_FLAGS.skip_confirmation,
                   enable_sandboxing=_FLAGS.enable_sandboxing,
                   output_path=_FLAGS.output_path,
-                  gemini_cli=_FLAGS.gemini_cli)
+                  gemini_cli=_FLAGS.gemini_cli,
+                  working_dir=_FLAGS.working_dir)
 
 
 def main(_):
@@ -424,4 +454,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
