@@ -101,7 +101,7 @@ def transform_worldbank_csv(input_filename,
                             country_code_column_index is not None and year_columns_start_index is not None:
                         indicator_code = row[indicator_code_column_index].strip(
                         )
-                        code_from_csv = row[country_code_column_index].strip()
+                        code_from_csv = row[country_code_column_index]
                         raw_country_code = "country/" + code_from_csv
 
                         if code_from_csv in IGNORE_DCIDS:
