@@ -152,8 +152,7 @@ class ExecutorConfig:
     # Latest import version (overwrite)
     import_version_override: str = ''
     # Relative path to version folder for graph files.
-    graph_data_paths: List[str] = dataclasses.field(
-        default_factory=lambda: ['/*/*/*.mcf'])
+    graph_data_path: str = '/*/*/*.mcf'
     # Maximum time venv creation can take in seconds.
     venv_create_timeout: float = 3600
     # Maximum time downloading a file can take in seconds.

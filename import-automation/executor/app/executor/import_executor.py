@@ -128,7 +128,7 @@ class ImportStatusSummary:
     import_name: str
     status: ImportStatus = None
     latest_version: str = ''
-    graph_paths: list = dataclasses.field(default_factory=list)
+    graph_path: str = ''
     execution_time: int = 0  # seconds
     data_volume: int = 0  # bytes
     job_id: str = ''
@@ -829,7 +829,7 @@ class ImportExecutor:
             version = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
         import_summary.latest_version = 'gs://' + os.path.join(
             self.config.storage_prod_bucket_name, output_dir, version)
-        import_summary.graph_paths = self.config.graph_data_paths
+        import_summary.graph_path = self.config.graph_data_path
         import_summary.next_refresh = utils.next_utc_timestamp(
             import_spec.get('cron_schedule'))
 
