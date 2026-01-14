@@ -1,5 +1,5 @@
 parameter,value
 dc_api_root,https://api.datacommons.org/
-output_columns,"observationDate,value,variableMeasured,latitude,longitude,placeName,unit"
+output_columns,"observationDate,value,variableMeasured,measurementMethod,latitude,longitude,placeName,unit"
 observation_date_format,%Y-%m-%dT%H:%M:%S
 #sourceUrl,https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/gfs.20251224/00/atmos/
