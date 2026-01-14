@@ -1,298 +1,312 @@
-# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output --debug" on 2026-01-06 11:13:25.955533
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output" on 2026-01-14 08:08:17.340917
 
-Node: dcid:AbsoluteVorticity_Place_0.01mb
+Node: dcid:AbsoluteVorticity_Place_0.01MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:0.01mb
+height: [0.01 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_0.02mb
+Node: dcid:AbsoluteVorticity_Place_0.02MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:0.02mb
+height: [0.02 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_0.04mb
+Node: dcid:AbsoluteVorticity_Place_0.04MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:0.04mb
+height: [0.04 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_0.07mb
+Node: dcid:AbsoluteVorticity_Place_0.07MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:0.07mb
+height: [0.07 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_0.1mb
+Node: dcid:AbsoluteVorticity_Place_0.1MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:0.1mb
+height: [0.1 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_0.2mb
+Node: dcid:AbsoluteVorticity_Place_0.2MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:0.2mb
+height: [0.2 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_0.4mb
+Node: dcid:AbsoluteVorticity_Place_0.4MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:0.4mb
+height: [0.4 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_0.7mb
+Node: dcid:AbsoluteVorticity_Place_0.7MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:0.7mb
+height: [0.7 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_1000mb
+Node: dcid:AbsoluteVorticity_Place_1000MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [1000 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_100mb
+Node: dcid:AbsoluteVorticity_Place_100MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [100 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_10mb
+Node: dcid:AbsoluteVorticity_Place_10MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:10mb
+height: [10 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_150mb
+Node: dcid:AbsoluteVorticity_Place_150MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [150 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_15mb
+Node: dcid:AbsoluteVorticity_Place_15MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:15mb
+height: [15 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_1mb
+Node: dcid:AbsoluteVorticity_Place_1MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:1mb
+height: [1 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_200mb
+Node: dcid:AbsoluteVorticity_Place_200MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [200 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_20mb
+Node: dcid:AbsoluteVorticity_Place_20MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:20mb
+height: [20 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_250mb
+Node: dcid:AbsoluteVorticity_Place_250MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [250 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_2mb
+Node: dcid:AbsoluteVorticity_Place_2MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:2mb
+height: [2 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_300mb
+Node: dcid:AbsoluteVorticity_Place_300MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [300 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_30mb
+Node: dcid:AbsoluteVorticity_Place_30MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:30mb
+height: [30 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_350mb
+Node: dcid:AbsoluteVorticity_Place_350MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [350 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_3mb
+Node: dcid:AbsoluteVorticity_Place_3MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:3mb
+height: [3 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_400mb
+Node: dcid:AbsoluteVorticity_Place_400MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [400 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_40mb
+Node: dcid:AbsoluteVorticity_Place_40MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:40mb
+height: [40 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_450mb
+Node: dcid:AbsoluteVorticity_Place_450MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [450 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_500mb
+Node: dcid:AbsoluteVorticity_Place_500MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [500 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_50mb
+Node: dcid:AbsoluteVorticity_Place_50MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [50 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_550mb
+Node: dcid:AbsoluteVorticity_Place_550MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [550 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_5mb
+Node: dcid:AbsoluteVorticity_Place_5MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:5mb
+height: [5 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_600mb
+Node: dcid:AbsoluteVorticity_Place_600MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [600 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_650mb
+Node: dcid:AbsoluteVorticity_Place_650MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [650 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_700mb
+Node: dcid:AbsoluteVorticity_Place_700MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [700 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_70mb
+Node: dcid:AbsoluteVorticity_Place_70MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:70mb
+height: [70 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_750mb
+Node: dcid:AbsoluteVorticity_Place_750MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [750 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_7mb
+Node: dcid:AbsoluteVorticity_Place_7MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:7mb
+height: [7 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_800mb
+Node: dcid:AbsoluteVorticity_Place_800MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [800 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_850mb
+Node: dcid:AbsoluteVorticity_Place_850MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [850 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_900mb
+Node: dcid:AbsoluteVorticity_Place_900MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:900mb
+height: [900 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_925mb
+Node: dcid:AbsoluteVorticity_Place_925MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:925mb
+height: [925 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_950mb
+Node: dcid:AbsoluteVorticity_Place_950MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:950mb
+height: [950 MilliBar]
 
-Node: dcid:AbsoluteVorticity_Place_975mb
+Node: dcid:AbsoluteVorticity_Place_975MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
-height: dcid:975mb
+height: [975 MilliBar]
 
-Node: dcid:ApparentTemperature_Place_2mAboveGround
+Node: dcid:ApparentTemperature_Place_2Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:apparentTemperature
 statType: dcid:measuredValue
-height: dcid:2mAboveGround
+height: [2 Meter]
+
+Node: dcid:Area_IceCover_SurfaceLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:IceCover
+measuredProperty: dcid:area
+statType: dcid:measuredValue
+height: dcid:SurfaceLevel
+
+Node: dcid:Area_LandCover_SurfaceLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:area
+statType: dcid:measuredValue
+height: dcid:SurfaceLevel
 
 Node: dcid:Area_Place_SurfaceLevel_Vegetation
 typeOf: dcid:StatisticalVariable
@@ -305,168 +319,168 @@ landCoverType: dcid:Vegetation
 Node: dcid:BestLiftedIndex_Atmosphere_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
-measuredProperty: dcid:BestLiftedIndex
+measuredProperty: dcid:bestLiftedIndex
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:CloudCover_Place_1000mb
+Node: dcid:CloudCoverTotal_Place_1000MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [1000 MilliBar]
 
-Node: dcid:CloudCover_Place_100mb
+Node: dcid:CloudCoverTotal_Place_100MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [100 MilliBar]
 
-Node: dcid:CloudCover_Place_150mb
+Node: dcid:CloudCoverTotal_Place_150MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [150 MilliBar]
 
-Node: dcid:CloudCover_Place_200mb
+Node: dcid:CloudCoverTotal_Place_200MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [200 MilliBar]
 
-Node: dcid:CloudCover_Place_250mb
+Node: dcid:CloudCoverTotal_Place_250MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [250 MilliBar]
 
-Node: dcid:CloudCover_Place_300mb
+Node: dcid:CloudCoverTotal_Place_300MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [300 MilliBar]
 
-Node: dcid:CloudCover_Place_350mb
+Node: dcid:CloudCoverTotal_Place_350MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [350 MilliBar]
 
-Node: dcid:CloudCover_Place_400mb
+Node: dcid:CloudCoverTotal_Place_400MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [400 MilliBar]
 
-Node: dcid:CloudCover_Place_450mb
+Node: dcid:CloudCoverTotal_Place_450MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [450 MilliBar]
 
-Node: dcid:CloudCover_Place_500mb
+Node: dcid:CloudCoverTotal_Place_500MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [500 MilliBar]
 
-Node: dcid:CloudCover_Place_50mb
+Node: dcid:CloudCoverTotal_Place_50MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [50 MilliBar]
 
-Node: dcid:CloudCover_Place_550mb
+Node: dcid:CloudCoverTotal_Place_550MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [550 MilliBar]
 
-Node: dcid:CloudCover_Place_600mb
+Node: dcid:CloudCoverTotal_Place_600MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [600 MilliBar]
 
-Node: dcid:CloudCover_Place_650mb
+Node: dcid:CloudCoverTotal_Place_650MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [650 MilliBar]
 
-Node: dcid:CloudCover_Place_700mb
+Node: dcid:CloudCoverTotal_Place_700MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [700 MilliBar]
 
-Node: dcid:CloudCover_Place_750mb
+Node: dcid:CloudCoverTotal_Place_750MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [750 MilliBar]
 
-Node: dcid:CloudCover_Place_800mb
+Node: dcid:CloudCoverTotal_Place_800MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [800 MilliBar]
 
-Node: dcid:CloudCover_Place_850mb
+Node: dcid:CloudCoverTotal_Place_850MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [850 MilliBar]
 
-Node: dcid:CloudCover_Place_900mb
+Node: dcid:CloudCoverTotal_Place_900MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:900mb
+height: [900 MilliBar]
 
-Node: dcid:CloudCover_Place_925mb
+Node: dcid:CloudCoverTotal_Place_925MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:925mb
+height: [925 MilliBar]
 
-Node: dcid:CloudCover_Place_950mb
+Node: dcid:CloudCoverTotal_Place_950MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:950mb
+height: [950 MilliBar]
 
-Node: dcid:CloudCover_Place_975mb
+Node: dcid:CloudCoverTotal_Place_975MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
-height: dcid:975mb
+height: [975 MilliBar]
 
-Node: dcid:CloudCover_Place_Atmosphere
+Node: dcid:CloudCoverTotal_Place_Atmosphere
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCover
+measuredProperty: dcid:cloudCoverTotal
 statType: dcid:measuredValue
 height: dcid:Atmosphere
 
@@ -505,189 +519,189 @@ measuredProperty: dcid:cloudWater
 statType: dcid:measuredValue
 height: dcid:Atmosphere
 
-Node: dcid:Cloud_MixingRatio_Place_1000mb
+Node: dcid:Cloud_MixingRatio_Place_1000MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [1000 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_100mb
+Node: dcid:Cloud_MixingRatio_Place_100MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [100 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_150mb
+Node: dcid:Cloud_MixingRatio_Place_150MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [150 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_1HybridLevel
+Node: dcid:Cloud_MixingRatio_Place_200MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:1HybridLevel
+height: [200 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_200mb
+Node: dcid:Cloud_MixingRatio_Place_250MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [250 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_250mb
+Node: dcid:Cloud_MixingRatio_Place_300MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [300 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_300mb
+Node: dcid:Cloud_MixingRatio_Place_350MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [350 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_350mb
+Node: dcid:Cloud_MixingRatio_Place_400MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [400 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_400mb
+Node: dcid:Cloud_MixingRatio_Place_450MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [450 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_450mb
+Node: dcid:Cloud_MixingRatio_Place_500MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [500 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_500mb
+Node: dcid:Cloud_MixingRatio_Place_50MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [50 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_50mb
+Node: dcid:Cloud_MixingRatio_Place_550MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [550 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_550mb
+Node: dcid:Cloud_MixingRatio_Place_600MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [600 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_600mb
+Node: dcid:Cloud_MixingRatio_Place_650MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [650 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_650mb
+Node: dcid:Cloud_MixingRatio_Place_700MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [700 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_700mb
+Node: dcid:Cloud_MixingRatio_Place_750MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [750 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_750mb
+Node: dcid:Cloud_MixingRatio_Place_800MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [800 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_800mb
+Node: dcid:Cloud_MixingRatio_Place_850MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [850 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_850mb
+Node: dcid:Cloud_MixingRatio_Place_900MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [900 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_900mb
+Node: dcid:Cloud_MixingRatio_Place_925MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:900mb
+height: [925 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_925mb
+Node: dcid:Cloud_MixingRatio_Place_950MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:925mb
+height: [950 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_950mb
+Node: dcid:Cloud_MixingRatio_Place_975MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:950mb
+height: [975 MilliBar]
 
-Node: dcid:Cloud_MixingRatio_Place_975mb
+Node: dcid:Cloud_MixingRatio_Place_HybridLevel1
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Cloud
 statType: dcid:measuredValue
-height: dcid:975mb
+height: dcid:HybridLevel1
 
 Node: dcid:Concentration_Atmosphere_Atmosphere_Ozone
 typeOf: dcid:StatisticalVariable
@@ -697,26 +711,26 @@ statType: dcid:measuredValue
 height: dcid:Atmosphere
 pollutant: dcid:Ozone
 
-Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere_1800mbAboveGround
+Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere_180To0MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:convectiveAvailablePotentialEnergy
 statType: dcid:measuredValue
-height: dcid:180_0mbAboveGround
+height: [180 0 MilliBar]
 
-Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere_2550mbAboveGround
+Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere_255To0MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:convectiveAvailablePotentialEnergy
 statType: dcid:measuredValue
-height: dcid:255_0mbAboveGround
+height: [255 0 MilliBar]
 
-Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere_900mbAboveGround
+Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere_90To0MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:convectiveAvailablePotentialEnergy
 statType: dcid:measuredValue
-height: dcid:90_0mbAboveGround
+height: [90 0 MilliBar]
 
 Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -725,26 +739,26 @@ measuredProperty: dcid:convectiveAvailablePotentialEnergy
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:ConvectiveInhibition_Atmosphere_1800mbAboveGround
+Node: dcid:ConvectiveInhibition_Atmosphere_180To0MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:convectiveInhibition
 statType: dcid:measuredValue
-height: dcid:180_0mbAboveGround
+height: [180 0 MilliBar]
 
-Node: dcid:ConvectiveInhibition_Atmosphere_2550mbAboveGround
+Node: dcid:ConvectiveInhibition_Atmosphere_255To0MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:convectiveInhibition
 statType: dcid:measuredValue
-height: dcid:255_0mbAboveGround
+height: [255 0 MilliBar]
 
-Node: dcid:ConvectiveInhibition_Atmosphere_900mbAboveGround
+Node: dcid:ConvectiveInhibition_Atmosphere_90To0MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:convectiveInhibition
 statType: dcid:measuredValue
-height: dcid:90_0mbAboveGround
+height: [90 0 MilliBar]
 
 Node: dcid:ConvectiveInhibition_Atmosphere_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -753,180 +767,166 @@ measuredProperty: dcid:convectiveInhibition
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:Count_Graupel_1000mb
+Node: dcid:Count_Graupel_1000MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [1000 MilliBar]
 
-Node: dcid:Count_Graupel_100mb
+Node: dcid:Count_Graupel_100MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [100 MilliBar]
 
-Node: dcid:Count_Graupel_150mb
+Node: dcid:Count_Graupel_150MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [150 MilliBar]
 
-Node: dcid:Count_Graupel_1HybridLevel
+Node: dcid:Count_Graupel_200MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:1HybridLevel
+height: [200 MilliBar]
 
-Node: dcid:Count_Graupel_200mb
+Node: dcid:Count_Graupel_250MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [250 MilliBar]
 
-Node: dcid:Count_Graupel_250mb
+Node: dcid:Count_Graupel_300MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [300 MilliBar]
 
-Node: dcid:Count_Graupel_300mb
+Node: dcid:Count_Graupel_350MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [350 MilliBar]
 
-Node: dcid:Count_Graupel_350mb
+Node: dcid:Count_Graupel_400MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [400 MilliBar]
 
-Node: dcid:Count_Graupel_400mb
+Node: dcid:Count_Graupel_450MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [450 MilliBar]
 
-Node: dcid:Count_Graupel_450mb
+Node: dcid:Count_Graupel_500MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [500 MilliBar]
 
-Node: dcid:Count_Graupel_500mb
+Node: dcid:Count_Graupel_50MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [50 MilliBar]
 
-Node: dcid:Count_Graupel_50mb
+Node: dcid:Count_Graupel_550MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [550 MilliBar]
 
-Node: dcid:Count_Graupel_550mb
+Node: dcid:Count_Graupel_600MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [600 MilliBar]
 
-Node: dcid:Count_Graupel_600mb
+Node: dcid:Count_Graupel_650MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [650 MilliBar]
 
-Node: dcid:Count_Graupel_650mb
+Node: dcid:Count_Graupel_700MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [700 MilliBar]
 
-Node: dcid:Count_Graupel_700mb
+Node: dcid:Count_Graupel_750MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [750 MilliBar]
 
-Node: dcid:Count_Graupel_750mb
+Node: dcid:Count_Graupel_800MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [800 MilliBar]
 
-Node: dcid:Count_Graupel_800mb
+Node: dcid:Count_Graupel_850MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [850 MilliBar]
 
-Node: dcid:Count_Graupel_850mb
+Node: dcid:Count_Graupel_900MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [900 MilliBar]
 
-Node: dcid:Count_Graupel_900mb
+Node: dcid:Count_Graupel_925MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:900mb
+height: [925 MilliBar]
 
-Node: dcid:Count_Graupel_925mb
+Node: dcid:Count_Graupel_950MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:925mb
+height: [950 MilliBar]
 
-Node: dcid:Count_Graupel_950mb
+Node: dcid:Count_Graupel_975MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:950mb
+height: [975 MilliBar]
 
-Node: dcid:Count_Graupel_975mb
+Node: dcid:Count_Graupel_HybridLevel1
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:975mb
-
-Node: dcid:Count_IceCover_SurfaceLevel
-typeOf: dcid:StatisticalVariable
-populationType: dcid:IceCover
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-height: dcid:SurfaceLevel
-
-Node: dcid:Count_LandCover_SurfaceLevel
-typeOf: dcid:StatisticalVariable
-populationType: dcid:LandCover
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-height: dcid:SurfaceLevel
+height: dcid:HybridLevel1
 
 Node: dcid:Depth_Snow_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -935,12 +935,12 @@ measuredProperty: dcid:depth
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:DewPointTemperature_Atmosphere_2mAboveGround
+Node: dcid:DewPointTemperature_Atmosphere_2Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:dewPointTemperature
 statType: dcid:measuredValue
-height: dcid:2mAboveGround
+height: [2 Meter]
 
 Node: dcid:FieldCapacity_Soil_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -963,620 +963,620 @@ measuredProperty: dcid:frozenPrecipitation
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.01mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.01MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.01mb
+height: [0.01 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.02mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.02MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.02mb
+height: [0.02 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.04mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.04MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.04mb
+height: [0.04 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.07mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.07MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.07mb
+height: [0.07 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.1mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.1MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.1mb
+height: [0.1 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.2mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.2MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.2mb
+height: [0.2 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.4mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.4MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.4mb
+height: [0.4 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.7mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_0.7MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.7mb
+height: [0.7 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_1000mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_1000MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [1000 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_100mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_100MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [100 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_10mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_10MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:10mb
+height: [10 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_150mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_150MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [150 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_15mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_15MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:15mb
+height: [15 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_1mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_1MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:1mb
+height: [1 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_200mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_200MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [200 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_20mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_20MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:20mb
+height: [20 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_250mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_250MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [250 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_2mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_2MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:2mb
+height: [2 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_300mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_300MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [300 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_30mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_30MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:30mb
+height: [30 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_350mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_350MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [350 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_3mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_3MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:3mb
+height: [3 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_400mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_400MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [400 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_40mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_40MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:40mb
+height: [40 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_450mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_450MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [450 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_500mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_500MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [500 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_50mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_50MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [50 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_550mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_550MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [550 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_5mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_5MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:5mb
+height: [5 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_600mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_600MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [600 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_650mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_650MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [650 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_700mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_700MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [700 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_70mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_70MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:70mb
+height: [70 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_750mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_750MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [750 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_7mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_7MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:7mb
+height: [7 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_800mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_800MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [800 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_850mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_850MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [850 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_900mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_900MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:900mb
+height: [900 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_925mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_925MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:925mb
+height: [925 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_950mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_950MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:950mb
+height: [950 MilliBar]
 
-Node: dcid:GeometricVerticalVelocity_Velocity_Place_975mb
+Node: dcid:GeometricVerticalVelocity_Velocity_Place_975MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:GeometricVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:975mb
+height: [975 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_0.01mb
+Node: dcid:GeopotentialHeight_Place_0.01MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:0.01mb
+height: [0.01 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_0.02mb
+Node: dcid:GeopotentialHeight_Place_0.02MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:0.02mb
+height: [0.02 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_0.04mb
+Node: dcid:GeopotentialHeight_Place_0.04MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:0.04mb
+height: [0.04 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_0.07mb
+Node: dcid:GeopotentialHeight_Place_0.07MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:0.07mb
+height: [0.07 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_0.1mb
+Node: dcid:GeopotentialHeight_Place_0.1MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:0.1mb
+height: [0.1 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_0.2mb
+Node: dcid:GeopotentialHeight_Place_0.2MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:0.2mb
+height: [0.2 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_0.4mb
+Node: dcid:GeopotentialHeight_Place_0.4MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:0.4mb
+height: [0.4 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_0.7mb
+Node: dcid:GeopotentialHeight_Place_0.7MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:0.7mb
+height: [0.7 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_1000mb
+Node: dcid:GeopotentialHeight_Place_1000MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [1000 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_100mb
+Node: dcid:GeopotentialHeight_Place_100MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [100 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_10mb
+Node: dcid:GeopotentialHeight_Place_10MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:10mb
+height: [10 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_150mb
+Node: dcid:GeopotentialHeight_Place_150MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [150 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_15mb
+Node: dcid:GeopotentialHeight_Place_15MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:15mb
+height: [15 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_1mb
+Node: dcid:GeopotentialHeight_Place_1MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:1mb
+height: [1 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_200mb
+Node: dcid:GeopotentialHeight_Place_200MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [200 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_20mb
+Node: dcid:GeopotentialHeight_Place_20MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:20mb
+height: [20 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_250mb
+Node: dcid:GeopotentialHeight_Place_250MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [250 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_2mb
+Node: dcid:GeopotentialHeight_Place_2MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:2mb
+height: [2 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_300mb
+Node: dcid:GeopotentialHeight_Place_300MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [300 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_30mb
+Node: dcid:GeopotentialHeight_Place_30MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:30mb
+height: [30 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_350mb
+Node: dcid:GeopotentialHeight_Place_350MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [350 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_3mb
+Node: dcid:GeopotentialHeight_Place_3MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:3mb
+height: [3 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_400mb
+Node: dcid:GeopotentialHeight_Place_400MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [400 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_40mb
+Node: dcid:GeopotentialHeight_Place_40MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:40mb
+height: [40 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_450mb
+Node: dcid:GeopotentialHeight_Place_450MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [450 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_500mb
+Node: dcid:GeopotentialHeight_Place_500MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [500 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_50mb
+Node: dcid:GeopotentialHeight_Place_50MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [50 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_550mb
+Node: dcid:GeopotentialHeight_Place_550MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [550 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_5mb
+Node: dcid:GeopotentialHeight_Place_5MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:5mb
+height: [5 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_600mb
+Node: dcid:GeopotentialHeight_Place_600MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [600 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_650mb
+Node: dcid:GeopotentialHeight_Place_650MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [650 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_700mb
+Node: dcid:GeopotentialHeight_Place_700MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [700 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_70mb
+Node: dcid:GeopotentialHeight_Place_70MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:70mb
+height: [70 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_750mb
+Node: dcid:GeopotentialHeight_Place_750MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [750 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_7mb
+Node: dcid:GeopotentialHeight_Place_7MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:7mb
+height: [7 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_800mb
+Node: dcid:GeopotentialHeight_Place_800MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [800 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_850mb
+Node: dcid:GeopotentialHeight_Place_850MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [850 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_900mb
+Node: dcid:GeopotentialHeight_Place_900MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:900mb
+height: [900 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_925mb
+Node: dcid:GeopotentialHeight_Place_925MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:925mb
+height: [925 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_950mb
+Node: dcid:GeopotentialHeight_Place_950MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:950mb
+height: [950 MilliBar]
 
-Node: dcid:GeopotentialHeight_Place_975mb
+Node: dcid:GeopotentialHeight_Place_975MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
-height: dcid:975mb
+height: [975 MilliBar]
 
 Node: dcid:GeopotentialHeight_Place_CloudCeiling
 typeOf: dcid:StatisticalVariable
@@ -1584,20 +1584,6 @@ populationType: dcid:Place
 measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
 height: dcid:CloudCeiling
-
-Node: dcid:GeopotentialHeight_Place_HighestTroposphericFreezingLevel
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:geopotentialHeight
-statType: dcid:measuredValue
-height: dcid:HighestTroposphericFreezingLevel
-
-Node: dcid:GeopotentialHeight_Place_Isotherm0C
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:geopotentialHeight
-statType: dcid:measuredValue
-height: dcid:Isotherm0C
 
 Node: dcid:GeopotentialHeight_Place_MaxWind
 typeOf: dcid:StatisticalVariable
@@ -1634,12 +1620,26 @@ measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
 height: dcid:Tropopause
 
-Node: dcid:GrowthRate_Count_Ice_10mAboveMeanSeaLevel
+Node: dcid:GeopotentialHeight_Place__0_Celsius_Isotherm_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: [0 Celsius Isotherm]
+
+Node: dcid:GeopotentialHeight_Place__Highest_Tropospheric_Freezing_Level_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: [Highest Tropospheric Freezing Level]
+
+Node: dcid:GrowthRate_Count_Ice__10_Meter_Above_Mean_Sea_Level_
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Ice
 measuredProperty: dcid:count
 statType: dcid:growthRate
-height: dcid:10mAboveMeanSeaLevel
+height: [10 Meter Above Mean Sea Level]
 
 Node: dcid:HainesIndex_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -1648,716 +1648,700 @@ measuredProperty: dcid:hainesIndex
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:Humidity_Place_0.01mb_RelativeHumidity
+Node: dcid:Humidity_Place_0.01MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.01mb
+height: [0.01 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_0.01mb_SpecificHumidity
+Node: dcid:Humidity_Place_0.01MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.01mb
+height: [0.01 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_0.02mb_RelativeHumidity
+Node: dcid:Humidity_Place_0.02MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.02mb
+height: [0.02 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_0.02mb_SpecificHumidity
+Node: dcid:Humidity_Place_0.02MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.02mb
+height: [0.02 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_0.04mb_RelativeHumidity
+Node: dcid:Humidity_Place_0.04MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.04mb
+height: [0.04 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_0.04mb_SpecificHumidity
+Node: dcid:Humidity_Place_0.04MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.04mb
+height: [0.04 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_0.07mb_RelativeHumidity
+Node: dcid:Humidity_Place_0.07MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.07mb
+height: [0.07 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_0.07mb_SpecificHumidity
+Node: dcid:Humidity_Place_0.07MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.07mb
+height: [0.07 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_0.1mb_RelativeHumidity
+Node: dcid:Humidity_Place_0.1MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.1mb
+height: [0.1 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_0.1mb_SpecificHumidity
+Node: dcid:Humidity_Place_0.1MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.1mb
+height: [0.1 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_0.2mb_RelativeHumidity
+Node: dcid:Humidity_Place_0.2MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.2mb
+height: [0.2 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_0.2mb_SpecificHumidity
+Node: dcid:Humidity_Place_0.2MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.2mb
+height: [0.2 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_0.331SigmaLayer_RelativeHumidity
+Node: dcid:Humidity_Place_0.4MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.33_1SigmaLayer
+height: [0.4 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_0.4mb_RelativeHumidity
+Node: dcid:Humidity_Place_0.4MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.4mb
-humidityParameter: dcid:RelativeHumidity
-
-Node: dcid:Humidity_Place_0.4mb_SpecificHumidity
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:humidity
-statType: dcid:measuredValue
-height: dcid:0.4mb
+height: [0.4 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_0.7mb_RelativeHumidity
+Node: dcid:Humidity_Place_0.7MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.7mb
+height: [0.7 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_0.7mb_SpecificHumidity
+Node: dcid:Humidity_Place_0.7MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.7mb
+height: [0.7 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_0.995SigmaLevel_RelativeHumidity
+Node: dcid:Humidity_Place_1000MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:0.995SigmaLevel
+height: [1000 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_1000mb_RelativeHumidity
+Node: dcid:Humidity_Place_1000MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:1000mb
-humidityParameter: dcid:RelativeHumidity
-
-Node: dcid:Humidity_Place_1000mb_SpecificHumidity
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:humidity
-statType: dcid:measuredValue
-height: dcid:1000mb
+height: [1000 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_100mb_RelativeHumidity
+Node: dcid:Humidity_Place_100MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [100 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_100mb_SpecificHumidity
+Node: dcid:Humidity_Place_100MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [100 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_10mb_RelativeHumidity
+Node: dcid:Humidity_Place_10MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:10mb
+height: [10 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_10mb_SpecificHumidity
+Node: dcid:Humidity_Place_10MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:10mb
+height: [10 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_150mb_RelativeHumidity
+Node: dcid:Humidity_Place_150MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [150 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_150mb_SpecificHumidity
+Node: dcid:Humidity_Place_150MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [150 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_15mb_RelativeHumidity
+Node: dcid:Humidity_Place_15MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:15mb
+height: [15 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_15mb_SpecificHumidity
+Node: dcid:Humidity_Place_15MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:15mb
+height: [15 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_1mb_RelativeHumidity
+Node: dcid:Humidity_Place_1MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:1mb
+height: [1 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_1mb_SpecificHumidity
+Node: dcid:Humidity_Place_1MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:1mb
+height: [1 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_200mb_RelativeHumidity
+Node: dcid:Humidity_Place_200MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [200 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_200mb_SpecificHumidity
+Node: dcid:Humidity_Place_200MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [200 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_20mb_RelativeHumidity
+Node: dcid:Humidity_Place_20MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:20mb
+height: [20 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_20mb_SpecificHumidity
+Node: dcid:Humidity_Place_20MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:20mb
+height: [20 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_250mb_RelativeHumidity
+Node: dcid:Humidity_Place_250MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [250 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_250mb_SpecificHumidity
+Node: dcid:Humidity_Place_250MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [250 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_2mAboveGround_RelativeHumidity
+Node: dcid:Humidity_Place_2Meter_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:2mAboveGround
+height: [2 Meter]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_2mAboveGround_SpecificHumidity
+Node: dcid:Humidity_Place_2Meter_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:2mAboveGround
+height: [2 Meter]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_2mb_RelativeHumidity
+Node: dcid:Humidity_Place_2MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:2mb
+height: [2 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_2mb_SpecificHumidity
+Node: dcid:Humidity_Place_2MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:2mb
+height: [2 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_300mbAboveGround_RelativeHumidity
+Node: dcid:Humidity_Place_300MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:30_0mbAboveGround
+height: [300 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_300mbAboveGround_SpecificHumidity
+Node: dcid:Humidity_Place_300MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:30_0mbAboveGround
+height: [300 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_300mb_RelativeHumidity
+Node: dcid:Humidity_Place_30MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [30 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_300mb_SpecificHumidity
+Node: dcid:Humidity_Place_30MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [30 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_30mb_RelativeHumidity
+Node: dcid:Humidity_Place_30To0MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:30mb
+height: [30 0 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_30mb_SpecificHumidity
+Node: dcid:Humidity_Place_30To0MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:30mb
+height: [30 0 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_350mb_RelativeHumidity
+Node: dcid:Humidity_Place_350MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [350 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_350mb_SpecificHumidity
+Node: dcid:Humidity_Place_350MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [350 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_3mb_RelativeHumidity
+Node: dcid:Humidity_Place_3MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:3mb
+height: [3 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_3mb_SpecificHumidity
+Node: dcid:Humidity_Place_3MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:3mb
+height: [3 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_400mb_RelativeHumidity
+Node: dcid:Humidity_Place_400MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [400 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_400mb_SpecificHumidity
+Node: dcid:Humidity_Place_400MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [400 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_40mb_RelativeHumidity
+Node: dcid:Humidity_Place_40MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:40mb
+height: [40 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_40mb_SpecificHumidity
+Node: dcid:Humidity_Place_40MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:40mb
+height: [40 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_450mb_RelativeHumidity
+Node: dcid:Humidity_Place_450MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [450 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_450mb_SpecificHumidity
+Node: dcid:Humidity_Place_450MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [450 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_500mb_RelativeHumidity
+Node: dcid:Humidity_Place_500MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [500 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_500mb_SpecificHumidity
+Node: dcid:Humidity_Place_500MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [500 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_50mb_RelativeHumidity
+Node: dcid:Humidity_Place_50MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [50 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_50mb_SpecificHumidity
+Node: dcid:Humidity_Place_50MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [50 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_550mb_RelativeHumidity
+Node: dcid:Humidity_Place_550MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [550 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_550mb_SpecificHumidity
+Node: dcid:Humidity_Place_550MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [550 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_5mb_RelativeHumidity
+Node: dcid:Humidity_Place_5MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:5mb
+height: [5 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_5mb_SpecificHumidity
+Node: dcid:Humidity_Place_5MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:5mb
+height: [5 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_600mb_RelativeHumidity
+Node: dcid:Humidity_Place_600MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [600 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_600mb_SpecificHumidity
+Node: dcid:Humidity_Place_600MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [600 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_650mb_RelativeHumidity
+Node: dcid:Humidity_Place_650MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [650 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_650mb_SpecificHumidity
+Node: dcid:Humidity_Place_650MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [650 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_700mb_RelativeHumidity
+Node: dcid:Humidity_Place_700MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [700 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_700mb_SpecificHumidity
+Node: dcid:Humidity_Place_700MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [700 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_70mb_RelativeHumidity
+Node: dcid:Humidity_Place_70MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:70mb
+height: [70 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_70mb_SpecificHumidity
+Node: dcid:Humidity_Place_70MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:70mb
+height: [70 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_750mb_RelativeHumidity
+Node: dcid:Humidity_Place_750MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [750 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_750mb_SpecificHumidity
+Node: dcid:Humidity_Place_750MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [750 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_7mb_RelativeHumidity
+Node: dcid:Humidity_Place_7MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:7mb
+height: [7 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_7mb_SpecificHumidity
+Node: dcid:Humidity_Place_7MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:7mb
+height: [7 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_800mb_RelativeHumidity
+Node: dcid:Humidity_Place_800MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [800 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_800mb_SpecificHumidity
+Node: dcid:Humidity_Place_800MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [800 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_80mAboveGround_SpecificHumidity
+Node: dcid:Humidity_Place_80Meter_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:80mAboveGround
+height: [80 Meter]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_850mb_RelativeHumidity
+Node: dcid:Humidity_Place_850MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [850 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_850mb_SpecificHumidity
+Node: dcid:Humidity_Place_850MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [850 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_900mb_RelativeHumidity
+Node: dcid:Humidity_Place_900MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:900mb
+height: [900 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_900mb_SpecificHumidity
+Node: dcid:Humidity_Place_900MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:900mb
+height: [900 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_925mb_RelativeHumidity
+Node: dcid:Humidity_Place_925MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:925mb
+height: [925 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_925mb_SpecificHumidity
+Node: dcid:Humidity_Place_925MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:925mb
+height: [925 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_950mb_RelativeHumidity
+Node: dcid:Humidity_Place_950MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:950mb
+height: [950 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_950mb_SpecificHumidity
+Node: dcid:Humidity_Place_950MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:950mb
+height: [950 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_975mb_RelativeHumidity
+Node: dcid:Humidity_Place_975MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:975mb
+height: [975 MilliBar]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_975mb_SpecificHumidity
+Node: dcid:Humidity_Place_975MilliBar_SpecificHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:975mb
+height: [975 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
 Node: dcid:Humidity_Place_Atmosphere_RelativeHumidity
@@ -2368,20 +2352,36 @@ statType: dcid:measuredValue
 height: dcid:Atmosphere
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_HighestTroposphericFreezingLevel_RelativeHumidity
+Node: dcid:Humidity_Place__0.33_1_Sigma_Layer__RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:HighestTroposphericFreezingLevel
+height: [0.33 1 Sigma Layer]
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place_Isotherm0C_RelativeHumidity
+Node: dcid:Humidity_Place__0.995_Sigma_Level__RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: dcid:Isotherm0C
+height: [0.995 Sigma Level]
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place__0_Celsius_Isotherm__RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: [0 Celsius Isotherm]
+humidityParameter: dcid:RelativeHumidity
+
+Node: dcid:Humidity_Place__Highest_Tropospheric_Freezing_Level__RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: [Highest Tropospheric Freezing Level]
 humidityParameter: dcid:RelativeHumidity
 
 Node: dcid:ICAOStandardAtmosphere_Height_Atmosphere_MaxWind
@@ -2400,225 +2400,225 @@ measurementQualifier: dcid:ICAOStandardAtmosphere
 statType: dcid:measuredValue
 height: dcid:Tropopause
 
-Node: dcid:Ice_MixingRatio_Place_1000mb
+Node: dcid:Ice_MixingRatio_Place_1000MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [1000 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_100mb
+Node: dcid:Ice_MixingRatio_Place_100MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [100 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_150mb
+Node: dcid:Ice_MixingRatio_Place_150MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [150 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_1HybridLevel
+Node: dcid:Ice_MixingRatio_Place_200MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:1HybridLevel
+height: [200 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_200mb
+Node: dcid:Ice_MixingRatio_Place_250MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [250 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_250mb
+Node: dcid:Ice_MixingRatio_Place_300MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [300 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_300mb
+Node: dcid:Ice_MixingRatio_Place_350MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [350 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_350mb
+Node: dcid:Ice_MixingRatio_Place_400MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [400 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_400mb
+Node: dcid:Ice_MixingRatio_Place_450MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [450 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_450mb
+Node: dcid:Ice_MixingRatio_Place_500MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [500 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_500mb
+Node: dcid:Ice_MixingRatio_Place_50MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [50 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_50mb
+Node: dcid:Ice_MixingRatio_Place_550MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [550 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_550mb
+Node: dcid:Ice_MixingRatio_Place_600MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [600 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_600mb
+Node: dcid:Ice_MixingRatio_Place_650MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [650 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_650mb
+Node: dcid:Ice_MixingRatio_Place_700MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [700 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_700mb
+Node: dcid:Ice_MixingRatio_Place_750MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [750 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_750mb
+Node: dcid:Ice_MixingRatio_Place_800MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [800 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_800mb
+Node: dcid:Ice_MixingRatio_Place_850MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [850 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_850mb
+Node: dcid:Ice_MixingRatio_Place_900MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [900 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_900mb
+Node: dcid:Ice_MixingRatio_Place_925MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:900mb
+height: [925 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_925mb
+Node: dcid:Ice_MixingRatio_Place_950MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:925mb
+height: [950 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_950mb
+Node: dcid:Ice_MixingRatio_Place_975MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:950mb
+height: [975 MilliBar]
 
-Node: dcid:Ice_MixingRatio_Place_975mb
+Node: dcid:Ice_MixingRatio_Place_HybridLevel1
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ice
 statType: dcid:measuredValue
-height: dcid:975mb
+height: dcid:HybridLevel1
 
-Node: dcid:LiftedParcelLevel_Pressure_Atmosphere_2550mbAboveGround
+Node: dcid:LiftedParcelLevel_Pressure_Atmosphere_255To0MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:pressure
 measurementQualifier: dcid:LiftedParcelLevel
 statType: dcid:measuredValue
-height: dcid:255_0mbAboveGround
+height: [255 0 MilliBar]
 
-Node: dcid:LiquidWaterContent_Soil_0.10.4mBelowGround
+Node: dcid:LiquidWaterContent_Soil_0.1To0.4Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:liquidWaterContent
 statType: dcid:measuredValue
-depth: dcid:0.1_0.4mBelowGround
+depth: [0.1 0.4 Meter]
 
-Node: dcid:LiquidWaterContent_Soil_0.41mBelowGround
+Node: dcid:LiquidWaterContent_Soil_0.4To1Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:liquidWaterContent
 statType: dcid:measuredValue
-depth: dcid:0.4_1mBelowGround
+depth: [0.4 1 Meter]
 
-Node: dcid:LiquidWaterContent_Soil_00.1mBelowGround
+Node: dcid:LiquidWaterContent_Soil_0To0.1Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:liquidWaterContent
 statType: dcid:measuredValue
-depth: dcid:0_0.1mBelowGround
+depth: [0 0.1 Meter]
 
-Node: dcid:LiquidWaterContent_Soil_12mBelowGround
+Node: dcid:LiquidWaterContent_Soil_1To2Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:liquidWaterContent
 statType: dcid:measuredValue
-depth: dcid:1_2mBelowGround
+depth: [1 2 Meter]
 
 Node: dcid:MSLPEtaReduction_Pressure_Atmosphere_MeanSeaLevel
 typeOf: dcid:StatisticalVariable
@@ -2674,333 +2674,333 @@ statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 precipitationType: dcid:Snow
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_0.01mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.01MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:0.01mb
+height: [0.01 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_0.02mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.02MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:0.02mb
+height: [0.02 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_0.04mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.04MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:0.04mb
+height: [0.04 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_0.07mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.07MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:0.07mb
+height: [0.07 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_0.1mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.1MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:0.1mb
+height: [0.1 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_0.2mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.2MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:0.2mb
+height: [0.2 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_0.4mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.4MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:0.4mb
+height: [0.4 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_0.7mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_0.7MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:0.7mb
+height: [0.7 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_1000mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_1000MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [1000 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_100mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_100MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [100 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_10mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_10MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:10mb
+height: [10 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_150mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_150MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [150 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_15mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_15MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:15mb
+height: [15 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_1mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_1MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:1mb
+height: [1 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_200mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_200MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [200 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_20mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_20MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:20mb
+height: [20 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_250mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_250MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [250 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_2mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_2MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:2mb
+height: [2 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_300mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_300MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [300 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_30mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_30MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:30mb
+height: [30 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_350mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_350MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [350 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_3mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_3MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:3mb
+height: [3 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_400mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_400MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [400 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_40mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_40MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:40mb
+height: [40 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_450mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_450MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [450 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_500mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_500MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [500 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_50mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_50MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [50 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_550mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_550MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [550 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_5mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_5MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:5mb
+height: [5 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_600mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_600MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [600 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_650mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_650MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [650 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_700mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_700MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [700 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_70mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_70MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:70mb
+height: [70 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_750mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_750MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [750 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_7mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_7MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:7mb
+height: [7 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_800mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_800MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [800 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_850mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_850MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [850 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_900mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_900MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:900mb
+height: [900 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_925mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_925MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:925mb
+height: [925 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_950mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_950MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:950mb
+height: [950 MilliBar]
 
-Node: dcid:Ozone_MixingRatio_Atmosphere_975mb
+Node: dcid:Ozone_MixingRatio_Atmosphere_975MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Ozone
 statType: dcid:measuredValue
-height: dcid:975mb
+height: [975 MilliBar]
 
 Node: dcid:PlanetaryBoundaryLayer_Height_Atmosphere_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -3010,12 +3010,12 @@ measurementQualifier: dcid:PlanetaryBoundaryLayer
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:PotentialTemperature_Atmosphere_0.995SigmaLevel
+Node: dcid:PotentialTemperature_Atmosphere__0.995_Sigma_Level_
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:potentialTemperature
 statType: dcid:measuredValue
-height: dcid:0.995SigmaLevel
+height: [0.995 Sigma Level]
 
 Node: dcid:PrecipitableWater_Place_Atmosphere
 typeOf: dcid:StatisticalVariable
@@ -3031,348 +3031,348 @@ measuredProperty: dcid:precipitationRate
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_0.01mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.01MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.01mb
+height: [0.01 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_0.02mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.02MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.02mb
+height: [0.02 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_0.04mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.04MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.04mb
+height: [0.04 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_0.07mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.07MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.07mb
+height: [0.07 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_0.1mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.1MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.1mb
+height: [0.1 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_0.2mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.2MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.2mb
+height: [0.2 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_0.4mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.4MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.4mb
+height: [0.4 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_0.7mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.7MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.7mb
+height: [0.7 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_0.995SigmaLevel
+Node: dcid:PressureVerticalVelocity_Velocity_Place_1000MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:0.995SigmaLevel
+height: [1000 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_1000mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_100MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [100 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_100mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_10MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [10 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_10mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_150MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:10mb
+height: [150 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_150mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_15MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [15 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_15mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_1MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:15mb
+height: [1 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_1mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_200MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:1mb
+height: [200 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_200mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_20MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [20 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_20mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_250MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:20mb
+height: [250 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_250mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_2MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [2 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_2mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_300MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:2mb
+height: [300 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_300mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_30MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [30 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_30mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_350MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:30mb
+height: [350 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_350mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_3MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [3 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_3mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_400MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:3mb
+height: [400 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_400mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_40MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [40 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_40mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_450MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:40mb
+height: [450 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_450mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_500MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [500 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_500mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_50MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [50 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_50mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_550MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [550 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_550mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_5MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [5 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_5mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_600MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:5mb
+height: [600 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_600mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_650MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [650 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_650mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_700MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [700 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_700mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_70MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [70 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_70mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_750MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:70mb
+height: [750 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_750mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_7MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [7 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_7mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_800MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:7mb
+height: [800 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_800mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_850MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [850 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_850mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_900MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [900 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_900mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_925MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:900mb
+height: [925 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_925mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_950MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:925mb
+height: [950 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_950mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place_975MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:950mb
+height: [975 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place_975mb
+Node: dcid:PressureVerticalVelocity_Velocity_Place__0.995_Sigma_Level_
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
-height: dcid:975mb
+height: [0.995 Sigma Level]
 
-Node: dcid:Pressure_Atmosphere_80mAboveGround
+Node: dcid:Pressure_Atmosphere_80Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:pressure
 statType: dcid:measuredValue
-height: dcid:80mAboveGround
+height: [80 Meter]
 
 Node: dcid:Pressure_Atmosphere_MaxWind
 typeOf: dcid:StatisticalVariable
@@ -3416,203 +3416,203 @@ measuredProperty: dcid:pressure
 statType: dcid:measuredValue
 height: dcid:MeanSeaLevel
 
-Node: dcid:Rainwater_MixingRatio_Place_1000mb
+Node: dcid:Rainwater_MixingRatio_Place_1000MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [1000 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_100mb
+Node: dcid:Rainwater_MixingRatio_Place_100MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [100 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_150mb
+Node: dcid:Rainwater_MixingRatio_Place_150MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [150 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_1HybridLevel
+Node: dcid:Rainwater_MixingRatio_Place_200MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:1HybridLevel
+height: [200 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_200mb
+Node: dcid:Rainwater_MixingRatio_Place_250MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [250 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_250mb
+Node: dcid:Rainwater_MixingRatio_Place_300MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [300 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_300mb
+Node: dcid:Rainwater_MixingRatio_Place_350MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [350 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_350mb
+Node: dcid:Rainwater_MixingRatio_Place_400MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [400 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_400mb
+Node: dcid:Rainwater_MixingRatio_Place_450MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [450 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_450mb
+Node: dcid:Rainwater_MixingRatio_Place_500MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [500 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_500mb
+Node: dcid:Rainwater_MixingRatio_Place_50MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [50 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_50mb
+Node: dcid:Rainwater_MixingRatio_Place_550MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [550 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_550mb
+Node: dcid:Rainwater_MixingRatio_Place_600MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [600 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_600mb
+Node: dcid:Rainwater_MixingRatio_Place_650MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [650 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_650mb
+Node: dcid:Rainwater_MixingRatio_Place_700MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [700 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_700mb
+Node: dcid:Rainwater_MixingRatio_Place_750MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [750 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_750mb
+Node: dcid:Rainwater_MixingRatio_Place_800MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [800 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_800mb
+Node: dcid:Rainwater_MixingRatio_Place_850MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [850 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_850mb
+Node: dcid:Rainwater_MixingRatio_Place_900MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [900 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_900mb
+Node: dcid:Rainwater_MixingRatio_Place_925MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:900mb
+height: [925 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_925mb
+Node: dcid:Rainwater_MixingRatio_Place_950MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:925mb
+height: [950 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_950mb
+Node: dcid:Rainwater_MixingRatio_Place_975MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:950mb
+height: [975 MilliBar]
 
-Node: dcid:Rainwater_MixingRatio_Place_975mb
+Node: dcid:Rainwater_MixingRatio_Place_HybridLevel1
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Rainwater
 statType: dcid:measuredValue
-height: dcid:975mb
+height: dcid:HybridLevel1
 
-Node: dcid:Reflectivity_Place_1HybridLevel
+Node: dcid:Reflectivity_Place_4000Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:reflectivity
 statType: dcid:measuredValue
-height: dcid:1HybridLevel
+height: [4000 Meter]
 
-Node: dcid:Reflectivity_Place_4000mAboveGround
+Node: dcid:Reflectivity_Place_HybridLevel1
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:reflectivity
 statType: dcid:measuredValue
-height: dcid:4000mAboveGround
+height: dcid:HybridLevel1
 
 Node: dcid:SnowWaterEquivalent_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -3621,189 +3621,189 @@ measuredProperty: dcid:snowWaterEquivalent
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:Snow_MixingRatio_Place_1000mb
+Node: dcid:Snow_MixingRatio_Place_1000MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [1000 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_100mb
+Node: dcid:Snow_MixingRatio_Place_100MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [100 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_150mb
+Node: dcid:Snow_MixingRatio_Place_150MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [150 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_1HybridLevel
+Node: dcid:Snow_MixingRatio_Place_200MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:1HybridLevel
+height: [200 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_200mb
+Node: dcid:Snow_MixingRatio_Place_250MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [250 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_250mb
+Node: dcid:Snow_MixingRatio_Place_300MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [300 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_300mb
+Node: dcid:Snow_MixingRatio_Place_350MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [350 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_350mb
+Node: dcid:Snow_MixingRatio_Place_400MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [400 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_400mb
+Node: dcid:Snow_MixingRatio_Place_450MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [450 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_450mb
+Node: dcid:Snow_MixingRatio_Place_500MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [500 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_500mb
+Node: dcid:Snow_MixingRatio_Place_50MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [50 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_50mb
+Node: dcid:Snow_MixingRatio_Place_550MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [550 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_550mb
+Node: dcid:Snow_MixingRatio_Place_600MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [600 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_600mb
+Node: dcid:Snow_MixingRatio_Place_650MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [650 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_650mb
+Node: dcid:Snow_MixingRatio_Place_700MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [700 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_700mb
+Node: dcid:Snow_MixingRatio_Place_750MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [750 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_750mb
+Node: dcid:Snow_MixingRatio_Place_800MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [800 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_800mb
+Node: dcid:Snow_MixingRatio_Place_850MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [850 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_850mb
+Node: dcid:Snow_MixingRatio_Place_900MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [900 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_900mb
+Node: dcid:Snow_MixingRatio_Place_925MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:900mb
+height: [925 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_925mb
+Node: dcid:Snow_MixingRatio_Place_950MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:925mb
+height: [950 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_950mb
+Node: dcid:Snow_MixingRatio_Place_975MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:950mb
+height: [975 MilliBar]
 
-Node: dcid:Snow_MixingRatio_Place_975mb
+Node: dcid:Snow_MixingRatio_Place_HybridLevel1
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:mixingRatio
 measurementQualifier: dcid:Snow
 statType: dcid:measuredValue
-height: dcid:975mb
+height: dcid:HybridLevel1
 
 Node: dcid:SoilType_Soil_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -3812,28 +3812,28 @@ measuredProperty: dcid:soilType
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:StormMotion_Atmosphere_06000mAboveGroundLayer_UComponent
+Node: dcid:StormMotion_Atmosphere__6000-0_Meter__UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:stormMotion
 statType: dcid:measuredValue
-height: dcid:0_6000mAboveGroundLayer
+height: [6000-0 Meter]
 windComponent: dcid:UComponent
 
-Node: dcid:StormMotion_Atmosphere_06000mAboveGroundLayer_VComponent
+Node: dcid:StormMotion_Atmosphere__6000-0_Meter__VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:stormMotion
 statType: dcid:measuredValue
-height: dcid:0_6000mAboveGroundLayer
+height: [6000-0 Meter]
 windComponent: dcid:VComponent
 
-Node: dcid:StormRelativeHelicity_Atmosphere_03000mAboveGroundLayer
+Node: dcid:StormRelativeHelicity_Atmosphere__3000-0_Meter_
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:stormRelativeHelicity
 statType: dcid:measuredValue
-height: dcid:0_3000mAboveGroundLayer
+height: [3000-0 Meter]
 
 Node: dcid:SunshineDuration_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -3856,348 +3856,320 @@ measuredProperty: dcid:surfaceRoughness
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:Temperature_Place_0.01mb
+Node: dcid:Temperature_Place_0.01MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:0.01mb
+height: [0.01 MilliBar]
 
-Node: dcid:Temperature_Place_0.02mb
+Node: dcid:Temperature_Place_0.02MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:0.02mb
+height: [0.02 MilliBar]
 
-Node: dcid:Temperature_Place_0.04mb
+Node: dcid:Temperature_Place_0.04MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:0.04mb
+height: [0.04 MilliBar]
 
-Node: dcid:Temperature_Place_0.07mb
+Node: dcid:Temperature_Place_0.07MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:0.07mb
+height: [0.07 MilliBar]
 
-Node: dcid:Temperature_Place_0.1mb
+Node: dcid:Temperature_Place_0.1MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:0.1mb
+height: [0.1 MilliBar]
 
-Node: dcid:Temperature_Place_0.2mb
+Node: dcid:Temperature_Place_0.2MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:0.2mb
+height: [0.2 MilliBar]
 
-Node: dcid:Temperature_Place_0.4mb
+Node: dcid:Temperature_Place_0.4MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:0.4mb
+height: [0.4 MilliBar]
 
-Node: dcid:Temperature_Place_0.7mb
+Node: dcid:Temperature_Place_0.7MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:0.7mb
+height: [0.7 MilliBar]
 
-Node: dcid:Temperature_Place_0.995SigmaLevel
+Node: dcid:Temperature_Place_1000MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:0.995SigmaLevel
+height: [1000 MilliBar]
 
-Node: dcid:Temperature_Place_1000mb
+Node: dcid:Temperature_Place_100Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [100 Meter]
 
-Node: dcid:Temperature_Place_100mAboveGround
+Node: dcid:Temperature_Place_100MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:100mAboveGround
+height: [100 MilliBar]
 
-Node: dcid:Temperature_Place_100mb
+Node: dcid:Temperature_Place_10MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [10 MilliBar]
 
-Node: dcid:Temperature_Place_10mb
+Node: dcid:Temperature_Place_150MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:10mb
+height: [150 MilliBar]
 
-Node: dcid:Temperature_Place_150mb
+Node: dcid:Temperature_Place_15MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [15 MilliBar]
 
-Node: dcid:Temperature_Place_15mb
+Node: dcid:Temperature_Place_1MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:15mb
+height: [1 MilliBar]
 
-Node: dcid:Temperature_Place_1829mAboveMeanSeaLevel
+Node: dcid:Temperature_Place_200MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:1829mAboveMeanSeaLevel
+height: [200 MilliBar]
 
-Node: dcid:Temperature_Place_1mb
+Node: dcid:Temperature_Place_20MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:1mb
+height: [20 MilliBar]
 
-Node: dcid:Temperature_Place_200mb
+Node: dcid:Temperature_Place_250MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [250 MilliBar]
 
-Node: dcid:Temperature_Place_20mb
+Node: dcid:Temperature_Place_2Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:20mb
+height: [2 Meter]
 
-Node: dcid:Temperature_Place_250mb
+Node: dcid:Temperature_Place_2MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [2 MilliBar]
 
-Node: dcid:Temperature_Place_2743mAboveMeanSeaLevel
+Node: dcid:Temperature_Place_300MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:2743mAboveMeanSeaLevel
+height: [300 MilliBar]
 
-Node: dcid:Temperature_Place_2mAboveGround
+Node: dcid:Temperature_Place_30MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:2mAboveGround
+height: [30 MilliBar]
 
-Node: dcid:Temperature_Place_2mb
+Node: dcid:Temperature_Place_30To0MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:2mb
+height: [30 0 MilliBar]
 
-Node: dcid:Temperature_Place_300mb
+Node: dcid:Temperature_Place_350MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [350 MilliBar]
 
-Node: dcid:Temperature_Place_300mbAboveGround
+Node: dcid:Temperature_Place_3MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:30_0mbAboveGround
+height: [3 MilliBar]
 
-Node: dcid:Temperature_Place_30mb
+Node: dcid:Temperature_Place_400MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:30mb
+height: [400 MilliBar]
 
-Node: dcid:Temperature_Place_350mb
+Node: dcid:Temperature_Place_40MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [40 MilliBar]
 
-Node: dcid:Temperature_Place_3658mAboveMeanSeaLevel
+Node: dcid:Temperature_Place_450MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:3658mAboveMeanSeaLevel
+height: [450 MilliBar]
 
-Node: dcid:Temperature_Place_3mb
+Node: dcid:Temperature_Place_500MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:3mb
+height: [500 MilliBar]
 
-Node: dcid:Temperature_Place_400mb
+Node: dcid:Temperature_Place_50MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [50 MilliBar]
 
-Node: dcid:Temperature_Place_40mb
+Node: dcid:Temperature_Place_550MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:40mb
+height: [550 MilliBar]
 
-Node: dcid:Temperature_Place_450mb
+Node: dcid:Temperature_Place_5MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [5 MilliBar]
 
-Node: dcid:Temperature_Place_500mb
+Node: dcid:Temperature_Place_600MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [600 MilliBar]
 
-Node: dcid:Temperature_Place_50mb
+Node: dcid:Temperature_Place_650MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [650 MilliBar]
 
-Node: dcid:Temperature_Place_550mb
+Node: dcid:Temperature_Place_700MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [700 MilliBar]
 
-Node: dcid:Temperature_Place_5mb
+Node: dcid:Temperature_Place_70MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:5mb
+height: [70 MilliBar]
 
-Node: dcid:Temperature_Place_600mb
+Node: dcid:Temperature_Place_750MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [750 MilliBar]
 
-Node: dcid:Temperature_Place_650mb
+Node: dcid:Temperature_Place_7MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [7 MilliBar]
 
-Node: dcid:Temperature_Place_700mb
+Node: dcid:Temperature_Place_800MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [800 MilliBar]
 
-Node: dcid:Temperature_Place_70mb
+Node: dcid:Temperature_Place_80Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:70mb
+height: [80 Meter]
 
-Node: dcid:Temperature_Place_750mb
+Node: dcid:Temperature_Place_850MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [850 MilliBar]
 
-Node: dcid:Temperature_Place_7mb
+Node: dcid:Temperature_Place_900MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:7mb
+height: [900 MilliBar]
 
-Node: dcid:Temperature_Place_800mb
+Node: dcid:Temperature_Place_925MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [925 MilliBar]
 
-Node: dcid:Temperature_Place_80mAboveGround
+Node: dcid:Temperature_Place_950MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:80mAboveGround
+height: [950 MilliBar]
 
-Node: dcid:Temperature_Place_850mb
+Node: dcid:Temperature_Place_975MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-height: dcid:850mb
-
-Node: dcid:Temperature_Place_900mb
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:temperature
-statType: dcid:measuredValue
-height: dcid:900mb
-
-Node: dcid:Temperature_Place_925mb
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:temperature
-statType: dcid:measuredValue
-height: dcid:925mb
-
-Node: dcid:Temperature_Place_950mb
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:temperature
-statType: dcid:measuredValue
-height: dcid:950mb
-
-Node: dcid:Temperature_Place_975mb
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:temperature
-statType: dcid:measuredValue
-height: dcid:975mb
+height: [975 MilliBar]
 
 Node: dcid:Temperature_Place_MaxWind
 typeOf: dcid:StatisticalVariable
@@ -4234,6 +4206,34 @@ measuredProperty: dcid:temperature
 statType: dcid:measuredValue
 height: dcid:Tropopause
 
+Node: dcid:Temperature_Place__0.995_Sigma_Level_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: [0.995 Sigma Level]
+
+Node: dcid:Temperature_Place__1829_Meter_Above_Mean_Sea_Level_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: [1829 Meter Above Mean Sea Level]
+
+Node: dcid:Temperature_Place__2743_Meter_Above_Mean_Sea_Level_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: [2743 Meter Above Mean Sea Level]
+
+Node: dcid:Temperature_Place__3658_Meter_Above_Mean_Sea_Level_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: [3658 Meter Above Mean Sea Level]
+
 Node: dcid:Temperature_SeaIce_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:SeaIce
@@ -4241,33 +4241,33 @@ measuredProperty: dcid:temperature
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:Temperature_Soil_0.10.4mBelowGround
+Node: dcid:Temperature_Soil_0.1To0.4Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-depth: dcid:0.1_0.4mBelowGround
+depth: [0.1 0.4 Meter]
 
-Node: dcid:Temperature_Soil_0.41mBelowGround
+Node: dcid:Temperature_Soil_0.4To1Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-depth: dcid:0.4_1mBelowGround
+depth: [0.4 1 Meter]
 
-Node: dcid:Temperature_Soil_00.1mBelowGround
+Node: dcid:Temperature_Soil_0To0.1Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-depth: dcid:0_0.1mBelowGround
+depth: [0 0.1 Meter]
 
-Node: dcid:Temperature_Soil_12mBelowGround
+Node: dcid:Temperature_Soil_1To2Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
-depth: dcid:1_2mBelowGround
+depth: [1 2 Meter]
 
 Node: dcid:Thickness_Ice_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -4290,33 +4290,33 @@ measuredProperty: dcid:visibility
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:VolumetricSoilMoisture_Soil_0.10.4mBelowGround
+Node: dcid:VolumetricSoilMoisture_Soil_0.1To0.4Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:volumetricSoilMoisture
 statType: dcid:measuredValue
-depth: dcid:0.1_0.4mBelowGround
+depth: [0.1 0.4 Meter]
 
-Node: dcid:VolumetricSoilMoisture_Soil_0.41mBelowGround
+Node: dcid:VolumetricSoilMoisture_Soil_0.4To1Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:volumetricSoilMoisture
 statType: dcid:measuredValue
-depth: dcid:0.4_1mBelowGround
+depth: [0.4 1 Meter]
 
-Node: dcid:VolumetricSoilMoisture_Soil_00.1mBelowGround
+Node: dcid:VolumetricSoilMoisture_Soil_0To0.1Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:volumetricSoilMoisture
 statType: dcid:measuredValue
-depth: dcid:0_0.1mBelowGround
+depth: [0 0.1 Meter]
 
-Node: dcid:VolumetricSoilMoisture_Soil_12mBelowGround
+Node: dcid:VolumetricSoilMoisture_Soil_1To2Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Soil
 measuredProperty: dcid:volumetricSoilMoisture
 statType: dcid:measuredValue
-depth: dcid:1_2mBelowGround
+depth: [1 2 Meter]
 
 Node: dcid:WiltingPoint_Soil_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -4346,852 +4346,788 @@ measuredProperty: dcid:windShear
 statType: dcid:measuredValue
 height: dcid:Tropopause
 
-Node: dcid:WindSpeed_Place_0.01mb_UComponent
+Node: dcid:WindSpeed_Place_0.01MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.01mb
+height: [0.01 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_0.01mb_VComponent
+Node: dcid:WindSpeed_Place_0.01MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.01mb
+height: [0.01 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_0.02mb_UComponent
+Node: dcid:WindSpeed_Place_0.02MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.02mb
+height: [0.02 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_0.02mb_VComponent
+Node: dcid:WindSpeed_Place_0.02MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.02mb
+height: [0.02 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_0.04mb_UComponent
+Node: dcid:WindSpeed_Place_0.04MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.04mb
+height: [0.04 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_0.04mb_VComponent
+Node: dcid:WindSpeed_Place_0.04MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.04mb
+height: [0.04 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_0.07mb_UComponent
+Node: dcid:WindSpeed_Place_0.07MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.07mb
+height: [0.07 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_0.07mb_VComponent
+Node: dcid:WindSpeed_Place_0.07MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.07mb
+height: [0.07 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_0.1mb_UComponent
+Node: dcid:WindSpeed_Place_0.1MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.1mb
+height: [0.1 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_0.1mb_VComponent
+Node: dcid:WindSpeed_Place_0.1MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.1mb
+height: [0.1 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_0.2mb_UComponent
+Node: dcid:WindSpeed_Place_0.2MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.2mb
+height: [0.2 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_0.2mb_VComponent
+Node: dcid:WindSpeed_Place_0.2MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.2mb
+height: [0.2 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_0.4mb_UComponent
+Node: dcid:WindSpeed_Place_0.4MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.4mb
+height: [0.4 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_0.4mb_VComponent
+Node: dcid:WindSpeed_Place_0.4MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.4mb
+height: [0.4 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_0.7mb_UComponent
+Node: dcid:WindSpeed_Place_0.7MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.7mb
+height: [0.7 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_0.7mb_VComponent
+Node: dcid:WindSpeed_Place_0.7MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.7mb
+height: [0.7 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_0.995SigmaLevel_UComponent
+Node: dcid:WindSpeed_Place_1000MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.995SigmaLevel
+height: [1000 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_0.995SigmaLevel_VComponent
+Node: dcid:WindSpeed_Place_1000MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:0.995SigmaLevel
+height: [1000 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_1000mb_UComponent
+Node: dcid:WindSpeed_Place_100Meter_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [100 Meter]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_1000mb_VComponent
+Node: dcid:WindSpeed_Place_100Meter_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:1000mb
+height: [100 Meter]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_100mAboveGround_UComponent
+Node: dcid:WindSpeed_Place_100MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:100mAboveGround
+height: [100 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_100mAboveGround_VComponent
+Node: dcid:WindSpeed_Place_100MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:100mAboveGround
+height: [100 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_100mb_UComponent
+Node: dcid:WindSpeed_Place_10Meter_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [10 Meter]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_100mb_VComponent
+Node: dcid:WindSpeed_Place_10Meter_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:100mb
+height: [10 Meter]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_10mAboveGround_UComponent
+Node: dcid:WindSpeed_Place_10MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:10mAboveGround
+height: [10 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_10mAboveGround_VComponent
+Node: dcid:WindSpeed_Place_10MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:10mAboveGround
+height: [10 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_10mb_UComponent
+Node: dcid:WindSpeed_Place_150MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:10mb
+height: [150 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_10mb_VComponent
+Node: dcid:WindSpeed_Place_150MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:10mb
+height: [150 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_150mb_UComponent
+Node: dcid:WindSpeed_Place_15MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [15 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_150mb_VComponent
+Node: dcid:WindSpeed_Place_15MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:150mb
+height: [15 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_15mb_UComponent
+Node: dcid:WindSpeed_Place_1MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:15mb
+height: [1 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_15mb_VComponent
+Node: dcid:WindSpeed_Place_1MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:15mb
+height: [1 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_1829mAboveMeanSeaLevel_UComponent
+Node: dcid:WindSpeed_Place_200MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:1829mAboveMeanSeaLevel
+height: [200 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_1829mAboveMeanSeaLevel_VComponent
+Node: dcid:WindSpeed_Place_200MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:1829mAboveMeanSeaLevel
+height: [200 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_1mb_UComponent
+Node: dcid:WindSpeed_Place_20Meter_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:1mb
+height: [20 Meter]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_1mb_VComponent
+Node: dcid:WindSpeed_Place_20Meter_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:1mb
+height: [20 Meter]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_200mb_UComponent
+Node: dcid:WindSpeed_Place_20MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [20 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_200mb_VComponent
+Node: dcid:WindSpeed_Place_20MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:200mb
+height: [20 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_20mAboveGround_UComponent
+Node: dcid:WindSpeed_Place_250MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:20mAboveGround
+height: [250 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_20mAboveGround_VComponent
+Node: dcid:WindSpeed_Place_250MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:20mAboveGround
+height: [250 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_20mb_UComponent
+Node: dcid:WindSpeed_Place_2MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:20mb
+height: [2 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_20mb_VComponent
+Node: dcid:WindSpeed_Place_2MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:20mb
+height: [2 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_250mb_UComponent
+Node: dcid:WindSpeed_Place_300MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [300 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_250mb_VComponent
+Node: dcid:WindSpeed_Place_300MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:250mb
+height: [300 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_2743mAboveMeanSeaLevel_UComponent
+Node: dcid:WindSpeed_Place_30Meter_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:2743mAboveMeanSeaLevel
+height: [30 Meter]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_2743mAboveMeanSeaLevel_VComponent
+Node: dcid:WindSpeed_Place_30Meter_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:2743mAboveMeanSeaLevel
+height: [30 Meter]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_2mb_UComponent
+Node: dcid:WindSpeed_Place_30MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:2mb
+height: [30 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_2mb_VComponent
+Node: dcid:WindSpeed_Place_30MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:2mb
+height: [30 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_300mbAboveGround_UComponent
+Node: dcid:WindSpeed_Place_30To0MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:30_0mbAboveGround
+height: [30 0 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_300mbAboveGround_VComponent
+Node: dcid:WindSpeed_Place_30To0MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:30_0mbAboveGround
+height: [30 0 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_300mb_UComponent
+Node: dcid:WindSpeed_Place_350MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [350 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_300mb_VComponent
+Node: dcid:WindSpeed_Place_350MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:300mb
+height: [350 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_30mAboveGround_UComponent
+Node: dcid:WindSpeed_Place_3MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:30mAboveGround
+height: [3 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_30mAboveGround_VComponent
+Node: dcid:WindSpeed_Place_3MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:30mAboveGround
+height: [3 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_30mb_UComponent
+Node: dcid:WindSpeed_Place_400MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:30mb
+height: [400 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_30mb_VComponent
+Node: dcid:WindSpeed_Place_400MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:30mb
+height: [400 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_350mb_UComponent
+Node: dcid:WindSpeed_Place_40Meter_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [40 Meter]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_350mb_VComponent
+Node: dcid:WindSpeed_Place_40Meter_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:350mb
+height: [40 Meter]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_3658mAboveMeanSeaLevel_UComponent
+Node: dcid:WindSpeed_Place_40MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:3658mAboveMeanSeaLevel
+height: [40 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_3658mAboveMeanSeaLevel_VComponent
+Node: dcid:WindSpeed_Place_40MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:3658mAboveMeanSeaLevel
+height: [40 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_3mb_UComponent
+Node: dcid:WindSpeed_Place_450MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:3mb
+height: [450 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_3mb_VComponent
+Node: dcid:WindSpeed_Place_450MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:3mb
+height: [450 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_400mb_UComponent
+Node: dcid:WindSpeed_Place_500MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [500 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_400mb_VComponent
+Node: dcid:WindSpeed_Place_500MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:400mb
+height: [500 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_40mAboveGround_UComponent
+Node: dcid:WindSpeed_Place_50Meter_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:40mAboveGround
+height: [50 Meter]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_40mAboveGround_VComponent
+Node: dcid:WindSpeed_Place_50Meter_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:40mAboveGround
+height: [50 Meter]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_40mb_UComponent
+Node: dcid:WindSpeed_Place_50MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:40mb
+height: [50 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_40mb_VComponent
+Node: dcid:WindSpeed_Place_50MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:40mb
+height: [50 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_450mb_UComponent
+Node: dcid:WindSpeed_Place_550MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [550 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_450mb_VComponent
+Node: dcid:WindSpeed_Place_550MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:450mb
+height: [550 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_500mb_UComponent
+Node: dcid:WindSpeed_Place_5MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [5 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_500mb_VComponent
+Node: dcid:WindSpeed_Place_5MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:500mb
+height: [5 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_50mAboveGround_UComponent
+Node: dcid:WindSpeed_Place_600MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:50mAboveGround
+height: [600 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_50mAboveGround_VComponent
+Node: dcid:WindSpeed_Place_600MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:50mAboveGround
+height: [600 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_50mb_UComponent
+Node: dcid:WindSpeed_Place_650MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [650 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_50mb_VComponent
+Node: dcid:WindSpeed_Place_650MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:50mb
+height: [650 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_550mb_UComponent
+Node: dcid:WindSpeed_Place_700MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [700 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_550mb_VComponent
+Node: dcid:WindSpeed_Place_700MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:550mb
+height: [700 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_5mb_UComponent
+Node: dcid:WindSpeed_Place_70MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:5mb
+height: [70 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_5mb_VComponent
+Node: dcid:WindSpeed_Place_70MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:5mb
+height: [70 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_600mb_UComponent
+Node: dcid:WindSpeed_Place_750MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [750 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_600mb_VComponent
+Node: dcid:WindSpeed_Place_750MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:600mb
+height: [750 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_650mb_UComponent
+Node: dcid:WindSpeed_Place_7MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [7 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_650mb_VComponent
+Node: dcid:WindSpeed_Place_7MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:650mb
+height: [7 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_700mb_UComponent
+Node: dcid:WindSpeed_Place_800MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [800 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_700mb_VComponent
+Node: dcid:WindSpeed_Place_800MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:700mb
+height: [800 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_70mb_UComponent
+Node: dcid:WindSpeed_Place_80Meter_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:70mb
+height: [80 Meter]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_70mb_VComponent
+Node: dcid:WindSpeed_Place_80Meter_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:70mb
+height: [80 Meter]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_750mb_UComponent
+Node: dcid:WindSpeed_Place_850MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [850 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_750mb_VComponent
+Node: dcid:WindSpeed_Place_850MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:750mb
+height: [850 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_7mb_UComponent
+Node: dcid:WindSpeed_Place_900MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:7mb
+height: [900 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_7mb_VComponent
+Node: dcid:WindSpeed_Place_900MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:7mb
+height: [900 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_800mb_UComponent
+Node: dcid:WindSpeed_Place_925MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [925 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_800mb_VComponent
+Node: dcid:WindSpeed_Place_925MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:800mb
+height: [925 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_80mAboveGround_UComponent
+Node: dcid:WindSpeed_Place_950MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:80mAboveGround
+height: [950 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_80mAboveGround_VComponent
+Node: dcid:WindSpeed_Place_950MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:80mAboveGround
+height: [950 MilliBar]
 windComponent: dcid:VComponent
 
-Node: dcid:WindSpeed_Place_850mb_UComponent
+Node: dcid:WindSpeed_Place_975MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:850mb
+height: [975 MilliBar]
 windComponent: dcid:UComponent
 
-Node: dcid:WindSpeed_Place_850mb_VComponent
+Node: dcid:WindSpeed_Place_975MilliBar_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
-height: dcid:850mb
-windComponent: dcid:VComponent
-
-Node: dcid:WindSpeed_Place_900mb_UComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: dcid:900mb
-windComponent: dcid:UComponent
-
-Node: dcid:WindSpeed_Place_900mb_VComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: dcid:900mb
-windComponent: dcid:VComponent
-
-Node: dcid:WindSpeed_Place_925mb_UComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: dcid:925mb
-windComponent: dcid:UComponent
-
-Node: dcid:WindSpeed_Place_925mb_VComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: dcid:925mb
-windComponent: dcid:VComponent
-
-Node: dcid:WindSpeed_Place_950mb_UComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: dcid:950mb
-windComponent: dcid:UComponent
-
-Node: dcid:WindSpeed_Place_950mb_VComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: dcid:950mb
-windComponent: dcid:VComponent
-
-Node: dcid:WindSpeed_Place_975mb_UComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: dcid:975mb
-windComponent: dcid:UComponent
-
-Node: dcid:WindSpeed_Place_975mb_VComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: dcid:975mb
+height: [975 MilliBar]
 windComponent: dcid:VComponent
 
 Node: dcid:WindSpeed_Place_MaxWind_UComponent
@@ -5272,5 +5208,69 @@ populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
 height: dcid:Tropopause
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place__0.995_Sigma_Level__UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [0.995 Sigma Level]
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place__0.995_Sigma_Level__VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [0.995 Sigma Level]
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place__1829_Meter_Above_Mean_Sea_Level__UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [1829 Meter Above Mean Sea Level]
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place__1829_Meter_Above_Mean_Sea_Level__VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [1829 Meter Above Mean Sea Level]
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place__2743_Meter_Above_Mean_Sea_Level__UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [2743 Meter Above Mean Sea Level]
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place__2743_Meter_Above_Mean_Sea_Level__VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [2743 Meter Above Mean Sea Level]
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place__3658_Meter_Above_Mean_Sea_Level__UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [3658 Meter Above Mean Sea Level]
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place__3658_Meter_Above_Mean_Sea_Level__VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [3658 Meter Above Mean Sea Level]
 windComponent: dcid:VComponent
 
