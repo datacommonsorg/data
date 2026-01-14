@@ -52,7 +52,8 @@ from tools.agentic_import.sdmx_pipeline_config import (  # pylint: disable=impor
     PipelineConfig, RunConfig, SampleConfig, SdmxConfig, SdmxDataflowConfig)
 from tools.agentic_import.sdmx_pipeline_steps import (  # pylint: disable=import-error
     CreateDcConfigStep, CreateSampleStep, CreateSchemaMapStep, DownloadDataStep,
-    DownloadMetadataStep, ProcessFullDataStep, SdmxStep, _run_command)
+    DownloadMetadataStep, ExtractMetadataStep, ProcessFullDataStep, SdmxStep,
+    _run_command)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
 
@@ -369,6 +370,7 @@ class PlanningTest(unittest.TestCase):
         self.assertEqual(names_all, [
             "download-data",
             "download-metadata",
+            "extract-metadata",
             "create-sample",
             "create-schema-mapping",
             "process-full-data",
@@ -381,6 +383,7 @@ class PlanningTest(unittest.TestCase):
         state = self._state_with({
             "download-data": ("1", "succeeded", newer),
             "download-metadata": ("1", "succeeded", older),
+            "extract-metadata": ("1", "succeeded", older),
             "create-sample": ("1", "succeeded", older),
             "create-schema-mapping": ("1", "succeeded", older),
             "process-full-data": ("1", "succeeded", older),
@@ -390,6 +393,7 @@ class PlanningTest(unittest.TestCase):
         names = self._names_from_builder(cfg, state=state)
         self.assertEqual(names, [
             "download-metadata",
+            "extract-metadata",
             "create-sample",
             "create-schema-mapping",
             "process-full-data",
@@ -443,6 +447,7 @@ class PlanningTest(unittest.TestCase):
         state = self._state_with({
             "download-data": ("1", "succeeded", 1_000),
             "download-metadata": ("1", "succeeded", 1_000),
+            "extract-metadata": ("1", "succeeded", 1_000),
             "create-sample": ("1", "succeeded", 1_000),
             "create-schema-mapping": ("1", "succeeded", 1_000),
             "process-full-data": ("1", "succeeded", 1_000),
@@ -548,11 +553,12 @@ class RunPipelineTest(SdmxTestBase):
         self.assertEqual(state["dataset_prefix"], "demo")
         self.assertEqual(state["command"], command)
         self.assertEqual(state["critical_input_hash"], expected_hash)
-        self.assertEqual(len(state["steps"]), 6)
+        self.assertEqual(len(state["steps"]), 7)
 
         for step_name in [
-                "download-data", "download-metadata", "create-sample",
-                "create-schema-mapping", "process-full-data", "create-dc-config"
+                "download-data", "download-metadata", "extract-metadata",
+                "create-sample", "create-schema-mapping", "process-full-data",
+                "create-dc-config"
         ]:
             self.assertIn(step_name, state["steps"])
             self.assertEqual(state["steps"][step_name]["status"], "succeeded")
@@ -767,6 +773,37 @@ class SdmxStepTest(SdmxTestBase):
             cmd_contains="download-metadata",
         )
 
+    def test_extract_metadata_step_caches_plan(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = ExtractMetadataStep(name="test-step", config=config)
+        # Cache the resolved command and paths for the extractor step.
+        self._assert_step_caches_plan(
+            step,
+            command_contains=["sdmx_metadata_extractor.py"],
+            path_attrs=["input_path", "output_path"],
+        )
+
+    def test_extract_metadata_step_run_and_dry_run_use_same_plan(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = ExtractMetadataStep(name="test-step", config=config)
+        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+        # Dry run and run should share the same extractor command plan.
+        self._assert_run_and_dry_run_use_same_plan(
+            step,
+            log_contains="sdmx_metadata_extractor.py",
+            cmd_contains="sdmx_metadata_extractor.py",
+        )
+
     def test_download_data_step_caches_plan(self) -> None:
         config = PipelineConfig(
             sdmx=SdmxConfig(
@@ -904,6 +941,35 @@ class SdmxStepTest(SdmxTestBase):
             ],
             path_attrs=["sample_path", "metadata_path", "output_prefix"],
         )
+
+    def test_create_schema_map_step_prefers_extracted_metadata(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = CreateSchemaMapStep(name="test-step", config=config)
+        (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
+        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+        (Path(self._tmpdir) / "demo_metadata.json").write_text("{}")
+        context = step._prepare_command()
+        # Prefer the extracted JSON when both formats are available.
+        self.assertEqual(context.metadata_path.name, "demo_metadata.json")
+
+    def test_create_schema_map_step_uses_xml_when_json_missing(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = CreateSchemaMapStep(name="test-step", config=config)
+        (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
+        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+        context = step._prepare_command()
+        # If JSON metadata is missing, fall back to the XML file.
+        self.assertEqual(context.metadata_path.name, "demo_metadata.xml")
 
     def test_create_schema_map_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(run=RunConfig(

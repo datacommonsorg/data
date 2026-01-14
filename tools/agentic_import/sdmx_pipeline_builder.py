@@ -24,7 +24,7 @@ from tools.agentic_import.pipeline import Pipeline, Step
 from tools.agentic_import.sdmx_pipeline_config import PipelineConfig
 from tools.agentic_import.sdmx_pipeline_steps import (
     CreateDcConfigStep, CreateSampleStep, CreateSchemaMapStep, DownloadDataStep,
-    DownloadMetadataStep, ProcessFullDataStep)
+    DownloadMetadataStep, ExtractMetadataStep, ProcessFullDataStep)
 from tools.agentic_import.state_handler import PipelineState
 
 
@@ -202,6 +202,7 @@ def build_steps(config: PipelineConfig) -> list[Step]:
     return [
         DownloadDataStep(name="download-data", config=config),
         DownloadMetadataStep(name="download-metadata", config=config),
+        ExtractMetadataStep(name="extract-metadata", config=config),
         CreateSampleStep(name="create-sample", config=config),
         CreateSchemaMapStep(name="create-schema-mapping", config=config),
         ProcessFullDataStep(name="process-full-data", config=config),
