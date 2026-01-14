@@ -763,9 +763,20 @@ class SdmxStepTest(SdmxTestBase):
             ),
         )
         step = DownloadMetadataStep(name="test-step", config=config)
+        working_dir = Path(self._tmpdir).resolve()
+        expected_command = [
+            sys.executable,
+            str(Path(_PROJECT_ROOT) / "tools" / "sdmx_import" / "sdmx_cli.py"),
+            "download-metadata",
+            "--endpoint=https://example.com",
+            "--agency=AGENCY",
+            "--dataflow=FLOW",
+            f"--output_path={working_dir / 'demo_metadata.xml'}",
+            "--verbose",
+        ]
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            cmd_contains="download-metadata",
+            expected_command=expected_command,
         )
 
     def test_extract_metadata_step_caches_plan(self) -> None:
@@ -852,9 +863,20 @@ class SdmxStepTest(SdmxTestBase):
             ),
         )
         step = DownloadDataStep(name="test-step", config=config)
+        working_dir = Path(self._tmpdir).resolve()
+        expected_command = [
+            sys.executable,
+            str(Path(_PROJECT_ROOT) / "tools" / "sdmx_import" / "sdmx_cli.py"),
+            "download-data",
+            "--endpoint=https://example.com",
+            "--agency=AGENCY",
+            "--dataflow=FLOW",
+            f"--output_path={working_dir / 'demo_data.csv'}",
+            "--verbose",
+        ]
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            cmd_contains="download-data",
+            expected_command=expected_command,
         )
 
     def test_create_sample_step_caches_plan(self) -> None:
@@ -889,9 +911,19 @@ class SdmxStepTest(SdmxTestBase):
         # Create test input file for run()
         input_path = Path(self._tmpdir) / "demo_data.csv"
         input_path.write_text("header\nrow1")
+        working_dir = Path(self._tmpdir).resolve()
+        expected_command = [
+            sys.executable,
+            str(
+                Path(_PROJECT_ROOT) / "tools" / "statvar_importer" /
+                "data_sampler.py"),
+            f"--sampler_input={working_dir / 'demo_data.csv'}",
+            f"--sampler_output={working_dir / 'demo_sample.csv'}",
+            "--sampler_output_rows=500",
+        ]
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            cmd_contains="data_sampler.py",
+            expected_command=expected_command,
         )
 
     def test_create_sample_step_dry_run_succeeds_if_input_missing(self) -> None:
@@ -984,9 +1016,21 @@ class SdmxStepTest(SdmxTestBase):
         # Create test input files for run()
         (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
         (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+        working_dir = Path(self._tmpdir).resolve()
+        expected_command = [
+            sys.executable,
+            str(
+                Path(_PROJECT_ROOT) / "tools" / "agentic_import" /
+                "pvmap_generator.py"),
+            f"--input_data={working_dir / 'demo_sample.csv'}",
+            f"--input_metadata={working_dir / 'demo_metadata.xml'}",
+            "--sdmx_dataset",
+            f"--output_path={working_dir / 'sample_output' / 'demo'}",
+            f"--working_dir={working_dir}",
+        ]
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            cmd_contains="pvmap_generator.py",
+            expected_command=expected_command,
         )
 
     def test_create_schema_map_step_dry_run_succeeds_if_input_missing(

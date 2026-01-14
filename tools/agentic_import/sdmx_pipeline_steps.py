@@ -248,8 +248,7 @@ class ExtractMetadataStep(SdmxStep):
                 f"Starting SDMX metadata extraction: {' '.join(context.full_command)} -> {context.output_path}"
             )
         else:
-            logging.info(
-                f"Extracting SDMX metadata to {context.output_path}")
+            logging.info(f"Extracting SDMX metadata to {context.output_path}")
         _run_command(context.full_command, verbose=self._config.run.verbose)
 
     def dry_run(self) -> None:
