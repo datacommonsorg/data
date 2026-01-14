@@ -129,7 +129,7 @@ def process(_INPUT_FILE_PATH, _OUTOUT_FILE_PATH, date_from_start_processing):
             # Format "date" column as "YYYY-MM"
             in_df["date"] = in_df["year"] + "-" + in_df["period"].str[-2:]
             in_df = in_df[["date", "value"]]
-            in_df["value"] = in_df["value"].replace("-", np.nan)
+            in_df["value"] = pd.to_numeric(in_df["value"], errors='coerce')
             in_df.columns = ["date", "cpi"]
             # Convert 'date' column to datetime format
             logging.info(
