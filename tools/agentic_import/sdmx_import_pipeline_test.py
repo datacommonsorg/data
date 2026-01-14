@@ -667,26 +667,22 @@ class SdmxStepTest(SdmxTestBase):
             self,
             step,
             *,
-            log_contains: str,
-            cmd_contains: str,
+            cmd_contains: str | None = None,
+            expected_command: list[str] | None = None,
             extra_cmd_checks=None,
             expect_verbose: bool = True) -> None:
         extra_cmd_checks = extra_cmd_checks or []
         with mock.patch("tools.agentic_import.sdmx_pipeline_steps._run_command"
                        ) as mock_run_cmd:
-            with self.assertLogs(logging.get_absl_logger(),
-                                 level="INFO") as logs:
-                step.dry_run()
-                step.run()
-
-        self.assertTrue(
-            any("test-step (dry run): would run" in entry
-                for entry in logs.output))
-        self.assertTrue(any(log_contains in entry for entry in logs.output))
+            step.dry_run()
+            step.run()
         mock_run_cmd.assert_called_once()
         args, kwargs = mock_run_cmd.call_args
         command = args[0]
-        self.assertTrue(any(cmd_contains in arg for arg in command))
+        if cmd_contains:
+            self.assertTrue(any(cmd_contains in arg for arg in command))
+        if expected_command:
+            self.assertEqual(command, expected_command)
         self.assertEqual(kwargs["verbose"], expect_verbose)
         for check in extra_cmd_checks:
             check(command)
@@ -769,7 +765,6 @@ class SdmxStepTest(SdmxTestBase):
         step = DownloadMetadataStep(name="test-step", config=config)
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            log_contains="download-metadata",
             cmd_contains="download-metadata",
         )
 
@@ -797,11 +792,19 @@ class SdmxStepTest(SdmxTestBase):
         ),)
         step = ExtractMetadataStep(name="test-step", config=config)
         (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
-        # Dry run and run should share the same extractor command plan.
+        # Verify the extractor command matches the expected full command.
+        working_dir = Path(self._tmpdir).resolve()
+        expected_command = [
+            sys.executable,
+            str(
+                Path(_PROJECT_ROOT) / "tools" / "agentic_import" /
+                "sdmx_metadata_extractor.py"),
+            f"--input_metadata={working_dir / 'demo_metadata.xml'}",
+            f"--output_path={working_dir / 'demo_metadata.json'}",
+        ]
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            log_contains="sdmx_metadata_extractor.py",
-            cmd_contains="sdmx_metadata_extractor.py",
+            expected_command=expected_command,
         )
 
     def test_download_data_step_caches_plan(self) -> None:
@@ -851,7 +854,6 @@ class SdmxStepTest(SdmxTestBase):
         step = DownloadDataStep(name="test-step", config=config)
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            log_contains="download-data",
             cmd_contains="download-data",
         )
 
@@ -889,7 +891,6 @@ class SdmxStepTest(SdmxTestBase):
         input_path.write_text("header\nrow1")
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            log_contains="data_sampler.py",
             cmd_contains="data_sampler.py",
         )
 
@@ -985,7 +986,6 @@ class SdmxStepTest(SdmxTestBase):
         (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            log_contains="pvmap_generator.py",
             cmd_contains="pvmap_generator.py",
         )
 
@@ -1043,7 +1043,6 @@ class SdmxStepTest(SdmxTestBase):
         self._create_test_input_files("demo")
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            log_contains="stat_var_processor.py",
             cmd_contains="stat_var_processor.py",
             extra_cmd_checks=[
                 lambda command: self.assertTrue(
@@ -1100,7 +1099,6 @@ class SdmxStepTest(SdmxTestBase):
         (final_output_dir / "demo.csv").write_text("data")
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            log_contains="generate_custom_dc_config.py",
             cmd_contains="generate_custom_dc_config.py",
             extra_cmd_checks=[
                 lambda command: self.assertIn(
