@@ -45,11 +45,16 @@ def extract_table_number(table_name):
 
 def download_state_tables():
     try:
-        with open("config.json") as f:
+        # Get the directory where the script is located to build absolute paths
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        config_path = os.path.join(script_dir, "config.json")
+
+        with open(config_path) as f:
             config = json.load(f)
     
         base_url = config["base_url"]
-        download_dir = os.path.join(config["download_dir"])  # Save in 'source_files'
+        # Ensure download_dir is also relative to the script location
+        download_dir = os.path.join(script_dir, config["download_dir"])  # Save in 'source_files'
         
         os.makedirs(download_dir, exist_ok=True)
         
@@ -94,7 +99,7 @@ def download_state_tables():
                 logging.warning(f"Skipping unparseable table: {table_name}")
                 continue
             
-            if not (26 <= table_number <= 57):
+            if not (19 <= table_number <= 52):
                 logging.debug(f"Skipping table {table_number} (out of range)")
                 continue
             
