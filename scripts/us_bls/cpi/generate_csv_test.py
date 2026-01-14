@@ -23,13 +23,14 @@ MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 TEST_DATA_DIR = os.path.join(MODULE_DIR, 'test_data')
 INPUT_FILES_DIR = os.path.join(TEST_DATA_DIR, 'input_files')
 EXPECTED_OUTPUT_DIR = os.path.join(TEST_DATA_DIR, 'expected_output')
+_TEST_START_YEAR = 1946
 
 
 class TestGenerateCSV(unittest.TestCase):
 
     def test_cpi_u(self):
         with tempfile.TemporaryDirectory() as temp_dir:
-            process(INPUT_FILES_DIR, temp_dir, int(1946))
+            process(INPUT_FILES_DIR, temp_dir, _TEST_START_YEAR)
 
             generated_file = os.path.join(temp_dir, "cpi_u.csv")
             expected_file = os.path.join(EXPECTED_OUTPUT_DIR, "cpi_u.csv")
@@ -41,7 +42,7 @@ class TestGenerateCSV(unittest.TestCase):
 
     def test_cpi_w(self):
         with tempfile.TemporaryDirectory() as temp_dir:
-            process(INPUT_FILES_DIR, temp_dir, int(1946))
+            process(INPUT_FILES_DIR, temp_dir, _TEST_START_YEAR)
 
             generated_file = os.path.join(temp_dir, "cpi_w.csv")
             expected_file = os.path.join(EXPECTED_OUTPUT_DIR, "cpi_w.csv")
@@ -53,7 +54,7 @@ class TestGenerateCSV(unittest.TestCase):
 
     def test_c_cpi_u(self):
         with tempfile.TemporaryDirectory() as temp_dir:
-            process(INPUT_FILES_DIR, temp_dir, int(1946))
+            process(INPUT_FILES_DIR, temp_dir, _TEST_START_YEAR)
 
             generated_file = os.path.join(temp_dir, "c_cpi_u.csv")
             expected_file = os.path.join(EXPECTED_OUTPUT_DIR, "c_cpi_u.csv")
