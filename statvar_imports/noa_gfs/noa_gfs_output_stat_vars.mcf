@@ -1,4 +1,4 @@
-# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output" on 2026-01-14 08:08:17.340917
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output" on 2026-01-14 14:56:24.789113
 
 Node: dcid:AbsoluteVorticity_Place_0.01MilliBar
 typeOf: dcid:StatisticalVariable
@@ -1585,6 +1585,20 @@ measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
 height: dcid:CloudCeiling
 
+Node: dcid:GeopotentialHeight_Place_HighestTroposphericFreezingLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:HighestTroposphericFreezingLevel
+
+Node: dcid:GeopotentialHeight_Place_Isotherm0C
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:geopotentialHeight
+statType: dcid:measuredValue
+height: dcid:Isotherm0C
+
 Node: dcid:GeopotentialHeight_Place_MaxWind
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
@@ -1620,26 +1634,12 @@ measuredProperty: dcid:geopotentialHeight
 statType: dcid:measuredValue
 height: dcid:Tropopause
 
-Node: dcid:GeopotentialHeight_Place__0_Celsius_Isotherm_
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:geopotentialHeight
-statType: dcid:measuredValue
-height: [0 Celsius Isotherm]
-
-Node: dcid:GeopotentialHeight_Place__Highest_Tropospheric_Freezing_Level_
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:geopotentialHeight
-statType: dcid:measuredValue
-height: [Highest Tropospheric Freezing Level]
-
-Node: dcid:GrowthRate_Count_Ice__10_Meter_Above_Mean_Sea_Level_
+Node: dcid:GrowthRate_Count_Ice_10Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Ice
 measuredProperty: dcid:count
 statType: dcid:growthRate
-height: [10 Meter Above Mean Sea Level]
+height: [10 Meter]
 
 Node: dcid:HainesIndex_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -1744,6 +1744,14 @@ statType: dcid:measuredValue
 height: [0.2 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
+Node: dcid:Humidity_Place_0.33To1SigmaLayer_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.33To1SigmaLayer
+humidityParameter: dcid:RelativeHumidity
+
 Node: dcid:Humidity_Place_0.4MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
@@ -1775,6 +1783,14 @@ measuredProperty: dcid:humidity
 statType: dcid:measuredValue
 height: [0.7 MilliBar]
 humidityParameter: dcid:SpecificHumidity
+
+Node: dcid:Humidity_Place_0.995SigmaLevel_RelativeHumidity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:humidity
+statType: dcid:measuredValue
+height: dcid:0.995SigmaLevel
+humidityParameter: dcid:RelativeHumidity
 
 Node: dcid:Humidity_Place_1000MilliBar_RelativeHumidity
 typeOf: dcid:StatisticalVariable
@@ -2352,36 +2368,20 @@ statType: dcid:measuredValue
 height: dcid:Atmosphere
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place__0.33_1_Sigma_Layer__RelativeHumidity
+Node: dcid:Humidity_Place_HighestTroposphericFreezingLevel_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: [0.33 1 Sigma Layer]
+height: dcid:HighestTroposphericFreezingLevel
 humidityParameter: dcid:RelativeHumidity
 
-Node: dcid:Humidity_Place__0.995_Sigma_Level__RelativeHumidity
+Node: dcid:Humidity_Place_Isotherm0C_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:humidity
 statType: dcid:measuredValue
-height: [0.995 Sigma Level]
-humidityParameter: dcid:RelativeHumidity
-
-Node: dcid:Humidity_Place__0_Celsius_Isotherm__RelativeHumidity
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:humidity
-statType: dcid:measuredValue
-height: [0 Celsius Isotherm]
-humidityParameter: dcid:RelativeHumidity
-
-Node: dcid:Humidity_Place__Highest_Tropospheric_Freezing_Level__RelativeHumidity
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:humidity
-statType: dcid:measuredValue
-height: [Highest Tropospheric Freezing Level]
+height: dcid:Isotherm0C
 humidityParameter: dcid:RelativeHumidity
 
 Node: dcid:ICAOStandardAtmosphere_Height_Atmosphere_MaxWind
@@ -2620,13 +2620,13 @@ measuredProperty: dcid:liquidWaterContent
 statType: dcid:measuredValue
 depth: [1 2 Meter]
 
-Node: dcid:MSLPEtaReduction_Pressure_Atmosphere_MeanSeaLevel
+Node: dcid:MSLPEtaReduction_Pressure_Atmosphere_0Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:pressure
 measurementQualifier: dcid:MSLPEtaReduction
 statType: dcid:measuredValue
-height: dcid:MeanSeaLevel
+height: [0 Meter]
 
 Node: dcid:Max_CompositeReflectivity_Place_Atmosphere
 typeOf: dcid:StatisticalVariable
@@ -3010,12 +3010,12 @@ measurementQualifier: dcid:PlanetaryBoundaryLayer
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:PotentialTemperature_Atmosphere__0.995_Sigma_Level_
+Node: dcid:PotentialTemperature_Atmosphere_0.995SigmaLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:potentialTemperature
 statType: dcid:measuredValue
-height: [0.995 Sigma Level]
+height: dcid:0.995SigmaLevel
 
 Node: dcid:PrecipitableWater_Place_Atmosphere
 typeOf: dcid:StatisticalVariable
@@ -3094,6 +3094,14 @@ measuredProperty: dcid:velocity
 measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
 height: [0.7 MilliBar]
+
+Node: dcid:PressureVerticalVelocity_Velocity_Place_0.995SigmaLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:velocity
+measurementQualifier: dcid:PressureVerticalVelocity
+statType: dcid:measuredValue
+height: dcid:0.995SigmaLevel
 
 Node: dcid:PressureVerticalVelocity_Velocity_Place_1000MilliBar
 typeOf: dcid:StatisticalVariable
@@ -3359,14 +3367,6 @@ measurementQualifier: dcid:PressureVerticalVelocity
 statType: dcid:measuredValue
 height: [975 MilliBar]
 
-Node: dcid:PressureVerticalVelocity_Velocity_Place__0.995_Sigma_Level_
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:velocity
-measurementQualifier: dcid:PressureVerticalVelocity
-statType: dcid:measuredValue
-height: [0.995 Sigma Level]
-
 Node: dcid:Pressure_Atmosphere_80Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
@@ -3409,12 +3409,12 @@ measuredProperty: dcid:pressure
 statType: dcid:measuredValue
 height: dcid:Tropopause
 
-Node: dcid:Pressure_Place_MeanSeaLevel
+Node: dcid:Pressure_Place_0Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:pressure
 statType: dcid:measuredValue
-height: dcid:MeanSeaLevel
+height: [0 Meter]
 
 Node: dcid:Rainwater_MixingRatio_Place_1000MilliBar
 typeOf: dcid:StatisticalVariable
@@ -3812,28 +3812,28 @@ measuredProperty: dcid:soilType
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:StormMotion_Atmosphere__6000-0_Meter__UComponent
+Node: dcid:StormMotion_Atmosphere_6000To0Meter_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:stormMotion
 statType: dcid:measuredValue
-height: [6000-0 Meter]
+height: [6000 0 Meter]
 windComponent: dcid:UComponent
 
-Node: dcid:StormMotion_Atmosphere__6000-0_Meter__VComponent
+Node: dcid:StormMotion_Atmosphere_6000To0Meter_VComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:stormMotion
 statType: dcid:measuredValue
-height: [6000-0 Meter]
+height: [6000 0 Meter]
 windComponent: dcid:VComponent
 
-Node: dcid:StormRelativeHelicity_Atmosphere__3000-0_Meter_
+Node: dcid:StormRelativeHelicity_Atmosphere_3000To0Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:stormRelativeHelicity
 statType: dcid:measuredValue
-height: [3000-0 Meter]
+height: [3000 0 Meter]
 
 Node: dcid:SunshineDuration_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -3912,6 +3912,13 @@ measuredProperty: dcid:temperature
 statType: dcid:measuredValue
 height: [0.7 MilliBar]
 
+Node: dcid:Temperature_Place_0.995SigmaLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: dcid:0.995SigmaLevel
+
 Node: dcid:Temperature_Place_1000MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
@@ -3954,6 +3961,13 @@ measuredProperty: dcid:temperature
 statType: dcid:measuredValue
 height: [15 MilliBar]
 
+Node: dcid:Temperature_Place_1829Meter
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: [1829 Meter]
+
 Node: dcid:Temperature_Place_1MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
@@ -3981,6 +3995,13 @@ populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
 height: [250 MilliBar]
+
+Node: dcid:Temperature_Place_2743Meter
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: [2743 Meter]
 
 Node: dcid:Temperature_Place_2Meter
 typeOf: dcid:StatisticalVariable
@@ -4023,6 +4044,13 @@ populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
 height: [350 MilliBar]
+
+Node: dcid:Temperature_Place_3658Meter
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: [3658 Meter]
 
 Node: dcid:Temperature_Place_3MilliBar
 typeOf: dcid:StatisticalVariable
@@ -4205,34 +4233,6 @@ populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
 height: dcid:Tropopause
-
-Node: dcid:Temperature_Place__0.995_Sigma_Level_
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:temperature
-statType: dcid:measuredValue
-height: [0.995 Sigma Level]
-
-Node: dcid:Temperature_Place__1829_Meter_Above_Mean_Sea_Level_
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:temperature
-statType: dcid:measuredValue
-height: [1829 Meter Above Mean Sea Level]
-
-Node: dcid:Temperature_Place__2743_Meter_Above_Mean_Sea_Level_
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:temperature
-statType: dcid:measuredValue
-height: [2743 Meter Above Mean Sea Level]
-
-Node: dcid:Temperature_Place__3658_Meter_Above_Mean_Sea_Level_
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:temperature
-statType: dcid:measuredValue
-height: [3658 Meter Above Mean Sea Level]
 
 Node: dcid:Temperature_SeaIce_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -4474,6 +4474,22 @@ statType: dcid:measuredValue
 height: [0.7 MilliBar]
 windComponent: dcid:VComponent
 
+Node: dcid:WindSpeed_Place_0.995SigmaLevel_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.995SigmaLevel
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_0.995SigmaLevel_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: dcid:0.995SigmaLevel
+windComponent: dcid:VComponent
+
 Node: dcid:WindSpeed_Place_1000MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
@@ -4586,6 +4602,22 @@ statType: dcid:measuredValue
 height: [15 MilliBar]
 windComponent: dcid:VComponent
 
+Node: dcid:WindSpeed_Place_1829Meter_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [1829 Meter]
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_1829Meter_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [1829 Meter]
+windComponent: dcid:VComponent
+
 Node: dcid:WindSpeed_Place_1MilliBar_UComponent
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
@@ -4664,6 +4696,22 @@ populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
 height: [250 MilliBar]
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_2743Meter_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [2743 Meter]
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_2743Meter_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [2743 Meter]
 windComponent: dcid:VComponent
 
 Node: dcid:WindSpeed_Place_2MilliBar_UComponent
@@ -4760,6 +4808,22 @@ populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
 height: [350 MilliBar]
+windComponent: dcid:VComponent
+
+Node: dcid:WindSpeed_Place_3658Meter_UComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [3658 Meter]
+windComponent: dcid:UComponent
+
+Node: dcid:WindSpeed_Place_3658Meter_VComponent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:windSpeed
+statType: dcid:measuredValue
+height: [3658 Meter]
 windComponent: dcid:VComponent
 
 Node: dcid:WindSpeed_Place_3MilliBar_UComponent
@@ -5208,69 +5272,5 @@ populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
 height: dcid:Tropopause
-windComponent: dcid:VComponent
-
-Node: dcid:WindSpeed_Place__0.995_Sigma_Level__UComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: [0.995 Sigma Level]
-windComponent: dcid:UComponent
-
-Node: dcid:WindSpeed_Place__0.995_Sigma_Level__VComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: [0.995 Sigma Level]
-windComponent: dcid:VComponent
-
-Node: dcid:WindSpeed_Place__1829_Meter_Above_Mean_Sea_Level__UComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: [1829 Meter Above Mean Sea Level]
-windComponent: dcid:UComponent
-
-Node: dcid:WindSpeed_Place__1829_Meter_Above_Mean_Sea_Level__VComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: [1829 Meter Above Mean Sea Level]
-windComponent: dcid:VComponent
-
-Node: dcid:WindSpeed_Place__2743_Meter_Above_Mean_Sea_Level__UComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: [2743 Meter Above Mean Sea Level]
-windComponent: dcid:UComponent
-
-Node: dcid:WindSpeed_Place__2743_Meter_Above_Mean_Sea_Level__VComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: [2743 Meter Above Mean Sea Level]
-windComponent: dcid:VComponent
-
-Node: dcid:WindSpeed_Place__3658_Meter_Above_Mean_Sea_Level__UComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: [3658 Meter Above Mean Sea Level]
-windComponent: dcid:UComponent
-
-Node: dcid:WindSpeed_Place__3658_Meter_Above_Mean_Sea_Level__VComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: [3658 Meter Above Mean Sea Level]
 windComponent: dcid:VComponent
 

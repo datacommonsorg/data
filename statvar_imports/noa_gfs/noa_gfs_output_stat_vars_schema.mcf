@@ -10,11 +10,6 @@ name: "height"
 domainIncludes: dcid:Atmosphere,dcid:Graupel,dcid:Ice,dcid:IceCover,dcid:LandCover,dcid:Place,dcid:SeaIce,dcid:Snow,dcid:Soil
 rangeIncludes: dcid:Class,dcid:DepthClassificationEnum,dcid:QuantityRange
 
-Node: dcid:MeanSeaLevel
-typeOf: dcid:Distance
-name: "Mean Sea Level"
-isProvisional: dcs:True
-
 Node: dcid:mixingRatio
 typeOf: dcs:Property
 name: "mixingRatio"
@@ -313,10 +308,30 @@ typeOf: dcid:Distance
 name: "Max Wind"
 isProvisional: dcs:True
 
+Node: dcid:Isotherm0C
+typeOf: dcid:Distance
+name: "Isotherm 0C"
+isProvisional: dcs:True
+
+Node: dcid:HighestTroposphericFreezingLevel
+typeOf: dcid:Distance
+name: "Highest Tropospheric Freezing Level"
+isProvisional: dcs:True
+
 Node: dcid:bestLiftedIndex
 typeOf: dcs:Property
 name: "bestLiftedIndex"
 rangeIncludes: dcid:BestLiftedIndexEnum
+isProvisional: dcs:True
+
+Node: dcid:0.33To1SigmaLayer
+typeOf: dcid:Distance
+name: "0. 33 To 1Sigma Layer"
+isProvisional: dcs:True
+
+Node: dcid:0.995SigmaLevel
+typeOf: dcid:Distance
+name: "0. 99 5Sigma Level"
 isProvisional: dcs:True
 
 Node: dcid:potentialTemperature
