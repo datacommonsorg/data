@@ -6,6 +6,7 @@ The SDMX Agentic Import Pipeline is a Python-based system designed to automate t
 
 The pipeline orchestrates several tools to handle the end-to-end import process:
 1.  **Download**: Retrieves data and metadata from SDMX endpoints.
+2.  **Metadata Extraction**: Converts SDMX metadata into JSON for downstream steps.
 2.  **Sample**: Creates a manageable sample of the data for analysis.
 3.  **Schema Mapping**: Generates Property-Value (PV) mappings using LLM-based tools.
 4.  **Full Data Processing**: Converts the full dataset into Data Commons MCF and CSV formats.
@@ -51,6 +52,7 @@ python $DC_DATA_REPO_PATH/tools/agentic_import/sdmx_import_pipeline.py \
 -   `--dataset_prefix`: (Optional) Prefix for generated artifacts. Useful for disambiguating multiple datasets in the same working directory. If not provided, it is derived from the dataflow ID.
 -   `--sample.rows`: Number of rows for the sample dataset (default: 1000).
 -   `--force`: Force re-execution of all steps, ignoring saved state.
+-   `--run_only`: Execute only a single pipeline step by name.
 -   `--skip_confirmation`: Skip interactive confirmation prompts during schema mapping.
 -   `--verbose`: Enable verbose logging.
 
@@ -60,10 +62,11 @@ The pipeline consists of the following steps, executed in order:
 
 1.  **DownloadDataStep**: Downloads SDMX data to `<dataset_prefix>_data.csv`.
 2.  **DownloadMetadataStep**: Downloads SDMX metadata to `<dataset_prefix>_metadata.xml`.
-3.  **CreateSampleStep**: Creates `<dataset_prefix>_sample.csv` from the downloaded data.
-4.  **CreateSchemaMapStep**: Generates PV map and config in `sample_output/` using `pvmap_generator.py`.
-5.  **ProcessFullDataStep**: Processes the full data using `stat_var_processor.py` to generate artifacts in `output/`.
-6.  **CreateDcConfigStep**: Generates `output/<dataset_prefix>_config.json` for custom DC imports.
+3.  **ExtractMetadataStep**: Extracts SDMX metadata to `<dataset_prefix>_metadata.json`.
+4.  **CreateSampleStep**: Creates `<dataset_prefix>_sample.csv` from the downloaded data.
+5.  **CreateSchemaMapStep**: Generates PV map and config in `sample_output/` using `pvmap_generator.py`.
+6.  **ProcessFullDataStep**: Processes the full data using `stat_var_processor.py` to generate artifacts in `output/`.
+7.  **CreateDcConfigStep**: Generates `output/<dataset_prefix>_config.json` for custom DC imports.
 
 ## Directory Structure
 
@@ -73,6 +76,7 @@ The pipeline organizes outputs within the specified working directory:
 working_dir/
 ├── <dataset_prefix>_data.csv          # Raw downloaded data
 ├── <dataset_prefix>_metadata.xml      # Raw downloaded metadata
+├── <dataset_prefix>_metadata.json     # Extracted metadata for downstream steps
 ├── <dataset_prefix>_sample.csv        # Sampled data
 ├── .datacommons/
 │   └── <dataset_prefix>.state.json    # Pipeline state for resuming runs
@@ -92,6 +96,7 @@ The pipeline automatically saves its state to a `<dataset_prefix>.state.json` fi
 -   **Resuming**: If a run is interrupted, running the same command again will resume from the last successful step.
 -   **Skipping**: Steps that have already completed successfully will be skipped unless `--force` is used.
 -   **Input Hashing**: The pipeline tracks input configuration. If critical configuration changes, it may trigger re-execution of steps.
+-   **Run Only**: Use `--run_only=<step_name>` to execute just one step (for example, `download-metadata` or `create-schema-mapping`).
 
 ## Troubleshooting
 
