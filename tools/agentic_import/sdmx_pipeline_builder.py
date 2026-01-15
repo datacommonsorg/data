@@ -63,8 +63,14 @@ class PipelineBuilder:
 
     def build(self) -> BuildResult:
         if self._config.run.run_only:
+            if self._config.run.run_from or self._config.run.run_until:
+                raise ValueError(
+                    "run_only cannot be combined with run_from/run_until")
             planned, decisions = self._plan_run_only(self._config.run.run_only)
-        elif self._config.run.force:
+            logging.info("Built SDMX pipeline with %d steps", len(planned))
+            return BuildResult(pipeline=Pipeline(steps=planned),
+                               decisions=decisions)
+        if self._config.run.force:
             logging.info("Force flag set; scheduling all SDMX steps")
             planned, decisions = self._plan_all_steps(
                 "Force flag set; scheduling this step")
@@ -74,6 +80,7 @@ class PipelineBuilder:
                 "Critical inputs changed; scheduling this step")
         else:
             planned, decisions = self._plan_incremental()
+        planned, decisions = self._apply_range_filter(planned, decisions)
         logging.info("Built SDMX pipeline with %d steps", len(planned))
         return BuildResult(pipeline=Pipeline(steps=planned),
                            decisions=decisions)
@@ -117,11 +124,16 @@ class PipelineBuilder:
         return planned, decisions
 
     def _plan_incremental(self) -> tuple[list[Step], list[StepDecision]]:
+        return self._plan_incremental_steps(self._steps)
+
+    def _plan_incremental_steps(
+            self,
+            steps: Sequence[Step]) -> tuple[list[Step], list[StepDecision]]:
         planned: list[Step] = []
         decisions: list[StepDecision] = []
         schedule_all_remaining = False
         previous: Step | None = None
-        for step in self._steps:
+        for step in steps:
             if schedule_all_remaining:
                 planned.append(step)
                 decisions.append(
@@ -174,6 +186,70 @@ class PipelineBuilder:
         if not planned:
             logging.info("No steps scheduled.")
         return planned, decisions
+
+    def _resolve_step_index(self, name: str, flag_name: str) -> int:
+        for index, step in enumerate(self._steps):
+            if step.name == name:
+                return index
+        raise ValueError(f"{flag_name} step not found: {name}")
+
+    def _range_skip_reason(self) -> str:
+        parts = []
+        if self._config.run.run_from:
+            parts.append(f"run_from={self._config.run.run_from}")
+        if self._config.run.run_until:
+            parts.append(f"run_until={self._config.run.run_until}")
+        suffix = " ".join(parts) if parts else "range"
+        return f"Outside requested range ({suffix})"
+
+    def _select_range(self) -> tuple[int, int, bool]:
+        run_from = self._config.run.run_from
+        run_until = self._config.run.run_until
+        if not run_from and not run_until:
+            return 0, len(self._steps) - 1, False
+        start = 0
+        end = len(self._steps) - 1
+        if run_from:
+            start = self._resolve_step_index(run_from, "run_from")
+        if run_until:
+            end = self._resolve_step_index(run_until, "run_until")
+        if start > end:
+            raise ValueError(
+                f"run_from={run_from} must not come after run_until={run_until}"
+            )
+        return start, end, True
+
+    def _apply_range_filter(
+        self,
+        planned: list[Step],
+        decisions: list[StepDecision],
+    ) -> tuple[list[Step], list[StepDecision]]:
+        start, end, has_range = self._select_range()
+        if not has_range:
+            return planned, decisions
+        decisions_by_name = {
+            decision.step_name: decision for decision in decisions
+        }
+        in_range = {step.name for step in self._steps[start:end + 1]}
+        filtered_planned = [step for step in planned if step.name in in_range]
+        filtered_decisions: list[StepDecision] = []
+        outside_reason = self._range_skip_reason()
+        for index, step in enumerate(self._steps):
+            if start <= index <= end:
+                filtered_decisions.append(decisions_by_name[step.name])
+            else:
+                decision = decisions_by_name[step.name]
+                filtered_decisions.append(
+                    StepDecision(step_name=step.name,
+                                 decision=StepDecision.SKIP,
+                                 reason=self._format_outside_range_reason(
+                                     outside_reason, decision)))
+        return filtered_planned, filtered_decisions
+
+    def _format_outside_range_reason(self, outside_reason: str,
+                                     decision: StepDecision) -> str:
+        return (f"{outside_reason}; original decision={decision.decision}; "
+                f"original reason={decision.reason}")
 
     def _hash_changed(self) -> bool:
         if not self._critical_input_hash:

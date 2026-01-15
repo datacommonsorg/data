@@ -53,6 +53,8 @@ python $DC_DATA_REPO_PATH/tools/agentic_import/sdmx_import_pipeline.py \
 -   `--sample.rows`: Number of rows for the sample dataset (default: 1000).
 -   `--force`: Force re-execution of all steps, ignoring saved state.
 -   `--run_only`: Execute only a single pipeline step by name.
+-   `--run_from`: Execute pipeline steps starting at the named step (inclusive).
+-   `--run_until`: Execute pipeline steps through the named step (inclusive).
 -   `--skip_confirmation`: Skip interactive confirmation prompts during schema mapping.
 -   `--verbose`: Enable verbose logging.
 
@@ -97,6 +99,7 @@ The pipeline automatically saves its state to a `<dataset_prefix>.state.json` fi
 -   **Skipping**: Steps that have already completed successfully will be skipped unless `--force` is used.
 -   **Input Hashing**: The pipeline tracks input configuration. If critical configuration changes, it may trigger re-execution of steps.
 -   **Run Only**: Use `--run_only=<step_name>` to execute just one step (for example, `download-metadata` or `create-schema-mapping`).
+-   **Run Range**: Use `--run_from=<step_name>` and/or `--run_until=<step_name>` to limit execution to a contiguous range of steps (inclusive). The range respects incremental state by default; use `--force` to rerun all steps in the range.
 
 ## Troubleshooting
 

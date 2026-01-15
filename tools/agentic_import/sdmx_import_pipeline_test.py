@@ -424,6 +424,75 @@ class PlanningTest(unittest.TestCase):
         names = self._names_from_builder(cfg, state=state)
         self.assertEqual(names, ["download-data"])
 
+    def test_run_range_selects_steps(self) -> None:
+        cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND,
+                                           run_from="create-sample",
+                                           run_until="process-full-data"))
+        names = self._names_from_builder(cfg)
+        self.assertEqual(names, [
+            "create-sample",
+            "create-schema-mapping",
+            "process-full-data",
+        ])
+
+    def test_run_range_respects_outside_predecessor(self) -> None:
+        newer = 2_000
+        older = 1_000
+        state = self._state_with({
+            "download-data": ("1", "succeeded", older),
+            "download-metadata": ("1", "succeeded", newer),
+            "extract-metadata": ("1", "succeeded", older),
+            "create-sample": ("1", "succeeded", older),
+            "create-schema-mapping": ("1", "succeeded", older),
+            "process-full-data": ("1", "succeeded", older),
+            "create-dc-config": ("1", "succeeded", older),
+        })
+        cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND,
+                                           run_from="extract-metadata",
+                                           run_until="process-full-data"))
+        names = self._names_from_builder(cfg, state=state)
+        self.assertEqual(names, [
+            "extract-metadata",
+            "create-sample",
+            "create-schema-mapping",
+            "process-full-data",
+        ])
+
+    def test_run_range_requires_valid_step(self) -> None:
+        cfg = PipelineConfig(
+            run=RunConfig(command=_TEST_COMMAND, run_from="nope"))
+        with self.assertRaisesRegex(ValueError,
+                                    "run_from step not found: nope"):
+            self._names_from_builder(cfg)
+
+    def test_run_range_rejects_inverted_bounds(self) -> None:
+        cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND,
+                                           run_from="process-full-data",
+                                           run_until="create-sample"))
+        with self.assertRaisesRegex(ValueError, "must not come after"):
+            self._names_from_builder(cfg)
+
+    def test_force_run_range_overrides_state(self) -> None:
+        state = self._state_with({
+            "download-data": ("1", "succeeded", 1_000),
+            "download-metadata": ("1", "succeeded", 1_000),
+            "extract-metadata": ("1", "succeeded", 1_000),
+        })
+        cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND,
+                                           run_from="download-data",
+                                           run_until="extract-metadata"))
+        names = self._names_from_builder(cfg, state=state)
+        self.assertEqual(names, [])
+
+        cfg_force = PipelineConfig(run=RunConfig(command=_TEST_COMMAND,
+                                                 run_from="download-data",
+                                                 run_until="extract-metadata",
+                                                 force=True))
+        names_force = self._names_from_builder(cfg_force, state=state)
+        self.assertEqual(
+            names_force,
+            ["download-data", "download-metadata", "extract-metadata"])
+
     def test_version_bump_schedules_downstream(self) -> None:
         steps = [
             _VersionedStep("download-data", "1"),
