@@ -1,4 +1,4 @@
-# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output" on 2026-01-14 15:08:06.447791
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-15 06:06:56.892719
 
 Node: dcid:AbsoluteVorticity_Place_0.01MilliBar
 typeOf: dcid:StatisticalVariable
@@ -4536,22 +4536,6 @@ populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:measuredValue
 height: [100 MilliBar]
-windComponent: dcid:VComponent
-
-Node: dcid:WindSpeed_Place_10Meter_UComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: [10 Meter]
-windComponent: dcid:UComponent
-
-Node: dcid:WindSpeed_Place_10Meter_VComponent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:windSpeed
-statType: dcid:measuredValue
-height: [10 Meter]
 windComponent: dcid:VComponent
 
 Node: dcid:WindSpeed_Place_10MilliBar_UComponent
