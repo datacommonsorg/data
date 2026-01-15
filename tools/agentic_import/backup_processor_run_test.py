@@ -45,6 +45,17 @@ class BackupProcessorRunTest(unittest.TestCase):
         with open(manifest_path, 'r') as manifest_file:
             return manifest_file.read()
 
+    def test_absolute_path_copied(self):
+        absolute_file = self.working_dir / 'abs.txt'
+        absolute_file.write_text('absolute')
+
+        backup_dir = self._run_backup([str(absolute_file)])
+
+        self.assertTrue((backup_dir / 'abs.txt').exists())
+        manifest = self._read_manifest(backup_dir)
+        self.assertIn(str(absolute_file), manifest)
+        self.assertNotIn('Skipped (missing or blocked):', manifest)
+
     def test_copies_requested_files(self):
         first = self.working_dir / 'a.txt'
         second = self.working_dir / 'b.txt'
