@@ -7,7 +7,7 @@ isProvisional: dcs:True
 Node: dcid:height
 typeOf: dcs:Property
 name: "height"
-domainIncludes: dcid:Atmosphere,dcid:Graupel,dcid:Ice,dcid:IceCover,dcid:LandCover,dcid:Place,dcid:SeaIce,dcid:Snow,dcid:Soil
+domainIncludes: dcid:Atmosphere,dcid:Cloud,dcid:Graupel,dcid:Ice,dcid:IceCover,dcid:LandCover,dcid:Place,dcid:Rainwater,dcid:SeaIce,dcid:Snow,dcid:Soil
 rangeIncludes: dcid:Class,dcid:DepthClassificationEnum,dcid:QuantityRange
 
 Node: dcid:mixingRatio
@@ -16,29 +16,23 @@ name: "mixingRatio"
 rangeIncludes: dcid:MixingRatioEnum
 isProvisional: dcs:True
 
-Node: dcid:MeasurementQualifierEnum
-typeOf: schema:Class
-subClassOf: dcs:Enumeration
-name: "MeasurementQualifierEnum"
-isProvisional: dcs:True
-
 Node: dcid:Cloud
-typeOf: dcid:MeasurementQualifierEnum
+typeOf: dcid:Thing
 name: "Cloud"
 isProvisional: dcs:True
 
-Node: dcid:HybridLevel1
+Node: dcid:LowestHybridLevel
 typeOf: dcid:Distance
-name: "Hybrid Level 1"
+name: "Lowest Hybrid Level"
 isProvisional: dcs:True
 
 Node: dcid:Ice
-typeOf: dcid:MeasurementQualifierEnum
+typeOf: dcid:Thing
 name: "Ice"
 isProvisional: dcs:True
 
 Node: dcid:Rainwater
-typeOf: dcid:MeasurementQualifierEnum
+typeOf: dcid:Thing
 name: "Rainwater"
 isProvisional: dcs:True
 
@@ -80,6 +74,12 @@ Node: dcid:velocity
 typeOf: dcs:Property
 name: "velocity"
 rangeIncludes: dcid:VelocityEnum
+isProvisional: dcs:True
+
+Node: dcid:MeasurementQualifierEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementQualifierEnum"
 isProvisional: dcs:True
 
 Node: dcid:PressureVerticalVelocity
@@ -151,10 +151,22 @@ name: "thickness"
 rangeIncludes: dcid:ThicknessEnum
 isProvisional: dcs:True
 
-Node: dcid:apparentTemperature
+Node: dcid:measuremenntQualifier
 typeOf: dcs:Property
-name: "apparentTemperature"
-rangeIncludes: dcid:ApparentTemperatureEnum
+name: "measuremenntQualifier"
+domainIncludes: dcid:Place
+rangeIncludes: dcid:MeasuremenntQualifierEnum
+isProvisional: dcs:True
+
+Node: dcid:MeasuremenntQualifierEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasuremenntQualifierEnum"
+isProvisional: dcs:True
+
+Node: dcid:Apparent
+typeOf: dcid:MeasuremenntQualifierEnum
+name: "Apparent"
 isProvisional: dcs:True
 
 Node: dcid:frozenPrecipitation

@@ -1,4 +1,4 @@
-# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-16 03:15:13.818492
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-16 03:22:59.204713
 
 Node: dcid:AbsoluteVorticity_Place_0.01MilliBar
 typeOf: dcid:StatisticalVariable
@@ -287,13 +287,6 @@ measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
 height: [975 MilliBar]
 
-Node: dcid:ApparentTemperature_Place_2Meter
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:apparentTemperature
-statType: dcid:measuredValue
-height: [2 Meter]
-
 Node: dcid:Area_IceCover_SurfaceLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:IceCover
@@ -519,190 +512,6 @@ measuredProperty: dcid:cloudWater
 statType: dcid:measuredValue
 height: dcid:Atmosphere
 
-Node: dcid:Cloud_MixingRatio_Place_1000MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [1000 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_100MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [100 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_150MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [150 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_200MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [200 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_250MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [250 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_300MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [300 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_350MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [350 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_400MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [400 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_450MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [450 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_500MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [500 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_50MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [50 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_550MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [550 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_600MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [600 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_650MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [650 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_700MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [700 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_750MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [750 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_800MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [800 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_850MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [850 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_900MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [900 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_925MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [925 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_950MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [950 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_975MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: [975 MilliBar]
-
-Node: dcid:Cloud_MixingRatio_Place_HybridLevel1
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Cloud
-statType: dcid:measuredValue
-height: dcid:HybridLevel1
-
 Node: dcid:Concentration_Atmosphere_Atmosphere_Ozone
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
@@ -921,12 +730,12 @@ measuredProperty: dcid:count
 statType: dcid:measuredValue
 height: [975 MilliBar]
 
-Node: dcid:Count_Graupel_HybridLevel1
+Node: dcid:Count_Graupel_LowestHybridLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Graupel
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-height: dcid:HybridLevel1
+height: dcid:LowestHybridLevel
 
 Node: dcid:Depth_Snow_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -2400,190 +2209,6 @@ measurementQualifier: dcid:ICAOStandardAtmosphere
 statType: dcid:measuredValue
 height: dcid:Tropopause
 
-Node: dcid:Ice_MixingRatio_Place_1000MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [1000 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_100MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [100 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_150MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [150 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_200MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [200 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_250MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [250 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_300MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [300 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_350MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [350 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_400MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [400 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_450MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [450 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_500MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [500 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_50MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [50 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_550MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [550 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_600MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [600 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_650MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [650 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_700MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [700 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_750MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [750 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_800MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [800 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_850MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [850 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_900MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [900 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_925MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [925 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_950MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [950 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_975MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: [975 MilliBar]
-
-Node: dcid:Ice_MixingRatio_Place_HybridLevel1
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Ice
-statType: dcid:measuredValue
-height: dcid:HybridLevel1
-
 Node: dcid:LiftedParcelLevel_Pressure_Atmosphere_255To0MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
@@ -2641,6 +2266,650 @@ populationType: dcid:Place
 measuredProperty: dcid:windSpeed
 statType: dcid:maxValue
 height: dcid:SurfaceLevel
+
+Node: dcid:MixingRatio_Cloud_1000MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [1000 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_100MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [100 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_150MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [150 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_200MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [200 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_250MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [250 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_300MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [300 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_350MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [350 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_400MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [400 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_450MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [450 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_500MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [500 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_50MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [50 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_550MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [550 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_600MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [600 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_650MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [650 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_700MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [700 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_750MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [750 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_800MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [800 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_850MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [850 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_900MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [900 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_925MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [925 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_950MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [950 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_975MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [975 MilliBar]
+
+Node: dcid:MixingRatio_Cloud_LowestHybridLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Cloud
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: dcid:LowestHybridLevel
+
+Node: dcid:MixingRatio_Ice_1000MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [1000 MilliBar]
+
+Node: dcid:MixingRatio_Ice_100MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [100 MilliBar]
+
+Node: dcid:MixingRatio_Ice_150MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [150 MilliBar]
+
+Node: dcid:MixingRatio_Ice_200MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [200 MilliBar]
+
+Node: dcid:MixingRatio_Ice_250MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [250 MilliBar]
+
+Node: dcid:MixingRatio_Ice_300MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [300 MilliBar]
+
+Node: dcid:MixingRatio_Ice_350MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [350 MilliBar]
+
+Node: dcid:MixingRatio_Ice_400MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [400 MilliBar]
+
+Node: dcid:MixingRatio_Ice_450MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [450 MilliBar]
+
+Node: dcid:MixingRatio_Ice_500MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [500 MilliBar]
+
+Node: dcid:MixingRatio_Ice_50MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [50 MilliBar]
+
+Node: dcid:MixingRatio_Ice_550MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [550 MilliBar]
+
+Node: dcid:MixingRatio_Ice_600MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [600 MilliBar]
+
+Node: dcid:MixingRatio_Ice_650MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [650 MilliBar]
+
+Node: dcid:MixingRatio_Ice_700MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [700 MilliBar]
+
+Node: dcid:MixingRatio_Ice_750MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [750 MilliBar]
+
+Node: dcid:MixingRatio_Ice_800MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [800 MilliBar]
+
+Node: dcid:MixingRatio_Ice_850MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [850 MilliBar]
+
+Node: dcid:MixingRatio_Ice_900MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [900 MilliBar]
+
+Node: dcid:MixingRatio_Ice_925MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [925 MilliBar]
+
+Node: dcid:MixingRatio_Ice_950MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [950 MilliBar]
+
+Node: dcid:MixingRatio_Ice_975MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [975 MilliBar]
+
+Node: dcid:MixingRatio_Ice_LowestHybridLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Ice
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: dcid:LowestHybridLevel
+
+Node: dcid:MixingRatio_Rainwater_1000MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [1000 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_100MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [100 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_150MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [150 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_200MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [200 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_250MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [250 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_300MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [300 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_350MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [350 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_400MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [400 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_450MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [450 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_500MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [500 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_50MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [50 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_550MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [550 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_600MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [600 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_650MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [650 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_700MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [700 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_750MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [750 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_800MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [800 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_850MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [850 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_900MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [900 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_925MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [925 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_950MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [950 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_975MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [975 MilliBar]
+
+Node: dcid:MixingRatio_Rainwater_LowestHybridLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Rainwater
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: dcid:LowestHybridLevel
+
+Node: dcid:MixingRatio_Snow_1000MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [1000 MilliBar]
+
+Node: dcid:MixingRatio_Snow_100MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [100 MilliBar]
+
+Node: dcid:MixingRatio_Snow_150MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [150 MilliBar]
+
+Node: dcid:MixingRatio_Snow_200MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [200 MilliBar]
+
+Node: dcid:MixingRatio_Snow_250MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [250 MilliBar]
+
+Node: dcid:MixingRatio_Snow_300MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [300 MilliBar]
+
+Node: dcid:MixingRatio_Snow_350MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [350 MilliBar]
+
+Node: dcid:MixingRatio_Snow_400MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [400 MilliBar]
+
+Node: dcid:MixingRatio_Snow_450MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [450 MilliBar]
+
+Node: dcid:MixingRatio_Snow_500MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [500 MilliBar]
+
+Node: dcid:MixingRatio_Snow_50MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [50 MilliBar]
+
+Node: dcid:MixingRatio_Snow_550MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [550 MilliBar]
+
+Node: dcid:MixingRatio_Snow_600MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [600 MilliBar]
+
+Node: dcid:MixingRatio_Snow_650MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [650 MilliBar]
+
+Node: dcid:MixingRatio_Snow_700MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [700 MilliBar]
+
+Node: dcid:MixingRatio_Snow_750MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [750 MilliBar]
+
+Node: dcid:MixingRatio_Snow_800MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [800 MilliBar]
+
+Node: dcid:MixingRatio_Snow_850MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [850 MilliBar]
+
+Node: dcid:MixingRatio_Snow_900MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [900 MilliBar]
+
+Node: dcid:MixingRatio_Snow_925MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [925 MilliBar]
+
+Node: dcid:MixingRatio_Snow_950MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [950 MilliBar]
+
+Node: dcid:MixingRatio_Snow_975MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: [975 MilliBar]
+
+Node: dcid:MixingRatio_Snow_LowestHybridLevel
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Snow
+measuredProperty: dcid:mixingRatio
+statType: dcid:measuredValue
+height: dcid:LowestHybridLevel
 
 Node: dcid:Occurrence_Place_SurfaceLevel_FreezingRain
 typeOf: dcid:StatisticalVariable
@@ -3416,190 +3685,6 @@ measuredProperty: dcid:pressure
 statType: dcid:measuredValue
 height: [0 Meter]
 
-Node: dcid:Rainwater_MixingRatio_Place_1000MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [1000 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_100MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [100 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_150MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [150 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_200MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [200 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_250MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [250 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_300MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [300 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_350MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [350 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_400MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [400 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_450MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [450 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_500MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [500 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_50MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [50 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_550MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [550 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_600MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [600 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_650MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [650 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_700MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [700 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_750MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [750 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_800MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [800 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_850MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [850 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_900MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [900 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_925MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [925 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_950MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [950 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_975MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: [975 MilliBar]
-
-Node: dcid:Rainwater_MixingRatio_Place_HybridLevel1
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Rainwater
-statType: dcid:measuredValue
-height: dcid:HybridLevel1
-
 Node: dcid:Reflectivity_Place_4000Meter
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
@@ -3607,12 +3692,12 @@ measuredProperty: dcid:reflectivity
 statType: dcid:measuredValue
 height: [4000 Meter]
 
-Node: dcid:Reflectivity_Place_HybridLevel1
+Node: dcid:Reflectivity_Place_LowestHybridLevel
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:reflectivity
 statType: dcid:measuredValue
-height: dcid:HybridLevel1
+height: dcid:LowestHybridLevel
 
 Node: dcid:SnowWaterEquivalent_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -3620,190 +3705,6 @@ populationType: dcid:Place
 measuredProperty: dcid:snowWaterEquivalent
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
-
-Node: dcid:Snow_MixingRatio_Place_1000MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [1000 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_100MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [100 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_150MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [150 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_200MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [200 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_250MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [250 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_300MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [300 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_350MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [350 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_400MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [400 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_450MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [450 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_500MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [500 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_50MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [50 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_550MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [550 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_600MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [600 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_650MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [650 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_700MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [700 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_750MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [750 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_800MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [800 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_850MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [850 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_900MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [900 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_925MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [925 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_950MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [950 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_975MilliBar
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: [975 MilliBar]
-
-Node: dcid:Snow_MixingRatio_Place_HybridLevel1
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:mixingRatio
-measurementQualifier: dcid:Snow
-statType: dcid:measuredValue
-height: dcid:HybridLevel1
 
 Node: dcid:SoilType_Soil_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -4009,6 +3910,14 @@ populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
 height: [2 Meter]
+
+Node: dcid:Temperature_Place_2Meter_Apparent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+statType: dcid:measuredValue
+height: [2 Meter]
+measuremenntQualifier: dcid:Apparent
 
 Node: dcid:Temperature_Place_2MilliBar
 typeOf: dcid:StatisticalVariable

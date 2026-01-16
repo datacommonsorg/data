@@ -4,10 +4,10 @@ Longitude,Longitude,{Data},longitude,{Longitude},,,,
 Latitude,Latitude,{Data},latitude,{Latitude},placeName,latLong/{Latitude}_{Longitude},,
 Valid_Time,observationDate,{ValidTime},#Eval,"ValidTime=format_date(Data, '%Y-%m-%dT%H:%M:%S')",,,,
 PRMSL,measuredProperty,pressure,populationType,Place,height,MeanSeaLevel,unit,Pascal
-CLMR,measuredProperty,mixingRatio,populationType,Place,measurementQualifier,Cloud,,
-ICMR,measuredProperty,mixingRatio,populationType,Place,measurementQualifier,Ice,,
-RWMR,measuredProperty,mixingRatio,populationType,Place,measurementQualifier,Rainwater,,
-SNMR,measuredProperty,mixingRatio,populationType,Place,measurementQualifier,Snow,,
+CLMR,measuredProperty,mixingRatio,populationType,Cloud,,,,
+ICMR,measuredProperty,mixingRatio,populationType,Ice,,,,
+RWMR,measuredProperty,mixingRatio,populationType,Rainwater,,,,
+SNMR,measuredProperty,mixingRatio,populationType,Snow,,,,
 GRLE,measuredProperty,count,populationType,Graupel,,,,
 REFD,measuredProperty,reflectivity,populationType,Place,unit,Decibel,,
 REFC,measuredProperty,compositeReflectivity,populationType,Place,statType,maxValue,unit,Decibel
@@ -36,7 +36,7 @@ WEASD,measuredProperty,snowWaterEquivalent,populationType,Place,unit,KilogramPer
 SNOD,measuredProperty,depth,populationType,Snow,unit,Meter,,
 ICETK,measuredProperty,thickness,populationType,Ice,unit,Meter,,
 DPT,measuredProperty,dewPointTemperature,populationType,Atmosphere,unit,Kelvin,,
-APTMP,measuredProperty,apparentTemperature,populationType,Place,unit,Kelvin,,
+APTMP,measuredProperty,temperature,populationType,Place,unit,Kelvin,measuremenntQualifier,Apparent
 ICEG,measuredProperty,count,populationType,Ice,statType,growthRate,unit,MeterPerSecond
 CPOFP,measuredProperty,frozenPrecipitation,populationType,Place,unit,Percent,,
 PRATE,measuredProperty,precipitationRate,populationType,Place,,,,
@@ -73,7 +73,7 @@ LAND,measuredProperty,area,populationType,LandCover,unit,SquareDegree,#Multiply,
 ICEC,measuredProperty,area,populationType,IceCover,unit,SquareDegree,#Multiply,0.0625
 ICETMP,measuredProperty,temperature,populationType,SeaIce,unit,Kelvin,,
 mean sea level,height,[0 Meter],measurementMethod,MeanSeaLevel,,,,
-1 hybrid level,height,HybridLevel1,,,,,,
+1 hybrid level,height,LowestHybridLevel,,,,,,
 entire atmosphere,height,Atmosphere,,,,,,
 surface,height,SurfaceLevel,,,,,,
 planetary boundary layer,height,PlanetaryBoundaryLayer,,,,,,
