@@ -8,7 +8,7 @@ Node: dcid:height
 typeOf: dcs:Property
 name: "height"
 domainIncludes: dcid:Atmosphere,dcid:Cloud,dcid:Graupel,dcid:Ice,dcid:IceCover,dcid:LandCover,dcid:Place,dcid:Rainwater,dcid:SeaIce,dcid:Snow,dcid:Soil
-rangeIncludes: dcid:Class,dcid:DepthClassificationEnum,dcid:QuantityRange
+rangeIncludes: dcid:QuantityRange,dcid:DepthClassificationEnum
 
 Node: dcid:mixingRatio
 typeOf: dcs:Property
@@ -96,12 +96,6 @@ Node: dcid:absoluteVorticity
 typeOf: dcs:Property
 name: "absoluteVorticity"
 rangeIncludes: dcid:AbsoluteVorticityEnum
-isProvisional: dcs:True
-
-Node: dcid:cloudCoverTotal
-typeOf: dcs:Property
-name: "cloudCoverTotal"
-rangeIncludes: dcid:CloudCoverTotalEnum
 isProvisional: dcs:True
 
 Node: dcid:hainesIndex

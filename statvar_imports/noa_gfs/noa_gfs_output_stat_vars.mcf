@@ -1,4 +1,4 @@
-# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-16 05:42:50.689471
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --debug" on 2026-01-16 06:57:47.600180
 
 Node: dcid:AbsoluteVorticity_Place_0.01MilliBar
 typeOf: dcid:StatisticalVariable
@@ -324,166 +324,165 @@ measuredProperty: dcid:bestLiftedIndex
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:CloudCoverTotal_Place_1000MilliBar
+Node: dcid:CloudCover_Place
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
+statType: dcid:measuredValue
+
+Node: dcid:CloudCover_Place_1000MilliBar
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [1000 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_100MilliBar
+Node: dcid:CloudCover_Place_100MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [100 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_150MilliBar
+Node: dcid:CloudCover_Place_150MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [150 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_200MilliBar
+Node: dcid:CloudCover_Place_200MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [200 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_250MilliBar
+Node: dcid:CloudCover_Place_250MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [250 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_300MilliBar
+Node: dcid:CloudCover_Place_300MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [300 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_350MilliBar
+Node: dcid:CloudCover_Place_350MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [350 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_400MilliBar
+Node: dcid:CloudCover_Place_400MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [400 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_450MilliBar
+Node: dcid:CloudCover_Place_450MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [450 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_500MilliBar
+Node: dcid:CloudCover_Place_500MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [500 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_50MilliBar
+Node: dcid:CloudCover_Place_50MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [50 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_550MilliBar
+Node: dcid:CloudCover_Place_550MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [550 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_600MilliBar
+Node: dcid:CloudCover_Place_600MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [600 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_650MilliBar
+Node: dcid:CloudCover_Place_650MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [650 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_700MilliBar
+Node: dcid:CloudCover_Place_700MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [700 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_750MilliBar
+Node: dcid:CloudCover_Place_750MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [750 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_800MilliBar
+Node: dcid:CloudCover_Place_800MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [800 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_850MilliBar
+Node: dcid:CloudCover_Place_850MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [850 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_900MilliBar
+Node: dcid:CloudCover_Place_900MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [900 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_925MilliBar
+Node: dcid:CloudCover_Place_925MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [925 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_950MilliBar
+Node: dcid:CloudCover_Place_950MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [950 MilliBar]
 
-Node: dcid:CloudCoverTotal_Place_975MilliBar
+Node: dcid:CloudCover_Place_975MilliBar
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
+measuredProperty: dcid:cloudCover
 statType: dcid:measuredValue
 height: [975 MilliBar]
-
-Node: dcid:CloudCoverTotal_Place_Atmosphere
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:cloudCoverTotal
-statType: dcid:measuredValue
-height: dcid:Atmosphere
 
 Node: dcid:CloudCover_Place_HighCloudLayer
 typeOf: dcid:StatisticalVariable
@@ -513,19 +512,17 @@ measuredProperty: dcid:cloudWaterContent
 statType: dcid:measuredValue
 height: dcid:SurfaceLevel
 
-Node: dcid:CloudWater_Place_Atmosphere
+Node: dcid:CloudWater_Place
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:cloudWater
 statType: dcid:measuredValue
-height: dcid:Atmosphere
 
-Node: dcid:Concentration_Atmosphere_Atmosphere_Ozone
+Node: dcid:Concentration_Atmosphere_Ozone
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Atmosphere
 measuredProperty: dcid:concentration
 statType: dcid:measuredValue
-height: dcid:Atmosphere
 pollutant: dcid:Ozone
 
 Node: dcid:ConvectiveAvailablePotentialEnergy_Atmosphere_180To0MilliBar
@@ -2177,14 +2174,6 @@ statType: dcid:measuredValue
 height: [975 MilliBar]
 humidityParameter: dcid:SpecificHumidity
 
-Node: dcid:Humidity_Place_Atmosphere_RelativeHumidity
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:humidity
-statType: dcid:measuredValue
-height: dcid:Atmosphere
-humidityParameter: dcid:RelativeHumidity
-
 Node: dcid:Humidity_Place_HighestTroposphericFreezingLevel_RelativeHumidity
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
@@ -2261,12 +2250,11 @@ measurementQualifier: dcid:MSLPEtaReduction
 statType: dcid:measuredValue
 height: [0 Meter]
 
-Node: dcid:Max_CompositeReflectivity_Place_Atmosphere
+Node: dcid:Max_CompositeReflectivity_Place
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:compositeReflectivity
 statType: dcid:maxValue
-height: dcid:Atmosphere
 
 Node: dcid:Max_WindSpeed_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -3294,12 +3282,11 @@ measuredProperty: dcid:potentialTemperature
 statType: dcid:measuredValue
 height: dcid:0.995SigmaLevel
 
-Node: dcid:PrecipitableWater_Place_Atmosphere
+Node: dcid:PrecipitableWater_Place
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Place
 measuredProperty: dcid:precipitableWater
 statType: dcid:measuredValue
-height: dcid:Atmosphere
 
 Node: dcid:PrecipitationRate_Place_SurfaceLevel
 typeOf: dcid:StatisticalVariable

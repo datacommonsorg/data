@@ -16,7 +16,7 @@ UGRD,measuredProperty,windSpeed,populationType,Place,windComponent,UComponent,un
 VGRD,measuredProperty,windSpeed,populationType,Place,windComponent,VComponent,unit,MeterPerSecond
 VRATE,measuredProperty,ventilationRate,populationType,Place,unit,SquareMeterPerSecond,,
 GUST,measuredProperty,windSpeed,populationType,Place,statType,maxValue,unit,MeterPerSecond
-HGT,measuredProperty,geopotentialHeight,populationType,Place,unit,Meter,,
+HGT,measuredProperty,geopotentialHeight,populationType,Place,unit,GeopotentialMeters,,
 TMP,measuredProperty,temperature,populationType,Place,unit,Kelvin,,
 RH,measuredProperty,humidity,populationType,Place,humidityParameter,RelativeHumidity,unit,Percent
 SPFH,measuredProperty,humidity,populationType,Place,humidityParameter,SpecificHumidity,,
@@ -24,7 +24,7 @@ VVEL,measuredProperty,velocity,populationType,Place,measurementQualifier,Pressur
 DZDT,measuredProperty,velocity,populationType,Place,measurementQualifier,GeometricVerticalVelocity,unit,MeterPerSecond
 ABSV,measuredProperty,absoluteVorticity,populationType,Place,unit,InverseSecond,,
 O3MR,measuredProperty,mixingRatio,populationType,Atmosphere,measurementQualifier,Ozone,,
-TCDC,measuredProperty,cloudCoverTotal,populationType,Place,unit,Percent,,
+TCDC,measuredProperty,cloudCover,populationType,Place,unit,Percent,,
 HINDEX,measuredProperty,hainesIndex,populationType,Place,,,,
 MSLET,measuredProperty,pressure,populationType,Atmosphere,measurementQualifier,MSLPEtaReduction,unit,Pascal
 PRES,measuredProperty,pressure,populationType,Atmosphere,unit,Pascal,,
@@ -60,7 +60,7 @@ TOZNE,measuredProperty,concentration,populationType,Atmosphere,pollutant,Ozone,,
 LCDC,measuredProperty,cloudCover,populationType,Place,unit,Percent,,
 MCDC,measuredProperty,cloudCover,populationType,Place,unit,Percent,,
 HCDC,measuredProperty,cloudCover,populationType,Place,unit,Percent,,
-HLCY,measuredProperty,stormRelativeHelicity,populationType,Atmosphere,unit,Meter,,
+HLCY,measuredProperty,stormRelativeHelicity,populationType,Atmosphere,unit,MetersSquaredPerSecondSquared,,
 USTM,measuredProperty,stormMotion,populationType,Atmosphere,windComponent,UComponent,unit,MeterPerSecond
 VSTM,measuredProperty,stormMotion,populationType,Atmosphere,windComponent,VComponent,unit,MeterPerSecond
 ICAHT,measuredProperty,height,populationType,Atmosphere,measurementQualifier,ICAOStandardAtmosphere,unit,Meter
@@ -74,7 +74,7 @@ ICEC,measuredProperty,area,populationType,IceCover,unit,SquareDegree,#Multiply,0
 ICETMP,measuredProperty,temperature,populationType,SeaIce,unit,Kelvin,,
 mean sea level,height,[0 Meter],measurementMethod,MeanSeaLevel,,,,
 1 hybrid level,height,LowestHybridLevel,,,,,,
-entire atmosphere,height,Atmosphere,,,,,,
+entire atmosphere,,,,,,,,
 surface,height,SurfaceLevel,,,,,,
 planetary boundary layer,height,PlanetaryBoundaryLayer,,,,,,
 0.01 mb,height,[0.01 MilliBar],,,,,,
@@ -126,7 +126,6 @@ planetary boundary layer,height,PlanetaryBoundaryLayer,,,,,,
 2 m above ground,height,[2 Meter],measurementMethod,GroundLevel,,,,
 10 m above ground,height,[10 Meter],measurementMethod,GroundLevel,,,,
 10 m above mean sea level,height,[10 Meter],measurementMethod,MeanSeaLevel,,,,
-entire atmosphere (considered as a single layer),height,Atmosphere,,,,,,
 low cloud layer,height,LowCloudLayer,,,,,,
 middle cloud layer,height,MiddleCloudLayer,,,,,,
 high cloud layer,height,HighCloudLayer,,,,,,
