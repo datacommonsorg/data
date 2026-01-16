@@ -580,7 +580,7 @@ observationDate,value,variableMeasured,measurementMethod,latitude,longitude,plac
 2025-12-24T00:00:00,0.0004,dcid:Humidity_Place_2Meter_SpecificHumidity,GroundLevel,-90,0,latLong/-90_0,
 2025-12-24T00:00:00,241.778,dcid:DewPointTemperature_Atmosphere_2Meter,GroundLevel,-90,0,latLong/-90_0,Kelvin
 2025-12-24T00:00:00,89.2,dcid:Humidity_Place_2Meter_RelativeHumidity,GroundLevel,-90,0,latLong/-90_0,Percent
-2025-12-24T00:00:00,236.269,dcid:Temperature_Place_2Meter_Apparent,GroundLevel,-90,0,latLong/-90_0,Kelvin
+2025-12-24T00:00:00,236.269,dcid:Apparent_Temperature_Place_2Meter,GroundLevel,-90,0,latLong/-90_0,Kelvin
 2025-12-24T00:00:00,-1.96906,dcid:WindSpeed_UComponent_Height10Meters,GroundLevel,-90,0,latLong/-90_0,MeterPerSecond
 2025-12-24T00:00:00,-2.74299,dcid:WindSpeed_VComponent_Height10Meters,GroundLevel,-90,0,latLong/-90_0,MeterPerSecond
 2025-12-24T00:00:00,0,dcid:GrowthRate_Count_Ice_10Meter,MeanSeaLevel,-90,0,latLong/-90_0,MeterPerSecond

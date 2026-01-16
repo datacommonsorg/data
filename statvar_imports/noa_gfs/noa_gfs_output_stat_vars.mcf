@@ -1,4 +1,4 @@
-# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-16 03:22:59.204713
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/noa_gfs_2025_12_24_0.csv --pv_map=noa_gfs_pvmap.csv --config_file=noa_gfs_metadata.csv --output_path=noa_gfs_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-16 05:42:50.689471
 
 Node: dcid:AbsoluteVorticity_Place_0.01MilliBar
 typeOf: dcid:StatisticalVariable
@@ -286,6 +286,14 @@ populationType: dcid:Place
 measuredProperty: dcid:absoluteVorticity
 statType: dcid:measuredValue
 height: [975 MilliBar]
+
+Node: dcid:Apparent_Temperature_Place_2Meter
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+measurementQualifier: dcid:Apparent
+statType: dcid:measuredValue
+height: [2 Meter]
 
 Node: dcid:Area_IceCover_SurfaceLevel
 typeOf: dcid:StatisticalVariable
@@ -3910,14 +3918,6 @@ populationType: dcid:Place
 measuredProperty: dcid:temperature
 statType: dcid:measuredValue
 height: [2 Meter]
-
-Node: dcid:Temperature_Place_2Meter_Apparent
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Place
-measuredProperty: dcid:temperature
-statType: dcid:measuredValue
-height: [2 Meter]
-measuremenntQualifier: dcid:Apparent
 
 Node: dcid:Temperature_Place_2MilliBar
 typeOf: dcid:StatisticalVariable

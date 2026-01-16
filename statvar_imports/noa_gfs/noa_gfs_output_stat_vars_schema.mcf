@@ -151,21 +151,8 @@ name: "thickness"
 rangeIncludes: dcid:ThicknessEnum
 isProvisional: dcs:True
 
-Node: dcid:measuremenntQualifier
-typeOf: dcs:Property
-name: "measuremenntQualifier"
-domainIncludes: dcid:Place
-rangeIncludes: dcid:MeasuremenntQualifierEnum
-isProvisional: dcs:True
-
-Node: dcid:MeasuremenntQualifierEnum
-typeOf: schema:Class
-subClassOf: dcs:Enumeration
-name: "MeasuremenntQualifierEnum"
-isProvisional: dcs:True
-
 Node: dcid:Apparent
-typeOf: dcid:MeasuremenntQualifierEnum
+typeOf: dcid:MeasurementQualifierEnum
 name: "Apparent"
 isProvisional: dcs:True
 

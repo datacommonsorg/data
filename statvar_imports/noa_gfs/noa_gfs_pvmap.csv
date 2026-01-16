@@ -36,7 +36,7 @@ WEASD,measuredProperty,snowWaterEquivalent,populationType,Place,unit,KilogramPer
 SNOD,measuredProperty,depth,populationType,Snow,unit,Meter,,
 ICETK,measuredProperty,thickness,populationType,Ice,unit,Meter,,
 DPT,measuredProperty,dewPointTemperature,populationType,Atmosphere,unit,Kelvin,,
-APTMP,measuredProperty,temperature,populationType,Place,unit,Kelvin,measuremenntQualifier,Apparent
+APTMP,measuredProperty,temperature,populationType,Place,unit,Kelvin,measurementQualifier,Apparent
 ICEG,measuredProperty,count,populationType,Ice,statType,growthRate,unit,MeterPerSecond
 CPOFP,measuredProperty,frozenPrecipitation,populationType,Place,unit,Percent,,
 PRATE,measuredProperty,precipitationRate,populationType,Place,,,,
