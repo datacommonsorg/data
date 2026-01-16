@@ -238,7 +238,7 @@ XKX,country/XKS
 BGD_CHI,wikidataId/Q158087
 BGD_DHA,wikidataId/Q330158
 BRA_RIO,wikidataId/Q41428
-BRA_SAO,wikidataId/Q174
+BRA_SAO,wikidataId/Q175
 CHN_BEI,wikidataId/Q956
 CHN_SHA,wikidataId/Q8686
 IDN_JAK,wikidataId/Q3630
@@ -256,7 +256,7 @@ PAK_LAH,wikidataId/Q3308170
 RUS_MOS,wikidataId/Q649
 RUS_STP,geoId/1263000
 USA_LA,geoId/0644000
-USA_NY,geoId/3651000
+USA_NY,geoId/36
 NAC,northamerica
 SAS,undata-geo/G00158000
 WLD,Earth
