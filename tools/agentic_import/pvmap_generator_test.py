@@ -248,6 +248,9 @@ class PVMapGeneratorTest(unittest.TestCase):
         config.output_path = 'output'
         with self.assertRaises(ValueError):
             PVMapGenerator(config)
+        config.output_path = None
+        with self.assertRaises(ValueError):
+            PVMapGenerator(config)
 
     def test_relative_paths_resolved_against_working_dir(self):
         # Create a separate working directory
