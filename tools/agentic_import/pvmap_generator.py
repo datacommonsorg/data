@@ -151,7 +151,13 @@ class PVMapGenerator:
             ]
 
         # Parse output_path into absolute path, handling relative paths and ~ expansion
+        output_path_raw = self._config.output_path or ''
         output_path = Path(self._config.output_path).expanduser()
+        if not output_path_raw.strip():
+            raise ValueError("output_path must be a non-empty <dir>/<prefix>")
+        if len(output_path.parts) < 2:
+            # Require a directory component so paths look like <dir>/<prefix>.
+            raise ValueError("output_path must include a directory and prefix")
         if not output_path.is_absolute():
             output_path = self._working_dir / output_path
         self._output_path_abs = output_path.resolve()
@@ -167,8 +173,7 @@ class PVMapGenerator:
 
         # Generate gemini_run_id with timestamp for this run
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        run_prefix = f"{self._output_basename}_" if self._output_basename else ""
-        self._gemini_run_id = f"{run_prefix}gemini_{timestamp}"
+        self._gemini_run_id = f"{self._output_basename}_gemini_{timestamp}"
 
         # Create run directory structure
         self._run_dir = self._datacommons_dir / 'runs' / self._gemini_run_id
