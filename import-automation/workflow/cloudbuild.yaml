@@ -22,6 +22,7 @@ substitutions:
   _GCS_BUCKET_ID: 'datcom-prod-imports'
   _LOCATION: 'us-central1'
   _GCS_MOUNT_BUCKET: 'datcom-volume-mount'
+  _BQ_DATASET_ID: 'datacommons'
 
 steps:
 - id: 'import-automation-workflow'
@@ -37,6 +38,11 @@ steps:
 - id: 'spanner-ingestion-helper'
   name: 'gcr.io/cloud-builders/gcloud'
   args: ['functions', 'deploy', 'spanner-ingestion-helper', '--runtime', 'python312', '--source', 'ingestion-helper', '--no-allow-unauthenticated', '--trigger-http', '--entry-point', 'ingestion_helper', '--project', '${_PROJECT_ID}', '--set-env-vars', 'PROJECT_ID=${_PROJECT_ID},SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},GCS_BUCKET_ID=${_GCS_BUCKET_ID},LOCATION=${_LOCATION}']
+  dir: 'import-automation/workflow'
+
+- id: 'import-aggregation-helper'
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['functions', 'deploy', 'import-aggregation-helper', '--runtime', 'python312', '--source', 'aggregation-helper', '--no-allow-unauthenticated', '--trigger-http', '--entry-point', 'aggregation_helper', '--project', '${_PROJECT_ID}', '--set-env-vars', 'PROJECT_ID=${_PROJECT_ID},SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},GCS_BUCKET_ID=${_GCS_BUCKET_ID},LOCATION=${_LOCATION},BQ_DATASET_ID=${_BQ_DATASET_ID}']
   dir: 'import-automation/workflow'
 
 - id: 'import-automation-helper'
