@@ -167,7 +167,8 @@ class PVMapGenerator:
 
         # Generate gemini_run_id with timestamp for this run
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self._gemini_run_id = f"gemini_{timestamp}"
+        run_prefix = f"{self._output_basename}_" if self._output_basename else ""
+        self._gemini_run_id = f"{run_prefix}gemini_{timestamp}"
 
         # Create run directory structure
         self._run_dir = self._datacommons_dir / 'runs' / self._gemini_run_id
@@ -406,7 +407,9 @@ class PVMapGenerator:
             'output_dir_abs':
                 str(self._output_dir_abs),  # Directory for pvmap/metadata files
             'output_basename':
-                self._output_basename  # Base name for pvmap/metadata files
+                self._output_basename,  # Base name for pvmap/metadata files
+            'run_dir_abs':
+                str(self._run_dir)
         }
 
         # Render template with these variables
