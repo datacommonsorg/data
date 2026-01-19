@@ -72,8 +72,9 @@ _MERGE_TARGETS = [
 
 
 class EnrichmentMerger:
-    def __init__(self, base_data: Dict[str, Any],
-                 enriched_data: Dict[str, Any]):
+
+    def __init__(self, base_data: Dict[str, Any], enriched_data: Dict[str,
+                                                                      Any]):
         self._base = base_data
         self._enriched = enriched_data
         self._targets = _MERGE_TARGETS
@@ -105,9 +106,8 @@ class EnrichmentMerger:
                     continue
                 base_node = base_by_key.get(match_value)
                 if not base_node:
-                    logging.warning(
-                        "No base match for %s='%s' at path '%s'", target.match_key,
-                        match_value, target.path)
+                    logging.warning("No base match for %s='%s' at path '%s'",
+                                    target.match_key, match_value, target.path)
                     continue
                 self._merge_node(base_node, enriched_node, target.path)
 
@@ -115,9 +115,8 @@ class EnrichmentMerger:
                     enriched_node: Dict[str, Any], path: str) -> None:
         if 'enriched_description' in enriched_node:
             if 'enriched_description' in base_node:
-                logging.warning(
-                    "Overwriting enriched_description at %s id=%s", path,
-                    base_node.get('id'))
+                logging.warning("Overwriting enriched_description at %s id=%s",
+                                path, base_node.get('id'))
             base_node['enriched_description'] = enriched_node[
                 'enriched_description']
 
@@ -132,8 +131,8 @@ class EnrichmentMerger:
                     continue
                 value = node.get(part)
                 if isinstance(value, list):
-                    next_level.extend([item for item in value if isinstance(
-                        item, dict)])
+                    next_level.extend(
+                        [item for item in value if isinstance(item, dict)])
                 elif isinstance(value, dict):
                     next_level.append(value)
             current = next_level

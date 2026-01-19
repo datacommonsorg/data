@@ -91,6 +91,7 @@ class RunResult:
 
 
 class EnrichmentDataFetcher:
+
     def __init__(self, config: Config):
         self._config = config
         self._working_dir = Path(
@@ -224,16 +225,15 @@ class EnrichmentDataFetcher:
 
     def _run_subprocess(self, command: str) -> int:
         try:
-            process = subprocess.Popen(
-                command,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                shell=True,
-                cwd=self._working_dir,
-                encoding='utf-8',
-                errors='replace',
-                bufsize=1,
-                universal_newlines=True)
+            process = subprocess.Popen(command,
+                                       stdout=subprocess.PIPE,
+                                       stderr=subprocess.STDOUT,
+                                       shell=True,
+                                       cwd=self._working_dir,
+                                       encoding='utf-8',
+                                       errors='replace',
+                                       bufsize=1,
+                                       universal_newlines=True)
 
             while True:
                 output = process.stdout.readline()

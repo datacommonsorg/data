@@ -34,9 +34,8 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def _define_flags():
     try:
-        flags.DEFINE_string(
-            'input_metadata_json', None,
-            'Path to input SDMX metadata JSON (required)')
+        flags.DEFINE_string('input_metadata_json', None,
+                            'Path to input SDMX metadata JSON (required)')
         flags.mark_flag_as_required('input_metadata_json')
 
         flags.DEFINE_string('output_path', None,
@@ -92,6 +91,7 @@ class RunResult:
 
 
 class EnrichmentItemsFinder:
+
     def __init__(self, config: Config):
         self._config = config
         self._working_dir = Path(
@@ -142,8 +142,8 @@ class EnrichmentItemsFinder:
                 "Gemini CLI not found in PATH. Will attempt to run anyway (may work if aliased)."
             )
 
-        logging.info(
-            "Launching gemini (cwd: %s): %s", self._working_dir, gemini_command)
+        logging.info("Launching gemini (cwd: %s): %s", self._working_dir,
+                     gemini_command)
         logging.info("Gemini output will be saved to: %s", gemini_log_file)
 
         exit_code = self._run_subprocess(gemini_command)
@@ -225,16 +225,15 @@ class EnrichmentItemsFinder:
 
     def _run_subprocess(self, command: str) -> int:
         try:
-            process = subprocess.Popen(
-                command,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                shell=True,
-                cwd=self._working_dir,
-                encoding='utf-8',
-                errors='replace',
-                bufsize=1,
-                universal_newlines=True)
+            process = subprocess.Popen(command,
+                                       stdout=subprocess.PIPE,
+                                       stderr=subprocess.STDOUT,
+                                       shell=True,
+                                       cwd=self._working_dir,
+                                       encoding='utf-8',
+                                       errors='replace',
+                                       bufsize=1,
+                                       universal_newlines=True)
 
             while True:
                 output = process.stdout.readline()
