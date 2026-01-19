@@ -38,6 +38,10 @@ def _define_flags():
                             'Path to input items JSON (required)')
         flags.mark_flag_as_required('input_items_json')
 
+        flags.DEFINE_string('dataset_prefix', None,
+                            'Dataset prefix for run id (required, non-empty)')
+        flags.mark_flag_as_required('dataset_prefix')
+
         flags.DEFINE_string('output_path', None,
                             'Path to output items JSON (required)')
         flags.mark_flag_as_required('output_path')
@@ -72,6 +76,7 @@ def _define_flags():
 @dataclass
 class Config:
     input_items_json: str
+    dataset_prefix: str
     output_path: str
     dry_run: bool = False
     skip_confirmation: bool = False
@@ -98,6 +103,10 @@ class EnrichmentDataFetcher:
             config.working_dir).resolve() if config.working_dir else Path.cwd()
         self._input_path = self._resolve_path(config.input_items_json)
         self._output_path = self._resolve_path(config.output_path)
+        self._dataset_prefix = (config.dataset_prefix or '').strip()
+
+        if not self._dataset_prefix:
+            raise ValueError("dataset_prefix must be a non-empty string.")
 
         if not self._input_path.exists():
             raise FileNotFoundError(
@@ -109,7 +118,7 @@ class EnrichmentDataFetcher:
         self._datacommons_dir.mkdir(parents=True, exist_ok=True)
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self._run_id = f"gemini_{timestamp}"
+        self._run_id = f"{self._dataset_prefix}_gemini_{timestamp}"
         self._run_dir = self._datacommons_dir / 'runs' / self._run_id
         self._run_dir.mkdir(parents=True, exist_ok=True)
 
@@ -250,6 +259,7 @@ class EnrichmentDataFetcher:
 
 def prepare_config() -> Config:
     return Config(input_items_json=_FLAGS.input_items_json,
+                  dataset_prefix=_FLAGS.dataset_prefix,
                   output_path=_FLAGS.output_path,
                   dry_run=_FLAGS.dry_run,
                   skip_confirmation=_FLAGS.skip_confirmation,

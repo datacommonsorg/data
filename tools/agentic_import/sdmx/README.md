@@ -11,6 +11,7 @@ CLI usage:
 ```
 python tools/agentic_import/sdmx/find_enrichment_items.py \
   --input_metadata_json="/path/to/metadata.json" \
+  --dataset_prefix="oecd_prices" \
   --output_path="/path/to/items_to_enrich.json" \
   --gemini_cli="gemini" \
   --enable_sandboxing
@@ -28,6 +29,7 @@ CLI usage:
 ```
 python tools/agentic_import/sdmx/fetch_enrichment_data.py \
   --input_items_json="/path/to/items_to_enrich.json" \
+  --dataset_prefix="oecd_prices" \
   --output_path="/path/to/enriched_items.json" \
   --gemini_cli="gemini" \
   --enable_sandboxing
