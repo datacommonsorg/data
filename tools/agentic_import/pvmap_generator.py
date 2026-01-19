@@ -152,10 +152,10 @@ class PVMapGenerator:
 
         # Parse output_path into absolute path, handling relative paths and ~ expansion
         output_path_raw = self._config.output_path
-        if output_path_raw is None:
-            raise ValueError("output_path must be set to <dir>/<prefix>")
-        if not output_path_raw.strip():
-            raise ValueError("output_path must be a non-empty <dir>/<prefix>")
+        if not output_path_raw or not output_path_raw.strip():
+            raise ValueError(
+                "output_path must be a non-empty string in <dir>/<prefix> format"
+            )
         output_path = Path(output_path_raw).expanduser()
         if len(output_path.parts) < 2:
             # Require a directory component so paths look like <dir>/<prefix>.
