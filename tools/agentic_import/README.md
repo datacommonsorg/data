@@ -283,7 +283,7 @@ working_directory/
 When encountering errors with Gemini CLI:
 
 1. **Restart the process**: If Gemini CLI fails, simply restart the PV map generation process
-2. **Check run logs**: All Gemini CLI runs are logged in `$WORKING_DIR/.datacommons/runs/<gemini_run_id>/` directory (e.g., `output_gemini_20250915_163906`)
+2. **Check run logs**: All Gemini CLI runs are logged in `$WORKING_DIR/.datacommons/runs/<gemini_run_id>/` directory (e.g., `output_gemini_20250915_163906_1234`)
 3. **Monitor for loops**: Gemini CLI can sometimes get stuck in loops - check logs at `.datacommons/runs/<gemini_run_id>/gemini_cli.log`
 4. **StatVar processor attempts**: Gemini CLI will run the StatVar processor multiple times if needed. Each attempt is logged in `.datacommons/runs/<gemini_run_id>/attempt_<number>/` directory
 
@@ -292,7 +292,7 @@ When encountering errors with Gemini CLI:
 ```
 .datacommons/
 ├── runs/
-│   └── output_gemini_20250915_163906/     # Individual run directory (gemini_run_id)
+│   └── output_gemini_20250915_163906_1234/  # Individual run directory (gemini_run_id)
 │       ├── gemini_cli.log                # Main Gemini CLI log
 │       ├── processor.log                 # StatVar processor logs
 │       ├── backup.log                    # Backup logs

@@ -17,6 +17,7 @@
 import copy
 import os
 import platform
+import random
 import shutil
 import subprocess
 import sys
@@ -173,9 +174,11 @@ class PVMapGenerator:
 
         self._datacommons_dir = self._initialize_datacommons_dir()
 
-        # Generate gemini_run_id with timestamp for this run
+        # Generate gemini_run_id with timestamp and a random suffix to avoid collisions
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self._gemini_run_id = f"{self._output_basename}_gemini_{timestamp}"
+        self._gemini_run_id = (
+            f"{self._output_basename}_gemini_{timestamp}_{random.randint(1, 10000)}"
+        )
 
         # Create run directory structure
         self._run_dir = self._datacommons_dir / 'runs' / self._gemini_run_id
