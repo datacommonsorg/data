@@ -16,20 +16,24 @@
 
 import os
 import platform
-import shutil
-import subprocess
+import sys
 from dataclasses import dataclass
-from datetime import datetime
 from pathlib import Path
 from typing import Optional
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_REPO_ROOT = Path(_SCRIPT_DIR).resolve().parents[3]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 
 from absl import app
 from absl import flags
 from absl import logging
-from jinja2 import Environment, FileSystemLoader
+
+from tools.agentic_import.common.gemini_prompt_runner import (
+    GeminiPromptRunner, GeminiRunResult)
 
 _FLAGS = flags.FLAGS
-_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def _define_flags():
@@ -85,16 +89,6 @@ class Config:
     working_dir: Optional[str] = None
 
 
-@dataclass
-class RunResult:
-    run_id: str
-    run_dir: Path
-    prompt_path: Path
-    gemini_log_path: Path
-    gemini_command: str
-    sandbox_enabled: bool
-
-
 class EnrichmentItemsFinder:
 
     def __init__(self, config: Config):
@@ -114,54 +108,23 @@ class EnrichmentItemsFinder:
 
         self._output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        self._datacommons_dir = self._working_dir / '.datacommons'
-        self._datacommons_dir.mkdir(parents=True, exist_ok=True)
+        self._runner = GeminiPromptRunner(
+            dataset_prefix=self._dataset_prefix,
+            working_dir=str(self._working_dir),
+            dry_run=config.dry_run,
+            skip_confirmation=config.skip_confirmation,
+            enable_sandboxing=config.enable_sandboxing,
+            gemini_cli=config.gemini_cli,
+        )
 
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self._run_id = f"{self._dataset_prefix}_gemini_{timestamp}"
-        self._run_dir = self._datacommons_dir / 'runs' / self._run_id
-        self._run_dir.mkdir(parents=True, exist_ok=True)
-
-    def find_items_to_enrich(self) -> RunResult:
+    def find_items_to_enrich(self) -> GeminiRunResult:
         prompt_file = self._generate_prompt()
-        gemini_log_file = self._run_dir / 'gemini_cli.log'
-        gemini_command = self._build_gemini_command(prompt_file,
-                                                    gemini_log_file)
-
-        result = RunResult(run_id=self._run_id,
-                           run_dir=self._run_dir,
-                           prompt_path=prompt_file,
-                           gemini_log_path=gemini_log_file,
-                           gemini_command=gemini_command,
-                           sandbox_enabled=self._config.enable_sandboxing)
-
-        if self._config.dry_run:
-            logging.info(
-                "Dry run mode: Prompt file generated at %s. "
-                "Skipping Gemini CLI execution.", prompt_file)
-            return result
-
-        if not self._config.skip_confirmation:
-            if not self._get_user_confirmation(prompt_file):
-                logging.info("Enrichment item selection cancelled by user.")
-                return result
-
-        if not self._check_gemini_cli_available():
-            logging.warning(
-                "Gemini CLI not found in PATH. Will attempt to run anyway (may work if aliased)."
-            )
-
-        logging.info("Launching gemini (cwd: %s): %s", self._working_dir,
-                     gemini_command)
-        logging.info("Gemini output will be saved to: %s", gemini_log_file)
-
-        exit_code = self._run_subprocess(gemini_command)
-        if exit_code == 0:
-            logging.info("Gemini CLI completed successfully")
-            return result
-
-        raise RuntimeError(
-            f"Gemini CLI execution failed with exit code {exit_code}")
+        return self._runner.run(
+            prompt_file,
+            log_filename='gemini_cli.log',
+            confirm_fn=self._get_user_confirmation,
+            cancel_log_message="Enrichment item selection cancelled by user.",
+        )
 
     def _resolve_path(self, path: str) -> Path:
         resolved = Path(path).expanduser()
@@ -170,21 +133,16 @@ class EnrichmentItemsFinder:
         return resolved.resolve()
 
     def _generate_prompt(self) -> Path:
-        template_dir = os.path.join(_SCRIPT_DIR, 'templates')
-        env = Environment(loader=FileSystemLoader(template_dir))
-        template = env.get_template('metadata_enricher_find_prompt.j2')
-
-        rendered_prompt = template.render(
-            input_metadata_abs=str(self._input_path),
-            output_path_abs=str(self._output_path),
+        template_dir = Path(_SCRIPT_DIR) / 'templates'
+        return self._runner.render_prompt(
+            template_dir=template_dir,
+            template_name='metadata_enricher_find_prompt.j2',
+            context={
+                "input_metadata_abs": str(self._input_path),
+                "output_path_abs": str(self._output_path),
+            },
+            prompt_filename='metadata_enricher_find_prompt.md',
         )
-
-        output_file = self._run_dir / 'metadata_enricher_find_prompt.md'
-        with open(output_file, 'w') as f:
-            f.write(rendered_prompt)
-
-        logging.info("Generated prompt written to: %s", output_file)
-        return output_file
 
     def _get_user_confirmation(self, prompt_file: Path) -> bool:
         print("\n" + "=" * 60)
@@ -217,44 +175,6 @@ class EnrichmentItemsFinder:
             except KeyboardInterrupt:
                 print("\nSelection cancelled by user.")
                 return False
-
-    def _check_gemini_cli_available(self) -> bool:
-        if self._config.gemini_cli:
-            return True
-        return shutil.which('gemini') is not None
-
-    def _build_gemini_command(self, prompt_file: Path, log_file: Path) -> str:
-        prompt_path = prompt_file.resolve()
-        log_path = log_file.resolve()
-        gemini_cmd = self._config.gemini_cli or 'gemini'
-        sandbox_flag = "--sandbox" if self._config.enable_sandboxing else ""
-        return (
-            f"cat '{prompt_path}' | {gemini_cmd} {sandbox_flag} -y 2>&1 | tee '{log_path}'"
-        )
-
-    def _run_subprocess(self, command: str) -> int:
-        try:
-            process = subprocess.Popen(command,
-                                       stdout=subprocess.PIPE,
-                                       stderr=subprocess.STDOUT,
-                                       shell=True,
-                                       cwd=self._working_dir,
-                                       encoding='utf-8',
-                                       errors='replace',
-                                       bufsize=1,
-                                       universal_newlines=True)
-
-            while True:
-                output = process.stdout.readline()
-                if output == '' and process.poll() is not None:
-                    break
-                if output:
-                    print(output.rstrip())
-
-            return process.wait()
-        except Exception as e:
-            logging.error("Error running subprocess: %s", str(e))
-            return 1
 
 
 def prepare_config() -> Config:
