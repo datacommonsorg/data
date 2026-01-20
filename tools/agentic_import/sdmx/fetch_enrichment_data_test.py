@@ -19,6 +19,9 @@ import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
+
+from jinja2 import Template
 
 from tools.agentic_import.sdmx.fetch_enrichment_data import (Config,
                                                             EnrichmentDataFetcher)
@@ -43,16 +46,31 @@ class EnrichmentDataFetcherTest(unittest.TestCase):
             )
 
             fetcher = EnrichmentDataFetcher(config)
-            result = fetcher.fetch_enrichment_data()
+            with mock.patch("jinja2.environment.Template.render",
+                            autospec=True,
+                            side_effect=Template.render) as render_mock:
+                result = fetcher.fetch_enrichment_data()
 
             self.assertTrue(result.run_id.startswith('demo_gemini_'))
             self.assertTrue(result.run_dir.is_dir())
             self.assertTrue(result.prompt_path.is_file())
             self.assertTrue(result.gemini_log_path.is_absolute())
             self.assertEqual(result.prompt_path.parent, result.run_dir)
-            self.assertIn(str(result.prompt_path), result.gemini_command)
-            self.assertIn(str(result.gemini_log_path), result.gemini_command)
+            expected_command = (
+                f"cat '{result.prompt_path.resolve()}' | "
+                f"{config.gemini_cli or 'gemini'} "
+                f"{'--sandbox' if config.enable_sandboxing else ''} "
+                f"-y 2>&1 | tee '{result.gemini_log_path.resolve()}'")
+            self.assertEqual(result.gemini_command, expected_command)
             self.assertTrue(output_path.parent.is_dir())
+
+            self.assertEqual(render_mock.call_count, 1)
+            _, render_kwargs = render_mock.call_args
+            self.assertEqual(
+                render_kwargs, {
+                    "input_items_abs": str(input_path.resolve()),
+                    "output_path_abs": str(output_path.resolve()),
+                })
 
 
 if __name__ == '__main__':
