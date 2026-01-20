@@ -136,6 +136,11 @@ class PVMapGeneratorTest(unittest.TestCase):
         generator = self._make_generator(is_sdmx=False)
         result = generator.generate()
         self._assert_generation_result(result)
+        self.assertTrue(result.run_dir.is_absolute())
+        self.assertEqual(
+            result.run_dir,
+            Path(self._temp_dir.name) / '.datacommons' / 'runs' / result.run_id)
+        self.assertTrue(result.run_id.startswith('output_file_gemini_'))
 
         prompt_path = self._read_prompt_path(result)
         self._assert_prompt_content(prompt_path,
@@ -146,6 +151,7 @@ class PVMapGeneratorTest(unittest.TestCase):
         generator = self._make_generator(is_sdmx=True)
         result = generator.generate()
         self._assert_generation_result(result)
+        self.assertTrue(result.run_id.startswith('output_file_gemini_'))
 
         prompt_path = self._read_prompt_path(result)
         self._assert_prompt_content(prompt_path,
@@ -224,6 +230,27 @@ class PVMapGeneratorTest(unittest.TestCase):
         # Verify input paths are also absolute in the prompt
         self.assertIn(str(data_file.resolve()), prompt_text)
         self.assertIn(str(metadata_file.resolve()), prompt_text)
+
+    def test_rejects_invalid_output_path(self):
+        data_config = DataConfig(
+            input_data=[str(self._data_file)],
+            input_metadata=[str(self._metadata_file)],
+            is_sdmx_dataset=False,
+        )
+        config = Config(
+            data_config=data_config,
+            dry_run=True,
+            max_iterations=3,
+            output_path='',
+        )
+        with self.assertRaises(ValueError):
+            PVMapGenerator(config)
+        config.output_path = 'output'
+        with self.assertRaises(ValueError):
+            PVMapGenerator(config)
+        config.output_path = None
+        with self.assertRaises(ValueError):
+            PVMapGenerator(config)
 
     def test_relative_paths_resolved_against_working_dir(self):
         # Create a separate working directory

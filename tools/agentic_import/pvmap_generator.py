@@ -17,6 +17,7 @@
 import copy
 import os
 import platform
+import random
 import shutil
 import subprocess
 import sys
@@ -151,7 +152,15 @@ class PVMapGenerator:
             ]
 
         # Parse output_path into absolute path, handling relative paths and ~ expansion
-        output_path = Path(self._config.output_path).expanduser()
+        output_path_raw = self._config.output_path
+        if not output_path_raw or not output_path_raw.strip():
+            raise ValueError(
+                "output_path must be a non-empty string in <dir>/<prefix> format"
+            )
+        output_path = Path(output_path_raw).expanduser()
+        if len(output_path.parts) < 2:
+            # Require a directory component so paths look like <dir>/<prefix>.
+            raise ValueError("output_path must include a directory and prefix")
         if not output_path.is_absolute():
             output_path = self._working_dir / output_path
         self._output_path_abs = output_path.resolve()
@@ -165,9 +174,11 @@ class PVMapGenerator:
 
         self._datacommons_dir = self._initialize_datacommons_dir()
 
-        # Generate gemini_run_id with timestamp for this run
+        # Generate gemini_run_id with timestamp and a random suffix to avoid collisions
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self._gemini_run_id = f"gemini_{timestamp}"
+        self._gemini_run_id = (
+            f"{self._output_basename}_gemini_{timestamp}_{random.randint(1, 10000)}"
+        )
 
         # Create run directory structure
         self._run_dir = self._datacommons_dir / 'runs' / self._gemini_run_id
@@ -406,7 +417,9 @@ class PVMapGenerator:
             'output_dir_abs':
                 str(self._output_dir_abs),  # Directory for pvmap/metadata files
             'output_basename':
-                self._output_basename  # Base name for pvmap/metadata files
+                self._output_basename,  # Base name for pvmap/metadata files
+            'run_dir_abs':
+                str(self._run_dir)
         }
 
         # Render template with these variables
