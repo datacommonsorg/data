@@ -23,8 +23,8 @@ from unittest import mock
 
 from jinja2 import Template
 
-from tools.agentic_import.sdmx.fetch_enrichment_data import (Config,
-                                                            EnrichmentDataFetcher)
+from tools.agentic_import.sdmx.fetch_enrichment_data import (
+    Config, EnrichmentDataFetcher)
 
 
 class EnrichmentDataFetcherTest(unittest.TestCase):

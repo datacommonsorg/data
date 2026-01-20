@@ -22,8 +22,8 @@ from unittest import mock
 
 from jinja2 import Template
 
-from tools.agentic_import.sdmx.find_enrichment_items import (Config,
-                                                            EnrichmentItemsFinder)
+from tools.agentic_import.sdmx.find_enrichment_items import (
+    Config, EnrichmentItemsFinder)
 
 
 class EnrichmentItemsFinderTest(unittest.TestCase):
