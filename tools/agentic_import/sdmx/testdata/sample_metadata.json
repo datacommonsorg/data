@@ -1,0 +1,56 @@
+{
+  "dataflows": [
+    {
+      "id": "DF1",
+      "name": "Flow One",
+      "data_structure_definition": {
+        "dimensions": [
+          {
+            "id": "DIM1",
+            "concept": {"id": "C1"},
+            "representation": {
+              "codelist": {
+                "codes": [
+                  {"id": "CODE1"},
+                  {"id": "CODE2"}
+                ]
+              }
+            }
+          }
+        ],
+        "attributes": [
+          {
+            "id": "ATTR1",
+            "concept": {"id": "C2"},
+            "representation": {
+              "codelist": {
+                "codes": [
+                  {"id": "ACODE1"}
+                ]
+              }
+            }
+          }
+        ],
+        "measures": [
+          {
+            "id": "MEAS1",
+            "concept": {"id": "C3"}
+          }
+        ]
+      },
+      "referenced_concept_schemes": [
+        {
+          "id": "CS1",
+          "concepts": [
+            {"id": "CON1"},
+            {"id": "CON2"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DF2",
+      "name": "Flow Two"
+    }
+  ]
+}

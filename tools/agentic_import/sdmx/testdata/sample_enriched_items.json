@@ -1,0 +1,84 @@
+{
+  "dataflows": [
+    {
+      "id": "DF1",
+      "enriched_description": "Flow One enriched",
+      "data_structure_definition": {
+        "dimensions": [
+          {
+            "id": "DIM1",
+            "enriched_description": "Dimension enriched",
+            "concept": {
+              "id": "C1",
+              "enriched_description": "Concept C1 enriched"
+            },
+            "representation": {
+              "codelist": {
+                "codes": [
+                  {
+                    "id": "CODE1",
+                    "enriched_description": "Code 1 enriched"
+                  },
+                  {
+                    "id": "CODE2",
+                    "enriched_description": "Code 2 enriched"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "attributes": [
+          {
+            "id": "ATTR1",
+            "enriched_description": "Attribute enriched",
+            "concept": {
+              "id": "C2",
+              "enriched_description": "Concept C2 enriched"
+            },
+            "representation": {
+              "codelist": {
+                "codes": [
+                  {
+                    "id": "ACODE1",
+                    "enriched_description": "Attr code enriched"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "measures": [
+          {
+            "id": "MEAS1",
+            "enriched_description": "Measure enriched",
+            "concept": {
+              "id": "C3",
+              "enriched_description": "Concept C3 enriched"
+            }
+          }
+        ]
+      },
+      "referenced_concept_schemes": [
+        {
+          "id": "CS1",
+          "enriched_description": "Scheme enriched",
+          "concepts": [
+            {
+              "id": "CON1",
+              "enriched_description": "Concept 1 enriched"
+            },
+            {
+              "id": "CON2",
+              "enriched_description": "Concept 2 enriched"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DF3",
+      "enriched_description": "No base match"
+    }
+  ]
+}
