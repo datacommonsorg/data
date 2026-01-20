@@ -172,14 +172,14 @@ class EnrichmentDataFetcher:
     def _generate_prompt(self) -> Path:
         template_dir = os.path.join(_SCRIPT_DIR, 'templates')
         env = Environment(loader=FileSystemLoader(template_dir))
-        template = env.get_template('fetch_enrichment_data_prompt.j2')
+        template = env.get_template('metadata_enricher_fetch_prompt.j2')
 
         rendered_prompt = template.render(
             input_items_abs=str(self._input_path),
             output_path_abs=str(self._output_path),
         )
 
-        output_file = self._run_dir / 'fetch_enrichment_data_prompt.md'
+        output_file = self._run_dir / 'metadata_enricher_fetch_prompt.md'
         with open(output_file, 'w') as f:
             f.write(rendered_prompt)
 

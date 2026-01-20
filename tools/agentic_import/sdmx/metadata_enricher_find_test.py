@@ -15,7 +15,6 @@
 # limitations under the License.
 
 import json
-import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -23,20 +22,20 @@ from unittest import mock
 
 from jinja2 import Template
 
-from tools.agentic_import.sdmx.fetch_enrichment_data import (
-    Config, EnrichmentDataFetcher)
+from tools.agentic_import.sdmx.metadata_enricher_find import (
+    Config, EnrichmentItemsFinder)
 
 
-class EnrichmentDataFetcherTest(unittest.TestCase):
+class EnrichmentItemsFinderTest(unittest.TestCase):
 
     def test_dry_run_creates_prompt_and_run_dir(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
-            input_path = Path(tmpdir) / 'items.json'
-            input_path.write_text(json.dumps({"items": []}))
-            output_path = Path(tmpdir) / 'out' / 'items_enriched.json'
+            input_path = Path(tmpdir) / 'metadata.json'
+            input_path.write_text(json.dumps({"dataflows": []}))
+            output_path = Path(tmpdir) / 'out' / 'items.json'
 
             config = Config(
-                input_items_json=str(input_path),
+                input_metadata_json=str(input_path),
                 dataset_prefix='demo',
                 output_path=str(output_path),
                 dry_run=True,
@@ -45,11 +44,11 @@ class EnrichmentDataFetcherTest(unittest.TestCase):
                 working_dir=tmpdir,
             )
 
-            fetcher = EnrichmentDataFetcher(config)
+            finder = EnrichmentItemsFinder(config)
             with mock.patch("jinja2.environment.Template.render",
                             autospec=True,
                             side_effect=Template.render) as render_mock:
-                result = fetcher.fetch_enrichment_data()
+                result = finder.find_items_to_enrich()
 
             self.assertTrue(result.run_id.startswith('demo_gemini_'))
             self.assertTrue(result.run_dir.is_dir())
@@ -68,7 +67,7 @@ class EnrichmentDataFetcherTest(unittest.TestCase):
             _, render_kwargs = render_mock.call_args
             self.assertEqual(
                 render_kwargs, {
-                    "input_items_abs": str(input_path.resolve()),
+                    "input_metadata_abs": str(input_path.resolve()),
                     "output_path_abs": str(output_path.resolve()),
                 })
 

@@ -22,7 +22,7 @@ from pathlib import Path
 
 from deepdiff.diff import DeepDiff
 
-from tools.agentic_import.sdmx.sdmx_enrichment_merge import merge_enrichment
+from tools.agentic_import.sdmx.metadata_enricher_merge import merge_enrichment
 
 _TESTDATA_DIR = Path(os.path.dirname(__file__)) / 'testdata'
 _BASE_JSON = _TESTDATA_DIR / 'sample_metadata.json'
