@@ -73,9 +73,14 @@ typeOf: dcid:ReligionEnum
 name: "No Religious Affiliation"
 isProvisional: dcs:True
 
-Node: dcid:NotBornInStateOfResidence
+Node: dcid:BornInAreaOfResidence
 typeOf: dcid:Country
-name: "Not Born In State Of Residence"
+name: "Born In Area Of Residence"
+isProvisional: dcs:True
+
+Node: dcid:BornOutsideAreaOfResidence
+typeOf: dcid:Country
+name: "Born Outside Area Of Residence"
 isProvisional: dcs:True
 
 Node: dcid:AreaOfBirth
