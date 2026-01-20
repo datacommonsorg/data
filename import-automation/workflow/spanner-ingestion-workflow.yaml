@@ -10,14 +10,14 @@ main:
           - dataflow_gcs_path: 'gs://datcom-templates/templates/flex/ingestion.json'
           - location: '${sys.get_env("LOCATION")}'
           - spanner_database_id: '${sys.get_env("SPANNER_DATABASE_ID")}'
-          - ingestion_helper: "spanner-ingestion-helper"
-          - function_url: ${"https://" + location + "-" + project_id + ".cloudfunctions.net/" + ingestion_helper}
+          - ingestion_function: ${"https://" + location + "-" + project_id + ".cloudfunctions.net/" + "spanner-ingestion-helper"}
+          - aggregation_function: ${"https://" + location + "-" + project_id + ".cloudfunctions.net/" + "import-aggregation-helper"}
           - import_list: ${default(map.get(args, "imports"), [])}
           - execution_error: null
     - acquire_ingestion_lock:
         call: http.post
         args:
-          url: ${function_url}
+          url: ${ingestion_function}
           auth:
             type: OIDC
           body:
@@ -31,7 +31,7 @@ main:
             - get_import_list:
                 call: http.post
                 args:
-                  url: ${function_url}
+                  url: ${ingestion_function}
                   auth:
                     type: OIDC
                   body:
@@ -49,10 +49,18 @@ main:
                   spanner_database_id: ${spanner_database_id}
                   wait_period: ${wait_period}
                 result: dataflow_job_id
+            - run_aggregation:
+                call: http.post
+                args:
+                  url: ${aggregation_function}
+                  auth:
+                    type: OIDC
+                  body:
+                    importList: ${import_info.body}
             - update_ingestion_status:
                 call: http.post
                 args:
-                  url: ${function_url}
+                  url: ${ingestion_function}
                   auth:
                     type: OIDC
                   body:
@@ -70,7 +78,7 @@ main:
     - release_ingestion_lock:
         call: http.post
         args:
-          url: ${function_url}
+          url: ${ingestion_function}
           auth:
             type: OIDC
           body:
