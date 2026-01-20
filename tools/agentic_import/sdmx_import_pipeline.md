@@ -95,6 +95,6 @@ The pipeline automatically saves its state to a `<dataset_prefix>.state.json` fi
 
 ## Troubleshooting
 
--   **Gemini CLI Errors**: If the schema mapping step fails, check the Gemini CLI logs (usually in `.datacommons/runs/` within the working directory). Refer to the [main README](./README.md#debugging) for detailed debugging instructions.
+-   **Gemini CLI Errors**: If the schema mapping step fails, check the Gemini CLI logs in `.datacommons/runs/<gemini_run_id>/` (e.g., `output_gemini_20250915_163906_1234`, includes `gemini_cli.log` and `processor.log`). Refer to the [main README](./README.md#debugging) for detailed debugging instructions.
 -   **Missing Data**: Ensure the SDMX endpoint, agency, and dataflow ID are correct. Use `--verbose` to see the exact commands being run.
 -   **State Issues**: If the pipeline is stuck or behaving unexpectedly, you can delete the state file to reset the state, or use `--force`.

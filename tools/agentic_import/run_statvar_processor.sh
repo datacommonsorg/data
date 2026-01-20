@@ -74,12 +74,14 @@ else
   OUTPUT_PREFIX="${WORKING_DIR}/${OUTPUT_PATH}"
 fi
 
-# Create .datacommons directory if it doesn't exist
-mkdir -p "${WORKING_DIR}/.datacommons"
+# Create .datacommons run directory if it doesn't exist
+RUN_DIR="${WORKING_DIR}/.datacommons/runs/${GEMINI_RUN_ID}"
+mkdir -p "${RUN_DIR}"
 
 # Define log file paths (persistent files that Gemini can read)
-PROCESSOR_LOG="${WORKING_DIR}/.datacommons/processor.log"
-BACKUP_LOG="${WORKING_DIR}/.datacommons/backup.log"
+PROCESSOR_LOG="${RUN_DIR}/processor.log"
+BACKUP_LOG="${RUN_DIR}/backup.log"
+OUTPUT_COUNTERS="${RUN_DIR}/output_counters.csv"
 # Keep CSV column ordering predictable across runs when importing multiple files.
 OUTPUT_COLUMNS="observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor"
 # TODO : Add existing_statvar_mcf, existing_schema_mcf support
@@ -93,7 +95,7 @@ echo "Running statvar processor..."
   --generate_statvar_name=True \
   --skip_constant_csv_columns=False \
   --output_columns="${OUTPUT_COLUMNS}" \
-  --output_counters="${WORKING_DIR}/.datacommons/output_counters.csv" \
+  --output_counters="${OUTPUT_COUNTERS}" \
   --output_path="${OUTPUT_PREFIX}" > "${PROCESSOR_LOG}" 2>&1
 
 # Capture the processor exit code
@@ -105,7 +107,7 @@ declare -a BACKUP_ARGS=(
   "--working_dir=${WORKING_DIR}"
   "--gemini_run_id=${GEMINI_RUN_ID}"
   "--backup_files=${PROCESSOR_LOG}"
-  "--backup_files=${WORKING_DIR}/.datacommons/output_counters.csv"
+  "--backup_files=${OUTPUT_COUNTERS}"
   "--backup_files=${OUTPUT_PREFIX}_pvmap.csv"
   "--backup_files=${OUTPUT_PREFIX}_metadata.csv"
   "--backup_files=${OUTPUT_PREFIX}.csv"
