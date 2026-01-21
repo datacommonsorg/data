@@ -22,7 +22,7 @@ from absl import app
 from absl import flags
 from absl import logging
 
-from tools.agentic_import.common.json_merge import merge_json
+from tools.agentic_import.common.merge_json_fields import merge_json_fields
 
 _FLAGS = flags.FLAGS
 
@@ -58,10 +58,11 @@ def merge_enrichment(input_metadata_json: str, input_enriched_items_json: str,
                      output_path: str) -> None:
     base_data = _load_json(Path(input_metadata_json))
     enriched_data = _load_json(Path(input_enriched_items_json))
-    merged = merge_json(base_data,
-                        enriched_data,
-                        key_field='id',
-                        allow_overwrite=False)
+    merged = merge_json_fields(base_data,
+                               enriched_data,
+                               fields_to_update=['enriched_description'],
+                               key_field='id',
+                               allow_overwrite=False)
     _write_json(Path(output_path), merged)
 
 
