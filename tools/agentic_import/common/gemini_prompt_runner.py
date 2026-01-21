@@ -13,6 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Render prompts and run the Gemini CLI with tracked run outputs."""
 
 import shutil
 import subprocess
