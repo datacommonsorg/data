@@ -37,23 +37,19 @@ class CollectionMerger:
               fields_to_update: List[str],
               key_field: str = 'id',
               allow_overwrite: bool = False) -> DictOrList:
-        """Merges values from `incoming` into `base` for a controlled set of fields.
+        """Merges specific fields from `incoming` into `base` in-place.
 
-        The merge walks `base` and only descends into dicts/lists that already
-        exist in `base` (it does not create new containers). For dicts, only keys
-        listed in `fields_to_update` may be added or updated; other keys are
-        merged only when they already exist in `base`. For lists, items are
-        matched by `key_field` (default: "id"); incoming items with no match in
-        `base` are ignored. Container type mismatches are skipped.
+        This performs a structure-aware merge:
+        1. Only keys in `fields_to_update` are added or updated.
+        2. Lists are merged by matching items on `key_field` (e.g., "id").
+        3. Structure in `base` is preserved; new unmatched containers are ignored.
 
         Args:
-          base: Nested dict/list structure to update. Modified in place.
-          incoming: Nested dict/list structure providing candidate updates.
-          fields_to_update: Dict keys that are allowed to be added/updated.
-          key_field: Dict key used to match list items when merging lists.
-          allow_overwrite: If True, overwrite existing values for
-            `fields_to_update`. If False, existing `base` values are preserved
-            and incoming values are ignored.
+          base: The target dictionary or list to update.
+          incoming: The source dictionary or list with updates.
+          fields_to_update: Keys allowed to be changed or added.
+          key_field: Key used to match list items.
+          allow_overwrite: Whether to overwrite existing values.
 
         Returns:
           The updated `base` object.
