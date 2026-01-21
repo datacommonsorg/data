@@ -10,9 +10,24 @@
             "concept": {"id": "C1"},
             "representation": {
               "codelist": {
+                "id": "CL1",
+                "name": "Base Codelist One",
                 "codes": [
-                  {"id": "CODE1"},
-                  {"id": "CODE2"}
+                  {"id": "CODE1", "name": "Base Code1 CL1"},
+                  {"id": "CODE2", "name": "Base Code2 CL1"}
+                ]
+              }
+            }
+          },
+          {
+            "id": "DIM2",
+            "concept": {"id": "C4"},
+            "representation": {
+              "codelist": {
+                "id": "CL2",
+                "name": "Base Codelist Two",
+                "codes": [
+                  {"id": "CODE1", "name": "Base Code1 CL2"}
                 ]
               }
             }

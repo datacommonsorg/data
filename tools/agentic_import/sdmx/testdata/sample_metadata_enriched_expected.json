@@ -14,19 +14,44 @@
             },
             "representation": {
               "codelist": {
+                "id": "CL1",
+                "name": "Base Codelist One",
                 "codes": [
                   {
                     "id": "CODE1",
+                    "name": "Base Code1 CL1",
                     "enriched_description": "Code 1 enriched"
                   },
                   {
                     "id": "CODE2",
+                    "name": "Base Code2 CL1",
                     "enriched_description": "Code 2 enriched"
                   }
                 ]
               }
             },
             "enriched_description": "Dimension enriched"
+          },
+          {
+            "id": "DIM2",
+            "concept": {
+              "id": "C4",
+              "enriched_description": "Concept C4 enriched"
+            },
+            "representation": {
+              "codelist": {
+                "id": "CL2",
+                "name": "Base Codelist Two",
+                "codes": [
+                  {
+                    "id": "CODE1",
+                    "name": "Base Code1 CL2",
+                    "enriched_description": "Code 1 enriched CL2"
+                  }
+                ]
+              }
+            },
+            "enriched_description": "Dimension two enriched"
           }
         ],
         "attributes": [
@@ -80,6 +105,10 @@
     {
       "id": "DF2",
       "name": "Flow Two"
+    },
+    {
+      "id": "DF3",
+      "enriched_description": "No base match"
     }
   ]
 }

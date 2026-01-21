@@ -14,14 +14,39 @@
             },
             "representation": {
               "codelist": {
+                "id": "CL1",
+                "name": "Enriched Codelist One",
                 "codes": [
                   {
                     "id": "CODE1",
+                    "name": "Enriched Code1 CL1",
                     "enriched_description": "Code 1 enriched"
                   },
                   {
                     "id": "CODE2",
+                    "name": "Enriched Code2 CL1",
                     "enriched_description": "Code 2 enriched"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "DIM2",
+            "enriched_description": "Dimension two enriched",
+            "concept": {
+              "id": "C4",
+              "enriched_description": "Concept C4 enriched"
+            },
+            "representation": {
+              "codelist": {
+                "id": "CL2",
+                "name": "Enriched Codelist Two",
+                "codes": [
+                  {
+                    "id": "CODE1",
+                    "name": "Enriched Code1 CL2",
+                    "enriched_description": "Code 1 enriched CL2"
                   }
                 ]
               }
