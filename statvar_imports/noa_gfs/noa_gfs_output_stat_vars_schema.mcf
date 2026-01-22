@@ -285,6 +285,12 @@ typeOf: dcid:Distance
 name: "Tropopause"
 isProvisional: dcs:True
 
+Node: dcid:altitude
+typeOf: dcs:Property
+name: "altitude"
+rangeIncludes: dcid:AltitudeEnum
+isProvisional: dcs:True
+
 Node: dcid:ICAOStandardAtmosphere
 typeOf: dcid:MeasurementQualifierEnum
 name: "ICAOStandard Atmosphere"
