@@ -1,12 +1,13 @@
 import csv
 import io
 import re
+import time
 from google.cloud import storage
 
 # --- CONFIGURATION ---
 BUCKET_NAME = "unresolved_mcf"
-INPUT_LOCAL = "./input_files/gfs.t00z.pgrb2.0p25.f000.csv"
-OUTPUT_BLOB_NAME = "noaa_gfs_poc/noaa_gfs_output_full.csv"
+INPUT_LOCAL = "../noa_gfs/input_files/gfs.t00z.pgrb2.0p25.f000.csv"
+OUTPUT_BLOB_NAME = "noaa_gfs/noaa_gfs_output.csv"
 
 # 1. Parameter Mapping (Original)
 param_map = {
@@ -84,7 +85,13 @@ param_map = {
 # 2. Helper Function to Clean Level for DCID
 def format_level_dcid(level):
     l = str(level).lower().strip()
-    if l == "mean sea level": return "0Meter"
+    
+    if l == "mean sea level": 
+        return "0MetersAboveMeanSeaLevel"
+    if "m above mean sea level" in l:
+        val = l.split(" ")[0].replace("-", "To")
+        return f"{val}MetersAboveMeanSeaLevel"
+
     if l == "surface": return "SurfaceLevel"
     if "entire atmosphere" in l: return ""
     if l == "planetary boundary layer": return "PlanetaryBoundaryLayer"
@@ -104,11 +111,13 @@ def format_level_dcid(level):
             start, end = match.group(1), match.group(2)
             return f"{start}To{end}Meter" if end else f"{start}Meter"
 
-    if "m above ground" in l or "m above mean sea level" in l:
+    if "m above ground" in l:
         val = l.split(" ")[0].replace("-", "To")
         return f"{val}Meter"
 
     if "mb" in l:
+        # Extracts values from "30-0 mb" -> "30To0Millibar"
+        # Prevents "GroundLevel" from being attached to Millibar layers later
         val = l.split(" ")[0].replace("-", "To")
         return f"{val}Millibar"
 
@@ -156,40 +165,32 @@ def process_and_upload_true_stream():
     client = storage.Client()
     bucket = client.bucket(BUCKET_NAME)
     blob = bucket.blob(OUTPUT_BLOB_NAME)
-
-    # This setting is key: it tells the client to upload in 5MB chunks
-    # instead of waiting for the whole file to finish.
-    blob.chunk_size = 5 * 1024 * 1024  # 5MB chunks
-
-    print(f"Streaming: {INPUT_LOCAL} -> gs://{BUCKET_NAME}/{OUTPUT_BLOB_NAME}")
+    blob.chunk_size = 64 * 1024 * 1024
 
     with open(INPUT_LOCAL, mode='r') as f_in:
         reader = csv.DictReader(f_in)
-        
-        # We use a 'file-like' object in memory to bridge the CSV writer and the Uploader
         output_buffer = io.StringIO()
         writer = csv.writer(output_buffer)
-        
-        # Write Header
         writer.writerow(['observationDate', 'value', 'variableMeasured', 'measurementMethod', 'latitude', 'longitude', 'placeName', 'unit'])
 
-        # Open the cloud write stream
         with blob.open("w", content_type='text/csv') as cloud_file:
-            # Write the header first
             cloud_file.write(output_buffer.getvalue())
-            output_buffer.seek(0)
-            output_buffer.truncate(0)
+            output_buffer.seek(0); output_buffer.truncate(0)
 
-            # Process rows one by one
             for i, row in enumerate(reader):
                 param = row['Parameter']
                 level = row['Level']
-                
                 obs_date = row['Valid_Time'].replace(' ', 'T')
                 dcid = construct_dcid(param, level)
                 
                 l_low = level.lower()
-                method = "MeanSeaLevel" if "mean sea level" in l_low else ("GroundLevel" if "ground" in l_low else "")
+                
+                # Logic to determine measurementMethod
+                # If it is Millibar or Mean Sea Level, it must be empty
+                if "mb" in l_low or "mean sea level" in l_low:
+                    method = ""
+                else:
+                    method = "GroundLevel" if "ground" in l_low else ""
                 
                 writer.writerow([
                     obs_date,
@@ -202,16 +203,20 @@ def process_and_upload_true_stream():
                     param_map.get(param.upper(), ('', ''))[1]
                 ])
                 
-                # Periodically flush the buffer to the cloud to keep RAM usage near zero
                 if i % 1000 == 0:
                     cloud_file.write(output_buffer.getvalue())
-                    output_buffer.seek(0)
-                    output_buffer.truncate(0)
+                    output_buffer.seek(0); output_buffer.truncate(0)
             
-            # Final flush for remaining rows
             cloud_file.write(output_buffer.getvalue())
 
-    print("Upload complete. No local storage used.")
-
 if __name__ == "__main__":
-    process_and_upload_true_stream()
+    start_time = time.perf_counter()
+    print(f"Process started: {time.strftime('%Y-%m-%d %H:%M:%S')}")
+    try:
+        process_and_upload_true_stream()
+        print("Upload complete.")
+    except Exception as e:
+        print(f"Error: {e}")
+    duration = time.perf_counter() - start_time
+    mins, secs = divmod(duration, 60)
+    print(f"Total Execution Time: {int(mins)}m {secs:.2f}s")
