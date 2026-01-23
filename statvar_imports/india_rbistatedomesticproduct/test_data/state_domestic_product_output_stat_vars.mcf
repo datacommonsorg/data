@@ -1,0 +1,12 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/india_rbistatedomesticproduct/test_data/state_domestic_input.xlsx --pv_map=statvar_imports/india_rbistatedomesticproduct/state_domestic_product_pv_map.csv --output_path=statvar_imports/india_rbistatedomesticproduct/test_data/state_domestic_product_output --config_file=statvar_imports/india_rbistatedomesticproduct/state_domestic_product_metadata.csv --places_resolved_csv=statvar_imports/india_rbistatedomesticproduct/state_domestic_product_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-14 15:16:57.954512
+
+Node: dcid:RealValue_Amount_EconomicActivity_GrossValueAdded_Construction
+typeOf: dcid:StatisticalVariable
+name: "Gross Value Added in Construction Sector by Current Prices."
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+activitySource: dcid:GrossValueAdded
+economicSector: dcid:Construction
+

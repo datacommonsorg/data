@@ -13,6 +13,9 @@ input_directory = os.path.join(_GCS_OUTPUT_DIR, 'input_files')
 output = os.path.join(_GCS_OUTPUT_DIR, 'output')
 output_file_path = os.path.join(output, 'transformed_data_for_all_final.csv')
 
+places_csv = os.path.join(_MODULE_DIR, 'places.csv')
+skip_places_csv = os.path.join(_MODULE_DIR, 'skip_places.csv')
+
 _UTIL_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_UTIL_DIR, '../../../util/'))
 import file_util
@@ -26,6 +29,31 @@ flags.DEFINE_string(
     "historical file path")
 flags.DEFINE_string("historical_file", "bq-results-20250423.csv",
                     "historical file name")
+
+DCID_MAP = {}
+IGNORE_DCIDS = set()
+
+
+def _load_place_mapping():
+    try:
+        with open(places_csv, 'r', newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                DCID_MAP[row['country code'].strip()] = row['dcid'].strip()
+    except FileNotFoundError:
+        logging.fatal(f"File not found: {places_csv}")
+    except csv.Error as e:
+        logging.fatal(f"Error reading CSV {places_csv}: {e}")
+
+    try:
+        with open(skip_places_csv, 'r', newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                IGNORE_DCIDS.add(row['country code'].strip())
+    except FileNotFoundError:
+        logging.fatal(f"File not found: {skip_places_csv}")
+    except csv.Error as e:
+        logging.fatal(f"Error reading CSV {skip_places_csv}: {e}")
 
 
 def transform_worldbank_csv(input_filename,
@@ -57,7 +85,6 @@ def transform_worldbank_csv(input_filename,
                                     break
                             except ValueError:
                                 pass
-                            """Ignoring ValueError: expecting integer for year column identification."""
                     except ValueError:
                         logging.info(
                             f"Error: Could not find required columns in header of '{input_filename}'."
@@ -74,8 +101,16 @@ def transform_worldbank_csv(input_filename,
                             country_code_column_index is not None and year_columns_start_index is not None:
                         indicator_code = row[indicator_code_column_index].strip(
                         )
-                        country_code = "country/" + row[
-                            country_code_column_index].strip()
+                        code_from_csv = row[country_code_column_index]
+                        raw_country_code = "country/" + code_from_csv
+
+                        if code_from_csv in IGNORE_DCIDS:
+                            continue
+                        if code_from_csv in DCID_MAP:
+                            country_code = DCID_MAP[code_from_csv]
+                        else:
+                            country_code = raw_country_code
+
                         stat_var = "worldBank/" + indicator_code.replace(
                             '.', '_')
 
@@ -84,7 +119,6 @@ def transform_worldbank_csv(input_filename,
                             year = header[j]
                             value = row[j].strip()
                             if value:
-                                """Keeping the first occurrence and removing subsequent duplicates. Verified with source and production; the initial value from the source now is matching with the production data(checked for 4-5 samples) ."""
                                 duplicate_key = (indicator_code, stat_var,
                                                  MEASUREMENT_METHOD,
                                                  country_code, year, unit_value)
@@ -125,10 +159,14 @@ def get_unit_by_indicator(target_indicator_code):
     except FileNotFoundError:
         return ""
     except Exception as e:
+        logging.warning(
+            f"Error while reading unit for indicator {target_indicator_code}: {e}"
+        )
         return ""
 
 
 def main(_):
+    _load_place_mapping()
     input_files = [
         os.path.join(input_directory, f)
         for f in os.listdir(input_directory)
@@ -151,9 +189,10 @@ def main(_):
         logging.info(
             f"\nSuccessfully processed {len(input_files)} files. Combined output written to '{output_file_path}'"
         )
-        # historical_file = "bq-results-20250423.csv"
+
         file_util.file_copy(f'{FLAGS.gs_path}{FLAGS.historical_file}',
                             f'{output}/{FLAGS.historical_file}')
+
         expected_output_files = [
             FLAGS.historical_file, 'transformed_data_for_all_final.csv'
         ]
