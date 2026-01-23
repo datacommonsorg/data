@@ -1,9 +1,9 @@
 key,prop,value,,,,,,,,,,,,
-TABLE 104: STATE-WISE FOREST COVER,measuredProperty,area,populationType,LandCover,landCoverType,Forest,name,"""Area of Land Cover: Forest""",unit,SquareKilometer,,,,
-TABLE 106: STATE-WISE TREE COVER,measuredProperty,area,populationType,LandCover,landCoverType,Tree,name,"""Area of Land Cover: Tree""",unit,SquareKilometer,,,,
-TABLE 107: SUB-DIVISION-WISE ANNUAL RAINFALL,measuredProperty,rainfall,populationType,Place,measurementQualifier,Annual,name,"""Annual Rainfall""",unit,Millimeter,,,,
-Table 110: STATE-WISE EXPENDITURE ON RELIEF ON NATURAL CALAMITIES,measuredProperty,amount,populationType,EconomicActivity,activitySource,ExpenditureActivity,expenditureType,ReliefOnNaturalCalamity,name,"""Expenditure on relief on natural calamity""",#Multiply,100000,unit,INR
-Table 111: STATE-WISE SUSTAINABLE DEVELOPMENT GOALS (SDGs) SCORE,measuredProperty,score,populationType,SustainableDevelopmentGoals,name,"""Sustainable Development Goals Score""",,,,,,,,
+TABLE 99: STATE-WISE FOREST COVER,measuredProperty,area,populationType,LandCover,landCoverType,Forest,name,"""Area of Land Cover: Forest""",unit,SquareKilometer,,,,
+TABLE 101: STATE-WISE TREE COVER,measuredProperty,area,populationType,LandCover,landCoverType,Tree,name,"""Area of Land Cover: Tree""",unit,SquareKilometer,,,,
+TABLE 102: SUB-DIVISION-WISE ANNUAL RAINFALL,measuredProperty,rainfall,populationType,Place,measurementQualifier,Annual,name,"""Annual Rainfall""",unit,Millimeter,,,,
+Table 105: STATE-WISE EXPENDITURE ON RELIEF ON NATURAL CALAMITIES,measuredProperty,amount,populationType,EconomicActivity,activitySource,ExpenditureActivity,expenditureType,ReliefOnNaturalCalamity,name,"""Expenditure on relief on natural calamity""",#Multiply,100000,unit,INR
+Table 106: STATE-WISE SUSTAINABLE DEVELOPMENT GOALS (SDGs) SCORE,measuredProperty,score,populationType,SustainableDevelopmentGoals,name,"""Sustainable Development Goals Score""",,,,,,,,
 State/ Union Territory,observationAbout,{Data},,,,,,,,,,,,
 State/Union Territory,observationAbout,{Data},,,,,,,,,,,,
 1987,observationDate,1987,value,{Number},,,,,,,,,,

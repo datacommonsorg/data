@@ -9,6 +9,7 @@
 
 absl-py
 chembl-webresource-client
+dataclasses-json
 deepdiff
 earthengine-api
 flask_restful
