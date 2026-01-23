@@ -149,6 +149,23 @@ def preprocess_and_save(data: List[Tuple], output_dir: str) -> None:
     output_path = os.path.join(_SCRIPT_PATH, 'india_nss_health_ailments.csv')  
     df.to_csv(output_path, index=False)
     logging.info('Data saved to %s', output_path)
+  """Converts data to a DataFrame and saves it as a CSV file.
+
+  Args:
+    data: The data to be processed, as a list of tuples.
+    output_dir: The directory where the output CSV will be saved.
+  """
+  if not data:
+    logging.info('No data was retrieved from the API.')
+    return
+
+  df = pd.DataFrame(data, columns=_OUTPUT_COLUMNS)
+
+  os.makedirs(output_dir, exist_ok=True)
+  output_path = os.path.join(output_dir, 'india_nss_health_ailments.csv')  
+  df.to_csv(output_path, index=False)
+  logging.info('Data saved to %s', output_path)
+
 
 def main(_) -> None:
     raw_data, output_dir = download_data(_FLAGS.config_file_path)
