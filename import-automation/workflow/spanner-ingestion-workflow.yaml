@@ -3,28 +3,38 @@ main:
   steps:
     - init:
         assign:
-          - lock_timeout: 86400 # 24 hours
+          - lock_timeout: 82800 # 23 hours
           - wait_period: 300 # seconds
           - project_id: '${sys.get_env("PROJECT_ID")}'
           - dataflow_job_name: 'ingestion-job'
           - dataflow_gcs_path: 'gs://datcom-templates/templates/flex/ingestion.json'
           - location: '${sys.get_env("LOCATION")}'
+          - spanner_project_id: '${sys.get_env("SPANNER_PROJECT_ID")}'
+          - spanner_instance_id: '${sys.get_env("SPANNER_INSTANCE_ID")}'
           - spanner_database_id: '${sys.get_env("SPANNER_DATABASE_ID")}'
           - ingestion_function: ${"https://" + location + "-" + project_id + ".cloudfunctions.net/" + "spanner-ingestion-helper"}
           - aggregation_function: ${"https://" + location + "-" + project_id + ".cloudfunctions.net/" + "import-aggregation-helper"}
           - import_list: ${default(map.get(args, "imports"), [])}
           - execution_error: null
     - acquire_ingestion_lock:
-        call: http.post
-        args:
-          url: ${ingestion_function}
-          auth:
-            type: OIDC
-          body:
-            actionType: acquire_ingestion_lock
-            workflowId: '${sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
-            timeout: ${lock_timeout}
-        result: lock_status
+        try:
+          call: http.post
+          args:
+            url: ${ingestion_function}
+            auth:
+              type: OIDC
+            body:
+              actionType: acquire_ingestion_lock
+              workflowId: '${sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
+              timeout: ${lock_timeout}
+          result: lock_status
+        retry:
+          predicate: ${http.default_retry_predicate}
+          max_retries: 10
+          backoff:
+            initial_delay: 300
+            max_delay: 300
+            multiplier: 1
     - process_ingestion:
         try:
           steps:
@@ -46,6 +56,8 @@ main:
                   job_name: ${dataflow_job_name}
                   template_gcs_path: ${dataflow_gcs_path}
                   location: ${location}
+                  spanner_project_id: ${spanner_project_id}
+                  spanner_instance_id: ${spanner_instance_id}
                   spanner_database_id: ${spanner_database_id}
                   wait_period: ${wait_period}
                 result: dataflow_job_id
@@ -85,7 +97,7 @@ main:
             actionType: release_ingestion_lock
             workflowId: '${sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
         result: function_response
-    - check_error:
+    - fail_workflow:
         switch:
           - condition: ${execution_error != null}
             raise: ${execution_error}
@@ -94,7 +106,7 @@ main:
 
 # This sub-workflow launches a Dataflow job and waits for it to complete.
 run_dataflow_job:
-  params: [import_list, project_id, job_name, template_gcs_path, location, spanner_database_id, wait_period]
+  params: [import_list, project_id, job_name, template_gcs_path, location, spanner_project_id, spanner_instance_id, spanner_database_id, wait_period]
   steps:
     - init:
         assign:
@@ -119,6 +131,8 @@ run_dataflow_job:
               jobName: '${jobName}'
               parameters:
                 importList: '${import_list}'
+                projectId: '${spanner_project_id}'
+                spannerInstanceId: '${spanner_instance_id}'
                 spannerDatabaseId: '${spanner_database_id}'
               environment:
                 numWorkers: 3
