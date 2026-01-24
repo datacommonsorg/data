@@ -1,0 +1,4 @@
+key,prop,value,,,,,,,,,,,,,,
+Municipalities,observationAbout,{Data},measuredProperty,count,populationType,BirthEvent,medicalStatus,LiveBirth,statType,measuredValue,measurementDenominator,Count_Person,observationPeriod,P1Y,unit,Per1000Persons
+value,value,{Number},,,,,,,,,,,,,,
+Period,observationDate,{Data},,,,,,,,,,,,,,
