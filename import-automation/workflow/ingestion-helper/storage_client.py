@@ -22,6 +22,9 @@ import os
 logging.getLogger().setLevel(logging.INFO)
 
 _STAGING_VERSION_FILE = 'staging_version.txt'
+_LATEST_VERSION_FILE = 'latest_version.txt'
+_IMPORT_METADATA_MCF = 'import_metadata_mcf.mcf'
+_IMPORT_SUMMARY_JSON = 'import_summary.json'
 
 
 class StorageClient:
@@ -42,7 +45,7 @@ class StorageClient:
             A dictionary containing the import summary, or an empty dict if not found.
         """
         output_dir = import_name.replace(':', '/')
-        summary_file = os.path.join(output_dir, version, 'import_summary.json')
+        summary_file = os.path.join(output_dir, version, _IMPORT_SUMMARY_JSON)
         logging.info(f'Reading import summary from {summary_file}')
         try:
             blob = self.bucket.blob(summary_file)
@@ -74,6 +77,27 @@ class StorageClient:
             logging.error(f"Version file {version_file} not found")
             return ''
 
+    def update_staging_version(self, import_name: str, version: str):
+        """Updates the staging version file in GCS.
+
+        Args:
+            import_name: The name of the import.
+            version: The new version string.
+        """
+        try:
+            logging.info(
+                f'Updating staging version file for import {import_name} to {version}'
+            )
+            output_dir = import_name.replace(':', '/')
+            version_file = self.bucket.blob(
+                os.path.join(output_dir, _STAGING_VERSION_FILE))
+            version_file.upload_from_string(version)
+            logging.info(
+                f'Updated staging version file {version_file} to {version}')
+        except exceptions.NotFound as e:
+            logging.error(f'Error updating version file for {import_name}: {e}')
+            raise
+
     def update_version_file(self, import_name: str, version: str):
         """Updates the version file in GCS.
 
@@ -85,15 +109,24 @@ class StorageClient:
             version: The new version string.
         """
         try:
+            logging.info(
+                f'Updating version history file for import {import_name} to add {version}'
+            )
             output_dir = import_name.replace(':', '/')
             version_file = self.bucket.blob(
-                os.path.join(output_dir, 'latest_version.txt'))
-            self.bucket.copy_blob(
-                self.bucket.blob(
-                    os.path.join(output_dir, version,
-                                 'import_metadata_mcf.mcf')), self.bucket,
-                os.path.join(output_dir, 'import_metadata_mcf.mcf'))
+                os.path.join(output_dir, _LATEST_VERSION_FILE))
+            metadata_blob = self.bucket.blob(
+                os.path.join(output_dir, version, _IMPORT_METADATA_MCF))
+            if metadata_blob.exists():
+                self.bucket.copy_blob(
+                    metadata_blob, self.bucket,
+                    os.path.join(output_dir, 'import_metadata_mcf.mcf'))
+            else:
+                logging.error(
+                    f'Metadata file not found for import {import_name} {version}'
+                )
             version_file.upload_from_string(version)
+            logging.info(f'Updated version history file {version_file}')
         except exceptions.NotFound as e:
             logging.error(f'Error updating version file for {import_name}: {e}')
             raise

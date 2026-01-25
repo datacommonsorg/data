@@ -53,24 +53,44 @@
         "release_year": 2024,
         "parameter": [
             {
-                "URL": "https://data.cdc.gov/api/views/swc5-untb/rows.csv?accessType=DOWNLOAD",
+                "URL": "https://data.cdc.gov/api/views/fu4u-a9bh/rows.csv?accessType=DOWNLOAD",
                 "FILE_TYPE": "County",
                 "FILE_NAME": "county_raw_data_2024.csv"
             },
             {
-                "URL": "https://data.cdc.gov/api/views/eav7-hnsx/rows.csv?accessType=DOWNLOAD",
+                "URL": "https://data.cdc.gov/api/views/sd8v-uq83/rows.csv?accessType=DOWNLOAD",
                 "FILE_TYPE": "City",
                 "FILE_NAME": "city_raw_data_2024.csv"
             },
             {
-                "URL": "https://data.cdc.gov/api/views/cwsq-ngmh/rows.csv?accessType=DOWNLOAD",
+                "URL": "https://data.cdc.gov/api/views/ai6z-tcin/rows.csv?accessType=DOWNLOAD",
                 "FILE_TYPE": "CensusTract",
                 "FILE_NAME": "censustract_raw_data_2024.csv"
+            }
+        ]
+    },
+    {
+        "release_year": 2025,
+        "parameter": [
+            {
+                "URL": "https://data.cdc.gov/api/views/swc5-untb/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "County",
+                "FILE_NAME": "county_raw_data_2025.csv"
+            },
+            {
+                "URL": "https://data.cdc.gov/api/views/eav7-hnsx/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "City",
+                "FILE_NAME": "city_raw_data_2025.csv"
+            },
+            {
+                "URL": "https://data.cdc.gov/api/views/cwsq-ngmh/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "CensusTract",
+                "FILE_NAME": "censustract_raw_data_2025.csv"
             },
             {
                 "URL": "https://data.cdc.gov/api/views/qnzd-25i4/rows.csv?accessType=DOWNLOAD",
                 "FILE_TYPE": "ZipCode",
-                "FILE_NAME": "zipcode_raw_data_2024.csv"
+                "FILE_NAME": "zipcode_raw_data_2025.csv"
             }
         ]
     }
