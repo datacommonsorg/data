@@ -37,6 +37,7 @@ The data imported in this effort is from the CDC's [500 Places project](https://
 For data refresh for CDC500 import we need to manually search in the website for the latest release files across all geo levels and add the required configuration in [Json file](gs://datcom-csv/cdc500_places/download_config.json) present in the GCP Bucket Location. The config file is present locally as well [download_config.json](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/download_config.json) we can use this file as well to generate the output.
 
 NOTE: If any changes made in local config update same changes in config file present in GCP as well vice versa. We should always keep both config file in sync.
+Here is the path for  download_config.json in bucket : gs://datcom-csv/cdc500_places/download_config.json
 
 Please fill the json file for the latest release data in below format:
 

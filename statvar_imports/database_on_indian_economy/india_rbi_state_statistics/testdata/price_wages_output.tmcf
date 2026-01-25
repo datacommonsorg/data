@@ -1,0 +1,8 @@
+Node: E:price_wages_output->E0
+observationAbout: C:price_wages_output->observationAbout
+observationDate: C:price_wages_output->observationDate
+variableMeasured: C:price_wages_output->variableMeasured
+value: C:price_wages_output->value
+unit: C:price_wages_output->unit
+observationPeriod: C:price_wages_output->observationPeriod
+typeOf: dcs:StatVarObservation

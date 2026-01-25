@@ -15,6 +15,7 @@
 
 import logging
 import croniter
+import re
 from datetime import datetime, timezone
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -41,7 +42,7 @@ def get_caller_identity(request):
                     logging.warning(
                         f"Could not decode unverified token for debugging: {e}")
                     email = unverified_claims.get('email', 'unknown_email')
-                    return f"{email} (unverified)"
+                    return f"{email}"
                 return 'decode_error'
         else:
             logging.warning(
@@ -51,7 +52,7 @@ def get_caller_identity(request):
     return 'no_auth_header'
 
 
-def get_import_params(request_json) -> dict:
+def get_import_params(request) -> dict:
     """Extracts and calculates import parameters from the request JSON.
 
     Args:
@@ -60,62 +61,44 @@ def get_import_params(request_json) -> dict:
     Returns:
         A dictionary with import params.
     """
-    import_name = request_json.get('importName', '')
-    status = request_json.get('status', '')
-    job_id = request_json.get('jobId', '')
-    exec_time = request_json.get('execTime', 0)
-    data_volume = request_json.get('dataVolume', 0)
-    version = request_json.get('version', '')
-    schedule = request_json.get('schedule', '')
-    next_refresh = datetime.now(timezone.utc)
-    try:
-        next_refresh = croniter.croniter(schedule, datetime.now(
-            timezone.utc)).get_next(datetime)
-    except (croniter.CroniterError) as e:
-        logging.error(
-            f"Error calculating next refresh from schedule '{schedule}': {e}")
-    return {
-        'import_name': import_name,
-        'status': status,
-        'job_id': job_id,
-        'exec_time': exec_time,
-        'data_volume': data_volume,
-        'version': version,
-        'next_refresh': next_refresh
+    # Convert CamelCase or mixedCase to snake_case.
+    request_json = {
+        re.sub(r'(?<!^)(?=[A-Z])', '_', k).lower(): v
+        for k, v in request.items()
     }
 
-
-def create_import_params(summary) -> dict:
-    """Creates import parameters from the import summary.
-
-    Args:
-        summary: A dictionary containing import summary details.
-
-    Returns:
-        A dictionary with import params.
-    """
-    import_name = summary.get('import_name', '')
-    status = summary.get('status', '').removeprefix('ImportStatus.')
-    job_id = summary.get('job_id', '')
-    exec_time = summary.get('execution_time', 0)
-    data_volume = summary.get('data_volume', 0)
-    version = summary.get('latest_version', '')
-    next_refresh_str = summary.get('next_refresh', '')
-    next_refresh = None
+    import_name = request_json.get('import_name', '').split(':')[-1]
+    status = request_json.get('status', '').removeprefix('ImportStatus.')
+    job_id = request_json.get('job_id', '')
+    execution_time = request_json.get('execution_time', 0)
+    data_volume = request_json.get('data_volume', 0)
+    latest_version = request_json.get('latest_version', '')
+    graph_path = request_json.get('graph_path', '')
+    schedule = request_json.get('schedule', '')
+    next_refresh_str = request_json.get('next_refresh', '')
+    next_refresh = datetime.now(timezone.utc)
     if next_refresh_str:
         try:
             next_refresh = datetime.fromisoformat(next_refresh_str)
         except ValueError:
             logging.error(f"Error parsing next_refresh: {next_refresh_str}")
-
+    if schedule:
+        try:
+            next_refresh = croniter.croniter(schedule, datetime.now(
+                timezone.utc)).get_next(datetime)
+        except (croniter.CroniterError) as e:
+            logging.error(
+                f"Error calculating next refresh from schedule '{schedule}': {e}"
+            )
     return {
         'import_name': import_name,
         'status': status,
         'job_id': job_id,
-        'exec_time': exec_time,
+        'execution_time': execution_time,
         'data_volume': data_volume,
-        'version': version,
-        'next_refresh': next_refresh,
+        'latest_version': latest_version,
+        'graph_path': graph_path,
+        'next_refresh': next_refresh
     }
 
 
@@ -160,11 +143,11 @@ def get_ingestion_metrics(project_id, location, job_id):
             for metric in metrics.get('metrics', []):
                 name = metric['name']['name']
                 if name == 'graph_node_count':
-                    node_count = int(metric['scalar'])
+                    node_count += int(metric['scalar'])
                 elif name == 'graph_edge_count':
-                    edge_count = int(metric['scalar'])
+                    edge_count += int(metric['scalar'])
                 elif name == 'graph_observation_count':
-                    obs_count = int(metric['scalar'])
+                    obs_count += int(metric['scalar'])
         except HttpError as e:
             logging.error(
                 f"Error fetching dataflow metrics for job {job_id}: {e}")

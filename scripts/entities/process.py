@@ -27,7 +27,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string("entity", "Schema", "Entity type (Schema/Place).")
 
 BUCKET_NAME = 'datcom-prod-imports'
-FILE_NAME = 'DONE'
+FILE_NAME = 'staging_version.txt'
 
 
 def process(entity_type: str):
@@ -35,11 +35,12 @@ def process(entity_type: str):
     current_date = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
     logging.info(f'Checking import {entity_type} for date {current_date}')
     file_path = os.path.join('scripts', os.path.basename(os.getcwd()),
-                             entity_type, current_date, FILE_NAME)
+                             entity_type, FILE_NAME)
     storage_client = storage.Client()
     bucket = storage_client.bucket(BUCKET_NAME)
     blob = bucket.blob(file_path)
-    if blob.exists():
+    version = blob.download_as_text()
+    if version == current_date:
         logging.info(
             f'Successfully validated import {entity_type} for date {current_date}'
         )
