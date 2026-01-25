@@ -1,0 +1,75 @@
+Node: dcid:crimeType
+typeOf: dcid:Property
+name: "crimeType"
+domainIncludes: dcid:CriminalActivities
+
+Node: dcid:Homicide
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Homicide"
+isProvisional: dcid:True
+
+Node: dcid:CrimeAgainstMorality
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Crime Against Morality"
+isProvisional: dcid:True
+
+Node: dcid:CrimeBreakings
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Crime Breakings"
+isProvisional: dcid:True
+
+Node: dcid:TheftOfStock
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Theft Of Stock"
+isProvisional: dcid:True
+
+Node: dcid:Stealing
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Stealing"
+isProvisional: dcid:True
+
+Node: dcid:TheftByServant
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Theft By Servant"
+isProvisional: dcid:True
+
+Node: dcid:TheftOfMotorVehicle__OtherTheft
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Theft Of Motor Vehicle__ Other Theft"
+isProvisional: dcid:True
+
+Node: dcid:DangerousDrugs
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Dangerous Drugs"
+isProvisional: dcid:True
+
+Node: dcid:TrafficOffences
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Traffic Offences"
+isProvisional: dcid:True
+
+Node: dcid:CriminalDamage
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Criminal Damage"
+isProvisional: dcid:True
+
+Node: dcid:EconomicCrime
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Economic Crime"
+isProvisional: dcid:True
+
+Node: dcid:CrimeInvolvingPoliceOfficers
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Crime Involving Police Officers"
+isProvisional: dcid:True
+
+Node: dcid:CrimeInvolvingTourists
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Crime Involving Tourists"
+isProvisional: dcid:True
+
+Node: dcid:KEN_OtherPenalCodeOffence
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "KEN_ Other Penal Code Offence"
+isProvisional: dcid:True
+
