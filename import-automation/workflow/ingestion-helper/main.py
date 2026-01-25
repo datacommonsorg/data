@@ -126,10 +126,12 @@ def ingestion_helper(request):
         #   importName: name of the import
         #   status: new status
         #   jobId: Dataflow job ID (optional)
-        #   execTime: execution time in seconds (optional)
+        #   executionTime: execution time in seconds (optional)
         #   dataVolume: data volume in bytes (optional)
-        #   version: version string (optional)
+        #   latestVersion: latest version string (optional)
+        #   graphPath: graph path regex (optional)
         #   schedule: cron schedule string (optional)
+        #   nextRefresh: next refresh timestamp (optional)
         validation_error = _validate_params(request_json,
                                             ['importName', 'status'])
         if validation_error:
@@ -138,6 +140,9 @@ def ingestion_helper(request):
         status = request_json['status']
         logging.info(f'Updating import {import_name} to status {status}')
         params = import_utils.get_import_params(request_json)
+        if status == 'STAGING':
+            latest_version = os.path.basename(request_json['latestVersion'])
+            storage.update_staging_version(import_name, latest_version)
         spanner.update_import_status(params)
         return (f"Updated import {import_name} to status {params['status']}",
                 200)
@@ -147,26 +152,34 @@ def ingestion_helper(request):
         #   importName: name of the import
         #   version: version string
         #   comment: audit log comment
+        #   override: override status check (optional)
         validation_error = _validate_params(
             request_json, ['importName', 'version', 'comment'])
         if validation_error:
             return (validation_error, 400)
         import_name = request_json['importName']
         version = request_json['version']
+        logging.info(f"Updating import {import_name} to version {version}")
         comment = request_json['comment']
-        short_import_name = import_name.split(':')[-1]
-        caller = import_utils.get_caller_identity(request)
-        logging.info(
-            f"Import {short_import_name} version {version} caller: {caller} comment: {comment}"
-        )
+        override = request_json.get('override', False)
         if version == 'staging':
             version = storage.get_staging_version(import_name)
         summary = storage.get_import_summary(import_name, version)
-        params = import_utils.create_import_params(summary)
-        params['status'] = 'READY'
-        storage.update_version_file(import_name, version)
-        spanner.update_version_history(import_name, version, caller, comment)
+        params = import_utils.get_import_params(summary)
+        if override:
+            params['status'] = 'READY'
+            caller = import_utils.get_caller_identity(request)
+            comment = f'version-override:{caller} {comment}'
+        if params['status'] == 'READY':
+            storage.update_version_file(import_name, version)
+            spanner.update_version_history(import_name, version, comment)
+            logging.info(
+                f"Import {import_name} version {version} comment: {comment}")
+        else:
+            logging.info(f"Skipping {import_name} version update")
         spanner.update_import_status(params)
-        return (f'Updated import {short_import_name} to version {version}', 200)
+        return (
+            f"Import {import_name} version {version} status: {params['status']}",
+            200)
     else:
         return (f'Unknown actionType: {actionType}', 400)
