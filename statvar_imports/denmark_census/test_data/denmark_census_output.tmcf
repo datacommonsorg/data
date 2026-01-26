@@ -1,6 +1,0 @@
-Node: E:output->E0
-observationDate: C:output->observationDate
-value: C:output->value
-observationAbout: C:output->observationAbout
-variableMeasured: C:output->variableMeasured
-typeOf: dcs:StatVarObservation
