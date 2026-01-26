@@ -1,0 +1,8 @@
+Node: E:school_finance_output->E0
+observationAbout: C:school_finance_output->observationAbout
+observationDate: C:school_finance_output->observationDate
+value: C:school_finance_output->value
+variableMeasured: C:school_finance_output->variableMeasured
+unit: C:school_finance_output->unit
+scalingFactor: C:school_finance_output->scalingFactor
+typeOf: dcs:StatVarObservation

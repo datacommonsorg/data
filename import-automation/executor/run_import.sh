@@ -31,8 +31,6 @@ GCP_PROJECT=${GCP_PROJECT:-"datcom-ci"}
 REGION="us-central1"
 GCS_BUCKET=${GCS_BUCKET:-"datcom-import-test"}
 GCS_MOUNT_PATH="/tmp/gcs"
-SPANNER_INSTANCE=${SPANNER_INSTANCE:-"datcom-spanner-test"}
-SPANNER_DB=${SPANNER_DB:-"dc-test-db"}
 SCRIPT_DIR=$(realpath $(dirname $0))
 DATA_REPO=$(realpath $(dirname $0)/../../)
 DEFAULT_CPU=8
@@ -298,15 +296,14 @@ function add_import_version_notes {
 function get_import_config {
   # Create an import config file based on default configs.
   # Drop any references to local files for cloud jobs
-  options="gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET spanner_project_id:$GCP_PROJECT spanner_instance_id:$SPANNER_INSTANCE spanner_database_id:$SPANNER_DB"
+  options="gcp_project_id:$GCP_PROJECT gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
   config_file=${config_file:-"$TMP_DIR/config-overrides-$IMPORT_NAME.json"}
   ignore_params="/tmp"
   [[ "$RUN_MODE" == "executor" ]] && ignore_params="NONE"
   [[ -f "$CONFIG" ]] && grep -v "$ignore_params" $CONFIG > $config_file
 
   # Get config overrides from manifest if any
-  # Assumes this is the last part of the manifest.json
-  manifest_overrides=$(echo "$MANIFEST" | jq ".config_override" | \
+  manifest_overrides=$(echo "$MANIFEST" | jq -r ".import_specifications[] | select(.import_name == \"$IMPORT_NAME\") | .config_override" | \
                        grep ":" | sed -e 's/ *: */:/g;s/"//g')
 
   # Add all config overrides to the config

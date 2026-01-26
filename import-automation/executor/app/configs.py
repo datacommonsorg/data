@@ -34,7 +34,7 @@ class ExecutorConfig:
 
     # ID of the Google Cloud project that hosts the executor. The project
     # needs to enable App Engine and Cloud Scheduler.
-    gcp_project_id: str = 'datcom-import-automation'
+    gcp_project_id: str = 'datcom-import-automation-prod'
     # ID of the Google Cloud project that stores generated CSVs and MCFs. The
     # project needs to enable Cloud Storage and gives the service account the
     # executor uses sufficient permissions to read and write the bucket below.
@@ -42,10 +42,6 @@ class ExecutorConfig:
     # Name of the Cloud Storage bucket to store the generated data files
     # for importing to prod.
     storage_prod_bucket_name: str = 'datcom-prod-imports'
-    # Spanner instance details for import status.
-    spanner_project_id: str = 'datcom-store'
-    spanner_instance_id: str = 'dc-kg-test'
-    spanner_database_id: str = 'dc_graph_import'
     # Name of the Cloud Storage bucket that the Data Commons importer
     # outputs to.
     storage_importer_bucket_name: str = 'resolved_mcf'
@@ -55,6 +51,11 @@ class ExecutorConfig:
     # Name of the Cloud Storage bucket to store the generated data files
     # for importing to dev.
     storage_dev_bucket_name: str = 'unresolved_mcf'
+    # DataCommons API key
+    dc_api_key: str = ''
+    autopush_dc_api_key: str = ''
+    # Gemini API key
+    gemini_api_key: str = ''
     # Executor output prefix in the storage_dev_bucket_name bucket.
     storage_executor_output_prefix: str = 'datcom-dev-imports'
     # Name of the file that specifies the most recently generated data files
@@ -74,6 +75,10 @@ class ExecutorConfig:
     # The content of latest_version.txt would be a single line of
     # '2020_07_15T12_07_17_365264_07_00'.
     storage_version_filename: str = 'latest_version.txt'
+    # GCP secret name containg import config.
+    import_config_secret: str = 'import-config'
+    # Config override file.
+    config_override_file: str = ''
     # File with list of historical versions with the most recent at the top
     storage_version_history_filename: str = 'version_history.txt'
     # Name of the file that contains the import_metadata_mcf for the import.
@@ -130,7 +135,10 @@ class ExecutorConfig:
     # Arguments for the user script
     user_script_args: List[str] = ()
     # Environment variables for the user script
-    user_script_env: dict = None
+    user_script_env: dict = dataclasses.field(default_factory=lambda: {
+        "EXISTING_STATVAR_MCF":
+            "gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+    })
     # Invoke import tool genmcf.
     invoke_import_tool: bool = True
     # Invoke differ tool.
@@ -143,6 +151,8 @@ class ExecutorConfig:
     validation_config_file: str = 'tools/import_validation/validation_config.json'
     # Latest import version (overwrite)
     import_version_override: str = ''
+    # Relative path to version folder for graph files.
+    graph_data_path: str = '/*/*/*.mcf'
     # Maximum time venv creation can take in seconds.
     venv_create_timeout: float = 3600
     # Maximum time downloading a file can take in seconds.

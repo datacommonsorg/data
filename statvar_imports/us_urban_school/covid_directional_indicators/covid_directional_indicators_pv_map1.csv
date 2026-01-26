@@ -1,0 +1,11 @@
+key,,,,,,,,,,
+YEAR,observationDate,{Data},populationType,PublicSchool,measuredProperty,count,statType,measuredValue,medicalCondition,COVID19
+LEA_STATE,observationAbout,{Data},,,,,,,,
+SCH_DIND_INSTRUCTIONTYPE:A,instructionMode,InstructionInPerson ,"#Aggregate
+",sum,value,1,,,,
+SCH_DIND_INSTRUCTIONTYPE:B,instructionMode,InstructionInRemote ,"#Aggregate
+",sum,value,1,,,,
+SCH_DIND_INSTRUCTIONTYPE:C,instructionMode,InstructionInHybrid,"#Aggregate
+",sum,value,1,,,,
+SCH_DIND_INSTRUCTIONTYPE:D,instructionMode,NoEffect,"#Aggregate
+",sum,value,1,,,,

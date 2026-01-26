@@ -1,108 +1,112 @@
 main:
   params: [args]
   steps:
-    - invoke_ingestion_workflow:
+    - init:
+        assign:
+          - lock_timeout: 82800 # 23 hours
+          - wait_period: 300 # seconds
+          - project_id: '${sys.get_env("PROJECT_ID")}'
+          - dataflow_job_name: 'ingestion-job'
+          - dataflow_gcs_path: 'gs://datcom-templates/templates/flex/ingestion.json'
+          - location: '${sys.get_env("LOCATION")}'
+          - spanner_project_id: '${sys.get_env("SPANNER_PROJECT_ID")}'
+          - spanner_instance_id: '${sys.get_env("SPANNER_INSTANCE_ID")}'
+          - spanner_database_id: '${sys.get_env("SPANNER_DATABASE_ID")}'
+          - ingestion_function: ${"https://" + location + "-" + project_id + ".cloudfunctions.net/" + "spanner-ingestion-helper"}
+          - aggregation_function: ${"https://" + location + "-" + project_id + ".cloudfunctions.net/" + "import-aggregation-helper"}
+          - import_list: ${default(map.get(args, "imports"), [])}
+          - execution_error: null
+    - acquire_ingestion_lock:
         try:
-          #call: googleapis.workflowexecutions.v1.projects.locations.workflows.executions.run
-          call: spanner_ingestion_workflow
+          call: http.post
           args:
-            workflow_id: 'spanner-ingestion-workflow' 
-          result: workflow_result
-        except:
-          as: e
+            url: ${ingestion_function}
+            auth:
+              type: OIDC
+            body:
+              actionType: acquire_ingestion_lock
+              workflowId: '${sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
+              timeout: ${lock_timeout}
+          result: lock_status
+        retry:
+          predicate: ${http.default_retry_predicate}
+          max_retries: 10
+          backoff:
+            initial_delay: 300
+            max_delay: 300
+            multiplier: 1
+    - process_ingestion:
+        try:
           steps:
-            - clean_up:
+            - get_import_list:
                 call: http.post
                 args:
-                  url: 'https://spanner-ingestion-helper-965988403328.us-central1.run.app'
+                  url: ${ingestion_function}
                   auth:
                     type: OIDC
                   body:
-                    actionType: release_ingestion_lock
+                    actionType: get_import_list
+                    importList: ${import_list}
+                result: import_info
+            - run_ingestion_job:
+                call: run_dataflow_job
+                args:
+                  import_list: '${json.encode_to_string(import_info.body)}'
+                  project_id: ${project_id}
+                  job_name: ${dataflow_job_name}
+                  template_gcs_path: ${dataflow_gcs_path}
+                  location: ${location}
+                  spanner_project_id: ${spanner_project_id}
+                  spanner_instance_id: ${spanner_instance_id}
+                  spanner_database_id: ${spanner_database_id}
+                  wait_period: ${wait_period}
+                result: dataflow_job_id
+            - run_aggregation:
+                call: http.post
+                args:
+                  url: ${aggregation_function}
+                  auth:
+                    type: OIDC
+                  body:
+                    importList: ${import_info.body}
+            - update_ingestion_status:
+                call: http.post
+                args:
+                  url: ${ingestion_function}
+                  auth:
+                    type: OIDC
+                  body:
+                    actionType: update_ingestion_status
                     workflowId: '${sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
+                    jobId: '${dataflow_job_id}'
+                    importList: '${import_info.body}'
                 result: function_response
-            - fail_workflow:
-                raise: ${e}
-    - return_result:
-        return: ${workflow_result}
-
-# This sub-workflow performs the following steps
-# - Acquire ingestion lock
-# - Get the list of pending imports
-# - Run dataflow ingestion job
-# - Update import status in spanner
-# - Release ingestion lock
-spanner_ingestion_workflow:
-  params: [workflow_id]
-  steps:
-    - init:
-        assign:
-          - lock_timeout: 3600 #seconds
-          - wait_period: 300 #seconds
-          - project_id: 'datcom-import-automation-prod'
-          - dataflow_job_name: 'ingestion-job'
-          - dataflow_gcs_path: 'gs://datcom-templates/templates/flex/ingestion.json'
-          - dataflow_location: 'us-central1'
-          - spanner_database_id: 'dc_graph_import'
-          - function_url: 'https://spanner-ingestion-helper-965988403328.us-central1.run.app'
-    - acquire_ingestion_lock:
-        call: http.post
-        args:
-          url: ${function_url}
-          auth:
-            type: OIDC
-          body:
-            actionType: acquire_ingestion_lock
-            workflowId: '${sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
-            timeout: ${lock_timeout}
-        result: lock_status
-    - get_import_status:
-        call: http.post
-        args:
-          url: ${function_url}
-          auth:
-            type: OIDC
-          body:
-            actionType: get_import_status
-        result: import_status
-    - run_ingestion_job:
-        call: run_dataflow_job
-        args:
-          import_list: '${json.encode_to_string(import_status.body)}'
-          project_id: ${project_id}
-          job_name: ${dataflow_job_name}
-          template_gcs_path: ${dataflow_gcs_path}
-          location: ${dataflow_location}
-          spanner_database_id: ${spanner_database_id}
-          wait_period: ${wait_period}
-        result: job_status
-    - update_import_status:
-        call: http.post
-        args:
-          url: ${function_url}
-          auth:
-            type: OIDC
-          body:
-            actionType: update_ingestion_status
-            workflowId: '${sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
-            importList: '${import_status.body}'
-        result: function_response
+        except:
+          as: e
+          steps:
+            - capture_error:
+                assign:
+                  - execution_error: ${e}
     - release_ingestion_lock:
         call: http.post
         args:
-          url: ${function_url}
+          url: ${ingestion_function}
           auth:
             type: OIDC
           body:
             actionType: release_ingestion_lock
             workflowId: '${sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
         result: function_response
-    - return_import_status:
-        return: '${import_status.body}'
+    - fail_workflow:
+        switch:
+          - condition: ${execution_error != null}
+            raise: ${execution_error}
+    - return_import_info:
+        return: '${import_info.body}'
 
 # This sub-workflow launches a Dataflow job and waits for it to complete.
 run_dataflow_job:
-  params: [import_list, project_id, job_name, template_gcs_path, location, spanner_database_id, wait_period]
+  params: [import_list, project_id, job_name, template_gcs_path, location, spanner_project_id, spanner_instance_id, spanner_database_id, wait_period]
   steps:
     - init:
         assign:
@@ -110,12 +114,12 @@ run_dataflow_job:
     - log_imports:
         call: sys.log
         args:
-          text: '${"Import list: " + import_list}'
+          text: '${"Dataflow job: " + jobName + " Import list: " + import_list}'
           severity: INFO 
     - check_if_empty:
         switch:
           - condition: ${import_list == "[]"}
-            return: 'SUCCESS'
+            return: ''
     - launch_dataflow_job:
         call: googleapis.dataflow.v1b3.projects.locations.flexTemplates.launch
         args:
@@ -127,7 +131,12 @@ run_dataflow_job:
               jobName: '${jobName}'
               parameters:
                 importList: '${import_list}'
+                projectId: '${spanner_project_id}'
+                spannerInstanceId: '${spanner_instance_id}'
                 spannerDatabaseId: '${spanner_database_id}'
+              environment:
+                numWorkers: 3
+                machineType: 'n2-highmem-8'
         result: launch_result
     - wait_for_job_completion:
         call: sys.sleep
@@ -140,17 +149,18 @@ run_dataflow_job:
           projectId: '${project_id}'
           location: '${location}'
           jobId: '${launch_result.job.id}'
+          view: 'JOB_VIEW_SUMMARY'
         result: job_status
         next: check_if_done
     - check_if_done:
         switch:
           - condition: ${job_status.currentState == "JOB_STATE_DONE"}
-            return: ${job_status.currentState}
+            return: ${launch_result.job.id}
           - condition: ${job_status.currentState == "JOB_STATE_FAILED" or
               job_status.currentState == "JOB_STATE_CANCELLED"}
             next: fail_workflow
         next: wait_for_job_completion
     - fail_workflow:
         raise:
-          message: '${"Dataflow job failed with status: " + job_status.currentState}'
+          message: '${jobName + " dataflow job failed with status: " + job_status.currentState}'
           code: 500
