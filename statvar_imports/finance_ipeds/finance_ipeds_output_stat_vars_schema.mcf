@@ -3,280 +3,227 @@ typeOf: dcs:Property
 name: "institutionLevel"
 domainIncludes: dcid:ExpenditureActivity
 rangeIncludes: dcid:CollegeOrUniversityLevelEnum
-isProvisional: dcs:True
 
 Node: dcid:institutionControl
 typeOf: dcs:Property
 name: "institutionControl"
 domainIncludes: dcid:ExpenditureActivity
 rangeIncludes: dcid:InstitutionControlEnum
-isProvisional: dcs:True
 
 Node: dcid:InstitutionControlEnum
 typeOf: schema:Class
 subClassOf: dcs:Enumeration
 name: "InstitutionControlEnum"
-isProvisional: dcs:True
 
 Node: dcid:PublicInstitution
 typeOf: dcid:InstitutionControlEnum
 name: "Public Institution"
-isProvisional: dcs:True
 
 Node: dcid:revenueSource
 typeOf: dcs:Property
 name: "revenueSource"
 domainIncludes: dcid:ExpenditureActivity
+rangeIncludes: dcid:RevenueSourceEnum
 
 Node: dcid:TotalRevenueInvestmentReturn
 typeOf: dcid:RevenueSourceEnum
 name: "Total Revenue Investment Return"
-isProvisional: dcs:True
 
 Node: dcid:LessThanTwoYear
 typeOf: dcid:CollegeOrUniversityLevelEnum
 name: "Less Than Two Year"
-isProvisional: dcs:True
 
 Node: dcid:revenueType
 typeOf: dcs:Property
 name: "revenueType"
 domainIncludes: dcid:ExpenditureActivity
 rangeIncludes: dcid:ProvisionalNode
-isProvisional: dcs:True
 
 Node: dcid:TotalOperatingRevenues
 typeOf: dcid:RevenueSourceEnum
 name: "Total Operating Revenues"
-isProvisional: dcs:True
 
 Node: dcid:TuitionAndFees
 typeOf: dcid:RevenueSourceEnum
-name: "Tuition And Fees"
-isProvisional: dcs:True
+name: "Tuition and Fees"
 
 Node: dcid:GrantsAndContracts
 typeOf: dcid:RevenueSourceEnum
-name: "Grants And Contracts"
-isProvisional: dcs:True
+name: "Grants and Contracts"
 
 Node: dcid:FederalFundingExcludesFDSLLoans
 typeOf: dcid:RevenueSourceEnum
-name: "Federal Funding Excludes FDSLLoans"
-isProvisional: dcs:True
+name: "Federal Funding excluding FDSLLoans"
 
 Node: dcid:StateFunding
 typeOf: dcid:RevenueSourceEnum
 name: "State Funding"
-isProvisional: dcs:True
 
 Node: dcid:LocalFunding
 typeOf: dcid:RevenueSourceEnum
 name: "Local Funding"
-isProvisional: dcs:True
 
 Node: dcid:PrivateFunding
 typeOf: dcid:RevenueSourceEnum
 name: "Private Funding"
-isProvisional: dcs:True
 
 Node: dcid:SalesAndServicesOfAuxiliaryEnterprises
 typeOf: dcid:RevenueSourceEnum
-name: "Sales And Services Of Auxiliary Enterprises"
-isProvisional: dcs:True
+name: "Sales and Services of Auxiliary Enterprises"
 
 Node: dcid:HospitalSales
 typeOf: dcid:RevenueSourceEnum
 name: "Hospital Sales"
-isProvisional: dcs:True
 
 Node: dcid:EducationalSales
 typeOf: dcid:RevenueSourceEnum
 name: "Educational Sales"
-isProvisional: dcs:True
 
 Node: dcid:IndependentOperations
 typeOf: dcid:RevenueSourceEnum
 name: "Independent Operations"
-isProvisional: dcs:True
 
 Node: dcid:OtherOperatingRevenues
 typeOf: dcid:RevenueSourceEnum
 name: "Other Operating Revenues"
-isProvisional: dcs:True
 
 Node: dcid:TotalNonOperatingRevenues
 typeOf: dcid:RevenueSourceEnum
 name: "Total Non Operating Revenues"
-isProvisional: dcs:True
 
 Node: dcid:NonOperating
 typeOf: dcid:ProvisionalNode
 name: "Non Operating"
-isProvisional: dcs:True
 
 Node: dcid:FederalFunding
 typeOf: dcid:RevenueSourceEnum
 name: "Federal Funding"
-isProvisional: dcs:True
 
 Node: dcid:Appropriations
 typeOf: dcid:ProvisionalNode
 name: "Appropriations"
-isProvisional: dcs:True
 
 Node: dcid:NonOperatingGrants
 typeOf: dcid:ProvisionalNode
 name: "Non Operating Grants"
-isProvisional: dcs:True
 
 Node: dcid:Gifts
 typeOf: dcid:RevenueSourceEnum
 name: "Gifts"
-isProvisional: dcs:True
 
 Node: dcid:InvestmentIncome
 typeOf: dcid:RevenueSourceEnum
 name: "Investment Income"
-isProvisional: dcs:True
 
 Node: dcid:OtherNonOperatingRevenue
 typeOf: dcid:RevenueSourceEnum
 name: "Other Non Operating Revenue"
-isProvisional: dcs:True
 
 Node: dcid:TotalOtherRevenues
 typeOf: dcid:RevenueSourceEnum
 name: "Total Other Revenues"
-isProvisional: dcs:True
 
 Node: dcid:CapitalAppropriations
 typeOf: dcid:RevenueSourceEnum
 name: "Capital Appropriations"
-isProvisional: dcs:True
 
 Node: dcid:CapitalGrantsGifts
 typeOf: dcid:RevenueSourceEnum
 name: "Capital Grants Gifts"
-isProvisional: dcs:True
 
 Node: dcid:AdditionsPermanent
 typeOf: dcid:RevenueSourceEnum
 name: "Additions Permanent"
-isProvisional: dcs:True
 
 Node: dcid:OtherRevenues
 typeOf: dcid:RevenueSourceEnum
 name: "Other Revenues"
-isProvisional: dcs:True
 
 Node: dcid:TotalExpenses
 typeOf: dcid:ExpenditureTypeEnum
 name: "Total Expenses"
-isProvisional: dcs:True
 
 Node: dcid:Instruction
 typeOf: dcid:ExpenditureTypeEnum
 name: "Instruction"
-isProvisional: dcs:True
 
 Node: dcid:expenditureType
 typeOf: dcs:Property
 name: "expenditureType"
-rangeIncludes: dcid:InvestmentProgramEnum,dcid:ConsumerGoodsCategoryEnum
+rangeIncludes: dcid:ExpenditureTypeEnum
 
 Node: dcid:PublicService
 typeOf: dcid:ExpenditureTypeEnum
 name: "Public Service"
-isProvisional: dcs:True
 
 Node: dcid:AcademicSupport
 typeOf: dcid:ExpenditureTypeEnum
 name: "Academic Support"
-isProvisional: dcs:True
 
 Node: dcid:StudentServices
 typeOf: dcid:ExpenditureTypeEnum
 name: "Student Services"
-isProvisional: dcs:True
 
 Node: dcid:InstitutionalSupport
 typeOf: dcid:ExpenditureTypeEnum
 name: "Institutional Support"
-isProvisional: dcs:True
 
 Node: dcid:ScholarshipFellowships
 typeOf: dcid:ExpenditureTypeEnum
 name: "Scholarship Fellowships"
-isProvisional: dcs:True
 
 Node: dcid:AuxiliaryEnterprises
 typeOf: dcid:ExpenditureTypeEnum
 name: "Auxiliary Enterprises"
-isProvisional: dcs:True
 
 Node: dcid:OtherExpensesAndDeductions
 typeOf: dcid:ExpenditureTypeEnum
-name: "Other Expenses And Deductions"
-isProvisional: dcs:True
+name: "Other Expenses and Deductions"
 
 Node: dcid:PrivateNonProfitInstitution
 typeOf: dcid:InstitutionControlEnum
 name: "Private Non Profit Institution"
-isProvisional: dcs:True
 
 Node: dcid:GovernmentAppropriations
 typeOf: dcid:ProvisionalNode
 name: "Government Appropriations"
-isProvisional: dcs:True
 
 Node: dcid:GovernmentGrantsAndContracts
 typeOf: dcid:ProvisionalNode
-name: "Government Grants And Contracts"
-isProvisional: dcs:True
+name: "Government Grants and Contracts"
 
 Node: dcid:PrivateGrantsAndContracts
 typeOf: dcid:RevenueSourceEnum
-name: "Private Grants And Contracts"
-isProvisional: dcs:True
+name: "Private Grants and Contracts"
 
 Node: dcid:AffiliatedEntities
 typeOf: dcid:RevenueSourceEnum
 name: "Affiliated Entities"
-isProvisional: dcs:True
 
 Node: dcid:InvestmentReturn
 typeOf: dcid:RevenueSourceEnum
 name: "Investment Return"
-isProvisional: dcs:True
 
 Node: dcid:HospitalRevenue
 typeOf: dcid:RevenueSourceEnum
 name: "Hospital Revenue"
-isProvisional: dcs:True
 
 Node: dcid:IndependentOperationsRevenue
 typeOf: dcid:RevenueSourceEnum
 name: "Independent Operations Revenue"
-isProvisional: dcs:True
 
 Node: dcid:GrantAid
 typeOf: dcid:ExpenditureTypeEnum
 name: "Grant Aid"
-isProvisional: dcs:True
 
 Node: dcid:OtherExpenses
 typeOf: dcid:ExpenditureTypeEnum
 name: "Other Expenses"
-isProvisional: dcs:True
 
 Node: dcid:PrivateForProfitInstitution
 typeOf: dcid:InstitutionControlEnum
-name: "Private For Profit Institution"
-isProvisional: dcs:True
+name: "Private for Profit Institution"
 
 Node: dcid:InvestmentIncomeAndGains
 typeOf: dcid:RevenueSourceEnum
-name: "Investment Income And Gains"
-isProvisional: dcs:True
-
+name: "Investment Income and Gains"
