@@ -116,6 +116,9 @@ class PVMapGeneratorTest(unittest.TestCase):
         self.assertIn(f'You have exactly {config.max_iterations} attempts',
                       prompt_text)
 
+        # Output path should be absolute in the prompt
+        self.assertIn(f'--output-path "{config.output_path}"', prompt_text)
+
         if expect_sdmx:
             # SDMX prompts highlight dataset type and show SDMX-specific banner.
             self.assertIn('"dataset_type": "sdmx"', prompt_text)
@@ -133,6 +136,11 @@ class PVMapGeneratorTest(unittest.TestCase):
         generator = self._make_generator(is_sdmx=False)
         result = generator.generate()
         self._assert_generation_result(result)
+        self.assertTrue(result.run_dir.is_absolute())
+        self.assertEqual(
+            result.run_dir,
+            Path(self._temp_dir.name) / '.datacommons' / 'runs' / result.run_id)
+        self.assertTrue(result.run_id.startswith('output_file_gemini_'))
 
         prompt_path = self._read_prompt_path(result)
         self._assert_prompt_content(prompt_path,
@@ -143,6 +151,7 @@ class PVMapGeneratorTest(unittest.TestCase):
         generator = self._make_generator(is_sdmx=True)
         result = generator.generate()
         self._assert_generation_result(result)
+        self.assertTrue(result.run_id.startswith('output_file_gemini_'))
 
         prompt_path = self._read_prompt_path(result)
         self._assert_prompt_content(prompt_path,
@@ -177,6 +186,102 @@ class PVMapGeneratorTest(unittest.TestCase):
                     Config(data_config=DataConfig(
                         input_data=[str(external_file)], input_metadata=[]),
                            dry_run=True))
+
+    def test_generate_prompt_with_relative_working_dir(self):
+        # Create a subdirectory for the relative working directory test
+        sub_dir_name = 'sub_working_dir'
+        sub_dir = Path(self._temp_dir.name) / sub_dir_name
+        sub_dir.mkdir()
+
+        # Create input files inside the subdirectory
+        data_file = sub_dir / 'input.csv'
+        data_file.write_text('header\nvalue')
+        metadata_file = sub_dir / 'metadata.csv'
+        metadata_file.write_text('parameter,value')
+
+        # Use relative path for working_dir
+        config = Config(
+            data_config=DataConfig(
+                input_data=['input.csv'],  # Relative to working_dir
+                input_metadata=['metadata.csv'],  # Relative to working_dir
+                is_sdmx_dataset=False,
+            ),
+            dry_run=True,
+            max_iterations=3,
+            output_path='output/output_file',
+            working_dir=sub_dir_name,  # Relative path
+        )
+
+        # We need to run from the parent directory so the relative path is valid
+        # The setUp already changed to self._temp_dir.name, so we are in the right place
+
+        generator = PVMapGenerator(config)
+        result = generator.generate()
+
+        self._assert_generation_result(result)
+        prompt_path = self._read_prompt_path(result)
+        prompt_text = prompt_path.read_text()
+
+        # Verify that the working directory in the prompt is the absolute path of the subdirectory
+        expected_working_dir = str(sub_dir.resolve())
+        self.assertIn(expected_working_dir, prompt_text)
+        self.assertIn(f'"working_dir": "{expected_working_dir}"', prompt_text)
+
+        # Verify input paths are also absolute in the prompt
+        self.assertIn(str(data_file.resolve()), prompt_text)
+        self.assertIn(str(metadata_file.resolve()), prompt_text)
+
+    def test_rejects_invalid_output_path(self):
+        data_config = DataConfig(
+            input_data=[str(self._data_file)],
+            input_metadata=[str(self._metadata_file)],
+            is_sdmx_dataset=False,
+        )
+        config = Config(
+            data_config=data_config,
+            dry_run=True,
+            max_iterations=3,
+            output_path='',
+        )
+        with self.assertRaises(ValueError):
+            PVMapGenerator(config)
+        config.output_path = 'output'
+        with self.assertRaises(ValueError):
+            PVMapGenerator(config)
+        config.output_path = None
+        with self.assertRaises(ValueError):
+            PVMapGenerator(config)
+
+    def test_relative_paths_resolved_against_working_dir(self):
+        # Create a separate working directory
+        with tempfile.TemporaryDirectory() as work_dir:
+            work_path = Path(work_dir)
+            # Create input files inside the working directory
+            data_file = work_path / 'input.csv'
+            data_file.write_text('header\nvalue')
+
+            # Run from a different directory (current temp dir)
+            # Use relative path to input file, which should be resolved against work_dir
+            config = Config(
+                data_config=DataConfig(
+                    input_data=['input.csv'],  # Relative to work_dir
+                    input_metadata=[],
+                    is_sdmx_dataset=False,
+                ),
+                dry_run=True,
+                working_dir=work_dir,
+            )
+
+            # This should not raise ValueError because input.csv is found in work_dir
+            generator = PVMapGenerator(config)
+            result = generator.generate()
+            self._assert_generation_result(result)
+            self.assertEqual(str(generator._config.data_config.input_data[0]),
+                             str(data_file.resolve()))
+            # Verify output directory is also under working_dir
+            self.assertTrue(
+                str(generator._output_dir_abs).startswith(
+                    str(work_path.resolve())))
 
 
 if __name__ == '__main__':
