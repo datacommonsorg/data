@@ -1,85 +1,67 @@
 Node: dcid:Years110
 typeOf: dcid:AgeStatusEnum
-name: "Years 11 0"
-isProvisional: dcs:True
+name: "Years 110"
 
 Node: dcid:Years111
 typeOf: dcid:AgeStatusEnum
-name: "Years 11 1"
-isProvisional: dcs:True
+name: "Years 111"
 
 Node: dcid:Years112
 typeOf: dcid:AgeStatusEnum
-name: "Years 11 2"
-isProvisional: dcs:True
+name: "Years 112"
 
 Node: dcid:Years113
 typeOf: dcid:AgeStatusEnum
-name: "Years 11 3"
-isProvisional: dcs:True
+name: "Years 113"
 
 Node: dcid:Years114
 typeOf: dcid:AgeStatusEnum
-name: "Years 11 4"
-isProvisional: dcs:True
+name: "Years 114"
 
 Node: dcid:Years115
 typeOf: dcid:AgeStatusEnum
-name: "Years 11 5"
-isProvisional: dcs:True
+name: "Years 115"
 
 Node: dcid:Years116
 typeOf: dcid:AgeStatusEnum
-name: "Years 11 6"
-isProvisional: dcs:True
+name: "Years 116"
 
 Node: dcid:Years117
 typeOf: dcid:AgeStatusEnum
-name: "Years 11 7"
-isProvisional: dcs:True
+name: "Years 117"
 
 Node: dcid:Years118
 typeOf: dcid:AgeStatusEnum
-name: "Years 11 8"
-isProvisional: dcs:True
+name: "Years 118"
 
 Node: dcid:Years119
 typeOf: dcid:AgeStatusEnum
-name: "Years 11 9"
-isProvisional: dcs:True
+name: "Years 119"
 
 Node: dcid:Years120
 typeOf: dcid:AgeStatusEnum
-name: "Years 12 0"
-isProvisional: dcs:True
+name: "Years 120"
 
 Node: dcid:Years121
 typeOf: dcid:AgeStatusEnum
-name: "Years 12 1"
-isProvisional: dcs:True
+name: "Years 121"
 
 Node: dcid:Years122
 typeOf: dcid:AgeStatusEnum
-name: "Years 12 2"
-isProvisional: dcs:True
+name: "Years 122"
 
 Node: dcid:Years123
 typeOf: dcid:AgeStatusEnum
-name: "Years 12 3"
-isProvisional: dcs:True
+name: "Years 123"
 
 Node: dcid:Years124
 typeOf: dcid:AgeStatusEnum
-name: "Years 12 4"
-isProvisional: dcs:True
+name: "Years 124"
 
 Node: dcid:Years125
 typeOf: dcid:AgeStatusEnum
-name: "Years 12 5"
-isProvisional: dcs:True
+name: "Years 125"
 
 Node: dcid:MarriedOrSeparated
 typeOf: dcid:MaritalStatusEnum
-name: "Married Or Separated"
-isProvisional: dcs:True
-
+name: "Married or Separated"
