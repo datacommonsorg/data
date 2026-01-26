@@ -8,8 +8,15 @@ This utility generates a diff of two versions of a dataset for import analysis.
 - Python/Pandas is installed for native runner mode.
 - gcloud ADC is configured for cloud runner mode.
 
-```
-python import_differ.py --current_data=<path> --previous_data=<path> --output_location=<path> --file_format=<mcf/tfrecord> --runner_mode=<local/cloud> --job_name=<name>
+```bash
+python import_differ.py \
+  --current_data=<path> \
+  --previous_data=<path> \
+  --output_location=<path> \
+  --file_format=<mcf/tfrecord> \
+  --runner_mode=<local/cloud> \
+  --project_id=<id> \
+  --job_name=<name>
 ```
 
 ***Parameters***
@@ -26,12 +33,12 @@ python import_differ.py --current_data=<path> --previous_data=<path> --output_lo
 
 Summary output generated is of the form below showing counts of differences for each variable.
 
-| |variableMeasured|ADDED|DELETED|MODIFIED|
-|---|---|---|---|---|---|---|
-|0|dcid:var1|1|0|0
-|1|dcid:var2|0|2|1|
-|2|dcid:var3|0|0|1|
-|3|dcid:var4|0|2|0|
+| variableMeasured | ADDED | DELETED | MODIFIED |
+| :--- | :--- | :--- | :--- |
+| dcid:var1 | 1 | 0 | 0 |
+| dcid:var2 | 0 | 2 | 1 |
+| dcid:var3 | 0 | 0 | 1 |
+| dcid:var4 | 0 | 2 | 0 |
 
 Detailed diff output is written to files for further analysis. Sample result files can be found under folder 'test/results'.
 - obs\_diff\_summary.csv: diff summary for observation analysis

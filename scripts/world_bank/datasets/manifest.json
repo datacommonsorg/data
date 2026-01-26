@@ -25,7 +25,12 @@
                     "cleaned_csv": "gcs_output/output/bq-results-20250423.csv"
                 }
             ],
-            "cron_schedule": "0 9 5,25 * *"
+            "cron_schedule": "0 9 5,25 * *",
+            "resource_limits": {
+                "cpu": 16,
+                "memory": 256,
+                "disk": 500
+            }
         }
     ]
 }
