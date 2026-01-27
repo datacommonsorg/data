@@ -1,6 +1,0 @@
-parameter,value
-mapped_rows,3
-word_delimiter,""""""
-mapped_columns,1
-provenance_url,https://www.nsi.bg/en/statistical-data/204/636
-output_columns,"observationDate,observationAbout,value,variableMeasured"

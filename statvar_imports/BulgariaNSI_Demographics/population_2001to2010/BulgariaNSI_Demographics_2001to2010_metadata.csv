@@ -1,9 +1,0 @@
-config,value
-provenance_url,https://www.nsi.bg/en/statistical-data/204/636
-output_columns,"observationDate,observationAbout,value,variableMeasured"
-#places_within,country/BGR
-#place_types,"AdministrativeArea,AdministrativeArea1,AdministrativeArea2,State"
-debug,1
-input_rows,5
-#word_delimiter,''
-
