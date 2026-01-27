@@ -1,18 +1,13 @@
-<<<<<<< HEAD
-=======
 Node: dcid:Years0To2
 typeOf: dcid:AgeStatusEnum
 name: "Years 0To 2"
 isProvisional: dcs:True
 
->>>>>>> 55594a09 (Added auto refresh for poland)
 Node: dcid:placeOfResidenceClassification
 typeOf: dcs:Property
 name: "placeOfResidenceClassification"
 rangeIncludes: dcid:HumanSettlementClassificationEnum,dcid:LocationClassificationEnum
 
-<<<<<<< HEAD
-=======
 Node: dcid:Years13To15
 typeOf: dcid:AgeStatusEnum
 name: "Years 13 To 15"
@@ -23,4 +18,3 @@ typeOf: dcid:AgeStatusEnum
 name: "Years 3To 6"
 isProvisional: dcs:True
 
->>>>>>> 55594a09 (Added auto refresh for poland)

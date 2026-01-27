@@ -7,19 +7,6 @@ total,,,,,,,,,,
 in urban areas,placeOfResidenceClassification,Urban,,,,,,,,
 in rural areas,placeOfResidenceClassification,Rural,,,,,,,,
 
-<<<<<<< HEAD
-0-2,age,[0 2 Years],,,,,,,,
-3-6,age,[3 6 Years],,,,,,,,
-7-12,age,[7 12 Years],,,,,,,,
-13-15,age,[13 15 Years],,,,,,,,
-16-19,age,[16 19 Years],,,,,,,,
-20-24,age,[20 24 Years],,,,,,,,
-25-34,age,[25 34 Years],,,,,,,,
-35-44,age,[35 44 Years],,,,,,,,
-45-54,age,[45 54 Years],,,,,,,,
-55-64,age,[55 64 Years],,,,,,,,
-65 and more,age,[65 - Years],,,,,,,,
-=======
 0-2,age,Years0To2,,,,,,,,
 3-6,age,Years3To6,,,,,,,,
 7-12,age,Years7To12,,,,,,,,
@@ -31,7 +18,6 @@ in rural areas,placeOfResidenceClassification,Rural,,,,,,,,
 45-54,age,Years45To54,,,,,,,,
 55-64,age,Years55To64,,,,,,,,
 65 and more,age,Years65Onwards,,,,,,,,
->>>>>>> 55594a09 (Added auto refresh for poland)
 ,,,,,,,,,,
 ,,,,,,,,,,
 POLAND,observationAbout,country/POL,#Header,observationAbout,,,,,,
@@ -40,22 +26,13 @@ KUJAWSKO-POMORSKIE,observationAbout,nuts/PL61,#Header,observationAbout,,,,,,
 LUBELSKIE,observationAbout,wikidataId/Q54155,#Header,observationAbout,,,,,,
 LUBUSKIE,observationAbout,wikidataId/Q54157,#Header,observationAbout,,,,,,
 ŁÓDZKIE,observationAbout,nuts/PL71,#Header,observationAbout,,,,,,
-<<<<<<< HEAD
-MAŁOPOLSKIE,observationAbout,nuts/PL21,#Header,observationAbout,,,,,,
-=======
 MAŁOPOLSKIE,observationAbout,nuts/PL213,#Header,observationAbout,,,,,,
->>>>>>> 55594a09 (Added auto refresh for poland)
 MAZOWIECKIE,observationAbout,wikidataId/Q54169,#Header,observationAbout,,,,,,
 OPOLSKIE,observationAbout,wikidataId/Q54171,#Header,observationAbout,,,,,,
 PODKARPACKIE,observationAbout,wikidataId/Q54175,#Header,observationAbout,,,,,,
 PODLASKIE,observationAbout,wikidataId/Q54177,#Header,observationAbout,,,,,,
-<<<<<<< HEAD
-POMORSKIE,observationAbout,wikidataId/Q54180,#Header,observationAbout,,,,,,
-ŚLĄSKIE,observationAbout,wikidataId/Q54181,#Header,observationAbout,,,,,,
-=======
 POMORSKIE,observationAbout,wikidataId/Q1288480,#Header,observationAbout,,,,,,
 ŚLĄSKIE,observationAbout,wikidataId/Q588,#Header,observationAbout,,,,,,
->>>>>>> 55594a09 (Added auto refresh for poland)
 ŚWIĘTOKRZYSKIE,observationAbout,nuts/PL72,#Header,observationAbout,,,,,,
 WARMIŃSKO-MAZURSKIE,observationAbout,wikidataId/Q54184,#Header,observationAbout,,,,,,
 WIELKOPOLSKIE,observationAbout,wikidataId/Q54187,#Header,observationAbout,,,,,,
