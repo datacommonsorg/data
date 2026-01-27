@@ -1,0 +1,7 @@
+Node: E:finland_census_output->E0
+observationDate: C:finland_census_output->observationDate
+value: C:finland_census_output->value
+unit: C:finland_census_output->unit
+observationAbout: C:finland_census_output->observationAbout
+variableMeasured: C:finland_census_output->variableMeasured
+typeOf: dcs:StatVarObservation
