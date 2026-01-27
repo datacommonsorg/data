@@ -1,0 +1,1097 @@
+<<<<<<< HEAD
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/statistics_poland/test/StatisticsPoland_input.csv --pv_map=statvar_imports/statistics_poland/StatisticsPoland_pvmap.csv --output_path=statvar_imports/statistics_poland/test/StatisticsPoland_output --config_file=statvar_imports/statistics_poland/Statistics_Poland_metadata.csv" on 2025-12-19 06:46:01.109902
+
+Node: dcid:Count_Person_0To2Years
+=======
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/statistics_poland/poland_input/StatisticsPoland_input.csv --pv_map=statvar_imports/statistics_poland/StatisticsPoland_pvmap.csv --output_path=statvar_imports/statistics_poland/poland_output/StatisticsPoland_output --config_file=statvar_imports/statistics_poland/Statistics_Poland_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-27 13:28:49.258223
+
+Node: dcid:Count_Person_Years0To2
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [0 2 Years]
+
+Node: dcid:Count_Person_0To2Years_Female
+=======
+age: dcid:Years0To2
+
+Node: dcid:Count_Person_Years0To2_Female
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [0 2 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_0To2Years_Female_Rural
+=======
+age: dcid:Years0To2
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years0To2_Female_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [0 2 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_0To2Years_Female_Urban
+=======
+age: dcid:Years0To2
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years0To2_Female_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [0 2 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_0To2Years_Male
+=======
+age: dcid:Years0To2
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years0To2_Male
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [0 2 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_0To2Years_Male_Rural
+=======
+age: dcid:Years0To2
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years0To2_Male_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [0 2 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_0To2Years_Male_Urban
+=======
+age: dcid:Years0To2
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years0To2_Male_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [0 2 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_0To2Years_Rural
+=======
+age: dcid:Years0To2
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years0To2_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [0 2 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_0To2Years_Urban
+=======
+age: dcid:Years0To2
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years0To2_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [0 2 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_13To15Years
+=======
+age: dcid:Years0To2
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years13To15
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [13 15 Years]
+
+Node: dcid:Count_Person_13To15Years_Female
+=======
+age: dcid:Years13To15
+
+Node: dcid:Count_Person_Years13To15_Female
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [13 15 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_13To15Years_Female_Rural
+=======
+age: dcid:Years13To15
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years13To15_Female_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [13 15 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_13To15Years_Female_Urban
+=======
+age: dcid:Years13To15
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years13To15_Female_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [13 15 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_13To15Years_Male
+=======
+age: dcid:Years13To15
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years13To15_Male
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [13 15 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_13To15Years_Male_Rural
+=======
+age: dcid:Years13To15
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years13To15_Male_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [13 15 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_13To15Years_Male_Urban
+=======
+age: dcid:Years13To15
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years13To15_Male_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [13 15 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_13To15Years_Rural
+=======
+age: dcid:Years13To15
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years13To15_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [13 15 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_13To15Years_Urban
+=======
+age: dcid:Years13To15
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years13To15_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [13 15 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_16To19Years_Female_Rural
+=======
+age: dcid:Years13To15
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years16To19_Female_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [16 19 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_16To19Years_Female_Urban
+=======
+age: dcid:Years16To19
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years16To19_Female_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [16 19 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_16To19Years_Male_Rural
+=======
+age: dcid:Years16To19
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years16To19_Male_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [16 19 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_16To19Years_Male_Urban
+=======
+age: dcid:Years16To19
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years16To19_Male_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [16 19 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_16To19Years_Rural
+=======
+age: dcid:Years16To19
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years16To19_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [16 19 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_16To19Years_Urban
+=======
+age: dcid:Years16To19
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years16To19_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [16 19 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_20To24Years_Female_Rural
+=======
+age: dcid:Years16To19
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years25To34_Female_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [20 24 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_20To24Years_Female_Urban
+=======
+age: dcid:Years25To34
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years25To34_Female_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [20 24 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_20To24Years_Male_Rural
+=======
+age: dcid:Years25To34
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years25To34_Male_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [20 24 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_20To24Years_Male_Urban
+=======
+age: dcid:Years25To34
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years25To34_Male_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [20 24 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_25To34Years_Female_Rural
+=======
+age: dcid:Years25To34
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years35To44_Female_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [25 34 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_25To34Years_Female_Urban
+=======
+age: dcid:Years35To44
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years35To44_Female_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [25 34 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_25To34Years_Male_Rural
+=======
+age: dcid:Years35To44
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years35To44_Male_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [25 34 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_25To34Years_Male_Urban
+=======
+age: dcid:Years35To44
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years35To44_Male_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [25 34 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_35To44Years_Female_Rural
+=======
+age: dcid:Years35To44
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years35To44_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [35 44 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_35To44Years_Female_Urban
+=======
+age: dcid:Years35To44
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years35To44_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years35To44
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years3To6
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years3To6
+
+Node: dcid:Count_Person_Years3To6_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years3To6
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years3To6_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years3To6
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years3To6_Female_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [35 44 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_35To44Years_Male_Rural
+=======
+age: dcid:Years3To6
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years3To6_Male
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [35 44 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_35To44Years_Male_Urban
+=======
+age: dcid:Years3To6
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years3To6_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years3To6
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years3To6_Male_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [35 44 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_35To44Years_Rural
+=======
+age: dcid:Years3To6
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years3To6_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [35 44 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_35To44Years_Urban
+=======
+age: dcid:Years3To6
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years3To6_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [35 44 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_3To6Years
+=======
+age: dcid:Years3To6
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years45To54_Female_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [3 6 Years]
+
+Node: dcid:Count_Person_3To6Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 6 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_3To6Years_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 6 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_3To6Years_Female_Urban
+=======
+age: dcid:Years45To54
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years45To54_Female_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [3 6 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_3To6Years_Male
+=======
+age: dcid:Years45To54
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years45To54_Male_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [3 6 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_3To6Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 6 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_3To6Years_Male_Urban
+=======
+age: dcid:Years45To54
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years45To54_Male_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [3 6 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_3To6Years_Rural
+=======
+age: dcid:Years45To54
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years45To54_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [3 6 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_3To6Years_Urban
+=======
+age: dcid:Years45To54
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years45To54_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [3 6 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_45To54Years_Female_Rural
+=======
+age: dcid:Years45To54
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years55To64_Female_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [45 54 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_45To54Years_Female_Urban
+=======
+age: dcid:Years55To64
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years55To64_Female_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [45 54 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_45To54Years_Male_Rural
+=======
+age: dcid:Years55To64
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years55To64_Male_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [45 54 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_45To54Years_Male_Urban
+=======
+age: dcid:Years55To64
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years55To64_Male_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [45 54 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_45To54Years_Rural
+=======
+age: dcid:Years55To64
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years65Onwards_Female_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [45 54 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_45To54Years_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 54 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_55To64Years_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 64 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_55To64Years_Female_Urban
+=======
+age: dcid:Years65Onwards
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years65Onwards_Female_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [55 64 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_55To64Years_Male_Rural
+=======
+age: dcid:Years65Onwards
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years65Onwards_Male_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [55 64 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_55To64Years_Male_Urban
+=======
+age: dcid:Years65Onwards
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years65Onwards_Male_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [55 64 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_65OrMoreYears_Female_Rural
+=======
+age: dcid:Years65Onwards
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years7To12_Female_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [65 - Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_65OrMoreYears_Female_Urban
+=======
+age: dcid:Years7To12
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years7To12_Female_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [65 - Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_65OrMoreYears_Male_Rural
+=======
+age: dcid:Years7To12
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years7To12_Male_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [65 - Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_65OrMoreYears_Male_Urban
+=======
+age: dcid:Years7To12
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years7To12_Male_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [65 - Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_7To12Years_Female_Rural
+=======
+age: dcid:Years7To12
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Years7To12_Rural
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [7 12 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_7To12Years_Female_Urban
+=======
+age: dcid:Years7To12
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Years7To12_Urban
+>>>>>>> 55594a09 (Added auto refresh for poland)
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+<<<<<<< HEAD
+age: [7 12 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_7To12Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [7 12 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_7To12Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [7 12 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_7To12Years_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [7 12 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_7To12Years_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [7 12 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+=======
+age: dcid:Years7To12
+>>>>>>> 55594a09 (Added auto refresh for poland)
+placeOfResidenceClassification: dcid:Urban
+

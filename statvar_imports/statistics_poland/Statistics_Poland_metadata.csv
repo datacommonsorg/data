@@ -1,0 +1,19 @@
+config,value
+provenance_url,https://bdl.stat.gov.pl/bdl/dane/podgrup/tablica
+output_columns,"observationDate,observationAbout,value,variableMeasured"
+places_within,country/POL
+#place_types,"AdministrativeArea,AdministrativeArea1,AdministrativeArea2,State"
+#debug,1
+#input_rows,100
+#word_delimiter,''
+<<<<<<< HEAD
+skip_rows,1
+header_rows,5
+dc_api_root,https://api.datacommons.org
+=======
+#skip_rows,1
+header_rows,5
+mapped_columns,2
+dc_api_root,https://api.datacommons.org
+
+>>>>>>> 55594a09 (Added auto refresh for poland)
