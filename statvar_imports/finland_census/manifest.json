@@ -1,0 +1,25 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Finland_Census",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://pxdata.stat.fi/PxWeb/pxweb/en/StatFin/StatFin__vaerak/statfin_vaerak_pxt_11ra.px/table/tableViewLayout1/",
+            "provenance_description": "Population data for Finland",
+            "scripts": [
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/finland/input_files/*.csv --pv_map=finland_census_pvmap.csv --config_file=finland_census_metadata.csv --output_path=output/finland_census_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/finland_census_output.tmcf",
+                    "cleaned_csv": "output/finland_census_output.csv"
+                }
+            ],
+            "source_files": [
+                "gs://unresolved_mcf/country/finland/input_files/*.csv"
+            ],
+            "cron_schedule": "30 5 1 *  *"
+        }
+    ]
+}
