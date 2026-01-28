@@ -14,7 +14,14 @@
 """
 Script to check if properties, DCIDs, or nodes exist in datacommons.org.
 """
-import datacommons
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from util.dc_api_wrapper import dc_api_is_defined_dcid
 
 
 def check_dcid_existence(nodes: list) -> dict:
@@ -27,18 +34,4 @@ def check_dcid_existence(nodes: list) -> dict:
     Returns:
         dict: Status dictionary.
     """
-    # pylint: disable=protected-access
-    nodes_response = datacommons.get_property_values(
-        nodes,
-        "typeOf",
-        out=True,
-        value_type=None,
-        limit=datacommons.utils._MAX_LIMIT)
-    # pylint: enable=protected-access
-    node_status = {}
-    for node, value in nodes_response.items():
-        if value == []:
-            node_status[node] = False
-        else:
-            node_status[node] = True
-    return node_status
+    return dc_api_is_defined_dcid(nodes)
