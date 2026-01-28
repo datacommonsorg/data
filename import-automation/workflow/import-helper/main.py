@@ -18,28 +18,27 @@ import json
 import logging
 import os
 from datetime import datetime, timezone
-from google.cloud import spanner
-from google.cloud.spanner_v1 import Transaction
-import google.cloud.workflows
+from google.auth.transport.requests import Request
+from google.oauth2 import id_token
+from google.cloud.workflows import executions_v1
+import requests
 
 logging.getLogger().setLevel(logging.INFO)
 
 PROJECT_ID = os.environ.get('PROJECT_ID')
 LOCATION = os.environ.get('LOCATION')
-WORKFLOW_ID = os.environ.get('WORKFLOW_ID', 'spanner-ingestion-workflow')
-SPANNER_PROJECT_ID = os.environ.get('SPANNER_PROJECT_ID')
-SPANNER_INSTANCE_ID = os.environ.get('SPANNER_INSTANCE_ID')
-SPANNER_DATABASE_ID = os.environ.get('SPANNER_DATABASE_ID')
-DEFAULT_GRAPH_PATH = "/**/*.mcf*"
+GCS_BUCKET_ID = os.environ.get('GCS_BUCKET_ID')
+WORKFLOW_ID = 'spanner-ingestion-workflow'
+INGESTION_HELPER_URL = f"https://{LOCATION}-{PROJECT_ID}.cloudfunctions.net/spanner-ingestion-helper"
 
 
 def invoke_ingestion_workflow(import_name):
     """Invokes the spanner ingestion workflow."""
     execution_client = executions_v1.ExecutionsClient()
     parent = f"projects/{PROJECT_ID}/locations/{LOCATION}/workflows/{WORKFLOW_ID}"
-    workflow_args = {"imports": [import_name]}
+    workflow_args = {"importList": [import_name]}
     try:
-        execution_req = workflows.executions_v1.Execution(
+        execution_req = executions_v1.Execution(
             argument=json.dumps(workflow_args))
         response = execution_client.create_execution(parent=parent,
                                                      execution=execution_req)
@@ -50,52 +49,31 @@ def invoke_ingestion_workflow(import_name):
         logging.error(f"Error triggering workflow: {e}")
 
 
-def update_import_status(import_name, dest_dir, status):
+def update_import_status(import_name, request_json):
     """Updates the status for the specified import job."""
-    logging.info(f"Updating import status for {import_name} to {status}")
     try:
-        spanner_client = spanner.Client(
-            project=SPANNER_PROJECT_ID,
-            client_options={'quota_project_id': SPANNER_PROJECT_ID})
-        instance = spanner_client.instance(SPANNER_INSTANCE_ID)
-        database = instance.database(SPANNER_DATABASE_ID)
-        job_id = ''
-        exec_time = 0
-        data_volume = 0
-        version = dest_dir
-        next_refresh = datetime.now(timezone.utc)
-        graph_paths = [DEFAULT_GRAPH_PATH]
-
-        def _record(transaction: Transaction):
-            columns = [
-                "ImportName", "State", "JobId", "ExecutionTime", "DataVolume",
-                "NextRefreshTimestamp", "LatestVersion", "GraphDataPaths",
-                "StatusUpdateTimestamp"
-            ]
-            row_values = [
-                import_name, status, job_id, exec_time, data_volume,
-                next_refresh, version, graph_paths, spanner.COMMIT_TIMESTAMP
-            ]
-            if status == 'READY':
-                columns.append("DataImportTimestamp")
-                row_values.append(spanner.COMMIT_TIMESTAMP)
-            transaction.insert_or_update(table="ImportStatus",
-                                         columns=columns,
-                                         values=[row_values])
-            logging.info(f"Marked {import_name} as {status}.")
-
-        database.run_in_transaction(_record)
-        logging.info(f"Updated Spanner status for {import_name}")
+        auth_req = Request()
+        token = id_token.fetch_id_token(auth_req, INGESTION_HELPER_URL)
+        headers = {'Authorization': f'Bearer {token}'}
+        response = requests.post(INGESTION_HELPER_URL,
+                                 json=request_json,
+                                 headers=headers)
+        response.raise_for_status()
+        logging.info(f"Updated status for {import_name}")
     except Exception as e:
         logging.error(f'Error updating import status for {import_name}: {e}')
 
 
 # Triggered from a message on a Cloud Pub/Sub topic.
-@functions_framework.cloud_event
-def handle_feed_event(cloud_event):
+@functions_framework.http
+def handle_feed_event(request):
     # Updates status in spanner and triggers ingestion workflow
     # for an import using CDA feed
-    pubsub_message = cloud_event.data['message']
+    request_json = request.get_json(silent=True)
+    if not request_json or 'message' not in request_json:
+        return 'Invalid Pub/Sub message format', 400
+
+    pubsub_message = request_json['message']
     logging.info(f"Received Pub/Sub message: {pubsub_message}")
     try:
         data_bytes = base64.b64decode(pubsub_message["data"])
@@ -106,12 +84,26 @@ def handle_feed_event(cloud_event):
 
     attributes = pubsub_message.get('attributes', {})
     if attributes.get('transfer_status') == 'TRANSFER_COMPLETED':
-        feed_type = attributes.get('feed_type')
         import_name = attributes.get('import_name')
-        dest_dir = attributes.get('dest_dir')
-        if feed_type == 'cns_to_gcs':
-            logging.info(f'Updating {import_name} import status')
-            update_import_status(import_name, dest_dir, 'READY')
+        import_status = attributes.get('import_status', 'STAGING')
+        import_version = 'gs://' + GCS_BUCKET_ID + '/' + import_name.replace(
+            ':', '/') + '/' + attributes.get(
+                'import_version',
+                datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+        graph_path = attributes.get('graph_path', "/**/*mcf*")
+        request = {
+            'actionType': 'update_import_status',
+            'importName': import_name,
+            'status': import_status,
+            'latestVersion': import_version,
+            'nextRefresh': datetime.now(timezone.utc).isoformat(),
+            'graphPath': graph_path
+        }
+
+        logging.info(
+            f"Updating import status for {import_name} to {import_status}")
+        update_import_status(import_name, request)
+        if import_status == 'READY':
             invoke_ingestion_workflow(import_name)
-        else:
-            logging.info(f'Unknown feed type: {feed_type}')
+
+    return 'OK', 200
