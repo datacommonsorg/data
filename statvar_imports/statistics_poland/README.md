@@ -35,8 +35,7 @@ To process the Poland Census data and generate statistical variables, use the fo
   --pv_map=statvar_imports/statistics_poland/StatisticsPoland_pvmap.csv \
   --output_path=statvar_imports/statistics_poland/test/StatisticsPoland_output \
   --config_file=statvar_imports/statistics_poland/Statistics_Poland_metadata.csv \
-  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-  2>&1 | tee statvar_imports/statistics_poland/log.txt
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
 ```
 
 **For Main data run**
