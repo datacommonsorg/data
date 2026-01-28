@@ -14,10 +14,12 @@ This is a manual refresh, as data cannot be downloaded directly from the source 
 ## Processing Instructions
 To process the Bulgaria Census data and generate statistical variables, use the following command from the "data" directory:
 
-python3 tools/statvar_importer/stat_var_processor.py \
+```bash
+    python3 tools/statvar_importer/stat_var_processor.py \
     --input_data='statvar_imports/Bulgaria_NSI_Demographics/test_data/BulgariaNSI_Demographics_input.csv' \
     --pv_map='statvar_imports/Bulgaria_NSI_Demographics/BulgariaNSI_Demographics_pvmap.csv' \
     --output_path='statvar_imports/Bulgaria_NSI_Demographics/test_data/BulgariaNSI_Demographics_output' \
     --config_file='statvar_imports/Bulgaria_NSI_Demographics/BulgariaNSI_Demographics_metadata.csv' \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+```
 
