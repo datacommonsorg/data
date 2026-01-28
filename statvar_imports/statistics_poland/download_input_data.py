@@ -1,10 +1,16 @@
 import pandas as pd
 import os
+import logging
 from datetime import datetime
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(levelname)s: %(message)s'
+)
 
 # Configuration
 INPUT_FILE = "statvar_imports/statistics_poland/poland_data_sample/poland_raw.xlsx"
-# Final path for Data Commons import
 OUTPUT_DIR = "statvar_imports/statistics_poland/poland_input"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "StatisticsPoland_input.csv")
 
@@ -16,10 +22,10 @@ TARGET_AGES = [
 
 def process_poland_pivot():
     if not os.path.exists(INPUT_FILE):
-        print(f"ERROR: {INPUT_FILE} not found.")
+        logging.error(f"{INPUT_FILE} not found.")
         return
 
-    print(f"Starting generic processing. Saving to: {OUTPUT_FILE}")
+    logging.info(f"Starting generic processing. Saving to: {OUTPUT_FILE}")
 
     try:
         # 1. Load the 'DANE' sheet
@@ -27,16 +33,14 @@ def process_poland_pivot():
         df.columns = ['Code', 'Name', 'Age', 'Sex', 'Location', 'Year', 'Value', 'Unit', 'Attr']
 
         # 2. Generic Filtering
-        # Keep only specified age groups
         df = df[df['Age'].isin(TARGET_AGES)]
         
-        # DYNAMIC YEAR LOGIC:
-        # Detects all years in the file and filters out any accidental future projections
+        # DYNAMIC YEAR LOGIC
         current_year = datetime.now().year
         available_years = sorted([y for y in df['Year'].unique() if y <= current_year])
         df = df[df['Year'].isin(available_years)]
 
-        # 3. Translation Dictionary
+        # 3. Translation Logic
         translations = {
             'mężczyźni': 'males',
             'kobiety': 'females',
@@ -47,13 +51,11 @@ def process_poland_pivot():
             '65 i więcej': '65 and more'
         }
         
-        df['Sex'] = df['Sex'].replace(translations)
-        df['Location'] = df['Location'].replace(translations)
-        df['Name'] = df['Name'].replace(translations)
-        df['Age'] = df['Age'].replace(translations)
+        # Refactored repetitive replace calls into a loop
+        for col in ['Sex', 'Location', 'Name', 'Age']:
+            df[col] = df[col].replace(translations)
 
         # 4. Create the Pivot Table
-        # Stacks categories into a multi-level header: Age > Sex > Location > Year
         pivot_df = df.pivot_table(
             index=['Code', 'Name'], 
             columns=['Age', 'Sex', 'Location', 'Year'], 
@@ -67,15 +69,14 @@ def process_poland_pivot():
 
         # 6. Save result
         os.makedirs(OUTPUT_DIR, exist_ok=True)
-        # utf-8-sig ensures Polish special characters in 'Name' stay readable
         pivot_df.to_csv(OUTPUT_FILE, encoding='utf-8-sig')
         
-        print(f"SUCCESS: {OUTPUT_FILE} has been updated.")
-        print(f"Years Included: {available_years}")
-        print(f"Total Geographies Processed: {pivot_df.shape[0]}")
+        logging.info(f"SUCCESS: {OUTPUT_FILE} has been updated.")
+        logging.info(f"Years Included: {available_years}")
+        logging.info(f"Total Geographies Processed: {pivot_df.shape[0]}")
 
     except Exception as e:
-        print(f"Processing Error: {e}")
+        logging.error(f"Processing Error: {e}")
 
 if __name__ == "__main__":
     process_poland_pivot()
