@@ -1428,7 +1428,7 @@ IF all items in the VALIDATION CHECKLIST above pass:
 ELIF CURRENT_ATTEMPT < {{max_iterations}}:
     → OUTPUT: "❌ ATTEMPT CURRENT_ATTEMPT FAILED - Error details: [describe specific error]"
     → OUTPUT: "🔄 Starting attempt [CURRENT_ATTEMPT + 1] of {{max_iterations}}..."   
-    → Analyze the error from logs. In case statvar processor failed, read log file at: {{working_dir_abs}}/.datacommons/processor.log
+    → Analyze the error from logs. In case statvar processor failed, read log file at: {{run_dir_abs}}/processor.log
     {# TODO: move debugging instructions to separate section #}
     → **Common {{output_path_abs}}_metadata.csv issues to check:**
        • Missing or wrong `header_rows` (should be 1 for standard CSV with headers)
@@ -1442,8 +1442,8 @@ ELIF CURRENT_ATTEMPT < {{max_iterations}}:
 ELSE (CURRENT_ATTEMPT >= {{max_iterations}}):
     → OUTPUT: "⛔ ITERATION LIMIT REACHED: Failed after {{max_iterations}} attempts"
     → OUTPUT: "📋 Final Status: FAILED - Manual intervention required"
-    → OUTPUT: "📁 Check logs at: {{working_dir_abs}}/.datacommons/ for debugging"
-    → OUTPUT: "📁 Check backup at: {{working_dir_abs}}/runs/{{gemini_run_id}}/ for debugging"
+    → OUTPUT: "📁 Check logs at: {{run_dir_abs}}/ for debugging"
+    → OUTPUT: "📁 Check backup at: {{run_dir_abs}}/ for debugging"
     → STOP EXECUTION IMMEDIATELY
     → DO NOT MAKE ANY MORE ATTEMPTS
 ```

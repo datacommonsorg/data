@@ -1,0 +1,125 @@
+Node: dcid:age
+typeOf: dcs:Property
+name: "age"
+rangeIncludes: dcid:ProvisionalNode
+
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_15To64Years_Employed
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 15 To 64 Years_ Employed"
+isProvisional: dcs:True
+
+Node: dcid:Finnish
+typeOf: dcid:USC_LanguageSpokenAtHomeEnum
+name: "Finnish"
+isProvisional: dcs:True
+
+Node: dcid:Swedish
+typeOf: dcid:USC_LanguageSpokenAtHomeEnum
+name: "Swedish"
+isProvisional: dcs:True
+
+Node: dcid:Sami
+typeOf: dcid:USC_LanguageSpokenAtHomeEnum
+name: "Sami"
+isProvisional: dcs:True
+
+Node: dcid:FIN_OtherLanguages
+typeOf: dcid:USC_LanguageSpokenAtHomeEnum
+name: "FIN_ Other Languages"
+isProvisional: dcs:True
+
+Node: dcid:placeOfBirth
+typeOf: dcs:Property
+name: "placeOfBirth"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:Country,dcid:NativityEnum,dcid:USC_PlaceOfBirthEnum
+
+Node: dcid:originBackgroundType
+typeOf: dcs:Property
+name: "originBackgroundType"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:OriginBackgroundTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:OriginBackgroundTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "OriginBackgroundTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:ForeignBackground
+typeOf: dcid:OriginBackgroundTypeEnum
+name: "Foreign Background"
+isProvisional: dcs:True
+
+Node: dcid:religiousOrientation
+typeOf: dcs:Property
+name: "religiousOrientation"
+domainIncludes: dcid:Person
+
+Node: dcid:FIN_OtherReligiousGroup
+typeOf: dcid:ReligionEnum
+name: "FIN_ Other Religious Group"
+isProvisional: dcs:True
+
+Node: dcid:NoReligiousAffiliation
+typeOf: dcid:ReligionEnum
+name: "No Religious Affiliation"
+isProvisional: dcs:True
+
+Node: dcid:BornInAreaOfResidence
+typeOf: dcid:Country
+name: "Born In Area Of Residence"
+isProvisional: dcs:True
+
+Node: dcid:BornOutsideAreaOfResidence
+typeOf: dcid:Country
+name: "Born Outside Area Of Residence"
+isProvisional: dcs:True
+
+Node: dcid:AreaOfBirth
+typeOf: dcid:CountyClassificationEnum
+name: "Area Of Birth"
+isProvisional: dcs:True
+
+Node: dcid:InnerUrban
+typeOf: dcid:CountyClassificationEnum
+name: "Inner Urban"
+isProvisional: dcs:True
+
+Node: dcid:OuterUrban
+typeOf: dcid:CountyClassificationEnum
+name: "Outer Urban"
+isProvisional: dcs:True
+
+Node: dcid:PeriUrban
+typeOf: dcid:CountyClassificationEnum
+name: "Peri Urban"
+isProvisional: dcs:True
+
+Node: dcid:LocalCentreRural
+typeOf: dcid:CountyClassificationEnum
+name: "Local Centre Rural"
+isProvisional: dcs:True
+
+Node: dcid:RuralCloseToUrban
+typeOf: dcid:CountyClassificationEnum
+name: "Rural Close To Urban"
+isProvisional: dcs:True
+
+Node: dcid:RuralHeartland
+typeOf: dcid:CountyClassificationEnum
+name: "Rural Heartland"
+isProvisional: dcs:True
+
+Node: dcid:SparseRural
+typeOf: dcid:CountyClassificationEnum
+name: "Sparse Rural"
+isProvisional: dcs:True
+

@@ -208,7 +208,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
                     'naics: dcid:NAICS/{naics}\n'
                     'statType: dcid:measuredValue\n\n')
 
-        with open('States_gdp_industry_statvars.mcf', 'w') as mcf_f:
+        with open('states_gdp_industry_statvars.mcf', 'w') as mcf_f:
             for naics_code in self.clean_df['NAICS'].unique():
                 code_title = naics_code[38:]
                 code = code_title.replace('_', '-')

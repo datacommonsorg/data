@@ -264,9 +264,12 @@ working_directory/
 ├── sample_data.csv             # Sampled data (30 lines max)
 ├── metadata_file1.json         # Metadata files
 ├── metadata_file2.yaml
-├── processor.log               # Processing logs
 ├── .datacommons/
-│   └── output_counters.log     # Output counters
+│   └── runs/
+│       └── <gemini_run_id>/
+│           ├── processor.log          # StatVar processor logs
+│           ├── backup.log             # Backup logs
+│           └── output_counters.csv    # Output counters
 ├── sample_output/              # Sample data output from PV map generation
 │   ├── output_pvmap.csv        # Generated PV mapping for sample data
 │   ├── output_metadata.csv     # Generated metadata configuration for sample data
@@ -287,7 +290,7 @@ working_directory/
 When encountering errors with Gemini CLI:
 
 1. **Restart the process**: If Gemini CLI fails, simply restart the PV map generation process
-2. **Check run logs**: All Gemini CLI runs are logged in `$WORKING_DIR/.datacommons/runs/<gemini_run_id>/` directory (e.g., `gemini_20250915_163906`)
+2. **Check run logs**: All Gemini CLI runs are logged in `$WORKING_DIR/.datacommons/runs/<gemini_run_id>/` directory (e.g., `output_gemini_20250915_163906_1234`)
 3. **Monitor for loops**: Gemini CLI can sometimes get stuck in loops - check logs at `.datacommons/runs/<gemini_run_id>/gemini_cli.log`
 4. **StatVar processor attempts**: Gemini CLI will run the StatVar processor multiple times if needed. Each attempt is logged in `.datacommons/runs/<gemini_run_id>/attempt_<number>/` directory
 
@@ -296,8 +299,11 @@ When encountering errors with Gemini CLI:
 ```
 .datacommons/
 ├── runs/
-│   └── gemini_20250915_163906/           # Individual run directory (gemini_run_id)
+│   └── output_gemini_20250915_163906_1234/  # Individual run directory (gemini_run_id)
 │       ├── gemini_cli.log                # Main Gemini CLI log
+│       ├── processor.log                 # StatVar processor logs
+│       ├── backup.log                    # Backup logs
+│       ├── output_counters.csv           # Output counters
 │       ├── attempt_1/                    # First attempt logs
 │       ├── attempt_2/                    # Second attempt logs (if needed)
 │       └── ...                           # Additional attempts

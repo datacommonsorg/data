@@ -67,45 +67,45 @@ class TestMaxDateLatestValidation(unittest.TestCase):
         self.assertIn('missing required column', result.message)
 
 
-class TestDeletedCountValidation(unittest.TestCase):
-    '''Test Class for the DELETED_COUNT validation rule.'''
+class TestDeletedRecordsCountValidation(unittest.TestCase):
+    '''Test Class for the DELETED_RECORDS_COUNT validation rule.'''
 
     def setUp(self):
         self.validator = Validator()
 
-    def test_deleted_count_fails_when_over_threshold(self):
+    def test_deleted_records_count_fails_when_over_threshold(self):
         test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
         params = {'threshold': 1}
-        result = self.validator.validate_deleted_count(test_df, params)
+        result = self.validator.validate_deleted_records_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(result.details['deleted_count'], 2)
+        self.assertEqual(result.details['deleted_records_count'], 2)
         self.assertEqual(result.details['threshold'], 1)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
 
-    def test_deleted_count_passes_when_at_threshold(self):
+    def test_deleted_records_count_passes_when_at_threshold(self):
         test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
         params = {'threshold': 2}
-        result = self.validator.validate_deleted_count(test_df, params)
+        result = self.validator.validate_deleted_records_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 2)
         self.assertEqual(result.details['rows_failed'], 0)
 
-    def test_deleted_count_passes_on_empty_dataframe(self):
+    def test_deleted_records_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'DELETED': []})
         params = {'threshold': 0}
-        result = self.validator.validate_deleted_count(test_df, params)
+        result = self.validator.validate_deleted_records_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['rows_processed'], 0)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 0)
 
-    def test_deleted_count_fails_on_missing_column(self):
+    def test_deleted_records_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'DELETED'
         params = {'threshold': 1}
-        result = self.validator.validate_deleted_count(test_df, params)
+        result = self.validator.validate_deleted_records_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
@@ -155,86 +155,86 @@ class TestLintErrorCountValidation(unittest.TestCase):
         self.assertEqual(result.details['lint_error_count'], 5)
 
 
-class TestModifiedCountValidation(unittest.TestCase):
-    '''Test Class for the MODIFIED_COUNT validation rule.'''
+class TestModifiedRecordsCountValidation(unittest.TestCase):
+    '''Test Class for the MODIFIED_RECORDS_COUNT validation rule.'''
 
     def setUp(self):
         self.validator = Validator()
 
-    def test_modified_count_fails_on_inconsistent_counts(self):
+    def test_modified_records_count_fails_on_inconsistent_counts(self):
         test_df = pd.DataFrame({
             'StatVar': ['sv1', 'sv2'],
             'MODIFIED': [1, 2]
         })  # Inconsistent
-        result = self.validator.validate_modified_count(test_df, {})
+        result = self.validator.validate_modified_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.details['distinct_statvar_count'], 2)
-        self.assertEqual(result.details['distinct_modified_counts'], 2)
+        self.assertEqual(result.details['distinct_modified_records_count'], 2)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
 
-    def test_modified_count_passes_on_consistent_counts(self):
+    def test_modified_records_count_passes_on_consistent_counts(self):
         test_df = pd.DataFrame({'MODIFIED': [2, 2]})  # Consistent
-        result = self.validator.validate_modified_count(test_df, {})
+        result = self.validator.validate_modified_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 2)
         self.assertEqual(result.details['rows_failed'], 0)
 
-    def test_modified_count_passes_on_empty_dataframe(self):
+    def test_modified_records_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'MODIFIED': []})
-        result = self.validator.validate_modified_count(test_df, {})
+        result = self.validator.validate_modified_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['rows_processed'], 0)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 0)
 
-    def test_modified_count_fails_on_missing_column(self):
+    def test_modified_records_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'MODIFIED'
-        result = self.validator.validate_modified_count(test_df, {})
+        result = self.validator.validate_modified_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
 
-class TestAddedCountValidation(unittest.TestCase):
-    '''Test Class for the ADDED_COUNT validation rule.'''
+class TestAddedRecordsCountValidation(unittest.TestCase):
+    '''Test Class for the ADDED_RECORDS_COUNT validation rule.'''
 
     def setUp(self):
         self.validator = Validator()
 
-    def test_added_count_fails_on_inconsistent_counts(self):
+    def test_added_records_count_fails_on_inconsistent_counts(self):
         test_df = pd.DataFrame({
             'StatVar': ['sv1', 'sv2'],
             'ADDED': [1, 2]
         })  # Inconsistent
-        result = self.validator.validate_added_count(test_df, {})
+        result = self.validator.validate_added_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.details['distinct_statvar_count'], 2)
-        self.assertEqual(result.details['distinct_added_counts'], 2)
+        self.assertEqual(result.details['distinct_added_records_count'], 2)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
 
-    def test_added_count_passes_on_consistent_counts(self):
+    def test_added_records_count_passes_on_consistent_counts(self):
         test_df = pd.DataFrame({'ADDED': [1, 1]})  # Consistent
-        result = self.validator.validate_added_count(test_df, {})
+        result = self.validator.validate_added_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 2)
         self.assertEqual(result.details['rows_failed'], 0)
 
-    def test_added_count_passes_on_empty_dataframe(self):
+    def test_added_records_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'ADDED': []})
-        result = self.validator.validate_added_count(test_df, {})
+        result = self.validator.validate_added_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['rows_processed'], 0)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 0)
 
-    def test_added_count_fails_on_missing_column(self):
+    def test_added_records_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'ADDED'
-        result = self.validator.validate_added_count(test_df, {})
+        result = self.validator.validate_added_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
@@ -256,7 +256,7 @@ class TestNumPlacesConsistentValidation(unittest.TestCase):
             result.message,
             "The number of places is not consistent across all StatVars.")
         self.assertEqual(result.details['distinct_statvar_count'], 2)
-        self.assertEqual(result.details['distinct_place_counts'], 2)
+        self.assertEqual(result.details['distinct_place_count'], 2)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
@@ -421,7 +421,7 @@ class TestMaxDateConsistentValidation(unittest.TestCase):
         self.assertEqual(result.message,
                          "The MaxDate is not consistent across all StatVars.")
         self.assertEqual(result.details['distinct_statvar_count'], 2)
-        self.assertEqual(result.details['distinct_max_date_counts'], 2)
+        self.assertEqual(result.details['distinct_max_date_count'], 2)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
@@ -538,7 +538,7 @@ class TestUnitConsistencyValidation(unittest.TestCase):
         self.assertEqual(result.message,
                          "The unit is not consistent across all StatVars.")
         self.assertEqual(result.details['distinct_statvar_count'], 2)
-        self.assertEqual(result.details['distinct_unit_counts'], 2)
+        self.assertEqual(result.details['distinct_unit_count'], 2)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
