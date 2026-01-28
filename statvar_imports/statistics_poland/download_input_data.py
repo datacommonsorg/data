@@ -69,7 +69,7 @@ def process_poland_pivot():
 
         # 6. Save result
         os.makedirs(OUTPUT_DIR, exist_ok=True)
-        pivot_df.to_csv(OUTPUT_FILE, encoding='utf-8-sig')
+        pivot_df.to_csv(OUTPUT_FILE, encoding='utf-8')
         
         logging.info(f"SUCCESS: {OUTPUT_FILE} has been updated.")
         logging.info(f"Years Included: {available_years}")

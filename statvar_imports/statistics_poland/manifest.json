@@ -5,7 +5,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://stat.gov.pl/en/databases/",
+            "provenance_url": "https://bdl.stat.gov.pl/bdl/dane/podgrup/tablica",
             "provenance_description": "Population data for demographic variables such as population counts, age distributions, and other census-related metrics in Poland",
             "scripts": [
                 "download_input_data.py",
