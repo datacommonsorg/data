@@ -5,3 +5,4 @@ mapped_rows,3
 mapped_columns,2
 word_delimiter,""""""
 output_columns,"observationDate,value,unit,observationAbout,variableMeasured"
+
