@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "statistics_poland",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://bdl.stat.gov.pl/bdl/dane/podgrup/tablica",
+            "provenance_description": "Population data for demographic variables such as population counts, age distributions, and other census-related metrics in Poland",
+            "scripts": [
+                "download_input_data.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=poland_input/StatisticsPoland_input.csv --pv_map=StatisticsPoland_pvmap.csv --config_file=Statistics_Poland_metadata.csv --output_path=poland_output/StatisticsPoland_output"
+            ],
+            "source_files": [
+                "poland_input/StatisticsPoland_input.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "poland_output/StatisticsPoland_output.tmcf",
+                    "cleaned_csv": "poland_output/StatisticsPoland_output.csv"
+                }
+            ],
+            "cron_schedule": "0 0 1 1,4,7,10 *"
+        }
+    ]
+}
