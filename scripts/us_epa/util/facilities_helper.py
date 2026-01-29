@@ -15,8 +15,13 @@
 
 import os
 import ssl
+import sys
+from pathlib import Path
 
-import datacommons
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+
+from util.dc_api_wrapper import dc_api_get_node_property
 import json
 import pandas as pd
 import requests
@@ -57,6 +62,17 @@ def name_to_id(s):
     s = s.replace('Incorportated', 'Inc')
     s = s.replace('Lp', 'LP')
     return ''.join([s[0].upper(), s[1:]])
+
+
+def _parse_property_values(values):
+    """Normalize DC API property values to a list of strings."""
+    if isinstance(values, list):
+        return values
+    return [v for v in values.split(',') if v]
+
+
+def _type_suffix(value_type):
+    return value_type.split(':')[-1] if value_type else ''
 
 
 def get_address(table, row, table_prefix=""):
@@ -115,14 +131,32 @@ def get_county_candidates(zcta):
     if zcta in _COUNTY_CANDIDATES_CACHE:
         return _COUNTY_CANDIDATES_CACHE[zcta]
     candidate_lists = []
+    # Aggregate candidates to make a single typeOf lookup.
+    all_candidates = set()
     for prop in ['containedInPlace', 'geoOverlaps']:
-        resp = datacommons.get_property_values([zcta],
-                                               prop,
-                                               out=True,
-                                               value_type='County')
-        candidate_lists.append(sorted(resp[zcta]))
-    _COUNTY_CANDIDATES_CACHE[zcta] = candidate_lists
-    return candidate_lists
+        resp = dc_api_get_node_property([zcta], prop)
+        values = resp.get(zcta, {}).get(prop, '')
+        candidates = _parse_property_values(values)
+        candidate_lists.append(candidates)
+        all_candidates.update(candidates)
+    type_map = {}
+    if all_candidates:
+        # V2 node property values do not filter outgoing arcs by constraints.
+        type_resp = dc_api_get_node_property(sorted(all_candidates), 'typeOf')
+        for candidate in all_candidates:
+            values = type_resp.get(candidate, {}).get('typeOf', '')
+            type_map[candidate] = set(
+                _type_suffix(value_type)
+                for value_type in _parse_property_values(values))
+    filtered_lists = []
+    for candidates in candidate_lists:
+        filtered = []
+        for candidate in candidates:
+            if 'County' in type_map.get(candidate, set()):
+                filtered.append(candidate)
+        filtered_lists.append(sorted(filtered))
+    _COUNTY_CANDIDATES_CACHE[zcta] = filtered_lists
+    return filtered_lists
 
 
 def _dc_sv_query(dc_api_url, data_string, svs=set()):
