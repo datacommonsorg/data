@@ -175,7 +175,7 @@ class ValidationRunner:
                                          self.data_sources['differ'],
                                          rule['params'])
             else:
-                scope = rule['scope']
+                scope = rule.get('scope', {})
                 if isinstance(scope, str):
                     scope = self.config.get_scope(scope)
 
