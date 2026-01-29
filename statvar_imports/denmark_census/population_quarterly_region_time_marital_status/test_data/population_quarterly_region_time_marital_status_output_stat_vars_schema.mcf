@@ -1,5 +1,3 @@
 Node: dcid:MarriedOrSeparated
 typeOf: dcid:MaritalStatusEnum
-name: "Married Or Separated"
-isProvisional: dcs:True
-
+name: "Married or Separated"
