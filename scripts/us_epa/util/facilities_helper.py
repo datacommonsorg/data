@@ -23,8 +23,6 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from datacommons_client.models.observation import ObservationDate
 from datacommons_client.models.observation import ObservationSelect
-from util.dc_api_wrapper import dc_api_get_node_property
-from util.dc_api_wrapper import get_datacommons_client
 import json
 import pandas as pd
 import requests
@@ -32,6 +30,11 @@ import requests
 from re import sub
 from requests.structures import CaseInsensitiveDict
 from requests.exceptions import HTTPError
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+from util.dc_api_wrapper import dc_api_get_node_property
+from util.dc_api_wrapper import get_datacommons_client
 
 _COUNTY_CANDIDATES_CACHE = {}
 
