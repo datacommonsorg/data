@@ -1,0 +1,262 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=./finland_census_input.csv --pv_map=../finland_census_pvmap.csv --config_file=../finland_census_metadata.csv --output_path=finland_census_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --debug" on 2026-01-20 08:35:33.361740
+
+Node: dcid:Count_Person_15To64Years_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 64 Years]
+
+Node: dcid:Count_Person_AreaOfBirth_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+placeOfResidenceClassification: dcid:AreaOfBirth
+
+Node: dcid:Count_Person_FINOtherLanguagesSpokenAtHome
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:FIN_OtherLanguages
+
+Node: dcid:Count_Person_FINOtherLanguagesSpokenAtHome_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+languageSpokenAtHome: dcid:FIN_OtherLanguages
+
+Node: dcid:Count_Person_FINOtherReligiousGroup_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+religiousOrientation: dcid:FIN_OtherReligiousGroup
+
+Node: dcid:Count_Person_FinnishSpokenAtHome
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Finnish
+
+Node: dcid:Count_Person_FinnishSpokenAtHome_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+languageSpokenAtHome: dcid:Finnish
+
+Node: dcid:Count_Person_ForeignBackground
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+originBackgroundType: dcid:ForeignBackground
+
+Node: dcid:Count_Person_ForeignBackground_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+originBackgroundType: dcid:ForeignBackground
+
+Node: dcid:Count_Person_InnerUrban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+placeOfResidenceClassification: dcid:InnerUrban
+
+Node: dcid:Count_Person_LocalCentreRural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+placeOfResidenceClassification: dcid:LocalCentreRural
+
+Node: dcid:Count_Person_LutheranChurchMissouriSynod_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+religiousOrientation: dcid:LutheranChurchMissouriSynod
+
+Node: dcid:Count_Person_NoReligiousAffiliation_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+religiousOrientation: dcid:NoReligiousAffiliation
+
+Node: dcid:Count_Person_NotACitizen
+typeOf: dcid:StatisticalVariable
+name: "Population of non-citizens"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+citizenship: dcid:NotACitizen
+
+Node: dcid:Count_Person_NotACitizen_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+citizenship: dcid:NotACitizen
+
+Node: dcid:Count_Person_OuterUrban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+placeOfResidenceClassification: dcid:OuterUrban
+
+Node: dcid:Count_Person_PeriUrban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+placeOfResidenceClassification: dcid:PeriUrban
+
+Node: dcid:Count_Person_PlaceOfBirthBornInAreaOfResidence
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+placeOfBirth: dcid:BornInAreaOfResidence
+
+Node: dcid:Count_Person_PlaceOfBirthBornInAreaOfResidence_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+placeOfBirth: dcid:BornInAreaOfResidence
+
+Node: dcid:Count_Person_PlaceOfBirthBornOutsideAreaOfResidence
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+placeOfBirth: dcid:BornOutsideAreaOfResidence
+
+Node: dcid:Count_Person_PlaceOfBirthCountryFIN
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+placeOfBirth: dcid:country/FIN
+
+Node: dcid:Count_Person_PlaceOfBirthForeignBorn_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+placeOfBirth: dcid:ForeignBorn
+
+Node: dcid:Count_Person_RuralCloseToUrban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+placeOfResidenceClassification: dcid:RuralCloseToUrban
+
+Node: dcid:Count_Person_RuralHeartland_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+placeOfResidenceClassification: dcid:RuralHeartland
+
+Node: dcid:Count_Person_SamiSpokenAtHome
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Sami
+
+Node: dcid:Count_Person_SparseRural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+placeOfResidenceClassification: dcid:SparseRural
+
+Node: dcid:Count_Person_SwedishSpokenAtHome
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:Swedish
+
+Node: dcid:Count_Person_SwedishSpokenAtHome_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+languageSpokenAtHome: dcid:Swedish
+
+Node: dcid:Count_Person_YearsUpto14OrYears65Onwards_AsAFractionOf_Count_Person_15To64Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To64Years
+age: dcid:Years65Onwards__YearsUpto14
+
+Node: dcid:Count_Person_YearsUpto14OrYears65Onwards_Unemployed_AsAFractionOf_Count_Person_15To64Years_Employed
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To64Years_Employed
+age: dcid:Years65Onwards__YearsUpto14
+employmentStatus: dcid:Unemployed
+
+Node: dcid:GrowthRate_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Population growth rate"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:growthRate
+
+Node: dcid:Mean_Age_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:age
+statType: dcid:meanValue
+
+Node: dcid:Mean_Age_Person_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:age
+statType: dcid:meanValue
+gender: dcid:Female
+
+Node: dcid:Mean_Age_Person_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:age
+statType: dcid:meanValue
+gender: dcid:Male
+
