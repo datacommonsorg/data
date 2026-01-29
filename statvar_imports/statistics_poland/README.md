@@ -38,10 +38,9 @@ python3 tools/statvar_importer/stat_var_processor.py \
 **For Main data run**
 ```bash
 python3 tools/statvar_importer/stat_var_processor.py \
-    --input_data='statvar_imports/statistics_poland/poland_input/StatisticsPoland_input.csv' \
+    --input_data='statvar_imports/statistics_poland/StatisticsPoland_input.csv' \
     --pv_map='statvar_imports/statistics_poland/StatisticsPoland_pvmap.csv' \
-    --output_path='statvar_imports/statistics_poland/poland_output/StatisticsPoland_output' \
+    --output_path='statvar_imports/statistics_poland/StatisticsPoland_output' \
     --config_file='statvar_imports/statistics_poland/Statistics_Poland_metadata.csv' \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
-
