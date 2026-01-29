@@ -84,55 +84,114 @@ _FACILITY_COMPANY_OWNERSHIP = {
     },
 }
 
+_FACET_ID = 'facet/EPA_GHGRP'
+_FACETS = {
+    _FACET_ID: {
+        'observationPeriod': 'P1Y',
+    },
+}
+
 _FACILITY_SVO_DICT = {
     'epaGhgrpFacilityId/1004962': {
         # The SVO series below is from an actual SVO on Data Commons.
         # Date: 03/31/2021. See below for an easier to follow example with
         # synthetically made up numbers.
         'Annual_Emissions_Methane_NonBiogenic': {
-            'sourceSeries': [{
-                'val': {
-                    '2010': 312.75,
-                    '2016': 997,
-                    '2017': 975.5,
-                    '2019': 932,
-                    '2018': 966.75,
-                    '2013': 1138.5,
-                    '2015': 1029.25,
-                    '2014': 1097.75,
-                    '2011': 1144.25,
-                    '2012': 1100.5
-                },
-                'measurementMethod': 'EPA_GHGRP',
-                'observationPeriod': 'P1Y',
-                'importName': 'EPA_GHGRP',
-                'provenanceDomain': 'epa.gov',
-                'unit': 'MetricTonCO2e',
-                'provenanceUrl': 'https://www.epa.gov/ghgreporting'
+            'orderedFacets': [{
+                'facetId':
+                    _FACET_ID,
+                'observations': [
+                    {
+                        'date': '2010',
+                        'value': 312.75
+                    },
+                    {
+                        'date': '2016',
+                        'value': 997
+                    },
+                    {
+                        'date': '2017',
+                        'value': 975.5
+                    },
+                    {
+                        'date': '2019',
+                        'value': 932
+                    },
+                    {
+                        'date': '2018',
+                        'value': 966.75
+                    },
+                    {
+                        'date': '2013',
+                        'value': 1138.5
+                    },
+                    {
+                        'date': '2015',
+                        'value': 1029.25
+                    },
+                    {
+                        'date': '2014',
+                        'value': 1097.75
+                    },
+                    {
+                        'date': '2011',
+                        'value': 1144.25
+                    },
+                    {
+                        'date': '2012',
+                        'value': 1100.5
+                    },
+                ],
             }]
         },
         # An easier to follow case. See below for the same SV corresponding to
         # the second company.
         'Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic': {
-            'sourceSeries': [{
-                'val': {
-                    '2010': 100,
-                    '2016': 100,  # 100% belongs to abc.
-                    '2015': 100,
-                    '2017': 100,  # 90% belongs to abc, 10% to efg.
-                    '2018': 100,
-                    '2013': 100,
-                    '2012': 100,
-                    '2019': 100,
-                    '2014': 100,
-                    '2011': 100,
-                },
-                'measurementMethod': 'EPA_GHGRP',
-                'observationPeriod': 'P1Y',
-                'importName': 'EPA_GHGRP',
-                'provenanceDomain': 'epa.gov',
-                'unit': 'MetricTonCO2e',
-                'provenanceUrl': 'https://www.epa.gov/ghgreporting'
+            'orderedFacets': [{
+                'facetId':
+                    _FACET_ID,
+                'observations': [
+                    {
+                        'date': '2010',
+                        'value': 100
+                    },
+                    {
+                        'date': '2016',
+                        'value': 100  # 100% belongs to abc.
+                    },
+                    {
+                        'date': '2015',
+                        'value': 100
+                    },
+                    {
+                        'date': '2017',
+                        'value': 100  # 90% belongs to abc, 10% to efg.
+                    },
+                    {
+                        'date': '2018',
+                        'value': 100
+                    },
+                    {
+                        'date': '2013',
+                        'value': 100
+                    },
+                    {
+                        'date': '2012',
+                        'value': 100
+                    },
+                    {
+                        'date': '2019',
+                        'value': 100
+                    },
+                    {
+                        'date': '2014',
+                        'value': 100
+                    },
+                    {
+                        'date': '2011',
+                        'value': 100
+                    },
+                ],
             }]
         },
     },
@@ -141,45 +200,88 @@ _FACILITY_SVO_DICT = {
         # Date: 03/31/2021. See below for an easier to follow example with
         # synthetically made up numbers.
         'Annual_Emissions_Methane_NonBiogenic': {
-            'sourceSeries': [{
-                'val': {
-                    '2014': 12,
-                    '2013': 12,
-                    '2016': 13,
-                    '2019': 13.75,
-                    '2018': 14.25,
-                    '2015': 12,
-                    '2017': 14.5
-                },
-                'measurementMethod': 'EPA_GHGRP',
-                'observationPeriod': 'P1Y',
-                'importName': 'EPA_GHGRP',
-                'provenanceDomain': 'epa.gov',
-                'unit': 'MetricTonCO2e',
-                'provenanceUrl': 'https://www.epa.gov/ghgreporting'
+            'orderedFacets': [{
+                'facetId':
+                    _FACET_ID,
+                'observations': [
+                    {
+                        'date': '2014',
+                        'value': 12
+                    },
+                    {
+                        'date': '2013',
+                        'value': 12
+                    },
+                    {
+                        'date': '2016',
+                        'value': 13
+                    },
+                    {
+                        'date': '2019',
+                        'value': 13.75
+                    },
+                    {
+                        'date': '2018',
+                        'value': 14.25
+                    },
+                    {
+                        'date': '2015',
+                        'value': 12
+                    },
+                    {
+                        'date': '2017',
+                        'value': 14.5
+                    },
+                ],
             }]
         },
         # Continuation of the easier to follow case.
         'Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic': {
-            'sourceSeries': [{
-                'val': {
-                    '2010': 50,
-                    '2016': 50,  # 100% belongs to efg.
-                    '2015': 50,
-                    '2017': 50,  # 75% belongs to abc and 25% to efg.
-                    '2018': 50,  # 50% belongs to abc and 50% to efg.
-                    '2013': 50,
-                    '2012': 50,
-                    '2019': 50,
-                    '2014': 50,
-                    '2011': 50,
-                },
-                'measurementMethod': 'EPA_GHGRP',
-                'observationPeriod': 'P1Y',
-                'importName': 'EPA_GHGRP',
-                'provenanceDomain': 'epa.gov',
-                'unit': 'MetricTonCO2e',
-                'provenanceUrl': 'https://www.epa.gov/ghgreporting'
+            'orderedFacets': [{
+                'facetId':
+                    _FACET_ID,
+                'observations': [
+                    {
+                        'date': '2010',
+                        'value': 50
+                    },
+                    {
+                        'date': '2016',
+                        'value': 50  # 100% belongs to efg.
+                    },
+                    {
+                        'date': '2015',
+                        'value': 50
+                    },
+                    {
+                        'date': '2017',
+                        'value': 50  # 75% belongs to abc and 25% to efg.
+                    },
+                    {
+                        'date': '2018',
+                        'value': 50  # 50% belongs to abc and 50% to efg.
+                    },
+                    {
+                        'date': '2013',
+                        'value': 50
+                    },
+                    {
+                        'date': '2012',
+                        'value': 50
+                    },
+                    {
+                        'date': '2019',
+                        'value': 50
+                    },
+                    {
+                        'date': '2014',
+                        'value': 50
+                    },
+                    {
+                        'date': '2011',
+                        'value': 50
+                    },
+                ],
             }]
         },
     }
@@ -223,7 +325,7 @@ class ProcessTest(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             process_svobs(tmp_dir, _FACILITY_COMPANY_OWNERSHIP,
-                          _FACILITY_SVO_DICT)
+                          _FACILITY_SVO_DICT, _FACETS)
             for fname in [
                     'SVObs.tmcf',
                     'SVObs.csv',

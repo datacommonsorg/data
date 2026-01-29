@@ -21,7 +21,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
+from datacommons_client.models.observation import ObservationDate
+from datacommons_client.models.observation import ObservationSelect
 from util.dc_api_wrapper import dc_api_get_node_property
+from util.dc_api_wrapper import get_datacommons_client
 import json
 import pandas as pd
 import requests
@@ -208,9 +211,14 @@ def get_all_statvars(dc_api_url, facility_ids):
     return statVars
 
 
-# Returns a map of Facility ID : {SV: SV Observation} from the Data Commons API.
+# Returns V2 StatVar observations keyed by facility with facet metadata.
 def get_all_svobs(facility_ids, svs):
-    facility_svo_dict = {}
+    if not facility_ids or not svs:
+        return {}, {}
+
+    facility_sv_map = {}
+    facets = {}
+    client = get_datacommons_client()
 
     # Process in batches of size n_facilities.
     n_facilities = 100
@@ -218,9 +226,29 @@ def get_all_svobs(facility_ids, svs):
     for i in range(0, len(facility_ids), n_facilities):
         if i % n_facilities == 0:
             print(f'**Processing facilities from index {i} to {i+n_facilities}')
-        facility_svo_dict.update(
-            datacommons.get_stat_all(facility_ids[i:i + n_facilities], svs))
+        response = client.observation.fetch(
+            variable_dcids=svs,
+            entity_dcids=facility_ids[i:i + n_facilities],
+            date=ObservationDate.ALL,
+            select=[
+                ObservationSelect.DATE,
+                ObservationSelect.VARIABLE,
+                ObservationSelect.ENTITY,
+                ObservationSelect.VALUE,
+                ObservationSelect.FACET,
+            ],
+        ).to_dict()
+        batch_by_variable = response.get('byVariable', {})
+        batch_facets = response.get('facets', {})
+        for stat_var, var_data in batch_by_variable.items():
+            by_entity = var_data.get('byEntity', {})
+            if not by_entity:
+                continue
+            for facility_id, entity_data in by_entity.items():
+                facility_sv_map.setdefault(facility_id, {})
+                facility_sv_map[facility_id][stat_var] = entity_data
+        facets.update(batch_facets)
 
     print("****Done getting existing StatVarObs.")
     print("***********************************.")
-    return facility_svo_dict
+    return facility_sv_map, facets
