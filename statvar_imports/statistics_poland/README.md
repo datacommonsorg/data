@@ -44,4 +44,3 @@ python3 tools/statvar_importer/stat_var_processor.py \
     --config_file='statvar_imports/statistics_poland/Statistics_Poland_metadata.csv' \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
-
