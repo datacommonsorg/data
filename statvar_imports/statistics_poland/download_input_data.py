@@ -89,4 +89,3 @@ def process_poland_pivot():
 
 if __name__ == "__main__":
     process_poland_pivot()
-
