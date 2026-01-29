@@ -1,0 +1,6 @@
+Node: E:annual_population_output->E0
+observationDate: C:annual_population_output->observationDate
+value: C:annual_population_output->value
+observationAbout: C:annual_population_output->observationAbout
+variableMeasured: C:annual_population_output->variableMeasured
+typeOf: dcs:StatVarObservation

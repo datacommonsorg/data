@@ -1,0 +1,9 @@
+key,p1,v1,p2,v2
+"Population on 1st January : average age and median age (in completed years), France",observationAbout,country/FRA,populationType,Person
+"Population on 1st January : average age and median age (in completed years), metropolitan France",observationAbout,country/FXX,populationType,Person
+Year,observationDate,{Year},#Eval,"Year = re.sub(r'\\D', '',Data)"
+All,value,{Number},gender,""""""
+Males,value,{Number},gender,Male
+Females,value,{Number},gender,Female
+Mean age,statType,meanValue,measuredProperty,age
+Median age,statType,medianValue,measuredProperty,age

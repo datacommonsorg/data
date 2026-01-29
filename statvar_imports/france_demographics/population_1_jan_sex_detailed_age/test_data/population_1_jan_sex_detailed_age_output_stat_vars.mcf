@@ -1,0 +1,94 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=./test_data/Pop1janv_age_va_2025.csv --pv_map=population_1_jan_sex_detailed_age_pvmap.csv --config_file=population_1_jan_sex_detailed_age_metadata.csv --output_path=./test_data/population_1_jan_sex_detailed_age_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --debug" on 2026-01-25 14:35:24.006579
+
+Node: dcid:Count_Person_Years101
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years101
+
+Node: dcid:Count_Person_Years101_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years101
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years101_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years101
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years102
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years102
+
+Node: dcid:Count_Person_Years102_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years102
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years102_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years102
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years103
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years103
+
+Node: dcid:Count_Person_Years103_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years103
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years103_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years103
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years104
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years104
+
+Node: dcid:Count_Person_Years104_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years104
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years104_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years104
+gender: dcid:Male
+
