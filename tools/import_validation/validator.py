@@ -134,8 +134,8 @@ class Validator:
                                     'rows_failed': 0
                                 })
 
-    def validate_deleted_count(self, differ_df: pd.DataFrame,
-                               params: dict) -> ValidationResult:
+    def validate_deleted_records_count(self, differ_df: pd.DataFrame,
+                                       params: dict) -> ValidationResult:
         """Checks if the total number of deleted points is within a threshold.
 
     Args:
@@ -148,23 +148,23 @@ class Validator:
       A ValidationResult object.
     """
         if differ_df.empty:
-            deleted_count = 0
+            deleted_records_count = 0
             threshold = params.get('threshold', 0)
-            if deleted_count > threshold:
+            if deleted_records_count > threshold:
                 return ValidationResult(
                     ValidationStatus.FAILED,
-                    'DELETED_COUNT',
+                    'DELETED_RECORDS_COUNT',
                     message=
-                    f"Found {deleted_count} deleted points, which is over the threshold of {threshold}.",
+                    f"Found {deleted_records_count} deleted points, which is over the threshold of {threshold}.",
                     details={
-                        'deleted_count': int(deleted_count),
+                        'deleted_records_count': int(deleted_records_count),
                         'threshold': threshold,
                         'rows_processed': 0,
                         'rows_succeeded': 0,
                         'rows_failed': 0
                     })
             return ValidationResult(ValidationStatus.PASSED,
-                                    'DELETED_COUNT',
+                                    'DELETED_RECORDS_COUNT',
                                     details={
                                         'rows_processed': 0,
                                         'rows_succeeded': 0,
@@ -174,28 +174,28 @@ class Validator:
         if 'DELETED' not in differ_df.columns:
             return ValidationResult(
                 ValidationStatus.DATA_ERROR,
-                'DELETED_COUNT',
+                'DELETED_RECORDS_COUNT',
                 message="Input data is missing required column: 'DELETED'.")
 
         rows_processed = len(differ_df)
         threshold = params.get('threshold', 0)
-        deleted_count = differ_df['DELETED'].sum()
+        deleted_records_count = differ_df['DELETED'].sum()
 
-        if deleted_count > threshold:
+        if deleted_records_count > threshold:
             return ValidationResult(
                 ValidationStatus.FAILED,
-                'DELETED_COUNT',
+                'DELETED_RECORDS_COUNT',
                 message=
-                f"Found {deleted_count} deleted points, which is over the threshold of {threshold}.",
+                f"Found {deleted_records_count} deleted points, which is over the threshold of {threshold}.",
                 details={
-                    'deleted_count': int(deleted_count),
+                    'deleted_records_count': int(deleted_records_count),
                     'threshold': threshold,
                     'rows_processed': rows_processed,
                     'rows_succeeded': 0,
                     'rows_failed': rows_processed
                 })
         return ValidationResult(ValidationStatus.PASSED,
-                                'DELETED_COUNT',
+                                'DELETED_RECORDS_COUNT',
                                 details={
                                     'rows_processed': rows_processed,
                                     'rows_succeeded': rows_processed,
@@ -219,8 +219,10 @@ class Validator:
             counters = report.get('levelSummary',
                                   {}).get('LEVEL_WARNING',
                                           {}).get('counters', {})
-            missing_refs_count = int(
-                counters.get('Existence_MissingReference', '0'))
+            missing_refs_count = sum(
+                int(value)
+                for key, value in counters.items()
+                if key.startswith('Existence_MissingReference'))
             threshold = params.get('threshold', 0)
             if missing_refs_count > threshold:
                 return ValidationResult(
@@ -264,8 +266,8 @@ class Validator:
                                 'LINT_ERROR_COUNT',
                                 details={'lint_error_count': lint_error_count})
 
-    def validate_modified_count(self, differ_df: pd.DataFrame,
-                                params: dict) -> ValidationResult:
+    def validate_modified_records_count(self, differ_df: pd.DataFrame,
+                                        params: dict) -> ValidationResult:
         """Checks if the number of modified points is the same for all StatVars.
 
     Args:
@@ -278,7 +280,7 @@ class Validator:
     """
         if differ_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
-                                    'MODIFIED_COUNT',
+                                    'MODIFIED_RECORDS_COUNT',
                                     details={
                                         'rows_processed': 0,
                                         'rows_succeeded': 0,
@@ -288,7 +290,7 @@ class Validator:
         if 'MODIFIED' not in differ_df.columns:
             return ValidationResult(
                 ValidationStatus.DATA_ERROR,
-                'MODIFIED_COUNT',
+                'MODIFIED_RECORDS_COUNT',
                 message="Input data is missing required column: 'MODIFIED'.")
 
         rows_processed = len(differ_df)
@@ -297,26 +299,26 @@ class Validator:
         if unique_counts > 1:
             return ValidationResult(
                 ValidationStatus.FAILED,
-                'MODIFIED_COUNT',
+                'MODIFIED_RECORDS_COUNT',
                 message=
                 "The number of modified data points is not consistent across all StatVars",
                 details={
                     'distinct_statvar_count': differ_df['StatVar'].nunique(),
-                    'distinct_modified_counts': unique_counts,
+                    'distinct_modified_records_count': unique_counts,
                     'rows_processed': rows_processed,
                     'rows_succeeded': 0,
                     'rows_failed': rows_processed
                 })
         return ValidationResult(ValidationStatus.PASSED,
-                                'MODIFIED_COUNT',
+                                'MODIFIED_RECORDS_COUNT',
                                 details={
                                     'rows_processed': rows_processed,
                                     'rows_succeeded': rows_processed,
                                     'rows_failed': 0
                                 })
 
-    def validate_added_count(self, differ_df: pd.DataFrame,
-                             params: dict) -> ValidationResult:
+    def validate_added_records_count(self, differ_df: pd.DataFrame,
+                                     params: dict) -> ValidationResult:
         """Checks if the number of added points is the same for all StatVars.
 
     Args:
@@ -329,7 +331,7 @@ class Validator:
     """
         if differ_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
-                                    'ADDED_COUNT',
+                                    'ADDED_RECORDS_COUNT',
                                     details={
                                         'rows_processed': 0,
                                         'rows_succeeded': 0,
@@ -339,7 +341,7 @@ class Validator:
         if 'ADDED' not in differ_df.columns:
             return ValidationResult(
                 ValidationStatus.DATA_ERROR,
-                'ADDED_COUNT',
+                'ADDED_RECORDS_COUNT',
                 message="Input data is missing required column: 'ADDED'.")
 
         rows_processed = len(differ_df)
@@ -348,18 +350,18 @@ class Validator:
         if unique_counts > 1:
             return ValidationResult(
                 ValidationStatus.FAILED,
-                'ADDED_COUNT',
+                'ADDED_RECORDS_COUNT',
                 message=
                 "The number of added data points is not consistent across all StatVars.",
                 details={
                     'distinct_statvar_count': differ_df['StatVar'].nunique(),
-                    'distinct_added_counts': unique_counts,
+                    'distinct_added_records_count': unique_counts,
                     'rows_processed': rows_processed,
                     'rows_succeeded': 0,
                     'rows_failed': rows_processed
                 })
         return ValidationResult(ValidationStatus.PASSED,
-                                'ADDED_COUNT',
+                                'ADDED_RECORDS_COUNT',
                                 details={
                                     'rows_processed': rows_processed,
                                     'rows_succeeded': rows_processed,
@@ -404,7 +406,7 @@ class Validator:
                 "The number of places is not consistent across all StatVars.",
                 details={
                     'distinct_statvar_count': stats_df['StatVar'].nunique(),
-                    'distinct_place_counts': unique_counts,
+                    'distinct_place_count': unique_counts,
                     'rows_processed': rows_processed,
                     'rows_succeeded': 0,
                     'rows_failed': rows_processed
@@ -619,7 +621,7 @@ class Validator:
                 message="The MaxDate is not consistent across all StatVars.",
                 details={
                     'distinct_statvar_count': stats_df['StatVar'].nunique(),
-                    'distinct_max_date_counts': unique_dates,
+                    'distinct_max_date_count': unique_dates,
                     'rows_processed': rows_processed,
                     'rows_succeeded': 0,
                     'rows_failed': rows_processed
@@ -763,7 +765,7 @@ class Validator:
                 message="The unit is not consistent across all StatVars.",
                 details={
                     'distinct_statvar_count': stats_df['StatVar'].nunique(),
-                    'distinct_unit_counts': unique_units,
+                    'distinct_unit_count': unique_units,
                     'rows_processed': rows_processed,
                     'rows_succeeded': 0,
                     'rows_failed': rows_processed
