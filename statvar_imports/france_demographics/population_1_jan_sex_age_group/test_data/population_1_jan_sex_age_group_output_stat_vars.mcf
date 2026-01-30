@@ -1,0 +1,25 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/*.csv --pv_map=population_1_jan_sex_age_group_pvmap.csv --config_file=population_1_jan_sex_age_group_metadata.csv --output_path=population_1_jan_sex_age_group_output" on 2026-01-11 10:29:58.788088
+
+Node: dcid:Count_Person_20To59Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 59 Years]
+
+Node: dcid:Count_Person_20To59Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 59 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_20To59Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 59 Years]
+gender: dcid:Male
+
