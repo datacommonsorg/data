@@ -2,12 +2,9 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_deleted_count",
+            "rule_id": "check_deleted_records_count",
             "description": "Checks that the number of deleted points is within the threshold.",
-            "validator": "DELETED_COUNT",
-            "scope": {
-                "data_source": "differ"
-            },
+            "validator": "DELETED_RECORDS_COUNT",
             "params": {
                 "threshold": 0
             }
@@ -15,9 +12,6 @@
         {
             "rule_id": "check_missing_refs_count",
             "validator": "MISSING_REFS_COUNT",
-            "scope": {
-                "data_source": "lint"
-            },
             "params": {
                 "threshold": 0
             }
@@ -25,9 +19,6 @@
         {
             "rule_id": "check_lint_error_count",
             "validator": "LINT_ERROR_COUNT",
-            "scope": {
-                "data_source": "lint"
-            },
             "params": {
                 "threshold": 0
             }

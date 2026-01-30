@@ -57,14 +57,16 @@ class ValidationRunner:
                 (self.validator.validate_max_date_latest, 'stats'),
             'MAX_DATE_CONSISTENT':
                 (self.validator.validate_max_date_consistent, 'stats'),
-            'DELETED_COUNT': (self.validator.validate_deleted_count, 'differ'),
+            'DELETED_RECORDS_COUNT':
+                (self.validator.validate_deleted_records_count, 'differ'),
             'MISSING_REFS_COUNT':
                 (self.validator.validate_missing_refs_count, 'lint'),
             'LINT_ERROR_COUNT':
                 (self.validator.validate_lint_error_count, 'lint'),
-            'MODIFIED_COUNT':
-                (self.validator.validate_modified_count, 'differ'),
-            'ADDED_COUNT': (self.validator.validate_added_count, 'differ'),
+            'MODIFIED_RECORDS_COUNT':
+                (self.validator.validate_modified_records_count, 'differ'),
+            'ADDED_RECORDS_COUNT':
+                (self.validator.validate_added_records_count, 'differ'),
             'NUM_PLACES_CONSISTENT':
                 (self.validator.validate_num_places_consistent, 'stats'),
             'NUM_PLACES_COUNT':
@@ -141,8 +143,10 @@ class ValidationRunner:
         for rule in self.config.rules:
             if not rule.get('enabled', True):
                 continue
-            if 'scope' in rule and 'data_source' in rule['scope']:
-                req_sources.add(rule['scope']['data_source'])
+
+            validator_name = rule.get('validator')
+            if validator_name in self.validation_dispatch:
+                req_sources.add(self.validation_dispatch[validator_name][1])
         return req_sources
 
     def run_validations(self) -> tuple[bool, list[ValidationResult]]:
@@ -171,7 +175,7 @@ class ValidationRunner:
                                          self.data_sources['differ'],
                                          rule['params'])
             else:
-                scope = rule['scope']
+                scope = rule.get('scope', {})
                 if isinstance(scope, str):
                     scope = self.config.get_scope(scope)
 

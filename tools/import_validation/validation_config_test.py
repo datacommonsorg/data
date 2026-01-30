@@ -36,8 +36,8 @@ class ValidationConfigTest(unittest.TestCase):
             json.dump(
                 {
                     "rules": [{
-                        "rule_id": "check_deleted_count",
-                        "validator": "DELETED_COUNT",
+                        "rule_id": "check_deleted_records_count",
+                        "validator": "DELETED_RECORDS_COUNT",
                         "params": {
                             "threshold": 0,
                             "warn_only": True,
@@ -55,8 +55,8 @@ class ValidationConfigTest(unittest.TestCase):
             json.dump(
                 {
                     "rules": [{
-                        "rule_id": "check_deleted_count",
-                        "validator": "DELETED_COUNT",
+                        "rule_id": "check_deleted_records_count",
+                        "validator": "DELETED_RECORDS_COUNT",
                         "params": {
                             "threshold": 5,
                             "new_param": "keep-me",
@@ -77,8 +77,8 @@ class ValidationConfigTest(unittest.TestCase):
         {
             "rules": [
                 {
-                    "rule_id": "check_deleted_count",
-                    "validator": "DELETED_COUNT",
+                    "rule_id": "check_deleted_records_count",
+                    "validator": "DELETED_RECORDS_COUNT",
                     "params": {
                         "threshold": 5,
                         "warn_only": true,
@@ -119,7 +119,6 @@ class ValidationConfigTest(unittest.TestCase):
                     "definitions": {
                         "scopes": {
                             "foo": {
-                                "data_source": "stats",
                                 "filters": {
                                     "dcids": ["a"]
                                 }
@@ -137,9 +136,7 @@ class ValidationConfigTest(unittest.TestCase):
                                     "contains_all": ["b"]
                                 }
                             },
-                            "bar": {
-                                "data_source": "differ"
-                            }
+                            "bar": {}
                         }
                     }
                 }, f)
@@ -150,14 +147,12 @@ class ValidationConfigTest(unittest.TestCase):
         expected_scopes_json = """
         {
             "foo": {
-                "data_source": "stats",
                 "filters": {
                     "dcids": ["a"],
                     "contains_all": ["b"]
                 }
             },
             "bar": {
-                "data_source": "differ"
             }
         }
         """
