@@ -1,0 +1,991 @@
+Region,Sex,Age,Contents,Year,Value
+Østfold,Females,0-9 years,Persons,2023,15040
+Østfold,Females,0-9 years,Persons,2024,14965
+Østfold,Females,0-9 years,Persons,2025,14870
+Østfold,Females,10-19 years,Persons,2023,18008
+Østfold,Females,10-19 years,Persons,2024,18077
+Østfold,Females,10-19 years,Persons,2025,18064
+Østfold,Females,20-29 years,Persons,2023,16421
+Østfold,Females,20-29 years,Persons,2024,16236
+Østfold,Females,20-29 years,Persons,2025,16364
+Østfold,Females,30-39 years,Persons,2023,19227
+Østfold,Females,30-39 years,Persons,2024,19531
+Østfold,Females,30-39 years,Persons,2025,19698
+Østfold,Females,40-49 years,Persons,2023,19771
+Østfold,Females,40-49 years,Persons,2024,19816
+Østfold,Females,40-49 years,Persons,2025,19786
+Østfold,Females,50-59 years,Persons,2023,22125
+Østfold,Females,50-59 years,Persons,2024,22378
+Østfold,Females,50-59 years,Persons,2025,22527
+Østfold,Females,60-69 years,Persons,2023,18725
+Østfold,Females,60-69 years,Persons,2024,18991
+Østfold,Females,60-69 years,Persons,2025,19273
+Østfold,Females,70-79 years,Persons,2023,15921
+Østfold,Females,70-79 years,Persons,2024,16236
+Østfold,Females,70-79 years,Persons,2025,16330
+Østfold,Females,80-89 years,Persons,2023,6999
+Østfold,Females,80-89 years,Persons,2024,7311
+Østfold,Females,80-89 years,Persons,2025,7809
+Østfold,Females,90-99 years,Persons,2023,1738
+Østfold,Females,90-99 years,Persons,2024,1717
+Østfold,Females,90-99 years,Persons,2025,1642
+Østfold,Females,100 years or older,Persons,2023,38
+Østfold,Females,100 years or older,Persons,2024,35
+Østfold,Females,100 years or older,Persons,2025,40
+Østfold,Males,0-9 years,Persons,2023,16082
+Østfold,Males,0-9 years,Persons,2024,15954
+Østfold,Males,0-9 years,Persons,2025,15820
+Østfold,Males,10-19 years,Persons,2023,19278
+Østfold,Males,10-19 years,Persons,2024,19458
+Østfold,Males,10-19 years,Persons,2025,19454
+Østfold,Males,20-29 years,Persons,2023,18356
+Østfold,Males,20-29 years,Persons,2024,18200
+Østfold,Males,20-29 years,Persons,2025,18220
+Østfold,Males,30-39 years,Persons,2023,19631
+Østfold,Males,30-39 years,Persons,2024,20175
+Østfold,Males,30-39 years,Persons,2025,20465
+Østfold,Males,40-49 years,Persons,2023,20165
+Østfold,Males,40-49 years,Persons,2024,20249
+Østfold,Males,40-49 years,Persons,2025,20111
+Østfold,Males,50-59 years,Persons,2023,22649
+Østfold,Males,50-59 years,Persons,2024,22843
+Østfold,Males,50-59 years,Persons,2025,22933
+Østfold,Males,60-69 years,Persons,2023,18451
+Østfold,Males,60-69 years,Persons,2024,18821
+Østfold,Males,60-69 years,Persons,2025,19248
+Østfold,Males,70-79 years,Persons,2023,14559
+Østfold,Males,70-79 years,Persons,2024,14790
+Østfold,Males,70-79 years,Persons,2025,14904
+Østfold,Males,80-89 years,Persons,2023,5137
+Østfold,Males,80-89 years,Persons,2024,5506
+Østfold,Males,80-89 years,Persons,2025,6015
+Østfold,Males,90-99 years,Persons,2023,828
+Østfold,Males,90-99 years,Persons,2024,850
+Østfold,Males,90-99 years,Persons,2025,818
+Østfold,Males,100 years or older,Persons,2023,12
+Østfold,Males,100 years or older,Persons,2024,13
+Østfold,Males,100 years or older,Persons,2025,16
+Akershus,Females,0-9 years,Persons,2023,40746
+Akershus,Females,0-9 years,Persons,2024,40602
+Akershus,Females,0-9 years,Persons,2025,40766
+Akershus,Females,10-19 years,Persons,2023,45535
+Akershus,Females,10-19 years,Persons,2024,46072
+Akershus,Females,10-19 years,Persons,2025,46386
+Akershus,Females,20-29 years,Persons,2023,36808
+Akershus,Females,20-29 years,Persons,2024,37789
+Akershus,Females,20-29 years,Persons,2025,38586
+Akershus,Females,30-39 years,Persons,2023,48229
+Akershus,Females,30-39 years,Persons,2024,49292
+Akershus,Females,30-39 years,Persons,2025,49905
+Akershus,Females,40-49 years,Persons,2023,50503
+Akershus,Females,40-49 years,Persons,2024,51102
+Akershus,Females,40-49 years,Persons,2025,51423
+Akershus,Females,50-59 years,Persons,2023,50031
+Akershus,Females,50-59 years,Persons,2024,50717
+Akershus,Females,50-59 years,Persons,2025,51426
+Akershus,Females,60-69 years,Persons,2023,37095
+Akershus,Females,60-69 years,Persons,2024,38281
+Akershus,Females,60-69 years,Persons,2025,39581
+Akershus,Females,70-79 years,Persons,2023,29555
+Akershus,Females,70-79 years,Persons,2024,30230
+Akershus,Females,70-79 years,Persons,2025,30477
+Akershus,Females,80-89 years,Persons,2023,13844
+Akershus,Females,80-89 years,Persons,2024,14504
+Akershus,Females,80-89 years,Persons,2025,15686
+Akershus,Females,90-99 years,Persons,2023,3336
+Akershus,Females,90-99 years,Persons,2024,3399
+Akershus,Females,90-99 years,Persons,2025,3403
+Akershus,Females,100 years or older,Persons,2023,92
+Akershus,Females,100 years or older,Persons,2024,85
+Akershus,Females,100 years or older,Persons,2025,105
+Akershus,Males,0-9 years,Persons,2023,42711
+Akershus,Males,0-9 years,Persons,2024,42685
+Akershus,Males,0-9 years,Persons,2025,42685
+Akershus,Males,10-19 years,Persons,2023,47796
+Akershus,Males,10-19 years,Persons,2024,48542
+Akershus,Males,10-19 years,Persons,2025,49169
+Akershus,Males,20-29 years,Persons,2023,39657
+Akershus,Males,20-29 years,Persons,2024,40322
+Akershus,Males,20-29 years,Persons,2025,41103
+Akershus,Males,30-39 years,Persons,2023,49068
+Akershus,Males,30-39 years,Persons,2024,50001
+Akershus,Males,30-39 years,Persons,2025,50866
+Akershus,Males,40-49 years,Persons,2023,52139
+Akershus,Males,40-49 years,Persons,2024,52858
+Akershus,Males,40-49 years,Persons,2025,53453
+Akershus,Males,50-59 years,Persons,2023,52027
+Akershus,Males,50-59 years,Persons,2024,52996
+Akershus,Males,50-59 years,Persons,2025,53595
+Akershus,Males,60-69 years,Persons,2023,37901
+Akershus,Males,60-69 years,Persons,2024,39105
+Akershus,Males,60-69 years,Persons,2025,40490
+Akershus,Males,70-79 years,Persons,2023,27154
+Akershus,Males,70-79 years,Persons,2024,27618
+Akershus,Males,70-79 years,Persons,2025,27872
+Akershus,Males,80-89 years,Persons,2023,10134
+Akershus,Males,80-89 years,Persons,2024,10916
+Akershus,Males,80-89 years,Persons,2025,12001
+Akershus,Males,90-99 years,Persons,2023,1641
+Akershus,Males,90-99 years,Persons,2024,1664
+Akershus,Males,90-99 years,Persons,2025,1672
+Akershus,Males,100 years or older,Persons,2023,18
+Akershus,Males,100 years or older,Persons,2024,23
+Akershus,Males,100 years or older,Persons,2025,30
+Oslo - Oslove,Females,0-9 years,Persons,2023,36725
+Oslo - Oslove,Females,0-9 years,Persons,2024,36389
+Oslo - Oslove,Females,0-9 years,Persons,2025,36193
+Oslo - Oslove,Females,10-19 years,Persons,2023,34918
+Oslo - Oslove,Females,10-19 years,Persons,2024,35135
+Oslo - Oslove,Females,10-19 years,Persons,2025,35507
+Oslo - Oslove,Females,20-29 years,Persons,2023,63761
+Oslo - Oslove,Females,20-29 years,Persons,2024,64393
+Oslo - Oslove,Females,20-29 years,Persons,2025,64054
+Oslo - Oslove,Females,30-39 years,Persons,2023,66828
+Oslo - Oslove,Females,30-39 years,Persons,2024,68275
+Oslo - Oslove,Females,30-39 years,Persons,2025,68738
+Oslo - Oslove,Females,40-49 years,Persons,2023,46925
+Oslo - Oslove,Females,40-49 years,Persons,2024,47419
+Oslo - Oslove,Females,40-49 years,Persons,2025,48013
+Oslo - Oslove,Females,50-59 years,Persons,2023,39850
+Oslo - Oslove,Females,50-59 years,Persons,2024,40510
+Oslo - Oslove,Females,50-59 years,Persons,2025,41279
+Oslo - Oslove,Females,60-69 years,Persons,2023,30155
+Oslo - Oslove,Females,60-69 years,Persons,2024,30660
+Oslo - Oslove,Females,60-69 years,Persons,2025,31351
+Oslo - Oslove,Females,70-79 years,Persons,2023,22860
+Oslo - Oslove,Females,70-79 years,Persons,2024,23293
+Oslo - Oslove,Females,70-79 years,Persons,2025,23520
+Oslo - Oslove,Females,80-89 years,Persons,2023,10364
+Oslo - Oslove,Females,80-89 years,Persons,2024,10761
+Oslo - Oslove,Females,80-89 years,Persons,2025,11459
+Oslo - Oslove,Females,90-99 years,Persons,2023,3237
+Oslo - Oslove,Females,90-99 years,Persons,2024,3186
+Oslo - Oslove,Females,90-99 years,Persons,2025,3108
+Oslo - Oslove,Females,100 years or older,Persons,2023,172
+Oslo - Oslove,Females,100 years or older,Persons,2024,169
+Oslo - Oslove,Females,100 years or older,Persons,2025,171
+Oslo - Oslove,Males,0-9 years,Persons,2023,38478
+Oslo - Oslove,Males,0-9 years,Persons,2024,38158
+Oslo - Oslove,Males,0-9 years,Persons,2025,37776
+Oslo - Oslove,Males,10-19 years,Persons,2023,35871
+Oslo - Oslove,Males,10-19 years,Persons,2024,36333
+Oslo - Oslove,Males,10-19 years,Persons,2025,37135
+Oslo - Oslove,Males,20-29 years,Persons,2023,57775
+Oslo - Oslove,Males,20-29 years,Persons,2024,58370
+Oslo - Oslove,Males,20-29 years,Persons,2025,57802
+Oslo - Oslove,Males,30-39 years,Persons,2023,69777
+Oslo - Oslove,Males,30-39 years,Persons,2024,70711
+Oslo - Oslove,Males,30-39 years,Persons,2025,71413
+Oslo - Oslove,Males,40-49 years,Persons,2023,51049
+Oslo - Oslove,Males,40-49 years,Persons,2024,51469
+Oslo - Oslove,Males,40-49 years,Persons,2025,51758
+Oslo - Oslove,Males,50-59 years,Persons,2023,42079
+Oslo - Oslove,Males,50-59 years,Persons,2024,42710
+Oslo - Oslove,Males,50-59 years,Persons,2025,43531
+Oslo - Oslove,Males,60-69 years,Persons,2023,29533
+Oslo - Oslove,Males,60-69 years,Persons,2024,30271
+Oslo - Oslove,Males,60-69 years,Persons,2025,31106
+Oslo - Oslove,Males,70-79 years,Persons,2023,20351
+Oslo - Oslove,Males,70-79 years,Persons,2024,20577
+Oslo - Oslove,Males,70-79 years,Persons,2025,20703
+Oslo - Oslove,Males,80-89 years,Persons,2023,6962
+Oslo - Oslove,Males,80-89 years,Persons,2024,7583
+Oslo - Oslove,Males,80-89 years,Persons,2025,8379
+Oslo - Oslove,Males,90-99 years,Persons,2023,1310
+Oslo - Oslove,Males,90-99 years,Persons,2024,1275
+Oslo - Oslove,Males,90-99 years,Persons,2025,1239
+Oslo - Oslove,Males,100 years or older,Persons,2023,57
+Oslo - Oslove,Males,100 years or older,Persons,2024,63
+Oslo - Oslove,Males,100 years or older,Persons,2025,55
+Innlandet,Females,0-9 years,Persons,2023,16654
+Innlandet,Females,0-9 years,Persons,2024,16646
+Innlandet,Females,0-9 years,Persons,2025,16508
+Innlandet,Females,10-19 years,Persons,2023,20270
+Innlandet,Females,10-19 years,Persons,2024,20361
+Innlandet,Females,10-19 years,Persons,2025,20294
+Innlandet,Females,20-29 years,Persons,2023,20229
+Innlandet,Females,20-29 years,Persons,2024,19850
+Innlandet,Females,20-29 years,Persons,2025,19761
+Innlandet,Females,30-39 years,Persons,2023,21210
+Innlandet,Females,30-39 years,Persons,2024,21869
+Innlandet,Females,30-39 years,Persons,2025,22249
+Innlandet,Females,40-49 years,Persons,2023,22241
+Innlandet,Females,40-49 years,Persons,2024,22151
+Innlandet,Females,40-49 years,Persons,2025,21869
+Innlandet,Females,50-59 years,Persons,2023,26866
+Innlandet,Females,50-59 years,Persons,2024,27038
+Innlandet,Females,50-59 years,Persons,2025,26993
+Innlandet,Females,60-69 years,Persons,2023,24636
+Innlandet,Females,60-69 years,Persons,2024,24915
+Innlandet,Females,60-69 years,Persons,2025,25196
+Innlandet,Females,70-79 years,Persons,2023,21418
+Innlandet,Females,70-79 years,Persons,2024,21663
+Innlandet,Females,70-79 years,Persons,2025,21949
+Innlandet,Females,80-89 years,Persons,2023,10119
+Innlandet,Females,80-89 years,Persons,2024,10517
+Innlandet,Females,80-89 years,Persons,2025,10980
+Innlandet,Females,90-99 years,Persons,2023,2574
+Innlandet,Females,90-99 years,Persons,2024,2542
+Innlandet,Females,90-99 years,Persons,2025,2498
+Innlandet,Females,100 years or older,Persons,2023,65
+Innlandet,Females,100 years or older,Persons,2024,68
+Innlandet,Females,100 years or older,Persons,2025,66
+Innlandet,Males,0-9 years,Persons,2023,17678
+Innlandet,Males,0-9 years,Persons,2024,17760
+Innlandet,Males,0-9 years,Persons,2025,17543
+Innlandet,Males,10-19 years,Persons,2023,21811
+Innlandet,Males,10-19 years,Persons,2024,21881
+Innlandet,Males,10-19 years,Persons,2025,21969
+Innlandet,Males,20-29 years,Persons,2023,22162
+Innlandet,Males,20-29 years,Persons,2024,21887
+Innlandet,Males,20-29 years,Persons,2025,21660
+Innlandet,Males,30-39 years,Persons,2023,22360
+Innlandet,Males,30-39 years,Persons,2024,22864
+Innlandet,Males,30-39 years,Persons,2025,23103
+Innlandet,Males,40-49 years,Persons,2023,22311
+Innlandet,Males,40-49 years,Persons,2024,22290
+Innlandet,Males,40-49 years,Persons,2025,22142
+Innlandet,Males,50-59 years,Persons,2023,27411
+Innlandet,Males,50-59 years,Persons,2024,27525
+Innlandet,Males,50-59 years,Persons,2025,27405
+Innlandet,Males,60-69 years,Persons,2023,24408
+Innlandet,Males,60-69 years,Persons,2024,24556
+Innlandet,Males,60-69 years,Persons,2025,24940
+Innlandet,Males,70-79 years,Persons,2023,20282
+Innlandet,Males,70-79 years,Persons,2024,20554
+Innlandet,Males,70-79 years,Persons,2025,20624
+Innlandet,Males,80-89 years,Persons,2023,7673
+Innlandet,Males,80-89 years,Persons,2024,8082
+Innlandet,Males,80-89 years,Persons,2025,8493
+Innlandet,Males,90-99 years,Persons,2023,1233
+Innlandet,Males,90-99 years,Persons,2024,1270
+Innlandet,Males,90-99 years,Persons,2025,1292
+Innlandet,Males,100 years or older,Persons,2023,17
+Innlandet,Males,100 years or older,Persons,2024,15
+Innlandet,Males,100 years or older,Persons,2025,22
+Buskerud,Females,0-9 years,Persons,2023,13186
+Buskerud,Females,0-9 years,Persons,2024,13170
+Buskerud,Females,0-9 years,Persons,2025,12980
+Buskerud,Females,10-19 years,Persons,2023,15595
+Buskerud,Females,10-19 years,Persons,2024,15685
+Buskerud,Females,10-19 years,Persons,2025,15709
+Buskerud,Females,20-29 years,Persons,2023,14071
+Buskerud,Females,20-29 years,Persons,2024,14074
+Buskerud,Females,20-29 years,Persons,2025,14108
+Buskerud,Females,30-39 years,Persons,2023,17378
+Buskerud,Females,30-39 years,Persons,2024,17575
+Buskerud,Females,30-39 years,Persons,2025,17713
+Buskerud,Females,40-49 years,Persons,2023,17833
+Buskerud,Females,40-49 years,Persons,2024,17983
+Buskerud,Females,40-49 years,Persons,2025,17873
+Buskerud,Females,50-59 years,Persons,2023,18181
+Buskerud,Females,50-59 years,Persons,2024,18482
+Buskerud,Females,50-59 years,Persons,2025,18651
+Buskerud,Females,60-69 years,Persons,2023,15614
+Buskerud,Females,60-69 years,Persons,2024,15718
+Buskerud,Females,60-69 years,Persons,2025,15802
+Buskerud,Females,70-79 years,Persons,2023,13161
+Buskerud,Females,70-79 years,Persons,2024,13430
+Buskerud,Females,70-79 years,Persons,2025,13558
+Buskerud,Females,80-89 years,Persons,2023,5896
+Buskerud,Females,80-89 years,Persons,2024,6176
+Buskerud,Females,80-89 years,Persons,2025,6580
+Buskerud,Females,90-99 years,Persons,2023,1501
+Buskerud,Females,90-99 years,Persons,2024,1502
+Buskerud,Females,90-99 years,Persons,2025,1473
+Buskerud,Females,100 years or older,Persons,2023,48
+Buskerud,Females,100 years or older,Persons,2024,53
+Buskerud,Females,100 years or older,Persons,2025,53
+Buskerud,Males,0-9 years,Persons,2023,13950
+Buskerud,Males,0-9 years,Persons,2024,13897
+Buskerud,Males,0-9 years,Persons,2025,13718
+Buskerud,Males,10-19 years,Persons,2023,16689
+Buskerud,Males,10-19 years,Persons,2024,16777
+Buskerud,Males,10-19 years,Persons,2025,16700
+Buskerud,Males,20-29 years,Persons,2023,15623
+Buskerud,Males,20-29 years,Persons,2024,15730
+Buskerud,Males,20-29 years,Persons,2025,15772
+Buskerud,Males,30-39 years,Persons,2023,18217
+Buskerud,Males,30-39 years,Persons,2024,18488
+Buskerud,Males,30-39 years,Persons,2025,18591
+Buskerud,Males,40-49 years,Persons,2023,18495
+Buskerud,Males,40-49 years,Persons,2024,18495
+Buskerud,Males,40-49 years,Persons,2025,18435
+Buskerud,Males,50-59 years,Persons,2023,19029
+Buskerud,Males,50-59 years,Persons,2024,19335
+Buskerud,Males,50-59 years,Persons,2025,19563
+Buskerud,Males,60-69 years,Persons,2023,15351
+Buskerud,Males,60-69 years,Persons,2024,15546
+Buskerud,Males,60-69 years,Persons,2025,15757
+Buskerud,Males,70-79 years,Persons,2023,11990
+Buskerud,Males,70-79 years,Persons,2024,12220
+Buskerud,Males,70-79 years,Persons,2025,12283
+Buskerud,Males,80-89 years,Persons,2023,4484
+Buskerud,Males,80-89 years,Persons,2024,4726
+Buskerud,Males,80-89 years,Persons,2025,5149
+Buskerud,Males,90-99 years,Persons,2023,756
+Buskerud,Males,90-99 years,Persons,2024,744
+Buskerud,Males,90-99 years,Persons,2025,766
+Buskerud,Males,100 years or older,Persons,2023,12
+Buskerud,Males,100 years or older,Persons,2024,13
+Buskerud,Males,100 years or older,Persons,2025,14
+Vestfold,Females,0-9 years,Persons,2023,12392
+Vestfold,Females,0-9 years,Persons,2024,12305
+Vestfold,Females,0-9 years,Persons,2025,12132
+Vestfold,Females,10-19 years,Persons,2023,14554
+Vestfold,Females,10-19 years,Persons,2024,14822
+Vestfold,Females,10-19 years,Persons,2025,14891
+Vestfold,Females,20-29 years,Persons,2023,12826
+Vestfold,Females,20-29 years,Persons,2024,12727
+Vestfold,Females,20-29 years,Persons,2025,12591
+Vestfold,Females,30-39 years,Persons,2023,15950
+Vestfold,Females,30-39 years,Persons,2024,16249
+Vestfold,Females,30-39 years,Persons,2025,16259
+Vestfold,Females,40-49 years,Persons,2023,16320
+Vestfold,Females,40-49 years,Persons,2024,16463
+Vestfold,Females,40-49 years,Persons,2025,16439
+Vestfold,Females,50-59 years,Persons,2023,17978
+Vestfold,Females,50-59 years,Persons,2024,18130
+Vestfold,Females,50-59 years,Persons,2025,18264
+Vestfold,Females,60-69 years,Persons,2023,16190
+Vestfold,Females,60-69 years,Persons,2024,16363
+Vestfold,Females,60-69 years,Persons,2025,16546
+Vestfold,Females,70-79 years,Persons,2023,12957
+Vestfold,Females,70-79 years,Persons,2024,13419
+Vestfold,Females,70-79 years,Persons,2025,13645
+Vestfold,Females,80-89 years,Persons,2023,6019
+Vestfold,Females,80-89 years,Persons,2024,6301
+Vestfold,Females,80-89 years,Persons,2025,6636
+Vestfold,Females,90-99 years,Persons,2023,1498
+Vestfold,Females,90-99 years,Persons,2024,1489
+Vestfold,Females,90-99 years,Persons,2025,1552
+Vestfold,Females,100 years or older,Persons,2023,42
+Vestfold,Females,100 years or older,Persons,2024,46
+Vestfold,Females,100 years or older,Persons,2025,51
+Vestfold,Males,0-9 years,Persons,2023,13231
+Vestfold,Males,0-9 years,Persons,2024,13175
+Vestfold,Males,0-9 years,Persons,2025,13146
+Vestfold,Males,10-19 years,Persons,2023,15896
+Vestfold,Males,10-19 years,Persons,2024,15954
+Vestfold,Males,10-19 years,Persons,2025,15930
+Vestfold,Males,20-29 years,Persons,2023,14287
+Vestfold,Males,20-29 years,Persons,2024,14262
+Vestfold,Males,20-29 years,Persons,2025,14341
+Vestfold,Males,30-39 years,Persons,2023,16252
+Vestfold,Males,30-39 years,Persons,2024,16596
+Vestfold,Males,30-39 years,Persons,2025,16706
+Vestfold,Males,40-49 years,Persons,2023,16397
+Vestfold,Males,40-49 years,Persons,2024,16459
+Vestfold,Males,40-49 years,Persons,2025,16547
+Vestfold,Males,50-59 years,Persons,2023,18089
+Vestfold,Males,50-59 years,Persons,2024,18170
+Vestfold,Males,50-59 years,Persons,2025,18154
+Vestfold,Males,60-69 years,Persons,2023,15397
+Vestfold,Males,60-69 years,Persons,2024,15625
+Vestfold,Males,60-69 years,Persons,2025,15742
+Vestfold,Males,70-79 years,Persons,2023,12107
+Vestfold,Males,70-79 years,Persons,2024,12487
+Vestfold,Males,70-79 years,Persons,2025,12669
+Vestfold,Males,80-89 years,Persons,2023,4398
+Vestfold,Males,80-89 years,Persons,2024,4643
+Vestfold,Males,80-89 years,Persons,2025,5083
+Vestfold,Males,90-99 years,Persons,2023,765
+Vestfold,Males,90-99 years,Persons,2024,738
+Vestfold,Males,90-99 years,Persons,2025,742
+Vestfold,Males,100 years or older,Persons,2023,10
+Vestfold,Males,100 years or older,Persons,2024,9
+Vestfold,Males,100 years or older,Persons,2025,5
+Telemark,Females,0-9 years,Persons,2023,8160
+Telemark,Females,0-9 years,Persons,2024,8189
+Telemark,Females,0-9 years,Persons,2025,8162
+Telemark,Females,10-19 years,Persons,2023,9976
+Telemark,Females,10-19 years,Persons,2024,10046
+Telemark,Females,10-19 years,Persons,2025,10008
+Telemark,Females,20-29 years,Persons,2023,9325
+Telemark,Females,20-29 years,Persons,2024,9265
+Telemark,Females,20-29 years,Persons,2025,9221
+Telemark,Females,30-39 years,Persons,2023,10515
+Telemark,Females,30-39 years,Persons,2024,10763
+Telemark,Females,30-39 years,Persons,2025,10896
+Telemark,Females,40-49 years,Persons,2023,10808
+Telemark,Females,40-49 years,Persons,2024,10822
+Telemark,Females,40-49 years,Persons,2025,10703
+Telemark,Females,50-59 years,Persons,2023,12560
+Telemark,Females,50-59 years,Persons,2024,12628
+Telemark,Females,50-59 years,Persons,2025,12664
+Telemark,Females,60-69 years,Persons,2023,11153
+Telemark,Females,60-69 years,Persons,2024,11304
+Telemark,Females,60-69 years,Persons,2025,11444
+Telemark,Females,70-79 years,Persons,2023,9612
+Telemark,Females,70-79 years,Persons,2024,9750
+Telemark,Females,70-79 years,Persons,2025,9771
+Telemark,Females,80-89 years,Persons,2023,4354
+Telemark,Females,80-89 years,Persons,2024,4568
+Telemark,Females,80-89 years,Persons,2025,4873
+Telemark,Females,90-99 years,Persons,2023,1126
+Telemark,Females,90-99 years,Persons,2024,1070
+Telemark,Females,90-99 years,Persons,2025,1078
+Telemark,Females,100 years or older,Persons,2023,47
+Telemark,Females,100 years or older,Persons,2024,52
+Telemark,Females,100 years or older,Persons,2025,36
+Telemark,Males,0-9 years,Persons,2023,8822
+Telemark,Males,0-9 years,Persons,2024,8804
+Telemark,Males,0-9 years,Persons,2025,8716
+Telemark,Males,10-19 years,Persons,2023,10752
+Telemark,Males,10-19 years,Persons,2024,10834
+Telemark,Males,10-19 years,Persons,2025,10864
+Telemark,Males,20-29 years,Persons,2023,10166
+Telemark,Males,20-29 years,Persons,2024,10174
+Telemark,Males,20-29 years,Persons,2025,10112
+Telemark,Males,30-39 years,Persons,2023,10751
+Telemark,Males,30-39 years,Persons,2024,10988
+Telemark,Males,30-39 years,Persons,2025,11118
+Telemark,Males,40-49 years,Persons,2023,10840
+Telemark,Males,40-49 years,Persons,2024,10752
+Telemark,Males,40-49 years,Persons,2025,10705
+Telemark,Males,50-59 years,Persons,2023,12779
+Telemark,Males,50-59 years,Persons,2024,12860
+Telemark,Males,50-59 years,Persons,2025,12798
+Telemark,Males,60-69 years,Persons,2023,11087
+Telemark,Males,60-69 years,Persons,2024,11173
+Telemark,Males,60-69 years,Persons,2025,11304
+Telemark,Males,70-79 years,Persons,2023,8990
+Telemark,Males,70-79 years,Persons,2024,9131
+Telemark,Males,70-79 years,Persons,2025,9178
+Telemark,Males,80-89 years,Persons,2023,3193
+Telemark,Males,80-89 years,Persons,2024,3391
+Telemark,Males,80-89 years,Persons,2025,3720
+Telemark,Males,90-99 years,Persons,2023,524
+Telemark,Males,90-99 years,Persons,2024,519
+Telemark,Males,90-99 years,Persons,2025,484
+Telemark,Males,100 years or older,Persons,2023,6
+Telemark,Males,100 years or older,Persons,2024,10
+Telemark,Males,100 years or older,Persons,2025,8
+Agder,Females,0-9 years,Persons,2023,16708
+Agder,Females,0-9 years,Persons,2024,16550
+Agder,Females,0-9 years,Persons,2025,16401
+Agder,Females,10-19 years,Persons,2023,19997
+Agder,Females,10-19 years,Persons,2024,20182
+Agder,Females,10-19 years,Persons,2025,20119
+Agder,Females,20-29 years,Persons,2023,19377
+Agder,Females,20-29 years,Persons,2024,19467
+Agder,Females,20-29 years,Persons,2025,19485
+Agder,Females,30-39 years,Persons,2023,19955
+Agder,Females,30-39 years,Persons,2024,20299
+Agder,Females,30-39 years,Persons,2025,20412
+Agder,Females,40-49 years,Persons,2023,20274
+Agder,Females,40-49 years,Persons,2024,20455
+Agder,Females,40-49 years,Persons,2025,20470
+Agder,Females,50-59 years,Persons,2023,20640
+Agder,Females,50-59 years,Persons,2024,20917
+Agder,Females,50-59 years,Persons,2025,21097
+Agder,Females,60-69 years,Persons,2023,17694
+Agder,Females,60-69 years,Persons,2024,17988
+Agder,Females,60-69 years,Persons,2025,18321
+Agder,Females,70-79 years,Persons,2023,14276
+Agder,Females,70-79 years,Persons,2024,14638
+Agder,Females,70-79 years,Persons,2025,14840
+Agder,Females,80-89 years,Persons,2023,6628
+Agder,Females,80-89 years,Persons,2024,6929
+Agder,Females,80-89 years,Persons,2025,7336
+Agder,Females,90-99 years,Persons,2023,1693
+Agder,Females,90-99 years,Persons,2024,1676
+Agder,Females,90-99 years,Persons,2025,1668
+Agder,Females,100 years or older,Persons,2023,60
+Agder,Females,100 years or older,Persons,2024,60
+Agder,Females,100 years or older,Persons,2025,60
+Agder,Males,0-9 years,Persons,2023,17767
+Agder,Males,0-9 years,Persons,2024,17618
+Agder,Males,0-9 years,Persons,2025,17489
+Agder,Males,10-19 years,Persons,2023,20728
+Agder,Males,10-19 years,Persons,2024,21192
+Agder,Males,10-19 years,Persons,2025,21295
+Agder,Males,20-29 years,Persons,2023,20869
+Agder,Males,20-29 years,Persons,2024,20746
+Agder,Males,20-29 years,Persons,2025,20762
+Agder,Males,30-39 years,Persons,2023,20410
+Agder,Males,30-39 years,Persons,2024,20840
+Agder,Males,30-39 years,Persons,2025,21031
+Agder,Males,40-49 years,Persons,2023,20674
+Agder,Males,40-49 years,Persons,2024,20662
+Agder,Males,40-49 years,Persons,2025,20703
+Agder,Males,50-59 years,Persons,2023,21387
+Agder,Males,50-59 years,Persons,2024,21626
+Agder,Males,50-59 years,Persons,2025,21582
+Agder,Males,60-69 years,Persons,2023,17630
+Agder,Males,60-69 years,Persons,2024,18022
+Agder,Males,60-69 years,Persons,2025,18432
+Agder,Males,70-79 years,Persons,2023,13537
+Agder,Males,70-79 years,Persons,2024,13905
+Agder,Males,70-79 years,Persons,2025,14128
+Agder,Males,80-89 years,Persons,2023,4981
+Agder,Males,80-89 years,Persons,2024,5268
+Agder,Males,80-89 years,Persons,2025,5728
+Agder,Males,90-99 years,Persons,2023,755
+Agder,Males,90-99 years,Persons,2024,800
+Agder,Males,90-99 years,Persons,2025,818
+Agder,Males,100 years or older,Persons,2023,11
+Agder,Males,100 years or older,Persons,2024,10
+Agder,Males,100 years or older,Persons,2025,11
+Rogaland,Females,0-9 years,Persons,2023,28978
+Rogaland,Females,0-9 years,Persons,2024,28701
+Rogaland,Females,0-9 years,Persons,2025,28382
+Rogaland,Females,10-19 years,Persons,2023,31931
+Rogaland,Females,10-19 years,Persons,2024,32436
+Rogaland,Females,10-19 years,Persons,2025,32739
+Rogaland,Females,20-29 years,Persons,2023,29203
+Rogaland,Females,20-29 years,Persons,2024,29830
+Rogaland,Females,20-29 years,Persons,2025,29711
+Rogaland,Females,30-39 years,Persons,2023,34513
+Rogaland,Females,30-39 years,Persons,2024,34819
+Rogaland,Females,30-39 years,Persons,2025,34900
+Rogaland,Females,40-49 years,Persons,2023,32603
+Rogaland,Females,40-49 years,Persons,2024,33133
+Rogaland,Females,40-49 years,Persons,2025,33605
+Rogaland,Females,50-59 years,Persons,2023,30994
+Rogaland,Females,50-59 years,Persons,2024,31461
+Rogaland,Females,50-59 years,Persons,2025,31783
+Rogaland,Females,60-69 years,Persons,2023,24946
+Rogaland,Females,60-69 years,Persons,2024,25440
+Rogaland,Females,60-69 years,Persons,2025,25966
+Rogaland,Females,70-79 years,Persons,2023,18446
+Rogaland,Females,70-79 years,Persons,2024,19046
+Rogaland,Females,70-79 years,Persons,2025,19519
+Rogaland,Females,80-89 years,Persons,2023,8694
+Rogaland,Females,80-89 years,Persons,2024,9098
+Rogaland,Females,80-89 years,Persons,2025,9593
+Rogaland,Females,90-99 years,Persons,2023,2301
+Rogaland,Females,90-99 years,Persons,2024,2233
+Rogaland,Females,90-99 years,Persons,2025,2247
+Rogaland,Females,100 years or older,Persons,2023,73
+Rogaland,Females,100 years or older,Persons,2024,73
+Rogaland,Females,100 years or older,Persons,2025,67
+Rogaland,Males,0-9 years,Persons,2023,30349
+Rogaland,Males,0-9 years,Persons,2024,30093
+Rogaland,Males,0-9 years,Persons,2025,29837
+Rogaland,Males,10-19 years,Persons,2023,33370
+Rogaland,Males,10-19 years,Persons,2024,33957
+Rogaland,Males,10-19 years,Persons,2025,34307
+Rogaland,Males,20-29 years,Persons,2023,31524
+Rogaland,Males,20-29 years,Persons,2024,31950
+Rogaland,Males,20-29 years,Persons,2025,32071
+Rogaland,Males,30-39 years,Persons,2023,35704
+Rogaland,Males,30-39 years,Persons,2024,36006
+Rogaland,Males,30-39 years,Persons,2025,36266
+Rogaland,Males,40-49 years,Persons,2023,35084
+Rogaland,Males,40-49 years,Persons,2024,35582
+Rogaland,Males,40-49 years,Persons,2025,36047
+Rogaland,Males,50-59 years,Persons,2023,32655
+Rogaland,Males,50-59 years,Persons,2024,33146
+Rogaland,Males,50-59 years,Persons,2025,33488
+Rogaland,Males,60-69 years,Persons,2023,25485
+Rogaland,Males,60-69 years,Persons,2024,25916
+Rogaland,Males,60-69 years,Persons,2025,26500
+Rogaland,Males,70-79 years,Persons,2023,17854
+Rogaland,Males,70-79 years,Persons,2024,18444
+Rogaland,Males,70-79 years,Persons,2025,18890
+Rogaland,Males,80-89 years,Persons,2023,6570
+Rogaland,Males,80-89 years,Persons,2024,7001
+Rogaland,Males,80-89 years,Persons,2025,7494
+Rogaland,Males,90-99 years,Persons,2023,1051
+Rogaland,Males,90-99 years,Persons,2024,1038
+Rogaland,Males,90-99 years,Persons,2025,1072
+Rogaland,Males,100 years or older,Persons,2023,22
+Rogaland,Males,100 years or older,Persons,2024,14
+Rogaland,Males,100 years or older,Persons,2025,12
+Vestland,Females,0-9 years,Persons,2023,34349
+Vestland,Females,0-9 years,Persons,2024,33908
+Vestland,Females,0-9 years,Persons,2025,33447
+Vestland,Females,10-19 years,Persons,2023,38678
+Vestland,Females,10-19 years,Persons,2024,38662
+Vestland,Females,10-19 years,Persons,2025,38601
+Vestland,Females,20-29 years,Persons,2023,42198
+Vestland,Females,20-29 years,Persons,2024,42280
+Vestland,Females,20-29 years,Persons,2025,42282
+Vestland,Females,30-39 years,Persons,2023,42910
+Vestland,Females,30-39 years,Persons,2024,43611
+Vestland,Females,30-39 years,Persons,2025,43963
+Vestland,Females,40-49 years,Persons,2023,39949
+Vestland,Females,40-49 years,Persons,2024,40148
+Vestland,Females,40-49 years,Persons,2025,40423
+Vestland,Females,50-59 years,Persons,2023,40334
+Vestland,Females,50-59 years,Persons,2024,40781
+Vestland,Females,50-59 years,Persons,2025,41105
+Vestland,Females,60-69 years,Persons,2023,34442
+Vestland,Females,60-69 years,Persons,2024,34966
+Vestland,Females,60-69 years,Persons,2025,35268
+Vestland,Females,70-79 years,Persons,2023,27980
+Vestland,Females,70-79 years,Persons,2024,28698
+Vestland,Females,70-79 years,Persons,2025,29218
+Vestland,Females,80-89 years,Persons,2023,13875
+Vestland,Females,80-89 years,Persons,2024,14241
+Vestland,Females,80-89 years,Persons,2025,14867
+Vestland,Females,90-99 years,Persons,2023,4166
+Vestland,Females,90-99 years,Persons,2024,4124
+Vestland,Females,90-99 years,Persons,2025,4041
+Vestland,Females,100 years or older,Persons,2023,190
+Vestland,Females,100 years or older,Persons,2024,180
+Vestland,Females,100 years or older,Persons,2025,202
+Vestland,Males,0-9 years,Persons,2023,36550
+Vestland,Males,0-9 years,Persons,2024,36113
+Vestland,Males,0-9 years,Persons,2025,35637
+Vestland,Males,10-19 years,Persons,2023,40472
+Vestland,Males,10-19 years,Persons,2024,40775
+Vestland,Males,10-19 years,Persons,2025,40986
+Vestland,Males,20-29 years,Persons,2023,44669
+Vestland,Males,20-29 years,Persons,2024,44613
+Vestland,Males,20-29 years,Persons,2025,44418
+Vestland,Males,30-39 years,Persons,2023,45141
+Vestland,Males,30-39 years,Persons,2024,45665
+Vestland,Males,30-39 years,Persons,2025,46214
+Vestland,Males,40-49 years,Persons,2023,42707
+Vestland,Males,40-49 years,Persons,2024,42687
+Vestland,Males,40-49 years,Persons,2025,42730
+Vestland,Males,50-59 years,Persons,2023,42687
+Vestland,Males,50-59 years,Persons,2024,43254
+Vestland,Males,50-59 years,Persons,2025,43324
+Vestland,Males,60-69 years,Persons,2023,35573
+Vestland,Males,60-69 years,Persons,2024,35955
+Vestland,Males,60-69 years,Persons,2025,36650
+Vestland,Males,70-79 years,Persons,2023,27160
+Vestland,Males,70-79 years,Persons,2024,27893
+Vestland,Males,70-79 years,Persons,2025,28265
+Vestland,Males,80-89 years,Persons,2023,10329
+Vestland,Males,80-89 years,Persons,2024,10888
+Vestland,Males,80-89 years,Persons,2025,11699
+Vestland,Males,90-99 years,Persons,2023,1807
+Vestland,Males,90-99 years,Persons,2024,1826
+Vestland,Males,90-99 years,Persons,2025,1838
+Vestland,Males,100 years or older,Persons,2023,39
+Vestland,Males,100 years or older,Persons,2024,31
+Vestland,Males,100 years or older,Persons,2025,32
+Møre og Romsdal,Females,0-9 years,Persons,2023,13851
+Møre og Romsdal,Females,0-9 years,Persons,2024,13778
+Møre og Romsdal,Females,0-9 years,Persons,2025,13666
+Møre og Romsdal,Females,10-19 years,Persons,2023,16243
+Møre og Romsdal,Females,10-19 years,Persons,2024,16357
+Møre og Romsdal,Females,10-19 years,Persons,2025,16255
+Møre og Romsdal,Females,20-29 years,Persons,2023,14902
+Møre og Romsdal,Females,20-29 years,Persons,2024,14872
+Møre og Romsdal,Females,20-29 years,Persons,2025,14921
+Møre og Romsdal,Females,30-39 years,Persons,2023,16352
+Møre og Romsdal,Females,30-39 years,Persons,2024,16599
+Møre og Romsdal,Females,30-39 years,Persons,2025,16686
+Møre og Romsdal,Females,40-49 years,Persons,2023,16109
+Møre og Romsdal,Females,40-49 years,Persons,2024,16343
+Møre og Romsdal,Females,40-49 years,Persons,2025,16445
+Møre og Romsdal,Females,50-59 years,Persons,2023,17253
+Møre og Romsdal,Females,50-59 years,Persons,2024,17453
+Møre og Romsdal,Females,50-59 years,Persons,2025,17575
+Møre og Romsdal,Females,60-69 years,Persons,2023,15964
+Møre og Romsdal,Females,60-69 years,Persons,2024,15984
+Møre og Romsdal,Females,60-69 years,Persons,2025,16035
+Møre og Romsdal,Females,70-79 years,Persons,2023,13183
+Møre og Romsdal,Females,70-79 years,Persons,2024,13521
+Møre og Romsdal,Females,70-79 years,Persons,2025,13759
+Møre og Romsdal,Females,80-89 years,Persons,2023,6191
+Møre og Romsdal,Females,80-89 years,Persons,2024,6433
+Møre og Romsdal,Females,80-89 years,Persons,2025,6773
+Møre og Romsdal,Females,90-99 years,Persons,2023,1898
+Møre og Romsdal,Females,90-99 years,Persons,2024,1879
+Møre og Romsdal,Females,90-99 years,Persons,2025,1815
+Møre og Romsdal,Females,100 years or older,Persons,2023,60
+Møre og Romsdal,Females,100 years or older,Persons,2024,61
+Møre og Romsdal,Females,100 years or older,Persons,2025,71
+Møre og Romsdal,Males,0-9 years,Persons,2023,14433
+Møre og Romsdal,Males,0-9 years,Persons,2024,14283
+Møre og Romsdal,Males,0-9 years,Persons,2025,14159
+Møre og Romsdal,Males,10-19 years,Persons,2023,16988
+Møre og Romsdal,Males,10-19 years,Persons,2024,17110
+Møre og Romsdal,Males,10-19 years,Persons,2025,17212
+Møre og Romsdal,Males,20-29 years,Persons,2023,16693
+Møre og Romsdal,Males,20-29 years,Persons,2024,16672
+Møre og Romsdal,Males,20-29 years,Persons,2025,16727
+Møre og Romsdal,Males,30-39 years,Persons,2023,17426
+Møre og Romsdal,Males,30-39 years,Persons,2024,17544
+Møre og Romsdal,Males,30-39 years,Persons,2025,17654
+Møre og Romsdal,Males,40-49 years,Persons,2023,17105
+Møre og Romsdal,Males,40-49 years,Persons,2024,17196
+Møre og Romsdal,Males,40-49 years,Persons,2025,17367
+Møre og Romsdal,Males,50-59 years,Persons,2023,18561
+Møre og Romsdal,Males,50-59 years,Persons,2024,18710
+Møre og Romsdal,Males,50-59 years,Persons,2025,18748
+Møre og Romsdal,Males,60-69 years,Persons,2023,16315
+Møre og Romsdal,Males,60-69 years,Persons,2024,16450
+Møre og Romsdal,Males,60-69 years,Persons,2025,16509
+Møre og Romsdal,Males,70-79 years,Persons,2023,13095
+Møre og Romsdal,Males,70-79 years,Persons,2024,13341
+Møre og Romsdal,Males,70-79 years,Persons,2025,13629
+Møre og Romsdal,Males,80-89 years,Persons,2023,4861
+Møre og Romsdal,Males,80-89 years,Persons,2024,5150
+Møre og Romsdal,Males,80-89 years,Persons,2025,5490
+Møre og Romsdal,Males,90-99 years,Persons,2023,872
+Møre og Romsdal,Males,90-99 years,Persons,2024,877
+Møre og Romsdal,Males,90-99 years,Persons,2025,904
+Møre og Romsdal,Males,100 years or older,Persons,2023,10
+Møre og Romsdal,Males,100 years or older,Persons,2024,11
+Møre og Romsdal,Males,100 years or older,Persons,2025,13
+Trøndelag - Trööndelage,Females,0-9 years,Persons,2023,24479
+Trøndelag - Trööndelage,Females,0-9 years,Persons,2024,24114
+Trøndelag - Trööndelage,Females,0-9 years,Persons,2025,23825
+Trøndelag - Trööndelage,Females,10-19 years,Persons,2023,27303
+Trøndelag - Trööndelage,Females,10-19 years,Persons,2024,27640
+Trøndelag - Trööndelage,Females,10-19 years,Persons,2025,27806
+Trøndelag - Trööndelage,Females,20-29 years,Persons,2023,32674
+Trøndelag - Trööndelage,Females,20-29 years,Persons,2024,32692
+Trøndelag - Trööndelage,Females,20-29 years,Persons,2025,32583
+Trøndelag - Trööndelage,Females,30-39 years,Persons,2023,31541
+Trøndelag - Trööndelage,Females,30-39 years,Persons,2024,32227
+Trøndelag - Trööndelage,Females,30-39 years,Persons,2025,32656
+Trøndelag - Trööndelage,Females,40-49 years,Persons,2023,28578
+Trøndelag - Trööndelage,Females,40-49 years,Persons,2024,28722
+Trøndelag - Trööndelage,Females,40-49 years,Persons,2025,28919
+Trøndelag - Trööndelage,Females,50-59 years,Persons,2023,30736
+Trøndelag - Trööndelage,Females,50-59 years,Persons,2024,31022
+Trøndelag - Trööndelage,Females,50-59 years,Persons,2025,31220
+Trøndelag - Trööndelage,Females,60-69 years,Persons,2023,26095
+Trøndelag - Trööndelage,Females,60-69 years,Persons,2024,26422
+Trøndelag - Trööndelage,Females,60-69 years,Persons,2025,26747
+Trøndelag - Trööndelage,Females,70-79 years,Persons,2023,21641
+Trøndelag - Trööndelage,Females,70-79 years,Persons,2024,22053
+Trøndelag - Trööndelage,Females,70-79 years,Persons,2025,22409
+Trøndelag - Trööndelage,Females,80-89 years,Persons,2023,10129
+Trøndelag - Trööndelage,Females,80-89 years,Persons,2024,10678
+Trøndelag - Trööndelage,Females,80-89 years,Persons,2025,11211
+Trøndelag - Trööndelage,Females,90-99 years,Persons,2023,2643
+Trøndelag - Trööndelage,Females,90-99 years,Persons,2024,2588
+Trøndelag - Trööndelage,Females,90-99 years,Persons,2025,2572
+Trøndelag - Trööndelage,Females,100 years or older,Persons,2023,82
+Trøndelag - Trööndelage,Females,100 years or older,Persons,2024,64
+Trøndelag - Trööndelage,Females,100 years or older,Persons,2025,78
+Trøndelag - Trööndelage,Males,0-9 years,Persons,2023,25936
+Trøndelag - Trööndelage,Males,0-9 years,Persons,2024,25734
+Trøndelag - Trööndelage,Males,0-9 years,Persons,2025,25547
+Trøndelag - Trööndelage,Males,10-19 years,Persons,2023,29001
+Trøndelag - Trööndelage,Males,10-19 years,Persons,2024,29491
+Trøndelag - Trööndelage,Males,10-19 years,Persons,2025,29787
+Trøndelag - Trööndelage,Males,20-29 years,Persons,2023,36266
+Trøndelag - Trööndelage,Males,20-29 years,Persons,2024,36018
+Trøndelag - Trööndelage,Males,20-29 years,Persons,2025,35951
+Trøndelag - Trööndelage,Males,30-39 years,Persons,2023,33657
+Trøndelag - Trööndelage,Males,30-39 years,Persons,2024,34256
+Trøndelag - Trööndelage,Males,30-39 years,Persons,2025,34864
+Trøndelag - Trööndelage,Males,40-49 years,Persons,2023,29823
+Trøndelag - Trööndelage,Males,40-49 years,Persons,2024,29790
+Trøndelag - Trööndelage,Males,40-49 years,Persons,2025,29778
+Trøndelag - Trööndelage,Males,50-59 years,Persons,2023,31657
+Trøndelag - Trööndelage,Males,50-59 years,Persons,2024,31914
+Trøndelag - Trööndelage,Males,50-59 years,Persons,2025,32041
+Trøndelag - Trööndelage,Males,60-69 years,Persons,2023,26203
+Trøndelag - Trööndelage,Males,60-69 years,Persons,2024,26649
+Trøndelag - Trööndelage,Males,60-69 years,Persons,2025,27042
+Trøndelag - Trööndelage,Males,70-79 years,Persons,2023,20821
+Trøndelag - Trööndelage,Males,70-79 years,Persons,2024,21037
+Trøndelag - Trööndelage,Males,70-79 years,Persons,2025,21300
+Trøndelag - Trööndelage,Males,80-89 years,Persons,2023,7964
+Trøndelag - Trööndelage,Males,80-89 years,Persons,2024,8584
+Trøndelag - Trööndelage,Males,80-89 years,Persons,2025,9200
+Trøndelag - Trööndelage,Males,90-99 years,Persons,2023,1233
+Trøndelag - Trööndelage,Males,90-99 years,Persons,2024,1251
+Trøndelag - Trööndelage,Males,90-99 years,Persons,2025,1263
+Trøndelag - Trööndelage,Males,100 years or older,Persons,2023,8
+Trøndelag - Trööndelage,Males,100 years or older,Persons,2024,10
+Trøndelag - Trööndelage,Males,100 years or older,Persons,2025,16
+Nordland - Nordlánnda,Females,0-9 years,Persons,2023,11426
+Nordland - Nordlánnda,Females,0-9 years,Persons,2024,11311
+Nordland - Nordlánnda,Females,0-9 years,Persons,2025,11123
+Nordland - Nordlánnda,Females,10-19 years,Persons,2023,13291
+Nordland - Nordlánnda,Females,10-19 years,Persons,2024,13435
+Nordland - Nordlánnda,Females,10-19 years,Persons,2025,13378
+Nordland - Nordlánnda,Females,20-29 years,Persons,2023,13733
+Nordland - Nordlánnda,Females,20-29 years,Persons,2024,13632
+Nordland - Nordlánnda,Females,20-29 years,Persons,2025,13388
+Nordland - Nordlánnda,Females,30-39 years,Persons,2023,14580
+Nordland - Nordlánnda,Females,30-39 years,Persons,2024,15024
+Nordland - Nordlánnda,Females,30-39 years,Persons,2025,15354
+Nordland - Nordlánnda,Females,40-49 years,Persons,2023,13829
+Nordland - Nordlánnda,Females,40-49 years,Persons,2024,13863
+Nordland - Nordlánnda,Females,40-49 years,Persons,2025,13815
+Nordland - Nordlánnda,Females,50-59 years,Persons,2023,16745
+Nordland - Nordlánnda,Females,50-59 years,Persons,2024,16779
+Nordland - Nordlánnda,Females,50-59 years,Persons,2025,16598
+Nordland - Nordlánnda,Females,60-69 years,Persons,2023,15002
+Nordland - Nordlánnda,Females,60-69 years,Persons,2024,15202
+Nordland - Nordlánnda,Females,60-69 years,Persons,2025,15366
+Nordland - Nordlánnda,Females,70-79 years,Persons,2023,12357
+Nordland - Nordlánnda,Females,70-79 years,Persons,2024,12629
+Nordland - Nordlánnda,Females,70-79 years,Persons,2025,12730
+Nordland - Nordlánnda,Females,80-89 years,Persons,2023,6151
+Nordland - Nordlánnda,Females,80-89 years,Persons,2024,6319
+Nordland - Nordlánnda,Females,80-89 years,Persons,2025,6668
+Nordland - Nordlánnda,Females,90-99 years,Persons,2023,1597
+Nordland - Nordlánnda,Females,90-99 years,Persons,2024,1615
+Nordland - Nordlánnda,Females,90-99 years,Persons,2025,1614
+Nordland - Nordlánnda,Females,100 years or older,Persons,2023,49
+Nordland - Nordlánnda,Females,100 years or older,Persons,2024,50
+Nordland - Nordlánnda,Females,100 years or older,Persons,2025,56
+Nordland - Nordlánnda,Males,0-9 years,Persons,2023,12187
+Nordland - Nordlánnda,Males,0-9 years,Persons,2024,12144
+Nordland - Nordlánnda,Males,0-9 years,Persons,2025,11997
+Nordland - Nordlánnda,Males,10-19 years,Persons,2023,14415
+Nordland - Nordlánnda,Males,10-19 years,Persons,2024,14590
+Nordland - Nordlánnda,Males,10-19 years,Persons,2025,14586
+Nordland - Nordlánnda,Males,20-29 years,Persons,2023,15045
+Nordland - Nordlánnda,Males,20-29 years,Persons,2024,14813
+Nordland - Nordlánnda,Males,20-29 years,Persons,2025,14699
+Nordland - Nordlánnda,Males,30-39 years,Persons,2023,15569
+Nordland - Nordlánnda,Males,30-39 years,Persons,2024,16108
+Nordland - Nordlánnda,Males,30-39 years,Persons,2025,16244
+Nordland - Nordlánnda,Males,40-49 years,Persons,2023,14168
+Nordland - Nordlánnda,Males,40-49 years,Persons,2024,14338
+Nordland - Nordlánnda,Males,40-49 years,Persons,2025,14381
+Nordland - Nordlánnda,Males,50-59 years,Persons,2023,17272
+Nordland - Nordlánnda,Males,50-59 years,Persons,2024,17126
+Nordland - Nordlánnda,Males,50-59 years,Persons,2025,16872
+Nordland - Nordlánnda,Males,60-69 years,Persons,2023,15552
+Nordland - Nordlánnda,Males,60-69 years,Persons,2024,15459
+Nordland - Nordlánnda,Males,60-69 years,Persons,2025,15546
+Nordland - Nordlánnda,Males,70-79 years,Persons,2023,12408
+Nordland - Nordlánnda,Males,70-79 years,Persons,2024,12648
+Nordland - Nordlánnda,Males,70-79 years,Persons,2025,12856
+Nordland - Nordlánnda,Males,80-89 years,Persons,2023,4927
+Nordland - Nordlánnda,Males,80-89 years,Persons,2024,5238
+Nordland - Nordlánnda,Males,80-89 years,Persons,2025,5529
+Nordland - Nordlánnda,Males,90-99 years,Persons,2023,774
+Nordland - Nordlánnda,Males,90-99 years,Persons,2024,750
+Nordland - Nordlánnda,Males,90-99 years,Persons,2025,777
+Nordland - Nordlánnda,Males,100 years or older,Persons,2023,7
+Nordland - Nordlánnda,Males,100 years or older,Persons,2024,8
+Nordland - Nordlánnda,Males,100 years or older,Persons,2025,5
+Troms - Romsa - Tromssa,Females,0-9 years,Persons,2023,8048
+Troms - Romsa - Tromssa,Females,0-9 years,Persons,2024,7992
+Troms - Romsa - Tromssa,Females,0-9 years,Persons,2025,7836
+Troms - Romsa - Tromssa,Females,10-19 years,Persons,2023,9336
+Troms - Romsa - Tromssa,Females,10-19 years,Persons,2024,9342
+Troms - Romsa - Tromssa,Females,10-19 years,Persons,2025,9330
+Troms - Romsa - Tromssa,Females,20-29 years,Persons,2023,11183
+Troms - Romsa - Tromssa,Females,20-29 years,Persons,2024,11190
+Troms - Romsa - Tromssa,Females,20-29 years,Persons,2025,11184
+Troms - Romsa - Tromssa,Females,30-39 years,Persons,2023,10860
+Troms - Romsa - Tromssa,Females,30-39 years,Persons,2024,11111
+Troms - Romsa - Tromssa,Females,30-39 years,Persons,2025,11382
+Troms - Romsa - Tromssa,Females,40-49 years,Persons,2023,10083
+Troms - Romsa - Tromssa,Females,40-49 years,Persons,2024,10043
+Troms - Romsa - Tromssa,Females,40-49 years,Persons,2025,9978
+Troms - Romsa - Tromssa,Females,50-59 years,Persons,2023,11265
+Troms - Romsa - Tromssa,Females,50-59 years,Persons,2024,11331
+Troms - Romsa - Tromssa,Females,50-59 years,Persons,2025,11311
+Troms - Romsa - Tromssa,Females,60-69 years,Persons,2023,9666
+Troms - Romsa - Tromssa,Females,60-69 years,Persons,2024,9754
+Troms - Romsa - Tromssa,Females,60-69 years,Persons,2025,9829
+Troms - Romsa - Tromssa,Females,70-79 years,Persons,2023,7951
+Troms - Romsa - Tromssa,Females,70-79 years,Persons,2024,8167
+Troms - Romsa - Tromssa,Females,70-79 years,Persons,2025,8317
+Troms - Romsa - Tromssa,Females,80-89 years,Persons,2023,3676
+Troms - Romsa - Tromssa,Females,80-89 years,Persons,2024,3812
+Troms - Romsa - Tromssa,Females,80-89 years,Persons,2025,4017
+Troms - Romsa - Tromssa,Females,90-99 years,Persons,2023,897
+Troms - Romsa - Tromssa,Females,90-99 years,Persons,2024,900
+Troms - Romsa - Tromssa,Females,90-99 years,Persons,2025,870
+Troms - Romsa - Tromssa,Females,100 years or older,Persons,2023,17
+Troms - Romsa - Tromssa,Females,100 years or older,Persons,2024,21
+Troms - Romsa - Tromssa,Females,100 years or older,Persons,2025,24
+Troms - Romsa - Tromssa,Males,0-9 years,Persons,2023,8212
+Troms - Romsa - Tromssa,Males,0-9 years,Persons,2024,8195
+Troms - Romsa - Tromssa,Males,0-9 years,Persons,2025,8104
+Troms - Romsa - Tromssa,Males,10-19 years,Persons,2023,9995
+Troms - Romsa - Tromssa,Males,10-19 years,Persons,2024,10140
+Troms - Romsa - Tromssa,Males,10-19 years,Persons,2025,10167
+Troms - Romsa - Tromssa,Males,20-29 years,Persons,2023,12223
+Troms - Romsa - Tromssa,Males,20-29 years,Persons,2024,12068
+Troms - Romsa - Tromssa,Males,20-29 years,Persons,2025,11920
+Troms - Romsa - Tromssa,Males,30-39 years,Persons,2023,11766
+Troms - Romsa - Tromssa,Males,30-39 years,Persons,2024,11963
+Troms - Romsa - Tromssa,Males,30-39 years,Persons,2025,12213
+Troms - Romsa - Tromssa,Males,40-49 years,Persons,2023,10492
+Troms - Romsa - Tromssa,Males,40-49 years,Persons,2024,10374
+Troms - Romsa - Tromssa,Males,40-49 years,Persons,2025,10292
+Troms - Romsa - Tromssa,Males,50-59 years,Persons,2023,11694
+Troms - Romsa - Tromssa,Males,50-59 years,Persons,2024,11844
+Troms - Romsa - Tromssa,Males,50-59 years,Persons,2025,11876
+Troms - Romsa - Tromssa,Males,60-69 years,Persons,2023,9771
+Troms - Romsa - Tromssa,Males,60-69 years,Persons,2024,9782
+Troms - Romsa - Tromssa,Males,60-69 years,Persons,2025,9910
+Troms - Romsa - Tromssa,Males,70-79 years,Persons,2023,7779
+Troms - Romsa - Tromssa,Males,70-79 years,Persons,2024,7956
+Troms - Romsa - Tromssa,Males,70-79 years,Persons,2025,8040
+Troms - Romsa - Tromssa,Males,80-89 years,Persons,2023,3004
+Troms - Romsa - Tromssa,Males,80-89 years,Persons,2024,3201
+Troms - Romsa - Tromssa,Males,80-89 years,Persons,2025,3426
+Troms - Romsa - Tromssa,Males,90-99 years,Persons,2023,417
+Troms - Romsa - Tromssa,Males,90-99 years,Persons,2024,419
+Troms - Romsa - Tromssa,Males,90-99 years,Persons,2025,449
+Troms - Romsa - Tromssa,Males,100 years or older,Persons,2023,5
+Troms - Romsa - Tromssa,Males,100 years or older,Persons,2024,5
+Troms - Romsa - Tromssa,Males,100 years or older,Persons,2025,4
+Finnmark - Finnmárku - Finmarkku,Females,0-9 years,Persons,2023,3635
+Finnmark - Finnmárku - Finmarkku,Females,0-9 years,Persons,2024,3620
+Finnmark - Finnmárku - Finmarkku,Females,0-9 years,Persons,2025,3547
+Finnmark - Finnmárku - Finmarkku,Females,10-19 years,Persons,2023,4070
+Finnmark - Finnmárku - Finmarkku,Females,10-19 years,Persons,2024,4161
+Finnmark - Finnmárku - Finmarkku,Females,10-19 years,Persons,2025,4157
+Finnmark - Finnmárku - Finmarkku,Females,20-29 years,Persons,2023,4742
+Finnmark - Finnmárku - Finmarkku,Females,20-29 years,Persons,2024,4713
+Finnmark - Finnmárku - Finmarkku,Females,20-29 years,Persons,2025,4557
+Finnmark - Finnmárku - Finmarkku,Females,30-39 years,Persons,2023,4515
+Finnmark - Finnmárku - Finmarkku,Females,30-39 years,Persons,2024,4719
+Finnmark - Finnmárku - Finmarkku,Females,30-39 years,Persons,2025,4798
+Finnmark - Finnmárku - Finmarkku,Females,40-49 years,Persons,2023,4122
+Finnmark - Finnmárku - Finmarkku,Females,40-49 years,Persons,2024,4053
+Finnmark - Finnmárku - Finmarkku,Females,40-49 years,Persons,2025,3999
+Finnmark - Finnmárku - Finmarkku,Females,50-59 years,Persons,2023,5362
+Finnmark - Finnmárku - Finmarkku,Females,50-59 years,Persons,2024,5481
+Finnmark - Finnmárku - Finmarkku,Females,50-59 years,Persons,2025,5387
+Finnmark - Finnmárku - Finmarkku,Females,60-69 years,Persons,2023,4242
+Finnmark - Finnmárku - Finmarkku,Females,60-69 years,Persons,2024,4318
+Finnmark - Finnmárku - Finmarkku,Females,60-69 years,Persons,2025,4436
+Finnmark - Finnmárku - Finmarkku,Females,70-79 years,Persons,2023,3476
+Finnmark - Finnmárku - Finmarkku,Females,70-79 years,Persons,2024,3577
+Finnmark - Finnmárku - Finmarkku,Females,70-79 years,Persons,2025,3612
+Finnmark - Finnmárku - Finmarkku,Females,80-89 years,Persons,2023,1572
+Finnmark - Finnmárku - Finmarkku,Females,80-89 years,Persons,2024,1605
+Finnmark - Finnmárku - Finmarkku,Females,80-89 years,Persons,2025,1667
+Finnmark - Finnmárku - Finmarkku,Females,90-99 years,Persons,2023,379
+Finnmark - Finnmárku - Finmarkku,Females,90-99 years,Persons,2024,379
+Finnmark - Finnmárku - Finmarkku,Females,90-99 years,Persons,2025,377
+Finnmark - Finnmárku - Finmarkku,Females,100 years or older,Persons,2023,5
+Finnmark - Finnmárku - Finmarkku,Females,100 years or older,Persons,2024,10
+Finnmark - Finnmárku - Finmarkku,Females,100 years or older,Persons,2025,8
+Finnmark - Finnmárku - Finmarkku,Males,0-9 years,Persons,2023,3630
+Finnmark - Finnmárku - Finmarkku,Males,0-9 years,Persons,2024,3697
+Finnmark - Finnmárku - Finmarkku,Males,0-9 years,Persons,2025,3762
+Finnmark - Finnmárku - Finmarkku,Males,10-19 years,Persons,2023,4267
+Finnmark - Finnmárku - Finmarkku,Males,10-19 years,Persons,2024,4285
+Finnmark - Finnmárku - Finmarkku,Males,10-19 years,Persons,2025,4221
+Finnmark - Finnmárku - Finmarkku,Males,20-29 years,Persons,2023,5396
+Finnmark - Finnmárku - Finmarkku,Males,20-29 years,Persons,2024,5289
+Finnmark - Finnmárku - Finmarkku,Males,20-29 years,Persons,2025,5245
+Finnmark - Finnmárku - Finmarkku,Males,30-39 years,Persons,2023,5026
+Finnmark - Finnmárku - Finmarkku,Males,30-39 years,Persons,2024,5325
+Finnmark - Finnmárku - Finmarkku,Males,30-39 years,Persons,2025,5390
+Finnmark - Finnmárku - Finmarkku,Males,40-49 years,Persons,2023,4432
+Finnmark - Finnmárku - Finmarkku,Males,40-49 years,Persons,2024,4438
+Finnmark - Finnmárku - Finmarkku,Males,40-49 years,Persons,2025,4384
+Finnmark - Finnmárku - Finmarkku,Males,50-59 years,Persons,2023,5795
+Finnmark - Finnmárku - Finmarkku,Males,50-59 years,Persons,2024,5737
+Finnmark - Finnmárku - Finmarkku,Males,50-59 years,Persons,2025,5652
+Finnmark - Finnmárku - Finmarkku,Males,60-69 years,Persons,2023,4484
+Finnmark - Finnmárku - Finmarkku,Males,60-69 years,Persons,2024,4534
+Finnmark - Finnmárku - Finmarkku,Males,60-69 years,Persons,2025,4619
+Finnmark - Finnmárku - Finmarkku,Males,70-79 years,Persons,2023,3554
+Finnmark - Finnmárku - Finmarkku,Males,70-79 years,Persons,2024,3639
+Finnmark - Finnmárku - Finmarkku,Males,70-79 years,Persons,2025,3671
+Finnmark - Finnmárku - Finmarkku,Males,80-89 years,Persons,2023,1249
+Finnmark - Finnmárku - Finmarkku,Males,80-89 years,Persons,2024,1321
+Finnmark - Finnmárku - Finmarkku,Males,80-89 years,Persons,2025,1392
+Finnmark - Finnmárku - Finmarkku,Males,90-99 years,Persons,2023,158
+Finnmark - Finnmárku - Finmarkku,Males,90-99 years,Persons,2024,152
+Finnmark - Finnmárku - Finmarkku,Males,90-99 years,Persons,2025,161
+Finnmark - Finnmárku - Finmarkku,Males,100 years or older,Persons,2023,1
+Finnmark - Finnmárku - Finmarkku,Males,100 years or older,Persons,2024,0
+Finnmark - Finnmárku - Finmarkku,Males,100 years or older,Persons,2025,0
