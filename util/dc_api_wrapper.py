@@ -274,8 +274,8 @@ def dc_api_merge_results(results: dict, new_result: dict) -> dict:
     return results
 
 
-def get_datacommons_client(config: dict = None) -> DataCommonsClient:
-    """Returns a DataCommonsClient object initialized using config."""
+def get_dc_api_key(config: dict = None) -> str:
+    """Returns the API key for DC API calls."""
     if config is None:
         config = {}
     api_key = config.get('dc_api_key', os.environ.get('DC_API_KEY'))
@@ -287,6 +287,14 @@ def get_datacommons_client(config: dict = None) -> DataCommonsClient:
             'for more details.',
             n=1)
         api_key = _DEFAULT_DC_API_KEY
+    return api_key
+
+
+def get_datacommons_client(config: dict = None) -> DataCommonsClient:
+    """Returns a DataCommonsClient object initialized using config."""
+    if config is None:
+        config = {}
+    api_key = get_dc_api_key(config)
     dc_instance = config.get('dc_api_root')
     url = None
     # Check if API root is a host or url endpoint.
