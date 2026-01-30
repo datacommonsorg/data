@@ -1,0 +1,123 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/norway_census/test/Norway_input.csv --pv_map=statvar_imports/norway_census/Norway_pvmap.csv --output_path=statvar_imports/norway_census/test/Norway_output --config_file=statvar_imports/norway_census/Norway_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-30 16:18:27.430545
+
+Node: dcid:Count_Person_50To59Years_Male
+typeOf: dcid:StatisticalVariable
+name: "Number of males aged 50 to 59 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years50To59
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years0To9_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years0To9
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years0To9_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years0To9
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years10To19_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years10To19
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years10To19_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years10To19
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years20To29_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years20To29
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years20To29_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years20To29
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years60To69_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years60To69
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years60To69_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years60To69
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years70To79_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years70To79
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years70To79_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years70To79
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years80To89_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years80To89
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years80To89_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years80To89
+gender: dcid:Male
+
+Node: dcid:Count_Person_Years90To99_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years90To99
+gender: dcid:Female
+
+Node: dcid:Count_Person_Years90To99_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years90To99
+gender: dcid:Male
+

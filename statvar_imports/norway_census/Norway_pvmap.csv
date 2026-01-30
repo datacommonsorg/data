@@ -1,0 +1,89 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+Value,populationType,Person,measuredProperty,count,value,{Number}
+
+Males,gender,Male
+Females,gender,Female
+0-9 years,age,dcs:Years0To9
+10-19 years,age,dcs:Years10To19
+20-29 years,age,dcs:Years20To29
+30-39 years,age,dcs:Years30To39
+40-49 years,age,dcs:Years40To49
+50-59 years,age,dcs:Years50To59
+60-69 years,age,dcs:Years60To69
+70-79 years,age,dcs:Years70To79
+80-89 years,age,dcs:Years80To89
+90-99 years,age,dcs:Years90To99
+100 years or older,age,dcs:Years100Onwards
+
+Oslo - Oslove,observationAbout,nuts/NO011
+Rogaland,observationAbout,nuts/NO012
+Møre og Romsdal,observationAbout,nuts/NO031
+Nordland - Nordlánnda,observationAbout,nuts/NO032
+Østfold,observationAbout,nuts/NO033
+Akershus,observationAbout,nuts/NO034
+Buskerud,observationAbout,nuts/NO020
+Innlandet,observationAbout,nuts/NO042
+Vestfold,observationAbout,nuts/NO043
+Telemark,observationAbout,wikidataId/Q56407177
+Agder,observationAbout,nuts/NO053
+Vestland,observationAbout,nuts/NO060
+Trøndelag - Trööndelage,observationAbout,nuts/NO071
+Troms - Romsa - Tromssa,observationAbout,nuts/NO072
+Finnmark - Finnmárku - Finmarkku,observationAbout,nuts/NO073
+
+
+1986,observationDate,1986
+1987,observationDate,1987
+1988,observationDate,1988
+1989,observationDate,1989
+1990,observationDate,1990
+1991,observationDate,1991
+1992,observationDate,1992
+1993,observationDate,1993
+1994,observationDate,1994
+1995,observationDate,1995
+1996,observationDate,1996
+1997,observationDate,1997
+1998,observationDate,1998
+1999,observationDate,1999
+2000,observationDate,2000
+2001,observationDate,2001
+2002,observationDate,2002
+2003,observationDate,2003
+2004,observationDate,2004
+2005,observationDate,2005
+2006,observationDate,2006
+2007,observationDate,2007
+2008,observationDate,2008
+2009,observationDate,2009
+2010,observationDate,2010
+2011,observationDate,2011
+2012,observationDate,2012
+2013,observationDate,2013
+2014,observationDate,2014
+2015,observationDate,2015
+2016,observationDate,2016
+2017,observationDate,2017
+2018,observationDate,2018
+2019,observationDate,2019
+2020,observationDate,2020
+2021,observationDate,2021
+2022,observationDate,2022
+2023,observationDate,2023
+2024,observationDate,2024
+2025,observationDate,2025
+2026,observationDate,2026
+2027,observationDate,2027
+2028,observationDate,2028
+2029,observationDate,2029
+2030,observationDate,2030
+2031,observationDate,2031
+2032,observationDate,2032
+2033,observationDate,2033
+2034,observationDate,2034
+2035,observationDate,2035
+2036,observationDate,2036
+2037,observationDate,2037
+2038,observationDate,2038
+2039,observationDate,2039
+2040,observationDate,2040
