@@ -39,6 +39,8 @@ DATA_SAMPLER_PATH = REPO_ROOT / "tools" / "statvar_importer" / "data_sampler.py"
 STAT_VAR_PROCESSOR_PATH = (REPO_ROOT / "tools" / "statvar_importer" /
                            "stat_var_processor.py")
 PVMAP_GENERATOR_PATH = REPO_ROOT / "tools" / "agentic_import" / "pvmap_generator.py"
+SDMX_METADATA_EXTRACTOR_PATH = (REPO_ROOT / "tools" / "agentic_import" /
+                                "sdmx_metadata_extractor.py")
 DC_CONFIG_GENERATOR_PATH = (REPO_ROOT / "tools" / "agentic_import" /
                             "generate_custom_dc_config.py")
 
@@ -201,6 +203,61 @@ class DownloadMetadataStep(SdmxStep):
         )
 
 
+class ExtractMetadataStep(SdmxStep):
+    """Extracts SDMX metadata to JSON for downstream steps."""
+
+    VERSION = "1"
+
+    @dataclass(frozen=True)
+    class _StepContext:
+        input_path: Path
+        output_path: Path
+        full_command: list[str]
+
+    def __init__(self, *, name: str, config: PipelineConfig) -> None:
+        super().__init__(name=name, version=self.VERSION, config=config)
+        self._context: ExtractMetadataStep._StepContext | None = None
+
+    def _prepare_command(self) -> _StepContext:
+        if self._context:
+            return self._context
+        dataset_prefix = self._config.run.dataset_prefix
+        working_dir = Path(self._config.run.working_dir).resolve()
+        input_path = working_dir / f"{dataset_prefix}_metadata.xml"
+        output_path = working_dir / f"{dataset_prefix}_metadata.json"
+        args = [
+            f"--input_metadata={input_path}",
+            f"--output_path={output_path}",
+        ]
+        full_command = [sys.executable,
+                        str(SDMX_METADATA_EXTRACTOR_PATH)] + args
+        self._context = ExtractMetadataStep._StepContext(
+            input_path=input_path,
+            output_path=output_path,
+            full_command=full_command,
+        )
+        return self._context
+
+    def run(self) -> None:
+        context = self._prepare_command()
+        if not context.input_path.is_file():
+            raise RuntimeError(
+                f"Metadata XML file missing: {context.input_path}")
+        if self._config.run.verbose:
+            logging.info(
+                f"Starting SDMX metadata extraction: {' '.join(context.full_command)} -> {context.output_path}"
+            )
+        else:
+            logging.info(f"Extracting SDMX metadata to {context.output_path}")
+        _run_command(context.full_command, verbose=self._config.run.verbose)
+
+    def dry_run(self) -> None:
+        context = self._prepare_command()
+        logging.info(
+            f"{self.name} (dry run): would run {' '.join(context.full_command)}"
+        )
+
+
 class CreateSampleStep(SdmxStep):
     """Creates a sample dataset from downloaded data."""
 
@@ -277,7 +334,8 @@ class CreateSchemaMapStep(SdmxStep):
         dataset_prefix = self._config.run.dataset_prefix
         working_dir = Path(self._config.run.working_dir).resolve()
         sample_path = working_dir / f"{dataset_prefix}_sample.csv"
-        metadata_path = working_dir / f"{dataset_prefix}_metadata.xml"
+        metadata_path = self._resolve_metadata_path(
+            working_dir=working_dir, dataset_prefix=dataset_prefix)
         output_prefix = working_dir / SAMPLE_OUTPUT_DIR / dataset_prefix
 
         args = [
@@ -299,6 +357,18 @@ class CreateSchemaMapStep(SdmxStep):
             output_prefix=output_prefix,
             full_command=full_command)
         return self._context
+
+    def _resolve_metadata_path(self, *, working_dir: Path,
+                               dataset_prefix: str) -> Path:
+        extracted_path = working_dir / f"{dataset_prefix}_metadata.json"
+        xml_path = working_dir / f"{dataset_prefix}_metadata.xml"
+        if extracted_path.is_file():
+            logging.info(f"Using extracted SDMX metadata: {extracted_path}")
+            return extracted_path
+        logging.info(
+            f"Extracted SDMX metadata not found; falling back to XML: {xml_path}"
+        )
+        return xml_path
 
     def run(self) -> None:
         context = self._prepare_command()
