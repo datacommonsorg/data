@@ -1,0 +1,28 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Crdc_Credit_Recovery_Program_Enrollment",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://civilrightsdata.ed.gov/",
+            "provenance_description": "The Civil Rights Data Collection (CRDC) is a biennial survey of all public schools and school districts in the United States.",
+            "scripts": [
+                "download.py",
+                "creditprocess.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_credit/*.csv --pv_map=pvmap.csv --config_file=metadata.csv  --output_path=output/credit_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf "
+            ],
+            "source_files": [
+                "input_credit/*.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/credit_output.tmcf",
+                    "cleaned_csv": "output/credit_output.csv"
+                }
+                
+            ],
+            "cron_schedule": "0 05 * * 5"
+        }
+    ]
+}
