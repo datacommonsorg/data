@@ -1,0 +1,57 @@
+# Auto generated using command: "process_spreadsheet.py --input_sheet=https://docs.google.com/spreadsheets/d/1blUsm8wHh5VYJ1FbZCgahhIP6FHdr-LXtGBlwnBE2SI/edit?gid=1521741136#gid=1521741136 --output_path=/usr/local/google/home/shamimansari/outputfile/Brazil28052025/" on 2025-05-28 14:29:13.510129
+
+Node: dcid:Count_Household_BrazilFoodAcquisitionProgram_FarmingFamily_AcquisitionOfSeeds
+typeOf: dcid:StatisticalVariable
+description: "Number of Family Farmers Supplying the PAA Program Under the Purchase with Acquisition Of Seeds"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de Agricultores Familiares Abastecedores do Programa PAA no âmbito da Compra com Aquisição de Sementes@pt"
+benefitProgram: dcid:Brazil_FoodAcquisitionProgram
+householdType: dcid:FarmingFamily
+purchaseModality: dcid:AcquisitionOfSeeds
+
+Node: dcid:Count_Household_BrazilFoodAcquisitionProgram_FarmingFamily_DirectPurchase
+typeOf: dcid:StatisticalVariable
+description: "Number of Family Farmers Supplying the PAA Program Under the Purchase with Direct Purchase"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de Agricultores Familiares Abastecedores do Programa PAA no âmbito da Compra com Compra Direta@pt"
+benefitProgram: dcid:Brazil_FoodAcquisitionProgram
+householdType: dcid:FarmingFamily
+purchaseModality: dcid:DirectPurchase
+
+Node: dcid:Count_Household_BrazilFoodAcquisitionProgram_FarmingFamily_IncentiveForMilkProductionAndConsumption
+typeOf: dcid:StatisticalVariable
+description: "Number of Family Farmers Supplying the PAA Program Under the Purchase with Incentive For Milk Production And Consumption"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de Agricultores Familiares Abastecedores do Programa PAA no âmbito da Compra com Incentivo à Produção e Consumo de Leite@pt"
+benefitProgram: dcid:Brazil_FoodAcquisitionProgram
+householdType: dcid:FarmingFamily
+purchaseModality: dcid:IncentiveForMilkProductionAndConsumption
+
+Node: dcid:Count_Household_BrazilFoodAcquisitionProgram_FarmingFamily_PurchaseWithDonation
+typeOf: dcid:StatisticalVariable
+description: "Number of Family Farmers Supplying the PAA Program Under the Purchase with Simultaneous Donation Modality"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de Agricultores Familiares Abastecedores do Programa PAA na modalidade Compra com Doação Simultânea@pt"
+benefitProgram: dcid:Brazil_FoodAcquisitionProgram
+householdType: dcid:FarmingFamily
+purchaseModality: dcid:PurchaseWithDonation
+
+Node: dcid:Count_Household_BrazilFoodAcquisitionProgram_FarmingFamily_SupportForStockBuilding
+typeOf: dcid:StatisticalVariable
+description: "Number of Family Farmers Supplying the PAA Program Under the Purchase with Support For Stock Building"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de Agricultores Familiares Abastecendo o Programa PAA no âmbito da Compra com Apoio à Formação de Estoque@pt"
+benefitProgram: dcid:Brazil_FoodAcquisitionProgram
+householdType: dcid:FarmingFamily
+purchaseModality: dcid:SupportForStockBuilding
+
