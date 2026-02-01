@@ -1,0 +1,6 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,,
+Referência,observationDate,{Data},,,benefitProgram,Brazil_AuxilioBrasilProgram,populationType,HouseHold,observationPeriod,P1M,,
+Código,observationAbout,{Data},,,,,,,,,,
+Famílias,value,{Number},,,,,,,name,"""The total number of families benefited from the Auxílio Brasil program""",alternateName,"""Total de famílias beneficiadas pelo programa Auxílio Brasil@pt"""
+* Recursos transferidos para famílias que não estão em situação de suspensão.,value,{Number},measuredProperty,amount,unit,BRL,benefitsStatus,NotSuspended,name,"""The financial resources transferred to families who are not in a suspension situation  under the Auxílio Brasil program""",alternateName,"""Os recursos financeiros repassados ​​às famílias que não estão em situação de suspensão do programa Auxílio Brasil@pt"""
+Valor Repassado médio recebido pelas famílias do Auxílio Brasil,value,{Number},measuredProperty,amount,unit,BRL,statType,meanValue,name,"""The average amount transffered to families under auxilio brasil program""",alternateName,"""Valor médio repassado às famílias do programa Auxílio Brasil@pt"""
