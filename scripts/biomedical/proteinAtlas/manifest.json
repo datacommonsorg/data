@@ -1,0 +1,27 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "HumanProteinAtlas",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.proteinatlas.org",
+            "provenance_description": "Information about the occurrence of proteins in human cells, tissues and organs",
+            "scripts": [
+                "download.sh",
+                "generate_gene_to_uniprot_mapping.py",
+                "parse_protein_atlas.py"
+            ],
+            "source_files": [
+                "normal_tissue.tsv",
+                "proteinatlas.tsv"
+            ],
+            "import_inputs": [
+                {
+                    "node_mcf": "protein*.mcf"
+                }
+            ],
+            "cron_schedule": "30 11 1 1,4,7,10 *"
+        }
+    ]
+}
