@@ -3,17 +3,17 @@ Value,populationType,Person,measuredProperty,count,value,{Number}
 
 Males,gender,Male
 Females,gender,Female
-0-9 years,age,dcs:Years0To9
-10-19 years,age,dcs:Years10To19
-20-29 years,age,dcs:Years20To29
-30-39 years,age,dcs:Years30To39
-40-49 years,age,dcs:Years40To49
-50-59 years,age,dcs:Years50To59
-60-69 years,age,dcs:Years60To69
-70-79 years,age,dcs:Years70To79
-80-89 years,age,dcs:Years80To89
-90-99 years,age,dcs:Years90To99
-100 years or older,age,dcs:Years100Onwards
+0-9 years,age,[0 9 Years]
+10-19 years,age,[10 19 Years]
+20-29 years,age,[20 29 Years]
+30-39 years,age,[30 39 Years]
+40-49 years,age,[40 49 Years]
+50-59 years,age,[50 59 Years]
+60-69 years,age,[60 69 Years]
+70-79 years,age,[70 79 Years]
+80-89 years,age,[80 89 Years]
+90-99 years,age,[90 99 Years]
+100 years or older,age,[100 - Years]
 
 The whole country,observationAbout,country/NOR
 Oslo - Oslove,observationAbout,nuts/NO011
