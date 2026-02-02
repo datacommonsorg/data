@@ -1054,6 +1054,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
     except Exception as e:
         logging.fatal(f"Error while processing files {e}")
 
+    logging.info(f"No of files to be processed {total_files_to_process}")
     logging.info(f"No of files processed {processed_count}")
     if processed_count >= total_files_to_process & total_files_to_process > 0:
         final_df["Year"] = final_df["Year"].astype("int")
