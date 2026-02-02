@@ -1,0 +1,27 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "norway_census",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.ssb.no/en/statbank/table/07459/",
+            "provenance_description": "Population data for demographic variables such as population counts, age distributions, and other census-related metrics in Norway",
+            "scripts": [
+                "data_download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=Norway_input.csv --pv_map=Norway_pvmap.csv --config_file=Norway_metadata.csv --output_path=Norway_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "source_files": [
+                "Norway_input.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "Norway_output.tmcf",
+                    "cleaned_csv": "Norway_output.csv",
+                    "stat_var_mcf": "Norway_output_stat_vars.mcf"
+                }
+            ],
+            "cron_schedule": "0 0 1 1,4,7,10 *"
+        }
+    ]
+}
