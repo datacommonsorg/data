@@ -30,6 +30,7 @@ import time
 import urllib
 import requests
 import threading
+from typing import Union
 
 from absl import logging
 from datacommons_client.client import DataCommonsClient
@@ -356,7 +357,9 @@ def dc_api_is_defined_dcid(dcids: list, config: dict = {}) -> dict:
     return response
 
 
-def dc_api_get_node_property(dcids: list, prop: str, config: dict = {}) -> dict:
+def dc_api_get_node_property(dcids: list,
+                             prop: Union[str, list],
+                             config: dict = {}) -> dict:
     """Returns a dictionary keyed by dcid with { prop:value } for each dcid.
 
      Uses the get_property_values() DC API to lookup the property for each dcid.
@@ -370,6 +373,14 @@ def dc_api_get_node_property(dcids: list, prop: str, config: dict = {}) -> dict:
     dictionary with each input dcid mapped to a True/False value.
   """
     is_v2 = config.get('dc_api_version', 'V2') == 'V2'
+    if isinstance(prop, list):
+        if not prop:
+            raise ValueError('prop list is empty.')
+        if len(prop) == 1:
+            prop = prop[0]
+        if not is_v2:
+            raise ValueError(
+                'V1 dc_api_get_node_property supports a single property.')
     # Set parameters for V2 node API.
     client = get_datacommons_client(config)
     api_function = client.node.fetch_property_values
@@ -396,19 +407,23 @@ def dc_api_get_node_property(dcids: list, prop: str, config: dict = {}) -> dict:
             continue
 
         if is_v2:
-            values = []
             arcs = node_data.get('arcs', {})
-            prop_nodes = arcs.get(prop, {}).get('nodes', [])
-            for node in prop_nodes:
-                val_dcid = node.get('dcid')
-                if val_dcid:
-                    values.append(val_dcid)
-                value = node.get('value')
-                if value:
-                    value = '"' + value + '"'
-                    values.append(value)
-            if values:
-                response[dcid] = {prop: ','.join(values)}
+            prop_list = prop if isinstance(prop, list) else [prop]
+            for prop_name in prop_list:
+                values = []
+                prop_nodes = arcs.get(prop_name, {}).get('nodes', [])
+                for node in prop_nodes:
+                    val_dcid = node.get('dcid')
+                    if val_dcid:
+                        values.append(val_dcid)
+                    value = node.get('value')
+                    if value:
+                        value = '"' + value + '"'
+                        values.append(value)
+                if values:
+                    if dcid not in response:
+                        response[dcid] = {}
+                    response[dcid][prop_name] = ','.join(values)
         else:  # V1
             if node_data:
                 response[dcid] = {prop: node_data}

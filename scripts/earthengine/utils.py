@@ -23,10 +23,10 @@ import pickle
 import re
 import sys
 import tempfile
+from pathlib import Path
 from typing import Union
 
 from absl import logging
-import datacommons as dc
 from dateutil.relativedelta import relativedelta
 from geopy import distance
 import s2sphere
@@ -41,12 +41,12 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 from config_map import ConfigMap, read_py_dict_from_file, write_py_dict_to_file
-from dc_api_wrapper import dc_api_wrapper
+from dc_api_wrapper import dc_api_get_node_property
 
 # Constants
 _MAX_LATITUDE = 90.0
 _MAX_LONGITUDE = 180.0
-_DC_API_ROOT = 'http://autopush.api.datacommons.org'
+_DC_API_ROOT = 'http://api.datacommons.org'
 
 # Utilities for dicts.
 
@@ -366,27 +366,34 @@ def place_id_to_lat_lng(placeid: str,
             placeid)
     elif dc_api_lookup:
         # Get the lat/lng from the DC API
-        latlng = []
-        for prop in ['latitude', 'longitude']:
-            # dc.utils._API_ROOT = 'http://autopush.api.datacommons.org'
-            # resp = dc.get_property_values([placeid], prop)
-            resp = dc_api_wrapper(
-                function=dc.get_property_values,
-                args={
-                    'dcids': [placeid],
-                    'prop': prop,
-                },
-                use_cache=True,
-                api_root=_DC_API_ROOT,
-            )
-            if not resp or placeid not in resp:
-                return (0, 0)
-            values = resp[placeid]
-            if not len(values):
-                return (0, 0)
-            latlng.append(float(values[0]))
-        lat = latlng[0]
-        lng = latlng[1]
+        resp = dc_api_get_node_property(
+            [placeid],
+            ['latitude', 'longitude'],
+            {
+                'dc_api_version': 'V2',
+                'dc_api_use_cache': True,
+                'dc_api_root': _DC_API_ROOT,
+            },
+        )
+        node_props = resp.get(placeid) if resp else None
+        if not node_props:
+            return (0, 0)
+        lat_value = node_props.get('latitude')
+        lng_value = node_props.get('longitude')
+        if not lat_value or not lng_value:
+            return (0, 0)
+        if isinstance(lat_value, list):
+            lat_value = lat_value[0]
+        if isinstance(lng_value, list):
+            lng_value = lng_value[0]
+        if isinstance(lat_value, str):
+            lat_value = lat_value.split(',')[0].strip().strip('"')
+        if isinstance(lng_value, str):
+            lng_value = lng_value.split(',')[0].strip().strip('"')
+        lat = str_get_numeric_value(lat_value)
+        lng = str_get_numeric_value(lng_value)
+        if lat is None or lng is None:
+            return (0, 0)
     return (lat, lng)
 
 
