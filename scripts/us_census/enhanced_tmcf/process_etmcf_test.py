@@ -16,6 +16,8 @@
 import os
 import tempfile
 import unittest
+from unittest import mock
+from . import process_etmcf
 from .process_etmcf import *
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
@@ -32,6 +34,15 @@ def compare_files(t, output_path, expected_path):
 
 
 class Process_ETMCF_Test(unittest.TestCase):
+
+    def test_get_places_not_found_uses_v2_wrapper(self):
+        geo_ids = ['0500000US06085', '0500000US06001']
+        mock_response = {'geoId/06085': {'name': 'Santa Clara County'}}
+        with mock.patch.object(process_etmcf,
+                               'dc_api_get_node_property',
+                               return_value=mock_response):
+            got = _get_places_not_found(geo_ids)
+        self.assertEqual(got, ['0500000US06001'])
 
     def test_simple_success(self):
         self.maxDiff = None
