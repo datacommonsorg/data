@@ -23,7 +23,7 @@ To process the Norway Census data and generate statistical variables, use the fo
 
 **Download Input File**
  ```bash
- python3 statvar_imports/statistics_poland/data_download.py
+ python3 statvar_imports/norway_census/data_download.py
 ```
 **For Test Data Run**
 ```bash
