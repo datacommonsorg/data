@@ -15,6 +15,7 @@ Females,gender,Female
 90-99 years,age,dcs:Years90To99
 100 years or older,age,dcs:Years100Onwards
 
+The whole country,observationAbout,country/NOR
 Oslo - Oslove,observationAbout,nuts/NO011
 Rogaland,observationAbout,nuts/NO012
 Møre og Romsdal,observationAbout,nuts/NO031

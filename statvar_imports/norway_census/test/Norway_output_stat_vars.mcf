@@ -1,4 +1,4 @@
-# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/norway_census/test/Norway_input.csv --pv_map=statvar_imports/norway_census/Norway_pvmap.csv --output_path=statvar_imports/norway_census/test/Norway_output --config_file=statvar_imports/norway_census/Norway_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-01-30 16:18:27.430545
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/norway_census/test/Norway_input.csv --pv_map=statvar_imports/norway_census/Norway_pvmap.csv --output_path=statvar_imports/norway_census/test/Norway_output --config_file=statvar_imports/norway_census/Norway_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-02-02 13:50:23.555356
 
 Node: dcid:Count_Person_50To59Years_Male
 typeOf: dcid:StatisticalVariable

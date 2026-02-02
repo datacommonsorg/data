@@ -1,4 +1,70 @@
-Region,Sex,Age,Contents,Year,Value
+Region,Gender,Age,Contents,Year,Value
+The whole country,Females,0-9 years,Persons,2023,284377
+The whole country,Females,0-9 years,Persons,2024,282240
+The whole country,Females,0-9 years,Persons,2025,279838
+The whole country,Females,10-19 years,Persons,2023,319705
+The whole country,Females,10-19 years,Persons,2024,322413
+The whole country,Females,10-19 years,Persons,2025,323244
+The whole country,Females,20-29 years,Persons,2023,341453
+The whole country,Females,20-29 years,Persons,2024,343010
+The whole country,Females,20-29 years,Persons,2025,342796
+The whole country,Females,30-39 years,Persons,2023,374563
+The whole country,Females,30-39 years,Persons,2024,381963
+The whole country,Females,30-39 years,Persons,2025,385609
+The whole country,Females,40-49 years,Persons,2023,349948
+The whole country,Females,40-49 years,Persons,2024,352516
+The whole country,Females,40-49 years,Persons,2025,353760
+The whole country,Females,50-59 years,Persons,2023,360920
+The whole country,Females,50-59 years,Persons,2024,365108
+The whole country,Females,50-59 years,Persons,2025,367880
+The whole country,Females,60-69 years,Persons,2023,301619
+The whole country,Females,60-69 years,Persons,2024,306306
+The whole country,Females,60-69 years,Persons,2025,311161
+The whole country,Females,70-79 years,Persons,2023,244794
+The whole country,Females,70-79 years,Persons,2024,250350
+The whole country,Females,70-79 years,Persons,2025,253654
+The whole country,Females,80-89 years,Persons,2023,114511
+The whole country,Females,80-89 years,Persons,2024,119253
+The whole country,Females,80-89 years,Persons,2025,126155
+The whole country,Females,90-99 years,Persons,2023,30584
+The whole country,Females,90-99 years,Persons,2024,30299
+The whole country,Females,90-99 years,Persons,2025,29958
+The whole country,Females,100 years or older,Persons,2023,1040
+The whole country,Females,100 years or older,Persons,2024,1027
+The whole country,Females,100 years or older,Persons,2025,1088
+The whole country,Males,0-9 years,Persons,2023,300016
+The whole country,Males,0-9 years,Persons,2024,298310
+The whole country,Males,0-9 years,Persons,2025,295936
+The whole country,Males,10-19 years,Persons,2023,337329
+The whole country,Males,10-19 years,Persons,2024,341319
+The whole country,Males,10-19 years,Persons,2025,343782
+The whole country,Males,20-29 years,Persons,2023,360711
+The whole country,Males,20-29 years,Persons,2024,361114
+The whole country,Males,20-29 years,Persons,2025,360803
+The whole country,Males,30-39 years,Persons,2023,390755
+The whole country,Males,30-39 years,Persons,2024,397530
+The whole country,Males,30-39 years,Persons,2025,402138
+The whole country,Males,40-49 years,Persons,2023,365881
+The whole country,Males,40-49 years,Persons,2024,367639
+The whole country,Males,40-49 years,Persons,2025,368833
+The whole country,Males,50-59 years,Persons,2023,375771
+The whole country,Males,50-59 years,Persons,2024,379796
+The whole country,Males,50-59 years,Persons,2025,381562
+The whole country,Males,60-69 years,Persons,2023,303141
+The whole country,Males,60-69 years,Persons,2024,307864
+The whole country,Males,60-69 years,Persons,2025,313795
+The whole country,Males,70-79 years,Persons,2023,231641
+The whole country,Males,70-79 years,Persons,2024,236240
+The whole country,Males,70-79 years,Persons,2025,239012
+The whole country,Males,80-89 years,Persons,2023,85866
+The whole country,Males,80-89 years,Persons,2024,91498
+The whole country,Males,80-89 years,Persons,2025,98798
+The whole country,Males,90-99 years,Persons,2023,14124
+The whole country,Males,90-99 years,Persons,2024,14173
+The whole country,Males,90-99 years,Persons,2025,14295
+The whole country,Males,100 years or older,Persons,2023,235
+The whole country,Males,100 years or older,Persons,2024,235
+The whole country,Males,100 years or older,Persons,2025,243
 Østfold,Females,0-9 years,Persons,2023,15040
 Østfold,Females,0-9 years,Persons,2024,14965
 Østfold,Females,0-9 years,Persons,2025,14870
