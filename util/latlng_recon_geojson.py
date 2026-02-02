@@ -32,6 +32,10 @@ _WORLD = 'Earth'
 _USA = 'country/USA'
 _MAX_RETRIES = 3
 _RETRY_DELAY = 15
+_DC_API_CONFIG = {
+    'dc_api_retries': _MAX_RETRIES,
+    'dc_api_retry_secs': _RETRY_DELAY,
+}
 
 _GJ_PROP = {
     'Country': 'geoJsonCoordinatesDP2',
@@ -41,12 +45,12 @@ _GJ_PROP = {
 }
 
 
+def _get_dc_client():
+    return get_datacommons_client(_DC_API_CONFIG)
+
+
 def _get_geojsons(place_type, parent_place):
-    config = {
-        'dc_api_retries': _MAX_RETRIES,
-        'dc_api_retry_secs': _RETRY_DELAY,
-    }
-    client = get_datacommons_client(config)
+    client = _get_dc_client()
     places_response = dc_api_wrapper(
         function=client.node.fetch_place_children,
         args={
@@ -68,7 +72,7 @@ def _get_geojsons(place_type, parent_place):
                                   dcids=places,
                                   args={'properties': _GJ_PROP[place_type]},
                                   dcid_arg_kw='node_dcids',
-                                  config=config)
+                                  config=_DC_API_CONFIG)
     geojsons = {}
     for place in places:
         nodes = (resp.get(place, {}).get('arcs',
@@ -84,16 +88,12 @@ def _get_geojsons(place_type, parent_place):
 
 
 def _get_continent_map(countries):
-    config = {
-        'dc_api_retries': _MAX_RETRIES,
-        'dc_api_retry_secs': _RETRY_DELAY,
-    }
-    client = get_datacommons_client(config)
+    client = _get_dc_client()
     resp = dc_api_batched_wrapper(function=client.node.fetch_property_values,
                                   dcids=countries,
                                   args={'properties': 'containedInPlace'},
                                   dcid_arg_kw='node_dcids',
-                                  config=config)
+                                  config=_DC_API_CONFIG)
     continent_map = {}
     for country in countries:
         nodes = (resp.get(country, {}).get('arcs',
