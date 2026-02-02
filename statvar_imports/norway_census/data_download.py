@@ -17,7 +17,6 @@ EXCLUDE_REGIONS = ["Svalbard", "Jan Mayen", "Continental shelf", "Unknown region
 
 def get_query(region_code, codelist=None):
     """Generates the body for the SSB API request."""
-    # FUTURE PROOFING: Changed specific years to "*" to get all available years
     selection = [
         {"variableCode": "ContentsCode", "valueCodes": ["*"]},
         {"variableCode": "Tid", "valueCodes": ["*"]}, 
@@ -31,7 +30,7 @@ def get_query(region_code, codelist=None):
     return {"selection": selection, "response": {"format": "json-stat2"}}
 
 def fetch_norway_data():
-    logging.info("Starting combined data fetch (National + Regional)...")
+    logging.info("Starting combined data fetch (National + Regional) for all years...")
     
     try:
         # 1. Fetch National Data (Code 0)
@@ -49,8 +48,9 @@ def fetch_norway_data():
         # 3. Combine DataFrames
         df = pd.concat([df_nat, df_reg], ignore_index=True)
 
-        # 4. Standardize Columns safely
-        # SSB lowercase names are: region, contents, tid, alder, kjonn, value
+        # 4. Robust Column Mapping (Case-Insensitive)
+        # This converts all column names to lowercase first to ensure the map finds them
+        df.columns = [c.lower() for c in df.columns]
         rename_map = {
             'region': 'Region',
             'contents': 'Contents',
@@ -62,20 +62,22 @@ def fetch_norway_data():
         df.rename(columns=rename_map, inplace=True)
         
         # 5. Filter Regions
-        df = df[~df['Region'].isin(EXCLUDE_REGIONS)]
-        df = df[~df['Region'].str.contains('shelf|Unknown|Svalbard', case=False, na=False)]
+        if 'Region' in df.columns:
+            df = df[~df['Region'].isin(EXCLUDE_REGIONS)]
+            df = df[~df['Region'].str.contains('shelf|Unknown|Svalbard', case=False, na=False)]
 
-        # 6. Year Cleaning and Future Filtering
-        # This keeps the script working for 2026, 2027, etc.
+        # 6. Year Cleaning (No date filter applied)
         if 'Year' in df.columns:
-            df['Year'] = df['Year'].astype(str).str.extract('(\d{4})')[0].astype(int)
-            # Filter to keep data from 2023 onwards (includes future years)
-            df = df[df['Year'] >= 2023]
+            df['Year'] = df['Year'].astype(str).str.extract('(\d{4})')[0]
         
         # 7. Save result
         df.to_csv(OUTPUT_FILE, index=False, encoding='utf-8')
         
         logging.info(f"SUCCESS: Combined data ({len(df)} rows) saved to {OUTPUT_FILE}")
+        
+        # Final safety check before logging year range
+        if 'Year' in df.columns and not df['Year'].isnull().all():
+            logging.info(f"Year range in file: {df['Year'].min()} to {df['Year'].max()}")
 
     except Exception as e:
         logging.error(f"An error occurred: {e}")
