@@ -16,7 +16,7 @@ type of place: AdministrativeArea1.
 
 statvars: Demographics
 
-years: 1986 to 2040.
+years: 1986 to 2025.
 
 ## Processing Instructions
 To process the Norway Census data and generate statistical variables, use the following command from the "data" directory:
