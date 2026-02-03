@@ -1142,7 +1142,15 @@ def download_files():
                 with open(os.path.join(_INPUT_FILE_PATH, file_name_to_save),
                           'wb') as f:
                     f.write(response.content)
-                    file_to_dowload['is_downloaded'] = True
+                file_to_dowload['is_downloaded'] = True
+            else:
+                logging.error(
+                    f"Failed to download {url} with status code {response.status_code}"
+                )
+                file_to_dowload['is_downloaded'] = False
+        for file_to_dowload in _FILES_TO_DOWNLOAD:
+            if not file_to_dowload['is_downloaded']:
+                raise Exception("Failed to download all files.")
 
     except Exception as e:
         logging.fatal(f"Error occurred in download method {e}")
@@ -1161,7 +1169,11 @@ def main(_):
 
     if mode == "" or mode == "download":
         add_future_year_urls()
-        download_files()
+        try:
+            download_files()
+        except Exception as e:
+            logging.fatal(f"Download failed: {e}")
+            sys.exit(1)
     if mode == "" or mode == "process":
         process(_INPUT_FILE_PATH, cleaned_csv_path, mcf_path, tmcf_path,
                 is_summary_levels)
