@@ -17,6 +17,7 @@ import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -25,6 +26,7 @@ import dc_api_wrapper as dc_api
 import datacommons as dc
 
 from absl import logging
+from datacommons_client.utils.error_handling import DCConnectionError
 
 
 class TestDCAPIWrapper(unittest.TestCase):
@@ -78,6 +80,28 @@ class TestDCAPIWrapper(unittest.TestCase):
         # API wrapper preserves the namespace if any although DC API call is
         # without namespace prefix.
         self.assertTrue(response['dcs:value'])
+
+    def test_dc_api_wrapper_attempts_no_extra_retries(self):
+        """Test wrapper doesn't retry beyond the max attempts."""
+        api_function = mock.Mock(side_effect=DCConnectionError('boom'))
+        with self.assertRaises(DCConnectionError):
+            dc_api.dc_api_wrapper(api_function, {},
+                                  retries=2,
+                                  retry_secs=0,
+                                  use_cache=False)
+        self.assertEqual(api_function.call_count, 2)
+
+    def test_dc_api_wrapper_stops_after_success(self):
+        """Test wrapper stops retrying after a successful response."""
+        expected_response = {'ok': True}
+        api_function = mock.Mock(
+            side_effect=[DCConnectionError('boom'), expected_response])
+        response = dc_api.dc_api_wrapper(api_function, {},
+                                         retries=3,
+                                         retry_secs=0,
+                                         use_cache=False)
+        self.assertEqual(response, expected_response)
+        self.assertEqual(api_function.call_count, 2)
 
     def test_dc_get_node_property_values(self):
         """Test API wrapper to get all property:values for a node."""
