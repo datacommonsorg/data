@@ -101,9 +101,8 @@ def dc_api_wrapper(
     with cache_context:
         for attempt in range(1, max_attempts + 1):
             try:
-                logging.debug(
-                    f'Invoking DC API {function}, attempt {attempt}/'
-                    f'{max_attempts} with {args}')
+                logging.debug(f'Invoking DC API {function}, attempt {attempt}/'
+                              f'{max_attempts} with {args}')
 
                 response = None
                 if api_root:
