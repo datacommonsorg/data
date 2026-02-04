@@ -75,7 +75,7 @@ def dc_api_wrapper(
     function: The DataCommons API function.
     args: dictionary with any the keyword arguments for the DataCommons API
       function.
-    retries: Number of retries in case of HTTP errors.
+    retries: Maximum number of attempts (including the first attempt).
     retry_sec: Interval in seconds between retries for which caller is blocked.
     use_cache: If True, uses request cache for faster response.
     api_root: The API server to use. Default is 'http://api.datacommons.org'. To
@@ -85,8 +85,9 @@ def dc_api_wrapper(
   Returns:
     The response from the DataCommons API call.
   """
-    if not retries or retries <= 0:
-        retries = 1
+    max_attempts = retries
+    if not max_attempts or max_attempts <= 0:
+        max_attempts = 1
     # Setup request cache
     if not requests_cache.is_installed():
         requests_cache.install_cache(expires_after=3600)
@@ -98,11 +99,11 @@ def dc_api_wrapper(
         cache_context = requests_cache.disabled()
         logging.debug(f'Using requests_cache for DC API {function}')
     with cache_context:
-        for attempt in range(retries):
+        for attempt in range(1, max_attempts + 1):
             try:
                 logging.debug(
-                    f'Invoking DC API {function}, #{attempt} with {args},'
-                    f' retries={retries}')
+                    f'Invoking DC API {function}, attempt {attempt}/'
+                    f'{max_attempts} with {args}')
 
                 response = None
                 if api_root:
@@ -132,7 +133,7 @@ def dc_api_wrapper(
             except (DCConnectionError, requests.exceptions.Timeout,
                     requests.exceptions.ChunkedEncodingError) as e:
                 # Retry network errors
-                if _should_retry_status_code(None, attempt, retries):
+                if _should_retry_status_code(None, attempt, max_attempts):
                     logging.debug(
                         f'Got exception {e}, retrying API {function} after'
                         f' {retry_secs}...')
@@ -146,7 +147,8 @@ def dc_api_wrapper(
                 # Retry 5xx and 429, but not other 4xx
                 status_code = getattr(e, 'code', None) or getattr(
                     e, 'status_code', None)
-                if _should_retry_status_code(status_code, attempt, retries):
+                if _should_retry_status_code(status_code, attempt,
+                                             max_attempts):
                     logging.debug(
                         f'Got exception {e}, retrying API {function} after'
                         f' {retry_secs}...')
@@ -170,7 +172,8 @@ def _should_retry_status_code(status_code: int, attempt: int,
             return False
     if attempt >= max_retries:
         logging.error(
-            f'Got status: {status_code} after {attempt} retries, not retrying.')
+            f'Got status: {status_code} after {attempt} attempts, not retrying.'
+        )
         return False
     return True
 
