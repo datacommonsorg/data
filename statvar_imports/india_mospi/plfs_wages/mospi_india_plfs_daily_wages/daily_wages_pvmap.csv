@@ -13,10 +13,10 @@ person,gender,"""""",,,,,,
 rural + urban,placeOfResidenceClassification,"""""",,,,,,
 rural,placeOfResidenceClassification,Rural,,,,,,
 urban,placeOfResidenceClassification,Urban,,,,,,
-APR-JUN,Month,5,observationPeriod,P3M,,,,
-OCT-DEC,Month,11,observationPeriod,P3M,,,,
-JUL-SEP,Month,8,observationPeriod,P3M,,,,
-JAN-MAR,Month,2,observationPeriod,P3M,,,,
-value,observationDate,{Year}-{Month},value,{Number},,,,
+APR-JUN,Month1,5,observationPeriod,P3M,#Eval,Year1=int(Year)-1,observationDate,{Year1}-{Month1}
+OCT-DEC,Month2,11,observationPeriod,P3M,#Eval,Year1=int(Year)-1,observationDate,{Year1}-{Month2}
+JUL-SEP,Month3,8,observationPeriod,P3M,#Eval,Year1=int(Year)-1,observationDate,{Year1}-{Month3}
+JAN-MAR,Month4,2,observationPeriod,P3M,observationDate,{Year}-{Month4},,
+value,value,{Number},,,,,,
 unit,unit,INR,,,,,,
 state,observationAbout,{Data},,,,,,
