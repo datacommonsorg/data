@@ -13,7 +13,7 @@ key,prop,val,,,,,,,,,,,,,,
 2022-23,observationDate,2023,value,{Number},,,,,,,,,,,,
 2023-24,observationDate,2024,value,{Number},,,,,,,,,,,,
 2024-25,observationDate,2025,value,{Number},,,,,,,,,,,,
-GSDP - CONSTANT PRICES (` in Crore),unit,INR,measuredProperty,amount,populationType,EconomicActivity,activitySource,GrossDomesticProduction,measurementQualifier,Nominal,measurementMethod,CurrentPrice_WithBaseYear2011_12,observationPeriod,P1Y,#Multiply,10000000
+GSDP - CURRENT PRICES (` in Crore),unit,INR,measuredProperty,amount,populationType,EconomicActivity,activitySource,GrossDomesticProduction,measurementQualifier,Nominal,measurementMethod,CurrentPrice_WithBaseYear2011_12,observationPeriod,P1Y,#Multiply,10000000
 (% Growth over previous year),unit,Percent,measuredProperty,amount,populationType,EconomicActivity,activitySource,GrossDomesticProduction,measurementQualifier,Nominal,measurementMethod,CurrentPrice_WithBaseYear2011_12,observationPeriod,P1Y,statType,growthRate
 Andhra Pradesh ,observationAbout,wikidataId/Q1159,,,,,,,,,,,,,,
 Arunachal Pradesh,observationAbout,wikidataId/Q1162,,,,,,,,,,,,,,
