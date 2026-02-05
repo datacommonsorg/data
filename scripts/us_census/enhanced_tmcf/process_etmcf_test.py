@@ -14,9 +14,16 @@
 """Tests for process_etmcf.py"""
 
 import os
+import sys
 import tempfile
 import unittest
-from .process_etmcf import *
+from pathlib import Path
+from unittest import mock
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+
+from scripts.us_census.enhanced_tmcf import process_etmcf
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _INPUT_DIR = os.path.join(_CODEDIR, 'testdata', 'input')
@@ -33,6 +40,15 @@ def compare_files(t, output_path, expected_path):
 
 class Process_ETMCF_Test(unittest.TestCase):
 
+    def test_get_places_not_found_uses_v2_wrapper(self):
+        geo_ids = ['0500000US06085', '0500000US06001']
+        mock_response = {'geoId/06085': {'name': 'Santa Clara County'}}
+        with mock.patch.object(process_etmcf,
+                               'dc_api_get_node_property',
+                               return_value=mock_response):
+            got = process_etmcf._get_places_not_found(geo_ids)
+        self.assertEqual(got, ['0500000US06001'])
+
     def test_simple_success(self):
         self.maxDiff = None
         input_etmcf = 'simple'
@@ -41,8 +57,17 @@ class Process_ETMCF_Test(unittest.TestCase):
         output_tmcf = "simple_processed"
         output_csv = "simple_processed"
         with tempfile.TemporaryDirectory() as tmp_dir:
-            process_enhanced_tmcf(_INPUT_DIR, tmp_dir, input_etmcf, input_csv,
-                                  output_tmcf, output_csv)
+            with mock.patch.object(
+                    process_etmcf,
+                    'dc_api_get_node_property',
+                    side_effect=lambda dcids, prop:
+                {dcid: {
+                    'name': 'name'
+                } for dcid in dcids},
+            ):
+                process_etmcf.process_enhanced_tmcf(_INPUT_DIR, tmp_dir,
+                                                    input_etmcf, input_csv,
+                                                    output_tmcf, output_csv)
             for fname in [output_tmcf + ".tmcf", output_csv + ".csv"]:
                 output_path = os.path.join(tmp_dir, fname)
                 expected_path = os.path.join(_EXPECTED_DIR, fname)
@@ -56,8 +81,17 @@ class Process_ETMCF_Test(unittest.TestCase):
         output_tmcf = "simple_opaque_processed"
         output_csv = "simple_opaque_processed"
         with tempfile.TemporaryDirectory() as tmp_dir:
-            process_enhanced_tmcf(_INPUT_DIR, tmp_dir, input_etmcf, input_csv,
-                                  output_tmcf, output_csv)
+            with mock.patch.object(
+                    process_etmcf,
+                    'dc_api_get_node_property',
+                    side_effect=lambda dcids, prop:
+                {dcid: {
+                    'name': 'name'
+                } for dcid in dcids},
+            ):
+                process_etmcf.process_enhanced_tmcf(_INPUT_DIR, tmp_dir,
+                                                    input_etmcf, input_csv,
+                                                    output_tmcf, output_csv)
             for fname in [output_tmcf + ".tmcf", output_csv + ".csv"]:
                 output_path = os.path.join(tmp_dir, fname)
                 expected_path = os.path.join(_EXPECTED_DIR, fname)
@@ -71,8 +105,17 @@ class Process_ETMCF_Test(unittest.TestCase):
         output_tmcf = "ECNBASIC2012.EC1200A1_processed"
         output_csv = "ECNBASIC2012.EC1200A1_processed"
         with tempfile.TemporaryDirectory() as tmp_dir:
-            process_enhanced_tmcf(_INPUT_DIR, tmp_dir, input_etmcf, input_csv,
-                                  output_tmcf, output_csv)
+            with mock.patch.object(
+                    process_etmcf,
+                    'dc_api_get_node_property',
+                    side_effect=lambda dcids, prop:
+                {dcid: {
+                    'name': 'name'
+                } for dcid in dcids},
+            ):
+                process_etmcf.process_enhanced_tmcf(_INPUT_DIR, tmp_dir,
+                                                    input_etmcf, input_csv,
+                                                    output_tmcf, output_csv)
             for fname in [output_tmcf + ".tmcf", output_csv + ".csv"]:
                 output_path = os.path.join(tmp_dir, fname)
                 expected_path = os.path.join(_EXPECTED_DIR, fname)
@@ -87,8 +130,9 @@ class Process_ETMCF_Test(unittest.TestCase):
         output_csv = "no_output"
         with tempfile.TemporaryDirectory() as tmp_dir:
             with self.assertRaises(Exception):
-                process_enhanced_tmcf(_INPUT_DIR, tmp_dir, input_etmcf,
-                                      input_csv, output_tmcf, output_csv)
+                process_etmcf.process_enhanced_tmcf(_INPUT_DIR, tmp_dir,
+                                                    input_etmcf, input_csv,
+                                                    output_tmcf, output_csv)
 
     def test_csv_file_not_found_exception(self):
         self.maxDiff = None
@@ -99,8 +143,9 @@ class Process_ETMCF_Test(unittest.TestCase):
         output_csv = "no_output"
         with tempfile.TemporaryDirectory() as tmp_dir:
             with self.assertRaises(Exception):
-                process_enhanced_tmcf(_INPUT_DIR, tmp_dir, input_etmcf,
-                                      input_csv, output_tmcf, output_csv)
+                process_etmcf.process_enhanced_tmcf(_INPUT_DIR, tmp_dir,
+                                                    input_etmcf, input_csv,
+                                                    output_tmcf, output_csv)
 
     def test_bad_tmcf_variable_measured_two_question_marks_exception(self):
         self.maxDiff = None
@@ -113,8 +158,9 @@ class Process_ETMCF_Test(unittest.TestCase):
             with self.assertRaisesRegex(
                     Exception,
                     "Exactly one '\?' expected in variableMeasured*"):
-                process_enhanced_tmcf(_INPUT_DIR, tmp_dir, input_etmcf,
-                                      input_csv, output_tmcf, output_csv)
+                process_etmcf.process_enhanced_tmcf(_INPUT_DIR, tmp_dir,
+                                                    input_etmcf, input_csv,
+                                                    output_tmcf, output_csv)
 
     def test_bad_tmcf_variable_measured_two_equals_exception(self):
         self.maxDiff = None
@@ -127,8 +173,9 @@ class Process_ETMCF_Test(unittest.TestCase):
             with self.assertRaisesRegex(
                     Exception,
                     "Exactly one '=' expected in the key/val opaque mapping*"):
-                process_enhanced_tmcf(_INPUT_DIR, tmp_dir, input_etmcf,
-                                      input_csv, output_tmcf, output_csv)
+                process_etmcf.process_enhanced_tmcf(_INPUT_DIR, tmp_dir,
+                                                    input_etmcf, input_csv,
+                                                    output_tmcf, output_csv)
 
 
 if __name__ == '__main__':

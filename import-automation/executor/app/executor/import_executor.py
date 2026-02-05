@@ -501,7 +501,7 @@ class ImportExecutor:
                     f'Error reading report.json {report_json} file: {e}')
             if os.path.exists(output_path):
                 # Upload output to GCS.
-                gcs_output = f'{relative_import_dir}/{import_spec["import_name"]}/{version}/{import_prefix}/validation'
+                gcs_output = f'{relative_import_dir}/{import_spec["import_name"]}/{version}/{import_prefix}/genmcf'
                 logging.info(
                     f'Uploading genmcf output to GCS path: {gcs_output}')
                 for filename in os.listdir(output_path):
@@ -587,7 +587,10 @@ class ImportExecutor:
                                                   import_prefix, 'validation')
             os.makedirs(validation_output_path, exist_ok=True)
             current_data_path = os.path.join(genmcf_output_path, '*.mcf')
-            previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
+            previous_data_path = latest_version + f'/{import_prefix}/genmcf/*.mcf'
+            if latest_version and not file_util.file_get_matching(
+                    previous_data_path):
+                previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
             summary_stats = os.path.join(genmcf_output_path,
                                          'summary_report.csv')
             report_json = os.path.join(genmcf_output_path, 'report.json')
@@ -623,7 +626,7 @@ class ImportExecutor:
                         "previous_version": latest_version,
                         "current_version": version
                     })
-                differ_output_file = differ_output
+                differ_output_file = validation_output_path
                 # Save the previous version being compared to
                 with open(
                         os.path.join(validation_output_path,

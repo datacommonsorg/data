@@ -102,6 +102,19 @@ class TestDCAPIWrapper(unittest.TestCase):
         self.assertEqual(response_v2['Count_Person'],
                          {'name': '"Total population"'})
 
+    def test_dc_api_get_node_property_multi_v2(self):
+        """Test API wrapper to get multiple properties for a node."""
+        dcids = ['Count_Person']
+        props = ['populationType', 'measuredProperty', 'typeOf']
+        response_v2 = dc_api.dc_api_get_node_property(dcids, props,
+                                                      {'dc_api_version': 'V2'})
+        self.assertTrue(response_v2)
+        self.assertIn('Count_Person', response_v2)
+        statvar_pvs = response_v2['Count_Person']
+        self.assertTrue(statvar_pvs.get('populationType'))
+        self.assertTrue(statvar_pvs.get('measuredProperty'))
+        self.assertIn('StatisticalVariable', statvar_pvs.get('typeOf', ''))
+
     def test_dc_api_resolve_placeid(self):
         """Test API wrapper to resolve entity using a placeid."""
         placeids = ['ChIJT3IGqvxznW4Rqgw7pv9zYz8']
