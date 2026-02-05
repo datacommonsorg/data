@@ -17,6 +17,7 @@ See latlng_recon_geojson_test.py for usage example.
 """
 
 import json
+import logging
 from pathlib import Path
 from shapely import geometry
 import sys
@@ -62,6 +63,17 @@ def _get_geojsons(place_type, parent_place):
         retry_secs=_RETRY_DELAY,
     )
     if not places_response or parent_place not in places_response:
+        response_keys = None
+        if isinstance(places_response, dict):
+            response_keys = sorted(places_response.keys())
+        logging.error(
+            'Failed to fetch place children. place_type=%s parent_place=%s '
+            'response_type=%s response_keys=%s',
+            place_type,
+            parent_place,
+            type(places_response).__name__,
+            response_keys,
+        )
         raise RuntimeError
     places = [
         node.get('dcid')

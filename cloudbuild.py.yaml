@@ -15,6 +15,8 @@ steps:
   entrypoint: /bin/sh
   waitFor:
   - python_install
+  secretEnv:
+    - DC_API_KEY
   args:
     - -c
     - |
@@ -41,3 +43,8 @@ steps:
 #  - python_install
 
 # TODO(rsned): Add any other useful code health tools.
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/datcom-ci/secrets/dc-api-key/versions/latest
+      env: DC_API_KEY
