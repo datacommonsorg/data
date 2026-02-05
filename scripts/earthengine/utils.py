@@ -378,18 +378,16 @@ def place_id_to_lat_lng(placeid: str,
         node_props = resp.get(placeid) if resp else None
         if not node_props:
             return (0, 0)
-        lat_value = node_props.get('latitude')
-        lng_value = node_props.get('longitude')
-        if not lat_value or not lng_value:
-            return (0, 0)
-        coords = []
-        for v in [lat_value, lng_value]:
-            if isinstance(v, list):
-                v = v[0]
-            if isinstance(v, str):
-                v = v.split(',')[0].strip().strip('"')
-            coords.append(str_get_numeric_value(v))
-        lat, lng = coords
+        def _parse_coordinate(val):
+            if isinstance(val, list):
+                val = val[0] if val else None
+            if isinstance(val, str):
+                val = val.split(',')[0].strip().strip('"')
+            return str_get_numeric_value(val)
+
+        lat = _parse_coordinate(node_props.get('latitude'))
+        lng = _parse_coordinate(node_props.get('longitude'))
+
         if lat is None or lng is None:
             return (0, 0)
     return (lat, lng)
