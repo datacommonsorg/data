@@ -381,19 +381,21 @@ def dc_api_get_node_property(dcids: list,
         if not is_v2:
             raise ValueError(
                 'V1 dc_api_get_node_property supports a single property.')
+    if is_v2:
+        return _dc_api_get_node_property_v2(dcids=dcids,
+                                            prop=prop,
+                                            config=config)
+    return _dc_api_get_node_property_v1(dcids=dcids, prop=prop, config=config)
+
+
+def _dc_api_get_node_property_v2(dcids: list,
+                                 prop: Union[str, list],
+                                 config: dict = {}) -> dict:
     # Set parameters for V2 node API.
     client = get_datacommons_client(config)
     api_function = client.node.fetch_property_values
     args = {'properties': prop}
     dcid_arg_kw = 'node_dcids'
-    if not is_v2:
-        # Set parameters for V1 API.
-        api_function = dc.get_property_values
-        args = {
-            'prop': prop,
-            'out': True,
-        }
-        dcid_arg_kw = 'dcids'
     api_result = dc_api_batched_wrapper(function=api_function,
                                         dcids=dcids,
                                         args=args,
@@ -406,27 +408,47 @@ def dc_api_get_node_property(dcids: list,
         if not node_data:
             continue
 
-        if is_v2:
-            arcs = node_data.get('arcs', {})
-            prop_list = prop if isinstance(prop, list) else [prop]
-            for prop_name in prop_list:
-                values = []
-                prop_nodes = arcs.get(prop_name, {}).get('nodes', [])
-                for node in prop_nodes:
-                    val_dcid = node.get('dcid')
-                    if val_dcid:
-                        values.append(val_dcid)
-                    value = node.get('value')
-                    if value:
-                        value = '"' + value + '"'
-                        values.append(value)
-                if values:
-                    if dcid not in response:
-                        response[dcid] = {}
-                    response[dcid][prop_name] = ','.join(values)
-        else:  # V1
-            if node_data:
-                response[dcid] = {prop: node_data}
+        arcs = node_data.get('arcs', {})
+        prop_list = prop if isinstance(prop, list) else [prop]
+        for prop_name in prop_list:
+            values = []
+            prop_nodes = arcs.get(prop_name, {}).get('nodes', [])
+            for node in prop_nodes:
+                val_dcid = node.get('dcid')
+                if val_dcid:
+                    values.append(val_dcid)
+                value = node.get('value')
+                if value:
+                    value = '"' + value + '"'
+                    values.append(value)
+            if values:
+                if dcid not in response:
+                    response[dcid] = {}
+                response[dcid][prop_name] = ','.join(values)
+    return response
+
+
+def _dc_api_get_node_property_v1(dcids: list,
+                                 prop: str,
+                                 config: dict = {}) -> dict:
+    # Set parameters for V1 API.
+    api_function = dc.get_property_values
+    args = {
+        'prop': prop,
+        'out': True,
+    }
+    dcid_arg_kw = 'dcids'
+    api_result = dc_api_batched_wrapper(function=api_function,
+                                        dcids=dcids,
+                                        args=args,
+                                        dcid_arg_kw=dcid_arg_kw,
+                                        config=config)
+    response = {}
+    for dcid in dcids:
+        dcid_stripped = _strip_namespace(dcid)
+        node_data = api_result.get(dcid_stripped)
+        if node_data:
+            response[dcid] = {prop: node_data}
     return response
 
 
