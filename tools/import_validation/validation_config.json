@@ -2,9 +2,9 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_deleted_records_count",
-            "description": "Checks that the number of deleted points is within the threshold.",
-            "validator": "DELETED_RECORDS_COUNT",
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted points is within the threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
             "params": {
                 "threshold": 0
             }
