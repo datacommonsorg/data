@@ -26,7 +26,7 @@ To download the data, you'll need to use the provided source link. The source li
 - The downloaded data is now avaialble for processing.
 
 ## Processing Instructions
-To process the Poland Census data and generate statistical variables, use the following command from the "data" directory:
+To process the IPEDS Graduation Rate data and generate statistical variables, use the following command from the "data" directory:
 
 **For Data Run**
 ```bash
