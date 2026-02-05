@@ -52,6 +52,16 @@ def get_dcid(sp_scale, lat, lon):
 def get_county_geoid(lat, lon):
     config = {'dc_api_use_cache': True}
     client = get_datacommons_client(config)
+
+    def extract_geojson(node_data, prop_name):
+        nodes = node_data.get('arcs', {}).get(prop_name, {}).get('nodes', [])
+        if not nodes:
+            return None
+        first_node = nodes[0]
+        if isinstance(first_node, dict):
+            return first_node.get('value')
+        return first_node.value
+
     counties_result = client.node.fetch_place_children(
         place_dcids=['country/USA'],
         children_type='County',
@@ -73,13 +83,7 @@ def get_county_geoid(lat, lon):
     counties_missing_dp1 = []
     for county in counties:
         node_data = counties_simp.get(county, {})
-        nodes = node_data.get('arcs', {}).get('geoJsonCoordinatesDP1',
-                                              {}).get('nodes', [])
-        geojson = None
-        if nodes:
-            first_node = nodes[0]
-            geojson = first_node.get('value') if isinstance(
-                first_node, dict) else first_node.value
+        geojson = extract_geojson(node_data, 'geoJsonCoordinatesDP1')
         if not geojson:
             counties_missing_dp1.append(county)
             continue
@@ -96,13 +100,7 @@ def get_county_geoid(lat, lon):
         )
     for county in counties_missing_dp1:
         node_data = fallback.get(county, {})
-        nodes = node_data.get('arcs', {}).get('geoJsonCoordinates',
-                                              {}).get('nodes', [])
-        geojson = None
-        if nodes:
-            first_node = nodes[0]
-            geojson = first_node.get('value') if isinstance(
-                first_node, dict) else first_node.value
+        geojson = extract_geojson(node_data, 'geoJsonCoordinates')
         if not geojson:  # property not defined for one county in alaska
             continue
         if geometry.shape(json.loads(geojson)).contains(point):
