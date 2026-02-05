@@ -23,3 +23,10 @@ typeOf: dcs:MeasurementMethodEnum
 name: "CourseCompletedWithin200PercentOfNormalTime"
 description: "Education course within 200% of the normal time."
 
+Node: dcid:graduationRate
+typeOf: schema:Property
+domainIncludes: dcs:Person
+name: "graduationRate"
+description: "graduation rates measure the percentage of students completing programs within specific timeframes."
+
+
