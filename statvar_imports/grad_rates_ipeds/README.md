@@ -16,6 +16,15 @@ https://nces.ed.gov/ipeds/search/
 **Provenance Description:**
 The data comes from U.S. Department of Education, National Center for Education Statistics (NCES). Specifically, the data is drawn from the Integrated Postsecondary Education Data System (IPEDS), which is a comprehensive system of interrelated surveys that gathers institutional-level data from colleges, universities, and technical/vocational schools across the United States.
 
+## Refresh Type
+Semi-Automatic Refresh
+
+For refresh of the data, the import is set up for semi automation with a manual download step to download the data into a gcs path.
+
+##Data Publish Frequency
+Release Frequency = Annual
+Provisional data is released during the early fall (Sep-Oct).
+
 ## How To Download Input Data
 To download the data, you'll need to use the provided source link. The source link leads to the IPEDS Data Explorer, which is a search tool provided by NCES. Here you need to filter the Graduation Rates as:
 - Go to the source link which leads to data explorer
@@ -24,17 +33,19 @@ To download the data, you'll need to use the provided source link. The source li
 - To fetch data for specific years, or all years, select the data year/years from the 'Data Year' dropdown
 - Once the table opens, from the page header, select the 'Excel' option, which downloads the data in the .xlsx format
 - The downloaded data is now avaialble for processing.
+- Move the data to the path: **gs://unresolved_mcf/IPEDS/graduation_rates_national/input_files/**
+- Process the data using the stat_var_processor script and the GCS bucket path for input as shown in below section.
 
 ## Processing Instructions
 To process the IPEDS Graduation Rate data and generate statistical variables, use the following command from the "data" directory:
 
 **For Data Run**
 ```bash
-python tools/statvar_importer/stat_var_processor.py \
-    --input_data='statvar_imports/grad_rates_ipeds/test_data/graduation_rates_ipeds_2022_23.csv' \
-    --pv_map='statvar_imports/grad_rates_ipeds/graduation_rates_ipeds_pvmap.csv' \
-    --output_path='statvar_imports/grad_rates_ipeds/graduation_rates_ipeds_output' \
-    --config_file='statvar_imports/grad_rates_ipeds/graduation_rates_ipeds_metadata.csv' \
+python ../../tools/statvar_importer/stat_var_processor.py \
+    --input_data=gs://unresolved_mcf/IPEDS/graduation_rates_national/input_files/*.csv \
+    --pv_map=graduation_rates_ipeds_pvmap.csv \
+    --output_path=output/graduation_rates_ipeds_output \
+    --config_file=graduation_rates_ipeds_metadata.csv \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
