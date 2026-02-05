@@ -18,8 +18,6 @@ import pathlib
 import sys
 
 import csv
-import datacommons
-import json
 import pandas as pd
 
 from absl import app
