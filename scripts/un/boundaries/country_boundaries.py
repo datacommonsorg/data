@@ -207,9 +207,8 @@ class CountryBoundariesGenerator:
         if country_data:
             arc = country_data.arcs.get('typeOf')
             if arc:
-                for node in arc.nodes:
-                    if node.dcid:
-                        dc_all_countries.add(node.dcid)
+                dc_all_countries.update(
+                    node.dcid for node in arc.nodes if node.dcid)
 
         def is_dc_country(iso):
             dcid = f'country/{iso}'
@@ -276,10 +275,10 @@ class CountryBoundariesGenerator:
                 arc = node_data.arcs.get('name')
                 if not arc:
                     continue
-                for name_node in arc.nodes:
-                    if name_node.value:
-                        child2name[child] = name_node.value
-                        break
+                name = next((node.value for node in arc.nodes if node.value),
+                            None)
+                if name:
+                    child2name[child] = name
 
         for parent, dp_level in PARENT_PLACES.items():
             if not parent2children.get(parent):
