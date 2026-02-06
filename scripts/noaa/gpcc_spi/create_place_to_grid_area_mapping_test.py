@@ -61,9 +61,11 @@ class PlaceToGridMappingTest(unittest.TestCase):
         with mock.patch.object(mapping,
                                'get_datacommons_client',
                                return_value=client), mock.patch.object(
-                                   mapping, 'dc_api_wrapper',
+                                   mapping,
+                                   'dc_api_wrapper',
                                    side_effect=responses):
-            got = mapping.get_place_by_type(['country/USA'], ['State', 'County'])
+            got = mapping.get_place_by_type(['country/USA'],
+                                            ['State', 'County'])
         self.assertEqual(got, ['geoId/06', 'geoId/12', 'geoId/06085'])
 
     def test_places_to_geo_jsons_parses_v2_property_response(self):
@@ -102,24 +104,23 @@ class PlaceToGridMappingTest(unittest.TestCase):
         fully_contained = geometry.shape({
             'type':
                 'Polygon',
-            'coordinates':
-                [[[0.2, 0.2], [0.2, 0.8], [0.8, 0.8], [0.8, 0.2], [0.2, 0.2]]]
+            'coordinates': [[[0.2, 0.2], [0.2, 0.8], [0.8, 0.8], [0.8, 0.2],
+                             [0.2, 0.2]]]
         })
         split_across_two_grids = geometry.shape({
             'type':
                 'Polygon',
-            'coordinates':
-                [[[0.5, 0.2], [0.5, 0.8], [1.5, 0.8], [1.5, 0.2], [0.5, 0.2]]]
+            'coordinates': [[[0.5, 0.2], [0.5, 0.8], [1.5, 0.8], [1.5, 0.2],
+                             [0.5, 0.2]]]
         })
-        with mock.patch.object(
-                mapping,
-                'get_geojsons',
-                return_value={
-                    'geoId/06': fully_contained,
-                    'geoId/12': split_across_two_grids
-                }):
-            got = mapping.create_place_to_grid_mapping(
-                ['geoId/06', 'geoId/12'], write_results=False)
+        with mock.patch.object(mapping,
+                               'get_geojsons',
+                               return_value={
+                                   'geoId/06': fully_contained,
+                                   'geoId/12': split_across_two_grids
+                               }):
+            got = mapping.create_place_to_grid_mapping(['geoId/06', 'geoId/12'],
+                                                       write_results=False)
         self.assertEqual(got['geoId/06'], [{'grid': '0^0', 'ratio': 1}])
         self.assertEqual(got['geoId/12'][0]['grid'], '0^0')
         self.assertEqual(got['geoId/12'][1]['grid'], '0^1')
