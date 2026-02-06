@@ -39,12 +39,16 @@ sys.path.insert(0, str(REPO_ROOT))
 from util.dc_api_wrapper import get_datacommons_client
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input_file', 'data/UNGIS_BNDA.geojson',
-                    'Input geojson file')
-flags.DEFINE_string(
-    'output_dir', 'output',
-    'Dir to output generated MCF files too. If blank, a temp folder will be used.'
-)
+
+
+def _define_flags():
+    flags.DEFINE_string('input_file', 'data/UNGIS_BNDA.geojson',
+                        'Input geojson file')
+    flags.DEFINE_string(
+        'output_dir', 'output',
+        'Dir to output generated MCF files too. If blank, a temp folder will be used.'
+    )
+
 
 # Threshold to DP level map, from scripts/us_census/geojsons_low_res/generate_mcf.py
 EPS_LEVEL_MAP = {0: 0, 0.03: 2, 0.05: 3, 0.125: 6, 0.225: 10, 0.3: 13}
@@ -341,4 +345,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
