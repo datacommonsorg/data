@@ -22,7 +22,7 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "common_otuput.tmcf",
+          "template_mcf": "common_output.tmcf",
           "cleaned_csv": "output/*.csv"
         }
       ],
