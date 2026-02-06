@@ -35,16 +35,17 @@ from absl import app
 from absl import flags
 from absl import logging
 
-_FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'ignore_mcf',
-    '',
-    'Comma separated list of MCF files with nodes to be dropped from output',
-)
-flags.DEFINE_list('ignore_dcids', [], 'List of dcids to be ignored')
-flags.DEFINE_bool('ignore_existing_nodes', True,
-                  'Drop nodes that are defined in DC API.')
+def _define_flags():
+    flags.DEFINE_string(
+        'ignore_mcf',
+        '',
+        'Comma separated list of MCF files with nodes to be dropped from output',
+    )
+    flags.DEFINE_list('ignore_dcids', [], 'List of dcids to be ignored')
+    flags.DEFINE_bool('ignore_existing_nodes', True,
+                      'Drop nodes that are defined in DC API.')
+
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -189,10 +190,11 @@ def filter_mcf_file(
 
 def main(_):
     config = get_diff_config()
-    config['ignore_existing_nodes'] = _FLAGS.ignore_existing_nodes
-    filter_mcf_file(_FLAGS.input_mcf, _FLAGS.ignore_mcf, config,
-                    _FLAGS.output_mcf)
+    config['ignore_existing_nodes'] = flags.FLAGS.ignore_existing_nodes
+    filter_mcf_file(flags.FLAGS.input_mcf, flags.FLAGS.ignore_mcf, config,
+                    flags.FLAGS.output_mcf)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
