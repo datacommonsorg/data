@@ -172,7 +172,6 @@ def dc_api_wrapper(
             e.add_note(f'DC API call failed for {function} with max attempts '
                        f'{max_attempts}.')
             raise
-    return None
 
 
 def dc_api_batched_wrapper(
