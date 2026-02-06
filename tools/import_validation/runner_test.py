@@ -247,6 +247,61 @@ class TestValidationRunner(unittest.TestCase):
         self.assertEqual(output_df.iloc[0]['ValidationName'],
                          'My_Custom_Test_Name')
 
+    @patch('tools.import_validation.runner.Validator')
+    def test_runner_deleted_records_percent(self, MockValidator):
+        # 1. Setup mock
+        mock_validator_instance = MockValidator.return_value
+        expected_result = ValidationResult(ValidationStatus.PASSED,
+                                           'DELETED_RECORDS_PERCENT',
+                                           details={'percent': 5.0})
+        mock_validator_instance.validate_deleted_records_percent.return_value = expected_result
+
+        # 2. Setup files in a directory for differ output
+        differ_dir = os.path.join(self.test_dir.name, 'differ_out')
+        os.makedirs(differ_dir, exist_ok=True)
+
+        differ_csv = os.path.join(differ_dir, 'obs_diff_summary.csv')
+        pd.DataFrame({'DELETED': [5]}).to_csv(differ_csv, index=False)
+
+        differ_json = os.path.join(differ_dir, 'differ_summary.json')
+        with open(differ_json, 'w') as f:
+            json.dump({'previous_data_size': 100}, f)
+
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    'rules': [{
+                        'rule_id': 'check_percent',
+                        'validator': 'DELETED_RECORDS_PERCENT',
+                        'params': {
+                            'threshold': 10
+                        }
+                    }]
+                }, f)
+
+        # 3. Run runner
+        runner = ValidationRunner(
+            validation_config_path=self.config_path,
+            stats_summary=self.stats_path,
+            differ_output=differ_dir,  # Pass directory
+            lint_report=self.report_path,
+            validation_output=self.output_path)
+        runner.run_validations()
+
+        # 4. Verify
+        # Check if validator was called with correct arguments
+        call_args, _ = mock_validator_instance.validate_deleted_records_percent.call_args
+        # call_args is (df, summary, params)
+        self.assertIsInstance(call_args[0], pd.DataFrame)
+        self.assertEqual(call_args[1]['previous_data_size'], 100)
+        self.assertEqual(call_args[2]['threshold'], 10)
+
+        # Check output
+        output_df = pd.read_csv(self.output_path)
+        self.assertEqual(len(output_df), 1)
+        self.assertEqual(output_df.iloc[0]['ValidationName'], 'check_percent')
+        self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
+
     @patch('tools.import_validation.runner.logging')
     @patch('tools.import_validation.runner.Validator')
     def test_runner_handles_unknown_validation(self, MockValidator,
