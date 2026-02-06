@@ -142,7 +142,7 @@ def dc_api_wrapper(
         logging.debug(f'Using requests_cache for DC API {function}')
     else:
         cache_context = requests_cache.disabled()
-        logging.debug(f'Using requests_cache for DC API {function}')
+        logging.debug(f'Disabling requests_cache for DC API {function}')
     retry_policy = Retrying(
         stop=stop_after_attempt(max_attempts),
         wait=wait_fixed(retry_secs),
