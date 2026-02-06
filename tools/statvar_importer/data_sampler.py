@@ -41,38 +41,40 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-flags.DEFINE_string('sampler_input', '',
-                    'The path to the input CSV file to be sampled.')
-flags.DEFINE_string('sampler_output', '',
-                    'The path to the output file for the sampled CSV data.')
-flags.DEFINE_integer(
-    'sampler_output_rows', 100,
-    'The maximum number of rows to include in the sampled output.')
-flags.DEFINE_integer(
-    'sampler_header_rows', 1,
-    'The number of header rows to be copied directly to the output file.')
-flags.DEFINE_integer(
-    'sampler_rows_per_key', 5,
-    'The maximum number of rows to select for each unique value found.')
-flags.DEFINE_float(
-    'sampler_rate', -1,
-    'The sampling rate for random row selection (e.g., 0.1 for 10%).')
-# TODO: Rename to sampler_cell_value_regex to better reflect its purpose.
-# See: https://github.com/datacommonsorg/data/pull/1445#discussion_r2180147075
-flags.DEFINE_string(
-    'sampler_column_regex', r'^[0-9]{4}$|[a-zA-Z-]',
-    'A regular expression used to identify and select unique column values.')
-flags.DEFINE_string(
-    'sampler_unique_columns', '',
-    'A comma-separated list of column names to use for selecting unique rows.')
-flags.DEFINE_string('sampler_input_delimiter', ',',
-                    'The delimiter used in the input CSV file.')
-flags.DEFINE_string('sampler_input_encoding', 'UTF8',
-                    'The encoding of the input CSV file.')
-flags.DEFINE_string('sampler_output_delimiter', None,
-                    'The delimiter to use in the output CSV file.')
 
-_FLAGS = flags.FLAGS
+def _define_flags():
+    flags.DEFINE_string('sampler_input', '',
+                        'The path to the input CSV file to be sampled.')
+    flags.DEFINE_string('sampler_output', '',
+                        'The path to the output file for the sampled CSV data.')
+    flags.DEFINE_integer(
+        'sampler_output_rows', 100,
+        'The maximum number of rows to include in the sampled output.')
+    flags.DEFINE_integer(
+        'sampler_header_rows', 1,
+        'The number of header rows to be copied directly to the output file.')
+    flags.DEFINE_integer(
+        'sampler_rows_per_key', 5,
+        'The maximum number of rows to select for each unique value found.')
+    flags.DEFINE_float(
+        'sampler_rate', -1,
+        'The sampling rate for random row selection (e.g., 0.1 for 10%).')
+    # TODO: Rename to sampler_cell_value_regex to better reflect its purpose.
+    # See: https://github.com/datacommonsorg/data/pull/1445#discussion_r2180147075
+    flags.DEFINE_string(
+        'sampler_column_regex', r'^[0-9]{4}$|[a-zA-Z-]',
+        'A regular expression used to identify and select unique column values.')
+    flags.DEFINE_string(
+        'sampler_unique_columns', '',
+        'A comma-separated list of column names to use for selecting unique rows.'
+    )
+    flags.DEFINE_string('sampler_input_delimiter', ',',
+                        'The delimiter used in the input CSV file.')
+    flags.DEFINE_string('sampler_input_encoding', 'UTF8',
+                        'The encoding of the input CSV file.')
+    flags.DEFINE_string('sampler_output_delimiter', None,
+                        'The delimiter to use in the output CSV file.')
+
 
 import file_util
 
@@ -497,27 +499,52 @@ def get_default_config() -> dict:
     Returns:
         A dictionary of default configuration parameter values.
     """
-    # Use default values of flags for tests
-    if not _FLAGS.is_parsed():
-        _FLAGS.mark_as_parsed()
-    return {
-        'sampler_rate': _FLAGS.sampler_rate,
-        'sampler_input': _FLAGS.sampler_input,
-        'sampler_output': _FLAGS.sampler_output,
-        'sampler_output_rows': _FLAGS.sampler_output_rows,
-        'header_rows': _FLAGS.sampler_header_rows,
-        'sampler_rows_per_key': _FLAGS.sampler_rows_per_key,
-        'sampler_column_regex': _FLAGS.sampler_column_regex,
-        'sampler_unique_columns': _FLAGS.sampler_unique_columns,
-        'input_delimiter': _FLAGS.sampler_input_delimiter,
-        'output_delimiter': _FLAGS.sampler_output_delimiter,
-        'input_encoding': _FLAGS.sampler_input_encoding,
+    # Hardcoded defaults for when flags are not defined (e.g. used as library)
+    configs = {
+        'sampler_rate': -1,
+        'sampler_input': '',
+        'sampler_output': '',
+        'sampler_output_rows': 100,
+        'header_rows': 1,
+        'sampler_rows_per_key': 5,
+        'sampler_column_regex': r'^[0-9]{4}$|[a-zA-Z-]',
+        'sampler_unique_columns': '',
+        'input_delimiter': ',',
+        'output_delimiter': None,
+        'input_encoding': 'UTF8',
     }
+    # Use default values of flags if defined and parsed
+    try:
+        if not flags.FLAGS.is_parsed():
+            flags.FLAGS.mark_as_parsed()
+
+        # Update with flag values if they exist
+        flag_map = {
+            'sampler_rate': 'sampler_rate',
+            'sampler_input': 'sampler_input',
+            'sampler_output': 'sampler_output',
+            'sampler_output_rows': 'sampler_output_rows',
+            'header_rows': 'sampler_header_rows',
+            'sampler_rows_per_key': 'sampler_rows_per_key',
+            'sampler_column_regex': 'sampler_column_regex',
+            'sampler_unique_columns': 'sampler_unique_columns',
+            'input_delimiter': 'sampler_input_delimiter',
+            'output_delimiter': 'sampler_output_delimiter',
+            'input_encoding': 'sampler_input_encoding',
+        }
+        for config_key, flag_name in flag_map.items():
+            if hasattr(flags.FLAGS, flag_name):
+                configs[config_key] = getattr(flags.FLAGS, flag_name)
+    except flags.UnparsedFlagAccessError:
+        pass
+
+    return configs
 
 
 def main(_):
-    sample_csv_file(_FLAGS.sampler_input, _FLAGS.sampler_output)
+    sample_csv_file(flags.FLAGS.sampler_input, flags.FLAGS.sampler_output)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
