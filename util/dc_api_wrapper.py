@@ -26,7 +26,6 @@ To use the legacy datacommons library module, set the config:
 from collections import OrderedDict
 import os
 import sys
-import time
 import urllib
 import requests
 import threading
@@ -34,9 +33,11 @@ from typing import Union
 
 from absl import logging
 from datacommons_client.client import DataCommonsClient
-from datacommons_client.utils.error_handling import DCConnectionError, DCStatusError, APIError
+from datacommons_client.utils.error_handling import APIError, DCConnectionError, DCStatusError
 import datacommons as dc
 import requests_cache
+from tenacity import (RetryCallState, Retrying, retry_if_exception,
+                      stop_after_attempt, wait_fixed)
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -59,6 +60,49 @@ _API_ROOT_LOCK = threading.Lock()
 _DEFAULT_API_ROOT = 'https://api.datacommons.org'
 
 
+def _get_exception_status_code(exception):
+    return getattr(exception, 'code', None) or getattr(exception, 'status_code',
+                                                       None)
+
+
+def _should_retry_exception(exception: Exception) -> bool:
+    if isinstance(exception, (DCConnectionError, requests.exceptions.Timeout,
+                              requests.exceptions.ChunkedEncodingError)):
+        return True
+    if isinstance(exception, (urllib.error.HTTPError, DCStatusError, APIError)):
+        status_code = _get_exception_status_code(exception)
+        if status_code is None or status_code == 429 or status_code >= 500:
+            return True
+        # Retry only 429 and 5xx for HTTP status errors.
+        logging.error(f'Got status: {status_code}, not retrying.')
+    return False
+
+
+def _log_retry_attempt(function, retry_state: RetryCallState) -> None:
+    exception = retry_state.outcome.exception()
+    if not exception:
+        return
+    wait_secs = retry_state.next_action.sleep if retry_state.next_action else 0
+    logging.debug(
+        f'Got exception {exception}, retrying API {function} after {wait_secs}...'
+    )
+
+
+def _invoke_dc_api(function, args: dict, api_root: str = None):
+    if api_root:
+        # All calls serialize here to prevent races while updating the global
+        # Data Commons API root.
+        with _API_ROOT_LOCK:
+            original_api_root = dc.utils._API_ROOT
+            dc.utils._API_ROOT = api_root
+            logging.debug(f'Setting DC API root to {api_root} for {function}')
+            try:
+                return function(**args)
+            finally:
+                dc.utils._API_ROOT = original_api_root
+    return function(**args)
+
+
 def dc_api_wrapper(
     function,
     args: dict,
@@ -76,7 +120,7 @@ def dc_api_wrapper(
     function: The DataCommons API function.
     args: dictionary with any the keyword arguments for the DataCommons API
       function.
-    retries: Number of retries in case of HTTP errors.
+    retries: Maximum number of attempts (including the first attempt).
     retry_sec: Interval in seconds between retries for which caller is blocked.
     use_cache: If True, uses request cache for faster response.
     api_root: The API server to use. Default is 'http://api.datacommons.org'. To
@@ -86,8 +130,9 @@ def dc_api_wrapper(
   Returns:
     The response from the DataCommons API call.
   """
-    if not retries or retries <= 0:
-        retries = 1
+    max_attempts = retries
+    if not max_attempts or max_attempts <= 0:
+        max_attempts = 1
     # Setup request cache
     if not requests_cache.is_installed():
         requests_cache.install_cache(expires_after=3600)
@@ -97,83 +142,36 @@ def dc_api_wrapper(
         logging.debug(f'Using requests_cache for DC API {function}')
     else:
         cache_context = requests_cache.disabled()
-        logging.debug(f'Using requests_cache for DC API {function}')
+        logging.debug(f'Disabling requests_cache for DC API {function}')
+    retry_policy = Retrying(
+        stop=stop_after_attempt(max_attempts),
+        wait=wait_fixed(retry_secs),
+        retry=retry_if_exception(_should_retry_exception),
+        reraise=True,
+        before_sleep=lambda retry_state: _log_retry_attempt(
+            function, retry_state),
+    )
     with cache_context:
-        for attempt in range(retries):
-            try:
-                logging.debug(
-                    f'Invoking DC API {function}, #{attempt} with {args},'
-                    f' retries={retries}')
-
-                response = None
-                if api_root:
-                    # All calls serialize here to prevent races while updating the
-                    # global Data Commons API root.
-                    with _API_ROOT_LOCK:
-                        original_api_root = dc.utils._API_ROOT
-                        if api_root:
-                            dc.utils._API_ROOT = api_root
-                            logging.debug(
-                                f'Setting DC API root to {api_root} for {function}'
-                            )
-                        try:
-                            response = function(**args)
-                        finally:
-                            dc.utils._API_ROOT = original_api_root
-                else:
-                    response = function(**args)
-
-                logging.debug(
-                    f'Got API response {response} for {function}, {args}')
-                return response
-            except KeyError as e:
-                # Exception in case of missing dcid. Don't retry.
-                logging.error(f'Got exception for api: {function}, {e}')
-                return None
-            except (DCConnectionError, requests.exceptions.Timeout,
-                    requests.exceptions.ChunkedEncodingError) as e:
-                # Retry network errors
-                if _should_retry_status_code(None, attempt, retries):
+        try:
+            for attempt in retry_policy:
+                with attempt:
+                    attempt_number = attempt.retry_state.attempt_number
                     logging.debug(
-                        f'Got exception {e}, retrying API {function} after'
-                        f' {retry_secs}...')
-                    time.sleep(retry_secs)
-                else:
-                    logging.error(
-                        f'Got exception for api: {function}, {e}, no more retries'
-                    )
-                    raise e
-            except (urllib.error.HTTPError, DCStatusError, APIError) as e:
-                # Retry 5xx and 429, but not other 4xx
-                status_code = getattr(e, 'code', None) or getattr(
-                    e, 'status_code', None)
-                if _should_retry_status_code(status_code, attempt, retries):
+                        f'Invoking DC API {function}, attempt '
+                        f'{attempt_number}/{max_attempts} with {args}')
+
+                    response = _invoke_dc_api(function, args, api_root)
                     logging.debug(
-                        f'Got exception {e}, retrying API {function} after'
-                        f' {retry_secs}...')
-                    time.sleep(retry_secs)
-                else:
-                    # Don't retry other errors (e.g. 400, 404, 401)
-                    logging.error(f'Got exception for api: {function}, {e}')
-                    raise e
-    return None
-
-
-def _should_retry_status_code(status_code: int, attempt: int,
-                              max_retries: int) -> bool:
-    """Returns True if the request should be retried.
-    Request can be retried for HTTP status codes like 429 or 5xx
-    if the number of attempts is less than max_retries."""
-    if status_code:
-        if (status_code != 429 and status_code < 500):
-            # Do no retry for error codes like 401
-            logging.error(f'Got status: {status_code}, not retrying.')
-            return False
-    if attempt >= max_retries:
-        logging.error(
-            f'Got status: {status_code} after {attempt} retries, not retrying.')
-        return False
-    return True
+                        f'Got API response {response} for {function}, {args}')
+                    return response
+        except KeyError as e:
+            # Exception in case of missing dcid. Don't retry.
+            logging.error(f'Got exception for api: {function}, {e}')
+            return None
+        except Exception as e:
+            e.add_note(f'DC API call failed for {function} with max attempts '
+                       f'{max_attempts}.')
+            raise
 
 
 def dc_api_batched_wrapper(

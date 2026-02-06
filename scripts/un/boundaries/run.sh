@@ -16,5 +16,6 @@
 
 python3 -m venv .env
 source .env/bin/activate
+pip3 install -r ../../../requirements_all.txt -q
 pip3 install -r requirements.txt -q
 python3 country_boundaries.py
