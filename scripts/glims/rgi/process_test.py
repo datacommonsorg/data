@@ -13,20 +13,83 @@
 # limitations under the License.
 """Tests for process.py"""
 
-import csv
 import os
-import tempfile
+from pathlib import Path
 import sys
+import tempfile
 import unittest
+from unittest import mock
 
-# Allows the following module imports to work when running as a script
-sys.path.append(
-    os.path.dirname(os.path.dirname(os.path.dirname(
-        os.path.abspath(__file__)))))
-from glims.rgi import process
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+
+from scripts.glims.rgi import process
 
 _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                         'test_data')
+
+
+class _FakeNodeEndpoint:
+
+    def __init__(self):
+        self.fetch_place_children_calls = []
+        self.fetch_property_values_calls = []
+
+    def fetch_place_children(self, place_dcids, children_type, as_dict):
+        self.fetch_place_children_calls.append(
+            (list(place_dcids), children_type, as_dict))
+        return {'Earth': [{'dcid': 'country/USA'}, {'dcid': 'country/CAN'}]}
+
+    def fetch_property_values(self, node_dcids, properties):
+        self.fetch_property_values_calls.append((list(node_dcids), properties))
+        if properties == 'geoJsonCoordinatesDP2':
+            return {
+                'country/USA': {
+                    'arcs': {
+                        'geoJsonCoordinatesDP2': {
+                            'nodes': [{
+                                'value':
+                                    '{"type":"Polygon","coordinates":[[[0,0],[0,1],[1,1],[1,0],[0,0]]]}'
+                            }]
+                        }
+                    }
+                },
+                'country/CAN': {
+                    'arcs': {
+                        'geoJsonCoordinatesDP2': {
+                            'nodes': []
+                        }
+                    }
+                },
+            }
+        if properties == 'containedInPlace':
+            return {
+                'country/USA': {
+                    'arcs': {
+                        'containedInPlace': {
+                            'nodes': [{
+                                'dcid': 'northamerica'
+                            }]
+                        }
+                    }
+                },
+                'country/CAN': {
+                    'arcs': {
+                        'containedInPlace': {
+                            'nodes': [{
+                                'dcid': 'northamerica'
+                            }]
+                        }
+                    }
+                },
+            }
+        raise AssertionError(f'Unexpected property request: {properties}')
+
+
+class _FakeClient:
+
+    def __init__(self):
+        self.node = _FakeNodeEndpoint()
 
 
 class ProcessTest(unittest.TestCase):
@@ -39,3 +102,22 @@ class ProcessTest(unittest.TestCase):
             with open(os.path.join(_TESTDIR, 'expected.csv')) as wantf:
                 with open(os.path.join(tmp_dir, "rgi6_glaciers.csv")) as gotf:
                     self.assertEqual(gotf.read(), wantf.read())
+
+    def test_load_geojsons_with_v2_response(self):
+        client = _FakeClient()
+        with mock.patch.object(process,
+                               'get_datacommons_client',
+                               return_value=client):
+            geojsons, cip = process._load_geojsons()
+
+        self.assertEqual(client.node.fetch_place_children_calls,
+                         [(['Earth'], 'Country', True)])
+        self.assertEqual(client.node.fetch_property_values_calls, [
+            (['country/USA', 'country/CAN'], 'geoJsonCoordinatesDP2'),
+            (['country/USA', 'country/CAN'], 'containedInPlace'),
+        ])
+        self.assertIn('country/USA', geojsons)
+        self.assertNotIn('country/CAN', geojsons)
+        self.assertEqual(geojsons['country/USA'].geom_type, 'Polygon')
+        self.assertEqual(cip['country/USA'], ['northamerica'])
+        self.assertEqual(cip['country/CAN'], ['northamerica'])

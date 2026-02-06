@@ -14,13 +14,20 @@
 """Generate Glaciers data for import into DC."""
 
 import csv
-import datacommons as dc
-import json
 import glob
+import json
 import os
-from shapely import geometry
+from pathlib import Path
+import sys
+
 from absl import app
 from absl import flags
+from shapely import geometry
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+
+from util.dc_api_wrapper import get_datacommons_client
 
 FLAGS = flags.FLAGS
 
@@ -28,16 +35,83 @@ flags.DEFINE_string('rgi_input_csv_pattern', '', 'Glacier CSV file pattern')
 flags.DEFINE_string('rgi_output_dir', '/tmp/', 'Output directory')
 
 
+def _extract_node_dcid(node):
+    if isinstance(node, dict):
+        return node.get('dcid')
+    return getattr(node, 'dcid', None)
+
+
+def _extract_node_value(node):
+    if isinstance(node, dict):
+        return node.get('value')
+    return getattr(node, 'value', None)
+
+
+def _get_response_data(response):
+    if isinstance(response, dict):
+        return response
+    response_data = getattr(response, 'data', None)
+    if response_data:
+        return response_data
+    if hasattr(response, 'to_dict'):
+        return response.to_dict().get('data', {})
+    return {}
+
+
+def _get_property_nodes(node_data, prop):
+    if not node_data:
+        return []
+    if isinstance(node_data, dict):
+        return node_data.get('arcs', {}).get(prop, {}).get('nodes', [])
+    arcs = getattr(node_data, 'arcs', {})
+    if not arcs:
+        return []
+    arc_data = arcs.get(prop, {})
+    if isinstance(arc_data, dict):
+        return arc_data.get('nodes', [])
+    return getattr(arc_data, 'nodes', [])
+
+
 def _load_geojsons():
-    countries = dc.get_places_in(['Earth'], 'Country')['Earth']
-    resp = dc.get_property_values(countries, 'geoJsonCoordinatesDP2')
+    client = get_datacommons_client()
+    countries_response = client.node.fetch_place_children(
+        place_dcids=['Earth'],
+        children_type='Country',
+        as_dict=True,
+    )
+    countries = []
+    for node in countries_response.get('Earth', []):
+        dcid = _extract_node_dcid(node)
+        if dcid:
+            countries.append(dcid)
+
+    geojson_response = _get_response_data(
+        client.node.fetch_property_values(node_dcids=countries,
+                                          properties='geoJsonCoordinatesDP2'))
     geojsons = {}
-    for p, gj in resp.items():
-        if not gj:
+    for country in countries:
+        nodes = _get_property_nodes(geojson_response.get(country),
+                                    'geoJsonCoordinatesDP2')
+        if not nodes:
             continue
-        geojsons[p] = geometry.shape(json.loads(gj[0]))
+        geojson = _extract_node_value(nodes[0])
+        if not geojson:
+            continue
+        geojsons[country] = geometry.shape(json.loads(geojson))
+
     print('Got', len(geojsons), 'geojsons!')
-    cip = dc.get_property_values(countries, 'containedInPlace')
+
+    cip_response = _get_response_data(
+        client.node.fetch_property_values(node_dcids=countries,
+                                          properties='containedInPlace'))
+    cip = {}
+    for country in countries:
+        nodes = _get_property_nodes(cip_response.get(country),
+                                    'containedInPlace')
+        cip[country] = [
+            dcid for dcid in (_extract_node_dcid(node) for node in nodes)
+            if dcid
+        ]
     return geojsons, cip
 
 
