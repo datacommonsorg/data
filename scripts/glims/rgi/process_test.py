@@ -43,47 +43,40 @@ class _FakeNodeEndpoint:
     def fetch_property_values(self, node_dcids, properties):
         self.fetch_property_values_calls.append((list(node_dcids), properties))
         if properties == 'geoJsonCoordinatesDP2':
-            return {
+            return _FakeNodeResponse({
                 'country/USA': {
-                    'arcs': {
-                        'geoJsonCoordinatesDP2': {
-                            'nodes': [{
-                                'value':
-                                    '{"type":"Polygon","coordinates":[[[0,0],[0,1],[1,1],[1,0],[0,0]]]}'
-                            }]
-                        }
-                    }
+                    'geoJsonCoordinatesDP2': [{
+                        'value':
+                            '{"type":"Polygon","coordinates":[[[0,0],[0,1],[1,1],[1,0],[0,0]]]}'
+                    }]
                 },
                 'country/CAN': {
-                    'arcs': {
-                        'geoJsonCoordinatesDP2': {
-                            'nodes': []
-                        }
-                    }
+                    'geoJsonCoordinatesDP2': []
                 },
-            }
+            })
         if properties == 'containedInPlace':
-            return {
+            return _FakeNodeResponse({
                 'country/USA': {
-                    'arcs': {
-                        'containedInPlace': {
-                            'nodes': [{
-                                'dcid': 'northamerica'
-                            }]
-                        }
-                    }
+                    'containedInPlace': [{
+                        'dcid': 'northamerica'
+                    }]
                 },
                 'country/CAN': {
-                    'arcs': {
-                        'containedInPlace': {
-                            'nodes': [{
-                                'dcid': 'northamerica'
-                            }]
-                        }
-                    }
+                    'containedInPlace': [{
+                        'dcid': 'northamerica'
+                    }]
                 },
-            }
+            })
         raise AssertionError(f'Unexpected property request: {properties}')
+
+
+class _FakeNodeResponse:
+
+    def __init__(self, properties):
+        self._properties = properties
+
+    def get_properties(self):
+        return self._properties
 
 
 class _FakeClient:

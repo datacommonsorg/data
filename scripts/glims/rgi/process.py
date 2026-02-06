@@ -47,31 +47,6 @@ def _extract_node_value(node):
     return getattr(node, 'value', None)
 
 
-def _get_response_data(response):
-    if isinstance(response, dict):
-        return response
-    response_data = getattr(response, 'data', None)
-    if response_data:
-        return response_data
-    if hasattr(response, 'to_dict'):
-        return response.to_dict().get('data', {})
-    return {}
-
-
-def _get_property_nodes(node_data, prop):
-    if not node_data:
-        return []
-    if isinstance(node_data, dict):
-        return node_data.get('arcs', {}).get(prop, {}).get('nodes', [])
-    arcs = getattr(node_data, 'arcs', {})
-    if not arcs:
-        return []
-    arc_data = arcs.get(prop, {})
-    if isinstance(arc_data, dict):
-        return arc_data.get('nodes', [])
-    return getattr(arc_data, 'nodes', [])
-
-
 def _load_geojsons():
     client = get_datacommons_client()
     countries_response = client.node.fetch_place_children(
@@ -85,13 +60,13 @@ def _load_geojsons():
         if dcid:
             countries.append(dcid)
 
-    geojson_response = _get_response_data(
-        client.node.fetch_property_values(node_dcids=countries,
-                                          properties='geoJsonCoordinatesDP2'))
+    geojson_response = client.node.fetch_property_values(
+        node_dcids=countries,
+        properties='geoJsonCoordinatesDP2').get_properties()
     geojsons = {}
     for country in countries:
-        nodes = _get_property_nodes(geojson_response.get(country),
-                                    'geoJsonCoordinatesDP2')
+        nodes = geojson_response.get(country, {}).get('geoJsonCoordinatesDP2',
+                                                      [])
         if not nodes:
             continue
         geojson = _extract_node_value(nodes[0])
