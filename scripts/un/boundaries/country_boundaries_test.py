@@ -17,6 +17,7 @@ import tempfile
 import unittest
 from unittest import mock
 
+import json
 import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -87,12 +88,12 @@ class CountryBoundariesTest(unittest.TestCase):
         })
         client = FakeClient(
             FakeNodeEndpoint(fetch_property_values_response=response))
-        with tempfile.TemporaryDirectory() as output_dir:
-            generator = country_boundaries.CountryBoundariesGenerator(
-                input_file="input.geojson", output_dir=output_dir)
-            with mock.patch.object(country_boundaries,
-                                   "get_datacommons_client",
-                                   return_value=client):
+        with mock.patch.object(country_boundaries,
+                               "get_datacommons_client",
+                               return_value=client):
+            with tempfile.TemporaryDirectory() as output_dir:
+                generator = country_boundaries.CountryBoundariesGenerator(
+                    input_file="input.geojson", output_dir=output_dir)
                 self.assertEqual(generator.existing_codes(all_countries),
                                  ["CAN", "USA"])
 
@@ -114,17 +115,64 @@ class CountryBoundariesTest(unittest.TestCase):
                 FakeNodeData({}),
         })
         client = FakeClient(FakeNodeEndpoint(fetch_response=response))
-        with mock.patch.object(country_boundaries,
-                               "get_datacommons_client",
-                               return_value=client):
-            result = country_boundaries.get_countries_in(
-                ["Earth", "asia", "europe"])
+        result = country_boundaries.get_countries_in(
+            client, ["Earth", "asia", "europe"])
         self.assertEqual(
             result, {
                 "Earth": ["country/USA", "country/CAN"],
                 "asia": ["country/JPN"],
                 "europe": [],
             })
+
+    def test_build_cache_uses_v2_name_values(self):
+        name_response = FakeNodeResponse({
+            "country/USA":
+                FakeNodeData({
+                    "name":
+                        FakeArc([FakeNode(value="United States of America")])
+                })
+        })
+        node_endpoint = mock.Mock()
+        node_endpoint.fetch_property_values.return_value = name_response
+        client = FakeClient(node_endpoint)
+
+        with mock.patch.object(country_boundaries,
+                               "get_datacommons_client",
+                               return_value=client):
+            with tempfile.TemporaryDirectory() as output_dir:
+                generator = country_boundaries.CountryBoundariesGenerator(
+                    input_file="input.geojson", output_dir=output_dir)
+
+                with open(Path(output_dir) / "tmp" / "USA_13.geojson",
+                          "w",
+                          encoding="utf-8") as fp:
+                    json.dump(
+                        {
+                            "type":
+                                "Polygon",
+                            "coordinates": [[[0, 0], [0, 1], [1, 1], [1, 0],
+                                             [0, 0]]],
+                        }, fp)
+
+                with mock.patch.dict(country_boundaries.PARENT_PLACES,
+                                     {"Earth": 13},
+                                     clear=True):
+                    with mock.patch.object(
+                            country_boundaries,
+                            "get_countries_in",
+                            return_value={"Earth": ["country/USA"]}):
+                        generator.build_cache(["USA"])
+
+                node_endpoint.fetch_property_values.assert_called_once_with(
+                    node_dcids=["country/USA"], properties="name")
+                with open(Path(output_dir) / "cache" /
+                          "earth_country_dp13.json",
+                          encoding="utf-8") as fp:
+                    cache_json = json.load(fp)
+                self.assertEqual(
+                    cache_json["features"][0]["properties"]["name"],
+                    "United States of America",
+                )
 
 
 if __name__ == "__main__":

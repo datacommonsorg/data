@@ -94,8 +94,7 @@ PARENT_PLACES = {
 }
 
 
-def get_countries_in(dcids):
-    client = get_datacommons_client()
+def get_countries_in(client, dcids):
     resp = client.node.fetch(node_dcids=dcids,
                              expression="<-containedInPlace+{typeOf:Country}")
     node2children = {}
@@ -183,6 +182,7 @@ class CountryBoundariesGenerator:
     def __init__(self, input_file, output_dir):
         self.input_file = input_file
         self.output_dir = output_dir
+        self.client = get_datacommons_client()
         for d in ['tmp', 'mcf', 'cache']:
             os.makedirs(os.path.join(self.output_dir, d), exist_ok=True)
 
@@ -199,10 +199,9 @@ class CountryBoundariesGenerator:
 
         Only countries with DCID of the form county/{code} are included.
         """
-        client = get_datacommons_client()
-        resp = client.node.fetch_property_values(node_dcids='Country',
-                                                 properties='typeOf',
-                                                 out=False)
+        resp = self.client.node.fetch_property_values(node_dcids='Country',
+                                                      properties='typeOf',
+                                                      out=False)
         dc_all_countries = set()
         country_data = resp.data.get('Country')
         if country_data:
@@ -263,15 +262,15 @@ class CountryBoundariesGenerator:
             self._simplify_json(country_code, country_data)
 
     def build_cache(self, existing_codes):
-        parent2children = get_countries_in(list(PARENT_PLACES.keys()))
+        parent2children = get_countries_in(self.client,
+                                           list(PARENT_PLACES.keys()))
         all_children = set()
         for children in parent2children.values():
             all_children.update(children)
 
         child2name = {}
         if all_children:
-            client = get_datacommons_client()
-            resp = client.node.fetch_property_values(
+            resp = self.client.node.fetch_property_values(
                 node_dcids=list(all_children), properties='name')
             for child, node_data in resp.data.items():
                 arc = node_data.arcs.get('name')
