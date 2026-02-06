@@ -74,63 +74,64 @@ sys.path.append(
 from counters import Counters
 from mcf_file_util import load_mcf_nodes, filter_mcf_nodes, normalize_mcf_node, normalize_value, node_dict_to_text, get_node_dcid, strip_namespace
 
+_DEFAULT_DIFF_CONFIG = {
+    'ignore_property': [
+        'description',
+        'provenance',
+        'memberOf',
+        'member',
+        'name',
+        'constraintProperties',
+        'keyString',  # 'Node'
+        'relevantVariable',
+    ],
+    'compare_property': [],
+    'fingerprint_dcid': False,
+    'ignore_nodes_with_pv': [],
+    'compare_dcids': [],
+    'compare_nodes_with_pv': [],
+    'show_diff_nodes_only': True,
+}
+
 
 def _define_flags():
     flags.DEFINE_string('mcf1', '', 'MCF file with nodes')
     flags.DEFINE_string('mcf2', '', 'MCF file with nodes')
     flags.DEFINE_list(
         'ignore_property',
-        [
-            'description',
-            'provenance',
-            'memberOf',
-            'member',
-            'name',
-            'constraintProperties',
-            'keyString',  # 'Node'
-            'relevantVariable',
-        ],
+        _DEFAULT_DIFF_CONFIG['ignore_property'],
         'List of properties to be ignored in diffs.',
     )
-    flags.DEFINE_list('compare_property', [],
+    flags.DEFINE_list('compare_property',
+                      _DEFAULT_DIFF_CONFIG['compare_property'],
                       'List of properties to be compared in diffs.')
     flags.DEFINE_bool(
         'fingerprint_dcid',
-        False,
+        _DEFAULT_DIFF_CONFIG['fingerprint_dcid'],
         'If set, ignores the dcid for nodes and instead uses fingerprint.',
     )
     flags.DEFINE_list(
         'ignore_nodes_with_pv',
-        [],
+        _DEFAULT_DIFF_CONFIG['ignore_nodes_with_pv'],
         'Ignore nodes containing any of the property:values in the comma separated'
         ' list.',
     )
-    flags.DEFINE_list('compare_dcids', [],
+    flags.DEFINE_list('compare_dcids', _DEFAULT_DIFF_CONFIG['compare_dcids'],
                       'Compare nodes with dcids in the comma seperated list.')
     flags.DEFINE_list(
         'compare_nodes_with_pv',
-        [],
+        _DEFAULT_DIFF_CONFIG['compare_nodes_with_pv'],
         'Compare nodes containing any of the property:values in the comma separated'
         ' list.',
     )
-    flags.DEFINE_bool('show_diff_nodes_only', True,
+    flags.DEFINE_bool('show_diff_nodes_only',
+                      _DEFAULT_DIFF_CONFIG['show_diff_nodes_only'],
                       'Output nodes with diff only.')
 
 
 def get_diff_config() -> dict:
     """Returns a dictionary of config parameters for MCF diff from flags."""
-    configs = {
-        'ignore_property': [
-            'description', 'provenance', 'memberOf', 'member', 'name',
-            'constraintProperties', 'keyString', 'relevantVariable'
-        ],
-        'compare_property': [],
-        'fingerprint_dcid': False,
-        'ignore_nodes_with_pv': [],
-        'compare_dcids': [],
-        'compare_nodes_with_pv': [],
-        'show_diff_nodes_only': True,
-    }
+    configs = _DEFAULT_DIFF_CONFIG.copy()
     # Use default values of flags if defined and parsed
     try:
         if not flags.FLAGS.is_parsed():

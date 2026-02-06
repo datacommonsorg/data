@@ -29,20 +29,35 @@ sys.path.append(os.path.dirname(_SCRIPT_DIR))
 _DATA_DIR = _SCRIPT_DIR.split('/data', 1)[0]
 sys.path.append(os.path.join(_DATA_DIR, 'data', 'util'))
 
+_DEFAULT_MATCHER_CONFIG = {
+    'semantic_matcher_corpus': '',
+    'semantic_matcher_cache': 'sample_schema_embeddings-all-MiniLM-L6-v2.pkl',
+    'semantic_matcher_input': '',
+    'semantic_matcher_output': '',
+    'semantic_matcher_model': 'all-MiniLM-L6-v2',
+    'semantic_matcher_debug': False,
+}
+
 
 def _define_flags():
-    flags.DEFINE_string('semantic_matcher_corpus', '',
+    flags.DEFINE_string('semantic_matcher_corpus',
+                        _DEFAULT_MATCHER_CONFIG['semantic_matcher_corpus'],
                         'Corpus file with key, value')
     flags.DEFINE_string('semantic_matcher_cache',
-                        'sample_schema_embeddings-all-MiniLM-L6-v2.pkl',
+                        _DEFAULT_MATCHER_CONFIG['semantic_matcher_cache'],
                         'Cache pickle file with corpus text and embeddings')
-    flags.DEFINE_string('semantic_matcher_input', '',
+    flags.DEFINE_string('semantic_matcher_input',
+                        _DEFAULT_MATCHER_CONFIG['semantic_matcher_input'],
                         'Input file with lookup queries.')
-    flags.DEFINE_string('semantic_matcher_output', '',
+    flags.DEFINE_string('semantic_matcher_output',
+                        _DEFAULT_MATCHER_CONFIG['semantic_matcher_output'],
                         'Output file with results per query.')
-    flags.DEFINE_string('semantic_matcher_model', 'all-MiniLM-L6-v2',
+    flags.DEFINE_string('semantic_matcher_model',
+                        _DEFAULT_MATCHER_CONFIG['semantic_matcher_model'],
                         'Output file with results per query.')
-    flags.DEFINE_bool('semantic_matcher_debug', False, 'Enable debug logs.')
+    flags.DEFINE_bool('semantic_matcher_debug',
+                      _DEFAULT_MATCHER_CONFIG['semantic_matcher_debug'],
+                      'Enable debug logs.')
 
 
 import file_util
@@ -260,9 +275,9 @@ def get_semantic_matcher_default_config() -> dict:
     """Get default config for semantic_matcher."""
     configs = {
         'embeddings_model':
-            'all-MiniLM-L6-v2',
+            _DEFAULT_MATCHER_CONFIG['semantic_matcher_model'],
         'semantic_matcher_cache':
-            'sample_schema_embeddings-all-MiniLM-L6-v2.pkl',
+            _DEFAULT_MATCHER_CONFIG['semantic_matcher_cache'],
     }
     # Use default values of flags if defined and parsed
     try:

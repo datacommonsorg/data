@@ -42,38 +42,50 @@ from config_map import ConfigMap
 from counters import Counters
 from mcf_file_util import get_numeric_value
 
+_DEFAULT_FILTER_CONFIG = {
+    'filter_data_keep_recent': True,
+    'filter_data_max_change_ratio': None,
+    'filter_data_max_yearly_change_ratio': None,
+    'filter_data_min_value': None,
+    'filter_data_max_value': None,
+    'data_series_value_properties': ['value'],
+    'data_series_date_properties': ['observationDate'],
+}
+
 
 def _define_flags():
     flags.DEFINE_string('filter_data_input', '',
                         'input CSV file with statvar observations')
     flags.DEFINE_string('filter_data_output', '', 'output CSV file')
-    flags.DEFINE_float('filter_data_max_change_ratio', None,
+    flags.DEFINE_float('filter_data_max_change_ratio',
+                       _DEFAULT_FILTER_CONFIG['filter_data_max_change_ratio'],
                        'Maximum change alowed between successive values.')
-    flags.DEFINE_float('filter_data_max_yearly_change_ratio', None,
-                       'Maximum change alowed between successive years.')
-    flags.DEFINE_float('filter_data_min_value', None, 'Minumum value allowed')
-    flags.DEFINE_float('filter_data_max_value', None, 'Maximum value allowed')
-    flags.DEFINE_list('data_series_value_properties', ['value'],
+    flags.DEFINE_float(
+        'filter_data_max_yearly_change_ratio',
+        _DEFAULT_FILTER_CONFIG['filter_data_max_yearly_change_ratio'],
+        'Maximum change alowed between successive years.')
+    flags.DEFINE_float('filter_data_min_value',
+                       _DEFAULT_FILTER_CONFIG['filter_data_min_value'],
+                       'Minumum value allowed')
+    flags.DEFINE_float('filter_data_max_value',
+                       _DEFAULT_FILTER_CONFIG['filter_data_max_value'],
+                       'Maximum value allowed')
+    flags.DEFINE_list('data_series_value_properties',
+                      _DEFAULT_FILTER_CONFIG['data_series_value_properties'],
                       'Properties with the value to be checked')
     flags.DEFINE_list(
-        'data_series_date_properties', ['observationDate'],
+        'data_series_date_properties',
+        _DEFAULT_FILTER_CONFIG['data_series_date_properties'],
         'Properties that can be used to sort values within a series such as date'
     )
-    flags.DEFINE_bool('filter_data_keep_recent', True,
+    flags.DEFINE_bool('filter_data_keep_recent',
+                      _DEFAULT_FILTER_CONFIG['filter_data_keep_recent'],
                       'Keep the most recent value for a time series.')
 
 
 def get_default_filter_data_config() -> dict:
     '''Returns the default filter config settings form flags as dict.'''
-    configs = {
-        'filter_data_keep_recent': True,
-        'filter_data_max_change_ratio': None,
-        'filter_data_max_yearly_change_ratio': None,
-        'filter_data_min_value': None,
-        'filter_data_max_value': None,
-        'data_series_value_properties': ['value'],
-        'data_series_date_properties': ['observationDate'],
-    }
+    configs = _DEFAULT_FILTER_CONFIG.copy()
     # Use default values of flags if defined and parsed
     try:
         if not flags.FLAGS.is_parsed():

@@ -41,40 +41,59 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
+_DEFAULT_SAMPLER_CONFIG = {
+    'sampler_input': '',
+    'sampler_output': '',
+    'sampler_output_rows': 100,
+    'sampler_header_rows': 1,
+    'sampler_rows_per_key': 5,
+    'sampler_rate': -1,
+    'sampler_column_regex': r'^[0-9]{4}$|[a-zA-Z-]',
+    'sampler_unique_columns': '',
+    'sampler_input_delimiter': ',',
+    'sampler_input_encoding': 'UTF8',
+    'sampler_output_delimiter': None,
+}
+
 
 def _define_flags():
-    flags.DEFINE_string('sampler_input', '',
+    flags.DEFINE_string('sampler_input',
+                        _DEFAULT_SAMPLER_CONFIG['sampler_input'],
                         'The path to the input CSV file to be sampled.')
     flags.DEFINE_string(
-        'sampler_output', '',
+        'sampler_output', _DEFAULT_SAMPLER_CONFIG['sampler_output'],
         'The path to the output file for the sampled CSV data.')
     flags.DEFINE_integer(
-        'sampler_output_rows', 100,
+        'sampler_output_rows', _DEFAULT_SAMPLER_CONFIG['sampler_output_rows'],
         'The maximum number of rows to include in the sampled output.')
     flags.DEFINE_integer(
-        'sampler_header_rows', 1,
+        'sampler_header_rows', _DEFAULT_SAMPLER_CONFIG['sampler_header_rows'],
         'The number of header rows to be copied directly to the output file.')
     flags.DEFINE_integer(
-        'sampler_rows_per_key', 5,
+        'sampler_rows_per_key', _DEFAULT_SAMPLER_CONFIG['sampler_rows_per_key'],
         'The maximum number of rows to select for each unique value found.')
     flags.DEFINE_float(
-        'sampler_rate', -1,
+        'sampler_rate', _DEFAULT_SAMPLER_CONFIG['sampler_rate'],
         'The sampling rate for random row selection (e.g., 0.1 for 10%).')
     # TODO: Rename to sampler_cell_value_regex to better reflect its purpose.
     # See: https://github.com/datacommonsorg/data/pull/1445#discussion_r2180147075
     flags.DEFINE_string(
-        'sampler_column_regex', r'^[0-9]{4}$|[a-zA-Z-]',
+        'sampler_column_regex', _DEFAULT_SAMPLER_CONFIG['sampler_column_regex'],
         'A regular expression used to identify and select unique column values.'
     )
     flags.DEFINE_string(
-        'sampler_unique_columns', '',
+        'sampler_unique_columns',
+        _DEFAULT_SAMPLER_CONFIG['sampler_unique_columns'],
         'A comma-separated list of column names to use for selecting unique rows.'
     )
-    flags.DEFINE_string('sampler_input_delimiter', ',',
+    flags.DEFINE_string('sampler_input_delimiter',
+                        _DEFAULT_SAMPLER_CONFIG['sampler_input_delimiter'],
                         'The delimiter used in the input CSV file.')
-    flags.DEFINE_string('sampler_input_encoding', 'UTF8',
+    flags.DEFINE_string('sampler_input_encoding',
+                        _DEFAULT_SAMPLER_CONFIG['sampler_input_encoding'],
                         'The encoding of the input CSV file.')
-    flags.DEFINE_string('sampler_output_delimiter', None,
+    flags.DEFINE_string('sampler_output_delimiter',
+                        _DEFAULT_SAMPLER_CONFIG['sampler_output_delimiter'],
                         'The delimiter to use in the output CSV file.')
 
 
@@ -503,17 +522,28 @@ def get_default_config() -> dict:
     """
     # Hardcoded defaults for when flags are not defined (e.g. used as library)
     configs = {
-        'sampler_rate': -1,
-        'sampler_input': '',
-        'sampler_output': '',
-        'sampler_output_rows': 100,
-        'header_rows': 1,
-        'sampler_rows_per_key': 5,
-        'sampler_column_regex': r'^[0-9]{4}$|[a-zA-Z-]',
-        'sampler_unique_columns': '',
-        'input_delimiter': ',',
-        'output_delimiter': None,
-        'input_encoding': 'UTF8',
+        'sampler_rate':
+            _DEFAULT_SAMPLER_CONFIG['sampler_rate'],
+        'sampler_input':
+            _DEFAULT_SAMPLER_CONFIG['sampler_input'],
+        'sampler_output':
+            _DEFAULT_SAMPLER_CONFIG['sampler_output'],
+        'sampler_output_rows':
+            _DEFAULT_SAMPLER_CONFIG['sampler_output_rows'],
+        'header_rows':
+            _DEFAULT_SAMPLER_CONFIG['sampler_header_rows'],
+        'sampler_rows_per_key':
+            _DEFAULT_SAMPLER_CONFIG['sampler_rows_per_key'],
+        'sampler_column_regex':
+            _DEFAULT_SAMPLER_CONFIG['sampler_column_regex'],
+        'sampler_unique_columns':
+            _DEFAULT_SAMPLER_CONFIG['sampler_unique_columns'],
+        'input_delimiter':
+            _DEFAULT_SAMPLER_CONFIG['sampler_input_delimiter'],
+        'output_delimiter':
+            _DEFAULT_SAMPLER_CONFIG['sampler_output_delimiter'],
+        'input_encoding':
+            _DEFAULT_SAMPLER_CONFIG['sampler_input_encoding'],
     }
     # Use default values of flags if defined and parsed
     try:
