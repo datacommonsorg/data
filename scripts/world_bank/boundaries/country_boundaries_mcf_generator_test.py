@@ -20,6 +20,10 @@ import unittest
 import os
 import tempfile
 import sys
+from types import SimpleNamespace
+from unittest import mock
+
+import pandas as pd
 
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
@@ -33,6 +37,33 @@ DP3_FNAME = 'countries.dp3.mcfgeojson.mcf'
 
 
 class CountyBoundariesMcfGeneratorTest(unittest.TestCase):
+
+    def test_build_import_codes_filters_to_dc_countries(self):
+        response = mock.Mock()
+        response.extract_connected_dcids.return_value = [
+            'country/USA', 'country/CAN'
+        ]
+        node_api = mock.Mock()
+        node_api.fetch_property_values.return_value = response
+        client = SimpleNamespace(node=node_api)
+        all_countries = pd.DataFrame({'WB_A3': ['USA', 'CAN', 'MEX']})
+
+        with mock.patch.object(mcf_gen,
+                               'get_datacommons_client',
+                               return_value=client):
+            gen = mcf_gen.CountryBoundariesMcfGenerator('', '', '')
+            col_to_code = gen.build_import_codes(all_countries)
+
+        self.assertEqual(col_to_code['WB_A3'], {'USA', 'CAN'})
+        self.assertEqual(col_to_code['ISO_A3'], mcf_gen.ISO_A3_CODES_TO_IMPORT)
+        node_api.fetch_property_values.assert_called_once_with(
+            node_dcids='Country',
+            properties='typeOf',
+            out=False,
+            all_pages=True,
+        )
+        response.extract_connected_dcids.assert_called_once_with(
+            'Country', 'typeOf')
 
     def test_output_mcf(self):
         with tempfile.TemporaryDirectory() as test_mcf_dir:
