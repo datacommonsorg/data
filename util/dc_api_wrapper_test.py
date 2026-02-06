@@ -16,6 +16,7 @@
 import os
 import sys
 import tempfile
+import urllib
 import unittest
 from unittest import mock
 
@@ -91,6 +92,26 @@ class TestDCAPIWrapper(unittest.TestCase):
                                   use_cache=False)
         self.assertEqual(api_function.call_count, 2)
 
+    def test_dc_api_wrapper_non_positive_retries_defaults_to_one_attempt(self):
+        """Test non-positive retries are treated as one attempt."""
+        api_function = mock.Mock(side_effect=DCConnectionError('boom'))
+        with self.assertRaises(DCConnectionError):
+            dc_api.dc_api_wrapper(api_function, {},
+                                  retries=0,
+                                  retry_secs=0,
+                                  use_cache=False)
+        self.assertEqual(api_function.call_count, 1)
+
+    def test_dc_api_wrapper_keyerror_returns_none_without_retry(self):
+        """Test wrapper returns None and does not retry for KeyError."""
+        api_function = mock.Mock(side_effect=KeyError('missing-dcid'))
+        response = dc_api.dc_api_wrapper(api_function, {},
+                                         retries=3,
+                                         retry_secs=0,
+                                         use_cache=False)
+        self.assertIsNone(response)
+        self.assertEqual(api_function.call_count, 1)
+
     def test_dc_api_wrapper_stops_after_success(self):
         """Test wrapper stops retrying after a successful response."""
         expected_response = {'ok': True}
@@ -102,6 +123,79 @@ class TestDCAPIWrapper(unittest.TestCase):
                                          use_cache=False)
         self.assertEqual(response, expected_response)
         self.assertEqual(api_function.call_count, 2)
+
+    def test_dc_api_wrapper_retries_http_429(self):
+        """Test wrapper retries HTTP 429 and succeeds."""
+        expected_response = {'ok': True}
+        retryable_error = urllib.error.HTTPError(
+            url='https://example.com',
+            code=429,
+            msg='Too Many Requests',
+            hdrs=None,
+            fp=None,
+        )
+        api_function = mock.Mock(
+            side_effect=[retryable_error, expected_response])
+        response = dc_api.dc_api_wrapper(api_function, {},
+                                         retries=2,
+                                         retry_secs=0,
+                                         use_cache=False)
+        self.assertEqual(response, expected_response)
+        self.assertEqual(api_function.call_count, 2)
+
+    def test_dc_api_wrapper_does_not_retry_http_400(self):
+        """Test wrapper does not retry non-transient HTTP errors."""
+        non_retryable_error = urllib.error.HTTPError(
+            url='https://example.com',
+            code=400,
+            msg='Bad Request',
+            hdrs=None,
+            fp=None,
+        )
+        api_function = mock.Mock(side_effect=non_retryable_error)
+        with self.assertRaises(urllib.error.HTTPError):
+            dc_api.dc_api_wrapper(api_function, {},
+                                  retries=3,
+                                  retry_secs=0,
+                                  use_cache=False)
+        self.assertEqual(api_function.call_count, 1)
+
+    def test_dc_api_wrapper_retries_http_503_until_exhausted(self):
+        """Test wrapper retries HTTP 503 until max attempts are exhausted."""
+        retryable_error = urllib.error.HTTPError(
+            url='https://example.com',
+            code=503,
+            msg='Service Unavailable',
+            hdrs=None,
+            fp=None,
+        )
+        api_function = mock.Mock(side_effect=retryable_error)
+        with self.assertRaises(urllib.error.HTTPError):
+            dc_api.dc_api_wrapper(api_function, {},
+                                  retries=3,
+                                  retry_secs=0,
+                                  use_cache=False)
+        self.assertEqual(api_function.call_count, 3)
+
+    def test_dc_api_wrapper_non_retryable_exception_has_note(self):
+        """Test non-retryable exceptions bubble once with added context note."""
+        api_function = mock.Mock(side_effect=ValueError('boom'))
+        with self.assertRaises(ValueError) as context:
+            dc_api.dc_api_wrapper(api_function, {},
+                                  retries=3,
+                                  retry_secs=0,
+                                  use_cache=False)
+        self.assertEqual(api_function.call_count, 1)
+        notes = getattr(context.exception, '__notes__', [])
+        self.assertTrue(any('max attempts 3' in note for note in notes))
+
+    def test_invoke_dc_api_restores_api_root_on_exception(self):
+        """Test API root is restored after a failing invoke with custom root."""
+        api_function = mock.Mock(side_effect=ValueError('boom'))
+        original_api_root = dc.utils._API_ROOT
+        with self.assertRaises(ValueError):
+            dc_api._invoke_dc_api(api_function, {}, api_root='https://test.api')
+        self.assertEqual(dc.utils._API_ROOT, original_api_root)
 
     def test_dc_get_node_property_values(self):
         """Test API wrapper to get all property:values for a node."""
