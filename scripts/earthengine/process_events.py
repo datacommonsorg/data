@@ -21,7 +21,6 @@ import os
 import pickle
 import sys
 import time
-import datacommons as dc
 
 from absl import app
 from absl import flags
@@ -75,6 +74,7 @@ from counters import Counters
 from latlng_recon_geojson import LatLng2Places
 from config_map import ConfigMap
 from dc_api_wrapper import dc_api_batched_wrapper
+from dc_api_wrapper import get_datacommons_client
 
 # List of place types in increasing order of preference for name.
 # This is used to pick the name of the place from the list of affectedPlaces
@@ -699,13 +699,29 @@ class GeoEventsProcessor:
 
         if lookup_places:
             start_time = time.perf_counter()
-            cache_dict.update(
-                dc_api_batched_wrapper(function=dc.get_property_values,
-                                       dcids=lookup_places,
-                                       args={
-                                           'prop': prop,
-                                       },
-                                       config=self._config))
+            client = get_datacommons_client(self._config)
+            node_data_by_place = dc_api_batched_wrapper(
+                function=client.node.fetch_property_values,
+                dcids=lookup_places,
+                args={
+                    'properties': prop,
+                },
+                dcid_arg_kw='node_dcids',
+                config=self._config)
+            # Normalize V2 node/arcs response to V1-style list cache values,
+            # including empty lists for negative caching.
+            for placeid in lookup_places:
+                node_data = node_data_by_place.get(placeid, {})
+                prop_nodes = (node_data.get('arcs',
+                                            {}).get(prop, {}).get('nodes', []))
+                values = []
+                for node in prop_nodes:
+                    value = node.get('dcid')
+                    if not value:
+                        value = node.get('value')
+                    if value is not None:
+                        values.append(str(value))
+                cache_dict[placeid] = values
             end_time = time.perf_counter()
             self._counters.add_counter(f'dc_api_lookup_{prop}_count',
                                        len(lookup_places))
