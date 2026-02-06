@@ -520,30 +520,22 @@ def get_default_config() -> dict:
     Returns:
         A dictionary of default configuration parameter values.
     """
-    # Hardcoded defaults for when flags are not defined (e.g. used as library)
+    flag_map = {
+        'sampler_rate': 'sampler_rate',
+        'sampler_input': 'sampler_input',
+        'sampler_output': 'sampler_output',
+        'sampler_output_rows': 'sampler_output_rows',
+        'header_rows': 'sampler_header_rows',
+        'sampler_rows_per_key': 'sampler_rows_per_key',
+        'sampler_column_regex': 'sampler_column_regex',
+        'sampler_unique_columns': 'sampler_unique_columns',
+        'input_delimiter': 'sampler_input_delimiter',
+        'output_delimiter': 'sampler_output_delimiter',
+        'input_encoding': 'sampler_input_encoding',
+    }
     configs = {
-        'sampler_rate':
-            _DEFAULT_SAMPLER_CONFIG['sampler_rate'],
-        'sampler_input':
-            _DEFAULT_SAMPLER_CONFIG['sampler_input'],
-        'sampler_output':
-            _DEFAULT_SAMPLER_CONFIG['sampler_output'],
-        'sampler_output_rows':
-            _DEFAULT_SAMPLER_CONFIG['sampler_output_rows'],
-        'header_rows':
-            _DEFAULT_SAMPLER_CONFIG['sampler_header_rows'],
-        'sampler_rows_per_key':
-            _DEFAULT_SAMPLER_CONFIG['sampler_rows_per_key'],
-        'sampler_column_regex':
-            _DEFAULT_SAMPLER_CONFIG['sampler_column_regex'],
-        'sampler_unique_columns':
-            _DEFAULT_SAMPLER_CONFIG['sampler_unique_columns'],
-        'input_delimiter':
-            _DEFAULT_SAMPLER_CONFIG['sampler_input_delimiter'],
-        'output_delimiter':
-            _DEFAULT_SAMPLER_CONFIG['sampler_output_delimiter'],
-        'input_encoding':
-            _DEFAULT_SAMPLER_CONFIG['sampler_input_encoding'],
+        config_key: _DEFAULT_SAMPLER_CONFIG[flag_name]
+        for config_key, flag_name in flag_map.items()
     }
     # Use default values of flags if defined and parsed
     try:
@@ -551,19 +543,6 @@ def get_default_config() -> dict:
             flags.FLAGS.mark_as_parsed()
 
         # Update with flag values if they exist
-        flag_map = {
-            'sampler_rate': 'sampler_rate',
-            'sampler_input': 'sampler_input',
-            'sampler_output': 'sampler_output',
-            'sampler_output_rows': 'sampler_output_rows',
-            'header_rows': 'sampler_header_rows',
-            'sampler_rows_per_key': 'sampler_rows_per_key',
-            'sampler_column_regex': 'sampler_column_regex',
-            'sampler_unique_columns': 'sampler_unique_columns',
-            'input_delimiter': 'sampler_input_delimiter',
-            'output_delimiter': 'sampler_output_delimiter',
-            'input_encoding': 'sampler_input_encoding',
-        }
         for config_key, flag_name in flag_map.items():
             if hasattr(flags.FLAGS, flag_name):
                 configs[config_key] = getattr(flags.FLAGS, flag_name)

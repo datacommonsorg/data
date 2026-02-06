@@ -273,21 +273,21 @@ class SemanticMatcher:
 
 def get_semantic_matcher_default_config() -> dict:
     """Get default config for semantic_matcher."""
+    flag_map = {
+        'embeddings_model': 'semantic_matcher_model',
+        'semantic_matcher_cache': 'semantic_matcher_cache',
+    }
     configs = {
-        'embeddings_model':
-            _DEFAULT_MATCHER_CONFIG['semantic_matcher_model'],
-        'semantic_matcher_cache':
-            _DEFAULT_MATCHER_CONFIG['semantic_matcher_cache'],
+        config_key: _DEFAULT_MATCHER_CONFIG[flag_name]
+        for config_key, flag_name in flag_map.items()
     }
     # Use default values of flags if defined and parsed
     try:
         if not flags.FLAGS.is_parsed():
             flags.FLAGS.mark_as_parsed()
-        if hasattr(flags.FLAGS, 'semantic_matcher_model'):
-            configs['embeddings_model'] = flags.FLAGS.semantic_matcher_model
-        if hasattr(flags.FLAGS, 'semantic_matcher_cache'):
-            configs[
-                'semantic_matcher_cache'] = flags.FLAGS.semantic_matcher_cache
+        for config_key, flag_name in flag_map.items():
+            if hasattr(flags.FLAGS, flag_name):
+                configs[config_key] = getattr(flags.FLAGS, flag_name)
     except flags.UnparsedFlagAccessError:
         pass
     return configs

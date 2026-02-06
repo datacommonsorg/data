@@ -131,16 +131,16 @@ def _define_flags():
 
 def get_diff_config() -> dict:
     """Returns a dictionary of config parameters for MCF diff from flags."""
-    configs = _DEFAULT_DIFF_CONFIG.copy()
+    flag_names = [
+        'ignore_property', 'compare_property', 'fingerprint_dcid',
+        'ignore_nodes_with_pv', 'compare_dcids', 'compare_nodes_with_pv',
+        'show_diff_nodes_only'
+    ]
+    configs = {name: _DEFAULT_DIFF_CONFIG[name] for name in flag_names}
     # Use default values of flags if defined and parsed
     try:
         if not flags.FLAGS.is_parsed():
             flags.FLAGS.mark_as_parsed()
-        flag_names = [
-            'ignore_property', 'compare_property', 'fingerprint_dcid',
-            'ignore_nodes_with_pv', 'compare_dcids', 'compare_nodes_with_pv',
-            'show_diff_nodes_only'
-        ]
         for flag_name in flag_names:
             if hasattr(flags.FLAGS, flag_name):
                 configs[flag_name] = getattr(flags.FLAGS, flag_name)
