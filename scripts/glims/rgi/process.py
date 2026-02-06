@@ -101,13 +101,11 @@ def _load_geojsons():
 
     print('Got', len(geojsons), 'geojsons!')
 
-    cip_response = _get_response_data(
-        client.node.fetch_property_values(node_dcids=countries,
-                                          properties='containedInPlace'))
+    cip_response = client.node.fetch_property_values(
+        node_dcids=countries, properties='containedInPlace').get_properties()
     cip = {}
     for country in countries:
-        nodes = _get_property_nodes(cip_response.get(country),
-                                    'containedInPlace')
+        nodes = cip_response.get(country, {}).get('containedInPlace', [])
         cip[country] = [
             dcid for dcid in (_extract_node_dcid(node) for node in nodes)
             if dcid
