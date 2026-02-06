@@ -57,7 +57,8 @@ def _define_flags():
                       'Properties with the value to be checked')
     flags.DEFINE_list(
         'data_series_date_properties', ['observationDate'],
-        'Properties that can be used to sort values within a series such as date')
+        'Properties that can be used to sort values within a series such as date'
+    )
     flags.DEFINE_bool('filter_data_keep_recent', True,
                       'Keep the most recent value for a time series.')
 

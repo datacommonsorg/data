@@ -259,7 +259,8 @@ class SemanticMatcher:
 def get_semantic_matcher_default_config() -> dict:
     """Get default config for semantic_matcher."""
     configs = {
-        'embeddings_model': 'all-MiniLM-L6-v2',
+        'embeddings_model':
+            'all-MiniLM-L6-v2',
         'semantic_matcher_cache':
             'sample_schema_embeddings-all-MiniLM-L6-v2.pkl',
     }
@@ -270,7 +271,8 @@ def get_semantic_matcher_default_config() -> dict:
         if hasattr(flags.FLAGS, 'semantic_matcher_model'):
             configs['embeddings_model'] = flags.FLAGS.semantic_matcher_model
         if hasattr(flags.FLAGS, 'semantic_matcher_cache'):
-            configs['semantic_matcher_cache'] = flags.FLAGS.semantic_matcher_cache
+            configs[
+                'semantic_matcher_cache'] = flags.FLAGS.semantic_matcher_cache
     except flags.UnparsedFlagAccessError:
         pass
     return configs

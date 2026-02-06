@@ -45,8 +45,9 @@ sys.path.append(
 def _define_flags():
     flags.DEFINE_string('sampler_input', '',
                         'The path to the input CSV file to be sampled.')
-    flags.DEFINE_string('sampler_output', '',
-                        'The path to the output file for the sampled CSV data.')
+    flags.DEFINE_string(
+        'sampler_output', '',
+        'The path to the output file for the sampled CSV data.')
     flags.DEFINE_integer(
         'sampler_output_rows', 100,
         'The maximum number of rows to include in the sampled output.')
@@ -63,7 +64,8 @@ def _define_flags():
     # See: https://github.com/datacommonsorg/data/pull/1445#discussion_r2180147075
     flags.DEFINE_string(
         'sampler_column_regex', r'^[0-9]{4}$|[a-zA-Z-]',
-        'A regular expression used to identify and select unique column values.')
+        'A regular expression used to identify and select unique column values.'
+    )
     flags.DEFINE_string(
         'sampler_unique_columns', '',
         'A comma-separated list of column names to use for selecting unique rows.'

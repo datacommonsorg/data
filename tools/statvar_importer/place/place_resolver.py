@@ -62,7 +62,8 @@ def _define_flags():
         '',
         'Input csv with places to resolve under column "name".',
     )
-    flags.DEFINE_string('resolve_output_csv', '', 'Output csv with place dcids.')
+    flags.DEFINE_string('resolve_output_csv', '',
+                        'Output csv with place dcids.')
     flags.DEFINE_list('resolve_place_names', [],
                       'List of place names to resolve.')
     flags.DEFINE_string('maps_key', os.environ.get('MAPS_API_KEY', ''),
@@ -1350,7 +1351,8 @@ def main(_):
     config.set_config('places_within', flags.FLAGS.place_names_within)
     config.set_config('place_type', flags.FLAGS.place_types)
     config.set_config('place_name_column', flags.FLAGS.place_name_column)
-    config.set_config('place_latitude_column', flags.FLAGS.place_latitude_column)
+    config.set_config('place_latitude_column',
+                      flags.FLAGS.place_latitude_column)
     config.set_config('place_longitude_column',
                       flags.FLAGS.place_longitude_column)
     config.set_config('places_resolved_csv', flags.FLAGS.place_resolver_cache)
