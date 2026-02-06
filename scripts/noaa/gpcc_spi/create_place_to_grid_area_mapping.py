@@ -82,10 +82,8 @@ def get_place_by_type(parent_places, places_types: List[str]) -> List[str]:
         if not parent_place_to_places:
             continue
         for places in parent_place_to_places.values():
-            for place in places:
-                dcid = place.get('dcid')
-                if dcid:
-                    all_types_of_places.append(dcid)
+            all_types_of_places.extend(
+                place.get('dcid') for place in places if place.get('dcid'))
     return all_types_of_places
 
 
