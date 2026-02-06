@@ -16,6 +16,7 @@ fsspec
 func-timeout
 gcsfs
 geojson
+geojson_rewind
 geopy
 google-api-python-client
 google-auth
