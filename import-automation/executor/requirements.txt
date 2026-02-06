@@ -54,6 +54,7 @@ s2sphere
 selenium
 sdmx1
 shapely
+tenacity
 urllib3
 webdriver_manager
 xarray
