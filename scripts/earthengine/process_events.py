@@ -716,9 +716,7 @@ class GeoEventsProcessor:
                                             {}).get(prop, {}).get('nodes', []))
                 values = []
                 for node in prop_nodes:
-                    value = node.get('dcid')
-                    if not value:
-                        value = node.get('value')
+                    value = node.get('dcid') or node.get('value')
                     if value is not None:
                         values.append(str(value))
                 cache_dict[placeid] = values
