@@ -1,0 +1,9 @@
+Node: E:monthlyWages->E0
+observationDate: C:monthlyWages->observationDate
+observationAbout: C:monthlyWages->observationAbout
+variableMeasured: C:monthlyWages->variableMeasured
+value: C:monthlyWages->value
+unit: C:monthlyWages->unit
+measurementMethod: C:monthlyWages->measurementMethod
+observationPeriod: C:monthlyWages->observationPeriod
+typeOf: dcs:StatVarObservation
