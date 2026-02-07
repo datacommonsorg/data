@@ -54,6 +54,8 @@ class RunConfig:
     dataset_prefix: str | None = None
     working_dir: str | None = None
     run_only: str | None = None
+    run_from: str | None = None
+    run_until: str | None = None
     force: bool = False
     verbose: bool = False
     skip_confirmation: bool = False
