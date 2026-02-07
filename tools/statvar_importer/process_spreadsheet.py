@@ -39,10 +39,13 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 import gspread
 
-flags.DEFINE_string('input_sheet', '', 'URL of spreadsheet to process')
-flags.DEFINE_string('output_prefix', '',
-                    'Path prefix for output csv and mcf files.')
-flags.DEFINE_string('credentials', '', 'File with credentials.')
+
+def _define_flags():
+    flags.DEFINE_string('input_sheet', '', 'URL of spreadsheet to process')
+    flags.DEFINE_string('output_prefix', '',
+                        'Path prefix for output csv and mcf files.')
+    flags.DEFINE_string('credentials', '', 'File with credentials.')
+
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -340,17 +343,18 @@ def main(_):
         return
 
     # Process the spreadsheet specified
-    output_path = _FLAGS.output_prefix
+    output_path = flags.FLAGS.output_prefix
     if not output_path:
-        output_path = _FLAGS.output_path
+        output_path = flags.FLAGS.output_path
     process_spreadsheets(
         stat_var_processor.StatVarDataProcessor,
-        input_file=_FLAGS.input_sheet,
+        input_file=flags.FLAGS.input_sheet,
         output_path=output_path,
-        config_file=_FLAGS.config_file,
-        pv_map_files=_FLAGS.pv_map,
+        config_file=flags.FLAGS.config_file,
+        pv_map_files=flags.FLAGS.pv_map,
     )
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

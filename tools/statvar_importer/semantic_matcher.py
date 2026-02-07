@@ -29,20 +29,36 @@ sys.path.append(os.path.dirname(_SCRIPT_DIR))
 _DATA_DIR = _SCRIPT_DIR.split('/data', 1)[0]
 sys.path.append(os.path.join(_DATA_DIR, 'data', 'util'))
 
-_FLAGS = flags.FLAGS
+_DEFAULT_MATCHER_CONFIG = {
+    'semantic_matcher_corpus': '',
+    'semantic_matcher_cache': 'sample_schema_embeddings-all-MiniLM-L6-v2.pkl',
+    'semantic_matcher_input': '',
+    'semantic_matcher_output': '',
+    'semantic_matcher_model': 'all-MiniLM-L6-v2',
+    'semantic_matcher_debug': False,
+}
 
-flags.DEFINE_string('semantic_matcher_corpus', '',
-                    'Corpus file with key, value')
-flags.DEFINE_string('semantic_matcher_cache',
-                    'sample_schema_embeddings-all-MiniLM-L6-v2.pkl',
-                    'Cache pickle file with corpus text and embeddings')
-flags.DEFINE_string('semantic_matcher_input', '',
-                    'Input file with lookup queries.')
-flags.DEFINE_string('semantic_matcher_output', '',
-                    'Output file with results per query.')
-flags.DEFINE_string('semantic_matcher_model', 'all-MiniLM-L6-v2',
-                    'Output file with results per query.')
-flags.DEFINE_bool('semantic_matcher_debug', False, 'Enable debug logs.')
+
+def _define_flags():
+    flags.DEFINE_string('semantic_matcher_corpus',
+                        _DEFAULT_MATCHER_CONFIG['semantic_matcher_corpus'],
+                        'Corpus file with key, value')
+    flags.DEFINE_string('semantic_matcher_cache',
+                        _DEFAULT_MATCHER_CONFIG['semantic_matcher_cache'],
+                        'Cache pickle file with corpus text and embeddings')
+    flags.DEFINE_string('semantic_matcher_input',
+                        _DEFAULT_MATCHER_CONFIG['semantic_matcher_input'],
+                        'Input file with lookup queries.')
+    flags.DEFINE_string('semantic_matcher_output',
+                        _DEFAULT_MATCHER_CONFIG['semantic_matcher_output'],
+                        'Output file with results per query.')
+    flags.DEFINE_string('semantic_matcher_model',
+                        _DEFAULT_MATCHER_CONFIG['semantic_matcher_model'],
+                        'Output file with results per query.')
+    flags.DEFINE_bool('semantic_matcher_debug',
+                      _DEFAULT_MATCHER_CONFIG['semantic_matcher_debug'],
+                      'Enable debug logs.')
+
 
 import file_util
 import process_http_server
@@ -257,13 +273,24 @@ class SemanticMatcher:
 
 def get_semantic_matcher_default_config() -> dict:
     """Get default config for semantic_matcher."""
-    # Use default values of flags for tests
-    if not _FLAGS.is_parsed():
-        _FLAGS.mark_as_parsed()
-    return {
-        'embeddings_model': _FLAGS.semantic_matcher_model,
-        'semantic_matcher_cache': _FLAGS.semantic_matcher_cache,
+    flag_map = {
+        'embeddings_model': 'semantic_matcher_model',
+        'semantic_matcher_cache': 'semantic_matcher_cache',
     }
+    configs = {
+        config_key: _DEFAULT_MATCHER_CONFIG[flag_name]
+        for config_key, flag_name in flag_map.items()
+    }
+    # Use default values of flags if defined and parsed
+    try:
+        if not flags.FLAGS.is_parsed():
+            flags.FLAGS.mark_as_parsed()
+        for config_key, flag_name in flag_map.items():
+            if hasattr(flags.FLAGS, flag_name):
+                configs[config_key] = getattr(flags.FLAGS, flag_name)
+    except flags.UnparsedFlagAccessError:
+        pass
+    return configs
 
 
 def semantic_matcher_lookup(corpus_file: str,
@@ -322,15 +349,16 @@ def main(_):
     if process_http_server.run_http_server(script=__file__, module=__name__):
         return
 
-    if _FLAGS.semantic_matcher_debug:
+    if flags.FLAGS.semantic_matcher_debug:
         logging.set_verbosity(2)
 
     semantic_matcher_lookup(
-        _FLAGS.semantic_matcher_corpus,
-        _FLAGS.semantic_matcher_input,
-        _FLAGS.semantic_matcher_output,
+        flags.FLAGS.semantic_matcher_corpus,
+        flags.FLAGS.semantic_matcher_input,
+        flags.FLAGS.semantic_matcher_output,
     )
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
