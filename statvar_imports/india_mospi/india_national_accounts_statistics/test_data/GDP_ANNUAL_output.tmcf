@@ -1,0 +1,9 @@
+Node: E:GDP_ANNUAL_output->E0
+observationAbout: C:GDP_ANNUAL_output->observationAbout
+observationDate: C:GDP_ANNUAL_output->observationDate
+variableMeasured: C:GDP_ANNUAL_output->variableMeasured
+value: C:GDP_ANNUAL_output->value
+unit: C:GDP_ANNUAL_output->unit
+measurementMethod: C:GDP_ANNUAL_output->measurementMethod
+observationPeriod: C:GDP_ANNUAL_output->observationPeriod
+typeOf: dcs:StatVarObservation
