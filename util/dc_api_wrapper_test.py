@@ -199,14 +199,6 @@ class TestDCAPIWrapper(unittest.TestCase):
         notes = getattr(context.exception, '__notes__', [])
         self.assertTrue(any('max attempts 3' in note for note in notes))
 
-    def test_invoke_dc_api(self):
-        """Test invoke helper calls function with args."""
-        api_function = mock.Mock(return_value={'ok': True})
-        response = dc_api._invoke_dc_api(api_function,
-                                         {'node_dcids': ['Count_Person']})
-        self.assertEqual(response, {'ok': True})
-        api_function.assert_called_once_with(node_dcids=['Count_Person'])
-
     def test_dc_get_node_property_values(self):
         """Test API wrapper to get all property:values for a node."""
         node_pvs = dc_api.dc_api_get_node_property_values(['dcid:Count_Person'])

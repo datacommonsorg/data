@@ -86,10 +86,6 @@ def _log_retry_attempt(function, retry_state: RetryCallState) -> None:
     )
 
 
-def _invoke_dc_api(function, args: dict):
-    return function(**args)
-
-
 def dc_api_wrapper(
     function,
     args: dict,
@@ -142,7 +138,7 @@ def dc_api_wrapper(
                         f'Invoking DC API {function}, attempt '
                         f'{attempt_number}/{max_attempts} with {args}')
 
-                    response = _invoke_dc_api(function, args)
+                    response = function(**args)
                     logging.debug(
                         f'Got API response {response} for {function}, {args}')
                     return response
