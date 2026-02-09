@@ -10,5 +10,5 @@ process,
 comments,
 output_columns,"observationAbout,observationDate,variableMeasured,value,unit,measurementMethod,observationPeriod"
 #header_rows,6
-#mapped_rows,6
+#mapped_rows,5
 dc_api_root,https://api.datacommons.org
