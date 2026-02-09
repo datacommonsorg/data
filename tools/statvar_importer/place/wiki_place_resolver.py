@@ -54,32 +54,34 @@ from absl import logging
 # uncomment to run pprof
 # from pypprof.net_http import start_pprof_server
 
-_FLAGS = flags.FLAGS
 
-flags.DEFINE_list(
-    'wiki_place_input_csv',
-    '',
-    'Input csv with places to resolve under column "name".',
-)
-flags.DEFINE_string('wiki_place_output_csv', '', 'Output csv with place dcids.')
-flags.DEFINE_list('wiki_place_names', [], 'List of place names to resolve.')
-flags.DEFINE_string(
-    'wiki_place_config',
-    '',
-    'Config setting for place resolution as json or python dict.',
-)
-flags.DEFINE_list(
-    'wiki_place_properties',
-    '',
-    'List of wiki place property codes, such as P31',
-)
-flags.DEFINE_string(
-    'custom_search_key', os.environ.get('SEARCH_API_KEY', ''),
-    'API key for Google custom search API.'
-    'Get an API key at https://developers.google.com/custom-search/v1/introduction.'
-)
-flags.DEFINE_integer('wiki_place_pprof_port', 0,
-                     'HTTP port for running pprof server.')
+def _define_flags():
+    flags.DEFINE_list(
+        'wiki_place_input_csv',
+        '',
+        'Input csv with places to resolve under column "name".',
+    )
+    flags.DEFINE_string('wiki_place_output_csv', '',
+                        'Output csv with place dcids.')
+    flags.DEFINE_list('wiki_place_names', [], 'List of place names to resolve.')
+    flags.DEFINE_string(
+        'wiki_place_config',
+        '',
+        'Config setting for place resolution as json or python dict.',
+    )
+    flags.DEFINE_list(
+        'wiki_place_properties',
+        '',
+        'List of wiki place property codes, such as P31',
+    )
+    flags.DEFINE_string(
+        'custom_search_key', os.environ.get('SEARCH_API_KEY', ''),
+        'API key for Google custom search API.'
+        'Get an API key at https://developers.google.com/custom-search/v1/introduction.'
+    )
+    flags.DEFINE_integer('wiki_place_pprof_port', 0,
+                         'HTTP port for running pprof server.')
+
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -476,20 +478,21 @@ def main(_):
 
     logging.set_verbosity(2)
 
-    config = ConfigMap(_FLAGS.wiki_place_config)
-    if _FLAGS.custom_search_key:
-        config.set_config('custom_search_key', _FLAGS.custom_search_key)
+    config = ConfigMap(flags.FLAGS.wiki_place_config)
+    if flags.FLAGS.custom_search_key:
+        config.set_config('custom_search_key', flags.FLAGS.custom_search_key)
     wiki_place_resolver = WikiPlaceResolver(config_dict=config.get_configs())
-    input_csv = _FLAGS.wiki_place_input_csv
+    input_csv = flags.FLAGS.wiki_place_input_csv
     places = file_util.file_load_py_dict(input_csv)
     logging.info(f'Looking up wiki properties for {len(places)}')
     wiki_places = wiki_place_resolver.lookup_wiki_places(places)
     if wiki_places:
-        output_csv = _FLAGS.wiki_place_output_csv
+        output_csv = flags.FLAGS.wiki_place_output_csv
         if not output_csv:
             output_csv = input_csv
         file_util.file_write_py_dict(wiki_places, output_csv)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
