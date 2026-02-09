@@ -59,14 +59,14 @@ def _define_flags():
     flags.DEFINE_string('filter_data_output', '', 'output CSV file')
     flags.DEFINE_float('filter_data_max_change_ratio',
                        _DEFAULT_FILTER_CONFIG['filter_data_max_change_ratio'],
-                       'Maximum change alowed between successive values.')
+                       'Maximum change allowed between successive values.')
     flags.DEFINE_float(
         'filter_data_max_yearly_change_ratio',
         _DEFAULT_FILTER_CONFIG['filter_data_max_yearly_change_ratio'],
-        'Maximum change alowed between successive years.')
+        'Maximum change allowed between successive years.')
     flags.DEFINE_float('filter_data_min_value',
                        _DEFAULT_FILTER_CONFIG['filter_data_min_value'],
-                       'Minumum value allowed')
+                       'Minimum value allowed')
     flags.DEFINE_float('filter_data_max_value',
                        _DEFAULT_FILTER_CONFIG['filter_data_max_value'],
                        'Maximum value allowed')
@@ -96,14 +96,10 @@ def get_default_filter_data_config() -> dict:
     ]
     configs = {name: _DEFAULT_FILTER_CONFIG[name] for name in flag_names}
     # Use default values of flags if defined and parsed
-    try:
-        if not flags.FLAGS.is_parsed():
-            flags.FLAGS.mark_as_parsed()
+    if flags.FLAGS.is_parsed():
         for flag_name in flag_names:
             if hasattr(flags.FLAGS, flag_name):
                 configs[flag_name] = getattr(flags.FLAGS, flag_name)
-    except flags.UnparsedFlagAccessError:
-        pass
     return configs
 
 
