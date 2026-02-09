@@ -33,13 +33,13 @@ import file_util
 
 from counters import Counters
 
-flags.DEFINE_string('input_json', '', 'JSON file to be converted into csv')
-flags.DEFINE_string('csv_output', '', 'Output CSV file')
-flags.DEFINE_list('csv_columns', [], 'List of columns')
-flags.DEFINE_list('exclude_columns', [],
-                  'Drop columns with the token in the list')
 
-_FLAGS = flags.FLAGS
+def _define_flags():
+    flags.DEFINE_string('input_json', '', 'JSON file to be converted into csv')
+    flags.DEFINE_string('csv_output', '', 'Output CSV file')
+    flags.DEFINE_list('csv_columns', [], 'List of columns')
+    flags.DEFINE_list('exclude_columns', [],
+                      'Drop columns with the token in the list')
 
 
 def flatten_dict(nested_dict: dict, key_prefix: str = '') -> dict:
@@ -144,18 +144,19 @@ def file_json_to_csv(
 
 
 def main(_):
-    if not _FLAGS.input_json:
+    if not flags.FLAGS.input_json:
         logging.error(
             f'Please provide a JSON file to be converted to CSV with --input_json'
         )
         return 1
     file_json_to_csv(
-        _FLAGS.input_json,
-        _FLAGS.csv_output,
-        _FLAGS.csv_columns,
-        _FLAGS.exclude_columns,
+        flags.FLAGS.input_json,
+        flags.FLAGS.csv_output,
+        flags.FLAGS.csv_columns,
+        flags.FLAGS.exclude_columns,
     )
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
