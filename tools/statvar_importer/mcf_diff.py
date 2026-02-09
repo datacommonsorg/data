@@ -74,11 +74,8 @@ sys.path.append(
 from counters import Counters
 from mcf_file_util import load_mcf_nodes, filter_mcf_nodes, normalize_mcf_node, normalize_value, node_dict_to_text, get_node_dcid, strip_namespace
 
-flags.DEFINE_string('mcf1', '', 'MCF file with nodes')
-flags.DEFINE_string('mcf2', '', 'MCF file with nodes')
-flags.DEFINE_list(
-    'ignore_property',
-    [
+_DEFAULT_DIFF_CONFIG = {
+    'ignore_property': [
         'description',
         'provenance',
         'memberOf',
@@ -88,46 +85,68 @@ flags.DEFINE_list(
         'keyString',  # 'Node'
         'relevantVariable',
     ],
-    'List of properties to be ignored in diffs.',
-)
-flags.DEFINE_list('compare_property', [],
-                  'List of properties to be compared in diffs.')
-flags.DEFINE_bool(
-    'fingerprint_dcid',
-    False,
-    'If set, ignores the dcid for nodes and instead uses fingerprint.',
-)
-flags.DEFINE_list(
-    'ignore_nodes_with_pv',
-    [],
-    'Ignore nodes containing any of the property:values in the comma separated'
-    ' list.',
-)
-flags.DEFINE_list('compare_dcids', [],
-                  'Compare nodes with dcids in the comma seperated list.')
-flags.DEFINE_list(
-    'compare_nodes_with_pv',
-    [],
-    'Compare nodes containing any of the property:values in the comma separated'
-    ' list.',
-)
-flags.DEFINE_bool('show_diff_nodes_only', True, 'Output nodes with diff only.')
+    'compare_property': [],
+    'fingerprint_dcid': False,
+    'ignore_nodes_with_pv': [],
+    'compare_dcids': [],
+    'compare_nodes_with_pv': [],
+    'show_diff_nodes_only': True,
+}
 
-_FLAGS = flags.FLAGS
-# _FLAGS(sys.argv)  # Allow invocation without app.run()
+
+def _define_flags():
+    flags.DEFINE_string('mcf1', '', 'MCF file with nodes')
+    flags.DEFINE_string('mcf2', '', 'MCF file with nodes')
+    flags.DEFINE_list(
+        'ignore_property',
+        _DEFAULT_DIFF_CONFIG['ignore_property'],
+        'List of properties to be ignored in diffs.',
+    )
+    flags.DEFINE_list('compare_property',
+                      _DEFAULT_DIFF_CONFIG['compare_property'],
+                      'List of properties to be compared in diffs.')
+    flags.DEFINE_bool(
+        'fingerprint_dcid',
+        _DEFAULT_DIFF_CONFIG['fingerprint_dcid'],
+        'If set, ignores the dcid for nodes and instead uses fingerprint.',
+    )
+    flags.DEFINE_list(
+        'ignore_nodes_with_pv',
+        _DEFAULT_DIFF_CONFIG['ignore_nodes_with_pv'],
+        'Ignore nodes containing any of the property:values in the comma separated'
+        ' list.',
+    )
+    flags.DEFINE_list('compare_dcids', _DEFAULT_DIFF_CONFIG['compare_dcids'],
+                      'Compare nodes with dcids in the comma seperated list.')
+    flags.DEFINE_list(
+        'compare_nodes_with_pv',
+        _DEFAULT_DIFF_CONFIG['compare_nodes_with_pv'],
+        'Compare nodes containing any of the property:values in the comma separated'
+        ' list.',
+    )
+    flags.DEFINE_bool('show_diff_nodes_only',
+                      _DEFAULT_DIFF_CONFIG['show_diff_nodes_only'],
+                      'Output nodes with diff only.')
 
 
 def get_diff_config() -> dict:
     """Returns a dictionary of config parameters for MCF diff from flags."""
-    return {
-        'ignore_property': _FLAGS.ignore_property,
-        'compare_property': _FLAGS.compare_property,
-        'fingerprint_dcid': _FLAGS.fingerprint_dcid,
-        'ignore_nodes_with_pv': _FLAGS.ignore_nodes_with_pv,
-        'compare_dcids': _FLAGS.compare_dcids,
-        'compare_nodes_with_pv': _FLAGS.compare_nodes_with_pv,
-        'show_diff_nodes_only': _FLAGS.show_diff_nodes_only,
-    }
+    flag_names = [
+        'ignore_property', 'compare_property', 'fingerprint_dcid',
+        'ignore_nodes_with_pv', 'compare_dcids', 'compare_nodes_with_pv',
+        'show_diff_nodes_only'
+    ]
+    configs = {name: _DEFAULT_DIFF_CONFIG[name] for name in flag_names}
+    # Use default values of flags if defined and parsed
+    try:
+        if not flags.FLAGS.is_parsed():
+            flags.FLAGS.mark_as_parsed()
+        for flag_name in flag_names:
+            if hasattr(flags.FLAGS, flag_name):
+                configs[flag_name] = getattr(flags.FLAGS, flag_name)
+    except flags.UnparsedFlagAccessError:
+        pass
+    return configs
 
 
 def diff_mcf_node_pvs(node_1: dict,
@@ -381,12 +400,13 @@ def diff_mcf_files(file1: str,
 
 
 def main(_):
-    if not _FLAGS.mcf1 or not _FLAGS.mcf2:
+    if not flags.FLAGS.mcf1 or not flags.FLAGS.mcf2:
         print(f'Please provide two MCF files to compare with --mcf1=<file1>'
               f' --mcf2=<file2>')
     else:
-        diff_mcf_files(_FLAGS.mcf1, _FLAGS.mcf2, get_diff_config())
+        diff_mcf_files(flags.FLAGS.mcf1, flags.FLAGS.mcf2, get_diff_config())
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
