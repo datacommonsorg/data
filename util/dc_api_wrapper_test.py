@@ -269,17 +269,42 @@ class TestDCAPIWrapper(unittest.TestCase):
         }
         self.assertEqual(response, expected_response)
 
-    def test_dc_api_resolve_latlng_v1_compat_shape(self):
+    @mock.patch('dc_api_wrapper.request_url')
+    def test_dc_api_resolve_latlng_v1_compat_shape(self, mock_request_url):
         """Test latlng resolution supports v1 compatibility response shape."""
+        mock_request_url.return_value = {
+            "entities": [{
+                "node":
+                    "37.42#-122.08",
+                "candidates": [{
+                    "dcid": "geoId/0649670",
+                    "dominantType": "City"
+                }]
+            }]
+        }
         latlngs = [{'latitude': 37.42, 'longitude': -122.08}]
         response = dc_api.dc_api_resolve_latlng(latlngs,
                                                 return_v1_response=True)
-        self.assertIn('placeCoordinates', response)
-        self.assertTrue(response['placeCoordinates'])
-        coord = response['placeCoordinates'][0]
-        self.assertEqual(coord.get('latitude'), 37.42)
-        self.assertEqual(coord.get('longitude'), -122.08)
-        self.assertIn('placeDcids', coord)
+        expected_response = {
+            "placeCoordinates": [{
+                "latitude": 37.42,
+                "longitude": -122.08,
+                "placeDcids": ["geoId/0649670"],
+                "places": [{
+                    "dcid": "geoId/0649670",
+                    "dominantType": "City"
+                }]
+            }]
+        }
+        self.assertEqual(response, expected_response)
+        mock_request_url.assert_called_once_with(
+            url='https://api.datacommons.org/v2/resolve',
+            params={
+                'nodes': ['37.42#-122.08'],
+                'property': '<-geoCoordinate->dcid'
+            },
+            method='POST',
+            output='json')
 
     def test_convert_v2_to_v1_coordinate_response(self):
         """Test coordinate response conversion from v2 to v1."""
