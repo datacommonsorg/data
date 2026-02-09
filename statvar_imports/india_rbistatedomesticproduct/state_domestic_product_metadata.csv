@@ -1,10 +1,10 @@
 parameter,value
 url,https://www.rbi.org.in/Scripts/PublicationsView.aspx?id=22089
-description,TABLE 25: PER CAPITA NET STATE DOMESTIC PRODUCT
+description,TABLE 19: PER CAPITA NET STATE DOMESTIC PRODUCT
 #place_type,AdministrativeArea1
 #places_within,country/IND
 start_date,2004
-end_date,2022
+end_date,2025
 release_frequency,Yearly
 process,
 comments,
