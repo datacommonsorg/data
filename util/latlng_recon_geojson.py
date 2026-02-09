@@ -22,6 +22,7 @@ import json
 import logging
 import time
 import urllib
+from dc_api_wrapper import dc_api_get_values
 
 _WORLD = 'Earth'
 _USA = 'country/USA'
@@ -39,7 +40,7 @@ _GJ_PROP = {
 def _get_geojsons(place_type, parent_place, retry=0):
     try:
         places = dc.get_places_in([parent_place], place_type)[parent_place]
-        resp = dc.get_property_values(places, _GJ_PROP[place_type])
+        resp = dc_api_get_values(places, _GJ_PROP[place_type])
         geojsons = {}
         for p, gj in resp.items():
             if not gj:

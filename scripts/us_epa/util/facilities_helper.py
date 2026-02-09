@@ -15,6 +15,7 @@
 
 import os
 import ssl
+import sys
 
 import datacommons
 import json
@@ -24,6 +25,13 @@ import requests
 from re import sub
 from requests.structures import CaseInsensitiveDict
 from requests.exceptions import HTTPError
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.join(_SCRIPT_DIR.split('/data/', 1)[0], 'data', 'util'))
+
+import dc_api_wrapper as dc_api
+from string_utils import str_to_list
 
 _COUNTY_CANDIDATES_CACHE = {}
 
@@ -116,11 +124,11 @@ def get_county_candidates(zcta):
         return _COUNTY_CANDIDATES_CACHE[zcta]
     candidate_lists = []
     for prop in ['containedInPlace', 'geoOverlaps']:
-        resp = datacommons.get_property_values([zcta],
+        resp = dc_api.dc_api_get_node_property([zcta],
                                                prop,
                                                out=True,
-                                               value_type='County')
-        candidate_lists.append(sorted(resp[zcta]))
+                                               constraints={'typeOf': 'County'})
+        candidate_lists.append(sorted(str_to_list(resp.get(zcta).get(prop, ''))))
     _COUNTY_CANDIDATES_CACHE[zcta] = candidate_lists
     return candidate_lists
 

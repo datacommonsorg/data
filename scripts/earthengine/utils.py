@@ -26,7 +26,6 @@ import tempfile
 from typing import Union
 
 from absl import logging
-import datacommons as dc
 from dateutil.relativedelta import relativedelta
 from geopy import distance
 import s2sphere
@@ -41,7 +40,8 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 from config_map import ConfigMap, read_py_dict_from_file, write_py_dict_to_file
-from dc_api_wrapper import dc_api_wrapper
+from dc_api_wrapper import dc_api_get_node_property
+from string_utils import str_to_list
 
 # Constants
 _MAX_LATITUDE = 90.0
@@ -368,23 +368,13 @@ def place_id_to_lat_lng(placeid: str,
         # Get the lat/lng from the DC API
         latlng = []
         for prop in ['latitude', 'longitude']:
-            # dc.utils._API_ROOT = 'http://autopush.api.datacommons.org'
-            # resp = dc.get_property_values([placeid], prop)
-            resp = dc_api_wrapper(
-                function=dc.get_property_values,
-                args={
-                    'dcids': [placeid],
-                    'prop': prop,
-                },
-                use_cache=True,
-                api_root=_DC_API_ROOT,
-            )
+            resp = dc_api_get_node_property([placeid], prop)
             if not resp or placeid not in resp:
                 return (0, 0)
-            values = resp[placeid]
+            values = str_to_list(resp[placeid].get(prop))
             if not len(values):
                 return (0, 0)
-            latlng.append(float(values[0]))
+            latlng.append(float(values[0].strip('"')))
         lat = latlng[0]
         lng = latlng[1]
     return (lat, lng)

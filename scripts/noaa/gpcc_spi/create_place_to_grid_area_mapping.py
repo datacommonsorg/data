@@ -23,14 +23,21 @@ Output:
 """
 
 from shapely import geometry
-import datacommons as dc
 import concurrent.futures
 from typing import List, Optional
 import json
 import csv
+import sys
+import os
 
 from absl import flags
 from absl import app
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.join(_SCRIPT_DIR.split('/data/', 1)[0], 'data', 'util'))
+
+import dc_api_wrapper as dc_api
 
 FLAGS = flags.FLAGS
 
@@ -59,20 +66,27 @@ def construct_one_degree_grid_polygons() -> List[geometry.box]:
 
 def get_place_by_type(parent_places, places_types: List[str]) -> List[str]:
     """Return the place ids of all places contained in a set of parent places."""
+    dc_api_client = dc_api.get_datacommons_client()
     all_types_of_places = []
     for place_type in places_types:
-        parent_place_to_places = dc.get_places_in(parent_places, place_type)
-        for places in parent_place_to_places.values():
-            for place in places:
-                all_types_of_places.extend(place)
+        parent_place_to_places = dc_api.dc_api_batched_wrapper(
+            dc_api_client.node.fetch_place_descendants,
+            parent_places, {'descendants_type': place_type},
+            dcid_arg_kw='place_dcids')
+        for child_places in parent_place_to_places.values():
+            for place in child_places:
+                    place_dcid = place.get('dcid')
+                    if place_dcid:
+                        all_types_of_places.append(place_dcid)
     return all_types_of_places
 
 
 def places_to_geo_jsons(places: List[str]):
     """Get geojsons for a list of places."""
-    resp = dc.get_property_values(places, 'geoJsonCoordinates')
+    resp = dc_api.dc_api_get_node_property(places, 'geoJsonCoordinates')
     geojsons = {}
-    for p, gj in resp.items():
+    for p, gj_value in resp.items():
+        gj = gj_value.get('geoJsonCoordinates')
         if not gj:
             continue
         geojsons[p] = geometry.shape(json.loads(gj[0]))

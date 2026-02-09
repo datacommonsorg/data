@@ -861,6 +861,7 @@ class PlaceResolver:
 
         lookup_dcids_by_prop = {p: [] for p in lookup_props}
         for dcid in dcids:
+            place_props = places.get(dcid, {})
             for prop in lookup_props:
                 value = place_props.get(prop, '')
                 if not value:

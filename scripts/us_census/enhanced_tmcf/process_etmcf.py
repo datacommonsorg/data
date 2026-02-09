@@ -1,6 +1,13 @@
 import csv
 import datacommons as dc
 import os
+import sys
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_DIR, '../../../util'))
+
+from dc_api_wrapper import dc_api_get_node_property
+import datacommons as dc
 
 from absl import app
 from absl import flags
@@ -70,9 +77,9 @@ def _get_places_not_found(census_geoids: List[str]) -> List[str]:
     for i in range(0, len(geo_ids), NUM_DCIDS_TO_QUERY):
         selected_geo_ids = geo_ids[i:i + NUM_DCIDS_TO_QUERY]
         selected_dcids = [geoId_to_dcids[g] for g in selected_geo_ids]
-        res = dc.get_property_values(selected_dcids, 'name')
+        res = dc_api_get_node_property(selected_dcids, 'name')
         for index in range(len(selected_dcids)):
-            if not res[selected_dcids[index]]:
+            if selected_dcids[index] not in res:
                 geoIds_not_found.append(selected_geo_ids[index])
     return geoIds_not_found
 

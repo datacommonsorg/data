@@ -21,7 +21,6 @@ import os
 import pickle
 import sys
 import time
-import datacommons as dc
 
 from absl import app
 from absl import flags
@@ -74,7 +73,7 @@ from aggregation_util import aggregate_dict
 from counters import Counters
 from latlng_recon_geojson import LatLng2Places
 from config_map import ConfigMap
-from dc_api_wrapper import dc_api_batched_wrapper
+from dc_api_wrapper import dc_api_get_property
 
 # List of place types in increasing order of preference for name.
 # This is used to pick the name of the place from the list of affectedPlaces
@@ -699,13 +698,11 @@ class GeoEventsProcessor:
 
         if lookup_places:
             start_time = time.perf_counter()
-            cache_dict.update(
-                dc_api_batched_wrapper(function=dc.get_property_values,
-                                       dcids=lookup_places,
-                                       args={
-                                           'prop': prop,
-                                       },
-                                       config=self._config))
+            place_props = dc_api_get_property(lookup_places, prop)
+            for placeid, prop_value in place_props.items():
+              value = prop_value.get(prop)
+              if value:
+                  cache_dict[placeid] = value
             end_time = time.perf_counter()
             self._counters.add_counter(f'dc_api_lookup_{prop}_count',
                                        len(lookup_places))

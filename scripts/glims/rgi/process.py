@@ -18,6 +18,11 @@ import datacommons as dc
 import json
 import glob
 import os
+import sys
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_DIR, '../../../util'))
+from dc_api_wrapper import dc_api_get_values
 from shapely import geometry
 from absl import app
 from absl import flags
@@ -30,14 +35,14 @@ flags.DEFINE_string('rgi_output_dir', '/tmp/', 'Output directory')
 
 def _load_geojsons():
     countries = dc.get_places_in(['Earth'], 'Country')['Earth']
-    resp = dc.get_property_values(countries, 'geoJsonCoordinatesDP2')
+    resp = dc_api_get_values(countries, 'geoJsonCoordinatesDP2')
     geojsons = {}
     for p, gj in resp.items():
         if not gj:
             continue
         geojsons[p] = geometry.shape(json.loads(gj[0]))
     print('Got', len(geojsons), 'geojsons!')
-    cip = dc.get_property_values(countries, 'containedInPlace')
+    cip = dc_api_get_values(countries, 'containedInPlace')
     return geojsons, cip
 
 

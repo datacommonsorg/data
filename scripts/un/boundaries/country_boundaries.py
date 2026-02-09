@@ -23,15 +23,22 @@ NOTE: this file generates temporary folders that are not deleted.
 
 from typing import Dict
 
-import datacommons as dc
 import geopandas as gpd
 from geojson_rewind import rewind
 import json
 import os
+import sys
 import requests
 
 from absl import app
 from absl import flags
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.join(_SCRIPT_DIR.split('/data/', 1)[0], 'data', 'util'))
+
+import dc_api_wrapper as dc_api
+from string_utils import str_to_list
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('input_file', 'data/UNGIS_BNDA.geojson',
@@ -194,10 +201,10 @@ class CountryBoundariesGenerator:
         Only countries with DCID of the form county/{code} are included.
         """
         # Call DC API to get list of countries
-        dc_all_countries = dc.get_property_values(['Country'],
-                                                  'typeOf',
-                                                  out=False,
-                                                  limit=500)['Country']
+        dc_all_countries = str_to_list(
+            dc_api.dc_api_get_property(['Country'], 'typeOf',
+                                       out=False).get('Country',
+                                                      {}).get('typeOf', ''))
         dc_all_countries = set(dc_all_countries)
 
         def is_dc_country(iso):
@@ -257,8 +264,10 @@ class CountryBoundariesGenerator:
             all_children.update(children)
 
         child2name = {}
-        for child, values in dc.get_property_values(list(all_children),
-                                                    'name').items():
+        children_names = dc_api.dc_api_get_node_property(
+            list(all_children), 'name')
+        for child, prop_values in children_names.items():
+            values = str_to_list(prop_values.get('name', ''))
             if values:
                 child2name[child] = values[0]
 

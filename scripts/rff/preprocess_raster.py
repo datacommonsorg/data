@@ -10,6 +10,8 @@ import sys
 
 RFF_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(RFF_DIR)
+sys.path.append(os.path.join(RFF_DIR, '../../util'))
+from dc_api_wrapper import dc_api_get_values
 from rff import util
 
 bandname_to_gdcStatVars = {
@@ -37,11 +39,11 @@ def get_dcid(sp_scale, lat, lon):
 
 def get_county_geoid(lat, lon):
     counties = dc.get_places_in(['country/USA'], 'County')['country/USA']
-    counties_simp = dc.get_property_values(counties, 'geoJsonCoordinatesDP1')
+    counties_simp = dc_api_get_values(counties, 'geoJsonCoordinatesDP1')
     point = geometry.Point(lon, lat)
     for p, gj in counties_simp.items():
         if len(gj) == 0:
-            gj = dc.get_property_values([p], 'geoJsonCoordinates')[p]
+            gj = dc_api_get_values([p], 'geoJsonCoordinates')[p]
             if len(gj) == 0:  # property not defined for one county in alaska
                 continue
         if geometry.shape(json.loads(gj[0])).contains(point):

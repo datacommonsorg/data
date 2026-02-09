@@ -20,6 +20,11 @@ Downloads and saves GeoJson map files from DataCommons.
 import datacommons as dc
 import geojson
 import os
+import sys
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_DIR, '../../../util'))
+from dc_api_wrapper import dc_api_node_get_property
 
 
 class GeojsonDownloader:
@@ -88,10 +93,11 @@ class GeojsonDownloader:
         Raises:
             ValueError: If a Data Commons API call fails.
         """
-        geolevel = dc.get_property_values([place], "typeOf")
+        place_types = dc_api.dc_api_node_get_property([place], "typeOf")
+        geo_level = str_to_list(place_types.get(place, {}).get("typeOf", ""))
         # There is an extra level of nesting in geojson files, so we have
         # to get the 0th element explicitly.
-        assert len(geolevel[place]) == 1
+        assert len(geo_level) >= 1
         geolevel = geolevel[place][0]
 
         for i in range(level):
@@ -99,9 +105,18 @@ class GeojsonDownloader:
                 raise ValueError("Desired level does not exist.")
             geolevel = self.LEVEL_MAP[geolevel]
 
-        geos_contained_in_place = dc.get_places_in([place], geolevel)[place]
-        self.geojsons = dc.get_property_values(geos_contained_in_place,
-                                               "geoJsonCoordinates")
+        dc_api_client = dc_api.get_datacommons_client()
+        descendant_places = dc_api.dc_api_batched_wrapper(
+            dc_api_client.node.fetch_place_descendants, [place], {
+                'descendants_type': geolevel
+            },
+            dcid_arg_kw='place_dcids').get(place, {})
+        geos_contained_in_place = [
+            place_name.get('dcid') for place_name in descendant_places
+        ]
+
+        self.geojsons = dc_api_get_values(geos_contained_in_place,
+                                          "geoJsonCoordinates")
         for area, coords in self.iter_subareas():
             self.geojsons[area][0] = geojson.loads(coords)
 
