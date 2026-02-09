@@ -15,7 +15,6 @@
 
 import os
 import sys
-import tempfile
 import urllib
 import unittest
 from unittest import mock
@@ -24,9 +23,6 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 
 import dc_api_wrapper as dc_api
-import datacommons as dc
-
-from absl import logging
 from datacommons_client.utils.error_handling import DCConnectionError
 
 
@@ -34,19 +30,29 @@ class TestDCAPIWrapper(unittest.TestCase):
 
     def test_dc_api_wrapper(self):
         """Test the wrapper for DC API."""
-        api_function = dc.get_property_labels
-        dcids = [
-            'Count_Person',  # 'dcid:' namespace will be removed.
-        ]
-        args = {'dcids': dcids}
+        api_function = mock.Mock(
+            return_value={'Count_Person': {
+                'typeOf': ['StatisticalVariable']
+            }})
+        args = {'dcids': ['Count_Person']}
         response = dc_api.dc_api_wrapper(api_function, args)
         self.assertTrue(response is not None)
-        self.assertTrue(dcids[0] in response)
+        self.assertTrue('Count_Person' in response)
         self.assertTrue('typeOf' in response['Count_Person'])
+        api_function.assert_called_once_with(dcids=['Count_Person'])
 
     def test_dc_api_batched_wrapper(self):
         """Test DC API wrapper for batched calls."""
-        api_function = dc.get_property_values
+
+        def _mock_get_property_values(dcids, prop):
+            response = {}
+            for dcid in dcids:
+                if dcid == 'NewStatVar_NotInDC':
+                    response[dcid] = []
+                else:
+                    response[dcid] = ['StatisticalVariable']
+            return response
+
         dcids = [
             'Count_Person',  # Statvar defined in DC
             'dcid:Count_Person_Male',  # 'dcid:' namespace will be removed.
@@ -54,7 +60,11 @@ class TestDCAPIWrapper(unittest.TestCase):
         ]
         args = {'prop': 'typeOf'}
         response = dc_api.dc_api_batched_wrapper(
-            api_function, dcids, args, config={'dc_api_batch_size': 2})
+            _mock_get_property_values,
+            dcids,
+            args,
+            config={'dc_api_batch_size': 2},
+        )
         self.assertTrue(response is not None)
         self.assertEqual(response['Count_Person'], ['StatisticalVariable'])
         self.assertEqual(response['Count_Person_Male'], ['StatisticalVariable'])
@@ -189,14 +199,6 @@ class TestDCAPIWrapper(unittest.TestCase):
         notes = getattr(context.exception, '__notes__', [])
         self.assertTrue(any('max attempts 3' in note for note in notes))
 
-    def test_invoke_dc_api_restores_api_root_on_exception(self):
-        """Test API root is restored after a failing invoke with custom root."""
-        api_function = mock.Mock(side_effect=ValueError('boom'))
-        original_api_root = dc.utils._API_ROOT
-        with self.assertRaises(ValueError):
-            dc_api._invoke_dc_api(api_function, {}, api_root='https://test.api')
-        self.assertEqual(dc.utils._API_ROOT, original_api_root)
-
     def test_dc_get_node_property_values(self):
         """Test API wrapper to get all property:values for a node."""
         node_pvs = dc_api.dc_api_get_node_property_values(['dcid:Count_Person'])
@@ -267,6 +269,43 @@ class TestDCAPIWrapper(unittest.TestCase):
         }
         self.assertEqual(response, expected_response)
 
+    @mock.patch('dc_api_wrapper.request_url')
+    def test_dc_api_resolve_latlng_v1_compat_shape(self, mock_request_url):
+        """Test latlng resolution supports v1 compatibility response shape."""
+        mock_request_url.return_value = {
+            "entities": [{
+                "node":
+                    "37.42#-122.08",
+                "candidates": [{
+                    "dcid": "geoId/0649670",
+                    "dominantType": "City"
+                }]
+            }]
+        }
+        latlngs = [{'latitude': 37.42, 'longitude': -122.08}]
+        response = dc_api.dc_api_resolve_latlng(latlngs,
+                                                return_v1_response=True)
+        expected_response = {
+            "placeCoordinates": [{
+                "latitude": 37.42,
+                "longitude": -122.08,
+                "placeDcids": ["geoId/0649670"],
+                "places": [{
+                    "dcid": "geoId/0649670",
+                    "dominantType": "City"
+                }]
+            }]
+        }
+        self.assertEqual(response, expected_response)
+        mock_request_url.assert_called_once_with(
+            url='https://api.datacommons.org/v2/resolve',
+            params={
+                'nodes': ['37.42#-122.08'],
+                'property': '<-geoCoordinate->dcid'
+            },
+            method='POST',
+            output='json')
+
     def test_convert_v2_to_v1_coordinate_response(self):
         """Test coordinate response conversion from v2 to v1."""
         v2_response = {
@@ -318,3 +357,31 @@ class TestDCAPIWrapper(unittest.TestCase):
         }
         v2_request = dc_api._convert_v1_to_v2_coordinate_request(v1_request)
         self.assertEqual(v2_request, expected_v2_request)
+
+    def test_non_v2_config_rejected(self):
+        """Test wrapper rejects non-V2 dc_api_version values."""
+        config = {'dc_api_version': 'V1'}
+        with self.assertRaises(ValueError):
+            dc_api.get_datacommons_client(config)
+        with self.assertRaises(ValueError):
+            dc_api.dc_api_batched_wrapper(
+                mock.Mock(),
+                dcids=['Count_Person'],
+                args={},
+                config=config,
+            )
+        with self.assertRaises(ValueError):
+            dc_api.dc_api_is_defined_dcid(['Count_Person'], config)
+        with self.assertRaises(ValueError):
+            dc_api.dc_api_get_node_property(['Count_Person'], 'name', config)
+        with self.assertRaises(ValueError):
+            dc_api.dc_api_get_node_property_values(['Count_Person'], config)
+        with self.assertRaises(ValueError):
+            dc_api.dc_api_resolve_placeid(['ChIJT3IGqvxznW4Rqgw7pv9zYz8'],
+                                          config=config)
+        with self.assertRaises(ValueError):
+            dc_api.dc_api_resolve_latlng([{
+                'latitude': 37.42,
+                'longitude': -122.08
+            }],
+                                         config=config)
