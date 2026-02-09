@@ -12,4 +12,3 @@ output_columns,"observationAbout,observationDate,variableMeasured,value,unit,mea
 #header_rows,6
 #mapped_rows,6
 dc_api_root,https://api.datacommons.org
-
