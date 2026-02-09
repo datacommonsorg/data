@@ -85,19 +85,10 @@ def _define_flags():
 
 def get_default_filter_data_config() -> dict:
     '''Returns the default filter config settings form flags as dict.'''
-    flag_names = [
-        'filter_data_keep_recent',
-        'filter_data_max_change_ratio',
-        'filter_data_max_yearly_change_ratio',
-        'filter_data_min_value',
-        'filter_data_max_value',
-        'data_series_value_properties',
-        'data_series_date_properties',
-    ]
-    configs = {name: _DEFAULT_FILTER_CONFIG[name] for name in flag_names}
+    configs = _DEFAULT_FILTER_CONFIG.copy()
     # Use default values of flags if defined and parsed
     if flags.FLAGS.is_parsed():
-        for flag_name in flag_names:
+        for flag_name in configs:
             if hasattr(flags.FLAGS, flag_name):
                 configs[flag_name] = getattr(flags.FLAGS, flag_name)
     return configs
