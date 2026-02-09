@@ -55,68 +55,72 @@ from absl import logging
 # uncomment to run pprof
 # from pypprof.net_http import start_pprof_server
 
-_FLAGS = flags.FLAGS
 
-flags.DEFINE_list(
-    'resolve_input_csv',
-    '',
-    'Input csv with places to resolve under column "name".',
-)
-flags.DEFINE_string('resolve_output_csv', '', 'Output csv with place dcids.')
-flags.DEFINE_list('resolve_place_names', [], 'List of place names to resolve.')
-flags.DEFINE_string('maps_key', os.environ.get('MAPS_API_KEY', ''),
-                    'Google Maps API key')
-flags.DEFINE_string(
-    'resolve_config',
-    '',
-    'Config setting for place resolution as json or python dict.',
-)
-flags.DEFINE_list(
-    'place_names_csv',
-    '',
-    'CSV files with place properties including name, dcid, containedInPlace'
-    'used by the place_name_matcher',
-)
-flags.DEFINE_list(
-    'place_names_within',
-    '',
-    'use place names within the list of places for name matches.',
-)
-flags.DEFINE_list('place_types', [], 'List of place types to resolve to.')
-flags.DEFINE_string(
-    'place_name_column',
-    'place_name',
-    'input CSV column with the name of the place to be resolved.',
-)
-flags.DEFINE_string(
-    'place_latitude_column',
-    'latitude',
-    'input CSV column with the latitude of the place to be resolved.',
-)
-flags.DEFINE_string(
-    'place_longitude_column',
-    'longitude',
-    'input CSV column with the longitude of the place to be resolved.',
-)
-flags.DEFINE_string('place_resolver_cache', '',
-                    'Cache file to save resolved places.')
-flags.DEFINE_list('output_place_columns', [], 'List of columns in the output.')
-flags.DEFINE_string('maps_api_cache', '',
-                    'Cache file to save responses from maps API.')
-flags.DEFINE_integer('place_pprof_port', 0,
-                     'HTTP port for running pprof server.')
-flags.DEFINE_string(
-    'resolve_api_url',
-    'https://autopush.api.datacommons.org/v2/resolve',
-    'DC API URL for resolve.',
-)
-flags.DEFINE_string('resolve_api_key', os.environ.get('DC_API_KEY', ''),
-                    'DC API key for resolve.')
-flags.DEFINE_integer(
-    'dc_api_batch_size',
-    3,
-    'DC API batch size for number of places to lookup per request.',
-)
+def _define_flags():
+    flags.DEFINE_list(
+        'resolve_input_csv',
+        '',
+        'Input csv with places to resolve under column "name".',
+    )
+    flags.DEFINE_string('resolve_output_csv', '',
+                        'Output csv with place dcids.')
+    flags.DEFINE_list('resolve_place_names', [],
+                      'List of place names to resolve.')
+    flags.DEFINE_string('maps_key', os.environ.get('MAPS_API_KEY', ''),
+                        'Google Maps API key')
+    flags.DEFINE_string(
+        'resolve_config',
+        '',
+        'Config setting for place resolution as json or python dict.',
+    )
+    flags.DEFINE_list(
+        'place_names_csv',
+        '',
+        'CSV files with place properties including name, dcid, containedInPlace'
+        'used by the place_name_matcher',
+    )
+    flags.DEFINE_list(
+        'place_names_within',
+        '',
+        'use place names within the list of places for name matches.',
+    )
+    flags.DEFINE_list('place_types', [], 'List of place types to resolve to.')
+    flags.DEFINE_string(
+        'place_name_column',
+        'place_name',
+        'input CSV column with the name of the place to be resolved.',
+    )
+    flags.DEFINE_string(
+        'place_latitude_column',
+        'latitude',
+        'input CSV column with the latitude of the place to be resolved.',
+    )
+    flags.DEFINE_string(
+        'place_longitude_column',
+        'longitude',
+        'input CSV column with the longitude of the place to be resolved.',
+    )
+    flags.DEFINE_string('place_resolver_cache', '',
+                        'Cache file to save resolved places.')
+    flags.DEFINE_list('output_place_columns', [],
+                      'List of columns in the output.')
+    flags.DEFINE_string('maps_api_cache', '',
+                        'Cache file to save responses from maps API.')
+    flags.DEFINE_integer('place_pprof_port', 0,
+                         'HTTP port for running pprof server.')
+    flags.DEFINE_string(
+        'resolve_api_url',
+        'https://autopush.api.datacommons.org/v2/resolve',
+        'DC API URL for resolve.',
+    )
+    flags.DEFINE_string('resolve_api_key', os.environ.get('DC_API_KEY', ''),
+                        'DC API key for resolve.')
+    flags.DEFINE_integer(
+        'dc_api_batch_size',
+        3,
+        'DC API batch size for number of places to lookup per request.',
+    )
+
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -1342,32 +1346,35 @@ def main(_):
         return
 
     logging.set_verbosity(2)
-    config = ConfigMap(filename=_FLAGS.resolve_config)
-    config.set_config('places_csv', _FLAGS.place_names_csv)
-    config.set_config('places_within', _FLAGS.place_names_within)
-    config.set_config('place_type', _FLAGS.place_types)
-    config.set_config('place_name_column', _FLAGS.place_name_column)
-    config.set_config('place_latitude_column', _FLAGS.place_latitude_column)
-    config.set_config('place_longitude_column', _FLAGS.place_longitude_column)
-    config.set_config('places_resolved_csv', _FLAGS.place_resolver_cache)
-    config.set_config('maps_api_key', _FLAGS.maps_key)
-    config.set_config('maps_api_cache', _FLAGS.maps_api_cache)
-    config.set_config('dc_api_key', _FLAGS.resolve_api_key)
-    config.set_config('resolve_api_url', _FLAGS.resolve_api_url)
-    config.set_config('dc_api_batch_size', _FLAGS.dc_api_batch_size)
+    config = ConfigMap(filename=flags.FLAGS.resolve_config)
+    config.set_config('places_csv', flags.FLAGS.place_names_csv)
+    config.set_config('places_within', flags.FLAGS.place_names_within)
+    config.set_config('place_type', flags.FLAGS.place_types)
+    config.set_config('place_name_column', flags.FLAGS.place_name_column)
+    config.set_config('place_latitude_column',
+                      flags.FLAGS.place_latitude_column)
+    config.set_config('place_longitude_column',
+                      flags.FLAGS.place_longitude_column)
+    config.set_config('places_resolved_csv', flags.FLAGS.place_resolver_cache)
+    config.set_config('maps_api_key', flags.FLAGS.maps_key)
+    config.set_config('maps_api_cache', flags.FLAGS.maps_api_cache)
+    config.set_config('dc_api_key', flags.FLAGS.resolve_api_key)
+    config.set_config('resolve_api_url', flags.FLAGS.resolve_api_url)
+    config.set_config('dc_api_batch_size', flags.FLAGS.dc_api_batch_size)
 
     # uncomment to run pprof
-    # if _FLAGS.place_pprof_port:
-    #    start_pprof_server(port=FLAGS.place_pprof_port)
+    # if flags.FLAGS.place_pprof_port:
+    #    start_pprof_server(port=flags.FLAGS.place_pprof_port)
     process(
-        _FLAGS.resolve_input_csv,
-        _FLAGS.resolve_output_csv,
-        _FLAGS.resolve_place_names,
-        _FLAGS.maps_key,
-        _FLAGS.output_place_columns,
+        flags.FLAGS.resolve_input_csv,
+        flags.FLAGS.resolve_output_csv,
+        flags.FLAGS.resolve_place_names,
+        flags.FLAGS.maps_key,
+        flags.FLAGS.output_place_columns,
         config,
     )
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
