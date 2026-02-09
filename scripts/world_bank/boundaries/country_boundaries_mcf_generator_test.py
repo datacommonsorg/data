@@ -51,7 +51,9 @@ class CountyBoundariesMcfGeneratorTest(unittest.TestCase):
         with mock.patch.object(mcf_gen,
                                'get_datacommons_client',
                                return_value=client):
-            gen = mcf_gen.CountryBoundariesMcfGenerator('', '', '')
+            gen = mcf_gen.CountryBoundariesMcfGenerator('test_path',
+                                                        'test_path',
+                                                        'test_path')
             col_to_code = gen.build_import_codes(all_countries)
 
         self.assertEqual(col_to_code['WB_A3'], {'USA', 'CAN'})
