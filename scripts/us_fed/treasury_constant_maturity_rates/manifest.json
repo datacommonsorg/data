@@ -20,10 +20,7 @@
             "source_files": [
                 "treasury_constant_maturity_rates.csv"
             ],
-            "cron_schedule": "15 3 * * *",
-            "config_override": {
-                "ignore_validation_status": false
-            }
+            "cron_schedule": "15 3 * * *"
         },
         {
             "import_name": "USFed_ConstantMaturityRates",
@@ -45,10 +42,7 @@
             "source_files": [
                 "treasury_constant_maturity_rates.csv"
             ],
-            "cron_schedule": "15 3 * * *",
-            "config_override": {
-                "ignore_validation_status": false
-            }
+            "cron_schedule": "15 3 * * *"
         }
     ]
 }
