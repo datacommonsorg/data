@@ -14,7 +14,6 @@
 """Utility functions for the ingestion helper."""
 
 import logging
-import croniter
 import re
 from datetime import datetime, timezone
 from googleapiclient.discovery import build
@@ -24,8 +23,38 @@ from google.auth.transport import requests
 from google.auth import jwt
 
 
+def get_next_refresh(project_id: str, location: str, import_name: str) -> str:
+    """Fetches the next scheduled run time for the import job from Cloud Scheduler.
+
+    Args:
+        project_id: The GCP project ID.
+        location: The location of the Cloud Scheduler job.
+        import_name: The name of the import (used as the job name).
+
+    Returns:
+        The next scheduled run time as an ISO formatted string, or None if not found/error.
+    """
+    try:
+        scheduler = build('cloudscheduler', 'v1', cache_discovery=False)
+        job_id = import_name.split(':')[-1]
+        job_name = f"projects/{project_id}/locations/{location}/jobs/{job_id}"
+        job = scheduler.projects().locations().jobs().get(
+            name=job_name).execute()
+        return job.get('scheduleTime')
+    except HttpError as e:
+        logging.warning(f"Could not fetch scheduler job {import_name}: {e}")
+        return None
+
+
 def get_caller_identity(request):
-    """Extracts the caller's email from the Authorization header (JWT)."""
+    """Extracts the caller's email from the Authorization header (JWT).
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        The email of the caller, or an error string/warning if extraction fails.
+    """
     auth_header = request.headers.get('Authorization')
     if auth_header:
         parts = auth_header.split()
@@ -74,22 +103,9 @@ def get_import_params(request) -> dict:
     data_volume = request_json.get('data_volume', 0)
     latest_version = request_json.get('latest_version', '')
     graph_path = request_json.get('graph_path', '')
-    schedule = request_json.get('schedule', '')
-    next_refresh_str = request_json.get('next_refresh', '')
-    next_refresh = datetime.now(timezone.utc)
-    if next_refresh_str:
-        try:
-            next_refresh = datetime.fromisoformat(next_refresh_str)
-        except ValueError:
-            logging.error(f"Error parsing next_refresh: {next_refresh_str}")
-    if schedule:
-        try:
-            next_refresh = croniter.croniter(schedule, datetime.now(
-                timezone.utc)).get_next(datetime)
-        except (croniter.CroniterError) as e:
-            logging.error(
-                f"Error calculating next refresh from schedule '{schedule}': {e}"
-            )
+    next_refresh = request_json.get('next_refresh',
+                                    datetime.now(timezone.utc).isoformat())
+
     return {
         'import_name': import_name,
         'status': status,

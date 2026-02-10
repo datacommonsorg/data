@@ -6,15 +6,21 @@ main:
           - projectId: ${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}
           - region: ${sys.get_env("LOCATION")}
           - imageUri: ${default(map.get(args, "imageUri"), "gcr.io/datcom-ci/dc-import-executor:stable")}
-          - jobId: ${text.substring(args.jobName, 0, 50) + "-" + string(int(sys.now()))}
+          - jobId: ${text.replace_all(text.to_lower(text.substring(text.split(args.importName, ":")[1], 0, 50) + "-" + string(int(sys.now()))), "_", "-")}
           - importName: ${args.importName}
-          - importConfig: ${args.importConfig}
+          - importConfig: ${default(map.get(args, "importConfig"), "{}")}
           - gcsMountBucket: ${sys.get_env("GCS_MOUNT_BUCKET")}
           - gcsImportBucket: ${sys.get_env("GCS_BUCKET_ID")}
           - gcsMountPath: "/tmp/gcs"
           - ingestionHelper: "spanner-ingestion-helper" 
           - functionUrl: ${"https://" + region + "-" + projectId + ".cloudfunctions.net/" + ingestionHelper}
           - startTime: ${sys.now()}
+          - defaultResources:
+              machine: "n2-standard-8"
+              cpu: 8000
+              memory: 32768
+              disk: 100
+          - resources: ${default(map.get(args, "resources"), defaultResources)}
     - runImportJob:
         try:
           call: googleapis.batch.v1.projects.locations.jobs.create
@@ -25,11 +31,11 @@ main:
               allocationPolicy:
                 instances:
                 - policy:
-                    machineType: ${args.resources.machine}
+                    machineType: ${resources.machine}
                     provisioningModel: "STANDARD"
                     bootDisk:
                       image: "projects/debian-cloud/global/images/family/debian-12"
-                      size_gb: ${args.resources.disk}
+                      size_gb: ${resources.disk}
                   installOpsAgent: true
               taskGroups:
                 taskSpec:
@@ -38,14 +44,14 @@ main:
                         remotePath: ${gcsMountBucket}
                       mountPath: ${gcsMountPath}
                   computeResource:
-                    cpuMilli: ${args.resources.cpu}
-                    memoryMib: ${args.resources.memory}
+                    cpuMilli: ${resources.cpu}
+                    memoryMib: ${resources.memory}
                   runnables:
                     - container:
                         imageUri: ${imageUri}
                         commands:
-                        - ${"--import_name=" + args.importName}
-                        - ${"--import_config=" + args.importConfig}
+                        - ${"--import_name=" + importName}
+                        - ${"--import_config=" + importConfig}
                       environment:
                         variables:
                           IMPORT_NAME: ${importName}
@@ -73,11 +79,10 @@ main:
                   body:
                     actionType: 'update_import_status'
                     jobId: ${jobId}
-                    importName: ${args.importName}
-                    status: 'FAILED'
+                    importName: ${importName}
+                    status: 'FAILURE'
                     executionTime: ${int(sys.now() - startTime)}
-                    latestVersion: ${"gs://" + gcsImportBucket + "/" + text.replace_all(args.importName, ":", "/")}
-                    schedule: ${default(map.get(args, "schedule"), "")}
+                    latestVersion: ${"gs://" + gcsImportBucket + "/" + text.replace_all(importName, ":", "/")}
                 result: functionResponse
             - failWorkflow:
                 raise: ${e}
@@ -89,8 +94,8 @@ main:
             type: OIDC
           body:
             actionType: 'update_import_version'
-            importName: ${args.importName}
-            version: 'staging'
+            importName: ${importName}
+            version: 'STAGING'
             override: false
             comment: '${"import-workflow:" + sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
         result: functionResponse
