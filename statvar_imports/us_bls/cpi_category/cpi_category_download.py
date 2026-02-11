@@ -345,10 +345,11 @@ def main():
                 f"January {current_year} not available for {category_prefix}. "
                 f"Using {effective_current_year} as effective current year."
         )
-        if effective_current_year == current_year:
-            effective_max_month = current_month
-        else:
-            effective_max_month = 12 
+            break
+    if effective_current_year == current_year:
+        effective_max_month = current_month
+    else:
+        effective_max_month = 12 
 
     # --- RULE 1: For 'c-cpi-u' files: Even months only, starting from Dec 2021 ---
     logging.info("\n--- Processing c-cpi-u files (even months, from Dec 2021 onwards) ---")
