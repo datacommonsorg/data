@@ -15,11 +15,13 @@
 
 ## Pennsylvania_education Import
 
-Dataset related to the pennsylvania's Education at country level.
-
+Dataset related to Pennsylvania's Education at county level.
 -----
 
-### ⚙️ How to Use
+**Provenance Description:**
+Data assets within this catalog are authored and maintained by individual Commonwealth agencies, which serve as the authoritative sources for their respective domains. The portal, managed by the Office of Administration, provides a transparent audit trail by documenting original publication dates, metadata update frequencies, and the specific departmental "stewards" responsible for the data's accuracy and integrity.
+
+### How to Use
 
 The workflow for this data import involves two main steps: downloading the necessary files and then processing them.
 
@@ -28,9 +30,9 @@ The workflow for this data import involves two main steps: downloading the neces
 - **Source:** [Pennsylvania_Education](https://data.pa.gov/browse?sortBy=relevance&page=1&pageSize=20)
 - **Description:** The provided URL links to the Education data category within the Commonwealth of Pennsylvania’s open data repository. This portal serves as a centralized clearinghouse for public records, statistics, and geospatial data managed by the Pennsylvania Department of Education (PDE) and related agencies.
 
-To get the necessary data files, you'll need to run download script `download_script.py`.
+To fetch the necessary data files, you'll need to run download script `download_script.py`.
 
-All downloaded files will be located in the `input_files` folder. Within this folder, there are six sub-folders, each containing categorized data for both adults and children:
+The download_script will download below mentioned files in the `input_files` folder. Within this folder, there are four sub-folders, each containing categorized data for both adults and children:
 
     - educational_attainment_by_age_range_and_gender
 
@@ -49,11 +51,11 @@ This import will be refreshed in a fully automated manner.
 
 #### Step 2: Process the Files
 
-After downloading the files, you can process them to generate the final output. There are two ways to do this:
+After downloading the files, you can process them to generate the final output. To do this:
 
-**Option A: Use the `run.sh` script**
+**Option A: Use the `run_processing.sh` script**
 
-The `run.sh` script automates the processing of all the downloaded files.
+The `run_processing.sh` script automates the processing of all the downloaded files.
 
 **Run the following command:**
 
@@ -75,7 +77,6 @@ python3 stat_var_processor.py
 --output_path=../../statvar_imports/pennsylvania/pennsylvania_education/output_files/educational_attainment_by_age_range_and_gender_output"
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 --places_resolved_csv=../../statvar_imports/pennsylvania/pennsylvania_education/educational_attainment_by_age_range_and_gender_places_resolver.csv"
-
 ```
 
 ```bash

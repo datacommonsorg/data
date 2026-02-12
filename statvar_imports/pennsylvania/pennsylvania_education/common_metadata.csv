@@ -2,4 +2,4 @@ parameter,value
 #places_within,
 output_columns,"observationAbout,observationDate,value,variableMeasured"
 header_rows,1
-url,https://data.pa.gov/-/Educational-Attainment-by-Age-Range-and-Gender-200/xwn6-8rmw/about_data
+url,https://data.pa.gov/browse?sortBy=relevance&page=1&pageSize=20
