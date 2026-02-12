@@ -1,4 +1,4 @@
-### This import process handles data from Brazil's SIDRA IBGE platform.
+### NITIIndiaPopulationProjection Import
 
 - Description: Population projection at India country and state level.
 
