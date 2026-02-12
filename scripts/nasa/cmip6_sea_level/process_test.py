@@ -18,6 +18,7 @@ import os
 import tempfile
 import sys
 import unittest
+from unittest.mock import patch
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
@@ -31,7 +32,10 @@ _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
 
 class ProcessTest(unittest.TestCase):
 
-    def test_place(self):
+    @patch('nasa.cmip6_sea_level.process.latlng_recon_geojson.LatLng2Places')
+    def test_place(self, mock_ll2p):
+        mock_instance = mock_ll2p.return_value
+        mock_instance.resolve.return_value = ['country/USA']
         self.maxDiff = None
         input_pattern = os.path.join(
             _TESTDIR, 'input/total_ssp119_medium_confidence_values.nc')
