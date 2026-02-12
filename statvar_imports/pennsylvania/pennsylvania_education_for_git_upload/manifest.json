@@ -4,7 +4,7 @@
       "import_name": "Pennsylvania_Education",
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://data.pa.gov/",
-      "provenance_description": "Dataset related to the pennsylvania's Education at country level.",
+      "provenance_description": "Dataset related to Pennsylvania's Education at county level.",
       "scripts": ["download_script.py", "run_processing.sh"],
       "source_files": [
         "input_files/*.csv"
