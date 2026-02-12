@@ -1,0 +1,87 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=canada_annual_population_age_gender_input.csv --pv_map=../canada_annual_population_age_gender_pvmap.csv --config_file=../canada_annual_population_age_gender_metadata.csv --output_path=canada_annual_population_age_gender_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-02-12 07:40:22.861138
+
+Node: dcid:Count_Person_0To15Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 15 Years]
+
+Node: dcid:Count_Person_0To15Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 15 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_0To15Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 15 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_0To16Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 16 Years]
+
+Node: dcid:Count_Person_0To16Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 16 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_0To16Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 16 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_0To17Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 17 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_0To17Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 17 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_17To64Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [17 64 Years]
+
+Node: dcid:Count_Person_17To64Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [17 64 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_17To64Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [17 64 Years]
+gender: dcid:Male
+
