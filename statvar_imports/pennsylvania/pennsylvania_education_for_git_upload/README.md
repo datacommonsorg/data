@@ -58,7 +58,7 @@ The `run.sh` script automates the processing of all the downloaded files.
 **Run the following command:**
 
 ```bash
-sh run.sh
+sh run_processing.sh
 ```
 
 **Option B: Manually Execute the Processing Script**
