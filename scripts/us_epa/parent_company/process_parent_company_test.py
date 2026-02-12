@@ -14,11 +14,20 @@
 """Tests for process_parent_company.py"""
 
 import os
+import sys
 import tempfile
 import unittest
-from .process_parent_company import process_companies
-from .process_parent_company import process_svobs
-from .process_parent_company import _COUNTERS_COMPANIES
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+
+from scripts.us_epa.parent_company.process_parent_company import (
+    process_companies,)
+from scripts.us_epa.parent_company.process_parent_company import (
+    process_svobs,)
+from scripts.us_epa.parent_company.process_parent_company import (
+    _COUNTERS_COMPANIES,)
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _INPUT_DATA_DIR = os.path.join(_CODEDIR, 'testdata', 'input')

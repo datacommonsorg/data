@@ -15,12 +15,16 @@
 Integration test for import executor image rollout.
 Runs a test import as a Cloud Batch job and verifies output from GCS.
 """
+import json
 import logging
 import os
 import time
+import datetime
+import pytz
 
 from app.executor import cloud_batch
 from app.executor import file_io
+from app.executor import import_executor
 from test import utils
 
 _PROJECT_ID = 'datcom-ci'
@@ -50,27 +54,48 @@ def run_test():
     # Download output data from GCS.
     gcs_path = 'gs://' + _GCS_BUCKET + '/' + _IMPORT_NAME.replace(':',
                                                                   '/') + '/'
-    file_path = gcs_path + 'latest_version.txt'
+    # Verify staging_version.txt
+    staging_version_path = gcs_path + import_executor.STAGING_VERSION_FILE
+    logging.info('Verifying data from GCS: %s', staging_version_path)
+    blob = file_io.file_get_gcs_blob(staging_version_path, True)
+    if not blob:
+        logging.error('Failed to get data from: %s', staging_version_path)
+        raise AssertionError(f'Failed to get data from {staging_version_path}')
+    staging_version = blob.download_as_text().strip()
+
+    # Verify import_summary.json
+    import_summary_path = gcs_path + staging_version + '/' + import_executor.IMPORT_SUMMARY_FILE
+    logging.info('Verifying data from GCS: %s', import_summary_path)
+    blob = file_io.file_get_gcs_blob(import_summary_path, True)
+    if not blob:
+        logging.error('Failed to get data from: %s', import_summary_path)
+        raise AssertionError(f'Failed to get data from {import_summary_path}')
+
+    try:
+        import_summary = json.loads(blob.download_as_text())
+        if import_summary.get('job_id') != job.uid:
+            raise AssertionError(
+                f"Import summary job_id mismatch: expected {job.uid}, got {import_summary.get('job_id')}"
+            )
+    except json.JSONDecodeError:
+        raise AssertionError(
+            f"Failed to decode JSON from {import_summary_path}")
+    logging.info("Verified job name in import summary: %s", job.uid)
+
+    file_path = gcs_path + staging_version + '/' + 'treasury_constant_maturity_rates.mcf'
     logging.info('Downloading data from GCS: %s', file_path)
     blob = file_io.file_get_gcs_blob(file_path, True)
     if not blob:
         logging.error('Failed to get data from: %s', file_path)
-        raise (AssertionError(f'Failed to get data from {file_path}'))
-    timestamp = blob.download_as_text()
-    file_path = gcs_path + timestamp + '/' + 'treasury_constant_maturity_rates.mcf'
-    logging.info('Downloading data from GCS: %s', file_path)
-    blob = file_io.file_get_gcs_blob(file_path, True)
-    if not blob:
-        logging.error('Failed to get data from: %s', file_path)
-        raise (AssertionError(f'Failed to get data from {file_path}'))
+        raise AssertionError(f'Failed to get data from {file_path}')
 
     # Compare output data with expected data.
-    output_file = 'prober_output.mcf'
+    output_file = 'import_output.mcf'
     blob.download_to_filename(output_file)
     golden_data_file = os.path.join('test', 'data',
                                     'treasury_constant_maturity_rates.mcf')
     if not utils.compare_lines(golden_data_file, output_file, 50):
-        raise (AssertionError('Prober failure due to data mismatch'))
+        raise AssertionError('Integration test failure due to data mismatch')
     logging.info("Verified mcf file content for import: %s", _IMPORT_NAME)
 
 
