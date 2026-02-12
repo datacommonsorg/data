@@ -1,0 +1,14 @@
+key,p1,v1,p2,v2,p3,v3
+"Population on 1st January by sex and age group (in completed years), France",observationAbout,country/FRA,populationType,Person,measuredProperty,count,,
+"Population on 1st January by sex and age group (in completed years), metropolitan France",observationAbout,country/FXX,populationType,Person,measuredProperty,count,,
+Year,observationDate,{Year},#Eval,"Year = re.sub(r'\\D', '',Data)"
+All,gender,"",#Header,gender
+Males,gender,Male,#Header,gender
+Females,gender,Female,#Header,gender
+Total,value,{Number}
+14 years,age,[0 14 Years],value,{Number},,,,
+15 - 19 years,age,[15 19 Years],value,{Number},,,,
+20 - 59 years,age,[20 59 Years],value,{Number},,,,
+60 - 64 years,age,[60 64 Years],value,{Number},,,,
+65 - 74 years,age,[65 74 Years],value,{Number},,,,
+75 years or over,age,[75 - Years],value,{Number},,,,

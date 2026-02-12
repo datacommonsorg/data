@@ -48,6 +48,7 @@ class ValidationRunner:
         self.data_sources = {
             'stats': pd.DataFrame(),
             'differ': pd.DataFrame(),
+            'differ_summary': {},
             'lint': {}
         }
 
@@ -59,6 +60,8 @@ class ValidationRunner:
                 (self.validator.validate_max_date_consistent, 'stats'),
             'DELETED_RECORDS_COUNT':
                 (self.validator.validate_deleted_records_count, 'differ'),
+            'DELETED_RECORDS_PERCENT':
+                (self.validator.validate_deleted_records_percent, 'differ'),
             'MISSING_REFS_COUNT':
                 (self.validator.validate_missing_refs_count, 'lint'),
             'LINT_ERROR_COUNT':
@@ -99,7 +102,7 @@ class ValidationRunner:
         if 'differ' in req_sources:
             if not differ_output or not os.path.exists(differ_output):
                 logging.warning(
-                    f"A validation rule requires the 'differ' data source, but the --differ_output file was not provided or does not exist. Path: {differ_output}"
+                    f"A validation rule requires the 'differ' data source, but the --differ_output path was not provided or does not exist. Path: {differ_output}"
                 )
 
         if 'lint' in req_sources and (not lint_report or
@@ -115,12 +118,38 @@ class ValidationRunner:
             logging.warning("stats_summary file exists but is empty: %s",
                             stats_summary)
 
-        if differ_output and os.path.exists(differ_output) and os.path.getsize(
-                differ_output) > 0:
-            self.data_sources['differ'] = pd.read_csv(differ_output)
-        elif differ_output and os.path.exists(differ_output):
-            logging.warning("differ_output file exists but is empty: %s",
-                            differ_output)
+        # Handle differ output (folder or file)
+        differ_csv_path = None
+        differ_json_path = None
+
+        if differ_output and os.path.exists(differ_output):
+            if os.path.isdir(differ_output):
+                differ_csv_path = os.path.join(differ_output,
+                                               'obs_diff_summary.csv')
+                differ_json_path = os.path.join(differ_output,
+                                                'differ_summary.json')
+            else:
+                differ_csv_path = differ_output
+
+        if differ_csv_path and os.path.exists(
+                differ_csv_path) and os.path.getsize(differ_csv_path) > 0:
+            self.data_sources['differ'] = pd.read_csv(differ_csv_path)
+        elif differ_csv_path and os.path.exists(differ_csv_path):
+            logging.warning("differ csv file exists but is empty: %s",
+                            differ_csv_path)
+
+        if differ_json_path and os.path.exists(
+                differ_json_path) and os.path.getsize(differ_json_path) > 0:
+            try:
+                with open(differ_json_path, 'r') as f:
+                    self.data_sources['differ_summary'] = json.load(f)
+            except Exception as e:
+                logging.error(
+                    f"JSON parse error while reading differ summary at {differ_json_path}: {e}"
+                )
+        elif differ_json_path and os.path.exists(differ_json_path):
+            logging.warning("differ summary file exists but is empty: %s",
+                            differ_json_path)
 
         if lint_report and os.path.exists(lint_report) and os.path.getsize(
                 lint_report) > 0:
@@ -129,7 +158,7 @@ class ValidationRunner:
                     self.data_sources['lint'] = json.load(f)
             except Exception as e:
                 logging.error(
-                    "JSON parse error while reading lint report at {lint_report}: {e}"
+                    f"JSON parse error while reading lint report at {lint_report}: {e}"
                 )
         elif lint_report and os.path.exists(lint_report):
             logging.warning("lint_report file exists but is empty: %s",
@@ -174,6 +203,10 @@ class ValidationRunner:
                 result = validation_func(self.data_sources['stats'],
                                          self.data_sources['differ'],
                                          rule['params'])
+            elif validator_name == 'DELETED_RECORDS_PERCENT':
+                result = validation_func(
+                    self.data_sources['differ'],
+                    self.data_sources.get('differ_summary'), rule['params'])
             else:
                 scope = rule.get('scope', {})
                 if isinstance(scope, str):
@@ -230,7 +263,7 @@ if __name__ == '__main__':
     flags.DEFINE_string('validation_config', 'validation_config.json',
                         'Path to the validation config file.')
     flags.DEFINE_string('differ_output', None,
-                        'Path to the differ output data file.')
+                        'Path to the differ output directory or data file.')
     flags.DEFINE_string('stats_summary', None,
                         'Path to the stats summary report file.')
     flags.DEFINE_string('lint_report', None,
