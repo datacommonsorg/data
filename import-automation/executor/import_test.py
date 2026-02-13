@@ -19,8 +19,6 @@ import json
 import logging
 import os
 import time
-import datetime
-import pytz
 
 from app.executor import cloud_batch
 from app.executor import file_io
