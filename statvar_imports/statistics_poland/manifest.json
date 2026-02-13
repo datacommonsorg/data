@@ -9,10 +9,10 @@
             "provenance_description": "Population data for demographic variables such as population counts, age distributions, and other census-related metrics in Poland",
             "scripts": [
                 "download_input_data.py",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=StatisticsPoland_input.csv --pv_map=StatisticsPoland_pvmap.csv --config_file=Statistics_Poland_metadata.csv --output_path=StatisticsPoland_output"
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.csv --pv_map=StatisticsPoland_pvmap.csv --config_file=StatisticsPoland_metadata.csv --output_path=StatisticsPoland_output"
             ],
             "source_files": [
-                "StatisticsPoland_input.csv"
+                "source_files/*.csv"
             ],
             "import_inputs": [
                 {

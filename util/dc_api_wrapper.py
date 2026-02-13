@@ -11,30 +11,23 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Wrapper utilities for data commons API.
+"""Wrapper utilities for Data Commons API.
 
-It uses the DataCommonsClient library module for V2 DC APIs by default
-and adds support for batched requests, retries and HTTP caching.
-DC V2 API requires an environment variable set for DC_API_KEY.
-Please refer to https://docs.datacommons.org/api/python/v2
-for more details.
-
-To use the legacy datacommons library module, set the config:
-  'dc_api_version': 'V1'
+It uses the DataCommonsClient library module for DC APIs and adds support for
+batched requests, retries and HTTP caching.
+DC API requires an environment variable set for DC_API_KEY.
+Please refer to https://docs.datacommons.org/api/python/v2 for more details.
 """
 
-from collections import OrderedDict
 import os
 import sys
 import urllib
 import requests
-import threading
 from typing import Union
 
 from absl import logging
 from datacommons_client.client import DataCommonsClient
 from datacommons_client.utils.error_handling import APIError, DCConnectionError, DCStatusError
-import datacommons as dc
 import requests_cache
 from tenacity import (RetryCallState, Retrying, retry_if_exception,
                       stop_after_attempt, wait_fixed)
@@ -44,20 +37,25 @@ sys.path.append(_SCRIPT_DIR)
 
 from download_util import request_url
 
-# Path for reconciliation API in the dc.utils._API_ROOT
-# For more details, please refer to:
-# https://github.com/datacommonsorg/reconciliation#usage
-# Resolve Id
-# https://api.datacommons.org/v1/recon/resolve/id
-_DC_API_PATH_RESOLVE_ID = '/v1/recon/resolve/id'
 # Resolve latlng coordinate
 # https://api.datacommons.org/v2/resolve
 _DC_API_PATH_RESOLVE_COORD = '/v2/resolve'
 # Default API key for limited tests
 _DEFAULT_DC_API_KEY = 'AIzaSyCTI4Xz-UW_G2Q2RfknhcfdAnTHq5X5XuI'
 
-_API_ROOT_LOCK = threading.Lock()
 _DEFAULT_API_ROOT = 'https://api.datacommons.org'
+_DEFAULT_BATCH_SIZE = 100
+
+
+def _validate_v2_config(config: dict = None) -> dict:
+    """Returns config after validating only V2 API is requested."""
+    if config is None:
+        return {}
+    dc_api_version = config.get('dc_api_version')
+    if dc_api_version and dc_api_version != 'V2':
+        raise ValueError(f'Unsupported dc_api_version "{dc_api_version}". '
+                         'Only "V2" is supported.')
+    return config
 
 
 def _get_exception_status_code(exception):
@@ -88,28 +86,12 @@ def _log_retry_attempt(function, retry_state: RetryCallState) -> None:
     )
 
 
-def _invoke_dc_api(function, args: dict, api_root: str = None):
-    if api_root:
-        # All calls serialize here to prevent races while updating the global
-        # Data Commons API root.
-        with _API_ROOT_LOCK:
-            original_api_root = dc.utils._API_ROOT
-            dc.utils._API_ROOT = api_root
-            logging.debug(f'Setting DC API root to {api_root} for {function}')
-            try:
-                return function(**args)
-            finally:
-                dc.utils._API_ROOT = original_api_root
-    return function(**args)
-
-
 def dc_api_wrapper(
     function,
     args: dict,
     retries: int = 3,
     retry_secs: int = 1,
     use_cache: bool = False,
-    api_root: str = None,
 ):
     """Wrapper for a DC API call with retries and caching.
 
@@ -123,10 +105,6 @@ def dc_api_wrapper(
     retries: Maximum number of attempts (including the first attempt).
     retry_sec: Interval in seconds between retries for which caller is blocked.
     use_cache: If True, uses request cache for faster response.
-    api_root: The API server to use. Default is 'http://api.datacommons.org'. To
-      use autopush with more recent data, set it to
-      'http://autopush.api.datacommons.org'
-
   Returns:
     The response from the DataCommons API call.
   """
@@ -160,7 +138,7 @@ def dc_api_wrapper(
                         f'Invoking DC API {function}, attempt '
                         f'{attempt_number}/{max_attempts} with {args}')
 
-                    response = _invoke_dc_api(function, args, api_root)
+                    response = function(**args)
                     logging.debug(
                         f'Got API response {response} for {function}, {args}')
                     return response
@@ -205,16 +183,11 @@ def dc_api_batched_wrapper(
   Returns:
     Merged function return values across all dcids.
   """
-    if not config:
-        config = {}
+    config = _validate_v2_config(config)
     api_result = {}
     index = 0
     num_dcids = len(dcids)
-    dc_api_root = config.get('dc_api_root', None)
-    if config.get('dc_api_version', 'V2') == 'V2':
-        # V2 API assumes api root is set in the function's client
-        dc_api_root = None
-    api_batch_size = config.get('dc_api_batch_size', dc.utils._MAX_LIMIT)
+    api_batch_size = config.get('dc_api_batch_size', _DEFAULT_BATCH_SIZE)
     logging.debug(
         f'Calling DC API {function} on {len(dcids)} dcids in batches of'
         f' {api_batch_size} with args: {args}...')
@@ -231,7 +204,6 @@ def dc_api_batched_wrapper(
             config.get('dc_api_retries', 3),
             config.get('dc_api_retry_secs', 5),
             config.get('dc_api_use_cache', False),
-            dc_api_root,
         )
         if batch_result:
             dc_api_merge_results(api_result, batch_result)
@@ -291,8 +263,7 @@ def get_dc_api_key(config: dict = None) -> str:
 
 def get_datacommons_client(config: dict = None) -> DataCommonsClient:
     """Returns a DataCommonsClient object initialized using config."""
-    if config is None:
-        config = {}
+    config = _validate_v2_config(config)
     api_key = get_dc_api_key(config)
     dc_instance = config.get('dc_api_root')
     url = None
@@ -326,24 +297,14 @@ def dc_api_is_defined_dcid(dcids: list, config: dict = {}) -> dict:
   Returns:
     dictionary with each input dcid mapped to a True/False value.
   """
-    # Set parameters for V2 node API.
+    config = _validate_v2_config(config)
+    # Set parameters for node API.
     client = get_datacommons_client(config)
     api_function = client.node.fetch_property_values
-    args = {'properties': 'typeOf'}
-    dcid_arg_kw = 'node_dcids'
-    if config.get('dc_api_version', 'V2') != 'V2':
-        # Set parameters for V1 API.
-        api_function = dc.get_property_values
-        args = {
-            'prop': 'typeOf',
-            'out': True,
-        }
-        dcid_arg_kw = 'dcids'
-
     api_result = dc_api_batched_wrapper(function=api_function,
                                         dcids=dcids,
-                                        args=args,
-                                        dcid_arg_kw=dcid_arg_kw,
+                                        args={'properties': 'typeOf'},
+                                        dcid_arg_kw='node_dcids',
                                         config=config)
     response = {}
     for dcid in dcids:
@@ -370,20 +331,13 @@ def dc_api_get_node_property(dcids: list,
   Returns:
     dictionary with each input dcid mapped to a True/False value.
   """
-    is_v2 = config.get('dc_api_version', 'V2') == 'V2'
+    config = _validate_v2_config(config)
     if isinstance(prop, list):
         if not prop:
             raise ValueError('prop list is empty.')
         if len(prop) == 1:
             prop = prop[0]
-        if not is_v2:
-            raise ValueError(
-                'V1 dc_api_get_node_property supports a single property.')
-    if is_v2:
-        return _dc_api_get_node_property_v2(dcids=dcids,
-                                            prop=prop,
-                                            config=config)
-    return _dc_api_get_node_property_v1(dcids=dcids, prop=prop, config=config)
+    return _dc_api_get_node_property_v2(dcids=dcids, prop=prop, config=config)
 
 
 def _dc_api_get_node_property_v2(dcids: list,
@@ -426,30 +380,6 @@ def _dc_api_get_node_property_v2(dcids: list,
     return response
 
 
-def _dc_api_get_node_property_v1(dcids: list,
-                                 prop: str,
-                                 config: dict = {}) -> dict:
-    # Set parameters for V1 API.
-    api_function = dc.get_property_values
-    args = {
-        'prop': prop,
-        'out': True,
-    }
-    dcid_arg_kw = 'dcids'
-    api_result = dc_api_batched_wrapper(function=api_function,
-                                        dcids=dcids,
-                                        args=args,
-                                        dcid_arg_kw=dcid_arg_kw,
-                                        config=config)
-    response = {}
-    for dcid in dcids:
-        dcid_stripped = _strip_namespace(dcid)
-        node_data = api_result.get(dcid_stripped)
-        if node_data:
-            response[dcid] = {prop: node_data}
-    return response
-
-
 def dc_api_get_node_property_values(dcids: list, config: dict = {}) -> dict:
     """Returns all the property values for a set of dcids from the DC API.
 
@@ -462,8 +392,7 @@ def dc_api_get_node_property_values(dcids: list, config: dict = {}) -> dict:
     dictionary with each dcid with the namspace 'dcid:' as the key
     mapped to a dictionary of property:value.
   """
-    if config.get('dc_api_version', 'V2') != 'V2':
-        return dc_api_v1_get_node_property_values(dcids, config)
+    config = _validate_v2_config(config)
     # Lookup node properties using V2 node API
     client = get_datacommons_client(config)
     api_function = client.node.fetch
@@ -497,42 +426,6 @@ def dc_api_get_node_property_values(dcids: list, config: dict = {}) -> dict:
     return response
 
 
-def dc_api_v1_get_node_property_values(dcids: list, config: dict = {}) -> dict:
-    """Returns all the property values for a set of dcids from the DC V1 API.
-
-  Args:
-    dcids: list of dcids to lookup
-    config: configuration parameters for the wrapper. See
-      dc_api_batched_wrapper() and dc_api_wrapper() for details.
-
-  Returns:
-    dictionary with each dcid with the namspace 'dcid:' as the key
-    mapped to a dictionary of property:value.
-  """
-    predefined_nodes = OrderedDict()
-    api_function = dc.get_triples
-    api_triples = dc_api_batched_wrapper(api_function, dcids, {}, config=config)
-    if api_triples:
-        for dcid, triples in api_triples.items():
-            if (_strip_namespace(dcid) not in dcids and
-                    _add_namespace(dcid) not in dcids):
-                continue
-            pvs = {}
-            for d, prop, val in triples:
-                if d == dcid and val:
-                    # quote string values with spaces if needed
-                    if ' ' in val and val[0] != '"':
-                        val = '"' + val + '"'
-                    if prop in pvs:
-                        val = pvs[prop] + ',' + val
-                    pvs[prop] = val
-            if len(pvs) > 0:
-                if 'Node' not in pvs:
-                    pvs['Node'] = _add_namespace(dcid)
-                predefined_nodes[_add_namespace(dcid)] = pvs
-    return predefined_nodes
-
-
 def dc_api_resolve_placeid(dcids: list,
                            in_prop: str = 'placeId',
                            *,
@@ -548,50 +441,26 @@ def dc_api_resolve_placeid(dcids: list,
   Returns:
     dictionary keyed by input placeid with reoslved dcid as value.
   """
-    if not config:
-        config = {}
-    if config.get('dc_api_version', 'V2') == 'V2':
-        client = get_datacommons_client(config)
-        api_function = client.resolve.fetch
-        args = {'expression': f'<-{in_prop}->dcid'}
-        dcid_arg_kw = 'node_ids'
-        api_result = dc_api_batched_wrapper(function=api_function,
-                                            dcids=dcids,
-                                            args=args,
-                                            dcid_arg_kw=dcid_arg_kw,
-                                            config=config)
-        results = {}
-        if api_result:
-            for node in api_result.get('entities', []):
-                place_id = node.get('node')
-                if place_id:
-                    candidates = node.get('candidates', [])
-                    if candidates:
-                        dcid = candidates[0].get('dcid')
-                        if dcid:
-                            results[place_id] = dcid
-        return results
-
-    # V1 implementation
-    api_root = config.get('dc_api_root', _DEFAULT_API_ROOT)
-    data = {'in_prop': in_prop, 'out_prop': 'dcid'}
-    data['ids'] = dcids
-    num_ids = len(dcids)
-    api_url = api_root + _DC_API_PATH_RESOLVE_ID
-    logging.debug(
-        f'Looking up {api_url} dcids for {num_ids} placeids: {data["ids"]}')
-    recon_resp = request_url(url=api_url,
-                             params=data,
-                             method='POST',
-                             output='json')
-    # Extract the dcid for each place from the response
+    config = _validate_v2_config(config)
+    client = get_datacommons_client(config)
+    api_function = client.resolve.fetch
+    args = {'expression': f'<-{in_prop}->dcid'}
+    dcid_arg_kw = 'node_ids'
+    api_result = dc_api_batched_wrapper(function=api_function,
+                                        dcids=dcids,
+                                        args=args,
+                                        dcid_arg_kw=dcid_arg_kw,
+                                        config=config)
     results = {}
-    if recon_resp:
-        for entity in recon_resp.get('entities', []):
-            place_id = entity.get('inId', '')
-            out_dcids = entity.get('outIds', None)
-            if place_id and out_dcids:
-                results[place_id] = out_dcids[0]
+    if api_result:
+        for node in api_result.get('entities', []):
+            place_id = node.get('node')
+            if place_id:
+                candidates = node.get('candidates', [])
+                if candidates:
+                    dcid = candidates[0].get('dcid')
+                    if dcid:
+                        results[place_id] = dcid
     return results
 
 
@@ -650,8 +519,7 @@ def dc_api_resolve_latlng(lat_lngs: list,
   Returns:
     dictionary containing the resolved place information.
   """
-    if not config:
-        config = {}
+    config = _validate_v2_config(config)
     api_root = config.get('dc_api_root', _DEFAULT_API_ROOT)
     v1_data = {}
     v1_data['coordinates'] = lat_lngs
