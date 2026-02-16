@@ -29,18 +29,17 @@ To download the latest version of this data or refresh the dataset:
 3. **Download:**
     - Select "Download options".
     - Choose "CSV (comma delimited)" to get the standard dataset file.
-    - Save the file as `canada_annual_population_age_gender_input.csv` in the `input_files` directory.
+    - Save the file as `canada_annual_population_age_gender_input.csv` in the `gs://unresolved_mcf/country/canada_statistics_age_gender/input_files/` directory.
 
 ## Processing Instructions
 
 To process the Canada Statistics data and generate statistical variables, use the following command from the repository root (or adjust paths relative to your current working directory):
 
-```bash
-python ./data/tools/statvar_importer/stat_var_processor.py 
-  --input_data="./data/statvar_imports/canada_statistics/input_files/canada_annual_population_age_gender_input.csv" 
-  --pv_map="./data/statvar_imports/canada_statistics/canada_annual_population_age_gender_pvmap.csv" 
-  --config_file="./data/statvar_imports/canada_statistics/canada_annual_population_age_gender_metadata.csv" 
-  --output_path="./data/statvar_imports/canada_statistics/canada_annual_population_age_gender_output"
+```python ./data/tools/statvar_importer/stat_var_processor.py 
+  --input_data="gs://unresolved_mcf/country/canada_statistics_age_gender/input_files/*.csv"
+  --pv_map="./data/statvar_imports/canada_statistics/CanadaStatisticsAgeGender/canada_annual_population_age_gender_pvmap.csv" 
+  --config_file="./data/statvar_imports/canada_statistics/CanadaStatisticsAgeGender/canada_annual_population_age_gender_metadata.csv" 
+  --output_path="output/canada_annual_population_age_gender_output"
 ```
 
 ## Data Refresh & Maintenance
