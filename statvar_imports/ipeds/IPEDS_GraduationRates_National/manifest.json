@@ -13,7 +13,7 @@
             "cleaned_csv": "output/graduation_rates_ipeds_output.csv"
           }
         ],
-        "cron_schedule": "15 22 10 * *"
+        "cron_schedule": "0 0 15 8 *"
       }
     ]
   }
