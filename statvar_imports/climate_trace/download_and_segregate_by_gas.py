@@ -118,6 +118,14 @@ def download_and_segregate_by_gas():
         
         try:
             final_df = pd.concat(gas_dataframes, ignore_index=True)
+
+            # Format emissions_quantity to avoid scientific notation
+            if 'emissions_quantity' in final_df.columns:
+                logging.info(f"  -> Formatting 'emissions_quantity' column...")
+                final_df['emissions_quantity'] = final_df['emissions_quantity'].apply(
+                    lambda x: format(x, '.16f').rstrip('0').rstrip('.') if pd.notna(x) else x
+                )
+
             logging.info(f"  -> Saving combined data to {output_filename}...")
             final_df.to_csv(output_filename, index=False)
             logging.info(f"  -> Successfully created {output_filename} with {len(final_df)} rows.\n")
