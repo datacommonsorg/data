@@ -1,3 +1,0 @@
-parameter,value
-output_columns,"observationDate,value,observationAbout,variableMeasured"
-dc_api_root,https://api.datacommons.org
