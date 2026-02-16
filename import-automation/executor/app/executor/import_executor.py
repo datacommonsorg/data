@@ -81,9 +81,9 @@ STAGING_VERSION_FILE = "staging_version.txt"
 class ImportStatus(Enum):
     SUCCESS = 1
     FAILURE = 2
-    ERROR = 3
+    PENDING = 3
     SKIP = 4
-    READY = 5
+    STAGING = 5
     VALIDATION = 6
 
 
@@ -788,7 +788,7 @@ class ImportExecutor:
             version, os.path.join(output_dir, STAGING_VERSION_FILE))
         self._upload_string_helper(
             self._import_metadata_mcf_helper(import_spec),
-            os.path.join(output_dir, version,
+            os.path.join(output_dir, version, 'provenance', 'genmcf',
                          self.config.import_metadata_mcf_filename))
         self._upload_string_helper(
             json.dumps(dataclasses.asdict(import_summary), default=str),
@@ -899,7 +899,7 @@ class ImportExecutor:
             logging.info(import_summary)
 
             if self.config.ignore_validation_status or validation_status:
-                import_summary.status = ImportStatus.READY
+                import_summary.status = ImportStatus.STAGING
             else:
                 logging.error(
                     "Staging latest version update due to validation failure.")
@@ -1017,6 +1017,7 @@ class ImportExecutor:
     """
 
         local_path = os.path.join(self.local_repo_dir, dest)
+        os.makedirs(os.path.dirname(local_path), exist_ok=True)
         with open(local_path, "w", encoding="utf-8") as file:
             file.write(text)
         self.uploader.upload_file(local_path, dest)
