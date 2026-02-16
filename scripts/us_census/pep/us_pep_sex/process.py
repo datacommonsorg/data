@@ -1192,11 +1192,10 @@ def add_future_year_urls():
                                      allow_redirects=True,
                                      timeout=5)
             if response.status_code != 200:
-                logging.info(
-                    f"Skipping year {future_year}: National file not found (404)."
-                )
+                logging.info(f"Skipping year {future_year}: National file not found (status code: {response.status_code}).")
                 continue
-        except Exception:
+        except requests.exceptions.RequestException as e:
+            logging.warning(f"Skipping year {future_year} due to an error checking the gatekeeper URL: {e}")
             continue
         # --- NEW GATEKEEPER LOGIC END ---
 
