@@ -53,9 +53,7 @@ class TestValidationRunner(unittest.TestCase):
                     'rules': [{
                         'rule_id': 'test_max_date',
                         'validator': 'MAX_DATE_LATEST',
-                        'scope': {
-                            'data_source': 'stats'
-                        },
+                        'scope': {},
                         'params': {}
                     }]
                 }, f)
@@ -76,7 +74,8 @@ class TestValidationRunner(unittest.TestCase):
         # 4. Assert that the correct method was called on the mock
         mock_validator_instance.validate_max_date_latest.assert_called_once()
         # Ensure other methods were NOT called
-        mock_validator_instance.validate_deleted_count.assert_not_called()
+        mock_validator_instance.validate_deleted_records_count.assert_not_called(
+        )
 
     @patch('tools.import_validation.runner.filter_dataframe')
     @patch('tools.import_validation.runner.Validator')
@@ -96,7 +95,6 @@ class TestValidationRunner(unittest.TestCase):
                 'rule_id': 'test_places_consistent',
                 'validator': 'NUM_PLACES_CONSISTENT',
                 'scope': {
-                    'data_source': 'stats',
                     'variables': {
                         'dcids': ['Count_Person_Male']
                     }
@@ -141,9 +139,7 @@ class TestValidationRunner(unittest.TestCase):
                     'rules': [{
                         'rule_id': 'test_max_date',
                         'validator': 'MAX_DATE_LATEST',
-                        'scope': {
-                            'data_source': 'stats'
-                        },
+                        'scope': {},
                         'params': {}
                     }]
                 }, f)
@@ -169,26 +165,24 @@ class TestValidationRunner(unittest.TestCase):
         mock_validator_instance = MockValidator.return_value
         expected_result = ValidationResult(
             ValidationStatus.FAILED,
-            'DELETED_COUNT',
+            'DELETED_RECORDS_COUNT',
             message='Too many deletions, found 100',
             details={
-                'deleted_count': 100,
+                'deleted_records_count': 100,
                 'rows_processed': 1,
                 'rows_succeeded': 0,
                 'rows_failed': 1
             })
-        mock_validator_instance.validate_deleted_count.return_value = expected_result
+        mock_validator_instance.validate_deleted_records_count.return_value = expected_result
 
         # 2. Create test files
         with open(self.config_path, 'w') as f:
             json.dump(
                 {
                     'rules': [{
-                        'rule_id': 'check_deleted_count',
-                        'validator': 'DELETED_COUNT',
-                        'scope': {
-                            'data_source': 'differ'
-                        },
+                        'rule_id': 'check_deleted_records_count',
+                        'validator': 'DELETED_RECORDS_COUNT',
+                        'scope': {},
                         'params': {
                             'threshold': 10
                         }
@@ -208,12 +202,12 @@ class TestValidationRunner(unittest.TestCase):
         output_df = pd.read_csv(self.output_path)
         self.assertEqual(len(output_df), 1)
         self.assertEqual(output_df.iloc[0]['ValidationName'],
-                         'check_deleted_count')
+                         'check_deleted_records_count')
         self.assertEqual(output_df.iloc[0]['Status'], 'FAILED')
         self.assertEqual(output_df.iloc[0]['Message'],
                          'Too many deletions, found 100')
         details = json.loads(output_df.iloc[0]['Details'])
-        self.assertEqual(details['deleted_count'], 100)
+        self.assertEqual(details['deleted_records_count'], 100)
         self.assertEqual(details['rows_processed'], 1)
         self.assertEqual(details['rows_succeeded'], 0)
         self.assertEqual(details['rows_failed'], 1)
@@ -232,9 +226,7 @@ class TestValidationRunner(unittest.TestCase):
                     'rules': [{
                         'rule_id': 'My_Custom_Test_Name',
                         'validator': 'MAX_DATE_LATEST',
-                        'scope': {
-                            'data_source': 'stats'
-                        },
+                        'scope': {},
                         'params': {}
                     }]
                 }, f)
@@ -255,6 +247,61 @@ class TestValidationRunner(unittest.TestCase):
         self.assertEqual(output_df.iloc[0]['ValidationName'],
                          'My_Custom_Test_Name')
 
+    @patch('tools.import_validation.runner.Validator')
+    def test_runner_deleted_records_percent(self, MockValidator):
+        # 1. Setup mock
+        mock_validator_instance = MockValidator.return_value
+        expected_result = ValidationResult(ValidationStatus.PASSED,
+                                           'DELETED_RECORDS_PERCENT',
+                                           details={'percent': 5.0})
+        mock_validator_instance.validate_deleted_records_percent.return_value = expected_result
+
+        # 2. Setup files in a directory for differ output
+        differ_dir = os.path.join(self.test_dir.name, 'differ_out')
+        os.makedirs(differ_dir, exist_ok=True)
+
+        differ_csv = os.path.join(differ_dir, 'obs_diff_summary.csv')
+        pd.DataFrame({'DELETED': [5]}).to_csv(differ_csv, index=False)
+
+        differ_json = os.path.join(differ_dir, 'differ_summary.json')
+        with open(differ_json, 'w') as f:
+            json.dump({'previous_data_size': 100}, f)
+
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    'rules': [{
+                        'rule_id': 'check_percent',
+                        'validator': 'DELETED_RECORDS_PERCENT',
+                        'params': {
+                            'threshold': 10
+                        }
+                    }]
+                }, f)
+
+        # 3. Run runner
+        runner = ValidationRunner(
+            validation_config_path=self.config_path,
+            stats_summary=self.stats_path,
+            differ_output=differ_dir,  # Pass directory
+            lint_report=self.report_path,
+            validation_output=self.output_path)
+        runner.run_validations()
+
+        # 4. Verify
+        # Check if validator was called with correct arguments
+        call_args, _ = mock_validator_instance.validate_deleted_records_percent.call_args
+        # call_args is (df, summary, params)
+        self.assertIsInstance(call_args[0], pd.DataFrame)
+        self.assertEqual(call_args[1]['previous_data_size'], 100)
+        self.assertEqual(call_args[2]['threshold'], 10)
+
+        # Check output
+        output_df = pd.read_csv(self.output_path)
+        self.assertEqual(len(output_df), 1)
+        self.assertEqual(output_df.iloc[0]['ValidationName'], 'check_percent')
+        self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
+
     @patch('tools.import_validation.runner.logging')
     @patch('tools.import_validation.runner.Validator')
     def test_runner_handles_unknown_validation(self, MockValidator,
@@ -265,9 +312,7 @@ class TestValidationRunner(unittest.TestCase):
                     'rules': [{
                         'rule_id': 'test_fake',
                         'validator': 'FAKE_VALIDATION',
-                        'scope': {
-                            'data_source': 'stats'
-                        },
+                        'scope': {},
                         'params': {}
                     }]
                 }, f)
@@ -292,9 +337,7 @@ class TestValidationRunner(unittest.TestCase):
                     'rules': [{
                         'rule_id': 'test_rule',
                         'validator': 'MAX_DATE_LATEST',
-                        'scope': {
-                            'data_source': 'stats'
-                        }
+                        'scope': {}
                     }]
                 }, f)
 
