@@ -26,7 +26,7 @@ The workflow for this data import involves two main steps: downloading the neces
 #### Step 1: Download the Data
 
 - **Source:** [Pennsylvania_Education](https://data.pa.gov/browse?sortBy=relevance&pageSize=20&q=education&page=1)
-- **Description:** The provided URL links to the Asthma and the Behavioral Risk Factor Surveillance System (BRFSS) data. The BRFSS is a large-scale, ongoing telephone survey conducted by the Centers for Disease Control and Prevention (CDC) that gathers data on health-related risk behaviors and chronic health conditions of adults and child in the U.S.
+- **Description:** The provided URL links to the Education data category within the Commonwealth of Pennsylvania’s open data repository. This portal serves as a centralized clearinghouse for public records, statistics, and geospatial data managed by the Pennsylvania Department of Education (PDE) and related agencies.
 
 To get the necessary data files, you'll need to run download script `download_script.py`.
 
