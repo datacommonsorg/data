@@ -1,6 +1,7 @@
 Node: E:graduation_rates_ipeds_output->E0
 observationDate: C:graduation_rates_ipeds_output->observationDate
 value: C:graduation_rates_ipeds_output->value
+unit: C:graduation_rates_ipeds_output->unit
 observationAbout: C:graduation_rates_ipeds_output->observationAbout
 variableMeasured: C:graduation_rates_ipeds_output->variableMeasured
 measurementMethod: C:graduation_rates_ipeds_output->measurementMethod

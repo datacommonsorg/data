@@ -1,12 +1,12 @@
-key,p1,v1,p2,v2,p3,v3,p4,v4
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
 National Center for Education Statistics,statType,measuredValue,populationType,Person,observationAbout,country/USA
-Total ,value,{Number},establishmentOwnership,"""""",statType,measuredValue,measuredProperty,graduationRate
-Overall,value,{Number},establishmentOwnership,"""""",statType,measuredValue,measuredProperty,graduationRate
-All institutions,value,{Number},establishmentOwnership,"""""",statType,measuredValue,measuredProperty,graduationRate
-Public,value,{Number},establishmentOwnership,PubliclyOwned,statType,measuredValue,measuredProperty,graduationRate
-not-for-profit,value,{Number},establishmentOwnership,PrivatelyOwnedNotForProfit,statType,measuredValue,measuredProperty,graduationRate
-nonprofit,value,{Number},establishmentOwnership,PrivatelyOwnedNotForProfit,statType,measuredValue,measuredProperty,graduationRate
-for-profit,value,{Number},establishmentOwnership,PrivatelyOwnedForProfit,statType,measuredValue,measuredProperty,graduationRate
+Total ,value,{Number},establishmentOwnership,"""""",statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+Overall,value,{Number},establishmentOwnership,"""""",statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+All institutions,value,{Number},establishmentOwnership,"""""",statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+Public,value,{Number},establishmentOwnership,PubliclyOwned,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+not-for-profit,value,{Number},establishmentOwnership,PrivatelyOwnedNotForProfit,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+nonprofit,value,{Number},establishmentOwnership,PrivatelyOwnedNotForProfit,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+for-profit,value,{Number},establishmentOwnership,PrivatelyOwnedForProfit,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
 "attending 4-year",educationalAttainment,BachelorsDegree,#Header,educationalAttainment,,,,
 "attending       2-year",educationalAttainment,AssociateDegreeOrCertificate,#Header,educationalAttainment,,,,
 "attending 2-year",educationalAttainment,AssociateDegreeOrCertificate,#Header,educationalAttainment,,,,
