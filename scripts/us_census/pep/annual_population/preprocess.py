@@ -30,8 +30,7 @@ National
     2000 - 2009     Data is available in State File in the year 2000-2009
     2010 - 2020     Processed As Is
 
-Before running this module, run download.sh script, it downloads required
-input files, creates necessary folders for processing.
+This module downloads and processes the input files.
 Folder information
 input_files - downloaded files (from US census website) are placed here
 output_files - output files (mcf, tmcf and csv are written here)
@@ -1169,11 +1168,8 @@ def main(_):
 
     if mode == "" or mode == "download":
         add_future_year_urls()
-        try:
-            download_files()
-        except Exception as e:
-            logging.fatal(f"Download failed: {e}")
-            sys.exit(1)
+        download_files()
+
     if mode == "" or mode == "process":
         process(_INPUT_FILE_PATH, cleaned_csv_path, mcf_path, tmcf_path,
                 is_summary_levels)
