@@ -30,29 +30,26 @@ To download the data manually:
 4. Click "Show table" and then "Download" to save as CSV.
 
 ## Processing Instructions
-To process the Denmark Demographics data and generate statistical variables, use the following command from the root directory:
+To process the Denmark Demographics data and generate statistical variables, use the following command:
 
-**For Data Run (Quarterly Population)**
-```bash
-python tools/statvar_importer/stat_var_processor.py \
-    --input_data='statvar_imports/denmark/Denmark_Demographics/population_quarterly_region_time_marital_status/test_data/population_quarterly_region_time_marital_status_input.csv' \
-    --pv_map='statvar_imports/denmark/Denmark_Demographics/population_quarterly_region_time_marital_status/population_quartely_region_time_marital_status_pvmap.csv' \
-    --output_path='statvar_imports/denmark/Denmark_Demographics/population_quarterly_region_time_marital_status/output' \
-    --config_file='statvar_imports/denmark/Denmark_Demographics/population_quarterly_region_time_marital_status/population_quartely_region_time_marital_status_metadata.csv' \
+**For Data Run (Quarterly Run)**
+```python ../../tools/statvar_importer/stat_var_processor.py \
+    --input_data='gs://unresolved_mcf/country/denmark/input_files/population_quarterly_region_time_marital_status_input.csv' \
+    --pv_map='population_quartely_region_time_marital_status_pvmap.csv' \
+    --output_path='population_quartely_region_time_marital_status_output' \
+    --config_file='denmark_demographics_metadata.csv' \
+    --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+```
+**For Data Run (Annual Run)**
+```python ../../tools/statvar_importer/stat_var_processor.py \
+    --input_data='gs://unresolved_mcf/country/denmark/input_files/population_sex_age_time_input.csv' \
+    --pv_map='population_sex_age_time_pvmap.csv' \
+    --output_path='population_sex_age_time_output' \
+    --config_file='denmark_demographics_metadata.csv' \
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
-**For Data Run (Annual Population)**
-```bash
-python tools/statvar_importer/stat_var_processor.py \
-    --input_data='statvar_imports/denmark/Denmark_Demographics/population_sex_age_time/test_data/population_sex_age_time_input.csv' \
-    --pv_map='statvar_imports/denmark/Denmark_Demographics/population_sex_age_time/population_sex_age_time_pvmap.csv' \
-    --output_path='statvar_imports/denmark/Denmark_Demographics/population_sex_age_time/output' \
-    --config_file='statvar_imports/denmark/Denmark_Demographics/population_sex_age_time/population_sex_age_time_metadata.csv' \
-    --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
-```
-
-This generates the following output files for each run:
+This generates the following output files for the first time run:
 - output.csv
 - output_stat_vars_schema.mcf
 - output_stat_vars.mcf
