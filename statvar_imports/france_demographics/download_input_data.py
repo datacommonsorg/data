@@ -1,9 +1,9 @@
 import requests
-from google.cloud import storage
+import os
 
-# Updated path as per your request
-BUCKET_NAME = "unresolved_mcf"
-DESTINATION_FOLDER = "country/france/input_files"
+# --- CONFIGURATION ---
+# The folder where files will be saved
+DESTINATION_FOLDER = "input_files"
 
 DATA_FILES = {
     "annual_population_components": "https://www.insee.fr/en/statistiques/fichier/8333211/Pop_annu_compo_evol_va.xlsx",
@@ -12,21 +12,23 @@ DATA_FILES = {
     "average_median_age": "https://www.insee.fr/en/statistiques/fichier/8333211/Pop_age_moyen_median_va.xlsx"
 }
 
-def upload_to_gcs(bucket_name, source_content, destination_blob_name):
-    """Uploads a binary stream to a GCS bucket."""
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(bucket_name)
-    blob = bucket.blob(destination_blob_name)
+def save_locally(content, folder, filename):
+    """Saves the binary content to a local file."""
+    # Ensure the directory exists
+    os.makedirs(folder, exist_ok=True)
     
-    blob.upload_from_string(
-        source_content, 
-        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    )
-    print(f"Successfully uploaded to gs://{bucket_name}/{destination_blob_name}")
+    file_path = os.path.join(folder, f"{filename}.xlsx")
+    
+    with open(file_path, "wb") as f:
+        f.write(content)
+    
+    print(f"Successfully saved: {file_path}")
 
 def download_and_transfer():
+    # Headers to mimic a browser
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Referer': 'https://www.insee.fr/en/statistiques/8333211'
     }
 
     for name, url in DATA_FILES.items():
@@ -35,10 +37,8 @@ def download_and_transfer():
             response = requests.get(url, headers=headers, timeout=30)
             response.raise_for_status() 
             
-            # Updated naming convention for 2025 data
-            blob_name = f"{DESTINATION_FOLDER}/{name}.xlsx"
-            
-            upload_to_gcs(BUCKET_NAME, response.content, blob_name)
+            # Save the file to the local directory
+            save_locally(response.content, DESTINATION_FOLDER, name)
             
         except Exception as e:
             print(f"Failed to process {name}: {e}")
