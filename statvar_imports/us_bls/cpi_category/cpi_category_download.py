@@ -118,36 +118,6 @@ def get_year_month_from_filename(filename: str) -> tuple[int, int] | None:
         return (year, month)
     return None
 
-def url_exists(url: str, timeout: int = 10) -> bool:
-    """
-    Checks if a URL exists without downloading the full file.
-    Uses GET with stream=True because BLS often blocks HEAD requests.
-
-    Returns True if the URL is reachable (HTTP 200),
-    otherwise False.
-    """
-    try:
-        response = requests.get(
-            url,
-            stream=True,
-            timeout=timeout,
-            allow_redirects=True
-        )
-
-        if response.status_code == 200:
-            return True
-
-        logging.info(
-            f"URL not available (status={response.status_code}): {url}"
-        )
-        return False
-
-    except requests.RequestException as e:
-        logging.warning(
-            f"URL existence check failed for {url}: {e}"
-        )
-        return False
-
 def unzip_all_excel_files(zip_file_path: str, temp_extract_base_path: str, final_destination_base_path: str,
                           cpi_u_w_rules: dict[str, list[int]], c_cpi_u_rules: dict[str, int])-> bool:
     """
@@ -328,37 +298,14 @@ def main():
 
     logging.info("\n--- Starting targeted download process for individual Excel files ---")
 
-    # If January file of current_year is not available yet,
-    # treat previous year as the "current" data year.
-    # This prevents loss of Feb–Dec data during year rollover.
-
-    effective_current_year = current_year
-
-    for category_prefix in ["cpi-u", "cpi-w"]:
-        jan_url = (
-            f"https://www.bls.gov/cpi/tables/supplemental-files/"
-            f"{category_prefix}-{current_year}01.xlsx"
-        )
-        if not url_exists(jan_url, timeout=args.timeout):
-            effective_current_year = current_year - 1
-            logging.info(
-                f"January {current_year} not available for {category_prefix}. "
-                f"Using {effective_current_year} as effective current year."
-        )
-            break
-    if effective_current_year == current_year:
-        effective_max_month = current_month
-    else:
-        effective_max_month = 12 
-
     # --- RULE 1: For 'c-cpi-u' files: Even months only, starting from Dec 2021 ---
     logging.info("\n--- Processing c-cpi-u files (even months, from Dec 2021 onwards) ---")
     start_year_ccpiu_rule = 2021
     c_cpi_u_filter_rules = {'start_year': start_year_ccpiu_rule}
 
-    for year in range(start_year_ccpiu_rule, effective_current_year + 1):
+    for year in range(start_year_ccpiu_rule, current_year + 1):
         start_month_for_year_ccpiu = 12 if year == start_year_ccpiu_rule else 2
-        end_month_for_year_ccpiu = effective_max_month if year == effective_current_year else 12
+        end_month_for_year_ccpiu = current_month if year == current_year else 12
 
         for month in range(start_month_for_year_ccpiu, end_month_for_year_ccpiu + 1):
             if month % 2 == 0:
@@ -380,7 +327,7 @@ def main():
     # Download January files for years *prior* to the current year (e.g., 2010-2024 January).
     start_year_january_cpi_uw_rule = 2010
 
-    for year in range(start_year_january_cpi_uw_rule, effective_current_year): # Loop up to, but *not including* current_year
+    for year in range(start_year_january_cpi_uw_rule, current_year): # Loop up to, but *not including* current_year
         month = 1 # Always January
         month_str = f"{month:02d}"
 
@@ -400,48 +347,35 @@ def main():
                 logging.error(f"Download of {category_prefix} January file {url} failed after multiple retries: {e}")
 
     # --- Handle current_year (2025) files for cpi-u and cpi-w: Ensure January AND the latest available are downloaded ---
- # --- NEW RULE: Download ALL monthly files for effective_current_year for cpi-u and cpi-w ---
-    logging.info(
-        f"\n--- Downloading ALL monthly files for {effective_current_year} "
-        f"(cpi-u and cpi-w) ---"
-    )
+    latest_current_year_month_cpi_uw = 0 # Stores the absolute highest month found for current year (e.g., if May 2025 is found, it's 5)
 
-    latest_current_year_month_cpi_uw = 0
-
+    logging.info(f"\n--- Attempting to download January {current_year} files for cpi-u and cpi-w ---")
     for category_prefix in ["cpi-u", "cpi-w"]:
-        for month in range(1, effective_max_month + 1):
-            month_str = f"{month:02d}"
-            url = (
-                f"https://www.bls.gov/cpi/tables/supplemental-files/"
-                f"{category_prefix}-{effective_current_year}{month_str}.xlsx"
-            )
-            filename = url.split("/")[-1]
+        # Explicitly attempt to download January current_year
+        month_jan = 1
+        month_jan_str = f"{month_jan:02d}"
+        url_jan = f"https://www.bls.gov/cpi/tables/supplemental-files/{category_prefix}-{current_year}{month_jan_str}.xlsx"
+        filename_jan = url_jan.split('/')[-1]
 
-            file_save_path = os.path.join(
-                cpi_u_folder if category_prefix == "cpi-u" else cpi_w_folder,
-                filename
-            )
+        file_save_path_jan = os.path.join(cpi_u_folder if category_prefix == "cpi-u" else cpi_w_folder, filename_jan)
+        try:
+            if download_file(url_jan, file_save_path_jan,timeout=args.timeout):
+                logging.info(f"Downloaded January {current_year} {category_prefix} file: {filename_jan}")
+                # If January is found, update latest_current_year_month_cpi_uw in case it's the only month out so far
+                latest_current_year_month_cpi_uw = max(latest_current_year_month_cpi_uw, month_jan)
+        except Exception as e:
+            logging.error(f"Download attempt for January {current_year} {category_prefix} file {url_jan} failed: {e}")
 
-            try:
-                if download_file(url, file_save_path, timeout=args.timeout):
-                    latest_current_year_month_cpi_uw = max(
-                        latest_current_year_month_cpi_uw, month
-                    )
-            except Exception as e:
-                logging.error(
-                    f"Failed to download {category_prefix} "
-                    f"{effective_current_year}{month_str}: {e}"
-                )
-        logging.info(f"\n--- Attempting to download absolute latest available {effective_current_year} files for cpi-u and cpi-w ---")
+    logging.info(f"\n--- Attempting to download absolute latest available {current_year} files for cpi-u and cpi-w ---")
 
     for category_prefix in ["cpi-u", "cpi-w"]:
         # Iterate backward from current_month to find the highest available month.
         # This loop will ensure the absolute latest file (e.g., April, May) is downloaded.
         # If January is the only file available, this loop will also ensure it's captured
         # as the latest and `download_file` will skip re-downloading if already present.
-        for month_iter in range(effective_max_month, 0, -1):
+        for month_iter in range(current_month, 0, -1):
             month_iter_str = f"{month_iter:02d}"
-            url_latest = f"https://www.bls.gov/cpi/tables/supplemental-files/{category_prefix}-{effective_current_year}{month_iter_str}.xlsx"
+            url_latest = f"https://www.bls.gov/cpi/tables/supplemental-files/{category_prefix}-{current_year}{month_iter_str}.xlsx"
             filename_latest = url_latest.split('/')[-1]
 
             file_save_path_latest = os.path.join(cpi_u_folder if category_prefix == "cpi-u" else cpi_w_folder, filename_latest)
@@ -450,13 +384,13 @@ def main():
                 # download_file will return True if downloaded or if file already existed but HTTP status was 200,
                 # or False if 404. We want to stop at the first existing/downloadable file.
                 if download_file(url_latest, file_save_path_latest,timeout=args.timeout):
-                    logging.info(f"Found and downloaded/confirmed latest {category_prefix} file for {effective_current_year}: {filename_latest}")
+                    logging.info(f"Found and downloaded/confirmed latest {category_prefix} file for {current_year}: {filename_latest}")
                     # Update overall latest_current_year_month_cpi_uw
                     latest_current_year_month_cpi_uw = max(latest_current_year_month_cpi_uw, month_iter)
                     break # Found the latest for this specific category_prefix, so stop iterating for this category
                 # else: File not found for this month, continue to next earlier month
             except Exception as e:
-                logging.error(f"Download attempt for {category_prefix} {effective_current_year}{month_iter_str} failed after retries: {e}")
+                logging.error(f"Download attempt for {category_prefix} {current_year}{month_iter_str} failed after retries: {e}")
 
 
     # Define the rules to pass to the unzip function
@@ -465,12 +399,12 @@ def main():
     # The `unzip_all_excel_files` function logic has been updated to handle the `latest_year` (2025) more precisely.
     cpi_u_w_filter_rules = {
         'months': [1], # This refers to general January files from historical ZIPs (prior to current_year).
-        'latest_year': effective_current_year,
+        'latest_year': current_year,
         'latest_month': latest_current_year_month_cpi_uw # This captures the single highest month found for current year (2025)
     }
 
     logging.info("\n--- Starting download process for yearly ZIP archives ---")
-    years_to_download_zip = list(range(2010, effective_current_year)) # Covers 2010 up to and including 2023
+    years_to_download_zip = list(range(2010, 2026)) # Covers 2010 up to and including 2023
 
     for year in years_to_download_zip:
         zip_url = generate_zip_url(year)
@@ -493,6 +427,22 @@ def main():
                 logging.fatal(f"CRITICAL ERROR: Unzipping or processing of {filename} failed. Cannot proceed.")
             else:
                 logging.info(f"Successfully processed ZIP for Year {year}.")
+        else:
+            logging.info(f"ZIP archive for {year} not found. Downloading all monthly files for cpi-u and cpi-w.")
+            for month in range(1, 13):
+                month_str = f"{month:02d}"
+                for category_prefix in ["cpi-u", "cpi-w"]:
+                    url = f"https://www.bls.gov/cpi/tables/supplemental-files/{category_prefix}-{year}{month_str}.xlsx"
+                    filename = url.split('/')[-1]
+                    if category_prefix == "cpi-u":
+                        file_save_path = os.path.join(cpi_u_folder, filename)
+                    else:
+                        file_save_path = os.path.join(cpi_w_folder, filename)
+                    
+                    try:
+                        download_file(url, file_save_path, timeout=args.timeout)
+                    except Exception as e:
+                        logging.warning(f"Failed to download monthly file {url} for year {year} (fallback): {e}")
 
     logging.info("\n--- Listing files in respective folders after all downloads/extractions ---")
     logging.info("Files in 'cpi-u' folder:")
