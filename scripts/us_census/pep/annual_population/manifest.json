@@ -8,7 +8,8 @@
             "provenance_url": "https://www2.census.gov/programs-surveys/popest/",
             "provenance_description": "U.S. Census Bureau PEP Annual Population",
             "scripts": [
-                "preprocess.py"
+                "preprocess.py --mode=download",
+                "preprocess.py --mode=process"
             ],
             "source_files": [
                 "input_files/*"
