@@ -1,5 +1,5 @@
 key,p1,v2,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
-World Bank Commodity Price Data (The Pink Sheet),observationAbout,dcid:Earth,measuredProperty,price,Year,{Number},populationType,Commodity,measurementQualifier,Nominal,observationPeriod,P1M,statType,meanValue
+Year,observationAbout,dcid:Earth,measuredProperty,price,Year,{Number},populationType,Commodity,measurementQualifier,Nominal,observationPeriod,P1M,statType,meanValue
 M01,Month,01,observationDate,{Year}-{Month},,,,,,,,,,
 M02,Month,02,observationDate,{Year}-{Month},,,,,,,,,,
 M03,Month,03,observationDate,{Year}-{Month},,,,,,,,,,
