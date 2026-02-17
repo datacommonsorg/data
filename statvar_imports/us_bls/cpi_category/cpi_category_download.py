@@ -404,7 +404,7 @@ def main():
     }
 
     logging.info("\n--- Starting download process for yearly ZIP archives ---")
-    years_to_download_zip = list(range(2010, 2026)) # Covers 2010 up to and including 2023
+    years_to_download_zip = list(range(2010, current_year)) # Covers 2010 up to and including previous year
 
     for year in years_to_download_zip:
         zip_url = generate_zip_url(year)
