@@ -9,10 +9,10 @@
             "provenance_description": "Population data for France from INSEE",
             "scripts": [
                 "python download_input_data.py",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data='gs://unresolved_mcf/country/france/input_files/annual_population_components.xlsx' --pv_map='annual_population_components_pvmap.csv' --config_file='france_demographics_metadata.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='output/annual_population_components_output'",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data='gs://unresolved_mcf/country/france/input_files/population_sex_detailed_age.xlsx' --pv_map='population_sex_detailed_age_pvmap.csv' --config_file='france_demographics_metadata.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='output/population_sex_detailed_age_output'",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data='gs://unresolved_mcf/country/france/input_files/population_sex_age_groups.xlsx' --pv_map='population_sex_age_groups_pvmap.csv' --config_file='france_demographics_metadata.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='output/population_sex_age_groups_output'",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data='gs://unresolved_mcf/country/france/input_files/average_median_age.xlsx' --pv_map='average_median_age_pvmap.csv' --config_file='france_demographics_metadata.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='output/average_median_age_output'"
+                "../../tools/statvar_importer/stat_var_processor.py --input_data='./input_files/annual_population_components.xlsx' --pv_map='annual_population_components_pvmap.csv' --config_file='france_demographics_metadata.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='output/annual_population_components_output'",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data='./input_files/population_sex_detailed_age.xlsx' --pv_map='population_sex_detailed_age_pvmap.csv' --config_file='france_demographics_metadata.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='output/population_sex_detailed_age_output'",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data='./input_files/population_sex_age_groups.xlsx' --pv_map='population_sex_age_groups_pvmap.csv' --config_file='france_demographics_metadata.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='output/population_sex_age_groups_output'",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data='./input_files/average_median_age.xlsx' --pv_map='average_median_age_pvmap.csv' --config_file='france_demographics_metadata.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='output/average_median_age_output'"
             ],
             "import_inputs": [
                 {
@@ -21,7 +21,7 @@
                 }
             ],
             "source_files": [
-                "gs://unresolved_mcf/country/france/input_files/*.xlsx"
+                "./input_files/*.xlsx"
             ],
             "cron_schedule": "0 10 21 * *"
         }
