@@ -14,7 +14,7 @@
 
 To download the raw input files:
 
-- Click on the provided source url. Login credentials are required to download the data. Create an account if not already created else login and download the data for both the datasets.
+- Click on the provided source url. Login credentials are required to download the data. Create an account if not already created else login and download the data for both the dataset.
 
 
 ### Data Processing
