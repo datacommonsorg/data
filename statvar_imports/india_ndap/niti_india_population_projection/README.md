@@ -1,6 +1,6 @@
 ### NITIIndiaPopulationProjection Import
 
-- Description: Population projection at India country and state level.
+- Description: Population projection at India country and state level. Country level data is aggregated from state level through pvmap. The dataset are about total population project at state level and total urban population projection at state level whcih are extended to country level as well.
 
 - Source URL: https://ndap.niti.gov.in/dataset/7208, https://ndap.niti.gov.in/dataset/7209
 
@@ -14,7 +14,7 @@
 
 To download the raw input files:
 
-- Click on the provided source url and download the data for boht the datasets.
+- Click on the provided source url. Login credentials are required to download the data. Create an account if not already created else login and download the data for both the datasets.
 
 
 ### Data Processing
