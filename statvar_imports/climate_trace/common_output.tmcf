@@ -1,0 +1,7 @@
+Node: E:sectors_CH4_output->E0
+observationAbout: C:sectors_CH4_output->observationAbout
+observationDate: C:sectors_CH4_output->observationDate
+variableMeasured: C:sectors_CH4_output->variableMeasured
+value: C:sectors_CH4_output->value
+typeOf: dcs:StatVarObservation
+#Aggregate: sum
