@@ -86,6 +86,10 @@ def _define_flags() -> None:
 
     flags.DEFINE_string("run_only", None,
                         "Execute only a specific pipeline step by name.")
+    flags.DEFINE_string("run_from", None,
+                        "Execute pipeline steps starting at the named step.")
+    flags.DEFINE_string("run_until", None,
+                        "Execute pipeline steps through the named step.")
 
     flags.DEFINE_boolean("force", False, "Force all steps to run.")
 
@@ -313,6 +317,8 @@ def prepare_config() -> PipelineConfig:
             dataset_prefix=FLAGS.dataset_prefix,
             working_dir=FLAGS.working_dir,
             run_only=FLAGS.run_only,
+            run_from=FLAGS.run_from,
+            run_until=FLAGS.run_until,
             force=FLAGS.force,
             verbose=FLAGS.verbose,
             skip_confirmation=FLAGS.skip_confirmation,
