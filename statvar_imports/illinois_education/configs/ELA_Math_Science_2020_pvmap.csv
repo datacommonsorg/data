@@ -1,0 +1,13 @@
+key,p1,v1,,,,,,,,
+RCDTS,observationAbout,{Data},observationDate,2020,,,,,,
+% EL students,value,{Number},measuredProperty,count,populationType,Student,languageLearned,EnglishLearner,,
+EL Student Exit Rate,,,,,,,,,,
+# EL students Tested with Access,,,,,,,,,,
+ACCESS Participation Rate,,,,,,,,,,
+% EL students Level 1,value,{Number},measuredProperty,count,populationType,Student,languageLearned,EnglishLearner,educationalAchievementLevel,Entering
+% EL students Level 2,value,{Number},measuredProperty,count,populationType,Student,languageLearned,EnglishLearner,educationalAchievementLevel,Emerging
+% EL students Level 3,value,{Number},measuredProperty,count,populationType,Student,languageLearned,EnglishLearner,educationalAchievementLevel,Developing
+% EL students Level 4,value,{Number},measuredProperty,count,populationType,Student,languageLearned,EnglishLearner,educationalAchievementLevel,Expanding
+% EL students Level 5,value,{Number},measuredProperty,count,populationType,Student,languageLearned,EnglishLearner,educationalAchievementLevel,Bridging
+% EL students Level 6,value,{Number},measuredProperty,count,populationType,Student,languageLearned,EnglishLearner,educationalAchievementLevel,Reaching
+# EL Long Term EL Students,,,,,,,,,,
