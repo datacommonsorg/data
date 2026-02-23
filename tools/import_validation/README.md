@@ -143,6 +143,7 @@ The following validations are currently supported:
 | `MISSING_REFS_COUNT`           | Checks that the total number of missing references is within a threshold.    | `lint`          | `threshold` (integer, defaults to 0)                   |
 | `LINT_ERROR_COUNT`           | Checks that the total number of lint errors is within a threshold.    | `lint`          | `threshold` (integer, defaults to 0)                   |
 | `DELETED_RECORDS_COUNT`           | Checks that the total number of deleted points is within a threshold.    | `differ`          | `threshold` (integer, defaults to 0)                   |
+| `DELETED_RECORDS_PERCENT`           | Checks that the percentage of deleted points is within a threshold.    | `differ`          | `threshold` (integer, defaults to 0)                   |
 | `MODIFIED_RECORDS_COUNT`          | Checks that the number of modified points is the same for all StatVars.  | `differ`          | None                                                   |
 | `ADDED_RECORDS_COUNT`             | Checks that the number of added points is the same for all StatVars.     | `differ`          | None                                                   |
 | `NUM_PLACES_CONSISTENT`   | Checks that the number of places is the same for all StatVars.           | `stats`           | None                                                   |
