@@ -1,0 +1,9 @@
+Node: E:daily_wages_output->E0
+observationDate: C:daily_wages_output->observationDate
+observationAbout: C:daily_wages_output->observationAbout
+variableMeasured: C:daily_wages_output->variableMeasured
+value: C:daily_wages_output->value
+unit: C:daily_wages_output->unit
+measurementMethod: C:daily_wages_output->measurementMethod
+observationPeriod: C:daily_wages_output->observationPeriod
+typeOf: dcs:StatVarObservation

@@ -12,9 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# gcloud builds submit --config=cloudbuild.yaml . --project=datcom-import-automation-prod 
-
+# Child Cloud Build configuration for deploying to a specific environment.
+# Defaults are set to PRODUCTION. Staging builds must override these values.
+#
 substitutions:
+  # Production config.
   _PROJECT_ID: 'datcom-import-automation-prod'
   _SPANNER_PROJECT_ID: 'datcom-store'
   _SPANNER_INSTANCE_ID: 'dc-kg-test'
@@ -45,9 +47,7 @@ steps:
   args: ['functions', 'deploy', 'import-aggregation-helper', '--runtime', 'python312', '--source', 'aggregation-helper', '--no-allow-unauthenticated', '--trigger-http', '--entry-point', 'aggregation_helper', '--project', '${_PROJECT_ID}', '--set-env-vars', 'PROJECT_ID=${_PROJECT_ID},SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},GCS_BUCKET_ID=${_GCS_BUCKET_ID},LOCATION=${_LOCATION},BQ_DATASET_ID=${_BQ_DATASET_ID}']
   dir: 'import-automation/workflow'
 
-# gcloud pubsub subscriptions create import-automation-sub --topic=import-automation-trigger --message-filter='attributes.transfer_status="TRANSFER_COMPLETED"' --push-endpoint=https://us-central1-datcom-import-automation-prod.cloudfunctions.net/import-automation-helper --push-auth-service-account=965988403328-compute@developer.gserviceaccount.com --project=datcom-import-automation-prod
 - id: 'import-automation-helper'
   name: 'gcr.io/cloud-builders/gcloud'
   args: ['functions', 'deploy', 'import-automation-helper', '--gen2', '--project', '${_PROJECT_ID}', '--region', '${_LOCATION}', '--runtime', 'python312', '--source', 'import-helper', '--no-allow-unauthenticated', '--trigger-http', '--entry-point', 'handle_feed_event', '--set-env-vars', 'PROJECT_ID=${_PROJECT_ID},LOCATION=${_LOCATION},GCS_BUCKET_ID=${_GCS_BUCKET_ID}']
   dir: 'import-automation/workflow'
-
