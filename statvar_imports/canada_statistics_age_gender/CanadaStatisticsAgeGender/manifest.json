@@ -1,0 +1,25 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "CanadaStatisticsAgeGender",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1710000501",
+            "provenance_description": "Canada Population Yearly Esitmates at Country, Province and Territories level across different age groups and gender.",
+            "scripts": [
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/canada_statistics_age_gender/input_files/*.csv --pv_map=canada_annual_population_age_gender_pvmap.csv --config_file=canada_annual_population_age_gender_metadata.csv --output_path=output/canada_annual_population_age_gender_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/canada_annual_population_age_gender_output.tmcf",
+                    "cleaned_csv": "output/canada_annual_population_age_gender_output.csv"
+                }
+            ],
+            "source_files": [
+                "gs://unresolved_mcf/country/canada_statistics_age_gender/input_files/*.csv"
+            ],
+            "cron_schedule": "30 5 1 *  *"
+        }
+    ]
+}
