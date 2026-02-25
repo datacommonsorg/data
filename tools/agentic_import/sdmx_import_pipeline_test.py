@@ -52,7 +52,8 @@ from tools.agentic_import.sdmx_pipeline_config import (  # pylint: disable=impor
     PipelineConfig, RunConfig, SampleConfig, SdmxConfig, SdmxDataflowConfig)
 from tools.agentic_import.sdmx_pipeline_steps import (  # pylint: disable=import-error
     CreateDcConfigStep, CreateSampleStep, CreateSchemaMapStep, DownloadDataStep,
-    DownloadMetadataStep, ProcessFullDataStep, SdmxStep, _run_command)
+    DownloadMetadataStep, ExtractMetadataStep, ProcessFullDataStep, SdmxStep,
+    _run_command)
 from tools.agentic_import.state_handler import (  # pylint: disable=import-error
     PipelineState, StateHandler, StepState)
 
@@ -369,6 +370,7 @@ class PlanningTest(unittest.TestCase):
         self.assertEqual(names_all, [
             "download-data",
             "download-metadata",
+            "extract-metadata",
             "create-sample",
             "create-schema-mapping",
             "process-full-data",
@@ -381,6 +383,7 @@ class PlanningTest(unittest.TestCase):
         state = self._state_with({
             "download-data": ("1", "succeeded", newer),
             "download-metadata": ("1", "succeeded", older),
+            "extract-metadata": ("1", "succeeded", older),
             "create-sample": ("1", "succeeded", older),
             "create-schema-mapping": ("1", "succeeded", older),
             "process-full-data": ("1", "succeeded", older),
@@ -390,6 +393,7 @@ class PlanningTest(unittest.TestCase):
         names = self._names_from_builder(cfg, state=state)
         self.assertEqual(names, [
             "download-metadata",
+            "extract-metadata",
             "create-sample",
             "create-schema-mapping",
             "process-full-data",
@@ -420,6 +424,75 @@ class PlanningTest(unittest.TestCase):
         names = self._names_from_builder(cfg, state=state)
         self.assertEqual(names, ["download-data"])
 
+    def test_run_range_selects_steps(self) -> None:
+        cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND,
+                                           run_from="create-sample",
+                                           run_until="process-full-data"))
+        names = self._names_from_builder(cfg)
+        self.assertEqual(names, [
+            "create-sample",
+            "create-schema-mapping",
+            "process-full-data",
+        ])
+
+    def test_run_range_respects_outside_predecessor(self) -> None:
+        newer = 2_000
+        older = 1_000
+        state = self._state_with({
+            "download-data": ("1", "succeeded", older),
+            "download-metadata": ("1", "succeeded", newer),
+            "extract-metadata": ("1", "succeeded", older),
+            "create-sample": ("1", "succeeded", older),
+            "create-schema-mapping": ("1", "succeeded", older),
+            "process-full-data": ("1", "succeeded", older),
+            "create-dc-config": ("1", "succeeded", older),
+        })
+        cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND,
+                                           run_from="extract-metadata",
+                                           run_until="process-full-data"))
+        names = self._names_from_builder(cfg, state=state)
+        self.assertEqual(names, [
+            "extract-metadata",
+            "create-sample",
+            "create-schema-mapping",
+            "process-full-data",
+        ])
+
+    def test_run_range_requires_valid_step(self) -> None:
+        cfg = PipelineConfig(
+            run=RunConfig(command=_TEST_COMMAND, run_from="nope"))
+        with self.assertRaisesRegex(ValueError,
+                                    "run_from step not found: nope"):
+            self._names_from_builder(cfg)
+
+    def test_run_range_rejects_inverted_bounds(self) -> None:
+        cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND,
+                                           run_from="process-full-data",
+                                           run_until="create-sample"))
+        with self.assertRaisesRegex(ValueError, "must not come after"):
+            self._names_from_builder(cfg)
+
+    def test_force_run_range_overrides_state(self) -> None:
+        state = self._state_with({
+            "download-data": ("1", "succeeded", 1_000),
+            "download-metadata": ("1", "succeeded", 1_000),
+            "extract-metadata": ("1", "succeeded", 1_000),
+        })
+        cfg = PipelineConfig(run=RunConfig(command=_TEST_COMMAND,
+                                           run_from="download-data",
+                                           run_until="extract-metadata"))
+        names = self._names_from_builder(cfg, state=state)
+        self.assertEqual(names, [])
+
+        cfg_force = PipelineConfig(run=RunConfig(command=_TEST_COMMAND,
+                                                 run_from="download-data",
+                                                 run_until="extract-metadata",
+                                                 force=True))
+        names_force = self._names_from_builder(cfg_force, state=state)
+        self.assertEqual(
+            names_force,
+            ["download-data", "download-metadata", "extract-metadata"])
+
     def test_version_bump_schedules_downstream(self) -> None:
         steps = [
             _VersionedStep("download-data", "1"),
@@ -443,6 +516,7 @@ class PlanningTest(unittest.TestCase):
         state = self._state_with({
             "download-data": ("1", "succeeded", 1_000),
             "download-metadata": ("1", "succeeded", 1_000),
+            "extract-metadata": ("1", "succeeded", 1_000),
             "create-sample": ("1", "succeeded", 1_000),
             "create-schema-mapping": ("1", "succeeded", 1_000),
             "process-full-data": ("1", "succeeded", 1_000),
@@ -548,11 +622,12 @@ class RunPipelineTest(SdmxTestBase):
         self.assertEqual(state["dataset_prefix"], "demo")
         self.assertEqual(state["command"], command)
         self.assertEqual(state["critical_input_hash"], expected_hash)
-        self.assertEqual(len(state["steps"]), 6)
+        self.assertEqual(len(state["steps"]), 7)
 
         for step_name in [
-                "download-data", "download-metadata", "create-sample",
-                "create-schema-mapping", "process-full-data", "create-dc-config"
+                "download-data", "download-metadata", "extract-metadata",
+                "create-sample", "create-schema-mapping", "process-full-data",
+                "create-dc-config"
         ]:
             self.assertIn(step_name, state["steps"])
             self.assertEqual(state["steps"][step_name]["status"], "succeeded")
@@ -661,26 +736,22 @@ class SdmxStepTest(SdmxTestBase):
             self,
             step,
             *,
-            log_contains: str,
-            cmd_contains: str,
+            cmd_contains: str | None = None,
+            expected_command: list[str] | None = None,
             extra_cmd_checks=None,
             expect_verbose: bool = True) -> None:
         extra_cmd_checks = extra_cmd_checks or []
         with mock.patch("tools.agentic_import.sdmx_pipeline_steps._run_command"
                        ) as mock_run_cmd:
-            with self.assertLogs(logging.get_absl_logger(),
-                                 level="INFO") as logs:
-                step.dry_run()
-                step.run()
-
-        self.assertTrue(
-            any("test-step (dry run): would run" in entry
-                for entry in logs.output))
-        self.assertTrue(any(log_contains in entry for entry in logs.output))
+            step.dry_run()
+            step.run()
         mock_run_cmd.assert_called_once()
         args, kwargs = mock_run_cmd.call_args
         command = args[0]
-        self.assertTrue(any(cmd_contains in arg for arg in command))
+        if cmd_contains:
+            self.assertTrue(any(cmd_contains in arg for arg in command))
+        if expected_command:
+            self.assertEqual(command, expected_command)
         self.assertEqual(kwargs["verbose"], expect_verbose)
         for check in extra_cmd_checks:
             check(command)
@@ -761,10 +832,59 @@ class SdmxStepTest(SdmxTestBase):
             ),
         )
         step = DownloadMetadataStep(name="test-step", config=config)
+        working_dir = Path(self._tmpdir).resolve()
+        expected_command = [
+            sys.executable,
+            str(Path(_PROJECT_ROOT) / "tools" / "sdmx_import" / "sdmx_cli.py"),
+            "download-metadata",
+            "--endpoint=https://example.com",
+            "--agency=AGENCY",
+            "--dataflow=FLOW",
+            f"--output_path={working_dir / 'demo_metadata.xml'}",
+            "--verbose",
+        ]
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            log_contains="download-metadata",
-            cmd_contains="download-metadata",
+            expected_command=expected_command,
+        )
+
+    def test_extract_metadata_step_caches_plan(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = ExtractMetadataStep(name="test-step", config=config)
+        # Cache the resolved command and paths for the extractor step.
+        self._assert_step_caches_plan(
+            step,
+            command_contains=["sdmx_metadata_extractor.py"],
+            path_attrs=["input_path", "output_path"],
+        )
+
+    def test_extract_metadata_step_run_and_dry_run_use_same_plan(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = ExtractMetadataStep(name="test-step", config=config)
+        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+        # Verify the extractor command matches the expected full command.
+        working_dir = Path(self._tmpdir).resolve()
+        expected_command = [
+            sys.executable,
+            str(
+                Path(_PROJECT_ROOT) / "tools" / "agentic_import" /
+                "sdmx_metadata_extractor.py"),
+            f"--input_metadata={working_dir / 'demo_metadata.xml'}",
+            f"--output_path={working_dir / 'demo_metadata.json'}",
+        ]
+        self._assert_run_and_dry_run_use_same_plan(
+            step,
+            expected_command=expected_command,
         )
 
     def test_download_data_step_caches_plan(self) -> None:
@@ -812,10 +932,20 @@ class SdmxStepTest(SdmxTestBase):
             ),
         )
         step = DownloadDataStep(name="test-step", config=config)
+        working_dir = Path(self._tmpdir).resolve()
+        expected_command = [
+            sys.executable,
+            str(Path(_PROJECT_ROOT) / "tools" / "sdmx_import" / "sdmx_cli.py"),
+            "download-data",
+            "--endpoint=https://example.com",
+            "--agency=AGENCY",
+            "--dataflow=FLOW",
+            f"--output_path={working_dir / 'demo_data.csv'}",
+            "--verbose",
+        ]
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            log_contains="download-data",
-            cmd_contains="download-data",
+            expected_command=expected_command,
         )
 
     def test_create_sample_step_caches_plan(self) -> None:
@@ -850,10 +980,19 @@ class SdmxStepTest(SdmxTestBase):
         # Create test input file for run()
         input_path = Path(self._tmpdir) / "demo_data.csv"
         input_path.write_text("header\nrow1")
+        working_dir = Path(self._tmpdir).resolve()
+        expected_command = [
+            sys.executable,
+            str(
+                Path(_PROJECT_ROOT) / "tools" / "statvar_importer" /
+                "data_sampler.py"),
+            f"--sampler_input={working_dir / 'demo_data.csv'}",
+            f"--sampler_output={working_dir / 'demo_sample.csv'}",
+            "--sampler_output_rows=500",
+        ]
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            log_contains="data_sampler.py",
-            cmd_contains="data_sampler.py",
+            expected_command=expected_command,
         )
 
     def test_create_sample_step_dry_run_succeeds_if_input_missing(self) -> None:
@@ -905,6 +1044,35 @@ class SdmxStepTest(SdmxTestBase):
             path_attrs=["sample_path", "metadata_path", "output_prefix"],
         )
 
+    def test_create_schema_map_step_prefers_extracted_metadata(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = CreateSchemaMapStep(name="test-step", config=config)
+        (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
+        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+        (Path(self._tmpdir) / "demo_metadata.json").write_text("{}")
+        context = step._prepare_command()
+        # Prefer the extracted JSON when both formats are available.
+        self.assertEqual(context.metadata_path.name, "demo_metadata.json")
+
+    def test_create_schema_map_step_uses_xml_when_json_missing(self) -> None:
+        config = PipelineConfig(run=RunConfig(
+            command="test",
+            dataset_prefix="demo",
+            working_dir=self._tmpdir,
+            verbose=True,
+        ),)
+        step = CreateSchemaMapStep(name="test-step", config=config)
+        (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
+        (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+        context = step._prepare_command()
+        # If JSON metadata is missing, fall back to the XML file.
+        self.assertEqual(context.metadata_path.name, "demo_metadata.xml")
+
     def test_create_schema_map_step_run_and_dry_run_use_same_plan(self) -> None:
         config = PipelineConfig(run=RunConfig(
             command="test",
@@ -917,10 +1085,21 @@ class SdmxStepTest(SdmxTestBase):
         # Create test input files for run()
         (Path(self._tmpdir) / "demo_sample.csv").write_text("header\nrow1")
         (Path(self._tmpdir) / "demo_metadata.xml").write_text("<xml/>")
+        working_dir = Path(self._tmpdir).resolve()
+        expected_command = [
+            sys.executable,
+            str(
+                Path(_PROJECT_ROOT) / "tools" / "agentic_import" /
+                "pvmap_generator.py"),
+            f"--input_data={working_dir / 'demo_sample.csv'}",
+            f"--input_metadata={working_dir / 'demo_metadata.xml'}",
+            "--sdmx_dataset",
+            f"--output_path={working_dir / 'sample_output' / 'demo'}",
+            f"--working_dir={working_dir}",
+        ]
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            log_contains="pvmap_generator.py",
-            cmd_contains="pvmap_generator.py",
+            expected_command=expected_command,
         )
 
     def test_create_schema_map_step_dry_run_succeeds_if_input_missing(
@@ -977,7 +1156,6 @@ class SdmxStepTest(SdmxTestBase):
         self._create_test_input_files("demo")
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            log_contains="stat_var_processor.py",
             cmd_contains="stat_var_processor.py",
             extra_cmd_checks=[
                 lambda command: self.assertTrue(
@@ -1034,7 +1212,6 @@ class SdmxStepTest(SdmxTestBase):
         (final_output_dir / "demo.csv").write_text("data")
         self._assert_run_and_dry_run_use_same_plan(
             step,
-            log_contains="generate_custom_dc_config.py",
             cmd_contains="generate_custom_dc_config.py",
             extra_cmd_checks=[
                 lambda command: self.assertIn(
