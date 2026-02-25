@@ -1,0 +1,6 @@
+Node: E:canada_annual_population_age_gender_output->E0
+observationDate: C:canada_annual_population_age_gender_output->observationDate
+value: C:canada_annual_population_age_gender_output->value
+observationAbout: C:canada_annual_population_age_gender_output->observationAbout
+variableMeasured: C:canada_annual_population_age_gender_output->variableMeasured
+typeOf: dcs:StatVarObservation

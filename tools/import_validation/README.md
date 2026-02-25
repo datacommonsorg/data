@@ -60,7 +60,6 @@ Each object in the `rules` list defines a single validation check with the follo
 
 The `scope` object specifies which data to run the validation on. It has two main parts:
 
-- `data_source`: The key for the data source to use (`"stats"` or `"differ"`).
 - `variables`: An optional filter to select a subset of StatVars from the data source.
 
 The `variables` object can contain any of the following keys:
@@ -82,17 +81,11 @@ Here is an example of a complete configuration file:
         {
             "rule_id": "check_latest_date_for_all",
             "validator": "MAX_DATE_LATEST",
-            "scope": {
-                "data_source": "stats"
-            },
             "params": {}
         },
         {
             "rule_id": "check_deleted_points_threshold",
-            "validator": "DELETED_COUNT",
-            "scope": {
-                "data_source": "differ"
-            },
+            "validator": "DELETED_RECORDS_COUNT",
             "params": {
                 "threshold": 10
             }
@@ -101,7 +94,6 @@ Here is an example of a complete configuration file:
             "rule_id": "check_percent_max_value",
             "validator": "MAX_VALUE_CHECK",
             "scope": {
-                "data_source": "stats",
                 "variables": {
                     "contains_all": ["Percent"]
                 }
@@ -150,9 +142,10 @@ The following validations are currently supported:
 | `MAX_DATE_CONSISTENT`     | Checks that the latest date is the same for all StatVars.                | `stats`           | None                                                   |
 | `MISSING_REFS_COUNT`           | Checks that the total number of missing references is within a threshold.    | `lint`          | `threshold` (integer, defaults to 0)                   |
 | `LINT_ERROR_COUNT`           | Checks that the total number of lint errors is within a threshold.    | `lint`          | `threshold` (integer, defaults to 0)                   |
-| `DELETED_COUNT`           | Checks that the total number of deleted points is within a threshold.    | `differ`          | `threshold` (integer, defaults to 0)                   |
-| `MODIFIED_COUNT`          | Checks that the number of modified points is the same for all StatVars.  | `differ`          | None                                                   |
-| `ADDED_COUNT`             | Checks that the number of added points is the same for all StatVars.     | `differ`          | None                                                   |
+| `DELETED_RECORDS_COUNT`           | Checks that the total number of deleted points is within a threshold.    | `differ`          | `threshold` (integer, defaults to 0)                   |
+| `DELETED_RECORDS_PERCENT`           | Checks that the percentage of deleted points is within a threshold.    | `differ`          | `threshold` (integer, defaults to 0)                   |
+| `MODIFIED_RECORDS_COUNT`          | Checks that the number of modified points is the same for all StatVars.  | `differ`          | None                                                   |
+| `ADDED_RECORDS_COUNT`             | Checks that the number of added points is the same for all StatVars.     | `differ`          | None                                                   |
 | `NUM_PLACES_CONSISTENT`   | Checks that the number of places is the same for all StatVars.           | `stats`           | None                                                   |
 | `NUM_PLACES_COUNT`        | Checks that the number of places is within a defined range.              | `stats`           | `minimum`, `maximum`, or `value` (integer)             |
 | `NUM_OBSERVATIONS_CHECK`  | Checks that the number of observations is within a defined range.        | `stats`           | `minimum`, `maximum`, or `value` (integer)             |

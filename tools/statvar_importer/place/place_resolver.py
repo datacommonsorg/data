@@ -51,7 +51,6 @@ from typing import Union
 from absl import app
 from absl import flags
 from absl import logging
-import datacommons as dc
 
 # uncomment to run pprof
 # from pypprof.net_http import start_pprof_server
