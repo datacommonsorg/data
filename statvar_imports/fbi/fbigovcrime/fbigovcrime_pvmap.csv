@@ -1,3 +1,4 @@
+key
 State,StateName,{Data},observationPeriod,P1Y,,,,,,
 Violent Crime Total,populationType,CriminalActivities,crimeType,ViolentCrime,value,{Number},crimeType,UCR_CombinedCrime,#Aggregate,sum
 Violent Crime,populationType,CriminalActivities,crimeType,ViolentCrime,value,{Number},crimeType,UCR_CombinedCrime,#Aggregate,sum
