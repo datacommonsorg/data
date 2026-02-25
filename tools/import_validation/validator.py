@@ -202,6 +202,83 @@ class Validator:
                                     'rows_failed': 0
                                 })
 
+    def validate_deleted_records_percent(self, differ_df: pd.DataFrame,
+                                         summary: dict,
+                                         params: dict) -> ValidationResult:
+        """Checks if the percentage of deleted records is within a threshold.
+
+    Args:
+      differ_df: A DataFrame containing the differ output.
+      summary: A dictionary containing the differ summary.
+      params: A dictionary containing the validation parameters, which may
+        have a 'threshold' key.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if differ_df is None:
+            return ValidationResult(ValidationStatus.DATA_ERROR,
+                                    'DELETED_RECORDS_PERCENT',
+                                    message="Differ DataFrame is missing.")
+
+        if summary is None:
+            return ValidationResult(ValidationStatus.DATA_ERROR,
+                                    'DELETED_RECORDS_PERCENT',
+                                    message="Differ summary is missing.")
+
+        if 'previous_obs_size' not in summary:
+            return ValidationResult(
+                ValidationStatus.DATA_ERROR,
+                'DELETED_RECORDS_PERCENT',
+                message=
+                "Differ summary is missing required field: 'previous_obs_size'."
+            )
+
+        previous_obs_size = summary['previous_obs_size']
+
+        if differ_df.empty:
+            deleted_records_count = 0
+        elif 'DELETED' not in differ_df.columns:
+            return ValidationResult(
+                ValidationStatus.DATA_ERROR,
+                'DELETED_RECORDS_PERCENT',
+                message="Input data is missing required column: 'DELETED'.")
+        else:
+            deleted_records_count = differ_df['DELETED'].sum()
+
+        if previous_obs_size == 0:
+            if deleted_records_count > 0:
+                percent = 100.0
+            else:
+                percent = 0.0
+        else:
+            percent = (deleted_records_count / previous_obs_size) * 100
+
+        threshold = params.get('threshold', 0)
+
+        if percent > threshold:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'DELETED_RECORDS_PERCENT',
+                message=
+                f"Found {percent:.2f}% deleted records, which is over the threshold of {threshold}%.",
+                details={
+                    'deleted_records_count': int(deleted_records_count),
+                    'previous_obs_size': int(previous_obs_size),
+                    'percent': percent,
+                    'threshold': threshold
+                })
+
+        return ValidationResult(
+            ValidationStatus.PASSED,
+            'DELETED_RECORDS_PERCENT',
+            details={
+                'deleted_records_count': int(deleted_records_count),
+                'previous_obs_size': int(previous_obs_size),
+                'percent': percent,
+                'threshold': threshold
+            })
+
     def validate_missing_refs_count(self, report: dict,
                                     params: dict) -> ValidationResult:
         """Checks if the total number of missing references is within a threshold.

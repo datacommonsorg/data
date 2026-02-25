@@ -1,0 +1,9 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=./test_data/*france.csv --pv_map=annual_population_pvmap.csv --config_file=annual_population_metadata.csv --output_path=./test_data/annual_population_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --debug" on 2026-01-25 15:21:44.018957
+
+Node: dcid:GrowthRate_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Population growth rate"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:growthRate
+

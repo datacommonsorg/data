@@ -1,0 +1,6 @@
+Node: E:population_1_jan_sex_detailed_age_output->E0
+observationDate: C:population_1_jan_sex_detailed_age_output->observationDate
+value: C:population_1_jan_sex_detailed_age_output->value
+observationAbout: C:population_1_jan_sex_detailed_age_output->observationAbout
+variableMeasured: C:population_1_jan_sex_detailed_age_output->variableMeasured
+typeOf: dcs:StatVarObservation
