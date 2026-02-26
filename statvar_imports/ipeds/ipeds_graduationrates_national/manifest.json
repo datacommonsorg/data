@@ -1,0 +1,21 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "IPEDS_GraduationRates_National",
+        "curator_emails": ["support@datacommons.org"],
+        "provenance_url": "https://nces.ed.gov/ipeds/search",
+        "provenance_description": "",
+        "scripts": ["../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/IPEDS/graduation_rates_national/input_files/*.csv --pv_map=graduation_rates_ipeds_pvmap.csv --config_file=graduation_rates_ipeds_metadata.csv --output_path=output/graduation_rates_ipeds_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+"],
+        "import_inputs": [
+          {
+            "template_mcf": "output/graduation_rates_ipeds_output.tmcf",
+            "cleaned_csv": "output/graduation_rates_ipeds_output.csv"
+          }
+        ],
+        "cron_schedule": "0 0 15 8 *"
+      }
+    ]
+  }
+  
+

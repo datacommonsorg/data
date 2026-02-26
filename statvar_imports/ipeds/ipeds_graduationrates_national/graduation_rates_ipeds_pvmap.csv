@@ -1,0 +1,37 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+National Center for Education Statistics,statType,measuredValue,populationType,Person,observationAbout,country/USA
+Total ,value,{Number},establishmentOwnership,"""""",statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+Overall,value,{Number},establishmentOwnership,"""""",statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+All institutions,value,{Number},establishmentOwnership,"""""",statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+Public,value,{Number},establishmentOwnership,PubliclyOwned,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+not-for-profit,value,{Number},establishmentOwnership,PrivatelyOwnedNotForProfit,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+nonprofit,value,{Number},establishmentOwnership,PrivatelyOwnedNotForProfit,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+for-profit,value,{Number},establishmentOwnership,PrivatelyOwnedForProfit,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+"attending 4-year",educationalAttainment,BachelorsDegree,#Header,educationalAttainment,,,,
+"attending       2-year",educationalAttainment,AssociateDegreeOrCertificate,#Header,educationalAttainment,,,,
+"attending 2-year",educationalAttainment,AssociateDegreeOrCertificate,#Header,educationalAttainment,,,,
+"less-than-      2-year",educationalAttainment,PostSecondaryCertificate,#Header,educationalAttainment,,,,
+"less-than-2-year",educationalAttainment,PostSecondaryCertificate,#Header,educationalAttainment,,,,
+"attending less-than-",educationalAttainment,PostSecondaryCertificate,#Header,educationalAttainment,,,,
+within 100%,courseCompletionTime,Within100PercentOfNormalTime,,,,,,
+within 150%,courseCompletionTime,Within150PercentOfNormalTime,,,,,,
+within 200%,courseCompletionTime,Within200PercentOfNormalTime,,,,,,
+Within 100 percent,courseCompletionTime,Within100PercentOfNormalTime,,,,,,
+Within 150 percent,courseCompletionTime,Within150PercentOfNormalTime,,,,,,
+Within 200 percent,courseCompletionTime,Within200PercentOfNormalTime,,,,,,
+cohort years 2000 and 2004,observationDate,2009
+cohort years 2001 and 2005,observationDate,2010
+cohort years 2002 and 2006,observationDate,2011
+cohort years 2003 and 2007,observationDate,2012
+cohort years 2004 and 2008,observationDate,2013
+cohort years 2005 and 2009,observationDate,2014
+cohort years 2006 and 2010,observationDate,2015
+cohort years 2007 and 2011,observationDate,2016
+cohort years 2008 and 2012,observationDate,2017
+cohort years 2009 and 2013,observationDate,2018
+cohort years 2010 and 2014,observationDate,2019
+cohort years 2011 and 2015,observationDate,2020
+cohort years 2012 and 2016,observationDate,2021
+cohort years 2013 and 2017,observationDate,2022
+cohort years 2014 and 2018,observationDate,2023
+cohort years 2015 and 2019,observationDate,2024
