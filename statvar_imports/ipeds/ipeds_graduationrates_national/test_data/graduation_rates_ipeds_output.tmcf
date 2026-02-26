@@ -4,5 +4,4 @@ value: C:graduation_rates_ipeds_output->value
 unit: C:graduation_rates_ipeds_output->unit
 observationAbout: C:graduation_rates_ipeds_output->observationAbout
 variableMeasured: C:graduation_rates_ipeds_output->variableMeasured
-measurementMethod: C:graduation_rates_ipeds_output->measurementMethod
 typeOf: dcs:StatVarObservation
