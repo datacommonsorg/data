@@ -31,6 +31,7 @@ CREATE TABLE ImportStatus (
 
 CREATE TABLE IngestionHistory (
   CompletionTimestamp TIMESTAMP NOT NULL OPTIONS ( allow_commit_timestamp = TRUE ),
+  IngestionFailure Bool NOT NULL,
   WorkflowExecutionID STRING(1024) NOT NULL,
   DataflowJobID STRING(1024),
   IngestedImports ARRAY<STRING(MAX)>,

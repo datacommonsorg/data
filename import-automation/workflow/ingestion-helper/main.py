@@ -1,25 +1,11 @@
-# Copyright 2025 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import functions_framework
 from spanner_client import SpannerClient
 from storage_client import StorageClient
-from flask import jsonify
 import logging
-import import_utils
 import os
 from absl import flags
+import import_utils
+from flask import jsonify
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -68,13 +54,14 @@ def ingestion_helper(request):
                             FLAGS.spanner_database_id)
     storage = StorageClient(FLAGS.gcs_bucket_id)
 
-    if actionType == 'get_import_list':
-        # Gets the list of imports that are ready for ingestion.
+    if actionType == 'get_import_info':
+        # Gets the details of imports that are ready for ingestion.
         # Input:
-        #   importList: list of import names to filter by (optional)
+        #   importList: list of import names to ingest (optional)
         import_list = request_json.get('importList', [])
-        imports = spanner.get_import_list(import_list)
-        return jsonify(imports)
+        import_info = spanner.get_import_info(import_list)
+        return jsonify(import_info)
+
     elif actionType == 'acquire_ingestion_lock':
         # Attempts to acquire the global lock for ingestion.
         # Input:
@@ -89,7 +76,8 @@ def ingestion_helper(request):
         status = spanner.acquire_lock(workflow, timeout)
         if not status:
             return ('Failed to acquire lock', 500)
-        return ('Lock acquired', 200)
+        return ('OK', 200)
+
     elif actionType == 'release_ingestion_lock':
         # Releases the global ingestion lock.
         # Input:
@@ -101,36 +89,44 @@ def ingestion_helper(request):
         status = spanner.release_lock(workflow)
         if not status:
             return ('Failed to release lock', 500)
-        return ('Lock released', 200)
+        return ('OK', 200)
+
     elif actionType == 'update_ingestion_status':
         # Updates the status of imports after ingestion.
         # Input:
         #   importList: list of import names
         #   workflowId: ID of the workflow
+        #   status: import status
         #   jobId: Dataflow job ID
         validation_error = _validate_params(
-            request_json, ['importList', 'workflowId', 'jobId'])
+            request_json, ['importList', 'workflowId', 'jobId', 'status'])
         if validation_error:
             return (validation_error, 400)
         import_list = request_json['importList']
         workflow_id = request_json['workflowId']
+        status = request_json['status']
         job_id = request_json['jobId']
+        ingested_imports = [item['importName'] for item in import_list]
+
+        spanner.update_ingestion_status(ingested_imports, workflow_id, status)
         metrics = import_utils.get_ingestion_metrics(FLAGS.project_id,
                                                      FLAGS.location, job_id)
-        spanner.update_ingestion_status(import_list, workflow_id, job_id,
-                                        metrics)
-        return ('Updated ingestion status', 200)
+        spanner.update_ingestion_history(workflow_id, job_id, ingested_imports,
+                                         metrics)
+        if status == 'SUCCESS':
+            spanner.update_import_version_history(import_list, workflow_id)
+        return ('OK', 200)
+
     elif actionType == 'update_import_status':
         # Updates the status of a specific import job.
         # Input:
         #   importName: name of the import
         #   status: new status
-        #   jobId: Dataflow job ID (optional)
+        #   jobId: Batch job ID (optional)
         #   executionTime: execution time in seconds (optional)
         #   dataVolume: data volume in bytes (optional)
         #   latestVersion: latest version string (optional)
         #   graphPath: graph path regex (optional)
-        #   schedule: cron schedule string (optional)
         #   nextRefresh: next refresh timestamp (optional)
         validation_error = _validate_params(request_json,
                                             ['importName', 'status'])
@@ -140,46 +136,62 @@ def ingestion_helper(request):
         status = request_json['status']
         logging.info(f'Updating import {import_name} to status {status}')
         params = import_utils.get_import_params(request_json)
+        next_refresh = import_utils.get_next_refresh(FLAGS.project_id,
+                                                     FLAGS.location,
+                                                     import_name)
+        if next_refresh:
+            params['next_refresh'] = next_refresh
         if status == 'STAGING':
-            latest_version = os.path.basename(request_json['latestVersion'])
-            storage.update_staging_version(import_name, latest_version)
+            version = os.path.basename(request_json.get('latestVersion', ''))
+            if not version:
+                return (f'Empty version for import {import_name}', 500)
+            storage.update_staging_version(import_name, version)
+            storage.update_provenance_file(import_name, version)
+            storage.update_import_summary(params)
+            storage.update_version_file(import_name, version)
+            comment = f"import-workflow:{request_json.get('jobId','')}"
+            spanner.update_version_history(import_name, version, comment)
         spanner.update_import_status(params)
-        return (f"Updated import {import_name} to status {params['status']}",
-                200)
+        return ('OK', 200)
+
     elif actionType == 'update_import_version':
-        # Updates the version of an import and marks it as READY.
+        # Updates the version and status of an import.
         # Input:
         #   importName: name of the import
         #   version: version string
         #   comment: audit log comment
         #   override: override status check (optional)
+        #   triggerIngestion: trigger ingestion workflow (optional)
         validation_error = _validate_params(
             request_json, ['importName', 'version', 'comment'])
         if validation_error:
             return (validation_error, 400)
         import_name = request_json['importName']
         version = request_json['version']
-        logging.info(f"Updating import {import_name} to version {version}")
         comment = request_json['comment']
+        logging.info(
+            f"Updating import {import_name} to version {version} comment:{comment}"
+        )
         override = request_json.get('override', False)
-        if version == 'staging':
+        if version == 'STAGING':
             version = storage.get_staging_version(import_name)
         summary = storage.get_import_summary(import_name, version)
         params = import_utils.get_import_params(summary)
         if override:
-            params['status'] = 'READY'
+            params['status'] = 'STAGING'
             caller = import_utils.get_caller_identity(request)
             comment = f'version-override:{caller} {comment}'
-        if params['status'] == 'READY':
+        if params['status'] == 'STAGING':
+            storage.update_provenance_file(import_name, version)
             storage.update_version_file(import_name, version)
             spanner.update_version_history(import_name, version, comment)
-            logging.info(
-                f"Import {import_name} version {version} comment: {comment}")
+            logging.info(f"Updated import {import_name} to version {version}")
         else:
             logging.info(f"Skipping {import_name} version update")
         spanner.update_import_status(params)
         return (
-            f"Import {import_name} version {version} status: {params['status']}",
+            f"OK [Import: {import_name} Version: {version} Status: {params['status']}]",
             200)
+
     else:
         return (f'Unknown actionType: {actionType}', 400)

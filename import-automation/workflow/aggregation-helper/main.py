@@ -40,9 +40,7 @@ def aggregation_helper(request):
     HTTP Cloud Function that takes importName and runs a BQ query.
     """
     request_json = request.get_json(silent=True)
-    import_list = request_json.get('importList')
-    if not import_list:
-        return ("'importList' parameter is missing", 400)
+    import_list = request_json.get('importList', [])
     logging.info(f"Received request for importList: {import_list}")
     results = []
     try:

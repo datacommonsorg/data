@@ -12,10 +12,10 @@ The function expects a JSON payload with a required `actionType` parameter, whic
 
 ### Supported Actions and Parameters
 
-#### `get_import_list`
-Gets the list of imports that are ready for ingestion.
+#### `get_import_info`
+Gets the details of imports that are ready for ingestion.
 
-*   `importList` (Optional): A list of import names to filter the results by.
+*   `importList` (Optional): list of imports to ingest.
 
 #### `acquire_ingestion_lock`
 Attempts to acquire the global lock for ingestion to prevent concurrent modifications.
@@ -33,6 +33,7 @@ Updates the status of imports after an ingestion job completes.
 
 *   `importList` (Required): A list of import names involved in the ingestion.
 *   `workflowId` (Required): The ID of the workflow.
+*   `status` (Required): Import status.
 *   `jobId` (Required): The Dataflow job ID associated with the ingestion.
 
 #### `update_import_status`
@@ -45,14 +46,13 @@ Updates the status of a specific import job.
 *   `dataVolume` (Optional): Data volume in bytes.
 *   `latestVersion` (Optional): Latest version string.
 *   `graphPath` (Optional): Graph path regex.
-*   `schedule` (Optional): A cron schedule string.
 *   `nextRefresh` (Optional): Next refresh timestamp.
 
 
 #### `update_import_version`
-Updates the version of an import, records an audit log, and marks the import as `READY`.
+Updates the version of an import, records version history, and updates the status.
 
 *   `importName` (Required): The name of the import.
-*   `version` (Required): The version string. If set to `'staging'`, it resolves to the current staging version.
+*   `version` (Required): The version string. If set to `'STAGING'`, it resolves to the current staging version.
 *   `comment` (Required): A comment for the audit log explaining the version update.
 *   `override` (Optional): Override version without checking import status (boolean)
