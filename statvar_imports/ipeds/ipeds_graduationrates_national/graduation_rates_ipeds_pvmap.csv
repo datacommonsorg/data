@@ -13,12 +13,12 @@ for-profit,value,{Number},establishmentOwnership,PrivatelyOwnedForProfit,statTyp
 "less-than-      2-year",educationalAttainment,PostSecondaryCertificate,#Header,educationalAttainment,,,,
 "less-than-2-year",educationalAttainment,PostSecondaryCertificate,#Header,educationalAttainment,,,,
 "attending less-than-",educationalAttainment,PostSecondaryCertificate,#Header,educationalAttainment,,,,
-within 100%,measurementMethod,CourseCompletedWithin100PercentOfNormalTime,,,,,,
-within 150%,measurementMethod,CourseCompletedWithin150PercentOfNormalTime,,,,,,
-within 200%,measurementMethod,CourseCompletedWithin200PercentOfNormalTime,,,,,,
-Within 100 percent,measurementMethod,CourseCompletedWithin100PercentOfNormalTime,,,,,,
-Within 150 percent,measurementMethod,CourseCompletedWithin150PercentOfNormalTime,,,,,,
-Within 200 percent,measurementMethod,CourseCompletedWithin200PercentOfNormalTime,,,,,,
+within 100%,courseCompletionTime,Within100PercentOfNormalTime,,,,,,
+within 150%,courseCompletionTime,Within150PercentOfNormalTime,,,,,,
+within 200%,courseCompletionTime,Within200PercentOfNormalTime,,,,,,
+Within 100 percent,courseCompletionTime,Within100PercentOfNormalTime,,,,,,
+Within 150 percent,courseCompletionTime,Within150PercentOfNormalTime,,,,,,
+Within 200 percent,courseCompletionTime,Within200PercentOfNormalTime,,,,,,
 cohort years 2000 and 2004,observationDate,2009
 cohort years 2001 and 2005,observationDate,2010
 cohort years 2002 and 2006,observationDate,2011
