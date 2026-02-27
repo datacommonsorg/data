@@ -1851,7 +1851,7 @@ series_id_value:6000000006,name,"""Production and Nonsupervisory Employees, In T
 series_id_value:6000000007,name,"""Average Weekly Hours of Production and Nonsupervisory Employees, Professional and Business Services""",industry,NAICS/1024,,,measurementQualifier,Weekly,measuredProperty,usualHoursWorked,statType,meanValue,unit,Hour,workCategory,ProductionAndNonsupervisory,,,,,,
 series_id_value:6000000008,name,"""Average Hourly Earnings of Production and Nonsupervisory Employees, In Dollars, Professional and Business Services""",industry,NAICS/1024,,,,,measuredProperty,earnings,measurementQualifier,Hourly,statType,meanValue,unit,USDollar,workCategory,ProductionAndNonsupervisory,,,,
 series_id_value:6000000030,name,"""Average Weekly Earnings of Production and Nonsupervisory Employees, In Dollars, Professional and Business Services""",industry,NAICS/1024,,,,,measuredProperty,earnings,measurementQualifier,Weekly,statType,meanValue,unit,USDollar,workCategory,ProductionAndNonsupervisory,,,,
-series_id_value:9093248001,name,"""All Employees, In Thousands, Transportation""",industry,Transportation,,,,,,,#Multiply,1000,,,,,,,,,,
+series_id_value:9093248001,name,"""All Employees, In Thousands, Transportation""",industry,NAICS/48,,,,,,,#Multiply,1000,,,,,,,,,,
 series_id_value:9094000001,name,"""All Employees, In Thousands, Total State and Local Government""",establishmentOwnership,GovernmentOwned,,,,,,,#Multiply,1000,,,,,,,,,,
 series_id_value:9094000101,#ignore,ignoring value,,,,,,,,,,,,,,,,,,,,
 series_id_value:3133530001,name,"""All Employees, In Thousands, Electrical Equipment Manufacturing""",industry,NAICS/3353,,,,,,,#Multiply,1000,,,,,,,,,,
