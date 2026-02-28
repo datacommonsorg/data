@@ -1,0 +1,55 @@
+Node: dcid:institutionControl
+typeOf: dcs:Property
+name: "institutionControl"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:InstitutionControlEnum
+isProvisional: dcs:True
+
+Node: dcid:InstitutionAll
+typeOf: dcid:InstitutionControlEnum
+name: "Institution All"
+isProvisional: dcs:True
+
+Node: dcid:AdjustedChort
+typeOf: dcid:InstitutionTypeEnum
+name: "Adjusted Chort"
+isProvisional: dcs:True
+
+Node: dcid:educationAid
+typeOf: dcs:Property
+name: "educationAid"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EducationAidEnum
+isProvisional: dcs:True
+
+Node: dcid:EducationAidEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "EducationAidEnum"
+isProvisional: dcs:True
+
+Node: dcid:AllStudents
+typeOf: dcid:EducationAidEnum
+name: "All Students"
+isProvisional: dcs:True
+
+Node: dcid:Received
+typeOf: dcid:InstitutionTypeEnum
+name: "Received"
+isProvisional: dcs:True
+
+Node: dcid:GraduationRate
+typeOf: dcid:InstitutionTypeEnum
+name: "Graduation Rate"
+isProvisional: dcs:True
+
+Node: dcid:PellGrant
+typeOf: dcid:EducationAidEnum
+name: "Pell Grant"
+isProvisional: dcs:True
+
+Node: dcid:SubsidizedLoan
+typeOf: dcid:EducationAidEnum
+name: "Subsidized Loan"
+isProvisional: dcs:True
+

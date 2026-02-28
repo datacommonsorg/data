@@ -1,0 +1,422 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/IPEDS/2012_2015/input.csv --pv_map=statvar_imports/IPEDS/2012_2015/pvmap.csv --output_path=statvar_imports/IPEDS/2012_2015/output --config_file=statvar_imports/IPEDS/2012_2015/metadata.csv" on 2025-12-12 15:08:26.541778
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_AllStudents_InstitutionAll_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateForProfit_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPrivateNonProfit_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_AllStudents_InstitutionControlPublic_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionAll_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_InstitutionAll_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_InstitutionControlPrivateForProfit_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_InstitutionControlPrivateNonProfit_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_InstitutionControlPublic_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_InstitutionControlPublic_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_PellGrant_InstitutionAll_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateForProfit_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPrivateNonProfit_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_PellGrant_InstitutionControlPublic_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionAll_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionType: dcid:Received
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_AdjustedChort
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionType: dcid:AdjustedChort
+
+Node: dcid:Count_Student_SubsidizedLoan_InstitutionControlPublic_Received
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionType: dcid:Received
+
+Node: dcid:Percent_Student_AllStudents_InstitutionAll_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionAll
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateForProfit_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPrivateNonProfit_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_AllStudents_InstitutionControlPublic_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:AllStudents
+institutionControl: dcid:InstitutionControlPublic
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_InstitutionAll_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionAll
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_InstitutionControlPrivateForProfit_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_InstitutionControlPrivateNonProfit_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_InstitutionControlPublic_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+institutionControl: dcid:InstitutionControlPublic
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_PellGrant_InstitutionAll_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionAll
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateForProfit_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_PellGrant_InstitutionControlPublic_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:PellGrant
+institutionControl: dcid:InstitutionControlPublic
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionAll_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionAll
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateForProfit
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPrivateNonProfit
+institutionType: dcid:GraduationRate
+
+Node: dcid:Percent_Student_SubsidizedLoan_InstitutionControlPublic_GraduationRate
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+educationAid: dcid:SubsidizedLoan
+institutionControl: dcid:InstitutionControlPublic
+institutionType: dcid:GraduationRate
+
