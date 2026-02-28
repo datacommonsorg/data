@@ -1184,6 +1184,25 @@ def add_future_year_urls():
     # Loop through years in reverse order from 2030 to 2023
     for future_year in range(2030, 2022, -1):  # From 2030 to 2023
 
+        # We check the National CSV first. If it's 404, the whole year is skipped.
+        gatekeeper_url = urls_to_scan[0].format(YEAR=future_year)
+        try:
+            # Use a short 5-second timeout for the check
+            response = requests.head(gatekeeper_url,
+                                     allow_redirects=True,
+                                     timeout=5)
+            if response.status_code != 200:
+                logging.info(
+                    f"Skipping year {future_year}: National file not found (status code: {response.status_code})."
+                )
+                continue
+        except requests.exceptions.RequestException as e:
+            logging.warning(
+                f"Skipping year {future_year} due to an error checking the gatekeeper URL: {e}"
+            )
+            continue
+        # --- NEW GATEKEEPER LOGIC END ---
+
         YEAR = future_year
         # Loop through URLs
         for url in urls_to_scan:
