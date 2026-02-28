@@ -12,20 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-dataflow.py
+sdmx_client.py
 
-This module provides a client class for interacting with SDMX APIs.
+This module provides a client class for discovering, fetching, and interacting
+with SDMX APIs.
 """
 
 import logging
 import sdmx
 import pandas as pd
 from requests.exceptions import HTTPError
-from typing import Dict, Any
+from typing import Dict, Any, List
+from tools.sdmx_import.sdmx_models import SdmxDataflow, SdmxStructureMessage
 
 
 class SdmxClient:
-    """A client for fetching data and metadata from an SDMX REST API."""
+    """A client for performing operations against an SDMX REST API."""
 
     def __init__(self, endpoint: str, agency_id: str):
         """
@@ -51,6 +53,36 @@ class SdmxClient:
         }
         sdmx.add_source(custom_source, override=True)
         return sdmx.Client(source_id)
+
+    def list_dataflows(self) -> SdmxStructureMessage:
+        """
+        Lists all available dataflows.
+
+        # TODO: Check if sub-agency dataflows are also listed.
+        # For example, agency=OECD should also list dataflows for OECD.ORG1.
+
+        Returns:
+            A StructureMessage object containing a list of Dataflow objects.
+        """
+        try:
+            logging.info(
+                f"Fetching all dataflows from {self.endpoint} for agency {self.agency_id}"
+            )
+            dataflows_msg = self.client.dataflow()
+
+            dataflows = [
+                SdmxDataflow(
+                    id=df_id,
+                    name=str(df.name),
+                    description=str(df.description) if df.description else '',
+                    agency_id=str(df.maintainer.id),
+                    version=str(df.version))
+                for df_id, df in dataflows_msg.dataflow.items()
+            ]
+            return SdmxStructureMessage(dataflows=dataflows)
+        except Exception as e:
+            logging.error(f"Error fetching dataflows: {e}")
+            raise
 
     def download_metadata(self, dataflow_id: str, output_path: str):
         """
