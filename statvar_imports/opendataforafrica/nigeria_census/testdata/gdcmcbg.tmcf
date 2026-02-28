@@ -1,0 +1,10 @@
+Node: E:input-gdcmcbg->E0
+observationAbout: C:input-gdcmcbg->observationAbout
+observationDate: C:input-gdcmcbg->observationDate
+variableMeasured: C:input-gdcmcbg->variableMeasured
+value: C:input-gdcmcbg->value
+unit: C:input-gdcmcbg->unit
+scalingFactor: C:input-gdcmcbg->scalingFactor
+observationPeriod: C:input-gdcmcbg->observationPeriod
+measurementMethod: C:input-gdcmcbg->measurementMethod
+typeOf: dcs:StatVarObservation

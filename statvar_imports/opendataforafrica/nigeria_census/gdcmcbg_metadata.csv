@@ -1,0 +1,13 @@
+parameter,value
+url,https://nigeria.opendataforafrica.org/gdcmcbg/economic-outlook-for-nigeria-2011-2019
+description,Economic data  country  level data
+start_date,2011
+end_date,2019
+release_frequency,Annual
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod,measurementMethod"
+mapped_rows,1
+mapped_columns,4
+header_rows,1
+drop_statvars_without_svobs,0

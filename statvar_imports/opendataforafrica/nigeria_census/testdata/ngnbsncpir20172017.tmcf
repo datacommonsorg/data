@@ -1,0 +1,10 @@
+Node: E:input-NGNBSNCPIR2017->E0
+observationAbout: C:input-NGNBSNCPIR2017->observationAbout
+observationDate: C:input-NGNBSNCPIR2017->observationDate
+variableMeasured: C:input-NGNBSNCPIR2017->variableMeasured
+value: C:input-NGNBSNCPIR2017->value
+unit: C:input-NGNBSNCPIR2017->unit
+scalingFactor: C:input-NGNBSNCPIR2017->scalingFactor
+observationPeriod: C:input-NGNBSNCPIR2017->observationPeriod
+measurementMethod: C:input-NGNBSNCPIR2017->measurementMethod
+typeOf: dcs:StatVarObservation
