@@ -1,0 +1,13 @@
+key,prop,value,,,,,,,,,,
+Age group,observationAbout,country/ESP,populationType,Person,observationPeriod,P1Y,unit,Percent,measurementDenominator,-employmentStatus,scalingFactor,100
+Age group:Total,age,[16 - Years],,,,,,,,,,
+From 16 to 24 years old,age,[16 24 Years],,,,,,,,,,
+From 25 to 44 years old,age,[25 44 Years],,,,,,,,,,
+From 45 to 64 years old,age,[45 64 Years],,,,,,,,,,
+Rate: Persons without disabilities,disabilityStatus,NoDisability,,,,,,,,,,
+Rate: Persons with disabilities,disabilityStatus,WithDisability,,,,,,,,,,
+Employment,employmentStatus,Employed,,,,,,,,,,
+Unemployment,employmentStatus,Unemployed,,,,,,,,,,
+value,value,{Number},,,,,,,,,,
+year,observationDate,{Data},,,,,,,,,,
+Activity,employmentStatus,BLS_InLaborForce,,,,,,,,,,
