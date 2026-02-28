@@ -83,7 +83,7 @@ from mcf_file_util import load_mcf_nodes, write_mcf_nodes, add_namespace, strip_
 from mcf_filter import drop_existing_mcf_nodes
 from mcf_diff import fingerprint_node, fingerprint_mcf_nodes, diff_mcf_node_pvs
 from place_resolver import PlaceResolver
-from property_value_mapper import PropertyValueMapper
+from property_value_mapper import PropertyValueMapper, write_pv_map
 from schema_resolver import SchemaResolver
 from json_to_csv import file_json_to_csv
 from schema_generator import generate_schema_nodes, generate_statvar_name
@@ -1421,6 +1421,8 @@ class StatVarDataProcessor:
             self._config.get('numeric_data_key', 'Number'),
             self._config.get('pv_lookup_key', 'Key'),
         ]
+        # Save per input cell PVs if required.
+        self._data_pvs = {} if self._config.get('output_data_pvs') else None
 
     def generate_pvmap(self):
         """Generate a PV Map from the input data."""
@@ -2264,6 +2266,8 @@ class StatVarDataProcessor:
                     row_index, col_index + 1) and self.process_stat_var_obs_pvs(
                         merged_col_pvs, row_index, col_index):
                 row_svobs += 1
+            if self._data_pvs is not None:
+                self._data_pvs[self._file_context] = merged_col_pvs
         self.process_row_header_pvs(row, row_index, row_col_pvs, row_svobs,
                                     cols_with_pvs)
         # If row has no SVObs but has PVs, it must be a header.
@@ -2808,6 +2812,11 @@ class StatVarDataProcessor:
                 columns=self._config.get('output_columns', []),
                 output_tmcf_file=output_tmcf_file,
             )
+        output_data_pvs = self._config.get('output_data_pvs')
+        if output_data_pvs and self._data_pvs:
+            write_pv_map(self._data_pvs, output_data_pvs)
+            self._counters.add_counter('output-data-pvs', len(self._data_pvs))
+
         self._counters.print_counters()
         counters_filename = self._config.get('output_counters',
                                              output_path + '_counters.txt')
