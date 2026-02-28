@@ -1,0 +1,44 @@
+Node: dcid:schoolDayType
+typeOf: dcs:Property
+name: "schoolDayType"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:SchoolDayTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:SchoolDayTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "SchoolDayTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:HalfDay
+typeOf: dcid:SchoolDayTypeEnum
+name: "Half Day"
+isProvisional: dcs:True
+
+Node: dcid:race
+typeOf: dcs:Property
+name: "race"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EthnicityEnum,dcid:RaceCodeEnum
+
+Node: dcid:FullDay
+typeOf: dcid:SchoolDayTypeEnum
+name: "Full Day"
+isProvisional: dcs:True
+
+Node: dcid:PreKindergartenFullDay
+typeOf: dcid:ElementarySchool
+name: "Pre Kindergarten Full Day"
+isProvisional: dcs:True
+
+Node: dcid:age
+typeOf: dcs:Property
+name: "age"
+domainIncludes: dcid:Student
+
+Node: dcid:schoolGradeLevel
+typeOf: dcs:Property
+name: "schoolGradeLevel"
+rangeIncludes: dcid:SchoolGradeLevelEnum,dcid:USC_EducationalAttainmentEnum
+
