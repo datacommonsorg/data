@@ -1,0 +1,29 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/kuru/DC_July07_2024/data/statvar_imports/testdata/sample_input/US_ITA_data.csv --pv_map=/usr/local/google/home/kuru/DC_July07_2024/data/statvar_imports/testdata/sample_input/US_ITA_pvmap.csv --places_resolved_csv=/usr/local/google/home/kuru/DC_July07_2024/data/statvar_imports/testdata/sample_input/US_ITA_places_resolved.csv --config=/usr/local/google/home/kuru/DC_July07_2024/data/statvar_imports/testdata/sample_input/US_ITA_metadata.csv --output_path=/usr/local/google/home/kuru/DC_July07_2024/data/statvar_imports/testdata/sample_output/US_ITA" on 2024-07-08 14:47:49.406538
+
+Node: dcid:Annual_Exports_EconomicActivity_Country/USA_NAICS/111
+typeOf: dcid:StatisticalVariable
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:exports
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+importSource: dcid:country/USA
+naics: dcid:NAICS/111
+
+Node: dcid:Annual_Exports_EconomicActivity_Country/USA_NAICS/112
+typeOf: dcid:StatisticalVariable
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:exports
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+importSource: dcid:country/USA
+naics: dcid:NAICS/112
+
+Node: dcid:Annual_Exports_EconomicActivity_Country/USA_NAICS/113
+typeOf: dcid:StatisticalVariable
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:exports
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+importSource: dcid:country/USA
+naics: dcid:NAICS/113
+
