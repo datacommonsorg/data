@@ -1,0 +1,8 @@
+Node: E:OECD_LandBuiltups->E0
+observationAbout: C:OECD_LandBuiltups->observationAbout
+observationDate: C:OECD_LandBuiltups->observationDate
+value: C:OECD_LandBuiltups->value
+variableMeasured: C:OECD_LandBuiltups->variableMeasured
+unit: C:OECD_LandBuiltups->unit
+scalingFactor: C:OECD_LandBuiltups->scalingFactor
+typeOf: dcs:StatVarObservation
