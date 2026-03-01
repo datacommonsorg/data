@@ -1,0 +1,3 @@
+key,prop,val,p1,v1,,,,,,,,
+Referência,observationDate,{Data},observationAbout,country/BRA,populationType,Household,measuredProperty,cumulativeCount,,,,
+Cisternas familiares de água para consumo (1ª água) entregues pelo MDS (Acumulado),value,{Number},containerType,Cisterns,distributionPartner,Brazil_MinistrySocialDevelopmentAndFightAgainstHunger,consumptionType,FirstWater,name,"""Family water cisterns for consumption (1st water) delivered by Ministry of Social Development and Fight Against Hunger (MDS) (Accumulated)""",alternateName,"""Cisternas familiares de água para consumo (1ª água) entregues pelo O Ministério do Desenvolvimento Social e Combate à Fome (MDS)  (Acumulado)@pt"""
