@@ -1,0 +1,15 @@
+parameter,value
+url,https://www.census.gov/data/tables/time-series/demo/income-poverty/historical-poverty-thresholds.html
+description,Poverty threshold for US
+#place_type,Country
+#places_within,country/USA
+start_date,
+end_date,2010
+release_frequency,
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,measurementMethod"
+header_rows,2
+drop_statvars_without_svobs,0
+word_delimiter,""""""
+pv_map,https://docs.google.com/spreadsheets/d/1orm6fHDDF8mvAoM2kgiQb1zqfPNNAe10_4Hbovos7lo/edit#gid=2080700151
