@@ -1,0 +1,25 @@
+parameter,value
+url,
+description,Nigeria national population split by age group and marital status. 
+start_date,
+end_date,
+release_frequency,Annual
+process,"Download 
+
+The online link is an interactive report with multiple variables. From the left pane do the below selections 
+State --> All
+Indicator --> Age Dependency Ratio by State and Urban  - Rural residence --> Youn, Old and Overall 
+Item --> Male , Female
+Age Group --> All
+Time --> All Data
+
+Select the tabular view from the different reports availble. Export as MS Excel "
+comments,"License : Any books, articles, conference papers, theses, dissertations, reports, or other publications that employ data obtained from the National Bureau of Statistics will cite the source of data in accordance with the Citation Requirement provided with each dataset.
+
+Original Data Url: http://www.nigerianstat.gov.ng"
+output_columns,"observationAbout, observationDate, value, variableMeasured, unit, scalingFactor"
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1L0cimZ7Z_L7g9p4aoNHJarc6z-rLBa5qR81wWnDIlio/edit#gid=806471601
+mapped_columns,4
+header_rows,7
+drop_statvars_without_svobs,0
+debug,0

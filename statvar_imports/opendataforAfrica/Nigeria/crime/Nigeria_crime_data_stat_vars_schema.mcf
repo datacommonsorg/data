@@ -1,0 +1,56 @@
+Node: dcid:CrimeAgainstLawfulAuthority
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Crime Against Lawful Authority"
+isProvisional: dcid:True
+
+Node: dcid:CrimeAgainstLocalActs
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Crime Against Local Acts"
+isProvisional: dcid:True
+
+Node: dcid:NameEnum
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+name: "NameEnum"
+isProvisional: dcid:True
+
+Node: dcid:Offence Against Persons
+typeOf: dcid:NameEnum
+name: "Offence  Against  Persons"
+isProvisional: dcid:True
+
+Node: dcid:Offence Against Property
+typeOf: dcid:NameEnum
+name: "Offence  Against  Property"
+isProvisional: dcid:True
+
+Node: dcid:Offence Against Lawfull Authority
+typeOf: dcid:NameEnum
+name: "Offence  Against  Lawfull  Authority"
+isProvisional: dcid:True
+
+Node: dcid:Offence Against Local Acts
+typeOf: dcid:NameEnum
+name: "Offence  Against  Local  Acts"
+isProvisional: dcid:True
+
+Node: dcid:MeasurementDenominatorEnum
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcid:True
+
+Node: -crimeType
+typeOf: dcid:MeasurementDenominatorEnum
+name: "-crime Type"
+isProvisional: dcid:True
+
+Node: % Share of Total Cases
+typeOf: dcid:NameEnum
+name: "%  Share of  Total  Cases"
+isProvisional: dcid:True
+
+Node: dcid:CrimeAgainstPerson__CrimeAgainstProperty__CrimeAgainstLawfulAuthority__CrimeAgainstLocalActs
+typeOf: dcid:ViolentCrimeTypeEnum
+name: "Crime Against Person__ Crime Against Property__ Crime Against Lawful Authority__ Crime Against Local Acts"
+isProvisional: dcid:True
