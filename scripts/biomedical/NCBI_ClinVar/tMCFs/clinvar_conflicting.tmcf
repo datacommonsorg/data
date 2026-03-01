@@ -1,0 +1,12 @@
+Node: E:clinvar_conflicting->E1
+typeOf: dcs:GeneticVariant
+dcid: C:clinvar_conflicting->dcid
+
+Node: E:clinvar_conflicting->E2
+typeOf: dcs:GeneticVariantConflictingClinicalSignificanceReport
+dcid: C:clinvar_conflicting->dcid_conflicting
+name: C:clinvar_conflicting->name_conflicting
+alleleType: C:clinvar_conflicting->alternativeAllele
+clinicalSignificance: C:clinvar_conflicting->clinicalSignificance
+geneticVariantID: E:clinvar_conflicting->E1
+reportCount: C:clinvar_conflicting->count
