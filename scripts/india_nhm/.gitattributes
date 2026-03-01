@@ -1,0 +1,2 @@
+districts/data/* filter=lfs diff=lfs merge=lfs -text
+states/data/* filter=lfs diff=lfs merge=lfs -text

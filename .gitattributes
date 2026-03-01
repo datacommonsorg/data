@@ -1,3 +1,8 @@
 scripts/india_geosadak/data/facilities/*.zip filter=lfs diff=lfs merge=lfs -text
 scripts/india_wris/data/groundWater.csv filter=lfs diff=lfs merge=lfs -text
 scripts/india_wris/data/surfaceWater.csv filter=lfs diff=lfs merge=lfs -text
+–filename filter=lfs diff=lfs merge=lfs -text
+“NHM_BirthControl1.csv” filter=lfs diff=lfs merge=lfs -text
+“NHM_ChildHealth.csv” filter=lfs diff=lfs merge=lfs -text
+“NHM_GeneralStats1.csv” filter=lfs diff=lfs merge=lfs -text
+“NHM_MaternalHealth.csv” filter=lfs diff=lfs merge=lfs -text
