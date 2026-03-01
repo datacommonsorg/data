@@ -1,0 +1,7 @@
+Node: E:chembl29_fasta->E1
+typeOf: dcs:Protein
+dcid: C:chembl29_fasta->dcid
+name: C:chembl29_fasta->name
+uniProtID: C:chembl_uniprot->uniprot
+chemblID: C:chembl_uniprot->chembl
+aminoAcidSequence: C:chembl_uniprot->Sequence
