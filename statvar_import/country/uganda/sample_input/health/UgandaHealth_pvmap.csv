@@ -1,0 +1,37 @@
+mapped_rows,1,,,,,,,,,,,
+mapped_columns,3,,,,,,,,,,,
+Region,observationAbout,{Data},statType,measuredValue,,,,,,,,
+Countrywide routine immunization rates for BCG,populationType,Person,vaccineStatus,VaccineAdministered,vaccineType,BCG,measurementDenominator,"-vaccineStatus,-vaccineType",scalingFactor,100,unit,Percent
+Countrywide routine immunization rates for DPT3,populationType,Person,vaccineStatus,VaccineAdministered,vaccineType,DPT3,measurementDenominator,"-vaccineStatus,-vaccineType",scalingFactor,100,unit,Percent
+Countrywide routine immunization rates for measles,populationType,Person,vaccineStatus,VaccineAdministered,vaccineType,MeaslesVaccine,measurementDenominator,"-vaccineStatus,-vaccineType",scalingFactor,100,unit,Percent
+Countrywide routine immunization rates for OPV3,populationType,Person,vaccineStatus,VaccineAdministered,vaccineType,OralPolioVaccine3,measurementDenominator,"-vaccineStatus,-vaccineType",scalingFactor,100,unit,Percent
+Countrywide routine immunization rates for Polio3,populationType,Person,vaccineStatus,VaccineAdministered,vaccineType,Polio3Vaccine,measurementDenominator,"-vaccineStatus,-vaccineType",scalingFactor,100,unit,Percent
+"Deliveries in Government and PNFP health facilities, percent",populationType,BirthEvent,establishmentOwnership,GovernmentOwned__PrivatelyOwnedNotForProfit,healthEstablishmentType,HealthFacility,measurementDenominator,"-establishmentOwnership,-healthEstablishmentType",unit,Percent,scalingFactor,100
+Deliveries in Health Facilities,populationType,BirthEvent,healthEstablishmentType,HealthFacility,,,,,,,,
+Government,populationType,HealthEstablishment,healthEstablishmentType,HealthFacility,establishmentOwnership,GovernmentOwned,,,,,,
+HIV Testing in Children born to HIV Positive Women,#ignore,not mapped,,,,,,,,,,
+NGO,populationType,HealthEstablishment,establishmentOwnership,NonGovernmentalOrganization,,,,,,,,
+"Number of Health Units, Health Center",populationType,HealthEstablishment,healthEstablishmentType,HealthCenter,,,,,,,,
+"Number of Health Units, Hospitals",populationType,HealthEstablishment,healthEstablishmentType,Hospital,,,,,,,,
+"Out Patient Department Per Capita Utilisation in Government and PNFP, Percent",#ignore,not mapped,,,,,,,,,,
+Out Patient Department Utilisation in Government and PNFP,#ignore,not mapped,,,,,,,,,,
+PHP,populationType,HealthEstablishment,healthEstablishmentType,PartialHospitalizationProgram,,,,,,,,
+Pit Latrine Coverage,#ignore,not mapped,,,,,,,,,,
+"Pit Latrine Coverage in households, Percent",#ignore,not mapped,,,,,,,,,,
+PNFP (Private Not Profit),populationType,HealthEstablishment,establishmentOwnership,PrivatelyOwnedNotForProfit,,,,,,,,
+Pregnant who receive 4 antenatal care visits,#ignore,not mapped,,,,,,,,,,
+Pregnant women receiving 2nd dose of Fansidar for IPT,#ignore,not mapped,,,,,,,,,,
+Private,populationType,HealthEstablishment,healthEstablishmentType,HealthFacility,establishmentOwnership,PrivatelyOwned,,,,,,
+Total,populationType,HealthEstablishment,,,,,,,,,,
+2005,value,{Number},observationDate,2005,,,,,,,,
+2006,value,{Number},observationDate,2006,,,,,,,,
+2007,value,{Number},observationDate,2007,,,,,,,,
+2008,value,{Number},observationDate,2008,,,,,,,,
+2009,value,{Number},observationDate,2009,,,,,,,,
+2010,value,{Number},observationDate,2010,,,,,,,,
+2011,value,{Number},observationDate,2011,,,,,,,,
+2012,value,{Number},observationDate,2012,,,,,,,,
+2013,value,{Number},observationDate,2013,,,,,,,,
+2014,value,{Number},observationDate,2014,,,,,,,,
+2015,value,{Number},observationDate,2015,,,,,,,,
+2016,value,{Number},observationDate,2016,,,,,,,,

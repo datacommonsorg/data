@@ -1,0 +1,260 @@
+,,,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year,Year
+,,,1969,1980,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+Region,Variable,Units,Year1969,Year1980,Year1991,Year1992,Year1993,Year1994,Year1995,Year1996,Year1997,Year1998,Year1999,Year2000,Year2001,Year2002,Year2003,Year2004,Year2005,Year2006,Year2007,Year2008,Year2009,Year2010,Year2011,Year2012,Year2013,Year2014,Year2015,Year2016
+Uganda,Census Population,Persons,,,16671705,,,,,,,,,,,24227297,,,,,,,,,32939800,34131400,35357000,34634650,35516300,36593000
+Uganda,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.2,,,,,,,,,,,,,,
+Uganda,"Mid Year Population, Total",Persons,9535051,12636179,16671705,17473000,18041600,18628700,19235000,19860900,20507300,21174700,21863900,22575400,23310100,24227297,25089400,25859700,26741300,27629300,28581300,29592600,30661300,31784600,32939800,34131400,35357000,34856813,35756800,36860700
+Uganda,"Mid Year Population, Rural",Persons,8900099,11697892,14782083,15671900,16149900,16641700,17148000,17668800,18204800,18756300,19323800,19907400,20507700,21305316,21998000,22612700,23330800,24047100,24818700,25220600,26136700,26003600,26951300,27930600,28937600,28430800,29168700,30082900
+Uganda,"Mid Year Population, Urban",Persons,634952,938287,1889622,1801100,1891700,1987000,2087000,2192100,2302500,2418400,2540100,2668000,2802400,2921981,3091400,3247000,3410500,3582200,3762600,4372000,4524600,5781000,5988500,6200800,6419400,6426013,6588100,6777800
+Uganda,"Projected mid year Population (’000) for 5 year age groups(0-4), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,6586,6796,7006.6,7220.7,7085.4,6131.253,6287.5,6478.4
+Uganda,"Projected mid year Population (’000) for 5 year age groups(5-9), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,4846,6070,5534.3,5930.3,5841.8,5551.838,5693.3,5866.1
+Uganda,"Projected mid year Population (’000) for 5 year age groups(10-14), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,3950,4598,4103.6,4160,4226.2,4920.476,5045.8,5198.9
+Uganda,"Projected mid year Population (’000) for 5 year age groups(15-19), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,3354,3730,3559.7,3661.1,3579.7,3957.051,4057.8,4180.9
+Uganda,"Projected mid year Population (’000) for 5 year age groups(20-24), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,2761,3148,2938.7,3033.8,2985.4,3185.344,3266.3,3365.2
+Uganda,"Projected mid year Population (’000) for 5 year age groups(25-29), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,2236,2579,2390.1,2468.5,2427.2,2485.925,2549.1,2626.2
+Uganda,"Projected mid year Population (’000) for 5 year age groups(30-34), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,1778,2078,1903.9,1969.3,1940.7,1951.491,2001.2,2061.7
+Uganda,"Projected mid year Population (’000) for 5 year age groups(35-39), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,1401,1645,1498.4,1549.2,1525.6,1535.793,1574.8,1622.6
+Uganda,"Projected mid year Population (’000) for 5 year age groups(40-44), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,1093,1289,1167.3,1206.4,1188.4,1272.341,1304.7,1344.2
+Uganda,"Projected mid year Population (’000) for 5 year age groups(45-49), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,841,1000,897.8,927.6,913.5,921.076,944.6,973.2
+Uganda,"Projected mid year Population (’000) for 5 year age groups(50-54), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,631,764,672.8,695.7,686.1,808.23,828.8,853.8
+Uganda,"Projected mid year Population (’000) for 5 year age groups(55-59), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,456,566,485.8,501.9,494.8,480.527,492.8,507.7
+Uganda,"Projected mid year Population (’000) for 5 year age groups(60-64), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,314,402,333.7,344.4,339.3,439.948,451.1,464.7
+Uganda,"Projected mid year Population (’000) for 5 year age groups(65-69), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,202,271,214.6,221.3,217.9,301.12,308.8,318.1
+Uganda,"Projected mid year Population (’000) for 5 year age groups(70-74), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,119,171,126.3,130.3,128.4,277.245,284.3,292.9
+Uganda,"Projected mid year Population (’000) for 5 year age groups(75-79), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,61,98,65.5,67.8,67.1,150.467,154.3,159
+Uganda,"Projected mid year Population (’000) for 5 year age groups(80+), Total",Thousand persons,,,,,,,,,,,,,,,,,,,,,36,54,40.7,43.1,43.5,264.525,271.1,279.4
+Uganda,"Projected mid year Population (’000) for 5 year age groups(0-4), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,3273,3382,3491,3602.1,3497.6,3180.707,3263.8,3365.4
+Uganda,"Projected mid year Population (’000) for 5 year age groups(5-9), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,2413,2579,2758.1,2955.3,2880.8,2842.451,2916.7,3007.5
+Uganda,"Projected mid year Population (’000) for 5 year age groups(10-14), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,1954,2001,2042.8,2077.7,2088.5,2496.389,2561.6,2641.3
+Uganda,"Projected mid year Population (’000) for 5 year age groups(15-19), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,1643,1699,1755,1810.5,1754.8,1970.75,2022.2,2085.2
+Uganda,"Projected mid year Population (’000) for 5 year age groups(20-24), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,1342,1390,1439,1490.4,1453.5,1474.106,1512.6,1559.7
+Uganda,"Projected mid year Population (’000) for 5 year age groups(25-29), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,1079,1121,1163.4,1207.3,1179,1156.405,1186.6,1223.5
+Uganda,"Projected mid year Population (’000) for 5 year age groups(30-34), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,852,886,921.1,957.7,937.5,915.438,939.4,968.6
+Uganda,"Projected mid year Population (’000) for 5 year age groups(35-39), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,665,691,718,746.5,730.8,732.085,751.2,774.6
+Uganda,"Projected mid year Population (’000) for 5 year age groups(40-44), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,512,531,551.3,572.6,560.2,619.653,635.8,655.6
+Uganda,"Projected mid year Population (’000) for 5 year age groups(45-49), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,389,402,416.8,431.9,421.6,454.967,466.9,481.4
+Uganda,"Projected mid year Population (’000) for 5 year age groups(50-54), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,288,297,307.2,317.9,309.9,372.131,381.9,393.7
+Uganda,"Projected mid year Population (’000) for 5 year age groups(55-59), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,205,212,218.2,225.2,219.1,226.37,232.3,239.5
+Uganda,"Projected mid year Population (’000) for 5 year age groups(60-64), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,139,143,146.8,151.1,146.7,194.448,199.5,205.7
+Uganda,"Projected mid year Population (’000) for 5 year age groups(65-69), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,88,90,92,94.5,91.4,136.73,140.3,144.7
+Uganda,"Projected mid year Population (’000) for 5 year age groups(70-74), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,51,52,53,54.2,52.4,115.111,118.1,121.8
+Uganda,"Projected mid year Population (’000) for 5 year age groups(75-79), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,26,27,27.4,28.1,27.1,69.345,71.2,73.4
+Uganda,"Projected mid year Population (’000) for 5 year age groups(80+), Male",Thousand persons,,,,,,,,,,,,,,,,,,,,,16,17,17.5,18.4,18.2,103.746,106.4,109.7
+Uganda,"Projected mid year Population (’000) for 5 year age groups(0-4), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,3313,3414,3515.6,3618.6,3587.8,2950.546,3023.7,3113
+Uganda,"Projected mid year Population (’000) for 5 year age groups(5-9), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,2433,3491,2776.2,2975,2961,2709.387,2776.6,2858.6
+Uganda,"Projected mid year Population (’000) for 5 year age groups(10-14), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,1996,2597,2060.8,2082.2,2137.7,2424.087,2484.2,2557.6
+Uganda,"Projected mid year Population (’000) for 5 year age groups(15-19), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,1711,2031,1804.7,1850.6,1824.9,1986.301,2035.6,2095.7
+Uganda,"Projected mid year Population (’000) for 5 year age groups(20-24), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,1419,1758,1499.7,1543.4,1531.9,1711.238,1753.7,1805.5
+Uganda,"Projected mid year Population (’000) for 5 year age groups(25-29), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,1157,1458,1226.7,1261.2,1248.2,1329.52,1362.5,1402.7
+Uganda,"Projected mid year Population (’000) for 5 year age groups(30-34), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,926,1192,982.8,1011.6,1003.2,1036.053,1061.8,1093.1
+Uganda,"Projected mid year Population (’000) for 5 year age groups(35-39), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,736,954,780.4,802.7,794.8,803.708,823.6,848
+Uganda,"Projected mid year Population (’000) for 5 year age groups(40-44), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,581,758,616,633.9,628.2,652.688,668.9,688.6
+Uganda,"Projected mid year Population (’000) for 5 year age groups(45-49), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,452,598,481,495.7,491.9,466.109,477.7,491.8
+Uganda,"Projected mid year Population (’000) for 5 year age groups(50-54), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,343,467,365.6,377.8,376.2,436.099,446.9,460.1
+Uganda,"Projected mid year Population (’000) for 5 year age groups(55-59), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,251,354,267.6,276.7,275.7,254.157,260.5,268.2
+Uganda,"Projected mid year Population (’000) for 5 year age groups(60-64), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,175,259,186.9,193.2,192.6,245.5,251.6,259
+Uganda,"Projected mid year Population (’000) for 5 year age groups(65-69), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,114,181,122.6,126.9,126.5,164.39,168.5,173.4
+Uganda,"Projected mid year Population (’000) for 5 year age groups(70-74), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,68,119,73.3,76.1,76,162.134,166.2,171.1
+Uganda,"Projected mid year Population (’000) for 5 year age groups(75-79), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,35,71,38.1,39.8,40,81.122,83.1,85.6
+Uganda,"Projected mid year Population (’000) for 5 year age groups(80+), Female",Thousand persons,,,,,,,,,,,,,,,,,,,,,20,37,23.2,24.7,25.3,160.779,164.7,169.7
+Central,Census Population,Persons,,,4843594,,,,,,,,,,,6575425,,,,,,,,,8465500,8715800,8970800,9529227,9783600,10095900
+Central,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.6,,,,,,,,,,,,,,
+Bukomansimbi,Census Population,Persons,,,126549,,,,,,,,,,,139556,,,,,,,,,152400,154000,155400,151413,152000,152700
+Butambala,Census Population,Persons,,,74062,,,,,,,,,,,86755,,,,,,,,,98200,99400,100900,100840,101800,102800
+Buikwe,Census Population,Persons,,,250511,,,,,,,,,,,329858,,,,,,,,,418200,429600,441100,422771,429500,437600
+Buvuma,Census Population,Persons,,,18482,,,,,,,,,,,42483,,,,,,,,,53900,55300,56800,89890,94600,100500
+Gomba,Census Population,Persons,,,119550,,,,,,,,,,,133264,,,,,,,,,150700,152800,154900,159922,161800,163900
+Kalungu,Census Population,Persons,,,152028,,,,,,,,,,,160684,,,,,,,,,175600,177200,178800,183232,184700,186300
+Kalangala,Census Population,Persons,,,16371,,,,,,,,,,,34766,,,,,,,,,62000,66300,70800,54293,56000,58000
+Kalangala,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,6.5,,,,,,,,,,,,,,
+Kampala,Census Population,Persons,,,774241,,,,,,,,,,,1189142,,,,,,,,,1659700,1723300,1788600,1507080,1529900,1557300
+Kampala,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.7,,,,,,,,,,,,,,
+Kayunga,Census Population,Persons,,,236177,,,,,,,,,,,294613,,,,,,,,,351600,358700,365700,368062,373300,379500
+Kayunga,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,1.9,,,,,,,,,,,,,,
+Kiboga,Census Population,Persons,,,98153,,,,,,,,,,,108897,,,,,,,,,158400,165100,172100,148218,151200,154800
+Kiboga,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,4.1,,,,,,,,,,,,,,
+Kyankwanzi,Census Population,Persons,,,43454,,,,,,,,,,,120575,,,,,,,,,175200,182900,190800,214693,223200,233800
+Lwengo,Census Population,Persons,,,212554,,,,,,,,,,,242252,,,,,,,,,264900,267300,269900,274953,277000,279300
+Luweero,Census Population,Persons,,,255390,,,,,,,,,,,341317,,,,,,,,,429000,440200,451500,456958,465700,476200
+Luweero,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.5,,,,,,,,,,,,,,
+Lyantonde,Census Population,Persons,,,53100,,,,,,,,,,,66039,,,,,,,,,78600,80200,81800,93753,95900,98600
+Lyantonde,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,1.9,,,,,,,,,,,,,,
+Masaka,Census Population,Persons,,,203566,,,,,,,,,,,228170,,,,,,,,,249200,251600,254100,297004,302100,308200
+Masaka,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,0.9,,,,,,,,,,,,,,
+Mityana,Census Population,Persons,,,223527,,,,,,,,,,,266108,,,,,,,,,306700,311600,316500,328964,333400,338600
+Mityana,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,1.5,,,,,,,,,,,,,,
+Mpigi,Census Population,Persons,,,157368,,,,,,,,,,,187771,,,,,,,,,212400,215500,218300,250548,255300,261000
+Mpigi,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,1.3,,,,,,,,,,,,,,
+Mubende,Census Population,Persons,,,277449,,,,,,,,,,,423422,,,,,,,,,588300,610600,633400,684337,706800,734200
+Mubende,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.6,,,,,,,,,,,,,,
+Mukono,Census Population,Persons,,,319434,,,,,,,,,,,423052,,,,,,,,,536400,551000,565700,596804,610500,626900
+Mukono,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.6,,,,,,,,,,,,,,
+Nakaseke,Census Population,Persons,,,93804,,,,,,,,,,,137278,,,,,,,,,184800,191100,197500,197369,202200,208100
+Nakaseke,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.3,,,,,,,,,,,,,,
+Nakasongola,Census Population,Persons,,,100497,,,,,,,,,,,127064,,,,,,,,,153200,156500,159800,181799,186100,191500
+Nakasongola,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2,,,,,,,,,,,,,,
+Rakai,Census Population,Persons,,,330401,,,,,,,,,,,404326,,,,,,,,,475600,484400,493000,516309,524400,534200
+Rakai,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,1.7,,,,,,,,,,,,,,
+Sembabule,Census Population,Persons,,,144039,,,,,,,,,,,180045,,,,,,,,,215200,219600,223900,252597,258300,265100
+Sembabule,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,1.9,,,,,,,,,,,,,,
+Wakiso,Census Population,Persons,,,562887,,,,,,,,,,,907988,,,,,,,,,1315300,1371600,1429500,1997418,2107900,2246800
+Wakiso,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,4.1,,,,,,,,,,,,,,
+Eastern,Census Population,Persons,,,4128469,,,,,,,,,,,6204915,,,,,,,,,8623700,8956200,9298700,9042422,9273600,9554200
+Eastern,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.5,,,,,,,,,,,,,,
+Amuria,Census Population,Persons,,,69353,,,,,,,,,,,180022,,,,,,,,,374000,406400,441200,270928,278400,287500
+Amuria,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,8.2,,,,,,,,,,,,,,
+Budaka,Census Population,Persons,,,100348,,,,,,,,,,,136489,,,,,,,,,174000,178900,183700,207597,213500,220600
+Budaka,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.6,,,,,,,,,,,,,,
+Bududa,Census Population,Persons,,,79218,,,,,,,,,,,123103,,,,,,,,,173700,180600,187600,210173,217900,227400
+Bududa,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.8,,,,,,,,,,,,,,
+Bugiri,Census Population,Persons,,,171269,,,,,,,,,,,237441,,,,,,,,,406800,426800,447200,382913,395400,410600
+Bugiri,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,4.7,,,,,,,,,,,,,,
+Bukedea,Census Population,Persons,,,75272,,,,,,,,,,,122433,,,,,,,,,178600,186400,194400,203600,210700,219400
+Bukedea,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,4.2,,,,,,,,,,,,,,
+Bukwa,Census Population,Persons,,,30692,,,,,,,,,,,48952,,,,,,,,,70400,73400,76300,89356,93100,97700
+Bukwa,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,4,,,,,,,,,,,,,,
+Bulambuli,Census Population,Persons,,,64576,,,,,,,,,,,97273,,,,,,,,,122300,125400,128600,174508,181600,190200
+Busia,Census Population,Persons,,,163597,,,,,,,,,,,225008,,,,,,,,,289300,297600,306000,323662,331500,341000
+Busia,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.7,,,,,,,,,,,,,,
+Butaleja,Census Population,Persons,,,106678,,,,,,,,,,,157489,,,,,,,,,213600,221100,228800,244153,251300,260300
+Butaleja,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.3,,,,,,,,,,,,,,
+Buyende,Census Population,Persons,,,130775,,,,,,,,,,,191266,,,,,,,,,256400,265100,273900,323067,334600,348900
+Iganga,Census Population,Persons,,,235348,,,,,,,,,,,355473,,,,,,,,,482900,499600,517000,504197,515900,530100
+Iganga,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.4,,,,,,,,,,,,,,
+Jinja,Census Population,Persons,,,289476,,,,,,,,,,,387573,,,,,,,,,488400,501300,514300,471242,477000,483900
+Jinja,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.5,,,,,,,,,,,,,,
+Kaberamaido,Census Population,Persons,,,81535,,,,,,,,,,,131650,,,,,,,,,191000,199200,207700,215026,222200,231000
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,4.1,,,,,,,,,,,,,,
+Kaliro,Census Population,Persons,,,105122,,,,,,,,,,,154667,,,,,,,,,209300,216500,224000,236199,243000,251200
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.3,,,,,,,,,,,,,,
+Kamuli,Census Population,Persons,,,249317,,,,,,,,,,,361399,,,,,,,,,484700,500800,517400,486319,495800,507100
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.2,,,,,,,,,,,,,,
+Kapchorwa,Census Population,Persons,,,48667,,,,,,,,,,,74268,,,,,,,,,109200,114100,119300,105186,107600,110600
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,4.3,,,,,,,,,,,,,,
+Katakwi,Census Population,Persons,,,75244,,,,,,,,,,,118928,,,,,,,,,169800,176800,184000,166231,170000,174400
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.9,,,,,,,,,,,,,,
+Kumi,Census Population,Persons,,,102030,,,,,,,,,,,165365,,,,,,,,,244500,255500,267000,239268,245100,252300
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,4.3,,,,,,,,,,,,,,
+Kween,Census Population,Persons,,,37343,,,,,,,,,,,67171,,,,,,,,,98900,103300,107700,93667,95700,98200
+Kibuku,Census Population,Persons,,,91216,,,,,,,,,,,128219,,,,,,,,,175300,181700,188000,202033,208300,215900
+Luuka,Census Population,Persons,,,130408,,,,,,,,,,,185526,,,,,,,,,252000,260900,269800,238020,241900,246400
+Manafwa,Census Population,Persons,,,178528,,,,,,,,,,,262566,,,,,,,,,355200,367500,380000,353825,360700,369100
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.3,,,,,,,,,,,,,,
+Mayuge,Census Population,Persons,,,216849,,,,,,,,,,,324674,,,,,,,,,445100,461200,477700,473239,485200,499600
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.5,,,,,,,,,,,,,,
+Mbale,Census Population,Persons,,,240929,,,,,,,,,,,332571,,,,,,,,,428800,441300,453900,488960,501600,517000
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.8,,,,,,,,,,,,,,
+Namutumba,Census Population,Persons,,,123871,,,,,,,,,,,167691,,,,,,,,,213100,218900,224800,252562,259500,268000
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.6,,,,,,,,,,,,,,
+Namayingo,Census Population,Persons,,,68038,,,,,,,,,,,174954,,,,,,,,,221700,232300,243700,215442,218300,221600
+Ngora,Census Population,Persons,,,59392,,,,,,,,,,,101867,,,,,,,,,150600,157400,164400,141919,145100,148800
+Pallisa,Census Population,Persons,,,166092,,,,,,,,,,,255870,,,,,,,,,350000,362600,375400,386890,397700,410800
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.4,,,,,,,,,,,,,,
+Serere,Census Population,Persons,,,90386,,,,,,,,,,,176479,,,,,,,,,279100,294100,309600,285903,295300,306800
+Sironko,Census Population,Persons,,,147729,,,,,,,,,,,185819,,,,,,,,,233500,239600,245700,242422,246600,251600
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.5,,,,,,,,,,,,,,
+Soroti,Census Population,Persons,,,113872,,,,,,,,,,,193310,,,,,,,,,305800,322000,339300,296833,305500,315900
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,5.1,,,,,,,,,,,,,,
+Tororo,Census Population,Persons,,,285299,,,,,,,,,,,379399,,,,,,,,,475700,487900,500300,517082,527600,540300
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.4,,,,,,,,,,,,,,
+Northern,Census Population,Persons,,,3151955,,,,,,,,,,,5148882,,,,,,,,,7620600,7972200,8337100,7230661,7371300,7594700
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,4.2,,,,,,,,,,,,,,
+Abim,Census Population,Persons,,,47572,,,,,,,,,,,51803,,,,,,,,,55200,56500,57200,109039,113500,120400
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,0.7,,,,,,,,,,,,,,
+Adjumani,Census Population,Persons,,,96264,,,,,,,,,,,202290,,,,,,,,,353100,375800,399700,232813,226600,228100
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,6.4,,,,,,,,,,,,,,
+Agago,Census Population,Persons,,,100659,,,,,,,,,,,184018,,,,,,,,,285300,299700,314700,227486,230900,234500
+Alebtong,Census Population,Persons,,,112584,,,,,,,,,,,163047,,,,,,,,,218800,226000,233400,225327,232600,238600
+Amolatar,Census Population,Persons,,,68473,,,,,,,,,,,96189,,,,,,,,,123900,127400,130900,146904,151400,156500
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.9,,,,,,,,,,,,,,
+Amuru,Census Population,Persons,,,88692,,,,,,,,,,,135723,,,,,,,,,174000,178800,183600,190516,190700,195300
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.9,,,,,,,,,,,,,,
+Amudat,Census Population,Persons,,,11336,,,,,,,,,,,63572,,,,,,,,,107300,113700,120500,111758,109400,113900
+Apac,Census Population,Persons,,,162192,,,,,,,,,,,249656,,,,,,,,,337400,349000,360500,368786,378200,390000
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.5,,,,,,,,,,,,,,
+Arua,Census Population,Persons,,,368214,,,,,,,,,,,559075,,,,,,,,,751700,776700,801400,785189,799500,820500
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.5,,,,,,,,,,,,,,
+Dokolo,Census Population,Persons,,,84978,,,,,,,,,,,129385,,,,,,,,,177100,183400,189700,182579,187300,192500
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.6,,,,,,,,,,,,,,
+Gulu,Census Population,Persons,,,211788,,,,,,,,,,,298527,,,,,,,,,385600,396500,407500,443733,447400,460900
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.9,,,,,,,,,,,,,,
+Kaabong,Census Population,Persons,,,91236,,,,,,,,,,,202758,,,,,,,,,369500,395200,422300,169274,171300,175400
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,6.8,,,,,,,,,,,,,,
+Kitgum,Census Population,Persons,,,104557,,,,,,,,,,,167030,,,,,,,,,238300,247800,257600,204012,206700,209600
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,4.1,,,,,,,,,,,,,,
+Kole,Census Population,Persons,,,115259,,,,,,,,,,,165922,,,,,,,,,224500,231900,239600,241878,245200,252300
+Koboko,Census Population,Persons,,,62337,,,,,,,,,,,129148,,,,,,,,,222900,236900,251800,208163,213000,221100
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,6.2,,,,,,,,,,,,,,
+Kotido,Census Population,Persons,,,57198,,,,,,,,,,,122541,,,,,,,,,218500,233300,248900,178909,185800,191600
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,6.5,,,,,,,,,,,,,,
+Lamwo,Census Population,Persons,,,71030,,,,,,,,,,,115345,,,,,,,,,164600,171300,178100,134050,135600,137000
+Lira,Census Population,Persons,,,191473,,,,,,,,,,,290601,,,,,,,,,390300,403100,416100,410516,417200,428400
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.4,,,,,,,,,,,,,,
+Maracha,Census Population,Persons,,,107596,,,,,,,,,,,145705,,,,,,,,,193300,199300,205600,186176,189000,192600
+Moroto,Census Population,Persons,,,59149,,,,,,,,,,,77243,,,,,,,,,128300,136000,143800,104539,105400,107800
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,5.8,,,,,,,,,,,,,,
+Moyo,Census Population,Persons,,,79381,,,,,,,,,,,194778,,,,,,,,,382400,412500,444700,137489,141600,144600
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,7.7,,,,,,,,,,,,,,
+Nakapiripirit,Census Population,Persons,,,66248,,,,,,,,,,,90922,,,,,,,,,152400,161600,171100,169691,162600,169800
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,5.9,,,,,,,,,,,,,,
+Napak,Census Population,Persons,,,37684,,,,,,,,,,,112697,,,,,,,,,187000,197700,209100,145219,144300,146900
+Nebbi,Census Population,Persons,,,185551,,,,,,,,,,,266312,,,,,,,,,337400,346200,355100,385220,407400,420400
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.7,,,,,,,,,,,,,,
+Nwoya,Census Population,Persons,,,37947,,,,,,,,,,,41010,,,,,,,,,52600,54000,55500,128094,144900,159500
+Nyadri,Census Population,Persons,,,206971,,,,,,,,,,,302109,,,,,,,,,,,,,,
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.2,,,,,,,,,,,,,,
+Otuke,Census Population,Persons,,,43457,,,,,,,,,,,62018,,,,,,,,,83300,86000,88800,105617,107900,112500
+Oyam,Census Population,Persons,,,177053,,,,,,,,,,,268415,,,,,,,,,366200,378900,391900,388011,392700,403800
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.6,,,,,,,,,,,,,,
+Pader,Census Population,Persons,,,80938,,,,,,,,,,,142320,,,,,,,,,221000,231700,243200,183723,180600,183500
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,5,,,,,,,,,,,,,,
+Yumbe,Census Population,Persons,,,99794,,,,,,,,,,,251784,,,,,,,,,504500,545500,589500,485582,506900,534300
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,7.9,,,,,,,,,,,,,,
+Zombo,Census Population,Persons,,,131315,,,,,,,,,,,169048,,,,,,,,,214200,219800,225300,240368,245700,252400
+Western,Census Population,Persons,,,4547687,,,,,,,,,,,6298075,,,,,,,,,8230000,8487200,8750400,8874862,9087800,9348200
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.8,,,,,,,,,,,,,,
+Buliisa,Census Population,Persons,,,47709,,,,,,,,,,,63363,,,,,,,,,78900,80800,82800,113161,117700,123300
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.4,,,,,,,,,,,,,,
+Buhweju,Census Population,Persons,,,55534,,,,,,,,,,,82881,,,,,,,,,99400,101300,103200,120720,123700,127500
+Bundibugyo,Census Population,Persons,,,92311,,,,,,,,,,,158909,,,,,,,,,248900,261700,275100,224387,229600,235800
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,5,,,,,,,,,,,,,,
+Bushenyi,Census Population,Persons,,,160982,,,,,,,,,,,205671,,,,,,,,,246400,251400,256500,234440,236200,238300
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2,,,,,,,,,,,,,,
+Hoima,Census Population,Persons,,,197851,,,,,,,,,,,343618,,,,,,,,,523400,548800,575100,572986,593000,617600
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,4.7,,,,,,,,,,,,,,
+Ibanda,Census Population,Persons,,,148029,,,,,,,,,,,198635,,,,,,,,,249200,255500,261900,249625,253300,257600
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.5,,,,,,,,,,,,,,
+Isingiro,Census Population,Persons,,,226365,,,,,,,,,,,316025,,,,,,,,,408400,420200,432100,486360,500600,517800
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.9,,,,,,,,,,,,,,
+Kabale,Census Population,Persons,,,417218,,,,,,,,,,,458318,,,,,,,,,494500,498300,502100,528231,532700,537900
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,0.8,,,,,,,,,,,,,,
+Kabarole,Census Population,Persons,,,299573,,,,,,,,,,,356914,,,,,,,,,409400,415600,421700,469236,477600,487600
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,1.5,,,,,,,,,,,,,,
+Kamwenge,Census Population,Persons,,,201654,,,,,,,,,,,263730,,,,,,,,,324400,332000,339500,414454,427200,442600
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.3,,,,,,,,,,,,,,
+Kanungu,Census Population,Persons,,,160708,,,,,,,,,,,204732,,,,,,,,,246900,252100,257200,252144,255500,259300
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.1,,,,,,,,,,,,,,
+Kasese,Census Population,Persons,,,343601,,,,,,,,,,,523033,,,,,,,,,721400,747800,774800,694992,707900,723400
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.6,,,,,,,,,,,,,,
+Kibaale,Census Population,Persons,,,220261,,,,,,,,,,,405882,,,,,,,,,646500,681300,717500,785088,821000,865800
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,5.2,,,,,,,,,,,,,,
+Kiruhura,Census Population,Persons,,,140946,,,,,,,,,,,212219,,,,,,,,,290400,300800,311300,328077,337700,349500
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.5,,,,,,,,,,,,,,
+Kiryandongo,Census Population,Persons,,,83405,,,,,,,,,,,187707,,,,,,,,,301000,317500,334500,266197,272400,279900
+Kisoro,Census Population,Persons,,,186681,,,,,,,,,,,220312,,,,,,,,,250800,254300,257800,281705,286100,291500
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,1.4,,,,,,,,,,,,,,
+Kyenjojo,Census Population,Persons,,,182026,,,,,,,,,,,266246,,,,,,,,,369700,383600,397700,422204,435400,451600
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,3.7,,,,,,,,,,,,,,
+Kyegegwa,Census Population,Persons,,,63547,,,,,,,,,,,110925,,,,,,,,,154000,159800,165800,281637,300200,323900
+Masindi,Census Population,Persons,,,129682,,,,,,,,,,,208420,,,,,,,,,334200,352400,371600,291113,297500,305400
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,5.3,,,,,,,,,,,,,,
+Mbarara,Census Population,Persons,,,267457,,,,,,,,,,,361477,,,,,,,,,436400,445600,454800,472629,480800,490700
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,2.6,,,,,,,,,,,,,,
+Mitooma,Census Population,Persons,,,134251,,,,,,,,,,,160802,,,,,,,,,192700,196300,200500,183444,184900,186500
+Ntoroko,Census Population,Persons,,,24255,,,,,,,,,,,51069,,,,,,,,,79900,84100,88400,67005,68200,69600
+Ntungamo,Census Population,Persons,,,305199,,,,,,,,,,,379987,,,,,,,,,469000,480100,491200,483841,491300,500400
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,1.9,,,,,,,,,,,,,,
+Rubirizi,Census Population,Persons,,,75361,,,,,,,,,,,101804,,,,,,,,,121900,124400,126900,129149,131100,133500
+Rukungiri,Census Population,Persons,,,230072,,,,,,,,,,,275162,,,,,,,,,316400,321300,326000,314694,317100,320100
+,"Census Population , Growth Rate (1991-2002)",%,,,,,,,,,,,,,,1.5,,,,,,,,,,,,,,
+Sheema,Census Population,Persons,,,153009,,,,,,,,,,,180234,,,,,,,,,215900,220200,224400,207343,209100,211100
