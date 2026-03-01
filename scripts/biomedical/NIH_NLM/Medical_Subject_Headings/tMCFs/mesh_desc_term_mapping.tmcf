@@ -1,0 +1,9 @@
+Node: E:mesh_desc_term->E1
+typeOf: dcs:MeSHConcept
+dcid: C:mesh_desc_term->Concept_dcid
+identifier: C:mesh_desc_term->ConceptID
+
+Node: E:mesh_desc_term->E2
+typeOf: dcs:MeSHTerm
+dcid: C:mesh_desc_term->Term_dcid
+parent: E:mesh_desc_term->E1

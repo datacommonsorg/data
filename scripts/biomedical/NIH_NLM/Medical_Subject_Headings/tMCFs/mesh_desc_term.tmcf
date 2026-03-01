@@ -1,0 +1,5 @@
+Node: E:mesh_desc_term->E2
+typeOf: dcs:MeSHTerm
+dcid: C:mesh_desc_term->Term_dcid
+name: C:mesh_desc_term->TermName
+identifier: C:mesh_desc_term->TermID
