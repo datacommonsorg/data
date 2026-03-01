@@ -1,0 +1,2556 @@
+model,forecast_date,target,target_week_end_date,location_name,point,quantile_0.025,quantile_0.975
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Alabama,470,433,526
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Alaska,12,11,13
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Arizona,644,590,773
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Arkansas,105,96,122
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,California,3164,3027,3335
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Colorado,1111,1051,1243
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Connecticut,3354,3196,3564
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Delaware,267,251,287
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,District of Columbia,391,365,426
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Florida,1983,1876,2121
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Georgia,1585,1511,1696
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Hawaii,19,18,20
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Idaho,73,70,78
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,3702,3347,4097
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Indiana,1797,1696,1933
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Iowa,354,320,398
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Kansas,217,192,252
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Kentucky,358,337,388
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Louisiana,2466,2386,2580
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Maine,74,69,83
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Maryland,2016,1858,2245
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Massachusetts,5781,5406,6313
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Michigan,4915,4769,5132
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Minnesota,780,691,888
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Mississippi,514,473,577
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Missouri,583,553,633
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Montana,17,17,18
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,National,88770,85789,92300
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Nebraska,135,113,168
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Nevada,356,338,405
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,New Hampshire,168,151,201
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,New Jersey,10285,9929,10709
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,New Mexico,241,228,265
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,New York,28354,27605,29322
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,North Carolina,682,640,747
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,North Dakota,44,40,52
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Ohio,1602,1506,1716
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Oklahoma,303,288,324
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Oregon,144,135,159
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Pennsylvania,4596,4333,4911
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Puerto Rico,123,116,136
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Rhode Island,539,493,590
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,South Carolina,389,360,442
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,South Dakota,48,41,62
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Tennessee,281,265,305
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Texas,1280,1208,1386
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Utah,83,76,97
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Vermont,56,55,59
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Virgin Islands,4,4,5
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Virginia,1052,981,1144
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Washington,1004,975,1051
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,West Virginia,62,57,71
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Wisconsin,479,443,528
+Ensemble,5/11/2020,1 wk ahead cum death,5/16/2020,Wyoming,9,8,12
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Alabama,561,481,745
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Alaska,12,12,14
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Arizona,775,662,1168
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Arkansas,122,105,165
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,California,3591,3315,4043
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Colorado,1245,1126,1571
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Connecticut,3703,3393,4196
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Delaware,312,280,366
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,District of Columbia,462,410,570
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Florida,2248,2050,2611
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Georgia,1754,1606,2018
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Hawaii,20,19,23
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Idaho,78,73,87
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,4356,3935,4828
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Indiana,2100,1899,2411
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Iowa,467,395,582
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Kansas,260,216,334
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Kentucky,411,369,486
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Louisiana,2638,2480,2935
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Maine,85,75,105
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Maryland,2406,2084,2964
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Massachusetts,6538,5857,7660
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Michigan,5222,4972,5678
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Minnesota,1045,855,1383
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Mississippi,612,525,780
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Missouri,672,610,826
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Montana,18,17,20
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,National,97788,91745,105287
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Nebraska,194,146,281
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Nevada,406,369,682
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,New Hampshire,212,176,332
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,New Jersey,11185,10526,12071
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,New Mexico,288,262,364
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,New York,29811,28437,31806
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,North Carolina,809,722,999
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,North Dakota,56,47,76
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Ohio,1866,1671,2161
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Oklahoma,333,306,383
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Oregon,161,144,204
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Pennsylvania,5403,4913,6172
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Puerto Rico,135,121,164
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Rhode Island,636,547,770
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,South Carolina,447,391,582
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,South Dakota,66,49,126
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Tennessee,311,286,358
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Texas,1494,1337,1812
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Utah,100,85,139
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Vermont,59,57,64
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Virgin Islands,5,5,6
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Virginia,1268,1123,1527
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Washington,1075,1017,1209
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,West Virginia,70,61,96
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Wisconsin,554,487,680
+Ensemble,5/11/2020,2 wk ahead cum death,5/23/2020,Wyoming,10,8,17
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Alabama,655,520,1309
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Alaska,13,12,15
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Arizona,905,726,2007
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Arkansas,137,112,239
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,California,3968,3543,5023
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Colorado,1374,1194,2045
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Connecticut,3985,3529,5073
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Delaware,352,306,451
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,District of Columbia,529,451,820
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Florida,2496,2194,3356
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Georgia,1894,1679,2506
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Hawaii,21,19,25
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Idaho,82,75,100
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,5012,4531,5555
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Indiana,2389,2074,3024
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Iowa,601,481,859
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Kansas,306,239,457
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Kentucky,468,404,643
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Louisiana,2780,2549,3429
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Maine,95,80,148
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Maryland,2777,2273,3919
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Massachusetts,7161,6207,9210
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Michigan,5461,5108,6228
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Minnesota,1386,1052,2345
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Mississippi,716,573,1086
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Missouri,755,653,1273
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Montana,19,17,22
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,National,105605,97003,117640
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Nebraska,282,196,497
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Nevada,457,395,1663
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,New Hampshire,260,200,619
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,New Jersey,11881,10948,13401
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,New Mexico,334,294,575
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,New York,30897,28990,34171
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,North Carolina,944,800,1518
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,North Dakota,68,54,122
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Ohio,2120,1812,2790
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Oklahoma,358,322,494
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Oregon,176,151,345
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Pennsylvania,6152,5449,7927
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Puerto Rico,144,125,193
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Rhode Island,725,594,997
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,South Carolina,508,418,792
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,South Dakota,92,59,290
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Tennessee,338,301,434
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Texas,1711,1447,2513
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Utah,116,92,241
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Vermont,61,58,70
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Virgin Islands,5,5,7
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Virginia,1469,1245,2140
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Washington,1137,1049,1534
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,West Virginia,78,64,149
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Wisconsin,623,523,920
+Ensemble,5/11/2020,3 wk ahead cum death,5/30/2020,Wyoming,12,9,24
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Alabama,762,557,2383
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Alaska,13,12,17
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Arizona,1035,782,3668
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Arkansas,153,118,453
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,California,4281,3728,6781
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Colorado,1502,1253,2860
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Connecticut,4212,3620,6145
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Delaware,391,326,563
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,District of Columbia,592,483,1205
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Florida,2755,2324,4827
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Georgia,2020,1732,3285
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Hawaii,21,19,28
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Idaho,86,77,119
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,5669,5106,6351
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Indiana,2680,2237,3853
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Iowa,763,579,1283
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Kansas,354,264,670
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Kentucky,534,443,943
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Louisiana,2894,2600,4200
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Maine,106,85,266
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Maryland,3125,2431,5356
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Massachusetts,7696,6474,10762
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Michigan,5648,5206,6960
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Minnesota,1835,1302,4150
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Mississippi,828,617,1607
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Missouri,833,697,2361
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Montana,19,18,24
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,National,112647,101462,130164
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Nebraska,422,273,845
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Nevada,507,414,3612
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,New Hampshire,313,223,1174
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,New Jersey,12420,11241,14762
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,New Mexico,379,322,952
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,New York,31740,29359,36544
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,North Carolina,1097,880,2752
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,North Dakota,81,61,204
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Ohio,2381,1938,3728
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Oklahoma,381,336,763
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Oregon,190,157,838
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Pennsylvania,6839,5928,10406
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Puerto Rico,152,127,219
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Rhode Island,809,642,1306
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,South Carolina,579,442,1137
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,South Dakota,128,70,530
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Tennessee,363,315,557
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Texas,1959,1554,4164
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Utah,133,100,492
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Vermont,63,59,78
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Virgin Islands,6,5,7
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Virginia,1653,1348,3262
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Washington,1192,1074,2439
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,West Virginia,87,67,261
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Wisconsin,686,552,1391
+Ensemble,5/11/2020,4 wk ahead cum death,6/6/2020,Wyoming,13,10,33
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Alabama,453,427,488
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Alaska,16,16,17
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Arizona,633,607,664
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Arkansas,98,92,111
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,California,3388,3241,3596
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Colorado,1128,1087,1173
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Connecticut,3291,3247,3402
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Delaware,278,261,297
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Florida,2007,1929,2102
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Georgia,1572,1498,1712
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Hawaii,18,17,22
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Idaho,70,67,77
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,4282,4080,4573
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Indiana,1626,1547,1767
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Iowa,365,318,418
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Kansas,205,189,224
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Kentucky,350,326,381
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Louisiana,2344,2293,2414
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Maine,76,70,86
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Maryland,1906,1804,2050
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Massachusetts,5763,5621,6008
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Michigan,4837,4749,4945
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Minnesota,716,671,774
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Mississippi,479,451,528
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Missouri,542,519,571
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Montana,17,17,17
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,National,88250,86142,91596
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Nebraska,189,158,224
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Nevada,350,336,370
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,New Hampshire,175,157,196
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,New Jersey,10170,10012,10337
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,New Mexico,206,197,219
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,New York,27627,27383,27976
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,North Carolina,703,628,822
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,North Dakota,21,14,28
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Ohio,1648,1536,1759
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Oklahoma,288,279,303
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Oregon,142,133,153
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Pennsylvania,4172,4074,4279
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Rhode Island,697,668,737
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,South Carolina,389,362,421
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,South Dakota,54,46,64
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Tennessee,299,278,339
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Texas,1368,1291,1481
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Utah,108,94,128
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Vermont,55,54,57
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Virginia,1138,1036,1277
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Washington,1038,1012,1080
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,West Virginia,55,54,59
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Wisconsin,521,479,568
+Columbia,5/11/2020,1 wk ahead cum death,5/16/2020,Wyoming,7,7,7
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Alabama,538,476,629
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Alaska,16,16,17
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Arizona,746,693,813
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Arkansas,103,94,131
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,California,3982,3723,4358
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Colorado,1303,1197,1391
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Connecticut,3578,3501,3753
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Delaware,349,319,392
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Florida,2307,2154,2501
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Georgia,1725,1575,1963
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Hawaii,18,17,23
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Idaho,74,69,85
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,5055,4695,5629
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Indiana,1889,1724,2159
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Iowa,472,369,587
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Kansas,244,213,288
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Kentucky,387,342,460
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Louisiana,2468,2372,2606
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Maine,90,79,106
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Maryland,2261,2066,2541
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Massachusetts,6479,6211,6932
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Michigan,5130,4965,5391
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Minnesota,958,836,1109
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Mississippi,551,480,660
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Missouri,610,567,675
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Montana,17,17,17
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,National,97731,93230,104455
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Nebraska,358,257,462
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Nevada,404,382,448
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,New Hampshire,211,179,252
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,New Jersey,10922,10651,11219
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,New Mexico,218,205,241
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,New York,29047,28628,29631
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,North Carolina,881,718,1173
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,North Dakota,41,25,52
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Ohio,1966,1746,2256
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Oklahoma,308,290,332
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Oregon,157,141,175
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Pennsylvania,4613,4380,4878
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Rhode Island,773,726,839
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,South Carolina,442,392,527
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,South Dakota,81,67,102
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Tennessee,353,316,438
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Texas,1743,1547,2033
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Utah,145,117,183
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Vermont,55,54,57
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Virginia,1402,1210,1673
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Washington,1140,1080,1210
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,West Virginia,55,54,64
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Wisconsin,642,557,757
+Columbia,5/11/2020,2 wk ahead cum death,5/23/2020,Wyoming,7,7,7
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Alabama,651,516,867
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Alaska,16,16,17
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Arizona,850,776,957
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Arkansas,106,94,146
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,California,4458,4066,5038
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Colorado,1505,1331,1696
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Connecticut,3788,3672,4006
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Delaware,422,369,499
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Florida,2667,2365,3093
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Georgia,1863,1654,2303
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Hawaii,19,17,24
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Idaho,82,74,101
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,5623,5154,6472
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Indiana,2164,1880,2674
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Iowa,576,422,784
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Kansas,293,233,367
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Kentucky,418,354,571
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Louisiana,2596,2444,2838
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Maine,109,88,140
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Maryland,2565,2281,2993
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Massachusetts,7013,6642,7666
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Michigan,5380,5135,5770
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Minnesota,1362,1069,1747
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Mississippi,657,528,870
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Missouri,682,618,810
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Montana,17,17,17
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,National,106425,99092,118577
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Nebraska,687,465,954
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Nevada,464,430,542
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,New Hampshire,240,193,294
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,New Jersey,11443,11064,11823
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,New Mexico,228,211,261
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,New York,30015,29438,30745
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,North Carolina,1139,835,1668
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,North Dakota,75,41,109
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Ohio,2334,1972,2971
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Oklahoma,331,303,392
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Oregon,172,149,204
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Pennsylvania,5012,4628,5501
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Rhode Island,827,772,915
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,South Carolina,532,428,703
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,South Dakota,130,96,170
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Tennessee,410,336,606
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Texas,2254,1823,2951
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Utah,185,141,249
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Vermont,55,54,57
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Virginia,1624,1368,2072
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Washington,1238,1142,1350
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,West Virginia,56,54,87
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Wisconsin,749,621,962
+Columbia,5/11/2020,3 wk ahead cum death,5/30/2020,Wyoming,7,7,8
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Alabama,842,590,1298
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Alaska,16,16,17
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Arizona,946,839,1137
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Arkansas,112,96,185
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,California,4851,4321,5623
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Colorado,1776,1481,2237
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Connecticut,3946,3789,4210
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Delaware,507,412,632
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Florida,3225,2649,4198
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Georgia,2019,1734,2797
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Hawaii,19,17,28
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Idaho,95,82,126
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,6055,5473,7202
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Indiana,2536,2055,3488
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Iowa,711,483,1143
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Kansas,356,269,520
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Kentucky,446,361,691
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Louisiana,2727,2508,3105
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Maine,138,100,211
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Maryland,2825,2442,3389
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Massachusetts,7418,6892,8281
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Michigan,5599,5266,6185
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Minnesota,2091,1423,3005
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Mississippi,827,596,1235
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Missouri,774,664,1030
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Montana,17,17,17
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,National,116478,104687,137401
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Nebraska,1335,836,1874
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Nevada,525,463,647
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,New Hampshire,260,201,345
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,New Jersey,11828,11339,12339
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,New Mexico,238,215,282
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,New York,30740,29985,31639
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,North Carolina,1565,1022,2607
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,North Dakota,139,74,219
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Ohio,2896,2244,4176
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Oklahoma,364,311,489
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Oregon,186,160,235
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Pennsylvania,5442,4916,6328
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Rhode Island,867,803,987
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,South Carolina,702,469,1073
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,South Dakota,216,138,314
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Tennessee,492,366,915
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Texas,3097,2203,4827
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Utah,238,170,354
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Vermont,55,54,58
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Virginia,1823,1484,2459
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Washington,1336,1201,1483
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,West Virginia,59,54,132
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Wisconsin,843,670,1191
+Columbia,5/11/2020,4 wk ahead cum death,6/6/2020,Wyoming,7,7,10
+Geneva,5/11/2020,1 wk ahead cum death,5/16/2020,National,88149,NA,NA
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Arkansas,104,96,115
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,California,3050,2937,3137
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Delaware,261,244,277
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,District of Columbia,386,369,401
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Florida,2091,1976,2163
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Georgia,1565,1520,1634
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Idaho,72,68,78
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,4083,3996,4234
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Iowa,379,353,407
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Kentucky,380,364,400
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Maryland,2044,1938,2212
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Massachusetts,5581,5194,6030
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Michigan,4659,4537,4863
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Missouri,622,603,644
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,National,88658,84917,92553
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,New Mexico,255,248,260
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Oklahoma,297,274,318
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Pennsylvania,5016,4504,5233
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Rhode Island,547,471,567
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Tennessee,265,254,282
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Texas,1248,1197,1311
+GA_Tech,5/11/2020,1 wk ahead cum death,5/16/2020,Virginia,1017,977,1048
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Arkansas,121,110,139
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,California,3309,3149,3454
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Delaware,291,261,356
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,District of Columbia,458,432,485
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Florida,2491,2368,2611
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Georgia,1661,1599,1741
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Idaho,75,72,80
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,4686,4404,4973
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Iowa,555,511,602
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Kentucky,492,438,546
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Maryland,2403,2256,2593
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Massachusetts,6141,5671,6618
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Michigan,4704,4659,4943
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Missouri,750,705,819
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,National,97274,90668,104358
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,New Mexico,327,311,340
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Oklahoma,322,299,350
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Pennsylvania,6182,5470,6696
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Rhode Island,692,577,736
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Tennessee,283,269,300
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Texas,1433,1354,1543
+GA_Tech,5/11/2020,2 wk ahead cum death,5/23/2020,Virginia,1193,1124,1263
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Arkansas,131,122,147
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,California,3486,3317,3639
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Delaware,309,291,384
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,District of Columbia,536,509,565
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Florida,2902,2744,3051
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Georgia,1692,1661,1773
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Idaho,81,75,94
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,5153,4731,5667
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Iowa,808,745,875
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Kentucky,680,576,808
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Maryland,2729,2548,2944
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Massachusetts,6585,6142,7335
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Michigan,4759,4704,5011
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Missouri,869,760,985
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,National,105479,98567,112665
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,New Mexico,404,382,419
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Oklahoma,340,322,378
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Pennsylvania,7214,6506,7907
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Rhode Island,845,705,892
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Tennessee,294,283,313
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Texas,1581,1473,1728
+GA_Tech,5/11/2020,3 wk ahead cum death,5/30/2020,Virginia,1342,1244,1440
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Arkansas,140,131,156
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,California,3559,3486,3708
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Delaware,338,309,487
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,District of Columbia,613,562,668
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Florida,3362,3094,3627
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Georgia,1700,1692,1755
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Idaho,86,82,99
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,5488,5153,6177
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Iowa,1159,1060,1262
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Kentucky,998,771,1512
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Maryland,3040,2847,3277
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Massachusetts,6975,6586,7899
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Michigan,4818,4759,5600
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Missouri,1000,869,1149
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,National,112695,105516,121947
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,New Mexico,498,449,524
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Oklahoma,358,340,402
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Pennsylvania,8083,7244,8798
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Rhode Island,1002,909,1073
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Tennessee,300,294,316
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Texas,1695,1581,1862
+GA_Tech,5/11/2020,4 wk ahead cum death,6/6/2020,Virginia,1457,1364,1560
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Alabama,504,460,594
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Alaska,5,5,5
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Arizona,659,572,813
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Arkansas,106,98,121
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,California,3231,3059,3539
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Colorado,1142,1096,1247
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Connecticut,3382,3266,3588
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Delaware,269,251,310
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,District of Columbia,384,358,433
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Florida,2064,1923,2312
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Georgia,1788,1671,2027
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Hawaii,19,19,19
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Idaho,75,72,77
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,4157,3874,4708
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Indiana,1913,1744,2312
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Iowa,343,304,426
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Kansas,199,190,222
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Kentucky,375,352,422
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Louisiana,2562,2497,2679
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Maine,64,63,71
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Maryland,1876,1743,2134
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Massachusetts,5868,5574,6442
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Michigan,5110,4951,5381
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Minnesota,830,707,1116
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Mississippi,526,477,632
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Missouri,587,544,678
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Montana,14,14,14
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,National,91986,88174,99127
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Nebraska,119,104,157
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Nevada,359,344,394
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,New Hampshire,135,124,158
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,New Jersey,10944,10509,11773
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,New Mexico,240,218,283
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,New York,28846,28433,29528
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,North Carolina,693,641,791
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,North Dakota,37,34,48
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Ohio,1750,1618,2030
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Oklahoma,315,301,341
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Oregon,145,141,157
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Pennsylvania,5098,4671,5993
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Puerto Rico,135,101,236
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Rhode Island,501,469,564
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,South Carolina,462,420,551
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,South Dakota,44,36,65
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Tennessee,300,288,326
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Texas,1310,1218,1498
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Utah,76,68,90
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Vermont,52,52,55
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Virginia,1008,940,1147
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Washington,984,977,992
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,West Virginia,58,56,66
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Wisconsin,456,439,484
+IHME,5/11/2020,1 wk ahead cum death,5/16/2020,Wyoming,6,6,6
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Alabama,617,502,831
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Alaska,5,5,5
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Arizona,855,659,1216
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Arkansas,122,105,156
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,California,3713,3341,4343
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Colorado,1264,1171,1469
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Connecticut,3717,3463,4140
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Delaware,306,267,388
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,District of Columbia,435,382,538
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Florida,2416,2124,2947
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Georgia,2071,1812,2585
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Hawaii,19,19,19
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Idaho,75,72,84
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,4851,4233,6098
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Indiana,2234,1879,3115
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Iowa,419,332,618
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Kansas,225,205,271
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Kentucky,434,388,528
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Louisiana,2773,2646,3002
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Maine,72,70,85
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Maryland,2092,1827,2622
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Massachusetts,6492,5901,7609
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Michigan,5445,5142,5980
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Minnesota,1068,802,1682
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Mississippi,648,531,899
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Missouri,696,602,885
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Montana,14,14,14
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,National,101361,93455,116150
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Nebraska,142,111,214
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Nevada,397,366,466
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,New Hampshire,156,132,207
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,New Jersey,12095,11206,13714
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,New Mexico,278,233,368
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,New York,29967,29244,31069
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,North Carolina,805,691,1009
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,North Dakota,47,41,70
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Ohio,1992,1710,2613
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Oklahoma,350,322,398
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Oregon,160,150,180
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Pennsylvania,6006,5122,7961
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Puerto Rico,144,101,281
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Rhode Island,568,501,698
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,South Carolina,534,452,728
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,South Dakota,57,43,103
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Tennessee,340,316,394
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Texas,1515,1319,1923
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Utah,91,75,118
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Vermont,52,52,55
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Virginia,1127,993,1429
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Washington,1029,1018,1046
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,West Virginia,63,56,78
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Wisconsin,508,473,563
+IHME,5/11/2020,2 wk ahead cum death,5/23/2020,Wyoming,6,6,6
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Alabama,736,530,1154
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Alaska,5,5,5
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Arizona,1073,734,1698
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Arkansas,136,112,198
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,California,4158,3568,5155
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Colorado,1365,1223,1673
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Connecticut,3978,3591,4614
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Delaware,335,277,463
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,District of Columbia,472,394,627
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Florida,2807,2314,3733
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Georgia,2355,1921,3228
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Hawaii,19,19,19
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Idaho,75,72,86
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,5488,4489,7568
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Indiana,2559,1978,4108
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Iowa,495,350,864
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Kansas,254,219,326
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Kentucky,488,416,633
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Louisiana,2930,2744,3263
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Maine,79,72,99
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Maryland,2247,1865,3066
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Massachusetts,6903,6062,8480
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Michigan,5687,5258,6465
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Minnesota,1291,874,2279
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Mississippi,766,570,1207
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Missouri,833,661,1177
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Montana,14,14,14
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,National,109272,97003,132764
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Nebraska,161,118,270
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Nevada,429,380,539
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,New Hampshire,173,139,256
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,New Jersey,12993,11677,15401
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,New Mexico,310,240,460
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,New York,30684,29697,32146
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,North Carolina,902,724,1229
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,North Dakota,57,42,97
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Ohio,2206,1764,3236
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Oklahoma,380,337,454
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Oregon,172,157,201
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Pennsylvania,6836,5448,10083
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Puerto Rico,145,101,292
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Rhode Island,614,518,812
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,South Carolina,592,470,907
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,South Dakota,71,47,152
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Tennessee,378,339,467
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Texas,1711,1391,2379
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Utah,105,82,147
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Vermont,52,52,55
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Virginia,1213,1019,1690
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Washington,1061,1043,1086
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,West Virginia,66,56,91
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Wisconsin,551,498,635
+IHME,5/11/2020,3 wk ahead cum death,5/30/2020,Wyoming,6,6,6
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Alabama,854,547,1565
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Alaska,5,5,5
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Arizona,1304,798,2231
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Arkansas,149,113,248
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,California,4554,3742,5930
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Colorado,1446,1261,1858
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Connecticut,4170,3663,5023
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Delaware,357,284,529
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,District of Columbia,497,401,691
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Florida,3216,2485,4659
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Georgia,2623,1999,3918
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Hawaii,19,19,19
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Idaho,75,72,86
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,6022,4667,8947
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Indiana,2877,2045,5255
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Iowa,568,360,1148
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Kansas,283,233,388
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Kentucky,536,438,734
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Louisiana,3039,2803,3461
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Maine,84,72,110
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Maryland,2358,1881,3440
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Massachusetts,7162,6146,9126
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Michigan,5867,5325,6890
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Minnesota,1486,923,2863
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Mississippi,873,595,1535
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Missouri,990,714,1538
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Montana,14,14,14
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,National,115866,99261,149040
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Nebraska,176,121,324
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Nevada,453,387,604
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,New Hampshire,188,142,305
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,New Jersey,13634,11953,16696
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,New Mexico,334,245,543
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,New York,31112,29925,32856
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,North Carolina,983,744,1433
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,North Dakota,66,42,125
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Ohio,2388,1791,3886
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Oklahoma,406,347,503
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Oregon,182,164,222
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Pennsylvania,7662,5688,12347
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Puerto Rico,145,101,292
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Rhode Island,643,525,896
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,South Carolina,637,480,1072
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,South Dakota,86,47,210
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Tennessee,413,359,538
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Texas,1887,1439,2860
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Utah,117,84,175
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Vermont,52,52,55
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Virginia,1272,1031,1918
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Washington,1084,1060,1115
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,West Virginia,69,56,105
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Wisconsin,586,515,698
+IHME,5/11/2020,4 wk ahead cum death,6/6/2020,Wyoming,6,6,6
+Imperial-ensemble1,5/11/2020,1 wk ahead cum death,5/16/2020,National,91528,89466,92714
+Imperial-ensemble2,5/11/2020,1 wk ahead cum death,5/16/2020,National,91176,89475,92556
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Alabama,468,422,545
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Alaska,10,10,11
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Arizona,640,577,739
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Arkansas,112,97,140
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,California,3019,2854,3254
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Colorado,1080,1015,1191
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Connecticut,3318,3120,3625
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Delaware,256,234,299
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,District of Columbia,391,348,462
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Florida,1960,1825,2164
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Georgia,1606,1493,1782
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Hawaii,17,17,19
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Idaho,72,68,82
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,3868,3616,4230
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Indiana,1724,1599,1911
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Iowa,302,278,349
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Kansas,191,179,217
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Kentucky,327,312,357
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Louisiana,2470,2360,2643
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Maine,79,69,101
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Maryland,1963,1793,2215
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Massachusetts,5591,5254,6064
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Michigan,4875,4683,5179
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Minnesota,706,629,826
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Mississippi,506,459,584
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Missouri,571,530,638
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Montana,16,16,17
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,National,87022,83223,91116
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Nebraska,100,93,117
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Nevada,344,322,383
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,New Hampshire,158,141,191
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,New Jersey,10044,9592,10693
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,New Mexico,235,212,276
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,New York,27817,27180,28815
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,North Carolina,671,610,769
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,North Dakota,41,37,55
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Ohio,1561,1432,1751
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Oklahoma,304,283,341
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Oregon,146,133,171
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Pennsylvania,4540,4144,5037
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Puerto Rico,124,114,145
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Rhode Island,499,451,579
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,South Carolina,393,354,458
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,South Dakota,50,39,74
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Tennessee,257,247,279
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Texas,1246,1159,1386
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Utah,78,70,95
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Vermont,54,53,59
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Virgin Islands,4,4,5
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Virginia,1016,917,1166
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Washington,1009,960,1095
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,West Virginia,63,57,77
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Wisconsin,448,417,502
+LANL,5/11/2020,1 wk ahead cum death,5/16/2020,Wyoming,8,7,12
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Alabama,547,446,756
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Alaska,10,10,12
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Arizona,746,612,1019
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Arkansas,134,103,207
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,California,3322,2953,3949
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Colorado,1192,1050,1495
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Connecticut,3656,3233,4462
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Delaware,293,245,397
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,District of Columbia,461,369,654
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Florida,2195,1908,2718
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Georgia,1812,1560,2298
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Hawaii,17,17,20
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Idaho,78,70,96
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,4304,3753,5319
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Indiana,1929,1664,2449
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Iowa,337,288,454
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Kansas,207,184,267
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Kentucky,350,319,421
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Louisiana,2628,2412,3046
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Maine,95,73,150
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Maryland,2301,1906,3051
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Massachusetts,6137,5441,7399
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Michigan,5151,4776,5882
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Minnesota,846,670,1227
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Mississippi,583,483,792
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Missouri,638,551,808
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Montana,16,16,17
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,National,93997,85717,105288
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Nebraska,110,95,146
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Nevada,376,332,471
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,New Hampshire,183,148,266
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,New Jersey,10719,9818,12319
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,New Mexico,268,221,370
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,New York,28820,27519,31183
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,North Carolina,786,649,1060
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,North Dakota,49,38,78
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Ohio,1780,1498,2282
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Oklahoma,337,293,429
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Oregon,166,139,227
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Pennsylvania,5256,4410,6678
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Puerto Rico,137,118,181
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Rhode Island,570,471,778
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,South Carolina,452,372,616
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,South Dakota,70,44,138
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Tennessee,270,251,316
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Texas,1400,1208,1771
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Utah,89,73,129
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Vermont,56,54,63
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Virgin Islands,4,4,6
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Virginia,1206,978,1628
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Washington,1087,981,1296
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,West Virginia,72,59,103
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Wisconsin,499,433,646
+LANL,5/11/2020,2 wk ahead cum death,5/23/2020,Wyoming,9,7,15
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Alabama,613,461,997
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Alaska,10,10,13
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Arizona,833,635,1345
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Arkansas,153,107,282
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,California,3565,3017,4750
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Colorado,1286,1073,1830
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Connecticut,3925,3307,5387
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Delaware,323,253,508
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,District of Columbia,520,382,878
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Florida,2385,1959,3288
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Georgia,1981,1604,2899
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Hawaii,18,17,20
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Idaho,82,71,110
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,4630,3840,6407
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Indiana,2096,1707,3040
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Iowa,364,294,561
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Kansas,220,187,322
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Kentucky,369,323,495
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Louisiana,2741,2438,3432
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Maine,109,77,206
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Maryland,2598,1980,4076
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Massachusetts,6528,5548,8744
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Michigan,5351,4819,6550
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Minnesota,966,696,1765
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Mississippi,649,499,1038
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Missouri,694,564,1001
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Montana,16,16,17
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,National,99444,87367,120942
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Nebraska,118,97,179
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Nevada,403,339,562
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,New Hampshire,201,152,347
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,New Jersey,11192,9959,13890
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,New Mexico,294,227,471
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,New York,29530,27741,33371
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,North Carolina,886,670,1422
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,North Dakota,55,40,105
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Ohio,1954,1544,2876
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Oklahoma,362,300,522
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Oregon,182,143,292
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Pennsylvania,5857,4584,8419
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Puerto Rico,146,120,221
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Rhode Island,623,485,984
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,South Carolina,498,384,785
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,South Dakota,88,48,236
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Tennessee,279,253,354
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Texas,1523,1241,2213
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Utah,99,76,170
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Vermont,57,54,66
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Virgin Islands,4,4,6
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Virginia,1366,1020,2241
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Washington,1147,998,1495
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,West Virginia,79,61,132
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Wisconsin,542,442,822
+LANL,5/11/2020,3 wk ahead cum death,5/30/2020,Wyoming,10,7,20
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Alabama,668,472,1269
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Alaska,11,10,13
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Arizona,904,650,1694
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Arkansas,168,110,377
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,California,3766,3060,5650
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Colorado,1361,1090,2186
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Connecticut,4134,3353,6283
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Delaware,348,257,627
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,District of Columbia,567,391,1124
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Florida,2531,1995,3855
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Georgia,2124,1638,3530
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Hawaii,18,17,21
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Idaho,85,72,123
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,4861,3886,7441
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Indiana,2223,1732,3549
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Iowa,382,298,668
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Kansas,229,189,374
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Kentucky,384,326,566
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Louisiana,2819,2455,3742
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Maine,121,79,267
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Maryland,2840,2031,5333
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Massachusetts,6810,5607,9912
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Michigan,5489,4849,7146
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Minnesota,1069,714,2448
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Mississippi,704,510,1317
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Missouri,738,574,1194
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Montana,16,16,17
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,National,103263,88416,134845
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Nebraska,123,98,212
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Nevada,424,343,650
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,New Hampshire,214,155,432
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,New Jersey,11521,10040,15372
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,New Mexico,312,230,586
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,New York,30048,27875,35286
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,North Carolina,973,690,1849
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,North Dakota,61,40,138
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Ohio,2093,1573,3448
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Oklahoma,383,304,619
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Oregon,195,145,358
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Pennsylvania,6334,4692,10211
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Puerto Rico,153,121,259
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Rhode Island,661,492,1184
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,South Carolina,534,391,950
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,South Dakota,104,51,351
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Tennessee,286,254,389
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Texas,1622,1264,2715
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Utah,107,77,213
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Vermont,58,54,70
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Virgin Islands,4,4,7
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Virginia,1499,1046,2978
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Washington,1194,1008,1693
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,West Virginia,86,62,160
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Wisconsin,578,449,1038
+LANL,5/11/2020,4 wk ahead cum death,6/6/2020,Wyoming,11,8,23
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Alabama,445,408,482
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Alaska,9,9,9
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Arizona,613,553,673
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Arkansas,105,92,118
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,California,3318,3208,3428
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Colorado,1245,1159,1331
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Connecticut,3427,3330,3524
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Delaware,275,267,283
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,District of Columbia,413,389,437
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Florida,1891,1823,1959
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Georgia,1542,1501,1583
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Hawaii,19,19,19
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Idaho,76,72,80
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,4503,4208,4798
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Indiana,1884,1772,1996
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Iowa,404,353,455
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Kansas,297,203,391
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Kentucky,394,362,426
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Louisiana,2281,2228,2334
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Maine,80,74,86
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Maryland,2239,2027,2451
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Massachusetts,6283,5844,6722
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Michigan,5064,4922,5206
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Minnesota,1061,810,1312
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Mississippi,497,452,542
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Missouri,556,543,569
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Montana,15,13,17
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,National,91849,89898,93800
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Nebraska,187,124,250
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Nevada,347,340,354
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,New Hampshire,156,137,175
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,New Jersey,10543,10184,10902
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,New Mexico,261,251,271
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,New York,28508,27792,29224
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,North Carolina,750,709,791
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,North Dakota,45,42,48
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Ohio,1625,1547,1703
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Oklahoma,318,299,337
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Oregon,147,140,154
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Pennsylvania,4704,4449,4959
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Rhode Island,480,454,506
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,South Carolina,412,377,447
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,South Dakota,37,24,50
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Tennessee,333,287,379
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Texas,1218,1187,1249
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Utah,74,70,78
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Vermont,58,58,58
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Virginia,1133,1091,1175
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Washington,953,938,968
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,West Virginia,66,61,71
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Wisconsin,547,463,631
+MIT,5/11/2020,1 wk ahead cum death,5/16/2020,Wyoming,11,7,15
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Alabama,508,465,551
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Alaska,9,9,9
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Arizona,739,667,811
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Arkansas,118,104,132
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,California,3824,3697,3951
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Colorado,1433,1334,1532
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Connecticut,3764,3657,3871
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Delaware,322,313,331
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,District of Columbia,503,473,533
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Florida,2078,2003,2153
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Georgia,1663,1619,1707
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Hawaii,20,20,20
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Idaho,80,75,85
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,5513,5152,5874
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Indiana,2191,2061,2321
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Iowa,569,497,641
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Kansas,399,273,525
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Kentucky,459,422,496
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Louisiana,2361,2306,2416
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Maine,90,83,97
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Maryland,2795,2530,3060
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Massachusetts,7409,6891,7927
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Michigan,5418,5266,5570
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Minnesota,1717,1310,2124
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Mississippi,595,541,649
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Missouri,627,612,642
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Montana,15,13,17
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,National,102512,100334,104690
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Nebraska,287,190,384
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Nevada,381,373,389
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,New Hampshire,197,173,221
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,New Jersey,11570,11176,11964
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,New Mexico,329,316,342
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,New York,29476,28736,30216
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,North Carolina,941,890,992
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,North Dakota,56,53,59
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Ohio,1875,1785,1965
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Oklahoma,348,328,368
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Oregon,162,154,170
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Pennsylvania,5612,5307,5917
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Rhode Island,536,507,565
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,South Carolina,484,443,525
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,South Dakota,45,30,60
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Tennessee,377,325,429
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Texas,1338,1304,1372
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Utah,83,78,88
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Vermont,60,60,60
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Virginia,1420,1367,1473
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Washington,981,966,996
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,West Virginia,74,69,79
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Wisconsin,648,549,747
+MIT,5/11/2020,2 wk ahead cum death,5/23/2020,Wyoming,13,9,17
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Alabama,560,513,607
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Alaska,9,9,9
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Arizona,859,775,943
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Arkansas,128,113,143
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,California,4259,4118,4400
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Colorado,1594,1484,1704
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Connecticut,4001,3888,4114
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Delaware,360,350,370
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,District of Columbia,588,553,623
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Florida,2220,2140,2300
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Georgia,1748,1702,1794
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Hawaii,20,20,20
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Idaho,82,77,87
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,6466,6042,6890
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Indiana,2446,2301,2591
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Iowa,763,666,860
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Kansas,514,352,676
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Kentucky,518,476,560
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Louisiana,2408,2352,2464
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Maine,98,90,106
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Maryland,3333,3017,3649
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Massachusetts,8381,7795,8967
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Michigan,5661,5502,5820
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Minnesota,2673,2040,3306
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Mississippi,689,627,751
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Missouri,684,668,700
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Montana,15,13,17
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,National,111885,109508,114262
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Nebraska,418,277,559
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Nevada,408,399,417
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,New Hampshire,241,212,270
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,New Jersey,12325,11905,12745
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,New Mexico,397,381,413
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,New York,30042,29288,30796
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,North Carolina,1137,1075,1199
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,North Dakota,67,63,71
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Ohio,2079,1979,2179
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Oklahoma,371,349,393
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Oregon,174,166,182
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Pennsylvania,6446,6096,6796
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Rhode Island,575,544,606
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,South Carolina,550,504,596
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,South Dakota,51,34,68
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Tennessee,413,356,470
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Texas,1424,1388,1460
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Utah,91,86,96
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Vermont,61,61,61
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Virginia,1703,1639,1767
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Washington,998,982,1014
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,West Virginia,81,75,87
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Wisconsin,741,627,855
+MIT,5/11/2020,3 wk ahead cum death,5/30/2020,Wyoming,15,10,20
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Alabama,601,551,651
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Alaska,9,9,9
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Arizona,971,876,1066
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Arkansas,137,121,153
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,California,4616,4463,4769
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Colorado,1726,1607,1845
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Connecticut,4160,4042,4278
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Delaware,390,379,401
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,District of Columbia,664,625,703
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Florida,2324,2240,2408
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Georgia,1805,1757,1853
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Hawaii,21,21,21
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Idaho,83,78,88
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,7319,6839,7799
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Indiana,2647,2490,2804
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Iowa,978,854,1102
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Kansas,635,435,835
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Kentucky,571,525,617
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Louisiana,2435,2378,2492
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Maine,106,98,114
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Maryland,3828,3465,4191
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Massachusetts,9188,8546,9830
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Michigan,5821,5658,5984
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Minnesota,4010,3060,4960
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Mississippi,776,706,846
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Missouri,727,710,744
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Montana,15,13,17
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,National,120192,117638,122746
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Nebraska,582,385,779
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Nevada,428,419,437
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,New Hampshire,287,252,322
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,New Jersey,12857,12419,13295
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,New Mexico,460,442,478
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,New York,30362,29600,31124
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,North Carolina,1332,1259,1405
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,North Dakota,77,72,82
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Ohio,2236,2128,2344
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Oklahoma,387,364,410
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Oregon,183,175,191
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Pennsylvania,7191,6801,7581
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Rhode Island,600,568,632
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,South Carolina,608,557,659
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,South Dakota,57,38,76
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Tennessee,440,379,501
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Texas,1483,1446,1520
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Utah,96,90,102
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Vermont,62,62,62
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Virginia,1967,1893,2041
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Washington,1008,992,1024
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,West Virginia,86,80,92
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Wisconsin,823,697,949
+MIT,5/11/2020,4 wk ahead cum death,6/6/2020,Wyoming,17,11,23
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Alabama,513,456,572
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Alaska,11,10,12
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Arizona,623,555,934
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Arkansas,107,94,140
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,California,3143,3073,3218
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Colorado,1048,979,1473
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Connecticut,3505,3139,3846
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Delaware,281,262,299
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Florida,2026,1889,2231
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Georgia,1615,1530,1710
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Hawaii,19,18,23
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Idaho,75,70,80
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,4191,4033,4314
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Indiana,1926,1861,1994
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Iowa,352,311,394
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Kansas,203,187,231
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Kentucky,352,328,392
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Louisiana,2480,2388,2589
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Maine,71,69,73
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Maryland,2087,1754,2610
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Massachusetts,5997,5171,7126
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Michigan,5050,4794,5398
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Minnesota,784,716,844
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Mississippi,548,479,667
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Missouri,601,564,664
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Montana,18,16,20
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,National,88922,85337,92835
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Nebraska,108,94,153
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Nevada,364,355,378
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,New Hampshire,196,174,232
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,New Jersey,10368,10080,10744
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,New Mexico,248,242,255
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,New York,29334,27393,31232
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,North Carolina,667,659,677
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,North Dakota,50,46,56
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Ohio,1685,1598,1762
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Oklahoma,305,291,318
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Oregon,145,135,161
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Pennsylvania,4968,4893,5133
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Rhode Island,557,472,653
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,South Carolina,396,350,538
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,South Dakota,51,44,63
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Tennessee,268,263,274
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Texas,1276,1158,1473
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Utah,79,70,102
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Vermont,58,55,62
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Virginia,1054,994,1113
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Washington,996,978,1015
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,West Virginia,62,54,84
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Wisconsin,457,427,507
+MOBS,5/11/2020,1 wk ahead cum death,5/16/2020,Wyoming,9,7,17
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Alabama,665,515,839
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Alaska,11,10,16
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Arizona,724,573,1546
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Arkansas,130,98,226
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,California,3564,3407,3735
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Colorado,1144,989,2188
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Connecticut,4063,3288,4813
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Delaware,343,298,388
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Florida,2310,2018,2842
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Georgia,1799,1622,2021
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Hawaii,21,18,30
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Idaho,81,73,91
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,5083,4708,5374
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Indiana,2420,2254,2601
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Iowa,479,368,606
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Kansas,231,196,305
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Kentucky,397,346,497
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Louisiana,2648,2468,2927
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Maine,76,72,81
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Maryland,2674,1864,4114
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Massachusetts,7213,5404,9833
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Michigan,5485,4968,6229
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Minnesota,1068,887,1237
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Mississippi,705,528,1024
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Missouri,702,620,876
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Montana,20,17,25
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,National,97513,90047,106841
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Nebraska,130,97,253
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Nevada,410,391,445
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,New Hampshire,288,227,405
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,New Jersey,11430,10817,12243
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,New Mexico,309,297,330
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,New York,31784,27905,35766
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,North Carolina,776,759,801
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,North Dakota,72,59,91
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Ohio,2069,1851,2267
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Oklahoma,333,307,363
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Oregon,162,141,202
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Pennsylvania,6282,6071,6691
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Rhode Island,727,516,990
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,South Carolina,475,366,861
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,South Dakota,76,54,112
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Tennessee,289,279,303
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Texas,1481,1227,2009
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Utah,92,73,154
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Vermont,62,56,72
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Virginia,1299,1150,1452
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Washington,1057,1021,1099
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,West Virginia,74,56,133
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Wisconsin,511,448,638
+MOBS,5/11/2020,2 wk ahead cum death,5/23/2020,Wyoming,10,7,31
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Alabama,847,568,1221
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Alaska,12,10,20
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Arizona,837,588,2443
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Arkansas,159,102,366
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,California,3951,3696,4237
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Colorado,1254,997,3178
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Connecticut,4596,3392,5811
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Delaware,407,330,487
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Florida,2566,2111,3574
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Georgia,1958,1688,2336
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Hawaii,22,19,38
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Idaho,86,75,103
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,6012,5345,6553
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Indiana,2967,2671,3322
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Iowa,637,424,908
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Kansas,257,203,402
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Kentucky,438,359,621
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Louisiana,2777,2520,3337
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Maine,80,75,88
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Maryland,3385,1947,6231
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Massachusetts,8450,5560,12814
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Michigan,5839,5084,7051
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Minnesota,1419,1068,1763
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Mississippi,892,568,1517
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Missouri,797,664,1138
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Montana,21,17,32
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,National,104814,93350,120667
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Nebraska,157,100,413
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Nevada,452,421,517
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,New Hampshire,415,290,682
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,New Jersey,12320,11378,13647
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,New Mexico,375,352,416
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,New York,33918,28226,40125
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,North Carolina,878,848,924
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,North Dakota,100,75,144
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Ohio,2476,2088,2850
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Oklahoma,357,318,404
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Oregon,179,146,253
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Pennsylvania,7691,7340,8429
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Rhode Island,927,550,1445
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,South Carolina,569,379,1353
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,South Dakota,109,62,193
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Tennessee,307,292,330
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Texas,1678,1278,2722
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Utah,104,76,228
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Vermont,66,57,82
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Virginia,1558,1293,1861
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Washington,1108,1053,1175
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,West Virginia,90,57,213
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Wisconsin,562,463,796
+MOBS,5/11/2020,3 wk ahead cum death,5/30/2020,Wyoming,12,7,54
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Alabama,1062,612,1744
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Alaska,12,10,27
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Arizona,963,598,3705
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Arkansas,196,104,588
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,California,4304,3943,4726
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Colorado,1383,1002,4468
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Connecticut,5107,3464,6824
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Delaware,471,357,593
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Florida,2796,2177,4448
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Georgia,2092,1733,2648
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Hawaii,23,19,48
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Idaho,91,76,114
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,6947,5952,7943
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Indiana,3572,3121,4136
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Iowa,830,475,1325
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Kansas,281,208,526
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Kentucky,476,368,766
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Louisiana,2874,2553,3827
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Maine,83,76,93
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Maryland,4218,2009,8925
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Massachusetts,9669,5666,15934
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Michigan,6120,5157,7828
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Minnesota,1841,1261,2435
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Mississippi,1106,602,2166
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Missouri,884,697,1456
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Montana,23,17,40
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,National,110913,95638,134231
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Nebraska,191,102,653
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Nevada,490,447,592
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,New Hampshire,585,363,1094
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,New Jersey,13095,11808,14967
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,New Mexico,444,405,513
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,New York,35831,28423,44193
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,North Carolina,972,930,1042
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,North Dakota,138,92,224
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Ohio,2902,2302,3515
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Oklahoma,376,327,443
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Oregon,194,149,315
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Pennsylvania,9183,8773,10315
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Rhode Island,1152,578,2004
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,South Carolina,680,389,2078
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,South Dakota,152,70,318
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Tennessee,321,301,354
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Texas,1865,1316,3664
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Utah,117,78,333
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Vermont,69,58,93
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Virginia,1829,1422,2334
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Washington,1150,1077,1242
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,West Virginia,110,58,339
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Wisconsin,609,474,985
+MOBS,5/11/2020,4 wk ahead cum death,6/6/2020,Wyoming,14,7,88
+NotreDame,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,3848,1217,7735
+NotreDame,5/11/2020,1 wk ahead cum death,5/16/2020,Indiana,1772,588,3494
+NotreDame,5/11/2020,1 wk ahead cum death,5/16/2020,Kentucky,272,46,1146
+NotreDame,5/11/2020,1 wk ahead cum death,5/16/2020,Michigan,4659,1974,9509
+NotreDame,5/11/2020,1 wk ahead cum death,5/16/2020,Minnesota,736,169,2067
+NotreDame,5/11/2020,1 wk ahead cum death,5/16/2020,Ohio,1423,382,3399
+NotreDame,5/11/2020,1 wk ahead cum death,5/16/2020,Wisconsin,430,76,1161
+NotreDame,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,4734,1573,8879
+NotreDame,5/11/2020,2 wk ahead cum death,5/23/2020,Indiana,2274,720,4339
+NotreDame,5/11/2020,2 wk ahead cum death,5/23/2020,Kentucky,318,49,1334
+NotreDame,5/11/2020,2 wk ahead cum death,5/23/2020,Michigan,4970,2253,9793
+NotreDame,5/11/2020,2 wk ahead cum death,5/23/2020,Minnesota,959,205,2812
+NotreDame,5/11/2020,2 wk ahead cum death,5/23/2020,Ohio,1754,489,4535
+NotreDame,5/11/2020,2 wk ahead cum death,5/23/2020,Wisconsin,496,84,1393
+NotreDame,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,5642,2140,9928
+NotreDame,5/11/2020,3 wk ahead cum death,5/30/2020,Indiana,2868,854,5266
+NotreDame,5/11/2020,3 wk ahead cum death,5/30/2020,Kentucky,367,52,1499
+NotreDame,5/11/2020,3 wk ahead cum death,5/30/2020,Michigan,5243,2588,10350
+NotreDame,5/11/2020,3 wk ahead cum death,5/30/2020,Minnesota,1236,271,3950
+NotreDame,5/11/2020,3 wk ahead cum death,5/30/2020,Ohio,2167,628,5797
+NotreDame,5/11/2020,3 wk ahead cum death,5/30/2020,Wisconsin,594,93,1744
+NotreDame,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,6720,2706,11173
+NotreDame,5/11/2020,4 wk ahead cum death,6/6/2020,Indiana,3576,998,6372
+NotreDame,5/11/2020,4 wk ahead cum death,6/6/2020,Kentucky,439,56,1760
+NotreDame,5/11/2020,4 wk ahead cum death,6/6/2020,Michigan,5572,2847,11134
+NotreDame,5/11/2020,4 wk ahead cum death,6/6/2020,Minnesota,1600,337,5088
+NotreDame,5/11/2020,4 wk ahead cum death,6/6/2020,Ohio,2742,720,7550
+NotreDame,5/11/2020,4 wk ahead cum death,6/6/2020,Wisconsin,724,98,2233
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,3697,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,3347,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,4097
+UChicago_100,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,4347,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,3935,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,4828
+UChicago_100,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,5012,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,4531,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,5555
+UChicago_100,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,5689,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,5106,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,6351
+UChicago_100,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,3715,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,3368,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,4137
+UChicago_40,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,4367,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,3955,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,4827
+UChicago_40,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,5029,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,4575,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,5637
+UChicago_40,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,5701,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,5204,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,6400
+UChicago_40,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,3690,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,3376,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,4069
+UChicago_60,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,4336,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,3903,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,4741
+UChicago_60,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,4998,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,4536,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,5500
+UChicago_60,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,5659,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,5118,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,6289
+UChicago_60,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,3708,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,3361,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,4195
+UChicago_80,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,4360,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,3977,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,4885
+UChicago_80,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,5019,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,4547,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,5647
+UChicago_80,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,5694,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,5160,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,6418
+UChicago_80,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,NA,NA,NA
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Alabama,449,432,467
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Alaska,11,11,11
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Arizona,605,583,630
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Arkansas,105,100,110
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,California,3124,2991,3287
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Colorado,1100,1062,1143
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Connecticut,3265,3181,3355
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Delaware,260,249,273
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,District of Columbia,364,352,378
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Florida,1897,1847,1951
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Georgia,1632,1566,1704
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Hawaii,18,18,19
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Idaho,75,73,77
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,3957,3793,4138
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Indiana,1713,1652,1780
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Iowa,346,318,384
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Kansas,230,213,251
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Kentucky,365,346,386
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Louisiana,2527,2460,2595
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Maine,72,69,74
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Maryland,1888,1816,1968
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Massachusetts,5473,5332,5621
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Michigan,4980,4861,5105
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Minnesota,701,661,750
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Mississippi,486,470,503
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Missouri,556,541,573
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Montana,17,17,18
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,National,88421,85870,91144
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Nebraska,137,121,157
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Nevada,345,335,356
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,New Hampshire,148,143,154
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,New Jersey,10149,9898,10412
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,New Mexico,227,219,235
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,New York,29100,28413,29834
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,North Carolina,632,612,654
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,North Dakota,41,39,43
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Ohio,1521,1468,1579
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Oklahoma,311,300,322
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Oregon,142,138,147
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Pennsylvania,4122,4035,4212
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Rhode Island,502,479,526
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,South Carolina,366,356,378
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,South Dakota,39,37,40
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Tennessee,288,275,302
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Texas,1271,1219,1328
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Utah,76,73,79
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Vermont,58,57,59
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Virginia,996,949,1049
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Washington,1014,991,1038
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,West Virginia,59,57,60
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Wisconsin,467,447,491
+UCLA,5/11/2020,1 wk ahead cum death,5/16/2020,Wyoming,8,8,9
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Alabama,509,472,553
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Alaska,12,11,12
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Arizona,686,634,753
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Arkansas,122,111,137
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,California,3647,3303,4117
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Colorado,1238,1154,1338
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Connecticut,3555,3385,3738
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Delaware,301,276,329
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,District of Columbia,408,382,439
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Florida,2075,1971,2190
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Georgia,1868,1726,2033
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Hawaii,20,19,21
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Idaho,83,78,88
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,4538,4183,4950
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Indiana,1928,1797,2081
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Iowa,472,385,606
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Kansas,298,254,357
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Kentucky,432,390,483
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Louisiana,2756,2624,2894
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Maine,81,75,87
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Maryland,2143,1988,2321
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Massachusetts,5959,5675,6265
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Michigan,5385,5150,5635
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Minnesota,857,754,1000
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Mississippi,543,509,582
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Missouri,612,579,650
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Montana,19,18,19
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,National,97355,92074,103179
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Nebraska,203,159,265
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Nevada,381,360,404
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,New Hampshire,167,154,183
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,New Jersey,11019,10514,11556
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,New Mexico,253,238,270
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,New York,31425,30069,32937
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,North Carolina,704,660,753
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,North Dakota,48,43,55
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Ohio,1708,1595,1839
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Oklahoma,349,327,373
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Oregon,159,149,171
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Pennsylvania,4425,4252,4603
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Rhode Island,583,535,636
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,South Carolina,404,381,429
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,South Dakota,44,41,48
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Tennessee,334,307,365
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Texas,1457,1345,1585
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Utah,86,80,93
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Vermont,62,60,65
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Virginia,1166,1062,1289
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Washington,1095,1048,1146
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,West Virginia,64,61,67
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Wisconsin,546,496,610
+UCLA,5/11/2020,2 wk ahead cum death,5/23/2020,Wyoming,10,9,11
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Alabama,562,506,631
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Alaska,12,12,13
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Arizona,765,680,883
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Arkansas,140,121,168
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,California,4183,3596,5034
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Colorado,1359,1232,1527
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Connecticut,3782,3546,4038
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Delaware,336,300,378
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,District of Columbia,446,406,493
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Florida,2224,2073,2393
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Georgia,2072,1859,2342
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Hawaii,21,20,22
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Idaho,89,83,96
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,5034,4509,5659
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Indiana,2113,1918,2346
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Iowa,629,457,920
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Kansas,370,294,482
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Kentucky,492,427,586
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Louisiana,2937,2754,3131
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Maine,89,80,100
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Maryland,2358,2131,2622
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Massachusetts,6351,5950,6785
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Michigan,5702,5377,6049
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Minnesota,1015,838,1305
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Mississippi,592,542,650
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Missouri,660,610,718
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Montana,20,19,21
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,National,104724,97128,113246
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Nebraska,276,196,398
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Nevada,410,380,446
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,New Hampshire,186,165,216
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,New Jersey,11717,11008,12476
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,New Mexico,275,253,299
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,New York,33254,31365,35412
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,North Carolina,765,701,841
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,North Dakota,56,48,68
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Ohio,1867,1700,2064
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Oklahoma,380,348,421
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Oregon,174,158,193
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Pennsylvania,4664,4425,4911
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Rhode Island,650,581,728
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,South Carolina,436,403,476
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,South Dakota,49,44,55
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Tennessee,374,334,424
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Texas,1618,1452,1822
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Utah,95,85,107
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Vermont,66,62,70
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Virginia,1315,1158,1505
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Washington,1163,1095,1236
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,West Virginia,68,64,74
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Wisconsin,622,541,733
+UCLA,5/11/2020,3 wk ahead cum death,5/30/2020,Wyoming,11,10,13
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Alabama,608,535,704
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Alaska,13,12,14
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Arizona,840,721,1011
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Arkansas,158,130,203
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,California,4702,3865,5962
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Colorado,1463,1294,1711
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Connecticut,3958,3672,4266
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Delaware,365,319,419
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,District of Columbia,477,426,538
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Florida,2346,2156,2561
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Georgia,2244,1966,2636
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Hawaii,22,21,24
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Idaho,95,87,103
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,5446,4776,6248
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Indiana,2266,2017,2588
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Iowa,814,533,1314
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Kansas,444,330,625
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Kentucky,543,456,689
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Louisiana,3080,2857,3317
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Maine,96,84,115
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Maryland,2533,2247,2869
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Massachusetts,6662,6169,7193
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Michigan,5947,5553,6367
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Minnesota,1164,909,1616
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Mississippi,632,568,708
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Missouri,700,636,781
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Montana,20,19,22
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,National,110695,101204,121476
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Nebraska,354,233,546
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Nevada,434,396,486
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,New Hampshire,204,174,248
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,New Jersey,12269,11400,13203
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,New Mexico,293,265,323
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,New York,34680,32378,37358
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,North Carolina,818,735,919
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,North Dakota,64,52,82
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Ohio,1999,1786,2258
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Oklahoma,405,365,465
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Oregon,187,166,214
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Pennsylvania,4852,4562,5149
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Rhode Island,705,618,803
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,South Carolina,463,420,520
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,South Dakota,53,47,62
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Tennessee,408,355,481
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Texas,1752,1537,2050
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Utah,103,90,119
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Vermont,69,65,74
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Virginia,1441,1237,1713
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Washington,1218,1133,1311
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,West Virginia,72,66,80
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Wisconsin,693,580,853
+UCLA,5/11/2020,4 wk ahead cum death,6/6/2020,Wyoming,12,10,15
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Alabama,490,438,630
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Alaska,10,10,12
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Arizona,723,616,1040
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Arkansas,108,97,128
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,California,3170,2995,3473
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Colorado,1088,1018,1251
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Connecticut,3341,3170,3668
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Delaware,262,240,296
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,District of Columbia,407,371,476
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Florida,1996,1863,2300
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Georgia,1586,1489,1794
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Hawaii,19,18,21
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Idaho,70,67,77
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,4158,3878,4688
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Indiana,1902,1747,2189
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Iowa,348,311,420
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Kansas,202,186,239
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Kentucky,351,327,402
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Louisiana,2484,2404,2645
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Maine,72,66,85
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Maryland,2097,1916,2408
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Massachusetts,5836,5378,6843
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Michigan,4932,4794,5178
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Minnesota,773,686,948
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Mississippi,550,498,647
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Missouri,613,557,771
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Montana,17,17,20
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Nebraska,120,101,171
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Nevada,394,344,628
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,New Hampshire,182,150,286
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,New Jersey,10350,9897,11048
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,New Mexico,256,227,342
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,New York,28048,27583,28936
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,North Carolina,689,636,812
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,North Dakota,44,37,60
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Ohio,1593,1475,1809
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Oklahoma,304,285,344
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Oregon,145,134,176
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Pennsylvania,4657,4261,5597
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Rhode Island,512,466,614
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,South Carolina,386,357,452
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,South Dakota,49,39,80
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Tennessee,275,258,312
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Texas,1336,1243,1511
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Utah,88,78,112
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Vermont,56,54,61
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Virginia,1057,949,1261
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Washington,1020,980,1104
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,West Virginia,62,56,73
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Wisconsin,470,437,531
+UMass-MB,5/11/2020,1 wk ahead cum death,5/16/2020,Wyoming,8,7,11
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Alabama,594,481,1259
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Alaska,10,10,13
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Arizona,945,700,2252
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Arkansas,123,104,207
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,California,3596,3205,4841
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Colorado,1180,1062,1695
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Connecticut,3632,3325,4603
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Delaware,294,256,390
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,District of Columbia,491,412,813
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Florida,2258,2011,3342
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Georgia,1752,1569,2400
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Hawaii,19,18,23
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Idaho,74,68,89
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,4850,4265,6741
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Indiana,2179,1902,2889
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Iowa,423,351,682
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Kansas,229,197,347
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Kentucky,383,344,560
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Louisiana,2640,2487,3212
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Maine,80,69,129
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Maryland,2450,2101,3535
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Massachusetts,6532,5734,9030
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Michigan,5196,4962,5891
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Minnesota,988,777,1995
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Mississippi,662,556,1021
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Missouri,728,612,1355
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Montana,18,17,21
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Nebraska,150,111,323
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Nevada,493,380,2185
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,New Hampshire,240,172,777
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,New Jersey,11166,10390,12690
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,New Mexico,310,253,688
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,New York,28896,28082,31110
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,North Carolina,817,698,1348
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,North Dakota,54,41,106
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Ohio,1813,1588,2492
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Oklahoma,334,297,492
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Oregon,165,142,312
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Pennsylvania,5494,4663,7942
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Rhode Island,589,500,947
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,South Carolina,434,380,624
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,South Dakota,73,46,291
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Tennessee,299,269,411
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Texas,1598,1374,2493
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Utah,107,86,217
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Vermont,58,54,68
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Virginia,1272,1060,2087
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Washington,1110,1022,1527
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,West Virginia,69,59,114
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Wisconsin,543,469,827
+UMass-MB,5/11/2020,2 wk ahead cum death,5/23/2020,Wyoming,9,7,14
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Alabama,696,509,4079
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Alaska,11,10,15
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Arizona,1175,762,6225
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Arkansas,139,109,492
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,California,4002,3334,8486
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Colorado,1255,1090,2768
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Connecticut,3852,3419,7465
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Delaware,317,263,563
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,District of Columbia,582,439,1784
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Florida,2488,2109,6202
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Georgia,1905,1618,4207
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Hawaii,19,18,25
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Idaho,76,69,125
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,5453,4496,10786
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Indiana,2396,1977,4284
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Iowa,492,373,1319
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Kansas,254,204,654
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Kentucky,408,353,998
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Louisiana,2768,2535,4591
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Maine,89,71,300
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Maryland,2774,2222,5891
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Massachusetts,7030,5937,12990
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Michigan,5378,5038,7025
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Minnesota,1214,836,5274
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Mississippi,764,595,1861
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Missouri,832,645,3879
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Montana,18,17,21
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Nebraska,178,119,809
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Nevada,620,406,8652
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,New Hampshire,306,186,2259
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,New Jersey,11762,10680,15206
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,New Mexico,362,271,1926
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,New York,29434,28337,34782
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,North Carolina,951,752,3544
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,North Dakota,62,44,257
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Ohio,2007,1658,4167
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Oklahoma,360,307,1027
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Oregon,187,148,1093
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Pennsylvania,6218,4921,14416
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Rhode Island,651,524,1607
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,South Carolina,469,393,1037
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,South Dakota,111,52,1000
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Tennessee,318,275,640
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Texas,1864,1459,5075
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Utah,127,92,698
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Vermont,60,55,83
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Virginia,1476,1134,4581
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Washington,1203,1051,3150
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,West Virginia,74,60,300
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Wisconsin,617,491,1669
+UMass-MB,5/11/2020,3 wk ahead cum death,5/30/2020,Wyoming,9,7,21
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Alabama,798,526,10095
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Alaska,11,10,19
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Arizona,1410,798,15481
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Arkansas,152,111,1757
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,California,4332,3402,18543
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Colorado,1308,1103,5692
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Connecticut,4005,3459,11936
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Delaware,335,269,853
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,District of Columbia,671,457,3528
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Florida,2675,2156,14124
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Georgia,2038,1638,8126
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Hawaii,19,18,27
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Idaho,78,69,216
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,5948,4651,20533
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Indiana,2558,2014,6846
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Iowa,545,385,2578
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Kansas,276,209,1459
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Kentucky,428,358,2128
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Louisiana,2860,2562,7667
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Maine,98,72,954
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Maryland,3028,2279,11466
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Massachusetts,7458,6072,17622
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Michigan,5500,5073,9405
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Minnesota,1417,870,12961
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Mississippi,846,613,3819
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Missouri,916,667,11354
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Montana,18,17,22
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Nebraska,202,124,1652
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Nevada,766,422,21884
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,New Hampshire,377,194,5462
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,New Jersey,12164,10814,18758
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,New Mexico,410,282,4439
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,New York,29790,28443,40372
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,North Carolina,1085,775,10238
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,North Dakota,69,45,590
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Ohio,2154,1697,7527
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Oklahoma,384,311,2796
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Oregon,211,151,4330
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Pennsylvania,6824,5065,26757
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Rhode Island,700,538,2831
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,South Carolina,493,401,1979
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,South Dakota,166,57,2023
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Tennessee,332,279,1127
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Texas,2137,1515,13925
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Utah,146,96,2143
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Vermont,61,55,115
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Virginia,1664,1174,11022
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Washington,1295,1069,8878
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,West Virginia,79,61,789
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Wisconsin,694,502,4053
+UMass-MB,5/11/2020,4 wk ahead cum death,6/6/2020,Wyoming,10,7,40
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Alabama,461,427,526
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Alaska,11,10,14
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Arizona,663,605,768
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Arkansas,109,98,130
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,California,3105,2925,3428
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Colorado,1052,1011,1127
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Connecticut,3251,3121,3485
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Delaware,260,240,296
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,District of Columbia,391,352,491
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Florida,1960,1847,2165
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Georgia,1547,1478,1678
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Hawaii,19,18,23
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Idaho,75,69,85
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,3954,3708,4400
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Indiana,1855,1725,2100
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Iowa,357,312,446
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Kansas,201,185,236
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Kentucky,345,326,381
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Louisiana,2448,2369,2599
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Maine,73,67,84
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Maryland,1993,1860,2234
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Massachusetts,5649,5355,6179
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Michigan,4869,4721,5121
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Minnesota,766,681,929
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Mississippi,526,478,621
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Missouri,609,557,704
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Montana,19,17,24
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,National,87666,86230,89467
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Nebraska,114,101,137
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Nevada,381,358,428
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,New Hampshire,169,150,203
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,New Jersey,9978,9658,10553
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,New Mexico,253,227,300
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,New York,27503,27195,28041
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,North Carolina,673,621,760
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,North Dakota,45,38,58
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Ohio,1561,1458,1741
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Oklahoma,296,281,325
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Oregon,142,132,161
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Pennsylvania,4456,4170,4973
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Rhode Island,493,459,553
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,South Carolina,392,360,450
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,South Dakota,59,42,106
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Tennessee,272,256,302
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Texas,1284,1193,1450
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Utah,89,78,108
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Vermont,58,55,66
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Virginia,1019,939,1167
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Washington,1018,973,1108
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,West Virginia,65,58,79
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Wisconsin,457,428,514
+UT,5/11/2020,1 wk ahead cum death,5/16/2020,Wyoming,8,7,11
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Alabama,533,459,713
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Alaska,13,10,21
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Arizona,839,693,1168
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Arkansas,133,107,194
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,California,3555,3156,4402
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Colorado,1126,1044,1294
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Connecticut,3476,3230,3954
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Delaware,305,262,392
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,District of Columbia,456,369,774
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Florida,2233,1970,2760
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Georgia,1668,1532,1958
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Hawaii,21,18,30
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Idaho,84,72,111
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,4591,4023,5810
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Indiana,2195,1892,2885
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Iowa,523,387,866
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Kansas,236,197,337
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Kentucky,384,341,476
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Louisiana,2577,2430,2895
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Maine,83,71,112
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Maryland,2267,1984,2817
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Massachusetts,6246,5670,7420
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Michigan,5144,4848,5716
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Minnesota,1086,828,1701
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Mississippi,644,529,931
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Missouri,751,620,1038
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Montana,23,18,38
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,National,96232,92089,102371
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Nebraska,145,115,210
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Nevada,434,380,550
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,New Hampshire,227,177,355
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,New Jersey,10564,9956,11821
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,New Mexico,323,260,454
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,New York,27901,27409,28841
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,North Carolina,804,685,1025
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,North Dakota,62,45,112
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Ohio,1836,1584,2351
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Oklahoma,318,289,387
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Oregon,162,140,212
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Pennsylvania,5171,4536,6441
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Rhode Island,562,495,703
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,South Carolina,467,393,629
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,South Dakota,169,68,646
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Tennessee,302,268,379
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Texas,1524,1308,1989
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Utah,113,87,170
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Vermont,63,56,89
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Virginia,1232,1047,1639
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Washington,1142,1026,1435
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,West Virginia,81,65,114
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Wisconsin,538,461,722
+UT,5/11/2020,2 wk ahead cum death,5/23/2020,Wyoming,9,7,15
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Alabama,576,469,905
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Alaska,16,11,36
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Arizona,993,751,1676
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Arkansas,148,111,262
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,California,3855,3261,5246
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Colorado,1164,1057,1416
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Connecticut,3577,3266,4271
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Delaware,335,272,487
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,District of Columbia,486,373,1091
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Florida,2390,2021,3252
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Georgia,1719,1545,2147
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Hawaii,23,18,41
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Idaho,92,74,142
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,5048,4169,7349
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Indiana,2434,1975,3729
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Iowa,714,443,1613
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Kansas,258,201,445
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Kentucky,407,347,566
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Louisiana,2625,2447,3062
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Maine,93,73,146
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Maryland,2420,2031,3304
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Massachusetts,6579,5794,8465
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Michigan,5289,4895,6183
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Minnesota,1431,935,2923
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Mississippi,714,546,1229
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Missouri,854,650,1416
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Montana,29,19,67
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,National,102679,95640,115095
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Nebraska,173,122,297
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Nevada,468,392,668
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,New Hampshire,295,197,636
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,New Jersey,10855,10059,12747
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,New Mexico,381,280,640
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,New York,28034,27458,29212
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,North Carolina,894,712,1283
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,North Dakota,82,50,198
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Ohio,2055,1657,3063
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Oklahoma,326,291,432
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Oregon,176,143,263
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Pennsylvania,5668,4714,8014
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Rhode Island,604,511,852
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,South Carolina,515,406,809
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,South Dakota,479,110,3427
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Tennessee,319,272,447
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Texas,1675,1356,2498
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Utah,133,93,250
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Vermont,69,56,127
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Virginia,1395,1104,2138
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Washington,1232,1054,1750
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,West Virginia,97,70,161
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Wisconsin,612,481,993
+UT,5/11/2020,3 wk ahead cum death,5/30/2020,Wyoming,10,7,19
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Alabama,473,450,498
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Alaska,11,11,11
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Arizona,679,641,734
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Arkansas,105,102,110
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,California,3097,2914,3288
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Colorado,1085,1033,1138
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Connecticut,3337,3187,3526
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Delaware,262,247,275
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,District of Columbia,383,360,404
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Florida,1981,1855,2103
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Georgia,1568,1492,1650
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Guam,6,6,6
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Hawaii,19,18,19
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Idaho,71,69,73
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Illinois,4062,3854,4220
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Indiana,1801,1695,1893
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Iowa,336,321,353
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Kansas,195,185,209
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Kentucky,343,327,360
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Louisiana,2491,2410,2594
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Maine,71,69,73
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Maryland,1927,1819,2044
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Massachusetts,5745,5456,6089
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Michigan,4963,4808,5182
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Minnesota,716,667,760
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Mississippi,531,502,567
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Missouri,600,570,632
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Montana,17,17,18
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,National,88767,85140,93053
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Nebraska,104,99,107
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Nevada,351,337,366
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,New Hampshire,164,156,175
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,New Jersey,10357,9842,10827
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,New Mexico,244,229,260
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,New York,28129,27489,29240
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,North Carolina,660,624,701
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,North Dakota,44,42,48
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Northern Mariana Islands,3,3,3
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Ohio,1575,1489,1652
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Oklahoma,301,291,312
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Oregon,141,135,148
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Pennsylvania,4560,4304,4838
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Puerto Rico,123,118,128
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Rhode Island,508,482,535
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,South Carolina,381,365,401
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,South Dakota,43,39,48
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Tennessee,265,257,273
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Texas,1281,1213,1350
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Utah,80,76,86
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Vermont,56,55,58
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Virgin Islands,5,5,5
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Virginia,1001,938,1066
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Washington,1000,968,1056
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,West Virginia,61,59,64
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Wisconsin,446,429,466
+YYG,5/11/2020,1 wk ahead cum death,5/16/2020,Wyoming,8,8,8
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Alabama,565,510,625
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Alaska,12,11,12
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Arizona,847,757,980
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Arkansas,124,114,138
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,California,3492,3080,3943
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Colorado,1225,1097,1361
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Connecticut,3690,3363,4130
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Delaware,309,273,343
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,District of Columbia,446,392,494
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Florida,2256,1971,2527
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Georgia,1761,1576,1978
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Guam,7,7,8
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Hawaii,21,19,22
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Idaho,76,72,79
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Illinois,4855,4331,5239
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Indiana,2155,1889,2378
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Iowa,430,391,476
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Kansas,217,194,251
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Kentucky,386,349,429
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Louisiana,2697,2520,2929
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Maine,80,75,85
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Maryland,2219,1963,2499
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Massachusetts,6468,5832,7279
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Michigan,5374,5034,5884
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Minnesota,876,752,986
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Mississippi,648,577,731
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Missouri,710,637,783
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Montana,18,18,20
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,National,98365,90146,108200
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Nebraska,122,111,132
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Nevada,397,363,433
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,New Hampshire,198,179,221
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,New Jersey,11450,10317,12503
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,New Mexico,291,255,329
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,New York,29420,28123,31798
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,North Carolina,762,677,862
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,North Dakota,55,50,65
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Northern Mariana Islands,4,3,4
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Ohio,1844,1632,2029
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Oklahoma,334,311,360
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Oregon,155,142,172
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Pennsylvania,5353,4751,5968
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Puerto Rico,134,125,147
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Rhode Island,604,540,667
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,South Carolina,442,403,491
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,South Dakota,53,45,66
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Tennessee,288,271,305
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Texas,1509,1340,1693
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Utah,95,84,109
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Vermont,61,58,63
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Virgin Islands,6,5,6
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Virginia,1188,1031,1351
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Washington,1066,1000,1191
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,West Virginia,70,64,76
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Wisconsin,491,455,536
+YYG,5/11/2020,2 wk ahead cum death,5/23/2020,Wyoming,10,9,10
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Alabama,658,564,761
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Alaska,12,12,13
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Arizona,1023,870,1251
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Arkansas,145,127,170
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,California,3849,3197,4598
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Colorado,1369,1151,1609
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Connecticut,3980,3481,4691
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Delaware,356,293,415
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,District of Columbia,504,416,581
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Florida,2510,2055,2945
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Georgia,1966,1645,2395
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Guam,8,7,10
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Hawaii,23,20,25
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Idaho,80,74,86
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Illinois,5676,4752,6345
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Indiana,2528,2063,2914
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Iowa,546,467,641
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Kansas,239,202,298
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Kentucky,427,366,502
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Louisiana,2873,2603,3243
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Maine,89,80,97
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Maryland,2478,2061,2948
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Massachusetts,7058,6082,8378
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Michigan,5724,5203,6548
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Minnesota,1047,819,1257
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Mississippi,772,649,913
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Missouri,824,698,955
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Montana,20,19,22
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,National,107120,94012,123124
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Nebraska,143,122,164
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Nevada,442,386,504
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,New Hampshire,230,199,266
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,New Jersey,12373,10642,14022
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,New Mexico,337,274,398
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,New York,30379,28532,33965
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,North Carolina,856,718,1028
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,North Dakota,68,57,85
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Northern Mariana Islands,4,4,5
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Ohio,2108,1745,2422
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Oklahoma,368,329,415
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Oregon,168,147,196
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Pennsylvania,6080,5095,7039
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Puerto Rico,144,130,164
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Rhode Island,695,588,801
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,South Carolina,507,437,590
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,South Dakota,64,51,86
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Tennessee,309,283,338
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Texas,1764,1459,2136
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Utah,112,91,138
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Vermont,64,60,69
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Virgin Islands,6,6,7
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Virginia,1374,1104,1656
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Washington,1121,1023,1317
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,West Virginia,79,68,91
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Wisconsin,530,475,602
+YYG,5/11/2020,3 wk ahead cum death,5/30/2020,Wyoming,11,11,12
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Alabama,758,616,919
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Alaska,13,13,14
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Arizona,1228,988,1579
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Arkansas,166,139,208
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,California,4182,3280,5265
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Colorado,1511,1194,1877
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Connecticut,4223,3561,5219
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Delaware,402,310,489
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,District of Columbia,557,435,667
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Florida,2765,2122,3392
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Georgia,2188,1700,2933
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Guam,9,8,12
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Hawaii,25,21,27
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Idaho,84,76,92
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Illinois,6524,5126,7529
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Indiana,2944,2228,3561
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Iowa,690,546,873
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Kansas,262,209,352
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Kentucky,466,380,578
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Louisiana,3029,2668,3543
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Maine,97,85,110
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Maryland,2717,2130,3396
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Massachusetts,7558,6258,9422
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Michigan,6022,5330,7168
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Minnesota,1244,876,1623
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Mississippi,917,721,1155
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Missouri,955,756,1179
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Montana,21,19,25
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,National,115468,97135,138500
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Nebraska,166,132,203
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Nevada,487,407,584
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,New Hampshire,263,218,315
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,New Jersey,13163,10867,15400
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,New Mexico,383,290,474
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,New York,31114,28807,35837
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,North Carolina,944,749,1202
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,North Dakota,82,65,111
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Northern Mariana Islands,5,5,6
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Ohio,2366,1837,2830
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Oklahoma,402,345,479
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Oregon,179,151,219
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Pennsylvania,6773,5372,8106
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Puerto Rico,153,134,180
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Rhode Island,783,628,936
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,South Carolina,576,468,702
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,South Dakota,77,56,112
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Tennessee,329,294,372
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Texas,2063,1571,2749
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Utah,130,98,178
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Vermont,68,62,73
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Virgin Islands,7,7,8
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Virginia,1561,1162,1987
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Washington,1170,1041,1439
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,West Virginia,88,72,108
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Wisconsin,565,491,666
+YYG,5/11/2020,4 wk ahead cum death,6/6/2020,Wyoming,13,12,14
