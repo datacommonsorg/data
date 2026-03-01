@@ -1,0 +1,8 @@
+Node: E:subnational->E0
+observationDate: C:subnational->observationDate
+observationAbout: C:subnational->observationAbout
+value: C:subnational->value
+variableMeasured: dcid:Count_Person
+measurementMethod: dcs:WorldBankSubnationalPopulationEstimate
+typeOf: dcs:StatVarObservation
+observationPeriod: P1Y
