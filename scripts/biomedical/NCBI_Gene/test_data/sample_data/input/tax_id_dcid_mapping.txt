@@ -1,0 +1,5 @@
+tax_id,dcid
+8345,dcid:bio/BombinaBombina
+9371,dcid:bio/EchinopsTelfairi
+9417,dcid:bio/ArtibeusJamaicensis
+9447,dcid:bio/LemurCatta

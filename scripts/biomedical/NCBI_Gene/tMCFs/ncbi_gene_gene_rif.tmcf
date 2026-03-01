@@ -1,0 +1,12 @@
+Node: E:ncbi_gene_gene_rif->E1
+typeOf: dcs:Gene
+dcid: C:ncbi_gene_gene_rif->GeneID
+
+Node: E:ncbi_gene_gene_rif->E2
+typeOf: dcs:GeneReferenceIntoFunction
+dcid: C:ncbi_gene_gene_rif->dcid
+name: C:ncbi_gene_gene_rif->name
+dateModified: C:ncbi_gene_gene_rif->dateModified
+geneID: E:ncbi_gene_gene_rif->E1
+geneReferenceIntoFunction: C:ncbi_gene_gene_rif->GeneRifText
+pubMedID: C:ncbi_gene_gene_rif->pubMedId
