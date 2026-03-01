@@ -1,0 +1,98 @@
+Node: dcid:Count_Household_AbovePovertyLine_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "total number of families registered in the Single Registry whose income exceeds the poverty line"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadunico tot fam ext pob@pt"
+incomeStatus: dcid:AbovePovertyLine
+registeredIn: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Household_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "total number of families registered in the Single Registry"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadunico tot fam@pt"
+registeredIn: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Household_LowIncomeOrAbovePovertyLine_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "The Single Registry reports total families, including both the current low-income population and those who have exited"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadunico tot fam pob e ext pob@pt"
+incomeStatus: dcid:LowIncome__AbovePovertyLine
+registeredIn: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Household_LowIncome_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "Number of low income families with Single Registry"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadunico tot fam pob@pt"
+incomeStatus: dcid:LowIncome
+registeredIn: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Household_UptoHalfOfMinimumWage_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "Single Registry total families registered with RPC by mid-morning today with an income up to half the minimum wage"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadunico tot fam rpc ate meio sm@pt"
+incomeStatus: dcid:UptoHalfOfMinimumWage
+registeredIn: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_AbovePovertyLine_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "The total number of individuals exceeding the poverty line within Single Registry families"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadunico tot pes ext pob@pt"
+incomeStatus: dcid:AbovePovertyLine
+registeredIn: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "total number of individuals registered in the Single Registry"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadunico tot pes@pt"
+registeredIn: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_LowIncomeOrAbovePovertyLine_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "The Single Registry tracks total individuals across families, encompassing both current low-income residents and those who have exited"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadunico tot pes pob e ext pob@pt"
+incomeStatus: dcid:LowIncome__AbovePovertyLine
+registeredIn: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_LowIncome_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "The number of low-income individuals in Single Registry families"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadunico tot pes pob@pt"
+incomeStatus: dcid:LowIncome
+registeredIn: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_UptoHalfOfMinimumWage_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "Single Registry total individuals registered with RPC by mid-morning today with an income up to half the minimum wage"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadunico tot pes rpc ate meio sm@pt"
+incomeStatus: dcid:UptoHalfOfMinimumWage
+registeredIn: dcid:Brazil_SingleRegistry
+

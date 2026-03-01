@@ -1,0 +1,8 @@
+Node: E:Individuals_Family_Single_Registry->E0
+observationAbout: C:Individuals_Family_Single_Registry->observationAbout
+observationDate: C:Individuals_Family_Single_Registry->observationDate
+observationPeriod: C:Individuals_Family_Single_Registry->observationPeriod
+value: C:Individuals_Family_Single_Registry->value
+variableMeasured: C:Individuals_Family_Single_Registry->variableMeasured
+measurementMethod: C:Individuals_Family_Single_Registry->measurementMethod
+typeOf: dcs:StatVarObservation

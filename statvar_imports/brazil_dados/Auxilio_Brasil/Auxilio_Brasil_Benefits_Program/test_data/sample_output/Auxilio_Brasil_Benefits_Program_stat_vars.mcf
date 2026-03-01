@@ -1,0 +1,60 @@
+Node: dcid:Count_Household_CitizenshipIncomeBenefits_HouseholderAge15To29Years
+typeOf: dcid:StatisticalVariable
+name: "Quantity of youth benefits for families in program"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+benefitsStatus: dcid:CitizenshipIncomeBenefits
+householderAge: [15 29 Years]
+
+Node: dcid:Count_Household_FamilyVariableBenefits
+typeOf: dcid:StatisticalVariable
+name: "Quantity of maternity benefits for families in program"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+benefitsStatus: dcid:FamilyVariableBenefits
+
+Node: dcid:Count_Household_FamilyVariableBenefits_HouseholderAge12To18Years
+typeOf: dcid:StatisticalVariable
+name: "Quantity of benefits for teenagers in families enrolled in program"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+benefitsStatus: dcid:FamilyVariableBenefits
+householderAge: [12 18 Years]
+
+Node: dcid:Count_Household_FamilyVariableBenefits_HouseholderAge7To12Years
+typeOf: dcid:StatisticalVariable
+name: "Quantity of child benefits for families in program"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+benefitsStatus: dcid:FamilyVariableBenefits
+householderAge: [7 12 Years]
+
+Node: dcid:Count_Person_0To6Years_EarlyChildhood
+typeOf: dcid:StatisticalVariable
+name: "Quantity of early childhood benefits in program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 6 Years]
+benefitsStatus: dcid:EarlyChildhood
+
+Node: dcid:Count_Person_ComplementaryBenefits
+typeOf: dcid:StatisticalVariable
+name: "Quantity of extreme poverty overcoming benefits in program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+benefitsStatus: dcid:ComplementaryBenefits
+
+Node: dcid:Count_Person_TemporaryCompensatoryBenefits
+typeOf: dcid:StatisticalVariable
+name: "Quantity of temporary compensatory benefits in program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+benefitsStatus: dcid:TemporaryCompensatoryBenefits
+
