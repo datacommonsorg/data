@@ -1,0 +1,4 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input
+country/COG,2011,7153,dcid:Qualifications_Count_Teacher_Male_4OrLessYears,,,/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_education/test_data/sample_input/Congo_education_test_data.csv:6:3
+country/COG,2011,7,dcid:Count_Person_Female_ConventionalTeachingCatholic_TechnicalGraduateDegree,,,/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_education/test_data/sample_input/Congo_education_test_data.csv:11:3
+country/COG,2011,14,dcid:Count_Person_Male_ConventionalTeachingBrotherhood_4Years,,,/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_education/test_data/sample_input/Congo_education_test_data.csv:16:3

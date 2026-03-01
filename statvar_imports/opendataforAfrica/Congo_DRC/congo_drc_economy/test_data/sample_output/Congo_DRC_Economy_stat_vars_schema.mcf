@@ -1,0 +1,107 @@
+Node: dcid:Donation
+typeOf: dcid:EconomicActivitySourceEnum
+name: "Donation"
+isProvisional: dcid:True
+
+Node: dcid:donationType
+typeOf: dcid:Property
+name: "donationType"
+domainIncludes: dcid:EconomicActivity
+rangeIncludes: dcid:DebtInstrumentEnum
+isProvisional: dcid:True
+
+Node: dcid:donationSource
+typeOf: dcid:Property
+name: "donationSource"
+domainIncludes: dcid:EconomicActivity
+rangeIncludes: dcid:DonationSourceEnum
+isProvisional: dcid:True
+
+Node: dcid:DonationSourceEnum
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+name: "DonationSourceEnum"
+isProvisional: dcid:True
+
+Node: dcid:WorldBankFoodAid
+typeOf: dcid:DonationSourceEnum
+name: "World Bank Food Aid"
+isProvisional: dcid:True
+
+Node: dcid:activitySource
+typeOf: dcid:Property
+name: "activitySource"
+rangeIncludes: dcid:EnergyConsumptionSectorEnum
+domainIncludes: dcid:Debt
+
+Node: dcid:FinalConsumptionExpenditure
+typeOf: dcid:ExpenditureTypeEnum
+name: "Final Consumption Expenditure"
+isProvisional: dcid:True
+
+Node: dcid:ActualSocialContribution
+typeOf: dcid:EconomicActivitySourceEnum
+name: "Actual Social Contribution"
+isProvisional: dcid:True
+
+Node: dcid:economicSector
+typeOf: dcid:Property
+name: "economicSector"
+domainIncludes: dcid:EconomicActivity
+
+Node: dcid:ProductionOfDomesticServices
+typeOf: dcid:NACEEnum
+name: "Production Of Domestic Services"
+isProvisional: dcid:True
+
+Node: dcid:WorldBank
+typeOf: dcid:DonationSourceEnum
+name: "World Bank"
+isProvisional: dcid:True
+
+Node: dcid:GDPAtFactorCost
+typeOf: dcid:EconomicActivitySourceEnum
+name: "GDPAt Factor Cost"
+isProvisional: dcid:True
+
+Node: dcid:Agriculture__Forest__Breeding__Hunting__Fishing
+typeOf: dcid:EconomicActivitySourceEnum
+name: "Agriculture__ Forest__ Breeding__ Hunting__ Fishing"
+isProvisional: dcid:True
+
+Node: dcid:PrimarySector
+typeOf: dcid:NACEEnum
+name: "Primary Sector"
+isProvisional: dcid:True
+
+Node: dcid:ImputedSocialContribution
+typeOf: dcid:EconomicActivitySourceEnum
+name: "Imputed Social Contribution"
+isProvisional: dcid:True
+
+Node: dcid:EducationAndHealth
+typeOf: dcid:NACEEnum
+name: "Education And Health"
+isProvisional: dcid:True
+
+Node: dcid:AfricanCapacityBuildingFoundation
+typeOf: dcid:DonationSourceEnum
+name: "African Capacity Building Foundation"
+isProvisional: dcid:True
+
+Node: dcid:amountDue
+typeOf: dcid:Property
+name: "amountDue"
+rangeIncludes: dcid:AmountDueEnum
+isProvisional: dcid:True
+
+Node: dcid:ClubKinshasa
+typeOf: dcid:EconomicActivitySourceEnum
+name: "Club Kinshasa"
+isProvisional: dcid:True
+
+Node: dcid:GrossOperatingSurplus
+typeOf: dcid:EconomicActivitySourceEnum
+name: "Gross Operating Surplus"
+isProvisional: dcid:True
+
