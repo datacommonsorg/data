@@ -1,0 +1,9 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+ObservationAbout,observationAbout,{Data},populationType,Student,measuredProperty,count,courseType,CareerAndTechnicalEducation,,,,,,
+Year,observationDate,{Number},,,,,,,,,,,,
+CTEParticipationSchoolPerc,careerClusterStatus,CTEParticipant,value,{Number},measurementDenominator,-careerClusterStatus,unit,Percent,,,,,,
+CTEParticipantsStatePerc,careerClusterStatus,CTEParticipant,value,{Number},observationAbout,geoId/34,measurementDenominator,-careerClusterStatus,unit,Percent,,,,
+CTEConcentratorsPercPerc,careerClusterStatus,CTEConcentrator,value,{Number},measurementDenominator,-careerClusterStatus,unit,Percent,,,,,,
+CTEConcentratorsStatePerc,careerClusterStatus,CTEConcentrator,value,{Number},observationAbout,geoId/34,measurementDenominator,-careerClusterStatus,unit,Percent,,,,
+SLEPerc,careerClusterStatus,StructuredLearningExperienced,value,{Number},measurementDenominator,-careerClusterStatus,unit,Percent,,,,,,
+SLEStatePerc,careerClusterStatus,StructuredLearningExperienced,value,{Number},observationAbout,geoId/34,measurementDenominator,-careerClusterStatus,unit,Percent,,,,
