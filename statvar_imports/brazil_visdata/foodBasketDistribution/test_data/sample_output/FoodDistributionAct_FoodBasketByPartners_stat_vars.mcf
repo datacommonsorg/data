@@ -1,0 +1,90 @@
+Node: dcid:CumulativeCount_FoodBasket_BancoDoBrasilFoundation
+typeOf: dcid:StatisticalVariable
+name: "Accumulated food baskets delivered by Banco do Brasil Foundation"
+populationType: dcid:FoodBasket
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Cestas entregues acumuladas por Fundação Banco do Brasil@pt"
+brazilAidDistributionPartner: dcid:BancoDoBrasilFoundation
+
+Node: dcid:CumulativeCount_FoodBasket_CortevaAgriscience
+typeOf: dcid:StatisticalVariable
+name: "Accumulated food baskets delivered by Corteva Agriscience"
+populationType: dcid:FoodBasket
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Cestas entregues acumuladas por Corteva Agriscience@pt"
+brazilAidDistributionPartner: dcid:CortevaAgriscience
+
+Node: dcid:CumulativeCount_FoodBasket_DivineCaldoBrazil
+typeOf: dcid:StatisticalVariable
+name: "Accumulated food baskets delivered by Divine Caldo Brazil"
+populationType: dcid:FoodBasket
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Cestas entregues acumuladas por Divino Caldo Brasil@pt"
+brazilAidDistributionPartner: dcid:DivineCaldoBrazil
+
+Node: dcid:CumulativeCount_FoodBasket_NationalAssociationOfGarlicOrOnionProducers
+typeOf: dcid:StatisticalVariable
+name: "Accumulated food baskets delivered by National Association of Garlic Producers/ National Association of Onion Producers"
+populationType: dcid:FoodBasket
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Cestas entregues acumuladas por Associação Nacional dos Produtores de Alho/ Associação Nacional de Produtores de Cebola@pt"
+brazilAidDistributionPartner: dcid:NationalAssociationOfGarlicOrOnionProducers
+
+Node: dcid:CumulativeCount_FoodBasket_NationalConfederationOfAgricultureSENAR
+typeOf: dcid:StatisticalVariable
+name: "Accumulated food baskets delivered by Agro Fraterno/National Confederation of Agriculture/SENAR"
+populationType: dcid:FoodBasket
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Cestas entregues acumuladas por Agro Fraterno/Confederação Nacional da Agricultura/SENAR@pt"
+brazilAidDistributionPartner: dcid:NationalConfederationOfAgricultureSENAR
+
+Node: dcid:CumulativeCount_FoodBasket_NationalConfederationOfCommerceSESC
+typeOf: dcid:StatisticalVariable
+name: "Accumulated food baskets delivered by National Confederation of Commerce/SESC/Regional Commerce Federations"
+populationType: dcid:FoodBasket
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Cestas entregues acumuladas por Confederação Nacional do Comercio/SESC/Federações do Comércio regionais@pt"
+brazilAidDistributionPartner: dcid:NationalConfederationOfCommerceSESC
+
+Node: dcid:CumulativeCount_FoodBasket_NationalConfederationOfIndustrySESI
+typeOf: dcid:StatisticalVariable
+name: "Accumulated food baskets delivered by National Confederation of Industry/SESI/Regional Industry Federations"
+populationType: dcid:FoodBasket
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Cestas entregues acumuladas por Confederação Nacional da Indústria/SESI/Federações da Industria regionais@pt"
+brazilAidDistributionPartner: dcid:NationalConfederationOfIndustrySESI
+
+Node: dcid:CumulativeCount_FoodBasket_NutrelliAlimentosECongelattos
+typeOf: dcid:StatisticalVariable
+name: "Accumulated food baskets delivered by Nutrelli Alimentos e Congelattos"
+populationType: dcid:FoodBasket
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Cestas entregues acumuladas por Nutrelli Alimentos e Congelattos@pt"
+brazilAidDistributionPartner: dcid:NutrelliAlimentosECongelattos
+
+Node: dcid:CumulativeCount_FoodBasket_OrganizationOfCooperativesOfBrazil
+typeOf: dcid:StatisticalVariable
+name: "Accumulated food baskets delivered by Agro Fraterno/ Organization of Cooperatives of Brazil"
+populationType: dcid:FoodBasket
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Cestas entregues acumuladas por Agro Fraterno/ Organização da Cooperativas do Brasil@pt"
+brazilAidDistributionPartner: dcid:OrganizationOfCooperativesOfBrazil
+
+Node: dcid:CumulativeCount_FoodBasket_SaoPauloWarehouseAndWarehouseCompanyCEAGESP
+typeOf: dcid:StatisticalVariable
+name: "Accumulated food baskets delivered by São Paulo Warehouse and Warehouse Company -CEAGESP"
+populationType: dcid:FoodBasket
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Cestas entregues acumuladas por Companhia de Entrepostos e Armazéns de São Paulo -CEAGESP@pt"
+brazilAidDistributionPartner: dcid:SaoPauloWarehouseAndWarehouseCompanyCEAGESP
+
