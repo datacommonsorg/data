@@ -167,6 +167,19 @@ _COUNTY_2010_2020_INFO = {
     "age_grp_func": _get_age_grp
 }
 
+_COUNTY_2020_2022_INFO = {
+    "year_range": "2020_2022",
+    "exclude_year": [1],
+    "exclude_age_grp": 0,
+    "replace_year_from": "",
+    "replace_year_to": "",
+    "add_base_year": 2018,
+    "derived_cols_string": "county_2020_2022",
+    "replace_age_grp_from": "85To89",
+    "replace_age_grp_to": "85",
+    "age_grp_func": _get_age_grp
+}
+
 
 def _add_measurement_method(data_df: pd.DataFrame, src_col: str,
                             tgt_col: str) -> pd.DataFrame:
@@ -287,7 +300,8 @@ def _load_data_df(path: str,
                                 skiprows=skip_rows,
                                 encoding=encoding)
     elif file_format.lower() in ["xls", "xlsx"]:
-        data_df = pd.read_excel(path, header=header)
+        data_df = pd.read_excel(path, header=header, engine='openpyxl')
+        #data_df = pd.read_excel(path, header=1, engine='openpyxl')
     data_df = _convert_to_int(data_df)
     return data_df
 
@@ -792,7 +806,6 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
     # SKipping Sex: 0, Origin: 0 which represents Total Count
     data_df = data_df[(data_df["SEX"] != 0) &
                       (data_df["ORIGIN"] != 0)].reset_index(drop=True)
-
     # Creating GeoId"s for State FIPS Code
     # Before padding STATE = 6, After padding STATE = 06
     data_df["STATE"] = "geoId/" + data_df["STATE"].astype("str").str.pad(
@@ -835,6 +848,121 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
     ] + [cols[column_indexes["AGE"]]
         ] + cols[column_indexes["POPULATION_EST_2010_2019_START"]:
                  column_indexes["POPULATION_EST_2010_2019_END"]] + [
+                     cols[column_indexes["POPULATION_EST_2020"]]
+                 ]
+    pop_cols = [val for val in req_cols if "POPESTIMATE" in val]
+    # Deriving New Columns
+    # Type Casting the pop_cols to integer/float using pd.to_numeric function
+    data_df[pop_cols] = data_df[pop_cols].apply(pd.to_numeric)
+    derived_cols = _get_mapper_cols_dict("state_2010_2020_hispanic")
+    for dsv, sv in derived_cols.items():
+        tmp_derived_cols_df = data_df[data_df["SV"].isin(
+            sv)][req_cols].reset_index(drop=True)
+        tmp_derived_cols_df["SV"] = dsv
+        tmp_derived_cols_df = tmp_derived_cols_df.groupby(
+            ["STATE", "SV", "AGE"]).sum().reset_index()
+        data_df = pd.concat([data_df, tmp_derived_cols_df])
+    # Deriving New Columns
+    derived_cols = _get_mapper_cols_dict("state_2010_2020_total")
+    for dsv, sv in derived_cols.items():
+        tmp_derived_cols_df = data_df[data_df["SV"].isin(
+            sv)][req_cols].reset_index(drop=True)
+        tmp_derived_cols_df["SV"] = dsv
+        tmp_derived_cols_df = tmp_derived_cols_df.groupby(
+            ["STATE", "SV", "AGE"]).sum().reset_index()
+        data_df = pd.concat([data_df, tmp_derived_cols_df])
+    # Creating SV"s name using SV, Age Column
+
+    data_df["SV"] = data_df.apply(
+        lambda row: _create_sv_with_age(row.SV, row.AGE), axis=1)
+    data_df = data_df[req_cols]
+    req_cols = [
+        col.replace("POPESTIMATE", "").replace("STATE", "Location")
+        for col in req_cols
+    ]
+    data_df.columns = req_cols
+    # data_df Columns or req_cols are below
+    # ["Location", "SV", "AGE", "2010", "2011", "2012",
+    # "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"]
+    data_df = pd.melt(data_df,
+                      id_vars=["SV", "Location", "AGE"],
+                      value_vars=req_cols[3:],
+                      var_name="Year",
+                      value_name='Count_Person')
+    f_cols = ["Year", "Location", "SV", "Measurement_Method", "Count_Person"]
+    data_df["Count_Person"] = data_df["Count_Person"].astype("int")
+    # Deriving Measurement Method for the SV"s
+    data_df = _add_measurement_method(data_df, "SV", "Measurement_Method")
+    return data_df[f_cols]
+
+
+def _process_state_2020_2022(file_path: str) -> pd.DataFrame:
+    """
+    Returns the Cleaned DataFrame consists
+    state data for the year 2010-2020.
+
+    Args:
+        file_path (str): Input File Path
+
+    Returns:
+        pd.DataFrame: Cleaned DataFrame
+    """
+    data_df = _load_data_df(path=file_path, file_format="csv", header=0)
+    # SKipping Sex: 0, Origin: 0 which represents Total Count
+    data_df = data_df[(data_df["SEX"] != 0) &
+                      (data_df["ORIGIN"] != 0)].reset_index(drop=True)
+    data_df = _load_data_df(path=file_path, file_format="csv", header=0)
+
+    # Creating GeoId"s for State FIPS Code
+    # Before padding STATE = 6, After padding STATE = 06
+    data_df["STATE"] = "geoId/" + data_df["STATE"].astype("str").str.pad(
+        width=2, side="left", fillchar="0")
+    gender_mapper = {0: "empty", 1: "Male", 2: "Female"}
+    origin_mapper = {
+        0: "remove",
+        1: "NotHispanicOrLatino",
+        2: "HispanicOrLatino"
+    }
+    race_mapper = {
+        1: "WhiteAlone",
+        2: "BlackOrAfricanAmericanAlone",
+        3: "AmericanIndianAndAlaskaNativeAlone",
+        4: "AsianAlone",
+        5: "NativeHawaiianAndOtherPacificIslanderAlone",
+        6: "TwoOrMoreRaces"
+    }
+
+    data_df["SEX"] = data_df["SEX"].map(gender_mapper)
+    data_df["ORIGIN"] = data_df["ORIGIN"].map(origin_mapper)
+    data_df["RACE"] = data_df["RACE"].map(race_mapper)
+    data_df[
+        "SV"] = data_df["SEX"] + "_" + data_df["ORIGIN"] + "_" + data_df["RACE"]
+    data_df["SV"] = data_df["SV"].str.replace("NotHispanicOrLatino_WhiteAlone",
+                                              "WhiteAloneNotHispanicOrLatino")
+    data_df["SV"] = data_df["SV"].str.replace("empty_",
+                                              "").str.replace("_empty", "")
+    data_df = data_df[data_df["SV"].str.contains("remove") == False]
+    cols = list(data_df.columns)
+    # data_df Columns
+    # ["SUMLEV", "REGION", "DIVISION", "STATE", "NAME", "SEX", "ORIGIN",
+    # "RACE", "AGE", "CENSUS2010POP", "ESTIMATESBASE2010", "POPESTIMATE2010",
+    # "POPESTIMATE2011", "POPESTIMATE2012", "POPESTIMATE2013",
+    # "POPESTIMATE2014", "POPESTIMATE2015", "POPESTIMATE2016",
+    # "POPESTIMATE2017", "POPESTIMATE2018", "POPESTIMATE2019",
+    # "POPESTIMATE042020", "POPESTIMATE2020", "SV"]
+    column_indexes = {
+        "STATE": 3,
+        "SV": 13,
+        "AGE": 8,
+        "POPULATION_EST_2020_2022_START": 10,
+        "POPULATION_EST_2020_2022_END": 12,
+        "POPULATION_EST_2020": 12
+    }
+    req_cols = [cols[column_indexes["STATE"]]] + [
+        cols[column_indexes["SV"]]
+    ] + [cols[column_indexes["AGE"]]
+        ] + cols[column_indexes["POPULATION_EST_2020_2022_START"]:
+                 column_indexes["POPULATION_EST_2020_2022_END"]] + [
                      cols[column_indexes["POPULATION_EST_2020"]]
                  ]
     pop_cols = [val for val in req_cols if "POPESTIMATE" in val]
@@ -994,9 +1122,73 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
 
 def _process_county_2000_2020(file_path: str,
                               county_conf: dict) -> pd.DataFrame:
-    """
+    """_process_county_2000_2020
     Returns the Cleaned DataFrame consists
     county data for the year 2000-2020.
+
+    Args:
+        file_path (str): Input File Path
+
+    Returns:
+        pd.DataFrame: Cleaned DataFrame
+    """
+    data_df = _load_data_df(path=file_path,
+                            file_format="csv",
+                            header=0,
+                            encoding="latin-1")
+    data_df = data_df[(~data_df["YEAR"].isin(county_conf["exclude_year"])) & (
+        data_df["AGEGRP"] != county_conf["exclude_age_grp"])].reset_index(
+            drop=True)
+    if "replace_year_from" in county_conf.keys():
+        data_df["YEAR"] = data_df["YEAR"].astype("str").str.replace(
+            county_conf["replace_year_from"],
+            county_conf["replace_year_to"]).astype("int")
+    data_df["YEAR"] = county_conf["add_base_year"] + data_df["YEAR"]
+    # Mapping Dataset Headers to its FullForm
+    cols_mapper = _get_mapper_cols_dict("header_mappers")
+    cols = data_df.columns.to_list()
+    for idx, val in enumerate(cols):
+        cols[idx] = cols_mapper.get(val, val)
+    data_df.columns = cols
+    # Adding Leading Zeros for State's Fips Code.
+    #  Before padding STATE = 6, After padding STATE = 06
+    data_df["STATE"] = data_df["STATE"].astype("str").str.pad(width=2,
+                                                              side="left",
+                                                              fillchar="0")
+    # Adding Leading Zeros for County's Fips Code.
+    # Before padding COUNTY = 20, After padding COUNTY = 020
+    data_df["COUNTY"] = data_df["COUNTY"].astype("str").str.pad(width=3,
+                                                                side="left",
+                                                                fillchar="0")
+    data_df["Location"] = "geoId/" + data_df["STATE"] + data_df["COUNTY"]
+    # Deriving New Columns
+    derived_cols = _get_mapper_cols_dict(county_conf["derived_cols_string"])
+    data_df = _derive_cols(data_df, derived_cols)
+    cols = cols + list(derived_cols.keys())
+    f_cols = [val for val in cols if "Hispanic" in val]
+    data_df["Age"] = data_df["AGEGRP"].apply(county_conf["age_grp_func"])
+    if "replace_age_grp_from" in county_conf.keys():
+        data_df["Age"] = data_df["Age"].str.replace(
+            county_conf["replace_age_grp_from"],
+            county_conf["replace_age_grp_to"])
+    data_df = pd.melt(data_df,
+                      id_vars=["Year", "Location", "Age"],
+                      value_vars=f_cols,
+                      var_name="SV",
+                      value_name='Count_Person')
+    data_df["SV"] = data_df.apply(
+        lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
+    f_cols = ["Year", "Location", "SV", "Measurement_Method", "Count_Person"]
+    # Deriving Measurement Method for the SV"s
+    data_df = _add_measurement_method(data_df, "SV", "Measurement_Method")
+    return data_df[f_cols]
+
+
+def _process_county_2000_2022(file_path: str,
+                              county_conf: dict) -> pd.DataFrame:
+    """
+    Returns the Cleaned DataFrame consists
+    county data for the year 2000-2022.
 
     Args:
         file_path (str): Input File Path
@@ -1146,6 +1338,11 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
             data_df = _process_state_2000_2010(file_path)
         elif "SC-EST2020-ALLDATA6" in file_path:
             data_df = _process_state_2010_2020(file_path)
+        elif "sc-est2022-alldata" in file_path:
+            data_df = _process_state_2020_2022(file_path)
+        #elif "sc-est2022-sr11h-01" in file_path:
+        #data_df = _state_2022(file_path)
+
         elif "st_int_asrh" in file_path:
             data_df = _process_state_1980_1989(file_path)
         elif "CQI.TXT" in file_path:
@@ -1162,6 +1359,9 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
         elif "CC-EST2020" in file_path:
             data_df = _process_county_2000_2020(file_path,
                                                 _COUNTY_2010_2020_INFO)
+        elif "cc-est2022-all" in file_path:
+            data_df = _process_county_2000_2022(file_path,
+                                                _COUNTY_2020_2022_INFO)
         data_df = _convert_to_int(data_df)
 
         data_df.to_csv(cleaned_csv_file_path,
@@ -1173,6 +1373,10 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     sv_list.sort()
     data_df = pd.read_csv(cleaned_csv_file_path, header=0)
     data_df = _measurement_method(data_df)
+    #Drop duplicate and keep last by Shamim
+    #Year,Location,SV,Measurement_Method
+    data_df = data_df.drop_duplicates(
+        subset=['Year', 'Location', 'SV', 'Measurement_Method'], keep='last')
     data_df.to_csv(cleaned_csv_file_path, index=False)
     _generate_mcf(sv_list, mcf_file_path)
     _generate_tmcf(tmcf_file_path)
