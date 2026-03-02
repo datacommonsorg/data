@@ -11,7 +11,7 @@ https://stat.gov.pl/en/databases/
 The data comes from Poland's official statistical authority and includes comprehensive demographic variables such as population counts, age distributions, and other census-related metrics.
 
 ## How To Download Input Data
-To download the data, you'll need to use the provided download script download_input_data.py. This script processes the statvar_imports/statistics_poland/poland_data_sample/poland_raw.xlsx file to generate StatisticsPoland_input.csv inside a new "poland_input" folder.
+To download the data, you'll need to use the provided download script download_input_data.py. This script processes the StatisticsPoland_input.csv file available in Bucket with path datcom-prod-imports/statvar_imports/statistics_poland/poland_data_sample to generate StatisticsPoland_input_*.csv inside a new "source_files" folder.
 
 type of place: State.
 
@@ -29,18 +29,18 @@ To process the Poland Census data and generate statistical variables, use the fo
 **For Test Data Run**
 ```bash
 python3 tools/statvar_importer/stat_var_processor.py \
-    --input_data='statvar_imports/statistics_poland/test/StatisticsPoland_input.csv' \
-    --pv_map='statvar_imports/statistics_poland/StatisticsPoland_pvmap.csv' \
-    --output_path='statvar_imports/statistics_poland/test/StatisticsPoland_output' \
-    --config_file='statvar_imports/statistics_poland/Statistics_Poland_metadata.csv' \
-    --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+  --input_data=statvar_imports/statistics_poland/test/StatisticsPoland_input.csv \
+  --pv_map=statvar_imports/statistics_poland/StatisticsPoland_pvmap.csv \
+  --output_path=statvar_imports/statistics_poland/test/StatisticsPoland_output \
+  --config_file=statvar_imports/statistics_poland/StatisticsPoland_metadata.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 **For Main data run**
 ```bash
 python3 tools/statvar_importer/stat_var_processor.py \
-    --input_data='statvar_imports/statistics_poland/StatisticsPoland_input.csv' \
-    --pv_map='statvar_imports/statistics_poland/StatisticsPoland_pvmap.csv' \
-    --output_path='statvar_imports/statistics_poland/StatisticsPoland_output' \
-    --config_file='statvar_imports/statistics_poland/Statistics_Poland_metadata.csv' \
-    --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+  --input_data='statvar_imports/statistics_poland/source_files/*.csv' \
+  --pv_map=statvar_imports/statistics_poland/StatisticsPoland_pvmap.csv \
+  --output_path=statvar_imports/statistics_poland/StatisticsPoland_output \
+  --config_file=statvar_imports/statistics_poland/StatisticsPoland_metadata.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
