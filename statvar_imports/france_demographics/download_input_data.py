@@ -30,9 +30,9 @@ def main():
         )
         
         if result:
-            print(f"Done: {result}")
+            print(f"Successfully downloaded: {result}")
         else:
-            print(f"Error: Could not download {name}")
+            raise RuntimeError(f"Failed to download file '{name}' from {url}")
 
 if __name__ == "__main__":
     main()
