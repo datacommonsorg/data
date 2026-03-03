@@ -88,6 +88,7 @@ from schema_resolver import SchemaResolver
 from json_to_csv import file_json_to_csv
 from schema_generator import generate_schema_nodes, generate_statvar_name
 from schema_checker import sanity_check_nodes
+from schema_reconciler import SchemaReconciler
 
 # imports from ../../util
 from config_map import ConfigMap, read_py_dict_from_file
@@ -1228,6 +1229,13 @@ class StatVarsMap:
     def filter_svobs(self):
         """Filter SVObs to remove outliers."""
         filter_data_svobs(self._statvar_obs_map, self._config, self._counters)
+
+    def reconcile_nodes(self):
+        """Reconcile statvar and obs to new property:values or statvars."""
+        recon = SchemaReconciler(config=self._config.get_configs(),
+                               counters=self._counters)
+        recon.reconcile_nodes(self._statvars_map)
+        recon.reconcile_nodes(self._statvar_obs_map)
 
     def write_statvar_obs_csv(
         self,
@@ -2789,6 +2797,8 @@ class StatVarDataProcessor:
         logging.info(f'Generating output: {output_path}')
         self._counters.set_prefix('2:prepare_output_')
         self._statvars_map.drop_invalid_statvars()
+        if self._config.get('reconcile_nodes', True):
+           self._statvars_map.reconcile_nodes()
         if self._config.get('generate_statvar_mcf', True):
             self._counters.set_prefix('3:write_statvar_mcf_')
             statvar_mcf_file = self._config.get('output_statvar_mcf',
