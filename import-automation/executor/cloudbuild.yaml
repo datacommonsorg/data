@@ -43,7 +43,7 @@ steps:
     args:
       - '-c'
       - |
-        python verify_import.py
+        python import_test.py
     dir: 'import-automation/executor'
     waitFor: ['push']
 
