@@ -4,6 +4,17 @@ The ClimateTrace dataset offers comprehensive and up-to-date greenhouse gas emis
 
 This project is designed to download, process, and segregate this data. It automates the collection of country-specific and gas-specific emissions data, transforms it into a standardized format, and prepares it for further analysis or ingestion into systems like Data Commons.
 
+## Data Aggregation
+
+The `download_and_segregate_by_gas.py` script aggregates greenhouse gas emissions data for the following types:
+- **CO2** (Carbon Dioxide)
+- **CH4** (Methane)
+- **N2O** (Nitrous Oxide)
+- **CO2e_20yr** (CO2 equivalent, 20-year global warming potential)
+- **CO2e_100yr** (CO2 equivalent, 100-year global warming potential)
+
+For each gas, the script downloads country-specific packages from ClimateTrace, extracts relevant CSV data (specifically files containing "country" in their name), and concatenates them into a single comprehensive CSV file located in the `input_files/` directory (e.g., `all_countries_co2.csv`).
+
 ## Features
 
 *   **Dynamic Data Acquisition**: Fetches a comprehensive list of countries from the ClimateTrace API and merges it with a local file (`check_country.csv`) to ensure all required locations are included.

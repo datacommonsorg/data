@@ -36,13 +36,13 @@ def download_and_process_zip(url, country_iso, gas):
                 return None
     except requests.exceptions.RequestException as e:
         logging.error(f"    -> Failed to download {url}: {e}")
-        return None
+        raise
     except zipfile.BadZipFile:
         logging.error(f"    -> Bad zip file for {url}")
-        return None
+        raise
     except Exception as e:
         logging.error(f"    -> An unexpected error occurred for {url}: {e}")
-        return None
+        raise
 
 def download_and_segregate_by_gas():
     """
@@ -59,7 +59,8 @@ def download_and_segregate_by_gas():
         api_country_codes = {country['id'] for country in countries}
         logging.info(f"Successfully fetched {len(api_country_codes)} countries from API.")
     except requests.exceptions.RequestException as e:
-        logging.warning(f"Warning: Could not fetch country list from API: {e}. Proceeding with local list only.")
+        logging.error(f"Error: Could not fetch country list from API: {e}")
+        raise
 
     local_country_codes = set()
     try:
@@ -131,6 +132,7 @@ def download_and_segregate_by_gas():
             logging.info(f"  -> Successfully created {output_filename} with {len(final_df)} rows.\n")
         except Exception as e:
             logging.error(f"  -> An error occurred during the final processing for {gas}: {e}\n")
+            raise
 
     logging.info("--- All processing complete. ---")
 

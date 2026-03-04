@@ -1,7 +1,10 @@
-Node: E:sectors_CH4_output->E0
-observationAbout: C:sectors_CH4_output->observationAbout
-observationDate: C:sectors_CH4_output->observationDate
-variableMeasured: C:sectors_CH4_output->variableMeasured
-value: C:sectors_CH4_output->value
-typeOf: dcs:StatVarObservation
+Node: E:output_sectors->E0
+observationAbout: C:output_sectors->observationAbout
+observationDate: C:output_sectors->observationDate
+variableMeasured: C:output_sectors->variableMeasured
+value: C:output_sectors->value
+unit: C:output_sectors->unit
+measurementMethod: C:output_sectors->measurementMethod
+observationPeriod: C:output_sectors->observationPeriod
 #Aggregate: sum
+typeOf: dcs:StatVarObservation

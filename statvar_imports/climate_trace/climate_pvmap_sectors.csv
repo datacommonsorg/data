@@ -16,7 +16,7 @@ iso3_country,observationAbout,country/{Data},,,,,,,,,,,,
 2028-01-01 00:00:00,observationDate,2028,,,,,,,,,,,,
 2029-01-01 00:00:00,observationDate,2029,,,,,,,,,,,,
 2030-01-01 00:00:00,observationDate,2030,,,,,,,,,,,,
-emissions_quantity,value,{Number},populationType,Emissions,measuredProperty,amount,measurementQualifier,Annual,#Aggregate,sum,observationPeriod,P1Y,unit,MetricTon
+emissions_quantity,value,{Number},populationType,Emissions,measuredProperty,amount,measurementQualifier,Annual,#Aggregate,sum,observationPeriod,P1Y,unit,MetricTon,measurementMethod,dcAggregate/ClimateTraceEstimate
 co2,emittedThing,CarbonDioxide,,,,,,,,,,,,
 ch4,emittedThing,Methane,,,,,,,,,,,,
 co2e_20yr,emittedThing,CarbonDioxideEquivalent20YearGlobalWarmingPotential,,,,,,,,,,,,
