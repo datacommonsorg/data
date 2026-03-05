@@ -13,7 +13,7 @@ The `download_and_segregate_by_gas.py` script aggregates greenhouse gas emission
 - **CO2e_20yr** (CO2 equivalent, 20-year global warming potential)
 - **CO2e_100yr** (CO2 equivalent, 100-year global warming potential)
 
-For each gas, the script downloads country-specific packages from ClimateTrace, extracts relevant CSV data (specifically files containing "country" in their name), and concatenates them into a single comprehensive CSV file located in the `input_files/` directory (e.g., `all_countries_co2.csv`).
+The current data is available at the subsector level. To maintain consistency with previous sector-level records, we used pvmap to aggregate the subsector data.
 
 ## Features
 
