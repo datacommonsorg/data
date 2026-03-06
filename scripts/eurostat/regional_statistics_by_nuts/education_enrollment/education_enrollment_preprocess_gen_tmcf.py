@@ -30,7 +30,6 @@ _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 flags.DEFINE_string('mode', '', 'Options: download or process')
 
-#Added 3 new Svs for newly added year range 18-64 
 _OUTPUT_COLUMNS = [
     'Date',
     'GeoId',
