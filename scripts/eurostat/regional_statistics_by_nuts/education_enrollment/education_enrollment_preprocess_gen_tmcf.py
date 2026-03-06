@@ -120,6 +120,17 @@ def translate_wide_to_long(file_path):
 
 
 def preprocess(df, cleaned_csv):
+    """Preprocesses and reshapes data, then saves it to a CSV file.
+
+    The function pivots the DataFrame to have separate columns for different
+    age groups, combines them into a single row per geo-location and year,
+    and then writes the result to a CSV file.
+
+    Args:
+        df: The raw, unprocessed DataFrame with columns for different age groups.
+        cleaned_csv: The path to the CSV file where the cleaned data will be saved.
+    """
+
     try:
         logging.info(f'Processing file: {cleaned_csv}')
         df = df.replace(np.nan, '', regex=True)
