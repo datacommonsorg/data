@@ -26,16 +26,17 @@ EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "sample_output")
 
 
 class TestProcess(unittest.TestCase):
+
     def __init__(self, methodName: str = "runTest") -> None:
         super().__init__(methodName)
         input_path = os.path.join(TEST_DATASET_DIR, 'sample_data.tsv')
         self.CLEANED_CSV_FILE_PATH = os.path.join(EXPECTED_FILES_DIR,
                                                   "test_output.csv")
-        
+
         # Transform and filter data to match original script logic
         df = translate_wide_to_long(input_path)
         df = df[(df['unit'] == 'PC') & (df['age'].isin(['Y18-64', 'Y25-64']))]
-        
+
         preprocess(df, self.CLEANED_CSV_FILE_PATH)
 
         with open(self.CLEANED_CSV_FILE_PATH, encoding="utf-8-sig") as csv_file:

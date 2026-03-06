@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import sys
+
 sys.path.insert(1, '../../../../util')
 from six.moves import urllib
 from alpha2_to_dcid import COUNTRY_MAP
@@ -60,6 +61,7 @@ def download_data(download_link, download_path):
         logging.info(f'Downloaded {download_path} from {download_link}')
     except Exception as e:
         logging.fatal(f'Download error for: {download_link}: {e}')
+
 
 def translate_wide_to_long(file_path):
     """ Reshaping DataFrames from Wide to Long Format
@@ -115,6 +117,7 @@ def translate_wide_to_long(file_path):
     except Exception as e:
         logging.fatal(f'Transforming error {e}')
 
+
 def preprocess(df, cleaned_csv):
     """Preprocesses and reshapes data, then saves it to a CSV file.
 
@@ -130,29 +133,43 @@ def preprocess(df, cleaned_csv):
     try:
         logging.info(f'Processing file: {cleaned_csv}')
         df = df.replace(np.nan, '', regex=True)
-        
+
         with open(cleaned_csv, 'w', newline='') as f_out:
-            writer = csv.DictWriter(f_out, fieldnames=_OUTPUT_COLUMNS, lineterminator='\n')
+            writer = csv.DictWriter(f_out,
+                                    fieldnames=_OUTPUT_COLUMNS,
+                                    lineterminator='\n')
             writer.writeheader()
-            
-            # Grouping ensures that Y25-64 and Y18-64 data points for the same 
+
+            # Grouping ensures that Y25-64 and Y18-64 data points for the same
             # place and year end up on the SAME row in your CSV.
             for (geo, time), group in df.groupby(['geo', 'time']):
                 row_to_write = {'Date': time[:4], 'GeoId': geo}
-                
+
                 for _, row in group.iterrows():
                     # Handle the 25-64 Age Group
                     if row['age'] == 'Y25-64':
-                        row_to_write['Count_Person_25To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_25To64Years_Female'] = row.get('F', '')
-                        row_to_write['Count_Person_25To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_25To64Years_Male'] = row.get('M', '')
-                        row_to_write['Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years'] = row.get('T', '')
-                    
+                        row_to_write[
+                            'Count_Person_25To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_25To64Years_Female'] = row.get(
+                                'F', '')
+                        row_to_write[
+                            'Count_Person_25To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_25To64Years_Male'] = row.get(
+                                'M', '')
+                        row_to_write[
+                            'Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years'] = row.get(
+                                'T', '')
+
                     # Handle the 18-64 Age Group (Now with Male and Female)
                     elif row['age'] == 'Y18-64':
-                        row_to_write['Count_Person_18To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_18To64Years_Female'] = row.get('F', '')
-                        row_to_write['Count_Person_18To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_18To64Years_Male'] = row.get('M', '')
-                        row_to_write['Count_Person_18To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_18To64Years'] = row.get('T', '')
-                
+                        row_to_write[
+                            'Count_Person_18To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_18To64Years_Female'] = row.get(
+                                'F', '')
+                        row_to_write[
+                            'Count_Person_18To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_18To64Years_Male'] = row.get(
+                                'M', '')
+                        row_to_write[
+                            'Count_Person_18To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_18To64Years'] = row.get(
+                                'T', '')
+
                 writer.writerow(row_to_write)
         logging.info('File processing completed')
     except Exception as e:
@@ -210,14 +227,14 @@ def main(_):
 
     if mode == "" or mode == "process":
         translate_df = translate_wide_to_long(input_file)
-        
+
         # Keep both age groups but ensure we only use the Percentage unit
-        translate_df = translate_df[
-            (translate_df['unit'] == 'PC') & 
-            (translate_df['age'].isin(['Y18-64', 'Y25-64']))
-        ]
-        
+        translate_df = translate_df[(translate_df['unit'] == 'PC') & (
+            translate_df['age'].isin(['Y18-64', 'Y25-64']))]
+
         preprocess(translate_df, _CLEANED_CSV)
         get_template_mcf(_OUTPUT_COLUMNS, _TMCF)
+
+
 if __name__ == "__main__":
     app.run(main)
