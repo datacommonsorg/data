@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import sys
-
 sys.path.insert(1, '../../../../util')
 from six.moves import urllib
 from alpha2_to_dcid import COUNTRY_MAP
@@ -61,7 +60,6 @@ def download_data(download_link, download_path):
         logging.info(f'Downloaded {download_path} from {download_link}')
     except Exception as e:
         logging.fatal(f'Download error for: {download_link}: {e}')
-
 
 def translate_wide_to_long(file_path):
     """ Reshaping DataFrames from Wide to Long Format
@@ -116,7 +114,6 @@ def translate_wide_to_long(file_path):
         return df
     except Exception as e:
         logging.fatal(f'Transforming error {e}')
-
 
 def preprocess(df, cleaned_csv):
     """Preprocesses and reshapes data, then saves it to a CSV file.
