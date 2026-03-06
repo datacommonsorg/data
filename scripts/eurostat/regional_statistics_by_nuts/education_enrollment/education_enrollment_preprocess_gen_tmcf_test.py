@@ -47,11 +47,5 @@ class TestProcess(unittest.TestCase):
 
         # Assertion
         self.assertEqual(expected_csv_data, actual_csv_data)
-
-    def tearDown(self):
-        """Clean up the generated test file after the test runs."""
-        if os.path.exists(self.actual_csv_path):
-            os.remove(self.actual_csv_path)
-
 if __name__ == "__main__":
     unittest.main()
