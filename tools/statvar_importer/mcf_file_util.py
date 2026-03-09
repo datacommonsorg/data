@@ -43,6 +43,7 @@ python3 mcf_file_util.py --input_mcf=test_data/*.mcf
 from collections import OrderedDict
 import csv
 import glob
+import hashlib
 import os
 import re
 import sys
@@ -1051,6 +1052,7 @@ def write_mcf_nodes(
             node_dict.update(d)
         file_util.file_write_csv_dict(node_dict, filename)
         return
+    filename_base = os.path.basename(filename)
     with file_util.FileIO(filename, mode) as output_f:
         if header is not None:
             output_f.write(header)
@@ -1061,6 +1063,11 @@ def write_mcf_nodes(
                 node_keys = sorted(node_keys)
             for dcid in node_keys:
                 node = nodes[dcid]
+                if 'dcid' not in node and 'Node' not in node:
+                    # Generate a local dcid in a node copy
+                    node = dict(node)
+                    node['Node'] = f'l:{filename_base}/' + hashlib.md5(
+                        dcid.encode('utf-8')).hexdigest()
                 if sort:
                     node = normalize_mcf_node(node, ignore_comments)
                 pvs = node_dict_to_text(node, default_pvs)

@@ -273,11 +273,8 @@ def validator_compare_nodes(input_nodes: dict,
             golden_key_sets[node_props_key] = {}
         golden_key_sets[node_props_key][node_key] = node
 
-    logging.level_debug() and logging.debug(
-        f'Got {len(golden_key_sets)} sets for {len(golden_nodes)} goldens: {golden_key_sets.keys()}'
-    )
     logging.info(
-        f'Comparing {len(input_nodes)} nodes against {len(golden_nodes)} goldens in {len(golden_key_sets)} sets using properties: {golden_key_props}'
+        f'Comparing {len(input_nodes)} nodes against {len(golden_nodes)} goldens in {len(golden_key_sets)} sets using properties: {golden_key_sets.keys()}'
     )
     counters.add_counter('validate-goldens-sets', len(golden_key_sets))
     counters.add_counter('validate-goldens-inputs', len(input_nodes))
@@ -296,7 +293,6 @@ def validator_compare_nodes(input_nodes: dict,
                                        strip_namespaces=strip_namespaces)
             # Initialize match count to 0.
             golden_matches[key] = 0
-    logging.debug(f'DELETE: matching golden keys: {golden_matches.keys()}')
 
     # Step 3: Iterate through input nodes and try to match them against the golden fingerprints.
     for node in input_nodes.values():
@@ -355,7 +351,6 @@ def load_nodes_from_file(files: str) -> dict:
                 mcf_file_util.add_mcf_node(node, nodes)
 
     logging.info(f'Loaded {len(nodes)} nodes from {input_files}')
-    logging.debug(f'DELETE: nodes: {nodes}')
     return nodes
 
 
@@ -491,10 +486,16 @@ def generate_goldens(input_files: str,
     logging.info(
         f'Generated {len(golden_nodes)} unique goldens from {len(input_nodes)} input nodes.'
     )
+    counters.add_counter('generated-golden-output', len(golden_nodes))
 
     if golden_nodes and output_file:
         logging.info(f'Writing {len(golden_nodes)} goldens to {output_file}')
-        mcf_file_util.write_mcf_nodes([golden_nodes], output_file)
+        if file_util.file_is_csv(output_file):
+            file_util.file_write_csv_dict(golden_nodes,
+                                          output_file,
+                                          key_column_name=None)
+        else:
+            mcf_file_util.write_mcf_nodes([golden_nodes], output_file)
 
     return golden_nodes
 
