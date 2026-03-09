@@ -54,6 +54,14 @@ flags.DEFINE_integer(
 flags.DEFINE_integer(
     'sampler_rows_per_key', 5,
     'The maximum number of rows to select for each unique value found.')
+flags.DEFINE_integer(
+    'sampler_uniques_per_column', 10,
+    'The maximum number of unique values to track per column. '
+    'If 0 or -1, all unique values are tracked.')
+flags.DEFINE_boolean(
+    'sampler_exhaustive', False,
+    'If True, sets sampler_output_rows and sampler_uniques_per_column to '
+    'infinity, and sampler_rows_per_key to 1, to capture every unique value.')
 flags.DEFINE_float(
     'sampler_rate', -1,
     'The sampling rate for random row selection (e.g., 0.1 for 10%).')
@@ -65,6 +73,11 @@ flags.DEFINE_string(
 flags.DEFINE_string(
     'sampler_unique_columns', '',
     'A comma-separated list of column names to use for selecting unique rows.')
+flags.DEFINE_list(
+    'sampler_must_include', [],
+    'A list of "column:file" pairs containing values that MUST be included '
+    'in the sample if they appear in the input data. '
+    'Example: "variableMeasured:prominent_svs.txt"')
 flags.DEFINE_string('sampler_input_delimiter', ',',
                     'The delimiter used in the input CSV file.')
 flags.DEFINE_string('sampler_input_encoding', 'UTF8',
@@ -75,6 +88,7 @@ flags.DEFINE_string('sampler_output_delimiter', None,
 _FLAGS = flags.FLAGS
 
 import file_util
+import mcf_file_util
 
 from config_map import ConfigMap
 from counters import Counters
@@ -144,6 +158,11 @@ class DataSampler:
                 if col.strip()
             ]
 
+        # Must include values: dict of column_name -> set of values
+        self._must_include_values = self._config.get('sampler_must_include', {})
+        # Map of column index -> set of values
+        self._must_include_indices = {}
+
     def __del__(self) -> None:
         """Logs the column headers and counts upon object deletion."""
         logging.log(2, f'Sampler column headers: {self._column_headers}')
@@ -206,14 +225,25 @@ class DataSampler:
         Args:
             row: A header row containing column names.
         """
-        if not self._unique_column_names:
-            return
-
         for index, column_name in enumerate(row):
-            if column_name in self._unique_column_names:
+            if self._unique_column_names and column_name in self._unique_column_names:
                 self._unique_column_indices[column_name] = index
                 logging.level_debug() and logging.debug(
                     f'Mapped unique column "{column_name}" to index {index}')
+
+            if self._must_include_values and column_name in self._must_include_values:
+                self._must_include_indices[index] = self._must_include_values[
+                    column_name]
+                logging.info(
+                    f'Mapped must-include column "{column_name}" to index {index}'
+                )
+
+    def _is_must_include(self, column_index: int, value: str) -> bool:
+        """Checks if a column value is in the must-include list."""
+        if column_index not in self._must_include_indices:
+            return False
+        # Normalize the input value before checking against the set
+        return mcf_file_util.strip_namespace(value) in self._must_include_indices[column_index]
 
     def _add_column_header(self, column_index: int, value: str) -> str:
         """Adds the first non-empty value of a column as its header.
@@ -283,12 +313,22 @@ class DataSampler:
             return False
         max_count = self._config.get('sampler_rows_per_key', 3)
         max_uniques_per_col = self._config.get('sampler_uniques_per_column', 10)
+        if max_uniques_per_col <= 0:
+            max_uniques_per_col = sys.maxsize
+
         for index in range(len(row)):
-            # Skip columns not in unique_columns list
-            if not self._should_track_column(index):
-                continue
             value = row[index]
             value_count = self._get_column_count(index, value)
+
+            # Rule 1: Always include if it's a must-include value and we haven't reached per-key limit.
+            if value_count < max_count and self._is_must_include(index, value):
+                self._counters.add_counter('sampler-selected-must-include', 1)
+                return True
+
+            # Skip columns not in unique_columns list for general unique sampling
+            if not self._should_track_column(index):
+                continue
+
             if value_count == 0 or value_count < max_count:
                 # This is a new value for this column.
                 col_counts = self._column_counts.get(index, {})
@@ -500,19 +540,49 @@ def get_default_config() -> dict:
     # Use default values of flags for tests
     if not _FLAGS.is_parsed():
         _FLAGS.mark_as_parsed()
-    return {
+
+    # Parse must-include flag if present
+    must_include = {}
+    for item in _FLAGS.sampler_must_include:
+        if ':' in item:
+            col, filepath = item.split(':', 1)
+            if os.path.exists(filepath):
+                logging.info(f'Loading must-include values for {col} from {filepath}')
+                vals = set()
+                with open(filepath, 'r') as f:
+                    for line in f:
+                        v = line.strip()
+                        if v:
+                            # Strip namespaces (e.g. dcid:) for robust matching
+                            vals.add(mcf_file_util.strip_namespace(v))
+                if vals:
+                    must_include[col] = vals
+            else:
+                logging.warning(f'Must-include file not found: {filepath}')
+
+    config = {
         'sampler_rate': _FLAGS.sampler_rate,
         'sampler_input': _FLAGS.sampler_input,
         'sampler_output': _FLAGS.sampler_output,
         'sampler_output_rows': _FLAGS.sampler_output_rows,
         'header_rows': _FLAGS.sampler_header_rows,
         'sampler_rows_per_key': _FLAGS.sampler_rows_per_key,
+        'sampler_uniques_per_column': _FLAGS.sampler_uniques_per_column,
         'sampler_column_regex': _FLAGS.sampler_column_regex,
         'sampler_unique_columns': _FLAGS.sampler_unique_columns,
+        'sampler_must_include': must_include,
         'input_delimiter': _FLAGS.sampler_input_delimiter,
         'output_delimiter': _FLAGS.sampler_output_delimiter,
         'input_encoding': _FLAGS.sampler_input_encoding,
     }
+
+    if _FLAGS.sampler_exhaustive:
+        # Exhaustive mode overrides limits to capture all unique values.
+        config['sampler_output_rows'] = -1
+        config['sampler_uniques_per_column'] = -1
+        config['sampler_rows_per_key'] = 1
+
+    return config
 
 
 def main(_):
