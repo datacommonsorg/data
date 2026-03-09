@@ -39,6 +39,9 @@ python $DC_DATA_REPO_PATH/tools/agentic_import/sdmx_import_pipeline.py \
   --sdmx.endpoint="https://sdmx.example.org/data" \
   --sdmx.agency="AGENCY_ID" \
   --sdmx.dataflow.id="DATAFLOW_ID" \
+  --sdmx.dataflow.key="FREQ:Q" \
+  --sdmx.dataflow.key="REF_AREA:USA" \
+  --sdmx.dataflow.param="startPeriod:2022" \
   --dataset_prefix="my_dataset"
 ```
 
@@ -47,8 +50,8 @@ python $DC_DATA_REPO_PATH/tools/agentic_import/sdmx_import_pipeline.py \
 -   `--sdmx.endpoint`: The SDMX API endpoint URL.
 -   `--sdmx.agency`: The SDMX agency ID.
 -   `--sdmx.dataflow.id`: The SDMX dataflow ID.
--   `--sdmx.dataflow.key`: (Optional) Filter key for data download.
--   `--sdmx.dataflow.param`: (Optional) Additional parameters for data download.
+-   `--sdmx.dataflow.key`: (Optional) Repeatable filter for data download, for example `--sdmx.dataflow.key=FREQ:Q --sdmx.dataflow.key=REF_AREA:USA`.
+-   `--sdmx.dataflow.param`: (Optional) Repeatable query parameter, for example `--sdmx.dataflow.param=startPeriod:2022 --sdmx.dataflow.param=endPeriod:2023`.
 -   `--dataset_prefix`: (Optional) Prefix for generated artifacts. Useful for disambiguating multiple datasets in the same working directory. If not provided, it is derived from the dataflow ID.
 -   `--sample.rows`: Number of rows for the sample dataset (default: 1000).
 -   `--force`: Force re-execution of all steps, ignoring saved state.

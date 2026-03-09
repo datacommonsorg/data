@@ -29,8 +29,8 @@ FLAG_SDMX_DATAFLOW_PARAM = "sdmx.dataflow.param"
 class SdmxDataflowConfig:
     """Configuration for SDMX dataflow."""
     id: str | None = None
-    key: str | None = None
-    param: str | None = None
+    key: tuple[str, ...] = ()
+    param: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)

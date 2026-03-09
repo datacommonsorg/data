@@ -118,10 +118,10 @@ class DownloadDataStep(SdmxStep):
             f"--dataflow={dataflow}",
             f"--output_path={output_path}",
         ]
-        if self._config.sdmx.dataflow.key:
-            args.append(f"--key={self._config.sdmx.dataflow.key}")
-        if self._config.sdmx.dataflow.param:
-            args.append(f"--param={self._config.sdmx.dataflow.param}")
+        for key in self._config.sdmx.dataflow.key:
+            args.append(f"--key={key}")
+        for param in self._config.sdmx.dataflow.param:
+            args.append(f"--param={param}")
         if self._config.run.verbose:
             args.append("--verbose")
         full_command = [sys.executable, str(SDMX_CLI_PATH)] + args

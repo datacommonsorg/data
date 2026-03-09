@@ -70,11 +70,11 @@ def _define_flags() -> None:
                         "Target SDMX dataflow identifier.")
     flags.mark_flag_as_required(FLAG_SDMX_DATAFLOW_ID)
 
-    flags.DEFINE_string(FLAG_SDMX_DATAFLOW_KEY, None,
-                        "Optional SDMX key or filter.")
+    flags.DEFINE_multi_string(FLAG_SDMX_DATAFLOW_KEY, [],
+                              "Optional SDMX key or filter.")
 
-    flags.DEFINE_string(
-        FLAG_SDMX_DATAFLOW_PARAM, None,
+    flags.DEFINE_multi_string(
+        FLAG_SDMX_DATAFLOW_PARAM, [],
         "Optional SDMX parameter appended to the dataflow query.")
 
     flags.DEFINE_integer(_FLAG_SAMPLE_ROWS, 1000,
@@ -307,8 +307,8 @@ def prepare_config() -> PipelineConfig:
             agency=FLAGS[FLAG_SDMX_AGENCY].value,
             dataflow=SdmxDataflowConfig(
                 id=FLAGS[FLAG_SDMX_DATAFLOW_ID].value,
-                key=FLAGS[FLAG_SDMX_DATAFLOW_KEY].value,
-                param=FLAGS[FLAG_SDMX_DATAFLOW_PARAM].value,
+                key=tuple(FLAGS[FLAG_SDMX_DATAFLOW_KEY].value),
+                param=tuple(FLAGS[FLAG_SDMX_DATAFLOW_PARAM].value),
             ),
         ),
         sample=SampleConfig(rows=FLAGS[_FLAG_SAMPLE_ROWS].value,),

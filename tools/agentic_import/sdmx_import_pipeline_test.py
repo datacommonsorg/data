@@ -566,8 +566,8 @@ class SdmxTestBase(unittest.TestCase):
                 agency=agency,
                 dataflow=SdmxDataflowConfig(
                     id=dataflow,
-                    key="test-key",
-                    param="area=US",
+                    key=("test-key",),
+                    param=("area=US",),
                 ),
             ),
             run=RunConfig(
@@ -686,7 +686,7 @@ class RunPipelineTest(SdmxTestBase):
             first_state = json.load(fp)
 
         updated_dataflow = dataclasses.replace(config.sdmx.dataflow,
-                                               key="changed-key")
+                                               key=("changed-key",))
         updated_sdmx = dataclasses.replace(config.sdmx,
                                            dataflow=updated_dataflow)
         updated_config = dataclasses.replace(config, sdmx=updated_sdmx)
@@ -894,8 +894,8 @@ class SdmxStepTest(SdmxTestBase):
                 agency="AGENCY",
                 dataflow=SdmxDataflowConfig(
                     id="FLOW",
-                    key="test-key",
-                    param="area=US",
+                    key=("test-key", "ref-area:USA"),
+                    param=("area=US", "startPeriod=2022"),
                 ),
             ),
             run=RunConfig(
@@ -912,9 +912,41 @@ class SdmxStepTest(SdmxTestBase):
                 "download-data",
                 "--endpoint=https://example.com",
                 "--key=test-key",
+                "--key=ref-area:USA",
                 "--param=area=US",
+                "--param=startPeriod=2022",
             ],
             path_attrs=["output_path"],
+        )
+
+    def test_download_data_step_preserves_key_and_param_order(self) -> None:
+        config = PipelineConfig(
+            sdmx=SdmxConfig(
+                endpoint="https://example.com",
+                agency="AGENCY",
+                dataflow=SdmxDataflowConfig(
+                    id="FLOW",
+                    key=("FREQ:Q", "REF_AREA:USA"),
+                    param=("startPeriod:2022", "endPeriod:2023"),
+                ),
+            ),
+            run=RunConfig(
+                command="test",
+                dataset_prefix="demo",
+                working_dir=self._tmpdir,
+                verbose=True,
+            ),
+        )
+        step = DownloadDataStep(name="test-step", config=config)
+        command = step._prepare_command().full_command
+        self.assertEqual(
+            command[-5:-1],
+            [
+                "--key=FREQ:Q",
+                "--key=REF_AREA:USA",
+                "--param=startPeriod:2022",
+                "--param=endPeriod:2023",
+            ],
         )
 
     def test_download_data_step_run_and_dry_run_use_same_plan(self) -> None:
