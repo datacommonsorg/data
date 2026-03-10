@@ -70,7 +70,6 @@ East South Central(4),observationAbout,usc/EastSouthCentralDivision
 West South Central(4),observationAbout,usc/WestSouthCentralDivision
 Mountain(4),observationAbout,usc/MountainDivision
 Pacific(4),observationAbout,usc/PacificDivision
-,
 Atlanta-Sandy Springs-Roswell,observationAbout,geoId/C12060
 "Atlanta-Sandy Springs-Roswell, GA",observationAbout,geoId/C12060
 Baltimore-Columbia-Towson,observationAbout,geoId/C12580
@@ -113,8 +112,7 @@ Atlanta,observationAbout,geoId/1304000
 "Atlanta, GA",observationAbout,geoId/1304000
 Detroit-Warren-Dearborn,observationAbout,geoId/C19820
 "Detroit-Warren-Dearborn, MI",observationAbout,geoId/C19820
-Chicago-Naperville-Elgin,observationAbout,geoId/C16980
-"Chicago-Naperville-Elgin, IL-IN-WI",
+"Chicago-Naperville-Elgin, IL-IN-WI",observationAbout,geoId/C16980
 Los Angeles-Long Beach-Anaheim,observationAbout,geoId/C31080
 "Los Angeles-Long Beach-Anaheim, CA",observationAbout,geoId/C31080
 New York-Newark-Jersey City,observationAbout,geoId/C35620
