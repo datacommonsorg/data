@@ -1268,23 +1268,14 @@ def add_future_yearurls():
     # This method will generate URLs for the years 2024 to 2029
     for future_year in range(2024, 2030):
         if dt.now().year >= future_year:
-            for base_url in urls_to_scan:  # Added loop to access the template
-                url_to_check = base_url.format(YEAR=future_year)
                 try:
-                    checkurl = requests.head(url_to_check,
-                                             timeout=10,
-                                             allow_redirects=True)
-
+                    checkurl = requests.head(url_to_check, timeout=10, allow_redirects=True)
                     # If it's 200 OK and NOT an HTML file
-                    if checkurl.status_code == 200 and 'text/csv' in checkurl.headers.get(
-                            'Content-Type', ''):
-                        _FILES_TO_DOWNLOAD.append(
-                            {"download_path": url_to_check})
+                    if checkurl.status_code == 200 and 'text/csv' in checkurl.headers.get('Content-Type', ''):
+                        _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
                     else:
-                        logging.info(
-                            f"Data for {future_year} not yet available at {url_to_check}"
-                        )
-                except Exception:
+                        logging.info(f"Data for {future_year} not yet available at {url_to_check}")
+                except requests.exceptions.RequestException:
                     logging.error(f"URL unreachable: {url_to_check}")
 
 
