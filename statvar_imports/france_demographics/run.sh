@@ -14,7 +14,7 @@ download_and_rename() {
     local temp_name=$(basename "$url")
     
     echo "Downloading $temp_name..."
-    python ../../util/download_util_script.py --download_url="$url" --output_folder=input_files/
+    python3 ../../util/download_util_script.py --download_url="$url" --output_folder=input_files/
     
     echo "Renaming $temp_name to $final_name..."
     mv "input_files/$temp_name" "input_files/$final_name"
