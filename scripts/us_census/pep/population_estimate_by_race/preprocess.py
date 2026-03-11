@@ -1212,8 +1212,6 @@ class CensusUSAPopulationByRace:
 
 
 # The outputs are loaded into
-
-
 def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a csv file format.
