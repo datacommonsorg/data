@@ -974,7 +974,7 @@ class CensusUSAPopulationByRace:
             file (str) : String of Dataset File Path
 
         Returns:
-            None
+            bool: True if transformation is successful or skipped, False otherwise.
         """
         if df is None or df.empty:
             logging.warning(f"No data to transform for file: {file_path}")
