@@ -1255,31 +1255,37 @@ def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
 def add_future_yearurls():
     """
     This method scans the download URLs for future years.
-
     """
     global _FILES_TO_DOWNLOAD
     with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
         _FILES_TO_DOWNLOAD = json.load(inpit_file)
+    
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
     ]
+    
     # This method will generate URLs for the years 2024 to 2029
     for future_year in range(2024, 2030):
         if dt.now().year >= future_year:
-            try:
-                checkurl = requests.head(url_to_check,
-                                         timeout=10,
-                                         allow_redirects=True)
-                # If it's 200 OK and NOT an HTML file
-                if checkurl.status_code == 200 and 'text/csv' in checkurl.headers.get(
-                        'Content-Type', ''):
-                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
-                else:
-                    logging.info(
-                        f"Data for {future_year} not yet available at {url_to_check}"
-                    )
-            except requests.exceptions.RequestException:
-                logging.error(f"URL unreachable: {url_to_check}")
+            for url_template in urls_to_scan:
+                # FIX: Define url_to_check by formatting the template
+                url_to_check = url_template.replace("{YEAR}", str(future_year))
+                
+                try:
+                    checkurl = requests.head(url_to_check,
+                                             timeout=10,
+                                             allow_redirects=True)
+                    
+                    # If it's 200 OK and NOT an HTML file
+                    if checkurl.status_code == 200 and 'text/csv' in checkurl.headers.get(
+                            'Content-Type', ''):
+                        _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+                    else:
+                        logging.info(
+                            f"Data for {future_year} not yet available at {url_to_check}"
+                        )
+                except requests.exceptions.RequestException:
+                    logging.error(f"URL unreachable: {url_to_check}")
 
 
 def download_files():
