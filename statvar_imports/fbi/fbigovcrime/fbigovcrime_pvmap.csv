@@ -1,4 +1,4 @@
-key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+key
 State,StateName,{Data},observationPeriod,P1Y,,,,,,
 Violent Crime Total,populationType,CriminalActivities,crimeType,ViolentCrime,value,{Number},crimeType,UCR_CombinedCrime,#Aggregate,sum
 Violent Crime,populationType,CriminalActivities,crimeType,ViolentCrime,value,{Number},crimeType,UCR_CombinedCrime,#Aggregate,sum
