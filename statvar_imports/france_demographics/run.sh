@@ -51,7 +51,7 @@ run_processor() {
         --pv_map="$pvmap" \
         --config_file="$CONFIG" \
         --existing_statvar_mcf="$MCF_PATH" \
-        --output_path="output/$out" 2>&1 | split -b 200k --filter='cat; echo -e "\n--- LOG CHUNK BOUNDARY ---"'
+        --output_path="output/$out"
 }
 
 datasets=(
