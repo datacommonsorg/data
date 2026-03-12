@@ -18,7 +18,6 @@ import sys
 from pathlib import Path
 
 import pandas as pd
-import requests
 
 from absl import app
 from absl import flags
@@ -27,11 +26,9 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from util.dc_api_wrapper import get_dc_api_key
+from util.dc_api_wrapper import get_datacommons_client
 
 FLAGS = flags.FLAGS
-
-_V2_SPARQL_URL = "https://api.datacommons.org/v2/sparql"
 
 
 def _define_flags() -> None:
@@ -42,23 +39,19 @@ def download_existing_facilities(output_path: str) -> str:
     Path(output_path).mkdir(exist_ok=True)
     out_file = os.path.join(output_path, 'existing_facilities.csv')
 
-    q = "SELECT DISTINCT ?dcid WHERE {?a typeOf EpaReportingFacility . ?a dcid ?dcid }"
-    headers = {"Content-Type": "application/json"}
-    api_key = get_dc_api_key()
-    if api_key:
-        headers["X-API-Key"] = api_key
-    response = requests.post(_V2_SPARQL_URL, json={"query": q}, headers=headers)
-    response.raise_for_status()
-    res = response.json()
-
+    client = get_datacommons_client()
+    response = client.node.fetch_property_values(
+        node_dcids="EpaReportingFacility", properties="typeOf", out=False)
+    facility_nodes = response.get_properties().get("EpaReportingFacility",
+                                                   {}).get("typeOf", [])
     facility_ids = []
-    for row in res.get('rows', []):
-        cells = row.get('cells', [])
-        if not cells:
+    facility_ids_set = set()
+    for node in facility_nodes:
+        value = getattr(node, "dcid", None)
+        if not value or value in facility_ids_set:
             continue
-        value = cells[0].get('value')
-        if value:
-            facility_ids.append(value)
+        facility_ids_set.add(value)
+        facility_ids.append(value)
 
     df = pd.DataFrame.from_dict({"epaGhgrpFacilityId": facility_ids})
     df.to_csv(out_file, mode="w", header=True, index=False)
