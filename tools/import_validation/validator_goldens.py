@@ -46,26 +46,26 @@ Usage:
     python3 validator_goldens.py \
       --validate_goldens_input=output/observations.csv \
       --generate_goldens_property_sets="variableMeasured|observationAbout,observationDate,variableMeasured|unit|scalingFactor|observationPeriod|measurementMethod" \
-      --validate_goldens_output=goldens/generated_goldens.mcf
+      --validate_goldens_output=goldens/generated_goldens.csv
 
     # To generate goldens using a sample of input nodes:
     python3 validator_goldens.py \
       --validate_goldens_input=output/observations.csv \
       --goldens_sampler_output_rows=100 \
       --generate_goldens_property_sets="variableMeasured|observationAbout" \
-      --validate_goldens_output=goldens/generated_goldens.mcf
+      --validate_goldens_output=goldens/generated_goldens.csv
 
     # To generate goldens capturing every unique value in every column:
     python3 validator_goldens.py \
-      --validate_goldens_input=output/observations.csv \
+      --validate_goldens_input=output/observations.mcf \
       --goldens_sampler_exhaustive \
       --validate_goldens_output=goldens/generated_goldens.mcf
 
     # To generate goldens ensuring prominent DCIDs are included if present:
     python3 validator_goldens.py \
       --validate_goldens_input=output/observations.csv \
-      --goldens_must_include="variableMeasured:prominent_svs.txt,observationAbout:prominent_places.txt" \
-      --validate_goldens_output=goldens/generated_goldens.mcf
+      --goldens_must_include="variableMeasured:selected_svs.txt,observationAbout:selected_places.txt" \
+      --validate_goldens_output=goldens/generated_goldens.csv
 """
 
 import os
@@ -117,7 +117,10 @@ flags.DEFINE_list(
     'List of "column:file" pairs containing values (e.g. prominent DCIDs) '
     'that MUST be included in the generated goldens if they appear '
     'in the input data. '
-    'Example: "variableMeasured:svs.txt,observationAbout:places.txt"')
+    'Example: "variableMeasured:website/tools/nl/embeddings/input/base/sheets_svs.csv,observationAbout:places.txt"'
+)
+flags.DEFINE_string('goldens_ignore_comments', '#',
+                    'Prefix for comments to be ignored in the golden set.')
 
 _FLAGS = flags.FLAGS
 
@@ -128,9 +131,13 @@ def get_validator_goldens_config() -> dict:
     The config includes properties to ignore and properties to use as keys
     for matching nodes, derived from command-line flags.
     """
+    if not _FLAGS.is_parsed():
+        _FLAGS.mark_as_parsed()
     return {
         'goldens_ignore_property': _FLAGS.goldens_ignore_property,
         'goldens_key_property': _FLAGS.goldens_key_property,
+        'goldens_must_include': _FLAGS.goldens_must_include,
+        'goldens_ignore_comments': _FLAGS_goldens_ignore_comments,
 
         # config options for data_sampler when generating goldens
         'sampler_output_rows': _FLAGS.goldens_sampler_output_rows,
@@ -140,8 +147,8 @@ def get_validator_goldens_config() -> dict:
 
 # Get a fingerprint for the node with the given properties
 def get_node_fingerprint(node: dict,
-                         key_property: set = {},
-                         ignore_property: set = {},
+                         key_property: set = None,
+                         ignore_property: set = None,
                          normalize: bool = True,
                          strip_namespaces: bool = True) -> str:
     """Returns a string key for the node based on the values for key_properties.
@@ -162,11 +169,11 @@ def get_node_fingerprint(node: dict,
     Returns:
         string that is a unique fingerprint for the node with the key properties.
     """
-    if not key_property:
+    if key_property is None:
         # If no key properties are specified, use all properties currently in the node.
         key_property = set(node.keys())
     if ignore_property is None:
-        ignore_property = {}
+        ignore_property = set()
 
     key_tokens = []
     # Sort keys to ensure the resulting fingerprint string is deterministic.
@@ -216,10 +223,28 @@ def normalize_value(value: str, strip_namespaces: bool = True) -> str:
     return str(value)
 
 
+def _is_commented_node(fingerprint: str, comment_char: str = '#') -> bool:
+    """Returns True if the node fingerprint is commented.
+
+    Args:
+      fingerprint: string fingerprint of the node of the form 'prop=value;...'
+
+    Returns:
+      True if any property or value is commented.
+    """
+    if not comment_char:
+        return False
+    if fingerprint.startswith(
+            comment_char
+    ) or f';{comment_char}' in fingerprint or f'={comment_char}' in fingerprint:
+        return True
+    return False
+
+
 # Compare nodes in a dictionary to nodes in a golden set
 def validator_compare_nodes(input_nodes: dict,
                             golden_nodes: dict,
-                            config: dict = {},
+                            config: dict = None,
                             counters: Counters = None) -> list:
     """Returns a summary of the differences in the input and golden nodes.
 
@@ -231,7 +256,7 @@ def validator_compare_nodes(input_nodes: dict,
             { <key1>: { <prop1>: <value1> ,,,}, <key2>: { <prop2>: <value2>..}
         golden_nodes: dictionary of key to expected nodes with property:values.
             These nodes may have fewer properties than input_nodes.
-        config: dictionary of config parameters such as ignore lists and 
+        config: dictionary of config parameters such as ignore lists and
             normalization settings.
         counters: Output counters for tracking match statistics.
 
@@ -241,6 +266,9 @@ def validator_compare_nodes(input_nodes: dict,
 
     if counters is None:
         counters = Counters()
+
+    if config is None:
+        config = get_validator_goldens_config()
 
     # Extract configuration parameters with defaults.
     ignore_props = config.get('goldens_ignore_property', {})
@@ -309,12 +337,20 @@ def validator_compare_nodes(input_nodes: dict,
                 counters.add_counter('validate-goldens-input-matched', 1)
 
     # Step 4: Identify which golden fingerprints had no corresponding input nodes.
-    missing_goldens = [
-        key for key, count in golden_matches.items() if count == 0
-    ]
-    counters.add_counter('validate-goldens-missing', len(missing_goldens))
-    counters.add_counter('validate-goldens-matched',
-                         len(golden_matches) - len(missing_goldens))
+    missing_goldens = []
+    comment_char = config.get('goldens_ignore_comments', '#')
+    for key, count in golden_matches.items():
+        if count > 0:
+            # This key got matches.
+            counters.add_counter('validate-goldens-matched', 1)
+        else:
+            if _is_commented_node(key, comment_char):
+                # No matches for this key. Ignore commented keys.
+                counters.add_counter('validate-goldens-ignored', 1)
+            else:
+                missing_goldens.append(key)
+                counters.add_counter('validate-goldens-missing', 1)
+
     if missing_goldens:
         logging.error(
             f'Missing {len(missing_goldens)} among {len(golden_nodes)} goldens in {len(input_nodes)} input nodes.'
@@ -356,10 +392,10 @@ def load_nodes_from_file(files: str) -> dict:
 
 def generate_goldens(input_files: str,
                      property_sets: list,
+                     column_include_values: dict = None,
                      output_file: str = None,
-                     config: dict = {},
-                     counters: Counters = None,
-                     must_include_values: dict = None) -> dict:
+                     config: dict = None,
+                     counters: Counters = None) -> dict:
     """Generates a set of unique golden nodes from input files.
 
     For each input node and each property set in property_sets, it extracts
@@ -371,12 +407,15 @@ def generate_goldens(input_files: str,
         input_files: Glob pattern or list of input data files.
         property_sets: List of sets/lists of properties to extract.
             Example: [{'variableMeasured'}, {'observationAbout', 'variableMeasured'}]
+        column_include_values: dictionary of column-name to set of values
+            to include in the column.
+            Example: {
+              'variable_measured': {'Count_Person', 'Count_Person_Employed'},
+              'observationAbout': {'country/USA'},
+            }
         output_file: Path to write the generated goldens to (MCF format).
         config: Configuration for normalization and sampling.
         counters: Output counters.
-        must_include_values: Optional dictionary mapping column names to sets 
-            of unique values (e.g. prominent DCIDs) to ensure they are 
-            included in the generated goldens if present in the input.
 
     Returns:
         A dictionary of unique golden nodes keyed by their fingerprints.
@@ -384,12 +423,22 @@ def generate_goldens(input_files: str,
     if counters is None:
         counters = Counters()
 
+    if config is None:
+        config = get_validator_goldens_config()
+
     # Apply sampling if requested.
     sampler_rows = config.get('sampler_output_rows', 0)
     exhaustive = config.get('sampler_exhaustive', False)
+    must_include_values = data_sampler.load_column_keys('goldens_must_include',
+                                                        [])
+    if column_include_values:
+        for col, vals in column_include_values.items():
+            if not col in must_include_values:
+                must_include_values[col] = set()
+            must_include_values[col].update(vals)
     if must_include_values:
         for col, vals in must_include_values.items():
-            counters.add_counter(f'generate-goldens-filter-{col}', len(vals))
+            counters.add_counter(f'generate-goldens-include-{col}', len(vals))
     if sampler_rows > 0 or exhaustive:
         logging.info(
             f'Sampling rows from {input_files} (exhaustive={exhaustive}, rows={sampler_rows})'
@@ -397,24 +446,14 @@ def generate_goldens(input_files: str,
         if exhaustive:
             config['sampler_column_regex'] = '.*'
 
-        # Pass must-include values to DataSampler
-        if must_include_values:
-            config['sampler_must_include'] = must_include_values
-
         # Generate a representative sample with unique values across columns.
-        sampled_file = data_sampler.sample_csv_file(input_files, config)
-        logging.info(f'Using sampled file: {sampled_file}')
+        sampled_file = data_sampler.sample_csv_file(
+            input_files, config, column_include_values=must_include_values)
         input_nodes = load_nodes_from_file(sampled_file)
+        logging.info(
+            f'Using sampled file: {sampled_file} with {len(input_nodes)} nodes')
         counters.add_counter(f'generate-goldens-sampled-nodes',
                              len(input_nodes))
-        # Clean up temporary sampled file if it was created by DataSampler.
-        if sampled_file and os.path.exists(
-                sampled_file) and '-sample.csv' in sampled_file:
-            try:
-                os.remove(sampled_file)
-            except Exception as e:
-                logging.warning(
-                    f'Failed to remove temporary file {sampled_file}: {e}')
     else:
         input_nodes = load_nodes_from_file(input_files)
         counters.add_counter('generate-goldens-input-nodes', len(input_nodes))
@@ -503,7 +542,7 @@ def generate_goldens(input_files: str,
 def validate_goldens(input_files: str,
                      golden_files: str,
                      output_file: str = None,
-                     config: dict = {},
+                     config: dict = None,
                      counters: Counters = None) -> list:
     """Validate records in the input files against goldens.
 
@@ -516,6 +555,9 @@ def validate_goldens(input_files: str,
         config: Validation configuration.
         counters: Counters for tracking progress and results.
     """
+    if config is None:
+        config = get_validator_goldens_config()
+
     # Load all nodes from input and golden files.
     input_nodes = load_nodes_from_file(input_files)
     golden_files_list = file_util.file_get_matching(golden_files)
@@ -539,47 +581,10 @@ def validate_goldens(input_files: str,
     return missing_goldens
 
 
-def load_must_include_values(must_include_list: list) -> dict:
-    """Loads unique values from files for specific columns.
-
-    Args:
-        must_include_list: List of "column:file" strings.
-
-    Returns:
-        A dictionary mapping column name to a set of values.
-    """
-    col_map = {}
-    for item in column_keys_list:
-        if ':' not in item:
-            logging.warning(f'Invalid column:file pair: {item}')
-            continue
-
-        column, filepath = item.split(':', 1)
-        if not os.path.exists(filepath):
-            logging.warning(f'File not found for column {column}: {filepath}')
-            continue
-
-        logging.info(f'Loading additional keys for {column} from {filepath}')
-        vals = set()
-        with open(filepath, 'r') as f:
-            for line in f:
-                val = line.strip()
-                if val:
-                    vals.add(mcf_file_util.strip_namespace(val))
-        col_map[column] = vals
-
-    return col_map
-
-
 def main(_):
     """Main entry point for the validator script."""
     logging.set_verbosity(2)
     counters = Counters()
-
-    must_include_values = {}
-    if _FLAGS.goldens_must_include:
-        must_include_values = load_must_include_values(
-            _FLAGS.goldens_must_include)
 
     if _FLAGS.generate_goldens_property_sets:
         # Generation Mode
@@ -587,12 +592,9 @@ def main(_):
         for p_set_str in _FLAGS.generate_goldens_property_sets:
             property_sets.append(set(p_set_str.split('|')))
 
-        generate_goldens(_FLAGS.validate_goldens_input,
-                         property_sets,
+        generate_goldens(_FLAGS.validate_goldens_input, property_sets,
                          _FLAGS.validate_goldens_output,
-                         get_validator_goldens_config(),
-                         counters,
-                         must_include_values=must_include_values)
+                         get_validator_goldens_config(), counters)
     else:
         # Check if we should generate goldens using all properties if property_sets is empty
         # and validate_goldens_input is provided but validate_goldens is NOT.
@@ -601,9 +603,7 @@ def main(_):
         if _FLAGS.validate_goldens_input and not _FLAGS.validate_goldens:
             generate_goldens(_FLAGS.validate_goldens_input, [],
                              _FLAGS.validate_goldens_output,
-                             get_validator_goldens_config(),
-                             counters,
-                             must_include_values=must_include_values)
+                             get_validator_goldens_config(), counters)
         else:
             # Validation Mode
             validate_goldens(_FLAGS.validate_goldens_input,
