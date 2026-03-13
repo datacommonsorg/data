@@ -1,15 +1,19 @@
 """A script to clean US EPA's Facility data from GHG Emitter Facilities table"""
 
 import csv
-import datacommons
 import json
 import os.path
-import pathlib
 import sys
+from pathlib import Path
 
 from absl import app
 from absl import flags
 from shapely import geometry
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+
+from util.dc_api_wrapper import dc_api_get_node_property
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -108,11 +112,16 @@ def _validate_latlng(lat, lng, dcid):
     if dcid in _GEOJSON_CACHE:
         gj = _GEOJSON_CACHE[dcid]
     else:
-        resp = datacommons.get_property_values([dcid], 'geoJsonCoordinates')
-        if not resp[dcid]:
+        resp = dc_api_get_node_property([dcid], 'geoJsonCoordinates')
+        values = resp.get(dcid, {}).get('geoJsonCoordinates', '')
+        if isinstance(values, list):
+            gj = values[0] if values else ''
+        else:
+            gj = values
+        if not gj:
             print(f'Did not find GEO JSON for {dcid}')
             return False
-        gj = resp[dcid][0]
+        gj = gj.strip('"')
         _GEOJSON_CACHE[dcid] = gj
 
     point = geometry.Point(float(lng), float(lat))

@@ -8,6 +8,7 @@ import pandas as pd
 import sys
 import json
 from datetime import datetime
+from unittest.mock import patch
 
 module_dir_ = os.path.dirname(__file__)
 sys.path.insert(0, module_dir_)
@@ -28,7 +29,8 @@ class PreprocessDataTest(unittest.TestCase):
             data = f.read()
         wfigs_data._LAT_LNG_CACHE = json.loads(data)
 
-    def test_ProcessDF(self):
+    @patch('wfigs_data.latlng_recon_geojson.LatLng2Places')
+    def test_ProcessDF(self, mock_ll2p):
         typeDict = {
             "FireCause": str,
             "FireCauseGeneral": str,

@@ -1,7 +1,0 @@
-parameter,value
-place_type,Country
-place_within,country/FIN
-mapped_rows,3
-mapped_columns,2
-word_delimiter,""""""
-output_columns,"observationDate,value,unit,observationAbout,variableMeasured"

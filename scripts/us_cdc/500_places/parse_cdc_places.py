@@ -143,6 +143,8 @@ MEASURE_TO_STATVAR_MAP = {
         "Count_Person_18OrMoreYears_UtilityServiceShutoffThreat_AsAFractionOf_Count_Person_18OrMoreYears",
     "ISOLATION":
         "Count_Person_18OrMoreYears_SociallyIsolated_AsAFractionOf_Count_Person_18OrMoreYears",
+    "LONELINESS":
+        "Count_Person_18OrMoreYears_Lonely_AsAFractionOf_Count_Person_18OrMoreYears"
 }
 
 # Mapping of data value type abbreviations to StatVar dcids

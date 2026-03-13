@@ -141,28 +141,26 @@ def get_gce_instance(required_cpu: float,
     return suitable_instances[0]['name']
 
 
-def create_job_request(import_name: str, import_config: dict, import_spec: dict,
-                       default_resources: dict, timeout: int) -> str:
-    resources = import_spec.get('resource_limits', default_resources)
-    machine_type = get_gce_instance(resources['cpu'], resources['memory'])
+def create_job_request(import_name: str, import_config: dict,
+                       import_spec: dict) -> str:
+    resources = {}
+    if 'resource_limits' in import_spec:
+        resources = import_spec.get('resource_limits', {})
+        machine_type = get_gce_instance(resources.get('cpu', 0),
+                                        resources.get('memory', 0))
+        resources[
+            "machine"] = machine_type if machine_type is not None else 'n2-standard-8'
+        resources["cpu"] = resources["cpu"] * 1000
+        resources["memory"] = resources["memory"] * 1024
 
-    resources[
-        "machine"] = machine_type if machine_type is not None else 'n2-standard-8'
-
-    resources["cpu"] = resources["cpu"] * 1000
-    resources["memory"] = resources["memory"] * 1024
-    schedule = import_spec.get('cron_schedule')
     import_config_string = json.dumps(import_config)
-    job_name = import_name.split(':')[1]
-    job_name = job_name.replace("_", "-").lower()
     argument_payload = {
-        "jobName": job_name,
         "importName": import_name,
         "importConfig": import_config_string,
-        "resources": resources,
-        "timeout": timeout,
-        "schedule": schedule
     }
+    if resources:
+        argument_payload["resources"] = resources
+
     argument_string = json.dumps(argument_payload)
     final_payload = {
         "argument": argument_string,
@@ -175,7 +173,6 @@ def create_job_request(import_name: str, import_config: dict, import_spec: dict,
 
 def execute_cloud_batch_job(project_id: str, location: str, job_name: str,
                             import_name: str, gcs_bucket: str,
-                            spanner_instance: str, spanner_db: str,
                             image_uri: str) -> batch_v1.Job | None:
     """Creates and runs a job using the Cloud Batch API.
 
@@ -185,8 +182,6 @@ def execute_cloud_batch_job(project_id: str, location: str, job_name: str,
         job_name: Name of the job.
         import_name: Name of the import.
         gcs_bucket: GCS bucket name for import configuration.
-        spanner_instance: spanner instance id.
-        spanner_db: spanner database id.
         image_uri: URI of the container image to run.
 
     Returns:
@@ -200,7 +195,7 @@ def execute_cloud_batch_job(project_id: str, location: str, job_name: str,
     runnable.container.image_uri = image_uri
     runnable.container.commands = [
         f"--import_name={import_name}",
-        f'--import_config={json.dumps({"gcp_project_id": project_id, "gcs_project_id": project_id, "storage_prod_bucket_name": gcs_bucket, "spanner_project_id": project_id, "spanner_instance_id": spanner_instance, "spanner_database_id": spanner_db})}'
+        f'--import_config={json.dumps({"gcp_project_id": project_id, "gcs_project_id": project_id, "storage_prod_bucket_name": gcs_bucket})}'
     ]
 
     # We can specify what resources are requested by a task.

@@ -24,7 +24,7 @@
     "validation_params": {}
   },
   {
-    "validation_name": "check_deleted_count",
+    "validation_name": "check_deleted_records_count",
     "status": "PASSED",
     "message": "",
     "details": {

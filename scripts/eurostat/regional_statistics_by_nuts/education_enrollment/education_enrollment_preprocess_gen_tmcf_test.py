@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 import unittest
 import os
 from education_enrollment_preprocess_gen_tmcf import *
@@ -23,41 +22,32 @@ MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, MODULE_DIR)
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "sample_input")
-
 EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "sample_output")
 
 
 class TestProcess(unittest.TestCase):
-    """
-    TestPreprocess is inherting unittest class
-    properties which further requried for unit testing.
-    The test will be conducted for EuroStat BMI Sample Datasets,
-    It will be generating CSV, MCF and TMCF files based on the sample input.
-    Comparing the data with the expected files.
-    """
 
-    def __init__(self, methodName: str = ...) -> None:
+    def __init__(self, methodName: str = "runTest") -> None:
         super().__init__(methodName)
         input_path = os.path.join(TEST_DATASET_DIR, 'sample_data.tsv')
         self.CLEANED_CSV_FILE_PATH = os.path.join(EXPECTED_FILES_DIR,
                                                   "test_output.csv")
-        preprocess(translate_wide_to_long(input_path),
-                   self.CLEANED_CSV_FILE_PATH)
+
+        # Transform and filter data to match original script logic
+        df = translate_wide_to_long(input_path)
+        df = df[(df['unit'] == 'PC') & (df['age'].isin(['Y18-64', 'Y25-64']))]
+
+        preprocess(df, self.CLEANED_CSV_FILE_PATH)
 
         with open(self.CLEANED_CSV_FILE_PATH, encoding="utf-8-sig") as csv_file:
             self.actual_csv_data = csv_file.read()
 
     def test_create_csv(self):
-        """
-        This method is required to test between output generated
-        preprocess script and excepted output files like CSV
-        """
         expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR,
                                               "Eurostats_NUTS2_Enrollment.csv")
 
-        expected_csv_data = ""
         with open(expected_csv_file_path,
-                  encoding="utf-8") as expected_csv_file:
+                  encoding="utf-8-sig") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
 
         self.assertEqual(expected_csv_data.strip(),

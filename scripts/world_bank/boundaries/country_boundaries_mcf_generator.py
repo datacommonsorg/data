@@ -23,20 +23,27 @@ https://geopandas.readthedocs.io/en/latest/docs/reference/api/geopandas.GeoSerie
 
 NOTE: this file generates temporary folders that are not deleted.
 """
-import datacommons as dc
-import geopandas as gpd
 import glob
 import io
 import json
-import numpy as np
 import os
-import pandas as pd
-import requests
+from pathlib import Path
+import sys
 import tempfile
 import zipfile
 
+import geopandas as gpd
+import numpy as np
+import pandas as pd
+import requests
+
 from absl import app
 from absl import flags
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+
+from util.dc_api_wrapper import get_datacommons_client
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -84,6 +91,7 @@ class CountryBoundariesMcfGenerator:
         self.mcf_dir = mcf_dir
         if not mcf_dir:
             self.mcf_dir = tempfile.mkdtemp(prefix="wb_mcf_")
+        self.client = get_datacommons_client()
 
     def load_data(self):
         """Download data from source, or use specified data from previous download.
@@ -111,18 +119,16 @@ class CountryBoundariesMcfGenerator:
           'ISO_A3': ['UMI', 'COD', ...]}
         """
         # Call DC API to get list of countries
-        dc_all_countries = dc.query('''
-        SELECT ?place ?name WHERE {
-          ?place typeOf Country .
-          ?place name ?name
-        }
-        ''',
-                                    select=None)
+        response = self.client.node.fetch_property_values(node_dcids='Country',
+                                                          properties='typeOf',
+                                                          out=False,
+                                                          all_pages=True)
+        dc_all_countries = set(
+            response.extract_connected_dcids('Country', 'typeOf'))
 
         def is_dc_country(iso):
             dcid = f'country/{iso}'
-            matches = filter(lambda x: x['?place'] == dcid, dc_all_countries)
-            return len(list(matches)) > 0
+            return dcid in dc_all_countries
 
         # Compare dataset countries with results from DC
         wb_idx = all_countries['WB_A3'].apply(is_dc_country)

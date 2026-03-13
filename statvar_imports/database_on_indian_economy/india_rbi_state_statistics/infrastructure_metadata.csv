@@ -2,3 +2,4 @@ parameter,value
 header_rows,5
 output_columns,"observationAbout,observationDate,variableMeasured,value,unit,observationPeriod"
 mapped_rows,5
+dc_api_root,https://api.datacommons.org
