@@ -214,32 +214,157 @@ class DataSamplerTest(unittest.TestCase):
         self.assertNotIn('Name',
                          error_msg)  # Name should be found, not in error
 
-    @unittest.skip("TODO: Implement rows per key in DataSampler.")
     def test_rows_per_key(self):
         """Tests that the sampler respects the sampler_rows_per_key config."""
-        config = {'sampler_rows_per_key': 2}
-        data_sampler.sample_csv_file(self.input_file, self.output_file, config)
+        # Use a controlled input
+        input_file = os.path.join(self._tmp_dir, 'rows_per_key.csv')
+        with open(input_file, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['Key', 'Value'])
+            writer.writerow(['A', 'v1'])
+            writer.writerow(['A', 'v2'])
+            writer.writerow(['A', 'v3'])
+            writer.writerow(['B', 'v4'])
+
+        config = {
+            'sampler_rows_per_key': 2,
+            'sampler_unique_columns': 'Key',
+            'sampler_output_rows': -1,
+            'header_rows': 1,
+        }
+        data_sampler.sample_csv_file(input_file, self.output_file, config)
         with open(self.output_file) as f:
             lines = f.readlines()
-            # The input file has 3 unique states. With sampler_rows_per_key=2,
-            # we expect 2 rows for each state, plus the header.
-            self.assertLessEqual(len(lines), 3 * 2 + 1)
+            # 2 rows for 'A', 1 row for 'B' + 1 header = 4 lines
+            self.assertEqual(len(lines), 4)
 
-    @unittest.skip("TODO: Implement cell value regex filtering in DataSampler.")
     def test_cell_value_regex(self):
         """Tests that sampler_column_regex filters based on cell values."""
-        # This test checks if the sampler correctly uses the regex to identify
-        # and select rows based on the content of their cells.
+        input_file = os.path.join(self._tmp_dir, 'regex_test.csv')
+        with open(input_file, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['Key', 'Value'])
+            writer.writerow(['2021', 'v1'])
+            writer.writerow(['2022', 'v2'])
+            writer.writerow(['abc', 'v3'])
+            writer.writerow(['123', 'v4'])
+
         config = {
-            'sampler_column_regex': r'^\d{4}$'
-        }  # Regex for a 4-digit year
-        data_sampler.sample_csv_file(self.input_file, self.output_file, config)
+            'sampler_column_regex': r'^\d{4}$',
+            'sampler_output_rows': -1,
+            'header_rows': 1,
+        }
+        data_sampler.sample_csv_file(input_file, self.output_file, config)
         with open(self.output_file) as f:
             lines = f.readlines()
-            # This would select the header and the one row in the test data that
-            # contains a year-like value.
-            self.assertEqual(len(lines), 2)
-            self.assertIn('2011', lines[1])
+            # Header + 2021 + 2022 = 3 lines. '123' is only 3 digits.
+            self.assertEqual(len(lines), 3)
+            self.assertIn('2021,v1\n', lines)
+            self.assertIn('2022,v2\n', lines)
+
+    def test_exhaustive_mode(self):
+        """Tests that exhaustive mode captures all unique values."""
+        input_file = os.path.join(self._tmp_dir, 'exhaustive.csv')
+        with open(input_file, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['Key', 'Value'])
+            for i in range(150):
+                writer.writerow([f'Key{i}', f'Value{i}'])
+
+        # Default max rows is 100. Exhaustive should take all 150.
+        config = {
+            'sampler_exhaustive': True,
+            'sampler_unique_columns': 'Key',
+            'header_rows': 1,
+        }
+        data_sampler.sample_csv_file(input_file, self.output_file, config)
+        with open(self.output_file) as f:
+            lines = f.readlines()
+            self.assertEqual(len(lines), 151)
+
+    def test_must_include_values(self):
+        """Tests that the sampler always includes must-include values."""
+        input_file = os.path.join(self._tmp_dir, 'must_include.csv')
+        with open(input_file, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['Key', 'Value'])
+            writer.writerow(['A', 'v1'])
+            writer.writerow(['B', 'v2'])
+            writer.writerow(['C', 'v3'])
+
+        # Include list for column 'Key'
+        include_file = os.path.join(self._tmp_dir, 'include.txt')
+        with open(include_file, 'w') as f:
+            f.write('Key\n')  # Add header
+            f.write('C\n')
+
+        config = {
+            'sampler_column_keys': [f'Key:{include_file}'],
+            'sampler_rate': 0,  # Disable random sampling
+            'sampler_unique_columns':
+                'Value',  # Track Value for unique sampling
+            'sampler_uniques_per_column':
+                1,  # Only first row ('A', 'v1') will be unique
+            'sampler_output_rows': 10,
+            'header_rows': 1,
+        }
+
+        data_sampler.sample_csv_file(input_file, self.output_file, config)
+        with open(self.output_file) as f:
+            lines = f.readlines()
+            # Header + 'A' (unique) + 'C' (must-include) = 3 lines
+            # 'B' is skipped because it's not unique enough for 'Value' column
+            # (since v1 was already taken) and not in must-include.
+            self.assertEqual(len(lines), 3)
+            self.assertIn('A,v1\n', lines)
+            self.assertIn('C,v3\n', lines)
+            self.assertNotIn('B,v2\n', lines)
+
+    def test_uniques_per_column(self):
+        """Tests that the sampler respects sampler_uniques_per_column."""
+        input_file = os.path.join(self._tmp_dir, 'uniques_per_col.csv')
+        with open(input_file, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['Key', 'Value'])
+            writer.writerow(['A', 'v1'])
+            writer.writerow(['B', 'v2'])
+            writer.writerow(['C', 'v3'])
+            writer.writerow(['D', 'v4'])
+
+        config = {
+            'sampler_uniques_per_column': 2,
+            'sampler_unique_columns': 'Key',
+            'sampler_output_rows': -1,
+            'header_rows': 1,
+        }
+        data_sampler.sample_csv_file(input_file, self.output_file, config)
+        with open(self.output_file) as f:
+            lines = f.readlines()
+            # Header + 2 unique values = 3 lines
+            self.assertEqual(len(lines), 3)
+
+    def test_load_column_keys(self):
+        """Tests that load_column_keys correctly parses the include list."""
+        file1 = os.path.join(self._tmp_dir, 'file1.csv')
+        with open(file1, 'w') as f:
+            f.write('col1\nval1\nval2\n')
+
+        file2 = os.path.join(self._tmp_dir, 'file2.csv')
+        with open(file2, 'w') as f:
+            f.write('col2\nval3\n')
+
+        column_keys = [f'col1:{file1}', f'col2:{file2}']
+        result = data_sampler.load_column_keys(column_keys)
+
+        self.assertEqual(result, {'col1': {'val1', 'val2'}, 'col2': {'val3'}})
+
+    def test_get_default_config(self):
+        """Tests that get_default_config returns the expected dictionary."""
+        config = data_sampler.get_default_config()
+        self.assertIn('sampler_rate', config)
+        self.assertIn('sampler_output_rows', config)
+        self.assertEqual(config['sampler_output_rows'],
+                         100)  # Default flag value
 
     def test_non_existent_input_file(self):
         """Tests that the sampler handles a non-existent input file."""
