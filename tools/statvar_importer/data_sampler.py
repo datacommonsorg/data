@@ -173,9 +173,7 @@ class DataSampler:
             self._config.get('sampler_column_keys', []))
         if self._column_include_values:
             for col, vals in self._column_include_values.items():
-                if not col in self._must_include_values:
-                    self._must_include_values[col] = set()
-                self._must_include_values[col].update(vals)
+                self._must_include_values.setdefault(col, set()).update(vals)
 
         # Map of column index -> set of values
         self._must_include_indices = {}
@@ -621,13 +619,8 @@ def get_default_config() -> dict:
         'input_delimiter': _FLAGS.sampler_input_delimiter,
         'output_delimiter': _FLAGS.sampler_output_delimiter,
         'input_encoding': _FLAGS.sampler_input_encoding,
+        'sampler_exhaustive': _FLAGS.sampler_exhaustive,
     }
-
-    if _FLAGS.sampler_exhaustive:
-        # Exhaustive mode overrides limits to capture all unique values.
-        config['sampler_output_rows'] = -1
-        config['sampler_uniques_per_column'] = -1
-        config['sampler_rows_per_key'] = 1
 
     return config
 
