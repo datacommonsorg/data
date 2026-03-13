@@ -1,0 +1,6 @@
+Node: E:undergraduate_stem_enrollment_output->E0
+observationAbout: C:undergraduate_stem_enrollment_output->observationAbout
+observationDate: C:undergraduate_stem_enrollment_output->observationDate
+value: C:undergraduate_stem_enrollment_output->value
+variableMeasured: C:undergraduate_stem_enrollment_output->variableMeasured
+typeOf: dcs:StatVarObservation
