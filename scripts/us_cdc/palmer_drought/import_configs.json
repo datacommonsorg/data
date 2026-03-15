@@ -1,0 +1,12 @@
+[  
+  {
+    "import_name": "CDC_PalmerDroughtSeverityIndex",
+    "files": [
+      {
+        "url": "https://data.cdc.gov/resource/en5r-5ds4.csv",
+        "input_file_name": "input/CDC_PalmerDroughtSeverityIndex_data.csv",
+        "output_file_name": "output/CDC_PalmerDroughtSeverityIndex.csv"
+      }
+    ]
+  }
+]
