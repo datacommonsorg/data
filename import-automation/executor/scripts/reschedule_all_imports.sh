@@ -16,7 +16,7 @@ mapfile -t IMPORT_LIST < <(gcloud scheduler jobs list --location us-central1 --p
 SCRIPT_DIR=$(realpath $(dirname $0))
 for import in "${IMPORT_LIST[@]}"; do
   echo "Scheduling import: $import"
-  $SCRIPT_DIR/schedule_update_import.sh -s $PROJECT $import
+  $SCRIPT_DIR/../schedule_update_import.sh -s $PROJECT $import
 done
 echo "Batch update finished."
 
