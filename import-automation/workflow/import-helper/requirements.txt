@@ -2,3 +2,5 @@ functions-framework==3.*
 google-cloud-workflows
 google-auth
 requests
+google-cloud-storage
+croniter

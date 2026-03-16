@@ -47,6 +47,7 @@ from counters import Counters
 from timer import Timer
 from import_differ.import_differ import ImportDiffer
 from tools.import_validation.runner import ValidationRunner
+from tools.import_validation.result import ValidationStatus, ValidationResult
 from tools.import_validation.validation_config import merge_and_save_config
 from app import configs
 from app import utils
@@ -568,6 +569,7 @@ class ImportExecutor:
         data_size = 0
         import_name = import_spec['import_name']
         validation_status = True
+        validation_results = []
 
         import_dir = f'{relative_import_dir}/{import_spec["import_name"]}'
         latest_version = self._get_latest_version(import_dir)
@@ -650,7 +652,8 @@ class ImportExecutor:
                     stats_summary=summary_stats,
                     lint_report=report_json,
                     validation_output=validation_output_file)
-                overall_status, _ = validation.run_validations()
+                overall_status, current_results = validation.run_validations()
+                validation_results.extend(current_results)
                 if validation_status:
                     validation_status = overall_status
             except ValueError as e:
@@ -683,12 +686,25 @@ class ImportExecutor:
         import_summary.import_stats[
             'validation_execution_time'] = start_timer.time()
         import_summary.import_stats['validation_data_size'] = data_size
+        validation_message = self._get_validation_message(validation_results)
         log_import_status(
             import_name, import_stage,
             ImportStatus.SUCCESS if validation_status else ImportStatus.FAILURE,
             import_summary.import_stats.get('validation_execution_time', 0),
-            import_summary.import_stats.get('validation_data_size', 0))
+            import_summary.import_stats.get('validation_data_size',
+                                            0), validation_message)
         return validation_status
+
+    def _get_validation_message(
+            self, validation_results: List[ValidationResult]) -> str:
+        """Generates a summary message of validation results."""
+        failed_validations = []
+
+        for res in validation_results:
+            if res.status.name == 'FAILED':
+                failed_validations.append(res.name)
+
+        return f"FAILED: {', '.join(failed_validations) if failed_validations else 'None'}"
 
     def _create_mount_point(self, gcs_volume_mount_dir: str,
                             cleanup_gcs_volume_mount: bool,
@@ -824,10 +840,6 @@ class ImportExecutor:
         output_dir = f'{relative_import_dir}/{import_name}'
         version = self.config.import_version_override if self.config.import_version_override else _clean_time(
             utils.pacific_time())
-        # Used for imports using CDA feed tranfers with a date placeholder in the GCS path,
-        # thus, we can determine the path using the current date (instead of a variable timestamp).
-        if version == 'DATE_VERSION_PLACEHOLDER':
-            version = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
         import_summary.latest_version = 'gs://' + os.path.join(
             self.config.storage_prod_bucket_name, output_dir, version)
         import_summary.graph_path = self.config.graph_data_path
