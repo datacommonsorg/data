@@ -423,12 +423,15 @@ def download_indicator_data(worldbank_countries, indicator_codes, mode):
         # Remove unneccessary indicators.
         country_df = country_df[country_df['IndicatorCode'].isin(
             indicators_to_keep)]
-
         # Map country codes to ISO.
         country_df['ISO3166Alpha3'] = country_code
-
         # Add new row to main datframe.
         country_df_list.append(country_df)
+    # 3. Handle the empty list case OUTSIDE the loop
+    if not country_df_list:
+        logging.error("No data was downloaded for any country.")
+        # Return empty DF with expected columns to satisfy the rest of the pipeline
+        return pd.DataFrame(columns=['StatisticalVariable', 'Year', 'Value'])
 
     worldbank_dataframe = pd.concat(country_df_list)
     # Map indicator codes to unique Statistical Variable.
