@@ -15,7 +15,7 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output/population_sex_age_time.tmcf",
+                    "template_mcf": "output/population_sex_age_time_output.tmcf",
                     "cleaned_csv": "output/*_output.csv"
                 }
             ],
