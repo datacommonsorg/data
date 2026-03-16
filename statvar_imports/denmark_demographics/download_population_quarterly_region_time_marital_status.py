@@ -9,6 +9,9 @@ url = "https://api.statbank.dk/v1/data"
 output_dir = "./input_files/"
 table_id = "FOLK1A"
 
+#FLAG: Set to True to download all available time periods
+DOWNLOAD_ALL = False
+
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
@@ -35,9 +38,14 @@ for var in meta_data.get('variables', []):
         # Statbank 'Tid' IDs are usually like '2020K1', '2020K2'
         all_quarters = [val['id'] for val in var['values']]
 
-# Filter quarters to only include those in our target years
-# Statbank IDs typically start with the year (e.g., '2025K1')
-target_quarters = [q for q in all_quarters if any(year in q for year in target_years)]
+# --- STEP 3: Download Logic ---
+if DOWNLOAD_ALL:
+    target_quarters = all_quarters
+    print(f"Flag 'DOWNLOAD_ALL' is True. Targeting all {len(target_quarters)} quarters.")
+else:
+    # Filter quarters to only include those in our target years
+    target_quarters = [q for q in all_quarters if any(year in q for year in target_years)]
+    print(f"Flag 'DOWNLOAD_ALL' is False. Targeting {len(target_quarters)} quarters for {target_years}.")
 
 if not target_quarters:
     print("No matching quarters found for the specified years.")
@@ -45,7 +53,7 @@ if not target_quarters:
 
 print(f"Targeting {len(target_quarters)} quarters: {target_quarters}")
 
-# --- STEP 3: Loop through each Region ---
+# --- STEP 4: Loop through each Region ---
 def find_key_recursive(source_dict, target_key):
     if target_key in source_dict: return source_dict[target_key]
     for key, value in source_dict.items():
