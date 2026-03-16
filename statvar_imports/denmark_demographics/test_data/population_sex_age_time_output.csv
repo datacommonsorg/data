@@ -124,6 +124,7 @@ observationDate,value,observationAbout,variableMeasured
 2023,5932654,country/DNK,dcid:Count_Person
 2024,5961249,country/DNK,dcid:Count_Person
 2025,5992734,country/DNK,dcid:Count_Person
+2026,6025603,country/DNK,dcid:Count_Person
 1901,305600,country/DNK,dcid:Count_Person_0To4Years
 1902,309100,country/DNK,dcid:Count_Person_0To4Years
 1903,312700,country/DNK,dcid:Count_Person_0To4Years
@@ -249,6 +250,7 @@ observationDate,value,observationAbout,variableMeasured
 2023,310676,country/DNK,dcid:Count_Person_0To4Years
 2024,306638,country/DNK,dcid:Count_Person_0To4Years
 2025,302428,country/DNK,dcid:Count_Person_0To4Years
+2026,300404,country/DNK,dcid:Count_Person_0To4Years
 1901,270400,country/DNK,dcid:Count_Person_5To9Years
 1902,276500,country/DNK,dcid:Count_Person_5To9Years
 1903,281800,country/DNK,dcid:Count_Person_5To9Years
@@ -374,6 +376,7 @@ observationDate,value,observationAbout,variableMeasured
 2023,306909,country/DNK,dcid:Count_Person_5To9Years
 2024,311109,country/DNK,dcid:Count_Person_5To9Years
 2025,314722,country/DNK,dcid:Count_Person_5To9Years
+2026,317347,country/DNK,dcid:Count_Person_5To9Years
 1901,254900,country/DNK,dcid:Count_Person_10To14Years
 1902,254300,country/DNK,dcid:Count_Person_10To14Years
 1903,255200,country/DNK,dcid:Count_Person_10To14Years
@@ -499,6 +502,7 @@ observationDate,value,observationAbout,variableMeasured
 2023,329873,country/DNK,dcid:Count_Person_10To14Years
 2024,320521,country/DNK,dcid:Count_Person_10To14Years
 2025,314443,country/DNK,dcid:Count_Person_10To14Years
+2026,309043,country/DNK,dcid:Count_Person_10To14Years
 1901,237100,country/DNK,dcid:Count_Person_15To19Years
 1902,240900,country/DNK,dcid:Count_Person_15To19Years
 1903,241700,country/DNK,dcid:Count_Person_15To19Years
@@ -624,6 +628,7 @@ observationDate,value,observationAbout,variableMeasured
 2023,347923,country/DNK,dcid:Count_Person_15To19Years
 2024,350913,country/DNK,dcid:Count_Person_15To19Years
 2025,351739,country/DNK,dcid:Count_Person_15To19Years
+2026,352953,country/DNK,dcid:Count_Person_15To19Years
 1901,206500,country/DNK,dcid:Count_Person_20To24Years
 1902,208100,country/DNK,dcid:Count_Person_20To24Years
 1903,212600,country/DNK,dcid:Count_Person_20To24Years
@@ -749,6 +754,7 @@ observationDate,value,observationAbout,variableMeasured
 2023,375378,country/DNK,dcid:Count_Person_20To24Years
 2024,375678,country/DNK,dcid:Count_Person_20To24Years
 2025,377613,country/DNK,dcid:Count_Person_20To24Years
+2026,378905,country/DNK,dcid:Count_Person_20To24Years
 1901,177600,country/DNK,dcid:Count_Person_25To29Years
 1902,184900,country/DNK,dcid:Count_Person_25To29Years
 1903,187800,country/DNK,dcid:Count_Person_25To29Years
@@ -874,6 +880,7 @@ observationDate,value,observationAbout,variableMeasured
 2023,409553,country/DNK,dcid:Count_Person_25To29Years
 2024,409715,country/DNK,dcid:Count_Person_25To29Years
 2025,407325,country/DNK,dcid:Count_Person_25To29Years
+2026,406458,country/DNK,dcid:Count_Person_25To29Years
 1901,157900,country/DNK,dcid:Count_Person_30To34Years
 1902,157900,country/DNK,dcid:Count_Person_30To34Years
 1903,162000,country/DNK,dcid:Count_Person_30To34Years
@@ -990,10 +997,3 @@ observationDate,value,observationAbout,variableMeasured
 2014,321890,country/DNK,dcid:Count_Person_30To34Years
 2015,319869,country/DNK,dcid:Count_Person_30To34Years
 2016,323168,country/DNK,dcid:Count_Person_30To34Years
-2017,330546,country/DNK,dcid:Count_Person_30To34Years
-2018,337657,country/DNK,dcid:Count_Person_30To34Years
-2019,348274,country/DNK,dcid:Count_Person_30To34Years
-2020,358346,country/DNK,dcid:Count_Person_30To34Years
-2021,368467,country/DNK,dcid:Count_Person_30To34Years
-2022,378954,country/DNK,dcid:Count_Person_30To34Years
-2023,395334,country/DNK,dcid:Count_Person_30To34Years
