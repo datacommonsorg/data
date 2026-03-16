@@ -255,9 +255,9 @@ def read_worldbank(iso3166alpha3, mode):
             if file.startswith("API"):
                 file_to_open = file
                 break
-        assert file_to_open is not None, \
-            "Failed to find data for" + iso3166alpha3
-
+        if file_to_open is None:
+            logging.warning('Failed to find data for %s in the downloaded ZIP. Skipping.', iso3166alpha3)
+            return None
         df = None
         # Captures any text contained in double quotatations.
         line_match = re.compile(r"\"([^\"]*)\"")
@@ -414,6 +414,9 @@ def download_indicator_data(worldbank_countries, indicator_codes, mode):
     country_df_list = []
     for index, country_code in enumerate(worldbank_countries['ISO3166Alpha3']):
         country_df = read_worldbank(country_code, mode)
+
+        if country_df is None:
+            continue
 
         # Remove unneccessary indicators.
         country_df = country_df[country_df['IndicatorCode'].isin(
