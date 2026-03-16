@@ -256,7 +256,9 @@ def read_worldbank(iso3166alpha3, mode):
                 file_to_open = file
                 break
         if file_to_open is None:
-            logging.warning('Failed to find data for %s in the downloaded ZIP. Skipping.', iso3166alpha3)
+            logging.warning(
+                'Failed to find data for %s in the downloaded ZIP. Skipping.',
+                iso3166alpha3)
             return None
         df = None
         # Captures any text contained in double quotatations.
