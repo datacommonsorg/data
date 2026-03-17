@@ -404,7 +404,7 @@ def main():
     }
 
     logging.info("\n--- Starting download process for yearly ZIP archives ---")
-    years_to_download_zip = list(range(2010, 2024)) # Covers 2010 up to and including 2023
+    years_to_download_zip = list(range(2010, current_year)) # Covers 2010 up to and including previous year
 
     for year in years_to_download_zip:
         zip_url = generate_zip_url(year)
@@ -427,6 +427,22 @@ def main():
                 logging.fatal(f"CRITICAL ERROR: Unzipping or processing of {filename} failed. Cannot proceed.")
             else:
                 logging.info(f"Successfully processed ZIP for Year {year}.")
+        else:
+            logging.info(f"ZIP archive for {year} not found. Downloading all monthly files for cpi-u and cpi-w.")
+            for month in range(1, 13):
+                month_str = f"{month:02d}"
+                for category_prefix in ["cpi-u", "cpi-w"]:
+                    url = f"https://www.bls.gov/cpi/tables/supplemental-files/{category_prefix}-{year}{month_str}.xlsx"
+                    filename = url.split('/')[-1]
+                    if category_prefix == "cpi-u":
+                        file_save_path = os.path.join(cpi_u_folder, filename)
+                    else:
+                        file_save_path = os.path.join(cpi_w_folder, filename)
+                    
+                    try:
+                        download_file(url, file_save_path, timeout=args.timeout)
+                    except Exception as e:
+                        logging.warning(f"Failed to download monthly file {url} for year {year} (fallback): {e}")
 
     logging.info("\n--- Listing files in respective folders after all downloads/extractions ---")
     logging.info("Files in 'cpi-u' folder:")
