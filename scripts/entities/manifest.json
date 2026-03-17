@@ -14,8 +14,6 @@
             "source_files": [],
             "cron_schedule": "15 3 * * *",
             "config_override": {
-                "import_version_override": "DATE_VERSION_PLACEHOLDER",
-                "graph_data_path": "/**/*mcf*",
                 "invoke_import_validation": false,
                 "invoke_import_tool": false,
                 "invoke_differ_tool": false
@@ -35,8 +33,6 @@
             "source_files": [],
             "cron_schedule": "15 3 * * 1",
             "config_override": {
-                "import_version_override": "DATE_VERSION_PLACEHOLDER",
-                "graph_data_path": "/**/*mcf*",
                 "invoke_import_validation": false,
                 "invoke_import_tool": false,
                 "invoke_differ_tool": false

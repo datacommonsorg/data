@@ -849,27 +849,30 @@ class PlaceResolver:
 
         # Get a list of dcids to lookup for each filter property.
         dcids = set()
-        for place_key, place_props in places.items():
-            dcid = place_props.get('dcid', '')
-            if not dcid:
-                continue
-            dcids.update(_get_value_set(dcid))
+        place_props_by_dcid = {}
+        for place_props in places.values():
+            for dcid in _get_value_set(place_props.get('dcid', '')):
+                if not dcid:
+                    continue
+                dcids.add(dcid)
+                place_props_by_dcid.setdefault(dcid, place_props)
         # Cache containedInPlace heirarchy for all dcids.
         if 'containedInPlace' in lookup_props:
             self._cache_contained_in_places(dcids)
 
         lookup_dcids_by_prop = {p: [] for p in lookup_props}
         for dcid in dcids:
+            place_props = place_props_by_dcid.get(dcid, {})
             for prop in lookup_props:
-                value = place_props.get(prop, '')
-                if not value:
-                    # filter property doesn't have a value for this dcid.
-                    # Check if the property is cached.
-                    values = self._get_cache_value(dcid, prop).get(prop)
-                    if values:
-                        place_props[prop] = values
-                if not value:
-                    lookup_dcids_by_prop[prop].append(dcid)
+                if place_props.get(prop):
+                    continue
+                # filter property doesn't have a value for this dcid.
+                # Check if the property is cached.
+                cached_values = self._get_cache_value(dcid, prop).get(prop)
+                if cached_values:
+                    place_props[prop] = cached_values
+                    continue
+                lookup_dcids_by_prop[prop].append(dcid)
 
         # Lookup property values for the dcids from DC API.
         for prop, dcids in lookup_dcids_by_prop.items():
