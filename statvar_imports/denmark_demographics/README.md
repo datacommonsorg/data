@@ -7,7 +7,6 @@ The import covers:
 - **Population (Annual):** Population count by sex and age groups.
 
 Type of place: Country
-Includes Denmark, Regions (NUTS2), and Municipalities.
 
 ## Data Source
 **Source URL:**
@@ -22,8 +21,8 @@ To download the data manually:
 1. Go to the [StatBank Denmark Portal](https://www.statbank.dk/statbank5a/default.asp?w=1396).
 2. Browse or search for the desired population tables. For quarterly demographics, search for table **FOLK1A** (Population at the first day of the quarter).
 3. Select the desired variables:
-   - **Region:** All Denmark, regions, or municipalities.
-   - **Marital Status:** Never married, Married/separated, Widowed, Divorced.
+   - **Region:** All Denmark.
+   - **Marital Status:** Total, Never married, Married/separated, Widowed, Divorced.
    - **Age:** Individual ages or age groups.
    - **Sex:** Men, Women.
    - **Time:** Quarters.

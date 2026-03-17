@@ -10,7 +10,7 @@
             "scripts": [
                 "download_population_quarterly_region_time_marital_status.py",
                 "download_population_sex_age_time.py",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/population_quarterly_region_time_marital_status*.csv --pv_map=./population_quarterly_region_time_marital_status_pvmap.csv --config_file=./denmark_demographics_metadata.csv --output_path=./output/population_quarterly_region_time_marital_status_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/population_quarterly_region_time_marital_status_input.csv --pv_map=./population_quarterly_region_time_marital_status_pvmap.csv --config_file=./denmark_demographics_metadata.csv --output_path=./output/population_quarterly_region_time_marital_status_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
                 "../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/population_sex_age_time_input.csv --pv_map=./population_sex_age_time_pvmap.csv --config_file=./denmark_demographics_metadata.csv --output_path=./output/population_sex_age_time_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
             ],
             "import_inputs": [
