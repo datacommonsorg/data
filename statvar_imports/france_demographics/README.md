@@ -8,22 +8,22 @@ This directory contains the scripts and configuration to import France demograph
 - **URL**: [INSEE Population Statistics](https://www.insee.fr/en/statistiques/8333211?sommaire=8333329)
 
 ## Directory Structure
-- `download_input_data.py`: Script to download source Excel files from INSEE.
+- `run.sh`: Primary entry point. Orchestrates downloading, renaming files, and processing.
 - `*_pvmap.csv`: Property-Value mapping files for the statvar processor.
 - `france_demographics_metadata.csv`: Metadata configuration for the import.
-- `manifest.json`: Import specification.
+- `manifest.json`: Import specification for the automation pipeline.
 
 ## Usage
 
-### 1. Download Data
-Run the download script to fetch the latest data files into `input_files/`.
+### 1. Automated Execution
+To ensure the pipeline works consistently across local environments and Google Cloud Batch, use the run.sh script. This script handles the downloading of INSEE files, renames them to match expected configuration, and runs the stat_var_processor.
 
-```bash
-python3 download_input_data.py
+```chmod +x run.sh
+./run.sh
 ```
 
-### 2. Process Data
-Run the `stat_var_processor.py` tool for each dataset to generate MCF and CSV files.
+### 2. Manual Processing
+If you already have the data files downloaded and renamed in input_files/, you can run the `stat_var_processor.py` tool for each dataset to generate MCF and CSV files.
 
 **Annual Population Components:**
 ```bash
