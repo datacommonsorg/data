@@ -1,0 +1,31 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "France_Demographics",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.insee.fr/en/statistiques/8333211?sommaire=8333329",
+            "provenance_description": "Population data for France from INSEE",
+            "scripts": [
+                "run.sh"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/population_sex_age_groups_output.tmcf",
+                    "cleaned_csv": "output/*_output.csv"
+                }
+            ],
+            "source_files": [
+                "./input_files/*.xlsx"
+            ],
+            "user_script_timeout": 3600,
+            "cron_schedule": "0 10 21 * *",
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 32,
+                "disk": 100
+            }
+        }
+    ]
+}
