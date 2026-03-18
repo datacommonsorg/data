@@ -1067,7 +1067,7 @@ def write_mcf_nodes(
                     # Generate a local dcid in a node copy
                     node = dict(node)
                     node['Node'] = f'l:{filename_base}/' + hashlib.md5(
-                        dcid.encode('utf-8')).hexdigest()
+                        str(dcid).encode('utf-8')).hexdigest()
                 if sort:
                     node = normalize_mcf_node(node, ignore_comments)
                 pvs = node_dict_to_text(node, default_pvs)

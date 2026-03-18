@@ -159,7 +159,7 @@ The following validations are currently supported:
 | `UNIT_CONSISTENCY_CHECK`  | Checks that the unit is the same for all StatVars.                       | `stats`           | None                                                   |
 | `MIN_VALUE_CHECK`         | Checks that the minimum value is not below a defined minimum.            | `stats`           | `minimum` (integer or float)                           |
 | MAX_VALUE_CHECK           | Checks that the maximum value is not above a defined maximum.            | `stats`           | `maximum` (integer or float)                           |
-| `GOLDENS`                 | Verifies that the data contains all records defined in a golden set.     | `stats`           | `golden_files` (list), `goldens_key_property` (list)   |
+| `GOLDENS`                 | Verifies that the data contains all records defined in a golden set.     | `stats`           | `golden_files` (list), `input_files` (list)   |
 
 ### Golden Set Validation with `GOLDENS`
 
@@ -185,7 +185,7 @@ The validator compares the input data (usually from the `stats` data source) aga
   },
   "params": {
     "golden_files": ["goldens/critical_stats.csv"],
-    "goldens_key_property": ["StatVar", "NumPlaces"]
+    "input_files": "processed_obs.csv"
   }
 }
 ```

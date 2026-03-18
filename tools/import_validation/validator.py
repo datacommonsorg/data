@@ -885,17 +885,18 @@ class Validator:
             output_path = params.get('output_path')
             # Compare nodes
             counters = Counters()
-            missing = validator_goldens.validate_goldens(inputs,
-                                                         golden_files,
-                                                         output_path,
-                                                         config=params,
-                                                         counters=counters)
+            missing_goldens = validator_goldens.validate_goldens(
+                inputs,
+                golden_files,
+                output_path,
+                config=params,
+                counters=counters)
             details = {
                 name: value
                 for name, value in counters.get_counters().items()
                 if 'golden' in name
             }
-            if not missing:
+            if not missing_goldens:
                 return ValidationResult(ValidationStatus.PASSED,
                                         'GOLDENS',
                                         details=details)
@@ -904,7 +905,7 @@ class Validator:
             return ValidationResult(
                 ValidationStatus.FAILED,
                 'GOLDENS',
-                message=f"Found {len(missing)} missing golden records.",
+                message=f"Found {len(missing_goldens)} missing golden records.",
                 details=details)
 
         except Exception as e:

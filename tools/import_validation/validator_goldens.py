@@ -46,26 +46,26 @@ Usage:
     python3 validator_goldens.py \
       --validate_goldens_input=output/observations.csv \
       --generate_goldens_property_sets="variableMeasured|observationAbout,observationDate,variableMeasured|unit|scalingFactor|observationPeriod|measurementMethod" \
-      --validate_goldens_output=goldens/generated_goldens.csv
+      --generate_goldens=goldens_data/generated_goldens.csv
 
     # To generate goldens using a sample of input nodes:
     python3 validator_goldens.py \
       --validate_goldens_input=output/observations.csv \
       --goldens_sample_rows=100 \
       --generate_goldens_property_sets="variableMeasured|observationAbout" \
-      --validate_goldens_output=goldens/generated_goldens.csv
+      --generate_goldens=goldens_data/generated_goldens.csv
 
     # To generate goldens capturing every unique value in every column:
     python3 validator_goldens.py \
       --validate_goldens_input=output/observations.mcf \
       --goldens_sampler_exhaustive \
-      --validate_goldens_output=goldens/generated_goldens.mcf
+      --generate_goldens=goldens_data/generated_goldens.mcf
 
     # To generate goldens ensuring prominent DCIDs are included if present:
     python3 validator_goldens.py \
       --validate_goldens_input=output/observations.csv \
       --goldens_must_include="variableMeasured:selected_svs.txt,observationAbout:selected_places.txt" \
-      --validate_goldens_output=goldens/generated_goldens.csv
+      --generate_goldens=goldens_data/generated_goldens.csv
 """
 
 import os
@@ -89,6 +89,7 @@ import mcf_file_util
 import data_sampler
 
 from counters import Counters
+from mcf_diff import fingerprint_node
 
 flags.DEFINE_list('validate_goldens_input', None,
                   'List of files to be compared against goldens.')
@@ -149,84 +150,6 @@ def get_validator_goldens_config() -> dict:
     }
 
 
-# Get a fingerprint for the node with the given properties
-def get_node_fingerprint(node: dict,
-                         key_property: set = None,
-                         ignore_property: set = None,
-                         normalize: bool = True,
-                         strip_namespaces: bool = True) -> str:
-    """Returns a string key for the node based on the values for key_properties.
-
-    The fingerprint is a semi-colon separated string of "prop=value" pairs,
-    sorted alphabetically by property name to ensure consistency.
-
-    Args:
-        node: dictionary of property:values for a node.
-        key_property: set of properties to be used as key.
-            If empty all properties are used.
-        ignore_property: set of properties not used to generate the key.
-        normalize: boolean to indicate if the values need to be normalized,
-            such as stripping out namespace prefix
-        strip_namespaces: boolean to indicate if DCID namespaces should be
-            removed during normalization.
-
-    Returns:
-        string that is a unique fingerprint for the node with the key properties.
-    """
-    if key_property is None:
-        # If no key properties are specified, use all properties currently in the node.
-        key_property = set(node.keys())
-    if ignore_property is None:
-        ignore_property = set()
-
-    key_tokens = []
-    # Sort keys to ensure the resulting fingerprint string is deterministic.
-    keys = sorted(list(node.keys()))
-    for prop in keys:
-        value = node.get(prop)
-        # Skip properties that are not in the key set or are explicitly ignored.
-        if prop not in key_property or prop in ignore_property:
-            continue
-        # Normalize the value (e.g., strip spaces, quotes, or DCID namespaces).
-        if normalize:
-            value = normalize_value(value, strip_namespaces)
-        key_tokens.append(f'{prop}={value}')
-
-    # Join tokens with a delimiter that is unlikely to be in the property names or values.
-    return ';'.join(key_tokens)
-
-
-def normalize_value(value: str, strip_namespaces: bool = True) -> str:
-    """Returns a normalized value for comparison.
-
-    Normalization handles:
-    1. Stripping leading/trailing whitespace and double quotes.
-    2. Removing namespaces from DCID references (e.g., 'dcid:Count_Person' -> 'Count_Person').
-    3. Normalizing lists by sorting elements.
-    4. Trimming trailing zeros from floats.
-    """
-    if isinstance(value, str):
-        # Remove surrounding quotes and spaces which are common in various file formats.
-        value = value.strip(' "')
-        # If the string contains special characters, check for specific DC types.
-        if not value.isalnum():
-            if ':' in value and strip_namespaces:
-                # String appears to be a DCID reference with a namespace.
-                return mcf_file_util.strip_namespace(value)
-            if ',' in value:
-                # String appears to be a comma-separated list.
-                return mcf_file_util.normalize_list(value)
-
-        # Return the stripped string if no other normalization applied.
-        return value
-    if isinstance(value, float):
-        # Standardize float representation by removing redundant trailing zeros.
-        return str(value).rstrip('0')
-
-    # For other types, return their string representation.
-    return str(value)
-
-
 def _is_commented_node(fingerprint: str, comment_char: str = '#') -> bool:
     """Returns True if the node fingerprint is commented.
 
@@ -276,22 +199,23 @@ def validator_compare_nodes(input_nodes: dict,
 
     # Extract configuration parameters with defaults.
     ignore_props = config.get('goldens_ignore_property', {})
-    ignore_comments = config.get('goldens_ignore_comments', True)
-    normalize = config.get('goldens_normalize', True)
-    strip_namespaces = config.get('goldens_strip_namespaces', True)
+    comment_char = config.get('goldens_ignore_comments', '#')
     golden_key_props = set(config.get('goldens_key_property', {}))
     key_delimiter = config.get('golden_key_delimiter', '|')
 
     # Step 1: Group golden nodes by their set of properties.
+    # Goldens may have a subset of the input node properties and would match
+    # any input node that contains all the golden property:values.
     # Different golden nodes might specify different subsets of properties to match on.
     golden_key_sets = {}
+    golden_matches = dict()
     logging.debug(f'Extracting properties for {len(golden_nodes)} goldens')
     for node_key, node in golden_nodes.items():
         node_props = set()
         for prop in node.keys():
             if not prop:
                 continue
-            if ignore_comments and prop.startswith('#'):
+            if comment_char and prop.startswith(comment_char):
                 continue
             if prop in ignore_props:
                 continue
@@ -299,51 +223,41 @@ def validator_compare_nodes(input_nodes: dict,
                 continue
             node_props.add(prop)
 
+        if not node_props:
+            counters.add_counter('validate-goldens-commented', 1)
+            continue
         # Use the joined sorted property names as a key for the group.
         node_props_key = key_delimiter.join(sorted(list(node_props)))
-        if node_props_key not in golden_key_sets:
-            golden_key_sets[node_props_key] = {}
-        golden_key_sets[node_props_key][node_key] = node
+        golden_key_sets[node_props_key] = node_props
+
+        # Initialize match count for the golden node to 0.
+        key = fingerprint_node(node, compare_props=node_props)
+        golden_matches.setdefault(key, {'node': node, 'matches': 0})
 
     logging.info(
-        f'Comparing {len(input_nodes)} nodes against {len(golden_nodes)} goldens in {len(golden_key_sets)} sets using properties: {golden_key_sets.keys()}'
+        f'Comparing {len(input_nodes)} nodes against {len(golden_matches)} goldens in {len(golden_key_sets)} sets using properties: {golden_key_sets.keys()}'
     )
     counters.add_counter('validate-goldens-sets', len(golden_key_sets))
     counters.add_counter('validate-goldens-inputs', len(input_nodes))
-    counters.add_counter('validate-goldens-expected', len(golden_nodes))
+    counters.add_counter('validate-goldens-expected', len(golden_matches))
 
-    # Step 2: Generate fingerprints for all expected golden nodes.
-    # We only generate a fingerprint for each node using its own relevant property set.
-    golden_matches = dict()
-    for node_props_key, nodes_group in golden_key_sets.items():
-        key_props = node_props_key.split(key_delimiter)
-        for node in nodes_group.values():
-            key = get_node_fingerprint(node,
-                                       key_property=key_props,
-                                       ignore_property=ignore_props,
-                                       normalize=normalize,
-                                       strip_namespaces=strip_namespaces)
-            # Initialize match count to 0.
-            golden_matches[key] = 0
-
-    # Step 3: Iterate through input nodes and try to match them against the golden fingerprints.
+    # Step 2: Match each input node with the golden fingerprints.
+    # An input node may match more than one golden node with different
+    # set of property:values.
     for node in input_nodes.values():
         # An input node might match different golden "shapes" (sets of properties).
-        for node_props_key in golden_key_sets.keys():
-            key_props = node_props_key.split(key_delimiter)
-            key = get_node_fingerprint(node,
-                                       key_property=key_props,
-                                       ignore_property=ignore_props,
-                                       normalize=normalize,
-                                       strip_namespaces=strip_namespaces)
+        for node_key_props in golden_key_sets.values():
+            key = fingerprint_node(node,
+                                   compare_props=node_key_props,
+                                   ignore_props=ignore_props)
             if key in golden_matches:
-                golden_matches[key] += 1
+                golden_matches[key]['matches'] += 1
                 counters.add_counter('validate-goldens-input-matched', 1)
 
-    # Step 4: Identify which golden fingerprints had no corresponding input nodes.
+    # Step 3: Identify which golden fingerprints had no corresponding input nodes.
     missing_goldens = []
-    comment_char = config.get('goldens_ignore_comments', '#')
-    for key, count in golden_matches.items():
+    for key, node_counts in golden_matches.items():
+        count = node_counts.get('matches', 0)
         if count > 0:
             # This key got matches.
             counters.add_counter('validate-goldens-matched', 1)
@@ -352,7 +266,7 @@ def validator_compare_nodes(input_nodes: dict,
                 # No matches for this key. Ignore commented keys.
                 counters.add_counter('validate-goldens-ignored', 1)
             else:
-                missing_goldens.append(key)
+                missing_goldens.append(node_counts.get('node'))
                 counters.add_counter('validate-goldens-missing', 1)
 
     if missing_goldens:
@@ -478,8 +392,6 @@ def generate_goldens(input_files: str,
             counters.add_counter('generate-goldens-filtered-nodes',
                                  len(filtered_nodes))
 
-    normalize = config.get('goldens_normalize', True)
-    strip_namespaces = config.get('goldens_strip_namespaces', True)
     ignore_props = set(config.get('goldens_ignore_property', []))
 
     golden_nodes = {}
@@ -512,10 +424,7 @@ def generate_goldens(input_files: str,
                 continue
 
             # Generate a unique key for this golden node shape.
-            key = get_node_fingerprint(golden_node,
-                                       key_property=props,
-                                       normalize=normalize,
-                                       strip_namespaces=strip_namespaces)
+            key = fingerprint_node(golden_node, compare_props=props)
 
             if key not in golden_nodes:
                 golden_nodes[key] = golden_node
@@ -572,7 +481,7 @@ def validate_goldens(inputs: str | dict,
     missing_goldens = validator_compare_nodes(input_nodes, golden_nodes, config,
                                               counters)
 
-    # Optionally write out the missing fingerprints to a CSV for debugging.
+    # Optionally write out the missing golden nodes for debugging.
     if missing_goldens and output_file:
         if output_file.endswith('/') or os.path.isdir(output_file):
             # Append a default filename if only a directory was provided.
@@ -581,8 +490,12 @@ def validate_goldens(inputs: str | dict,
                 'goldens_missing_' + os.path.basename(golden_files_list[0]))
         logging.info(
             f'Writing {len(missing_goldens)} missing goldens to {output_file}')
-        file_util.file_write_csv_dict(dict(enumerate(missing_goldens)),
-                                      output_file)
+        if file_util.file_is_csv(output_file):
+            file_util.file_write_csv_dict(dict(enumerate(missing_goldens)),
+                                          output_file)
+        else:
+            mcf_file_util.write_mcf_nodes(dict(enumerate(missing_goldens)),
+                                          output_file)
     return missing_goldens
 
 
