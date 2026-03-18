@@ -77,6 +77,7 @@ class ValidationRunner:
                 (self.validator.validate_min_value_check, 'stats'),
             'MAX_VALUE_CHECK':
                 (self.validator.validate_max_value_check, 'stats'),
+            'GOLDENS': (self.validator.validate_goldens, 'stats'),
         }
 
         self._initialize_data_sources(stats_summary, lint_report, differ_output)
@@ -166,10 +167,20 @@ class ValidationRunner:
             validation_func, data_source_key = self.validation_dispatch[
                 validator_name]
 
+            rule_params = dict(rule.get('params', {}))
+            if rule_params:
+                # Add default parameters for output folder
+                output_dir = self.validation_output
+                if output_dir and not output_dir.endswith(
+                        '/') and not os.path.isdir(output_dir):
+                    output_dir = os.path.dirname(output_dir)
+                if output_dir:
+                    rule_params.setdefault('output_path', output_dir)
+
             if validator_name == 'SQL_VALIDATOR':
                 result = validation_func(self.data_sources['stats'],
                                          self.data_sources['differ'],
-                                         rule['params'])
+                                         rule_params)
             else:
                 scope = rule['scope']
                 if isinstance(scope, str):
@@ -185,7 +196,7 @@ class ValidationRunner:
                         regex_patterns=variables_config.get('regex'),
                         contains_all=variables_config.get('contains_all'))
 
-                result = validation_func(df, rule['params'])
+                result = validation_func(df, rule_params)
 
             result.name = rule['rule_id']
             result.validation_params = rule.get('params', {})

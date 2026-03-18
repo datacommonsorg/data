@@ -31,6 +31,27 @@
             "params": {
                 "threshold": 0
             }
+        },
+        {
+            "rule_id": "check_goldens_output_csv",
+            "validator": "GOLDENS",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {
+                "golden_files": "golden_data/golden_treasury_constant_maturity_rates.csv",
+                "input_files": "treasury_constant_maturity_rates.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {
+                "golden_files": "golden_data/golden_summary_report.csv"
+            }
         }
     ]
 }
