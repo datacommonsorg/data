@@ -133,8 +133,8 @@ class SchemaReconciler:
     """
 
     def __init__(self,
-                 schema_mcf_files: list = '',
-                 config: dict = {},
+                 schema_mcf_files: list = None,
+                 config: dict = None,
                  counters: Counters = None):
         """Initializes the SchemaReconciler with schema files and configuration.
 
@@ -155,6 +155,8 @@ class SchemaReconciler:
 
     def load_schema_mcf(self, schema_mcf_files: list):
         """Load nodes from schema MCF files and add to the index."""
+        if not schema_mcf_files:
+            return
         mcf_nodes = load_mcf_nodes(schema_mcf_files, {})
         self.add_schema_nodes(mcf_nodes)
         logging.info(
@@ -379,8 +381,25 @@ def schema_reconcile_nodes(nodes: dict,
                            config: dict = None,
                            schema_nodes: dict = None,
                            schema_files: list = None,
-                           counters: Counters = None) -> bool:
-    """Reconcile a set of nodes."""
+                           counters: Counters = None) -> int:
+    """Reconcile a set of nodes.
+
+    Args:
+      nodes: dictionary of nodes as dict of property:values
+      config: dictionary of config parameter values
+      schema_nodes: dictionary of existing schema nodes
+        with key with a namespace: dcid:
+      schema_file: list of schema file to be loaded
+        Any node not in chema_nodes or schema_files is lookedup in DC API.
+      counters: (optional) counters to be updated
+
+    Returns:
+      the number of nodes that wre reconciled.
+
+      Also updates the input nodes with the reconciled property
+      if config recon_keep_legacy_svobs is set, keeps existing gnodes
+        and creates new nodesthat have been reconciled.
+    """
     recon = SchemaReconciler(schema_files, config, counters)
     recon.add_schema_nodes(schema_nodes)
     return recon.reconcile_nodes(nodes)
