@@ -462,6 +462,7 @@ class DataSampler:
                         # Process and write header rows from the first input file.
                         if row_index <= header_rows and input_index == 0:
                             self._process_header_row(row)
+                            self._add_row_counts(row)
                             csv_writer.writerow(row)
                             self._counters.add_counter('sampler-header-rows', 1)
                             # After processing all header rows, validate that all
@@ -529,7 +530,8 @@ def load_column_keys(column_keys: list) -> dict:
 
 def sample_csv_file(input_file: str,
                     output_file: str = '',
-                    config: dict = None) -> str:
+                    config: dict = None,
+                    counters: Counters = None) -> str:
     """Samples a CSV file and returns the path to the sampled file.
 
     This function provides a convenient way to sample a CSV file with a single
@@ -559,6 +561,7 @@ def sample_csv_file(input_file: str,
           - input_delimiter: The delimiter used in the input file.
           - output_delimiter: The delimiter to use in the output file.
           - input_encoding: The encoding of the input file.
+        counters: optional Counters object to get counts of sampling.
 
     Returns:
         The path to the output file with the sampled rows.
@@ -588,7 +591,7 @@ def sample_csv_file(input_file: str,
     """
     if config is None:
         config = {}
-    data_sampler = DataSampler(config_dict=config)
+    data_sampler = DataSampler(config_dict=config, counters=counters)
     return data_sampler.sample_csv_file(input_file, output_file)
 
 
@@ -626,7 +629,9 @@ def get_default_config() -> dict:
 
 
 def main(_):
-    sample_csv_file(_FLAGS.sampler_input, _FLAGS.sampler_output)
+    counters = Counters()
+    sample_csv_file(_FLAGS.sampler_input, _FLAGS.sampler_output, counters=counters)
+    counters.print_counters()
 
 
 if __name__ == '__main__':
