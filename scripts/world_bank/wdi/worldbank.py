@@ -229,77 +229,64 @@ def read_worldbank(iso3166alpha3, mode):
     """
     if mode in ["download", '']:
         logging.info('Downloading input file for country %s', iso3166alpha3)
-        country_zip = ("http://api.worldbank.org/v2/en/country/" +
-                       iso3166alpha3 + "?downloadformat=csv")
-        r = retry_call(requests.get,
-                       fargs=[country_zip],
-                       tries=3,
-                       delay=20,
-                       backoff=1.5)
+        
+        # 1. Attempt CSV ZIP Download
+        csv_url = f"http://api.worldbank.org/v2/en/country/{iso3166alpha3}?downloadformat=csv"
+        r = retry_call(requests.get, fargs=[csv_url], tries=3, delay=20, backoff=1.5)
+        
         if r.status_code != 200:
             logging.fatal('Failed to retrieve %s', iso3166alpha3)
-        if not os.path.exists(os.path.join(_MODULE_DIR, 'source_data')):
-            os.mkdir(os.path.join(_MODULE_DIR, 'source_data'))
-        with open(
-                os.path.join(_MODULE_DIR, 'source_data',
-                             iso3166alpha3 + '.zip'), 'wb') as f:
-            f.write(r.content)
 
-        filebytes = io.BytesIO(r.content)
-        myzipfile = zipfile.ZipFile(filebytes)
+        myzipfile = zipfile.ZipFile(io.BytesIO(r.content))
+        file_to_open = next((f for f in myzipfile.namelist() if f.startswith("API")), None)
 
-        # We need to select the data file which starts with "API",
-        # but does not have an otherwise regular filename structure.
-        file_to_open = None
-        for file in myzipfile.namelist():
-            if file.startswith("API"):
-                file_to_open = file
-                break
-        if file_to_open is None:
-            logging.warning(
-                'Failed to find data for %s in the downloaded ZIP. Skipping.',
-                iso3166alpha3)
-            return None
         df = None
-        # Captures any text contained in double quotatations.
-        line_match = re.compile(r"\"([^\"]*)\"")
+        # Check if CSV exists in the ZIP
+        if file_to_open:
+            line_match = re.compile(r"\"([^\"]*)\"")
+            for line in myzipfile.open(file_to_open).readlines():
+                cols = line_match.findall(line.decode("utf-8"))
+                if len(cols) > 2:
+                    if df is None:
+                        df = pd.DataFrame(columns=cols)
+                    else:
+                        df = pd.concat([df, pd.DataFrame([cols], columns=df.columns)], ignore_index=True)
+        
+        # 2. FALLBACK: Download Excel ZIP if CSV was missing or invalid
+        if df is None:
+            logging.info('API file not in CSV zip. Trying Excel zip for %s', iso3166alpha3)
+            excel_url = f"http://api.worldbank.org/v2/en/country/{iso3166alpha3}?downloadformat=excel"
+            r_ex = requests.get(excel_url)
+            
+            if r_ex.status_code == 200:
+                # The Excel "ZIP" usually contains an .xls file. 
+                # World Bank sometimes sends the .xls directly or inside a zip.
+                # This logic handles the Excel stream directly:
+                df = pd.read_excel(io.BytesIO(r_ex.content), sheet_name=0, skiprows=3)
+            else:
+                logging.warning('Failed to find data in any format for %s', iso3166alpha3)
+                return None
 
-        for line in myzipfile.open(file_to_open).readlines():
-            # Cells are contained in quotations and comma separated.
-            cols = line_match.findall(line.decode("utf-8"))
-
-            # CSVs include header informational lines which should be ignored.
-            if len(cols) > 2:
-                # Use first row as the header.
-                if df is None:
-                    df = pd.DataFrame(columns=cols)
-                else:
-                    df = pd.concat(
-                        [df, pd.DataFrame([cols], columns=df.columns)],
-                        ignore_index=True)
-
+        # --- Tidying Logic (shared by both) ---
         df = df.rename(columns=WORLDBANK_COL_REMAP)
-
-        # Turn each year into its own row.
-        df = df.set_index(
-            ['CountryName', 'CountryCode', 'IndicatorName', 'IndicatorCode'])
+        df = df.set_index(['CountryName', 'CountryCode', 'IndicatorName', 'IndicatorCode'])
         df = df.stack()
         df.index = df.index.rename('year', level=4)
         df.name = "Value"
         df = df.reset_index()
 
-        # Convert to numeric and drop empty values.
-        df['Value'] = pd.to_numeric(df['Value'])
-        df = df.dropna()
-        if not os.path.exists(
-                os.path.join(_MODULE_DIR, 'preprocessed_source_csv')):
-            os.mkdir(os.path.join(_MODULE_DIR, 'preprocessed_source_csv'))
-        df.to_csv('preprocessed_source_csv/' + iso3166alpha3 + '.csv',
-                  index=False)
+        df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
+        df = df.dropna(subset=['Value'])
+        
+        # Save preprocessed version
+        out_path = os.path.join(_MODULE_DIR, 'preprocessed_source_csv', f'{iso3166alpha3}.csv')
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+        df.to_csv(out_path, index=False)
+        
     else:
-        df = pd.read_csv('preprocessed_source_csv/' + iso3166alpha3 + '.csv')
+        df = pd.read_csv(os.path.join(_MODULE_DIR, 'preprocessed_source_csv', f'{iso3166alpha3}.csv'))
+    
     return df
-
 
 def build_stat_vars_from_indicator_list(row):
     """ Generates World Bank StatVar for a row in the indicators dataframe. """
