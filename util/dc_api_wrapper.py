@@ -329,7 +329,7 @@ def dc_api_get_node_property(dcids: list,
       dc_api_batched_wrapper and dc_api_wrapper for details.
 
   Returns:
-    dictionary with each input dcid mapped to a propeorty:value
+    dictionary with each input dcid mapped to a property:value
   """
     config = _validate_v2_config(config)
     if isinstance(prop, list):
