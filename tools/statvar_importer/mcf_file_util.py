@@ -743,7 +743,7 @@ def get_value_list(value: str) -> list:
     value_list = []
     # Read the string as a comma separated line.
     if not isinstance(value, str):
-      value = str(value)
+        value = str(value)
     is_quoted = '"' in value
     try:
         if is_quoted and "," in value:

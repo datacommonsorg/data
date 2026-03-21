@@ -1233,7 +1233,7 @@ class StatVarsMap:
     def reconcile_nodes(self):
         """Reconcile statvar and obs to new property:values or statvars."""
         recon = SchemaReconciler(config=self._config.get_configs(),
-                               counters=self._counters)
+                                 counters=self._counters)
         recon.reconcile_nodes(self._statvars_map)
         recon.reconcile_nodes(self._statvar_obs_map)
 
@@ -2798,7 +2798,7 @@ class StatVarDataProcessor:
         self._counters.set_prefix('2:prepare_output_')
         self._statvars_map.drop_invalid_statvars()
         if self._config.get('reconcile_nodes', True):
-           self._statvars_map.reconcile_nodes()
+            self._statvars_map.reconcile_nodes()
         if self._config.get('generate_statvar_mcf', True):
             self._counters.set_prefix('3:write_statvar_mcf_')
             statvar_mcf_file = self._config.get('output_statvar_mcf',
