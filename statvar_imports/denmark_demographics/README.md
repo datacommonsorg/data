@@ -58,7 +58,7 @@ This generates the following output files for the first time run:
 Validation is performed using the Data Commons import tool:
 
 ```bash
-java -jar datacommons-import-tool-0.1-jar-with-dependencies.jar lint \
+java -jar datacommons-import-tool-jar-with-dependencies.jar lint \
     output_stat_vars_schema.mcf \
     output.csv \
     output.tmcf \
