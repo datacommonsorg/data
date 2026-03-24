@@ -19,12 +19,12 @@ categories (ensuring 'Total' values appear first) and pivots the data to a
 wide-format time series before saving to CSV.
 """
 
-import requests
 import pandas as pd
 import os
-from io import StringIO
 import re
+from io import StringIO
 from absl import logging
+from statbank_utils import fetch_statbank_api
 
 # Set logging verbosity
 logging.set_verbosity(logging.INFO)
@@ -35,18 +35,7 @@ output_dir = "./input_files/"
 table_id = "BEFOLK2"
 
 def get_age_rank(age_str):
-    """
-    Assigns a numerical rank to age strings to facilitate correct sorting.
-    
-    'Total' or 'Age, total' is assigned the highest priority (-1), while 
-    numeric age groups (e.g., '0-4', '5-9') are ranked by their starting integer.
-    
-    Args:
-        age_str (str): The label for the age category.
-        
-    Returns:
-        int: A ranking value used for sorting.
-    """
+    """Assigns a numerical rank to age strings to facilitate correct sorting."""
     age_str = str(age_str).lower()
     if 'total' in age_str:
         return -1
@@ -54,25 +43,13 @@ def get_age_rank(age_str):
     return int(nums[0]) if nums else 999
 
 def main():
-    """
-    Main orchestration function to fetch, sort, pivot, and save the population data.
-    
-    The function handles:
-    1. Directory initialization.
-    2. API POST request for bulk data.
-    3. Dynamic sorting of Sex (Total first).
-    4. Regex-based sorting of Age groups and Years.
-    5. Transformation from long to wide format (time series).
-    """
+    """Main orchestration function to fetch, sort, pivot, and save the population data."""
     logging.info("--- Starting Statistics Denmark BEFOLK2 data extraction ---")
 
-    # Ensure the target directory exists
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
         logging.info(f"Created output directory: {output_dir}")
 
-    # --- FETCH DATA ---
-    # Define the variables for the API request
     payload = {
        "table": table_id,
        "format": "BULK",
@@ -85,35 +62,29 @@ def main():
     }
 
     try:
-        logging.info(f"Requesting bulk data for table: {table_id}")
-        response = requests.post(url, json=payload)
-        response.raise_for_status()
-
+        # Use modularized download logic
+        response = fetch_statbank_api(url, table_id, payload)
+        
         if response.status_code == 200:
             # Process the semicolon-separated bulk response
             df = pd.read_csv(StringIO(response.text), sep=';')
             sex_col, age_col, time_col, val_col = df.columns
+            
+            # RESTORED: Printing the total number of rows processed
             logging.info(f"Data received. Processing {len(df)} rows.")
 
-            # 1. DYNAMIC SEX SORTING (Total -> Men -> Women)
-            # Identify 'Total' dynamically to ensure it stays at the top of the dataset.
+            # 1. DYNAMIC SEX SORTING
             sex_order = sorted(df[sex_col].unique(), key=lambda x: 0 if 'total' in str(x).lower() else 1)
             df[sex_col] = pd.Categorical(df[sex_col], categories=sex_order, ordered=True)
 
-            # 2. DYNAMIC AGE SORTING (Age, total -> 0-4 -> 5-9...)
-            # Apply the ranking function to create a temporary sort key.
+            # 2. DYNAMIC AGE SORTING
             df['age_sort'] = df[age_col].apply(get_age_rank)
 
             # 3. DYNAMIC YEAR SORTING
-            # Extract digits from time labels to ensure chronological ordering.
             df[time_col] = df[time_col].apply(lambda x: int(re.search(r'\d+', str(x)).group()))
 
-            # Sort the dataframe by the defined demographic hierarchy.
+            # Sort and Pivot
             df = df.sort_values([sex_col, 'age_sort', time_col])
-
-            # 4. PIVOT
-            # Transform the data so that years become individual columns. 
-            # sort=False is used to preserve the manual demographic sorting performed above.
             df_pivot = df.pivot_table(
                 index=[sex_col, age_col],
                 columns=time_col,
@@ -122,22 +93,17 @@ def main():
                 sort=False 
             ).reset_index()
             
-            # Map column names to descriptive English titles
             df_pivot = df_pivot.rename(columns={'ALDER': 'Age', 'KØN': 'Sex'})
 
             # --- SAVE ---
             filename = "population_sex_age_time_input.csv"
             save_path = os.path.join(output_dir, filename)
-            
-            # Save using utf-8-sig to ensure compatibility with Excel and special characters.
             df_pivot.to_csv(save_path, index=False, encoding='utf-8-sig')
             logging.info(f"File saved successfully: {save_path}")
 
         else:
             logging.error(f"Request failed with status code: {response.status_code}")
 
-    except requests.exceptions.RequestException as e:
-        logging.fatal(f"Network error while fetching data: {e}")
     except Exception as e:
         logging.fatal(f"An unexpected error occurred during processing: {e}")
 
