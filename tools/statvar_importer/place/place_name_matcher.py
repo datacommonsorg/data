@@ -74,26 +74,6 @@ from counters import Counters
 import file_util
 from ngram_matcher import NgramMatcher
 
-flags.DEFINE_string('input_csv', '',
-                    'CSV file with names of places to resolve.')
-flags.DEFINE_string('input_name_column', 'name',
-                    'CSV column for names in the input_csv.')
-flags.DEFINE_list(
-    'place_within',
-    '',
-    'Comma separated list of parent places, eg: country/BRA.',
-)
-flags.DEFINE_string('ngram_matcher_config', '',
-                    'Configuration settings for ngram matcher.')
-flags.DEFINE_list('lookup_names', '',
-                  'Comma separated list of places to lookup.')
-flags.DEFINE_string('place_output_csv', '',
-                    'Output CSV with place dcids added.')
-flags.DEFINE_string('place_csv', '',
-                    'CSV file with place names and dcids to match.')
-
-_FLAGS = flags.FLAGS
-
 _DEFAULT_CONFIG = {
     # Ordered list of parent places
     'parent_place_types': [
@@ -356,6 +336,7 @@ class PlaceNameMatcher:
 
 
 def main(_):
+    _FLAGS = flags.FLAGS
     config = {}
     if _FLAGS.ngram_matcher_config:
         config = ast.literal_eval(_FLAGS.ngram_matcher_config)
@@ -373,4 +354,21 @@ def main(_):
 
 
 if __name__ == '__main__':
+    flags.DEFINE_string('input_csv', '',
+                        'CSV file with names of places to resolve.')
+    flags.DEFINE_string('input_name_column', 'name',
+                        'CSV column for names in the input_csv.')
+    flags.DEFINE_list(
+        'place_within',
+        '',
+        'Comma separated list of parent places, eg: country/BRA.',
+    )
+    flags.DEFINE_string('ngram_matcher_config', '',
+                        'Configuration settings for ngram matcher.')
+    flags.DEFINE_list('lookup_names', '',
+                      'Comma separated list of places to lookup.')
+    flags.DEFINE_string('place_output_csv', '',
+                        'Output CSV with place dcids added.')
+    flags.DEFINE_string('place_csv', '',
+                        'CSV file with place names and dcids to match.')
     app.run(main)

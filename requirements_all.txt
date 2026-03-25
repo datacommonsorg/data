@@ -9,6 +9,7 @@
 
 absl-py
 chembl-webresource-client
+dataclasses-json
 deepdiff
 earthengine-api
 flask_restful
@@ -21,6 +22,7 @@ netCDF4
 protobuf
 rasterio
 rdp
+requests-mock
 s2sphere
 sentence-transformers
 tabula-py

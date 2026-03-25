@@ -22,15 +22,24 @@ Output:
 
 """
 
-from shapely import geometry
-import datacommons as dc
 import concurrent.futures
-from typing import List, Optional
-import json
 import csv
+import json
+from pathlib import Path
+import sys
+from typing import List, Optional
+
+from shapely import geometry
 
 from absl import flags
 from absl import app
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+
+from util.dc_api_wrapper import dc_api_batched_wrapper
+from util.dc_api_wrapper import dc_api_wrapper
+from util.dc_api_wrapper import get_datacommons_client
 
 FLAGS = flags.FLAGS
 
@@ -59,23 +68,43 @@ def construct_one_degree_grid_polygons() -> List[geometry.box]:
 
 def get_place_by_type(parent_places, places_types: List[str]) -> List[str]:
     """Return the place ids of all places contained in a set of parent places."""
+    client = get_datacommons_client()
     all_types_of_places = []
     for place_type in places_types:
-        parent_place_to_places = dc.get_places_in(parent_places, place_type)
+        parent_place_to_places = dc_api_wrapper(
+            function=client.node.fetch_place_children,
+            args={
+                'place_dcids': parent_places,
+                'children_type': place_type,
+                'as_dict': True,
+            },
+        )
+        if not parent_place_to_places:
+            continue
         for places in parent_place_to_places.values():
-            for place in places:
-                all_types_of_places.extend(place)
+            all_types_of_places.extend(
+                place.get('dcid') for place in places if place.get('dcid'))
     return all_types_of_places
 
 
 def places_to_geo_jsons(places: List[str]):
     """Get geojsons for a list of places."""
-    resp = dc.get_property_values(places, 'geoJsonCoordinates')
+    client = get_datacommons_client()
+    resp = dc_api_batched_wrapper(function=client.node.fetch_property_values,
+                                  dcids=places,
+                                  args={'properties': 'geoJsonCoordinates'},
+                                  dcid_arg_kw='node_dcids')
     geojsons = {}
-    for p, gj in resp.items():
-        if not gj:
+    for place in places:
+        nodes = (resp.get(place, {}).get('arcs',
+                                         {}).get('geoJsonCoordinates',
+                                                 {}).get('nodes', []))
+        if not nodes:
             continue
-        geojsons[p] = geometry.shape(json.loads(gj[0]))
+        geojson = nodes[0].get('value')
+        if not geojson:
+            continue
+        geojsons[place] = geometry.shape(json.loads(geojson))
     return geojsons
 
 

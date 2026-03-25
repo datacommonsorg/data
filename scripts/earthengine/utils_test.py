@@ -15,9 +15,11 @@
 
 import math
 import os
+from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 from absl import logging
 import s2sphere
@@ -371,3 +373,26 @@ class DateUtilsTest(unittest.TestCase):
                          utils.date_format_by_time_period('2022-04-10', 'P3M'))
         self.assertEqual('2021',
                          utils.date_format_by_time_period('2021-01-10', '1Y'))
+
+
+class PlaceUtilsTest(unittest.TestCase):
+
+    def test_place_id_to_lat_lng_dc_api(self):
+        placeid = 'geoId/06085'
+        response = {
+            placeid: {
+                'latitude': '"37.221614","37.36"',
+                'longitude': '"-121.68954","-121.97"',
+            }
+        }
+        with mock.patch('utils.dc_api_get_node_property',
+                        return_value=response) as mock_get:
+            lat, lng = utils.place_id_to_lat_lng(placeid, dc_api_lookup=True)
+            self.assertAlmostEqual(37.221614, lat)
+            self.assertAlmostEqual(-121.68954, lng)
+            mock_get.assert_called_once_with(
+                [placeid], ['latitude', 'longitude'], {
+                    'dc_api_version': 'V2',
+                    'dc_api_use_cache': True,
+                    'dc_api_root': utils._DC_API_ROOT,
+                })

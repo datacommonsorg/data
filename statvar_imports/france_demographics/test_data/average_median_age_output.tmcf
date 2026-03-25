@@ -1,0 +1,6 @@
+Node: E:average_median_age_output->E0
+observationDate: C:average_median_age_output->observationDate
+value: C:average_median_age_output->value
+observationAbout: C:average_median_age_output->observationAbout
+variableMeasured: C:average_median_age_output->variableMeasured
+typeOf: dcs:StatVarObservation

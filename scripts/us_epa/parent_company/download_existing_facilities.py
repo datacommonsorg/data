@@ -14,34 +14,58 @@
 """A simple script to download existing Facilities in Data Commons."""
 
 import os
-import pathlib
+import sys
+from pathlib import Path
 
-import datacommons
 import pandas as pd
 
 from absl import app
 from absl import flags
 
+REPO_ROOT = Path(__file__).resolve().parents[3]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from util.dc_api_wrapper import get_datacommons_client
+
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('output_path', 'tmp_data', 'Output directory')
+
+def _define_flags() -> None:
+    flags.DEFINE_string('output_path', 'tmp_data', 'Output directory')
 
 
-def main(_):
-    assert FLAGS.output_path
-    pathlib.Path(FLAGS.output_path).mkdir(exist_ok=True)
-    out_file = os.path.join(FLAGS.output_path, 'existing_facilities.csv')
+def download_existing_facilities(output_path: str) -> str:
+    Path(output_path).mkdir(exist_ok=True)
+    out_file = os.path.join(output_path, 'existing_facilities.csv')
 
-    q = "SELECT DISTINCT ?dcid WHERE {?a typeOf EpaReportingFacility . ?a dcid ?dcid }"
-    res = datacommons.query(q)
-
+    client = get_datacommons_client()
+    response = client.node.fetch_property_values(
+        node_dcids="EpaReportingFacility", properties="typeOf", out=False)
+    facility_nodes = response.get_properties().get("EpaReportingFacility",
+                                                   {}).get("typeOf", [])
     facility_ids = []
-    for facility in res:
-        facility_ids.append(facility["?dcid"])
+    facility_ids_set = set()
+    for node in facility_nodes:
+        value = getattr(node, "dcid", None)
+        if not value or value in facility_ids_set:
+            continue
+        facility_ids_set.add(value)
+        facility_ids.append(value)
 
     df = pd.DataFrame.from_dict({"epaGhgrpFacilityId": facility_ids})
     df.to_csv(out_file, mode="w", header=True, index=False)
+    return out_file
+
+
+def main(_: list[str]) -> int:
+    output_path = FLAGS.output_path
+    if not output_path:
+        raise ValueError("output_path is required.")
+    download_existing_facilities(output_path)
+    return 0
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

@@ -34,7 +34,6 @@ import urllib
 from absl import app
 from absl import flags
 from absl import logging
-import datacommons as dc
 
 _FLAGS = flags.FLAGS
 

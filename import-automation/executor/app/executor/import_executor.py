@@ -29,7 +29,6 @@ import tempfile
 import time
 import traceback
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
-from google.cloud import spanner
 import datetime
 from enum import Enum
 
@@ -48,6 +47,7 @@ from counters import Counters
 from timer import Timer
 from import_differ.import_differ import ImportDiffer
 from tools.import_validation.runner import ValidationRunner
+from tools.import_validation.result import ValidationStatus, ValidationResult
 from tools.import_validation.validation_config import merge_and_save_config
 from app import configs
 from app import utils
@@ -76,15 +76,15 @@ lastDataRefreshDate: "{last_data_refresh_date}"
 AUTO_IMPORT_JOB_STAGE = "auto-import-job-stage"
 AUTO_IMPORT_JOB_STATUS = "auto-import-job-status"
 IMPORT_SUMMARY_FILE = "import_summary.json"
-STAGING_PATH = "staging"
+STAGING_VERSION_FILE = "staging_version.txt"
 
 
 class ImportStatus(Enum):
     SUCCESS = 1
     FAILURE = 2
-    ERROR = 3
+    PENDING = 3
     SKIP = 4
-    READY = 5
+    STAGING = 5
     VALIDATION = 6
 
 
@@ -129,6 +129,7 @@ class ImportStatusSummary:
     import_name: str
     status: ImportStatus = None
     latest_version: str = ''
+    graph_path: str = ''
     execution_time: int = 0  # seconds
     data_volume: int = 0  # bytes
     job_id: str = ''
@@ -239,6 +240,7 @@ class ImportExecutor:
                     tmpdir, timeout=self.config.repo_download_timeout)
                 logging.info('%s: downloaded repo %s', absolute_import_name,
                              repo_dir)
+                self.local_repo_dir = repo_dir
 
             executed_imports = []
 
@@ -462,8 +464,8 @@ class ImportExecutor:
                 logging.error(
                     'Skipping genmcf due to missing import input spec.')
                 continue
-            output_path = os.path.join(absolute_import_dir, import_prefix,
-                                       'genmcf')
+            output_path = os.path.join(absolute_import_dir, import_name,
+                                       version, import_prefix, 'genmcf')
 
             # Run dc import tool to generate resolved mcf.
             logging.info(f'Generating resolved mcf for {import_prefix}')
@@ -501,7 +503,7 @@ class ImportExecutor:
                     f'Error reading report.json {report_json} file: {e}')
             if os.path.exists(output_path):
                 # Upload output to GCS.
-                gcs_output = f'{relative_import_dir}/{import_spec["import_name"]}/{version}/{import_prefix}/validation'
+                gcs_output = f'{relative_import_dir}/{import_spec["import_name"]}/{version}/{import_prefix}/genmcf'
                 logging.info(
                     f'Uploading genmcf output to GCS path: {gcs_output}')
                 for filename in os.listdir(output_path):
@@ -567,6 +569,7 @@ class ImportExecutor:
         data_size = 0
         import_name = import_spec['import_name']
         validation_status = True
+        validation_results = []
 
         import_dir = f'{relative_import_dir}/{import_spec["import_name"]}'
         latest_version = self._get_latest_version(import_dir)
@@ -581,13 +584,19 @@ class ImportExecutor:
                 logging.error('Skipping validation due to missing import spec.')
                 continue
 
-            genmcf_output_path = os.path.join(absolute_import_dir,
-                                              import_prefix, 'genmcf')
+            genmcf_output_path = os.path.join(absolute_import_dir, import_name,
+                                              version, import_prefix, 'genmcf')
             validation_output_path = os.path.join(absolute_import_dir,
+                                                  import_name, version,
                                                   import_prefix, 'validation')
             os.makedirs(validation_output_path, exist_ok=True)
             current_data_path = os.path.join(genmcf_output_path, '*.mcf')
-            previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
+            previous_data_path = latest_version + f'/{import_prefix}/genmcf/*.mcf'
+            # TODO: remove fallback logic once all imports move to new path.
+            if latest_version and not file_util.file_get_matching(
+                    previous_data_path):
+                previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
+            # END
             summary_stats = os.path.join(genmcf_output_path,
                                          'summary_report.csv')
             report_json = os.path.join(genmcf_output_path, 'report.json')
@@ -623,12 +632,7 @@ class ImportExecutor:
                         "previous_version": latest_version,
                         "current_version": version
                     })
-                differ_output_file = differ_output
-                # Save the previous version being compared to
-                with open(
-                        os.path.join(validation_output_path,
-                                     'previous_version.txt'), 'w') as f:
-                    f.write(f'{latest_version}\n')
+                differ_output_file = validation_output_path
             else:
                 differ_output_file = ''
                 logging.error(
@@ -648,7 +652,8 @@ class ImportExecutor:
                     stats_summary=summary_stats,
                     lint_report=report_json,
                     validation_output=validation_output_file)
-                overall_status, _ = validation.run_validations()
+                overall_status, current_results = validation.run_validations()
+                validation_results.extend(current_results)
                 if validation_status:
                     validation_status = overall_status
             except ValueError as e:
@@ -681,12 +686,25 @@ class ImportExecutor:
         import_summary.import_stats[
             'validation_execution_time'] = start_timer.time()
         import_summary.import_stats['validation_data_size'] = data_size
+        validation_message = self._get_validation_message(validation_results)
         log_import_status(
             import_name, import_stage,
             ImportStatus.SUCCESS if validation_status else ImportStatus.FAILURE,
             import_summary.import_stats.get('validation_execution_time', 0),
-            import_summary.import_stats.get('validation_data_size', 0))
+            import_summary.import_stats.get('validation_data_size',
+                                            0), validation_message)
         return validation_status
+
+    def _get_validation_message(
+            self, validation_results: List[ValidationResult]) -> str:
+        """Generates a summary message of validation results."""
+        failed_validations = []
+
+        for res in validation_results:
+            if res.status.name == 'FAILED':
+                failed_validations.append(res.name)
+
+        return f"FAILED: {', '.join(failed_validations) if failed_validations else 'None'}"
 
     def _create_mount_point(self, gcs_volume_mount_dir: str,
                             cleanup_gcs_volume_mount: bool,
@@ -776,70 +794,22 @@ class ImportExecutor:
             import_summary.import_stats.get('source_data_size', 0))
         return inputs
 
-    def _update_import_status_table(
-            self, import_summary: ImportStatusSummary) -> None:
-        """Updates import job status table in spanner."""
-        logging.info(
-            f'Updating {import_summary.import_name} status to {import_summary.status} in spanner.'
-        )
-        if not self.config.spanner_project_id or not self.config.spanner_instance_id or not self.config.spanner_database_id:
-            return
-        spanner_client = spanner.Client(
-            project=self.config.spanner_project_id,
-            client_options={'quota_project_id': self.config.spanner_project_id})
-        instance = spanner_client.instance(self.config.spanner_instance_id)
-        database = instance.database(self.config.spanner_database_id)
-
-        with database.batch() as batch:
-            columns = [
-                "ImportName", "State", "JobId", "ExecutionTime", "DataVolume",
-                "StatusUpdateTimestamp", "NextRefreshTimestamp", "LatestVersion"
-            ]
-            values = [
-                import_summary.import_name, import_summary.status.name,
-                import_summary.job_id, import_summary.execution_time,
-                import_summary.data_volume, spanner.COMMIT_TIMESTAMP,
-                import_summary.next_refresh, import_summary.latest_version
-            ]
-            # Update import timestamp only if import completed successfully.
-            if import_summary.status == ImportStatus.READY:
-                columns.extend(["DataImportTimestamp"])
-                values.extend([spanner.COMMIT_TIMESTAMP])
-
-            batch.insert_or_update(table="ImportStatus",
-                                   columns=tuple(columns),
-                                   values=[tuple(values)])
-
-        logging.info(f'Updated {import_summary.import_name} status in spanner.')
-
     def _update_latest_version(self, version, output_dir, import_spec,
                                import_summary):
         if self.config.skip_gcs_upload:
-            logging.warning(
-                "Skipping latest version update as per import config.")
+            logging.warning("Skipping version update as per import config.")
             return
-        logging.info(f'Updating import latest version {version}')
-        self.uploader.upload_string(
-            version,
-            os.path.join(output_dir, self.config.storage_version_filename))
-        self.uploader.upload_string(
+        logging.info(f'Updating import staging version {version}')
+        self._upload_string_helper(
+            version, os.path.join(output_dir, STAGING_VERSION_FILE))
+        self._upload_string_helper(
             self._import_metadata_mcf_helper(import_spec),
-            os.path.join(output_dir, self.config.import_metadata_mcf_filename))
-        self.uploader.upload_string(
+            os.path.join(output_dir, version, 'provenance', 'genmcf',
+                         self.config.import_metadata_mcf_filename))
+        self._upload_string_helper(
             json.dumps(dataclasses.asdict(import_summary), default=str),
-            os.path.join(output_dir, IMPORT_SUMMARY_FILE))
-        # Add current version to the history of versions if import was successful.
-        if self.config.storage_version_history_filename:
-            history_filename = os.path.join(
-                output_dir, self.config.storage_version_history_filename)
-            versions_history = [version]
-            history = self._get_blob_content(history_filename)
-            if history:
-                versions_history.append(history)
-            self.uploader.upload_string('\n'.join(versions_history),
-                                        history_filename)
-        logging.info(f'Updated import latest version {version}')
-        self._update_import_status_table(import_summary)
+            os.path.join(output_dir, version, IMPORT_SUMMARY_FILE))
+        logging.info(f'Updated import staging version {version}')
 
     @log_function_call
     def _import_one_helper(
@@ -870,19 +840,11 @@ class ImportExecutor:
         output_dir = f'{relative_import_dir}/{import_name}'
         version = self.config.import_version_override if self.config.import_version_override else _clean_time(
             utils.pacific_time())
-        if version == 'DATE_VERSION_PLACEHOLDER':
-            version = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
         import_summary.latest_version = 'gs://' + os.path.join(
-            self.config.storage_prod_bucket_name, output_dir, version, '*', '*',
-            '*.mcf')
+            self.config.storage_prod_bucket_name, output_dir, version)
+        import_summary.graph_path = self.config.graph_data_path
         import_summary.next_refresh = utils.next_utc_timestamp(
             import_spec.get('cron_schedule'))
-        if self.config.import_version_override and self.config.import_version_override != 'DATE_VERSION_PLACEHOLDER':
-            logging.info(f'Import version override {version}')
-            import_summary.status = ImportStatus.READY
-            self._update_latest_version(version, output_dir, import_spec,
-                                        import_summary)
-            return
 
         with tempfile.TemporaryDirectory() as tmpdir:
             requirements_path = os.path.join(absolute_import_dir,
@@ -947,21 +909,15 @@ class ImportExecutor:
                 import_summary.import_stats.get('mcf_data_size', 0) +
                 import_summary.import_stats.get('validation_data_size', 0))
             logging.info(import_summary)
-            self.uploader.upload_string(
-                json.dumps(dataclasses.asdict(import_summary), default=str),
-                os.path.join(output_dir, version, IMPORT_SUMMARY_FILE))
 
             if self.config.ignore_validation_status or validation_status:
-                import_summary.status = ImportStatus.READY
+                import_summary.status = ImportStatus.STAGING
             else:
                 logging.error(
                     "Staging latest version update due to validation failure.")
                 import_summary.status = ImportStatus.VALIDATION
 
-            # Update version and metadata files in staging folder for failed imports
-            version_dir = output_dir if import_summary.status == ImportStatus.READY else os.path.join(
-                output_dir, STAGING_PATH)
-            self._update_latest_version(version, version_dir, import_spec,
+            self._update_latest_version(version, output_dir, import_spec,
                                         import_summary)
 
         if self.importer:
@@ -1063,6 +1019,20 @@ class ImportExecutor:
             raise RuntimeError(
                 f'Import job failed due to missing output files {errors}')
         return uploaded
+
+    def _upload_string_helper(self, text: str, dest: str) -> None:
+        """Uploads a text to dest and also copies locally.
+
+    Args:
+        text: Content of the file to upload, as a string.
+        dest: Path to where the file is to be uploaded to, as a string.
+    """
+
+        local_path = os.path.join(self.local_repo_dir, dest)
+        os.makedirs(os.path.dirname(local_path), exist_ok=True)
+        with open(local_path, "w", encoding="utf-8") as file:
+            file.write(text)
+        self.uploader.upload_file(local_path, dest)
 
     def _upload_file_helper(self, src: str, dest: str) -> None:
         """Uploads a file from src to dest.
