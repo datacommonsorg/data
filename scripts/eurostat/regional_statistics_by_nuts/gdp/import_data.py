@@ -33,6 +33,7 @@ import os
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_HISTORICAL_DATA_PATH = os.path.join(_MODULE_DIR,'historical_deleted.csv')
 flags.DEFINE_string('mode', '', 'Options: download or process')
 
 # Imports country mapping alpha2 country codes to country DCIDs.
@@ -248,6 +249,29 @@ class EurostatGDPImporter:
                                 val_col=col,
                                 unit=unit,
                                 mm=mea_method))
+                
+    def merge_historical_data(self, historical_path):
+        """Concatenates historical deleted data with clean_df. On any (geo,
+        time) overlap, values from clean_df take precedence over historical.
+
+        Args:
+            historical_path (str): Path to the historical deleted data CSV.
+        """
+        if self.clean_df is None:
+            raise ValueError("clean_df is not initialized. Call clean_data "
+                            "before merge_historical_data.")
+
+        if not os.path.exists(historical_path):
+            logging.warning(f'Historical data file not found, skipping: {historical_path}')
+            return
+        logging.info(f'Loading historical data from: {historical_path}')
+        hist_df = pd.read_csv(historical_path)
+
+        # Concatenate; clean_df rows first so .first() keeps output values on overlap.
+        combined = pd.concat([self.clean_df, hist_df], ignore_index=True)
+        self.clean_df = combined.groupby(['geo', 'time'], sort=False,
+                                        as_index=False).first()
+        logging.info(f'Merged historical data. Total rows: {len(self.clean_df)}')
 
 
 def main(_):
@@ -265,6 +289,7 @@ def main(_):
     if mode == "" or mode == "process":
         imp.preprocess_data(input_file)
         imp.clean_data()
+        imp.merge_historical_data(_HISTORICAL_DATA_PATH)
         imp.save_csv()
         imp.generate_tmcf()
 
