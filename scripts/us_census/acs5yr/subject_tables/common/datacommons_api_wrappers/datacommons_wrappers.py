@@ -62,8 +62,7 @@ def dc_check_existence(dcid_list: list,
         Dict object with dcids as key values and boolean values signifying existence as values.
     """
     wrapper_config = {
-        'dc_api_batch_size':
-            max_items,
+        'dc_api_batch_size': max_items,
     }
     return dc_api_is_defined_dcid(dcid_list, wrapper_config)
 

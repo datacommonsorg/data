@@ -390,8 +390,8 @@ class PlaceUtilsTest(unittest.TestCase):
             lat, lng = utils.place_id_to_lat_lng(placeid, dc_api_lookup=True)
             self.assertAlmostEqual(37.221614, lat)
             self.assertAlmostEqual(-121.68954, lng)
-            mock_get.assert_called_once_with(
-                [placeid], ['latitude', 'longitude'], {
-                    'dc_api_version': 'V2',
-                    'dc_api_use_cache': True,
-                })
+            mock_get.assert_called_once_with([placeid],
+                                             ['latitude', 'longitude'], {
+                                                 'dc_api_version': 'V2',
+                                                 'dc_api_use_cache': True,
+                                             })

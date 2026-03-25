@@ -19,11 +19,11 @@ from datetime import date
 from datetime import datetime
 import glob
 import os
+from pathlib import Path
 import pickle
 import re
 import sys
 import tempfile
-from pathlib import Path
 from typing import Union
 
 from absl import logging
@@ -305,8 +305,8 @@ def grid_get_neighbor_ids(grid_id: str) -> list:
             if lat_offset != 0 or lng_offset != 0:
                 neighbour_lat = lat + lat_offset * deg
                 neighbour_lng = lng + lng_offset * deg
-                if abs(neighbour_lat) < _MAX_LATITUDE and abs(
-                        neighbour_lng) < _MAX_LONGITUDE:
+                if (abs(neighbour_lat) < _MAX_LATITUDE and
+                        abs(neighbour_lng) < _MAX_LONGITUDE):
                     neighbours.append(
                         grid_id_from_lat_lng(
                             deg,
@@ -433,7 +433,7 @@ def add_namespace(dcid: str, prefix: str = 'dcid:') -> str:
 
 
 def str_get_numeric_value(
-        value: Union[str, list, int, float]) -> Union[int, float, None]:
+    value: Union[str, list, int, float],) -> Union[int, float, None]:
     """Returns the numeric value from input string or None."""
     if isinstance(value, list):
         value = value[0]
@@ -528,7 +528,7 @@ def date_advance_by_period(date_str: str,
     if not date_str:
         return ''
     dt = datetime.strptime(date_str, date_format)
-    (delta, unit) = date_parse_time_period(time_period)
+    delta, unit = date_parse_time_period(time_period)
     if not delta or not unit:
         logging.error(
             f'Unable to parse time period: {time_period} for date: {date_str}')
@@ -545,7 +545,7 @@ def date_format_by_time_period(date_str: str, time_period: str) -> str:
   """
     if not time_period:
         return date_str
-    (delta, unit) = date_parse_time_period(time_period)
+    delta, unit = date_parse_time_period(time_period)
     date_parts = date_str.split('-')
     if unit == 'years':
         return date_parts[0]
