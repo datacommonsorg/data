@@ -1,8 +1,9 @@
-Node: E:ipeds_gradrates_output->E0
-observationDate: C:ipeds_gradrates_output->observationDate
-observationPeriod: C:ipeds_gradrates_output->observationPeriod
-value: C:ipeds_gradrates_output->value
-observationAbout: C:ipeds_gradrates_output->observationAbout
-variableMeasured: C:ipeds_gradrates_output->variableMeasured
-measurementMethod: C:ipeds_gradrates_output->measurementMethod
+Node: E:graduation_rates_ipeds_output->E0
+observationDate: C:graduation_rates_ipeds_output->observationDate
+observationPeriod: C:graduation_rates_ipeds_output->observationPeriod
+value: C:graduation_rates_ipeds_output->value
+unit: C:graduation_rates_ipeds_output->unit
+observationAbout: C:graduation_rates_ipeds_output->observationAbout
+variableMeasured: C:graduation_rates_ipeds_output->variableMeasured
+measurementMethod: C:graduation_rates_ipeds_output->measurementMethod
 typeOf: dcs:StatVarObservation
