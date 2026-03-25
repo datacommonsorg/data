@@ -7,6 +7,8 @@ It captures these key metrics:
 - 150% Graduation Rate: The standard reporting benchmark (e.g., 6 years for a Bachelor's)
 - 200% Graduation Rate: The extended benchmark (e.g., 8 years for a Bachelor's)
 
+The cohort year in the data refers to the specific time, a group of students who first entered an institution or started a degree. For some cohort year 2018-2022, the data refers to the graduation rates in 2022 for the students who enrolled in 2018.
+
 type of place: Country.
 years: 2009-2024
 ## Data Source
@@ -59,7 +61,7 @@ This generates the following output files:
 Validation of the data is done using the lint flag in the java tool present.
 
 ```bash
-java -jar datacommons-import-tool-0.1-jar-with-dependencies.jar lint graduation_rates_ipeds_output_stat_vars_schema.mcf graduation_rates_ipeds_output.csv graduation_rates_ipeds_output.tmcf graduation_rates_ipeds_output_stat_vars.mcf  
+java -jar datacommons-import-tool-0.1-jar-with-dependencies.jar lint graduation_rates_ipeds_output_stat_vars_schema.mcf graduation_rates_ipeds_output.csv graduation_rates_ipeds_output.tmcf graduation_rates_ipeds_output_stat_vars.mcf
 ```
 
 This generates the following output files:
