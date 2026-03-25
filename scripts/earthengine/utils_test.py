@@ -394,5 +394,4 @@ class PlaceUtilsTest(unittest.TestCase):
                 [placeid], ['latitude', 'longitude'], {
                     'dc_api_version': 'V2',
                     'dc_api_use_cache': True,
-                    'dc_api_root': utils._DC_API_ROOT,
                 })

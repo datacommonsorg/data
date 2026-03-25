@@ -46,7 +46,6 @@ from dc_api_wrapper import dc_api_get_node_property
 # Constants
 _MAX_LATITUDE = 90.0
 _MAX_LONGITUDE = 180.0
-_DC_API_ROOT = 'https://api.datacommons.org'
 
 # Utilities for dicts.
 
@@ -372,7 +371,6 @@ def place_id_to_lat_lng(placeid: str,
             {
                 'dc_api_version': 'V2',
                 'dc_api_use_cache': True,
-                'dc_api_root': _DC_API_ROOT,
             },
         )
         node_props = resp.get(placeid) if resp else None

@@ -520,7 +520,8 @@ def dc_api_resolve_latlng(lat_lngs: list,
     dictionary containing the resolved place information.
   """
     config = _validate_v2_config(config)
-    api_root = config.get('dc_api_root', _DEFAULT_API_ROOT)
+    api_root = config.get('dc_api_root',
+                          os.environ.get('DC_API_ROOT', _DEFAULT_API_ROOT))
     v1_data = {}
     v1_data['coordinates'] = lat_lngs
     num_ids = len(lat_lngs)

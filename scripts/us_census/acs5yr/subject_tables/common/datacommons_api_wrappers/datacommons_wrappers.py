@@ -64,9 +64,6 @@ def dc_check_existence(dcid_list: list,
     wrapper_config = {
         'dc_api_batch_size':
             max_items,
-        'dc_api_root':
-            'https://autopush.api.datacommons.org'
-            if use_autopush else 'https://api.datacommons.org'
     }
     return dc_api_is_defined_dcid(dcid_list, wrapper_config)
 
