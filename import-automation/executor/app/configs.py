@@ -139,6 +139,8 @@ class ExecutorConfig:
         "EXISTING_STATVAR_MCF":
             "gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
     })
+    # API Environment used by the import tool
+    use_autopush_dc_api: bool = True
     # Invoke import tool genmcf.
     invoke_import_tool: bool = True
     # Invoke differ tool.
