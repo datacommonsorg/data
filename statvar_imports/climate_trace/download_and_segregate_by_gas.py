@@ -33,22 +33,25 @@ def download_and_process_zip(url, country_iso, gas):
             if df_list:
                 return pd.concat(df_list, ignore_index=True)
             else:
+                logging.warning(f"    -> No relevant CSV files found in zip for {country_iso} ({gas})")
                 return None
-    except requests.exceptions.RequestException as e:
-        logging.error(f"    -> Failed to download {url}: {e}")
-        raise
-    except zipfile.BadZipFile:
-        logging.error(f"    -> Bad zip file for {url}")
-        raise
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 404:
+            logging.warning(f"    -> Not found (404) for {country_iso} ({gas}) at {url}")
+        else:
+            logging.error(f"    -> HTTP Error for {country_iso} ({gas}) at {url}: {e}")
+        return None
     except Exception as e:
-        logging.error(f"    -> An unexpected error occurred for {url}: {e}")
-        raise
+        logging.error(f"    -> Unexpected error for {country_iso} ({gas}) at {url}: {e}")
+        return None
 
 def download_and_segregate_by_gas():
     """
     Generates a fresh list of country download URLs and then downloads all
     data, saving a separate concatenated CSV for each gas.
     """
+    failed_downloads = []
+    
     logging.info("--- Step 1: Generating Country URL List ---")
     api_country_codes = set()
     try:
@@ -60,7 +63,7 @@ def download_and_segregate_by_gas():
         logging.info(f"Successfully fetched {len(api_country_codes)} countries from API.")
     except requests.exceptions.RequestException as e:
         logging.error(f"Error: Could not fetch country list from API: {e}")
-        raise
+        # Not raising here, we might still have check_country.csv
 
     local_country_codes = set()
     try:
@@ -71,6 +74,10 @@ def download_and_segregate_by_gas():
         logging.warning("Warning: 'check_country.csv' not found. Will only use countries from API.")
 
     combined_codes = sorted(list(api_country_codes.union(local_country_codes)))
+    if not combined_codes:
+        logging.error("No countries to process. Exiting.")
+        return
+
     logging.info(f"Total unique countries to process: {len(combined_codes)}")
 
     gases = ["co2", "ch4", "n2o", "co2e_20yr", "co2e_100yr"]
@@ -101,14 +108,21 @@ def download_and_segregate_by_gas():
 
         gas_dataframes = []
         with ThreadPoolExecutor(max_workers=10) as executor:
-            future_to_url = {
+            future_to_item = {
                 executor.submit(download_and_process_zip, item['url'], item['iso'], gas): item
                 for item in gas_specific_urls
             }
-            for future in as_completed(future_to_url):
-                result_df = future.result()
-                if result_df is not None and not result_df.empty:
-                    gas_dataframes.append(result_df)
+            for future in as_completed(future_to_item):
+                item = future_to_item[future]
+                try:
+                    result_df = future.result()
+                    if result_df is not None and not result_df.empty:
+                        gas_dataframes.append(result_df)
+                    else:
+                        failed_downloads.append(f"{item['iso']} ({gas})")
+                except Exception as e:
+                    logging.error(f"Unhandled error for {item['iso']} ({gas}): {e}")
+                    failed_downloads.append(f"{item['iso']} ({gas}) - Error: {e}")
 
         if not gas_dataframes:
             logging.info(f"No data was downloaded for {gas}. The output file will not be created.")
@@ -132,9 +146,15 @@ def download_and_segregate_by_gas():
             logging.info(f"  -> Successfully created {output_filename} with {len(final_df)} rows.\n")
         except Exception as e:
             logging.error(f"  -> An error occurred during the final processing for {gas}: {e}\n")
-            raise
 
     logging.info("--- All processing complete. ---")
+    if failed_downloads:
+        logging.warning(f"The following {len(failed_downloads)} downloads failed:")
+        for failure in sorted(failed_downloads):
+            logging.warning(f"  - {failure}")
+    else:
+        logging.info("All downloads succeeded!")
+
 
 if __name__ == '__main__':
     download_and_segregate_by_gas()
