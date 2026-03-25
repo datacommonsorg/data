@@ -15,7 +15,7 @@
 
 It uses the DataCommonsClient library module for DC APIs and adds support for
 batched requests, retries and HTTP caching.
-DC API requires an environment variable set for DC_API_KEY.
+DC API requires an environment variable set for DC_API_KEY and DC_API_ROOT.
 Please refer to https://docs.datacommons.org/api/python/v2 for more details.
 """
 
@@ -265,7 +265,7 @@ def get_datacommons_client(config: dict = None) -> DataCommonsClient:
     """Returns a DataCommonsClient object initialized using config."""
     config = _validate_v2_config(config)
     api_key = get_dc_api_key(config)
-    dc_instance = config.get('dc_api_root')
+    dc_instance = config.get('dc_api_root', os.environ.get('DC_API_ROOT'))
     url = None
     # Check if API root is a host or url endpoint.
     if dc_instance:
