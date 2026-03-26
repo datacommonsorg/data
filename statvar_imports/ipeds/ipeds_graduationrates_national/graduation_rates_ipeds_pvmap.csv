@@ -1,5 +1,5 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
-National Center for Education Statistics,statType,measuredValue,populationType,Person,observationAbout,country/USA,,,,
+National Center for Education Statistics,statType,measuredValue,populationType,Student,observationAbout,country/USA,,,,
 Total,value,{Number},institutionType,"""""",statType,measuredValue,measuredProperty,graduationRate,unit,Percent
 Overall,value,{Number},institutionType,"""""",statType,measuredValue,measuredProperty,graduationRate,unit,Percent
 All institutions,value,{Number},institutionType,"""""",statType,measuredValue,measuredProperty,graduationRate,unit,Percent
@@ -13,12 +13,12 @@ attending 2-year,educationalAttainment,AssociateDegreeOrCertificate,#Header,educ
 less-than-      2-year,educationalAttainment,PostSecondaryCertificate,#Header,educationalAttainment,,,,,,
 less-than-2-year,educationalAttainment,PostSecondaryCertificate,#Header,educationalAttainment,,,,,,
 attending less-than-,educationalAttainment,PostSecondaryCertificate,#Header,educationalAttainment,,,,,,
-within 100%,measurementMethod,CourseCompletedWithin100PercentOfNormalTime,,,,,,,,
-within 150%,measurementMethod,CourseCompletedWithin150PercentOfNormalTime,,,,,,,,
-within 200%,measurementMethod,CourseCompletedWithin200PercentOfNormalTime,,,,,,,,
-Within 100 percent,measurementMethod,CourseCompletedWithin100PercentOfNormalTime,,,,,,,,
-Within 150 percent,measurementMethod,CourseCompletedWithin150PercentOfNormalTime,,,,,,,,
-Within 200 percent,measurementMethod,CourseCompletedWithin200PercentOfNormalTime,,,,,,,,
+within 100%,courseCompletionTime,CourseCompletedWithin100PercentOfNormalTime,,,,,,,,
+within 150%,courseCompletionTime,CourseCompletedWithin150PercentOfNormalTime,,,,,,,,
+within 200%,courseCompletionTime,CourseCompletedWithin200PercentOfNormalTime,,,,,,,,
+Within 100 percent,courseCompletionTime,CourseCompletedWithin100PercentOfNormalTime,,,,,,,,
+Within 150 percent,courseCompletionTime,CourseCompletedWithin150PercentOfNormalTime,,,,,,,,
+Within 200 percent,courseCompletionTime,CourseCompletedWithin200PercentOfNormalTime,,,,,,,,
 cohort years 2000 and 2004,observationDate,2004,observationPeriod,P4Y,,,,,,
 cohort years 2001 and 2005,observationDate,2005,observationPeriod,P4Y,,,,,,
 cohort years 2002 and 2006,observationDate,2006,observationPeriod,P4Y,,,,,,
