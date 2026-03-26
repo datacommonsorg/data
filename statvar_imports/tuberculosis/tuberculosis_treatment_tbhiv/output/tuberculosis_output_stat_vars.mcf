@@ -1,0 +1,47 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Tuberculosis_outcome_TB_HIV.csv --pv_map=tuberculosis_outcome_pvmap.csv --config_file=metadata.csv --output_path=output/tuberculosis_output" on 2026-03-26 12:52:09.087631
+
+Node: dcid:Count_Person_ConditionTuberculosisAndHIV_DiedDuringTreatment_AsAFractionOf_Count_Person_ConditionTuberculosisAndHIV
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_ConditionTuberculosisAndHIV
+medicalCondition: dcid:TuberculosisAndHIV
+treatmentOutcome: dcid:DiedDuringTreatment
+
+Node: dcid:Count_Person_ConditionTuberculosisAndHIV_LostToFollowUp_AsAFractionOf_Count_Person_ConditionTuberculosisAndHIV
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_ConditionTuberculosisAndHIV
+medicalCondition: dcid:TuberculosisAndHIV
+treatmentOutcome: dcid:LostToFollowUp
+
+Node: dcid:Count_Person_ConditionTuberculosisAndHIV_SuccessfullyTreated_AsAFractionOf_Count_Person_ConditionTuberculosisAndHIV
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_ConditionTuberculosisAndHIV
+medicalCondition: dcid:TuberculosisAndHIV
+treatmentOutcome: dcid:SuccessfullyTreated
+
+Node: dcid:Count_Person_ConditionTuberculosisAndHIV_TreatmentFailed_AsAFractionOf_Count_Person_ConditionTuberculosisAndHIV
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_ConditionTuberculosisAndHIV
+medicalCondition: dcid:TuberculosisAndHIV
+treatmentOutcome: dcid:TreatmentFailed
+
+Node: dcid:Count_Person_ConditionTuberculosisAndHIV_TreatmentNotEvaluated_AsAFractionOf_Count_Person_ConditionTuberculosisAndHIV
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_ConditionTuberculosisAndHIV
+medicalCondition: dcid:TuberculosisAndHIV
+treatmentOutcome: dcid:TreatmentNotEvaluated
+

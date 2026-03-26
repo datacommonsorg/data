@@ -1,0 +1,8 @@
+Node: E:tuberculosis_output->E0
+observationDate: C:tuberculosis_output->observationDate
+observationAbout: C:tuberculosis_output->observationAbout
+variableMeasured: C:tuberculosis_output->variableMeasured
+value: C:tuberculosis_output->value
+unit: C:tuberculosis_output->unit
+scalingFactor: C:tuberculosis_output->scalingFactor
+typeOf: dcs:StatVarObservation

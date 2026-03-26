@@ -1,0 +1,54 @@
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_ConditionTuberculosisAndHIV
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Condition Tuberculosis And HIV"
+isProvisional: dcs:True
+
+Node: dcid:TuberculosisAndHIV
+typeOf: dcid:Disease
+name: "Tuberculosis And HIV"
+isProvisional: dcs:True
+
+Node: dcid:treatmentOutcome
+typeOf: dcs:Property
+name: "treatmentOutcome"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:TreatmentOutcomeEnum
+isProvisional: dcs:True
+
+Node: dcid:TreatmentOutcomeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "TreatmentOutcomeEnum"
+isProvisional: dcs:True
+
+Node: dcid:SuccessfullyTreated
+typeOf: dcid:TreatmentOutcomeEnum
+name: "Successfully Treated"
+isProvisional: dcs:True
+
+Node: dcid:TreatmentFailed
+typeOf: dcid:TreatmentOutcomeEnum
+name: "Treatment Failed"
+isProvisional: dcs:True
+
+Node: dcid:DiedDuringTreatment
+typeOf: dcid:TreatmentOutcomeEnum
+name: "Died During Treatment"
+isProvisional: dcs:True
+
+Node: dcid:LostToFollowUp
+typeOf: dcid:TreatmentOutcomeEnum
+name: "Lost To Follow Up"
+isProvisional: dcs:True
+
+Node: dcid:TreatmentNotEvaluated
+typeOf: dcid:TreatmentOutcomeEnum
+name: "Treatment Not Evaluated"
+isProvisional: dcs:True
+
