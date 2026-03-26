@@ -15,22 +15,27 @@
 
 It uses the DataCommonsClient library module for DC APIs and adds support for
 batched requests, retries and HTTP caching.
-DC API requires an environment variable set for DC_API_KEY.
+DC API requires an environment variable set for DC_API_KEY and DC_API_ROOT.
 Please refer to https://docs.datacommons.org/api/python/v2 for more details.
 """
 
 import os
 import sys
-import urllib
-import requests
 from typing import Union
+import urllib
 
 from absl import logging
 from datacommons_client.client import DataCommonsClient
 from datacommons_client.utils.error_handling import APIError, DCConnectionError, DCStatusError
+import requests
 import requests_cache
-from tenacity import (RetryCallState, Retrying, retry_if_exception,
-                      stop_after_attempt, wait_fixed)
+from tenacity import (
+    RetryCallState,
+    Retrying,
+    retry_if_exception,
+    stop_after_attempt,
+    wait_fixed,
+)
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -64,8 +69,14 @@ def _get_exception_status_code(exception):
 
 
 def _should_retry_exception(exception: Exception) -> bool:
-    if isinstance(exception, (DCConnectionError, requests.exceptions.Timeout,
-                              requests.exceptions.ChunkedEncodingError)):
+    if isinstance(
+            exception,
+        (
+            DCConnectionError,
+            requests.exceptions.Timeout,
+            requests.exceptions.ChunkedEncodingError,
+        ),
+    ):
         return True
     if isinstance(exception, (urllib.error.HTTPError, DCStatusError, APIError)):
         status_code = _get_exception_status_code(exception)
@@ -105,6 +116,7 @@ def dc_api_wrapper(
     retries: Maximum number of attempts (including the first attempt).
     retry_sec: Interval in seconds between retries for which caller is blocked.
     use_cache: If True, uses request cache for faster response.
+
   Returns:
     The response from the DataCommons API call.
   """
@@ -147,8 +159,9 @@ def dc_api_wrapper(
             logging.error(f'Got exception for api: {function}, {e}')
             return None
         except Exception as e:
-            e.add_note(f'DC API call failed for {function} with max attempts '
-                       f'{max_attempts}.')
+            e.add_note(
+                f'DC API call failed for {function} with max attempts {max_attempts}.'
+            )
             raise
 
 
@@ -252,11 +265,13 @@ def get_dc_api_key(config: dict = None) -> str:
     api_key = config.get('dc_api_key', os.environ.get('DC_API_KEY'))
     if not api_key:
         logging.log_first_n(
-            logging.WARNING, f'Using default DC API key with limited quota. '
-            'Please set an API key in the environment variable: DC_API_KEY.'
-            'Refer https://docs.datacommons.org/api/python/v2/#authentication '
-            'for more details.',
-            n=1)
+            logging.WARNING,
+            f'Using default DC API key with limited quota. '
+            f'Please set an API key in the environment variable: DC_API_KEY.'
+            f'Refer https://docs.datacommons.org/api/python/v2/#authentication '
+            f'for more details.',
+            n=1,
+        )
         api_key = _DEFAULT_DC_API_KEY
     return api_key
 
@@ -265,7 +280,7 @@ def get_datacommons_client(config: dict = None) -> DataCommonsClient:
     """Returns a DataCommonsClient object initialized using config."""
     config = _validate_v2_config(config)
     api_key = get_dc_api_key(config)
-    dc_instance = config.get('dc_api_root')
+    dc_instance = config.get('dc_api_root', os.environ.get('DC_API_ROOT'))
     url = None
     # Check if API root is a host or url endpoint.
     if dc_instance:
@@ -286,6 +301,7 @@ def get_datacommons_client(config: dict = None) -> DataCommonsClient:
 
 def dc_api_is_defined_dcid(dcids: list, config: dict = {}) -> dict:
     """Returns a dictionary with dcids mapped to True/False based on whether
+
   the dcid is defined in the API and has a 'typeOf' property.
      Uses the property_value() DC API to lookup 'typeOf' for each dcid.
      dcids not defined in KG get a value of False.
@@ -301,11 +317,13 @@ def dc_api_is_defined_dcid(dcids: list, config: dict = {}) -> dict:
     # Set parameters for node API.
     client = get_datacommons_client(config)
     api_function = client.node.fetch_property_values
-    api_result = dc_api_batched_wrapper(function=api_function,
-                                        dcids=dcids,
-                                        args={'properties': 'typeOf'},
-                                        dcid_arg_kw='node_dcids',
-                                        config=config)
+    api_result = dc_api_batched_wrapper(
+        function=api_function,
+        dcids=dcids,
+        args={'properties': 'typeOf'},
+        dcid_arg_kw='node_dcids',
+        config=config,
+    )
     response = {}
     for dcid in dcids:
         dcid_stripped = _strip_namespace(dcid)
@@ -348,11 +366,13 @@ def _dc_api_get_node_property_v2(dcids: list,
     api_function = client.node.fetch_property_values
     args = {'properties': prop}
     dcid_arg_kw = 'node_dcids'
-    api_result = dc_api_batched_wrapper(function=api_function,
-                                        dcids=dcids,
-                                        args=args,
-                                        dcid_arg_kw=dcid_arg_kw,
-                                        config=config)
+    api_result = dc_api_batched_wrapper(
+        function=api_function,
+        dcids=dcids,
+        args=args,
+        dcid_arg_kw=dcid_arg_kw,
+        config=config,
+    )
     response = {}
     for dcid in dcids:
         dcid_stripped = _strip_namespace(dcid)
@@ -398,11 +418,13 @@ def dc_api_get_node_property_values(dcids: list, config: dict = {}) -> dict:
     api_function = client.node.fetch
     args = {'expression': '->*'}
     dcid_arg_kw = 'node_dcids'
-    api_result = dc_api_batched_wrapper(function=api_function,
-                                        dcids=dcids,
-                                        args=args,
-                                        dcid_arg_kw=dcid_arg_kw,
-                                        config=config)
+    api_result = dc_api_batched_wrapper(
+        function=api_function,
+        dcids=dcids,
+        args=args,
+        dcid_arg_kw=dcid_arg_kw,
+        config=config,
+    )
     response = {}
     for dcid, arcs in api_result.items():
         pvs = {}
@@ -446,11 +468,13 @@ def dc_api_resolve_placeid(dcids: list,
     api_function = client.resolve.fetch
     args = {'expression': f'<-{in_prop}->dcid'}
     dcid_arg_kw = 'node_ids'
-    api_result = dc_api_batched_wrapper(function=api_function,
-                                        dcids=dcids,
-                                        args=args,
-                                        dcid_arg_kw=dcid_arg_kw,
-                                        config=config)
+    api_result = dc_api_batched_wrapper(
+        function=api_function,
+        dcids=dcids,
+        args=args,
+        dcid_arg_kw=dcid_arg_kw,
+        config=config,
+    )
     results = {}
     if api_result:
         for node in api_result.get('entities', []):
@@ -478,7 +502,7 @@ def dc_api_resolve_latlng(lat_lngs: list,
     }
 
     if return_v1_response is True, a v1 response of this form is returned:
-    
+
     {
       "placeCoordinates": [
           {
@@ -520,7 +544,8 @@ def dc_api_resolve_latlng(lat_lngs: list,
     dictionary containing the resolved place information.
   """
     config = _validate_v2_config(config)
-    api_root = config.get('dc_api_root', _DEFAULT_API_ROOT)
+    api_root = config.get('dc_api_root',
+                          os.environ.get('DC_API_ROOT', _DEFAULT_API_ROOT))
     v1_data = {}
     v1_data['coordinates'] = lat_lngs
     num_ids = len(lat_lngs)
@@ -551,8 +576,7 @@ def dc_api_resolve_latlng(lat_lngs: list,
 
 
 def _convert_v2_to_v1_coordinate_response(v2_response: dict) -> dict:
-    """Converts a v2 coordinate resolution response to a v1 response.
-    """
+    """Converts a v2 coordinate resolution response to a v1 response."""
     v1_response = {'placeCoordinates': []}
     for entity in v2_response.get('entities', []):
         node = entity.get('node', '')
@@ -572,15 +596,14 @@ def _convert_v2_to_v1_coordinate_response(v2_response: dict) -> dict:
                 candidate.get('dcid')
                 for candidate in entity.get('candidates', [])
             ],
-            'places': entity.get('candidates', [])
+            'places': entity.get('candidates', []),
         }
         v1_response['placeCoordinates'].append(place_coordinate)
     return v1_response
 
 
 def _convert_v1_to_v2_coordinate_request(v1_request: dict) -> dict:
-    """Converts a v1 coordinate resolution request to a v2 request.
-    """
+    """Converts a v1 coordinate resolution request to a v2 request."""
     v2_request = {'nodes': [], 'property': '<-geoCoordinate->dcid'}
     for coordinate in v1_request.get('coordinates', []):
         lat = coordinate.get('latitude')
