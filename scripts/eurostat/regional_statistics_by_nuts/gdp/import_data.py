@@ -258,8 +258,7 @@ class EurostatGDPImporter:
             historical_path (str): Path to the historical deleted data CSV.
         """
         if self.clean_df is None:
-            raise ValueError("clean_df is not initialized. Call clean_data "
-                             "before merge_historical_data.")
+            raise ValueError("No cleaned data available. Please call 'clean_data()' before merging historical records.")
 
         if not os.path.exists(historical_path):
             logging.warning(
