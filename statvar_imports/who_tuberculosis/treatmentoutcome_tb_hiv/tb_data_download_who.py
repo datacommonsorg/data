@@ -2,6 +2,10 @@ import os
 import requests
 import io
 import pandas as pd
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def download_who_data():
     # 1. Get the Clean Data from the API using the new Indicator ID
@@ -12,30 +16,31 @@ def download_who_data():
         "$format": "csv"
     }
     
-    print("1. Fetching clean percentage data from WHO API...")
+    logging.info("1. Fetching clean percentage data from WHO API...")
     api_response = requests.get(api_url, params=params)
     
     if api_response.status_code != 200:
-        print(f"Failed to fetch API data. HTTP {api_response.status_code}")
+        logging.info(f"Failed to fetch API data. HTTP {api_response.status_code}")
         return
         
     # Load the clean API data into a pandas table
     api_df = pd.read_csv(io.StringIO(api_response.text))
     
     # 2. Get ONLY the iso3 code from the master database
-    print("2. Fetching country iso3 codes from WHO master database...")
+    logging.info("2. Fetching country iso3 codes from WHO master database...")
     master_url = "https://extranet.who.int/tme/generateCSV.asp?ds=notifications"
     master_response = requests.get(master_url)
     if master_response.status_code != 200:
-        print(f"Failed to fetch master data. HTTP {master_response.status_code}")
+        logging.fatal(f"Failed to fetch master data. HTTP {master_response.status_code}")
         return
     
     # We only pull the 'country' (for matching) and 'iso3' columns
     geo_columns = ['country', 'iso3']
-    master_df = pd.read_csv(master_url, usecols=geo_columns).drop_duplicates()
+    master_df = pd.read_csv(io.StringIO(master_response.text), 
+                    usecols=geo_columns).drop_duplicates()
     
     # 3. Merge the two datasets together based on the country name
-    print("3. Merging data and formatting...")
+    logging.info("3. Merging data and formatting...")
     # The API uses uppercase 'COUNTRY', the master uses lowercase 'country'
     merged_df = pd.merge(api_df, master_df, left_on='COUNTRY', right_on='country', how='left')
     
@@ -56,7 +61,7 @@ def download_who_data():
     
     # Save without the pandas index column
     merged_df.to_csv(filename, index=False)
-    print(f"Success! Data saved locally as '{filename}'")
+    logging.info(f"Success! Data saved locally as '{filename}'")
 
 if __name__ == "__main__":
     download_who_data()
