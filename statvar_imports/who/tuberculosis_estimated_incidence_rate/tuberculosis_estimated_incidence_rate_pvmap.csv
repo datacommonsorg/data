@@ -1,0 +1,6 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+TB incidence,populationType,Person,measuredProperty,incidenceRate,medicalCondition,Tuberculosis,measurementMethod,WHOEstimate,scalingFactor,100000
+HIV-positive TB incidence,variableMeasured,who/TB_e_inc_tbhiv_100k,,,,,,,,
+YEAR,observationDate,{Number},,,,,,,,
+iso3,observationAbout,country/{Data},,,,,,,,
+VALUE,value,{Number},,,,,,,,
