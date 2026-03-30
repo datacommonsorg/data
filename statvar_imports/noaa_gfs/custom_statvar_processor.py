@@ -34,7 +34,6 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('bucket_name', 'unresolved_mcf', 'GCS unresolved_mcf bucket.')
 flags.DEFINE_string('input_local', './test_data/noaa_gfs_2025_12_24_0.csv', 'Path to the local input CSV file.')
 flags.DEFINE_string('output_blob_name', 'noaa_gfs/auto/noaa_gfs_output.csv', 'Destination path in unresolved_mcf bucket.')
-#INPUT_LOCAL = "gfs.t00z.pgrb2.0p25.f000.csv"
 
 # 1. Parameter Mapping (Original)
 param_map = {
