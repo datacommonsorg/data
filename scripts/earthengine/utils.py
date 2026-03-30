@@ -19,6 +19,7 @@ from datetime import date
 from datetime import datetime
 import glob
 import os
+from pathlib import Path
 import pickle
 import re
 import sys
@@ -26,7 +27,6 @@ import tempfile
 from typing import Union
 
 from absl import logging
-import datacommons as dc
 from dateutil.relativedelta import relativedelta
 from geopy import distance
 import s2sphere
@@ -41,12 +41,11 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 from config_map import ConfigMap, read_py_dict_from_file, write_py_dict_to_file
-from dc_api_wrapper import dc_api_wrapper
+from dc_api_wrapper import dc_api_get_node_property
 
 # Constants
 _MAX_LATITUDE = 90.0
 _MAX_LONGITUDE = 180.0
-_DC_API_ROOT = 'http://autopush.api.datacommons.org'
 
 # Utilities for dicts.
 
@@ -306,8 +305,8 @@ def grid_get_neighbor_ids(grid_id: str) -> list:
             if lat_offset != 0 or lng_offset != 0:
                 neighbour_lat = lat + lat_offset * deg
                 neighbour_lng = lng + lng_offset * deg
-                if abs(neighbour_lat) < _MAX_LATITUDE and abs(
-                        neighbour_lng) < _MAX_LONGITUDE:
+                if (abs(neighbour_lat) < _MAX_LATITUDE and
+                        abs(neighbour_lng) < _MAX_LONGITUDE):
                     neighbours.append(
                         grid_id_from_lat_lng(
                             deg,
@@ -366,27 +365,30 @@ def place_id_to_lat_lng(placeid: str,
             placeid)
     elif dc_api_lookup:
         # Get the lat/lng from the DC API
-        latlng = []
-        for prop in ['latitude', 'longitude']:
-            # dc.utils._API_ROOT = 'http://autopush.api.datacommons.org'
-            # resp = dc.get_property_values([placeid], prop)
-            resp = dc_api_wrapper(
-                function=dc.get_property_values,
-                args={
-                    'dcids': [placeid],
-                    'prop': prop,
-                },
-                use_cache=True,
-                api_root=_DC_API_ROOT,
-            )
-            if not resp or placeid not in resp:
-                return (0, 0)
-            values = resp[placeid]
-            if not len(values):
-                return (0, 0)
-            latlng.append(float(values[0]))
-        lat = latlng[0]
-        lng = latlng[1]
+        resp = dc_api_get_node_property(
+            [placeid],
+            ['latitude', 'longitude'],
+            {
+                'dc_api_version': 'V2',
+                'dc_api_use_cache': True,
+            },
+        )
+        node_props = resp.get(placeid) if resp else None
+        if not node_props:
+            return (0, 0)
+
+        def _parse_coordinate(val):
+            if isinstance(val, list):
+                val = val[0] if val else None
+            if isinstance(val, str):
+                val = val.split(',')[0].strip().strip('"')
+            return str_get_numeric_value(val)
+
+        lat = _parse_coordinate(node_props.get('latitude'))
+        lng = _parse_coordinate(node_props.get('longitude'))
+
+        if lat is None or lng is None:
+            return (0, 0)
     return (lat, lng)
 
 
@@ -431,7 +433,7 @@ def add_namespace(dcid: str, prefix: str = 'dcid:') -> str:
 
 
 def str_get_numeric_value(
-        value: Union[str, list, int, float]) -> Union[int, float, None]:
+    value: Union[str, list, int, float],) -> Union[int, float, None]:
     """Returns the numeric value from input string or None."""
     if isinstance(value, list):
         value = value[0]
@@ -526,7 +528,7 @@ def date_advance_by_period(date_str: str,
     if not date_str:
         return ''
     dt = datetime.strptime(date_str, date_format)
-    (delta, unit) = date_parse_time_period(time_period)
+    delta, unit = date_parse_time_period(time_period)
     if not delta or not unit:
         logging.error(
             f'Unable to parse time period: {time_period} for date: {date_str}')
@@ -543,7 +545,7 @@ def date_format_by_time_period(date_str: str, time_period: str) -> str:
   """
     if not time_period:
         return date_str
-    (delta, unit) = date_parse_time_period(time_period)
+    delta, unit = date_parse_time_period(time_period)
     date_parts = date_str.split('-')
     if unit == 'years':
         return date_parts[0]

@@ -17,9 +17,15 @@ Downloads and saves GeoJson map files from DataCommons.
     python3 download.py
 """
 
-import datacommons as dc
 import geojson
 import os
+from pathlib import Path
+import sys
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+
+from util.dc_api_wrapper import dc_api_get_node_property, get_datacommons_client
 
 
 class GeojsonDownloader:
@@ -66,7 +72,7 @@ class GeojsonDownloader:
     }
 
     def __init__(self):
-        dc.set_api_key('dev')
+        self._dc_client = get_datacommons_client()
         self.geojsons = None
 
     def download_data(self, place='country/USA', level=1):
@@ -88,20 +94,42 @@ class GeojsonDownloader:
         Raises:
             ValueError: If a Data Commons API call fails.
         """
-        geolevel = dc.get_property_values([place], "typeOf")
-        # There is an extra level of nesting in geojson files, so we have
-        # to get the 0th element explicitly.
-        assert len(geolevel[place]) == 1
-        geolevel = geolevel[place][0]
+        geolevel_response = dc_api_get_node_property([place], 'typeOf')
+        geolevel_values = geolevel_response.get(place, {}).get('typeOf', '')
+        geolevel_values = [
+            x.strip().strip('"')
+            for x in geolevel_values.split(',')
+            if x.strip()
+        ]
+        assert len(geolevel_values) == 1
+        geolevel = geolevel_values[0]
 
         for i in range(level):
             if geolevel not in self.LEVEL_MAP:
                 raise ValueError("Desired level does not exist.")
             geolevel = self.LEVEL_MAP[geolevel]
 
-        geos_contained_in_place = dc.get_places_in([place], geolevel)[place]
-        self.geojsons = dc.get_property_values(geos_contained_in_place,
-                                               "geoJsonCoordinates")
+        geos_contained_in_place = []
+        place_children = self._dc_client.node.fetch_place_children(
+            place_dcids=[place], children_type=geolevel, as_dict=True)
+        for node in place_children.get(place, []):
+            dcid = node.get("dcid") if isinstance(node, dict) else node.dcid
+            if dcid:
+                geos_contained_in_place.append(dcid)
+
+        geojson_response = self._dc_client.node.fetch_property_values(
+            node_dcids=geos_contained_in_place,
+            properties="geoJsonCoordinates").get_properties()
+        self.geojsons = {}
+        for area in geos_contained_in_place:
+            coords = []
+            for node in geojson_response.get(area,
+                                             {}).get("geoJsonCoordinates", []):
+                value = node.get("value") if isinstance(node,
+                                                        dict) else node.value
+                if value:
+                    coords.append(value)
+            self.geojsons[area] = coords
         for area, coords in self.iter_subareas():
             self.geojsons[area][0] = geojson.loads(coords)
 

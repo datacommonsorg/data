@@ -90,8 +90,11 @@ def _override_configs(import_name: str, import_dir: str,
         logging.info('Overriding config from manifest %s', manifest_path)
         manifest_config = json.load(f)
         logging.info(f'Import manifest: {json.dumps(manifest_config)}')
-        config = dataclasses.replace(
-            config, **manifest_config.get("config_override", {}))
+        for import_spec in manifest_config.get("import_specifications", []):
+            if import_spec.get("import_name") == import_name:
+                config = dataclasses.replace(
+                    config, **import_spec.get("config_override", {}))
+                break
 
     config = dataclasses.replace(config, **user_config)
     return config
@@ -109,10 +112,12 @@ def run_import_job(absolute_import_name: str, import_config: str):
     config = _override_configs(import_name, import_dir, base_config,
                                import_config)
     logging.info(f'Import config: {config}')
-    if config.dc_api_key:
+    if config.use_autopush_dc_api:
+        os.environ['DC_API_KEY'] = config.autopush_dc_api_key
+        os.environ['DC_API_ROOT'] = 'https://autopush.api.datacommons.org'
+    else:
         os.environ['DC_API_KEY'] = config.dc_api_key
-    if config.autopush_dc_api_key:
-        os.environ['AUTOPUSH_DC_API_KEY'] = config.autopush_dc_api_key
+        os.environ['DC_API_ROOT'] = 'https://api.datacommons.org'
     executor = import_executor.ImportExecutor(
         uploader=file_uploader.GCSFileUploader(
             project_id=config.gcs_project_id,

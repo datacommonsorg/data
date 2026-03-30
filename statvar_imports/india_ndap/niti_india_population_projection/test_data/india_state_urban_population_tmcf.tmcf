@@ -1,0 +1,10 @@
+Node: E:india_state_urban_population->E0
+observationDate: C:india_state_urban_population->observationDate
+observationAbout: C:india_state_urban_population->observationAbout
+variableMeasured: C:india_state_urban_population->variableMeasured
+value: C:india_state_urban_population->value
+unit: C:india_state_urban_population->unit
+measurementMethod: C:india_state_urban_population->measurementMethod
+observationPeriod: C:india_state_urban_population->observationPeriod
+#Aggregate: sum
+typeOf: dcs:StatVarObservation

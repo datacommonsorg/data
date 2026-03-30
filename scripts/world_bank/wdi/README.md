@@ -147,5 +147,4 @@ python3 worldbank.py --mode=download
 ```
 
 We highly recommend the use of the import validation tool for this import which
-you can find in
-https://github.com/datacommonsorg/tools/tree/master/import-validation-helper.
+you can find in https://github.com/datacommonsorg/tools/tree/master/import-validation-helper.

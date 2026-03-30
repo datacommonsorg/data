@@ -58,9 +58,7 @@ class ImportValidationTest(unittest.TestCase):
                     "rules": [{
                         "rule_id": "num_places_consistent",
                         "validator": "NUM_PLACES_CONSISTENT",
-                        "scope": {
-                            "data_source": "stats"
-                        },
+                        "scope": {},
                         "params": {}
                     }]
                 }, f)
@@ -97,9 +95,7 @@ class ImportValidationTest(unittest.TestCase):
                     "rules": [{
                         "rule_id": "num_places_consistent",
                         "validator": "NUM_PLACES_CONSISTENT",
-                        "scope": {
-                            "data_source": "stats"
-                        },
+                        "scope": {},
                         "params": {}
                     }]
                 }, f)
@@ -136,9 +132,7 @@ class ImportValidationTest(unittest.TestCase):
                     "rules": [{
                         "rule_id": "num_places_consistent",
                         "validator": "NUM_PLACES_CONSISTENT",
-                        "scope": {
-                            "data_source": "stats"
-                        }
+                        "scope": {}
                     }]
                 }, f)
 
@@ -169,7 +163,6 @@ class ImportValidationTest(unittest.TestCase):
                         "rule_id": "num_places_consistent_filtered",
                         "validator": "NUM_PLACES_CONSISTENT",
                         "scope": {
-                            "data_source": "stats",
                             "variables": {
                                 "dcids": ["sv1", "sv2"]
                             }
@@ -254,11 +247,9 @@ class ImportValidationTest(unittest.TestCase):
             json.dump(
                 {
                     "rules": [{
-                        "rule_id": "check_deleted_count",
-                        "validator": "DELETED_COUNT",
-                        "scope": {
-                            "data_source": "differ"
-                        },
+                        "rule_id": "check_deleted_records_count",
+                        "validator": "DELETED_RECORDS_COUNT",
+                        "scope": {},
                         "params": {
                             "threshold": 0
                         }  # Fail if deleted count is > 0
@@ -299,11 +290,9 @@ class ImportValidationTest(unittest.TestCase):
             json.dump(
                 {
                     "rules": [{
-                        "rule_id": "check_deleted_count",
-                        "validator": "DELETED_COUNT",
-                        "scope": {
-                            "data_source": "differ"
-                        },
+                        "rule_id": "check_deleted_records_count",
+                        "validator": "DELETED_RECORDS_COUNT",
+                        "scope": {},
                         "params": {
                             "threshold": 10
                         }

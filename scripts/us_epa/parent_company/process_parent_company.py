@@ -18,8 +18,6 @@ import pathlib
 import sys
 
 import csv
-import datacommons
-import json
 import pandas as pd
 
 from absl import app
@@ -206,22 +204,29 @@ def _get_county(company_id, zip, year):
 # value: a map of all elements in the Key and the observed Value multiplied by
 #   the percentage ownership.
 def _get_key_val_for_svobs(facility_id, stat_var, facility_comp_ownership,
-                           svobs_series):
+                           ordered_facets, facets):
     key_val = {}
-    for svo_dict in svobs_series:
-        for dt, v in svo_dict['val'].items():
+    for ordered_facet in ordered_facets:
+        facet_id = ordered_facet.get('facetId')
+        observation_period = ''
+        if facet_id and facet_id in facets:
+            observation_period = facets[facet_id].get('observationPeriod', '')
+        for observation in ordered_facet.get('observations', []):
+            dt = observation.get('date')
+            v = observation.get('value')
+            if dt is None or v is None:
+                continue
             if (facility_id, dt) in facility_comp_ownership:
                 for company_id, percentage in facility_comp_ownership[(
                         facility_id, dt)].items():
-                    key = (company_id, stat_var, svo_dict['observationPeriod'],
-                           dt)
+                    key = (company_id, stat_var, observation_period, dt)
                     if key not in key_val:
                         key_val[key] = {}
                     key_val.update({
                         key: {
                             _PARENT_COMPANY_DCID: company_id,
                             _SV_MEASURED: stat_var,
-                            _OBSERVATION_PERIOD: svo_dict['observationPeriod'],
+                            _OBSERVATION_PERIOD: observation_period,
                             _OBSERVATION_DATE: dt,
                             _SVO_VAL: v * float(percentage) / 100
                         }
@@ -408,7 +413,8 @@ def process_companies(input_table_path, existing_facilities_file,
         fp.write(_gen_ownership_tmcf())
 
 
-def process_svobs(svobs_path, facility_company_ownership, facility_svo_dict):
+def process_svobs(svobs_path, facility_company_ownership, facility_sv_map,
+                  facets):
     # Create a map where key: (company_id, statVar, obsPeriod, year)
     # and value: the svobs value multiplied by the percentage ownership.
     # Note that the same key may appear more than once. This happens when the
@@ -416,9 +422,10 @@ def process_svobs(svobs_path, facility_company_ownership, facility_svo_dict):
     # add the (value * percentage) across all the multiple facilities, for the
     # same key.
     company_svo_dict = {}
-    for facility_id, sv_dict in facility_svo_dict.items():
-        for sv, svobs in sv_dict.items():
-            if not svobs:
+    for facility_id in sorted(facility_sv_map):
+        for sv, by_entity in facility_sv_map.get(facility_id, {}).items():
+            ordered_facets = by_entity.get('orderedFacets', [])
+            if not ordered_facets:
                 continue
 
             # Construct a key comprising the Company ID, SV, Year and
@@ -427,7 +434,7 @@ def process_svobs(svobs_path, facility_company_ownership, facility_svo_dict):
             # year. Therefore, we need to sum the values of the observations.
             key_val = _get_key_val_for_svobs(facility_id, sv,
                                              facility_company_ownership,
-                                             svobs['sourceSeries'])
+                                             ordered_facets, facets)
             for (k, v) in key_val.items():
                 if k not in company_svo_dict:
                     company_svo_dict[k] = {
@@ -481,12 +488,12 @@ def generate_svobs_helper(ownership_relationships_filepath, svobs_path_info):
     facilities = list(facilities)
 
     statVars = fh.get_all_statvars(_DC_API_URL, facilities)
-    facility_svo_dict = fh.get_all_svobs(facilities, statVars)
+    facility_sv_map, facets = fh.get_all_svobs(facilities, statVars)
     print("# SVs : %d" % len(statVars))
-    print("# Facilities : %d" % len(facility_svo_dict))
+    print("# Facilities : %d" % len(facility_sv_map))
 
-    process_svobs(svobs_path_info, facility_company_ownership,
-                  facility_svo_dict)
+    process_svobs(svobs_path_info, facility_company_ownership, facility_sv_map,
+                  facets)
 
 
 def main(_):

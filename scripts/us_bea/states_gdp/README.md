@@ -35,8 +35,8 @@ US state industry GDP is further broken down into:
 3. Industry code 22: Utilities
 4. Industry code 23: Construction
 5. Industry code 31_33: Manufacturing
-6. Industry code 321&327_339: Durable goods manufacturing
-7. Industry code 311_316&322_326: Nondurable goods manufacturing
+6. Industry code 321_327_339: Durable goods manufacturing
+7. Industry code 311_316_322_326: Nondurable goods manufacturing
 8. Industry code 42: Wholesale trade
 9. Industry code 44_45: Retail trade
 10. Industry code 48_49: Transportation and warehousing
@@ -51,6 +51,7 @@ US state industry GDP is further broken down into:
 19. Industry code 71: Arts, entertainment, and recreation
 20. Industry code 72: Accommodation and food services
 21. Industry code 81: Other services (except government and government enterprises)
+22. Industry code 92: Government and government enterprises
 
 
 ### Notes and Caveats

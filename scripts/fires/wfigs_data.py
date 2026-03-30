@@ -27,7 +27,6 @@ import pandas as pd
 import pickle
 import re
 import requests
-import datacommons as dc
 import sys
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

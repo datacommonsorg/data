@@ -14,11 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# docker buildx build --load --build-context data=/data/repo/path --build-arg build_type=local -f Dockerfile . -t dc-import-executor
+
 # build_type: local or cloud
 ARG build_type=cloud
 
 # build base image with all the dependencies installed
-FROM python:3.12.8 as base
+FROM python:3.12.8 AS base
 RUN apt-get update && apt-get install -y jq \
 gnupg \
 apt-transport-https \
@@ -55,18 +57,19 @@ ENV GRPC_VERBOSITY=ERROR
 
 ADD https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar /import-tool.jar
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+RUN uv pip install --system -r requirements.txt
 
 # build_type: local (copy local data repo)
-FROM base as local
+FROM base AS local
 COPY --from=data . /data
 
 # build_type: cloud (clone github data repo) 
-FROM base as cloud
+FROM base AS cloud
 ARG CACHE_BUSTER=1
 RUN echo "Cache buster: $CACHE_BUSTER" && git clone https://github.com/datacommonsorg/data.git
 
 # build the final image
-FROM ${build_type} as final
+FROM ${build_type} AS final
 WORKDIR /data/import-automation/executor
 ENTRYPOINT ["python", "main.py"]
