@@ -13,8 +13,13 @@
 # limitations under the License.
 """Utilities to sample csv files.
 
-To sample a CSV data file, run the command:
+To sample 100 rows from a CSV data file, run the command:
   python data_sampler.py --sampler_input=<input-csv> --sampler_output=<output-csv>
+
+To sample all unique values from a set of columns, run the command
+with the additional options:
+    --sampler_uniques_per_column=-1
+    --sampler_output_rows=-1
 
 This generates a sample output CSV with atmost 100 rows selecting input rows
 with unique column values.
@@ -58,10 +63,6 @@ flags.DEFINE_integer(
     'sampler_uniques_per_column', 10,
     'The maximum number of unique values to track per column. '
     'If 0 or -1, all unique values are tracked.')
-flags.DEFINE_boolean(
-    'sampler_exhaustive', False,
-    'If True, sets sampler_output_rows and sampler_uniques_per_column to '
-    'infinity, and sampler_rows_per_key to 1, to capture every unique value.')
 flags.DEFINE_float(
     'sampler_rate', -1,
     'The sampling rate for random row selection (e.g., 0.1 for 10%).')
@@ -77,6 +78,7 @@ flags.DEFINE_list(
     'sampler_column_keys', [],
     'A list of "column:file" pairs containing values that MUST be included '
     'in the sample if they appear in the input data. '
+    'If empty (default), sampling is based on sampler_uniques_per_column.'
     'Example: "variableMeasured:prominent_svs.txt"')
 flags.DEFINE_string('sampler_input_delimiter', ',',
                     'The delimiter used in the input CSV file.')
@@ -138,9 +140,7 @@ class DataSampler:
         """Resets the state of the DataSampler.
 
         This method resets the internal state of the DataSampler, including the
-        counts of unique column values and the number of selected rows. If
-        sampler_exhaustive is set in the configuration, it applies overrides
-        to other configuration parameters to capture all unique values.
+        counts of unique column values and the number of selected rows.
         """
         if self._config.get('sampler_exhaustive'):
             # Exhaustive mode overrides limits to capture all unique values.
@@ -521,7 +521,8 @@ def load_column_keys(column_keys: list) -> dict:
             continue
 
         col_items = file_util.file_load_csv_dict(file_name)
-        column_map[column_name] = set(col_items.keys())
+        column_map[column_name] = set(
+            {mcf_file_util.strip_namespace(val) for val in col_items.keys()})
         logging.info(
             f'Loaded {len(col_items)} for column {column_name} from {file_name}'
         )
@@ -547,8 +548,6 @@ def sample_csv_file(input_file: str,
           - sampler_output_rows: The maximum number of rows to include in the
             sample.
           - sampler_rate: The sampling rate to use for random selection.
-          - sampler_exhaustive: If True, overrides limits to capture all unique
-            values.
           - header_rows: The number of header rows to copy from the input file
             and search for sampler_unique_columns. Increase this if column names
             appear in later header rows (e.g., after a title row).
@@ -622,7 +621,6 @@ def get_default_config() -> dict:
         'input_delimiter': _FLAGS.sampler_input_delimiter,
         'output_delimiter': _FLAGS.sampler_output_delimiter,
         'input_encoding': _FLAGS.sampler_input_encoding,
-        'sampler_exhaustive': _FLAGS.sampler_exhaustive,
     }
 
     return config
@@ -630,7 +628,9 @@ def get_default_config() -> dict:
 
 def main(_):
     counters = Counters()
-    sample_csv_file(_FLAGS.sampler_input, _FLAGS.sampler_output, counters=counters)
+    sample_csv_file(_FLAGS.sampler_input,
+                    _FLAGS.sampler_output,
+                    counters=counters)
     counters.print_counters()
 
 

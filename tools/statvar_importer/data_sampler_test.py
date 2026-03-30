@@ -273,9 +273,10 @@ class DataSamplerTest(unittest.TestCase):
 
         # Default max rows is 100. Exhaustive should take all 150.
         config = {
-            'sampler_exhaustive': True,
             'sampler_unique_columns': 'Key',
             'header_rows': 1,
+            'sampler_uniques_per_column': -1,
+            'sampler_output_rows': -1,
         }
         data_sampler.sample_csv_file(input_file, self.output_file, config)
         with open(self.output_file) as f:
