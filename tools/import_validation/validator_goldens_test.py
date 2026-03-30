@@ -169,10 +169,11 @@ class TestValidatorGoldens(unittest.TestCase):
                 'value': 20
             },
         }
-        property_sets = [{'variableMeasured'}, {'variableMeasured', 'observationAbout'}]
-        
+        property_sets = [{'variableMeasured'},
+                         {'variableMeasured', 'observationAbout'}]
+
         goldens = validator_goldens.generate_goldens('dummy', property_sets)
-        
+
         # Unique goldens expected:
         # 1. variableMeasured=sv1
         # 2. variableMeasured=sv2
@@ -187,38 +188,37 @@ class TestValidatorGoldens(unittest.TestCase):
     @patch('validator_goldens.load_nodes_from_file')
     @patch('validator_goldens.mcf_file_util')
     @patch('validator_goldens.data_sampler')
-    def test_generate_goldens_with_sampling(self, mock_sampler, mock_mcf, mock_load):
+    def test_generate_goldens_with_sampling(self, mock_sampler, mock_mcf,
+                                            mock_load):
         mock_sampler.sample_csv_file.return_value = 'tmp-sample.csv'
         mock_load.return_value = {0: {'p1': 'v1'}}
-        
+
         property_sets = [{'p1'}]
         config = {'sampler_output_rows': 10}
 
-        
-        with patch('os.path.exists', return_value=True), patch('os.remove') as mock_remove:
-             goldens = validator_goldens.generate_goldens('input.csv', property_sets, config=config)
-             
-             self.assertEqual(len(goldens), 1)
-             mock_sampler.sample_csv_file.assert_called_once()
-             mock_load.assert_called_with('tmp-sample.csv')
-             mock_remove.assert_called_with('tmp-sample.csv')
+        with patch('os.path.exists',
+                   return_value=True), patch('os.remove') as mock_remove:
+            goldens = validator_goldens.generate_goldens('input.csv',
+                                                         property_sets,
+                                                         config=config)
+
+            self.assertEqual(len(goldens), 1)
+            mock_sampler.sample_csv_file.assert_called_once()
+            mock_load.assert_called_with('tmp-sample.csv')
+            mock_remove.assert_called_with('tmp-sample.csv')
 
     @patch('validator_goldens.load_nodes_from_file')
     @patch('validator_goldens.mcf_file_util')
     def test_generate_goldens_all_props(self, mock_mcf, mock_load):
-        mock_load.return_value = {
-            0: {
-                'p1': 'v1',
-                'p2': 'v2',
-                'ignore_me': 'x'
-            }
-        }
+        mock_load.return_value = {0: {'p1': 'v1', 'p2': 'v2', 'ignore_me': 'x'}}
         # property_sets is empty, should use all props except ignore_me
         property_sets = []
         config = {'goldens_ignore_property': ['ignore_me']}
-        
-        goldens = validator_goldens.generate_goldens('dummy', property_sets, config=config)
-        
+
+        goldens = validator_goldens.generate_goldens('dummy',
+                                                     property_sets,
+                                                     config=config)
+
         self.assertEqual(len(goldens), 1)
         key = list(goldens.keys())[0]
         # p1=v1;p2=v2 (alphabetical)
@@ -229,19 +229,26 @@ class TestValidatorGoldens(unittest.TestCase):
 
     @patch('validator_goldens.load_nodes_from_file')
     @patch('validator_goldens.mcf_file_util')
-    def test_generate_goldens_with_must_include_values(self, mock_mcf, mock_load):
+    def test_generate_goldens_with_must_include_values(self, mock_mcf,
+                                                       mock_load):
         # Input has two nodes, but only one matches the prominent DCID filter.
         mock_load.return_value = {
-            0: {'p1': 'v1', 'p2': 'other'},
-            1: {'p1': 'v2', 'p2': 'other'}
+            0: {
+                'p1': 'v1',
+                'p2': 'other'
+            },
+            1: {
+                'p1': 'v2',
+                'p2': 'other'
+            }
         }
         # Filter for p1=v1
         must_include_values = {'p1': {'v1'}}
         property_sets = [{'p1'}]
-        
+
         goldens = validator_goldens.generate_goldens(
             'dummy', property_sets, must_include_values=must_include_values)
-            
+
         # Only v1 should be included because of the filter (non-sampled mode).
         self.assertEqual(len(goldens), 1)
         self.assertIn('p1=v1', goldens)
@@ -251,15 +258,12 @@ class TestValidatorGoldens(unittest.TestCase):
     @patch('validator_goldens.mcf_file_util')
     def test_generate_goldens_all_props_mixed_schema(self, mock_mcf, mock_load):
         # input nodes have different columns
-        mock_load.return_value = {
-            0: {'p1': 'v1'},
-            1: {'p2': 'v2'}
-        }
+        mock_load.return_value = {0: {'p1': 'v1'}, 1: {'p2': 'v2'}}
         # property_sets is empty, should use each node's own props
         property_sets = []
-        
+
         goldens = validator_goldens.generate_goldens('dummy', property_sets)
-        
+
         self.assertEqual(len(goldens), 2)
         self.assertIn('p1=v1', goldens)
         self.assertIn('p2=v2', goldens)
@@ -269,12 +273,16 @@ class TestValidatorGoldens(unittest.TestCase):
     @patch('validator_goldens.file_util')
     def test_validate_goldens(self, mock_file, mock_compare, mock_load):
         mock_load.side_effect = [
-            {'n1': {
-                'p1': 'v1'
-            }},  # input
-            {'g1': {
-                'p1': 'v1'
-            }}  # golden
+            {
+                'n1': {
+                    'p1': 'v1'
+                }
+            },  # input
+            {
+                'g1': {
+                    'p1': 'v1'
+                }
+            }  # golden
         ]
         mock_compare.return_value = []
 

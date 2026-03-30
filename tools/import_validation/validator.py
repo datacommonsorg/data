@@ -20,7 +20,7 @@ import sys
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
-_DATA_DIR = os.path.join(_SCRIPT_DIR.split('/data/')[0], 'data')
+_DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.join(_DATA_DIR, 'util'))
 
 from result import ValidationResult, ValidationStatus

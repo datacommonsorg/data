@@ -33,7 +33,7 @@ class TestGoldensValidation(unittest.TestCase):
     def setUp(self):
         self.validator = Validator()
         self.test_dir = tempfile.mkdtemp()
-        
+
         # Create a sample golden CSV
         self.golden_file = os.path.join(self.test_dir, 'goldens.csv')
         with open(self.golden_file, 'w', newline='') as f:
@@ -51,7 +51,8 @@ class TestGoldensValidation(unittest.TestCase):
             writer.writerow(['sv2', '20', '200'])
 
         # Create a sample input CSV that is missing a golden
-        self.input_file_missing = os.path.join(self.test_dir, 'input_missing.csv')
+        self.input_file_missing = os.path.join(self.test_dir,
+                                               'input_missing.csv')
         with open(self.input_file_missing, 'w', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(['StatVar', 'NumPlaces', 'Value'])
