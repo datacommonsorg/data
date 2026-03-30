@@ -67,10 +67,9 @@ import process_http_server
 
 from mcf_file_util import load_mcf_nodes, write_mcf_nodes
 from mcf_file_util import add_namespace, strip_namespace
-from mcf_file_util import add_mcf_node, get_value_list
+from mcf_file_util import add_mcf_node, add_pv_to_node, get_value_list
 
 # imports from data/util
-import file_util
 import dc_api_wrapper as dc_api
 from config_map import ConfigMap
 from counters import Counters
@@ -237,8 +236,9 @@ class SchemaReconciler:
 
                 if remapped_prop != prop or remapped_values != values:
                     # Property:value is modified. Add the new property:value.
-                    new_pvs[strip_namespace(remapped_prop)] = ",".join(
-                        remapped_values)
+                    for val in remapped_values:
+                        add_pv_to_node(strip_namespace(remapped_prop), val,
+                                       new_pvs)
                 else:
                     # No modification to property:value. Copy it over.
                     new_node[prop] = value
@@ -248,7 +248,8 @@ class SchemaReconciler:
                 continue
 
             # Merge modified properties and values into the new node representation.
-            new_node.update(new_pvs)
+            for prop, value in new_pvs.items():
+                add_pv_to_node(prop, value, new_node)
 
             # Update the original nodes dictionary.
             # For StatVarObservations, we can optionally keep the legacy observation.

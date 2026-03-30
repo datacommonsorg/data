@@ -31,6 +31,12 @@ sys.modules['dc_api_wrapper'] = mock.Mock()
 import schema_reconciler
 
 
+def _mock_dc_api_get_node_property(node_id, property_id):
+    if node_id == 'NodeInApi' and property_id == 'supercededBy':
+        return {'value': 'dcid:NewApiVal'}
+    return {}
+
+
 class SchemaReconcilerTest(unittest.TestCase):
 
     def setUp(self):
@@ -71,7 +77,7 @@ class SchemaReconcilerTest(unittest.TestCase):
         self.reconciler.add_schema_nodes(self.schema_nodes)
 
         # Configure mock to return empty dict if called
-        schema_reconciler.dc_api.dc_api_get_node_property.return_value = {}
+        schema_reconciler.dc_api.dc_api_get_node_property.side_effect = _mock_dc_api_get_node_property
 
     def test_reconcile_simple(self):
         # Test value reconciliation
@@ -125,7 +131,45 @@ class SchemaReconcilerTest(unittest.TestCase):
         self.assertEqual(num_remapped, 1)
         # Should be "dcid:NewVal, dcid:NewVal" -> duplicate values might be kept or joined
         # Code: ",".join(remapped_values)
-        self.assertEqual(nodes['node1']['prop1'], 'dcid:NewVal,dcid:NewVal')
+        self.assertEqual(nodes['node1']['prop1'], 'dcid:NewVal')
+
+    def test_non_statvar_node(self):
+        nodes = {'node1': {'oldProp': 'BaseVal', 'newProp': 'NewVal1'}}
+        num_remapped = self.reconciler.reconcile_nodes(nodes,
+                                                       keep_legacy_obs=False)
+        self.assertEqual(num_remapped, 1)
+        self.assertEqual(nodes['node1']['newProp'], 'NewVal1,BaseVal')
+
+    def test_node_in_api(self):
+        # Verify API lookup for reconciled nodes
+        nodes = {'Node1': {'prop1': 'dcid:NodeInApi', 'prop2': 'dcid:OldVal'}}
+        num_remapped = self.reconciler.reconcile_nodes(nodes,
+                                                       keep_legacy_obs=False)
+        self.assertEqual(num_remapped, 1)
+        self.assertEqual(nodes['Node1']['prop1'], 'dcid:NodeInApi')
+        self.assertEqual(nodes['Node1']['prop2'], 'dcid:NewVal')
+
+    def test_node_with_api_disabled(self):
+        # Verify API lookup is disabled
+        self.reconciler._config.set_config('recon_lookup_api', False)
+        nodes = {'Node1': {'prop1': 'dcid:NodeInApi', 'prop2': 'dcid:OldVal'}}
+        num_remapped = self.reconciler.reconcile_nodes(nodes,
+                                                       keep_legacy_obs=False)
+        self.assertEqual(num_remapped, 1)
+        self.assertEqual(nodes['Node1']['prop1'], 'dcid:NodeInApi')
+        self.assertEqual(nodes['Node1']['prop2'], 'dcid:NewVal')
+
+    def test_recon_property(self):
+        # Verify only the selected property is reconciled
+        self.reconciler._config.set_config('recon_property', 'testProp')
+        nodes = {'node1': {'oldProp': 'NodeInApi', 'testProp': 'OldVal'}}
+        num_remapped = self.reconciler.reconcile_nodes(nodes,
+                                                       keep_legacy_obs=False)
+        self.assertEqual(num_remapped, 1)
+        self.assertIn('testProp', nodes['node1'])
+        self.assertEqual(nodes['node1']['testProp'], 'dcid:NewVal')
+        self.assertIn('oldProp', nodes['node1'])
+        self.assertEqual(nodes['node1']['oldProp'], 'NodeInApi')
 
 
 if __name__ == '__main__':

@@ -767,6 +767,42 @@ def get_value_list(value: str) -> list:
     return value_list
 
 
+def is_number(value: str) -> bool:
+    """Returns true if the value is a number."""
+    if isinstance(value, int) or isinstance(value, float):
+        return True
+    if not isinstance(value, str):
+        return False
+    return value and (value.isdigit() or value.replace('.', '', 1).isdigit())
+
+
+def is_leaf_object(value: str) -> bool:
+    """Returns true if the value is a leaf node, such as, string, number.
+
+  Args:
+    value: Value of a property in a node.
+
+  Returns
+    Boolean: True if value is quoted string or a number.
+  """
+    if isinstance(value, list):
+        return all(is_leaf_object(v) for v in value)
+    if is_number(value):
+        return True
+    if not isinstance(value, str):
+        return False
+    if ',' in value:
+        return all(is_leaf_object(v) for v in get_value_list(value))
+    return value and (value[0] == '"' and value[-1] == '"')
+
+
+def is_valid_property(prop: str) -> bool:
+    """Returns true if the property is valid."""
+    if not isinstance(prop, str):
+        return False
+    return prop and not prop.startswith('#') and prop[0].islower()
+
+
 def normalize_list(value: str, sort: bool = True) -> str:
     """Normalize a comma separated list of sorting strings.
 
