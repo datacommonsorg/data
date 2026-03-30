@@ -1,0 +1,27 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "tuberculosis percentage",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://data.who.int/indicators/i/1891124/449F55C",
+            "provenance_description": "Percentage of people diagnosed with a new episode of pulmonary TB whose disease was bacteriologically confirmed",
+            "scripts": [
+                "download_who_tuberculosis.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.csv --pv_map=tuberculosisPercentage_pvmap.csv --config_file=tuberculosisPercentage_metadata.csv --output_path=tuberculosisPercentage_output"
+            ],
+            "source_files": [
+                "source_files/*.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "tuberculosisPercentage_output.tmcf",
+                    "cleaned_csv": "tuberculosisPercentage_output.csv",
+                    "stat_var_mcf": "tuberculosisPercentage_output_stat_vars.mcf"
+                }
+            ],
+            "cron_schedule": "0 0 1 1,4,7,10 *"
+        }
+    ]
+}

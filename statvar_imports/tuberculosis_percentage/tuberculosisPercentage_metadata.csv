@@ -1,0 +1,6 @@
+parameter,value
+header_rows,1
+provenance_url,https://data.who.int/indicators/i/1891124/449F55C
+mapped_columns,5
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor"
+dc_api_root,https://api.datacommons.org
