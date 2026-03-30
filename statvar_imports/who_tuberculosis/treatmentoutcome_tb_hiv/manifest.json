@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "TreatmentOutcome_TB_HIV",
+            "import_name": "WHO_TuberculosisAndHIVTreatmentOutcome",
             "curator_emails": [
                 "support@datacommons.org"
             ],
