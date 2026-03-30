@@ -1,13 +1,40 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the 'License');
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#         https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an 'AS IS' BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""
+This script processes GFS (Global Forecast System) weather data. 
+It maps raw meteorological parameters and atmospheric levels to standardized 
+Data Commons Identifiers (DCIDs), cleans and flattens the observations, and 
+streams the resulting dataset directly to the unresolved_mcf bucket.
+"""
+
 import csv
 import io
 import re
 import time
+from absl import app, flags, logging
 from google.cloud import storage
 
-# --- CONFIGURATION ---
-BUCKET_NAME = "unresolved_mcf"
-INPUT_LOCAL = "../noa_gfs/input_files/gfs.t00z.pgrb2.0p25.f000.csv"
-OUTPUT_BLOB_NAME = "noaa_gfs/noaa_gfs_output.csv"
+logging.set_verbosity(logging.INFO)
+
+# --- FLAG DEFINITIONS ---
+FLAGS = flags.FLAGS
+
+flags.DEFINE_string('bucket_name', 'unresolved_mcf', 'GCS unresolved_mcf bucket.')
+flags.DEFINE_string('input_local', './test_data/noaa_gfs_2025_12_24_0.csv', 'Path to the local input CSV file.')
+flags.DEFINE_string('output_blob_name', 'noaa_gfs/auto/noaa_gfs_output.csv', 'Destination path in unresolved_mcf bucket.')
+#INPUT_LOCAL = "gfs.t00z.pgrb2.0p25.f000.csv"
 
 # 1. Parameter Mapping (Original)
 param_map = {
@@ -84,6 +111,15 @@ param_map = {
 
 # 2. Helper Function to Clean Level for DCID
 def format_level_dcid(level):
+    """
+    Standardizes raw GFS level strings into DCID standards.
+    
+    Args:
+        level (str): The raw vertical level description (e.g., '2 m above ground').
+        
+    Returns:
+        str: A cleaned, standardized string suitable for a Data Commons identifier.
+    """
     l = str(level).lower().strip()
     
     if l == "mean sea level": 
@@ -133,6 +169,16 @@ def format_level_dcid(level):
 
 # 3. DCID Constructor Logic
 def construct_dcid(param_raw, level_raw):
+    """
+    Constructs a full Data Commons Identifier (DCID) based on GFS parameters and levels.
+    
+    Args:
+        param_raw (str): The raw meteorological parameter code (e.g., 'TMP').
+        level_raw (str): The raw vertical level description.
+        
+    Returns:
+        str: The complete DCID string formatted with 'dcid:' prefix.
+    """
     param = str(param_raw).upper()
     level_clean = format_level_dcid(level_raw)
     
@@ -162,12 +208,18 @@ def construct_dcid(param_raw, level_raw):
     return dcid
 
 def process_and_upload_true_stream():
+    """
+    Reads weather data and streams the transformed rows to GCS.
+    
+    The function flattens the data, determines measurement methods, resolves DCIDs,
+    and writes to Cloud Storage using an internal buffer to manage write frequency.
+    """
     client = storage.Client()
-    bucket = client.bucket(BUCKET_NAME)
-    blob = bucket.blob(OUTPUT_BLOB_NAME)
+    bucket = client.bucket(FLAGS.bucket_name)
+    blob = bucket.blob(FLAGS.output_blob_name)
     blob.chunk_size = 64 * 1024 * 1024
 
-    with open(INPUT_LOCAL, mode='r') as f_in:
+    with open(FLAGS.input_local, mode='r') as f_in:
         reader = csv.DictReader(f_in)
         output_buffer = io.StringIO()
         writer = csv.writer(output_buffer)
@@ -209,14 +261,24 @@ def process_and_upload_true_stream():
             
             cloud_file.write(output_buffer.getvalue())
 
-if __name__ == "__main__":
+def main(argv):
+    """
+    Main entry point for the script. Parses flags, tracks execution time, and triggers processing.
+    """
+    if len(argv) > 1:
+        raise app.UsageError('Too many command-line arguments.')
+
     start_time = time.perf_counter()
-    print(f"Process started: {time.strftime('%Y-%m-%d %H:%M:%S')}")
+    logging.info(f"Process started: {time.strftime('%Y-%m-%d %H:%M:%S')}")
     try:
         process_and_upload_true_stream()
-        print("Upload complete.")
+        logging.info("Upload complete.")
     except Exception as e:
-        print(f"Error: {e}")
+        logging.fatal(f"Error: {e}")
+    
     duration = time.perf_counter() - start_time
     mins, secs = divmod(duration, 60)
-    print(f"Total Execution Time: {int(mins)}m {secs:.2f}s")
+    logging.info(f"Total Execution Time: {int(mins)}m {secs:.2f}s")
+
+if __name__ == "__main__":
+    app.run(main)
