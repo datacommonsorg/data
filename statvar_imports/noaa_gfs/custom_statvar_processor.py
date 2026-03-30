@@ -234,6 +234,14 @@ def process_and_upload_true_stream():
                 level = row['Level']
                 obs_date = row['Valid_Time'].replace(' ', 'T')
                 dcid = construct_dcid(param, level)
+
+                # Apply multiplier for specific parameters
+                try:
+                    value = float(row['Value'])
+                    if param in ['LAND', 'ICEC']:
+                        value = value * 0.0625
+                except (ValueError, TypeError):
+                    value = row['Value']
                 
                 l_low = level.lower()
                 
