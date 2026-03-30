@@ -22,9 +22,9 @@
             "user_script_timeout": 36000,
             "cron_schedule": "30 04 * * *",
             "resource_limits": {
-                "cpu": 32,
-                "memory": 512,
-                "disk": 1000
+                "cpu": 64,
+                "memory": 256,
+                "disk": 4096
             }
         }
     ]
