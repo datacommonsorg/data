@@ -44,12 +44,9 @@ echo "Converting to CSV..."
 $WGRIB2_BIN "./${FILE_NAME}" -csv "./${FILE_NAME}.csv"
 
 # --- 4. Upload to GCS ---
-if command -v gsutil &> /dev/null; then
-    echo "Uploading to gs://${BUCKET}/..."
-    gsutil cp "./${FILE_NAME}.csv" "gs://${BUCKET}/noaa_gfs/${DATE_STAMP}/input_files/${FILE_NAME}.csv"
-else
-    echo "gsutil not found. Skipping upload. File is at ./${FILE_NAME}.csv"
-fi
+echo "Uploading to gs://${BUCKET}/..."
+gsutil cp "./${FILE_NAME}.csv" "gs://${BUCKET}/noaa_gfs/${DATE_STAMP}/input_files/${FILE_NAME}.csv"
+gsutil cp "gs://${BUCKET}/noaa_gfs/noaa_gfs_output.tmcf" "gs://${BUCKET}/noaa_gfs/${DATE_STAMP}/output/"
 
 # --- 5. Run StatVar Processing ---
 echo "Running StatVar processing and streaming to GCS..."
