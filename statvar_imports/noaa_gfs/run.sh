@@ -46,7 +46,6 @@ $WGRIB2_BIN "./${FILE_NAME}" -csv "./${FILE_NAME}.csv"
 # --- 4. Upload to GCS ---
 echo "Uploading to gs://${BUCKET}/..."
 gsutil cp "./${FILE_NAME}.csv" "gs://${BUCKET}/noaa_gfs/${DATE_STAMP}/input_files/${FILE_NAME}.csv"
-gsutil cp "gs://${BUCKET}/noaa_gfs/noaa_gfs_output.tmcf" "gs://${BUCKET}/noaa_gfs/${DATE_STAMP}/output/"
 
 # --- 5. Run StatVar Processing ---
 echo "Running StatVar processing and streaming to GCS..."
@@ -54,5 +53,9 @@ python3 custom_statvar_processor.py \
     --bucket_name="${BUCKET}" \
     --input_local="./${FILE_NAME}.csv" \
     --output_blob_name="noaa_gfs/${DATE_STAMP}/output/noaa_gfs_output.csv"
+
+# --- 6. Upload TMCF to GCS ---
+echo "Uploading TMCF to gs://${BUCKET}/noaa_gfs/${DATE_STAMP}/output/..."
+gsutil cp "gs://${BUCKET}/noaa_gfs/noaa_gfs_output.tmcf" "gs://${BUCKET}/noaa_gfs/${DATE_STAMP}/output/"
 
 echo "Pipeline complete."
