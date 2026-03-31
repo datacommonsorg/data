@@ -13,8 +13,13 @@
 # limitations under the License.
 """Utilities to sample csv files.
 
-To sample a CSV data file, run the command:
+To sample 100 rows from a CSV data file, run the command:
   python data_sampler.py --sampler_input=<input-csv> --sampler_output=<output-csv>
+
+To sample all unique values from a set of columns, run the command
+with the additional options:
+    --sampler_uniques_per_column=-1
+    --sampler_output_rows=-1
 
 This generates a sample output CSV with atmost 100 rows selecting input rows
 with unique column values.
@@ -58,10 +63,13 @@ flags.DEFINE_integer(
     'sampler_uniques_per_column', 10,
     'The maximum number of unique values to track per column. '
     'If 0 or -1, all unique values are tracked.')
+<<<<<<< HEAD
 flags.DEFINE_boolean(
     'sampler_exhaustive', False,
     'If True, sets sampler_output_rows and sampler_uniques_per_column to '
     'infinity, and sampler_rows_per_key to 1, to capture every unique value.')
+=======
+>>>>>>> fe0103529e131bac1a2e56dd76a3e679a43fe6cc
 flags.DEFINE_float(
     'sampler_rate', -1,
     'The sampling rate for random row selection (e.g., 0.1 for 10%).')
@@ -77,6 +85,10 @@ flags.DEFINE_list(
     'sampler_column_keys', [],
     'A list of "column:file" pairs containing values that MUST be included '
     'in the sample if they appear in the input data. '
+<<<<<<< HEAD
+=======
+    'If empty (default), sampling is based on sampler_uniques_per_column.'
+>>>>>>> fe0103529e131bac1a2e56dd76a3e679a43fe6cc
     'Example: "variableMeasured:prominent_svs.txt"')
 flags.DEFINE_string('sampler_input_delimiter', ',',
                     'The delimiter used in the input CSV file.')
@@ -138,9 +150,13 @@ class DataSampler:
         """Resets the state of the DataSampler.
 
         This method resets the internal state of the DataSampler, including the
+<<<<<<< HEAD
         counts of unique column values and the number of selected rows. If
         sampler_exhaustive is set in the configuration, it applies overrides
         to other configuration parameters to capture all unique values.
+=======
+        counts of unique column values and the number of selected rows.
+>>>>>>> fe0103529e131bac1a2e56dd76a3e679a43fe6cc
         """
         if self._config.get('sampler_exhaustive'):
             # Exhaustive mode overrides limits to capture all unique values.
@@ -462,6 +478,7 @@ class DataSampler:
                         # Process and write header rows from the first input file.
                         if row_index <= header_rows and input_index == 0:
                             self._process_header_row(row)
+                            self._add_row_counts(row)
                             csv_writer.writerow(row)
                             self._counters.add_counter('sampler-header-rows', 1)
                             # After processing all header rows, validate that all
@@ -520,7 +537,12 @@ def load_column_keys(column_keys: list) -> dict:
             continue
 
         col_items = file_util.file_load_csv_dict(file_name)
+<<<<<<< HEAD
         column_map[column_name] = set(col_items.keys())
+=======
+        column_map[column_name] = set(
+            {mcf_file_util.strip_namespace(val) for val in col_items.keys()})
+>>>>>>> fe0103529e131bac1a2e56dd76a3e679a43fe6cc
         logging.info(
             f'Loaded {len(col_items)} for column {column_name} from {file_name}'
         )
@@ -529,7 +551,8 @@ def load_column_keys(column_keys: list) -> dict:
 
 def sample_csv_file(input_file: str,
                     output_file: str = '',
-                    config: dict = None) -> str:
+                    config: dict = None,
+                    counters: Counters = None) -> str:
     """Samples a CSV file and returns the path to the sampled file.
 
     This function provides a convenient way to sample a CSV file with a single
@@ -559,6 +582,7 @@ def sample_csv_file(input_file: str,
           - input_delimiter: The delimiter used in the input file.
           - output_delimiter: The delimiter to use in the output file.
           - input_encoding: The encoding of the input file.
+        counters: optional Counters object to get counts of sampling.
 
     Returns:
         The path to the output file with the sampled rows.
@@ -588,7 +612,7 @@ def sample_csv_file(input_file: str,
     """
     if config is None:
         config = {}
-    data_sampler = DataSampler(config_dict=config)
+    data_sampler = DataSampler(config_dict=config, counters=counters)
     return data_sampler.sample_csv_file(input_file, output_file)
 
 
@@ -626,7 +650,11 @@ def get_default_config() -> dict:
 
 
 def main(_):
-    sample_csv_file(_FLAGS.sampler_input, _FLAGS.sampler_output)
+    counters = Counters()
+    sample_csv_file(_FLAGS.sampler_input,
+                    _FLAGS.sampler_output,
+                    counters=counters)
+    counters.print_counters()
 
 
 if __name__ == '__main__':
