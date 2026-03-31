@@ -77,9 +77,9 @@ from absl import flags
 from absl import logging
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-_DATA_DIR = os.path.join(_SCRIPT_DIR.split('/data/')[0], 'data')
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
+_DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(_DATA_DIR)
 sys.path.append(os.path.join(_DATA_DIR, 'util'))
 sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
