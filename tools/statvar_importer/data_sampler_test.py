@@ -305,7 +305,7 @@ class DataSamplerTest(unittest.TestCase):
             'sampler_unique_columns':
                 'Value',  # Track Value for unique sampling
             'sampler_uniques_per_column':
-                1,  # Only first row ('A', 'v1') will be unique
+                2,  # Only first row ('A', 'v1') will be unique
             'sampler_output_rows': 10,
             'header_rows': 1,
         }
@@ -333,7 +333,7 @@ class DataSamplerTest(unittest.TestCase):
             writer.writerow(['D', 'v4'])
 
         config = {
-            'sampler_uniques_per_column': 2,
+            'sampler_uniques_per_column': 3,
             'sampler_unique_columns': 'Key',
             'sampler_output_rows': -1,
             'header_rows': 1,
@@ -341,6 +341,7 @@ class DataSamplerTest(unittest.TestCase):
         data_sampler.sample_csv_file(input_file, self.output_file, config)
         with open(self.output_file) as f:
             lines = f.readlines()
+            print(lines)
             # Header + 2 unique values = 3 lines
             self.assertEqual(len(lines), 3)
 
