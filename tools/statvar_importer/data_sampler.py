@@ -63,13 +63,6 @@ flags.DEFINE_integer(
     'sampler_uniques_per_column', 10,
     'The maximum number of unique values to track per column. '
     'If 0 or -1, all unique values are tracked.')
-<<<<<<< HEAD
-flags.DEFINE_boolean(
-    'sampler_exhaustive', False,
-    'If True, sets sampler_output_rows and sampler_uniques_per_column to '
-    'infinity, and sampler_rows_per_key to 1, to capture every unique value.')
-=======
->>>>>>> fe0103529e131bac1a2e56dd76a3e679a43fe6cc
 flags.DEFINE_float(
     'sampler_rate', -1,
     'The sampling rate for random row selection (e.g., 0.1 for 10%).')
@@ -85,10 +78,7 @@ flags.DEFINE_list(
     'sampler_column_keys', [],
     'A list of "column:file" pairs containing values that MUST be included '
     'in the sample if they appear in the input data. '
-<<<<<<< HEAD
-=======
     'If empty (default), sampling is based on sampler_uniques_per_column.'
->>>>>>> fe0103529e131bac1a2e56dd76a3e679a43fe6cc
     'Example: "variableMeasured:prominent_svs.txt"')
 flags.DEFINE_string('sampler_input_delimiter', ',',
                     'The delimiter used in the input CSV file.')
@@ -150,13 +140,7 @@ class DataSampler:
         """Resets the state of the DataSampler.
 
         This method resets the internal state of the DataSampler, including the
-<<<<<<< HEAD
-        counts of unique column values and the number of selected rows. If
-        sampler_exhaustive is set in the configuration, it applies overrides
-        to other configuration parameters to capture all unique values.
-=======
         counts of unique column values and the number of selected rows.
->>>>>>> fe0103529e131bac1a2e56dd76a3e679a43fe6cc
         """
         if self._config.get('sampler_exhaustive'):
             # Exhaustive mode overrides limits to capture all unique values.
@@ -531,18 +515,17 @@ def load_column_keys(column_keys: list) -> dict:
         column_keys = column_keys.split(',')
 
     for col_file in column_keys:
+        if not ':' in col_file:
+          logging.error(f'Invalid column key format: {col_file}')
+          continue
         column_name, file_name = col_file.split(':', 1)
         if not file_name:
             logging.error(f'No file for column {column_name} in {column_keys}')
             continue
 
         col_items = file_util.file_load_csv_dict(file_name)
-<<<<<<< HEAD
-        column_map[column_name] = set(col_items.keys())
-=======
         column_map[column_name] = set(
             {mcf_file_util.strip_namespace(val) for val in col_items.keys()})
->>>>>>> fe0103529e131bac1a2e56dd76a3e679a43fe6cc
         logging.info(
             f'Loaded {len(col_items)} for column {column_name} from {file_name}'
         )
