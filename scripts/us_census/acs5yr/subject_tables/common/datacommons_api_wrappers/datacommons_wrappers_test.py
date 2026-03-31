@@ -34,17 +34,14 @@ class TestDCWrappers(unittest.TestCase):
         # Test 1: Default (use_autopush=True by default in function signature)
         mock_is_defined.return_value = {'node1': True}
         dc_check_existence(['node1'])
-        mock_is_defined.assert_called_with(
-            ['node1'], {
-                'dc_api_batch_size': 450,
-                'dc_api_root': 'https://autopush.api.datacommons.org'
-            })
+        mock_is_defined.assert_called_with(['node1'], {
+            'dc_api_batch_size': 450,
+        })
 
         # Test 2: use_autopush=False
         dc_check_existence(['node2'], use_autopush=False, max_items=10)
         mock_is_defined.assert_called_with(['node2'], {
             'dc_api_batch_size': 10,
-            'dc_api_root': 'https://api.datacommons.org'
         })
 
     @mock.patch('datacommons_wrappers.request_post_json')
