@@ -1,0 +1,10 @@
+Node: dcid:medicalCondition
+typeOf: dcs:Property
+name: "medicalCondition"
+rangeIncludes: dcid:CauseOfDeathAndDisabilityEnum,dcid:Disease,dcid:ICD10_113CausesOfDeath
+
+Node: dcid:who_tbCasetype
+typeOf: dcs:Property
+name: "who_tbCasetype"
+domainIncludes: dcid:MedicalConditionIncident
+
