@@ -207,7 +207,8 @@
       "Civilian veteran": "Civilian"
     },
     "abilityToSpeakEnglish": {
-      "Speak English less than \"very well\"": "SpeakEnglishLessThanVeryWell"
+      "Speak English less than \"very well\"": "SpeakEnglishLessThanVeryWell",
+      "Speak English less than very well\"\"": "SpeakEnglishLessThanVeryWell"
     },
     "benefitsStatus": {
       "With Food Stamp/SNAP benefits": "WithFoodStampsInThePast12Months"
@@ -705,9 +706,12 @@
       "Margin of Error!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Estimate!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Margin of Error!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Estimate!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
-      "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\""
+      "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
     ],
     "Estimate!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over": [
       "Estimate!!Total population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
@@ -941,9 +945,12 @@
       "Margin of Error!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Estimate!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Margin of Error!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Estimate!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
-      "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\""
+      "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
     ],
     "Estimate!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over": [
       "Estimate!!Total group quarters population!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
@@ -1177,9 +1184,12 @@
       "Margin of Error!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Estimate!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Margin of Error!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Estimate!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!College/university housing MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Margin of Error!!College/university housing MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
-      "Margin of Error!!College/university housing MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\""
+      "Margin of Error!!College/university housing MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!College/university housing MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
     ],
     "Estimate!!College/university housing!!EMPLOYMENT STATUS!!Population 16 years and over": [
       "Estimate!!College/university housing!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
@@ -1413,9 +1423,12 @@
       "Margin of Error!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Estimate!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Margin of Error!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
-      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\""
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
     ],
     "Estimate!!Nursing facilities/skilled nursing facilities!!EMPLOYMENT STATUS!!Population 16 years and over": [
       "Estimate!!Nursing facilities/skilled nursing facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
@@ -1649,9 +1662,12 @@
       "Margin of Error!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Estimate!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Margin of Error!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Estimate!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Margin of Error!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Adult correctional facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Margin of Error!!Adult correctional facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
-      "Margin of Error!!Adult correctional facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\""
+      "Margin of Error!!Adult correctional facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Adult correctional facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
     ],
     "Estimate!!Adult correctional facilities!!EMPLOYMENT STATUS!!Population 16 years and over": [
       "Estimate!!Adult correctional facilities!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force",
