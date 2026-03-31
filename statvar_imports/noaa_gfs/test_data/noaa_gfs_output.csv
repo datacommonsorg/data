@@ -689,4 +689,4 @@ observationDate,value,variableMeasured,measurementMethod,latitude,longitude,plac
 2025-12-24T0:00:00,230.385,dcid:Temperature_Place_PotentialVorticityNeg2PVU,,-90,0,latLong/-90_0,Kelvin
 2025-12-24T0:00:00,13380.9,dcid:GeopotentialHeight_Place_PotentialVorticityNeg2PVU,,-90,0,latLong/-90_0,GeopotentialMeters
 2025-12-24T0:00:00,18162.1,dcid:Pressure_Atmosphere_PotentialVorticityNeg2PVU,,-90,0,latLong/-90_0,Pascal
-2025-12-24T0:00:00,-0.000220795,dcid:WindShear_Atmosphere_PotentialVorticityNeg2PVU,,-90,0,latLong/-90_0,InverseSecond
+2025-12-24T0:00:00,-0.00022,dcid:WindShear_Atmosphere_PotentialVorticityNeg2PVU,,-90,0,latLong/-90_0,InverseSecond

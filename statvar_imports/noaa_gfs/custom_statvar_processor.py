@@ -218,8 +218,14 @@ def process_and_upload_true_stream():
     blob = bucket.blob(FLAGS.output_blob_name)
     blob.chunk_size = 64 * 1024 * 1024
 
+    # Define the standard wgrib2 CSV columns
+    WGRIB2_COLUMNS = [
+        'Reference_Time', 'Valid_Time', 'Parameter', 'Level', 
+        'Longitude', 'Latitude', 'Value'
+    ]
+
     with open(FLAGS.input_local, mode='r') as f_in:
-        reader = csv.DictReader(f_in)
+        reader = csv.DictReader(f_in, fieldnames=WGRIB2_COLUMNS)
         output_buffer = io.StringIO()
         writer = csv.writer(output_buffer)
         writer.writerow(['observationDate', 'value', 'variableMeasured', 'measurementMethod', 'latitude', 'longitude', 'placeName', 'unit'])
