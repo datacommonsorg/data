@@ -3,10 +3,10 @@ National Center for Education Statistics,statType,measuredValue,populationType,S
 Total,value,{Number},institutionType,"""""",statType,measuredValue,measuredProperty,graduationRate,unit,Percent
 Overall,value,{Number},institutionType,"""""",statType,measuredValue,measuredProperty,graduationRate,unit,Percent
 All institutions,value,{Number},institutionType,"""""",statType,measuredValue,measuredProperty,graduationRate,unit,Percent
-Public,value,{Number},institutionType,PubliclyOwnedInstitute,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
-not-for-profit,value,{Number},institutionType,PrivatelyOwnedNotForProfitInstitute,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
-nonprofit,value,{Number},institutionType,PrivatelyOwnedNotForProfitInstitute,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
-for-profit,value,{Number},institutionType,PrivatelyOwnedForProfitInstitute,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+Public,value,{Number},institutionType,PublicInstitute,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+not-for-profit,value,{Number},institutionType,PrivateNotForProfitInstitute,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+nonprofit,value,{Number},institutionType,PrivateNotForProfitInstitute,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
+for-profit,value,{Number},institutionType,PrivateForProfitInstitute,statType,measuredValue,measuredProperty,graduationRate,unit,Percent
 attending 4-year,educationalAttainment,BachelorsDegree,#Header,educationalAttainment,,,,,,
 attending       2-year,educationalAttainment,AssociateDegreeOrCertificate,#Header,educationalAttainment,,,,,,
 attending 2-year,educationalAttainment,AssociateDegreeOrCertificate,#Header,educationalAttainment,,,,,,
