@@ -232,6 +232,31 @@ class TestMCFFileUtil(unittest.TestCase):
         }
         self.assertTrue(mcf_file_util.check_nodes_can_merge(node1, node3))
 
+    def test_is_valid_property(self):
+        self.assertTrue(mcf_file_util.is_valid_property('prop1'))
+        self.assertFalse(mcf_file_util.is_valid_property('#prop1'))
+        self.assertFalse(mcf_file_util.is_valid_property('Prop1'))
+        self.assertFalse(mcf_file_util.is_valid_property(1))
+
+    def test_is_leaf_object(self):
+        self.assertFalse(mcf_file_util.is_leaf_object('prop1'))
+        self.assertFalse(mcf_file_util.is_leaf_object('#prop1'))
+        self.assertFalse(mcf_file_util.is_leaf_object('Value1'))
+        self.assertFalse(mcf_file_util.is_leaf_object('dcid:Value1'))
+        self.assertTrue(mcf_file_util.is_leaf_object(1))
+        self.assertTrue(mcf_file_util.is_leaf_object(1.1))
+        self.assertTrue(mcf_file_util.is_leaf_object('1.1'))
+        self.assertTrue(mcf_file_util.is_leaf_object('"abc"'))
+        self.assertTrue(mcf_file_util.is_leaf_object('"abc",1.2'))
+        self.assertTrue(mcf_file_util.is_leaf_object('"abc",1.2,"def"'))
+
+    def test_is_number(self):
+        self.assertTrue(mcf_file_util.is_number('1'))
+        self.assertTrue(mcf_file_util.is_number('1.1'))
+        self.assertFalse(mcf_file_util.is_number('1.1.1'))
+        self.assertTrue(mcf_file_util.is_number(1.1))
+        self.assertTrue(mcf_file_util.is_number(1))
+
 
 class TestAddPVToNode(unittest.TestCase):
 
