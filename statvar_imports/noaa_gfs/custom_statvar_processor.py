@@ -34,6 +34,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('bucket_name', 'unresolved_mcf', 'GCS unresolved_mcf bucket.')
 flags.DEFINE_string('input_local', './test_data/noaa_gfs_2025_12_24_0.csv', 'Path to the local input CSV file.')
 flags.DEFINE_string('output_blob_name', 'noaa_gfs/auto/noaa_gfs_output.csv', 'Destination path in unresolved_mcf bucket.')
+flags.DEFINE_string('forecast_hour', '000', 'The forecast hour (e.g., 000, 003).')
 
 # 1. Parameter Mapping (Original)
 param_map = {
@@ -257,6 +258,18 @@ def process_and_upload_true_stream():
                 else:
                     method = "GroundLevel" if "ground" in l_low else ""
                 
+                # Suffixing logic based on Forecast Hour
+                f_hour_int = int(FLAGS.forecast_hour)
+                if f_hour_int == 0:
+                    suffix = "GFS0Hour"
+                else:
+                    suffix = f"GFS{f_hour_int}HourForecast"
+                
+                if method:
+                    method = f"{method}_{suffix}"
+                else:
+                    method = suffix
+
                 writer.writerow([
                     obs_date,
                     row['Value'],

@@ -3,11 +3,12 @@
 # --- Variables ---
 BUCKET=${BUCKET:-"unresolved_mcf"}
 CYCLE=${CYCLE:-"00"}
+FHOUR=${FHOUR:-"000"}
 DATE_STAMP=$(date +%Y%m%d)
-FILE_NAME="gfs.t${CYCLE}z.pgrb2.0p25.f000"
+FILE_NAME="gfs.t${CYCLE}z.pgrb2.0p25.f${FHOUR}"
 URL="https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/gfs.${DATE_STAMP}/${CYCLE}/atmos/${FILE_NAME}"
 
-echo "Starting pipeline for ${DATE_STAMP} cycle ${CYCLE}..."
+echo "Starting pipeline for ${DATE_STAMP} cycle ${CYCLE} hour ${FHOUR}..."
 
 # Helper to use sudo only if we aren't already root
 SUDO=""
@@ -36,7 +37,7 @@ cd ../..
 
 # --- 2. Download GFS Data ---
 echo "Downloading GFS data..."
-curl -L -o "./${FILE_NAME}" "$URL"
+curl -L -o "./${FILE_NAME}" "$URL" || { echo "Failed to download ${URL}"; exit 1; }
 
 # --- 3. Convert GRIB2 to CSV ---
 echo "Converting to CSV..."
@@ -52,6 +53,7 @@ echo "Running StatVar processing and streaming to GCS..."
 python3 custom_statvar_processor.py \
     --bucket_name="${BUCKET}" \
     --input_local="./${FILE_NAME}.csv" \
+    --forecast_hour="${FHOUR}" \
     --output_blob_name="noaa_gfs/${DATE_STAMP}/output/noaa_gfs_output.csv"
 
 # --- 6. Upload TMCF to GCS ---
