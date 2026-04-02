@@ -75,6 +75,7 @@ def obtain_value(entry):
             return np.nan
     return entry
 
+
 def preprocess(input_file, output_file):
     logging.info(f'Processing file: {input_file}')
 
