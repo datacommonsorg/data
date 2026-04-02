@@ -1,5 +1,5 @@
 key,property,value,property2,value2,property3,value3,,,,,,,,
-VALUE,value,{Number},populationType,MedicalConditionIncident,measuredProperty,count,statType,measuredValue,measurementDenominator,Tuberculosis_New,scalingFactor,100,unit,Percent
+VALUE,value,{Number},populationType,MedicalConditionIncident,measuredProperty,count,statType,measuredValue,measurementDenominator,Count_MedicalConditionIncident_ConditionTuberculosis,scalingFactor,100,unit,Percent
 YEAR,observationDate,{Number},,,,,,,,,,,,
 iso3,observationAbout,country/{Data},,,,,,,,,,,,
 whose disease was bacteriologically confirmed,who_tbCasetype,WHO_TbCasetypeEnum_BCPTB,,,,,,,,,,,,

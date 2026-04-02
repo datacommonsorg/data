@@ -6,3 +6,4 @@ value: C:tuberculosisPercentage_output->value
 unit: C:tuberculosisPercentage_output->unit
 scalingFactor: C:tuberculosisPercentage_output->scalingFactor
 typeOf: dcs:StatVarObservation
+
