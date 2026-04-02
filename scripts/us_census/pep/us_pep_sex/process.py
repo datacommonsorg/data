@@ -1242,66 +1242,56 @@ def download_files():
     global _FILES_TO_DOWNLOAD
     session = requests.session()
 
-    #Get set of already downloaded files
+    # Get set of already downloaded files
     downloaded_files = set(os.listdir(_GCS_OUTPUT_PERSISTENT_PATH))
 
     for file_to_download in _FILES_TO_DOWNLOAD:
         file_name_to_save = None
         url = file_to_download['download_path']
 
-        if 'file_name' in file_to_download and len(
-                file_to_download['file_name']) > 5:
+        if 'file_name' in file_to_download and len(file_to_download['file_name']) > 5:
             file_name_to_save = file_to_download['file_name']
         else:
             file_name_to_save = url.split('/')[-1]
 
+        # Skip if file already exists (Moved up for efficiency)
+        if file_name_to_save in downloaded_files:
+            logging.info(f"Skipping already downloaded file: {file_name_to_save}")
+            continue
+
         headers = {'User-Agent': 'Mozilla/5.0'}
         try:
-            with session.get(url, stream=True, timeout=120,
-                             headers=headers) as response:
+            with session.get(url, stream=True, timeout=120, headers=headers) as response:
                 response.raise_for_status()
 
                 content_type = response.headers.get('Content-Type', '')
 
-                # Skip if file already exists
-                if file_name_to_save in downloaded_files:
-                    logging.info(
-                        f"Skipping already downloaded file: {file_name_to_save}"
-                    )
-                    continue
+                # Minimal fix: Log error and continue to skip HTML pages
                 if 'html' in content_type.lower():
-                    logging.fatal(
-                        f"Server returned HTML error page for URL: {url}")
-                else:
-                    if response.status_code == 200:
-                        with tempfile.NamedTemporaryFile(
-                                delete=False) as tmp_file:
-                            # Stream the response into a temp file
-                            for chunk in response.iter_content(chunk_size=8192):
-                                if chunk:
-                                    tmp_file.write(chunk)
-                            tmp_file_path = tmp_file.name
+                    logging.error(f"Server returned HTML error page for URL: {url}. Skipping.")
+                    continue 
 
-                        # Copy to local destination
-                        shutil.copy(
-                            tmp_file_path,
-                            os.path.join(_INPUT_FILE_PATH, file_name_to_save))
+                if response.status_code == 200:
+                    with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+                        for chunk in response.iter_content(chunk_size=8192):
+                            if chunk:
+                                tmp_file.write(chunk)
+                        tmp_file_path = tmp_file.name
 
-                        # Copy to gcs destination
-                        shutil.copy(
-                            tmp_file_path,
-                            os.path.join(_GCS_OUTPUT_PERSISTENT_PATH,
-                                         file_name_to_save))
+                    # Copy to local destination
+                    shutil.copy(tmp_file_path, os.path.join(_INPUT_FILE_PATH, file_name_to_save))
 
-                        # Optionally delete the temp file
-                        os.remove(tmp_file_path)
-                        file_to_download['is_downloaded'] = True
-                        logging.info(f"Downloaded file: {url}")
+                    # Copy to gcs destination
+                    shutil.copy(tmp_file_path, os.path.join(_GCS_OUTPUT_PERSISTENT_PATH, file_name_to_save))
+
+                    os.remove(tmp_file_path)
+                    file_to_download['is_downloaded'] = True
+                    logging.info(f"Downloaded file: {url}")
 
         except Exception as e:
             file_to_download['is_downloaded'] = False
             logging.error(f"Error downloading {url}: {e}")
-            raise  # re-raise to trigger @retry
+            raise 
         time.sleep(1)
 
     return True
