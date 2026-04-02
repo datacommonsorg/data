@@ -141,34 +141,26 @@ def get_gce_instance(required_cpu: float,
     return suitable_instances[0]['name']
 
 
-def create_job_request(import_name: str, import_config: dict, import_spec: dict,
-                       default_resources: dict, timeout: int) -> str:
-    resources = import_spec.get('resource_limits', default_resources)
-    machine_type = get_gce_instance(resources['cpu'], resources['memory'])
+def create_job_request(import_name: str, import_config: dict,
+                       import_spec: dict) -> str:
+    resources = {}
+    if 'resource_limits' in import_spec:
+        resources = import_spec.get('resource_limits', {})
+        machine_type = get_gce_instance(resources.get('cpu', 0),
+                                        resources.get('memory', 0))
+        resources[
+            "machine"] = machine_type if machine_type is not None else 'n2-standard-8'
+        resources["cpu"] = resources["cpu"] * 1000
+        resources["memory"] = resources["memory"] * 1024
 
-    resources[
-        "machine"] = machine_type if machine_type is not None else 'n2-standard-8'
-
-    resources["cpu"] = resources["cpu"] * 1000
-    resources["memory"] = resources["memory"] * 1024
-    schedule = import_spec.get('cron_schedule')
     import_config_string = json.dumps(import_config)
-    job_name = import_name.split(':')[1]
-    job_name = job_name.replace("_", "-").lower()
     argument_payload = {
-        "jobName": job_name,
         "importName": import_name,
         "importConfig": import_config_string,
-        "resources": resources,
-        "timeout": timeout,
-        "schedule": schedule
     }
-    argument_string = json.dumps(argument_payload)
-    final_payload = {
-        "argument": argument_string,
-        "callLogLevel": "CALL_LOG_LEVEL_UNSPECIFIED"
-    }
-
+    if resources:
+        argument_payload["resources"] = resources
+    final_payload = {"argument": json.dumps(argument_payload)}
     json_encoded_body = json.dumps(final_payload, indent=2)
     return json_encoded_body
 

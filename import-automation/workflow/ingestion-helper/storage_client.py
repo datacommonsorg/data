@@ -58,6 +58,21 @@ class StorageClient:
                 f'Error reading import summary file {summary_file}: {e}')
             return {}
 
+    def update_import_summary(self, import_summary: dict):
+        """Updates the import summary in GCS.
+
+        Args:
+            import_summary: A dictionary containing the summary of the import.
+        """
+        latest_version = import_summary.get('latest_version')
+        path = latest_version.removeprefix('gs://').split('/', 1)
+        summary_file = os.path.join(path[1], _IMPORT_SUMMARY_JSON)
+        logging.info(
+            f'Updating import summary at {summary_file} {import_summary}')
+        blob = self.bucket.blob(summary_file)
+        blob.upload_from_string(json.dumps(import_summary))
+        logging.info(f'Updated import summary at {summary_file}')
+
     def get_staging_version(self, import_name: str) -> str:
         """Retrieves the latest version from the staging directory.
 
@@ -77,56 +92,65 @@ class StorageClient:
             logging.error(f"Version file {version_file} not found")
             return ''
 
-    def update_staging_version(self, import_name: str, version: str):
-        """Updates the staging version file in GCS.
+    def update_version_file(self,
+                            import_name: str,
+                            version: str,
+                            is_staging: bool = False):
+        """Updates the version file (staging or latest) in GCS.
 
         Args:
             import_name: The name of the import.
             version: The new version string.
+            is_staging: Whether to update the staging version file or the latest version file.
         """
-        try:
-            logging.info(
-                f'Updating staging version file for import {import_name} to {version}'
-            )
-            output_dir = import_name.replace(':', '/')
-            version_file = self.bucket.blob(
-                os.path.join(output_dir, _STAGING_VERSION_FILE))
-            version_file.upload_from_string(version)
-            logging.info(
-                f'Updated staging version file {version_file} to {version}')
-        except exceptions.NotFound as e:
-            logging.error(f'Error updating version file for {import_name}: {e}')
-            raise
+        file_name = _STAGING_VERSION_FILE if is_staging else _LATEST_VERSION_FILE
+        file_type = "staging" if is_staging else "latest"
+        logging.info(
+            f'Updating {file_type} version file for import {import_name} to {version}'
+        )
+        output_dir = import_name.replace(':', '/')
+        version_file = self.bucket.blob(os.path.join(output_dir, file_name))
+        version_file.upload_from_string(version)
+        logging.info(
+            f'Updated {file_type} version file {version_file.name} to {version}'
+        )
 
-    def update_version_file(self, import_name: str, version: str):
-        """Updates the version file in GCS.
-
-        Copies the latest version file and import metadata from staging to the
-        output directory.
+    def update_provenance_file(self, import_name: str, version: str):
+        """Updates the provenance file for the import.
 
         Args:
             import_name: The name of the import.
-            version: The new version string.
+            version: The version of the import.
         """
-        try:
-            logging.info(
-                f'Updating version history file for import {import_name} to add {version}'
-            )
-            output_dir = import_name.replace(':', '/')
-            version_file = self.bucket.blob(
-                os.path.join(output_dir, _LATEST_VERSION_FILE))
-            metadata_blob = self.bucket.blob(
-                os.path.join(output_dir, version, _IMPORT_METADATA_MCF))
-            if metadata_blob.exists():
-                self.bucket.copy_blob(
-                    metadata_blob, self.bucket,
-                    os.path.join(output_dir, 'import_metadata_mcf.mcf'))
-            else:
-                logging.error(
-                    f'Metadata file not found for import {import_name} {version}'
-                )
-            version_file.upload_from_string(version)
-            logging.info(f'Updated version history file {version_file}')
-        except exceptions.NotFound as e:
-            logging.error(f'Error updating version file for {import_name}: {e}')
-            raise
+        logging.info(
+            f'Updating provenance file for import {import_name} to add {version}'
+        )
+        output_dir = import_name.replace(':', '/')
+        metadata_blob = self.bucket.blob(
+            os.path.join(output_dir, version, 'provenance', 'genmcf',
+                         _IMPORT_METADATA_MCF))
+        if metadata_blob.exists():
+            self.bucket.copy_blob(
+                metadata_blob, self.bucket,
+                os.path.join(output_dir, 'import_metadata_mcf.mcf'))
+        else:
+            logging.warning(
+                f'Generating default metadata for import {import_name}')
+            base_name = import_name.split(':')[-1]
+            default_provenance = f"Node: dcid:dc/base/{base_name}\ntypeOf: dcid:Provenance\n"
+            new_blob = self.bucket.blob(
+                os.path.join(output_dir, version, 'provenance', 'genmcf',
+                             'import_metadata_mcf.mcf'))
+            new_blob.upload_from_string(default_provenance)
+
+        provenance_file = import_name.split(':')[-1] + '.mcf'
+        provenance_blob = self.bucket.blob(
+            os.path.join('provenance', provenance_file))
+        if provenance_blob.exists():
+            self.bucket.copy_blob(
+                provenance_blob, self.bucket,
+                os.path.join(output_dir, version, 'provenance', 'genmcf',
+                             provenance_file))
+        logging.info(
+            f'Updated provenance file for import {import_name} to add {version}'
+        )

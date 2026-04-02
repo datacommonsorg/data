@@ -507,8 +507,20 @@ def _clean_county_2022_csv_file(df: pd.DataFrame,
     Returns:
         df (DataFrame) : Transformed DataFrame for csv dataset.
     '''
+
     try:
-        # filter by agegrp = 0
+        # Check if the dataframe is empty or missing the 'YEAR' column
+        if df is None or df.empty:
+            logging.info(f"Skipping empty file: {file_path}")
+            return pd.DataFrame()
+
+        if 'YEAR' not in df.columns:
+            logging.warning(
+                f"File {file_path} does not contain 'YEAR' column. Likely an error page."
+            )
+            return pd.DataFrame()
+
+        # Existing logic
         df = df.query("YEAR not in [1]")
         df = df.query("AGEGRP == 0")
         # filter years 3 - 14
@@ -911,6 +923,11 @@ class CensusUSAPopulationByRace:
             elif "cc-est202" in file:
                 df = pd.read_csv(file, encoding='ISO-8859-1', low_memory=False)
                 df = _clean_county_2022_csv_file(df, file)
+                if df.empty:
+                    logging.warning(
+                        f"Skipping further processing for empty/invalid file: {file}"
+                    )
+                    return df  # Returns the empty DF and moves to next file
                 # aggregating County data to obtain National data for 2020-2022
                 df_national = df.copy()
                 df_national['geo_ID'] = "country/USA"
@@ -957,8 +974,12 @@ class CensusUSAPopulationByRace:
             file (str) : String of Dataset File Path
 
         Returns:
-            None
+            bool: True if transformation is successful or skipped, False otherwise.
         """
+        if df is None or df.empty:
+            logging.warning(f"No data to transform for file: {file_path}")
+            return True
+
         try:
             # Finding the Dir Path
             file_dir = self.cleaned_csv_file_path
@@ -1191,8 +1212,6 @@ class CensusUSAPopulationByRace:
 
 
 # The outputs are loaded into
-
-
 def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a csv file format.
@@ -1236,28 +1255,38 @@ def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
 def add_future_yearurls():
     """
     This method scans the download URLs for future years.
-
     """
     global _FILES_TO_DOWNLOAD
     with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
         _FILES_TO_DOWNLOAD = json.load(inpit_file)
+
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
     ]
+
     # This method will generate URLs for the years 2024 to 2029
     for future_year in range(2024, 2030):
-        if dt.now().year > future_year:
-            YEAR = future_year
-            for url in urls_to_scan:
-                url_to_check = url.format(YEAR=YEAR)
+        if dt.now().year >= future_year:
+            for url_template in urls_to_scan:
+                # FIX: Define url_to_check by formatting the template
+                url_to_check = url_template.replace("{YEAR}", str(future_year))
+
                 try:
-                    checkurl = requests.head(url_to_check)
-                    if checkurl.status_code == 200:
+                    checkurl = requests.head(url_to_check,
+                                             timeout=10,
+                                             allow_redirects=True)
+
+                    # If it's 200 OK and NOT an HTML file
+                    if checkurl.status_code == 200 and 'text/csv' in checkurl.headers.get(
+                            'Content-Type', ''):
                         _FILES_TO_DOWNLOAD.append(
                             {"download_path": url_to_check})
-
-                except:
-                    logging.error(f"URL is not accessable {url_to_check}")
+                    else:
+                        logging.info(
+                            f"Data for {future_year} not yet available at {url_to_check}"
+                        )
+                except requests.exceptions.RequestException:
+                    logging.error(f"URL unreachable: {url_to_check}")
 
 
 def download_files():
@@ -1288,6 +1317,14 @@ def download_files():
                 headers = {'User-Agent': 'Mozilla/5.0'}
                 response = requests.get(url, headers=headers, timeout=60)
                 response.raise_for_status()
+
+                content_type = response.headers.get('Content-Type', '').lower()
+                if 'text/html' in content_type:
+                    logging.warning(
+                        f"Server returned HTML for {url}. Skipping download.")
+                    is_file_downloaded = True  # Break the while loop
+                    continue  # Move to the next file in _FILES_TO_DOWNLOAD
+
                 if ".csv" in url:
                     if "st-est" in url or 'SC-EST' in url:
                         file_name = file_name.replace(".csv", ".xlsx")
