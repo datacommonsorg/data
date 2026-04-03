@@ -1,7 +1,0 @@
-Node: E:adolescent_birth_rate_output->E0
-observationDate: C:adolescent_birth_rate_output->observationDate
-value: C:adolescent_birth_rate_output->value
-observationAbout: C:adolescent_birth_rate_output->observationAbout
-variableMeasured: C:adolescent_birth_rate_output->variableMeasured
-scalingFactor: 1000
-typeOf: dcs:StatVarObservation
