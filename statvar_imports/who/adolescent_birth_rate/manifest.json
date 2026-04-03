@@ -1,0 +1,30 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "Adolescent_Birth_Rate",
+        "curator_emails": ["support@datacommons.org"],
+        "provenance_url": "https://data.who.int/indicators/i/24C65FE/27D371A",
+        "provenance_description": "The annual number of births to females aged 10-14 or 15-19 years per 1,000 females in the respective age group.",
+        "scripts": ["data_download.py",
+<<<<<<< HEAD
+        	    "../../tools/statvar_importer/stat_var_processor.py --input_data=gs://datacommons_public/unresolved_mcf/who/Adolescent_Birth_Rate_Per_1000_Women/adolescent_birth_rate_input.csv --pv_map=gs://datacommons_public/unresolved_mcf/who/Adolescent_Birth_Rate_Per_1000_Women/adolescent_birth_rate_pvmap.csv --config_file=gs://datacommons_public/unresolved_mcf/who/Adolescent_Birth_Rate_Per_1000_Women/adolescent_birth_rate_metadata.csv --output_path=gs://datacommons_public/unresolved_mcf/who/Adolescent_Birth_Rate_Per_1000_Women/adolescent_birth_rate_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+"],
+=======
+        	    "../../tools/statvar_importer/stat_var_processor.py --input_data=gs://datacommons_public/unresolved_mcf/who/Adolescent_Birth_Rate_Per_1000_Women/input_files/* --pv_map=gs://datacommons_public/unresolved_mcf/who/Adolescent_Birth_Rate_Per_1000_Women/adolescent_birth_rate_pvmap.csv --config_file=gs://datacommons_public/unresolved_mcf/who/Adolescent_Birth_Rate_Per_1000_Women/adolescent_birth_rate_metadata.csv --output_path=gs://datacommons_public/unresolved_mcf/who/Adolescent_Birth_Rate_Per_1000_Women/adolescent_birth_rate_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+],
+>>>>>>> 77012e1c (Adding files)
+        "import_inputs": [
+          {
+            "template_mcf": "adolescent_birth_rate_output.tmcf",
+            "cleaned_csv": "adolescent_birth_rate_output.csv"
+          }
+        ],
+<<<<<<< HEAD
+=======
+        "source_files": ["input_files/*.csv"],
+>>>>>>> 77012e1c (Adding files)
+        "cron_schedule": "0 0 20 6 *"
+      }
+    ]
+  }
+  
