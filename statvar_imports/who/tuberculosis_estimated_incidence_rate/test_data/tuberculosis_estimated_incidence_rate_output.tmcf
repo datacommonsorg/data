@@ -1,0 +1,8 @@
+Node: E:tuberculosis_estimated_incidence_rate_output->E0
+observationDate: C:tuberculosis_estimated_incidence_rate_output->observationDate
+value: C:tuberculosis_estimated_incidence_rate_output->value
+observationAbout: C:tuberculosis_estimated_incidence_rate_output->observationAbout
+variableMeasured: C:tuberculosis_estimated_incidence_rate_output->variableMeasured
+measurementMethod: WHOEstimate
+typeOf: dcs:StatVarObservation
+scalingFactor: 100000

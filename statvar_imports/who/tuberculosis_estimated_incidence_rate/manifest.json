@@ -1,0 +1,22 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "TB_Estimated_Incidence_Rate",
+        "curator_emails": ["support@datacommons.org"],
+        "provenance_url": "https://data.who.int/indicators/i/EB68992/2674B39",
+        "provenance_description": "Estimated number of new episodes of TB cases arising in a given year per 100 000 population.",
+        "scripts": ["tb_data_download.py",
+        	    "../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/who/TB_Estimated_Incidence_Rate/tuberculosis_estimated_incidence_rate_input.csv --pv_map=gs://unresolved_mcf/who/TB_Estimated_Incidence_Rate/tuberculosis_estimated_incidence_rate_pvmap.csv --config_file=gs://unresolved_mcf/who/TB_Estimated_Incidence_Rate/tuberculosis_estimated_incidence_rate_metadata.csv --output_path=gs://unresolved_mcf/who/TB_Estimated_Incidence_Rate/tuberculosis_estimated_incidence_rate_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+"],
+        "import_inputs": [
+          {
+            "template_mcf": "tuberculosis_estimated_incidence_rate_output.tmcf",
+            "cleaned_csv": "tuberculosis_estimated_incidence_rate_output.csv"
+          }
+        ],
+        "source_files": ["input_files/*.csv"],
+        "cron_schedule": "15 22 15 12 *"
+      }
+    ]
+  }
+  
