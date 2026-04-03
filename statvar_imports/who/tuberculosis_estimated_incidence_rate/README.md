@@ -35,7 +35,7 @@ To download the data, run the provided script:
 ```bash
 python3 tb_data_download.py
 ```
-This will fetch the latest full dataset, process the ISO3 codes, and save it locally as `Estimated_incidence_rate_per_100_000_population.csv` making it available for stat var processing.
+This will fetch the latest full dataset, process the ISO3 codes, and save it locally as `input_files/Estimated_incidence_rate_per_100_000_population.csv` making it available for stat var processing.
 
 ## Processing Instructions
 To process the WHO Tuberculosis Incidence Rate data and generate statistical variables, use the following command from the import directory:
@@ -43,7 +43,7 @@ To process the WHO Tuberculosis Incidence Rate data and generate statistical var
 **For Data Run**
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
-    --input_data=tuberculosis_estimated_incidence_rate_input.csv \
+    --input_data=input_files/* \
     --pv_map=tuberculosis_estimated_incidence_rate_pvmap.csv \
     --output_path=tuberculosis_estimated_incidence_rate_output \
     --config_file=tuberculosis_estimated_incidence_rate_metadata.csv
