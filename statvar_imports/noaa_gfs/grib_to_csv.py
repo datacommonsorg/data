@@ -13,98 +13,91 @@
 # limitations under the License.
 
 """
-This script processes GRIB2 meteorological data by utilizing the pygrib library to 
-decode binary records into NumPy arrays for vectorized grid transformations. 
-It performs automated coordinate normalization (converting 0-360° to -180-180°), 
-re-orienting data for standard GIS compatibility, and resolving complex 
-vertical level definitions (including Potential Vorticity, Sigma, and Hybrid layers). 
-The pipeline maps raw NCEP shortnames to standardized identifiers, applies 
-variable-specific precision rounding, and leverages PyArrow for high-performance 
-flattening and CSV streaming of the resulting observations.
+This script processes GRIB2 meteorological data by utilizing the pygrib library.
+It performs automated coordinate normalization, re-orienting data for GIS 
+compatibility, and leverages PyArrow for high-performance CSV streaming.
 """
 
+import time
 import pygrib
 import numpy as np
 import pyarrow as pa
 import pyarrow.csv as csv
-import sys
-import time
+from absl import app, flags, logging
 
-def convert(input_file, output_file):
-    """
-    Converts GRIB weather data to a filtered, flattened CSV format.
-    Uses PyArrow for high-performance I/O and NumPy for vectorised data manipulation.
-    """
-    start_total = time.time()
-    
+# --- FLAG DEFINITIONS ---
+FLAGS = flags.FLAGS
+
+flags.DEFINE_string('input_file', None, 'Path to the input GRIB file.')
+flags.DEFINE_string('output_file', None, 'Path to the output CSV file.')
+
+# Set mandatory flags
+flags.mark_flag_as_required('input_file')
+flags.mark_flag_as_required('output_file')
+
+# --- CONSTANTS & MAPS ---
+NAME_MAP = {
+    "prmsl": "PRMSL", "clwmr": "CLMR", "icmr": "ICMR", "rwmr": "RWMR",
+    "snmr": "SNMR", "grle": "GRLE", "refd": "REFD", "refc": "REFC",
+    "vis": "VIS", "u": "UGRD", "v": "VGRD", "vrate": "VRATE",
+    "gust": "GUST", "gh": "HGT", "t": "TMP", "r": "RH",
+    "q": "SPFH", "w": "VVEL", "wz": "DZDT", "absv": "ABSV",
+    "o3mr": "O3MR", "tcc": "TCDC", "hindex": "HINDEX", "mslet": "MSLET",
+    "sp": "PRES", "orog": "HGT", "st": "TSOIL", "soilw": "SOILW",
+    "soill": "SOILL", "cnwat": "CNWAT", "sdwe": "WEASD", "sde": "SNOD",
+    "sithick": "ICETK", "2t": "TMP", "2sh": "SPFH", "2d": "DPT",
+    "2r": "RH", "aptmp": "APTMP", "10u": "UGRD", "10v": "VGRD",
+    "cpofp": "CPOFP", "prate": "PRATE", "csnow": "CSNOW", "cicep": "CICEP",
+    "cfrzr": "CFRZR", "crain": "CRAIN", "fsr": "SFCR", "fricv": "FRICV",
+    "veg": "VEG", "slt": "SOTYP", "wilt": "WILT", "fldcp": "FLDCP",
+    "sunsd": "SUNSD", "lftx": "LFTX", "cape": "CAPE", "cin": "CIN",
+    "pwat": "PWAT", "cwat": "CWAT", "tozne": "TOZNE", "lcc": "LCDC",
+    "mcc": "MCDC", "hcc": "HCDC", "hlcy": "HLCY", "ustm": "USTM",
+    "vstm": "VSTM", "trpp": "PRES", "icaht": "ICAHT", "vwsh": "VWSH",
+    "pres": "PRES", "100u": "UGRD", "100v": "VGRD", "4lftx": "4LFTX",
+    "pt": "POT", "plpl": "PLPL", "lsm": "LAND", "ci": "ICEC", "sit": "ICETMP"
+}
+
+LEVEL_TYPE_MAP = {
+    "surface": "surface", "meanSea": "mean sea level", "atmosphere": "entire atmosphere",
+    "atmosphereSingleLayer": "entire atmosphere (considered as a single layer)",
+    "planetaryBoundaryLayer": "planetary boundary layer", "lowCloudLayer": "low cloud layer",
+    "middleCloudLayer": "middle cloud layer", "highCloudLayer": "high cloud layer",
+    "cloudCeiling": "cloud ceiling", "isothermZero": "0C isotherm",
+    "highestTroposphericFreezing": "highest tropospheric freezing level",
+    "tropopause": "tropopause", "maxWind": "max wind", "heightAboveSea": "m above mean sea level"
+}
+
+def convert_grib_to_csv(input_path, output_path):
+    """Processes GRIB data and writes to CSV using Arrow."""
     try:
-        grbs = pygrib.open(input_file)
+        grbs = pygrib.open(input_path)
     except Exception as e:
-        print(f"Error: {e}")
+        logging.error(f"Failed to open GRIB file: {e}")
         return
 
     # --- 1. STATIC GRID INITIALIZATION ---
-    # We extract the lat/lon grid once from the first record to avoid redundant 
-    # heavy calculations, assuming the grid is consistent across the GRIB file.
     sample = grbs.readline()
     lats, lons = sample.latlons()
 
-    # GRIB data is often stored top-to-bottom; flipud ensures standard orientation.
+    # Flip and flatten coordinates
     lats_flat = np.flipud(lats).flatten().astype(np.float32)
     lons_raw = np.flipud(lons).flatten()
-
-    # Normalize longitudes from [0, 360] to [-180, 180] for standard GIS compatibility.
     lons_flat = np.where(lons_raw > 180, lons_raw - 360, lons_raw).astype(np.float32)
+
     grbs.rewind()
     
-    # --- 2. TRANSLATION MAPS ---
-    # Maps internal GRIB shortnames to standardized NOAA/NCEP abbreviations.
-    name_map = {
-        "prmsl": "PRMSL", "clwmr": "CLMR", "icmr": "ICMR", "rwmr": "RWMR",
-        "snmr": "SNMR", "grle": "GRLE", "refd": "REFD", "refc": "REFC",
-        "vis": "VIS", "u": "UGRD", "v": "VGRD", "vrate": "VRATE",
-        "gust": "GUST", "gh": "HGT", "t": "TMP", "r": "RH",
-        "q": "SPFH", "w": "VVEL", "wz": "DZDT", "absv": "ABSV",
-        "o3mr": "O3MR", "tcc": "TCDC", "hindex": "HINDEX", "mslet": "MSLET",
-        "sp": "PRES", "orog": "HGT", "st": "TSOIL", "soilw": "SOILW",
-        "soill": "SOILL", "cnwat": "CNWAT", "sdwe": "WEASD", "sde": "SNOD",
-        "sithick": "ICETK", "2t": "TMP", "2sh": "SPFH", "2d": "DPT",
-        "2r": "RH", "aptmp": "APTMP", "10u": "UGRD", "10v": "VGRD",
-        "cpofp": "CPOFP", "prate": "PRATE", "csnow": "CSNOW", "cicep": "CICEP",
-        "cfrzr": "CFRZR", "crain": "CRAIN", "fsr": "SFCR", "fricv": "FRICV",
-        "veg": "VEG", "slt": "SOTYP", "wilt": "WILT", "fldcp": "FLDCP",
-        "sunsd": "SUNSD", "lftx": "LFTX", "cape": "CAPE", "cin": "CIN",
-        "pwat": "PWAT", "cwat": "CWAT", "tozne": "TOZNE", "lcc": "LCDC",
-        "mcc": "MCDC", "hcc": "HCDC", "hlcy": "HLCY", "ustm": "USTM",
-        "vstm": "VSTM", "trpp": "PRES", "icaht": "ICAHT", "vwsh": "VWSH",
-        "pres": "PRES", "100u": "UGRD", "100v": "VGRD", "4lftx": "4LFTX",
-        "pt": "POT", "plpl": "PLPL", "lsm": "LAND", "ci": "ICEC", "sit": "ICETMP"
-    }
-
-    # Human-readable strings for vertical levels (e.g., 'surface', 'tropopause').
-    level_type_map = {
-        "surface": "surface", "meanSea": "mean sea level", "atmosphere": "entire atmosphere",
-        "atmosphereSingleLayer": "entire atmosphere (considered as a single layer)",
-        "planetaryBoundaryLayer": "planetary boundary layer", "lowCloudLayer": "low cloud layer",
-        "middleCloudLayer": "middle cloud layer", "highCloudLayer": "high cloud layer",
-        "cloudCeiling": "cloud ceiling", "isothermZero": "0C isotherm",
-        "highestTroposphericFreezing": "highest tropospheric freezing level",
-        "tropopause": "tropopause", "maxWind": "max wind", "heightAboveSea": "m above mean sea level"
-    }
-
-    # --- 3. DATA PROCESSING LOOP ---
-    with open(output_file, 'wb') as f:
-        # include_header=False is used because we append rows record-by-record.
+    # --- 2. DATA PROCESSING LOOP ---
+    with open(output_path, 'wb') as f:
+        # Standard CSV options
         opts = csv.WriteOptions(include_header=False, quoting_style='needed')
         
         for grb in grbs:
             try:
-                # Align data values with our flipped lat/lon grid.
                 vals_flipped = np.flipud(grb.values)
                 data_flat = vals_flipped.flatten()
 
-                # --- Variable Name Resolution ---
-                # Handles "Unknown" GRIB parameters by looking at Discipline/Category/Number.
+                # Variable Name Resolution
                 raw_short = grb.shortName.lower()
                 if raw_short == "unknown":
                     d, c, num = grb.discipline, grb.parameterCategory, grb.parameterNumber
@@ -112,18 +105,15 @@ def convert(input_file, output_file):
                     elif d == 10 and c == 2 and num == 6: var_name = "ICEG"
                     else: var_name = f"VAR_{d}_{c}_{num}"
                 else:
-                    var_name = name_map.get(raw_short, raw_short.upper())
+                    var_name = NAME_MAP.get(raw_short, raw_short.upper())
 
-                # --- Filtering Logic (Missing Values / Bitmaps) ---
-                # Identifies which grid points actually contain data.
+                # Filtering Logic (Missing Values / Bitmaps) ---
                 try:
                     has_bitmap = grb.bitmapPresent
                 except:
                     has_bitmap = False
 
                 valid_mask = np.ones(data_flat.shape, dtype=bool)
-
-                # Apply mask if the GRIB record uses a bitmap (e.g., land-only data).
                 if has_bitmap and hasattr(data_flat, 'mask'):
                     valid_mask &= ~data_flat.mask
                 
@@ -143,14 +133,12 @@ def convert(input_file, output_file):
                 lats_subset = lats_flat[valid_mask]
 
                 n = len(data_subset)
-                if n == 0: continue
+                if n == 0: 
+                    continue
                 
-                # --- Vertical Level Logic ---
-                # Complex logic to interpret different height/pressure/sigma types.
+                # Vertical Level Logic
                 l_type = grb.typeOfLevel
-                
                 if l_type == "potentialVorticity":
-                    # Manually parsing GRIB2 sign bits for PV units (Km^2/kg/s).
                     try:
                         s_factor = grb['scaleFactorOfFirstFixedSurface']
                         s_value = grb['scaledValueOfFirstFixedSurface']
@@ -161,10 +149,8 @@ def convert(input_file, output_file):
                         level_str = f"PV={pv_val:g} (Km^2/kg/s) surface"
                     except:
                         level_str = f"PV={grb.level*1e-9:g} (Km^2/kg/s) surface"
-
-                # (Standard level parsing: mb for pressure, m for height, etc.)
-                elif l_type in level_type_map:
-                    level_str = f"{grb.level} {level_type_map[l_type]}" if l_type == "heightAboveSea" else level_type_map[l_type]
+                elif l_type in LEVEL_TYPE_MAP:
+                    level_str = f"{grb.level} {LEVEL_TYPE_MAP[l_type]}" if l_type == "heightAboveSea" else LEVEL_TYPE_MAP[l_type]
                 elif l_type == "isobaricInhPa": level_str = f"{grb.level:g} mb"
                 elif l_type == "isobaricInPa": level_str = f"{grb.level/100:g} mb"
                 elif l_type == "heightAboveGround": level_str = f"{grb.level} m above ground"
@@ -195,12 +181,9 @@ def convert(input_file, output_file):
                 else:
                     level_str = f"{grb.level} {l_type}"
 
-                # --- Precision & Rounding ---
-                # Uniformly rounding all raw values to two decimal places
                 processed_vals = np.round(data_subset, 2)
                 
-                # --- CSV Export via Arrow ---
-                # We wrap the data in PyArrow arrays for the fastest possible conversion to CSV.
+                # CSV Export via Arrow
                 table = pa.Table.from_arrays([
                     pa.array([grb.analDate.strftime("%Y-%m-%d %H:%M:%S")] * n),
                     pa.array([grb.validDate.strftime("%Y-%m-%d %H:%M:%S")] * n),
@@ -214,13 +197,26 @@ def convert(input_file, output_file):
                 csv.write_csv(table, f, write_options=opts)
 
             except Exception as e:
-                print(f"Error: {e}")
+                logging.error(f"Error: {e}")
 
     grbs.close()
-    print(f"Total Time taken for GRIB to CSV conversion ({input_file}): {time.time() - start_total:.2f}s")
+
+def main(argv):
+    """Main execution entry point."""
+    if len(argv) > 1:
+        raise app.UsageError('Too many command-line arguments.')
+
+    start_time = time.perf_counter()
+    logging.info(f"Conversion started for: {FLAGS.input_file}")
+
+    try:
+        convert_grib_to_csv(FLAGS.input_file, FLAGS.output_file)
+        logging.info(f"Conversion complete. Output saved to: {FLAGS.output_file}")
+    except Exception as e:
+        logging.fatal(f"Process failed: {e}")
+    
+    duration = time.perf_counter() - start_time
+    logging.info(f"Total Execution Time: {duration:.2f}s")
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python script.py <input_grib> <output_csv>")
-        sys.exit(1)
-    convert(sys.argv[1], sys.argv[2])
+    app.run(main)
