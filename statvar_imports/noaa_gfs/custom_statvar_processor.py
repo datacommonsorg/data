@@ -109,6 +109,14 @@ param_map = {
     'ICETMP': ('Temperature_SeaIce', 'Kelvin'),
 }
 
+STATIC_LEVEL_MAP = {
+    "mean sea level": "0MetersAboveMeanSeaLevel",
+    "surface": "SurfaceLevel",
+    "planetary boundary layer": "PlanetaryBoundaryLayer",
+    "0c isotherm": "Isotherm0C",
+    "highest tropospheric freezing level": "HighestTroposphericFreezingLevel"
+}
+
 # 2. Helper Function to Clean Level for DCID
 def format_level_dcid(level):
     """
@@ -122,20 +130,21 @@ def format_level_dcid(level):
     """
     l = str(level).lower().strip()
     
-    if l == "mean sea level": 
-        return "0MetersAboveMeanSeaLevel"
+    # 1. Check for exact matches using the map
+    if l in STATIC_LEVEL_MAP:
+        return STATIC_LEVEL_MAP[l]
+    
+    # 2. Dynamic string parsing for non-static levels
     if "m above mean sea level" in l:
         val = l.split(" ")[0].replace("-", "To")
         return f"{val}MetersAboveMeanSeaLevel"
 
-    if l == "surface": return "SurfaceLevel"
-    if "entire atmosphere" in l: return ""
-    if l == "planetary boundary layer": return "PlanetaryBoundaryLayer"
+    if "entire atmosphere" in l: 
+        return ""
+    
     if "low cloud layer" in l: return "LowCloudLayer"
     if "middle cloud layer" in l: return "MiddleCloudLayer"
     if "high cloud layer" in l: return "HighCloudLayer"
-    if l == "0c isotherm": return "Isotherm0C"
-    if l == "highest tropospheric freezing level": return "HighestTroposphericFreezingLevel"
     
     if "hybrid level" in l:
         val = l.split(" ")[0]
