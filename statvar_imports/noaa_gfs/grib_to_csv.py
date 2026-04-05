@@ -196,15 +196,8 @@ def convert(input_file, output_file):
                     level_str = f"{grb.level} {l_type}"
 
                 # --- Precision & Rounding ---
-                # Variables like Pressure/Height are rounded to integers.
-                # Wind components (UGRD/VGRD) keep high precision.
-                if var_name in ["PRMSL", "PRES", "HGT", "MSLET"]:
-                    processed_vals = (np.floor(np.abs(data_subset) + 0.499999999) * np.sign(data_subset)).astype(np.int32)
-                elif var_name in ["UGRD", "VGRD", "ICEG", "HPBL", "VWSH"]:
-                    # VWSH added to high precision to match wgrib2 evidence
-                    processed_vals = np.round(data_subset, 9) if var_name == "VWSH" else np.round(data_subset, 5)
-                else:
-                    processed_vals = np.round(data_subset, 3)
+                # Uniformly rounding all raw values to two decimal places
+                processed_vals = np.round(data_subset, 2)
                 
                 # --- CSV Export via Arrow ---
                 # We wrap the data in PyArrow arrays for the fastest possible conversion to CSV.
@@ -224,7 +217,7 @@ def convert(input_file, output_file):
                 print(f"Error: {e}")
 
     grbs.close()
-    print(f"Total Time taken for GRIB to CSV conversion: {time.time() - start_total:.2f}s")
+    print(f"Total Time taken for GRIB to CSV conversion ({input_file}): {time.time() - start_total:.2f}s")
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
