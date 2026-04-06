@@ -7,7 +7,7 @@ main:
           - wait_period: 300 # seconds
           - project_id: '${sys.get_env("PROJECT_ID")}'
           - dataflow_job_name: ${"ingestion-job-" + string(int(sys.now()))}
-          - dataflow_gcs_path: 'gs://datcom-templates/templates/flex/ingestion.json'
+          - dataflow_gcs_path: ${default(map.get(args, "templateGcsPath"), "gs://datcom-templates/templates/flex/ingestion.json")}
           - location: '${sys.get_env("LOCATION")}'
           - spanner_project_id: '${sys.get_env("SPANNER_PROJECT_ID")}'
           - spanner_instance_id: '${sys.get_env("SPANNER_INSTANCE_ID")}'
