@@ -273,6 +273,7 @@ def process_grib_dcid(input_path, output_path):
                 elif l_type == "isobaricInhPa": l_str = f"{grb.level:g} mb"
                 elif l_type == "isobaricInPa": l_str = f"{grb.level / 100:g} mb"
                 elif l_type == "heightAboveGround": l_str = f"{grb.level} m above ground"
+                elif l_type == "heightAboveSea": l_str = f"{grb.level} m above mean sea level"
                 elif l_type == "depthBelowLandLayer": 
                     try:
                         top = grb['scaledValueOfFirstFixedSurface'] * (10**-grb['scaleFactorOfFirstFixedSurface'])
