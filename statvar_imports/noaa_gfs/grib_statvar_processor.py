@@ -273,12 +273,18 @@ def process_grib_dcid(input_path, output_path):
                 elif l_type == "isobaricInhPa": l_str = f"{grb.level:g} mb"
                 elif l_type == "isobaricInPa": l_str = f"{grb.level / 100:g} mb"
                 elif l_type == "heightAboveGround": l_str = f"{grb.level} m above ground"
+                elif l_type == "depthBelowLandLayer": 
+                    try:
+                        top = grb['scaledValueOfFirstFixedSurface'] * (10**-grb['scaleFactorOfFirstFixedSurface'])
+                        bottom = grb['scaledValueOfSecondFixedSurface'] * (10**-grb['scaleFactorOfSecondFixedSurface'])
+                        l_str = f"{top:g}-{bottom:g} m below ground"
+                    except:
+                        l_str = f"{grb.level} m below ground"
                 elif l_type == "hybrid": l_str = "1 hybrid level" if grb.level == 1 else f"{grb.level} hybrid level"
                 elif l_type == "planetaryBoundaryLayer": l_str = "planetary boundary layer"
                 else: l_str = f"{grb.level} {l_type}"
 
                 l_low = l_str.lower()
-                # EXACT MATCH of Script 2 logic:
                 if "mb" in l_low or "mean sea level" in l_low:
                     final_m = suffix_method
                 else:
