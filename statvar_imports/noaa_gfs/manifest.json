@@ -12,12 +12,12 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output/noaa_gfs_output.tmcf",
-                    "cleaned_csv": "output/noaa_gfs_output.csv"
+                    "template_mcf": "./noaa_gfs_output.tmcf",
+                    "cleaned_csv": "output/noaa_gfs_output_*.csv"
                 }
             ],
             "source_files": [
-                "./input_files/gfs.t00z.pgrb2.0p25.f000.csv"
+                "./input_files/gfs.*"
             ],
             "user_script_timeout": 36000,
             "cron_schedule": "30 04 * * *",

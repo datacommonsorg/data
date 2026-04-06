@@ -25,6 +25,8 @@ import pyarrow as pa
 import pyarrow.csv as csv
 from absl import app, flags, logging
 
+logging.set_verbosity(logging.INFO)
+
 # --- FLAG DEFINITIONS ---
 FLAGS = flags.FLAGS
 
