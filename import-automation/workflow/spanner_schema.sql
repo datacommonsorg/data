@@ -1,6 +1,6 @@
 -- Copyright 2025 Google LLC
 --
--- Licensed under the Apache License, Version 2.0 (the "License");
+-- Licensed under the Apache License, Version 2.0 (the "License")
 -- you may not use this file except in compliance with the License.
 -- You may obtain a copy of the License at
 --
@@ -53,7 +53,3 @@ CREATE TABLE IngestionLock (
   LockOwner STRING(1024),
   AcquiredTimestamp TIMESTAMP OPTIONS ( allow_commit_timestamp = TRUE ),
 ) PRIMARY KEY(LockID);
-
--- Initialize the IngestionLock table with the global lock.
--- INSERT INTO IngestionLock (LockID) VALUES ('global_ingestion_lock');
-
