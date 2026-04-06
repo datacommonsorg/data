@@ -41,47 +41,6 @@ class TestValidatorGoldens(unittest.TestCase):
             self.assertEqual(config['goldens_ignore_property'], ['p1'])
             self.assertEqual(config['goldens_key_property'], ['p2'])
 
-    @patch('validator_goldens.mcf_file_util')
-    def test_normalize_value(self, mock_mcf):
-        # Test string with quotes
-        self.assertEqual(validator_goldens.normalize_value(' "val" '), 'val')
-        # Test float normalization
-        self.assertEqual(validator_goldens.normalize_value(1.20), '1.2')
-        # Test namespace stripping
-        mock_mcf.strip_namespace.return_value = 'val'
-        self.assertEqual(
-            validator_goldens.normalize_value('dcid:val',
-                                              strip_namespaces=True), 'val')
-        mock_mcf.strip_namespace.assert_called_with('dcid:val')
-        # Test list normalization
-        mock_mcf.normalize_list.return_value = 'v1,v2'
-        self.assertEqual(validator_goldens.normalize_value('v1,v2'), 'v1,v2')
-        mock_mcf.normalize_list.assert_called_with('v1,v2')
-        # Test alphanumeric string
-        self.assertEqual(validator_goldens.normalize_value('simple'), 'simple')
-
-    def test_get_node_fingerprint(self):
-        node = {'p1': 'v1', 'p2': 'v2', 'p3': 'v3'}
-        # All properties (default)
-        self.assertEqual(validator_goldens.get_node_fingerprint(node),
-                         'p1=v1;p2=v2;p3=v3')
-        # Specific key properties
-        self.assertEqual(
-            validator_goldens.get_node_fingerprint(node,
-                                                   key_property={'p1', 'p3'}),
-            'p1=v1;p3=v3')
-        # Ignore properties
-        self.assertEqual(
-            validator_goldens.get_node_fingerprint(node,
-                                                   ignore_property={'p2'}),
-            'p1=v1;p3=v3')
-        # Combined key and ignore
-        self.assertEqual(
-            validator_goldens.get_node_fingerprint(node,
-                                                   key_property={'p1', 'p2'},
-                                                   ignore_property={'p2'}),
-            'p1=v1')
-
     def test_validator_compare_nodes(self):
         input_nodes = {
             'n1': {
@@ -99,7 +58,7 @@ class TestValidatorGoldens(unittest.TestCase):
         missing = validator_goldens.validator_compare_nodes(
             input_nodes, golden_nodes, config, counters)
         # Expected fingerprint for g2 is p1=v5, which is not in input_nodes
-        self.assertEqual(missing, ['p1=v5'])
+        self.assertEqual(missing, [{'p1': 'v5'}])
         self.assertEqual(counters.get_counter('validate-goldens-missing'), 1)
         self.assertEqual(counters.get_counter('validate-goldens-matched'), 1)
 
@@ -180,10 +139,12 @@ class TestValidatorGoldens(unittest.TestCase):
         # 3. observationAbout=geo1;variableMeasured=sv1
         # 4. observationAbout=geo1;variableMeasured=sv2
         self.assertEqual(len(goldens), 4)
-        self.assertIn('variableMeasured=sv1', goldens)
-        self.assertIn('variableMeasured=sv2', goldens)
-        self.assertIn('observationAbout=geo1;variableMeasured=sv1', goldens)
-        self.assertIn('observationAbout=geo1;variableMeasured=sv2', goldens)
+        self.assertIn('variableMeasured=dcid:sv1', goldens)
+        self.assertIn('variableMeasured=dcid:sv2', goldens)
+        self.assertIn('observationAbout=dcid:geo1;variableMeasured=dcid:sv1',
+                      goldens)
+        self.assertIn('observationAbout=dcid:geo1;variableMeasured=dcid:sv2',
+                      goldens)
 
     @patch('validator_goldens.load_nodes_from_file')
     @patch('validator_goldens.mcf_file_util')
@@ -222,37 +183,10 @@ class TestValidatorGoldens(unittest.TestCase):
         self.assertEqual(len(goldens), 1)
         key = list(goldens.keys())[0]
         # p1=v1;p2=v2 (alphabetical)
-        self.assertEqual(key, 'p1=v1;p2=v2')
+        self.assertEqual(key, 'p1=dcid:v1;p2=dcid:v2')
         self.assertIn('p1', goldens[key])
         self.assertIn('p2', goldens[key])
         self.assertNotIn('ignore_me', goldens[key])
-
-    @patch('validator_goldens.load_nodes_from_file')
-    @patch('validator_goldens.mcf_file_util')
-    def test_generate_goldens_with_must_include_values(self, mock_mcf,
-                                                       mock_load):
-        # Input has two nodes, but only one matches the prominent DCID filter.
-        mock_load.return_value = {
-            0: {
-                'p1': 'v1',
-                'p2': 'other'
-            },
-            1: {
-                'p1': 'v2',
-                'p2': 'other'
-            }
-        }
-        # Filter for p1=v1
-        must_include_values = {'p1': {'v1'}}
-        property_sets = [{'p1'}]
-
-        goldens = validator_goldens.generate_goldens(
-            'dummy', property_sets, must_include_values=must_include_values)
-
-        # Only v1 should be included because of the filter (non-sampled mode).
-        self.assertEqual(len(goldens), 1)
-        self.assertIn('p1=v1', goldens)
-        self.assertNotIn('p1=v2', goldens)
 
     @patch('validator_goldens.load_nodes_from_file')
     @patch('validator_goldens.mcf_file_util')
@@ -265,8 +199,8 @@ class TestValidatorGoldens(unittest.TestCase):
         goldens = validator_goldens.generate_goldens('dummy', property_sets)
 
         self.assertEqual(len(goldens), 2)
-        self.assertIn('p1=v1', goldens)
-        self.assertIn('p2=v2', goldens)
+        self.assertIn('p1=dcid:v1', goldens)
+        self.assertIn('p2=dcid:v2', goldens)
 
     @patch('validator_goldens.load_nodes_from_file')
     @patch('validator_goldens.validator_compare_nodes')

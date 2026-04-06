@@ -516,8 +516,8 @@ def load_column_keys(column_keys: list) -> dict:
 
     for col_file in column_keys:
         if not ':' in col_file:
-          logging.error(f'Invalid column key format: {col_file}')
-          continue
+            logging.error(f'Invalid column key format: {col_file}')
+            continue
         column_name, file_name = col_file.split(':', 1)
         if not file_name:
             logging.error(f'No file for column {column_name} in {column_keys}')

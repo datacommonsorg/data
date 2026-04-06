@@ -163,7 +163,7 @@ The validator compares the input data (usually from the `stats` data source) aga
 #### Configuration Parameters
 - `golden_files`: A list or glob pattern of golden MCF or CSV files to compare against.
 - `goldens_key_property`: A list of properties to match on. If not specified, all properties in the golden record must match.
-- `input_files`: (Optional) Path to specific input files. If not provided, the data source defined in the rule's `scope` is used.
+- `input_files`: (Optional) A list of glob pattern of input files to be compared with goldens. If not provided, the data source defined in the rule's `scope` is used.
 
 #### GOLDENS Validator Example
 
@@ -173,9 +173,6 @@ The validator compares the input data (usually from the `stats` data source) aga
 {
   "rule_id": "verify_critical_obs",
   "validator": "GOLDENS",
-  "scope": {
-    "data_source": "stats"
-  },
   "params": {
     "golden_files": ["goldens/critical_stats.csv"],
     "input_files": "processed_obs.csv"
