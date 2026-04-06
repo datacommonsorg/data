@@ -26,6 +26,7 @@ import pygrib
 import numpy as np
 import pyarrow as pa
 import pyarrow.csv as csv
+import csv as py_csv
 import re
 from absl import app, flags, logging
 
@@ -224,13 +225,13 @@ def process_grib_dcid(input_path, output_path):
     lats, lons = sample.latlons()
 
     # Flip and flatten coordinates
-    lats_flat = np.flipud(lats).flatten()
+    lats_flat = np.flipud(lats).flatten().astype(np.float32)
     lons_raw = np.flipud(lons).flatten()
-    lons_flat = np.where(lons_raw > 180, lons_raw - 360, lons_raw)
+    lons_flat = np.where(lons_raw > 180, lons_raw - 360, lons_raw).astype(np.float32)
     
     # Match precision of the second script (simple string conversion)
-    lats_str = [str(x) for x in lats_flat]
-    lons_str = [str(x) for x in lons_flat]
+    lats_str = [str(int(x)) if x % 1 == 0 else f"{x:g}" for x in lats_flat]
+    lons_str = [str(int(x)) if x % 1 == 0 else f"{x:g}" for x in lons_flat]
     place_names = [f"latLong/{la}_{lo}" for la, lo in zip(lats_str, lons_str)]
     
     grbs.rewind()
@@ -239,10 +240,9 @@ def process_grib_dcid(input_path, output_path):
     suffix_method = "GFS0Hour" if f_hour_int == 0 else f"GFS{f_hour_int}HourForecast"
 
     # --- 2. DATA PROCESSING LOOP ---
-    with open(output_path, 'wb') as f_out:
-        header = "observationDate,value,variableMeasured,measurementMethod,latitude,longitude,placeName,unit\n"
-        f_out.write(header.encode('utf-8'))
-        opts = csv.WriteOptions(include_header=False, quoting_style='none')
+    with open(output_path, 'w', encoding='utf-8', newline='') as f_out:
+        writer = py_csv.writer(f_out, quoting=py_csv.QUOTE_MINIMAL)
+        writer.writerow(['observationDate', 'value', 'variableMeasured', 'measurementMethod', 'latitude', 'longitude', 'placeName', 'unit'])
 
         for grb in grbs:
             try:
@@ -266,12 +266,15 @@ def process_grib_dcid(input_path, output_path):
                 data_subset = data_flat[valid_mask]
                 mask_idx = np.where(valid_mask)[0]
                 
-                # Resolve Level and Method (Sync logic with script #2)
+                # Resolve Level and Method
                 l_type = grb.typeOfLevel
                 if l_type == "meanSea": l_str = "mean sea level"
                 elif l_type == "surface": l_str = "surface"
-                elif "isobaricIn" in l_type: l_str = f"{grb.level:g} mb"
+                elif l_type == "isobaricInhPa": l_str = f"{grb.level:g} mb"
+                elif l_type == "isobaricInPa": l_str = f"{grb.level / 100:g} mb"
                 elif l_type == "heightAboveGround": l_str = f"{grb.level} m above ground"
+                elif l_type == "hybrid": l_str = "1 hybrid level" if grb.level == 1 else f"{grb.level} hybrid level"
+                elif l_type == "planetaryBoundaryLayer": l_str = "planetary boundary layer"
                 else: l_str = f"{grb.level} {l_type}"
 
                 l_low = l_str.lower()
@@ -283,27 +286,30 @@ def process_grib_dcid(input_path, output_path):
                     final_m = f"{base_m}_{suffix_method}" if base_m else suffix_method
 
                 dcid = construct_dcid(var_name, l_str)
+                obs_date = grb.validDate.strftime("%Y-%m-%dT%H:%M:%S")
+                unit = PARAM_MAP.get(var_name, ('', ''))[1]
 
-                # Convert values to strings (Script 2 uses raw CSV values, 
-                # but since we are coming from GRIB, we use str() for consistency)
-                n = len(data_subset)
-                val_strs = [str(x) for x in data_subset]
-                curr_lats = [lats_str[i] for i in mask_idx]
-                curr_lons = [lons_str[i] for i in mask_idx]
-                curr_places = [place_names[i] for i in mask_idx]
-                
-                table = pa.Table.from_arrays([
-                    pa.array([grb.validDate.strftime("%Y-%m-%dT%H:%M:%S")] * n),
-                    pa.array(val_strs),
-                    pa.array([dcid] * n),
-                    pa.array([final_m] * n),
-                    pa.array(curr_lats),
-                    pa.array(curr_lons),
-                    pa.array(curr_places),
-                    pa.array([PARAM_MAP.get(var_name, ('', ''))[1]] * n)
-                ], names=['a','b','c','d','e','f','g','h'])
+                data_rounded = np.round(data_subset, 2)
 
-                csv.write_csv(table, f_out, write_options=opts)
+                # --- WRITING ROWS ---
+                for i, val in enumerate(data_rounded):
+                    idx = mask_idx[i]
+                    if val == 0:
+                        val_out = "-0" if np.signbit(val) else "0"
+                    elif val % 1 == 0:
+                        val_out = str(int(val))
+                    else:
+                        val_out = f"{val:.2f}".rstrip('0').rstrip('.')
+                    writer.writerow([
+                        obs_date,
+                        val_out,
+                        dcid,
+                        final_m,
+                        lats_str[idx],
+                        lons_str[idx],
+                        place_names[idx],
+                        unit
+                    ])
 
             except Exception as e:
                 logging.error(f"Skip message: {e}")

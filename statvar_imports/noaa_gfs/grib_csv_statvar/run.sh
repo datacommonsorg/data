@@ -37,7 +37,7 @@ check_fail "Failed to upload CSV to GCS"
 
 # --- 4. Run StatVar Processing ---
 echo "Running StatVar processing and streaming to GCS..."
-python3 custom_statvar_processor.py \
+python3 csv_statvar_processor.py \
     --bucket_name="${BUCKET}" \
     --input_local="./${FILE_NAME}.csv" \
     --forecast_hour="${FHOUR}" \
