@@ -259,7 +259,20 @@ def process_grib_dcid(input_path, output_path):
                     var_name = NAME_MAP.get(raw_short, raw_short.upper())
 
                 valid_mask = np.ones(data_flat.shape, dtype=bool)
-                if hasattr(data_flat, 'mask'): valid_mask &= ~data_flat.mask
+                # Only apply masking if the variable is NOT Sunshine Duration
+                # SUNSD often has metadata that incorrectly marks valid 0 or low values as 'missing'
+                if raw_short != "sunsd":
+                    if hasattr(data_flat, 'mask'): 
+                        valid_mask &= ~data_flat.mask
+                    
+                    # Also check for the explicit missingValue attribute if it exists
+                    try:
+                        m_val = grb.missingValue
+                        if m_val is not None:
+                            raw_data = data_flat.data if hasattr(data_flat, 'mask') else data_flat
+                            valid_mask &= (raw_data != m_val)
+                    except:
+                        pass
                 
                 if not np.any(valid_mask): continue
                 
