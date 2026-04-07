@@ -675,7 +675,7 @@ observationDate,value,variableMeasured,measurementMethod,latitude,longitude,plac
 2025-12-24T0:00:00,0,dcid:ConvectiveAvailablePotentialEnergy_Atmosphere_255To0Millibar,GFS0Hour,-90,0,latLong/-90_0,JoulePerKilogram
 2025-12-24T0:00:00,-0.0107422,dcid:ConvectiveInhibition_Atmosphere_255To0Millibar,GFS0Hour,-90,0,latLong/-90_0,JoulePerKilogram
 2025-12-24T0:00:00,40427.3,dcid:LiftedParcelLevel_Pressure_Atmosphere_255To0Millibar,GFS0Hour,-90,0,latLong/-90_0,Pascal
-2025-12-24T0:00:00,1,dcid:Area_LandCover_SurfaceLevel,GFS0Hour,-90,0,latLong/-90_0,SquareDegree
+2025-12-24T0:00:00,0.0625,dcid:Area_LandCover_SurfaceLevel,GFS0Hour,-90,0,latLong/-90_0,SquareDegree
 2025-12-24T0:00:00,0,dcid:Area_IceCover_SurfaceLevel,GFS0Hour,-90,0,latLong/-90_0,SquareDegree
 2025-12-24T0:00:00,268.213,dcid:Temperature_SeaIce_SurfaceLevel,GFS0Hour,-78,-178.25,latLong/-78_-178.25,Kelvin
 2025-12-24T0:00:00,-0.500232,dcid:WindSpeed_Place_PotentialVorticity2PVU_UComponent,GFS0Hour,-90,0,latLong/-90_0,MeterPerSecond

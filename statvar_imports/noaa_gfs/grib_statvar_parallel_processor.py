@@ -1,33 +1,17 @@
 # Copyright 2026 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the 'License');
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#         https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an 'AS IS' BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# Licensed under the Apache License, Version 2.0
 """
-Processes GRIB2 weather data for Data Commons ingestion.
-This script automates the end-to-end pipeline by utilizing the pygrib library: 
-opening GRIB2 files, normalizing coordinates for GIS compatibility, mapping 
-raw parameters to standardized DCIDs, handling complex vertical level logic, 
-and generating high-precision, quote-free CSV outputs using PyArrow for 
-optimal streaming performance.
+Processes GRIB2 weather data for Data Commons ingestion using multi-processing.
+Outputs CRLF line endings regardless of the host Operating System.
 """
 
 import time
 import pygrib
 import numpy as np
-import pyarrow as pa
-import pyarrow.csv as csv
 import csv as py_csv
 import re
+import os
+from multiprocessing import Pool, cpu_count
 from absl import app, flags, logging
 
 logging.set_verbosity(logging.INFO)
@@ -37,13 +21,9 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('input_file', None, 'Path to the input GRIB file.')
 flags.DEFINE_string('output_file', None, 'Path to the output CSV file.')
 flags.DEFINE_string('forecast_hour', '000', 'The forecast hour (e.g., 000, 003).')
-
-# Set mandatory flags
-flags.mark_flag_as_required('input_file')
-flags.mark_flag_as_required('output_file')
+flags.DEFINE_integer('num_workers', cpu_count(), 'Number of parallel processes.')
 
 # --- PARAMETER & LEVEL MAPPING ---
-# Maps raw GRIB shortnames to standardized internal codes
 NAME_MAP = {
     "prmsl": "PRMSL", "clwmr": "CLMR", "icmr": "ICMR", "rwmr": "RWMR",
     "snmr": "SNMR", "grle": "GRLE", "refd": "REFD", "refc": "REFC",
@@ -66,7 +46,6 @@ NAME_MAP = {
     "pt": "POT", "plpl": "PLPL", "lsm": "LAND", "ci": "ICEC", "sit": "ICETMP"
 }
 
-# Maps internal codes to Data Commons StatVar base names and Units
 PARAM_MAP = {
     'PRMSL': ('Pressure_Place', 'Pascal'), 'MSLET': ('MSLPEtaReduction_Pressure_Atmosphere', 'Pascal'),
     'TMP': ('Temperature_Place', 'Kelvin'), 'DPT': ('DewPointTemperature_Atmosphere', 'Kelvin'),
@@ -116,140 +95,82 @@ STATIC_LEVEL_MAP = {
 
 # --- HELPER FUNCTIONS ---
 def format_level_dcid(level):
-    """
-    Standardizes raw GFS level strings into DCID standards.
-    
-    Args:
-        level (str): The raw vertical level description (e.g., '2 m above ground').
-        
-    Returns:
-        str: A cleaned, standardized string suitable for a Data Commons identifier.
-    """
     l = str(level).lower().strip()
-
-    # 1. Check for exact matches using the map
     if l in STATIC_LEVEL_MAP: return STATIC_LEVEL_MAP[l]
-
-    # 2. Dynamic string parsing for non-static levels
     if "m above mean sea level" in l:
         val = l.split(" ")[0].replace("-", "To")
         return f"{val}MetersAboveMeanSeaLevel"
-    
     if "entire atmosphere" in l: return ""
-
     if "low cloud layer" in l: return "LowCloudLayer"
     if "middle cloud layer" in l: return "MiddleCloudLayer"
     if "high cloud layer" in l: return "HighCloudLayer"
-    
+    if "cloud ceiling" in l: return "CloudCeiling"
     if "hybrid level" in l:
         val = l.split(" ")[0]
         return "LowestHybridLevel" if val == "1" else f"{val}HybridLevel"
-    
     if "m below ground" in l:
         match = re.search(r'([0-9.]+)-?([0-9.]*)', l)
         if match:
             start, end = match.group(1), match.group(2)
             return f"{start}To{end}Meter" if end else f"{start}Meter"
-    
     if "m above ground" in l:
         val = l.split(" ")[0].replace("-", "To")
         return f"{val}Meter"
-    
     if "mb" in l:
         val = l.split(" ")[0].replace("-", "To")
         return f"{val}Millibar"
-    
     if "sigma" in l:
         val = l.split(" ")[0].replace("-", "To")
         suffix = "SigmaLayer" if "layer" in l else "SigmaLevel"
         return f"{val}{suffix}"
-    
     if "pv=" in l:
         return "PotentialVorticityNeg2PVU" if ("neg" in l or "-2" in l) else "PotentialVorticity2PVU"
-    
     return "".join(word.capitalize() for word in l.replace("-", " ").split() if word)
 
 def construct_dcid(param_raw, level_raw):
-    """
-    Constructs a full Data Commons Identifier (DCID) based on parameters and levels.
-    
-    Args:
-        param_raw (str): The meteorological parameter code (e.g., 'TMP').
-        level_raw (str): The raw vertical level description.
-        
-    Returns:
-        str: The complete DCID string formatted with 'dcid:' prefix.
-    """
     param = str(param_raw).upper()
     level_clean = format_level_dcid(level_raw)
     mapping = PARAM_MAP.get(param)
     base = mapping[0] if mapping else param
-
-    if param == 'RH' and not level_clean: 
-        return "dcid:Humidity_RelativeHumidity"
-    
-    if level_clean and level_clean in base: 
-        dcid = f"dcid:{base}"
-    elif not level_clean: 
-        dcid = f"dcid:{base}"
-    else: 
-        dcid = f"dcid:{base}_{level_clean}"
-    
-    # Handle component-specific wind and motion vectors
+    if param == 'RH' and not level_clean: return "dcid:Humidity_RelativeHumidity"
+    if level_clean and level_clean in base: dcid = f"dcid:{base}"
+    elif not level_clean: dcid = f"dcid:{base}"
+    else: dcid = f"dcid:{base}_{level_clean}"
     if param in ['UGRD', 'VGRD', 'USTM', 'VSTM']:
         suffix = "UComponent" if param in ['UGRD', 'USTM'] else "VComponent"
-        if param in ['UGRD', 'VGRD'] and level_clean == "10Meter": 
-            return f"dcid:WindSpeed_{suffix}_Height10Meters"
+        if param in ['UGRD', 'VGRD'] and level_clean == "10Meter": return f"dcid:WindSpeed_{suffix}_Height10Meters"
         return f"{dcid}_{suffix}"
-    
     if param == 'RH': return f"{dcid}_RelativeHumidity"
     if param == 'SPFH': return f"{dcid}_SpecificHumidity"
     if param == 'REFC': return f"dcid:{base}"
-
     return dcid
 
-# --- MAIN PROCESSING LOGIC ---
-def process_grib_dcid(input_path, output_path):
-    """
-    Processes GRIB data and writes directly to standardized CSV using Arrow.
-    Includes coordinate normalization, parameter mapping, and DCID resolution.
-    """
-    try:
-        grbs = pygrib.open(input_path)
-    except Exception as e:
-        logging.error(f"Failed to open GRIB file: {e}")
-        return
-
-    # --- 1. STATIC GRID INITIALIZATION ---
-    sample = grbs.readline()
-    lats, lons = sample.latlons()
-
-    # Flip and flatten coordinates
-    lats_flat = np.flipud(lats).flatten().astype(np.float32)
-    lons_raw = np.flipud(lons).flatten()
-    lons_flat = np.where(lons_raw > 180, lons_raw - 360, lons_raw).astype(np.float32)
+# --- WORKER FUNCTION ---
+def worker_process(args):
+    input_path, start_msg, end_msg, chunk_id, lats_str, lons_str, place_names, f_hour = args
+    temp_path = f"{FLAGS.output_file}.part{chunk_id}"
     
-    # Match precision of the second script (simple string conversion)
-    lats_str = [str(int(x)) if x % 1 == 0 else f"{x:g}" for x in lats_flat]
-    lons_str = [str(int(x)) if x % 1 == 0 else f"{x:g}" for x in lons_flat]
-    place_names = [f"latLong/{la}_{lo}" for la, lo in zip(lats_str, lons_str)]
-    
-    grbs.rewind()
-
-    f_hour_int = int(FLAGS.forecast_hour)
+    f_hour_int = int(f_hour)
     suffix_method = "GFS0Hour" if f_hour_int == 0 else f"GFS{f_hour_int}HourForecast"
-
-    # --- 2. DATA PROCESSING LOOP ---
-    with open(output_path, 'w', encoding='utf-8', newline='') as f_out:
-        writer = py_csv.writer(f_out, quoting=py_csv.QUOTE_MINIMAL)
-        writer.writerow(['observationDate', 'value', 'variableMeasured', 'measurementMethod', 'latitude', 'longitude', 'placeName', 'unit'])
-
-        for grb in grbs:
+    
+    grbs = pygrib.open(input_path)
+    
+    with open(temp_path, 'w', encoding='utf-8', newline='') as f_out:
+        writer = py_csv.writer(f_out, quoting=py_csv.QUOTE_MINIMAL, lineterminator='\r\n')
+        
+        for i in range(start_msg, end_msg + 1):
             try:
-                data_flat = np.flipud(grb.values).flatten()
+                grb = grbs.message(i)
+                raw_values = np.flipud(grb.values)
+                if hasattr(raw_values, 'mask'):
+                    data_flat = raw_values.data.flatten()
+                    mask_flat = raw_values.mask.flatten()
+                else:
+                    data_flat = raw_values.flatten()
+                    mask_flat = np.zeros(data_flat.shape, dtype=bool)
+
                 raw_short = grb.shortName.lower()
                 
-                # Parameter mapping
                 if raw_short == "unknown":
                     d, c, num = grb.discipline, grb.parameterCategory, grb.parameterNumber
                     if d == 0 and c == 3 and num == 196: var_name = "HPBL"
@@ -259,45 +180,68 @@ def process_grib_dcid(input_path, output_path):
                     var_name = NAME_MAP.get(raw_short, raw_short.upper())
 
                 valid_mask = np.ones(data_flat.shape, dtype=bool)
-                # Only apply masking if the variable is NOT Sunshine Duration
-                # SUNSD often has metadata that incorrectly marks valid 0 or low values as 'missing'
                 if raw_short != "sunsd":
-                    if hasattr(data_flat, 'mask'): 
-                        valid_mask &= ~data_flat.mask
-                    
-                    # Also check for the explicit missingValue attribute if it exists
+                    valid_mask &= ~mask_flat
                     try:
                         m_val = grb.missingValue
                         if m_val is not None:
-                            raw_data = data_flat.data if hasattr(data_flat, 'mask') else data_flat
-                            valid_mask &= (raw_data != m_val)
-                    except:
-                        pass
+                            valid_mask &= (data_flat != m_val)
+                    except: pass
                 
                 if not np.any(valid_mask): continue
                 
                 data_subset = data_flat[valid_mask]
                 mask_idx = np.where(valid_mask)[0]
                 
-                # Resolve Level and Method
+                # --- SYNCED LEVEL LOGIC ---
                 l_type = grb.typeOfLevel
-                if l_type == "meanSea": l_str = "mean sea level"
-                elif l_type == "surface": l_str = "surface"
+                LEVEL_TYPE_MAP_REF = {
+                    "surface": "surface", "meanSea": "mean sea level", "atmosphere": "entire atmosphere",
+                    "atmosphereSingleLayer": "entire atmosphere", "planetaryBoundaryLayer": "planetary boundary layer",
+                    "lowCloudLayer": "low cloud layer", "middleCloudLayer": "middle cloud layer",
+                    "highCloudLayer": "high cloud layer", "cloudCeiling": "cloud ceiling",
+                    "isothermZero": "0C isotherm", "highestTroposphericFreezing": "highest tropospheric freezing level",
+                    "tropopause": "tropopause", "maxWind": "max wind", "heightAboveSea": "m above mean sea level"
+                }
+
+                if l_type in LEVEL_TYPE_MAP_REF:
+                    l_str = f"{grb.level} m above mean sea level" if l_type == "heightAboveSea" else LEVEL_TYPE_MAP_REF[l_type]
                 elif l_type == "isobaricInhPa": l_str = f"{grb.level:g} mb"
                 elif l_type == "isobaricInPa": l_str = f"{grb.level / 100:g} mb"
                 elif l_type == "heightAboveGround": l_str = f"{grb.level} m above ground"
-                elif l_type == "heightAboveSea": l_str = f"{grb.level} m above mean sea level"
-                elif l_type == "depthBelowLandLayer": 
+                elif l_type == "hybrid": l_str = f"{grb.level} hybrid level"
+                elif l_type == "potentialVorticity":
                     try:
-                        top = grb['scaledValueOfFirstFixedSurface'] * (10**-grb['scaleFactorOfFirstFixedSurface'])
-                        bottom = grb['scaledValueOfSecondFixedSurface'] * (10**-grb['scaleFactorOfSecondFixedSurface'])
-                        l_str = f"{top:g}-{bottom:g} m below ground"
-                    except:
-                        l_str = f"{grb.level} m below ground"
-                elif l_type == "hybrid": l_str = "1 hybrid level" if grb.level == 1 else f"{grb.level} hybrid level"
-                elif l_type == "planetaryBoundaryLayer": l_str = "planetary boundary layer"
+                        s_val = grb['scaledValueOfFirstFixedSurface']
+                        if s_val & (1 << 31): s_val = -(s_val & ~(1 << 31))
+                        pv_val = s_val * (10**-grb['scaleFactorOfFirstFixedSurface'])
+                        l_str = f"PV={pv_val:g} (Km^2/kg/s) surface"
+                    except: l_str = f"PV={grb.level*1e-9:g} (Km^2/kg/s) surface"
+                elif l_type == "sigma":
+                    try:
+                        s_val = grb['scaledValueOfFirstFixedSurface'] * (10**-grb['scaleFactorOfFirstFixedSurface'])
+                        l_str = f"{s_val:g} sigma level"
+                    except: l_str = f"{grb.level} sigma level"
+                elif l_type == "sigmaLayer":
+                    try:
+                        t = grb['scaledValueOfFirstFixedSurface'] * (10**-grb['scaleFactorOfFirstFixedSurface'])
+                        b = grb['scaledValueOfSecondFixedSurface'] * (10**-grb['scaleFactorOfSecondFixedSurface'])
+                        l_str = f"{t:g}-{b:g} sigma layer"
+                    except: l_str = f"{grb.level} sigma layer"
+                elif l_type == "depthBelowLandLayer":
+                    try:
+                        t = grb['scaledValueOfFirstFixedSurface'] * (10**-grb['scaleFactorOfFirstFixedSurface'])
+                        b = grb['scaledValueOfSecondFixedSurface'] * (10**-grb['scaleFactorOfSecondFixedSurface'])
+                        l_str = f"{t:g}-{b:g} m below ground"
+                    except: l_str = f"{grb.level} m below ground"
+                elif l_type in ["pressureFromGroundLayer", "heightAboveGroundLayer"]:
+                    unit_l = "mb above ground" if "pressure" in l_type else "m above ground"
+                    try:
+                        l_str = f"{grb.topLevel/100 if 'pressure' in l_type else grb.topLevel:g}-{grb.bottomLevel/100 if 'pressure' in l_type else grb.bottomLevel:g} {unit_l}"
+                    except: l_str = f"{grb.level} {unit_l}"
                 else: l_str = f"{grb.level} {l_type}"
 
+                # --- SYNCED METHOD LOGIC ---
                 l_low = l_str.lower()
                 if "mb" in l_low or "mean sea level" in l_low:
                     final_m = suffix_method
@@ -309,48 +253,73 @@ def process_grib_dcid(input_path, output_path):
                 obs_date = grb.validDate.strftime("%Y-%m-%dT%H:%M:%S")
                 unit = PARAM_MAP.get(var_name, ('', ''))[1]
 
+                # --- SYNCED MULTIPLIER ---
+                if var_name in ['LAND', 'ICEC']:
+                    data_subset = data_subset * 0.0625
+
                 data_rounded = np.round(data_subset, 2)
 
-                # --- WRITING ROWS ---
-                for i, val in enumerate(data_rounded):
-                    idx = mask_idx[i]
-                    if val == 0:
-                        val_out = "-0" if np.signbit(val) else "0"
-                    elif val % 1 == 0:
-                        val_out = str(int(val))
-                    else:
-                        val_out = f"{val:.2f}".rstrip('0').rstrip('.')
+                for j, val in enumerate(data_rounded):
+                    idx = mask_idx[j]
+                    if val == 0: val_out = "-0" if np.signbit(val) else "0"
+                    elif val % 1 == 0: val_out = str(int(val))
+                    else: val_out = f"{val:.2f}".rstrip('0').rstrip('.')
+                    
                     writer.writerow([
-                        obs_date,
-                        val_out,
-                        dcid,
-                        final_m,
-                        lats_str[idx],
-                        lons_str[idx],
-                        place_names[idx],
-                        unit
+                        obs_date, val_out, dcid, final_m, 
+                        lats_str[idx], lons_str[idx], place_names[idx], unit
                     ])
-
             except Exception as e:
-                logging.error(f"Skip message: {e}")
+                logging.error(f"Worker {chunk_id} skipped msg {i}: {e}")
+                
+    grbs.close()
+    return temp_path
 
+# --- MAIN EXECUTION ---
+def main(argv):
+    if len(argv) > 1: raise app.UsageError('Too many arguments.')
+    start_time = time.perf_counter()
+    logging.info(f"Parallel process started: {FLAGS.input_file}")
+
+    grbs = pygrib.open(FLAGS.input_file)
+    total_messages = grbs.messages
+    sample = grbs.readline()
+    lats, lons = sample.latlons()
+    lats_flat = np.flipud(lats).flatten().astype(np.float32)
+    lons_raw = np.flipud(lons).flatten()
+    lons_flat = np.where(lons_raw > 180, lons_raw - 360, lons_raw).astype(np.float32)
+    
+    lats_str = [str(int(x)) if x % 1 == 0 else f"{x:g}" for x in lats_flat]
+    lons_str = [str(int(x)) if x % 1 == 0 else f"{x:g}" for x in lons_flat]
+    place_names = [f"latLong/{la}_{lo}" for la, lo in zip(lats_str, lons_str)]
     grbs.close()
 
-def main(argv):
-    """Main execution entry point."""
-    if len(argv) > 1: raise app.UsageError('Too many arguments.')
+    num_workers = min(FLAGS.num_workers, total_messages)
+    chunk_size = total_messages // num_workers
+    tasks = []
+    for i in range(num_workers):
+        start = (i * chunk_size) + 1
+        end = total_messages if i == num_workers - 1 else (i + 1) * chunk_size
+        tasks.append((FLAGS.input_file, start, end, i, lats_str, lons_str, place_names, FLAGS.forecast_hour))
 
-    start_time = time.perf_counter()
-    logging.info(f"Process started: {FLAGS.input_file}")
+    with Pool(num_workers) as pool:
+        temp_files = pool.map(worker_process, tasks)
 
-    try:
-        process_grib_dcid(FLAGS.input_file, FLAGS.output_file)
-        logging.info(f"Conversion complete. Output saved to: {FLAGS.output_file}")
-    except Exception as e:
-        logging.fatal(f"Process failed: {e}")
-    
+    logging.info(f"Merging {len(temp_files)} partitions into {FLAGS.output_file}...")
+    with open(FLAGS.output_file, 'wb') as f_final:
+        header = "observationDate,value,variableMeasured,measurementMethod,latitude,longitude,placeName,unit\r\n"
+        f_final.write(header.encode('utf-8'))
+        
+        for temp_path in temp_files:
+            if os.path.exists(temp_path):
+                with open(temp_path, 'rb') as f_part:
+                    f_final.write(f_part.read())
+                os.remove(temp_path)
+
     duration = time.perf_counter() - start_time
     logging.info(f"Total processing time: {duration:.2f} seconds")
 
 if __name__ == "__main__":
+    flags.mark_flag_as_required('input_file')
+    flags.mark_flag_as_required('output_file')
     app.run(main)
