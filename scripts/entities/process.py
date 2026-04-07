@@ -25,35 +25,17 @@ import os
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string("entity", "Schema", "Entity type (Schema/Place).")
-
-BUCKET_NAME = 'datcom-prod-imports'
-FILE_NAME = 'staging_version.txt'
+flags.DEFINE_string("version", "", "Import version.")
 
 
-def process(entity_type: str):
-    # Ensure the import data is available in GCS.
-    current_date = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
-    logging.info(f'Checking import {entity_type} for date {current_date}')
-    file_path = os.path.join('scripts', os.path.basename(os.getcwd()),
-                             entity_type, FILE_NAME)
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(BUCKET_NAME)
-    blob = bucket.blob(file_path)
-    version = blob.download_as_text()
-    if version == current_date:
-        logging.info(
-            f'Successfully validated import {entity_type} for date {current_date}'
-        )
-        return 0
-    else:
-        raise RuntimeError(
-            f'{entity_type} data not present in GCS bucket {BUCKET_NAME} for date {current_date}'
-        )
+def process(entity_type: str, version: str):
+    logging.info(f'Processing import {entity_type} for version {version}')
+    # TODO: add processing logic
 
 
 def main(_):
     """Runs the code."""
-    process(FLAGS.entity)
+    process(FLAGS.entity, FLAGS.version)
 
 
 if __name__ == "__main__":

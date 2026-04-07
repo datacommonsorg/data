@@ -21,6 +21,7 @@ main:
               memory: 32768
               disk: 100
           - resources: ${default(map.get(args, "resources"), defaultResources)}
+          - runIngestion: ${default(map.get(args, "runIngestion"), false)}
     - runImportJob:
         try:
           call: googleapis.batch.v1.projects.locations.jobs.create
@@ -99,6 +100,16 @@ main:
             override: false
             comment: '${"import-workflow:" + sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
         result: functionResponse
+    - runIngestion:
+        switch:
+          - condition: ${runIngestion}
+            steps:
+              - runSpannerIngestion:
+                  call: googleapis.workflowexecutions.v1.projects.locations.workflows.executions.create
+                  args:
+                    parent: ${"projects/" + projectId + "/locations/" + region + "/workflows/spanner-ingestion-workflow"}
+                    body:
+                      argument: ${json.encode_to_string({"importList": [text.split(importName, ":")[1]]})}
     - returnResult:
         return:
           jobId: ${jobId}

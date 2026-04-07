@@ -347,7 +347,7 @@ class ImportDiffer:
         )
         return status
 
-    def run_differ(self):
+    def run_differ(self) -> dict:
         os.makedirs(self.output_path, exist_ok=True)
         tmp_path = os.path.join(self.output_path, self.job_name)
         os.makedirs(tmp_path, exist_ok=True)
@@ -424,6 +424,7 @@ class ImportDiffer:
         differ_utils.write_csv_data(obs_diff_samples, self.output_path,
                                     'obs_diff_samples.csv', tmp_path)
         logging.info(f'Differ output written to {self.output_path}')
+        return differ_summary
 
 
 def main(_):
