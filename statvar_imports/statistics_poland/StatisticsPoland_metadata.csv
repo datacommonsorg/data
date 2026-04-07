@@ -9,6 +9,3 @@ places_within,country/POL
 #skip_rows,1
 header_rows,5
 mapped_columns,2
-dc_api_root,https://api.datacommons.org
-
-
