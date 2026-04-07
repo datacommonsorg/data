@@ -90,7 +90,6 @@ def download_energy_dataset(
             str(supported_datasets))
         return output_files
     # Download data in batches of years as the download has a limit of 100k rows.
-    years_list = list(range(start_year, years_per_batch + 1))
     years_list = [str(y) for y in range(start_year, end_year + 1)]
     batch_years = [
         years_list[i:i + years_per_batch]
@@ -117,7 +116,8 @@ def download_energy_dataset(
         if download_successful:
             logging.info(f"Download of '{download_url}' completed.")
             for f in os.listdir(output):
-                output_files.append(os.path.join(output, f))
+                if f.endswith('.csv'):
+                    output_files.append(os.path.join(output, f))
         else:
             logging.fatal(f"Download or processing of '{download_url}' failed")
     return output_files
