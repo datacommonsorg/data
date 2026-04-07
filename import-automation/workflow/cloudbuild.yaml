@@ -46,3 +46,6 @@ steps:
 - id: 'import-automation-helper'
   name: 'gcr.io/cloud-builders/gcloud'
   args: ['functions', 'deploy', 'import-automation-helper', '--gen2', '--project', '${_PROJECT_ID}', '--region', '${_LOCATION}', '--runtime', 'python312', '--source', 'import-helper', '--no-allow-unauthenticated', '--trigger-http', '--entry-point', 'handle_feed_event', '--set-env-vars', 'PROJECT_ID=${_PROJECT_ID},LOCATION=${_LOCATION},GCS_BUCKET_ID=${_GCS_BUCKET_ID}']
+
+options:
+  logging: CLOUD_LOGGING_ONLY
