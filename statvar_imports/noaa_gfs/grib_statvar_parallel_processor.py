@@ -147,11 +147,16 @@ def construct_dcid(param_raw, level_raw):
 
 # --- WORKER FUNCTION ---
 def worker_process(args):
-    input_path, start_msg, end_msg, chunk_id, lats_str, lons_str, place_names, f_hour = args
+    input_path, start_msg, end_msg, chunk_id, lats_flat, lons_flat, f_hour = args
     temp_path = f"{FLAGS.output_file}.part{chunk_id}"
     
     f_hour_int = int(f_hour)
     suffix_method = "GFS0Hour" if f_hour_int == 0 else f"GFS{f_hour_int}HourForecast"
+    
+    # Pre-calculate coordinate strings once per worker for efficiency
+    lats_str = [str(int(x)) if x % 1 == 0 else f"{x:g}" for x in lats_flat]
+    lons_str = [str(int(x)) if x % 1 == 0 else f"{x:g}" for x in lons_flat]
+    place_names = [f"latLong/{la}_{lo}" for la, lo in zip(lats_str, lons_str)]
     
     grbs = pygrib.open(input_path)
     
@@ -162,15 +167,9 @@ def worker_process(args):
             try:
                 grb = grbs.message(i)
                 raw_values = np.flipud(grb.values)
-                if hasattr(raw_values, 'mask'):
-                    data_flat = raw_values.data.flatten()
-                    mask_flat = raw_values.mask.flatten()
-                else:
-                    data_flat = raw_values.flatten()
-                    mask_flat = np.zeros(data_flat.shape, dtype=bool)
-
-                raw_short = grb.shortName.lower()
+                data_flat = raw_values.flatten()
                 
+                raw_short = grb.shortName.lower()
                 if raw_short == "unknown":
                     d, c, num = grb.discipline, grb.parameterCategory, grb.parameterNumber
                     if d == 0 and c == 3 and num == 196: var_name = "HPBL"
@@ -178,19 +177,28 @@ def worker_process(args):
                     else: var_name = f"VAR_{d}_{c}_{num}"
                 else:
                     var_name = NAME_MAP.get(raw_short, raw_short.upper())
+                
+                # --- SYNCED FILTERING LOGIC ---
+                try:
+                    has_bitmap = grb.bitmapPresent
+                except:
+                    has_bitmap = False
 
                 valid_mask = np.ones(data_flat.shape, dtype=bool)
-                if raw_short != "sunsd":
-                    valid_mask &= ~mask_flat
+                if has_bitmap and hasattr(data_flat, 'mask'):
+                    valid_mask &= ~data_flat.mask
+                
+                raw_data = data_flat.data if hasattr(data_flat, 'mask') else data_flat
+                if var_name not in ["SUNSD", "CLMR"]:
                     try:
                         m_val = grb.missingValue
                         if m_val is not None:
-                            valid_mask &= (data_flat != m_val)
+                            valid_mask &= (raw_data != m_val)
                     except: pass
                 
                 if not np.any(valid_mask): continue
                 
-                data_subset = data_flat[valid_mask]
+                data_subset = raw_data[valid_mask]
                 mask_idx = np.where(valid_mask)[0]
                 
                 # --- SYNCED LEVEL LOGIC ---
@@ -241,7 +249,6 @@ def worker_process(args):
                     except: l_str = f"{grb.level} {unit_l}"
                 else: l_str = f"{grb.level} {l_type}"
 
-                # --- SYNCED METHOD LOGIC ---
                 l_low = l_str.lower()
                 if "mb" in l_low or "mean sea level" in l_low:
                     final_m = suffix_method
@@ -253,7 +260,6 @@ def worker_process(args):
                 obs_date = grb.validDate.strftime("%Y-%m-%dT%H:%M:%S")
                 unit = PARAM_MAP.get(var_name, ('', ''))[1]
 
-                # --- SYNCED MULTIPLIER ---
                 if var_name in ['LAND', 'ICEC']:
                     data_subset = data_subset * 0.0625
 
@@ -283,15 +289,11 @@ def main(argv):
 
     grbs = pygrib.open(FLAGS.input_file)
     total_messages = grbs.messages
-    sample = grbs.readline()
+    sample = grbs.message(1)
     lats, lons = sample.latlons()
     lats_flat = np.flipud(lats).flatten().astype(np.float32)
     lons_raw = np.flipud(lons).flatten()
     lons_flat = np.where(lons_raw > 180, lons_raw - 360, lons_raw).astype(np.float32)
-    
-    lats_str = [str(int(x)) if x % 1 == 0 else f"{x:g}" for x in lats_flat]
-    lons_str = [str(int(x)) if x % 1 == 0 else f"{x:g}" for x in lons_flat]
-    place_names = [f"latLong/{la}_{lo}" for la, lo in zip(lats_str, lons_str)]
     grbs.close()
 
     num_workers = min(FLAGS.num_workers, total_messages)
@@ -300,7 +302,7 @@ def main(argv):
     for i in range(num_workers):
         start = (i * chunk_size) + 1
         end = total_messages if i == num_workers - 1 else (i + 1) * chunk_size
-        tasks.append((FLAGS.input_file, start, end, i, lats_str, lons_str, place_names, FLAGS.forecast_hour))
+        tasks.append((FLAGS.input_file, start, end, i, lats_flat, lons_flat, FLAGS.forecast_hour))
 
     with Pool(num_workers) as pool:
         temp_files = pool.map(worker_process, tasks)
