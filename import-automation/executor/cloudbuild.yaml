@@ -44,8 +44,15 @@ steps:
       - '-c'
       - |
         python import_test.py
+    env:
+      - 'PROJECT_ID=$PROJECT_ID'
+      - 'LOCATION=$LOCATION'
+      - 'GCS_BUCKET=${_GCS_BUCKET}'
+      - 'IMAGE_URI=${_DOCKER_IMAGE}:${COMMIT_SHA}'
     dir: 'import-automation/executor'
     waitFor: ['push']
+    secretEnv:
+      - DC_API_KEY
 
   # Run unit tests
   - name: '${_DOCKER_IMAGE}:${COMMIT_SHA}'
@@ -72,6 +79,12 @@ steps:
 
 availableSecrets:
   secretManager:
-    - versionName: projects/datcom-ci/secrets/dc-api-key/versions/latest
+    - versionName: projects/${PROJECT_ID}/secrets/dc-api-key/versions/latest
       env: DC_API_KEY
 
+substitutions:
+  _GCS_BUCKET: 'datcom-ci-test'
+  _DOCKER_IMAGE: 'us-docker.pkg.dev/${PROJECT_ID}/gcr.io/dc-import-executor'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
