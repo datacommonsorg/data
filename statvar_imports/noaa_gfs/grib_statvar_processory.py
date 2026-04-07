@@ -1,8 +1,30 @@
 # Copyright 2026 Google LLC
-# Licensed under the Apache License, Version 2.0
+#
+# Licensed under the Apache License, Version 2.0 (the 'License');
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#         https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an 'AS IS' BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 """
-Processes GRIB2 weather data for Data Commons ingestion using multi-processing.
-Outputs CRLF line endings regardless of the host Operating System.
+GRIB2 to Data Commons CSV Processor
+
+This script extracts meteorological variables from GRIB2 files 
+and maps them to standardized Data Commons identifiers (dcids).
+
+Key Features:
+1. Multi-processing: Uses a Pool of workers to process GRIB messages in parallel.
+2. Coordinate Transformation: Converts 0-360 longitude to -180 to 180 range.
+3. DCID Mapping: Dynamically constructs Data Commons IDs based on parameter type 
+   and vertical levels (e.g., Isobaric, Height Above Ground).
+4. Data Cleaning: Handles bitmaps, missing values, and unit conversions 
+   (e.g., scaling land/ice cover).
 """
 
 import time
@@ -24,6 +46,7 @@ flags.DEFINE_string('forecast_hour', '000', 'The forecast hour (e.g., 000, 003).
 flags.DEFINE_integer('num_workers', cpu_count(), 'Number of parallel processes.')
 
 # --- PARAMETER & LEVEL MAPPING ---
+# Maps short GRIB names to standardized Data Commons variable names
 NAME_MAP = {
     "prmsl": "PRMSL", "clwmr": "CLMR", "icmr": "ICMR", "rwmr": "RWMR",
     "snmr": "SNMR", "grle": "GRLE", "refd": "REFD", "refc": "REFC",
@@ -46,6 +69,7 @@ NAME_MAP = {
     "pt": "POT", "plpl": "PLPL", "lsm": "LAND", "ci": "ICEC", "sit": "ICETMP"
 }
 
+# Mapping for (Data Commons Base Property, Unit)
 PARAM_MAP = {
     'PRMSL': ('Pressure_Place', 'Pascal'), 'MSLET': ('MSLPEtaReduction_Pressure_Atmosphere', 'Pascal'),
     'TMP': ('Temperature_Place', 'Kelvin'), 'DPT': ('DewPointTemperature_Atmosphere', 'Kelvin'),
@@ -95,58 +119,97 @@ STATIC_LEVEL_MAP = {
 
 # --- HELPER FUNCTIONS ---
 def format_level_dcid(level):
+    """
+    Standardizes raw GFS level strings into Data Commons naming conventions.
+    
+    Example: '2 m above ground' -> '2Meter'
+             '1000 mb' -> '1000Millibar'
+    """
     l = str(level).lower().strip()
     if l in STATIC_LEVEL_MAP: return STATIC_LEVEL_MAP[l]
+
+    # Handle vertical altitude (Above Mean Sea Level)
     if "m above mean sea level" in l:
         val = l.split(" ")[0].replace("-", "To")
         return f"{val}MetersAboveMeanSeaLevel"
+    
     if "entire atmosphere" in l: return ""
     if "low cloud layer" in l: return "LowCloudLayer"
     if "middle cloud layer" in l: return "MiddleCloudLayer"
     if "high cloud layer" in l: return "HighCloudLayer"
     if "cloud ceiling" in l: return "CloudCeiling"
+
+    # Handle hybrid vertical coordinates
     if "hybrid level" in l:
         val = l.split(" ")[0]
         return "LowestHybridLevel" if val == "1" else f"{val}HybridLevel"
+    
+    # Handle sub-surface depths
     if "m below ground" in l:
         match = re.search(r'([0-9.]+)-?([0-9.]*)', l)
         if match:
             start, end = match.group(1), match.group(2)
             return f"{start}To{end}Meter" if end else f"{start}Meter"
+    
+    # Handle standard height above ground
     if "m above ground" in l:
         val = l.split(" ")[0].replace("-", "To")
         return f"{val}Meter"
+    
+    # Handle pressure levels (Millibars)
     if "mb" in l:
         val = l.split(" ")[0].replace("-", "To")
         return f"{val}Millibar"
+    
+    # Handle sigma (pressure-normalized) levels
     if "sigma" in l:
         val = l.split(" ")[0].replace("-", "To")
         suffix = "SigmaLayer" if "layer" in l else "SigmaLevel"
         return f"{val}{suffix}"
+    
+    # Handle Potential Vorticity units (PVU)
     if "pv=" in l:
         return "PotentialVorticityNeg2PVU" if ("neg" in l or "-2" in l) else "PotentialVorticity2PVU"
     return "".join(word.capitalize() for word in l.replace("-", " ").split() if word)
 
 def construct_dcid(param_raw, level_raw):
+    """
+    Orchestrates the creation of the final Data Commons Identifier.
+    Combines the base property with level specifics and directional components (U/V).
+    """
     param = str(param_raw).upper()
     level_clean = format_level_dcid(level_raw)
     mapping = PARAM_MAP.get(param)
+
     base = mapping[0] if mapping else param
+
+    # Special case: Humidity (DCID has specific structure)
     if param == 'RH' and not level_clean: return "dcid:Humidity_RelativeHumidity"
+
+    # Construct base DCID
     if level_clean and level_clean in base: dcid = f"dcid:{base}"
     elif not level_clean: dcid = f"dcid:{base}"
     else: dcid = f"dcid:{base}_{level_clean}"
+
+    # Append Vector components (Wind/Storm motion)
     if param in ['UGRD', 'VGRD', 'USTM', 'VSTM']:
         suffix = "UComponent" if param in ['UGRD', 'USTM'] else "VComponent"
+        # Standardize 10m wind speed identifier
         if param in ['UGRD', 'VGRD'] and level_clean == "10Meter": return f"dcid:WindSpeed_{suffix}_Height10Meters"
         return f"{dcid}_{suffix}"
+    
     if param == 'RH': return f"{dcid}_RelativeHumidity"
     if param == 'SPFH': return f"{dcid}_SpecificHumidity"
     if param == 'REFC': return f"dcid:{base}"
+
     return dcid
 
 # --- WORKER FUNCTION ---
 def worker_process(args):
+    """
+    The core loop executed by each CPU core.
+    Processes a slice of GRIB messages and writes to a temporary partition file.
+    """
     input_path, start_msg, end_msg, chunk_id, lats_flat, lons_flat, f_hour = args
     temp_path = f"{FLAGS.output_file}.part{chunk_id}"
     
@@ -178,7 +241,7 @@ def worker_process(args):
                 else:
                     var_name = NAME_MAP.get(raw_short, raw_short.upper())
                 
-                # --- SYNCED FILTERING LOGIC ---
+                # --- FILTERING LOGIC ---
                 try:
                     has_bitmap = grb.bitmapPresent
                 except:
@@ -201,7 +264,7 @@ def worker_process(args):
                 data_subset = raw_data[valid_mask]
                 mask_idx = np.where(valid_mask)[0]
                 
-                # --- SYNCED LEVEL LOGIC ---
+                # --- LEVEL LOGIC ---
                 l_type = grb.typeOfLevel
                 LEVEL_TYPE_MAP_REF = {
                     "surface": "surface", "meanSea": "mean sea level", "atmosphere": "entire atmosphere",
@@ -283,6 +346,9 @@ def worker_process(args):
 
 # --- MAIN EXECUTION ---
 def main(argv):
+    """
+    Main entry point for the script. Parses flags, tracks execution time, and triggers processing.
+    """
     if len(argv) > 1: raise app.UsageError('Too many arguments.')
     start_time = time.perf_counter()
     logging.info(f"Parallel process started: {FLAGS.input_file}")
