@@ -83,6 +83,7 @@ def download_energy_dataset(
     Returns:
       A list of output files downloaded.
     """
+    output_files = []
     supported_datasets = get_all_energy_source_codes()
     if energy_dataset not in supported_datasets:
         logging.info(
@@ -95,7 +96,6 @@ def download_energy_dataset(
         years_list[i:i + years_per_batch]
         for i in range(0, len(years_list), years_per_batch)
     ]
-    output_files = []
     for year_batch in batch_years:
         start_year = year_batch[0]
         end_year = year_batch[-1]
