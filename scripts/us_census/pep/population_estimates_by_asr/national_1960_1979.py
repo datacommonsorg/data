@@ -38,8 +38,23 @@ def national1960(output_folder: str):
         ]
         # Reading the csv format input file and converting it to a dataframe.
         # Skipping unwanted rows from top and bottom.
-        df = pd.read_csv(url,names=cols,engine='python',skiprows=8,\
-            skipfooter=15)
+        try:
+            # Check if the URL is accessible and returns a CSV
+            import requests
+            response = requests.head(url, allow_redirects=True)
+            if response.status_code != 200 or 'text/csv' not in response.headers.get(
+                    'Content-Type', ''):
+                print(f"Skipping {url} as it is not a CSV or not accessible.")
+                continue
+
+            df = pd.read_csv(url,
+                             names=cols,
+                             engine='python',
+                             skiprows=8,
+                             skipfooter=15)
+        except Exception as e:
+            print(f"Error reading {url}: {e}")
+            continue
         #Writing raw data to csv
         df.to_csv(os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "raw_data",
