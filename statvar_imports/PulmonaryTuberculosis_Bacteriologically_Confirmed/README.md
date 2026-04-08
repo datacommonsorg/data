@@ -24,7 +24,7 @@ To process the WHO Tuberculosis data and generate statistical variables, use the
 
 **Download input file**
 ```bash
-python3 statvar_imports/TB_Bacteriologically_Confirmed/download_tb_data.py
+python3 statvar_imports/PulmonaryTuberculosis_Bacteriologically_Confirmed/download_tb_data.py
 ```
 **For Test Data Run**
 ```bash
