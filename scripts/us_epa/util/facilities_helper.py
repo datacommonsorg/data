@@ -172,8 +172,7 @@ def get_all_statvars(facility_ids):
     n_facilities = 50
     print("****Getting existing StatVars for Facilities.")
     for i in range(0, len(facility_ids), n_facilities):
-        if i % n_facilities == 0:
-            print(f'**Processing facilities from index {i} to {i+n_facilities}')
+        print(f'**Processing facilities from index {i} to {i+n_facilities}')
         response = client.observation.fetch(
             entity_dcids=facility_ids[i:i + n_facilities],
             variable_dcids=[],
