@@ -987,7 +987,7 @@ class Validator:
                 message=f"Found {len(missing_goldens)} missing golden records.",
                 details=details)
 
-        except Exception as e:
+        except IOError as e:
             return ValidationResult(
                 ValidationStatus.DATA_ERROR,
                 'GOLDENS_CHECK',

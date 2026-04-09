@@ -126,8 +126,10 @@ class TestValidatorGoldens(unittest.TestCase):
     def test_generate_goldens_with_sampling(self):
         config = {'sampler_output_rows': 3}
         property_sets = []
-        goldens = validator_goldens.generate_goldens(
-            'sample_data/stats_summary.csv', property_sets, config=config)
+        goldens = validator_goldens.generate_goldens(os.path.join(
+            _SCRIPT_DIR, 'sample_data/stats_summary.csv'),
+                                                     property_sets,
+                                                     config=config)
 
         self.assertEqual(len(goldens), 2)
 
