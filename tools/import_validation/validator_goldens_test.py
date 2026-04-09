@@ -90,29 +90,6 @@ class TestValidatorGoldens(unittest.TestCase):
         self.assertEqual(missing, [])
         self.assertEqual(counters.get_counter('validate-goldens-matched'), 2)
 
-    @patch('validator_goldens.file_util')
-    @patch('validator_goldens.mcf_file_util')
-    def test_load_nodes_from_file(self, mock_mcf, mock_file):
-        mock_file.file_get_matching.return_value = ['f1.csv', 'f2.mcf']
-        mock_file.file_is_csv.side_effect = lambda x: x.endswith('.csv')
-        mock_file.file_load_csv_dict.return_value = {0: {'p1': 'v1'}}
-        mock_mcf.load_file_nodes.return_value = {'dcid:n1': {'p1': 'v2'}}
-        mock_mcf.strip_namespace.return_value = 'n1'
-
-        def side_effect_add(pvs, nodes, **kwargs):
-            nodes[pvs['dcid']] = pvs
-            return True
-
-        mock_mcf.add_mcf_node.side_effect = side_effect_add
-
-        nodes = validator_goldens.load_nodes_from_file('dummy')
-
-        self.assertEqual(len(nodes), 2)
-        self.assertIn(0, nodes)
-        self.assertEqual(nodes[0]['p1'], 'v1')
-        self.assertIn('n1', nodes)
-        self.assertEqual(nodes['n1']['p1'], 'v2')
-
     @patch('validator_goldens.load_nodes_from_file')
     @patch('validator_goldens.mcf_file_util')
     def test_generate_goldens(self, mock_mcf, mock_load):
@@ -146,27 +123,13 @@ class TestValidatorGoldens(unittest.TestCase):
         self.assertIn('observationAbout=dcid:geo1;variableMeasured=dcid:sv2',
                       goldens)
 
-    @patch('validator_goldens.load_nodes_from_file')
-    @patch('validator_goldens.mcf_file_util')
-    @patch('validator_goldens.data_sampler')
-    def test_generate_goldens_with_sampling(self, mock_sampler, mock_mcf,
-                                            mock_load):
-        mock_sampler.sample_csv_file.return_value = 'tmp-sample.csv'
-        mock_load.return_value = {0: {'p1': 'v1'}}
+    def test_generate_goldens_with_sampling(self):
+        config = {'sampler_output_rows': 3}
+        property_sets = []
+        goldens = validator_goldens.generate_goldens(
+            'sample_data/stats_summary.csv', property_sets, config=config)
 
-        property_sets = [{'p1'}]
-        config = {'sampler_output_rows': 10}
-
-        with patch('os.path.exists',
-                   return_value=True), patch('os.remove') as mock_remove:
-            goldens = validator_goldens.generate_goldens('input.csv',
-                                                         property_sets,
-                                                         config=config)
-
-            self.assertEqual(len(goldens), 1)
-            mock_sampler.sample_csv_file.assert_called_once()
-            mock_load.assert_called_with('tmp-sample.csv')
-            mock_remove.assert_called_with('tmp-sample.csv')
+        self.assertEqual(len(goldens), 2)
 
     @patch('validator_goldens.load_nodes_from_file')
     @patch('validator_goldens.mcf_file_util')

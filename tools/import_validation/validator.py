@@ -952,9 +952,9 @@ class Validator:
         if not golden_files:
             return ValidationResult(
                 ValidationStatus.CONFIG_ERROR,
-                'GOLDENS',
+                'GOLDENS_CHECK',
                 message=
-                "Configuration error: 'golden_files' must be specified for GOLDENS validator."
+                "Configuration error: 'golden_files' must be specified for GOLDENS_CHECK validator."
             )
 
         try:
@@ -977,18 +977,18 @@ class Validator:
             }
             if not missing_goldens:
                 return ValidationResult(ValidationStatus.PASSED,
-                                        'GOLDENS',
+                                        'GOLDENS_CHECK',
                                         details=details)
             details['missing_goldens'] = missing_goldens
 
             return ValidationResult(
                 ValidationStatus.FAILED,
-                'GOLDENS',
+                'GOLDENS_CHECK',
                 message=f"Found {len(missing_goldens)} missing golden records.",
                 details=details)
 
         except Exception as e:
             return ValidationResult(
                 ValidationStatus.DATA_ERROR,
-                'GOLDENS',
+                'GOLDENS_CHECK',
                 message=f"Error during golden validation: {e}")

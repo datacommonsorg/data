@@ -152,11 +152,11 @@ The following validations are currently supported:
 | `UNIT_CONSISTENCY_CHECK`  | Checks that the unit is the same for all StatVars.                       | `stats`           | None                                                   |
 | `MIN_VALUE_CHECK`         | Checks that the minimum value is not below a defined minimum.            | `stats`           | `minimum` (integer or float)                           |
 | MAX_VALUE_CHECK           | Checks that the maximum value is not above a defined maximum.            | `stats`           | `maximum` (integer or float)                           |
-| `GOLDENS`                 | Verifies that the data contains all records defined in a golden set.     | `stats`           | `golden_files` (list), `input_files` (list)   |
+| `GOLDENS_CHECK`                 | Verifies that the data contains all records defined in a golden set.     | `stats`           | `golden_files` (list), `input_files` (list)   |
 
-### Golden Set Validation with `GOLDENS`
+### Golden Set Validation with `GOLDENS_CHECK`
 
-The `GOLDENS` validator ensures that your import contains a specific set of expected records. This is useful for verifying that critical StatVars, Places, or specific metadata combinations are always present in your output.
+The `GOLDENS_CHECK` validator ensures that your import contains a specific set of expected records. This is useful for verifying that critical StatVars, Places, or specific metadata combinations are always present in your output.
 
 The validator compares the input data (usually from the `stats` data source) against one or more "golden" files (MCF or CSV).
 
@@ -165,14 +165,14 @@ The validator compares the input data (usually from the `stats` data source) aga
 - `goldens_key_property`: A list of properties to match on. If not specified, all properties in the golden record must match.
 - `input_files`: (Optional) A list of glob pattern of input files to be compared with goldens. If not provided, the data source defined in the rule's `scope` is used.
 
-#### GOLDENS Validator Example
+#### GOLDENS_CHECK Validator Example
 
 **Rule:** "Ensure that observations for `Count_Person` and `Median_Age_Person` are present in the import as defined in our critical golden set."
 
 ```json
 {
   "rule_id": "verify_critical_obs",
-  "validator": "GOLDENS",
+  "validator": "GOLDENS_CHECK",
   "params": {
     "golden_files": ["goldens/critical_stats.csv"],
     "input_files": "processed_obs.csv"

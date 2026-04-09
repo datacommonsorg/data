@@ -515,9 +515,6 @@ def load_column_keys(column_keys: list) -> dict:
         column_keys = column_keys.split(',')
 
     for col_file in column_keys:
-        if not ':' in col_file:
-            logging.error(f'Invalid column key format: {col_file}')
-            continue
         column_name, file_name = col_file.split(':', 1)
         if not file_name:
             logging.error(f'No file for column {column_name} in {column_keys}')
@@ -551,8 +548,6 @@ def sample_csv_file(input_file: str,
           - sampler_output_rows: The maximum number of rows to include in the
             sample.
           - sampler_rate: The sampling rate to use for random selection.
-          - sampler_exhaustive: If True, overrides limits to capture all unique
-            values.
           - header_rows: The number of header rows to copy from the input file
             and search for sampler_unique_columns. Increase this if column names
             appear in later header rows (e.g., after a title row).
@@ -626,7 +621,6 @@ def get_default_config() -> dict:
         'input_delimiter': _FLAGS.sampler_input_delimiter,
         'output_delimiter': _FLAGS.sampler_output_delimiter,
         'input_encoding': _FLAGS.sampler_input_encoding,
-        'sampler_exhaustive': _FLAGS.sampler_exhaustive,
     }
 
     return config

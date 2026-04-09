@@ -82,7 +82,7 @@ class ValidationRunner:
                 (self.validator.validate_min_value_check, 'stats'),
             'MAX_VALUE_CHECK':
                 (self.validator.validate_max_value_check, 'stats'),
-            'GOLDENS': (self.validator.validate_goldens, 'stats'),
+            'GOLDENS_CHECK': (self.validator.validate_goldens, 'stats'),
         }
 
         self._initialize_data_sources(stats_summary, lint_report, differ_output)

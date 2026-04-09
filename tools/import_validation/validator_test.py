@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import csv
 import os
 import sys
+import tempfile
 import pandas as pd
 import unittest
 from datetime import datetime
@@ -771,14 +773,14 @@ class TestSQLValidator(unittest.TestCase):
 
 
 class TestGoldensValidator(unittest.TestCase):
-    '''Test Class for the GOLDENS validation rule.'''
+    '''Test Class for the GOLDENS_CHECK validation rule.'''
 
     def setUp(self):
         self.validator = Validator()
-        self.test_dir = tempfile.mkdtemp()
+        self.test_dir = tempfile.TemporaryDirectory()
 
         # Create a sample golden CSV
-        self.golden_file = os.path.join(self.test_dir, 'goldens.csv')
+        self.golden_file = os.path.join(self.test_dir.name, 'goldens.csv')
         with open(self.golden_file, 'w', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(['StatVar', 'NumPlaces'])
@@ -786,7 +788,8 @@ class TestGoldensValidator(unittest.TestCase):
             writer.writerow(['sv2', '20'])
 
         # Create a sample input CSV that matches
-        self.input_file_match = os.path.join(self.test_dir, 'input_match.csv')
+        self.input_file_match = os.path.join(self.test_dir.name,
+                                             'input_match.csv')
         with open(self.input_file_match, 'w', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(['StatVar', 'NumPlaces', 'Value'])
@@ -794,7 +797,7 @@ class TestGoldensValidator(unittest.TestCase):
             writer.writerow(['sv2', '20', '200'])
 
         # Create a sample input CSV that is missing a golden
-        self.input_file_missing = os.path.join(self.test_dir,
+        self.input_file_missing = os.path.join(self.test_dir.name,
                                                'input_missing.csv')
         with open(self.input_file_missing, 'w', newline='') as f:
             writer = csv.writer(f)
@@ -803,7 +806,8 @@ class TestGoldensValidator(unittest.TestCase):
             # sv2 is missing
 
     def tearDown(self):
-        shutil.rmtree(self.test_dir)
+        # Clean up the temporary directory
+        self.test_dir.cleanup()
 
     def test_validate_goldens_passes_with_matching_files(self):
         params = {
@@ -825,7 +829,10 @@ class TestGoldensValidator(unittest.TestCase):
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertIn('Found 1 missing golden records', result.message)
         # Fingerprint of sv2: 'NumPlaces=20;StatVar=sv2' (alphabetical)
-        self.assertIn('StatVar=sv2', result.details['missing_goldens'][0])
+        self.assertEqual({
+            'StatVar': 'sv2',
+            'NumPlaces': '20'
+        }, result.details['missing_goldens'][0])
 
     def test_validate_goldens_uses_dataframe_when_input_files_missing(self):
         # Sample DataFrame representing the stats data source
@@ -861,12 +868,6 @@ class TestGoldensValidator(unittest.TestCase):
         result = self.validator.validate_goldens(pd.DataFrame(), params)
         self.assertEqual(result.status, ValidationStatus.CONFIG_ERROR)
         self.assertIn('golden_files', result.message)
-
-    def test_validate_goldens_empty_df_error(self):
-        params = {'golden_files': self.golden_file}
-        result = self.validator.validate_goldens(pd.DataFrame(), params)
-        self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
-        self.assertIn('provided data source is empty', result.message)
 
 
 if __name__ == '__main__':

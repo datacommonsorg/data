@@ -1216,7 +1216,7 @@ def _get_value_set(values: str) -> set:
         values = values.split(',')
     else:
         logging.log_every_n(logging.DEBUG, f'flattening into set {values}',
-                            self._log_every_n)
+                            10)
         values = ','.join(values).split(',')
     values_set.update(values)
     return values_set
@@ -1271,7 +1271,7 @@ def process(
             logging.log_every_n(
                 logging.INFO,
                 f'Loading places from csv file {filename} with columns:'
-                f' {reader.fieldnames}...', self._log_every_n)
+                f' {reader.fieldnames}...', 10)
             for row in reader:
                 num_inputs += 1
                 if num_inputs > config.get('input_rows', sys.maxsize):
@@ -1292,13 +1292,13 @@ def process(
     if place_names:
         logging.log_every_n(logging.DEBUG,
                             f'Resolving {len(place_names)} places names...',
-                            self._log_every_n)
+                            10)
         resolved_places.update(pr.resolve_name(place_names))
         columns.extend(['dcid', 'placeId', 'lat', 'lng'])
     if place_coords:
         logging.log_every_n(logging.DEBUG,
                             f'Resolving {len(place_coords)} places coords...',
-                            self._log_every_n)
+                            10)
         resolved_places.update(pr.resolve_latlng(place_coords))
         columns.append('placeDcids')
     counters.print_counters()
@@ -1320,7 +1320,7 @@ def process(
     logging.log_every_n(
         logging.INFO,
         f'Writing output {len(resolved_places)} rows with columns: {output_columns} into'
-        f' {output_filename}', self._log_every_n)
+        f' {output_filename}', 10)
     with file_util.FileIO(output_filename, mode='w') as output_fp:
         writer = csv.DictWriter(
             output_fp,

@@ -504,7 +504,7 @@ def load_mcf_nodes(
     filenames: command seperated string or a list of MCF filenames
     nodes: dictonary to which new nodes are added. If a node with dcid exists,
       the new properties are added to the existing node.
-    strip_namespace: if True, strips namespace from the value for node
+    strip_namespaces: if True, strips namespace from the value for node
       properties as well as the dcid key for the nodes dict.
     append_values: if True, appends new values for existing properties into a
       comma separated list, else replaces existing value.
@@ -590,7 +590,7 @@ def load_mcf_nodes(
                         if strip_namespaces:
                             value = strip_namespace(value)
                         add_pv_to_node(prop, value, pvs, append_values,
-                                       strip_namespace, normalize)
+                                       strip_namespaces, normalize)
                         num_props += 1
                 if pvs:
                     if not add_mcf_node(pvs, nodes, strip_namespaces,
