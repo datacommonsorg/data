@@ -16,6 +16,7 @@ This Python Script is for National Level Data 1900-1959
 '''
 import os
 import pandas as pd
+import requests
 
 
 def national1900(output_folder: str):
@@ -43,7 +44,6 @@ def national1900(output_folder: str):
         # reading the csv format input file and converting it to a dataframe
         try:
             # Check if the URL is accessible and returns a CSV
-            import requests
             response = requests.head(url, allow_redirects=True)
             if response.status_code != 200 or 'text/csv' not in response.headers.get(
                     'Content-Type', ''):

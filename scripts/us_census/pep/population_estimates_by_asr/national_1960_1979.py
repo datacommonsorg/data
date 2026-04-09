@@ -16,6 +16,7 @@ This Python Script is for National Level Data 1960-1979.
 '''
 import os
 import pandas as pd
+import requests
 
 
 def national1960(output_folder: str):
@@ -40,7 +41,6 @@ def national1960(output_folder: str):
         # Skipping unwanted rows from top and bottom.
         try:
             # Check if the URL is accessible and returns a CSV
-            import requests
             response = requests.head(url, allow_redirects=True)
             if response.status_code != 200 or 'text/csv' not in response.headers.get(
                     'Content-Type', ''):
