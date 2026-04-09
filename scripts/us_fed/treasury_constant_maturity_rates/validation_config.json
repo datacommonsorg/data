@@ -3,7 +3,7 @@
     "rules": [
         {
             "rule_id": "check_goldens_output_csv",
-            "validator": "GOLDENS",
+            "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "golden_data/golden_treasury_constant_maturity_rates.csv",
                 "input_files": "treasury_constant_maturity_rates.csv"
@@ -11,7 +11,7 @@
         },
         {
             "rule_id": "check_goldens_summary_report",
-            "validator": "GOLDENS",
+            "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "golden_data/golden_summary_report.csv"
             }

@@ -1215,8 +1215,7 @@ def _get_value_set(values: str) -> set:
     if isinstance(values, str):
         values = values.split(',')
     else:
-        logging.log_every_n(logging.DEBUG, f'flattening into set {values}',
-                            10)
+        logging.log_every_n(logging.DEBUG, f'flattening into set {values}', 10)
         values = ','.join(values).split(',')
     values_set.update(values)
     return values_set
@@ -1291,8 +1290,7 @@ def process(
     resolved_places = {}
     if place_names:
         logging.log_every_n(logging.DEBUG,
-                            f'Resolving {len(place_names)} places names...',
-                            10)
+                            f'Resolving {len(place_names)} places names...', 10)
         resolved_places.update(pr.resolve_name(place_names))
         columns.extend(['dcid', 'placeId', 'lat', 'lng'])
     if place_coords:
