@@ -40,18 +40,10 @@ def handle_feed_event(request):
         return 'OK', 200
 
     import_name = attributes.get('import_name')
-    import_status = 'STAGING'
     latest_version = attributes.get(
         'import_version',
         datetime.now(timezone.utc).strftime("%Y-%m-%d"))
-    graph_path = attributes.get('graph_path', "/**/*.mcf*")
-    job_id = attributes.get('feed_name', 'cda_feed')
-    cron_schedule = attributes.get('cron_schedule', '')
-    run_ingestion = 'Schema' in import_name or 'Place' in import_name
-
-    # Update import status in spanner
-    helper.update_import_status(import_name, import_status, latest_version,
-                                graph_path, job_id, cron_schedule)
+    run_ingestion = True 
 
     # Invoke import job and ingestion workflow to trigger dataflow job
     helper.invoke_import_workflow(import_name, latest_version, run_ingestion)

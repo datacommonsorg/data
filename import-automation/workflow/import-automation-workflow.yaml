@@ -22,6 +22,9 @@ main:
               disk: 100
           - resources: ${default(map.get(args, "resources"), defaultResources)}
           - runIngestion: ${default(map.get(args, "runIngestion"), false)}
+          - ingestionArgs:
+              importList:
+                - ${text.split(importName, ":")[1]}
     - runImportJob:
         try:
           call: googleapis.batch.v1.projects.locations.jobs.create
@@ -109,7 +112,7 @@ main:
                   args:
                     parent: ${"projects/" + projectId + "/locations/" + region + "/workflows/spanner-ingestion-workflow"}
                     body:
-                      argument: ${json.encode_to_string({"importList": [text.split(importName, ":")[1]]})}
+                      argument: ${json.encode_to_string(ingestionArgs)}
     - returnResult:
         return:
           jobId: ${jobId}

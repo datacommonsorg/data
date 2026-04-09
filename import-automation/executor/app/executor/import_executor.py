@@ -555,7 +555,8 @@ class ImportExecutor:
                               absolute_import_dir: str) -> Tuple[str, str]:
         """Invokes the differ tool to compare current data with previous data."""
         current_data_path = os.path.join(genmcf_output_path, '*.mcf')
-        previous_data_path = latest_version + f'/{import_prefix}/genmcf/*.mcf'
+        previous_data_path = os.path.join(latest_version, import_prefix,
+                                          'genmcf', '*.mcf')
         diff_found = True
         # TODO: remove fallback logic once all imports move to new path.
         if not file_util.file_get_matching(previous_data_path):
@@ -715,17 +716,7 @@ class ImportExecutor:
             import_summary.import_stats.get('validation_execution_time', 0),
             import_summary.import_stats.get('validation_data_size',
                                             0), validation_message)
-        if not self.config.ignore_validation_status and not validation_status:
-            logging.error(
-                "Marking import as VALIDATION due to validation failure.")
-            import_summary.status = ImportStatus.VALIDATION
-        elif not differ_status:
-            logging.info("Marking import as SKIP due to no data diff.")
-            import_summary.status = ImportStatus.SKIP
-        else:
-            import_summary.status = ImportStatus.STAGING
-
-        return validation_status
+        return validation_status, differ_status
 
     def _get_validation_message(
             self, validation_results: List[ValidationResult]) -> str:
@@ -916,9 +907,10 @@ class ImportExecutor:
                     import_summary=import_summary)
 
             validation_status = True
+            differ_status = True
             if self.config.invoke_import_validation:
                 logging.info("Invoking import validations")
-                validation_status = self._invoke_import_validation(
+                validation_status, differ_status = self._invoke_import_validation(
                     repo_dir=repo_dir,
                     relative_import_dir=relative_import_dir,
                     absolute_import_dir=absolute_import_dir,
@@ -931,6 +923,16 @@ class ImportExecutor:
             else:
                 logging.info(
                     'Skipping import validations as per import config.')
+
+            if not self.config.ignore_validation_status and not validation_status:
+                logging.error(
+                    "Marking import as VALIDATION due to validation failure.")
+                import_summary.status = ImportStatus.VALIDATION
+            elif not differ_status:
+                logging.info("Marking import as SKIP due to no data diff.")
+                import_summary.status = ImportStatus.SKIP
+            else:
+                import_summary.status = ImportStatus.STAGING
 
             import_summary.execution_time = int(time.time() - start_time)
             import_summary.data_volume = int(
@@ -987,6 +989,13 @@ class ImportExecutor:
         import_inputs: Specification of the import as a dict.
 
     """
+        # Copy manifest file
+        manifest_file = os.path.join(import_dir, 'manifest.json')
+        dest = f'{output_dir}/{version}/{os.path.basename(manifest_file)}'
+        self._upload_file_helper(
+            src=manifest_file,
+            dest=dest,
+        )
         import_inputs = import_spec.get('import_inputs', [])
         errors = []
         data_size = 0
@@ -996,7 +1005,7 @@ class ImportExecutor:
             import_files = self._get_import_input_files(import_input,
                                                         import_dir)
             for file in import_files:
-                dest = f'{output_dir}/{version}/input{input_index}/{os.path.basename(file)}'
+                dest = f'{output_dir}/{version}/{os.path.basename(file)}'
                 data_size += os.path.getsize(file)
                 if not self.config.skip_input_upload:
                     self._upload_file_helper(
@@ -1012,11 +1021,10 @@ class ImportExecutor:
         for file in source_files:
             dest = f'{output_dir}/{version}/source_files/{os.path.relpath(file, import_dir)}'
             data_size += os.path.getsize(file)
-            if not self.config.skip_input_upload:
-                self._upload_file_helper(
-                    src=file,
-                    dest=dest,
-                )
+            self._upload_file_helper(
+                src=file,
+                dest=dest,
+            )
 
         import_summary.import_stats['source_data_size'] = data_size
         if errors:
