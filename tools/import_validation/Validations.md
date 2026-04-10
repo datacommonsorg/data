@@ -88,7 +88,7 @@ place dcids loaded from txt files:
       --validate_goldens_input=output/observations.csv \
       --generate_goldens=golden_data/golden_observations.csv \
       --goldens_must_include="variableMeasured:gs://unresolved_mcf/import_validation/nl_statvars.csv,observationAbout:gs://unresolved_mcf/import_validation/top_100k_places.csv" \
-      --generate_goldens_property_sets="variableMeasured,observationAbout,observationDate"
+      --generate_goldens_property_sets="variableMeasured|unit|scalingFactor|observationPeriod|measurementMethod,observationAbout,observationDate"
 ```
 
 To enable goldens validation with files generated above
