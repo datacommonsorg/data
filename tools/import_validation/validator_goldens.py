@@ -436,7 +436,6 @@ def generate_goldens(input_files: str,
         f'Generated {len(golden_nodes)} unique goldens from {len(input_nodes)} input nodes.'
     )
     counters.add_counter('generated-golden-output', len(golden_nodes))
-    print(golden_nodes)
 
     if golden_nodes and output_file:
         logging.info(f'Writing {len(golden_nodes)} goldens to {output_file}')

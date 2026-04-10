@@ -27,7 +27,7 @@ disable lint check for a specific import.
         },
         {
             "rule_id": "check_lint_error_count",
-            "enabled": False,
+            "enabled": false,
         }
     ]
 }
@@ -40,6 +40,10 @@ Here are some additional details for each validation rule.
 The `GOLDENS_CHECK` validator ensures that the import contains a specific set of expected records. This is useful for verifying that critical StatVars, Places, or specific metadata combinations are always present in the output.
 
 The validator compares the input data (usually from the `stats` data source) against one or more "golden" files (MCF or CSV).
+
+If any of the combination of values in a row of the golden file is not present
+in the input, the validation is treated as a failure.
+The missing golden rows are listed in the validation report json.
 
 ### Configuration Parameters
 - `golden_files`: A list or glob pattern of golden MCF or CSV files to compare against.
@@ -87,7 +91,6 @@ place dcids loaded from txt files:
       --generate_goldens_property_sets="variableMeasured,observationAbout,observationDate"
 ```
 
-
 To enable goldens validation with files generated above
 while relaxing the default deleted records threshold, add the following
 valiation rules to the validation config:
@@ -116,7 +119,7 @@ valiation rules to the validation config:
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "golden_data/golden_observations.csv"
-                "input_files": "output/observations.csv",
+                "input_files": "output/observations.csv"
             }
         }
     ]
