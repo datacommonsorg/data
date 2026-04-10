@@ -1,7 +1,7 @@
 {
     "import_specifications": [
       {
-        "import_name": "TB_Estimated_Incidence_Rate",
+        "import_name": "WHO_TuberculosisEstimatedIncidenceRate",
         "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://data.who.int/indicators/i/EB68992/2674B39",
         "provenance_description": "Estimated number of new episodes of TB cases arising in a given year per 100 000 population.",
