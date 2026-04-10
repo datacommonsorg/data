@@ -85,9 +85,9 @@ Here is an example of a complete configuration file:
         },
         {
             "rule_id": "check_deleted_points_threshold",
-            "validator": "DELETED_RECORDS_COUNT",
+            "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 10
+                "threshold": 1
             }
         },
         {
@@ -154,34 +154,9 @@ The following validations are currently supported:
 | MAX_VALUE_CHECK           | Checks that the maximum value is not above a defined maximum.            | `stats`           | `maximum` (integer or float)                           |
 | `GOLDENS_CHECK`                 | Verifies that the data contains all records defined in a golden set.     | `stats`           | `golden_files` (list), `input_files` (list)   |
 
-### Golden Set Validation with `GOLDENS_CHECK`
-
-The `GOLDENS_CHECK` validator ensures that your import contains a specific set of expected records. This is useful for verifying that critical StatVars, Places, or specific metadata combinations are always present in your output.
-
-The validator compares the input data (usually from the `stats` data source) against one or more "golden" files (MCF or CSV).
-
-#### Configuration Parameters
-- `golden_files`: A list or glob pattern of golden MCF or CSV files to compare against.
-- `goldens_key_property`: A list of properties to match on. If not specified, all properties in the golden record must match.
-- `input_files`: (Optional) A list of glob pattern of input files to be compared with goldens. If not provided, the data source defined in the rule's `scope` is used.
-
-#### GOLDENS_CHECK Validator Example
-
-**Rule:** "Ensure that observations for `Count_Person` and `Median_Age_Person` are present in the import as defined in our critical golden set."
-
-```json
-{
-  "rule_id": "verify_critical_obs",
-  "validator": "GOLDENS_CHECK",
-  "params": {
-    "golden_files": ["goldens/critical_stats.csv"],
-    "input_files": "processed_obs.csv"
-  }
-}
-```
+For more details on the validations, please refer to [Validations.md](Validations.md)
 
 ## Output
-
 
 The framework generates a report file (specified by the `--validation_output` flag) with the results of each validation. The format of the report is determined by the file extension (`.csv` or `.json`).
 
