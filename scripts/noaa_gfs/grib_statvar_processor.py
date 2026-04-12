@@ -33,15 +33,22 @@ import numpy as np
 import csv as py_csv
 import re
 import os
+import json
+from pathlib import Path
 from multiprocessing import Pool, cpu_count
 from absl import app, flags, logging
+from google.cloud import storage
 
 logging.set_verbosity(logging.INFO)
 
 # --- FLAG DEFINITIONS ---
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input_file', None, 'Path to the input GRIB file.')
-flags.DEFINE_string('output_file', None, 'Path to the output CSV file.')
+flags.DEFINE_string('project_id', 'datcom', 'GCP Project ID.')
+flags.DEFINE_string('bucket_name', 'datcom-prod-imports', 'GCS Bucket for state storage.')
+flags.DEFINE_string('state_path', 'scripts/noaa_gfs/state.json', 'Path to state.json in GCS.')
+
+flags.DEFINE_string('input', 'input_files', 'Directory containing input GRIB files.')
+flags.DEFINE_string('output', 'output', 'Directory for output CSV files.')
 flags.DEFINE_string('forecast_hour', '000', 'The forecast hour (e.g., 000, 003).')
 flags.DEFINE_integer('num_workers', cpu_count(), 'Number of parallel processes.')
 
@@ -204,14 +211,32 @@ def construct_dcid(param_raw, level_raw):
 
     return dcid
 
+def update_state_json(latest_date, latest_cycle):
+    """Uploads the newest processed checkpoint to GCS."""
+    try:
+        client = storage.Client(project=FLAGS.project_id)
+        bucket = client.bucket(FLAGS.bucket_name)
+        blob = bucket.blob(FLAGS.state_path)
+        
+        state_content = json.dumps({
+            "date": latest_date,
+            "cycle": latest_cycle,
+            "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        })
+        
+        blob.upload_from_string(state_content, content_type='application/json')
+        logging.info(f"Successfully updated GCS state to: {latest_date} {latest_cycle}z")
+    except Exception as e:
+        logging.error(f"Failed to update state.json: {e}")
+
 # --- WORKER FUNCTION ---
 def worker_process(args):
     """
     The core loop executed by each CPU core.
     Processes a slice of GRIB messages and writes to a temporary partition file.
     """
-    input_path, start_msg, end_msg, chunk_id, lats_flat, lons_flat, f_hour = args
-    temp_path = f"{FLAGS.output_file}.part{chunk_id}"
+    input_path, start_msg, end_msg, chunk_id, lats_flat, lons_flat, f_hour, output_path = args
+    temp_path = f"{output_path}.part{chunk_id}"
     
     f_hour_int = int(f_hour)
     suffix_method = "GFS0Hour" if f_hour_int == 0 else f"GFS{f_hour_int}HourForecast"
@@ -344,50 +369,92 @@ def worker_process(args):
     grbs.close()
     return temp_path
 
-# --- MAIN EXECUTION ---
-def main(argv):
+def grib_statvar_processor(input_path, output_path):
     """
-    Main entry point for the script. Parses flags, tracks execution time, and triggers processing.
+    Converts the specified GRIB file into a Data Commons compatible CSV format.
     """
-    if len(argv) > 1: raise app.UsageError('Too many arguments.')
     start_time = time.perf_counter()
-    logging.info(f"Parallel process started: {FLAGS.input_file}")
+    logging.info(f"Parallel process started: {input_path}")
 
-    grbs = pygrib.open(FLAGS.input_file)
-    total_messages = grbs.messages
-    sample = grbs.message(1)
-    lats, lons = sample.latlons()
-    lats_flat = np.flipud(lats).flatten().astype(np.float32)
-    lons_raw = np.flipud(lons).flatten()
-    lons_flat = np.where(lons_raw > 180, lons_raw - 360, lons_raw).astype(np.float32)
-    grbs.close()
+    try:
+        grbs = pygrib.open(str(input_path))
+        total_messages = grbs.messages
+        sample = grbs.message(1)
+        lats, lons = sample.latlons()
+        lats_flat = np.flipud(lats).flatten().astype(np.float32)
+        lons_raw = np.flipud(lons).flatten()
+        lons_flat = np.where(lons_raw > 180, lons_raw - 360, lons_raw).astype(np.float32)
+        grbs.close()
 
-    num_workers = min(FLAGS.num_workers, total_messages)
-    chunk_size = total_messages // num_workers
-    tasks = []
-    for i in range(num_workers):
-        start = (i * chunk_size) + 1
-        end = total_messages if i == num_workers - 1 else (i + 1) * chunk_size
-        tasks.append((FLAGS.input_file, start, end, i, lats_flat, lons_flat, FLAGS.forecast_hour))
+        num_workers = min(FLAGS.num_workers, total_messages)
+        chunk_size = total_messages // num_workers
+        tasks = []
+        for i in range(num_workers):
+            start = (i * chunk_size) + 1
+            end = total_messages if i == num_workers - 1 else (i + 1) * chunk_size
+            tasks.append((str(input_path), start, end, i, lats_flat, lons_flat, FLAGS.forecast_hour, str(output_path)))
 
-    with Pool(num_workers) as pool:
-        temp_files = pool.map(worker_process, tasks)
+        with Pool(num_workers) as pool:
+            temp_files = pool.map(worker_process, tasks)
 
-    logging.info(f"Merging {len(temp_files)} partitions into {FLAGS.output_file}...")
-    with open(FLAGS.output_file, 'wb') as f_final:
-        header = "observationDate,value,variableMeasured,measurementMethod,latitude,longitude,placeName,unit\r\n"
-        f_final.write(header.encode('utf-8'))
+        logging.info(f"Merging {len(temp_files)} partitions into {output_path}...")
+        with open(output_path, 'wb') as f_final:
+            header = "observationDate,value,variableMeasured,measurementMethod,latitude,longitude,placeName,unit\r\n"
+            f_final.write(header.encode('utf-8'))
         
-        for temp_path in temp_files:
-            if os.path.exists(temp_path):
-                with open(temp_path, 'rb') as f_part:
-                    f_final.write(f_part.read())
-                os.remove(temp_path)
+            for temp_path in temp_files:
+                if os.path.exists(temp_path):
+                    with open(temp_path, 'rb') as f_part:
+                        f_final.write(f_part.read())
+                    os.remove(temp_path)
 
-    duration = time.perf_counter() - start_time
-    logging.info(f"Total processing time: {duration:.2f} seconds")
+        duration = time.perf_counter() - start_time
+        logging.info(f"Completed {input_path.name} in {duration:.2f}s")
+        return True
+    
+    except Exception as e:
+        logging.error(f"Failed to process {input_path}: {e}")
+        return False
+
+def main(argv):
+    """Entry point for the GRIB processing script."""
+    input_dir = Path(FLAGS.input)
+    output_dir = Path(FLAGS.output)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    files_to_process = sorted(list(input_dir.rglob('gfs.t*')))
+
+    if not files_to_process:
+        logging.warning(f"No files found in {FLAGS.input}")
+        return
+    
+    logging.info(f"Found {len(files_to_process)} files to process.")
+    processed_checkpoints = []
+
+    for input_path in files_to_process:
+        relative_path = input_path.relative_to(input_dir)
+        output_path = output_dir / relative_path.with_suffix('.csv')
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        if grib_statvar_processor(input_path, output_path):
+            path_str = str(input_path)
+            date_match = re.search(r'(\d{8})', path_str)
+            cycle_match = re.search(r't(\d{2})z', path_str)
+
+            if date_match and cycle_match:
+                date_str = date_match.group(1)
+                cycle_str = cycle_match.group(1)
+                processed_checkpoints.append((date_str, cycle_str))
+            else:
+                logging.warning(f"Could not extract date/cycle from {path_str}; skipping state update for this file.")
+
+    if processed_checkpoints:
+        processed_checkpoints.sort()
+        latest_date, latest_cycle = processed_checkpoints[-1]
+        logging.info(f"Batch complete. Updating GCS state to match {latest_date} {latest_cycle}z")
+        update_state_json(latest_date, latest_cycle)
+    else:
+        logging.warning("No files were successfully processed; skipping state update.")
 
 if __name__ == "__main__":
-    flags.mark_flag_as_required('input_file')
-    flags.mark_flag_as_required('output_file')
     app.run(main)
