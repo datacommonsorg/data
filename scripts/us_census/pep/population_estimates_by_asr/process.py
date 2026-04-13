@@ -69,15 +69,12 @@ def add_future_year_urls():
             url_to_check = url.format(YEAR=YEAR)
             try:
                 check_url = requests.head(url_to_check, allow_redirects=True)
-                # Check both the status code AND the content type
-                content_type = check_url.headers.get('Content-Type', '')
-
-                if check_url.status_code == 200 and 'text/csv' in content_type:
+                if check_url.status_code == 200:
                     _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
                     break
                 else:
                     logging.warning(
-                        f"URL exists but is not a CSV: {url_to_check}")
+                        f"URL is not accessible: {url_to_check}")
             except Exception as e:
                 logging.error(f"URL is not accessible {url_to_check}: {e}")
 

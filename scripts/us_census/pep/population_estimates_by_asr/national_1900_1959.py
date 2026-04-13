@@ -17,6 +17,7 @@ This Python Script is for National Level Data 1900-1959
 import os
 import pandas as pd
 import requests
+from absl import logging
 
 
 def national1900(output_folder: str):
@@ -43,11 +44,10 @@ def national1900(output_folder: str):
         cols = ['Age', '0', '1', '2', '3', '4', '5', '6', '7', '8']
         # reading the csv format input file and converting it to a dataframe
         try:
-            # Check if the URL is accessible and returns a CSV
+            # Check if the URL is accessible
             response = requests.head(url, allow_redirects=True)
-            if response.status_code != 200 or 'text/csv' not in response.headers.get(
-                    'Content-Type', ''):
-                print(f"Skipping {url} as it is not a CSV or not accessible.")
+            if response.status_code != 200:
+                logging.warning(f"Skipping {url} as it is not accessible.")
                 continue
 
             df = pd.read_csv(url,
@@ -57,7 +57,7 @@ def national1900(output_folder: str):
                              skipfooter=15,
                              encoding='ISO-8859-1')
         except Exception as e:
-            print(f"Error reading {url}: {e}")
+            logging.error(f"Error reading {url}: {e}")
             continue
         #Writing raw data to csv
         df.to_csv(os.path.join(
