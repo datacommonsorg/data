@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "TB_Bacteriologically_Confirmed",
+            "import_name": "WHO_TuberculosisBacteriologicallyConfirmed",
             "curator_emails": [
                 "support@datacommons.org"
             ],
