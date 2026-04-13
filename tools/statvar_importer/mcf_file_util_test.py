@@ -121,7 +121,8 @@ class TestMCFFileUtil(unittest.TestCase):
         for dcid, node in mcf_nodes.items():
             for expected_prop in ['Node', 'typeOf']:
                 self.assertTrue(expected_prop in node)
-            self.assertEqual(mcf_file_util.strip_namespace(dcid), node['Node'])
+            self.assertEqual(mcf_file_util.strip_namespace(dcid),
+                             mcf_file_util.strip_namespace(node['Node']))
 
         # Verify loading node with additional property added to existing node.
         dcid = list(mcf_nodes.keys())[0]
