@@ -17,73 +17,76 @@ Automates ingestion of processed NOAA GFS meteorological data into BigQuery.
 """
 
 import os
-from pathlib import Path
 from absl import app, flags, logging
 from google.cloud import bigquery
+from google.cloud import storage
 
 # --- FLAG DEFINITIONS ---
 FLAGS = flags.FLAGS
 flags.DEFINE_string('project_id', 'datcom', 'GCP Project ID.')
+flags.DEFINE_string('bucket_name', 'datcom-prod-imports', 'GCS Bucket containing the CSVs.')
+flags.DEFINE_string('gcs_prefix', 'scripts/noaa_gfs/NOAA_GlobalForecastSystem/output/', 'GCS prefix (folder path).')
 flags.DEFINE_string('dataset_id', 'noaa_gfs', 'BigQuery Dataset ID.')
 flags.DEFINE_string('table_id', 'observations', 'BigQuery Table ID.')
-flags.DEFINE_string('output_dir', 'output', 'Directory containing CSV files to upload.')
 
-def upload_csv_to_bq(client, file_path):
+def upload_gcs_to_bq(bq_client, gcs_uri):
     """
-    Loads a single CSV file into the BigQuery table.
+    Triggers a BigQuery load job directly from a GCS URI.
     """
-    # Construct the full table reference: project.dataset.table
     table_ref = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.table_id}"
     
     # Configure the load job
     job_config = bigquery.LoadJobConfig(
         source_format=bigquery.SourceFormat.CSV,
         skip_leading_rows=1,      # Skip the header row
-        autodetect=True,          # Automatically infer types (Date, Float, String)
-        write_disposition=bigquery.WriteDisposition.WRITE_APPEND, # Append to existing data
+        autodetect=True,          # Automatically infer types
+        write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
     )
 
     try:
-        with open(file_path, "rb") as source_file:
-            logging.info(f"Uploading {file_path.name} to {table_ref}...")
-            load_job = client.load_table_from_file(
-                source_file, 
-                table_ref, 
-                job_config=job_config
-            )
+        logging.info(f"Starting load job for: {gcs_uri}")
+        # Direct URI load
+        load_job = bq_client.load_table_from_uri(
+            gcs_uri, 
+            table_ref, 
+            job_config=job_config
+        )
+        
+        # Wait for the job to complete
+        load_job.result() 
             
-            # Wait for the job to complete
-            load_job.result() 
-            
-        logging.info(f"Successfully loaded {load_job.output_rows} rows.")
+        logging.info(f"Successfully loaded rows from {gcs_uri}. Job ID: {load_job.job_id}")
         return True
     except Exception as e:
-        logging.error(f"Failed to load {file_path.name}: {e}")
+        logging.error(f"Failed to load {gcs_uri}: {e}")
         return False
 
 def main(argv):
-    """Entry point for the script."""
-    # Initialize BigQuery Client
+    """Entry point for the GCS-to-BigQuery ingestion script."""
+    # Initialize Clients
     bq_client = bigquery.Client(project=FLAGS.project_id)
+    storage_client = storage.Client(project=FLAGS.project_id)
     
-    output_path = Path(FLAGS.output_dir)
+    # Get reference to the bucket and list blobs
+    bucket = storage_client.bucket(FLAGS.bucket_name)
+    blobs = bucket.list_blobs(prefix=FLAGS.gcs_prefix)
     
-    # 1. Find all CSV files recursively
-    csv_files = list(output_path.rglob('*.csv'))
+    # Filter for CSV files
+    csv_uris = [f"gs://{FLAGS.bucket_name}/{blob.name}" for blob in blobs if blob.name.endswith('.csv')]
     
-    if not csv_files:
-        logging.warning(f"No CSV files found in {FLAGS.output_dir}")
+    if not csv_uris:
+        logging.warning(f"No CSV files found at gs://{FLAGS.bucket_name}/{FLAGS.gcs_prefix}")
         return
 
-    logging.info(f"Found {len(csv_files)} files for ingestion.")
+    logging.info(f"Found {len(csv_uris)} files in GCS for ingestion.")
 
-    # 2. Loop and Upload
+    # Loop and Trigger Load Jobs
     success_count = 0
-    for csv_file in csv_files:
-        if upload_csv_to_bq(bq_client, csv_file):
+    for uri in csv_uris:
+        if upload_gcs_to_bq(bq_client, uri):
             success_count += 1
 
-    logging.info(f"Ingestion batch complete. {success_count}/{len(csv_files)} files uploaded.")
+    logging.info(f"Ingestion batch complete. {success_count}/{len(csv_uris)} URIs processed.")
 
 if __name__ == "__main__":
     app.run(main)
