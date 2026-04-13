@@ -32,7 +32,7 @@ from google.api_core import exceptions
 FLAGS = flags.FLAGS
 flags.DEFINE_string('project_id', 'datcom', 'The GCP Project ID.')
 flags.DEFINE_string('bucket_name', 'datcom-prod-imports', 'The GCS bucket name.')
-flags.DEFINE_string('state_path', 'scripts/noaa_gfs/state.json', 'The path within the bucket for state.json.')
+flags.DEFINE_string('state_path', 'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json', 'The path within the bucket for state.json.')
 
 def get_gcs_client():
     """Initializes the GCS client with a specific Project ID."""

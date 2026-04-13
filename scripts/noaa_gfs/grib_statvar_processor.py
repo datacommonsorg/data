@@ -45,7 +45,7 @@ logging.set_verbosity(logging.INFO)
 FLAGS = flags.FLAGS
 flags.DEFINE_string('project_id', 'datcom', 'GCP Project ID.')
 flags.DEFINE_string('bucket_name', 'datcom-prod-imports', 'GCS Bucket for state storage.')
-flags.DEFINE_string('state_path', 'scripts/noaa_gfs/state.json', 'Path to state.json in GCS.')
+flags.DEFINE_string('state_path', 'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json', 'Path to state.json in GCS.')
 
 flags.DEFINE_string('input', 'input_files', 'Directory containing input GRIB files.')
 flags.DEFINE_string('output', 'output', 'Directory for output CSV files.')
