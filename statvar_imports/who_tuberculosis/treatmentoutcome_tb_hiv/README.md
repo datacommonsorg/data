@@ -1,6 +1,8 @@
 # WHO Treatment Outcome for TB and HIV
 
 - source: https://data.who.int/indicators/i/DCDC2EB/625E736
+
+- description: Percentage of people with TB/HIV who started dug-susceptible tuberculosis treatment and whose treatment outcome was recorded as treatment success (cured or treatment completed), treatment failed, died, lost to follow-up, or not evaluated, within the reporting period.
     
 - type of place: Country Data
 
