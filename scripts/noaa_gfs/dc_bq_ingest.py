@@ -23,11 +23,11 @@ from google.cloud import storage
 
 # --- FLAG DEFINITIONS ---
 FLAGS = flags.FLAGS
-flags.DEFINE_string('project_id', 'datcom', 'GCP Project ID.')
+flags.DEFINE_string('project_id', 'datcom-store', 'GCP Project ID.')
 flags.DEFINE_string('bucket_name', 'datcom-prod-imports', 'GCS Bucket containing the CSVs.')
 flags.DEFINE_string('gcs_prefix', 'scripts/noaa_gfs/NOAA_GlobalForecastSystem/output/', 'GCS prefix (folder path).')
-flags.DEFINE_string('dataset_id', 'noaa_gfs', 'BigQuery Dataset ID.')
-flags.DEFINE_string('table_id', 'observations', 'BigQuery Table ID.')
+flags.DEFINE_string('dataset_id', 'dc_kg_latest', 'BigQuery Dataset ID.')
+flags.DEFINE_string('table_id', 'noaa_gfs_pdp', 'BigQuery Table ID.')
 
 def upload_gcs_to_bq(bq_client, gcs_uri):
     """
