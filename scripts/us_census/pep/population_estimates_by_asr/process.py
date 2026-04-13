@@ -73,8 +73,7 @@ def add_future_year_urls():
                     _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
                     break
                 else:
-                    logging.warning(
-                        f"URL is not accessible: {url_to_check}")
+                    logging.warning(f"URL is not accessible: {url_to_check}")
             except Exception as e:
                 logging.error(f"URL is not accessible {url_to_check}: {e}")
 
