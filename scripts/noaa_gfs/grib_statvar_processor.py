@@ -34,6 +34,7 @@ import csv as py_csv
 import re
 import os
 import json
+import io
 from pathlib import Path
 from multiprocessing import Pool, cpu_count
 from absl import app, flags, logging
@@ -46,9 +47,9 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('project_id', 'datcom', 'GCP Project ID.')
 flags.DEFINE_string('bucket_name', 'datcom-prod-imports', 'GCS Bucket for state storage.')
 flags.DEFINE_string('state_path', 'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json', 'Path to state.json in GCS.')
+flags.DEFINE_string('output_gcs_prefix', 'scripts/noaa_gfs/NOAA_GlobalForecastSystem/output/', 'GCS prefix for CSVs.')
 
 flags.DEFINE_string('input', 'input_files', 'Directory containing input GRIB files.')
-flags.DEFINE_string('output', 'output', 'Directory for output CSV files.')
 flags.DEFINE_string('forecast_hour', '000', 'The forecast hour (e.g., 000, 003).')
 flags.DEFINE_integer('num_workers', cpu_count(), 'Number of parallel processes.')
 
@@ -369,12 +370,17 @@ def worker_process(args):
     grbs.close()
     return temp_path
 
-def grib_statvar_processor(input_path, output_path):
+def grib_statvar_processor(input_path, gcs_blob_name):
     """
     Converts the specified GRIB file into a Data Commons compatible CSV format.
     """
     start_time = time.perf_counter()
     logging.info(f"Parallel process started: {input_path}")
+
+    # Temporary local directory for worker partitions
+    temp_dir = Path("temp_parts")
+    temp_dir.mkdir(exist_ok=True)
+    local_temp_base = temp_dir / input_path.name
 
     try:
         grbs = pygrib.open(str(input_path))
@@ -392,13 +398,19 @@ def grib_statvar_processor(input_path, output_path):
         for i in range(num_workers):
             start = (i * chunk_size) + 1
             end = total_messages if i == num_workers - 1 else (i + 1) * chunk_size
-            tasks.append((str(input_path), start, end, i, lats_flat, lons_flat, FLAGS.forecast_hour, str(output_path)))
+            tasks.append((str(input_path), start, end, i, lats_flat, lons_flat, FLAGS.forecast_hour, str(local_temp_base)))
 
         with Pool(num_workers) as pool:
             temp_files = pool.map(worker_process, tasks)
 
-        logging.info(f"Merging {len(temp_files)} partitions into {output_path}...")
-        with open(output_path, 'wb') as f_final:
+        # Merge and Stream to GCS
+        client = storage.Client(project=FLAGS.project_id)
+        bucket = client.bucket(FLAGS.bucket_name)
+        blob = bucket.blob(gcs_blob_name)
+
+        logging.info(f"Uploading merged results to gs://{FLAGS.bucket_name}/{gcs_blob_name}...")
+        final_local_csv = f"{local_temp_base}.final"
+        with open(final_local_csv, 'wb') as f_final:
             header = "observationDate,value,variableMeasured,measurementMethod,latitude,longitude,placeName,unit\r\n"
             f_final.write(header.encode('utf-8'))
         
@@ -407,6 +419,8 @@ def grib_statvar_processor(input_path, output_path):
                     with open(temp_path, 'rb') as f_part:
                         f_final.write(f_part.read())
                     os.remove(temp_path)
+        
+        blob.upload_from_filename(final_local_csv, content_type='text/csv')
 
         duration = time.perf_counter() - start_time
         logging.info(f"Completed {input_path.name} in {duration:.2f}s")
@@ -419,9 +433,6 @@ def grib_statvar_processor(input_path, output_path):
 def main(argv):
     """Entry point for the GRIB processing script."""
     input_dir = Path(FLAGS.input)
-    output_dir = Path(FLAGS.output)
-    output_dir.mkdir(parents=True, exist_ok=True)
-
     files_to_process = sorted(list(input_dir.rglob('gfs.t*')))
 
     if not files_to_process:
@@ -432,18 +443,20 @@ def main(argv):
     processed_checkpoints = []
 
     for input_path in files_to_process:
-        relative_path = input_path.relative_to(input_dir)
-        output_path = output_dir / relative_path.with_suffix('.csv')
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        
-        if grib_statvar_processor(input_path, output_path):
-            path_str = str(input_path)
-            date_match = re.search(r'(\d{8})', path_str)
-            cycle_match = re.search(r't(\d{2})z', path_str)
+        path_str = str(input_path)
+        # Extract metadata for filename: noaa_gfs_output_DATE_CYCLE_FHOUR.csv
+        date_match = re.search(r'(\d{8})', path_str)
+        cycle_match = re.search(r't(\d{2})z', path_str)
 
-            if date_match and cycle_match:
-                date_str = date_match.group(1)
-                cycle_str = cycle_match.group(1)
+        if date_match and cycle_match:
+            date_str = date_match.group(1)
+            cycle_str = cycle_match.group(1)
+            f_hour = FLAGS.forecast_hour
+
+            gcs_filename = f"noaa_gfs_output_{date_str}_{cycle_str}_{f_hour}.csv"
+            gcs_full_path = f"{FLAGS.output_gcs_prefix.strip('/')}/{gcs_filename}"
+            
+            if grib_statvar_processor(input_path, gcs_full_path):
                 processed_checkpoints.append((date_str, cycle_str))
             else:
                 logging.warning(f"Could not extract date/cycle from {path_str}; skipping state update for this file.")
