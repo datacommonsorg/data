@@ -21,8 +21,8 @@
             "source_files": [
                 "./input_files/*/gfs.t*"
             ],
-            "user_script_timeout": 36000,
-            "cron_schedule": "30 04 * * *",
+            "user_script_timeout": 3600,
+            "cron_schedule": "30 04,10,16,22 * * *",
             "resource_limits": {
                 "cpu": 64,
                 "memory": 256,

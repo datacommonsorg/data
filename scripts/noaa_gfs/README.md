@@ -12,33 +12,50 @@ This pipeline automates the ingestion, format conversion, and standardized mappi
 
 
 ## Automated Pipeline Logic
-The dataset is processed via an automated Bash pipeline (run.sh) designed for containerized environments. The pipeline performs the following steps:
+The pipeline is a Python-driven architecture managed via a `manifest.json` import specification.
 
-### 1. Environment Bootstrap
-* **Build Dependencies:** Installs `build-essential`, `gfortran`, `cmake`, and `libaec-dev`.
-* **Toolchain Setup:** Performs a shallow clone of the [NOAA-EMC/wgrib2](https://github.com/NOAA-EMC/wgrib2.git) repository and compiles the binary at runtime using `cmake` and `make install`.
+### 1. Data Ingestion (`download_noaa_gfs_grib.py`)
+* **Stateful Tracking:** The script retrieves its last successful run checkpoint from `gs://{bucket}/state.json`.
+* **Chronological Integrity:** It identifies missing 6-hour slots (00z, 06z, 12z, 18z) and performs memory-efficient streamed downloads of GRIB2 files into local `input_files/` directories.
 
-### 2. Data Ingestion
-* **Dynamic Targeting:** Automatically calculates the current date and constructs the URL for the specified GFS cycle (default: `00z`).
-* **Reliable Download:** Uses `curl -L` to fetch the binary GRIB2 forecast file (e.g., `gfs.t00z.pgrb2.0p25.f000`).
+### 2. Transformation & Mapping (`grib_statvar_processor.py`)
+This stage converts binary meteorological data into structured CSVs using the `pygrib` library.
+* **Parallel Processing:** Utilizes `multiprocessing.Pool` to process GRIB messages across available CPU cores.
+* **Coordinate Normalization:** Longitudes are transformed from the 0–360 range to the -180 to 180 range.
+* **StatVar Mapping:**
+    * **DCID Construction:** Maps GRIB short codes (e.g., `TMP`, `UGRD`) and vertical levels to formal Data Commons identifiers like `dcid:Temperature_Place_850Millibar`.
+    * **Unit Scaling:** Automatically scales variables such as Land and Ice cover.
+* **GCS Streaming:** Processed CSVs are merged and uploaded directly to the GCS output prefix.
 
-### 3. Transformation & Mapping
-The pipeline pivots the data from binary to a structured StatVar CSV via two layers:
-1.  **Format Conversion:** `wgrib2` converts the `.pgrb2` binary into a raw `.csv` file.
-2.  **StatVar Mapping (`custom_statvar_processor.py`):** * **DCID Construction:** Short codes (e.g., `TMP`, `UGRD`) and levels (e.g., `2 m above ground`) are mapped to formal DCIDs like `dcid:Temperature_Place_2Meter`.
-    * **Cleaning:** Standardizes vertical levels and measurement methods (e.g., `GroundLevel`).
-    * **Streaming Upload:** Uses `google-cloud-storage` with a 64MB chunked buffer to stream processed rows directly to the GCS bucket in batches of 1,000 to manage memory footprint.
+### 3. BigQuery Ingestion (`dc_bq_ingest.py`)
+* **Staging Pattern:** Bulk loads raw CSVs from GCS into a staging table (`Observation_Staging`).
+* **SQL Transformation:** Executes an `INSERT INTO` query to map staging data to the final production schema, handling type casting and attaching the provenance ID (`dc/base/NOAA_GlobalForecastSystem`).
+
+---
+
+## Pipeline Configuration (`manifest.json`)
+The pipeline is governed by specific resource requirements for high-concurrency GRIB decompression:
+* **Cron Schedule:** `30 04,10,16,22 * * *` (Runs 30 minutes after GFS cycle releases).
+* **Resource Limits:** 64 CPUs | 256GB RAM | 4GB Disk.
+* **Timeout:** 1 hour (`3600s`).
 
 ---
 
 ## Usage Instructions
 
-### Running the Pipeline
-The script can be executed directly. Ensure your environment has Google Cloud credentials configured if running outside of GCP.
+### Prerequisites
+* **Python Libraries:** `pygrib`, `numpy`, `google-cloud-storage`, `google-cloud-bigquery`, `absl-py`.
+* **System Requirements:** Requires `libgrib-api` or `eccodes` installed on the host system.
+
+### Manual Execution
+While designed for automated execution, stages can be run manually for debugging:
 
 ```bash
-# Make the script executable
-chmod +x run.sh
+# 1. Download missing data
+python3 download_noaa_gfs_grib.py --project_id=YOUR_PROJECT_ID
 
-# Run with default settings (Today's 00z data)
-./run.sh
+# 2. Process GRIB to CSV and upload to GCS
+python3 grib_statvar_processor.py --input=./input_files
+
+# 3. Ingest from GCS to BigQuery
+python3 dc_bq_ingest.py --project_id=YOUR_PROJECT_ID --dataset_id=YOUR_DATASET
