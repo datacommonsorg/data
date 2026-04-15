@@ -123,13 +123,6 @@ def preprocess(input_file, output_file):
 
     # Drop rows with NaN values
     data = data.dropna(subset=['value'])
-
-    # Split dimensions
-    # Format is: freq,unit,sex,age,geo\TIME_PERIOD
-    # But wait, freq is stripped in the original preprocess.py?
-    # data['unit,sex,age,geo\time'] = data['unit,sex,age,geo\time'].str.slice(2)
-    # Let's check the first column content
-
     dims = identifier.split('\\')[0].split(',')
     data[dims] = data[identifier].str.split(',', expand=True)
 
