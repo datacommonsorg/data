@@ -30,11 +30,8 @@ To download the data, run the provided script:
 ```bash
 python3 data_download.py
 ```
-<<<<<<< HEAD
-This will fetch the latest full dataset and save it locally as `adolescent_birth_rate_data.csv`, making it available for processing.
-=======
+
 This will fetch the latest full dataset and save it locally as `input_files/adolescent_birth_rate_data.csv`, making it available for processing.
->>>>>>> 77012e1c (Adding files)
 
 ## Processing Instructions
 To process the WHO Adolescent Birth Rate data and generate statistical variables, use the following command from the `adolescent_birth_rate` directory:
@@ -42,11 +39,7 @@ To process the WHO Adolescent Birth Rate data and generate statistical variables
 **For Data Run**
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
-<<<<<<< HEAD
-    --input_data=adolescent_birth_rate_data.csv \
-=======
     --input_data=input_files/* \
->>>>>>> 77012e1c (Adding files)
     --pv_map=adolescent_birth_rate_pvmap.csv \
     --output_path=adolescent_birth_rate_output \
     --config_file=adolescent_birth_rate_metadata.csv
@@ -76,4 +69,3 @@ Testing is performed using the provided `test_data` directory:
 - Input: `test_data/adolescent_birth_rate_input.csv`
 - Output (expected): `test_data/adolescent_birth_rate_output.csv`
 - MCF (expected): `test_data/adolescent_birth_rate_output.tmcf`
-
