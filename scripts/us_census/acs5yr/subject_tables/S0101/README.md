@@ -1,5 +1,6 @@
 # Age and Sex
-This table provides data on the age and sex distribution of the total population. It includes counts of individuals across various age groups and by gender, as well as summary measures like median age and dependency ratios.
+This table provides data on the age and sex distribution of the total population.
+It includes counts of individuals across various age groups and by gender, as well as summary measures like median age and dependency ratios.
 
 The data is sliced by the following properties:
 - age
