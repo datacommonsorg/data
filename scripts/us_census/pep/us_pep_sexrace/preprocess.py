@@ -180,15 +180,18 @@ def downloadFiles(config_files: list, test=False):
             try:
                 process_national_2020_2029(url)
             except Exception as e:
-                logging.error(f"Failed to process national 2020-2029 for {url}: {e}")
+                logging.error(
+                    f"Failed to process national 2020-2029 for {url}: {e}")
             try:
                 process_county_2020_2029(url)
             except Exception as e:
-                logging.error(f"Failed to process county 2020-2029 for {url}: {e}")
+                logging.error(
+                    f"Failed to process county 2020-2029 for {url}: {e}")
             try:
                 process_state_2020_2029(url)
             except Exception as e:
-                logging.error(f"Failed to process state 2020-2029 for {url}: {e}")
+                logging.error(
+                    f"Failed to process state 2020-2029 for {url}: {e}")
     except Exception as e:
         logging.fatal(f"There is an error while downloading the files {e}")
 

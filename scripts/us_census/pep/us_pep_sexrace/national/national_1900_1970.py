@@ -58,7 +58,9 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
 
                 # providing proper column names
                 if len(df.columns) != 10:
-                    logging.warning(f"Skipping {file}: expected 10 cols, got {len(df.columns)}")
+                    logging.warning(
+                        f"Skipping {file}: expected 10 cols, got {len(df.columns)}"
+                    )
                     continue
                 df.columns = [
                     "Age", "All race total", "Count_Person_Male",
@@ -92,7 +94,9 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                            index=False)
                 # providing proper column names
                 if len(df2.columns) != 13:
-                    logging.warning(f"Skipping {file}: expected 13 cols, got {len(df2.columns)}")
+                    logging.warning(
+                        f"Skipping {file}: expected 13 cols, got {len(df2.columns)}"
+                    )
                     continue
                 df2.columns = [
                     "Age", "All race total", "Count_Person_Male",
