@@ -1001,7 +1001,7 @@ class PopulationEstimateBySex:
         # Creating Output Directory
         output_path = os.path.dirname(self._cleaned_csv_file_path)
         if not os.path.exists(output_path):
-            os.mkdir(output_path)
+            os.makedirs(output_path, exist_ok=True)
         sv_list = []
         final_df = pd.DataFrame()
         processed_count = 0
@@ -1092,7 +1092,11 @@ class PopulationEstimateBySex:
                 value_vars=['Count_Person_Male', 'Count_Person_Female'],
                 var_name="SV",
                 value_name="Observation")
-
+            subset_cols = ['Year', 'geo_ID', 'Measurement_Method', 'SV']
+            # 2. Drop duplicates based on those columns, keeping the first occurrence
+            final_df.drop_duplicates(subset=subset_cols,
+                                     keep='first',
+                                     inplace=True)
             final_df.to_csv(self._cleaned_csv_file_path, index=False)
             sv_list = ['Count_Person_Female', 'Count_Person_Male']
             self._generate_mcf(sv_list)
@@ -1117,7 +1121,7 @@ def fetch_skip_urls_from_gcs(GCS_BUCKET_NAME: str,
 
 def is_valid_url(url):
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=20)
         if response.status_code != 200:
             return False
         content_type = response.headers.get("Content-Type", "")
@@ -1318,11 +1322,11 @@ def main(_):
     tmcf_name = "population_estimate_sex.tmcf"
     data_file_path = os.path.join(_MODULE_DIR, "output")
     if not (os.path.exists(data_file_path)):
-        os.mkdir(data_file_path)
+        os.makedirs(data_file_path, exist_ok=True)
     if not (os.path.exists(_INPUT_FILE_PATH)):
-        os.mkdir(_INPUT_FILE_PATH)
+        os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
     if not (os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH)):
-        os.mkdir(_GCS_OUTPUT_PERSISTENT_PATH)
+        os.makedirs(_GCS_OUTPUT_PERSISTENT_PATH, exist_ok=True)
 
     cleaned_csv_path = data_file_path + os.sep + csv_name
     mcf_path = data_file_path + os.sep + mcf_name

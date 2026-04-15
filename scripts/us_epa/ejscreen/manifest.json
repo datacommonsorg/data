@@ -1,0 +1,30 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "EPA_EJSCREEN",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.epa.gov/ejscreen",
+            "provenance_description": "EJSCREEN combines Census demographic data and environmental data from EPA sources",
+            "scripts": [
+                "ejscreen.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/ejscreen.tmcf",
+                    "cleaned_csv": "output_files/ejscreen_airpollutants.csv"
+                }
+            ],
+            "cron_schedule": "0 10 1,15 * *",
+            "source_files": [
+                "input_files/*"
+            ],
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 256,
+                "disk": 300
+            }
+        }
+    ]
+}

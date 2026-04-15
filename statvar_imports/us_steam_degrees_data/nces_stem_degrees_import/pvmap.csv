@@ -11,7 +11,7 @@ Asian/Pacific Islander,race,AsianOrPacificIslander,value,{Number},ethnicity,""""
 Asian/Pacific Islander:Total,race,AsianOrPacificIslander,value,{Number},ethnicity,"""""",,,,,,,,
 Both,race,AsianOrPacificIslander,value,{Number},ethnicity,"""""",,,,,,,,
 Asian,race,Asian,value,{Number},ethnicity,"""""",,,,,,,,
-Pacific Islander,race,HawaiianNativeOrPacificIslander,value,{Number},ethnicity,"""""",#MergedCell,FALSE,,,,,,
+Pacific Islander,race,HawaiianNativeOrPacificIslander,value,{Number},ethnicity,"""""",#MergedCell,0,,,,,,
 Asian/Pacific Islander:Pacific Islander,race,HawaiianNativeOrPacificIslander,value,{Number},ethnicity,"""""",,,,,,,,
 American Indian/Alaska Native,race,AmericanIndianOrAlaskaNativeAlone,value,{Number},ethnicity,"""""",,,,,,,,
 Two or more races,race,TwoOrMoreRaces,value,{Number},ethnicity,"""""",,,,,,,,

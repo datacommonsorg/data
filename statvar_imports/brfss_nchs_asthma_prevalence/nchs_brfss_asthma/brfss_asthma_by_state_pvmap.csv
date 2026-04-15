@@ -1,0 +1,17 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+State,observationAbout,{Data},populationType,Person,healthOutcome,Asthma,,,,,,
+,,,,,,,,,,,,
+life_stage:child,age,YearsUpto18,,,,,,,,,,
+life_stage:adult,age,Years18Onwards,,,,,,,,,,
+,,,,,,,,,,,,
+year,observationDate,{Data},,,,,,,,,,
+,,,,,,,,,,,,
+Prevalence (percent),value,{Number},statType,measuredValue,measuredProperty,percent,unit,Percent,,,,
+Standard Error,value,{Number},statType,stdError,measurementDenominator,"-statType,-healthOutcome",measuredProperty,count,scalingFactor,100,unit,Percent
+Sample Size,value,{Number},statType,sampleSize,measuredProperty,count,,,,,,
+Prevalence (Percent),value,{Number},statType,measuredValue,measuredProperty,percent,unit,Percent,,,,
+Sample Sizec,value,{Number},statType,sampleSize,measuredProperty,count,,,,,,
+Sample Sized,value,{Number},statType,sampleSize,measuredProperty,count,,,,,,
+Sample Size§,value,{Number},statType,sampleSize,measuredProperty,count,,,,,,
+Sample,value,{Number},statType,sampleSize,measuredProperty,count,,,,,,
+Unweighted Number,value,{Number},statType,sampleSize,measuredProperty,count,,,,,,

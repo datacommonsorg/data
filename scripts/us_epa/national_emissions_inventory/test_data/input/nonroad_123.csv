@@ -1,0 +1,500 @@
+epa region code,state,fips state code,tribal name,fips code,county,data category,emissions type code,scc,sector,aetc,reporting period,emissions operating type,pollutant code,pollutant desc,pollutant type(s),total emissions,emissions uom,data set
+03,VA,51,,51690,Martinsville city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,91203,Naphthalene,HAP,.006809798,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,CO2,Carbon Dioxide,GHG,235.9714,TON,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.02846051,TON,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,208968,Acenaphthylene,HAP,.0006154882,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,85018,Phenanthrene,HAP,.0012779368,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.002923445,TON,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.0007957144,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,56553,Benz[a]Anthracene,HAP,.008402114,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,75070,Acetaldehyde,HAP,81.1546,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,85018,Phenanthrene,HAP,1.363246,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,107028,Acrolein,HAP,18.518178,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,129000,Pyrene,HAP,.1257416,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,18540299,Chromium (VI),HAP,.000009693604,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,205992,Benzo[b]Fluoranthene,HAP,.004151264,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,218019,Chrysene,HAP,.011248846,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,120127,Anthracene,HAP,.1153926,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,86737,Fluorene,HAP,.9268008,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,83329,Acenaphthene,HAP,.005183266,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,NH3,Ammonia,CAP,.0000590232,TON,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.00002799592,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,207089,Benzo[k]Fluoranthene,HAP,.00003370442,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,540841,"2,2,4-Trimethylpentane",HAP,.0658334,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,CO,Carbon Monoxide,CAP,.1440071,TON,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,DIESEL-PM10,PM10-Primary from certain diesel engines,,.02518793,TON,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,NH3,Ammonia,CAP,.0003808966,TON,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.001199727,TON,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,120127,Anthracene,HAP,.007309874,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.0003639366,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,208968,Acenaphthylene,HAP,.0537172,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,120127,Anthracene,HAP,.0698562,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,208968,Acenaphthylene,HAP,.4389404,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,218019,Chrysene,HAP,.00649732,LB,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,CO,Carbon Monoxide,CAP,1.331493,TON,2017NEI_Apr2020
+03,VA,51,,51690,Martinsville city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,VOC,Volatile Organic Compounds,CAP,.3094826,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,1.186377,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,100414,Ethyl Benzene,HAP,369.8994,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,110543,Hexane,HAP,130.68816,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,120127,Anthracene,HAP,.5956566,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,123386,Propionaldehyde,HAP,8.408638,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,129000,Pyrene,HAP,1.238763,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,3.274398,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,7440020,Nickel,HAP,.0008487048,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,83329,Acenaphthene,HAP,.6469978,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,CO2,Carbon Dioxide,GHG,98.2226,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,540841,"2,2,4-Trimethylpentane",HAP,48.2192,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,7440382,Arsenic,HAP,.000070538,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,83329,Acenaphthene,HAP,.015887508,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,86737,Fluorene,HAP,.0321732,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,106990,"1,3-Butadiene",HAP,.035429,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,50328,Benzo[a]Pyrene,HAP,.0006250964,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,56553,Benz[a]Anthracene,HAP,.0002894466,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,NOX,Nitrogen Oxides,CAP,.000210519,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.0006118487,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.0002458408,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,85018,Phenanthrene,HAP,.0017216832,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,218019,Chrysene,HAP,.57769,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,7439965,Manganese,HAP,.00145251,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,75070,Acetaldehyde,HAP,71.41644,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,129000,Pyrene,HAP,3.213244,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,8.928282,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,208968,Acenaphthylene,HAP,7.67289,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,50000,Formaldehyde,HAP,273.96,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,CO2,Carbon Dioxide,GHG,413.9729,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,NH3,Ammonia,CAP,.006249573,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,100425,Styrene,HAP,9.267036,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,108883,Toluene,HAP,458.5022,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,110543,Hexane,HAP,57.32406,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,129000,Pyrene,HAP,.274529,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,18540299,Chromium (VI),HAP,.000002208034,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.2942052,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.006771838,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,540841,"2,2,4-Trimethylpentane",HAP,462.0224,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.0346559,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,NOX,Nitrogen Oxides,CAP,.09003818,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.3092727,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260007022,Mobile - Non-Road Equipment - Gasoline,,A,R,1330207,Xylenes (Mixed Isomers),HAP,4.63621,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260007022,Mobile - Non-Road Equipment - Gasoline,,A,R,208968,Acenaphthylene,HAP,.010740968,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260007022,Mobile - Non-Road Equipment - Gasoline,,A,R,7440382,Arsenic,HAP,.000005915192,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260007022,Mobile - Non-Road Equipment - Gasoline,,A,R,75070,Acetaldehyde,HAP,.1960902,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260007022,Mobile - Non-Road Equipment - Gasoline,,A,R,83329,Acenaphthene,HAP,.002328572,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2260007022,Mobile - Non-Road Equipment - Gasoline,,A,R,85018,Phenanthrene,HAP,.01315244,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,108883,Toluene,HAP,719.0804,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,18540299,Chromium (VI),HAP,.00003515436,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,208968,Acenaphthylene,HAP,.9922624,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,7439965,Manganese,HAP,.004346356,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,91203,Naphthalene,HAP,11.317162,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.03532479,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,SO2,Sulfur Dioxide,CAP,.01177268,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,108883,Toluene,HAP,1777.0704,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,CH4,Methane,GHG,1.065567,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.4323021,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.5489883,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,108883,Toluene,HAP,3792.064,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,120127,Anthracene,HAP,1.0693732,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,1330207,Xylenes (Mixed Isomers),HAP,5598.738,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,50000,Formaldehyde,HAP,733.3292,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,50328,Benzo[a]Pyrene,HAP,.6644256,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,7439965,Manganese,HAP,.0289756,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,CO2,Carbon Dioxide,GHG,4667.1,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,NOX,Nitrogen Oxides,CAP,9.695077,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,18540299,Chromium (VI),HAP,.00009395766,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,207089,Benzo[k]Fluoranthene,HAP,.2261974,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,CH4,Methane,GHG,1.281575,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,CO,Carbon Monoxide,CAP,342.2489,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,CO2,Carbon Dioxide,GHG,1874.464,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.1584978,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,71432,Benzene,HAP,1255.9344,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,7439976,Mercury,HAP,.000844295,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,7440020,Nickel,HAP,.013068658,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,106990,"1,3-Butadiene",HAP,223.9772,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.794964,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,208968,Acenaphthylene,HAP,3.281386,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265007022,Mobile - Non-Road Equipment - Gasoline,,A,R,100414,Ethyl Benzene,HAP,.1838184,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265007022,Mobile - Non-Road Equipment - Gasoline,,A,R,110543,Hexane,HAP,.213663,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265007022,Mobile - Non-Road Equipment - Gasoline,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.0000731407,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265007022,Mobile - Non-Road Equipment - Gasoline,,A,R,206440,Fluoranthene,HAP,.0003943348,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265007022,Mobile - Non-Road Equipment - Gasoline,,A,R,207089,Benzo[k]Fluoranthene,HAP,.00006253086,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265007022,Mobile - Non-Road Equipment - Gasoline,,A,R,7439965,Manganese,HAP,.000004480374,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265007022,Mobile - Non-Road Equipment - Gasoline,,A,R,7440382,Arsenic,HAP,.000010426736,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265007022,Mobile - Non-Road Equipment - Gasoline,,A,R,83329,Acenaphthene,HAP,.0002730912,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2265007022,Mobile - Non-Road Equipment - Gasoline,,A,R,CO,Carbon Monoxide,CAP,.1963692,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,107028,Acrolein,HAP,1.2341426,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,7439965,Manganese,HAP,.0005398168,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,208968,Acenaphthylene,HAP,.0655604,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,85018,Phenanthrene,HAP,.181265,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,CH4,Methane,GHG,1.774755,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,1.294389,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2267004044,Mobile - Non-Road Equipment - Other,,A,R,83329,Acenaphthene,HAP,.00013966518,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2267004044,Mobile - Non-Road Equipment - Other,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.005588694,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2267004044,Mobile - Non-Road Equipment - Other,,A,R,SO2,Sulfur Dioxide,CAP,.0002616931,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2267006022,Mobile - Non-Road Equipment - Other,,A,R,129000,Pyrene,HAP,.002715192,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2267006022,Mobile - Non-Road Equipment - Other,,A,R,208968,Acenaphthylene,HAP,.001923696,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2267006022,Mobile - Non-Road Equipment - Other,,A,R,83329,Acenaphthene,HAP,.0008815796,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2267006022,Mobile - Non-Road Equipment - Other,,A,R,CH4,Methane,GHG,.0520755,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268002022,Mobile - Non-Road Equipment - Other,,A,R,7440020,Nickel,HAP,.000005645598,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268002022,Mobile - Non-Road Equipment - Other,,A,R,86737,Fluorene,HAP,.000016035396,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268002022,Mobile - Non-Road Equipment - Other,,A,R,91203,Naphthalene,HAP,.00004930556,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268002022,Mobile - Non-Road Equipment - Other,,A,R,SO2,Sulfur Dioxide,CAP,.000001094547,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268002022,Mobile - Non-Road Equipment - Other,,A,R,123386,Propionaldehyde,HAP,.0780218,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,108883,Toluene,HAP,2.910428,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,1330207,Xylenes (Mixed Isomers),HAP,3.4664,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,71432,Benzene,HAP,5.686076,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,7440382,Arsenic,HAP,.026598,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,83329,Acenaphthene,HAP,.00859275,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,NOX,Nitrogen Oxides,CAP,3.927961,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.1859615,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,VOC,Volatile Organic Compounds,CAP,2.105954,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,CO,Carbon Monoxide,CAP,2.365513,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,NOX,Nitrogen Oxides,CAP,.5982732,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.001268886,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,50328,Benzo[a]Pyrene,HAP,.1365202,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,56553,Benz[a]Anthracene,HAP,.4085314,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,71432,Benzene,HAP,1585.5202,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,13.04839,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.8323311,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,100414,Ethyl Benzene,HAP,35.64564,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,108883,Toluene,HAP,205.1848,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,2.491941,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,NH3,Ammonia,CAP,.1151297,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,NOX,Nitrogen Oxides,CAP,48.6553,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,206440,Fluoranthene,HAP,.0293926,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.05676075,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,106990,"1,3-Butadiene",HAP,.3523122,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,1330207,Xylenes (Mixed Isomers),HAP,2.45885,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,107028,Acrolein,HAP,34.3867,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,110543,Hexane,HAP,2.416234,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,18540299,Chromium (VI),HAP,.000015060474,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.008162574,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.003661738,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,205992,Benzo[b]Fluoranthene,HAP,.005578256,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,208968,Acenaphthylene,HAP,1.2047982,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,50328,Benzo[a]Pyrene,HAP,.003899292,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,56553,Benz[a]Anthracene,HAP,.013060458,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,7439976,Mercury,HAP,.00004389424,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.5479812,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,VOC,Volatile Organic Compounds,CAP,.7816536,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.006804568,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,1.027226,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270007022,Mobile - Non-Road Equipment - Diesel,,A,R,7440020,Nickel,HAP,.000130904,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270007022,Mobile - Non-Road Equipment - Diesel,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.00194687,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270007022,Mobile - Non-Road Equipment - Diesel,,A,R,NH3,Ammonia,CAP,.0001617545,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270007022,Mobile - Non-Road Equipment - Diesel,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.0000337356,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270007022,Mobile - Non-Road Equipment - Diesel,,A,R,107028,Acrolein,HAP,.0755006,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270007022,Mobile - Non-Road Equipment - Diesel,,A,R,123386,Propionaldehyde,HAP,.089144,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270007022,Mobile - Non-Road Equipment - Diesel,,A,R,129000,Pyrene,HAP,.0008259662,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2270007022,Mobile - Non-Road Equipment - Diesel,,A,R,50328,Benzo[a]Pyrene,HAP,.00003337624,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2282005022,Mobile - Non-Road Equipment - Gasoline,,A,R,120127,Anthracene,HAP,1.9247358,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2282005022,Mobile - Non-Road Equipment - Gasoline,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.4838794,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2282005022,Mobile - Non-Road Equipment - Gasoline,,A,R,50000,Formaldehyde,HAP,406.7784,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2282005022,Mobile - Non-Road Equipment - Gasoline,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.0002339843,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2282020022,Mobile - Non-Road Equipment - Diesel,,A,R,218019,Chrysene,HAP,.009224092,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2282020022,Mobile - Non-Road Equipment - Diesel,,A,R,50000,Formaldehyde,HAP,252.2836,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2282020022,Mobile - Non-Road Equipment - Diesel,,A,R,7440020,Nickel,HAP,.010984564,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2282020022,Mobile - Non-Road Equipment - Diesel,,A,R,91203,Naphthalene,HAP,3.990744,LB,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2282020022,Mobile - Non-Road Equipment - Diesel,,A,R,CO,Carbon Monoxide,CAP,1.845607,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2282020022,Mobile - Non-Road Equipment - Diesel,,A,R,DIESEL-PM10,PM10-Primary from certain diesel engines,,.2030339,TON,2017NEI_Apr2020
+03,VA,51,,51700,Newport News city,NR,,2282020022,Mobile - Non-Road Equipment - Diesel,,A,R,SO2,Sulfur Dioxide,CAP,.00858362,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,CH4,Methane,GHG,.2268788,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,110543,Hexane,HAP,171.4305,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,18540299,Chromium (VI),HAP,.000008025734,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,207089,Benzo[k]Fluoranthene,HAP,.8595094,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,50328,Benzo[a]Pyrene,HAP,1.5948082,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,205992,Benzo[b]Fluoranthene,HAP,.007415356,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,207089,Benzo[k]Fluoranthene,HAP,.007415356,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,56553,Benz[a]Anthracene,HAP,.006443842,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.001647031,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.006425854,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,100425,Styrene,HAP,.0377902,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,106990,"1,3-Butadiene",HAP,.0618316,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,110543,Hexane,HAP,.1081828,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,1330207,Xylenes (Mixed Isomers),HAP,.9984794,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,50000,Formaldehyde,HAP,.0996276,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,50328,Benzo[a]Pyrene,HAP,.001090933,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,7440020,Nickel,HAP,.0000012655198,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,NH3,Ammonia,CAP,.000002398695,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.0005074242,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,71432,Benzene,HAP,623.664,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,7439965,Manganese,HAP,.0018409804,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.0008811288,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,123386,Propionaldehyde,HAP,10.424546,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,1.822175,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,208968,Acenaphthylene,HAP,3.842486,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,50328,Benzo[a]Pyrene,HAP,1.8001,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,CH4,Methane,GHG,1.391432,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,CO2,Carbon Dioxide,GHG,722.4748,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,207089,Benzo[k]Fluoranthene,HAP,.4073666,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,218019,Chrysene,HAP,.3128498,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,7440020,Nickel,HAP,.000805554,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.7716856,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.09090081,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.3546475,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,SO2,Sulfur Dioxide,CAP,.001718999,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,86737,Fluorene,HAP,.7494844,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,106990,"1,3-Butadiene",HAP,89.04828,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,120127,Anthracene,HAP,.2457002,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,123386,Propionaldehyde,HAP,2.944586,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,1330207,Xylenes (Mixed Isomers),HAP,654.3008,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,205992,Benzo[b]Fluoranthene,HAP,.0861548,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,83329,Acenaphthene,HAP,.2865524,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,106990,"1,3-Butadiene",HAP,69.27186,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,107028,Acrolein,HAP,2.508312,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.4868966,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,205992,Benzo[b]Fluoranthene,HAP,.109902,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,207089,Benzo[k]Fluoranthene,HAP,.109902,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,50000,Formaldehyde,HAP,98.32136,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,7439965,Manganese,HAP,.00932782,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.08383085,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,100425,Styrene,HAP,389.9094,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,206440,Fluoranthene,HAP,3.19152,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,71432,Benzene,HAP,3020.35,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,91203,Naphthalene,HAP,112.99532,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,CO2,Carbon Dioxide,GHG,7244.444,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,207089,Benzo[k]Fluoranthene,HAP,.6144576,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,91203,Naphthalene,HAP,109.39258,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,CO,Carbon Monoxide,CAP,1359.73,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.6018916,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,208968,Acenaphthylene,HAP,4.809552,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.0005288427,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,NOX,Nitrogen Oxides,CAP,13.04543,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.781176,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,207089,Benzo[k]Fluoranthene,HAP,.5646558,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,7440382,Arsenic,HAP,.0842688,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,107028,Acrolein,HAP,1.6232764,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,120127,Anthracene,HAP,.000415205,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.00006301914,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,218019,Chrysene,HAP,.0003396806,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,86737,Fluorene,HAP,.0013625462,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,NOX,Nitrogen Oxides,CAP,.7495292,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.006356964,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,107028,Acrolein,HAP,33.85098,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,56553,Benz[a]Anthracene,HAP,.012299744,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.006917343,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,1.080835,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267004044,Mobile - Non-Road Equipment - Other,,A,R,18540299,Chromium (VI),HAP,.000013828184,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267004044,Mobile - Non-Road Equipment - Other,,A,R,CO,Carbon Monoxide,CAP,1.137198,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267004044,Mobile - Non-Road Equipment - Other,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.0009022002,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267006022,Mobile - Non-Road Equipment - Other,,A,R,83329,Acenaphthene,HAP,.00231234,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2267006022,Mobile - Non-Road Equipment - Other,,A,R,218019,Chrysene,HAP,.0012865046,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2268002022,Mobile - Non-Road Equipment - Other,,A,R,7440020,Nickel,HAP,.000007425696,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,120127,Anthracene,HAP,.002391562,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,123386,Propionaldehyde,HAP,28.58398,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,208968,Acenaphthylene,HAP,.007902632,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,218019,Chrysene,HAP,.002242662,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,75070,Acetaldehyde,HAP,56.98114,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,120127,Anthracene,HAP,.002179164,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,7439965,Manganese,HAP,.002142104,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,85018,Phenanthrene,HAP,.015728468,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.03598084,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,83329,Acenaphthene,HAP,35.30044,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,17.16264,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,3.914775,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,22.97358,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,107028,Acrolein,HAP,1184.3018,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,206440,Fluoranthene,HAP,6.578646,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.0123089,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,1330207,Xylenes (Mixed Isomers),HAP,44.64656,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.0300318,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,206440,Fluoranthene,HAP,.4589852,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,56553,Benz[a]Anthracene,HAP,.038014,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,83329,Acenaphthene,HAP,1.8807422,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,129000,Pyrene,HAP,.0512022,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,1330207,Xylenes (Mixed Isomers),HAP,4.291244,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,207089,Benzo[k]Fluoranthene,HAP,.0013192878,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,71432,Benzene,HAP,16.04457,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,7440382,Arsenic,HAP,.0008930714,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270004022,Mobile - Non-Road Equipment - Diesel,,A,R,NOX,Nitrogen Oxides,CAP,1.717475,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,106990,"1,3-Butadiene",HAP,5.069558,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,540841,"2,2,4-Trimethylpentane",HAP,21.07856,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270004044,Mobile - Non-Road Equipment - Diesel,,A,R,DIESEL-PM25,PM25-Primary from certain diesel engines,,.9563496,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,83329,Acenaphthene,HAP,5.693214,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,CO2,Carbon Dioxide,GHG,4398.351,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,DIESEL-PM10,PM10-Primary from certain diesel engines,,2.777696,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,2.777696,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,100414,Ethyl Benzene,HAP,52.54236,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,108883,Toluene,HAP,165.85842,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,110543,Hexane,HAP,12.763112,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,1330207,Xylenes (Mixed Isomers),HAP,138.28308,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,206440,Fluoranthene,HAP,.665527,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,540841,"2,2,4-Trimethylpentane",HAP,59.63796,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2282005022,Mobile - Non-Road Equipment - Gasoline,,A,R,100414,Ethyl Benzene,HAP,2750.226,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2282005022,Mobile - Non-Road Equipment - Gasoline,,A,R,129000,Pyrene,HAP,7.898332,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2282005022,Mobile - Non-Road Equipment - Gasoline,,A,R,50000,Formaldehyde,HAP,864.4044,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2282005022,Mobile - Non-Road Equipment - Gasoline,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.9944326,TON,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2282020022,Mobile - Non-Road Equipment - Diesel,,A,R,1330207,Xylenes (Mixed Isomers),HAP,18.704298,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2282020022,Mobile - Non-Road Equipment - Diesel,,A,R,207089,Benzo[k]Fluoranthene,HAP,.0021953,LB,2017NEI_Apr2020
+03,VA,51,,51710,Norfolk city,NR,,2282020022,Mobile - Non-Road Equipment - Diesel,,A,R,7439976,Mercury,HAP,.00004595568,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,91203,Naphthalene,HAP,4.003642,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,CO2,Carbon Dioxide,GHG,11.66305,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.1408715,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,50000,Formaldehyde,HAP,9.90769,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,85018,Phenanthrene,HAP,.4340208,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,206440,Fluoranthene,HAP,.0003308424,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,50328,Benzo[a]Pyrene,HAP,.0003808688,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.0001771204,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.0001497622,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,7439976,Mercury,HAP,.00000274376,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,CO,Carbon Monoxide,CAP,1.046327,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.03927926,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.0000180684,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,85018,Phenanthrene,HAP,.0985052,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,NH3,Ammonia,CAP,.0000715719,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,100414,Ethyl Benzene,HAP,12.019942,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,129000,Pyrene,HAP,.0337536,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,7440020,Nickel,HAP,.00003776034,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,129000,Pyrene,HAP,.0437322,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,56553,Benz[a]Anthracene,HAP,.007779038,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,86737,Fluorene,HAP,.0529792,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,CO2,Carbon Dioxide,GHG,83.36333,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.01043927,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,SO2,Sulfur Dioxide,CAP,.001370854,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,VOC,Volatile Organic Compounds,CAP,.4591703,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,100414,Ethyl Benzene,HAP,3.833176,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,18540299,Chromium (VI),HAP,.000002079564,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,CO,Carbon Monoxide,CAP,3.251634,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,7440020,Nickel,HAP,.0002892482,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.00000832526,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,107028,Acrolein,HAP,.4913538,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,1330207,Xylenes (Mixed Isomers),HAP,149.26964,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,50000,Formaldehyde,HAP,19.25996,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,85018,Phenanthrene,HAP,.236784,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,91203,Naphthalene,HAP,2.267388,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,110543,Hexane,HAP,49.60054,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,540841,"2,2,4-Trimethylpentane",HAP,172.28212,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,7440020,Nickel,HAP,.001909527,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,7440382,Arsenic,HAP,.0039501,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,CH4,Methane,GHG,.1900071,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,SO2,Sulfur Dioxide,CAP,.004504035,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,129000,Pyrene,HAP,.0001738615,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,206440,Fluoranthene,HAP,.00009017916,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,85018,Phenanthrene,HAP,.0002716298,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,CH4,Methane,GHG,.003407888,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,7439976,Mercury,HAP,.00012535172,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,83329,Acenaphthene,HAP,.0007734012,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.01102001,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,NOX,Nitrogen Oxides,CAP,.6232522,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,SO2,Sulfur Dioxide,CAP,.001409126,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.0001906679,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,VOC,Volatile Organic Compounds,CAP,.09474619,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,206440,Fluoranthene,HAP,.0012647836,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267006022,Mobile - Non-Road Equipment - Other,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.00001134308,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267006022,Mobile - Non-Road Equipment - Other,,A,R,91203,Naphthalene,HAP,.000583495,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2267006022,Mobile - Non-Road Equipment - Other,,A,R,NOX,Nitrogen Oxides,CAP,.1659365,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2268002022,Mobile - Non-Road Equipment - Other,,A,R,SO2,Sulfur Dioxide,CAP,.0000001299676,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2268002022,Mobile - Non-Road Equipment - Other,,A,R,VOC,Volatile Organic Compounds,CAP,.0003027577,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2268002022,Mobile - Non-Road Equipment - Other,,A,R,120127,Anthracene,HAP,.000000712809,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2268002022,Mobile - Non-Road Equipment - Other,,A,R,18540299,Chromium (VI),HAP,.00000000481254,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,100414,Ethyl Benzene,HAP,.00433077,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,7440382,Arsenic,HAP,.0003251922,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2268003022,Mobile - Non-Road Equipment - Other,,A,R,NOX,Nitrogen Oxides,CAP,.04802395,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,123386,Propionaldehyde,HAP,1.2843644,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,1330207,Xylenes (Mixed Isomers),HAP,.069087,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,7439965,Manganese,HAP,.00010041108,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,75070,Acetaldehyde,HAP,2.560336,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2268006022,Mobile - Non-Road Equipment - Other,,A,R,83329,Acenaphthene,HAP,.00013479404,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,7439965,Manganese,HAP,.0240972,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,CH4,Methane,GHG,.1248185,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.09883183,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,123386,Propionaldehyde,HAP,137.02916,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,1330207,Xylenes (Mixed Isomers),HAP,83.7852,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,208968,Acenaphthylene,HAP,4.293984,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,218019,Chrysene,HAP,.064945,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270002022,Mobile - Non-Road Equipment - Diesel,,A,R,540841,"2,2,4-Trimethylpentane",HAP,40.3385,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,107028,Acrolein,HAP,1.662381,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.0008277892,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.0004446442,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,71432,Benzene,HAP,3.499256,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,7440020,Nickel,HAP,.0013981376,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,91203,Naphthalene,HAP,.3418216,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,DIESEL-PM25,PM25-Primary from certain diesel engines,,.0398297,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270003022,Mobile - Non-Road Equipment - Diesel,,A,R,VOC,Volatile Organic Compounds,CAP,.04090557,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,205992,Benzo[b]Fluoranthene,HAP,.0012453682,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,208968,Acenaphthylene,HAP,.2532348,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,50328,Benzo[a]Pyrene,HAP,.000878964,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,540841,"2,2,4-Trimethylpentane",HAP,2.79553,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,108883,Toluene,HAP,7.774612,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,18540299,Chromium (VI),HAP,.000002866604,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.0008366274,LB,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,DIESEL-PM10,PM10-Primary from certain diesel engines,,.1302045,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.0001439424,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.02218485,TON,2017NEI_Apr2020
+03,VA,51,,51720,Norton city,NR,,2270006022,Mobile - Non-Road Equipment - Diesel,,A,R,SO2,Sulfur Dioxide,CAP,.001753945,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,206440,Fluoranthene,HAP,.0284282,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,50000,Formaldehyde,HAP,2.169458,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,86737,Fluorene,HAP,.034066,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,91203,Naphthalene,HAP,.876666,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,CO,Carbon Monoxide,CAP,.9209387,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260002022,Mobile - Non-Road Equipment - Gasoline,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.0335285,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,205992,Benzo[b]Fluoranthene,HAP,.0017812662,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,207089,Benzo[k]Fluoranthene,HAP,.0017812662,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.00007730892,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,56553,Benz[a]Anthracene,HAP,.0015478946,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,7440020,Nickel,HAP,.000003633204,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,75070,Acetaldehyde,HAP,.1889952,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,CH4,Methane,GHG,.001029901,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260003022,Mobile - Non-Road Equipment - Gasoline,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.000001624132,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,CO2,Carbon Dioxide,GHG,.00416419,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.000003322692,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,SO2,Sulfur Dioxide,CAP,.00000006824599,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004022,Mobile - Non-Road Equipment - Gasoline,,A,R,108883,Toluene,HAP,.0292868,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,100414,Ethyl Benzene,HAP,99.39338,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,86737,Fluorene,HAP,.2807422,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,91203,Naphthalene,HAP,7.229806,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,NH3,Ammonia,CAP,.0006550538,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004033,Mobile - Non-Road Equipment - Gasoline,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.2940618,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,100425,Styrene,HAP,4.551792,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,106990,"1,3-Butadiene",HAP,7.327032,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,107028,Acrolein,HAP,.8190936,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,110543,Hexane,HAP,20.98882,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,120127,Anthracene,HAP,.0685766,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,129000,Pyrene,HAP,.1432656,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.1491344,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,207089,Benzo[k]Fluoranthene,HAP,.078984,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,7440020,Nickel,HAP,.00014700844,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,85018,Phenanthrene,HAP,.419848,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,91203,Naphthalene,HAP,3.861908,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.01756727,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,NH3,Ammonia,CAP,.0002786433,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260004044,Mobile - Non-Road Equipment - Gasoline,,A,R,7439965,Manganese,HAP,.00013067412,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,83329,Acenaphthene,HAP,.0346972,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,CH4,Methane,GHG,.01869544,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.03324813,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,107028,Acrolein,HAP,.3838636,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2260006022,Mobile - Non-Road Equipment - Gasoline,,A,R,123386,Propionaldehyde,HAP,.4370734,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,100425,Styrene,HAP,1.017115,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,540841,"2,2,4-Trimethylpentane",HAP,10.390476,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,CO,Carbon Monoxide,CAP,3.800558,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265002022,Mobile - Non-Road Equipment - Gasoline,,A,R,NOX,Nitrogen Oxides,CAP,.04870855,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,50000,Formaldehyde,HAP,23.66806,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,50328,Benzo[a]Pyrene,HAP,.0435346,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,NH3,Ammonia,CAP,.004777887,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,205992,Benzo[b]Fluoranthene,HAP,.0264112,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265003022,Mobile - Non-Road Equipment - Gasoline,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.0000211882,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,106990,"1,3-Butadiene",HAP,17.305474,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,120127,Anthracene,HAP,.047748,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,56553,Benz[a]Anthracene,HAP,.016678976,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,75070,Acetaldehyde,HAP,12.518558,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,CH4,Methane,GHG,.1180451,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004022,Mobile - Non-Road Equipment - Gasoline,,A,R,CO2,Carbon Dioxide,GHG,185.0771,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,71432,Benzene,HAP,782.3456,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.016503,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004033,Mobile - Non-Road Equipment - Gasoline,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.0000948448,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,56553,Benz[a]Anthracene,HAP,.00969128,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,7440382,Arsenic,HAP,.0012053458,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,85018,Phenanthrene,HAP,.14711,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,91203,Naphthalene,HAP,1.4024376,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,107028,Acrolein,HAP,.3037882,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,123386,Propionaldehyde,HAP,.2774074,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,1330207,Xylenes (Mixed Isomers),HAP,99.36318,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265004044,Mobile - Non-Road Equipment - Gasoline,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.015376788,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,107028,Acrolein,HAP,1.9981602,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,18540299,Chromium (VI),HAP,.00002745726,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,218019,Chrysene,HAP,.0512886,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,7439965,Manganese,HAP,.003394716,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,86737,Fluorene,HAP,.3595798,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.03365706,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2265006022,Mobile - Non-Road Equipment - Gasoline,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.07698603,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.0000218819,TON,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2267002022,Mobile - Non-Road Equipment - Other,,A,R,208968,Acenaphthylene,HAP,.00002756558,LB,2017NEI_Apr2020
+03,VA,51,,51730,Petersburg city,NR,,2267003022,Mobile - Non-Road Equipment - Other,,A,R,106990,"1,3-Butadiene",HAP,.589547,LB,2017NEI_Apr2020

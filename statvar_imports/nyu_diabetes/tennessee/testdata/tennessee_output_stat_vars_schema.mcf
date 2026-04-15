@@ -1,0 +1,21 @@
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_DiabetesMellitus
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Diabetes Mellitus"
+isProvisional: dcs:True
+
+Node: dcid:causeOfDeath
+typeOf: dcs:Property
+name: "causeOfDeath"
+rangeIncludes: dcid:CauseOfDeathAndDisabilityEnum,dcid:ICD10_113CausesOfDeath
+
+Node: dcid:AgeAdjusted_Count_Person_DiabetesMellitus
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ Diabetes Mellitus"
+isProvisional: dcs:True
+

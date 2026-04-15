@@ -20,6 +20,7 @@ import shapely
 import sys
 import tempfile
 import unittest
+from unittest import mock
 import pandas as pd
 
 from absl import logging
@@ -201,3 +202,99 @@ class ProcessEventsTest(unittest.TestCase):
         self.assertEqual(1, new_event_pvs['AffectedPlaceCount'])
         self.assertEqual('floodEvent/2023-01_0x89c2f90000000000',
                          new_event_pvs['dcid'])
+
+    @mock.patch('process_events.dc_api_batched_wrapper')
+    @mock.patch('process_events.get_datacommons_client')
+    def test_prefetch_placeid_property_uses_v2_client(
+            self, mock_get_datacommons_client, mock_dc_api_batched_wrapper):
+        events_processor = GeoEventsProcessor(self._config)
+        mock_client = mock.Mock()
+        mock_get_datacommons_client.return_value = mock_client
+
+        def _mock_v2_property_response(**kwargs):
+            prop = kwargs['args']['properties']
+            if prop == 'latitude':
+                return {
+                    'geoId/06': {
+                        'arcs': {
+                            'latitude': {
+                                'nodes': [{
+                                    'value': '37.148573'
+                                }]
+                            }
+                        }
+                    }
+                }
+            if prop == 'longitude':
+                return {
+                    'geoId/06': {
+                        'arcs': {
+                            'longitude': {
+                                'nodes': [{
+                                    'value': '-119.5406515'
+                                }]
+                            }
+                        }
+                    }
+                }
+            return {}
+
+        mock_dc_api_batched_wrapper.side_effect = _mock_v2_property_response
+
+        events_processor.prefetch_placeid_property('latitude',
+                                                   ['dcid:geoId/06'])
+        events_processor.prefetch_placeid_property('longitude',
+                                                   ['dcid:geoId/06'])
+
+        mock_dc_api_batched_wrapper.assert_any_call(
+            function=mock_client.node.fetch_property_values,
+            dcids=['geoId/06'],
+            args={
+                'properties': 'latitude',
+            },
+            dcid_arg_kw='node_dcids',
+            config=self._config)
+        mock_dc_api_batched_wrapper.assert_any_call(
+            function=mock_client.node.fetch_property_values,
+            dcids=['geoId/06'],
+            args={
+                'properties': 'longitude',
+            },
+            dcid_arg_kw='node_dcids',
+            config=self._config)
+        self.assertEqual(['37.148573'],
+                         events_processor.get_place_property(
+                             'geoId/06', 'latitude'))
+        self.assertEqual(['-119.5406515'],
+                         events_processor.get_place_property(
+                             'geoId/06', 'longitude'))
+
+        lat, lng = events_processor._get_place_lat_lng('geoId/06')
+        self.assertAlmostEqual(37.148573, lat, places=6)
+        self.assertAlmostEqual(-119.5406515, lng, places=6)
+
+    @mock.patch('process_events.dc_api_batched_wrapper')
+    @mock.patch('process_events.get_datacommons_client')
+    def test_prefetch_placeid_property_negative_cache(
+            self, mock_get_datacommons_client, mock_dc_api_batched_wrapper):
+        events_processor = GeoEventsProcessor(self._config)
+        mock_client = mock.Mock()
+        mock_get_datacommons_client.return_value = mock_client
+        mock_dc_api_batched_wrapper.return_value = {}
+
+        events_processor.prefetch_placeid_property('typeOf', ['dcid:geoId/00'])
+        events_processor.prefetch_placeid_property('typeOf', ['dcid:geoId/00'])
+
+        mock_dc_api_batched_wrapper.assert_called_once_with(
+            function=mock_client.node.fetch_property_values,
+            dcids=['geoId/00'],
+            args={
+                'properties': 'typeOf',
+            },
+            dcid_arg_kw='node_dcids',
+            config=self._config)
+        self.assertIn('geoId/00',
+                      events_processor._place_property_cache['typeOf'])
+        self.assertEqual([],
+                         events_processor.get_place_property(
+                             'geoId/00', 'typeOf'))

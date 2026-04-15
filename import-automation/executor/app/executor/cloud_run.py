@@ -29,8 +29,8 @@ from google.protobuf import duration_pb2
 
 def create_or_update_cloud_run_job(project_id: str, location: str, job_id: str,
                                    image: str, mount_bucket: str,
-                                   env_vars: dict, args: list, resources: dict,
-                                   timeout: int) -> run_v2.Job:
+                                   mount_path: str, env_vars: dict, args: list,
+                                   resources: dict, timeout: int) -> run_v2.Job:
     """Creates a new cloud run job or updates an existing one.
 
   If the jobs exists, the container is updated with new image and environment
@@ -43,6 +43,7 @@ def create_or_update_cloud_run_job(project_id: str, location: str, job_id: str,
     job_id: Name of the job
     image: Container image URL such as 'gcr.io/your-project/your-image:latest'
     mount_bucket: Name of GCS bucket to mount as a volume
+    mount_path: Mount path for GCS bucket volume
     env_vars: dict of environment variables as {'VAR': '<value>'}
     args: list of command line arguments
     resources: cpu/memory resources
@@ -63,7 +64,7 @@ def create_or_update_cloud_run_job(project_id: str, location: str, job_id: str,
 
     res = run_v2.types.ResourceRequirements(limits=resources)
     mount = run_v2.types.VolumeMount(name='datcom-mount-volume',
-                                     mount_path='/mnt')
+                                     mount_path=mount_path)
     source = run_v2.GCSVolumeSource(bucket=mount_bucket)
     volume = run_v2.types.Volume(name='datcom-mount-volume', gcs=source)
     container = run_v2.Container(image=image,

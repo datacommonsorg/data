@@ -1,0 +1,7 @@
+parameter,value
+#places_within,country/MNG
+output_columns,"observationAbout,observationDate,value,variableMeasured"
+header_rows,1
+mapped_rows,1
+mapped_columns,1
+url,https://www.1212.mn/en/statcate/table-view/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_027V1.px

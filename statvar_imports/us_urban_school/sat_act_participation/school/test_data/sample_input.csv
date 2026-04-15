@@ -1,0 +1,100 @@
+YEAR,ncesid,JJ,LEA_STATE,LEA_STATE_NAME,LEAID,LEA_NAME,SCHID,SCH_NAME,COMBOKEY,SCH_SATACT_HI_M,SCH_SATACT_HI_F,SCH_SATACT_AM_M,SCH_SATACT_AM_F,SCH_SATACT_AS_M,SCH_SATACT_AS_F,SCH_SATACT_HP_M,SCH_SATACT_HP_F,SCH_SATACT_BL_M,SCH_SATACT_BL_F,SCH_SATACT_WH_M,SCH_SATACT_WH_F,SCH_SATACT_TR_M,SCH_SATACT_TR_F,TOT_SATACT_M,TOT_SATACT_F,SCH_SATACT_LEP_M,SCH_SATACT_LEP_F,SCH_SATACT_IDEA_M,SCH_SATACT_IDEA_F
+2021,010000201705,Yes,AL,Alabama,0100002,Alabama Youth Services,01705,Wallace Sch - Mt Meigs Campus,010000201705,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2021,010000201706,Yes,AL,Alabama,0100002,Alabama Youth Services,01706,Mcneel Sch - Vacca Campus,010000201706,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2021,010000299995,Yes,AL,Alabama,0100002,Alabama Youth Services,99995,Autauga Campus,010000299995,0,0,0,0,0,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0
+2021,010000500870,No,AL,Alabama,0100005,Albertville City,00870,Albertville Middle School,010000500870,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000500871,No,AL,Alabama,0100005,Albertville City,00871,Albertville High School,010000500871,83,99,0,0,1,1,0,0,12,7,91,82,2,6,189,195,39,21,18,9
+2021,010000500879,No,AL,Alabama,0100005,Albertville City,00879,Albertville Intermediate School,010000500879,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000500889,No,AL,Alabama,0100005,Albertville City,00889,Albertville Elementary School,010000500889,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000501616,No,AL,Alabama,0100005,Albertville City,01616,Albertville Kindergarten And Prek,010000501616,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000502150,No,AL,Alabama,0100005,Albertville City,02150,Albertville Primary School,010000502150,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000600193,No,AL,Alabama,0100006,Marshall County,00193,Kate Duncan Smith Dar Middle,010000600193,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000600872,No,AL,Alabama,0100006,Marshall County,00872,Asbury High School,010000600872,18,23,0,0,3,0,0,0,2,2,27,21,0,0,50,46,4,4,19,5
+2021,010000600876,No,AL,Alabama,0100006,Marshall County,00876,Claysville School,010000600876,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000600877,No,AL,Alabama,0100006,Marshall County,00877,Douglas Elementary School,010000600877,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000600878,No,AL,Alabama,0100006,Marshall County,00878,Douglas High School,010000600878,46,33,1,1,0,0,0,0,2,2,37,43,0,0,86,79,11,3,20,8
+2021,010000600880,No,AL,Alabama,0100006,Marshall County,00880,Brindlee Mountain Elementary School,010000600880,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000600883,No,AL,Alabama,0100006,Marshall County,00883,Kate D Smith Dar High School,010000600883,7,6,0,0,0,0,0,0,2,1,89,70,0,0,98,77,0,0,11,11
+2021,010000600887,No,AL,Alabama,0100006,Marshall County,00887,Brindlee Mountain Primary School,010000600887,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000601413,No,AL,Alabama,0100006,Marshall County,01413,Robert D Sloman Primary,010000601413,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000601585,No,AL,Alabama,0100006,Marshall County,01585,Brindlee Mountain High School,010000601585,7,3,0,0,0,0,0,0,2,1,45,73,0,0,54,77,1,0,11,6
+2021,010000601685,No,AL,Alabama,0100006,Marshall County,01685,Kate D Smith Dar Elementary School,010000601685,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000601812,No,AL,Alabama,0100006,Marshall County,01812,Douglas Middle School,010000601812,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000602209,No,AL,Alabama,0100006,Marshall County,02209,Asbury Elementary School,010000602209,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000700091,No,AL,Alabama,0100007,Hoover City,00091,Trace Crossings Elementary School,010000700091,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000700248,No,AL,Alabama,0100007,Hoover City,00248,Greystone Elementary School,010000700248,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000700251,No,AL,Alabama,0100007,Hoover City,00251,Hoover High School,010000700251,3,2,0,0,2,0,0,0,1,1,3,8,0,0,9,11,4,1,0,0
+2021,010000700337,No,AL,Alabama,0100007,Hoover City,00337,Berry Middle School,010000700337,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2021,010000700342,No,AL,Alabama,0100007,Hoover City,00342,South Shades Crest Elementary School,010000700342,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000701422,No,AL,Alabama,0100007,Hoover City,01422,Robert F Bumpus Middle School,010000701422,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000701456,No,AL,Alabama,0100007,Hoover City,01456,Spain Park High School,010000701456,8,16,0,0,17,9,0,0,39,31,127,114,13,16,204,186,15,15,23,19
+2021,010000701483,No,AL,Alabama,0100007,Hoover City,01483,Deer Valley Elementary School,010000701483,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000701738,No,AL,Alabama,0100007,Hoover City,01738,Bluff Park Elementary School,010000701738,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000701739,No,AL,Alabama,0100007,Hoover City,01739,Green Valley Elementary School,010000701739,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000701740,No,AL,Alabama,0100007,Hoover City,01740,Gwin Elementary School,010000701740,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000701741,No,AL,Alabama,0100007,Hoover City,01741,Ira F Simmons Middle School,010000701741,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000701742,No,AL,Alabama,0100007,Hoover City,01742,Rocky Ridge Elementary School,010000701742,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000701743,No,AL,Alabama,0100007,Hoover City,01743,Shades Mountain Elementary School,010000701743,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000702091,No,AL,Alabama,0100007,Hoover City,02091,Riverchase Elementary School,010000702091,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000702186,No,AL,Alabama,0100007,Hoover City,02186,Brocks Gap Intermediate School,010000702186,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000800303,No,AL,Alabama,0100008,Madison City,00303,Horizon Elementary School,010000800303,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000800495,No,AL,Alabama,0100008,Madison City,00495,Discovery Middle School,010000800495,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000800831,No,AL,Alabama,0100008,Madison City,00831,Bob Jones High School,010000800831,36,35,3,4,34,43,1,0,77,68,253,222,0,0,404,372,1,5,7,4
+2021,010000800839,No,AL,Alabama,0100008,Madison City,00839,Madison Elementary School,010000800839,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000800851,No,AL,Alabama,0100008,Madison City,00851,West Madison Elementary School,010000800851,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000801423,No,AL,Alabama,0100008,Madison City,01423,Heritage Elementary School,010000801423,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000801485,No,AL,Alabama,0100008,Madison City,01485,Rainbow Elementary School,010000801485,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000801798,No,AL,Alabama,0100008,Madison City,01798,Liberty Middle School,010000801798,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000802097,No,AL,Alabama,0100008,Madison City,02097,Columbia Elementary School,010000802097,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000802133,No,AL,Alabama,0100008,Madison City,02133,Mill Creek Elementary School,010000802133,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010000802198,No,AL,Alabama,0100008,Madison City,02198,James Clemens High School,010000802198,50,44,6,0,85,89,4,0,122,110,398,490,4,0,669,733,1,2,0,0
+2021,010000901403,No,AL,Alabama,0100009,Al Inst Deaf And Blind,01403,Alabama School For Deaf,010000901403,1,0,0,0,0,0,0,0,4,3,6,9,0,0,11,12,0,0,11,12
+2021,010000901404,No,AL,Alabama,0100009,Al Inst Deaf And Blind,01404,Alabama School For Blind,010000901404,1,0,0,0,0,0,0,0,3,5,8,4,0,0,12,9,1,0,13,9
+2021,010000901405,No,AL,Alabama,0100009,Al Inst Deaf And Blind,01405,Helen Keller School,010000901405,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2021,010001102094,No,AL,Alabama,0100011,Leeds City,02094,Leeds Elementary School,010001102094,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010001102095,No,AL,Alabama,0100011,Leeds City,02095,Leeds Middle School,010001102095,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010001102096,No,AL,Alabama,0100011,Leeds City,02096,Leeds High School,010001102096,9,6,0,0,0,1,0,0,18,16,37,35,0,0,64,58,12,6,11,8
+2021,010001102430,No,AL,Alabama,0100011,Leeds City,02430,Leeds Primary School,010001102430,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010001200123,No,AL,Alabama,0100012,Boaz City,00123,Boaz Middle School,010001200123,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010001200874,No,AL,Alabama,0100012,Boaz City,00874,Boaz High School,010001200874,0,0,31,21,1,2,1,1,6,0,67,81,3,0,109,105,6,6,2,0
+2021,010001200884,No,AL,Alabama,0100012,Boaz City,00884,Corley Elementary School,010001200884,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010001201630,No,AL,Alabama,0100012,Boaz City,01630,Boaz Intermediate School,010001201630,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010001201781,No,AL,Alabama,0100012,Boaz City,01781,Boaz Elementary School,010001201781,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010001300714,No,AL,Alabama,0100013,Trussville City,00714,Hewitttrussville Middle School,010001300714,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010001301498,No,AL,Alabama,0100013,Trussville City,01498,Paine Elementary School,010001301498,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010001301682,No,AL,Alabama,0100013,Trussville City,01682,Hewitttrussville High School,010001301682,0,0,0,1,5,7,0,0,26,31,169,143,2,9,202,191,1,1,24,31
+2021,010001302401,No,AL,Alabama,0100013,Trussville City,02401,Magnolia Elementary School,010001302401,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010001302402,No,AL,Alabama,0100013,Trussville City,02402,Cahaba Elementary School,010001302402,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010001802104,No,AL,Alabama,0100018,Alabama School Of Fine Arts,02104,Alabama School Of Fine Arts,010001802104,0,0,0,0,5,6,0,0,4,5,10,20,0,0,19,31,0,0,0,0
+2021,010001901830,No,AL,Alabama,0100019,United Ability,01830,United Ability,010001901830,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010002001831,No,AL,Alabama,0100020,Boyd School,01831,The Boyd School,010002001831,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2021,010002101832,No,AL,Alabama,0100021,Brewerporch Childrens Center,01832,Brewerporch Childrens Center,010002101832,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2021,010003000001,No,AL,Alabama,0100030,Alexander City,00001,Alexander City Middle School,010003000001,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010003000003,No,AL,Alabama,0100030,Alexander City,00003,Benjamin Russell High School,010003000003,6,6,0,0,6,2,0,0,50,49,76,116,0,0,138,173,0,0,24,11
+2021,010003000004,No,AL,Alabama,0100030,Alexander City,00004,Jim Pearson Elementary School,010003000004,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010003000005,No,AL,Alabama,0100030,Alexander City,00005,Nathaniel H Stephens Elementary School,010003000005,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010003000006,No,AL,Alabama,0100030,Alexander City,00006,William L Radney Elementary School,010003000006,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010003399998,No,AL,Alabama,0100033,Glenwood Mental Health Service,99998,Allan Cott,010003399998,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010003399999,No,AL,Alabama,0100033,Glenwood Mental Health Service,99999,Lakeview,010003399999,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010003501845,No,AL,Alabama,0100035,The Little Tree Preschool  Auburn,01845,Learning Tree Inc Mobile,010003501845,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010003501846,No,AL,Alabama,0100035,The Little Tree Preschool  Auburn,01846,Learning Tree Inc Webb,010003501846,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010003502105,No,AL,Alabama,0100035,The Little Tree Preschool  Auburn,02105,Learning Tree Inc Tallassee,010003502105,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2021,010003502370,No,AL,Alabama,0100035,The Little Tree Preschool  Auburn,02370,The Learning Tree  Birmingham,010003502370,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2021,010003602451,No,AL,Alabama,0100036,Lee County Youth Development Center,02451,Lee Co Youth Detention Ctr,010003602451,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2021,010003801849,No,AL,Alabama,0100038,Pathway Inc,01849,Pathway Inc,010003801849,0,0,0,0,0,0,0,0,1,2,3,4,0,0,4,6,0,0,1,1
+2021,010003802468,No,AL,Alabama,0100038,Pathway Inc,02468,Pathway At Baldwin,010003802468,0,0,0,0,0,0,0,0,0,4,1,4,0,0,1,8,0,0,2,2
+2021,010003901850,No,AL,Alabama,0100039,Presbyterian Home For Children,01850,Presbyterian Home For Children,010003901850,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1
+2021,010004101852,No,AL,Alabama,0100041,Developing Alabama Youth Prog,01852,Developing Alabama Youth Prog,010004101852,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2021,010004201853,No,AL,Alabama,0100042,Laurel Oaks Behavioral Health Center,01853,Laurel Oaks Behavioral Health Center,010004201853,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2021,010006000007,No,AL,Alabama,0100060,Andalusia City,00007,Andalusia High School,010006000007,0,0,0,0,4,3,0,0,19,18,63,74,0,0,86,95,2,3,5,3
+2021,010006000008,No,AL,Alabama,0100060,Andalusia City,00008,Andalusia Junior High,010006000008,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010006001467,No,AL,Alabama,0100060,Andalusia City,01467,Andalusia Elementary School,010006001467,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010009000011,No,AL,Alabama,0100090,Anniston City,00011,Anniston High School,010009000011,0,1,0,0,0,0,0,0,36,34,1,0,0,4,37,39,0,0,0,0
+2021,010009000017,No,AL,Alabama,0100090,Anniston City,00017,Golden Springs Elementary School,010009000017,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010009000020,No,AL,Alabama,0100090,Anniston City,00020,Randolph Park Elementary School,010009000020,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010009000021,No,AL,Alabama,0100090,Anniston City,00021,Tenth Street Elementary School,010009000021,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010009001246,Yes,AL,Alabama,0100090,Anniston City,01246,Anniston City Boot Camp School,010009001246,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2021,010009001725,No,AL,Alabama,0100090,Anniston City,01725,Anniston Middle School,010009001725,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010009001782,No,AL,Alabama,0100090,Anniston City,01782,Cobb Preparatory Academy,010009001782,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010010000022,No,AL,Alabama,0100100,Arab City,00022,Arab Elementary School,010010000022,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9
+2021,010010000025,No,AL,Alabama,0100100,Arab City,00025,Arab Primary School,010010000025,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9

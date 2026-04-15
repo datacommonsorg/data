@@ -1,0 +1,6 @@
+parameter,value
+,
+header_rows,1
+output_columns,"observationAbout,observationDate,variableMeasured,value"
+places_within,country/USA
+place_type,SchoolDistrict

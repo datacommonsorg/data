@@ -14,16 +14,15 @@
 """Tests for util.latlng_recon_geojson"""
 
 import json
-import os
+from pathlib import Path
 import sys
 import unittest
 from shapely import geometry
 from unittest import mock
 
-sys.path.append(
-    os.path.dirname(os.path.dirname(os.path.dirname(
-        os.path.abspath(__file__)))))
-import latlng_recon_geojson
+REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT))
+from util import latlng_recon_geojson
 
 _SC_COUNTY_GJ_STR = """
 {"type": "Polygon", "coordinates": [[[-122.202653, 37.363046], [-122.026107, 37.16681], [-121.575402, 36.893033], [-121.488949, 36.983148], [-121.215406, 36.961248], [-121.23711, 37.157204], [-121.399019, 37.150135], [-121.45575, 37.24944], [-121.409075, 37.380672], [-121.472952, 37.482333], [-122.115161, 37.46628], [-122.202653, 37.363046]]]}
@@ -46,8 +45,8 @@ def _mock_get_gj(place_type, parent_place):
 
 class LatlngReconGeojsonTest(unittest.TestCase):
 
-    @mock.patch('latlng_recon_geojson._get_geojsons')
-    @mock.patch('latlng_recon_geojson._get_continent_map')
+    @mock.patch('util.latlng_recon_geojson._get_geojsons')
+    @mock.patch('util.latlng_recon_geojson._get_continent_map')
     def test_main(self, mock_cmap, mock_gj):
         mock_cmap.return_value = {'country/USA': ['northamerica']}
         mock_gj.side_effect = _mock_get_gj

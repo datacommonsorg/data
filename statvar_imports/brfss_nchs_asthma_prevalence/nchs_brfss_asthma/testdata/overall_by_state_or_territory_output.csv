@@ -1,0 +1,13 @@
+observationAbout,observationDate,variableMeasured,value,unit,scalingFactor
+dcid:country/USA,2021,dcid:SampleSize_Percent_Person_WithAsthma,429912,,
+dcid:country/USA,2021,dcid:Percent_Person_WithAsthma,14.6,Percent,
+dcid:country/USA,2021,dcid:StandardError_Person_Adults_WithAsthma,0.12,Percent,100
+dcid:geoId/01,2021,dcid:SampleSize_Percent_Person_WithAsthma,4573,,
+dcid:geoId/01,2021,dcid:Percent_Person_WithAsthma,16.4,Percent,
+dcid:geoId/01,2021,dcid:StandardError_Person_Adults_WithAsthma,0.77,Percent,100
+dcid:geoId/02,2021,dcid:SampleSize_Percent_Person_WithAsthma,5466,,
+dcid:geoId/02,2021,dcid:Percent_Person_WithAsthma,14,Percent,
+dcid:geoId/02,2021,dcid:StandardError_Person_Adults_WithAsthma,0.72,Percent,100
+dcid:geoId/04,2021,dcid:SampleSize_Percent_Person_WithAsthma,10620,,
+dcid:geoId/04,2021,dcid:Percent_Person_WithAsthma,15,Percent,
+dcid:geoId/04,2021,dcid:StandardError_Person_Adults_WithAsthma,0.49,Percent,100

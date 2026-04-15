@@ -4,3 +4,4 @@ populationType: dcs:EconomicActivity
 activitySource: dcs:GrossDomesticProduction
 measuredProperty: dcs:amount
 measurementQualifier: dcs:InflationAdjusted
+statType: dcid:measuredValue

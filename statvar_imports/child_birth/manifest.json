@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "usa_child_birth",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.cdc.gov/nchs/nvss/vsrr/provisional-tables.html",
+            "provenance_description": "The data set contains USA birth data",
+            "scripts": [
+                "../../util/download_util_script.py --download_url=https://data.cdc.gov/api/views/hmz2-vwda/rows.csv?accessType=DOWNLOAD --output_folder=input_files/",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=pvmap.csv --config_file=metadata.csv --places_resolved_csv=places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/child_birth"
+            ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/child_birth.tmcf",
+                    "cleaned_csv": "output_files/child_birth.csv"
+                }
+            ],
+            "cron_schedule": "0 07 * * 2"
+        }
+    ]
+}

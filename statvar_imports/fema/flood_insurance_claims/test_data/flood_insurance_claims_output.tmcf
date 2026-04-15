@@ -1,0 +1,10 @@
+Node: E:nfip_output->E0
+observationDate: C:nfip_output->observationDate
+observationAbout: C:nfip_output->observationAbout
+value: C:nfip_output->value
+observationPeriod: C:nfip_output->observationPeriod
+unit: C:nfip_output->unit
+variableMeasured: C:nfip_output->variableMeasured
+#Aggregate: sum
+measurementMethod: dcs:dcAggregate/NFIPInsuranceClaims
+typeOf: dcs:StatVarObservation

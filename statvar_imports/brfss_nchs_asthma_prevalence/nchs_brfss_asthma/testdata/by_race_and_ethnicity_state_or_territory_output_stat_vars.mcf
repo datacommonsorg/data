@@ -1,0 +1,110 @@
+
+Node: dcid:Percent_Person_HispanicOrLatino_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+ethnicity: dcid:HispanicOrLatino
+healthOutcome: dcid:Asthma
+
+Node: dcid:Percent_Person_NotHispanicOrLatino_WithAsthma_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+ethnicity: dcid:NotHispanicOrLatino
+healthOutcome: dcid:Asthma
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:Percent_Person_NotHispanicOrLatino_WithAsthma_OtherRace
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+ethnicity: dcid:NotHispanicOrLatino
+healthOutcome: dcid:Asthma
+race: dcid:CDC_OtherRace
+
+Node: dcid:Percent_Person_NotHispanicOrLatino_WithAsthma_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+ethnicity: dcid:NotHispanicOrLatino
+healthOutcome: dcid:Asthma
+race: dcid:WhiteAlone
+
+Node: dcid:SampleSize_Count_Person_HispanicOrLatino_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+ethnicity: dcid:HispanicOrLatino
+healthOutcome: dcid:Asthma
+
+Node: dcid:SampleSize_Count_Person_NotHispanicOrLatino_WithAsthma_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+ethnicity: dcid:NotHispanicOrLatino
+healthOutcome: dcid:Asthma
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:SampleSize_Count_Person_NotHispanicOrLatino_WithAsthma_OtherRace
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+ethnicity: dcid:NotHispanicOrLatino
+healthOutcome: dcid:Asthma
+race: dcid:CDC_OtherRace
+
+Node: dcid:SampleSize_Count_Person_NotHispanicOrLatino_WithAsthma_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+ethnicity: dcid:NotHispanicOrLatino
+healthOutcome: dcid:Asthma
+race: dcid:WhiteAlone
+
+Node: dcid:StdError_Count_Person_HispanicOrLatino_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_HispanicOrLatino
+ethnicity: dcid:HispanicOrLatino
+healthOutcome: dcid:Asthma
+
+Node: dcid:StdError_Count_Person_NotHispanicOrLatino_WithAsthma_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_NotHispanicOrLatino_BlackOrAfricanAmericanAlone
+ethnicity: dcid:NotHispanicOrLatino
+healthOutcome: dcid:Asthma
+race: dcid:BlackOrAfricanAmericanAlone
+
+Node: dcid:StdError_Count_Person_NotHispanicOrLatino_WithAsthma_OtherRace
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_NotHispanicOrLatino_OtherRace
+ethnicity: dcid:NotHispanicOrLatino
+healthOutcome: dcid:Asthma
+race: dcid:CDC_OtherRace
+
+Node: dcid:StdError_Count_Person_NotHispanicOrLatino_WithAsthma_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_NotHispanicOrLatino_WhiteAlone
+ethnicity: dcid:NotHispanicOrLatino
+healthOutcome: dcid:Asthma
+race: dcid:WhiteAlone
+

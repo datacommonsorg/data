@@ -1,0 +1,8 @@
+Node: E:by_sex_and_state_or_territory_output->E0
+observationAbout: C:by_sex_and_state_or_territory_output->observationAbout
+observationDate: C:by_sex_and_state_or_territory_output->observationDate
+variableMeasured: C:by_sex_and_state_or_territory_output->variableMeasured
+value: C:by_sex_and_state_or_territory_output->value
+unit: C:by_sex_and_state_or_territory_output->unit
+scalingFactor: C:by_sex_and_state_or_territory_output->scalingFactor
+typeOf: dcs:StatVarObservation

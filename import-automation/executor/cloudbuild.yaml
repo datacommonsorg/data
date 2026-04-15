@@ -1,3 +1,17 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 # Builds the docker image of import executor, verifies using integration test,
 # and pushes it to artifact registry.
 # 
@@ -7,44 +21,69 @@
 steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', '${_DOCKER_IMAGE}:${COMMIT_SHA}', '-t', '${_DOCKER_IMAGE}:latest', '.']
+    id: 'build'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        # Use current timestamp to bust cache for git clone and other external dependencies.
+        docker build --build-arg CACHE_BUSTER=$(date +%s) -t ${_DOCKER_IMAGE}:${COMMIT_SHA} -t ${_DOCKER_IMAGE}:latest .
     dir: 'import-automation/executor'
     env: ['DOCKER_BUILDKIT=1']
 
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
+    id: 'push'
     args: ['push', '${_DOCKER_IMAGE}', '--all-tags']
 
-  # Install dependencies
-  - id: python_install
-    name: python:3.12.8
-    entrypoint: pip
-    args: ['install', '-r', 'requirements.txt', '--user']
-    dir: 'import-automation/executor'
-
   # Run import executor integration test
-  - name: python:3.12.8
-    entrypoint: python
-    args: ['verify_import.py']
+  - name: '${_DOCKER_IMAGE}:${COMMIT_SHA}'
+    id: 'integration-test'
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        python import_test.py
+    env:
+      - 'PROJECT_ID=$PROJECT_ID'
+      - 'GCS_BUCKET=${_GCS_BUCKET}'
+      - 'IMAGE_URI=${_DOCKER_IMAGE}:${COMMIT_SHA}'
     dir: 'import-automation/executor'
-    waitFor:
-    - python_install
+    waitFor: ['push']
+    secretEnv:
+      - DC_API_KEY
 
   # Run unit tests
-  - name: 'python:3.12.8'
+  - name: '${_DOCKER_IMAGE}:${COMMIT_SHA}'
+    id: 'unit-test'
     args:
       - '-c'
       - |
         ./run_tests.sh -a
     entrypoint: bash
-    waitFor:
-    - python_install
-  
+    waitFor: ['push']
+    secretEnv:
+      - DC_API_KEY
+
   # Tag image as stable and push
   - name: 'gcr.io/cloud-builders/docker'
+    id: 'tag'
     entrypoint: 'bash'
+    waitFor: ['integration-test', 'unit-test']
     args:
     - '-c'
     - |
       docker tag ${_DOCKER_IMAGE}:${COMMIT_SHA} ${_DOCKER_IMAGE}:stable \
       && docker push ${_DOCKER_IMAGE}:stable
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/${PROJECT_ID}/secrets/dc-api-key/versions/latest
+      env: DC_API_KEY
+
+substitutions:
+  _GCS_BUCKET: 'datcom-ci-test'
+  _DOCKER_IMAGE: 'us-docker.pkg.dev/${PROJECT_ID}/gcr.io/dc-import-executor'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

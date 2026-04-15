@@ -30,8 +30,7 @@ National
     2000 - 2009     Data is available in State File in the year 2000-2009
     2010 - 2020     Processed As Is
 
-Before running this module, run download.sh script, it downloads required
-input files, creates necessary folders for processing.
+This module downloads and processes the input files.
 Folder information
 input_files - downloaded files (from US census website) are placed here
 output_files - output files (mcf, tmcf and csv are written here)
@@ -1054,6 +1053,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
     except Exception as e:
         logging.fatal(f"Error while processing files {e}")
 
+    logging.info(f"No of files to be processed {total_files_to_process}")
     logging.info(f"No of files processed {processed_count}")
     if processed_count >= total_files_to_process & total_files_to_process > 0:
         final_df["Year"] = final_df["Year"].astype("int")
@@ -1118,22 +1118,22 @@ def download_files():
     if not os.path.exists(_INPUT_FILE_PATH):
         os.makedirs(_INPUT_FILE_PATH)
     try:
-        for file_to_dowload in _FILES_TO_DOWNLOAD:
+        for file_to_download in _FILES_TO_DOWNLOAD:
             file_name_to_save = None
-            url = file_to_dowload['download_path']
-            if 'file_name' in file_to_dowload and len(
-                    file_to_dowload['file_name'] > 5):
-                file_name_to_save = file_to_dowload['file_name']
+            url = file_to_download['download_path']
+            if 'file_name' in file_to_download and len(
+                    file_to_download['file_name']) > 5:
+                file_name_to_save = file_to_download['file_name']
             else:
                 file_name_to_save = url.split('/')[-1]
-            if 'file_path' in file_to_dowload:
+            if 'file_path' in file_to_download:
                 if not os.path.exists(
                         os.path.join(_INPUT_FILE_PATH,
-                                     file_to_dowload['file_path'])):
+                                     file_to_download['file_path'])):
                     os.makedirs(
                         os.path.join(_INPUT_FILE_PATH,
-                                     file_to_dowload['file_path']))
-                file_name_to_save = file_to_dowload[
+                                     file_to_download['file_path']))
+                file_name_to_save = file_to_download[
                     'file_path'] + file_name_to_save
 
             response = download_with_retry(url, file_name_to_save)
@@ -1141,7 +1141,21 @@ def download_files():
                 with open(os.path.join(_INPUT_FILE_PATH, file_name_to_save),
                           'wb') as f:
                     f.write(response.content)
-                    file_to_dowload['is_downloaded'] = True
+                file_to_download['is_downloaded'] = True
+            else:
+                logging.error(
+                    f"Failed to download {url} with status code {response.status_code}"
+                )
+                file_to_download['is_downloaded'] = False
+        failed_downloads = [
+            file_to_download['download_path']
+            for file_to_download in _FILES_TO_DOWNLOAD
+            if not file_to_download.get('is_downloaded', False)
+        ]
+        if failed_downloads:
+            raise Exception(
+                f"Failed to download {len(failed_downloads)} files: {failed_downloads}"
+            )
 
     except Exception as e:
         logging.fatal(f"Error occurred in download method {e}")
@@ -1161,6 +1175,7 @@ def main(_):
     if mode == "" or mode == "download":
         add_future_year_urls()
         download_files()
+
     if mode == "" or mode == "process":
         process(_INPUT_FILE_PATH, cleaned_csv_path, mcf_path, tmcf_path,
                 is_summary_levels)

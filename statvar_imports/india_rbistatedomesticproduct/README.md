@@ -11,6 +11,8 @@ years: 2004 to 2024.
 
 place_resolution: Places resolved to wikidataId in metadata sheet itself.
 
+Caveat: In source files number may change in future right now its from table number 19 to 52 for STATE DOMESTIC PRODUCT , in that case make changes in rbi_sdp_download.py script to download correct files 
+
 How to run:
 python3 stat_var_processor.py  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='../../statvar_imports/india_rbistatedomesticproduct/test_data/<filename>.xlsx' --pv_map=".../../statvar_imports/india_rbistatedomesticproduct/<filename>_pvmap.csv" --output_path='.../../statvar_imports/india_rbistatedomesticproduct/test_data/<filename>' --config=".../../statvar_imports/india_rbistatedomesticproduct/<filename>_metadata.csv"
 

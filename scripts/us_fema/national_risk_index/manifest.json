@@ -2,19 +2,25 @@
     "import_specifications": [
         {
             "import_name": "USFEMA_NationalRiskIndex",
-            "curator_emails": ["support@datacommons.org"],
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
             "provenance_url": "https://hazards.fema.gov/nri/data-resources",
             "provenance_description": "USFEMA National RiskIndex",
-            "scripts": ["sh/download_data.sh", "sh/e2e.sh"],
+            "scripts": [
+                "sh/download_data.sh",
+                "sh/e2e.sh"
+            ],
             "import_inputs": [
                 {
                     "template_mcf": "output/fema_nri_counties.tmcf",
                     "cleaned_csv": "output/*.csv"
                 }
             ],
-            "source_files": ["source_data/*"],
+            "source_files": [
+                "source_data/*"
+            ],
             "cron_schedule": "0 4 2,16 * *"
         }
     ]
 }
-

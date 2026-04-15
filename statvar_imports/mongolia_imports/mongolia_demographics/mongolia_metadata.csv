@@ -1,0 +1,5 @@
+parameter,value
+#places_within,country/MNG
+output_columns,"observationAbout,observationDate,value,variableMeasured"
+header_rows,1
+url,"https://www.1212.mn/en/statcate/table-view/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_002V1.px, https://www.1212.mn/en/statcate/table-view/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_027V1.px, https://www.1212.mn/en/statcate/table-view/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_003V1.px, https://www.1212.mn/en/statcate/table-view/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_033V1.px, https://www.1212.mn/en/statcate/table-view/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_077V2.px, https://www.1212.mn/en/statcate/table-view/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_004V1.px"

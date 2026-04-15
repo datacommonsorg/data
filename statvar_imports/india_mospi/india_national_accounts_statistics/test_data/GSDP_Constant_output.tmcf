@@ -1,0 +1,9 @@
+Node: E:GSDP_Constant_output->E0
+observationAbout: C:GSDP_Constant_output->observationAbout
+observationDate: C:GSDP_Constant_output->observationDate
+variableMeasured: C:GSDP_Constant_output->variableMeasured
+value: C:GSDP_Constant_output->value
+unit: C:GSDP_Constant_output->unit
+measurementMethod: C:GSDP_Constant_output->measurementMethod
+observationPeriod: C:GSDP_Constant_output->observationPeriod
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,707 @@
+{
+	"preprocess":{
+		"find_and_replace":{
+			"PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Received public assistance income": "Received public assistance income",
+			"PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Did not receive public assistance income": "Did not receive public assistance income"
+		}
+	},
+	"populationType":{
+		"_DEFAULT": "schema:Person"
+	},
+	"measurement":{
+		"_DEFAULT":{
+			"statType": "measuredValue",
+			"measuredProperty": "count"
+		},
+		"Margin of Error":{
+			"statType": "marginOfError",
+			"measuredProperty": "count"
+		}
+	},
+	"pvs":{
+		"scalingFactor":{
+			"Rate per 1,000 women":1000,
+			"Rate per 1,000 women MOE":1000
+		},
+		"age":{
+			"Women 15 to 50 years": "[Years 15 50]",
+			"15 to 19 years": "[Years 15 19]",
+			"20 to 34 years": "[Years 20 34]",
+			"35 to 50 years": "[Years 35 50]",
+			"Women 15 to 50 years for whom poverty status is determined": "[Years 15 50]",
+			"Women 16 to 50 years": "[Years 16 50]"
+		},
+		"race":{
+			"One race": "OneRace",
+			"White": "WhiteAlone",
+			"Black or African American": "BlackOrAfricanAmericanAlone",
+			"American Indian and Alaska Native": "AmericanIndianOrAlaskaNativeAlone",
+			"Asian": "AsianAlone",
+			"Native Hawaiian and Other Pacific Islander": "NativeHawaiianOrOtherPacificIslanderAlone",
+			"Some other race": "SomeOtherRaceAlone",
+			"Two or more races": "TwoOrMoreRaces",
+			"Hispanic or Latino origin (of any race)": "HispanicOrLatino",
+			"White alone, not Hispanic or Latino": "WhiteAloneNotHispanicOrLatino"
+		},
+		"nativity":{
+			"Native": "USC_Native",
+			"Foreign born": "USC_ForeignBorn"
+		},
+		"educationalAttainment":{
+			"Less than high school graduate": "LessThanHighSchoolGraduate",
+			"High school graduate (includes equivalency)": "HighSchoolGraduateIncludesEquivalency",
+			"Some college or associate's degree": "SomeCollegeOrAssociatesDegree",
+			"Bachelor's degree": "BachelorsDegreeOrHigher",
+			"Graduate or professional degree": "GraduateOrProfessionalDegree"
+		},
+		"povertyStatus":{
+			"Women 15 to 50 years for whom poverty status is determined": "PovertyStatusDetermined",
+			"Below 100 percent of poverty level": "[- 1.0 RatioToPovertyLine]",
+			"100 to 199 percent of poverty level": "[1 1.99 RatioToPovertyLine]",
+			"200 percent or more above poverty level": "[2 - RatioToPovertyLine]"
+		},
+		"employmentStatus":{
+			"In labor force": "BLS_InLaborForce"
+		},
+		"benefitsStatus":{
+			"Received public assistance income": "WithCashAssistanceInThePast12Months",
+			"Did not receive public assistance income": "WithoutCashAssistanceInThePast12Months"
+		},
+		"birthEventStatus":{
+			"Women with births in the past 12 months": "BirthInThePast12Months",
+			"Women with births in the past 12 months MOE": "BirthInThePast12Months",
+			"Percent of women who had a birth in the past 12 months who were unmarried": "BirthInThePast12Months",
+			"Percent of women who had a birth in the past 12 months who were unmarried MOE": "BirthInThePast12Months"
+		},
+		"maritalStatus":{
+			"Percent of women who had a birth in the past 12 months who were unmarried": "Unmarried",
+			"Percent of women who had a birth in the past 12 months who were unmarried MOE": "Unmarried"
+		}
+	},
+	"universePVs":[
+		{
+			"populationType": "Person",
+			"constraintProperties":[
+				"birthEventStatus"
+			],
+			"dependentPVs":{
+				"gender": "Female"
+			}
+		}
+	],
+	"inferredSpec":{
+		"populationType":{
+			"gender": "Female"
+		},
+		"employmentStatus":{
+			"age": "[Years 16 50]"
+		},
+		"benefitsStatus":{
+			"age": "[Years 15 50]"
+		},
+		"povertyStatus":{
+			"age": "[Years 15 50]"
+		},
+		"race":{
+			"age": "[Years 15 50]"
+		},
+		"educationalAttainment":{
+			"age": "[Years 15 50]"
+		},
+		"nativity":{
+			"age": "[Years 15 50]"
+		}
+	},
+	"ignoreColumns":[
+		"id",
+		"Geographic Area Name",
+		"PERCENT IMPUTED",
+		"PERCENT ALLOCATED",
+		"Percent Distribution",
+		"Percent Distribution MOE",
+		"PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error",
+		"Margin of Error!!Rate per 1,000 Women"
+	],
+	"measurementDenominator":{
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!Women 15 to 50 years": "Total!!Estimate!!Women 15 to 50 years",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!Women 15 to 50 years": "Total!!Margin of Error!!Women 15 to 50 years",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!15 to 19 years": "Total!!Estimate!!15 to 19 years",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!15 to 19 years": "Total!!Margin of Error!!15 to 19 years",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!20 to 34 years": "Total!!Estimate!!20 to 34 years",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!20 to 34 years": "Total!!Margin of Error!!20 to 34 years",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!35 to 50 years": "Total!!Estimate!!35 to 50 years",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!35 to 50 years": "Total!!Margin of Error!!35 to 50 years",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!Hispanic or Latino origin (of any race)": "Total!!Estimate!!Hispanic or Latino origin (of any race)",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!Hispanic or Latino origin (of any race)": "Total!!Margin of Error!!Hispanic or Latino origin (of any race)",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!White alone, not Hispanic or Latino": "Total!!Estimate!!White alone, not Hispanic or Latino",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!White alone, not Hispanic or Latino": "Total!!Margin of Error!!White alone, not Hispanic or Latino",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!NATIVITY!!Native": "Total!!Estimate!!NATIVITY!!Native",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!NATIVITY!!Native": "Total!!Margin of Error!!NATIVITY!!Native",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!NATIVITY!!Foreign born": "Total!!Estimate!!NATIVITY!!Foreign born",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!NATIVITY!!Foreign born": "Total!!Margin of Error!!NATIVITY!!Foreign born",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined": "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined": "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below 100 percent of poverty level": "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below 100 percent of poverty level",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below 100 percent of poverty level": "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below 100 percent of poverty level",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!100 to 199 percent of poverty level": "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!100 to 199 percent of poverty level",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!100 to 199 percent of poverty level": "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!100 to 199 percent of poverty level",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!200 percent or more above poverty level": "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!200 percent or more above poverty level",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!200 percent or more above poverty level": "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!200 percent or more above poverty level",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!LABOR FORCE STATUS!!Women 16 to 50 years": "Total!!Estimate!!LABOR FORCE STATUS!!Women 16 to 50 years",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!LABOR FORCE STATUS!!Women 16 to 50 years": "Total!!Margin of Error!!LABOR FORCE STATUS!!Women 16 to 50 years",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!LABOR FORCE STATUS!!In labor force": "Total!!Estimate!!LABOR FORCE STATUS!!In labor force",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!LABOR FORCE STATUS!!In labor force": "Total!!Margin of Error!!LABOR FORCE STATUS!!In labor force",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years": "Total!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years": "Total!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Received public assistance income": "Total!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Received public assistance income",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Received public assistance income": "Total!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Received public assistance income",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Did not receive public assistance income": "Total!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Did not receive public assistance income",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Did not receive public assistance income": "Total!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Did not receive public assistance income",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level": "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level": "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level": "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level": "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level": "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level": "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force": "Total!!Estimate!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force": "Total!!Margin of Error!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income": "Total!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income": "Total!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income": "Total!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income",
+		"Women with births in the past 12 months!!Rate per 1,000 women!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income": "Total!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years": "Estimate!!Total!!Women 15 to 50 years",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years": "Margin of Error!!Total MOE!!Women 15 to 50 years",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!15 to 19 years": "Estimate!!Total!!Women 15 to 50 years!!15 to 19 years",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!15 to 19 years": "Margin of Error!!Total MOE!!Women 15 to 50 years!!15 to 19 years",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!20 to 34 years": "Estimate!!Total!!Women 15 to 50 years!!20 to 34 years",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!20 to 34 years": "Margin of Error!!Total MOE!!Women 15 to 50 years!!20 to 34 years",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!35 to 50 years": "Estimate!!Total!!Women 15 to 50 years!!35 to 50 years",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!35 to 50 years": "Margin of Error!!Total MOE!!Women 15 to 50 years!!35 to 50 years",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": "Margin of Error!!Total MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": "Margin of Error!!Total MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": "Margin of Error!!Total MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": "Margin of Error!!Total MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": "Margin of Error!!Total MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": "Margin of Error!!Total MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": "Margin of Error!!Total MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": "Margin of Error!!Total MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)": "Margin of Error!!Total MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino": "Margin of Error!!Total MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!NATIVITY!!Native": "Estimate!!Total!!Women 15 to 50 years!!NATIVITY!!Native",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!NATIVITY!!Native": "Margin of Error!!Total MOE!!Women 15 to 50 years!!NATIVITY!!Native",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!NATIVITY!!Foreign born": "Estimate!!Total!!Women 15 to 50 years!!NATIVITY!!Foreign born",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!NATIVITY!!Foreign born": "Margin of Error!!Total MOE!!Women 15 to 50 years!!NATIVITY!!Foreign born",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate": "Estimate!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate": "Margin of Error!!Total MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)": "Estimate!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)": "Margin of Error!!Total MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree": "Estimate!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree": "Margin of Error!!Total MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree": "Estimate!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree": "Margin of Error!!Total MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree": "Estimate!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree": "Margin of Error!!Total MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined": "Estimate!!Total!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined": "Margin of Error!!Total MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level": "Estimate!!Total!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level": "Margin of Error!!Total MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level": "Estimate!!Total!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level": "Margin of Error!!Total MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level": "Estimate!!Total!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level": "Margin of Error!!Total MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!LABOR FORCE STATUS!!Women 16 to 50 years": "Estimate!!Total!!LABOR FORCE STATUS!!Women 16 to 50 years",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!LABOR FORCE STATUS!!Women 16 to 50 years": "Margin of Error!!Total MOE!!LABOR FORCE STATUS!!Women 16 to 50 years",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force": "Estimate!!Total!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force": "Margin of Error!!Total MOE!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years": "Estimate!!Total!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years": "Margin of Error!!Total MOE!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income": "Estimate!!Total!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income": "Margin of Error!!Total MOE!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income",
+		"Estimate!!Women with births in the past 12 months!!Rate per 1,000 women!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income": "Estimate!!Total!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income",
+		"Margin of Error!!Women with births in the past 12 months!!Rate per 1,000 women MOE!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income": "Margin of Error!!Total MOE!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years": "Estimate!!Total!!Women 15 to 50 years",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years": "Margin of Error!!Total!!Women 15 to 50 years",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!15 to 19 years": "Estimate!!Total!!Women 15 to 50 years!!15 to 19 years",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!15 to 19 years": "Margin of Error!!Total!!Women 15 to 50 years!!15 to 19 years",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!20 to 34 years": "Estimate!!Total!!Women 15 to 50 years!!20 to 34 years",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!20 to 34 years": "Margin of Error!!Total!!Women 15 to 50 years!!20 to 34 years",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!35 to 50 years": "Estimate!!Total!!Women 15 to 50 years!!35 to 50 years",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!35 to 50 years": "Margin of Error!!Total!!Women 15 to 50 years!!35 to 50 years",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": "Margin of Error!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": "Margin of Error!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": "Margin of Error!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": "Margin of Error!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": "Margin of Error!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": "Margin of Error!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": "Margin of Error!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": "Margin of Error!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)": "Margin of Error!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino": "Estimate!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino": "Margin of Error!!Total!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!NATIVITY!!Native": "Estimate!!Total!!Women 15 to 50 years!!NATIVITY!!Native",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!NATIVITY!!Native": "Margin of Error!!Total!!Women 15 to 50 years!!NATIVITY!!Native",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!NATIVITY!!Foreign born": "Estimate!!Total!!Women 15 to 50 years!!NATIVITY!!Foreign born",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!NATIVITY!!Foreign born": "Margin of Error!!Total!!Women 15 to 50 years!!NATIVITY!!Foreign born",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate": "Estimate!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate": "Margin of Error!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)": "Estimate!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)": "Margin of Error!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree": "Estimate!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree": "Margin of Error!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree": "Estimate!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree": "Margin of Error!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree": "Estimate!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree": "Margin of Error!!Total!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined": "Estimate!!Total!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined": "Margin of Error!!Total!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level": "Estimate!!Total!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level": "Margin of Error!!Total!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level": "Estimate!!Total!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level": "Margin of Error!!Total!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level": "Estimate!!Total!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level": "Margin of Error!!Total!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!LABOR FORCE STATUS!!Women 16 to 50 years": "Estimate!!Total!!LABOR FORCE STATUS!!Women 16 to 50 years",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!LABOR FORCE STATUS!!Women 16 to 50 years": "Margin of Error!!Total!!LABOR FORCE STATUS!!Women 16 to 50 years",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force": "Estimate!!Total!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force": "Margin of Error!!Total!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years": "Estimate!!Total!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years": "Margin of Error!!Total!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income": "Estimate!!Total!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income": "Margin of Error!!Total!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income",
+		"Estimate!!Rate per 1,000 women!!Women with births in the past 12 months!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income": "Estimate!!Total!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income",
+		"Margin of Error!!Rate per 1,000 women!!Women with births in the past 12 months!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income": "Margin of Error!!Total!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income"
+	},
+	"denominators":{
+		"Women with births in the past 12 months!!Number!!Estimate!!Women 15 to 50 years":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!Women 15 to 50 years",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!Women 15 to 50 years"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!15 to 19 years":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!15 to 19 years",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!15 to 19 years"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!20 to 34 years":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!20 to 34 years",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!20 to 34 years"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!35 to 50 years":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!35 to 50 years",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!35 to 50 years"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!Hispanic or Latino origin (of any race)":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!Hispanic or Latino origin (of any race)",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!Hispanic or Latino origin (of any race)"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!White alone, not Hispanic or Latino":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!White alone, not Hispanic or Latino",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!White alone, not Hispanic or Latino"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!NATIVITY!!Native":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!NATIVITY!!Native",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!NATIVITY!!Native"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!NATIVITY!!Foreign born":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!NATIVITY!!Foreign born",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!NATIVITY!!Foreign born"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below 100 percent of poverty level":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below 100 percent of poverty level",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below 100 percent of poverty level"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!100 to 199 percent of poverty level":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!100 to 199 percent of poverty level",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!100 to 199 percent of poverty level"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!200 percent or more above poverty level":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!200 percent or more above poverty level",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!200 percent or more above poverty level"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!LABOR FORCE STATUS!!Women 16 to 50 years":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!LABOR FORCE STATUS!!Women 16 to 50 years",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!LABOR FORCE STATUS!!Women 16 to 50 years"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!LABOR FORCE STATUS!!In labor force":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!LABOR FORCE STATUS!!In labor force",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!LABOR FORCE STATUS!!In labor force"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Received public assistance income":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Received public assistance income",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Received public assistance income"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Did not receive public assistance income":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Did not receive public assistance income",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Did not receive public assistance income"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income"
+		],
+		"Women with births in the past 12 months!!Number!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income":[
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Estimate!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income",
+			"Percent of women who had a birth in the past 12 months who were unmarried!!Margin of Error!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!15 to 19 years":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!15 to 19 years",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!15 to 19 years"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!20 to 34 years":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!20 to 34 years",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!20 to 34 years"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!35 to 50 years":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!35 to 50 years",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!35 to 50 years"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!NATIVITY!!Native":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!NATIVITY!!Native",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!NATIVITY!!Native"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!NATIVITY!!Foreign born":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!NATIVITY!!Foreign born",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!NATIVITY!!Foreign born"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!LABOR FORCE STATUS!!Women 16 to 50 years":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!LABOR FORCE STATUS!!Women 16 to 50 years",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!LABOR FORCE STATUS!!Women 16 to 50 years"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income"
+		],
+		"Estimate!!Women with births in the past 12 months!!Number!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried MOE!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!15 to 19 years":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!15 to 19 years",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!15 to 19 years"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!20 to 34 years":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!20 to 34 years",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!20 to 34 years"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!35 to 50 years":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!35 to 50 years",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!35 to 50 years"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!NATIVITY!!Native":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!NATIVITY!!Native",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!NATIVITY!!Native"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!NATIVITY!!Foreign born":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!NATIVITY!!Foreign born",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!NATIVITY!!Foreign born"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Less than high school graduate"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Bachelor's degree"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!Women 15 to 50 years!!EDUCATIONAL ATTAINMENT!!Graduate or professional degree"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!Below 100 percent of poverty level"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!100 to 199 percent of poverty level"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!POVERTY STATUS IN THE PAST 12 MONTHS!!Women 15 to 50 years for whom poverty status is determined!!200 percent or more above poverty level"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!LABOR FORCE STATUS!!Women 16 to 50 years":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!LABOR FORCE STATUS!!Women 16 to 50 years",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!LABOR FORCE STATUS!!Women 16 to 50 years"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!LABOR FORCE STATUS!!Women 16 to 50 years!!In labor force"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Received public assistance income"
+		],
+		"Estimate!!Number!!Women with births in the past 12 months!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income":[
+			"Estimate!!Percent of women who had a birth in the past 12 months who were unmarried!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income",
+			"Margin of Error!!Percent of women who had a birth in the past 12 months who were unmarried!!PUBLIC ASSISTANCE INCOME IN THE PAST 12 MONTHS!!Women 15 to 50 years!!Did not receive public assistance income"
+		]
+	}
+}

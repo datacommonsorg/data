@@ -8,6 +8,7 @@ chromedriver_py
 croniter
 dataclasses
 datacommons
+datacommons_client
 db-dtypes
 duckdb
 frozendict
@@ -15,16 +16,20 @@ fsspec
 func-timeout
 gcsfs
 geojson
+geojson_rewind
 geopy
 google-api-python-client
 google-auth
+google-cloud-batch
 google-cloud-bigquery
 google-cloud-bigquery-storage
 google-cloud-datastore
 google-cloud-run
+google-cloud-spanner
 google-cloud-storage
 google-cloud-logging
 google-cloud-scheduler
+google-cloud-secret-manager
 gspread
 gunicorn
 legacy-cgi
@@ -32,6 +37,7 @@ lxml
 numpy
 openpyxl
 pandas
+omegaconf
 prettytable
 protobuf
 psutil
@@ -46,7 +52,9 @@ requests_cache
 retry
 s2sphere
 selenium
+sdmx1
 shapely
+tenacity
 urllib3
 webdriver_manager
 xarray
@@ -57,3 +65,4 @@ netCDF4
 xmltodict
 sodapy
 certifi==2025.1.31
+tqdm

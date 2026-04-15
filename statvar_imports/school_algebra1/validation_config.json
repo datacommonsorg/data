@@ -1,0 +1,12 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_missing_refs_count",
+            "validator": "MISSING_REFS_COUNT",
+            "params": {
+                "threshold": 457000
+            }
+        }
+    ]
+}

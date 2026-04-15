@@ -94,7 +94,7 @@ def download_state_tables():
                 logging.warning(f"Skipping unparseable table: {table_name}")
                 continue
             
-            if not (26 <= table_number <= 57):
+            if not (19 <= table_number <= 52):
                 logging.debug(f"Skipping table {table_number} (out of range)")
                 continue
             

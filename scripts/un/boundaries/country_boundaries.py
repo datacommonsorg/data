@@ -21,25 +21,34 @@ https://geopandas.readthedocs.io/en/latest/docs/reference/api/geopandas.GeoSerie
 NOTE: this file generates temporary folders that are not deleted.
 """
 
-from typing import Dict
-
-import datacommons as dc
-import geopandas as gpd
-from geojson_rewind import rewind
 import json
 import os
-import requests
+from pathlib import Path
+import sys
+from typing import Dict
+
+import geopandas as gpd
+from geojson_rewind import rewind
 
 from absl import app
 from absl import flags
 
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+
+from util.dc_api_wrapper import get_datacommons_client
+
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input_file', 'data/UNGIS_BNDA.geojson',
-                    'Input geojson file')
-flags.DEFINE_string(
-    'output_dir', 'output',
-    'Dir to output generated MCF files too. If blank, a temp folder will be used.'
-)
+
+
+def _define_flags():
+    flags.DEFINE_string('input_file', 'data/UNGIS_BNDA.geojson',
+                        'Input geojson file')
+    flags.DEFINE_string(
+        'output_dir', 'output',
+        'Dir to output generated MCF files too. If blank, a temp folder will be used.'
+    )
+
 
 # Threshold to DP level map, from scripts/us_census/geojsons_low_res/generate_mcf.py
 EPS_LEVEL_MAP = {0: 0, 0.03: 2, 0.05: 3, 0.125: 6, 0.225: 10, 0.3: 13}
@@ -89,21 +98,21 @@ PARENT_PLACES = {
 }
 
 
-def get_countries_in(dcids):
-    resp = requests.post('https://autopush.api.datacommons.org/v2/node',
-                         headers={
-                             'X-API-Key': os.environ['MIXER_API_KEY']
-                         },
-                         json={
-                             'nodes': dcids,
-                             'property': "<-containedInPlace+{typeOf:Country}"
-                         }).json()
+def get_countries_in(client, dcids):
+    resp = client.node.fetch(node_dcids=dcids,
+                             expression="<-containedInPlace+{typeOf:Country}")
     node2children = {}
-    for place, d in resp.get('data', {}).items():
+    for place in dcids:
         node2children[place] = []
-        for n in d.get('arcs', {}).get('containedInPlace+',
-                                       {}).get('nodes', []):
-            node2children[place].append(n['dcid'])
+        place_data = resp.data.get(place)
+        if not place_data:
+            continue
+        arc = place_data.arcs.get('containedInPlace+')
+        if not arc:
+            continue
+        for node in arc.nodes:
+            if node.dcid:
+                node2children[place].append(node.dcid)
     return node2children
 
 
@@ -177,6 +186,7 @@ class CountryBoundariesGenerator:
     def __init__(self, input_file, output_dir):
         self.input_file = input_file
         self.output_dir = output_dir
+        self.client = get_datacommons_client()
         for d in ['tmp', 'mcf', 'cache']:
             os.makedirs(os.path.join(self.output_dir, d), exist_ok=True)
 
@@ -193,12 +203,16 @@ class CountryBoundariesGenerator:
 
         Only countries with DCID of the form county/{code} are included.
         """
-        # Call DC API to get list of countries
-        dc_all_countries = dc.get_property_values(['Country'],
-                                                  'typeOf',
-                                                  out=False,
-                                                  limit=500)['Country']
-        dc_all_countries = set(dc_all_countries)
+        resp = self.client.node.fetch_property_values(node_dcids='Country',
+                                                      properties='typeOf',
+                                                      out=False)
+        dc_all_countries = set()
+        country_data = resp.data.get('Country')
+        if country_data:
+            arc = country_data.arcs.get('typeOf')
+            if arc:
+                dc_all_countries.update(
+                    node.dcid for node in arc.nodes if node.dcid)
 
         def is_dc_country(iso):
             dcid = f'country/{iso}'
@@ -251,16 +265,24 @@ class CountryBoundariesGenerator:
             self._simplify_json(country_code, country_data)
 
     def build_cache(self, existing_codes):
-        parent2children = get_countries_in(list(PARENT_PLACES.keys()))
+        parent2children = get_countries_in(self.client,
+                                           list(PARENT_PLACES.keys()))
         all_children = set()
         for children in parent2children.values():
             all_children.update(children)
 
         child2name = {}
-        for child, values in dc.get_property_values(list(all_children),
-                                                    'name').items():
-            if values:
-                child2name[child] = values[0]
+        if all_children:
+            resp = self.client.node.fetch_property_values(
+                node_dcids=list(all_children), properties='name')
+            for child, node_data in resp.data.items():
+                arc = node_data.arcs.get('name')
+                if not arc:
+                    continue
+                name = next((node.value for node in arc.nodes if node.value),
+                            None)
+                if name:
+                    child2name[child] = name
 
         for parent, dp_level in PARENT_PLACES.items():
             if not parent2children.get(parent):
@@ -323,4 +345,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

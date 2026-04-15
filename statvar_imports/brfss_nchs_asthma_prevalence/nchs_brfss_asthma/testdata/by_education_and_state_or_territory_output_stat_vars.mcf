@@ -1,0 +1,85 @@
+
+Node: dcid:Percent_Person_Years18Onwards_EducationalAttainmentCollegeGraduate_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: dcid:Years18Onwards
+educationalAttainment: dcid:CollegeGraduate
+healthOutcome: dcid:Asthma
+
+Node: dcid:Percent_Person_Years18Onwards_EducationalAttainmentHighSchoolGraduateGedOrAlternative_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: dcid:Years18Onwards
+educationalAttainment: dcid:HighSchoolGraduateGedOrAlternative
+healthOutcome: dcid:Asthma
+
+Node: dcid:Percent_Person_Years18Onwards_EducationalAttainmentNotHighSchoolGraduateOrAlternative_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: dcid:Years18Onwards
+educationalAttainment: dcid:NotHighSchoolGraduateOrAlternative
+healthOutcome: dcid:Asthma
+
+Node: dcid:SampleSize_Count_Person_Years18Onwards_EducationalAttainmentCollegeGraduate_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+age: dcid:Years18Onwards
+educationalAttainment: dcid:CollegeGraduate
+healthOutcome: dcid:Asthma
+
+Node: dcid:SampleSize_Count_Person_Years18Onwards_EducationalAttainmentHighSchoolGraduateGedOrAlternative_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+age: dcid:Years18Onwards
+educationalAttainment: dcid:HighSchoolGraduateGedOrAlternative
+healthOutcome: dcid:Asthma
+
+Node: dcid:SampleSize_Count_Person_Years18Onwards_EducationalAttainmentNotHighSchoolGraduateOrAlternative_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+age: dcid:Years18Onwards
+educationalAttainment: dcid:NotHighSchoolGraduateOrAlternative
+healthOutcome: dcid:Asthma
+
+Node: dcid:StdError_Count_Person_Years18Onwards_EducationalAttainmentCollegeGraduate_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_Years18Onwards_EducationalAttainmentCollegeGraduate
+age: dcid:Years18Onwards
+educationalAttainment: dcid:CollegeGraduate
+healthOutcome: dcid:Asthma
+
+Node: dcid:StdError_Count_Person_Years18Onwards_EducationalAttainmentHighSchoolGraduateGedOrAlternative_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_Years18Onwards_EducationalAttainmentHighSchoolGraduateGedOrAlternative
+age: dcid:Years18Onwards
+educationalAttainment: dcid:HighSchoolGraduateGedOrAlternative
+healthOutcome: dcid:Asthma
+
+Node: dcid:StdError_Count_Person_Years18Onwards_EducationalAttainmentNotHighSchoolGraduateOrAlternative_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_Years18Onwards_EducationalAttainmentNotHighSchoolGraduateOrAlternative
+age: dcid:Years18Onwards
+educationalAttainment: dcid:NotHighSchoolGraduateOrAlternative
+healthOutcome: dcid:Asthma
+

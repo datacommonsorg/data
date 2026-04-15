@@ -1,5 +1,6 @@
 import glob
 import fnmatch
+import json
 import os
 import pandas as pd
 import re
@@ -67,6 +68,18 @@ def write_csv_data(df: pd.DataFrame, dest: str, file: str, tmp_dir: str):
         path = os.path.join(dest, file)
     with open(path, mode='w', encoding='utf-8') as out_file:
         df.to_csv(out_file, index=False, mode='w', header=True)
+    if dest.startswith('gs://'):
+        upload_output_data(path, dest)
+
+
+def write_json_data(data, dest: str, file: str, tmp_dir: str):
+    """ Writes data to a JSON file with the given path."""
+    if dest.startswith('gs://'):
+        path = os.path.join(tmp_dir, file)
+    else:
+        path = os.path.join(dest, file)
+    with open(path, mode='w', encoding='utf-8') as out_file:
+        json.dump(data, out_file, indent=4)
     if dest.startswith('gs://'):
         upload_output_data(path, dest)
 

@@ -68,15 +68,17 @@ FROM
 )
 """
 
-client = bigquery.Client(project='datcom-store')
+client = bigquery.Client()
 try:
     logging.info("Running the query")
     query_job = client.query(query)
 except Exception as e:
     logging.fatal(f"Error faced while running the query {e}")
-
-logging.info("Converting to dataframe")
-results = query_job.to_dataframe()
+try:
+    logging.info("Converting to dataframe")
+    results = query_job.to_dataframe()
+except Exception as e:
+    logging.info(f"Error faced while fetching results: {e}")
 
 logging.info("Writing output to CSV")
 output_file = os.path.join(_OUTPUT_FILE_PATH + "/CDC500State_Output.csv")

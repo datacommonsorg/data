@@ -11,13 +11,14 @@
                 "download.sh",
                 "scripts/format_ncbi_taxonomy.py"
             ],
-            "source_files": ["input/*.dmp"],
+            "source_files": [
+                "input/*.dmp"
+            ],
             "import_inputs": [
                 {
                     "cleaned_csv": "output/ncbi_taxonomy.csv",
                     "node_mcf": "output/ncbi_taxonomy_schema_enum.mcf",
-                    "template_mcf" : "tMCFs/ncbi_taxonomy.tmcf"
-
+                    "template_mcf": "tMCFs/ncbi_taxonomy.tmcf"
                 }
             ],
             "cron_schedule": "0 0 1 * *"

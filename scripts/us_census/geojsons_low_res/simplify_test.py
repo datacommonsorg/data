@@ -16,12 +16,17 @@
     Typical usage:
     python3 simplify_test.py
 """
-import unittest
 import geojson
-import simplify
-import os
+from pathlib import Path
+import sys
+import unittest
 
-TEST_DATA_DIR = "test-data"
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+
+from scripts.us_census.geojsons_low_res import simplify
+
+TEST_DATA_DIR = Path(__file__).resolve().parent / "test-data"
 
 
 class GeojsonSimplifierTest(unittest.TestCase):
@@ -29,10 +34,10 @@ class GeojsonSimplifierTest(unittest.TestCase):
     @staticmethod
     def get_file_output(raw_file, simple_file):
         simplifier = simplify.GeojsonSimplifier()
-        simplifier.read_geojson(os.path.join(TEST_DATA_DIR, raw_file))
+        simplifier.read_geojson(str(TEST_DATA_DIR / raw_file))
         simplifier.simplify()
         result = simplifier.geojson
-        file = os.path.join(TEST_DATA_DIR, simple_file)
+        file = TEST_DATA_DIR / simple_file
         with open(file, 'r') as f:
             expected_result = geojson.load(f)
         return result, expected_result
@@ -59,11 +64,11 @@ class GeojsonSimplifierTest(unittest.TestCase):
         """
         polygon_ex = {
             'type': 'Polygon',
-            'coordinates': [[[[1, 1], [2, 2], [3, 3.1], [4, 0]]]]
+            'coordinates': [[[1, 1], [2, 2], [3, 3.1], [4, 0]]]
         }
         polygon_simple_ex = {
             'type': 'Polygon',
-            'coordinates': [[[[1, 1], [3, 3.1], [4, 0]]]]
+            'coordinates': [[[1, 1], [3, 3.1], [4, 0]]]
         }
         simplifier = simplify.GeojsonSimplifier()
         simplifier.geojson = polygon_ex
@@ -76,11 +81,11 @@ class GeojsonSimplifierTest(unittest.TestCase):
         """
         polygon_ex = {
             'type': 'Polygon',
-            'coordinates': [[[[1, 0], [2, 5], [3, 0.25], [4, -0.5], [5, 0.1]]]]
+            'coordinates': [[[1, 0], [2, 5], [3, 0.25], [4, -0.5], [5, 0.1]]]
         }
         polygon_simple_ex = {
             'type': 'Polygon',
-            'coordinates': [[[[1, 0], [2, 5], [5, 0.1]]]]
+            'coordinates': [[[1, 0], [2, 5], [5, 0.1]]]
         }
         simplifier = simplify.GeojsonSimplifier()
         simplifier.geojson = polygon_ex

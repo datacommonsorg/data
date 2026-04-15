@@ -1,0 +1,6 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+COUNTY,observationAbout,{Data},measuredProperty,count,populationType,MortalityEvent,statType,measuredValue,causeOfDeath,DiabetesMellitus
+year,observationDate,{Data},,,,,,,,
+NUMBER,value,{Number},,,,,,,,
+RATE,value,{Number},measurementDenominator,"-populationType, +populationType=Person",unit,Per100000Persons,,,,
+AGE ADJUSTED RATE,value,{Number},measurementDenominator,"-populationType, +populationType=Person",measurementQualifier,AgeAdjusted,unit,Per100000Persons,,

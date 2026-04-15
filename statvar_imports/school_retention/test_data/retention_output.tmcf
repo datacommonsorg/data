@@ -1,0 +1,6 @@
+Node: E:retention_output->E0
+observationAbout: C:retention_output->observationAbout
+observationDate: C:retention_output->observationDate
+variableMeasured: C:retention_output->variableMeasured
+value: C:retention_output->value
+typeOf: dcs:StatVarObservation

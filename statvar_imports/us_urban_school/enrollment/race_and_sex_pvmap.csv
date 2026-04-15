@@ -1,0 +1,36 @@
+YEAR,observationDate,{Data},,,,,,,,,,,,,,
+ncesid,observationAbout,nces/{Data},,,,,,,,,,,,,,
+JJ:Yes,educationalInstitutionType,JuvenileJusticeFacility,,,,,,,,,,,,,,
+JJ:No,educationalInstitutionType,NotJuvenileJusticeFacility,,,,,,,,,,,,,,
+SCH_ENR_HI_M,value,{Number},#Filter,Allow=int(value) >= 0,race,HispanicOrLatino,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+SCH_ENR_HI_F,value,{Number},#Filter,Allow=int(value) >= 0,race,HispanicOrLatino,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+SCH_ENR_AM_M,value,{Number},#Filter,Allow=int(value) >= 0,race,AmericanIndianOrAlaskaNativeAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+SCH_ENR_AM_F,value,{Number},#Filter,Allow=int(value) >= 0,race,AmericanIndianOrAlaskaNativeAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+SCH_ENR_AS_M,value,{Number},#Filter,Allow=int(value) >= 0,race,AsianAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+SCH_ENR_AS_F,value,{Number},#Filter,Allow=int(value) >= 0,race,AsianAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+SCH_ENR_HP_M,value,{Number},#Filter,Allow=int(value) >= 0,race,NativeHawaiianOrOtherPacificIslanderAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+SCH_ENR_HP_F,value,{Number},#Filter,Allow=int(value) >= 0,race,NativeHawaiianOrOtherPacificIslanderAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+SCH_ENR_BL_M,value,{Number},#Filter,Allow=int(value) >= 0,race,BlackOrAfricanAmericanAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+SCH_ENR_BL_F,value,{Number},#Filter,Allow=int(value) >= 0,race,BlackOrAfricanAmericanAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+SCH_ENR_WH_M,value,{Number},#Filter,Allow=int(value) >= 0,race,WhiteAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+SCH_ENR_WH_F,value,{Number},#Filter,Allow=int(value) >= 0,race,WhiteAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+SCH_ENR_TR_M,value,{Number},#Filter,Allow=int(value) >= 0,race,TwoOrMoreRaces,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+SCH_ENR_TR_F,value,{Number},#Filter,Allow=int(value) >= 0,race,TwoOrMoreRaces,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+M_HIS_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,HispanicOrLatino,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+F_HIS_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,HispanicOrLatino,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+M_AME_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,AmericanIndianOrAlaskaNativeAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+F_AME_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,AmericanIndianOrAlaskaNativeAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+M_ASI_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,AsianAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+F_ASI_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,AsianAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+M_HI_PAC_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,NativeHawaiianOrOtherPacificIslanderAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+F_HI_PAC_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,NativeHawaiianOrOtherPacificIslanderAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+M_BLA_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,BlackOrAfricanAmericanAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+F_BLA_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,BlackOrAfricanAmericanAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+M_WHI_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,WhiteAlone,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+F_WHI_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,WhiteAlone,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+M_2_OR_MORE_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,TwoOrMoreRaces,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+F_2_OR_MORE_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,race,TwoOrMoreRaces,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue
+M_TOT_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,,
+F_TOT_7_ENROL,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,,
+TOT_ENR_M,value,{Number},#Filter,Allow=int(value) >= 0,gender,Male,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,,
+TOT_ENR_F,value,{Number},#Filter,Allow=int(value) >= 0,gender,Female,enrollmentStatus,Enrolled,populationType,Student,measuredProperty,count,statType,measuredValue,,

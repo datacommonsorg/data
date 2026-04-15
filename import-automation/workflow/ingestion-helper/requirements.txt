@@ -1,0 +1,6 @@
+functions-framework==3.*
+google-cloud-spanner
+google-api-python-client
+google-cloud-storage
+google-auth
+absl-py

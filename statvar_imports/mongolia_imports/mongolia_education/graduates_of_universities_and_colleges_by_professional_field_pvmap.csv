@@ -1,0 +1,53 @@
+key,p1,v1,p2,v2,,,,
+,,,,,,,,
+Professional fields,observationAbout,country/MNG,populationType,person,measuredProperty,count,educationalAttainment,Graduate
+Journalism and information,bachelorsDegreeMajor,CommunicationJournalismAndRelatedMajor,,,,,,
+Economy,bachelorsDegreeMajor,EconomyMajor,,,,,,
+Psychology,bachelorsDegreeMajor,PhilosophyMajor,,,,,,
+"Business, administration and law",bachelorsDegreeMajor,BusinessAdministrationAndManagement__LegalProfessionsAndStudiesMajor,,,,,,
+Management and administration,bachelorsDegreeMajor,ManagementAndAdministrationMajor,,,,,,
+Accounting and taxation,bachelorsDegreeMajor,AccountingAndTaxationMajor,,,,,,
+Law,bachelorsDegreeMajor,LegalProfessionsAndStudiesMajor,,,,,,
+"Natural sciences, mathematics and statistics",bachelorsDegreeMajor,NaturalSciencesMajor__MathAndStatisticsMajor,,,,,,
+Biological and related sciences,bachelorsDegreeMajor,BiologicalAndBiomedicalSciencesMajor,,,,,,
+Environment,bachelorsDegreeMajor,EnvironmentMajor,,,,,,
+Natural sciences,bachelorsDegreeMajor,NaturalSciencesMajor,,,,,,
+Mathematics and statistics,bachelorsDegreeMajor,MathAndStatisticsMajor,,,,,,
+Information and Communication Technologies,bachelorsDegreeMajor,InformationAndCommunicationsTechnologiesMajor ,,,,,,
+"Engineering, manufacturing and construction",bachelorsDegreeMajor,EngineeringMajor__EngineeringManufacturing__ConstructionEngineering,,,,,,
+Architecture and construction,bachelorsDegreeMajor,ArchitectureAndRelatedServicesMajor__ConstructionEngineering,,,,,,
+Engineering between industries,bachelorsDegreeMajor,EngineeringMajor__Industries,,,,,,
+Engineering and engineering production,bachelorsDegreeMajor,EngineeringMajor__ProductionEngineering,,,,,,
+Production and processing,bachelorsDegreeMajor,ProductionEngineering__ProcessingEngineering,,,,,,
+"Agriculture, forestry, fisheries and veterinary",bachelorsDegreeMajor,AgriculturalEngineering__ForestryEngineering__Fisheries__Veterinary,,,,,,
+Veterinary medicine,bachelorsDegreeMajor,VeterinaryMedicineMajor,,,,,,
+"Agriculture, forestry, fisheries",bachelorsDegreeMajor,AgriculturalEngineering__ForestryEngineering__Fisheries,,,,,,
+Health and social protection,bachelorsDegreeMajor,HealthRelatedMajor,,,,,,
+Oral and Maxillofacial Studies,bachelorsDegreeMajor,OralAndMaxillofacialStudies,,,,,,
+Nursing and midwifery,bachelorsDegreeMajor,NursingAndMidwifery,,,,,,
+Pharmacology,bachelorsDegreeMajor,Pharmacology,,,,,,
+Traditional,bachelorsDegreeMajor,Traditional,,,,,,
+Medicine,bachelorsDegreeMajor,Medicine,,,,,,
+Social welfare,bachelorsDegreeMajor,SocialWelfare,,,,,,
+Services,bachelorsDegreeMajor,ServicesRelatedMajor,,,,,,
+General basic curriculum,bachelorsDegreeMajor,GeneralBasicCurriculumMajor,,,,,,
+Education,bachelorsDegreeMajor,EducationMajor,,,,,,
+Arts and humanities,bachelorsDegreeMajor,HumanityAndArts,,,,,,
+Arts,bachelorsDegreeMajor,ArtsMajor,,,,,,
+Humanities,bachelorsDegreeMajor,HumanityAndArts,,,,,,
+Languages,bachelorsDegreeMajor,Languages,,,,,,
+"Social sciences, journalism and information",bachelorsDegreeMajor,SocialSciencesMajor__CommunicationJournalismAndRelatedMajor,,,,,,
+,,,,,,,,
+,,,,,,,,
+2019,observationDate,2019,value,{Number},observationAbout,country/MNG,populationType,Person
+2020,observationDate,2020,value,{Number},observationAbout,country/MNG,populationType,Person
+2021,observationDate,2021,value,{Number},observationAbout,country/MNG,populationType,Person
+2022,observationDate,2022,value,{Number},observationAbout,country/MNG,populationType,Person
+2023,observationDate,2023,value,{Number},observationAbout,country/MNG,populationType,Person
+2024,observationDate,2024,value,{Number},observationAbout,country/MNG,populationType,Person
+2025,observationDate,2025,value,{Number},observationAbout,country/MNG,populationType,Person
+2026,observationDate,2026,value,{Number},observationAbout,country/MNG,populationType,Person
+2027,observationDate,2027,value,{Number},observationAbout,country/MNG,populationType,Person
+2028,observationDate,2028,value,{Number},observationAbout,country/MNG,populationType,Person
+2029,observationDate,2029,value,{Number},observationAbout,country/MNG,populationType,Person
+2030,observationDate,2030,value,{Number},observationAbout,country/MNG,populationType,Person

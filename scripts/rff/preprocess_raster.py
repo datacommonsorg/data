@@ -1,16 +1,30 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import csv
-import datacommons as dc
 import glob
 import json
 import numpy as np
 import os
 from osgeo import gdal
+from pathlib import Path
 from shapely import geometry
 import sys
 
-RFF_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(RFF_DIR)
-from rff import util
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
+from util.dc_api_wrapper import dc_api_batched_wrapper, get_datacommons_client
+from scripts.rff import util
 
 bandname_to_gdcStatVars = {
     "std_dev": "StandardDeviation_<c_var>",
@@ -36,16 +50,61 @@ def get_dcid(sp_scale, lat, lon):
 
 
 def get_county_geoid(lat, lon):
-    counties = dc.get_places_in(['country/USA'], 'County')['country/USA']
-    counties_simp = dc.get_property_values(counties, 'geoJsonCoordinatesDP1')
+    config = {'dc_api_use_cache': True}
+    client = get_datacommons_client(config)
+
+    def extract_geojson(node_data, prop_name):
+        nodes = node_data.get('arcs', {}).get(prop_name, {}).get('nodes', [])
+        if not nodes:
+            return None
+        first_node = nodes[0]
+        if isinstance(first_node, dict):
+            return first_node.get('value')
+        return first_node.value
+
+    counties_result = client.node.fetch_place_children(
+        place_dcids=['country/USA'],
+        children_type='County',
+        as_dict=True,
+    )
+    counties = [
+        node.get('dcid')
+        for node in counties_result.get('country/USA', [])
+        if node.get('dcid')
+    ]
+    counties_simp = dc_api_batched_wrapper(
+        function=client.node.fetch_property_values,
+        dcids=counties,
+        args={'properties': 'geoJsonCoordinatesDP1'},
+        dcid_arg_kw='node_dcids',
+        config=config,
+    )
     point = geometry.Point(lon, lat)
-    for p, gj in counties_simp.items():
-        if len(gj) == 0:
-            gj = dc.get_property_values([p], 'geoJsonCoordinates')[p]
-            if len(gj) == 0:  # property not defined for one county in alaska
-                continue
-        if geometry.shape(json.loads(gj[0])).contains(point):
-            return p
+    counties_missing_dp1 = []
+    for county in counties:
+        node_data = counties_simp.get(county, {})
+        geojson = extract_geojson(node_data, 'geoJsonCoordinatesDP1')
+        if not geojson:
+            counties_missing_dp1.append(county)
+            continue
+        if geometry.shape(json.loads(geojson)).contains(point):
+            return county
+    fallback = {}
+    if counties_missing_dp1:
+        fallback = dc_api_batched_wrapper(
+            function=client.node.fetch_property_values,
+            dcids=counties_missing_dp1,
+            args={'properties': 'geoJsonCoordinates'},
+            dcid_arg_kw='node_dcids',
+            config=config,
+        )
+    for county in counties_missing_dp1:
+        node_data = fallback.get(county, {})
+        geojson = extract_geojson(node_data, 'geoJsonCoordinates')
+        if not geojson:  # property not defined for one county in alaska
+            continue
+        if geometry.shape(json.loads(geojson)).contains(point):
+            return county
     return None
 
 

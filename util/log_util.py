@@ -17,7 +17,21 @@ import json
 import logging
 import os
 import sys
+
+from absl import flags
+
 from google.cloud.logging.handlers import StructuredLogHandler
+from functools import wraps
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(SCRIPT_DIR)
+
+from timer import Timer
+
+flags.DEFINE_integer('funcion_call_log_level', logging.INFO,
+                     'Log level for function call logs.')
+
+_FLAGS = flags.FLAGS
 
 
 def log_struct(level: str, message: str, labels: dict):
@@ -101,6 +115,46 @@ def running_on_cloud() -> bool:
 
 def configure_logging(enable_cloud_logging: bool):
     running_on_cloud_result = running_on_cloud()
-    if enable_cloud_logging or running_on_cloud_result:
-        configure_cloud_logging()
-        logging.info("Google Cloud Logging configured.")
+    if running_on_cloud_result:
+        if enable_cloud_logging:
+            configure_cloud_logging()
+            logging.info("Google Cloud Logging configured.")
+        else:
+            logging.info(f'Not enabling cloud logging')
+    else:
+        logging.info(f'Not running on cloud, using default logging')
+
+
+def log_function_call(func):
+    """
+    A decorator to log function entry and exit.
+
+    To log a function, add the @log_function_call before it.
+    Example:
+      @log_function_call
+      def my_function():
+         ...
+    """
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        func_name = func.__name__
+        log_level = logging.INFO
+        if _FLAGS.is_parsed():
+            log_level = _FLAGS.funcion_call_log_level
+        logging.log(log_level, f"Function start: {func_name}")
+        timer = Timer()
+        try:
+            result = func(*args, **kwargs)
+            logging.log(
+                log_level,
+                f"Function end: {func_name}, time: {timer.time():.4f}s")
+            return result
+        except Exception as e:
+            logging.log(
+                log_level - 1,
+                f"Function error: {func_name}: {e}, time: {timer.time():.4f}s",
+                exc_info=True)
+            raise  # Re-raise the exception after logging
+
+    return wrapper

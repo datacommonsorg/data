@@ -1,0 +1,8 @@
+key,p1,v1,p2,v2,p3,v3
+"Annual population and components of population changes, France",observationAbout,country/FRA,populationType,Person,measuredProperty,count
+"Annual population and components of population changes, metropolitan France",observationAbout,country/FXX,populationType,Person,measuredProperty,count
+Year,observationDate,{Year},#Eval,"Year = re.sub(r'\\D', '',Data)",,
+Average population,value,{Number},statType,meanValue,,
+Live births,populationType,BirthEvent,value,{Number},,
+Deaths,populationType,MortalityEvent,value,{Number},,
+Crude rate of natural change,value,{Number},statType,growthRate,,

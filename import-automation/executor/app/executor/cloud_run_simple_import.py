@@ -27,9 +27,11 @@ import pytz
 # Set path for import modules.
 _SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.dirname(_SCRIPT_DIR))
 
 import cloud_run
 import file_io
+import configs
 
 # Default settings.
 _DEFAULT_PROJECT = os.environ.get('GCS_PROJECT',
@@ -38,7 +40,8 @@ _DEFAULT_SIMPLE_IMAGE = os.environ.get(
     'DOCKER_IMAGE', 'gcr.io/datcom-ci/datacommons-simple:stable')
 _DEFAULT_LOCATION = os.environ.get('CLOUD_REGION', 'us-central1')
 _DEFAULT_GCS_BUCKET = os.environ.get('GCS_BUCKET', 'datcom-prod-imports')
-_DEFAULT_VOLUME_MOUNT = os.environ.get('VOLUME_MOUNT', 'datcom-volume-mount')
+_DEFAULT_VOLUME_MOUNT = configs.ExecutorConfig.gcs_bucket_volume_mount
+_DEFAULT_MOUNT_PATH = configs.ExecutorConfig.gcs_volume_mount_dir
 _DEFAULT_CONFIG_PREFIX = 'import_config'
 
 # Path for simple import config spec under data/scripts/simple
@@ -138,6 +141,7 @@ def cloud_run_simple_import_job(
     location: str = _DEFAULT_LOCATION,
     image: str = _DEFAULT_SIMPLE_IMAGE,
     volume_mount: str = _DEFAULT_VOLUME_MOUNT,
+    mount_path: str = _DEFAULT_MOUNT_PATH,
 ) -> str:
     """Create and run a Cloud Run job for simple a import.
 
@@ -193,9 +197,9 @@ def cloud_run_simple_import_job(
         f' {config_file} with output: {gcs_output_dir}, env: {env_vars}')
     resources = {}
     args = []
-    job = cloud_run.create_or_update_cloud_run_job(project_id, location, job_id,
-                                                   image, volume_mount,
-                                                   env_vars, args, resources)
+    job = cloud_run.create_or_update_cloud_run_job(
+        project_id, location, job_id, image, volume_mount, mount_path, env_vars,
+        args, resources, int(configs.ExecutorConfig.user_script_timeout))
     if not job:
         logging.error(
             f'Failed to setup cloud run job {job_id} for {config_file}')

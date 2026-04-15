@@ -32,3 +32,9 @@ To run unit tests:
 
 ## Data Download and Documentation
 https://www.epa.gov/ejscreen/download-ejscreen-data
+- Since the file columns are inconsistent, we are manually checking the url, column names and add them in the config.
+- Hence, setting up the import under autorefresh where the donwload congif has to be updated manually to bring new data into DataCommons 
+- In the download config, attach new year with the URL and check if it exist.
+- Add the suffix and filename. Refer previous years.
+- Fill eht remaining dicts and also create config column list for new file.
+- Update the config file in `gs://unresolved_mcf/epa/ejscreen/download_config.json` path.

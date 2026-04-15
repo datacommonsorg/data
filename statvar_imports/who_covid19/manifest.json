@@ -1,0 +1,46 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "WHO_COVID19",
+            "curator_emails": [
+                "support@datacommons.org" 
+            ],
+            "provenance_url": "https://data.who.int/dashboards/covid19/cases?n=c",
+            "provenance_description": "World Health Organization's (WHO) raw data and statistical releases covering global COVID-19 cases, deaths, hospitalizations, and vaccination coverage",
+            "scripts": [
+                "download.sh",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/COV_VAC_UPTAKE_2021_2023.csv --pv_map=pvmap/COV_VAC_UPTAKE_2021_2023_pvmap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf  --config_file=common_metadata.csv  --output_path=output/COV_VAC_UPTAKE_2021_2023", 
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/COV_VAC_UPTAKE_2024.csv --pv_map=pvmap/COV_VAC_UPTAKE_2024_pvmap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --config_file=common_metadata.csv  --output_path=output/COV_VAC_UPTAKE_2024",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/WHO-COVID-19-global-monthly-death-by-age-data.csv --pv_map=pvmap/WHO-COVID-19-global-monthly-death-by-age-data_pvmap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --config_file=common_metadata.csv --output_path=output/death_by_age",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/WHO-COVID-19-global-daily-data.csv --pv_map=pvmap/WHO-COVID-19-global-daily-data_pvmap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=place_resolver.csv --config_file=common_metadata.csv --output_path=output/global_daily_data",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/WHO-COVID-19-global-hosp-icu-data.csv --pv_map=pvmap/WHO-COVID-19-global-hosp-icu-data_pvmap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --config_file=common_metadata.csv --statvar_dcid_remap_csv=remap/WHO-COVID-19-global-hosp-icu-data_remap.csv --output_path=output/global_hosp_icu_data"
+            ],
+            "import_inputs": [
+                {
+                      "template_mcf": "output/COV_VAC_UPTAKE_2021_2023.tmcf",
+                      "cleaned_csv": "output/COV_VAC_UPTAKE_2021_2023.csv"
+                  },
+                  {
+                      "template_mcf": "output/COV_VAC_UPTAKE_2024.tmcf",
+                      "cleaned_csv": "output/COV_VAC_UPTAKE_2024.csv"
+                  },
+                  {
+                      "template_mcf": "output/death_by_age.tmcf",
+                      "cleaned_csv": "output/death_by_age.csv"
+                  },
+                  {
+                      "template_mcf": "output/global_daily_data.tmcf",
+                      "cleaned_csv": "output/global_daily_data.csv"
+                  },
+                  {
+                      "template_mcf": "output/global_hosp_icu_data.tmcf",
+                      "cleaned_csv": "output/global_hosp_icu_data.csv"
+                  }
+                          ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "cron_schedule": "0 9 1 * *"
+        }
+    ]
+}

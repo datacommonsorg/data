@@ -143,6 +143,8 @@ MEASURE_TO_STATVAR_MAP = {
         "Count_Person_18OrMoreYears_UtilityServiceShutoffThreat_AsAFractionOf_Count_Person_18OrMoreYears",
     "ISOLATION":
         "Count_Person_18OrMoreYears_SociallyIsolated_AsAFractionOf_Count_Person_18OrMoreYears",
+    "LONELINESS":
+        "Count_Person_18OrMoreYears_Lonely_AsAFractionOf_Count_Person_18OrMoreYears"
 }
 
 # Mapping of data value type abbreviations to StatVar dcids
@@ -342,7 +344,7 @@ def clean_cdc_places_data(input_file, file_type, sep, release_year):
     """
     logging.info(
         f"Processing input files for {file_type} for the year {release_year}")
-    data = pd.read_csv(input_file, sep=sep)
+    data = pd.read_csv(input_file, sep=sep, thousands=',')
     data["release_year"] = release_year
     data = generate_statvar_names(data)
     if "CensusTract" == file_type:

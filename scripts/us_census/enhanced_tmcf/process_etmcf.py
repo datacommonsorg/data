@@ -1,11 +1,17 @@
 import csv
-import datacommons as dc
 import os
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Dict, List, Tuple
 
 from absl import app
 from absl import flags
-from dataclasses import dataclass
-from typing import Dict, List, Tuple
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+
+from util.dc_api_wrapper import dc_api_get_node_property
 
 GEO_ID_COLUMN = 'GEO_ID'
 NUM_DCIDS_TO_QUERY = 50
@@ -70,9 +76,10 @@ def _get_places_not_found(census_geoids: List[str]) -> List[str]:
     for i in range(0, len(geo_ids), NUM_DCIDS_TO_QUERY):
         selected_geo_ids = geo_ids[i:i + NUM_DCIDS_TO_QUERY]
         selected_dcids = [geoId_to_dcids[g] for g in selected_geo_ids]
-        res = dc.get_property_values(selected_dcids, 'name')
+        res = dc_api_get_node_property(selected_dcids, 'name')
         for index in range(len(selected_dcids)):
-            if not res[selected_dcids[index]]:
+            name = res.get(selected_dcids[index], {}).get('name')
+            if not name:
                 geoIds_not_found.append(selected_geo_ids[index])
     return geoIds_not_found
 

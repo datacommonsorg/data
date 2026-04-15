@@ -3,7 +3,7 @@
 - source: https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/downloads 
 
 - how to download data: Download script (fbigovcrime_downlod_script.py).
-    This script will create two folders (download_folder and download_folder/input_files).The file to be processed will be inside input_files.
+    Manually downloaded  XLSX files from the source and uploaded to our GCS bucket.Process.py is used to pre process the xlxs files.
 
 - type of place: City.
 
@@ -25,5 +25,11 @@
 If processing from current import folder :
 
 `python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=download_folder/input_files/* --config_file=fbigovcrime_metadata.csv --output_path=output/fbi_gov_crime`
+
+Semi Autorefresh:
+Upload final files to:
+
+     * `gs://unresolved_mcf/fbi/city/latest`
+Trigger `data/import-automation/executor/run_import.sh` manually for test/prod ingestion 
 
 

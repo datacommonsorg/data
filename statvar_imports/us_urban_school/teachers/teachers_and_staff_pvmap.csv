@@ -1,0 +1,35 @@
+YEAR,observationDate,{Data},measuredProperty,count,statType,measuredValue,,,,,,
+ncesid,observationAbout,nces/{Data},,,,,,,,,,
+TOT_FTE,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,employmentStatus,FullTimeEmployee,,,,
+SCH_FTETEACH_TOT,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,employmentStatus,FullTimeEmployee,,,,
+FTE_CERT,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,employmentStatus,FullTimeEmployee,certificationStatus,Certified,,
+SCH_FTETEACH_CERT,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,employmentStatus,FullTimeEmployee,certificationStatus,Certified,,
+SCH_FTETEACH_NOTCERT,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,employmentStatus,FullTimeEmployee,certificationStatus,NotCertified,,
+TEACH_1ST_YR,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,employmentStatus,FullTimeEmployee,teachingExperienceLevel,FirstYear,,
+TEACH_2ND_YR,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,employmentStatus,FullTimeEmployee,teachingExperienceLevel,SecondYear,,
+SCH_FTETEACH_FY,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,employmentStatus,FullTimeEmployee,teachingExperienceLevel,FirstYear,,
+SCH_FTETEACH_SY,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,employmentStatus,FullTimeEmployee,teachingExperienceLevel,SecondYear,,
+SCH_FTETEACH_ABSENT,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,employmentStatus,FullTimeEmployee,absenteeismStatus,AbsentMoreThan10Days,,
+SCH_TEACHERS_CURR_HI_M,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,HispanicOrLatino,gender,Male,timePeriod,CurrentSchoolYear
+SCH_TEACHERS_CURR_HI_F,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,HispanicOrLatino,gender,Female,timePeriod,CurrentSchoolYear
+SCH_TEACHERS_CURR_AM_M,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,AmericanIndianOrAlaskaNativeAlone,gender,Male,timePeriod,CurrentSchoolYear
+SCH_TEACHERS_CURR_AM_F,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,AmericanIndianOrAlaskaNativeAlone,gender,Female,timePeriod,CurrentSchoolYear
+SCH_TEACHERS_CURR_AS_M,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,AsianAlone,gender,Male,timePeriod,CurrentSchoolYear
+SCH_TEACHERS_CURR_AS_F,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,AsianAlone,gender,Female,timePeriod,CurrentSchoolYear
+SCH_TEACHERS_CURR_HP_M,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,NativeHawaiianOrOtherPacificIslanderAlone,gender,Male,timePeriod,CurrentSchoolYear
+SCH_TEACHERS_CURR_HP_F,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,NativeHawaiianOrOtherPacificIslanderAlone,gender,Female,timePeriod,CurrentSchoolYear
+SCH_TEACHERS_CURR_BL_M,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,Black,gender,Male,timePeriod,CurrentSchoolYear
+SCH_TEACHERS_CURR_BL_F,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,Black,gender,Female,timePeriod,CurrentSchoolYear
+SCH_TEACHERS_CURR_WH_M,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,WhiteAlone,gender,Male,timePeriod,CurrentSchoolYear
+SCH_TEACHERS_CURR_WH_F,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,WhiteAlone,gender,Female,timePeriod,CurrentSchoolYear
+SCH_TEACHERS_CURR_TR_M,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,TwoOrMoreRaces,gender,Male,timePeriod,CurrentSchoolYear
+SCH_TEACHERS_CURR_TR_F,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,race,TwoOrMoreRaces,gender,Female,timePeriod,CurrentSchoolYear
+COUNSEL,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Faculty,employmentStatus,FullTimeEmployee,facultyType,SchoolCounselor,,
+SCH_FTECOUNSELORS,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Faculty,employmentStatus,FullTimeEmployee,facultyType,SchoolCounselor,,
+SCH_FTESERVICES_NUR,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Faculty,employmentStatus,FullTimeEmployee,facultyType,Nurse,,
+SCH_FTESERVICES_PSY,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Faculty,employmentStatus,FullTimeEmployee,facultyType,SchoolPsychologist,,
+SCH_FTESERVICES_SOC,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Faculty,employmentStatus,FullTimeEmployee,facultyType,SocialWorker,,
+SCH_TEACHERS_CURR_TOT,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,timePeriod,CurrentSchoolYear,,,,
+SCH_TEACHERS_PREV_TOT,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Teacher,timePeriod,PreviousSchoolYear,,,,
+SCH_FTESECURITY_LEO,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Faculty,employmentStatus,FullTimeEmployee,facultyType,LawEnforcementOfficer,,
+SCH_FTESECURITY_GUA,value,{Number},#Filter,Allow=int(value) >= 0,populationType,Faculty,employmentStatus,FullTimeEmployee,facultyType,SecurityGuard,,

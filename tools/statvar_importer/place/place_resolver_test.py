@@ -252,6 +252,78 @@ class LookupNamesTest(unittest.TestCase):
         self.assertEqual(len(resolved_places), 0)
 
 
+class FilterByPvsTest(unittest.TestCase):
+
+    def _get_typeof_lookup_calls(self, mock_get_node_property):
+        return [
+            call_args.kwargs['dcids']
+            for call_args in mock_get_node_property.call_args_list
+            if call_args.kwargs['prop'] == 'typeOf'
+        ]
+
+    @patch('place_resolver.dc_api_get_node_property')
+    def test_filter_by_pvs_uses_correct_place_props_per_dcid(
+            self, mock_get_node_property):
+        """Tests that each dcid checks its own place properties for lookups."""
+        resolver = PlaceResolver(config_dict={'dc_api_key': 'test_key'})
+        places = {
+            'k1': {
+                'dcid': 'geoId/1'
+            },
+            'k2': {
+                'dcid': 'geoId/2',
+                'typeOf': 'County'
+            },
+        }
+
+        def _mock_get_props(dcids, prop, config):
+            if prop == 'typeOf':
+                return {'geoId/1': {'typeOf': 'City'}}
+            return {}
+
+        mock_get_node_property.side_effect = _mock_get_props
+
+        results = resolver.filter_by_pvs(places,
+                                         filter_pvs={'typeOf': 'County'})
+
+        self.assertEqual({'k2'}, set(results.keys()))
+        self.assertEqual([['geoId/1']],
+                         self._get_typeof_lookup_calls(mock_get_node_property))
+
+    @patch('place_resolver.dc_api_get_node_property')
+    def test_filter_by_pvs_skips_typeof_lookup_when_local_value_exists(
+            self, mock_get_node_property):
+        """Tests that typeOf API lookup is skipped when place has local typeOf."""
+        resolver = PlaceResolver(config_dict={'dc_api_key': 'test_key'})
+        places = {'k1': {'dcid': 'geoId/1', 'typeOf': 'City'}}
+        mock_get_node_property.return_value = {}
+
+        resolver.filter_by_pvs(places, filter_pvs={'typeOf': 'City'})
+
+        self.assertEqual([[]],
+                         self._get_typeof_lookup_calls(mock_get_node_property))
+
+    @patch('place_resolver.dc_api_get_node_property')
+    def test_filter_by_pvs_skips_typeof_lookup_when_cache_has_value(
+            self, mock_get_node_property):
+        """Tests that typeOf API lookup is skipped when cache has typeOf."""
+        resolver = PlaceResolver(config_dict={'dc_api_key': 'test_key'})
+        places = {'geoId/1': {'dcid': 'geoId/1'}}
+        mock_get_node_property.return_value = {}
+
+        def _mock_cache(cache_key, prop=''):
+            if cache_key == 'geoId/1' and prop == 'typeOf':
+                return {'typeOf': 'City'}
+            return {}
+
+        with patch.object(resolver, '_get_cache_value') as mock_get_cache_value:
+            mock_get_cache_value.side_effect = _mock_cache
+            resolver.filter_by_pvs(places, filter_pvs={'typeOf': 'City'})
+
+        self.assertEqual([[]],
+                         self._get_typeof_lookup_calls(mock_get_node_property))
+
+
 class GetMapsPlaceIdTest(unittest.TestCase):
 
     @patch('place_resolver.request_url')

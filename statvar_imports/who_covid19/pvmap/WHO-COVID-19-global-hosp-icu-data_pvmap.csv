@@ -1,0 +1,7 @@
+key,property1,value1,property2,value2,property3,value3,property4,value4,property5,value5,property6,value6,property7,value7
+Date_reported,observationDate,{Data},,,,,,,,,,,,
+Country_code,#Format,observationAbout=country/{Data},,,,,,,,,,,,
+Covid_new_hospitalizations_last_7days,value,{Number},measuredProperty,count,populationType,MedicalConditionIncident,medicalStatus,PatientDeceased,incidentType,COVID_19,medicalStatus,PatientHospitalized,observationPeriod,P1W
+Covid_new_icu_admissions_last_7days,value,{Number},measuredProperty,count,populationType,MedicalConditionIncident,medicalStatus,PatientDeceased,incidentType,COVID_19,medicalStatus,PatientInICU,observationPeriod,P1W
+Covid_new_hospitalizations_last_28days,value,{Number},measuredProperty,count,populationType,MedicalConditionIncident,medicalStatus,PatientDeceased,incidentType,COVID_19,medicalStatus,PatientHospitalized,observationPeriod,P1M
+Covid_new_icu_admissions_last_28days,value,{Number},measuredProperty,count,populationType,MedicalConditionIncident,medicalStatus,PatientDeceased,incidentType,COVID_19,medicalStatus,PatientInICU,observationPeriod,P1M

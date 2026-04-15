@@ -1,0 +1,62 @@
+Node: dcid:Algebra2
+typeOf: dcid:LanguageLearnedEnum
+name: "Algebra 2"
+isProvisional: dcs:True
+
+Node: dcid:race
+typeOf: dcs:Property
+name: "race"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EthnicityEnum,dcid:RaceCodeEnum
+
+Node: dcid:educationalInstitutionType
+typeOf: dcs:Property
+name: "educationalInstitutionType"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EducationalInstitutionTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:EducationalInstitutionTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "EducationalInstitutionTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:JuvenileJusticeFacility
+typeOf: dcid:EducationalInstitutionTypeEnum
+name: "Juvenile Justice Facility"
+isProvisional: dcs:True
+
+Node: dcid:disabilityStatus
+typeOf: dcs:Property
+name: "disabilityStatus"
+domainIncludes: dcid:Student
+
+Node: dcid:educationProgram
+typeOf: dcs:Property
+name: "educationProgram"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EducationProgramEnum
+isProvisional: dcs:True
+
+Node: dcid:EducationProgramEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "EducationProgramEnum"
+isProvisional: dcs:True
+
+Node: dcid:IDEA
+typeOf: dcid:EducationProgramEnum
+name: "IDEA"
+isProvisional: dcs:True
+
+Node: dcid:schoolSubject
+typeOf: dcs:Property
+name: "schoolSubject"
+rangeIncludes: dcid:CourseSpecializationEnum
+
+Node: dcid:Geometry
+typeOf: dcid:LanguageLearnedEnum
+name: "Geometry"
+isProvisional: dcs:True
+

@@ -347,7 +347,7 @@ class ImportDiffer:
         )
         return status
 
-    def run_differ(self):
+    def run_differ(self) -> dict:
         os.makedirs(self.output_path, exist_ok=True)
         tmp_path = os.path.join(self.output_path, self.job_name)
         os.makedirs(tmp_path, exist_ok=True)
@@ -368,6 +368,8 @@ class ImportDiffer:
             diff_path = os.path.join(self.output_path, 'schema-diff*')
             logging.info("Loading schema diff data from: %s", diff_path)
             schema_diff = differ_utils.load_csv_data(diff_path, tmp_path)
+            # TODO: populate summary for cloud mode
+            differ_summary = {}
         else:
             # Runs local Python differ.
             current_dir = os.path.join(tmp_path, 'current')
@@ -393,9 +395,22 @@ class ImportDiffer:
                                         'obs_diff_log.csv', tmp_path)
             differ_utils.write_csv_data(schema_diff, self.output_path,
                                         'schema_diff_log.csv', tmp_path)
+            differ_summary = {
+                'current_version': self.current_data,
+                'previous_version': self.previous_data,
+                'current_obs_size': current_df_obs.shape[0],
+                'previous_obs_size': previous_df_obs.shape[0],
+                'current_schema_size': current_df_schema.shape[0],
+                'previous_schema_size': previous_df_schema.shape[0],
+                'obs_diff_size': obs_diff.shape[0],
+                'schema_diff_size': schema_diff.shape[0]
+            }
+            differ_utils.write_json_data(differ_summary, self.output_path,
+                                         'differ_summary.json', tmp_path)
 
         logging.info(f'Generated observation diff of size {obs_diff.shape[0]}')
         logging.info(f'Generated schema diff of size {schema_diff.shape[0]}')
+        logging.info(f'Differ summary: {differ_summary}')
 
         logging.info(f'Performing schema diff analysis')
         schema_diff_summary = self.schema_diff_analysis(schema_diff)
@@ -411,6 +426,7 @@ class ImportDiffer:
         differ_utils.write_csv_data(obs_diff_samples, self.output_path,
                                     'obs_diff_samples.csv', tmp_path)
         logging.info(f'Differ output written to {self.output_path}')
+        return differ_summary
 
 
 def main(_):

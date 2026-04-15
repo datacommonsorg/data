@@ -5,27 +5,18 @@
             "rule_id": "check_max_date_latest",
             "description": "Checks that the latest date in the stats summary is from the current year.",
             "validator": "MAX_DATE_LATEST",
-            "scope": {
-                "data_source": "stats"
-            },
             "params": {}
         },
         {
             "rule_id": "check_max_date_consistent",
             "description": "Checks if the MaxDate is the same for all StatVars.",
             "validator": "MAX_DATE_CONSISTENT",
-            "scope": {
-                "data_source": "stats"
-            },
             "params": {}
         },
         {
-            "rule_id": "check_deleted_count",
+            "rule_id": "check_deleted_records_count",
             "description": "Checks that the number of deleted points is within the threshold.",
-            "validator": "DELETED_COUNT",
-            "scope": {
-                "data_source": "differ"
-            },
+            "validator": "DELETED_RECORDS_COUNT",
             "params": {
                 "threshold": 5
             }
@@ -35,7 +26,6 @@
             "description": "Checks if the number of places is the same for all StatVars.",
             "validator": "NUM_PLACES_CONSISTENT",
             "scope": {
-                "data_source": "stats",
                 "variables": {
                     "regex": [
                         "Count_Person_.*"
@@ -48,9 +38,6 @@
             "rule_id": "check_min_value",
             "description": "Checks that the minimum value for each StatVar is not below 0.",
             "validator": "MIN_VALUE_CHECK",
-            "scope": {
-                "data_source": "stats"
-            },
             "params": {
                 "minimum": 0
             }
@@ -60,7 +47,6 @@
             "description": "Checks that the maximum value for percentage StatVars is not above 100.",
             "validator": "MAX_VALUE_CHECK",
             "scope": {
-                "data_source": "stats",
                 "variables": {
                     "regex": [
                         ".*Percent.*"
@@ -84,9 +70,6 @@
             "rule_id": "check_num_observations",
             "description": "Checks that there is at least one observation for each StatVar.",
             "validator": "NUM_OBSERVATIONS_CHECK",
-            "scope": {
-                "data_source": "stats"
-            },
             "params": {
                 "minimum": 1
             }
@@ -95,9 +78,6 @@
             "rule_id": "check_unit_consistency",
             "description": "Check that all units are consistent",
             "validator": "UNIT_CONSISTENCY_CHECK",
-            "scope": {
-                "data_source": "stats"
-            },
             "params": {}
         }
     ]

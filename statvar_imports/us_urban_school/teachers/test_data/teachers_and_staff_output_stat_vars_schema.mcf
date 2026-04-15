@@ -1,0 +1,48 @@
+Node: dcid:employmentStatus
+typeOf: dcs:Property
+name: "employmentStatus"
+domainIncludes: dcid:Teacher,dcid:Faculty
+
+Node: dcid:certificationStatus
+typeOf: dcs:Property
+name: "certificationStatus"
+domainIncludes: dcid:Teacher
+rangeIncludes: dcid:CertificationStatusEnum
+isProvisional: dcs:True
+
+Node: dcid:CertificationStatusEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "CertificationStatusEnum"
+isProvisional: dcs:True
+
+Node: dcid:Certified
+typeOf: dcid:CertificationStatusEnum
+name: "Certified"
+isProvisional: dcs:True
+
+Node: dcid:NotCertified
+typeOf: dcid:CertificationStatusEnum
+name: "Not Certified"
+isProvisional: dcs:True
+
+Node: dcid:SchoolCounselor
+typeOf: dcid:FacultyTypeEnum
+name: "School Counselor"
+isProvisional: dcs:True
+
+Node: dcid:facultyType
+typeOf: dcs:Property
+name: "facultyType"
+rangeIncludes: dcid:HealthWorkerEnum,dcid:VictimTypeEnum
+
+Node: dcid:SocialWorker
+typeOf: dcid:FacultyTypeEnum
+name: "Social Worker"
+isProvisional: dcs:True
+
+Node: dcid:SecurityGuard
+typeOf: dcid:FacultyTypeEnum
+name: "Security Guard"
+isProvisional: dcs:True
+

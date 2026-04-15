@@ -28,7 +28,6 @@ from absl import flags
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))  # for recon util
 
-import latlng_recon_service
 import latlng_recon_geojson
 
 FLAGS = flags.FLAGS

@@ -1,0 +1,46 @@
+Node: dcid:healthOutcome
+typeOf: dcs:Property
+name: "healthOutcome"
+rangeIncludes: dcid:CauseOfDeathAndDisabilityEnum,dcid:HealthOutcomeEnum,dcid:ICD10_113CausesOfDeath
+
+Node: dcid:USDollarUpto14999
+typeOf: dcid:QuantityRange
+name: "USDollar Upto 14 99 9"
+isProvisional: dcs:True
+
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_IncomeOfUSDollarUpto14999
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Income Of USDollar Upto 14 99 9"
+isProvisional: dcs:True
+
+Node: dcid:income
+typeOf: dcs:Property
+name: "income"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:Count_Person_IncomeOfUSDollar15000To24999
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Income Of USDollar 15 00 0To 24 99 9"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_IncomeOfUSDollar25000To49999
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Income Of USDollar 25 00 0To 49 99 9"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_IncomeOfUSDollar50000To74999
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Income Of USDollar 50 00 0To 74 99 9"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_IncomeOfUSDollar75000Onwards
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Income Of USDollar 75 00 0Onwards"
+isProvisional: dcs:True
+

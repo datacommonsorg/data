@@ -2,14 +2,18 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_deleted_count",
-            "description": "Checks that the number of deleted points is within the threshold.",
-            "validator": "DELETED_COUNT",
-            "scope": {
-                "data_source": "differ"
-            },
+            "rule_id": "check_goldens_output_csv",
+            "validator": "GOLDENS_CHECK",
             "params": {
-                "threshold": 0
+                "golden_files": "golden_data/golden_treasury_constant_maturity_rates.csv",
+                "input_files": "treasury_constant_maturity_rates.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "golden_data/golden_summary_report.csv"
             }
         }
     ]

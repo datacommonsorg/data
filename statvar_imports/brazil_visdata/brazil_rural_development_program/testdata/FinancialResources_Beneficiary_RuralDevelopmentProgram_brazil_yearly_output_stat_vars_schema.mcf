@@ -1,0 +1,10 @@
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Household
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:Household
+

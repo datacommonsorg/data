@@ -473,6 +473,9 @@ class USEducation:
         """
         The Data for Place Entities is cleaned and written to a file.
         """
+        # FIX: Work on a copy to prevent SettingWithCopyWarning
+        self._final_df_place = self._final_df_place.copy()
+
         # Renaming Column Names
         self._final_df_place = self._final_df_place.rename(
             columns=self._renaming_columns)
@@ -483,7 +486,6 @@ class USEducation:
         # Files before the year 2017 and files 2017 onwards have different
         # column name for the same entity'School_Level'. Hence, combining both
         # columns under one common column.
-        # Define the column names for clarity
         col_pre_2017 = 'School_Level_16'
         col_post_2017 = 'School_Level_17'
         final_col = 'School_Level'
@@ -495,12 +497,10 @@ class USEducation:
             self._final_df_place[col_post_2017] = np.nan
 
         # Use .combine_first() to merge the two columns intelligently.
-        # This takes values from 'School_Level_17' and fills its missing spots
-        # with values from 'School_Level_16'.
         self._final_df_place[final_col] = self._final_df_place[
             col_post_2017].combine_first(self._final_df_place[col_pre_2017])
 
-        # (Optional but recommended) Clean up the old columns
+        # Clean up the old columns
         self._final_df_place.drop(columns=[col_pre_2017, col_post_2017],
                                   inplace=True)
 
@@ -520,40 +520,63 @@ class USEducation:
                 self._final_df_place[col] = self._final_df_place[col].replace(
                     to_replace={'': pd.NA})
                 self._final_df_place[col] = "dcs:" + self._final_df_place[col]
-        # Adding prefixes to ZIP, State and County code.
+
+        # --- FIX 1: Early String Cleanup (Prevents "nan" strings) ---
         self._final_df_place['ZIP'] = 'zip/' + self._final_df_place['ZIP']
+
+        # Convert to string, but immediately replace "nan" or "None" text with empty string
         self._final_df_place['County_code'] = self._final_df_place[
-            'County_code'].astype(str)
+            'County_code'].astype(str).replace({
+                'nan': '',
+                'None': ''
+            })
         self._final_df_place['State_code'] = self._final_df_place[
-            'State_code'].astype(str)
-        # In some cases The state code is not valid or is not a state.
-        # For example: state_code:59, 63
-        # In such cases, the state code is replaced with first 2 characters of
-        # its respective county code
+            'State_code'].astype(str).replace({
+                'nan': '',
+                'None': ''
+            })
+
+        # --- FIX 2: Zero Padding (Fixes geoId/4 -> geoId/04) ---
+        self._final_df_place['State_code'] = self._final_df_place[
+            'State_code'].apply(lambda x: x.zfill(2) if x.strip() else '')
+        self._final_df_place['County_code'] = self._final_df_place[
+            'County_code'].apply(lambda x: x.zfill(5) if x.strip() else '')
+
+        # In some cases The state code is not valid or is not a state (59, 63).
         self._final_df_place["State_code"] = np.where(
             self._final_df_place["State_code"].str.contains("59|63"),
-            (self._final_df_place['County_code'].astype(str).str[:2]),
+            (self._final_df_place['County_code'].str[:2]),
             (self._final_df_place["State_code"]))
 
         self._final_df_place['County_code'] = self._final_df_place[
             'County_code'].apply(lambda x: 'geoId/' + x if x != '' else '')
         self._final_df_place['State_code'] = self._final_df_place[
             'State_code'].apply(lambda x: 'geoId/' + x if x != '' else '')
-        # Generates State code by mapping state abbrevation and USSTATE map
-        # to fill the empty values in the state code column.
+
+        # --- FIX 3: Safe Map Handling ---
+        # Map abbreviations. Use fillna('') so we don't put float NaNs into our string column.
+        mapped_states = self._final_df_place['State_Abbr'].map(
+            USSTATE_MAP).fillna('')
+
         self._final_df_place['State_code'] = np.where(
-            self._final_df_place['State_code'] == "",
-            (self._final_df_place['State_Abbr'].map(USSTATE_MAP)),
-            (self._final_df_place['State_code']))
-        # Creating a unique list for zip,state and county.
-        zip_list = list(pd.unique((self._final_df_place['ZIP'])))
-        county_list = list(pd.unique(self._final_df_place['County_code']))
-        state_list = list(pd.unique(self._final_df_place['State_code']))
-        # removing empty values from the list which are from source.
-        if '' in county_list:
-            county_list.remove("")
-        if '' in state_list:
-            state_list.remove("")
+            self._final_df_place['State_code'] == "", mapped_states,
+            self._final_df_place['State_code'])
+
+        # --- FIX 4: Rigorous List Sanitization (The Crash Fix) ---
+        # We must filter out non-strings and empty strings before sending to API
+        raw_zip = pd.unique(self._final_df_place['ZIP']).tolist()
+        raw_county = pd.unique(self._final_df_place['County_code']).tolist()
+        raw_state = pd.unique(self._final_df_place['State_code']).tolist()
+
+        zip_list = [
+            x for x in raw_zip if isinstance(x, str) and x.strip() != ''
+        ]
+        county_list = [
+            x for x in raw_county if isinstance(x, str) and x.strip() != ''
+        ]
+        state_list = [
+            x for x in raw_state if isinstance(x, str) and x.strip() != ''
+        ]
 
         config = {
             'dc_api_batch_size': 200,
@@ -562,27 +585,38 @@ class USEducation:
             'dc_api_use_cache': False,
             'dc_api_root': None
         }
-        # Passing the list through API call for checking its existance.
-        dcid_check_zip = dc_api_is_defined_dcid(zip_list, config)
-        dcid_check_county = dc_api_is_defined_dcid(county_list, config)
-        dcid_check_state = dc_api_is_defined_dcid(state_list, config)
-        # After passing through check, the empty values are assigned as False.
+
+        # Only call API if lists are not empty
+        dcid_check_zip = dc_api_is_defined_dcid(zip_list,
+                                                config) if zip_list else {}
+        dcid_check_county = dc_api_is_defined_dcid(
+            county_list, config) if county_list else {}
+        dcid_check_state = dc_api_is_defined_dcid(state_list,
+                                                  config) if state_list else {}
+
+        # Add safety defaults
         dcid_check_county[""] = False
         dcid_check_state[""] = False
-        # Considering only the existing zip, state and county codes.
+        dcid_check_zip[""] = False
+
+        # --- FIX 5: Safe Dictionary Lookups ---
+        # Use .get(x, False) to prevent crash if key is missing
         self._final_df_place['ZIP'] = self._final_df_place['ZIP'].apply(
-            lambda x: x if dcid_check_zip[x] else '')
+            lambda x: x if dcid_check_zip.get(x, False) else '')
 
         self._final_df_place['County_code'] = self._final_df_place[
-            'County_code'].apply(lambda x: x if dcid_check_county[x] else '')
+            'County_code'].apply(lambda x: x
+                                 if dcid_check_county.get(x, False) else '')
 
         self._final_df_place['State_code'] = self._final_df_place[
-            'State_code'].apply(lambda x: x if dcid_check_state[x] else '')
-        # Reverse mapping State abbrevations from the current state_code
-        # column to combine Physical Address with State Abbrevation.
+            'State_code'].apply(lambda x: x
+                                if dcid_check_state.get(x, False) else '')
+
+        # Reverse mapping State abbrevations
         state_abbr = {v: k for k, v in USSTATE_MAP.items()}
         self._final_df_place['Validated_State_Abbr'] = self._final_df_place[
             'State_code'].replace(state_abbr)
+
         # Generating a column for place property.
         self._final_df_place['ContainedInPlace'] = self._final_df_place[
             'ZIP'].apply(lambda x: x + ',' if x != '' else ''
@@ -590,6 +624,7 @@ class USEducation:
                             lambda x: x + ',' if x != '' else ''
                         ) + self._final_df_place['State_code'].apply(
                             lambda x: x if x != '' else '')
+
         self._final_df_place['ZIP'] = self._final_df_place['ZIP'].str.replace(
             "zip/", "")
         self._final_df_place["Physical_Address"] = self._final_df_place[
@@ -597,21 +632,23 @@ class USEducation:
         # Camel casing Physical Address
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"].str.title()
-        # Created a column School_Management for State Name as NCES_BureauOfIndianEducation
-        # and NCES_DepartmentOfDefenseEducationActivity as they are outlyin areas of United States.
+
+        # School Management logic
         self._final_df_place["School_Management"] = np.where(
             self._final_df_place["State_Name"].str.contains(
                 "NCES_BureauOfIndianEducation|NCES_DepartmentOfDefenseEducationActivity"
             ), self._final_df_place["State_Name"], '')
-        # Checking if state code is not null and respectively adding state
-        # abbrevation to physical address.
+
+        # --- FIX 6: Address Generation Safety ---
+        # Ensure Validated_State_Abbr is string and not nan
         self._final_df_place["Physical_Address"] = np.where(
             self._final_df_place['State_code'] == "",
             (self._final_df_place["Physical_Address"]),
             (self._final_df_place["Physical_Address"] + " " +
-             self._final_df_place["Validated_State_Abbr"]))
+             self._final_df_place["Validated_State_Abbr"].astype(str).replace(
+                 'nan', '')))
+
         # Checking if ZIP4 is not null and respectively adding it
-        # to physical address.
         self._final_df_place["Physical_Address"] = np.where(
             self._final_df_place['Location_ZIP4'] == "",
             (self._final_df_place["Physical_Address"] + " " +
@@ -622,19 +659,18 @@ class USEducation:
 
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"].str.replace("Po Box", "PO BOX")
-        # Camel casing Public School Name and if the length of the school name
-        # is less than 4 then the school name remains the same. Most of them
-        # are abbrevations.
+
+        # Camel casing Public School Name
         self._final_df_place["Public_School_Name"] = np.where(
             self._final_df_place["Public_School_Name"].str.len() <= 4,
             self._final_df_place["Public_School_Name"],
             self._final_df_place["Public_School_Name"].astype(str).apply(
                 lambda x: x.title()))
-        # Sorting the values by descending order in year and dropping duplicates.
+
+        # Sorting and dropping duplicates
         self._final_df_place = self._final_df_place.sort_values(by=["year"],
                                                                 ascending=False)
-        self._final_df_place = self._final_df_place.reset_index(
-            drop=True)  # Added this line
+        self._final_df_place = self._final_df_place.reset_index(drop=True)
         self._final_df_place = self._final_df_place.drop_duplicates(
             subset=["school_state_code"]).reset_index(drop=True)
 
@@ -643,41 +679,70 @@ class USEducation:
         """
         The Data for Place Entities is cleaned and written to a file.
         """
+        # Ensure we are working on a copy to reduce SettingWithCopyWarning risks
+        self._final_df_place = self._final_df_place.copy()
+
         self._final_df_place[
             'geoID'] = "sch" + self._final_df_place['Agency ID - NCES Assigned']
         self._final_df_place = self._final_df_place.rename(
             columns=self._renaming_columns)
+
         # Renaming the property values according to DataCommons.
         self._final_df_place = replace_values(self._final_df_place,
                                               replace_with_all_mappers=False,
                                               regex_flag=False)
+
+        # --- FIX 1: Robust String Cleaning & Padding ---
+        # Convert to string but immediately replace 'nan' artifacts with empty strings
         self._final_df_place['County_code'] = self._final_df_place[
-            'County_code'].astype(str)
+            'County_code'].astype(str).replace({
+                'nan': '',
+                'None': ''
+            })
         self._final_df_place['State_code'] = self._final_df_place[
-            'State_code'].astype(str)
+            'State_code'].astype(str).replace({
+                'nan': '',
+                'None': ''
+            })
+
+        # Pad with zeros to ensure valid FIPS (e.g., '4' -> '04')
+        self._final_df_place['State_code'] = self._final_df_place[
+            'State_code'].apply(lambda x: x.zfill(2) if x.strip() else '')
+        self._final_df_place['County_code'] = self._final_df_place[
+            'County_code'].apply(lambda x: x.zfill(5) if x.strip() else '')
+
         # In some cases The state code is not valid or is not a state.
         # For example: state_code:59, 63
         # In such cases, the state code is replaced with first 2 characters of
         # its respective county code
         self._final_df_place["State_code"] = np.where(
             self._final_df_place["State_code"].str.contains("59|63"),
-            (self._final_df_place['County_code'].astype(str).str[:2]),
+            (self._final_df_place['County_code'].str[:2]),
             (self._final_df_place["State_code"]))
 
         self._final_df_place['County_code'] = self._final_df_place[
             'County_code'].apply(lambda x: 'geoId/' + x if x != '' else '')
         self._final_df_place['State_code'] = self._final_df_place[
             'State_code'].apply(lambda x: 'geoId/' + x if x != '' else '')
-        # Generates State code by mapping state abbrevation and USSTATE map
-        # to fill the empty values in the state code column.
+
+        # --- FIX 2: Handle Map NaNs Immediately ---
+        # Generates State code by mapping state abbrevation.
+        # IMPORTANT: Use .fillna('') so we don't introduce float NaNs into the string column.
+        mapped_states = self._final_df_place['State_Abbr'].map(
+            USSTATE_MAP).fillna('')
+
         self._final_df_place['State_code'] = np.where(
-            self._final_df_place['State_code'] == "",
-            (self._final_df_place['State_Abbr'].map(USSTATE_MAP)),
-            (self._final_df_place['State_code']))
-        # Creating a unique list of Sate Code and removing null values from source.
-        state_list = list(pd.unique(self._final_df_place['State_code']))
-        if '' in state_list:
-            state_list.remove("")
+            self._final_df_place['State_code'] == "", mapped_states,
+            self._final_df_place['State_code'])
+
+        # --- FIX 3: Sanitize List for API (The Crash Fix) ---
+        # Creating a unique list of State Code.
+        # rigorously filter: must be a string, must not be empty.
+        raw_state_list = pd.unique(self._final_df_place['State_code']).tolist()
+        state_list = [
+            x for x in raw_state_list if isinstance(x, str) and x.strip() != ''
+        ]
+
         config = {
             'dc_api_batch_size': 200,
             'dc_api_retries': 3,
@@ -685,16 +750,29 @@ class USEducation:
             'dc_api_use_cache': False,
             'dc_api_root': None
         }
-        dcid_check_state = dc_api_is_defined_dcid(state_list, config)
+
+        # Only call API if we actually have states to check
+        if state_list:
+            dcid_check_state = dc_api_is_defined_dcid(state_list, config)
+        else:
+            dcid_check_state = {}
+
+        # Add safety default
         dcid_check_state[""] = False
+
+        # --- FIX 4: Safe Dictionary Lookup ---
         # Generating a column for place property.
+        # Use .get(x, False) to prevent crash if 'x' is somehow not in the dict
         self._final_df_place['ContainedInPlace'] = self._final_df_place[
-            'State_code'].apply(lambda x: x if dcid_check_state[x] else '')
+            'State_code'].apply(lambda x: x
+                                if dcid_check_state.get(x, False) else '')
+
         # Reverse mapping State abbrevations from the current state_code
         # column to combine Physical Address with State Abbrevation.
         state_abbr = {v: k for k, v in USSTATE_MAP.items()}
         self._final_df_place['Validated_State_Abbr'] = self._final_df_place[
             'State_code'].replace(state_abbr)
+
         # Camel casing Physical Address
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"] + " " + self._final_df_place["City"]
@@ -705,7 +783,8 @@ class USEducation:
             self._final_df_place['ContainedInPlace'] == "",
             (self._final_df_place["Physical_Address"]),
             (self._final_df_place["Physical_Address"] + " " +
-             self._final_df_place["Validated_State_Abbr"]))
+             self._final_df_place["Validated_State_Abbr"].astype(str).replace(
+                 'nan', '')))
 
         self._final_df_place["Physical_Address"] = np.where(
             self._final_df_place['Location_ZIP4'] == "",
@@ -714,14 +793,17 @@ class USEducation:
             (self._final_df_place["Physical_Address"] + " " +
              self._final_df_place["ZIP"] + "-" +
              self._final_df_place['Location_ZIP4']))
+
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"].str.replace("Po Box", "PO Box")
+
         self._final_df_place["District_School_name"] = np.where(
             self._final_df_place["District_School_name"].str.len() <= 4,
             self._final_df_place["District_School_name"],
             self._final_df_place["District_School_name"].str.title())
+
         # Created a column School_Management for State Name as NCES_BureauOfIndianEducation
-        # and NCES_DepartmentOfDefenseEducationActivity as they are outlyin areas of United States.
+        # and NCES_DepartmentOfDefenseEducationActivity as they are outlying areas of United States.
         self._final_df_place["School_Management"] = np.where(
             self._final_df_place["State_Name"].str.contains(
                 "NCES_BureauOfIndianEducation|NCES_DepartmentOfDefenseEducationActivity"
@@ -735,6 +817,7 @@ class USEducation:
             self._final_df_place[col] = self._final_df_place[col].replace(
                 to_replace={'': pd.NA})
             self._final_df_place[col] = "dcs:" + self._final_df_place[col]
+
         self._final_df_place = self._final_df_place.sort_values(by=["year"],
                                                                 ascending=False)
         self._final_df_place = self._final_df_place.drop_duplicates(

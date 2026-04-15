@@ -1,0 +1,5 @@
+Node: dcid:healthOutcome
+typeOf: dcs:Property
+name: "healthOutcome"
+rangeIncludes: dcid:CauseOfDeathAndDisabilityEnum,dcid:HealthOutcomeEnum,dcid:ICD10_113CausesOfDeath
+

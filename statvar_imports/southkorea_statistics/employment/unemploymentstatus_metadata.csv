@@ -1,0 +1,14 @@
+parameter,value
+url,https://kosis.kr/statHtml/statHtml.do?sso=ok&returnurl=https%3A%2F%2Fkosis.kr%3A443%2FstatHtml%2FstatHtml.do%3Flist_id%3DB16%26obj_var_id%3D%26seqNo%3D%26tblId%3DDT_1DA7088S%26vw_cd%3DMT_ETITLE%26language%3Den%26orgId%3D101%26path%3D%252Feng%252FstatisticsList%252FstatisticsListIndex.do%26conn_path%3DMT_ETITLE%26itm_id%3D%26lang_mode%3Den%26scrId%3D%26
+description,
+process,
+#place_type,Country
+#places_within,country/KOR
+start_date,2015
+end_date,2024
+release_frequency,P1Y
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured, scalingFactor, unit"
+mapped_rows,1
+mapped_columns,2
+header_rows,1

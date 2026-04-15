@@ -1,0 +1,12 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_count",
+            "validator": "DELETED_RECORDS_COUNT",
+            "params": {
+                "threshold": 1230
+            }
+        }
+    ]
+}

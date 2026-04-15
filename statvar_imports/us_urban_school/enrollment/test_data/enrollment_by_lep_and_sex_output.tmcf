@@ -1,0 +1,6 @@
+Node: E:enrollment_by_lep_and_sex_output->E0
+observationDate: C:enrollment_by_lep_and_sex_output->observationDate
+observationAbout: C:enrollment_by_lep_and_sex_output->observationAbout
+variableMeasured: C:enrollment_by_lep_and_sex_output->variableMeasured
+value: C:enrollment_by_lep_and_sex_output->value
+typeOf: dcs:StatVarObservation

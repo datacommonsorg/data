@@ -1,0 +1,6 @@
+Node: E:junior_college_output->E0
+observationAbout: C:junior_college_output->observationAbout
+observationDate: C:junior_college_output->observationDate
+value: C:junior_college_output->value
+variableMeasured: C:junior_college_output->variableMeasured
+typeOf: dcs:StatVarObservation

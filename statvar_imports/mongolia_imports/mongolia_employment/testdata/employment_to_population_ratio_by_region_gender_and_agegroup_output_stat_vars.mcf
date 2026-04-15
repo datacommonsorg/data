@@ -1,0 +1,15 @@
+Node: dcid:Count_Person_15To19Years_Employed
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_Employed
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:Employed
+

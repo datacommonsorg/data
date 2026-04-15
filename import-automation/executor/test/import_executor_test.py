@@ -21,6 +21,7 @@ import subprocess
 import tempfile
 
 from app.executor import import_executor
+from app.executor.import_executor import ImportStatus
 
 
 class ImportExecutorTest(unittest.TestCase):
@@ -68,7 +69,7 @@ class ImportExecutorTest(unittest.TestCase):
             raise Exception
 
         result = import_executor.run_and_handle_exception(raise_exception)
-        self.assertEqual('failed', result.status)
+        self.assertEqual(ImportStatus.FAILURE, result.status)
         self.assertEqual([], result.imports_executed)
         self.assertIn('Exception', result.message)
         self.assertIn('Traceback', result.message)

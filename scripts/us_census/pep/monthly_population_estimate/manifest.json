@@ -10,7 +10,9 @@
             "scripts": [
                 "preprocess.py"
             ],
-            "source_files": ["raw_data/*"],
+            "source_files": [
+                "raw_data/*"
+            ],
             "import_inputs": [
                 {
                     "template_mcf": "output/USA_Population_Count.tmcf",

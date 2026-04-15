@@ -36,9 +36,9 @@ MELT_VAR_COL = "householdSize_numberOfVehicles"
 
 MELT_OBV_COL = "observation"
 
-_HOUSEHOLD_PV = "[dcs:Person {person}]"
+_HOUSEHOLD_PV = "With{person}Person"
 
-_NUM_OF_VEHICLES_PV = "[dcs:AvailableVehicles {vehicle}]"
+_NUM_OF_VEHICLES_PV = "With{vehicle}AvailableVehicles"
 
 # pylint: disable=unnecessary-lambda-assignment
 # pylint: disable=line-too-long
@@ -65,21 +65,14 @@ URBAN_RURAL_MCF_NODE = (
     "statType: dcs:measurementResult\n"
     "measuredProperty: dcs:placeOfResidenceClassification\n")
 
-TMCF_TEMPLATE = (
-    "Node: E:us_transportation_household->E0\n"
-    "typeOf: dcs:StatVarObservation\n"
-    "variableMeasured: dcs:Place_Type_PlaceofResidenceClassification\n"
-    "value: C:us_transportation_household->urban_group\n"
-    "observationAbout: C:us_transportation_household->location\n"
-    "observationDate: C:us_transportation_household->year\n"
-    "\n"
-    "Node: E:us_transportation_household->E1\n"
-    "typeOf: dcs:StatVarObservation\n"
-    "variableMeasured: C:us_transportation_household->sv\n"
-    "measurementMethod: C:us_transportation_household->measurement_method\n"
-    "observationAbout: C:us_transportation_household->location\n"
-    "observationDate: C:us_transportation_household->year\n"
-    "value: C:us_transportation_household->observation\n")
+TMCF_TEMPLATE = """Node: E:{filename}->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: C:{filename}->sv
+measurementMethod: C:{filename}->measurement_method
+observationAbout: C:{filename}->location
+observationDate: C:{filename}->year
+value: C:{filename}->observation
+"""
 
 COMMON_COLS = [
     "ptrp_1mem_0veh", "ptrp_1mem_1veh", "ptrp_1mem_2veh", "ptrp_1mem_3veh",
@@ -210,11 +203,6 @@ SV_PROP_ORDER = [
 ]
 
 FORM_STATVAR = {
-    # "placeOfResidenceClassification": {
-    #     "column": "urban_group",
-    #     "update_value": _DEFAULT_PROP,
-    #     "pv_format": _PV_FORMAT
-    # },
     "numberOfVehicles": {
         "column": MELT_VAR_COL,
         "regex": {

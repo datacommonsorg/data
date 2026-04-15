@@ -1,0 +1,42 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "NCHS_BRFSS_Asthma",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.cdc.gov/asthma/brfss/default.htm",
+      "provenance_description": "This dataset mainly focused on Adult and child Self-Reported Lifetime Asthma Prevalence.",
+      "scripts": ["download_script.py", "run.sh"],
+      "source_files": [
+        "input_files/*/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/brfss_asthma_by_age_and_state_output.tmcf",
+          "cleaned_csv": "output_files/brfss_asthma_by_age_and_state_output.csv"
+        },
+        {
+          "template_mcf": "output_files/brfss_asthma_by_education_and_state_output.tmcf",
+          "cleaned_csv": "output_files/brfss_asthma_by_education_and_state_output.csv"
+        },
+        {
+          "template_mcf": "output_files/brfss_asthma_by_income_and_state_output.tmcf",
+          "cleaned_csv": "output_files/brfss_asthma_by_income_and_state_output.csv"
+        },
+        {
+          "template_mcf": "output_files/brfss_asthma_by_race_and_ethnicity_state_output.tmcf",
+          "cleaned_csv": "output_files/brfss_asthma_by_race_and_ethnicity_state_output.csv"
+        },
+        {
+          "template_mcf": "output_files/brfss_asthma_by_sex_and_state_output.tmcf",
+          "cleaned_csv": "output_files/brfss_asthma_by_sex_and_state_output.csv"
+        },
+        {
+          "template_mcf": "output_files/brfss_asthma_by_state_output.tmcf",
+          "cleaned_csv": "output_files/brfss_asthma_by_state_output.csv"
+        }
+      ],
+      "cron_schedule": "0 02 * * 2"
+    }
+  ]
+}
+

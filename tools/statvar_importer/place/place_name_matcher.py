@@ -74,26 +74,6 @@ from counters import Counters
 import file_util
 from ngram_matcher import NgramMatcher
 
-flags.DEFINE_string('input_csv', '',
-                    'CSV file with names of places to resolve.')
-flags.DEFINE_string('input_name_column', 'name',
-                    'CSV column for names in the input_csv.')
-flags.DEFINE_list(
-    'place_within',
-    '',
-    'Comma separated list of parent places, eg: country/BRA.',
-)
-flags.DEFINE_string('ngram_matcher_config', '',
-                    'Configuration settings for ngram matcher.')
-flags.DEFINE_list('lookup_names', '',
-                  'Comma separated list of places to lookup.')
-flags.DEFINE_string('place_output_csv', '',
-                    'Output CSV with place dcids added.')
-flags.DEFINE_string('place_csv', '',
-                    'CSV file with place names and dcids to match.')
-
-_FLAGS = flags.FLAGS
-
 _DEFAULT_CONFIG = {
     # Ordered list of parent places
     'parent_place_types': [
@@ -148,6 +128,7 @@ class PlaceNameMatcher:
 
         # Load the ngrams for place names into the matcher.
         self._setup_name_matcher()
+        self._log_every_n = self._config.get('log_every_n', 10)
 
     def _load_places_dict(self, place_csv: str, places_within: list):
         """Add place names from csv to the name matcher."""
@@ -209,8 +190,10 @@ class PlaceNameMatcher:
         matches = self._ngram_matcher.lookup(key=place_name,
                                              num_results=num_results,
                                              config=self._config)
-        logging.debug(
-            f'Got {len(matches)} lookup results for {place_name}: {matches}')
+        logging.log_every_n(
+            logging.DEBUG,
+            f'Got {len(matches)} lookup results for {place_name}: {matches}',
+            self._log_every_n)
         # Filter results for matching properties such as typeOf.
         if not property_filters:
             property_filters = self._config.get('match_filters', None)
@@ -233,9 +216,10 @@ class PlaceNameMatcher:
                 unique_matches.append((name, dcid))
                 dcids.add(dcid)
         matches = unique_matches
-        logging.debug(
+        logging.log_every_n(
+            logging.DEBUG,
             f'Got {len(matches)} matches for {place_name} with {property_filters}:'
-            f' {matches}')
+            f' {matches}', self._log_every_n)
         return matches
 
     def process_csv(self, input_csv: str, name_column: str, output_csv: str):
@@ -248,7 +232,9 @@ class PlaceNameMatcher:
                 counters.add_counter('total',
                                      file_util.file_estimate_num_rows(file))
             for file in files:
-                logging.info(f'Looking up dcids for places in {file}')
+                logging.log_every_n(logging.INFO,
+                                    f'Looking up dcids for places in {file}',
+                                    self._log_every_n)
                 with file_util.FileIO(file) as csvfile:
                     csv_reader = csv.reader(
                         csvfile,
@@ -281,13 +267,16 @@ class PlaceNameMatcher:
                                     row.append(place_dcid)
                                     row.append(key)
                                     row.append(place_type)
-                                logging.debug(
-                                    f'Found matches for {row}: {matches}')
+                                logging.log_every_n(
+                                    logging.DEBUG,
+                                    f'Found matches for {row}: {matches}',
+                                    self._log_every_n)
                                 counters.add_counter('places_resolved', 1)
                             else:
                                 counters.add_counter('places_not_resolved', 1)
                         csv_writer.writerow(row)
                         counters.add_counter('processed', 1)
+        counters.print_counters()
 
     def get_parent_places(self, dcid: str) -> list:
         """Returns the list of containedInPlace parents."""
@@ -347,6 +336,7 @@ class PlaceNameMatcher:
 
 
 def main(_):
+    _FLAGS = flags.FLAGS
     config = {}
     if _FLAGS.ngram_matcher_config:
         config = ast.literal_eval(_FLAGS.ngram_matcher_config)
@@ -364,4 +354,21 @@ def main(_):
 
 
 if __name__ == '__main__':
+    flags.DEFINE_string('input_csv', '',
+                        'CSV file with names of places to resolve.')
+    flags.DEFINE_string('input_name_column', 'name',
+                        'CSV column for names in the input_csv.')
+    flags.DEFINE_list(
+        'place_within',
+        '',
+        'Comma separated list of parent places, eg: country/BRA.',
+    )
+    flags.DEFINE_string('ngram_matcher_config', '',
+                        'Configuration settings for ngram matcher.')
+    flags.DEFINE_list('lookup_names', '',
+                      'Comma separated list of places to lookup.')
+    flags.DEFINE_string('place_output_csv', '',
+                        'Output CSV with place dcids added.')
+    flags.DEFINE_string('place_csv', '',
+                        'CSV file with place names and dcids to match.')
     app.run(main)

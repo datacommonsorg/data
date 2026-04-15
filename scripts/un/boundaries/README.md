@@ -38,7 +38,7 @@ Among those, the following ones have boundary from World Bank source:
 Run the following script to generate Website cache and MCFs ready for import.
 
 ```bash
-export MIXER_API_KEY=<autopush_api_key>
+export DC_API_KEY=<dc_api_key>
 ./run.sh
 ```
 

@@ -1,0 +1,58 @@
+
+
+Node: dcid:Percent_Person_YearsUpto18_Female_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: dcid:YearsUpto18
+gender: dcid:Female
+healthOutcome: dcid:Asthma
+
+Node: dcid:Percent_Person_YearsUpto18_Male_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: dcid:YearsUpto18
+gender: dcid:Male
+healthOutcome: dcid:Asthma
+
+Node: dcid:SampleSize_Count_Person_YearsUpto18_Female_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+age: dcid:YearsUpto18
+gender: dcid:Female
+healthOutcome: dcid:Asthma
+
+Node: dcid:SampleSize_Count_Person_YearsUpto18_Male_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+age: dcid:YearsUpto18
+gender: dcid:Male
+healthOutcome: dcid:Asthma
+
+Node: dcid:StdError_Count_Person_YearsUpto18_Female_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_18OrLessYears_Female
+age: dcid:YearsUpto18
+gender: dcid:Female
+healthOutcome: dcid:Asthma
+
+Node: dcid:StdError_Count_Person_YearsUpto18_Male_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_18OrLessYears_Male
+age: dcid:YearsUpto18
+gender: dcid:Male
+healthOutcome: dcid:Asthma
+

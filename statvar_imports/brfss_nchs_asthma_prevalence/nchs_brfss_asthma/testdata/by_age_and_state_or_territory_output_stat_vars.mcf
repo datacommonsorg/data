@@ -1,0 +1,101 @@
+
+Node: dcid:Percent_Person_0To4Years_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [0 4 Years]
+healthOutcome: dcid:Asthma
+
+Node: dcid:Percent_Person_10To14Years_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [10 14 Years]
+healthOutcome: dcid:Asthma
+
+Node: dcid:Percent_Person_15To17Years_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [15 17 Years]
+healthOutcome: dcid:Asthma
+
+Node: dcid:Percent_Person_5To9Years_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [5 9 Years]
+healthOutcome: dcid:Asthma
+
+Node: dcid:SampleSize_Count_Person_0To4Years_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+age: [0 4 Years]
+healthOutcome: dcid:Asthma
+
+Node: dcid:SampleSize_Count_Person_10To14Years_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+age: [10 14 Years]
+healthOutcome: dcid:Asthma
+
+Node: dcid:SampleSize_Count_Person_15To17Years_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+age: [15 17 Years]
+healthOutcome: dcid:Asthma
+
+Node: dcid:SampleSize_Count_Person_5To9Years_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:sampleSize
+age: [5 9 Years]
+healthOutcome: dcid:Asthma
+
+Node: dcid:StdError_Count_Person_0To4Years_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_0To4Years
+age: [0 4 Years]
+healthOutcome: dcid:Asthma
+
+Node: dcid:StdError_Count_Person_10To14Years_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_10To14Years
+age: [10 14 Years]
+healthOutcome: dcid:Asthma
+
+Node: dcid:StdError_Count_Person_15To17Years_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_15To17Years
+age: [15 17 Years]
+healthOutcome: dcid:Asthma
+
+Node: dcid:StdError_Count_Person_5To9Years_WithAsthma
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:stdError
+measurementDenominator: dcid:Count_Person_5To9Years
+age: [5 9 Years]
+healthOutcome: dcid:Asthma
+

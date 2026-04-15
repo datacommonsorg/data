@@ -1,0 +1,16 @@
+Node: dcid:healthOutcome
+typeOf: dcs:Property
+name: "healthOutcome"
+rangeIncludes: dcid:CauseOfDeathAndDisabilityEnum,dcid:HealthOutcomeEnum,dcid:ICD10_113CausesOfDeath
+
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_NotHispanicOrLatino_OtherRace
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Not Hispanic Or Latino_ Other Race"
+isProvisional: dcs:True
+

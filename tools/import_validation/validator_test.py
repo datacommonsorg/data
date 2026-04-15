@@ -12,12 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import csv
+import os
+import sys
+import tempfile
 import pandas as pd
 import unittest
 from datetime import datetime
 
-from tools.import_validation.validator import Validator
-from tools.import_validation.result import ValidationStatus
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _SCRIPT_DIR)
+
+from validator import Validator
+from result import ValidationStatus
 
 
 class TestMaxDateLatestValidation(unittest.TestCase):
@@ -62,129 +69,242 @@ class TestMaxDateLatestValidation(unittest.TestCase):
         self.assertIn('missing required column', result.message)
 
 
-class TestDeletedCountValidation(unittest.TestCase):
-    '''Test Class for the DELETED_COUNT validation rule.'''
+class TestDeletedRecordsCountValidation(unittest.TestCase):
+    '''Test Class for the DELETED_RECORDS_COUNT validation rule.'''
 
     def setUp(self):
         self.validator = Validator()
 
-    def test_deleted_count_fails_when_over_threshold(self):
+    def test_deleted_records_count_fails_when_over_threshold(self):
         test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
         params = {'threshold': 1}
-        result = self.validator.validate_deleted_count(test_df, params)
+        result = self.validator.validate_deleted_records_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(result.details['deleted_count'], 2)
+        self.assertEqual(result.details['deleted_records_count'], 2)
         self.assertEqual(result.details['threshold'], 1)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
 
-    def test_deleted_count_passes_when_at_threshold(self):
+    def test_deleted_records_count_passes_when_at_threshold(self):
         test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
         params = {'threshold': 2}
-        result = self.validator.validate_deleted_count(test_df, params)
+        result = self.validator.validate_deleted_records_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 2)
         self.assertEqual(result.details['rows_failed'], 0)
 
-    def test_deleted_count_passes_on_empty_dataframe(self):
+    def test_deleted_records_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'DELETED': []})
         params = {'threshold': 0}
-        result = self.validator.validate_deleted_count(test_df, params)
+        result = self.validator.validate_deleted_records_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['rows_processed'], 0)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 0)
 
-    def test_deleted_count_fails_on_missing_column(self):
+    def test_deleted_records_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'DELETED'
         params = {'threshold': 1}
-        result = self.validator.validate_deleted_count(test_df, params)
+        result = self.validator.validate_deleted_records_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
 
-class TestModifiedCountValidation(unittest.TestCase):
-    '''Test Class for the MODIFIED_COUNT validation rule.'''
+class TestDeletedRecordsPercentValidation(unittest.TestCase):
+    '''Test Class for the DELETED_RECORDS_PERCENT validation rule.'''
 
     def setUp(self):
         self.validator = Validator()
 
-    def test_modified_count_fails_on_inconsistent_counts(self):
+    def test_deleted_records_percent_fails_when_over_threshold(self):
+        # 10 records, 2 deleted => 20%
+        test_df = pd.DataFrame({'DELETED': [1, 1]})
+        summary = {'previous_obs_size': 10}
+        params = {'threshold': 10}  # Threshold 10%
+
+        result = self.validator.validate_deleted_records_percent(
+            test_df, summary, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['percent'], 20.0)
+        self.assertEqual(result.details['threshold'], 10)
+
+    def test_deleted_records_percent_passes_when_below_threshold(self):
+        # 100 records, 1 deleted => 1%
+        test_df = pd.DataFrame({'DELETED': [1]})
+        summary = {'previous_obs_size': 100}
+        params = {'threshold': 10}
+
+        result = self.validator.validate_deleted_records_percent(
+            test_df, summary, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['percent'], 1.0)
+
+    def test_deleted_records_percent_passes_when_no_deleted(self):
+        test_df = pd.DataFrame({'DELETED': []})
+        summary = {'previous_obs_size': 100}
+        params = {'threshold': 10}
+
+        result = self.validator.validate_deleted_records_percent(
+            test_df, summary, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['percent'], 0.0)
+
+    def test_deleted_records_percent_handles_zero_data_size(self):
+        # 0 records, 0 deleted => 0%
+        test_df = pd.DataFrame({'DELETED': []})
+        summary = {'previous_obs_size': 0}
+        params = {'threshold': 10}
+
+        result = self.validator.validate_deleted_records_percent(
+            test_df, summary, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['percent'], 0.0)
+
+    def test_deleted_records_percent_fails_on_missing_summary(self):
+        test_df = pd.DataFrame({'DELETED': [1]})
+        params = {'threshold': 10}
+
+        result = self.validator.validate_deleted_records_percent(
+            test_df, None, params)
+        self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
+
+    def test_deleted_records_percent_fails_on_missing_size_in_summary(self):
+        test_df = pd.DataFrame({'DELETED': [1]})
+        summary = {}  # Missing previous_obs_size
+        params = {'threshold': 10}
+
+        result = self.validator.validate_deleted_records_percent(
+            test_df, summary, params)
+        self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
+
+
+class TestMissingRefsCountValidation(unittest.TestCase):
+    '''Test Class for the MISSING_REFS_COUNT validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_missing_refs_count_fails_when_over_threshold(self):
+        report = {
+            'levelSummary': {
+                'LEVEL_WARNING': {
+                    'counters': {
+                        'Existence_MissingReference': "5"
+                    }
+                }
+            }
+        }
+        params = {'threshold': 4}
+        result = self.validator.validate_missing_refs_count(report, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['missing_refs_count'], 5)
+
+
+class TestLintErrorCountValidation(unittest.TestCase):
+    '''Test Class for the LINT_ERROR_COUNT validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_lint_error_count_fails_when_over_threshold(self):
+        report = {
+            'levelSummary': {
+                'LEVEL_ERROR': {
+                    'counters': {
+                        'CSV_TmcfCheckFailure': "2",
+                        'MCF_QuantityMalformedValue': "3"
+                    }
+                }
+            }
+        }
+        params = {'threshold': 4}
+        result = self.validator.validate_lint_error_count(report, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['lint_error_count'], 5)
+
+
+class TestModifiedRecordsCountValidation(unittest.TestCase):
+    '''Test Class for the MODIFIED_RECORDS_COUNT validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_modified_records_count_fails_on_inconsistent_counts(self):
         test_df = pd.DataFrame({
             'StatVar': ['sv1', 'sv2'],
             'MODIFIED': [1, 2]
         })  # Inconsistent
-        result = self.validator.validate_modified_count(test_df, {})
+        result = self.validator.validate_modified_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.details['distinct_statvar_count'], 2)
-        self.assertEqual(result.details['distinct_modified_counts'], 2)
+        self.assertEqual(result.details['distinct_modified_records_count'], 2)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
 
-    def test_modified_count_passes_on_consistent_counts(self):
+    def test_modified_records_count_passes_on_consistent_counts(self):
         test_df = pd.DataFrame({'MODIFIED': [2, 2]})  # Consistent
-        result = self.validator.validate_modified_count(test_df, {})
+        result = self.validator.validate_modified_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 2)
         self.assertEqual(result.details['rows_failed'], 0)
 
-    def test_modified_count_passes_on_empty_dataframe(self):
+    def test_modified_records_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'MODIFIED': []})
-        result = self.validator.validate_modified_count(test_df, {})
+        result = self.validator.validate_modified_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['rows_processed'], 0)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 0)
 
-    def test_modified_count_fails_on_missing_column(self):
+    def test_modified_records_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'MODIFIED'
-        result = self.validator.validate_modified_count(test_df, {})
+        result = self.validator.validate_modified_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
 
-class TestAddedCountValidation(unittest.TestCase):
-    '''Test Class for the ADDED_COUNT validation rule.'''
+class TestAddedRecordsCountValidation(unittest.TestCase):
+    '''Test Class for the ADDED_RECORDS_COUNT validation rule.'''
 
     def setUp(self):
         self.validator = Validator()
 
-    def test_added_count_fails_on_inconsistent_counts(self):
+    def test_added_records_count_fails_on_inconsistent_counts(self):
         test_df = pd.DataFrame({
             'StatVar': ['sv1', 'sv2'],
             'ADDED': [1, 2]
         })  # Inconsistent
-        result = self.validator.validate_added_count(test_df, {})
+        result = self.validator.validate_added_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.details['distinct_statvar_count'], 2)
-        self.assertEqual(result.details['distinct_added_counts'], 2)
+        self.assertEqual(result.details['distinct_added_records_count'], 2)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
 
-    def test_added_count_passes_on_consistent_counts(self):
+    def test_added_records_count_passes_on_consistent_counts(self):
         test_df = pd.DataFrame({'ADDED': [1, 1]})  # Consistent
-        result = self.validator.validate_added_count(test_df, {})
+        result = self.validator.validate_added_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 2)
         self.assertEqual(result.details['rows_failed'], 0)
 
-    def test_added_count_passes_on_empty_dataframe(self):
+    def test_added_records_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'ADDED': []})
-        result = self.validator.validate_added_count(test_df, {})
+        result = self.validator.validate_added_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['rows_processed'], 0)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 0)
 
-    def test_added_count_fails_on_missing_column(self):
+    def test_added_records_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'ADDED'
-        result = self.validator.validate_added_count(test_df, {})
+        result = self.validator.validate_added_records_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
@@ -206,7 +326,7 @@ class TestNumPlacesConsistentValidation(unittest.TestCase):
             result.message,
             "The number of places is not consistent across all StatVars.")
         self.assertEqual(result.details['distinct_statvar_count'], 2)
-        self.assertEqual(result.details['distinct_place_counts'], 2)
+        self.assertEqual(result.details['distinct_place_count'], 2)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
@@ -371,7 +491,7 @@ class TestMaxDateConsistentValidation(unittest.TestCase):
         self.assertEqual(result.message,
                          "The MaxDate is not consistent across all StatVars.")
         self.assertEqual(result.details['distinct_statvar_count'], 2)
-        self.assertEqual(result.details['distinct_max_date_counts'], 2)
+        self.assertEqual(result.details['distinct_max_date_count'], 2)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
@@ -488,7 +608,7 @@ class TestUnitConsistencyValidation(unittest.TestCase):
         self.assertEqual(result.message,
                          "The unit is not consistent across all StatVars.")
         self.assertEqual(result.details['distinct_statvar_count'], 2)
-        self.assertEqual(result.details['distinct_unit_counts'], 2)
+        self.assertEqual(result.details['distinct_unit_count'], 2)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
@@ -650,6 +770,104 @@ class TestSQLValidator(unittest.TestCase):
                                              params)
         self.assertEqual(result.status, ValidationStatus.CONFIG_ERROR)
         self.assertIn('must be specified', result.message)
+
+
+class TestGoldensValidator(unittest.TestCase):
+    '''Test Class for the GOLDENS_CHECK validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+        self.test_dir = tempfile.TemporaryDirectory()
+
+        # Create a sample golden CSV
+        self.golden_file = os.path.join(self.test_dir.name, 'goldens.csv')
+        with open(self.golden_file, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['StatVar', 'NumPlaces'])
+            writer.writerow(['sv1', '10'])
+            writer.writerow(['sv2', '20'])
+
+        # Create a sample input CSV that matches
+        self.input_file_match = os.path.join(self.test_dir.name,
+                                             'input_match.csv')
+        with open(self.input_file_match, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['StatVar', 'NumPlaces', 'Value'])
+            writer.writerow(['sv1', '10', '100'])
+            writer.writerow(['sv2', '20', '200'])
+
+        # Create a sample input CSV that is missing a golden
+        self.input_file_missing = os.path.join(self.test_dir.name,
+                                               'input_missing.csv')
+        with open(self.input_file_missing, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['StatVar', 'NumPlaces', 'Value'])
+            writer.writerow(['sv1', '10', '100'])
+            # sv2 is missing
+
+    def tearDown(self):
+        # Clean up the temporary directory
+        self.test_dir.cleanup()
+
+    def test_validate_goldens_passes_with_matching_files(self):
+        params = {
+            'golden_files': self.golden_file,
+            'input_files': self.input_file_match,
+            'goldens_key_property': ['StatVar', 'NumPlaces']
+        }
+        # df is not used when input_files is in params
+        result = self.validator.validate_goldens(pd.DataFrame(), params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+    def test_validate_goldens_fails_with_missing_records(self):
+        params = {
+            'golden_files': self.golden_file,
+            'input_files': self.input_file_missing,
+            'goldens_key_property': ['StatVar', 'NumPlaces']
+        }
+        result = self.validator.validate_goldens(pd.DataFrame(), params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertIn('Found 1 missing golden records', result.message)
+        # Fingerprint of sv2: 'NumPlaces=20;StatVar=sv2' (alphabetical)
+        self.assertEqual({
+            'StatVar': 'sv2',
+            'NumPlaces': '20'
+        }, result.details['missing_goldens'][0])
+
+    def test_validate_goldens_uses_dataframe_when_input_files_missing(self):
+        # Sample DataFrame representing the stats data source
+        df = pd.DataFrame({
+            'StatVar': ['sv1', 'sv2'],
+            'NumPlaces': [10, 20],
+            'Value': [100, 200]
+        })
+        params = {
+            'golden_files': self.golden_file,
+            'goldens_key_property': ['StatVar', 'NumPlaces']
+        }
+        result = self.validator.validate_goldens(df, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+    def test_validate_goldens_fails_with_missing_records_from_df(self):
+        # Sample DataFrame missing sv2
+        df = pd.DataFrame({
+            'StatVar': ['sv1'],
+            'NumPlaces': [10],
+            'Value': [100]
+        })
+        params = {
+            'golden_files': self.golden_file,
+            'goldens_key_property': ['StatVar', 'NumPlaces']
+        }
+        result = self.validator.validate_goldens(df, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(len(result.details['missing_goldens']), 1)
+
+    def test_validate_goldens_missing_golden_files_param(self):
+        params = {'input_files': self.input_file_match}
+        result = self.validator.validate_goldens(pd.DataFrame(), params)
+        self.assertEqual(result.status, ValidationStatus.CONFIG_ERROR)
+        self.assertIn('golden_files', result.message)
 
 
 if __name__ == '__main__':

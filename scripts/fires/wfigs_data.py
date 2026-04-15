@@ -27,7 +27,6 @@ import pandas as pd
 import pickle
 import re
 import requests
-import datacommons as dc
 import sys
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -130,7 +129,8 @@ def process_df(df):
     # convert epoch time in milliseconds to datetime
     def epoch_to_datetime(date_val):
         if not pd.isna(date_val):
-            return datetime.datetime.fromtimestamp(date_val / 1000)
+            return datetime.datetime.fromtimestamp(date_val / 1000,
+                                                   datetime.timezone.utc)
         else:
             return None
 

@@ -1,26 +1,26 @@
 {
-  "import_specifications": [
-    {
-      "import_name": "India_RBIStateDomesticProduct",
-      "curator_emails": [
-        "support@datacommons.org"
-      ],
-      "provenance_url": "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook%20of%20Statistics%20on%20Indian%20States",
-      "provenance_description": "RBI State Domestic Product data",
-      "scripts": [
-        "rbi_sdp_download.py",
-        "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.xlsx --pv_map=state_domestic_product_pv_map.csv --config_file=state_domestic_product_metadata.csv --places_resolved_csv=state_domestic_product_places_resolved.csv --output_path=output/state_domestic_product_output"
-      ],
-      "source_files": [
-        "source_files/*.xlsx"
-      ],
-      "import_inputs": [
+    "import_specifications": [
         {
-          "template_mcf": "output/state_domestic_product_output.tmcf",
-          "cleaned_csv": "output/state_domestic_product_output.csv"
+            "import_name": "India_RBIStateDomesticProduct",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook%20of%20Statistics%20on%20Indian%20States",
+            "provenance_description": "RBI State Domestic Product data",
+            "scripts": [
+                "rbi_sdp_download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.xlsx --pv_map=state_domestic_product_pv_map.csv --config_file=state_domestic_product_metadata.csv --places_resolved_csv=state_domestic_product_places_resolved.csv --output_path=output/state_domestic_product_output"
+            ],
+            "source_files": [
+                "source_files/*.xlsx"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/state_domestic_product_output.tmcf",
+                    "cleaned_csv": "output/state_domestic_product_output.csv"
+                }
+            ],
+            "cron_schedule": "0 09 4,18 * *"
         }
-      ],
-      "cron_schedule": "0 09 4,18 * *"
-    }
-  ]
+    ]
 }

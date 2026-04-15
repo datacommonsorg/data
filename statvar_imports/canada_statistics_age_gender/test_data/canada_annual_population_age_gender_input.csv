@@ -1,0 +1,999 @@
+REF_DATE,GEO,DGUID,Gender,Age group,UOM,UOM_ID,SCALAR_FACTOR,SCALAR_ID,VECTOR,COORDINATE,VALUE,STATUS,SYMBOL,TERMINATED,DECIMALS
+2025,Canada,2021A000011124,Total - gender,All ages,Persons,249,units,0,v466668,1.1.1,41651653,,,,0
+2025,Canada,2021A000011124,Total - gender,0 to 4 years,Persons,249,units,0,v466884,1.1.7,1871184,,,,0
+2025,Canada,2021A000011124,Total - gender,0 years,Persons,249,units,0,v466719,1.1.2,368007,,,,0
+2025,Canada,2021A000011124,Total - gender,1 year,Persons,249,units,0,v466752,1.1.3,364592,,,,0
+2025,Canada,2021A000011124,Total - gender,2 years,Persons,249,units,0,v466785,1.1.4,363549,,,,0
+2025,Canada,2021A000011124,Total - gender,3 years,Persons,249,units,0,v466818,1.1.5,385355,,,,0
+2025,Canada,2021A000011124,Total - gender,4 years,Persons,249,units,0,v466851,1.1.6,389681,,,,0
+2025,Canada,2021A000011124,Total - gender,5 to 9 years,Persons,249,units,0,v466698,1.1.13,2138350,,,,0
+2025,Canada,2021A000011124,Total - gender,5 years,Persons,249,units,0,v466917,1.1.8,404808,,,,0
+2025,Canada,2021A000011124,Total - gender,6 years,Persons,249,units,0,v466950,1.1.9,417313,,,,0
+2025,Canada,2021A000011124,Total - gender,7 years,Persons,249,units,0,v466671,1.1.10,428757,,,,0
+2025,Canada,2021A000011124,Total - gender,8 years,Persons,249,units,0,v466692,1.1.11,439706,,,,0
+2025,Canada,2021A000011124,Total - gender,9 years,Persons,249,units,0,v466695,1.1.12,447766,,,,0
+2025,Canada,2021A000011124,Total - gender,10 to 14 years,Persons,249,units,0,v466716,1.1.19,2251628,,,,0
+2025,Canada,2021A000011124,Total - gender,10 years,Persons,249,units,0,v466701,1.1.14,450324,,,,0
+2025,Canada,2021A000011124,Total - gender,11 years,Persons,249,units,0,v466704,1.1.15,448662,,,,0
+2025,Canada,2021A000011124,Total - gender,12 years,Persons,249,units,0,v466707,1.1.16,452388,,,,0
+2025,Canada,2021A000011124,Total - gender,13 years,Persons,249,units,0,v466710,1.1.17,451011,,,,0
+2025,Canada,2021A000011124,Total - gender,14 years,Persons,249,units,0,v466713,1.1.18,449243,,,,0
+2025,Canada,2021A000011124,Total - gender,15 to 19 years,Persons,249,units,0,v466737,1.1.25,2319393,,,,0
+2025,Canada,2021A000011124,Total - gender,15 years,Persons,249,units,0,v466722,1.1.20,456358,,,,0
+2025,Canada,2021A000011124,Total - gender,16 years,Persons,249,units,0,v466725,1.1.21,462135,,,,0
+2025,Canada,2021A000011124,Total - gender,17 years,Persons,249,units,0,v466728,1.1.22,462528,,,,0
+2025,Canada,2021A000011124,Total - gender,18 years,Persons,249,units,0,v466731,1.1.23,458804,,,,0
+2025,Canada,2021A000011124,Total - gender,19 years,Persons,249,units,0,v466734,1.1.24,479568,,,,0
+2025,Canada,2021A000011124,Total - gender,20 to 24 years,Persons,249,units,0,v466758,1.1.31,2703780,,,,0
+2025,Canada,2021A000011124,Total - gender,20 years,Persons,249,units,0,v466740,1.1.26,517515,,,,0
+2025,Canada,2021A000011124,Total - gender,21 years,Persons,249,units,0,v466743,1.1.27,544893,,,,0
+2025,Canada,2021A000011124,Total - gender,22 years,Persons,249,units,0,v466746,1.1.28,543347,,,,0
+2025,Canada,2021A000011124,Total - gender,23 years,Persons,249,units,0,v466749,1.1.29,544993,,,,0
+2025,Canada,2021A000011124,Total - gender,24 years,Persons,249,units,0,v466755,1.1.30,553032,,,,0
+2025,Canada,2021A000011124,Total - gender,25 to 29 years,Persons,249,units,0,v466776,1.1.37,2995647,,,,0
+2025,Canada,2021A000011124,Total - gender,25 years,Persons,249,units,0,v466761,1.1.32,575096,,,,0
+2025,Canada,2021A000011124,Total - gender,26 years,Persons,249,units,0,v466764,1.1.33,579540,,,,0
+2025,Canada,2021A000011124,Total - gender,27 years,Persons,249,units,0,v466767,1.1.34,600365,,,,0
+2025,Canada,2021A000011124,Total - gender,28 years,Persons,249,units,0,v466770,1.1.35,612797,,,,0
+2025,Canada,2021A000011124,Total - gender,29 years,Persons,249,units,0,v466773,1.1.36,627849,,,,0
+2025,Canada,2021A000011124,Total - gender,30 to 34 years,Persons,249,units,0,v466797,1.1.43,3175724,,,,0
+2025,Canada,2021A000011124,Total - gender,30 years,Persons,249,units,0,v466779,1.1.38,633005,,,,0
+2025,Canada,2021A000011124,Total - gender,31 years,Persons,249,units,0,v466782,1.1.39,629537,,,,0
+2025,Canada,2021A000011124,Total - gender,32 years,Persons,249,units,0,v466788,1.1.40,633622,,,,0
+2025,Canada,2021A000011124,Total - gender,33 years,Persons,249,units,0,v466791,1.1.41,635511,,,,0
+2025,Canada,2021A000011124,Total - gender,34 years,Persons,249,units,0,v466794,1.1.42,644049,,,,0
+2025,Canada,2021A000011124,Total - gender,35 to 39 years,Persons,249,units,0,v466815,1.1.49,3032523,,,,0
+2025,Canada,2021A000011124,Total - gender,35 years,Persons,249,units,0,v466800,1.1.44,640621,,,,0
+2025,Canada,2021A000011124,Total - gender,36 years,Persons,249,units,0,v466803,1.1.45,615285,,,,0
+2025,Canada,2021A000011124,Total - gender,37 years,Persons,249,units,0,v466806,1.1.46,595065,,,,0
+2025,Canada,2021A000011124,Total - gender,38 years,Persons,249,units,0,v466809,1.1.47,589776,,,,0
+2025,Canada,2021A000011124,Total - gender,39 years,Persons,249,units,0,v466812,1.1.48,591776,,,,0
+2025,Canada,2021A000011124,Total - gender,40 to 44 years,Persons,249,units,0,v466836,1.1.55,2859631,,,,0
+2025,Canada,2021A000011124,Total - gender,40 years,Persons,249,units,0,v466821,1.1.50,588543,,,,0
+2025,Canada,2021A000011124,Total - gender,41 years,Persons,249,units,0,v466824,1.1.51,579159,,,,0
+2025,Canada,2021A000011124,Total - gender,42 years,Persons,249,units,0,v466827,1.1.52,572018,,,,0
+2025,Canada,2021A000011124,Total - gender,43 years,Persons,249,units,0,v466830,1.1.53,562582,,,,0
+2025,Canada,2021A000011124,Total - gender,44 years,Persons,249,units,0,v466833,1.1.54,557329,,,,0
+2025,Canada,2021A000011124,Total - gender,45 to 49 years,Persons,249,units,0,v466857,1.1.61,2593361,,,,0
+2025,Canada,2021A000011124,Total - gender,45 years,Persons,249,units,0,v466839,1.1.56,545259,,,,0
+2025,Canada,2021A000011124,Total - gender,46 years,Persons,249,units,0,v466842,1.1.57,528254,,,,0
+2025,Canada,2021A000011124,Total - gender,47 years,Persons,249,units,0,v466845,1.1.58,513041,,,,0
+2025,Canada,2021A000011124,Total - gender,48 years,Persons,249,units,0,v466848,1.1.59,506230,,,,0
+2025,Canada,2021A000011124,Total - gender,49 years,Persons,249,units,0,v466854,1.1.60,500577,,,,0
+2025,Canada,2021A000011124,Total - gender,50 to 54 years,Persons,249,units,0,v466875,1.1.67,2447311,,,,0
+2025,Canada,2021A000011124,Total - gender,50 years,Persons,249,units,0,v466860,1.1.62,497734,,,,0
+2025,Canada,2021A000011124,Total - gender,51 years,Persons,249,units,0,v466863,1.1.63,483978,,,,0
+2025,Canada,2021A000011124,Total - gender,52 years,Persons,249,units,0,v466866,1.1.64,479979,,,,0
+2025,Canada,2021A000011124,Total - gender,53 years,Persons,249,units,0,v466869,1.1.65,484691,,,,0
+2025,Canada,2021A000011124,Total - gender,54 years,Persons,249,units,0,v466872,1.1.66,500929,,,,0
+2025,Canada,2021A000011124,Total - gender,55 to 59 years,Persons,249,units,0,v466896,1.1.73,2446446,,,,0
+2025,Canada,2021A000011124,Total - gender,55 years,Persons,249,units,0,v466878,1.1.68,494907,,,,0
+2025,Canada,2021A000011124,Total - gender,56 years,Persons,249,units,0,v466881,1.1.69,486646,,,,0
+2025,Canada,2021A000011124,Total - gender,57 years,Persons,249,units,0,v466887,1.1.70,479944,,,,0
+2025,Canada,2021A000011124,Total - gender,58 years,Persons,249,units,0,v466890,1.1.71,480992,,,,0
+2025,Canada,2021A000011124,Total - gender,59 years,Persons,249,units,0,v466893,1.1.72,503957,,,,0
+2025,Canada,2021A000011124,Total - gender,60 to 64 years,Persons,249,units,0,v466914,1.1.79,2708208,,,,0
+2025,Canada,2021A000011124,Total - gender,60 years,Persons,249,units,0,v466899,1.1.74,535619,,,,0
+2025,Canada,2021A000011124,Total - gender,61 years,Persons,249,units,0,v466902,1.1.75,547595,,,,0
+2025,Canada,2021A000011124,Total - gender,62 years,Persons,249,units,0,v466905,1.1.76,550876,,,,0
+2025,Canada,2021A000011124,Total - gender,63 years,Persons,249,units,0,v466908,1.1.77,535968,,,,0
+2025,Canada,2021A000011124,Total - gender,64 years,Persons,249,units,0,v466911,1.1.78,538150,,,,0
+2025,Canada,2021A000011124,Total - gender,65 to 69 years,Persons,249,units,0,v466935,1.1.85,2494286,,,,0
+2025,Canada,2021A000011124,Total - gender,65 years,Persons,249,units,0,v466920,1.1.80,527392,,,,0
+2025,Canada,2021A000011124,Total - gender,66 years,Persons,249,units,0,v466923,1.1.81,510978,,,,0
+2025,Canada,2021A000011124,Total - gender,67 years,Persons,249,units,0,v466926,1.1.82,502192,,,,0
+2025,Canada,2021A000011124,Total - gender,68 years,Persons,249,units,0,v466929,1.1.83,486520,,,,0
+2025,Canada,2021A000011124,Total - gender,69 years,Persons,249,units,0,v466932,1.1.84,467204,,,,0
+2025,Canada,2021A000011124,Total - gender,70 to 74 years,Persons,249,units,0,v466938,1.1.86,2044533,,,,0
+2025,Canada,2021A000011124,Total - gender,70 years,Persons,249,units,0,v28594035,1.1.106,455480,,,,0
+2025,Canada,2021A000011124,Total - gender,71 years,Persons,249,units,0,v28594036,1.1.107,430902,,,,0
+2025,Canada,2021A000011124,Total - gender,72 years,Persons,249,units,0,v28594037,1.1.108,405768,,,,0
+2025,Canada,2021A000011124,Total - gender,73 years,Persons,249,units,0,v28594038,1.1.109,383798,,,,0
+2025,Canada,2021A000011124,Total - gender,74 years,Persons,249,units,0,v28594039,1.1.110,368585,,,,0
+2025,Canada,2021A000011124,Total - gender,75 to 79 years,Persons,249,units,0,v466941,1.1.87,1609542,,,,0
+2025,Canada,2021A000011124,Total - gender,75 years,Persons,249,units,0,v28594040,1.1.111,354423,,,,0
+2025,Canada,2021A000011124,Total - gender,76 years,Persons,249,units,0,v28594041,1.1.112,339619,,,,0
+2025,Canada,2021A000011124,Total - gender,77 years,Persons,249,units,0,v28594042,1.1.113,330747,,,,0
+2025,Canada,2021A000011124,Total - gender,78 years,Persons,249,units,0,v28594043,1.1.114,319619,,,,0
+2025,Canada,2021A000011124,Total - gender,79 years,Persons,249,units,0,v28594044,1.1.115,265134,,,,0
+2025,Canada,2021A000011124,Total - gender,80 to 84 years,Persons,249,units,0,v466944,1.1.88,1008273,,,,0
+2025,Canada,2021A000011124,Total - gender,80 years,Persons,249,units,0,v28594045,1.1.116,238248,,,,0
+2025,Canada,2021A000011124,Total - gender,81 years,Persons,249,units,0,v28594046,1.1.117,221748,,,,0
+2025,Canada,2021A000011124,Total - gender,82 years,Persons,249,units,0,v28594047,1.1.118,203205,,,,0
+2025,Canada,2021A000011124,Total - gender,83 years,Persons,249,units,0,v28594048,1.1.119,180315,,,,0
+2025,Canada,2021A000011124,Total - gender,84 years,Persons,249,units,0,v28594049,1.1.120,164757,,,,0
+2025,Canada,2021A000011124,Total - gender,85 to 89 years,Persons,249,units,0,v466947,1.1.89,579797,,,,0
+2025,Canada,2021A000011124,Total - gender,85 years,Persons,249,units,0,v28594050,1.1.121,146032,,,,0
+2025,Canada,2021A000011124,Total - gender,86 years,Persons,249,units,0,v28594051,1.1.122,130175,,,,0
+2025,Canada,2021A000011124,Total - gender,87 years,Persons,249,units,0,v28594052,1.1.123,115357,,,,0
+2025,Canada,2021A000011124,Total - gender,88 years,Persons,249,units,0,v28594053,1.1.124,99750,,,,0
+2025,Canada,2021A000011124,Total - gender,89 years,Persons,249,units,0,v28594054,1.1.125,88483,,,,0
+2025,Canada,2021A000011124,Total - gender,90 to 94 years,Persons,249,units,0,v31226524,1.1.126,275677,,,,0
+2025,Canada,2021A000011124,Total - gender,90 years,Persons,249,units,0,v31226525,1.1.127,75135,,,,0
+2025,Canada,2021A000011124,Total - gender,91 years,Persons,249,units,0,v31226526,1.1.128,63358,,,,0
+2025,Canada,2021A000011124,Total - gender,92 years,Persons,249,units,0,v31226527,1.1.129,54668,,,,0
+2025,Canada,2021A000011124,Total - gender,93 years,Persons,249,units,0,v31226528,1.1.130,45532,,,,0
+2025,Canada,2021A000011124,Total - gender,94 years,Persons,249,units,0,v31226529,1.1.131,36984,,,,0
+2025,Canada,2021A000011124,Total - gender,95 to 99 years,Persons,249,units,0,v31226530,1.1.132,84078,,,,0
+2025,Canada,2021A000011124,Total - gender,95 years,Persons,249,units,0,v31226531,1.1.133,28254,,,,0
+2025,Canada,2021A000011124,Total - gender,96 years,Persons,249,units,0,v31226532,1.1.134,21477,,,,0
+2025,Canada,2021A000011124,Total - gender,97 years,Persons,249,units,0,v31226533,1.1.135,15729,,,,0
+2025,Canada,2021A000011124,Total - gender,98 years,Persons,249,units,0,v31226534,1.1.136,11409,,,,0
+2025,Canada,2021A000011124,Total - gender,99 years,Persons,249,units,0,v31226535,1.1.137,7209,,,,0
+2025,Canada,2021A000011124,Total - gender,100 years and older,Persons,249,units,0,v31226536,1.1.138,12281,,,,0
+2025,Canada,2021A000011124,Total - gender,0 to 14 years,Persons,249,units,0,v466956,1.1.91,6261162,,,,0
+2025,Canada,2021A000011124,Total - gender,0 to 15 years,Persons,249,units,0,v466959,1.1.92,6717520,,,,0
+2025,Canada,2021A000011124,Total - gender,0 to 16 years,Persons,249,units,0,v466962,1.1.93,7179655,,,,0
+2025,Canada,2021A000011124,Total - gender,0 to 17 years,Persons,249,units,0,v466965,1.1.94,7642183,,,,0
+2025,Canada,2021A000011124,Total - gender,15 to 49 years,Persons,249,units,0,v466968,1.1.95,19680059,,,,0
+2025,Canada,2021A000011124,Total - gender,15 to 64 years,Persons,249,units,0,v466971,1.1.96,27282024,,,,0
+2025,Canada,2021A000011124,Total - gender,16 to 64 years,Persons,249,units,0,v466974,1.1.97,26825666,,,,0
+2025,Canada,2021A000011124,Total - gender,17 to 64 years,Persons,249,units,0,v466977,1.1.98,26363531,,,,0
+2025,Canada,2021A000011124,Total - gender,18 years and older,Persons,249,units,0,v466677,1.1.101,34009470,,,,0
+2025,Canada,2021A000011124,Total - gender,18 to 64 years,Persons,249,units,0,v466674,1.1.100,25901003,,,,0
+2025,Canada,2021A000011124,Total - gender,18 to 24 years,Persons,249,units,0,v466980,1.1.99,3642152,,,,0
+2025,Canada,2021A000011124,Total - gender,25 to 44 years,Persons,249,units,0,v466680,1.1.102,12063525,,,,0
+2025,Canada,2021A000011124,Total - gender,45 to 64 years,Persons,249,units,0,v466683,1.1.103,10195326,,,,0
+2025,Canada,2021A000011124,Total - gender,65 years and older,Persons,249,units,0,v466686,1.1.104,8108467,,,,0
+2025,Canada,2021A000011124,Total - gender,90 years and older,Persons,249,units,0,v466953,1.1.90,372036,,,,0
+2025,Canada,2021A000011124,Total - gender,Median age,Years,308,units,0,v466689,1.1.105,40.6,,,,1
+2025,Canada,2021A000011124,Total - gender,Average age,Years,308,units,0,v1200123443,1.1.139,41.8,,,,1
+2025,Canada,2021A000011124,Men+,All ages,Persons,249,units,0,v466669,1.2.1,20810309,,,,0
+2025,Canada,2021A000011124,Men+,0 to 4 years,Persons,249,units,0,v466885,1.2.7,959179,,,,0
+2025,Canada,2021A000011124,Men+,0 years,Persons,249,units,0,v466720,1.2.2,188650,,,,0
+2025,Canada,2021A000011124,Men+,1 year,Persons,249,units,0,v466753,1.2.3,186780,,,,0
+2025,Canada,2021A000011124,Men+,2 years,Persons,249,units,0,v466786,1.2.4,186297,,,,0
+2025,Canada,2021A000011124,Men+,3 years,Persons,249,units,0,v466819,1.2.5,197461,,,,0
+2025,Canada,2021A000011124,Men+,4 years,Persons,249,units,0,v466852,1.2.6,199991,,,,0
+2025,Canada,2021A000011124,Men+,5 to 9 years,Persons,249,units,0,v466699,1.2.13,1095748,,,,0
+2025,Canada,2021A000011124,Men+,5 years,Persons,249,units,0,v466918,1.2.8,206939,,,,0
+2025,Canada,2021A000011124,Men+,6 years,Persons,249,units,0,v466951,1.2.9,213273,,,,0
+2025,Canada,2021A000011124,Men+,7 years,Persons,249,units,0,v466672,1.2.10,220047,,,,0
+2025,Canada,2021A000011124,Men+,8 years,Persons,249,units,0,v466693,1.2.11,225795,,,,0
+2025,Canada,2021A000011124,Men+,9 years,Persons,249,units,0,v466696,1.2.12,229694,,,,0
+2025,Canada,2021A000011124,Men+,10 to 14 years,Persons,249,units,0,v466717,1.2.19,1156401,,,,0
+2025,Canada,2021A000011124,Men+,10 years,Persons,249,units,0,v466702,1.2.14,231065,,,,0
+2025,Canada,2021A000011124,Men+,11 years,Persons,249,units,0,v466705,1.2.15,229670,,,,0
+2025,Canada,2021A000011124,Men+,12 years,Persons,249,units,0,v466708,1.2.16,232772,,,,0
+2025,Canada,2021A000011124,Men+,13 years,Persons,249,units,0,v466711,1.2.17,231910,,,,0
+2025,Canada,2021A000011124,Men+,14 years,Persons,249,units,0,v466714,1.2.18,230984,,,,0
+2025,Canada,2021A000011124,Men+,15 to 19 years,Persons,249,units,0,v466738,1.2.25,1195736,,,,0
+2025,Canada,2021A000011124,Men+,15 years,Persons,249,units,0,v466723,1.2.20,234372,,,,0
+2025,Canada,2021A000011124,Men+,16 years,Persons,249,units,0,v466726,1.2.21,237859,,,,0
+2025,Canada,2021A000011124,Men+,17 years,Persons,249,units,0,v466729,1.2.22,238075,,,,0
+2025,Canada,2021A000011124,Men+,18 years,Persons,249,units,0,v466732,1.2.23,236563,,,,0
+2025,Canada,2021A000011124,Men+,19 years,Persons,249,units,0,v466735,1.2.24,248867,,,,0
+2025,Canada,2021A000011124,Men+,20 to 24 years,Persons,249,units,0,v466759,1.2.31,1419266,,,,0
+2025,Canada,2021A000011124,Men+,20 years,Persons,249,units,0,v466741,1.2.26,270979,,,,0
+2025,Canada,2021A000011124,Men+,21 years,Persons,249,units,0,v466744,1.2.27,286412,,,,0
+2025,Canada,2021A000011124,Men+,22 years,Persons,249,units,0,v466747,1.2.28,284903,,,,0
+2025,Canada,2021A000011124,Men+,23 years,Persons,249,units,0,v466750,1.2.29,286414,,,,0
+2025,Canada,2021A000011124,Men+,24 years,Persons,249,units,0,v466756,1.2.30,290558,,,,0
+2025,Canada,2021A000011124,Men+,25 to 29 years,Persons,249,units,0,v466777,1.2.37,1556583,,,,0
+2025,Canada,2021A000011124,Men+,25 years,Persons,249,units,0,v466762,1.2.32,300793,,,,0
+2025,Canada,2021A000011124,Men+,26 years,Persons,249,units,0,v466765,1.2.33,301596,,,,0
+2025,Canada,2021A000011124,Men+,27 years,Persons,249,units,0,v466768,1.2.34,311431,,,,0
+2025,Canada,2021A000011124,Men+,28 years,Persons,249,units,0,v466771,1.2.35,317933,,,,0
+2025,Canada,2021A000011124,Men+,29 years,Persons,249,units,0,v466774,1.2.36,324830,,,,0
+2025,Canada,2021A000011124,Men+,30 to 34 years,Persons,249,units,0,v466798,1.2.43,1634132,,,,0
+2025,Canada,2021A000011124,Men+,30 years,Persons,249,units,0,v466780,1.2.38,327865,,,,0
+2025,Canada,2021A000011124,Men+,31 years,Persons,249,units,0,v466783,1.2.39,324147,,,,0
+2025,Canada,2021A000011124,Men+,32 years,Persons,249,units,0,v466789,1.2.40,326211,,,,0
+2025,Canada,2021A000011124,Men+,33 years,Persons,249,units,0,v466792,1.2.41,325317,,,,0
+2025,Canada,2021A000011124,Men+,34 years,Persons,249,units,0,v466795,1.2.42,330592,,,,0
+2025,Canada,2021A000011124,Men+,35 to 39 years,Persons,249,units,0,v466816,1.2.49,1545244,,,,0
+2025,Canada,2021A000011124,Men+,35 years,Persons,249,units,0,v466801,1.2.44,328136,,,,0
+2025,Canada,2021A000011124,Men+,36 years,Persons,249,units,0,v466804,1.2.45,314258,,,,0
+2025,Canada,2021A000011124,Men+,37 years,Persons,249,units,0,v466807,1.2.46,302682,,,,0
+2025,Canada,2021A000011124,Men+,38 years,Persons,249,units,0,v466810,1.2.47,299378,,,,0
+2025,Canada,2021A000011124,Men+,39 years,Persons,249,units,0,v466813,1.2.48,300790,,,,0
+2025,Canada,2021A000011124,Men+,40 to 44 years,Persons,249,units,0,v466837,1.2.55,1444713,,,,0
+2025,Canada,2021A000011124,Men+,40 years,Persons,249,units,0,v466822,1.2.50,298349,,,,0
+2025,Canada,2021A000011124,Men+,41 years,Persons,249,units,0,v466825,1.2.51,293398,,,,0
+2025,Canada,2021A000011124,Men+,42 years,Persons,249,units,0,v466828,1.2.52,288914,,,,0
+2025,Canada,2021A000011124,Men+,43 years,Persons,249,units,0,v466831,1.2.53,283205,,,,0
+2025,Canada,2021A000011124,Men+,44 years,Persons,249,units,0,v466834,1.2.54,280847,,,,0
+2025,Canada,2021A000011124,Men+,45 to 49 years,Persons,249,units,0,v466858,1.2.61,1297200,,,,0
+2025,Canada,2021A000011124,Men+,45 years,Persons,249,units,0,v466840,1.2.56,274304,,,,0
+2025,Canada,2021A000011124,Men+,46 years,Persons,249,units,0,v466843,1.2.57,264816,,,,0
+2025,Canada,2021A000011124,Men+,47 years,Persons,249,units,0,v466846,1.2.58,256753,,,,0
+2025,Canada,2021A000011124,Men+,48 years,Persons,249,units,0,v466849,1.2.59,252176,,,,0
+2025,Canada,2021A000011124,Men+,49 years,Persons,249,units,0,v466855,1.2.60,249151,,,,0
+2025,Canada,2021A000011124,Men+,50 to 54 years,Persons,249,units,0,v466876,1.2.67,1211765,,,,0
+2025,Canada,2021A000011124,Men+,50 years,Persons,249,units,0,v466861,1.2.62,247754,,,,0
+2025,Canada,2021A000011124,Men+,51 years,Persons,249,units,0,v466864,1.2.63,239619,,,,0
+2025,Canada,2021A000011124,Men+,52 years,Persons,249,units,0,v466867,1.2.64,237476,,,,0
+2025,Canada,2021A000011124,Men+,53 years,Persons,249,units,0,v466870,1.2.65,239689,,,,0
+2025,Canada,2021A000011124,Men+,54 years,Persons,249,units,0,v466873,1.2.66,247227,,,,0
+2025,Canada,2021A000011124,Men+,55 to 59 years,Persons,249,units,0,v466897,1.2.73,1203214,,,,0
+2025,Canada,2021A000011124,Men+,55 years,Persons,249,units,0,v466879,1.2.68,243799,,,,0
+2025,Canada,2021A000011124,Men+,56 years,Persons,249,units,0,v466882,1.2.69,239088,,,,0
+2025,Canada,2021A000011124,Men+,57 years,Persons,249,units,0,v466888,1.2.70,235671,,,,0
+2025,Canada,2021A000011124,Men+,58 years,Persons,249,units,0,v466891,1.2.71,236178,,,,0
+2025,Canada,2021A000011124,Men+,59 years,Persons,249,units,0,v466894,1.2.72,248478,,,,0
+2025,Canada,2021A000011124,Men+,60 to 64 years,Persons,249,units,0,v466915,1.2.79,1334699,,,,0
+2025,Canada,2021A000011124,Men+,60 years,Persons,249,units,0,v466900,1.2.74,264035,,,,0
+2025,Canada,2021A000011124,Men+,61 years,Persons,249,units,0,v466903,1.2.75,270438,,,,0
+2025,Canada,2021A000011124,Men+,62 years,Persons,249,units,0,v466906,1.2.76,272396,,,,0
+2025,Canada,2021A000011124,Men+,63 years,Persons,249,units,0,v466909,1.2.77,263746,,,,0
+2025,Canada,2021A000011124,Men+,64 years,Persons,249,units,0,v466912,1.2.78,264084,,,,0
+2025,Canada,2021A000011124,Men+,65 to 69 years,Persons,249,units,0,v466936,1.2.85,1211801,,,,0
+2025,Canada,2021A000011124,Men+,65 years,Persons,249,units,0,v466921,1.2.80,257861,,,,0
+2025,Canada,2021A000011124,Men+,66 years,Persons,249,units,0,v466924,1.2.81,248940,,,,0
+2025,Canada,2021A000011124,Men+,67 years,Persons,249,units,0,v466927,1.2.82,244247,,,,0
+2025,Canada,2021A000011124,Men+,68 years,Persons,249,units,0,v466930,1.2.83,235567,,,,0
+2025,Canada,2021A000011124,Men+,69 years,Persons,249,units,0,v466933,1.2.84,225186,,,,0
+2025,Canada,2021A000011124,Men+,70 to 74 years,Persons,249,units,0,v466939,1.2.86,973885,,,,0
+2025,Canada,2021A000011124,Men+,70 years,Persons,249,units,0,v28594055,1.2.106,218387,,,,0
+2025,Canada,2021A000011124,Men+,71 years,Persons,249,units,0,v28594056,1.2.107,205224,,,,0
+2025,Canada,2021A000011124,Men+,72 years,Persons,249,units,0,v28594057,1.2.108,193126,,,,0
+2025,Canada,2021A000011124,Men+,73 years,Persons,249,units,0,v28594058,1.2.109,182450,,,,0
+2025,Canada,2021A000011124,Men+,74 years,Persons,249,units,0,v28594059,1.2.110,174698,,,,0
+2025,Canada,2021A000011124,Men+,75 to 79 years,Persons,249,units,0,v466942,1.2.87,753952,,,,0
+2025,Canada,2021A000011124,Men+,75 years,Persons,249,units,0,v28594060,1.2.111,167213,,,,0
+2025,Canada,2021A000011124,Men+,76 years,Persons,249,units,0,v28594061,1.2.112,159337,,,,0
+2025,Canada,2021A000011124,Men+,77 years,Persons,249,units,0,v28594062,1.2.113,155353,,,,0
+2025,Canada,2021A000011124,Men+,78 years,Persons,249,units,0,v28594063,1.2.114,149113,,,,0
+2025,Canada,2021A000011124,Men+,79 years,Persons,249,units,0,v28594064,1.2.115,122936,,,,0
+2025,Canada,2021A000011124,Men+,80 to 84 years,Persons,249,units,0,v466945,1.2.88,455953,,,,0
+2025,Canada,2021A000011124,Men+,80 years,Persons,249,units,0,v28594065,1.2.116,110116,,,,0
+2025,Canada,2021A000011124,Men+,81 years,Persons,249,units,0,v28594066,1.2.117,101339,,,,0
+2025,Canada,2021A000011124,Men+,82 years,Persons,249,units,0,v28594067,1.2.118,92391,,,,0
+2025,Canada,2021A000011124,Men+,83 years,Persons,249,units,0,v28594068,1.2.119,80311,,,,0
+2025,Canada,2021A000011124,Men+,84 years,Persons,249,units,0,v28594069,1.2.120,71796,,,,0
+2025,Canada,2021A000011124,Men+,85 to 89 years,Persons,249,units,0,v466948,1.2.89,238879,,,,0
+2025,Canada,2021A000011124,Men+,85 years,Persons,249,units,0,v28594070,1.2.121,62467,,,,0
+2025,Canada,2021A000011124,Men+,86 years,Persons,249,units,0,v28594071,1.2.122,54448,,,,0
+2025,Canada,2021A000011124,Men+,87 years,Persons,249,units,0,v28594072,1.2.123,47166,,,,0
+2025,Canada,2021A000011124,Men+,88 years,Persons,249,units,0,v28594073,1.2.124,40011,,,,0
+2025,Canada,2021A000011124,Men+,89 years,Persons,249,units,0,v28594074,1.2.125,34787,,,,0
+2025,Canada,2021A000011124,Men+,90 to 94 years,Persons,249,units,0,v31226537,1.2.126,97205,,,,0
+2025,Canada,2021A000011124,Men+,90 years,Persons,249,units,0,v31226538,1.2.127,28337,,,,0
+2025,Canada,2021A000011124,Men+,91 years,Persons,249,units,0,v31226539,1.2.128,23154,,,,0
+2025,Canada,2021A000011124,Men+,92 years,Persons,249,units,0,v31226540,1.2.129,18900,,,,0
+2025,Canada,2021A000011124,Men+,93 years,Persons,249,units,0,v31226541,1.2.130,15223,,,,0
+2025,Canada,2021A000011124,Men+,94 years,Persons,249,units,0,v31226542,1.2.131,11591,,,,0
+2025,Canada,2021A000011124,Men+,95 to 99 years,Persons,249,units,0,v31226543,1.2.132,22549,,,,0
+2025,Canada,2021A000011124,Men+,95 years,Persons,249,units,0,v31226544,1.2.133,8145,,,,0
+2025,Canada,2021A000011124,Men+,96 years,Persons,249,units,0,v31226545,1.2.134,5789,,,,0
+2025,Canada,2021A000011124,Men+,97 years,Persons,249,units,0,v31226546,1.2.135,4054,,,,0
+2025,Canada,2021A000011124,Men+,98 years,Persons,249,units,0,v31226547,1.2.136,2895,,,,0
+2025,Canada,2021A000011124,Men+,99 years,Persons,249,units,0,v31226548,1.2.137,1666,,,,0
+2025,Canada,2021A000011124,Men+,100 years and older,Persons,249,units,0,v31226549,1.2.138,2205,,,,0
+2025,Canada,2021A000011124,Men+,0 to 14 years,Persons,249,units,0,v466957,1.2.91,3211328,,,,0
+2025,Canada,2021A000011124,Men+,0 to 15 years,Persons,249,units,0,v466960,1.2.92,3445700,,,,0
+2025,Canada,2021A000011124,Men+,0 to 16 years,Persons,249,units,0,v466963,1.2.93,3683559,,,,0
+2025,Canada,2021A000011124,Men+,0 to 17 years,Persons,249,units,0,v466966,1.2.94,3921634,,,,0
+2025,Canada,2021A000011124,Men+,15 to 49 years,Persons,249,units,0,v466969,1.2.95,10092874,,,,0
+2025,Canada,2021A000011124,Men+,15 to 64 years,Persons,249,units,0,v466972,1.2.96,13842552,,,,0
+2025,Canada,2021A000011124,Men+,16 to 64 years,Persons,249,units,0,v466975,1.2.97,13608180,,,,0
+2025,Canada,2021A000011124,Men+,17 to 64 years,Persons,249,units,0,v466978,1.2.98,13370321,,,,0
+2025,Canada,2021A000011124,Men+,18 years and older,Persons,249,units,0,v466678,1.2.101,16888675,,,,0
+2025,Canada,2021A000011124,Men+,18 to 64 years,Persons,249,units,0,v466675,1.2.100,13132246,,,,0
+2025,Canada,2021A000011124,Men+,18 to 24 years,Persons,249,units,0,v466981,1.2.99,1904696,,,,0
+2025,Canada,2021A000011124,Men+,25 to 44 years,Persons,249,units,0,v466681,1.2.102,6180672,,,,0
+2025,Canada,2021A000011124,Men+,45 to 64 years,Persons,249,units,0,v466684,1.2.103,5046878,,,,0
+2025,Canada,2021A000011124,Men+,65 years and older,Persons,249,units,0,v466687,1.2.104,3756429,,,,0
+2025,Canada,2021A000011124,Men+,90 years and older,Persons,249,units,0,v466954,1.2.90,121959,,,,0
+2025,Canada,2021A000011124,Men+,Median age,Years,308,units,0,v466690,1.2.105,39.5,,,,1
+2025,Canada,2021A000011124,Men+,Average age,Years,308,units,0,v1200123441,1.2.139,40.9,,,,1
+2025,Canada,2021A000011124,Women+,All ages,Persons,249,units,0,v466670,1.3.1,20841344,,,,0
+2025,Canada,2021A000011124,Women+,0 to 4 years,Persons,249,units,0,v466886,1.3.7,912005,,,,0
+2025,Canada,2021A000011124,Women+,0 years,Persons,249,units,0,v466721,1.3.2,179357,,,,0
+2025,Canada,2021A000011124,Women+,1 year,Persons,249,units,0,v466754,1.3.3,177812,,,,0
+2025,Canada,2021A000011124,Women+,2 years,Persons,249,units,0,v466787,1.3.4,177252,,,,0
+2025,Canada,2021A000011124,Women+,3 years,Persons,249,units,0,v466820,1.3.5,187894,,,,0
+2025,Canada,2021A000011124,Women+,4 years,Persons,249,units,0,v466853,1.3.6,189690,,,,0
+2025,Canada,2021A000011124,Women+,5 to 9 years,Persons,249,units,0,v466700,1.3.13,1042602,,,,0
+2025,Canada,2021A000011124,Women+,5 years,Persons,249,units,0,v466919,1.3.8,197869,,,,0
+2025,Canada,2021A000011124,Women+,6 years,Persons,249,units,0,v466952,1.3.9,204040,,,,0
+2025,Canada,2021A000011124,Women+,7 years,Persons,249,units,0,v466673,1.3.10,208710,,,,0
+2025,Canada,2021A000011124,Women+,8 years,Persons,249,units,0,v466694,1.3.11,213911,,,,0
+2025,Canada,2021A000011124,Women+,9 years,Persons,249,units,0,v466697,1.3.12,218072,,,,0
+2025,Canada,2021A000011124,Women+,10 to 14 years,Persons,249,units,0,v466718,1.3.19,1095227,,,,0
+2025,Canada,2021A000011124,Women+,10 years,Persons,249,units,0,v466703,1.3.14,219259,,,,0
+2025,Canada,2021A000011124,Women+,11 years,Persons,249,units,0,v466706,1.3.15,218992,,,,0
+2025,Canada,2021A000011124,Women+,12 years,Persons,249,units,0,v466709,1.3.16,219616,,,,0
+2025,Canada,2021A000011124,Women+,13 years,Persons,249,units,0,v466712,1.3.17,219101,,,,0
+2025,Canada,2021A000011124,Women+,14 years,Persons,249,units,0,v466715,1.3.18,218259,,,,0
+2025,Canada,2021A000011124,Women+,15 to 19 years,Persons,249,units,0,v466739,1.3.25,1123657,,,,0
+2025,Canada,2021A000011124,Women+,15 years,Persons,249,units,0,v466724,1.3.20,221986,,,,0
+2025,Canada,2021A000011124,Women+,16 years,Persons,249,units,0,v466727,1.3.21,224276,,,,0
+2025,Canada,2021A000011124,Women+,17 years,Persons,249,units,0,v466730,1.3.22,224453,,,,0
+2025,Canada,2021A000011124,Women+,18 years,Persons,249,units,0,v466733,1.3.23,222241,,,,0
+2025,Canada,2021A000011124,Women+,19 years,Persons,249,units,0,v466736,1.3.24,230701,,,,0
+2025,Canada,2021A000011124,Women+,20 to 24 years,Persons,249,units,0,v466760,1.3.31,1284514,,,,0
+2025,Canada,2021A000011124,Women+,20 years,Persons,249,units,0,v466742,1.3.26,246536,,,,0
+2025,Canada,2021A000011124,Women+,21 years,Persons,249,units,0,v466745,1.3.27,258481,,,,0
+2025,Canada,2021A000011124,Women+,22 years,Persons,249,units,0,v466748,1.3.28,258444,,,,0
+2025,Canada,2021A000011124,Women+,23 years,Persons,249,units,0,v466751,1.3.29,258579,,,,0
+2025,Canada,2021A000011124,Women+,24 years,Persons,249,units,0,v466757,1.3.30,262474,,,,0
+2025,Canada,2021A000011124,Women+,25 to 29 years,Persons,249,units,0,v466778,1.3.37,1439064,,,,0
+2025,Canada,2021A000011124,Women+,25 years,Persons,249,units,0,v466763,1.3.32,274303,,,,0
+2025,Canada,2021A000011124,Women+,26 years,Persons,249,units,0,v466766,1.3.33,277944,,,,0
+2025,Canada,2021A000011124,Women+,27 years,Persons,249,units,0,v466769,1.3.34,288934,,,,0
+2025,Canada,2021A000011124,Women+,28 years,Persons,249,units,0,v466772,1.3.35,294864,,,,0
+2025,Canada,2021A000011124,Women+,29 years,Persons,249,units,0,v466775,1.3.36,303019,,,,0
+2025,Canada,2021A000011124,Women+,30 to 34 years,Persons,249,units,0,v466799,1.3.43,1541592,,,,0
+2025,Canada,2021A000011124,Women+,30 years,Persons,249,units,0,v466781,1.3.38,305140,,,,0
+2025,Canada,2021A000011124,Women+,31 years,Persons,249,units,0,v466784,1.3.39,305390,,,,0
+2025,Canada,2021A000011124,Women+,32 years,Persons,249,units,0,v466790,1.3.40,307411,,,,0
+2025,Canada,2021A000011124,Women+,33 years,Persons,249,units,0,v466793,1.3.41,310194,,,,0
+2025,Canada,2021A000011124,Women+,34 years,Persons,249,units,0,v466796,1.3.42,313457,,,,0
+2025,Canada,2021A000011124,Women+,35 to 39 years,Persons,249,units,0,v466817,1.3.49,1487279,,,,0
+2025,Canada,2021A000011124,Women+,35 years,Persons,249,units,0,v466802,1.3.44,312485,,,,0
+2025,Canada,2021A000011124,Women+,36 years,Persons,249,units,0,v466805,1.3.45,301027,,,,0
+2025,Canada,2021A000011124,Women+,37 years,Persons,249,units,0,v466808,1.3.46,292383,,,,0
+2025,Canada,2021A000011124,Women+,38 years,Persons,249,units,0,v466811,1.3.47,290398,,,,0
+2025,Canada,2021A000011124,Women+,39 years,Persons,249,units,0,v466814,1.3.48,290986,,,,0
+2025,Canada,2021A000011124,Women+,40 to 44 years,Persons,249,units,0,v466838,1.3.55,1414918,,,,0
+2025,Canada,2021A000011124,Women+,40 years,Persons,249,units,0,v466823,1.3.50,290194,,,,0
+2025,Canada,2021A000011124,Women+,41 years,Persons,249,units,0,v466826,1.3.51,285761,,,,0
+2025,Canada,2021A000011124,Women+,42 years,Persons,249,units,0,v466829,1.3.52,283104,,,,0
+2025,Canada,2021A000011124,Women+,43 years,Persons,249,units,0,v466832,1.3.53,279377,,,,0
+2025,Canada,2021A000011124,Women+,44 years,Persons,249,units,0,v466835,1.3.54,276482,,,,0
+2025,Canada,2021A000011124,Women+,45 to 49 years,Persons,249,units,0,v466859,1.3.61,1296161,,,,0
+2025,Canada,2021A000011124,Women+,45 years,Persons,249,units,0,v466841,1.3.56,270955,,,,0
+2025,Canada,2021A000011124,Women+,46 years,Persons,249,units,0,v466844,1.3.57,263438,,,,0
+2025,Canada,2021A000011124,Women+,47 years,Persons,249,units,0,v466847,1.3.58,256288,,,,0
+2025,Canada,2021A000011124,Women+,48 years,Persons,249,units,0,v466850,1.3.59,254054,,,,0
+2025,Canada,2021A000011124,Women+,49 years,Persons,249,units,0,v466856,1.3.60,251426,,,,0
+2025,Canada,2021A000011124,Women+,50 to 54 years,Persons,249,units,0,v466877,1.3.67,1235546,,,,0
+2025,Canada,2021A000011124,Women+,50 years,Persons,249,units,0,v466862,1.3.62,249980,,,,0
+2025,Canada,2021A000011124,Women+,51 years,Persons,249,units,0,v466865,1.3.63,244359,,,,0
+2025,Canada,2021A000011124,Women+,52 years,Persons,249,units,0,v466868,1.3.64,242503,,,,0
+2025,Canada,2021A000011124,Women+,53 years,Persons,249,units,0,v466871,1.3.65,245002,,,,0
+2025,Canada,2021A000011124,Women+,54 years,Persons,249,units,0,v466874,1.3.66,253702,,,,0
+2025,Canada,2021A000011124,Women+,55 to 59 years,Persons,249,units,0,v466898,1.3.73,1243232,,,,0
+2025,Canada,2021A000011124,Women+,55 years,Persons,249,units,0,v466880,1.3.68,251108,,,,0
+2025,Canada,2021A000011124,Women+,56 years,Persons,249,units,0,v466883,1.3.69,247558,,,,0
+2025,Canada,2021A000011124,Women+,57 years,Persons,249,units,0,v466889,1.3.70,244273,,,,0
+2025,Canada,2021A000011124,Women+,58 years,Persons,249,units,0,v466892,1.3.71,244814,,,,0
+2025,Canada,2021A000011124,Women+,59 years,Persons,249,units,0,v466895,1.3.72,255479,,,,0
+2025,Canada,2021A000011124,Women+,60 to 64 years,Persons,249,units,0,v466916,1.3.79,1373509,,,,0
+2025,Canada,2021A000011124,Women+,60 years,Persons,249,units,0,v466901,1.3.74,271584,,,,0
+2025,Canada,2021A000011124,Women+,61 years,Persons,249,units,0,v466904,1.3.75,277157,,,,0
+2025,Canada,2021A000011124,Women+,62 years,Persons,249,units,0,v466907,1.3.76,278480,,,,0
+2025,Canada,2021A000011124,Women+,63 years,Persons,249,units,0,v466910,1.3.77,272222,,,,0
+2025,Canada,2021A000011124,Women+,64 years,Persons,249,units,0,v466913,1.3.78,274066,,,,0
+2025,Canada,2021A000011124,Women+,65 to 69 years,Persons,249,units,0,v466937,1.3.85,1282485,,,,0
+2025,Canada,2021A000011124,Women+,65 years,Persons,249,units,0,v466922,1.3.80,269531,,,,0
+2025,Canada,2021A000011124,Women+,66 years,Persons,249,units,0,v466925,1.3.81,262038,,,,0
+2025,Canada,2021A000011124,Women+,67 years,Persons,249,units,0,v466928,1.3.82,257945,,,,0
+2025,Canada,2021A000011124,Women+,68 years,Persons,249,units,0,v466931,1.3.83,250953,,,,0
+2025,Canada,2021A000011124,Women+,69 years,Persons,249,units,0,v466934,1.3.84,242018,,,,0
+2025,Canada,2021A000011124,Women+,70 to 74 years,Persons,249,units,0,v466940,1.3.86,1070648,,,,0
+2025,Canada,2021A000011124,Women+,70 years,Persons,249,units,0,v28594075,1.3.106,237093,,,,0
+2025,Canada,2021A000011124,Women+,71 years,Persons,249,units,0,v28594076,1.3.107,225678,,,,0
+2025,Canada,2021A000011124,Women+,72 years,Persons,249,units,0,v28594077,1.3.108,212642,,,,0
+2025,Canada,2021A000011124,Women+,73 years,Persons,249,units,0,v28594078,1.3.109,201348,,,,0
+2025,Canada,2021A000011124,Women+,74 years,Persons,249,units,0,v28594079,1.3.110,193887,,,,0
+2025,Canada,2021A000011124,Women+,75 to 79 years,Persons,249,units,0,v466943,1.3.87,855590,,,,0
+2025,Canada,2021A000011124,Women+,75 years,Persons,249,units,0,v28594080,1.3.111,187210,,,,0
+2025,Canada,2021A000011124,Women+,76 years,Persons,249,units,0,v28594081,1.3.112,180282,,,,0
+2025,Canada,2021A000011124,Women+,77 years,Persons,249,units,0,v28594082,1.3.113,175394,,,,0
+2025,Canada,2021A000011124,Women+,78 years,Persons,249,units,0,v28594083,1.3.114,170506,,,,0
+2025,Canada,2021A000011124,Women+,79 years,Persons,249,units,0,v28594084,1.3.115,142198,,,,0
+2025,Canada,2021A000011124,Women+,80 to 84 years,Persons,249,units,0,v466946,1.3.88,552320,,,,0
+2025,Canada,2021A000011124,Women+,80 years,Persons,249,units,0,v28594085,1.3.116,128132,,,,0
+2025,Canada,2021A000011124,Women+,81 years,Persons,249,units,0,v28594086,1.3.117,120409,,,,0
+2025,Canada,2021A000011124,Women+,82 years,Persons,249,units,0,v28594087,1.3.118,110814,,,,0
+2025,Canada,2021A000011124,Women+,83 years,Persons,249,units,0,v28594088,1.3.119,100004,,,,0
+2025,Canada,2021A000011124,Women+,84 years,Persons,249,units,0,v28594089,1.3.120,92961,,,,0
+2025,Canada,2021A000011124,Women+,85 to 89 years,Persons,249,units,0,v466949,1.3.89,340918,,,,0
+2025,Canada,2021A000011124,Women+,85 years,Persons,249,units,0,v28594090,1.3.121,83565,,,,0
+2025,Canada,2021A000011124,Women+,86 years,Persons,249,units,0,v28594091,1.3.122,75727,,,,0
+2025,Canada,2021A000011124,Women+,87 years,Persons,249,units,0,v28594092,1.3.123,68191,,,,0
+2025,Canada,2021A000011124,Women+,88 years,Persons,249,units,0,v28594093,1.3.124,59739,,,,0
+2025,Canada,2021A000011124,Women+,89 years,Persons,249,units,0,v28594094,1.3.125,53696,,,,0
+2025,Canada,2021A000011124,Women+,90 to 94 years,Persons,249,units,0,v31226550,1.3.126,178472,,,,0
+2025,Canada,2021A000011124,Women+,90 years,Persons,249,units,0,v31226551,1.3.127,46798,,,,0
+2025,Canada,2021A000011124,Women+,91 years,Persons,249,units,0,v31226552,1.3.128,40204,,,,0
+2025,Canada,2021A000011124,Women+,92 years,Persons,249,units,0,v31226553,1.3.129,35768,,,,0
+2025,Canada,2021A000011124,Women+,93 years,Persons,249,units,0,v31226554,1.3.130,30309,,,,0
+2025,Canada,2021A000011124,Women+,94 years,Persons,249,units,0,v31226555,1.3.131,25393,,,,0
+2025,Canada,2021A000011124,Women+,95 to 99 years,Persons,249,units,0,v31226556,1.3.132,61529,,,,0
+2025,Canada,2021A000011124,Women+,95 years,Persons,249,units,0,v31226557,1.3.133,20109,,,,0
+2025,Canada,2021A000011124,Women+,96 years,Persons,249,units,0,v31226558,1.3.134,15688,,,,0
+2025,Canada,2021A000011124,Women+,97 years,Persons,249,units,0,v31226559,1.3.135,11675,,,,0
+2025,Canada,2021A000011124,Women+,98 years,Persons,249,units,0,v31226560,1.3.136,8514,,,,0
+2025,Canada,2021A000011124,Women+,99 years,Persons,249,units,0,v31226561,1.3.137,5543,,,,0
+2025,Canada,2021A000011124,Women+,100 years and older,Persons,249,units,0,v31226562,1.3.138,10076,,,,0
+2025,Canada,2021A000011124,Women+,0 to 14 years,Persons,249,units,0,v466958,1.3.91,3049834,,,,0
+2025,Canada,2021A000011124,Women+,0 to 15 years,Persons,249,units,0,v466961,1.3.92,3271820,,,,0
+2025,Canada,2021A000011124,Women+,0 to 16 years,Persons,249,units,0,v466964,1.3.93,3496096,,,,0
+2025,Canada,2021A000011124,Women+,0 to 17 years,Persons,249,units,0,v466967,1.3.94,3720549,,,,0
+2025,Canada,2021A000011124,Women+,15 to 49 years,Persons,249,units,0,v466970,1.3.95,9587185,,,,0
+2025,Canada,2021A000011124,Women+,15 to 64 years,Persons,249,units,0,v466973,1.3.96,13439472,,,,0
+2025,Canada,2021A000011124,Women+,16 to 64 years,Persons,249,units,0,v466976,1.3.97,13217486,,,,0
+2025,Canada,2021A000011124,Women+,17 to 64 years,Persons,249,units,0,v466979,1.3.98,12993210,,,,0
+2025,Canada,2021A000011124,Women+,18 years and older,Persons,249,units,0,v466679,1.3.101,17120795,,,,0
+2025,Canada,2021A000011124,Women+,18 to 64 years,Persons,249,units,0,v466676,1.3.100,12768757,,,,0
+2025,Canada,2021A000011124,Women+,18 to 24 years,Persons,249,units,0,v466982,1.3.99,1737456,,,,0
+2025,Canada,2021A000011124,Women+,25 to 44 years,Persons,249,units,0,v466682,1.3.102,5882853,,,,0
+2025,Canada,2021A000011124,Women+,45 to 64 years,Persons,249,units,0,v466685,1.3.103,5148448,,,,0
+2025,Canada,2021A000011124,Women+,65 years and older,Persons,249,units,0,v466688,1.3.104,4352038,,,,0
+2025,Canada,2021A000011124,Women+,90 years and older,Persons,249,units,0,v466955,1.3.90,250077,,,,0
+2025,Canada,2021A000011124,Women+,Median age,Years,308,units,0,v466691,1.3.105,41.7,,,,1
+2025,Canada,2021A000011124,Women+,Average age,Years,308,units,0,v1200123442,1.3.139,42.7,,,,1
+2025,Newfoundland and Labrador,2021A000210,Total - gender,All ages,Persons,249,units,0,v466983,2.1.1,549911,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,0 to 4 years,Persons,249,units,0,v467199,2.1.7,18363,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,0 years,Persons,249,units,0,v467034,2.1.2,3405,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,1 year,Persons,249,units,0,v467067,2.1.3,3374,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,2 years,Persons,249,units,0,v467100,2.1.4,3415,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,3 years,Persons,249,units,0,v467133,2.1.5,4069,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,4 years,Persons,249,units,0,v467166,2.1.6,4100,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,5 to 9 years,Persons,249,units,0,v467013,2.1.13,23456,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,5 years,Persons,249,units,0,v467232,2.1.8,4267,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,6 years,Persons,249,units,0,v467265,2.1.9,4585,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,7 years,Persons,249,units,0,v466986,2.1.10,4575,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,8 years,Persons,249,units,0,v467007,2.1.11,4948,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,9 years,Persons,249,units,0,v467010,2.1.12,5081,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,10 to 14 years,Persons,249,units,0,v467031,2.1.19,25930,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,10 years,Persons,249,units,0,v467016,2.1.14,5073,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,11 years,Persons,249,units,0,v467019,2.1.15,5220,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,12 years,Persons,249,units,0,v467022,2.1.16,5117,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,13 years,Persons,249,units,0,v467025,2.1.17,5134,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,14 years,Persons,249,units,0,v467028,2.1.18,5386,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,15 to 19 years,Persons,249,units,0,v467052,2.1.25,28316,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,15 years,Persons,249,units,0,v467037,2.1.20,5702,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,16 years,Persons,249,units,0,v467040,2.1.21,5687,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,17 years,Persons,249,units,0,v467043,2.1.22,5730,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,18 years,Persons,249,units,0,v467046,2.1.23,5610,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,19 years,Persons,249,units,0,v467049,2.1.24,5587,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,20 to 24 years,Persons,249,units,0,v467073,2.1.31,30426,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,20 years,Persons,249,units,0,v467055,2.1.26,5619,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,21 years,Persons,249,units,0,v467058,2.1.27,5964,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,22 years,Persons,249,units,0,v467061,2.1.28,6271,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,23 years,Persons,249,units,0,v467064,2.1.29,6236,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,24 years,Persons,249,units,0,v467070,2.1.30,6336,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,25 to 29 years,Persons,249,units,0,v467091,2.1.37,30986,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,25 years,Persons,249,units,0,v467076,2.1.32,6315,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,26 years,Persons,249,units,0,v467079,2.1.33,6244,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,27 years,Persons,249,units,0,v467082,2.1.34,6365,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,28 years,Persons,249,units,0,v467085,2.1.35,6052,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,29 years,Persons,249,units,0,v467088,2.1.36,6010,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,30 to 34 years,Persons,249,units,0,v467112,2.1.43,31291,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,30 years,Persons,249,units,0,v467094,2.1.38,6125,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,31 years,Persons,249,units,0,v467097,2.1.39,5990,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,32 years,Persons,249,units,0,v467103,2.1.40,6183,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,33 years,Persons,249,units,0,v467106,2.1.41,6304,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,34 years,Persons,249,units,0,v467109,2.1.42,6689,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,35 to 39 years,Persons,249,units,0,v467130,2.1.49,33093,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,35 years,Persons,249,units,0,v467115,2.1.44,6872,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,36 years,Persons,249,units,0,v467118,2.1.45,6499,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,37 years,Persons,249,units,0,v467121,2.1.46,6575,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,38 years,Persons,249,units,0,v467124,2.1.47,6525,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,39 years,Persons,249,units,0,v467127,2.1.48,6622,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,40 to 44 years,Persons,249,units,0,v467151,2.1.55,33901,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,40 years,Persons,249,units,0,v467136,2.1.50,6832,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,41 years,Persons,249,units,0,v467139,2.1.51,6866,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,42 years,Persons,249,units,0,v467142,2.1.52,6726,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,43 years,Persons,249,units,0,v467145,2.1.53,6774,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,44 years,Persons,249,units,0,v467148,2.1.54,6703,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,45 to 49 years,Persons,249,units,0,v467172,2.1.61,34060,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,45 years,Persons,249,units,0,v467154,2.1.56,6820,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,46 years,Persons,249,units,0,v467157,2.1.57,6689,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,47 years,Persons,249,units,0,v467160,2.1.58,6743,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,48 years,Persons,249,units,0,v467163,2.1.59,6851,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,49 years,Persons,249,units,0,v467169,2.1.60,6957,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,50 to 54 years,Persons,249,units,0,v467190,2.1.67,37021,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,50 years,Persons,249,units,0,v467175,2.1.62,7141,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,51 years,Persons,249,units,0,v467178,2.1.63,7144,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,52 years,Persons,249,units,0,v467181,2.1.64,7243,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,53 years,Persons,249,units,0,v467184,2.1.65,7645,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,54 years,Persons,249,units,0,v467187,2.1.66,7848,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,55 to 59 years,Persons,249,units,0,v467211,2.1.73,40909,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,55 years,Persons,249,units,0,v467193,2.1.68,7817,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,56 years,Persons,249,units,0,v467196,2.1.69,7962,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,57 years,Persons,249,units,0,v467202,2.1.70,8247,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,58 years,Persons,249,units,0,v467205,2.1.71,8336,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,59 years,Persons,249,units,0,v467208,2.1.72,8547,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,60 to 64 years,Persons,249,units,0,v467229,2.1.79,43645,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,60 years,Persons,249,units,0,v467214,2.1.74,8778,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,61 years,Persons,249,units,0,v467217,2.1.75,8715,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,62 years,Persons,249,units,0,v467220,2.1.76,8693,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,63 years,Persons,249,units,0,v467223,2.1.77,8674,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,64 years,Persons,249,units,0,v467226,2.1.78,8785,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,65 to 69 years,Persons,249,units,0,v467250,2.1.85,42093,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,65 years,Persons,249,units,0,v467235,2.1.80,8621,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,66 years,Persons,249,units,0,v467238,2.1.81,8574,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,67 years,Persons,249,units,0,v467241,2.1.82,8477,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,68 years,Persons,249,units,0,v467244,2.1.83,8245,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,69 years,Persons,249,units,0,v467247,2.1.84,8176,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,70 to 74 years,Persons,249,units,0,v467253,2.1.86,37889,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,70 years,Persons,249,units,0,v28594095,2.1.106,8123,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,71 years,Persons,249,units,0,v28594096,2.1.107,7926,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,72 years,Persons,249,units,0,v28594097,2.1.108,7555,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,73 years,Persons,249,units,0,v28594098,2.1.109,7242,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,74 years,Persons,249,units,0,v28594099,2.1.110,7043,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,75 to 79 years,Persons,249,units,0,v467256,2.1.87,29566,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,75 years,Persons,249,units,0,v28594100,2.1.111,6633,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,76 years,Persons,249,units,0,v28594101,2.1.112,6191,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,77 years,Persons,249,units,0,v28594102,2.1.113,5936,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,78 years,Persons,249,units,0,v28594103,2.1.114,5596,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,79 years,Persons,249,units,0,v28594104,2.1.115,5210,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,80 to 84 years,Persons,249,units,0,v467259,2.1.88,16614,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,80 years,Persons,249,units,0,v28594105,2.1.116,4154,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,81 years,Persons,249,units,0,v28594106,2.1.117,3783,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,82 years,Persons,249,units,0,v28594107,2.1.118,3331,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,83 years,Persons,249,units,0,v28594108,2.1.119,2854,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,84 years,Persons,249,units,0,v28594109,2.1.120,2492,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,85 to 89 years,Persons,249,units,0,v467262,2.1.89,8378,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,85 years,Persons,249,units,0,v28594110,2.1.121,2250,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,86 years,Persons,249,units,0,v28594111,2.1.122,1904,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,87 years,Persons,249,units,0,v28594112,2.1.123,1678,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,88 years,Persons,249,units,0,v28594113,2.1.124,1398,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,89 years,Persons,249,units,0,v28594114,2.1.125,1148,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,90 to 94 years,Persons,249,units,0,v31226563,2.1.126,3081,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,90 years,Persons,249,units,0,v31226564,2.1.127,941,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,91 years,Persons,249,units,0,v31226565,2.1.128,727,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,92 years,Persons,249,units,0,v31226566,2.1.129,595,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,93 years,Persons,249,units,0,v31226567,2.1.130,453,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,94 years,Persons,249,units,0,v31226568,2.1.131,365,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,95 to 99 years,Persons,249,units,0,v31226569,2.1.132,778,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,95 years,Persons,249,units,0,v31226570,2.1.133,275,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,96 years,Persons,249,units,0,v31226571,2.1.134,179,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,97 years,Persons,249,units,0,v31226572,2.1.135,153,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,98 years,Persons,249,units,0,v31226573,2.1.136,105,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,99 years,Persons,249,units,0,v31226574,2.1.137,66,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,100 years and older,Persons,249,units,0,v31226575,2.1.138,115,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,0 to 14 years,Persons,249,units,0,v467271,2.1.91,67749,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,0 to 15 years,Persons,249,units,0,v467274,2.1.92,73451,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,0 to 16 years,Persons,249,units,0,v467277,2.1.93,79138,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,0 to 17 years,Persons,249,units,0,v467280,2.1.94,84868,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,15 to 49 years,Persons,249,units,0,v467283,2.1.95,222073,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,15 to 64 years,Persons,249,units,0,v467286,2.1.96,343648,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,16 to 64 years,Persons,249,units,0,v467289,2.1.97,337946,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,17 to 64 years,Persons,249,units,0,v467292,2.1.98,332259,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,18 years and older,Persons,249,units,0,v466992,2.1.101,465043,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,18 to 64 years,Persons,249,units,0,v466989,2.1.100,326529,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,18 to 24 years,Persons,249,units,0,v467295,2.1.99,41623,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,25 to 44 years,Persons,249,units,0,v466995,2.1.102,129271,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,45 to 64 years,Persons,249,units,0,v466998,2.1.103,155635,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,65 years and older,Persons,249,units,0,v467001,2.1.104,138514,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,90 years and older,Persons,249,units,0,v467268,2.1.90,3974,,,,0
+2025,Newfoundland and Labrador,2021A000210,Total - gender,Median age,Years,308,units,0,v467004,2.1.105,47.8,,,,1
+2025,Newfoundland and Labrador,2021A000210,Total - gender,Average age,Years,308,units,0,v1200123446,2.1.139,45.9,,,,1
+2025,Newfoundland and Labrador,2021A000210,Men+,All ages,Persons,249,units,0,v466984,2.2.1,271718,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,0 to 4 years,Persons,249,units,0,v467200,2.2.7,9433,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,0 years,Persons,249,units,0,v467035,2.2.2,1750,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,1 year,Persons,249,units,0,v467068,2.2.3,1753,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,2 years,Persons,249,units,0,v467101,2.2.4,1774,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,3 years,Persons,249,units,0,v467134,2.2.5,2082,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,4 years,Persons,249,units,0,v467167,2.2.6,2074,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,5 to 9 years,Persons,249,units,0,v467014,2.2.13,12006,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,5 years,Persons,249,units,0,v467233,2.2.8,2157,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,6 years,Persons,249,units,0,v467266,2.2.9,2372,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,7 years,Persons,249,units,0,v466987,2.2.10,2329,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,8 years,Persons,249,units,0,v467008,2.2.11,2502,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,9 years,Persons,249,units,0,v467011,2.2.12,2646,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,10 to 14 years,Persons,249,units,0,v467032,2.2.19,13281,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,10 years,Persons,249,units,0,v467017,2.2.14,2595,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,11 years,Persons,249,units,0,v467020,2.2.15,2684,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,12 years,Persons,249,units,0,v467023,2.2.16,2651,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,13 years,Persons,249,units,0,v467026,2.2.17,2586,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,14 years,Persons,249,units,0,v467029,2.2.18,2765,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,15 to 19 years,Persons,249,units,0,v467053,2.2.25,14661,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,15 years,Persons,249,units,0,v467038,2.2.20,2991,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,16 years,Persons,249,units,0,v467041,2.2.21,2891,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,17 years,Persons,249,units,0,v467044,2.2.22,2951,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,18 years,Persons,249,units,0,v467047,2.2.23,2939,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,19 years,Persons,249,units,0,v467050,2.2.24,2889,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,20 to 24 years,Persons,249,units,0,v467074,2.2.31,15924,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,20 years,Persons,249,units,0,v467056,2.2.26,2906,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,21 years,Persons,249,units,0,v467059,2.2.27,3177,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,22 years,Persons,249,units,0,v467062,2.2.28,3294,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,23 years,Persons,249,units,0,v467065,2.2.29,3242,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,24 years,Persons,249,units,0,v467071,2.2.30,3305,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,25 to 29 years,Persons,249,units,0,v467092,2.2.37,16133,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,25 years,Persons,249,units,0,v467077,2.2.32,3249,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,26 years,Persons,249,units,0,v467080,2.2.33,3245,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,27 years,Persons,249,units,0,v467083,2.2.34,3339,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,28 years,Persons,249,units,0,v467086,2.2.35,3185,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,29 years,Persons,249,units,0,v467089,2.2.36,3115,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,30 to 34 years,Persons,249,units,0,v467113,2.2.43,15948,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,30 years,Persons,249,units,0,v467095,2.2.38,3155,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,31 years,Persons,249,units,0,v467098,2.2.39,3104,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,32 years,Persons,249,units,0,v467104,2.2.40,3138,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,33 years,Persons,249,units,0,v467107,2.2.41,3143,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,34 years,Persons,249,units,0,v467110,2.2.42,3408,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,35 to 39 years,Persons,249,units,0,v467131,2.2.49,16458,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,35 years,Persons,249,units,0,v467116,2.2.44,3428,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,36 years,Persons,249,units,0,v467119,2.2.45,3268,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,37 years,Persons,249,units,0,v467122,2.2.46,3243,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,38 years,Persons,249,units,0,v467125,2.2.47,3241,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,39 years,Persons,249,units,0,v467128,2.2.48,3278,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,40 to 44 years,Persons,249,units,0,v467152,2.2.55,16687,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,40 years,Persons,249,units,0,v467137,2.2.50,3370,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,41 years,Persons,249,units,0,v467140,2.2.51,3402,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,42 years,Persons,249,units,0,v467143,2.2.52,3343,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,43 years,Persons,249,units,0,v467146,2.2.53,3302,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,44 years,Persons,249,units,0,v467149,2.2.54,3270,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,45 to 49 years,Persons,249,units,0,v467173,2.2.61,16747,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,45 years,Persons,249,units,0,v467155,2.2.56,3309,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,46 years,Persons,249,units,0,v467158,2.2.57,3306,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,47 years,Persons,249,units,0,v467161,2.2.58,3320,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,48 years,Persons,249,units,0,v467164,2.2.59,3316,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,49 years,Persons,249,units,0,v467170,2.2.60,3496,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,50 to 54 years,Persons,249,units,0,v467191,2.2.67,18124,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,50 years,Persons,249,units,0,v467176,2.2.62,3537,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,51 years,Persons,249,units,0,v467179,2.2.63,3550,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,52 years,Persons,249,units,0,v467182,2.2.64,3472,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,53 years,Persons,249,units,0,v467185,2.2.65,3719,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,54 years,Persons,249,units,0,v467188,2.2.66,3846,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,55 to 59 years,Persons,249,units,0,v467212,2.2.73,19913,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,55 years,Persons,249,units,0,v467194,2.2.68,3833,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,56 years,Persons,249,units,0,v467197,2.2.69,3882,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,57 years,Persons,249,units,0,v467203,2.2.70,4027,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,58 years,Persons,249,units,0,v467206,2.2.71,4057,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,59 years,Persons,249,units,0,v467209,2.2.72,4114,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,60 to 64 years,Persons,249,units,0,v467230,2.2.79,21513,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,60 years,Persons,249,units,0,v467215,2.2.74,4273,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,61 years,Persons,249,units,0,v467218,2.2.75,4331,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,62 years,Persons,249,units,0,v467221,2.2.76,4277,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,63 years,Persons,249,units,0,v467224,2.2.77,4309,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,64 years,Persons,249,units,0,v467227,2.2.78,4323,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,65 to 69 years,Persons,249,units,0,v467251,2.2.85,20532,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,65 years,Persons,249,units,0,v467236,2.2.80,4297,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,66 years,Persons,249,units,0,v467239,2.2.81,4193,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,67 years,Persons,249,units,0,v467242,2.2.82,4082,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,68 years,Persons,249,units,0,v467245,2.2.83,4016,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,69 years,Persons,249,units,0,v467248,2.2.84,3944,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,70 to 74 years,Persons,249,units,0,v467254,2.2.86,18267,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,70 years,Persons,249,units,0,v28594115,2.2.106,3967,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,71 years,Persons,249,units,0,v28594116,2.2.107,3839,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,72 years,Persons,249,units,0,v28594117,2.2.108,3634,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,73 years,Persons,249,units,0,v28594118,2.2.109,3455,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,74 years,Persons,249,units,0,v28594119,2.2.110,3372,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,75 to 79 years,Persons,249,units,0,v467257,2.2.87,13796,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,75 years,Persons,249,units,0,v28594120,2.2.111,3116,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,76 years,Persons,249,units,0,v28594121,2.2.112,2870,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,77 years,Persons,249,units,0,v28594122,2.2.113,2797,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,78 years,Persons,249,units,0,v28594123,2.2.114,2632,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,79 years,Persons,249,units,0,v28594124,2.2.115,2381,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,80 to 84 years,Persons,249,units,0,v467260,2.2.88,7543,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,80 years,Persons,249,units,0,v28594125,2.2.116,1951,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,81 years,Persons,249,units,0,v28594126,2.2.117,1753,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,82 years,Persons,249,units,0,v28594127,2.2.118,1504,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,83 years,Persons,249,units,0,v28594128,2.2.119,1241,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,84 years,Persons,249,units,0,v28594129,2.2.120,1094,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,85 to 89 years,Persons,249,units,0,v467263,2.2.89,3402,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,85 years,Persons,249,units,0,v28594130,2.2.121,978,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,86 years,Persons,249,units,0,v28594131,2.2.122,778,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,87 years,Persons,249,units,0,v28594132,2.2.123,675,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,88 years,Persons,249,units,0,v28594133,2.2.124,535,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,89 years,Persons,249,units,0,v28594134,2.2.125,436,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,90 to 94 years,Persons,249,units,0,v31226576,2.2.126,1151,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,90 years,Persons,249,units,0,v31226577,2.2.127,367,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,91 years,Persons,249,units,0,v31226578,2.2.128,288,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,92 years,Persons,249,units,0,v31226579,2.2.129,216,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,93 years,Persons,249,units,0,v31226580,2.2.130,174,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,94 years,Persons,249,units,0,v31226581,2.2.131,106,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,95 to 99 years,Persons,249,units,0,v31226582,2.2.132,181,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,95 years,Persons,249,units,0,v31226583,2.2.133,73,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,96 years,Persons,249,units,0,v31226584,2.2.134,46,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,97 years,Persons,249,units,0,v31226585,2.2.135,31,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,98 years,Persons,249,units,0,v31226586,2.2.136,18,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,99 years,Persons,249,units,0,v31226587,2.2.137,13,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,100 years and older,Persons,249,units,0,v31226588,2.2.138,18,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,0 to 14 years,Persons,249,units,0,v467272,2.2.91,34720,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,0 to 15 years,Persons,249,units,0,v467275,2.2.92,37711,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,0 to 16 years,Persons,249,units,0,v467278,2.2.93,40602,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,0 to 17 years,Persons,249,units,0,v467281,2.2.94,43553,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,15 to 49 years,Persons,249,units,0,v467284,2.2.95,112558,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,15 to 64 years,Persons,249,units,0,v467287,2.2.96,172108,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,16 to 64 years,Persons,249,units,0,v467290,2.2.97,169117,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,17 to 64 years,Persons,249,units,0,v467293,2.2.98,166226,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,18 years and older,Persons,249,units,0,v466993,2.2.101,228165,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,18 to 64 years,Persons,249,units,0,v466990,2.2.100,163275,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,18 to 24 years,Persons,249,units,0,v467296,2.2.99,21752,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,25 to 44 years,Persons,249,units,0,v466996,2.2.102,65226,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,45 to 64 years,Persons,249,units,0,v466999,2.2.103,76297,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,65 years and older,Persons,249,units,0,v467002,2.2.104,64890,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,90 years and older,Persons,249,units,0,v467269,2.2.90,1350,,,,0
+2025,Newfoundland and Labrador,2021A000210,Men+,Median age,Years,308,units,0,v467005,2.2.105,46.6,,,,1
+2025,Newfoundland and Labrador,2021A000210,Men+,Average age,Years,308,units,0,v1200123444,2.2.139,45,,,,1
+2025,Newfoundland and Labrador,2021A000210,Women+,All ages,Persons,249,units,0,v466985,2.3.1,278193,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,0 to 4 years,Persons,249,units,0,v467201,2.3.7,8930,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,0 years,Persons,249,units,0,v467036,2.3.2,1655,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,1 year,Persons,249,units,0,v467069,2.3.3,1621,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,2 years,Persons,249,units,0,v467102,2.3.4,1641,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,3 years,Persons,249,units,0,v467135,2.3.5,1987,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,4 years,Persons,249,units,0,v467168,2.3.6,2026,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,5 to 9 years,Persons,249,units,0,v467015,2.3.13,11450,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,5 years,Persons,249,units,0,v467234,2.3.8,2110,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,6 years,Persons,249,units,0,v467267,2.3.9,2213,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,7 years,Persons,249,units,0,v466988,2.3.10,2246,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,8 years,Persons,249,units,0,v467009,2.3.11,2446,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,9 years,Persons,249,units,0,v467012,2.3.12,2435,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,10 to 14 years,Persons,249,units,0,v467033,2.3.19,12649,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,10 years,Persons,249,units,0,v467018,2.3.14,2478,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,11 years,Persons,249,units,0,v467021,2.3.15,2536,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,12 years,Persons,249,units,0,v467024,2.3.16,2466,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,13 years,Persons,249,units,0,v467027,2.3.17,2548,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,14 years,Persons,249,units,0,v467030,2.3.18,2621,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,15 to 19 years,Persons,249,units,0,v467054,2.3.25,13655,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,15 years,Persons,249,units,0,v467039,2.3.20,2711,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,16 years,Persons,249,units,0,v467042,2.3.21,2796,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,17 years,Persons,249,units,0,v467045,2.3.22,2779,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,18 years,Persons,249,units,0,v467048,2.3.23,2671,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,19 years,Persons,249,units,0,v467051,2.3.24,2698,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,20 to 24 years,Persons,249,units,0,v467075,2.3.31,14502,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,20 years,Persons,249,units,0,v467057,2.3.26,2713,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,21 years,Persons,249,units,0,v467060,2.3.27,2787,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,22 years,Persons,249,units,0,v467063,2.3.28,2977,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,23 years,Persons,249,units,0,v467066,2.3.29,2994,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,24 years,Persons,249,units,0,v467072,2.3.30,3031,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,25 to 29 years,Persons,249,units,0,v467093,2.3.37,14853,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,25 years,Persons,249,units,0,v467078,2.3.32,3066,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,26 years,Persons,249,units,0,v467081,2.3.33,2999,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,27 years,Persons,249,units,0,v467084,2.3.34,3026,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,28 years,Persons,249,units,0,v467087,2.3.35,2867,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,29 years,Persons,249,units,0,v467090,2.3.36,2895,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,30 to 34 years,Persons,249,units,0,v467114,2.3.43,15343,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,30 years,Persons,249,units,0,v467096,2.3.38,2970,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,31 years,Persons,249,units,0,v467099,2.3.39,2886,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,32 years,Persons,249,units,0,v467105,2.3.40,3045,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,33 years,Persons,249,units,0,v467108,2.3.41,3161,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,34 years,Persons,249,units,0,v467111,2.3.42,3281,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,35 to 39 years,Persons,249,units,0,v467132,2.3.49,16635,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,35 years,Persons,249,units,0,v467117,2.3.44,3444,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,36 years,Persons,249,units,0,v467120,2.3.45,3231,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,37 years,Persons,249,units,0,v467123,2.3.46,3332,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,38 years,Persons,249,units,0,v467126,2.3.47,3284,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,39 years,Persons,249,units,0,v467129,2.3.48,3344,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,40 to 44 years,Persons,249,units,0,v467153,2.3.55,17214,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,40 years,Persons,249,units,0,v467138,2.3.50,3462,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,41 years,Persons,249,units,0,v467141,2.3.51,3464,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,42 years,Persons,249,units,0,v467144,2.3.52,3383,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,43 years,Persons,249,units,0,v467147,2.3.53,3472,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,44 years,Persons,249,units,0,v467150,2.3.54,3433,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,45 to 49 years,Persons,249,units,0,v467174,2.3.61,17313,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,45 years,Persons,249,units,0,v467156,2.3.56,3511,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,46 years,Persons,249,units,0,v467159,2.3.57,3383,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,47 years,Persons,249,units,0,v467162,2.3.58,3423,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,48 years,Persons,249,units,0,v467165,2.3.59,3535,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,49 years,Persons,249,units,0,v467171,2.3.60,3461,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,50 to 54 years,Persons,249,units,0,v467192,2.3.67,18897,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,50 years,Persons,249,units,0,v467177,2.3.62,3604,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,51 years,Persons,249,units,0,v467180,2.3.63,3594,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,52 years,Persons,249,units,0,v467183,2.3.64,3771,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,53 years,Persons,249,units,0,v467186,2.3.65,3926,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,54 years,Persons,249,units,0,v467189,2.3.66,4002,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,55 to 59 years,Persons,249,units,0,v467213,2.3.73,20996,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,55 years,Persons,249,units,0,v467195,2.3.68,3984,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,56 years,Persons,249,units,0,v467198,2.3.69,4080,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,57 years,Persons,249,units,0,v467204,2.3.70,4220,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,58 years,Persons,249,units,0,v467207,2.3.71,4279,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,59 years,Persons,249,units,0,v467210,2.3.72,4433,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,60 to 64 years,Persons,249,units,0,v467231,2.3.79,22132,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,60 years,Persons,249,units,0,v467216,2.3.74,4505,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,61 years,Persons,249,units,0,v467219,2.3.75,4384,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,62 years,Persons,249,units,0,v467222,2.3.76,4416,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,63 years,Persons,249,units,0,v467225,2.3.77,4365,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,64 years,Persons,249,units,0,v467228,2.3.78,4462,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,65 to 69 years,Persons,249,units,0,v467252,2.3.85,21561,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,65 years,Persons,249,units,0,v467237,2.3.80,4324,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,66 years,Persons,249,units,0,v467240,2.3.81,4381,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,67 years,Persons,249,units,0,v467243,2.3.82,4395,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,68 years,Persons,249,units,0,v467246,2.3.83,4229,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,69 years,Persons,249,units,0,v467249,2.3.84,4232,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,70 to 74 years,Persons,249,units,0,v467255,2.3.86,19622,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,70 years,Persons,249,units,0,v28594135,2.3.106,4156,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,71 years,Persons,249,units,0,v28594136,2.3.107,4087,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,72 years,Persons,249,units,0,v28594137,2.3.108,3921,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,73 years,Persons,249,units,0,v28594138,2.3.109,3787,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,74 years,Persons,249,units,0,v28594139,2.3.110,3671,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,75 to 79 years,Persons,249,units,0,v467258,2.3.87,15770,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,75 years,Persons,249,units,0,v28594140,2.3.111,3517,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,76 years,Persons,249,units,0,v28594141,2.3.112,3321,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,77 years,Persons,249,units,0,v28594142,2.3.113,3139,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,78 years,Persons,249,units,0,v28594143,2.3.114,2964,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,79 years,Persons,249,units,0,v28594144,2.3.115,2829,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,80 to 84 years,Persons,249,units,0,v467261,2.3.88,9071,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,80 years,Persons,249,units,0,v28594145,2.3.116,2203,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,81 years,Persons,249,units,0,v28594146,2.3.117,2030,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,82 years,Persons,249,units,0,v28594147,2.3.118,1827,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,83 years,Persons,249,units,0,v28594148,2.3.119,1613,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,84 years,Persons,249,units,0,v28594149,2.3.120,1398,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,85 to 89 years,Persons,249,units,0,v467264,2.3.89,4976,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,85 years,Persons,249,units,0,v28594150,2.3.121,1272,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,86 years,Persons,249,units,0,v28594151,2.3.122,1126,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,87 years,Persons,249,units,0,v28594152,2.3.123,1003,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,88 years,Persons,249,units,0,v28594153,2.3.124,863,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,89 years,Persons,249,units,0,v28594154,2.3.125,712,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,90 to 94 years,Persons,249,units,0,v31226589,2.3.126,1930,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,90 years,Persons,249,units,0,v31226590,2.3.127,574,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,91 years,Persons,249,units,0,v31226591,2.3.128,439,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,92 years,Persons,249,units,0,v31226592,2.3.129,379,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,93 years,Persons,249,units,0,v31226593,2.3.130,279,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,94 years,Persons,249,units,0,v31226594,2.3.131,259,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,95 to 99 years,Persons,249,units,0,v31226595,2.3.132,597,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,95 years,Persons,249,units,0,v31226596,2.3.133,202,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,96 years,Persons,249,units,0,v31226597,2.3.134,133,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,97 years,Persons,249,units,0,v31226598,2.3.135,122,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,98 years,Persons,249,units,0,v31226599,2.3.136,87,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,99 years,Persons,249,units,0,v31226600,2.3.137,53,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,100 years and older,Persons,249,units,0,v31226601,2.3.138,97,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,0 to 14 years,Persons,249,units,0,v467273,2.3.91,33029,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,0 to 15 years,Persons,249,units,0,v467276,2.3.92,35740,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,0 to 16 years,Persons,249,units,0,v467279,2.3.93,38536,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,0 to 17 years,Persons,249,units,0,v467282,2.3.94,41315,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,15 to 49 years,Persons,249,units,0,v467285,2.3.95,109515,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,15 to 64 years,Persons,249,units,0,v467288,2.3.96,171540,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,16 to 64 years,Persons,249,units,0,v467291,2.3.97,168829,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,17 to 64 years,Persons,249,units,0,v467294,2.3.98,166033,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,18 years and older,Persons,249,units,0,v466994,2.3.101,236878,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,18 to 64 years,Persons,249,units,0,v466991,2.3.100,163254,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,18 to 24 years,Persons,249,units,0,v467297,2.3.99,19871,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,25 to 44 years,Persons,249,units,0,v466997,2.3.102,64045,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,45 to 64 years,Persons,249,units,0,v467000,2.3.103,79338,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,65 years and older,Persons,249,units,0,v467003,2.3.104,73624,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,90 years and older,Persons,249,units,0,v467270,2.3.90,2624,,,,0
+2025,Newfoundland and Labrador,2021A000210,Women+,Median age,Years,308,units,0,v467006,2.3.105,49,,,,1
+2025,Newfoundland and Labrador,2021A000210,Women+,Average age,Years,308,units,0,v1200123445,2.3.139,46.8,,,,1
+2025,Prince Edward Island,2021A000211,Total - gender,All ages,Persons,249,units,0,v467298,3.1.1,182657,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,0 to 4 years,Persons,249,units,0,v467514,3.1.7,7218,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,0 years,Persons,249,units,0,v467349,3.1.2,1374,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,1 year,Persons,249,units,0,v467382,3.1.3,1402,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,2 years,Persons,249,units,0,v467415,3.1.4,1356,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,3 years,Persons,249,units,0,v467448,3.1.5,1489,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,4 years,Persons,249,units,0,v467481,3.1.6,1597,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,5 to 9 years,Persons,249,units,0,v467328,3.1.13,8535,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,5 years,Persons,249,units,0,v467547,3.1.8,1629,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,6 years,Persons,249,units,0,v467580,3.1.9,1618,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,7 years,Persons,249,units,0,v467301,3.1.10,1677,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,8 years,Persons,249,units,0,v467322,3.1.11,1790,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,9 years,Persons,249,units,0,v467325,3.1.12,1821,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,10 to 14 years,Persons,249,units,0,v467346,3.1.19,9581,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,10 years,Persons,249,units,0,v467331,3.1.14,1887,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,11 years,Persons,249,units,0,v467334,3.1.15,1956,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,12 years,Persons,249,units,0,v467337,3.1.16,1874,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,13 years,Persons,249,units,0,v467340,3.1.17,1925,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,14 years,Persons,249,units,0,v467343,3.1.18,1939,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,15 to 19 years,Persons,249,units,0,v467367,3.1.25,10165,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,15 years,Persons,249,units,0,v467352,3.1.20,1978,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,16 years,Persons,249,units,0,v467355,3.1.21,2039,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,17 years,Persons,249,units,0,v467358,3.1.22,2028,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,18 years,Persons,249,units,0,v467361,3.1.23,2071,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,19 years,Persons,249,units,0,v467364,3.1.24,2049,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,20 to 24 years,Persons,249,units,0,v467388,3.1.31,14339,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,20 years,Persons,249,units,0,v467370,3.1.26,2357,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,21 years,Persons,249,units,0,v467373,3.1.27,2500,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,22 years,Persons,249,units,0,v467376,3.1.28,2743,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,23 years,Persons,249,units,0,v467379,3.1.29,3145,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,24 years,Persons,249,units,0,v467385,3.1.30,3594,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,25 to 29 years,Persons,249,units,0,v467406,3.1.37,15504,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,25 years,Persons,249,units,0,v467391,3.1.32,3523,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,26 years,Persons,249,units,0,v467394,3.1.33,3279,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,27 years,Persons,249,units,0,v467397,3.1.34,3093,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,28 years,Persons,249,units,0,v467400,3.1.35,2845,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,29 years,Persons,249,units,0,v467403,3.1.36,2764,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,30 to 34 years,Persons,249,units,0,v467427,3.1.43,12009,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,30 years,Persons,249,units,0,v467409,3.1.38,2491,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,31 years,Persons,249,units,0,v467412,3.1.39,2404,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,32 years,Persons,249,units,0,v467418,3.1.40,2307,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,33 years,Persons,249,units,0,v467421,3.1.41,2404,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,34 years,Persons,249,units,0,v467424,3.1.42,2403,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,35 to 39 years,Persons,249,units,0,v467445,3.1.49,11709,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,35 years,Persons,249,units,0,v467430,3.1.44,2402,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,36 years,Persons,249,units,0,v467433,3.1.45,2387,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,37 years,Persons,249,units,0,v467436,3.1.46,2249,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,38 years,Persons,249,units,0,v467439,3.1.47,2322,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,39 years,Persons,249,units,0,v467442,3.1.48,2349,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,40 to 44 years,Persons,249,units,0,v467466,3.1.55,11117,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,40 years,Persons,249,units,0,v467451,3.1.50,2230,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,41 years,Persons,249,units,0,v467454,3.1.51,2235,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,42 years,Persons,249,units,0,v467457,3.1.52,2314,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,43 years,Persons,249,units,0,v467460,3.1.53,2179,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,44 years,Persons,249,units,0,v467463,3.1.54,2159,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,45 to 49 years,Persons,249,units,0,v467487,3.1.61,10516,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,45 years,Persons,249,units,0,v467469,3.1.56,2087,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,46 years,Persons,249,units,0,v467472,3.1.57,2197,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,47 years,Persons,249,units,0,v467475,3.1.58,2084,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,48 years,Persons,249,units,0,v467478,3.1.59,2123,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,49 years,Persons,249,units,0,v467484,3.1.60,2025,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,50 to 54 years,Persons,249,units,0,v467505,3.1.67,10609,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,50 years,Persons,249,units,0,v467490,3.1.62,2079,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,51 years,Persons,249,units,0,v467493,3.1.63,2071,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,52 years,Persons,249,units,0,v467496,3.1.64,2111,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,53 years,Persons,249,units,0,v467499,3.1.65,2149,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,54 years,Persons,249,units,0,v467502,3.1.66,2199,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,55 to 59 years,Persons,249,units,0,v467526,3.1.73,10697,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,55 years,Persons,249,units,0,v467508,3.1.68,2151,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,56 years,Persons,249,units,0,v467511,3.1.69,2138,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,57 years,Persons,249,units,0,v467517,3.1.70,2081,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,58 years,Persons,249,units,0,v467520,3.1.71,2146,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,59 years,Persons,249,units,0,v467523,3.1.72,2181,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,60 to 64 years,Persons,249,units,0,v467544,3.1.79,12553,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,60 years,Persons,249,units,0,v467529,3.1.74,2475,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,61 years,Persons,249,units,0,v467532,3.1.75,2534,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,62 years,Persons,249,units,0,v467535,3.1.76,2583,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,63 years,Persons,249,units,0,v467538,3.1.77,2494,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,64 years,Persons,249,units,0,v467541,3.1.78,2467,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,65 to 69 years,Persons,249,units,0,v467565,3.1.85,11535,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,65 years,Persons,249,units,0,v467550,3.1.80,2440,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,66 years,Persons,249,units,0,v467553,3.1.81,2285,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,67 years,Persons,249,units,0,v467556,3.1.82,2335,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,68 years,Persons,249,units,0,v467559,3.1.83,2225,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,69 years,Persons,249,units,0,v467562,3.1.84,2250,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,70 to 74 years,Persons,249,units,0,v467568,3.1.86,9845,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,70 years,Persons,249,units,0,v28594155,3.1.106,2156,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,71 years,Persons,249,units,0,v28594156,3.1.107,2111,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,72 years,Persons,249,units,0,v28594157,3.1.108,1943,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,73 years,Persons,249,units,0,v28594158,3.1.109,1859,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,74 years,Persons,249,units,0,v28594159,3.1.110,1776,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,75 to 79 years,Persons,249,units,0,v467571,3.1.87,8129,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,75 years,Persons,249,units,0,v28594160,3.1.111,1774,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,76 years,Persons,249,units,0,v28594161,3.1.112,1729,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,77 years,Persons,249,units,0,v28594162,3.1.113,1715,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,78 years,Persons,249,units,0,v28594163,3.1.114,1637,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,79 years,Persons,249,units,0,v28594164,3.1.115,1274,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,80 to 84 years,Persons,249,units,0,v467574,3.1.88,4555,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,80 years,Persons,249,units,0,v28594165,3.1.116,1126,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,81 years,Persons,249,units,0,v28594166,3.1.117,1087,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,82 years,Persons,249,units,0,v28594167,3.1.118,860,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,83 years,Persons,249,units,0,v28594168,3.1.119,763,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,84 years,Persons,249,units,0,v28594169,3.1.120,719,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,85 to 89 years,Persons,249,units,0,v467577,3.1.89,2551,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,85 years,Persons,249,units,0,v28594170,3.1.121,661,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,86 years,Persons,249,units,0,v28594171,3.1.122,578,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,87 years,Persons,249,units,0,v28594172,3.1.123,501,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,88 years,Persons,249,units,0,v28594173,3.1.124,424,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,89 years,Persons,249,units,0,v28594174,3.1.125,387,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,90 to 94 years,Persons,249,units,0,v31226602,3.1.126,1135,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,90 years,Persons,249,units,0,v31226603,3.1.127,331,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,91 years,Persons,249,units,0,v31226604,3.1.128,274,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,92 years,Persons,249,units,0,v31226605,3.1.129,227,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,93 years,Persons,249,units,0,v31226606,3.1.130,174,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,94 years,Persons,249,units,0,v31226607,3.1.131,129,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,95 to 99 years,Persons,249,units,0,v31226608,3.1.132,291,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,95 years,Persons,249,units,0,v31226609,3.1.133,107,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,96 years,Persons,249,units,0,v31226610,3.1.134,67,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,97 years,Persons,249,units,0,v31226611,3.1.135,54,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,98 years,Persons,249,units,0,v31226612,3.1.136,36,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,99 years,Persons,249,units,0,v31226613,3.1.137,27,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,100 years and older,Persons,249,units,0,v31226614,3.1.138,64,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,0 to 14 years,Persons,249,units,0,v467586,3.1.91,25334,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,0 to 15 years,Persons,249,units,0,v467589,3.1.92,27312,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,0 to 16 years,Persons,249,units,0,v467592,3.1.93,29351,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,0 to 17 years,Persons,249,units,0,v467595,3.1.94,31379,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,15 to 49 years,Persons,249,units,0,v467598,3.1.95,85359,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,15 to 64 years,Persons,249,units,0,v467601,3.1.96,119218,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,16 to 64 years,Persons,249,units,0,v467604,3.1.97,117240,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,17 to 64 years,Persons,249,units,0,v467607,3.1.98,115201,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,18 years and older,Persons,249,units,0,v467307,3.1.101,151278,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,18 to 64 years,Persons,249,units,0,v467304,3.1.100,113173,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,18 to 24 years,Persons,249,units,0,v467610,3.1.99,18459,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,25 to 44 years,Persons,249,units,0,v467310,3.1.102,50339,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,45 to 64 years,Persons,249,units,0,v467313,3.1.103,44375,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,65 years and older,Persons,249,units,0,v467316,3.1.104,38105,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,90 years and older,Persons,249,units,0,v467583,3.1.90,1490,,,,0
+2025,Prince Edward Island,2021A000211,Total - gender,Median age,Years,308,units,0,v467319,3.1.105,41,,,,1
+2025,Prince Edward Island,2021A000211,Total - gender,Average age,Years,308,units,0,v1200123449,3.1.139,42.4,,,,1
+2025,Prince Edward Island,2021A000211,Men+,All ages,Persons,249,units,0,v467299,3.2.1,89569,,,,0
+2025,Prince Edward Island,2021A000211,Men+,0 to 4 years,Persons,249,units,0,v467515,3.2.7,3688,,,,0
+2025,Prince Edward Island,2021A000211,Men+,0 years,Persons,249,units,0,v467350,3.2.2,711,,,,0
+2025,Prince Edward Island,2021A000211,Men+,1 year,Persons,249,units,0,v467383,3.2.3,722,,,,0
+2025,Prince Edward Island,2021A000211,Men+,2 years,Persons,249,units,0,v467416,3.2.4,694,,,,0
+2025,Prince Edward Island,2021A000211,Men+,3 years,Persons,249,units,0,v467449,3.2.5,763,,,,0
+2025,Prince Edward Island,2021A000211,Men+,4 years,Persons,249,units,0,v467482,3.2.6,798,,,,0
+2025,Prince Edward Island,2021A000211,Men+,5 to 9 years,Persons,249,units,0,v467329,3.2.13,4394,,,,0
+2025,Prince Edward Island,2021A000211,Men+,5 years,Persons,249,units,0,v467548,3.2.8,822,,,,0
+2025,Prince Edward Island,2021A000211,Men+,6 years,Persons,249,units,0,v467581,3.2.9,819,,,,0
+2025,Prince Edward Island,2021A000211,Men+,7 years,Persons,249,units,0,v467302,3.2.10,873,,,,0
+2025,Prince Edward Island,2021A000211,Men+,8 years,Persons,249,units,0,v467323,3.2.11,934,,,,0
+2025,Prince Edward Island,2021A000211,Men+,9 years,Persons,249,units,0,v467326,3.2.12,946,,,,0
+2025,Prince Edward Island,2021A000211,Men+,10 to 14 years,Persons,249,units,0,v467347,3.2.19,4871,,,,0
+2025,Prince Edward Island,2021A000211,Men+,10 years,Persons,249,units,0,v467332,3.2.14,969,,,,0
+2025,Prince Edward Island,2021A000211,Men+,11 years,Persons,249,units,0,v467335,3.2.15,988,,,,0
+2025,Prince Edward Island,2021A000211,Men+,12 years,Persons,249,units,0,v467338,3.2.16,946,,,,0
+2025,Prince Edward Island,2021A000211,Men+,13 years,Persons,249,units,0,v467341,3.2.17,979,,,,0
+2025,Prince Edward Island,2021A000211,Men+,14 years,Persons,249,units,0,v467344,3.2.18,989,,,,0
+2025,Prince Edward Island,2021A000211,Men+,15 to 19 years,Persons,249,units,0,v467368,3.2.25,5097,,,,0
+2025,Prince Edward Island,2021A000211,Men+,15 years,Persons,249,units,0,v467353,3.2.20,992,,,,0
+2025,Prince Edward Island,2021A000211,Men+,16 years,Persons,249,units,0,v467356,3.2.21,1042,,,,0
+2025,Prince Edward Island,2021A000211,Men+,17 years,Persons,249,units,0,v467359,3.2.22,991,,,,0
+2025,Prince Edward Island,2021A000211,Men+,18 years,Persons,249,units,0,v467362,3.2.23,1044,,,,0
+2025,Prince Edward Island,2021A000211,Men+,19 years,Persons,249,units,0,v467365,3.2.24,1028,,,,0

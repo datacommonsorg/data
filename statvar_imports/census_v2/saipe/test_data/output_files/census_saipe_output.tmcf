@@ -1,0 +1,6 @@
+Node: E:census_saipe_output->E0
+observationAbout: C:census_saipe_output->observationAbout
+observationDate: C:census_saipe_output->observationDate
+variableMeasured: C:census_saipe_output->variableMeasured
+value: C:census_saipe_output->value
+typeOf: dcs:StatVarObservation
