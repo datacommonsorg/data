@@ -12,7 +12,8 @@ def download_who_data():
     }
     
     print("1. Fetching clean percentage data from WHO API...")
-    api_response = requests.get(api_url, params=params)
+    # Timeout set to 5s for connection, 300s for data transfer
+    api_response = requests.get(api_url, params=params, timeout=(5, 300))
     
     if api_response.status_code != 200:
         print(f"Failed to fetch API data. HTTP {api_response.status_code}")
@@ -24,10 +25,14 @@ def download_who_data():
     # 2. Get ONLY the iso3 code from the master database
     print("2. Fetching country iso3 codes from WHO master database...")
     master_url = "https://extranet.who.int/tme/generateCSV.asp?ds=notifications"
+
+    # Fetch data first to ensure timeout is applied correctly
+    master_response = requests.get(master_url, timeout=(5, 300))
+    master_response.raise_for_status() 
     
-    # We only pull the 'country' (for matching) and 'iso3' columns
+    # Load from the response text to avoid a second unprotected download call
     geo_columns = ['country', 'iso3']
-    master_df = pd.read_csv(master_url, usecols=geo_columns).drop_duplicates()
+    master_df = pd.read_csv(io.StringIO(master_response.text), usecols=geo_columns).drop_duplicates()
     
     # 3. Merge the two datasets together based on the country name
     print("3. Merging data and formatting...")
@@ -54,4 +59,10 @@ def download_who_data():
     print(f"Success! Data saved locally as '{filename}'")
 
 if __name__ == "__main__":
-    download_who_data()
+    try:
+        download_who_data()
+    except requests.exceptions.Timeout:
+        print("Error: The request timed out. The server may be slow or offline.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        
