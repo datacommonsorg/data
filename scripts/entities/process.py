@@ -19,41 +19,42 @@ Currently, it only checks the existince of the files on GCS.
 from absl import app
 from absl import flags
 from absl import logging
-import datetime
-from google.cloud import storage
 import os
+import sys
+
+# Add the scripts directory to sys.path
+script_dir = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..', '..', 'import-automation',
+                 'executor', 'scripts'))
+sys.path.append(script_dir)
+import generate_provisional_nodes
+import convert_dc_manifest
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string("entity", "Schema", "Entity type (Schema/Place).")
-
-BUCKET_NAME = 'datcom-prod-imports'
-FILE_NAME = 'staging_version.txt'
+flags.DEFINE_string("entity", "", "Entity type (Schema/Place).")
+flags.DEFINE_string("version", "", "Import version.")
 
 
-def process(entity_type: str):
-    # Ensure the import data is available in GCS.
-    current_date = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
-    logging.info(f'Checking import {entity_type} for date {current_date}')
-    file_path = os.path.join('scripts', os.path.basename(os.getcwd()),
-                             entity_type, FILE_NAME)
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(BUCKET_NAME)
-    blob = bucket.blob(file_path)
-    version = blob.download_as_text()
-    if version == current_date:
-        logging.info(
-            f'Successfully validated import {entity_type} for date {current_date}'
-        )
-        return 0
-    else:
-        raise RuntimeError(
-            f'{entity_type} data not present in GCS bucket {BUCKET_NAME} for date {current_date}'
-        )
+def process(entity_type: str, version: str):
+    logging.info(f'Processing import {entity_type} for version {version}')
+    local_path = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), entity_type, version))
+
+    if entity_type == 'Provenance':
+        # Local path to Provenance data
+        logging.info(f'Processing DC manifest files in {local_path}')
+        convert_dc_manifest.process_directory(local_path)
+
+    # Local path to data
+    logging.info(
+        f'Generating provisional nodes for {entity_type} in {local_path}')
+    generate_provisional_nodes.generate_provisional_nodes(local_path)
+    return 0
 
 
 def main(_):
     """Runs the code."""
-    process(FLAGS.entity)
+    process(FLAGS.entity, FLAGS.version)
 
 
 if __name__ == "__main__":
