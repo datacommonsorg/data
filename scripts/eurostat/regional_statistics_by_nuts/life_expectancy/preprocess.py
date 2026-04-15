@@ -27,7 +27,8 @@ flags.DEFINE_string('input_file', 'input_files/input_file.tsv',
                     'Path to input TSV file')
 flags.DEFINE_string('output_file', 'demo_r_mlifexp_cleaned.csv',
                     'Path to output CSV file')
-flags.DEFINE_string('mode', '', 'Mode of operation: download, process, or empty (both)')
+flags.DEFINE_string('mode', '',
+                    'Mode of operation: download, process, or empty (both)')
 
 
 def nuts_to_iso(data):

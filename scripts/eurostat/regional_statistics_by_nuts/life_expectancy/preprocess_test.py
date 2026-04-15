@@ -36,10 +36,9 @@ class PreprocessTest(unittest.TestCase):
             output_file = os.path.join(test_dir, 'output.csv')
 
             with open(input_file, 'w') as f:
-                f.write(
-                    "freq,unit,sex,age,geo\\TIME_PERIOD\t2022 \t2021 \n"
-                    "A,YR,F,Y1,AT\t81.6 \t82.0 \n"
-                    "A,YR,M,Y_GE85,BE\t: \t5.1 \n")
+                f.write("freq,unit,sex,age,geo\\TIME_PERIOD\t2022 \t2021 \n"
+                        "A,YR,F,Y1,AT\t81.6 \t82.0 \n"
+                        "A,YR,M,Y_GE85,BE\t: \t5.1 \n")
 
             preprocess(input_file, output_file)
 
