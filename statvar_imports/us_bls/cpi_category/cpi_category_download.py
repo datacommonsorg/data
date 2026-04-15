@@ -64,14 +64,15 @@ def download_file(url: str, save_path: str ,timeout: int = 60):
     }
     try:
         logging.info(f"Attempting to download: {url} with timeout {timeout} seconds.")
-        response = requests.get(url, headers=headers, timeout=timeout, impersonate="chrome124") # To avoid 403 errors, we use impersonate to mimic a real browser's TLS fingerprint.
+        response = requests.get(url, stream=True, headers=headers, timeout=timeout, impersonate="chrome124") # To avoid 403 errors, we use impersonate to mimic a real browser's TLS fingerprint.
         response.raise_for_status() # Raise an HTTPError for bad responses (4xx or 5xx)
 
         # Ensure the directory for save_path exists
         os.makedirs(os.path.dirname(save_path), exist_ok=True)
 
         with open(save_path, 'wb') as file:
-            file.write(response.content)
+            for chunk in response.iter_content(chunk_size=8192):
+                file.write(chunk)
         logging.info(f"Successfully downloaded: {os.path.basename(save_path)} to {os.path.dirname(save_path)}")
         return True
 
