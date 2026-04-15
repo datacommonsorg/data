@@ -46,7 +46,6 @@ steps:
         python import_test.py
     env:
       - 'PROJECT_ID=$PROJECT_ID'
-      - 'LOCATION=$LOCATION'
       - 'GCS_BUCKET=${_GCS_BUCKET}'
       - 'IMAGE_URI=${_DOCKER_IMAGE}:${COMMIT_SHA}'
     dir: 'import-automation/executor'
