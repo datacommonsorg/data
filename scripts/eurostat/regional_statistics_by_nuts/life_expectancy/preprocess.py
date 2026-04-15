@@ -36,8 +36,8 @@ def nuts_to_iso(data):
     ISO_2_TO_3_PATH = os.path.join(_MODULE_DIR,
                                    'countries_codes_and_coordinates.csv')
     if not os.path.exists(ISO_2_TO_3_PATH):
-        logging.warning(
-            f"{ISO_2_TO_3_PATH} not found. Skipping ISO conversion for countries."
+        raise FileNotFoundError(
+            f"{ISO_2_TO_3_PATH} not found. This file is required for ISO conversion."
         )
         return data
 
