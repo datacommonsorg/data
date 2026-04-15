@@ -22,7 +22,7 @@ def download_full_who_data(indicator_id="27D371A"):
     
     try:
         # We use stream=True to handle potentially large files efficiently
-        with requests.get(base_url, stream=True) as r:
+        with requests.get(base_url, stream=True, timeout=300) as r:
             r.raise_for_status()
             with open(filename, 'wb') as f:
                 for chunk in r.iter_content(chunk_size=8192):
