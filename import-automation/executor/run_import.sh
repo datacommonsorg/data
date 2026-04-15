@@ -254,7 +254,7 @@ function build_docker {
 # Get the latest import output from GCS
 function get_latest_gcs_import_output {
   echo_log "Looking for import files on GCS at $GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME..."
-  LATEST_VERSION=$(gsutil cat gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/latest_version.txt)
+  LATEST_VERSION=$(gsutil cat gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/staging_version.txt)
   if [[ -n "$LATEST_VERSION" ]]; then
     echo_log "latest_version.txt: $LATEST_VERSION"
     run_cmd gsutil ls -lR gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$LATEST_VERSION
