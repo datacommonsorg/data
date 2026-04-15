@@ -16,6 +16,7 @@ import pandas as pd
 import numpy as np
 import re
 import os
+import urllib.request
 from absl import logging
 from absl import app
 from absl import flags
@@ -26,6 +27,7 @@ flags.DEFINE_string('input_file', 'input_files/input_file.tsv',
                     'Path to input TSV file')
 flags.DEFINE_string('output_file', 'demo_r_mlifexp_cleaned.csv',
                     'Path to output CSV file')
+flags.DEFINE_string('mode', '', 'Mode of operation: download, process, or empty (both)')
 
 
 def nuts_to_iso(data):
@@ -62,18 +64,39 @@ def nuts_to_iso(data):
 
 
 def obtain_value(entry):
-    """Extract value from entry."""
-    if pd.isna(entry) or entry == ':':
-        return np.nan
-    if isinstance(entry, str):
-        entry = entry.split(' ', maxsplit=-1)[0]
-        if entry == ':':
-            return np.nan
-        try:
-            return float(entry)
-        except ValueError:
-            return np.nan
-    return entry
+    """Extract value from entry. 
+    The entries could be like: '81.6', ': ', '79.9 e', ': e'.
+    """
+    if isinstance(entry, (int, float)):
+        return float(entry)
+    entry = str(entry).split(' ', maxsplit=-1)[0]  # Discard notes.
+    if not entry or entry == ':':
+        return None
+    try:
+        return float(entry)
+    except ValueError:
+        return None
+
+
+def download_data(download_link, download_path):
+    """Downloads raw data from Eurostat website and stores it in instance
+       data frame.
+    
+        Args:
+        download_link(str): A string representing the URL of the data source.
+        download_path(str): A string specifying the local file path where the downloaded data will be saved.
+        
+        Returns:None
+        
+    """
+    try:
+        logging.info(f'Processing file: {download_path}')
+        urllib.request.urlretrieve(download_link, "demo_r_mlifexp.tsv.gz")
+        raw_df = pd.read_table("demo_r_mlifexp.tsv.gz")
+        raw_df.to_csv(download_path, index=False, sep='\t')
+        logging.info(f'Downloaded {download_path} from {download_link}')
+    except Exception as e:
+        logging.fatal(f'Download error for: {download_link}: {e}')
 
 
 def preprocess(input_file, output_file):
@@ -151,7 +174,18 @@ def preprocess(input_file, output_file):
 
 
 def main(_):
-    preprocess(_FLAGS.input_file, _FLAGS.output_file)
+    mode = _FLAGS.mode
+    _DATA_URL = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_mlifexp/?format=TSV&compressed=true"
+
+    input_path = os.path.join(_MODULE_DIR, 'input_files')
+    if not os.path.exists(input_path):
+        os.makedirs(input_path)
+    input_file = os.path.join(input_path, 'input_file.tsv')
+
+    if mode == "" or mode == "download":
+        download_data(_DATA_URL, input_file)
+    if mode == "" or mode == "process":
+        preprocess(input_file, _FLAGS.output_file)
 
 
 if __name__ == "__main__":
