@@ -1,0 +1,27 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "WHO_TuberculosisBacteriologicallyConfirmed",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://data.who.int/indicators/i/1891124/5D51DB1",
+            "provenance_description": "Number of people diagnosed with a new episode of pulmonary TB whose disease was bacteriologically confirmed",
+            "scripts": [
+                "download_tb_data.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.csv --pv_map=pulmonary_tb_bctpb_pvmap.csv --config_file=pulmonary_tb_bctpb_metadata.csv --output_path=TB_Bacteriologically_Confirmed_output"
+            ],
+            "source_files": [
+                "source_files/*.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "TB_Bacteriologically_Confirmed_output.tmcf",
+                    "cleaned_csv": "TB_Bacteriologically_Confirmed_output.csv",
+                    "stat_var_mcf": "TB_Bacteriologically_Confirmed_output_stat_vars.mcf"
+                }
+            ],
+            "cron_schedule": "0 0 1 1,4,7,10 *"
+        }
+    ]
+}

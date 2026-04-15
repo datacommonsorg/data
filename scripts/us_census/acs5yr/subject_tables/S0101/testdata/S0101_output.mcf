@@ -1,0 +1,819 @@
+Node: dcid:Count_Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Upto5Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Upto5Years
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To9Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [5 9 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_10To14Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [10 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To19Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 19 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_20To24Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [20 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To29Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [25 29 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_30To34Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [30 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To39Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [35 39 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To44Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [40 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To49Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [45 49 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_50To54Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [50 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To59Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [55 59 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_60To64Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [60 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To69Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [65 69 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_70To74Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [70 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75To79Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [75 79 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_80To84Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [80 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_85OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years5To14
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years5To14
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To17Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Upto18Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To24Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To44Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_21OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [21 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_60OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [60 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_62OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [62 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person
+measuredProperty: dcs:age
+statType: dcs:medianValue
+populationType: dcs:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_AsAFractionOf_Count_Person_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+measurementDenominator: dcs:Count_Person_Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NotInLaborForce_AsAFractionOf_Count_Person_InLaborForce
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_InLaborForce
+employmentStatus: dcs:NotInLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_NoIncome_AsAFractionOf_Count_Person_15To64Years_WithIncome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [65 - Years]
+measurementDenominator: dcs:Count_Person_15To64Years_WithIncome
+incomeStatus: dcs:NoIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrLessYears_AsAFractionOf_Count_Person_15To64Years_WithIncome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [- 15 Years]
+measurementDenominator: dcs:Count_Person_15To64Years_WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Upto5Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: dcs:Upto5Years
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To9Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [5 9 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_10To14Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [10 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To19Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [15 19 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_20To24Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [20 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To29Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [25 29 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_30To34Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [30 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To39Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [35 39 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To44Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [40 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To49Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [45 49 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_50To54Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [50 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To59Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [55 59 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_60To64Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [60 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To69Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [65 69 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_70To74Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [70 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75To79Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [75 79 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_80To84Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [80 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_85OrMoreYears_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years5To14_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: dcs:Years5To14
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To17Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [15 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrLessYears_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To24Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To44Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [15 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrMoreYears_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_21OrMoreYears_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [21 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_60OrMoreYears_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [60 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_62OrMoreYears_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [62 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_Male
+measuredProperty: dcs:age
+statType: dcs:medianValue
+populationType: dcs:Person
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NotInLaborForce_Male_AsAFractionOf_Count_Person_InLaborForce_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+measurementDenominator: dcs:Count_Person_InLaborForce
+employmentStatus: dcs:NotInLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_Male_NoIncome_AsAFractionOf_Count_Person_15To64Years_Male_WithIncome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [65 - Years]
+measurementDenominator: dcs:Count_Person_15To64Years_WithIncome
+incomeStatus: dcs:NoIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrLessYears_Male_AsAFractionOf_Count_Person_15To64Years_Male_WithIncome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [- 15 Years]
+measurementDenominator: dcs:Count_Person_15To64Years_WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Upto5Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: dcs:Upto5Years
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To9Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [5 9 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_10To14Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [10 14 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To19Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [15 19 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_20To24Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [20 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To29Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [25 29 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_30To34Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [30 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To39Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [35 39 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_40To44Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [40 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To49Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [45 49 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_50To54Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [50 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To59Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [55 59 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_60To64Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [60 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To69Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [65 69 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_70To74Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [70 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75To79Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [75 79 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_80To84Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [80 84 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_85OrMoreYears_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years5To14_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: dcs:Years5To14
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To17Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [15 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrLessYears_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To24Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15To44Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [15 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrMoreYears_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [18 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_21OrMoreYears_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [21 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_60OrMoreYears_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [60 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_62OrMoreYears_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [62 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_Female
+measuredProperty: dcs:age
+statType: dcs:medianValue
+populationType: dcs:Person
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NotInLaborForce_Female_AsAFractionOf_Count_Person_InLaborForce_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+measurementDenominator: dcs:Count_Person_InLaborForce
+employmentStatus: dcs:NotInLaborForce
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_Female_NoIncome_AsAFractionOf_Count_Person_15To64Years_Female_WithIncome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [65 - Years]
+measurementDenominator: dcs:Count_Person_15To64Years_WithIncome
+incomeStatus: dcs:NoIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrLessYears_Female_AsAFractionOf_Count_Person_15To64Years_Female_WithIncome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [- 15 Years]
+measurementDenominator: dcs:Count_Person_15To64Years_WithIncome
+typeOf: dcs:StatisticalVariable
+

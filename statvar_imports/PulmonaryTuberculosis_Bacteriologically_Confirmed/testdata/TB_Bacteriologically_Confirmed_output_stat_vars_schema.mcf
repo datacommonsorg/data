@@ -1,0 +1,20 @@
+Node: dcid:NewCase
+typeOf: dcid:MedicalEventEnum
+name: "New Case"
+isProvisional: dcs:True
+
+Node: dcid:PulmonaryTuberculosis
+typeOf: dcid:Disease
+name: "Pulmonary Tuberculosis"
+isProvisional: dcs:True
+
+Node: dcid:medicalTestingMethod
+typeOf: dcs:Property
+name: "medicalTestingMethod"
+domainIncludes: dcid:MedicalConditionIncident
+
+Node: dcid:BacteriologicalTest
+typeOf: dcid:MedicalTestingMethodEnum
+name: "Bacteriological Test"
+isProvisional: dcs:True
+
