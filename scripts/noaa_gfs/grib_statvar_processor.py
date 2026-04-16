@@ -621,7 +621,6 @@ def main(argv):
         return
 
     logging.info(f"Found {len(files_to_process)} files to process.")
-    processed_checkpoints = []
 
     for input_path in files_to_process:
         path_str = str(input_path)
@@ -638,22 +637,15 @@ def main(argv):
             gcs_full_path = f"{FLAGS.output_gcs_prefix.strip('/')}/{gcs_filename}"
 
             if grib_statvar_processor(input_path, gcs_full_path):
-                processed_checkpoints.append((date_str, cycle_str))
+                logging.info(f"Successfully processed {date_str} {cycle_str}z. Updating state...")
+                update_state_json(date_str, cycle_str)
             else:
-                logging.warning(
-                    f"Could not extract date/cycle from {path_str}; skipping state update for this file."
-                )
-
-    if processed_checkpoints:
-        processed_checkpoints.sort()
-        latest_date, latest_cycle = processed_checkpoints[-1]
-        logging.info(
-            f"Batch complete. Updating GCS state to match {latest_date} {latest_cycle}z"
-        )
-        update_state_json(latest_date, latest_cycle)
-    else:
-        logging.warning(
-            "No files were successfully processed; skipping state update.")
+                logging.error(f"Failed to process {path_str}. Stopping to maintain integrity.")
+                break
+        else:
+            logging.warning(
+                f"Could not extract date/cycle from {path_str}; skipping."
+            )
 
 
 if __name__ == "__main__":
