@@ -29,9 +29,9 @@
                 "disk": 4096
             },
             "config_override": {
-                "skip_gcs_upload": True,
-                "invoke_differ_tool": False,
-                "invoke_import_validation": False
+                "skip_gcs_upload": true,
+                "invoke_differ_tool": false,
+                "invoke_import_validation": false
             }
         }
     ]
