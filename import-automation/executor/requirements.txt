@@ -41,6 +41,7 @@ omegaconf
 prettytable
 protobuf
 psutil
+pygrib
 pylint
 pyspellchecker
 pytest
