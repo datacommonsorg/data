@@ -27,6 +27,11 @@
                 "cpu": 64,
                 "memory": 256,
                 "disk": 4096
+            },
+            "config_override": {
+                "skip_gcs_upload": True,
+                "invoke_differ_tool": False,
+                "invoke_import_validation": False
             }
         }
     ]
