@@ -31,6 +31,8 @@ LOCATION = os.environ.get('LOCATION')
 GCS_BUCKET_ID = os.environ.get('GCS_BUCKET_ID')
 INGESTION_HELPER_URL = f"https://{LOCATION}-{PROJECT_ID}.cloudfunctions.net/spanner-ingestion-helper"
 WORKFLOW_ID = 'spanner-ingestion-workflow'
+IMPORT_AUTOMATION_WORKFLOW_ID = 'import-automation-workflow'
+
 
 def invoke_ingestion_workflow(import_name: str):
     """Triggers the graph ingestion workflows.
@@ -48,6 +50,34 @@ def invoke_ingestion_workflow(import_name: str):
                                                  execution=execution_req)
     logging.info(
         f"Triggered workflow {WORKFLOW_ID} for {import_name}. Execution ID: {response.name}"
+    )
+
+
+def invoke_import_workflow(import_name: str,
+                           latest_version: str,
+                           run_ingestion: bool = False):
+    """Triggers the import automation workflow.
+
+    Args:
+        import_name: The name of the import.
+        latest_version: The version of the import.
+        run_ingestion: Whether to run the ingestion workflow after the import.
+    """
+    import_config = {"user_script_args": [f"--version={latest_version}"]}
+    workflow_args = {
+        "importName": import_name,
+        "importConfig": json.dumps(import_config),
+        "runIngestion": run_ingestion
+    }
+
+    logging.info(f"Invoking {IMPORT_AUTOMATION_WORKFLOW_ID} for {import_name}")
+    execution_client = executions_v1.ExecutionsClient()
+    parent = f"projects/{PROJECT_ID}/locations/{LOCATION}/workflows/{IMPORT_AUTOMATION_WORKFLOW_ID}"
+    execution_req = executions_v1.Execution(argument=json.dumps(workflow_args))
+    response = execution_client.create_execution(parent=parent,
+                                                 execution=execution_req)
+    logging.info(
+        f"Triggered workflow {IMPORT_AUTOMATION_WORKFLOW_ID} for {import_name}. Execution ID: {response.name}"
     )
 
 
