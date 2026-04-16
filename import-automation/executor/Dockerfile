@@ -37,7 +37,7 @@ xdg-utils \
 chromium \
 chromium-driver \
 p7zip-full \
-libeccodes
+libeccodes-dev
 # Install the Google Cloud CLI
 RUN apt-get update && \
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && \
