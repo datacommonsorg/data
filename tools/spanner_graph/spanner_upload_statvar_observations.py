@@ -19,6 +19,7 @@ sys.path.append(os.path.join(_DATA_DIR, 'util'))
 sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
 
 from counters import Counters
+from eval_functions import evaluate_statement
 
 import file_util
 import mcf_file_util
@@ -34,16 +35,31 @@ flags.DEFINE_list("spanner_default_values", [],
                   "Default list of property=values")
 flags.DEFINE_boolean("dry_run", False, "Dry run mode.")
 flags.DEFINE_boolean("spanner_debug", False, "Spanner debug mode.")
+flags.DEFINE_boolean("spanner_delete", False, "Delete data from Spanner.")
 
 # Map from input csv to spanner graph table columns
 _DEFAULT_TABLE_CONFIG = {
+    # Default variables for common StatVarObservation properties
+    "DefaultVariables": {
+        "measurementMethod": "",
+        "provenance": "",
+        "unit": "",
+        "observationPeriod": "",
+        "scalingFactor": "",
+    },
+    # Local variables reused in multiple tables
+    "LocalVariables": {
+        "FacetId": "=crc32('{provenance}-{measurementMethod}-{observationPeriod}-{unit}-{scalingFactor}')",
+    },
+
+    "SpannerTables": {
     # TimeSeries Table with the schema:
     #   id STRING(1024) NOT NULL,
     #   variable_measured STRING(1024) NOT NULL,
     #   provenance STRING(1024) NOT NULL,
     "TimeSeries": {
         "id":
-            "{variableMeasured};{provenance};{unit};{observationPeriod};{measurementMethod}",
+            "{variableMeasured};{donor};{recipient};{FacetId}",
         "variable_measured":
             "{variableMeasured}",
         "provenance":
@@ -109,6 +125,7 @@ _DEFAULT_TABLE_CONFIG = {
         "property": "footnote",
         "value": "{footnote}",
     },],
+    }
 }
 
 
@@ -147,28 +164,37 @@ class SpannerStatVarObservationsUploader:
         else:
             self._table_config = _DEFAULT_TABLE_CONFIG
 
-    def _build_value_from_template(self, template: str, row: dict) -> str:
-        """Build a value from a template string and a row dictionary."""
-        try:
-            return template.format(**row)
-        except KeyError as e:
-            logging.error(f"KeyError: {e} in template: {template}, row: {row}")
-            raise e
+
+    def _get_default_variables(self, row: dict ):
+        def_vars = self._table_config.get("DefaultVariables", {})
+        def_vars.update(self._default_values)
+        def_vars.update(row)
+        return def_vars
+
+    def _get_local_variables(self, pvs: dict):
+        local_vars = self._table_config.get("LocalVariables", {})
+        for var in local_vars.keys():
+            value = _build_value_from_template(local_vars[var], pvs)
+            pvs[var] = value
+        return pvs
 
     def process_input_row(self, row: dict):
         """Process a single row from the input CSV and generate Spanner mutations."""
         mutations = []
-        pvs = dict(self._default_values)
-        pvs.update(row)
+        pvs = self._get_default_variables(row)
+        pvs = self._get_local_variables(pvs)
+
         # Generate all table columns values from the input row
         self._counters.add_counter('spanner-input-rows', 1)
-        for table, table_cfg in self._table_config.items():
+        spanner_tables = self._table_config.get("SpannerTables", {})
+        for table, table_cfg in spanner_tables.items():
             # Generate mutation per table from the input row
             table_row = {}
             if isinstance(table_cfg, dict):
-                for col, template in table_cfg.items():
+                for col in list(table_cfg.keys()):
+                    template = table_cfg[col]
                     if isinstance(template, str):
-                        value = self._build_value_from_template(template, pvs)
+                        value = _build_value_from_template(template, pvs)
                         if value:
                             table_row[col] = value
                         pvs[f'{table}_{col}'] = value
@@ -176,8 +202,9 @@ class SpannerStatVarObservationsUploader:
                 table_row = []
                 for index, tpl in enumerate(table_cfg):
                     sub_table_row = {}
-                    for col, template in tpl.items():
-                        value = self._build_value_from_template(template, pvs)
+                    for col in tpl.keys():
+                        template = tpl[col]
+                        value = _build_value_from_template(template, pvs)
                         if value:
                             sub_table_row[col] = value
                             pvs_key = f'{table}{col}'
@@ -229,14 +256,45 @@ class SpannerStatVarObservationsUploader:
             f'Added {num_mutations} rows from {len(input_files)} files to spanner database {self._instance_id}.{self._database_id}'
         )
 
+    def delete_statvar_observations(self):
+        """Delete data from all tables for a given provenance."""
+        pvs = self._get_default_variables()
+        provenance = pvs.get('provenance')
+        if not self._dry_run:
+            for table, template in self._table_config.get("SpannerTables", {}).items():
+                if 'provenance' in template:
+                    row_ct = self.database.execute_partitioned_dml(
+                        f"DELETE FROM {table} WHERE provenance = '{provenance}'"
+                    )
+                    logging.info(f"Bulk deleted {row_ct} records from {table}.")
+                    self._counters.add_counter(f'spanner-rows-deleted-{table}', row_ct)
+        else:
+            logging.info(f"Dry run: would have deleted data from {len(self._table_config.get("SpannerTables", {}))} tables.")
+
+
+def _build_value_from_template(template: str, row: dict) -> str:
+    """Build a value from a template string and a row dictionary."""
+    try:
+        if template.startswith('='):
+            variable, value = evaluate_statement(template[1:], row)
+            row[variable] = value
+            return value
+        return template.format(**row)
+    except KeyError as e:
+        logging.error(f"KeyError: {e} in template: {template}, row: {row}")
+        raise e
+
 
 def spanner_upload_statvar_observations(instance_id, database_id,
                                         table_config_file, default_values,
-                                        input_file, dry_run):
+                                        input_file, delete, dry_run):
     uploader = SpannerStatVarObservationsUploader(instance_id, database_id,
                                                   table_config_file,
                                                   default_values, dry_run)
-    uploader.process_input_file(input_file)
+    if delete:
+        uploader.delete_statvar_observations()
+    if input_file:
+        uploader.process_input_file(input_file)
     return uploader._counters
 
 
@@ -248,6 +306,7 @@ def main(_):
                                         _FLAGS.spanner_table_config_file,
                                         _FLAGS.spanner_default_values,
                                         _FLAGS.spanner_input_file,
+                                        _FLAGS.spanner_delete,
                                         _FLAGS.dry_run)
 
 

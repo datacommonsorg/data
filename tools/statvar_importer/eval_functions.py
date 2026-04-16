@@ -37,6 +37,7 @@ format, you could use:
 
 from datetime import datetime
 import re
+import zlib
 
 from absl import logging
 import dateutil
@@ -109,6 +110,18 @@ def str_to_camel_case(input_string: str,
     return ''.join(
         [w[0].upper() + w[1:] for w in clean_str.split(' ') if len(w) > 0])
 
+def crc32(input_string: str) -> str:
+    """Computes the CRC32 hash of a string
+    
+    Args:
+        input_string: The string to be hashed.
+    
+    Returns:
+        The CRC32 hash of the string.
+    """
+    if not isinstance(input_string, str):
+        input_string = str(input_string)
+    return str(zlib.crc32(input_string.encode('utf-8')))
 
 # A dictionary of functions and modules that are safe to use in `eval()`.
 # This dictionary acts as a safelist, defining the execution environment for
@@ -136,6 +149,10 @@ EVAL_GLOBALS = {
     # - `re.sub`: The 'sub' function for string substitution.
     're': re,
     're_sub': re.sub,
+
+    # Hash functions:
+    # - `crc32`: The 'crc32' function for stable hash ids generation.
+    'crc32': crc32,
 }
 
 
