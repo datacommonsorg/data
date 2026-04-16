@@ -422,21 +422,34 @@ def worker_process(args):
                 # --- LEVEL LOGIC ---
                 l_type = grb.typeOfLevel
                 LEVEL_TYPE_MAP_REF = {
-                    "surface": "surface",
-                    "meanSea": "mean sea level",
-                    "atmosphere": "entire atmosphere",
-                    "atmosphereSingleLayer": "entire atmosphere",
-                    "planetaryBoundaryLayer": "planetary boundary layer",
-                    "lowCloudLayer": "low cloud layer",
-                    "middleCloudLayer": "middle cloud layer",
-                    "highCloudLayer": "high cloud layer",
-                    "cloudCeiling": "cloud ceiling",
-                    "isothermZero": "0C isotherm",
+                    "surface":
+                        "surface",
+                    "meanSea":
+                        "mean sea level",
+                    "atmosphere":
+                        "entire atmosphere",
+                    "atmosphereSingleLayer":
+                        "entire atmosphere",
+                    "planetaryBoundaryLayer":
+                        "planetary boundary layer",
+                    "lowCloudLayer":
+                        "low cloud layer",
+                    "middleCloudLayer":
+                        "middle cloud layer",
+                    "highCloudLayer":
+                        "high cloud layer",
+                    "cloudCeiling":
+                        "cloud ceiling",
+                    "isothermZero":
+                        "0C isotherm",
                     "highestTroposphericFreezing":
-                    "highest tropospheric freezing level",
-                    "tropopause": "tropopause",
-                    "maxWind": "max wind",
-                    "heightAboveSea": "m above mean sea level"
+                        "highest tropospheric freezing level",
+                    "tropopause":
+                        "tropopause",
+                    "maxWind":
+                        "max wind",
+                    "heightAboveSea":
+                        "m above mean sea level"
                 }
 
                 if l_type in LEVEL_TYPE_MAP_REF:
