@@ -195,7 +195,7 @@ PARAM_MAP = {
     'LFTX': ('SurfaceLiftedIndex_Atmosphere', 'Kelvin'),
     '4LFTX': ('BestLiftedIndex_Atmosphere', 'Kelvin'),
     'CAPE':
-    ('ConvectiveAvailablePotentialEnergy_Atmosphere', 'JoulePerKilogram'),
+        ('ConvectiveAvailablePotentialEnergy_Atmosphere', 'JoulePerKilogram'),
     'CIN': ('ConvectiveInhibition_Atmosphere', 'JoulePerKilogram'),
     'PWAT': ('PrecipitableWater_Place', 'KilogramPerMeterSquared'),
     'CWAT': ('CloudWater_Place', 'KilogramPerMeterSquared'),
@@ -204,7 +204,7 @@ PARAM_MAP = {
     'MCDC': ('CloudCover_Place_MiddleCloudLayer', 'Percent'),
     'HCDC': ('CloudCover_Place_HighCloudLayer', 'Percent'),
     'HLCY':
-    ('StormRelativeHelicity_Atmosphere', 'MetersSquaredPerSecondSquared'),
+        ('StormRelativeHelicity_Atmosphere', 'MetersSquaredPerSecondSquared'),
     'USTM': ('StormMotion_Atmosphere', 'MeterPerSecond'),
     'VSTM': ('StormMotion_Atmosphere', 'MeterPerSecond'),
     'ICAHT': ('ICAOStandardAtmosphere_Altitude_Atmosphere', 'Meter'),
@@ -235,18 +235,24 @@ def format_level_dcid(level):
              '1000 mb' -> '1000Millibar'
     """
     l = str(level).lower().strip()
-    if l in STATIC_LEVEL_MAP: return STATIC_LEVEL_MAP[l]
+    if l in STATIC_LEVEL_MAP:
+        return STATIC_LEVEL_MAP[l]
 
     # Handle vertical altitude (Above Mean Sea Level)
     if "m above mean sea level" in l:
         val = l.split(" ")[0].replace("-", "To")
         return f"{val}MetersAboveMeanSeaLevel"
 
-    if "entire atmosphere" in l: return ""
-    if "low cloud layer" in l: return "LowCloudLayer"
-    if "middle cloud layer" in l: return "MiddleCloudLayer"
-    if "high cloud layer" in l: return "HighCloudLayer"
-    if "cloud ceiling" in l: return "CloudCeiling"
+    if "entire atmosphere" in l:
+        return ""
+    if "low cloud layer" in l:
+        return "LowCloudLayer"
+    if "middle cloud layer" in l:
+        return "MiddleCloudLayer"
+    if "high cloud layer" in l:
+        return "HighCloudLayer"
+    if "cloud ceiling" in l:
+        return "CloudCeiling"
 
     # Handle hybrid vertical coordinates
     if "hybrid level" in l:
@@ -280,8 +286,8 @@ def format_level_dcid(level):
     if "pv=" in l:
         return "PotentialVorticityNeg2PVU" if (
             "neg" in l or "-2" in l) else "PotentialVorticity2PVU"
-    return "".join(word.capitalize() for word in l.replace("-", " ").split()
-                   if word)
+    return "".join(
+        word.capitalize() for word in l.replace("-", " ").split() if word)
 
 
 def construct_dcid(param_raw, level_raw):
@@ -300,9 +306,12 @@ def construct_dcid(param_raw, level_raw):
         return "dcid:Humidity_RelativeHumidity"
 
     # Construct base DCID
-    if level_clean and level_clean in base: dcid = f"dcid:{base}"
-    elif not level_clean: dcid = f"dcid:{base}"
-    else: dcid = f"dcid:{base}_{level_clean}"
+    if level_clean and level_clean in base:
+        dcid = f"dcid:{base}"
+    elif not level_clean:
+        dcid = f"dcid:{base}"
+    else:
+        dcid = f"dcid:{base}_{level_clean}"
 
     # Append Vector components (Wind/Storm motion)
     if param in ['UGRD', 'VGRD', 'USTM', 'VSTM']:
@@ -312,9 +321,12 @@ def construct_dcid(param_raw, level_raw):
             return f"dcid:WindSpeed_{suffix}_Height10Meters"
         return f"{dcid}_{suffix}"
 
-    if param == 'RH': return f"{dcid}_RelativeHumidity"
-    if param == 'SPFH': return f"{dcid}_SpecificHumidity"
-    if param == 'REFC': return f"dcid:{base}"
+    if param == 'RH':
+        return f"{dcid}_RelativeHumidity"
+    if param == 'SPFH':
+        return f"{dcid}_SpecificHumidity"
+    if param == 'REFC':
+        return f"dcid:{base}"
 
     return dcid
 
@@ -327,18 +339,14 @@ def update_state_json(latest_date, latest_cycle):
         blob = bucket.blob(FLAGS.state_path)
 
         state_content = json.dumps({
-            "date":
-            latest_date,
-            "cycle":
-            latest_cycle,
-            "updated_at":
-            time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+            "date": latest_date,
+            "cycle": latest_cycle,
+            "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         })
 
         blob.upload_from_string(state_content, content_type='application/json')
         logging.info(
-            f"Successfully updated GCS state to: {latest_date} {latest_cycle}z"
-        )
+            f"Successfully updated GCS state to: {latest_date} {latest_cycle}z")
     except Exception as e:
         logging.error(f"Failed to update state.json: {e}")
 
@@ -376,9 +384,12 @@ def worker_process(args):
                 raw_short = grb.shortName.lower()
                 if raw_short == "unknown":
                     d, c, num = grb.discipline, grb.parameterCategory, grb.parameterNumber
-                    if d == 0 and c == 3 and num == 196: var_name = "HPBL"
-                    elif d == 10 and c == 2 and num == 6: var_name = "ICEG"
-                    else: var_name = f"VAR_{d}_{c}_{num}"
+                    if d == 0 and c == 3 and num == 196:
+                        var_name = "HPBL"
+                    elif d == 10 and c == 2 and num == 6:
+                        var_name = "ICEG"
+                    else:
+                        var_name = f"VAR_{d}_{c}_{num}"
                 else:
                     var_name = NAME_MAP.get(raw_short, raw_short.upper())
 
@@ -402,7 +413,8 @@ def worker_process(args):
                     except:
                         pass
 
-                if not np.any(valid_mask): continue
+                if not np.any(valid_mask):
+                    continue
 
                 data_subset = raw_data[valid_mask]
                 mask_idx = np.where(valid_mask)[0]
@@ -441,7 +453,8 @@ def worker_process(args):
                 elif l_type == "potentialVorticity":
                     try:
                         s_val = grb['scaledValueOfFirstFixedSurface']
-                        if s_val & (1 << 31): s_val = -(s_val & ~(1 << 31))
+                        if s_val & (1 << 31):
+                            s_val = -(s_val & ~(1 << 31))
                         pv_val = s_val * (
                             10**-grb['scaleFactorOfFirstFixedSurface'])
                         l_str = f"PV={pv_val:g} (Km^2/kg/s) surface"
@@ -501,9 +514,12 @@ def worker_process(args):
 
                 for j, val in enumerate(data_rounded):
                     idx = mask_idx[j]
-                    if val == 0: val_out = "-0" if np.signbit(val) else "0"
-                    elif val % 1 == 0: val_out = str(int(val))
-                    else: val_out = f"{val:.2f}".rstrip('0').rstrip('.')
+                    if val == 0:
+                        val_out = "-0" if np.signbit(val) else "0"
+                    elif val % 1 == 0:
+                        val_out = str(int(val))
+                    else:
+                        val_out = f"{val:.2f}".rstrip('0').rstrip('.')
 
                     writer.writerow([
                         obs_date, val_out, dcid, final_m, lats_str[idx],
