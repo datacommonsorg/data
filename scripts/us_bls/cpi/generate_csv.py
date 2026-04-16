@@ -41,7 +41,8 @@ global buffer
 
 @retry(tries=3, delay=5, backoff=5)
 def retry_method(url, header):
-    return requests.get(url, headers=header, impersonate="chrome124") # To avoid 403 errors, we use impersonate to mimic a real browser's TLS fingerprint.
+    # To avoid 403 errors, we use impersonate to mimic a real browser's TLS fingerprint.
+    return requests.get(url, headers=header, impersonate="chrome124") 
 
 
 # Dict from series names to download links
