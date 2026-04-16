@@ -637,15 +637,18 @@ def main(argv):
             gcs_full_path = f"{FLAGS.output_gcs_prefix.strip('/')}/{gcs_filename}"
 
             if grib_statvar_processor(input_path, gcs_full_path):
-                logging.info(f"Successfully processed {date_str} {cycle_str}z. Updating state...")
+                logging.info(
+                    f"Successfully processed {date_str} {cycle_str}z. Updating state..."
+                )
                 update_state_json(date_str, cycle_str)
             else:
-                logging.error(f"Failed to process {path_str}. Stopping to maintain integrity.")
+                logging.error(
+                    f"Failed to process {path_str}. Stopping to maintain integrity."
+                )
                 break
         else:
             logging.warning(
-                f"Could not extract date/cycle from {path_str}; skipping."
-            )
+                f"Could not extract date/cycle from {path_str}; skipping.")
 
 
 if __name__ == "__main__":
