@@ -78,7 +78,6 @@ def obtain_value(entry):
     except ValueError:
         return None
 
-
 def download_data(download_link, download_path):
     """Downloads raw data from Eurostat website and stores it in instance
        data frame.
