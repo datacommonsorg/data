@@ -34,10 +34,10 @@ def embedding_helper(request):
     action_type = request_json['actionType']
     logging.info(f"Received request for actionType: {action_type}")
 
-    if action_type == 'initilization':
+    if action_type == 'initialization':
         return jsonify({
             "status": "success",
-            "message": "initilization action triggered"
+            "message": "initialization action triggered"
         }), 200
     elif action_type == 'incremental_update':
         return jsonify({

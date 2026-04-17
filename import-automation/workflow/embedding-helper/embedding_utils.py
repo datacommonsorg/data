@@ -15,8 +15,9 @@
 """Helper utilities for embedding workflows."""
 
 import logging
+import time
 from datetime import datetime
-from google.cloud.spanner_v1.param_types import TIMESTAMP, STRING, Array, Struct, Struct, StructField
+from google.cloud.spanner_v1.param_types import TIMESTAMP, STRING, Array, Struct, StructField
 
 
 def get_latest_lock_timestamp(database):
@@ -28,10 +29,10 @@ def get_latest_lock_timestamp(database):
     Returns:
         The latest AcquiredTimestamp as a datetime object, or None if no entries exist.
     """
-    sql = "SELECT MAX(AcquiredTimestamp) FROM IngestionLock"
+    time_lock_sql = "SELECT MAX(AcquiredTimestamp) FROM IngestionLock"
     try:
         with database.snapshot() as snapshot:
-            results = snapshot.execute_sql(sql)
+            results = snapshot.execute_sql(time_lock_sql)
             for row in results:
                 return row[0]
     except Exception as e:
@@ -52,7 +53,7 @@ def get_updated_nodes(database, timestamp, node_types):
     """
     if not timestamp:
         logging.info("No timestamp provided, reading all nodes.")
-        sql = """
+        updated_node_sql = """
             SELECT subject_id, name FROM Node 
             WHERE name IS NOT NULL
               AND EXISTS (
@@ -63,7 +64,7 @@ def get_updated_nodes(database, timestamp, node_types):
         param_types = {"node_types": Array(STRING)}
     else:
         logging.info(f"Filtering nodes updated after {timestamp}")
-        sql = """
+        updated_node_sql = """
             SELECT subject_id, name FROM Node 
             WHERE update_timestamp > @timestamp
               AND name IS NOT NULL
@@ -77,7 +78,7 @@ def get_updated_nodes(database, timestamp, node_types):
     nodes = []
     try:
         with database.snapshot() as snapshot:
-            results = snapshot.execute_sql(sql, params=params, param_types=param_types)
+            results = snapshot.execute_sql(updated_node_sql, params=params, param_types=param_types)
             fields = None
             for row in results:
                 if fields is None:
@@ -99,7 +100,6 @@ def filter_and_convert_nodes(nodes):
     Returns:
         A list of tuples (subject_id, embedding_content).
     """
-    valid_tuples = []
     valid_tuples = [
         (node.get("subject_id"), node.get("name"))
         for node in nodes
@@ -128,7 +128,7 @@ def generate_embeddings_partitioned(database, nodes):
 
     logging.info(f"Generating embeddings for {len(nodes)} nodes in batches of {BATCH_SIZE}.")
 
-    sql = """
+    embeddings_sql = """
         INSERT OR UPDATE INTO NodeEmbeddings (subject_id, embedding_content, embeddings)
         SELECT subject_id, content, embeddings.values
         FROM ML.PREDICT(
@@ -149,7 +149,7 @@ def generate_embeddings_partitioned(database, nodes):
         param_types = {"nodes": Array(struct_type)}
 
         def _execute_dml(transaction):
-            return transaction.execute_update(sql, params=params, param_types=param_types)
+            return transaction.execute_update(embeddings_sql, params=params, param_types=param_types)
 
         try:
             row_count = database.run_in_transaction(_execute_dml)
