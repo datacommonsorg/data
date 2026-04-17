@@ -188,6 +188,10 @@ def main(argv):
     to_ingest.sort(key=lambda x: x[0]) # Chronological order
 
     # 3. Process Batch
+    # Ensure staging is clean before starting a new batch
+    staging_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.staging_table_id}"
+    bq_client.query(f"TRUNCATE TABLE `{staging_table}`").result()
+    
     success_count = 0
     current_max_date, current_max_cycle = bq_progress['date'], bq_progress['cycle']
 
