@@ -1254,7 +1254,8 @@ def cleanup():
         for file_name in os.listdir(_GCS_FOLDER_PERSISTENT_PATH):
             file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH, file_name)
             if os.path.isfile(file_path):
-                file_age = (time.time() - os.path.getmtime(file_path)) / (24 * 3600)
+                file_age = (time.time() - os.path.getmtime(file_path)) / (24 *
+                                                                          3600)
                 # Delete ANY file older than the TTL
                 if file_age > _TTL_DAYS:
                     logging.info(f"Cleaning up old file: {file_name}")
@@ -1291,11 +1292,14 @@ def download_files():
 
         # Skip if file already exists in cache (cleanup() already removed stale files)
         if file_name_to_save in downloaded_files:
-            file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH, file_name_to_save)
-            logging.info(f"Skipping download, using cached file: {file_name_to_save}")
+            file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH,
+                                     file_name_to_save)
+            logging.info(
+                f"Skipping download, using cached file: {file_name_to_save}")
 
             # Make sure to copy the cached file to the input directory!
-            shutil.copy(file_path, os.path.join(_INPUT_FILE_PATH, file_name_to_save))
+            shutil.copy(file_path,
+                        os.path.join(_INPUT_FILE_PATH, file_name_to_save))
             continue
 
         headers = {'User-Agent': 'Mozilla/5.0'}
