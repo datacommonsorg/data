@@ -31,8 +31,8 @@ flags.DEFINE_string('bucket_name', 'datcom-prod-imports',
 flags.DEFINE_string('gcs_prefix',
                     'scripts/noaa_gfs/NOAA_GlobalForecastSystem/output/',
                     'GCS prefix (folder path).')
-flags.DEFINE_string('state_path', 
-                    'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json', 
+flags.DEFINE_string('state_path',
+                    'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json',
                     'Path to state.json in GCS.')
 flags.DEFINE_string('dataset_id', 'data_commons_noaa_gfs',
                     'BigQuery Dataset ID.')
@@ -59,8 +59,7 @@ def load_state():
         )
         return json.loads(state_data)
     except exceptions.NotFound:
-        logging.warning(
-            "State file not found in GCS. Starting from scratch.")
+        logging.warning("State file not found in GCS. Starting from scratch.")
         return {}
 
 def update_bq_state(latest_date, latest_cycle):
@@ -77,15 +76,21 @@ def update_bq_state(latest_date, latest_cycle):
             state = {}
 
         state['bq_ingest'] = {
-            "date": latest_date,
-            "cycle": latest_cycle,
-            "updated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            "date":
+                latest_date,
+            "cycle":
+                latest_cycle,
+            "updated_at":
+                datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         }
 
-        blob.upload_from_string(json.dumps(state, indent=2), content_type='application/json')
-        logging.info(f"Successfully updated BQ state to: {latest_date} {latest_cycle}z")
+        blob.upload_from_string(json.dumps(state, indent=2),
+                                content_type='application/json')
+        logging.info(
+            f"Successfully updated BQ state to: {latest_date} {latest_cycle}z")
     except Exception as e:
         logging.error(f"Failed to update state.json: {e}")
+
 
 def run_mapping_query(bq_client):
     """
@@ -173,19 +178,20 @@ def main(argv):
     for blob in blobs:
         if not blob.name.endswith('.csv'):
             continue
-        
+
         # Match YYYYMMDD and HH cycle from filename
         match = re.search(r'output_(\d{8})_(\d{2})_', blob.name)
         if match:
             f_date, f_cycle = match.groups()
             if f"{f_date}_{f_cycle}" > last_key:
-                to_ingest.append((f"gs://{FLAGS.bucket_name}/{blob.name}", f_date, f_cycle))
-    
+                to_ingest.append(
+                    (f"gs://{FLAGS.bucket_name}/{blob.name}", f_date, f_cycle))
+
     if not to_ingest:
         logging.info("Everything is up to date in BigQuery.")
         return
 
-    to_ingest.sort(key=lambda x: x[0]) # Chronological order
+    to_ingest.sort(key=lambda x: x[0])  # Chronological order
 
     # 3. Process Batch
     # Ensure staging is clean before starting a new batch
@@ -193,7 +199,8 @@ def main(argv):
     bq_client.query(f"TRUNCATE TABLE `{staging_table}`").result()
 
     success_count = 0
-    current_max_date, current_max_cycle = bq_progress['date'], bq_progress['cycle']
+    current_max_date, current_max_cycle = bq_progress['date'], bq_progress[
+        'cycle']
 
     for uri, f_date, f_cycle in to_ingest:
         if upload_gcs_to_staging(bq_client, uri):
