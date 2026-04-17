@@ -42,9 +42,8 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _INPUT_URL_JSON = "input_url.json"
 _FILES_TO_DOWNLOAD = None
-_GCS_OUTPUT_PERSISTENT_PATH = os.path.join(
-    _MODULE_DIR, 'gcs_output/us_pep_sex_source_files')
-_GCS_BASE_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
+_GCS_FOLDER_PERSISTENT_PATH = os.path.join(
+    _MODULE_DIR, 'gcs_folder/us_pep_sex_source_files')
 _TTL_DAYS = 30  # Time-to-live for downloaded files in days
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
@@ -58,7 +57,7 @@ _USSTATE_SHORT_FORM = statetoshortform.USSTATE_MAP
 
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "gcs_output/us_pep_sex_source_files")
+                                  "gcs_folder/us_pep_sex_source_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -1249,6 +1248,19 @@ def add_future_year_urls():
                         f"URL is not accessible {url_to_check} due to {e}")
 
 
+def cleanup():
+    """Delete all old files in the gcs_folder to prevent cache bloat."""
+    if os.path.exists(_GCS_FOLDER_PERSISTENT_PATH):
+        for file_name in os.listdir(_GCS_FOLDER_PERSISTENT_PATH):
+            file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH, file_name)
+            if os.path.isfile(file_path):
+                file_age = (time.time() - os.path.getmtime(file_path)) / (24 * 3600)
+                # Delete ANY file older than the TTL
+                if file_age > _TTL_DAYS:
+                    logging.info(f"Cleaning up old file: {file_name}")
+                    os.remove(file_path)
+
+
 @retry(tries=3,
        delay=2,
        backoff=2,
@@ -1262,10 +1274,10 @@ def download_files():
     session = requests.session()
 
     # Ensure the directory exists (it shouldn't "expect" it to be there)
-    os.makedirs(_GCS_OUTPUT_PERSISTENT_PATH, exist_ok=True)
+    os.makedirs(_GCS_FOLDER_PERSISTENT_PATH, exist_ok=True)
 
     # Get set of already downloaded files
-    downloaded_files = set(os.listdir(_GCS_OUTPUT_PERSISTENT_PATH))
+    downloaded_files = set(os.listdir(_GCS_FOLDER_PERSISTENT_PATH))
 
     for file_to_download in _FILES_TO_DOWNLOAD:
         file_name_to_save = None
@@ -1277,19 +1289,14 @@ def download_files():
         else:
             file_name_to_save = url.split('/')[-1]
 
-        # Skip if file already exists and is not stale (TTL)
+        # Skip if file already exists in cache (cleanup() already removed stale files)
         if file_name_to_save in downloaded_files:
-            file_path = os.path.join(_GCS_OUTPUT_PERSISTENT_PATH,
-                                     file_name_to_save)
-            file_age = (time.time() - os.path.getmtime(file_path)) / (24 * 3600)
-            if file_age < _TTL_DAYS:
-                logging.info(
-                    f"Skipping already downloaded file (age: {file_age:.1f} days): {file_name_to_save}"
-                )
-                continue
-            logging.info(
-                f"File {file_name_to_save} is stale (age: {file_age:.1f} days). Re-downloading..."
-            )
+            file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH, file_name_to_save)
+            logging.info(f"Skipping download, using cached file: {file_name_to_save}")
+
+            # Make sure to copy the cached file to the input directory!
+            shutil.copy(file_path, os.path.join(_INPUT_FILE_PATH, file_name_to_save))
+            continue
 
         headers = {'User-Agent': 'Mozilla/5.0'}
         try:
@@ -1321,7 +1328,7 @@ def download_files():
                     # Move to gcs destination (optimized from shutil.copy + os.remove)
                     shutil.move(
                         tmp_file_path,
-                        os.path.join(_GCS_OUTPUT_PERSISTENT_PATH,
+                        os.path.join(_GCS_FOLDER_PERSISTENT_PATH,
                                      file_name_to_save))
 
                     file_to_download['is_downloaded'] = True
@@ -1354,12 +1361,15 @@ def main(_):
         os.makedirs(data_file_path, exist_ok=True)
     if not (os.path.exists(_INPUT_FILE_PATH)):
         os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
-    if not (os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH)):
-        os.makedirs(_GCS_OUTPUT_PERSISTENT_PATH, exist_ok=True)
+    if not (os.path.exists(_GCS_FOLDER_PERSISTENT_PATH)):
+        os.makedirs(_GCS_FOLDER_PERSISTENT_PATH, exist_ok=True)
 
     cleaned_csv_path = data_file_path + os.sep + csv_name
     mcf_path = data_file_path + os.sep + mcf_name
     tmcf_path = data_file_path + os.sep + tmcf_name
+
+    # Perform cleanup of old files
+    cleanup()
 
     download_status = True
     if mode == "" or mode == "download":
