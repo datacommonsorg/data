@@ -1,0 +1,13 @@
+Node: E:noa_gfs_output->E0
+dcid: C:noa_gfs_output->placeName
+typeOf: schema:GeoCoordinates
+latitude: C:noa_gfs_output->latitude
+longitude: C:noa_gfs_output->longitude
+
+Node: E:noa_gfs_output->E1
+observationDate: C:noa_gfs_output->observationDate
+value: C:noa_gfs_output->value
+observationAbout: E:noa_gfs_output->E0
+variableMeasured: C:noa_gfs_output->variableMeasured
+unit: C:noa_gfs_output->unit
+typeOf: dcs:StatVarObservation

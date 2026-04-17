@@ -126,3 +126,4 @@ TOTAL,observationDate,{Year},value,{Number},observationPeriod,P1Y,measurementQua
 2028,Year,2028,value,{Number},observationDate,{Year}-{Month},,,,,,,,,,
 2029,Year,2029,value,{Number},observationDate,{Year}-{Month},,,,,,,,,,
 2030,Year,2030,value,{Number},observationDate,{Year}-{Month},,,,,,,,,,
+"Prior to the benchmark report released",#ignore,footnote

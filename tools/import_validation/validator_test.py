@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import csv
 import os
 import sys
+import tempfile
 import pandas as pd
 import unittest
 from datetime import datetime
@@ -768,6 +770,104 @@ class TestSQLValidator(unittest.TestCase):
                                              params)
         self.assertEqual(result.status, ValidationStatus.CONFIG_ERROR)
         self.assertIn('must be specified', result.message)
+
+
+class TestGoldensValidator(unittest.TestCase):
+    '''Test Class for the GOLDENS_CHECK validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+        self.test_dir = tempfile.TemporaryDirectory()
+
+        # Create a sample golden CSV
+        self.golden_file = os.path.join(self.test_dir.name, 'goldens.csv')
+        with open(self.golden_file, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['StatVar', 'NumPlaces'])
+            writer.writerow(['sv1', '10'])
+            writer.writerow(['sv2', '20'])
+
+        # Create a sample input CSV that matches
+        self.input_file_match = os.path.join(self.test_dir.name,
+                                             'input_match.csv')
+        with open(self.input_file_match, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['StatVar', 'NumPlaces', 'Value'])
+            writer.writerow(['sv1', '10', '100'])
+            writer.writerow(['sv2', '20', '200'])
+
+        # Create a sample input CSV that is missing a golden
+        self.input_file_missing = os.path.join(self.test_dir.name,
+                                               'input_missing.csv')
+        with open(self.input_file_missing, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['StatVar', 'NumPlaces', 'Value'])
+            writer.writerow(['sv1', '10', '100'])
+            # sv2 is missing
+
+    def tearDown(self):
+        # Clean up the temporary directory
+        self.test_dir.cleanup()
+
+    def test_validate_goldens_passes_with_matching_files(self):
+        params = {
+            'golden_files': self.golden_file,
+            'input_files': self.input_file_match,
+            'goldens_key_property': ['StatVar', 'NumPlaces']
+        }
+        # df is not used when input_files is in params
+        result = self.validator.validate_goldens(pd.DataFrame(), params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+    def test_validate_goldens_fails_with_missing_records(self):
+        params = {
+            'golden_files': self.golden_file,
+            'input_files': self.input_file_missing,
+            'goldens_key_property': ['StatVar', 'NumPlaces']
+        }
+        result = self.validator.validate_goldens(pd.DataFrame(), params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertIn('Found 1 missing golden records', result.message)
+        # Fingerprint of sv2: 'NumPlaces=20;StatVar=sv2' (alphabetical)
+        self.assertEqual({
+            'StatVar': 'sv2',
+            'NumPlaces': '20'
+        }, result.details['missing_goldens'][0])
+
+    def test_validate_goldens_uses_dataframe_when_input_files_missing(self):
+        # Sample DataFrame representing the stats data source
+        df = pd.DataFrame({
+            'StatVar': ['sv1', 'sv2'],
+            'NumPlaces': [10, 20],
+            'Value': [100, 200]
+        })
+        params = {
+            'golden_files': self.golden_file,
+            'goldens_key_property': ['StatVar', 'NumPlaces']
+        }
+        result = self.validator.validate_goldens(df, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+    def test_validate_goldens_fails_with_missing_records_from_df(self):
+        # Sample DataFrame missing sv2
+        df = pd.DataFrame({
+            'StatVar': ['sv1'],
+            'NumPlaces': [10],
+            'Value': [100]
+        })
+        params = {
+            'golden_files': self.golden_file,
+            'goldens_key_property': ['StatVar', 'NumPlaces']
+        }
+        result = self.validator.validate_goldens(df, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(len(result.details['missing_goldens']), 1)
+
+    def test_validate_goldens_missing_golden_files_param(self):
+        params = {'input_files': self.input_file_match}
+        result = self.validator.validate_goldens(pd.DataFrame(), params)
+        self.assertEqual(result.status, ValidationStatus.CONFIG_ERROR)
+        self.assertIn('golden_files', result.message)
 
 
 if __name__ == '__main__':
