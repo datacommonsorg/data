@@ -45,6 +45,7 @@ _FILES_TO_DOWNLOAD = None
 _GCS_OUTPUT_PERSISTENT_PATH = os.path.join(
     _MODULE_DIR, 'gcs_output/us_pep_sex_source_files')
 _GCS_BASE_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
+_TTL_DAYS = 30  # Time-to-live for downloaded files in days
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 # pylint: disable=wrong-import-position
@@ -1260,6 +1261,9 @@ def download_files():
     global _FILES_TO_DOWNLOAD
     session = requests.session()
 
+    # Ensure the directory exists (it shouldn't "expect" it to be there)
+    os.makedirs(_GCS_OUTPUT_PERSISTENT_PATH, exist_ok=True)
+
     # Get set of already downloaded files
     downloaded_files = set(os.listdir(_GCS_OUTPUT_PERSISTENT_PATH))
 
@@ -1273,11 +1277,19 @@ def download_files():
         else:
             file_name_to_save = url.split('/')[-1]
 
-        # Skip if file already exists (Moved up for efficiency)
+        # Skip if file already exists and is not stale (TTL)
         if file_name_to_save in downloaded_files:
+            file_path = os.path.join(_GCS_OUTPUT_PERSISTENT_PATH,
+                                     file_name_to_save)
+            file_age = (time.time() - os.path.getmtime(file_path)) / (24 * 3600)
+            if file_age < _TTL_DAYS:
+                logging.info(
+                    f"Skipping already downloaded file (age: {file_age:.1f} days): {file_name_to_save}"
+                )
+                continue
             logging.info(
-                f"Skipping already downloaded file: {file_name_to_save}")
-            continue
+                f"File {file_name_to_save} is stale (age: {file_age:.1f} days). Re-downloading..."
+            )
 
         headers = {'User-Agent': 'Mozilla/5.0'}
         try:
@@ -1306,13 +1318,12 @@ def download_files():
                         tmp_file_path,
                         os.path.join(_INPUT_FILE_PATH, file_name_to_save))
 
-                    # Copy to gcs destination
-                    shutil.copy(
+                    # Move to gcs destination (optimized from shutil.copy + os.remove)
+                    shutil.move(
                         tmp_file_path,
                         os.path.join(_GCS_OUTPUT_PERSISTENT_PATH,
                                      file_name_to_save))
 
-                    os.remove(tmp_file_path)
                     file_to_download['is_downloaded'] = True
                     logging.info(f"Downloaded file: {url}")
 
@@ -1368,11 +1379,7 @@ def main(_):
                                              mcf_path, tmcf_path)
             loader.process()
 
-            # Only delete if it's a subdirectory of gcs_output, and not gcs_output itself
-            if os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH) and os.path.commonpath([_GCS_OUTPUT_PERSISTENT_PATH, _GCS_BASE_DIR]) == _GCS_BASE_DIR \
-            and os.path.abspath(_GCS_OUTPUT_PERSISTENT_PATH) != os.path.abspath(_GCS_BASE_DIR):
-                shutil.rmtree(_GCS_OUTPUT_PERSISTENT_PATH)
-                logging.info(f"Deleted folder: {_GCS_OUTPUT_PERSISTENT_PATH}")
+            # The persistent folder is intentionally kept to allow for TTL caching.
         except Exception as e:
             logging.fatal(f"The processing is failed due to the error: {e}")
 
