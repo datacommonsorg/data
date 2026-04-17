@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "tuberculosis percentage",
+            "import_name": "WHO_TuberculosisBacteriologicallyConfirmedPercentage",
             "curator_emails": [
                 "support@datacommons.org"
             ],
