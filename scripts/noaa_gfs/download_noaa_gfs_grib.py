@@ -18,7 +18,6 @@ HTTP streaming to download large-scale meteorological datasets for
 downstream Data Commons ingestion.
 """
 
-import os
 import json
 import requests
 from datetime import datetime, timedelta
