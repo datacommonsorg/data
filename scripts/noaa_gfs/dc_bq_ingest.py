@@ -15,10 +15,13 @@
 Automates ingestion of processed NOAA GFS meteorological data into BigQuery.
 """
 
-import os
+import json
+import re
+from datetime import datetime
 from absl import app, flags, logging
 from google.cloud import bigquery
 from google.cloud import storage
+from google.api_core import exceptions
 
 # --- FLAG DEFINITIONS ---
 FLAGS = flags.FLAGS
@@ -28,12 +31,61 @@ flags.DEFINE_string('bucket_name', 'datcom-prod-imports',
 flags.DEFINE_string('gcs_prefix',
                     'scripts/noaa_gfs/NOAA_GlobalForecastSystem/output/',
                     'GCS prefix (folder path).')
+flags.DEFINE_string('state_path', 
+                    'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json', 
+                    'Path to state.json in GCS.')
 flags.DEFINE_string('dataset_id', 'data_commons_noaa_gfs',
                     'BigQuery Dataset ID.')
 flags.DEFINE_string('table_id', 'Observation', 'BigQuery Table ID.')
 flags.DEFINE_string('staging_table_id', 'Observation_Staging',
                     'Temporary Staging Table ID.')
 
+
+def get_gcs_client():
+    """Initializes the GCS client with a specific Project ID."""
+    return storage.Client(project=FLAGS.project_id)
+
+
+def load_state():
+    """Reads state from GCS. Returns default if file doesn't exist."""
+    client = get_gcs_client()
+    bucket = client.bucket(FLAGS.bucket_name)
+    blob = bucket.blob(FLAGS.state_path)
+
+    try:
+        state_data = blob.download_as_text()
+        logging.info(
+            f"Successfully loaded state from gs://{FLAGS.bucket_name}/{FLAGS.state_path}"
+        )
+        return json.loads(state_data)
+    except exceptions.NotFound:
+        logging.warning(
+            "State file not found in GCS. Starting from scratch.")
+        return {}
+
+def update_bq_state(latest_date, latest_cycle):
+    """Updates the bq_ingest key in the state.json ."""
+    try:
+        client = get_gcs_client()
+        bucket = client.bucket(FLAGS.bucket_name)
+        blob = bucket.blob(FLAGS.state_path)
+
+        # Download existing to preserve 'date' and 'cycle' from grib_statvar_processor.py
+        try:
+            state = json.loads(blob.download_as_text())
+        except exceptions.NotFound:
+            state = {}
+
+        state['bq_ingest'] = {
+            "date": latest_date,
+            "cycle": latest_cycle,
+            "updated_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+        }
+
+        blob.upload_from_string(json.dumps(state, indent=2), content_type='application/json')
+        logging.info(f"Successfully updated BQ state to: {latest_date} {latest_cycle}z")
+    except Exception as e:
+        logging.error(f"Failed to update state.json: {e}")
 
 def run_mapping_query(bq_client):
     """
@@ -87,7 +139,6 @@ def upload_gcs_to_staging(bq_client, gcs_uri):
         source_format=bigquery.SourceFormat.CSV,
         skip_leading_rows=1,
         autodetect=True,
-        # WRITE_APPEND used here to collect all CSVs before the final SQL transformation
         write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
     )
 
@@ -107,39 +158,53 @@ def main(argv):
     """Entry point for the GCS-to-BigQuery ingestion script."""
     # Initialize Clients
     bq_client = bigquery.Client(project=FLAGS.project_id)
-    storage_client = storage.Client(project=FLAGS.project_id)
+    storage_client = get_gcs_client()
 
-    # Get reference to the bucket and list blobs
+    # 1. Load progress
+    state = load_state()
+    bq_progress = state.get('bq_ingest', {"date": "00000000", "cycle": "00"})
+    last_key = f"{bq_progress['date']}_{bq_progress['cycle']}"
+
+    # 2. Filter GCS CSVs
     bucket = storage_client.bucket(FLAGS.bucket_name)
     blobs = bucket.list_blobs(prefix=FLAGS.gcs_prefix)
 
-    # Filter for CSV files
-    csv_uris = [
-        f"gs://{FLAGS.bucket_name}/{blob.name}" for blob in blobs
-        if blob.name.endswith('.csv')
-    ]
-
-    if not csv_uris:
-        logging.warning(
-            f"No CSV files found at gs://{FLAGS.bucket_name}/{FLAGS.gcs_prefix}"
-        )
+    to_ingest = []
+    for blob in blobs:
+        if not blob.name.endswith('.csv'):
+            continue
+        
+        # Match YYYYMMDD and HH cycle from filename
+        match = re.search(r'output_(\d{8})_(\d{2})_', blob.name)
+        if match:
+            f_date, f_cycle = match.groups()
+            if f"{f_date}_{f_cycle}" > last_key:
+                to_ingest.append((f"gs://{FLAGS.bucket_name}/{blob.name}", f_date, f_cycle))
+    
+    if not to_ingest:
+        logging.info("Everything is up to date in BigQuery.")
         return
 
-    logging.info(f"Found {len(csv_uris)} files in GCS for ingestion.")
+    to_ingest.sort(key=lambda x: x[0]) # Chronological order
 
-    # Step 1: Bulk Load everything into Staging
+    # 3. Process Batch
     success_count = 0
-    for uri in csv_uris:
+    current_max_date, current_max_cycle = bq_progress['date'], bq_progress['cycle']
+
+    for uri, f_date, f_cycle in to_ingest:
         if upload_gcs_to_staging(bq_client, uri):
             success_count += 1
+            if f"{f_date}_{f_cycle}" > f"{current_max_date}_{current_max_cycle}":
+                current_max_date, current_max_cycle = f_date, f_cycle
 
     logging.info(
-        f"Ingestion batch complete. {success_count}/{len(csv_uris)} URIs processed."
+        f"Ingestion batch complete. {success_count}/{len(to_ingest)} URIs processed."
     )
 
-    # Step 2: Run Mapping SQL if at least some files loaded
+    # 4. Finalize
     if success_count > 0:
-        run_mapping_query(bq_client)
+        if run_mapping_query(bq_client):
+            update_bq_state(current_max_date, current_max_cycle)
 
 
 if __name__ == "__main__":
