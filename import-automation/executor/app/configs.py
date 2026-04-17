@@ -139,6 +139,8 @@ class ExecutorConfig:
         "EXISTING_STATVAR_MCF":
             "gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
     })
+    # API Environment used by the import tool
+    use_autopush_dc_api: bool = True
     # Invoke import tool genmcf.
     invoke_import_tool: bool = True
     # Invoke differ tool.
@@ -167,6 +169,8 @@ class ExecutorConfig:
     disable_email_notifications: bool = True
     # Skip uploading the data to GCS (for local testing).
     skip_gcs_upload: bool = False
+    # Skip uploading input files to GCS.
+    skip_input_upload: bool = False
     # Maximum time a blocking call to the importer to
     # perform an import can take in seconds.
     importer_import_timeout: float = 20 * 60

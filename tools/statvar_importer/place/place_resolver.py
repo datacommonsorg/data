@@ -849,27 +849,30 @@ class PlaceResolver:
 
         # Get a list of dcids to lookup for each filter property.
         dcids = set()
-        for place_key, place_props in places.items():
-            dcid = place_props.get('dcid', '')
-            if not dcid:
-                continue
-            dcids.update(_get_value_set(dcid))
+        place_props_by_dcid = {}
+        for place_props in places.values():
+            for dcid in _get_value_set(place_props.get('dcid', '')):
+                if not dcid:
+                    continue
+                dcids.add(dcid)
+                place_props_by_dcid.setdefault(dcid, place_props)
         # Cache containedInPlace heirarchy for all dcids.
         if 'containedInPlace' in lookup_props:
             self._cache_contained_in_places(dcids)
 
         lookup_dcids_by_prop = {p: [] for p in lookup_props}
         for dcid in dcids:
+            place_props = place_props_by_dcid.get(dcid, {})
             for prop in lookup_props:
-                value = place_props.get(prop, '')
-                if not value:
-                    # filter property doesn't have a value for this dcid.
-                    # Check if the property is cached.
-                    values = self._get_cache_value(dcid, prop).get(prop)
-                    if values:
-                        place_props[prop] = values
-                if not value:
-                    lookup_dcids_by_prop[prop].append(dcid)
+                if place_props.get(prop):
+                    continue
+                # filter property doesn't have a value for this dcid.
+                # Check if the property is cached.
+                cached_values = self._get_cache_value(dcid, prop).get(prop)
+                if cached_values:
+                    place_props[prop] = cached_values
+                    continue
+                lookup_dcids_by_prop[prop].append(dcid)
 
         # Lookup property values for the dcids from DC API.
         for prop, dcids in lookup_dcids_by_prop.items():
@@ -1212,8 +1215,7 @@ def _get_value_set(values: str) -> set:
     if isinstance(values, str):
         values = values.split(',')
     else:
-        logging.log_every_n(logging.DEBUG, f'flattening into set {values}',
-                            self._log_every_n)
+        logging.log_every_n(logging.DEBUG, f'flattening into set {values}', 10)
         values = ','.join(values).split(',')
     values_set.update(values)
     return values_set
@@ -1268,7 +1270,7 @@ def process(
             logging.log_every_n(
                 logging.INFO,
                 f'Loading places from csv file {filename} with columns:'
-                f' {reader.fieldnames}...', self._log_every_n)
+                f' {reader.fieldnames}...', 10)
             for row in reader:
                 num_inputs += 1
                 if num_inputs > config.get('input_rows', sys.maxsize):
@@ -1288,14 +1290,13 @@ def process(
     resolved_places = {}
     if place_names:
         logging.log_every_n(logging.DEBUG,
-                            f'Resolving {len(place_names)} places names...',
-                            self._log_every_n)
+                            f'Resolving {len(place_names)} places names...', 10)
         resolved_places.update(pr.resolve_name(place_names))
         columns.extend(['dcid', 'placeId', 'lat', 'lng'])
     if place_coords:
         logging.log_every_n(logging.DEBUG,
                             f'Resolving {len(place_coords)} places coords...',
-                            self._log_every_n)
+                            10)
         resolved_places.update(pr.resolve_latlng(place_coords))
         columns.append('placeDcids')
     counters.print_counters()
@@ -1317,7 +1318,7 @@ def process(
     logging.log_every_n(
         logging.INFO,
         f'Writing output {len(resolved_places)} rows with columns: {output_columns} into'
-        f' {output_filename}', self._log_every_n)
+        f' {output_filename}', 10)
     with file_util.FileIO(output_filename, mode='w') as output_fp:
         writer = csv.DictWriter(
             output_fp,
