@@ -17,7 +17,7 @@ Automates ingestion of processed NOAA GFS meteorological data into BigQuery.
 
 import json
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from absl import app, flags, logging
 from google.cloud import bigquery
 from google.cloud import storage
@@ -79,7 +79,7 @@ def update_bq_state(latest_date, latest_cycle):
         state['bq_ingest'] = {
             "date": latest_date,
             "cycle": latest_cycle,
-            "updated_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+            "updated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         }
 
         blob.upload_from_string(json.dumps(state, indent=2), content_type='application/json')
@@ -191,7 +191,7 @@ def main(argv):
     # Ensure staging is clean before starting a new batch
     staging_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.staging_table_id}"
     bq_client.query(f"TRUNCATE TABLE `{staging_table}`").result()
-    
+
     success_count = 0
     current_max_date, current_max_cycle = bq_progress['date'], bq_progress['cycle']
 
