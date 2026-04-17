@@ -74,7 +74,7 @@ class ExecutorConfig:
     # ------------ data.csv
     # The content of latest_version.txt would be a single line of
     # '2020_07_15T12_07_17_365264_07_00'.
-    storage_version_filename: str = 'staging_version.txt'
+    storage_version_filename: str = 'latest_version.txt'
     # GCP secret name containg import config.
     import_config_secret: str = 'import-config'
     # Config override file.
