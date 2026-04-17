@@ -13,37 +13,54 @@
 # limitations under the License.
 
 import pandas as pd
-from six.moves import urllib
+import numpy as np
 import re
+import os
+import urllib.request
 from absl import logging
 from absl import app
-from absl import logging
 from absl import flags
-import os
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-flags.DEFINE_string('mode', '', 'Options: download or process')
-
-PATH = 'demo_r_mlifexp.tsv'
+flags.DEFINE_string('input_file', 'input_files/input_file.tsv',
+                    'Path to input TSV file')
+flags.DEFINE_string('output_file', 'demo_r_mlifexp_cleaned.csv',
+                    'Path to output CSV file')
+flags.DEFINE_string('mode', '',
+                    'Mode of operation: download, process, or empty (both)')
 
 
 def nuts_to_iso(data):
     """Convert 2-letter NUTS codes for countries to ISO 3166-1 alpha-3 codes."""
-    # TODO(jefferyoldham): Consider using util/geo/geo_to_dcid_mappings.go's
-    # CountryCodeToDCID subject to NUTS's two additions. If so, remove
-    # countries_codes_and_coordinate.csv
-    ISO_2_TO_3_PATH = ('./countries_codes_and_coordinates.csv')
+    ISO_2_TO_3_PATH = os.path.join(_MODULE_DIR,
+                                   'countries_codes_and_coordinates.csv')
+    if not os.path.exists(ISO_2_TO_3_PATH):
+        raise FileNotFoundError(
+            f"{ISO_2_TO_3_PATH} not found. This file is required for ISO conversion."
+        )
+        return data
+
     codes = pd.read_csv(ISO_2_TO_3_PATH)
+    # The file seems to have quoted values like '"AD"'
     codes["Alpha-2 code"] = codes["Alpha-2 code"].str.extract(r'"([a-zA-Z]+)"')
     codes["Alpha-3 code"] = codes["Alpha-3 code"].str.extract(r'"([a-zA-Z]+)"')
+
     # NUTS code matches ISO 3166-1 alpha-2 with two exceptions
     codes["NUTS"] = codes["Alpha-2 code"]
     codes.loc[codes["NUTS"] == "GR", "NUTS"] = "EL"
     codes.loc[codes["NUTS"] == "GB", "NUTS"] = "UK"
-    code_dict = codes.set_index('NUTS').to_dict()['Alpha-3 code']
-    data.loc[data.index, 'geo'] = data['geo'].map(code_dict)
-    assert (~data['geo'].isnull()).all()
+
+    code_dict = codes.set_index('NUTS')['Alpha-3 code'].to_dict()
+
+    def map_geo(geo):
+        if len(geo) == 2:
+            iso3 = code_dict.get(geo)
+            if iso3:
+                return f'country/{iso3}'
+        return f'nuts/{geo}'
+
+    data['place'] = data['geo'].apply(map_geo)
     return data
 
 
@@ -51,10 +68,15 @@ def obtain_value(entry):
     """Extract value from entry. 
     The entries could be like: '81.6', ': ', '79.9 e', ': e'.
     """
-    entry = entry.split(' ', maxsplit=-1)[0]  # Discard notes.
+    if isinstance(entry, (int, float)):
+        return float(entry)
+    entry = str(entry).split(' ', maxsplit=-1)[0]  # Discard notes.
     if not entry or entry == ':':
         return None
-    return float(entry)
+    try:
+        return float(entry)
+    except ValueError:
+        return None
 
 
 def download_data(download_link, download_path):
@@ -78,86 +100,71 @@ def download_data(download_link, download_path):
         logging.fatal(f'Download error for: {download_link}: {e}')
 
 
-def preprocess(file_path):
-    """Preprocess the tsv file for importing into DataCommons.
-      Args:
-         input_file: Path to the input TSV file.
-     Returns:
-         None"""
-    try:
-        logging.info('File processing start')
-        data = pd.read_csv(file_path, delimiter='\t')
-        data = data.rename(columns=({
-            'freq,unit,sex,age,geo\TIME_PERIOD': 'unit,sex,age,geo\\time'
-        }))
-        data['unit,sex,age,geo\\time'] = data[
-            'unit,sex,age,geo\\time'].str.slice(2)
-        identifier = 'unit,sex,age,geo\\time'
-        assert data.columns.values[0].endswith(
-            '\\time'), "Expected the first column header to end with '\\time'."
-        years = list(data.columns.values)
-        years.remove(identifier)
-        data = pd.melt(data,
-                       id_vars=identifier,
-                       value_vars=years,
-                       var_name='year',
-                       value_name='life_expectancy')
+def preprocess(input_file, output_file):
+    logging.info(f'Processing file: {input_file}')
 
-        # Format string into desired format.
-        data['year'] = data['year'].astype(int)  # remove spaces, e.g. "2018 "
-        data['life_expectancy'] = data['life_expectancy'].apply(obtain_value)
+    # Read TSV
+    data = pd.read_csv(input_file, delimiter='\t')
 
-        # Generate the statvars that each row belongs to.
-        data[['unit', 'sex', 'age',
-              'geo']] = data[identifier].str.split(',', expand=True)
-        assert (data['unit'] == 'YR').all()
-        data['sex'] = data['sex'].map({'F': '_Female', 'M': '_Male', 'T': ''})
-        assert (~data['sex'].isnull()).all()
-        age_except = data['age'].isin(['Y_GE85', 'Y_LT1'])
-        data.loc[age_except, 'age'] = data.loc[age_except, 'age'].map({
-            'Y_GE85': '85OrMoreYears',
-            'Y_LT1': 'Upto1Years'
-        })
-        data.loc[~age_except, 'age'] = data.loc[~age_except, 'age'].str.replace(
-            'Y', '') + "Years"
-        data = data.drop(columns=[identifier])
-        data['StatVar'] = "LifeExpectancy_Person_" + data['age'] + data['sex']
-        data = data.drop(columns=['unit', 'sex', 'age'])
-        statvars = data['StatVar'].unique()
+    # Identify the first column which contains multiple dimensions
+    identifier = data.columns[0]
+    years = [col for col in data.columns if col != identifier]
 
-        # Convert the nuts codes to dcids
-        data_country = data[data['geo'].str.len() <= 2]
-        data_nuts = data[~(data['geo'].str.len() <= 2)]
-        data_country = nuts_to_iso(
-            data_country)  # convert nuts code to ISO 3166-1 alpha-3
-        data.loc[data_country.index, 'geo'] = 'country/' + data_country['geo']
-        data.loc[data_nuts.index, 'geo'] = 'nuts/' + data_nuts['geo']
+    # Melt to long format
+    data = pd.melt(data,
+                   id_vars=identifier,
+                   value_vars=years,
+                   var_name='year',
+                   value_name='value')
 
-        # Separate data of different StatVars from one column into multiple columns
-        # For example:
-        # geo       year  StatVar           sv1_geo   sv1_year   sv2_geo   sv2_year
-        # nuts/AT1  2018  sv1         =>    nuts/AT1  2018      nuts/AT2   2018
-        # nuts/AT2  2018  sv2
-        data_grouped = data.groupby('StatVar')
-        subsets = []
-        for _, subset in data_grouped:
-            pivot = subset['StatVar'].iloc[0]  # get the statvar name
-            subset = subset.rename(
-                columns={
-                    'geo': pivot + '_geo',
-                    'year': pivot + '_year',
-                    'life_expectancy': pivot
-                })
-            subset = subset.drop(columns=['StatVar']).reset_index(drop=True)
-            subsets.append(subset)
-        data = pd.concat(subsets, axis=1, join='outer')
+    # Clean year and value
+    data['year'] = data['year'].str.strip().astype(int)
+    data['value'] = data['value'].apply(obtain_value)
 
-        # Save the processed data into CSV file.
-        data.to_csv(PATH[:-4] + '_cleaned.csv', index=False)
-        logging.info('File processing completed')
-        return
-    except Exception as e:
-        logging.fatal(f'Processing error {e}')
+    # Drop rows with NaN values
+    data = data.dropna(subset=['value'])
+    dims = identifier.split('\\')[0].split(',')
+    data[dims] = data[identifier].str.split(',', expand=True)
+
+    # Map sex
+    data['sex_mapped'] = data['sex'].map({
+        'F': '_Female',
+        'M': '_Male',
+        'T': ''
+    })
+
+    # Map age
+    age_map = {
+        'Y_GE85': '85OrMoreYears',
+        'Y_LT1': 'Upto1Years',
+        'Y_GE95': '95OrMoreYears'
+    }
+
+    def map_age(age):
+        if age in age_map:
+            return age_map[age]
+        if age.startswith('Y'):
+            return age[1:] + "Years"
+        return age + "Years"
+
+    data['age_mapped'] = data['age'].apply(map_age)
+
+    # Create SV (StatVar)
+    data['SV'] = "dcid:LifeExpectancy_Person_" + data['age_mapped'] + data[
+        'sex_mapped']
+
+    # Map geo to place
+    data = nuts_to_iso(data)
+
+    # Select final columns
+    final_df = data[['year', 'place', 'SV', 'value']]
+
+    # Sort for consistency
+    final_df = final_df.sort_values(['year', 'place', 'SV'])
+
+    # Save to CSV
+    final_df.to_csv(output_file, index=False)
+    logging.info(f'Processed data saved to {output_file}')
 
 
 def main(_):
@@ -172,7 +179,7 @@ def main(_):
     if mode == "" or mode == "download":
         download_data(_DATA_URL, input_file)
     if mode == "" or mode == "process":
-        preprocess(input_file)
+        preprocess(input_file, _FLAGS.output_file)
 
 
 if __name__ == "__main__":
