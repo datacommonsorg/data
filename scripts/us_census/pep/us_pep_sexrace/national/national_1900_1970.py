@@ -58,10 +58,11 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
 
                 # providing proper column names
                 if len(df.columns) != 10:
-                    logging.warning(
-                        f"Skipping {file}: expected 10 cols, got {len(df.columns)}"
+                    logging.error(
+                        f"Schema mismatch for {file}: expected 10 columns, but got {len(df.columns)}."
                     )
-                    continue
+                    raise ValueError(
+                        f"Expected 10 columns, got {len(df.columns)}")
                 df.columns = [
                     "Age", "All race total", "Count_Person_Male",
                     "Count_Person_Female", "White Total",
@@ -94,10 +95,11 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                            index=False)
                 # providing proper column names
                 if len(df2.columns) != 13:
-                    logging.warning(
-                        f"Skipping {file}: expected 13 cols, got {len(df2.columns)}"
+                    logging.error(
+                        f"Schema mismatch for {file}: expected 13 columns, but got {len(df2.columns)}."
                     )
-                    continue
+                    raise ValueError(
+                        f"Expected 13 columns, got {len(df2.columns)}")
                 df2.columns = [
                     "Age", "All race total", "Count_Person_Male",
                     "Count_Person_Female", "White Total",
