@@ -62,6 +62,7 @@ def load_state():
         logging.warning("State file not found in GCS. Starting from scratch.")
         return {}
 
+
 def update_bq_state(latest_date, latest_cycle):
     """Updates the bq_ingest key in the state.json ."""
     try:
