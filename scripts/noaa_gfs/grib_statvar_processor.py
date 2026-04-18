@@ -343,7 +343,7 @@ def update_state_json(latest_date, latest_cycle):
         state = {}
         if blob.exists():
             state = json.loads(blob.download_as_text())
-        
+
         # 2. Update ONLY the top-level date/cycle (for the processor/downloader)
         state["date"] = latest_date
         state["cycle"] = latest_cycle
