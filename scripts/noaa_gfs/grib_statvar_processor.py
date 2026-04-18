@@ -340,10 +340,9 @@ def update_state_json(latest_date, latest_cycle):
         blob = bucket.blob(FLAGS.state_path)
 
         # 1. Get existing state to preserve BigQuery progress
-        try:
+        state = {}
+        if blob.exists():
             state = json.loads(blob.download_as_text())
-        except exceptions.NotFound:
-            state = {}
         
         # 2. Update ONLY the top-level date/cycle (for the processor/downloader)
         state["date"] = latest_date

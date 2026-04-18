@@ -72,10 +72,9 @@ def update_bq_state(latest_date, latest_cycle):
         blob = bucket.blob(FLAGS.state_path)
 
         # Download existing to preserve 'date' and 'cycle' from grib_statvar_processor.py
-        try:
+        state = {}
+        if blob.exists():
             state = json.loads(blob.download_as_text())
-        except exceptions.NotFound:
-            state = {}
 
         state['bq_ingest'] = {
             "date":
