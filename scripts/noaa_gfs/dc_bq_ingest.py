@@ -100,24 +100,6 @@ def run_mapping_query(bq_client):
     final_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.table_id}"
     staging_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.staging_table_id}"
 
-    # --- ONE-TIME CLEANUP SQL ---
-    # Note: Remove this block after the first successful run
-    cleanup_query = f"""
-    DELETE FROM `{final_table}`
-    WHERE STRUCT(observation_date, value, variable_measured, observation_about) NOT IN (
-        SELECT AS STRUCT observation_date, value, variable_measured, observation_about
-        FROM (
-            SELECT *,
-                ROW_NUMBER() OVER(
-                    PARTITION BY observation_date, value, variable_measured, observation_about
-                    ORDER BY observation_date
-                ) as row_num
-            FROM `{final_table}`
-        )
-        WHERE row_num = 1
-    )
-    """
-
     query = f"""
     INSERT INTO `{final_table}` (
         observation_about,
@@ -140,17 +122,12 @@ def run_mapping_query(bq_client):
     """
 
     try:
-        # 1. Run Deduplication first
-        logging.info("Running one-time deduplication on final table...")
-        bq_client.query(cleanup_query).result()
-        logging.info("Cleanup successful.")
-
-        # 2. Run Ingestion
+        # Run Ingestion
         logging.info("Starting transformation query...")
         query_job = bq_client.query(query)
         query_job.result()  # Wait for completion
 
-        # Optional: Truncate staging table after successful migration
+        # Truncate staging table after successful migration
         bq_client.query(f"TRUNCATE TABLE `{staging_table}`").result()
         logging.info("Transformation complete and staging table cleared.")
         return True
