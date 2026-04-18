@@ -54,10 +54,11 @@ def load_state():
 
     try:
         state_data = blob.download_as_text()
+        data = json.loads(state_data)
         logging.info(
-            f"Successfully loaded state from gs://{FLAGS.bucket_name}/{FLAGS.state_path}"
+            f"Successfully loaded state: {data.get('bq_ingest')} from gs://{FLAGS.bucket_name}/{FLAGS.state_path}"
         )
-        return json.loads(state_data)
+        return data
     except exceptions.NotFound:
         logging.warning("State file not found in GCS. Starting from scratch.")
         return {}
@@ -181,7 +182,9 @@ def main(argv):
             continue
 
         # Match YYYYMMDD and HH cycle from filename
-        match = re.search(r'output_(\d{8})_(\d{2})_', blob.name)
+        filename = blob.name.split('/')[-1]
+        match = re.fullmatch(r'noaa_gfs_output_(\d{8})_(\d{2})_\d{3}\.csv',
+                             filename)
         if match:
             f_date, f_cycle = match.groups()
             if f"{f_date}_{f_cycle}" > last_key:
