@@ -38,6 +38,7 @@ from pathlib import Path
 from multiprocessing import Pool, cpu_count
 from absl import app, flags, logging
 from google.cloud import storage
+from google.api_core import exceptions
 
 logging.set_verbosity(logging.INFO)
 
@@ -338,13 +339,20 @@ def update_state_json(latest_date, latest_cycle):
         bucket = client.bucket(FLAGS.bucket_name)
         blob = bucket.blob(FLAGS.state_path)
 
-        state_content = json.dumps({
-            "date": latest_date,
-            "cycle": latest_cycle,
-            "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-        })
+        # 1. Get existing state to preserve BigQuery progress
+        try:
+            state = json.loads(blob.download_as_text())
+        except exceptions.NotFound:
+            state = {}
+        
+        # 2. Update ONLY the top-level date/cycle (for the processor/downloader)
+        state["date"] = latest_date
+        state["cycle"] = latest_cycle
+        state["updated_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
-        blob.upload_from_string(state_content, content_type='application/json')
+        # 3. Upload the merged dictionary
+        blob.upload_from_string(json.dumps(state, indent=2),
+                                content_type='application/json')
         logging.info(
             f"Successfully updated GCS state to: {latest_date} {latest_cycle}z")
     except Exception as e:
