@@ -183,7 +183,8 @@ def main(argv):
 
         # Match YYYYMMDD and HH cycle from filename
         filename = blob.name.split('/')[-1]
-        match = re.search(r'noaa_gfs_output_(\d{8})_(\d{2})_\d{3}\.csv', filename)
+        match = re.search(r'noaa_gfs_output_(\d{8})_(\d{2})_\d{3}\.csv',
+                          filename)
         if match:
             f_date, f_cycle = match.groups()
             if f"{f_date}_{f_cycle}" > last_key:
