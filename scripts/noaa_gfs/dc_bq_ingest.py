@@ -100,28 +100,6 @@ def run_mapping_query(bq_client):
     final_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.table_id}"
     staging_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.staging_table_id}"
 
-    # --- ONE-TIME CLEANUP SQL ---
-    # Note: Remove this block after the first successful run
-    cleanup_query = f"""
-    MERGE `{final_table}` AS main
-    USING (
-        SELECT
-            observation_date, value, variable_measured, observation_about,
-            ROW_NUMBER() OVER(
-                PARTITION BY observation_date, value, variable_measured, observation_about
-                ORDER BY observation_date
-            ) as row_num
-        FROM `{final_table}`
-    ) AS sub
-    ON
-        main.observation_date = sub.observation_date AND
-        main.value = sub.value AND
-        main.variable_measured = sub.variable_measured AND
-        main.observation_about = sub.observation_about AND
-        sub.row_num > 1
-    WHEN MATCHED THEN DELETE
-    """
-
     query = f"""
     INSERT INTO `{final_table}` (
         observation_about,
@@ -144,11 +122,9 @@ def run_mapping_query(bq_client):
     """
 
     try:
-        # 1. Run Deduplication first
-        logging.info("Running one-time deduplication on final table...")
-        cleanup_query_job = bq_client.query(cleanup_query)
-        cleanup_query_job.result() # Wait for completion
-        logging.info("Cleanup successful.Removed {cleanup_query_job.num_dml_affected_rows} duplicate rows.")
+        # 1. Truncate table first ONE-TIME-CLEANING
+        bq_client.query(f"TRUNCATE TABLE `{final_table}`").result()
+        logging.info("Table cleared.")
 
         # 2. Run Ingestion
         logging.info("Starting transformation query...")
