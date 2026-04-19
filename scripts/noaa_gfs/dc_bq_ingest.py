@@ -122,11 +122,7 @@ def run_mapping_query(bq_client):
     """
 
     try:
-        # 1. Truncate table first ONE-TIME-CLEANING
-        bq_client.query(f"TRUNCATE TABLE `{final_table}`").result()
-        logging.info("Table cleared.")
-
-        # 2. Run Ingestion
+        # Run Ingestion
         logging.info("Starting transformation query...")
         query_job = bq_client.query(query)
         query_job.result()  # Wait for completion
