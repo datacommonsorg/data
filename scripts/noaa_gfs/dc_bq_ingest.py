@@ -103,19 +103,23 @@ def run_mapping_query(bq_client):
     # --- ONE-TIME CLEANUP SQL ---
     # Note: Remove this block after the first successful run
     cleanup_query = f"""
-    DELETE FROM `{final_table}`
-    WHERE STRUCT(observation_date, value, variable_measured, observation_about) NOT IN (
-        SELECT AS STRUCT observation_date, value, variable_measured, observation_about
-        FROM (
-            SELECT *,
-                ROW_NUMBER() OVER(
-                    PARTITION BY observation_date, value, variable_measured, observation_about
-                    ORDER BY observation_date
-                ) as row_num
-            FROM `{final_table}`
-        )
-        WHERE row_num = 1
-    )
+    MERGE `{final_table}` AS main
+    USING (
+        SELECT
+            observation_date, value, variable_measured, observation_about,
+            ROW_NUMBER() OVER(
+                PARTITION BY observation_date, value, variable_measured, observation_about
+                ORDER BY observation_date
+            ) as row_num
+        FROM `{final_table}`
+    ) AS sub
+    ON
+        main.observation_date = sub.observation_date AND
+        main.value = sub.value AND
+        main.variable_measured = sub.variable_measured AND
+        main.observation_about = sub.observation_about AND
+        sub.row_num > 1
+    WHEN MATCHED THEN DELETE
     """
 
     query = f"""
@@ -142,8 +146,9 @@ def run_mapping_query(bq_client):
     try:
         # 1. Run Deduplication first
         logging.info("Running one-time deduplication on final table...")
-        bq_client.query(cleanup_query).result()
-        logging.info("Cleanup successful.")
+        cleanup_query_job = bq_client.query(cleanup_query)
+        cleanup_query_job.result() # Wait for completion
+        logging.info("Cleanup successful.Removed {cleanup_query_job.num_dml_affected_rows} duplicate rows.")
 
         # 2. Run Ingestion
         logging.info("Starting transformation query...")
