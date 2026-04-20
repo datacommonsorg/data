@@ -54,10 +54,11 @@ def load_state():
 
     try:
         state_data = blob.download_as_text()
+        data = json.loads(state_data)
         logging.info(
-            f"Successfully loaded state from gs://{FLAGS.bucket_name}/{FLAGS.state_path}"
+            f"Successfully loaded state: {data.get('bq_ingest')} from gs://{FLAGS.bucket_name}/{FLAGS.state_path}"
         )
-        return json.loads(state_data)
+        return data
     except exceptions.NotFound:
         logging.warning("State file not found in GCS. Starting from scratch.")
         return {}
@@ -71,10 +72,9 @@ def update_bq_state(latest_date, latest_cycle):
         blob = bucket.blob(FLAGS.state_path)
 
         # Download existing to preserve 'date' and 'cycle' from grib_statvar_processor.py
-        try:
+        state = {}
+        if blob.exists():
             state = json.loads(blob.download_as_text())
-        except exceptions.NotFound:
-            state = {}
 
         state['bq_ingest'] = {
             "date":
@@ -122,11 +122,12 @@ def run_mapping_query(bq_client):
     """
 
     try:
+        # Run Ingestion
         logging.info("Starting transformation query...")
         query_job = bq_client.query(query)
         query_job.result()  # Wait for completion
 
-        # Optional: Truncate staging table after successful migration
+        # Truncate staging table after successful migration
         bq_client.query(f"TRUNCATE TABLE `{staging_table}`").result()
         logging.info("Transformation complete and staging table cleared.")
         return True
@@ -181,7 +182,9 @@ def main(argv):
             continue
 
         # Match YYYYMMDD and HH cycle from filename
-        match = re.search(r'output_(\d{8})_(\d{2})_', blob.name)
+        filename = blob.name.split('/')[-1]
+        match = re.fullmatch(r'noaa_gfs_output_(\d{8})_(\d{2})_\d{3}\.csv',
+                             filename)
         if match:
             f_date, f_cycle = match.groups()
             if f"{f_date}_{f_cycle}" > last_key:
