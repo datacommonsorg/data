@@ -15,6 +15,8 @@
 import logging
 import os
 from google.cloud import spanner
+from google.cloud.spanner_admin_database_v1 import DatabaseAdminClient
+from google.cloud.spanner_admin_database_v1.types import UpdateDatabaseDdlRequest
 from google.cloud.spanner_v1 import Transaction
 from google.cloud.spanner_v1.param_types import STRING, TIMESTAMP, Array, INT64
 from datetime import datetime, timezone
@@ -57,13 +59,16 @@ class SpannerClient:
             params = {"lockId": self._LOCK_ID}
             param_types = {"lockId": STRING}
 
-            current_owner, acquired_at = None, None
+            row_found = False
             results = transaction.execute_sql(sql, params, param_types)
             for row in results:
+                row_found = True
                 current_owner, acquired_at = row[0], row[1]
 
             lock_is_available = False
-            if current_owner is None:
+            if not row_found:
+                lock_is_available = True
+            elif current_owner is None:
                 lock_is_available = True
             else:
                 timeout_threshold = datetime.now(timezone.utc) - acquired_at
@@ -72,22 +77,43 @@ class SpannerClient:
                         f"Stale lock found, owned by {current_owner}. Acquiring."
                     )
                     lock_is_available = True
+
             if lock_is_available:
-                update_sql = """
-                    UPDATE IngestionLock
-                    SET LockOwner = @workflowId, AcquiredTimestamp = PENDING_COMMIT_TIMESTAMP()
-                    WHERE LockID = @lockId
-                """
-                transaction.execute_update(update_sql,
-                                           params={
-                                               "workflowId": workflow_id,
-                                               "lockId": self._LOCK_ID
-                                           },
-                                           param_types={
-                                               "workflowId": STRING,
-                                               "lockId": STRING
-                                           })
-                logging.info(f"Lock successfully acquired by {workflow_id}")
+                if not row_found:
+                    insert_sql = """
+                        INSERT INTO IngestionLock (LockID, LockOwner, AcquiredTimestamp)
+                        VALUES (@lockId, @workflowId, PENDING_COMMIT_TIMESTAMP())
+                    """
+                    transaction.execute_update(insert_sql,
+                                               params={
+                                                   "workflowId": workflow_id,
+                                                   "lockId": self._LOCK_ID
+                                               },
+                                               param_types={
+                                                   "workflowId": STRING,
+                                                   "lockId": STRING
+                                               })
+                    logging.info(
+                        f"Lock successfully acquired by {workflow_id} (new row created)"
+                    )
+                else:
+                    update_sql = """
+                        UPDATE IngestionLock
+                        SET LockOwner = @workflowId, AcquiredTimestamp = PENDING_COMMIT_TIMESTAMP()
+                        WHERE LockID = @lockId
+                    """
+                    transaction.execute_update(update_sql,
+                                               params={
+                                                   "workflowId": workflow_id,
+                                                   "lockId": self._LOCK_ID
+                                               },
+                                               param_types={
+                                                   "workflowId": STRING,
+                                                   "lockId": STRING
+                                               })
+                    logging.info(
+                        f"Lock successfully acquired by {workflow_id} (existing row updated)"
+                    )
                 return True
             else:
                 logging.info(f"Lock is currently held by {current_owner}")
@@ -383,3 +409,67 @@ class SpannerClient:
             logging.error(
                 f'Error updating version history for {import_name}: {e}')
             raise
+
+    def initialize_database(self):
+        """Initializes the database by creating all required tables and proto bundles."""
+        logging.info("Initializing database...")
+        
+        with self.database.snapshot() as snapshot:
+            results = snapshot.execute_sql(
+                "SELECT table_name FROM information_schema.tables WHERE table_schema = ''"
+            )
+            existing_tables = [row[0] for row in results]
+            
+        logging.info(f"Existing tables: {existing_tables}")
+        
+        required_tables = ["Node", "Edge", "Observation", "ImportStatus", "IngestionHistory", "ImportVersionHistory", "IngestionLock"]
+        
+        missing_tables = [t for t in required_tables if t not in existing_tables]
+        
+        if not missing_tables:
+            logging.info("All tables already exist.")
+            return
+            
+        if len(missing_tables) < len(required_tables):
+            raise RuntimeError(
+                f"Database inconsistent state. Missing tables: {missing_tables}. Please clean up manually."
+            )
+            
+        logging.info("Creating all tables and proto bundles...")
+        
+        schema_path = os.path.join(os.path.dirname(__file__), 'schema.sql')
+        logging.info(f"Reading schema from {schema_path}")
+        try:
+            with open(schema_path, 'r') as f:
+                schema_content = f.read()
+            ddl_statements = [s.strip() for s in schema_content.split(';') if s.strip()]
+        except Exception as e:
+            logging.error(f"Failed to read schema file: {e}")
+            raise
+            
+        proto_path = os.path.join(os.path.dirname(__file__), 'storage.pb')
+        logging.info(f"Reading proto descriptors from {proto_path}")
+        try:
+            with open(proto_path, 'rb') as f:
+                proto_descriptors_bytes = f.read()
+        except Exception as e:
+            logging.error(f"Failed to read proto descriptors file: {e}")
+            raise
+            
+        database_path = self.database.name
+        logging.info(f"Updating DDL for {database_path} with protos")
+        
+        try:
+            admin_client = DatabaseAdminClient()
+            request = UpdateDatabaseDdlRequest(
+                database=database_path,
+                statements=ddl_statements,
+                proto_descriptors=proto_descriptors_bytes
+            )
+            operation = admin_client.update_database_ddl(request=request)
+            operation.result()
+            logging.info("Database initialized successfully with protos.")
+        except Exception as e:
+            logging.error(f"Failed to update DDL with protos: {e}")
+            raise
+
