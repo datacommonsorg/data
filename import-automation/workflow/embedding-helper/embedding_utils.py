@@ -123,7 +123,7 @@ def generate_embeddings_partitioned(database, nodes):
         logging.info("No nodes to update.")
         return 0
 
-    BATCH_SIZE = 100
+    BATCH_SIZE = 500
     total_rows_affected = 0
 
     logging.info(f"Generating embeddings for {len(nodes)} nodes in batches of {BATCH_SIZE}.")
@@ -149,7 +149,7 @@ def generate_embeddings_partitioned(database, nodes):
         param_types = {"nodes": Array(struct_type)}
 
         def _execute_dml(transaction):
-            return transaction.execute_update(embeddings_sql, params=params, param_types=param_types)
+            return transaction.execute_update(embeddings_sql, params=params, param_types=param_types, timeout=300)
 
         try:
             row_count = database.run_in_transaction(_execute_dml)
