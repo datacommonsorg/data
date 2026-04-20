@@ -1,54 +1,40 @@
-# Copyright 2026 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-import functions_framework
+import os
 import logging
-from flask import jsonify
+from google.cloud import spanner
+from embedding_utils import get_updated_nodes, filter_and_convert_nodes, generate_embeddings_partitioned
 
-logging.getLogger().setLevel(logging.INFO)
+logging.basicConfig(level=logging.INFO)
 
-@functions_framework.http
-def embedding_helper(request):
-    """
-    HTTP Cloud Function for handling embedding tasks.
-    Takes request and argument actionType.
-    """
-    request_json = request.get_json(silent=True)
-    if not request_json:
-        return ('Request is not a valid JSON', 400)
+def main():
+    # Read configuration from environment variables
+    instance_id = os.environ.get("SPANNER_INSTANCE")
+    database_id = os.environ.get("SPANNER_DATABASE")
+    project_id = os.environ.get("SPANNER_PROJECT")
+    
+    if not instance_id or not database_id:
+        logging.error("SPANNER_INSTANCE or SPANNER_DATABASE environment variables not set.")
+        exit(1)
+        
+    logging.info(f"Connecting to Spanner instance: {instance_id}, database: {database_id}, project: {project_id}")
+    
+    spanner_client = spanner.Client(project=project_id)
+    instance = spanner_client.instance(instance_id)
+    database = instance.database(database_id)
 
-    if 'actionType' not in request_json:
-        return ("'actionType' parameter is missing", 400)
+    node_types = ["StatisticalVariable", "Topic"]
+    
+    try:
+        logging.info(f"Job started. Fetching all nodes for types: {node_types}")
+        nodes = get_updated_nodes(database, None, node_types)
+        
+        converted_nodes = filter_and_convert_nodes(nodes)
+        
+        affected_rows = generate_embeddings_partitioned(database, converted_nodes)
+        
+        logging.info(f"Job completed successfully. Total affected rows: {affected_rows}")
+    except Exception as e:
+        logging.error(f"Job failed with error: {e}")
+        exit(1)
 
-    action_type = request_json['actionType']
-    logging.info(f"Received request for actionType: {action_type}")
-
-    if action_type == 'initialization':
-        return jsonify({
-            "status": "success",
-            "message": "initialization action triggered"
-        }), 200
-    elif action_type == 'incremental_update':
-        return jsonify({
-            "status": "success",
-            "message": "incremental_update action triggered"
-        }), 200
-    elif action_type == 'manual_update':
-        return jsonify({
-            "status": "success",
-            "message": "manual_update action triggered"
-        }), 200
-    else:
-        logging.warning(f"Unknown actionType: {action_type}")
-        return (f"Unknown actionType: {action_type}", 400)
+if __name__ == "__main__":
+    main()

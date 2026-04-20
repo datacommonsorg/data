@@ -14,6 +14,7 @@
 
 """Helper utilities for embedding workflows."""
 
+import itertools
 import logging
 import time
 from datetime import datetime
@@ -42,14 +43,15 @@ def get_latest_lock_timestamp(database):
 
 def get_updated_nodes(database, timestamp, node_types):
     """Gets subject_ids and names from Node table where update_timestamp > timestamp.
+    Yields results to avoid loading all into memory.
     
     Args:
         database: google.cloud.spanner.Database object.
         timestamp: datetime object to filter by.
         node_types: A list of strings representing the node types to filter by.
         
-    Returns:
-        A list of dictionaries containing subject_id and name.
+    Yields:
+        Dictionaries containing subject_id and name.
     """
     timestamp_condition = "update_timestamp > @timestamp" if timestamp else "TRUE"
     
@@ -72,7 +74,6 @@ def get_updated_nodes(database, timestamp, node_types):
     else:
         logging.info("No timestamp provided, reading all valid nodes.")
     
-    nodes = []
     try:
         with database.snapshot() as snapshot:
             results = snapshot.execute_sql(updated_node_sql, params=params, param_types=param_types)
@@ -80,50 +81,43 @@ def get_updated_nodes(database, timestamp, node_types):
             for row in results:
                 if fields is None:
                     fields = [field.name for field in results.fields]
-                nodes.append(dict(zip(fields, row)))
+                yield dict(zip(fields, row))
     except Exception as e:
         logging.error(f"Error fetching updated nodes: {e}")
         raise
-    return nodes
 
 
-def filter_and_convert_nodes(nodes):
+def filter_and_convert_nodes(nodes_generator):
     """Filters out nodes without a name and converts dictionaries to tuples.
-    Reads 'name' from input and maps it to output tuple.
+    Reads from a generator and yields results.
 
     Args:
-        nodes: A list of dictionaries containing subject_id and name.
+        nodes_generator: A generator yielding dictionaries containing subject_id and name.
 
-    Returns:
-        A list of tuples (subject_id, embedding_content).
+    Yields:
+        Tuples (subject_id, embedding_content).
     """
-    valid_tuples = [
-        (node.get("subject_id"), node.get("name"))
-        for node in nodes
-        if node.get("name")
-    ]
-    return valid_tuples
+    for node in nodes_generator:
+        if node.get("name"):
+            yield (node.get("subject_id"), node.get("name"))
 
 
-def generate_embeddings_partitioned(database, nodes):
+def generate_embeddings_partitioned(database, nodes_generator):
     """Generates embeddings in batches using standard transactions.
     Processes nodes in chunks of 500 to avoid transaction size limits.
+    Accepts a generator to avoid loading all nodes into memory.
     
     Args:
         database: google.cloud.spanner.Database object.
-        nodes: A list of tuples containing (subject_id, embedding_content).
+        nodes_generator: A generator yielding tuples containing (subject_id, embedding_content).
         
     Returns:
         The number of affected rows.
     """
-    if not nodes:
-        logging.info("No nodes to update.")
-        return 0
-
     BATCH_SIZE = 500
     total_rows_affected = 0
 
-    logging.info(f"Generating embeddings for {len(nodes)} nodes in batches of {BATCH_SIZE}.")
+    logging.info(f"Generating embeddings in batches of {BATCH_SIZE}.")
 
     embeddings_sql = """
         INSERT OR UPDATE INTO NodeEmbeddings (subject_id, embedding_content, embeddings)
@@ -139,9 +133,15 @@ def generate_embeddings_partitioned(database, nodes):
         StructField("embedding_content", STRING)
     ])
 
-    for i in range(0, len(nodes), BATCH_SIZE):
-        batch = nodes[i : i + BATCH_SIZE]
+    def chunked(iterable, n):
+        it = iter(iterable)
+        while True:
+            chunk = list(itertools.islice(it, n))
+            if not chunk:
+                break
+            yield chunk
 
+    for batch in chunked(nodes_generator, BATCH_SIZE):
         params = {"nodes": batch}
         param_types = {"nodes": Array(struct_type)}
 
