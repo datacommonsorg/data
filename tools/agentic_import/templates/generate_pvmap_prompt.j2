@@ -1316,6 +1316,9 @@ Follow these steps sequentially.
 
 - Input files and configuration is listed in `INPUT DATA FOR THIS RUN` section
   below.
+{% if extra_instruction_files_abs %}
+- If `extra_instruction_files` are listed for this run, read them first and use them as supplemental guidance for dataset-specific mappings. If they conflict, prefer this prompt's hard rules and the input files.
+{% endif %}
 - **Carefully** examine examine **sample** input data `input_data` and metadata
   `input_metadata` files to understand the structure and content of the data.
 
@@ -1466,7 +1469,8 @@ CRITICAL: Follow all SDMX-specific guidelines and use metadata for semantic mapp
   "input_metadata": {{input_metadata_abs | tojson}},
   "working_dir": "{{working_dir_abs}}",
   "output_dir": "{{output_dir_abs}}",
-  "dataset_type": "{{dataset_type}}"
+  "dataset_type": "{{dataset_type}}",
+  "extra_instruction_files": {{extra_instruction_files_abs | tojson}}
 }
 ```
 
@@ -1490,6 +1494,10 @@ CRITICAL: Follow all SDMX-specific guidelines and use metadata for semantic mapp
 6. **NO INFINITE LOOPS**: The iteration control prevents endless retries
 
 # ACTION REQUIRED NOW
+
+{% if extra_instruction_files_abs %}
+Before starting, read all files listed in `extra_instruction_files`; they contain critical run-specific instructions.
+{% endif %}
 
 **Execute** the data analysis and generate the `{{output_path_abs}}_pvmap.csv` and `{{output_path_abs}}_metadata.csv`
 files now. Follow the primary workflow **WITHOUT** deviation.
