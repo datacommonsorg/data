@@ -128,55 +128,70 @@ def downloadFiles(config_files: list, test=False):
     os.system("mkdir -p " + os.path.join(_MODULE_DIR, __INPUTFILES))
     try:
         for config_file in config_files:
-            files = _get_urls(config_file, "urls", test)
-            if "national_1980_1990.json" in config_file:
-                process_national_1980_1990(files)
-            elif "national_1900_1970.json" in config_file:
-                process_national_1900_1970(files)
-            elif "national_1990_2000.json" in config_file:
-                process_national_1990_2000(files)
-            elif "national_2000_2010.json" in config_file:
-                process_national_2000_2010(files)
-            elif "national_2010_2020.json" in config_file:
-                process_national_2010_2020(files)
-            #Added for data refresh from 2020-2023
-            elif "national_2020_2022.json" in config_file:
-                process_national_2020_2022(files)
-            elif "state_1970_1979.json" in config_file:
-                process_state_1970_1979(files)
-            elif "state_1980_1990.json" in config_file:
-                process_state_1980_1990(files)
-            elif "state_1990_2000.json" in config_file:
-                process_state_1990_2000(files)
-            elif "state_2000_2010.json" in config_file:
-                process_state_2000_2010(files)
-            elif "state_2010_2020.json" in config_file:
-                process_state_2010_2020(files)
-            #Added for 2020-2023 part of data refresh
-            elif "state_2020_2022.json" in config_file:
-                process_state_2020_2022(files)
-            elif "county_1970_1979.json" in config_file:
-                process_county_1970_1979(files)
-            elif "county_1980_1989.json" in config_file:
-                process_county_1980_1989(files)
-            elif "county_1990_2000.json" in config_file:
-                process_county_1990_2000(files)
-            elif "county_2000_2009.json" in config_file:
-                process_county_2000_2009(files)
-            elif "county_2010_2020.json" in config_file:
-                process_county_2010_2020(files)
-            #added for 2020-2022 data refresh
-            elif "county_2020_2022.json" in config_file:
-                process_county_2020_2022(files)
+            try:
+                files = _get_urls(config_file, "urls", test)
+                if "national_1980_1990.json" in config_file:
+                    process_national_1980_1990(files)
+                elif "national_1900_1970.json" in config_file:
+                    process_national_1900_1970(files)
+                elif "national_1990_2000.json" in config_file:
+                    process_national_1990_2000(files)
+                elif "national_2000_2010.json" in config_file:
+                    process_national_2000_2010(files)
+                elif "national_2010_2020.json" in config_file:
+                    process_national_2010_2020(files)
+                #Added for data refresh from 2020-2023
+                elif "national_2020_2022.json" in config_file:
+                    process_national_2020_2022(files)
+                elif "state_1970_1979.json" in config_file:
+                    process_state_1970_1979(files)
+                elif "state_1980_1990.json" in config_file:
+                    process_state_1980_1990(files)
+                elif "state_1990_2000.json" in config_file:
+                    process_state_1990_2000(files)
+                elif "state_2000_2010.json" in config_file:
+                    process_state_2000_2010(files)
+                elif "state_2010_2020.json" in config_file:
+                    process_state_2010_2020(files)
+                #Added for 2020-2023 part of data refresh
+                elif "state_2020_2022.json" in config_file:
+                    process_state_2020_2022(files)
+                elif "county_1970_1979.json" in config_file:
+                    process_county_1970_1979(files)
+                elif "county_1980_1989.json" in config_file:
+                    process_county_1980_1989(files)
+                elif "county_1990_2000.json" in config_file:
+                    process_county_1990_2000(files)
+                elif "county_2000_2009.json" in config_file:
+                    process_county_2000_2009(files)
+                elif "county_2010_2020.json" in config_file:
+                    process_county_2010_2020(files)
+                #added for 2020-2022 data refresh
+                elif "county_2020_2022.json" in config_file:
+                    process_county_2020_2022(files)
+            except Exception as e:
+                logging.error(f"Failed to process {config_file}: {e}")
 
         global _FILES_TO_DOWNLOAD
         for file in _FILES_TO_DOWNLOAD:
             file_name_to_save = None
             url = file['download_path']
             #Calling 2023 onwards methods
-            process_national_2020_2029(url)
-            process_county_2020_2029(url)
-            process_state_2020_2029(url)
+            try:
+                process_national_2020_2029(url)
+            except Exception as e:
+                logging.error(
+                    f"Failed to process national 2020-2029 for {url}: {e}")
+            try:
+                process_county_2020_2029(url)
+            except Exception as e:
+                logging.error(
+                    f"Failed to process county 2020-2029 for {url}: {e}")
+            try:
+                process_state_2020_2029(url)
+            except Exception as e:
+                logging.error(
+                    f"Failed to process state 2020-2029 for {url}: {e}")
     except Exception as e:
         logging.fatal(f"There is an error while downloading the files {e}")
 
