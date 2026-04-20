@@ -1,0 +1,110 @@
+{
+  "dataflows": [
+    {
+      "id": "DF1",
+      "name": "Flow One",
+      "enriched_description": "Flow One enriched",
+      "data_structure_definition": {
+        "dimensions": [
+          {
+            "id": "DIM1",
+            "concept": {
+              "id": "C1",
+              "enriched_description": "Concept C1 enriched"
+            },
+            "representation": {
+              "codelist": {
+                "id": "CL1",
+                "name": "Base Codelist One",
+                "codes": [
+                  {
+                    "id": "CODE1",
+                    "name": "Base Code1 CL1",
+                    "enriched_description": "Code 1 enriched"
+                  },
+                  {
+                    "id": "CODE2",
+                    "name": "Base Code2 CL1",
+                    "enriched_description": "Code 2 enriched"
+                  }
+                ]
+              }
+            },
+            "enriched_description": "Dimension enriched"
+          },
+          {
+            "id": "DIM2",
+            "concept": {
+              "id": "C4",
+              "enriched_description": "Concept C4 enriched"
+            },
+            "representation": {
+              "codelist": {
+                "id": "CL2",
+                "name": "Base Codelist Two",
+                "codes": [
+                  {
+                    "id": "CODE1",
+                    "name": "Base Code1 CL2",
+                    "enriched_description": "Code 1 enriched CL2"
+                  }
+                ]
+              }
+            },
+            "enriched_description": "Dimension two enriched"
+          }
+        ],
+        "attributes": [
+          {
+            "id": "ATTR1",
+            "concept": {
+              "id": "C2",
+              "enriched_description": "Concept C2 enriched"
+            },
+            "representation": {
+              "codelist": {
+                "codes": [
+                  {
+                    "id": "ACODE1",
+                    "enriched_description": "Attr code enriched"
+                  }
+                ]
+              }
+            },
+            "enriched_description": "Attribute enriched"
+          }
+        ],
+        "measures": [
+          {
+            "id": "MEAS1",
+            "concept": {
+              "id": "C3",
+              "enriched_description": "Concept C3 enriched"
+            },
+            "enriched_description": "Measure enriched"
+          }
+        ]
+      },
+      "referenced_concept_schemes": [
+        {
+          "id": "CS1",
+          "concepts": [
+            {
+              "id": "CON1",
+              "enriched_description": "Concept 1 enriched"
+            },
+            {
+              "id": "CON2",
+              "enriched_description": "Concept 2 enriched"
+            }
+          ],
+          "enriched_description": "Scheme enriched"
+        }
+      ]
+    },
+    {
+      "id": "DF2",
+      "name": "Flow Two"
+    }
+  ]
+}

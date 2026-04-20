@@ -1,0 +1,39 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NOAA_GlobalForecastSystem",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/",
+            "provenance_description": "NOAA Global Forecast System (GFS) data",
+            "scripts": [
+                "download_noaa_gfs_grib.py",
+                "grib_statvar_processor.py",
+                "dc_bq_ingest.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "./noaa_gfs_output.tmcf",
+                    "cleaned_csv": "output/*/gfs.t*.csv"
+                }
+            ],
+            "source_files": [
+                "./input_files/*/gfs.t*"
+            ],
+            "user_script_timeout": 3600,
+            "cron_schedule": "30 04,10,16,22 * * *",
+            "resource_limits": {
+                "cpu": 64,
+                "memory": 256,
+                "disk": 4096
+            },
+            "config_override": {
+                "skip_gcs_upload": true,
+                "invoke_differ_tool": false,
+                "invoke_import_validation": false,
+                "invoke_import_tool": false
+            }
+        }
+    ]
+}

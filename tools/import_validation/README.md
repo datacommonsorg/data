@@ -85,9 +85,9 @@ Here is an example of a complete configuration file:
         },
         {
             "rule_id": "check_deleted_points_threshold",
-            "validator": "DELETED_RECORDS_COUNT",
+            "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 10
+                "threshold": 1
             }
         },
         {
@@ -151,7 +151,10 @@ The following validations are currently supported:
 | `NUM_OBSERVATIONS_CHECK`  | Checks that the number of observations is within a defined range.        | `stats`           | `minimum`, `maximum`, or `value` (integer)             |
 | `UNIT_CONSISTENCY_CHECK`  | Checks that the unit is the same for all StatVars.                       | `stats`           | None                                                   |
 | `MIN_VALUE_CHECK`         | Checks that the minimum value is not below a defined minimum.            | `stats`           | `minimum` (integer or float)                           |
-| `MAX_VALUE_CHECK`         | Checks that the maximum value is not above a defined maximum.            | `stats`           | `maximum` (integer or float)                           |
+| MAX_VALUE_CHECK           | Checks that the maximum value is not above a defined maximum.            | `stats`           | `maximum` (integer or float)                           |
+| `GOLDENS_CHECK`                 | Verifies that the data contains all records defined in a golden set.     | `stats`           | `golden_files` (list), `input_files` (list)   |
+
+For more details on the validations, please refer to [Validations.md](Validations.md)
 
 ## Output
 
