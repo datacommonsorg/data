@@ -34,10 +34,9 @@ from url_list_compiler import get_table_url_list
 
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
 path.insert(1, os.path.join(module_dir_, '../../../'))
-
-from .download_utils import download_url_list_iterations
+from download_utils import download_url_list_iterations
 from tools.download_utils.requests_wrappers import request_url_json
-from .status_file_utils import sync_status_list
+from status_file_utils import sync_status_list
 
 FLAGS = flags.FLAGS
 
@@ -165,6 +164,7 @@ def download_table(dataset: str,
     url_list = get_table_url_list(dataset, table_id, q_variable, year_list,
                                   output_path, api_key, s_level_list,
                                   force_fetch_config, force_fetch_data)
+    print(url_list)
 
     status_path = os.path.join(output_path, 'download_status.json')
 
@@ -292,7 +292,11 @@ def consolidate_files(dataset: str,
         df = pd.DataFrame()
         for csv_file in csv_files_list[year]:
             cur_csv_path = os.path.join(output_path, csv_file)
-            df2 = pd.read_csv(cur_csv_path, low_memory=False)
+            try:
+                df2 = pd.read_csv(cur_csv_path, low_memory=False)
+            except pd.errors.EmptyDataError:
+                logging.warning('Skipping empty file: %s', cur_csv_path)
+                continue
             print("Collecting", csv_file)
             # remove extra columns
             drop_list = []
@@ -451,8 +455,10 @@ logging.basicConfig(
 
 def main(argv):
     year_list_int = list(range(FLAGS.start_year, FLAGS.end_year + 1))
+    print("#########################",year_list_int)
     year_list = [str(y) for y in year_list_int]
     out_path = os.path.expanduser(FLAGS.output_path)
+    print("#####",FLAGS.summary_levels)
     if FLAGS.summary_levels:
         s_list = FLAGS.summary_levels
     else:
