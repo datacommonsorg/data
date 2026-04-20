@@ -51,29 +51,26 @@ def get_updated_nodes(database, timestamp, node_types):
     Returns:
         A list of dictionaries containing subject_id and name.
     """
-    if not timestamp:
-        logging.info("No timestamp provided, reading all nodes.")
-        updated_node_sql = """
-            SELECT subject_id, name FROM Node 
-            WHERE name IS NOT NULL
-              AND EXISTS (
-                SELECT 1 FROM UNNEST(types) AS t WHERE t IN UNNEST(@node_types)
-              )
-        """
-        params = {"node_types": node_types}
-        param_types = {"node_types": Array(STRING)}
+    timestamp_condition = "update_timestamp > @timestamp" if timestamp else "TRUE"
+    
+    updated_node_sql = f"""
+        SELECT subject_id, name FROM Node 
+        WHERE name IS NOT NULL
+          AND {timestamp_condition}
+          AND EXISTS (
+            SELECT 1 FROM UNNEST(types) AS t WHERE t IN UNNEST(@node_types)
+          )
+    """
+    
+    params = {"node_types": node_types}
+    param_types = {"node_types": Array(STRING)}
+    
+    if timestamp:
+        logging.info(f"Filtering valid nodes updated after {timestamp}")
+        params["timestamp"] = timestamp
+        param_types["timestamp"] = TIMESTAMP
     else:
-        logging.info(f"Filtering nodes updated after {timestamp}")
-        updated_node_sql = """
-            SELECT subject_id, name FROM Node 
-            WHERE update_timestamp > @timestamp
-              AND name IS NOT NULL
-              AND EXISTS (
-                SELECT 1 FROM UNNEST(types) AS t WHERE t IN UNNEST(@node_types)
-              )
-        """
-        params = {"timestamp": timestamp, "node_types": node_types}
-        param_types = {"timestamp": TIMESTAMP, "node_types": Array(STRING)}
+        logging.info("No timestamp provided, reading all valid nodes.")
     
     nodes = []
     try:
