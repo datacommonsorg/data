@@ -80,40 +80,29 @@ class SpannerClient:
 
             if lock_is_available:
                 if not row_found:
-                    insert_sql = """
+                    sql_statement = """
                         INSERT INTO IngestionLock (LockID, LockOwner, AcquiredTimestamp)
                         VALUES (@lockId, @workflowId, PENDING_COMMIT_TIMESTAMP())
                     """
-                    transaction.execute_update(insert_sql,
-                                               params={
-                                                   "workflowId": workflow_id,
-                                                   "lockId": self._LOCK_ID
-                                               },
-                                               param_types={
-                                                   "workflowId": STRING,
-                                                   "lockId": STRING
-                                               })
-                    logging.info(
-                        f"Lock successfully acquired by {workflow_id} (new row created)"
-                    )
+                    log_msg = f"Lock successfully acquired by {workflow_id} (new row created)"
                 else:
-                    update_sql = """
+                    sql_statement = """
                         UPDATE IngestionLock
                         SET LockOwner = @workflowId, AcquiredTimestamp = PENDING_COMMIT_TIMESTAMP()
                         WHERE LockID = @lockId
                     """
-                    transaction.execute_update(update_sql,
-                                               params={
-                                                   "workflowId": workflow_id,
-                                                   "lockId": self._LOCK_ID
-                                               },
-                                               param_types={
-                                                   "workflowId": STRING,
-                                                   "lockId": STRING
-                                               })
-                    logging.info(
-                        f"Lock successfully acquired by {workflow_id} (existing row updated)"
-                    )
+                    log_msg = f"Lock successfully acquired by {workflow_id} (existing row updated)"
+
+                transaction.execute_update(sql_statement,
+                                           params={
+                                               "workflowId": workflow_id,
+                                               "lockId": self._LOCK_ID
+                                           },
+                                           param_types={
+                                               "workflowId": STRING,
+                                               "lockId": STRING
+                                           })
+                logging.info(log_msg)
                 return True
             else:
                 logging.info(f"Lock is currently held by {current_owner}")
