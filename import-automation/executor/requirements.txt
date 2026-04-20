@@ -6,6 +6,7 @@ beautifulsoup4
 chardet
 chromedriver_py
 croniter
+curl_cffi
 dataclasses
 datacommons
 datacommons_client
@@ -41,6 +42,7 @@ omegaconf
 prettytable
 protobuf
 psutil
+pygrib
 pylint
 pyspellchecker
 pytest

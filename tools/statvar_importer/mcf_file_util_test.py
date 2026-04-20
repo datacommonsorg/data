@@ -121,7 +121,8 @@ class TestMCFFileUtil(unittest.TestCase):
         for dcid, node in mcf_nodes.items():
             for expected_prop in ['Node', 'typeOf']:
                 self.assertTrue(expected_prop in node)
-            self.assertEqual(mcf_file_util.strip_namespace(dcid), node['Node'])
+            self.assertEqual(mcf_file_util.strip_namespace(dcid),
+                             mcf_file_util.strip_namespace(node['Node']))
 
         # Verify loading node with additional property added to existing node.
         dcid = list(mcf_nodes.keys())[0]
@@ -231,6 +232,31 @@ class TestMCFFileUtil(unittest.TestCase):
             'description': 'TestNode with addiotnal name can be merged.'
         }
         self.assertTrue(mcf_file_util.check_nodes_can_merge(node1, node3))
+
+    def test_is_valid_property(self):
+        self.assertTrue(mcf_file_util.is_valid_property('prop1'))
+        self.assertFalse(mcf_file_util.is_valid_property('#prop1'))
+        self.assertFalse(mcf_file_util.is_valid_property('Prop1'))
+        self.assertFalse(mcf_file_util.is_valid_property(1))
+
+    def test_is_leaf_object(self):
+        self.assertFalse(mcf_file_util.is_leaf_object('prop1'))
+        self.assertFalse(mcf_file_util.is_leaf_object('#prop1'))
+        self.assertFalse(mcf_file_util.is_leaf_object('Value1'))
+        self.assertFalse(mcf_file_util.is_leaf_object('dcid:Value1'))
+        self.assertTrue(mcf_file_util.is_leaf_object(1))
+        self.assertTrue(mcf_file_util.is_leaf_object(1.1))
+        self.assertTrue(mcf_file_util.is_leaf_object('1.1'))
+        self.assertTrue(mcf_file_util.is_leaf_object('"abc"'))
+        self.assertTrue(mcf_file_util.is_leaf_object('"abc",1.2'))
+        self.assertTrue(mcf_file_util.is_leaf_object('"abc",1.2,"def"'))
+
+    def test_is_number(self):
+        self.assertTrue(mcf_file_util.is_number('1'))
+        self.assertTrue(mcf_file_util.is_number('1.1'))
+        self.assertFalse(mcf_file_util.is_number('1.1.1'))
+        self.assertTrue(mcf_file_util.is_number(1.1))
+        self.assertTrue(mcf_file_util.is_number(1))
 
 
 class TestAddPVToNode(unittest.TestCase):
