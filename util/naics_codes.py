@@ -2782,7 +2782,7 @@ NAICS_CODES = {
     '457110':
         'GasolineStationsWithConvenienceStores_NAICS457110',
     '45712':
-        'OtherGasolineStations',
+        'OtherGasolineStations_NAICS45712',
     '457120':
         'OtherGasolineStations_NAICS457120',
     '4572':
