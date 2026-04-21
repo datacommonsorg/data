@@ -56,7 +56,7 @@ def get_updated_nodes(database, timestamp, node_types):
     timestamp_condition = "update_timestamp > @timestamp" if timestamp else "TRUE"
     
     updated_node_sql = f"""
-        SELECT subject_id, name FROM Node 
+        SELECT subject_id, name, types FROM Node 
         WHERE name IS NOT NULL
           AND {timestamp_condition}
           AND EXISTS (
@@ -92,14 +92,14 @@ def filter_and_convert_nodes(nodes_generator):
     Reads from a generator and yields results.
 
     Args:
-        nodes_generator: A generator yielding dictionaries containing subject_id and name.
+        nodes_generator: A generator yielding dictionaries containing subject_id, name, and types.
 
     Yields:
-        Tuples (subject_id, embedding_content).
+        Tuples (subject_id, embedding_content, types).
     """
     for node in nodes_generator:
         if node.get("name"):
-            yield (node.get("subject_id"), node.get("name"))
+            yield (node.get("subject_id"), node.get("name"), node.get("types"))
 
 
 def generate_embeddings_partitioned(database, nodes_generator):
@@ -120,17 +120,18 @@ def generate_embeddings_partitioned(database, nodes_generator):
     logging.info(f"Generating embeddings in batches of {BATCH_SIZE}.")
 
     embeddings_sql = """
-        INSERT OR UPDATE INTO NodeEmbeddings (subject_id, embedding_content, embeddings)
-        SELECT subject_id, content, embeddings.values
+        INSERT OR UPDATE INTO NodeEmbeddings (subject_id, embedding_content, embeddings, types)
+        SELECT subject_id, content, embeddings.values, types
         FROM ML.PREDICT(
             MODEL text_embeddings,
-            (SELECT subject_id, embedding_content AS content, "RETRIEVAL_QUERY" AS task_type FROM UNNEST(@nodes))
+            (SELECT subject_id, embedding_content AS content, types, "RETRIEVAL_QUERY" AS task_type FROM UNNEST(@nodes))
         )
     """
 
     struct_type = Struct([
         StructField("subject_id", STRING),
-        StructField("embedding_content", STRING)
+        StructField("embedding_content", STRING),
+        StructField("types", Array(STRING))
     ])
 
     def chunked(iterable, n):
