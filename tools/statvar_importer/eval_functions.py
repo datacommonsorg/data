@@ -110,6 +110,7 @@ def str_to_camel_case(input_string: str,
     return ''.join(
         [w[0].upper() + w[1:] for w in clean_str.split(' ') if len(w) > 0])
 
+
 def crc32(input_string: str) -> str:
     """Computes the CRC32 hash of a string
     
@@ -122,6 +123,7 @@ def crc32(input_string: str) -> str:
     if not isinstance(input_string, str):
         input_string = str(input_string)
     return str(zlib.crc32(input_string.encode('utf-8')))
+
 
 # A dictionary of functions and modules that are safe to use in `eval()`.
 # This dictionary acts as a safelist, defining the execution environment for
