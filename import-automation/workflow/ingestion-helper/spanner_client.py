@@ -145,7 +145,7 @@ class SpannerClient:
         """Get the details of imports to ingest.
 
         If import_list is empty, return info for ready imports.
-        If import_list is not empty, return info for the imports in the list irrespective of status.
+        If import_list is not empty, return info for the imports in the list that are in 'STAGING' status.
 
         Args:
             import_list: A list of import names to fetch details for.
@@ -159,7 +159,7 @@ class SpannerClient:
         params = {}
         param_types = {}
         if import_list:
-            sql = "SELECT ImportName, LatestVersion, GraphPath FROM ImportStatus WHERE ImportName IN UNNEST(@importNames)"
+            sql = "SELECT ImportName, LatestVersion, GraphPath FROM ImportStatus WHERE State = 'STAGING' AND ImportName IN UNNEST(@importNames)"
             params = {"importNames": import_list}
             param_types = {"importNames": Array(STRING)}
         else:

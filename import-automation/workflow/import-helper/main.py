@@ -43,8 +43,27 @@ def handle_feed_event(request):
     latest_version = attributes.get(
         'import_version',
         datetime.now(timezone.utc).strftime("%Y-%m-%d"))
-    run_ingestion = True 
+    import_step = attributes.get('import_step', '')
 
-    # Invoke import job and ingestion workflow to trigger dataflow job
-    helper.invoke_import_workflow(import_name, latest_version, run_ingestion)
+    if import_step == 'spanner_ingestion_workflow':
+        # Update import status in spanner
+        import_status = 'STAGING'
+        graph_path = attributes.get('graph_path', "/**/*.*")
+        job_id = attributes.get('feed_name', 'cda_feed')
+        cron_schedule = attributes.get('cron_schedule', '')
+        helper.update_import_status(import_name, import_status, latest_version,
+                                    graph_path, job_id, cron_schedule)
+        # Invoke ingestion workflow to trigger dataflow job
+        helper.invoke_spanner_ingestion_workflow(import_name)
+    elif import_step == 'import_automation_workflow':
+        run_ingestion = False
+        # Invoke batch import automation job
+        helper.invoke_import_automation_workflow(import_name, latest_version,
+                                                 run_ingestion)
+    else:
+        run_ingestion = True
+        # Invoke batch import job and ingestion workflow to trigger dataflow job
+        helper.invoke_import_automation_workflow(import_name, latest_version,
+                                                 run_ingestion)
+
     return 'OK', 200
