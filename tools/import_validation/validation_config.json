@@ -10,6 +10,12 @@
             }
         },
         {
+            "rule_id": "check_empty_import",
+            "description": "Checks if the import is empty (no observations and no schema).",
+            "validator": "EMPTY_IMPORT_CHECK",
+            "params": {}
+        },
+        {
             "rule_id": "check_missing_refs_count",
             "validator": "MISSING_REFS_COUNT",
             "params": {

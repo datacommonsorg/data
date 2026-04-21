@@ -180,6 +180,39 @@ class TestDeletedRecordsPercentValidation(unittest.TestCase):
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
 
 
+class TestEmptyImportValidation(unittest.TestCase):
+    '''Test Class for the EMPTY_IMPORT_CHECK validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_empty_import_fails_when_both_zero(self):
+        summary = {'current_obs_size': 0, 'current_schema_size': 0}
+        result = self.validator.validate_empty_import(pd.DataFrame(), summary,
+                                                      {})
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['current_obs_size'], 0)
+        self.assertEqual(result.details['current_schema_size'], 0)
+
+    def test_empty_import_passes_when_obs_not_zero(self):
+        summary = {'current_obs_size': 100, 'current_schema_size': 0}
+        result = self.validator.validate_empty_import(pd.DataFrame(), summary,
+                                                      {})
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['current_obs_size'], 100)
+
+    def test_empty_import_passes_when_schema_not_zero(self):
+        summary = {'current_obs_size': 0, 'current_schema_size': 5}
+        result = self.validator.validate_empty_import(pd.DataFrame(), summary,
+                                                      {})
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['current_schema_size'], 5)
+
+    def test_empty_import_fails_on_missing_summary(self):
+        result = self.validator.validate_empty_import(pd.DataFrame(), None, {})
+        self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
+
+
 class TestMissingRefsCountValidation(unittest.TestCase):
     '''Test Class for the MISSING_REFS_COUNT validation rule.'''
 
