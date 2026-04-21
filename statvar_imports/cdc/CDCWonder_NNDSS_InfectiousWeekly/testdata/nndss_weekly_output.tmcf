@@ -3,6 +3,6 @@ observationDate: C:nndss_weekly_output->observationDate
 observationAbout: C:nndss_weekly_output->observationAbout
 value: C:nndss_weekly_output->value
 variableMeasured: C:nndss_weekly_output->variableMeasured
-typeOf: dcs:StatVarObservation
-observationPeriod: P1W
 measurementMethod: CDC_NNDSS_Diseases_WeeklyTables
+observationPeriod: P1W
+typeOf: dcs:StatVarObservation

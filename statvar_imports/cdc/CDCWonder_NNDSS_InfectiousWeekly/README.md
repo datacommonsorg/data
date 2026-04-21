@@ -1,7 +1,7 @@
 # CDCWonder_NNDSS_Infectious_Weekly
 
 ## Overview
-Notifiable Infectious Diseases Data: Weekly tables from CDC WONDER which has the incident counts of different infectious diseases per week that are reported by the 50 states, New York City, the District of Columbia, and the U.S. territories.
+Notifiable Infectious Diseases Data: Weekly tables from CDC WONDER which has the incident counts of different infectious diseases per Previous 52 week that are reported by the 50 states, New York City, the District of Columbia, and the U.S. territories.
 
 ## Data Source
 **Source URL:**
@@ -10,7 +10,7 @@ Notifiable Infectious Diseases Data: Weekly tables from CDC WONDER which has the
 ## How To Download Input Data
 To download and process the data, you'll need to run the provided preprocess script, `preprocess.py`. This script will automatically create an "input_files" folder where you should place the file to be processed.By using this script, we are creating one more columns in the input files such as 'observationDate'. 
 
-statvars: Demographics
+statvars: Infectious Diseases
 
 ## Download the data: 
 For download and preprocess the source data, run:
