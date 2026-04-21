@@ -56,3 +56,8 @@ Updates the version of an import, records version history, and updates the statu
 *   `version` (Required): The version string. If set to `'STAGING'`, it resolves to the current staging version.
 *   `comment` (Required): A comment for the audit log explaining the version update.
 *   `override` (Optional): Override version without checking import status (boolean)
+
+#### `initialize_database`
+Initializes the Spanner database by creating all necessary tables and uploading proto descriptors.
+
+*   This action requires no payload parameters. It automatically reads `schema.sql` and `storage.pb` from the container directory to provision the database schema and proto descriptors.
