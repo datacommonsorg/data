@@ -14,6 +14,9 @@
 
 FROM python:3.12-slim
 
+# Copy uv binary
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
 # Allow statements and log messages to immediately appear in the logs
 ENV PYTHONUNBUFFERED True
 
@@ -24,7 +27,7 @@ RUN apt-get update && apt-get install -y protobuf-compiler curl && rm -rf /var/l
 
 # Install production dependencies.
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 
 # Copy local code to the container image.
 COPY . .
