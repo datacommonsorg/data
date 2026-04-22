@@ -1,7 +1,21 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import os
 import logging
 from google.cloud import spanner
-from embedding_utils import get_updated_nodes, filter_and_convert_nodes, generate_embeddings_partitioned
+from embedding_utils import get_latest_lock_timestamp, get_updated_nodes, filter_and_convert_nodes, generate_embeddings_partitioned
 
 logging.basicConfig(level=logging.INFO)
 
@@ -25,7 +39,8 @@ def main():
     
     try:
         logging.info(f"Job started. Fetching all nodes for types: {node_types}")
-        nodes = get_updated_nodes(database, None, node_types)
+        timestamp = get_latest_lock_timestamp(database)
+        nodes = get_updated_nodes(database, timestamp, node_types)
         
         converted_nodes = filter_and_convert_nodes(nodes)
         

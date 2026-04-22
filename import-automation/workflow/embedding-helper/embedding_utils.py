@@ -21,6 +21,8 @@ from datetime import datetime
 from google.cloud.spanner_v1.param_types import TIMESTAMP, STRING, Array, Struct, StructField
 
 
+_BATCH_SIZE = 500
+
 def get_latest_lock_timestamp(database):
     """Gets the latest AcquiredTimestamp from IngestionLock table.
     
@@ -114,10 +116,10 @@ def generate_embeddings_partitioned(database, nodes_generator):
     Returns:
         The number of affected rows.
     """
-    BATCH_SIZE = 500
+    global _BATCH_SIZE
     total_rows_affected = 0
 
-    logging.info(f"Generating embeddings in batches of {BATCH_SIZE}.")
+    logging.info(f"Generating embeddings in batches of {_BATCH_SIZE}.")
 
     embeddings_sql = """
         INSERT OR UPDATE INTO NodeEmbeddings (subject_id, embedding_content, embeddings, types)
@@ -142,7 +144,7 @@ def generate_embeddings_partitioned(database, nodes_generator):
                 break
             yield chunk
 
-    for batch in chunked(nodes_generator, BATCH_SIZE):
+    for batch in chunked(nodes_generator, _BATCH_SIZE):
         params = {"nodes": batch}
         param_types = {"nodes": Array(struct_type)}
 
