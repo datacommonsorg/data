@@ -23,7 +23,7 @@ To process the Tuberculosis data and generate statistical variables, use the fol
 
 **Download input file**
  ```bash
- python3 statvar_imports/tuberculosis_percentage/tuberculosisPercentage_input.py
+ python3 statvar_imports/tuberculosis_percentage/download_who_tuberculosis.py
 ```
 
 **For Test Data Run**
