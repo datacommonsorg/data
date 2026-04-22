@@ -121,10 +121,7 @@ def run_mapping_query(bq_client):
         measurementMethod,
         unit,
         'dc/base/NOAA_GlobalForecastSystem',
-        ST_GEOGPOINT(
-            CAST(REGEXP_EXTRACT(placeName, r'_(.*)') AS FLOAT64),
-            CAST(REGEXP_EXTRACT(placeName, r'latLong/(.*)_') AS FLOAT64)
-        )
+        ST_GEOGPOINT(longitude, latitude)
     FROM `{staging_table}`;
     """
 
