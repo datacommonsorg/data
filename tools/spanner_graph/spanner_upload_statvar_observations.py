@@ -53,8 +53,9 @@ _DEFAULT_TABLE_CONFIG = {
     },
     # Local variables reused in multiple tables
     "LocalVariables": {
-        # "FacetId": "=crc32('{provenance}-{measurementMethod}-{observationPeriod}-{unit}-{scalingFactor}')",
-        "FacetId": "{provenance}-{measurementMethod}-{observationPeriod}-{unit}-{scalingFactor}",
+        #"FacetId": "=md5(f'{provenance}-{measurementMethod}-{observationPeriod}-{unit}-{scalingFactor}')",
+        "FacetId": "=crc32(f'{provenance}-{measurementMethod}-{observationPeriod}-{unit}-{scalingFactor}')",
+        #"FacetId": "{provenance}-{measurementMethod}-{observationPeriod}-{unit}-{scalingFactor}",
     },
 
     "SpannerTables": {
@@ -287,7 +288,7 @@ class SpannerStatVarObservationsUploader:
             row: A dictionary representing a single row from the input CSV.
         
         Returns:
-            A list of Spanner mutations.
+            The number of Spanner mutations for cells.
         """
         mutations = []
         pvs = self._get_default_variables(row)
@@ -396,11 +397,12 @@ class SpannerStatVarObservationsUploader:
                 while self.process_input_batch(reader):
                   batch_count += 1
                   self._counters.add_counter('spanner-batch-count', 1)
-                  logging.info(f'Processed batch:{batch_count} of {self._spanner_batch_size} rows for {infile}')
+                  logging.info(f'Processed batch:{batch_count} of {self._spanner_batch_size} mutations for {infile}')
                 logging.info(f'Processed input file: {infile} in {batch_count} batches')
         if not input_files:
             # Process an empty row for any default variables
             num_mutations += self.process_input_row({}, None)
+            self._counters.add_counter('spanner-mutations-cells', num_mutations)
             self._counters.add_counter('processed', 1)
         logging.info(
             f'Added {num_mutations} rows from {len(input_files)} files to spanner database {self._instance_id}.{self._database_id}'
@@ -413,10 +415,10 @@ class SpannerStatVarObservationsUploader:
         Returns:
           True if the input is not completely processed and can be called again.
         """
-        num_mutations = 0
         with self._database.batch() as batch:
+            num_mutations = 0
             num_input_rows = 0
-            while num_input_rows < self._spanner_batch_size:
+            while num_mutations < self._spanner_batch_size:
                 row = next(csv_reader, None)
                 if row is None:
                   # End of the input.
@@ -425,6 +427,7 @@ class SpannerStatVarObservationsUploader:
                     row[prop] = mcf_file_util.strip_namespace(row[prop])
                 num_mutations += self.process_input_row(row, batch)
                 num_input_rows += 1
+                self._counters.add_counter('spanner-mutations', num_mutations)
                 self._counters.add_counter('processed', 1)
         return True
 
@@ -448,8 +451,9 @@ def _build_value_from_template(template: str, row: dict) -> str:
     """Build a value from a template string and a row dictionary."""
     try:
         if template.startswith('='):
-            variable, value = evaluate_statement(template[1:], row)
-            row[variable] = value
+            variable, value = evaluate_statement(template, row)
+            if variable:
+              row[variable] = value
             return value
         return template.format(**row)
     except KeyError as e:
