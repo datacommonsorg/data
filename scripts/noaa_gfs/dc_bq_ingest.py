@@ -102,7 +102,7 @@ def run_mapping_query(bq_client):
     final_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.table_id}"
     staging_table = f"{FLAGS.project_id}.{FLAGS.staging_dataset_id}.{FLAGS.staging_table_id}"
     variable_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.Variable"
-    place_table  = f"{FLAGS.project_id}.{FLAGS.dataset_id}.Place"
+    place_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.Place"
 
     query = f"""
     INSERT INTO `{final_table}` (
