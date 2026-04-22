@@ -37,6 +37,7 @@ format, you could use:
 
 from datetime import datetime
 import re
+import hashlib
 import zlib
 
 from absl import logging
@@ -124,6 +125,19 @@ def crc32(input_string: str) -> str:
         input_string = str(input_string)
     return str(zlib.crc32(input_string.encode('utf-8')))
 
+def md5(input_string: str) -> str:
+    """Computes the MD5 hash of a string
+    
+    Args:
+        input_string: The string to be hashed.
+    
+    Retu rns:
+        The MD5 hash of the string.
+    """
+    if not isinstance(input_string, str):
+        input_string = str(input_string)
+    return hashlib.md5(input_string.encode()).hexdigest()
+
 
 # A dictionary of functions and modules that are safe to use in `eval()`.
 # This dictionary acts as a safelist, defining the execution environment for
@@ -155,6 +169,7 @@ EVAL_GLOBALS = {
     # Hash functions:
     # - `crc32`: The 'crc32' function for stable hash ids generation.
     'crc32': crc32,
+    'md5': md5,
 }
 
 
