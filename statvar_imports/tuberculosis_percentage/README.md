@@ -39,7 +39,7 @@ python3 tools/statvar_importer/stat_var_processor.py \
 **For Main data run**
 ```bash
 python3 tools/statvar_importer/stat_var_processor.py \
-  --input_data=statvar_imports/tuberculosis_percentage/tuberculosisPercentage_input.csv \
+  --input_data=statvar_imports/tuberculosis_percentage/source_files/tuberculosisPercentage_input.csv \
   --pv_map=statvar_imports/tuberculosis_percentage/tuberculosisPercentage_pvmap.csv \
   --output_path=statvar_imports/tuberculosis_percentage/tuberculosisPercentage_output \
   --config_file=statvar_imports/tuberculosis_percentage/tuberculosisPercentage_metadata.csv \
