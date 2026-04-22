@@ -48,7 +48,7 @@ def handle_feed_event(request):
     if import_step == 'spanner_ingestion_workflow':
         # Update import status in spanner
         import_status = 'STAGING'
-        graph_path = attributes.get('graph_path', "/**/*.*")
+        graph_path = attributes.get('graph_path', "/**/*.mcf*")
         job_id = attributes.get('feed_name', 'cda_feed')
         cron_schedule = attributes.get('cron_schedule', '')
         helper.update_import_status(import_name, import_status, latest_version,

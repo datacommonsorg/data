@@ -77,7 +77,7 @@
                 "invoke_import_validation": false,
                 "invoke_import_tool": false,
                 "invoke_differ_tool": false,
-                "skip_input_upload": true
+                "skip_input_upload": false 
             }
         },
         {

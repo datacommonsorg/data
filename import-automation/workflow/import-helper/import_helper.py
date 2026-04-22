@@ -65,7 +65,8 @@ def invoke_import_automation_workflow(import_name: str,
     """
     import_config = {
         "user_script_args": [f"--version={latest_version}"],
-        "import_version_override": latest_version
+        "import_version_override": latest_version,
+        "graph_data_path": "/**/*.mcf*" 
     }
     workflow_args = {
         "importName": import_name,
@@ -74,7 +75,7 @@ def invoke_import_automation_workflow(import_name: str,
     }
 
     logging.info(
-        f"Invoking {IMPORT_AUTOMATION_SPANNER_INGESTION_WORKFLOW_ID} for {import_name}"
+        f"Invoking {IMPORT_AUTOMATION_WORKFLOW_ID} for {import_name}"
     )
     execution_client = executions_v1.ExecutionsClient()
     parent = f"projects/{PROJECT_ID}/locations/{LOCATION}/workflows/{IMPORT_AUTOMATION_WORKFLOW_ID}"
