@@ -101,28 +101,35 @@ def run_mapping_query(bq_client):
     """
     final_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.table_id}"
     staging_table = f"{FLAGS.project_id}.{FLAGS.staging_dataset_id}.{FLAGS.staging_table_id}"
+    variable_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.Variable"
 
     query = f"""
     INSERT INTO `{final_table}` (
         observation_about,
         variable_measured,
+        variable_name,
         value,
         observation_date,
         measurement_method,
         unit,
         prov_id,
+        provenance_name,
         geo_coordinates
     )
     SELECT 
-        placeName,
-        variableMeasured,
-        CAST(value AS STRING),
-        CAST(observationDate AS STRING),
-        measurementMethod,
-        unit,
+        st.placeName,
+        st.variableMeasured,
+        v.name,
+        CAST(st.value AS STRING),
+        CAST(st.observationDate AS STRING),
+        st.measurementMethod,
+        st.unit,
         'dc/base/NOAA_GlobalForecastSystem',
-        ST_GEOGPOINT(longitude, latitude)
-    FROM `{staging_table}`;
+        'NOAA_GlobalForecastSystem',
+        ST_GEOGPOINT(st.longitude, st.latitude)
+    FROM `{staging_table}` AS st
+    LEFT JOIN `{variable_table}` AS v
+        ON st.variableMeasured = v.id;
     """
 
     try:
