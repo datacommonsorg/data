@@ -1,0 +1,39 @@
+prop,key,val,,,,
+Year,observationDate,{Number},populationType,MedicalConditionIncident,observationAbout,country/USA
+Sex Code:1,gender,Female,,,,
+Sex Code:2,gender,Male,,,,
+Sex Code:99,gender,CDC_GenderUnknownOrNotStated,,,,
+Age Code:1,age,YearsUpto1,
+Age Code:2,age,Years1To4,
+Age Code:3,age,Years5To14,
+Age Code:4,age,Years15To24,
+Age Code:5,age,Years25To39,
+Age Code:6,age,Years40To64,
+Age Code:7,age,Years65Onwards,
+Age Code:99,age,USC_AgeNotStated,
+Race Code:1,race,AmericanIndianAndAlaskaNativeAlone,
+Race Code:2,race,AsianOrPacificIslander,
+Race Code:3,race,BlackOrAfricanAmericanAlone,
+Race Code:4,race,WhiteAlone,
+Race Code:5,race,CDC_OtherRace,
+Race Code:99,race,CDC_RaceUnknownOrNotStated,
+Race Code:98,#ignore,Race,,
+
+Ethnicity Code:1,ethnicity,HispanicOrLatino
+Ethnicity Code:non-,ethnicity,NotHispanicOrLatino
+Ethnicity Code:99,ethnicity,CDC_EthnicityUnknownOrNotStated
+Ethnicity Code:98,#ignore,Ignore
+Regions Code:U.S.,residentStatus,USResident
+Regions Code:REGION1,#ignore,Ignore,
+Regions Code:REGION2,#ignore,Ignore,
+Regions Code:REGION3,#ignore,Ignore,
+Regions Code:REGION4,#ignore,Ignore,
+Regions Code:REGION5,#ignore,Ignore,
+Regions Code:REGION6,#ignore,Ignore,
+Regions Code:REGION7,#ignore,Ignore,
+Regions Code:REGION8,#ignore,Ignore,
+Regions Code:REGION9,#ignore,Ignore,
+Regions Code:REGION10,#ignore,Ignore,
+Regions Code:REGION11,residentStatus,NonUSResident
+
+Case Count,value,{Number},measurementMethod,CDC_NNDSS_Diseases_AnnualTables,observationPeriod,P1Y
