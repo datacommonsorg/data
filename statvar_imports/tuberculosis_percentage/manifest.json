@@ -9,10 +9,10 @@
             "provenance_description": "Percentage of people diagnosed with a new episode of pulmonary TB whose disease was bacteriologically confirmed",
             "scripts": [
                 "download_who_tuberculosis.py",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=tuberculosisPercentage_input.csv --pv_map=tuberculosisPercentage_pvmap.csv --config_file=tuberculosisPercentage_metadata.csv --output_path=tuberculosisPercentage_output"
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/* --pv_map=tuberculosisPercentage_pvmap.csv --config_file=tuberculosisPercentage_metadata.csv --output_path=tuberculosisPercentage_output"
             ],
             "source_files": [
-                "input_files/*"
+                "input_files/*.csv"
             ],
             "import_inputs": [
                 {
