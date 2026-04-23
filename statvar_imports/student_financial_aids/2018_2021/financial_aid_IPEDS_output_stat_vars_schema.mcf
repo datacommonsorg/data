@@ -1,0 +1,103 @@
+Node: dcid:institutionControl
+typeOf: dcs:Property
+name: "institutionControl"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:InstitutionControlEnum
+isProvisional: dcs:True
+
+Node: dcid:InstitutionAll
+typeOf: dcid:InstitutionControlEnum
+name: "Institution All"
+isProvisional: dcs:True
+
+Node: dcid:institutionType
+typeOf: dcs:Property
+name: "institutionType"
+rangeIncludes: dcid:SeasonalAdjustmentEnum
+
+Node: dcid:institutionLevel
+typeOf: dcs:Property
+name: "institutionLevel"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:InstitutionLevelEnum
+isProvisional: dcs:True
+
+Node: dcid:InstitutionLevelEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "InstitutionLevelEnum"
+isProvisional: dcs:True
+
+Node: dcid:AllInstitution
+typeOf: dcid:InstitutionLevelEnum
+name: "All Institution"
+isProvisional: dcs:True
+
+Node: dcid:educationAid
+typeOf: dcs:Property
+name: "educationAid"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EducationAidEnum
+isProvisional: dcs:True
+
+Node: dcid:EducationAidEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "EducationAidEnum"
+isProvisional: dcs:True
+
+Node: dcid:AllStudents
+typeOf: dcid:EducationAidEnum
+name: "All Students"
+isProvisional: dcs:True
+
+Node: dcid:Received
+typeOf: dcid:InstitutionTypeEnum
+name: "Received"
+isProvisional: dcs:True
+
+Node: dcid:Graduation
+typeOf: dcid:InstitutionTypeEnum
+name: "Graduation"
+isProvisional: dcs:True
+
+Node: dcid:PellGrant
+typeOf: dcid:EducationAidEnum
+name: "Pell Grant"
+isProvisional: dcs:True
+
+Node: dcid:SubsidizedLoan
+typeOf: dcid:EducationAidEnum
+name: "Subsidized Loan"
+isProvisional: dcs:True
+
+Node: dcid:NoGrant
+typeOf: dcid:EducationAidEnum
+name: "No Grant"
+isProvisional: dcs:True
+
+Node: dcid:FourYearInstitution
+typeOf: dcid:InstitutionLevelEnum
+name: "Four Year Institution"
+isProvisional: dcs:True
+
+Node: dcid:FourYearBachelorsCohort
+typeOf: dcid:InstitutionLevelEnum
+name: "Four Year Bachelors Cohort"
+isProvisional: dcs:True
+
+Node: dcid:FourYearOtherThanBachelorsCohort
+typeOf: dcid:InstitutionLevelEnum
+name: "Four Year Other Than Bachelors Cohort"
+isProvisional: dcs:True
+
+Node: dcid:TwoYearInstitution
+typeOf: dcid:InstitutionLevelEnum
+name: "Two Year Institution"
+isProvisional: dcs:True
+
+Node: dcid:LessThanTwoYearInstitution
+typeOf: dcid:InstitutionLevelEnum
+name: "Less Than Two Year Institution"
+isProvisional: dcs:True
+
