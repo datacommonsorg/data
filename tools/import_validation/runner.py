@@ -179,16 +179,34 @@ class ValidationRunner:
             logging.warning("lint_report file exists but is empty: %s",
                             lint_report)
 
-        if counters_report and os.path.exists(counters_report) and os.path.getsize(
+        if counters_report:
+            self._load_counters(counters_report)
+
+    def _load_counters(self, counters_report: str):
+        """Loads counters from a CSV file and stores them in data_sources."""
+        if os.path.exists(counters_report) and os.path.getsize(
                 counters_report) > 0:
             try:
-                with open(counters_report, 'r') as f:
-                    self.data_sources['counters'] = json.load(f)
+                df = pd.read_csv(counters_report)
+                def clean_key(x):
+                    if not isinstance(x, str):
+                        return x
+                    if ':' in x:
+                        x = x.split(':', 1)[1]
+                    if '_' in x:
+                        x = x.rsplit('_', 1)[-1]
+                    return x
+
+                df['key'] = df['key'].apply(clean_key)
+                # Aggregate by summing if there are duplicates
+                df = df.groupby('key')['value'].sum().reset_index()
+                self.data_sources['counters'] = dict(
+                    zip(df['key'], df['value']))
             except Exception as e:
                 logging.error(
-                    f"JSON parse error while reading counters report at {counters_report}: {e}"
+                    f"CSV parse error while reading counters report at {counters_report}: {e}"
                 )
-        elif counters_report and os.path.exists(counters_report):
+        elif os.path.exists(counters_report):
             logging.warning("counters_report file exists but is empty: %s",
                             counters_report)
 

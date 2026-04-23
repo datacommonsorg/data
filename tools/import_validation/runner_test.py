@@ -13,6 +13,7 @@
 # limitations under the License.
 """Tests for the ValidationRunner."""
 
+import csv
 import unittest
 from unittest.mock import patch, MagicMock
 import pandas as pd
@@ -362,7 +363,7 @@ class TestCountersIntegration(unittest.TestCase):
         self.report_path = os.path.join(self.test_dir.name, 'report.json')
         self.differ_path = os.path.join(self.test_dir.name, 'differ.csv')
         self.output_path = os.path.join(self.test_dir.name, 'output.csv')
-        self.counters_path = os.path.join(self.test_dir.name, 'counters.json')
+        self.counters_path = os.path.join(self.test_dir.name, 'counters.csv')
 
     def tearDown(self):
         self.test_dir.cleanup()
@@ -385,9 +386,11 @@ class TestCountersIntegration(unittest.TestCase):
                     }]
                 }, f)
         
-        counters_data = {'invalid-lat-lng': 0}
-        with open(self.counters_path, 'w') as f:
-            json.dump(counters_data, f)
+        # Create sample CSV data for counters
+        with open(self.counters_path, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['key', 'value'])
+            writer.writerow(['invalid-lat-lng', 0])
 
         # 3. Run the runner
         runner = ValidationRunner(
@@ -403,4 +406,49 @@ class TestCountersIntegration(unittest.TestCase):
         mock_validator_instance.validate_counter_zero.assert_called_once()
         call_args, _ = mock_validator_instance.validate_counter_zero.call_args
         self.assertEqual(call_args[0]['invalid-lat-lng'], 0)
+
+    @patch('tools.import_validation.runner.Validator')
+    def test_runner_strips_counter_prefixes(self, MockValidator):
+        # 1. Setup the mock
+        mock_validator_instance = MockValidator.return_value
+        mock_validator_instance.validate_counter_max_threshold.return_value = ValidationResult(
+            ValidationStatus.PASSED, 'COUNTER_MAX_THRESHOLD')
+
+        # 2. Create test files with prefixed keys
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    'rules': [{
+                        'rule_id': 'check_dropped_points',
+                        'validator': 'COUNTER_MAX_THRESHOLD',
+                        'params': {
+                            'counter_name': 'dropped-points',
+                            'threshold': 10
+                        }
+                    }]
+                }, f)
+
+        # Create sample CSV data with prefixes and duplicates
+        with open(self.counters_path, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['key', 'value'])
+            writer.writerow(['2:prepare_output_dropped-points', 5])
+            writer.writerow(['3:write_statvar_mcf_dropped-points', 3])
+
+        # 3. Run the runner
+        runner = ValidationRunner(
+            validation_config_path=self.config_path,
+            stats_summary=self.stats_path,
+            differ_output=self.differ_path,
+            lint_report=self.report_path,
+            validation_output=self.output_path,
+            counters_report=self.counters_path)
+        runner.run_validations()
+
+        # 4. Assert that the correct method was called with aggregated counters
+        mock_validator_instance.validate_counter_max_threshold.assert_called_once()
+        call_args, _ = mock_validator_instance.validate_counter_max_threshold.call_args
+        # Values should be summed: 5 + 3 = 8
+        self.assertEqual(call_args[0]['dropped-points'], 8)
+
 
