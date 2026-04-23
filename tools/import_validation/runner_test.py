@@ -350,3 +350,57 @@ class TestValidationRunner(unittest.TestCase):
                 lint_report=self.report_path,
                 validation_output=self.output_path)
         self.assertIn("'stats' data source", str(context.exception))
+
+
+class TestCountersIntegration(unittest.TestCase):
+    '''Test Class for counter validations integration in ValidationRunner.'''
+
+    def setUp(self):
+        self.test_dir = tempfile.TemporaryDirectory()
+        self.config_path = os.path.join(self.test_dir.name, 'config.json')
+        self.stats_path = os.path.join(self.test_dir.name, 'stats.csv')
+        self.report_path = os.path.join(self.test_dir.name, 'report.json')
+        self.differ_path = os.path.join(self.test_dir.name, 'differ.csv')
+        self.output_path = os.path.join(self.test_dir.name, 'output.csv')
+        self.counters_path = os.path.join(self.test_dir.name, 'counters.json')
+
+    def tearDown(self):
+        self.test_dir.cleanup()
+
+    @patch('tools.import_validation.runner.Validator')
+    def test_runner_loads_counters_and_calls_validator(self, MockValidator):
+        # 1. Setup the mock
+        mock_validator_instance = MockValidator.return_value
+        mock_validator_instance.validate_counter_zero.return_value = ValidationResult(
+            ValidationStatus.PASSED, 'COUNTER_ZERO_CHECK')
+
+        # 2. Create test files
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    'rules': [{
+                        'rule_id': 'check_zero_errors',
+                        'validator': 'COUNTER_ZERO_CHECK',
+                        'params': {'counter_name': 'invalid-lat-lng'}
+                    }]
+                }, f)
+        
+        counters_data = {'invalid-lat-lng': 0}
+        with open(self.counters_path, 'w') as f:
+            json.dump(counters_data, f)
+
+        # 3. Run the runner
+        runner = ValidationRunner(
+            validation_config_path=self.config_path,
+            stats_summary=self.stats_path,
+            differ_output=self.differ_path,
+            lint_report=self.report_path,
+            validation_output=self.output_path,
+            counters_report=self.counters_path)
+        runner.run_validations()
+
+        # 4. Assert that the correct method was called on the mock with loaded counters
+        mock_validator_instance.validate_counter_zero.assert_called_once()
+        call_args, _ = mock_validator_instance.validate_counter_zero.call_args
+        self.assertEqual(call_args[0]['invalid-lat-lng'], 0)
+

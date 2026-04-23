@@ -1031,3 +1031,243 @@ class Validator:
                 ValidationStatus.DATA_ERROR,
                 'GOLDENS_CHECK',
                 message=f"Error during golden validation: {e}")
+
+    def validate_counter_zero(self, counters: dict,
+                              params: dict) -> ValidationResult:
+        """Checks that a specific counter is strictly zero.
+
+    Args:
+      counters: A dictionary containing the counter values.
+      params: A dictionary containing the validation parameters, which must
+        have a 'counter_name' key.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if 'counter_name' not in params:
+            return ValidationResult(
+                ValidationStatus.CONFIG_ERROR,
+                'COUNTER_ZERO_CHECK',
+                message="Configuration error: 'counter_name' key not specified."
+            )
+
+        counter_name = params['counter_name']
+        value = counters.get(counter_name, 0)
+
+        if value > 0:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'COUNTER_ZERO_CHECK',
+                message=f"Counter '{counter_name}' is {value}, expected 0.",
+                details={
+                    'counter_name': counter_name,
+                    'actual_value': value,
+                    'expected_value': 0
+                })
+
+        return ValidationResult(ValidationStatus.PASSED,
+                                'COUNTER_ZERO_CHECK',
+                                details={
+                                    'counter_name': counter_name,
+                                    'actual_value': value,
+                                    'expected_value': 0
+                                })
+
+    def validate_counter_max_threshold(self, counters: dict,
+                                       params: dict) -> ValidationResult:
+        """Checks that a specific counter value does not exceed a maximum threshold.
+
+    Args:
+      counters: A dictionary containing the counter values.
+      params: A dictionary containing the validation parameters, which must
+        have 'counter_name' and 'threshold' keys.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if 'counter_name' not in params or 'threshold' not in params:
+            return ValidationResult(
+                ValidationStatus.CONFIG_ERROR,
+                'COUNTER_MAX_THRESHOLD',
+                message=
+                "Configuration error: 'counter_name' and 'threshold' must be specified."
+            )
+
+        counter_name = params['counter_name']
+        threshold = params['threshold']
+        value = counters.get(counter_name, 0)
+
+        if value > threshold:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'COUNTER_MAX_THRESHOLD',
+                message=
+                f"Counter '{counter_name}' is {value}, which exceeds the threshold of {threshold}.",
+                details={
+                    'counter_name': counter_name,
+                    'actual_value': value,
+                    'threshold': threshold
+                })
+
+        return ValidationResult(ValidationStatus.PASSED,
+                                'COUNTER_MAX_THRESHOLD',
+                                details={
+                                    'counter_name': counter_name,
+                                    'actual_value': value,
+                                    'threshold': threshold
+                                })
+
+    def validate_counter_ratio_threshold(self, counters: dict,
+                                         params: dict) -> ValidationResult:
+        """Checks that the ratio of two counters (percentage) does not exceed a threshold.
+
+    Args:
+      counters: A dictionary containing the counter values.
+      params: A dictionary containing the validation parameters, which must
+        have 'subset_counter', 'total_counter', and 'threshold_percent' keys.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if 'subset_counter' not in params or 'total_counter' not in params or 'threshold_percent' not in params:
+            return ValidationResult(
+                ValidationStatus.CONFIG_ERROR,
+                'COUNTER_RATIO_THRESHOLD',
+                message=
+                "Configuration error: 'subset_counter', 'total_counter', and 'threshold_percent' must be specified."
+            )
+
+        subset_counter = params['subset_counter']
+        total_counter = params['total_counter']
+        threshold_percent = params['threshold_percent']
+
+        subset_value = counters.get(subset_counter, 0)
+        total_value = counters.get(total_counter, 0)
+
+        if total_value == 0:
+            if subset_value > 0:
+                percent = 100.0
+            else:
+                percent = 0.0
+        else:
+            percent = (subset_value / total_value) * 100
+
+        if percent > threshold_percent:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'COUNTER_RATIO_THRESHOLD',
+                message=
+                f"Ratio of '{subset_counter}' to '{total_counter}' is {percent:.2f}%, which exceeds the threshold of {threshold_percent}%.",
+                details={
+                    'subset_counter': subset_counter,
+                    'subset_value': subset_value,
+                    'total_counter': total_counter,
+                    'total_value': total_value,
+                    'percent': percent,
+                    'threshold_percent': threshold_percent
+                })
+
+        return ValidationResult(ValidationStatus.PASSED,
+                                'COUNTER_RATIO_THRESHOLD',
+                                details={
+                                    'subset_counter': subset_counter,
+                                    'subset_value': subset_value,
+                                    'total_counter': total_counter,
+                                    'total_value': total_value,
+                                    'percent': percent,
+                                    'threshold_percent': threshold_percent
+                                })
+
+    def validate_counter_sum_integrity(self, counters: dict,
+                                       params: dict) -> ValidationResult:
+        """Checks that the sum of constituent counters equals a total counter.
+
+    Args:
+      counters: A dictionary containing the counter values.
+      params: A dictionary containing the validation parameters, which must
+        have 'total_counter' and 'constituent_counters' keys.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if 'total_counter' not in params or 'constituent_counters' not in params:
+            return ValidationResult(
+                ValidationStatus.CONFIG_ERROR,
+                'COUNTER_SUM_INTEGRITY',
+                message=
+                "Configuration error: 'total_counter' and 'constituent_counters' must be specified."
+            )
+
+        total_counter = params['total_counter']
+        constituent_counters = params['constituent_counters']
+
+        total_value = counters.get(total_counter, 0)
+        constituent_sum = sum(
+            counters.get(c, 0) for c in constituent_counters)
+
+        if total_value != constituent_sum:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'COUNTER_SUM_INTEGRITY',
+                message=
+                f"Sum of constituent counters ({constituent_sum}) does not equal total counter '{total_counter}' ({total_value}).",
+                details={
+                    'total_counter': total_counter,
+                    'total_value': total_value,
+                    'constituent_counters': constituent_counters,
+                    'constituent_sum': constituent_sum
+                })
+
+        return ValidationResult(ValidationStatus.PASSED,
+                                'COUNTER_SUM_INTEGRITY',
+                                details={
+                                    'total_counter': total_counter,
+                                    'total_value': total_value,
+                                    'constituent_counters': constituent_counters,
+                                    'constituent_sum': constituent_sum
+                                })
+
+    def validate_counter_min_yield(self, counters: dict,
+                                   params: dict) -> ValidationResult:
+        """Checks that a specific counter is above a minimum yield.
+
+    Args:
+      counters: A dictionary containing the counter values.
+      params: A dictionary containing the validation parameters, which must
+        have 'counter_name' and 'min_yield' keys.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if 'counter_name' not in params or 'min_yield' not in params:
+            return ValidationResult(
+                ValidationStatus.CONFIG_ERROR,
+                'COUNTER_MIN_YIELD',
+                message=
+                "Configuration error: 'counter_name' and 'min_yield' must be specified."
+            )
+
+        counter_name = params['counter_name']
+        min_yield = params['min_yield']
+        value = counters.get(counter_name, 0)
+
+        if value < min_yield:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'COUNTER_MIN_YIELD',
+                message=
+                f"Counter '{counter_name}' is {value}, which is below the minimum yield of {min_yield}.",
+                details={
+                    'counter_name': counter_name,
+                    'actual_value': value,
+                    'min_yield': min_yield
+                })
+
+        return ValidationResult(ValidationStatus.PASSED,
+                                'COUNTER_MIN_YIELD',
+                                details={
+                                    'counter_name': counter_name,
+                                    'actual_value': value,
+                                    'min_yield': min_yield
+                                })
+
