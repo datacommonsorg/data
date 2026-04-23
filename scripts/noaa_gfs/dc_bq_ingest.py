@@ -120,7 +120,7 @@ def run_mapping_query(bq_client):
     )
     SELECT 
         st.placeName,
-        st.variableMeasured,
+        REGEXP_REPLACE(st.variableMeasured, r'^dcid:', '') AS variable_measured,
         v.name,
         CAST(st.value AS STRING),
         CAST(st.observationDate AS STRING),
@@ -132,7 +132,7 @@ def run_mapping_query(bq_client):
         p.name
     FROM `{staging_table}` AS st
     LEFT JOIN `{variable_table}` AS v
-        ON st.variableMeasured = v.id
+        ON REGEXP_REPLACE(st.variableMeasured, r'^dcid:', '') = v.id
     LEFT JOIN `{place_table}` AS p
         ON st.placeName = p.id;
     """
