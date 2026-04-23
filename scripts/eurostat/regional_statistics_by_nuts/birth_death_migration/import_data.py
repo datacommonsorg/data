@@ -182,7 +182,9 @@ def clean_data(preprocessed_df, output_path):
         logging.info('Cleaning process start. ')
 
         # Skip redundant IDs
-        ids_to_skip = ['HUX', 'HUXX', 'HUXXX', 'FRX', 'FRXX', 'FRXXX', 'EEXX', 'EEXXX']
+        ids_to_skip = [
+            'HUX', 'HUXX', 'HUXXX', 'FRX', 'FRXX', 'FRXXX', 'EEXX', 'EEXXX'
+        ]
         mask_to_skip = preprocessed_df['geo'].isin(ids_to_skip)
         if mask_to_skip.any():
             skipped_data = preprocessed_df[mask_to_skip]
