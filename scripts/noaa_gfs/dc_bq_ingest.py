@@ -34,8 +34,10 @@ flags.DEFINE_string('gcs_prefix',
 flags.DEFINE_string('state_path',
                     'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json',
                     'Path to state.json in GCS.')
-flags.DEFINE_string('dataset_id', 'data_commons_noaa_gfs',
+flags.DEFINE_string('dataset_id', 'NOAA_GFS_data_commons',
                     'BigQuery Dataset ID.')
+flags.DEFINE_string('staging_dataset_id', 'NOAA_GFS_Staging',
+                    'BigQuery Staging Dataset ID.')
 flags.DEFINE_string('table_id', 'Observation', 'BigQuery Table ID.')
 flags.DEFINE_string('staging_table_id', 'Observation_Staging',
                     'Temporary Staging Table ID.')
@@ -54,10 +56,11 @@ def load_state():
 
     try:
         state_data = blob.download_as_text()
+        data = json.loads(state_data)
         logging.info(
-            f"Successfully loaded state from gs://{FLAGS.bucket_name}/{FLAGS.state_path}"
+            f"Successfully loaded state: {data.get('bq_ingest')} from gs://{FLAGS.bucket_name}/{FLAGS.state_path}"
         )
-        return json.loads(state_data)
+        return data
     except exceptions.NotFound:
         logging.warning("State file not found in GCS. Starting from scratch.")
         return {}
@@ -71,10 +74,9 @@ def update_bq_state(latest_date, latest_cycle):
         blob = bucket.blob(FLAGS.state_path)
 
         # Download existing to preserve 'date' and 'cycle' from grib_statvar_processor.py
-        try:
+        state = {}
+        if blob.exists():
             state = json.loads(blob.download_as_text())
-        except exceptions.NotFound:
-            state = {}
 
         state['bq_ingest'] = {
             "date":
@@ -98,35 +100,50 @@ def run_mapping_query(bq_client):
     Executes the SQL transformation to map data from Staging to Final table.
     """
     final_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.table_id}"
-    staging_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.staging_table_id}"
+    staging_table = f"{FLAGS.project_id}.{FLAGS.staging_dataset_id}.{FLAGS.staging_table_id}"
+    variable_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.Variable"
+    place_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.Place"
 
     query = f"""
     INSERT INTO `{final_table}` (
         observation_about,
         variable_measured,
+        variable_name,
         value,
         observation_date,
         measurement_method,
         unit,
-        prov_id
+        prov_id,
+        provenance_name,
+        geo_coordinates,
+        place_name
     )
     SELECT 
-        placeName,
-        variableMeasured,
-        CAST(value AS STRING),
-        CAST(observationDate AS STRING),
-        measurementMethod,
-        unit,
-        'dc/base/NOAA_GlobalForecastSystem'
-    FROM `{staging_table}`;
+        st.placeName,
+        REGEXP_REPLACE(st.variableMeasured, r'^dcid:', '') AS variable_measured,
+        v.name,
+        CAST(st.value AS STRING),
+        CAST(st.observationDate AS STRING),
+        st.measurementMethod,
+        st.unit,
+        'dc/base/NOAA_GlobalForecastSystem',
+        'NOAA_GlobalForecastSystem',
+        ST_GEOGPOINT(st.longitude, st.latitude),
+        p.name
+    FROM `{staging_table}` AS st
+    LEFT JOIN `{variable_table}` AS v
+        ON REGEXP_REPLACE(st.variableMeasured, r'^dcid:', '') = v.id
+    LEFT JOIN `{place_table}` AS p
+        ON st.placeName = p.id;
     """
 
     try:
+        # Run Ingestion
         logging.info("Starting transformation query...")
         query_job = bq_client.query(query)
         query_job.result()  # Wait for completion
 
-        # Optional: Truncate staging table after successful migration
+        # Truncate staging table after successful migration
         bq_client.query(f"TRUNCATE TABLE `{staging_table}`").result()
         logging.info("Transformation complete and staging table cleared.")
         return True
@@ -139,7 +156,7 @@ def upload_gcs_to_staging(bq_client, gcs_uri):
     """
     Loads raw CSV data into the Staging table.
     """
-    table_ref = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.staging_table_id}"
+    table_ref = f"{FLAGS.project_id}.{FLAGS.staging_dataset_id}.{FLAGS.staging_table_id}"
 
     job_config = bigquery.LoadJobConfig(
         source_format=bigquery.SourceFormat.CSV,
@@ -181,7 +198,9 @@ def main(argv):
             continue
 
         # Match YYYYMMDD and HH cycle from filename
-        match = re.search(r'output_(\d{8})_(\d{2})_', blob.name)
+        filename = blob.name.split('/')[-1]
+        match = re.fullmatch(r'noaa_gfs_output_(\d{8})_(\d{2})_\d{3}\.csv',
+                             filename)
         if match:
             f_date, f_cycle = match.groups()
             if f"{f_date}_{f_cycle}" > last_key:
@@ -196,7 +215,7 @@ def main(argv):
 
     # 3. Process Batch
     # Ensure staging is clean before starting a new batch
-    staging_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.staging_table_id}"
+    staging_table = f"{FLAGS.project_id}.{FLAGS.staging_dataset_id}.{FLAGS.staging_table_id}"
     bq_client.query(f"TRUNCATE TABLE `{staging_table}`").result()
 
     success_count = 0
