@@ -1,0 +1,6 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+TB incidence,populationType,MedicalConditionIncident,measuredProperty,count,medicalCondition,Tuberculosis,measurementMethod,WorldHealthOrganizationEstimates,scalingFactor,100000,measurementDenominator,Count_Person
+HIV-positive TB incidence,populationType,MedicalConditionIncident,measuredProperty,count,medicalCondition,TuberculosisAndHIV,measurementMethod,WorldHealthOrganizationEstimates,scalingFactor,100000,measurementDenominator,Count_Person
+YEAR,observationDate,{Number},,,,,,,,,,
+iso3,observationAbout,country/{Data},,,,,,,,,,
+VALUE,value,{Number},,,,,,,,,,
