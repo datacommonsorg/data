@@ -15,6 +15,7 @@
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
+    dir: 'import-automation/workflow/ingestion-helper'
     args: ['build', '-t', '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:$_TAG', '-t', '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:latest', '.']
   
   # Push the container image - Needed before deployment
