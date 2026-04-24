@@ -12,6 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Terraform deployment for Data Commons Import Automation Workflow
+#
+# Usage:
+# - Authenticate and set up application default credentials for Terraform to access GCP using 'gcloud auth login --update-adc'.
+# - Obtain DataCommons API key: Get an API key portal https://apikeys.datacommons.org/ to be used as the `dc_api_key` variable.
+# - Deploy the infrastructure and resources defined in this configuration using 'terraform apply'.
+# - The output service account needs to have required permissions to access external resources.
+#
+# Input variables:
+# - GCP project id
+# - DC API key
+#
+# This file sets up:
+# - Necessary GCP APIs
+# - Secret Manager for the import-config secret
+# - GCS Buckets for imports, mounting, and Dataflow templates
+# - Spanner Instance and Database with schema
+# - Artifact Registry for hosting Docker images (Flex Template & Executor)
+# - Pub/Sub Topic and Subscription for triggering imports
+# - Cloud Functions, Workflows, and Ingestion Pipeline
+# - Unified Service Account with necessary IAM roles for Workflows, Functions, and Pub/Sub
+
 terraform {
   required_providers {
     google = {
