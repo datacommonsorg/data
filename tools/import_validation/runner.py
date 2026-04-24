@@ -63,7 +63,7 @@ class ValidationRunner:
             'DELETED_RECORDS_PERCENT':
                 (self.validator.validate_deleted_records_percent, 'differ'),
             'EMPTY_IMPORT_CHECK':
-                (self.validator.validate_empty_import, 'differ'),
+                (self.validator.validate_empty_import, 'lint'),
             'MISSING_REFS_COUNT':
                 (self.validator.validate_missing_refs_count, 'lint'),
             'LINT_ERROR_COUNT':
@@ -216,9 +216,7 @@ class ValidationRunner:
                 result = validation_func(self.data_sources['stats'],
                                          self.data_sources['differ'],
                                          rule_params)
-            elif validator_name in [
-                    'DELETED_RECORDS_PERCENT', 'EMPTY_IMPORT_CHECK'
-            ]:
+            elif validator_name in ['DELETED_RECORDS_PERCENT']:
                 result = validation_func(
                     self.data_sources['differ'],
                     self.data_sources.get('differ_summary'), rule_params)
