@@ -25,12 +25,11 @@ WORKDIR /app
 # Install protobuf compiler and curl
 RUN apt-get update && apt-get install -y protobuf-compiler curl && rm -rf /var/lib/apt/lists/*
 
-# Install production dependencies.
-COPY requirements.txt .
-RUN uv pip install --system --no-cache -r requirements.txt
-
 # Copy local code to the container image.
 COPY . .
+
+# Install production dependencies using uv.
+RUN uv pip install --system --no-cache .
 
 # Fetch proto file from GitHub
 RUN curl -o storage.proto https://raw.githubusercontent.com/datacommonsorg/import/master/pipeline/data/src/main/proto/storage.proto
