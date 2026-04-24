@@ -34,8 +34,10 @@ flags.DEFINE_string('gcs_prefix',
 flags.DEFINE_string('state_path',
                     'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json',
                     'Path to state.json in GCS.')
-flags.DEFINE_string('dataset_id', 'data_commons_noaa_gfs',
+flags.DEFINE_string('dataset_id', 'NOAA_GFS_data_commons',
                     'BigQuery Dataset ID.')
+flags.DEFINE_string('staging_dataset_id', 'NOAA_GFS_Staging',
+                    'BigQuery Staging Dataset ID.')
 flags.DEFINE_string('table_id', 'Observation', 'BigQuery Table ID.')
 flags.DEFINE_string('staging_table_id', 'Observation_Staging',
                     'Temporary Staging Table ID.')
@@ -98,27 +100,41 @@ def run_mapping_query(bq_client):
     Executes the SQL transformation to map data from Staging to Final table.
     """
     final_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.table_id}"
-    staging_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.staging_table_id}"
+    staging_table = f"{FLAGS.project_id}.{FLAGS.staging_dataset_id}.{FLAGS.staging_table_id}"
+    variable_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.Variable"
+    place_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.Place"
 
     query = f"""
     INSERT INTO `{final_table}` (
         observation_about,
         variable_measured,
+        variable_name,
         value,
         observation_date,
         measurement_method,
         unit,
-        prov_id
+        prov_id,
+        provenance_name,
+        geo_coordinates,
+        place_name
     )
     SELECT 
-        placeName,
-        variableMeasured,
-        CAST(value AS STRING),
-        CAST(observationDate AS STRING),
-        measurementMethod,
-        unit,
-        'dc/base/NOAA_GlobalForecastSystem'
-    FROM `{staging_table}`;
+        st.placeName,
+        REGEXP_REPLACE(st.variableMeasured, r'^dcid:', '') AS variable_measured,
+        v.name,
+        CAST(st.value AS STRING),
+        CAST(st.observationDate AS STRING),
+        st.measurementMethod,
+        st.unit,
+        'dc/base/NOAA_GlobalForecastSystem',
+        'NOAA_GlobalForecastSystem',
+        ST_GEOGPOINT(st.longitude, st.latitude),
+        p.name
+    FROM `{staging_table}` AS st
+    LEFT JOIN `{variable_table}` AS v
+        ON REGEXP_REPLACE(st.variableMeasured, r'^dcid:', '') = v.id
+    LEFT JOIN `{place_table}` AS p
+        ON st.placeName = p.id;
     """
 
     try:
@@ -140,7 +156,7 @@ def upload_gcs_to_staging(bq_client, gcs_uri):
     """
     Loads raw CSV data into the Staging table.
     """
-    table_ref = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.staging_table_id}"
+    table_ref = f"{FLAGS.project_id}.{FLAGS.staging_dataset_id}.{FLAGS.staging_table_id}"
 
     job_config = bigquery.LoadJobConfig(
         source_format=bigquery.SourceFormat.CSV,
@@ -199,7 +215,7 @@ def main(argv):
 
     # 3. Process Batch
     # Ensure staging is clean before starting a new batch
-    staging_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.staging_table_id}"
+    staging_table = f"{FLAGS.project_id}.{FLAGS.staging_dataset_id}.{FLAGS.staging_table_id}"
     bq_client.query(f"TRUNCATE TABLE `{staging_table}`").result()
 
     success_count = 0
