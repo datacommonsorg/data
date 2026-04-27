@@ -17,6 +17,7 @@ from google.cloud import bigquery
 import logging
 from flask import jsonify
 import os
+from place_aggregator import PlaceAggregator
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -44,30 +45,23 @@ def aggregation_helper(request):
     logging.info(f"Received request for importList: {import_list}")
     results = []
     try:
+        # Initialize PlaceAggregator
+        place_aggregator = PlaceAggregator(bq_client)
+        
         for import_item in import_list:
             import_name = import_item.get('importName')
 
-            query = None
-            # Define specific queries based on importName
-            if import_name:
-                query = """
-                    SELECT @import_name as import_name, CURRENT_TIMESTAMP() as execution_time
-                 """
+            # Scaffolding: Run place aggregation for a specific import or just as a test
+            if import_name == 'CDCMortality': # Using the example from legacy doc
+                logging.info(f"Triggering place aggregation for {import_name}")
+                # Defaulting to California and 2020 for scaffolding
+                agg_results = place_aggregator.aggregate_population(parent_place="geoId/06", date="2020")
+                results.extend(agg_results)
             else:
-                logging.info('Skipping aggregation logic')
+                logging.info(f"Skipping aggregation logic for {import_name}")
                 continue
 
-            if query:
-                job_config = bigquery.QueryJobConfig(query_parameters=[
-                    bigquery.ScalarQueryParameter("import_name", "STRING",
-                                                  import_name),
-                ])
-                query_job = bq_client.query(query, job_config=job_config)
-                query_results = query_job.result()
-                for row in query_results:
-                    results.append(dict(row))
-
-        return jsonify({"status": "success"}), 200
+        return jsonify({"status": "success", "results": results}), 200
 
     except Exception as e:
         logging.error(f"Aggregation failed: {e}")
