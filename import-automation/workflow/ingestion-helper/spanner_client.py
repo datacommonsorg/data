@@ -20,6 +20,7 @@ from google.cloud.spanner_admin_database_v1.types import UpdateDatabaseDdlReques
 from google.cloud.spanner_v1 import Transaction
 from google.cloud.spanner_v1.param_types import STRING, TIMESTAMP, Array, INT64
 from datetime import datetime, timezone
+from jinja2 import Template
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -30,8 +31,9 @@ class SpannerClient:
     and getting/updating import statuses.
     """
     _LOCK_ID = "global_ingestion_lock"
+    _EMBEDDING_MODEL_PATH = "projects/{project}/locations/{location}/publishers/google/models/{model}"
 
-    def __init__(self, project_id: str, instance_id: str, database_id: str):
+    def __init__(self, project_id: str, instance_id: str, database_id: str, location: str = None, model_id: str = None):
         """Initializes a Spanner client and connects to a specific database."""
         spanner_client = spanner.Client(
             project=project_id,
@@ -41,6 +43,17 @@ class SpannerClient:
         database = instance.database(database_id)
         logging.info(f"Successfully initialized database: {database.name}")
         self.database = database
+        self.project_id = project_id
+        self.location = location
+        self.model_id = model_id
+
+    def _get_embeddings_endpoint(self) -> str:
+        """Returns the parameterized embedding model endpoint."""
+        return self._EMBEDDING_MODEL_PATH.format(
+            project=self.project_id,
+            location=self.location or "us-central1",
+            model=self.model_id or "text-embedding-005"
+        )
 
     def acquire_lock(self, workflow_id: str, timeout: int) -> bool:
         """Attempts to acquire the global ingestion lock.
@@ -399,29 +412,64 @@ class SpannerClient:
                 f'Error updating version history for {import_name}: {e}')
             raise
 
-    def initialize_database(self):
+    def initialize_database(self, enable_embeddings=False):
         """Initializes the database by creating all required tables and proto bundles."""
         logging.info("Initializing database...")
         
+        query = """
+            SELECT 'table' as type, table_name as name FROM information_schema.tables WHERE table_schema = ''
+            UNION ALL
+            SELECT 'index' as type, index_name as name FROM information_schema.indexes WHERE table_schema = '' AND table_name = 'NodeEmbedding'
+            UNION ALL
+            SELECT 'model' as type, model_name as name FROM information_schema.models WHERE model_schema = ''
+        """
+
+        existing_tables = []
+        existing_indexes = []
+        existing_models = []
+        
         with self.database.snapshot() as snapshot:
-            results = snapshot.execute_sql(
-                "SELECT table_name FROM information_schema.tables WHERE table_schema = ''"
-            )
-            existing_tables = [row[0] for row in results]
-            
+            results = snapshot.execute_sql(query)
+            for row in results:
+                if len(row) < 2:
+                    logging.warning(f"Invalid row from query: {row}")
+                    continue
+                obj_type = row[0]
+                obj_name = row[1]
+                if obj_type == 'table':
+                    existing_tables.append(obj_name)
+                elif obj_type == 'index':
+                    existing_indexes.append(obj_name)
+                elif obj_type == 'model':
+                    existing_models.append(obj_name)
+        
         logging.info(f"Existing tables: {existing_tables}")
-        
+        logging.info(f"Existing indexes: {existing_indexes}")
+        logging.info(f"Existing models: {existing_models}")
+
         required_tables = ["Node", "Edge", "Observation", "ImportStatus", "IngestionHistory", "ImportVersionHistory", "IngestionLock"]
+        required_indexes = []
+        required_models = []
         
+        if enable_embeddings:
+            required_tables.append("NodeEmbedding")
+            required_indexes.append("NodeEmbeddingIndex")
+            required_models.append("NodeEmbeddingModel")
+            
         missing_tables = [t for t in required_tables if t not in existing_tables]
+        missing_indexes = [i for i in required_indexes if i not in existing_indexes]
+        missing_models = [m for m in required_models if m not in existing_models]
         
-        if not missing_tables:
-            logging.info("All tables already exist.")
+        total_required = len(required_tables) + len(required_indexes) + len(required_models)
+        total_missing = len(missing_tables) + len(missing_indexes) + len(missing_models)
+        
+        if total_missing == 0:
+            logging.info("Database is properly initialized.")
             return
             
-        if len(missing_tables) < len(required_tables):
+        if total_missing < total_required:
             raise RuntimeError(
-                f"Database inconsistent state. Missing tables: {missing_tables}. Please clean up manually."
+                f"Database inconsistent state. Missing tables: {missing_tables}, missing indexes: {missing_indexes}, missing models: {missing_models}. Please clean up manually."
             )
             
         logging.info("Creating all tables and proto bundles...")
@@ -431,7 +479,18 @@ class SpannerClient:
         try:
             with open(schema_path, 'r') as f:
                 schema_content = f.read()
+            
             ddl_statements = [s.strip() for s in schema_content.split(';') if s.strip()]
+            
+            if enable_embeddings:
+                embeddings_endpoint = self._get_embeddings_endpoint()
+                embedding_schema_path = os.path.join(os.path.dirname(__file__), 'embedding_schema.sql')
+                logging.info(f"Reading embedding schema from {embedding_schema_path}")
+                with open(embedding_schema_path, 'r') as f:
+                    embedding_schema_content = f.read()
+                embedding_schema_content = Template(embedding_schema_content).render(embeddings_endpoint=embeddings_endpoint)
+                embedding_ddl_statements = [s.strip() for s in embedding_schema_content.split(';') if s.strip()]
+                ddl_statements.extend(embedding_ddl_statements)
         except Exception as e:
             logging.error(f"Failed to read schema file: {e}")
             raise
