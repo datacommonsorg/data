@@ -432,6 +432,7 @@ class SpannerClient:
             results = snapshot.execute_sql(query)
             for row in results:
                 if len(row) < 2:
+                    logging.warning(f"Invalid row from query: {row}")
                     continue
                 obj_type = row[0]
                 obj_name = row[1]
@@ -463,7 +464,7 @@ class SpannerClient:
         total_missing = len(missing_tables) + len(missing_indexes) + len(missing_models)
         
         if total_missing == 0:
-            logging.info("Database is properly intiialized.")
+            logging.info("Database is properly initialized.")
             return
             
         if total_missing < total_required:
