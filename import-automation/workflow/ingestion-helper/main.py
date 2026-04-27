@@ -24,6 +24,7 @@ flags.DEFINE_string('spanner_database_id',
 flags.DEFINE_string('gcs_bucket_id', os.environ.get('GCS_BUCKET_ID'),
                     'GCS Bucket ID')
 flags.DEFINE_string('location', os.environ.get('LOCATION'), 'Location')
+flags.DEFINE_bool('enable_embeddings', os.environ.get('ENABLE_EMBEDDINGS', 'false').lower() == 'true', 'Enable embeddings')
 
 if not FLAGS.is_parsed():
     FLAGS(['ingestion_helper'])
@@ -196,7 +197,8 @@ def ingestion_helper(request):
     elif actionType == 'initialize_database':
         # Initializes the database by creating all required tables and proto bundles.
         logging.info("Action: initialize_database")
-        spanner.initialize_database()
+        enable_embeddings = request_json.get('enableEmbeddings', FLAGS.enable_embeddings)
+        spanner.initialize_database(enable_embeddings=enable_embeddings)
         return ('OK', 200)
     else:
         return (f'Unknown actionType: {actionType}', 400)

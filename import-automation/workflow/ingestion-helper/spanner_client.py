@@ -401,7 +401,7 @@ class SpannerClient:
                 f'Error updating version history for {import_name}: {e}')
             raise
 
-    def initialize_database(self):
+    def initialize_database(self, enable_embeddings=False):
         """Initializes the database by creating all required tables and proto bundles."""
         logging.info("Initializing database...")
         
@@ -425,10 +425,17 @@ class SpannerClient:
         logging.info(f"Existing indexes: {existing_indexes}")
         logging.info(f"Existing models: {existing_models}")
         
-        required_tables = ["Node", "Edge", "Observation", "NodeEmbedding", "ImportStatus", "IngestionHistory", "ImportVersionHistory", "IngestionLock"]
-        required_indexes = ["NodeEmbeddingIndex"]
-        required_models = ["NodeEmbeddingModel"]
+
         
+        required_tables = ["Node", "Edge", "Observation", "ImportStatus", "IngestionHistory", "ImportVersionHistory", "IngestionLock"]
+        required_indexes = []
+        required_models = []
+        
+        if enable_embeddings:
+            required_tables.append("NodeEmbedding")
+            required_indexes.append("NodeEmbeddingIndex")
+            required_models.append("NodeEmbeddingModel")
+            
         missing_tables = [t for t in required_tables if t not in existing_tables]
         missing_indexes = [i for i in required_indexes if i not in existing_indexes]
         missing_models = [m for m in required_models if m not in existing_models]
@@ -453,10 +460,18 @@ class SpannerClient:
             with open(schema_path, 'r') as f:
                 schema_content = f.read()
             
-            embeddings_endpoint = f"//aiplatform.googleapis.com/projects/{self.project_id}/locations/us-central1/publishers/google/models/text-embedding-005"
-                
-            schema_content = Template(schema_content).render(embeddings_endpoint=embeddings_endpoint)
             ddl_statements = [s.strip() for s in schema_content.split(';') if s.strip()]
+            
+            if enable_embeddings:
+                embeddings_endpoint = f"//aiplatform.googleapis.com/projects/{self.project_id}/locations/us-central1/publishers/google/models/text-embedding-005"
+                
+                embedding_schema_path = os.path.join(os.path.dirname(__file__), 'embedding_schema.sql')
+                logging.info(f"Reading embedding schema from {embedding_schema_path}")
+                with open(embedding_schema_path, 'r') as f:
+                    embedding_schema_content = f.read()
+                embedding_schema_content = Template(embedding_schema_content).render(embeddings_endpoint=embeddings_endpoint)
+                embedding_ddl_statements = [s.strip() for s in embedding_schema_content.split(';') if s.strip()]
+                ddl_statements.extend(embedding_ddl_statements)
         except Exception as e:
             logging.error(f"Failed to read schema file: {e}")
             raise

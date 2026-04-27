@@ -48,36 +48,7 @@ CREATE TABLE Observation (
   is_dc_aggregate BOOL,
 ) PRIMARY KEY(observation_about, variable_measured, facet_id);
 
-CREATE TABLE NodeEmbedding (
-  subject_id STRING(1024) NOT NULL,
-  embedding_content STRING(MAX),
-  types ARRAY<STRING(1024)>,
-  embeddings ARRAY<FLOAT64>(vector_length=>768)
-) PRIMARY KEY(subject_id),
-INTERLEAVE IN PARENT Node ON DELETE CASCADE;
 
-CREATE VECTOR INDEX NodeEmbeddingIndex
-ON NodeEmbedding(embeddings)
-WHERE embeddings IS NOT NULL
-OPTIONS (
-  distance_type = 'COSINE',
-  flat_index = true
-);
-
-CREATE MODEL NodeEmbeddingModel
-INPUT(
-  content STRING(MAX),
-  task_type STRING(MAX),
-)
-OUTPUT(
-  embeddings
-    STRUCT<
-      statistics STRUCT<truncated BOOL, token_count FLOAT64>,
-      values ARRAY<FLOAT64>>
-)
-REMOTE OPTIONS (
-  endpoint = '{{ embeddings_endpoint }}'
-)
 
 CREATE TABLE ImportStatus (
   ImportName STRING(MAX) NOT NULL,
