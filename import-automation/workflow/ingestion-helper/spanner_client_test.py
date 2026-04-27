@@ -34,9 +34,11 @@ class TestSpannerClient(unittest.TestCase):
         # Mock snapshot results (all tables exist)
         mock_snapshot = MagicMock()
         mock_db.snapshot.return_value.__enter__.return_value = mock_snapshot
-        mock_snapshot.execute_sql.return_value = [
-            ["Node"], ["Edge"], ["Observation"], ["ImportStatus"],
-            ["IngestionHistory"], ["ImportVersionHistory"], ["IngestionLock"]
+        mock_snapshot.execute_sql.side_effect = [
+            [["Node"], ["Edge"], ["Observation"], ["NodeEmbedding"], ["ImportStatus"],
+             ["IngestionHistory"], ["ImportVersionHistory"], ["IngestionLock"]],
+            [["NodeEmbeddingIndex"]],
+            [["NodeEmbeddingModel"]]
         ]
         
         client = SpannerClient("project", "instance", "database")
@@ -67,7 +69,7 @@ class TestSpannerClient(unittest.TestCase):
         # Mock snapshot results (no tables exist)
         mock_snapshot = MagicMock()
         mock_db.snapshot.return_value.__enter__.return_value = mock_snapshot
-        mock_snapshot.execute_sql.return_value = []
+        mock_snapshot.execute_sql.side_effect = [[], [], []]
 
         client = SpannerClient("project", "instance", "database")
 
@@ -76,7 +78,7 @@ class TestSpannerClient(unittest.TestCase):
             if 'storage.pb' in str(file_path):
                 m.__enter__.return_value.read.return_value = b'dummy proto data'
             else:
-                m.__enter__.return_value.read.return_value = 'CREATE TABLE Node;'
+                m.__enter__.return_value.read.return_value = 'CREATE TABLE Node; CREATE MODEL M REMOTE OPTIONS (endpoint = \'{{ embeddings_endpoint }}\');'
             return m
 
         # Run method with patched open
@@ -86,6 +88,13 @@ class TestSpannerClient(unittest.TestCase):
         # Verify update_database_ddl WAS called
         mock_admin_instance.update_database_ddl.assert_called_once()
         mock_operation.result.assert_called_once()
+        
+        # Verify placeholder replacement
+        args, kwargs = mock_admin_instance.update_database_ddl.call_args
+        request = kwargs.get('request') if kwargs else args[0]
+        statements = request.statements
+        self.assertEqual(len(statements), 2)
+        self.assertIn("projects/project/locations", statements[1])
 
     @patch('google.cloud.spanner.Client')
     def test_initialize_database_inconsistent_state(self, mock_spanner_client):
@@ -98,7 +107,7 @@ class TestSpannerClient(unittest.TestCase):
         # Mock snapshot results (some tables exist)
         mock_snapshot = MagicMock()
         mock_db.snapshot.return_value.__enter__.return_value = mock_snapshot
-        mock_snapshot.execute_sql.return_value = [["Node"]]
+        mock_snapshot.execute_sql.side_effect = [[["Node"]], [], []]
         
         client = SpannerClient("project", "instance", "database")
         

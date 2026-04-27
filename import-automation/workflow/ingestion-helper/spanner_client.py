@@ -20,6 +20,7 @@ from google.cloud.spanner_admin_database_v1.types import UpdateDatabaseDdlReques
 from google.cloud.spanner_v1 import Transaction
 from google.cloud.spanner_v1.param_types import STRING, TIMESTAMP, Array, INT64
 from datetime import datetime, timezone
+from jinja2 import Template
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -41,6 +42,7 @@ class SpannerClient:
         database = instance.database(database_id)
         logging.info(f"Successfully initialized database: {database.name}")
         self.database = database
+        self.project_id = project_id
 
     def acquire_lock(self, workflow_id: str, timeout: int) -> bool:
         """Attempts to acquire the global ingestion lock.
@@ -409,19 +411,38 @@ class SpannerClient:
             )
             existing_tables = [row[0] for row in results]
             
+            results = snapshot.execute_sql(
+                "SELECT index_name FROM information_schema.indexes WHERE table_schema = '' AND table_name = 'NodeEmbedding'"
+            )
+            existing_indexes = [row[0] for row in results]
+            
+            results = snapshot.execute_sql(
+                "SELECT model_name FROM information_schema.models WHERE model_schema = ''"
+            )
+            existing_models = [row[0] for row in results]
+            
         logging.info(f"Existing tables: {existing_tables}")
+        logging.info(f"Existing indexes: {existing_indexes}")
+        logging.info(f"Existing models: {existing_models}")
         
-        required_tables = ["Node", "Edge", "Observation", "ImportStatus", "IngestionHistory", "ImportVersionHistory", "IngestionLock"]
+        required_tables = ["Node", "Edge", "Observation", "NodeEmbedding", "ImportStatus", "IngestionHistory", "ImportVersionHistory", "IngestionLock"]
+        required_indexes = ["NodeEmbeddingIndex"]
+        required_models = ["NodeEmbeddingModel"]
         
         missing_tables = [t for t in required_tables if t not in existing_tables]
+        missing_indexes = [i for i in required_indexes if i not in existing_indexes]
+        missing_models = [m for m in required_models if m not in existing_models]
         
-        if not missing_tables:
-            logging.info("All tables already exist.")
+        total_required = len(required_tables) + len(required_indexes) + len(required_models)
+        total_missing = len(missing_tables) + len(missing_indexes) + len(missing_models)
+        
+        if total_missing == 0:
+            logging.info("All required objects already exist.")
             return
             
-        if len(missing_tables) < len(required_tables):
+        if total_missing < total_required:
             raise RuntimeError(
-                f"Database inconsistent state. Missing tables: {missing_tables}. Please clean up manually."
+                f"Database inconsistent state. Missing tables: {missing_tables}, Indexes: {missing_indexes}, Models: {missing_models}. Please clean up manually."
             )
             
         logging.info("Creating all tables and proto bundles...")
@@ -431,6 +452,10 @@ class SpannerClient:
         try:
             with open(schema_path, 'r') as f:
                 schema_content = f.read()
+            
+            embeddings_endpoint = f"//aiplatform.googleapis.com/projects/{self.project_id}/locations/us-central1/publishers/google/models/text-embedding-005"
+                
+            schema_content = Template(schema_content).render(embeddings_endpoint=embeddings_endpoint)
             ddl_statements = [s.strip() for s in schema_content.split(';') if s.strip()]
         except Exception as e:
             logging.error(f"Failed to read schema file: {e}")

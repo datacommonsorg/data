@@ -22,7 +22,7 @@ CREATE TABLE Node (
   bytes BYTES(MAX),
   name STRING(MAX),
   types ARRAY<STRING(1024)>,
-  last_update_time TIMESTAMP OPTIONS (allow_commit_timestamp=true),
+  last_update_timestamp TIMESTAMP OPTIONS (allow_commit_timestamp=true),
   name_tokenlist TOKENLIST AS (TOKENIZE_FULLTEXT(name)) HIDDEN,
 ) PRIMARY KEY(subject_id);
 
@@ -49,11 +49,11 @@ CREATE TABLE Observation (
 ) PRIMARY KEY(observation_about, variable_measured, facet_id);
 
 CREATE TABLE NodeEmbedding (
-    subject_id STRING(1024) NOT NULL,
-    embedding_content STRING(MAX),
-    types ARRAY<STRING(1024)>,
-    embeddings ARRAY<FLOAT64>(vector_length=>768)
-) PRIMARY KEY (subject_id),
+  subject_id STRING(1024) NOT NULL,
+  embedding_content STRING(MAX),
+  types ARRAY<STRING(1024)>,
+  embeddings ARRAY<FLOAT64>(vector_length=>768)
+) PRIMARY KEY(subject_id),
 INTERLEAVE IN PARENT Node ON DELETE CASCADE;
 
 CREATE VECTOR INDEX NodeEmbeddingIndex
@@ -76,7 +76,7 @@ OUTPUT(
       values ARRAY<FLOAT64>>
 )
 REMOTE OPTIONS (
-  endpoint = '//aiplatform.googleapis.com/projects/datcom-store/locations/us-central1/publishers/google/models/text-embedding-005'
+  endpoint = '{{ embeddings_endpoint }}'
 )
 
 CREATE TABLE ImportStatus (
