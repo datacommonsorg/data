@@ -193,5 +193,10 @@ def ingestion_helper(request):
             f"OK [Import: {import_name} Version: {version} Status: {params['status']}]",
             200)
 
+    elif actionType == 'initialize_database':
+        # Initializes the database by creating all required tables and proto bundles.
+        logging.info("Action: initialize_database")
+        spanner.initialize_database()
+        return ('OK', 200)
     else:
         return (f'Unknown actionType: {actionType}', 400)

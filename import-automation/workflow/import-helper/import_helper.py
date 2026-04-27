@@ -55,17 +55,24 @@ def invoke_spanner_ingestion_workflow(import_name: str):
 
 def invoke_import_automation_workflow(import_name: str,
                                       latest_version: str,
+                                      import_size: str,
+                                      graph_path: str, cron_schedule: str,
                                       run_ingestion: bool = False):
     """Triggers the import automation workflow.
 
     Args:
         import_name: The name of the import.
         latest_version: The version of the import.
+        import_size: The size of the import ('small', 'medium', 'large').
+        graph_path: The graph path for the import.
+        cron_schedule: The cron schedule for the import.
         run_ingestion: Whether to run the ingestion workflow after the import.
     """
     import_config = {
         "user_script_args": [f"--version={latest_version}"],
-        "import_version_override": latest_version
+        "import_version_override": latest_version,
+        "graph_data_path": graph_path,
+        "cron_schedule_override": cron_schedule
     }
     workflow_args = {
         "importName": import_name,
@@ -73,9 +80,15 @@ def invoke_import_automation_workflow(import_name: str,
         "runIngestion": run_ingestion
     }
 
-    logging.info(
-        f"Invoking {IMPORT_AUTOMATION_SPANNER_INGESTION_WORKFLOW_ID} for {import_name}"
-    )
+    if import_size == 'large':
+        workflow_args["resources"] = {
+            "machine": "n2-highmem-16",
+            "cpu": 16000,
+            "memory": 131072,
+            "disk": 100
+        }
+
+    logging.info(f"Invoking {IMPORT_AUTOMATION_WORKFLOW_ID} for {import_name}")
     execution_client = executions_v1.ExecutionsClient()
     parent = f"projects/{PROJECT_ID}/locations/{LOCATION}/workflows/{IMPORT_AUTOMATION_WORKFLOW_ID}"
     execution_req = executions_v1.Execution(argument=json.dumps(workflow_args))

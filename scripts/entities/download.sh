@@ -37,7 +37,7 @@ GCS_PATH="gs://${BUCKET_NAME}/${GCS_FOLDER_PREFIX}/${VERSION}"
 
 echo "Downloading import ${ENTITY} for version ${VERSION} from ${GCS_PATH} to $(pwd)"
 mkdir -p "${ENTITY}"
-gcloud storage cp -r "${GCS_PATH}" "${ENTITY}/"
+gcloud storage cp -r "${GCS_PATH}" "${ENTITY}/" &> copy.log
 echo "Successfully downloaded ${ENTITY} version ${VERSION}"
 
 # TODO: remove after scrpts are checked in

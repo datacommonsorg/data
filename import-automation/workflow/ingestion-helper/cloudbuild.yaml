@@ -1,0 +1,49 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    dir: 'import-automation/workflow/ingestion-helper'
+    args: ['build', '-t', '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:$_TAG', '-t', '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:latest', '.']
+  
+  # Push the container image - Needed before deployment
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:$_TAG']
+  
+  # Deploy container image to Cloud Run (Conditional)
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        if [ "$_DEPLOY" = "true" ]; then
+          gcloud run deploy '$_SERVICE_NAME' \
+            --image '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:$_TAG' \
+            --region '$_AR_REGION' \
+            --project '$PROJECT_ID'
+        else
+          echo "Skipping deployment as _DEPLOY is not set to true"
+        fi
+
+substitutions:
+  _AR_REGION: 'us'
+  _AR_REPO: 'gcr.io'
+  _SERVICE_NAME: 'spanner-ingestion-helper'
+  _DEPLOY: 'false'
+  _TAG: 'latest'
+
+images:
+  - '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:$_TAG'
+  - '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:latest'
