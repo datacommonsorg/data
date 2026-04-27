@@ -180,6 +180,63 @@ class TestDeletedRecordsPercentValidation(unittest.TestCase):
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
 
 
+class TestEmptyImportValidation(unittest.TestCase):
+    '''Test Class for the EMPTY_IMPORT_CHECK validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_empty_import_fails_when_both_zero(self):
+        report = {
+            'levelSummary': {
+                'LEVEL_INFO': {
+                    'counters': {
+                        'NumNodeSuccesses': "0",
+                        'NumRowSuccesses': "0"
+                    }
+                }
+            }
+        }
+        result = self.validator.validate_empty_import(report, {})
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['num_nodes'], 0)
+        self.assertEqual(result.details['num_rows'], 0)
+
+    def test_empty_import_passes_when_rows_not_zero(self):
+        report = {
+            'levelSummary': {
+                'LEVEL_INFO': {
+                    'counters': {
+                        'NumNodeSuccesses': "0",
+                        'NumRowSuccesses': "100"
+                    }
+                }
+            }
+        }
+        result = self.validator.validate_empty_import(report, {})
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['num_rows'], 100)
+
+    def test_empty_import_passes_when_nodes_not_zero(self):
+        report = {
+            'levelSummary': {
+                'LEVEL_INFO': {
+                    'counters': {
+                        'NumNodeSuccesses': "5",
+                        'NumRowSuccesses': "0"
+                    }
+                }
+            }
+        }
+        result = self.validator.validate_empty_import(report, {})
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['num_nodes'], 5)
+
+    def test_empty_import_fails_on_missing_report(self):
+        result = self.validator.validate_empty_import(None, {})
+        self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
+
+
 class TestMissingRefsCountValidation(unittest.TestCase):
     '''Test Class for the MISSING_REFS_COUNT validation rule.'''
 
