@@ -927,5 +927,156 @@ class TestGoldensValidator(unittest.TestCase):
         self.assertIn('golden_files', result.message)
 
 
+class TestCounterZeroValidation(unittest.TestCase):
+    '''Test Class for the COUNTER_ZERO_CHECK validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_counter_zero_fails_when_positive(self):
+        counters = {'invalid-lat-lng': 5}
+        params = {'counter_name': 'invalid-lat-lng'}
+        result = self.validator.validate_counter_zero(counters, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['actual_value'], 5)
+
+    def test_counter_zero_passes_when_zero(self):
+        counters = {'invalid-lat-lng': 0}
+        params = {'counter_name': 'invalid-lat-lng'}
+        result = self.validator.validate_counter_zero(counters, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+    def test_counter_zero_passes_when_missing(self):
+        counters = {}
+        params = {'counter_name': 'invalid-lat-lng'}
+        result = self.validator.validate_counter_zero(counters, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+    def test_counter_zero_fails_on_missing_config(self):
+        counters = {'invalid-lat-lng': 0}
+        params = {}
+        result = self.validator.validate_counter_zero(counters, params)
+        self.assertEqual(result.status, ValidationStatus.CONFIG_ERROR)
+
+
+class TestCounterMaxThresholdValidation(unittest.TestCase):
+    '''Test Class for the COUNTER_MAX_THRESHOLD validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_counter_max_threshold_fails_when_over(self):
+        counters = {'dropped_points': 10}
+        params = {'counter_name': 'dropped_points', 'threshold': 5}
+        result = self.validator.validate_counter_max_threshold(counters, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['actual_value'], 10)
+
+    def test_counter_max_threshold_passes_when_at_threshold(self):
+        counters = {'dropped_points': 5}
+        params = {'counter_name': 'dropped_points', 'threshold': 5}
+        result = self.validator.validate_counter_max_threshold(counters, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+    def test_counter_max_threshold_passes_when_below(self):
+        counters = {'dropped_points': 2}
+        params = {'counter_name': 'dropped_points', 'threshold': 5}
+        result = self.validator.validate_counter_max_threshold(counters, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+    def test_counter_max_threshold_fails_on_missing_config(self):
+        counters = {'dropped_points': 2}
+        params = {'counter_name': 'dropped_points'}  # Missing threshold
+        result = self.validator.validate_counter_max_threshold(counters, params)
+        self.assertEqual(result.status, ValidationStatus.CONFIG_ERROR)
+
+
+class TestCounterRatioThresholdValidation(unittest.TestCase):
+    '''Test Class for the COUNTER_RATIO_THRESHOLD validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_counter_ratio_threshold_fails_when_over(self):
+        counters = {'processed_points_dropped': 20, 'total_points': 100}
+        params = {
+            'subset_counter': 'processed_points_dropped',
+            'total_counter': 'total_points',
+            'threshold_percent': 10.0
+        }
+        result = self.validator.validate_counter_ratio_threshold(counters, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['percent'], 20.0)
+
+    def test_counter_ratio_threshold_passes_when_below(self):
+        counters = {'processed_points_dropped': 5, 'total_points': 100}
+        params = {
+            'subset_counter': 'processed_points_dropped',
+            'total_counter': 'total_points',
+            'threshold_percent': 10.0
+        }
+        result = self.validator.validate_counter_ratio_threshold(counters, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['percent'], 5.0)
+
+    def test_counter_ratio_threshold_handles_zero_total(self):
+        counters = {'processed_points_dropped': 5, 'total_points': 0}
+        params = {
+            'subset_counter': 'processed_points_dropped',
+            'total_counter': 'total_points',
+            'threshold_percent': 10.0
+        }
+        result = self.validator.validate_counter_ratio_threshold(counters, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['percent'], 100.0)
+
+
+class TestCounterSumIntegrityValidation(unittest.TestCase):
+    '''Test Class for the COUNTER_SUM_INTEGRITY validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_counter_sum_integrity_fails_on_mismatch(self):
+        counters = {'total_points': 100, 'output_points': 80, 'dropped_points': 10}
+        params = {
+            'total_counter': 'total_points',
+            'constituent_counters': ['output_points', 'dropped_points']
+        }
+        result = self.validator.validate_counter_sum_integrity(counters, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['constituent_sum'], 90)
+        self.assertEqual(result.details['total_value'], 100)
+
+    def test_counter_sum_integrity_passes_on_match(self):
+        counters = {'total_points': 100, 'output_points': 90, 'dropped_points': 10}
+        params = {
+            'total_counter': 'total_points',
+            'constituent_counters': ['output_points', 'dropped_points']
+        }
+        result = self.validator.validate_counter_sum_integrity(counters, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+
+class TestCounterMinYieldValidation(unittest.TestCase):
+    '''Test Class for the COUNTER_MIN_YIELD validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_counter_min_yield_fails_below_minimum(self):
+        counters = {'output_points': 50}
+        params = {'counter_name': 'output_points', 'min_yield': 100}
+        result = self.validator.validate_counter_min_yield(counters, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['actual_value'], 50)
+
+    def test_counter_min_yield_passes_at_minimum(self):
+        counters = {'output_points': 100}
+        params = {'counter_name': 'output_points', 'min_yield': 100}
+        result = self.validator.validate_counter_min_yield(counters, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+
 if __name__ == '__main__':
     unittest.main()
