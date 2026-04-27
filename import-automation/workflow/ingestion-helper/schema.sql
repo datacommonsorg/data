@@ -48,8 +48,6 @@ CREATE TABLE Observation (
   is_dc_aggregate BOOL,
 ) PRIMARY KEY(observation_about, variable_measured, facet_id);
 
-
-
 CREATE TABLE ImportStatus (
   ImportName STRING(MAX) NOT NULL,
   LatestVersion STRING(MAX),

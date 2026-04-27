@@ -31,8 +31,9 @@ class SpannerClient:
     and getting/updating import statuses.
     """
     _LOCK_ID = "global_ingestion_lock"
+    _EMBEDDING_MODEL_PATH = "projects/{project}/locations/{location}/publishers/google/models/{model}"
 
-    def __init__(self, project_id: str, instance_id: str, database_id: str):
+    def __init__(self, project_id: str, instance_id: str, database_id: str, location: str = None, model_id: str = None):
         """Initializes a Spanner client and connects to a specific database."""
         spanner_client = spanner.Client(
             project=project_id,
@@ -43,6 +44,16 @@ class SpannerClient:
         logging.info(f"Successfully initialized database: {database.name}")
         self.database = database
         self.project_id = project_id
+        self.location = location
+        self.model_id = model_id
+
+    def _get_embeddings_endpoint(self) -> str:
+        """Returns the parameterized embedding model endpoint."""
+        return self._EMBEDDING_MODEL_PATH.format(
+            project=self.project_id,
+            location=self.location or "us-central1",
+            model=self.model_id or "text-embedding-005"
+        )
 
     def acquire_lock(self, workflow_id: str, timeout: int) -> bool:
         """Attempts to acquire the global ingestion lock.
@@ -405,28 +416,36 @@ class SpannerClient:
         """Initializes the database by creating all required tables and proto bundles."""
         logging.info("Initializing database...")
         
+        query = """
+            SELECT 'table' as type, table_name as name FROM information_schema.tables WHERE table_schema = ''
+            UNION ALL
+            SELECT 'index' as type, index_name as name FROM information_schema.indexes WHERE table_schema = '' AND table_name = 'NodeEmbedding'
+            UNION ALL
+            SELECT 'model' as type, model_name as name FROM information_schema.models WHERE model_schema = ''
+        """
+
+        existing_tables = []
+        existing_indexes = []
+        existing_models = []
+        
         with self.database.snapshot() as snapshot:
-            results = snapshot.execute_sql(
-                "SELECT table_name FROM information_schema.tables WHERE table_schema = ''"
-            )
-            existing_tables = [row[0] for row in results]
-            
-            results = snapshot.execute_sql(
-                "SELECT index_name FROM information_schema.indexes WHERE table_schema = '' AND table_name = 'NodeEmbedding'"
-            )
-            existing_indexes = [row[0] for row in results]
-            
-            results = snapshot.execute_sql(
-                "SELECT model_name FROM information_schema.models WHERE model_schema = ''"
-            )
-            existing_models = [row[0] for row in results]
-            
+            results = snapshot.execute_sql(query)
+            for row in results:
+                if len(row) < 2:
+                    continue
+                obj_type = row[0]
+                obj_name = row[1]
+                if obj_type == 'table':
+                    existing_tables.append(obj_name)
+                elif obj_type == 'index':
+                    existing_indexes.append(obj_name)
+                elif obj_type == 'model':
+                    existing_models.append(obj_name)
+        
         logging.info(f"Existing tables: {existing_tables}")
         logging.info(f"Existing indexes: {existing_indexes}")
         logging.info(f"Existing models: {existing_models}")
-        
 
-        
         required_tables = ["Node", "Edge", "Observation", "ImportStatus", "IngestionHistory", "ImportVersionHistory", "IngestionLock"]
         required_indexes = []
         required_models = []
@@ -444,12 +463,12 @@ class SpannerClient:
         total_missing = len(missing_tables) + len(missing_indexes) + len(missing_models)
         
         if total_missing == 0:
-            logging.info("All required objects already exist.")
+            logging.info("Database is properly intiialized.")
             return
             
         if total_missing < total_required:
             raise RuntimeError(
-                f"Database inconsistent state. Missing tables: {missing_tables}, Indexes: {missing_indexes}, Models: {missing_models}. Please clean up manually."
+                f"Database inconsistent state. Missing tables: {missing_tables}, missing indexes: {missing_indexes}, missing models: {missing_models}. Please clean up manually."
             )
             
         logging.info("Creating all tables and proto bundles...")
@@ -463,8 +482,7 @@ class SpannerClient:
             ddl_statements = [s.strip() for s in schema_content.split(';') if s.strip()]
             
             if enable_embeddings:
-                embeddings_endpoint = f"//aiplatform.googleapis.com/projects/{self.project_id}/locations/us-central1/publishers/google/models/text-embedding-005"
-                
+                embeddings_endpoint = self._get_embeddings_endpoint()
                 embedding_schema_path = os.path.join(os.path.dirname(__file__), 'embedding_schema.sql')
                 logging.info(f"Reading embedding schema from {embedding_schema_path}")
                 with open(embedding_schema_path, 'r') as f:

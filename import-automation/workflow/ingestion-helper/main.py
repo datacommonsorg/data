@@ -52,7 +52,8 @@ def ingestion_helper(request):
 
     actionType = request_json['actionType']
     spanner = SpannerClient(FLAGS.spanner_project_id, FLAGS.spanner_instance_id,
-                            FLAGS.spanner_database_id)
+                            FLAGS.spanner_database_id, location=FLAGS.location,
+                            model_id=os.environ.get('EMBEDDING_MODEL_ID', 'text-embedding-005'))
     storage = StorageClient(FLAGS.gcs_bucket_id)
 
     if actionType == 'get_import_info':

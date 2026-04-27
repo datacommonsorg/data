@@ -34,11 +34,13 @@ class TestSpannerClient(unittest.TestCase):
         # Mock snapshot results (all tables exist)
         mock_snapshot = MagicMock()
         mock_db.snapshot.return_value.__enter__.return_value = mock_snapshot
-        mock_snapshot.execute_sql.side_effect = [
-            [["Node"], ["Edge"], ["Observation"], ["NodeEmbedding"], ["ImportStatus"],
-             ["IngestionHistory"], ["ImportVersionHistory"], ["IngestionLock"]],
-            [["NodeEmbeddingIndex"]],
-            [["NodeEmbeddingModel"]]
+        mock_snapshot.execute_sql.return_value = [
+            ["table", "Node"], ["table", "Edge"], ["table", "Observation"],
+            ["table", "NodeEmbedding"], ["table", "ImportStatus"],
+            ["table", "IngestionHistory"], ["table", "ImportVersionHistory"],
+            ["table", "IngestionLock"],
+            ["index", "NodeEmbeddingIndex"],
+            ["model", "NodeEmbeddingModel"]
         ]
         
         client = SpannerClient("project", "instance", "database")
@@ -69,7 +71,7 @@ class TestSpannerClient(unittest.TestCase):
         # Mock snapshot results (no tables exist)
         mock_snapshot = MagicMock()
         mock_db.snapshot.return_value.__enter__.return_value = mock_snapshot
-        mock_snapshot.execute_sql.side_effect = [[], [], []]
+        mock_snapshot.execute_sql.return_value = []
 
         client = SpannerClient("project", "instance", "database")
 
@@ -115,7 +117,7 @@ class TestSpannerClient(unittest.TestCase):
         # Mock snapshot results (no tables exist)
         mock_snapshot = MagicMock()
         mock_db.snapshot.return_value.__enter__.return_value = mock_snapshot
-        mock_snapshot.execute_sql.side_effect = [[], [], []]
+        mock_snapshot.execute_sql.return_value = []
 
         client = SpannerClient("project", "instance", "database")
 
@@ -156,7 +158,7 @@ class TestSpannerClient(unittest.TestCase):
         # Mock snapshot results (some tables exist)
         mock_snapshot = MagicMock()
         mock_db.snapshot.return_value.__enter__.return_value = mock_snapshot
-        mock_snapshot.execute_sql.side_effect = [[["Node"]], [], []]
+        mock_snapshot.execute_sql.return_value = [["table", "Node"]]
         
         client = SpannerClient("project", "instance", "database")
         
