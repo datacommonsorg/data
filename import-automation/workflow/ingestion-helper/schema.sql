@@ -22,6 +22,7 @@ CREATE TABLE Node (
   bytes BYTES(MAX),
   name STRING(MAX),
   types ARRAY<STRING(1024)>,
+  last_update_timestamp TIMESTAMP OPTIONS (allow_commit_timestamp=true),
   name_tokenlist TOKENLIST AS (TOKENIZE_FULLTEXT(name)) HIDDEN,
 ) PRIMARY KEY(subject_id);
 
