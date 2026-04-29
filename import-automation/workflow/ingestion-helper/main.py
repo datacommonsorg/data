@@ -21,6 +21,9 @@ flags.DEFINE_string('spanner_instance_id',
 flags.DEFINE_string('spanner_database_id',
                     os.environ.get('SPANNER_DATABASE_ID'),
                     'Spanner Database ID')
+flags.DEFINE_string('spanner_graph_database_id',
+                    os.environ.get('SPANNER_GRAPH_DATABASE_ID'),
+                    'Spanner Graph Database ID')
 flags.DEFINE_string('gcs_bucket_id', os.environ.get('GCS_BUCKET_ID'),
                     'GCS Bucket ID')
 flags.DEFINE_string('location', os.environ.get('LOCATION'), 'Location')
@@ -52,7 +55,9 @@ def ingestion_helper(request):
 
     actionType = request_json['actionType']
     spanner = SpannerClient(FLAGS.spanner_project_id, FLAGS.spanner_instance_id,
-                            FLAGS.spanner_database_id, location=FLAGS.location,
+                            FLAGS.spanner_database_id,
+                            graph_database_id=FLAGS.spanner_graph_database_id,
+                            location=FLAGS.location,
                             model_id=os.environ.get('EMBEDDING_MODEL_ID', 'text-embedding-005'))
     storage = StorageClient(FLAGS.gcs_bucket_id)
 
