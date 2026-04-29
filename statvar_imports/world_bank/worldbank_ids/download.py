@@ -15,6 +15,7 @@
 import os
 import sys
 import numpy as np
+import pandas as pd
 from absl import logging, flags, app
 # Import the required function after installing the package
 from bblocks import WorldBankData, DebtIDS
@@ -92,16 +93,37 @@ indicator_listname = ["interest", "currency", "principal", "disbursed"]
 
 def main(_):
     # Itterating each list to download the respective data.
-    for idx, indicator in enumerate(indicator_list):
+    for idx, indicator_list_to_process in enumerate(indicator_list):
         # Creating an IDS object
         debt_id = DebtIDS()
-        # Load the indicators.
-        logging.info("Loaded data for%s", indicator)
-        debt_id.load_data(indicators=indicator,
-                        start_year=FLAGS.start_year,
-                        end_year=FLAGS.end_year)
-        # Get the data as a DataFrame
-        df = debt_id.get_data()
+        
+        all_data_frames = []
+        
+        # Process indicators one by one to avoid crashing the whole batch
+        for ind in indicator_list_to_process:
+            try:
+                logging.info("Loading data for %s", ind)
+                debt_id.load_data(indicators=[ind],
+                                start_year=FLAGS.start_year,
+                                end_year=FLAGS.end_year)
+                # Get the data for this specific indicator
+                df_temp = debt_id.get_data()
+                if df_temp is not None and not df_temp.empty:
+                    all_data_frames.append(df_temp)
+                
+                # Reset debt_id for next indicator if needed or use a new one
+                debt_id = DebtIDS() 
+            except Exception as e:
+                logging.error("Failed to load data for %s: %s", ind, e)
+                continue
+
+        if not all_data_frames:
+            logging.warning("No data loaded for category: %s", indicator_listname[idx])
+            continue
+            
+        # Combine all successful indicators for this category
+        df = pd.concat(all_data_frames, ignore_index=True)
+
         try:
             # Extracting only the year part for data.
             df["YEARMOD"]=df["year"].dt.year
