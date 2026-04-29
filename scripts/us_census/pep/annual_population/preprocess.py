@@ -1069,7 +1069,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
         _generate_mcf(mcf_file_path)
         _generate_tmcf(tmcf_file_path)
     else:
-        logging.error("No files were successfully processed.")
+        logging.fatal("No files were successfully processed.")
 
 
 def add_future_year_urls():
