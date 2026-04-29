@@ -49,7 +49,7 @@ class SpannerClient:
         database = instance.database(database_id)
         logging.info(f"Successfully initialized database: {database.name}")
         self.database = database
-        self.graph_database = None
+        self.graph_database = database
         if graph_database_id:
             self.graph_database = instance.database(graph_database_id)
             logging.info(

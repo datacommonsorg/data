@@ -113,6 +113,8 @@ main:
                     parent: ${"projects/" + projectId + "/locations/" + region + "/workflows/spanner-ingestion-workflow"}
                     body:
                       argument: ${json.encode_to_string(ingestionArgs)}
+                    connector_params:
+                      skip_polling: true
     - returnResult:
         return:
           jobId: ${jobId}
