@@ -146,5 +146,7 @@ def main(_):
     elapsed_time = round((time() - start_time) / 60, 2)
     logging.info(f"Script completed in {elapsed_time} mins")
 
+    
+
 if __name__ == '__main__':
     app.run(main)
