@@ -15,9 +15,12 @@
 import logging
 import os
 from google.cloud import spanner
+from google.cloud.spanner_admin_database_v1 import DatabaseAdminClient
+from google.cloud.spanner_admin_database_v1.types import UpdateDatabaseDdlRequest
 from google.cloud.spanner_v1 import Transaction
 from google.cloud.spanner_v1.param_types import STRING, TIMESTAMP, Array, INT64
 from datetime import datetime, timezone
+from jinja2 import Template
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -28,8 +31,15 @@ class SpannerClient:
     and getting/updating import statuses.
     """
     _LOCK_ID = "global_ingestion_lock"
+    _EMBEDDING_MODEL_PATH = "projects/{project}/locations/{location}/publishers/google/models/{model}"
 
-    def __init__(self, project_id: str, instance_id: str, database_id: str):
+    def __init__(self,
+                 project_id: str,
+                 instance_id: str,
+                 database_id: str,
+                 graph_database_id: str = None,
+                 location: str = None,
+                 model_id: str = None):
         """Initializes a Spanner client and connects to a specific database."""
         spanner_client = spanner.Client(
             project=project_id,
@@ -39,6 +49,23 @@ class SpannerClient:
         database = instance.database(database_id)
         logging.info(f"Successfully initialized database: {database.name}")
         self.database = database
+        self.graph_database = database
+        if graph_database_id:
+            self.graph_database = instance.database(graph_database_id)
+            logging.info(
+                f"Successfully initialized graph database: {self.graph_database.name}"
+            )
+        self.project_id = project_id
+        self.location = location
+        self.model_id = model_id
+
+    def _get_embeddings_endpoint(self) -> str:
+        """Returns the parameterized embedding model endpoint."""
+        return self._EMBEDDING_MODEL_PATH.format(project=self.project_id,
+                                                 location=self.location or
+                                                 "us-central1",
+                                                 model=self.model_id or
+                                                 "text-embedding-005")
 
     def acquire_lock(self, workflow_id: str, timeout: int) -> bool:
         """Attempts to acquire the global ingestion lock.
@@ -57,13 +84,16 @@ class SpannerClient:
             params = {"lockId": self._LOCK_ID}
             param_types = {"lockId": STRING}
 
-            current_owner, acquired_at = None, None
+            row_found = False
             results = transaction.execute_sql(sql, params, param_types)
             for row in results:
+                row_found = True
                 current_owner, acquired_at = row[0], row[1]
 
             lock_is_available = False
-            if current_owner is None:
+            if not row_found:
+                lock_is_available = True
+            elif current_owner is None:
                 lock_is_available = True
             else:
                 timeout_threshold = datetime.now(timezone.utc) - acquired_at
@@ -72,13 +102,23 @@ class SpannerClient:
                         f"Stale lock found, owned by {current_owner}. Acquiring."
                     )
                     lock_is_available = True
+
             if lock_is_available:
-                update_sql = """
-                    UPDATE IngestionLock
-                    SET LockOwner = @workflowId, AcquiredTimestamp = PENDING_COMMIT_TIMESTAMP()
-                    WHERE LockID = @lockId
-                """
-                transaction.execute_update(update_sql,
+                if not row_found:
+                    sql_statement = """
+                        INSERT INTO IngestionLock (LockID, LockOwner, AcquiredTimestamp)
+                        VALUES (@lockId, @workflowId, PENDING_COMMIT_TIMESTAMP())
+                    """
+                    log_msg = f"Lock successfully acquired by {workflow_id} (new row created)"
+                else:
+                    sql_statement = """
+                        UPDATE IngestionLock
+                        SET LockOwner = @workflowId, AcquiredTimestamp = PENDING_COMMIT_TIMESTAMP()
+                        WHERE LockID = @lockId
+                    """
+                    log_msg = f"Lock successfully acquired by {workflow_id} (existing row updated)"
+
+                transaction.execute_update(sql_statement,
                                            params={
                                                "workflowId": workflow_id,
                                                "lockId": self._LOCK_ID
@@ -87,7 +127,7 @@ class SpannerClient:
                                                "workflowId": STRING,
                                                "lockId": STRING
                                            })
-                logging.info(f"Lock successfully acquired by {workflow_id}")
+                logging.info(log_msg)
                 return True
             else:
                 logging.info(f"Lock is currently held by {current_owner}")
@@ -145,7 +185,7 @@ class SpannerClient:
         """Get the details of imports to ingest.
 
         If import_list is empty, return info for ready imports.
-        If import_list is not empty, return info for the imports in the list irrespective of status.
+        If import_list is not empty, return info for the imports in the list that are in 'STAGING' status.
 
         Args:
             import_list: A list of import names to fetch details for.
@@ -159,7 +199,7 @@ class SpannerClient:
         params = {}
         param_types = {}
         if import_list:
-            sql = "SELECT ImportName, LatestVersion, GraphPath FROM ImportStatus WHERE ImportName IN UNNEST(@importNames)"
+            sql = "SELECT ImportName, LatestVersion, GraphPath FROM ImportStatus WHERE State = 'STAGING' AND ImportName IN UNNEST(@importNames)"
             params = {"importNames": import_list}
             param_types = {"importNames": Array(STRING)}
         else:
@@ -253,6 +293,9 @@ class SpannerClient:
 
         try:
             self.database.run_in_transaction(_insert)
+            # TODO: remvoe dual writes after switching to the prod setup.
+            if self.graph_database and self.graph_database.name != self.database.name:
+                self.graph_database.run_in_transaction(_insert)
             logging.info(
                 f"Updated IngestionHistory table for workflow {workflow_id}")
         except Exception as e:
@@ -382,4 +425,133 @@ class SpannerClient:
         except Exception as e:
             logging.error(
                 f'Error updating version history for {import_name}: {e}')
+            raise
+
+    def initialize_database(self, enable_embeddings=False):
+        """Initializes the database by creating all required tables and proto bundles."""
+        logging.info("Initializing database...")
+
+        query = """
+            SELECT 'table' as type, table_name as name FROM information_schema.tables WHERE table_schema = ''
+            UNION ALL
+            SELECT 'index' as type, index_name as name FROM information_schema.indexes WHERE table_schema = '' AND table_name = 'NodeEmbedding'
+            UNION ALL
+            SELECT 'model' as type, model_name as name FROM information_schema.models WHERE model_schema = ''
+        """
+
+        existing_tables = []
+        existing_indexes = []
+        existing_models = []
+
+        with self.database.snapshot() as snapshot:
+            results = snapshot.execute_sql(query)
+            for row in results:
+                if len(row) < 2:
+                    logging.warning(f"Invalid row from query: {row}")
+                    continue
+                obj_type = row[0]
+                obj_name = row[1]
+                if obj_type == 'table':
+                    existing_tables.append(obj_name)
+                elif obj_type == 'index':
+                    existing_indexes.append(obj_name)
+                elif obj_type == 'model':
+                    existing_models.append(obj_name)
+
+        logging.info(f"Existing tables: {existing_tables}")
+        logging.info(f"Existing indexes: {existing_indexes}")
+        logging.info(f"Existing models: {existing_models}")
+
+        required_tables = [
+            "Node", "Edge", "Observation", "ImportStatus", "IngestionHistory",
+            "ImportVersionHistory", "IngestionLock"
+        ]
+        required_indexes = []
+        required_models = []
+
+        if enable_embeddings:
+            required_tables.append("NodeEmbedding")
+            required_indexes.append("NodeEmbeddingIndex")
+            required_models.append("NodeEmbeddingModel")
+
+        missing_tables = [
+            t for t in required_tables if t not in existing_tables
+        ]
+        missing_indexes = [
+            i for i in required_indexes if i not in existing_indexes
+        ]
+        missing_models = [
+            m for m in required_models if m not in existing_models
+        ]
+
+        total_required = len(required_tables) + len(required_indexes) + len(
+            required_models)
+        total_missing = len(missing_tables) + len(missing_indexes) + len(
+            missing_models)
+
+        if total_missing == 0:
+            logging.info("Database is properly initialized.")
+            return
+
+        if total_missing < total_required:
+            raise RuntimeError(
+                f"Database inconsistent state. Missing tables: {missing_tables}, missing indexes: {missing_indexes}, missing models: {missing_models}. Please clean up manually."
+            )
+
+        logging.info("Creating all tables and proto bundles...")
+
+        schema_path = os.path.join(os.path.dirname(__file__), 'schema.sql')
+        logging.info(f"Reading schema from {schema_path}")
+        try:
+            with open(schema_path, 'r') as f:
+                schema_content = f.read()
+
+            ddl_statements = [
+                s.strip() for s in schema_content.split(';') if s.strip()
+            ]
+
+            if enable_embeddings:
+                embeddings_endpoint = self._get_embeddings_endpoint()
+                embedding_schema_path = os.path.join(os.path.dirname(__file__),
+                                                     'embedding_schema.sql')
+                logging.info(
+                    f"Reading embedding schema from {embedding_schema_path}")
+                with open(embedding_schema_path, 'r') as f:
+                    embedding_schema_content = f.read()
+                embedding_schema_content = Template(
+                    embedding_schema_content).render(
+                        embeddings_endpoint=embeddings_endpoint)
+                embedding_ddl_statements = [
+                    s.strip()
+                    for s in embedding_schema_content.split(';')
+                    if s.strip()
+                ]
+                ddl_statements.extend(embedding_ddl_statements)
+        except Exception as e:
+            logging.error(f"Failed to read schema file: {e}")
+            raise
+
+        proto_path = os.path.join(os.path.dirname(__file__), 'storage.pb')
+        logging.info(f"Reading proto descriptors from {proto_path}")
+        try:
+            with open(proto_path, 'rb') as f:
+                proto_descriptors_bytes = f.read()
+        except Exception as e:
+            logging.error(f"Failed to read proto descriptors file: {e}")
+            raise
+
+        database_path = self.database.name
+        logging.info(f"Updating DDL for {database_path} with protos")
+
+        try:
+            admin_client = DatabaseAdminClient()
+            request = UpdateDatabaseDdlRequest(
+                database=database_path,
+                statements=ddl_statements,
+                proto_descriptors=proto_descriptors_bytes)
+            operation = admin_client.update_database_ddl(request=request)
+            operation.result()
+            logging.info("Database initialized successfully with protos.")
+        except Exception as e:
+            logging.error(f"Failed to update DDL with protos: {e}")
             raise

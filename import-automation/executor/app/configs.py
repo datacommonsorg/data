@@ -153,6 +153,8 @@ class ExecutorConfig:
     validation_config_file: str = 'tools/import_validation/validation_config.json'
     # Latest import version (overwrite)
     import_version_override: str = ''
+    # Override cron schedule in import spec.
+    cron_schedule_override: str = ''
     # Relative path to version folder for graph files.
     graph_data_path: str = '/*/*/*.mcf'
     # Maximum time venv creation can take in seconds.
@@ -169,6 +171,8 @@ class ExecutorConfig:
     disable_email_notifications: bool = True
     # Skip uploading the data to GCS (for local testing).
     skip_gcs_upload: bool = False
+    # Skip uploading input files to GCS.
+    skip_input_upload: bool = False
     # Maximum time a blocking call to the importer to
     # perform an import can take in seconds.
     importer_import_timeout: float = 20 * 60

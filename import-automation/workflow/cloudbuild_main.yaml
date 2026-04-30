@@ -21,6 +21,7 @@ substitutions:
   _SPANNER_PROJECT_ID: 'datcom-ci'
   _SPANNER_INSTANCE_ID: 'datcom-spanner-test'
   _SPANNER_DATABASE_ID: 'dc-test-db'
+  _SPANNER_GRAPH_DATABASE_ID: 'dc-test-db'
   _GCS_BUCKET_ID: 'datcom-ci-test'
   _GCS_MOUNT_BUCKET: 'datcom-ci-test'
   _BQ_DATASET_ID: 'datacommons'
