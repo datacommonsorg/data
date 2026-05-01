@@ -13,7 +13,6 @@ main:
           - spanner_instance_id: '${sys.get_env("SPANNER_INSTANCE_ID")}'
           - spanner_database_id: '${sys.get_env("SPANNER_DATABASE_ID")}'
           - ingestion_function: ${"https://" + location + "-" + project_id + ".cloudfunctions.net/" + "spanner-ingestion-helper"}
-          - aggregation_function: ${"https://" + location + "-" + project_id + ".cloudfunctions.net/" + "import-aggregation-helper"}
           - import_list: ${default(map.get(args, "importList"), [])}
           - execution_error: null
     - acquire_ingestion_lock:
@@ -66,10 +65,11 @@ main:
             - run_aggregation:
                 call: http.post
                 args:
-                  url: ${aggregation_function}
+                  url: ${ingestion_function}
                   auth:
                     type: OIDC
                   body:
+                    actionType: run_aggregation
                     importList: ${import_info.body}
             - update_ingestion_status:
                 call: http.post
