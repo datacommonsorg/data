@@ -167,15 +167,25 @@ class TestValidationRunner(unittest.TestCase):
             ValidationStatus.FAILED,
             'DELETED_RECORDS_COUNT',
             message='Too many deletions, found 100',
-            details={
-                'deleted_records_count': 100,
-                'rows_processed': 1,
-                'rows_succeeded': 0,
-                'rows_failed': 1
-            })
+            details={'deleted_records_count': 100})
         mock_validator_instance.validate_deleted_records_count.return_value = expected_result
 
-        # 2. Create test files
+        # 2. Setup files in a directory for differ output
+        differ_dir = os.path.join(self.test_dir.name, 'differ_out2')
+        os.makedirs(differ_dir, exist_ok=True)
+
+        # Create a mock MCF file to generate the 'differ' DataFrame
+        mcf_path = os.path.join(differ_dir, 'import_diff.mcf')
+        with open(mcf_path, 'w') as f:
+            for _ in range(100):
+                f.write(
+                    'Node: dcid:sv_test\nvariableMeasured: dcid:sv_test\ndiffType: DELETED\n\n'
+                )
+
+        differ_json = os.path.join(differ_dir, 'differ_summary.json')
+        with open(differ_json, 'w') as f:
+            json.dump({'deleted_obs_count': 100}, f)
+
         with open(self.config_path, 'w') as f:
             json.dump(
                 {
@@ -188,12 +198,11 @@ class TestValidationRunner(unittest.TestCase):
                         }
                     }]
                 }, f)
-        pd.DataFrame({'DELETED': [100]}).to_csv(self.differ_path, index=False)
 
         # 3. Run the runner
         runner = ValidationRunner(validation_config_path=self.config_path,
                                   stats_summary=self.stats_path,
-                                  differ_output=self.differ_path,
+                                  differ_output=differ_dir,
                                   lint_report=self.report_path,
                                   validation_output=self.output_path)
         runner.run_validations()
@@ -208,9 +217,6 @@ class TestValidationRunner(unittest.TestCase):
                          'Too many deletions, found 100')
         details = json.loads(output_df.iloc[0]['Details'])
         self.assertEqual(details['deleted_records_count'], 100)
-        self.assertEqual(details['rows_processed'], 1)
-        self.assertEqual(details['rows_succeeded'], 0)
-        self.assertEqual(details['rows_failed'], 1)
 
     @patch('tools.import_validation.runner.Validator')
     def test_runner_uses_custom_name(self, MockValidator):
@@ -260,12 +266,17 @@ class TestValidationRunner(unittest.TestCase):
         differ_dir = os.path.join(self.test_dir.name, 'differ_out')
         os.makedirs(differ_dir, exist_ok=True)
 
-        differ_csv = os.path.join(differ_dir, 'obs_diff_summary.csv')
-        pd.DataFrame({'DELETED': [5]}).to_csv(differ_csv, index=False)
+        # Create a mock MCF file
+        mcf_path = os.path.join(differ_dir, 'import_diff.mcf')
+        with open(mcf_path, 'w') as f:
+            for _ in range(5):
+                f.write(
+                    'Node: dcid:sv_test\nvariableMeasured: dcid:sv_test\ndiffType: DELETED\n\n'
+                )
 
         differ_json = os.path.join(differ_dir, 'differ_summary.json')
         with open(differ_json, 'w') as f:
-            json.dump({'previous_data_size': 100}, f)
+            json.dump({'previous_obs_count': 100, 'deleted_obs_count': 5}, f)
 
         with open(self.config_path, 'w') as f:
             json.dump(
@@ -291,10 +302,10 @@ class TestValidationRunner(unittest.TestCase):
         # 4. Verify
         # Check if validator was called with correct arguments
         call_args, _ = mock_validator_instance.validate_deleted_records_percent.call_args
-        # call_args is (df, summary, params)
-        self.assertIsInstance(call_args[0], pd.DataFrame)
-        self.assertEqual(call_args[1]['previous_data_size'], 100)
-        self.assertEqual(call_args[2]['threshold'], 10)
+        # call_args is (summary, params)
+        self.assertEqual(call_args[0]['previous_obs_count'], 100)
+        self.assertEqual(call_args[0]['deleted_obs_count'], 5)
+        self.assertEqual(call_args[1]['threshold'], 10)
 
         # Check output
         output_df = pd.read_csv(self.output_path)

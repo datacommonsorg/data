@@ -84,6 +84,28 @@ def write_json_data(data, dest: str, file: str, tmp_dir: str):
         upload_output_data(path, dest)
 
 
+def write_mcf_nodes(nodes: list, dest: str, file: str, tmp_dir: str):
+    """ Writes mcf nodes to a file with the given path."""
+    if dest.startswith('gs://'):
+        path = os.path.join(tmp_dir, file)
+    else:
+        path = os.path.join(dest, file)
+    with open(path, mode='w', encoding='utf-8') as out_file:
+        for node in nodes:
+            if 'Node' in node:
+                out_file.write(f'Node: {node["Node"]}\n')
+            elif 'dcid' in node:
+                out_file.write(f'dcid: {node["dcid"]}\n')
+
+            for key, value in node.items():
+                if key in ['Node', 'dcid']:
+                    continue
+                out_file.write(f'{key}: {value}\n')
+            out_file.write('\n')
+    if dest.startswith('gs://'):
+        upload_output_data(path, dest)
+
+
 def upload_output_data(src: str, dest: str):
     client = storage.Client()
     bucket_name = dest.split('/')[2]

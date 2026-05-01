@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import os
 import pandas as pd
 import unittest
@@ -32,27 +33,68 @@ class TestImportDiffer(unittest.TestCase):
     def test_diff_analysis(self):
         current_data = os.path.join(module_dir, 'test', 'current', '*.mcf')
         previous_data = os.path.join(module_dir, 'test', 'previous', '*.mcf')
-        output_location = os.path.join(module_dir)
-        self.differ = import_differ.ImportDiffer(current_data, previous_data,
-                                                 output_location)
-        current_mcf = differ_utils.load_data(self.differ.current_data, '.')
-        previous_mcf = differ_utils.load_data(self.differ.previous_data, '.')
-        current_obs_df, current_schema_df = self.differ.split_data(current_mcf)
-        previous_obs_df, previous_schema_df = self.differ.split_data(
-            previous_mcf)
-        obs_diff = self.differ.generate_diff(previous_obs_df, current_obs_df)
-        summary, _ = self.differ.observation_diff_analysis(obs_diff)
-        expected_summary = pd.read_csv(
-            os.path.join(module_dir, 'test', 'results', 'obs_diff_summary.csv'))
-        assert_frame_equal(summary, expected_summary)
+        output_location = os.path.join(module_dir, 'test', 'output')
+        if os.path.exists(output_location):
+            import shutil
+            shutil.rmtree(output_location)
+        os.makedirs(output_location)
 
-        schema_diff = self.differ.generate_diff(previous_schema_df,
-                                                current_schema_df)
-        summary = self.differ.schema_diff_analysis(schema_diff)
-        expected_summary = pd.read_csv(
-            os.path.join(module_dir, 'test', 'results',
-                         'schema_diff_summary.csv'))
-        assert_frame_equal(summary, expected_summary)
+        differ = import_differ.ImportDiffer(current_data=current_data,
+                                            previous_data=previous_data,
+                                            output_location=output_location,
+                                            runner_mode='native')
+        differ.run_differ()
+
+        # Check for expected files
+        expected_files = ['import_diff.mcf', 'differ_summary.json']
+
+        for f in expected_files:
+            file_path = os.path.join(output_location, f)
+            self.assertTrue(os.path.exists(file_path),
+                            f"File {f} was not generated")
+
+        # Verify content of the combined MCF file
+        with open(os.path.join(output_location, 'import_diff.mcf'), 'r') as f:
+            content = f.read().strip()
+
+        with open(
+                os.path.join(module_dir, 'test', 'results', 'import_diff.mcf'),
+                'r') as f:
+            expected_content = f.read().strip()
+
+        # Split into individual nodes, strip whitespace, and sort to avoid ordering issues
+        actual_nodes = sorted(
+            [node.strip() for node in content.split('\n\n') if node.strip()])
+        expected_nodes = sorted([
+            node.strip()
+            for node in expected_content.split('\n\n')
+            if node.strip()
+        ])
+
+        self.assertListEqual(actual_nodes, expected_nodes)
+
+        # Verify content of the summary file
+        with open(os.path.join(output_location, 'differ_summary.json'),
+                  'r') as f:
+            summary_content = json.load(f)
+
+        with open(
+                os.path.join(module_dir, 'test', 'results',
+                             'differ_summary.json'), 'r') as f:
+            expected_summary_content = json.load(f)
+
+        # The version paths might differ based on where the test is run,
+        # so we normalize or remove them for the comparison
+        summary_content.pop('current_version', None)
+        summary_content.pop('previous_version', None)
+        expected_summary_content.pop('current_version', None)
+        expected_summary_content.pop('previous_version', None)
+
+        self.assertDictEqual(summary_content, expected_summary_content)
+
+        if os.path.exists(output_location):
+            import shutil
+            shutil.rmtree(output_location)
 
 
 if __name__ == '__main__':

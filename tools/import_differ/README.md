@@ -24,7 +24,7 @@ python import_differ.py \
 - previous\_data: Path to the previous data (wildcard on local/GCS supported).
 - output\_location: Path to the output data folder (local/GCS).
 - file\_format: Format of the input data (mcf,tfrecord).
-- runner\_mode: Runner mode: local (Python) / cloud (Dataflow in Cloud).
+- runner\_mode: Runner mode: native (Python) / direct (Java runner) /cloud (Dataflow in Cloud).
 - project\_id: GCP project Id for the dataflow job.
 - job\_name: Name of the differ dataflow job.
 

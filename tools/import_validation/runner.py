@@ -59,9 +59,11 @@ class ValidationRunner:
             'MAX_DATE_CONSISTENT':
                 (self.validator.validate_max_date_consistent, 'stats'),
             'DELETED_RECORDS_COUNT':
-                (self.validator.validate_deleted_records_count, 'differ'),
+                (self.validator.validate_deleted_records_count, 'differ_summary'
+                ),
             'DELETED_RECORDS_PERCENT':
-                (self.validator.validate_deleted_records_percent, 'differ'),
+                (self.validator.validate_deleted_records_percent,
+                 'differ_summary'),
             'EMPTY_IMPORT_CHECK':
                 (self.validator.validate_empty_import, 'lint'),
             'MISSING_REFS_COUNT':
@@ -121,38 +123,21 @@ class ValidationRunner:
             logging.warning("stats_summary file exists but is empty: %s",
                             stats_summary)
 
-        # Handle differ output (folder or file)
-        differ_csv_path = None
-        differ_json_path = None
-
         if differ_output and os.path.exists(differ_output):
-            if os.path.isdir(differ_output):
-                differ_csv_path = os.path.join(differ_output,
-                                               'obs_diff_summary.csv')
-                differ_json_path = os.path.join(differ_output,
-                                                'differ_summary.json')
-            else:
-                differ_csv_path = differ_output
+            differ_json_path = os.path.join(differ_output,
+                                            'differ_summary.json')
+            if os.path.exists(differ_json_path) and os.path.getsize(
+                    differ_json_path) > 0:
+                try:
+                    with open(differ_json_path, 'r') as f:
+                        self.data_sources['differ_summary'] = json.load(f)
+                except Exception as e:
+                    logging.error(
+                        f'JSON parse error while reading differ summary at {differ_json_path}: {e}'
+                    )
 
-        if differ_csv_path and os.path.exists(
-                differ_csv_path) and os.path.getsize(differ_csv_path) > 0:
-            self.data_sources['differ'] = pd.read_csv(differ_csv_path)
-        elif differ_csv_path and os.path.exists(differ_csv_path):
-            logging.warning("differ csv file exists but is empty: %s",
-                            differ_csv_path)
-
-        if differ_json_path and os.path.exists(
-                differ_json_path) and os.path.getsize(differ_json_path) > 0:
-            try:
-                with open(differ_json_path, 'r') as f:
-                    self.data_sources['differ_summary'] = json.load(f)
-            except Exception as e:
-                logging.error(
-                    f"JSON parse error while reading differ summary at {differ_json_path}: {e}"
-                )
-        elif differ_json_path and os.path.exists(differ_json_path):
-            logging.warning("differ summary file exists but is empty: %s",
-                            differ_json_path)
+            self.data_sources['differ'] = self._load_differ_df_from_mcf(
+                differ_output)
 
         if lint_report and os.path.exists(lint_report) and os.path.getsize(
                 lint_report) > 0:
@@ -166,6 +151,51 @@ class ValidationRunner:
         elif lint_report and os.path.exists(lint_report):
             logging.warning("lint_report file exists but is empty: %s",
                             lint_report)
+
+    def _load_differ_df_from_mcf(self, input_dir: str) -> pd.DataFrame:
+        """Parses MCF diff files and returns a summary DataFrame."""
+        import glob
+        from collections import defaultdict
+        stats = defaultdict(lambda: {'ADDED': 0, 'DELETED': 0, 'MODIFIED': 0})
+
+        combined_pattern = os.path.join(input_dir, 'import_diff*.mcf')
+        combined_files = glob.glob(combined_pattern)
+        for filepath in combined_files:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                current_var = None
+                current_diff_type = None
+                for line in f:
+                    line = line.strip()
+                    if not line:  # End of node
+                        if current_var and current_diff_type:
+                            stats[current_var][current_diff_type] += 1
+                        current_var = None
+                        current_diff_type = None
+                        continue
+                    if line.startswith('variableMeasured:'):
+                        parts = line.split(':', 1)
+                        if len(parts) > 1:
+                            current_var = parts[1].strip().strip('"\'')
+                    elif line.startswith('diffType:'):
+                        parts = line.split(':', 1)
+                        if len(parts) > 1:
+                            current_diff_type = parts[1].strip()
+                # Catch last node if file doesn't end with newline
+                if current_var and current_diff_type:
+                    stats[current_var][current_diff_type] += 1
+
+        if not stats:
+            return pd.DataFrame()
+
+        rows = []
+        for var, counts in stats.items():
+            rows.append({
+                'StatVar': var,
+                'ADDED': counts['ADDED'],
+                'DELETED': counts['DELETED'],
+                'MODIFIED': counts['MODIFIED']
+            })
+        return pd.DataFrame(rows)
 
     def _determine_required_sources(self) -> set[str]:
         """
@@ -216,9 +246,10 @@ class ValidationRunner:
                 result = validation_func(self.data_sources['stats'],
                                          self.data_sources['differ'],
                                          rule_params)
-            elif validator_name in ['DELETED_RECORDS_PERCENT']:
+            elif validator_name in [
+                    'DELETED_RECORDS_PERCENT', 'DELETED_RECORDS_COUNT'
+            ]:
                 result = validation_func(
-                    self.data_sources['differ'],
                     self.data_sources.get('differ_summary'), rule_params)
             else:
                 scope = rule.get('scope', {})
