@@ -46,10 +46,10 @@ def handle_feed_event(request):
     import_step = attributes.get('import_step', '')
     graph_path = attributes.get('graph_path', "/**/*.mcf*")
     import_size = attributes.get('import_size', '')
+    cron_schedule = attributes.get('cron_schedule', '')
     if import_step == 'ingestion_workflow_single' or import_step == 'ingestion_workflow_batch':
         import_status = 'STAGING'
         job_id = attributes.get('feed_name', 'cda_feed')
-        cron_schedule = attributes.get('cron_schedule', '')
         helper.update_import_status(import_name, import_status, latest_version,
                                     graph_path, job_id, cron_schedule)
         if import_step == 'ingestion_workflow_single':
