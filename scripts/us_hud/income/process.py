@@ -105,6 +105,7 @@ def iter_excel_calamine(file: IO[bytes]) -> Iterator[dict[str, object]]:
     for row in rows:
         yield dict(zip(headers, row))
 
+
 def process(year, matches, input_folder):
     '''Generate cleaned CSV.'''
     url = get_url(year)
