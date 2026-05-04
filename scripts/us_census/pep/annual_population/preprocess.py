@@ -1071,6 +1071,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
     else:
         logging.fatal("No files were successfully processed.")
 
+
 def add_future_year_urls():
     """ This method will generate future URLs specified in the urls_to_scan object.
         If valid URL, it will append to the _FILES_TO_DOWNLOAD global variable.
