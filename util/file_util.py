@@ -348,7 +348,7 @@ def file_get_matching(filepat: Union[str, list]) -> list:
         for file in input_files:
             if file_is_local(file):
                 # Expand local file pattern.
-                for f in glob.glob(file):
+                for f in glob.glob(file, recursive=True):
                     files.add(f)
             elif file_is_gcs(file):
                 bucket = file_get_gcs_bucket(file)
