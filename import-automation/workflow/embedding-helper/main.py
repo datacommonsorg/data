@@ -40,7 +40,7 @@ def main():
     try:
         logging.info(f"Job started. Fetching all nodes for types: {node_types}")
         timestamp = get_latest_lock_timestamp(database)
-        nodes = get_updated_nodes(database, timestamp, node_types)
+        nodes = list(get_updated_nodes(database, timestamp, node_types))
         
         converted_nodes = filter_and_convert_nodes(nodes)
         

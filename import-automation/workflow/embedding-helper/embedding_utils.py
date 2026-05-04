@@ -21,7 +21,7 @@ from datetime import datetime
 from google.cloud.spanner_v1.param_types import TIMESTAMP, STRING, Array, Struct, StructField
 
 
-_BATCH_SIZE = 500
+_BATCH_SIZE = 1000
 
 def get_latest_lock_timestamp(database):
     """Gets the latest AcquiredTimestamp from IngestionLock table.
@@ -78,7 +78,7 @@ def get_updated_nodes(database, timestamp, node_types):
     
     try:
         with database.snapshot() as snapshot:
-            results = snapshot.execute_sql(updated_node_sql, params=params, param_types=param_types)
+            results = snapshot.execute_sql(updated_node_sql, params=params, param_types=param_types, timeout=300)
             fields = None
             for row in results:
                 if fields is None:
@@ -154,7 +154,7 @@ def generate_embeddings_partitioned(database, nodes_generator):
         try:
             row_count = database.run_in_transaction(_execute_dml)
             total_rows_affected += row_count
-            logging.info(f"Processed batch of {len(batch)} nodes. Affected {row_count} rows.")
+            logging.info(f"Processed batch of {len(batch)} nodes. Affected total {total_rows_affected} rows.")
             time.sleep(0.5)
         except Exception as e:
             logging.error(f"Error executing batch transaction: {e}")
