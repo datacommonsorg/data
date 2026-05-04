@@ -153,6 +153,8 @@ class ExecutorConfig:
     validation_config_file: str = 'tools/import_validation/validation_config.json'
     # Latest import version (overwrite)
     import_version_override: str = ''
+    # Override cron schedule in import spec.
+    cron_schedule_override: str = ''
     # Relative path to version folder for graph files.
     graph_data_path: str = '/*/*/*.mcf'
     # Maximum time venv creation can take in seconds.

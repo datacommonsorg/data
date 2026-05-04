@@ -10,7 +10,7 @@ The enrichment process is organized into three distinct steps: Discovery, Fetchi
 
 **Command**:
 ```bash
-python tools/agentic_import/sdmx/metadata_enricher_find.py \
+python tools/agentic_import/sdmx_support/metadata_enricher_find.py \
   --input_metadata_json="/path/to/metadata.json" \
   --dataset_prefix="oecd_prices" \
   --output_path="/path/to/items_to_enrich.json" \
@@ -32,7 +32,7 @@ python tools/agentic_import/sdmx/metadata_enricher_find.py \
 
 **Command**:
 ```bash
-python tools/agentic_import/sdmx/metadata_enricher_fetch.py \
+python tools/agentic_import/sdmx_support/metadata_enricher_fetch.py \
   --input_items_json="/path/to/items_to_enrich.json" \
   --dataset_prefix="oecd_prices" \
   --output_path="/path/to/enriched_items.json" \
@@ -54,7 +54,7 @@ python tools/agentic_import/sdmx/metadata_enricher_fetch.py \
 
 **Command**:
 ```bash
-python tools/agentic_import/sdmx/metadata_enricher_merge.py \
+python tools/agentic_import/sdmx_support/metadata_enricher_merge.py \
   --input_metadata_json="/path/to/metadata.json" \
   --input_enriched_items_json="/path/to/enriched_items.json" \
   --output_path="/path/to/metadata_enriched.json"
@@ -75,19 +75,19 @@ To run the entire enrichment pipeline for a dataset:
 
 ```bash
 # 1. Discover items to enrich
-python tools/agentic_import/sdmx/metadata_enricher_find.py \
+python tools/agentic_import/sdmx_support/metadata_enricher_find.py \
   --input_metadata_json="metadata.json" \
   --dataset_prefix="my_dataset" \
   --output_path="items_to_enrich.json"
 
 # 2. Fetch enriched descriptions
-python tools/agentic_import/sdmx/metadata_enricher_fetch.py \
+python tools/agentic_import/sdmx_support/metadata_enricher_fetch.py \
   --input_items_json="items_to_enrich.json" \
   --dataset_prefix="my_dataset" \
   --output_path="enriched_items.json"
 
 # 3. Merge results into the original metadata
-python tools/agentic_import/sdmx/metadata_enricher_merge.py \
+python tools/agentic_import/sdmx_support/metadata_enricher_merge.py \
   --input_metadata_json="metadata.json" \
   --input_enriched_items_json="enriched_items.json" \
   --output_path="metadata_enriched.json"
