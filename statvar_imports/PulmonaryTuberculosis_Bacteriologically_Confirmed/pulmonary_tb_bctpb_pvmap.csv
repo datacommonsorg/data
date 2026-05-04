@@ -1,0 +1,9 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+,,,,,,,,,,
+VALUE,measuredProperty,count,populationType,MedicalConditionIncident,statType,measuredValue,value,{Number},,,
+pulmonary TB,medicalCondition,PulmonaryTuberculosis,,,,,,,,
+new episode,medicalStatus,NewCase,,,,,,,,
+bacteriologically confirmed,medicalTestingMethod,BacteriologicalTest
+
+iso3,observationAbout,country/{Data},,,,,,,,
+YEAR,observationDate,{Number},,,,,,,,

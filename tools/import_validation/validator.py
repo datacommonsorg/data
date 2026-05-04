@@ -283,6 +283,46 @@ class Validator:
                 'threshold': threshold
             })
 
+    def validate_empty_import(self, report: dict,
+                              params: dict) -> ValidationResult:
+        """Checks if the import is empty (no observations and no schema).
+
+    Args:
+      report: A json object containing the lint report.
+      params: A dictionary containing the validation parameters.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if report is None:
+            return ValidationResult(ValidationStatus.DATA_ERROR,
+                                    'EMPTY_IMPORT_CHECK',
+                                    message="Lint report is missing.")
+
+        counters = report.get('levelSummary', {}).get('LEVEL_INFO',
+                                                      {}).get('counters', {})
+
+        num_nodes = int(counters.get('NumNodeSuccesses', 0))
+        num_rows = int(counters.get('NumRowSuccesses', 0))
+
+        if num_nodes == 0 and num_rows == 0:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'EMPTY_IMPORT_CHECK',
+                message=
+                "The import is empty: both NumNodeSuccesses and NumRowSuccesses are 0 in the lint report.",
+                details={
+                    'num_nodes': num_nodes,
+                    'num_rows': num_rows
+                })
+
+        return ValidationResult(ValidationStatus.PASSED,
+                                'EMPTY_IMPORT_CHECK',
+                                details={
+                                    'num_nodes': num_nodes,
+                                    'num_rows': num_rows
+                                })
+
     def validate_missing_refs_count(self, report: dict,
                                     params: dict) -> ValidationResult:
         """Checks if the total number of missing references is within a threshold.

@@ -548,16 +548,15 @@ class ImportExecutor:
         return base_config_path
 
     @log_function_call
-    def _invoke_import_differ(self, genmcf_output_path: str,
-                              validation_output_path: str, import_name: str,
-                              import_prefix: str, version: str,
-                              latest_version: str, import_input: dict,
-                              absolute_import_dir: str) -> Tuple[str, str]:
+    def _invoke_differ_summary(self, genmcf_output_path: str,
+                               validation_output_path: str, import_name: str,
+                               import_prefix: str, version: str,
+                               latest_version: str, import_input: dict,
+                               absolute_import_dir: str) -> Optional[Dict]:
         """Invokes the differ tool to compare current data with previous data."""
         current_data_path = os.path.join(genmcf_output_path, '*.mcf')
         previous_data_path = os.path.join(latest_version, import_prefix,
                                           'genmcf', '*.mcf')
-        diff_found = True
         # TODO: remove fallback logic once all imports move to new path.
         if not file_util.file_get_matching(previous_data_path):
             input_files = self._get_import_input_files(import_input,
@@ -569,7 +568,6 @@ class ImportExecutor:
             previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
         # END
 
-        differ_output = ''
         differ_job_name = 'differ'
         if latest_version and len(
                 file_util.file_get_matching(previous_data_path)) > 0:
@@ -595,13 +593,11 @@ class ImportExecutor:
                     "previous_version": latest_version,
                     "current_version": version
                 })
-            differ_output = validation_output_path
-            diff_found = differ_summary['obs_diff_size'] != 0 or differ_summary[
-                'schema_diff_size'] == 0
+            return differ_summary
         else:
             logging.error('Skipping differ tool due to missing latest mcf file')
 
-        return differ_output, diff_found
+        return None
 
     @log_function_call
     def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
@@ -647,7 +643,7 @@ class ImportExecutor:
             differ_output = ''
             # Invoke differ and validation scripts.
             if self.config.invoke_differ_tool:
-                differ_output, diff_found = self._invoke_import_differ(
+                differ_summary = self._invoke_differ_summary(
                     genmcf_output_path=genmcf_output_path,
                     validation_output_path=validation_output_path,
                     import_name=import_name,
@@ -656,6 +652,11 @@ class ImportExecutor:
                     latest_version=latest_version,
                     import_input=import_input,
                     absolute_import_dir=absolute_import_dir)
+                if differ_summary is not None:
+                    diff_found = (differ_summary.get('obs_diff_size', 1) != 0 or
+                                  differ_summary.get('schema_diff_size',
+                                                     1) != 0)
+                    differ_output = validation_output_path
             else:
                 logging.error('Skipping differ tool as per import config')
 
@@ -667,7 +668,7 @@ class ImportExecutor:
                     repo_dir, absolute_import_dir, import_spec,
                     validation_output_path)
                 logging.info(
-                    f'Invoking validation script with config: {config_file_path}, differ:{differ_output}, summary:{summary_stats}...'
+                    f'Invoking validation script with config: {config_file_path}, differ:{differ_output}, summary:{summary_stats}'
                 )
                 validation = ValidationRunner(
                     validation_config_path=config_file_path,
@@ -716,7 +717,16 @@ class ImportExecutor:
             import_summary.import_stats.get('validation_execution_time', 0),
             import_summary.import_stats.get('validation_data_size',
                                             0), validation_message)
-        return validation_status, differ_status
+        if not self.config.ignore_validation_status and not validation_status:
+            logging.error(
+                "Marking import as VALIDATION due to validation failure.")
+            import_summary.status = ImportStatus.VALIDATION
+        elif not differ_status:
+            logging.info("Marking import as SKIP due to no data diff.")
+            import_summary.status = ImportStatus.SKIP
+        else:
+            import_summary.status = ImportStatus.STAGING
+        return validation_status
 
     def _get_validation_message(
             self, validation_results: List[ValidationResult]) -> str:
@@ -818,9 +828,6 @@ class ImportExecutor:
 
     def _update_latest_version(self, version, output_dir, import_spec,
                                import_summary):
-        if self.config.skip_gcs_upload:
-            logging.warning("Skipping version update as per import config.")
-            return
         logging.info(f'Updating import staging version {version}')
         self._upload_string_helper(
             version, os.path.join(output_dir, STAGING_VERSION_FILE))
@@ -866,7 +873,9 @@ class ImportExecutor:
             self.config.storage_prod_bucket_name, output_dir, version)
         import_summary.graph_path = self.config.graph_data_path
         import_summary.next_refresh = utils.next_utc_timestamp(
-            import_spec.get('cron_schedule'))
+            import_spec.get('cron_schedule',
+                            self.config.cron_schedule_override))
+        import_summary.status = ImportStatus.STAGING
 
         with tempfile.TemporaryDirectory() as tmpdir:
             requirements_path = os.path.join(absolute_import_dir,
@@ -907,10 +916,9 @@ class ImportExecutor:
                     import_summary=import_summary)
 
             validation_status = True
-            differ_status = True
             if self.config.invoke_import_validation:
                 logging.info("Invoking import validations")
-                validation_status, differ_status = self._invoke_import_validation(
+                validation_status = self._invoke_import_validation(
                     repo_dir=repo_dir,
                     relative_import_dir=relative_import_dir,
                     absolute_import_dir=absolute_import_dir,
@@ -923,16 +931,6 @@ class ImportExecutor:
             else:
                 logging.info(
                     'Skipping import validations as per import config.')
-
-            if not self.config.ignore_validation_status and not validation_status:
-                logging.error(
-                    "Marking import as VALIDATION due to validation failure.")
-                import_summary.status = ImportStatus.VALIDATION
-            elif not differ_status:
-                logging.info("Marking import as SKIP due to no data diff.")
-                import_summary.status = ImportStatus.SKIP
-            else:
-                import_summary.status = ImportStatus.STAGING
 
             import_summary.execution_time = int(time.time() - start_time)
             import_summary.data_volume = int(
@@ -1071,7 +1069,8 @@ class ImportExecutor:
             "last_data_refresh_date": _clean_date(utils.utctime())
         })
         next_data_refresh_date = utils.next_utc_date(
-            import_spec.get('cron_schedule'))
+            import_spec.get('cron_schedule',
+                            self.config.cron_schedule_override))
         if next_data_refresh_date:
             node += f'nextDataRefreshDate: "{next_data_refresh_date}"\n'
         return node

@@ -254,11 +254,11 @@ function build_docker {
 # Get the latest import output from GCS
 function get_latest_gcs_import_output {
   echo_log "Looking for import files on GCS at $GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME..."
-  LATEST_VERSION=$(gsutil cat gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/latest_version.txt)
-  if [[ -n "$LATEST_VERSION" ]]; then
-    echo_log "latest_version.txt: $LATEST_VERSION"
-    run_cmd gsutil ls -lR gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$LATEST_VERSION
-    echo_log "View latest import files at: https://pantheon.corp.google.com/storage/browser/$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$LATEST_VERSION"
+  STAGING_VERSION=$(gsutil cat gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/staging_version.txt)
+  if [[ -n "$STAGING_VERSION" ]]; then
+    echo_log "staging_version.txt: $STAGING_VERSION"
+    run_cmd gsutil ls -lR gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$STAGING_VERSION
+    echo_log "View latest import files at: https://pantheon.corp.google.com/storage/browser/$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$STAGING_VERSION"
   else
     echo_log "No files on GCS at $GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME"
   fi
@@ -317,7 +317,7 @@ function get_import_config {
     IMPORT_VERSION=$(cut -d: -f2 <<< "$ver_override")
     get_latest_gcs_import_output
     # Add config to update version.
-    add_import_version_notes "$IMPORT_VERSION" "Updating latest $IMPORT_NAME from: $LATEST_VERSION to: $IMPORT_VERSION, $NOTE"
+    add_import_version_notes "$IMPORT_VERSION" "Updating latest $IMPORT_NAME from: $STAGING_VERSION to: $IMPORT_VERSION, $NOTE"
   fi
   for c_v in $config_vals; do
     param=$(cut -d: -f1 <<< "$c_v")
