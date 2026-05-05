@@ -56,3 +56,29 @@ Updates the version of an import, records version history, and updates the statu
 *   `version` (Required): The version string. If set to `'STAGING'`, it resolves to the current staging version.
 *   `comment` (Required): A comment for the audit log explaining the version update.
 *   `override` (Optional): Override version without checking import status (boolean)
+
+#### `initialize_database`
+Initializes the Spanner database by creating all necessary tables and uploading proto descriptors.
+
+*   This action requires no payload parameters. It automatically reads `schema.sql` and `storage.pb` from the container directory to provision the database schema and proto descriptors.
+*   **Note on Protos**: The `storage.pb` file is generated during the Docker build process. The `Dockerfile` fetches `storage.proto` from the `datacommonsorg/import` GitHub repository and compiles it into `storage.pb`.
+
+## Local Development and Testing
+
+To run the helper service locally and test its functionality:
+
+### Running the Server
+Ensure you have installed the requirements (`uv pip install -r requirements.txt`), then start the functions framework:
+
+```bash
+uv run functions-framework --target ingestion_helper
+```
+By default, this will start serving on `http://localhost:8080`.
+
+### Triggering Actions
+You can test specific actions by sending a POST request with a JSON payload. For example, to trigger database initialization locally:
+```bash
+curl -X POST http://localhost:8080 \
+  -H "Content-Type: application/json" \
+  -d '{"actionType": "initialize_database"}'
+```

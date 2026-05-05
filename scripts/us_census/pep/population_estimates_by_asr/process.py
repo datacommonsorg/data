@@ -68,13 +68,14 @@ def add_future_year_urls():
         for YEAR in range(2030, 2020, -1):
             url_to_check = url.format(YEAR=YEAR)
             try:
-                check_url = requests.head(url_to_check)
+                check_url = requests.head(url_to_check, allow_redirects=True)
                 if check_url.status_code == 200:
                     _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
                     break
-
-            except:
-                logging.error(f"URL is not accessable {url_to_check}")
+                else:
+                    logging.warning(f"URL is not accessible: {url_to_check}")
+            except Exception as e:
+                logging.error(f"URL is not accessible {url_to_check}: {e}")
 
 
 MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
