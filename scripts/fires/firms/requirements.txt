@@ -1,7 +1,7 @@
 # Requirements for Python code in this directory.
 bigquery
 dataclasses
-datacommons_client
+datacommons-client
 earthengine-api
 geojson
 geopy
