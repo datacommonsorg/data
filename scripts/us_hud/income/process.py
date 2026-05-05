@@ -77,7 +77,6 @@ def download_with_retry(url):
     response.raise_for_status()
     return response
 
-
 def download_file(url: str, filename: str, input_folder: str):
     '''Download file and save it locally.'''
     try:
