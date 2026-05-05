@@ -59,7 +59,9 @@ def download_who_tb_data_with_iso3():
     merged_df = merged_df[final_columns]
     
     # 4. Save to CSV
-    output_dir = "statvar_imports/PulmonaryTuberculosis_Bacteriologically_Confirmed/source_files"
+    # Get the absolute path of the directory containing this script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(script_dir, "source_files")
     filename = os.path.join(output_dir, "TB_Bacteriologically_Confirmed_input.csv")
     
     os.makedirs(output_dir, exist_ok=True)
