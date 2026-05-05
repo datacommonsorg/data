@@ -144,6 +144,13 @@ class Downloader:
             logging.fatal(f"Failed to download or extract data for {year}: {e}")
             return False
 
+    def _get_summary_filename(self, year):
+        """Helper to construct the path for a year's Excel data file."""
+        return os.path.join(
+            self.save_path,
+            YEAR_DATA_FILENAME.format(year=year)
+        )
+
     def extract_all_years(self):
         """
         Extract and save data from downloaded Excel files for all years.
@@ -154,10 +161,7 @@ class Downloader:
         try:
             headers = {sheet: {} for sheet in SHEET_NAMES_TO_CSV_FILENAMES}
             for current_year in self.years:
-                # Construct the expected filename for the year
-                summary_filename = os.path.join(
-                    self.save_path,
-                    YEAR_DATA_FILENAME.format(year=current_year))
+                summary_filename = self._get_summary_filename(current_year)
                 
                 # Check if the file exists before processing
                 if not os.path.exists(summary_filename):
@@ -166,7 +170,7 @@ class Downloader:
 
                 logging.info(f'Extracting data for {current_year}')
                 self.current_year = current_year
-                self._extract_data(headers)
+                self._extract_data(summary_filename, headers)
             for sheet, csv_name in SHEET_NAMES_TO_CSV_FILENAMES.items():
                 headers_df = pd.DataFrame.from_dict(headers[sheet],
                                                     orient='index')
@@ -191,7 +195,12 @@ class Downloader:
         logging.info('Saving all ID crosswalks')
         try:
             crosswalks = []
-            for current_year in self.years:
+            for year in self.years:
+                summary_filename = self._get_summary_filename(year)
+                if not os.path.exists(summary_filename):
+                    continue
+                
+                self.current_year = year
                 crosswalks.append(self._gen_crosswalk())
             all_crosswalks_df = pd.concat(crosswalks, join='outer')
             all_crosswalks_df = all_crosswalks_df.sort_values(
@@ -217,17 +226,15 @@ class Downloader:
             year = self.current_year
         return os.path.join(self.save_path, f'{year}_{csv_filename}')
 
-    def _extract_data(self, headers):
+    def _extract_data(self, summary_filename, headers):
         """
         Extract data from Excel sheets and save them as CSV.
 
         Args:
+            summary_filename (str): The pre-verified path to the Excel file.
             headers (dict): Dictionary to store column headers per sheet and year.
         """
         try:
-            summary_filename = os.path.join(
-                self.save_path,
-                YEAR_DATA_FILENAME.format(year=self.current_year))
             xl = pd.ExcelFile(summary_filename, engine='openpyxl')
             logging.info(
                 f"Available sheets in {summary_filename}: {xl.sheet_names}")
@@ -279,10 +286,10 @@ class Downloader:
                                     engine='openpyxl')
         oris_df = oris_df.rename(columns={'GHGRP Facility ID': GHGRP_ID_COL})
         all_facilities_df = pd.DataFrame()
-        for sheet, csv_filename in SHEET_NAMES_TO_CSV_FILENAMES.items():
+        csv_filenames = list(SHEET_NAMES_TO_CSV_FILENAMES.values()) + ['direct_emitters.csv']
+        for csv_filename in csv_filenames:
             csv_path = self._csv_path(csv_filename)
             if not os.path.exists(csv_path):
-                logging.info(f"Skipping crosswalk for {csv_path} - file missing.")
                 continue
             df = pd.read_csv(csv_path,
                              usecols=[GHGRP_ID_COL, 'FRS Id'],
