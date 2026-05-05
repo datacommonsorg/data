@@ -20,8 +20,12 @@ import sys
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
+_DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
+sys.path.append(os.path.join(_DATA_DIR, 'util'))
 
 from result import ValidationResult, ValidationStatus
+from counters import Counters
+import validator_goldens
 
 
 class Validator:
@@ -278,6 +282,46 @@ class Validator:
                 'percent': percent,
                 'threshold': threshold
             })
+
+    def validate_empty_import(self, report: dict,
+                              params: dict) -> ValidationResult:
+        """Checks if the import is empty (no observations and no schema).
+
+    Args:
+      report: A json object containing the lint report.
+      params: A dictionary containing the validation parameters.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if report is None:
+            return ValidationResult(ValidationStatus.DATA_ERROR,
+                                    'EMPTY_IMPORT_CHECK',
+                                    message="Lint report is missing.")
+
+        counters = report.get('levelSummary', {}).get('LEVEL_INFO',
+                                                      {}).get('counters', {})
+
+        num_nodes = int(counters.get('NumNodeSuccesses', 0))
+        num_rows = int(counters.get('NumRowSuccesses', 0))
+
+        if num_nodes == 0 and num_rows == 0:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'EMPTY_IMPORT_CHECK',
+                message=
+                "The import is empty: both NumNodeSuccesses and NumRowSuccesses are 0 in the lint report.",
+                details={
+                    'num_nodes': num_nodes,
+                    'num_rows': num_rows
+                })
+
+        return ValidationResult(ValidationStatus.PASSED,
+                                'EMPTY_IMPORT_CHECK',
+                                details={
+                                    'num_nodes': num_nodes,
+                                    'num_rows': num_rows
+                                })
 
     def validate_missing_refs_count(self, report: dict,
                                     params: dict) -> ValidationResult:
@@ -926,3 +970,65 @@ class Validator:
                                     'rows_succeeded': rows_succeeded,
                                     'rows_failed': rows_failed
                                 })
+
+    def validate_goldens(self, df: pd.DataFrame,
+                         params: dict) -> ValidationResult:
+        """Validates records against a golden set.
+
+        Args:
+          df: A DataFrame containing the data to validate (used if input_files
+            is not provided in params).
+          params: A dictionary containing:
+            'golden_files': Path(s) to golden MCF/CSV files.
+            'input_files': (Optional) Path(s) to input files. If not provided,
+                           the 'df' will be used.
+            'output_path': (Optional) folder or output filename to save missing goldens.
+            And other optional validator_goldens config (e.g., goldens_key_property).
+
+        Returns:
+          A ValidationResult object.
+        """
+        golden_files = params.get('golden_files')
+        if not golden_files:
+            return ValidationResult(
+                ValidationStatus.CONFIG_ERROR,
+                'GOLDENS_CHECK',
+                message=
+                "Configuration error: 'golden_files' must be specified for GOLDENS_CHECK validator."
+            )
+
+        try:
+            inputs = params.get('input_files')
+            if not inputs:
+                inputs = df.to_dict('index')
+            output_path = params.get('output_path')
+            # Compare nodes
+            counters = Counters()
+            missing_goldens = validator_goldens.validate_goldens(
+                inputs,
+                golden_files,
+                output_path,
+                config=params,
+                counters=counters)
+            details = {
+                name: value
+                for name, value in counters.get_counters().items()
+                if 'golden' in name
+            }
+            if not missing_goldens:
+                return ValidationResult(ValidationStatus.PASSED,
+                                        'GOLDENS_CHECK',
+                                        details=details)
+            details['missing_goldens'] = missing_goldens
+
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'GOLDENS_CHECK',
+                message=f"Found {len(missing_goldens)} missing golden records.",
+                details=details)
+
+        except IOError as e:
+            return ValidationResult(
+                ValidationStatus.DATA_ERROR,
+                'GOLDENS_CHECK',
+                message=f"Error during golden validation: {e}")

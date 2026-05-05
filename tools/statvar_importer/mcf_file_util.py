@@ -43,6 +43,7 @@ python3 mcf_file_util.py --input_mcf=test_data/*.mcf
 from collections import OrderedDict
 import csv
 import glob
+import hashlib
 import os
 import re
 import sys
@@ -503,7 +504,7 @@ def load_mcf_nodes(
     filenames: command seperated string or a list of MCF filenames
     nodes: dictonary to which new nodes are added. If a node with dcid exists,
       the new properties are added to the existing node.
-    strip_namespace: if True, strips namespace from the value for node
+    strip_namespaces: if True, strips namespace from the value for node
       properties as well as the dcid key for the nodes dict.
     append_values: if True, appends new values for existing properties into a
       comma separated list, else replaces existing value.
@@ -589,7 +590,7 @@ def load_mcf_nodes(
                         if strip_namespaces:
                             value = strip_namespace(value)
                         add_pv_to_node(prop, value, pvs, append_values,
-                                       strip_namespace, normalize)
+                                       strip_namespaces, normalize)
                         num_props += 1
                 if pvs:
                     if not add_mcf_node(pvs, nodes, strip_namespaces,
@@ -1089,6 +1090,7 @@ def write_mcf_nodes(
             node_dict.update(d)
         file_util.file_write_csv_dict(node_dict, filename)
         return
+    filename_base = os.path.basename(filename)
     with file_util.FileIO(filename, mode) as output_f:
         if header is not None:
             output_f.write(header)
@@ -1099,6 +1101,11 @@ def write_mcf_nodes(
                 node_keys = sorted(node_keys)
             for dcid in node_keys:
                 node = nodes[dcid]
+                if 'dcid' not in node and 'Node' not in node:
+                    # Generate a local dcid in a node copy
+                    node = dict(node)
+                    node['Node'] = f'l:{filename_base}/' + hashlib.md5(
+                        str(dcid).encode('utf-8')).hexdigest()
                 if sort:
                     node = normalize_mcf_node(node, ignore_comments)
                 pvs = node_dict_to_text(node, default_pvs)
