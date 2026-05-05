@@ -1108,7 +1108,6 @@ def download_with_retry(url, file_name_to_save):
     logging.info(f"Downloaded file : {file_name_to_save} - URL {url}")
     return requests.get(url=url, stream=True)
 
-
 def download_files():
     """ This method will download data from the URLs specified in the input_url.json file.
         If any download attempt fails, the script will terminate.
