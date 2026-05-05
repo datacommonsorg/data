@@ -44,26 +44,24 @@ def handle_feed_event(request):
         'import_version',
         datetime.now(timezone.utc).strftime("%Y-%m-%d"))
     import_step = attributes.get('import_step', '')
-
-    if import_step == 'spanner_ingestion_workflow':
-        # Update import status in spanner
+    graph_path = attributes.get('graph_path', "/**/*.mcf*")
+    import_size = attributes.get('import_size', '')
+    cron_schedule = attributes.get('cron_schedule', '')
+    if import_step == 'ingestion_workflow_single' or import_step == 'ingestion_workflow_batch':
         import_status = 'STAGING'
-        graph_path = attributes.get('graph_path', "/**/*.*")
         job_id = attributes.get('feed_name', 'cda_feed')
-        cron_schedule = attributes.get('cron_schedule', '')
         helper.update_import_status(import_name, import_status, latest_version,
                                     graph_path, job_id, cron_schedule)
-        # Invoke ingestion workflow to trigger dataflow job
-        helper.invoke_spanner_ingestion_workflow(import_name)
-    elif import_step == 'import_automation_workflow':
-        run_ingestion = False
-        # Invoke batch import automation job
+        if import_step == 'ingestion_workflow_single':
+            # Invoke ingestion workflow to trigger dataflow job
+            helper.invoke_spanner_ingestion_workflow(import_name)
+    elif import_step == 'import_automation_job' or import_step == 'import_automation_e2e':
+        # Invoke batch import job and optionally ingestion workflow to trigger dataflow job
+        run_ingestion = True if import_step == 'import_automation_e2e' else False
         helper.invoke_import_automation_workflow(import_name, latest_version,
-                                                 run_ingestion)
+                                                 import_size, graph_path,
+                                                 cron_schedule, run_ingestion)
     else:
-        run_ingestion = True
-        # Invoke batch import job and ingestion workflow to trigger dataflow job
-        helper.invoke_import_automation_workflow(import_name, latest_version,
-                                                 run_ingestion)
+        logging.info(f"Skipping import post processing.")
 
     return 'OK', 200

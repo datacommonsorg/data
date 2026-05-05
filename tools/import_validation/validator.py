@@ -283,44 +283,45 @@ class Validator:
                 'threshold': threshold
             })
 
-    def validate_empty_import(self, differ_df: pd.DataFrame, summary: dict,
+    def validate_empty_import(self, report: dict,
                               params: dict) -> ValidationResult:
         """Checks if the import is empty (no observations and no schema).
 
     Args:
-      differ_df: A DataFrame containing the differ output (unused but passed for consistency).
-      summary: A dictionary containing the differ summary.
+      report: A json object containing the lint report.
       params: A dictionary containing the validation parameters.
 
     Returns:
       A ValidationResult object.
     """
-        if summary is None:
+        if report is None:
             return ValidationResult(ValidationStatus.DATA_ERROR,
                                     'EMPTY_IMPORT_CHECK',
-                                    message="Differ summary is missing.")
+                                    message="Lint report is missing.")
 
-        current_obs_size = summary['current_obs_size']
-        current_schema_size = summary['current_schema_size']
+        counters = report.get('levelSummary', {}).get('LEVEL_INFO',
+                                                      {}).get('counters', {})
 
-        if current_obs_size == 0 and current_schema_size == 0:
+        num_nodes = int(counters.get('NumNodeSuccesses', 0))
+        num_rows = int(counters.get('NumRowSuccesses', 0))
+
+        if num_nodes == 0 and num_rows == 0:
             return ValidationResult(
                 ValidationStatus.FAILED,
                 'EMPTY_IMPORT_CHECK',
                 message=
-                "The import is empty: both current_obs_size and current_schema_size are 0.",
+                "The import is empty: both NumNodeSuccesses and NumRowSuccesses are 0 in the lint report.",
                 details={
-                    'current_obs_size': int(current_obs_size),
-                    'current_schema_size': int(current_schema_size)
+                    'num_nodes': num_nodes,
+                    'num_rows': num_rows
                 })
 
-        return ValidationResult(
-            ValidationStatus.PASSED,
-            'EMPTY_IMPORT_CHECK',
-            details={
-                'current_obs_size': int(current_obs_size),
-                'current_schema_size': int(current_schema_size)
-            })
+        return ValidationResult(ValidationStatus.PASSED,
+                                'EMPTY_IMPORT_CHECK',
+                                details={
+                                    'num_nodes': num_nodes,
+                                    'num_rows': num_rows
+                                })
 
     def validate_missing_refs_count(self, report: dict,
                                     params: dict) -> ValidationResult:

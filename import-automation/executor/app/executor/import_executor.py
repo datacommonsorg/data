@@ -873,7 +873,8 @@ class ImportExecutor:
             self.config.storage_prod_bucket_name, output_dir, version)
         import_summary.graph_path = self.config.graph_data_path
         import_summary.next_refresh = utils.next_utc_timestamp(
-            import_spec.get('cron_schedule'))
+            import_spec.get('cron_schedule',
+                            self.config.cron_schedule_override))
         import_summary.status = ImportStatus.STAGING
 
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1068,7 +1069,8 @@ class ImportExecutor:
             "last_data_refresh_date": _clean_date(utils.utctime())
         })
         next_data_refresh_date = utils.next_utc_date(
-            import_spec.get('cron_schedule'))
+            import_spec.get('cron_schedule',
+                            self.config.cron_schedule_override))
         if next_data_refresh_date:
             node += f'nextDataRefreshDate: "{next_data_refresh_date}"\n'
         return node
