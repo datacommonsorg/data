@@ -1,7 +1,7 @@
 key,p1,v1,p2,v2,p3,v3,,,,
 Place,observationAbout,{Data},populationType,ConsumerGoodsAndServices,measuredProperty,consumerPriceIndex,,,,
 #Relative importance,#ignore,#ignore,,,,,,,,
-Consumer Price Index,observationAbout,country/USA,,,,,,,,
+#Consumer Price Index,observationAbout,country/USA,,,,,,,,
 Unadjusted indexes,value,{Number},measurementQualifier,BLSSeasonallyUnadjusted,observationDate,{Year}-{Month},#Eval,"consumerGoodsCategory = str_to_camel_case(re.sub(""['\\-]"", """", Category.replace(' less ', ' except ')), '[^A-Za-z]')",#Aggregate,last
 2010,Year,2010,,,,,,,,
 2011,Year,2011,,,,,,,,
@@ -52,8 +52,47 @@ Dec,Month,12,observationDate,{Year}-{Month},,,,,,
 Jan.,Month,1,observationDate,{Year}-{Month},,,,,,
 #Unadjusted percent,#ignore,#ignore,,,,,,,,
 #Seasonally adjusted percent,#ignore,#ignore,,,,,,,,
-Expenditure category,Category,{Data},populationType,ConsumerGoodsAndServices,measuredProperty,consumerPriceIndex,,,,
-Area,observationAbout,{Data},populationType,ConsumerGoodsAndServices,measuredProperty,consumerPriceIndex,consumer,UrbanConsumer,consumerGoodsCategory,AllItems
+Expenditure category,Category,{Data},populationType,ConsumerGoodsAndServices,measuredProperty,consumerPriceIndex,observationAbout,country/USA,,
+Area,populationType,ConsumerGoodsAndServices,measuredProperty,consumerPriceIndex,consumer,UrbanConsumer,consumerGoodsCategory,AllItems
 CPI-W,consumer,UrbanWageEarnerAndClericalWorker,,,,,,,,
 CPI-U,consumer,UrbanConsumer,,,,,,,
 C-CPI-U,consumer,UrbanConsumer,,,,,,,
+Northeast,observationAbout,usc/NortheastRegion
+Midwest,observationAbout,usc/MidwestRegion
+South,observationAbout,usc/SouthRegion
+West,observationAbout,usc/WestRegion
+New England(4),observationAbout,usc/NewEnglandDivision
+Middle Atlantic(4),observationAbout,usc/MiddleAtlanticDivision
+East North Central(4),observationAbout,usc/EastNorthCentralDivision
+West North Central(4),observationAbout,usc/WestNorthCentralDivision
+South Atlantic(4),observationAbout,usc/SouthAtlanticDivision
+East South Central(4),observationAbout,usc/EastSouthCentralDivision
+West South Central(4),observationAbout,usc/WestSouthCentralDivision
+Mountain(4),observationAbout,usc/MountainDivision
+Pacific(4),observationAbout,usc/PacificDivision
+"Atlanta-Sandy Springs-Roswell, GA",observationAbout,geoId/C12060
+"Baltimore-Columbia-Towson, MD(6)",observationAbout,geoId/C12580
+"Houston-The Woodlands-Sugar Land, TX",observationAbout,geoId/C26420
+"Miami-Fort Lauderdale-West Palm Beach, FL",observationAbout,geoId/C33100
+"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",observationAbout,geoId/C37980
+"Phoenix-Mesa-Scottsdale, AZ(7)",observationAbout,geoId/C38060
+"San Francisco-Oakland-Hayward, CA",observationAbout,geoId/C41860
+"Seattle-Tacoma-Bellevue, WA",observationAbout,geoId/C42660
+"St. Louis, MO-IL",observationAbout,geoId/C41180
+"Boston-Cambridge-Newton, MA-NH",observationAbout,geoId/C14460
+"Dallas-Fort Worth-Arlington, TX",observationAbout,geoId/C19100
+"Denver-Aurora-Lakewood, CO",observationAbout,geoId/C19740
+"Minneapolis-St.Paul-Bloomington, MN-WI",observationAbout,geoId/C33460
+"Riverside-San Bernardino-Ontario, CA(4)",observationAbout,geoId/C40140
+"San Diego-Carlsbad, CA",observationAbout,geoId/C41740
+"Tampa-St. Petersburg-Clearwater, FL(8)",observationAbout,geoId/C45300
+"Washington-Arlington-Alexandria, DC-VA-MD-WV(6)",observationAbout,geoId/C47894
+Northeast urban,observationAbout,usc/NortheastRegion
+Midwest urban,observationAbout,usc/MidwestRegion
+South urban,observationAbout,usc/SouthRegion
+West urban,observationAbout,usc/WestRegion
+"Atlanta, GA",observationAbout,geoId/1304000
+"Detroit-Warren-Dearborn, MI",observationAbout,geoId/C19820
+"Chicago-Naperville-Elgin, IL-IN-WI",observationAbout,geoId/C16980
+"Los Angeles-Long Beach-Anaheim, CA",observationAbout,geoId/C31080
+"New York-Newark-Jersey City, NY-NJ-PA",observationAbout,geoId/C35620
