@@ -146,10 +146,8 @@ class Downloader:
 
     def _get_summary_filename(self, year):
         """Helper to construct the path for a year's Excel data file."""
-        return os.path.join(
-            self.save_path,
-            YEAR_DATA_FILENAME.format(year=year)
-        )
+        return os.path.join(self.save_path,
+                            YEAR_DATA_FILENAME.format(year=year))
 
     def extract_all_years(self):
         """
@@ -162,10 +160,12 @@ class Downloader:
             headers = {sheet: {} for sheet in SHEET_NAMES_TO_CSV_FILENAMES}
             for current_year in self.years:
                 summary_filename = self._get_summary_filename(current_year)
-                
+
                 # Check if the file exists before processing
                 if not os.path.exists(summary_filename):
-                    logging.warning(f"Excel file for {current_year} not found at {summary_filename}. Skipping extraction.")
+                    logging.warning(
+                        f"Excel file for {current_year} not found at {summary_filename}. Skipping extraction."
+                    )
                     continue
 
                 logging.info(f'Extracting data for {current_year}')
@@ -199,10 +199,10 @@ class Downloader:
                 summary_filename = self._get_summary_filename(year)
                 if not os.path.exists(summary_filename):
                     continue
-                
+
                 self.current_year = year
                 crosswalks.append(self._gen_crosswalk())
-            
+
             if not crosswalks:
                 logging.warning("No crosswalk data found for any year.")
                 return pd.DataFrame()
@@ -211,7 +211,7 @@ class Downloader:
             if all_crosswalks_df.empty:
                 logging.warning("No crosswalk data found for any year.")
                 return all_crosswalks_df
-            
+
             all_crosswalks_df = all_crosswalks_df.sort_values(
                 by=[GHGRP_ID_COL, 'FRS Id', 'ORIS CODE'])
             all_crosswalks_df = all_crosswalks_df.drop_duplicates()
@@ -295,7 +295,8 @@ class Downloader:
                                     engine='openpyxl')
         oris_df = oris_df.rename(columns={'GHGRP Facility ID': GHGRP_ID_COL})
         all_facilities_df = pd.DataFrame()
-        csv_filenames = list(SHEET_NAMES_TO_CSV_FILENAMES.values()) + ['direct_emitters.csv']
+        csv_filenames = list(
+            SHEET_NAMES_TO_CSV_FILENAMES.values()) + ['direct_emitters.csv']
         for csv_filename in csv_filenames:
             csv_path = self._csv_path(csv_filename)
             if not os.path.exists(csv_path):
@@ -305,7 +306,7 @@ class Downloader:
                              dtype=str)
             all_facilities_df = pd.concat([all_facilities_df, df],
                                           ignore_index=True)
-        
+
         if all_facilities_df.empty:
             return pd.DataFrame()
 
