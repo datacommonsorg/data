@@ -208,6 +208,10 @@ class Downloader:
                 return pd.DataFrame()
 
             all_crosswalks_df = pd.concat(crosswalks, join='outer')
+            if all_crosswalks_df.empty:
+                logging.warning("No crosswalk data found for any year.")
+                return all_crosswalks_df
+            
             all_crosswalks_df = all_crosswalks_df.sort_values(
                 by=[GHGRP_ID_COL, 'FRS Id', 'ORIS CODE'])
             all_crosswalks_df = all_crosswalks_df.drop_duplicates()
