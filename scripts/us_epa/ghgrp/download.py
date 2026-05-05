@@ -202,6 +202,11 @@ class Downloader:
                 
                 self.current_year = year
                 crosswalks.append(self._gen_crosswalk())
+            
+            if not crosswalks:
+                logging.warning("No crosswalk data found for any year.")
+                return pd.DataFrame()
+
             all_crosswalks_df = pd.concat(crosswalks, join='outer')
             all_crosswalks_df = all_crosswalks_df.sort_values(
                 by=[GHGRP_ID_COL, 'FRS Id', 'ORIS CODE'])
@@ -296,6 +301,10 @@ class Downloader:
                              dtype=str)
             all_facilities_df = pd.concat([all_facilities_df, df],
                                           ignore_index=True)
+        
+        if all_facilities_df.empty:
+            return pd.DataFrame()
+
         all_facilities_df = all_facilities_df.join(
             oris_df.set_index(GHGRP_ID_COL), on=GHGRP_ID_COL, how='left')
         return all_facilities_df
