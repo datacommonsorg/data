@@ -154,6 +154,16 @@ class Downloader:
         try:
             headers = {sheet: {} for sheet in SHEET_NAMES_TO_CSV_FILENAMES}
             for current_year in self.years:
+                # Construct the expected filename for the year
+                summary_filename = os.path.join(
+                    self.save_path,
+                    YEAR_DATA_FILENAME.format(year=current_year))
+                
+                # Check if the file exists before processing
+                if not os.path.exists(summary_filename):
+                    logging.warning(f"Excel file for {current_year} not found at {summary_filename}. Skipping extraction.")
+                    continue
+
                 logging.info(f'Extracting data for {current_year}')
                 self.current_year = current_year
                 self._extract_data(headers)
@@ -272,6 +282,7 @@ class Downloader:
         for sheet, csv_filename in SHEET_NAMES_TO_CSV_FILENAMES.items():
             csv_path = self._csv_path(csv_filename)
             if not os.path.exists(csv_path):
+                logging.info(f"Skipping crosswalk for {csv_path} - file missing.")
                 continue
             df = pd.read_csv(csv_path,
                              usecols=[GHGRP_ID_COL, 'FRS Id'],
