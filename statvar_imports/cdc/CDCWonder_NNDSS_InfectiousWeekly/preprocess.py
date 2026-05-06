@@ -6,11 +6,17 @@ import pandas as pd
 from absl import app, logging
 from pathlib import Path
 import datetime
+import importlib.util
 import shutil
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(script_dir, '../../../util'))
-from download_util_script import download_file
+util_script_path = os.path.abspath(os.path.join(script_dir, '../../../util/download_util_script.py'))
+spec = importlib.util.spec_from_file_location('download_util_script', util_script_path)
+if spec is None or spec.loader is None:
+    raise ImportError(f'Could not load download_util_script from {util_script_path}')
+download_util_script = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(download_util_script)
+download_file = download_util_script.download_file
 INPUT_DIR = os.path.join(script_dir, "input_files")
 Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 INPUT_FILE = os.path.join(INPUT_DIR, "rows.csv")
