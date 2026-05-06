@@ -1,6 +1,7 @@
 import functions_framework
 from spanner_client import SpannerClient
 from storage_client import StorageClient
+from embedding_utils import get_latest_lock_timestamp, get_updated_nodes, filter_and_convert_nodes, generate_embeddings_partitioned
 import logging
 import os
 from absl import flags
@@ -33,6 +34,9 @@ flags.DEFINE_bool(
     'enable_embeddings',
     os.environ.get('ENABLE_EMBEDDINGS', 'false').lower() == 'true',
     'Enable embeddings')
+flags.DEFINE_list(
+    'node_types', ['StatisticalVariable', 'Topic'],
+    'Node types to generate embeddings for')
 
 if not FLAGS.is_parsed():
     FLAGS(['ingestion_helper'])
@@ -214,5 +218,24 @@ def ingestion_helper(request):
                                              FLAGS.enable_embeddings)
         spanner.initialize_database(enable_embeddings=enable_embeddings)
         return ('OK', 200)
+    elif actionType == 'embedding_ingestion':
+        logging.info("Action: embedding_ingestion")
+        enable_embeddings = request_json.get('enableEmbeddings',
+                                             FLAGS.enable_embeddings)
+        if not enable_embeddings:
+            logging.info("Embeddings not enabled, skipping.")
+            return ('OK', 200)
+            
+        node_types = FLAGS.node_types
+        try:
+            logging.info(f"Job started. Fetching all nodes for types: {node_types}")
+            timestamp = get_latest_lock_timestamp(spanner.database)
+            nodes = get_updated_nodes(spanner.database, timestamp, node_types)
+            converted_nodes = filter_and_convert_nodes(nodes)
+            affected_rows = generate_embeddings_partitioned(spanner.database, converted_nodes)
+            return (f"OK [Affected rows: {affected_rows}]", 200)
+        except Exception as e:
+            logging.error(f"Embedding ingestion failed: {e}")
+            return (f"Error: {e}", 500)
     else:
         return (f'Unknown actionType: {actionType}', 400)
