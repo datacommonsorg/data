@@ -224,7 +224,7 @@ def ingestion_helper(request):
                                              FLAGS.enable_embeddings)
         if not enable_embeddings:
             logging.info("Embeddings not enabled, skipping.")
-            return ('OK', 200)
+            return ('Invalid request on embedding ingestion.', 400)
             
         node_types = FLAGS.node_types
         try:
