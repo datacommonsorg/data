@@ -1,22 +1,12 @@
 # Copyright 2025 Google LLC
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#    https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 
 import os, sys
 import pandas as pd
 from absl import app, logging
 from pathlib import Path
 import datetime
+import shutil
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(script_dir, '../../../util'))
@@ -27,85 +17,65 @@ INPUT_FILE = os.path.join(INPUT_DIR, "rows.csv")
 NEW_FILE = os.path.join(INPUT_DIR, "NNDSS_Weekly_Data.csv")
 SOURCE_URL = "https://data.cdc.gov/api/views/x9gk-5huc/rows.csv?accessType=DOWNLOAD&api_foundry=true"
 
-
 def _start_date_of_year(year: int) -> datetime.date:
-    """
-    Return start date of the year using MMWR week rules.
-    
-    A year's first MMWR week is the first full calendar week (Sunday-Saturday)
-    that contains at least four days of the new year. This means the start
-    date of the first MMWR week can be in the previous calendar year.
-    """
     jan_one = datetime.date(year, 1, 1)
-    
-    # Calculate the day difference to get to the first Sunday of the year.
-    # The condition jan_one.isoweekday() > 3 accounts for the rule that
-    # Jan 1 must be in the first week if it falls on a Mon, Tue, Wed, or Thu.
     diff = 7 * (jan_one.isoweekday() > 3) - jan_one.isoweekday()
-    
     return jan_one + datetime.timedelta(days=diff)
 
 def get_mmwr_week_start_date(year, week) -> datetime.date:
-    """
-    Return the start date of an MMWR week (starts at Sunday).
-    The provided code originally had 'end_date' in the name but calculated
-    the start date. To maintain the original logic, this returns the start date.
-    """
     day_one = _start_date_of_year(year)
     diff = 7 * (week - 1)
     return day_one + datetime.timedelta(days=diff)
 
 def preprocess_data(filepath: str):
-    """
-    Reads a CSV file, adds a new column 'observationDate' by calculating
-    the MMWR week start date, and saves the changes back to the same file.
-    The new column is placed immediately after the 'MMWR WEEK' column.
-    
-    Args:
-        filepath (str): The path to the CSV file to read and update.
-    """
+    temp_filepath = filepath + ".tmp"
+    chunk_size = 100000 
+    first_chunk = True
+    chunk_count = 0
+
     try:
-        # Read the CSV file into a pandas DataFrame
-        df = pd.read_csv(filepath)
-
-        # Define the required column names.
-        required_cols = ['Current MMWR Year', 'MMWR WEEK']
-
-        # Check for the required columns. A KeyError will be raised if they don't exist.
-        if not all(col in df.columns for col in required_cols):
-            # This check is good practice, although the KeyError below would also catch it.
-            raise KeyError(f"The file must contain the columns: {required_cols}.")
-
-        # Use a vectorized operation with .apply() for better performance.
-        # This applies the get_mmwr_week_end_date function to each row.
-        df['observationDate'] = df.apply(
-            lambda row: get_mmwr_week_start_date(row['Current MMWR Year'], row['MMWR WEEK']),
-            axis=1
-        )
-
-        # Reorder the columns to place 'observationDate' after 'MMWR WEEK'
-        cols = list(df.columns)
-        mmwr_week_index = cols.index('MMWR WEEK')
-        # Move 'observationDate' from the end to its new position
-        observation_date_col = cols.pop()  # It was added as the last column
-        cols.insert(mmwr_week_index + 1, observation_date_col)
-        # Reassign the DataFrame with the new column order
-        df = df[cols]
-        # Save the updated DataFrame back to the same CSV file
-        df.to_csv(filepath, index=False)
-        logging.info(f"Success: File '{filepath}' has been updated and saved.")
+        print(f"DEBUG: Opening pandas reader on {filepath}...")
         
-    except FileNotFoundError:
-        logging.fatal(f"Error: The file '{filepath}' was not found.")
-        raise RuntimeError(f"Error: The file '{filepath}' was not found.")
-    except KeyError as e:
-        logging.fatal(f"Error: Missing a required column. Details: {e}")
-        raise RuntimeError(f"Error: Missing a required column. Details: {e}")
+        # Added safety flags: low_memory=False and on_bad_lines='skip'
+        # to prevent C-level SIGABRT crashes on bad rows.
+        reader = pd.read_csv(filepath, chunksize=chunk_size, low_memory=False, on_bad_lines='skip')
+        
+        for chunk in reader:
+            chunk_count += 1
+            print(f"DEBUG: Processing chunk {chunk_count}...")
+            
+            if first_chunk:
+                required_cols = ['Current MMWR Year', 'MMWR WEEK']
+                if not all(col in chunk.columns for col in required_cols):
+                    raise KeyError(f"The file must contain the columns: {required_cols}.")
+
+            chunk['observationDate'] = chunk.apply(
+                lambda row: get_mmwr_week_start_date(row['Current MMWR Year'], row['MMWR WEEK']),
+                axis=1
+            )
+
+            cols = list(chunk.columns)
+            mmwr_week_index = cols.index('MMWR WEEK')
+            observation_date_col = cols.pop()  
+            cols.insert(mmwr_week_index + 1, observation_date_col)
+            chunk = chunk[cols]
+            
+            chunk.to_csv(temp_filepath, mode='a' if not first_chunk else 'w', 
+                         header=first_chunk, index=False)
+            first_chunk = False
+
+        print("DEBUG: All chunks processed. Moving temp file...")
+        shutil.move(temp_filepath, filepath)
+        print(f"Success: File '{filepath}' updated safely.")
+        
     except Exception as e:
+        if os.path.exists(temp_filepath): os.remove(temp_filepath)
+        print(f"CRASH: Error during Pandas processing: {e}")
         logging.fatal(f"An unexpected error occurred: {e}")
         raise RuntimeError(f"Import job failed An unexpected error occurred: {e}")
 
 def main(argv):
+    print("DEBUG: Starting download phase...")
     try:
         download_file(url=SOURCE_URL,
                   output_folder=INPUT_DIR,
@@ -114,26 +84,40 @@ def main(argv):
                   tries= 3,
                   delay= 5,
                   backoff= 2)
+        print("DEBUG: Download function completed.")
     except Exception as e:
+        print(f"CRASH: Failed during download: {e}")
         logging.fatal(f"Failed to download NNDSS weekly data file,{e}")
         raise RuntimeError(f"Failed to download NNDSS weekly data file,{e}")
     
-    # 1. Preprocess the data
+    # Check if file actually downloaded and check its size
+    if not os.path.exists(INPUT_FILE):
+        print("CRASH: The file 'rows.csv' was never downloaded.")
+        sys.exit(1)
+        
+    file_size_mb = os.path.getsize(INPUT_FILE) / (1024 * 1024)
+    print(f"DEBUG: Downloaded file size is {file_size_mb:.2f} MB.")
+    
+    # Prevent Pandas from processing tiny error files
+    if file_size_mb < 0.1:
+        print("CRASH: File is suspiciously small! CDC likely returned an HTML error page.")
+        with open(INPUT_FILE, 'r') as f:
+            print(f"Preview of bad file:\n{f.read(500)}")
+        sys.exit(1)
+
+    print("DEBUG: Handing off to Pandas chunker...")
     preprocess_data(INPUT_FILE)
     
-    # 2. Rename the file
+    print("DEBUG: Renaming final file...")
     try:
         if os.path.exists(INPUT_FILE):
-            # If NNDSS_Weekly_Data.csv already exists from a previous run, remove it first
             if os.path.exists(NEW_FILE):
                 os.remove(NEW_FILE)
             os.rename(INPUT_FILE, NEW_FILE)
-            logging.info(f"Successfully renamed 'rows.csv' to 'NNDSS_Weekly_Data.csv'")
-        else:
-            logging.warning(f"Could not rename file. '{INPUT_FILE}' does not exist.")
+            print("DEBUG: Successfully renamed file.")
     except Exception as e:
-        logging.fatal(f"Failed to rename file: {e}")
-        raise RuntimeError(f"Failed to rename file: {e}")
+        print(f"CRASH: Failed to rename file: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     app.run(main)

@@ -9,7 +9,7 @@
             "provenance_description": "Notifiable Infectious Diseases Data: Weekly tables from CDC WONDER which has the incident counts of different infectious diseases per week that are reported by the 50 states, New York City, the District of Columbia, and the U.S. territories.",
             "scripts": [
                 "preprocess.py",
-                "python ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/NNDSS_Weekly_Data.csv --pv_map='nndss_weekly_pvmap.csv' --config_file=nndss_weekly_metadata.csv  --output_path=output/nndss_weekly_output"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/NNDSS_Weekly_Data.csv --pv_map='nndss_weekly_pvmap.csv' --config_file=nndss_weekly_metadata.csv  --output_path=output/nndss_weekly_output"
             ],
             "import_inputs": [
                 {
@@ -21,16 +21,16 @@
             "source_files": [
                 "input_files/NNDSS_Weekly_Data.csv"
             ],
-        "cron_schedule": "00 11 1,15 * *",
-        "resource_limits": {"cpu": 4, "memory": 8, "disk": 100},
-        "config_override": {
-            "invoke_import_validation": true,
-            "invoke_import_tool": true,
-            "invoke_differ_tool": true,
-            "skip_input_upload": false,
-            "skip_gcs_upload": false,
-            "cleanup_gcs_volume_mount": false
-                            }
+            "cron_schedule": "00 11 1,15 * *",
+            "resource_limits": {"cpu": 8, "memory": 32, "disk": 100}
         }
-    ]
+    ],
+    "config_override": {
+        "invoke_import_validation": true,
+        "invoke_import_tool": true,
+        "invoke_differ_tool": true,
+        "skip_input_upload": false,
+        "skip_gcs_upload": false,
+        "cleanup_gcs_volume_mount": false
+    }
 }
