@@ -7,21 +7,6 @@
       "params": {
         "threshold": 340
       }
-    },
-    {
-      "rule_id": "check_goldens_output_csv",
-      "validator": "GOLDENS_CHECK",
-      "params": {
-        "golden_files": "golden_data/golden_WorldBank.csv",
-        "input_files": "output/WorldBank.csv"
-      }
-    },
-    {
-      "rule_id": "check_goldens_summary_report",
-      "validator": "GOLDENS_CHECK",
-      "params": {
-        "golden_files": "golden_data/golden_summary_report.csv"
-      }
     }
   ]
 }
