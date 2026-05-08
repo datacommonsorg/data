@@ -55,8 +55,14 @@ def aggregation_helper(request):
             if import_name == 'CDCMortality': # Using the example from legacy doc
                 logging.info(f"Triggering place aggregation for {import_name}")
                 # Defaulting to California and 2020 for scaffolding
-                agg_results = place_aggregator.aggregate_population(parent_place="geoId/06", date="2020")
-                results.extend(agg_results)
+                
+                # 1. State to Country Aggregation
+                states_to_country_results = place_aggregator.aggregate_states_to_country(parent_place="geoId/06", date="2020")
+                results.extend(states_to_country_results)
+                
+                # 2. County to State Aggregation (Optimized)
+                counties_to_state_results = place_aggregator.aggregate_counties_to_state(parent_place="geoId/06", date="2020")
+                results.extend(counties_to_state_results)
             else:
                 logging.info(f"Skipping aggregation logic for {import_name}")
                 continue
