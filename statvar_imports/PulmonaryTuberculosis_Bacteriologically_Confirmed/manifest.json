@@ -9,10 +9,10 @@
             "provenance_description": "Number of people diagnosed with a new episode of pulmonary TB whose disease was bacteriologically confirmed",
             "scripts": [
                 "download_tb_data.py",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.csv --pv_map=pulmonary_tb_bctpb_pvmap.csv --config_file=pulmonary_tb_bctpb_metadata.csv --output_path=TB_Bacteriologically_Confirmed_output"
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=TB_Bacteriologically_Confirmed_input.csv --pv_map=pulmonary_tb_bctpb_pvmap.csv --config_file=pulmonary_tb_bctpb_metadata.csv --output_path=TB_Bacteriologically_Confirmed_output"
             ],
             "source_files": [
-                "source_files/*.csv"
+                "TB_Bacteriologically_Confirmed_input.csv"
             ],
             "import_inputs": [
                 {

@@ -13,10 +13,7 @@ def download_who_tb_data_with_iso3():
     }
     
     print("1. Fetching clean indicator data from WHO API...")
-    # FIX: Added 60-second timeout
     api_response = requests.get(api_url, params=params, timeout=60)
-    
-    # FIX: Replaced manual status check with raise_for_status()
     api_response.raise_for_status()
         
     # Load the clean API data into a pandas table
@@ -27,7 +24,6 @@ def download_who_tb_data_with_iso3():
     master_url = "https://extranet.who.int/tme/generateCSV.asp?ds=notifications"
     geo_columns = ['country', 'iso3']
     
-    # FIX: Use requests to fetch the CSV so we can enforce a timeout
     master_response = requests.get(master_url, timeout=60)
     master_response.raise_for_status()
     
@@ -38,7 +34,7 @@ def download_who_tb_data_with_iso3():
     print("3. Merging data and formatting...")
     merged_df = pd.merge(api_df, master_df, left_on='COUNTRY', right_on='country', how='left')
     
-    # FIX: Validate that the left join did not result in missing iso3 codes
+    # Validate that the left join did not result in missing iso3 codes
     missing_iso3_df = merged_df[merged_df['iso3'].isna()]
     if not missing_iso3_df.empty:
         unmapped_countries = missing_iso3_df['COUNTRY'].unique()
@@ -58,13 +54,9 @@ def download_who_tb_data_with_iso3():
     ]
     merged_df = merged_df[final_columns]
     
-    # 4. Save to CSV
-    # Get the absolute path of the directory containing this script
+    # 4. Save to CSV directly in the script directory (FLATTENED)
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    output_dir = os.path.join(script_dir, "source_files")
-    filename = os.path.join(output_dir, "TB_Bacteriologically_Confirmed_input.csv")
-    
-    os.makedirs(output_dir, exist_ok=True)
+    filename = os.path.join(script_dir, "TB_Bacteriologically_Confirmed_input.csv")
     
     # Save without the pandas index column
     merged_df.to_csv(filename, index=False)
@@ -72,3 +64,4 @@ def download_who_tb_data_with_iso3():
 
 if __name__ == "__main__":
     download_who_tb_data_with_iso3()
+    
