@@ -3,7 +3,7 @@
         {
             "import_name": "NCES_PrivateSchoolStats",
             "curator_emails": [
-                "support@datacommons.org"
+                ""
             ],
             "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
             "provenance_description": "US nces school data for private",
@@ -20,12 +20,7 @@
                     "cleaned_csv": "../gcs_folder/output_files/us_nces_demographics_private_school.csv"
                 }
             ],
-            "cron_schedule": "30 3 1 3,6,9,12 *",
-            "resource_limits": {
-                "cpu": 32,
-                "memory": 512,
-                "disk": 300
-            }
+            "cron_schedule": "30 3 1 3,6,9,12 *"
         }
     ]
 } 
