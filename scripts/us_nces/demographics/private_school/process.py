@@ -140,7 +140,7 @@ def main(argv):
         logging.info("Main Method Completed For Private School District")
 
     except Exception as e:
-        logging.fatal(f"Error While Running Private School Process: {e}")
+        logging.fatal(f"Error While Running Private School Process: {e}", exc_info=True)
 
 
 if __name__ == '__main__':
