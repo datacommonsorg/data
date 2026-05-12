@@ -1,0 +1,11 @@
+config,value
+provenance_url,https://data.who.int/indicators/i/45274BD/F5556F8
+output_columns,"observationDate,observationAbout,variableMeasured,value,unit,scalingFactor"
+populationType,HouseholdContact
+measuredProperty,count
+header_rows,1
+mapped_columns,6
+dc_api_root,https://api.datacommons.org
+#input_rows,100
+#debug,0
+#word_delimiter,''
