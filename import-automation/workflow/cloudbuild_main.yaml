@@ -26,6 +26,7 @@ substitutions:
   _GCS_MOUNT_BUCKET: 'datcom-ci-test'
   _BQ_DATASET_ID: 'datacommons'
   _LOCATION: 'us-central1'
+  _PROJECT_NUMBER: '879489846695'
 
 steps:
 
@@ -41,7 +42,7 @@ steps:
     - '--project=${_PROJECT_ID}'
     - '--service-account=projects/${_PROJECT_ID}/serviceAccounts/import-automation-sa@${_PROJECT_ID}.iam.gserviceaccount.com'
     - '--default-buckets-behavior=REGIONAL_USER_OWNED_BUCKET'
-    - '--substitutions=_PROJECT_ID=${_PROJECT_ID},_SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},_SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},_SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},_GCS_BUCKET_ID=${_GCS_BUCKET_ID},_LOCATION=${_LOCATION},_GCS_MOUNT_BUCKET=${_GCS_MOUNT_BUCKET},_BQ_DATASET_ID=${_BQ_DATASET_ID}'
+    - '--substitutions=_PROJECT_ID=${_PROJECT_ID},_SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},_SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},_SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},_SPANNER_GRAPH_DATABASE_ID=${_SPANNER_GRAPH_DATABASE_ID},_GCS_BUCKET_ID=${_GCS_BUCKET_ID},_LOCATION=${_LOCATION},_GCS_MOUNT_BUCKET=${_GCS_MOUNT_BUCKET},_BQ_DATASET_ID=${_BQ_DATASET_ID},_PROJECT_NUMBER=${_PROJECT_NUMBER}'
   dir: 'import-automation/workflow'
 
 # 2. Run E2E Tests on Staging
@@ -63,7 +64,7 @@ steps:
   dir: 'import-automation/workflow'
 
 # 3. Trigger Production Build (Child)
-# Uses default (Production) values defined in cloudbuild_deploy.yaml.
+# Uses default (Production) values defined in cloudbuild.yaml.
 - id: 'deploy-prod'
   name: 'gcr.io/cloud-builders/gcloud'
   args:
