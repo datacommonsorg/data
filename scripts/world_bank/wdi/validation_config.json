@@ -6,7 +6,7 @@
             "rule_id": "check_deleted_points_threshold",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 7 
+                "threshold": 0.08
             }
         },
         {
