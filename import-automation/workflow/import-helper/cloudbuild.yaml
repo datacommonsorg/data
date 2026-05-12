@@ -16,7 +16,7 @@ steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:latest', '.']
-    dir: 'import-automation/workflow/ingestion-helper'
+    dir: 'import-automation/workflow/import-helper'
 
   # Push the container image
   - name: 'gcr.io/cloud-builders/docker'
@@ -28,8 +28,8 @@ steps:
 
 substitutions:
   _AR_REPO_URL: 'us-docker.pkg.dev/datcom-ci/gcr.io'
-  _SERVICE_NAME: 'spanner-ingestion-helper'
-  _IMAGE_NAME: 'ingestion-helper'
+  _SERVICE_NAME: 'import-automation-helper'
+  _IMAGE_NAME: 'import-helper'
   _TAG: 'latest'
   _PROJECT_ID: 'datcom-ci'
   _LOCATION: 'us-central1'
