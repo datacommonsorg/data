@@ -237,7 +237,7 @@ def main(argv):
     if success_count > 0:
         if not run_mapping_query(bq_client):
             raise RuntimeError("BigQuery ingestion failed. Terminating.")
-        
+
         update_bq_state(current_max_date, current_max_cycle)
 
 
