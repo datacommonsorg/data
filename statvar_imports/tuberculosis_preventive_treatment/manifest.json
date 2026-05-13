@@ -9,11 +9,7 @@
             "provenance_description": "Tuberculosis: Percentage of household contacts (or all close contacts) who were started on TB preventive treatment out of those eligible",
             "scripts": [
                 "tb_data_download_who.py",
-<<<<<<< HEAD
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Tuberculosis_preventive_treatment.csv --pv_map=tuberculosis_PreventiveTreatment_pvmap.csv --config_file=tuberculosis_PreventiveTreatment_metadata.csv --output_path=output/tuberculosis_preventive_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
-=======
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Tuberculosis_preventive_treatment.csv --pv_map=tuberculosis_PreventiveTreatment_pv_mapping.csv --config_file=tuberculosis_PreventiveTreatment_metadata.csv --output_path=output/tuberculosis_preventive_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
->>>>>>> 52fd568515958ab33ac62e11b3b07a03ae2933d3
             ],
             "import_inputs": [
                 {

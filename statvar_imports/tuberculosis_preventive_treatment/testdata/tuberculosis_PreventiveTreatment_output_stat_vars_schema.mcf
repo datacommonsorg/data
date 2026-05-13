@@ -6,11 +6,7 @@ isProvisional: dcs:True
 
 Node: dcid:Count_Person_Tuberculosis_EligibleForPreventiveTreatment
 typeOf: dcid:MeasurementDenominatorEnum
-<<<<<<< HEAD
 name: "Count_Person_Tuberculosis_EligibleForPreventiveTreatment"
-=======
-name: "Count_ Person_ Tuberculosis_ Eligible For Preventive Treatment"
->>>>>>> 52fd568515958ab33ac62e11b3b07a03ae2933d3
 isProvisional: dcs:True
 
 Node: dcid:medicalCondition
@@ -25,10 +21,6 @@ domainIncludes: dcid:Person
 
 Node: dcid:StartedOnTBPreventiveTreatment
 typeOf: dcid:MedicalEventEnum
-<<<<<<< HEAD
 name: "StartedOnTBPreventiveTreatment"
-=======
-name: "Started On TBPreventive Treatment"
->>>>>>> 52fd568515958ab33ac62e11b3b07a03ae2933d3
 isProvisional: dcs:True
 
