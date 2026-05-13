@@ -5,7 +5,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "<https://data.who.int/indicators/i/45274BD/F5556F8>",
+            "provenance_url": "https://data.who.int/indicators/i/45274BD/F5556F8",
             "provenance_description": "Tuberculosis: Percentage of household contacts (or all close contacts) who were started on TB preventive treatment out of those eligible",
             "scripts": [
                 "tb_data_download_who.py",
