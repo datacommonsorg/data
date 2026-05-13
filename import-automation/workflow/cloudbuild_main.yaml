@@ -27,10 +27,22 @@ substitutions:
   _BQ_DATASET_ID: 'datacommons'
   _LOCATION: 'us-central1'
   _PROJECT_NUMBER: '879489846695'
+  _AR_REPO_URL: 'us-docker.pkg.dev/datcom-ci/gcr.io'
 
 steps:
 
-# 1. Trigger Staging Build (Child)
+# 1. Build and push helper images
+- id: 'build-ingestion-helper'
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['builds', 'submit', 'ingestion-helper', '--config', 'ingestion-helper/cloudbuild.yaml', '--substitutions', '_AR_REPO_URL=${_AR_REPO_URL}']
+  dir: 'import-automation/workflow'
+
+- id: 'build-import-helper'
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['builds', 'submit', 'import-helper', '--config', 'import-helper/cloudbuild.yaml', '--substitutions', '_AR_REPO_URL=${_AR_REPO_URL}']
+  dir: 'import-automation/workflow'
+
+# 2. Trigger Staging Build (Child)
 # Overrides default (Production) values with Staging values.
 - id: 'deploy-staging'
   name: 'gcr.io/cloud-builders/gcloud'
@@ -40,8 +52,6 @@ steps:
     - '.'
     - '--config=cloudbuild.yaml'
     - '--project=${_PROJECT_ID}'
-    - '--service-account=projects/${_PROJECT_ID}/serviceAccounts/import-automation-sa@${_PROJECT_ID}.iam.gserviceaccount.com'
-    - '--default-buckets-behavior=REGIONAL_USER_OWNED_BUCKET'
     - '--substitutions=_PROJECT_ID=${_PROJECT_ID},_SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},_SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},_SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},_SPANNER_GRAPH_DATABASE_ID=${_SPANNER_GRAPH_DATABASE_ID},_GCS_BUCKET_ID=${_GCS_BUCKET_ID},_LOCATION=${_LOCATION},_GCS_MOUNT_BUCKET=${_GCS_MOUNT_BUCKET},_BQ_DATASET_ID=${_BQ_DATASET_ID},_PROJECT_NUMBER=${_PROJECT_NUMBER}'
   dir: 'import-automation/workflow'
 
@@ -73,8 +83,6 @@ steps:
     - '.'
     - '--config=cloudbuild.yaml'
     - '--project=${_PROJECT_ID}'  # Build runs in CI project, deploys to Prod
-    - '--service-account=projects/${_PROJECT_ID}/serviceAccounts/import-automation-sa@${_PROJECT_ID}.iam.gserviceaccount.com'
-    - '--default-buckets-behavior=REGIONAL_USER_OWNED_BUCKET'
   dir: 'import-automation/workflow'
 
 options:
