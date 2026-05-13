@@ -1,0 +1,30 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "WHO_TuberculosisPreventiveTreatment",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://data.who.int/indicators/i/45274BD/F5556F8",
+            "provenance_description": "Tuberculosis: Percentage of household contacts (or all close contacts) who were started on TB preventive treatment out of those eligible",
+            "scripts": [
+                "tb_data_download_who.py",
+<<<<<<< HEAD
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Tuberculosis_preventive_treatment.csv --pv_map=tuberculosis_PreventiveTreatment_pvmap.csv --config_file=tuberculosis_PreventiveTreatment_metadata.csv --output_path=output/tuberculosis_preventive_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+=======
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Tuberculosis_preventive_treatment.csv --pv_map=tuberculosis_PreventiveTreatment_pv_mapping.csv --config_file=tuberculosis_PreventiveTreatment_metadata.csv --output_path=output/tuberculosis_preventive_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+>>>>>>> 52fd568515958ab33ac62e11b3b07a03ae2933d3
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/tuberculosis_preventive_output.tmcf",
+                    "cleaned_csv": "output/tuberculosis_preventive_output.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/Tuberculosis_preventive_treatment.csv"
+            ],
+            "cron_schedule": "0 10 10,21 * *"
+        }
+    ]
+}
