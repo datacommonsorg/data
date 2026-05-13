@@ -93,6 +93,7 @@ def update_bq_state(latest_date, latest_cycle):
             f"Successfully updated BQ state to: {latest_date} {latest_cycle}z")
     except Exception as e:
         logging.error(f"Failed to update state.json: {e}")
+        raise
 
 
 def run_mapping_query(bq_client):
@@ -234,8 +235,10 @@ def main(argv):
 
     # 4. Finalize
     if success_count > 0:
-        if run_mapping_query(bq_client):
-            update_bq_state(current_max_date, current_max_cycle)
+        if not run_mapping_query(bq_client):
+            raise RuntimeError("BigQuery ingestion failed. Terminating.")
+
+        update_bq_state(current_max_date, current_max_cycle)
 
 
 if __name__ == "__main__":
