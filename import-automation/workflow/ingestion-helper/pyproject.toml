@@ -32,3 +32,8 @@ dependencies = [
 
 [tool.hatch.build.targets.wheel]
 bypass-selection = true
+
+[dependency-groups]
+dev = [
+    "pytest",
+]
