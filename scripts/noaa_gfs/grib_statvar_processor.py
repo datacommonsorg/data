@@ -650,10 +650,7 @@ def main(argv):
                 )
                 update_state_json(date_str, cycle_str)
             else:
-                logging.error(
-                    f"Failed to process {path_str}. Stopping to maintain integrity."
-                )
-                break
+                raise RuntimeError(f"Pipeline failed at file: {path_str}")
         else:
             logging.warning(
                 f"Could not extract date/cycle from {path_str}; skipping.")
