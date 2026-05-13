@@ -34,12 +34,12 @@ steps:
 # 1. Build and push helper images
 - id: 'build-ingestion-helper'
   name: 'gcr.io/cloud-builders/gcloud'
-  args: ['builds', 'submit', 'ingestion-helper', '--config', 'ingestion-helper/cloudbuild.yaml', '--substitutions', '_PROJECT_ID=${_PROJECT_ID},_LOCATION=${_LOCATION},_AR_REPO_URL=${_AR_REPO_URL}']
+  args: ['builds', 'submit', 'ingestion-helper', '--config', 'ingestion-helper/cloudbuild.yaml', '--substitutions', '_AR_REPO_URL=${_AR_REPO_URL}']
   dir: 'import-automation/workflow'
 
 - id: 'build-import-helper'
   name: 'gcr.io/cloud-builders/gcloud'
-  args: ['builds', 'submit', 'import-helper', '--config', 'import-helper/cloudbuild.yaml', '--substitutions', '_PROJECT_ID=${_PROJECT_ID},_LOCATION=${_LOCATION},_AR_REPO_URL=${_AR_REPO_URL}']
+  args: ['builds', 'submit', 'import-helper', '--config', 'import-helper/cloudbuild.yaml', '--substitutions', '_AR_REPO_URL=${_AR_REPO_URL}']
   dir: 'import-automation/workflow'
 
 # 2. Trigger Staging Build (Child)
