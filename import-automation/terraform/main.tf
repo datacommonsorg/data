@@ -43,24 +43,6 @@ variable "region" {
   default     = "us-central1"
 }
 
-variable "github_owner" {
-  description = "The owner of the GitHub repository"
-  type        = string
-  default     = "datacommonsorg"
-}
-
-variable "github_repo_name" {
-  description = "The name of the GitHub repository (data)"
-  type        = string
-  default     = "data"
-}
-
-variable "github_repo_ingestion_name" {
-  description = "The name of the GitHub repository (import)"
-  type        = string
-  default     = "import"
-}
-
 variable "spanner_instance_id" {
   description = "Spanner Instance ID"
   type        = string
@@ -89,6 +71,12 @@ variable "dc_api_key" {
   description = "Data Commons API Key"
   type        = string
   sensitive   = true
+}
+
+variable "artifact_registry_url" {
+  description = "Artifact Registry URL for Cloud Run images"
+  type        = string
+  default     = "us-docker.pkg.dev/datcom-ci/gcr.io"
 }
 
 # --- APIs ---
@@ -181,14 +169,14 @@ resource "google_storage_bucket" "mount_bucket" {
 # --- Cloud Functions ---
 
 resource "google_cloud_run_v2_service" "ingestion_helper" {
-  name     = "spanner-ingestion-helper"
+  name     = "ingestion-helper-service"
   location = var.region
   project  = var.project_id
 
   template {
     service_account = google_service_account.automation_sa.email
     containers {
-      image = "${var.region}-docker.pkg.dev/${var.project_id}/${google_artifact_registry_repository.automation_repo.repository_id}/spanner-ingestion-helper:latest"
+      image = "${var.artifact_registry_url}/datacommons-ingestion-helper:latest"
       env {
         name  = "PROJECT_ID"
         value = var.project_id
@@ -228,14 +216,14 @@ resource "google_cloud_run_v2_service" "ingestion_helper" {
 }
 
 resource "google_cloud_run_v2_service" "import_helper" {
-  name     = "import-automation-helper"
+  name     = "import-helper-service"
   location = var.region
   project  = var.project_id
 
   template {
     service_account = google_service_account.automation_sa.email
     containers {
-      image = "${var.region}-docker.pkg.dev/${var.project_id}/${google_artifact_registry_repository.automation_repo.repository_id}/import-automation-helper:latest"
+      image = "${var.artifact_registry_url}/datacommons-import-helper:latest"
       env {
         name  = "PROJECT_ID"
         value = var.project_id
