@@ -27,9 +27,10 @@ import requests
 logging.getLogger().setLevel(logging.INFO)
 
 PROJECT_ID = os.environ.get('PROJECT_ID')
+PROJECT_NUMBER = os.environ.get('PROJECT_NUMBER')
 LOCATION = os.environ.get('LOCATION')
 GCS_BUCKET_ID = os.environ.get('GCS_BUCKET_ID')
-INGESTION_HELPER_URL = f"https://{LOCATION}-{PROJECT_ID}.cloudfunctions.net/spanner-ingestion-helper"
+INGESTION_HELPER_URL = f"https://ingestion-helper-service-{PROJECT_NUMBER}.{LOCATION}.run.app"
 SPANNER_INGESTION_WORKFLOW_ID = 'spanner-ingestion-workflow'
 IMPORT_AUTOMATION_WORKFLOW_ID = 'import-automation-workflow'
 

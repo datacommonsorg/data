@@ -16,41 +16,15 @@ steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:latest', '.']
-    dir: 'import-automation/workflow/ingestion-helper'
 
   # Push the container image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}']
 
-  # Deploy container image to Cloud Run
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-      - 'run'
-      - 'deploy'
-      - '$_SERVICE_NAME'
-      - '--image'
-      - '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}'
-      - '--region'
-      - '${_LOCATION}'
-      - '--project'
-      - '${_PROJECT_ID}'
-      - '--no-allow-unauthenticated'
-      - '--set-env-vars'
-      - 'PROJECT_ID=${_PROJECT_ID},LOCATION=${_LOCATION},SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},SPANNER_GRAPH_DATABASE_ID=${_SPANNER_GRAPH_DATABASE_ID},GCS_BUCKET_ID=${_GCS_BUCKET_ID},BQ_DATASET_ID=${_BQ_DATASET_ID}'
-
 substitutions:
   _AR_REPO_URL: 'us-docker.pkg.dev/datcom-ci/gcr.io'
-  _SERVICE_NAME: 'spanner-ingestion-helper'
-  _IMAGE_NAME: 'ingestion-helper'
+  _IMAGE_NAME: 'datacommons-ingestion-helper'
   _TAG: 'latest'
-  _PROJECT_ID: 'datcom-ci'
-  _LOCATION: 'us-central1'
-  _SPANNER_PROJECT_ID: 'datcom-ci'
-  _SPANNER_INSTANCE_ID: 'datcom-spanner-test'
-  _SPANNER_DATABASE_ID: 'dc-test-db'
-  _SPANNER_GRAPH_DATABASE_ID: 'dc-test-db'
-  _GCS_BUCKET_ID: 'datcom-ci-test'
-  _BQ_DATASET_ID: 'datacommons'
 
 images:
   - '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}'
