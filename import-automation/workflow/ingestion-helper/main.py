@@ -7,6 +7,7 @@ import os
 from absl import flags
 import import_utils
 from flask import jsonify
+from aggregation_utils import AggregationUtils
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -237,5 +238,19 @@ def ingestion_helper(request):
         except Exception as e:
             logging.error(f"Embedding ingestion failed: {e}")
             return (f"Error: {e}", 500)
+    elif actionType == 'run_aggregation':
+        # Runs aggregation logic for the specified imports.
+        # Input:
+        #   importList: list of imports to aggregate
+        import_list = request_json.get('importList', [])
+        aggregation = AggregationUtils()
+        try:
+            if aggregation.run_aggregation(import_list):
+                return ('OK', 200)
+            else:
+                return ('Aggregation failed', 500)
+        except Exception as e:
+            return (f"Aggregation failed: {str(e)}", 500)
+
     else:
         return (f'Unknown actionType: {actionType}', 400)
