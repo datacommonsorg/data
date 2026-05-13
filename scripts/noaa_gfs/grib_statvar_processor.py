@@ -356,6 +356,7 @@ def update_state_json(latest_date, latest_cycle):
             f"Successfully updated GCS state to: {latest_date} {latest_cycle}z")
     except Exception as e:
         logging.error(f"Failed to update state.json: {e}")
+        raise
 
 
 # --- WORKER FUNCTION ---

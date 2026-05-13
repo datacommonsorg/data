@@ -93,6 +93,7 @@ def update_bq_state(latest_date, latest_cycle):
             f"Successfully updated BQ state to: {latest_date} {latest_cycle}z")
     except Exception as e:
         logging.error(f"Failed to update state.json: {e}")
+        raise
 
 
 def run_mapping_query(bq_client):
