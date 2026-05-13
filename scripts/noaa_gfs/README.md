@@ -37,7 +37,7 @@ This stage converts binary meteorological data into structured CSVs using the `p
 The pipeline is governed by specific resource requirements for high-concurrency GRIB decompression:
 * **Cron Schedule:** `30 04,10,16,22 * * *` (Runs 30 minutes after GFS cycle releases).
 * **Resource Limits:** 64 CPUs | 256GB RAM | 4GB Disk.
-* **Timeout:** 24 hours (`86400`) (default timeout).
+* **Timeout:** 24 hours (86400s) (default timeout).
 
 ---
 
