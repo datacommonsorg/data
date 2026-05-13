@@ -12,8 +12,7 @@ main:
           - gcsMountBucket: ${sys.get_env("GCS_MOUNT_BUCKET")}
           - gcsImportBucket: ${sys.get_env("GCS_BUCKET_ID")}
           - gcsMountPath: "/tmp/gcs"
-          - ingestionHelper: "spanner-ingestion-helper" 
-          - helperUrl: ${"https://" + ingestionHelper + "-" + sys.get_env("PROJECT_NUMBER") + "." + region + ".run.app"}
+          - helperUrl: ${"https://ingestion-helper-service-" + sys.get_env("PROJECT_NUMBER") + "." + region + ".run.app"}
           - startTime: ${sys.now()}
           - defaultResources:
               machine: "n2-standard-8"

@@ -12,7 +12,7 @@ main:
           - spanner_project_id: '${sys.get_env("SPANNER_PROJECT_ID")}'
           - spanner_instance_id: '${sys.get_env("SPANNER_INSTANCE_ID")}'
           - spanner_database_id: '${sys.get_env("SPANNER_DATABASE_ID")}'
-          - helper_url: ${"https://spanner-ingestion-helper-" + sys.get_env("PROJECT_NUMBER") + "." + location + ".run.app"}
+          - helper_url: ${"https://ingestion-helper-service-" + sys.get_env("PROJECT_NUMBER") + "." + location + ".run.app"}
           - import_list: ${default(map.get(args, "importList"), [])}
           - execution_error: null
     - acquire_ingestion_lock:
