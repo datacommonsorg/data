@@ -16,36 +16,15 @@ steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:latest', '.']
-    dir: 'import-automation/workflow/import-helper'
 
   # Push the container image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}']
 
-  # Deploy container image to Cloud Run
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-      - 'run'
-      - 'deploy'
-      - '$_SERVICE_NAME'
-      - '--image'
-      - '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}'
-      - '--region'
-      - '${_LOCATION}'
-      - '--project'
-      - '${_PROJECT_ID}'
-      - '--no-allow-unauthenticated'
-      - '--set-env-vars'
-      - 'PROJECT_ID=${_PROJECT_ID},LOCATION=${_LOCATION},GCS_BUCKET_ID=${_GCS_BUCKET_ID}'
-
 substitutions:
   _AR_REPO_URL: 'us-docker.pkg.dev/datcom-ci/gcr.io'
-  _SERVICE_NAME: 'import-automation-helper'
-  _IMAGE_NAME: 'import-helper'
+  _IMAGE_NAME: 'datacommons-import-helper'
   _TAG: 'latest'
-  _PROJECT_ID: 'datcom-ci'
-  _LOCATION: 'us-central1'
-  _GCS_BUCKET_ID: 'datcom-ci-test'
 
 images:
   - '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}'
