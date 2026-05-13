@@ -34,12 +34,11 @@ python3 statvar_imports/tuberculosis_preventive_treatment/tb_data_download_who.p
 **For Test Data Run**
 ```bash
 	python3 tools/statvar_importer/stat_var_processor.py \
-  --input_data="statvar_imports/tuberculosis_preventive_treatment/source_files/Tuberculosis_preventive_treatment.csv" \
+  --input_data="statvar_imports/tuberculosis_preventive_treatment/testdata/Tuberculosis_preventive_treatment_input.csv" \
   --pv_map="statvar_imports/tuberculosis_preventive_treatment/tuberculosis_PreventiveTreatment_pv_mapping.csv" \
   --output_path="statvar_imports/tuberculosis_preventive_treatment/output_files/tuberculosis_PreventiveTreatment" \
   --config_file="statvar_imports/tuberculosis_preventive_treatment/tuberculosis_PreventiveTreatment_metadata.csv" \
   --existing_statvar_mcf="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
-```
     
 **For Main data run**
 ```bash
