@@ -15,35 +15,17 @@
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    dir: 'import-automation/workflow/ingestion-helper'
-    args: ['build', '-t', '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:$_TAG', '-t', '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:latest', '.']
-  
-  # Push the container image - Needed before deployment
+    args: ['build', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:latest', '.']
+
+  # Push the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:$_TAG']
-  
-  # Deploy container image to Cloud Run (Conditional)
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        if [ "$_DEPLOY" = "true" ]; then
-          gcloud run deploy '$_SERVICE_NAME' \
-            --image '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:$_TAG' \
-            --region '$_AR_REGION' \
-            --project '$PROJECT_ID'
-        else
-          echo "Skipping deployment as _DEPLOY is not set to true"
-        fi
+    args: ['push', '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}']
 
 substitutions:
-  _AR_REGION: 'us'
-  _AR_REPO: 'gcr.io'
-  _SERVICE_NAME: 'spanner-ingestion-helper'
-  _DEPLOY: 'false'
+  _AR_REPO_URL: 'us-docker.pkg.dev/datcom-ci/gcr.io'
+  _IMAGE_NAME: 'datacommons-ingestion-helper'
   _TAG: 'latest'
 
 images:
-  - '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:$_TAG'
-  - '$_AR_REGION-docker.pkg.dev/datcom-ci/$_AR_REPO/datacommons-ingestion-helper:latest'
+  - '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}'
+  - '${_AR_REPO_URL}/${_IMAGE_NAME}:latest'

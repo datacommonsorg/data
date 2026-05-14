@@ -12,28 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+FROM python:3.12-slim
 
-[project]
-name = "ingestion-helper"
-version = "0.1.0"
-description = "Ingestion helper for Data Commons Spanner ingestion"
-dependencies = [
-    "functions-framework==3.*",
-    "google-cloud-spanner",
-    "google-api-python-client",
-    "google-cloud-storage",
-    "google-auth",
-    "absl-py",
-    "google-cloud-bigquery",
-]
+# Copy uv binary
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-[tool.hatch.build.targets.wheel]
-bypass-selection = true
+# Allow statements and log messages to immediately appear in the logs
+ENV PYTHONUNBUFFERED True
 
-[dependency-groups]
-dev = [
-    "pytest",
-]
+WORKDIR /app
+
+# Copy local code to the container image.
+COPY . .
+
+# Install production dependencies using uv.
+RUN uv pip install --system --no-cache -r requirements.txt
+
+# Run the functions framework
+CMD ["functions-framework", "--target", "handle_feed_event"]

@@ -154,7 +154,7 @@ class TestEmbeddingUtils(unittest.TestCase):
         for i, tx in enumerate(transactions):
             tx.execute_update.assert_called_once()
             args, kwargs = tx.execute_update.call_args
-            self.assertIn("INSERT OR UPDATE INTO NodeEmbeddings", args[0])
+            self.assertIn("INSERT OR UPDATE INTO NodeEmbedding", args[0])
             
             # Verify batch content
             batch = kwargs["params"]["nodes"]
