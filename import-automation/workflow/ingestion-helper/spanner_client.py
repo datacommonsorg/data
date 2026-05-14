@@ -43,7 +43,10 @@ class SpannerClient:
         """Initializes a Spanner client and connects to a specific database."""
         spanner_client = spanner.Client(
             project=project_id,
-            client_options={'quota_project_id': project_id},
+            client_options={
+                'quota_project_id': project_id,
+                'api_endpoint': 'spanner.googleapis.com'
+            },
             disable_builtin_metrics=True)
         instance = spanner_client.instance(instance_id)
         database = instance.database(database_id)
@@ -434,7 +437,7 @@ class SpannerClient:
         query = """
             SELECT 'table' as type, table_name as name FROM information_schema.tables WHERE table_schema = ''
             UNION ALL
-            SELECT 'index' as type, index_name as name FROM information_schema.indexes WHERE table_schema = '' AND table_name = 'NodeEmbedding'
+            SELECT 'index' as type, index_name as name FROM information_schema.indexes WHERE table_schema = '' AND table_name IN ('NodeEmbedding', 'Edge', 'Observation')
             UNION ALL
             SELECT 'model' as type, model_name as name FROM information_schema.models WHERE model_schema = ''
         """
@@ -466,7 +469,7 @@ class SpannerClient:
             "Node", "Edge", "Observation", "ImportStatus", "IngestionHistory",
             "ImportVersionHistory", "IngestionLock", "Cache", "VariableMetadata"
         ]
-        required_indexes = []
+        required_indexes = ["InEdge", "VariableMeasuredObservationAbout"]
         required_models = []
 
         if enable_embeddings:

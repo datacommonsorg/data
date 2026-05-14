@@ -41,6 +41,8 @@ class TestSpannerClient(unittest.TestCase):
             ["table", "IngestionLock"], ["table", "Cache"],
             ["table", "VariableMetadata"],
             ["index", "NodeEmbeddingIndex"],
+            ["index", "InEdge"],
+            ["index", "VariableMeasuredObservationAbout"],
             ["model", "NodeEmbeddingModel"]
         ]
         
