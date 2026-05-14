@@ -15,7 +15,7 @@
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}', '.']
+    args: ['build', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:latest', '.']
 
   # Push the container image
   - name: 'gcr.io/cloud-builders/docker'
@@ -28,3 +28,4 @@ substitutions:
 
 images:
   - '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}'
+  - '${_AR_REPO_URL}/${_IMAGE_NAME}:latest'
