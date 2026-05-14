@@ -561,14 +561,6 @@ class SpannerClient:
         logging.info("Seeding database with base nodes...")
 
         def _seed(transaction: Transaction):
-            subjects = ["StatisticalVariable", "StatVarGroup", "StatVarObservation", "Topic", "c/g/Root"]
-            sql = "SELECT subject_id FROM Node WHERE subject_id IN UNNEST(@subjects)"
-            params = {"subjects": subjects}
-            param_types = {"subjects": Array(STRING)}
-            existing = set()
-            for row in transaction.execute_sql(sql, params, param_types):
-                existing.add(row[0])
-
             candidates = {
                 "StatisticalVariable": ["StatisticalVariable", ["Class"], spanner.COMMIT_TIMESTAMP],
                 "StatVarGroup": ["StatVarGroup", ["Class"], spanner.COMMIT_TIMESTAMP],
@@ -576,6 +568,13 @@ class SpannerClient:
                 "Topic": ["Topic", ["Class"], spanner.COMMIT_TIMESTAMP],
                 "c/g/Root": ["c/g/Root", ["StatVarGroup"], spanner.COMMIT_TIMESTAMP],
             }
+            subjects = list(candidates.keys())
+            sql = "SELECT subject_id FROM Node WHERE subject_id IN UNNEST(@subjects)"
+            params = {"subjects": subjects}
+            param_types = {"subjects": Array(STRING)}
+            existing = set()
+            for row in transaction.execute_sql(sql, params, param_types):
+                existing.add(row[0])
 
             values = [candidates[subj] for subj in subjects if subj not in existing]
 
