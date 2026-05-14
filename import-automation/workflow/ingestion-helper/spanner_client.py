@@ -555,3 +555,40 @@ class SpannerClient:
         except Exception as e:
             logging.error(f"Failed to update DDL with protos: {e}")
             raise
+
+    def seed_database(self):
+        """Seeds the database with base empty nodes."""
+        logging.info("Seeding database with base nodes...")
+
+        def _seed(transaction: Transaction):
+            subjects = ["StatisticalVariable", "StatVarGroup", "StatVarObservation", "Topic", "c/g/Root"]
+            sql = "SELECT subject_id FROM Node WHERE subject_id IN UNNEST(@subjects)"
+            params = {"subjects": subjects}
+            param_types = {"subjects": Array(STRING)}
+            existing = set()
+            for row in transaction.execute_sql(sql, params, param_types):
+                existing.add(row[0])
+
+            candidates = {
+                "StatisticalVariable": ["StatisticalVariable", ["Class"], spanner.COMMIT_TIMESTAMP],
+                "StatVarGroup": ["StatVarGroup", ["Class"], spanner.COMMIT_TIMESTAMP],
+                "StatVarObservation": ["StatVarObservation", ["Class"], spanner.COMMIT_TIMESTAMP],
+                "Topic": ["Topic", ["Class"], spanner.COMMIT_TIMESTAMP],
+                "c/g/Root": ["c/g/Root", ["StatVarGroup"], spanner.COMMIT_TIMESTAMP],
+            }
+
+            values = [candidates[subj] for subj in subjects if subj not in existing]
+
+            if values:
+                columns = ["subject_id", "types", "last_update_timestamp"]
+                transaction.insert(table="Node", columns=columns, values=values)
+
+        try:
+            self.database.run_in_transaction(_seed)
+            if self.graph_database and self.graph_database.name != self.database.name:
+                self.graph_database.run_in_transaction(_seed)
+            logging.info("Database seeded successfully.")
+        except Exception as e:
+            logging.error(f"Error seeding database: {e}")
+            raise
+
