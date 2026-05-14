@@ -38,7 +38,8 @@ class TestSpannerClient(unittest.TestCase):
             ["table", "Node"], ["table", "Edge"], ["table", "Observation"],
             ["table", "NodeEmbedding"], ["table", "ImportStatus"],
             ["table", "IngestionHistory"], ["table", "ImportVersionHistory"],
-            ["table", "IngestionLock"],
+            ["table", "IngestionLock"], ["table", "Cache"],
+            ["table", "VariableMetadata"],
             ["index", "NodeEmbeddingIndex"],
             ["model", "NodeEmbeddingModel"]
         ]
