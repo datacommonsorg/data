@@ -145,6 +145,13 @@ If you want to perform "only download", run the below command:
 ```bash
 python3 worldbank.py --mode=download
 ```
+### Added golden files and increased the threshold with golden checks in validation_config.json.
+
+The GOLDENS_CHECK validator confirms that the import includes a specific set of expected records. This is useful for verifying that critical StatVars, Places, or specific metadata combinations are consistently present in the output.
+
+The validator compares the input data (usually from the stats data source) against one or more "golden" files (MCF or CSV).
+
+If any combination of values in a golden file row is missing from the input, the validation fails. The missing golden rows are then listed in the validation report JSON.
 
 We highly recommend the use of the import validation tool for this import which
 you can find in https://github.com/datacommonsorg/tools/tree/master/import-validation-helper.
