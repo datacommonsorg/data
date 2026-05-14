@@ -184,7 +184,7 @@ class SpannerClient:
     def get_import_info(self, import_list: list) -> list:
         """Get the details of imports to ingest.
 
-        If import_list is empty, return info for ready imports.
+        If import_list is empty, return info for ready imports (STAGING).
         If import_list is not empty, return info for the imports in the list that are in 'STAGING' status.
 
         Args:
@@ -464,7 +464,7 @@ class SpannerClient:
 
         required_tables = [
             "Node", "Edge", "Observation", "ImportStatus", "IngestionHistory",
-            "ImportVersionHistory", "IngestionLock"
+            "ImportVersionHistory", "IngestionLock", "Cache", "VariableMetadata"
         ]
         required_indexes = []
         required_models = []
