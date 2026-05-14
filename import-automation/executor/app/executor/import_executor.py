@@ -721,7 +721,7 @@ class ImportExecutor:
             logging.error(
                 "Marking import as VALIDATION due to validation failure.")
             import_summary.status = ImportStatus.VALIDATION
-        elif not differ_status:
+        elif self.config.enable_skip_status and not differ_status:
             logging.info("Marking import as SKIP due to no data diff.")
             import_summary.status = ImportStatus.SKIP
         else:

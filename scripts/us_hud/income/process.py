@@ -69,7 +69,13 @@ def get_url(year):
 def download_with_retry(url):
     '''Retries downloading a file up to 5 times with exponential backoff.'''
     logging.info(f"Downloading URL: {url}")
-    return requests.get(url, verify=False)
+    headers = {
+        'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    }
+    response = requests.get(url, headers=headers, timeout=60)
+    response.raise_for_status()
+    return response
 
 
 def download_file(url: str, filename: str, input_folder: str):

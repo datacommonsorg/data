@@ -61,7 +61,15 @@ Updates the version of an import, records version history, and updates the statu
 Initializes the Spanner database by creating all necessary tables and uploading proto descriptors.
 
 *   This action requires no payload parameters. It automatically reads `schema.sql` and `storage.pb` from the container directory to provision the database schema and proto descriptors.
+*   `enableEmbeddings` (Optional): Boolean to enable creation of embedding tables and models.
 *   **Note on Protos**: The `storage.pb` file is generated during the Docker build process. The `Dockerfile` fetches `storage.proto` from the `datacommonsorg/import` GitHub repository and compiles it into `storage.pb`.
+
+#### `embedding_ingestion`
+Triggers the generation of embeddings for updated nodes in Spanner. It fetches nodes of specific types (e.g., `StatisticalVariable`, `Topic`) that have been updated, generates embeddings using a remote ML model in Spanner, and stores the results in the `NodeEmbedding` table.
+
+*   `enableEmbeddings` (Optional): Boolean to override the default setting for enabling embeddings. If false or missing and default is false, it skips embedding generation.
+*   **Flags**:
+    -   `--node_types`: A comma-separated list of node types to process (default: `StatisticalVariable,Topic`). This is a command-line flag for the service, not a request parameter.
 
 ## Local Development and Testing
 
@@ -81,4 +89,10 @@ You can test specific actions by sending a POST request with a JSON payload. For
 curl -X POST http://localhost:8080 \
   -H "Content-Type: application/json" \
   -d '{"actionType": "initialize_database"}'
+```
+### Running unit tests
+Run unit tests with uv using:
+
+```bash
+uv run pytest
 ```

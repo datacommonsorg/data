@@ -12,28 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:latest', '.']
 
-[project]
-name = "ingestion-helper"
-version = "0.1.0"
-description = "Ingestion helper for Data Commons Spanner ingestion"
-dependencies = [
-    "functions-framework==3.*",
-    "google-cloud-spanner",
-    "google-api-python-client",
-    "google-cloud-storage",
-    "google-auth",
-    "absl-py",
-    "google-cloud-bigquery",
-]
+  # Push the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}']
 
-[tool.hatch.build.targets.wheel]
-bypass-selection = true
+substitutions:
+  _AR_REPO_URL: 'us-docker.pkg.dev/datcom-ci/gcr.io'
+  _IMAGE_NAME: 'datacommons-import-helper'
+  _TAG: 'latest'
 
-[dependency-groups]
-dev = [
-    "pytest",
-]
+images:
+  - '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}'
+  - '${_AR_REPO_URL}/${_IMAGE_NAME}:latest'
