@@ -45,7 +45,9 @@ def download_tb_percentage_data():
     merged_df = merged_df[final_columns]
     
     # 4. Save to CSV in a new folder
-    output_dir = "statvar_imports/tuberculosis_percentage/input_files"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(script_dir, "input_files")
+    
     filename = os.path.join(output_dir, "tuberculosisPercentage_input.csv")
     
     os.makedirs(output_dir, exist_ok=True)
