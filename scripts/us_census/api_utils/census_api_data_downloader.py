@@ -304,6 +304,7 @@ def consolidate_files(dataset: str,
                 # substitute annotations
                 if table_id in column_name and column_name[-1] != 'A':
                     if replace_annotations:
+                        df2[column_name] = df2[column_name].astype(object)
                         df2.loc[df2[column_name + 'A'].notna(),
                                 column_name] = df2[column_name + 'A']
                     if drop_annotations:
