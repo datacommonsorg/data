@@ -26,7 +26,7 @@ of the entire record.
 
 To shard by a combination of columns, set the shard_key to the list of columns,
 for example, to shard a CSV file with SVObs such that each observation goes
-dtereministically to a specific shard, set the shard_key with the columns:
+detereministically to a specific shard, set the shard_key with the columns:
   --shard_key="{observationDate}{observationAbout}{variableMeasured}"
 
 To generate a specified number of output shards, use the '@N' suffix for the output file.
