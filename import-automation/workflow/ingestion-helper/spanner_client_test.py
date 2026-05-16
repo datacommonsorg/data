@@ -246,10 +246,15 @@ class TestSpannerClient(unittest.TestCase):
         mock_transaction.insert.assert_called_once()
         args, kwargs = mock_transaction.insert.call_args
         self.assertEqual(kwargs['table'], 'Node')
+        self.assertEqual(kwargs['columns'], ["subject_id", "name", "value", "types", "last_update_timestamp"])
         self.assertEqual(len(kwargs['values']), 5)
         expected_subjects = ["StatisticalVariable", "StatVarGroup", "StatVarObservation", "Topic", "c/g/Root"]
         actual_subjects = [val[0] for val in kwargs['values']]
+        actual_names = [val[1] for val in kwargs['values']]
+        actual_values = [val[2] for val in kwargs['values']]
         self.assertEqual(actual_subjects, expected_subjects)
+        self.assertEqual(actual_names, expected_subjects)
+        self.assertEqual(actual_values, expected_subjects)
 
     @patch('google.cloud.spanner.Client')
     def test_seed_database_already_exists(self, mock_spanner_client):
