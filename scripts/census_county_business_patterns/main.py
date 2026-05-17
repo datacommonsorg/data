@@ -98,6 +98,8 @@ def retry_method(url, headers=None):
 def download_files():
     start_year = FLAGS.data_start_year
     end_year = FLAGS.data_end_year
+    # The latest year being attempted is end_year - 2 (e.g., 2026 - 2 = 2024)
+    latest_year = end_year - 2
 
     for year in range(start_year, end_year - 1):
         last_two_digits_formatted = f"{year % 100:02d}"
@@ -107,29 +109,49 @@ def download_files():
             filename = name_template.format(last_two_digits_formatted)
             url = url_template.format(year, last_two_digits_formatted)
             logging.info(f"downloading url: {url}")
-            response = retry_method(url)
-            zip_content_stream = io.BytesIO(response.content)
-            with zipfile.ZipFile(zip_content_stream, 'r') as zip_ref:
-                for member in zip_ref.namelist():
-                    if not member.endswith('/') and member.lower().endswith(
-                            '.txt'):
-                        extract_path = os.path.join(_LOCAL_OUTPUT_PATH,
-                                                    os.path.basename(member))
-                        abs_extract_path = os.path.abspath(extract_path)
-                        abs_target_dir = os.path.abspath(_LOCAL_OUTPUT_PATH)
-                        if not abs_extract_path.startswith(abs_target_dir):
-                            logging.info(
-                                f"    WARNING: Path traversal attempt detected for '{member}'. Skipping."
-                            )
-                            continue  # Skip this member to prevent security risk
+            try:
+                response = retry_method(url)
+                zip_content_stream = io.BytesIO(response.content)
+                with zipfile.ZipFile(zip_content_stream, 'r') as zip_ref:
+                    for member in zip_ref.namelist():
+                        if not member.endswith('/') and member.lower().endswith(
+                                '.txt'):
+                            extract_path = os.path.join(
+                                _LOCAL_OUTPUT_PATH,
+                                os.path.join(_LOCAL_OUTPUT_PATH,
+                                             os.path.basename(member)))
+                            abs_extract_path = os.path.abspath(extract_path)
+                            abs_target_dir = os.path.abspath(_LOCAL_OUTPUT_PATH)
+
+                            if not abs_extract_path.startswith(abs_target_dir):
+                                logging.info(
+                                    f"    WARNING: Path traversal attempt detected for '{member}'. Skipping."
+                                )
+                                continue
 
                             # Read the file content from the in-memory zip and write it to disk
-                        with open(extract_path, 'wb') as outfile:
-                            outfile.write(zip_ref.read(member))
-                        extracted_any_txt = True
-                    else:
-                        logging.info(
-                            f"Skipping non-txt file/folder in zip: '{member}'")
+                            with open(extract_path, 'wb') as outfile:
+                                outfile.write(zip_ref.read(member))
+                        else:
+                            logging.info(
+                                f" Skipping non-txt file/folder in zip: '{member}'"
+                            )
+            except (requests.exceptions.RequestException,
+                    zipfile.BadZipFile) as e:
+                # Check if this is the latest year which might not be published yet (404)
+                is_404 = (isinstance(e, requests.exceptions.HTTPError) and
+                          e.response.status_code == 404)
+                if year == latest_year and is_404:
+                    logging.warning(
+                        f"Latest year {year} not yet available at {url}. Skipping."
+                    )
+                    continue
+                else:
+                    # For historical years or non-404 errors, we want the script to fail
+                    logging.error(
+                        f"Critical failure: Could not download historical data for {year} at {url}."
+                    )
+                    raise e
 
 
 def main(argv):
