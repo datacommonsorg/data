@@ -14,7 +14,7 @@
 # - Necessary GCP APIs
 # - Secret Manager for the import-config secret
 # - GCS Buckets for imports, mounting, and Dataflow templates
-# - Spanner Instance and Database with schema
+# - Spanner Instance and Database
 # - Artifact Registry for hosting Docker images (Flex Template & Executor)
 # - Pub/Sub Topic and Subscription for triggering imports
 # - Cloud Functions, Workflows, and Ingestion Pipeline
@@ -43,24 +43,6 @@ variable "region" {
   default     = "us-central1"
 }
 
-variable "github_owner" {
-  description = "The owner of the GitHub repository"
-  type        = string
-  default     = "datacommonsorg"
-}
-
-variable "github_repo_name" {
-  description = "The name of the GitHub repository (data)"
-  type        = string
-  default     = "data"
-}
-
-variable "github_repo_ingestion_name" {
-  description = "The name of the GitHub repository (import)"
-  type        = string
-  default     = "import"
-}
-
 variable "spanner_instance_id" {
   description = "Spanner Instance ID"
   type        = string
@@ -69,6 +51,12 @@ variable "spanner_instance_id" {
 
 variable "spanner_database_id" {
   description = "Spanner Database ID"
+  type        = string
+  default     = "dc-import-db"
+}
+
+variable "spanner_graph_database_id" {
+  description = "Spanner Graph Database ID"
   type        = string
   default     = "dc-import-db"
 }
@@ -83,6 +71,12 @@ variable "dc_api_key" {
   description = "Data Commons API Key"
   type        = string
   sensitive   = true
+}
+
+variable "artifact_registry_url" {
+  description = "Artifact Registry URL for Cloud Run images"
+  type        = string
+  default     = "us-docker.pkg.dev/datcom-ci/gcr.io"
 }
 
 # --- APIs ---
@@ -172,141 +166,80 @@ resource "google_storage_bucket" "mount_bucket" {
 
 # --- Cloud Functions Source Packaging ---
 
-data "archive_file" "ingestion_helper_source" {
-  type        = "zip"
-  source_dir  = "${path.module}/../workflow/ingestion-helper"
-  output_path = "${path.module}/ingestion_helper.zip"
-}
-
-data "archive_file" "aggregation_helper_source" {
-  type        = "zip"
-  source_dir  = "${path.module}/../workflow/aggregation-helper"
-  output_path = "${path.module}/aggregation_helper.zip"
-}
-
-data "archive_file" "import_helper_source" {
-  type        = "zip"
-  source_dir  = "${path.module}/../workflow/import-helper"
-  output_path = "${path.module}/import_helper.zip"
-}
-
-resource "google_storage_bucket_object" "ingestion_helper_zip" {
-  name   = "function-source/ingestion_helper.${data.archive_file.ingestion_helper_source.output_md5}.zip"
-  bucket = google_storage_bucket.import_bucket.name
-  source = data.archive_file.ingestion_helper_source.output_path
-}
-
-resource "google_storage_bucket_object" "aggregation_helper_zip" {
-  name   = "function-source/aggregation_helper.${data.archive_file.aggregation_helper_source.output_md5}.zip"
-  bucket = google_storage_bucket.import_bucket.name
-  source = data.archive_file.aggregation_helper_source.output_path
-}
-
-resource "google_storage_bucket_object" "import_helper_zip" {
-  name   = "function-source/import_helper.${data.archive_file.import_helper_source.output_md5}.zip"
-  bucket = google_storage_bucket.import_bucket.name
-  source = data.archive_file.import_helper_source.output_path
-}
-
 # --- Cloud Functions ---
 
-resource "google_cloudfunctions2_function" "ingestion_helper" {
-  name        = "spanner-ingestion-helper"
-  location    = var.region
-  project     = var.project_id
-  description = "Helper for Spanner ingestion"
+resource "google_cloud_run_v2_service" "ingestion_helper" {
+  name     = "ingestion-helper-service"
+  location = var.region
+  project  = var.project_id
 
-  build_config {
-    runtime     = "python312"
-    entry_point = "ingestion_helper"
-    source {
-      storage_source {
-        bucket = google_storage_bucket.import_bucket.name
-        object = google_storage_bucket_object.ingestion_helper_zip.name
+  template {
+    service_account = google_service_account.automation_sa.email
+    containers {
+      image = "${var.artifact_registry_url}/datacommons-ingestion-helper:latest"
+      env {
+        name  = "PROJECT_ID"
+        value = var.project_id
       }
-    }
-  }
-
-  service_config {
-    max_instance_count = 10
-    available_memory   = "256M"
-    timeout_seconds    = 60
-    service_account_email = google_service_account.automation_sa.email
-    environment_variables = {
-      PROJECT_ID          = var.project_id
-      SPANNER_PROJECT_ID  = var.project_id
-      SPANNER_INSTANCE_ID = var.spanner_instance_id
-      SPANNER_DATABASE_ID = var.spanner_database_id
-      GCS_BUCKET_ID       = google_storage_bucket.import_bucket.name
-      LOCATION            = var.region
+      env {
+        name  = "SPANNER_PROJECT_ID"
+        value = var.project_id
+      }
+      env {
+        name  = "SPANNER_INSTANCE_ID"
+        value = var.spanner_instance_id
+      }
+      env {
+        name  = "SPANNER_DATABASE_ID"
+        value = var.spanner_database_id
+      }
+      env {
+        name  = "SPANNER_GRAPH_DATABASE_ID"
+        value = var.spanner_graph_database_id
+      }
+      env {
+        name  = "GCS_BUCKET_ID"
+        value = google_storage_bucket.import_bucket.name
+      }
+      env {
+        name  = "LOCATION"
+        value = var.region
+      }
+      env {
+        name  = "BQ_DATASET_ID"
+        value = var.bq_dataset_id
+      }
     }
   }
 
   depends_on = [google_project_service.services]
 }
 
-resource "google_cloudfunctions2_function" "aggregation_helper" {
-  name        = "import-aggregation-helper"
-  location    = var.region
-  project     = var.project_id
-  description = "Helper for import aggregation"
+resource "google_cloud_run_v2_service" "import_helper" {
+  name     = "import-helper-service"
+  location = var.region
+  project  = var.project_id
 
-  build_config {
-    runtime     = "python312"
-    entry_point = "aggregation_helper"
-    source {
-      storage_source {
-        bucket = google_storage_bucket.import_bucket.name
-        object = google_storage_bucket_object.aggregation_helper_zip.name
+  template {
+    service_account = google_service_account.automation_sa.email
+    containers {
+      image = "${var.artifact_registry_url}/datacommons-import-helper:latest"
+      env {
+        name  = "PROJECT_ID"
+        value = var.project_id
       }
-    }
-  }
-
-  service_config {
-    max_instance_count = 10
-    available_memory   = "256M"
-    timeout_seconds    = 60
-    service_account_email = google_service_account.automation_sa.email
-    environment_variables = {
-      PROJECT_ID          = var.project_id
-      SPANNER_PROJECT_ID  = var.project_id
-      SPANNER_INSTANCE_ID = var.spanner_instance_id
-      SPANNER_DATABASE_ID = var.spanner_database_id
-      GCS_BUCKET_ID       = google_storage_bucket.import_bucket.name
-      LOCATION            = var.region
-      BQ_DATASET_ID       = var.bq_dataset_id
-    }
-  }
-
-  depends_on = [google_project_service.services]
-}
-
-resource "google_cloudfunctions2_function" "import_helper" {
-  name        = "import-automation-helper"
-  location    = var.region
-  project     = var.project_id
-  description = "Helper for import automation"
-
-  build_config {
-    runtime     = "python312"
-    entry_point = "handle_feed_event"
-    source {
-      storage_source {
-        bucket = google_storage_bucket.import_bucket.name
-        object = google_storage_bucket_object.import_helper_zip.name
+      env {
+        name  = "LOCATION"
+        value = var.region
       }
-    }
-  }
-
-  service_config {
-    max_instance_count = 10
-    available_memory   = "256M"
-    timeout_seconds    = 60
-    service_account_email = google_service_account.automation_sa.email
-    environment_variables = {
-      PROJECT_ID    = var.project_id
-      LOCATION      = var.region
-      GCS_BUCKET_ID = google_storage_bucket.import_bucket.name
+      env {
+        name  = "GCS_BUCKET_ID"
+        value = google_storage_bucket.import_bucket.name
+      }
+      env {
+        name  = "INGESTION_HELPER_URL"
+        value = google_cloud_run_v2_service.ingestion_helper.uri
+      }
     }
   }
 
@@ -324,9 +257,10 @@ resource "google_workflows_workflow" "import_automation_workflow" {
   source_contents = file("${path.module}/../workflow/import-automation-workflow.yaml")
 
   user_env_vars = {
-    LOCATION          = var.region
-    GCS_BUCKET_ID     = google_storage_bucket.import_bucket.name
-    GCS_MOUNT_BUCKET  = google_storage_bucket.mount_bucket.name
+    LOCATION             = var.region
+    GCS_BUCKET_ID        = google_storage_bucket.import_bucket.name
+    GCS_MOUNT_BUCKET     = google_storage_bucket.mount_bucket.name
+    INGESTION_HELPER_URL = google_cloud_run_v2_service.ingestion_helper.uri
   }
 
   depends_on = [google_project_service.services]
@@ -341,11 +275,12 @@ resource "google_workflows_workflow" "spanner_ingestion_workflow" {
   source_contents = file("${path.module}/../workflow/spanner-ingestion-workflow.yaml")
 
   user_env_vars = {
-    LOCATION            = var.region
-    PROJECT_ID          = var.project_id
-    SPANNER_PROJECT_ID  = var.project_id
-    SPANNER_INSTANCE_ID = var.spanner_instance_id
-    SPANNER_DATABASE_ID = var.spanner_database_id
+    LOCATION               = var.region
+    PROJECT_ID             = var.project_id
+    SPANNER_PROJECT_ID     = var.project_id
+    SPANNER_INSTANCE_ID    = var.spanner_instance_id
+    SPANNER_DATABASE_ID    = var.spanner_database_id
+    INGESTION_HELPER_URL   = google_cloud_run_v2_service.ingestion_helper.uri
   }
 
   depends_on = [google_project_service.services]
@@ -367,23 +302,7 @@ resource "google_spanner_database" "import_db" {
   instance = google_spanner_instance.import_instance.name
   name     = var.spanner_database_id
   project  = var.project_id
-  ddl      = [for s in split(";", file("${path.module}/../workflow/spanner_schema.sql")) : trimspace(s) if trimspace(s) != ""]
-
   deletion_protection = false
-}
-
-# Initialize IngestionLock (DML)
-resource "null_resource" "init_spanner_lock" {
-  provisioner "local-exec" {
-    command = <<EOT
-gcloud spanner databases execute-sql ${google_spanner_database.import_db.name} \
-  --instance=${google_spanner_instance.import_instance.name} \
-  --project=${var.project_id} \
-  --sql="INSERT INTO IngestionLock (LockID) VALUES ('global_ingestion_lock')" || echo 'Lock already exists'
-EOT
-  }
-
-  depends_on = [google_spanner_database.import_db]
 }
 
 # --- IAM ---
@@ -444,7 +363,7 @@ resource "google_pubsub_subscription" "import_automation_sub" {
   filter = "attributes.transfer_status=\"TRANSFER_COMPLETED\""
 
   push_config {
-    push_endpoint = google_cloudfunctions2_function.import_helper.service_config[0].uri
+    push_endpoint = google_cloud_run_v2_service.import_helper.uri
     oidc_token {
       service_account_email = google_service_account.automation_sa.email
     }
@@ -456,4 +375,5 @@ output "automation_service_account_email" {
   value       = google_service_account.automation_sa.email
   description = "The email of the service account used for import automation."
 }
+
 

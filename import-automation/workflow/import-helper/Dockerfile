@@ -12,20 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-steps:
-  # Build the container image
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}', '-t', '${_AR_REPO_URL}/${_IMAGE_NAME}:latest', '.']
+FROM python:3.12-slim
 
-  # Push the container image
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}']
+# Copy uv binary
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-substitutions:
-  _AR_REPO_URL: 'us-docker.pkg.dev/datcom-ci/gcr.io'
-  _IMAGE_NAME: 'datacommons-ingestion-helper'
-  _TAG: 'latest'
+# Allow statements and log messages to immediately appear in the logs
+ENV PYTHONUNBUFFERED True
 
-images:
-  - '${_AR_REPO_URL}/${_IMAGE_NAME}:${_TAG}'
-  - '${_AR_REPO_URL}/${_IMAGE_NAME}:latest'
+WORKDIR /app
+
+# Copy local code to the container image.
+COPY . .
+
+# Install production dependencies using uv.
+RUN uv pip install --system --no-cache -r requirements.txt
+
+# Run the functions framework
+CMD ["functions-framework", "--target", "handle_feed_event"]
