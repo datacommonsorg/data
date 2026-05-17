@@ -38,8 +38,11 @@ class TestSpannerClient(unittest.TestCase):
             ["table", "Node"], ["table", "Edge"], ["table", "Observation"],
             ["table", "NodeEmbedding"], ["table", "ImportStatus"],
             ["table", "IngestionHistory"], ["table", "ImportVersionHistory"],
-            ["table", "IngestionLock"],
+            ["table", "IngestionLock"], ["table", "Cache"],
+            ["table", "VariableMetadata"],
             ["index", "NodeEmbeddingIndex"],
+            ["index", "InEdge"],
+            ["index", "VariableMeasuredObservationAbout"],
             ["model", "NodeEmbeddingModel"]
         ]
         
@@ -220,5 +223,61 @@ class TestSpannerClient(unittest.TestCase):
         args, _ = mock_transaction.execute_update.call_args
         self.assertIn("UPDATE IngestionLock", args[0])
 
+    @patch('google.cloud.spanner.Client')
+    def test_seed_database(self, mock_spanner_client):
+        # Setup mock
+        mock_instance = MagicMock()
+        mock_db = MagicMock()
+        mock_spanner_client.return_value.instance.return_value = mock_instance
+        mock_instance.database.return_value = mock_db
+
+        mock_transaction = MagicMock()
+        mock_transaction.execute_sql.return_value = []
+        def run_in_transaction_side_effect(callback, *args, **kwargs):
+            return callback(mock_transaction, *args, **kwargs)
+        mock_db.run_in_transaction.side_effect = run_in_transaction_side_effect
+
+        client = SpannerClient("project", "instance", "database")
+
+        # Run method
+        client.seed_database()
+
+        # Verify
+        mock_transaction.insert.assert_called_once()
+        args, kwargs = mock_transaction.insert.call_args
+        self.assertEqual(kwargs['table'], 'Node')
+        self.assertEqual(kwargs['columns'], ["subject_id", "name", "value", "types", "last_update_timestamp"])
+        self.assertEqual(len(kwargs['values']), 5)
+        expected_subjects = ["StatisticalVariable", "StatVarGroup", "StatVarObservation", "Topic", "c/g/Root"]
+        actual_subjects = [val[0] for val in kwargs['values']]
+        actual_names = [val[1] for val in kwargs['values']]
+        actual_values = [val[2] for val in kwargs['values']]
+        self.assertEqual(actual_subjects, expected_subjects)
+        self.assertEqual(actual_names, expected_subjects)
+        self.assertEqual(actual_values, expected_subjects)
+
+    @patch('google.cloud.spanner.Client')
+    def test_seed_database_already_exists(self, mock_spanner_client):
+        # Setup mock
+        mock_instance = MagicMock()
+        mock_db = MagicMock()
+        mock_spanner_client.return_value.instance.return_value = mock_instance
+        mock_instance.database.return_value = mock_db
+
+        mock_transaction = MagicMock()
+        mock_transaction.execute_sql.return_value = [["StatisticalVariable"], ["StatVarGroup"], ["StatVarObservation"], ["Topic"], ["c/g/Root"]]
+        def run_in_transaction_side_effect(callback, *args, **kwargs):
+            return callback(mock_transaction, *args, **kwargs)
+        mock_db.run_in_transaction.side_effect = run_in_transaction_side_effect
+
+        client = SpannerClient("project", "instance", "database")
+
+        # Run method
+        client.seed_database()
+
+        # Verify
+        mock_transaction.insert.assert_not_called()
+
 if __name__ == '__main__':
     unittest.main()
+

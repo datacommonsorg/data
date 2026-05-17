@@ -7,6 +7,7 @@ import os
 from absl import flags
 import import_utils
 from flask import jsonify
+from aggregation_utils import AggregationUtils
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -62,7 +63,7 @@ def ingestion_helper(request):
     if validation_error:
         return (validation_error, 400)
 
-    actionType = request_json['actionType']
+    action_type = request_json['actionType']
     spanner = SpannerClient(FLAGS.spanner_project_id,
                             FLAGS.spanner_instance_id,
                             FLAGS.spanner_database_id,
@@ -72,7 +73,7 @@ def ingestion_helper(request):
                                                     'text-embedding-005'))
     storage = StorageClient(FLAGS.gcs_bucket_id)
 
-    if actionType == 'get_import_info':
+    if action_type == 'get_import_info':
         # Gets the details of imports that are ready for ingestion.
         # Input:
         #   importList: list of import names to ingest (optional)
@@ -80,7 +81,7 @@ def ingestion_helper(request):
         import_info = spanner.get_import_info(import_list)
         return jsonify(import_info)
 
-    elif actionType == 'acquire_ingestion_lock':
+    elif action_type == 'acquire_ingestion_lock':
         # Attempts to acquire the global lock for ingestion.
         # Input:
         #   workflowId: ID of the workflow acquiring the lock
@@ -96,7 +97,7 @@ def ingestion_helper(request):
             return ('Failed to acquire lock', 500)
         return ('OK', 200)
 
-    elif actionType == 'release_ingestion_lock':
+    elif action_type == 'release_ingestion_lock':
         # Releases the global ingestion lock.
         # Input:
         #   workflowId: ID of the workflow releasing the lock
@@ -109,7 +110,7 @@ def ingestion_helper(request):
             return ('Failed to release lock', 500)
         return ('OK', 200)
 
-    elif actionType == 'update_ingestion_status':
+    elif action_type == 'update_ingestion_status':
         # Updates the status of imports after ingestion.
         # Input:
         #   importList: list of import names
@@ -135,7 +136,7 @@ def ingestion_helper(request):
             spanner.update_import_version_history(import_list, workflow_id)
         return ('OK', 200)
 
-    elif actionType == 'update_import_status':
+    elif action_type == 'update_import_status':
         # Updates the status of a specific import job.
         # Input:
         #   importName: name of the import
@@ -172,7 +173,7 @@ def ingestion_helper(request):
         spanner.update_import_status(params)
         return ('OK', 200)
 
-    elif actionType == 'update_import_version':
+    elif action_type == 'update_import_version':
         # Updates the version and status of an import.
         # Input:
         #   importName: name of the import
@@ -211,14 +212,20 @@ def ingestion_helper(request):
             f"OK [Import: {import_name} Version: {version} Status: {params['status']}]",
             200)
 
-    elif actionType == 'initialize_database':
+    elif action_type == 'initialize_database':
         # Initializes the database by creating all required tables and proto bundles.
         logging.info("Action: initialize_database")
         enable_embeddings = request_json.get('enableEmbeddings',
                                              FLAGS.enable_embeddings)
         spanner.initialize_database(enable_embeddings=enable_embeddings)
         return ('OK', 200)
-    elif actionType == 'embedding_ingestion':
+    elif action_type == 'seed_database':
+        # Seeds the database with base empty nodes.
+        logging.info("Action: seed_database")
+        spanner.seed_database()
+        return ('OK', 200)
+    elif action_type == 'embedding_ingestion':
+
         logging.info("Action: embedding_ingestion")
         enable_embeddings = request_json.get('enableEmbeddings',
                                              FLAGS.enable_embeddings)
@@ -237,5 +244,19 @@ def ingestion_helper(request):
         except Exception as e:
             logging.error(f"Embedding ingestion failed: {e}")
             return (f"Error: {e}", 500)
+    elif action_type == 'run_aggregation':
+        # Runs aggregation logic for the specified imports.
+        # Input:
+        #   importList: list of imports to aggregate
+        import_list = request_json.get('importList', [])
+        aggregation = AggregationUtils()
+        try:
+            if aggregation.run_aggregation(import_list):
+                return ('OK', 200)
+            else:
+                return ('Aggregation failed', 500)
+        except Exception as e:
+            return (f"Aggregation failed: {str(e)}", 500)
+
     else:
-        return (f'Unknown actionType: {actionType}', 400)
+        return (f'Unknown actionType: {action_type}', 400)

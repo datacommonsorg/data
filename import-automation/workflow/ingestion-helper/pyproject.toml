@@ -19,6 +19,7 @@ build-backend = "hatchling.build"
 [project]
 name = "ingestion-helper"
 version = "0.1.0"
+requires-python = ">=3.12"
 description = "Ingestion helper for Data Commons Spanner ingestion"
 dependencies = [
     "functions-framework==3.*",
@@ -27,7 +28,13 @@ dependencies = [
     "google-cloud-storage",
     "google-auth",
     "absl-py",
+    "google-cloud-bigquery",
 ]
 
 [tool.hatch.build.targets.wheel]
 bypass-selection = true
+
+[dependency-groups]
+dev = [
+    "pytest",
+]
