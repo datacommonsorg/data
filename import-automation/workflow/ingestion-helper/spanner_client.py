@@ -565,11 +565,11 @@ class SpannerClient:
 
         def _seed(transaction: Transaction):
             candidates = {
-                "StatisticalVariable": ["StatisticalVariable", ["Class"], spanner.COMMIT_TIMESTAMP],
-                "StatVarGroup": ["StatVarGroup", ["Class"], spanner.COMMIT_TIMESTAMP],
-                "StatVarObservation": ["StatVarObservation", ["Class"], spanner.COMMIT_TIMESTAMP],
-                "Topic": ["Topic", ["Class"], spanner.COMMIT_TIMESTAMP],
-                "c/g/Root": ["c/g/Root", ["StatVarGroup"], spanner.COMMIT_TIMESTAMP],
+                "StatisticalVariable": ["StatisticalVariable", "StatisticalVariable", "StatisticalVariable", ["Class"], spanner.COMMIT_TIMESTAMP],
+                "StatVarGroup": ["StatVarGroup", "StatVarGroup", "StatVarGroup", ["Class"], spanner.COMMIT_TIMESTAMP],
+                "StatVarObservation": ["StatVarObservation", "StatVarObservation", "StatVarObservation", ["Class"], spanner.COMMIT_TIMESTAMP],
+                "Topic": ["Topic", "Topic", "Topic", ["Class"], spanner.COMMIT_TIMESTAMP],
+                "c/g/Root": ["c/g/Root", "c/g/Root", "c/g/Root", ["StatVarGroup"], spanner.COMMIT_TIMESTAMP],
             }
             subjects = list(candidates.keys())
             sql = "SELECT subject_id FROM Node WHERE subject_id IN UNNEST(@subjects)"
@@ -582,7 +582,7 @@ class SpannerClient:
             values = [candidates[subj] for subj in subjects if subj not in existing]
 
             if values:
-                columns = ["subject_id", "types", "last_update_timestamp"]
+                columns = ["subject_id", "name", "value", "types", "last_update_timestamp"]
                 transaction.insert(table="Node", columns=columns, values=values)
 
         try:
