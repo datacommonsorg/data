@@ -120,5 +120,27 @@ class TestMain(unittest.TestCase):
         self.assertEqual(batch[0][0], "dc/1")
         self.assertEqual(batch[0][1], "Node 1")
 
+    @patch.dict(os.environ, {
+        "SPANNER_INSTANCE_ID": "test-instance",
+        "SPANNER_DATABASE_ID": "test-db",
+        "SPANNER_PROJECT_ID": "test-proj"
+    })
+    @patch('main.SpannerClient')
+    def test_seed_database_success(self, mock_spanner_client_class):
+        mock_spanner_client = MagicMock()
+        mock_spanner_client_class.return_value = mock_spanner_client
+
+        mock_request = MagicMock()
+        mock_request.get_json.return_value = {
+            "actionType": "seed_database"
+        }
+
+        response, status_code = main.ingestion_helper(mock_request)
+
+        self.assertEqual(status_code, 200)
+        self.assertIn("OK", response)
+        mock_spanner_client.seed_database.assert_called_once()
+
 if __name__ == '__main__':
     unittest.main()
+

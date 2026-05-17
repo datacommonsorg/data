@@ -219,7 +219,13 @@ def ingestion_helper(request):
                                              FLAGS.enable_embeddings)
         spanner.initialize_database(enable_embeddings=enable_embeddings)
         return ('OK', 200)
+    elif action_type == 'seed_database':
+        # Seeds the database with base empty nodes.
+        logging.info("Action: seed_database")
+        spanner.seed_database()
+        return ('OK', 200)
     elif action_type == 'embedding_ingestion':
+
         logging.info("Action: embedding_ingestion")
         enable_embeddings = request_json.get('enableEmbeddings',
                                              FLAGS.enable_embeddings)

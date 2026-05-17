@@ -133,4 +133,8 @@ CREATE TABLE VariableMetadata (
   place_types ARRAY<STRING(1024)>,
 ) PRIMARY KEY(variable_measured, import_name);
 
+CREATE INDEX InEdge ON Edge(object_id, predicate, subject_id, provenance) OPTIONS (
+  columnar_policy = 'enabled'
+);
 
+CREATE INDEX VariableMeasuredObservationAbout ON Observation(variable_measured, observation_about);
