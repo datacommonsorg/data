@@ -67,6 +67,18 @@ class GraphAggregator:
     def __init__(self, executor: BigQueryExecutor) -> None:
         self.executor = executor
 
+    def run_all(self) -> None:
+        """Runs all global aggregations in sequence."""
+        global_aggregations = [
+            self.run_linked_contained_in_place,
+            self.run_linked_member_of,
+            self.run_linked_member,
+        ]
+        
+        for agg_func in global_aggregations:
+            logging.info(f"Running global aggregation: {agg_func.__name__}")
+            agg_func()
+
 
     def run_linked_contained_in_place(self) -> None:
         """Expands place containment hierarchies."""
@@ -360,15 +372,7 @@ class AggregationUtils:
                     logging.info('Skipping aggregation logic for empty importName')
 
             # 2. Run global aggregations
-            global_aggregations = [
-                self.graph_aggregator.run_linked_contained_in_place,
-                self.graph_aggregator.run_linked_member_of,
-                self.graph_aggregator.run_linked_member,
-            ]
-            
-            for agg_func in global_aggregations:
-                logging.info(f"Running global aggregation: {agg_func.__name__}")
-                agg_func()
+            self.graph_aggregator.run_all()
             
             return True
 
