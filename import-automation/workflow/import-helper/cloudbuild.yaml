@@ -23,7 +23,7 @@ steps:
 
 substitutions:
   _AR_REPO_URL: 'us-docker.pkg.dev/datcom-ci/gcr.io'
-  _IMAGE_NAME: 'datacommons-ingestion-helper'
+  _IMAGE_NAME: 'datacommons-import-helper'
   _TAG: 'latest'
 
 images:

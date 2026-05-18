@@ -26,7 +26,7 @@ if [ "$#" -ne 3 ]; then
 fi
 
 # Deployed using import-automation/workflow/cloudbuild.yaml
-FUNCTION_URL="https://us-central1-datcom-import-automation-prod.cloudfunctions.net/spanner-ingestion-helper"
+FUNCTION_URL="https://ingestion-helper-service-965988403328.us-central1.run.app"
 IMPORT_NAME=$1
 VERSION=$2
 COMMENT=$3

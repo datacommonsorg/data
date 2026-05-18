@@ -16,6 +16,7 @@
                     "cleaned_csv": ""
                 }
             ],
+            "user_script_timeout": 86400,
             "cron_schedule": "0 5 1 * *"
         }
     ]
