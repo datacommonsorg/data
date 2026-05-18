@@ -641,8 +641,15 @@ def main(argv):
             cycle_str = cycle_match.group(1)
             f_hour = FLAGS.forecast_hour
 
+            # Extract year and month from the 8-digit date string (YYYYMMDD)
+            year_str = date_str[:4]
+            month_str = date_str[4:6]
+
             gcs_filename = f"noaa_gfs_output_{date_str}_{cycle_str}_{f_hour}.csv"
-            gcs_full_path = f"{FLAGS.output_gcs_prefix.strip('/')}/{gcs_filename}"
+            gcs_full_path = (
+                f"{FLAGS.output_gcs_prefix.strip('/')}/"
+                f"{year_str}/{month_str}/{gcs_filename}"
+            )
 
             if grib_statvar_processor(input_path, gcs_full_path):
                 logging.info(
