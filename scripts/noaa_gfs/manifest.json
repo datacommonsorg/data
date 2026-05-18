@@ -15,7 +15,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "./noaa_gfs_output.tmcf",
-                    "cleaned_csv": "output/*/gfs.t*.csv"
+                    "cleaned_csv": "output/*/*/noaa_gfs_output_*.csv"
                 }
             ],
             "source_files": [
