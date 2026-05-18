@@ -53,7 +53,7 @@ def download_tb_rr_mdr_data():
     merged_df = merged_df[final_columns]
     
     # 4. Save to CSV in a new folder
-    output_dir = "input_files"
+    output_dir = "statvar_imports/tuberculosis_rifampicin_resistant/input_files"
     filename = os.path.join(output_dir, "Tuberculosis_rr_mdr_tb_outcomes.csv")
     
     os.makedirs(output_dir, exist_ok=True)
