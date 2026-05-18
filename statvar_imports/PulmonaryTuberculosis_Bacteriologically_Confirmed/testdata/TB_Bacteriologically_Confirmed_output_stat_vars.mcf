@@ -1,0 +1,11 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/PulmonaryTuberculosis_Bacteriologically_Confirmed/testdata/TB_Bacteriologically_Confirmed_input.csv --pv_map=statvar_imports/PulmonaryTuberculosis_Bacteriologically_Confirmed/pulmonary_tb_bctpb_pvmap.csv --output_path=statvar_imports/PulmonaryTuberculosis_Bacteriologically_Confirmed/testdata/TB_Bacteriologically_Confirmed_output --config_file=statvar_imports/PulmonaryTuberculosis_Bacteriologically_Confirmed/pulmonary_tb_bctpb_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2026-04-15 09:22:18.833724
+
+Node: dcid:Count_MedicalConditionIncident_ConditionPulmonaryTuberculosis_NewCase_BacteriologicalTest
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:PulmonaryTuberculosis
+medicalStatus: dcid:NewCase
+medicalTestingMethod: dcid:BacteriologicalTest
+

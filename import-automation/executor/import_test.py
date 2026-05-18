@@ -25,12 +25,13 @@ from app.executor import file_io
 from app.executor import import_executor
 from test import utils
 
-_PROJECT_ID = 'datcom-ci'
+_PROJECT_ID = os.environ.get('PROJECT_ID', 'datcom-ci')
+_LOCATION = os.environ.get('LOCATION', 'us-central1')
+_GCS_BUCKET = os.environ.get('GCS_BUCKET', 'datcom-ci-test')
+_IMAGE_URI = os.environ.get(
+    'IMAGE_URI', 'us-docker.pkg.dev/datcom-ci/gcr.io/dc-import-executor:latest')
 _JOB_ID_PREFIX = 'dc-import-test'
-_LOCATION = 'us-central1'
-_GCS_BUCKET = 'datcom-ci-test'
 _IMPORT_NAME = 'scripts/us_fed/treasury_constant_maturity_rates:USFed_ConstantMaturityRates_Test'
-_IMAGE_URI = 'gcr.io/datcom-ci/dc-import-executor:latest'
 
 
 def run_test():
