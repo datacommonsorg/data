@@ -33,7 +33,7 @@ class BigQueryExecutor:
         self.instance_id = instance_id
         self.database_id = database_id
         try:
-            self.client = bigquery.Client()
+            self.client = bigquery.Client(project=self.project_id)
         except Exception as e:
             logging.warning(f"Failed to initialize BigQuery client: {e}")
             self.client = None
