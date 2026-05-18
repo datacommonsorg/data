@@ -169,6 +169,8 @@ class ExecutorConfig:
     email_token: str = ''
     # Email alerts are disabled by default. Cloud Run jobs use GCP alerting.
     disable_email_notifications: bool = True
+    # Allow skipping ingestion for no data change.
+    enable_skip_status: bool = True
     # Skip uploading the data to GCS (for local testing).
     skip_gcs_upload: bool = False
     # Skip uploading input files to GCS.
