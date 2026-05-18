@@ -19,7 +19,7 @@ from google.cloud import bigquery
 logging.getLogger().setLevel(logging.INFO)
 
 class BigQueryExecutor:
-    """Handles low-level BigQuery client initialization and query execution."""
+    """Handles BigQuery client initialization and query execution."""
     def __init__(self):
         try:
             self.client = bigquery.Client()
@@ -40,21 +40,28 @@ class BigQueryExecutor:
 
 class GraphAggregator:
     """Contains the specific business logic and SQL for graph-related recursive queries."""
-    def __init__(self, executor: BigQueryExecutor):
+    def __init__(self, executor: BigQueryExecutor, 
+                 default_source_dataset: str = "dc_graph_stable",
+                 default_destination_uri: str = None):
         self.executor = executor
+        self.default_source_dataset = default_source_dataset
+        self.default_destination_uri = default_destination_uri
 
-    def run_linked_contained_in_place(self):
+    def run_linked_contained_in_place(self, source_dataset: str = None, destination_uri: str = None):
         """Expands place containment hierarchies."""
-        query = """
+        source = source_dataset or self.default_source_dataset
+        dest = destination_uri or self.default_destination_uri
+        
+        query = f"""
         CREATE OR REPLACE TEMPORARY TABLE `temp_cip` AS
         SELECT subject_id, object_id
-        FROM `dc_graph_stable.Edge` 
+        FROM `{source}.Edge` 
         WHERE predicate = 'containedInPlace';
 
         EXPORT DATA
-          OPTIONS( uri="https://spanner.googleapis.com/projects/datcom-store/instances/dc-kg-test/databases/dc_graph_2026_01_27",
+          OPTIONS( uri="{dest}",
             format='CLOUD_SPANNER',
-            spanner_options = '{"table": "Edge"}' ) AS
+            spanner_options = '{{"table": "Edge"}}' ) AS
         with RECURSIVE Ancestors AS (
           SELECT
             subject_id,
@@ -86,18 +93,21 @@ class GraphAggregator:
         """
         self.executor.execute(query)
 
-    def run_linked_member_of(self):
+    def run_linked_member_of(self, source_dataset: str = None, destination_uri: str = None):
         """Expands membership hierarchies using memberOf and specializationOf."""
-        query = """
+        source = source_dataset or self.default_source_dataset
+        dest = destination_uri or self.default_destination_uri
+
+        query = f"""
         CREATE OR REPLACE TEMPORARY TABLE `temp_hierarchy` AS
         SELECT DISTINCT subject_id, predicate, object_id
-        FROM `dc_graph_2026_01_27.Edge`
+        FROM `{source}.Edge`
         WHERE predicate IN ('memberOf', 'specializationOf');
 
         EXPORT DATA
-          OPTIONS( uri="https://spanner.googleapis.com/projects/datcom-store/instances/dc-kg-test/databases/dc_graph_2026_01_27",
+          OPTIONS( uri="{dest}",
             format='CLOUD_SPANNER',
-            spanner_options = '{"table": "Edge"}' ) AS
+            spanner_options = '{{"table": "Edge"}}' ) AS
         WITH RECURSIVE Ancestors AS (
           SELECT
             subject_id,
@@ -132,19 +142,22 @@ class GraphAggregator:
         """
         self.executor.execute(query)
 
-    def run_linked_member(self):
+    def run_linked_member(self, source_dataset: str = None, destination_uri: str = None):
         """Expands topic/SVGP descendants to identify leaf members."""
-        query = """
+        source = source_dataset or self.default_source_dataset
+        dest = destination_uri or self.default_destination_uri
+
+        query = f"""
         CREATE OR REPLACE TEMPORARY TABLE `temp_topic_hierarchy` AS
         SELECT DISTINCT subject_id, object_id
-        FROM `dc_graph_2026_01_27.Edge`
+        FROM `{source}.Edge`
         WHERE predicate IN ('relevantVariable', 'member')
         AND (subject_id LIKE 'dc/topic%' OR subject_id LIKE 'dc/svpg%');
 
         EXPORT DATA
-          OPTIONS( uri="https://spanner.googleapis.com/projects/datcom-store/instances/dc-kg-test/databases/dc_graph_2026_01_27",
+          OPTIONS( uri="{dest}",
             format='CLOUD_SPANNER',
-            spanner_options = '{"table": "Edge"}' ) AS
+            spanner_options = '{{"table": "Edge"}}' ) AS
         WITH RECURSIVE Descendants AS (
           SELECT
             subject_id,
@@ -182,13 +195,26 @@ class GraphAggregator:
 
 class AggregationUtils:
     """Orchestrates the overall aggregation workflow."""
-    def __init__(self):
+    def __init__(self, 
+                 source_dataset: str = "dc_graph_stable",
+                 destination_uri: str = None):
+        # Default destination URI
+        if not destination_uri:
+            destination_uri = os.environ.get(
+                'SPANNER_DESTINATION_URI',
+                "https://spanner.googleapis.com/projects/datcom-store/instances/dc-kg-test/databases/dc_graph_2026_01_27"
+            )
+            
         self.executor = BigQueryExecutor()
-        self.graph_aggregator = GraphAggregator(self.executor)
+        self.graph_aggregator = GraphAggregator(
+            self.executor,
+            default_source_dataset=source_dataset,
+            default_destination_uri=destination_uri
+        )
 
     def run_aggregation(self, import_list):
         """
-        Orchestrates standard per-import aggregations and custom modular aggregations.
+        Orchestrates standard per-import aggregations and global aggregations.
         """
         logging.info(f"Received request for importList: {import_list}")
         
@@ -205,15 +231,15 @@ class AggregationUtils:
                 else:
                     logging.info('Skipping aggregation logic for empty importName')
 
-            # 2. Run custom modular aggregations
-            custom_aggregations = [
+            # 2. Run global aggregations
+            global_aggregations = [
                 self.graph_aggregator.run_linked_contained_in_place,
                 self.graph_aggregator.run_linked_member_of,
                 self.graph_aggregator.run_linked_member,
             ]
             
-            for agg_func in custom_aggregations:
-                logging.info(f"Running custom aggregation: {agg_func.__name__}")
+            for agg_func in global_aggregations:
+                logging.info(f"Running global aggregation: {agg_func.__name__}")
                 agg_func()
             
             return True
