@@ -1,0 +1,500 @@
+IND_ID,INDICATOR_NAME,YEAR,COUNTRY,iso3,DISAGGR_1,VALUE
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Afghanistan,AFG,Successfully treated,66.6666666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Afghanistan,AFG,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Afghanistan,AFG,Died,9.52380952380952
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Afghanistan,AFG,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Afghanistan,AFG,Not evaluated,23.8095238095238
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Afghanistan,AFG,Successfully treated,71.0526315789474
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Afghanistan,AFG,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Afghanistan,AFG,Died,15.7894736842105
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Afghanistan,AFG,Lost to follow-up,7.89473684210526
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Afghanistan,AFG,Not evaluated,5.26315789473684
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Afghanistan,AFG,Successfully treated,63.0434782608696
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Afghanistan,AFG,Treatment failed,2.17391304347826
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Afghanistan,AFG,Died,13.0434782608696
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Afghanistan,AFG,Lost to follow-up,19.5652173913043
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Afghanistan,AFG,Not evaluated,2.17391304347826
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Afghanistan,AFG,Successfully treated,65.1162790697675
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Afghanistan,AFG,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Afghanistan,AFG,Died,11.6279069767442
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Afghanistan,AFG,Lost to follow-up,23.2558139534884
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Afghanistan,AFG,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Afghanistan,AFG,Successfully treated,63.855421686747
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Afghanistan,AFG,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Afghanistan,AFG,Died,16.8674698795181
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Afghanistan,AFG,Lost to follow-up,19.2771084337349
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Afghanistan,AFG,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Afghanistan,AFG,Successfully treated,62.0915032679739
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Afghanistan,AFG,Treatment failed,2.61437908496732
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Afghanistan,AFG,Died,13.7254901960784
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Afghanistan,AFG,Lost to follow-up,20.9150326797386
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Afghanistan,AFG,Not evaluated,0.65359477124183
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Afghanistan,AFG,Successfully treated,63.9175257731959
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Afghanistan,AFG,Treatment failed,1.03092783505155
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Afghanistan,AFG,Died,12.3711340206186
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Afghanistan,AFG,Lost to follow-up,22.1649484536082
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Afghanistan,AFG,Not evaluated,0.515463917525773
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Afghanistan,AFG,Successfully treated,68.8073394495413
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Afghanistan,AFG,Treatment failed,2.75229357798165
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Afghanistan,AFG,Died,10.0917431192661
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Afghanistan,AFG,Lost to follow-up,16.8195718654434
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Afghanistan,AFG,Not evaluated,1.52905198776758
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Afghanistan,AFG,Successfully treated,71.2121212121212
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Afghanistan,AFG,Treatment failed,2.02020202020202
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Afghanistan,AFG,Died,8.58585858585859
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Afghanistan,AFG,Lost to follow-up,14.3939393939394
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Afghanistan,AFG,Not evaluated,3.78787878787879
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Afghanistan,AFG,Successfully treated,74.2857142857143
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Afghanistan,AFG,Treatment failed,0.952380952380952
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Afghanistan,AFG,Died,9.84126984126984
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Afghanistan,AFG,Lost to follow-up,13.015873015873
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Afghanistan,AFG,Not evaluated,1.9047619047619
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Afghanistan,AFG,Successfully treated,68.4478371501272
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Afghanistan,AFG,Treatment failed,2.79898218829517
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Afghanistan,AFG,Died,11.1959287531807
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Afghanistan,AFG,Lost to follow-up,16.793893129771
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Afghanistan,AFG,Not evaluated,0.763358778625954
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Afghanistan,AFG,Successfully treated,72.3154362416107
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Afghanistan,AFG,Treatment failed,2.18120805369128
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Afghanistan,AFG,Died,11.0738255033557
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Afghanistan,AFG,Lost to follow-up,13.4228187919463
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Afghanistan,AFG,Not evaluated,1.00671140939597
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2006,Albania,ALB,Successfully treated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2006,Albania,ALB,Treatment failed,100
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2006,Albania,ALB,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2006,Albania,ALB,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2006,Albania,ALB,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Albania,ALB,Successfully treated,100
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Albania,ALB,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Albania,ALB,Successfully treated,100
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Albania,ALB,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Albania,ALB,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Albania,ALB,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Albania,ALB,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Albania,ALB,Successfully treated,75
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Albania,ALB,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Albania,ALB,Died,25
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Albania,ALB,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Albania,ALB,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Albania,ALB,Successfully treated,50
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Albania,ALB,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Albania,ALB,Died,50
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Albania,ALB,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Albania,ALB,Successfully treated,50
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Albania,ALB,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Albania,ALB,Died,50
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Albania,ALB,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Albania,ALB,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Albania,ALB,Successfully treated,60
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Albania,ALB,Died,20
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Albania,ALB,Not evaluated,20
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Albania,ALB,Successfully treated,66.6666666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Albania,ALB,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Albania,ALB,Died,33.3333333333333
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Albania,ALB,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Albania,ALB,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,American Samoa,ASM,Successfully treated,100
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,American Samoa,ASM,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,American Samoa,ASM,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,American Samoa,ASM,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,American Samoa,ASM,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,American Samoa,ASM,Lost to follow-up,100
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,American Samoa,ASM,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Angola,AGO,Successfully treated,100
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Angola,AGO,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Angola,AGO,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Angola,AGO,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Angola,AGO,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Angola,AGO,Successfully treated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Angola,AGO,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Angola,AGO,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Angola,AGO,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Angola,AGO,Not evaluated,100
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Angola,AGO,Successfully treated,77.3480662983426
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Angola,AGO,Treatment failed,0.552486187845304
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Angola,AGO,Died,8.28729281767956
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Angola,AGO,Lost to follow-up,13.8121546961326
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Angola,AGO,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Angola,AGO,Successfully treated,72.4279835390947
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Angola,AGO,Treatment failed,0.411522633744856
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Angola,AGO,Died,8.23045267489712
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Angola,AGO,Lost to follow-up,18.9300411522634
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Angola,AGO,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Angola,AGO,Successfully treated,72.2466960352423
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Central African Republic,CAF,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Central African Republic,CAF,Died,6.75675675675676
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Central African Republic,CAF,Lost to follow-up,12.1621621621622
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Central African Republic,CAF,Not evaluated,18.9189189189189
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Central African Republic,CAF,Successfully treated,80.4347826086957
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Central African Republic,CAF,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Central African Republic,CAF,Died,4.34782608695652
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Central African Republic,CAF,Lost to follow-up,9.78260869565217
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Central African Republic,CAF,Not evaluated,5.43478260869565
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Central African Republic,CAF,Successfully treated,69
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Central African Republic,CAF,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Central African Republic,CAF,Died,14
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Central African Republic,CAF,Lost to follow-up,17
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Central African Republic,CAF,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Chad,TCD,Successfully treated,56
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Chad,TCD,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Chad,TCD,Died,8
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Chad,TCD,Lost to follow-up,12
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Chad,TCD,Not evaluated,24
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Chad,TCD,Successfully treated,72.7272727272727
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Chad,TCD,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Chad,TCD,Died,9.09090909090909
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Chad,TCD,Lost to follow-up,12.1212121212121
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Chad,TCD,Not evaluated,6.06060606060606
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Chad,TCD,Successfully treated,48.7804878048781
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Chad,TCD,Treatment failed,2.4390243902439
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Chad,TCD,Died,14.6341463414634
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Chad,TCD,Lost to follow-up,9.75609756097561
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Chad,TCD,Not evaluated,24.390243902439
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Chad,TCD,Successfully treated,56.25
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Chad,TCD,Treatment failed,2.08333333333333
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Chad,TCD,Died,14.5833333333333
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Chad,TCD,Lost to follow-up,22.9166666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Chad,TCD,Not evaluated,4.16666666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Chad,TCD,Successfully treated,66
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Chad,TCD,Treatment failed,2
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Chad,TCD,Died,22
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Chad,TCD,Lost to follow-up,10
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Chad,TCD,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Chad,TCD,Successfully treated,26.7857142857143
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Chad,TCD,Treatment failed,1.78571428571429
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Chad,TCD,Died,10.7142857142857
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Chad,TCD,Lost to follow-up,16.0714285714286
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Chad,TCD,Not evaluated,44.6428571428571
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Chad,TCD,Successfully treated,61.71875
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Chad,TCD,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Chad,TCD,Died,12.5
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Chad,TCD,Lost to follow-up,24.21875
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Chad,TCD,Not evaluated,1.5625
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Chad,TCD,Successfully treated,61.71875
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Chad,TCD,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Chad,TCD,Died,12.5
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Chad,TCD,Lost to follow-up,24.21875
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Chad,TCD,Not evaluated,1.5625
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Chad,TCD,Successfully treated,72.8070175438597
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Chad,TCD,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Chad,TCD,Died,11.4035087719298
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Chad,TCD,Lost to follow-up,14.0350877192982
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Chad,TCD,Not evaluated,1.75438596491228
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2002,Chile,CHL,Successfully treated,50
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2002,Chile,CHL,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2002,Chile,CHL,Died,40
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2002,Chile,CHL,Lost to follow-up,10
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2002,Chile,CHL,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2004,Chile,CHL,Successfully treated,42.8571428571429
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2004,Chile,CHL,Died,28.5714285714286
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2004,Chile,CHL,Lost to follow-up,14.2857142857143
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2004,Chile,CHL,Not evaluated,14.2857142857143
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2006,Chile,CHL,Successfully treated,50
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2006,Chile,CHL,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2006,Chile,CHL,Died,7.14285714285714
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2006,Chile,CHL,Lost to follow-up,7.14285714285714
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2006,Chile,CHL,Not evaluated,35.7142857142857
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2007,Chile,CHL,Successfully treated,36.3636363636364
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2007,Chile,CHL,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2007,Chile,CHL,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2007,Chile,CHL,Lost to follow-up,18.1818181818182
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2007,Chile,CHL,Not evaluated,45.4545454545455
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2008,Chile,CHL,Successfully treated,16.6666666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2008,Chile,CHL,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2008,Chile,CHL,Died,16.6666666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2008,Chile,CHL,Lost to follow-up,33.3333333333333
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2008,Chile,CHL,Not evaluated,33.3333333333333
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Chile,CHL,Successfully treated,21.0526315789474
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Chile,CHL,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Chile,CHL,Died,26.3157894736842
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Chile,CHL,Lost to follow-up,15.7894736842105
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Chile,CHL,Not evaluated,36.8421052631579
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,Chile,CHL,Successfully treated,41.6666666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,Chile,CHL,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,Chile,CHL,Died,16.6666666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,Chile,CHL,Lost to follow-up,25
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,Chile,CHL,Not evaluated,16.6666666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Chile,CHL,Successfully treated,50
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Chile,CHL,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Chile,CHL,Died,20
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Chile,CHL,Lost to follow-up,20
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Chile,CHL,Not evaluated,10
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Chile,CHL,Successfully treated,55.5555555555556
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Chile,CHL,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Chile,CHL,Died,22.2222222222222
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Chile,CHL,Lost to follow-up,11.1111111111111
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Chile,CHL,Not evaluated,11.1111111111111
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Chile,CHL,Successfully treated,21.4285714285714
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Chile,CHL,Treatment failed,7.14285714285714
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Chile,CHL,Died,28.5714285714286
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Chile,CHL,Lost to follow-up,42.8571428571429
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Chile,CHL,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Chile,CHL,Successfully treated,30.7692307692308
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Chile,CHL,Treatment failed,7.69230769230769
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Chile,CHL,Died,30.7692307692308
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Chile,CHL,Lost to follow-up,15.3846153846154
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Chile,CHL,Not evaluated,15.3846153846154
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Chile,CHL,Successfully treated,36.8421052631579
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Chile,CHL,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Chile,CHL,Died,10.5263157894737
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Chile,CHL,Lost to follow-up,26.3157894736842
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Chile,CHL,Not evaluated,26.3157894736842
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Chile,CHL,Successfully treated,71.4285714285714
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Chile,CHL,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Chile,CHL,Died,7.14285714285714
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Chile,CHL,Lost to follow-up,21.4285714285714
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Chile,CHL,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Chile,CHL,Successfully treated,48
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Chile,CHL,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Chile,CHL,Died,12
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Chile,CHL,Lost to follow-up,36
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Chile,CHL,Not evaluated,4
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Chile,CHL,Successfully treated,46.031746031746
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Chile,CHL,Treatment failed,1.58730158730159
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Chile,CHL,Died,14.2857142857143
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Chile,CHL,Lost to follow-up,34.9206349206349
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Chile,CHL,Not evaluated,3.17460317460317
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Chile,CHL,Successfully treated,50
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Chile,CHL,Treatment failed,1.66666666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Chile,CHL,Died,13.3333333333333
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Chile,CHL,Lost to follow-up,28.3333333333333
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Chile,CHL,Not evaluated,6.66666666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Chile,CHL,Successfully treated,59.4594594594595
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Chile,CHL,Treatment failed,5.40540540540541
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Chile,CHL,Died,13.5135135135135
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Chile,CHL,Lost to follow-up,21.6216216216216
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Chile,CHL,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Chile,CHL,Successfully treated,54.3859649122807
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Chile,CHL,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Chile,CHL,Died,19.2982456140351
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Chile,CHL,Lost to follow-up,22.8070175438597
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Chile,CHL,Not evaluated,3.50877192982456
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Chile,CHL,Successfully treated,63.6363636363636
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Chile,CHL,Treatment failed,1.81818181818182
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Chile,CHL,Died,14.5454545454545
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Chile,CHL,Lost to follow-up,20
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Chile,CHL,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2008,China,CHN,Successfully treated,46.1538461538462
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2008,China,CHN,Treatment failed,38.4615384615385
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2008,China,CHN,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2008,China,CHN,Lost to follow-up,7.69230769230769
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2008,China,CHN,Not evaluated,7.69230769230769
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,China,CHN,Successfully treated,46.1538461538462
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,China,CHN,Treatment failed,24.6153846153846
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,China,CHN,Died,8.46153846153846
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,China,CHN,Lost to follow-up,7.69230769230769
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,China,CHN,Not evaluated,13.0769230769231
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,China,CHN,Successfully treated,41.8166939443535
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,China,CHN,Treatment failed,16.4484451718494
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,China,CHN,Died,7.28314238952537
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,China,CHN,Lost to follow-up,8.34697217675941
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,China,CHN,Not evaluated,26.1047463175123
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,China,CHN,Successfully treated,49.9065420560748
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,China,CHN,Treatment failed,20.4672897196262
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,China,CHN,Died,8.41121495327103
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,China,CHN,Lost to follow-up,8.22429906542056
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,China,CHN,Not evaluated,12.9906542056075
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,China,CHN,Successfully treated,42.2350472193074
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,China,CHN,Treatment failed,7.71248688352571
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,China,CHN,Died,5.40398740818468
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,China,CHN,Lost to follow-up,4.45960125918153
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,China,CHN,Not evaluated,40.1888772298006
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,China,CHN,Successfully treated,55.4945054945055
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,China,CHN,Treatment failed,8.97435897435897
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,China,CHN,Died,7.14285714285714
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,China,CHN,Lost to follow-up,7.37179487179487
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,China,CHN,Not evaluated,21.0164835164835
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,China,CHN,Successfully treated,40.9697821503865
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,China,CHN,Treatment failed,6.39494026704146
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,China,CHN,Died,5.86788475052706
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,China,CHN,Lost to follow-up,8.9599437807449
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,China,CHN,Not evaluated,37.8074490513001
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,China,CHN,Successfully treated,40.9945528026709
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,China,CHN,Treatment failed,9.7873835881216
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,China,CHN,Died,4.09418379898085
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,China,CHN,Lost to follow-up,13.1259884027412
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,China,CHN,Not evaluated,31.9978914074855
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,China,CHN,Successfully treated,52.2664199814986
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,China,CHN,Treatment failed,6.91951896392229
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,China,CHN,Died,5.64292321924144
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Eswatini,SWZ,Lost to follow-up,25.1428571428571
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Eswatini,SWZ,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Eswatini,SWZ,Successfully treated,60.1208459214502
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Eswatini,SWZ,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Eswatini,SWZ,Died,23.5649546827795
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Eswatini,SWZ,Lost to follow-up,16.3141993957704
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Eswatini,SWZ,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Eswatini,SWZ,Successfully treated,69.8198198198198
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Eswatini,SWZ,Treatment failed,1.8018018018018
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Eswatini,SWZ,Died,19.8198198198198
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Eswatini,SWZ,Lost to follow-up,8.55855855855856
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Eswatini,SWZ,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Eswatini,SWZ,Successfully treated,67.5409836065574
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Eswatini,SWZ,Treatment failed,1.9672131147541
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Eswatini,SWZ,Died,22.9508196721311
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Eswatini,SWZ,Lost to follow-up,4.26229508196721
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Eswatini,SWZ,Not evaluated,3.27868852459016
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Eswatini,SWZ,Successfully treated,71.864406779661
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Eswatini,SWZ,Treatment failed,4.74576271186441
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Eswatini,SWZ,Died,18.6440677966102
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Eswatini,SWZ,Lost to follow-up,2.71186440677966
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Eswatini,SWZ,Not evaluated,2.03389830508475
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Eswatini,SWZ,Successfully treated,73.4513274336283
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Eswatini,SWZ,Treatment failed,3.53982300884956
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Eswatini,SWZ,Died,19.4690265486726
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Eswatini,SWZ,Lost to follow-up,3.09734513274336
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Eswatini,SWZ,Not evaluated,0.442477876106195
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Eswatini,SWZ,Successfully treated,76.2237762237762
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Eswatini,SWZ,Treatment failed,2.0979020979021
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Eswatini,SWZ,Died,12.5874125874126
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Eswatini,SWZ,Lost to follow-up,2.7972027972028
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Eswatini,SWZ,Not evaluated,6.29370629370629
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Eswatini,SWZ,Successfully treated,81.6793893129771
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Eswatini,SWZ,Treatment failed,0.763358778625954
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Eswatini,SWZ,Died,15.2671755725191
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Eswatini,SWZ,Lost to follow-up,2.29007633587786
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Eswatini,SWZ,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Eswatini,SWZ,Successfully treated,77.6470588235294
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Eswatini,SWZ,Treatment failed,2.35294117647059
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Eswatini,SWZ,Died,11.7647058823529
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Eswatini,SWZ,Lost to follow-up,8.23529411764706
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Eswatini,SWZ,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Eswatini,SWZ,Successfully treated,84.4155844155844
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Eswatini,SWZ,Treatment failed,2.5974025974026
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Eswatini,SWZ,Died,7.79220779220779
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Eswatini,SWZ,Lost to follow-up,5.1948051948052
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Eswatini,SWZ,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Eswatini,SWZ,Successfully treated,85.7142857142857
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Eswatini,SWZ,Treatment failed,1.42857142857143
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Eswatini,SWZ,Died,8.57142857142857
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Eswatini,SWZ,Lost to follow-up,4.28571428571429
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Eswatini,SWZ,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Ethiopia,ETH,Successfully treated,90.4109589041096
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Ethiopia,ETH,Died,8.21917808219178
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Ethiopia,ETH,Lost to follow-up,1.36986301369863
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2009,Ethiopia,ETH,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,Ethiopia,ETH,Successfully treated,84.2105263157895
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,Ethiopia,ETH,Treatment failed,0.87719298245614
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,Ethiopia,ETH,Died,13.1578947368421
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,Ethiopia,ETH,Lost to follow-up,0.87719298245614
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2010,Ethiopia,ETH,Not evaluated,0.87719298245614
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Ethiopia,ETH,Successfully treated,72.4137931034483
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Ethiopia,ETH,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Ethiopia,ETH,Died,18.1034482758621
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Ethiopia,ETH,Lost to follow-up,7.75862068965517
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2011,Ethiopia,ETH,Not evaluated,1.72413793103448
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Ethiopia,ETH,Successfully treated,82.6568265682657
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Ethiopia,ETH,Treatment failed,3.690036900369
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Ethiopia,ETH,Died,11.8081180811808
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Ethiopia,ETH,Lost to follow-up,1.8450184501845
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2012,Ethiopia,ETH,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Ethiopia,ETH,Successfully treated,68.0100755667506
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Ethiopia,ETH,Treatment failed,2.51889168765743
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Ethiopia,ETH,Died,12.3425692695214
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Ethiopia,ETH,Lost to follow-up,8.06045340050378
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2013,Ethiopia,ETH,Not evaluated,9.06801007556675
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Ethiopia,ETH,Successfully treated,69.6588868940754
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Ethiopia,ETH,Treatment failed,0.538599640933573
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Ethiopia,ETH,Died,15.2603231597846
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Ethiopia,ETH,Lost to follow-up,8.79712746858169
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Ethiopia,ETH,Not evaluated,5.74506283662478
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Ethiopia,ETH,Successfully treated,75.1515151515152
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Ethiopia,ETH,Treatment failed,0.757575757575758
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Ethiopia,ETH,Died,11.969696969697
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Ethiopia,ETH,Lost to follow-up,10.4545454545455
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Ethiopia,ETH,Not evaluated,1.66666666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Ethiopia,ETH,Successfully treated,72.4039829302987
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Ethiopia,ETH,Treatment failed,2.13371266002845
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Ethiopia,ETH,Died,12.0910384068279
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Ethiopia,ETH,Lost to follow-up,7.96586059743955
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Ethiopia,ETH,Not evaluated,5.40540540540541
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Ethiopia,ETH,Successfully treated,75.2824858757062
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Ethiopia,ETH,Treatment failed,1.69491525423729
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Ethiopia,ETH,Died,10.7344632768362
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Ethiopia,ETH,Lost to follow-up,7.20338983050848
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Ethiopia,ETH,Not evaluated,5.08474576271186
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Ethiopia,ETH,Successfully treated,70.1388888888889
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Ethiopia,ETH,Treatment failed,1.52777777777778
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Ethiopia,ETH,Died,10.4166666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Ethiopia,ETH,Lost to follow-up,6.80555555555556
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,Ethiopia,ETH,Not evaluated,11.1111111111111
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Ethiopia,ETH,Successfully treated,68.266253869969
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Ethiopia,ETH,Treatment failed,3.09597523219814
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Ethiopia,ETH,Died,8.97832817337461
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Ethiopia,ETH,Lost to follow-up,5.57275541795666
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Ethiopia,ETH,Not evaluated,14.0866873065015
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Ethiopia,ETH,Successfully treated,60.6164383561644
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Ethiopia,ETH,Treatment failed,1.1986301369863
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Ethiopia,ETH,Died,5.82191780821918
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Ethiopia,ETH,Lost to follow-up,2.73972602739726
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2020,Ethiopia,ETH,Not evaluated,29.6232876712329
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Ethiopia,ETH,Successfully treated,78.0155642023346
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Ethiopia,ETH,Treatment failed,2.91828793774319
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Ethiopia,ETH,Died,8.94941634241245
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Ethiopia,ETH,Lost to follow-up,4.08560311284047
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Ethiopia,ETH,Not evaluated,6.03112840466926
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Ethiopia,ETH,Successfully treated,81.9178082191781
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Ethiopia,ETH,Treatment failed,0.273972602739726
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Ethiopia,ETH,Died,6.84931506849315
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Ethiopia,ETH,Lost to follow-up,6.71232876712329
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Ethiopia,ETH,Not evaluated,4.24657534246575
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Fiji,FJI,Successfully treated,100
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Fiji,FJI,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Fiji,FJI,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Fiji,FJI,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2014,Fiji,FJI,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Fiji,FJI,Successfully treated,100
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Fiji,FJI,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Fiji,FJI,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Fiji,FJI,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Fiji,FJI,Successfully treated,100
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Fiji,FJI,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Fiji,FJI,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Fiji,FJI,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Fiji,FJI,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Fiji,FJI,Successfully treated,100
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Fiji,FJI,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Fiji,FJI,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Fiji,FJI,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Fiji,FJI,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Fiji,FJI,Successfully treated,75
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Fiji,FJI,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Fiji,FJI,Died,25
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Fiji,FJI,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2021,Fiji,FJI,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Fiji,FJI,Successfully treated,60
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Fiji,FJI,Treatment failed,20
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Fiji,FJI,Died,20
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Fiji,FJI,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Fiji,FJI,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Finland,FIN,Successfully treated,50
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Finland,FIN,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Finland,FIN,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Finland,FIN,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2015,Finland,FIN,Not evaluated,50
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Finland,FIN,Successfully treated,80
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Finland,FIN,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Finland,FIN,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Finland,FIN,Lost to follow-up,20
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2016,Finland,FIN,Not evaluated,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Finland,FIN,Successfully treated,40
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Finland,FIN,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Finland,FIN,Died,20
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Finland,FIN,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2017,Finland,FIN,Not evaluated,40
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Finland,FIN,Successfully treated,66.6666666666667
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Finland,FIN,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Finland,FIN,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Finland,FIN,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,Finland,FIN,Not evaluated,33.3333333333333
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Finland,FIN,Successfully treated,62.5
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Finland,FIN,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Finland,FIN,Died,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Finland,FIN,Lost to follow-up,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2022,Finland,FIN,Not evaluated,37.5
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,France,FRA,Successfully treated,4.05405405405405
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,France,FRA,Treatment failed,0
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,France,FRA,Died,1.35135135135135
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,France,FRA,Lost to follow-up,1.35135135135135
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2018,France,FRA,Not evaluated,93.2432432432432
+39E4281F1912F6,Treatment outcomes of people with RR/MDR-TB,2019,France,FRA,Successfully treated,8.13953488372093

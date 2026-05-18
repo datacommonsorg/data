@@ -1,0 +1,9 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+iso3,observationAbout,country/{Data},,,,,,
+YEAR,observationDate,{Data},,,,,,
+DISAGGR_1:Died,treatmentOutcome,dcs:DiedDuringTreatment,,,,,,
+DISAGGR_1:Lost to follow-up,treatmentOutcome,dcs:LostToFollowUp,,,,,,
+DISAGGR_1:Not evaluated,treatmentOutcome,dcs:TreatmentNotEvaluated,,,,,,
+DISAGGR_1:Successfully treated,treatmentOutcome,dcs:SuccessfullyTreated,,,,,,
+DISAGGR_1:Treatment failed,treatmentOutcome,dcs:TreatmentFailed,,,,,,
+VALUE,value,{Number},populationType,dcs:Person,measuredProperty,dcs:count,medicalCondition,dcs:MultidrugOrRifampicinResistantTuberculosis,unit,dcs:Percent,scalingFactor,100,,
