@@ -23,12 +23,24 @@ logging.getLogger().setLevel(logging.INFO)
 
 class BigQueryExecutor:
     """Handles BigQuery client initialization and query execution."""
-    def __init__(self) -> None:
+    def __init__(self,
+                 connection_id: Optional[str] = None,
+                 project_id: Optional[str] = None,
+                 instance_id: Optional[str] = None,
+                 database_id: Optional[str] = None) -> None:
+        self.connection_id = connection_id
+        self.project_id = project_id
+        self.instance_id = instance_id
+        self.database_id = database_id
         try:
             self.client = bigquery.Client()
         except Exception as e:
             logging.warning(f"Failed to initialize BigQuery client: {e}")
             self.client = None
+
+    def get_spanner_destination_uri(self) -> str:
+        """Returns the Spanner destination URI for EXPORT DATA."""
+        return f"https://spanner.googleapis.com/projects/{self.project_id}/instances/{self.instance_id}/databases/{self.database_id}"
 
     def execute(self, query: str, job_config: Optional[bigquery.QueryJobConfig] = None) -> bigquery.table.RowIterator:
         """Executes a query and returns the result."""
@@ -52,27 +64,23 @@ class BigQueryExecutor:
 
 class GraphAggregator:
     """Contains the SQL global aggregation queries."""
-    def __init__(self, executor: BigQueryExecutor, 
-                 connection_id: str = "429015563165.us.dc_graph_2026_01_27_no_parallel",
-                 default_destination_uri: Optional[str] = None) -> None:
+    def __init__(self, executor: BigQueryExecutor) -> None:
         self.executor = executor
-        self.connection_id = connection_id
-        self.default_destination_uri = default_destination_uri
 
 
-    def run_linked_contained_in_place(self, destination_uri: Optional[str] = None) -> None:
+    def run_linked_contained_in_place(self) -> None:
         """Expands place containment hierarchies."""
-        dest = destination_uri or self.default_destination_uri
+        dest = self.executor.get_spanner_destination_uri()
         
         query = f"""
         -- Pull base edges needed for containedInPlace aggregation
         CREATE OR REPLACE TEMPORARY TABLE `temp_base_contained_in_place` AS
-        SELECT * FROM EXTERNAL_QUERY("{self.connection_id}", 
+        SELECT * FROM EXTERNAL_QUERY("{self.executor.connection_id}", 
           "SELECT subject_id, predicate, object_id FROM Edge WHERE predicate = 'containedInPlace'");
 
         -- Pull existing generated edges to filter them out later
         CREATE OR REPLACE TEMPORARY TABLE `temp_existing_linked_contained_in_place` AS
-        SELECT * FROM EXTERNAL_QUERY("{self.connection_id}", 
+        SELECT * FROM EXTERNAL_QUERY("{self.executor.connection_id}", 
           "SELECT subject_id, predicate, object_id, provenance FROM Edge WHERE predicate = 'linkedContainedInPlace'");
 
         CREATE OR REPLACE TEMPORARY TABLE `temp_contained_in_place` AS
@@ -140,19 +148,19 @@ class GraphAggregator:
         """
         self.executor.execute(query)
 
-    def run_linked_member_of(self, destination_uri: Optional[str] = None) -> None:
+    def run_linked_member_of(self) -> None:
         """Expands membership hierarchies using memberOf and specializationOf."""
-        dest = destination_uri or self.default_destination_uri
+        dest = self.executor.get_spanner_destination_uri()
 
         query = f"""
         -- Pull base edges needed for memberOf aggregation
         CREATE OR REPLACE TEMPORARY TABLE `temp_base_member_of` AS
-        SELECT * FROM EXTERNAL_QUERY("{self.connection_id}", 
+        SELECT * FROM EXTERNAL_QUERY("{self.executor.connection_id}", 
           "SELECT subject_id, predicate, object_id FROM Edge WHERE predicate IN ('memberOf', 'specializationOf')");
 
         -- Pull existing generated edges to filter them out later
         CREATE OR REPLACE TEMPORARY TABLE `temp_existing_linked_member_of` AS
-        SELECT * FROM EXTERNAL_QUERY("{self.connection_id}", 
+        SELECT * FROM EXTERNAL_QUERY("{self.executor.connection_id}", 
           "SELECT subject_id, predicate, object_id, provenance FROM Edge WHERE predicate = 'linkedMemberOf'");
 
         CREATE OR REPLACE TEMPORARY TABLE `temp_hierarchy` AS
@@ -223,19 +231,19 @@ class GraphAggregator:
         """
         self.executor.execute(query)
 
-    def run_linked_member(self, destination_uri: Optional[str] = None) -> None:
+    def run_linked_member(self) -> None:
         """Expands topic/SVGP descendants to identify leaf members."""
-        dest = destination_uri or self.default_destination_uri
+        dest = self.executor.get_spanner_destination_uri()
 
         query = f"""
         -- Pull base edges needed for member aggregation
         CREATE OR REPLACE TEMPORARY TABLE `temp_base_member` AS
-        SELECT * FROM EXTERNAL_QUERY("{self.connection_id}", 
+        SELECT * FROM EXTERNAL_QUERY("{self.executor.connection_id}", 
           "SELECT subject_id, predicate, object_id FROM Edge WHERE predicate IN ('relevantVariable', 'member')");
 
         -- Pull existing generated edges to filter them out later
         CREATE OR REPLACE TEMPORARY TABLE `temp_existing_linked_member` AS
-        SELECT * FROM EXTERNAL_QUERY("{self.connection_id}", 
+        SELECT * FROM EXTERNAL_QUERY("{self.executor.connection_id}", 
           "SELECT subject_id, predicate, object_id, provenance FROM Edge WHERE predicate = 'linkedMember'");
 
         CREATE OR REPLACE TEMPORARY TABLE `temp_topic_hierarchy` AS
@@ -311,8 +319,7 @@ class GraphAggregator:
 class AggregationUtils:
     """Orchestrates the overall aggregation workflow."""
     def __init__(self, 
-                 connection_id: Optional[str] = None,
-                 destination_uri: Optional[str] = None) -> None:
+                 connection_id: Optional[str] = None) -> None:
         # Default connection ID
         if not connection_id:
             connection_id = os.environ.get(
@@ -320,21 +327,18 @@ class AggregationUtils:
                 "429015563165.us.dc_graph_2026_01_27_no_parallel"
             )
 
-        # Default destination URI
-        if not destination_uri:
-            destination_uri = os.environ.get('SPANNER_DESTINATION_URI')
-            if not destination_uri:
-                project = os.environ.get('SPANNER_PROJECT_ID', 'datcom-store')
-                instance = os.environ.get('SPANNER_INSTANCE_ID', 'dc-kg-test')
-                database = os.environ.get('SPANNER_GRAPH_DATABASE_ID', 'dc_graph_2026_01_27')
-                destination_uri = f"https://spanner.googleapis.com/projects/{project}/instances/{instance}/databases/{database}"
-            
-        self.executor = BigQueryExecutor()
-        self.graph_aggregator = GraphAggregator(
-            self.executor,
+        # Spanner metadata
+        project_id = os.environ.get('SPANNER_PROJECT_ID', 'datcom-store')
+        instance_id = os.environ.get('SPANNER_INSTANCE_ID', 'dc-kg-test')
+        database_id = os.environ.get('SPANNER_GRAPH_DATABASE_ID', 'dc_graph_2026_01_27')
+
+        self.executor = BigQueryExecutor(
             connection_id=connection_id,
-            default_destination_uri=destination_uri
+            project_id=project_id,
+            instance_id=instance_id,
+            database_id=database_id
         )
+        self.graph_aggregator = GraphAggregator(self.executor)
 
     def run_aggregation(self, import_list: List[Dict[str, Any]]) -> bool:
         """
