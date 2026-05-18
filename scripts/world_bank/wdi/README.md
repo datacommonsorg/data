@@ -154,5 +154,14 @@ The validator compares the input data (usually from the stats data source) again
 
 If any combination of values in a golden file row is missing from the input, the validation fails. The missing golden rows are then listed in the validation report JSON.
 
+If you want to get goldens, run the below command:
+```bash
+#goldens from output csv 
+python3 validator_goldens.py   --validate_goldens_input=scripts/world_bank/wdi/output/WorldBank.csv   --generate_goldens=golden_data/golden_WorldBank.csv   --goldens_must_include="StatisticalVariable:gs://unresolved_mcfimport_validation/nl_statvars.csv"   --generate_goldens_property_sets="StatisticalVariable|observationPeriod|unit"
+
+#goldens from summary reports
+python3 validator_goldens.py --validate_goldens_input="summary_report.csv" --generate_goldens=golden_data/golden_summary_report.csv  --generate_goldens_property_sets="StatVar|NumPlaces|MinDate"
+```
+
 We highly recommend the use of the import validation tool for this import which
 you can find in https://github.com/datacommonsorg/tools/tree/master/import-validation-helper.
