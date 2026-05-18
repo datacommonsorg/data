@@ -53,22 +53,31 @@ class BigQueryExecutor:
 class GraphAggregator:
     """Contains the SQL global aggregation queries."""
     def __init__(self, executor: BigQueryExecutor, 
-                 default_source_dataset: str = "dc_graph_stable",
+                 connection_id: str = "429015563165.us.dc_graph_2026_01_27_no_parallel",
                  default_destination_uri: Optional[str] = None) -> None:
         self.executor = executor
-        self.default_source_dataset = default_source_dataset
+        self.connection_id = connection_id
         self.default_destination_uri = default_destination_uri
 
-    def run_linked_contained_in_place(self, source_dataset: Optional[str] = None, destination_uri: Optional[str] = None) -> None:
+
+    def run_linked_contained_in_place(self, destination_uri: Optional[str] = None) -> None:
         """Expands place containment hierarchies."""
-        source = source_dataset or self.default_source_dataset
         dest = destination_uri or self.default_destination_uri
         
         query = f"""
+        -- Pull base edges needed for containedInPlace aggregation
+        CREATE OR REPLACE TEMPORARY TABLE `temp_base_contained_in_place` AS
+        SELECT * FROM EXTERNAL_QUERY("{self.connection_id}", 
+          "SELECT subject_id, predicate, object_id FROM Edge WHERE predicate = 'containedInPlace'");
+
+        -- Pull existing generated edges to filter them out later
+        CREATE OR REPLACE TEMPORARY TABLE `temp_existing_linked_contained_in_place` AS
+        SELECT * FROM EXTERNAL_QUERY("{self.connection_id}", 
+          "SELECT subject_id, predicate, object_id, provenance FROM Edge WHERE predicate = 'linkedContainedInPlace'");
+
         CREATE OR REPLACE TEMPORARY TABLE `temp_contained_in_place` AS
         SELECT subject_id, object_id
-        FROM `{source}.Edge` 
-        WHERE predicate = 'containedInPlace';
+        FROM `temp_base_contained_in_place`;
 
         EXPORT DATA
           OPTIONS( uri="{dest}",
@@ -94,27 +103,61 @@ class GraphAggregator:
             ON a.ancestor_place = t.subject_id
           WHERE
             a.level <= 10 -- Limit to 10 levels
+        ),
+        NewEdges AS (
+          SELECT DISTINCT
+            subject_id,
+            'linkedContainedInPlace' as predicate,
+            ancestor_place as object_id,
+            'dc/base/GeneratedGraphs' as provenance
+          FROM
+            Ancestors
+        ),
+        FilteredEdges AS (
+          SELECT
+            subject_id,
+            predicate,
+            object_id,
+            provenance
+          FROM
+            NewEdges n
+          WHERE NOT EXISTS (
+            SELECT 1
+            FROM `temp_existing_linked_contained_in_place` e
+            WHERE n.subject_id = e.subject_id
+              AND n.predicate = e.predicate
+              AND n.object_id = e.object_id
+              AND n.provenance = e.provenance
+          )
         )
-        SELECT DISTINCT
+        SELECT
           subject_id,
-          'linkedContainedInPlace' as predicate,
-          ancestor_place as object_id,
-          'dc/base/GeneratedGraphs' as provenance
+          predicate,
+          object_id,
+          provenance
         FROM
-          Ancestors
+          FilteredEdges
         """
         self.executor.execute(query)
 
-    def run_linked_member_of(self, source_dataset: Optional[str] = None, destination_uri: Optional[str] = None) -> None:
+    def run_linked_member_of(self, destination_uri: Optional[str] = None) -> None:
         """Expands membership hierarchies using memberOf and specializationOf."""
-        source = source_dataset or self.default_source_dataset
         dest = destination_uri or self.default_destination_uri
 
         query = f"""
+        -- Pull base edges needed for memberOf aggregation
+        CREATE OR REPLACE TEMPORARY TABLE `temp_base_member_of` AS
+        SELECT * FROM EXTERNAL_QUERY("{self.connection_id}", 
+          "SELECT subject_id, predicate, object_id FROM Edge WHERE predicate IN ('memberOf', 'specializationOf')");
+
+        -- Pull existing generated edges to filter them out later
+        CREATE OR REPLACE TEMPORARY TABLE `temp_existing_linked_member_of` AS
+        SELECT * FROM EXTERNAL_QUERY("{self.connection_id}", 
+          "SELECT subject_id, predicate, object_id, provenance FROM Edge WHERE predicate = 'linkedMemberOf'");
+
         CREATE OR REPLACE TEMPORARY TABLE `temp_hierarchy` AS
         SELECT DISTINCT subject_id, predicate, object_id
-        FROM `{source}.Edge`
-        WHERE predicate IN ('memberOf', 'specializationOf');
+        FROM `temp_base_member_of`;
 
         EXPORT DATA
           OPTIONS( uri="{dest}",
@@ -143,28 +186,62 @@ class GraphAggregator:
           WHERE
             a.level <= 20 -- Limit to 20 levels
             AND t.predicate = 'specializationOf'
+        ),
+        NewEdges AS (
+          SELECT DISTINCT
+            subject_id,
+            'linkedMemberOf' as predicate,
+            ancestor as object_id,
+            'dc/base/GeneratedGraphs' as provenance
+          FROM
+            Ancestors
+        ),
+        FilteredEdges AS (
+          SELECT
+            subject_id,
+            predicate,
+            object_id,
+            provenance
+          FROM
+            NewEdges n
+          WHERE NOT EXISTS (
+            SELECT 1
+            FROM `temp_existing_linked_member_of` e
+            WHERE n.subject_id = e.subject_id
+              AND n.predicate = e.predicate
+              AND n.object_id = e.object_id
+              AND n.provenance = e.provenance
+          )
         )
-        SELECT DISTINCT
+        SELECT
           subject_id,
-          'linkedMemberOf' as predicate,
-          ancestor as object_id,
-          'dc/base/GeneratedGraphs' as provenance
+          predicate,
+          object_id,
+          provenance
         FROM
-          Ancestors
+          FilteredEdges
         """
         self.executor.execute(query)
 
-    def run_linked_member(self, source_dataset: Optional[str] = None, destination_uri: Optional[str] = None) -> None:
+    def run_linked_member(self, destination_uri: Optional[str] = None) -> None:
         """Expands topic/SVGP descendants to identify leaf members."""
-        source = source_dataset or self.default_source_dataset
         dest = destination_uri or self.default_destination_uri
 
         query = f"""
+        -- Pull base edges needed for member aggregation
+        CREATE OR REPLACE TEMPORARY TABLE `temp_base_member` AS
+        SELECT * FROM EXTERNAL_QUERY("{self.connection_id}", 
+          "SELECT subject_id, predicate, object_id FROM Edge WHERE predicate IN ('relevantVariable', 'member')");
+
+        -- Pull existing generated edges to filter them out later
+        CREATE OR REPLACE TEMPORARY TABLE `temp_existing_linked_member` AS
+        SELECT * FROM EXTERNAL_QUERY("{self.connection_id}", 
+          "SELECT subject_id, predicate, object_id, provenance FROM Edge WHERE predicate = 'linkedMember'");
+
         CREATE OR REPLACE TEMPORARY TABLE `temp_topic_hierarchy` AS
         SELECT DISTINCT subject_id, object_id
-        FROM `{source}.Edge`
-        WHERE predicate IN ('relevantVariable', 'member')
-        AND (subject_id LIKE 'dc/topic%' OR subject_id LIKE 'dc/svpg%');
+        FROM `temp_base_member`
+        WHERE (subject_id LIKE 'dc/topic%' OR subject_id LIKE 'dc/svpg%');
 
         EXPORT DATA
           OPTIONS( uri="{dest}",
@@ -190,17 +267,43 @@ class GraphAggregator:
             ON d.descendant = t.subject_id
           WHERE
             d.level <= 20 -- Limit to 20 levels
+        ),
+        NewEdges AS (
+          SELECT DISTINCT
+            descendant as subject_id,
+            'linkedMember' as predicate,
+            subject_id as object_id,
+            'dc/base/GeneratedGraphs' as provenance
+          FROM
+            Descendants
+          WHERE subject_id LIKE 'dc/topic%'
+          AND descendant NOT LIKE 'dc/topic%'
+          AND descendant NOT LIKE 'dc/svpg%'
+        ),
+        FilteredEdges AS (
+          SELECT
+            subject_id,
+            predicate,
+            object_id,
+            provenance
+          FROM
+            NewEdges n
+          WHERE NOT EXISTS (
+            SELECT 1
+            FROM `temp_existing_linked_member` e
+            WHERE n.subject_id = e.subject_id
+              AND n.predicate = e.predicate
+              AND n.object_id = e.object_id
+              AND n.provenance = e.provenance
+          )
         )
-        SELECT DISTINCT
-          descendant as subject_id,
-          'linkedMember' as predicate,
-          subject_id as object_id,
-          'dc/base/GeneratedGraphs' as provenance
+        SELECT
+          subject_id,
+          predicate,
+          object_id,
+          provenance
         FROM
-          Descendants
-        WHERE subject_id LIKE 'dc/topic%'
-        AND descendant NOT LIKE 'dc/topic%'
-        AND descendant NOT LIKE 'dc/svpg%'
+          FilteredEdges
         """
         self.executor.execute(query)
 
@@ -208,19 +311,28 @@ class GraphAggregator:
 class AggregationUtils:
     """Orchestrates the overall aggregation workflow."""
     def __init__(self, 
-                 source_dataset: str = "dc_graph_stable",
+                 connection_id: Optional[str] = None,
                  destination_uri: Optional[str] = None) -> None:
+        # Default connection ID
+        if not connection_id:
+            connection_id = os.environ.get(
+                'SPANNER_CONNECTION_ID',
+                "429015563165.us.dc_graph_2026_01_27_no_parallel"
+            )
+
         # Default destination URI
         if not destination_uri:
-            destination_uri = os.environ.get(
-                'SPANNER_DESTINATION_URI',
-                "https://spanner.googleapis.com/projects/datcom-store/instances/dc-kg-test/databases/dc_graph_2026_01_27"
-            )
+            destination_uri = os.environ.get('SPANNER_DESTINATION_URI')
+            if not destination_uri:
+                project = os.environ.get('SPANNER_PROJECT_ID', 'datcom-store')
+                instance = os.environ.get('SPANNER_INSTANCE_ID', 'dc-kg-test')
+                database = os.environ.get('SPANNER_GRAPH_DATABASE_ID', 'dc_graph_2026_01_27')
+                destination_uri = f"https://spanner.googleapis.com/projects/{project}/instances/{instance}/databases/{database}"
             
         self.executor = BigQueryExecutor()
         self.graph_aggregator = GraphAggregator(
             self.executor,
-            default_source_dataset=source_dataset,
+            connection_id=connection_id,
             default_destination_uri=destination_uri
         )
 
