@@ -14,46 +14,58 @@
 
 import logging
 import os
+import time
+from typing import Any, Dict, List, Optional
+
 from google.cloud import bigquery
 
 logging.getLogger().setLevel(logging.INFO)
 
 class BigQueryExecutor:
-    """Handles BigQuery client initialization and query execution."""
-    def __init__(self):
+    """Handles BigQuery client initialization and query execution with timing."""
+    def __init__(self) -> None:
         try:
             self.client = bigquery.Client()
         except Exception as e:
             logging.warning(f"Failed to initialize BigQuery client: {e}")
             self.client = None
 
-    def execute(self, query, job_config=None):
-        """Executes a query and waits for the result."""
+    def execute(self, query: str, job_config: Optional[bigquery.QueryJobConfig] = None) -> bigquery.table.RowIterator:
+        """Executes a query, waits for the result, and logs execution time."""
         if not self.client:
              logging.error("BigQuery client not initialized")
-             raise Exception("BigQuery client not initialized")
+             raise RuntimeError("BigQuery client not initialized")
              
+        start_time = time.time()
         logging.info(f"Executing query (first 100 chars): {query.strip()[:100]}...")
-        query_job = self.client.query(query, job_config=job_config)
-        return query_job.result()
+        
+        try:
+            query_job = self.client.query(query, job_config=job_config)
+            result = query_job.result()
+            duration = time.time() - start_time
+            logging.info(f"Query completed in {duration:.2f}s. Job ID: {query_job.job_id}")
+            return result
+        except Exception as e:
+            logging.error(f"Query execution failed after {time.time() - start_time:.2f}s: {e}")
+            raise
 
 
 class GraphAggregator:
-    """Contains the specific business logic and SQL for graph-related recursive queries."""
+    """Contains the SQL global aggregation queries."""
     def __init__(self, executor: BigQueryExecutor, 
                  default_source_dataset: str = "dc_graph_stable",
-                 default_destination_uri: str = None):
+                 default_destination_uri: Optional[str] = None) -> None:
         self.executor = executor
         self.default_source_dataset = default_source_dataset
         self.default_destination_uri = default_destination_uri
 
-    def run_linked_contained_in_place(self, source_dataset: str = None, destination_uri: str = None):
+    def run_linked_contained_in_place(self, source_dataset: Optional[str] = None, destination_uri: Optional[str] = None) -> None:
         """Expands place containment hierarchies."""
         source = source_dataset or self.default_source_dataset
         dest = destination_uri or self.default_destination_uri
         
         query = f"""
-        CREATE OR REPLACE TEMPORARY TABLE `temp_cip` AS
+        CREATE OR REPLACE TEMPORARY TABLE `temp_contained_in_place` AS
         SELECT subject_id, object_id
         FROM `{source}.Edge` 
         WHERE predicate = 'containedInPlace';
@@ -68,7 +80,7 @@ class GraphAggregator:
             object_id AS ancestor_place,
             1 AS level
           FROM
-            temp_cip
+            temp_contained_in_place
           UNION ALL
 
           SELECT
@@ -78,7 +90,7 @@ class GraphAggregator:
           FROM
             Ancestors AS a
           JOIN
-            temp_cip AS t
+            temp_contained_in_place AS t
             ON a.ancestor_place = t.subject_id
           WHERE
             a.level <= 10 -- Limit to 10 levels
@@ -93,7 +105,7 @@ class GraphAggregator:
         """
         self.executor.execute(query)
 
-    def run_linked_member_of(self, source_dataset: str = None, destination_uri: str = None):
+    def run_linked_member_of(self, source_dataset: Optional[str] = None, destination_uri: Optional[str] = None) -> None:
         """Expands membership hierarchies using memberOf and specializationOf."""
         source = source_dataset or self.default_source_dataset
         dest = destination_uri or self.default_destination_uri
@@ -142,7 +154,7 @@ class GraphAggregator:
         """
         self.executor.execute(query)
 
-    def run_linked_member(self, source_dataset: str = None, destination_uri: str = None):
+    def run_linked_member(self, source_dataset: Optional[str] = None, destination_uri: Optional[str] = None) -> None:
         """Expands topic/SVGP descendants to identify leaf members."""
         source = source_dataset or self.default_source_dataset
         dest = destination_uri or self.default_destination_uri
@@ -197,7 +209,7 @@ class AggregationUtils:
     """Orchestrates the overall aggregation workflow."""
     def __init__(self, 
                  source_dataset: str = "dc_graph_stable",
-                 destination_uri: str = None):
+                 destination_uri: Optional[str] = None) -> None:
         # Default destination URI
         if not destination_uri:
             destination_uri = os.environ.get(
@@ -212,7 +224,7 @@ class AggregationUtils:
             default_destination_uri=destination_uri
         )
 
-    def run_aggregation(self, import_list):
+    def run_aggregation(self, import_list: List[Dict[str, Any]]) -> bool:
         """
         Orchestrates standard per-import aggregations and global aggregations.
         """
