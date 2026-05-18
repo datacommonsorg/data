@@ -1,0 +1,42 @@
+# Auto generated using command: "data/tools/statvar_importer/stat_var_processor.py --input_data=data/statvar_imports/TB For RR_MDR-TB/input_files/Tuberculosis_rr_mdr_tb_outcomes.csv --pv_map=data/statvar_imports/TB For RR_MDR-TB/tuberculosis_rifampicin_resistant_pv_mapping.csv --output_path=data/statvar_imports/TB For RR_MDR-TB/output/TB_output" on 2026-05-11 09:48:02.453639
+
+Node: dcid:Count_Person_ConditionMultidrugOrRifampicinResistantTuberculosis_DiedDuringTreatment
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:MultidrugOrRifampicinResistantTuberculosis
+treatmentOutcome: dcid:DiedDuringTreatment
+
+Node: dcid:Count_Person_ConditionMultidrugOrRifampicinResistantTuberculosis_LostToFollowUp
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:MultidrugOrRifampicinResistantTuberculosis
+treatmentOutcome: dcid:LostToFollowUp
+
+Node: dcid:Count_Person_ConditionMultidrugOrRifampicinResistantTuberculosis_SuccessfullyTreated
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:MultidrugOrRifampicinResistantTuberculosis
+treatmentOutcome: dcid:SuccessfullyTreated
+
+Node: dcid:Count_Person_ConditionMultidrugOrRifampicinResistantTuberculosis_TreatmentFailed
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:MultidrugOrRifampicinResistantTuberculosis
+treatmentOutcome: dcid:TreatmentFailed
+
+Node: dcid:Count_Person_ConditionMultidrugOrRifampicinResistantTuberculosis_TreatmentNotEvaluated
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:MultidrugOrRifampicinResistantTuberculosis
+treatmentOutcome: dcid:TreatmentNotEvaluated
+

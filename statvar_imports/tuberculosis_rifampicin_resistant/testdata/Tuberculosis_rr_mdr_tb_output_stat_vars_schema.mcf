@@ -1,0 +1,43 @@
+Node: dcid:MultidrugOrRifampicinResistantTuberculosis
+typeOf: dcid:Disease
+name: "Multidrug Or Rifampicin Resistant Tuberculosis"
+isProvisional: dcs:True
+
+Node: dcid:treatmentOutcome
+typeOf: dcs:Property
+name: "treatmentOutcome"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:TreatmentOutcomeEnum
+isProvisional: dcs:True
+
+Node: dcid:TreatmentOutcomeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "TreatmentOutcomeEnum"
+isProvisional: dcs:True
+
+Node: dcid:SuccessfullyTreated
+typeOf: dcid:TreatmentOutcomeEnum
+name: "Successfully Treated"
+isProvisional: dcs:True
+
+Node: dcid:TreatmentFailed
+typeOf: dcid:TreatmentOutcomeEnum
+name: "Treatment Failed"
+isProvisional: dcs:True
+
+Node: dcid:DiedDuringTreatment
+typeOf: dcid:TreatmentOutcomeEnum
+name: "Died During Treatment"
+isProvisional: dcs:True
+
+Node: dcid:LostToFollowUp
+typeOf: dcid:TreatmentOutcomeEnum
+name: "Lost To Follow Up"
+isProvisional: dcs:True
+
+Node: dcid:TreatmentNotEvaluated
+typeOf: dcid:TreatmentOutcomeEnum
+name: "Treatment Not Evaluated"
+isProvisional: dcs:True
+

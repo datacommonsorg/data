@@ -17,7 +17,7 @@ def download_tb_rr_mdr_data():
     }
     
     logging.info("1. Fetching clean percentage data from WHO API...")
-    api_response = requests.get(api_url, params=params)
+    api_response = requests.get(api_url, params=params, timeout=30)
     
     if api_response.status_code != 200:
         logging.error(f"Failed to fetch API data. HTTP {api_response.status_code}")
@@ -29,7 +29,7 @@ def download_tb_rr_mdr_data():
     # 2. Get ONLY the iso3 code from the master database
     logging.info("2. Fetching country iso3 codes from WHO master database...")
     master_url = "https://extranet.who.int/tme/generateCSV.asp?ds=notifications"
-    master_response = requests.get(master_url)
+    master_response = requests.get(master_url, timeout=60)
     if master_response.status_code != 200:
         logging.error(f"Failed to fetch master data. HTTP {master_response.status_code}")
         return
