@@ -22,7 +22,7 @@ from google.cloud import bigquery
 logging.getLogger().setLevel(logging.INFO)
 
 class BigQueryExecutor:
-    """Handles BigQuery client initialization and query execution with timing."""
+    """Handles BigQuery client initialization and query execution."""
     def __init__(self) -> None:
         try:
             self.client = bigquery.Client()
@@ -31,7 +31,7 @@ class BigQueryExecutor:
             self.client = None
 
     def execute(self, query: str, job_config: Optional[bigquery.QueryJobConfig] = None) -> bigquery.table.RowIterator:
-        """Executes a query, waits for the result, and logs execution time."""
+        """Executes a query and returns the result."""
         if not self.client:
              logging.error("BigQuery client not initialized")
              raise RuntimeError("BigQuery client not initialized")
