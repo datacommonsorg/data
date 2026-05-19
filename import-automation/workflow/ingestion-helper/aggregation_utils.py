@@ -67,28 +67,31 @@ class GraphAggregator:
     def __init__(self, executor: BigQueryExecutor) -> None:
         self.executor = executor
 
-    def run_all(self) -> None:
+    def run_all(self, import_names: List[str] = None) -> None:
         """Runs all global aggregations in sequence."""
-        global_aggregations = [
-            self.run_linked_contained_in_place,
-            self.run_linked_member_of,
-            self.run_linked_member,
-        ]
+        import_names = import_names or []
+        logging.info(f"Running global aggregations for imports: {import_names}")
         
-        for agg_func in global_aggregations:
-            logging.info(f"Running global aggregation: {agg_func.__name__}")
-            agg_func()
+        self.run_linked_contained_in_place(import_names)
+        self.run_linked_member_of(import_names)
+        self.run_linked_member(import_names)
 
 
-    def run_linked_contained_in_place(self) -> None:
+    def run_linked_contained_in_place(self, import_names: List[str] = None) -> None:
         """Expands place containment hierarchies."""
         dest = self.executor.get_spanner_destination_uri()
+        import_names = import_names or []
+
+        provenance_filter = ""
+        if import_names:
+            provenances = [f"'dc/base/{name}'" for name in import_names]
+            provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
         
         query = f"""
         -- Pull base edges needed for containedInPlace aggregation
         CREATE OR REPLACE TEMPORARY TABLE `temp_base_contained_in_place` AS
         SELECT * FROM EXTERNAL_QUERY("{self.executor.connection_id}", 
-          "SELECT subject_id, predicate, object_id FROM Edge WHERE predicate = 'containedInPlace'");
+          "SELECT subject_id, predicate, object_id FROM Edge WHERE predicate = 'containedInPlace'{provenance_filter}");
 
         -- Pull existing generated edges to filter them out later
         CREATE OR REPLACE TEMPORARY TABLE `temp_existing_linked_contained_in_place` AS
@@ -160,15 +163,21 @@ class GraphAggregator:
         """
         self.executor.execute(query)
 
-    def run_linked_member_of(self) -> None:
+    def run_linked_member_of(self, import_names: List[str] = None) -> None:
         """Expands membership hierarchies using memberOf and specializationOf."""
         dest = self.executor.get_spanner_destination_uri()
+        import_names = import_names or []
+
+        provenance_filter = ""
+        if import_names:
+            provenances = [f"'dc/base/{name}'" for name in import_names]
+            provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
 
         query = f"""
         -- Pull base edges needed for memberOf aggregation
         CREATE OR REPLACE TEMPORARY TABLE `temp_base_member_of` AS
         SELECT * FROM EXTERNAL_QUERY("{self.executor.connection_id}", 
-          "SELECT subject_id, predicate, object_id FROM Edge WHERE predicate IN ('memberOf', 'specializationOf')");
+          "SELECT subject_id, predicate, object_id FROM Edge WHERE predicate IN ('memberOf', 'specializationOf'){provenance_filter}");
 
         -- Pull existing generated edges to filter them out later
         CREATE OR REPLACE TEMPORARY TABLE `temp_existing_linked_member_of` AS
@@ -243,15 +252,21 @@ class GraphAggregator:
         """
         self.executor.execute(query)
 
-    def run_linked_member(self) -> None:
+    def run_linked_member(self, import_names: List[str] = None) -> None:
         """Expands topic/SVGP descendants to identify leaf members."""
         dest = self.executor.get_spanner_destination_uri()
+        import_names = import_names or []
+
+        provenance_filter = ""
+        if import_names:
+            provenances = [f"'dc/base/{name}'" for name in import_names]
+            provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
 
         query = f"""
         -- Pull base edges needed for member aggregation
         CREATE OR REPLACE TEMPORARY TABLE `temp_base_member` AS
         SELECT * FROM EXTERNAL_QUERY("{self.executor.connection_id}", 
-          "SELECT subject_id, predicate, object_id FROM Edge WHERE predicate IN ('relevantVariable', 'member')");
+          "SELECT subject_id, predicate, object_id FROM Edge WHERE predicate IN ('relevantVariable', 'member'){provenance_filter}");
 
         -- Pull existing generated edges to filter them out later
         CREATE OR REPLACE TEMPORARY TABLE `temp_existing_linked_member` AS
@@ -571,7 +586,7 @@ class AggregationUtils:
                     logging.info('Skipping aggregation logic for empty importName')
 
             # 2. Run global aggregations
-            self.graph_aggregator.run_all()
+            self.graph_aggregator.run_all(import_names)
             if import_names:
                 self.cache_aggregator.run_all(import_names)
             
