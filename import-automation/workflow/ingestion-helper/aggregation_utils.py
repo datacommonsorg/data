@@ -69,7 +69,10 @@ class GraphAggregator:
 
     def run_all(self, import_names: List[str] = None) -> None:
         """Runs all global aggregations in sequence."""
-        import_names = import_names or []
+        if not import_names:
+            logging.info("No imports specified. Skipping global aggregations.")
+            return
+
         logging.info(f"Running global aggregations for imports: {import_names}")
         
         self.run_linked_contained_in_place(import_names)
@@ -79,13 +82,12 @@ class GraphAggregator:
 
     def run_linked_contained_in_place(self, import_names: List[str] = None) -> None:
         """Expands place containment hierarchies."""
-        dest = self.executor.get_spanner_destination_uri()
-        import_names = import_names or []
+        if not import_names:
+            return
 
-        provenance_filter = ""
-        if import_names:
-            provenances = [f"'dc/base/{name}'" for name in import_names]
-            provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
+        dest = self.executor.get_spanner_destination_uri()
+        provenances = [f"'dc/base/{name}'" for name in import_names]
+        provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
         
         query = f"""
         -- Pull base edges needed for containedInPlace aggregation
@@ -165,13 +167,12 @@ class GraphAggregator:
 
     def run_linked_member_of(self, import_names: List[str] = None) -> None:
         """Expands membership hierarchies using memberOf and specializationOf."""
-        dest = self.executor.get_spanner_destination_uri()
-        import_names = import_names or []
+        if not import_names:
+            return
 
-        provenance_filter = ""
-        if import_names:
-            provenances = [f"'dc/base/{name}'" for name in import_names]
-            provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
+        dest = self.executor.get_spanner_destination_uri()
+        provenances = [f"'dc/base/{name}'" for name in import_names]
+        provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
 
         query = f"""
         -- Pull base edges needed for memberOf aggregation
@@ -254,13 +255,12 @@ class GraphAggregator:
 
     def run_linked_member(self, import_names: List[str] = None) -> None:
         """Expands topic/SVGP descendants to identify leaf members."""
-        dest = self.executor.get_spanner_destination_uri()
-        import_names = import_names or []
+        if not import_names:
+            return
 
-        provenance_filter = ""
-        if import_names:
-            provenances = [f"'dc/base/{name}'" for name in import_names]
-            provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
+        dest = self.executor.get_spanner_destination_uri()
+        provenances = [f"'dc/base/{name}'" for name in import_names]
+        provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
 
         query = f"""
         -- Pull base edges needed for member aggregation
@@ -350,11 +350,18 @@ class CacheAggregator:
 
     def run_all(self, import_names: List[str]) -> None:
         """Runs all cache aggregations in sequence."""
+        if not import_names:
+            logging.info("No imports specified. Skipping cache aggregations.")
+            return
+
         logging.info(f"Running cache aggregations for imports: {import_names}")
         self.run_provenance_summary_aggregation(import_names)
 
     def run_provenance_summary_aggregation(self, import_names: List[str]) -> None:
         """Calculates ProvenanceSummary for all variables and populates the Cache table."""
+        if not import_names:
+            return
+
         dest = self.executor.get_spanner_destination_uri()
         connection_id = self.executor.connection_id
         
@@ -587,8 +594,7 @@ class AggregationUtils:
 
             # 2. Run global aggregations
             self.graph_aggregator.run_all(import_names)
-            if import_names:
-                self.cache_aggregator.run_all(import_names)
+            self.cache_aggregator.run_all(import_names)
             
             return True
 
