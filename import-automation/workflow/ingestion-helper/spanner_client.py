@@ -569,7 +569,7 @@ class SpannerClient:
                 "StatVarGroup": ["StatVarGroup", "StatVarGroup", "StatVarGroup", ["Class"], spanner.COMMIT_TIMESTAMP],
                 "StatVarObservation": ["StatVarObservation", "StatVarObservation", "StatVarObservation", ["Class"], spanner.COMMIT_TIMESTAMP],
                 "Topic": ["Topic", "Topic", "Topic", ["Class"], spanner.COMMIT_TIMESTAMP],
-                "c/g/Root": ["c/g/Root", "c/g/Root", "c/g/Root", ["StatVarGroup"], spanner.COMMIT_TIMESTAMP],
+                "dc/g/Root": ["dc/g/Root", "Data Commons Variables", "Data Commons Variables", ["StatVarGroup"], spanner.COMMIT_TIMESTAMP],
             }
             subjects = list(candidates.keys())
             sql = "SELECT subject_id FROM Node WHERE subject_id IN UNNEST(@subjects)"
