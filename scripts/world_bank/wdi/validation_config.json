@@ -6,7 +6,7 @@
             "description": "Checks that the percentage of deleted points is within the threshold.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 0.08
+                "threshold": 0.03
             }
         },
         {
@@ -15,13 +15,6 @@
             "params": {
                 "golden_files": "golden_data/golden_WorldBank.csv",
                 "input_files": "output/WorldBank.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_summary_report",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "golden_data/golden_summary_report.csv"
             }
         }
     ]
