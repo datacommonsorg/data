@@ -39,93 +39,94 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
     final_df = pd.DataFrame()
     final_df2 = pd.DataFrame()
     for file in ip_files:
+        try:
+            filename = file
+            if ".csv" in filename:
+                # Extract year from the url
+                year = filename[-8:-4]
 
-        filename = file
-        if ".csv" in filename:
-            # Extract year from the url
-            year = filename[-8:-4]
+                # comparing the year value as schema is chaning from 1959
+                if int(year) < 1960:
 
-            # comparing the year value as schema is chaning from 1959
-            if int(year) < 1960:
+                    # reading the csv format input file
+                    # and converting it to a dataframe
+                    df = pd.read_csv(file)
+                    #Saving file to local
+                    df.to_csv(_CODEDIR + "/../input_files/" +
+                              "nationals_result_1900_1959.csv",
+                              index=False)
 
-                # reading the csv format input file
-                # and converting it to a dataframe
-                df = pd.read_csv(file)
-                #Saving file to local
-                df.to_csv(_CODEDIR + "/../input_files/" +
-                          "nationals_result_1900_1959.csv",
-                          index=False)
+                    # providing proper column names
+                    if len(df.columns) != 10:
+                        logging.error(
+                            f"Schema mismatch for {file}: expected 10 columns, but got {len(df.columns)}."
+                        )
+                        continue
+                    df.columns = [
+                        "Age", "All race total", "Count_Person_Male",
+                        "Count_Person_Female", "White Total",
+                        "Count_Person_Male_WhiteAlone",
+                        "Count_Person_Female_WhiteAlone", "Nonwhite Total",
+                        "Count_Person_Male_NonWhite", "Count_Person_Female_NonWhite"
+                    ]
 
-                # providing proper column names
-                if len(df.columns) != 10:
-                    logging.error(
-                        f"Schema mismatch for {file}: expected 10 columns, but got {len(df.columns)}."
-                    )
-                    raise ValueError(
-                        f"Expected 10 columns, got {len(df.columns)}")
-                df.columns = [
-                    "Age", "All race total", "Count_Person_Male",
-                    "Count_Person_Female", "White Total",
-                    "Count_Person_Male_WhiteAlone",
-                    "Count_Person_Female_WhiteAlone", "Nonwhite Total",
-                    "Count_Person_Male_NonWhite", "Count_Person_Female_NonWhite"
-                ]
+                    # dropping the unwanted columns
+                    df.drop(columns=[
+                        "Age", "All race total", "White Total", "Nonwhite Total"
+                    ],
+                            inplace=True)
 
-                # dropping the unwanted columns
-                df.drop(columns=[
-                    "Age", "All race total", "White Total", "Nonwhite Total"
-                ],
-                        inplace=True)
+                    # inserting year column to the dataframe
+                    df.insert(loc=0, column='Year', value=year)
+                    df = df.iloc[5:6, :]
 
-                # inserting year column to the dataframe
-                df.insert(loc=0, column='Year', value=year)
-                df = df.iloc[5:6, :]
+                    # writing all the output to a dataframe
+                    final_df = pd.concat([final_df, df], ignore_index=True)
+                    final_df = final_df.sort_values('Year')
 
-                # writing all the output to a dataframe
-                final_df = pd.concat([final_df, df], ignore_index=True)
-                final_df = final_df.sort_values('Year')
+                # for the years after 1960 as schema is changing
+                else:
+                    # reading the csv format input file
+                    # and converting it to a dataframe
+                    df2 = pd.read_csv(file)
+                    df2.to_csv(_CODEDIR + "/../input_files/" +
+                               "nationals_result_1960_1979.csv",
+                               index=False)
+                    # providing proper column names
+                    if len(df2.columns) != 13:
+                        logging.error(
+                            f"Schema mismatch for {file}: expected 13 columns, but got {len(df2.columns)}."
+                        )
+                        continue
+                    df2.columns = [
+                        "Age", "All race total", "Count_Person_Male",
+                        "Count_Person_Female", "White Total",
+                        "Count_Person_Male_WhiteAlone",
+                        "Count_Person_Female_WhiteAlone", "Black Total",
+                        "Count_Person_Male_BlackOrAfricanAmericanAlone",
+                        "Count_Person_Female_BlackOrAfricanAmericanAlone",
+                        "Other Races Total", "Count_Person_Male_OtherRaces",
+                        "Count_Person_Female_OtherRaces"
+                    ]
 
-            # for the years after 1960 as schema is changing
-            else:
-                # reading the csv format input file
-                # and converting it to a dataframe
-                df2 = pd.read_csv(file)
-                df2.to_csv(_CODEDIR + "/../input_files/" +
-                           "nationals_result_1960_1979.csv",
-                           index=False)
-                # providing proper column names
-                if len(df2.columns) != 13:
-                    logging.error(
-                        f"Schema mismatch for {file}: expected 13 columns, but got {len(df2.columns)}."
-                    )
-                    raise ValueError(
-                        f"Expected 13 columns, got {len(df2.columns)}")
-                df2.columns = [
-                    "Age", "All race total", "Count_Person_Male",
-                    "Count_Person_Female", "White Total",
-                    "Count_Person_Male_WhiteAlone",
-                    "Count_Person_Female_WhiteAlone", "Black Total",
-                    "Count_Person_Male_BlackOrAfricanAmericanAlone",
-                    "Count_Person_Female_BlackOrAfricanAmericanAlone",
-                    "Other Races Total", "Count_Person_Male_OtherRaces",
-                    "Count_Person_Female_OtherRaces"
-                ]
+                    # dropping the unwanted columns
+                    df2.drop(columns=[
+                        "Age", "All race total", "White Total", "Black Total",
+                        "Other Races Total", "Count_Person_Male_OtherRaces",
+                        "Count_Person_Female_OtherRaces"
+                    ],
+                             inplace=True)
 
-                # dropping the unwanted columns
-                df2.drop(columns=[
-                    "Age", "All race total", "White Total", "Black Total",
-                    "Other Races Total", "Count_Person_Male_OtherRaces",
-                    "Count_Person_Female_OtherRaces"
-                ],
-                         inplace=True)
+                    # inserting year column
+                    df2.insert(loc=0, column='Year', value=year)
+                    df2 = df2.iloc[4:5, :]
 
-                # inserting year column
-                df2.insert(loc=0, column='Year', value=year)
-                df2 = df2.iloc[4:5, :]
-
-                # writing all the output to a dataframe
-                final_df2 = pd.concat([df2, final_df2], ignore_index=True)
-                final_df2 = final_df2.sort_values('Year')
+                    # writing all the output to a dataframe
+                    final_df2 = pd.concat([df2, final_df2], ignore_index=True)
+                    final_df2 = final_df2.sort_values('Year')
+        except Exception as e:
+            logging.error(f"Error processing {file}: {e}")
+            continue
 
     if final_df.shape[1] > 0:
         # inserting geoId to the final dataframe
@@ -135,11 +136,14 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
 
     # removing numerics thousand seperator from the row values
     for col in final_df.columns:
-        final_df[col] = final_df[col].str.replace(",", "")
+        final_df[col] = final_df[col].astype(str).str.replace(",", "")
     for col in final_df2.columns:
-        final_df2[col] = final_df2[col].str.replace(",", "")
+        final_df2[col] = final_df2[col].astype(str).str.replace(",", "")
         if col not in ["Year", "geo_ID"]:
-            final_df2[col] = final_df2[col].astype("int")
+            try:
+                final_df2[col] = final_df2[col].astype("int")
+            except:
+                pass
 
     final_df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
                     "nationals_result_1900_1959.csv",
@@ -147,5 +151,6 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
     final_df2.to_csv(_CODEDIR + "/../output_files/intermediate/" +
                      "nationals_result_1960_1979.csv",
                      index=False)
+
 
     return final_df.columns, final_df2.columns
