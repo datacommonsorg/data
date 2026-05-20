@@ -344,18 +344,18 @@ class PrecomputedEdgeIngester:
         self.executor.execute(query)
 
 
-class CacheAggregator:
-    """Contains the SQL queries for Cache table aggregations."""
+class ProvenanceSummaryGenerator:
+    """Contains the SQL queries to generate ProvenanceSummary in the Cache table."""
     def __init__(self, executor: BigQueryExecutor) -> None:
         self.executor = executor
 
     def run_all(self, import_names: List[str]) -> None:
-        """Runs all cache aggregations in sequence."""
+        """Runs all provenance summary generation in sequence."""
         if not import_names:
             logging.info("No imports specified. Skipping cache aggregations.")
             return
 
-        logging.info(f"Running cache aggregations for imports: {import_names}")
+        logging.info(f"Running provenance summary generation for imports: {import_names}")
         self.run_provenance_summary_aggregation(import_names)
 
     def run_provenance_summary_aggregation(self, import_names: List[str]) -> None:
@@ -561,7 +561,7 @@ class AggregationUtils:
             database_id=database_id
         )
         self.precomputed_edge_ingester = PrecomputedEdgeIngester(self.executor)
-        self.cache_aggregator = CacheAggregator(self.executor)
+        self.provenance_summary_generator = ProvenanceSummaryGenerator(self.executor)
 
     def run_aggregation(self, import_list: List[Dict[str, Any]]) -> bool:
         """
@@ -586,7 +586,7 @@ class AggregationUtils:
 
             # 2. Run global aggregations
             self.precomputed_edge_ingester.run_all(import_names)
-            self.cache_aggregator.run_all(import_names)
+            self.provenance_summary_generator.run_all(import_names)
             
             return True
         except Exception as e:
