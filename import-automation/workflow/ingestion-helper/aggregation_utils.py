@@ -27,13 +27,15 @@ class BigQueryExecutor:
                  connection_id: str,
                  project_id: str,
                  instance_id: str,
-                 database_id: str) -> None:
+                 database_id: str,
+                 location: Optional[str] = None) -> None:
         self.connection_id = connection_id
         self.project_id = project_id
         self.instance_id = instance_id
         self.database_id = database_id
+        self.location = location
         try:
-            self.client = bigquery.Client(project=self.project_id)
+            self.client = bigquery.Client(project=self.project_id, location=self.location)
         except Exception as e:
             logging.warning(f"Failed to initialize BigQuery client: {e}")
             self.client = None
@@ -553,12 +555,14 @@ class AggregationUtils:
                  connection_id: str,
                  project_id: str,
                  instance_id: str,
-                 database_id: str) -> None:
+                 database_id: str,
+                 location: Optional[str] = None) -> None:
         self.executor = BigQueryExecutor(
             connection_id=connection_id,
             project_id=project_id,
             instance_id=instance_id,
-            database_id=database_id
+            database_id=database_id,
+            location=location
         )
         self.linked_edge_generator = LinkedEdgeGenerator(self.executor)
         self.provenance_summary_generator = ProvenanceSummaryGenerator(self.executor)
