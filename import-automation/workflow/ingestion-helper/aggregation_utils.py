@@ -35,7 +35,7 @@ class BigQueryExecutor:
         self.database_id = database_id
         self.location = location
         try:
-            self.client = bigquery.Client(project=self.project_id)
+            self.client = bigquery.Client(project=self.project_id, location=self.location)
         except Exception as e:
             logging.warning(f"Failed to initialize BigQuery client: {e}")
             self.client = None
