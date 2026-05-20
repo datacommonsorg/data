@@ -54,7 +54,7 @@ class BigQueryExecutor:
         logging.info(f"Executing query (first 100 chars): {query.strip()[:100]}...")
         
         try:
-            query_job = self.client.query(query, job_config=job_config, location=self.location)
+            query_job = self.client.query(query, job_config=job_config)
             result = query_job.result()
             duration = time.time() - start_time
             logging.info(f"Query completed in {duration:.2f}s. Job ID: {query_job.job_id}")
