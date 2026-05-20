@@ -24,10 +24,10 @@ logging.getLogger().setLevel(logging.INFO)
 class BigQueryExecutor:
     """Handles BigQuery client initialization and query execution."""
     def __init__(self,
-                 connection_id: Optional[str] = None,
-                 project_id: Optional[str] = None,
-                 instance_id: Optional[str] = None,
-                 database_id: Optional[str] = None) -> None:
+                 connection_id: str,
+                 project_id: str,
+                 instance_id: str,
+                 database_id: str) -> None:
         self.connection_id = connection_id
         self.project_id = project_id
         self.instance_id = instance_id
@@ -45,9 +45,9 @@ class BigQueryExecutor:
     def execute(self, query: str, job_config: Optional[bigquery.QueryJobConfig] = None) -> bigquery.table.RowIterator:
         """Executes a query and returns the result."""
         if not self.client:
-             logging.error("BigQuery client not initialized")
-             raise RuntimeError("BigQuery client not initialized")
-             
+            logging.error("BigQuery client not initialized")
+            raise RuntimeError("BigQuery client not initialized")
+            
         start_time = time.time()
         logging.info(f"Executing query (first 100 chars): {query.strip()[:100]}...")
         
@@ -550,19 +550,10 @@ class CacheAggregator:
 class AggregationUtils:
     """Orchestrates the overall aggregation workflow."""
     def __init__(self, 
-                 connection_id: Optional[str] = None) -> None:
-        # Default connection ID
-        if not connection_id:
-            connection_id = os.environ.get(
-                'SPANNER_CONNECTION_ID',
-                "429015563165.us.dc_graph_2026_01_27_no_parallel"
-            )
-
-        # Spanner metadata
-        project_id = os.environ.get('SPANNER_PROJECT_ID', 'datcom-store')
-        instance_id = os.environ.get('SPANNER_INSTANCE_ID', 'dc-kg-test')
-        database_id = os.environ.get('SPANNER_GRAPH_DATABASE_ID', 'dc_graph_2025_11_07')
-
+                 connection_id: str,
+                 project_id: str,
+                 instance_id: str,
+                 database_id: str) -> None:
         self.executor = BigQueryExecutor(
             connection_id=connection_id,
             project_id=project_id,
@@ -577,7 +568,7 @@ class AggregationUtils:
         Orchestrates standard per-import aggregations and global aggregations.
         """
         logging.info(f"Received request for importList: {import_list}")
-        
+
         try:
             import_names = []
             # 1. Run standard per-import aggregations
@@ -598,7 +589,6 @@ class AggregationUtils:
             self.cache_aggregator.run_all(import_names)
             
             return True
-
         except Exception as e:
             logging.error(f"Aggregation failed: {e}")
             raise e
