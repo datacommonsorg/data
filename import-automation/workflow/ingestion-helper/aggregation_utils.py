@@ -27,11 +27,13 @@ class BigQueryExecutor:
                  connection_id: str,
                  project_id: str,
                  instance_id: str,
-                 database_id: str) -> None:
+                 database_id: str,
+                 location: Optional[str] = None) -> None:
         self.connection_id = connection_id
         self.project_id = project_id
         self.instance_id = instance_id
         self.database_id = database_id
+        self.location = location
         try:
             self.client = bigquery.Client(project=self.project_id)
         except Exception as e:
@@ -52,7 +54,7 @@ class BigQueryExecutor:
         logging.info(f"Executing query (first 100 chars): {query.strip()[:100]}...")
         
         try:
-            query_job = self.client.query(query, job_config=job_config)
+            query_job = self.client.query(query, job_config=job_config, location=self.location)
             result = query_job.result()
             duration = time.time() - start_time
             logging.info(f"Query completed in {duration:.2f}s. Job ID: {query_job.job_id}")
@@ -553,12 +555,14 @@ class AggregationUtils:
                  connection_id: str,
                  project_id: str,
                  instance_id: str,
-                 database_id: str) -> None:
+                 database_id: str,
+                 location: Optional[str] = None) -> None:
         self.executor = BigQueryExecutor(
             connection_id=connection_id,
             project_id=project_id,
             instance_id=instance_id,
-            database_id=database_id
+            database_id=database_id,
+            location=location
         )
         self.linked_edge_generator = LinkedEdgeGenerator(self.executor)
         self.provenance_summary_generator = ProvenanceSummaryGenerator(self.executor)
