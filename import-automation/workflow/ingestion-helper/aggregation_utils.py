@@ -75,6 +75,7 @@ class PrecomputedEdgeIngester:
 
         logging.info(f"Running global aggregations for imports: {import_names}")
         
+        # TODO: Run these methods in parallel to speed up execution since they are independent.
         self.run_linked_contained_in_place(import_names)
         self.run_linked_member_of(import_names)
         self.run_linked_member(import_names)
