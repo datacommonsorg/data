@@ -142,7 +142,7 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
         if col not in ["Year", "geo_ID"]:
             try:
                 final_df2[col] = final_df2[col].astype("int")
-            except:
+            except (ValueError, TypeError):
                 pass
 
     final_df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
