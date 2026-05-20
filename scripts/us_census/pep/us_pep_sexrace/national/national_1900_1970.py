@@ -67,7 +67,8 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                         "Count_Person_Female", "White Total",
                         "Count_Person_Male_WhiteAlone",
                         "Count_Person_Female_WhiteAlone", "Nonwhite Total",
-                        "Count_Person_Male_NonWhite", "Count_Person_Female_NonWhite"
+                        "Count_Person_Male_NonWhite",
+                        "Count_Person_Female_NonWhite"
                     ]
 
                     # dropping the unwanted columns
@@ -143,9 +144,9 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                                           errors='coerce')
     for col in final_df2.columns:
         if col not in ["Year", "geo_ID"]:
-            final_df2[col] = pd.to_numeric(final_df2[col].astype(str).str.replace(
-                ",", ""),
-                                           errors='coerce')
+            final_df2[col] = pd.to_numeric(
+                final_df2[col].astype(str).str.replace(",", ""),
+                errors='coerce')
 
     final_df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
                     "nationals_result_1900_1959.csv",
