@@ -62,8 +62,8 @@ class BigQueryExecutor:
             raise
 
 
-class PrecomputedEdgeIngester:
-    """Computes and ingests pre-computed edges (e.g., transitive closures) into Spanner for faster lookup."""
+class LinkedEdgeGenerator:
+    """Generates and ingests linked relationship edges (e.g., transitive closures) into Spanner for faster lookup."""
     def __init__(self, executor: BigQueryExecutor) -> None:
         self.executor = executor
 
@@ -560,7 +560,7 @@ class AggregationUtils:
             instance_id=instance_id,
             database_id=database_id
         )
-        self.precomputed_edge_ingester = PrecomputedEdgeIngester(self.executor)
+        self.linked_edge_generator = LinkedEdgeGenerator(self.executor)
         self.provenance_summary_generator = ProvenanceSummaryGenerator(self.executor)
 
     def run_aggregation(self, import_list: List[Dict[str, Any]]) -> bool:
@@ -585,7 +585,7 @@ class AggregationUtils:
                     logging.info('Skipping aggregation logic for empty importName')
 
             # 2. Run global aggregations
-            self.precomputed_edge_ingester.run_all(import_names)
+            self.linked_edge_generator.run_all(import_names)
             self.provenance_summary_generator.run_all(import_names)
             
             return True
