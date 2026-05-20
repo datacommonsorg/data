@@ -62,8 +62,8 @@ class BigQueryExecutor:
             raise
 
 
-class GraphAggregator:
-    """Contains the SQL global aggregation queries."""
+class PrecomputedEdgeIngester:
+    """Computes and ingests pre-computed edges (e.g., transitive closures) into Spanner for faster lookup."""
     def __init__(self, executor: BigQueryExecutor) -> None:
         self.executor = executor
 
@@ -568,7 +568,7 @@ class AggregationUtils:
             instance_id=instance_id,
             database_id=database_id
         )
-        self.graph_aggregator = GraphAggregator(self.executor)
+        self.precomputed_edge_ingester = PrecomputedEdgeIngester(self.executor)
         self.cache_aggregator = CacheAggregator(self.executor)
 
     def run_aggregation(self, import_list: List[Dict[str, Any]]) -> bool:
@@ -593,7 +593,7 @@ class AggregationUtils:
                     logging.info('Skipping aggregation logic for empty importName')
 
             # 2. Run global aggregations
-            self.graph_aggregator.run_all(import_names)
+            self.precomputed_edge_ingester.run_all(import_names)
             self.cache_aggregator.run_all(import_names)
             
             return True
