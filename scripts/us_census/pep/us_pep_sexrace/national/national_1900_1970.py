@@ -53,7 +53,7 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                     df = pd.read_csv(file)
                     #Saving file to local
                     df.to_csv(_CODEDIR + "/../input_files/" +
-                              "nationals_result_1900_1959.csv",
+                              f"nationals_result_{year}.csv",
                               index=False)
 
                     # providing proper column names
@@ -82,7 +82,6 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
 
                     # writing all the output to a dataframe
                     final_df = pd.concat([final_df, df], ignore_index=True)
-                    final_df = final_df.sort_values('Year')
 
                 # for the years after 1960 as schema is changing
                 else:
@@ -90,7 +89,7 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                     # and converting it to a dataframe
                     df2 = pd.read_csv(file)
                     df2.to_csv(_CODEDIR + "/../input_files/" +
-                               "nationals_result_1960_1979.csv",
+                               f"nationals_result_{year}.csv",
                                index=False)
                     # providing proper column names
                     if len(df2.columns) != 13:
@@ -122,21 +121,28 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                     df2 = df2.iloc[4:5, :]
 
                     # writing all the output to a dataframe
-                    final_df2 = pd.concat([df2, final_df2], ignore_index=True)
-                    final_df2 = final_df2.sort_values('Year')
-        except Exception as e:
+                    final_df2 = pd.concat([final_df2, df2], ignore_index=True)
+        except (pd.errors.ParserError, pd.errors.EmptyDataError, IOError,
+                ValueError) as e:
             logging.error(f"Error processing {file}: {e}")
             continue
 
-    if final_df.shape[1] > 0:
+    if not final_df.empty:
+        final_df = final_df.sort_values('Year')
         # inserting geoId to the final dataframe
         final_df.insert(1, 'geo_ID', 'country/USA', True)
-    if final_df2.shape[1] > 0:
+    if not final_df2.empty:
+        final_df2 = final_df2.sort_values('Year')
         final_df2.insert(1, 'geo_ID', 'country/USA', True)
 
     # removing numerics thousand seperator from the row values
     for col in final_df.columns:
         final_df[col] = final_df[col].astype(str).str.replace(",", "")
+        if col not in ["Year", "geo_ID"]:
+            try:
+                final_df[col] = final_df[col].astype("int")
+            except (ValueError, TypeError):
+                pass
     for col in final_df2.columns:
         final_df2[col] = final_df2[col].astype(str).str.replace(",", "")
         if col not in ["Year", "geo_ID"]:
@@ -151,6 +157,5 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
     final_df2.to_csv(_CODEDIR + "/../output_files/intermediate/" +
                      "nationals_result_1960_1979.csv",
                      index=False)
-
 
     return final_df.columns, final_df2.columns
