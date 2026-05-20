@@ -13,11 +13,10 @@
             ],
             "import_inputs": [
                 {
-                    "node_mcf": "**/*.mcf"
+                    "node_mcf": "**/*.mcf*"
                 }
             ],
             "source_files": [],
-            "cron_schedule": "15 3 * * *",
             "config_override": {
                 "invoke_import_validation": true,
                 "invoke_import_tool": true,
@@ -38,16 +37,10 @@
             ],
             "import_inputs": [
                 {
-                    "node_mcf": "**/*.mcf"
+                    "node_mcf": "**/*.mcf*"
                 }
             ],
             "source_files": [],
-            "cron_schedule": "15 3 * * 1",
-            "resource_limits": {
-                "cpu": 8,
-                "memory": 128,
-                "disk": 100
-            },
             "config_override": {
                 "invoke_import_validation": false,
                 "invoke_import_tool": false,
@@ -68,16 +61,15 @@
             ],
             "import_inputs": [
                 {
-                    "node_mcf": "**/*.mcf"
+                    "node_mcf": "**/*.mcf*"
                 }
             ],
             "source_files": [],
-            "cron_schedule": "15 3 * * 1",
             "config_override": {
                 "invoke_import_validation": false,
                 "invoke_import_tool": false,
                 "invoke_differ_tool": false,
-                "skip_input_upload": true
+                "skip_input_upload": false
             }
         },
         {
@@ -93,16 +85,10 @@
             ],
             "import_inputs": [
                 {
-                    "node_mcf": "**/*.mcf"
+                    "node_mcf": "**/*.mcf*"
                 }
             ],
             "source_files": [],
-            "cron_schedule": "15 3 * * 1",
-            "resource_limits": {
-                "cpu": 8,
-                "memory": 128,
-                "disk": 100
-            },
             "config_override": {
                 "invoke_import_validation": false,
                 "invoke_import_tool": false,

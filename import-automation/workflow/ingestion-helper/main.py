@@ -1,11 +1,13 @@
 import functions_framework
 from spanner_client import SpannerClient
 from storage_client import StorageClient
+from embedding_utils import get_latest_lock_timestamp, get_updated_nodes, filter_and_convert_nodes, generate_embeddings_partitioned
 import logging
 import os
 from absl import flags
 import import_utils
 from flask import jsonify
+from aggregation_utils import AggregationUtils
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -18,12 +20,24 @@ flags.DEFINE_string('spanner_project_id', os.environ.get('SPANNER_PROJECT_ID'),
 flags.DEFINE_string('spanner_instance_id',
                     os.environ.get('SPANNER_INSTANCE_ID'),
                     'Spanner Instance ID')
+# Separate spanner DB for metadata and graph tables
+# (to be merged into a single DB after testing).
 flags.DEFINE_string('spanner_database_id',
                     os.environ.get('SPANNER_DATABASE_ID'),
                     'Spanner Database ID')
+flags.DEFINE_string('spanner_graph_database_id',
+                    os.environ.get('SPANNER_GRAPH_DATABASE_ID'),
+                    'Spanner Graph Database ID')
 flags.DEFINE_string('gcs_bucket_id', os.environ.get('GCS_BUCKET_ID'),
                     'GCS Bucket ID')
 flags.DEFINE_string('location', os.environ.get('LOCATION'), 'Location')
+flags.DEFINE_bool(
+    'enable_embeddings',
+    os.environ.get('ENABLE_EMBEDDINGS', 'false').lower() == 'true',
+    'Enable embeddings')
+flags.DEFINE_list(
+    'node_types', ['StatisticalVariable', 'Topic'],
+    'Node types to generate embeddings for')
 
 if not FLAGS.is_parsed():
     FLAGS(['ingestion_helper'])
@@ -49,12 +63,17 @@ def ingestion_helper(request):
     if validation_error:
         return (validation_error, 400)
 
-    actionType = request_json['actionType']
-    spanner = SpannerClient(FLAGS.spanner_project_id, FLAGS.spanner_instance_id,
-                            FLAGS.spanner_database_id)
+    action_type = request_json['actionType']
+    spanner = SpannerClient(FLAGS.spanner_project_id,
+                            FLAGS.spanner_instance_id,
+                            FLAGS.spanner_database_id,
+                            graph_database_id=FLAGS.spanner_graph_database_id,
+                            location=FLAGS.location,
+                            model_id=os.environ.get('EMBEDDING_MODEL_ID',
+                                                    'text-embedding-005'))
     storage = StorageClient(FLAGS.gcs_bucket_id)
 
-    if actionType == 'get_import_info':
+    if action_type == 'get_import_info':
         # Gets the details of imports that are ready for ingestion.
         # Input:
         #   importList: list of import names to ingest (optional)
@@ -62,7 +81,7 @@ def ingestion_helper(request):
         import_info = spanner.get_import_info(import_list)
         return jsonify(import_info)
 
-    elif actionType == 'acquire_ingestion_lock':
+    elif action_type == 'acquire_ingestion_lock':
         # Attempts to acquire the global lock for ingestion.
         # Input:
         #   workflowId: ID of the workflow acquiring the lock
@@ -78,7 +97,7 @@ def ingestion_helper(request):
             return ('Failed to acquire lock', 500)
         return ('OK', 200)
 
-    elif actionType == 'release_ingestion_lock':
+    elif action_type == 'release_ingestion_lock':
         # Releases the global ingestion lock.
         # Input:
         #   workflowId: ID of the workflow releasing the lock
@@ -91,7 +110,7 @@ def ingestion_helper(request):
             return ('Failed to release lock', 500)
         return ('OK', 200)
 
-    elif actionType == 'update_ingestion_status':
+    elif action_type == 'update_ingestion_status':
         # Updates the status of imports after ingestion.
         # Input:
         #   importList: list of import names
@@ -117,7 +136,7 @@ def ingestion_helper(request):
             spanner.update_import_version_history(import_list, workflow_id)
         return ('OK', 200)
 
-    elif actionType == 'update_import_status':
+    elif action_type == 'update_import_status':
         # Updates the status of a specific import job.
         # Input:
         #   importName: name of the import
@@ -154,7 +173,7 @@ def ingestion_helper(request):
         spanner.update_import_status(params)
         return ('OK', 200)
 
-    elif actionType == 'update_import_version':
+    elif action_type == 'update_import_version':
         # Updates the version and status of an import.
         # Input:
         #   importName: name of the import
@@ -193,5 +212,51 @@ def ingestion_helper(request):
             f"OK [Import: {import_name} Version: {version} Status: {params['status']}]",
             200)
 
+    elif action_type == 'initialize_database':
+        # Initializes the database by creating all required tables and proto bundles.
+        logging.info("Action: initialize_database")
+        enable_embeddings = request_json.get('enableEmbeddings',
+                                             FLAGS.enable_embeddings)
+        spanner.initialize_database(enable_embeddings=enable_embeddings)
+        return ('OK', 200)
+    elif action_type == 'seed_database':
+        # Seeds the database with base empty nodes.
+        logging.info("Action: seed_database")
+        spanner.seed_database()
+        return ('OK', 200)
+    elif action_type == 'embedding_ingestion':
+
+        logging.info("Action: embedding_ingestion")
+        enable_embeddings = request_json.get('enableEmbeddings',
+                                             FLAGS.enable_embeddings)
+        if not enable_embeddings:
+            logging.info("Embeddings not enabled, skipping.")
+            return ('Invalid request on embedding ingestion.', 400)
+            
+        node_types = FLAGS.node_types
+        try:
+            logging.info(f"Job started. Fetching all nodes for types: {node_types}")
+            timestamp = get_latest_lock_timestamp(spanner.database)
+            nodes = get_updated_nodes(spanner.database, timestamp, node_types)
+            converted_nodes = filter_and_convert_nodes(nodes)
+            affected_rows = generate_embeddings_partitioned(spanner.database, converted_nodes)
+            return (f"OK [Affected rows: {affected_rows}]", 200)
+        except Exception as e:
+            logging.error(f"Embedding ingestion failed: {e}")
+            return (f"Error: {e}", 500)
+    elif action_type == 'run_aggregation':
+        # Runs aggregation logic for the specified imports.
+        # Input:
+        #   importList: list of imports to aggregate
+        import_list = request_json.get('importList', [])
+        aggregation = AggregationUtils()
+        try:
+            if aggregation.run_aggregation(import_list):
+                return ('OK', 200)
+            else:
+                return ('Aggregation failed', 500)
+        except Exception as e:
+            return (f"Aggregation failed: {str(e)}", 500)
+
     else:
-        return (f'Unknown actionType: {actionType}', 400)
+        return (f'Unknown actionType: {action_type}', 400)

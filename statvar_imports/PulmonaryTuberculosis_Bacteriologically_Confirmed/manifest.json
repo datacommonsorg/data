@@ -9,19 +9,27 @@
             "provenance_description": "Number of people diagnosed with a new episode of pulmonary TB whose disease was bacteriologically confirmed",
             "scripts": [
                 "download_tb_data.py",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.csv --pv_map=pulmonary_tb_bctpb_pvmap.csv --config_file=pulmonary_tb_bctpb_metadata.csv --output_path=TB_Bacteriologically_Confirmed_output"
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=TB_Bacteriologically_Confirmed_input.csv --pv_map=pulmonary_tb_bctpb_pvmap.csv --config_file=pulmonary_tb_bctpb_metadata.csv --output_path=TB_Bacteriologically_Confirmed_output"
             ],
             "source_files": [
-                "source_files/*.csv"
+                "TB_Bacteriologically_Confirmed_input.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "TB_Bacteriologically_Confirmed_output.tmcf",
-                    "cleaned_csv": "TB_Bacteriologically_Confirmed_output.csv",
-                    "stat_var_mcf": "TB_Bacteriologically_Confirmed_output_stat_vars.mcf"
+                    "cleaned_csv": "TB_Bacteriologically_Confirmed_output.csv"
                 }
             ],
-            "cron_schedule": "0 0 1 1,4,7,10 *"
+            "cron_schedule": "0 0 1 1,4,7,10 *",
+            "resource_limits": {"cpu": 4, "memory": 8, "disk":100}
         }
-    ]
+    ],
+    "config_override": {
+         "invoke_import_validation": true,
+         "invoke_import_tool": true,
+         "invoke_differ_tool": true,
+         "skip_input_upload": false,
+         "skip_gcs_upload": false,
+         "cleanup_gcs_volume_mount": false
+    }
 }

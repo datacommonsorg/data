@@ -12,8 +12,7 @@ main:
           - gcsMountBucket: ${sys.get_env("GCS_MOUNT_BUCKET")}
           - gcsImportBucket: ${sys.get_env("GCS_BUCKET_ID")}
           - gcsMountPath: "/tmp/gcs"
-          - ingestionHelper: "spanner-ingestion-helper" 
-          - functionUrl: ${"https://" + region + "-" + projectId + ".cloudfunctions.net/" + ingestionHelper}
+          - helperUrl: ${"https://ingestion-helper-service-" + sys.get_env("PROJECT_NUMBER") + "." + region + ".run.app"}
           - startTime: ${sys.now()}
           - defaultResources:
               machine: "n2-standard-8"
@@ -77,7 +76,7 @@ main:
             - updateImportStatus:
                 call: http.post
                 args:
-                  url: ${functionUrl}
+                  url: ${helperUrl}
                   auth:
                     type: OIDC
                   body:
@@ -93,7 +92,7 @@ main:
     - updateImportVersion:
         call: http.post
         args:
-          url: ${functionUrl}
+          url: ${helperUrl}
           auth:
             type: OIDC
           body:
@@ -113,6 +112,8 @@ main:
                     parent: ${"projects/" + projectId + "/locations/" + region + "/workflows/spanner-ingestion-workflow"}
                     body:
                       argument: ${json.encode_to_string(ingestionArgs)}
+                    connector_params:
+                      skip_polling: true
     - returnResult:
         return:
           jobId: ${jobId}
