@@ -135,21 +135,17 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
         final_df2 = final_df2.sort_values('Year')
         final_df2.insert(1, 'geo_ID', 'country/USA', True)
 
-    # removing numerics thousand seperator from the row values
+    # removing numerics thousand seperator from the row values and converting to numeric
     for col in final_df.columns:
-        final_df[col] = final_df[col].astype(str).str.replace(",", "")
         if col not in ["Year", "geo_ID"]:
-            try:
-                final_df[col] = final_df[col].astype("int")
-            except (ValueError, TypeError):
-                pass
+            final_df[col] = pd.to_numeric(final_df[col].astype(str).str.replace(
+                ",", ""),
+                                          errors='coerce')
     for col in final_df2.columns:
-        final_df2[col] = final_df2[col].astype(str).str.replace(",", "")
         if col not in ["Year", "geo_ID"]:
-            try:
-                final_df2[col] = final_df2[col].astype("int")
-            except (ValueError, TypeError):
-                pass
+            final_df2[col] = pd.to_numeric(final_df2[col].astype(str).str.replace(
+                ",", ""),
+                                           errors='coerce')
 
     final_df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
                     "nationals_result_1900_1959.csv",
