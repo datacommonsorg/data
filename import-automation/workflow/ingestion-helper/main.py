@@ -28,6 +28,9 @@ flags.DEFINE_string('spanner_database_id',
 flags.DEFINE_string('spanner_graph_database_id',
                     os.environ.get('SPANNER_GRAPH_DATABASE_ID'),
                     'Spanner Graph Database ID')
+flags.DEFINE_string('spanner_connection_id',
+                    os.environ.get('BQ_SPANNER_CONN_ID'),
+                    'BigQuery Connection ID to access Cloud Spanner')
 flags.DEFINE_string('gcs_bucket_id', os.environ.get('GCS_BUCKET_ID'),
                     'GCS Bucket ID')
 flags.DEFINE_string('location', os.environ.get('LOCATION'), 'Location')
@@ -249,7 +252,29 @@ def ingestion_helper(request):
         # Input:
         #   importList: list of imports to aggregate
         import_list = request_json.get('importList', [])
-        aggregation = AggregationUtils()
+        
+        # Validate required flags are not empty or None
+        missing_flags = []
+        if not FLAGS.spanner_connection_id:
+            missing_flags.append('spanner_connection_id (BQ_SPANNER_CONN_ID)')
+        if not FLAGS.spanner_project_id:
+            missing_flags.append('spanner_project_id (SPANNER_PROJECT_ID)')
+        if not FLAGS.spanner_instance_id:
+            missing_flags.append('spanner_instance_id (SPANNER_INSTANCE_ID)')
+        if not FLAGS.spanner_graph_database_id:
+            missing_flags.append('spanner_graph_database_id (SPANNER_GRAPH_DATABASE_ID)')
+            
+        if missing_flags:
+            error_msg = f"Missing required configuration flags/env-vars: {', '.join(missing_flags)}"
+            logging.error(error_msg)
+            return (error_msg, 400)
+
+        aggregation = AggregationUtils(
+            connection_id=FLAGS.spanner_connection_id,
+            project_id=FLAGS.spanner_project_id,
+            instance_id=FLAGS.spanner_instance_id,
+            database_id=FLAGS.spanner_graph_database_id,
+        )
         try:
             if aggregation.run_aggregation(import_list):
                 return ('OK', 200)
