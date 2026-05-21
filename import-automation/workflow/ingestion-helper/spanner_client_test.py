@@ -248,13 +248,14 @@ class TestSpannerClient(unittest.TestCase):
         self.assertEqual(kwargs['table'], 'Node')
         self.assertEqual(kwargs['columns'], ["subject_id", "name", "value", "types", "last_update_timestamp"])
         self.assertEqual(len(kwargs['values']), 5)
-        expected_subjects = ["StatisticalVariable", "StatVarGroup", "StatVarObservation", "Topic", "c/g/Root"]
+        expected_subjects = ["StatisticalVariable", "StatVarGroup", "StatVarObservation", "Topic", "dc/g/Root"]
+        expected_names = ["StatisticalVariable", "StatVarGroup", "StatVarObservation", "Topic", "Data Commons Variables"]
         actual_subjects = [val[0] for val in kwargs['values']]
         actual_names = [val[1] for val in kwargs['values']]
         actual_values = [val[2] for val in kwargs['values']]
         self.assertEqual(actual_subjects, expected_subjects)
-        self.assertEqual(actual_names, expected_subjects)
-        self.assertEqual(actual_values, expected_subjects)
+        self.assertEqual(actual_names, expected_names)
+        self.assertEqual(actual_values, expected_names)
 
     @patch('google.cloud.spanner.Client')
     def test_seed_database_already_exists(self, mock_spanner_client):
@@ -265,7 +266,7 @@ class TestSpannerClient(unittest.TestCase):
         mock_instance.database.return_value = mock_db
 
         mock_transaction = MagicMock()
-        mock_transaction.execute_sql.return_value = [["StatisticalVariable"], ["StatVarGroup"], ["StatVarObservation"], ["Topic"], ["c/g/Root"]]
+        mock_transaction.execute_sql.return_value = [["StatisticalVariable"], ["StatVarGroup"], ["StatVarObservation"], ["Topic"], ["dc/g/Root"]]
         def run_in_transaction_side_effect(callback, *args, **kwargs):
             return callback(mock_transaction, *args, **kwargs)
         mock_db.run_in_transaction.side_effect = run_in_transaction_side_effect
