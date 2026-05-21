@@ -27,13 +27,15 @@ class BigQueryExecutor:
                  connection_id: str,
                  project_id: str,
                  instance_id: str,
-                 database_id: str) -> None:
+                 database_id: str,
+                 location: Optional[str] = None) -> None:
         self.connection_id = connection_id
         self.project_id = project_id
         self.instance_id = instance_id
         self.database_id = database_id
+        self.location = location
         try:
-            self.client = bigquery.Client(project=self.project_id)
+            self.client = bigquery.Client(project=self.project_id, location=self.location)
         except Exception as e:
             logging.warning(f"Failed to initialize BigQuery client: {e}")
             self.client = None
@@ -395,7 +397,13 @@ class ProvenanceSummaryGenerator:
                unit,
                scaling_factor,
                is_dc_aggregate,
-               CAST(observations AS STRING) as observations_json
+               IF(ARRAY_LENGTH(observations.values) > 0,
+                 (
+                   SELECT CONCAT('{{"values":[', STRING_AGG(FORMAT('{{"key":"%s","value":"%s"}}', entry.key, entry.value), ','), ']}}')
+                   FROM UNNEST(observations.values) as entry
+                 ),
+                 NULL
+               ) as observations_json
              FROM Observation
              WHERE import_name IN ({imports_str}) ''');
 
@@ -523,20 +531,22 @@ class ProvenanceSummaryGenerator:
                 'observation_count', CAST(facet_obs_count AS FLOAT64),
                 'time_series_count', CAST(facet_ts_count AS FLOAT64),
                 'place_type_summary', (
-                  SELECT JSON_OBJECT(
-                    ARRAY_AGG(place_type),
-                    ARRAY_AGG(JSON_OBJECT(
-                      'place_count', place_count,
-                      'min_value', min_val,
-                      'max_value', max_val,
-                      'top_places', (
-                        SELECT ARRAY_AGG(JSON_OBJECT('dcid', tp.dcid, 'name', tp.name))
-                        FROM UNNEST(top_places) tp
-                      )
-                    ))
+                  SELECT IF(ARRAY_LENGTH(keys) > 0, JSON_OBJECT(keys, vals), NULL)
+                  FROM (
+                    SELECT 
+                      ARRAY_AGG(place_type) as keys,
+                      ARRAY_AGG(JSON_OBJECT(
+                        'place_count', place_count,
+                        'min_value', min_val,
+                        'max_value', max_val,
+                        'top_places', (
+                          SELECT ARRAY_AGG(JSON_OBJECT('dcid', tp.dcid, 'name', tp.name))
+                          FROM UNNEST(top_places) tp
+                        )
+                      )) as vals
+                    FROM UNNEST(pt_summaries)
+                    WHERE place_type IS NOT NULL
                   )
-                  FROM UNNEST(pt_summaries)
-                  WHERE place_type IS NOT NULL
                 )
               )
             )
@@ -553,12 +563,14 @@ class AggregationUtils:
                  connection_id: str,
                  project_id: str,
                  instance_id: str,
-                 database_id: str) -> None:
+                 database_id: str,
+                 location: Optional[str] = None) -> None:
         self.executor = BigQueryExecutor(
             connection_id=connection_id,
             project_id=project_id,
             instance_id=instance_id,
-            database_id=database_id
+            database_id=database_id,
+            location=location
         )
         self.linked_edge_generator = LinkedEdgeGenerator(self.executor)
         self.provenance_summary_generator = ProvenanceSummaryGenerator(self.executor)
