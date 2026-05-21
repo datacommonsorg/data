@@ -467,7 +467,7 @@ class SpannerClient:
 
         required_tables = [
             "Node", "Edge", "Observation", "ImportStatus", "IngestionHistory",
-            "ImportVersionHistory", "IngestionLock", "Cache", "VariableMetadata"
+            "ImportVersionHistory", "IngestionLock", "Cache"
         ]
         required_indexes = ["InEdge", "VariableMeasuredObservationAbout"]
         required_models = []
