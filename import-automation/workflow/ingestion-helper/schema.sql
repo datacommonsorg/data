@@ -13,7 +13,8 @@
 -- limitations under the License.
 
 CREATE PROTO BUNDLE (
-  `org.datacommons.Observations`
+  `org.datacommons.Observations`,
+  `org.datacommons.Observations.ValuesEntry`
 );
 
 CREATE TABLE Node (
