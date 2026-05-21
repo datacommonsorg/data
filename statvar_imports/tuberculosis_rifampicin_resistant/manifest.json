@@ -5,11 +5,11 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "<https://data.who.int/indicators/i/39E4281/F1912F6>",
+            "provenance_url": "https://data.who.int/indicators/i/39E4281/F1912F6",
             "provenance_description": "Treatment outcomes among those who started rifampicin-resistant TB treatment during a specified reporting period.",
             "scripts": [
                 "who_data_download_tuberculosis_rifampicin_resistant.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/tuberculosis_rifampicin_resistant_input.csv --pv_map=tuberculosis_rifampicin_resistant_pvmap.csv --config_file=tuberculosis_rifampicin_resistant_metadata.csv --output_path=output/tuberculosis_rifampicin_resistant_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/tuberculosis_rifampicin_resistant_input.csv --pv_map=tuberculosis_rifampicin_resistant_pvmap.csv --config_file=tuberculosis_rifampicin_resistant_metadata.csv --output_path=output/tuberculosis_rifampicin_resistant_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
             ],
             "import_inputs": [
                 {
