@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "WHO_TuberculosisTreatmentOutcomes_RR_MDR_TB",
+            "import_name": "WHO_TuberculosisRifampicinResistant",
             "curator_emails": [
                 "support@datacommons.org"
             ],
@@ -9,16 +9,16 @@
             "provenance_description": "Treatment outcomes among those who started rifampicin-resistant TB treatment during a specified reporting period.",
             "scripts": [
                 "who_data_download_tuberculosis_rifampicin_resistant.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Tuberculosis_rr_mdr_tb_outcomes.csv --pv_map=tuberculosis_rifampicin_resistant_pvmap.csv --config_file=tuberculosis_rifampicin_resistant_metadata.csv --output_path=output/tuberculosis_rr_mdr_tb_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/tuberculosis_rifampicin_resistant_input.csv --pv_map=tuberculosis_rifampicin_resistant_pvmap.csv --config_file=tuberculosis_rifampicin_resistant_metadata.csv --output_path=output/tuberculosis_rifampicin_resistant_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output/tuberculosis_rr_mdr_tb_output.tmcf",
-                    "cleaned_csv": "output/tuberculosis_rr_mdr_tb_output.csv"
+                    "template_mcf": "output/tuberculosis_rifampicin_resistant_output.tmcf",
+                    "cleaned_csv": "output/tuberculosis_rifampicin_resistant_output.csv"
                 }
             ],
             "source_files": [
-                "input_files/Tuberculosis_rr_mdr_tb_outcomes.csv"
+                "test_files/tuberculosis_rifampicin_resistant_input.csv"
             ],
             "cron_schedule": "0 10 10,21 * *"
         }
