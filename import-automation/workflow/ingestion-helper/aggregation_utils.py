@@ -397,7 +397,13 @@ class ProvenanceSummaryGenerator:
                unit,
                scaling_factor,
                is_dc_aggregate,
-               CAST(observations AS STRING) as observations_json
+               IF(ARRAY_LENGTH(observations.values) > 0,
+                 (
+                   SELECT CONCAT('{{"values":[', STRING_AGG(FORMAT('{{"key":"%s","value":"%s"}}', entry.key, entry.value), ','), ']}}')
+                   FROM UNNEST(observations.values) as entry
+                 ),
+                 NULL
+               ) as observations_json
              FROM Observation
              WHERE import_name IN ({imports_str}) ''');
 
@@ -525,20 +531,22 @@ class ProvenanceSummaryGenerator:
                 'observation_count', CAST(facet_obs_count AS FLOAT64),
                 'time_series_count', CAST(facet_ts_count AS FLOAT64),
                 'place_type_summary', (
-                  SELECT JSON_OBJECT(
-                    ARRAY_AGG(place_type),
-                    ARRAY_AGG(JSON_OBJECT(
-                      'place_count', place_count,
-                      'min_value', min_val,
-                      'max_value', max_val,
-                      'top_places', (
-                        SELECT ARRAY_AGG(JSON_OBJECT('dcid', tp.dcid, 'name', tp.name))
-                        FROM UNNEST(top_places) tp
-                      )
-                    ))
+                  SELECT IF(ARRAY_LENGTH(keys) > 0, JSON_OBJECT(keys, vals), NULL)
+                  FROM (
+                    SELECT 
+                      ARRAY_AGG(place_type) as keys,
+                      ARRAY_AGG(JSON_OBJECT(
+                        'place_count', place_count,
+                        'min_value', min_val,
+                        'max_value', max_val,
+                        'top_places', (
+                          SELECT ARRAY_AGG(JSON_OBJECT('dcid', tp.dcid, 'name', tp.name))
+                          FROM UNNEST(top_places) tp
+                        )
+                      )) as vals
+                    FROM UNNEST(pt_summaries)
+                    WHERE place_type IS NOT NULL
                   )
-                  FROM UNNEST(pt_summaries)
-                  WHERE place_type IS NOT NULL
                 )
               )
             )
