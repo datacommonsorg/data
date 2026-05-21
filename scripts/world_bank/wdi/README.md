@@ -157,12 +157,12 @@ If any combination of values in a golden file row is missing from the input, the
 If you want to get goldens, run the below command:
 ```bash
 #goldens from output csv 
-python3 validator_goldens.py --validate_goldens_input=../../scripts/world_bank/wdi/output/WorldBank.csv --generate_goldens=golden_data/golden_observations.csv --goldens_must_include="StatisticalVariable:gs://unresolved_mcf/import_validation/nl_statvars.csv, ISO3166Alpha3:gs://unresolved_mcf/import_validation/top_100k_places.csv" --generate_goldens_property_sets="StatisticalVariable|observationPeriod|ISO3166Alpha3"
+python3 validator_goldens.py --validate_goldens_input=../../scripts/world_bank/wdi/output/WorldBank.csv --generate_goldens=golden_data/golden_observations.csv --goldens_must_include="ISO3166Alpha3:gs://unresolved_mcf/import_validation/top_100k_places.csv" --generate_goldens_property_sets="ISO3166Alpha3"
 ```
 
 #goldens from summary reports
 ```bash
-python3 validator_goldens.py --validate_goldens_input="summary_report.csv" --generate_goldens=golden_data/golden_summary_report.csv  --generate_goldens_property_sets="StatVar|NumPlaces|MinDate"
+python3 validator_goldens.py --validate_goldens_input="summary_report.csv" --generate_goldens=golden_data/golden_summary_report.csv  --generate_goldens_property_sets="StatVar|Units|MinDate|MeasurementMethods|observationPeriod"
 ```
 
 We highly recommend the use of the import validation tool for this import which
