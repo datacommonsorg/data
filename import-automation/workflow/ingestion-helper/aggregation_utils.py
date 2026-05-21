@@ -90,8 +90,10 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
+        # Escape single quotes to prevent SQL injection
+        safe_names = [name.replace("'", "''") for name in import_names]
         prefix = "dc/base/" if self.is_base_dc else ""
-        provenances = [f"'{prefix}{name}'" for name in import_names]
+        provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
         gen_graphs_prov = 'dc/base/GeneratedGraphs' if self.is_base_dc else 'GeneratedGraphs'
         
@@ -177,8 +179,10 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
+        # Escape single quotes to prevent SQL injection
+        safe_names = [name.replace("'", "''") for name in import_names]
         prefix = "dc/base/" if self.is_base_dc else ""
-        provenances = [f"'{prefix}{name}'" for name in import_names]
+        provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
         gen_graphs_prov = 'dc/base/GeneratedGraphs' if self.is_base_dc else 'GeneratedGraphs'
 
@@ -267,8 +271,10 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
+        # Escape single quotes to prevent SQL injection
+        safe_names = [name.replace("'", "''") for name in import_names]
         prefix = "dc/base/" if self.is_base_dc else ""
-        provenances = [f"'{prefix}{name}'" for name in import_names]
+        provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
         gen_graphs_prov = 'dc/base/GeneratedGraphs' if self.is_base_dc else 'GeneratedGraphs'
 
@@ -376,8 +382,10 @@ class ProvenanceSummaryGenerator:
         dest = self.executor.get_spanner_destination_uri()
         connection_id = self.executor.connection_id
         
+        # Escape single quotes to prevent SQL injection
+        safe_names = [name.replace("'", "''") for name in import_names]
         # Format import names for the SQL IN clause
-        imports_str = ", ".join([f"'{name}'" for name in import_names])
+        imports_str = ", ".join([f"'{name}'" for name in safe_names])
         provenance_dcid_expr = "CONCAT('dc/base/', raw.import_name)" if self.is_base_dc else "raw.import_name"
         
         query = f"""
