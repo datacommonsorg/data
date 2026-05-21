@@ -255,7 +255,7 @@ class TestSpannerClient(unittest.TestCase):
         actual_values = [val[2] for val in kwargs['values']]
         self.assertEqual(actual_subjects, expected_subjects)
         self.assertEqual(actual_names, expected_names)
-        self.assertEqual(actual_values, expected_names)
+        self.assertEqual(actual_values, expected_subjects)
 
     @patch('google.cloud.spanner.Client')
     def test_seed_database_already_exists(self, mock_spanner_client):
