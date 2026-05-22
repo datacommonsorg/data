@@ -285,13 +285,10 @@ def ingestion_helper(request):
             is_base_dc=FLAGS.is_base_dc,
         )
         try:
-            if aggregation.run_aggregation(import_list):
-                return ('OK', 200)
-            else:
-                return ('Aggregation failed', 500)
+            job_ids = aggregation.run_aggregation(import_list)
+            return jsonify({'status': 'SUBMITTED', 'jobIds': job_ids}), 200
         except Exception as e:
             return (f"Aggregation failed: {str(e)}", 500)
-
     elif action_type == 'clear_redis_cache':
         logging.info("Action: clear_redis_cache")
         redis_host = os.environ.get("REDIS_HOST")
@@ -309,6 +306,26 @@ def ingestion_helper(request):
         else:
             logging.warning("REDIS_HOST not set, skipping cache flush.")
             return jsonify({'status': 'SKIPPED', 'message': 'REDIS_HOST not set'}), 200
+    elif action_type == 'check_aggregation_status':
+        # Checks the status of submitted aggregation BigQuery jobs.
+        # Input:
+        #   jobIds: list of BigQuery job IDs
+        job_ids = request_json.get('jobIds', [])
+        if not job_ids:
+             return ('Missing or empty jobIds', 400)
+
+        aggregation = AggregationUtils(
+            connection_id=FLAGS.spanner_connection_id,
+            project_id=FLAGS.spanner_project_id,
+            instance_id=FLAGS.spanner_instance_id,
+            database_id=FLAGS.spanner_graph_database_id,
+            location=FLAGS.location,
+        )
+        try:
+            status = aggregation.check_aggregation_status(job_ids)
+            return jsonify(status), 200
+        except Exception as e:
+            return (f"Aggregation status check failed: {str(e)}", 500)
 
     else:
         return (f'Unknown actionType: {action_type}', 400)
