@@ -367,7 +367,8 @@ class ImportExecutor:
         try:
             dataclasses.replace(self.config, **overrides)
         except TypeError as exc:
-            logging.error(f"Invalid configuration key provided in config_override: {exc}")
+            logging.error(
+                f"Invalid configuration key provided in config_override: {exc}")
             raise exc
 
         original_config = self.config
