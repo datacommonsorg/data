@@ -369,7 +369,8 @@ class ImportExecutor:
             valid_fields = {f.name for f in dataclasses.fields(self.config)}
             invalid_keys = set(overrides) - valid_fields
             if invalid_keys:
-                raise TypeError(f"Invalid configuration keys provided: {invalid_keys}")
+                raise TypeError(
+                    f"Invalid configuration keys provided: {invalid_keys}")
             self.config = dataclasses.replace(self.config, **overrides)
         try:
             self._import_one_helper(
