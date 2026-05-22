@@ -364,15 +364,13 @@ class ImportExecutor:
         dc_email_aliases = [_ALERT_EMAIL_ADDR, _DEBUG_EMAIL_ADDR]
 
         overrides = import_spec.get('config_override') or {}
-        try:
-            dataclasses.replace(self.config, **overrides)
-        except TypeError as exc:
-            logging.error(
-                f"Invalid configuration key provided in config_override: {exc}")
-            raise exc
-
         original_config = self.config
-        self.config = dataclasses.replace(self.config, **overrides)
+        if overrides:
+            valid_fields = {f.name for f in dataclasses.fields(self.config)}
+            invalid_keys = set(overrides) - valid_fields
+            if invalid_keys:
+                raise TypeError(f"Invalid configuration keys provided: {invalid_keys}")
+            self.config = dataclasses.replace(self.config, **overrides)
         try:
             self._import_one_helper(
                 repo_dir=repo_dir,
