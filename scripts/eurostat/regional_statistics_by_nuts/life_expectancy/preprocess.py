@@ -30,7 +30,7 @@ flags.DEFINE_string('output_file', 'demo_r_mlifexp_cleaned.csv',
 flags.DEFINE_string('mode', '',
                     'Mode of operation: download, process, or empty (both)')
 flags.DEFINE_string(
-    'deleted_gcs_path',
+    'historical_gcs_path',
     'gs://unresolved_mcf/eurostat/life_expectancy/deleted_historical_data.csv',
     'GCS path to the deleted historical data CSV file')
 
@@ -166,9 +166,9 @@ def preprocess(input_file, output_file):
     # Read deleted historical data from GCS if it exists
     try:
         logging.info(
-            f"Reading historical deleted data from GCS: {_FLAGS.deleted_gcs_path}"
+            f"Reading historical deleted data from GCS: {_FLAGS.historical_gcs_path}"
         )
-        deleted_df = pd.read_csv(_FLAGS.deleted_gcs_path)
+        deleted_df = pd.read_csv(_FLAGS.historical_gcs_path)
 
         # Combine dataframes. final_df is placed first so its versions are preferred.
         final_df = pd.concat([final_df, deleted_df], ignore_index=True)
