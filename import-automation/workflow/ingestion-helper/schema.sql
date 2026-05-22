@@ -13,7 +13,8 @@
 -- limitations under the License.
 
 CREATE PROTO BUNDLE (
-  `org.datacommons.Observations`
+  `org.datacommons.Observations`,
+  `org.datacommons.Observations.ValuesEntry`
 );
 
 CREATE TABLE Node (
@@ -116,22 +117,6 @@ CREATE TABLE Cache (
   provenance STRING(1024) NOT NULL,
   value JSON,
 ) PRIMARY KEY(type, key, provenance);
-
-CREATE TABLE VariableMetadata (
-  variable_measured STRING(1024) NOT NULL,
-  import_name STRING(1024) NOT NULL,
-  facet_id STRING(1024) NOT NULL,
-  observation_period STRING(1024),
-  measurement_method STRING(1024),
-  unit STRING(1024),
-  scaling_factor STRING(1024),
-  is_dc_aggregate BOOL,
-  total_observations INT64,
-  observed_places INT64,
-  min_date STRING(1024),
-  max_date STRING(1024),
-  place_types ARRAY<STRING(1024)>,
-) PRIMARY KEY(variable_measured, import_name);
 
 CREATE INDEX InEdge ON Edge(object_id, predicate, subject_id, provenance) OPTIONS (
   columnar_policy = 'enabled'

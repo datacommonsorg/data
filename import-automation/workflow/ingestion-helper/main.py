@@ -33,7 +33,7 @@ flags.DEFINE_string('spanner_connection_id',
                     'BigQuery Connection ID to access Cloud Spanner')
 flags.DEFINE_string('gcs_bucket_id', os.environ.get('GCS_BUCKET_ID'),
                     'GCS Bucket ID')
-flags.DEFINE_string('location', os.environ.get('LOCATION'), 'Location')
+flags.DEFINE_string('location', os.environ.get('LOCATION') or os.environ.get('REGION'), 'Location')
 flags.DEFINE_bool(
     'enable_embeddings',
     os.environ.get('ENABLE_EMBEDDINGS', 'false').lower() == 'true',
@@ -41,6 +41,10 @@ flags.DEFINE_bool(
 flags.DEFINE_list(
     'node_types', ['StatisticalVariable', 'Topic'],
     'Node types to generate embeddings for')
+flags.DEFINE_bool(
+    'is_base_dc',
+    os.environ.get('IS_BASE_DC', 'true').lower() == 'true',
+    'Is base DC')
 
 if not FLAGS.is_parsed():
     FLAGS(['ingestion_helper'])
@@ -274,6 +278,8 @@ def ingestion_helper(request):
             project_id=FLAGS.spanner_project_id,
             instance_id=FLAGS.spanner_instance_id,
             database_id=FLAGS.spanner_graph_database_id,
+            location=FLAGS.location,
+            is_base_dc=FLAGS.is_base_dc,
         )
         try:
             if aggregation.run_aggregation(import_list):
