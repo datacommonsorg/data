@@ -362,6 +362,10 @@ class ImportExecutor:
             relative_import_dir, import_name)
         curator_emails = import_spec['curator_emails']
         dc_email_aliases = [_ALERT_EMAIL_ADDR, _DEBUG_EMAIL_ADDR]
+
+        original_config = self.config
+        overrides = {k: v for k, v in import_spec.items() if k in vars(self.config)}
+        self.config = dataclasses.replace(self.config, **overrides, **(import_spec.get('config_override') or {}))
         try:
             self._import_one_helper(
                 repo_dir=repo_dir,
@@ -383,6 +387,8 @@ class ImportExecutor:
                     receiver_addresses=dc_email_aliases + curator_emails,
                 )
             raise exc
+        finally:
+            self.config = original_config
 
     def _get_blob_content(self, gcs_path: str) -> str:
         """Returns the file content for the file in GCS path.
