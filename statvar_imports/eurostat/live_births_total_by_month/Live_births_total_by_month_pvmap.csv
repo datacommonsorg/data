@@ -48,5 +48,5 @@ OBS_FLAG:f,measurementMethod,dcs:EurostatForecastValue
 OBS_FLAG:n,measurementMethod,dcs:EurostatNotSignificantValue
 OBS_FLAG:u,measurementMethod,dcs:EurostatLowReliabilityValue
 # Missing values
-OBS_FLAG:M,MissingValue,''
-unit:NR,UnitMapping,''
+OBS_FLAG:M,MissingValue,""
+unit:NR,UnitMapping,""
