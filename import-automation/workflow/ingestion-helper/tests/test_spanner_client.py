@@ -17,8 +17,8 @@ from unittest.mock import MagicMock, patch
 import sys
 import os
 
-# Add the current directory to path so we can import spanner_client
-sys.path.append(os.path.dirname(__file__))
+# Add the parent directory to path so we can import spanner_client
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from spanner_client import SpannerClient
 
 class TestSpannerClient(unittest.TestCase):
@@ -281,4 +281,3 @@ class TestSpannerClient(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

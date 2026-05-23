@@ -16,7 +16,7 @@ import unittest
 from unittest.mock import MagicMock, patch
 from datetime import datetime
 
-from embedding_utils import (
+from handlers.helpers.embedding_utils import (
     get_latest_lock_timestamp,
     get_updated_nodes,
     filter_and_convert_nodes,
@@ -121,7 +121,7 @@ class TestEmbeddingUtils(unittest.TestCase):
         self.assertEqual(converted[0], ("dc/1", "Node 1", ["Topic"]))
         self.assertEqual(converted[1], ("dc/3", "Node 3", ["Topic", "StatisticalVariable"]))
 
-    @patch('embedding_utils._BATCH_SIZE', 2)
+    @patch('handlers.helpers.embedding_utils._BATCH_SIZE', 2)
     def test_generate_embeddings_partitioned(self):
         mock_database = MagicMock()
 
