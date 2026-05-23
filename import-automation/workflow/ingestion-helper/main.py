@@ -5,7 +5,7 @@ from storage_client import StorageClient
 import logging
 import os
 from absl import flags
-import import_utils
+
 from flask import jsonify
 
 
