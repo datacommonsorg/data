@@ -1405,7 +1405,7 @@ def _log_process(process: subprocess.CompletedProcess,
             payload_str = payload.decode('utf-8', errors='replace')
         else:
             payload_str = str(payload)
-        chunk_size = 100000
+        chunk_size = 50000
         total_len = len(payload_str)
 
         logging.info(f'--- Start of {label} (Total length: {total_len} chars) ---')
