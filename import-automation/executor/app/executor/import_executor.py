@@ -809,7 +809,8 @@ class ImportExecutor:
                                  "latency_secs": timer.time(),
                                  "script_index": script_index,
                                  "script_path": path,
-                             })
+                             },
+                             skip_stream_logging=True)
                 process.check_returncode()
 
         import_summary.import_stats['script_execution_time'] = start_timer.time(
@@ -1246,6 +1247,9 @@ def _run_with_timeout(args: List[str],
         logging.info(
             f'Completed command: {args}, retcode: {process.returncode}')
 
+        _stream_payload_in_chunks(f'[Command: {" ".join(args)}] stdout', process.stdout)
+        _stream_payload_in_chunks(f'[Command: {" ".join(args)}] stderr', process.stderr)
+
         return process
     except Exception as e:
         message = traceback.format_exc()
@@ -1410,7 +1414,8 @@ def _construct_process_message(message: str,
 
 def _log_process(process: subprocess.CompletedProcess,
                  import_name: str = '',
-                 metrics: dict = {}) -> None:
+                 metrics: dict = {},
+                 skip_stream_logging: bool = False) -> None:
     """Logs the result of a subprocess.
 
   Args:
@@ -1423,8 +1428,9 @@ def _log_process(process: subprocess.CompletedProcess,
     message = _construct_process_message(process_message, process)
     logging.info(message)
 
-    _stream_payload_in_chunks(f'[{import_name}] Subprocess stdout', process.stdout)
-    _stream_payload_in_chunks(f'[{import_name}] Subprocess stderr', process.stderr)
+    if not skip_stream_logging:
+        _stream_payload_in_chunks(f'[{import_name}] Subprocess stdout', process.stdout)
+        _stream_payload_in_chunks(f'[{import_name}] Subprocess stderr', process.stderr)
 
     status = ImportStatus.FAILURE if process.returncode else ImportStatus.SUCCESS
     if import_name:
