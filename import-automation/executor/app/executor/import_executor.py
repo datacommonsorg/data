@@ -1378,10 +1378,6 @@ def _construct_process_message(message: str,
     message = (f'{message}\n'
                f'[Subprocess command]: {command}\n'
                f'[Subprocess return code]: {process.returncode}')
-    if process.stdout:
-        message += f'\n[Subprocess stdout]:\n{process.stdout}'
-    if process.stderr:
-        message += f'\n[Subprocess stderr]:\n{process.stderr}'
     return message
 
 
@@ -1399,6 +1395,27 @@ def _log_process(process: subprocess.CompletedProcess,
         process_message = 'Subprocess failed'
     message = _construct_process_message(process_message, process)
     logging.info(message)
+
+    # Helper function to split text and log in safe chunks
+    def _stream_payload_in_chunks(label: str, payload):
+        if not payload:
+            return
+
+        if isinstance(payload, bytes):
+            payload_str = payload.decode('utf-8', errors='replace')
+        else:
+            payload_str = str(payload)
+        chunk_size = 100000
+        total_len = len(payload_str)
+
+        logging.info(f'--- Start of {label} (Total length: {total_len} chars) ---')
+        for i in range(0, total_len, chunk_size):
+            chunk = payload_str[i:i + chunk_size]
+            logging.info(f'[{label} Part {i//chunk_size + 1}]:\n{chunk}')
+        logging.info(f'--- End of {label} ---')
+
+    _stream_payload_in_chunks('Subprocess stdout', process.stdout)
+    _stream_payload_in_chunks('Subprocess stderr', process.stderr)
 
     status = ImportStatus.FAILURE if process.returncode else ImportStatus.SUCCESS
     if import_name:
