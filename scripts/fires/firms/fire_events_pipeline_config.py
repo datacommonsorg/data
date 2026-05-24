@@ -88,7 +88,7 @@
             # Output events csv into a common folder with a year in filename,
             # as the import automation can copy all files in a single folder.
             "output_dir":
-                "gs://{gcs_bucket}/{gcs_folder}/{import_name}-{stage}-{year}-without-usa-",
+                "gs://{gcs_bucket}/{gcs_folder}/{stage}/{import_name}-{stage}-{year}-without-usa-",
             "event_type":
                 "FireEvent",
 
