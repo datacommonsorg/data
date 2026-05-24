@@ -1420,6 +1420,8 @@ def _log_process(process: subprocess.CompletedProcess,
       process: subprocess.CompletedProcess object whose arguments, return code,
         stdout, and stderr are to be logged.
   """
+    if metrics is None:
+        metrics = {}
     process_message = 'Subprocess succeeded'
     if process.returncode:
         process_message = 'Subprocess failed'
