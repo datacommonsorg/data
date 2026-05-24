@@ -1118,33 +1118,6 @@ def run_and_handle_exception(
         return ExecutionResult(ImportStatus.FAILURE, [], message)
 
 
-def _stream_payload_in_chunks(label: str, payload) -> None:
-    """Helper function to split text and log in safe chunks to avoid
-
-    "Log entry too large" (InvalidArgument) errors.
-    """
-    if not payload:
-        return
-
-    if isinstance(payload, bytes):
-        payload_str = payload.decode('utf-8', errors='replace')
-    else:
-        payload_str = str(payload)
-
-    chunk_size = 50000
-    total_len = len(payload_str)
-
-    if total_len <= chunk_size:
-        logging.info(f'{label}:\n{payload_str}')
-        return
-
-    logging.info(f'--- Start of {label} (Total length: {total_len} chars) ---')
-    for i in range(0, total_len, chunk_size):
-        chunk = payload_str[i:i + chunk_size]
-        logging.info(f'[{label} Part {i//chunk_size + 1}]:\n{chunk}')
-    logging.info(f'--- End of {label} ---')
-
-
 @log_function_call
 def _run_with_timeout_async(args: List[str],
                             timeout: float,
@@ -1243,12 +1216,9 @@ def _run_with_timeout(args: List[str],
                                  timeout=timeout,
                                  cwd=cwd,
                                  env=env)
-        process_message = 'Subprocess succeeded' if process.returncode == 0 else 'Subprocess failed'
         logging.info(
-            f'Completed command: {args}, retcode: {process.returncode}')
-        _stream_payload_in_chunks(f'[Command: {" ".join(args)}] stdout', process.stdout)
-        _stream_payload_in_chunks(f'[Command: {" ".join(args)}] stderr', process.stderr)
-
+            f'Completed command: {args}, retcode: {process.returncode}, stdout:'
+            f' {process.stdout}, stderr: {process.stderr}')
         return process
     except Exception as e:
         message = traceback.format_exc()
@@ -1425,6 +1395,24 @@ def _log_process(process: subprocess.CompletedProcess,
         process_message = 'Subprocess failed'
     message = _construct_process_message(process_message, process)
     logging.info(message)
+
+    # Helper function to split text and log in safe chunks
+    def _stream_payload_in_chunks(label: str, payload):
+        if not payload:
+            return
+
+        if isinstance(payload, bytes):
+            payload_str = payload.decode('utf-8', errors='replace')
+        else:
+            payload_str = str(payload)
+        chunk_size = 50000
+        total_len = len(payload_str)
+
+        logging.info(f'--- Start of {label} (Total length: {total_len} chars) ---')
+        for i in range(0, total_len, chunk_size):
+            chunk = payload_str[i:i + chunk_size]
+            logging.info(f'[{label} Part {i//chunk_size + 1}]:\n{chunk}')
+        logging.info(f'--- End of {label} ---')
 
     _stream_payload_in_chunks(f'[{import_name}] Subprocess stdout', process.stdout)
     _stream_payload_in_chunks(f'[{import_name}] Subprocess stderr', process.stderr)
