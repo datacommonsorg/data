@@ -1597,7 +1597,8 @@ class GeoEventsProcessor:
             if self._config.get('omit_events_subdir', False):
                 events_output_path = output_path
             else:
-                events_output_path = _get_output_subdir_path(output_path, 'events')
+                events_output_path = _get_output_subdir_path(
+                    output_path, 'events')
             output_files.append(
                 self.write_events_csv(output_path=events_output_path,
                                       output_ended_events=output_ended_events))
