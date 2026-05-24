@@ -1418,6 +1418,9 @@ def _log_process(process: subprocess.CompletedProcess,
   Args:
       process: subprocess.CompletedProcess object whose arguments, return code,
         stdout, and stderr are to be logged.
+      import_name: Name of the import for labeling logs.
+      metrics: Dictionary to store execution metrics.
+      skip_stream_logging: Whether to skip chunked logging of stdout and stderr.
   """
     if metrics is None:
         metrics = {}
