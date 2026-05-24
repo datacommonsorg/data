@@ -1394,7 +1394,8 @@ def _clean_date(time: str) -> str:
 
 
 def _construct_process_message(message: str,
-                               process: subprocess.CompletedProcess) -> str:
+                               process: subprocess.CompletedProcess,
+                               include_streams: bool = False) -> str:
     """Constructs a log message describing the result of a subprocess.
 
   Args:
@@ -1408,12 +1409,11 @@ def _construct_process_message(message: str,
     message = (f'{message}\n'
                f'[Subprocess command]: {command}\n'
                f'[Subprocess return code]: {process.returncode}')
-    if hasattr(process, 'stdout') and process.stdout:
-        stdout_str = process.stdout.decode('utf-8', errors='replace') if isinstance(process.stdout, bytes) else str(process.stdout)
-        message += f'\n[Subprocess stdout]:\n{stdout_str}'
-    if hasattr(process, 'stderr') and process.stderr:
-        stderr_str = process.stderr.decode('utf-8', errors='replace') if isinstance(process.stderr, bytes) else str(process.stderr)
-        message += f'\n[Subprocess stderr]:\n{stderr_str}'
+    if include_streams:
+        if process.stdout:
+            message += f'\n[Subprocess stdout]:\n{process.stdout}'
+        if process.stderr:
+            message += f'\n[Subprocess stderr]:\n{process.stderr}'
 
     return message
 
@@ -1431,7 +1431,8 @@ def _log_process(process: subprocess.CompletedProcess,
     process_message = 'Subprocess succeeded'
     if process.returncode:
         process_message = 'Subprocess failed'
-    message = _construct_process_message(process_message, process)
+
+    message = _construct_process_message(process_message, process, include_streams=False)
     logging.info(message)
 
     if not skip_stream_logging:
