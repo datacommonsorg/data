@@ -481,8 +481,7 @@ class ImportExecutor:
                              "latency": timer.time(),
                              "input_index": input_index,
                              "import_input": import_prefix,
-                         },
-                         skip_stream_logging=True)
+                         })
             process.check_returncode()
             logging.info(
                 f'Generated resolved mcf for {import_prefix} in {output_path}.')
@@ -811,8 +810,7 @@ class ImportExecutor:
                                  "latency_secs": timer.time(),
                                  "script_index": script_index,
                                  "script_path": path,
-                             },
-                             skip_stream_logging=True)
+                             })
                 process.check_returncode()
 
         import_summary.import_stats['script_execution_time'] = start_timer.time(
