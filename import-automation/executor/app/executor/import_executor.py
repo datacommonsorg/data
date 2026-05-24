@@ -79,6 +79,7 @@ IMPORT_SUMMARY_FILE = "import_summary.json"
 STAGING_VERSION_FILE = "staging_version.txt"
 MAX_LOG_CHUNK_SIZE = 50000
 
+
 class ImportStatus(Enum):
     SUCCESS = 1
     FAILURE = 2
