@@ -1243,11 +1243,8 @@ def _run_with_timeout(args: List[str],
                                  timeout=timeout,
                                  cwd=cwd,
                                  env=env)
-        process_message = 'Subprocess succeeded' if process.returncode == 0 else 'Subprocess failed'
         logging.info(
             f'Completed command: {args}, retcode: {process.returncode}')
-        _stream_payload_in_chunks(f'[Command: {" ".join(args)}] stdout', process.stdout)
-        _stream_payload_in_chunks(f'[Command: {" ".join(args)}] stderr', process.stderr)
 
         return process
     except Exception as e:
