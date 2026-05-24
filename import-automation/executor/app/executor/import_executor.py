@@ -1414,8 +1414,8 @@ def _log_process(process: subprocess.CompletedProcess,
             logging.info(f'[{label} Part {i//chunk_size + 1}]:\n{chunk}')
         logging.info(f'--- End of {label} ---')
 
-    _stream_payload_in_chunks('Subprocess stdout', process.stdout)
-    _stream_payload_in_chunks('Subprocess stderr', process.stderr)
+    _stream_payload_in_chunks(f'[{import_name}] Subprocess stdout', process.stdout)
+    _stream_payload_in_chunks(f'[{import_name}] Subprocess stderr', process.stderr)
 
     status = ImportStatus.FAILURE if process.returncode else ImportStatus.SUCCESS
     if import_name:
