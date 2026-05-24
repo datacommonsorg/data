@@ -1412,7 +1412,7 @@ def _construct_process_message(message: str,
 
 def _log_process(process: subprocess.CompletedProcess,
                  import_name: str = '',
-                 metrics: dict = {},
+                 metrics: dict = None,
                  skip_stream_logging: bool = False) -> None:
     """Logs the result of a subprocess.
 
