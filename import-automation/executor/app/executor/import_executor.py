@@ -1408,6 +1408,10 @@ def _log_process(process: subprocess.CompletedProcess,
         chunk_size = 50000
         total_len = len(payload_str)
 
+        if total_len <= chunk_size:
+            logging.info(f'{label}:\n{payload_str}')
+            return
+
         logging.info(f'--- Start of {label} (Total length: {total_len} chars) ---')
         for i in range(0, total_len, chunk_size):
             chunk = payload_str[i:i + chunk_size]
