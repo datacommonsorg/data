@@ -481,7 +481,8 @@ class ImportExecutor:
                              "latency": timer.time(),
                              "input_index": input_index,
                              "import_input": import_prefix,
-                         })
+                         },
+                         skip_stream_logging=True)
             process.check_returncode()
             logging.info(
                 f'Generated resolved mcf for {import_prefix} in {output_path}.')
@@ -810,7 +811,8 @@ class ImportExecutor:
                                  "latency_secs": timer.time(),
                                  "script_index": script_index,
                                  "script_path": path,
-                             })
+                             },
+                             skip_stream_logging=True)
                 process.check_returncode()
 
         import_summary.import_stats['script_execution_time'] = start_timer.time(
@@ -1179,11 +1181,16 @@ def _run_with_timeout_async(args: List[str],
             env=env,
         )
 
-        out, err = process.communicate(timeout=timeout)
-        stdout.append(out)
-        stderr.append(err)
-        if process.returncode != 0:
-            raise RuntimeError(f"Process failed with exit code {process.returncode}")
+        # Log output continuously until the command completes.
+        for line in process.stderr:
+            stderr.append(line)
+            logging.info(f'Process stderr:{name}: {line}')
+        for line in process.stdout:
+            stdout.append(line)
+            logging.info(f'Process stdout:{name}: {line}')
+
+        # Wait in case script has closed stderr/stdout early.
+        process.wait()
         end_time = time.time()
 
         return_code = process.returncode
