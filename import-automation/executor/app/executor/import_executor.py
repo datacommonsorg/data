@@ -1182,10 +1182,8 @@ def _run_with_timeout_async(args: List[str],
         # Log output continuously until the command completes.
         for line in process.stderr:
             stderr.append(line)
-            logging.info(f'Process stderr:{name}: {line}')
         for line in process.stdout:
             stdout.append(line)
-            logging.info(f'Process stdout:{name}: {line}')
 
         # Wait in case script has closed stderr/stdout early.
         process.wait()
