@@ -1179,14 +1179,11 @@ def _run_with_timeout_async(args: List[str],
             env=env,
         )
 
-        # Log output continuously until the command completes.
-        for line in process.stderr:
-            stderr.append(line)
-        for line in process.stdout:
-            stdout.append(line)
-
-        # Wait in case script has closed stderr/stdout early.
-        process.wait()
+        out, err = process.communicate(timeout=timeout)
+        stdout.append(out)
+        stderr.append(err)
+        if process.returncode != 0:
+            raise RuntimeError(f"Process failed with exit code {process.returncode}")
         end_time = time.time()
 
         return_code = process.returncode
