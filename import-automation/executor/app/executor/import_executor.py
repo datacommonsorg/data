@@ -77,7 +77,7 @@ AUTO_IMPORT_JOB_STAGE = "auto-import-job-stage"
 AUTO_IMPORT_JOB_STATUS = "auto-import-job-status"
 IMPORT_SUMMARY_FILE = "import_summary.json"
 STAGING_VERSION_FILE = "staging_version.txt"
-
+MAX_LOG_CHUNK_SIZE = 50000
 
 class ImportStatus(Enum):
     SUCCESS = 1
@@ -897,8 +897,7 @@ class ImportExecutor:
                          metrics={
                              "stage": ImportStage.INIT.name,
                              "latency_secs": timer.time(),
-                         },
-                         skip_stream_logging=False)
+                         })
             process.check_returncode()
 
             self._invoke_import_job(absolute_import_dir=absolute_import_dir,
@@ -1134,7 +1133,7 @@ def _stream_payload_in_chunks(label: str, payload) -> None:
     else:
         payload_str = str(payload)
 
-    chunk_size = 50000
+    chunk_size = MAX_LOG_CHUNK_SIZE
     total_len = len(payload_str)
 
     if total_len <= chunk_size:
@@ -1429,8 +1428,10 @@ def _log_process(process: subprocess.CompletedProcess,
     logging.info(message)
 
     if not skip_stream_logging:
-        _stream_payload_in_chunks(f'[{import_name}] Subprocess stdout', process.stdout)
-        _stream_payload_in_chunks(f'[{import_name}] Subprocess stderr', process.stderr)
+        _stream_payload_in_chunks(f'[{import_name}] Subprocess stdout',
+                                  process.stdout)
+        _stream_payload_in_chunks(f'[{import_name}] Subprocess stderr',
+                                  process.stderr)
 
     status = ImportStatus.FAILURE if process.returncode else ImportStatus.SUCCESS
     if import_name:
