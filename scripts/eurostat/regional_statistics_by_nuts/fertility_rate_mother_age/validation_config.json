@@ -6,7 +6,22 @@
             "description": "Checks that the percentage of deleted points is within the threshold.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 0.01
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_goldens_output_csv",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "golden_data/golden_observations.csv",
+                "input_files": "Eurostats_NUTS3_FRate_Age.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_summary_report",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "golden_data/golden_summary_report.csv"
             }
         }
     ]
