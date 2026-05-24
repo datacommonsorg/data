@@ -480,7 +480,8 @@ class ImportExecutor:
                              "latency": timer.time(),
                              "input_index": input_index,
                              "import_input": import_prefix,
-                         })
+                         },
+                         skip_stream_logging=True)
             process.check_returncode()
             logging.info(
                 f'Generated resolved mcf for {import_prefix} in {output_path}.')
@@ -896,7 +897,8 @@ class ImportExecutor:
                          metrics={
                              "stage": ImportStage.INIT.name,
                              "latency_secs": timer.time(),
-                         })
+                         },
+                         skip_stream_logging=False)
             process.check_returncode()
 
             self._invoke_import_job(absolute_import_dir=absolute_import_dir,
@@ -1247,9 +1249,6 @@ def _run_with_timeout(args: List[str],
         logging.info(
             f'Completed command: {args}, retcode: {process.returncode}')
 
-        _stream_payload_in_chunks(f'[Command: {" ".join(args)}] stdout', process.stdout)
-        _stream_payload_in_chunks(f'[Command: {" ".join(args)}] stderr', process.stderr)
-
         return process
     except Exception as e:
         message = traceback.format_exc()
@@ -1409,6 +1408,13 @@ def _construct_process_message(message: str,
     message = (f'{message}\n'
                f'[Subprocess command]: {command}\n'
                f'[Subprocess return code]: {process.returncode}')
+    if hasattr(process, 'stdout') and process.stdout:
+        stdout_str = process.stdout.decode('utf-8', errors='replace') if isinstance(process.stdout, bytes) else str(process.stdout)
+        message += f'\n[Subprocess stdout]:\n{stdout_str}'
+    if hasattr(process, 'stderr') and process.stderr:
+        stderr_str = process.stderr.decode('utf-8', errors='replace') if isinstance(process.stderr, bytes) else str(process.stderr)
+        message += f'\n[Subprocess stderr]:\n{stderr_str}'
+
     return message
 
 
