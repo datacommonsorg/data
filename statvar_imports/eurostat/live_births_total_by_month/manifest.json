@@ -12,8 +12,8 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "Live_births_total_by_month_output.tmcf",
-          "cleaned_csv": "Live_births_total_by_month_output.csv"
+          "template_mcf": "live_births_total_by_month_output.tmcf",
+          "cleaned_csv": "live_births_total_by_month_output.csv"
         }
       ],
       "source_files": [

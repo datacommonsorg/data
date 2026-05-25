@@ -4,7 +4,7 @@
 This dataset contains monthly live births data at national and regional levels, sourced from Eurostat. The data tracks the total number of live births per month across various European countries and regions.
 
 **type of place:** Country, NUTS Regions (Level 0-3)
-**years:** Historical data to present
+**years:** Historical data to present (1960-2025) 
 **place_resolution:** Resolved to DCIDs (e.g., dcid:country/FRA, dcid:nuts/AT113)
 
 ## Data Source
@@ -46,6 +46,6 @@ The resulting reports (`report.json`, `summary_report.html`) in `dc_generated/` 
 
 ## Testing
 Testing is performed using the `test_data` directory:
-- Raw Input: `test_data/Live_births_total_by_month_data_raw.csv`
-- Expected Output: `test_data/Live_births_total_by_month_output.csv`
-- Expected TMCF: `test_data/Live_births_total_by_month_output.tmcf`
+- Raw Input: `test_data/live_births_total_by_month_data_raw.csv`
+- Expected Output: `test_data/live_births_total_by_month_output.csv`
+- Expected TMCF: `test_data/live_births_total_by_month_output.tmcf`

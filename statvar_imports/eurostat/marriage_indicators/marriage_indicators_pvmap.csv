@@ -1,0 +1,43 @@
+key,property1,value1,property2,value2,property3,value3,property4,value4,property5,value5,property6,value6
+
+# --- AUTOMATED CLEANUP: Ignored Columns ---
+DATAFLOW,#ignore,"",,,,,,,,,,
+LAST UPDATE,#ignore,"",,,,,,,,,,
+CONF_STATUS,#ignore,"",,,,,,,,,,
+
+# --- AUTOMATED CLEANUP: Global Geo Logic & Ignores ---
+geo,observationAbout,{Data},,,,,,,,,,
+geo:DE_TOT,#ignore,"",,,,,,,,,,
+geo:EA19,#ignore,"",,,,,,,,,,
+geo:EFTA,#ignore,"",,,,,,,,,,
+geo:EU27_2020,#ignore,"",,,,,,,,,,
+freq:A,observationPeriod,P1Y,,,,,,,,,,
+
+# --- Mapped Marriage Indicators ---
+indic_de:AGEMAR1,populationType,dcs:MarriageEvent,measuredProperty,dcs:age,statType,dcs:meanValue,marriageNumber,"1",unit,dcs:Year,,
+indic_de:FAGEMAR1,populationType,dcs:MarriageEvent,measuredProperty,dcs:age,statType,dcs:meanValue,marriageNumber,"1",gender,dcs:Female,unit,dcs:Year
+indic_de:MAGEMAR1,populationType,dcs:MarriageEvent,measuredProperty,dcs:age,statType,dcs:meanValue,marriageNumber,"1",gender,dcs:Male,unit,dcs:Year
+
+# First Marriage Rates & Proportions (Females)
+indic_de:FMAR1CUM,populationType,dcs:MarriageEvent,measuredProperty,dcs:totalFirstMarriageRate,gender,dcs:Female,marriageNumber,"1",,,,
+indic_de:FMAR1PC,populationType,dcs:MarriageEvent,measuredProperty,dcs:proportion,gender,dcs:Female,marriageNumber,"1",,,,
+
+# First Marriage Rates & Proportions (Males - ADDED TO FIX DISCREPANCY)
+indic_de:MMAR1CUM,populationType,dcs:MarriageEvent,measuredProperty,dcs:totalFirstMarriageRate,gender,dcs:Male,marriageNumber,"1",,,,
+indic_de:MMAR1PC,populationType,dcs:MarriageEvent,measuredProperty,dcs:proportion,gender,dcs:Male,marriageNumber,"1",,,,
+
+# Absolute Counts & Crude Rates
+indic_de:MARRIAGE,populationType,dcs:MarriageEvent,measuredProperty,dcs:count,,,,,,,,
+indic_de:DIV,populationType,dcs:DivorceEvent,measuredProperty,dcs:count,,,,,,,,
+indic_de:GNUPRT,populationType,dcs:MarriageEvent,measuredProperty,dcs:crudeMarriageRate,,,,,,
+indic_de:GDIVRT,populationType,dcs:DivorceEvent,measuredProperty,dcs:crudeDivorceRate,,,,,,
+indic_de:DIVMARPCT,populationType,dcs:DivorceEvent,measuredProperty,dcs:divorceToMarriageRatio,,,,,,,,
+
+# Catch-All Fallback: Cleanly ignore any remaining unmapped indicator codes
+indic_de,#ignore,"",,,,,,,,,,
+
+# --- Time, Value, and Flags ---
+TIME_PERIOD,observationDate,{Data},,,,,,,,,,
+OBS_VALUE,value,{Number},,,,,,,,,,
+OBS_FLAG:M,MissingValue,'',,,,,,,,,,
+OBS_FLAG:NA,NotApplicable,'',,,,,,,,,,

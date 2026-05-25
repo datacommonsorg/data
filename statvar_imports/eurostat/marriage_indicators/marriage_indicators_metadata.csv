@@ -1,0 +1,4 @@
+parameter,value
+header_rows,1
+place_type,Country
+generate_statvar_name,False
