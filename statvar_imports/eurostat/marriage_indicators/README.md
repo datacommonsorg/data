@@ -22,7 +22,7 @@ The refresh is automated using the provided `run.sh` script, which handles both 
 ## How To Run Import
 To execute the complete import process (download and processing), run:
 ```bash
-./run_commands.sh
+./run.sh
 ```
 
 ### Script Details:
@@ -30,14 +30,13 @@ To execute the complete import process (download and processing), run:
 - **Processing**: Uses `stat_var_processor.py` to map raw data to Data Commons StatVarObservations using the PV map and metadata configuration.
 
 ## Key Files
-- `run_commands.sh`: Main execution script for download and processing.
+- `run.sh`: Main execution script for download and processing.
 - `marriage_indicators_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
 - `marriage_indicators_metadata.csv`: Configuration parameters for the processor.
 - `places_resolved.csv`: Mapping of place codes to Data Commons DCIDs.
-- `output.csv`: Processed statistical observations.
-- `output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
-- `output_stat_vars.mcf`: Definitions for the Statistical Variables.
-- `output_stat_vars_schema.mcf`: Schema definitions (properties and classes) for the Statistical Variables.
+- `marriage_indicators_output.csv`: Processed statistical observations.
+- `marriage_indicators_output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
+
 
 ## Validation
 To validate the generated data, use the Data Commons import tool (lint mode). Note that you must include the StatVar MCF files to resolve schema references:
