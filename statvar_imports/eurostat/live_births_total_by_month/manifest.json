@@ -1,7 +1,7 @@
 {
   "import_specifications": [
     {
-      "import_name": "Eurostat_Live_Births_Total_By_Month",
+      "import_name": "EuroStat_Live_Births_Total_By_Month",
       "curator_emails": [
         "support@datacommons.org"
       ],

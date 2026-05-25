@@ -1,7 +1,7 @@
 {
   "import_specifications": [
     {
-      "import_name": "Eurostat_Marriage_Indicators",
+      "import_name": "EuroStat_Marriage_Indicators",
       "curator_emails": [
         "support@datacommons.org"
       ],
