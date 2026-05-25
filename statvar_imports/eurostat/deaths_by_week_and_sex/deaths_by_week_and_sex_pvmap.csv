@@ -1,0 +1,35 @@
+key,property1,value1,property2,value2,property3,value3,property4,value4
+# Dataflow mapping
+DATAFLOW,measuredProperty,dcs:count,populationType,dcs:Person,mortalityStatus,dcs:Deceased,statType,dcs:measuredValue
+
+# --- AUTOMATED CLEANUP: Ignored Columns ---
+LAST UPDATE,#ignore,"",,,,,,
+CONF_STATUS,#ignore,"",,,,,,
+
+# --- AUTOMATED CLEANUP: Global Geo Logic & Ignores ---
+geo:DE_TOT,#ignore,"",,,,,,
+geo:EA19,#ignore,"",,,,,,
+geo:EA20,#ignore,"",,,,,,
+geo:EA21,#ignore,"",,,,,,
+geo:EEA30_2007,#ignore,"",,,,,,
+geo:EEA31,#ignore,"",,,,,,
+geo:EFTA,#ignore,"",,,,,,
+geo:EU27_2007,#ignore,"",,,,,,
+geo:EU27_2020,#ignore,"",,,,,,
+geo:EU28,#ignore,"",,,,,,
+# Frequency dimension
+freq:W,observationPeriod,P1W,,,,,,
+# Sex dimension
+sex:T,gender,"",,,,,,
+sex:M,gender,dcs:Male,,,,,,
+sex:F,gender,dcs:Female,,,,,,
+# Unit dimension
+unit:NR,unit,dcs:Number,,,,,,
+# Geography dimension
+geo,observationAbout,{Data},,,,,,
+# Time Period - Using #Regex to match every cell value
+TIME_PERIOD,#Regex,"(?P<Year>[0-9]{4})-W(?P<Week>[0-9]{2})",observationDate,{Year},measurementMethod,dcs:EurostatWeekly_Week{Week}
+# Observation Value
+OBS_VALUE,value,{Number},,,,,,
+# Observation Flag (Status)
+OBS_FLAG:p,observationStatus,dcs:Provisional,,,,,,

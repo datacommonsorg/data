@@ -1,0 +1,26 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EuroStat_Deaths_by_week_and_sex",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://ec.europa.eu/eurostat/databrowser/view/demo_r_mwk_ts/default/table?lang=en",
+      "provenance_description": "This data is a voluntary, granular collection of weekly deaths by sex, age, and region across European countries from 2000 onward, established by Eurostat to monitor mortality trends during and after the COVID-19 pandemic.",
+      "scripts": [
+        "run.sh"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "deaths_by_week_and_sex_output.tmcf",
+          "cleaned_csv": "deaths_by_week_and_sex_output.csv"
+        }
+      ],
+      "source_files": [
+        "input_files/*.csv"
+      ],
+      "cron_schedule": "5 1 1,15 * *",
+      "resource_limits": {"cpu": 4, "memory": 8, "disk":100}
+        }
+   ]
+}
