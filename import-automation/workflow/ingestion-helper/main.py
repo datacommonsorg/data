@@ -289,5 +289,23 @@ def ingestion_helper(request):
         except Exception as e:
             return (f"Aggregation failed: {str(e)}", 500)
 
+    elif action_type == 'clear_redis_cache':
+        logging.info("Action: clear_redis_cache")
+        redis_host = os.environ.get("REDIS_HOST")
+        redis_port = os.environ.get("REDIS_PORT", "6379")
+        if redis_host:
+            try:
+                import redis
+                r = redis.Redis(host=redis_host, port=int(redis_port))
+                r.flushall(asynchronous=True)
+                logging.info(f"Redis cache at {redis_host}:{redis_port} flushed successfully (async).")
+                return jsonify({'status': 'SUCCESS', 'message': 'Cache cleared'}), 200
+            except Exception as e:
+                logging.error(f"Failed to flush Redis cache: {e}")
+                return jsonify({'status': 'ERROR', 'message': str(e)}), 500
+        else:
+            logging.warning("REDIS_HOST not set, skipping cache flush.")
+            return jsonify({'status': 'SKIPPED', 'message': 'REDIS_HOST not set'}), 200
+
     else:
         return (f'Unknown actionType: {action_type}', 400)
