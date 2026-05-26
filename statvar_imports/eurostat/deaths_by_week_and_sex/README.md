@@ -21,9 +21,7 @@ The refresh is automated using the provided `run.sh` script, which handles both 
 
 ## How To Run Import
 To execute the complete import process (download and processing), run:
-```bash
 ./run.sh
-
 
 ### Script Details:
 - **Download**: Uses `curl` to fetch the latest SDMX-CSV data from Eurostat's dissemination API.

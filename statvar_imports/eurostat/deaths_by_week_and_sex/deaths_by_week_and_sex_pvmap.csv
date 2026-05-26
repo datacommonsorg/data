@@ -28,7 +28,7 @@ unit:NR,unit,dcs:Number,,,,,,
 # Geography dimension
 geo,observationAbout,{Data},,,,,,
 # Time Period - Using #Regex to match every cell value
-TIME_PERIOD,#Regex,"(?P<Year>[0-9]{4})-W(?P<Week>[0-9]{2})",observationDate,{Year},measurementMethod,dcs:EurostatWeekly_Week{Week}
+TIME_PERIOD,#Regex,"(?P<Year>[0-9]{4})-W(?P<Week>[0-9]{2})",observationDate,{Data},measurementMethod,dcs:EurostatWeekly_Week{Week}
 # Observation Value
 OBS_VALUE,value,{Number},,,,,,
 # Observation Flag (Status)
