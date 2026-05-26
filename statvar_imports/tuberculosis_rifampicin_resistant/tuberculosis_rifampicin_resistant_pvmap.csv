@@ -6,4 +6,4 @@ DISAGGR_1:Lost to follow-up,treatmentOutcome,dcs:LostToFollowUp,,,,,,
 DISAGGR_1:Not evaluated,treatmentOutcome,dcs:TreatmentNotEvaluated,,,,,,
 DISAGGR_1:Successfully treated,treatmentOutcome,dcs:SuccessfullyTreated,,,,,,
 DISAGGR_1:Treatment failed,treatmentOutcome,dcs:TreatmentFailed,,,,,,
-VALUE,value,{Number},populationType,dcs:Person,measuredProperty,dcs:count,medicalCondition,dcs:MultidrugOrRifampicinResistantTuberculosis,unit,dcs:Percent,scalingFactor,100,,
+VALUE,value,{Number},populationType,dcs:Person,measuredProperty,dcs:count,medicalCondition,dcs:MultidrugOrRifampicinResistantTuberculosis,unit,dcs:Percent,scalingFactor,100,measurementDenominator,-treatmentOutcome

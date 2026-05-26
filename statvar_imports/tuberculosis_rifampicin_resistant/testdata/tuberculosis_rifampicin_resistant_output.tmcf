@@ -1,8 +1,8 @@
-Node: E:TB_output->E0
-observationDate: C:TB_output->observationDate
-observationAbout: C:TB_output->observationAbout
-value: C:TB_output->value
-variableMeasured: C:TB_output->variableMeasured
-scalingFactor: 100
+Node: E:tuberculosis_rifampicin_resistant->E0
+observationDate: C:tuberculosis_rifampicin_resistant->observationDate
+observationAbout: C:tuberculosis_rifampicin_resistant->observationAbout
+variableMeasured: C:tuberculosis_rifampicin_resistant->variableMeasured
+value: C:tuberculosis_rifampicin_resistant->value
+unit: C:tuberculosis_rifampicin_resistant->unit
+scalingFactor: C:tuberculosis_rifampicin_resistant->scalingFactor
 typeOf: dcs:StatVarObservation
-unit: dcs:Percent
