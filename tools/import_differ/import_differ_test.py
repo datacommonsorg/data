@@ -46,32 +46,38 @@ class TestImportDiffer(unittest.TestCase):
         differ.run_differ()
 
         # Check for expected files
-        expected_files = ['import_diff.mcf', 'differ_summary.json']
+        expected_files = [
+            'nodes-added.mcf', 'nodes-deleted.mcf', 'nodes-modified.mcf',
+            'differ_summary.json'
+        ]
 
         for f in expected_files:
             file_path = os.path.join(output_location, f)
             self.assertTrue(os.path.exists(file_path),
                             f"File {f} was not generated")
 
-        # Verify content of the combined MCF file
-        with open(os.path.join(output_location, 'import_diff.mcf'), 'r') as f:
-            content = f.read().strip()
+        # Verify content of the combined MCF files
+        for f_name in [
+                'nodes-added.mcf', 'nodes-deleted.mcf', 'nodes-modified.mcf'
+        ]:
+            with open(os.path.join(output_location, f_name), 'r') as f:
+                content = f.read().strip()
 
-        with open(
-                os.path.join(module_dir, 'test', 'results', 'import_diff.mcf'),
-                'r') as f:
-            expected_content = f.read().strip()
+            with open(os.path.join(module_dir, 'test', 'results', f_name),
+                      'r') as f:
+                expected_content = f.read().strip()
 
-        # Split into individual nodes, strip whitespace, and sort to avoid ordering issues
-        actual_nodes = sorted(
-            [node.strip() for node in content.split('\n\n') if node.strip()])
-        expected_nodes = sorted([
-            node.strip()
-            for node in expected_content.split('\n\n')
-            if node.strip()
-        ])
+            # Split into individual nodes, strip whitespace, and sort to avoid ordering issues
+            actual_nodes = sorted([
+                node.strip() for node in content.split('\n\n') if node.strip()
+            ])
+            expected_nodes = sorted([
+                node.strip()
+                for node in expected_content.split('\n\n')
+                if node.strip()
+            ])
 
-        self.assertListEqual(actual_nodes, expected_nodes)
+            self.assertListEqual(actual_nodes, expected_nodes)
 
         # Verify content of the summary file
         with open(os.path.join(output_location, 'differ_summary.json'),

@@ -175,12 +175,11 @@ class TestValidationRunner(unittest.TestCase):
         os.makedirs(differ_dir, exist_ok=True)
 
         # Create a mock MCF file to generate the 'differ' DataFrame
-        mcf_path = os.path.join(differ_dir, 'import_diff.mcf')
+        mcf_path = os.path.join(differ_dir, 'nodes-deleted.mcf')
         with open(mcf_path, 'w') as f:
             for _ in range(100):
                 f.write(
-                    'Node: dcid:sv_test\nvariableMeasured: dcid:sv_test\ndiffType: DELETED\n\n'
-                )
+                    'Node: dcid:sv_test\nvariableMeasured: dcid:sv_test\n\n')
 
         differ_json = os.path.join(differ_dir, 'differ_summary.json')
         with open(differ_json, 'w') as f:
@@ -267,12 +266,11 @@ class TestValidationRunner(unittest.TestCase):
         os.makedirs(differ_dir, exist_ok=True)
 
         # Create a mock MCF file
-        mcf_path = os.path.join(differ_dir, 'import_diff.mcf')
+        mcf_path = os.path.join(differ_dir, 'nodes-deleted.mcf')
         with open(mcf_path, 'w') as f:
             for _ in range(5):
                 f.write(
-                    'Node: dcid:sv_test\nvariableMeasured: dcid:sv_test\ndiffType: DELETED\n\n'
-                )
+                    'Node: dcid:sv_test\nvariableMeasured: dcid:sv_test\n\n')
 
         differ_json = os.path.join(differ_dir, 'differ_summary.json')
         with open(differ_json, 'w') as f:

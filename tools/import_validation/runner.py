@@ -29,7 +29,7 @@ from validation_config import ValidationConfig
 from report_generator import ReportGenerator
 from validator import Validator
 from result import ValidationResult, ValidationStatus
-from util import filter_dataframe
+from validation_util import filter_dataframe
 
 _FLAGS = flags.FLAGS
 
@@ -158,31 +158,36 @@ class ValidationRunner:
         from collections import defaultdict
         stats = defaultdict(lambda: {'ADDED': 0, 'DELETED': 0, 'MODIFIED': 0})
 
-        combined_pattern = os.path.join(input_dir, 'import_diff*.mcf')
-        combined_files = glob.glob(combined_pattern)
-        for filepath in combined_files:
+        # Map filename pattern to diff type
+        file_patterns = {
+            'nodes-added.mcf': 'ADDED',
+            'nodes-deleted.mcf': 'DELETED',
+            'nodes-modified.mcf': 'MODIFIED'
+        }
+
+        for filename, diff_type in file_patterns.items():
+            filepath = os.path.join(input_dir, filename)
+            if not os.path.exists(filepath):
+                continue
             with open(filepath, 'r', encoding='utf-8') as f:
                 current_var = None
-                current_diff_type = None
                 for line in f:
                     line = line.strip()
                     if not line:  # End of node
-                        if current_var and current_diff_type:
-                            stats[current_var][current_diff_type] += 1
+                        if current_var:
+                            stats[current_var][diff_type] += 1
                         current_var = None
-                        current_diff_type = None
                         continue
                     if line.startswith('variableMeasured:'):
                         parts = line.split(':', 1)
                         if len(parts) > 1:
                             current_var = parts[1].strip().strip('"\'')
-                    elif line.startswith('diffType:'):
-                        parts = line.split(':', 1)
-                        if len(parts) > 1:
-                            current_diff_type = parts[1].strip()
+                            # Strip dcid: prefix if present to match stats summary
+                            if current_var.startswith('dcid:'):
+                                current_var = current_var[len('dcid:'):]
                 # Catch last node if file doesn't end with newline
-                if current_var and current_diff_type:
-                    stats[current_var][current_diff_type] += 1
+                if current_var:
+                    stats[current_var][diff_type] += 1
 
         if not stats:
             return pd.DataFrame()

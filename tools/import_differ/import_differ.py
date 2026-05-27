@@ -37,6 +37,11 @@ import differ_utils
 
 _DATAFLOW_TEMPLATE_URL = 'gs://datcom-templates/templates/flex/differ.json'
 
+_GROUPBY_KEYS = [
+    'variableMeasured', 'observationAbout', 'observationDate',
+    'observationPeriod', 'measurementMethod', 'unit', 'scalingFactor'
+]
+
 Diff = Enum('Diff', [
     ('ADDED', 1),
     ('DELETED', 2),
@@ -72,6 +77,14 @@ flags.DEFINE_string('job_name', 'differ', 'Name of the differ job.')
 flags.DEFINE_string('project_id', '', 'GCP project id for the dataflow job.')
 
 
+def val_str(value) -> str:
+    if isinstance(value, list):
+        return ",".join([val_str(v) for v in value])
+    if value and isinstance(value, str) and " " in value and value[0].isalpha():
+        return '"' + value + '"'
+    return str(value)
+
+
 class ImportDiffer:
     """
   Utility to generate a diff of two versions of a dataset for import analysis. 
@@ -79,6 +92,11 @@ class ImportDiffer:
   Usage:
   $ python import_differ.py --current_data=<path> --previous_data=<path> --output_location=<path> \
     --file_format=<mcf/tfrecord> --runner_mode=<native/direct/cloud> --project_id=<id> --job_name=<name> 
+
+  Runner Modes:
+  - native: Runs the differ using native Python (Pandas) locally.
+  - direct: Runs the differ using the Apache Beam DirectRunner (Java jar) locally.
+  - cloud: Runs the differ as a Dataflow job in GCP.
 
   Summary output generated is of the form below showing 
   counts of differences for each variable.  
@@ -90,7 +108,9 @@ class ImportDiffer:
   3   dcid:var4       0      2       0
 
   Detailed diff output is written to files for further analysis.
-  - import-diff.mcf: combined MCF diff for observations and schema
+  - nodes-added.mcf: MCF nodes added in the current version
+  - nodes-deleted.mcf: MCF nodes deleted in the current version
+  - nodes-modified.mcf: MCF nodes modified in the current version
   - differ_summary.json: consolidated diff statistics 
 
   """
@@ -139,7 +159,7 @@ class ImportDiffer:
         elif previous_df.empty and current_df.empty:
             column_list = [
                 Column.key_combined.name, Column.value_combined.name + '_x',
-                Column.value_combined.name + '_y' + Column.diff_type.name
+                Column.value_combined.name + '_y', Column.diff_type.name
             ]
             return pd.DataFrame(columns=column_list)
         result = pd.merge(previous_df,
@@ -160,7 +180,7 @@ class ImportDiffer:
         if result.empty:
             column_list = [
                 Column.key_combined.name, Column.value_combined.name + '_x',
-                Column.value_combined.name + '_y' + Column.diff_type.name
+                Column.value_combined.name + '_y', Column.diff_type.name
             ]
             return pd.DataFrame(columns=column_list)
 
@@ -179,13 +199,8 @@ class ImportDiffer:
             if 'StatVarObservation' in node.get(Column.typeOf.name):
                 values_to_combine = []
                 keys_to_combine = []
-                groupby_keys = [
-                    'variableMeasured', 'observationAbout', 'observationDate',
-                    'observationPeriod', 'measurementMethod', 'unit',
-                    'scalingFactor'
-                ]
                 value_keys = [Column.value.name]
-                for key in groupby_keys:
+                for key in _GROUPBY_KEYS:
                     keys_to_combine.append(str(node.get(key, "")))
                 for key in value_keys:
                     values_to_combine.append(str(node.get(key, "")))
@@ -211,7 +226,8 @@ class ImportDiffer:
                 node.pop('Node', None)
                 value_keys = sorted(node.keys())
                 for key in value_keys:
-                    values_to_combine.append(key + ":" + str(node.get(key, "")))
+                    values_to_combine.append(key + ":" +
+                                             val_str(node.get(key, "")))
                 key_combined = ";".join(keys_to_combine)
                 value_combined = ";".join(values_to_combine)
                 schema_list.append({
@@ -224,16 +240,19 @@ class ImportDiffer:
         obs_df = pd.DataFrame(obs_list)
         return obs_df, schema_df
 
-    def convert_diff_to_mcf_nodes(self, diff_df: pd.DataFrame,
-                                  is_obs: bool) -> list:
+    def convert_diff_to_mcf_nodes(self,
+                                  diff_df: pd.DataFrame,
+                                  is_obs: bool,
+                                  diff_type: str = None) -> list:
         """
         Converts the diff dataframe back to MCF format nodes.
         """
         all_nodes = []
-        for diff_type in [
-                Diff.ADDED.name, Diff.DELETED.name, Diff.MODIFIED.name
-        ]:
-            df_type = diff_df[diff_df[Column.diff_type.name] == diff_type]
+        diff_types = [diff_type] if diff_type else [
+            Diff.ADDED.name, Diff.DELETED.name, Diff.MODIFIED.name
+        ]
+        for d_type in diff_types:
+            df_type = diff_df[diff_df[Column.diff_type.name] == d_type]
             if df_type.empty:
                 continue
 
@@ -242,7 +261,7 @@ class ImportDiffer:
                 key_combined = str(row[Column.key_combined.name])
 
                 # Determine which column to use for values and node IDs
-                suffix = '_x' if diff_type == Diff.DELETED.name else '_y'
+                suffix = '_x' if d_type == Diff.DELETED.name else '_y'
 
                 # Helper to get value from row, handles cases with or without suffix
                 def get_val(base_name):
@@ -262,13 +281,8 @@ class ImportDiffer:
                         node['dcid'] = dcid_id
 
                     # Reconstruct observation node
-                    groupby_keys = [
-                        'variableMeasured', 'observationAbout',
-                        'observationDate', 'observationPeriod',
-                        'measurementMethod', 'unit', 'scalingFactor'
-                    ]
                     keys = key_combined.split(';')
-                    for i, key in enumerate(groupby_keys):
+                    for i, key in enumerate(_GROUPBY_KEYS):
                         if i < len(keys) and keys[i] and keys[i] != "nan":
                             node[key] = keys[i]
 
@@ -290,7 +304,6 @@ class ImportDiffer:
                             k, v = kv.split(':', 1)
                             node[k] = v
 
-                node['diffType'] = diff_type
                 all_nodes.append(node)
         return all_nodes
 
@@ -422,12 +435,19 @@ class ImportDiffer:
                                              current_df_schema)
 
             logging.info('Writing diff to MCF files...')
-            obs_nodes = self.convert_diff_to_mcf_nodes(obs_diff, True)
-            schema_nodes = self.convert_diff_to_mcf_nodes(schema_diff, False)
-            all_nodes = obs_nodes + schema_nodes
-            if all_nodes:
-                differ_utils.write_mcf_nodes(all_nodes, self.output_path,
-                                             'import_diff.mcf', tmp_path)
+            for d_type, filename in [
+                (Diff.ADDED.name, 'nodes-added.mcf'),
+                (Diff.DELETED.name, 'nodes-deleted.mcf'),
+                (Diff.MODIFIED.name, 'nodes-modified.mcf'),
+            ]:
+                obs_nodes = self.convert_diff_to_mcf_nodes(
+                    obs_diff, True, d_type)
+                schema_nodes = self.convert_diff_to_mcf_nodes(
+                    schema_diff, False, d_type)
+                type_nodes = obs_nodes + schema_nodes
+                if type_nodes:
+                    differ_utils.write_mcf_nodes(type_nodes, self.output_path,
+                                                 filename, tmp_path)
 
             obs_stats = obs_diff[Column.diff_type.name].value_counts().to_dict()
             schema_stats = schema_diff[

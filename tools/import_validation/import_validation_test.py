@@ -45,7 +45,8 @@ class ImportValidationTest(unittest.TestCase):
                   'w') as f:
             json.dump({}, f)
         # Create an empty mcf file
-        with open(os.path.join(self.differ_path, 'import_diff.mcf'), 'w') as f:
+        with open(os.path.join(self.differ_path, 'nodes-modified.mcf'),
+                  'w') as f:
             f.write("")
         # Create a dummy stats file, as it is often required
         pd.DataFrame({
@@ -76,7 +77,7 @@ class ImportValidationTest(unittest.TestCase):
 
         # 2. Run the script
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
@@ -113,7 +114,7 @@ class ImportValidationTest(unittest.TestCase):
 
         # 2. Run the script
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
@@ -145,7 +146,7 @@ class ImportValidationTest(unittest.TestCase):
 
         # 2. Run the script without the required --stats_summary flag
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--differ_output={self.differ_path}',
             f'--validation_output={self.output_path}'
@@ -186,7 +187,7 @@ class ImportValidationTest(unittest.TestCase):
 
         # 3. Run the script
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
@@ -225,14 +226,13 @@ class ImportValidationTest(unittest.TestCase):
         }).to_csv(self.stats_path, index=False)
 
         # Write to the differ_output directory to ensure differ_df is populated
-        with open(os.path.join(self.differ_path, 'import_diff_test.mcf'),
+        with open(os.path.join(self.differ_path, 'nodes-modified.mcf'),
                   'w') as f:
-            f.write(
-                "Node: dcid:sv1\nvariableMeasured: sv1\ndiffType: MODIFIED\n\n")
+            f.write("Node: dcid:sv1\nvariableMeasured: sv1\n\n")
 
         # 3. Run the script
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
@@ -276,7 +276,7 @@ class ImportValidationTest(unittest.TestCase):
 
         # 3. Run the script
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
@@ -316,7 +316,7 @@ class ImportValidationTest(unittest.TestCase):
 
         # 2. Run the script without the --differ_output flag
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.runner',
+            sys.executable, '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--validation_output={self.output_path}'
