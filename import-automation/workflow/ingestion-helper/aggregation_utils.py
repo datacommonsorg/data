@@ -66,8 +66,9 @@ class BigQueryExecutor:
 
 class LinkedEdgeGenerator:
     """Generates and ingests linked relationship edges (e.g., transitive closures) into Spanner for faster lookup."""
-    def __init__(self, executor: BigQueryExecutor) -> None:
+    def __init__(self, executor: BigQueryExecutor, is_base_dc: bool = True) -> None:
         self.executor = executor
+        self.is_base_dc = is_base_dc
 
     def run_all(self, import_names: List[str] = None) -> None:
         """Runs all global aggregations in sequence."""
@@ -348,8 +349,9 @@ class LinkedEdgeGenerator:
 
 class ProvenanceSummaryGenerator:
     """Contains the SQL queries to generate ProvenanceSummary in the Cache table."""
-    def __init__(self, executor: BigQueryExecutor) -> None:
+    def __init__(self, executor: BigQueryExecutor, is_base_dc: bool = True) -> None:
         self.executor = executor
+        self.is_base_dc = is_base_dc
 
     def run_all(self, import_names: List[str]) -> None:
         """Runs all provenance summary generation in sequence."""
@@ -564,16 +566,17 @@ class AggregationUtils:
                  project_id: str,
                  instance_id: str,
                  database_id: str,
-                 location: Optional[str] = None) -> None:
+                 location: Optional[str] = None,
+                 is_base_dc: bool = True) -> None:
         self.executor = BigQueryExecutor(
             connection_id=connection_id,
             project_id=project_id,
             instance_id=instance_id,
             database_id=database_id,
-            location=location
+            location=location,
         )
-        self.linked_edge_generator = LinkedEdgeGenerator(self.executor)
-        self.provenance_summary_generator = ProvenanceSummaryGenerator(self.executor)
+        self.linked_edge_generator = LinkedEdgeGenerator(self.executor, is_base_dc)
+        self.provenance_summary_generator = ProvenanceSummaryGenerator(self.executor, is_base_dc)
 
     def run_aggregation(self, import_list: List[Dict[str, Any]]) -> bool:
         """
