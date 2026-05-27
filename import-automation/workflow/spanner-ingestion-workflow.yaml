@@ -66,6 +66,7 @@ main:
                 call: http.post
                 args:
                   url: ${helper_url}
+                  timeout: 1800
                   auth:
                     type: OIDC
                   body:
