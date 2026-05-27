@@ -41,10 +41,6 @@ flags.DEFINE_bool(
 flags.DEFINE_list(
     'node_types', ['StatisticalVariable', 'Topic'],
     'Node types to generate embeddings for')
-flags.DEFINE_bool(
-    'is_base_dc',
-    os.environ.get('IS_BASE_DC', 'true').lower() == 'true',
-    'Is base DC')
 
 if not FLAGS.is_parsed():
     FLAGS(['ingestion_helper'])
@@ -279,7 +275,6 @@ def ingestion_helper(request):
             instance_id=FLAGS.spanner_instance_id,
             database_id=FLAGS.spanner_graph_database_id,
             location=FLAGS.location,
-            is_base_dc=FLAGS.is_base_dc,
         )
         try:
             if aggregation.run_aggregation(import_list):

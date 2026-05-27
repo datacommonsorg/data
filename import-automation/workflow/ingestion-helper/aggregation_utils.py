@@ -66,9 +66,8 @@ class BigQueryExecutor:
 
 class LinkedEdgeGenerator:
     """Generates and ingests linked relationship edges (e.g., transitive closures) into Spanner for faster lookup."""
-    def __init__(self, executor: BigQueryExecutor, is_base_dc: bool = True) -> None:
+    def __init__(self, executor: BigQueryExecutor) -> None:
         self.executor = executor
-        self.is_base_dc = is_base_dc
 
     def run_all(self, import_names: List[str] = None) -> None:
         """Runs all global aggregations in sequence."""
@@ -90,12 +89,8 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        # Escape single quotes to prevent SQL injection
-        safe_names = [name.replace("'", "''") for name in import_names]
-        prefix = "dc/base/" if self.is_base_dc else ""
-        provenances = [f"'{prefix}{name}'" for name in safe_names]
+        provenances = [f"'dc/base/{name}'" for name in import_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
-        gen_graphs_prov = 'dc/base/GeneratedGraphs' if self.is_base_dc else 'GeneratedGraphs'
         
         query = f"""
         -- Pull base edges needed for containedInPlace aggregation
@@ -142,7 +137,7 @@ class LinkedEdgeGenerator:
             subject_id,
             'linkedContainedInPlace' as predicate,
             ancestor_place as object_id,
-            '{gen_graphs_prov}' as provenance
+            'dc/base/GeneratedGraphs' as provenance
           FROM
             Ancestors
         ),
@@ -179,12 +174,8 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        # Escape single quotes to prevent SQL injection
-        safe_names = [name.replace("'", "''") for name in import_names]
-        prefix = "dc/base/" if self.is_base_dc else ""
-        provenances = [f"'{prefix}{name}'" for name in safe_names]
+        provenances = [f"'dc/base/{name}'" for name in import_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
-        gen_graphs_prov = 'dc/base/GeneratedGraphs' if self.is_base_dc else 'GeneratedGraphs'
 
         query = f"""
         -- Pull base edges needed for memberOf aggregation
@@ -234,7 +225,7 @@ class LinkedEdgeGenerator:
             subject_id,
             'linkedMemberOf' as predicate,
             ancestor as object_id,
-            '{gen_graphs_prov}' as provenance
+            'dc/base/GeneratedGraphs' as provenance
           FROM
             Ancestors
         ),
@@ -271,12 +262,8 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        # Escape single quotes to prevent SQL injection
-        safe_names = [name.replace("'", "''") for name in import_names]
-        prefix = "dc/base/" if self.is_base_dc else ""
-        provenances = [f"'{prefix}{name}'" for name in safe_names]
+        provenances = [f"'dc/base/{name}'" for name in import_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
-        gen_graphs_prov = 'dc/base/GeneratedGraphs' if self.is_base_dc else 'GeneratedGraphs'
 
         query = f"""
         -- Pull base edges needed for member aggregation
@@ -324,7 +311,7 @@ class LinkedEdgeGenerator:
             descendant as subject_id,
             'linkedMember' as predicate,
             subject_id as object_id,
-            '{gen_graphs_prov}' as provenance
+            'dc/base/GeneratedGraphs' as provenance
           FROM
             Descendants
           WHERE subject_id LIKE 'dc/topic%'
@@ -361,9 +348,8 @@ class LinkedEdgeGenerator:
 
 class ProvenanceSummaryGenerator:
     """Contains the SQL queries to generate ProvenanceSummary in the Cache table."""
-    def __init__(self, executor: BigQueryExecutor, is_base_dc: bool = True) -> None:
+    def __init__(self, executor: BigQueryExecutor) -> None:
         self.executor = executor
-        self.is_base_dc = is_base_dc
 
     def run_all(self, import_names: List[str]) -> None:
         """Runs all provenance summary generation in sequence."""
@@ -382,11 +368,8 @@ class ProvenanceSummaryGenerator:
         dest = self.executor.get_spanner_destination_uri()
         connection_id = self.executor.connection_id
         
-        # Escape single quotes to prevent SQL injection
-        safe_names = [name.replace("'", "''") for name in import_names]
         # Format import names for the SQL IN clause
-        imports_str = ", ".join([f"'{name}'" for name in safe_names])
-        provenance_dcid_expr = "CONCAT('dc/base/', raw.import_name)" if self.is_base_dc else "raw.import_name"
+        imports_str = ", ".join([f"'{name}'" for name in import_names])
         
         query = f"""
         -- Step 1: Fetch Observation rows for the specific import
@@ -450,7 +433,7 @@ class ProvenanceSummaryGenerator:
           raw.is_dc_aggregate,
           JSON_VALUE(v, '$.key') as date_val,
           SAFE_CAST(JSON_VALUE(v, '$.value') AS FLOAT64) as value_num,
-          {provenance_dcid_expr} as provenance_dcid,
+          CONCAT('dc/base/', raw.import_name) as provenance_dcid,
           nodes.name as place_name,
           edges.place_type
         FROM `temp_obs_raw` raw
@@ -581,8 +564,7 @@ class AggregationUtils:
                  project_id: str,
                  instance_id: str,
                  database_id: str,
-                 location: Optional[str] = None,
-                 is_base_dc: bool = True) -> None:
+                 location: Optional[str] = None) -> None:
         self.executor = BigQueryExecutor(
             connection_id=connection_id,
             project_id=project_id,
@@ -590,8 +572,8 @@ class AggregationUtils:
             database_id=database_id,
             location=location
         )
-        self.linked_edge_generator = LinkedEdgeGenerator(self.executor, is_base_dc)
-        self.provenance_summary_generator = ProvenanceSummaryGenerator(self.executor, is_base_dc)
+        self.linked_edge_generator = LinkedEdgeGenerator(self.executor)
+        self.provenance_summary_generator = ProvenanceSummaryGenerator(self.executor)
 
     def run_aggregation(self, import_list: List[Dict[str, Any]]) -> bool:
         """
