@@ -2,10 +2,10 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_deleted_records_count",
-            "validator": "DELETED_RECORDS_COUNT",
+            "rule_id": "check_deleted_records_percent",
+            "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 1230
+                "threshold": 0.1
             }
         }
     ]
