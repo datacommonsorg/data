@@ -44,7 +44,7 @@ def get_latest_lock_timestamp(database):
     return None
 
 def get_updated_nodes(database, timestamp, node_types):
-    """Gets subject_ids and names from Node table where update_timestamp > timestamp.
+    """Gets subject_ids and names from Node table where last_update_timestamp > timestamp.
     Yields results to avoid loading all into memory.
     
     Args:
@@ -55,7 +55,7 @@ def get_updated_nodes(database, timestamp, node_types):
     Yields:
         Dictionaries containing subject_id and name.
     """
-    timestamp_condition = "update_timestamp > @timestamp" if timestamp else "TRUE"
+    timestamp_condition = "last_update_timestamp > @timestamp" if timestamp else "TRUE"
     
     updated_node_sql = f"""
         SELECT subject_id, name, types FROM Node 

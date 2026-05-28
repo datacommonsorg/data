@@ -24,8 +24,7 @@ CREATE VECTOR INDEX NodeEmbeddingIndex
 ON NodeEmbedding(embeddings)
 WHERE embeddings IS NOT NULL
 OPTIONS (
-  distance_type = 'COSINE',
-  flat_index = true
+  distance_type = 'COSINE'
 );
 
 CREATE MODEL NodeEmbeddingModel
