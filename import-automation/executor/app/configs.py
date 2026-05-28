@@ -153,6 +153,8 @@ class ExecutorConfig:
     validation_config_file: str = 'tools/import_validation/validation_config.json'
     # Latest import version (overwrite)
     import_version_override: str = ''
+    # Override cron schedule in import spec.
+    cron_schedule_override: str = ''
     # Relative path to version folder for graph files.
     graph_data_path: str = '/*/*/*.mcf'
     # Maximum time venv creation can take in seconds.
@@ -167,6 +169,8 @@ class ExecutorConfig:
     email_token: str = ''
     # Email alerts are disabled by default. Cloud Run jobs use GCP alerting.
     disable_email_notifications: bool = True
+    # Allow skipping ingestion for no data change.
+    enable_skip_status: bool = True
     # Skip uploading the data to GCS (for local testing).
     skip_gcs_upload: bool = False
     # Skip uploading input files to GCS.

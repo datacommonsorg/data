@@ -1055,7 +1055,11 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
 
     logging.info(f"No of files to be processed {total_files_to_process}")
     logging.info(f"No of files processed {processed_count}")
-    if processed_count >= total_files_to_process & total_files_to_process > 0:
+    if processed_count > 0:
+        if processed_count < total_files_to_process:
+            logging.warning(
+                f"Mismatch between files expected ({total_files_to_process}) and processed ({processed_count})"
+            )
         final_df["Year"] = final_df["Year"].astype("int")
         final_df = final_df.sort_values(by=["Location", "Year"])
         final_df = final_df.drop_duplicates(["Year", "Location"])
@@ -1065,9 +1069,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
         _generate_mcf(mcf_file_path)
         _generate_tmcf(tmcf_file_path)
     else:
-        logging.fatal(
-            "The script has been terminated due to a mismatch between the number of files expected to be processed and the actual number processed"
-        )
+        logging.fatal("No files were successfully processed.")
 
 
 def add_future_year_urls():

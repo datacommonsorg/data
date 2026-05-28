@@ -138,6 +138,7 @@ The following validations are currently supported:
 | Validator Name            | Description                                                              | Required Data     | `params` Configuration                                 |
 | ------------------------- | ------------------------------------------------------------------------ | ----------------- | ------------------------------------------------------ |
 | `SQL_VALIDATOR`           | Runs a user-defined SQL query to perform complex validations.            | `stats`, `differ` | `query` (string), `condition` (string)                 |
+| `EMPTY_IMPORT_CHECK`      | Checks if the import is empty (no observations and no schema).           | `lint`          | None                                                   |
 | `MAX_DATE_LATEST`         | Checks that the latest date in the data is from the current year.        | `stats`           | None                                                   |
 | `MAX_DATE_CONSISTENT`     | Checks that the latest date is the same for all StatVars.                | `stats`           | None                                                   |
 | `MISSING_REFS_COUNT`           | Checks that the total number of missing references is within a threshold.    | `lint`          | `threshold` (integer, defaults to 0)                   |
