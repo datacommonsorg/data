@@ -29,6 +29,7 @@ dependencies = [
     "google-auth",
     "absl-py",
     "google-cloud-bigquery",
+    "redis",
 ]
 
 [tool.hatch.build.targets.wheel]
