@@ -13,7 +13,8 @@
 -- limitations under the License.
 
 CREATE PROTO BUNDLE (
-  `org.datacommons.Observations`
+  `org.datacommons.Observations`,
+  `org.datacommons.Observations.ValuesEntry`
 );
 
 CREATE TABLE Node (
@@ -109,3 +110,16 @@ CREATE PROPERTY GRAPH DCGraph
         provenance,
         subject_id)
   );
+
+CREATE TABLE Cache (
+  type STRING(1024) NOT NULL,
+  key STRING(1024) NOT NULL,
+  provenance STRING(1024) NOT NULL,
+  value JSON,
+) PRIMARY KEY(type, key, provenance);
+
+CREATE INDEX InEdge ON Edge(object_id, predicate, subject_id, provenance) OPTIONS (
+  columnar_policy = 'enabled'
+);
+
+CREATE INDEX VariableMeasuredObservationAbout ON Observation(variable_measured, observation_about);
