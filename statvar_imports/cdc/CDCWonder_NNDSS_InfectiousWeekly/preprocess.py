@@ -24,23 +24,51 @@ NEW_FILE = os.path.join(INPUT_DIR, "NNDSS_Weekly_Data.csv")
 SOURCE_URL = "https://data.cdc.gov/api/views/x9gk-5huc/rows.csv?accessType=DOWNLOAD&api_foundry=true"
 
 def _start_date_of_year(year: int) -> datetime.date:
+    """Return the first day of the first MMWR week for a given year.
+
+    The first MMWR week starts on the Sunday of the week containing Jan 4.
+    """
     jan_one = datetime.date(year, 1, 1)
     diff = 7 * (jan_one.isoweekday() > 3) - jan_one.isoweekday()
     return jan_one + datetime.timedelta(days=diff)
 
 def get_mmwr_week_start_date(year, week) -> datetime.date:
+    """Compute the start date for a given MMWR year and week.
+
+    Args:
+        year: The MMWR year value from the CDC dataset.
+        week: The MMWR week value from the CDC dataset.
+
+    Returns:
+        A datetime.date object for the first day of the specified week, or None if invalid.
+    """
+    try:
+        year = int(year)
+        week = int(week)
+    except (ValueError, TypeError):
+        return None
+
+    if not (1 <= week <= 53):
+        logging.warning(f"Invalid MMWR WEEK found: {week}. Skipping date calculation.")
+        return None
+
     day_one = _start_date_of_year(year)
     diff = 7 * (week - 1)
     return day_one + datetime.timedelta(days=diff)
 
 def preprocess_data(filepath: str):
+    """Read a CDC CSV in chunks, add observation dates, and save safely.
+
+    Args:
+        filepath: Path to the downloaded CDC CSV file.
+    """
     temp_filepath = filepath + ".tmp"
     chunk_size = 100000 
     first_chunk = True
     chunk_count = 0
 
     try:
-        print(f"DEBUG: Opening pandas reader on {filepath}...")
+        logging.info(f"Opening pandas reader on {filepath}...")
         
         # Added safety flags: low_memory=False and on_bad_lines='skip'
         # to prevent C-level SIGABRT crashes on bad rows.
@@ -48,7 +76,7 @@ def preprocess_data(filepath: str):
         
         for chunk in reader:
             chunk_count += 1
-            print(f"DEBUG: Processing chunk {chunk_count}...")
+            logging.info(f"Processing chunk {chunk_count}...")
             
             if first_chunk:
                 required_cols = ['Current MMWR Year', 'MMWR WEEK']
@@ -61,27 +89,28 @@ def preprocess_data(filepath: str):
             )
 
             cols = list(chunk.columns)
+            cols.remove('observationDate')
             mmwr_week_index = cols.index('MMWR WEEK')
-            observation_date_col = cols.pop()  
-            cols.insert(mmwr_week_index + 1, observation_date_col)
+            cols.insert(mmwr_week_index + 1, 'observationDate')
             chunk = chunk[cols]
             
             chunk.to_csv(temp_filepath, mode='a' if not first_chunk else 'w', 
                          header=first_chunk, index=False)
             first_chunk = False
 
-        print("DEBUG: All chunks processed. Moving temp file...")
+        logging.info("All chunks processed. Moving temp file...")
         shutil.move(temp_filepath, filepath)
-        print(f"Success: File '{filepath}' updated safely.")
+        logging.info(f"Success: File '{filepath}' updated safely.")
         
     except Exception as e:
         if os.path.exists(temp_filepath): os.remove(temp_filepath)
-        print(f"CRASH: Error during Pandas processing: {e}")
+        logging.error(f"Error during Pandas processing: {e}")
         logging.fatal(f"An unexpected error occurred: {e}")
         raise RuntimeError(f"Import job failed An unexpected error occurred: {e}")
 
 def main(argv):
-    print("DEBUG: Starting download phase...")
+    """Download CDC data, validate it, preprocess it, and rename the output."""
+    logging.info("Starting download phase...")
     try:
         download_file(url=SOURCE_URL,
                   output_folder=INPUT_DIR,
@@ -90,39 +119,39 @@ def main(argv):
                   tries= 3,
                   delay= 5,
                   backoff= 2)
-        print("DEBUG: Download function completed.")
+        logging.info("Download function completed.")
     except Exception as e:
-        print(f"CRASH: Failed during download: {e}")
+        logging.error(f"Failed during download: {e}")
         logging.fatal(f"Failed to download NNDSS weekly data file,{e}")
         raise RuntimeError(f"Failed to download NNDSS weekly data file,{e}")
     
     # Check if file actually downloaded and check its size
     if not os.path.exists(INPUT_FILE):
-        print("CRASH: The file 'rows.csv' was never downloaded.")
+        logging.fatal("The file 'rows.csv' was never downloaded.")
         sys.exit(1)
         
     file_size_mb = os.path.getsize(INPUT_FILE) / (1024 * 1024)
-    print(f"DEBUG: Downloaded file size is {file_size_mb:.2f} MB.")
+    logging.info(f"Downloaded file size is {file_size_mb:.2f} MB.")
     
     # Prevent Pandas from processing tiny error files
     if file_size_mb < 0.1:
-        print("CRASH: File is suspiciously small! CDC likely returned an HTML error page.")
+        logging.error("File is suspiciously small! CDC likely returned an HTML error page.")
         with open(INPUT_FILE, 'r') as f:
-            print(f"Preview of bad file:\n{f.read(500)}")
+            logging.error(f"Preview of bad file:\n{f.read(500)}")
         sys.exit(1)
 
-    print("DEBUG: Handing off to Pandas chunker...")
+    logging.info("Handing off to Pandas chunker...")
     preprocess_data(INPUT_FILE)
     
-    print("DEBUG: Renaming final file...")
+    logging.info("Renaming final file...")
     try:
         if os.path.exists(INPUT_FILE):
             if os.path.exists(NEW_FILE):
                 os.remove(NEW_FILE)
             os.rename(INPUT_FILE, NEW_FILE)
-            print("DEBUG: Successfully renamed file.")
+            logging.info("Successfully renamed file.")
     except Exception as e:
-        print(f"CRASH: Failed to rename file: {e}")
+        logging.error(f"Failed to rename file: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":
