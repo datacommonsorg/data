@@ -18,10 +18,7 @@ def download_tb_rr_mdr_data():
     
     logging.info("1. Fetching clean percentage data from WHO API...")
     api_response = requests.get(api_url, params=params, timeout=30)
-    
-    if api_response.status_code != 200:
-        logging.error(f"Failed to fetch API data. HTTP {api_response.status_code}")
-        return
+    api_response.raise_for_status()
         
     # Load the clean API data into a pandas table
     api_df = pd.read_csv(io.StringIO(api_response.text))
@@ -30,9 +27,7 @@ def download_tb_rr_mdr_data():
     logging.info("2. Fetching country iso3 codes from WHO master database...")
     master_url = "https://extranet.who.int/tme/generateCSV.asp?ds=notifications"
     master_response = requests.get(master_url, timeout=60)
-    if master_response.status_code != 200:
-        logging.error(f"Failed to fetch master data. HTTP {master_response.status_code}")
-        return
+    master_response.raise_for_status()
         
     # We only pull the 'country' (for matching) and 'iso3' columns
     geo_columns = ['country', 'iso3']

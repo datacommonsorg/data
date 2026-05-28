@@ -13,8 +13,8 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output/tuberculosis_rifampicin_resistant_output.tmcf",
-                    "cleaned_csv": "output/tuberculosis_rifampicin_resistant_output.csv"
+                    "template_mcf": "output_files/tuberculosis_rifampicin_resistant_output.tmcf",
+                    "cleaned_csv": "output_files/tuberculosis_rifampicin_resistant_output.csv"
                 }
             ],
             "source_files": [
