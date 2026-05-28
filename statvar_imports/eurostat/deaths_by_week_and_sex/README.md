@@ -31,7 +31,7 @@ To execute the complete import process (download and processing), run:
 - `run.sh`: Main execution script for download and processing.
 - `deaths_by_week_and_sex_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
 - `deaths_by_week_and_sex_metadata.csv`: Configuration parameters for the processor.
-- `places_resolved.csv`: Mapping of place codes to Data Commons DCIDs.
+- `places_resolved_runtime.csv`: Mapping of place codes to Data Commons DCIDs.
 - `deaths_by_week_and_sex_output.csv`: Processed statistical observations.
 - `deaths_by_week_and_sex_output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
 

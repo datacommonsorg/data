@@ -31,7 +31,7 @@ To execute the complete import process (download and processing), run:
 - `run.sh`: Main execution script for download and processing.
 - `divorce_indicators_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
 - `divorce_indicators_metadata.csv`: Configuration parameters for the processor.
-- `places_resolved.csv`: Mapping of place codes to Data Commons DCIDs.
+- `places_resolved_runtime.csv`: Mapping of place codes to Data Commons DCIDs.
 - `divorce_indicators_output.csv`: Processed statistical observations.
 - `divorce_indicators_output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
 

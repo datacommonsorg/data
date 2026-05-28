@@ -6,30 +6,35 @@ DATAFLOW,measuredProperty,dcs:count,populationType,dcs:Person,mortalityStatus,dc
 LAST UPDATE,#ignore,"",,,,,,
 CONF_STATUS,#ignore,"",,,,,,
 
-# --- AUTOMATED CLEANUP: Global Geo Logic & Ignores ---
-geo:DE_TOT,#ignore,"",,,,,,
-geo:EA19,#ignore,"",,,,,,
-geo:EA20,#ignore,"",,,,,,
-geo:EA21,#ignore,"",,,,,,
-geo:EEA30_2007,#ignore,"",,,,,,
-geo:EEA31,#ignore,"",,,,,,
-geo:EFTA,#ignore,"",,,,,,
-geo:EU27_2007,#ignore,"",,,,,,
-geo:EU27_2020,#ignore,"",,,,,,
-geo:EU28,#ignore,"",,,,,,
+
 # Frequency dimension
 freq:W,observationPeriod,P1W,,,,,,
+
 # Sex dimension
 sex:T,gender,"",,,,,,
 sex:M,gender,dcs:Male,,,,,,
 sex:F,gender,dcs:Female,,,,,,
+
 # Unit dimension
 unit:NR,unit,dcs:Number,,,,,,
+
 # Geography dimension
 geo,observationAbout,{Data},,,,,,
+
 # Time Period - Using #Regex to match every cell value
-TIME_PERIOD,#Regex,"(?P<Year>[0-9]{4})-W(?P<Week>[0-9]{2})",observationDate,{Data},measurementMethod,dcs:EurostatWeekly_Week{Week}
+# Extract Year for the strict date checker, and map the raw week string to measurementMethod
+TIME_PERIOD,#Regex,"(?P<Year>[0-9]{4})-W(?P<Week>[0-9]{2})",observationDate,{Year},measurementMethod,dcs:EurostatWeekly_{Week}
+
 # Observation Value
 OBS_VALUE,value,{Number},,,,,,
-# Observation Flag (Status)
-OBS_FLAG:p,observationStatus,dcs:Provisional,,,,,,
+
+# Observation Flags (Status) - Mapped to measurementMethod
+OBS_FLAG:p,MeasurementQualifier,dcs:EurostatProvisionalValue,,,,,,
+OBS_FLAG:e,MeasurementQualifier,dcs:EurostatEstimatedValue,,,,,,
+OBS_FLAG:b,MeasurementQualifier,dcs:EurostatBreakInTimeSeries,,,,,,
+OBS_FLAG:f,MeasurementQualifier,dcs:EurostatForecastValue,,,,,,
+OBS_FLAG:n,MeasurementQualifier,dcs:EurostatNotSignificantValue,,,,,,
+OBS_FLAG:u,MeasurementQualifier,dcs:EurostatLowReliabilityValue,,,,,,
+
+# Missing values
+OBS_FLAG:M,MissingValue,'',,,,,,

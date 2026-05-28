@@ -1,24 +1,28 @@
 key,property1,value1,property2,value2,property3,value3,property4,value4,property5,value5
 indic_de:DIV,populationType,dcs:DivorceEvent,measuredProperty,dcs:count,statType,dcs:measuredValue,,,
-indic_de:DIVMARPCT,populationType,dcs:DivorceEvent,measuredProperty,dcs:count,measurementDenominator,dcid:Count_MarriageEvent,scalingFactor,100
-indic_de:GDIVRT,populationType,dcs:Person,measuredProperty,dcs:divorceRate,statType,dcs:measuredValue,,,
+indic_de:DIVMARPCT,populationType,dcs:DivorceEvent,measuredProperty,dcs:count,denominatorPopulationType,dcs:MarriageEvent,denominatorProp,dcs:count,scalingFactor,100
+indic_de:GDIVRT,populationType,dcs:Person,measuredProperty,dcs:divorceRate,statType,dcs:measuredValue,scalingFactor,1000,,
 freq:A,observationPeriod,P1Y,,,,,,,
-DATAFLOW:ESTAT:DEMO_NDIVIND(1.0),measurementMethod,dcs:Eurostat,,,,,,,
 
 # --- AUTOMATED CLEANUP: Ignored Columns ---
 LAST UPDATE,#ignore,"",,,,,,,,
-OBS_FLAG,#ignore,"",,,,,,,,
 CONF_STATUS,#ignore,"",,,,,,,,
+OBS_FLAG,#ignore,"",,,,,,,,
 
 # --- AUTOMATED CLEANUP: Global Geo Logic & Ignores ---
 geo,observationAbout,{Data},,,,,,,,
-geo:DE_TOT,#ignore,"",,,,,,,,
-geo:EA19,#ignore,"",,,,,,,,
-geo:EEA30_2007,#ignore,"",,,,,,,,
-geo:EEA31,#ignore,"",,,,,,,,
-geo:EFTA,#ignore,"",,,,,,,,
-geo:EU27_2007,#ignore,"",,,,,,,,
-geo:EU27_2020,#ignore,"",,,,,,,,
-geo:EU28,#ignore,"",,,,,,,,
+
+
 TIME_PERIOD,observationDate,{Data},,,,,,,
 OBS_VALUE,value,{Number},,,,,,,
+
+# --- Observation Flags (Status) mapped to measurementMethod ---
+OBS_FLAG:p,measurementMethod,dcs:EurostatProvisionalValue,,,,,,,,
+OBS_FLAG:e,measurementMethod,dcs:EurostatEstimatedValue,,,,,,,,
+OBS_FLAG:b,measurementMethod,dcs:EurostatBreakInTimeSeries,,,,,,,,
+OBS_FLAG:f,measurementMethod,dcs:EurostatForecastValue,,,,,,,,
+OBS_FLAG:n,measurementMethod,dcs:EurostatNotSignificantValue,,,,,,,,
+OBS_FLAG:u,measurementMethod,dcs:EurostatLowReliabilityValue,,,,,,,,
+
+# Missing values
+OBS_FLAG:M,MissingValue,'',,,,,,,,
