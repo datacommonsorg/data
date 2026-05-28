@@ -162,11 +162,12 @@ def ingestion_helper(request):
         status = request_json['status']
         logging.info(f'Updating import {import_name} to status {status}')
         params = import_utils.get_import_params(request_json)
-        next_refresh = import_utils.get_next_refresh(FLAGS.project_id,
-                                                     FLAGS.location,
-                                                     import_name)
+        if FLAGS.is_base_dc:
+            next_refresh = import_utils.get_next_refresh(FLAGS.project_id, FLAGS.location, import_name)
+
         if next_refresh:
             params['next_refresh'] = next_refresh
+
         if status == 'STAGING':
             version = os.path.basename(request_json.get('latestVersion', ''))
             if not version:
