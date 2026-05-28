@@ -1,0 +1,14 @@
+config,value
+provenance_url,https://data.who.int/indicators/i/39E4281/F1912F6
+output_columns,"observationDate,observationAbout,variableMeasured,value,unit,scalingFactor"
+#places_within,country/POL
+#place_types,"AdministrativeArea,AdministrativeArea1,AdministrativeArea2,State"
+#debug,1
+#input_rows,100
+#word_delimiter,''
+#skip_rows,1
+populationType,Person
+measuredProperty,count
+header_rows,1
+mapped_columns,6
+dc_api_root,https://api.datacommons.org
