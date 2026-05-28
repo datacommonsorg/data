@@ -36,7 +36,7 @@ python3 statvar_imports/tuberculosis_rifampicin_resistant/tuberculosis_rifampici
 	python3 tools/statvar_importer/stat_var_processor.py \
   --input_data="statvar_imports/tuberculosis_rifampicin_resistant/testdata/tuberculosis_rifampicin_resistant_input.csv" \
   --pv_map="statvar_imports/tuberculosis_rifampicin_resistant/tuberculosis_rifampicin_resistant_pvmap.csv" \
-  --output_path="statvar_imports/tuberculosis_rifampicin_resistant/output_files/tuberculosis_rifampicin_resistant" \
+  --output_path="statvar_imports/tuberculosis_rifampicin_resistant/output_files/tuberculosis_rifampicin_resistant_output" \
   --config_file="statvar_imports/tuberculosis_rifampicin_resistant/tuberculosis_rifampicin_resistant_metadata.csv" \
   --existing_statvar_mcf="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
 ```
@@ -46,7 +46,7 @@ python3 statvar_imports/tuberculosis_rifampicin_resistant/tuberculosis_rifampici
 	python3 tools/statvar_importer/stat_var_processor.py \
   --input_data="statvar_imports/tuberculosis_rifampicin_resistant/input_files/tuberculosis_rifampicin_resistant_input.csv" \
   --pv_map="statvar_imports/tuberculosis_rifampicin_resistant/tuberculosis_rifampicin_resistant_pvmap.csv" \
-  --output_path="statvar_imports/tuberculosis_rifampicin_resistant/output_files/tuberculosis_rifampicin_resistant" \
+  --output_path="statvar_imports/tuberculosis_rifampicin_resistant/output_files/tuberculosis_rifampicin_resistant_output" \
   --config_file="statvar_imports/tuberculosis_rifampicin_resistant/tuberculosis_rifampicin_resistant_metadata.csv" \
   --existing_statvar_mcf="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
 ```
