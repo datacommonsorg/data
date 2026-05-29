@@ -45,6 +45,9 @@ flags.DEFINE_bool(
     'is_base_dc',
     os.environ.get('IS_BASE_DC', 'true').lower() == 'true',
     'Is base DC')
+flags.DEFINE_integer(
+    'timeout', int(os.environ.get('TIMEOUT', 1700)),
+    'Timeout in seconds for spanner client to execute queries')
 
 if not FLAGS.is_parsed():
     FLAGS(['ingestion_helper'])
@@ -246,9 +249,9 @@ def ingestion_helper(request):
         try:
             logging.info(f"Job started. Fetching all nodes for types: {node_types}")
             timestamp = get_latest_lock_timestamp(spanner.database)
-            nodes = get_updated_nodes(spanner.database, timestamp, node_types)
+            nodes = get_updated_nodes(spanner.database, timestamp, node_types, timeout=FLAGS.timeout)
             converted_nodes = filter_and_convert_nodes(nodes)
-            affected_rows = generate_embeddings_partitioned(spanner.database, converted_nodes)
+            affected_rows = generate_embeddings_partitioned(spanner.database, converted_nodes, timeout=FLAGS.timeout)
             return (f"OK [Affected rows: {affected_rows}]", 200)
         except Exception as e:
             logging.error(f"Embedding ingestion failed: {e}")
