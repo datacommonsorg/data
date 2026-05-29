@@ -27,7 +27,8 @@
                     "cleaned_csv": "output/USA_Population_Count_by_Race_county_after_2000.csv"
                 }
             ],
-            "cron_schedule": "0 04 * * 1"
+            "cron_schedule": "0 04 * * 1",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }
