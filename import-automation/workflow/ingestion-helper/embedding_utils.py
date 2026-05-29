@@ -43,7 +43,7 @@ def get_latest_lock_timestamp(database):
         raise
     return None
 
-def get_updated_nodes(database, timestamp, node_types, timeout=None):
+def get_updated_nodes(database, timestamp, node_types, timeout=300):
     """Gets subject_ids and names from Node table where last_update_timestamp > timestamp.
     Yields results to avoid loading all into memory.
     
@@ -79,7 +79,7 @@ def get_updated_nodes(database, timestamp, node_types, timeout=None):
     
     try:
         with database.snapshot() as snapshot:
-            results = snapshot.execute_sql(updated_node_sql, params=params, param_types=param_types, timeout=timeout or 300)
+            results = snapshot.execute_sql(updated_node_sql, params=params, param_types=param_types, timeout=timeout)
             fields = None
             for row in results:
                 if fields is None:
@@ -105,7 +105,7 @@ def filter_and_convert_nodes(nodes_generator):
             yield (node.get("subject_id"), node.get("name"), node.get("types"))
 
 
-def generate_embeddings_partitioned(database, nodes_generator, timeout=None):
+def generate_embeddings_partitioned(database, nodes_generator, timeout=300):
     """Generates embeddings in batches using standard transactions.
     Processes nodes in chunks of 500 to avoid transaction size limits.
     Accepts a generator to avoid loading all nodes into memory.
@@ -151,7 +151,7 @@ def generate_embeddings_partitioned(database, nodes_generator, timeout=None):
         param_types = {"nodes": Array(struct_type)}
 
         def _execute_dml(transaction):
-            return transaction.execute_update(embeddings_sql, params=params, param_types=param_types, timeout=timeout or 300)
+            return transaction.execute_update(embeddings_sql, params=params, param_types=param_types, timeout=timeout)
 
         try:
             row_count = database.run_in_transaction(_execute_dml)
