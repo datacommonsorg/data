@@ -13,8 +13,8 @@ cd ../../../
 # Step 3: Data Processing
 python3 tools/statvar_importer/stat_var_processor.py \
   "--input_data=statvar_imports/eurostat/Deaths_by_week_and_sex/Deaths_by_week_and_sex_data_raw.csv" \
-  "--pv_map=statvar_imports/eurostat/Deaths_by_week_and_sex/sample_output/output_pvmap_cleaned.csv" \
-  "--config_file=statvar_imports/eurostat/Deaths_by_week_and_sex/sample_output/output_metadata.csv" \
+  "--pv_map=statvar_imports/eurostat/Deaths_by_week_and_sex/output_pvmap_cleaned.csv" \
+  "--config_file=statvar_imports/eurostat/Deaths_by_week_and_sex/output_metadata.csv" \
   "--generate_statvar_name=True" \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor" \

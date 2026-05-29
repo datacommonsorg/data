@@ -44,6 +44,6 @@ The resulting reports (`report.json`, `summary_report.html`) in `dc_generated/` 
 
 ## Testing
 Testing is performed using the `test_data` directory:
-- Raw Input: `test_data/sample_data.csv`
+- Raw Input: `test_data/Deaths_by_week_and_sex_data_raw.csv`
 - Expected Output: `test_data/output.csv`
 - Expected TMCF: `test_data/output.tmcf`
