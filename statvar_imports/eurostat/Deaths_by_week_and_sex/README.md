@@ -29,11 +29,11 @@ To execute the complete import process (download and processing), run:
 
 ## Key Files
 - `run.sh`: Main execution script for download and processing.
-- `deaths_by_week_and_sex_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
-- `deaths_by_week_and_sex_metadata.csv`: Configuration parameters for the processor.
+- `output_pvmap_cleaned.csv`: Property-Value mapping for StatVar definitions and dimensions.
+- `output_metadata.csv`: Configuration parameters for the processor.
 - `places_resolved_runtime.csv`: Mapping of place codes to Data Commons DCIDs.
-- `deaths_by_week_and_sex_output.csv`: Processed statistical observations.
-- `deaths_by_week_and_sex_output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
+- `output.csv`: Processed statistical observations.
+- `output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
 
 ## Validation
 To validate the generated data, use the Data Commons import tool (lint mode):
@@ -44,6 +44,6 @@ The resulting reports (`report.json`, `summary_report.html`) in `dc_generated/` 
 
 ## Testing
 Testing is performed using the `test_data` directory:
-- Raw Input: `test_data/deaths_by_week_and_sex_data_raw.csv`
-- Expected Output: `test_data/deaths_by_week_and_sex_output.csv`
-- Expected TMCF: `test_data/deaths_by_week_and_sex_output.tmcf`
+- Raw Input: `test_data/sample_data.csv`
+- Expected Output: `test_data/output.csv`
+- Expected TMCF: `test_data/output.tmcf`

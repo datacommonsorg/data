@@ -10,14 +10,14 @@
       "scripts": [
         "run.sh"
       ],
+      "source_files": [
+        "Deaths_by_week_and_sex_data_raw.csv"
+      ],
       "import_inputs": [
         {
-          "template_mcf": "deaths_by_week_and_sex_output.tmcf",
-          "cleaned_csv": "deaths_by_week_and_sex_output.csv"
+          "template_mcf": "final_output/output.tmcf",
+          "cleaned_csv": "final_output/output.csv"
         }
-      ],
-      "source_files": [
-        "input_files/*.csv"
       ],
       "cron_schedule": "5 1 1,15 * *",
       "resource_limits": {"cpu": 4, "memory": 8, "disk":100}
