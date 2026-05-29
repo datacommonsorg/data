@@ -47,7 +47,7 @@ flags.DEFINE_bool(
     'Is base DC')
 flags.DEFINE_integer(
     'timeout', int(os.environ.get('TIMEOUT', 1700)),
-    'Timeout in seconds for Spanner queries')
+    'Timeout in seconds for spanner client to execute queries')
 
 if not FLAGS.is_parsed():
     FLAGS(['ingestion_helper'])

@@ -43,7 +43,7 @@ def get_latest_lock_timestamp(database):
         raise
     return None
 
-def get_updated_nodes(database, timestamp, node_types, timeout=300):
+def get_updated_nodes(database, timestamp, node_types, timeout):
     """Gets subject_ids and names from Node table where last_update_timestamp > timestamp.
     Yields results to avoid loading all into memory.
     
@@ -51,7 +51,7 @@ def get_updated_nodes(database, timestamp, node_types, timeout=300):
         database: google.cloud.spanner.Database object.
         timestamp: datetime object to filter by.
         node_types: A list of strings representing the node types to filter by.
-        timeout: Timeout for the query.
+        timeout: Timeout for the spanner client to execute queries.
         
     Yields:
         Dictionaries containing subject_id and name.
@@ -105,7 +105,7 @@ def filter_and_convert_nodes(nodes_generator):
             yield (node.get("subject_id"), node.get("name"), node.get("types"))
 
 
-def generate_embeddings_partitioned(database, nodes_generator, timeout=300):
+def generate_embeddings_partitioned(database, nodes_generator, timeout):
     """Generates embeddings in batches using standard transactions.
     Processes nodes in chunks of 500 to avoid transaction size limits.
     Accepts a generator to avoid loading all nodes into memory.
@@ -113,7 +113,7 @@ def generate_embeddings_partitioned(database, nodes_generator, timeout=300):
     Args:
         database: google.cloud.spanner.Database object.
         nodes_generator: A generator yielding tuples containing (subject_id, embedding_content).
-        timeout: Timeout for the query.
+        timeout: Timeout for the spanner client to execute queries.
         
     Returns:
         The number of affected rows.
