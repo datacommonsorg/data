@@ -1,18 +1,18 @@
-# Eurostat Deaths By Week And Sex Import
+# Eurostat Divorce Indicators Import
 
 ## Overview
-This dataset contains weekly death indicators at national and regional levels, sourced from Eurostat. The data tracks the total number of deaths broken down by sex and week across various European countries and regions.
+This dataset contains annual divorce indicators at the national level, sourced from Eurostat. The data tracks key demographic metrics including total divorces and crude divorce rates across various European countries.
 
-**type of place:** Country, NUTS Regions (Level 0-3)
-**years:** Historical data to present (2000-present, recorded weekly e.g., 2000-W01) 
-**place_resolution:** Resolved to DCIDs (e.g., dcid:country/FRA, dcid:nuts/AT113)
+**type of place:** Country
+**years:** Historical data to present (1960-2024) 
+**place_resolution:** Resolved to DCIDs (e.g., dcid:country/ARM, dcid:country/EST)
 
 ## Data Source
 **Source URL:**
-https://ec.europa.eu/eurostat/databrowser/view/demo_r_mwk_ts/default/table?lang=en
+https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/DEMO_NDIVIND/?format=SDMX-CSV&compressed=false
 
 **Provenance Description:**
-The data is provided by Eurostat, the statistical office of the European Union. It belongs to the "Demography, population stock and balance" database under the "Deaths by week - special data collection" statistical theme, specifically the "Deaths by week and sex" (DEMO_R_MWK_TS) dataset.
+The data is provided by Eurostat, the statistical office of the European Union. It originates from the "Demography, population stock and balance" database under the "Divorces" statistical framework, specifically the "Divorce indicators" (DEMO_NDIVIND) dataset.
 
 ## Refresh Type
 Automatic Refresh
@@ -44,6 +44,6 @@ The resulting reports (`report.json`, `summary_report.html`) in `dc_generated/` 
 
 ## Testing
 Testing is performed using the `test_data` directory:
-- Raw Input: `test_data/Deaths_by_week_and_sex_data_raw.csv`
+- Raw Input: `test_data/Divorce_indicators_data_raw.csv`
 - Expected Output: `test_data/output.csv`
 - Expected TMCF: `test_data/output.tmcf`
