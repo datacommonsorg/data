@@ -124,6 +124,8 @@ CREATE INDEX InEdge ON Edge(object_id, predicate, subject_id, provenance) OPTION
 
 CREATE INDEX VariableMeasuredObservationAbout ON Observation(variable_measured, observation_about);
 
+-- NodeEmbedding table, NodeEmbeddingIndex index and NodeEmbeddingModel model are necessary for embeddings to work properly.
+
 CREATE TABLE NodeEmbedding (
   subject_id STRING(1024) NOT NULL,
   embedding_content STRING(MAX),
