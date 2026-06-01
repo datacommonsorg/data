@@ -4,7 +4,7 @@
 mkdir -p final_output
 
 # Step 1: Data Download (Downloads directly into this local folder)
-curl -L --retry 3 "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/DEMO\_NDIVIND/?format=SDMX-CSV&compressed=false" -o Divorce_indicators_data_raw.csv
+curl -L --retry 3 "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/DEMO_NDIVIND/?format=SDMX-CSV&compressed=false" -o Divorce_indicators_data_raw.csv
 
 # Step 2: Navigate up 3 levels to the 'data/' repository root
 # This makes all the "statvar_imports/..." parameter paths perfectly resolve.
