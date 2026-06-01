@@ -123,3 +123,35 @@ CREATE INDEX InEdge ON Edge(object_id, predicate, subject_id, provenance) OPTION
 );
 
 CREATE INDEX VariableMeasuredObservationAbout ON Observation(variable_measured, observation_about);
+
+-- NodeEmbedding table, NodeEmbeddingIndex index and NodeEmbeddingModel model are necessary for embeddings to work properly.
+
+CREATE TABLE NodeEmbedding (
+  subject_id STRING(1024) NOT NULL,
+  embedding_content STRING(MAX),
+  types ARRAY<STRING(1024)>,
+  embeddings ARRAY<FLOAT64>(vector_length=>768)
+) PRIMARY KEY(subject_id),
+INTERLEAVE IN PARENT Node ON DELETE CASCADE;
+
+CREATE VECTOR INDEX NodeEmbeddingIndex
+ON NodeEmbedding(embeddings)
+WHERE embeddings IS NOT NULL
+OPTIONS (
+  distance_type = 'COSINE'
+);
+
+CREATE MODEL NodeEmbeddingModel
+INPUT(
+  content STRING(MAX),
+  task_type STRING(MAX),
+)
+OUTPUT(
+  embeddings
+    STRUCT<
+      statistics STRUCT<truncated BOOL, token_count FLOAT64>,
+      values ARRAY<FLOAT64>>
+)
+REMOTE OPTIONS (
+  endpoint = '{{ embeddings_endpoint }}'
+);
