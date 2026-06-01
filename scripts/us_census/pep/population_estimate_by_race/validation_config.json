@@ -11,45 +11,15 @@
             "rule_id": "check_goldens_output_csv",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "golden_data/golden_USA_Population_Count_by_Race_National_state_2000.csv",
-                "input_files": "output/USA_Population_Count_by_Race_National_state_2000.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_output_csv",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "golden_data/golden_USA_Population_Count_by_Race_before_2000.csv",
-                "input_files": "output/USA_Population_Count_by_Race_before_2000.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_output_csv",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "golden_data/golden_USA_Population_Count_by_Race_county_after_2000.csv",
-                "input_files": "output/USA_Population_Count_by_Race_county_after_2000.csv"
+                "golden_files": "golden_data/golden_USA_Population_*.csv",
+                "input_files": "output/USA_Population_*.csv"
             }
         },
         {
             "rule_id": "check_goldens_summary_report",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "golden_data/golden_summary_report_national_2000.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_summary_report",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "golden_data/golden_summary_report_before_2000.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_summary_report",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "golden_data/golden_summary_report_after_2000.csv"
+                "golden_files": "golden_data/golden_summary_report_*.csv"
             }
         }
     ]
