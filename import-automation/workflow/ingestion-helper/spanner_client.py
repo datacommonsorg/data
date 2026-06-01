@@ -430,7 +430,7 @@ class SpannerClient:
                 f'Error updating version history for {import_name}: {e}')
             raise
 
-    def initialize_database(self, enable_embeddings=False):
+    def initialize_database(self):
         """Initializes the database by creating all required tables and proto bundles."""
         logging.info("Initializing database...")
 
