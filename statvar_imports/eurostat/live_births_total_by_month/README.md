@@ -31,21 +31,21 @@ To execute the complete import process (download and processing), run:
 
 ## Key Files
 - `run.sh`: Main execution script for download and processing.
-- `Live_births_total_by_month_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
-- `Live_births_total_by_month_metadata.csv`: Configuration parameters for the processor.
-- `places_resolved.csv`: Mapping of place codes to Data Commons DCIDs.
+- `live_births_total_by_month_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
+- `live_births_total_by_month_metadata.csv`: Configuration parameters for the processor.
+- `places_resolved_runtime.csv`: Mapping of place codes to Data Commons DCIDs.
 - `output.csv`: Processed statistical observations.
 - `output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
 
 ## Validation
 To validate the generated data, use the Data Commons import tool (lint mode):
 ```bash
-java -jar datacommons-import-tool.jar lint output.csv output.tmcf
+java -jar datacommons-import-tool.jar lint live_births_total_by_month_output.csv live_births_total_by_month_output.tmcf
 ```
 The resulting reports (`report.json`, `summary_report.html`) in `dc_generated/` provide detailed insights into data quality and validation status.
 
 ## Testing
 Testing is performed using the `test_data` directory:
-- Raw Input: `test_data/live_births_total_by_month_data_raw.csv`
+- Raw Input: `test_data/live_births_total_by_month_data_input.csv`
 - Expected Output: `test_data/live_births_total_by_month_output.csv`
 - Expected TMCF: `test_data/live_births_total_by_month_output.tmcf`

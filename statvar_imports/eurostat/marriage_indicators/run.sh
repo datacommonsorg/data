@@ -2,7 +2,7 @@
 
 # Step 1: Data Download
 mkdir -p input_files
-curl -L --retry 3 "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/DEMO_NIND/?format=SDMX-CSV&compressed=false" -o ./input_files/Marriage_indicators_data_raw.csv
+curl -L --retry 3 "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/DEMO_NIND/?format=SDMX-CSV&compressed=false" -o ./input_files/marriage_indicators_data_input.csv
 
 # Step 2: Data Processing
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
@@ -13,6 +13,6 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,unit" \
   "--output_path=./marriage_indicators_output" \
-  "--places_resolved_csv=./places_resolved.csv" \
-  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" \
+  "--places_resolved_csv=./places_resolved_runtime.csv" \
+  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" 
   

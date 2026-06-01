@@ -20,7 +20,15 @@
         "input_files/*.csv"
       ],
       "cron_schedule": "5 2 1,15 * *",
-      "resource_limits": {"cpu": 4, "memory": 8, "disk":100}
+      "resource_limits": {"cpu": 4, "memory": 8, "disk":100},
+      "config_override": {
+         "invoke_import_validation": true,
+         "invoke_import_tool": true,
+         "invoke_differ_tool": true,
+         "skip_input_upload": false,
+         "skip_gcs_upload": false,
+         "cleanup_gcs_volume_mount": false
+        }
     }
   ]
 }

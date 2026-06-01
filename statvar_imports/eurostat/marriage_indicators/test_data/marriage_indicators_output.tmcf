@@ -3,6 +3,6 @@ observationDate: C:output->observationDate
 observationAbout: C:output->observationAbout
 variableMeasured: C:output->variableMeasured
 value: C:output->value
-observationPeriod: C:output->observationPeriod
+measurementMethod: C:output->measurementMethod
 unit: C:output->unit
 typeOf: dcs:StatVarObservation

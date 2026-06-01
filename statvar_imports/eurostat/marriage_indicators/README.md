@@ -33,7 +33,7 @@ To execute the complete import process (download and processing), run:
 - `run.sh`: Main execution script for download and processing.
 - `marriage_indicators_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
 - `marriage_indicators_metadata.csv`: Configuration parameters for the processor.
-- `places_resolved.csv`: Mapping of place codes to Data Commons DCIDs.
+- `places_resolved_runtime.csv`: Mapping of place codes to Data Commons DCIDs.
 - `marriage_indicators_output.csv`: Processed statistical observations.
 - `marriage_indicators_output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
 
@@ -41,7 +41,7 @@ To execute the complete import process (download and processing), run:
 ## Validation
 To validate the generated data, use the Data Commons import tool (lint mode). Note that you must include the StatVar MCF files to resolve schema references:
 ```bash
-java -jar datacommons-import-tool.jar lint output.csv output.tmcf
+java -jar datacommons-import-tool.jar lint marriage_indicators_output.csv marriage_indicators_output.tmcf
 ```
 The resulting reports (`report.json`, `summary_report.html`) in `dc_generated/` provide detailed insights into data quality and validation status.
 

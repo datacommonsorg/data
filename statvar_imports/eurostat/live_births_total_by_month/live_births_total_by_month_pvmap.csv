@@ -7,15 +7,7 @@ LAST UPDATE,#ignore,"",,,,,,
 freq,#ignore,"",,,,,,
 CONF_STATUS,#ignore,"",,,,,,
 
-# --- AUTOMATED CLEANUP: Global Geo Logic & Ignores ---
-geo:DE_TOT,#ignore,"",,,,,,
-geo:EA20,#ignore,"",,,,,,
-geo:EA21,#ignore,"",,,,,,
-geo:EEA31,#ignore,"",,,,,,
-geo:EFTA,#ignore,"",,,,,,
-geo:EU27_2007,#ignore,"",,,,,,
-geo:EU27_2020,#ignore,"",,,,,,
-geo:EU28,#ignore,"",,,,,,
+
 # Month and observationPeriod
 month:M01,Month,01,observationPeriod,P1M
 month:M02,Month,02,observationPeriod,P1M
@@ -30,16 +22,18 @@ month:M10,Month,10,observationPeriod,P1M
 month:M11,Month,11,observationPeriod,P1M
 month:M12,Month,12,observationPeriod,P1M
 month:TOTAL,Month,"",observationPeriod,P1Y
+month:UNK,#ignore,"",,,
 # Time
 TIME_PERIOD,Year,{Data}
 # About - Aggregates
-geo:FX,observationAbout,country/FXX,,,,,,
+
 # About - NUTS regions (level 0-3)
 geo,#Regex,"^(?P<NUTS_ID>[A-Z]{2}[0-9A-Z]{1,3})$",observationAbout,nuts/{NUTS_ID}
 # About - Countries
 geo,observationAbout,{Data}
 # Measure and Date Resolution
 OBS_VALUE,#Eval,"observationDate='{Year}-{Month}' if '{Month}' else '{Year}'",value,{Number}
+# Flags
 # Flags
 OBS_FLAG:e,measurementMethod,dcs:EurostatEstimatedValue
 OBS_FLAG:p,measurementMethod,dcs:EurostatProvisionalValue
@@ -48,5 +42,5 @@ OBS_FLAG:f,measurementMethod,dcs:EurostatForecastValue
 OBS_FLAG:n,measurementMethod,dcs:EurostatNotSignificantValue
 OBS_FLAG:u,measurementMethod,dcs:EurostatLowReliabilityValue
 # Missing values
-OBS_FLAG:M,MissingValue,""
-unit:NR,UnitMapping,""
+OBS_FLAG:M,MissingValue,''
+

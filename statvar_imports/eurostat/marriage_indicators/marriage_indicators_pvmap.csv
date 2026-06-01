@@ -7,24 +7,19 @@ CONF_STATUS,#ignore,"",,,,,,,,,,
 
 # --- AUTOMATED CLEANUP: Global Geo Logic & Ignores ---
 geo,observationAbout,{Data},,,,,,,,,,
-geo:DE_TOT,#ignore,"",,,,,,,,,,
-geo:EA19,#ignore,"",,,,,,,,,,
-geo:EFTA,#ignore,"",,,,,,,,,,
-geo:EU27_2020,#ignore,"",,,,,,,,,,
-freq:A,observationPeriod,P1Y,,,,,,,,,,
 
 # --- Mapped Marriage Indicators ---
-indic_de:AGEMAR1,populationType,dcs:MarriageEvent,measuredProperty,dcs:age,statType,dcs:meanValue,marriageNumber,"1",unit,dcs:Year,,
-indic_de:FAGEMAR1,populationType,dcs:MarriageEvent,measuredProperty,dcs:age,statType,dcs:meanValue,marriageNumber,"1",gender,dcs:Female,unit,dcs:Year
-indic_de:MAGEMAR1,populationType,dcs:MarriageEvent,measuredProperty,dcs:age,statType,dcs:meanValue,marriageNumber,"1",gender,dcs:Male,unit,dcs:Year
+indic_de:AGEMAR1,populationType,dcs:MarriageEvent,measuredProperty,dcs:age,statType,dcs:meanValue,measurementQualifier,dcs:First,unit,dcs:Year,,
+indic_de:FAGEMAR1,populationType,dcs:MarriageEvent,measuredProperty,dcs:age,statType,dcs:meanValue,measurementQualifier,dcs:First,gender,dcs:Female,unit,dcs:Year
+indic_de:MAGEMAR1,populationType,dcs:MarriageEvent,measuredProperty,dcs:age,statType,dcs:meanValue,measurementQualifier,dcs:First,gender,dcs:Male,unit,dcs:Year
 
 # First Marriage Rates & Proportions (Females)
-indic_de:FMAR1CUM,populationType,dcs:MarriageEvent,measuredProperty,dcs:totalFirstMarriageRate,gender,dcs:Female,marriageNumber,"1",,,,
-indic_de:FMAR1PC,populationType,dcs:MarriageEvent,measuredProperty,dcs:proportion,gender,dcs:Female,marriageNumber,"1",,,,
+indic_de:FMAR1CUM,populationType,dcs:MarriageEvent,measuredProperty,dcs:totalFirstMarriageRate,gender,dcs:Female,,,,,,
+indic_de:FMAR1PC,populationType,dcs:MarriageEvent,measuredProperty,dcs:proportion,gender,dcs:Female,,,,,,
 
 # First Marriage Rates & Proportions (Males - ADDED TO FIX DISCREPANCY)
-indic_de:MMAR1CUM,populationType,dcs:MarriageEvent,measuredProperty,dcs:totalFirstMarriageRate,gender,dcs:Male,marriageNumber,"1",,,,
-indic_de:MMAR1PC,populationType,dcs:MarriageEvent,measuredProperty,dcs:proportion,gender,dcs:Male,marriageNumber,"1",,,,
+indic_de:MMAR1CUM,populationType,dcs:MarriageEvent,measuredProperty,dcs:totalFirstMarriageRate,gender,dcs:Male,,,,,,
+indic_de:MMAR1PC,populationType,dcs:MarriageEvent,measuredProperty,dcs:proportion,gender,dcs:Male,,,,,,
 
 # Absolute Counts & Crude Rates
 indic_de:MARRIAGE,populationType,dcs:MarriageEvent,measuredProperty,dcs:count,,,,,,,,
@@ -39,5 +34,13 @@ indic_de,#ignore,"",,,,,,,,,,
 # --- Time, Value, and Flags ---
 TIME_PERIOD,observationDate,{Data},,,,,,,,,,
 OBS_VALUE,value,{Number},,,,,,,,,,
+
+# Flags
+OBS_FLAG:e,measurementMethod,dcs:EurostatEstimatedValue
+OBS_FLAG:p,measurementMethod,dcs:EurostatProvisionalValue
+OBS_FLAG:b,measurementMethod,dcs:EurostatBreakInTimeSeries
+OBS_FLAG:f,measurementMethod,dcs:EurostatForecastValue
+OBS_FLAG:n,measurementMethod,dcs:EurostatNotSignificantValue
+OBS_FLAG:u,measurementMethod,dcs:EurostatLowReliabilityValue
 OBS_FLAG:M,MissingValue,'',,,,,,,,,,
 OBS_FLAG:NA,NotApplicable,'',,,,,,,,,,
