@@ -1,0 +1,38 @@
+key,property1,value1,property2,value2,property3,value3,property4,value4,property5,value5
+
+# --- AUTOMATED CLEANUP: Ignored Columns ---
+DATAFLOW,#ignore,"",,,,,,,,
+LAST UPDATE,#ignore,"",,,,,,,,
+
+
+# Dataflow - Base StatVar Properties
+"DATAFLOW:ESTAT:DEMO_PJAN(1.0)",populationType,dcs:Person,measuredProperty,dcs:count,statType,dcs:measuredValue,,
+# Frequency
+freq:A,observationPeriod,P1Y,,,,,,
+# Unit
+unit:NR,unit,dcs:Person,,,,,,
+# Sex
+sex:T,gender,"",,,,,,
+sex:M,gender,dcs:Male,,,,,,
+sex:F,gender,dcs:Female,,,,,,
+
+# --- Age Group Normalization ---
+age:TOTAL,age,"",,,
+age:UNK,#ignore,Zero values for unknown age,,,
+age:Y_LT1,#ignore,Ignore infant rows,,,
+age:Y_OPEN,#ignore,Ignored open-ended age bracket,,,
+
+# Strict regex matching ONLY strings that start with Y and end exactly after the digits
+age,#Regex,"^Y(?P<AgeVal>[0-9]+)$",age,"[{AgeVal} {AgeVal} Years]"
+
+# Geography
+# Geography - Aggregates
+# Default Geography
+geo,observationAbout,{Data},,,,,,
+# Time Period
+TIME_PERIOD,observationDate,{Data},,,,,,
+# Observation Value
+OBS_VALUE,value,{Number},,,,,,
+# Status Flags
+OBS_FLAG:M,MissingValue,'',,,,,,
+CONF_STATUS:C,ConfidentialValue,'',,,,,,

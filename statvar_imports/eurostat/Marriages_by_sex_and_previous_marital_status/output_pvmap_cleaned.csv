@@ -1,0 +1,52 @@
+key,property1,value1,property2,value2,property3,value3,property4,value4,property5,value5
+# Dataflow and global properties
+DATAFLOW:ESTAT:DEMO_NMSTA(1.0),populationType,dcs:Person,measuredProperty,dcs:count,statType,dcs:measuredValue,event,dcs:MarriageEvent
+
+
+
+# Frequency
+freq:A,observationPeriod,P1Y
+freq:M,observationPeriod,P1M
+freq:Q,observationPeriod,P3M
+
+# Unit
+unit:NR,unit,dcs:Number
+
+# Sex / Gender
+sex:T,gender,""
+sex:M,gender,dcs:Male
+sex:F,gender,dcs:Female
+# Marital Status (Previous)
+
+marsta:TOTAL,maritalStatus,""
+marsta:SIN,maritalStatus,dcs:Single
+marsta:LUN,maritalStatus,dcs:Married
+marsta:MAR,maritalStatus,dcs:Married
+marsta:WID,maritalStatus,dcs:Widowed
+marsta:DIV,maritalStatus,dcs:Divorced
+marsta:DISLUN,maritalStatus,dcs:Divorced
+marsta:DIV_DISREP,maritalStatus,dcs:Divorced
+marsta:DISREP,maritalStatus,dcs:Divorced
+marsta:WID_DTHREP,maritalStatus,dcs:Widowed
+marsta:MAR_REP,maritalStatus,dcs:Married
+marsta:SEP,maritalStatus,dcs:Separated
+marsta:DTHLUN,maritalStatus,dcs:Widowed
+marsta:REP,maritalStatus,dcs:Married
+marsta:UNK,maritalStatus,dcs:UnknownMaritalStatus
+
+# Geography
+geo,observationAbout,{Data},,,,,,,,
+
+# Time
+TIME_PERIOD,observationDate,{Data}
+# Value
+OBS_VALUE,value,{Number}
+# Silencing warnings for unmapped columns
+LAST UPDATE,LastUpdate,{Data}
+CONF_STATUS,ConfStatus,{Data}
+
+OBS_FLAG,ObsFlag,{Data}
+# Missing values / Flags
+OBS_VALUE::,#ignore,Empty value
+OBS_FLAG:M,MissingValue,''
+OBS_FLAG:NA,NotApplicable,''
