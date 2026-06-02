@@ -227,9 +227,7 @@ def ingestion_helper(request):
     elif action_type == 'initialize_database':
         # Initializes the database by creating all required tables and proto bundles.
         logging.info("Action: initialize_database")
-        enable_embeddings = request_json.get('enableEmbeddings',
-                                             FLAGS.enable_embeddings)
-        spanner.initialize_database(enable_embeddings=enable_embeddings)
+        spanner.initialize_database()
         return ('OK', 200)
     elif action_type == 'seed_database':
         # Seeds the database with base empty nodes.
