@@ -34,6 +34,14 @@ class StorageClient:
         self.storage = storage.Client()
         self.bucket = self.storage.bucket(bucket_name)
 
+    def _get_output_dir(self, import_name: str) -> str:
+        """Constructs the output directory path."""
+        output_dir = import_name.replace(':', '/')
+        output_prefix = os.environ.get('GCS_OUTPUT_PREFIX', '')
+        if output_prefix:
+            output_dir = os.path.join(output_prefix, output_dir)
+        return output_dir
+
     def get_import_summary(self, import_name: str, version: str) -> dict:
         """Retrieves the import summary from GCS.
 
@@ -44,7 +52,7 @@ class StorageClient:
         Returns:
             A dictionary containing the import summary, or an empty dict if not found.
         """
-        output_dir = import_name.replace(':', '/')
+        output_dir = self._get_output_dir(import_name)
         summary_file = os.path.join(output_dir, version, _IMPORT_SUMMARY_JSON)
         logging.info(f'Reading import summary from {summary_file}')
         try:
@@ -82,7 +90,7 @@ class StorageClient:
         Returns:
             The version string, or an empty string if not found.
         """
-        output_dir = import_name.replace(':', '/')
+        output_dir = self._get_output_dir(import_name)
         version_file = os.path.join(output_dir, _STAGING_VERSION_FILE)
         logging.info(f'Reading version file {version_file}')
         try:
@@ -108,7 +116,7 @@ class StorageClient:
         logging.info(
             f'Updating {file_type} version file for import {import_name} to {version}'
         )
-        output_dir = import_name.replace(':', '/')
+        output_dir = self._get_output_dir(import_name)
         version_file = self.bucket.blob(os.path.join(output_dir, file_name))
         version_file.upload_from_string(version)
         logging.info(
@@ -125,7 +133,7 @@ class StorageClient:
         logging.info(
             f'Updating provenance file for import {import_name} to add {version}'
         )
-        output_dir = import_name.replace(':', '/')
+        output_dir = self._get_output_dir(import_name)
         metadata_blob = self.bucket.blob(
             os.path.join(output_dir, version, 'provenance', 'genmcf',
                          _IMPORT_METADATA_MCF))

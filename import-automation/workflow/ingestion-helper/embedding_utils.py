@@ -43,19 +43,20 @@ def get_latest_lock_timestamp(database):
         raise
     return None
 
-def get_updated_nodes(database, timestamp, node_types):
-    """Gets subject_ids and names from Node table where update_timestamp > timestamp.
+def get_updated_nodes(database, timestamp, node_types, timeout):
+    """Gets subject_ids and names from Node table where last_update_timestamp > timestamp.
     Yields results to avoid loading all into memory.
     
     Args:
         database: google.cloud.spanner.Database object.
         timestamp: datetime object to filter by.
         node_types: A list of strings representing the node types to filter by.
+        timeout: Timeout for the spanner client to execute queries.
         
     Yields:
         Dictionaries containing subject_id and name.
     """
-    timestamp_condition = "update_timestamp > @timestamp" if timestamp else "TRUE"
+    timestamp_condition = "last_update_timestamp > @timestamp" if timestamp else "TRUE"
     
     updated_node_sql = f"""
         SELECT subject_id, name, types FROM Node 
@@ -78,7 +79,7 @@ def get_updated_nodes(database, timestamp, node_types):
     
     try:
         with database.snapshot() as snapshot:
-            results = snapshot.execute_sql(updated_node_sql, params=params, param_types=param_types, timeout=300)
+            results = snapshot.execute_sql(updated_node_sql, params=params, param_types=param_types, timeout=timeout)
             fields = None
             for row in results:
                 if fields is None:
@@ -104,7 +105,7 @@ def filter_and_convert_nodes(nodes_generator):
             yield (node.get("subject_id"), node.get("name"), node.get("types"))
 
 
-def generate_embeddings_partitioned(database, nodes_generator):
+def generate_embeddings_partitioned(database, nodes_generator, timeout):
     """Generates embeddings in batches using standard transactions.
     Processes nodes in chunks of 500 to avoid transaction size limits.
     Accepts a generator to avoid loading all nodes into memory.
@@ -112,6 +113,7 @@ def generate_embeddings_partitioned(database, nodes_generator):
     Args:
         database: google.cloud.spanner.Database object.
         nodes_generator: A generator yielding tuples containing (subject_id, embedding_content).
+        timeout: Timeout for the spanner client to execute queries.
         
     Returns:
         The number of affected rows.
@@ -149,7 +151,7 @@ def generate_embeddings_partitioned(database, nodes_generator):
         param_types = {"nodes": Array(struct_type)}
 
         def _execute_dml(transaction):
-            return transaction.execute_update(embeddings_sql, params=params, param_types=param_types, timeout=300)
+            return transaction.execute_update(embeddings_sql, params=params, param_types=param_types, timeout=timeout)
 
         try:
             row_count = database.run_in_transaction(_execute_dml)
