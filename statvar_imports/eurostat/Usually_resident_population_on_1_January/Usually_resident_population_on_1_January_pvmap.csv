@@ -1,0 +1,33 @@
+key,property1,value1,property2,value2,property3,value3,property4,value4
+# Dataflow defining the StatVar
+DATAFLOW:ESTAT:DEMO_URESPOP(1.0),populationType,dcs:Person,measuredProperty,dcs:count,statType,dcs:measuredValue,,
+
+# --- AUTOMATED CLEANUP: Ignored Columns ---
+LAST UPDATE,#ignore,"",,,,,,
+
+# Frequency mapping
+freq:A,observationPeriod,P1Y,,,,,,
+freq:Q,observationPeriod,P3M,,,,,,
+freq:M,observationPeriod,P1M,,,,,,
+freq:W,observationPeriod,P1W,,,,,,
+freq:D,observationPeriod,P1D,,,,,,
+
+# Unit mapping
+unit:NR,unit,dcs:Number,,,,,,
+
+# Geographic mapping - manual resolution to ISO3
+# Aggregates
+# Default for other geo codes
+geo,observationAbout,{Data},,,,,,
+# Time and Value
+TIME_PERIOD,observationDate,{Data},,,,,,
+OBS_VALUE,value,{Number},,,,,,
+# Observation status flags
+OBS_FLAG:e,measurementMethod,dcs:EstimatedValue,,,,,,
+OBS_FLAG:p,measurementMethod,dcs:ProvisionalValue,,,,,,
+OBS_FLAG:m,MissingValue,'',,,,,
+OBS_FLAG:b,measurementMethod,dcs:SeriesBreak,,,,,,
+# Confidentiality status
+CONF_STATUS:C,ConfidentialValue,'',,,,,,
+CONF_STATUS:N,NotForPublication,'',,,,,,
+CONF_STATUS:P,ConfidentialValue,'',,,,,,
