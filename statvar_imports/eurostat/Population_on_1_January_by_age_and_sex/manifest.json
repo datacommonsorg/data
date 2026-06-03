@@ -15,8 +15,8 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "final_output/output.tmcf",
-          "cleaned_csv": "final_output/output.csv"
+          "template_mcf": "final_output/Population_on_1_January_by_age_and_sex_output.tmcf",
+          "cleaned_csv": "final_output/Population_on_1_January_by_age_and_sex_output.csv"
         }
       ],
       "cron_schedule": "5 1 1,15 * *",

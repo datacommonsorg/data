@@ -13,11 +13,11 @@ cd ../../../
 # Step 3: Data Processing
 python3 tools/statvar_importer/stat_var_processor.py \
   "--input_data=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/Marriages_by_sex_and_previous_marital_status_data_raw.csv" \
-  "--pv_map=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/output_pvmap_cleaned.csv" \
-  "--config_file=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/output_metadata.csv" \
+  "--pv_map=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/Marriages_by_sex_and_previous_marital_status_pvmap.csv" \
+  "--config_file=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/Marriages_by_sex_and_previous_marital_status_metadata.csv" \
   "--generate_statvar_name=True" \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor" \
-  "--output_path=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/final_output/output" \
+  "--output_path=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/final_output/Marriages_by_sex_and_previous_marital_status_output" \
   "--places_resolved_csv=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/places_resolved_runtime.csv" \
   "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"

@@ -15,8 +15,8 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "final_output/output.tmcf",
-          "cleaned_csv": "final_output/output.csv"
+          "template_mcf": "final_output/Marriages_by_sex_and_previous_marital_status_output.tmcf",
+          "cleaned_csv": "final_output/Marriages_by_sex_and_previous_marital_status_output.csv"
         }
       ],
       "cron_schedule": "5 1 1,15 * *",

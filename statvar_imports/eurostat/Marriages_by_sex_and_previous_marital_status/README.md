@@ -28,21 +28,21 @@ To execute the complete import process (download and processing), run:
 
 ## Key Files
 - `run.sh`: Main execution script for download and processing.
-- `output_pvmap_cleaned.csv`: Property-Value mapping for StatVar definitions and dimensions.
-- `output_metadata.csv`: Configuration parameters for the processor.
+- `Marriages_by_sex_and_previous_marital_status_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
+- `Marriages_by_sex_and_previous_marital_status_metadata.csv`: Configuration parameters for the processor.
 - `places_resolved_runtime.csv`: Mapping of place codes to Data Commons DCIDs.
-- `output.csv`: Processed statistical observations.
-- `output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
+- `Marriages_by_sex_and_previous_marital_status_output.csv`: Processed statistical observations.
+- `Marriages_by_sex_and_previous_marital_status_output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
 
 ## Validation
 To validate the generated data, use the Data Commons import tool (lint mode):
 ```bash
-java -jar datacommons-import-tool.jar lint output.csv output.tmcf
+java -jar datacommons-import-tool.jar lint Marriages_by_sex_and_previous_marital_status_output.csv Marriages_by_sex_and_previous_marital_status_output.tmcf
 ```
 The resulting reports (`report.json`, `summary_report.html`) in `dc_generated/` provide detailed insights into data quality and validation status.
 
 ## Testing
 Testing is performed using the `test_data` directory:
 - Raw Input: `test_data/Marriages_by_sex_and_previous_marital_status_data_raw.csv`
-- Expected Output: `test_data/output.csv`
-- Expected TMCF: `test_data/output.tmcf`
+- Expected Output: `test_data/Marriages_by_sex_and_previous_marital_status_output.csv`
+- Expected TMCF: `test_data/Marriages_by_sex_and_previous_marital_status_output.tmcf`
