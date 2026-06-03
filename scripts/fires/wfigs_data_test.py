@@ -5,6 +5,7 @@ expected output.
 import unittest
 import os
 import pandas as pd
+import numpy as np
 import sys
 import json
 from datetime import datetime
@@ -15,6 +16,7 @@ sys.path.insert(0, module_dir_)
 import wfigs_data
 
 pd.set_option("display.max_rows", None)
+pd.set_option("future.no_silent_downcasting", True)
 
 
 def _GetTestPath(relative_path):
@@ -42,8 +44,8 @@ class PreprocessDataTest(unittest.TestCase):
         expected_df = pd.read_csv(_GetTestPath("test_data/expected_data.csv"))
         processed = wfigs_data.process_df(df)
         self.assertIsNone(
-            pd.testing.assert_frame_equal(processed,
-                                          expected_df,
+            pd.testing.assert_frame_equal(processed.fillna(np.nan),
+                                          expected_df.fillna(np.nan),
                                           check_dtype=False,
                                           check_like=True))
 
