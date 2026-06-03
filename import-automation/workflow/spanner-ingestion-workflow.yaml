@@ -137,7 +137,7 @@ run_aggregation_job:
           - wait_for_aggregation:
               call: sys.sleep
               args:
-                seconds: ${wait_period}
+                seconds: 300
           - check_aggregation_status:
               call: http.post
               args:
