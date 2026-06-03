@@ -29,6 +29,42 @@ To execute the complete import process (download and processing), run:
 - **Download**: Uses `curl` to fetch the latest SDMX-CSV data from Eurostat's dissemination API.
 - **Processing**: Uses `stat_var_processor.py` to map raw data to Data Commons StatVarObservations using the PV map and metadata configuration.
 
+## Processing Instructions
+To process the Eurostat Live Births data and generate statistical variables, use the following commands from your current import data directory:
+
+Download input file
+
+```bash
+mkdir -p input_files
+curl -L --retry 3 "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/DEMO_FMONTH/?format=SDMX-CSV&compressed=false" -o input_files/live_births_total_by_month_data_input.csv
+```
+
+For Test Data Run
+
+```bash
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  "--input_data=./test_data/live_births_total_by_month_data_input.csv" \
+  "--pv_map=./live_births_total_by_month_pvmap.csv" \
+  "--output_path=./test_data/live_births_total_by_month_output" \
+  "--config_file=./live_births_total_by_month_metadata.csv" \
+  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+```
+
+For Main data processing run
+
+```bash
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  "--input_data=./input_files/*.csv" \
+  "--pv_map=./live_births_total_by_month_pvmap.csv" \
+  "--config_file=./live_births_total_by_month_metadata.csv" \
+  "--generate_statvar_name=True" \
+  "--skip_constant_csv_columns=False" \
+  "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod" \
+  "--output_path=./live_births_total_by_month_output" \
+  "--places_resolved_csv=./places_resolved_runtime.csv" \
+  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+```
+
 ## Key Files
 - `run.sh`: Main execution script for download and processing.
 - `live_births_total_by_month_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
