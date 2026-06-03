@@ -57,7 +57,7 @@ class TestEmbeddingUtils(unittest.TestCase):
             field_names=["subject_id", "name", "types"]
         )
 
-        nodes = list(get_updated_nodes(mock_database, None, ["Topic"]))
+        nodes = list(get_updated_nodes(mock_database, None, ["Topic"], 3600))
         
         # Verify Spanner call
         mock_snapshot.execute_sql.assert_called_once()
@@ -95,7 +95,7 @@ class TestEmbeddingUtils(unittest.TestCase):
         )
 
         test_timestamp = datetime(2026, 4, 25, 0, 0, 0)
-        nodes = list(get_updated_nodes(mock_database, test_timestamp, ["Topic"]))
+        nodes = list(get_updated_nodes(mock_database, test_timestamp, ["Topic"], 3600))
         
         # Verify Spanner call
         mock_snapshot.execute_sql.assert_called_once()
@@ -145,7 +145,7 @@ class TestEmbeddingUtils(unittest.TestCase):
 
         mock_database.run_in_transaction.side_effect = side_effect
 
-        affected_rows = generate_embeddings_partitioned(mock_database, nodes)
+        affected_rows = generate_embeddings_partitioned(mock_database, nodes, 3600)
         self.assertEqual(affected_rows, 8)
         self.assertEqual(mock_database.run_in_transaction.call_count, 4)
         
