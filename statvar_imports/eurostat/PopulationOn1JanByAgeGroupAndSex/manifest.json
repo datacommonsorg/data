@@ -1,23 +1,23 @@
 {
   "import_specifications": [
     {
-      "import_name": "EuroStat_Usually_resident_population_on_1_January",
+      "import_name": "EuroStat_Population_On_1_January_By_Age_Group_And_Sex",
       "curator_emails": [
         "support@datacommons.org"
       ],
-      "provenance_url": "https://ec.europa.eu/eurostat/databrowser/product/view/demo_urespop?lang=en",
-      "provenance_description": "Annual tracking of the usually resident population on January 1st across reporting European countries",
+      "provenance_url": "https://ec.europa.eu/eurostat/databrowser/view/demo_pjangroup/default/table",
+      "provenance_description": "Annual European population stock on January 1st by age group and sex, harmonized by Eurostat.",
       "scripts": [
-        "run_commands.sh"
+        "run.sh"
       ],
       "import_inputs": [
         {
-          "template_mcf": "Usually_resident_population_on_1_January_output.tmcf",
-          "cleaned_csv": "Usually_resident_population_on_1_January_output.csv"
+          "template_mcf": "Population_On_1_January_By_Age_Group_And_Sex_output.tmcf",
+          "cleaned_csv": "Population_On_1_January_By_Age_Group_And_Sex_output.csv"
         }
       ],
       "source_files": [
-        "input_files/*.csv"
+        "source_files/*.csv"
       ],
       "cron_schedule": "5 1 1,15 * *",
       "resource_limits": {"cpu": 4, "memory": 8, "disk":100},

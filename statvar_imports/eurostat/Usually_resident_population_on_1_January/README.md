@@ -22,7 +22,7 @@ To process the  Eurostat Usually Resident Population On January 1 data and gener
 
 ```bash
 mkdir -p input_files
-curl -L --retry 3 "curl -L --retry 3 "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/DEMO_URESPOP/?format=SDMX-CSV&compressed=false" -o ./source_files/Usually_resident_population_on_1_January_input.csv
+curl -L --retry 3 "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/DEMO_URESPOP/?format=SDMX-CSV&compressed=false" -o ./source_files/Usually_resident_population_on_1_January_input.csv
 
 ## For Test Data Run
 

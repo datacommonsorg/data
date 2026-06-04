@@ -8,7 +8,7 @@
       "provenance_url": "https://ec.europa.eu/eurostat/databrowser/product/view/demo_urespop?lang=en",
       "provenance_description": "Annual tracking of the usually resident population on January 1st across reporting European countries",
       "scripts": [
-        "run_commands.sh"
+        "run.sh"
       ],
       "import_inputs": [
         {
