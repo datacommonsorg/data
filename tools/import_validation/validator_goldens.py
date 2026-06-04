@@ -298,7 +298,9 @@ def load_nodes_from_file(files: str) -> dict:
             file_nodes = file_util.file_load_csv_dict(input_file,
                                                       key_index=True)
             for node in file_nodes.values():
-                nodes[len(nodes)] = node
+                # Clean up None/empty keys and strip whitespace from headers/keys to ensure robust parsing
+                cleaned_node = {k.strip(): v for k, v in node.items() if k is not None and isinstance(k, str) and k.strip() != ''}
+                nodes[len(nodes)] = cleaned_node
         else:
             # For MCF or JSON, we assume nodes are already keyed by DCID.
             file_nodes = mcf_file_util.load_mcf_nodes(input_file)
