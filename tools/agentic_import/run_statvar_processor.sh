@@ -26,6 +26,7 @@ WORKING_DIR=""
 INPUT_DATA=""
 GEMINI_RUN_ID=""
 OUTPUT_PATH=""
+PLACES_RESOLVED_CSV=""
 
 while [[ $# -gt 0 ]]; do
   case $1 in
@@ -33,25 +34,57 @@ while [[ $# -gt 0 ]]; do
       PYTHON_INTERPRETER="$2"
       shift 2
       ;;
+    --python=*)
+      PYTHON_INTERPRETER="${1#*=}"
+      shift
+      ;;
     --script-dir)
       SCRIPT_DIR="$2"
       shift 2
+      ;;
+    --script-dir=*)
+      SCRIPT_DIR="${1#*=}"
+      shift
       ;;
     --working-dir)
       WORKING_DIR="$2"
       shift 2
       ;;
+    --working-dir=*)
+      WORKING_DIR="${1#*=}"
+      shift
+      ;;
     --input-data)
       INPUT_DATA="$2"
       shift 2
+      ;;
+    --input-data=*)
+      INPUT_DATA="${1#*=}"
+      shift
       ;;
     --gemini-run-id)
       GEMINI_RUN_ID="$2"
       shift 2
       ;;
+    --gemini-run-id=*)
+      GEMINI_RUN_ID="${1#*=}"
+      shift
+      ;;
     --output-path)
       OUTPUT_PATH="$2"
       shift 2
+      ;;
+    --output-path=*)
+      OUTPUT_PATH="${1#*=}"
+      shift
+      ;;
+    --places_resolved_csv)
+      PLACES_RESOLVED_CSV="$2"
+      shift 2
+      ;;
+    --places_resolved_csv=*)
+      PLACES_RESOLVED_CSV="${1#*=}"
+      shift
       ;;
     *)
       echo "Unknown option $1"
@@ -96,6 +129,7 @@ echo "Running statvar processor..."
   --skip_constant_csv_columns=False \
   --output_columns="${OUTPUT_COLUMNS}" \
   --output_counters="${OUTPUT_COUNTERS}" \
+  --places_resolved_csv="${PLACES_RESOLVED_CSV}" \
   --output_path="${OUTPUT_PREFIX}" > "${PROCESSOR_LOG}" 2>&1
 
 # Capture the processor exit code
