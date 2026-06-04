@@ -88,9 +88,9 @@ FILE_TYPES_CONFIG = [
 @retry(tries=3,
        delay=5,
        backoff=2,
-       exceptions=requests.exceptions.ConnectionError)
+       exceptions=requests.exceptions.RequestException)
 def retry_method(url, headers=None):
-    response = requests.get(url, stream=True, headers=headers, timeout=120)
+    response = requests.get(url, stream=True, headers=headers, timeout=(30, 300))
     response.raise_for_status()
     return response
 
@@ -109,10 +109,18 @@ def download_files():
             filename = name_template.format(last_two_digits_formatted)
             url = url_template.format(year, last_two_digits_formatted)
             logging.info(f"downloading url: {url}")
+
+            # Temporary path to save the zip file instead of keeping it in memory
+            temp_zip_path = os.path.join(_LOCAL_OUTPUT_PATH, f"temp_{filename}")
             try:
                 response = retry_method(url)
-                zip_content_stream = io.BytesIO(response.content)
-                with zipfile.ZipFile(zip_content_stream, 'r') as zip_ref:
+                # Stream chunk by chunk directly to disk to avoid ReadTimeout issues
+                with open(temp_zip_path, 'wb') as f:
+                    for chunk in response.iter_content(chunk_size=8192):
+                        if chunk:
+                            f.write(chunk)
+
+                with zipfile.ZipFile(temp_zip_path, 'r') as zip_ref:
                     for member in zip_ref.namelist():
                         if not member.endswith('/') and member.lower().endswith(
                                 '.txt'):
