@@ -1,7 +1,7 @@
 {
   "import_specifications": [
     {
-      "import_name": "EuroStat_Pop_Broad_Age_Group_sex",
+      "import_name": "EuroStat_Pop_Broad_Age_Group_Sex",
       "curator_emails": [
         "support@datacommons.org"
       ],

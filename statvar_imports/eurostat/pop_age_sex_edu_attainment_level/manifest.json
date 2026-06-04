@@ -6,7 +6,7 @@
         "support@datacommons.org"
       ],
       "provenance_url": "https://ec.europa.eu/eurostat/databrowser/view/DEMO_PJANEDU/default/table?lang=en",
-      "provenance_description": "Annual tracking of the total population on January 1st, broken down simultaneously by age groups, sex, and highest level of education completed",
+      "provenance_description": "Annual tracking of the total population on January 1st, by age groups, sex, and highest level of education completed",
       "scripts": [
         "run.sh"
       ],
