@@ -90,7 +90,7 @@ FILE_TYPES_CONFIG = [
        backoff=2,
        exceptions=requests.exceptions.ConnectionError)
 def retry_method(url, headers=None):
-    response = requests.get(url, stream=True, headers=headers, timeout=30)
+    response = requests.get(url, stream=True, headers=headers, timeout=120)
     response.raise_for_status()
     return response
 
