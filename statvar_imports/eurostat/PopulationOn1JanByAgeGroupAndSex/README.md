@@ -25,7 +25,7 @@ To process the Eurostat Population By Age Group And Sex On January 1 data and ge
 # Download input file
 
 ```bash
-mkdir -p input_files
+mkdir -p source_files
 curl -L --retry 3 "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/DEMO_PJANGROUP/?format=SDMX-CSV&compressed=false" -o ./source_files/Population_on_1_January_by_age_group_and_sex_data_input.csv
 
 ## For Test Data Run
