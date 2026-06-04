@@ -25,9 +25,9 @@ OBS_VALUE,value,{Number},,,,,,
 # Observation status flags
 OBS_FLAG:e,measurementMethod,dcs:EstimatedValue,,,,,,
 OBS_FLAG:p,measurementMethod,dcs:ProvisionalValue,,,,,,
-OBS_FLAG:m,MissingValue,'',,,,,
+OBS_FLAG:m,MISSINGVALUE,'',,,,,
 OBS_FLAG:b,measurementMethod,dcs:SeriesBreak,,,,,,
 # Confidentiality status
-CONF_STATUS:C,ConfidentialValue,'',,,,,,
-CONF_STATUS:N,NotForPublication,'',,,,,,
-CONF_STATUS:P,ConfidentialValue,'',,,,,,
+CONF_STATUS:C,CONFIDENTIALVALUE,'',,,,,,
+CONF_STATUS:N,NOTFORPUBLICATION,'',,,,,,
+CONF_STATUS:P,CONFIDENTIALVALUE,'',,,,,,
