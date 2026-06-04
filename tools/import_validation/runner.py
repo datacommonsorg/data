@@ -215,7 +215,30 @@ class ValidationRunner:
 
                 # Resolve paths relative to the directory of the validation config.
                 if 'summary_report' in rule.get('rule_id', ''):
-                    config_dir = os.path.dirname(os.path.abspath(self.validation_config_path))
+                    # Helper to find a base directory containing target_sub_path by walking up
+                    def find_base_dir(start_path: str, target_sub_path: str):
+                        if not start_path:
+                            return None
+                        curr = os.path.abspath(start_path)
+                        for _ in range(10):  # limit to 10 levels up
+                            if os.path.exists(os.path.join(curr, target_sub_path)):
+                                return curr
+                            parent = os.path.dirname(curr)
+                            if parent == curr:
+                                break
+                            curr = parent
+                        return None
+
+                    config_dir = None
+                    # Walk up from validation_config_path, stats_summary, or CWD to find where 'golden_data' lives
+                    for start in [self.validation_config_path, stats_summary, os.getcwd()]:
+                        config_dir = find_base_dir(start, 'golden_data')
+                        if config_dir:
+                            break
+
+                    if not config_dir:
+                        config_dir = os.path.dirname(os.path.abspath(self.validation_config_path))
+
                     print(f"DEBUG: Found summary_report rule: '{rule.get('rule_id')}'")
                     print(f"DEBUG: Config directory resolved to: '{config_dir}'")
                     for path_key in ['golden_files', 'input_files']:
