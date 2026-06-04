@@ -1,4 +1,4 @@
-"StatVar","MinDate","Units","MeasurementMethods","observationPeriods"
+StatVar, MinDate, Units, MeasurementMethods, observationPeriods
 "Count_Death_IntentionalSelfHarm_Male_AsFractionOf_Count_Person_Male","2000","[Per100000Males]","[]","[P1Y]"
 "Amount_EconomicActivity_GrossNationalIncome_PurchasingPowerParity","1990","[InternationalDollar]","[]","[P1Y]"
 "Count_Person_Upto4Years_Wasting_AsFractionOf_Count_Person_Upto4Years","1983","[Percent]","[JointChildMalnutritionEstimate]","[P1Y]"
