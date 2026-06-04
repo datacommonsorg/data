@@ -13,7 +13,8 @@
 -- limitations under the License.
 
 CREATE PROTO BUNDLE (
-  `org.datacommons.Observations`
+  `org.datacommons.Observations`,
+  `org.datacommons.Observations.ValuesEntry`
 );
 
 CREATE TABLE Node (
@@ -117,24 +118,40 @@ CREATE TABLE Cache (
   value JSON,
 ) PRIMARY KEY(type, key, provenance);
 
-CREATE TABLE VariableMetadata (
-  variable_measured STRING(1024) NOT NULL,
-  import_name STRING(1024) NOT NULL,
-  facet_id STRING(1024) NOT NULL,
-  observation_period STRING(1024),
-  measurement_method STRING(1024),
-  unit STRING(1024),
-  scaling_factor STRING(1024),
-  is_dc_aggregate BOOL,
-  total_observations INT64,
-  observed_places INT64,
-  min_date STRING(1024),
-  max_date STRING(1024),
-  place_types ARRAY<STRING(1024)>,
-) PRIMARY KEY(variable_measured, import_name);
-
 CREATE INDEX InEdge ON Edge(object_id, predicate, subject_id, provenance) OPTIONS (
   columnar_policy = 'enabled'
 );
 
 CREATE INDEX VariableMeasuredObservationAbout ON Observation(variable_measured, observation_about);
+
+-- NodeEmbedding table, NodeEmbeddingIndex index and NodeEmbeddingModel model are necessary for embeddings to work properly.
+
+CREATE TABLE NodeEmbedding (
+  subject_id STRING(1024) NOT NULL,
+  embedding_content STRING(MAX),
+  types ARRAY<STRING(1024)>,
+  embeddings ARRAY<FLOAT64>(vector_length=>768)
+) PRIMARY KEY(subject_id),
+INTERLEAVE IN PARENT Node ON DELETE CASCADE;
+
+CREATE VECTOR INDEX NodeEmbeddingIndex
+ON NodeEmbedding(embeddings)
+WHERE embeddings IS NOT NULL
+OPTIONS (
+  distance_type = 'COSINE'
+);
+
+CREATE MODEL NodeEmbeddingModel
+INPUT(
+  content STRING(MAX),
+  task_type STRING(MAX),
+)
+OUTPUT(
+  embeddings
+    STRUCT<
+      statistics STRUCT<truncated BOOL, token_count FLOAT64>,
+      values ARRAY<FLOAT64>>
+)
+REMOTE OPTIONS (
+  endpoint = '{{ embeddings_endpoint }}'
+);

@@ -31,7 +31,7 @@ class SpannerClient:
     and getting/updating import statuses.
     """
     _LOCK_ID = "global_ingestion_lock"
-    _EMBEDDING_MODEL_PATH = "projects/{project}/locations/{location}/publishers/google/models/{model}"
+    _EMBEDDING_MODEL_PATH = "//aiplatform.googleapis.com/projects/{project}/locations/{location}/publishers/google/models/{model}"
 
     def __init__(self,
                  project_id: str,
@@ -430,7 +430,7 @@ class SpannerClient:
                 f'Error updating version history for {import_name}: {e}')
             raise
 
-    def initialize_database(self, enable_embeddings=False):
+    def initialize_database(self):
         """Initializes the database by creating all required tables and proto bundles."""
         logging.info("Initializing database...")
 
@@ -467,15 +467,10 @@ class SpannerClient:
 
         required_tables = [
             "Node", "Edge", "Observation", "ImportStatus", "IngestionHistory",
-            "ImportVersionHistory", "IngestionLock", "Cache", "VariableMetadata"
+            "ImportVersionHistory", "IngestionLock", "Cache", "NodeEmbedding"
         ]
-        required_indexes = ["InEdge", "VariableMeasuredObservationAbout"]
-        required_models = []
-
-        if enable_embeddings:
-            required_tables.append("NodeEmbedding")
-            required_indexes.append("NodeEmbeddingIndex")
-            required_models.append("NodeEmbeddingModel")
+        required_indexes = ["InEdge", "VariableMeasuredObservationAbout", "NodeEmbeddingIndex"]
+        required_models = ["NodeEmbeddingModel"]
 
         missing_tables = [
             t for t in required_tables if t not in existing_tables
@@ -506,30 +501,17 @@ class SpannerClient:
         schema_path = os.path.join(os.path.dirname(__file__), 'schema.sql')
         logging.info(f"Reading schema from {schema_path}")
         try:
+            embeddings_endpoint = self._get_embeddings_endpoint()
             with open(schema_path, 'r') as f:
                 schema_content = f.read()
+
+            schema_content = Template(
+                schema_content).render(
+                    embeddings_endpoint=embeddings_endpoint)
 
             ddl_statements = [
                 s.strip() for s in schema_content.split(';') if s.strip()
             ]
-
-            if enable_embeddings:
-                embeddings_endpoint = self._get_embeddings_endpoint()
-                embedding_schema_path = os.path.join(os.path.dirname(__file__),
-                                                     'embedding_schema.sql')
-                logging.info(
-                    f"Reading embedding schema from {embedding_schema_path}")
-                with open(embedding_schema_path, 'r') as f:
-                    embedding_schema_content = f.read()
-                embedding_schema_content = Template(
-                    embedding_schema_content).render(
-                        embeddings_endpoint=embeddings_endpoint)
-                embedding_ddl_statements = [
-                    s.strip()
-                    for s in embedding_schema_content.split(';')
-                    if s.strip()
-                ]
-                ddl_statements.extend(embedding_ddl_statements)
         except Exception as e:
             logging.error(f"Failed to read schema file: {e}")
             raise
@@ -569,7 +551,7 @@ class SpannerClient:
                 "StatVarGroup": ["StatVarGroup", "StatVarGroup", "StatVarGroup", ["Class"], spanner.COMMIT_TIMESTAMP],
                 "StatVarObservation": ["StatVarObservation", "StatVarObservation", "StatVarObservation", ["Class"], spanner.COMMIT_TIMESTAMP],
                 "Topic": ["Topic", "Topic", "Topic", ["Class"], spanner.COMMIT_TIMESTAMP],
-                "c/g/Root": ["c/g/Root", "c/g/Root", "c/g/Root", ["StatVarGroup"], spanner.COMMIT_TIMESTAMP],
+                "dc/g/Root": ["dc/g/Root", "Data Commons Variables", "dc/g/Root", ["StatVarGroup"], spanner.COMMIT_TIMESTAMP],
             }
             subjects = list(candidates.keys())
             sql = "SELECT subject_id FROM Node WHERE subject_id IN UNNEST(@subjects)"

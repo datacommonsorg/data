@@ -12,39 +12,88 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Child Cloud Build configuration for deploying to a specific environment.
-# Defaults are set to PRODUCTION. Staging builds must override these values.
-#
+# Parent Cloud Build configuration that orchestrates Staging and Production deployments.
+# Usage: gcloud builds submit . --config=cloudbuild.yaml --project=datcom-ci
+
 substitutions:
-  # Production config.
-  _PROJECT_ID: 'datcom-import-automation-prod'
-  _SPANNER_PROJECT_ID: 'datcom-store'
-  _SPANNER_INSTANCE_ID: 'dc-kg-test'
-  _SPANNER_DATABASE_ID: 'dc_graph_import'
-  _SPANNER_GRAPH_DATABASE_ID: 'dc_graph_2025_11_07'
-  _GCS_BUCKET_ID: 'datcom-prod-imports'
-  _LOCATION: 'us-central1'
-  _GCS_MOUNT_BUCKET: 'datcom-volume-mount'
+  # Staging Configuration (Overrides defaults in child build)
+  _PROJECT_ID: 'datcom-ci'
+  _SPANNER_PROJECT_ID: 'datcom-ci'
+  _SPANNER_INSTANCE_ID: 'datcom-spanner-test'
+  _SPANNER_DATABASE_ID: 'dc-test-db'
+  _SPANNER_GRAPH_DATABASE_ID: 'dc-test-db'
+  _GCS_BUCKET_ID: 'datcom-ci-test'
+  _GCS_MOUNT_BUCKET: 'datcom-ci-test'
   _BQ_DATASET_ID: 'datacommons'
-  _PROJECT_NUMBER: '965988403328'
+  _LOCATION: 'us-central1'
+  _PROJECT_NUMBER: '879489846695'
   _AR_REPO_URL: 'us-docker.pkg.dev/datcom-ci/gcr.io'
+  _BQ_SPANNER_CONN_ID: 'projects/datcom-ci/locations/us-central1/connections/bq_spanner_conn_test'
+  _VERSION: '${SHORT_SHA}'
+  _DATAFLOW_TEMPLATE_PATH: 'gs://datcom-templates/templates/flex/ingestion.json'
+  _PROD_TAG: 'latest' # TODO: rename to prod
 
 steps:
-- id: 'ingestion-helper-service'
-  name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'ingestion-helper-service', '--image', '${_AR_REPO_URL}/datacommons-ingestion-helper:latest', '--region', '${_LOCATION}', '--project', '${_PROJECT_ID}', '--no-allow-unauthenticated', '--set-env-vars', 'PROJECT_ID=${_PROJECT_ID},LOCATION=${_LOCATION},SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},SPANNER_GRAPH_DATABASE_ID=${_SPANNER_GRAPH_DATABASE_ID},GCS_BUCKET_ID=${_GCS_BUCKET_ID},BQ_DATASET_ID=${_BQ_DATASET_ID}']
 
-- id: 'import-helper-service'
+# 1. Build and push helper images
+- id: 'build-ingestion-helper'
   name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'import-helper-service', '--image', '${_AR_REPO_URL}/datacommons-import-helper:latest', '--region', '${_LOCATION}', '--project', '${_PROJECT_ID}', '--no-allow-unauthenticated', '--set-env-vars', 'PROJECT_ID=${_PROJECT_ID},LOCATION=${_LOCATION},PROJECT_NUMBER=${_PROJECT_NUMBER},GCS_BUCKET_ID=${_GCS_BUCKET_ID}']
+  args: ['builds', 'submit', 'ingestion-helper', '--config', 'ingestion-helper/cloudbuild.yaml', '--substitutions', '_AR_REPO_URL=${_AR_REPO_URL},_VERSION=${_VERSION}']
+  dir: 'import-automation/workflow'
 
-- id: 'import-automation-workflow'
+- id: 'build-import-helper'
   name: 'gcr.io/cloud-builders/gcloud'
-  args: ['workflows', 'deploy', 'import-automation-workflow', '--project', '${_PROJECT_ID}', '--location', '${_LOCATION}', '--source', 'import-automation-workflow.yaml', '--set-env-vars', 'LOCATION=${_LOCATION},GCS_BUCKET_ID=${_GCS_BUCKET_ID},GCS_MOUNT_BUCKET=${_GCS_MOUNT_BUCKET},PROJECT_NUMBER=${_PROJECT_NUMBER}']
+  args: ['builds', 'submit', 'import-helper', '--config', 'import-helper/cloudbuild.yaml', '--substitutions', '_AR_REPO_URL=${_AR_REPO_URL},_VERSION=${_VERSION}']
+  dir: 'import-automation/workflow'
 
-- id: 'spanner-ingestion-workflow'
+# 2. Trigger Staging Build (Child)
+# Overrides default (Production) values with Staging values.
+- id: 'deploy-staging'
   name: 'gcr.io/cloud-builders/gcloud'
-  args: ['workflows', 'deploy', 'spanner-ingestion-workflow', '--project', '${_PROJECT_ID}', '--location', '${_LOCATION}', '--source', 'spanner-ingestion-workflow.yaml', '--set-env-vars', 'LOCATION=${_LOCATION},PROJECT_ID=${_PROJECT_ID},SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},SPANNER_DATABASE_ID=${_SPANNER_GRAPH_DATABASE_ID},PROJECT_NUMBER=${_PROJECT_NUMBER}']
+  args:
+    - 'builds'
+    - 'submit'
+    - '.'
+    - '--config=deploy-services.yaml'
+    - '--project=${_PROJECT_ID}'
+    - '--substitutions=_PROJECT_ID=${_PROJECT_ID},_SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},_SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},_SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},_SPANNER_GRAPH_DATABASE_ID=${_SPANNER_GRAPH_DATABASE_ID},_GCS_BUCKET_ID=${_GCS_BUCKET_ID},_LOCATION=${_LOCATION},_GCS_MOUNT_BUCKET=${_GCS_MOUNT_BUCKET},_BQ_DATASET_ID=${_BQ_DATASET_ID},_PROJECT_NUMBER=${_PROJECT_NUMBER},_BQ_SPANNER_CONN_ID=${_BQ_SPANNER_CONN_ID},_VERSION=${_VERSION},_DATAFLOW_TEMPLATE_PATH=${_DATAFLOW_TEMPLATE_PATH}'
+  dir: 'import-automation/workflow'
+
+# 2. Run E2E Tests on Staging
+- id: 'e2e-test-staging'
+  name: 'python:3.11'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      pip install google-cloud-spanner google-cloud-workflows absl-py
+      python spanner_ingestion_test.py
+  env:
+    - 'PROJECT_ID=${_PROJECT_ID}'
+    - 'LOCATION=${_LOCATION}'
+    - 'SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID}'
+    - 'SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID}'
+    - 'SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID}'
+    - 'GCS_BUCKET_ID=${_GCS_BUCKET_ID}'
+  dir: 'import-automation/workflow'
+
+- id: 'tag-prod'
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['builds', 'submit', '.', '--config', 'tag-prod.yaml', '--substitutions', '_AR_REPO_URL=${_AR_REPO_URL},_PROD_TAG=${_PROD_TAG},_VERSION=${_VERSION}']
+  dir: 'import-automation/workflow'
+
+# 3. Trigger Production Build (Child)
+# Uses default (Production) values defined in cloudbuild.yaml.
+- id: 'deploy-prod'
+  name: 'gcr.io/cloud-builders/gcloud'
+  args:
+    - 'builds'
+    - 'submit'
+    - '.'
+    - '--config=deploy-services.yaml'
+    - '--project=${_PROJECT_ID}'  # Build runs in CI project, deploys to Prod
+    - '--substitutions=_VERSION=${_PROD_TAG}'
+  dir: 'import-automation/workflow'
 
 options:
   logging: CLOUD_LOGGING_ONLY

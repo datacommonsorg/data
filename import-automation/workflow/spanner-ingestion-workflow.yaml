@@ -7,13 +7,14 @@ main:
           - wait_period: 300 # seconds
           - project_id: '${sys.get_env("PROJECT_ID")}'
           - dataflow_job_name: ${"ingestion-job-" + string(int(sys.now()))}
-          - dataflow_gcs_path: ${default(map.get(args, "templateGcsPath"), "gs://datcom-templates/templates/flex/ingestion.json")}
+          - dataflow_gcs_path: '${sys.get_env("DATAFLOW_TEMPLATE_PATH")}'
           - location: '${sys.get_env("LOCATION")}'
           - spanner_project_id: '${sys.get_env("SPANNER_PROJECT_ID")}'
           - spanner_instance_id: '${sys.get_env("SPANNER_INSTANCE_ID")}'
           - spanner_database_id: '${sys.get_env("SPANNER_DATABASE_ID")}'
           - helper_url: ${"https://ingestion-helper-service-" + sys.get_env("PROJECT_NUMBER") + "." + location + ".run.app"}
           - import_list: ${default(map.get(args, "importList"), [])}
+          - dataflow_job_id: null
           - execution_error: null
     - acquire_ingestion_lock:
         try:
@@ -62,15 +63,11 @@ main:
                   helper_url: ${helper_url}
                   workflow_id: '${sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
                 result: dataflow_job_id
-            - run_aggregation:
-                call: http.post
+            - run_aggregation_job:
+                call: run_aggregation_job
                 args:
-                  url: ${helper_url}
-                  auth:
-                    type: OIDC
-                  body:
-                    actionType: run_aggregation
-                    importList: ${import_info.body}
+                  import_list: ${import_info.body}
+                  helper_url: ${helper_url}
             - update_ingestion_status:
                 call: http.post
                 args:
@@ -87,6 +84,19 @@ main:
         except:
           as: e
           steps:
+            - record_failure:
+                call: http.post
+                args:
+                  url: ${helper_url}
+                  auth:
+                    type: OIDC
+                  body:
+                    actionType: update_ingestion_status
+                    workflowId: '${sys.get_env("GOOGLE_CLOUD_WORKFLOW_EXECUTION_ID")}'
+                    jobId: ${default(dataflow_job_id, default(map.get(e, "job_id"), "N/A"))}
+                    importList: '${import_info.body}'
+                    status: 'RETRY'
+                result: retry_response
             - capture_error:
                 assign:
                   - execution_error: ${e}
@@ -106,6 +116,45 @@ main:
             raise: ${execution_error}
     - return_import_info:
         return: '${import_info.body}'
+
+# This sub-workflow runs aggregation jobs and waits for them to complete.
+run_aggregation_job:
+  params: [import_list, helper_url]
+  steps:
+    - run_aggregation:
+        call: http.post
+        args:
+          url: ${helper_url}
+          timeout: 300
+          auth:
+            type: OIDC
+          body:
+            actionType: run_aggregation
+            importList: ${import_list}
+        result: aggregation_response
+    - check_aggregation_status_loop:
+        steps:
+          - wait_for_aggregation:
+              call: sys.sleep
+              args:
+                seconds: 300
+          - check_aggregation_status:
+              call: http.post
+              args:
+                url: ${helper_url}
+                auth:
+                  type: OIDC
+                body:
+                  actionType: check_aggregation_status
+                  jobIds: ${aggregation_response.body.jobIds}
+              result: aggregation_status_response
+          - evaluate_aggregation_status:
+              switch:
+                - condition: ${aggregation_status_response.body.status == "DONE"}
+                  return: 'OK'
+                - condition: ${aggregation_status_response.body.status == "FAILED"}
+                  raise: ${aggregation_status_response.body.error}
+              next: check_aggregation_status_loop
 
 # This sub-workflow launches a Dataflow job and waits for it to complete.
 run_dataflow_job:
@@ -162,22 +211,8 @@ run_dataflow_job:
           - condition: ${job_status.currentState == "JOB_STATE_DONE"}
             return: ${launch_result.job.id}
           - condition: ${job_status.currentState == "JOB_STATE_FAILED" or job_status.currentState == "JOB_STATE_CANCELLED"}
-            next: record_failed_imports 
+            raise:
+              message: '${jobName + " dataflow job failed with status: " + job_status.currentState}'
+              code: 500
+              job_id: ${launch_result.job.id}
         next: wait_for_job_completion
-    - record_failed_imports:
-        call: http.post
-        args:
-          url: ${helper_url}
-          auth:
-            type: OIDC
-          body:
-            actionType: update_ingestion_status
-            workflowId: '${workflow_id}'
-            jobId: '${launch_result.job.id}'
-            importList: '${json.decode(import_list)}'
-            status: 'PENDING'
-        result: retry_response
-    - fail_workflow:
-        raise:
-          message: '${jobName + " dataflow job failed with status: " + job_status.currentState}'
-          code: 500

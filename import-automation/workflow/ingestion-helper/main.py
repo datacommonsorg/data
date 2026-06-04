@@ -28,9 +28,12 @@ flags.DEFINE_string('spanner_database_id',
 flags.DEFINE_string('spanner_graph_database_id',
                     os.environ.get('SPANNER_GRAPH_DATABASE_ID'),
                     'Spanner Graph Database ID')
+flags.DEFINE_string('spanner_connection_id',
+                    os.environ.get('BQ_SPANNER_CONN_ID'),
+                    'BigQuery Connection ID to access Cloud Spanner')
 flags.DEFINE_string('gcs_bucket_id', os.environ.get('GCS_BUCKET_ID'),
                     'GCS Bucket ID')
-flags.DEFINE_string('location', os.environ.get('LOCATION'), 'Location')
+flags.DEFINE_string('location', os.environ.get('LOCATION') or os.environ.get('REGION'), 'Location')
 flags.DEFINE_bool(
     'enable_embeddings',
     os.environ.get('ENABLE_EMBEDDINGS', 'false').lower() == 'true',
@@ -38,6 +41,13 @@ flags.DEFINE_bool(
 flags.DEFINE_list(
     'node_types', ['StatisticalVariable', 'Topic'],
     'Node types to generate embeddings for')
+flags.DEFINE_bool(
+    'is_base_dc',
+    os.environ.get('IS_BASE_DC', 'true').lower() == 'true',
+    'Is base DC')
+flags.DEFINE_integer(
+    'timeout', int(os.environ.get('TIMEOUT', 1700)),
+    'Timeout in seconds for spanner client to execute queries')
 
 if not FLAGS.is_parsed():
     FLAGS(['ingestion_helper'])
@@ -155,11 +165,13 @@ def ingestion_helper(request):
         status = request_json['status']
         logging.info(f'Updating import {import_name} to status {status}')
         params = import_utils.get_import_params(request_json)
-        next_refresh = import_utils.get_next_refresh(FLAGS.project_id,
-                                                     FLAGS.location,
-                                                     import_name)
+        next_refresh = None
+        if FLAGS.is_base_dc:
+            next_refresh = import_utils.get_next_refresh(FLAGS.project_id, FLAGS.location, import_name)
+
         if next_refresh:
             params['next_refresh'] = next_refresh
+
         if status == 'STAGING':
             version = os.path.basename(request_json.get('latestVersion', ''))
             if not version:
@@ -215,9 +227,7 @@ def ingestion_helper(request):
     elif action_type == 'initialize_database':
         # Initializes the database by creating all required tables and proto bundles.
         logging.info("Action: initialize_database")
-        enable_embeddings = request_json.get('enableEmbeddings',
-                                             FLAGS.enable_embeddings)
-        spanner.initialize_database(enable_embeddings=enable_embeddings)
+        spanner.initialize_database()
         return ('OK', 200)
     elif action_type == 'seed_database':
         # Seeds the database with base empty nodes.
@@ -237,9 +247,9 @@ def ingestion_helper(request):
         try:
             logging.info(f"Job started. Fetching all nodes for types: {node_types}")
             timestamp = get_latest_lock_timestamp(spanner.database)
-            nodes = get_updated_nodes(spanner.database, timestamp, node_types)
+            nodes = get_updated_nodes(spanner.database, timestamp, node_types, timeout=FLAGS.timeout)
             converted_nodes = filter_and_convert_nodes(nodes)
-            affected_rows = generate_embeddings_partitioned(spanner.database, converted_nodes)
+            affected_rows = generate_embeddings_partitioned(spanner.database, converted_nodes, timeout=FLAGS.timeout)
             return (f"OK [Affected rows: {affected_rows}]", 200)
         except Exception as e:
             logging.error(f"Embedding ingestion failed: {e}")
@@ -249,14 +259,73 @@ def ingestion_helper(request):
         # Input:
         #   importList: list of imports to aggregate
         import_list = request_json.get('importList', [])
-        aggregation = AggregationUtils()
+        
+        # Validate required flags are not empty or None
+        missing_flags = []
+        if not FLAGS.spanner_connection_id:
+            missing_flags.append('spanner_connection_id (BQ_SPANNER_CONN_ID)')
+        if not FLAGS.spanner_project_id:
+            missing_flags.append('spanner_project_id (SPANNER_PROJECT_ID)')
+        if not FLAGS.spanner_instance_id:
+            missing_flags.append('spanner_instance_id (SPANNER_INSTANCE_ID)')
+        if not FLAGS.spanner_graph_database_id:
+            missing_flags.append('spanner_graph_database_id (SPANNER_GRAPH_DATABASE_ID)')
+            
+        if missing_flags:
+            error_msg = f"Missing required configuration flags/env-vars: {', '.join(missing_flags)}"
+            logging.error(error_msg)
+            return (error_msg, 400)
+
+        aggregation = AggregationUtils(
+            connection_id=FLAGS.spanner_connection_id,
+            project_id=FLAGS.spanner_project_id,
+            instance_id=FLAGS.spanner_instance_id,
+            database_id=FLAGS.spanner_graph_database_id,
+            location=FLAGS.location,
+            is_base_dc=FLAGS.is_base_dc,
+        )
         try:
-            if aggregation.run_aggregation(import_list):
-                return ('OK', 200)
-            else:
-                return ('Aggregation failed', 500)
+            job_ids = aggregation.run_aggregation(import_list)
+            return jsonify({'status': 'SUBMITTED', 'jobIds': job_ids}), 200
         except Exception as e:
             return (f"Aggregation failed: {str(e)}", 500)
+    elif action_type == 'clear_redis_cache':
+        logging.info("Action: clear_redis_cache")
+        redis_host = os.environ.get("REDIS_HOST")
+        redis_port = os.environ.get("REDIS_PORT", "6379")
+        if redis_host:
+            try:
+                import redis
+                r = redis.Redis(host=redis_host, port=int(redis_port))
+                r.flushall(asynchronous=True)
+                logging.info(f"Redis cache at {redis_host}:{redis_port} flushed successfully (async).")
+                return jsonify({'status': 'SUCCESS', 'message': 'Cache cleared'}), 200
+            except Exception as e:
+                logging.error(f"Failed to flush Redis cache: {e}")
+                return jsonify({'status': 'ERROR', 'message': str(e)}), 500
+        else:
+            logging.warning("REDIS_HOST not set, skipping cache flush.")
+            return jsonify({'status': 'SKIPPED', 'message': 'REDIS_HOST not set'}), 200
+    elif action_type == 'check_aggregation_status':
+        # Checks the status of submitted aggregation BigQuery jobs.
+        # Input:
+        #   jobIds: list of BigQuery job IDs
+        job_ids = request_json.get('jobIds', [])
+        if not job_ids:
+             return ('Missing or empty jobIds', 400)
+
+        aggregation = AggregationUtils(
+            connection_id=FLAGS.spanner_connection_id,
+            project_id=FLAGS.spanner_project_id,
+            instance_id=FLAGS.spanner_instance_id,
+            database_id=FLAGS.spanner_graph_database_id,
+            location=FLAGS.location,
+        )
+        try:
+            status = aggregation.check_aggregation_status(job_ids)
+            return jsonify(status), 200
+        except Exception as e:
+            return (f"Aggregation status check failed: {str(e)}", 500)
 
     else:
         return (f'Unknown actionType: {action_type}', 400)
