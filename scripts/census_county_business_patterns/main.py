@@ -85,14 +85,30 @@ FILE_TYPES_CONFIG = [
 ]
 
 
+class NonRetryableHTTPError(Exception):
+
+    def __init__(self, e):
+        super().__init__(str(e))
+        self.response = e.response
+
+
 @retry(tries=3,
        delay=5,
        backoff=2,
-       exceptions=requests.exceptions.ConnectionError)
-def retry_method(url, headers=None):
-    response = requests.get(url, stream=True, headers=headers, timeout=120)
-    response.raise_for_status()
-    return response
+       exceptions=requests.exceptions.RequestException)
+def retry_method(url, filepath, headers=None):
+    try:
+        with requests.get(url, stream=True, headers=headers,
+                          timeout=(30, 300)) as response:
+            response.raise_for_status()
+            with open(filepath, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+    except requests.exceptions.HTTPError as e:
+        if e.response is not None and 400 <= e.response.status_code < 500:
+            raise NonRetryableHTTPError(e)
+        raise
 
 
 def download_files():
@@ -109,17 +125,17 @@ def download_files():
             filename = name_template.format(last_two_digits_formatted)
             url = url_template.format(year, last_two_digits_formatted)
             logging.info(f"downloading url: {url}")
+
+            # Temporary path to save the zip file instead of keeping it in memory
+            temp_zip_path = os.path.join(_LOCAL_OUTPUT_PATH, f"temp_{filename}")
             try:
-                response = retry_method(url)
-                zip_content_stream = io.BytesIO(response.content)
-                with zipfile.ZipFile(zip_content_stream, 'r') as zip_ref:
+                retry_method(url, temp_zip_path)
+                with zipfile.ZipFile(temp_zip_path, 'r') as zip_ref:
                     for member in zip_ref.namelist():
                         if not member.endswith('/') and member.lower().endswith(
                                 '.txt'):
                             extract_path = os.path.join(
-                                _LOCAL_OUTPUT_PATH,
-                                os.path.join(_LOCAL_OUTPUT_PATH,
-                                             os.path.basename(member)))
+                                _LOCAL_OUTPUT_PATH, os.path.basename(member))
                             abs_extract_path = os.path.abspath(extract_path)
                             abs_target_dir = os.path.abspath(_LOCAL_OUTPUT_PATH)
 
@@ -136,22 +152,33 @@ def download_files():
                             logging.info(
                                 f" Skipping non-txt file/folder in zip: '{member}'"
                             )
-            except (requests.exceptions.RequestException,
-                    zipfile.BadZipFile) as e:
-                # Check if this is the latest year which might not be published yet (404)
-                is_404 = (isinstance(e, requests.exceptions.HTTPError) and
-                          e.response.status_code == 404)
-                if year == latest_year and is_404:
+            except (requests.exceptions.RequestException, zipfile.BadZipFile,
+                    NonRetryableHTTPError) as e:
+                status_code = None
+                if isinstance(e, NonRetryableHTTPError):
+                    status_code = e.response.status_code if e.response is not None else None
+                elif hasattr(e, 'response') and e.response is not None:
+                    status_code = getattr(e.response, 'status_code', None)
+                if year == latest_year and (status_code == 404 or
+                                            isinstance(e, zipfile.BadZipFile)):
                     logging.warning(
-                        f"Latest year {year} not yet available at {url}. Skipping."
+                        f"Latest year {year} data is invalid or not yet available at {url}. Skipping."
                     )
                     continue
                 else:
                     # For historical years or non-404 errors, we want the script to fail
                     logging.error(
-                        f"Critical failure: Could not download historical data for {year} at {url}."
+                        f"Critical failure: Could not download historical data for {year} at {url}. Error: {e}"
                     )
                     raise e
+            finally:
+                if os.path.exists(temp_zip_path):
+                    try:
+                        os.remove(temp_zip_path)
+                    except OSError as cleanup_error:
+                        logging.warning(
+                            f"Failed to delete temp file {temp_zip_path}: {cleanup_error}"
+                        )
 
 
 def main(argv):
