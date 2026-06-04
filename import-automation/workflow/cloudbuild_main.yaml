@@ -29,18 +29,21 @@ substitutions:
   _PROJECT_NUMBER: '879489846695'
   _AR_REPO_URL: 'us-docker.pkg.dev/datcom-ci/gcr.io'
   _BQ_SPANNER_CONN_ID: 'projects/datcom-ci/locations/us-central1/connections/bq_spanner_conn_test'
+  _VERSION: '${SHORT_SHA}'
+  _DATAFLOW_TEMPLATE_PATH: 'gs://datcom-templates/templates/flex/ingestion.json'
+  _PROD_TAG: 'latest' # TODO: rename to prod
 
 steps:
 
 # 1. Build and push helper images
 - id: 'build-ingestion-helper'
   name: 'gcr.io/cloud-builders/gcloud'
-  args: ['builds', 'submit', 'ingestion-helper', '--config', 'ingestion-helper/cloudbuild.yaml', '--substitutions', '_AR_REPO_URL=${_AR_REPO_URL}']
+  args: ['builds', 'submit', 'ingestion-helper', '--config', 'ingestion-helper/cloudbuild.yaml', '--substitutions', '_AR_REPO_URL=${_AR_REPO_URL},_VERSION=${_VERSION}']
   dir: 'import-automation/workflow'
 
 - id: 'build-import-helper'
   name: 'gcr.io/cloud-builders/gcloud'
-  args: ['builds', 'submit', 'import-helper', '--config', 'import-helper/cloudbuild.yaml', '--substitutions', '_AR_REPO_URL=${_AR_REPO_URL}']
+  args: ['builds', 'submit', 'import-helper', '--config', 'import-helper/cloudbuild.yaml', '--substitutions', '_AR_REPO_URL=${_AR_REPO_URL},_VERSION=${_VERSION}']
   dir: 'import-automation/workflow'
 
 # 2. Trigger Staging Build (Child)
@@ -53,7 +56,7 @@ steps:
     - '.'
     - '--config=cloudbuild.yaml'
     - '--project=${_PROJECT_ID}'
-    - '--substitutions=_PROJECT_ID=${_PROJECT_ID},_SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},_SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},_SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},_SPANNER_GRAPH_DATABASE_ID=${_SPANNER_GRAPH_DATABASE_ID},_GCS_BUCKET_ID=${_GCS_BUCKET_ID},_LOCATION=${_LOCATION},_GCS_MOUNT_BUCKET=${_GCS_MOUNT_BUCKET},_BQ_DATASET_ID=${_BQ_DATASET_ID},_PROJECT_NUMBER=${_PROJECT_NUMBER},_BQ_SPANNER_CONN_ID=${_BQ_SPANNER_CONN_ID}'
+    - '--substitutions=_PROJECT_ID=${_PROJECT_ID},_SPANNER_PROJECT_ID=${_SPANNER_PROJECT_ID},_SPANNER_INSTANCE_ID=${_SPANNER_INSTANCE_ID},_SPANNER_DATABASE_ID=${_SPANNER_DATABASE_ID},_SPANNER_GRAPH_DATABASE_ID=${_SPANNER_GRAPH_DATABASE_ID},_GCS_BUCKET_ID=${_GCS_BUCKET_ID},_LOCATION=${_LOCATION},_GCS_MOUNT_BUCKET=${_GCS_MOUNT_BUCKET},_BQ_DATASET_ID=${_BQ_DATASET_ID},_PROJECT_NUMBER=${_PROJECT_NUMBER},_BQ_SPANNER_CONN_ID=${_BQ_SPANNER_CONN_ID},_VERSION=${_VERSION},_DATAFLOW_TEMPLATE_PATH=${_DATAFLOW_TEMPLATE_PATH}'
   dir: 'import-automation/workflow'
 
 # 2. Run E2E Tests on Staging
@@ -74,6 +77,11 @@ steps:
     - 'GCS_BUCKET_ID=${_GCS_BUCKET_ID}'
   dir: 'import-automation/workflow'
 
+- id: 'tag-prod'
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['builds', 'submit', '.', '--config', 'tag-prod.yaml', '--substitutions', '_AR_REPO_URL=${_AR_REPO_URL},_PROD_TAG=${_PROD_TAG},_VERSION=${_VERSION}']
+  dir: 'import-automation/workflow'
+
 # 3. Trigger Production Build (Child)
 # Uses default (Production) values defined in cloudbuild.yaml.
 - id: 'deploy-prod'
@@ -84,6 +92,7 @@ steps:
     - '.'
     - '--config=cloudbuild.yaml'
     - '--project=${_PROJECT_ID}'  # Build runs in CI project, deploys to Prod
+    - '--substitutions=_VERSION=${_PROD_TAG}'
   dir: 'import-automation/workflow'
 
 options:
