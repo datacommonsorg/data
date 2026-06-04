@@ -64,7 +64,7 @@ class StorageClient:
         except (exceptions.NotFound, json.JSONDecodeError) as e:
             logging.error(
                 f'Error reading import summary file {summary_file}: {e}')
-            return {}
+            raise
 
     def update_import_summary(self, import_summary: dict):
         """Updates the import summary in GCS.
@@ -98,7 +98,7 @@ class StorageClient:
             return blob.download_as_text()
         except exceptions.NotFound:
             logging.error(f"Version file {version_file} not found")
-            return ''
+            raise
 
     def update_version_file(self,
                             import_name: str,
