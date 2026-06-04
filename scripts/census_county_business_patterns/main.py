@@ -88,7 +88,7 @@ FILE_TYPES_CONFIG = [
 @retry(tries=3,
        delay=5,
        backoff=2,
-       exceptions=requests.exceptions.ConnectionError)
+       exceptions=(requests.exceptions.ConnectionError, requests.exceptions.Timeout))
 def retry_method(url, headers=None):
     response = requests.get(url, stream=True, headers=headers, timeout=(10, 300))
     response.raise_for_status()
