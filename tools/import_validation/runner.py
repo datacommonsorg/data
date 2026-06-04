@@ -42,6 +42,7 @@ class ValidationRunner:
     def __init__(self, validation_config_path: str, differ_output: str,
                  stats_summary: str, lint_report: str, validation_output: str):
         self.validation_config_path = validation_config_path
+        self.stats_summary = stats_summary
         self.config = ValidationConfig(validation_config_path)
         self.validation_output = validation_output
         self.validator = Validator()
@@ -230,8 +231,8 @@ class ValidationRunner:
                         return None
 
                     config_dir = None
-                    # Walk up from validation_config_path, stats_summary, or CWD to find where 'golden_data' lives
-                    for start in [self.validation_config_path, stats_summary, os.getcwd()]:
+                    # Walk up from validation_config_path, self.stats_summary, or CWD to find where 'golden_data' lives
+                    for start in [self.validation_config_path, self.stats_summary, os.getcwd()]:
                         config_dir = find_base_dir(start, 'golden_data')
                         if config_dir:
                             break
