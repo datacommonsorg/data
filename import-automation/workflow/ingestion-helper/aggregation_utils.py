@@ -22,6 +22,23 @@ from google.cloud import bigquery
 logging.getLogger().setLevel(logging.INFO)
 
 
+def _escape_sql_literal(val: str) -> str:
+    r"""Escapes a string literal for use in nested BigQuery/Spanner queries.
+
+    This is required because the query string travels through two SQL parsers:
+    1. BigQuery parses the EXTERNAL_QUERY double-quoted string literal.
+    2. Spanner parses the resulting inner query's single-quoted string literal.
+
+    To ensure the value is correctly matched and prevent SQL injection:
+    - Backslashes (\) are escaped to 4 backslashes (\\\\) so they survive
+      both decodings (\\\\ -> \\ -> \). Otherwise, they may escape quotes
+      or be interpreted as control characters (like \b becoming backspace).
+    - Double quotes (") are escaped to \\" to prevent terminating BQ string.
+    - Single quotes (') are escaped to '' to prevent terminating Spanner string.
+    """
+    return val.replace('\\', '\\\\\\\\').replace('"', '\\"').replace("'", "''")
+
+
 class BigQueryExecutor:
     """Handles BigQuery client initialization and query execution."""
 
@@ -153,8 +170,7 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        # Escape single quotes to prevent SQL injection
-        safe_names = [name.replace("'", "''") for name in import_names]
+        safe_names = [_escape_sql_literal(name) for name in import_names]
         prefix = "dc/base/" if self.is_base_dc else ""
         provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
@@ -242,8 +258,7 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        # Escape single quotes to prevent SQL injection
-        safe_names = [name.replace("'", "''") for name in import_names]
+        safe_names = [_escape_sql_literal(name) for name in import_names]
         prefix = "dc/base/" if self.is_base_dc else ""
         provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
@@ -334,8 +349,7 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        # Escape single quotes to prevent SQL injection
-        safe_names = [name.replace("'", "''") for name in import_names]
+        safe_names = [_escape_sql_literal(name) for name in import_names]
         prefix = "dc/base/" if self.is_base_dc else ""
         provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
@@ -451,8 +465,7 @@ class ProvenanceSummaryGenerator:
         dest = self.executor.get_spanner_destination_uri()
         connection_id = self.executor.connection_id
 
-        # Escape single quotes to prevent SQL injection
-        safe_names = [name.replace("'", "''") for name in import_names]
+        safe_names = [_escape_sql_literal(name) for name in import_names]
         # Format import names for the SQL IN clause
         imports_str = ", ".join([f"'{name}'" for name in safe_names])
         provenance_dcid_expr = "CONCAT('dc/base/', raw.import_name)" if self.is_base_dc else "raw.import_name"
