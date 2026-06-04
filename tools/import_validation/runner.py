@@ -214,7 +214,7 @@ class ValidationRunner:
                     rule_params.setdefault('output_path', output_dir)
 
                 # Resolve paths relative to the directory of the validation config.
-                if rule.get('rule_id') == 'check_goldens_summary_report':
+                if 'summary_report' in rule.get('rule_id', ''):
                     config_dir = os.path.dirname(os.path.abspath(self.validation_config_path))
                     for path_key in ['golden_files', 'input_files']:
                         if path_key in rule_params:
