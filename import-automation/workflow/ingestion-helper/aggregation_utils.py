@@ -153,8 +153,12 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        provenances = [f"'dc/base/{name}'" for name in import_names]
+        # Escape single quotes to prevent SQL injection
+        safe_names = [name.replace("'", "''") for name in import_names]
+        prefix = "dc/base/" if self.is_base_dc else ""
+        provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
+        gen_graphs_prov = 'dc/base/GeneratedGraphs' if self.is_base_dc else 'GeneratedGraphs'
 
         query = f"""
         -- Pull base edges needed for containedInPlace aggregation
@@ -201,7 +205,7 @@ class LinkedEdgeGenerator:
             subject_id,
             'linkedContainedInPlace' as predicate,
             ancestor_place as object_id,
-            'dc/base/GeneratedGraphs' as provenance
+            '{gen_graphs_prov}' as provenance
           FROM
             Ancestors
         ),
@@ -238,8 +242,12 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        provenances = [f"'dc/base/{name}'" for name in import_names]
+        # Escape single quotes to prevent SQL injection
+        safe_names = [name.replace("'", "''") for name in import_names]
+        prefix = "dc/base/" if self.is_base_dc else ""
+        provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
+        gen_graphs_prov = 'dc/base/GeneratedGraphs' if self.is_base_dc else 'GeneratedGraphs'
 
         query = f"""
         -- Pull base edges needed for memberOf aggregation
@@ -289,7 +297,7 @@ class LinkedEdgeGenerator:
             subject_id,
             'linkedMemberOf' as predicate,
             ancestor as object_id,
-            'dc/base/GeneratedGraphs' as provenance
+            '{gen_graphs_prov}' as provenance
           FROM
             Ancestors
         ),
@@ -326,8 +334,12 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        provenances = [f"'dc/base/{name}'" for name in import_names]
+        # Escape single quotes to prevent SQL injection
+        safe_names = [name.replace("'", "''") for name in import_names]
+        prefix = "dc/base/" if self.is_base_dc else ""
+        provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
+        gen_graphs_prov = 'dc/base/GeneratedGraphs' if self.is_base_dc else 'GeneratedGraphs'
 
         query = f"""
         -- Pull base edges needed for member aggregation
@@ -375,7 +387,7 @@ class LinkedEdgeGenerator:
             descendant as subject_id,
             'linkedMember' as predicate,
             subject_id as object_id,
-            'dc/base/GeneratedGraphs' as provenance
+            '{gen_graphs_prov}' as provenance
           FROM
             Descendants
           WHERE subject_id LIKE 'dc/topic%'
@@ -439,8 +451,11 @@ class ProvenanceSummaryGenerator:
         dest = self.executor.get_spanner_destination_uri()
         connection_id = self.executor.connection_id
 
+        # Escape single quotes to prevent SQL injection
+        safe_names = [name.replace("'", "''") for name in import_names]
         # Format import names for the SQL IN clause
-        imports_str = ", ".join([f"'{name}'" for name in import_names])
+        imports_str = ", ".join([f"'{name}'" for name in safe_names])
+        provenance_dcid_expr = "CONCAT('dc/base/', raw.import_name)" if self.is_base_dc else "raw.import_name"
 
         query = f"""
         -- Step 1: Fetch Observation rows for the specific import
@@ -504,7 +519,7 @@ class ProvenanceSummaryGenerator:
           raw.is_dc_aggregate,
           JSON_VALUE(v, '$.key') as date_val,
           SAFE_CAST(JSON_VALUE(v, '$.value') AS FLOAT64) as value_num,
-          CONCAT('dc/base/', raw.import_name) as provenance_dcid,
+          {provenance_dcid_expr} as provenance_dcid,
           nodes.name as place_name,
           edges.place_type
         FROM `temp_obs_raw` raw
