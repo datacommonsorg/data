@@ -22,6 +22,23 @@ from google.cloud import bigquery
 logging.getLogger().setLevel(logging.INFO)
 
 
+def _escape_sql_literal(val: str) -> str:
+    r"""Escapes a string literal for use in nested BigQuery/Spanner queries.
+
+    This is required because the query string travels through two SQL parsers:
+    1. BigQuery parses the EXTERNAL_QUERY double-quoted string literal.
+    2. Spanner parses the resulting inner query's single-quoted string literal.
+
+    To ensure the value is correctly matched and prevent SQL injection:
+    - Backslashes (\) are escaped to 4 backslashes (\\\\) so they survive
+      both decodings (\\\\ -> \\ -> \). Otherwise, they may escape quotes
+      or be interpreted as control characters (like \b becoming backspace).
+    - Double quotes (") are escaped to \\" to prevent terminating BQ string.
+    - Single quotes (') are escaped to '' to prevent terminating Spanner string.
+    """
+    return val.replace('\\', '\\\\\\\\').replace('"', '\\"').replace("'", "''")
+
+
 class BigQueryExecutor:
     """Handles BigQuery client initialization and query execution."""
 
@@ -153,8 +170,11 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        provenances = [f"'dc/base/{name}'" for name in import_names]
+        safe_names = [_escape_sql_literal(name) for name in import_names]
+        prefix = "dc/base/" if self.is_base_dc else ""
+        provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
+        gen_graphs_prov = 'dc/base/GeneratedGraphs' if self.is_base_dc else 'GeneratedGraphs'
 
         query = f"""
         -- Pull base edges needed for containedInPlace aggregation
@@ -201,7 +221,7 @@ class LinkedEdgeGenerator:
             subject_id,
             'linkedContainedInPlace' as predicate,
             ancestor_place as object_id,
-            'dc/base/GeneratedGraphs' as provenance
+            '{gen_graphs_prov}' as provenance
           FROM
             Ancestors
         ),
@@ -238,8 +258,11 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        provenances = [f"'dc/base/{name}'" for name in import_names]
+        safe_names = [_escape_sql_literal(name) for name in import_names]
+        prefix = "dc/base/" if self.is_base_dc else ""
+        provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
+        gen_graphs_prov = 'dc/base/GeneratedGraphs' if self.is_base_dc else 'GeneratedGraphs'
 
         query = f"""
         -- Pull base edges needed for memberOf aggregation
@@ -289,7 +312,7 @@ class LinkedEdgeGenerator:
             subject_id,
             'linkedMemberOf' as predicate,
             ancestor as object_id,
-            'dc/base/GeneratedGraphs' as provenance
+            '{gen_graphs_prov}' as provenance
           FROM
             Ancestors
         ),
@@ -326,8 +349,11 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        provenances = [f"'dc/base/{name}'" for name in import_names]
+        safe_names = [_escape_sql_literal(name) for name in import_names]
+        prefix = "dc/base/" if self.is_base_dc else ""
+        provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
+        gen_graphs_prov = 'dc/base/GeneratedGraphs' if self.is_base_dc else 'GeneratedGraphs'
 
         query = f"""
         -- Pull base edges needed for member aggregation
@@ -375,7 +401,7 @@ class LinkedEdgeGenerator:
             descendant as subject_id,
             'linkedMember' as predicate,
             subject_id as object_id,
-            'dc/base/GeneratedGraphs' as provenance
+            '{gen_graphs_prov}' as provenance
           FROM
             Descendants
           WHERE subject_id LIKE 'dc/topic%'
@@ -439,8 +465,10 @@ class ProvenanceSummaryGenerator:
         dest = self.executor.get_spanner_destination_uri()
         connection_id = self.executor.connection_id
 
+        safe_names = [_escape_sql_literal(name) for name in import_names]
         # Format import names for the SQL IN clause
-        imports_str = ", ".join([f"'{name}'" for name in import_names])
+        imports_str = ", ".join([f"'{name}'" for name in safe_names])
+        provenance_dcid_expr = "CONCAT('dc/base/', raw.import_name)" if self.is_base_dc else "raw.import_name"
 
         query = f"""
         -- Step 1: Fetch Observation rows for the specific import
@@ -504,7 +532,7 @@ class ProvenanceSummaryGenerator:
           raw.is_dc_aggregate,
           JSON_VALUE(v, '$.key') as date_val,
           SAFE_CAST(JSON_VALUE(v, '$.value') AS FLOAT64) as value_num,
-          CONCAT('dc/base/', raw.import_name) as provenance_dcid,
+          {provenance_dcid_expr} as provenance_dcid,
           nodes.name as place_name,
           edges.place_type
         FROM `temp_obs_raw` raw
