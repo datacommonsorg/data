@@ -77,6 +77,7 @@ AUTO_IMPORT_JOB_STAGE = "auto-import-job-stage"
 AUTO_IMPORT_JOB_STATUS = "auto-import-job-status"
 IMPORT_SUMMARY_FILE = "import_summary.json"
 STAGING_VERSION_FILE = "staging_version.txt"
+MAX_LOG_CHUNK_SIZE = 50000
 
 
 class ImportStatus(Enum):
@@ -480,7 +481,8 @@ class ImportExecutor:
                              "latency": timer.time(),
                              "input_index": input_index,
                              "import_input": import_prefix,
-                         })
+                         },
+                         skip_stream_logging=True)
             process.check_returncode()
             logging.info(
                 f'Generated resolved mcf for {import_prefix} in {output_path}.')
@@ -809,7 +811,8 @@ class ImportExecutor:
                                  "latency_secs": timer.time(),
                                  "script_index": script_index,
                                  "script_path": path,
-                             })
+                             },
+                             skip_stream_logging=True)
                 process.check_returncode()
 
         import_summary.import_stats['script_execution_time'] = start_timer.time(
@@ -1118,6 +1121,33 @@ def run_and_handle_exception(
         return ExecutionResult(ImportStatus.FAILURE, [], message)
 
 
+def _stream_payload_in_chunks(label: str, payload) -> None:
+    """Helper function to split text and log in safe chunks to avoid
+
+    "Log entry too large" (InvalidArgument) errors.
+    """
+    if not payload:
+        return
+
+    if isinstance(payload, bytes):
+        payload_str = payload.decode('utf-8', errors='replace')
+    else:
+        payload_str = str(payload)
+
+    chunk_size = MAX_LOG_CHUNK_SIZE
+    total_len = len(payload_str)
+
+    if total_len <= chunk_size:
+        logging.info(f'{label}:\n{payload_str}')
+        return
+
+    logging.info(f'--- Start of {label} (Total length: {total_len} chars) ---')
+    for i in range(0, total_len, chunk_size):
+        chunk = payload_str[i:i + chunk_size]
+        logging.info(f'[{label} Part {i//chunk_size + 1}]:\n{chunk}')
+    logging.info(f'--- End of {label} ---')
+
+
 @log_function_call
 def _run_with_timeout_async(args: List[str],
                             timeout: float,
@@ -1217,8 +1247,8 @@ def _run_with_timeout(args: List[str],
                                  cwd=cwd,
                                  env=env)
         logging.info(
-            f'Completed command: {args}, retcode: {process.returncode}, stdout:'
-            f' {process.stdout}, stderr: {process.stderr}')
+            f'Completed command: {args}, retcode: {process.returncode}')
+
         return process
     except Exception as e:
         message = traceback.format_exc()
@@ -1378,27 +1408,36 @@ def _construct_process_message(message: str,
     message = (f'{message}\n'
                f'[Subprocess command]: {command}\n'
                f'[Subprocess return code]: {process.returncode}')
-    if process.stdout:
-        message += f'\n[Subprocess stdout]:\n{process.stdout}'
-    if process.stderr:
-        message += f'\n[Subprocess stderr]:\n{process.stderr}'
     return message
 
 
 def _log_process(process: subprocess.CompletedProcess,
                  import_name: str = '',
-                 metrics: dict = {}) -> None:
+                 metrics: dict = None,
+                 skip_stream_logging: bool = False) -> None:
     """Logs the result of a subprocess.
 
   Args:
       process: subprocess.CompletedProcess object whose arguments, return code,
         stdout, and stderr are to be logged.
+      import_name: Name of the import for labeling logs.
+      metrics: Dictionary to store execution metrics.
+      skip_stream_logging: Whether to skip chunked logging of stdout and stderr.
   """
+    if metrics is None:
+        metrics = {}
     process_message = 'Subprocess succeeded'
     if process.returncode:
         process_message = 'Subprocess failed'
+
     message = _construct_process_message(process_message, process)
     logging.info(message)
+
+    if not skip_stream_logging:
+        _stream_payload_in_chunks(f'[{import_name}] Subprocess stdout',
+                                  process.stdout)
+        _stream_payload_in_chunks(f'[{import_name}] Subprocess stderr',
+                                  process.stderr)
 
     status = ImportStatus.FAILURE if process.returncode else ImportStatus.SUCCESS
     if import_name:

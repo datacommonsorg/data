@@ -21,21 +21,43 @@ from google.cloud import bigquery
 
 logging.getLogger().setLevel(logging.INFO)
 
+
+def _escape_sql_literal(val: str) -> str:
+    r"""Escapes a string literal for use in nested BigQuery/Spanner queries.
+
+    This is required because the query string travels through two SQL parsers:
+    1. BigQuery parses the EXTERNAL_QUERY double-quoted string literal.
+    2. Spanner parses the resulting inner query's single-quoted string literal.
+
+    To ensure the value is correctly matched and prevent SQL injection:
+    - Backslashes (\) are escaped to 4 backslashes (\\\\) so they survive
+      both decodings (\\\\ -> \\ -> \). Otherwise, they may escape quotes
+      or be interpreted as control characters (like \b becoming backspace).
+    - Double quotes (") are escaped to \\" to prevent terminating BQ string.
+    - Single quotes (') are escaped to '' to prevent terminating Spanner string.
+    """
+    return val.replace('\\', '\\\\\\\\').replace('"', '\\"').replace("'", "''")
+
+
 class BigQueryExecutor:
     """Handles BigQuery client initialization and query execution."""
+
     def __init__(self,
                  connection_id: str,
                  project_id: str,
                  instance_id: str,
                  database_id: str,
-                 location: Optional[str] = None) -> None:
+                 location: Optional[str] = None,
+                 run_sequential: bool = True) -> None:
         self.connection_id = connection_id
         self.project_id = project_id
         self.instance_id = instance_id
         self.database_id = database_id
         self.location = location
+        self.run_sequential = run_sequential
         try:
-            self.client = bigquery.Client(project=self.project_id, location=self.location)
+            self.client = bigquery.Client(project=self.project_id,
+                                          location=self.location)
         except Exception as e:
             logging.warning(f"Failed to initialize BigQuery client: {e}")
             self.client = None
@@ -44,59 +66,116 @@ class BigQueryExecutor:
         """Returns the Spanner destination URI for EXPORT DATA."""
         return f"https://spanner.googleapis.com/projects/{self.project_id}/instances/{self.instance_id}/databases/{self.database_id}"
 
-    def execute(self, query: str, job_config: Optional[bigquery.QueryJobConfig] = None) -> bigquery.table.RowIterator:
-        """Executes a query and returns the result."""
+    def execute(
+        self,
+        query: str,
+        job_config: Optional[bigquery.QueryJobConfig] = None
+    ) -> bigquery.job.QueryJob:
+        """Submits a query and returns the QueryJob.
+
+        If run_sequential is True, it blocks and waits for the query to complete
+        before returning.
+        """
         if not self.client:
             logging.error("BigQuery client not initialized")
             raise RuntimeError("BigQuery client not initialized")
-            
+
+        logging.info(
+            f"Submitting query (first 100 chars): {query.strip()[:100]}...")
+
         start_time = time.time()
-        logging.info(f"Executing query (first 100 chars): {query.strip()[:100]}...")
-        
         try:
             query_job = self.client.query(query, job_config=job_config)
-            result = query_job.result()
-            duration = time.time() - start_time
-            logging.info(f"Query completed in {duration:.2f}s. Job ID: {query_job.job_id}")
-            return result
+            logging.info(f"Query submitted. Job ID: {query_job.job_id}")
+
+            if self.run_sequential:
+                logging.info(
+                    f"Waiting for Query Job {query_job.job_id} to complete (sequential mode)..."
+                )
+                query_job.result()
+                duration = time.time() - start_time
+                logging.info(
+                    f"Query completed in {duration:.2f}s. Job ID: {query_job.job_id}"
+                )
+
+            return query_job
         except Exception as e:
-            logging.error(f"Query execution failed after {time.time() - start_time:.2f}s: {e}")
+            logging.error(f"Failed to submit or execute query: {e}")
             raise
+
+    def get_jobs_status(self, job_ids: List[str]) -> Dict[str, Any]:
+        """Returns the overall status of a list of BigQuery jobs."""
+        if not self.client:
+            logging.error("BigQuery client not initialized")
+            raise RuntimeError("BigQuery client not initialized")
+
+        overall_status = "DONE"
+        failed_jobs = []
+        error_message = ""
+
+        for job_id in job_ids:
+            try:
+                job = self.client.get_job(job_id, location=self.location)
+                if job.error_result:
+                    overall_status = "FAILED"
+                    failed_jobs.append(job_id)
+                    error_message += f"Job {job_id} failed: {job.error_result}. "
+                elif job.state != "DONE" and overall_status != "FAILED":
+                    overall_status = "RUNNING"
+            except Exception as e:
+                logging.error(f"Failed to get job status for {job_id}: {e}")
+                overall_status = "FAILED"
+                failed_jobs.append(job_id)
+                error_message += f"Failed to get job {job_id}: {e}. "
+
+        if overall_status == "FAILED":
+            return {
+                "status": overall_status,
+                "error": error_message,
+                "failedJobs": failed_jobs
+            }
+        else:
+            return {"status": overall_status}
 
 
 class LinkedEdgeGenerator:
     """Generates and ingests linked relationship edges (e.g., transitive closures) into Spanner for faster lookup."""
-    def __init__(self, executor: BigQueryExecutor, is_base_dc: bool = True) -> None:
+
+    def __init__(self,
+                 executor: BigQueryExecutor,
+                 is_base_dc: bool = True) -> None:
         self.executor = executor
         self.is_base_dc = is_base_dc
 
-    def run_all(self, import_names: List[str] = None) -> None:
-        """Runs all global aggregations in sequence."""
+    def run_all(self,
+                import_names: List[str] = None) -> List[bigquery.job.QueryJob]:
+        """Runs all global aggregations asynchronously and returns their jobs."""
         if not import_names:
             logging.info("No imports specified. Skipping global aggregations.")
-            return
+            return []
 
         logging.info(f"Running global aggregations for imports: {import_names}")
-        
-        # TODO: Run these methods in parallel to speed up execution since they are independent.
-        self.run_linked_contained_in_place(import_names)
-        self.run_linked_member_of(import_names)
-        self.run_linked_member(import_names)
 
+        jobs = [
+            self.run_linked_contained_in_place(import_names),
+            self.run_linked_member_of(import_names),
+            self.run_linked_member(import_names)
+        ]
+        return jobs
 
-    def run_linked_contained_in_place(self, import_names: List[str] = None) -> None:
+    def run_linked_contained_in_place(self,
+                                      import_names: List[str] = None) -> None:
         """Expands place containment hierarchies."""
         if not import_names:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        # Escape single quotes to prevent SQL injection
-        safe_names = [name.replace("'", "''") for name in import_names]
+        safe_names = [_escape_sql_literal(name) for name in import_names]
         prefix = "dc/base/" if self.is_base_dc else ""
         provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
         gen_graphs_prov = 'dc/base/GeneratedGraphs' if self.is_base_dc else 'GeneratedGraphs'
-        
+
         query = f"""
         -- Pull base edges needed for containedInPlace aggregation
         CREATE OR REPLACE TEMPORARY TABLE `temp_base_contained_in_place` AS
@@ -171,7 +250,7 @@ class LinkedEdgeGenerator:
         FROM
           FilteredEdges
         """
-        self.executor.execute(query)
+        return self.executor.execute(query)
 
     def run_linked_member_of(self, import_names: List[str] = None) -> None:
         """Expands membership hierarchies using memberOf and specializationOf."""
@@ -179,8 +258,7 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        # Escape single quotes to prevent SQL injection
-        safe_names = [name.replace("'", "''") for name in import_names]
+        safe_names = [_escape_sql_literal(name) for name in import_names]
         prefix = "dc/base/" if self.is_base_dc else ""
         provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
@@ -263,7 +341,7 @@ class LinkedEdgeGenerator:
         FROM
           FilteredEdges
         """
-        self.executor.execute(query)
+        return self.executor.execute(query)
 
     def run_linked_member(self, import_names: List[str] = None) -> None:
         """Expands topic/SVGP descendants to identify leaf members."""
@@ -271,8 +349,7 @@ class LinkedEdgeGenerator:
             return
 
         dest = self.executor.get_spanner_destination_uri()
-        # Escape single quotes to prevent SQL injection
-        safe_names = [name.replace("'", "''") for name in import_names]
+        safe_names = [_escape_sql_literal(name) for name in import_names]
         prefix = "dc/base/" if self.is_base_dc else ""
         provenances = [f"'{prefix}{name}'" for name in safe_names]
         provenance_filter = f" AND provenance IN ({', '.join(provenances)})"
@@ -356,38 +433,43 @@ class LinkedEdgeGenerator:
         FROM
           FilteredEdges
         """
-        self.executor.execute(query)
+        return self.executor.execute(query)
 
 
 class ProvenanceSummaryGenerator:
     """Contains the SQL queries to generate ProvenanceSummary in the Cache table."""
-    def __init__(self, executor: BigQueryExecutor, is_base_dc: bool = True) -> None:
+
+    def __init__(self,
+                 executor: BigQueryExecutor,
+                 is_base_dc: bool = True) -> None:
         self.executor = executor
         self.is_base_dc = is_base_dc
 
-    def run_all(self, import_names: List[str]) -> None:
-        """Runs all provenance summary generation in sequence."""
+    def run_all(self, import_names: List[str]) -> List[bigquery.job.QueryJob]:
+        """Runs all provenance summary generation asynchronously and returns their jobs."""
         if not import_names:
             logging.info("No imports specified. Skipping cache aggregations.")
-            return
+            return []
 
-        logging.info(f"Running provenance summary generation for imports: {import_names}")
-        self.run_provenance_summary_aggregation(import_names)
+        logging.info(
+            f"Running provenance summary generation for imports: {import_names}"
+        )
+        return [self.run_provenance_summary_aggregation(import_names)]
 
-    def run_provenance_summary_aggregation(self, import_names: List[str]) -> None:
+    def run_provenance_summary_aggregation(self,
+                                           import_names: List[str]) -> None:
         """Calculates ProvenanceSummary for all variables and populates the Cache table."""
         if not import_names:
             return
 
         dest = self.executor.get_spanner_destination_uri()
         connection_id = self.executor.connection_id
-        
-        # Escape single quotes to prevent SQL injection
-        safe_names = [name.replace("'", "''") for name in import_names]
+
+        safe_names = [_escape_sql_literal(name) for name in import_names]
         # Format import names for the SQL IN clause
         imports_str = ", ".join([f"'{name}'" for name in safe_names])
         provenance_dcid_expr = "CONCAT('dc/base/', raw.import_name)" if self.is_base_dc else "raw.import_name"
-        
+
         query = f"""
         -- Step 1: Fetch Observation rows for the specific import
         -- We cast 'observations' to STRING to avoid the PROTO error.
@@ -571,31 +653,37 @@ class ProvenanceSummaryGenerator:
         FROM facet_summaries
         GROUP BY variable_measured, provenance_dcid;
         """
-        self.executor.execute(query)
+        return self.executor.execute(query)
 
 
 class AggregationUtils:
     """Orchestrates the overall aggregation workflow."""
-    def __init__(self, 
+
+    def __init__(self,
                  connection_id: str,
                  project_id: str,
                  instance_id: str,
                  database_id: str,
                  location: Optional[str] = None,
                  is_base_dc: bool = True) -> None:
-        self.executor = BigQueryExecutor(
-            connection_id=connection_id,
-            project_id=project_id,
-            instance_id=instance_id,
-            database_id=database_id,
-            location=location
-        )
-        self.linked_edge_generator = LinkedEdgeGenerator(self.executor, is_base_dc)
-        self.provenance_summary_generator = ProvenanceSummaryGenerator(self.executor, is_base_dc)
+        # TODO: remove sequential execution once DCP changes are made
+        # Use sequential execution for DCP (backward compatibility)
+        run_sequential = not is_base_dc
+        self.executor = BigQueryExecutor(connection_id=connection_id,
+                                         project_id=project_id,
+                                         instance_id=instance_id,
+                                         database_id=database_id,
+                                         location=location,
+                                         run_sequential=run_sequential)
+        self.linked_edge_generator = LinkedEdgeGenerator(
+            self.executor, is_base_dc)
+        self.provenance_summary_generator = ProvenanceSummaryGenerator(
+            self.executor, is_base_dc)
 
-    def run_aggregation(self, import_list: List[Dict[str, Any]]) -> bool:
+    def run_aggregation(self, import_list: List[Dict[str, Any]]) -> List[str]:
         """
         Orchestrates standard per-import aggregations and global aggregations.
+        Returns a list of BigQuery job IDs for async polling.
         """
         logging.info(f"Received request for importList: {import_list}")
 
@@ -608,17 +696,34 @@ class AggregationUtils:
                     import_names.append(import_name)
                     query = "SELECT @import_name as import_name, CURRENT_TIMESTAMP() as execution_time"
                     job_config = bigquery.QueryJobConfig(query_parameters=[
-                        bigquery.ScalarQueryParameter("import_name", "STRING", import_name),
+                        bigquery.ScalarQueryParameter("import_name", "STRING",
+                                                      import_name),
                     ])
                     self.executor.execute(query, job_config=job_config)
                 else:
-                    logging.info('Skipping aggregation logic for empty importName')
+                    logging.info(
+                        'Skipping aggregation logic for empty importName')
 
-            # 2. Run global aggregations
-            self.linked_edge_generator.run_all(import_names)
-            self.provenance_summary_generator.run_all(import_names)
-            
-            return True
+            # 2. Run global aggregations asynchronously
+            jobs = []
+            jobs.extend(self.linked_edge_generator.run_all(import_names))
+            jobs.extend(self.provenance_summary_generator.run_all(import_names))
+
+            job_ids = [job.job_id for job in jobs if job]
+            logging.info(f"Submitted async aggregation jobs: {job_ids}")
+
+            return job_ids
         except Exception as e:
             logging.error(f"Aggregation failed: {e}")
+            raise e
+
+    def check_aggregation_status(self, job_ids: List[str]) -> Dict[str, Any]:
+        """
+        Checks the status of the provided BigQuery job IDs.
+        """
+        logging.info(f"Checking status for jobs: {job_ids}")
+        try:
+            return self.executor.get_jobs_status(job_ids)
+        except Exception as e:
+            logging.error(f"Failed to check aggregation status: {e}")
             raise e

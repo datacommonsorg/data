@@ -83,11 +83,7 @@ class ImportExecutorTest(unittest.TestCase):
         expected = (
             'message\n'
             '[Subprocess command]: printf "out" & >&2 printf "err" & exit 1\n'
-            '[Subprocess return code]: 1\n'
-            '[Subprocess stdout]:\n'
-            'out\n'
-            '[Subprocess stderr]:\n'
-            'err')
+            '[Subprocess return code]: 1')
         self.assertEqual(expected, message)
 
     def test_construct_process_message_no_output(self):
