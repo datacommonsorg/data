@@ -71,6 +71,7 @@ Usage:
 import os
 import sys
 import tempfile
+import csv
 
 from absl import app
 from absl import flags
@@ -298,7 +299,8 @@ def load_nodes_from_file(files: str) -> dict:
             file_nodes = file_util.file_load_csv_dict(input_file,
                                                       key_index=True)
             for node in file_nodes.values():
-                nodes[len(nodes)] = node
+                cleaned_node = {k.strip(): v for k, v in node.items() if k is not None and isinstance(k, str) and k.strip() != ''}
+                nodes[len(nodes)] = cleaned_node
         else:
             # For MCF or JSON, we assume nodes are already keyed by DCID.
             file_nodes = mcf_file_util.load_mcf_nodes(input_file)
@@ -379,7 +381,9 @@ def generate_goldens(input_files: str,
             for k, node in input_nodes.items():
                 match = False
                 for col, vals in must_include_values.items():
-                    if node.get(col) in vals:
+                    val = node.get(col)
+                    if val in vals or mcf_file_util.strip_namespace(
+                            val) in vals:
                         match = True
                         break
                 if match:
@@ -440,9 +444,16 @@ def generate_goldens(input_files: str,
     if golden_nodes and output_file:
         logging.info(f'Writing {len(golden_nodes)} goldens to {output_file}')
         if file_util.file_is_csv(output_file):
-            file_util.file_write_csv_dict(golden_nodes,
-                                          output_file,
-                                          key_column_name=None)
+            with file_util.FileIO(output_file, mode='w') as csvfile:
+                columns = sorted(
+                    list(set().union(
+                        *(node.keys() for node in golden_nodes.values()))))
+                writer = csv.DictWriter(csvfile,
+                                        fieldnames=columns,
+                                        quoting=csv.QUOTE_NONNUMERIC)
+                writer.writeheader()
+                for node in golden_nodes.values():
+                    writer.writerow(node)
         else:
             mcf_file_util.write_mcf_nodes([golden_nodes], output_file)
 

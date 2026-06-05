@@ -41,6 +41,8 @@ class ValidationRunner:
 
     def __init__(self, validation_config_path: str, differ_output: str,
                  stats_summary: str, lint_report: str, validation_output: str):
+        self.validation_config_path = validation_config_path
+        self.stats_summary = stats_summary
         self.config = ValidationConfig(validation_config_path)
         self.validation_output = validation_output
         self.validator = Validator()
@@ -211,6 +213,48 @@ class ValidationRunner:
                     output_dir = os.path.dirname(output_dir)
                 if output_dir:
                     rule_params.setdefault('output_path', output_dir)
+
+                # Resolve paths relative to the directory of the validation config.
+                if 'summary_report' in rule.get('rule_id', ''):
+                    # Helper to find a base directory containing target_sub_path by walking up
+                    def find_base_dir(start_path: str, target_sub_path: str):
+                        if not start_path:
+                            return None
+                        curr = os.path.abspath(start_path)
+                        for _ in range(10):  # limit to 10 levels up
+                            if os.path.exists(os.path.join(curr, target_sub_path)):
+                                return curr
+                            parent = os.path.dirname(curr)
+                            if parent == curr:
+                                break
+                            curr = parent
+                        return None
+
+                    config_dir = None
+                    # Walk up from validation_config_path, self.stats_summary, or CWD to find where 'golden_data' lives
+                    for start in [self.validation_config_path, self.stats_summary, os.getcwd()]:
+                        config_dir = find_base_dir(start, 'golden_data')
+                        if config_dir:
+                            break
+
+                    if not config_dir:
+                        config_dir = os.path.dirname(os.path.abspath(self.validation_config_path))
+
+                    print(f"DEBUG: Found summary_report rule: '{rule.get('rule_id')}'")
+                    print(f"DEBUG: Config directory resolved to: '{config_dir}'")
+                    for path_key in ['golden_files', 'input_files']:
+                        if path_key in rule_params:
+                            val = rule_params[path_key]
+                            print(f"DEBUG: Before resolve '{path_key}': '{val}'")
+                            if isinstance(val, str):
+                                if val and not os.path.isabs(val) and not val.startswith('gs://') and not val.startswith('http://') and not val.startswith('https://'):
+                                    rule_params[path_key] = os.path.join(config_dir, val)
+                            elif isinstance(val, list):
+                                rule_params[path_key] = [
+                                    os.path.join(config_dir, item) if isinstance(item, str) and item and not os.path.isabs(item) and not item.startswith('gs://') and not item.startswith('http://') and not item.startswith('https://') else item
+                                    for item in val
+                                ]
+                            print(f"DEBUG: After resolve '{path_key}': '{rule_params[path_key]}'")
 
             if validator_name == 'SQL_VALIDATOR':
                 result = validation_func(self.data_sources['stats'],
