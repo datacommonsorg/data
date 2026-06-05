@@ -1,2 +1,2 @@
-"MinDate","MeasurementMethods","observationPeriods","StatVar"
-"1900","[CensusPEPSurvey]","[P1Y]","Count_Person"
+"ScalingFactors","MeasurementMethods","Units","MinDate","observationPeriods","NumPlaces","StatVar"
+"[]","[CensusPEPSurvey]","[]","1900","[P1Y]","23057","Count_Person"
