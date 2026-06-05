@@ -18,10 +18,6 @@ python3 tools/statvar_importer/stat_var_processor.py \
   "--generate_statvar_name=True" \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor" \
-<<<<<<< HEAD
-  "--output_path=statvar_imports/eurostat/Divorce_indicators/final_output/output" \
-=======
   "--output_path=statvar_imports/eurostat/Divorce_indicators/final_output/Divorce_indicators_output" \
->>>>>>> 9200997f (Eurostat Data Death by week and Sex & Divorce Indicators Filename Changed)
-  "--places_resolved_csv=statvar_imports/eurostat/Divorce_indicators/places_resolved_runtime.csv" \
+  "--places_resolved_csv=statvar_imports/eurostat/Divorce_indicators/places_resolved.csv" \
   "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
