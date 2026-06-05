@@ -64,6 +64,11 @@ class TestExtractSourceDatasetProvenance(unittest.TestCase):
             extract_source_dataset_provenance.get_node_property(
                 {}, 'name', default='Fallback'), 'Fallback')
 
+        # None data
+        self.assertEqual(
+            extract_source_dataset_provenance.get_node_property(
+                None, 'name', default='Fallback'), 'Fallback')
+
     def test_get_node_dcid(self):
         """Tests extracting DCID values from node property structures."""
         # DCID exists
@@ -89,6 +94,10 @@ class TestExtractSourceDatasetProvenance(unittest.TestCase):
         # Missing property
         self.assertIsNone(
             extract_source_dataset_provenance.get_node_dcid({}, 'isPartOf'))
+
+        # None data
+        self.assertIsNone(
+            extract_source_dataset_provenance.get_node_dcid(None, 'isPartOf'))
 
     @mock.patch('util.extract_source_dataset_provenance.dc_api_wrapper')
     @mock.patch('util.extract_source_dataset_provenance.get_datacommons_client')

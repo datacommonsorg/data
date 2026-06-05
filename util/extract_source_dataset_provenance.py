@@ -44,6 +44,8 @@ flags.DEFINE_string(
 
 def get_node_property(node_data, prop_name, default=None):
     """Helper to extract a property value from the node data dictionary."""
+    if not node_data:
+        return default
     arcs = node_data.get("arcs", {})
     prop_nodes = arcs.get(prop_name, {}).get("nodes", [])
     if not prop_nodes:
@@ -53,6 +55,8 @@ def get_node_property(node_data, prop_name, default=None):
 
 def get_node_dcid(node_data, prop_name):
     """Helper to extract a DCID from a property."""
+    if not node_data:
+        return None
     arcs = node_data.get("arcs", {})
     prop_nodes = arcs.get(prop_name, {}).get("nodes", [])
     if not prop_nodes:
@@ -185,23 +189,24 @@ def fetch_all_provenances(api_key: str, output_file: str) -> None:
         dataset_info = None
 
         if ds_dcid:
-            ds_data = dataset_data_map.get(ds_dcid, {})
-            src_dcid = ds_data.get("source_dcid")
-            source_info = None
+            ds_data = dataset_data_map.get(ds_dcid)
+            if ds_data:
+                src_dcid = ds_data.get("source_dcid")
+                source_info = None
 
-            if src_dcid:
-                source_info = source_data_map.get(src_dcid)
-
-            dataset_info = {
-                "name": ds_data.get("name"),
-                "url": ds_data.get("url"),
-                "source": source_info
-            }
+                if src_dcid:
+                    source_info = source_data_map.get(src_dcid)
+                    
+                dataset_info = {
+                    "name": ds_data.get("name"),
+                    "url": ds_data.get("url"),
+                    "source": source_info
+                }
 
         prov["dataset"] = dataset_info
         final_output.append(prov)
 
-    with open(output_file, "w") as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         json.dump(final_output, f, indent=2)
 
     logging.info(
