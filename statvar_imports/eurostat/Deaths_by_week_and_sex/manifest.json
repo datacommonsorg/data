@@ -11,12 +11,12 @@
         "run.sh"
       ],
       "source_files": [
-        "Deaths_by_week_and_sex_data_raw.csv"
+        "Deaths_by_week_and_sex_data_raw_processed.csv"
       ],
       "import_inputs": [
         {
-          "template_mcf": "final_output/output.tmcf",
-          "cleaned_csv": "final_output/output.csv"
+          "template_mcf": "final_output/Deaths_by_week_and_sex_output.tmcf",
+          "cleaned_csv": "final_output/Deaths_by_week_and_sex_output.csv"
         }
       ],
       "cron_schedule": "5 1 1,15 * *",

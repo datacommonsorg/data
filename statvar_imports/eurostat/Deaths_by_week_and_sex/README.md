@@ -29,21 +29,46 @@ To execute the complete import process (download and processing), run:
 
 ## Key Files
 - `run.sh`: Main execution script for download and processing.
-- `output_pvmap_cleaned.csv`: Property-Value mapping for StatVar definitions and dimensions.
-- `output_metadata.csv`: Configuration parameters for the processor.
-- `places_resolved_runtime.csv`: Mapping of place codes to Data Commons DCIDs.
-- `output.csv`: Processed statistical observations.
-- `output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
+- `Deaths_by_week_and_sex_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
+- `Deaths_by_week_and_sex_metadata.csv`: Configuration parameters for the processor.
+- `places_resolved.csv`: Mapping of place codes to Data Commons DCIDs.
+- `Deaths_by_week_and_sex_output.csv`: Processed statistical observations.
+- `Deaths_by_week_and_sex_output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
 
 ## Validation
 To validate the generated data, use the Data Commons import tool (lint mode):
 ```bash
-java -jar datacommons-import-tool.jar lint output.csv output.tmcf
+java -jar datacommons-import-tool.jar lint Deaths_by_week_and_sex_output.csv Deaths_by_week_and_sex_output.tmcf
 ```
 The resulting reports (`report.json`, `summary_report.html`) in `dc_generated/` provide detailed insights into data quality and validation status.
 
 ## Testing
 Testing is performed using the `test_data` directory:
 - Raw Input: `test_data/Deaths_by_week_and_sex_data_raw.csv`
-- Expected Output: `test_data/output.csv`
-- Expected TMCF: `test_data/output.tmcf`
+- Raw Processed Input: `test_data/Deaths_by_week_and_sex_data_raw_processed`
+- Expected Output: `test_data/Deaths_by_week_and_sex_output.csv`
+- Expected TMCF: `test_data/Deaths_by_week_and_sex_output.tmcf`
+
+## Run to Process the test data
+python3 tools/statvar_importer/stat_var_processor.py \
+  "--input_data=statvar_imports/eurostat/Deaths_by_week_and_sex/test_data/Deaths_by_week_and_sex_data_raw_processed.csv" \
+  "--pv_map=statvar_imports/eurostat/Deaths_by_week_and_sex/Deaths_by_week_and_sex_pvmap.csv" \
+  "--config_file=statvar_imports/eurostat/Deaths_by_week_and_sex/Deaths_by_week_and_sex_metadata.csv" \
+  "--generate_statvar_name=True" \
+  "--skip_constant_csv_columns=False" \
+  "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor" \
+  "--output_path=statvar_imports/eurostat/Deaths_by_week_and_sex/final_output/Deaths_by_week_and_sex_output" \
+  "--places_resolved_csv=statvar_imports/eurostat/Deaths_by_week_and_sex/places_resolved.csv" \
+  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+
+## Run to Process the full data
+python3 tools/statvar_importer/stat_var_processor.py \
+  "--input_data=statvar_imports/eurostat/Deaths_by_week_and_sex/Deaths_by_week_and_sex_data_raw_processed.csv" \
+  "--pv_map=statvar_imports/eurostat/Deaths_by_week_and_sex/Deaths_by_week_and_sex_pvmap.csv" \
+  "--config_file=statvar_imports/eurostat/Deaths_by_week_and_sex/Deaths_by_week_and_sex_metadata.csv" \
+  "--generate_statvar_name=True" \
+  "--skip_constant_csv_columns=False" \
+  "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor" \
+  "--output_path=statvar_imports/eurostat/Deaths_by_week_and_sex/final_output/Deaths_by_week_and_sex_output" \
+  "--places_resolved_csv=statvar_imports/eurostat/Deaths_by_week_and_sex/places_resolved.csv" \
+  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"

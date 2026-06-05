@@ -15,8 +15,8 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "final_output/output.tmcf",
-          "cleaned_csv": "final_output/output.csv"
+          "template_mcf": "final_output/Divorce_indicators_output.tmcf",
+          "cleaned_csv": "final_output/Divorce_indicators_output.csv"
         }
       ],
       "cron_schedule": "5 1 1,15 * *",
