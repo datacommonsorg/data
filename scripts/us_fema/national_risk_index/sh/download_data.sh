@@ -15,7 +15,7 @@ cd "$tmp"
 ## County-level data
 ## Zip includes data a copy of the data dictionary
 ### Double slash after DataDownload is intentional
-curl -L https://www.fema.gov/about/reports-and-data/openfema/nri/v120/NRI_Table_Counties.zip -o NRI_Table_Counties.zip
+curl -fL https://www.fema.gov/about/reports-and-data/openfema/nri/v120/NRI_Table_Counties.zip -o NRI_Table_Counties.zip
 unzip NRI_Table_Counties.zip -d NRI_Table_Counties
 
 ## Tract-level data
