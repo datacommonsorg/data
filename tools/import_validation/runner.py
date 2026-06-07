@@ -215,7 +215,7 @@ class ValidationRunner:
                     rule_params.setdefault('output_path', output_dir)
 
                 # Resolve paths relative to the directory of the validation config.
-                if 'summary_report' in rule.get('rule_id', ''):
+                if validator_name == 'GOLDENS_CHECK':
                     # Helper to find a base directory containing target_sub_path by walking up
                     def find_base_dir(start_path: str, target_sub_path: str):
                         if not start_path:
@@ -240,7 +240,7 @@ class ValidationRunner:
                     if not config_dir:
                         config_dir = os.path.dirname(os.path.abspath(self.validation_config_path))
 
-                    print(f"DEBUG: Found summary_report rule: '{rule.get('rule_id')}'")
+                    print(f"DEBUG: Found GOLDENS_CHECK rule: '{rule.get('rule_id')}'")
                     print(f"DEBUG: Config directory resolved to: '{config_dir}'")
                     for path_key in ['golden_files', 'input_files']:
                         if path_key in rule_params:

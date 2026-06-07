@@ -350,3 +350,48 @@ class TestValidationRunner(unittest.TestCase):
                 lint_report=self.report_path,
                 validation_output=self.output_path)
         self.assertIn("'stats' data source", str(context.exception))
+
+    @patch('tools.import_validation.runner.Validator')
+    def test_runner_resolves_goldens_check_paths(self, MockValidator):
+        """Tests that GOLDENS_CHECK validator resolves relative paths correctly."""
+        # 1. Setup the mock
+        mock_validator_instance = MockValidator.return_value
+        mock_validator_instance.validate_goldens.return_value = ValidationResult(
+            ValidationStatus.PASSED, 'GOLDENS_CHECK')
+
+        # 2. Create the config file with relative paths
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    'rules': [{
+                        'rule_id': 'check_goldens_output_csv',
+                        'validator': 'GOLDENS_CHECK',
+                        'scope': {},
+                        'params': {
+                            'golden_files': 'golden_data/golden_WorldBank.csv',
+                            'input_files': 'output/WorldBank.csv'
+                        }
+                    }]
+                }, f)
+        pd.DataFrame({'StatVar': ['sv1']}).to_csv(self.stats_path, index=False)
+
+        # 3. Setup a dummy golden_data folder inside the temp dir to trigger base dir resolution
+        golden_dir = os.path.join(self.test_dir.name, 'golden_data')
+        os.makedirs(golden_dir, exist_ok=True)
+
+        runner = ValidationRunner(
+            validation_config_path=self.config_path,
+            stats_summary=self.stats_path,
+            differ_output=self.differ_path,
+            lint_report=self.report_path,
+            validation_output=self.output_path)
+        runner.run_validations()
+
+        # 4. Assert that validate_goldens was called with resolved paths
+        mock_validator_instance.validate_goldens.assert_called_once()
+        args, kwargs = mock_validator_instance.validate_goldens.call_args
+        rule_params = args[1]
+        expected_golden = os.path.join(self.test_dir.name, 'golden_data/golden_WorldBank.csv')
+        expected_input = os.path.join(self.test_dir.name, 'output/WorldBank.csv')
+        self.assertEqual(rule_params['golden_files'], expected_golden)
+        self.assertEqual(rule_params['input_files'], expected_input)
