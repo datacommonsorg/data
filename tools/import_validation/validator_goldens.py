@@ -68,6 +68,7 @@ Usage:
       --generate_goldens=goldens_data/generated_goldens.csv
 """
 
+import csv
 import os
 import sys
 import tempfile
@@ -297,15 +298,47 @@ def load_nodes_from_file(files: str) -> dict:
             # Nodes are keyed by their index in the combined loaded set.
             file_nodes = file_util.file_load_csv_dict(input_file,
                                                       key_index=True)
+            # Check if any loaded node has None as a key, indicating an incorrect delimiter
+            # was auto-detected (e.g. splitting 'dcid:Earth' on colon ':')
+            has_delimiter_error = False
             for node in file_nodes.values():
-                nodes[len(nodes)] = node
+                if None in node:
+                    has_delimiter_error = True
+                    break
+
+            if has_delimiter_error:
+                import csv
+                with file_util.FileIO(input_file) as csvfile:
+                    rawdata = csvfile.read()
+                    if isinstance(rawdata, bytes):
+                        encoding = file_util.file_get_encoding(input_file)
+                        data_str = rawdata.decode(encoding)
+                    else:
+                        data_str = rawdata
+                    reader = csv.DictReader(data_str.splitlines(),
+                                            delimiter=',')
+                    file_nodes = {}
+                    for row in reader:
+                        file_nodes[len(file_nodes)] = dict(row)
+
+            for node in file_nodes.values():
+                # Clean up None/empty keys and strip whitespace from headers/keys and values to ensure robust parsing
+                cleaned_node = {
+                    k.strip(): (v.strip() if isinstance(v, str) else v)
+                    for k, v in node.items()
+                    if k is not None and isinstance(k, str) and k.strip() != ''
+                }
+                nodes[len(nodes)] = cleaned_node
         else:
             # For MCF or JSON, we assume nodes are already keyed by DCID.
             file_nodes = mcf_file_util.load_mcf_nodes(input_file)
             for dcid, node in file_nodes.items():
-                # Ensure the dcid is present in the node dictionary itself.
+                # Ensure the dcid is present in the node dictionary itself with a null-safe check.
                 if 'dcid' not in node:
-                    node['dcid'] = mcf_file_util.strip_namespace(dcid)
+                    if dcid and isinstance(dcid, str):
+                        node['dcid'] = mcf_file_util.strip_namespace(dcid)
+                    else:
+                        node['dcid'] = ''
                 mcf_file_util.add_mcf_node(node, nodes)
 
     logging.info(f'Loaded {len(nodes)} nodes from {input_files}')
