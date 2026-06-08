@@ -194,7 +194,7 @@ def fetch_all_provenances(api_key: str, output_file: str) -> None:
 
                 if src_dcid:
                     source_info = source_data_map.get(src_dcid)
-                    
+
                 dataset_info = {
                     "name": ds_data.get("name"),
                     "url": ds_data.get("url"),
@@ -214,9 +214,7 @@ def fetch_all_provenances(api_key: str, output_file: str) -> None:
 def main(_):
     api_key = os.environ.get('DC_API_KEY')
     if not api_key:
-        logging.fatal(
-            "DC_API_KEY environment variable not set."
-        )
+        logging.fatal("DC_API_KEY environment variable not set.")
         sys.exit(1)
 
     fetch_all_provenances(api_key=api_key, output_file=FLAGS.output_file)
