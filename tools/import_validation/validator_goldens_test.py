@@ -190,24 +190,6 @@ class TestValidatorGoldens(unittest.TestCase):
         self.assertEqual(missing, [])
         mock_compare.assert_called_once()
 
-    def test_load_nodes_from_file_with_colon_values(self):
-        import tempfile
-        # Create a temporary CSV file with values containing colons and no commas
-        with tempfile.NamedTemporaryFile(mode='w', suffix='.csv', delete=False) as f:
-            f.write("ISO3166Alpha3\n")
-            f.write("dcid:Earth\n")
-            f.write("dcid:country/AGO\n")
-            temp_name = f.name
-
-        try:
-            nodes = validator_goldens.load_nodes_from_file(temp_name)
-            # The nodes should be parsed using comma as delimiter, which correctly preserves 'dcid:Earth' and 'dcid:country/AGO'
-            self.assertEqual(len(nodes), 2)
-            self.assertEqual(nodes[0], {'ISO3166Alpha3': 'dcid:Earth'})
-            self.assertEqual(nodes[1], {'ISO3166Alpha3': 'dcid:country/AGO'})
-        finally:
-            os.remove(temp_name)
-
 
 if __name__ == '__main__':
     unittest.main()

@@ -297,32 +297,8 @@ def load_nodes_from_file(files: str) -> dict:
             # Nodes are keyed by their index in the combined loaded set.
             file_nodes = file_util.file_load_csv_dict(input_file,
                                                       key_index=True)
-            # Check if any loaded node has None as a key, indicating an incorrect delimiter
-            # was auto-detected (e.g. splitting 'dcid:Earth' on colon ':')
-            has_delimiter_error = False
             for node in file_nodes.values():
-                if None in node:
-                    has_delimiter_error = True
-                    break
-
-            if has_delimiter_error:
-                import csv
-                with file_util.FileIO(input_file) as csvfile:
-                    rawdata = csvfile.read()
-                    if isinstance(rawdata, bytes):
-                        encoding = file_util.file_get_encoding(input_file)
-                        data_str = rawdata.decode(encoding)
-                    else:
-                        data_str = rawdata
-                    reader = csv.DictReader(data_str.splitlines(), delimiter=',')
-                    file_nodes = {}
-                    for row in reader:
-                        file_nodes[len(file_nodes)] = dict(row)
-
-            for node in file_nodes.values():
-                # Clean up None/empty keys and strip whitespace from headers/keys to ensure robust parsing
-                cleaned_node = {k.strip(): v for k, v in node.items() if k is not None and isinstance(k, str) and k.strip() != ''}
-                nodes[len(nodes)] = cleaned_node
+                nodes[len(nodes)] = node
         else:
             # For MCF or JSON, we assume nodes are already keyed by DCID.
             file_nodes = mcf_file_util.load_mcf_nodes(input_file)
