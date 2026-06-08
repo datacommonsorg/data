@@ -30,7 +30,7 @@ To execute the complete import process (download and processing), run:
 - `run.sh`: Main execution script for download and processing.
 - `Marriages_by_sex_and_previous_marital_status_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
 - `Marriages_by_sex_and_previous_marital_status_metadata.csv`: Configuration parameters for the processor.
-- `places_resolved_runtime.csv`: Mapping of place codes to Data Commons DCIDs.
+- `places_resolved.csv`: Mapping of place codes to Data Commons DCIDs.
 - `Marriages_by_sex_and_previous_marital_status_output.csv`: Processed statistical observations.
 - `Marriages_by_sex_and_previous_marital_status_output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
 
@@ -46,3 +46,27 @@ Testing is performed using the `test_data` directory:
 - Raw Input: `test_data/Marriages_by_sex_and_previous_marital_status_data_raw.csv`
 - Expected Output: `test_data/Marriages_by_sex_and_previous_marital_status_output.csv`
 - Expected TMCF: `test_data/Marriages_by_sex_and_previous_marital_status_output.tmcf`
+
+## Run the script for test data processing
+python3 tools/statvar_importer/stat_var_processor.py \
+  "--input_data=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/test_data/Marriages_by_sex_and_previous_marital_status_data_raw.csv" \
+  "--pv_map=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/Marriages_by_sex_and_previous_marital_status_pvmap.csv" \
+  "--config_file=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/Marriages_by_sex_and_previous_marital_status_metadata.csv" \
+  "--generate_statvar_name=True" \
+  "--skip_constant_csv_columns=False" \
+  "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor" \
+  "--output_path=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/final_output/Marriages_by_sex_and_previous_marital_status_output" \
+  "--places_resolved_csv=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/places_resolved.csv" \
+  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+  
+## Run the script for full data processing
+python3 tools/statvar_importer/stat_var_processor.py \
+  "--input_data=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/Marriages_by_sex_and_previous_marital_status_data_raw.csv" \
+  "--pv_map=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/Marriages_by_sex_and_previous_marital_status_pvmap.csv" \
+  "--config_file=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/Marriages_by_sex_and_previous_marital_status_metadata.csv" \
+  "--generate_statvar_name=True" \
+  "--skip_constant_csv_columns=False" \
+  "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor" \
+  "--output_path=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/final_output/Marriages_by_sex_and_previous_marital_status_output" \
+  "--places_resolved_csv=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/places_resolved.csv" \
+  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"

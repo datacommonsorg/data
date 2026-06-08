@@ -4,7 +4,5 @@ observationAbout: C:output->observationAbout
 variableMeasured: C:output->variableMeasured
 value: C:output->value
 observationPeriod: C:output->observationPeriod
-measurementMethod: C:output->measurementMethod
 unit: C:output->unit
-scalingFactor: C:output->scalingFactor
 typeOf: dcs:StatVarObservation

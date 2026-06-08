@@ -19,5 +19,5 @@ python3 tools/statvar_importer/stat_var_processor.py \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor" \
   "--output_path=statvar_imports/eurostat/Population_on_1_January_by_age_and_sex/final_output/Population_on_1_January_by_age_and_sex_output" \
-  "--places_resolved_csv=statvar_imports/eurostat/Population_on_1_January_by_age_and_sex/places_resolved_runtime.csv" \
+  "--places_resolved_csv=statvar_imports/eurostat/Population_on_1_January_by_age_and_sex/places_resolved.csv" \
   "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"

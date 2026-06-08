@@ -19,5 +19,5 @@ python3 tools/statvar_importer/stat_var_processor.py \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor" \
   "--output_path=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/final_output/Marriages_by_sex_and_previous_marital_status_output" \
-  "--places_resolved_csv=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/places_resolved_runtime.csv" \
+  "--places_resolved_csv=statvar_imports/eurostat/Marriages_by_sex_and_previous_marital_status/places_resolved.csv" \
   "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
