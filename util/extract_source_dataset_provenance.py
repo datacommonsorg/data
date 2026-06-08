@@ -16,6 +16,8 @@
 This script fetches all Provenance nodes from the Data Commons Knowledge Graph,
 resolves their associated Dataset and Source nodes, and outputs the hierarchy
 as a structured JSON file.
+
+Requires the DC_API_KEY environment variable to be set.
 """
 
 import json
@@ -36,10 +38,6 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'output_file', 'provenances_full.json',
     'Path to the output JSON file where the hierarchy will be saved.')
-flags.DEFINE_string(
-    'api_key', None,
-    'Data Commons API key. If not provided, the DC_API_KEY environment variable is used.'
-)
 
 
 def get_node_property(node_data, prop_name, default=None):
@@ -102,7 +100,7 @@ def fetch_all_provenances(api_key: str, output_file: str) -> None:
     provenance_data_map = {}
     dataset_dcids = set()
 
-    batch_size = 50
+    batch_size = 100
     for i in range(0, len(provenance_dcids), batch_size):
         batch = provenance_dcids[i:i + batch_size]
         batch_res = dc_api_wrapper(function=client.node.fetch,
@@ -214,10 +212,10 @@ def fetch_all_provenances(api_key: str, output_file: str) -> None:
 
 
 def main(_):
-    api_key = FLAGS.api_key or os.environ.get('DC_API_KEY')
+    api_key = os.environ.get('DC_API_KEY')
     if not api_key:
         logging.fatal(
-            "DC_API_KEY environment variable not set and --api_key flag not provided."
+            "DC_API_KEY environment variable not set."
         )
         sys.exit(1)
 
