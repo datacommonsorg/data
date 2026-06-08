@@ -431,8 +431,9 @@ class TestValidationRunner(unittest.TestCase):
                                 'output/input_file.csv',
                             'output_file':
                                 'output/output_file.csv',
-                            'custom_files':
-                                ['output/custom_file.csv', 'gs://skip/this.csv']
+                            'custom_files': [
+                                'output/custom_file.csv', 'gs://skip/this.csv'
+                            ]
                         }
                     }]
                 }, f)
@@ -455,13 +456,13 @@ class TestValidationRunner(unittest.TestCase):
 
         self.assertEqual(
             rule_params['golden_files'],
-            os.path.join(self.test_dir.name,
-                         'golden_data/golden_file.csv'))
+            os.path.join(self.test_dir.name, 'golden_data/golden_file.csv'))
         self.assertEqual(
             rule_params['input_files'],
             os.path.join(self.test_dir.name, 'output/input_file.csv'))
-        self.assertEqual(rule_params['output_file'],
-                         os.path.join(self.test_dir.name, 'output/output_file.csv'))
+        self.assertEqual(
+            rule_params['output_file'],
+            os.path.join(self.test_dir.name, 'output/output_file.csv'))
         self.assertEqual(rule_params['custom_files'], [
             os.path.join(self.test_dir.name, 'output/custom_file.csv'),
             'gs://skip/this.csv'
