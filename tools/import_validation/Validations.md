@@ -72,6 +72,8 @@ To generate goldens for the summary_report.csv to verify that all the expected
 StatVars are generated with the corresponding number of places and dates, run
 the following:
 
+This will compare the golden files using summary_report.csv as the default input:
+
 ```shell
     python3 validator_goldens.py \
       --validate_goldens_input=summary_report.csv \
