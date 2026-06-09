@@ -1,53 +1,44 @@
 key,property1,value1,property2,value2,property3,value3,property4,value4,property5,value5
-
 # Global Dataflow properties (Standard Data Commons Demographic Modeling)
-"DATAFLOW:ESTAT:DEMO_NMSTA(1.0)",populationType,dcs:Person,measuredProperty,dcs:count,statType,dcs:measuredValue,,,,
-
+"DATAFLOW:ESTAT:DEMO_NMSTA(1.0)",populationType,dcs:Person,measuredProperty,dcs:count,statType,dcs:measuredValue
 # --- AUTOMATED CLEANUP: Ignored Columns ---
-LAST UPDATE,#ignore,"",,,,,,,,
-CONF_STATUS,#ignore,"",,,,,,,,
-
+LAST UPDATE,#ignore,""
+CONF_STATUS,#ignore,""
 # Frequency dimension (Standard ISO-8601 Durations)
-freq:A,observationPeriod,P1Y,,,,,,,,
-freq:M,observationPeriod,P1M,,,,,,,,
-freq:Q,observationPeriod,P3M,,,,,,,,
-
+freq:A,observationPeriod,P1Y
+freq:M,observationPeriod,P1M
+freq:Q,observationPeriod,P3M
 # Unit dimension (dcs:Person is standard for demographic counts)
-unit:NR,unit,dcs:Person,,,,,,,,
-
+unit:NR,unit,dcs:Person
 # Sex / Gender dimension
-sex:T,gender,"",,,,,,,,
-sex:M,gender,dcs:Male,,,,,,,,
-sex:F,gender,dcs:Female,,,,,,,,
-
+sex:T,gender,""
+sex:M,gender,dcs:Male
+sex:F,gender,dcs:Female
 # Marital Status dimension (Standard Data Commons Enums)
-marsta:TOTAL,maritalStatus,"",,,,,,,,
-marsta:SIN,maritalStatus,dcs:NeverMarried,,,,,,,,
-marsta:LUN,maritalStatus,dcs:Married,,,,,,,,
-marsta:MAR,maritalStatus,dcs:Married,,,,,,,,
-marsta:WID,maritalStatus,dcs:Widowed,,,,,,,,
-marsta:DIV,maritalStatus,dcs:Divorced,,,,,,,,
-marsta:DISLUN,maritalStatus,dcs:Divorced,,,,,,,,
-marsta:DIV_DISREP,maritalStatus,dcs:Divorced,,,,,,,,
-marsta:DISREP,maritalStatus,dcs:Divorced,,,,,,,,
-marsta:WID_DTHREP,maritalStatus,dcs:Widowed,,,,,,,,
-marsta:MAR_REP,maritalStatus,dcs:Married,,,,,,,,
-marsta:SEP,maritalStatus,dcs:Separated,,,,,,,,
-marsta:DTHLUN,maritalStatus,dcs:Widowed,,,,,,,,
-marsta:REP,maritalStatus,dcs:Married,,,,,,,,
-marsta:UNK,maritalStatus,dcs:CDC_MaritalStatusUnknownOrNotStated,,,,,,,,
-
+marsta:TOTAL,maritalStatus,""
+marsta:SIN,maritalStatus,dcs:NeverMarried
+marsta:LUN,maritalStatus,dcs:Married
+marsta:MAR,maritalStatus,dcs:Married
+marsta:WID,maritalStatus,dcs:Widowed
+marsta:DIV,maritalStatus,dcs:Divorced
+marsta:DISLUN,maritalStatus,dcs:Divorced
+marsta:DIV_DISREP,maritalStatus,dcs:Divorced
+marsta:DISREP,maritalStatus,dcs:Divorced
+marsta:WID_DTHREP,maritalStatus,dcs:Widowed
+marsta:MAR_REP,maritalStatus,dcs:Married
+marsta:SEP,maritalStatus,dcs:Separated
+marsta:DTHLUN,maritalStatus,dcs:Widowed
+marsta:REP,maritalStatus,dcs:Married
+marsta:UNK,maritalStatus,dcs:CDC_MaritalStatusUnknownOrNotStated
 # Geography
-geo,observationAbout,{Data},,,,,,,,
-
+geo,observationAbout,{Data}
 # Time and Value
-TIME_PERIOD,observationDate,{Data},,,,,,,,
-OBS_VALUE,value,{Number},,,,,,,,
-
+TIME_PERIOD,observationDate,{Data}
+OBS_VALUE,value,{Number}
 # Safely Ignoring Transient and Composite Status Flags to Prevent Ingestion Warnings
-OBS_FLAG,#ignore,"",,,,,,,,
-OBS_FLAG:b,#ignore,"",,,,,,,,
-OBS_FLAG:p,#ignore,"",,,,,,,,
-OBS_FLAG:e,#ignore,"",,,,,,,,
-OBS_FLAG:M,MissingValue,"",,,,,,,,
-OBS_FLAG:NA,MissingValue,"",,,,,,,,
+OBS_FLAG,#ignore,""
+OBS_FLAG:b,#ignore,""
+OBS_FLAG:p,#ignore,""
+OBS_FLAG:e,#ignore,""
+OBS_FLAG:M,MissingValue,""
+OBS_FLAG:NA,MissingValue,""
