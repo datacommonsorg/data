@@ -405,9 +405,6 @@ class TestValidationRunner(unittest.TestCase):
         # Test helper functions
         self.assertTrue(_is_relative_local("some/relative/path.csv"))
         self.assertFalse(_is_relative_local("/absolute/path.csv"))
-        self.assertFalse(_is_relative_local("gs://bucket/path.csv"))
-        self.assertFalse(_is_relative_local("http://example.com/path.csv"))
-        self.assertFalse(_is_relative_local("https://example.com/path.csv"))
         self.assertFalse(_is_relative_local(None))
         self.assertFalse(_is_relative_local(123))
 
@@ -432,7 +429,7 @@ class TestValidationRunner(unittest.TestCase):
                             'output_file':
                                 'output/output_file.csv',
                             'custom_files': [
-                                'output/custom_file.csv', 'gs://skip/this.csv'
+                                'output/custom_file.csv', '/skip/this.csv'
                             ]
                         }
                     }]
@@ -465,5 +462,5 @@ class TestValidationRunner(unittest.TestCase):
             os.path.join(self.test_dir.name, 'output/output_file.csv'))
         self.assertEqual(rule_params['custom_files'], [
             os.path.join(self.test_dir.name, 'output/custom_file.csv'),
-            'gs://skip/this.csv'
+            '/skip/this.csv'
         ])

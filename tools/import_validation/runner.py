@@ -39,9 +39,8 @@ def _is_relative_local(path_val: str) -> bool:
     """Checks if a path is a relative, local file path.
 
     This function identifies path strings that represent local relative files
-    (e.g., 'golden_data/un_wpp.csv') as opposed to absolute paths or remote/cloud 
-    URIs. It filters out non-strings, empty strings, absolute local paths,
-    Google Cloud Storage URIs (gs://), and web URLs (http://, https://).
+    (e.g., 'golden_data/un_wpp.csv') as opposed to absolute paths. It filters
+    out non-strings, empty strings, and absolute local paths.
 
     Args:
         path_val: The file path string to evaluate.
@@ -51,9 +50,7 @@ def _is_relative_local(path_val: str) -> bool:
     """
     if not isinstance(path_val, str) or not path_val:
         return False
-    return (not os.path.isabs(path_val) and not path_val.startswith('gs://') and
-            not path_val.startswith('http://') and
-            not path_val.startswith('https://'))
+    return not os.path.isabs(path_val)
 
 
 def _find_base_dir(start_path: str, target_sub_path: str) -> str | None:
