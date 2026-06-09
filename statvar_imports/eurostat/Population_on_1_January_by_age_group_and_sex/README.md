@@ -31,17 +31,21 @@ curl -L --retry 3 "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data
 ## For Test Data Run
 
 python3 tools/statvar_importer/stat_var_processor.py \
-  --input_data=statvar_imports/eurostat/Population_on_1_January_by_age_group_and_sex/testdata/Population_on_1_January_by_age_group_and_sex_data_input.csv \
-  --pv_map=statvar_imports/eurostat/Population_on_1_January_by_age_group_and_sex/Population_on_1_January_by_age_group_and_sex_pvmap.csv \
-  --output_path=statvar_imports/eurostat/Population_on_1_January_by_age_group_and_sex/testdata/Population_on_1_January_by_age_group_and_sex_output \
-  --config_file=statvar_imports/eurostat/Population_on_1_January_by_age_group_and_sex/Population_on_1_January_by_age_group_and_sex_metadata.csv \
-  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
+  "--input_data=./testdata/Population_on_1_January_by_age_group_and_sex_data_input.csv"\
+  "--pv_map=./Population_on_1_January_by_age_group_and_sex_pvmap.csv" \
+  "--output_path=./testdata/Population_on_1_January_by_age_group_and_sex_output" \
+  "--config_file=./Population_on_1_January_by_age_group_and_sex_metadata.csv" \
+  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" 
 
 ## For Main data run
 
-python3 tools/statvar_importer/stat_var_processor.py \
-  --input_data=statvar_imports/eurostat/Population_on_1_January_by_age_group_and_sex/source_files/Population_on_1_January_by_age_group_and_sex_data_input.csv \
-  --pv_map=statvar_imports/eurostat/Population_on_1_January_by_age_group_and_sex/Population_on_1_January_by_age_group_and_sex_pvmap.csv \
-  --output_path=statvar_imports/eurostat/Population_on_1_January_by_age_group_and_sex/Population_on_1_January_by_age_group_and_sex_output \
-  --config_file=statvar_imports/eurostat/Population_on_1_January_by_age_group_and_sex/Population_on_1_January_by_age_group_and_sex_metadata.csv\
-  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  "--input_data=./source_files/*.csv" \
+  "--pv_map=./Population_on_1_January_by_age_group_and_sex_pvmap.csv" \
+  "--config_file=./Population_on_1_January_by_age_group_and_sex_metadata.csv" \
+  "--generate_statvar_name=True" \
+  "--skip_constant_csv_columns=False" \
+  "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,unit" \
+  "--output_path=./Population_on_1_January_by_age_group_and_sex_output" \
+  "--places_resolved_csv=./places_resolved_runtime.csv" \
+  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"

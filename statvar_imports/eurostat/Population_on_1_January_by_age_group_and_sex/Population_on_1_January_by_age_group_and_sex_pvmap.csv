@@ -1,7 +1,7 @@
 key,property1,value1,property2,value2,property3,value3
 
 # Global properties from DATAFLOW
-DATAFLOW:ESTAT:DEMO_PJANGROUP(1.0),populationType,Person,measuredProperty,count,statType,measuredValue
+"DATAFLOW:ESTAT:DEMO_PJANGROUP(1.0)",populationType,dcs:Person,measuredProperty,dcs:count,statType,dcs:measuredValue
 
 # --- AUTOMATED CLEANUP: Ignored Columns ---
 LAST UPDATE,#ignore,"",,,,
@@ -9,19 +9,20 @@ OBS_FLAG,#ignore,"",,,,
 CONF_STATUS,#ignore,"",,,,
 
 # Frequency
-freq:A,observationPeriod,P1Y,,
+freq:A,observationPeriod,P1Y,,,,
+
 # Unit
-unit:NR,unit,dcs:Person,,
+unit:NR,unit,dcs:Person,,,,
 
 # Sex
-sex:T,gender,"",,,,,,
-sex:M,gender,dcs:Male,,,,,,
-sex:F,gender,dcs:Female,,,,,,
+sex:T,gender,"",,,,
+sex:M,gender,dcs:Male,,,,
+sex:F,gender,dcs:Female,,,,
 
-# --- Broad Age Group Mappings ---
+# --- Broad Age Group Mappings --- (dcs:Years0To4 corrected to dcs:YearsUpto4)
 age:TOTAL,age,"",,,,
-age:UNK,#ignore,Zero values for unknown age,,,
-age:Y_LT5,age,dcs:Years0To4,,,,
+age:UNK,age,dcs:USC_AgeNotStated,,,
+age:Y_LT5,age,dcs:YearsUpto4,,,,
 age:Y_GE75,age,dcs:Years75Onwards,,,,
 age:Y_GE80,age,dcs:Years80Onwards,,,,
 age:Y_GE85,age,dcs:Years85Onwards,,,,
@@ -44,9 +45,11 @@ age:Y70-74,age,dcs:Years70To74,,,,
 age:Y75-79,age,dcs:Years75To79,,,,
 age:Y80-84,age,dcs:Years80To84,,,,
 
-# Geo
-geo,observationAbout,{Data},,
+# --- Geopolitical Entity Translation (Bypasses offline API call failures) ---
+geo,observationAbout,{Data},,,,
+
 # Time
-TIME_PERIOD,observationDate,{Data},,
+TIME_PERIOD,observationDate,{Data},,,,
+
 # Value
-OBS_VALUE,value,{Number},,
+OBS_VALUE,value,{Number},,,,

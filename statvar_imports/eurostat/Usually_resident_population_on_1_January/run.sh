@@ -12,6 +12,6 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   "--generate_statvar_name=True" \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,unit" \
-  "--output_path=./Usually_resident_population_on_1_January" \
+  "--output_path=./Usually_resident_population_on_1_January_output" \
   "--places_resolved_csv=./places_resolved_runtime.csv" \
   "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
