@@ -54,33 +54,28 @@ def _is_relative_local(path_val: str) -> bool:
 
 
 def _find_base_dir(start_path: str, target_sub_path: str) -> str | None:
-    """Helper to find a base directory containing a target sub-path by walking up.
+    """Helper to find a base directory containing a target sub-path.
 
-    Starting from the absolute directory of `start_path`, this function recursively
-    checks if `target_sub_path` exists in the current folder. If not, it walks up the 
-    parent directory tree up to 10 levels. This is crucial for resolving paths relative 
-    to import-specific golden directories when tests/validation are run from
-    different working directories (such as the repository root in CI/CD).
+    Since the validation config and other files are co-located in the same 
+    directory as the golden data, this function checks the directory of start_path
+    (or start_path itself if it's already a directory) for target_sub_path immediately.
 
     Args:
-        start_path: The file or directory path to start the upward search from.
+        start_path: The file or directory path to check.
         target_sub_path: The name of the subdirectory or file (e.g., 'golden_data')
-            to search for within the parent tree.
+            to search for within the directory.
 
     Returns:
         The absolute path of the directory containing `target_sub_path` if found,
-        or None if the root was reached or the 10-level limit was exceeded.
+        or None otherwise.
     """
     if not start_path:
         return None
     curr = os.path.abspath(start_path)
-    for _ in range(10):  # limit to 10 levels up
-        if os.path.exists(os.path.join(curr, target_sub_path)):
-            return curr
-        parent = os.path.dirname(curr)
-        if parent == curr:
-            break
-        curr = parent
+    if os.path.isfile(curr):
+        curr = os.path.dirname(curr)
+    if os.path.exists(os.path.join(curr, target_sub_path)):
+        return curr
     return None
 
 
