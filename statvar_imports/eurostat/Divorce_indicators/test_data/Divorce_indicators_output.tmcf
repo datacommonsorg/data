@@ -1,8 +1,10 @@
-Node: E:output->E0
-observationDate: C:output->observationDate
-observationAbout: C:output->observationAbout
-variableMeasured: C:output->variableMeasured
-value: C:output->value
-observationPeriod: C:output->observationPeriod
-scalingFactor: C:output->scalingFactor
+Node: E:Divorce_indicators_output->E0
+observationDate: C:Divorce_indicators_output->observationDate
+observationAbout: C:Divorce_indicators_output->observationAbout
+variableMeasured: C:Divorce_indicators_output->variableMeasured
+value: C:Divorce_indicators_output->value
+observationPeriod: C:Divorce_indicators_output->observationPeriod
+measurementMethod: C:Divorce_indicators_output->measurementMethod
+unit: C:Divorce_indicators_output->unit
+scalingFactor: C:Divorce_indicators_output->scalingFactor
 typeOf: dcs:StatVarObservation
