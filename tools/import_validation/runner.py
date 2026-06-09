@@ -36,16 +36,41 @@ _FLAGS = flags.FLAGS
 
 
 def _is_relative_local(path_val: str) -> bool:
-    """Checks if a path is a relative, local file path."""
+    """Checks if a path is a relative, local file path.
+
+    This function identifies path strings that represent local relative files
+    (e.g., 'golden_data/un_wpp.csv') as opposed to absolute paths. It filters
+    out non-strings, empty strings, and absolute local paths.
+
+    Args:
+        path_val: The file path string to evaluate.
+
+    Returns:
+        True if the path represents a relative, local file path; False otherwise.
+    """
     if not isinstance(path_val, str) or not path_val:
         return False
-    return (not os.path.isabs(path_val) and not path_val.startswith('gs://') and
-            not path_val.startswith('http://') and
-            not path_val.startswith('https://'))
+    return not os.path.isabs(path_val)
 
 
 def _find_base_dir(start_path: str, target_sub_path: str) -> str | None:
-    """Helper to find a base directory containing target_sub_path by walking up."""
+    """Helper to find a base directory containing a target sub-path by walking up.
+
+    Starting from the absolute directory of `start_path`, this function recursively
+    checks if `target_sub_path` exists in the current folder. If not, it walks up the 
+    parent directory tree up to 10 levels. This is crucial for resolving paths relative 
+    to import-specific golden directories when tests/validation are run from
+    different working directories (such as the repository root in CI/CD).
+
+    Args:
+        start_path: The file or directory path to start the upward search from.
+        target_sub_path: The name of the subdirectory or file (e.g., 'golden_data')
+            to search for within the parent tree.
+
+    Returns:
+        The absolute path of the directory containing `target_sub_path` if found,
+        or None if the root was reached or the 10-level limit was exceeded.
+    """
     if not start_path:
         return None
     curr = os.path.abspath(start_path)
@@ -263,9 +288,9 @@ class ValidationRunner:
                     for path_key in list(rule_params.keys()):
                         # Check any key in rule_params that equals 'golden_files' or 'input_files' or ends with '_file' or '_files'
                         if path_key in (
-                                'golden_files', 'input_files'
-                        ) or path_key.endswith('_file') or path_key.endswith(
-                                '_files'):
+                                'golden_files',
+                                'input_files') or path_key.endswith(
+                                    '_file') or path_key.endswith('_files'):
                             val = rule_params[path_key]
                             print(
                                 f"DEBUG: Before resolve '{path_key}': '{val}'")
