@@ -74,7 +74,7 @@ def _find_base_dir(start_path: str, target_sub_path: str) -> str | None:
     if not start_path:
         return None
     curr = os.path.abspath(start_path)
-    for _ in range(10):  # limit to 10 levels up
+    for _ in range(8):  # limit to 10 levels up
         if os.path.exists(os.path.join(curr, target_sub_path)):
             return curr
         parent = os.path.dirname(curr)
