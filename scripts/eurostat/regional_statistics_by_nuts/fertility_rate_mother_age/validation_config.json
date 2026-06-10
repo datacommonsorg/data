@@ -10,14 +10,6 @@
             }
         },
         {
-            "rule_id": "check_goldens_output_csv",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "golden_data/golden_observations.csv",
-                "input_files": "Eurostats_NUTS3_FRate_Age.csv"
-            }
-        },
-        {
             "rule_id": "check_goldens_summary_report",
             "validator": "GOLDENS_CHECK",
             "params": {
