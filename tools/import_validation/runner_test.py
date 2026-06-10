@@ -428,9 +428,8 @@ class TestValidationRunner(unittest.TestCase):
                                 'output/input_file.csv',
                             'output_file':
                                 'output/output_file.csv',
-                            'custom_files': [
-                                'output/custom_file.csv', '/skip/this.csv'
-                            ]
+                            'custom_files':
+                                ['output/custom_file.csv', '/skip/this.csv']
                         }
                     }]
                 }, f)
