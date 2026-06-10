@@ -31,7 +31,7 @@ IMPORT_NAME=$1
 VERSION=$2
 COMMENT=$3
 
-curl -X POST "${FUNCTION_URL}" \
+curl -X POST "${FUNCTION_URL}/imports/version" \
   -H "Authorization: bearer $(gcloud auth print-identity-token)" \
   -H "Content-Type: application/json" \
-  -d "{\"actionType\": \"update_import_version\", \"importName\": \"${IMPORT_NAME}\", \"version\": \"${VERSION}\", \"override\": true, \"comment\": \"${COMMENT}\"}"
+  -d "{\"importName\": \"${IMPORT_NAME}\", \"version\": \"${VERSION}\", \"override\": true, \"comment\": \"${COMMENT}\"}"
