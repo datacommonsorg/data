@@ -445,12 +445,19 @@ def generate_goldens(input_files: str,
     if golden_nodes and output_file:
         logging.info(f'Writing {len(golden_nodes)} goldens to {output_file}')
         if file_util.file_is_csv(output_file):
+            # Gather all unique column headers across all generated golden nodes.
+            # This ensures that even if some nodes have differing schema properties,
+            # every single column is fully represented in the CSV header.
             headers = []
             for node in golden_nodes.values():
                 for prop in node.keys():
                     if prop not in headers:
                         headers.append(prop)
             with file_util.FileIO(output_file, mode='w') as csvfile:
+                # Use standard-compliant csv.DictWriter with QUOTE_NONNUMERIC.
+                # This automatically wraps all string fields (e.g. text containing commas)
+                # in double quotes to prevent column misalignment/corruption, while leaving
+                # numbers (like float and int values) unquoted.
                 writer = csv.DictWriter(
                     csvfile,
                     fieldnames=headers,
