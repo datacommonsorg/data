@@ -1,0 +1,26 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "eurostat_unemp_sex_age_annual",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://ec.europa.eu/eurostat/databrowser/view/une_rt_a/default/table?lang=en",
+      "provenance_description": "The data is provided by Eurostat, the statistical office of the European Union. It belongs to the Labour market database under the Employment and unemployment (Labour force survey) statistical theme, specifically the Unemployment by sex and age - annual data (UNE_RT_A) dataset.",
+      "scripts": [
+        "run.sh"
+      ],
+      "source_files": [
+        "unemployment_by_sex_and_age_annual_data_data_raw.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "final_output/unemployment_by_sex_and_age_annual_data_output.tmcf",
+          "cleaned_csv": "final_output/unemployment_by_sex_and_age_annual_data_output.csv"
+        }
+      ],
+      "cron_schedule": "5 1 1,15 * *",
+      "resource_limits": {"cpu": 4, "memory": 8, "disk":100}
+        }
+   ]
+}
