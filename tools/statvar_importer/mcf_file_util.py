@@ -43,6 +43,7 @@ python3 mcf_file_util.py --input_mcf=test_data/*.mcf
 from collections import OrderedDict
 import csv
 import glob
+import hashlib
 import os
 import re
 import sys
@@ -503,7 +504,7 @@ def load_mcf_nodes(
     filenames: command seperated string or a list of MCF filenames
     nodes: dictonary to which new nodes are added. If a node with dcid exists,
       the new properties are added to the existing node.
-    strip_namespace: if True, strips namespace from the value for node
+    strip_namespaces: if True, strips namespace from the value for node
       properties as well as the dcid key for the nodes dict.
     append_values: if True, appends new values for existing properties into a
       comma separated list, else replaces existing value.
@@ -589,7 +590,7 @@ def load_mcf_nodes(
                         if strip_namespaces:
                             value = strip_namespace(value)
                         add_pv_to_node(prop, value, pvs, append_values,
-                                       strip_namespace, normalize)
+                                       strip_namespaces, normalize)
                         num_props += 1
                 if pvs:
                     if not add_mcf_node(pvs, nodes, strip_namespaces,
@@ -742,6 +743,8 @@ def get_value_list(value: str) -> list:
         return value
     value_list = []
     # Read the string as a comma separated line.
+    if not isinstance(value, str):
+        value = str(value)
     is_quoted = '"' in value
     try:
         if is_quoted and "," in value:
@@ -763,6 +766,42 @@ def get_value_list(value: str) -> list:
             f'Too large value {len(value)}, failed to convert to list')
         value_list = [value]
     return value_list
+
+
+def is_number(value: str) -> bool:
+    """Returns true if the value is a number."""
+    if isinstance(value, int) or isinstance(value, float):
+        return True
+    if not isinstance(value, str):
+        return False
+    return value and (value.isdigit() or value.replace('.', '', 1).isdigit())
+
+
+def is_leaf_object(value: str) -> bool:
+    """Returns true if the value is a leaf node, such as, string, number.
+
+  Args:
+    value: Value of a property in a node.
+
+  Returns
+    Boolean: True if value is quoted string or a number.
+  """
+    if isinstance(value, list):
+        return all(is_leaf_object(v) for v in value)
+    if is_number(value):
+        return True
+    if not isinstance(value, str):
+        return False
+    if ',' in value:
+        return all(is_leaf_object(v) for v in get_value_list(value))
+    return value and (value[0] == '"' and value[-1] == '"')
+
+
+def is_valid_property(prop: str) -> bool:
+    """Returns true if the property is valid."""
+    if not isinstance(prop, str):
+        return False
+    return prop and not prop.startswith('#') and prop[0].islower()
 
 
 def normalize_list(value: str, sort: bool = True) -> str:
@@ -1051,6 +1090,7 @@ def write_mcf_nodes(
             node_dict.update(d)
         file_util.file_write_csv_dict(node_dict, filename)
         return
+    filename_base = os.path.basename(filename)
     with file_util.FileIO(filename, mode) as output_f:
         if header is not None:
             output_f.write(header)
@@ -1061,6 +1101,11 @@ def write_mcf_nodes(
                 node_keys = sorted(node_keys)
             for dcid in node_keys:
                 node = nodes[dcid]
+                if 'dcid' not in node and 'Node' not in node:
+                    # Generate a local dcid in a node copy
+                    node = dict(node)
+                    node['Node'] = f'l:{filename_base}/' + hashlib.md5(
+                        str(dcid).encode('utf-8')).hexdigest()
                 if sort:
                     node = normalize_mcf_node(node, ignore_comments)
                 pvs = node_dict_to_text(node, default_pvs)
