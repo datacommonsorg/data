@@ -58,7 +58,7 @@ python3 tools/statvar_importer/stat_var_processor.py \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,unit,scalingFactor" \
   "--output_path=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/final_output/unemployment_by_sex_and_age_annual_data_output" \
   "--places_resolved_csv=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/places_resolved.csv" \
-  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat.mcf"
+  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
 
 ## Run to Process the full data
 python3 tools/statvar_importer/stat_var_processor.py \
@@ -70,4 +70,4 @@ python3 tools/statvar_importer/stat_var_processor.py \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,unit,scalingFactor" \
   "--output_path=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/final_output/unemployment_by_sex_and_age_annual_data_output" \
   "--places_resolved_csv=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/places_resolved.csv" \
-  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat.mcf"
+  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
