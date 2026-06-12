@@ -4,7 +4,7 @@
 The data is provided by Eurostat, the statistical office of the European Union. It belongs to the Labour market database under the Employment and unemployment (Labour force survey) statistical theme, specifically the Unemployment by sex and age - monthly data (UNE_RT_M) dataset.
 
 **type of place:** Country, NUTS Regions
-**years:** 2003-2025
+**years:** 1983-01 - 2026-05
 **place_resolution:** Resolved to DCIDs (e.g., dcid:country/FRA, dcid:nuts/AT11)
 
 ## Data Source
