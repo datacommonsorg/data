@@ -89,6 +89,7 @@ from json_to_csv import file_json_to_csv
 from schema_generator import generate_schema_nodes, generate_statvar_name
 from schema_checker import sanity_check_nodes
 from schema_reconciler import SchemaReconciler
+from statvar_dcid_gen import generate_dcid_for_statvar
 
 # imports from ../../util
 from config_map import ConfigMap, read_py_dict_from_file
@@ -375,14 +376,19 @@ class StatVarsMap:
             'statvar_dcid_ignore_properties',
             [
                 'description', 'name', 'nameWithLanguage', 'descriptionUrl',
-                'alternateName'
+                'alternateName', 'footnote', 'typeOf', 'Node'
             ],
         )
         if not self._config.get(
                 'schemaless',
                 False) or not self._get_schemaless_statvar_props(pvs):
             try:
-                dcid = get_statvar_dcid(pvs, ignore_props=dcid_ignore_props)
+                if self._config.get('statvar_dcid_fixed_properties'):
+                    # Use the custom statvar dcid generator
+                    dcid = generate_dcid_for_statvar(pvs, self._config,
+                                                     self._counters)
+                else:
+                    dcid = get_statvar_dcid(pvs, ignore_props=dcid_ignore_props)
                 dcid = re.sub(r'[^A-Za-z_0-9/_\.-]+', '_', dcid)
             except TypeError as e:
                 logging.log_every_n(
