@@ -40,7 +40,8 @@ class ValidationRunner:
   """
 
     def __init__(self, validation_config_path: str, differ_output: str,
-                 stats_summary: str, lint_report: str, validation_output: str):
+                 stats_summary: str, lint_report: str, validation_output: str,
+                 counters_report: str = None):
         self.config = ValidationConfig(validation_config_path)
         self.validation_output = validation_output
         self.validator = Validator()
@@ -49,7 +50,8 @@ class ValidationRunner:
             'stats': pd.DataFrame(),
             'differ': pd.DataFrame(),
             'differ_summary': {},
-            'lint': {}
+            'lint': {},
+            'counters': {}
         }
 
         self.validation_dispatch = {
@@ -85,12 +87,22 @@ class ValidationRunner:
             'MAX_VALUE_CHECK':
                 (self.validator.validate_max_value_check, 'stats'),
             'GOLDENS_CHECK': (self.validator.validate_goldens, 'stats'),
+            'COUNTER_ZERO_CHECK':
+                (self.validator.validate_counter_zero, 'counters'),
+            'COUNTER_MAX_THRESHOLD':
+                (self.validator.validate_counter_max_threshold, 'counters'),
+            'COUNTER_RATIO_THRESHOLD':
+                (self.validator.validate_counter_ratio_threshold, 'counters'),
+            'COUNTER_SUM_INTEGRITY':
+                (self.validator.validate_counter_sum_integrity, 'counters'),
+            'COUNTER_MIN_YIELD':
+                (self.validator.validate_counter_min_yield, 'counters'),
         }
 
-        self._initialize_data_sources(stats_summary, lint_report, differ_output)
+        self._initialize_data_sources(stats_summary, lint_report, differ_output, counters_report)
 
     def _initialize_data_sources(self, stats_summary: str, lint_report: str,
-                                 differ_output: str):
+                                 differ_output: str, counters_report: str = None):
         """
     Checks for and loads the required data sources based on the config.
     """
@@ -166,6 +178,37 @@ class ValidationRunner:
         elif lint_report and os.path.exists(lint_report):
             logging.warning("lint_report file exists but is empty: %s",
                             lint_report)
+
+        if counters_report:
+            self._load_counters(counters_report)
+
+    def _load_counters(self, counters_report: str):
+        """Loads counters from a CSV file and stores them in data_sources."""
+        if os.path.exists(counters_report) and os.path.getsize(
+                counters_report) > 0:
+            try:
+                df = pd.read_csv(counters_report)
+                def clean_key(x):
+                    if not isinstance(x, str):
+                        return x
+                    if ':' in x:
+                        x = x.split(':', 1)[1]
+                    if '_' in x:
+                        x = x.rsplit('_', 1)[-1]
+                    return x
+
+                df['key'] = df['key'].apply(clean_key)
+                # Aggregate by summing if there are duplicates
+                df = df.groupby('key')['value'].sum().reset_index()
+                self.data_sources['counters'] = dict(
+                    zip(df['key'], df['value']))
+            except Exception as e:
+                logging.error(
+                    f"CSV parse error while reading counters report at {counters_report}: {e}"
+                )
+        elif os.path.exists(counters_report):
+            logging.warning("counters_report file exists but is empty: %s",
+                            counters_report)
 
     def _determine_required_sources(self) -> set[str]:
         """
@@ -263,7 +306,8 @@ def main(_):
                                   differ_output=_FLAGS.differ_output,
                                   stats_summary=_FLAGS.stats_summary,
                                   lint_report=_FLAGS.lint_report,
-                                  validation_output=_FLAGS.validation_output)
+                                  validation_output=_FLAGS.validation_output,
+                                  counters_report=_FLAGS.counters_report)
         overall_status, _ = runner.run_validations()
         if not overall_status:
             sys.exit(1)
@@ -281,6 +325,8 @@ if __name__ == '__main__':
                         'Path to the stats summary report file.')
     flags.DEFINE_string('lint_report', None,
                         'Path to the mcf lint report file.')
+    flags.DEFINE_string('counters_report', None,
+                        'Path to the counters report file.')
     flags.DEFINE_string('validation_output', None,
                         'Path to the validation output file.')
     flags.mark_flag_as_required('validation_output')
