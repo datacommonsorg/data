@@ -30,10 +30,10 @@ class TestStatvarDcidGen(unittest.TestCase):
 
     def test_get_dcid_token(self):
         self.assertEqual(get_dcid_token('Hello World!'), 'Hello_World')
-        self.assertEqual(
-            get_dcid_token('helloWorld', upper_case=True), 'HELLO_WORLD')
-        self.assertEqual(
-            get_dcid_token('prefixWorld', remove_prefix='prefix'), 'World')
+        self.assertEqual(get_dcid_token('helloWorld', upper_case=True),
+                         'HELLO_WORLD')
+        self.assertEqual(get_dcid_token('prefixWorld', remove_prefix='prefix'),
+                         'World')
 
     def test_get_dcid_name(self):
         schema_nodes = {
@@ -65,6 +65,37 @@ class TestStatvarDcidGen(unittest.TestCase):
         }
         dcid2 = generate_dcid_for_statvar(pvs2, {})
         self.assertEqual(dcid2, 'Index_Count_Person')
+
+    def test_generate_dcid_with_property(self):
+        config = {
+            'statvar_dcid_fixed_properties': [
+                'statType<>measuredValue', 'measuredProperty<>value',
+                'populationType'
+            ],
+            'statvar_dcid_delimiter': '__',
+            'statvar_dcid_value_delimiter': '--',
+            'statvar_dcid_remove_prefix': 'TEST_',
+            'statvar_dcid_upper_case': True,
+            'statvar_dcid_prefix': 'test/',
+        }
+        pvs = {
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'Person',
+        }
+        dcid = generate_dcid_for_statvar(pvs, config)
+        self.assertEqual(dcid, 'test/COUNT__PERSON')
+
+        pvs2 = {
+            'statType': 'medianValue',
+            'measuredProperty': 'age',
+            'populationType': 'Person',
+            'gender': 'Male',
+            'place': 'TEST_Urban',
+        }
+        dcid2 = generate_dcid_for_statvar(pvs2, config)
+        self.assertEqual(
+            dcid2, 'test/MEDIAN_VALUE__AGE__PERSON__GENDER--MALE__PLACE--URBAN')
 
 
 if __name__ == '__main__':

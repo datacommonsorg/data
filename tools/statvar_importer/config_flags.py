@@ -433,6 +433,21 @@ def get_default_config() -> dict:
             _FLAGS.generate_statvar_name,  # Generate names for StatVars
         'llm_generate_statvar_name':
             _FLAGS.llm_generate_statvar_name,
+
+        # Settings for statvar dcid generator
+        'statvar_dcid_fixed_properties': [],
+        'statvar_dcid_prefix':
+            '',
+        'statvar_dcid_remove_prefix':
+            '',
+        'statvar_dcid_delimiter':
+            '',
+        'statvar_dcid_value_delimiter':
+            '',
+        'statvar_dcid_upper_case':
+            False,
+        'statvar_dcid_remove_prefix':
+            '',
     }
 
 
