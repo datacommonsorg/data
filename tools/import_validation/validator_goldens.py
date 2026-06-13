@@ -446,8 +446,8 @@ def generate_goldens(input_files: str,
     if golden_nodes and output_file:
         logging.info(f'Writing {len(golden_nodes)} goldens to {output_file}')
         if file_util.file_is_csv(output_file):
-            file_util.file_write_csv_dict(golden_nodes, 
-                                          output_file, 
+            file_util.file_write_csv_dict(golden_nodes,
+                                          output_file,
                                           key_column_name=None)
         else:
             mcf_file_util.write_mcf_nodes([golden_nodes], output_file)
