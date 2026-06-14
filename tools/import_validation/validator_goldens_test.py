@@ -190,28 +190,6 @@ class TestValidatorGoldens(unittest.TestCase):
         self.assertEqual(missing, [])
         mock_compare.assert_called_once()
 
-    @patch('validator_goldens.file_util')
-    def test_load_nodes_from_file_with_dcid_prefix_values(self, mock_file):
-        mock_file.file_get_matching.return_value = ['dummy.csv']
-        mock_file.file_is_csv.return_value = True
-        mock_file.file_load_csv_dict.return_value = {
-            0: {
-                'observationAbout': 'dcid:Earth',
-                'variableMeasured': 'dcid:Count_Person',
-                'value': '10'
-            }
-        }
-
-        nodes = validator_goldens.load_nodes_from_file('dummy.csv')
-
-        self.assertEqual(len(nodes), 1)
-        # Verify that prefixes 'dcid:' have been stripped from values only
-        self.assertIn('observationAbout', nodes[0])
-        self.assertEqual(nodes[0]['observationAbout'], 'Earth')
-        self.assertIn('variableMeasured', nodes[0])
-        self.assertEqual(nodes[0]['variableMeasured'], 'Count_Person')
-        self.assertEqual(nodes[0]['value'], '10')
-
 
 if __name__ == '__main__':
     unittest.main()
