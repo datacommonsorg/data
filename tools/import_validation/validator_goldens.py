@@ -68,7 +68,6 @@ Usage:
       --generate_goldens=goldens_data/generated_goldens.csv
 """
 
-import csv
 import os
 import sys
 import tempfile
@@ -299,12 +298,7 @@ def load_nodes_from_file(files: str) -> dict:
             file_nodes = file_util.file_load_csv_dict(input_file,
                                                       key_index=True)
             for node in file_nodes.values():
-                # Clean up "dcid:" prefixes from values (column headers are kept as is)
-                clean_node = {}
-                for k, v in node.items():
-                    clean_val = v[5:] if (isinstance(v, str) and v.startswith("dcid:")) else v
-                    clean_node[k] = clean_val
-                nodes[len(nodes)] = clean_node
+                nodes[len(nodes)] = node
         else:
             # For MCF or JSON, we assume nodes are already keyed by DCID.
             file_nodes = mcf_file_util.load_mcf_nodes(input_file)
