@@ -301,7 +301,8 @@ def load_nodes_from_file(files: str) -> dict:
                 # Clean up "dcid:" prefixes from values (column headers are kept as is)
                 clean_node = {}
                 for k, v in node.items():
-                    clean_val = v[5:] if (isinstance(v, str) and v.startswith("dcid:")) else v
+                    clean_val = v[5:] if (isinstance(v, str) and
+                                          v.startswith("dcid:")) else v
                     clean_node[k] = clean_val
                 nodes[len(nodes)] = clean_node
         else:

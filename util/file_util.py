@@ -675,7 +675,8 @@ def file_write_csv_dict(py_dict: dict,
                         columns.append(col)
     if len(columns) == 1:
         # Check if values are dicts. If they are, it's not a primitive value.
-        is_value_dict = any(isinstance(value, dict) for value in py_dict.values())
+        is_value_dict = any(
+            isinstance(value, dict) for value in py_dict.values())
         if not is_value_dict:
             # Value is not a dict. Write it as a column name value.
             value_column_name = 'value'
