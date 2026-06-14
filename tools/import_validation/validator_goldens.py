@@ -68,7 +68,6 @@ Usage:
       --generate_goldens=goldens_data/generated_goldens.csv
 """
 
-
 import os
 import sys
 import tempfile
