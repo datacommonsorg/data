@@ -68,7 +68,6 @@ Usage:
       --generate_goldens=goldens_data/generated_goldens.csv
 """
 
-import csv
 import os
 import sys
 import tempfile
@@ -312,6 +311,7 @@ def load_nodes_from_file(files: str) -> dict:
     logging.info(f'Loaded {len(nodes)} nodes from {input_files}')
     return nodes
 
+
 def generate_goldens(input_files: str,
                      property_sets: list,
                      output_file: str = None,
@@ -440,23 +440,9 @@ def generate_goldens(input_files: str,
     if golden_nodes and output_file:
         logging.info(f'Writing {len(golden_nodes)} goldens to {output_file}')
         if file_util.file_is_csv(output_file):
-            headers = []
-            for node in golden_nodes.values():
-                for prop in node.keys():
-                    if prop not in headers:
-                        headers.append(prop)
-            with file_util.FileIO(output_file, mode='w') as csvfile:
-                writer = csv.DictWriter(
-                    csvfile,
-                    fieldnames=headers,
-                    escapechar='\\',
-                    extrasaction='ignore',
-                    quotechar='"',
-                    quoting=csv.QUOTE_NONNUMERIC,
-                )
-                writer.writeheader()
-                for node in golden_nodes.values():
-                    writer.writerow(node)
+            file_util.file_write_csv_dict(golden_nodes,
+                                          output_file,
+                                          key_column_name=None)
         else:
             mcf_file_util.write_mcf_nodes([golden_nodes], output_file)
 
