@@ -1055,7 +1055,7 @@ def file_get_csv_reader_options(
         default_options: dict = {},
         data: str = None,
         encoding: str = None,
-        delim_chars: list = [',', '\t', ';', '|', ':']) -> dict:
+        delim_chars: list = [',', '	', ';', '|', ':']) -> dict:
     """Returns a dictionary with options for the CSV file reader.
 
     Args:
