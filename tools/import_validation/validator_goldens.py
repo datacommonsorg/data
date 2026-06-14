@@ -68,7 +68,7 @@ Usage:
       --generate_goldens=goldens_data/generated_goldens.csv
 """
 
-import csv
+
 import os
 import sys
 import tempfile
@@ -302,8 +302,7 @@ def load_nodes_from_file(files: str) -> dict:
                 # Clean up "dcid:" prefixes from values (column headers are kept as is)
                 clean_node = {}
                 for k, v in node.items():
-                    clean_val = v[5:] if (isinstance(v, str) and
-                                          v.startswith("dcid:")) else v
+                    clean_val = v[5:] if (isinstance(v, str) and v.startswith("dcid:")) else v
                     clean_node[k] = clean_val
                 nodes[len(nodes)] = clean_node
         else:
@@ -447,30 +446,9 @@ def generate_goldens(input_files: str,
     if golden_nodes and output_file:
         logging.info(f'Writing {len(golden_nodes)} goldens to {output_file}')
         if file_util.file_is_csv(output_file):
-            # Gather all unique column headers across all generated golden nodes.
-            # This ensures that even if some nodes have differing schema properties,
-            # every single column is fully represented in the CSV header.
-            headers = []
-            for node in golden_nodes.values():
-                for prop in node.keys():
-                    if prop not in headers:
-                        headers.append(prop)
-            with file_util.FileIO(output_file, mode='w') as csvfile:
-                # Use standard-compliant csv.DictWriter with QUOTE_NONNUMERIC.
-                # This automatically wraps all string fields (e.g. text containing commas)
-                # in double quotes to prevent column misalignment/corruption, while leaving
-                # numbers (like float and int values) unquoted.
-                writer = csv.DictWriter(
-                    csvfile,
-                    fieldnames=headers,
-                    escapechar='\\',
-                    extrasaction='ignore',
-                    quotechar='"',
-                    quoting=csv.QUOTE_NONNUMERIC,
-                )
-                writer.writeheader()
-                for node in golden_nodes.values():
-                    writer.writerow(node)
+            file_util.file_write_csv_dict(golden_nodes,
+                                          output_file,
+                                          key_column_name=None)
         else:
             mcf_file_util.write_mcf_nodes([golden_nodes], output_file)
 
