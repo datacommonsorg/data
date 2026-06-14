@@ -14,7 +14,6 @@
 """Module for the ValidationRunner class."""
 
 import os
-import logging
 from absl import app
 from absl import flags
 from absl import logging
@@ -58,7 +57,7 @@ def _find_base_dir(start_path: str, target_sub_path: str) -> str | None:
 
     Starting from the absolute directory of `start_path`, this function recursively
     checks if `target_sub_path` exists in the current folder. If not, it walks up the 
-    parent directory tree up to 10 levels. This is crucial for resolving paths relative 
+    parent directory tree up to 8 levels. This is crucial for resolving paths relative 
     to import-specific golden directories when tests/validation are run from
     different working directories (such as the repository root in CI/CD).
 
@@ -69,7 +68,7 @@ def _find_base_dir(start_path: str, target_sub_path: str) -> str | None:
 
     Returns:
         The absolute path of the directory containing `target_sub_path` if found,
-        or None if the root was reached or the 10-level limit was exceeded.
+        or None if the root was reached or the 8-level limit was exceeded.
     """
     if not start_path:
         return None
