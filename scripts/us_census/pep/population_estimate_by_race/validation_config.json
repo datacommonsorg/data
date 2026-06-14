@@ -1,18 +1,38 @@
 {
-    "schema_version": "1.0",
-    "rules": [
-        {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
-            "validator": "DELETED_RECORDS_PERCENT",
-            "params": { "threshold": 0.15 }
-        },
-        {
-            "rule_id": "check_goldens_summary_report",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "golden_data/*.csv"
-            }
-        }
-    ]
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": { "threshold": 0.15}
+    },
+    {
+      "rule_id": "check_goldens_national",
+      "description": "Validates national and state-level 2000+ data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "golden_data/golden_summary_report_national.csv",
+        "input_files": "USCensusPEP_PopulationEstimatebyRace/*/input0/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_before_2000",
+      "description": "Validates data before 2000 against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "golden_data/golden_summary_report_before_2000.csv",
+        "input_files": "USCensusPEP_PopulationEstimatebyRace/*/input1/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_after_2000",
+      "description": "Validates county-level 2000+ data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "golden_data/golden_summary_report_after_2000.csv",
+        "input_files": "USCensusPEP_PopulationEstimatebyRace/*/input2/genmcf/summary_report.csv"
+      }
+    }
+  ]
 }
