@@ -13,7 +13,6 @@
 # limitations under the License.
 """Utility functions for the import validation tool."""
 
-import os
 import pandas as pd
 import re
 
