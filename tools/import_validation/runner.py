@@ -29,7 +29,7 @@ from validation_config import ValidationConfig
 from report_generator import ReportGenerator
 from validator import Validator
 from result import ValidationResult, ValidationStatus
-from util import filter_dataframe, _is_relative_local, _find_base_dir
+from util import filter_dataframe
 
 _FLAGS = flags.FLAGS
 
@@ -216,19 +216,15 @@ class ValidationRunner:
 
                 # Resolve paths relative to the directory of the validation config.
                 if validator_name == 'GOLDENS_CHECK':
-                    config_dir = None
-                    # Walk up from validation_config_path, self.stats_summary, or CWD to find where 'golden_data' lives
-                    for start in [
-                            self.validation_config_path, self.stats_summary,
-                            os.getcwd()
-                    ]:
-                        config_dir = _find_base_dir(start, 'golden_data')
-                        if config_dir:
+                    config_dir = os.path.dirname(
+                        os.path.abspath(self.validation_config_path))
+                    # We walk up to find where the golden_data folder is situated.
+                    curr = config_dir
+                    while curr and curr != os.path.dirname(curr):
+                        if os.path.exists(os.path.join(curr, 'golden_data')):
+                            config_dir = curr
                             break
-
-                    if not config_dir:
-                        config_dir = os.path.dirname(
-                            os.path.abspath(self.validation_config_path))
+                        curr = os.path.dirname(curr)
 
                     print(
                         f"DEBUG: Found GOLDENS_CHECK rule: '{rule.get('rule_id')}'"
@@ -245,13 +241,13 @@ class ValidationRunner:
                             print(
                                 f"DEBUG: Before resolve '{path_key}': '{val}'")
                             if isinstance(val, str):
-                                if _is_relative_local(val):
+                                if val and not os.path.isabs(val):
                                     rule_params[path_key] = os.path.join(
                                         config_dir, val)
                             elif isinstance(val, list):
                                 rule_params[path_key] = [
                                     os.path.join(config_dir, item)
-                                    if _is_relative_local(item) else item
+                                    if isinstance(item, str) and item and not os.path.isabs(item) else item
                                     for item in val
                                 ]
                             print(
