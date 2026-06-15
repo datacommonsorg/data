@@ -240,17 +240,11 @@ class ValidationRunner:
                             val = rule_params[path_key]
                             print(
                                 f"DEBUG: Before resolve '{path_key}': '{val}'")
-                            if isinstance(val, str):
-                                if val and not os.path.isabs(val):
-                                    rule_params[path_key] = os.path.join(
-                                        config_dir, val)
-                            elif isinstance(val, list):
-                                rule_params[path_key] = [
-                                    os.path.join(config_dir, item)
-                                    if isinstance(item, str) and item and
-                                    not os.path.isabs(item) else item
-                                    for item in val
-                                ]
+                            if isinstance(
+                                    val,
+                                    str) and val and not os.path.isabs(val):
+                                rule_params[path_key] = os.path.join(
+                                    config_dir, val)
                             print(
                                 f"DEBUG: After resolve '{path_key}': '{rule_params[path_key]}'"
                             )
