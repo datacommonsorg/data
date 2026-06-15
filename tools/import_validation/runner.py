@@ -218,11 +218,10 @@ class ValidationRunner:
                 if validator_name == 'GOLDENS_CHECK':
                     config_dir = os.path.dirname(
                         os.path.abspath(self.validation_config_path))
-                    # In batch jobs, the config file may be nested deeply in the import directory.
-                    # We walk up to find where the manifest.json or golden_data folder is situated.
+                    # We walk up to find where the golden_data folder is situated.
                     curr = config_dir
                     while curr and curr != os.path.dirname(curr):
-                        if os.path.exists(os.path.join(curr, 'manifest.json')) or os.path.exists(os.path.join(curr, 'golden_data')):
+                        if os.path.exists(os.path.join(curr, 'golden_data')):
                             config_dir = curr
                             break
                         curr = os.path.dirname(curr)
