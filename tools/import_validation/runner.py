@@ -247,7 +247,8 @@ class ValidationRunner:
                             elif isinstance(val, list):
                                 rule_params[path_key] = [
                                     os.path.join(config_dir, item)
-                                    if isinstance(item, str) and item and not os.path.isabs(item) else item
+                                    if isinstance(item, str) and item and
+                                    not os.path.isabs(item) else item
                                     for item in val
                                 ]
                             print(
