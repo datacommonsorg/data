@@ -400,7 +400,7 @@ class TestValidationRunner(unittest.TestCase):
     @patch('tools.import_validation.runner.Validator')
     def test_path_resolution_helpers_and_robustness(self, MockValidator):
         """Tests that relative local path helpers work and robust path resolution handles ends-with keys."""
-        from tools.import_validation.runner import _is_relative_local, _find_base_dir
+        from tools.import_validation.util import _is_relative_local, _find_base_dir
 
         # Test helper functions
         self.assertTrue(_is_relative_local("some/relative/path.csv"))
