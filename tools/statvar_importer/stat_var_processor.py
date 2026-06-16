@@ -1222,6 +1222,7 @@ class StatVarsMap:
                     numeric_value,
                     precision_digits=self._config.get('output_precision_digits',
                                                       5),
+                    max_int=self._config.get('max_integer', sys.maxsize),
                 )
             elif isinstance(value, str) and value:
                 value = value.strip()
