@@ -11,6 +11,15 @@ from absl import logging
 from anyascii import anyascii
 from pprint import pprint
 
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.dirname(_SCRIPT_DIR))
+sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
+_DATA_DIR = os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
+sys.path.append(_DATA_DIR)
+sys.path.append(os.path.join(_DATA_DIR, 'util'))
+sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
+
 import file_util
 import mcf_file_util
 import eval_functions
