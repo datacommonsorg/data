@@ -94,7 +94,10 @@ def str_from_number(number: Union[int, float],
         '123.45'
     """
     # Check if number is an integer or float without any decimals.
-    if int(number) == number:
+    if abs(number) > sys.maxsize:
+        # Convert very large ints to float.
+        number = float(number)
+    elif int(number) == number:
         number_int = int(number)
         return f'{number_int}'
     # Return float rounded to precision digits.
