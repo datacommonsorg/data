@@ -43,10 +43,9 @@ def camel_to_snake(text: str, delim: str = '_') -> str:
     Returns:
       The converted snake_case string in lowercase.
     """
-    s1 = re.sub(r'([a-z0-9])([A-Z])', r'\1' + delim + r'\2', text)
-    s2 = re.sub(r'([a-zA-Z])([0-9])', r'\1' + delim + r'\2', s1)
-    s3 = re.sub(r'([A-Z])([A-Z][a-z])', r'\1' + delim + r'\2', s2)
-    return s3.lower()
+    s1 = re.sub(r'([a-z])([A-Z0-9])', r'\1' + delim + r'\2', text)
+    s2 = re.sub(r'([A-Z])([A-Z][a-z])', r'\1' + delim + r'\2', s1)
+    return s2.lower()
 
 
 def get_dcid_name(dcid: str, schema_nodes: dict) -> str:
@@ -92,7 +91,7 @@ def get_dcid_token(word: str,
         # Convert camelCase to snake case
         token = camel_to_snake(token).upper()
     if remove_prefix:
-        token = token.removeprefix(remove_prefix)
+        token = re.sub(remove_prefix, '', token)
     return token[0].upper() + token[1:]
 
 
@@ -136,6 +135,7 @@ def generate_dcid_for_statvar(pvs: dict,
         'alternateName', 'footnote', 'unCode', 'Node', 'typeOf'
     ])
     prop_delim = config.get('statvar_dcid_delimiter', '_')
+    fixed_prop_delim = config.get('statvar_dcid_fixed_delimiter', '_')
     val_delim = config.get('statvar_dcid_value_delimiter', '')
     upper_case = config.get('statvar_dcid_upper_case', False)
     remove_prefix = config.get('statvar_dcid_remove_prefix', '')
@@ -177,7 +177,8 @@ def generate_dcid_for_statvar(pvs: dict,
             ordered_props.append(prop)
 
     # Get ordered list of dcid tokens
-    dcid_tokens = []
+    dcid_fixed_tokens = []
+    dcid_prop_tokens = []
     for prop in ordered_props:
         prop_value = dcid_pvs.pop(prop, None)
         if prop_value:
@@ -190,8 +191,14 @@ def generate_dcid_for_statvar(pvs: dict,
                 value_name = prop_name + val_delim + value_name
             if upper_case:
                 value_name = value_name.upper()
-            dcid_tokens.append(value_name)
-    dcid = prop_delim.join(dcid_tokens)
+            if prop in fixed_props:
+                dcid_fixed_tokens.append(value_name)
+            else:
+                dcid_prop_tokens.append(value_name)
+    prop_token = prop_delim.join(dcid_prop_tokens)
+    if prop_token:
+        dcid_fixed_tokens.append(prop_token)
+    dcid = fixed_prop_delim.join(dcid_fixed_tokens)
     if dcid_prefix:
         dcid = dcid_prefix + dcid
     return dcid

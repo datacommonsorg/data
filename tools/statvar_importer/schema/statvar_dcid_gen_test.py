@@ -73,6 +73,7 @@ class TestStatvarDcidGen(unittest.TestCase):
                 'populationType'
             ],
             'statvar_dcid_delimiter': '__',
+            'statvar_dcid_fixed_delimiter': '.',
             'statvar_dcid_value_delimiter': '--',
             'statvar_dcid_remove_prefix': 'TEST_',
             'statvar_dcid_upper_case': True,
@@ -84,7 +85,7 @@ class TestStatvarDcidGen(unittest.TestCase):
             'populationType': 'Person',
         }
         dcid = generate_dcid_for_statvar(pvs, config)
-        self.assertEqual(dcid, 'test/COUNT__PERSON')
+        self.assertEqual(dcid, 'test/COUNT.PERSON')
 
         pvs2 = {
             'statType': 'medianValue',
@@ -95,7 +96,18 @@ class TestStatvarDcidGen(unittest.TestCase):
         }
         dcid2 = generate_dcid_for_statvar(pvs2, config)
         self.assertEqual(
-            dcid2, 'test/MEDIAN_VALUE__AGE__PERSON__GENDER--MALE__PLACE--URBAN')
+            dcid2, 'test/MEDIAN_VALUE.AGE.PERSON.GENDER--MALE__PLACE--URBAN')
+        pvs3 = {
+            'statType': 'measuredValue',
+            'measuredProperty': 'value',
+            'populationType': 'AdultPerson',
+            'gender': 'Male',
+            'place': 'TEST_Urban',
+        }
+        dcid3 = generate_dcid_for_statvar(pvs3, config)
+        self.assertEqual(
+            dcid3, 'test/ADULT_PERSON.GENDER--MALE__PLACE--URBAN')
+
 
 
 if __name__ == '__main__':
