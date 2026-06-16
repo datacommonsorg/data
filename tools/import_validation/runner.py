@@ -41,8 +41,6 @@ class ValidationRunner:
 
     def __init__(self, validation_config_path: str, differ_output: str,
                  stats_summary: str, lint_report: str, validation_output: str):
-        self.validation_config_path = validation_config_path
-        self.stats_summary = stats_summary
         self.config = ValidationConfig(validation_config_path)
         self.validation_output = validation_output
         self.validator = Validator()
@@ -213,41 +211,6 @@ class ValidationRunner:
                     output_dir = os.path.dirname(output_dir)
                 if output_dir:
                     rule_params.setdefault('output_path', output_dir)
-
-                # Resolve paths relative to the directory of the validation config.
-                if validator_name == 'GOLDENS_CHECK':
-                    config_dir = os.path.dirname(
-                        os.path.abspath(self.validation_config_path))
-                    # We walk up to find where the golden_data folder is situated.
-                    curr = config_dir
-                    while curr and curr != os.path.dirname(curr):
-                        if os.path.exists(os.path.join(curr, 'golden_data')):
-                            config_dir = curr
-                            break
-                        curr = os.path.dirname(curr)
-
-                    print(
-                        f"DEBUG: Found GOLDENS_CHECK rule: '{rule.get('rule_id')}'"
-                    )
-                    print(
-                        f"DEBUG: Config directory resolved to: '{config_dir}'")
-                    for path_key in list(rule_params.keys()):
-                        # Check any key in rule_params that equals 'golden_files' or 'input_files' or ends with '_file' or '_files'
-                        if path_key in (
-                                'golden_files',
-                                'input_files') or path_key.endswith(
-                                    '_file') or path_key.endswith('_files'):
-                            val = rule_params[path_key]
-                            print(
-                                f"DEBUG: Before resolve '{path_key}': '{val}'")
-                            if isinstance(
-                                    val,
-                                    str) and val and not os.path.isabs(val):
-                                rule_params[path_key] = os.path.join(
-                                    config_dir, val)
-                            print(
-                                f"DEBUG: After resolve '{path_key}': '{rule_params[path_key]}'"
-                            )
 
             if validator_name == 'SQL_VALIDATOR':
                 result = validation_func(self.data_sources['stats'],
