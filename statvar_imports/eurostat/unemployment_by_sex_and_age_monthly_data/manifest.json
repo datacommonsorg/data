@@ -1,7 +1,7 @@
 {
   "import_specifications": [
     {
-      "import_name": "eurostat_unemp_sex_age_monthly",
+      "import_name": "EuroStat_Unemployment_by_sex_and_age_monthly_data",
       "curator_emails": [
         "support@datacommons.org"
       ],
@@ -11,7 +11,7 @@
         "run.sh"
       ],
       "source_files": [
-        "unemployment_by_sex_and_age_monthly_data_data_raw.csv"
+        "input_files/*.csv"
       ],
       "import_inputs": [
         {

@@ -49,25 +49,25 @@ Testing is performed using the `test_data` directory:
 - Expected TMCF: `test_data/unemployment_by_sex_and_age_annual_data_output.tmcf`
 
 ## Run to Process the test data
-python3 tools/statvar_importer/stat_var_processor.py \
-  "--input_data=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/test_data/unemployment_by_sex_and_age_annual_data_data_raw.csv" \
-  "--pv_map=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/unemployment_by_sex_and_age_annual_data_pvmap.csv" \
-  "--config_file=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/unemployment_by_sex_and_age_annual_data_metadata.csv" \
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  "--input_data=./test_data/unemployment_by_sex_and_age_annual_data_data_raw.csv \  
+  "--pv_map=./unemployment_by_sex_and_age_annual_data_pvmap.csv" \
+  "--config_file=./unemployment_by_sex_and_age_annual_data_metadata.csv" \
   "--generate_statvar_name=True" \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,unit,scalingFactor" \
-  "--output_path=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/final_output/unemployment_by_sex_and_age_annual_data_output" \
-  "--places_resolved_csv=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/places_resolved.csv" \
-  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+  "--output_path=./final_output/unemployment_by_sex_and_age_annual_data_output" \
+  "--places_resolved_csv=./places_resolved.csv" \
+  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" 
 
 ## Run to Process the full data
-python3 tools/statvar_importer/stat_var_processor.py \
-  "--input_data=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/unemployment_by_sex_and_age_annual_data_data_raw.csv" \
-  "--pv_map=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/unemployment_by_sex_and_age_annual_data_pvmap.csv" \
-  "--config_file=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/unemployment_by_sex_and_age_annual_data_metadata.csv" \
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  "--input_data=./input_files/*.csv" \
+  "--pv_map=./unemployment_by_sex_and_age_annual_data_pvmap.csv" \
+  "--config_file=./unemployment_by_sex_and_age_annual_data_metadata.csv" \
   "--generate_statvar_name=True" \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,unit,scalingFactor" \
-  "--output_path=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/final_output/unemployment_by_sex_and_age_annual_data_output" \
-  "--places_resolved_csv=statvar_imports/eurostat/unemployment_by_sex_and_age_annual_data/places_resolved.csv" \
-  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+  "--output_path=./final_output/unemployment_by_sex_and_age_annual_data_output" \
+  "--places_resolved_csv=./places_resolved.csv" \
+  "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" 
