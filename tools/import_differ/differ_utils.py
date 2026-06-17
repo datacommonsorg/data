@@ -4,8 +4,14 @@ import pandas as pd
 import re
 
 from absl import logging
-from util.file_util import FileIO
-from util.file_util import file_get_matching
+import sys
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
+sys.path.append(os.path.join(_DATA_DIR, 'util'))
+
+from file_util import FileIO
+from file_util import file_get_matching
 
 
 def load_mcf_file(file: str):
