@@ -92,7 +92,9 @@ def get_dcid_token(word: str,
         token = camel_to_snake(token).upper()
     if remove_prefix:
         token = re.sub(remove_prefix, '', token)
-    return token[0].upper() + token[1:]
+    if token:
+      return token[0].upper() + token[1:]
+    return ''
 
 
 def generate_dcid_for_statvar(pvs: dict,
@@ -187,7 +189,7 @@ def generate_dcid_for_statvar(pvs: dict,
                 value_name = get_dcid_name(prop_value, schema_nodes)
             value_name = get_dcid_token(value_name, upper_case, remove_prefix)
             if val_delim and prop not in fixed_props:
-                prop_name = get_dcid_token(prop, upper_case, remove_prefix)
+                prop_name = get_dcid_token(prop, upper_case)
                 value_name = prop_name + val_delim + value_name
             if upper_case:
                 value_name = value_name.upper()

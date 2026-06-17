@@ -28,7 +28,7 @@ flags.DEFINE_string('input_statvar_mcf', '', 'MCF files with statvar nodes.')
 flags.DEFINE_string('output_statvar_mcf', '',
                     'Output MCF files for statvar with names.')
 flags.DEFINE_string('input_schema_mcf', '',
-                    'Schema file with names for propeorties.')
+                    'Schema file with names for properties.')
 flags.DEFINE_integer('logging_level', logging.INFO, 'Logging level.')
 
 _FLAGS = flags.FLAGS
@@ -47,6 +47,14 @@ _DEFAULT_IGNORE_PROP = {
     'statType': 'measuredValue',
 }
 
+def to_quoted(text: str) -> str:
+    """Returns quoted string."""
+    if not text:
+        return text
+    text = text.strip().strip('"').strip().replace('"', "'")
+    if text:
+        return '"' + text + '"'
+    return ''
 
 def to_sentence_case(text: str) -> str:
     """Returns a string in sentence case."""
@@ -105,13 +113,14 @@ class UNStatVarNameGenerator:
         if name:
             logging.debug(f'Using existing name for statvar:{name}')
             self._counters.add_counter(f'input-existing-name', 1)
+            pvs['name'] = to_quoted(name)
             return pvs
 
         # Use the name from the schema if it already exists.
         dcid = get_node_dcid(pvs)
         name = self.get_schema_name(dcid)
         if name:
-            pvs['name'] = '"' + name + '"'
+            pvs['name'] = to_quoted(name)
             self._counters.add_counter(f'input-schema-name', 1)
             return pvs
 
@@ -146,7 +155,7 @@ class UNStatVarNameGenerator:
         if name_suffix:
             self._counters.add_counter(f'generated-statvar-name-contraints', 1)
             name = f'{name} [{name_suffix}]'
-        pvs['name'] = f'"{name}"'
+        pvs['name'] = to_quoted(name)
         self._counters.add_counter(f'generated-statvar-names', 1)
 
 
