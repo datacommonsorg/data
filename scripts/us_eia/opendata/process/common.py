@@ -26,6 +26,7 @@ from sys import path
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../../util/'))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../../'))
 import alpha2_to_dcid as alpha2_to_dcid
 import name_to_alpha2 as name_to_alpha2
 
