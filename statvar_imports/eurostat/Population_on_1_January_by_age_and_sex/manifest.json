@@ -11,7 +11,7 @@
         "run.sh"
       ],
       "source_files": [
-        "Population_on_1_January_by_age_and_sex_data_raw.csv"
+        "input_files/*.csv"
       ],
       "import_inputs": [
         {

@@ -11,7 +11,7 @@
         "run.sh"
       ],
       "source_files": [
-        "Marriages_by_sex_and_previous_marital_status_data_raw.csv"
+        "input_files/*.csv"
       ],
       "import_inputs": [
         {
