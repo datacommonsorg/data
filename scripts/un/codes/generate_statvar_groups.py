@@ -39,7 +39,10 @@ flags.DEFINE_list('statvar_property_order', ['populationType'],
                   'Statvar properties ordered by group heirarchy.')
 flags.DEFINE_bool(
     'statvar_group_permutations', True,
-    'Geneerate statvar groups for all permutations of properties.')
+    'Generate statvar groups for all permutations of properties.')
+flags.DEFINE_bool(
+    'statvar_add_linked_member_of', True,
+    'Add linkedMemberOf property to statvars to all its parent groups.')
 flags.DEFINE_integer('logging_level', logging.INFO, 'Logging level.')
 
 _FLAGS = flags.FLAGS
@@ -66,6 +69,7 @@ def get_default_statvar_group_config() -> dict:
         'svg_properties': _FLAGS.statvar_property_order,
         'statvar_dcid_remove_prefix': _FLAGS.statvar_dcid_remove_prefix,
         'statvar_group_permutations': _FLAGS.statvar_group_permutations,
+        'statvar_add_linked_member_of': _FLAGS.statvar_add_linked_member_of,
     }
 
 
@@ -136,7 +140,7 @@ class UNStatVarGroupGenerator:
         if not name:
             # convert the dcid to a name string
             remove_prefix = self._config.get('statvar_dcid_remove_prefix', '')
-            name = re.sub(remove_prefix, '', dcid[dcid.find('/') + 1:])
+            name = re.sub(remove_prefix, '', dcid[dcid.rfind('/') + 1:])
             name = to_snake_case(name).capitalize()
         return name.strip('"').strip()
 
@@ -158,8 +162,9 @@ class UNStatVarGroupGenerator:
         }
 
     def generate_prop_value_svg(self, pvs: dict, grp_props: list,
-                                svg_parent: str, svg_prefix: str):
-        """Generate statvar groups for the property values in the list."""
+                                svg_parent: str, svg_prefix: str) -> list[str]:
+        """Returns statvar group dcids for the property values in the list."""
+        svg_grps = []
         strip_prefix = self._config.get('svg_dcid_remove_prefix', '')
         depth = 0
         for prop in grp_props:
@@ -185,20 +190,15 @@ class UNStatVarGroupGenerator:
             svg_name = self.get_schema_name(val)
             self.add_statvar_group(
                 self.get_statvar_group_node(svg_dcid, svg_name, svg_parent))
+            svg_grps.append(svg_dcid)
             depth += 1
             self._counters.add_counter(
                 f'generated-statvar-groups-depth-{depth}', 1)
             svg_parent = svg_dcid
             svg_prefix = svg_dcid + self._config.get('statvar_dcid_delimiter',
                                                      '__')
-        # Add the statvar to the leaf group.
-        sv = {
-            'Node': add_namespace(get_node_dcid(pvs)),
-            'typeOf': 'StatisticalVariable',
-            'memberOf': svg_parent,
-        }
-        self.add_statvar_group(sv)
         self._counters.add_counter(f'statvar-for-depth-{depth}', 1)
+        return svg_grps
 
     def generate_groups_for_statvar(self, pvs: dict, svg_parent: str,
                                     svg_prefix: str):
@@ -217,6 +217,8 @@ class UNStatVarGroupGenerator:
 
         # Get an ordered list of properties to create statvar groups.
         # Also generate statvar for each set of properties.
+        leaf_svg = []
+        linked_svgs = set()
         strip_prefix = self._config.get('svg_dcid_remove_prefix', '')
         for prop in self._config.get('svg_properties', ['populationType']):
             val = grp_props.pop(prop, None)
@@ -227,18 +229,39 @@ class UNStatVarGroupGenerator:
             svg_name = self.get_schema_name(val)
             self.add_statvar_group(
                 self.get_statvar_group_node(svg_dcid, svg_name, svg_parent))
+            linked_svgs.add(add_namespace(svg_dcid))
             self._counters.add_counter(f'generated-statvar-groups-{prop}', 1)
             svg_parent = svg_dcid
             svg_prefix = svg_dcid + self._config.get('statvar_dcid_delimiter',
                                                      '__')
 
         # Generate statvar group for all permutations of properties.
-        props_perm = sorted(grp_props.keys())
+        if not grp_props:
+            leaf_svg.append(svg_parent)
+            linked_svgs.add(svg_parent)
+        props_perm = [sorted(list(grp_props.keys()))]
         if self._config.get('statvar_group_permutations', False):
-            props_perm = list(itertools.permutations(grp_props.keys()))
+            props_perm = list(itertools.permutations(props_perm[0]))
         for props_list in props_perm:
-            self.generate_prop_value_svg(pvs, props_list, svg_parent,
-                                         svg_prefix)
+            parent_svgs = self.generate_prop_value_svg(pvs, props_list,
+                                                       svg_parent, svg_prefix)
+            if parent_svgs:
+                leaf_svg.append(parent_svgs[-1])
+                linked_svgs.update(parent_svgs)
+
+        # Add the statvar to the leaf group.
+        sv = {
+            'Node': add_namespace(get_node_dcid(pvs)),
+            'typeOf': 'StatisticalVariable',
+        }
+        if leaf_svg:
+            sv['memberOf'] = ','.join(
+                [add_namespace(dcid) for dcid in leaf_svg])
+        if linked_svgs and self._config.get('statvar_add_linked_member_of',
+                                            False):
+            sv['linkedMemberOf'] = ','.join(
+                [add_namespace(dcid) for dcid in linked_svgs])
+        self.add_statvar_group(sv)
 
     def generate_statvar_groups(self, sv_nodes: dict):
         """Generate statvar groups for given statvar nodes."""
@@ -256,7 +279,7 @@ class UNStatVarGroupGenerator:
         # Make the top SVG a child of root
         if 'Root' not in svg_root and self._config.get(
                 'generate_statvar_group_root', True):
-            name = to_snake_case(svg_root[svg_root.find('/') + 1:], ' ', False)
+            name = to_snake_case(svg_root[svg_root.rfind('/') + 1:], ' ', False)
             self.add_statvar_group(
                 self.get_statvar_group_node(svg_root, name, 'dc/g/Root'))
             self._counters.add_counter(f'generated-statvar-groups-root', 1)
