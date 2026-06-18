@@ -1,7 +1,7 @@
 key,property1,value1,property2,value2,property3,value3,property4,value4,property5,value5
 
 # Global Dataflow properties (Standard Data Commons Demographic Modeling)
-"DATAFLOW:ESTAT:DEMO_NMSTA(1.0)",populationType,dcs:MarriageEvent,measuredProperty,dcs:count,statType,dcs:measuredValue,,,,
+"DATAFLOW:ESTAT:DEMO_NMSTA(1.0)",populationType,dcs:Person,measuredProperty,dcs:count,statType,dcs:measuredValue,maritalStatus,dcs:Married,,
 
 # --- AUTOMATED CLEANUP: Ignored Columns ---
 LAST UPDATE,#ignore,"",,,,,,,,
@@ -12,22 +12,19 @@ freq:A,observationPeriod,P1Y,,,,,,,,
 freq:M,observationPeriod,P1M,,,,,,,,
 freq:Q,observationPeriod,P3M,,,,,,,,
 
-# Unit dimension (dcs:Person is standard for demographic counts)
-unit:NR,unit,dcs:Person,,,,,,,,
-
 # Sex / Gender dimension
 sex:T,gender,"",,,,,,,,
 sex:M,gender,dcs:Male,,,,,,,,
 sex:F,gender,dcs:Female,,,,,,,,
 
-# Marital Status dimension (Standard Data Commons Enums)
-marsta:TOTAL,maritalStatus,"",,,,,,,,
-marsta:DISLUN,maritalStatus,dcs:Divorced,,,,,,,,
-marsta:DTHLUN,maritalStatus,dcs:Widowed,,,,,,,,
-marsta:REP,maritalStatus,dcs:Married,,,,,,,,
-marsta:SIN,maritalStatus,dcs:NeverMarried,,,,,,,,
-marsta:SEP,maritalStatus,dcs:Separated,,,,,,,,
-marsta:UNK,maritalStatus,dcs:CDC_MaritalStatusUnknownOrNotStated,,,,,,,,
+# Previous Marital Status dimension (Using custom previousMaritalStatus property to prevent ontological collisions)
+marsta:TOTAL,previousMaritalStatus,"",,,,,,,,
+marsta:DISLUN,previousMaritalStatus,dcs:PreviouslyDivorced,,,,,,,,
+marsta:DTHLUN,previousMaritalStatus,dcs:PreviouslyWidowed,,,,,,,,
+marsta:REP,previousMaritalStatus,dcs:PreviouslyInRegisteredPartnership,,,,,,,,
+marsta:SIN,previousMaritalStatus,dcs:PreviouslyNeverMarried,,,,,,,,
+marsta:SEP,previousMaritalStatus,dcs:PreviouslySeparated,,,,,,,,
+marsta:UNK,previousMaritalStatus,dcs:PreviouslyUnknownMaritalStatus,,,,,,,,
 
 # Geography
 geo,observationAbout,{Data},,,,,,,,

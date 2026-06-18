@@ -1,10 +1,7 @@
-Node: E:Marriages_by_sex_and_previous_marital_status_output->E0
-observationDate: C:Marriages_by_sex_and_previous_marital_status_output->observationDate
-observationAbout: C:Marriages_by_sex_and_previous_marital_status_output->observationAbout
-variableMeasured: C:Marriages_by_sex_and_previous_marital_status_output->variableMeasured
-value: C:Marriages_by_sex_and_previous_marital_status_output->value
-observationPeriod: C:Marriages_by_sex_and_previous_marital_status_output->observationPeriod
-measurementMethod: C:Marriages_by_sex_and_previous_marital_status_output->measurementMethod
-unit: C:Marriages_by_sex_and_previous_marital_status_output->unit
-scalingFactor: C:Marriages_by_sex_and_previous_marital_status_output->scalingFactor
+Node: E:output->E0
+observationDate: C:output->observationDate
+observationAbout: C:output->observationAbout
+variableMeasured: C:output->variableMeasured
+value: C:output->value
+observationPeriod: C:output->observationPeriod
 typeOf: dcs:StatVarObservation
