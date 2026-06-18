@@ -60,7 +60,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   "--generate_statvar_name=True" \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,unit,scalingFactor" \
-  "--output_path=./marriage_indicators_output" \
+  "--output_path=output_files/marriage_indicators_output" \
   "--places_resolved_csv=./places_resolved.csv" \
   "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" 
 ```
@@ -70,18 +70,18 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 - `marriage_indicators_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
 - `marriage_indicators_metadata.csv`: Configuration parameters for the processor.
 - `places_resolved.csv`: Mapping of place codes to Data Commons DCIDs.
-- `marriage_indicators_output.csv`: Processed statistical observations.
-- `marriage_indicators_output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
+- `output_files/marriage_indicators_output.csv`: Processed statistical observations.
+- `output_files/marriage_indicators_output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
 
 
 ## Validation
 To validate the generated data, use the Data Commons import tool (lint mode). Note that you must include the StatVar MCF files to resolve schema references:
 ```bash
-java -jar datacommons-import-tool.jar lint marriage_indicators_output.csv marriage_indicators_output.tmcf
+java -jar datacommons-import-tool.jar lint output_files/marriage_indicators_output.csv output_files/marriage_indicators_output.tmcf
 ```
 The resulting reports (`report.json`, `summary_report.html`) in `dc_generated/` provide detailed insights into data quality and validation status.
 
 ## Testing
 Testing is performed using the `test_data` directory:
-- Expected Output: `marriage_indicators_output.csv`
-- Expected TMCF: `marriage_indicators_output.tmcf`
+- Expected Output: `test_data/marriage_indicators_output.csv`
+- Expected TMCF: `test_data/marriage_indicators_output.tmcf`

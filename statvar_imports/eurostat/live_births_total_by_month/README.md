@@ -60,7 +60,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   "--generate_statvar_name=True" \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,unit" \
-  "--output_path=./live_births_total_by_month_output" \
+  "--output_path=output_files/live_births_total_by_month_output" \
   "--places_resolved_csv=./places_resolved.csv" \
   "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
 ```
@@ -70,13 +70,13 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 - `live_births_total_by_month_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
 - `live_births_total_by_month_metadata.csv`: Configuration parameters for the processor.
 - `places_resolved.csv`: Mapping of place codes to Data Commons DCIDs.
-- `live_births_total_by_month_output.csv`: Processed statistical observations.
-- `live_births_total_by_month_output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
+- `output_files/live_births_total_by_month_output.csv`: Processed statistical observations.
+- `output_files/live_births_total_by_month_output.tmcf`: Template MCF mapping the CSV columns to Data Commons schema.
 
 ## Validation
 To validate the generated data, use the Data Commons import tool (lint mode):
 ```bash
-java -jar datacommons-import-tool.jar lint live_births_total_by_month_output.csv live_births_total_by_month_output.tmcf
+java -jar datacommons-import-tool.jar lint output_files/live_births_total_by_month_output.csv output_files/live_births_total_by_month_output.tmcf
 ```
 The resulting reports (`report.json`, `summary_report.html`) in `dc_generated/` provide detailed insights into data quality and validation status.
 

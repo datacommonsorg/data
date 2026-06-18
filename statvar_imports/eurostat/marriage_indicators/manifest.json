@@ -12,8 +12,8 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "marriage_indicators_output.tmcf",
-          "cleaned_csv": "marriage_indicators_output.csv"
+          "template_mcf": "output_files/marriage_indicators_output.tmcf",
+          "cleaned_csv": "output_files/marriage_indicators_output.csv"
         }
       ],
       "source_files": [
