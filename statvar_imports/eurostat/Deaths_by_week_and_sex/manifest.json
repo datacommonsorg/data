@@ -11,7 +11,7 @@
         "run.sh"
       ],
       "source_files": [
-        "Deaths_by_week_and_sex_data_raw_processed.csv"
+        "input_files/*.csv"
       ],
       "import_inputs": [
         {

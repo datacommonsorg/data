@@ -49,26 +49,26 @@ Testing is performed using the `test_data` directory:
 - Expected TMCF: `test_data/Divorce_indicators_output.tmcf`
 
 ## Run the Script for test data processing
-python3 tools/statvar_importer/stat_var_processor.py \
-  "--input_data=statvar_imports/eurostat/Divorce_indicators/test_data/Divorce_indicators_data_raw.csv" \
-  "--pv_map=statvar_imports/eurostat/Divorce_indicators/Divorce_indicators_pvmap.csv" \
-  "--config_file=statvar_imports/eurostat/Divorce_indicators/Divorce_indicators_metadata.csv" \
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  "--input_data=./test_data/Divorce_indicators_data_raw.csv" \
+  "--pv_map=./Divorce_indicators_pvmap.csv" \
+  "--config_file=./Divorce_indicators_metadata.csv" \
   "--generate_statvar_name=True" \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor" \
-  "--output_path=statvar_imports/eurostat/Divorce_indicators/final_output/Divorce_indicators_output" \
-  "--places_resolved_csv=statvar_imports/eurostat/Divorce_indicators/places_resolved.csv" \
+  "--output_path=./final_output/Divorce_indicators_output" \
+  "--places_resolved_csv=./places_resolved.csv" \
   "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
   
 ## Run the Script for full data processing
-python3 tools/statvar_importer/stat_var_processor.py \
-  "--input_data=statvar_imports/eurostat/Divorce_indicators/Divorce_indicators_data_raw.csv" \
-  "--pv_map=statvar_imports/eurostat/Divorce_indicators/Divorce_indicators_pvmap.csv" \
-  "--config_file=statvar_imports/eurostat/Divorce_indicators/Divorce_indicators_metadata.csv" \
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  "--input_data=./input_files/Divorce_indicators_data_raw.csv" \
+  "--pv_map=./Divorce_indicators_pvmap.csv" \
+  "--config_file=./Divorce_indicators_metadata.csv" \
   "--generate_statvar_name=True" \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor" \
-  "--output_path=statvar_imports/eurostat/Divorce_indicators/final_output/Divorce_indicators_output" \
-  "--places_resolved_csv=statvar_imports/eurostat/Divorce_indicators/places_resolved.csv" \
+  "--output_path=./final_output/Divorce_indicators_output" \
+  "--places_resolved_csv=./places_resolved.csv" \
   "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
 

@@ -11,7 +11,7 @@
         "run.sh"
       ],
       "source_files": [
-        "Divorce_indicators_data_raw.csv"
+        "input_files/*.csv"
       ],
       "import_inputs": [
         {

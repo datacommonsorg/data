@@ -50,25 +50,25 @@ Testing is performed using the `test_data` directory:
 - Expected TMCF: `test_data/Deaths_by_week_and_sex_output.tmcf`
 
 ## Run to Process the test data
-python3 tools/statvar_importer/stat_var_processor.py \
-  "--input_data=statvar_imports/eurostat/Deaths_by_week_and_sex/test_data/Deaths_by_week_and_sex_data_raw_processed.csv" \
-  "--pv_map=statvar_imports/eurostat/Deaths_by_week_and_sex/Deaths_by_week_and_sex_pvmap.csv" \
-  "--config_file=statvar_imports/eurostat/Deaths_by_week_and_sex/Deaths_by_week_and_sex_metadata.csv" \
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  "--input_data=./test_data/Deaths_by_week_and_sex_data_raw_processed.csv" \
+  "--pv_map=./Deaths_by_week_and_sex_pvmap.csv" \
+  "--config_file=./Deaths_by_week_and_sex_metadata.csv" \
   "--generate_statvar_name=True" \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor" \
-  "--output_path=statvar_imports/eurostat/Deaths_by_week_and_sex/final_output/Deaths_by_week_and_sex_output" \
-  "--places_resolved_csv=statvar_imports/eurostat/Deaths_by_week_and_sex/places_resolved.csv" \
+  "--output_path=./final_output/Deaths_by_week_and_sex_output" \
+  "--places_resolved_csv=./places_resolved.csv" \
   "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
 
 ## Run to Process the full data
-python3 tools/statvar_importer/stat_var_processor.py \
-  "--input_data=statvar_imports/eurostat/Deaths_by_week_and_sex/Deaths_by_week_and_sex_data_raw_processed.csv" \
-  "--pv_map=statvar_imports/eurostat/Deaths_by_week_and_sex/Deaths_by_week_and_sex_pvmap.csv" \
-  "--config_file=statvar_imports/eurostat/Deaths_by_week_and_sex/Deaths_by_week_and_sex_metadata.csv" \
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  "--input_data=./input_files/Deaths_by_week_and_sex_data_raw_processed.csv" \
+  "--pv_map=./Deaths_by_week_and_sex_pvmap.csv" \
+  "--config_file=./Deaths_by_week_and_sex_metadata.csv" \
   "--generate_statvar_name=True" \
   "--skip_constant_csv_columns=False" \
   "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,measurementMethod,unit,scalingFactor" \
-  "--output_path=statvar_imports/eurostat/Deaths_by_week_and_sex/final_output/Deaths_by_week_and_sex_output" \
-  "--places_resolved_csv=statvar_imports/eurostat/Deaths_by_week_and_sex/places_resolved.csv" \
+  "--output_path=./final_output/Deaths_by_week_and_sex_output" \
+  "--places_resolved_csv=./places_resolved.csv" \
   "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
