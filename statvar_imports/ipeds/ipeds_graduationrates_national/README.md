@@ -36,32 +36,38 @@ To download the data, you'll need to use the provided source link. The source li
 - Once the table opens, from the page header, select the 'Excel' option, which downloads the data in the .xlsx format
 - The downloaded data is now avaialble for processing.
 - Move the data to the path: **gs://unresolved_mcf/IPEDS/graduation_rates_national/input_files/**
-- Process the data using the stat_var_processor script and the GCS bucket path for input as shown in below section.
+- Process the data using the run.sh shell script which fetches the input data from the bucket and invokes the processing of the data using statvar processor.
 
 ## Processing Instructions
 To process the IPEDS Graduation Rate data and generate statistical variables, use the following command from the "data" directory:
 
 **For Data Run**
+
 ```bash
-python ../../tools/statvar_importer/stat_var_processor.py \
-    --input_data=gs://unresolved_mcf/IPEDS/graduation_rates_national/input_files/*.csv \
-    --pv_map=graduation_rates_ipeds_pvmap.csv \
-    --output_path=output/graduation_rates_ipeds_output \
-    --config_file=graduation_rates_ipeds_metadata.csv \
-    --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+run.sh
+```
+
+**For Data Processing**
+
+```bash
+python ../../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/* --config_file=graduation_rates_ipeds_metadata.csv --pv_map=graduation_rates_ipeds_pvmap.csv --statvar_dcid_remap_csv=remap/graduation_rates_ipeds_remap.csv --output_path=output_files/graduation_rates_ipeds_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
 This generates the following output files:
-- output csv
-- output_stat_vars_scehma.mcf
-- output_stat_vars.mcf
-- output.tmcf
+- graduation_rates_ipeds_output csv
+- graduation_rates_ipeds_output.tmcf
+
+
+**For Test Data Run**
+```bash
+python ../../../tools/statvar_importer/stat_var_processor.py --input_data=./test_data/graduation_rates_ipeds_2017_18.csv --config_file=graduation_rates_ipeds_metadata.csv --pv_map=graduation_rates_ipeds_pvmap.csv --statvar_dcid_remap_csv=remap/graduation_rates_ipeds_remap.csv --output_path=test_data/graduation_rates_ipeds_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+```
 
 **For Data Quality Checks and validation**
 Validation of the data is done using the lint flag in the java tool present.
 
 ```bash
-java -jar datacommons-import-tool-0.1-jar-with-dependencies.jar lint graduation_rates_ipeds_output_stat_vars_schema.mcf graduation_rates_ipeds_output.csv graduation_rates_ipeds_output.tmcf graduation_rates_ipeds_output_stat_vars.mcf
+java -jar /datacommons-import-tool-0.1-jar-with-dependencies.jar lint output_files/*
 ```
 
 This generates the following output files:
@@ -70,4 +76,3 @@ This generates the following output files:
 - summary_report.html
 
 The report files can be analysed to check for errors and warnings.
-Further, Linting is performed on the generated output files using the DataCommons import tool.

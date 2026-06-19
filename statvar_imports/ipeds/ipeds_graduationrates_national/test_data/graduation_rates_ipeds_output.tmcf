@@ -6,3 +6,4 @@ unit: C:graduation_rates_ipeds_output->unit
 observationAbout: C:graduation_rates_ipeds_output->observationAbout
 variableMeasured: C:graduation_rates_ipeds_output->variableMeasured
 typeOf: dcs:StatVarObservation
+scalingFactor: 100
