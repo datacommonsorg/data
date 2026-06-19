@@ -59,7 +59,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   "--config_file=./live_births_total_by_month_metadata.csv" \
   "--generate_statvar_name=True" \
   "--skip_constant_csv_columns=False" \
-  "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod,unit" \
+  "--output_columns=observationDate,observationAbout,variableMeasured,value,observationPeriod" \
   "--output_path=output_files/live_births_total_by_month_output" \
   "--places_resolved_csv=./places_resolved.csv" \
   "--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"

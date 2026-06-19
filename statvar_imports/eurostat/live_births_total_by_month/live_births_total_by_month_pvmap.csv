@@ -24,8 +24,6 @@ month:M12,Month,12,observationPeriod,P1M,,,,
 month:TOTAL,Month,"",observationPeriod,P1Y,,,,
 month:UNK,#ignore,"",,,,,,
 
-# Unit dimension (dcs:Person is standard for demographic counts)
-unit:NR,unit,dcs:Person,,,,,,
 
 # Time column capture (Stores year for the strict date checker)
 TIME_PERIOD,Year,{Data},,,,,,
