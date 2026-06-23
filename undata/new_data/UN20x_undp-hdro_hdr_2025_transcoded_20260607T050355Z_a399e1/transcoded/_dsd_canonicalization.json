@@ -1,0 +1,2473 @@
+{
+  "schema_version": "v1",
+  "step": "apply_transcoding",
+  "tier": "transcoded",
+  "agency": "UNDP-HDRO",
+  "version": "hdr_2025",
+  "run_id": "20260607T050355Z_a399e1",
+  "registry_path": "undata_concepts/canonical_concepts.csv",
+  "registry_concept_count": 162,
+  "dsds_scanned": 28,
+  "rows_scanned": 216,
+  "rows_canonicalized_count": 200,
+  "concepts_unchanged_count": 5,
+  "concepts_not_in_registry_count": 0,
+  "rows_canonicalized": [
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi_group.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi_group.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi_group.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi_group.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi_group.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi_group.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GDI_gdi_group.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_abr.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_abr.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_abr.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_abr.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_abr.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_abr.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_abr.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii_rank.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii_rank.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii_rank.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii_rank.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii_rank.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii_rank.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_gii_rank.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_lfpr.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_lfpr.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_lfpr.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_lfpr.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_lfpr.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_lfpr.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_lfpr.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_mmr.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_mmr.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_mmr.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_mmr.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_mmr.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_mmr.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_mmr.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_pr.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_pr.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_pr.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_pr.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_pr.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_pr.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_pr.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_se.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_se.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_se.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_se.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_se.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_se.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_GII_se.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_eys.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_eys.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_eys.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_eys.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_eys.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_eys.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_eys.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_gnipc.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_gnipc.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_gnipc.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_gnipc.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_gnipc.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_gnipc.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_gnipc.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi_rank.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi_rank.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi_rank.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi_rank.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi_rank.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi_rank.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_hdi_rank.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_le.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_le.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_le.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_le.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_le.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_le.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_le.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_mys.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_mys.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_mys.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_mys.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_mys.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_mys.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_HDI_mys.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_coef_ineq.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_coef_ineq.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_coef_ineq.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_coef_ineq.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_coef_ineq.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_coef_ineq.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_coef_ineq.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ihdi.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ihdi.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ihdi.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ihdi.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ihdi.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ihdi.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ihdi.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ineq.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ineq.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ineq.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ineq.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ineq.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ineq.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_ineq.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_loss.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_loss.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_loss.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_loss.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_loss.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_loss.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_IHDI_loss.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_contribution.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_contribution.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_contribution.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_contribution.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_contribution.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_contribution.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_contribution.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_contribution.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_headcount.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_headcount.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_headcount.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_headcount.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_headcount.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_headcount.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_headcount.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_headcount.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_intensity.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_intensity.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_intensity.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_intensity.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_intensity.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_intensity.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_intensity.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_intensity.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_value.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_value.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_value.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_value.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_value.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_value.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_value.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_MPI_mpi_value.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_co2_prod.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_co2_prod.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_co2_prod.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_co2_prod.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_co2_prod.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_co2_prod.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_co2_prod.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_diff_hdi_phdi.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_diff_hdi_phdi.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_diff_hdi_phdi.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_diff_hdi_phdi.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_diff_hdi_phdi.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_diff_hdi_phdi.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_diff_hdi_phdi.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_mf.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_mf.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_mf.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_mf.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_mf.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_mf.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_mf.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_phdi.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_phdi.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_phdi.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_phdi.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_phdi.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_phdi.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_phdi.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_rankdiff_hdi_phdi.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Indicator",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_rankdiff_hdi_phdi.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Country",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_rankdiff_hdi_phdi.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Year",
+          "now": "Time period"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_rankdiff_hdi_phdi.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_rankdiff_hdi_phdi.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_rankdiff_hdi_phdi.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Scale",
+          "now": "Unit multiplier"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNDP-HDRO_hdr_2025_DSD_PHDI_rankdiff_hdi_phdi.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    }
+  ],
+  "concepts_unchanged": [
+    "AGE",
+    "BASE_PERIOD",
+    "HUMAN_DEVELOPMENT_COMPONENT",
+    "MPI_DEPRIVATION_INDICATOR",
+    "SEX"
+  ],
+  "concepts_not_in_registry": []
+}

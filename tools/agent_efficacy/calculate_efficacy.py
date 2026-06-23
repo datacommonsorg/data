@@ -68,6 +68,38 @@ def run_comparison(pred_path, gold_path, is_pvmap=False, use_fingerprint=False):
     metrics = get_metrics_from_counters(counters)
     return diff_text, metrics
 
+def run_csv_comparison(pred_path, gold_path):
+    if not os.path.exists(pred_path) or not os.path.exists(gold_path):
+        print(f"Skipping: missing {pred_path} or {gold_path}")
+        return "Missing files.", {'tp': 0, 'fp': 0, 'fn': 0, 'precision': 0, 'recall': 0, 'f1': 0}
+
+    def load_csv(path):
+        rows = set()
+        with open(path, 'r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            # Skip header
+            next(reader, None)
+            for row in reader:
+                clean_row = tuple(cell.strip() for cell in row if cell.strip())
+                if clean_row:
+                    rows.add(clean_row)
+        return rows
+
+    pred_rows = load_csv(pred_path)
+    gold_rows = load_csv(gold_path)
+
+    tp = len(pred_rows.intersection(gold_rows))
+    fp = len(pred_rows - gold_rows)
+    fn = len(gold_rows - pred_rows)
+
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+
+    diff_text = f"Total Prediction Rows: {len(pred_rows)}\nTotal Gold Rows: {len(gold_rows)}\nExact Matches (TP): {tp}\nOnly in Prediction (FP): {fp}\nOnly in Gold (FN): {fn}"
+    
+    return diff_text, {'tp': tp, 'fp': fp, 'fn': fn, 'precision': precision, 'recall': recall, 'f1': f1}
+
 def update_html(template_content, dataset_id, hero_metrics, detailed_results):
     content = template_content
     for key, label in [('f1', 'Agent Efficacy (F1)'), ('precision', 'Precision'), ('recall', 'Recall')]:
@@ -86,7 +118,7 @@ def update_html(template_content, dataset_id, hero_metrics, detailed_results):
     if '<section class="mt-8 px-4 sm:px-6 lg:px-8 pb-12">' in content:
         content = content.split('<section class="mt-8 px-4 sm:px-6 lg:px-8 pb-12">')[0]
 
-    diff_sections = '<section class="mt-8 px-4 sm:px-6 lg:px-8 pb-12"><h2 class="text-2xl lg:text-3xl font-extrabold text-slate-900 mb-6">Detailed Semantic Comparisons</h2>'
+    diff_sections = '<section class="mt-8 px-4 sm:px-6 lg:px-8 pb-12"><h2 class="text-2xl lg:text-3xl font-extrabold text-slate-900 mb-6">Detailed File Comparisons (Recalculated)</h2>\n'
     for label, data in detailed_results.items():
         diff_sections += f'''
         <div class="mb-10 bg-white p-6 lg:p-8 rounded-2xl shadow-lg border-2 border-slate-200">
@@ -96,35 +128,52 @@ def update_html(template_content, dataset_id, hero_metrics, detailed_results):
                 <div class="bg-amber-50 p-4 rounded-xl border-2 border-amber-200"><span class="block text-xs font-black uppercase tracking-widest">Recall</span><span class="text-2xl font-black">{data['metrics']['recall']*100:.1f}%</span></div>
                 <div class="bg-indigo-50 p-4 rounded-xl border-2 border-indigo-200"><span class="block text-xs font-black uppercase tracking-widest">F1 Score</span><span class="text-2xl font-black">{data['metrics']['f1']*100:.1f}%</span></div>
             </div>
-            <div class="text-xs font-bold text-slate-500 mb-2 font-mono uppercase tracking-widest">Semantic Match (TP: {data['metrics']['tp']} | FP: {data['metrics']['fp']} | FN: {data['metrics']['fn']})</div>
+            <div class="text-xs font-bold text-slate-500 mb-2 font-mono uppercase tracking-widest">Structural Diff Analysis (TP: {data['metrics']['tp']} | FP: {data['metrics']['fp']} | FN: {data['metrics']['fn']})</div>
             <pre class="bg-slate-900 text-slate-100 p-6 rounded-xl overflow-auto max-h-[30rem] text-sm font-mono whitespace-pre-wrap">{data['diff'] if data['diff'] else 'No differences found.'}</pre>
         </div>
         '''
-    diff_sections += '</section>'
-    return content.replace('</body>', diff_sections + '</body>') if '</body>' in content else content + diff_sections
+    diff_sections += '        </section>\n</body>\n</html>'
+    return content + diff_sections
 
-def process_single_dataset(test_dir, gold_dir, output_dir, dataset_id, template_content):
+def process_single_dataset(dataset_dir, output_dir, dataset_id, template_content):
     if not os.path.exists(output_dir): os.makedirs(output_dir)
 
+    # dataset_dir is the root of the dataset (e.g. abhishek_data/Deaths_by_week_and_sex)
     file_mappings = [
-        ('pvmap.csv', 'output_pvmap.csv', 'output_pvmap.csv', True, False),
-        ('stat_vars.mcf', 'output_stat_vars.mcf', 'output_stat_vars.mcf', False, True),
-        ('stat_vars_schema.mcf', 'output_stat_vars_schema.mcf', 'output_stat_vars_schema.mcf', False, False),
-        ('tmcf', 'output.tmcf', 'output.tmcf', False, False),
+        ('pvmap.csv', os.path.join(dataset_dir, 'sample_output', 'output_pvmap.csv'), os.path.join(dataset_dir, 'sample_output', 'output_pvmap_cleaned.csv'), True, False, False),
+        ('stat_vars.mcf', os.path.join(dataset_dir, 'agent_output', 'output_stat_vars.mcf'), os.path.join(dataset_dir, 'final_output', 'output_stat_vars.mcf'), False, True, False),
+        ('stat_vars_schema.mcf', os.path.join(dataset_dir, 'agent_output', 'output_stat_vars_schema.mcf'), os.path.join(dataset_dir, 'final_output', 'output_stat_vars_schema.mcf'), False, False, False),
+        ('tmcf', os.path.join(dataset_dir, 'agent_output', 'output.tmcf'), os.path.join(dataset_dir, 'final_output', 'output.tmcf'), False, False, False),
+        ('output.csv', os.path.join(dataset_dir, 'agent_output', 'output.csv'), os.path.join(dataset_dir, 'final_output', 'output.csv'), False, False, True),
     ]
 
     detailed_results = {}
+    metrics_summary_data = []
     total_tp = 0
     total_fp = 0
     total_fn = 0
 
     print(f"\n--- Rechecking Efficacy for {dataset_id} ---")
-    for label, pred_name, gold_name, is_pv, use_fp in file_mappings:
+    for label, pred_path, gold_path, is_pv, use_fp, is_csv in file_mappings:
         print(f"Comparing {label}...")
-        diff_text, metrics = run_comparison(os.path.join(test_dir, pred_name), os.path.join(gold_dir, gold_name), is_pvmap=is_pv, use_fingerprint=use_fp)
+        if is_csv:
+            diff_text, metrics = run_csv_comparison(pred_path, gold_path)
+        else:
+            diff_text, metrics = run_comparison(pred_path, gold_path, is_pvmap=is_pv, use_fingerprint=use_fp)
+        
         detailed_results[label] = {'diff': diff_text, 'metrics': metrics}
         print(f"  Result: F1={metrics['f1']:.1%}, TP={metrics['tp']}, FP={metrics['fp']}, FN={metrics['fn']}")
         
+        metrics_summary_data.append({
+            'File': label,
+            'F1': f"{metrics['f1']:.4f}",
+            'Precision': f"{metrics['precision']:.4f}",
+            'Recall': f"{metrics['recall']:.4f}",
+            'TP': metrics['tp'],
+            'FP': metrics['fp'],
+            'FN': metrics['fn']
+        })
+
         total_tp += metrics['tp']
         total_fp += metrics['fp']
         total_fn += metrics['fn']
@@ -142,6 +191,23 @@ def process_single_dataset(test_dir, gold_dir, output_dir, dataset_id, template_
         'f1': f1
     }
 
+    metrics_summary_data.append({
+        'File': 'Overall',
+        'F1': f"{f1:.4f}",
+        'Precision': f"{precision:.4f}",
+        'Recall': f"{recall:.4f}",
+        'TP': total_tp,
+        'FP': total_fp,
+        'FN': total_fn
+    })
+
+    # Write metrics_summary.csv
+    summary_csv_path = os.path.join(output_dir, 'metrics_summary.csv')
+    with open(summary_csv_path, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=['File', 'F1', 'Precision', 'Recall', 'TP', 'FP', 'FN'])
+        writer.writeheader()
+        writer.writerows(metrics_summary_data)
+
     final_html = update_html(template_content, dataset_id, hero_metrics, detailed_results)
     
     with open(os.path.join(output_dir, 'Agent_Efficacy_Board.html'), 'w') as f: f.write(final_html)
@@ -150,9 +216,10 @@ def process_single_dataset(test_dir, gold_dir, output_dir, dataset_id, template_
 def main():
     parser = argparse.ArgumentParser(description="Calculate efficacy metrics.")
     parser.add_argument('--test', required=True, help="Path to the test (prediction) directory.")
-    parser.add_argument('--gold', required=True, help="Path to the gold (reviewed) directory.")
+    parser.add_argument('--gold', required=False, help="Path to the gold (reviewed) directory.")
     parser.add_argument('--output', required=True, help="Path to the output directory to save results.")
     parser.add_argument('--dataset_id', default="Dataset", help="Optional dataset ID for display.")
+    parser.add_argument('--file_mode', action='store_true', help="If set, treats test and gold as direct file paths.")
     parser.add_argument('--bulk', action='store_true', help="If set, treats test and gold as parent directories containing multiple dataset folders.")
     args = parser.parse_args()
 
@@ -181,7 +248,7 @@ def main():
             if os.path.isdir(test_ds_dir):
                 out_ds_dir = os.path.join(args.output, dataset_id)
                 try:
-                    hero_metrics = process_single_dataset(test_ds_dir, gold_ds_dir, out_ds_dir, dataset_id, template_content)
+                    hero_metrics = process_single_dataset(test_ds_dir, out_ds_dir, dataset_id, template_content)
                     if hero_metrics:
                         summary_data.append({
                             'dataset_id': dataset_id,
@@ -206,7 +273,7 @@ def main():
                 writer.writerows(summary_data)
             print(f"\nBulk run complete. Summary saved to {summary_path}")
     else:
-        process_single_dataset(args.test, args.gold, args.output, args.dataset_id, template_content)
+        process_single_dataset(args.test, args.output, args.dataset_id, template_content)
         print(f"\nRecheck complete. Results saved to {args.output}")
 
 if __name__ == "__main__":

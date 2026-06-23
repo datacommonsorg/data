@@ -23,5 +23,29 @@ import-automation/executor/config_override.json
 .datacommons/
 
 .venv/
+.env
+defaults.env
 
+undata/output
+undata/metadata
+undata/data
+undata/cl_reviewed
+undata/logs
+redundant_archive
+undata/DESA
+undata/SDG
+undata/verification_test
 
+undata/DESA/cl_reviewed/
+undata/DESA/cl_unreviewed/
+undata/DESA/data/
+undata/DESA/efficacy_results/
+undata/DESA/metadata/
+undata/DESA/metadata_unreviewed/
+undata/DESA/output/
+.datacommons/runs/
+*.csv
+
+model/
+model_cache/
+tmp/
