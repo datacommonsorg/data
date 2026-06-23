@@ -34,4 +34,4 @@ COMMENT=$3
 curl -X POST "${FUNCTION_URL}/imports/version" \
   -H "Authorization: bearer $(gcloud auth print-identity-token)" \
   -H "Content-Type: application/json" \
-  -d "{\"importName\": \"${IMPORT_NAME}\", \"version\": \"${VERSION}\", \"override\": true, \"comment\": \"${COMMENT}\"}"
+  -d "{\"imports\": [\"${IMPORT_NAME}\"], \"version\": \"${VERSION}\", \"override\": true, \"comment\": \"${COMMENT}\"}"
