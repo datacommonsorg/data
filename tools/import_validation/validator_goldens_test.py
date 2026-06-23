@@ -190,6 +190,30 @@ class TestValidatorGoldens(unittest.TestCase):
         self.assertEqual(missing, [])
         mock_compare.assert_called_once()
 
+    @patch('validator_goldens.file_util')
+    def test_load_nodes_from_file_csv_namespaces(self, mock_file_util):
+        # 1. Setup mocks
+        mock_file_util.file_get_matching.return_value = ['dummy.csv']
+        mock_file_util.file_is_csv.return_value = True
+        mock_file_util.file_load_csv_dict.return_value = {
+            0: {
+                'dcid': 'dcid:geo1',
+                'variableMeasured': 'dcs:sv1',
+                'unit': 'schema:unit1',
+                'value': '10'
+            }
+        }
+
+        # 2. Call load_nodes_from_file
+        nodes = validator_goldens.load_nodes_from_file('dummy.csv')
+
+        # 3. Assert namespaces are stripped correctly
+        self.assertEqual(len(nodes), 1)
+        self.assertEqual(nodes[0]['dcid'], 'geo1')
+        self.assertEqual(nodes[0]['variableMeasured'], 'sv1')
+        self.assertEqual(nodes[0]['unit'], 'unit1')
+        self.assertEqual(nodes[0]['value'], '10')
+
 
 if __name__ == '__main__':
     unittest.main()

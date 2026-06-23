@@ -298,10 +298,10 @@ def load_nodes_from_file(files: str) -> dict:
             file_nodes = file_util.file_load_csv_dict(input_file,
                                                       key_index=True)
             for node in file_nodes.values():
-                # Clean up "dcid:" prefixes from values (column headers are kept as is)
+                # Clean up namespace prefixes (like dcs:, dcid:, schema:) from values (column headers are kept as is)
                 clean_node = {}
                 for k, v in node.items():
-                    clean_val = v.removeprefix("dcid:") if isinstance(
+                    clean_val = mcf_file_util.strip_namespace(v) if isinstance(
                         v, str) else v
                     clean_node[k] = clean_val
                 nodes[len(nodes)] = clean_node

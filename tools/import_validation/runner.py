@@ -226,11 +226,11 @@ class ValidationRunner:
                             break
                         curr = os.path.dirname(curr)
 
-                    print(
-                        f"DEBUG: Found GOLDENS_CHECK rule: '{rule.get('rule_id')}'"
+                    logging.debug(
+                        f"Found GOLDENS_CHECK rule: '{rule.get('rule_id')}'"
                     )
-                    print(
-                        f"DEBUG: Config directory resolved to: '{config_dir}'")
+                    logging.debug(
+                        f"Config directory resolved to: '{config_dir}'")
                     for path_key in list(rule_params.keys()):
                         # Check any key in rule_params that equals 'golden_files' or 'input_files' or ends with '_file' or '_files'
                         if path_key in (
@@ -238,15 +238,15 @@ class ValidationRunner:
                                 'input_files') or path_key.endswith(
                                     '_file') or path_key.endswith('_files'):
                             val = rule_params[path_key]
-                            print(
-                                f"DEBUG: Before resolve '{path_key}': '{val}'")
+                            logging.debug(
+                                f"Before resolve '{path_key}': '{val}'")
                             if isinstance(
                                     val,
                                     str) and val and not os.path.isabs(val):
                                 rule_params[path_key] = os.path.join(
                                     config_dir, val)
-                            print(
-                                f"DEBUG: After resolve '{path_key}': '{rule_params[path_key]}'"
+                            logging.debug(
+                                f"After resolve '{path_key}': '{rule_params[path_key]}'"
                             )
 
             if validator_name == 'SQL_VALIDATOR':
