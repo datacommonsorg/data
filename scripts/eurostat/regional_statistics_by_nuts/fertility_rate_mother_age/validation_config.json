@@ -13,7 +13,7 @@
             "rule_id": "check_goldens_summary_report",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "scripts/eurostat/regional_statistics_by_nuts/fertility_rate_mother_age/golden_data/golden_summary_report.csv"
+                "golden_files": "../../../../../../../../golden_data/golden_summary_report.csv"
             }
         }
     ]
