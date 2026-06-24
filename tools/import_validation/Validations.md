@@ -81,7 +81,7 @@ This will compare the golden files using summary_report.csv as the default input
       --generate_goldens_property_sets="StatVar|NumPlaces|MinDate|MeasurementMethods|Units|ScalingFactors|observationPeriods"
 ```
 
-To validate summary_report.csv against a golden file:
+To validate summary_report.csv against a golden file run the below command:
 
 ```shell
    python3 validator_goldens.py \
