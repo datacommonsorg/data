@@ -218,18 +218,11 @@ class ValidationRunner:
                 if validator_name == 'GOLDENS_CHECK':
                     config_dir = os.path.dirname(
                         os.path.abspath(self.validation_config_path))
-                    # We walk up to find where the golden_data folder is situated.
-                    curr = config_dir
-                    while curr and curr != os.path.dirname(curr):
-                        if os.path.exists(os.path.join(curr, 'golden_data')):
-                            config_dir = curr
-                            break
-                        curr = os.path.dirname(curr)
 
-                    logging.debug(
+                    logging.info(
                         f"Found GOLDENS_CHECK rule: '{rule.get('rule_id')}'"
                     )
-                    logging.debug(
+                    logging.info(
                         f"Config directory resolved to: '{config_dir}'")
                     for path_key in list(rule_params.keys()):
                         # Check any key in rule_params that equals 'golden_files' or 'input_files' or ends with '_file' or '_files'
@@ -238,15 +231,20 @@ class ValidationRunner:
                                 'input_files') or path_key.endswith(
                                     '_file') or path_key.endswith('_files'):
                             val = rule_params[path_key]
-                            logging.debug(
+                            logging.info(
                                 f"Before resolve '{path_key}': '{val}'")
                             if isinstance(
                                     val,
                                     str) and val and not os.path.isabs(val):
                                 rule_params[path_key] = os.path.join(
                                     config_dir, val)
-                            logging.debug(
+                            logging.info(
                                 f"After resolve '{path_key}': '{rule_params[path_key]}'"
+                            )
+                            # Log if the resolved path actually exists
+                            path_exists = os.path.exists(rule_params[path_key])
+                            logging.info(
+                                f"Resolved path exists: {path_exists}"
                             )
 
             if validator_name == 'SQL_VALIDATOR':

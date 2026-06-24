@@ -81,6 +81,14 @@ This will compare the golden files using summary_report.csv as the default input
       --generate_goldens_property_sets="StatVar|NumPlaces|MinDate|MeasurementMethods|Units|ScalingFactors|observationPeriods"
 ```
 
+To validate summary_report.csv against a golden file:
+
+```shell
+   python3 validator_goldens.py \
+      --validate_goldens_input=summary_report.csv \
+      --validate_goldens=goldens_data/golden_summary_report.csv 
+```
+
 To generate goldens for observations that include important
 statvars, places and dates, run the following with selected StatVar and
 place dcids loaded from txt files:
