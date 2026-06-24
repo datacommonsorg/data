@@ -220,8 +220,7 @@ class ValidationRunner:
                         os.path.abspath(self.validation_config_path))
 
                     logging.info(
-                        f"Found GOLDENS_CHECK rule: '{rule.get('rule_id')}'"
-                    )
+                        f"Found GOLDENS_CHECK rule: '{rule.get('rule_id')}'")
                     logging.info(
                         f"Config directory resolved to: '{config_dir}'")
                     for path_key in list(rule_params.keys()):
@@ -243,9 +242,7 @@ class ValidationRunner:
                             )
                             # Log if the resolved path actually exists
                             path_exists = os.path.exists(rule_params[path_key])
-                            logging.info(
-                                f"Resolved path exists: {path_exists}"
-                            )
+                            logging.info(f"Resolved path exists: {path_exists}")
 
             if validator_name == 'SQL_VALIDATOR':
                 result = validation_func(self.data_sources['stats'],
