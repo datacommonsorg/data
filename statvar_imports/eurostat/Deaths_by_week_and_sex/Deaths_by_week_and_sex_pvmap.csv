@@ -15,9 +15,6 @@ sex:T,gender,"",,,,,,
 sex:M,gender,dcs:Male,,,,,,
 sex:F,gender,dcs:Female,,,,,,
 
-# Unit dimension (dcs:Person is standard for demographic counts)
-unit:NR,unit,dcs:Person,,,,,,
-
 # Geography dimension (Using direct passing)
 geo,observationAbout,{Data},,,,,,
 
