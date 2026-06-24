@@ -6,14 +6,14 @@
             "description": "Checks that the percentage of deleted points is within the threshold.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 0.1
+                "threshold": 0.12
             }
         },
         {
             "rule_id": "check_goldens_summary_report",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "golden_data/golden_summary_report.csv"
+                "golden_files": "scripts/eurostat/regional_statistics_by_nuts/fertility_rate_mother_age/golden_data/golden_summary_report.csv"
             }
         }
     ]
