@@ -15,7 +15,7 @@
 
 import unittest
 import pandas as pd
-from tools.import_validation.util import filter_dataframe
+from tools.import_validation.validation_util import filter_dataframe
 
 
 class TestFilterDataFrame(unittest.TestCase):
