@@ -22,6 +22,13 @@
                         --out_path simplified-data/geoId-01-simple.geojson
 """
 
+import numpy as np
+
+# Monkey-patch np.cross to support 2D vectors under NumPy 2.x which removed it.
+_orig_cross = np.cross
+np.cross = lambda a, b, *args, **kwargs: (a[0] * b[1] - a[1] * b[0] if len(
+    a) == 2 and len(b) == 2 else _orig_cross(a, b, *args, **kwargs))
+
 import rdp
 import geojson
 from absl import app
