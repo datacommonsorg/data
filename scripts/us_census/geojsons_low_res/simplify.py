@@ -23,6 +23,11 @@
 """
 
 import numpy as np
+import rdp
+import geojson
+from absl import app
+from absl import flags
+from absl import logging
 
 # Monkey-patch np.cross to support 2D vectors under NumPy 2.x which removed it.
 _orig_cross = np.cross
@@ -38,12 +43,6 @@ def _robust_cross(a, b, *args, **kwargs):
 
 
 np.cross = _robust_cross
-
-import rdp
-import geojson
-from absl import app
-from absl import flags
-from absl import logging
 
 
 class GeojsonSimplifier:
