@@ -25,6 +25,7 @@ import re
 import os
 import sys
 
+from util import file_util
 from absl import app
 from absl import flags
 from absl import logging
@@ -32,6 +33,11 @@ import pandas as pd
 from retry.api import retry_call
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.extend([
+    os.path.abspath(os.path.join(_MODULE_DIR, '../../..')),
+    os.path.abspath(os.path.join(_MODULE_DIR, '../../../util'))
+])
+
 _FLAGS = flags.FLAGS
 flags.DEFINE_boolean("fetchFromSource", True,
                      "Whether to bypass cached CSVs and fetch from source.")
@@ -39,6 +45,10 @@ flags.DEFINE_string(
     "indicatorSchemaFile",
     os.path.join(_MODULE_DIR, "schema_csvs/WorldBankIndicators_prod.csv"), "")
 flags.DEFINE_string('mode', '', 'Options: download or process')
+flags.DEFINE_string(
+    'historical_gcs_path',
+    'gs://resolved_mcf/world_bank/wdi/deleted_rows_06_2026.csv',
+    'GCS path to the deleted historical data CSV file')
 
 # Remaps the columns provided by World Bank API.
 WORLDBANK_COL_REMAP = {
@@ -504,9 +514,38 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
         df = df.replace({'StatisticalVariable': RESOLUTION_TO_EXISTING_DCID})
         if saveOutput:
             logging.info("Writing output csv")
-            df.drop('IndicatorCode', axis=1).to_csv('output/WorldBank.csv',
+            output_file_path = 'output/WorldBank.csv'
+            df.drop('IndicatorCode', axis=1).to_csv(output_file_path,
                                                     float_format='%.10f',
                                                     index=False)
+
+            # Read and append historical deleted data from GCS.
+            try:
+                logging.info(
+                    f"Reading historical deleted data from GCS: {_FLAGS.historical_gcs_path}"
+                )
+                final_df = pd.read_csv(output_file_path)
+                with file_util.FileIO(_FLAGS.historical_gcs_path, 'r') as f:
+                    deleted_df = pd.read_csv(f)
+
+                # Combine dataframes. final_df is placed first so its versions are preferred.
+                final_df = pd.concat([final_df, deleted_df], ignore_index=True)
+
+                # Deduplicate based on composite keys, keeping the first occurrence (from final_df)
+                composite_keys = [
+                    'StatisticalVariable', 'ISO3166Alpha3', 'Year',
+                    'observationPeriod', 'unit', 'measurementMethod', 'scalingFactor'
+                ]
+                final_df = final_df.drop_duplicates(subset=composite_keys,
+                                                    keep='first')
+                final_df.to_csv(output_file_path, float_format='%.10f', index=False)
+                logging.info(
+                    "Successfully merged and de-duplicated deleted historical data."
+                )
+            except Exception as e:
+                logging.warning(
+                    f"Could not read historical deleted data from GCS: {e}. Proceeding with fresh data only."
+                )
         else:
             return df
     except Exception as e:
