@@ -25,18 +25,18 @@ import re
 import os
 import sys
 
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.extend([
+    os.path.abspath(os.path.join(_MODULE_DIR, '../../..')),
+    os.path.abspath(os.path.join(_MODULE_DIR, '../../../util'))
+])
+
 from util import file_util
 from absl import app
 from absl import flags
 from absl import logging
 import pandas as pd
 from retry.api import retry_call
-
-_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.extend([
-    os.path.abspath(os.path.join(_MODULE_DIR, '../../..')),
-    os.path.abspath(os.path.join(_MODULE_DIR, '../../../util'))
-])
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_boolean("fetchFromSource", True,
