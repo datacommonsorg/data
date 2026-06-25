@@ -23,21 +23,14 @@ import io
 import time
 import re
 import os
-import sys
 
-_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.extend([
-    os.path.abspath(os.path.join(_MODULE_DIR, '../../..')),
-    os.path.abspath(os.path.join(_MODULE_DIR, '../../../util'))
-])
-
-from util import file_util
 from absl import app
 from absl import flags
 from absl import logging
 import pandas as pd
 from retry.api import retry_call
 
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _FLAGS = flags.FLAGS
 flags.DEFINE_boolean("fetchFromSource", True,
                      "Whether to bypass cached CSVs and fetch from source.")
@@ -525,8 +518,7 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
                     f"Reading historical deleted data from GCS: {_FLAGS.historical_gcs_path}"
                 )
                 final_df = pd.read_csv(output_file_path)
-                with file_util.FileIO(_FLAGS.historical_gcs_path, 'r') as f:
-                    deleted_df = pd.read_csv(f)
+                deleted_df = pd.read_csv(_FLAGS.historical_gcs_path)
 
                 # Combine dataframes. final_df is placed first so its versions are preferred.
                 final_df = pd.concat([final_df, deleted_df], ignore_index=True)
