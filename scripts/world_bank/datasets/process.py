@@ -2,6 +2,7 @@ import datetime
 import os
 import csv
 import sys
+import pandas as pd
 from absl import logging, flags, app
 from collections import Counter
 
@@ -196,7 +197,6 @@ def main(_):
 
         # Read deleted historical data from GCS if it exists
         try:
-            import pandas as pd
             logging.info(
                 f"Reading historical deleted data from GCS: {FLAGS.historical_gcs_path}"
             )
@@ -212,9 +212,12 @@ def main(_):
                 'indicatorcode', 'statvar', 'measurementmethod',
                 'observationabout', 'observationdate', 'unit'
             ]
-            final_df = final_df.drop_duplicates(subset=composite_keys, keep='first')
+            final_df = final_df.drop_duplicates(subset=composite_keys,
+                                                keep='first')
             final_df.to_csv(output_file_path, index=False)
-            logging.info("Successfully merged and de-duplicated deleted historical data.")
+            logging.info(
+                "Successfully merged and de-duplicated deleted historical data."
+            )
         except Exception as e:
             logging.warning(
                 f"Could not read historical deleted data from GCS: {e}. Proceeding with fresh data only."
