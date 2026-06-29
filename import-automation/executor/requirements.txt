@@ -36,7 +36,7 @@ legacy-cgi
 lxml
 numpy>=1.26.0,<2.0.0
 openpyxl
-pandas
+pandas>=2.2.2
 omegaconf
 prettytable
 protobuf
