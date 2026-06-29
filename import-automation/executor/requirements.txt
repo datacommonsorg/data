@@ -34,7 +34,7 @@ gspread
 gunicorn
 legacy-cgi
 lxml
-numpy>=1.26.0,<=2.0.0
+numpy>=1.26.0
 openpyxl
 pandas
 omegaconf

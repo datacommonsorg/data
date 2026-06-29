@@ -12,14 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import faulthandler
-faulthandler.enable()
-
-import numpy as np
-import pandas as pd
-print("CRITICAL DEBUG: numpy version:", np.__version__)
-print("CRITICAL DEBUG: pandas version:", pd.__version__)
-
 import filecmp
 import os
 import json
