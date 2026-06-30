@@ -527,11 +527,14 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
                 # Deduplicate based on composite keys, keeping the first occurrence (from final_df)
                 composite_keys = [
                     'StatisticalVariable', 'ISO3166Alpha3', 'Year',
-                    'observationPeriod', 'unit', 'measurementMethod', 'scalingFactor'
+                    'observationPeriod', 'unit', 'measurementMethod',
+                    'scalingFactor'
                 ]
                 final_df = final_df.drop_duplicates(subset=composite_keys,
                                                     keep='first')
-                final_df.to_csv(output_file_path, float_format='%.10f', index=False)
+                final_df.to_csv(output_file_path,
+                                float_format='%.10f',
+                                index=False)
                 logging.info(
                     "Successfully merged and de-duplicated deleted historical data."
                 )
