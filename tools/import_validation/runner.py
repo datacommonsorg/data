@@ -249,8 +249,7 @@ class ValidationRunner:
                     rule_params.setdefault('output_path', output_dir)
 
                 # Inject the directory containing the validation config file as config_dir.
-                # This allows individual validators to resolve relative paths relative to
-                # the config file's directory.
+                # This allows individual validators to resolve relative paths relative to the config file's directory.
                 config_dir = os.path.dirname(
                     os.path.abspath(self.validation_config_path))
                 rule_params.setdefault('config_dir', config_dir)
