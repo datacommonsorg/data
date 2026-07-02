@@ -214,6 +214,33 @@ class TestValidatorGoldens(unittest.TestCase):
         self.assertEqual(nodes[0]['unit'], 'unit1')
         self.assertEqual(nodes[0]['value'], '10')
 
+    @patch('validator_goldens.load_nodes_from_file')
+    @patch('validator_goldens.file_util.file_get_matching')
+    @patch('validator_goldens.validator_compare_nodes')
+    def test_validate_goldens_resolves_relative_paths(self, mock_compare,
+                                                      mock_get_matching,
+                                                      mock_load):
+        # 1. Setup mocks
+        mock_load.return_value = {}
+        mock_get_matching.return_value = ['/abs/path/gold.csv']
+        mock_compare.return_value = []
+
+        config = {'config_dir': '/abs/path/config_dir'}
+
+        # 2. Call validate_goldens with relative paths
+        validator_goldens.validate_goldens(inputs='relative_input.csv',
+                                           golden_files='relative_golden.csv',
+                                           output_file='relative_output.csv',
+                                           config=config)
+
+        # 3. Assert relative paths are resolved before loading
+        # First load: inputs
+        mock_load.assert_any_call('/abs/path/config_dir/relative_input.csv')
+        # Second load: golden files list
+        mock_get_matching.assert_called_with(
+            '/abs/path/config_dir/relative_golden.csv')
+        mock_load.assert_any_call(['/abs/path/gold.csv'])
+
 
 if __name__ == '__main__':
     unittest.main()
