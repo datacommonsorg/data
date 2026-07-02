@@ -249,35 +249,12 @@ class ValidationRunner:
                 if output_dir:
                     rule_params.setdefault('output_path', output_dir)
 
-                # Resolve paths relative to the directory of the validation config.
-                if validator_name == 'GOLDENS_CHECK':
-                    config_dir = os.path.dirname(
-                        os.path.abspath(self.validation_config_path))
-
-                    logging.info(
-                        f"Found GOLDENS_CHECK rule: '{rule.get('rule_id')}'")
-                    logging.info(
-                        f"Config directory resolved to: '{config_dir}'")
-                    for path_key in list(rule_params.keys()):
-                        # Check any key in rule_params that equals 'golden_files' or 'input_files' or ends with '_file' or '_files'
-                        if path_key in (
-                                'golden_files',
-                                'input_files') or path_key.endswith(
-                                    '_file') or path_key.endswith('_files'):
-                            val = rule_params[path_key]
-                            logging.info(
-                                f"Before resolve '{path_key}': '{val}'")
-                            if isinstance(
-                                    val,
-                                    str) and val and not os.path.isabs(val):
-                                rule_params[path_key] = os.path.join(
-                                    config_dir, val)
-                            logging.info(
-                                f"After resolve '{path_key}': '{rule_params[path_key]}'"
-                            )
-                            # Log if the resolved path actually exists
-                            path_exists = os.path.exists(rule_params[path_key])
-                            logging.info(f"Resolved path exists: {path_exists}")
+                # Inject the directory containing the validation config file as config_dir.
+                # This allows individual validators to resolve relative paths relative to
+                # the config file's directory.
+                config_dir = os.path.dirname(
+                    os.path.abspath(self.validation_config_path))
+                rule_params.setdefault('config_dir', config_dir)
 
             if validator_name == 'SQL_VALIDATOR':
                 result = validation_func(self.data_sources['stats'],
