@@ -457,8 +457,7 @@ def generate_goldens(input_files: str,
 
 def _resolve_paths(path: str, config_dir: str) -> str:
     """Resolves relative paths to be absolute relative to config_dir."""
-    if isinstance(path, str) and path and not os.path.isabs(
-            path) and not path.startswith('gs://'):
+    if isinstance(path, str) and path and not os.path.isabs(path):
         resolved = os.path.join(config_dir, path)
         logging.info("Resolved relative path '%s' to '%s'", path, resolved)
         return resolved
