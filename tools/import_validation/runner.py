@@ -42,7 +42,6 @@ class ValidationRunner:
     def __init__(self, validation_config_path: str, differ_output: str,
                  stats_summary: str, lint_report: str, validation_output: str):
         self.validation_config_path = validation_config_path
-        self.stats_summary = stats_summary
         self.config = ValidationConfig(validation_config_path)
         self.validation_output = validation_output
         self.validator = Validator()
