@@ -457,8 +457,7 @@ def generate_goldens(input_files: str,
 
 def _resolve_paths(path: str, config_dir: str) -> str:
     """Resolves relative paths to be absolute relative to config_dir."""
-    if isinstance(path, str) and path and not os.path.isabs(
-            path) and not path.startswith('gs://'):
+    if isinstance(path, str) and path and not os.path.isabs(path):
         resolved = os.path.join(config_dir, path)
         logging.info("Resolved relative path '%s' to '%s'", path, resolved)
         return resolved
@@ -489,8 +488,6 @@ def validate_goldens(inputs: str | dict,
     if config_dir:
         inputs = _resolve_paths(inputs, config_dir)
         golden_files = _resolve_paths(golden_files, config_dir)
-        if output_file:
-            output_file = _resolve_paths(output_file, config_dir)
 
     # Load all nodes from input and golden files.
     if isinstance(inputs, dict):
