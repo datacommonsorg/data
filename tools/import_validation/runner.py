@@ -29,7 +29,7 @@ from validation_config import ValidationConfig
 from report_generator import ReportGenerator
 from validator import Validator
 from result import ValidationResult, ValidationStatus
-from util import filter_dataframe
+from validation_util import filter_dataframe
 
 _FLAGS = flags.FLAGS
 
@@ -59,9 +59,13 @@ class ValidationRunner:
             'MAX_DATE_CONSISTENT':
                 (self.validator.validate_max_date_consistent, 'stats'),
             'DELETED_RECORDS_COUNT':
-                (self.validator.validate_deleted_records_count, 'differ'),
+                (self.validator.validate_deleted_records_count, 'differ_summary'
+                ),
             'DELETED_RECORDS_PERCENT':
-                (self.validator.validate_deleted_records_percent, 'differ'),
+                (self.validator.validate_deleted_records_percent,
+                 'differ_summary'),
+            'EMPTY_IMPORT_CHECK':
+                (self.validator.validate_empty_import, 'lint'),
             'MISSING_REFS_COUNT':
                 (self.validator.validate_missing_refs_count, 'lint'),
             'LINT_ERROR_COUNT':
@@ -82,6 +86,7 @@ class ValidationRunner:
                 (self.validator.validate_min_value_check, 'stats'),
             'MAX_VALUE_CHECK':
                 (self.validator.validate_max_value_check, 'stats'),
+            'GOLDENS_CHECK': (self.validator.validate_goldens, 'stats'),
         }
 
         self._initialize_data_sources(stats_summary, lint_report, differ_output)
@@ -118,38 +123,21 @@ class ValidationRunner:
             logging.warning("stats_summary file exists but is empty: %s",
                             stats_summary)
 
-        # Handle differ output (folder or file)
-        differ_csv_path = None
-        differ_json_path = None
-
         if differ_output and os.path.exists(differ_output):
-            if os.path.isdir(differ_output):
-                differ_csv_path = os.path.join(differ_output,
-                                               'obs_diff_summary.csv')
-                differ_json_path = os.path.join(differ_output,
-                                                'differ_summary.json')
-            else:
-                differ_csv_path = differ_output
+            differ_json_path = os.path.join(differ_output,
+                                            'differ_summary.json')
+            if os.path.exists(differ_json_path) and os.path.getsize(
+                    differ_json_path) > 0:
+                try:
+                    with open(differ_json_path, 'r') as f:
+                        self.data_sources['differ_summary'] = json.load(f)
+                except Exception as e:
+                    logging.error(
+                        f'JSON parse error while reading differ summary at {differ_json_path}: {e}'
+                    )
 
-        if differ_csv_path and os.path.exists(
-                differ_csv_path) and os.path.getsize(differ_csv_path) > 0:
-            self.data_sources['differ'] = pd.read_csv(differ_csv_path)
-        elif differ_csv_path and os.path.exists(differ_csv_path):
-            logging.warning("differ csv file exists but is empty: %s",
-                            differ_csv_path)
-
-        if differ_json_path and os.path.exists(
-                differ_json_path) and os.path.getsize(differ_json_path) > 0:
-            try:
-                with open(differ_json_path, 'r') as f:
-                    self.data_sources['differ_summary'] = json.load(f)
-            except Exception as e:
-                logging.error(
-                    f"JSON parse error while reading differ summary at {differ_json_path}: {e}"
-                )
-        elif differ_json_path and os.path.exists(differ_json_path):
-            logging.warning("differ summary file exists but is empty: %s",
-                            differ_json_path)
+            self.data_sources['differ'] = self._load_differ_df_from_mcf(
+                differ_output)
 
         if lint_report and os.path.exists(lint_report) and os.path.getsize(
                 lint_report) > 0:
@@ -163,6 +151,56 @@ class ValidationRunner:
         elif lint_report and os.path.exists(lint_report):
             logging.warning("lint_report file exists but is empty: %s",
                             lint_report)
+
+    def _load_differ_df_from_mcf(self, input_dir: str) -> pd.DataFrame:
+        """Parses MCF diff files and returns a summary DataFrame."""
+        import glob
+        from collections import defaultdict
+        stats = defaultdict(lambda: {'ADDED': 0, 'DELETED': 0, 'MODIFIED': 0})
+
+        # Map filename pattern to diff type
+        file_patterns = {
+            'nodes-added.mcf': 'ADDED',
+            'nodes-deleted.mcf': 'DELETED',
+            'nodes-modified.mcf': 'MODIFIED'
+        }
+
+        for filename, diff_type in file_patterns.items():
+            filepath = os.path.join(input_dir, filename)
+            if not os.path.exists(filepath):
+                continue
+            with open(filepath, 'r', encoding='utf-8') as f:
+                current_var = None
+                for line in f:
+                    line = line.strip()
+                    if not line:  # End of node
+                        if current_var:
+                            stats[current_var][diff_type] += 1
+                        current_var = None
+                        continue
+                    if line.startswith('variableMeasured:'):
+                        parts = line.split(':', 1)
+                        if len(parts) > 1:
+                            current_var = parts[1].strip().strip('"\'')
+                            # Strip dcid: prefix if present to match stats summary
+                            if current_var.startswith('dcid:'):
+                                current_var = current_var[len('dcid:'):]
+                # Catch last node if file doesn't end with newline
+                if current_var:
+                    stats[current_var][diff_type] += 1
+
+        if not stats:
+            return pd.DataFrame()
+
+        rows = []
+        for var, counts in stats.items():
+            rows.append({
+                'StatVar': var,
+                'ADDED': counts['ADDED'],
+                'DELETED': counts['DELETED'],
+                'MODIFIED': counts['MODIFIED']
+            })
+        return pd.DataFrame(rows)
 
     def _determine_required_sources(self) -> set[str]:
         """
@@ -199,14 +237,25 @@ class ValidationRunner:
             validation_func, data_source_key = self.validation_dispatch[
                 validator_name]
 
+            rule_params = dict(rule.get('params', {}))
+            if rule_params:
+                # Add default parameters for output folder
+                output_dir = self.validation_output
+                if output_dir and not output_dir.endswith(
+                        '/') and not os.path.isdir(output_dir):
+                    output_dir = os.path.dirname(output_dir)
+                if output_dir:
+                    rule_params.setdefault('output_path', output_dir)
+
             if validator_name == 'SQL_VALIDATOR':
                 result = validation_func(self.data_sources['stats'],
                                          self.data_sources['differ'],
-                                         rule['params'])
-            elif validator_name == 'DELETED_RECORDS_PERCENT':
+                                         rule_params)
+            elif validator_name in [
+                    'DELETED_RECORDS_PERCENT', 'DELETED_RECORDS_COUNT'
+            ]:
                 result = validation_func(
-                    self.data_sources['differ'],
-                    self.data_sources.get('differ_summary'), rule['params'])
+                    self.data_sources.get('differ_summary'), rule_params)
             else:
                 scope = rule.get('scope', {})
                 if isinstance(scope, str):
@@ -222,7 +271,7 @@ class ValidationRunner:
                         regex_patterns=variables_config.get('regex'),
                         contains_all=variables_config.get('contains_all'))
 
-                result = validation_func(df, rule['params'])
+                result = validation_func(df, rule_params)
 
             result.name = rule['rule_id']
             result.validation_params = rule.get('params', {})
