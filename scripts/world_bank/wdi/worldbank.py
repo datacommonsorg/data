@@ -41,7 +41,7 @@ flags.DEFINE_string(
 flags.DEFINE_string('mode', '', 'Options: download or process')
 flags.DEFINE_string(
     'historical_gcs_path',
-    'gs://resolved_mcf/world_bank/wdi/deleted_rows_06_2026.csv',
+    'gs://unresolved_mcf/world_bank/wdi/deleted_rows_07_2026.csv',
     'GCS path to the deleted historical data CSV file')
 
 # Remaps the columns provided by World Bank API.
