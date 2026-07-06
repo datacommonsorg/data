@@ -1,0 +1,8 @@
+"Units","StatVar","ScalingFactors","observationPeriods","NumPlaces","MeasurementMethods","MinDate"
+"[]","Count_Death_AsAFractionOfCount_Person","[]","[]","2122","[EurostatRegionalStatistics]","2000"
+"[]","GrowthRate_Count_Person","[]","[]","2122","[EurostatRegionalStatistics]","2000"
+"[]","Count_Death","[]","[]","2125","[EurostatRegionalStatistics]","2000"
+"[]","Count_Person","[]","[]","2125","[EurostatRegionalStatistics]","2000"
+"[]","Count_BirthEvent","[]","[]","2124","[EurostatRegionalStatistics]","2000"
+"[]","IncrementalCount_Person","[]","[]","2125","[EurostatRegionalStatistics]","2000"
+"[]","Count_BirthEvent_AsAFractionOfCount_Person","[]","[]","2121","[EurostatRegionalStatistics]","2000"
