@@ -8,15 +8,20 @@
             "provenance_url": "https://datacommons.org",
             "provenance_description": "Schema nodes for Data Commons",
             "scripts": [
-                "process.py --entity=Schema"
+                "./download.sh --entity=Schema",
+                "./process.py --entity=Schema"
             ],
-            "import_inputs": [],
+            "import_inputs": [
+                {
+                    "node_mcf": "**/*.mcf*"
+                }
+            ],
             "source_files": [],
-            "cron_schedule": "15 3 * * *",
             "config_override": {
-                "invoke_import_validation": false,
-                "invoke_import_tool": false,
-                "invoke_differ_tool": false
+                "invoke_import_validation": true,
+                "invoke_import_tool": true,
+                "invoke_differ_tool": true,
+                "skip_input_upload": true
             }
         },
         {
@@ -27,15 +32,68 @@
             "provenance_url": "https://datacommons.org",
             "provenance_description": "Place nodes for Data Commons",
             "scripts": [
-                "process.py --entity=Place"
+                "./download.sh --entity=Place",
+                "./process.py --entity=Place"
             ],
-            "import_inputs": [],
+            "import_inputs": [
+                {
+                    "node_mcf": "**/*.mcf*"
+                }
+            ],
             "source_files": [],
-            "cron_schedule": "15 3 * * 1",
             "config_override": {
                 "invoke_import_validation": false,
                 "invoke_import_tool": false,
-                "invoke_differ_tool": false
+                "invoke_differ_tool": false,
+                "skip_input_upload": true
+            }
+        },
+        {
+            "import_name": "Provenance",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://datacommons.org",
+            "provenance_description": "Provenance nodes for Data Commons",
+            "scripts": [
+                "./download.sh --entity=Provenance",
+                "./process.py --entity=Provenance"
+            ],
+            "import_inputs": [
+                {
+                    "node_mcf": "**/*.mcf*"
+                }
+            ],
+            "source_files": [],
+            "config_override": {
+                "invoke_import_validation": false,
+                "invoke_import_tool": false,
+                "invoke_differ_tool": false,
+                "skip_input_upload": false
+            }
+        },
+        {
+            "import_name": "Event",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://datacommons.org",
+            "provenance_description": "Event nodes for Data Commons",
+            "scripts": [
+                "./download.sh --entity=Event",
+                "./process.py --entity=Event"
+            ],
+            "import_inputs": [
+                {
+                    "node_mcf": "**/*.mcf*"
+                }
+            ],
+            "source_files": [],
+            "config_override": {
+                "invoke_import_validation": false,
+                "invoke_import_tool": false,
+                "invoke_differ_tool": false,
+                "skip_input_upload": true
             }
         }
     ]

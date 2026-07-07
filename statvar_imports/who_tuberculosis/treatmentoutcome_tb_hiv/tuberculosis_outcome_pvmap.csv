@@ -1,0 +1,9 @@
+key,,,,,,,,
+iso3,observationAbout,country/{Data},,,,,,
+YEAR,observationDate,{Number},,,,,,
+DISAGGR_1:Died,treatmentOutcome,DiedDuringTreatment,,,,,,
+DISAGGR_1:Lost to follow-up,treatmentOutcome,LostToFollowUp,,,,,,
+DISAGGR_1:Not evaluated,treatmentOutcome,TreatmentNotEvaluated,,,,,,
+DISAGGR_1:Successfully treated,treatmentOutcome,SuccessfullyTreated,,,,,,
+DISAGGR_1:Treatment failed,treatmentOutcome,TreatmentFailed,,,,,,
+VALUE,value,{Number},populationType,Person,measuredProperty,count,measurementDenominator,-treatmentOutcome,medicalCondition,TuberculosisAndHIV,unit,Percent,scalingFactor,100

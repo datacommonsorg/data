@@ -47,8 +47,7 @@ for folder in ${!foldermap[@]}; do
       # In GCS, there are /internal folders that should not be overwritten.
       # TODO(shifucun): Handle copy GCS reference. In this case, user would
       # store a link but not actual data in this repo.
-      gsutil cp -r "$folder/$import_group/data/*" "$gcs_path/$import_group/data/"
+      gcloud storage cp --recursive "$folder/$import_group/data/*" "$gcs_path/$import_group/data/"
     done
   fi
 done
-

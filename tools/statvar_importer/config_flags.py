@@ -370,7 +370,7 @@ def get_default_config() -> dict:
             True,
         # Settings for DC API.
         'dc_api_root':
-            'http://api.datacommons.org',
+            os.environ.get('DC_API_ROOT', 'https://api.datacommons.org'),
         'dc_api_use_cache':
             False,
         'dc_api_batch_size':

@@ -545,6 +545,9 @@ def process(in_paths: list,
         with open(mcf_file_path, 'w+', newline='') as f_out_mcf:
             # Process each CSV input file, one row at a time.
             for in_file in in_paths:
+                if not in_file.endswith('.csv'):
+                    logging.warning(f'Skipping non-CSV file: {in_file}')
+                    continue
                 logging.info(f'Processing data file: {in_file}')
                 with open(in_file) as csvfile:
                     counters['input_files'] += 1

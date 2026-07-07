@@ -160,13 +160,7 @@ def create_job_request(import_name: str, import_config: dict,
     }
     if resources:
         argument_payload["resources"] = resources
-
-    argument_string = json.dumps(argument_payload)
-    final_payload = {
-        "argument": argument_string,
-        "callLogLevel": "CALL_LOG_LEVEL_UNSPECIFIED"
-    }
-
+    final_payload = {"argument": json.dumps(argument_payload)}
     json_encoded_body = json.dumps(final_payload, indent=2)
     return json_encoded_body
 

@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "NYU_NewYork_Diabetes",
+            "import_name": "NewYorkUniversity_Diabetes",
             "curator_emails": [
                 "support@datacommons.org"
             ],
