@@ -1,0 +1,32 @@
+Node: treasury_constant_maturity_rates/E9/c0eb81eb-be8c-d11a-9279-a0391c1b01ef
+variableMeasured: dcid:InterestRate_TreasuryNote_10Year
+observationAbout: dcid:country/USA
+observationDate: "2025-01-31"
+measurementMethod: dcid:ConstantMaturityRate
+unit: dcid:Percent
+value: 4.58
+typeOf: StatVarObservation
+
+dcid: InterestRate_TreasuryNote_3Year
+maturity: [3 Year]
+measuredProperty: dcs:interestRate
+name: "InterestRate_TreasuryNote_3Year"
+populationType: dcs:TreasuryNote
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+dcid: InterestRate_TreasuryNote_5Year
+maturity: [5 Year]
+measuredProperty: dcs:interestRate
+name: "InterestRate_TreasuryNote_5Year"
+populationType: dcs:TreasuryNote
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+dcid: InterestRate_TreasuryNote_7Year
+maturity: [7 Year]
+measuredProperty: dcs:interestRate
+name: "InterestRate_TreasuryNote_7Year"
+populationType: dcs:TreasuryNote
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
