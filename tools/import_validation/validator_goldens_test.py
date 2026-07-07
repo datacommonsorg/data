@@ -244,9 +244,8 @@ class TestValidatorGoldens(unittest.TestCase):
     @patch('validator_goldens.load_nodes_from_file')
     @patch('validator_goldens.file_util.file_get_matching')
     @patch('validator_goldens.validator_compare_nodes')
-    def test_validate_goldens_does_not_resolve_gcs_paths(self, mock_compare,
-                                                         mock_get_matching,
-                                                         mock_load):
+    def test_validate_goldens_does_not_resolve_gcs_paths(
+            self, mock_compare, mock_get_matching, mock_load):
         # 1. Setup mocks
         mock_load.return_value = {}
         mock_get_matching.return_value = ['gs://bucket/gold.csv']
@@ -255,15 +254,15 @@ class TestValidatorGoldens(unittest.TestCase):
         config = {'config_dir': '/abs/path/config_dir'}
 
         # 2. Call validate_goldens with GCS paths
-        validator_goldens.validate_goldens(inputs='gs://bucket/relative_input.csv',
-                                           golden_files='gs://bucket/relative_golden.csv',
-                                           output_file='relative_output.csv',
-                                           config=config)
+        validator_goldens.validate_goldens(
+            inputs='gs://bucket/relative_input.csv',
+            golden_files='gs://bucket/relative_golden.csv',
+            output_file='relative_output.csv',
+            config=config)
 
         # 3. Assert GCS paths are NOT resolved
         mock_load.assert_any_call('gs://bucket/relative_input.csv')
-        mock_get_matching.assert_called_with(
-            'gs://bucket/relative_golden.csv')
+        mock_get_matching.assert_called_with('gs://bucket/relative_golden.csv')
         mock_load.assert_any_call(['gs://bucket/gold.csv'])
 
 
