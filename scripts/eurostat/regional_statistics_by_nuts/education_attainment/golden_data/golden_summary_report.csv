@@ -1,0 +1,7 @@
+"StatVar","MeasurementMethods","ScalingFactors","NumPlaces","MinDate","Units","observationPeriods"
+"Count_Person_25To64Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_25To64Years","[EurostatRegionalStatistics]","[100]","512","2000","[Percent]","[]"
+"Count_Person_25To64Years_TertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female","[EurostatRegionalStatistics]","[100]","512","2000","[Percent]","[]"
+"Count_Person_25To64Years_TertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male","[EurostatRegionalStatistics]","[100]","512","2000","[Percent]","[]"
+"Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_25To64Years_Male","[EurostatRegionalStatistics]","[100]","512","2000","[Percent]","[]"
+"Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_25To64Years_Female","[EurostatRegionalStatistics]","[100]","512","2000","[Percent]","[]"
+"Count_Person_25To64Years_TertiaryEducation_AsAFractionOfCount_Person_25To64Years","[EurostatRegionalStatistics]","[100]","512","2000","[Percent]","[]"
