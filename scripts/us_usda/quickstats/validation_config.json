@@ -15,7 +15,7 @@
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": [
-                    "../../../../golden_data/golden_summary_report.csv"
+                    "golden_data/golden_summary_report.csv"
                 ]
             }
         }
