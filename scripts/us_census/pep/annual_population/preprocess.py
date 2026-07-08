@@ -129,7 +129,7 @@ def _load_data_df(path: str,
     elif file_format.lower() == "txt":
         data_df = pd.read_table(path,
                                 index_col=False,
-                                delim_whitespace=True,
+                                sep=r'\s+',
                                 engine='python',
                                 header=header,
                                 skiprows=skip_rows)
