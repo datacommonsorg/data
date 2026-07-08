@@ -631,7 +631,8 @@ def _clean_csv2_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
             df.iloc[j, 0] = str(df.iloc[j, 0]) + " " + str(df.iloc[j, 1])
             for i in range(2, 10):
                 df.iloc[j, i - 1] = df.iloc[j, i]
-        df.iloc[9, 0] = str(df.iloc[9, 0]) + " " + str(df.iloc[9, 1]) + " " + str(df.iloc[9, 2])
+        df.iloc[9, 0] = str(df.iloc[9, 0]) + " " + str(
+            df.iloc[9, 1]) + " " + str(df.iloc[9, 2])
         for i in range(3, 11):
             df.iloc[9, i - 2] = df.iloc[9, i]
         df.drop(columns=["3", "4", "8", "9", "10"], inplace=True)
@@ -1213,7 +1214,9 @@ class CensusUSAPopulationByRace:
 
 
 # The outputs are loaded into
-def _resolve_pe_11(file_name: str, url: str, session: requests.Session = None) -> pd.DataFrame:
+def _resolve_pe_11(file_name: str,
+                   url: str,
+                   session: requests.Session = None) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a csv file format.
 
@@ -1300,12 +1303,10 @@ def download_files():
     global _FILES_TO_DOWNLOAD
     session = requests.Session()
     # Configure retry adapter with backoff
-    retries = Retry(
-        total=5,
-        backoff_factor=1,
-        status_forcelist=[429, 500, 502, 503, 504],
-        raise_on_status=False
-    )
+    retries = Retry(total=5,
+                    backoff_factor=1,
+                    status_forcelist=[429, 500, 502, 503, 504],
+                    raise_on_status=False)
     session.mount('https://', HTTPAdapter(max_retries=retries))
 
     max_retry = 5
