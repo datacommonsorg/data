@@ -96,9 +96,9 @@ def format_csv_content(raw_csv_content: str) -> str:
   Returns:
     The formatted CSV string with title block and preserved column headers.
   """
-  lines = raw_csv_content.strip().replace('\r\n', '\n').split('\n')
-  if not lines:
+  if not raw_csv_content or not raw_csv_content.strip():
     return raw_csv_content
+  lines = raw_csv_content.strip().replace('\r\n', '\n').split('\n')
 
   header_line = lines[0]
   num_columns = len(header_line.split(','))
