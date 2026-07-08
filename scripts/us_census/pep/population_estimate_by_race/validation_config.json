@@ -13,7 +13,7 @@
       "validator": "GOLDENS_CHECK",
       "params": {
         "golden_files": "../../../../golden_data/golden_summary_report_national.csv",
-        "input_files": "USCensusPEP_PopulationEstimatebyRace/*/input0/genmcf/summary_report.csv"
+        "input_files": "../../input0/genmcf/summary_report.csv"
       }
     },
     {
@@ -21,8 +21,8 @@
       "description": "Validates data before 2000 against its golden summary report.",
       "validator": "GOLDENS_CHECK",
       "params": {
-        "golden_files": "../../../../golden_data/golden_summary_report_national.csv",
-        "input_files": "USCensusPEP_PopulationEstimatebyRace/*/input1/genmcf/summary_report.csv"
+        "golden_files": "../../../../golden_data/golden_summary_report_before_2000.csv",
+        "input_files": "../../input1/genmcf/summary_report.csv"
       }
     },
     {
@@ -30,8 +30,8 @@
       "description": "Validates county-level 2000+ data against its golden summary report.",
       "validator": "GOLDENS_CHECK",
       "params": {
-        "golden_files": "../../../../golden_data/golden_summary_report_national.csv",
-        "input_files": "USCensusPEP_PopulationEstimatebyRace/*/input2/genmcf/summary_report.csv"
+        "golden_files": "../../../../golden_data/golden_summary_report_after_2000.csv",
+        "input_files": "../../input2/genmcf/summary_report.csv"
       }
     }
   ]
