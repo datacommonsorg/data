@@ -1,0 +1,5 @@
+"MinDate","MeasurementMethods","observationPeriods","StatVar","NumPlaces","ScalingFactors","Units"
+"1990","[]","[]","IncrementalCount_Person","1","[]","[]"
+"1990","[]","[]","Count_Person","1","[]","[]"
+"1990","[]","[]","GrowthRate_Count_Person","1","[]","[Percent]"
+"1990","[]","[]","Count_Person_PerArea","1","[]","[PersonPerSquareKilometer]"

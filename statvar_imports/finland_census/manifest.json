@@ -20,7 +20,8 @@
                 "input_files/*.csv"
             ],
             "cron_schedule": "00 05 1,15 * *",
-            "resource_limits": {"cpu": 8, "memory": 32, "disk":100}
+            "resource_limits": {"cpu": 8, "memory": 32, "disk":100},
+            "validation_config_file": "validation_config.json"
         }
     ]
 }
