@@ -28,6 +28,8 @@ import sys
 import requests
 import time
 import json
+from urllib3.util import Retry
+from requests.adapters import HTTPAdapter
 from datetime import datetime as dt
 from absl import logging
 from io import StringIO
@@ -1294,8 +1296,6 @@ def download_files():
     This method allows to download the input files.
 
     """
-    from urllib3.util import Retry
-    from requests.adapters import HTTPAdapter
 
     global _FILES_TO_DOWNLOAD
     session = requests.Session()
