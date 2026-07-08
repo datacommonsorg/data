@@ -1,0 +1,4 @@
+"Units","MeasurementMethods","ScalingFactors","observationPeriods","NumPlaces","StatVar","MinDate"
+"[Percent]","[EurostatRegionalStatistics]","[100]","[]","512","Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years","2000"
+"[Percent]","[EurostatRegionalStatistics]","[100]","[]","509","Count_Person_25To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_25To64Years_Male","2000"
+"[Percent]","[EurostatRegionalStatistics]","[100]","[]","511","Count_Person_25To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_25To64Years_Female","2000"
