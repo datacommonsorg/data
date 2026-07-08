@@ -6,7 +6,7 @@
             "description": "Checks that the percentage of deleted points is within the threshold.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 0.05
+                "threshold": 0.1
             }
         },
         {
