@@ -148,7 +148,7 @@ def _geo_id(val: pd.Series) -> str:
         str: State/County GeoId
     """
     res = "geoId/"
-    state, county = val[0], val[1]
+    state, county = val.iloc[0], val.iloc[1]
     if county == "000":
         return res + state
     return res + state + county
