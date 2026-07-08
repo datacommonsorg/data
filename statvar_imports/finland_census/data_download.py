@@ -14,6 +14,8 @@
 # limitations under the License.
 """Downloader for Finland Census data from Statistics Finland PxWeb API using download_util."""
 
+import csv
+import io
 import os
 import sys
 
@@ -101,7 +103,7 @@ def format_csv_content(raw_csv_content: str) -> str:
   lines = raw_csv_content.strip().replace('\r\n', '\n').split('\n')
 
   header_line = lines[0]
-  num_columns = len(header_line.split(','))
+  num_columns = len(next(csv.reader(io.StringIO(header_line))))
 
   title = '"Key figures on population by Area, Information and Year"'
   title_line = title + ',' * (num_columns - 1)
