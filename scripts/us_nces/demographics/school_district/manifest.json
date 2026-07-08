@@ -29,7 +29,8 @@
                 "cpu": 32,
                 "memory": 512,
                 "disk": 300
-            }
+            },
+            "validation_config_file": "validation_config.json"
         }
     ]
 }
