@@ -19,7 +19,11 @@
                     "cleaned_csv": "data/output/NORS_NonInfectious_Disease.csv"
                 }
             ],
-            "cron_schedule": "0 2 15 * *"
+            "cron_schedule": "0 2 15 * *",
+            "validation_config_file": "validation_config.json",
+            "config_overrides": {
+                "validation_config_file": "validation_config.json"
+            }
         }
     ]
 }

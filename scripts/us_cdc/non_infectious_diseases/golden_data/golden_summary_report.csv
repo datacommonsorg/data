@@ -1,0 +1,5 @@
+"NumPlaces","Units","ScalingFactors","MinDate","MeasurementMethods","observationPeriods","StatVar"
+"55","[]","[]","1998-01","[dcAggregate/NORSNonInfectiousDisease]","[P1Y]","Count_MedicalConditionIncident_PatientDeceased_FoodborneTransmission"
+"53","[]","[]","2009-01","[dcAggregate/NORSNonInfectiousDisease]","[P1Y]","Count_MedicalConditionIncident_PatientDeceased_PersonToPersonTransmission"
+"45","[]","[]","2009-01","[dcAggregate/NORSNonInfectiousDisease]","[P1Y]","Count_MedicalConditionIncident_PatientDeceased_AnimalContactTransmission"
+"56","[]","[]","1971-02","[dcAggregate/NORSNonInfectiousDisease]","[P1Y]","Count_MedicalConditionIncident_PatientDeceased_WaterborneTransmission"
