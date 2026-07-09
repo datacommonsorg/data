@@ -150,6 +150,19 @@ def process_all():
             url = get_url(year)
             if url:
                 filename = f"Section8-FY{year}.xlsx" if year > 2016 else f"Section8-FY{year}.xls"
+                if year == today.year:
+                    try:
+                        headers = {
+                            'User-Agent':
+                                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+                        }
+                        resp = requests.get(url, headers=headers, timeout=10, stream=True)
+                        if resp.status_code != 200:
+                            logging.warning(f"HUD income limits for {year} are not yet available. Skipping.")
+                            continue
+                    except Exception as e:
+                        logging.warning(f"Could not check availability for {year}: {e}. Skipping.")
+                        continue
                 download_file(url, filename, input_folder)
 
     if FLAGS.mode == "" or FLAGS.mode == "process":
