@@ -2,6 +2,12 @@
   "schema_version": "1.0",
   "rules": [
     {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": { "threshold": 0.1}
+    },
+    {
       "rule_id": "check_goldens_cpi_u",
       "description": "Validates cpi_u data against its golden summary report.",
       "validator": "GOLDENS_CHECK",
