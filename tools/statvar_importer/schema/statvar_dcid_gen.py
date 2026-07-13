@@ -206,7 +206,7 @@ def resolve_dcid_names(pvs: dict,
         if use_value_names:
             if not get_dcid_name(prop, schema_nodes):
                 lookup_dcids.add(prop)
-            if value and not is_leaf_object(value) and not get_dcid_name(
+            if value and is_leaf_object(value) and not get_dcid_name(
                 value, schema_nodes
             ):
                 lookup_dcids.add(value)
