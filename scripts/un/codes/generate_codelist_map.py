@@ -150,7 +150,7 @@ def to_dcid(code: str) -> str:
 
 
 def clean_value_str(val: Union[str, None],
-                    regex: str = 'r[^A-Za-z0-9()[]".-]+',
+                    regex: str = r'[^A-Za-z0-9()\[\]" :_.,/-]+',
                     replace: str = '_') -> str:
     """Cleans up a value string by removing redundant chars and outer quotes.
 
