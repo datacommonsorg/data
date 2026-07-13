@@ -1,5 +1,5 @@
 # Template for converting UN codelist files to PVMap for statvar processor.
-# The pvmap will have columns to generate statvar constraint propoerty:values
+# The pvmap will have columns to generate statvar constraint property:values
 # and names.
 # The pvmap will also have columns to generate schema MCF with a tMCF.
 {
@@ -11,13 +11,13 @@
     'ConstraintProp': '{PROPERTY}',
     'ConstraintPropValue': 'to_dcid(NAMESPACE+"_"+CONCEPT+"-"+CODE)',
     'ConstraintPropType': 'TypeOf',
-    'ConstraintPropEnum': 'str(ConstraintProp[0].upper() + ConstraintProp[1:]+"Enum")',
+    'ConstraintPropEnum': (
+        'str(ConstraintProp[0].upper() + ConstraintProp[1:]+"Enum")'
+    ),
     'NameProp': 'ValueName_{CONCEPT}',
     'ConstraintValueName': '"{NAME_EN}"',
-    'DescriptionProp': 'Desc_{CONCEPT}',
-    'ConstraintValueDescription': 'quote(anyascii(DESCRIPTION))',
-    # Eond of line prop:value when description is empty.
-    '#End': 'End',
+    'DescriptionProp': 'ValueDesc_{CONCEPT}',
+    'ConstraintValueDescription': '{DESCRIPTION}',
+    'End': 'End',
     'Dummy': '.',
 }
-
