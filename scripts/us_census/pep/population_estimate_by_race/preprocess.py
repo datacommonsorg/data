@@ -28,8 +28,6 @@ import sys
 import requests
 import time
 import json
-from urllib3.util import Retry
-from requests.adapters import HTTPAdapter
 from datetime import datetime as dt
 from absl import logging
 from io import StringIO
@@ -628,13 +626,13 @@ def _clean_csv2_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
         df.drop(df.index[1:14], inplace=True)
         modify = [0, 30, 31, 32, 33, 34, 35, 40, 41, 42, 49]
         for j in modify:
-            df.iloc[j, 0] = str(df.iloc[j, 0]) + " " + str(df.iloc[j, 1])
+            df.iloc[j]["Area"] = df.iloc[j]["Area"] + " " + df.iloc[j][1]
             for i in range(2, 10):
-                df.iloc[j, i - 1] = df.iloc[j, i]
-        df.iloc[9, 0] = str(df.iloc[9, 0]) + " " + str(
-            df.iloc[9, 1]) + " " + str(df.iloc[9, 2])
+                df.iloc[j][i - 1] = df.iloc[j][i]
+        df.iloc[9]["Area"] = df.iloc[9]["Area"] + " " + df.iloc[9][
+            1] + " " + df.iloc[9][2]
         for i in range(3, 11):
-            df.iloc[9, i - 2] = df.iloc[9, i]
+            df.iloc[9][i - 2] = df.iloc[9][i]
         df.drop(columns=["3", "4", "8", "9", "10"], inplace=True)
         # Replacing the reuired columns.
         df.columns = df.columns.str.replace('Area', 'Geographic Area')
@@ -1067,7 +1065,7 @@ class CensusUSAPopulationByRace:
         cleaned CSV file, MCF file and TMCF file.
         """
         #input_path = _FLAGS.input_path
-        ip_files = sorted(os.listdir(self.input_path))
+        ip_files = os.listdir(self.input_path)
         self.input_files = [
             self.input_path + os.sep + file for file in ip_files
         ]
@@ -1214,9 +1212,7 @@ class CensusUSAPopulationByRace:
 
 
 # The outputs are loaded into
-def _resolve_pe_11(file_name: str,
-                   url: str,
-                   session: requests.Session = None) -> pd.DataFrame:
+def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a csv file format.
 
@@ -1229,12 +1225,11 @@ def _resolve_pe_11(file_name: str,
         df (DataFrame) : Transformed DataFrame for csv dataset.
     """
     try:
-        client = session if session is not None else requests
         year = file_name[-8:-4]
         if int(year) < 1960:
             cols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
             headers = {'User-Agent': 'Mozilla/5.0'}
-            response = client.get(url, headers=headers, timeout=60)
+            response = requests.get(url, headers=headers, timeout=60)
             response.raise_for_status()  # will raise for 403/404/etc.
             df = pd.read_csv(StringIO(response.text), names=cols)
             df = df[df["0"].str.contains("All ages", na=False)]
@@ -1246,7 +1241,7 @@ def _resolve_pe_11(file_name: str,
                 "12"
             ]
             headers = {'User-Agent': 'Mozilla/5.0'}
-            response = client.get(url, headers=headers, timeout=60)
+            response = requests.get(url, headers=headers, timeout=60)
             response.raise_for_status()  # will raise for 403/404/etc.
             df = pd.read_csv(StringIO(response.text), names=cols, skiprows=2)
             df = df[df["0"].str.contains("All ages", na=False)]
@@ -1301,22 +1296,14 @@ def download_files():
     """
 
     global _FILES_TO_DOWNLOAD
-    session = requests.Session()
-    # Configure retry adapter with backoff
-    retries = Retry(total=5,
-                    backoff_factor=1,
-                    status_forcelist=[429, 500, 502, 503, 504],
-                    raise_on_status=False)
-    session.mount('https://', HTTPAdapter(max_retries=retries))
-
+    session = requests.session()
     max_retry = 5
     for file_to_dowload in _FILES_TO_DOWNLOAD:
         file_name = None
         download_local_path = _INPUT_FILE_PATH
         url = file_to_dowload['download_path']
-
         if 'file_name' in file_to_dowload and len(
-                file_to_dowload['file_name']) > 5:
+                file_to_dowload['file_name'] > 5):
             file_name = file_to_dowload['file_name']
         else:
             file_name = url.split('/')[-1]
@@ -1328,7 +1315,7 @@ def download_files():
         while is_file_downloaded == False:
             try:
                 headers = {'User-Agent': 'Mozilla/5.0'}
-                response = session.get(url, headers=headers, timeout=60)
+                response = requests.get(url, headers=headers, timeout=60)
                 response.raise_for_status()
 
                 content_type = response.headers.get('Content-Type', '').lower()
@@ -1347,7 +1334,7 @@ def download_files():
                         df.to_excel(download_local_path + os.sep + file_name\
                             ,index=False,engine='xlsxwriter')
                     elif "pe-11" in url:
-                        df = _resolve_pe_11(file_name, url, session)
+                        df = _resolve_pe_11(file_name, url)
                         df.to_csv(download_local_path + os.sep + file_name,
                                   index=False)
                     elif "pe-19" in url:
