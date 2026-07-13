@@ -22,6 +22,7 @@ the manifest.
 Usage:
     python3 manifest_to_mcf.py <directory_path>
 """
+import hashlib
 import os
 from urllib.parse import urlparse
 from google.protobuf import text_format
@@ -30,13 +31,36 @@ from absl import flags
 import dc_manifest_pb2
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string("directory", os.getcwd(),
-                    "Directory to scan for .textproto files.")
+flags.DEFINE_string("directory",
+                    os.getcwd(),
+                    "Directory to scan for .textproto files.",
+                    allow_override=True)
+
+DEFAULT_CURATOR_DCID = "dcid:dc/cjj7vp"
+DC_BASE_PREFIX = "dc/base"
+
+
+def clean_id(name):
+    if not name:
+        return name
+    r = []
+    first = True
+    for c in name:
+        if c.isalpha() and first:
+            r.append(c.upper())
+            first = False
+        elif c.isalpha() and not first:
+            r.append(c.lower())
+        elif c.isspace():
+            first = True
+        elif c.isdigit() or c in ('_', '-'):
+            r.append(c)
+    return "".join(r)
 
 
 def convert_to_mcf(import_proto, dataset_to_source, test_time=15700000):
     import_name = import_proto.import_name
-    dcid = f"dc/base/{import_name}"
+    dcid = f"{DC_BASE_PREFIX}/{import_name}"
 
     mcf_lines = []
     mcf_lines.append(f"Node: dcid:{dcid}")
@@ -44,11 +68,12 @@ def convert_to_mcf(import_proto, dataset_to_source, test_time=15700000):
     # curator
     curator_email = import_proto.curator_email
     if not curator_email or curator_email == "imports@datacommons.org":
-        mcf_lines.append("curator: dcid:dc/cjj7vp")
+        mcf_lines.append(f"curator: {DEFAULT_CURATOR_DCID}")
     else:
-        # Simple hash as in Java code fallback
-        mcf_lines.append(
-            f"curator: dcid:dc/curator_{hash(curator_email) & 0xffffffff}")
+        curator_hash = int(
+            hashlib.sha256(curator_email.encode('utf-8')).hexdigest(),
+            16) & 0xffffffff
+        mcf_lines.append(f"curator: dcid:dc/curator_{curator_hash}")
 
     mcf_lines.append(f'dcid: "{dcid}"')
 
@@ -67,8 +92,6 @@ def convert_to_mcf(import_proto, dataset_to_source, test_time=15700000):
                 res_type = "dcid:IdResolutionWithoutKg"
     mcf_lines.append(f"entityResolutionType: {res_type}")
 
-
-
     # isPartOf
     dataset_name = import_proto.dataset_name
     source_id = None
@@ -76,11 +99,14 @@ def convert_to_mcf(import_proto, dataset_to_source, test_time=15700000):
         source_id = dataset_to_source[dataset_name]
     else:
         if dataset_name:
-            print(f"Warning: Source not found for dataset '{dataset_name}', skipping isPartOf and source")
+            print(
+                f"Warning: Source not found for dataset '{dataset_name}', skipping isPartOf and source"
+            )
 
     if source_id:
-        clean_dataset_name = dataset_name.replace(" ", "")
-        mcf_lines.append(f"isPartOf: dcid:dc/d/{source_id}_{clean_dataset_name}")
+        clean_dataset_name = clean_id(dataset_name)
+        mcf_lines.append(
+            f"isPartOf: dcid:dc/d/{source_id}_{clean_dataset_name}")
 
     mcf_lines.append(f'name: "{import_name}"')
     mcf_lines.append(f"provenance: dcid:{dcid}")
@@ -92,21 +118,22 @@ def convert_to_mcf(import_proto, dataset_to_source, test_time=15700000):
         dc_manifest_pb2.DataCommonsManifest.PLACE:
             "PlaceProvenance",
         dc_manifest_pb2.DataCommonsManifest.CURATED_STATVAR:
-            "StatVarProvenance",
+            "CuratedStatvarProvenance",
         dc_manifest_pb2.DataCommonsManifest.GENERATED_STATVAR:
-            "StatVarProvenance",
+            "GeneratedStatvarProvenance",
         dc_manifest_pb2.DataCommonsManifest.STATS:
-            "StatsProvenance",
+            "StatisticsProvenance",
         dc_manifest_pb2.DataCommonsManifest.AGGREGATED_STATS:
-            "StatsProvenance",
+            "StatisticsProvenance",
         dc_manifest_pb2.DataCommonsManifest.IMPUTED_STATS:
-            "StatsProvenance",
+            "StatisticsProvenance",
         dc_manifest_pb2.DataCommonsManifest.INTERMEDIATE_STATS:
-            "StatsProvenance",
+            "StatisticsProvenance",
     }
     category = import_proto.category
-    cat_dcid = cat_map.get(category, "UnknownProvenance")
-    mcf_lines.append(f"provenanceCategory: dcid:{cat_dcid}")
+    cat_dcid = cat_map.get(category)
+    if cat_dcid:
+        mcf_lines.append(f"provenanceCategory: dcid:{cat_dcid}")
 
     if import_proto.mcf_url:
         mcf_lines.append(f'resolvedTextMcfUrl: "{import_proto.mcf_url[0]}"')
@@ -125,7 +152,7 @@ def convert_dataset_sources_to_mcf(dataset_sources):
     out_nodes = []
 
     for ds in dataset_sources:
-        source_id = ds.name.replace(" ", "")
+        source_id = clean_id(ds.name)
         s_node_id = f"dcid:dc/s/{source_id}"
 
         s_props = {}
@@ -138,12 +165,12 @@ def convert_dataset_sources_to_mcf(dataset_sources):
             if domain:
                 s_props['domain'] = [f'"{domain}"']
 
-        s_props['provenance'] = ['dcid:dc/base/GeneratedGraphs']
+        s_props['provenance'] = [f'dcid:{DC_BASE_PREFIX}/GeneratedGraphs']
         s_props['typeOf'] = ['dcid:Source']
 
         d_nodes_out = []
         for d in ds.datasets:
-            dataset_id = d.name.replace(" ", "")
+            dataset_id = clean_id(d.name)
             d_node_id = f"dcid:dc/d/{source_id}_{dataset_id}"
 
             d_props = {}
@@ -154,7 +181,7 @@ def convert_dataset_sources_to_mcf(dataset_sources):
             if d.url:
                 d_props['url'] = [f'"{d.url}"']
 
-            d_props['provenance'] = ['dcid:dc/base/GeneratedGraphs']
+            d_props['provenance'] = [f'dcid:{DC_BASE_PREFIX}/GeneratedGraphs']
             d_props['typeOf'] = ['dcid:Dataset']
 
             lines = [f"Node: {d_node_id}"]
@@ -214,7 +241,7 @@ def extract_dataset_source_map(textproto_path):
         text_format.Merge(content, manifest)
         dataset_sources = getattr(manifest, 'dataset_source', [])
         for ds in dataset_sources:
-            source_id = ds.name.replace(" ", "")
+            source_id = clean_id(ds.name)
             for d in ds.datasets:
                 dataset_to_source[d.name] = source_id
     except Exception:
@@ -238,7 +265,8 @@ def process_directory(path):
         for file in files:
             if file.endswith(".textproto"):
                 textproto_path = os.path.join(root, file)
-                mcf_path = os.path.join(root, file.replace(".textproto", ".mcf"))
+                mcf_path = os.path.join(root,
+                                        file.replace(".textproto", ".mcf"))
 
                 with open(textproto_path, 'r') as f:
                     input_text = f.read()
