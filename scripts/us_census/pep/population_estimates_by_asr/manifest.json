@@ -20,6 +20,7 @@
                 "input_files/*"
             ],
             "cron_schedule": "0 05 * * 1",
+            "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 16,
                 "memory": 256,
