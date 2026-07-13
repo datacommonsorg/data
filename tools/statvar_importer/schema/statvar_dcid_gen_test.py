@@ -13,10 +13,15 @@
 # limitations under the License.
 
 import unittest
+from statvar_dcid_gen import apply_cumulative_property_dropping
 from statvar_dcid_gen import camel_to_snake
 from statvar_dcid_gen import generate_dcid_for_statvar
 from statvar_dcid_gen import get_dcid_name
 from statvar_dcid_gen import get_dcid_token
+from statvar_dcid_gen import order_dcid_properties
+from statvar_dcid_gen import parse_fixed_properties
+from statvar_dcid_gen import resolve_dcid_names
+from statvar_dcid_gen import strip_overlapping_prop_prefix
 
 
 class TestStatvarDcidGen(unittest.TestCase):
@@ -106,8 +111,145 @@ class TestStatvarDcidGen(unittest.TestCase):
         }
         dcid3 = generate_dcid_for_statvar(pvs3, config)
         self.assertEqual(
-            dcid3, 'test/ADULT_PERSON.GENDER--MALE__PLACE--URBAN')
+            dcid3, 'test/ADULT_PERSON.GENDER--MALE__PLACE--URBAN'
+        )
 
+    def test_parse_fixed_properties(self):
+        props = ['statType<>measuredValue', 'populationType']
+        res = parse_fixed_properties(props)
+        self.assertEqual(
+            res, {'statType': {'measuredValue'}, 'populationType': {''}}
+        )
+        default_res = parse_fixed_properties(None)
+        self.assertIn('statType', default_res)
+
+    def test_order_dcid_properties(self):
+        dcid_pvs = {'statType': 'measuredValue', 'gender': 'Female'}
+        fixed = {'statType': {'measuredValue'}}
+        ordered = order_dcid_properties(dcid_pvs, fixed)
+        self.assertEqual(ordered, ['gender'])
+        self.assertNotIn('statType', dcid_pvs)
+
+    def test_resolve_dcid_names(self):
+        pvs = {'statType': 'measuredValue', 'description': 'Ignore me'}
+        schema_nodes = {}
+        resolved = resolve_dcid_names(pvs, schema_nodes, {'description'})
+        self.assertEqual(resolved, {'statType': 'measuredValue'})
+
+    def test_edge_cases(self):
+        self.assertEqual(camel_to_snake(None), '')
+        self.assertIsNone(get_dcid_name(None, {}))
+        self.assertEqual(get_dcid_token(None), '')
+        self.assertEqual(generate_dcid_for_statvar(None), '')
+
+    def test_strip_overlapping_prop_prefix(self):
+        self.assertEqual(
+            strip_overlapping_prop_prefix(
+                'MeasurementQualifier_Annual', 'measurementQualifier'
+            ),
+            'Annual',
+        )
+        self.assertEqual(
+            strip_overlapping_prop_prefix(
+                'UNIT_PERCENT', 'unit', upper_case=True
+            ),
+            'PERCENT',
+        )
+        self.assertEqual(
+            strip_overlapping_prop_prefix('Person', 'populationType'),
+            'Person',
+        )
+
+    def test_generate_dcid_with_overlapping_prefix(self):
+        pvs = {
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'Person',
+            'measurementQualifier': 'MeasurementQualifier_Annual',
+        }
+        dcid = generate_dcid_for_statvar(pvs, {})
+        self.assertEqual(dcid, 'Annual_Count_Person')
+
+    def test_dcid_max_length_fallbacks(self):
+        # Test #3 fallback: use_value_names falls back to raw code when > max
+        schema_nodes = {
+            'Count': {
+                'name': '"ExtremelyLongDescriptiveCountNameOfManyWords"'
+            }
+        }
+        pvs = {
+            'statType': 'measuredValue',
+            'measuredProperty': 'Count',
+            'populationType': 'Person',
+        }
+        config = {
+            'statvar_dcid_value_name': True,
+            'statvar_dcid_max_length': 30,
+        }
+        dcid = generate_dcid_for_statvar(pvs, config, schema_nodes)
+        self.assertEqual(dcid, 'Count_Person')
+
+        # Test #4 fallback: cumulative dropping + deterministic hash
+        long_pvs = {
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'Person',
+            'age': 'Age_0_To_18_Years_Old',
+            'gender': 'Gender_Female_Or_Male',
+            'place': 'Place_California_Or_New_York',
+        }
+        short_config = {'statvar_dcid_max_length': 45}
+        dcid_hashed = generate_dcid_for_statvar(long_pvs, short_config)
+        self.assertTrue(len(dcid_hashed) <= 45)
+        self.assertTrue(dcid_hashed.startswith('Count_Person'))
+        self.assertIn('_', dcid_hashed)
+
+    def test_complex_edge_cases(self):
+        # 1. camel_to_snake complex cases
+        self.assertEqual(
+            camel_to_snake('HTTP2ServerResponse', delim='-'),
+            'http2server-response',
+        )
+        self.assertEqual(camel_to_snake('ALREADY_SNAKE'), 'already_snake')
+
+        # 2. get_dcid_name complex cases
+        schema_nodes = {
+            'Person': {'name': ' "  Complex Person Name  " '},
+            'Count': {'typeOf': 'Property'},
+            'BadNode': 'NotADict',
+        }
+        self.assertEqual(
+            get_dcid_name('un:Person', schema_nodes), 'Complex Person Name'
+        )
+        self.assertEqual(get_dcid_name('Count', schema_nodes), 'Count')
+        self.assertIsNone(get_dcid_name('BadNode', schema_nodes))
+
+        # 3. get_dcid_token complex cases (invalid regex warning recovery)
+        self.assertEqual(
+            get_dcid_token('Hello World!', remove_prefix='['), 'Hello_World'
+        )
+        self.assertEqual(
+            get_dcid_token('TEST_prefix_value', remove_prefix='TEST_'),
+            'Prefix_value',
+        )
+        self.assertEqual(get_dcid_token('...___...'), '')
+
+        # 4. parse_fixed_properties complex cases
+        props = ['statType<>measuredValue<>extra', '  populationType  <>  ', 12]
+        parsed = parse_fixed_properties(props)
+        self.assertEqual(
+            parsed,
+            {'statType': {'measuredValue<>extra'}, 'populationType': {''}},
+        )
+
+        # 5. apply_cumulative_property_dropping boundary cases
+        small_drop = apply_cumulative_property_dropping(
+            [('p1', 'VERY_LONG_CORE')],
+            [('p2', 'CONSTRAINT')],
+            max_len=5,
+            config={'statvar_dcid_hash_length': 8},
+        )
+        self.assertEqual(len(small_drop), 5)
 
 
 if __name__ == '__main__':
