@@ -60,13 +60,29 @@ csv.field_size_limit(sys.maxsize)
 ENTITY_PREFIXES = ("dcid:", "dcs:", "schema:")
 
 
+def has_entity_prefix(s):
+    """Checks if a string starts with any common entity prefix (dcid:, dcs:, schema:)."""
+    s = s.strip()
+    for prefix in ENTITY_PREFIXES:
+        prefix_name = prefix.rstrip(":")
+        if s.startswith(prefix_name):
+            rem = s[len(prefix_name):].lstrip()
+            if rem.startswith(":"):
+                return True
+    return False
+
+
 def strip_prefix(s):
     """Strips common prefixes (dcid:, dcs:, schema:) from a string."""
-    # Strip common prefixes
+    s = s.strip()
     for prefix in ENTITY_PREFIXES:
-        if s.startswith(prefix):
-            return s[len(prefix):]
+        prefix_name = prefix.rstrip(":")
+        if s.startswith(prefix_name):
+            rem = s[len(prefix_name):].lstrip()
+            if rem.startswith(":"):
+                return rem[1:].strip()
     return s
+
 
 
 def is_quoted(s):
@@ -216,8 +232,8 @@ def generate_provisional_nodes(scan_dir,
                         key = match.group(1).strip()
                         value_str = match.group(2).strip()
 
-                        # If explicitly defining dcid as a property, use that as the node ID
-                        if key == "dcid":
+                        # If explicitly defining dcid or Node as a property, use that as the node ID
+                        if key in ("dcid", "Node"):
                             current_node_id = strip_prefix(
                                 strip_quotes(value_str))
                             continue
@@ -240,7 +256,7 @@ def generate_provisional_nodes(scan_dir,
                             clean_token = strip_quotes(token)
 
                             # Only strict prefixes are references
-                            if clean_token.startswith(ENTITY_PREFIXES):
+                            if has_entity_prefix(clean_token):
                                 ref_id = strip_prefix(clean_token)
                                 referenced_values.add(ref_id)
 
