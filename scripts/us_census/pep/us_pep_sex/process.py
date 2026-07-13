@@ -995,7 +995,7 @@ class PopulationEstimateBySex:
         Returns:
             None
         """
-        ip_files = os.listdir(self._input_path)
+        ip_files = sorted(os.listdir(self._input_path))
         ip_files = [self._input_path + os.sep + file for file in ip_files]
 
         # Creating Output Directory
@@ -1213,7 +1213,8 @@ def add_future_year_urls():
 
                     try:
                         check_url = requests.head(url_to_check,
-                                                  allow_redirects=True)
+                                                  allow_redirects=True,
+                                                  timeout=10)
                         if check_url.status_code == 200:
                             _FILES_TO_DOWNLOAD.append(
                                 {"download_path": url_to_check})
@@ -1221,6 +1222,7 @@ def add_future_year_urls():
                     except requests.exceptions.RequestException as e:
                         logging.error(
                             f"URL is not accessible {url_to_check} due to {e}")
+                    time.sleep(0.05)
 
             else:  # This URL does not contain {i}, so we only need to process it once per year
                 url_to_check = url.format(YEAR=YEAR)
@@ -1231,7 +1233,8 @@ def add_future_year_urls():
 
                 try:
                     check_url = requests.head(url_to_check,
-                                              allow_redirects=True)
+                                              allow_redirects=True,
+                                              timeout=10)
                     if check_url.status_code == 200:
                         _FILES_TO_DOWNLOAD.append(
                             {"download_path": url_to_check})
@@ -1246,6 +1249,7 @@ def add_future_year_urls():
                 except requests.exceptions.RequestException as e:
                     logging.error(
                         f"URL is not accessible {url_to_check} due to {e}")
+                time.sleep(0.05)
 
 
 def cleanup():
@@ -1303,46 +1307,61 @@ def download_files():
             continue
 
         headers = {'User-Agent': 'Mozilla/5.0'}
-        try:
-            with session.get(url, stream=True, timeout=120,
-                             headers=headers) as response:
-                response.raise_for_status()
+        max_file_retries = 3
+        file_download_success = False
 
-                content_type = response.headers.get('Content-Type', '')
+        for attempt in range(max_file_retries):
+            try:
+                # Dynamically increase timeout on subsequent retries
+                current_timeout = 120 + (attempt * 60)
+                with session.get(url, stream=True, timeout=current_timeout,
+                                 headers=headers) as response:
+                    response.raise_for_status()
 
-                # Minimal fix: Log error and continue to skip HTML pages
-                if 'html' in content_type.lower():
-                    logging.error(
-                        f"Server returned HTML error page for URL: {url}. Skipping."
-                    )
-                    continue
+                    content_type = response.headers.get('Content-Type', '')
 
-                if response.status_code == 200:
-                    with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-                        for chunk in response.iter_content(chunk_size=8192):
-                            if chunk:
-                                tmp_file.write(chunk)
-                        tmp_file_path = tmp_file.name
+                    # Minimal fix: Log error and continue to skip HTML pages
+                    if 'html' in content_type.lower():
+                        logging.error(
+                            f"Server returned HTML error page for URL: {url}. Skipping."
+                        )
+                        break
 
-                    # Copy to local destination
-                    shutil.copy(
-                        tmp_file_path,
-                        os.path.join(_INPUT_FILE_PATH, file_name_to_save))
+                    if response.status_code == 200:
+                        with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+                            for chunk in response.iter_content(chunk_size=8192):
+                                if chunk:
+                                    tmp_file.write(chunk)
+                            tmp_file_path = tmp_file.name
 
-                    # Move to gcs destination (optimized from shutil.copy + os.remove)
-                    shutil.move(
-                        tmp_file_path,
-                        os.path.join(_GCS_FOLDER_PERSISTENT_PATH,
-                                     file_name_to_save))
+                        # Copy to local destination
+                        shutil.copy(
+                            tmp_file_path,
+                            os.path.join(_INPUT_FILE_PATH, file_name_to_save))
 
-                    file_to_download['is_downloaded'] = True
-                    logging.info(f"Downloaded file: {url}")
+                        # Move to gcs destination (optimized from shutil.copy + os.remove)
+                        shutil.move(
+                            tmp_file_path,
+                            os.path.join(_GCS_FOLDER_PERSISTENT_PATH,
+                                         file_name_to_save))
 
-        except Exception as e:
-            file_to_download['is_downloaded'] = False
-            logging.error(f"Error downloading {url}: {e}")
-            raise
-        time.sleep(1)
+                        file_to_download['is_downloaded'] = True
+                        logging.info(f"Downloaded file: {url}")
+                        file_download_success = True
+                        break
+
+            except Exception as e:
+                logging.warning(f"Attempt {attempt + 1} failed downloading {url}: {e}")
+                if attempt < max_file_retries - 1:
+                    # Exponential backoff: 5s, 10s...
+                    time.sleep(5 * (attempt + 1))
+                else:
+                    file_to_download['is_downloaded'] = False
+                    logging.error(f"Failed to download {url} after {max_file_retries} attempts.")
+                    raise
+
+        if file_download_success:
+            time.sleep(1)
 
     return True
 

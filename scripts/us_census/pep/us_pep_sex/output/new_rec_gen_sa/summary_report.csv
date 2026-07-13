@@ -1,0 +1,3 @@
+StatVar,NumPlaces,NumObservations,MinValue,MaxValue,NumObservationsDates,MinDate,MaxDate,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Person_Female,1,111,3.7227E7,1.67227921E8,111,1900,2020,[dcAggregate/CensusPEPSurvey_PartialAggregate],[],[],[P1Y]
+Count_Person_Male,1,111,3.8867E7,1.62256202E8,111,1900,2020,[dcAggregate/CensusPEPSurvey_PartialAggregate],[],[],[P1Y]
