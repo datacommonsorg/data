@@ -17,6 +17,15 @@
       }
     },
     {
+      "rule_id": "check_goldens_cpi_w",
+      "description": "Validates cpi_w data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_cpi_w.csv",
+        "input_files": "../../input1/genmcf/summary_report.csv"
+      }
+    },
+    {
       "rule_id": "check_goldens_c_cpi_u",
       "description": "Validates c_cpi_u data against its golden summary report.",
       "validator": "GOLDENS_CHECK",
