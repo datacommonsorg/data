@@ -2,7 +2,7 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_deleted_records_percent",
+            "rule_id": "Check_deleted_records_percent",
             "description": "Strictly enforce historical deletion average threshold of 0.1%",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
