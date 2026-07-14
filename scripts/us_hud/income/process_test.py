@@ -42,6 +42,23 @@ class ProcessTest(unittest.TestCase):
         )
         year = 1997
         self.assertEqual(process.get_url(year), '')
+        
+        # Test the current year URL generation, as process.py now supports processing up to the current year
+        import datetime
+        current_year = datetime.date.today().year
+        suffix = str(current_year)[-2:]
+        self.assertEqual(
+            process.get_url(current_year),
+            f'https://www.huduser.gov/portal/datasets/il/il{suffix}/Section8-FY{suffix}.xlsx'
+        )
+
+        # Test the next year (today.year + 1) URL generation, matching the upper limit of process.py's loop range
+        next_year = current_year + 1
+        next_suffix = str(next_year)[-2:]
+        self.assertEqual(
+            process.get_url(next_year),
+            f'https://www.huduser.gov/portal/datasets/il/il{next_suffix}/Section8-FY{next_suffix}.xlsx'
+        )
 
     def test_process_with_dynamic_csv(self):
         matches = {'dcs:geoId/02110': 'dcs:geoId/0236400'}
