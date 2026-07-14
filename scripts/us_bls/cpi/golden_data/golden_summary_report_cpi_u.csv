@@ -1,2 +1,2 @@
-"MinDate","NumPlaces","Units","ScalingFactors","MeasurementMethods","StatVar","observationPeriods"
-"1947-01","1","[IndexPointBasePeriod1982To1984Equals100]","[]","[BLSUnchained]","dc/x6l3mg60hpe7c","[]"
+"NumPlaces","ScalingFactors","observationPeriods","Units","MinDate","MeasurementMethods","StatVar"
+"1","[]","[]","[IndexPointBasePeriod1982To1984Equals100]","1947-01","[BLSUnchained]","dc/x6l3mg60hpe7c"
