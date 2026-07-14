@@ -18,15 +18,16 @@ import csv
 import io
 import os
 import sys
+
+_CODEDIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(1, _CODEDIR)
+sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
+
 from absl import app
 from absl import flags
 from absl import logging
 import download_util
 from file_util import FileIO
-
-_CODEDIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(1, _CODEDIR)
-sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
