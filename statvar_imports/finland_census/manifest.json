@@ -5,7 +5,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://stat.fi/en",
+            "provenance_url": "https://pxdata.stat.fi/PxWeb/pxweb/en/StatFin/StatFin__vaerak/",
             "provenance_description": "National statistical data and socio-economic indicators for Finland, provided by Statistics Finland",
             "scripts": [
                 "run.sh"
