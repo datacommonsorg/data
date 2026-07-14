@@ -447,8 +447,6 @@ def get_default_config() -> dict:
             '',
         'statvar_dcid_upper_case':
             False,
-        'statvar_dcid_remove_prefix':
-            '',
     }
 
 
