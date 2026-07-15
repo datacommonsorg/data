@@ -14,7 +14,7 @@
 
 import os
 import unittest
-from .download_utils import *
+from download_utils import *
 
 
 class TestCommonUtil(unittest.TestCase):
