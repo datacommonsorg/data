@@ -22,7 +22,7 @@
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/golden_observations.csv",
-                "input_files": "../../WorldBank.csv"
+                "input_files": "../../../../output/WorldBank.csv"
             }
         }
     ]
