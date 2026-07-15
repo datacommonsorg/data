@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": { "threshold": 0.1}
+    },
+    {
+      "rule_id": "check_goldens_currency",
+      "description": "Validates data for currency input",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_currency.csv",
+        "input_files": "../../input0/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_interest",
+      "description": "Validates data for interest input",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_interest.csv",
+        "input_files": "../../input1/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_principal",
+      "description": "Validates data for principal input",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_principal.csv",
+        "input_files": "../../input2/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_disbursed",
+      "description": "Validates data for disbursed input",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_disbursed.csv",
+        "input_files": "../../input3/genmcf/summary_report.csv"
+      }
+    }
+  ]
+}
