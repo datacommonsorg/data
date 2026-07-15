@@ -77,7 +77,7 @@
             "description": "Verifies male latest output CSV matches established golden observations",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../golden_data/nces_male_output_latest_golden_summary_report.csv",
+                "golden_files": "../../../golden_data/nces_male_output_latest_golden_observations.csv",
                 "input_files": "../../nces_male_output_latest.csv"
             }
         }
