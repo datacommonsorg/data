@@ -5,7 +5,7 @@
             "rule_id": "no_deletions_for_monthly_rate",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT * FROM differ WHERE variableMeasured = 'Monthly_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate'",
+                "query": "SELECT * FROM differ WHERE StatVar = 'Monthly_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate'",
                 "condition": "DELETED = 0"
             }
         },
@@ -13,15 +13,16 @@
             "rule_id": "100_deletions_for_daily_rate",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT * FROM differ WHERE variableMeasured = 'Daily_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate'",
+                "query": "SELECT * FROM differ WHERE StatVar = 'Daily_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate'",
                 "condition": "DELETED <= 100"
             }
         },
         {
-            "rule_id": "check_deleted_records_count",
-            "validator": "DELETED_RECORDS_COUNT",
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted points is within the threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 100
+                "threshold": 0.1
             }
         }
     ]
