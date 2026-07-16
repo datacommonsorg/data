@@ -79,7 +79,7 @@ def nc_to_df(nc_path, period, spi_col, start_date, end_date):
     df['period'] = f'"[{int(period)} dcs:Monthly]"'
     # Adding observation period in output csv
     df['observationPeriod'] = f'P{int(period)}M'
-    df['place'] = df[['lat', 'lon']].apply(to_one_degree_grid_place, axis=1)
+    df['place'] = df[['lat', 'lon']].apply(to_one_degree_grid_place, axis=1, raw=True)
     df = df.drop('lat', axis=1)
     df = df.drop('lon', axis=1)
     return df
