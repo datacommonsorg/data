@@ -49,15 +49,6 @@ flags.DEFINE_string('end_date', DEFAULT_END_DATE,
                     'Dash separated start date. Defaults to the running date.')
 
 
-def to_one_degree_grid_place(latlon):
-    """Latlng data to grid format.
-
-  Change longitude from 0 ~ 360 scale to -180 ~ 180 scale.
-  Change coordinate from middle of the grid to north west point of the grid.
-  """
-    return f'grid_1/{math.floor(latlon[0])}_{math.floor((latlon[1]+180)%360 - 180)}'
-
-
 def nc_to_df(nc_path, period, spi_col, start_date, end_date):
     """Read a netcdf and parse to df."""
     logging.info(f"Read a netcdf file - {nc_path} and parse to df.")
@@ -79,7 +70,9 @@ def nc_to_df(nc_path, period, spi_col, start_date, end_date):
     df['period'] = f'"[{int(period)} dcs:Monthly]"'
     # Adding observation period in output csv
     df['observationPeriod'] = f'P{int(period)}M'
-    df['place'] = df[['lat', 'lon']].apply(to_one_degree_grid_place, axis=1, raw=True)
+    lat_floor = (df['lat'] // 1).astype(int)
+    lon_floor = (((df['lon'] + 180) % 360 - 180) // 1).astype(int)
+    df['place'] = 'grid_1/' + lat_floor.astype(str) + '_' + lon_floor.astype(str)
     df = df.drop('lat', axis=1)
     df = df.drop('lon', axis=1)
     return df
