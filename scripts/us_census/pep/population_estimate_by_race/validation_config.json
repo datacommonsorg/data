@@ -5,7 +5,7 @@
       "rule_id": "check_deleted_records_percent",
       "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
       "validator": "DELETED_RECORDS_PERCENT",
-      "params": { "threshold": 0.1}
+      "params": { "threshold": 0.1 }
     },
     {
       "rule_id": "check_goldens_national",
@@ -32,6 +32,33 @@
       "params": {
         "golden_files": "../../../../golden_data/golden_summary_report_after_2000.csv",
         "input_files": "../../input2/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "Check_goldens_output_csv_before_2000",
+      "description": "Verifies the generated output CSV data matches established critical golden records",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_before_2000.csv",
+        "input_files": "../../../../output/USA_Population_Count_by_Race_before_2000.csv"
+      }
+    },
+    {
+      "rule_id": "Check_goldens_output_csv_after_2000",
+      "description": "Verifies the generated output CSV data matches established critical golden records",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_after_2000.csv",
+        "input_files": "../../../../output/USA_Population_Count_by_Race_county_after_2000.csv"
+      }
+    },
+    {
+      "rule_id": "Check_goldens_output_csv_state",
+      "description": "Verifies the generated output CSV data matches established critical golden records",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_state.csv",
+        "input_files": "../../../../output/USA_Population_Count_by_Race_National_state_2000.csv"
       }
     }
   ]
