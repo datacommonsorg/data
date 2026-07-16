@@ -22,18 +22,18 @@ To process  data and generate statistical variables, use the following command f
 **For Test Data Run**
 ```
 python3 tools/statvar_importer/stat_var_processor.py \
-  --input_data=statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/testdata/NNDSS_Weekly_Data.csv \
-  --pv_map=statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/nndss_weekly_pvmap.csv \
-  --config_file=statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/nndss_weekly_metadata.csv \
-  --output_path=statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/testdata/nndss_weekly_output 
+  --input_data=statvar_imports/cdc/CDCWonder_NNDSS_Infectious_Weekly/testdata/NNDSS_Weekly_Data.csv \
+  --pv_map=statvar_imports/cdc/CDCWonder_NNDSS_Infectious_Weekly/nndss_weekly_pvmap.csv \
+  --config_file=statvar_imports/cdc/CDCWonder_NNDSS_Infectious_Weekly/nndss_weekly_metadata.csv \
+  --output_path=statvar_imports/cdc/CDCWonder_NNDSS_Infectious_Weekly/testdata/nndss_weekly_output 
 ```
 
 **For Main data run**
 ```bash
 python3 tools/statvar_importer/stat_var_processor.py \
-  --input_data=statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/input_files/NNDSS_Weekly_Data.csv \
-  --pv_map=statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/nndss_weekly_pvmap.csv \
-  --config_file=statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/nndss_weekly_metadata.csv \
+  --input_data=statvar_imports/cdc/CDCWonder_NNDSS_Infectious_Weekly/input_files/NNDSS_Weekly_Data.csv \
+  --pv_map=statvar_imports/cdc/CDCWonder_NNDSS_Infectious_Weekly/nndss_weekly_pvmap.csv \
+  --config_file=statvar_imports/cdc/CDCWonder_NNDSS_Infectious_Weekly/nndss_weekly_metadata.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-  --output_path=statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/output/nndss_weekly_output
+  --output_path=statvar_imports/cdc/CDCWonder_NNDSS_Infectious_Weekly/output/nndss_weekly_output
 ```
