@@ -22,7 +22,7 @@
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/golden_observations.csv",
-                "input_files": "../../../../output/scripts/us_hud/income/output/output_all_years.csv"
+                "input_files": "../../../../output/output_all_years.csv"
             }
         }
     ]
