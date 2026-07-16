@@ -75,9 +75,8 @@ def nc_to_df(nc_path, period, spi_col, start_date, end_date):
     # Coordinates are floored to map them to the grid's corner.
     lat_floor = (df['lat'] // 1).astype(int)
     lon_floor = (((df['lon'] + 180) % 360 - 180) // 1).astype(int)
-    df['place'] = (
-        'grid_1/' + lat_floor.astype(str) + '_' + lon_floor.astype(str)
-    )
+    df['place'] = ('grid_1/' + lat_floor.astype(str) + '_' +
+                   lon_floor.astype(str))
     df = df.drop('lat', axis=1)
     df = df.drop('lon', axis=1)
     return df
