@@ -70,6 +70,9 @@ def nc_to_df(nc_path, period, spi_col, start_date, end_date):
     df['period'] = f'"[{int(period)} dcs:Monthly]"'
     # Adding observation period in output csv
     df['observationPeriod'] = f'P{int(period)}M'
+    # Convert latitude and longitude to 1-degree grid format.
+    # Longitude is converted from 0-360 scale to -180-180 scale.
+    # Coordinates are floored to map them to the grid's corner.
     lat_floor = (df['lat'] // 1).astype(int)
     lon_floor = (((df['lon'] + 180) % 360 - 180) // 1).astype(int)
     df['place'] = 'grid_1/' + lat_floor.astype(str) + '_' + lon_floor.astype(str)
