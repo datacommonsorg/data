@@ -52,26 +52,32 @@ def get_variable_codes() -> tuple[str, str, str]:
         )
         if not metadata or not isinstance(metadata, dict):
             raise RuntimeError('Failed to fetch valid JSON metadata from PxWeb API.')
+
+        area_code = None
+        info_code = None
+        year_code = None
+
+        # Cleaner matching using case-insensitive checks
+        for var in metadata.get('variables', []):
+            text = var.get('text', '').lower()
+            code = var.get('code')
+
+            if 'area' in text or 'alue' in text:
+                area_code = code
+            elif 'information' in text or 'tiedot' in text:
+                info_code = code
+            elif 'year' in text or 'vuosi' in text:
+                year_code = code
+
+        if not (area_code and info_code and year_code):
+            raise RuntimeError(
+                f'Failed to map API codes: area={area_code}, info={info_code}, year={year_code}'
+            )
+
+        return area_code, info_code, year_code
     except Exception as e:
         logging.error('Error fetching table metadata: %s', e)
         raise
-
-    area_code = None
-    info_code = None
-    year_code = None
-
-    # Cleaner matching using case-insensitive checks
-    for var in metadata.get('variables', []):
-        text = var.get('text', '').lower()
-        code = var.get('code')
-
-        if 'area' in text or 'alue' in text:
-            area_code = code
-        elif 'information' in text or 'tiedot' in text:
-            info_code = code
-        elif 'year' in text or 'vuosi' in text:
-            year_code = code
-    return area_code, info_code, year_code
 
 
 def format_csv_content(raw_csv_content: str) -> str:
@@ -128,17 +134,17 @@ def download_data(output_path: str) -> None:
 
         if not content_bytes:
             raise RuntimeError('Failed to download CSV data: empty response.')
+
+        content = content_bytes.decode('utf-8-sig')
+        formatted_content = format_csv_content(content)
+
+        with FileIO(output_path, 'w') as f:
+            f.write(formatted_content)
+
+        logging.info('Successfully downloaded data and saved to %s', output_path)
     except Exception as e:
-        logging.error('Error downloading CSV data: %s', e)
+        logging.error('Failed to download and save CSV data: %s', e)
         raise
-
-    content = content_bytes.decode('utf-8-sig')
-    formatted_content = format_csv_content(content)
-
-    with FileIO(output_path, 'w') as f:
-        f.write(formatted_content)
-
-    logging.info('Successfully downloaded data and saved to %s', output_path)
 
 
 def main(_) -> None:
