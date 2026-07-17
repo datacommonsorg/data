@@ -15,6 +15,15 @@
             "params": {
                 "golden_files": "../../../../golden_data/golden_summary_report.csv"
             }
+        },
+        {
+            "rule_id": "Check_goldens_output_csv_state",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../Eurostats_NUTS2_Enrollment.csv"
+            }
         }
     ]
 }
