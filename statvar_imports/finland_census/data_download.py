@@ -20,7 +20,6 @@ import os
 import sys
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(1, _CODEDIR)
 sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
 
 from absl import app
@@ -44,14 +43,18 @@ def get_variable_codes() -> tuple[str, str, str]:
     """Fetches table metadata and maps structural concepts to API codes."""
     logging.info('Fetching table metadata from %s...', API_URL)
     
-    metadata = download_util.request_url(
-        url=API_URL,
-        output='json',
-        retries=3,
-        retry_secs=5,
-    )
-    if not metadata or not isinstance(metadata, dict):
-        raise RuntimeError('Failed to fetch valid JSON metadata from PxWeb API.')
+    try:
+        metadata = download_util.request_url(
+            url=API_URL,
+            output='json',
+            retries=3,
+            retry_secs=5,
+        )
+        if not metadata or not isinstance(metadata, dict):
+            raise RuntimeError('Failed to fetch valid JSON metadata from PxWeb API.')
+    except Exception as e:
+        logging.error('Error fetching table metadata: %s', e)
+        raise
 
     area_code = None
     info_code = None
@@ -72,32 +75,18 @@ def get_variable_codes() -> tuple[str, str, str]:
 
 
 def format_csv_content(raw_csv_content: str) -> str:
-    """Safely prepends a title block to the CSV payload using standard CSV writing."""
-    if not raw_csv_content or not raw_csv_content.strip():
-        return raw_csv_content
+    """Safely prepends a title block to the CSV matching the pvmap layout."""
+    clean_content = raw_csv_content.strip()
+    header_line = clean_content.split('\n', 1)[0]
+    num_columns = len(next(csv.reader([header_line])))
 
-    # Read incoming CSV properly to avoid newline/comma split issues
-    csv_file = io.StringIO(raw_csv_content.strip())
-    reader = csv.reader(csv_file)
-    header = next(reader)
-    rows = list(reader)
-
-    num_columns = len(header)
     title = "Key figures on population by Area, Information and Year"
-    # Title and blank lines are added to match the pvmap layout
-    # Construct the padded rows cleanly without manual string multiplication
-    title_row = [title] + [''] * (num_columns - 1)
-    blank_row = [''] * num_columns
-
     output = io.StringIO()
     writer = csv.writer(output, lineterminator='\n')
-    
-    writer.writerow(title_row)
-    writer.writerow(blank_row)
-    writer.writerow(header)
-    writer.writerows(rows)
+    writer.writerow([title] + [''] * (num_columns - 1))
+    writer.writerow([''] * num_columns)
 
-    return output.getvalue()
+    return output.getvalue() + clean_content + '\n'
 
 
 def download_data(output_path: str) -> None:
@@ -127,22 +116,25 @@ def download_data(output_path: str) -> None:
     }
 
     logging.info('Sending POST query to retrieve CSV data...')
-    content_bytes = download_util.request_url(
-        url=API_URL,
-        params=query,
-        method='POST',
-        output='bytes',
-        retries=3,
-        retry_secs=5,
-    )
-    
-    if not content_bytes:
-        raise RuntimeError('Failed to download CSV data: empty response.')
+    try:
+        content_bytes = download_util.request_url(
+            url=API_URL,
+            params=query,
+            method='POST',
+            output='bytes',
+            retries=3,
+            retry_secs=5,
+        )
+
+        if not content_bytes:
+            raise RuntimeError('Failed to download CSV data: empty response.')
+    except Exception as e:
+        logging.error('Error downloading CSV data: %s', e)
+        raise
 
     content = content_bytes.decode('utf-8-sig')
     formatted_content = format_csv_content(content)
 
-    # Trust the imported FileIO dependency entirely; drop the redundant fallback
     with FileIO(output_path, 'w') as f:
         f.write(formatted_content)
 

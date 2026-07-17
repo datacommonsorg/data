@@ -17,6 +17,6 @@ set -e
 mkdir -p input_files
 mkdir -p output_files
 
-python data_download.py --output_path=./input_files/finland_census_input.csv
+python3 data_download.py --output_path=./input_files/finland_census_input.csv
 
-python ../../tools/statvar_importer/stat_var_processor.py --input_data="input_files/*.csv" --pv_map="finland_census_pvmap.csv" --config_file="finland_census_metadata.csv" --output_path="output_files/finland_census_output" --existing_statvar_mcf="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+python3 ../../tools/statvar_importer/stat_var_processor.py --input_data="input_files/*.csv" --pv_map="finland_census_pvmap.csv" --config_file="finland_census_metadata.csv" --output_path="output_files/finland_census_output" --existing_statvar_mcf="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
