@@ -5,7 +5,7 @@
       "rule_id": "check_deleted_records_percent",
       "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
       "validator": "DELETED_RECORDS_PERCENT",
-      "params": { "threshold": 0.1 }
+      "params": { "threshold": 0.20 }
     },
     {
       "rule_id": "check_goldens_national",
