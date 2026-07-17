@@ -21,7 +21,7 @@
             "description": "Verifies the generated output CSV data matches established critical golden records",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/golden_observations_national.csv",
+                "golden_files": "../../../../golden_data/golden_observations.csv",
                 "input_files": "../../../../output_files/usa_annual_population.csv"
             }
         }
