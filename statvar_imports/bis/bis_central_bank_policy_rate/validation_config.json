@@ -24,7 +24,7 @@
             "params": {
                 "threshold": 0.1
             }
-        }
+        },
         {
             "rule_id": "check_goldens_summary_report",
             "validator": "GOLDENS_CHECK",
