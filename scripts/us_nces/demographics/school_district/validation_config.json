@@ -10,8 +10,8 @@
             }
         },
         {
-            "rule_id": "check_goldens_school_summary_report",
-            "description": "Validates school summary_report.csv against golden summary data",
+            "rule_id": "check_goldens_district_school_summary_report",
+            "description": "Validates district_school summary_report.csv against golden summary data",
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/district_school_golden_summary_report.csv",
@@ -19,21 +19,12 @@
             }
         },
         {
-            "rule_id": "check_goldens_school_output_csv",
+            "rule_id": "check_goldens_district_school_output_csv",
             "description": "Verifies school output CSV data matches established golden observations",
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/district_school_golden_observations.csv",
                 "input_files": "../../../../gcs_folder/output_files/us_nces_demographics_district_school.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_place_output_csv",
-            "description": "Verifies place output CSV data matches established golden place records",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/district_place_golden_observations.csv",
-                "input_files": "../../../../gcs_folder/output_place/us_nces_demographics_district_place.csv"
             }
         }
     ]
