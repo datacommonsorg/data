@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": { "threshold": 0.1}
+    },
+    {
+      "rule_id": "check_goldens_summary_gpcc_spi",
+      "description": "Validates gpcc_spi data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_gpcc_spi.csv",
+        "input_files": "../../input0/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_gpcc_spi_aggregation",
+      "description": "Validates gpcc_spi_aggregation data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_gpcc_spi_aggregation.csv",
+        "input_files": "../../input1/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_drought_spi_9m_polygon_place_svobs",
+      "description": "Validates drought_spi_9m_polygon_place_svobs data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_drought_spi_9m_polygon_place_svobs.csv",
+        "input_files": "../../input2/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_drought_spi_9m_polygon_svobs",
+      "description": "Validates drought_spi_9m_polygon_svobs data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_drought_spi_9m_polygon_svobs.csv",
+        "input_files": "../../input4/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_output_csv_gpcc_spi_aggregation",
+      "description": "Verifies the generated gpcc_spi_aggregation output CSV data matches established critical golden records",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_gpcc_spi_aggregation.csv",
+        "input_files": "../../../../output_files/events_spi_9m_polygon/event_svobs/drought_spi_9m_polygon_svobs.csv"
+      }
+    }
+  ]
+}
