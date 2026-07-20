@@ -23,6 +23,27 @@
                 "golden_files": "../../../../golden_data/golden_observations.csv",
                 "input_files": "../../../../output/*/*.csv"
             }
+        },
+        {
+            "rule_id": "check_max_date_latest",
+            "description": "Checks that the latest date in the stats summary is from the current year.",
+            "validator": "MAX_DATE_LATEST",
+            "params": {}
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Checks if the MaxDate is the same for all StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        },
+        {
+            "rule_id": "check_max_date_previous_month",
+            "description": "Checks that the max date is the previous month.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "strptime(substring(MaxDate, 1, 7), '%Y-%m') = date_trunc('month', today() - interval 1 month)"
+            }
         }
     ]
 }
