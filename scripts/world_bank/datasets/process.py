@@ -32,7 +32,7 @@ flags.DEFINE_string("historical_file", "bq-results-20250423.csv",
                     "historical file name")
 flags.DEFINE_string(
     'historical_gcs_path',
-    'https://storage.mtls.cloud.google.com/unresolved_mcf/world_bank/datasets/deleted_historical_data_06_2026.csv',
+    'gs://unresolved_mcf/world_bank/datasets/deleted_historical_data_06_2026.csv',
     'GCS path to the deleted historical data CSV file')
 
 DCID_MAP = {}

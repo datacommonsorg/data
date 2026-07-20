@@ -13,7 +13,8 @@
             "rule_id": "check_goldens_summary_report",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report.csv"
+                "golden_files": "../../../../golden_data/golden_summary_report.csv",
+                "input_files": "../../input0/genmcf/summary_report.csv"
             }
         },
         {
