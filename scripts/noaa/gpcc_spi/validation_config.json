@@ -49,7 +49,7 @@
       "validator": "GOLDENS_CHECK",
       "params": {
         "golden_files": "../../../../golden_data/golden_observations_gpcc_spi_aggregation.csv",
-        "input_files": "../../../../output_files/events_spi_9m_polygon/event_svobs/drought_spi_9m_polygon_svobs.csv"
+        "input_files": "../../../../output_files/aggregations/*.csv"
       }
     }
   ]
