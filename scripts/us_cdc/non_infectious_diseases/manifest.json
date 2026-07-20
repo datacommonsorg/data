@@ -16,7 +16,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "data/output/NORS_NonInfectious_Disease.tmcf",
-                    "cleaned_csv": "data/output/NORS_NonInfectious_Disease.csv"
+                    "cleaned_csv": "data/output/NORS_NonInfectious_Disease.csv",
+                    "node_mcf": "data/output/NORS_NonInfectious_Disease.mcf"
                 }
             ],
             "cron_schedule": "0 2 15 * *",
