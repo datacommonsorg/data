@@ -39,10 +39,9 @@ python3 ../../../util/download_util_script.py --download_url="https://nces.ed.go
 ### Run StatVar Processor
 To process the downloaded data into Data Commons CSV and TMCF format:
 ```bash
-python3 stat_var_processor.py \
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data='source_files/*.xlsx' \
   --pv_map='pvmap.csv' \
-  --config='metadata.csv' \
+  --config_file='metadata.csv' \
   --output_path='output/nces_steam_degree' \
   --statvar_dcid_remap_csv='dcid_remap.csv'
-```
