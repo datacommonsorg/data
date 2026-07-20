@@ -42,6 +42,42 @@
         "golden_files": "../../../../golden_data/golden_summary_report_disbursed.csv",
         "input_files": "../../input3/genmcf/summary_report.csv"
       }
+    },
+    {
+            "rule_id": "Check_goldens_output_csv_currency",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations_currency.csv",
+                "input_files": "../../../../output/currency/currency.csv"
+        }
+    },
+    {
+            "rule_id": "Check_goldens_output_csv_disbursed",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations_disbursed.csv",
+                "input_files": "../../../../output/disbursed/disbursed_output.csv"
+        }
+    },
+    {
+            "rule_id": "Check_goldens_output_csv_interest",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations_interest.csv",
+                "input_files": "../../../../output/interest/interest_output.csv"
+        }
+    },
+    {
+            "rule_id": "Check_goldens_output_csv_principal",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations_principal.csv",
+                "input_files": "../../../../output/principal/principal_output.csv"
+        }
     }
   ]
 }
