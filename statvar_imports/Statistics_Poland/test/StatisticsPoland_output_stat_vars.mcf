@@ -1,0 +1,611 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/Statistics_Poland/test/StatisticsPoland_input.csv --pv_map=statvar_imports/Statistics_Poland/StatisticsPoland_pvmap.csv --output_path=statvar_imports/Statistics_Poland/test/StatisticsPoland_output --config_file=statvar_imports/Statistics_Poland/Statistics_Poland_metadata.csv" on 2025-12-19 10:33:53.138805
+
+Node: dcid:Count_Person_0To2Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 2 Years]
+
+Node: dcid:Count_Person_0To2Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 2 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_0To2Years_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 2 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_0To2Years_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 2 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_0To2Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 2 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_0To2Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 2 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_0To2Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 2 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_0To2Years_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 2 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_0To2Years_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 2 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_13To15Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [13 15 Years]
+
+Node: dcid:Count_Person_13To15Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [13 15 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_13To15Years_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [13 15 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_13To15Years_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [13 15 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_13To15Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [13 15 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_13To15Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [13 15 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_13To15Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [13 15 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_13To15Years_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [13 15 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_13To15Years_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [13 15 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_16To19Years_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [16 19 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_16To19Years_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [16 19 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_16To19Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [16 19 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_16To19Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [16 19 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_16To19Years_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [16 19 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_16To19Years_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [16 19 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_20To24Years_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_20To24Years_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_20To24Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_20To24Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_25To34Years_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 34 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_25To34Years_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 34 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_25To34Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 34 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_25To34Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 34 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_35To44Years_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 44 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_35To44Years_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 44 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_35To44Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 44 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_35To44Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 44 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_35To44Years_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 44 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_35To44Years_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 44 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_3To6Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 6 Years]
+
+Node: dcid:Count_Person_3To6Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 6 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_3To6Years_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 6 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_3To6Years_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 6 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_3To6Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 6 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_3To6Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 6 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_3To6Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 6 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_3To6Years_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 6 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_3To6Years_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 6 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_45To54Years_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 54 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_45To54Years_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 54 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_45To54Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 54 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_45To54Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 54 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_45To54Years_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 54 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_45To54Years_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 54 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_55To64Years_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 64 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_55To64Years_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 64 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_55To64Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 64 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_55To64Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [55 64 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_65OrMoreYears_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 - Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_65OrMoreYears_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 - Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_65OrMoreYears_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 - Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_65OrMoreYears_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 - Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_7To12Years_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [7 12 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_7To12Years_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [7 12 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_7To12Years_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [7 12 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_7To12Years_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [7 12 Years]
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_7To12Years_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [7 12 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_7To12Years_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [7 12 Years]
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
