@@ -26,8 +26,7 @@
                 "input_files/english/*",
                 "input_files/maths/*"
             ],
-            "cron_schedule": "0 0 1 1,4,7,10 *",
-            "validation_config_file": "validation_config.json"
+            "cron_schedule": "0 0 1 1,4,7,10 *"
         }
     ]
 }
