@@ -28,12 +28,12 @@ function setup_python {
   if [[ "$PYTHON_REQUIREMENTS_INSTALLED" = false ]]
   then
     echo "Installing Python requirements"
-    if command -v uv &> /dev/null; then
-      echo "Using uv for package installation"
-      uv pip install -r requirements_all.txt -q
-    else
-      pip3 install -r requirements_all.txt -q
+    if ! command -v uv &> /dev/null; then
+      echo "Installing uv"
+      pip3 install uv -q
     fi
+    echo "Using uv for package installation"
+    uv pip install -r requirements_all.txt -q
     PYTHON_REQUIREMENTS_INSTALLED=true
   fi
 }
