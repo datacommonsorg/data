@@ -69,7 +69,7 @@
       "validator": "GOLDENS_CHECK",
       "params": {
         "golden_files": "../../../../golden_data/golden_observations.csv",
-        "input_files": "../../../../output/commodity_monthly_price.csv"
+        "input_files": "../../../../output/*.csv"
       }
     }
   ]
