@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "WorldBank_CommodityMarket",
+            "import_name": "WB_CommodityMarket",
             "curator_emails": [
                 "support@datacommons.org"
             ],
