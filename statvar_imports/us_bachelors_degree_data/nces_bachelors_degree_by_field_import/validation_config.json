@@ -15,7 +15,10 @@
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/nces_female_output_golden_summary_report.csv",
-                "input_files": "../../input0/genmcf/summary_report.csv"
+                "input_files": [
+                    "../../input0/genmcf/summary_report.csv",
+                    "../../input2/genmcf/summary_report.csv"
+                ]
             }
         },
         {
@@ -24,7 +27,10 @@
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/nces_female_output_golden_observations.csv",
-                "input_files": "../../../../output_files/nces_female_output.csv"
+                "input_files": [
+                    "../../../../output_files/nces_female_output.csv",
+                    "../../../../output_files/nces_female_output_latest.csv"
+                ]
             }
         },
         {
@@ -33,7 +39,10 @@
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/nces_male_output_golden_summary_report.csv",
-                "input_files": "../../input1/genmcf/summary_report.csv"
+                "input_files": [
+                    "../../input1/genmcf/summary_report.csv",
+                    "../../input3/genmcf/summary_report.csv"
+                ]
             }
         },
         {
@@ -42,43 +51,10 @@
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/nces_male_output_golden_observations.csv",
-                "input_files": "../../../../output_files/nces_male_output.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_female_latest_summary_report",
-            "description": "Validates female latest output data against its golden summary report",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/nces_female_output_latest_golden_summary_report.csv",
-                "input_files": "../../input2/genmcf/summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_female_latest_observations",
-            "description": "Verifies female latest output CSV matches established golden observations",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/nces_female_output_latest_golden_observations.csv",
-                "input_files": "../../../../output_files/nces_female_output_latest.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_male_latest_summary_report",
-            "description": "Validates male latest output data against its golden summary report",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/nces_male_output_latest_golden_summary_report.csv",
-                "input_files": "../../input3/genmcf/summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_male_latest_observations",
-            "description": "Verifies male latest output CSV matches established golden observations",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/nces_male_output_latest_golden_observations.csv",
-                "input_files": "../../../../output_files/nces_male_output_latest.csv"
+                "input_files": [
+                    "../../../../output_files/nces_male_output.csv",
+                    "../../../../output_files/nces_male_output_latest.csv"
+                ]
             }
         }
     ]
