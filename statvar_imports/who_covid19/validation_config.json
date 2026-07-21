@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.5
+      }
+    },
+    {
+      "rule_id": "check_goldens_cov_vac_uptake_2021_2023",
+      "description": "Validates COV_VAC_UPTAKE 2021-2023 data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/COV_VAC_UPTAKE_2021_2023_golden_summary_report.csv",
+        "input_files": "../../input0/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_cov_vac_uptake_2024",
+      "description": "Validates COV_VAC_UPTAKE 2024 data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/COV_VAC_UPTAKE_2024_golden_summary_report.csv",
+        "input_files": "../../input1/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_death_by_age",
+      "description": "Validates death by age data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/death_by_age_golden_summary_report.csv",
+        "input_files": "../../input2/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_global_daily_data",
+      "description": "Validates global daily data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/global_daily_data_golden_summary_report.csv",
+        "input_files": "../../input3/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_global_hosp_icu_data",
+      "description": "Validates global hospital and ICU data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/global_hosp_icu_data_golden_summary_report.csv",
+        "input_files": "../../input4/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_cov_vac_uptake_2021_2023",
+      "description": "Verifies the generated output CSV data matches established critical golden records for COV_VAC_UPTAKE_2021_2023",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/COV_VAC_UPTAKE_2021_2023_golden_observations.csv",
+        "input_files": "../../../../output/COV_VAC_UPTAKE_2021_2023.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_cov_vac_uptake_2024",
+      "description": "Verifies the generated output CSV data matches established critical golden records for COV_VAC_UPTAKE_2024",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/COV_VAC_UPTAKE_2024_golden_observations.csv",
+        "input_files": "../../../../output/COV_VAC_UPTAKE_2024.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_death_by_age",
+      "description": "Verifies the generated output CSV data matches established critical golden records for death_by_age",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/death_by_age_golden_observations.csv",
+        "input_files": "../../../../output/death_by_age.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_global_daily_data",
+      "description": "Verifies the generated output CSV data matches established critical golden records for global_daily_data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/global_daily_data_golden_observations.csv",
+        "input_files": "../../../../output/global_daily_data.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_global_hosp_icu_data",
+      "description": "Verifies the generated output CSV data matches established critical golden records for global_hosp_icu_data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/global_hosp_icu_data_golden_observations.csv",
+        "input_files": "../../../../output/global_hosp_icu_data.csv"
+      }
+    }
+  ]
+}
