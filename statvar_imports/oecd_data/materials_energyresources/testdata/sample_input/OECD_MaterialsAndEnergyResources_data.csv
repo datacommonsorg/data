@@ -1,0 +1,999 @@
+COUNTRY,Country,Resource,Stocks and flows,Class,Year,Unit,Value
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2000,Barrels,4.115
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2001,Barrels,4.271
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2002,Barrels,4.12
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2003,Barrels,3.869
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2004,Barrels,3.76
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2005,Barrels,3.841
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2006,Barrels,4.768
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2007,Barrels,4.512
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2008,Barrels,4.563
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2009,Barrels,4.401
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2010,Barrels,3.99
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2011,Barrels,3.777
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2012,Barrels,3.746
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2013,Barrels,3.793
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2014,Barrels,3.942
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2015,Barrels,3.771
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2016,Barrels,4.015
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2017,Barrels,4.08
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2018,Barrels,4.229
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2019,Barrels,4.853
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2020,Barrels,4.632
+CAN,Canada,Crude oil,Opening stock,Class A - Commercially recoverable resources,2021,Barrels,4.644
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2000,Barrels,0.656
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2001,Barrels,0.355
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2002,Barrels,0.283
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2003,Barrels,0.424
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2004,Barrels,0.596
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2005,Barrels,1.425
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2006,Barrels,0.238
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2007,Barrels,0.562
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2008,Barrels,0.333
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2009,Barrels,0.027
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2010,Barrels,0.235
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2011,Barrels,0.43
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2012,Barrels,0.525
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2013,Barrels,0.654
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2014,Barrels,0.339
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2015,Barrels,0.706
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2016,Barrels,0.498
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2017,Barrels,0.592
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2018,Barrels,1.089
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2019,Barrels,0.255
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2020,Barrels,0.45
+CAN,Canada,Crude oil,Upward reappraisals,Class A - Commercially recoverable resources,2021,Barrels,0.446
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2000,Barrels,0.656
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2001,Barrels,0.355
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2002,Barrels,0.283
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2003,Barrels,0.424
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2004,Barrels,0.596
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2005,Barrels,1.425
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2006,Barrels,0.238
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2007,Barrels,0.562
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2008,Barrels,0.333
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2009,Barrels,0.027
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2010,Barrels,0.235
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2011,Barrels,0.43
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2012,Barrels,0.525
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2013,Barrels,0.654
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2014,Barrels,0.339
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2015,Barrels,0.706
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2016,Barrels,0.498
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2017,Barrels,0.592
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2018,Barrels,1.089
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2019,Barrels,0.255
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2020,Barrels,0.45
+CAN,Canada,Crude oil,Total additions to stock,Class A - Commercially recoverable resources,2021,Barrels,0.446
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2000,Barrels,0.499
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2001,Barrels,0.506
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2002,Barrels,0.535
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2003,Barrels,0.533
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2004,Barrels,0.516
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2005,Barrels,0.498
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2006,Barrels,0.494
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2007,Barrels,0.511
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2008,Barrels,0.496
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2009,Barrels,0.438
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2010,Barrels,0.447
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2011,Barrels,0.46
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2012,Barrels,0.479
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2013,Barrels,0.504
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2014,Barrels,0.511
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2015,Barrels,0.462
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2016,Barrels,0.434
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2017,Barrels,0.443
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2018,Barrels,0.465
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2019,Barrels,0.476
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2020,Barrels,0.438
+CAN,Canada,Crude oil,Extractions,Class A - Commercially recoverable resources,2021,Barrels,0.435
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2000,Barrels,0.499
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2001,Barrels,0.506
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2002,Barrels,0.535
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2003,Barrels,0.533
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2004,Barrels,0.516
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2005,Barrels,0.498
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2006,Barrels,0.494
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2007,Barrels,0.511
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2008,Barrels,0.496
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2009,Barrels,0.438
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2010,Barrels,0.447
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2011,Barrels,0.46
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2012,Barrels,0.479
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2013,Barrels,0.504
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2014,Barrels,0.511
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2015,Barrels,0.462
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2016,Barrels,0.434
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2017,Barrels,0.443
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2018,Barrels,0.465
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2019,Barrels,0.476
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2020,Barrels,0.438
+CAN,Canada,Crude oil,Total reductions in stock,Class A - Commercially recoverable resources,2021,Barrels,0.435
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2000,Barrels,4.271
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2001,Barrels,4.12
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2002,Barrels,3.869
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2003,Barrels,3.76
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2004,Barrels,3.841
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2005,Barrels,4.768
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2006,Barrels,4.512
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2007,Barrels,4.563
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2008,Barrels,4.401
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2009,Barrels,3.99
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2010,Barrels,3.777
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2011,Barrels,3.746
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2012,Barrels,3.793
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2013,Barrels,3.942
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2014,Barrels,3.771
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2015,Barrels,4.015
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2016,Barrels,4.08
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2017,Barrels,4.229
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2018,Barrels,4.853
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2019,Barrels,4.632
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2020,Barrels,4.644
+CAN,Canada,Crude oil,Closing stock,Class A - Commercially recoverable resources,2021,Barrels,4.654
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2000,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2001,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2002,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2003,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2004,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2005,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2006,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2007,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2008,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2009,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2010,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2011,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2012,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2013,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2014,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2015,Barrels,0.001
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2016,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2017,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2018,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2019,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2020,Barrels,0
+CAN,Canada,Crude oil,Discrepancies,Class A - Commercially recoverable resources,2021,Barrels,0
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2000,Cubic metres,1718.9
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2001,Cubic metres,1682.9
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2002,Cubic metres,1693.8
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2003,Cubic metres,1664.2
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2004,Cubic metres,1594
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2005,Cubic metres,1593
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2006,Cubic metres,1632.6
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2007,Cubic metres,1639.7
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2008,Cubic metres,1633.8
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2009,Cubic metres,1754.2
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2010,Cubic metres,1727.5
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2011,Cubic metres,1977
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2012,Cubic metres,1903.1
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2013,Cubic metres,1995.7
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2014,Cubic metres,2024.3
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2015,Cubic metres,1987.1
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2016,Cubic metres,2118.1
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2017,Cubic metres,2095.1
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2018,Cubic metres,2083
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2019,Cubic metres,2093.5
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2020,Cubic metres,2471.3
+CAN,Canada,Natural gas,Opening stock,Class A - Commercially recoverable resources,2021,Cubic metres,2477.3
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2000,Cubic metres,131.8
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2001,Cubic metres,182.3
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2002,Cubic metres,142.6
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2003,Cubic metres,96.5
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2004,Cubic metres,166.4
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2005,Cubic metres,210.3
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2006,Cubic metres,178.8
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2007,Cubic metres,161.3
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2008,Cubic metres,278.3
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2009,Cubic metres,120.8
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2010,Cubic metres,393.9
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2011,Cubic metres,70.5
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2012,Cubic metres,233.9
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2013,Cubic metres,170
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2014,Cubic metres,106.5
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2015,Cubic metres,280.1
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2016,Cubic metres,136.9
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2017,Cubic metres,161.3
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2018,Cubic metres,188.3
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2019,Cubic metres,549.3
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2020,Cubic metres,172.9
+CAN,Canada,Natural gas,Upward reappraisals,Class A - Commercially recoverable resources,2021,Cubic metres,179.4
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2000,Cubic metres,131.8
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2001,Cubic metres,182.3
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2002,Cubic metres,142.6
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2003,Cubic metres,96.5
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2004,Cubic metres,166.4
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2005,Cubic metres,210.3
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2006,Cubic metres,178.8
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2007,Cubic metres,161.3
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2008,Cubic metres,278.3
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2009,Cubic metres,120.8
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2010,Cubic metres,393.9
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2011,Cubic metres,70.5
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2012,Cubic metres,233.9
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2013,Cubic metres,170
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2014,Cubic metres,106.5
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2015,Cubic metres,280.1
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2016,Cubic metres,136.9
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2017,Cubic metres,161.3
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2018,Cubic metres,188.3
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2019,Cubic metres,549.3
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2020,Cubic metres,172.9
+CAN,Canada,Natural gas,Total additions to stock,Class A - Commercially recoverable resources,2021,Cubic metres,179.4
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2000,Cubic metres,167.8
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2001,Cubic metres,171.4
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2002,Cubic metres,172.2
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2003,Cubic metres,166.7
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2004,Cubic metres,167.4
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2005,Cubic metres,170.7
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2006,Cubic metres,171.7
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2007,Cubic metres,167.2
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2008,Cubic metres,157.9
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2009,Cubic metres,147.5
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2010,Cubic metres,144.4
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2011,Cubic metres,144.4
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2012,Cubic metres,141.3
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2013,Cubic metres,141.4
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2014,Cubic metres,147.1
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2015,Cubic metres,149.1
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2016,Cubic metres,159.8
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2017,Cubic metres,173.5
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2018,Cubic metres,177.8
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2019,Cubic metres,171.5
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2020,Cubic metres,166.9
+CAN,Canada,Natural gas,Extractions,Class A - Commercially recoverable resources,2021,Cubic metres,173.5
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2000,Cubic metres,167.8
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2001,Cubic metres,171.4
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2002,Cubic metres,172.2
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2003,Cubic metres,166.7
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2004,Cubic metres,167.4
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2005,Cubic metres,170.7
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2006,Cubic metres,171.7
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2007,Cubic metres,167.2
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2008,Cubic metres,157.9
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2009,Cubic metres,147.5
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2010,Cubic metres,144.4
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2011,Cubic metres,144.4
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2012,Cubic metres,141.3
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2013,Cubic metres,141.4
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2014,Cubic metres,147.1
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2015,Cubic metres,149.1
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2016,Cubic metres,159.8
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2017,Cubic metres,173.5
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2018,Cubic metres,177.8
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2019,Cubic metres,171.5
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2020,Cubic metres,166.9
+CAN,Canada,Natural gas,Total reductions in stock,Class A - Commercially recoverable resources,2021,Cubic metres,173.5
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2000,Cubic metres,1682.9
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2001,Cubic metres,1693.8
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2002,Cubic metres,1664.2
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2003,Cubic metres,1594
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2004,Cubic metres,1593
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2005,Cubic metres,1632.6
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2006,Cubic metres,1639.7
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2007,Cubic metres,1633.8
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2008,Cubic metres,1754.2
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2009,Cubic metres,1727.5
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2010,Cubic metres,1977
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2011,Cubic metres,1903.1
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2012,Cubic metres,1995.7
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2013,Cubic metres,2024.3
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2014,Cubic metres,1983.7
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2015,Cubic metres,2118.1
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2016,Cubic metres,2095.1
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2017,Cubic metres,2083
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2018,Cubic metres,2093.5
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2019,Cubic metres,2471.3
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2020,Cubic metres,2477.3
+CAN,Canada,Natural gas,Closing stock,Class A - Commercially recoverable resources,2021,Cubic metres,2483.2
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2000,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2001,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2002,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2003,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2004,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2005,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2006,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2007,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2008,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2009,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2010,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2011,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2012,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2013,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2014,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2015,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2016,Cubic metres,-0.1
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2017,Cubic metres,0.1
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2018,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2019,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2020,Cubic metres,0
+CAN,Canada,Natural gas,Discrepancies,Class A - Commercially recoverable resources,2021,Cubic metres,0
+CAN,Canada,Hard coal,Opening stock,Class A - Commercially recoverable resources,2000,Tonnes,3.079
+CAN,Canada,Hard coal,Extractions,Class A - Commercially recoverable resources,2000,Tonnes,0.034
+CAN,Canada,Hard coal,Downward reappraisals,Class A - Commercially recoverable resources,2000,Tonnes,0.667
+CAN,Canada,Hard coal,Total reductions in stock,Class A - Commercially recoverable resources,2000,Tonnes,0.701
+CAN,Canada,Hard coal,Closing stock,Class A - Commercially recoverable resources,2000,Tonnes,2.378
+CAN,Canada,Hard coal,Discrepancies,Class A - Commercially recoverable resources,2000,Tonnes,0
+CAN,Canada,Brown coal,Opening stock,Class A - Commercially recoverable resources,2000,Tonnes,2.423
+CAN,Canada,Brown coal,Extractions,Class A - Commercially recoverable resources,2000,Tonnes,0.035
+CAN,Canada,Brown coal,Downward reappraisals,Class A - Commercially recoverable resources,2000,Tonnes,0.043
+CAN,Canada,Brown coal,Total reductions in stock,Class A - Commercially recoverable resources,2000,Tonnes,0.078
+CAN,Canada,Brown coal,Closing stock,Class A - Commercially recoverable resources,2000,Tonnes,2.345
+CAN,Canada,Brown coal,Discrepancies,Class A - Commercially recoverable resources,2000,Tonnes,0
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2000,Tonnes,1.692
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2001,Tonnes,1.692
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2002,Tonnes,1.692
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2003,Tonnes,1.692
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2004,Tonnes,1.692
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2005,Tonnes,1.692
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2006,Tonnes,1.692
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2007,Tonnes,1.692
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2008,Tonnes,1.692
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2009,Tonnes,1.692
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2010,Tonnes,3.194
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2011,Tonnes,3.159
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2012,Tonnes,3.123
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2013,Tonnes,3.283
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2014,Tonnes,3.559
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2015,Tonnes,4.141
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2016,Tonnes,3.005
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2017,Tonnes,2.959
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2018,Tonnes,2.902
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2019,Tonnes,3.523
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2020,Tonnes,3.468
+CAN,Canada,Iron-Ore,Opening stock,Class A - Commercially recoverable resources,2021,Tonnes,3.409
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2000,Tonnes,0.035
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2001,Tonnes,0.027
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2002,Tonnes,0.031
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2003,Tonnes,0.033
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2004,Tonnes,0.029
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2005,Tonnes,0.03
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2006,Tonnes,0.034
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2007,Tonnes,0.033
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2008,Tonnes,0.032
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2009,Tonnes,1.534
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2010,Tonnes,0.001
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2012,Tonnes,0.199
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2013,Tonnes,0.318
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2014,Tonnes,0.625
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2016,Tonnes,0.001
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2018,Tonnes,0.674
+CAN,Canada,Iron-Ore,Upward reappraisals,Class A - Commercially recoverable resources,2019,Tonnes,0.001
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2000,Tonnes,0.035
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2001,Tonnes,0.027
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2002,Tonnes,0.031
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2003,Tonnes,0.033
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2004,Tonnes,0.029
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2005,Tonnes,0.03
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2006,Tonnes,0.034
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2007,Tonnes,0.033
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2008,Tonnes,0.032
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2009,Tonnes,1.534
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2010,Tonnes,0.001
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2012,Tonnes,0.199
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2013,Tonnes,0.318
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2014,Tonnes,0.625
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2016,Tonnes,0.001
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2018,Tonnes,0.674
+CAN,Canada,Iron-Ore,Total additions to stock,Class A - Commercially recoverable resources,2019,Tonnes,0.001
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2000,Tonnes,0.035
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2001,Tonnes,0.027
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2002,Tonnes,0.031
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2003,Tonnes,0.033
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2004,Tonnes,0.029
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2005,Tonnes,0.03
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2006,Tonnes,0.034
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2007,Tonnes,0.033
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2008,Tonnes,0.031
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2009,Tonnes,0.032
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2010,Tonnes,0.034
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2011,Tonnes,0.036
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2012,Tonnes,0.039
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2013,Tonnes,0.042
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2014,Tonnes,0.043
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2015,Tonnes,0.046
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2016,Tonnes,0.047
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2017,Tonnes,0.043
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2018,Tonnes,0.053
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2019,Tonnes,0.056
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2020,Tonnes,0.059
+CAN,Canada,Iron-Ore,Extractions,Class A - Commercially recoverable resources,2021,Tonnes,0.058
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2000,Tonnes,0.035
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2001,Tonnes,0.027
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2002,Tonnes,0.031
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2003,Tonnes,0.033
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2004,Tonnes,0.029
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2005,Tonnes,0.03
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2006,Tonnes,0.034
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2007,Tonnes,0.033
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2008,Tonnes,0.031
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2009,Tonnes,0.032
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2010,Tonnes,0.034
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2011,Tonnes,0.036
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2012,Tonnes,0.039
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2013,Tonnes,0.042
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2014,Tonnes,0.043
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2015,Tonnes,1.136
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2016,Tonnes,0.047
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2017,Tonnes,0.057
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2018,Tonnes,0.053
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2019,Tonnes,0.056
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2020,Tonnes,0.059
+CAN,Canada,Iron-Ore,Total reductions in stock,Class A - Commercially recoverable resources,2021,Tonnes,0.058
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2000,Tonnes,1.692
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2001,Tonnes,1.692
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2002,Tonnes,1.692
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2003,Tonnes,1.692
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2004,Tonnes,1.692
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2005,Tonnes,1.692
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2006,Tonnes,1.692
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2007,Tonnes,1.692
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2008,Tonnes,1.692
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2009,Tonnes,3.194
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2010,Tonnes,3.159
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2011,Tonnes,3.123
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2012,Tonnes,3.283
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2013,Tonnes,3.559
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2014,Tonnes,4.141
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2015,Tonnes,3.005
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2016,Tonnes,2.959
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2017,Tonnes,2.902
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2018,Tonnes,3.523
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2019,Tonnes,3.468
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2020,Tonnes,3.409
+CAN,Canada,Iron-Ore,Closing stock,Class A - Commercially recoverable resources,2021,Tonnes,3.351
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2000,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2001,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2002,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2003,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2004,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2005,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2006,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2007,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2008,Tonnes,-0.001
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2009,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2010,Tonnes,-0.002
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2011,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2012,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2013,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2014,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2015,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2016,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2017,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2018,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2019,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2020,Tonnes,0
+CAN,Canada,Iron-Ore,Discrepancies,Class A - Commercially recoverable resources,2021,Tonnes,0
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2000,Tonnes,7.763
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2001,Tonnes,7.419
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2002,Tonnes,6.666
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2003,Tonnes,6.774
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2004,Tonnes,6.037
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2005,Tonnes,5.546
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2006,Tonnes,6.589
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2007,Tonnes,6.923
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2008,Tonnes,7.565
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2009,Tonnes,7.456
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2010,Tonnes,7.29
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2011,Tonnes,8.851
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2012,Tonnes,10.57
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2013,Tonnes,10.364
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2014,Tonnes,10.777
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2015,Tonnes,10.215
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2016,Tonnes,9.937
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2017,Tonnes,9.101
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2018,Tonnes,8.984
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2019,Tonnes,8.115
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2020,Tonnes,7.348
+CAN,Canada,Copper,Opening stock,Class A - Commercially recoverable resources,2021,Tonnes,7.001
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2000,Tonnes,0.278
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2002,Tonnes,0.692
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2004,Tonnes,0.054
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2005,Tonnes,1.62
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2006,Tonnes,0.921
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2007,Tonnes,1.22
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2008,Tonnes,0.475
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2009,Tonnes,0.304
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2010,Tonnes,2.069
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2011,Tonnes,2.273
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2012,Tonnes,0.355
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2013,Tonnes,1.034
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2014,Tonnes,0.092
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2015,Tonnes,0.42
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2017,Tonnes,0.463
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2020,Tonnes,0.232
+CAN,Canada,Copper,Upward reappraisals,Class A - Commercially recoverable resources,2021,Tonnes,1.161
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2000,Tonnes,0.278
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2002,Tonnes,0.692
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2004,Tonnes,0.054
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2005,Tonnes,1.62
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2006,Tonnes,0.921
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2007,Tonnes,1.22
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2008,Tonnes,0.475
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2009,Tonnes,0.304
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2010,Tonnes,2.069
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2011,Tonnes,2.273
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2012,Tonnes,0.355
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2013,Tonnes,1.034
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2014,Tonnes,0.092
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2015,Tonnes,0.42
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2017,Tonnes,0.463
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2020,Tonnes,0.232
+CAN,Canada,Copper,Total additions to stock,Class A - Commercially recoverable resources,2021,Tonnes,1.161
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2000,Tonnes,0.622
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2001,Tonnes,0.614
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2002,Tonnes,0.584
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2003,Tonnes,0.541
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2004,Tonnes,0.545
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2005,Tonnes,0.577
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2006,Tonnes,0.587
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2007,Tonnes,0.578
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2008,Tonnes,0.584
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2009,Tonnes,0.47
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2010,Tonnes,0.508
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2011,Tonnes,0.554
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2012,Tonnes,0.561
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2013,Tonnes,0.621
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2014,Tonnes,0.655
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2015,Tonnes,0.697
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2016,Tonnes,0.708
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2017,Tonnes,0.58
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2018,Tonnes,0.528
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2019,Tonnes,0.557
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2020,Tonnes,0.579
+CAN,Canada,Copper,Extractions,Class A - Commercially recoverable resources,2021,Tonnes,0.542
+CAN,Canada,Copper,Downward reappraisals,Class A - Commercially recoverable resources,2001,Tonnes,0.139
+CAN,Canada,Copper,Downward reappraisals,Class A - Commercially recoverable resources,2003,Tonnes,0.196
+CAN,Canada,Copper,Downward reappraisals,Class A - Commercially recoverable resources,2016,Tonnes,0.129
+CAN,Canada,Copper,Downward reappraisals,Class A - Commercially recoverable resources,2018,Tonnes,0.342
+CAN,Canada,Copper,Downward reappraisals,Class A - Commercially recoverable resources,2019,Tonnes,0.21
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2000,Tonnes,0.622
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2001,Tonnes,0.753
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2002,Tonnes,0.584
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2003,Tonnes,0.737
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2004,Tonnes,0.545
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2005,Tonnes,0.577
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2006,Tonnes,0.587
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2007,Tonnes,0.578
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2008,Tonnes,0.584
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2009,Tonnes,0.47
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2010,Tonnes,0.508
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2011,Tonnes,0.554
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2012,Tonnes,0.561
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2013,Tonnes,0.621
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2014,Tonnes,0.655
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2015,Tonnes,0.697
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2016,Tonnes,0.836
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2017,Tonnes,0.58
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2018,Tonnes,0.869
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2019,Tonnes,0.767
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2020,Tonnes,0.579
+CAN,Canada,Copper,Total reductions in stock,Class A - Commercially recoverable resources,2021,Tonnes,0.542
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2000,Tonnes,7.419
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2001,Tonnes,6.666
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2002,Tonnes,6.774
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2003,Tonnes,6.037
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2004,Tonnes,5.546
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2005,Tonnes,6.589
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2006,Tonnes,6.923
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2007,Tonnes,7.565
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2008,Tonnes,7.456
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2009,Tonnes,7.29
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2010,Tonnes,8.851
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2011,Tonnes,10.57
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2012,Tonnes,10.364
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2013,Tonnes,10.777
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2014,Tonnes,10.215
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2015,Tonnes,9.937
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2016,Tonnes,9.101
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2017,Tonnes,8.984
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2018,Tonnes,8.115
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2019,Tonnes,7.348
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2020,Tonnes,7.001
+CAN,Canada,Copper,Closing stock,Class A - Commercially recoverable resources,2021,Tonnes,7.62
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2000,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2001,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2002,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2003,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2004,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2005,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2006,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2007,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2008,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2009,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2010,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2011,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2012,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2013,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2014,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2015,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2016,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2017,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2018,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2019,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2020,Tonnes,0
+CAN,Canada,Copper,Discrepancies,Class A - Commercially recoverable resources,2021,Tonnes,0
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2000,Tonnes,10.21
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2001,Tonnes,8.896
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2002,Tonnes,7.808
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2003,Tonnes,6.871
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2004,Tonnes,6.251
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2005,Tonnes,5.299
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2006,Tonnes,5.063
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2007,Tonnes,6.055
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2008,Tonnes,5.984
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2009,Tonnes,5.005
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2010,Tonnes,4.25
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2011,Tonnes,4.133
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2012,Tonnes,4.807
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2013,Tonnes,4.163
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2014,Tonnes,3.532
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2015,Tonnes,2.972
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2016,Tonnes,3.009
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2017,Tonnes,2.231
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2018,Tonnes,2.286
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2019,Tonnes,1.913
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2020,Tonnes,2.18
+CAN,Canada,Zinc,Opening stock,Class A - Commercially recoverable resources,2021,Tonnes,1.63
+CAN,Canada,Zinc,Upward reappraisals,Class A - Commercially recoverable resources,2003,Tonnes,0.137
+CAN,Canada,Zinc,Upward reappraisals,Class A - Commercially recoverable resources,2005,Tonnes,0.383
+CAN,Canada,Zinc,Upward reappraisals,Class A - Commercially recoverable resources,2006,Tonnes,1.594
+CAN,Canada,Zinc,Upward reappraisals,Class A - Commercially recoverable resources,2007,Tonnes,0.523
+CAN,Canada,Zinc,Upward reappraisals,Class A - Commercially recoverable resources,2010,Tonnes,0.493
+CAN,Canada,Zinc,Upward reappraisals,Class A - Commercially recoverable resources,2011,Tonnes,1.265
+CAN,Canada,Zinc,Upward reappraisals,Class A - Commercially recoverable resources,2015,Tonnes,0.312
+CAN,Canada,Zinc,Upward reappraisals,Class A - Commercially recoverable resources,2017,Tonnes,0.36
+CAN,Canada,Zinc,Upward reappraisals,Class A - Commercially recoverable resources,2019,Tonnes,0.536
+CAN,Canada,Zinc,Total additions to stock,Class A - Commercially recoverable resources,2003,Tonnes,0.137
+CAN,Canada,Zinc,Total additions to stock,Class A - Commercially recoverable resources,2005,Tonnes,0.383
+CAN,Canada,Zinc,Total additions to stock,Class A - Commercially recoverable resources,2006,Tonnes,1.594
+CAN,Canada,Zinc,Total additions to stock,Class A - Commercially recoverable resources,2007,Tonnes,0.523
+CAN,Canada,Zinc,Total additions to stock,Class A - Commercially recoverable resources,2010,Tonnes,0.493
+CAN,Canada,Zinc,Total additions to stock,Class A - Commercially recoverable resources,2011,Tonnes,1.265
+CAN,Canada,Zinc,Total additions to stock,Class A - Commercially recoverable resources,2015,Tonnes,0.312
+CAN,Canada,Zinc,Total additions to stock,Class A - Commercially recoverable resources,2017,Tonnes,0.36
+CAN,Canada,Zinc,Total additions to stock,Class A - Commercially recoverable resources,2019,Tonnes,0.536
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2000,Tonnes,0.936
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2001,Tonnes,1.012
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2002,Tonnes,0.924
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2003,Tonnes,0.757
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2004,Tonnes,0.734
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2005,Tonnes,0.619
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2006,Tonnes,0.602
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2007,Tonnes,0.594
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2008,Tonnes,0.705
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2009,Tonnes,0.67
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2010,Tonnes,0.61
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2011,Tonnes,0.591
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2012,Tonnes,0.602
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2013,Tonnes,0.412
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2014,Tonnes,0.323
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2015,Tonnes,0.275
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2016,Tonnes,0.301
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2017,Tonnes,0.305
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2018,Tonnes,0.269
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2019,Tonnes,0.269
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2020,Tonnes,0.248
+CAN,Canada,Zinc,Extractions,Class A - Commercially recoverable resources,2021,Tonnes,0.31
+CAN,Canada,Zinc,Downward reappraisals,Class A - Commercially recoverable resources,2000,Tonnes,0.378
+CAN,Canada,Zinc,Downward reappraisals,Class A - Commercially recoverable resources,2001,Tonnes,0.076
+CAN,Canada,Zinc,Downward reappraisals,Class A - Commercially recoverable resources,2002,Tonnes,0.013
+CAN,Canada,Zinc,Downward reappraisals,Class A - Commercially recoverable resources,2004,Tonnes,0.218
+CAN,Canada,Zinc,Downward reappraisals,Class A - Commercially recoverable resources,2008,Tonnes,0.274
+CAN,Canada,Zinc,Downward reappraisals,Class A - Commercially recoverable resources,2009,Tonnes,0.085
+CAN,Canada,Zinc,Downward reappraisals,Class A - Commercially recoverable resources,2012,Tonnes,0.043
+CAN,Canada,Zinc,Downward reappraisals,Class A - Commercially recoverable resources,2013,Tonnes,0.219
+CAN,Canada,Zinc,Downward reappraisals,Class A - Commercially recoverable resources,2014,Tonnes,0.237
+CAN,Canada,Zinc,Downward reappraisals,Class A - Commercially recoverable resources,2016,Tonnes,0.477
+CAN,Canada,Zinc,Downward reappraisals,Class A - Commercially recoverable resources,2018,Tonnes,0.104
+CAN,Canada,Zinc,Downward reappraisals,Class A - Commercially recoverable resources,2020,Tonnes,0.303
+CAN,Canada,Zinc,Downward reappraisals,Class A - Commercially recoverable resources,2021,Tonnes,0.082
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2000,Tonnes,1.314
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2001,Tonnes,1.088
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2002,Tonnes,0.937
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2003,Tonnes,0.757
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2004,Tonnes,0.952
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2005,Tonnes,0.619
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2006,Tonnes,0.602
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2007,Tonnes,0.594
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2008,Tonnes,0.979
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2009,Tonnes,0.755
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2010,Tonnes,0.61
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2011,Tonnes,0.591
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2012,Tonnes,0.644
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2013,Tonnes,0.631
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2014,Tonnes,0.56
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2015,Tonnes,0.275
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2016,Tonnes,0.778
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2017,Tonnes,0.305
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2018,Tonnes,0.373
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2019,Tonnes,0.269
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2020,Tonnes,0.55
+CAN,Canada,Zinc,Total reductions in stock,Class A - Commercially recoverable resources,2021,Tonnes,0.392
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2000,Tonnes,8.896
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2001,Tonnes,7.808
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2002,Tonnes,6.871
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2003,Tonnes,6.251
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2004,Tonnes,5.299
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2005,Tonnes,5.063
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2006,Tonnes,6.055
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2007,Tonnes,5.984
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2008,Tonnes,5.005
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2009,Tonnes,4.25
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2010,Tonnes,4.133
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2011,Tonnes,4.807
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2012,Tonnes,4.163
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2013,Tonnes,3.532
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2014,Tonnes,2.972
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2015,Tonnes,3.009
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2016,Tonnes,2.231
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2017,Tonnes,2.286
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2018,Tonnes,1.913
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2019,Tonnes,2.18
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2020,Tonnes,1.63
+CAN,Canada,Zinc,Closing stock,Class A - Commercially recoverable resources,2021,Tonnes,1.238
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2000,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2001,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2002,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2003,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2004,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2005,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2006,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2007,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2008,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2009,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2010,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2011,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2012,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2013,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2014,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2015,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2016,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2017,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2018,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2019,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2020,Tonnes,0
+CAN,Canada,Zinc,Discrepancies,Class A - Commercially recoverable resources,2021,Tonnes,0
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2000,Tonnes,1.586
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2001,Tonnes,1.315
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2002,Tonnes,0.97
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2003,Tonnes,0.872
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2004,Tonnes,0.749
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2005,Tonnes,0.667
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2006,Tonnes,0.552
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2007,Tonnes,0.737
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2008,Tonnes,0.682
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2009,Tonnes,0.636
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2010,Tonnes,0.451
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2011,Tonnes,0.4
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2012,Tonnes,0.247
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2013,Tonnes,0.126
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2014,Tonnes,0.116
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2015,Tonnes,0.088
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2016,Tonnes,0.083
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2017,Tonnes,0.04
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2018,Tonnes,0.165
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2019,Tonnes,0.118
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2020,Tonnes,0.203
+CAN,Canada,Lead,Opening stock,Class A - Commercially recoverable resources,2021,Tonnes,0.176
+CAN,Canada,Lead,Upward reappraisals,Class A - Commercially recoverable resources,2002,Tonnes,0.003
+CAN,Canada,Lead,Upward reappraisals,Class A - Commercially recoverable resources,2006,Tonnes,0.264
+CAN,Canada,Lead,Upward reappraisals,Class A - Commercially recoverable resources,2007,Tonnes,0.015
+CAN,Canada,Lead,Upward reappraisals,Class A - Commercially recoverable resources,2008,Tonnes,0.041
+CAN,Canada,Lead,Upward reappraisals,Class A - Commercially recoverable resources,2010,Tonnes,0.011
+CAN,Canada,Lead,Upward reappraisals,Class A - Commercially recoverable resources,2013,Tonnes,0.013
+CAN,Canada,Lead,Upward reappraisals,Class A - Commercially recoverable resources,2017,Tonnes,0.139
+CAN,Canada,Lead,Upward reappraisals,Class A - Commercially recoverable resources,2019,Tonnes,0.107
+CAN,Canada,Lead,Upward reappraisals,Class A - Commercially recoverable resources,2021,Tonnes,0.025
+CAN,Canada,Lead,Total additions to stock,Class A - Commercially recoverable resources,2002,Tonnes,0.003
+CAN,Canada,Lead,Total additions to stock,Class A - Commercially recoverable resources,2006,Tonnes,0.264
+CAN,Canada,Lead,Total additions to stock,Class A - Commercially recoverable resources,2007,Tonnes,0.015
+CAN,Canada,Lead,Total additions to stock,Class A - Commercially recoverable resources,2008,Tonnes,0.041
+CAN,Canada,Lead,Total additions to stock,Class A - Commercially recoverable resources,2010,Tonnes,0.011
+CAN,Canada,Lead,Total additions to stock,Class A - Commercially recoverable resources,2013,Tonnes,0.013
+CAN,Canada,Lead,Total additions to stock,Class A - Commercially recoverable resources,2017,Tonnes,0.139
+CAN,Canada,Lead,Total additions to stock,Class A - Commercially recoverable resources,2019,Tonnes,0.107
+CAN,Canada,Lead,Total additions to stock,Class A - Commercially recoverable resources,2021,Tonnes,0.025
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2000,Tonnes,0.143
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2001,Tonnes,0.15
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2002,Tonnes,0.101
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2003,Tonnes,0.093
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2004,Tonnes,0.072
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2005,Tonnes,0.073
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2006,Tonnes,0.079
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2007,Tonnes,0.07
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2008,Tonnes,0.087
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2009,Tonnes,0.071
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2010,Tonnes,0.062
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2011,Tonnes,0.063
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2012,Tonnes,0.062
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2013,Tonnes,0.023
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2014,Tonnes,0.004
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2015,Tonnes,0.004
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2016,Tonnes,0.012
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2017,Tonnes,0.014
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2018,Tonnes,0.019
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2019,Tonnes,0.022
+CAN,Canada,Lead,Extractions,Class A - Commercially recoverable resources,2021,Tonnes,0.07
+CAN,Canada,Lead,Downward reappraisals,Class A - Commercially recoverable resources,2000,Tonnes,0.128
+CAN,Canada,Lead,Downward reappraisals,Class A - Commercially recoverable resources,2001,Tonnes,0.195
+CAN,Canada,Lead,Downward reappraisals,Class A - Commercially recoverable resources,2003,Tonnes,0.03
+CAN,Canada,Lead,Downward reappraisals,Class A - Commercially recoverable resources,2004,Tonnes,0.01
+CAN,Canada,Lead,Downward reappraisals,Class A - Commercially recoverable resources,2005,Tonnes,0.042
+CAN,Canada,Lead,Downward reappraisals,Class A - Commercially recoverable resources,2009,Tonnes,0.113
+CAN,Canada,Lead,Downward reappraisals,Class A - Commercially recoverable resources,2011,Tonnes,0.091
+CAN,Canada,Lead,Downward reappraisals,Class A - Commercially recoverable resources,2012,Tonnes,0.059
+CAN,Canada,Lead,Downward reappraisals,Class A - Commercially recoverable resources,2014,Tonnes,0.024
+CAN,Canada,Lead,Downward reappraisals,Class A - Commercially recoverable resources,2015,Tonnes,0.001
+CAN,Canada,Lead,Downward reappraisals,Class A - Commercially recoverable resources,2016,Tonnes,0.031
+CAN,Canada,Lead,Downward reappraisals,Class A - Commercially recoverable resources,2018,Tonnes,0.028
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2000,Tonnes,0.271
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2001,Tonnes,0.345
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2002,Tonnes,0.101
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2003,Tonnes,0.123
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2004,Tonnes,0.082
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2005,Tonnes,0.115
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2006,Tonnes,0.079
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2007,Tonnes,0.07
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2008,Tonnes,0.087
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2009,Tonnes,0.185
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2010,Tonnes,0.062
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2011,Tonnes,0.153
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2012,Tonnes,0.121
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2013,Tonnes,0.023
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2014,Tonnes,0.028
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2015,Tonnes,0.005
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2016,Tonnes,0.043
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2017,Tonnes,0.014
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2018,Tonnes,0.047
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2019,Tonnes,0.022
+CAN,Canada,Lead,Total reductions in stock,Class A - Commercially recoverable resources,2021,Tonnes,0.07
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2000,Tonnes,1.315
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2001,Tonnes,0.97
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2002,Tonnes,0.872
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2003,Tonnes,0.749
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2004,Tonnes,0.667
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2005,Tonnes,0.552
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2006,Tonnes,0.737
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2007,Tonnes,0.682
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2008,Tonnes,0.636
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2009,Tonnes,0.451
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2010,Tonnes,0.4
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2011,Tonnes,0.247
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2012,Tonnes,0.126
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2013,Tonnes,0.116
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2014,Tonnes,0.088
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2015,Tonnes,0.083
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2016,Tonnes,0.04
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2017,Tonnes,0.165
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2018,Tonnes,0.118
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2019,Tonnes,0.203
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2020,Tonnes,0.176
+CAN,Canada,Lead,Closing stock,Class A - Commercially recoverable resources,2021,Tonnes,0.131
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2000,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2001,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2002,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2003,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2004,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2005,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2006,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2007,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2008,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2009,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2010,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2011,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2012,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2013,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2014,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2015,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2016,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2017,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2018,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2019,Tonnes,0
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2020,Tonnes,-0.027
+CAN,Canada,Lead,Discrepancies,Class A - Commercially recoverable resources,2021,Tonnes,0
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2000,Tonnes,4.983
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2001,Tonnes,4.782
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2002,Tonnes,4.335
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2003,Tonnes,4.92
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2004,Tonnes,4.303
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2005,Tonnes,3.846
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2006,Tonnes,3.96
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2007,Tonnes,3.94
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2008,Tonnes,3.778
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2009,Tonnes,3.605
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2010,Tonnes,3.301
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2011,Tonnes,3.074
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2012,Tonnes,2.936
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2013,Tonnes,2.617
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2014,Tonnes,2.682
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2015,Tonnes,2.287
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2016,Tonnes,2.725
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2017,Tonnes,2.604
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2018,Tonnes,2.79
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2019,Tonnes,2.296
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2020,Tonnes,2.236
+CAN,Canada,Nickel,Opening stock,Class A - Commercially recoverable resources,2021,Tonnes,1.977
+CAN,Canada,Nickel,Upward reappraisals,Class A - Commercially recoverable resources,2002,Tonnes,0.765
+CAN,Canada,Nickel,Upward reappraisals,Class A - Commercially recoverable resources,2005,Tonnes,0.307
+CAN,Canada,Nickel,Upward reappraisals,Class A - Commercially recoverable resources,2006,Tonnes,0.205
+CAN,Canada,Nickel,Upward reappraisals,Class A - Commercially recoverable resources,2007,Tonnes,0.083
+CAN,Canada,Nickel,Upward reappraisals,Class A - Commercially recoverable resources,2008,Tonnes,0.073
+CAN,Canada,Nickel,Upward reappraisals,Class A - Commercially recoverable resources,2011,Tonnes,0.073
+CAN,Canada,Nickel,Upward reappraisals,Class A - Commercially recoverable resources,2013,Tonnes,0.283
+CAN,Canada,Nickel,Upward reappraisals,Class A - Commercially recoverable resources,2015,Tonnes,0.663
+CAN,Canada,Nickel,Upward reappraisals,Class A - Commercially recoverable resources,2016,Tonnes,0.109
+CAN,Canada,Nickel,Upward reappraisals,Class A - Commercially recoverable resources,2017,Tonnes,0.392
+CAN,Canada,Nickel,Upward reappraisals,Class A - Commercially recoverable resources,2019,Tonnes,0.116
+CAN,Canada,Nickel,Upward reappraisals,Class A - Commercially recoverable resources,2021,Tonnes,0.066
+CAN,Canada,Nickel,Total additions to stock,Class A - Commercially recoverable resources,2002,Tonnes,0.765
+CAN,Canada,Nickel,Total additions to stock,Class A - Commercially recoverable resources,2005,Tonnes,0.307
+CAN,Canada,Nickel,Total additions to stock,Class A - Commercially recoverable resources,2006,Tonnes,0.205
+CAN,Canada,Nickel,Total additions to stock,Class A - Commercially recoverable resources,2007,Tonnes,0.083
+CAN,Canada,Nickel,Total additions to stock,Class A - Commercially recoverable resources,2008,Tonnes,0.073
+CAN,Canada,Nickel,Total additions to stock,Class A - Commercially recoverable resources,2011,Tonnes,0.073
+CAN,Canada,Nickel,Total additions to stock,Class A - Commercially recoverable resources,2013,Tonnes,0.283
+CAN,Canada,Nickel,Total additions to stock,Class A - Commercially recoverable resources,2015,Tonnes,0.663
+CAN,Canada,Nickel,Total additions to stock,Class A - Commercially recoverable resources,2016,Tonnes,0.109
+CAN,Canada,Nickel,Total additions to stock,Class A - Commercially recoverable resources,2017,Tonnes,0.392
+CAN,Canada,Nickel,Total additions to stock,Class A - Commercially recoverable resources,2019,Tonnes,0.116
+CAN,Canada,Nickel,Total additions to stock,Class A - Commercially recoverable resources,2021,Tonnes,0.066
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2000,Tonnes,0.181
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2001,Tonnes,0.184
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2002,Tonnes,0.18
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2003,Tonnes,0.156
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2004,Tonnes,0.177
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2005,Tonnes,0.193
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2006,Tonnes,0.225
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2007,Tonnes,0.245
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2008,Tonnes,0.246
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2009,Tonnes,0.133
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2010,Tonnes,0.156
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2011,Tonnes,0.211
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2012,Tonnes,0.204
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2013,Tonnes,0.218
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2014,Tonnes,0.218
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2015,Tonnes,0.225
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2016,Tonnes,0.23
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2017,Tonnes,0.206
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2018,Tonnes,0.176
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2019,Tonnes,0.176
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2020,Tonnes,0.158
+CAN,Canada,Nickel,Extractions,Class A - Commercially recoverable resources,2021,Tonnes,0.134
+CAN,Canada,Nickel,Downward reappraisals,Class A - Commercially recoverable resources,2000,Tonnes,0.02
+CAN,Canada,Nickel,Downward reappraisals,Class A - Commercially recoverable resources,2001,Tonnes,0.263
+CAN,Canada,Nickel,Downward reappraisals,Class A - Commercially recoverable resources,2003,Tonnes,0.462
+CAN,Canada,Nickel,Downward reappraisals,Class A - Commercially recoverable resources,2004,Tonnes,0.28
+CAN,Canada,Nickel,Downward reappraisals,Class A - Commercially recoverable resources,2009,Tonnes,0.172
+CAN,Canada,Nickel,Downward reappraisals,Class A - Commercially recoverable resources,2010,Tonnes,0.071
+CAN,Canada,Nickel,Downward reappraisals,Class A - Commercially recoverable resources,2012,Tonnes,0.115
+CAN,Canada,Nickel,Downward reappraisals,Class A - Commercially recoverable resources,2014,Tonnes,0.177
+CAN,Canada,Nickel,Downward reappraisals,Class A - Commercially recoverable resources,2018,Tonnes,0.318
+CAN,Canada,Nickel,Downward reappraisals,Class A - Commercially recoverable resources,2020,Tonnes,0.101
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2000,Tonnes,0.201
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2001,Tonnes,0.447
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2002,Tonnes,0.18
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2003,Tonnes,0.617
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2004,Tonnes,0.457
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2005,Tonnes,0.193
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2006,Tonnes,0.225
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2007,Tonnes,0.245
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2008,Tonnes,0.246
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2009,Tonnes,0.304
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2010,Tonnes,0.227
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2011,Tonnes,0.211
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2012,Tonnes,0.319
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2013,Tonnes,0.218
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2014,Tonnes,0.395
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2015,Tonnes,0.225
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2016,Tonnes,0.23
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2017,Tonnes,0.206
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2018,Tonnes,0.494
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2019,Tonnes,0.176
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2020,Tonnes,0.259
+CAN,Canada,Nickel,Total reductions in stock,Class A - Commercially recoverable resources,2021,Tonnes,0.134
+CAN,Canada,Nickel,Closing stock,Class A - Commercially recoverable resources,2000,Tonnes,4.782
+CAN,Canada,Nickel,Closing stock,Class A - Commercially recoverable resources,2001,Tonnes,4.335
+CAN,Canada,Nickel,Closing stock,Class A - Commercially recoverable resources,2002,Tonnes,4.92
+CAN,Canada,Nickel,Closing stock,Class A - Commercially recoverable resources,2003,Tonnes,4.303
+CAN,Canada,Nickel,Closing stock,Class A - Commercially recoverable resources,2004,Tonnes,3.846
+CAN,Canada,Nickel,Closing stock,Class A - Commercially recoverable resources,2005,Tonnes,3.96
