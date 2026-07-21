@@ -127,8 +127,8 @@ def download_data(api_url: str, temp_dir: str):
             download_success = download_file(url=csv_url,
                                              output_folder=temp_dir,
                                              unzip=False,
-                                             tries=3,
-                                             delay=5,
+                                             tries=10,
+                                             delay=10,
                                              backoff=2)
 
             if not download_success or not os.path.exists(util_output_path):
