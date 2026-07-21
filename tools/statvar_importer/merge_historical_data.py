@@ -126,7 +126,8 @@ def process_and_reconcile_data(current_path: str, historical_path: str,
     final_df = pd.concat([current_df, historical_only], ignore_index=True)
 
   try:
-    final_df.to_csv(output_path, index=False, encoding='utf-8')
+    with file_util.FileIO(output_path, 'w') as f:
+      final_df.to_csv(f, index=False, encoding='utf-8')
     logging.info('Successfully saved unified dataset to: %s', output_path)
 
     print('=' * 80)
