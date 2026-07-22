@@ -25,9 +25,14 @@ from zipfile import ZipFile
 from collections import OrderedDict
 import pandas as pd
 
-# Allows 'scripts' package to be imported when run as a script or module directly
+# Allows the sibling/parent module imports to work when running as a script or module
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.abspath(os.path.join(_SCRIPT_PATH, '../../../../..')))
+_curr = _SCRIPT_PATH
+while _curr and _curr != os.path.dirname(_curr):
+    if os.path.exists(os.path.join(_curr, '.git')) or os.path.exists(os.path.join(_curr, 'WORKSPACE')):
+        sys.path.append(_curr)
+        break
+    _curr = os.path.dirname(_curr)
 
 from scripts.us_census.acs5yr.subject_tables.common.generate_col_map import generate_stat_var_map
 
