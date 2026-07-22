@@ -1,0 +1,15 @@
+Node: E:DSD->E0
+dcid: C:DSD->ConstraintProp
+typeOf: C:DSD->ConstraintPropType
+name: C:DSD->ConstraintProp
+domainIncludes: dcid:UNSeries
+alternateName: C:DSD->ConceptName
+description: C:DSD->ConceptDescription
+rangeIncludes: C:DSD->ConstraintPropEnum
+
+Node: E:DSD->E1
+dcid: C:DSD->ConstraintPropEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: C:DSD->ConceptDescription
+

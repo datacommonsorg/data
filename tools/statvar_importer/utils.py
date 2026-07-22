@@ -67,7 +67,8 @@ def capitalize_first_char(string: str) -> str:
 
 
 def str_from_number(number: Union[int, float],
-                    precision_digits: Optional[int] = None) -> str:
+                    precision_digits: Optional[int] = None,
+                    max_int: int = sys.maxsize) -> str:
     """Converts a number (int or float) to its string representation.
 
     Integers and floats that are whole numbers (e.g., 10.0) are returned as
@@ -77,6 +78,7 @@ def str_from_number(number: Union[int, float],
     Args:
         number: The number to convert.
         precision_digits: Optional number of decimal places to round a float to.
+        max_int: Numbers larger than this are converted to float
 
     Returns:
         The string representation of the number.
@@ -94,7 +96,10 @@ def str_from_number(number: Union[int, float],
         '123.45'
     """
     # Check if number is an integer or float without any decimals.
-    if int(number) == number:
+    if abs(number) > max_int:
+        # Convert very large ints to float with potential loss of precision
+        number = float(number)
+    elif int(number) == number:
         number_int = int(number)
         return f'{number_int}'
     # Return float rounded to precision digits.
