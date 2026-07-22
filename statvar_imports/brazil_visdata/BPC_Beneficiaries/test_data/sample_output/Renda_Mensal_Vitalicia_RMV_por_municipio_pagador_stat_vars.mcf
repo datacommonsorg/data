@@ -1,0 +1,87 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/test_data/sample_input/Renda_Mensal_Vitalicia_RMV_por_municipio_pagador - data.csv --pv_map=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/pv_map/Renda_Mensal_Vitalicia_RMV_por_municipio_pagador - pvmap.csv --config_file=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/config_metadata/Renda_Mensal_Vitalicia_RMV_por_municipio_pagador - metadata.csv --output_path=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/test_data/sample_output/Renda_Mensal_Vitalicia_RMV_por_municipio_pagador --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2025-06-17 16:07:11.039024
+
+Node: dcid:Monthly_Count_Person_60OrMoreYears_BrazilContinuousCashBenefitProgram_MunicipalityBenefit_Lifetime_WithIncome_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Elderly (over 60 years old) BPC beneficiaries registered in the Single Registry receiving lifetime income from the municipality."
+populationType: dcid:Person
+measuredProperty: dcid:count
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único Menores de Idosos (Idade >60 anos) com Renda Vitalícia Paga pelo Município@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:MunicipalityBenefit
+incomeSource: dcid:Lifetime
+incomeStatus: dcid:WithIncome
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Monthly_Count_Person_BrazilContinuousCashBenefitProgram_MunicipalityBenefit_Lifetime_WithIncome_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry With Lifetime Income Paid By Municipality"
+populationType: dcid:Person
+measuredProperty: dcid:count
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC inscritos no Cadastro Único com renda vitalícia paga pelo município@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:MunicipalityBenefit
+incomeSource: dcid:Lifetime
+incomeStatus: dcid:WithIncome
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Monthly_Count_Person_BrazilContinuousCashBenefitProgram_MunicipalityBenefit_PermanentDisablity_Lifetime_WithIncome_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Permanent Disability With Lifetime Income Paid By Municipality"
+populationType: dcid:Person
+measuredProperty: dcid:count
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único em Invalidez Permanente com Renda Vitalícia Paga pelo Município@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:MunicipalityBenefit
+disabilityStatus: dcid:PermanentDisablity
+incomeSource: dcid:Lifetime
+incomeStatus: dcid:WithIncome
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Monthly_Income_Person_60OrMoreYears_BrazilContinuousCashBenefitProgram_MunicipalityBenefit_Lifetime_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Total amount paid to elderly (over 60 years old) BPC beneficiaries registered in the Single Registry receiving lifetime income from the municipality."
+populationType: dcid:Person
+measuredProperty: dcid:income
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Valor total pago aos beneficiários do BPC Inscritos no Cadastro Único sob Idoso(idade>60 anos) com Renda Vitalícia Paga pelo Município@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:MunicipalityBenefit
+incomeSource: dcid:Lifetime
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Monthly_Income_Person_BrazilContinuousCashBenefitProgram_MunicipalityBenefit_Lifetime_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Total amount paid to beneficiaries of BPC Registered in the Single Registry With Lifetime Income Paid By Municipality"
+populationType: dcid:Person
+measuredProperty: dcid:income
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+alternateName: "Valor total pago aos beneficiários do BPC inscritos no Cadastro Único com Renda Vitalícia Paga pelo Município@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:MunicipalityBenefit
+incomeSource: dcid:Lifetime
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Monthly_Income_Person_BrazilContinuousCashBenefitProgram_MunicipalityBenefit_PermanentDisablity_Lifetime_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Total amount paid to BPC beneficiaries with permanent disability receiving lifetime income from the municipality."
+populationType: dcid:Person
+measuredProperty: dcid:income
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+alternateName: "Valor total pago aos beneficiários do BPC Inscritos no Cadastro Único em Invalidez Permanente com Renda Vitalícia e Pago pelo Município@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+benefitSource: dcid:MunicipalityBenefit
+disabilityStatus: dcid:PermanentDisablity
+incomeSource: dcid:Lifetime
+registrationStatus: dcid:Brazil_SingleRegistry
+
