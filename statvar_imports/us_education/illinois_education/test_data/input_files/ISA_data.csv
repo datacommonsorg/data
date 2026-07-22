@@ -1,0 +1,50 @@
+RCDTS,Type,School Name,District,City,County,District Type,District Size,School Type,Grades Served,ISA Proficiency Total Student Count,ISA Proficiency Male Count,ISA Proficiency Female Count,ISA Proficiency Male %,ISA Proficiency Female %,ISA Participation Total Student Count,ISA Participation Male Count,ISA Participation Female Count,ISA Participation White Count,ISA Participation Black or African American Count,ISA Participation Hispanic or Latino Count,ISA Participation Asian Count,ISA Participation Native Hawaiian or Other Pacific Islander Count,ISA Participation American Indian or Alaska Native Count,ISA Participation Two or More Races Count,ISA Participation IEP Count,ISA Participation EL Count,ISA Participation Low Income Count,ISA Participation Total Student %,ISA Participation Male %,ISA Participation Female %,ISA Participation White %,ISA Participation Black or African American %,ISA Participation Hispanic or Latino %,ISA Participation Asian %,ISA Participation Native Hawaiian or Other Pacific Islander %,ISA Participation American Indian or Alaska Native %,ISA Participation Two or More Races %,ISA Participation IEP %,ISA Participation EL %,ISA Participation Low Income %
+10010010260000,District,,Payson CUSD 1,Payson,Adams,UNIT,MEDIUM,,,57,31,26,49.2,44.1,122,63,59,119,,,,,,,18,,61,100,100,100,100,,,,,,,100,,100
+10010010260001,School,Seymour High School,Payson CUSD 1,Payson,Adams,UNIT,MEDIUM,HIGH SCHOOL,7 8 9 10 11 12,35,20,15,52.6,46.9,70,38,32,69,,,,,,,,,35,100,100,100,100,,,,,,,,,100
+10010010262002,School,Seymour Elementary School,Payson CUSD 1,Payson,Adams,UNIT,MEDIUM,ELEMENTARY,PK K 1 2 3 4 5 6,22,11,11,44,40.7,52,25,27,50,,,,,,,,,26,100,100,100,100,,,,,,,,,100
+10010020260000,District,,Liberty CUSD 2,Liberty,Adams,UNIT,MEDIUM,,,77,41,36,61.2,64.3,123,67,56,120,,,,,,,18,,34,97.6,98.5,96.6,97.6,,,,,,,94.7,,97.1
+10010020260001,School,Liberty High School,Liberty CUSD 2,Liberty,Adams,UNIT,MEDIUM,HIGH SCHOOL,7 8 9 10 11 12,56,33,23,68.8,63.9,84,48,36,83,,,,,,,,,22,97.7,98,97.3,97.6,,,,,,,,,100
+10010020262002,School,Liberty Elementary School,Liberty CUSD 2,Liberty,Adams,UNIT,MEDIUM,ELEMENTARY,PK K 1 2 3 4 5 6,21,8,13,44.4,65,38,18,20,36,,,,,,,,,11,97.4,100,95.2,97.3,,,,,,,,,91.7
+10010030260000,District,,Central CUSD 3,Camp Point,Adams,UNIT,MEDIUM,,,106,58,48,57.4,64,176,101,75,171,,,,,,,28,,94,98.3,98.1,98.7,98.3,,,,,,,100,,97.9
+10010030260001,School,Central High School,Central CUSD 3,Camp Point,Adams,UNIT,MEDIUM,HIGH SCHOOL,9 10 11 12,21,12,9,41.4,45,49,29,20,48,,,,,,,,,21,96.1,96.7,95.2,96,,,,,,,,,95.5
+10010030261001,School,Central Junior High School,Central CUSD 3,Camp Point,Adams,UNIT,MEDIUM,MIDDLE SCHL,5 6 7 8,85,46,39,64.8,70.9,126,71,55,122,,,,,,,23,,72,99.2,98.6,100,99.2,,,,,,,100,,98.6
+10010030262003,School,Central Elementary Grade School,Central CUSD 3,Camp Point,Adams,UNIT,MEDIUM,ELEMENTARY,PK K 1 2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10010030262008,School,Central 3-4 Middle School,Central CUSD 3,Golden,Adams,UNIT,MEDIUM,ELEMENTARY,3 4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10010040260000,District,,CUSD 4,Mendon,Adams,UNIT,MEDIUM,,,43,22,21,28.6,33.3,140,77,63,135,,,,,,,25,,52,99.3,98.7,100,100,,,,,,,100,,98.1
+10010040260001,School,Unity High School,CUSD 4,Mendon,Adams,UNIT,MEDIUM,HIGH SCHOOL,9 10 11 12,9,2,7,13.3,31.8,37,15,22,37,,,,,,,,,12,97.4,93.8,100,100,,,,,,,,,92.3
+10010040262006,School,Unity Elementary School,CUSD 4,Mendon,Adams,UNIT,MEDIUM,ELEMENTARY,PK K 1 2 3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10010040262007,School,Unity Middle School,CUSD 4,Mendon,Adams,UNIT,MEDIUM,ELEMENTARY,4 5 6 7 8,34,20,14,32.3,34.1,103,62,41,98,,,,,,,17,,40,100,100,100,100,,,,,,,100,,100
+10011720220000,District,,Quincy SD 172,Quincy,Adams,UNIT,LARGE,,,613,307,306,45.8,45.5,1334,661,673,1052,128,47,15,,,90,243,,761,95,93.6,96.4,94.6,96.2,100,88.2,,,96.8,91.7,,95.8
+10011720220003,School,Quincy Sr High School,Quincy SD 172,Quincy,Adams,UNIT,LARGE,HIGH SCHOOL,9 10 11 12,172,84,88,38.9,38.8,427,202,225,352,32,10,,,,27,67,,229,91.4,88.6,94.1,91,88.9,100,,,,100,93.1,,92
+10011720221003,School,Quincy Jr High School,Quincy SD 172,Quincy,Adams,UNIT,LARGE,MIDDLE SCHL,6 7 2008,220,111,109,50.5,51.9,430,220,210,339,38,13,,,,35,63,,236,99.1,99.5,98.6,98.8,100,100,,,,100,98.4,,98.3
+10011720222004,School,Sarah Atwater Denman Elementary School Site 2,Quincy SD 172,Quincy,Adams,UNIT,LARGE,ELEMENTARY,K 1 2 3 4 5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10011720222006,School,Colonel George Iles Elementary School,Quincy SD 172,Quincy,Adams,UNIT,LARGE,ELEMENTARY,K 1 2 3 4 5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10011720222007,School,Thomas S Baldwin Elementary School Site 1,Quincy SD 172,Quincy,Adams,UNIT,LARGE,ELEMENTARY,K 1 2 3 4 5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10011720222008,School,Sarah Atwater Denman Elementary Site 1,Quincy SD 172,Quincy,Adams,UNIT,LARGE,ELEMENTARY,K 1 2 3 4 5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10011720222009,School,Thomas S Baldwin Elementary School Site 2,Quincy SD 172,Quincy,Adams,UNIT,LARGE,ELEMENTARY,K 1 2 3 4 5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10011720222016,School,Lincoln-Douglas Elementary School,Quincy SD 172,Quincy,Adams,UNIT,LARGE,ELEMENTARY,K 1 2 3 4 5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10011720222017,School,Dr. Abby Fox Rooney Elementary School,Quincy SD 172,Quincy,Adams,UNIT,LARGE,ELEMENTARY,K 1 2 3 4 5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10011720222019,School,Baldwin Intermediate,Quincy SD 172,Quincy,Adams,UNIT,LARGE,ELEMENTARY,4 5,221,112,109,48.3,46,469,232,237,355,56,24,,,,28,106,,296,97.3,97.1,97.5,97.3,100,100,,,,93.3,95.5,,97.4
+10050010260000,District,,Brown County CUSD 1,Mount Sterling,Brown,UNIT,MEDIUM,,,68,32,36,46.4,38.7,162,69,93,154,,,,,,,14,,135,100,100,100,100,,,,,,,100,,100
+10050010260001,School,Brown County High School,Brown County CUSD 1,Mount Sterling,Brown,UNIT,MEDIUM,HIGH SCHOOL,9 10 11 12,15,8,7,38.1,21.2,54,21,33,51,,,,,,,,,27,100,100,100,100,,,,,,,,,100
+10050010261002,School,Brown County Middle School,Brown County CUSD 1,Mount Sterling,Brown,UNIT,MEDIUM,MIDDLE SCHL,5 6 7 8,53,24,29,51.1,48.3,107,47,60,102,,,,,,,,,107,100,100,100,100,,,,,,,,,100
+10050010262002,School,Brown County Elementary School,Brown County CUSD 1,Mount Sterling,Brown,UNIT,MEDIUM,ELEMENTARY,PK K 1 2 3 4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10090150260000,District,,Beardstown CUSD 15,Beardstown,Cass,UNIT,MEDIUM,,,87,38,49,20.5,30.8,344,185,159,114,36,185,,,,,52,110,263,97.7,97.4,98.1,96.6,97.3,98.4,,,,,92.9,99.1,98.9
+10090150260007,School,Beardstown Jr/Sr High School,Beardstown CUSD 15,Beardstown,Cass,UNIT,MEDIUM,HIGH SCHOOL,5 6 7 8 9 10 11 12,87,38,49,20.5,30.8,344,185,159,114,36,185,,,,,52,110,263,98,97.9,98.1,97.4,97.3,98.4,,,,,94.5,99.1,98.9
+10090150262003,School,Gard Elementary School,Beardstown CUSD 15,Beardstown,Cass,UNIT,MEDIUM,ELEMENTARY,K 1 2 3 4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10090150263002,School,Grand Ave Sch,Beardstown CUSD 15,Beardstown,Cass,UNIT,MEDIUM,PreK,PK,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10090640260000,District,,Virginia CUSD 64,Virginia,Cass,UNIT,SMALL,,,17,5,12,19.2,30,66,26,40,61,,,,,,,,,36,100,100,100,100,,,,,,,,,100
+10090640260003,School,Virginia Jr/ Sr High School,Virginia CUSD 64,Virginia,Cass,UNIT,SMALL,HIGH SCHOOL,6 7 8 9 10 11 12,8,3,5,18.8,21.7,39,16,23,36,,,,,,,,,23,100,100,100,100,,,,,,,,,100
+10090640262001,School,Virginia Elem School,Virginia CUSD 64,Virginia,Cass,UNIT,SMALL,ELEMENTARY,PK K 1 2 3 4 5,9,2,7,20,41.2,27,10,17,25,,,,,,,,,13,100,100,100,100,,,,,,,,,100
+10092620260000,District,,A-C Central CUSD 262,Ashland,Cass,UNIT,SMALL,,,42,19,23,33.3,46,107,57,50,103,,,,,,,17,,55,95.5,95,96.2,95.4,,,,,,,81,,91.7
+10092620260002,School,A-C Central High School,A-C Central CUSD 262,Ashland,Cass,UNIT,SMALL,HIGH SCHOOL,9 10 11 12,10,3,7,15,33.3,41,20,21,40,,,,,,,,,20,97.6,100,95.5,97.6,,,,,,,,,95.2
+10092620261002,School,A-C Central Middle School,A-C Central CUSD 262,Ashland,Cass,UNIT,SMALL,MIDDLE SCHL,5 6 7 8,32,16,16,43.2,55.2,66,37,29,63,,,,,,,12,,35,100,100,100,100,,,,,,,100,,100
+10092620262001,School,A-C Central Elementary School,A-C Central CUSD 262,Chandlerville,Cass,UNIT,SMALL,ELEMENTARY,PK K 1 2 3 4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10690010260000,District,,Franklin CUSD 1,Franklin,Morgan,UNIT,SMALL,,,31,14,17,38.9,48.6,71,36,35,66,,,,,,,15,,24,100,100,100,100,,,,,,,100,,100
+10690010260001,School,Franklin Jr/Sr High School,Franklin CUSD 1,Franklin,Morgan,UNIT,SMALL,HIGH SCHOOL,3 4 5 6 7 8 9 10 11 12,16,6,10,27.3,41.7,46,22,24,43,,,,,,,,,14,100,100,100,100,,,,,,,,,100
+10690010262004,School,Alexander Elem School,Franklin CUSD 1,Alexander,Morgan,UNIT,SMALL,ELEMENTARY,2 3 4 5,15,8,7,57.1,63.6,25,14,11,23,,,,,,,,,10,100,100,100,100,,,,,,,,,100
+10690010262005,School,Franklin Elementary School,Franklin CUSD 1,Franklin,Morgan,UNIT,SMALL,ELEMENTARY,PK K 1 2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+10690060260000,District,,Waverly CUSD 6,Waverly,Morgan,UNIT,SMALL,,,44,25,19,55.6,51.4,82,45,37,78,,,,,,,16,,24,97.6,100,94.9,97.5,,,,,,,94.1,,96
+10690060260001,School,Waverly Junior/Senior High School,Waverly CUSD 6,Waverly,Morgan,UNIT,SMALL,HIGH SCHOOL,7 8 9 10 11 12,32,20,12,58.8,54.5,56,34,22,52,,,,,,,10,,17,96.6,100,91.7,96.3,,,,,,,90.9,,94.4
+10690060262002,School,Waverly Elementary School,Waverly CUSD 6,Waverly,Morgan,UNIT,SMALL,ELEMENTARY,PK K 1 2 3 4 5 6,12,5,7,50,46.7,25,10,15,25,,,,,,,,,,100,100,100,100,,,,,,,,,
+10690110260000,District,,Meredosia-Chambersburg CUSD 11,Meredosia,Morgan,UNIT,SMALL,,,12,9,3,39.1,21.4,37,23,14,35,,,,,,,,,20,92.5,92,93.3,94.6,,,,,,,,,87
