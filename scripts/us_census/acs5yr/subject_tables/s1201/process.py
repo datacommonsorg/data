@@ -16,10 +16,12 @@
 import os
 import sys
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(_SCRIPT_PATH)
-sys.path.append(os.path.join(_SCRIPT_PATH,
-                             '../common'))  # for col_map_generator, data_loader
-sys.path.append(os.path.abspath(os.path.join(_SCRIPT_PATH, '../../../../..')))
+_curr = _SCRIPT_PATH
+while _curr and _curr != os.path.dirname(_curr):
+    if os.path.exists(os.path.join(_curr, '.git')) or os.path.exists(os.path.join(_curr, 'WORKSPACE')):
+        sys.path.append(_curr)
+        break
+    _curr = os.path.dirname(_curr)
 
 # TODO: Add unit tests
 import json
@@ -29,8 +31,8 @@ import pandas as pd
 from absl import app, flags
 # TODO: logs from the column map step is empty when invoked from here, needs to be checked
 
-from generate_col_map import process_zip_file
-from data_loader import process_subject_tables
+from scripts.us_census.acs5yr.subject_tables.s1201.generate_col_map import process_zip_file
+from scripts.us_census.acs5yr.subject_tables.common.data_loader import process_subject_tables
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(

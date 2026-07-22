@@ -1,0 +1,18 @@
+2026-07-22 21:11:14,027 MainProcess  Processing: S1201_2019_21/ACSST5Y2021.S1201_data_with_overlays_1111-11-11T111111.csv (data_loader.py:263)
+2026-07-22 21:16:52,785 MainProcess  Completed with 64326273
+            observation for 348
+            StatVars at 200759 places.
+             (data_loader.py:357)
+2026-07-22 21:17:16,861 MainProcess  Processing: S1201_2019_21/ACSST5Y2020.S1201_data_with_overlays_1111-11-11T111111.csv (data_loader.py:263)
+2026-07-22 21:22:57,384 MainProcess  Completed with 64121526
+            observation for 348
+            StatVars at 200569 places.
+             (data_loader.py:357)
+2026-07-22 21:23:22,443 MainProcess  Processing: S1201_2019_21/ACSST5Y2019.S1201_data_with_overlays_1111-11-11T111111.csv (data_loader.py:263)
+2026-07-22 21:28:51,575 MainProcess  Completed with 60141369
+            observation for 348
+            StatVars at 187745 places.
+             (data_loader.py:357)
+2026-07-22 21:47:35,970 MainProcess  processing of subject table is complete: the summary of the
+            process is available at S1201_2019_21_output/S1201_summary.json along with the generated
+            output files. (data_loader.py:459)
