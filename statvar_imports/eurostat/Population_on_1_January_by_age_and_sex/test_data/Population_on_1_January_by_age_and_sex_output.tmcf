@@ -1,0 +1,10 @@
+Node: E:Population_on_1_January_by_age_and_sex_output->E0
+observationDate: C:Population_on_1_January_by_age_and_sex_output->observationDate
+observationAbout: C:Population_on_1_January_by_age_and_sex_output->observationAbout
+variableMeasured: C:Population_on_1_January_by_age_and_sex_output->variableMeasured
+value: C:Population_on_1_January_by_age_and_sex_output->value
+observationPeriod: C:Population_on_1_January_by_age_and_sex_output->observationPeriod
+measurementMethod: C:Population_on_1_January_by_age_and_sex_output->measurementMethod
+unit: C:Population_on_1_January_by_age_and_sex_output->unit
+scalingFactor: C:Population_on_1_January_by_age_and_sex_output->scalingFactor
+typeOf: dcs:StatVarObservation

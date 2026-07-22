@@ -1,0 +1,26 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EuroStat_Marriages_by_sex_and_previous_marital_status",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://ec.europa.eu/eurostat/databrowser/view/demo_nmsta/default/table?lang=en",
+      "provenance_description": "The Eurostat Marriages by sex and previous marital status indicator offers standardized, long-term national demographic insights into social structure developments across European countries. Updated annually, it details the yearly count of marriage ceremonies stratified by the sex of the individuals and classified by their prior legal marital background (such as never-married single persons, divorcees, or widowed individuals).",
+      "scripts": [
+        "run.sh"
+      ],
+      "source_files": [
+        "input_files/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "final_output/Marriages_by_sex_and_previous_marital_status_output.tmcf",
+          "cleaned_csv": "final_output/Marriages_by_sex_and_previous_marital_status_output.csv"
+        }
+      ],
+      "cron_schedule": "5 1 1,15 * *",
+      "resource_limits": {"cpu": 4, "memory": 8, "disk":100}
+        }
+   ]
+}
