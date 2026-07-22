@@ -73,8 +73,7 @@ def main(argv):
     has_percent = FLAGS.has_percent
     debug = FLAGS.debug
 
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+    os.makedirs(output_dir, exist_ok=True)
 
     # TODO: remove the constraint of inputs being only zip file
     # context: the current implementation of the column map generator accepts

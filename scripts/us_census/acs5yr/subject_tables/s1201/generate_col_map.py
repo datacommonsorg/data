@@ -36,6 +36,8 @@ sys.path.append(os.path.join(_SCRIPT_PATH,
 # to avoid circular and conflicting name import issues.
 _COMMON_COL_MAP_PATH = os.path.abspath(os.path.join(_SCRIPT_PATH, '../common/generate_col_map.py'))
 _spec = importlib.util.spec_from_file_location("common_generate_col_map", _COMMON_COL_MAP_PATH)
+if _spec is None or _spec.loader is None:
+    raise ImportError(f"Failed to load module spec from {_COMMON_COL_MAP_PATH}")
 _common_generate_col_map = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_common_generate_col_map)
 generate_stat_var_map = _common_generate_col_map.generate_stat_var_map
