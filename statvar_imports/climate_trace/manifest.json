@@ -1,7 +1,7 @@
 {
   "import_specifications": [
     {
-      "import_name": "ClimateTrace",
+      "import_name": "ClimateTrace_GHG_Emissions",
       "curator_emails": [
         "support@datacommons.org"
       ],
