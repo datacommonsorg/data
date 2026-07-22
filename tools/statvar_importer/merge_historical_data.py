@@ -16,7 +16,7 @@
 This script compares a current output CSV with an older historical CSV. It
 identifies rows in the historical file that are still missing from the current
 output file based on specific composite keys and generates a unified
-concatenated CSV. It safely accesses cloud storage locations using internal utilities.
+concatenated CSV. It safely accesses cloud storage locations using internal utilities
 """
 
 import os
