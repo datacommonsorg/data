@@ -19,6 +19,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_PATH)
 sys.path.append(os.path.join(_SCRIPT_PATH,
                              '../common'))  # for col_map_generator, data_loader
+sys.path.append(os.path.abspath(os.path.join(_SCRIPT_PATH, '../../../../..')))
 
 # TODO: Add unit tests
 import json
@@ -58,9 +59,8 @@ def set_column_map(input_path, spec_path, output_dir):
                                          spec_path,
                                          write_output=False)
     os.makedirs(output_dir, exist_ok=True)
-    f = open(os.path.join(output_dir, 'column_map.json'), 'w')
-    json.dump(generated_col_map, f, indent=4)
-    f.close()
+    with open(os.path.join(output_dir, 'column_map.json'), 'w') as f:
+        json.dump(generated_col_map, f, indent=4)
 
 
 def main(argv):

@@ -15,7 +15,7 @@
 import os
 import unittest
 
-from status_file_utils import *
+from scripts.us_census.api_utils.status_file_utils import *
 
 
 class TestCommonUtil(unittest.TestCase):

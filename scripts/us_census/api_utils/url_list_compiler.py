@@ -26,7 +26,7 @@ from sys import path
 from typing import Any, Union
 
 from census_api_helpers import *
-from status_file_utils import sync_status_list
+from scripts.us_census.api_utils.status_file_utils import sync_status_list
 
 FLAGS = flags.FLAGS
 
