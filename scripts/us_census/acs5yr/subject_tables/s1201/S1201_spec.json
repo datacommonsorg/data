@@ -229,41 +229,7 @@
         }
    },
 
-   "overwrite_dcids": {
-        "Count_Person_15OrMoreYears_Separated": "Count_Person_Separated",
-        "Count_Person_15OrMoreYears_NeverMarried": "Count_Person_NeverMarried",
-        "Count_Person_15OrMoreYears_Divorced": "Count_Person_Divorced",
-        "Count_Person_15OrMoreYears_Widowed": "Count_Person_Widowed",
-        "Count_Person_15OrMoreYears_MarriedAndNotSeparated": "Count_Person_MarriedAndNotSeparated",
-        "MarginOfError_Count_Person_15OrMoreYears_Separated": "MarginOfError_Count_Person_Separated",
-        "MarginOfError_Count_Person_15OrMoreYears_NeverMarried": "MarginOfError_Count_Person_NeverMarried",
-        "MarginOfError_Count_Person_15OrMoreYears_Divorced": "MarginOfError_Count_Person_Divorced",
-        "MarginOfError_Count_Person_15OrMoreYears_Widowed": "MarginOfError_Count_Person_Widowed",
-        "MarginOfError_Count_Person_15OrMoreYears_MarriedAndNotSeparated": "MarginOfError_Count_Person_MarriedAndNotSeparated",
-
-        "Count_Person_15OrMoreYears_Male_Separated": "Count_Person_Male_Separated",
-        "Count_Person_15OrMoreYears_Male_NeverMarried": "Count_Person_Male_NeverMarried",
-        "Count_Person_15OrMoreYears_Male_Divorced": "Count_Person_Male_Divorced",
-        "Count_Person_15OrMoreYears_Male_Widowed": "Count_Person_Male_Widowed",
-        "Count_Person_15OrMoreYears_Male_MarriedAndNotSeparated": "Count_Person_Male_MarriedAndNotSeparated",
-        "MarginOfError_Count_Person_15OrMoreYears_Male_Separated": "MarginOfError_Count_Person_Male_Separated",
-        "MarginOfError_Count_Person_15OrMoreYears_Male_NeverMarried": "MarginOfError_Count_Person_Male_NeverMarried",
-        "MarginOfError_Count_Person_15OrMoreYears_Male_Divorced": "MarginOfError_Count_Person_Male_Divorced",
-        "MarginOfError_Count_Person_15OrMoreYears_Male_Widowed": "MarginOfError_Count_Person_Male_Widowed",
-        "MarginOfError_Count_Person_15OrMoreYears_Male_MarriedAndNotSeparated": "MarginOfError_Count_Person_Male_MarriedAndNotSeparated",
-
-        "Count_Person_15OrMoreYears_Female_Separated": "Count_Person_Female_Separated",
-        "Count_Person_15OrMoreYears_Female_NeverMarried": "Count_Person_Female_NeverMarried",
-        "Count_Person_15OrMoreYears_Female_Divorced": "Count_Person_Female_Divorced",
-        "Count_Person_15OrMoreYears_Female_Widowed": "Count_Person_Female_Widowed",
-        "Count_Person_15OrMoreYears_Female_MarriedAndNotSeparated": "Count_Person_Female_MarriedAndNotSeparated",
-        "MarginOfError_Count_Person_15OrMoreYears_Female_Separated": "MarginOfError_Count_Person_Female_Separated",
-        "MarginOfError_Count_Person_15OrMoreYears_Female_NeverMarried": "MarginOfError_Count_Person_Female_NeverMarried",
-        "MarginOfError_Count_Person_15OrMoreYears_Female_Divorced": "MarginOfError_Count_Person_Female_Divorced",
-        "MarginOfError_Count_Person_15OrMoreYears_Female_Widowed": "MarginOfError_Count_Person_Female_Widowed",
-        "MarginOfError_Count_Person_15OrMoreYears_Female_MarriedAndNotSeparated": "MarginOfError_Count_Person_Female_MarriedAndNotSeparated"
-
-    },
+   "overwrite_dcids": {},
     "denominators":{
         "Estimate!!Total!!Population 15 years and over": [
             "Estimate!!Now married (except separated)!!Population 15 years and over",

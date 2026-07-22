@@ -12,9 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Generic proces module to generate the csv/tmcf and csv"""
-# TODO: Add unit tests
+# Allows the sibling/parent module imports to work when running as a script or module
 import os
 import sys
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_PATH)
+sys.path.append(os.path.join(_SCRIPT_PATH,
+                             '../common'))  # for col_map_generator, data_loader
+
+# TODO: Add unit tests
 import json
 from zipfile import ZipFile
 import pandas as pd
@@ -22,12 +28,7 @@ import pandas as pd
 from absl import app, flags
 # TODO: logs from the column map step is empty when invoked from here, needs to be checked
 
-from .generate_col_map import generate_stat_var_map, process_zip_file
-
-# Allows the following module imports to work when running as a script
-_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH,
-                             '../common'))  # for col_map_generator, data_loader
+from generate_col_map import process_zip_file
 from data_loader import process_subject_tables
 
 FLAGS = flags.FLAGS
@@ -56,6 +57,7 @@ def set_column_map(input_path, spec_path, output_dir):
     generated_col_map = process_zip_file(input_path,
                                          spec_path,
                                          write_output=False)
+    os.makedirs(output_dir, exist_ok=True)
     f = open(os.path.join(output_dir, 'column_map.json'), 'w')
     json.dump(generated_col_map, f, indent=4)
     f.close()
@@ -70,6 +72,9 @@ def main(argv):
     output_dir = FLAGS.output_dir
     has_percent = FLAGS.has_percent
     debug = FLAGS.debug
+
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
     # TODO: remove the constraint of inputs being only zip file
     # context: the current implementation of the column map generator accepts

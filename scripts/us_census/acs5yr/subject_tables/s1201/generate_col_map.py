@@ -25,11 +25,20 @@ from zipfile import ZipFile
 from collections import OrderedDict
 import pandas as pd
 
+import importlib.util
+
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH,
                              '../common'))  # for statvar_dcid_generator
-from generate_col_map import generate_stat_var_map
+
+# Dynamically import generate_stat_var_map from ../common/generate_col_map.py
+# to avoid circular and conflicting name import issues.
+_COMMON_COL_MAP_PATH = os.path.abspath(os.path.join(_SCRIPT_PATH, '../common/generate_col_map.py'))
+_spec = importlib.util.spec_from_file_location("common_generate_col_map", _COMMON_COL_MAP_PATH)
+_common_generate_col_map = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_common_generate_col_map)
+generate_stat_var_map = _common_generate_col_map.generate_stat_var_map
 
 
 def process_zip_file(zip_file_path,
