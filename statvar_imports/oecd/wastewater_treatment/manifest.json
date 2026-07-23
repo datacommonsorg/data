@@ -10,17 +10,21 @@
             "scripts": [
                 "../../../util/download_util_script.py --download_url='https://sdmx.oecd.org/public/rest/data/OECD.ENV.EPI,DSD_WATER_TREAT@DF_WATER_TREAT,/all?dimensionAtObservation=AllDimensions&format=csvfilewithlabels' --output_folder=input",
                 "preprocess.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/oecd_wastewatertreatment_data.csv --pv_map=oecd_wastewatertreatment_pvmap.csv --config_file=oecd_wastewatertreatment_metadata.csv --places_resolved_csv=oecd_wastewatertreatment_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/oecd_wastewatertreatment"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/oecd_wastewatertreatment_data.csv --pv_map=oecd_wastewatertreatment_pvmap.csv --config_file=oecd_wastewatertreatment_metadata.csv --places_resolved_csv=oecd_wastewatertreatment_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/oecd_wastewatertreatment --output_counters=counters/oecd_wastewatertreatment.csv",
+                "../../../tools/statvar_importer/merge_historical_data.py --current_output=output/oecd_wastewatertreatment.csv --historical_output=https://storage.mtls.cloud.google.com/unresolved_mcf/oecd/oecd_wastewater_treatment/historical_data/oecd_waste_water_historical.csv --output_file=output/oecd_wastewatertreatment_merged.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "output/oecd_wastewatertreatment.tmcf",
-                    "cleaned_csv": "output/oecd_wastewatertreatment.csv"
+                    "cleaned_csv": "output/oecd_wastewatertreatment_merged.csv"
                 }
             ],
             "cron_schedule": "0 10 1,15 * *",
+            "validation_config_file": "validation_config.json",
             "source_files": [
-                "input/*.csv"
+                "input/*.csv",
+                "golden_data/*.csv",
+                "counters/*.csv"
             ]
         }
     ]
