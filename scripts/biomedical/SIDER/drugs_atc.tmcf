@@ -1,0 +1,11 @@
+Node: E:drugs->E1
+typeOf: dcs:ChemicalCompound
+dcid: C:drugs->PubChem
+pubChemCompoundID: C:drugs->CompoundID
+atcCode: C:drugs->ATC
+
+Node:E:drugs->E2
+typeOf: dcs:AnatomicalTherapeuticChemicalCode
+dcid: C:drugs->ATC
+atcCode: C:drugs->ATCCode
+specializationOf: C:drugs->ATCParent
