@@ -1,0 +1,20 @@
+Node: dcid:age
+typeOf: dcid:Property
+name: "age"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:gender
+typeOf: dcid:Property
+name: "gender"
+rangeIncludes: dcid:GenderType
+
+Node: dcid:DRC_FirstUnion
+typeOf: dcid:USC_MaritalStatusEnum
+name: "DRC_ First Union"
+isProvisional: dcid:True
+
+Node: dcid:FirstBirth
+typeOf: dcid:BirthEventStatusEnum
+name: "First Birth"
+isProvisional: dcid:True
+

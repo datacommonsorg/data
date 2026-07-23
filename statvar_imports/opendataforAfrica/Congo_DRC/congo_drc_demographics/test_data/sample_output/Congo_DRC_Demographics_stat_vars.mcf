@@ -1,0 +1,146 @@
+Node: dcid:Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Total Projected population for all age group"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_Person_0To4Years
+typeOf: dcid:StatisticalVariable
+name: "Total Projected population for the age group 0 to 4 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+
+Node: dcid:Count_Person_0To4Years_Male
+typeOf: dcid:StatisticalVariable
+name: "Total projected population of males for the age group 0 to 4 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_10To14Years
+typeOf: dcid:StatisticalVariable
+name: "Total Projected population for the age group 10 to 14 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+
+Node: dcid:Count_Person_10To14Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Total projected population of females for the age group 10 to 14 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [10 14 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_25To29Years
+typeOf: dcid:StatisticalVariable
+name: "Total Projected population for the age group 25 to 29 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+
+Node: dcid:Count_Person_25To29Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Total projected population of females for the age group 25 to 29 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 29 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_35To39Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Total projected population of females for the age group 35 to 39 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 39 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_40To44Years_Male
+typeOf: dcid:StatisticalVariable
+name: "Total projected population of males for the age group 40 to 44 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 44 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_45To49Years
+typeOf: dcid:StatisticalVariable
+name: "Total Projected population for the age group 45 to 49 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 49 Years]
+
+Node: dcid:Count_Person_50To54Years_Male
+typeOf: dcid:StatisticalVariable
+name: "Total projected population of males for the age group 50 to 54 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 54 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_60To64Years_Male
+typeOf: dcid:StatisticalVariable
+name: "Total projected population of males for the age group 60 to 64 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 64 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_70To74Years
+typeOf: dcid:StatisticalVariable
+name: "Total Projected population for the age group above 75 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+
+Node: dcid:Count_Person_70To74Years_Male
+typeOf: dcid:StatisticalVariable
+name: "Total projected population of males for the age group 70 to 74 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [70 74 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_75OrMoreYears
+typeOf: dcid:StatisticalVariable
+name: "Total Projected population for the age group 70 to 74 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [75 - Years]
+
+Node: dcid:Median_Count_Person_25To49Years_Female_DRCFirstUnion
+typeOf: dcid:StatisticalVariable
+name: "The median age of women at their first union for the age group 25 to 49 (in %)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:medianValue
+age: [25 49 Years]
+gender: dcid:Female
+maritalStatus: dcid:DRC_FirstUnion
+
+Node: dcid:Median_Count_Person_25To49Years_FirstBirth
+typeOf: dcid:StatisticalVariable
+name: "The median age of parents at their first birth was 25 to 49 years old"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:medianValue
+age: [25 49 Years]
+birthEventStatus: dcid:FirstBirth
+
