@@ -169,7 +169,8 @@ flags.DEFINE_bool('llm_generate_statvar_name', False,
                   'Generate names for Statvars.')
 flags.DEFINE_bool('enable_cloud_logging', False,
                   'Enable cloud logging when running on cloud.')
-
+flags.DEFINE_string('statvar_dcid_prefix', '',
+                    'Prefix for statvar dcid.')
 
 def get_default_config() -> dict:
     """Returns the default config as dictionary of config parameters and values."""
@@ -433,6 +434,21 @@ def get_default_config() -> dict:
             _FLAGS.generate_statvar_name,  # Generate names for StatVars
         'llm_generate_statvar_name':
             _FLAGS.llm_generate_statvar_name,
+
+        # Settings for statvar dcid generator
+        'statvar_dcid_fixed_properties': [],
+        'statvar_dcid_prefix':
+            _FLAGS.statvar_dcid_prefix,
+        'statvar_dcid_remove_prefix':
+            '',
+        'statvar_dcid_delimiter':
+            '',
+        'statvar_dcid_value_delimiter':
+            '',
+        'statvar_dcid_upper_case':
+            False,
+        'statvar_dcid_remove_prefix':
+            '',
     }
 
 
