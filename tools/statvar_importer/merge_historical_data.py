@@ -105,14 +105,13 @@ def process_and_reconcile_data(current_path: str, historical_path: str,
 
   logging.info('Generating series footprints for alignment validation...')
 
-  # Extract only the key columns from the current CSV and drop any duplicates
-  current_keys = current_df[keys].drop_duplicates()
-
-  # Perform a left merge from the historical data onto the current keys
-  merged = historical_df.merge(current_keys, on=keys, how='left', indicator=True)
-
-  # Keep only the rows from the historical CSV that DO NOT exist in the current CSV
-  historical_only = historical_df[merged['_merge'] == 'left_only'].copy()
+  # Identify rows in historical_df whose composite keys are missing from current_df
+  merged = historical_df.merge(
+      current_df[keys].drop_duplicates(), on=keys, how='left', indicator=True
+  )
+  historical_only = merged[merged['_merge'] == 'left_only'].drop(
+      columns=['_merge']
+  )
 
   if historical_only.empty:
     logging.info('All historical data points are already active in current.')
@@ -130,12 +129,14 @@ def process_and_reconcile_data(current_path: str, historical_path: str,
       final_df.to_csv(f, index=False, encoding='utf-8')
     logging.info('Successfully saved unified dataset to: %s', output_path)
 
-    print('=' * 80)
-    print(f'Current Base Records Processed : {len(current_df)}')
-    print(f'Historical Points Re-inserted  : {len(historical_only)}')
-    print(f'Total Unified Series Exported  : {len(final_df)}')
-    print(f'Target File Location           : {output_path}')
-    print('=' * 80)
+    logging.info(
+        '\n' + '=' * 80 + '\n'
+        f'Current Base Records Processed : {len(current_df)}\n'
+        f'Historical Points Re-inserted  : {len(historical_only)}\n'
+        f'Total Unified Series Exported  : {len(final_df)}\n'
+        f'Target File Location           : {output_path}\n'
+        + '=' * 80
+    )
   except Exception as e:
     logging.fatal('Failed to write reconciliation dataset matrix: %s', e)
     sys.exit(1)
