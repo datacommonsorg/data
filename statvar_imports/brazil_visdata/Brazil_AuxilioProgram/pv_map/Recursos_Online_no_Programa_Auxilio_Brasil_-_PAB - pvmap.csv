@@ -1,0 +1,7 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,,
+Referência,observationDate,{Data},observationAbout,country/BRA,benefitProgram,Brazil_AuxilioBrasilProgram,observationPeriod,P2M,measurementQualifier,Bimonthly,,
+Total de recursos,value,{Number},populationType,Resource,,,,,name,"""The total number of resources in Auxilio Brasil Programs.""",alternateName,"""O total de recursos dos Programas Auxilio Brasil@pt"""
+Total de recursos avaliados,value,{Number},populationType,Resource,benefitsStatus,Evaluated,,,name,"""The total number of resources evaluated in Auxilio Brasil Programs.""",alternateName,"""Total de recursos avaliados nos Programas Auxilio Brasil@pt"""
+Total de recursos avaliados e deferidos,value,{Number},populationType,Resource,benefitsStatus,Granted,,,name,"""The total number of resources evaluated and granted in Auxilio Brasil Programs.""",alternateName,"""Total de recursos avaliados e concedidos nos Programas Auxilio Brasil@pt"""
+Total de recursos avaliados e indeferidos,value,{Number},populationType,Resource,benefitsStatus,Rejected,,,name,"""The total number of resources evaluated and rejected in Auxilio Brasil Programs.""",alternateName,"""Total de recursos avaliados e rejeitados nos Programas Auxilio Brasil @pt"""
+Recursos cadastrados e NÃO avaliados,value,{Number},populationType,Resource,benefitsStatus,NotEvaluated,registrationStatus,Registered,name,"""The total number of resources not evaluated and registered in Auxilio Brasil Programs.""",alternateName,"""Total de recursos não avaliados e cadastrados nos Programas Auxilio Brasil@pt"""
