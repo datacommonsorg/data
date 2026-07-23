@@ -1,0 +1,8 @@
+Node: E:kenya_economy->E0
+observationAbout: C:kenya_economy->observationAbout
+observationDate: C:kenya_economy->observationDate
+value: C:kenya_economy->value
+variableMeasured: C:kenya_economy->variableMeasured
+unit: C:kenya_economy->unit
+scalingFactor: C:kenya_economy->scalingFactor
+typeOf: dcs:StatVarObservation
