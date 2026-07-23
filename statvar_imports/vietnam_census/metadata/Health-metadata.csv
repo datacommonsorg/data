@@ -1,0 +1,11 @@
+parameter,value
+url,https://www.gso.gov.vn/en/px-web/?pxid=E1105&theme=Health%2C%20Culture%2C%20Sport%20and%20Living%20standard
+description,Number of health establishments under provincial departments of health by province
+#place_type,"AA2,AA1"
+#places_within,country/VNM
+start_date,
+end_date,
+release_frequency,1years
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,#input"
+mapped_rows,4
+mapped_columns,1
