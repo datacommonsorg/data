@@ -1,0 +1,52 @@
+key,property1,value1,property2,value2,property3,value3,property4,value4,property5,value5,property6,value6
+
+
+# --- AUTOMATED CLEANUP: Ignored Columns ---
+DATAFLOW,#ignore,"",,,,,,,,,,
+LAST UPDATE,#ignore,"",,,,,,,,,,
+CONF_STATUS,#ignore,"",,,,,,,,,,
+
+# Frequency dimension (P1Y for Annual series)
+freq:A,observationPeriod,P1Y,,,,,,,,,
+
+# --- Geopolitical Entity Translation (Bypasses offline API call failures) ---
+geo,observationAbout,{Data},,,,,,,
+EU27_2007,#ignore,"",,,,,,,,,,
+EU28,#ignore,"",,,,,,,,,,
+EU27_2020,#ignore,"",,,,,,, 
+
+# --- Mapped Marriage Indicators (Strict Person-Based Tracking) ---
+# Mean age at first marriage (Mapped to Person population with FirstMarriage status)
+indic_de:FAGEMAR1,populationType,dcs:Person,measuredProperty,dcs:age,statType,dcs:meanValue,gender,dcs:Female,maritalStatus,dcs:FirstMarriage,unit,dcs:Year
+indic_de:MAGEMAR1,populationType,dcs:Person,measuredProperty,dcs:age,statType,dcs:meanValue,gender,dcs:Male,maritalStatus,dcs:FirstMarriage,unit,dcs:Year
+
+# First Marriage Rates (TFMR) modeled under Person population
+indic_de:FMAR1CUM,populationType,dcs:Person,measuredProperty,dcs:count,statType,dcs:measuredValue,gender,dcs:Female,maritalStatus,dcs:FirstMarriage,measurementDenominator,dcs:Count_Person_Female
+indic_de:MMAR1CUM,populationType,dcs:Person,measuredProperty,dcs:count,statType,dcs:measuredValue,gender,dcs:Male,maritalStatus,dcs:FirstMarriage,measurementDenominator,dcs:Count_Person_Male
+
+# First Marriage Proportions (NeverMarried as fraction of EverMarried females/males)
+indic_de:FMAR1PC,populationType,dcs:Person,measuredProperty,dcs:count,statType,dcs:measuredValue,gender,dcs:Female,maritalStatus,dcs:NeverMarried,measurementDenominator,dcs:Count_Person_Female_EverMarried
+indic_de:MMAR1PC,populationType,dcs:Person,measuredProperty,dcs:count,statType,dcs:measuredValue,gender,dcs:Male,maritalStatus,dcs:NeverMarried,measurementDenominator,dcs:Count_Person_Male_EverMarried
+
+# Absolute Counts (Coded as MarriedInThePast12Months)
+indic_de:MARRIAGE,populationType,dcs:Person,measuredProperty,dcs:count,statType,dcs:measuredValue,maritalStatus,dcs:MarriedInThePast12Months,,,
+
+# Crude Marriage Rate (Count of persons married in the past 12 months as a fraction of total population)
+indic_de:GNUPRT,populationType,dcs:Person,measuredProperty,dcs:count,statType,dcs:measuredValue,maritalStatus,dcs:MarriedInThePast12Months,measurementDenominator,dcs:Count_Person,scalingFactor,1000
+
+# Catch-All Fallback: Cleanly ignore any remaining unmapped indicator codes
+indic_de,#ignore,"",,,,,,,,,,
+
+# --- Time, Value, and Flags ---
+TIME_PERIOD,observationDate,{Data},,,,,,,,,,
+OBS_VALUE,value,{Number},,,,,,,,,,
+
+# Safely Ignoring Transient and Composite Status Flags to Prevent Ingestion Warnings
+OBS_FLAG,#ignore,"",,,,,,,,,,
+OBS_FLAG:b,#ignore,"",,,,,,,,,,
+OBS_FLAG:p,#ignore,"",,,,,,,,,,
+OBS_FLAG:e,#ignore,"",,,,,,, 
+OBS_FLAG:ep,#ignore,"",,,,,,,,,,
+OBS_FLAG:i,#ignore,"",,,,,,,,,,
+OBS_FLAG:M,MissingValue,"",,,,,,,,,,
+OBS_FLAG:NA,MissingValue,"",,,,,,,,,,
