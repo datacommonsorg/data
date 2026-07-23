@@ -8,10 +8,12 @@
             "provenance_url": "https://unstats.un.org/unsd/energystats/data/",
             "provenance_description": "The data is provided by the United Nations Statistics Division (UNSD) and is based on energy statistics collected through a variety of methods. The primary source for the data is the Annual Questionnaire on Energy Statistics (AQES), which is part of UNSD's regular data collection program. ",
             "scripts": [
-                "run.sh "
+                "run.sh --output_counters=counters/un_energy_all_counters.csv"
             ],
             "source_files": [
-                "input_data/un_energy_all.csv"
+                "input_data/un_energy_all.csv",
+                "golden_data/*.csv",
+                "counters/*.csv"
             ],
             "import_inputs": [
                 {
