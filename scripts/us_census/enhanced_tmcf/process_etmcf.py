@@ -29,6 +29,10 @@ class NewCSVColumn:
     ordered_csv_column_names: List[str]
 
 
+def _replace_ct_with_empty(line: str) -> str:
+    return line.replace("C:T->", "")
+
+
 def _replace_ce_t_with_filename(line: str, csv_out_name: str) -> str:
     if "C:T" in line or "E:T" in line:
         return line.replace(":T", ":" + csv_out_name)
@@ -95,6 +99,36 @@ def _get_geoId_column(input_csv_filepath: str) -> List[str]:
     return geoIds
 
 
+def _get_cols_to_secondary_names(input_csv_filepath: str,
+                                 secondary_row_num=1) -> Dict[str, str]:
+    with open(input_csv_filepath, 'r') as input_csv:
+        csv_reader = csv.DictReader(input_csv)
+        seconary_names = []
+        row_num = 1
+        for row_dict in csv_reader:
+            if row_num == secondary_row_num:
+                return row_dict
+            row_num += 1
+    return {}
+
+
+def _verify_return_new_col(query_format: str,
+                           new_csv_columns: List[NewCSVColumn],
+                           ordered_csv_column_names: List[str]):
+    # Verify that such a new column does not already exist.
+    for new_col in new_csv_columns:
+        if query_format == new_col.format:
+            return new_col
+
+    new_col = NewCSVColumn(
+        name="new_col_" + str(len(new_csv_columns)),
+        format=query_format,
+        ordered_csv_column_names=ordered_csv_column_names,
+    )
+    new_csv_columns.append(new_col)
+    return new_col
+
+
 def _process_var_measured_new_column(
         var_measured_str: str,
         new_csv_columns: List[NewCSVColumn]) -> NewCSVColumn:
@@ -121,7 +155,7 @@ def _process_var_measured_new_column(
                 f"Exactly one '=' expected in the key/val opaque mapping. Got: {param_and_val}"
             )
         key = key_val_split[0]
-        col_name = key_val_split[1].replace("C:T->", "")
+        col_name = _replace_ct_with_empty(key_val_split[1])
 
         ordered_csv_column_names.append(col_name)
         query_format += key + "="
@@ -135,22 +169,84 @@ def _process_var_measured_new_column(
 
     # TODO: remove these checks when a better format for opaque mapping is agreed.
     query_format = query_format.replace("?", "__")
-    query_format = query_format.replace("&", "++")
+    query_format = query_format.replace("&", "%%")
     query_format = query_format.replace("=", "--")
 
-    # Verify that such a new column does not already exist.
-    for new_col in new_csv_columns:
-        if query_format == new_col.format:
-            return new_col
+    return _verify_return_new_col(query_format, new_csv_columns,
+                                  ordered_csv_column_names)
 
-    new_col = NewCSVColumn(
-        name="new_col_" + str(len(new_csv_columns)),
-        format=query_format,
-        ordered_csv_column_names=ordered_csv_column_names,
-    )
 
-    new_csv_columns.append(new_col)
-    return new_col
+def _process_name_new_column(
+        name_str: str, cols_to_secondary_names: Dict[str, str],
+        new_csv_columns: List[NewCSVColumn]) -> NewCSVColumn:
+    # Example of line: "T:ESTAB?C:T->NAICS2012=C:T->NAICS2012_LABEL&C:T->TAXSTAT=C:T->TAXSTAT_LABEL&C:T->TYPOP=C:T->TYPOP_LABEL"
+    # Example output name: """First-quarter payroll ($1,000): Wholesale trade (2012 NAICS code); All establishments (Tax status code); Merchant wholesalers, except manufacturers' sales branches and offices (Type of operation code)"""
+    #   Explanation:
+    #       1. The first part before the : comes from T:ESTAB (for which the secondary row is used to get "First-quarter payroll ($1,000)")
+    #       2. The remaining parts are ; delimited
+    #       3. Each component (separated by ?) in the remaining parts is constructed using <key>=<val> as follows:
+    #               <val column's entry in the data row> (<key column's entry in the secondary row>)
+    #               e.g. Wholesale trade (2012 NAICS code)
+    #               where "Wholesale trade" is the NAICS2012_LABEL column's entry in that data row and
+    #                     "(2012 NAICS code)" is the secondary row entry for the NAICS2012 column.
+    #   Note that the secondary column refers to the row of strings corresponding to the header (usually assumed to be in the second row).
+
+    # Step 0: split on "?"
+    (source_str, opaque_portion) = _split_source_query_portions(name_str)
+
+    # Step 1: replace T:<col_name> with the col_value.
+    source_str = source_str.replace("T:", "")
+
+    if source_str not in cols_to_secondary_names:
+        raise Exception(
+            f"<col_name> in T:<col_name> must exist in the input CSV. <col_name> = {source_str}, name line = {name_str}"
+        )
+    # The 'source_str' is assumed to be a column in the CSV but it is replaced with
+    # the value in the secondary row.
+    # This means that it will be the same for ALL rows (i.e. it won't need to be added in the new column).
+    source_val_str = cols_to_secondary_names[source_str]
+    query_format = "\"" + source_val_str + ":"
+
+    # Step 2: split on '&'
+    query_split = opaque_portion.split("&")
+    num_params = len(query_split)
+
+    ordered_csv_column_names = []
+    index = 0
+    for param_and_val in query_split:
+        # Extract both key and value. Both are assumed to be columns in the CSV.
+        # The 'key' column will be replaced by the value in the secondary row for the 'key' column.
+        #   This means that it will be the same for ALL rows (i.e. it won't need to be added in the new column).
+        # The 'value' column will be replaced by the value in the data row for the 'value' column.
+        #   This means that it will be different for each data row (i.e. it needs to be added in the new column).
+        key_val_split = param_and_val.split("=")
+        if len(key_val_split) != 2:
+            raise Exception(
+                f"Exactly one '=' expected in the key/val opaque mapping. Got: {param_and_val}"
+            )
+        key = _replace_ct_with_empty(key_val_split[0])
+        col_name = _replace_ct_with_empty(key_val_split[1])
+
+        if key not in cols_to_secondary_names:
+            raise Exception(
+                f"<key_col_name> in opaque name mapping must exist in the input CSV. <key_col_name> = {key}, name line = {name_str}"
+            )
+
+        if col_name not in cols_to_secondary_names:
+            raise Exception(
+                f"<col_name> in opaque name mapping must exist in the input CSV. <col_name> = {col_name}, name line = {name_str}"
+            )
+        ordered_csv_column_names.append(col_name)
+        query_format += " {" + str(
+            index) + "}" + f" ({cols_to_secondary_names[key]});"
+
+        index += 1
+
+    if query_format[-1] == ";":
+        query_format = query_format[:-1]
+    query_format += "\""
+    return _verify_return_new_col(query_format, new_csv_columns,
+                                  ordered_csv_column_names)
 
 
 def _write_modified_csv(original_csv_path, output_csv_path,
@@ -205,9 +301,16 @@ def _write_modified_csv(original_csv_path, output_csv_path,
             output_rows.append(row_dict)
 
     with open(output_csv_path, 'w', newline='') as output_csv:
-        writer = csv.DictWriter(output_csv, fieldnames=csv_column_names)
+        writer = csv.DictWriter(output_csv,
+                                fieldnames=csv_column_names,
+                                doublequote=False,
+                                escapechar='\\')
         writer.writeheader()
         for row_dict in output_rows:
+            # Ensure all string types are escaped properly.
+            if "NAME" in row_dict and isinstance(row_dict["NAME"], str):
+                row_dict["NAME"] = "\"" + str(row_dict["NAME"]) + "\""
+
             writer.writerow(row_dict)
 
 
@@ -238,6 +341,9 @@ def process_enhanced_tmcf(input_folder, output_folder, etmcf_filename,
     geo_ids = _get_geoId_column(input_csv_filepath)
     geo_ids_to_dcids = _census_geoId_to_dcid(geo_ids)
     geo_ids_not_found = _get_places_not_found(geo_ids)
+
+    # Get column names to secondary names.
+    cols_to_secondary_names = _get_cols_to_secondary_names(input_csv_filepath)
 
     # new_csv_columns is a list of new columns to add to produce the processed CSV.
     new_csv_columns: List[NewCSVColumn] = []
@@ -274,15 +380,28 @@ def process_enhanced_tmcf(input_folder, output_folder, etmcf_filename,
             # Reaching here means the traditional TMCF can now start
             output_started = True
 
-            # Detect opaque mapping.
-            if line.startswith("variableMeasured:") and _detect_opaque_mapping(
-                    line):
+            # Detect opaque mapping for dcid or measuredProperty. It is assumed
+            # that this is part of the opaque mapping for the variableMeasured (which
+            # points to this Node in the super/enhanced TMCF file).
+            if (line.startswith("dcid:") or line.startswith("measuredProperty:")
+               ) and _detect_opaque_mapping(line):
                 # Split on " " (space)
                 line_split = line.split(" ")
                 var_measured_str = _replace_t_with_T_path(line_split[1],
                                                           T).replace("\n", "")
                 new_col = _process_var_measured_new_column(
                     var_measured_str, new_csv_columns)
+                out_line = line_split[0] + " C:T->" + new_col.name + "\n"
+
+            # Detect opaque mapping for name.
+            if line.startswith("name:") and _detect_opaque_mapping(line):
+                # Split on " " (space)
+                line_split = line.split(" ")
+                name_opaque_str = line_split[1].replace("\n", "")
+
+                new_col = _process_name_new_column(name_opaque_str,
+                                                   cols_to_secondary_names,
+                                                   new_csv_columns)
                 out_line = line_split[0] + " C:T->" + new_col.name + "\n"
 
             # If the line has 'geoId:', replace it with 'dcid:'
