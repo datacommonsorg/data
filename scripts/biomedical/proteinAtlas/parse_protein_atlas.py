@@ -36,20 +36,23 @@ flags.DEFINE_string('uniprot_to_dcid',
                     short_name='u')
 
 flags.DEFINE_string('data_mcf',
-                    'ProteinAtlasData.mcf',
+                    'proteinAtlasData.mcf',
                     'The output data mcf file path.',
                     short_name='m')
 
-flags.DEFINE_string('tissue_mcf', 'HumanTissueEnum.mcf',
+flags.DEFINE_string('tissue_mcf', 'proteinHumanTissueEnum.mcf',
                     'The output HumanTissueEnum.mcf file path.')
 
-flags.DEFINE_string('cell_mcf', 'HumanCellTypeEnum.mcf',
+flags.DEFINE_string('cell_mcf', 'protein_HumanCellTypeEnum.mcf',
                     'The output HumanCellTypeEnum.mcf file path.')
 EXPRESSION_MAP = {
     'Not detected': 'ProteinExpressionNotDetected',
     'Low': 'ProteinExpressionLow',
     'Medium': 'ProteinExpressionMedium',
-    'High': 'ProteinExpressionHigh'
+    'High': 'ProteinExpressionHigh',
+    'Ascending': 'dcs:ProteinExpressionAscending',
+    'Descending': 'dcs:ProteinExpressionDescending',
+    'Not representative': 'dcs:ProteinExpressionNotRepresentative'
 }
 
 RELIABILITY_MAP = {
@@ -120,9 +123,15 @@ def get_gene_to_dcid_list(gene_to_uniprot_list, uniprot_to_dcid):
     for gene in gene_to_uniprot_list:
         # One gene can map to several UniProt entry
         uniprot_list = gene_to_uniprot_list[gene]
+
         dcid_list = []
         for uniprot in uniprot_list:
-            dcid_list.append(uniprot_to_dcid[uniprot])
+            if uniprot in uniprot_to_dcid:
+                dcid_list.append(uniprot_to_dcid[uniprot])
+            else:
+                print(
+                    f"Warning: UniProt ID '{uniprot}' not found in uniprot_to_dcid."
+                )
         gene_to_dcid_list[gene] = dcid_list
     return gene_to_dcid_list
 
@@ -200,7 +209,7 @@ def get_cell_enum(cell):
     return ''.join(mcf_list)
 
 
-def main(argv):
+def main(_):
     "Main function to read the database file and generate data mcf"
     database_file = FLAGS.database
     gene_to_uniprot_list_path = FLAGS.gene_to_uniprot_list
@@ -211,7 +220,7 @@ def main(argv):
     gene_to_dcid_list = get_gene_to_dcid_list(gene_to_uniprot_list,
                                               uniprot_to_dcid)
     tissue_atlas_path = database_file
-    df = pd.read_csv(tissue_atlas_path, sep='\t', header=[0], squeeze=True)
+    df = pd.read_csv(tissue_atlas_path, sep='\t', header=[0])
 
     df = df.dropna()
     df['mcf'] = df.apply(lambda row: mcf_from_row(row, gene_to_dcid_list),

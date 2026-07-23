@@ -23,7 +23,7 @@ from absl import flags
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('atlas_file',
-                    None,
+                    'proteinatlas.tsv',
                     'Proteinatlas.tsv file path.',
                     short_name='f')
 flags.DEFINE_string(
@@ -34,10 +34,10 @@ flags.DEFINE_string(
     'File path to save the gene name to uniprot entries mapping.')
 
 
-def main(argv):
+def main(_):
     """Main function to generate the gene name to uniprot entries mapping."""
     atlas_file_path = FLAGS.atlas_file
-    df_atlas = pd.read_csv(atlas_file_path, sep='\t', header=[0], squeeze=True)
+    df_atlas = pd.read_csv(atlas_file_path, sep='\t', header=[0])
 
     # in the naming, gene stands for gene name and uniprot stands for uniprot entry
     # dcid stands for uniprot entry name
