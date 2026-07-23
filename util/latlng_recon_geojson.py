@@ -121,9 +121,12 @@ class LatLng2Places:
     """Helper class to map lat/lng to DC places using GeoJSON files.
 
        Right now it only supports: Country, Continent and US States.
+
+    Args:
+       types: List of types to map to. If empty, all supported types are mapped.
     """
 
-    def __init__(self):
+    def __init__(self, types=[]):
         self._country_geojsons = _get_geojsons('Country', _WORLD)
         self._us_state_geojsons = _get_geojsons('State', _USA)
         self._us_county_geojsons = {}
@@ -131,6 +134,7 @@ class LatLng2Places:
             self._us_county_geojsons.update(_get_geojsons('County', state))
         self._continent_map = _get_continent_map(
             [k for k in self._country_geojsons])
+        self._types = types
         print('Loaded',
               len(self._country_geojsons) + len(self._us_state_geojsons),
               'geojsons!')
@@ -145,7 +149,7 @@ class LatLng2Places:
                 country = p
                 break
         cip = []
-        if country == _USA:
+        if country == _USA and self._check('State'):
             for p, gj in self._us_state_geojsons.items():
                 if gj.contains(point):
                     cip.append(p)
@@ -155,6 +159,11 @@ class LatLng2Places:
                     cip.append(p.zfill(5))
                     break
         if country:
-            cip.append(country)
-            cip.extend(self._continent_map[country])
+            if self._check('Country'):
+                cip.append(country)
+            if self._check('Continent'):
+                cip.extend(self._continent_map[country])
         return cip
+
+    def _check(self, typ):
+        return not self._types or typ in self._types
