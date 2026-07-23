@@ -1,0 +1,3 @@
+"NumPlaces","StatVar","ScalingFactors","observationPeriods","Units","MeasurementMethods","MinDate"
+"1","Count_Person_Civilian_NonInstitutionalized","[]","[P1M]","[]","[CensusPEPSurvey]","1990-04"
+"1","Count_Person_ResidesInHousehold","[]","[P1M]","[]","[CensusPEPSurvey]","2010-04"

@@ -123,6 +123,10 @@ def downloadFiles(config_files: list, test=False):
         test=False
     '''
     flag = None
+    if test:
+        shutil.rmtree(os.path.join(_MODULE_DIR, _OUTPUTFINAL), ignore_errors=True)
+        shutil.rmtree(os.path.join(_MODULE_DIR, _OUTPUTINTERMEDIATE), ignore_errors=True)
+        shutil.rmtree(os.path.join(_MODULE_DIR, __INPUTFILES), ignore_errors=True)
     os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTFINAL))
     os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTINTERMEDIATE))
     os.system("mkdir -p " + os.path.join(_MODULE_DIR, __INPUTFILES))
@@ -172,26 +176,27 @@ def downloadFiles(config_files: list, test=False):
             except Exception as e:
                 logging.error(f"Failed to process {config_file}: {e}")
 
-        global _FILES_TO_DOWNLOAD
-        for file in _FILES_TO_DOWNLOAD:
-            file_name_to_save = None
-            url = file['download_path']
-            #Calling 2023 onwards methods
-            try:
-                process_national_2020_2029(url)
-            except Exception as e:
-                logging.error(
-                    f"Failed to process national 2020-2029 for {url}: {e}")
-            try:
-                process_county_2020_2029(url)
-            except Exception as e:
-                logging.error(
-                    f"Failed to process county 2020-2029 for {url}: {e}")
-            try:
-                process_state_2020_2029(url)
-            except Exception as e:
-                logging.error(
-                    f"Failed to process state 2020-2029 for {url}: {e}")
+        if not test:
+            global _FILES_TO_DOWNLOAD
+            for file in _FILES_TO_DOWNLOAD:
+                file_name_to_save = None
+                url = file['download_path']
+                #Calling 2023 onwards methods
+                try:
+                    process_national_2020_2029(url)
+                except Exception as e:
+                    logging.error(
+                        f"Failed to process national 2020-2029 for {url}: {e}")
+                try:
+                    process_county_2020_2029(url)
+                except Exception as e:
+                    logging.error(
+                        f"Failed to process county 2020-2029 for {url}: {e}")
+                try:
+                    process_state_2020_2029(url)
+                except Exception as e:
+                    logging.error(
+                        f"Failed to process state 2020-2029 for {url}: {e}")
     except Exception as e:
         logging.fatal(f"There is an error while downloading the files {e}")
 
@@ -225,12 +230,18 @@ def process(config_files: list, test=False):
         "nationals_result_1900_1959.csv", "nationals_result_1960_1979.csv",
         "nationals_result_1980_1990.csv", "nationals_result_1990_2000.csv"
     ]
+    national_before_2000 = [
+        f for f in national_before_2000 if os.path.exists(os.path.join(_INPUT_FILE_PATH, f))
+    ]
 
     # list of state and county output files before year 2000
     state_county_before_2000 = [
         "state_result_1970_1979.csv", "state_result_1980_1990.csv",
         "state_result_1990_2000.csv", "county_result_1970_1979.csv",
         "county_result_1980_1989.csv", "county_result_1990_2000.csv"
+    ]
+    state_county_before_2000 = [
+        f for f in state_county_before_2000 if os.path.exists(os.path.join(_INPUT_FILE_PATH, f))
     ]
 
     # list of state and county output files before after 2000
@@ -240,11 +251,17 @@ def process(config_files: list, test=False):
         "state_result_2020_2022.csv", "state_result_2020_2029.csv",
         "county_result_2020_2022.csv", "county_result_2020_2029.csv"
     ]
+    state_county_after_2000 = [
+        f for f in state_county_after_2000 if os.path.exists(os.path.join(_INPUT_FILE_PATH, f))
+    ]
 
     # list of national output files after year 2000
     national_after_2000 = [
         "nationals_result_2000_2010.csv", "nationals_result_2010_2020.csv",
         "nationals_result_2020_2022.csv", "nationals_result_2020_2029.csv"
+    ]
+    national_after_2000 = [
+        f for f in national_after_2000 if os.path.exists(os.path.join(_INPUT_FILE_PATH, f))
     ]
 
     output_files_names = {

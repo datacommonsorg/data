@@ -654,7 +654,7 @@ def download_files():
                     ]
                     df = pd.read_table(url,
                                        index_col=False,
-                                       delim_whitespace=True,
+                                       sep=r'\s+',
                                        engine='python',
                                        skiprows=17,
                                        names=cols)
