@@ -1,0 +1,6 @@
+key,,,,,,,,,,,,
+COMBOKEY,#Format,observationAbout=nces/{Data:0>12},statType,measuredValue,,,,,,,,
+SCH_CREDITRECOVERYENR,value,{Number},statType,measuredValue,measuredProperty,count,populationType,Student,educationalProgram,CreditRecoveryProgram,enrollmentStatus,Enrolled
+year,observationDate,{Data},,,,,,,,,,
+JJ:0,juvenileJusticeFacilityStatus,NotJuvenileJusticeFacility,,,,,,,,,,
+JJ:1,juvenileJusticeFacilityStatus,JuvenileJusticeFacility,,,,,,,,,,
