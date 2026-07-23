@@ -178,8 +178,8 @@ def _clean_dataframe(df: pd.DataFrame, year: str, table_num: str):
             inplace=True,
             errors='ignore')
 
-    df['state'] = df['state'].fillna(method='ffill')
-    df['agency type'] = df['agency type'].fillna(method='ffill')
+    df['state'] = df['state'].ffill()
+    df['agency type'] = df['agency type'].ffill()
 
     # Cleaning cities
     df = df[df['agency'].notna()]
