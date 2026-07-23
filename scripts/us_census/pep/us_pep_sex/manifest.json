@@ -11,7 +11,7 @@
                 "process.py --config_path=unresolved_mcf/us_census/pep/population_estimate_by_sex/skip_url.json"
             ],
             "source_files": [
-                "gcs_output/us_pep_sex_source_files/*"
+                "input_files/*"
             ],
             "import_inputs": [
                 {
