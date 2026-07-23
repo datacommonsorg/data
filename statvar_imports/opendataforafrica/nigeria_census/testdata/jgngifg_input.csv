@@ -1,0 +1,343 @@
+SEX,ID_SEX,INDICATORS,ID_INDICATORS,CODE-2_INDICATORS,DESCRIPTION_INDICATORS,FULLNAME_INDICATORS,SOURCE-LINK_INDICATORS,SOURCE-NAME_INDICATORS,FREQ,TIME_PERIOD,OBS_VALUE
+6898919,6898919,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2007,207
+6898919,6898919,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2008,195
+6898919,6898919,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2009,79
+6898919,6898919,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2010,343
+6898919,6898919,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2011,231
+6898919,6898919,6899919,6899919,102,,Veterinary Council of Nigeria\Non Nigerian,,,A,2007,1
+6898919,6898919,6899919,6899919,102,,Veterinary Council of Nigeria\Non Nigerian,,,A,2009,1
+6898919,6898919,6899919,6899919,102,,Veterinary Council of Nigeria\Non Nigerian,,,A,2010,1
+6898919,6898919,6899919,6899919,102,,Veterinary Council of Nigeria\Non Nigerian,,,A,2011,1
+6898919,6898919,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2007,9350
+6898919,6898919,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2008,9875
+6898919,6898919,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2009,11789
+6898919,6898919,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2010,15632
+6898919,6898919,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2011,18536
+6898919,6898919,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2012,13254
+6898919,6898919,6901019,6901019,20102,,Nigerian\Dentists,,,A,2007,624
+6898919,6898919,6901019,6901019,20102,,Nigerian\Dentists,,,A,2008,816
+6898919,6898919,6901019,6901019,20102,,Nigerian\Dentists,,,A,2009,859
+6898919,6898919,6901019,6901019,20102,,Nigerian\Dentists,,,A,2010,1153
+6898919,6898919,6901019,6901019,20102,,Nigerian\Dentists,,,A,2011,1367
+6898919,6898919,6901019,6901019,20102,,Nigerian\Dentists,,,A,2012,978
+6898919,6898919,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2007,28
+6898919,6898919,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2008,34
+6898919,6898919,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2009,40
+6898919,6898919,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2010,42
+6898919,6898919,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2011,82
+6898919,6898919,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2012,104
+6898919,6898919,6901219,6901219,20202,,Non Nigerian\Dentists,,,A,2007,2
+6898919,6898919,6901219,6901219,20202,,Non Nigerian\Dentists,,,A,2008,5
+6898919,6898919,6901219,6901219,20202,,Non Nigerian\Dentists,,,A,2009,4
+6898919,6898919,6901219,6901219,20202,,Non Nigerian\Dentists,,,A,2010,3
+6898919,6898919,6901219,6901219,20202,,Non Nigerian\Dentists,,,A,2011,4
+6898919,6898919,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2007,769
+6898919,6898919,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2008,738
+6898919,6898919,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2009,720
+6898919,6898919,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2010,624
+6898919,6898919,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2011,654
+6898919,6898919,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2007,51
+6898919,6898919,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2008,10
+6898919,6898919,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2009,8
+6898919,6898919,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2010,6
+6898919,6898919,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2011,16
+6898919,6898919,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2007,59
+6898919,6898919,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2008,64
+6898919,6898919,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2009,39
+6898919,6898919,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2010,54
+6898919,6898919,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2011,55
+6898919,6898919,6901719,6901719,304,,Nursing And Midwifery Council of Nigeria\Cardio Thoracic Nurses,,,A,2008,3
+6898919,6898919,6901719,6901719,304,,Nursing And Midwifery Council of Nigeria\Cardio Thoracic Nurses,,,A,2009,1
+6898919,6898919,6901719,6901719,304,,Nursing And Midwifery Council of Nigeria\Cardio Thoracic Nurses,,,A,2010,5
+6898919,6898919,6901719,6901719,304,,Nursing And Midwifery Council of Nigeria\Cardio Thoracic Nurses,,,A,2011,7
+6898919,6898919,6901819,6901819,305,,Nursing And Midwifery Council of Nigeria\Intensive-Care Nurses,,,A,2008,3
+6898919,6898919,6901819,6901819,305,,Nursing And Midwifery Council of Nigeria\Intensive-Care Nurses,,,A,2009,7
+6898919,6898919,6901819,6901819,305,,Nursing And Midwifery Council of Nigeria\Intensive-Care Nurses,,,A,2010,14
+6898919,6898919,6901819,6901819,305,,Nursing And Midwifery Council of Nigeria\Intensive-Care Nurses,,,A,2011,7
+6898919,6898919,6901919,6901919,306,,"Nursing And Midwifery Council of Nigeria\Ear, Nose and Throat (ENT) Nurses",,,A,2009,7
+6898919,6898919,6901919,6901919,306,,"Nursing And Midwifery Council of Nigeria\Ear, Nose and Throat (ENT) Nurses",,,A,2010,18
+6898919,6898919,6901919,6901919,306,,"Nursing And Midwifery Council of Nigeria\Ear, Nose and Throat (ENT) Nurses",,,A,2011,17
+6898919,6898919,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2007,6
+6898919,6898919,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2008,14
+6898919,6898919,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2009,4
+6898919,6898919,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2010,11
+6898919,6898919,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2011,8
+6898919,6898919,6902119,6902119,308,,Nursing And Midwifery Council of Nigeria\Burns and Plastic Nurses,,,A,2008,6
+6898919,6898919,6902119,6902119,308,,Nursing And Midwifery Council of Nigeria\Burns and Plastic Nurses,,,A,2009,8
+6898919,6898919,6902119,6902119,308,,Nursing And Midwifery Council of Nigeria\Burns and Plastic Nurses,,,A,2010,6
+6898919,6898919,6902119,6902119,308,,Nursing And Midwifery Council of Nigeria\Burns and Plastic Nurses,,,A,2011,3
+6898919,6898919,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2007,22
+6898919,6898919,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2008,13
+6898919,6898919,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2009,11
+6898919,6898919,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2010,17
+6898919,6898919,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2011,22
+6898919,6898919,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2007,25
+6898919,6898919,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2008,43
+6898919,6898919,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2009,33
+6898919,6898919,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2010,30
+6898919,6898919,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2011,22
+6898919,6898919,6902519,6902519,311,,Nursing And Midwifery Council of Nigeria\Nurse Administrator,,,A,2007,3
+6898919,6898919,6902519,6902519,311,,Nursing And Midwifery Council of Nigeria\Nurse Administrator,,,A,2008,3
+6898919,6898919,6902519,6902519,311,,Nursing And Midwifery Council of Nigeria\Nurse Administrator,,,A,2011,1
+6898919,6898919,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2007,8
+6898919,6898919,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2008,8
+6898919,6898919,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2009,1
+6898919,6898919,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2010,3
+6898919,6898919,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2011,5
+6898919,6898919,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2007,8
+6898919,6898919,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2008,17
+6898919,6898919,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2009,15
+6898919,6898919,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2010,13
+6898919,6898919,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2011,30
+6898919,6898919,6902919,6902919,315,,Nursing And Midwifery Council of Nigeria\Public Health Nurse Educators,,,A,2008,2
+6898919,6898919,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2007,54
+6898919,6898919,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2008,51
+6898919,6898919,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2009,32
+6898919,6898919,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2010,79
+6898919,6898919,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2011,71
+6898919,6898919,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2007,56
+6898919,6898919,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2008,38
+6898919,6898919,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2009,8
+6898919,6898919,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2010,19
+6898919,6898919,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2011,41
+6898919,6898919,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2007,35
+6898919,6898919,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2008,52
+6898919,6898919,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2009,44
+6898919,6898919,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2010,48
+6898919,6898919,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2011,41
+6898919,6898919,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2007,5
+6898919,6898919,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2008,6
+6898919,6898919,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2009,2
+6898919,6898919,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2010,2
+6898919,6898919,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2011,6
+6899019,6899019,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2007,91
+6899019,6899019,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2008,85
+6899019,6899019,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2009,37
+6899019,6899019,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2010,118
+6899019,6899019,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2011,90
+6899019,6899019,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2007,3750
+6899019,6899019,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2008,5638
+6899019,6899019,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2009,7533
+6899019,6899019,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2010,8292
+6899019,6899019,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2011,9832
+6899019,6899019,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2012,7030
+6899019,6899019,6901019,6901019,20102,,Nigerian\Dentists,,,A,2007,276
+6899019,6899019,6901019,6901019,20102,,Nigerian\Dentists,,,A,2008,300
+6899019,6899019,6901019,6901019,20102,,Nigerian\Dentists,,,A,2009,350
+6899019,6899019,6901019,6901019,20102,,Nigerian\Dentists,,,A,2010,468
+6899019,6899019,6901019,6901019,20102,,Nigerian\Dentists,,,A,2011,555
+6899019,6899019,6901019,6901019,20102,,Nigerian\Dentists,,,A,2012,396
+6899019,6899019,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2007,16
+6899019,6899019,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2008,18
+6899019,6899019,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2009,19
+6899019,6899019,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2010,13
+6899019,6899019,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2011,19
+6899019,6899019,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2012,25
+6899019,6899019,6901219,6901219,20202,,Non Nigerian\Dentists,,,A,2007,12
+6899019,6899019,6901219,6901219,20202,,Non Nigerian\Dentists,,,A,2008,15
+6899019,6899019,6901219,6901219,20202,,Non Nigerian\Dentists,,,A,2009,14
+6899019,6899019,6901219,6901219,20202,,Non Nigerian\Dentists,,,A,2010,8
+6899019,6899019,6901219,6901219,20202,,Non Nigerian\Dentists,,,A,2011,9
+6899019,6899019,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2007,2740
+6899019,6899019,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2008,3733
+6899019,6899019,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2009,2879
+6899019,6899019,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2010,2882
+6899019,6899019,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2011,3399
+6899019,6899019,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2007,1328
+6899019,6899019,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2008,1727
+6899019,6899019,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2009,1546
+6899019,6899019,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2010,2694
+6899019,6899019,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2011,2635
+6899019,6899019,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2007,95
+6899019,6899019,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2008,94
+6899019,6899019,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2009,92
+6899019,6899019,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2010,101
+6899019,6899019,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2011,95
+6899019,6899019,6901719,6901719,304,,Nursing And Midwifery Council of Nigeria\Cardio Thoracic Nurses,,,A,2008,67
+6899019,6899019,6901719,6901719,304,,Nursing And Midwifery Council of Nigeria\Cardio Thoracic Nurses,,,A,2009,19
+6899019,6899019,6901719,6901719,304,,Nursing And Midwifery Council of Nigeria\Cardio Thoracic Nurses,,,A,2010,12
+6899019,6899019,6901719,6901719,304,,Nursing And Midwifery Council of Nigeria\Cardio Thoracic Nurses,,,A,2011,16
+6899019,6899019,6901819,6901819,305,,Nursing And Midwifery Council of Nigeria\Intensive-Care Nurses,,,A,2008,30
+6899019,6899019,6901819,6901819,305,,Nursing And Midwifery Council of Nigeria\Intensive-Care Nurses,,,A,2009,15
+6899019,6899019,6901819,6901819,305,,Nursing And Midwifery Council of Nigeria\Intensive-Care Nurses,,,A,2010,24
+6899019,6899019,6901819,6901819,305,,Nursing And Midwifery Council of Nigeria\Intensive-Care Nurses,,,A,2011,23
+6899019,6899019,6901919,6901919,306,,"Nursing And Midwifery Council of Nigeria\Ear, Nose and Throat (ENT) Nurses",,,A,2008,4
+6899019,6899019,6901919,6901919,306,,"Nursing And Midwifery Council of Nigeria\Ear, Nose and Throat (ENT) Nurses",,,A,2009,15
+6899019,6899019,6901919,6901919,306,,"Nursing And Midwifery Council of Nigeria\Ear, Nose and Throat (ENT) Nurses",,,A,2010,35
+6899019,6899019,6901919,6901919,306,,"Nursing And Midwifery Council of Nigeria\Ear, Nose and Throat (ENT) Nurses",,,A,2011,62
+6899019,6899019,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2007,152
+6899019,6899019,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2008,163
+6899019,6899019,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2009,151
+6899019,6899019,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2010,273
+6899019,6899019,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2011,152
+6899019,6899019,6902119,6902119,308,,Nursing And Midwifery Council of Nigeria\Burns and Plastic Nurses,,,A,2008,32
+6899019,6899019,6902119,6902119,308,,Nursing And Midwifery Council of Nigeria\Burns and Plastic Nurses,,,A,2009,21
+6899019,6899019,6902119,6902119,308,,Nursing And Midwifery Council of Nigeria\Burns and Plastic Nurses,,,A,2010,26
+6899019,6899019,6902119,6902119,308,,Nursing And Midwifery Council of Nigeria\Burns and Plastic Nurses,,,A,2011,24
+6899019,6899019,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2007,37
+6899019,6899019,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2008,36
+6899019,6899019,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2009,52
+6899019,6899019,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2010,94
+6899019,6899019,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2011,61
+6899019,6899019,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2007,35
+6899019,6899019,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2008,53
+6899019,6899019,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2009,33
+6899019,6899019,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2010,28
+6899019,6899019,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2011,26
+6899019,6899019,6902519,6902519,311,,Nursing And Midwifery Council of Nigeria\Nurse Administrator,,,A,2007,9
+6899019,6899019,6902519,6902519,311,,Nursing And Midwifery Council of Nigeria\Nurse Administrator,,,A,2008,31
+6899019,6899019,6902519,6902519,311,,Nursing And Midwifery Council of Nigeria\Nurse Administrator,,,A,2009,12
+6899019,6899019,6902519,6902519,311,,Nursing And Midwifery Council of Nigeria\Nurse Administrator,,,A,2010,5
+6899019,6899019,6902519,6902519,311,,Nursing And Midwifery Council of Nigeria\Nurse Administrator,,,A,2011,10
+6899019,6899019,6902619,6902619,312,,Nursing And Midwifery Council of Nigeria\Midwife Educators,,,A,2007,11
+6899019,6899019,6902619,6902619,312,,Nursing And Midwifery Council of Nigeria\Midwife Educators,,,A,2008,24
+6899019,6899019,6902619,6902619,312,,Nursing And Midwifery Council of Nigeria\Midwife Educators,,,A,2009,17
+6899019,6899019,6902619,6902619,312,,Nursing And Midwifery Council of Nigeria\Midwife Educators,,,A,2010,17
+6899019,6899019,6902619,6902619,312,,Nursing And Midwifery Council of Nigeria\Midwife Educators,,,A,2011,25
+6899019,6899019,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2007,45
+6899019,6899019,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2008,67
+6899019,6899019,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2009,55
+6899019,6899019,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2010,99
+6899019,6899019,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2011,61
+6899019,6899019,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2007,39
+6899019,6899019,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2008,44
+6899019,6899019,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2009,32
+6899019,6899019,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2010,28
+6899019,6899019,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2011,40
+6899019,6899019,6902919,6902919,315,,Nursing And Midwifery Council of Nigeria\Public Health Nurse Educators,,,A,2007,1
+6899019,6899019,6902919,6902919,315,,Nursing And Midwifery Council of Nigeria\Public Health Nurse Educators,,,A,2008,1
+6899019,6899019,6902919,6902919,315,,Nursing And Midwifery Council of Nigeria\Public Health Nurse Educators,,,A,2009,2
+6899019,6899019,6902919,6902919,315,,Nursing And Midwifery Council of Nigeria\Public Health Nurse Educators,,,A,2010,1
+6899019,6899019,6902919,6902919,315,,Nursing And Midwifery Council of Nigeria\Public Health Nurse Educators,,,A,2011,5
+6899019,6899019,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2007,139
+6899019,6899019,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2008,93
+6899019,6899019,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2009,127
+6899019,6899019,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2010,184
+6899019,6899019,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2011,132
+6899019,6899019,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2007,39
+6899019,6899019,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2008,51
+6899019,6899019,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2009,48
+6899019,6899019,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2010,79
+6899019,6899019,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2011,69
+6899019,6899019,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2007,57
+6899019,6899019,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2008,47
+6899019,6899019,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2009,66
+6899019,6899019,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2010,93
+6899019,6899019,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2011,76
+6899019,6899019,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2007,11
+6899019,6899019,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2008,9
+6899019,6899019,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2009,16
+6899019,6899019,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2010,16
+6899019,6899019,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2011,17
+6899119,6899119,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2007,298
+6899119,6899119,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2008,280
+6899119,6899119,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2009,116
+6899119,6899119,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2010,461
+6899119,6899119,6899819,6899819,101,,Veterinary Council of Nigeria\Nigerian,,,A,2011,321
+6899119,6899119,6899919,6899919,102,,Veterinary Council of Nigeria\Non Nigerian,,,A,2007,1
+6899119,6899119,6899919,6899919,102,,Veterinary Council of Nigeria\Non Nigerian,,,A,2009,1
+6899119,6899119,6899919,6899919,102,,Veterinary Council of Nigeria\Non Nigerian,,,A,2010,1
+6899119,6899119,6899919,6899919,102,,Veterinary Council of Nigeria\Non Nigerian,,,A,2011,1
+6899119,6899119,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2007,13100
+6899119,6899119,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2008,15513
+6899119,6899119,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2009,19322
+6899119,6899119,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2010,23924
+6899119,6899119,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2011,28368
+6899119,6899119,6900919,6900919,20101,,Nigerian\Medical Practitioners,,,A,2012,20284
+6899119,6899119,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2007,44
+6899119,6899119,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2008,52
+6899119,6899119,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2009,59
+6899119,6899119,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2010,55
+6899119,6899119,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2011,101
+6899119,6899119,6901119,6901119,20201,,Non Nigerian\Medical Practitioners,,,A,2012,129
+6899119,6899119,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2007,3509
+6899119,6899119,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2008,4471
+6899119,6899119,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2009,3599
+6899119,6899119,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2010,3506
+6899119,6899119,6901419,6901419,301,,Nursing And Midwifery Council of Nigeria\General Nurses,,,A,2011,4053
+6899119,6899119,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2007,1379
+6899119,6899119,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2008,1737
+6899119,6899119,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2009,1554
+6899119,6899119,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2010,2700
+6899119,6899119,6901519,6901519,302,,Nursing And Midwifery Council of Nigeria\Midwives,,,A,2011,2651
+6899119,6899119,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2007,154
+6899119,6899119,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2008,158
+6899119,6899119,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2009,131
+6899119,6899119,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2010,155
+6899119,6899119,6901619,6901619,303,,Nursing And Midwifery Council of Nigeria\Perioperative Nurses,,,A,2011,150
+6899119,6899119,6901719,6901719,304,,Nursing And Midwifery Council of Nigeria\Cardio Thoracic Nurses,,,A,2008,70
+6899119,6899119,6901719,6901719,304,,Nursing And Midwifery Council of Nigeria\Cardio Thoracic Nurses,,,A,2009,20
+6899119,6899119,6901719,6901719,304,,Nursing And Midwifery Council of Nigeria\Cardio Thoracic Nurses,,,A,2010,17
+6899119,6899119,6901719,6901719,304,,Nursing And Midwifery Council of Nigeria\Cardio Thoracic Nurses,,,A,2011,23
+6899119,6899119,6901819,6901819,305,,Nursing And Midwifery Council of Nigeria\Intensive-Care Nurses,,,A,2008,33
+6899119,6899119,6901819,6901819,305,,Nursing And Midwifery Council of Nigeria\Intensive-Care Nurses,,,A,2009,22
+6899119,6899119,6901819,6901819,305,,Nursing And Midwifery Council of Nigeria\Intensive-Care Nurses,,,A,2010,38
+6899119,6899119,6901819,6901819,305,,Nursing And Midwifery Council of Nigeria\Intensive-Care Nurses,,,A,2011,30
+6899119,6899119,6901919,6901919,306,,"Nursing And Midwifery Council of Nigeria\Ear, Nose and Throat (ENT) Nurses",,,A,2008,4
+6899119,6899119,6901919,6901919,306,,"Nursing And Midwifery Council of Nigeria\Ear, Nose and Throat (ENT) Nurses",,,A,2009,22
+6899119,6899119,6901919,6901919,306,,"Nursing And Midwifery Council of Nigeria\Ear, Nose and Throat (ENT) Nurses",,,A,2010,53
+6899119,6899119,6901919,6901919,306,,"Nursing And Midwifery Council of Nigeria\Ear, Nose and Throat (ENT) Nurses",,,A,2011,79
+6899119,6899119,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2007,158
+6899119,6899119,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2008,177
+6899119,6899119,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2009,155
+6899119,6899119,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2010,284
+6899119,6899119,6902019,6902019,307,,Nursing And Midwifery Council of Nigeria\Public Health Nurses,,,A,2011,160
+6899119,6899119,6902119,6902119,308,,Nursing And Midwifery Council of Nigeria\Burns and Plastic Nurses,,,A,2008,38
+6899119,6899119,6902119,6902119,308,,Nursing And Midwifery Council of Nigeria\Burns and Plastic Nurses,,,A,2009,29
+6899119,6899119,6902119,6902119,308,,Nursing And Midwifery Council of Nigeria\Burns and Plastic Nurses,,,A,2010,32
+6899119,6899119,6902119,6902119,308,,Nursing And Midwifery Council of Nigeria\Burns and Plastic Nurses,,,A,2011,27
+6899119,6899119,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2007,59
+6899119,6899119,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2008,49
+6899119,6899119,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2009,63
+6899119,6899119,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2010,111
+6899119,6899119,6902219,6902219,309,,Nursing And Midwifery Council of Nigeria\Orthopaedic Nurses,,,A,2011,83
+6899119,6899119,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2007,60
+6899119,6899119,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2008,96
+6899119,6899119,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2009,66
+6899119,6899119,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2010,58
+6899119,6899119,6902419,6902419,310,,Nursing And Midwifery Council of Nigeria\Anaesthetic Nurses,,,A,2011,48
+6899119,6899119,6902519,6902519,311,,Nursing And Midwifery Council of Nigeria\Nurse Administrator,,,A,2007,12
+6899119,6899119,6902519,6902519,311,,Nursing And Midwifery Council of Nigeria\Nurse Administrator,,,A,2008,34
+6899119,6899119,6902519,6902519,311,,Nursing And Midwifery Council of Nigeria\Nurse Administrator,,,A,2009,12
+6899119,6899119,6902519,6902519,311,,Nursing And Midwifery Council of Nigeria\Nurse Administrator,,,A,2010,5
+6899119,6899119,6902519,6902519,311,,Nursing And Midwifery Council of Nigeria\Nurse Administrator,,,A,2011,11
+6899119,6899119,6902619,6902619,312,,Nursing And Midwifery Council of Nigeria\Midwife Educators,,,A,2007,11
+6899119,6899119,6902619,6902619,312,,Nursing And Midwifery Council of Nigeria\Midwife Educators,,,A,2008,24
+6899119,6899119,6902619,6902619,312,,Nursing And Midwifery Council of Nigeria\Midwife Educators,,,A,2009,17
+6899119,6899119,6902619,6902619,312,,Nursing And Midwifery Council of Nigeria\Midwife Educators,,,A,2010,17
+6899119,6899119,6902619,6902619,312,,Nursing And Midwifery Council of Nigeria\Midwife Educators,,,A,2011,25
+6899119,6899119,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2007,53
+6899119,6899119,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2008,75
+6899119,6899119,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2009,56
+6899119,6899119,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2010,102
+6899119,6899119,6902719,6902719,313,,Nursing And Midwifery Council of Nigeria\Paediatric Nurses,,,A,2011,66
+6899119,6899119,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2007,47
+6899119,6899119,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2008,61
+6899119,6899119,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2009,47
+6899119,6899119,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2010,41
+6899119,6899119,6902819,6902819,314,,Nursing And Midwifery Council of Nigeria\Nurse Educators,,,A,2011,70
+6899119,6899119,6902919,6902919,315,,Nursing And Midwifery Council of Nigeria\Public Health Nurse Educators,,,A,2007,1
+6899119,6899119,6902919,6902919,315,,Nursing And Midwifery Council of Nigeria\Public Health Nurse Educators,,,A,2008,3
+6899119,6899119,6902919,6902919,315,,Nursing And Midwifery Council of Nigeria\Public Health Nurse Educators,,,A,2009,2
+6899119,6899119,6902919,6902919,315,,Nursing And Midwifery Council of Nigeria\Public Health Nurse Educators,,,A,2010,1
+6899119,6899119,6902919,6902919,315,,Nursing And Midwifery Council of Nigeria\Public Health Nurse Educators,,,A,2011,5
+6899119,6899119,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2007,193
+6899119,6899119,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2008,144
+6899119,6899119,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2009,159
+6899119,6899119,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2010,263
+6899119,6899119,6903019,6903019,316,,Nursing And Midwifery Council of Nigeria\Psychiatric Nurses,,,A,2011,203
+6899119,6899119,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2007,95
+6899119,6899119,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2008,89
+6899119,6899119,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2009,56
+6899119,6899119,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2010,98
+6899119,6899119,6903119,6903119,317,,Nursing And Midwifery Council of Nigeria\Ophthalmic Nurses,,,A,2011,110
+6899119,6899119,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2007,92
+6899119,6899119,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2008,99
+6899119,6899119,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2009,110
+6899119,6899119,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2010,141
+6899119,6899119,6903219,6903219,318,,Nursing And Midwifery Council of Nigeria\Accident and Emergency Nurses,,,A,2011,117
+6899119,6899119,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2007,16
+6899119,6899119,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2008,15
+6899119,6899119,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2009,18
+6899119,6899119,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2010,18
+6899119,6899119,6903319,6903319,319,,Nursing And Midwifery Council of Nigeria\Occupational Health Nurses,,,A,2011,23

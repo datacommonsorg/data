@@ -1,0 +1,10 @@
+Node: E:input-wdidshd->E0
+observationAbout: C:input-wdidshd->observationAbout
+observationDate: C:input-wdidshd->observationDate
+variableMeasured: C:input-wdidshd->variableMeasured
+value: C:input-wdidshd->value
+unit: C:input-wdidshd->unit
+scalingFactor: C:input-wdidshd->scalingFactor
+observationPeriod: C:input-wdidshd->observationPeriod
+measurementMethod: C:input-wdidshd->measurementMethod
+typeOf: dcs:StatVarObservation
