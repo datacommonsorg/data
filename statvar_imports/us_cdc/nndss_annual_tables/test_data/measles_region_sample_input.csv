@@ -1,0 +1,14 @@
+"Notes","Disease","Disease Code","Year","Year Code","Regions","Regions Code",Case Count
+,"Measles, Indigenous","10500","2023","2023","United States","U.S.",42
+,"Measles, Indigenous","10500","2023","2023","New England","REGION1",0
+,"Measles, Indigenous","10500","2023","2023","Middle Atlantic","REGION2",6
+,"Measles, Indigenous","10500","2023","2023","East North Central","REGION3",9
+,"Measles, Indigenous","10500","2023","2023","West North Central","REGION4",1
+,"Measles, Indigenous","10500","2023","2023","South Atlantic","REGION5",0
+,"Measles, Indigenous","10500","2023","2023","East South Central","REGION6",1
+,"Measles, Indigenous","10500","2023","2023","West South Central","REGION7",2
+,"Measles, Indigenous","10500","2023","2023","Mountain","REGION8",9
+,"Measles, Indigenous","10500","2023","2023","Pacific","REGION9",14
+,"Measles, Indigenous","10500","2023","2023","Territories","REGION10",0
+,"Measles, Indigenous","10500","2023","2023","Non-U.S. Residents","REGION11",0
+

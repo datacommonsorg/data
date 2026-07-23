@@ -1,0 +1,8 @@
+Node: E:measles_sample_output->E0
+observationDate: C:measles_sample_output->observationDate
+observationAbout: C:measles_sample_output->observationAbout
+variableMeasured: C:measles_sample_output->variableMeasured
+value: C:measles_sample_output->value
+measurementMethod: C:measles_sample_output->measurementMethod
+observationPeriod: C:measles_sample_output->observationPeriod
+typeOf: dcs:StatVarObservation

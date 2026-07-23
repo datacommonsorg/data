@@ -1,0 +1,9 @@
+"Notes","Disease","Disease Code","Year","Year Code","Race","Race Code",Case Count
+,"Measles, Indigenous","10500","2023","2023","American Indian or Alaska Native","1",0
+,"Measles, Indigenous","10500","2023","2023","Asian or Pacific Islander","2",3
+,"Measles, Indigenous","10500","2023","2023","Black or African American","3",6
+,"Measles, Indigenous","10500","2023","2023","White","4",16
+,"Measles, Indigenous","10500","2023","2023","Other or Multi-Race","5",10
+,"Measles, Indigenous","10500","2023","2023","Unknown","99",7
+,"Measles, Indigenous","10500","2023","2023","Suppressed","98",0
+"Total","Measles, Indigenous","10500","2023","2023",,,42

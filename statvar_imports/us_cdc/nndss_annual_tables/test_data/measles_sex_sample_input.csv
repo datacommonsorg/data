@@ -1,0 +1,8 @@
+"Notes","Disease","Disease Code","Year","Year Code","Sex","Sex Code",Case Count
+,"Measles, Indigenous","10500","2023","2023","Female","1",25
+,"Measles, Indigenous","10500","2023","2023","Male","2",16
+,"Measles, Indigenous","10500","2023","2023","Unknown","99",1
+"Total","Measles, Indigenous","10500",,,,,42
+,"Measles, Imported","10510","2023","2023","Female","1",9
+,"Measles, Imported","10510","2023","2023","Male","2",13
+,"Measles, Imported","10510","2023","2023","Unknown","99",0
