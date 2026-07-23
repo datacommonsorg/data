@@ -15,11 +15,11 @@ cd "$tmp"
 ## County-level data
 ## Zip includes data a copy of the data dictionary
 ### Double slash after DataDownload is intentional
-curl -L https://hazards.fema.gov/nri/Content/StaticDocuments/DataDownload/NRI_Table_Counties/NRI_Table_Counties.zip -o NRI_Table_Counties.zip
+curl -fL https://www.fema.gov/about/reports-and-data/openfema/nri/v120/NRI_Table_Counties.zip -o NRI_Table_Counties.zip
 unzip NRI_Table_Counties.zip -d NRI_Table_Counties
 
 ## Tract-level data
-curl -L https://hazards.fema.gov/nri/Content/StaticDocuments/DataDownload/NRI_Table_CensusTracts/NRI_Table_CensusTracts.zip -o NRI_Table_CensusTracts.zip
+curl -fL https://www.fema.gov/about/reports-and-data/openfema/nri/v120/NRI_Table_CensusTracts.zip -o NRI_Table_CensusTracts.zip
 unzip NRI_Table_CensusTracts.zip -d NRI_Table_CensusTracts
 
 # Move files to final destination
