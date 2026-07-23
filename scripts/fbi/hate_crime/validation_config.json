@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": { "threshold": 0.1}
+    },
+    {
+      "rule_id": "check_goldens_national",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_t1t10.csv",
+        "input_files": "../../input0/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_table11",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_table11.csv",
+        "input_files": "../../input1/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_table12",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_table12.csv",
+        "input_files": "../../input2/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_table13",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_table13.csv",
+        "input_files": "../../input3/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_table14",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_table14.csv",
+        "input_files": "../../input4/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_table11",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_table11.csv",
+        "input_files": "../../../../table11/table11_output.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_table12",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_table12.csv",
+        "input_files": "../../../../table12/table12_output.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_table13",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_table13.csv",
+        "input_files": "../../../../table13/table13_output.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_table14",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_table14.csv",
+        "input_files": "../../../../table14/table14_output.csv"
+      }
+    }
+  ]
+}
