@@ -1,0 +1,21 @@
+parameter,value
+url,https://aplicacoes.cidadania.gov.br/vis/data3/data-explorer.php
+description,Brazil Pact againt hunger - VISDATA
+#place_type,Country
+#places_within,
+start_date,2013
+end_date,2021
+release_frequency,1Year
+process,
+#pv_map,"https://docs.google.com/spreadsheets/d/1wQ4oCs-8-tQXEvjLjcMdxlP6kD7aYkzKr9vtgRwhcQk/edit?gid=1489285453#gid=1489285453,Código:https://docs.google.com/spreadsheets/d/1h5dmMxmQx8Vz5S4VkBGixy17q7XtLoDr0749mcsBOPg/edit?resourcekey=0-aIOYn5welLV0hq3a6YVmxQ&gid=1338846625#gid=1338846625"
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured,observationPeriod,measurementMethod"
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1h5dmMxmQx8Vz5S4VkBGixy17q7XtLoDr0749mcsBOPg/edit?resourcekey=0-aIOYn5welLV0hq3a6YVmxQ&gid=0#gid=0
+multi_value_properties,observationAbout
+mapped_rows,1
+mapped_columns,
+header_rows,1
+#input_rows,300
+#drop_statvars_without_svobs,0
+existing_statvar_mcf,""""""
+#debug,1
