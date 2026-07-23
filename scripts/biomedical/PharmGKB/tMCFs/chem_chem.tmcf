@@ -1,0 +1,23 @@
+Node: E:chem_chem->E1
+typeOf: dcs:ChemicalCompound
+dcid: C:chem_chem->Entity1_dcid
+name: C:chem_chem->Entity1_name
+pharmGKBID: C:chem_chem->Entity1_id
+
+Node: E:chem_chem->E2
+typeOf: dcs:ChemicalCompound
+dcid: C:chem_chem->Entity2_dcid
+name: C:chem_chem->Entity2_name
+pharmGKBID: C:chem_chem->Entity2_id
+
+Node: E:chem_chem->E3
+typeOf: dcs:ChemicalCompoundChemicalCompoundAssociation
+dcid: C:chem_chem->dcid
+name: C:chem_chem->name
+isPharmacodynamicRelationship: C:chem_chem->PD
+isPharmacokineticRelationship: C:chem_chem->PK
+relationshipAssociationType: C:chem_chem->Association
+relationshipEvidenceType: C:chem_chem->Evidence	
+pubMedID: C:chem_chem->PMIDs	
+compoundID: E:chem_chem->E1
+compoundID: E:chem_chem->E2

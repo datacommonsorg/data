@@ -1,0 +1,23 @@
+Node: E:disease_gene->E1
+typeOf: dcs:Disease
+dcid: C:disease_gene->Entity1_dcid
+name: C:disease_gene->Entity1_name
+pharmGKBID: C:disease_gene->Entity1_id
+
+Node: E:disease_gene->E2
+typeOf: dcs:Gene
+dcid: C:disease_gene->Entity2_dcid
+name: C:disease_gene->Entity2_name
+pharmGKBID: C:disease_gene->Entity2_id
+
+Node: E:disease_gene->E3
+typeOf: dcs:DiseaseGeneAssociation
+dcid: C:disease_gene->dcid
+name: C:disease_gene->name
+isPharmacodynamicRelationship: C:disease_gene->PD
+isPharmacokineticRelationship: C:disease_gene->PK
+relationshipAssociationType: C:disease_gene->Association
+relationshipEvidenceType: C:disease_gene->Evidence	
+pubMedID: C:disease_gene->PMIDs	
+diseaseID: E:disease_gene->E1
+geneID: E:disease_gene->E2
