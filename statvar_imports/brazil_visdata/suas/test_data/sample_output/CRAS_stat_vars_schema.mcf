@@ -1,0 +1,51 @@
+Node: dcid:placeCategory
+typeOf: dcs:Property
+name: "placeCategory"
+domainIncludes: dcid:CivicStructure
+
+Node: dcid:BRA_SocialAssistanceReferenceCenters
+typeOf: dcid:Place
+name: "BRA_ Social Assistance Reference Centers"
+isProvisional: dcs:True
+
+Node: dcid:financeType
+typeOf: dcs:Property
+name: "financeType"
+domainIncludes: dcid:CivicStructure
+rangeIncludes: dcid:FinanceTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:FinanceTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "FinanceTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:Cofinancing
+typeOf: dcid:FinanceTypeEnum
+name: "Cofinancing"
+isProvisional: dcs:True
+
+Node: dcid:financePartner
+typeOf: dcs:Property
+name: "financePartner"
+domainIncludes: dcid:CivicStructure
+rangeIncludes: dcid:FinancePartnerEnum
+isProvisional: dcs:True
+
+Node: dcid:FinancePartnerEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "FinancePartnerEnum"
+isProvisional: dcs:True
+
+Node: dcid:MinistryOfCitizenship
+typeOf: dcid:FinancePartnerEnum
+name: "Ministry Of Citizenship"
+isProvisional: dcs:True
+
+Node: dcid:nameWithLanguage
+typeOf: dcs:Property
+name: "nameWithLanguage"
+domainIncludes: dcid:CivicStructure
+

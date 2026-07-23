@@ -1,0 +1,8 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,,
+Referência,observationDate,{Data},populationType,FoodBasket,householdType,ExtractiveFamily,,,,,,,,
+Unidade Territorial,observationAbout,{Data},,,,,,,,,,,,
+Qtde de famílias extrativista,value,{Number},populationType,Household,foodBasketStatus,ReceivedFoodBasket,,,name,"""Number of extractive families that received food baskets""",alternateName,"""Qtde de famílias extrativista receberam cestas de alimento@pt""",,
+Qtde de cestas de alimentos destinadas a famílias extrativista,value,{Number},foodBasketStatus,DestinedFoodBasket,,,,,name,"""Number of food baskets destined for extractive families""",alternateName,"""Qtde de cestas de alimentos destinadas a famílias extrativista@pt""",,
+Qtde de cestas de alimentos entregues a famílias extrativista,value,{Number},foodBasketStatus,DeliveredFoodBasket,,,,,name,"""Number of food baskets delivered to extractive families""",alternateName,"""Qtde de cestas de alimentos entregues a famílias extrativista@pt""",,
+Quilos de alimentos entregues a famílias extrativistas,value,{Number},populationType,Food,unit,Kilogram,measuredProperty,amount,name,"""Kilograms of food delivered to extractive families""",alternateName,"""Quilos de alimentos entregues a famílias extrativistas@pt""",,
+Percentual de Cestas Básicas entregues a famílias extrativistas,value,{Number},foodBasketStatus,DeliveredFoodBasket,,,measurementDenominator,"-foodBasketStatus,+foodBasketStatus=DestinedFoodBasket",name,"""Percentage of Basic Food Baskets delivered to extractive families""",alternateName,"""Percentual de Cestas Básicas entregues a famílias extrativistas@pt""",unit,Percent

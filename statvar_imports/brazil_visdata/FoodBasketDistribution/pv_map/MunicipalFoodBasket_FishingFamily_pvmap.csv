@@ -1,8 +1,0 @@
-key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,,
-Referência,observationDate,{Data},populationType,FoodBasket,householdType,FishingFamily,,,,,,,,
-Unidade Territorial,observationAbout,{Data},,,,,,,,,,,,
-Qtde de famílias de pescadores,value,{Number},populationType,Household,foodBasketStatus,ReceivedFoodBasket,,,name,"""Number of fishing families that received food baskets""",alternateName,"""Qtde de famílias de pescadores receberam cestas de alimento@pt""",,
-Qtde de cestas de alimentos destinadas a famílias de pescadores,value,{Number},foodBasketStatus,DestinedFoodBasket,,,,,name,"""Number of food baskets destined for fishing families""",alternateName,"""Qtde de cestas de alimentos destinadas a famílias de pescadores@pt""",,
-Qtde de cestas de alimentos entregues a famílias de pescadores,value,{Number},foodBasketStatus,DeliveredFoodBasket,,,,,name,"""Number of food baskets delivered to fishing families""",alternateName,"""Qtde de cestas de alimentos entregues a famílias de pescadores@pt""",,
-Quilos de alimentos entregues a famílias de pescadores,value,{Number},populationType,Food,unit,Kilogram,measuredProperty,amount,name,"""Kilos of food delivered to fishing families""",alternateName,"""Quilos de alimentos entregues a famílias de pescadores@pt""",,
-Percentual de Cestas Básicas entregues a Famílias de pescadores,value,{Number},foodBasketStatus,DeliveredFoodBasket,,,measurementDenominator,"-foodBasketStatus,+foodBasketStatus=DestinedFoodBasket",name,"""Percentage of Basic Food Baskets delivered to fishing families""",alternateName,"""Percentual de Cestas Básicas entregues a Famílias de pescadores@pt""",unit,Percent
