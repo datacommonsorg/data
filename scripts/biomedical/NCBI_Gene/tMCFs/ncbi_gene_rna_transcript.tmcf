@@ -1,0 +1,48 @@
+Node: E:ncbi_gene_rna_transcript->E1
+typeOf: dcs:Gene
+dcid: C:ncbi_gene_rna_transcript->GeneID
+
+Node: E:ncbi_gene_rna_transcript->E2
+typeOf: dcs:GenomicCoordinates
+dcid: C:ncbi_gene_rna_transcript->dcid_dna_coordinates
+name: C:ncbi_gene_rna_transcript->name_dna_coordinates
+chromEnd: C:ncbi_gene_rna_transcript->end_position_on_the_genomic_accession
+chromStart: C:ncbi_gene_rna_transcript->start_position_on_the_genomic_accession
+inGenomeAssembly: C:ncbi_gene_rna_transcript->assembly
+strandOrientation: C:ncbi_gene_rna_transcript->orientation
+
+Node: E:ncbi_gene_rna_transcript->E3
+typeOf: dcs:GenomicNucleotide
+dcid: C:ncbi_gene_rna_transcript->dcid_genomic_nucleotide
+name: C:ncbi_gene_rna_transcript->genomic_nucleotide_accession.version
+encodesGene: E:ncbi_gene_rna_transcript->E1
+hasGenomicCoordinates: E:ncbi_gene_rna_transcript->E2
+ncbiSequenceGiNumber: C:ncbi_gene_rna_transcript->genomic_nucleotide_gi
+refSeqGenomicAccession: C:ncbi_gene_rna_transcript->genomic_nucleotide_accession.version
+
+Node: E:ncbi_gene_rna_transcript->E4
+typeOf: dcs:RnaTranscript
+dcid: C:ncbi_gene_rna_transcript->dcid_rna_transcript
+name: C:ncbi_gene_rna_transcript->RNA_nucleotide_accession.version
+ncbiRnaNucleotideGiNumber: C:ncbi_gene_rna_transcript->RNA_nucleotide_gi
+refSeqRnaNucleotideAccession: C:ncbi_gene_rna_transcript->RNA_nucleotide_accession.version
+transcribedFromGene: E:ncbi_gene_rna_transcript->E3
+
+Node: E:ncbi_gene_rna_transcript->E5
+typeOf: dcs:Protein
+dcid: C:ncbi_gene_rna_transcript->dcid_protein
+name: C:ncbi_gene_rna_transcript->protein_accession.version
+transcribedFromGene: E:ncbi_gene_rna_transcript->E1
+ncbiProteinGiNumber: C:ncbi_gene_rna_transcript->protein_gi
+refSeqProteinAccession: C:ncbi_gene_rna_transcript->protein_accession.version
+translatedFromRna: E:ncbi_gene_rna_transcript->E4
+
+Node: E:ncbi_gene_rna_transcript->E6
+typeOf: dcs:MaturePeptide
+dcid: C:ncbi_gene_rna_transcript->dcid_peptide
+name: C:ncbi_gene_rna_transcript->mature_peptide_accession.version
+transcribedFromGene: E:ncbi_gene_rna_transcript->E1
+maturedFromProtein: E:ncbi_gene_rna_transcript->E5
+ncbiMaturePeptideGiNumber: C:ncbi_gene_rna_transcript->mature_peptide_gi
+refSeqMaturePeptideAccession: C:ncbi_gene_rna_transcript->mature_peptide_accession.version
+translatedFromRna: E:ncbi_gene_rna_transcript->E4
