@@ -1,0 +1,8 @@
+Node: E:US_EDU_NJ->E0
+observationAbout: C:US_EDU_NJ->observationAbout
+observationDate: C:US_EDU_NJ->observationDate
+value: C:US_EDU_NJ->value
+variableMeasured: C:US_EDU_NJ->variableMeasured
+unit: C:US_EDU_NJ->unit
+scalingFactor: C:US_EDU_NJ->scalingFactor
+typeOf: dcs:StatVarObservation
