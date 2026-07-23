@@ -1,0 +1,34 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EuroStat_Usually_resident_population_on_1_January",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://ec.europa.eu/eurostat/databrowser/product/view/demo_urespop?lang=en",
+      "provenance_description": "Annual tracking of the usually resident population on January 1st across reporting European countries",
+      "scripts": [
+        "run.sh"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "Usually_resident_population_on_1_January_output.tmcf",
+          "cleaned_csv": "Usually_resident_population_on_1_January_output.csv"
+        }
+      ],
+      "source_files": [
+        "source_files/*.csv"
+      ],
+      "cron_schedule": "5 1 1,15 * *",
+      "resource_limits": {"cpu": 4, "memory": 8, "disk":100},
+      "config_override": {
+         "invoke_import_validation": true,
+         "invoke_import_tool": true,
+         "invoke_differ_tool": true,
+         "skip_input_upload": false,
+         "skip_gcs_upload": false,
+         "cleanup_gcs_volume_mount": false
+        }
+      }
+    ]
+}
