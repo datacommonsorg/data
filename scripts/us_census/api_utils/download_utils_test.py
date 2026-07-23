@@ -12,9 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import os
 import unittest
-from scripts.us_census.api_utils.download_utils import *
+
+from scripts.us_census.api_utils.download_utils import async_save_resp_json, download_url_list
 
 
 class TestCommonUtil(unittest.TestCase):

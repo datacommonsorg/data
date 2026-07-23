@@ -60,7 +60,6 @@ def set_column_map(input_path, spec_path, output_dir):
     generated_col_map = process_zip_file(input_path,
                                          spec_path,
                                          write_output=False)
-    os.makedirs(output_dir, exist_ok=True)
     with open(os.path.join(output_dir, 'column_map.json'), 'w') as f:
         json.dump(generated_col_map, f, indent=4)
 
