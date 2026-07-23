@@ -29,7 +29,8 @@ import pandas as pd
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 _curr = _SCRIPT_PATH
 while _curr and _curr != os.path.dirname(_curr):
-    if os.path.exists(os.path.join(_curr, '.git')) or os.path.exists(os.path.join(_curr, 'WORKSPACE')):
+    if os.path.exists(os.path.join(_curr, '.git')) or os.path.exists(
+        os.path.join(_curr, 'WORKSPACE')):
         sys.path.append(_curr)
         break
     _curr = os.path.dirname(_curr)
