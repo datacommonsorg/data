@@ -82,6 +82,10 @@ def _define_flags():
         )
 
         flags.DEFINE_string(
+            'places_resolved_csv', None,
+            'Path to a CSV file with resolved places (optional)')
+
+        flags.DEFINE_string(
             'gemini_cli', 'gemini',
             'Custom path or command to invoke Gemini CLI. '
             'Example: "/usr/local/bin/gemini". '
@@ -118,6 +122,7 @@ class Config:
     skip_confirmation: bool = False
     enable_sandboxing: bool = False
     output_path: str = 'output/output'
+    places_resolved_csv: Optional[str] = None
     gemini_cli: Optional[str] = None
     working_dir: Optional[str] = None
     extra_instruction_files: List[str] = field(default_factory=list)
@@ -478,6 +483,9 @@ class PVMapGenerator:
             'extra_instruction_files_abs': [
                 str(path) for path in self._config.extra_instruction_files
             ] if self._config.extra_instruction_files else [],
+            'places_resolved_csv_abs':
+                str(self._resolve_path(self._config.places_resolved_csv))
+                if self._config.places_resolved_csv else "",
         }
 
         # Render template with these variables
@@ -507,6 +515,7 @@ def prepare_config() -> Config:
         skip_confirmation=_FLAGS.skip_confirmation,
         enable_sandboxing=_FLAGS.enable_sandboxing,
         output_path=_FLAGS.output_path,
+        places_resolved_csv=_FLAGS.places_resolved_csv,
         gemini_cli=_FLAGS.gemini_cli,
         working_dir=_FLAGS.working_dir,
         extra_instruction_files=_FLAGS.extra_instruction_files or [],
