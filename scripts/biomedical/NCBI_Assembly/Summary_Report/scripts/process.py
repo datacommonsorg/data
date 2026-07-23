@@ -399,13 +399,16 @@ def group(df):
 def set_flags():
     global _FLAGS
     _FLAGS = flags.FLAGS
-    flags.DEFINE_string('output_dir', 'output',
+    flags.DEFINE_string('output_dir', 'scripts/output',
                         'Output directory for generated files.')
-    flags.DEFINE_string('input_dir', 'input/assembly_summary_genbank.txt',
+    flags.DEFINE_string('input_dir',
+                        'scripts/input/assembly_summary_genbank.txt',
                         'Input directory where .txt files downloaded.')
-    flags.DEFINE_string('input_dir1', 'input/assembly_summary_refseq.txt',
+    flags.DEFINE_string('input_dir1',
+                        'scripts/input/assembly_summary_refseq.txt',
                         'Output directory for generated files.')
-    flags.DEFINE_string('tax_id_dcid_mapping', 'tax_id_dcid_mapping.txt',
+    flags.DEFINE_string('tax_id_dcid_mapping',
+                        'scripts/input/tax_id_dcid_mapping.txt',
                         'Input directory where .txt files downloaded.')
 
 
