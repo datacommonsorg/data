@@ -1,0 +1,8 @@
+Node: E:-Programa_de_Aquisicao_de_Alimento_Execucao_da_modalidade_Leite->E0
+observationAbout: C:-Programa_de_Aquisicao_de_Alimento_Execucao_da_modalidade_Leite->observationAbout
+observationDate: C:-Programa_de_Aquisicao_de_Alimento_Execucao_da_modalidade_Leite->observationDate
+value: C:-Programa_de_Aquisicao_de_Alimento_Execucao_da_modalidade_Leite->value
+variableMeasured: C:-Programa_de_Aquisicao_de_Alimento_Execucao_da_modalidade_Leite->variableMeasured
+unit: C:-Programa_de_Aquisicao_de_Alimento_Execucao_da_modalidade_Leite->unit
+scalingFactor: C:-Programa_de_Aquisicao_de_Alimento_Execucao_da_modalidade_Leite->scalingFactor
+typeOf: dcs:StatVarObservation
