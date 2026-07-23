@@ -1,0 +1,6 @@
+Node: E:public_school_enrollment_by_county_grade_and_race_output->E0
+observationAbout: C:public_school_enrollment_by_county_grade_and_race_output->observationAbout
+observationDate: C:public_school_enrollment_by_county_grade_and_race_output->observationDate
+value: C:public_school_enrollment_by_county_grade_and_race_output->value
+variableMeasured: C:public_school_enrollment_by_county_grade_and_race_output->variableMeasured
+typeOf: dcs:StatVarObservation
