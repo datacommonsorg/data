@@ -1,0 +1,486 @@
+I1201 13:47:15.315608 8412012736 stat_var_processor.py:2954] Not running under Cloud
+I1201 13:47:15.316497 8412012736 file_util.py:580] Loading dict from file: statvar_imports/Norway/Norway_metadata.csv with key: parameter, value: value
+I1201 13:47:15.316580 8412012736 file_util.py:613] Loaded 8 rows from statvar_imports/Norway/Norway_metadata.csv into dict
+I1201 13:47:15.316631 8412012736 config_flags.py:479] Logging verbosity 0
+I1201 13:47:15.316725 8412012736 stat_var_processor.py:2897] Processing data ['statvar_imports/Norway/input/Norway_input.csv'] into statvar_imports/Norway/output/Norway_output using config: {'ignore_numeric_commas': True, 'input_reference_column': '#input', 'input_min_columns_per_row': 2, 'input_data': ['statvar_imports/Norway/input/Norway_input.csv'], 'data_url': [], 'input_encoding': 'utf-8', 'input_xls': [], 'pv_map_drop_undefined_nodes': False, 'duplicate_svobs_key': '#ErrorDuplicateSVObs', 'duplicate_statvars_key': '#ErrorDuplicateStatVar', 'drop_statvars_without_svobs': 1, 'aggregate_key': '#Aggregate', 'aggregate_duplicate_svobs': None, 'merged_pvs_property': '#MergedSVObs', 'multi_value_properties': ['name', 'alternateName', 'measurementDenominator'], 'schemaless': False, 'schemaless_statvar_comment_undefined_pvs': False, 'default_statvar_pvs': OrderedDict({'typeOf': 'dcs:StatisticalVariable', 'measurementQualifier': '', 'statType': 'dcs:measuredValue', 'measuredProperty': 'dcs:count', 'populationType': '', 'memberOf': '', 'name': '', 'nameWithLanguage': '', 'alternateName': '', 'description': '', 'descriptionUrl': ''}), 'statvar_dcid_ignore_properties': ['description', 'name', 'nameWithLanguage', 'descriptionUrl', 'alternateName'], 'statvar_dcid_ignore_values': ['measuredValue', 'StatisticalVariable'], 'default_svobs_pvs': OrderedDict({'typeOf': 'dcs:StatVarObservation', 'observationDate': '', 'observationAbout': '', 'value': '', 'observationPeriod': '', 'measurementMethod': '', 'unit': '', 'scalingFactor': '', 'variableMeasured': '', 'measurementResult': '', '#Aggregate': ''}), 'required_statvar_properties': ['measuredProperty', 'populationType'], 'required_statvarobs_properties': ['variableMeasured', 'observationAbout', 'observationDate', 'value'], 'existing_statvar_mcf': '', 'existing_schema_mcf': '', 'statvar_fingerprint_ignore_props': ['Node', 'dcid', 'name', 'nameWithLanguage', 'alternateName', 'description', 'descriptionUrl', 'provenance', 'memberOf', 'member', 'relevantVariable'], 'statvar_fingerprint_include_props': [], 'statvar_dcid_remap_csv': '', 'use_all_numeric_data_values': False, 'number_decimal': '.', 'number_separator': ', ', 'word_delimiter': ' ', 'merged_cells': True, 'default_pv_maps': ['GLOBAL'], 'mapped_rows': 0, 'mapped_columns': ['4'], 'show_counters_every_n': 0, 'show_counters_every_sec': 30, 'dc_api_key': '', 'maps_api_key': '', 'resolve_places': False, 'places_csv': [], 'places_resolved_csv': '', 'place_type': ['Country'], 'places_within': [], 'filter_data_min_value': None, 'filter_data_max_value': None, 'filter_data_max_change_ratio': None, 'filter_data_max_yearly_change_ratio': None, 'output_path': 'statvar_imports/Norway/output/Norway_output', 'generate_statvar_mcf': True, 'generate_csv': True, 'output_csv_mode': 'w', 'output_columns': ['observationDate', 'observationAbout', 'value', 'variableMeasured'], 'generate_tmcf': True, 'skip_constant_csv_columns': True, 'output_only_new_statvars': True, 'output_precision_digits': 5, 'generate_schema_mcf': True, 'generate_provisional_schema': True, 'dc_api_root': 'http://autopush.api.datacommons.org', 'dc_api_use_cache': False, 'dc_api_batch_size': 100, 'pv_map': ['statvar_imports/Norway/Norway_pvmap.csv'], 'input_rows': 9223372036854775807, 'input_columns': 9223372036854775807, 'skip_rows': 2, 'ignore_rows': [0], 'header_rows': 3, 'header_columns': -1, 'process_rows': [0], 'parallelism': 0, 'output_counters': '', 'spell_check': True, 'spell_allowlist': '/Users/abhishekjaiswal/Desktop/data-master/data-master/tools/statvar_importer/words_allowlist.txt', 'spell_allow_words': [], 'output_sanity_check': '', 'spell_check_text_only': False, 'spell_check_ignore_props': None, 'debug': False, 'log_level': 0, 'log_every_n': 1, 'generate_pvmap': True, 'google_api_key': '', 'sample_pvmap': '/Users/abhishekjaiswal/Desktop/data-master/data-master/tools/statvar_importer/sample_pvmap.csv', 'sample_statvars': '/Users/abhishekjaiswal/Desktop/data-master/data-master/tools/statvar_importer/sample_statvars.mcf', 'data_context': '', 'llm_data_annotation': True, 'generate_statvar_name': False, 'llm_generate_statvar_name': False, '#mapped_rows': '3', 'place_within': 'country/NOR', '#word_delimiter': '""'}...
+I1201 13:47:15.316890 8412012736 utils.py:470] Converting statvar_imports/Norway/input/Norway_input.csv into csv for []
+I1201 13:47:15.316946 8412012736 stat_var_processor.py:2906] Creating output directory: statvar_imports/Norway/output
+I1201 13:47:15.316982 8412012736 stat_var_processor.py:2910] Processing data ['statvar_imports/Norway/input/Norway_input.csv'] into statvar_imports/Norway/output/Norway_output...
+I1201 13:47:15.317145 8412012736 property_value_mapper.py:143] Loading PV maps for GLOBAL from csv file: statvar_imports/Norway/Norway_pvmap.csv
+I1201 13:47:15.317620 8412012736 property_value_mapper.py:241] Loaded 104 property-value mappings for "GLOBAL"
+I1201 13:47:15.317698 8412012736 schema_resolver.py:136] Loaded 0 schema MCF nodes: 
+I1201 13:47:15.317724 8412012736 stat_var_processor.py:181] Loaded 0 remapped statvar dcids: {}
+I1201 13:47:15.317808 8412012736 place_name_matcher.py:134] Setting up PlaceNameMatcher with config: {'parent_place_types': ['Country', 'State', 'AdministrativeArea', 'AdministrativeArea1', 'EurostatNUTS1', 'District', 'AdministrativeArea2', 'EurostatNUTS2', 'County', 'AdministrativeArea3', 'EurostatNUTS3', 'AdministrativeArea4', 'AdministrativeArea5', 'City', 'Village', 'Place', 'Neighborhood'], 'ngram_size': 4, 'ignore_non_alphanum': True, 'min_match_fraction': 0.1, 'num_results': 10, 'ignore_numeric_commas': True, 'input_reference_column': '#input', 'input_min_columns_per_row': 2, 'input_data': ['statvar_imports/Norway/input/Norway_input.csv'], 'data_url': [], 'input_encoding': 'utf-8', 'input_xls': [], 'pv_map_drop_undefined_nodes': False, 'duplicate_svobs_key': '#ErrorDuplicateSVObs', 'duplicate_statvars_key': '#ErrorDuplicateStatVar', 'drop_statvars_without_svobs': 1, 'aggregate_key': '#Aggregate', 'aggregate_duplicate_svobs': None, 'merged_pvs_property': '#MergedSVObs', 'multi_value_properties': ['name', 'alternateName', 'measurementDenominator'], 'schemaless': False, 'schemaless_statvar_comment_undefined_pvs': False, 'default_statvar_pvs': OrderedDict({'typeOf': 'dcs:StatisticalVariable', 'measurementQualifier': '', 'statType': 'dcs:measuredValue', 'measuredProperty': 'dcs:count', 'populationType': '', 'memberOf': '', 'name': '', 'nameWithLanguage': '', 'alternateName': '', 'description': '', 'descriptionUrl': ''}), 'statvar_dcid_ignore_properties': ['description', 'name', 'nameWithLanguage', 'descriptionUrl', 'alternateName'], 'statvar_dcid_ignore_values': ['measuredValue', 'StatisticalVariable'], 'default_svobs_pvs': OrderedDict({'typeOf': 'dcs:StatVarObservation', 'observationDate': '', 'observationAbout': '', 'value': '', 'observationPeriod': '', 'measurementMethod': '', 'unit': '', 'scalingFactor': '', 'variableMeasured': '', 'measurementResult': '', '#Aggregate': ''}), 'required_statvar_properties': ['measuredProperty', 'populationType'], 'required_statvarobs_properties': ['variableMeasured', 'observationAbout', 'observationDate', 'value'], 'existing_statvar_mcf': '', 'existing_schema_mcf': '', 'statvar_fingerprint_ignore_props': ['Node', 'dcid', 'name', 'nameWithLanguage', 'alternateName', 'description', 'descriptionUrl', 'provenance', 'memberOf', 'member', 'relevantVariable'], 'statvar_fingerprint_include_props': [], 'statvar_dcid_remap_csv': '', 'use_all_numeric_data_values': False, 'number_decimal': '.', 'number_separator': ', ', 'word_delimiter': ' ', 'merged_cells': True, 'default_pv_maps': ['GLOBAL'], 'mapped_rows': 0, 'mapped_columns': [1, 2, 3, 4], 'show_counters_every_n': 0, 'show_counters_every_sec': 30, 'dc_api_key': '', 'maps_api_key': '', 'resolve_places': False, 'places_csv': [], 'places_resolved_csv': '', 'place_type': ['Country'], 'places_within': [], 'filter_data_min_value': None, 'filter_data_max_value': None, 'filter_data_max_change_ratio': None, 'filter_data_max_yearly_change_ratio': None, 'output_path': 'statvar_imports/Norway/output/Norway_output', 'generate_statvar_mcf': True, 'generate_csv': True, 'output_csv_mode': 'w', 'output_columns': ['observationDate', 'observationAbout', 'value', 'variableMeasured'], 'generate_tmcf': True, 'skip_constant_csv_columns': True, 'output_only_new_statvars': True, 'output_precision_digits': 5, 'generate_schema_mcf': True, 'generate_provisional_schema': True, 'dc_api_root': 'http://autopush.api.datacommons.org', 'dc_api_use_cache': False, 'dc_api_batch_size': 100, 'pv_map': ['statvar_imports/Norway/Norway_pvmap.csv'], 'input_rows': 9223372036854775807, 'input_columns': 9223372036854775807, 'skip_rows': 2, 'ignore_rows': [0], 'header_rows': 3, 'header_columns': -1, 'process_rows': [0], 'parallelism': 0, 'output_counters': '', 'spell_check': True, 'spell_allowlist': '/Users/abhishekjaiswal/Desktop/data-master/data-master/tools/statvar_importer/words_allowlist.txt', 'spell_allow_words': [], 'output_sanity_check': '', 'spell_check_text_only': False, 'spell_check_ignore_props': None, 'debug': False, 'log_level': 0, 'log_every_n': 1, 'generate_pvmap': True, 'google_api_key': '', 'sample_pvmap': '/Users/abhishekjaiswal/Desktop/data-master/data-master/tools/statvar_importer/sample_pvmap.csv', 'sample_statvars': '/Users/abhishekjaiswal/Desktop/data-master/data-master/tools/statvar_importer/sample_statvars.mcf', 'data_context': '', 'llm_data_annotation': True, 'generate_statvar_name': False, 'llm_generate_statvar_name': False, '#mapped_rows': '3', 'place_within': 'country/NOR', '#word_delimiter': '""'}
+I1201 13:47:15.317909 8412012736 place_name_matcher.py:177] Loaded 0 places from [''] within []
+I1201 13:47:15.317936 8412012736 place_name_matcher.py:191] Loaded 0 names into ngram matcher with 0 ngrams
+I1201 13:47:15.318331 8412012736 counters.py:381] Counters:
+                         1:process_input_processed =          0
+                        1:process_input_start_time = 1979369.11
+                                       process-mem = 420574183424
+                                   process-mem-rss =  136478720
+                             process-time-sys-secs =       0.18
+                            process-time-user-secs =       0.59
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                        start_time = 1979369.11
+I1201 13:47:15.318638 8412012736 counters.py:346] Counters:
+                       1:process_input_process-mem = 420574183424
+                   1:process_input_process-mem-rss =  136495104
+             1:process_input_process-time-sys-secs =       0.18
+            1:process_input_process-time-user-secs =       0.59
+              1:process_input_process_elapsed_time =       0.00
+            1:process_input_process_remaining_time = 136060000.00
+                         1:process_input_processed =          0
+                        1:process_input_start_time = 1979369.11
+                             1:process_input_total =      13606
+                                       process-mem = 420574183424
+                                   process-mem-rss =  136478720
+                             process-time-sys-secs =       0.18
+                            process-time-user-secs =       0.59
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                        start_time = 1979369.11
+I1201 13:47:15.318681 8412012736 stat_var_processor.py:1824] Processing input data file statvar_imports/Norway/input/Norway_input.csv with encoding:utf-8...
+I1201 13:47:15.318950 8412012736 counters.py:346] Counters:
+             1:process_input_input-files-processed =          1
+1:process_input_num-rows-statvar_imports/Norway/input/Norway_input.csv =      13606
+                       1:process_input_process-mem = 420574183424
+                   1:process_input_process-mem-rss =  136495104
+             1:process_input_process-time-sys-secs =       0.18
+            1:process_input_process-time-user-secs =       0.59
+              1:process_input_process_elapsed_time =       0.00
+            1:process_input_process_remaining_time = 136060000.00
+                         1:process_input_processed =          0
+                        1:process_input_start_time = 1979369.11
+                             1:process_input_total =      27212
+                                       process-mem = 420574183424
+                                   process-mem-rss =  136511488
+                             process-time-sys-secs =       0.18
+                            process-time-user-secs =       0.59
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                        start_time = 1979369.11
+                      warning-missing-property-key =          1
+I1201 13:47:15.320026 8412012736 counters.py:346] Counters:
+                                       process-mem = 420574183424
+                                   process-mem-rss =  136544256
+                             process-time-sys-secs =       0.18
+                            process-time-user-secs =       0.59
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                      resolve-miss =          1
+                                        start_time = 1979369.11
+I1201 13:47:15.320197 8412012736 counters.py:346] Counters:
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =          1
+              1:process_input_input-rows-processed =          1
+                1:process_input_input-rows-skipped =          2
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/Norway/input/Norway_input.csv =      13606
+                       1:process_input_process-mem = 420574183424
+                   1:process_input_process-mem-rss =  136495104
+             1:process_input_process-time-sys-secs =       0.18
+            1:process_input_process-time-user-secs =       0.59
+              1:process_input_process_elapsed_time =       0.00
+            1:process_input_process_remaining_time = 136060000.00
+                         1:process_input_processed =          4
+                        1:process_input_start_time = 1979369.11
+                             1:process_input_total =      27212
+      1:process_input_warning-unresolved-value-ref =          6
+                                generated-statvars =          1
+                                       process-mem = 420574183424
+                                   process-mem-rss =  136544256
+                             process-time-sys-secs =       0.18
+                            process-time-user-secs =       0.59
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                        start_time = 1979369.11
+                      warning-missing-property-key =        117
+I1201 13:47:21.565207 8412012736 counters.py:346] Counters:
+                   1:process_input_generated-svobs =      13200
+  1:process_input_generated-svobs-Norway_input.csv =      13200
+                   1:process_input_input-data-rows =      13200
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =        334
+                1:process_input_input-rows-ignored =         51
+              1:process_input_input-rows-processed =      13213
+                1:process_input_input-rows-skipped =          2
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/Norway/input/Norway_input.csv =      13606
+                       1:process_input_process-mem = 420612980736
+                   1:process_input_process-mem-rss =  146964480
+             1:process_input_process-time-sys-secs =       0.19
+            1:process_input_process-time-user-secs =       6.82
+              1:process_input_process_elapsed_time =       6.25
+            1:process_input_process_remaining_time =       6.57
+                         1:process_input_processed =      13266
+           1:process_input_processing-time-seconds =       6.25
+1:process_input_processing-time-seconds_statvar_imports/Norway/input/Norway_input.csv =       6.25
+                   1:process_input_processing_rate =    2123.62
+                        1:process_input_start_time = 1979369.11
+                             1:process_input_total =      27212
+      1:process_input_warning-unresolved-value-ref =         72
+                                generated-statvars =      13200
+                         generated-unique-statvars =         22
+                                       process-mem = 420574183424
+                                   process-mem-rss =  136544256
+                             process-time-sys-secs =       0.18
+                            process-time-user-secs =       0.59
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                        start_time = 1979369.11
+                                       svobs-added =      13200
+                      warning-missing-property-key =     711060
+I1201 13:47:21.565391 8412012736 stat_var_processor.py:1898] Processed 13266 lines from statvar_imports/Norway/input/Norway_input.csv @ 2123.79 lines/sec.
+I1201 13:47:21.565432 8412012736 stat_var_processor.py:1912] Processed 13213 rows from 1 files @ 2115.09 rows/sec.
+I1201 13:47:21.565457 8412012736 stat_var_processor.py:2766] Generating output: statvar_imports/Norway/output/Norway_output
+I1201 13:47:21.565531 8412012736 counters.py:381] Counters:
+                   1:process_input_generated-svobs =      13200
+  1:process_input_generated-svobs-Norway_input.csv =      13200
+                   1:process_input_input-data-rows =      13200
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =        334
+                1:process_input_input-rows-ignored =         51
+              1:process_input_input-rows-processed =      13213
+                1:process_input_input-rows-skipped =          2
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/Norway/input/Norway_input.csv =      13606
+                       1:process_input_process-mem = 420612980736
+                   1:process_input_process-mem-rss =  146964480
+             1:process_input_process-time-sys-secs =       0.19
+            1:process_input_process-time-user-secs =       6.82
+              1:process_input_process_elapsed_time =       6.25
+            1:process_input_process_remaining_time =       6.57
+                         1:process_input_processed =      13266
+        1:process_input_processing-input-rows-rate =    2115.09
+1:process_input_processing-input-rows-rate_statvar_imports/Norway/input/Norway_input.csv =    2123.79
+           1:process_input_processing-time-seconds =       6.25
+1:process_input_processing-time-seconds_statvar_imports/Norway/input/Norway_input.csv =       6.25
+                   1:process_input_processing_rate =    2123.51
+                        1:process_input_start_time = 1979369.11
+                             1:process_input_total =      27212
+      1:process_input_warning-unresolved-value-ref =         72
+                        2:prepare_output_processed =          0
+                       2:prepare_output_start_time = 1979375.36
+                                generated-statvars =      13200
+                         generated-unique-statvars =         22
+                                       process-mem = 420574183424
+                                   process-mem-rss =  136544256
+                             process-time-sys-secs =       0.18
+                            process-time-user-secs =       0.59
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                        start_time = 1979369.11
+                                       svobs-added =      13200
+                      warning-missing-property-key =     711060
+I1201 13:47:21.587610 8412012736 counters.py:381] Counters:
+                   1:process_input_generated-svobs =      13200
+  1:process_input_generated-svobs-Norway_input.csv =      13200
+                   1:process_input_input-data-rows =      13200
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =        334
+                1:process_input_input-rows-ignored =         51
+              1:process_input_input-rows-processed =      13213
+                1:process_input_input-rows-skipped =          2
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/Norway/input/Norway_input.csv =      13606
+                       1:process_input_process-mem = 420612980736
+                   1:process_input_process-mem-rss =  146964480
+             1:process_input_process-time-sys-secs =       0.19
+            1:process_input_process-time-user-secs =       6.82
+              1:process_input_process_elapsed_time =       6.25
+            1:process_input_process_remaining_time =       6.57
+                         1:process_input_processed =      13266
+        1:process_input_processing-input-rows-rate =    2115.09
+1:process_input_processing-input-rows-rate_statvar_imports/Norway/input/Norway_input.csv =    2123.79
+           1:process_input_processing-time-seconds =       6.25
+1:process_input_processing-time-seconds_statvar_imports/Norway/input/Norway_input.csv =       6.25
+                   1:process_input_processing_rate =    2123.51
+                        1:process_input_start_time = 1979369.11
+                             1:process_input_total =      27212
+      1:process_input_warning-unresolved-value-ref =         72
+                      2:prepare_output_process-mem = 420612980736
+                  2:prepare_output_process-mem-rss =  147603456
+            2:prepare_output_process-time-sys-secs =       0.19
+           2:prepare_output_process-time-user-secs =       6.84
+             2:prepare_output_process_elapsed_time =       0.02
+                        2:prepare_output_processed =          0
+                       2:prepare_output_start_time = 1979375.36
+                     3:write_statvar_mcf_processed =          0
+                    3:write_statvar_mcf_start_time = 1979375.38
+                                generated-statvars =      13200
+                         generated-unique-statvars =         22
+                                       process-mem = 420574183424
+                                   process-mem-rss =  136544256
+                             process-time-sys-secs =       0.18
+                            process-time-user-secs =       0.59
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                        start_time = 1979369.11
+                                       svobs-added =      13200
+                      warning-missing-property-key =     711060
+I1201 13:47:22.158192 8412012736 mcf_filter.py:86] Filtering 22 nodes with 8 ignored nodes
+W1201 13:47:22.158915 8412012736 mcf_filter.py:97] Diff in ignored Node: Count_Person_30To39Years_Female, diff:
+  Node: dcid:Count_Person_30To39Years_Female
+  typeOf: dcid:StatisticalVariable
++ name: "Number of women aged 30 to 39 years"
+  populationType: dcid:Person
+  measuredProperty: dcid:count
+  statType: dcid:measuredValue
+  age: dcid:Years30To39
+  gender: dcid:Female
+
+E1201 13:47:22.159122 8412012736 mcf_file_util.py:390] Statvar Count_Person_30To39Years_Female has conflicting values for age: {'age': 'Years30To39', 'constraintProperties': 'age,gender', 'gender': 'Female', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years30To39_Gender-Female', 'name': '"Number of women aged 30 to 39 years"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_30To39Years_Female'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Female', 'age': '[30 39 Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_30To39Years_Female'}
+E1201 13:47:22.159245 8412012736 mcf_filter.py:111] Node has conflicting properties:Count_Person_30To39Years_Female: {'age': 'Years30To39', 'constraintProperties': 'age,gender', 'gender': 'Female', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years30To39_Gender-Female', 'name': '"Number of women aged 30 to 39 years"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_30To39Years_Female'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Female', 'age': '[30 39 Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_30To39Years_Female'}
+W1201 13:47:22.159621 8412012736 mcf_filter.py:97] Diff in ignored Node: Count_Person_40To49Years_Female, diff:
+  Node: dcid:Count_Person_40To49Years_Female
+  typeOf: dcid:StatisticalVariable
++ name: "Number of women aged 40 to 49 years"
+  populationType: dcid:Person
+  measuredProperty: dcid:count
+  statType: dcid:measuredValue
+  age: dcid:Years40To49
+  gender: dcid:Female
+
+E1201 13:47:22.159786 8412012736 mcf_file_util.py:390] Statvar Count_Person_40To49Years_Female has conflicting values for age: {'age': 'Years40To49', 'constraintProperties': 'age,gender', 'gender': 'Female', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years40To49_Gender-Female', 'name': '"Number of women aged 40 to 49 years"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_40To49Years_Female'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Female', 'age': '[40 49 Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_40To49Years_Female'}
+E1201 13:47:22.159888 8412012736 mcf_filter.py:111] Node has conflicting properties:Count_Person_40To49Years_Female: {'age': 'Years40To49', 'constraintProperties': 'age,gender', 'gender': 'Female', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years40To49_Gender-Female', 'name': '"Number of women aged 40 to 49 years"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_40To49Years_Female'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Female', 'age': '[40 49 Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_40To49Years_Female'}
+W1201 13:47:22.160372 8412012736 mcf_filter.py:97] Diff in ignored Node: Count_Person_50To59Years_Female, diff:
+  Node: dcid:Count_Person_50To59Years_Female
+  typeOf: dcid:StatisticalVariable
++ name: "Number of women aged 50 to 59 years"
+  populationType: dcid:Person
+  measuredProperty: dcid:count
+  statType: dcid:measuredValue
+  age: dcid:Years50To59
+  gender: dcid:Female
+
+E1201 13:47:22.161056 8412012736 mcf_file_util.py:390] Statvar Count_Person_50To59Years_Female has conflicting values for age: {'age': 'Years50To59', 'constraintProperties': 'age,gender', 'gender': 'Female', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years50To59_Gender-Female', 'name': '"Number of women aged 50 to 59 years"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_50To59Years_Female'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Female', 'age': '[50 59 Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_50To59Years_Female'}
+E1201 13:47:22.161324 8412012736 mcf_filter.py:111] Node has conflicting properties:Count_Person_50To59Years_Female: {'age': 'Years50To59', 'constraintProperties': 'age,gender', 'gender': 'Female', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years50To59_Gender-Female', 'name': '"Number of women aged 50 to 59 years"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_50To59Years_Female'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Female', 'age': '[50 59 Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_50To59Years_Female'}
+W1201 13:47:22.161768 8412012736 mcf_filter.py:97] Diff in ignored Node: Count_Person_100OrMoreYears_Female, diff:
+  Node: dcid:Count_Person_100OrMoreYears_Female
+  typeOf: dcid:StatisticalVariable
++ name: "Population: 100 Years or More, Female"
+  populationType: dcid:Person
+  measuredProperty: dcid:count
+  statType: dcid:measuredValue
+  age: dcid:Years100Onwards
+  gender: dcid:Female
+
+E1201 13:47:22.161931 8412012736 mcf_file_util.py:390] Statvar Count_Person_100OrMoreYears_Female has conflicting values for age: {'age': 'Years100Onwards', 'constraintProperties': 'age,gender', 'gender': 'Female', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years100Onwards_Gender-Female', 'name': '"Population: 100 Years or More, Female"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_100OrMoreYears_Female'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Female', 'age': '[100 - Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_100OrMoreYears_Female'}
+E1201 13:47:22.162050 8412012736 mcf_filter.py:111] Node has conflicting properties:Count_Person_100OrMoreYears_Female: {'age': 'Years100Onwards', 'constraintProperties': 'age,gender', 'gender': 'Female', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years100Onwards_Gender-Female', 'name': '"Population: 100 Years or More, Female"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_100OrMoreYears_Female'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Female', 'age': '[100 - Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_100OrMoreYears_Female'}
+W1201 13:47:22.162469 8412012736 mcf_filter.py:97] Diff in ignored Node: Count_Person_30To39Years_Male, diff:
+  Node: dcid:Count_Person_30To39Years_Male
+  typeOf: dcid:StatisticalVariable
++ name: "Number of men aged 30 to 39 years"
+  populationType: dcid:Person
+  measuredProperty: dcid:count
+  statType: dcid:measuredValue
+  age: dcid:Years30To39
+  gender: dcid:Male
+
+E1201 13:47:22.162647 8412012736 mcf_file_util.py:390] Statvar Count_Person_30To39Years_Male has conflicting values for age: {'age': 'Years30To39', 'constraintProperties': 'age,gender', 'gender': 'Male', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years30To39_Gender-Male', 'name': '"Number of men aged 30 to 39 years"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_30To39Years_Male'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Male', 'age': '[30 39 Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_30To39Years_Male'}
+E1201 13:47:22.162726 8412012736 mcf_filter.py:111] Node has conflicting properties:Count_Person_30To39Years_Male: {'age': 'Years30To39', 'constraintProperties': 'age,gender', 'gender': 'Male', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years30To39_Gender-Male', 'name': '"Number of men aged 30 to 39 years"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_30To39Years_Male'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Male', 'age': '[30 39 Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_30To39Years_Male'}
+W1201 13:47:22.163131 8412012736 mcf_filter.py:97] Diff in ignored Node: Count_Person_40To49Years_Male, diff:
+  Node: dcid:Count_Person_40To49Years_Male
+  typeOf: dcid:StatisticalVariable
++ name: "Number of men aged 40 to 49 years"
+  populationType: dcid:Person
+  measuredProperty: dcid:count
+  statType: dcid:measuredValue
+  age: dcid:Years40To49
+  gender: dcid:Male
+
+E1201 13:47:22.163289 8412012736 mcf_file_util.py:390] Statvar Count_Person_40To49Years_Male has conflicting values for age: {'age': 'Years40To49', 'constraintProperties': 'age,gender', 'gender': 'Male', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years40To49_Gender-Male', 'name': '"Number of men aged 40 to 49 years"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_40To49Years_Male'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Male', 'age': '[40 49 Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_40To49Years_Male'}
+E1201 13:47:22.163450 8412012736 mcf_filter.py:111] Node has conflicting properties:Count_Person_40To49Years_Male: {'age': 'Years40To49', 'constraintProperties': 'age,gender', 'gender': 'Male', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years40To49_Gender-Male', 'name': '"Number of men aged 40 to 49 years"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_40To49Years_Male'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Male', 'age': '[40 49 Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_40To49Years_Male'}
+W1201 13:47:22.164527 8412012736 mcf_filter.py:97] Diff in ignored Node: Count_Person_50To59Years_Male, diff:
+  Node: dcid:Count_Person_50To59Years_Male
+  typeOf: dcid:StatisticalVariable
++ name: "Number of males aged 50 to 59 years","Number of men aged 50 to 59 years"
+  populationType: dcid:Person
+  measuredProperty: dcid:count
+  statType: dcid:measuredValue
+  age: dcid:Years50To59
+  gender: dcid:Male
+
+E1201 13:47:22.164971 8412012736 mcf_file_util.py:390] Statvar Count_Person_50To59Years_Male has conflicting values for age: {'age': 'Years50To59', 'constraintProperties': 'age,gender', 'gender': 'Male', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years50To59_Gender-Male', 'name': '"Number of males aged 50 to 59 years","Number of men aged 50 to 59 years"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_50To59Years_Male'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Male', 'age': '[50 59 Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_50To59Years_Male'}
+E1201 13:47:22.165370 8412012736 mcf_filter.py:111] Node has conflicting properties:Count_Person_50To59Years_Male: {'age': 'Years50To59', 'constraintProperties': 'age,gender', 'gender': 'Male', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years50To59_Gender-Male', 'name': '"Number of males aged 50 to 59 years","Number of men aged 50 to 59 years"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_50To59Years_Male'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Male', 'age': '[50 59 Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_50To59Years_Male'}
+W1201 13:47:22.165829 8412012736 mcf_filter.py:97] Diff in ignored Node: Count_Person_100OrMoreYears_Male, diff:
+  Node: dcid:Count_Person_100OrMoreYears_Male
+  typeOf: dcid:StatisticalVariable
++ name: "Population: 100 Years or More, Male"
+  populationType: dcid:Person
+  measuredProperty: dcid:count
+  statType: dcid:measuredValue
+  age: dcid:Years100Onwards
+  gender: dcid:Male
+
+E1201 13:47:22.166016 8412012736 mcf_file_util.py:390] Statvar Count_Person_100OrMoreYears_Male has conflicting values for age: {'age': 'Years100Onwards', 'constraintProperties': 'age,gender', 'gender': 'Male', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years100Onwards_Gender-Male', 'name': '"Population: 100 Years or More, Male"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_100OrMoreYears_Male'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Male', 'age': '[100 - Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_100OrMoreYears_Male'}
+E1201 13:47:22.166208 8412012736 mcf_filter.py:111] Node has conflicting properties:Count_Person_100OrMoreYears_Male: {'age': 'Years100Onwards', 'constraintProperties': 'age,gender', 'gender': 'Male', 'measuredProperty': 'count', 'memberOf': 'dc/g/Person_Age-Years100Onwards_Gender-Male', 'name': '"Population: 100 Years or More, Male"', 'populationType': 'Person', 'provenance': 'dc/base/HumanReadableStatVars', 'statType': 'measuredValue', 'typeOf': 'StatisticalVariable', 'Node': 'dcid:Count_Person_100OrMoreYears_Male'}, {'populationType': 'Person', 'measuredProperty': 'count', 'gender': 'Male', 'age': '[100 - Years]', 'typeOf': 'dcs:StatisticalVariable', 'statType': 'dcs:measuredValue', 'Node': 'dcid:Count_Person_100OrMoreYears_Male'}
+I1201 13:47:22.166330 8412012736 stat_var_processor.py:1057] Removed 8 existing nodes from 22 statvars
+I1201 13:47:22.166435 8412012736 stat_var_processor.py:1085] Generating 14 statvars into statvar_imports/Norway/output/Norway_output_stat_vars.mcf
+I1201 13:47:22.245235 8412012736 schema_spell_checker.py:349] Loading allowed words from /Users/abhishekjaiswal/Desktop/data-master/data-master/tools/statvar_importer/words_allowlist.txt
+I1201 13:47:22.261861 8412012736 schema_spell_checker.py:360] Spell checker loaded with 24 words from /Users/abhishekjaiswal/Desktop/data-master/data-master/tools/statvar_importer/words_allowlist.txt
+I1201 13:47:22.262040 8412012736 schema_checker.py:182] Loaded 0 urls from 
+I1201 13:47:22.262908 8412012736 schema_checker.py:360] Sanity checked: nodes: 14, spell errors: 0, URL errors: 0
+I1201 13:47:23.907913 8412012736 schema_generator.py:210] Got schema for 6 dcids out of 6
+I1201 13:47:27.370054 8412012736 schema_generator.py:210] Got schema for 21 dcids out of 23
+I1201 13:47:29.179365 8412012736 schema_generator.py:210] Got schema for 26 dcids out of 38
+I1201 13:47:30.806182 8412012736 schema_generator.py:210] Got schema for 16 dcids out of 21
+I1201 13:47:31.252979 8412012736 schema_generator.py:210] Got schema for 2 dcids out of 9
+I1201 13:47:31.253364 8412012736 schema_generator.py:210] Got schema for 0 dcids out of 0
+I1201 13:47:31.255962 8412012736 schema_generator.py:495] Generated 0 new nodes with 0 new properties and 0 new values.
+I1201 13:47:31.257174 8412012736 counters.py:381] Counters:
+                   1:process_input_generated-svobs =      13200
+  1:process_input_generated-svobs-Norway_input.csv =      13200
+                   1:process_input_input-data-rows =      13200
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =        334
+                1:process_input_input-rows-ignored =         51
+              1:process_input_input-rows-processed =      13213
+                1:process_input_input-rows-skipped =          2
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/Norway/input/Norway_input.csv =      13606
+                       1:process_input_process-mem = 420612980736
+                   1:process_input_process-mem-rss =  146964480
+             1:process_input_process-time-sys-secs =       0.19
+            1:process_input_process-time-user-secs =       6.82
+              1:process_input_process_elapsed_time =       6.25
+            1:process_input_process_remaining_time =       6.57
+                         1:process_input_processed =      13266
+        1:process_input_processing-input-rows-rate =    2115.09
+1:process_input_processing-input-rows-rate_statvar_imports/Norway/input/Norway_input.csv =    2123.79
+           1:process_input_processing-time-seconds =       6.25
+1:process_input_processing-time-seconds_statvar_imports/Norway/input/Norway_input.csv =       6.25
+                   1:process_input_processing_rate =    2123.51
+                        1:process_input_start_time = 1979369.11
+                             1:process_input_total =      27212
+      1:process_input_warning-unresolved-value-ref =         72
+                      2:prepare_output_process-mem = 420612980736
+                  2:prepare_output_process-mem-rss =  147603456
+            2:prepare_output_process-time-sys-secs =       0.19
+           2:prepare_output_process-time-user-secs =       6.84
+             2:prepare_output_process_elapsed_time =       0.02
+                        2:prepare_output_processed =          0
+                       2:prepare_output_start_time = 1979375.36
+                   3:write_statvar_mcf_process-mem = 421231542272
+               3:write_statvar_mcf_process-mem-rss =  212025344
+         3:write_statvar_mcf_process-time-sys-secs =       0.27
+        3:write_statvar_mcf_process-time-user-secs =       7.10
+          3:write_statvar_mcf_process_elapsed_time =       9.67
+                     3:write_statvar_mcf_processed =          0
+                    3:write_statvar_mcf_start_time = 1979375.38
+                       4:write_svobs_csv_processed =          0
+                      4:write_svobs_csv_start_time = 1979385.05
+                                       PVs-matched =         56
+                       dropped-output-statvars-mcf =          8
+                      error-input-ignore-node-diff =          8
+                         error-node-merge-conflict =          8
+                           existing-nodes-from-api =          8
+                                generated-statvars =      13200
+                         generated-unique-statvars =         22
+                                   nodes-with-diff =          8
+                             output-new-schema-mcf =          0
+                               output-statvars-mcf =         22
+                                       process-mem = 420574183424
+                                   process-mem-rss =  136544256
+                             process-time-sys-secs =       0.18
+                            process-time-user-secs =       0.59
+                              process_elapsed_time =       0.00
+                                         processed =         14
+                                         pvs-added =          8
+                                    pvs-added-name =          8
+                              spell-allowlist-file =          1
+                             spell-allowlist-words =         24
+                           spell-check-ignored-pvs =         14
+                                 spell-check-nodes =         14
+                                   spell-check-pvs =         70
+                                        start_time = 1979369.11
+                                       svobs-added =      13200
+                                             total =         14
+                                    urls-allowlist =          0
+                      warning-missing-property-key =     711060
+I1201 13:47:31.257538 8412012736 stat_var_processor.py:1243] Writing 13200 SVObs  into statvar_imports/Norway/output/Norway_output.csv with ['observationDate', 'observationAbout', 'value', 'variableMeasured']
+I1201 13:47:31.377751 8412012736 stat_var_processor.py:1300] Writing SVObs tmcf statvar_imports/Norway/output/Norway_output.tmcf with ['observationDate', 'observationAbout', 'value', 'variableMeasured'] into statvar_imports/Norway/output/Norway_output.tmcf.
+I1201 13:47:31.378798 8412012736 counters.py:346] Counters:
+                   1:process_input_generated-svobs =      13200
+  1:process_input_generated-svobs-Norway_input.csv =      13200
+                   1:process_input_input-data-rows =      13200
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =        334
+                1:process_input_input-rows-ignored =         51
+              1:process_input_input-rows-processed =      13213
+                1:process_input_input-rows-skipped =          2
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/Norway/input/Norway_input.csv =      13606
+                       1:process_input_process-mem = 420612980736
+                   1:process_input_process-mem-rss =  146964480
+             1:process_input_process-time-sys-secs =       0.19
+            1:process_input_process-time-user-secs =       6.82
+              1:process_input_process_elapsed_time =       6.25
+            1:process_input_process_remaining_time =       6.57
+                         1:process_input_processed =      13266
+        1:process_input_processing-input-rows-rate =    2115.09
+1:process_input_processing-input-rows-rate_statvar_imports/Norway/input/Norway_input.csv =    2123.79
+           1:process_input_processing-time-seconds =       6.25
+1:process_input_processing-time-seconds_statvar_imports/Norway/input/Norway_input.csv =       6.25
+                   1:process_input_processing_rate =    2123.51
+                        1:process_input_start_time = 1979369.11
+                             1:process_input_total =      27212
+      1:process_input_warning-unresolved-value-ref =         72
+                      2:prepare_output_process-mem = 420612980736
+                  2:prepare_output_process-mem-rss =  147603456
+            2:prepare_output_process-time-sys-secs =       0.19
+           2:prepare_output_process-time-user-secs =       6.84
+             2:prepare_output_process_elapsed_time =       0.02
+                        2:prepare_output_processed =          0
+                       2:prepare_output_start_time = 1979375.36
+                   3:write_statvar_mcf_process-mem = 421231542272
+               3:write_statvar_mcf_process-mem-rss =  212025344
+         3:write_statvar_mcf_process-time-sys-secs =       0.27
+        3:write_statvar_mcf_process-time-user-secs =       7.10
+          3:write_statvar_mcf_process_elapsed_time =       9.67
+                     3:write_statvar_mcf_processed =          0
+                    3:write_statvar_mcf_start_time = 1979375.38
+                     4:write_svobs_csv_process-mem = 421231542272
+                 4:write_svobs_csv_process-mem-rss =  212041728
+           4:write_svobs_csv_process-time-sys-secs =       0.28
+          4:write_svobs_csv_process-time-user-secs =       7.21
+            4:write_svobs_csv_process_elapsed_time =       0.12
+                       4:write_svobs_csv_processed =          0
+                      4:write_svobs_csv_start_time = 1979385.05
+                                       PVs-matched =         56
+                       dropped-output-statvars-mcf =          8
+                      error-input-ignore-node-diff =          8
+                         error-node-merge-conflict =          8
+                           existing-nodes-from-api =          8
+                                generated-statvars =      13200
+                         generated-unique-statvars =         22
+                                   nodes-with-diff =          8
+                             output-new-schema-mcf =          0
+                               output-statvars-mcf =         22
+                             output-svobs-csv-rows =      13200
+              output-svobs-unique-observationAbout =         15
+               output-svobs-unique-observationDate =         40
+                        output-svobs-unique-typeOf =          1
+                         output-svobs-unique-value =       6168
+              output-svobs-unique-variableMeasured =         22
+                                       process-mem = 420574183424
+                                   process-mem-rss =  136544256
+                             process-time-sys-secs =       0.18
+                            process-time-user-secs =       0.59
+                              process_elapsed_time =       0.00
+                                         processed =         14
+                                         pvs-added =          8
+                                    pvs-added-name =          8
+                              spell-allowlist-file =          1
+                             spell-allowlist-words =         24
+                           spell-check-ignored-pvs =         14
+                                 spell-check-nodes =         14
+                                   spell-check-pvs =         70
+                                        start_time = 1979369.11
+                                       svobs-added =      13200
+                                             total =         14
+                                    urls-allowlist =          0
+                      warning-missing-property-key =     711060
+I1201 13:47:31.379021 8412012736 stat_var_processor.py:2791] Writing counters to 
+I1201 13:47:31.379101 8412012736 stat_var_processor.py:2927] Error Counters: ['error-input-ignore-node-diff=8', 'error-node-merge-conflict=8']
