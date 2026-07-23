@@ -179,8 +179,8 @@ def _clean_dataframe(df: pd.DataFrame, year: str, table_num: str):
             axis=1,
             inplace=True,
             errors='ignore')
-    df['state'] = df['state'].ffill()
-    df['agency type'] = df['agency type'].ffill()
+    df['state'] = df['state'].fillna(method='ffill')
+    df['agency type'] = df['agency type'].fillna(method='ffill')
 
     # Assigning agency to state
     df.loc[df['agency type'] == 'Total',
