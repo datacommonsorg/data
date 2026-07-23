@@ -1,0 +1,39 @@
+{
+    "populationType": {
+        "_DEFAULT": "schema:HousingUnit"
+    },
+    "measurement": {
+        "_DEFAULT": {
+            "measuredProperty": "grossRent",
+            "statType": "medianValue"
+        }
+    },
+    "enumSpecializations": {},
+    "pvs": {
+        "statType": {
+            "Margin of Error": "marginOfError"
+        },
+        "numberOfBedrooms": {
+            "no bedroom": "[0 Bedrooms]",
+            "1 bedroom": "[1 Bedrooms]",
+            "2 bedrooms": "[2 Bedrooms]",
+            "3 bedrooms": "[3 Bedrooms]",
+            "4 bedrooms": "[4 Bedrooms]",
+            "5 or more bedrooms": "[5 - Bedrooms]"
+        },
+        "unit": {
+            "Median gross rent --": "USDollar",
+            "Median gross rent": "USDollar"
+        },
+        "measurementQualifier": {
+            "Median gross rent --":  "Monthly",
+            "Median gross rent":  "Monthly"
+        } 
+    },
+    "ignoreColumns": [
+        "Geography",
+        "Geographic Area Name",
+        "Annotation of Estimate",
+        "Annotation of Margin of Error"
+    ]
+}
