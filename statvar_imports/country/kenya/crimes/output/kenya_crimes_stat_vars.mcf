@@ -1,0 +1,149 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/sumakaranam/data/statvar_imports/country/kenya/crimes/input/kenya_crimes_data.csv --pv_map=/usr/local/google/home/sumakaranam/data/statvar_imports/country/kenya/crimes/kenya_crimes_pvmap.csv --config=/usr/local/google/home/sumakaranam/data/statvar_imports/country/kenya/crimes/kenya_crime_metadata.csv --output_path=/usr/local/google/home/sumakaranam/data/statvar_imports/country/kenya/crimes/output/kenya_crimes" on 2024-07-14 14:26:08.473139
+
+Node: dcid:Count_CriminalActivities
+typeOf: dcid:StatisticalVariable
+name: "Total Criminal Activities"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_CriminalActivities_CorruptionCrime
+typeOf: dcid:StatisticalVariable
+name: "Number of corruption crimes"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:CorruptionCrime
+
+Node: dcid:Count_CriminalActivities_CrimeBreakings
+typeOf: dcid:StatisticalVariable
+name: "Number of breaking crimes"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:CrimeBreakings
+
+Node: dcid:Count_CriminalActivities_CriminalDamage
+typeOf: dcid:StatisticalVariable
+name: "Number of criminal damage"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:CriminalDamage
+
+Node: dcid:Count_CriminalActivities_DangerousDrugs
+typeOf: dcid:StatisticalVariable
+name: "Number of crimes related to dangerous drugs"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:DangerousDrugs
+
+Node: dcid:Count_CriminalActivities_EconomicCrime
+typeOf: dcid:StatisticalVariable
+name: "Number of economic crimes"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:EconomicCrime
+
+Node: dcid:Count_CriminalActivities_Homicide
+typeOf: dcid:StatisticalVariable
+name: "Homicide Criminal Activity"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:Homicide
+
+Node: dcid:Count_CriminalActivities_KENOtherPenalCodeOffence
+typeOf: dcid:StatisticalVariable
+name: "Kenya Other Penal Code Offence"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:KEN_OtherPenalCodeOffence
+
+Node: dcid:Count_CriminalActivities_Robbery
+typeOf: dcid:StatisticalVariable
+name: "Number of robberies"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:Robbery
+
+Node: dcid:Count_CriminalActivities_Stealing
+typeOf: dcid:StatisticalVariable
+name: "Number of Criminal Activities involving stealing"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:Stealing
+
+Node: dcid:Count_CriminalActivities_TheftByServant
+typeOf: dcid:StatisticalVariable
+name: "Number of thefts by servant"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:TheftByServant
+
+Node: dcid:Count_CriminalActivities_TheftOfMotorVehicleOrOtherTheft
+typeOf: dcid:StatisticalVariable
+name: "Number of Motor Vehicle or Other Theft"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:TheftOfMotorVehicle__OtherTheft
+
+Node: dcid:Count_CriminalActivities_TheftOfStock
+typeOf: dcid:StatisticalVariable
+name: "Number of theft of stock"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:TheftOfStock
+
+Node: dcid:Count_CriminalActivities_TrafficOffences
+typeOf: dcid:StatisticalVariable
+name: "Number of traffic offences"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:TrafficOffences
+
+Node: dcid:Offense_Count_CriminalActivities_CrimeAgainstMorality
+typeOf: dcid:StatisticalVariable
+name: "Crime Against Morality"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+measurementQualifier: dcid:Offense
+statType: dcid:measuredValue
+crimeType: dcid:CrimeAgainstMorality
+
+Node: dcid:Offense_Count_CriminalActivities_CrimeAgainstPerson
+typeOf: dcid:StatisticalVariable
+name: "Crime Against Person"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+measurementQualifier: dcid:Offense
+statType: dcid:measuredValue
+crimeType: dcid:CrimeAgainstPerson
+
+Node: dcid:Offense_Count_CriminalActivities_CrimeInvolvingPoliceOfficers
+typeOf: dcid:StatisticalVariable
+name: "Crime Involving Police Officers"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+measurementQualifier: dcid:Offense
+statType: dcid:measuredValue
+crimeType: dcid:CrimeInvolvingPoliceOfficers
+
+Node: dcid:Offense_Count_CriminalActivities_CrimeInvolvingTourists
+typeOf: dcid:StatisticalVariable
+name: "Crime Involving Tourists"
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+measurementQualifier: dcid:Offense
+statType: dcid:measuredValue
+crimeType: dcid:CrimeInvolvingTourists
+
