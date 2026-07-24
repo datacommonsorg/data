@@ -13,16 +13,16 @@
             "rule_id": "check_goldens_summary_report",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report.csv",
-                "input_files": "../../input0/genmcf/summary_report_interest_rate.csv"
+                "golden_files": "../../../../golden_data/golden_summary_report_interest_rate.csv",
+                "input_files": "../../input0/genmcf/summary_report.csv"
             }
         },
         {
             "rule_id": "check_goldens_summary_report",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report.csv",
-                "input_files": "../../input1/genmcf/summary_report_fed_fund.csv"
+                "golden_files": "../../../../golden_data/golden_summary_report_fed_fund.csv",
+                "input_files": "../../input1/genmcf/summary_report.csv"
             }
         },
         {
