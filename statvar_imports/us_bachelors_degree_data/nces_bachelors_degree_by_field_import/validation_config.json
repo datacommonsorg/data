@@ -15,14 +15,7 @@
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/nces_female_output_golden_summary_report.csv",
-                "input_files": "../../input0/genmcf/summary_report.csv",
-                "goldens_key_property": [
-                    "StatVar",
-                    "NumPlaces",
-                    "Units",
-                    "ScalingFactors",
-                    "observationPeriods"
-                ]
+                "input_files": "../../input0/genmcf/summary_report.csv"
             }
         },
         {
@@ -40,14 +33,7 @@
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/nces_male_output_golden_summary_report.csv",
-                "input_files": "../../input1/genmcf/summary_report.csv",
-                "goldens_key_property": [
-                    "StatVar",
-                    "NumPlaces",
-                    "Units",
-                    "ScalingFactors",
-                    "observationPeriods"
-                ]
+                "input_files": "../../input1/genmcf/summary_report.csv"
             }
         },
         {
@@ -107,6 +93,15 @@
             "params": {
                 "golden_files": "../../../../golden_data/nces_male_output_golden_observations.csv",
                 "input_files": "../../../../output_files/nces_male_output_latest.csv"
+            }
+        },
+        {
+            "rule_id": "check_min_date_2011_sql",
+            "description": "Verifies that all StatVars in summary report have MinDate equal to 2011",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MinDate FROM stats",
+                "condition": "MinDate = '2011'"
             }
         }
     ]
