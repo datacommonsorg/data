@@ -13,8 +13,8 @@
             "rule_id": "check_goldens_summary_report",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report_hate_crime.csv",
- 			}
+                "golden_files": "../../../../golden_data/golden_summary_hate_crime.csv"
+            }
         },
         {
             "rule_id": "Check_goldens_output_csv",
