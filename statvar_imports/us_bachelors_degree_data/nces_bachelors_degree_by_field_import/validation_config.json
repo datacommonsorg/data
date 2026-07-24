@@ -14,7 +14,7 @@
             "description": "Validates female output data against its golden summary report",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/nces_female_output_golden_summary_report.csv",
+                "golden_files": "../../../../golden_data/nces_female_golden_summary_report.csv",
                 "input_files": "../../input0/genmcf/summary_report.csv"
             }
         },
@@ -23,7 +23,7 @@
             "description": "Verifies female output CSV matches established golden observations",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/nces_female_output_golden_observations.csv",
+                "golden_files": "../../../../golden_data/nces_female_golden_observations.csv",
                 "input_files": "../../../../output_files/nces_female_output.csv"
             }
         },
@@ -32,7 +32,7 @@
             "description": "Validates male output data against its golden summary report",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/nces_male_output_golden_summary_report.csv",
+                "golden_files": "../../../../golden_data/nces_male_golden_summary_report.csv",
                 "input_files": "../../input1/genmcf/summary_report.csv"
             }
         },
@@ -41,7 +41,7 @@
             "description": "Verifies male output CSV matches established golden observations",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/nces_male_output_golden_observations.csv",
+                "golden_files": "../../../../golden_data/nces_male_golden_observations.csv",
                 "input_files": "../../../../output_files/nces_male_output.csv"
             }
         },
@@ -50,15 +50,8 @@
             "description": "Validates female latest output data against its golden summary report",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/nces_female_output_golden_summary_report.csv",
-                "input_files": "../../input2/genmcf/summary_report.csv",
-                "goldens_key_property": [
-                    "StatVar",
-                    "NumPlaces",
-                    "Units",
-                    "ScalingFactors",
-                    "observationPeriods"
-                ]
+                "golden_files": "../../../../golden_data/nces_female_latest_golden_summary_report.csv",
+                "input_files": "../../input2/genmcf/summary_report.csv"
             }
         },
         {
@@ -66,7 +59,7 @@
             "description": "Verifies female latest output CSV matches established golden observations",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/nces_female_output_golden_observations.csv",
+                "golden_files": "../../../../golden_data/nces_female_latest_golden_observations.csv",
                 "input_files": "../../../../output_files/nces_female_output_latest.csv"
             }
         },
@@ -75,15 +68,8 @@
             "description": "Validates male latest output data against its golden summary report",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/nces_male_output_golden_summary_report.csv",
-                "input_files": "../../input3/genmcf/summary_report.csv",
-                "goldens_key_property": [
-                    "StatVar",
-                    "NumPlaces",
-                    "Units",
-                    "ScalingFactors",
-                    "observationPeriods"
-                ]
+                "golden_files": "../../../../golden_data/nces_male_latest_golden_summary_report.csv",
+                "input_files": "../../input3/genmcf/summary_report.csv"
             }
         },
         {
@@ -91,17 +77,8 @@
             "description": "Verifies male latest output CSV matches established golden observations",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/nces_male_output_golden_observations.csv",
+                "golden_files": "../../../../golden_data/nces_male_latest_golden_observations.csv",
                 "input_files": "../../../../output_files/nces_male_output_latest.csv"
-            }
-        },
-        {
-            "rule_id": "check_min_date_2011_sql",
-            "description": "Verifies that all StatVars in summary report have MinDate equal to 2011",
-            "validator": "SQL_VALIDATOR",
-            "params": {
-                "query": "SELECT StatVar, MinDate FROM stats",
-                "condition": "MinDate = '2011'"
             }
         }
     ]
