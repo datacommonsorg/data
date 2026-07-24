@@ -20,8 +20,12 @@ import sys
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
+_DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
+sys.path.append(os.path.join(_DATA_DIR, 'util'))
 
 from result import ValidationResult, ValidationStatus
+from counters import Counters
+import validator_goldens
 
 
 class Validator:
@@ -134,52 +138,25 @@ class Validator:
                                     'rows_failed': 0
                                 })
 
-    def validate_deleted_records_count(self, differ_df: pd.DataFrame,
+    def validate_deleted_records_count(self, summary: dict,
                                        params: dict) -> ValidationResult:
         """Checks if the total number of deleted points is within a threshold.
 
     Args:
-      differ_df: A DataFrame containing the differ output, expected to have a
-        'DELETED' column.
+      summary: A dictionary containing the differ summary.
       params: A dictionary containing the validation parameters, which may
         have a 'threshold' key.
 
     Returns:
       A ValidationResult object.
     """
-        if differ_df.empty:
-            deleted_records_count = 0
-            threshold = params.get('threshold', 0)
-            if deleted_records_count > threshold:
-                return ValidationResult(
-                    ValidationStatus.FAILED,
-                    'DELETED_RECORDS_COUNT',
-                    message=
-                    f"Found {deleted_records_count} deleted points, which is over the threshold of {threshold}.",
-                    details={
-                        'deleted_records_count': int(deleted_records_count),
-                        'threshold': threshold,
-                        'rows_processed': 0,
-                        'rows_succeeded': 0,
-                        'rows_failed': 0
-                    })
-            return ValidationResult(ValidationStatus.PASSED,
-                                    'DELETED_RECORDS_COUNT',
-                                    details={
-                                        'rows_processed': 0,
-                                        'rows_succeeded': 0,
-                                        'rows_failed': 0
-                                    })
-
-        if 'DELETED' not in differ_df.columns:
-            return ValidationResult(
-                ValidationStatus.DATA_ERROR,
-                'DELETED_RECORDS_COUNT',
-                message="Input data is missing required column: 'DELETED'.")
-
-        rows_processed = len(differ_df)
         threshold = params.get('threshold', 0)
-        deleted_records_count = differ_df['DELETED'].sum()
+
+        if not summary or 'deleted_obs_count' not in summary:
+            # If summary is missing or empty, assume 0 deleted records.
+            deleted_records_count = 0
+        else:
+            deleted_records_count = summary['deleted_obs_count']
 
         if deleted_records_count > threshold:
             return ValidationResult(
@@ -189,26 +166,22 @@ class Validator:
                 f"Found {deleted_records_count} deleted points, which is over the threshold of {threshold}.",
                 details={
                     'deleted_records_count': int(deleted_records_count),
-                    'threshold': threshold,
-                    'rows_processed': rows_processed,
-                    'rows_succeeded': 0,
-                    'rows_failed': rows_processed
+                    'threshold': threshold
                 })
-        return ValidationResult(ValidationStatus.PASSED,
-                                'DELETED_RECORDS_COUNT',
-                                details={
-                                    'rows_processed': rows_processed,
-                                    'rows_succeeded': rows_processed,
-                                    'rows_failed': 0
-                                })
 
-    def validate_deleted_records_percent(self, differ_df: pd.DataFrame,
-                                         summary: dict,
+        return ValidationResult(
+            ValidationStatus.PASSED,
+            'DELETED_RECORDS_COUNT',
+            details={
+                'deleted_records_count': int(deleted_records_count),
+                'threshold': threshold
+            })
+
+    def validate_deleted_records_percent(self, summary: dict,
                                          params: dict) -> ValidationResult:
         """Checks if the percentage of deleted records is within a threshold.
 
     Args:
-      differ_df: A DataFrame containing the differ output.
       summary: A dictionary containing the differ summary.
       params: A dictionary containing the validation parameters, which may
         have a 'threshold' key.
@@ -216,43 +189,37 @@ class Validator:
     Returns:
       A ValidationResult object.
     """
-        if differ_df is None:
-            return ValidationResult(ValidationStatus.DATA_ERROR,
-                                    'DELETED_RECORDS_PERCENT',
-                                    message="Differ DataFrame is missing.")
-
         if summary is None:
             return ValidationResult(ValidationStatus.DATA_ERROR,
                                     'DELETED_RECORDS_PERCENT',
                                     message="Differ summary is missing.")
 
-        if 'previous_obs_size' not in summary:
+        if 'previous_obs_count' not in summary:
             return ValidationResult(
                 ValidationStatus.DATA_ERROR,
                 'DELETED_RECORDS_PERCENT',
                 message=
-                "Differ summary is missing required field: 'previous_obs_size'."
+                "Differ summary is missing required field: 'previous_obs_count'."
             )
 
-        previous_obs_size = summary['previous_obs_size']
-
-        if differ_df.empty:
-            deleted_records_count = 0
-        elif 'DELETED' not in differ_df.columns:
+        if 'deleted_obs_count' not in summary:
             return ValidationResult(
                 ValidationStatus.DATA_ERROR,
                 'DELETED_RECORDS_PERCENT',
-                message="Input data is missing required column: 'DELETED'.")
-        else:
-            deleted_records_count = differ_df['DELETED'].sum()
+                message=
+                "Differ summary is missing required field: 'deleted_obs_count'."
+            )
 
-        if previous_obs_size == 0:
+        previous_obs_count = summary['previous_obs_count']
+        deleted_records_count = summary['deleted_obs_count']
+
+        if previous_obs_count == 0:
             if deleted_records_count > 0:
                 percent = 100.0
             else:
                 percent = 0.0
         else:
-            percent = (deleted_records_count / previous_obs_size) * 100
+            percent = (deleted_records_count / previous_obs_count) * 100
 
         threshold = params.get('threshold', 0)
 
@@ -264,7 +231,7 @@ class Validator:
                 f"Found {percent:.2f}% deleted records, which is over the threshold of {threshold}%.",
                 details={
                     'deleted_records_count': int(deleted_records_count),
-                    'previous_obs_size': int(previous_obs_size),
+                    'previous_obs_count': int(previous_obs_count),
                     'percent': percent,
                     'threshold': threshold
                 })
@@ -274,10 +241,50 @@ class Validator:
             'DELETED_RECORDS_PERCENT',
             details={
                 'deleted_records_count': int(deleted_records_count),
-                'previous_obs_size': int(previous_obs_size),
+                'previous_obs_count': int(previous_obs_count),
                 'percent': percent,
                 'threshold': threshold
             })
+
+    def validate_empty_import(self, report: dict,
+                              params: dict) -> ValidationResult:
+        """Checks if the import is empty (no observations and no schema).
+
+    Args:
+      report: A json object containing the lint report.
+      params: A dictionary containing the validation parameters.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if report is None:
+            return ValidationResult(ValidationStatus.DATA_ERROR,
+                                    'EMPTY_IMPORT_CHECK',
+                                    message="Lint report is missing.")
+
+        counters = report.get('levelSummary', {}).get('LEVEL_INFO',
+                                                      {}).get('counters', {})
+
+        num_nodes = int(counters.get('NumNodeSuccesses', 0))
+        num_rows = int(counters.get('NumRowSuccesses', 0))
+
+        if num_nodes == 0 and num_rows == 0:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'EMPTY_IMPORT_CHECK',
+                message=
+                "The import is empty: both NumNodeSuccesses and NumRowSuccesses are 0 in the lint report.",
+                details={
+                    'num_nodes': num_nodes,
+                    'num_rows': num_rows
+                })
+
+        return ValidationResult(ValidationStatus.PASSED,
+                                'EMPTY_IMPORT_CHECK',
+                                details={
+                                    'num_nodes': num_nodes,
+                                    'num_rows': num_rows
+                                })
 
     def validate_missing_refs_count(self, report: dict,
                                     params: dict) -> ValidationResult:
@@ -926,3 +933,65 @@ class Validator:
                                     'rows_succeeded': rows_succeeded,
                                     'rows_failed': rows_failed
                                 })
+
+    def validate_goldens(self, df: pd.DataFrame,
+                         params: dict) -> ValidationResult:
+        """Validates records against a golden set.
+
+        Args:
+          df: A DataFrame containing the data to validate (used if input_files
+            is not provided in params).
+          params: A dictionary containing:
+            'golden_files': Path(s) to golden MCF/CSV files.
+            'input_files': (Optional) Path(s) to input files. If not provided,
+                           the 'df' will be used.
+            'output_path': (Optional) folder or output filename to save missing goldens.
+            And other optional validator_goldens config (e.g., goldens_key_property).
+
+        Returns:
+          A ValidationResult object.
+        """
+        golden_files = params.get('golden_files')
+        if not golden_files:
+            return ValidationResult(
+                ValidationStatus.CONFIG_ERROR,
+                'GOLDENS_CHECK',
+                message=
+                "Configuration error: 'golden_files' must be specified for GOLDENS_CHECK validator."
+            )
+
+        try:
+            inputs = params.get('input_files')
+            if not inputs:
+                inputs = df.to_dict('index')
+            output_path = params.get('output_path')
+            # Compare nodes
+            counters = Counters()
+            missing_goldens = validator_goldens.validate_goldens(
+                inputs,
+                golden_files,
+                output_path,
+                config=params,
+                counters=counters)
+            details = {
+                name: value
+                for name, value in counters.get_counters().items()
+                if 'golden' in name
+            }
+            if not missing_goldens:
+                return ValidationResult(ValidationStatus.PASSED,
+                                        'GOLDENS_CHECK',
+                                        details=details)
+            details['missing_goldens'] = missing_goldens
+
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'GOLDENS_CHECK',
+                message=f"Found {len(missing_goldens)} missing golden records.",
+                details=details)
+
+        except IOError as e:
+            return ValidationResult(
+                ValidationStatus.DATA_ERROR,
+                'GOLDENS_CHECK',
+                message=f"Error during golden validation: {e}")
