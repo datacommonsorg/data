@@ -28,6 +28,28 @@ Description:  Converts an NIH NCBI assembly reports file on a genome assembly
 '''
 
 import re
+from absl import flags
+from absl import app
+
+FLAGS = flags.FLAGS
+flags.DEFINE_string('GCF', 'GCF_000001405.39_GRCh38.p13_assembly_report.txt',
+                    'assembly report  file path.')
+
+flags.DEFINE_string('hg38_genome_assembly',
+                    'hg38_genome_assembly.mcf',
+                    'hg38_genome_assembly file path.',
+                    short_name='g')
+
+flags.DEFINE_string(
+    'hg38',
+    'hg38',
+    'hg38_genome_assembly file path.',
+)
+flags.DEFINE_string(
+    'hs',
+    'hs',
+    'hs file path.',
+)
 
 
 def format_camel_case(value):
@@ -218,12 +240,12 @@ def write_chromosome(line, file_output, genome):
     w.write('chromosomeSize: [' + line[8] + ' BasePairs]\n\n')
 
 
-def main():
-    import sys
-    file_input = sys.argv[1]  # import defined properties from command line
-    file_output = sys.argv[2]
-    genome = sys.argv[3]
-    species_abrv = sys.argv[4]
+def main(argv):
+    del argv  # Unused argument
+    file_input = FLAGS.GCF
+    file_output = FLAGS.hg38_genome_assembly
+    genome = FLAGS.hg38
+    species_abrv = FLAGS.hs
 
     dict_genome_assembly = {}
     f = open(file_input, mode='r')
@@ -251,4 +273,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    app.run(main)
