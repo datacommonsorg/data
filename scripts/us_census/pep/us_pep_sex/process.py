@@ -441,12 +441,12 @@ def _state_1980_1990(file_path: str) -> pd.DataFrame:
         if year == 1987:
             df = pd.read_table(file_path,
                                skiprows=29,
-                               delim_whitespace=True,
+                               sep=r'\s+',
                                names=column_names)
         else:
             df = pd.read_table(file_path,
                                skiprows=28,
-                               delim_whitespace=True,
+                               sep=r'\s+',
                                names=column_names)
         df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(2)
         df['Year'] = year
@@ -736,7 +736,7 @@ def _county_1990_2000(file_path: str) -> pd.DataFrame:
     """
     try:
         column_names = ['Year', 'geo_ID', 'Age', 'Race-Sex', 'Ethnic', 'Value']
-        df = pd.read_table(file_path, delim_whitespace=True, header=None)
+        df = pd.read_table(file_path, sep=r'\s+', header=None)
         df.columns = column_names
         df['Year'] = '19' + df['Year'].astype(str)
         df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(5)
@@ -995,7 +995,7 @@ class PopulationEstimateBySex:
         Returns:
             None
         """
-        ip_files = sorted(os.listdir(self._input_path))
+        ip_files = os.listdir(self._input_path)
         ip_files = [self._input_path + os.sep + file for file in ip_files]
 
         # Creating Output Directory
@@ -1213,8 +1213,7 @@ def add_future_year_urls():
 
                     try:
                         check_url = requests.head(url_to_check,
-                                                  allow_redirects=True,
-                                                  timeout=10)
+                                                  allow_redirects=True)
                         if check_url.status_code == 200:
                             _FILES_TO_DOWNLOAD.append(
                                 {"download_path": url_to_check})
@@ -1222,7 +1221,6 @@ def add_future_year_urls():
                     except requests.exceptions.RequestException as e:
                         logging.error(
                             f"URL is not accessible {url_to_check} due to {e}")
-                    time.sleep(0.05)
 
             else:  # This URL does not contain {i}, so we only need to process it once per year
                 url_to_check = url.format(YEAR=YEAR)
@@ -1233,8 +1231,7 @@ def add_future_year_urls():
 
                 try:
                     check_url = requests.head(url_to_check,
-                                              allow_redirects=True,
-                                              timeout=10)
+                                              allow_redirects=True)
                     if check_url.status_code == 200:
                         _FILES_TO_DOWNLOAD.append(
                             {"download_path": url_to_check})
@@ -1249,7 +1246,6 @@ def add_future_year_urls():
                 except requests.exceptions.RequestException as e:
                     logging.error(
                         f"URL is not accessible {url_to_check} due to {e}")
-                time.sleep(0.05)
 
 
 def cleanup():
@@ -1307,61 +1303,46 @@ def download_files():
             continue
 
         headers = {'User-Agent': 'Mozilla/5.0'}
-        max_file_retries = 3
-        file_download_success = False
+        try:
+            with session.get(url, stream=True, timeout=120,
+                             headers=headers) as response:
+                response.raise_for_status()
 
-        for attempt in range(max_file_retries):
-            try:
-                # Dynamically increase timeout on subsequent retries
-                current_timeout = 120 + (attempt * 60)
-                with session.get(url, stream=True, timeout=current_timeout,
-                                 headers=headers) as response:
-                    response.raise_for_status()
+                content_type = response.headers.get('Content-Type', '')
 
-                    content_type = response.headers.get('Content-Type', '')
+                # Minimal fix: Log error and continue to skip HTML pages
+                if 'html' in content_type.lower():
+                    logging.error(
+                        f"Server returned HTML error page for URL: {url}. Skipping."
+                    )
+                    continue
 
-                    # Minimal fix: Log error and continue to skip HTML pages
-                    if 'html' in content_type.lower():
-                        logging.error(
-                            f"Server returned HTML error page for URL: {url}. Skipping."
-                        )
-                        break
+                if response.status_code == 200:
+                    with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+                        for chunk in response.iter_content(chunk_size=8192):
+                            if chunk:
+                                tmp_file.write(chunk)
+                        tmp_file_path = tmp_file.name
 
-                    if response.status_code == 200:
-                        with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-                            for chunk in response.iter_content(chunk_size=8192):
-                                if chunk:
-                                    tmp_file.write(chunk)
-                            tmp_file_path = tmp_file.name
+                    # Copy to local destination
+                    shutil.copy(
+                        tmp_file_path,
+                        os.path.join(_INPUT_FILE_PATH, file_name_to_save))
 
-                        # Copy to local destination
-                        shutil.copy(
-                            tmp_file_path,
-                            os.path.join(_INPUT_FILE_PATH, file_name_to_save))
+                    # Move to gcs destination (optimized from shutil.copy + os.remove)
+                    shutil.move(
+                        tmp_file_path,
+                        os.path.join(_GCS_FOLDER_PERSISTENT_PATH,
+                                     file_name_to_save))
 
-                        # Move to gcs destination (optimized from shutil.copy + os.remove)
-                        shutil.move(
-                            tmp_file_path,
-                            os.path.join(_GCS_FOLDER_PERSISTENT_PATH,
-                                         file_name_to_save))
+                    file_to_download['is_downloaded'] = True
+                    logging.info(f"Downloaded file: {url}")
 
-                        file_to_download['is_downloaded'] = True
-                        logging.info(f"Downloaded file: {url}")
-                        file_download_success = True
-                        break
-
-            except Exception as e:
-                logging.warning(f"Attempt {attempt + 1} failed downloading {url}: {e}")
-                if attempt < max_file_retries - 1:
-                    # Exponential backoff: 5s, 10s...
-                    time.sleep(5 * (attempt + 1))
-                else:
-                    file_to_download['is_downloaded'] = False
-                    logging.error(f"Failed to download {url} after {max_file_retries} attempts.")
-                    raise
-
-        if file_download_success:
-            time.sleep(1)
+        except Exception as e:
+            file_to_download['is_downloaded'] = False
+            logging.error(f"Error downloading {url}: {e}")
+            raise
+        time.sleep(1)
 
     return True
 

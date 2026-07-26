@@ -57,7 +57,7 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
             # reading the input file and converting to dataframe
             df = pd.read_table(_url,
                                index_col=False,
-                               delim_whitespace=True,
+                               sep=r'\s+',
                                skiprows=16,
                                skipfooter=14,
                                engine='python',

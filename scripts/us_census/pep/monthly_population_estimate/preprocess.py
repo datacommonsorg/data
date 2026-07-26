@@ -585,10 +585,10 @@ def _concat_cols(col: pd.Series) -> pd.Series:
     Returns:
         res (Series) : Concatenated DataFrame Columns
     """
-    res = col[0]
-    if col[1] is None:
+    res = col.iloc[0]
+    if col.iloc[1] is None:
         return res
-    res = col[0] + ' ' + col[1]
+    res = col.iloc[0] + ' ' + col.iloc[1]
     return res
 
 
