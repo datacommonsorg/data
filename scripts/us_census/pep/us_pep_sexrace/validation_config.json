@@ -8,8 +8,8 @@
       "params": { "threshold": 0.1}
     },
     {
-      "rule_id": "check_goldens_national",
-      "description": "Validates national and state-level 2000+ data against its golden summary report.",
+      "rule_id": "check_goldens_national_after_2000",
+      "description": "Validates national-level 2000+ data against its golden summary report.",
       "validator": "GOLDENS_CHECK",
       "params": {
         "golden_files": "../../../../golden_data/golden_summary_report_national_after.csv",
@@ -17,8 +17,8 @@
       }
     },
     {
-      "rule_id": "check_goldens_before_2000",
-      "description": "Validates data before 2000 against its golden summary report.",
+      "rule_id": "check_goldens_national_before_2000",
+      "description": "Validates national-level before 2000 data against its golden summary report.",
       "validator": "GOLDENS_CHECK",
       "params": {
         "golden_files": "../../../../golden_data/golden_summary_report_national_before.csv",
@@ -26,8 +26,8 @@
       }
     },
     {
-      "rule_id": "check_goldens_after_2000",
-      "description": "Validates county-level 2000+ data against its golden summary report.",
+      "rule_id": "check_goldens_state_county_after_2000",
+      "description": "Validates state and county-level 2000+ data against its golden summary report.",
       "validator": "GOLDENS_CHECK",
       "params": {
         "golden_files": "../../../../golden_data/golden_summary_report_state_after.csv",
@@ -35,12 +35,48 @@
       }
     },
     {
-      "rule_id": "check_goldens_after_2000",
-      "description": "Validates county-level 2000+ data against its golden summary report.",
+      "rule_id": "check_goldens_state_county_before_2000",
+      "description": "Validates state and county-level before 2000 data against its golden summary report.",
       "validator": "GOLDENS_CHECK",
       "params": {
         "golden_files": "../../../../golden_data/golden_summary_report_state_before.csv",
         "input_files": "../../input3/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_output_csv_national_after",
+      "description": "Verifies the generated national after 2000 output CSV data matches established critical golden records.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_national_after.csv",
+        "input_files": "../../../../output_files/final/national_after_2000.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_output_csv_national_before",
+      "description": "Verifies the generated national before 2000 output CSV data matches established critical golden records.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_national_before.csv",
+        "input_files": "../../../../output_files/final/national_before_2000.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_output_csv_state_county_after",
+      "description": "Verifies the generated state and county after 2000 output CSV data matches established critical golden records.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_state_after.csv",
+        "input_files": "../../../../output_files/final/state_county_after_2000.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_output_csv_state_county_before",
+      "description": "Verifies the generated state and county before 2000 output CSV data matches established critical golden records.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_state_before.csv",
+        "input_files": "../../../../output_files/final/state_county_before_2000.csv"
       }
     }
   ]
