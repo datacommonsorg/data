@@ -1735,8 +1735,14 @@ def _write_to_csv(df: pd.DataFrame, csv_file_name: str):
         df: A pandas dataframe to write to csv.
         csv_file_name: The filename of the csv.
     """
-    df['Place'].replace('', np.nan, inplace=True)
-    df.dropna(subset=['Place'], inplace=True)
+    df = df.copy()
+    if 'Place' in df.columns:
+        df['Place'] = df['Place'].replace('', np.nan)
+        if df['Place'].dtype == object:
+            df['Place'] = df['Place'].astype(str).str.strip().replace({'': np.nan, 'nan': np.nan, 'NaN': np.nan, 'None': np.nan})
+        df = df.dropna(subset=['Place'])
+        df = df[df['Place'] != '']
+        df = df[df['Place'].notna()]
     df = df.sort_values("Value")  #Getting error Sanity_InconsistentSvObsValues
     df = df.drop_duplicates(subset=['DATA_YEAR', 'Place', 'StatVar'],
                             keep='last')
