@@ -18,15 +18,12 @@
                 }
             ],
             "source_files": [
-                "input_files/India_LifeExpectancy_input.csv"
-            ],
-            "cron_schedule": "00 11 1,15 * *",
-            "validation_config_file": "validation_config.json",
-            "source_files": [
-                "input/*.csv",
+                "input_files/India_LifeExpectancy_input.csv",
                 "golden_data/*.csv",
                 "counters/*.csv"
-            ]
+            ],
+            "cron_schedule": "00 11 1,15 * *",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }
