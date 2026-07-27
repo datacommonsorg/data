@@ -14,9 +14,9 @@
 """Utility script to check and retain missing historical data points.
 
 This script compares a current output CSV with an older historical CSV. It
-identifies rows in the historical file that are still missing from the current
+identifies rows in the historical file that are missing from the current
 output file based on specific composite keys and generates a unified
-concatenated CSV. It safely accesses cloud storage locations using internal utilities
+concatenated CSV. It safely accesses cloud storage locations using internal utilities.
 """
 
 import os
@@ -103,26 +103,16 @@ def process_and_reconcile_data(current_path: str, historical_path: str,
       'scalingFactor',
   ]
 
-  logging.info('Generating series footprints for alignment validation...')
+  logging.info('Concatenating and deduplicating historical vs current data...')
 
-  # Identify rows in historical_df whose composite keys are missing from current_df
-  merged = historical_df.merge(
-      current_df[keys].drop_duplicates(), on=keys, how='left', indicator=True
-  )
-  historical_only = merged[merged['_merge'] == 'left_only'].drop(
-      columns=['_merge']
-  )
+  # 1. current_df is first, historical_df is second
+  combined_df = pd.concat([current_df, historical_df], ignore_index=True)
 
-  if historical_only.empty:
-    logging.info('All historical data points are already active in current.')
-    final_df = current_df
-  else:
-    logging.info(
-        'Retaining %d records from the historical framework.',
-        len(historical_only),
-    )
-    # Combine all data points from current CSV with the unique historical entries
-    final_df = pd.concat([current_df, historical_only], ignore_index=True)
+  # 2. keep='first' retains records from current_df and drops duplicate keys from historical_df
+  final_df = combined_df.drop_duplicates(subset=keys, keep='first')
+
+  retained_count = len(final_df) - len(current_df)
+  logging.info('Retaining %d records from the historical framework.', retained_count)
 
   try:
     with file_util.FileIO(output_path, 'w') as f:
@@ -132,7 +122,7 @@ def process_and_reconcile_data(current_path: str, historical_path: str,
     logging.info(
         '\n' + '=' * 80 + '\n'
         f'Current Base Records Processed : {len(current_df)}\n'
-        f'Historical Points Re-inserted  : {len(historical_only)}\n'
+        f'Historical Points Re-inserted  : {retained_count}\n'
         f'Total Unified Series Exported  : {len(final_df)}\n'
         f'Target File Location           : {output_path}\n'
         + '=' * 80
