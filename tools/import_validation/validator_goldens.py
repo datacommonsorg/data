@@ -503,13 +503,12 @@ def validate_goldens(inputs: str | dict,
         for node in nodes.values():
             for k, v in node.items():
                 if isinstance(v, str) and v.startswith('[') and v.endswith(']'):
-                    if ',' in v or v == '[]':
-                        content = v[1:-1].strip()
-                        if content:
-                            parts = sorted([p.strip() for p in content.split(',')])
-                            node[k] = '[' + ', '.join(parts) + ']'
-                        else:
-                            node[k] = '[]'
+                    content = v[1:-1].strip()
+                    if content:
+                        parts = sorted([p.strip() for p in content.split(',')])
+                        node[k] = '[' + ', '.join(parts) + ']'
+                    else:
+                        node[k] = '[]'
 
     # Run the core comparison logic.
     missing_goldens = validator_compare_nodes(input_nodes, golden_nodes, config,
