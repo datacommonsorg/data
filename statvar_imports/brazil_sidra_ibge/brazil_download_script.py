@@ -12,6 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Downloads PNAD Continuous (PNADc) quarterly data directly via IBGE REST API.
+Fetches data starting from Q1 2022 to the latest available period and reshapes
+the output into Excel spreadsheets.
+"""
+
 import os
 import time
 import requests
