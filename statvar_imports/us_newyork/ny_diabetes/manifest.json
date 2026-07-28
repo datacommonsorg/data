@@ -33,7 +33,11 @@
                 "input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2021_data.csv"
             ],
             "cron_schedule": "0 0 1 * *",
-            "resource_limits": {"cpu": 4, "memory": 8, "disk":100},
+            "resource_limits": {
+                "cpu": 4, 
+                "memory": 8, 
+                "disk":100
+            },
             "config_override": {
                 "invoke_import_validation": true,
                 "invoke_import_tool": true,
