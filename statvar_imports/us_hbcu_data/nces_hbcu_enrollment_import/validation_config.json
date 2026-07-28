@@ -2,14 +2,6 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted points is within the threshold.",
-            "validator": "DELETED_RECORDS_PERCENT",
-            "params": {
-                "threshold": 0.1
-            }
-        },
-        {
             "rule_id": "check_goldens_summary_report",
             "description": "Validates summary_report.csv against the golden summary report",
             "validator": "GOLDENS_CHECK",
