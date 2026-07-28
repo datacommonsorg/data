@@ -17,7 +17,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "output_files/nces_hbcu_output_tabn313.30.tmcf",
-                    "cleaned_csv": "output_files/nces_hbcu_output_tabn313.30.csv"
+                    "cleaned_csv": "output_files/nces_hbcu_output_tabn313.30.csv",
+                    "node_mcf": "output_files/*.mcf"
                 }
             ],
             "cron_schedule": "0 07 * * 5",
