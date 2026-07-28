@@ -2,22 +2,6 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "no_deletions_for_monthly_rate",
-            "validator": "SQL_VALIDATOR",
-            "params": {
-                "query": "SELECT * FROM differ WHERE StatVar = 'Monthly_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate'",
-                "condition": "DELETED = 0"
-            }
-        },
-        {
-            "rule_id": "100_deletions_for_daily_rate",
-            "validator": "SQL_VALIDATOR",
-            "params": {
-                "query": "SELECT * FROM differ WHERE StatVar = 'Daily_InterestRate_FinancialInstrument_CountryCentralBankPolicyRate'",
-                "condition": "DELETED <= 100"
-            }
-        },
-        {
             "rule_id": "check_deleted_records_percent",
             "description": "Checks that the percentage of deleted points is within the threshold.",
             "validator": "DELETED_RECORDS_PERCENT",
@@ -38,8 +22,9 @@
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/golden_observations.csv",
-                "input_files": "../../../../output/central_bank_policy_rate.csv"
+                "input_files": "../../../../Eurostats_NUTS2_Enrollment.csv"
             }
         }
     ]
 }
+
