@@ -568,8 +568,8 @@ def _mulitply_scaling_factor(col: pd.Series) -> pd.Series:
         Series: A DataFrame column with values multiplied by the scaling factor.
     """
     res = col
-    if col not in [None, np.nan]:
-        if col.isdigit():
+    if not pd.isna(col) and col is not None:
+        if isinstance(col, str) and col.isdigit():
             res = int(col) * _SCALING_FACTOR_TXT_FILE
     return res
 
@@ -586,9 +586,9 @@ def _concat_cols(col: pd.Series) -> pd.Series:
         res (Series) : Concatenated DataFrame Columns
     """
     res = col.iloc[0]
-    if col.iloc[1] is None:
+    if pd.isna(col.iloc[1]) or col.iloc[1] is None:
         return res
-    res = col.iloc[0] + ' ' + col.iloc[1]
+    res = str(col.iloc[0]) + ' ' + str(col.iloc[1])
     return res
 
 
