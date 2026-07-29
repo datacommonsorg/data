@@ -17,7 +17,9 @@ import sys
 import re
 import zipfile
 import time
-from datetime import date 
+import requests
+from datetime import date
+from urllib.parse import urlparse
 from absl import logging
 
 # --- Configuration ---
@@ -113,23 +115,46 @@ def download_for_year(year: int) -> bool:
         else:
             url = url_template.format(year)
 
-        zip_filename = f"EF{year}D.zip"
-        download_path = os.path.join(DOWNLOAD_DIR, zip_filename)
-
         try:
             download_success = download_file(
                 url=url,
                 output_folder=DOWNLOAD_DIR,
                 unzip=False,
-                tries=5,
+                tries=10,
                 delay=1,
                 backoff=1
             )
 
-            if download_success and os.path.exists(download_path) and zipfile.is_zipfile(download_path):
-                if process_and_filter_zip(download_path, DOWNLOAD_DIR):
-                    logging.info("  Successfully fetched dataset for year %d.", year)
-                    return True
+            if download_success:
+                # Determine the filename inferred by download_file
+                parsed_url = urlparse(url)
+                file_name = os.path.basename(parsed_url.path)
+                if not file_name:
+                    file_name = "downloaded_file"
+                elif '.' not in file_name:
+                    file_name = file_name + '.xlsx'
+
+                download_path = os.path.join(DOWNLOAD_DIR, file_name)
+                default_zip_path = os.path.join(DOWNLOAD_DIR, f"EF{year}D.zip")
+
+                actual_download_path = download_path if os.path.exists(download_path) else default_zip_path
+
+                if os.path.exists(actual_download_path):
+                    if zipfile.is_zipfile(actual_download_path):
+                        if process_and_filter_zip(actual_download_path, DOWNLOAD_DIR):
+                            logging.info("  Successfully fetched and extracted dataset for year %d.", year)
+                            return True
+                    else:
+                        # Direct CSV download (e.g. from data-generator)
+                        target_name = f"ef{year}d_rv.csv" if "HasRV=1" in url else f"ef{year}d.csv"
+                        target_path = os.path.join(DOWNLOAD_DIR, target_name)
+                        if os.path.exists(target_path):
+                            os.remove(target_path)
+                        os.rename(actual_download_path, target_path)
+                        logging.info("  Successfully fetched direct CSV dataset for year %d.", year)
+                        return True
+        except requests.exceptions.RequestException as e:
+            logging.info("  Network error for candidate URL %s: %s", url, e)
         except Exception as e:
             logging.info("  Candidate URL %s failed: %s", url, e)
 

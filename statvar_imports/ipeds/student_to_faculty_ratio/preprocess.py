@@ -82,7 +82,7 @@ def process_files():
 
             except Exception as e:
                 logging.fatal(f"Error renaming file {selected_filename}: {e}")
-                continue
+                raise e
 
             try:
                 # Load CSV
@@ -112,9 +112,11 @@ def process_files():
 
             except Exception as e:
                 logging.fatal(f"Error processing CSV {new_filename}: {e}")
+                raise e
 
     except Exception as e:
         logging.fatal(f"Unexpected error: {e}")
+        raise e
 
 if __name__ == "__main__":
     process_files()
