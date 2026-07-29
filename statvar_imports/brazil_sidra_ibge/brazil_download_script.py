@@ -302,4 +302,4 @@ def main(argv):
 
 if __name__ == "__main__":
     flags.FLAGS.log_dir = SCRIPT_DIR
-    app.run(main)
+    app.run(main)   
