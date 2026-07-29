@@ -103,9 +103,8 @@ def process_files():
                     df["measurementMethod"] = "NCES_ProvisionalEstimate"
                     logging.info(f"Added 'measurementMethod' = 'NCES_ProvisionalEstimate' to provisional file {new_filename}")
                 else:
-                    if "measurementMethod" in df.columns:
-                        df.drop(columns=["measurementMethod"], inplace=True)
-                        logging.info(f"Removed 'measurementMethod' column from revised file {new_filename}")
+                    df["measurementMethod"] = ""
+                    logging.info(f"Set empty 'measurementMethod' for revised file {new_filename}")
 
                 # Save updated CSV
                 df.to_csv(new_file_path, index=False)
