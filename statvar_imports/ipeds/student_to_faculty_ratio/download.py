@@ -120,9 +120,9 @@ def download_for_year(year: int) -> bool:
                 url=url,
                 output_folder=DOWNLOAD_DIR,
                 unzip=False,
-                tries=10,
-                delay=1,
-                backoff=1
+                tries=4,
+                delay=2,
+                backoff=2
             )
 
             if download_success:
