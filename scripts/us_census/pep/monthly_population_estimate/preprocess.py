@@ -241,8 +241,7 @@ class CensusUSACountryPopulation:
         final_cols = [col for col in df.columns if 'year' not in col.lower()]
         # _return_year("1999") or _return_year("1999 [1]"): 1999
         # _return_year(".07 1"): pd.NA
-        df['Year'] = df['Year and Month'].apply(_return_year).fillna(
-            method='ffill', limit=12)
+        df['Year'] = df['Year and Month'].apply(_return_year).ffill(limit=12)
         # _return_year("1999") or _return_year("1999 [1]"): pd.NA
         # _return_year(".07 1"): 07
         df['Month'] = df['Year and Month'].apply(_return_month)
