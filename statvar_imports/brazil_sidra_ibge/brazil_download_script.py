@@ -84,7 +84,7 @@ def get_available_periods():
     """
     url = "https://servicodados.ibge.gov.br/api/v3/agregados/6461/periodos"
     headers = {"User-Agent": "Mozilla/5.0"}
-    res = requests.get(url, headers=headers, verify=False, timeout=30)
+    res = SESSION.get(url, headers=headers, timeout=30)
     res.raise_for_status()
     periods_data = res.json()
     return [p for p in periods_data if p["id"] >= PERIOD_START]
@@ -111,11 +111,11 @@ def fetch_aggregate_series(agg_id, var_id, geo_code, period_query, classif=None)
     
     headers = {"User-Agent": "Mozilla/5.0"}
     try:
-        r = requests.get(url, headers=headers, verify=False, timeout=30)
+        r = SESSION.get(url, headers=headers, timeout=30)
         if r.status_code != 200:
             return {}
         data = r.json()
-        if not data or "resultados" not in data[0]:
+        if not isinstance(data, list) or not data or "resultados" not in data[0]:
             return {}
         
         result_map = {}
