@@ -21,13 +21,26 @@ the output into Excel spreadsheets.
 import os
 import time
 import requests
-import urllib3
 import pandas as pd
 from absl import app, logging, flags
 from pathlib import Path
+from requests.adapters import HTTPAdapter
+from urllib3.util import Retry
 
-# Suppress SSL InsecureRequestWarning
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+# --- Robust Session Setup ---
+def get_robust_session() -> requests.Session:
+    """Configures a global requests Session with retries and connection pooling."""
+    session = requests.Session()
+    retries = Retry(
+        total=10,
+        backoff_factor=1,
+        status_forcelist=[500, 502, 503, 504],
+        raise_on_status=False
+    )
+    session.mount("https://", HTTPAdapter(max_retries=retries))
+    return session
+
+SESSION = get_robust_session()
 
 # --- Configuration ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -78,6 +91,7 @@ LOCATIONS = {
 
 PERIOD_START = "202201"
 
+
 def get_available_periods():
     """
     Fetches available period metadata starting from Q1 2022 to the latest available period.
@@ -88,6 +102,7 @@ def get_available_periods():
     res.raise_for_status()
     periods_data = res.json()
     return [p for p in periods_data if p["id"] >= PERIOD_START]
+
 
 def format_quarter_label(period_item):
     """
@@ -101,23 +116,26 @@ def format_quarter_label(period_item):
     q = int(p_id[4:])
     return f"{q}º trimestre {year}"
 
+
 def fetch_aggregate_series(agg_id, var_id, geo_code, period_query, classif=None):
     """
-    Helper function to query IBGE aggregate API endpoint.
+    Helper function to query IBGE aggregate API endpoint using robust SESSION.
     """
     url = f"https://servicodados.ibge.gov.br/api/v3/agregados/{agg_id}/periodos/{period_query}/variaveis/{var_id}?localidades={geo_code}"
     if classif:
         url += f"&classificacao={classif}"
-    
+
     headers = {"User-Agent": "Mozilla/5.0"}
     try:
         r = SESSION.get(url, headers=headers, timeout=30)
         if r.status_code != 200:
             return {}
         data = r.json()
+
+        # Guard check to ensure valid list structure returned from API
         if not isinstance(data, list) or not data or "resultados" not in data[0]:
             return {}
-        
+
         result_map = {}
         for res in data[0]["resultados"]:
             cat_key = "Total"
@@ -133,6 +151,7 @@ def fetch_aggregate_series(agg_id, var_id, geo_code, period_query, classif=None)
         logging.warning(f"Error fetching agg {agg_id} var {var_id}: {e}")
         return {}
 
+
 def fetch_panel_data(place_name, geo_code, panel_index, periods):
     """
     Fetches SIDRA data for 2022Q1 to the latest available period and reshapes the output
@@ -145,7 +164,7 @@ def fetch_panel_data(place_name, geo_code, panel_index, periods):
     folder_name = PANEL_FOLDER_MAP[panel_index]
     dest_dir = os.path.join(DOWNLOAD_DIR, folder_name)
     Path(dest_dir).mkdir(parents=True, exist_ok=True)
-    
+
     filename = f"{place_name.replace(' ', '_')}_Panel_{panel_index}_Pesquisa Nacional por Amostra de Domicílios Contínua - Divulgação Trimestral.xlsx"
     filepath = os.path.join(dest_dir, filename)
 
@@ -183,7 +202,7 @@ def fetch_panel_data(place_name, geo_code, panel_index, periods):
         for name, serie in ind_specs:
             vals = [serie.get(pid, '') for pid in period_ids]
             rows.append([name] + vals)
-            
+
         rows.append(["Fonte: IBGE, Diretoria de Pesquisas, Coordenação de Trabalho e Rendimento, Pesquisa Nacional por Amostra de Domicílios Contínua"] + [''] * (num_cols - 1))
 
     elif panel_index == 2:
@@ -269,7 +288,7 @@ def fetch_panel_data(place_name, geo_code, panel_index, periods):
         for name, serie in ind_specs:
             vals = [serie.get(pid, '') for pid in period_ids]
             rows.append([name] + vals)
-            
+
         rows.append(["Fonte: IBGE, Diretoria de Pesquisas, Coordenação de Trabalho e Rendimento, Pesquisa Nacional por Amostra de Domicílios Contínua"] + [''] * (num_cols - 1))
         rows.append(["Nota: 1 - O rendimento está deflacionado para o mês do meio do último trimestre de coleta divulgado."] + [''] * (num_cols - 1))
         rows.append(["2 - O rendimento efetivo se refere ao valor recebido no mês anterior ao da coleta."] + [''] * (num_cols - 1))
@@ -281,7 +300,9 @@ def fetch_panel_data(place_name, geo_code, panel_index, periods):
 
     logging.info(f"Saved: '{filepath}'")
 
+
 def main(argv):
+    """Main function to orchestrate downloading and processing data."""
     del argv
     logging.info("Script started.")
 
@@ -300,6 +321,7 @@ def main(argv):
 
     logging.info("Script finished successfully.")
 
+
 if __name__ == "__main__":
     flags.FLAGS.log_dir = SCRIPT_DIR
-    app.run(main)   
+    app.run(main)
