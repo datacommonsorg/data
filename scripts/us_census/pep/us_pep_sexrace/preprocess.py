@@ -65,6 +65,7 @@ flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 _MODULE_DIR = os.path.dirname(__file__)
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'output_files/intermediate')
 _FILES_TO_DOWNLOAD = None
+_IS_TEST = False
 
 
 def _get_urls(json_file_path, key, test):
@@ -138,13 +139,14 @@ def _resolve_local_path(url):
         return cached_path
 
     # 2. If not found in GCS, check if it's already in the local test_data (since unit tests/inputs might have them)
-    test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
-    if os.path.exists(test_data_dir):
-        for root, dirs, files in os.walk(test_data_dir):
-            if file_name in files:
-                local_path = os.path.join(root, file_name)
-                logging.info(f"Using local test file: {local_path} for URL: {url}")
-                return local_path
+    if _IS_TEST:
+        test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
+        if os.path.exists(test_data_dir):
+            for root, dirs, files in os.walk(test_data_dir):
+                if file_name in files:
+                    local_path = os.path.join(root, file_name)
+                    logging.info(f"Using local test file: {local_path} for URL: {url}")
+                    return local_path
 
     # 3. Try to download it and save to gcs_folder
     gcs_folder = os.path.join(_MODULE_DIR, 'gcs_folder')
@@ -187,6 +189,8 @@ def downloadFiles(config_files: list, test=False):
         config_files: List of config file
         test=False
     '''
+    global _IS_TEST
+    _IS_TEST = test
     flag = None
     os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTFINAL))
     os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTINTERMEDIATE))
