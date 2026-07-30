@@ -69,13 +69,9 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
             num_df = (df.drop(_cols,
                               axis=1).join(df[_cols].apply(pd.to_numeric,
                                                            errors='coerce')))
-            df = num_df[num_df[_cols].notnull().all(axis=1)]
+            df = num_df[num_df[_cols].notnull().all(axis=1)].copy()
             df.loc[:, 1:] = df.loc[:, 1:].apply(pd.to_numeric)
-            df.loc[:, 'geo_ID'] = df.loc[:, 'geo_ID'].astype(int)
-
-            # providing geoId to the dataframe
-            # and making the geoId of 5 digit as county
-            df.loc[:, 'geo_ID'] = [f'{x:05}' for x in df.loc[:, 'geo_ID']]
+            df['geo_ID'] = df['geo_ID'].astype(int).apply(lambda x: f'{x:05}')
             # columns after 11 where having origin hence not required
             df.drop(df[df['Race'] >= 11].index, inplace=True)
 
