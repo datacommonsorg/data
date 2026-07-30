@@ -64,7 +64,7 @@
       }
     },
     {
-      "rule_id": "check_goldens_output_commodity_monthly_price",
+      "rule_id": "check_goldens_output",
       "description": "Verifies that the generated commodity monthly price output CSV data matches the established golden observations.",
       "validator": "GOLDENS_CHECK",
       "params": {
