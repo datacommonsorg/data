@@ -115,71 +115,6 @@ def add_future_year_urls():
                     logging.error(f"URL is not accessable {url_to_check}")
 
 
-def _find_file_in_gcs(file_name):
-    gcs_folder = os.path.join(_MODULE_DIR, 'gcs_folder')
-    if not os.path.exists(gcs_folder):
-        return None
-    direct_path = os.path.join(gcs_folder, file_name)
-    if os.path.exists(direct_path):
-        return direct_path
-    for root, dirs, files in os.walk(gcs_folder):
-        if file_name in files:
-            return os.path.join(root, file_name)
-    return None
-
-
-def _resolve_local_path(url):
-    file_name = url.split('/')[-1]
-
-    # 1. Check if the file is cached in gcs_folder
-    cached_path = _find_file_in_gcs(file_name)
-    if cached_path:
-        logging.info(f"Using cached file from GCS: {cached_path} for URL: {url}")
-        return cached_path
-
-    # 2. If not found in GCS, check if it's already in the local test_data (since unit tests/inputs might have them)
-    test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
-    if os.path.exists(test_data_dir):
-        for root, dirs, files in os.walk(test_data_dir):
-            if file_name in files:
-                local_path = os.path.join(root, file_name)
-                logging.info(f"Using local test file: {local_path} for URL: {url}")
-                return local_path
-
-    # 3. Try to download it and save to gcs_folder
-    gcs_folder = os.path.join(_MODULE_DIR, 'gcs_folder')
-    os.makedirs(gcs_folder, exist_ok=True)
-    destination_path = os.path.join(gcs_folder, file_name)
-
-    logging.info(f"File not found in GCS cache. Attempting download from URL: {url}")
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-    }
-    try:
-        response = requests.get(url, headers=headers, timeout=120)
-        response.raise_for_status()
-        content_type = response.headers.get('Content-Type', '')
-        if 'html' in content_type.lower():
-            raise ValueError("Server returned HTML rejection page instead of CSV/TXT data")
-
-        with open(destination_path, 'wb') as f:
-            f.write(response.content)
-        logging.info(f"Successfully downloaded and cached: {url} -> {destination_path}")
-        return destination_path
-    except Exception as e:
-        logging.error(f"Failed to download {url}: {e}")
-        # Return URL as fallback if download fails, so original error behavior is preserved
-        return url
-
-
-def _resolve_paths(urls):
-    if isinstance(urls, str):
-        return _resolve_local_path(urls)
-    elif isinstance(urls, list):
-        return [_resolve_local_path(u) for u in urls]
-    return urls
-
-
 def downloadFiles(config_files: list, test=False):
     #This method is use to download the file from URL
     '''
@@ -195,8 +130,6 @@ def downloadFiles(config_files: list, test=False):
         for config_file in config_files:
             try:
                 files = _get_urls(config_file, "urls", test)
-                if not test:
-                    files = _resolve_paths(files)
                 if "national_1980_1990.json" in config_file:
                     process_national_1980_1990(files)
                 elif "national_1900_1970.json" in config_file:
@@ -240,27 +173,26 @@ def downloadFiles(config_files: list, test=False):
                 logging.error(f"Failed to process {config_file}: {e}")
 
         global _FILES_TO_DOWNLOAD
-        for file in _FILES_TO_DOWNLOAD:
-            file_name_to_save = None
-            url = file['download_path']
-            if not test:
-                url = _resolve_local_path(url)
-            #Calling 2023 onwards methods
-            try:
-                process_national_2020_2029(url)
-            except Exception as e:
-                logging.error(
-                    f"Failed to process national 2020-2029 for {url}: {e}")
-            try:
-                process_county_2020_2029(url)
-            except Exception as e:
-                logging.error(
-                    f"Failed to process county 2020-2029 for {url}: {e}")
-            try:
-                process_state_2020_2029(url)
-            except Exception as e:
-                logging.error(
-                    f"Failed to process state 2020-2029 for {url}: {e}")
+        if _FILES_TO_DOWNLOAD is not None:
+            for file in _FILES_TO_DOWNLOAD:
+                file_name_to_save = None
+                url = file['download_path']
+                #Calling 2023 onwards methods
+                try:
+                    process_national_2020_2029(url)
+                except Exception as e:
+                    logging.error(
+                        f"Failed to process national 2020-2029 for {url}: {e}")
+                try:
+                    process_county_2020_2029(url)
+                except Exception as e:
+                    logging.error(
+                        f"Failed to process county 2020-2029 for {url}: {e}")
+                try:
+                    process_state_2020_2029(url)
+                except Exception as e:
+                    logging.error(
+                        f"Failed to process state 2020-2029 for {url}: {e}")
     except Exception as e:
         logging.fatal(f"There is an error while downloading the files {e}")
 
