@@ -8,7 +8,7 @@
       "params": { "threshold": 0.1}
     },
     {
-      "rule_id": "check_goldens_national",
+      "rule_id": "check_goldens_table1t10",
       "validator": "GOLDENS_CHECK",
       "params": {
         "golden_files": "../../../../golden_data/golden_summary_report_t1t10.csv",
