@@ -5,7 +5,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-             "provenance_url": "https://www.health.ny.gov/statistics/prevention/injury_prevention/information_for_action/",
+            "provenance_url": "https://www.health.ny.gov/statistics/prevention/injury_prevention/information_for_action/",
             "provenance_description": "The Behavioral Risk Factor Surveillance System (BRFSS) is an annual statewide telephone survey of adults developed by the Centers for Disease Control and Prevention (CDC) and administered by the New York State Department of Health. This data represents the percentage of adults with diagnosed diabetes by county in New York for the years 2016, 2018, and 2021.",
             "scripts": [
             "run.sh",
@@ -31,8 +31,22 @@
                 "input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2016_data.csv",
                 "input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2018_data.csv",
                 "input_files/ny_percentage_of_adults_with_diagnosed_diabetes_by_county_2021_data.csv"
-            ]
-
+            ],
+            "cron_schedule": "0 0 1 * *",
+            "resource_limits": {
+                "cpu": 4, 
+                "memory": 8, 
+                "disk":100
+            },
+            "config_override": {
+                "invoke_import_validation": true,
+                "invoke_import_tool": true,
+                "invoke_differ_tool": true,
+                "skip_input_upload": false,
+                "skip_gcs_upload": false,
+                "cleanup_gcs_volume_mount": false
         }
+      }
     ]
 }
+
