@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://datacommons.org/schemas/import-support/import-snapshot-v1.json",
+  "title": "Data Commons import information snapshot",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "environment",
+    "query",
+    "imports",
+    "evidence",
+    "warnings"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "environment": {
+      "type": "object",
+      "required": ["name", "scheduler_project", "scheduler_location"],
+      "properties": {
+        "name": {"type": "string"},
+        "scheduler_project": {"type": "string"},
+        "scheduler_location": {"type": "string"},
+        "facts": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence"}
+        }
+      },
+      "additionalProperties": true
+    },
+    "query": {
+      "type": "object",
+      "required": ["mode", "start_time", "end_time", "limits", "truncated"],
+      "properties": {
+        "mode": {"enum": ["single_import", "fleet"]},
+        "start_time": {"type": "string", "format": "date-time"},
+        "end_time": {"type": "string", "format": "date-time"},
+        "limits": {"type": "object"},
+        "truncated": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
+    "imports": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/import"}
+    },
+    "evidence": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidence"}
+    },
+    "warnings": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "required": ["source_kind", "source", "finding"],
+      "properties": {
+        "source_kind": {
+          "enum": [
+            "user_provided",
+            "repo_configured",
+            "live_observed",
+            "derived"
+          ]
+        },
+        "source": {"type": "string"},
+        "finding": {"type": "string"},
+        "observed_at": {"type": "string", "format": "date-time"}
+      },
+      "additionalProperties": true
+    },
+    "run": {
+      "type": "object",
+      "required": [
+        "id",
+        "status",
+        "correlation",
+        "artifacts",
+        "batch",
+        "logs",
+        "logs_truncated"
+      ],
+      "properties": {
+        "id": {"type": "string"},
+        "status": {"type": "object"},
+        "correlation": {"type": "object"},
+        "artifacts": {"type": "object"},
+        "batch": {"$ref": "#/$defs/batch_evidence"},
+        "logs": {
+          "type": "array",
+          "items": {"type": "object"}
+        },
+        "logs_truncated": {"type": "boolean"},
+        "runtime_provenance": {
+          "type": "object",
+          "properties": {
+            "task_start_time": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "time_basis": {
+              "enum": [
+                "batch_task_running_event",
+                "batch_job_create_time",
+                "workflow_start_time"
+              ]
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "batch_evidence": {
+      "type": "object",
+      "required": [
+        "correlation",
+        "evidence",
+        "expected_job_id",
+        "unavailable_reason",
+        "jobs"
+      ],
+      "properties": {
+        "correlation": {
+          "enum": ["exact", "time_correlated", "ambiguous", "unknown"]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "expected_job_id": {"type": ["string", "null"]},
+        "unavailable_reason": {"type": ["string", "null"]},
+        "jobs": {
+          "type": "array",
+          "items": {"type": "object"}
+        }
+      },
+      "additionalProperties": true
+    },
+    "latest_successful_run": {
+      "type": "object",
+      "required": ["id", "version", "timestamp", "source", "complete"],
+      "properties": {
+        "id": {"type": ["string", "null"]},
+        "version": {"type": ["string", "null"]},
+        "timestamp": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "source": {
+          "enum": ["workflow_run", "spanner_version_history", null]
+        },
+        "complete": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "gcs_evidence": {
+      "type": "object",
+      "required": [
+        "base_uri",
+        "summary_truncated",
+        "objects_truncated",
+        "truncated",
+        "warnings"
+      ],
+      "properties": {
+        "base_uri": {"type": "string"},
+        "summary_truncated": {"type": "boolean"},
+        "objects_truncated": {"type": "boolean"},
+        "truncated": {"type": "boolean"},
+        "warnings": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      },
+      "additionalProperties": true
+    },
+    "import": {
+      "type": "object",
+      "required": [
+        "identity",
+        "auto_refresh",
+        "deployment",
+        "links",
+        "latest_run_id",
+        "latest_successful_run_id",
+        "latest_successful_run",
+        "version_pointers",
+        "state_records",
+        "runs",
+        "warnings"
+      ],
+      "properties": {
+        "identity": {"type": "object"},
+        "auto_refresh": {"type": "object"},
+        "deployment": {
+          "type": "object",
+          "properties": {
+            "gcs": {"$ref": "#/$defs/gcs_evidence"}
+          },
+          "additionalProperties": true
+        },
+        "links": {"type": "object"},
+        "latest_run_id": {"type": ["string", "null"]},
+        "latest_successful_run_id": {"type": ["string", "null"]},
+        "latest_successful_run": {
+          "$ref": "#/$defs/latest_successful_run"
+        },
+        "version_pointers": {"type": "object"},
+        "state_records": {"type": "object"},
+        "runs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/run"}
+        },
+        "warnings": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,4 @@
+# Direct dependencies for repository-owned agent support tools.
+google-cloud-spanner
+google-cloud-workflows
+jsonschema
