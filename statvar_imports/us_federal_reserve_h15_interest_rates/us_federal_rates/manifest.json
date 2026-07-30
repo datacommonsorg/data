@@ -9,11 +9,13 @@
             "provenance_description": "Federal Reserve System H.15 Selected Interest Rates",
             "scripts": [
                 "us_fed_download.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/us_fed_input_1.csv --pv_map=us_fed_fund_pvmap.csv --config_file=us_fed_fund_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/us_fed_fund_output",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/us_fed_input_2.csv --pv_map=us_fed_interest_rates_pvmap.csv --config_file=us_fed_interest_rates_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/us_fed_interest_rate_output"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/us_fed_input_1.csv --pv_map=us_fed_fund_pvmap.csv --config_file=us_fed_fund_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/us_fed_fund_output -output_counters=counters/us_fed_fund_counters.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/us_fed_input_2.csv --pv_map=us_fed_interest_rates_pvmap.csv --config_file=us_fed_interest_rates_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/us_fed_interest_rate_output -output_counters=counters/us_fed_interest_rate_counters.csv"
             ],
             "source_files": [
-                "input_files/us_fed_input_*.csv"
+                "input_files/us_fed_input_*.csv",
+                "golden_data/*.csv",
+                "counters/*.csv"
             ],
             "import_inputs": [
                 {
