@@ -183,6 +183,80 @@ HEALTH_TABLES = [{
 }]
 
 
+
+
+
+
+def find_table_path(session, table_id):
+    import functools
+    import re
+    tid = table_id.upper()
+    if tid.endswith(".PX"):
+        tid = tid[:-3]
+    
+    # Base ID for fuzzy version match (e.g., DT_NSO_0300_077V1 -> DT_NSO_0300_077)
+    base_match = re.match(r"(DT_NSO_\d+_\d+)V\d+", tid)
+    base_id = base_match.group(1) if base_match else tid
+    
+    sectors_url = "https://data.1212.mn/api/v1/en/NSO"
+    try:
+        r = session.get(sectors_url)
+        if r.status_code != 200:
+            return None
+        sectors = r.json()
+    except Exception as e:
+        logging.error(f"Failed to fetch sectors: {e}")
+        return None
+        
+    candidates = []
+    for sector in sectors:
+        sector_id = sector.get("id")
+        if not sector_id:
+            continue
+        subsectors_url = f"https://data.1212.mn/api/v1/en/NSO/{sector_id}"
+        try:
+            r = session.get(subsectors_url)
+            if r.status_code != 200:
+                continue
+            subsectors = r.json()
+        except Exception:
+            continue
+            
+        for subsector in subsectors:
+            subsector_id = subsector.get("id")
+            if not subsector_id:
+                continue
+            tables_url = f"https://data.1212.mn/api/v1/en/NSO/{sector_id}/{subsector_id}"
+            try:
+                r = session.get(tables_url)
+                if r.status_code != 200:
+                    continue
+                tables = r.json()
+            except Exception:
+                continue
+                
+            for table in tables:
+                table_item_id = table.get("id", "").upper()
+                if table_item_id.endswith(".PX"):
+                    table_item_id = table_item_id[:-3]
+                
+                # Exact match
+                if table_item_id == tid:
+                    return sector_id, subsector_id, table.get("id")
+                
+                # Fuzzy version match candidate
+                if table_item_id.startswith(base_id):
+                    candidates.append((sector_id, subsector_id, table.get("id"), table_item_id))
+                    
+    if candidates:
+        # Sort candidates so that we get the highest version first or exact version if possible
+        candidates.sort(key=lambda x: x[3], reverse=True)
+        logging.info(f"Fuzzy version match found for {table_id}: selected {candidates[0][2]}")
+        return candidates[0][0], candidates[0][1], candidates[0][2]
+        
+    return None
+
+
 def fetch_and_save_data(table_id, csv_filepath, header_mapping):
     """
     Fetches data from the API for a given table ID, pivots it,
@@ -196,95 +270,171 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
     """
     logging.info(f"Processing {table_id} -> {csv_filepath}...")
 
-    url = "https://opendata.1212.mn/api/Data"
-    data = {"tbl_id": table_id}
-    headers = {"Content-Type": "application/json"}
-    retry_logic = Retry(total=5, backoff_factor=1, allowed_methods=["POST"])
+    retry_logic = Retry(total=5, backoff_factor=1, allowed_methods=["GET", "POST"])
     adapter = HTTPAdapter(max_retries=retry_logic)
     session = requests.Session()
     session.mount("https://", adapter)
 
     try:
-        response = session.post(url, headers=headers, data=json.dumps(data))
+        # 1. Resolve table path
+        path_info = find_table_path(session, table_id)
+        if not path_info:
+            error_msg = f"FATAL ERROR for {table_id}: Table not found in API catalog. Aborting."
+            logging.fatal(error_msg)
+            raise RuntimeError(error_msg)
+            
+        sector_id, subsector_id, table_filename = path_info
+        logging.info(f"Resolved path for {table_id}: NSO/{sector_id}/{subsector_id}/{table_filename}")
+
+        # 2. Fetch metadata (English and Mongolian)
+        en_meta_url = f"https://data.1212.mn/api/v1/en/NSO/{sector_id}/{subsector_id}/{table_filename}"
+        mn_meta_url = f"https://data.1212.mn/api/v1/mn/NSO/{sector_id}/{subsector_id}/{table_filename}"
+        
+        en_meta_res = session.get(en_meta_url)
+        mn_meta_res = session.get(mn_meta_url)
+        
+        if en_meta_res.status_code != 200 or mn_meta_res.status_code != 200:
+            error_msg = f"FATAL ERROR for {table_id}: Failed to fetch metadata (EN: {en_meta_res.status_code}, MN: {mn_meta_res.status_code})"
+            logging.fatal(error_msg)
+            raise RuntimeError(error_msg)
+            
+        en_meta = en_meta_res.json()
+        mn_meta = mn_meta_res.json()
+
+        # 3. Fetch all data using POST
+        data_url = f"https://data.1212.mn/api/v1/en/NSO/{sector_id}/{subsector_id}/{table_filename}"
+        payload = {
+            "query": [],
+            "response": {
+                "format": "json"
+            }
+        }
+        headers = {"Content-Type": "application/json"}
+        response = session.post(data_url, headers=headers, json=payload)
 
         # Check status code first
         if response.status_code == 200:
             response_data = response.json()
 
-            if not response_data:
-                # Checks if the dictionary is empty[from the source we are getting data in dictionary fomate]
+            if not response_data or "data" not in response_data:
                 error_msg = f"FATAL ERROR for {table_id}: No data found in the source. Aborting script."
                 logging.fatal(error_msg)
                 raise RuntimeError(error_msg)
 
             logging.info("Success! Response data received.")
 
-            if "DataList" in response_data and isinstance(
-                    response_data["DataList"], list):
-                data_list = response_data["DataList"]
+            # Map variables
+            variables = en_meta["variables"]
+            period_var_idx = -1
+            for idx, var in enumerate(variables):
+                code_lower = var.get("code", "").lower()
+                text_lower = var.get("text", "").lower()
+                if any(p in code_lower or p in text_lower for p in ["year", "period", "time", "month", "он", "сар"]):
+                    period_var_idx = idx
+                    break
+                    
+            class_vars = []
+            for idx, (en_v, mn_v) in enumerate(zip(en_meta["variables"], mn_meta["variables"])):
+                if idx != period_var_idx:
+                    class_vars.append((idx, en_v, mn_v))
+                    
+            N = len(class_vars)
+            
+            # Map POST response data to data_list format
+            data_list = []
+            for item in response_data.get("data", []):
+                keys = item.get("key", [])
+                vals = item.get("values", [])
+                if not vals:
+                    continue
+                    
+                row_data = {}
+                row_data["DTVAL_CO"] = vals[0]
+                
+                if period_var_idx != -1:
+                    period_key = keys[period_var_idx]
+                    en_var = en_meta["variables"][period_var_idx]
+                    try:
+                        val_idx = en_var["values"].index(period_key)
+                        row_data["Period"] = en_var["valueTexts"][val_idx]
+                    except ValueError:
+                        row_data["Period"] = period_key
+                else:
+                    row_data["Period"] = ""
+                    
+                for i, (var_idx, en_v, mn_v) in enumerate(class_vars):
+                    suffix = str(N - 1 - i) if i < N - 1 else ""
+                    key_val = keys[var_idx]
+                    try:
+                        val_idx = en_v["values"].index(key_val)
+                        en_text = en_v["valueTexts"][val_idx]
+                        mn_text = mn_v["valueTexts"][val_idx]
+                    except ValueError:
+                        en_text = key_val
+                        mn_text = key_val
+                    row_data[f"CODE{suffix}"] = key_val
+                    row_data[f"SCR_ENG{suffix}"] = en_text
+                    row_data[f"SCR_MN{suffix}"] = mn_text
+                data_list.append(row_data)
 
-                # Check for empty DataList and log the finding before aborting
-                if not data_list:
-                    logging.info(
-                        f"Found 'DataList' structure in source, but it is empty: {table_id}."
-                    )
-                    error_msg = f"FATAL ERROR for {table_id}: 'DataList' is present but contains zero records. No data found from the Source"
-                    logging.fatal(error_msg)
-                    raise RuntimeError(error_msg)
-                if len(data_list) < 40:  # Updated threshold to 40 records
-                    logging.info(
-                        f"Found 'DataList' structure in source, but it is empty or too small: {table_id}. DataList length: {len(data_list)}"
-                    )
-                    error_msg = f"FATAL ERROR for {table_id}: 'DataList' contains less than 40 records. Data is not sufficient."
-                    logging.fatal(error_msg)
-                    raise RuntimeError(error_msg)
-
-                pivoted_data = {}
-                all_periods = set()
-
-                for item in data_list:
-                    period = item.get("Period", "")
-                    row_keys = [
-                        item.get(key, "") for key in header_mapping['keys']
-                    ]
-                    dtval_co = item.get("DTVAL_CO", "")
-                    row_key = tuple(row_keys)
-
-                    if period:
-                        all_periods.add(period)
-                    if row_key not in pivoted_data:
-                        pivoted_data[row_key] = {}
-                    pivoted_data[row_key][period] = dtval_co
-
-                sorted_periods = sorted(list(all_periods))
-
-                try:
-                    with open(csv_filepath, 'w', newline='',
-                              encoding='utf-8') as csvfile:
-                        csv_writer = csv.writer(csvfile)
-
-                        csv_headers = header_mapping['cols'] + sorted_periods
-                        csv_writer.writerow(csv_headers)
-
-                        for row_key, period_values in pivoted_data.items():
-
-                            # It creates the row using only as many keys as there are column names.
-                            row = list(row_key)[:len(header_mapping['cols'])]
-
-                            for period in sorted_periods:
-                                row.append(period_values.get(period, ""))
-                            csv_writer.writerow(row)
-
-                    logging.info(
-                        f"Successfully created CSV file: {csv_filepath}\n")
-                except IOError as e:
-                    error_msg = f"Failed to write CSV file {csv_filepath}: {e}"
-                    logging.fatal(error_msg)
-                    raise RuntimeError(error_msg)
-            else:
-                logging.warning(
-                    f"Error for {table_id}: 'DataList' not found in the API response.\n"
+            # Check for empty DataList and log the finding before aborting
+            if not data_list:
+                logging.info(
+                    f"Found empty DataList for: {table_id}."
                 )
+                error_msg = f"FATAL ERROR for {table_id}: DataList contains zero records. No data found from the Source"
+                logging.fatal(error_msg)
+                raise RuntimeError(error_msg)
+            if len(data_list) < 40:  # Updated threshold to 40 records
+                logging.info(
+                    f"Found too small DataList: {table_id}. DataList length: {len(data_list)}"
+                )
+                error_msg = f"FATAL ERROR for {table_id}: DataList contains less than 40 records. Data is not sufficient."
+                logging.fatal(error_msg)
+                raise RuntimeError(error_msg)
+
+            pivoted_data = {}
+            all_periods = set()
+
+            for item in data_list:
+                period = item.get("Period", "")
+                row_keys = [
+                    item.get(key, "") for key in header_mapping['keys']
+                ]
+                dtval_co = item.get("DTVAL_CO", "")
+                row_key = tuple(row_keys)
+
+                if period:
+                    all_periods.add(period)
+                if row_key not in pivoted_data:
+                    pivoted_data[row_key] = {}
+                pivoted_data[row_key][period] = dtval_co
+
+            sorted_periods = sorted(list(all_periods))
+
+            try:
+                with open(csv_filepath, 'w', newline='',
+                          encoding='utf-8') as csvfile:
+                    csv_writer = csv.writer(csvfile)
+
+                    csv_headers = header_mapping['cols'] + sorted_periods
+                    csv_writer.writerow(csv_headers)
+
+                    for row_key, period_values in pivoted_data.items():
+
+                        # It creates the row using only as many keys as there are column names.
+                        row = list(row_key)[:len(header_mapping['cols'])]
+
+                        for period in sorted_periods:
+                            row.append(period_values.get(period, ""))
+                        csv_writer.writerow(row)
+
+                logging.info(
+                    f"Successfully created CSV file: {csv_filepath}\n")
+            except IOError as e:
+                error_msg = f"Failed to write CSV file {csv_filepath}: {e}"
+                logging.fatal(error_msg)
+                raise RuntimeError(error_msg)
         else:
             logging.warning(
                 f"Error for {table_id}: Request failed with status code {response.status_code}\n"
