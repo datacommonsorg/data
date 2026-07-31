@@ -17,7 +17,9 @@
                 }
             ],
             "source_files": [
-                "input_files/*.csv"
+                "input_files/*.csv",
+                "golden_data/*.csv",
+                "counters/*.csv"
             ],
             "cron_schedule": "30 5 1 * *",
             "resource_limits": {"cpu": 8, "memory": 32, "disk":100},
