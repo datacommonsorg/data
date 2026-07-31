@@ -223,8 +223,11 @@ def create_single_csv(output_files_names: list):
         if len(national_before_2000) > 0:
             for i in national_before_2000:
                 #os.path.join(_CODEDIR, _OUTPUTFINAL, "national_after_2000.csv")
-                df = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i),
-                                 header=0)
+                file_path = os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i)
+                if not os.path.exists(file_path):
+                    logging.warning(f"File {i} not found in intermediate outputs, skipping.")
+                    continue
+                df = pd.read_csv(file_path, header=0)
                 for col in df.columns:
                     df[col] = df[col].astype("str")
                 df1 = pd.concat([df, df1], ignore_index=True)
@@ -234,9 +237,11 @@ def create_single_csv(output_files_names: list):
         # year 2000 to final output csv
         if len(state_county_before_2000) > 0:
             for i in state_county_before_2000:
-                df2 = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE,
-                                               i),
-                                  header=0)
+                file_path = os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i)
+                if not os.path.exists(file_path):
+                    logging.warning(f"File {i} not found in intermediate outputs, skipping.")
+                    continue
+                df2 = pd.read_csv(file_path, header=0)
                 for col in df2.columns:
                     df2[col] = df2[col].astype("str")
                 df3 = pd.concat([df2, df3], ignore_index=True)
@@ -246,9 +251,11 @@ def create_single_csv(output_files_names: list):
         # year 2000 to final output csv
         if len(state_county_after_2000) > 0:
             for i in state_county_after_2000:
-                df6 = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE,
-                                               i),
-                                  header=0)
+                file_path = os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i)
+                if not os.path.exists(file_path):
+                    logging.warning(f"File {i} not found in intermediate outputs, skipping.")
+                    continue
+                df6 = pd.read_csv(file_path, header=0)
                 for col in df6.columns:
                     df6[col] = df6[col].astype("str")
                 df7 = pd.concat([df6, df7], ignore_index=True)
@@ -258,9 +265,11 @@ def create_single_csv(output_files_names: list):
         # to final output csv
         if len(national_after_2000) > 0:
             for i in national_after_2000:
-                df4 = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE,
-                                               i),
-                                  header=0)
+                file_path = os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i)
+                if not os.path.exists(file_path):
+                    logging.warning(f"File {i} not found in intermediate outputs, skipping.")
+                    continue
+                df4 = pd.read_csv(file_path, header=0)
                 for col in df4.columns:
                     df4[col] = df4[col].astype("str")
                 df5 = pd.concat([df4, df5], ignore_index=True)
