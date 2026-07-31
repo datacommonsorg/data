@@ -31,8 +31,7 @@
             "source_files": [
                 "input_files/*"
             ],
-            "cron_schedule": "0 10 * * 1",
-            "validation_config_file": "validation_config.json"
+            "cron_schedule": "0 10 * * 1"
         }
     ]
 }

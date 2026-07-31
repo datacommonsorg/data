@@ -223,53 +223,48 @@ def create_single_csv(output_files_names: list):
         if len(national_before_2000) > 0:
             for i in national_before_2000:
                 #os.path.join(_CODEDIR, _OUTPUTFINAL, "national_after_2000.csv")
-                file_path = os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i)
-                if os.path.exists(file_path):
-                    df = pd.read_csv(file_path, header=0)
-                    for col in df.columns:
-                        df[col] = df[col].astype("str")
-                    df1 = pd.concat([df, df1], ignore_index=True)
-            if not df1.empty:
-                column_names[1] = process_national_before_2000(df1)
+                df = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i),
+                                 header=0)
+                for col in df.columns:
+                    df[col] = df[col].astype("str")
+                df1 = pd.concat([df, df1], ignore_index=True)
+            column_names[1] = process_national_before_2000(df1)
 
         # aggregating the files which are having state and county data before the
         # year 2000 to final output csv
         if len(state_county_before_2000) > 0:
             for i in state_county_before_2000:
-                file_path = os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i)
-                if os.path.exists(file_path):
-                    df2 = pd.read_csv(file_path, header=0)
-                    for col in df2.columns:
-                        df2[col] = df2[col].astype("str")
-                    df3 = pd.concat([df2, df3], ignore_index=True)
-            if not df3.empty:
-                column_names[2] = process_state_county_before_2000(df3)
+                df2 = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE,
+                                               i),
+                                  header=0)
+                for col in df2.columns:
+                    df2[col] = df2[col].astype("str")
+                df3 = pd.concat([df2, df3], ignore_index=True)
+            column_names[2] = process_state_county_before_2000(df3)
 
         # aggregating the files which are having state and county data after the
         # year 2000 to final output csv
         if len(state_county_after_2000) > 0:
             for i in state_county_after_2000:
-                file_path = os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i)
-                if os.path.exists(file_path):
-                    df6 = pd.read_csv(file_path, header=0)
-                    for col in df6.columns:
-                        df6[col] = df6[col].astype("str")
-                    df7 = pd.concat([df6, df7], ignore_index=True)
-            if not df7.empty:
-                column_names[3] = process_state_county_after_2000(df7)
+                df6 = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE,
+                                               i),
+                                  header=0)
+                for col in df6.columns:
+                    df6[col] = df6[col].astype("str")
+                df7 = pd.concat([df6, df7], ignore_index=True)
+            column_names[3] = process_state_county_after_2000(df7)
 
         # aggregating the files which are having national data after the year 2000
         # to final output csv
         if len(national_after_2000) > 0:
             for i in national_after_2000:
-                file_path = os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i)
-                if os.path.exists(file_path):
-                    df4 = pd.read_csv(file_path, header=0)
-                    for col in df4.columns:
-                        df4[col] = df4[col].astype("str")
-                    df5 = pd.concat([df4, df5], ignore_index=True)
-            if not df5.empty:
-                column_names[4] = process_national_after_2000(df5)
+                df4 = pd.read_csv(os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE,
+                                               i),
+                                  header=0)
+                for col in df4.columns:
+                    df4[col] = df4[col].astype("str")
+                df5 = pd.concat([df4, df5], ignore_index=True)
+            column_names[4] = process_national_after_2000(df5)
         logging.info("End create_single_csv")
         return column_names
 
