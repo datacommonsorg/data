@@ -20,8 +20,8 @@ import unittest
 
 from google.cloud.workflows import executions_v1
 
-from agents.common.import_support.list_import_runs import filter_import_runs
 from agents.common.import_support.list_import_runs import list_workflow_execution_records
+from agents.common.import_support.list_import_runs import select_runs
 
 
 class _ExecutionClient:
@@ -60,13 +60,35 @@ class ListImportRunsTest(unittest.TestCase):
             datetime(2025, 12, 1, tzinfo=timezone.utc),
             datetime(2026, 2, 1, tzinfo=timezone.utc),
             client=client)
-        filtered = filter_import_runs(listed, 'scripts/a:Import')
+        filtered = select_runs(listed, 'scripts/a:Import')
 
         self.assertEqual(executions_v1.ExecutionView.FULL, client.request.view)
         self.assertEqual('one', filtered['runs'][0]['id'])
-        self.assertEqual('batch-job', filtered['runs'][0]['result']['job_id'])
-        self.assertEqual([],
-                         filter_import_runs(listed, 'scripts/a:Other')['runs'])
+        self.assertEqual('batch-job', filtered['runs'][0]['batch_job_id'])
+        self.assertEqual('scripts/a:Import', filtered['runs'][0]['import_name'])
+        self.assertNotIn('argument', filtered['runs'][0])
+        self.assertEqual([], select_runs(listed, 'scripts/a:Other')['runs'])
+
+    def test_without_import_filter_returns_bounded_fleet_runs(self):
+        listed = {
+            'executions': [{
+                'id': 'one',
+                'import_name': 'scripts/a:Import'
+            }, {
+                'id': 'two',
+                'import_name': 'scripts/b:Import'
+            }],
+            'scan_truncated': False,
+        }
+
+        selected = select_runs(listed, run_limit=1)
+
+        self.assertIsNone(selected['absolute_import_name'])
+        self.assertEqual([{
+            'id': 'one',
+            'import_name': 'scripts/a:Import'
+        }], selected['runs'])
+        self.assertTrue(selected['result_truncated'])
 
 
 if __name__ == '__main__':

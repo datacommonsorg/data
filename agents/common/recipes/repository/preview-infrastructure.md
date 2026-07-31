@@ -4,69 +4,68 @@ Recipe ID: `repository.preview-infrastructure`
 
 ## Use when
 
-A request needs live Scheduler, Workflow, Batch, GCS, Cloud Run, Cloud Build,
-Logging, or Spanner evidence.
+A request needs live GCP evidence.
 
 ## Required inputs
 
-Request mode, exact import name for single-import inspection, selected
-environment, UTC window, result limits, and any explicit infrastructure values
-from the user.
+Selected environment, planned recipes, exact import identity when applicable,
+UTC window, limits, and any explicit user-provided infrastructure values.
 
 ## Clarify when
 
-Two explicit sources disagree or the preview reports required Scheduler
-coordinates unresolved.
+Required values remain unresolved, two explicit sources disagree, or a
+non-production environment has no canonical repository deployment definition.
 
 ## Read-only operation
 
-Run the snapshot collector locally with the same arguments intended for cloud
-collection and add `--preview_infrastructure`:
+Read production candidates from their repository source rather than copying
+them into the skill:
 
 ```bash
-./agents/common/run_python.sh \
-  agents/common/import_support/collect_import_snapshot.py \
-  --mode=single_import \
-  --import_name=<IMPORT_NAME> \
-  --start_time=<RFC3339_UTC> \
-  --end_time=<RFC3339_UTC> \
-  --run_limit=<LIMIT> \
-  --preview_infrastructure
+rg -n \
+  'gcp_project_id:|gcs_project_id:|storage_prod_bucket_name:|scheduler_location:|cloud_workflow_id:' \
+  import-automation/executor/app/configs.py
 ```
 
-Pass project, location, bucket, helper, or Spanner flags only when the user
-explicitly supplies them or selects a supported non-production environment.
+Read an exact user-provided file only when the user supplies its path. Do not
+execute it. Then print a review table with these columns:
+
+```text
+operation | resource type | candidate value | source | UTC bounds | limit
+```
+
+Include only resources required by the planned recipes. Mark downstream values
+such as Batch job, version, or Spanner database as `derive after selected live
+read` instead of resolving them upfront.
 
 ## Preferred invocation
 
-Use this operation before the first cloud call. Print the returned candidates
-and sources. Ask once in an interactive session; in a prompt-declared headless
-run print `review: skipped (headless)` and continue only when
-`ready_for_cloud` is true.
+Use repository reads and the review table above. Do not call a collector or any
+cloud API during preview. Ask once in an interactive session. In a
+prompt-declared headless run, print `review: skipped (headless)` after the table.
 
 ## Expected output
 
-JSON on stdout containing `cloud_access_performed: false`, environment, query
-bounds, selected and repository-candidate resources, source labels,
-`ready_for_cloud`, unresolved values, blocked reads, and warnings.
+Selected environment, planned operations, resource candidates with source
+labels, unresolved fields, UTC bounds, limits, and whether review was approved
+or skipped.
 
 ## Required bounds
 
-Use the same UTC window and hard result limits intended for collection. Do not
-replace exact user values with broader projects, locations, or time ranges.
+Do not include services not required by the evidence plan. Do not replace exact
+user values with broader projects, locations, buckets, or time ranges.
 
 ## Evidence to retain
 
-Every selected value, its source, any replaced repository candidate, unresolved
-fields, blocked reads, and the fact that no cloud access occurred.
+Every proposed value and source, unresolved values, blocked operations, and the
+fact that no cloud access occurred during preview.
 
 ## Common failures
 
-Missing data-repository environment, invalid bounds, unresolved non-production
-Scheduler coordinates, incomplete Spanner coordinates, or conflicting explicit
-user sources.
+Missing repository configuration, incomplete non-production coordinates,
+conflicting explicit values, or a planned operation with no bounded recipe.
 
 ## Related repository sources
 
-`import-automation/executor/app/configs.py`, the snapshot collector, and the
-shared environment-resolution reference.
+`import-automation/executor/app/configs.py`, deployment definitions under
+`import-automation/`, and the shared environment-resolution reference.

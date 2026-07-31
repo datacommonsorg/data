@@ -1,16 +1,16 @@
-# Read import state and history from Spanner
+# Read one import record type from Spanner
 
 Recipe ID: `gcp.spanner.read-import-records`
 
 ## Use when
 
 Current publication state, accepted/version events, or downstream ingestion
-history is required.
+history is specifically required.
 
 ## Required inputs
 
-Verified Spanner project, instance, database, exact simple import name, and
-row limit.
+Verified Spanner project, instance, database, exact simple import name, one
+query type, and row limit.
 
 ## Clarify when
 
@@ -18,52 +18,44 @@ Coordinates cannot be derived from the selected live helper deployment.
 
 ## Read-only operation
 
-Use the parameterized Spanner adapter in the snapshot collector. It executes
-an `INFORMATION_SCHEMA.COLUMNS` check for the three named tables, then only
-these bounded `SELECT` shapes when the expected columns are present:
-
-```sql
-SELECT <allowlisted current-state columns>
-FROM ImportStatus WHERE ImportName = @import_name;
-SELECT <allowlisted version-event columns>
-FROM ImportVersionHistory WHERE ImportName = @import_name
-ORDER BY UpdateTimestamp DESC LIMIT @limit;
-SELECT <allowlisted downstream-ingestion columns>
-FROM IngestionHistory
-WHERE @import_name IN UNNEST(IngestedImports)
-ORDER BY CreationTimestamp DESC LIMIT @limit;
+```bash
+./agents/common/run_python.sh \
+  agents/common/import_support/read_import_records.py \
+  --project=<PROJECT> \
+  --instance=<INSTANCE> \
+  --database=<DATABASE> \
+  --import_name=<IMPORT_NAME> \
+  --query=<current|version_history|ingestion_history> \
+  --limit=<LIMIT>
 ```
 
 ## Preferred invocation
 
-Use the Python adapter because the installed `gcloud spanner databases
-execute-sql` command does not support bound parameters.
-
-Pass project, instance, and database explicitly. Application Default
-Credentials provide identity only. Never use an MCP tool, IDE database
-connection, plugin, connector, or ambient database configuration as a fallback.
+Choose exactly one query type. The focused helper exists because installed
+`gcloud spanner databases execute-sql` has no bound-parameter flag. It executes
+one parameterized `SELECT`, disables client metrics, and makes no schema or
+follow-up queries.
 
 ## Expected output
 
-One current row, bounded version events, and bounded downstream ingestion
-events, each labeled by role.
+Canonical database resource, selected query type, bounded rows, and truncation.
 
 ## Required bounds
 
-Exact import parameter and explicit row limit. Reject non-`SELECT` SQL.
+Use exact coordinates/import name and a limit from 1 through 100. Never query
+all three record types speculatively.
 
 ## Evidence to retain
 
-Canonical database resource, query role, row timestamps,
-version/status/workflow fields, and truncation. With `--verbose`, print the
-canonical database resource before executing the query.
+Canonical database resource, query role, relevant row timestamps and status or
+workflow fields, limit, and truncation.
 
 ## Common failures
 
-Missing ADC, schema drift, permission denied, absent current row, or history
-that legitimately omits failed attempts.
+Missing Application Default Credentials, schema drift, permission denied,
+absent current row, or history that legitimately omits failed attempts.
 
 ## Related repository sources
 
-A supplied sibling `ingestion-helper/clients/schema.sql` and live database
-metadata.
+A supplied sibling `ingestion-helper/clients/schema.sql`, live database
+metadata, and the run/status reference.

@@ -1,21 +1,23 @@
-# List Workflow executions for one import
+# List Workflow executions
 
 Recipe ID: `gcp.workflows.list-import-executions`
 
 ## Use when
 
-Collecting logical refresh history or grouping fleet runs by exact import.
+Listing refresh runs for one import or a bounded fleet window.
 
 ## Required inputs
 
-Full Workflow resource, exact absolute import name, UTC start/end, result
-limit, and scan limit.
+Full Workflow resource, UTC start/end, result limit, scan limit, and optional
+exact absolute import name.
 
 ## Clarify when
 
 The Scheduler target cannot identify exactly one Workflow.
 
 ## Read-only operation
+
+For one import:
 
 ```bash
 ./agents/common/run_python.sh \
@@ -24,32 +26,37 @@ The Scheduler target cannot identify exactly one Workflow.
   --absolute_import_name=<DIRECTORY:IMPORT_NAME> \
   --start_time=<RFC3339_UTC> \
   --end_time=<RFC3339_UTC> \
-  --run_limit=10
+  --run_limit=<LIMIT> \
+  --scan_limit=<SCAN_LIMIT>
 ```
+
+For a fleet window, omit `--absolute_import_name`.
 
 ## Preferred invocation
 
-Use the helper. It requests FULL execution view, paginates, parses the JSON
-argument, and filters exact `argument.importName` locally.
+Use this focused helper because the installed `gcloud workflows executions
+list` command cannot request FULL view and therefore omits `argument.importName`.
+The helper makes one paginated Workflow list operation and no downstream calls.
 
 ## Expected output
 
-Execution resource, state/error, timestamps, revision, parsed argument,
-successful result/job ID, scan count, and truncation.
+Execution resource/ID, exact import name, state/error, timestamps, revision,
+Batch job ID, scan/page counts, and truncation.
 
 ## Required bounds
 
-Always use a UTC time window, result limit, and execution scan limit.
+Always use a UTC time window, result limit, and scan limit. Return at most 100
+runs and scan at most 5,000 executions.
 
 ## Evidence to retain
 
-Workflow resource/revision, execution resource, exact import match, result job
-ID, and page/scan metadata.
+Workflow resource, exact import identity, execution resource, state, revision,
+Batch job ID, and scan/truncation metadata.
 
 ## Common failures
 
-Missing Application Default Credentials, expired execution history, malformed
-argument/result, API quota, or scan truncation before enough matches.
+Missing Application Default Credentials, expired history, malformed arguments,
+API quota, permission denied, or scan truncation before enough matches.
 
 ## Related repository sources
 

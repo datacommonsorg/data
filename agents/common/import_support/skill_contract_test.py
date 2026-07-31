@@ -18,8 +18,6 @@ from pathlib import Path
 import re
 import unittest
 
-from jsonschema import Draft202012Validator
-
 _MARKDOWN_LINK = re.compile(r'\[[^]]+\]\(([^)]+)\)')
 _TEXT_SUFFIXES = {'.json', '.md', '.py', '.sh', '.yaml', '.yml'}
 _RECIPE_HEADINGS = (
@@ -100,12 +98,66 @@ class SkillContractTest(unittest.TestCase):
                  'agents/skills/dc-import-info/SKILL.md').read_text(
                      encoding='utf-8')
 
-        for required in ('--preview_infrastructure',
-                         'review: skipped (headless)',
+        for required in ('review: skipped (headless)',
                          'Infrastructure actually used', 'Never use MCP tools',
-                         'Do not preview infrastructure or access GCP'):
+                         'Keep code, manifest, configured schedule'):
             with self.subTest(required=required):
                 self.assertIn(required, skill)
+
+    def test_skill_and_recipes_do_not_reference_removed_collectors(self):
+        paths = [
+            self._repo_root / 'agents/skills/dc-import-info/SKILL.md',
+            *self._repo_root.glob(
+                'agents/skills/dc-import-info/references/*.md'),
+            *self._repo_root.glob('agents/common/recipes/**/*.md'),
+        ]
+
+        for path in paths:
+            text = path.read_text(encoding='utf-8')
+            with self.subTest(path=path):
+                self.assertNotIn('collect_import_snapshot.py', text)
+                self.assertNotIn('collect_provenance.py', text)
+                self.assertNotIn('snapshot collector', text.lower())
+
+    def test_recipes_do_not_document_mutating_gcloud_commands(self):
+        recipes = '\n'.join(
+            path.read_text(encoding='utf-8')
+            for path in self._repo_root.glob('agents/common/recipes/**/*.md'))
+        forbidden = (
+            'gcloud scheduler jobs run',
+            'gcloud workflows execute',
+            'gcloud batch jobs delete',
+            'gcloud run services update',
+            'gcloud builds submit',
+            'gcloud storage rm',
+        )
+
+        for command in forbidden:
+            with self.subTest(command=command):
+                self.assertNotIn(command, recipes)
+
+    def test_expensive_recipes_are_targeted_and_bounded(self):
+        recipe_root = self._repo_root / 'agents/common/recipes/gcp'
+        historical = (recipe_root / 'gcs/find-historical-summary.md').read_text(
+            encoding='utf-8')
+        artifacts = (recipe_root / 'gcs/list-version-artifacts.md').read_text(
+            encoding='utf-8')
+        logs = (recipe_root /
+                'logging/fetch-batch-logs.md').read_text(encoding='utf-8')
+        builds = (recipe_root /
+                  'cloud-build/resolve-runtime-provenance.md').read_text(
+                      encoding='utf-8')
+
+        self.assertIn('<YYYY_MM_DD>*/import_summary.json', historical)
+        self.assertNotIn('<IMPORT_PREFIX>/**/', historical)
+        self.assertIn('<IMPORT_PREFIX>/<VERSION>/**', artifacts)
+        self.assertIn('--limit=<LIMIT_PLUS_ONE>', artifacts)
+        for required in ('labels.job_uid', 'timestamp>=', 'timestamp<=',
+                         '--limit=<LIMIT_PLUS_ONE>', 'jsonPayload.log_type'):
+            with self.subTest(log_required=required):
+                self.assertIn(required, logs)
+        self.assertIn('finishTime<', builds)
+        self.assertIn('--limit=<LIMIT>', builds)
 
     def test_python_wrapper_uses_repository_environment_without_minor_pin(self):
         wrapper = (self._repo_root /
@@ -113,14 +165,6 @@ class SkillContractTest(unittest.TestCase):
 
         self.assertIn('.env/bin/python', wrapper)
         self.assertNotIn('Expected Python 3.12', wrapper)
-
-    def test_snapshot_schema_is_valid(self):
-        schema = json.loads(
-            (self._repo_root /
-             'agents/common/schemas/import_snapshot.schema.json').read_text(
-                 encoding='utf-8'))
-
-        Draft202012Validator.check_schema(schema)
 
 
 if __name__ == '__main__':

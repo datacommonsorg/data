@@ -26,9 +26,14 @@ This is a candidate template. List actual objects and report only those found.
 Preserve `input<N>` because one manifest specification can contain multiple
 `import_inputs`.
 
-Discover `import_summary.json` with a separate bounded summary query. A broad
-artifact listing can truncate before reaching a summary; in that case summary
-status can still be complete while categorized artifact details are partial.
+For the latest completed attempt, read `staging_version.txt` and then the exact
+`<version>/import_summary.json`. Verify its import and job IDs before using it.
+For an older run, use date-scoped summary candidates and stop when one exact job
+ID matches. Never list every summary or every object below the import prefix.
+
+List artifacts only below an already selected `<version>/` directory. Summary
+status and artifact inventory are separate operations; do not list artifacts
+merely to determine status.
 
 ## Categories
 

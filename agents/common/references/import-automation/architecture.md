@@ -53,7 +53,6 @@ silent precedence rule.
 
 ## Execution paths
 
-The detailed V1 collector supports the current `CLOUD_BATCH` path. The
-Scheduler code also supports GKE, GAE, and Cloud Run. Recognize and report
-those target types as unsupported for full V1 correlation rather than treating
-them as Batch.
+The current recipes cover the `CLOUD_BATCH` path. The Scheduler code also
+supports GKE, GAE, and Cloud Run. Recognize and report those target types as
+unsupported for full V1 correlation rather than treating them as Batch.

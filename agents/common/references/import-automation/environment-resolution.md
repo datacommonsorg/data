@@ -43,13 +43,14 @@ not exist.
 ## Review before cloud access
 
 Do not review infrastructure for a local-only request. Before a cloud-backed
-request, run the repository infrastructure preview with the same environment,
-explicit values, UTC window, and limits intended for collection.
+request, select the minimum recipes and read their production candidates from
+repository configuration. Print only the resources those recipes require,
+together with sources, UTC bounds, and limits.
 
-Print every candidate and source before the first cloud call. Ask once in an
-interactive session. Only when the prompt explicitly declares a headless run,
-print `review: skipped (headless)` and proceed without pausing. Do not proceed
-when `ready_for_cloud` is false.
+Ask once before the first cloud call in an interactive session. Only when the
+prompt explicitly declares a headless run, print `review: skipped (headless)`
+and proceed without pausing. Do not proceed while a required value is missing
+or conflicting.
 
 Application Default Credentials identify the caller; they do not select a
 project or database. Never use MCP tools, IDE database connections, plugins,

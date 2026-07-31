@@ -11,59 +11,39 @@ Use this path when the user supplies one globally unique `import_name`.
 
 ## Procedure
 
-1. Resolve the name:
-
-   ```bash
-   ./agents/common/run_python.sh \
-     agents/common/import_support/resolve_import.py \
-     --import_name=<IMPORT_NAME>
-   ```
-
-2. Read the returned manifest specification and existing referenced source
-   paths. Report zero or multiple matches; never choose a near match.
-3. If the request asks only for code, manifest, validation, or configured
-   auto-refresh information, answer from local evidence and stop. Do not preview
-   infrastructure or query GCP.
-4. For a cloud-backed request, run the local preview with the intended UTC
-   window, limits, environment, and explicit user-provided values:
-
-   ```bash
-   ./agents/common/run_python.sh \
-     agents/common/import_support/collect_import_snapshot.py \
-     --mode=single_import \
-     --import_name=<IMPORT_NAME> \
-     --environment=<ENVIRONMENT> \
-     --start_time=<RFC3339_UTC> \
-     --end_time=<RFC3339_UTC> \
-     --run_limit=<LIMIT> \
-     --preview_infrastructure
-   ```
-
-   Omit redundant production infrastructure flags. Include each explicit user
-   selection and every required non-production coordinate.
-5. Print the proposed values and sources. Ask once before cloud access in an
-   interactive session. In a prompt-declared headless run, print
-   `review: skipped (headless)` and continue only when `ready_for_cloud` is
-   true.
-6. After approval or headless review, rerun the exact command without
-   `--preview_infrastructure` and add `--verbose`. Progress is written to stderr;
-   the schema-valid snapshot remains on stdout.
-7. Default to the latest ten matching Workflow executions within 90 days.
-8. Present identity/code, configured and deployed auto-refresh state, resource
-   links, latest run, latest semantic success, recent runs, actual artifacts,
-   current state, version events, downstream ingestion events, pointers, and
-   provenance confidence. If bounded Workflow and Spanner evidence do not
-   contain a success, report the latest-success result as incomplete.
-9. End with the exact Scheduler, Workflow, Batch, GCS, and Spanner resources
-   actually used. Mark unresolved or skipped resources explicitly.
+1. Resolve the name with the
+   [resolve-import recipe](../../../common/recipes/repository/resolve-import.md).
+2. Read the returned manifest and existing referenced source paths. Report zero
+   or multiple matches; never choose a near match.
+3. If the question is local-only, answer and stop without reviewing or querying
+   cloud infrastructure.
+4. For cloud-backed questions, write a minimal evidence plan. For example:
+   - Deployment only: Scheduler description.
+   - Last run: Scheduler verification and one matching Workflow execution.
+   - Last ten runs: Scheduler verification and ten matching Workflow executions.
+   - Current publication state: add one current Spanner query.
+   - Selected run artifacts: add one version pointer or exact version listing.
+5. Preview only the resources needed by that plan and follow the cloud approval
+   gate in `SKILL.md`.
+6. Invoke the selected recipes in dependency order. Stop as soon as the answer
+   is supported.
+7. Default a request for “the last run” to one matching execution within the
+   previous 90 days. State when scan truncation makes that result incomplete.
+8. For semantic status after Workflow success, use one source first:
+   - Query current `ImportStatus` and accept it only if `JobId` matches; or
+   - Read `staging_version.txt`, then its exact `import_summary.json`, and verify
+     both import name and job ID.
+9. Fetch Batch, tasks, logs, artifacts, ingestion history, or provenance only
+   when the question requires those details.
+10. End with `Infrastructure actually used`, including skipped and unresolved
+    components.
 
 ## Clarify instead of guessing
 
-Ask the user when the Scheduler project/location cannot be resolved, more than
-one live deployment matches, explicit sources conflict, or live evidence
-conflicts with the selected scope. A missing resource or permission is a
-result, not permission to search every project. Never use ambient or MCP-backed
-infrastructure as a fallback.
+Ask when Scheduler project/location cannot be resolved, more than one live
+deployment matches, explicit sources conflict, or live evidence conflicts with
+the selected scope. A missing resource or permission is a result, not permission
+to search every project.
 
 ## Do not diagnose
 
