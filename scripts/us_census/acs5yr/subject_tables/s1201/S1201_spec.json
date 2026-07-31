@@ -7,6 +7,7 @@
             "statType": "measuredValue",
             "measuredProperty": "count",
             "age": "[15 - Years]"
+        
         },
         "Margin of Error": {
             "statType": "marginOfError",
@@ -27,7 +28,7 @@
             "Females 16 years and over": "[16 - Years]",
             "Males 15 years and over": "[15 - Years]",
             "Females 15 years and over": "[15 - Years]"
-        },
+            },
         "gender": {
             "Males 15 years and over": "Male",
             "Males 16 years and over": "Male",
@@ -46,6 +47,7 @@
             "Hispanic or Latino origin (of any race)": "HispanicOrLatino",
             "White alone, not Hispanic or Latino": "WhiteAloneNotHispanicOrLatino"
         },
+
         "maritalStatus": {
             "Now married (except separated)": "MarriedAndNotSeparated",
             "Widowed": "Widowed",
@@ -61,7 +63,7 @@
         "employmentStatus": {
             "In labor force": "BLS_InLaborForce"
         },
-        "nativity": {
+        "nativity":{
             "Native": "USC_Native",
             "Foreign born": "USC_ForeignBorn"
         }
@@ -77,19 +79,20 @@
             }
         }
     ],
-    "ignoreColumns": [
+
+   "ignoreColumns": [
         "id",
         "Geographic Area Name",
         "PERCENT ALLOCATED",
         "PERCENT IMPUTED",
-        "Population 15 years and over.1",
-        "SUMMARY INDICATOR"
-    ],
-    "preprocess": {
-        "find_and_replace": {
+        "Population 15 years and over.1"
+   ],
+
+   "preprocess": {
+        "find_and_replace":{
             "Total!!Estimate!!15 to 19 years": "Total!!Estimate!!AGE AND SEX!!Males 15 years and over!!15 to 19 years",
             "Total!!Margin of Error!!15 to 19 years": "Total!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!15 to 19 years",
-            "Total!!Estimate!!20 to 34 years": "Total!!Estimate!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
+            "Total!!Estimate!!20 to 34 years":"Total!!Estimate!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
             "Total!!Margin of Error!!20 to 34 years": "Total!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
             "Total!!Estimate!!35 to 44 years": "Total!!Estimate!!AGE AND SEX!!Males 15 years and over!!35 to 44 years",
             "Total!!Margin of Error!!35 to 44 years": "Total!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!35 to 44 years",
@@ -99,9 +102,10 @@
             "Total!!Margin of Error!!55 to 64 years": "Total!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!55 to 64 years",
             "Total!!Estimate!!65 years and over": "Total!!Estimate!!AGE AND SEX!!Males 15 years and over!!65 years and over",
             "Total!!Margin of Error!!65 years and over": "Total!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!65 years and over",
+
             "Now married (except separated)!!Estimate!!15 to 19 years": "Now married (except separated)!!Estimate!!AGE AND SEX!!Males 15 years and over!!15 to 19 years",
             "Now married (except separated)!!Margin of Error!!15 to 19 years": "Now married (except separated)!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!15 to 19 years",
-            "Now married (except separated)!!Estimate!!20 to 34 years": "Now married (except separated)!!Estimate!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
+            "Now married (except separated)!!Estimate!!20 to 34 years":"Now married (except separated)!!Estimate!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
             "Now married (except separated)!!Margin of Error!!20 to 34 years": "Now married (except separated)!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
             "Now married (except separated)!!Estimate!!35 to 44 years": "Now married (except separated)!!Estimate!!AGE AND SEX!!Males 15 years and over!!35 to 44 years",
             "Now married (except separated)!!Margin of Error!!35 to 44 years": "Now married (except separated)!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!35 to 44 years",
@@ -111,9 +115,10 @@
             "Now married (except separated)!!Margin of Error!!55 to 64 years": "Now married (except separated)!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!55 to 64 years",
             "Now married (except separated)!!Estimate!!65 years and over": "Now married (except separated)!!Estimate!!AGE AND SEX!!Males 15 years and over!!65 years and over",
             "Now married (except separated)!!Margin of Error!!65 years and over": "Now married (except separated)!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!65 years and over",
+
             "Widowed!!Estimate!!15 to 19 years": "Widowed!!Estimate!!AGE AND SEX!!Males 15 years and over!!15 to 19 years",
             "Widowed!!Margin of Error!!15 to 19 years": "Widowed!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!15 to 19 years",
-            "Widowed!!Estimate!!20 to 34 years": "Widowed!!Estimate!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
+            "Widowed!!Estimate!!20 to 34 years":"Widowed!!Estimate!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
             "Widowed!!Margin of Error!!20 to 34 years": "Widowed!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
             "Widowed!!Estimate!!35 to 44 years": "Widowed!!Estimate!!AGE AND SEX!!Males 15 years and over!!35 to 44 years",
             "Widowed!!Margin of Error!!35 to 44 years": "Widowed!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!35 to 44 years",
@@ -123,9 +128,10 @@
             "Widowed!!Margin of Error!!55 to 64 years": "Widowed!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!55 to 64 years",
             "Widowed!!Estimate!!65 years and over": "Widowed!!Estimate!!AGE AND SEX!!Males 15 years and over!!65 years and over",
             "Widowed!!Margin of Error!!65 years and over": "Widowed!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!65 years and over",
+
             "Divorced!!Estimate!!15 to 19 years": "Divorced!!Estimate!!AGE AND SEX!!Males 15 years and over!!15 to 19 years",
             "Divorced!!Margin of Error!!15 to 19 years": "Divorced!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!15 to 19 years",
-            "Divorced!!Estimate!!20 to 34 years": "Divorced!!Estimate!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
+            "Divorced!!Estimate!!20 to 34 years":"Divorced!!Estimate!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
             "Divorced!!Margin of Error!!20 to 34 years": "Divorced!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
             "Divorced!!Estimate!!35 to 44 years": "Divorced!!Estimate!!AGE AND SEX!!Males 15 years and over!!35 to 44 years",
             "Divorced!!Margin of Error!!35 to 44 years": "Divorced!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!35 to 44 years",
@@ -135,9 +141,10 @@
             "Divorced!!Margin of Error!!55 to 64 years": "Divorced!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!55 to 64 years",
             "Divorced!!Estimate!!65 years and over": "Divorced!!Estimate!!AGE AND SEX!!Males 15 years and over!!65 years and over",
             "Divorced!!Margin of Error!!65 years and over": "Divorced!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!65 years and over",
+
             "Separated!!Estimate!!15 to 19 years": "Separated!!Estimate!!AGE AND SEX!!Males 15 years and over!!15 to 19 years",
             "Separated!!Margin of Error!!15 to 19 years": "Separated!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!15 to 19 years",
-            "Separated!!Estimate!!20 to 34 years": "Separated!!Estimate!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
+            "Separated!!Estimate!!20 to 34 years":"Separated!!Estimate!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
             "Separated!!Margin of Error!!20 to 34 years": "Separated!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
             "Separated!!Estimate!!35 to 44 years": "Separated!!Estimate!!AGE AND SEX!!Males 15 years and over!!35 to 44 years",
             "Separated!!Margin of Error!!35 to 44 years": "Separated!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!35 to 44 years",
@@ -147,9 +154,10 @@
             "Separated!!Margin of Error!!55 to 64 years": "Separated!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!55 to 64 years",
             "Separated!!Estimate!!65 years and over": "Separated!!Estimate!!AGE AND SEX!!Males 15 years and over!!65 years and over",
             "Separated!!Margin of Error!!65 years and over": "Separated!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!65 years and over",
+
             "Never married!!Estimate!!15 to 19 years": "Never married!!Estimate!!AGE AND SEX!!Males 15 years and over!!15 to 19 years",
             "Never married!!Margin of Error!!15 to 19 years": "Never married!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!15 to 19 years",
-            "Never married!!Estimate!!20 to 34 years": "Never married!!Estimate!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
+            "Never married!!Estimate!!20 to 34 years":"Never married!!Estimate!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
             "Never married!!Margin of Error!!20 to 34 years": "Never married!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!20 to 34 years",
             "Never married!!Estimate!!35 to 44 years": "Never married!!Estimate!!AGE AND SEX!!Males 15 years and over!!35 to 44 years",
             "Never married!!Margin of Error!!35 to 44 years": "Never married!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!35 to 44 years",
@@ -159,53 +167,104 @@
             "Never married!!Margin of Error!!55 to 64 years": "Never married!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!55 to 64 years",
             "Never married!!Estimate!!65 years and over": "Never married!!Estimate!!AGE AND SEX!!Males 15 years and over!!65 years and over",
             "Never married!!Margin of Error!!65 years and over": "Never married!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!65 years and over",
+
+
             "Total!!Estimate!!65 years and over!!Females 15 years and over": "Total!!Estimate!!AGE AND SEX!!Females 15 years and over",
-            "Total!!Margin of Error!!65 years and over!!Females 15 years and over": "Total!!Margin of Error!!AGE AND SEX!!Females 15 years and over",
+            "Total!!Margin of Error!!65 years and over!!Females 15 years and over" : "Total!!Margin of Error!!AGE AND SEX!!Females 15 years and over",
+
             "Now married (except separated)!!Estimate!!65 years and over!!Females 15 years and over": "Now married (except separated)!!Estimate!!AGE AND SEX!!Females 15 years and over",
-            "Now married (except separated)!!Margin of Error!!65 years and over!!Females 15 years and over": "Now married (except separated)!!Margin of Error!!AGE AND SEX!!Females 15 years and over",
+            "Now married (except separated)!!Margin of Error!!65 years and over!!Females 15 years and over" : "Now married (except separated)!!Margin of Error!!AGE AND SEX!!Females 15 years and over",
+
             "Widowed!!Estimate!!65 years and over!!Females 15 years and over": "Widowed!!Estimate!!AGE AND SEX!!Females 15 years and over",
-            "Widowed!!Margin of Error!!65 years and over!!Females 15 years and over": "Widowed!!Margin of Error!!AGE AND SEX!!Females 15 years and over",
+            "Widowed!!Margin of Error!!65 years and over!!Females 15 years and over" : "Widowed!!Margin of Error!!AGE AND SEX!!Females 15 years and over",
+
             "Divorced!!Estimate!!65 years and over!!Females 15 years and over": "Divorced!!Estimate!!AGE AND SEX!!Females 15 years and over",
-            "Divorced!!Margin of Error!!65 years and over!!Females 15 years and over": "Divorced!!Margin of Error!!AGE AND SEX!!Females 15 years and over",
+            "Divorced!!Margin of Error!!65 years and over!!Females 15 years and over" : "Divorced!!Margin of Error!!AGE AND SEX!!Females 15 years and over",
+
             "Separated!!Estimate!!65 years and over!!Females 15 years and over": "Separated!!Estimate!!AGE AND SEX!!Females 15 years and over",
-            "Separated!!Margin of Error!!65 years and over!!Females 15 years and over": "Separated!!Margin of Error!!AGE AND SEX!!Females 15 years and over",
+            "Separated!!Margin of Error!!65 years and over!!Females 15 years and over" : "Separated!!Margin of Error!!AGE AND SEX!!Females 15 years and over",
+
             "Never married!!Estimate!!65 years and over!!Females 15 years and over": "Never married!!Estimate!!AGE AND SEX!!Females 15 years and over",
-            "Never married!!Margin of Error!!65 years and over!!Females 15 years and over": "Never married!!Margin of Error!!AGE AND SEX!!Females 15 years and over",
+            "Never married!!Margin of Error!!65 years and over!!Females 15 years and over" : "Never married!!Margin of Error!!AGE AND SEX!!Females 15 years and over",
+
             "15 to 19 years.1": "AGE AND SEX!!Females 15 years and over!!15 to 19 years",
-            "20 to 34 years.1": "AGE AND SEX!!Females 15 years and over!!20 to 34 years",
+            "20 to 34 years.1":"AGE AND SEX!!Females 15 years and over!!20 to 34 years",
             "35 to 44 years.1": "AGE AND SEX!!Females 15 years and over!!35 to 44 years",
             "45 to 54 years.1": "AGE AND SEX!!Females 15 years and over!!45 to 54 years",
             "55 to 64 years.1": "AGE AND SEX!!Females 15 years and over!!55 to 64 years",
             "65 years and over.1": "AGE AND SEX!!Females 15 years and over!!65 years and over",
+
+
             "Total!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force": "Total!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Total!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force": "Total!!Margin of Error!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Total!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over": "Total!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
             "Total!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over": "Total!!Margin of Error!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
+
             "Now married (except separated)!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force": "Now married (except separated)!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Now married (except separated)!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force": "Now married (except separated)!!Margin of Error!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Now married (except separated)!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over": "Now married (except separated)!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
             "Now married (except separated)!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over": "Now married (except separated)!!Margin of Error!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
+
             "Widowed!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force": "Widowed!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Widowed!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force": "Widowed!!Margin of Error!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Widowed!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over": "Widowed!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
             "Widowed!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over": "Widowed!!Margin of Error!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
+
             "Divorced!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force": "Divorced!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Divorced!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force": "Divorced!!Margin of Error!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Divorced!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over": "Divorced!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
             "Divorced!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over": "Divorced!!Margin of Error!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
+
             "Separated!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force": "Separated!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Separated!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force": "Separated!!Margin of Error!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Separated!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over": "Separated!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
             "Separated!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over": "Separated!!Margin of Error!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
+
             "Never married!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force": "Never married!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Never married!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force": "Never married!!Margin of Error!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Never married!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over": "Never married!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
             "Never married!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over": "Never married!!Margin of Error!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
+
             "In labor force.1": "Females 16 years and over!!In labor force"
         }
+   },
+
+   "overwrite_dcids": {
+        "Count_Person_15OrMoreYears_Separated": "Count_Person_Separated",
+        "Count_Person_15OrMoreYears_NeverMarried": "Count_Person_NeverMarried",
+        "Count_Person_15OrMoreYears_Divorced": "Count_Person_Divorced",
+        "Count_Person_15OrMoreYears_Widowed": "Count_Person_Widowed",
+        "Count_Person_15OrMoreYears_MarriedAndNotSeparated": "Count_Person_MarriedAndNotSeparated",
+        "MarginOfError_Count_Person_15OrMoreYears_Separated": "MarginOfError_Count_Person_Separated",
+        "MarginOfError_Count_Person_15OrMoreYears_NeverMarried": "MarginOfError_Count_Person_NeverMarried",
+        "MarginOfError_Count_Person_15OrMoreYears_Divorced": "MarginOfError_Count_Person_Divorced",
+        "MarginOfError_Count_Person_15OrMoreYears_Widowed": "MarginOfError_Count_Person_Widowed",
+        "MarginOfError_Count_Person_15OrMoreYears_MarriedAndNotSeparated": "MarginOfError_Count_Person_MarriedAndNotSeparated",
+
+        "Count_Person_15OrMoreYears_Male_Separated": "Count_Person_Male_Separated",
+        "Count_Person_15OrMoreYears_Male_NeverMarried": "Count_Person_Male_NeverMarried",
+        "Count_Person_15OrMoreYears_Male_Divorced": "Count_Person_Male_Divorced",
+        "Count_Person_15OrMoreYears_Male_Widowed": "Count_Person_Male_Widowed",
+        "Count_Person_15OrMoreYears_Male_MarriedAndNotSeparated": "Count_Person_Male_MarriedAndNotSeparated",
+        "MarginOfError_Count_Person_15OrMoreYears_Male_Separated": "MarginOfError_Count_Person_Male_Separated",
+        "MarginOfError_Count_Person_15OrMoreYears_Male_NeverMarried": "MarginOfError_Count_Person_Male_NeverMarried",
+        "MarginOfError_Count_Person_15OrMoreYears_Male_Divorced": "MarginOfError_Count_Person_Male_Divorced",
+        "MarginOfError_Count_Person_15OrMoreYears_Male_Widowed": "MarginOfError_Count_Person_Male_Widowed",
+        "MarginOfError_Count_Person_15OrMoreYears_Male_MarriedAndNotSeparated": "MarginOfError_Count_Person_Male_MarriedAndNotSeparated",
+
+        "Count_Person_15OrMoreYears_Female_Separated": "Count_Person_Female_Separated",
+        "Count_Person_15OrMoreYears_Female_NeverMarried": "Count_Person_Female_NeverMarried",
+        "Count_Person_15OrMoreYears_Female_Divorced": "Count_Person_Female_Divorced",
+        "Count_Person_15OrMoreYears_Female_Widowed": "Count_Person_Female_Widowed",
+        "Count_Person_15OrMoreYears_Female_MarriedAndNotSeparated": "Count_Person_Female_MarriedAndNotSeparated",
+        "MarginOfError_Count_Person_15OrMoreYears_Female_Separated": "MarginOfError_Count_Person_Female_Separated",
+        "MarginOfError_Count_Person_15OrMoreYears_Female_NeverMarried": "MarginOfError_Count_Person_Female_NeverMarried",
+        "MarginOfError_Count_Person_15OrMoreYears_Female_Divorced": "MarginOfError_Count_Person_Female_Divorced",
+        "MarginOfError_Count_Person_15OrMoreYears_Female_Widowed": "MarginOfError_Count_Person_Female_Widowed",
+        "MarginOfError_Count_Person_15OrMoreYears_Female_MarriedAndNotSeparated": "MarginOfError_Count_Person_Female_MarriedAndNotSeparated"
+
     },
-    "overwrite_dcids": {},
-    "denominators": {
+    "denominators":{
         "Estimate!!Total!!Population 15 years and over": [
             "Estimate!!Now married (except separated)!!Population 15 years and over",
             "Estimate!!Widowed!!Population 15 years and over",
@@ -342,6 +401,7 @@
             "Margin of Error!!Separated MOE!!Population 15 years and over!!AGE AND SEX!!Males 15 years and over!!65 years and over",
             "Margin of Error!!Never married MOE!!Population 15 years and over!!AGE AND SEX!!Males 15 years and over!!65 years and over"
         ],
+
         "Estimate!!Total!!Population 15 years and over!!AGE AND SEX!!Females 15 years and over": [
             "Estimate!!Now married (except separated)!!Population 15 years and over!!AGE AND SEX!!Females 15 years and over",
             "Estimate!!Widowed!!Population 15 years and over!!AGE AND SEX!!Females 15 years and over",
@@ -461,6 +521,8 @@
             "Margin of Error!!Separated MOE!!Population 15 years and over!!AGE AND SEX!!Females 15 years and over!!65 years and over",
             "Margin of Error!!Never married MOE!!Population 15 years and over!!AGE AND SEX!!Females 15 years and over!!65 years and over"
         ],
+
+
         "Estimate!!Total!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": [
             "Estimate!!Now married (except separated)!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
             "Estimate!!Widowed!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
@@ -477,6 +539,7 @@
             "Margin of Error!!Divorced MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
             "Margin of Error!!Separated MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
             "Margin of Error!!Never married MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race"
+
         ],
         "Estimate!!Total!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": [
             "Estimate!!Now married (except separated)!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
@@ -494,6 +557,7 @@
             "Margin of Error!!Divorced MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
             "Margin of Error!!Separated MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
             "Margin of Error!!Never married MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White"
+
         ],
         "Estimate!!Total!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": [
             "Estimate!!Now married (except separated)!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
@@ -511,6 +575,7 @@
             "Margin of Error!!Divorced MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
             "Margin of Error!!Separated MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
             "Margin of Error!!Never married MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American"
+
         ],
         "Estimate!!Total!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": [
             "Estimate!!Now married (except separated)!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
@@ -528,6 +593,7 @@
             "Margin of Error!!Divorced MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
             "Margin of Error!!Separated MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
             "Margin of Error!!Never married MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native"
+
         ],
         "Estimate!!Total!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": [
             "Estimate!!Now married (except separated)!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
@@ -545,6 +611,7 @@
             "Margin of Error!!Divorced MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
             "Margin of Error!!Separated MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
             "Margin of Error!!Never married MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian"
+
         ],
         "Estimate!!Total!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": [
             "Estimate!!Now married (except separated)!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
@@ -562,6 +629,7 @@
             "Margin of Error!!Divorced MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
             "Margin of Error!!Separated MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
             "Margin of Error!!Never married MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander"
+
         ],
         "Estimate!!Total!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": [
             "Estimate!!Now married (except separated)!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
@@ -579,6 +647,7 @@
             "Margin of Error!!Divorced MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
             "Margin of Error!!Separated MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
             "Margin of Error!!Never married MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race"
+
         ],
         "Estimate!!Total!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": [
             "Estimate!!Now married (except separated)!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
@@ -596,6 +665,7 @@
             "Margin of Error!!Divorced MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
             "Margin of Error!!Separated MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
             "Margin of Error!!Never married MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races"
+
         ],
         "Estimate!!Total!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)": [
             "Estimate!!Now married (except separated)!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)",
@@ -613,6 +683,7 @@
             "Margin of Error!!Divorced MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)",
             "Margin of Error!!Separated MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)",
             "Margin of Error!!Never married MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)"
+
         ],
         "Estimate!!Total!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino": [
             "Estimate!!Now married (except separated)!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino",
@@ -630,8 +701,10 @@
             "Margin of Error!!Divorced MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino",
             "Margin of Error!!Separated MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino",
             "Margin of Error!!Never married MOE!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino"
+
         ],
-        "Estimate!!Total!!LABOR FORCE PARTICIPATION!!Males 16 years and over": [
+
+        "Estimate!!Total!!LABOR FORCE PARTICIPATION!!Males 16 years and over":[
             "Estimate!!Now married (except separated)!!LABOR FORCE PARTICIPATION!!Males 16 years and over",
             "Estimate!!Widowed!!LABOR FORCE PARTICIPATION!!Males 16 years and over",
             "Estimate!!Divorced!!LABOR FORCE PARTICIPATION!!Males 16 years and over",
@@ -648,7 +721,7 @@
             "Margin of Error!!Separated MOE!!LABOR FORCE PARTICIPATION!!Males 16 years and over",
             "Margin of Error!!Never married MOE!!LABOR FORCE PARTICIPATION!!Males 16 years and over"
         ],
-        "Estimate!!Total!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force": [
+        "Estimate!!Total!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force":[
             "Estimate!!Now married (except separated)!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Estimate!!Widowed!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Estimate!!Divorced!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
@@ -665,7 +738,7 @@
             "Margin of Error!!Separated MOE!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Margin of Error!!Never married MOE!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force"
         ],
-        "Estimate!!Total!!LABOR FORCE PARTICIPATION!!Females 16 years and over": [
+        "Estimate!!Total!!LABOR FORCE PARTICIPATION!!Females 16 years and over":[
             "Estimate!!Now married (except separated)!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
             "Estimate!!Widowed!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
             "Estimate!!Divorced!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
@@ -682,7 +755,7 @@
             "Margin of Error!!Separated MOE!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
             "Margin of Error!!Never married MOE!!LABOR FORCE PARTICIPATION!!Females 16 years and over"
         ],
-        "Estimate!!Total!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force": [
+        "Estimate!!Total!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force":[
             "Estimate!!Now married (except separated)!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force",
             "Estimate!!Widowed!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force",
             "Estimate!!Divorced!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force",
@@ -699,6 +772,8 @@
             "Margin of Error!!Separated MOE!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force",
             "Margin of Error!!Never married MOE!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force"
         ],
+
+
         "Total!!Estimate!!Population 15 years and over": [
             "Now married (except separated)!!Estimate!!Population 15 years and over",
             "Widowed!!Estimate!!Population 15 years and over",
@@ -795,6 +870,7 @@
             "Separated!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!65 years and over",
             "Never married!!Margin of Error!!AGE AND SEX!!Males 15 years and over!!65 years and over"
         ],
+
         "Total!!Estimate!!AGE AND SEX!!Females 15 years and over": [
             "Now married (except separated)!!Estimate!!AGE AND SEX!!Females 15 years and over",
             "Widowed!!Estimate!!AGE AND SEX!!Females 15 years and over",
@@ -879,6 +955,7 @@
             "Separated!!Margin of Error!!AGE AND SEX!!Females 15 years and over!!65 years and over",
             "Never married!!Margin of Error!!AGE AND SEX!!Females 15 years and over!!65 years and over"
         ],
+
         "Total!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": [
             "Now married (except separated)!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
             "Widowed!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
@@ -890,6 +967,7 @@
             "Divorced!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
             "Separated!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
             "Never married!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race"
+
         ],
         "Total!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": [
             "Now married (except separated)!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
@@ -902,6 +980,7 @@
             "Divorced!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
             "Separated!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
             "Never married!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White"
+
         ],
         "Total!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": [
             "Now married (except separated)!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
@@ -914,6 +993,7 @@
             "Divorced!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
             "Separated!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
             "Never married!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American"
+
         ],
         "Total!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": [
             "Now married (except separated)!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
@@ -926,6 +1006,7 @@
             "Divorced!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
             "Separated!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
             "Never married!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native"
+
         ],
         "Total!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": [
             "Now married (except separated)!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
@@ -938,6 +1019,7 @@
             "Divorced!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
             "Separated!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
             "Never married!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian"
+
         ],
         "Total!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": [
             "Now married (except separated)!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
@@ -950,6 +1032,7 @@
             "Divorced!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
             "Separated!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
             "Never married!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander"
+
         ],
         "Total!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": [
             "Now married (except separated)!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
@@ -962,6 +1045,7 @@
             "Divorced!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
             "Separated!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
             "Never married!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race"
+
         ],
         "Total!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": [
             "Now married (except separated)!!Estimate!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
@@ -974,6 +1058,7 @@
             "Divorced!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
             "Separated!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
             "Never married!!Margin of Error!!Population 15 years and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races"
+
         ],
         "Total!!Estimate!!Hispanic or Latino origin (of any race)": [
             "Now married (except separated)!!Estimate!!Hispanic or Latino origin (of any race)",
@@ -986,6 +1071,7 @@
             "Divorced!!Margin of Error!!Hispanic or Latino origin (of any race)",
             "Separated!!Margin of Error!!Hispanic or Latino origin (of any race)",
             "Never married!!Margin of Error!!Hispanic or Latino origin (of any race)"
+
         ],
         "Total!!Estimate!!White alone, not Hispanic or Latino": [
             "Now married (except separated)!!Estimate!!White alone, not Hispanic or Latino",
@@ -998,8 +1084,10 @@
             "Divorced!!Margin of Error!!White alone, not Hispanic or Latino",
             "Separated!!Margin of Error!!White alone, not Hispanic or Latino",
             "Never married!!Margin of Error!!White alone, not Hispanic or Latino"
+
         ],
-        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over": [
+
+        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over":[
             "Now married (except separated)!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over",
             "Widowed!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over",
             "Divorced!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over",
@@ -1011,7 +1099,7 @@
             "Separated!!Margin of Error!!LABOR FORCE PARTICIPATION!!Males 16 years and over",
             "Never married!!Margin of Error!!LABOR FORCE PARTICIPATION!!Males 16 years and over"
         ],
-        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force": [
+        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force":[
             "Now married (except separated)!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Widowed!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Divorced!!Estimate!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
@@ -1023,7 +1111,7 @@
             "Separated!!Margin of Error!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force",
             "Never married!!Margin of Error!!LABOR FORCE PARTICIPATION!!Males 16 years and over!!In labor force"
         ],
-        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over": [
+        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over":[
             "Now married (except separated)!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
             "Widowed!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
             "Divorced!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
@@ -1035,7 +1123,7 @@
             "Separated!!Margin of Error!!LABOR FORCE PARTICIPATION!!Females 16 years and over",
             "Never married!!Margin of Error!!LABOR FORCE PARTICIPATION!!Females 16 years and over"
         ],
-        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force": [
+        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force":[
             "Now married (except separated)!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force",
             "Widowed!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force",
             "Divorced!!Estimate!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force",
@@ -1047,7 +1135,7 @@
             "Separated!!Margin of Error!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force",
             "Never married!!Margin of Error!!LABOR FORCE PARTICIPATION!!Females 16 years and over!!In labor force"
         ],
-        "Total!!Estimate!!NATIVITY!!Native": [
+        "Total!!Estimate!!NATIVITY!!Native":[
             "Now married (except separated)!!Estimate!!NATIVITY!!Native",
             "Widowed!!Estimate!!NATIVITY!!Native",
             "Divorced!!Estimate!!NATIVITY!!Native",
@@ -1059,7 +1147,7 @@
             "Separated!!Margin of Error!!NATIVITY!!Native",
             "Never married!!Margin of Error!!NATIVITY!!Native"
         ],
-        "Total!!Estimate!!NATIVITY!!Foreign born": [
+        "Total!!Estimate!!NATIVITY!!Foreign born":[
             "Now married (except separated)!!Estimate!!NATIVITY!!Foreign born",
             "Widowed!!Estimate!!NATIVITY!!Foreign born",
             "Divorced!!Estimate!!NATIVITY!!Foreign born",
@@ -1071,6 +1159,8 @@
             "Separated!!Margin of Error!!NATIVITY!!Foreign born",
             "Never married!!Margin of Error!!NATIVITY!!Foreign born"
         ],
+
+
         "Total!!Estimate!!15 to 19 years": [
             "Now married (except separated)!!Estimate!!15 to 19 years",
             "Widowed!!Estimate!!15 to 19 years",
@@ -1083,6 +1173,7 @@
             "Separated!!Margin of Error!!15 to 19 years",
             "Never married!!Margin of Error!!15 to 19 years"
         ],
+
         "Total!!Estimate!!20 to 34 years": [
             "Now married (except separated)!!Estimate!!20 to 34 years",
             "Widowed!!Estimate!!20 to 34 years",
@@ -1143,6 +1234,7 @@
             "Separated!!Margin of Error!!65 years and over",
             "Never married!!Margin of Error!!65 years and over"
         ],
+
         "Total!!Estimate!!65 years and over!!Females 15 years and over": [
             "Now married (except separated)!!Estimate!!65 years and over!!Females 15 years and over",
             "Widowed!!Estimate!!65 years and over!!Females 15 years and over",
@@ -1155,6 +1247,7 @@
             "Separated!!Margin of Error!!65 years and over!!Females 15 years and over",
             "Never married!!Margin of Error!!65 years and over!!Females 15 years and over"
         ],
+
         "Total!!Estimate!!15 to 19 years.1": [
             "Now married (except separated)!!Estimate!!15 to 19 years.1",
             "Widowed!!Estimate!!15 to 19 years.1",
@@ -1227,6 +1320,7 @@
             "Separated!!Margin of Error!!65 years and over.1",
             "Never married!!Margin of Error!!65 years and over.1"
         ],
+
         "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": [
             "Now married (except separated)!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
             "Widowed!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
@@ -1238,6 +1332,7 @@
             "Divorced!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
             "Separated!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
             "Never married!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race"
+
         ],
         "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": [
             "Now married (except separated)!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
@@ -1250,6 +1345,7 @@
             "Divorced!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
             "Separated!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White",
             "Never married!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White"
+
         ],
         "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": [
             "Now married (except separated)!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
@@ -1262,6 +1358,7 @@
             "Divorced!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
             "Separated!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American",
             "Never married!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American"
+
         ],
         "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": [
             "Now married (except separated)!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
@@ -1274,6 +1371,7 @@
             "Divorced!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
             "Separated!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native",
             "Never married!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native"
+
         ],
         "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": [
             "Now married (except separated)!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
@@ -1286,6 +1384,7 @@
             "Divorced!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
             "Separated!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian",
             "Never married!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian"
+
         ],
         "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": [
             "Now married (except separated)!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
@@ -1298,6 +1397,7 @@
             "Divorced!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
             "Separated!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander",
             "Never married!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander"
+
         ],
         "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": [
             "Now married (except separated)!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
@@ -1310,6 +1410,7 @@
             "Divorced!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
             "Separated!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
             "Never married!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race"
+
         ],
         "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": [
             "Now married (except separated)!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
@@ -1322,8 +1423,10 @@
             "Divorced!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
             "Separated!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
             "Never married!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races"
+
         ],
-        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force": [
+
+        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force":[
             "Now married (except separated)!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force",
             "Widowed!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force",
             "Divorced!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force",
@@ -1335,7 +1438,7 @@
             "Separated!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force",
             "Never married!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force"
         ],
-        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over": [
+        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over":[
             "Now married (except separated)!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over",
             "Widowed!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over",
             "Divorced!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over",
@@ -1347,7 +1450,7 @@
             "Separated!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over",
             "Never married!!Margin of Error!!LABOR FORCE PARTICIPATION!!In labor force!!Females 16 years and over"
         ],
-        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force.1": [
+        "Total!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force.1":[
             "Now married (except separated)!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force.1",
             "Widowed!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force.1",
             "Divorced!!Estimate!!LABOR FORCE PARTICIPATION!!In labor force.1",
