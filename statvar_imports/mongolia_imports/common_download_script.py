@@ -200,7 +200,7 @@ def find_table_path(session, table_id):
     
     sectors_url = "https://data.1212.mn/api/v1/en/NSO"
     try:
-        r = session.get(sectors_url)
+        r = session.get(sectors_url, timeout=60)
         if r.status_code != 200:
             return None
         sectors = r.json()
@@ -215,7 +215,7 @@ def find_table_path(session, table_id):
             continue
         subsectors_url = f"https://data.1212.mn/api/v1/en/NSO/{sector_id}"
         try:
-            r = session.get(subsectors_url)
+            r = session.get(subsectors_url, timeout=60)
             if r.status_code != 200:
                 continue
             subsectors = r.json()
@@ -228,7 +228,7 @@ def find_table_path(session, table_id):
                 continue
             tables_url = f"https://data.1212.mn/api/v1/en/NSO/{sector_id}/{subsector_id}"
             try:
-                r = session.get(tables_url)
+                r = session.get(tables_url, timeout=60)
                 if r.status_code != 200:
                     continue
                 tables = r.json()
@@ -290,8 +290,8 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
         en_meta_url = f"https://data.1212.mn/api/v1/en/NSO/{sector_id}/{subsector_id}/{table_filename}"
         mn_meta_url = f"https://data.1212.mn/api/v1/mn/NSO/{sector_id}/{subsector_id}/{table_filename}"
         
-        en_meta_res = session.get(en_meta_url)
-        mn_meta_res = session.get(mn_meta_url)
+        en_meta_res = session.get(en_meta_url, timeout=60)
+        mn_meta_res = session.get(mn_meta_url, timeout=60)
         
         if en_meta_res.status_code != 200 or mn_meta_res.status_code != 200:
             error_msg = f"FATAL ERROR for {table_id}: Failed to fetch metadata (EN: {en_meta_res.status_code}, MN: {mn_meta_res.status_code})"
@@ -310,7 +310,7 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
             }
         }
         headers = {"Content-Type": "application/json"}
-        response = session.post(data_url, headers=headers, json=payload)
+        response = session.post(data_url, headers=headers, json=payload, timeout=60)
 
         # Check status code first
         if response.status_code == 200:
@@ -324,17 +324,17 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
             logging.info("Success! Response data received.")
 
             # Map variables
-            variables = en_meta["variables"]
+            variables = en_meta.get("variables", [])
             period_var_idx = -1
             for idx, var in enumerate(variables):
-                code_lower = var.get("code", "").lower()
-                text_lower = var.get("text", "").lower()
+                code_lower = var.get("code", "").lower() if var else ""
+                text_lower = var.get("text", "").lower() if var else ""
                 if any(p in code_lower or p in text_lower for p in ["year", "period", "time", "month", "он", "сар"]):
                     period_var_idx = idx
                     break
                     
             class_vars = []
-            for idx, (en_v, mn_v) in enumerate(zip(en_meta["variables"], mn_meta["variables"])):
+            for idx, (en_v, mn_v) in enumerate(zip(en_meta.get("variables", []), mn_meta.get("variables", []))):
                 if idx != period_var_idx:
                     class_vars.append((idx, en_v, mn_v))
                     
@@ -351,12 +351,14 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
                 row_data = {}
                 row_data["DTVAL_CO"] = vals[0]
                 
-                if period_var_idx != -1:
+                if period_var_idx != -1 and period_var_idx < len(keys):
                     period_key = keys[period_var_idx]
-                    en_var = en_meta["variables"][period_var_idx]
+                    en_var = en_meta.get("variables", [])[period_var_idx] if period_var_idx < len(en_meta.get("variables", [])) else None
+                    en_values = en_var.get("values", []) if en_var else []
+                    en_texts = en_var.get("valueTexts", []) if en_var else []
                     try:
-                        val_idx = en_var["values"].index(period_key)
-                        row_data["Period"] = en_var["valueTexts"][val_idx]
+                        val_idx = en_values.index(period_key)
+                        row_data["Period"] = en_texts[val_idx] if val_idx < len(en_texts) else period_key
                     except ValueError:
                         row_data["Period"] = period_key
                 else:
@@ -364,11 +366,14 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
                     
                 for i, (var_idx, en_v, mn_v) in enumerate(class_vars):
                     suffix = str(N - 1 - i) if i < N - 1 else ""
-                    key_val = keys[var_idx]
+                    key_val = keys[var_idx] if var_idx < len(keys) else ""
+                    en_values = en_v.get("values", []) if en_v else []
+                    en_texts = en_v.get("valueTexts", []) if en_v else []
+                    mn_texts = mn_v.get("valueTexts", []) if mn_v else []
                     try:
-                        val_idx = en_v["values"].index(key_val)
-                        en_text = en_v["valueTexts"][val_idx]
-                        mn_text = mn_v["valueTexts"][val_idx]
+                        val_idx = en_values.index(key_val)
+                        en_text = en_texts[val_idx] if val_idx < len(en_texts) else key_val
+                        mn_text = mn_texts[val_idx] if val_idx < len(mn_texts) else key_val
                     except ValueError:
                         en_text = key_val
                         mn_text = key_val
