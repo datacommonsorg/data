@@ -38,14 +38,16 @@ description: Retrieves read-only information about Data Commons imports, includi
 
 - For exactly one globally unique `import_name`, read
   [Single-import inspection](references/single-import.md).
-- For imports matching time, state, name, auto-refresh, or repeated-failure
+- For manifest-only name or configured auto-refresh criteria, read
+  [Repository catalog](references/repository-catalog.md).
+- For imports matching execution time, operational state, or repeated-failure
   criteria, read [Fleet search](references/fleet-search.md).
 
 ## Common workflow
 
-1. Resolve the import name only from `statvar_imports/**/manifest.json` and
-   `scripts/**/manifest.json` with
-   `../../common/import_support/resolve_import.py`.
+1. Resolve one exact import with `resolve_import.py`, or run a bounded local
+   catalog query with `list_imports.py`. Scan only
+   `statvar_imports/**/manifest.json` and `scripts/**/manifest.json`.
 2. Read the selected manifest specification and referenced local source files.
    A cron schedule proves configured intent, not a deployed Scheduler job.
 3. Resolve infrastructure coordinates from explicit user context, versioned
@@ -83,6 +85,7 @@ description: Retrieves read-only information about Data Commons imports, includi
 | Need | Read and follow |
 |---|---|
 | Resolve an import | [Resolve import](../../common/recipes/repository/resolve-import.md) |
+| Search configured imports | [List repository imports](../../common/recipes/repository/list-imports.md) |
 | Verify Scheduler and target | [Describe Scheduler job](../../common/recipes/gcp/scheduler/describe-job.md) |
 | List exact logical runs | [List import executions](../../common/recipes/gcp/workflows/list-import-executions.md) |
 | Inspect Batch and tasks | [Describe Batch job and tasks](../../common/recipes/gcp/batch/describe-job-and-tasks.md) |

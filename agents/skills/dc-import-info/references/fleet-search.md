@@ -1,12 +1,14 @@
 # Fleet search
 
-Use this path for bounded questions about multiple imports.
+Use this path for bounded live operational questions about multiple imports.
+For manifest-only name or configured cron queries, use repository catalog
+instead.
 
 ## Supported criteria
 
 - UTC start/end time.
 - Composite status: `failed`, `running`, `succeeded`, `skipped`, or `unknown`.
-- Case-insensitive import-name substring.
+- Optional case-insensitive import-name substring combined with live criteria.
 - Minimum consecutive terminal semantic failures.
 
 Default to production, the previous 24 hours, and at most 100 imports. If the

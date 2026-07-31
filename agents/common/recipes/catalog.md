@@ -6,6 +6,7 @@ specific recipe they need rather than load this catalog in full.
 | Recipe ID | Outcome |
 |---|---|
 | `repository.resolve-import` | Resolve a unique import name and local code |
+| `repository.list-imports` | Search bounded repository-configured imports |
 | `gcp.scheduler.describe-job` | Verify Scheduler and decode its Workflow target |
 | `gcp.workflows.list-import-executions` | List exact bounded logical runs |
 | `gcp.batch.describe-job-and-tasks` | Inspect compute and task status |
