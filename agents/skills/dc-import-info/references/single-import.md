@@ -33,9 +33,11 @@ Use this path when the user supplies one globally unique `import_name`.
      --import_name=<IMPORT_NAME> \
      --environment=<ENVIRONMENT> \
      --scheduler_project=<PROJECT> \
-     --scheduler_location=<LOCATION>
+     --scheduler_location=<LOCATION> \
+     --verbose
    ```
 
+   Progress is written to stderr; the schema-valid snapshot remains on stdout.
 5. Default to the latest ten matching Workflow executions within 90 days.
 6. Present identity/code, configured and deployed auto-refresh state, resource
    links, latest run, latest semantic success, recent runs, actual artifacts,

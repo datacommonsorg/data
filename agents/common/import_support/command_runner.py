@@ -15,9 +15,11 @@
 
 from collections.abc import Sequence
 import json
+import logging
 from pathlib import Path
 import re
 import subprocess
+import time
 from typing import Any
 
 _ALLOWED_GCLOUD_PREFIXES = (
@@ -37,6 +39,7 @@ _SENSITIVE_KEY = re.compile(
     r'(access.?token|api.?key|authorization|credential|oauth|password|private.?key|secret)',
     re.IGNORECASE)
 _MAX_ERROR_LENGTH = 2000
+_LOGGER = logging.getLogger(__name__)
 
 
 class CommandError(RuntimeError):
@@ -92,30 +95,59 @@ def _safe_error(stderr: str, stdout: str) -> str:
     return message[:_MAX_ERROR_LENGTH]
 
 
+def _safe_operation_summary(args: Sequence[str]) -> str:
+    operation = next(prefix for prefix in _ALLOWED_GCLOUD_PREFIXES
+                     if tuple(args[1:1 + len(prefix)]) == prefix)
+    details = [f'gcloud {" ".join(operation)}']
+    remaining = args[1 + len(operation):]
+    if remaining and not remaining[0].startswith('--') and operation != (
+            'logging', 'read'):
+        details.append(f'target={remaining[0]}')
+    for flag in ('--project', '--location', '--region', '--job',
+                 '--revision-id'):
+        for arg in args:
+            if arg.startswith(f'{flag}='):
+                details.append(arg)
+                break
+    return ' '.join(details)
+
+
 class ReadOnlyCommandRunner:
     """Executes validated gcloud commands without a shell."""
 
-    def __init__(self, repo_root: Path, default_timeout: int = 90):
+    def __init__(self,
+                 repo_root: Path,
+                 default_timeout: int = 90,
+                 verbose: bool = False):
         self._repo_root = repo_root.resolve()
         self._default_timeout = default_timeout
+        self._verbose = verbose
 
     def _run(self,
              args: Sequence[str],
              expect_json: bool,
              timeout: int | None = None) -> str:
         _validate_gcloud_args(args, expect_json)
+        command = _safe_operation_summary(args)
+        effective_timeout = timeout or self._default_timeout
+        started = time.monotonic()
+        if self._verbose:
+            _LOGGER.info(f'Starting {command}; timeout={effective_timeout}s')
         try:
             process = subprocess.run(list(args),
                                      cwd=self._repo_root,
                                      check=False,
                                      capture_output=True,
                                      text=True,
-                                     timeout=timeout or self._default_timeout)
+                                     timeout=effective_timeout)
         except (OSError, subprocess.TimeoutExpired) as exc:
             raise CommandError(f'Unable to execute gcloud: {exc}') from exc
         if process.returncode:
             raise CommandError(_safe_error(process.stderr, process.stdout),
                                process.returncode)
+        if self._verbose:
+            elapsed = time.monotonic() - started
+            _LOGGER.info(f'Completed {command}; elapsed={elapsed:.1f}s')
         return process.stdout
 
     def run_json(self, args: Sequence[str], timeout: int | None = None) -> Any:

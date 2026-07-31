@@ -58,4 +58,4 @@ permission denied, or listing truncation.
 ## Related repository sources
 
 `import_executor.py`, `file_uploader.py`, executor config fields, and
-`import-automation/docs/support/artifact-layout.md`.
+[Artifact layout](../../../references/import-automation/artifact-layout.md).

@@ -24,6 +24,7 @@ from unittest import mock
 
 from agents.common.import_support.collect_import_snapshot import build_snapshot
 from agents.common.import_support.collect_import_snapshot import _candidate_import_names
+from agents.common.import_support.collect_import_snapshot import _collector_help
 from agents.common.import_support.collect_import_snapshot import _collect_run
 from agents.common.import_support.collect_import_snapshot import _fleet_matches
 from agents.common.import_support.collect_import_snapshot import _latest_successful_run
@@ -102,7 +103,16 @@ class CollectImportSnapshotTest(unittest.TestCase):
             history_limit=10,
             build_project='',
             build_region='global',
+            verbose=False,
         )
+
+    def test_help_lists_collector_flags(self):
+        help_text = _collector_help()
+
+        for flag in ('--mode', '--import_name', '--scheduler_project',
+                     '--start_time', '--run_limit', '--[no]verbose'):
+            with self.subTest(flag=flag):
+                self.assertIn(flag, help_text)
 
     def test_missing_cloud_access_returns_valid_partial_snapshot(self):
         with tempfile.TemporaryDirectory() as temp_dir:

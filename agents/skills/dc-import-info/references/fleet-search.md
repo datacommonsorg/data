@@ -35,9 +35,11 @@ truncation.
      --scheduler_location=<LOCATION> \
      --start_time=<RFC3339_UTC> \
      --end_time=<RFC3339_UTC> \
-     --status=<STATUS>
+     --status=<STATUS> \
+     --verbose
    ```
 
+   Progress is written to stderr; the schema-valid snapshot remains on stdout.
 6. Return a compact table first, then details only for imports needed to answer
    the question. State scan/result limits and whether data was truncated.
 

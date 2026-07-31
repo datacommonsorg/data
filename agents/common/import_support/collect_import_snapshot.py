@@ -18,7 +18,9 @@ from datetime import datetime
 from datetime import timedelta
 from pathlib import Path
 import json
+import logging
 import sys
+import time
 from typing import Any
 
 from absl import app
@@ -77,6 +79,10 @@ def _define_enum(*args, **kwargs):
     return flags.DEFINE_enum(*args, flag_values=_FLAGS, **kwargs)
 
 
+def _define_boolean(*args, **kwargs):
+    return flags.DEFINE_boolean(*args, flag_values=_FLAGS, **kwargs)
+
+
 _MODE = _define_enum('mode', 'single_import', ['single_import', 'fleet'],
                      'Snapshot mode.')
 _IMPORT_NAME = _define_string('import_name', '', 'Exact manifest import name.')
@@ -130,12 +136,17 @@ _HISTORY_LIMIT = _define_integer('history_limit', 50,
 _BUILD_PROJECT = _define_string('build_project', '',
                                 'Optional Cloud Build project.')
 _BUILD_REGION = _define_string('build_region', 'global', 'Cloud Build region.')
+_VERBOSE = _define_boolean(
+    'verbose', False,
+    'Print safe collection progress and operation timings to stderr.')
 
 _MAX_RUN_LIMIT = 50
 _MAX_IMPORT_LIMIT = 200
 _MAX_LOG_LIMIT = 500
 _MAX_OBJECT_LIMIT = 1000
 _MAX_HISTORY_LIMIT = 100
+_LOGGER = logging.getLogger(__name__)
+_HELP_FLAGS = frozenset(('-?', '--help', '--helpfull', '--helpshort'))
 
 
 class SnapshotError(ValueError):
@@ -173,6 +184,7 @@ class SnapshotOptions:
     history_limit: int
     build_project: str
     build_region: str
+    verbose: bool
 
 
 def _evidence(source_kind: str, source: str, finding: str) -> dict[str, Any]:
@@ -236,7 +248,13 @@ def _build_options() -> SnapshotOptions:
         history_limit=_HISTORY_LIMIT.value,
         build_project=_BUILD_PROJECT.value,
         build_region=_BUILD_REGION.value,
+        verbose=_VERBOSE.value,
     )
+
+
+def _progress(options: SnapshotOptions, message: str) -> None:
+    if options.verbose:
+        _LOGGER.info(message)
 
 
 def _resolve_environment(repo_root: Path,
@@ -733,6 +751,10 @@ def _collect_state_records(runner: ReadOnlyCommandRunner,
         [('ingestion helper', helper_env.get('SPANNER_DATABASE_ID'))], warnings)
     if spanner_project and spanner_instance and spanner_database:
         try:
+            started = time.monotonic()
+            _progress(
+                options, f'Reading Spanner records for {import_name}; '
+                f'history_limit={options.history_limit}')
             result.update(
                 read_spanner_records(spanner_project,
                                      spanner_instance,
@@ -740,6 +762,12 @@ def _collect_state_records(runner: ReadOnlyCommandRunner,
                                      import_name,
                                      options.history_limit,
                                      client=client))
+            _progress(
+                options, f'Completed Spanner records for {import_name}; '
+                f'version_history={len(result.get("version_history", []))}; '
+                'downstream_history='
+                f'{len(result.get("downstream_ingestion_history", []))}; '
+                f'elapsed={time.monotonic() - started:.1f}s')
             links['spanner'] = spanner_link(spanner_project, spanner_instance,
                                             spanner_database)
         except Exception as exc:
@@ -763,6 +791,7 @@ def collect_import(
         workflow: dict[str, Any] | None = None,
         listed_executions: dict[str, Any] | None = None) -> dict[str, Any]:
     """Collects one import without turning missing permissions into guesses."""
+    _progress(options, f'Collecting import {record.absolute_import_name}')
     result = _empty_import(record)
     try:
         scheduler = scheduler or describe_scheduler(
@@ -796,12 +825,24 @@ def collect_import(
                                                 target['workflow'])
     if listed_executions is None:
         try:
+            started = time.monotonic()
+            _progress(
+                options,
+                f'Listing Workflow executions for {target["resource"]}; '
+                f'window={format_rfc3339(options.start_time)}..'
+                f'{format_rfc3339(options.end_time)}; '
+                f'scan_limit={options.scan_limit}')
             listed_executions = list_workflow_execution_records(
                 target['resource'],
                 options.start_time,
                 options.end_time,
                 options.scan_limit,
                 client=workflow_client)
+            _progress(
+                options, 'Completed Workflow execution listing; '
+                f'scanned={listed_executions["scanned_execution_count"]}; '
+                f'pages={listed_executions["page_count"]}; '
+                f'elapsed={time.monotonic() - started:.1f}s')
         except WorkflowExecutionError as exc:
             result['warnings'].append(str(exc))
             listed_executions = {
@@ -816,6 +857,9 @@ def collect_import(
         key: value for key, value in runs_result.items() if key not in ('runs',)
     }
     raw_runs = runs_result['runs']
+    _progress(
+        options, f'Matched {len(raw_runs)} Workflow runs for '
+        f'{record.absolute_import_name}')
     batches = []
     for run in raw_runs:
         try:
@@ -858,6 +902,10 @@ def collect_import(
                                batch.get('unavailable_reason'))))
     gcs = {}
     if gcs_bucket and gcs_project:
+        _progress(
+            options, f'Collecting GCS evidence for '
+            f'{record.absolute_import_name}; object_limit='
+            f'{options.object_limit}')
         gcs = collect_gcs_evidence(
             runner, gcs_project, gcs_bucket,
             record.absolute_import_name.replace(':', '/'), record.import_inputs,
@@ -873,6 +921,12 @@ def collect_import(
         result['links']['gcs'] = gcs_link(
             gcs_project, gcs_bucket,
             record.absolute_import_name.replace(':', '/'))
+        _progress(
+            options,
+            f'Completed GCS evidence for {record.absolute_import_name}; '
+            f'summaries={len(gcs.get("summaries_by_job_id", {}))}; '
+            f'objects={len(gcs.get("objects", []))}; '
+            f'truncated={gcs.get("truncated", False)}')
     else:
         result['warnings'].append(
             'GCS project or bucket is unresolved; skipped artifact reads.')
@@ -942,6 +996,10 @@ def collect_import(
         for run in result['runs']
         if run.get('links', {}).get('batch')
     ]
+    _progress(
+        options, f'Completed import {record.absolute_import_name}; '
+        f'runs={len(result["runs"])}; warnings='
+        f'{len(result["warnings"])}')
     return result
 
 
@@ -1025,11 +1083,21 @@ def collect_fleet(repo_root: Path,
     all_executions = []
     for resource, target in target_by_resource.items():
         try:
+            started = time.monotonic()
+            _progress(
+                options, f'Listing fleet Workflow executions for {resource}; '
+                f'scan_limit={options.scan_limit}')
             listed = list_workflow_execution_records(resource,
                                                      options.start_time,
                                                      options.end_time,
                                                      options.scan_limit,
                                                      client=workflow_client)
+            _progress(
+                options,
+                f'Completed fleet Workflow execution listing for {resource}; '
+                f'scanned={listed["scanned_execution_count"]}; '
+                f'pages={listed["page_count"]}; '
+                f'elapsed={time.monotonic() - started:.1f}s')
             listed_by_resource[resource] = listed
             all_executions.extend(listed['executions'])
             snapshot['query']['truncated'] |= listed['truncated']
@@ -1109,11 +1177,22 @@ def build_snapshot(repo_root: Path,
     """Builds one schema-versioned snapshot."""
     if options.consecutive_failures > options.run_limit:
         raise SnapshotError('consecutive_failures cannot exceed run_limit.')
+    _progress(
+        options, f'Starting snapshot; mode={options.mode}; '
+        f'environment={options.environment}; '
+        f'window={format_rfc3339(options.start_time)}..'
+        f'{format_rfc3339(options.end_time)}')
     environment = _resolve_environment(repo_root, options)
     snapshot = _new_snapshot(options, environment)
-    command_runner = runner or ReadOnlyCommandRunner(repo_root)
+    command_runner = runner or ReadOnlyCommandRunner(repo_root,
+                                                     verbose=options.verbose)
     manifest = Path(options.manifest_path) if options.manifest_path else None
+    started = time.monotonic()
+    _progress(options, 'Scanning repository import manifests')
     catalog = build_import_catalog(repo_root, manifest)
+    _progress(
+        options, f'Completed manifest scan; import_names={len(catalog)}; '
+        f'elapsed={time.monotonic() - started:.1f}s')
     if options.mode == 'single_import':
         record = resolve_import(catalog, options.import_name)
         item = collect_import(repo_root, command_runner, options, environment,
@@ -1123,6 +1202,10 @@ def build_snapshot(repo_root: Path,
     else:
         collect_fleet(repo_root, command_runner, options, environment, catalog,
                       snapshot, workflow_client, spanner_client)
+    _progress(
+        options, f'Completed snapshot collection; imports='
+        f'{len(snapshot["imports"])}; warnings='
+        f'{len(snapshot["warnings"])}')
     return snapshot
 
 
@@ -1144,8 +1227,13 @@ def main(argv: list[str]) -> None:
     try:
         repo_root = find_repository_root()
         options = _build_options()
+        if options.verbose:
+            logging.getLogger('agents.common.import_support').setLevel(
+                logging.INFO)
         snapshot = build_snapshot(repo_root, options)
+        _progress(options, 'Validating snapshot schema')
         validate_snapshot(repo_root, snapshot)
+        _progress(options, 'Snapshot schema is valid; writing JSON output')
     except ImportResolutionError as exc:
         print(json.dumps({'error': str(exc)}, indent=2), file=sys.stderr)
         raise SystemExit(2) from exc
@@ -1160,7 +1248,15 @@ def main(argv: list[str]) -> None:
     print(json.dumps(snapshot, indent=2, sort_keys=True))
 
 
+def _collector_help() -> str:
+    return (__doc__ + '\n\nCollector flags:\n' +
+            _FLAGS.get_help(include_special_flags=False))
+
+
 def _parse_flags(argv: list[str]) -> list[str]:
+    if _HELP_FLAGS.intersection(argv[1:]):
+        print(_collector_help())
+        raise SystemExit(0)
     remaining = flags.FLAGS(argv, known_only=True)
     return _FLAGS(remaining)
 

@@ -56,6 +56,38 @@ class CommandRunnerTest(unittest.TestCase):
         self.assertEqual([{'x': 1}], result)
         self.assertNotIn('shell', run_mock.call_args.kwargs)
 
+    @mock.patch('subprocess.run')
+    def test_verbose_logs_safe_operation_and_timing(self, run_mock):
+        run_mock.return_value = subprocess.CompletedProcess([], 0, '[]', '')
+        runner = ReadOnlyCommandRunner(Path.cwd(), verbose=True)
+        args = [
+            'gcloud', 'logging', 'read',
+            'jsonPayload.message="do not log this payload"',
+            '--project=project', '--format=json'
+        ]
+
+        with self.assertLogs(
+                'agents.common.import_support.command_runner') as captured:
+            runner.run_json(args)
+
+        logs = '\n'.join(captured.output)
+        self.assertIn('Starting gcloud logging read --project=project', logs)
+        self.assertIn('Completed gcloud logging read --project=project', logs)
+        self.assertIn('elapsed=', logs)
+        self.assertNotIn('do not log this payload', logs)
+
+    @mock.patch('agents.common.import_support.command_runner._LOGGER.info')
+    @mock.patch('subprocess.run')
+    def test_non_verbose_does_not_log_progress(self, run_mock, log_mock):
+        run_mock.return_value = subprocess.CompletedProcess([], 0, '[]', '')
+
+        ReadOnlyCommandRunner(Path.cwd()).run_json([
+            'gcloud', 'batch', 'jobs', 'list', '--project=project',
+            '--format=json'
+        ])
+
+        log_mock.assert_not_called()
+
     def test_redacts_nested_sensitive_fields(self):
         self.assertEqual({
             'api_key': '<redacted>',

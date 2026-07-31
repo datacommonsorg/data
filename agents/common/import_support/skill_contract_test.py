@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Tests for the repository-local Antigravity skill contract."""
+"""Tests for the repository-local agent skill contract."""
 
 import json
 from pathlib import Path
@@ -21,6 +21,7 @@ import unittest
 from jsonschema import Draft202012Validator
 
 _MARKDOWN_LINK = re.compile(r'\[[^]]+\]\(([^)]+)\)')
+_TEXT_SUFFIXES = {'.json', '.md', '.py', '.sh', '.yaml', '.yml'}
 _RECIPE_HEADINGS = (
     '## Use when',
     '## Required inputs',
@@ -62,9 +63,15 @@ class SkillContractTest(unittest.TestCase):
                 for heading in _RECIPE_HEADINGS:
                     self.assertIn(heading, text)
 
-    def test_skill_direct_links_exist(self):
+    def test_agent_documentation_links_exist(self):
         skill_root = self._repo_root / 'agents/skills/dc-import-info'
-        paths = [skill_root / 'SKILL.md', *skill_root.glob('references/*.md')]
+        common_root = self._repo_root / 'agents/common'
+        paths = [
+            skill_root / 'SKILL.md',
+            *skill_root.glob('references/*.md'),
+            *common_root.glob('references/**/*.md'),
+            *common_root.glob('recipes/**/*.md'),
+        ]
 
         for path in paths:
             for target in _MARKDOWN_LINK.findall(
@@ -73,6 +80,20 @@ class SkillContractTest(unittest.TestCase):
                     continue
                 with self.subTest(source=path, target=target):
                     self.assertTrue((path.parent / target).resolve().is_file())
+
+    def test_reusable_agent_artifacts_are_framework_neutral(self):
+        framework_name = 'anti' + 'gravity'
+        roots = [self._repo_root / '.agents', self._repo_root / 'agents']
+
+        for root in roots:
+            for path in root.rglob('*'):
+                if not path.is_file() or path.suffix not in _TEXT_SUFFIXES:
+                    continue
+                with self.subTest(path=path):
+                    self.assertNotIn(
+                        framework_name,
+                        path.read_text(encoding='utf-8').lower(),
+                    )
 
     def test_python_wrapper_uses_repository_environment_without_minor_pin(self):
         wrapper = (self._repo_root /

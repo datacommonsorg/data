@@ -26,7 +26,7 @@ description: Retrieves read-only information about Data Commons imports, includi
 1. Require the current working directory to be the `data` repository root.
    Verify `statvar_imports/`, `scripts/`, `import-automation/`,
    `requirements_all.txt`, and `run_tests.sh` exist.
-2. Read [Import automation architecture](../../../import-automation/docs/support/architecture.md).
+2. Read [Import automation architecture](../../common/references/import-automation/architecture.md).
 3. Use production by default. Use another environment only when the user asks.
 4. Treat pasted infrastructure information or a user-provided file as
    request-scoped data. Extract explicit values, never persist it, and ask when
@@ -70,15 +70,15 @@ description: Retrieves read-only information about Data Commons imports, includi
 ## Load detailed knowledge only when needed
 
 - For environment selection or conflicts, read
-  [Environment resolution](../../../import-automation/docs/support/environment-resolution.md).
+  [Environment resolution](../../common/references/import-automation/environment-resolution.md).
 - For component and semantic status, read
-  [Run and status model](../../../import-automation/docs/support/run-and-status-model.md).
+  [Run and status model](../../common/references/import-automation/run-and-status-model.md).
 - For GCS files and version pointers, read
-  [Artifact layout](../../../import-automation/docs/support/artifact-layout.md).
+  [Artifact layout](../../common/references/import-automation/artifact-layout.md).
 - For image, build, Workflow revision, or commit questions, read
-  [Runtime provenance](../../../import-automation/docs/support/runtime-provenance.md).
+  [Runtime provenance](../../common/references/import-automation/runtime-provenance.md).
 - For access questions, read
-  [Identity and access](../../../import-automation/docs/support/identity-and-access.md).
+  [Identity and access](../../common/references/import-automation/identity-and-access.md).
 
 ## Route exact operations
 
