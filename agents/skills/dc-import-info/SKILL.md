@@ -7,7 +7,7 @@ description: Retrieves read-only information about Data Commons imports, includi
 
 ## Safety
 
-- Treat GCP and the repository as read-only.
+- Treat GCP and the data repository as read-only.
 - Never run, retry, update, pause, resume, delete, deploy, or mutate a cloud
   resource.
 - Never edit repository files or persist a snapshot unless the user explicitly
@@ -17,6 +17,10 @@ description: Retrieves read-only information about Data Commons imports, includi
 - Retain only allowlisted structured import stage/status log fields. Do not
   return arbitrary log messages or text payloads.
 - Use explicit project, location, time, and result bounds for every cloud query.
+- Use only repository-local helpers, their Python SDK clients, and documented
+  bounded `gcloud` operations. Never use MCP tools, IDE database connections,
+  plugins, connectors, or ambient database configuration for import
+  infrastructure, even when they are available.
 - Report missing permission or evidence; do not obtain broader credentials.
 - Provide operational information only. If the user asks why an import failed
   or how to fix it, use `dc-import-debugging` when available.
@@ -27,11 +31,10 @@ description: Retrieves read-only information about Data Commons imports, includi
    Verify `statvar_imports/`, `scripts/`, `import-automation/`,
    `requirements_all.txt`, and `run_tests.sh` exist.
 2. Read [Import automation architecture](../../common/references/import-automation/architecture.md).
-3. Use production by default. Use another environment only when the user asks.
-4. Treat pasted infrastructure information or a user-provided file as
+3. Treat pasted infrastructure information or a user-provided file as
    request-scoped data. Extract explicit values, never persist it, and ask when
    values are missing, ambiguous, or conflict with repository or live state.
-5. Invoke Python only through `./agents/common/run_python.sh`. If `.env` is
+4. Invoke Python only through `./agents/common/run_python.sh`. If `.env` is
    missing, stop and tell the user to run `./run_tests.sh -r`.
 
 ## Select the request mode
@@ -43,6 +46,30 @@ description: Retrieves read-only information about Data Commons imports, includi
 - For imports matching execution time, operational state, or repeated-failure
   criteria, read [Fleet search](references/fleet-search.md).
 
+## Gate cloud access
+
+1. Classify the request before resolving infrastructure. Code, manifests,
+   configured schedules, validation rules, and repository-catalog searches are
+   local-only. Do not preview infrastructure or access GCP for those requests.
+2. For a cloud-backed request, read
+   [Environment resolution](../../common/references/import-automation/environment-resolution.md)
+   and follow
+   [Preview infrastructure](../../common/recipes/repository/preview-infrastructure.md).
+3. Run the local preview with the same environment, explicit infrastructure,
+   UTC window, and limits intended for collection. Print its proposed
+   Scheduler, Workflow, GCS, helper, and Spanner values, source labels,
+   unresolved fields, and blocked reads.
+4. In an interactive session, ask once for approval and stop before the first
+   cloud call. Continue only after approval.
+5. Only when the prompt explicitly declares a headless run, print
+   `review: skipped (headless)` and continue without pausing. Headless mode does
+   not relax command permissions or permit guessing.
+6. If `ready_for_cloud` is false, ask for missing values interactively. In a
+   headless run, return a partial or blocked result without cloud access.
+7. If explicit sources conflict, do not choose a flag value. If later live
+   evidence conflicts with the selected scope, stop dependent reads and ask in
+   an interactive session or return a partial result in headless mode.
+
 ## Common workflow
 
 1. Resolve one exact import with `resolve_import.py`, or run a bounded local
@@ -50,10 +77,8 @@ description: Retrieves read-only information about Data Commons imports, includi
    `statvar_imports/**/manifest.json` and `scripts/**/manifest.json`.
 2. Read the selected manifest specification and referenced local source files.
    A cron schedule proves configured intent, not a deployed Scheduler job.
-3. Resolve infrastructure coordinates from explicit user context, versioned
-   repository sources, and live read-only descriptions. Record each fact as
-   user-provided, repository-configured, or live-observed. Never silently
-   choose between conflicting values.
+3. After the cloud gate, invoke the snapshot collector with the same arguments
+   used for the preview, excluding `--preview_infrastructure`.
 4. Verify the Scheduler job using its description and decoded
    `argument.importName`, then follow its HTTP target to the exact Workflow.
 5. Treat one Workflow execution as one logical run. Join to Batch through
@@ -86,6 +111,7 @@ description: Retrieves read-only information about Data Commons imports, includi
 |---|---|
 | Resolve an import | [Resolve import](../../common/recipes/repository/resolve-import.md) |
 | Search configured imports | [List repository imports](../../common/recipes/repository/list-imports.md) |
+| Review cloud candidates | [Preview infrastructure](../../common/recipes/repository/preview-infrastructure.md) |
 | Verify Scheduler and target | [Describe Scheduler job](../../common/recipes/gcp/scheduler/describe-job.md) |
 | List exact logical runs | [List import executions](../../common/recipes/gcp/workflows/list-import-executions.md) |
 | Inspect Batch and tasks | [Describe Batch job and tasks](../../common/recipes/gcp/batch/describe-job-and-tasks.md) |
@@ -105,6 +131,10 @@ description: Retrieves read-only information about Data Commons imports, includi
 - Treat `VALIDATION` as a semantic failure and `SKIP` as a completed no-change
   result. Do not infer semantic success from Workflow or Batch success.
 - Show canonical resource names and generated console links.
+- For every cloud-backed answer, include an `Infrastructure actually used`
+  section. List the exact Scheduler, Workflow, Batch, GCS, and Spanner resource
+  names from the snapshot and their evidence sources. Mark each resource that
+  was not queried or could not be resolved.
 - Cite repository files, cloud resources, logs, and GCS/Spanner records used.
 - Label correlations and runtime provenance as `exact`,
   `strongly_correlated`, `time_correlated`, `ambiguous`, or `unknown`.

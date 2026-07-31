@@ -17,14 +17,20 @@ truncation.
 
 ## Procedure
 
-1. Resolve the selected environment and exact Scheduler/Workflow coordinates.
-2. Build the manifest catalog once.
-3. List Workflow executions once for the bounded window using FULL view, parse
+1. Run the local infrastructure preview with the intended environment, exact
+   UTC window, limits, filters, and explicit user-provided values. The preview
+   command must otherwise match the intended collector command.
+2. Print the proposed values and sources. Ask once before cloud access in an
+   interactive session. In a prompt-declared headless run, print
+   `review: skipped (headless)` and continue only when `ready_for_cloud` is
+   true.
+3. Build the manifest catalog once.
+4. List Workflow executions once for the bounded window using FULL view, parse
    `argument.importName`, and group locally by exact import identity.
-4. Apply the name criterion first. Collect verified Batch/GCS status evidence,
+5. Apply the name criterion first. Collect verified Batch/GCS status evidence,
    then apply status and repeated-failure criteria before fetching detailed
    logs, runtime provenance, and Spanner history.
-5. Collect a snapshot:
+6. Collect a snapshot:
 
    ```bash
    ./agents/common/run_python.sh \
@@ -39,9 +45,18 @@ truncation.
      --verbose
    ```
 
-   Progress is written to stderr; the schema-valid snapshot remains on stdout.
-6. Return a compact table first, then details only for imports needed to answer
+   For the preview, replace `--verbose` with `--preview_infrastructure`. Omit
+   redundant production infrastructure flags; include explicit user selections
+   and required non-production coordinates. Progress is written to stderr; the
+   schema-valid snapshot remains on stdout.
+7. Return a compact table first, then details only for imports needed to answer
    the question. State scan/result limits and whether data was truncated.
+8. End with the unique exact Scheduler, Workflow, Batch, GCS, and Spanner
+   resources actually used. Mark unresolved or skipped resources explicitly.
+
+Never use MCP, IDE database connections, plugins, connectors, or ambient
+database configuration. If live evidence conflicts with the selected scope,
+stop dependent reads and ask interactively or return a partial headless result.
 
 ## Status semantics
 

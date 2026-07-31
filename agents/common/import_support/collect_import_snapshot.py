@@ -139,6 +139,9 @@ _BUILD_REGION = _define_string('build_region', 'global', 'Cloud Build region.')
 _VERBOSE = _define_boolean(
     'verbose', False,
     'Print safe collection progress and operation timings to stderr.')
+_PREVIEW_INFRASTRUCTURE = _define_boolean(
+    'preview_infrastructure', False,
+    'Print local infrastructure candidates without cloud access, then exit.')
 
 _MAX_RUN_LIMIT = 50
 _MAX_IMPORT_LIMIT = 200
@@ -257,13 +260,184 @@ def _progress(options: SnapshotOptions, message: str) -> None:
         _LOGGER.info(message)
 
 
+def _selected_value(explicit: str, configured: str) -> dict[str, Any]:
+    value = explicit or configured
+    source = ('user_provided' if explicit else
+              'repo_configured' if configured else 'unresolved')
+    return {
+        'value':
+            value or None,
+        'source':
+            source,
+        'repository_candidate':
+            configured or None,
+        'overrides_repository_candidate':
+            bool(explicit and configured and explicit != configured),
+    }
+
+
+def _helper_service_candidate(repo_root: Path) -> str:
+    helper_script = repo_root / (
+        'import-automation/executor/scripts/update_import_version.sh')
+    if helper_script.is_file() and 'ingestion-helper-service' in (
+            helper_script.read_text(encoding='utf-8')):
+        return 'ingestion-helper-service'
+    return ''
+
+
+def build_infrastructure_preview(repo_root: Path,
+                                 options: SnapshotOptions) -> dict[str, Any]:
+    """Returns repository-derived candidates without accessing the cloud."""
+    defaults = load_executor_defaults(repo_root)
+    use_defaults = options.environment == 'prod'
+    configured_project = str(defaults.get('gcp_project_id') or
+                             '') if use_defaults else ''
+    configured_location = str(defaults.get('scheduler_location') or
+                              '') if use_defaults else ''
+    scheduler_project = _selected_value(options.scheduler_project,
+                                        configured_project)
+    scheduler_location = _selected_value(options.scheduler_location,
+                                         configured_location)
+    project = str(scheduler_project['value'] or '')
+    location = str(scheduler_location['value'] or '')
+
+    configured_workflow = str(defaults.get('cloud_workflow_id') or
+                              '') if use_defaults else ''
+    workflow_resource = ''
+    if project and location and configured_workflow:
+        workflow_resource = (
+            f'projects/{project}/locations/{location}/workflows/'
+            f'{configured_workflow}')
+
+    configured_gcs_project = str(defaults.get('gcs_project_id') or
+                                 '') if use_defaults else ''
+    configured_gcs_bucket = str(defaults.get('storage_prod_bucket_name') or
+                                '') if use_defaults else ''
+    gcs_project = _selected_value(options.gcs_project, configured_gcs_project)
+    gcs_bucket = _selected_value(options.gcs_bucket, configured_gcs_bucket)
+
+    helper_project = _selected_value(options.helper_project, '')
+    if not options.helper_project and project:
+        helper_project['value'] = project
+        helper_project['source'] = 'derived_from_scheduler'
+    helper_location = _selected_value(options.helper_location, '')
+    if not options.helper_location and location:
+        helper_location['value'] = location
+        helper_location['source'] = 'derived_from_scheduler'
+    configured_helper = _helper_service_candidate(
+        repo_root) if use_defaults else ''
+    helper_service = _selected_value(options.helper_service, configured_helper)
+
+    spanner_values = {
+        'project': options.spanner_project or None,
+        'instance': options.spanner_instance or None,
+        'database': options.spanner_database or None,
+    }
+    supplied_spanner = [value for value in spanner_values.values() if value]
+    if len(supplied_spanner) == len(spanner_values):
+        spanner_status = 'selected'
+        spanner_source = 'user_provided'
+    elif supplied_spanner:
+        spanner_status = 'incomplete'
+        spanner_source = 'user_provided'
+    else:
+        spanner_status = 'derive_from_live_ingestion_helper'
+        spanner_source = 'live_observed_required'
+
+    missing_scheduler = [
+        name for name, value in (
+            ('scheduler_project', project),
+            ('scheduler_location', location),
+        ) if not value
+    ]
+    missing_spanner = ([
+        f'spanner_{name}' for name, value in spanner_values.items() if not value
+    ] if spanner_status == 'incomplete' else [])
+    unresolved = missing_scheduler + missing_spanner
+    blocked_reads = []
+    if unresolved:
+        blocked_reads.append('all_cloud_reads')
+    if spanner_status == 'incomplete':
+        blocked_reads.append('spanner')
+    warnings = []
+    for name, selected in (('scheduler_project', scheduler_project),
+                           ('scheduler_location',
+                            scheduler_location), ('gcs_project', gcs_project),
+                           ('gcs_bucket', gcs_bucket), ('helper_project',
+                                                        helper_project),
+                           ('helper_location', helper_location),
+                           ('helper_service', helper_service)):
+        if selected['overrides_repository_candidate']:
+            warnings.append(
+                f'User-provided {name} replaces repository candidate '
+                f'{selected["repository_candidate"]}.')
+
+    return {
+        'cloud_access_performed': False,
+        'ready_for_cloud': not unresolved,
+        'environment': {
+            'name':
+                options.environment,
+            'source':
+                'default' if options.environment == 'prod' else 'user_provided',
+        },
+        'query': {
+            'mode': options.mode,
+            'import_name': options.import_name or None,
+            'start_time': format_rfc3339(options.start_time),
+            'end_time': format_rfc3339(options.end_time),
+            'limits': {
+                'run_limit': options.run_limit,
+                'scan_limit': options.scan_limit,
+                'import_limit': options.import_limit,
+                'log_limit': options.log_limit,
+                'object_limit': options.object_limit,
+                'history_limit': options.history_limit,
+            },
+        },
+        'resources': {
+            'scheduler': {
+                'project': scheduler_project,
+                'location': scheduler_location,
+            },
+            'workflow': {
+                'resource_candidate':
+                    workflow_resource or None,
+                'source':
+                    'repo_configured'
+                    if workflow_resource else 'resolve_from_live_scheduler',
+            },
+            'gcs': {
+                'project': gcs_project,
+                'bucket': gcs_bucket,
+            },
+            'ingestion_helper': {
+                'project': helper_project,
+                'location': helper_location,
+                'service': helper_service,
+            },
+            'spanner': {
+                **spanner_values,
+                'source': spanner_source,
+                'status': spanner_status,
+            },
+        },
+        'unresolved': unresolved,
+        'blocked_reads': blocked_reads,
+        'warnings': warnings,
+    }
+
+
 def _resolve_environment(repo_root: Path,
                          options: SnapshotOptions) -> dict[str, Any]:
+    preview = build_infrastructure_preview(repo_root, options)
     defaults = load_executor_defaults(repo_root)
-    project = options.scheduler_project
-    location = options.scheduler_location
+    scheduler = preview['resources']['scheduler']
+    project = str(scheduler['project']['value'] or '')
+    location = str(scheduler['location']['value'] or '')
     facts = []
-    helper_service_candidate = ''
+    helper_service_candidate = str(
+        preview['resources']['ingestion_helper']['service']['value'] or '')
     if options.environment == 'prod':
         configured_project = str(defaults.get('gcp_project_id') or '')
         configured_location = str(defaults.get('scheduler_location') or '')
@@ -281,31 +455,21 @@ def _resolve_environment(repo_root: Path,
                     'import-automation/executor/app/configs.py',
                     'Scheduler location candidate: '
                     f'{configured_location}'))
-        if project and configured_project and project != configured_project:
-            raise SnapshotError(
-                'User-provided Scheduler project conflicts with the '
-                'repository production candidate. Clarify the environment.')
-        if location and configured_location and location != configured_location:
-            raise SnapshotError(
-                'User-provided Scheduler location conflicts with the '
-                'repository production candidate. Clarify the environment.')
-        project = project or configured_project
-        location = location or configured_location
-        helper_script = repo_root / (
-            'import-automation/executor/scripts/update_import_version.sh')
-        if helper_script.is_file() and 'ingestion-helper-service' in (
-                helper_script.read_text(encoding='utf-8')):
-            helper_service_candidate = 'ingestion-helper-service'
+        if helper_service_candidate:
             facts.append(
                 _evidence(
-                    'repo_configured',
-                    str(helper_script.relative_to(repo_root)),
+                    'repo_configured', 'import-automation/executor/scripts/'
+                    'update_import_version.sh',
                     'Ingestion helper service candidate: '
                     f'{helper_service_candidate}'))
     if not project or not location:
         raise SnapshotError(
             'Scheduler project and location are unresolved. Provide both; '
             'non-production infrastructure is never inferred.')
+    if preview['resources']['spanner']['status'] == 'incomplete':
+        raise SnapshotError(
+            'Spanner coordinates are incomplete. Provide project, instance, '
+            'and database together, or omit all three for live resolution.')
     if options.scheduler_project:
         facts.append(
             _evidence('user_provided', '--scheduler_project',
@@ -314,6 +478,8 @@ def _resolve_environment(repo_root: Path,
         facts.append(
             _evidence('user_provided', '--scheduler_location',
                       f'Scheduler location: {location}'))
+    for warning in preview['warnings']:
+        facts.append(_evidence('derived', 'infrastructure preview', warning))
     return {
         'name': options.environment,
         'scheduler_project': project,
@@ -752,8 +918,12 @@ def _collect_state_records(runner: ReadOnlyCommandRunner,
     if spanner_project and spanner_instance and spanner_database:
         try:
             started = time.monotonic()
+            database_resource = (
+                f'projects/{spanner_project}/instances/{spanner_instance}/'
+                f'databases/{spanner_database}')
             _progress(
-                options, f'Reading Spanner records for {import_name}; '
+                options, f'Reading Spanner records from {database_resource} '
+                f'for {import_name}; '
                 f'history_limit={options.history_limit}')
             result.update(
                 read_spanner_records(spanner_project,
@@ -1227,6 +1397,10 @@ def main(argv: list[str]) -> None:
     try:
         repo_root = find_repository_root()
         options = _build_options()
+        if _PREVIEW_INFRASTRUCTURE.value:
+            preview = build_infrastructure_preview(repo_root, options)
+            print(json.dumps(preview, indent=2, sort_keys=True))
+            return
         if options.verbose:
             logging.getLogger('agents.common.import_support').setLevel(
                 logging.INFO)

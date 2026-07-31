@@ -39,6 +39,10 @@ ORDER BY CreationTimestamp DESC LIMIT @limit;
 Use the Python adapter because the installed `gcloud spanner databases
 execute-sql` command does not support bound parameters.
 
+Pass project, instance, and database explicitly. Application Default
+Credentials provide identity only. Never use an MCP tool, IDE database
+connection, plugin, connector, or ambient database configuration as a fallback.
+
 ## Expected output
 
 One current row, bounded version events, and bounded downstream ingestion
@@ -50,8 +54,9 @@ Exact import parameter and explicit row limit. Reject non-`SELECT` SQL.
 
 ## Evidence to retain
 
-Database resource, query role, row timestamps, version/status/workflow fields,
-and truncation.
+Canonical database resource, query role, row timestamps,
+version/status/workflow fields, and truncation. With `--verbose`, print the
+canonical database resource before executing the query.
 
 ## Common failures
 

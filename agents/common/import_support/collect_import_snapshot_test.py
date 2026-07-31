@@ -23,9 +23,11 @@ import unittest
 from unittest import mock
 
 from agents.common.import_support.collect_import_snapshot import build_snapshot
+from agents.common.import_support.collect_import_snapshot import build_infrastructure_preview
 from agents.common.import_support.collect_import_snapshot import _candidate_import_names
 from agents.common.import_support.collect_import_snapshot import _collector_help
 from agents.common.import_support.collect_import_snapshot import _collect_run
+from agents.common.import_support.collect_import_snapshot import _collect_state_records
 from agents.common.import_support.collect_import_snapshot import _fleet_matches
 from agents.common.import_support.collect_import_snapshot import _latest_successful_run
 from agents.common.import_support.collect_import_snapshot import SnapshotError
@@ -110,7 +112,8 @@ class CollectImportSnapshotTest(unittest.TestCase):
         help_text = _collector_help()
 
         for flag in ('--mode', '--import_name', '--scheduler_project',
-                     '--start_time', '--run_limit', '--[no]verbose'):
+                     '--start_time', '--run_limit', '--[no]verbose',
+                     '--[no]preview_infrastructure'):
             with self.subTest(flag=flag):
                 self.assertIn(flag, help_text)
 
@@ -138,14 +141,156 @@ class CollectImportSnapshotTest(unittest.TestCase):
             with self.assertRaisesRegex(SnapshotError, 'never inferred'):
                 build_snapshot(root, options, runner=_UnavailableRunner())
 
-    def test_conflicting_production_coordinates_require_clarification(self):
+    def test_preview_uses_repository_candidates_without_cloud_access(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
             self._repo(root)
-            options = replace(self._options(), scheduler_project='other')
 
-            with self.assertRaisesRegex(SnapshotError, 'conflicts'):
+            preview = build_infrastructure_preview(root, self._options())
+
+            self.assertFalse(preview['cloud_access_performed'])
+            self.assertTrue(preview['ready_for_cloud'])
+            resources = preview['resources']
+            self.assertEqual('prod-project',
+                             resources['scheduler']['project']['value'])
+            self.assertEqual('repo_configured',
+                             resources['scheduler']['project']['source'])
+            self.assertEqual(
+                'projects/prod-project/locations/us-central1/workflows/workflow',
+                resources['workflow']['resource_candidate'])
+            self.assertEqual('gcs-project',
+                             resources['gcs']['project']['value'])
+            self.assertEqual('bucket', resources['gcs']['bucket']['value'])
+            self.assertEqual('derived_from_scheduler',
+                             resources['ingestion_helper']['project']['source'])
+            self.assertIsNone(resources['ingestion_helper']['project']
+                              ['repository_candidate'])
+            self.assertEqual('derive_from_live_ingestion_helper',
+                             resources['spanner']['status'])
+
+    def test_explicit_production_coordinates_replace_repository_candidates(
+            self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            self._repo(root)
+            options = replace(self._options(),
+                              scheduler_project='other-project',
+                              scheduler_location='europe-west1')
+
+            preview = build_infrastructure_preview(root, options)
+            project = preview['resources']['scheduler']['project']
+            location = preview['resources']['scheduler']['location']
+
+            self.assertEqual('other-project', project['value'])
+            self.assertEqual('prod-project', project['repository_candidate'])
+            self.assertTrue(project['overrides_repository_candidate'])
+            self.assertEqual('europe-west1', location['value'])
+            snapshot = build_snapshot(root,
+                                      options,
+                                      runner=_UnavailableRunner())
+            self.assertEqual('other-project',
+                             snapshot['environment']['scheduler_project'])
+            self.assertEqual('europe-west1',
+                             snapshot['environment']['scheduler_location'])
+
+    def test_nonproduction_preview_reports_unresolved_coordinates(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            self._repo(root)
+            options = replace(self._options(), environment='staging')
+
+            preview = build_infrastructure_preview(root, options)
+
+            self.assertFalse(preview['ready_for_cloud'])
+            self.assertEqual(['scheduler_project', 'scheduler_location'],
+                             preview['unresolved'])
+            self.assertEqual(['all_cloud_reads'], preview['blocked_reads'])
+
+    def test_incomplete_spanner_scope_blocks_cloud_access(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            self._repo(root)
+            options = replace(self._options(),
+                              spanner_project='spanner-project')
+
+            preview = build_infrastructure_preview(root, options)
+
+            self.assertFalse(preview['ready_for_cloud'])
+            self.assertEqual(['spanner_instance', 'spanner_database'],
+                             preview['unresolved'])
+            self.assertEqual(['all_cloud_reads', 'spanner'],
+                             preview['blocked_reads'])
+            with self.assertRaisesRegex(SnapshotError,
+                                        'Spanner coordinates are incomplete'):
                 build_snapshot(root, options, runner=_UnavailableRunner())
+
+    @mock.patch(
+        'agents.common.import_support.collect_import_snapshot.read_spanner_records'
+    )
+    @mock.patch(
+        'agents.common.import_support.collect_import_snapshot.describe_ingestion_helper'
+    )
+    def test_spanner_progress_names_exact_database(self, describe_helper,
+                                                   read_spanner):
+        describe_helper.return_value = {
+            'environment': {
+                'SPANNER_PROJECT_ID': 'spanner-project',
+                'SPANNER_INSTANCE_ID': 'spanner-instance',
+                'SPANNER_DATABASE_ID': 'spanner-database',
+            }
+        }
+        read_spanner.return_value = {}
+        options = replace(self._options(), verbose=True)
+        environment = {
+            'scheduler_project': 'prod-project',
+            'scheduler_location': 'us-central1',
+            'ingestion_helper_service_candidate': 'ingestion-helper-service',
+        }
+
+        with self.assertLogs(
+                'agents.common.import_support.collect_import_snapshot',
+                level='INFO') as logs:
+            _collect_state_records(_UnavailableRunner(), options, environment,
+                                   {}, '', 'ImportOne', [], None)
+
+        self.assertIn(
+            'Reading Spanner records from projects/spanner-project/instances/'
+            'spanner-instance/databases/spanner-database for ImportOne',
+            '\n'.join(logs.output))
+
+    @mock.patch(
+        'agents.common.import_support.collect_import_snapshot.read_spanner_records'
+    )
+    @mock.patch(
+        'agents.common.import_support.collect_import_snapshot.describe_ingestion_helper'
+    )
+    def test_spanner_conflict_skips_dependent_read(self, describe_helper,
+                                                   read_spanner):
+        describe_helper.return_value = {
+            'environment': {
+                'SPANNER_PROJECT_ID': 'live-project',
+                'SPANNER_INSTANCE_ID': 'instance',
+                'SPANNER_DATABASE_ID': 'database',
+            }
+        }
+        options = replace(self._options(),
+                          spanner_project='selected-project',
+                          spanner_instance='instance',
+                          spanner_database='database')
+        environment = {
+            'scheduler_project': 'prod-project',
+            'scheduler_location': 'us-central1',
+            'ingestion_helper_service_candidate': 'ingestion-helper-service',
+        }
+        warnings = []
+
+        _collect_state_records(_UnavailableRunner(), options, environment, {},
+                               '', 'ImportOne', warnings, None)
+
+        read_spanner.assert_not_called()
+        self.assertTrue(
+            any('Conflicting Spanner project values' in warning
+                for warning in warnings))
 
     @mock.patch(
         'agents.common.import_support.collect_import_snapshot.collect_runtime_provenance'

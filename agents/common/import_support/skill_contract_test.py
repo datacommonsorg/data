@@ -95,6 +95,18 @@ class SkillContractTest(unittest.TestCase):
                         path.read_text(encoding='utf-8').lower(),
                     )
 
+    def test_skill_requires_review_and_repository_tools_for_cloud_access(self):
+        skill = (self._repo_root /
+                 'agents/skills/dc-import-info/SKILL.md').read_text(
+                     encoding='utf-8')
+
+        for required in ('--preview_infrastructure',
+                         'review: skipped (headless)',
+                         'Infrastructure actually used', 'Never use MCP tools',
+                         'Do not preview infrastructure or access GCP'):
+            with self.subTest(required=required):
+                self.assertIn(required, skill)
+
     def test_python_wrapper_uses_repository_environment_without_minor_pin(self):
         wrapper = (self._repo_root /
                    'agents/common/run_python.sh').read_text(encoding='utf-8')
