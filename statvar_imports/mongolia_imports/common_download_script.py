@@ -358,9 +358,13 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
                     en_texts = en_var.get("valueTexts", []) if en_var else []
                     try:
                         val_idx = en_values.index(period_key)
-                        row_data["Period"] = en_texts[val_idx] if val_idx < len(en_texts) else period_key
+                        p_val = en_texts[val_idx] if val_idx < len(en_texts) else period_key
                     except ValueError:
-                        row_data["Period"] = period_key
+                        p_val = period_key
+                    import re
+                    if re.match(r"^\d{4}-\d{2}$", p_val):
+                        p_val = p_val.replace("-", "")
+                    row_data["Period"] = p_val
                 else:
                     row_data["Period"] = ""
                     
