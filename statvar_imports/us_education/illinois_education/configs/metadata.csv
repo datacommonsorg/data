@@ -1,0 +1,17 @@
+key,value
+url,
+description,https://www.isbe.net/Pages/Illinois-State-Report-Card-Data.aspx
+process,
+#place_type,Country
+#places_within,country/IL
+start_date,
+end_date,
+release_frequency,P1Y
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured, unit, scalingFactor,#input"
+mapped_rows,1
+mapped_columns,1
+header_rows,1
+#places_resolved_csv,https://docs.google.com/spreadsheets/d/1Qc479haSWug1w9FSZWV_gg0ytYcVIedo4kjTg5K-ug0/edit?gid=923685706#gid=923685706
+#input_rows,100
+word_delimiter,""""""
