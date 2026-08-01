@@ -1,0 +1,8 @@
+Node: E:Nigeria-CPI->E0
+observationAbout: C:Nigeria-CPI->observationAbout
+observationDate: C:Nigeria-CPI->observationDate
+value: C:Nigeria-CPI->value
+variableMeasured: C:Nigeria-CPI->variableMeasured
+unit: C:Nigeria-CPI->unit
+scalingFactor: C:Nigeria-CPI->scalingFactor
+typeOf: dcs:StatVarObservation
