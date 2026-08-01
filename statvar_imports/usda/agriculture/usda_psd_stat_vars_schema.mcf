@@ -1,0 +1,32 @@
+Node: dcid:ShelledAlmonds
+typeOf: dcid:FarmInventoryTypeEnum
+name: "Shelled Almonds"
+isProvisional: dcs:True
+
+Node: dcid:economicSector
+typeOf: dcs:Property
+name: "economicSector"
+domainIncludes: dcid:FarmInventory
+rangeIncludes: dcid:WaterUseCategoryEnum
+
+Node: dcid:production
+typeOf: dcs:Property
+name: "production"
+rangeIncludes: dcid:ProductionEnum
+isProvisional: dcs:True
+
+Node: dcid:usedFor
+typeOf: dcs:Property
+name: "usedFor"
+domainIncludes: dcid:FarmInventory
+
+Node: dcid:TotalDistribution
+typeOf: dcid:WaterUseCategoryEnum
+name: "Total Distribution"
+isProvisional: dcs:True
+
+Node: dcid:Supply
+typeOf: dcid:WaterUseCategoryEnum
+name: "Supply"
+isProvisional: dcs:True
+
