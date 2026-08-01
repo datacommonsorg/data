@@ -64,7 +64,7 @@ DEMOGRAPHICS_TABLES = [
         "filename":
             "resident_population_by_agegroup_15_and_over_and_maritalstatus.csv",
         "header_mapping": {
-            "keys": ["SCR_ENG", "SCR_ENG1", "SCR_ENG2", "CODE"],
+            "keys": ["SCR_ENG2", "SCR_ENG1", "SCR_ENG", "CODE"],
             "cols": ["Marital Status", "Age Group", "Gender"]
         }
     },
@@ -72,8 +72,8 @@ DEMOGRAPHICS_TABLES = [
         "id": "DT_NSO_0300_004V1",
         "filename": "total_population_by_region_and_urban_rural.csv",
         "header_mapping": {
-            "keys": ["SCR_ENG", "SCR_ENG1", "CODE1", "CODE"],
-            "cols": ["Total", "Aimag", "Код"]
+            "keys": ["SCR_ENG", "SCR_ENG1", "CODE"],
+            "cols": ["Aimag", "Total", "Код"]
         }
     },
     {
@@ -81,7 +81,7 @@ DEMOGRAPHICS_TABLES = [
         "filename": "number_of_households_by_region_and_urban_rural.csv",
         "header_mapping": {
             "keys": ["SCR_ENG", "SCR_ENG1", "CODE"],
-            "cols": ["NUMBER OF HOUSEHOLDS", "Aimag", "Код"]
+            "cols": ["Aimag", "NUMBER OF HOUSEHOLDS", "Код"]
         }
     },
 ]
