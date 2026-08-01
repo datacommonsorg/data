@@ -119,6 +119,8 @@ _FLAGS = flags.FLAGS
 
 def get_diff_config() -> dict:
     """Returns a dictionary of config parameters for MCF diff from flags."""
+    if not _FLAGS.is_parsed():
+        _FLAGS.mark_as_parsed()
     return {
         'ignore_property': _FLAGS.ignore_property,
         'compare_property': _FLAGS.compare_property,
