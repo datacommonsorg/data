@@ -1,6 +1,7 @@
 # Requirements for Python scripts in this repo that have automation enabled!
 
 absl-py
+anyascii
 arcgis2geojson
 beautifulsoup4
 chardet
