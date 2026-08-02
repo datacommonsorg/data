@@ -190,10 +190,11 @@ def diff_mcf_node_pvs(node_1: dict,
     pvs_deleted = set()
     pvs_added = set()
     pvs_modified = set()
+    pvs_matched = set()
     for d in diff:
         diff_str.append(d)
-        if d[0] == ' ':
-            counters and counters.add_counter(f'PVs-matched', 1)
+        if d[0] == ' ' and len(d) > 1:
+            counters and counters.add_counter(f'pvs-matched', 1)
         else:
             prop = ''
             value = ''
@@ -204,10 +205,16 @@ def diff_mcf_node_pvs(node_1: dict,
                 if prop:
                     pvs_deleted.add(prop)
                 has_diff = True
-            if d[0] == '+':
+            elif d[0] == '+':
                 if prop:
                     pvs_added.add(prop)
                 has_diff = True
+            elif d[0] == '?':
+                # Ignore modifications that already show as delete/add
+                has_diff = True
+            else:
+                if prop:
+                  pvs_matched.add(prop)
     if has_diff:
         pvs_modified = pvs_deleted.intersection(pvs_added)
         pvs_added = pvs_added.difference(pvs_modified)
@@ -217,6 +224,7 @@ def diff_mcf_node_pvs(node_1: dict,
                 (pvs_modified, 'modified'),
                 (pvs_added, 'added'),
                 (pvs_deleted, 'deleted'),
+                (pvs_matched, 'matched'),
             ]:
                 for prop in props:
                     counters.add_counter(f'pvs-{diff_type}', 1)
@@ -230,7 +238,9 @@ def diff_mcf_node_pvs(node_1: dict,
         else:
             counters and counters.add_counter(f'nodes-missing-in-mcf1', 1)
     else:
-        counters and counters.add_counter(f'nodes-matched', 1)
+      if counters:
+        counters.add_counter(f'nodes-matched', 1)
+        counters.add_counter(f'pvs-matched', len(pvs_matched))
     return has_diff, '\n'.join(diff_str), pvs_added, pvs_deleted, pvs_modified
 
 

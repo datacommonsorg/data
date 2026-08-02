@@ -1,0 +1,6135 @@
+{
+  "schema_version": "v1",
+  "step": "apply_transcoding",
+  "tier": "transcoded",
+  "agency": "UNAIDS",
+  "version": "2026-05-12",
+  "run_id": "20260607T060952Z_ce9628",
+  "registry_path": "undata_concepts/canonical_concepts.csv",
+  "registry_concept_count": 162,
+  "dsds_scanned": 41,
+  "rows_scanned": 503,
+  "rows_canonicalized_count": 500,
+  "concepts_unchanged_count": 3,
+  "concepts_not_in_registry_count": 0,
+  "rows_canonicalized": [
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_DTH.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_MORT.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_MORT.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_MORT.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_MORT.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_MORT.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_MORT.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_MORT.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_MORT.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_MORT.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_MORT.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_MORT.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_MORT.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_MORT.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_ORPH.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_ORPH.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_ORPH.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_ORPH.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_ORPH.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_ORPH.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_ORPH.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_ORPH.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_ORPH.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_ORPH.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_ORPH.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_ORPH.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_AIDS_ORPH.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ANC_TEST.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ANC_TEST.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ANC_TEST.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ANC_TEST.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ANC_TEST.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ANC_TEST.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ANC_TEST.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ANC_TEST.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ANC_TEST.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ANC_TEST.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_COV.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_NEW.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_NEW.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_NEW.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_NEW.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_NEW.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_NEW.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_NEW.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_NEW.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_NEW.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_NEW.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_NEW.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_NEW.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_NEW.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_RECV.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_ART_VLS.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_DTH_10.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_DTH_10.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_DTH_10.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_DTH_10.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_DTH_10.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_DTH_10.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_DTH_10.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_DTH_10.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_DTH_10.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_DTH_10.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_DTH_10.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_DTH_10.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_INF_10.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_INF_10.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_INF_10.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_INF_10.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_INF_10.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_INF_10.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_INF_10.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_INF_10.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_INF_10.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_INF_10.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_INF_10.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_CHG_INF_10.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_DTH_AVRT.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_DTH_AVRT.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_DTH_AVRT.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_DTH_AVRT.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_DTH_AVRT.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_DTH_AVRT.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_DTH_AVRT.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_DTH_AVRT.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_DTH_AVRT.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_DTH_AVRT.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_DTH_AVRT.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_DTH_AVRT.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_EID.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_EID.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_EID.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_EID.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_EID.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_EID.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_EID.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_EID.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_EID.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_EID.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_EID.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HEU.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HEU.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HEU.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HEU.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HEU.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HEU.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HEU.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HEU.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HEU.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HEU.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HEU.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HEU.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_INC.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "CD4_COUNT_THRESHOLD",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "CD4 count threshold band",
+          "now": "CD4 count threshold"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "CD4 cell count threshold used to classify or stratify the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_LATE.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "OBSERVATION_STATUS",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Modelled-data flag",
+          "now": "Observation status"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Quality or interpretive status of the observation (e.g. estimated, provisional, final)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_HIV_PREV.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IMR.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IMR.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IMR.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IMR.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IMR.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IMR.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IMR.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IMR.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IMR.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IMR.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IMR.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IMR.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_INF_AVRT.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_INF_AVRT.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_INF_AVRT.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_INF_AVRT.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_INF_AVRT.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_INF_AVRT.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_INF_AVRT.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_INF_AVRT.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_INF_AVRT.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_INF_AVRT.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_INF_AVRT.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_INF_AVRT.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IPR.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IPR.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IPR.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IPR.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IPR.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IPR.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IPR.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IPR.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IPR.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IPR.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IPR.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_IPR.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_ON_ART.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV_N.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV_N.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV_N.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV_N.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV_N.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV_N.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV_N.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV_N.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV_N.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV_N.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV_N.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV_N.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_KS_PLHIV_N.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_PCT.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_PCT.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_PCT.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_PCT.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_PCT.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_PCT.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_PCT.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_PCT.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_PCT.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_PCT.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_PCT.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_RATE.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_RATE.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_RATE.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_RATE.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_RATE.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_RATE.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_RATE.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_RATE.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_RATE.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_RATE.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_MTCT_RATE.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_NEW_INF.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLHIV_DTH.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLHIV_DTH.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLHIV_DTH.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLHIV_DTH.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLHIV_DTH.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLHIV_DTH.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLHIV_DTH.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLHIV_DTH.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLHIV_DTH.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLHIV_DTH.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLHIV_DTH.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLHIV_DTH.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PLWH.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_COV.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_COV.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_COV.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_COV.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_COV.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_COV.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_COV.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_COV.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_COV.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_COV.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_COV.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_NEED.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_NEED.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_NEED.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_NEED.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_NEED.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_NEED.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_NEED.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_NEED.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_NEED.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_NEED.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_NEED.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_RECV.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_RECV.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_RECV.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_RECV.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_RECV.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_RECV.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_RECV.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_RECV.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_RECV.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_RECV.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_PMTCT_RECV.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_ART.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_ART.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_ART.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_ART.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_ART.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_ART.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_ART.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_ART.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_ART.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_ART.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_IPR.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_IPR.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_IPR.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_IPR.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_IPR.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_IPR.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_IPR.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_IPR.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_IPR.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_IPR.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_IPR.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS_ART.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS_ART.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS_ART.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS_ART.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS_ART.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS_ART.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS_ART.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS_ART.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS_ART.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_KS_ART.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VLS.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VLS.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VLS.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VLS.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VLS.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VLS.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VLS.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VLS.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VLS.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VLS.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VS.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VS.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VS.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VS.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VS.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VS.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VS.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VS.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VS.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_TGT_VS.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_N.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_N.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_N.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_N.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_N.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_N.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_N.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_N.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_N.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_N.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_N.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_N.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_N.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "ESTIMATE_TYPE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Estimate type (uncertainty band)",
+          "now": "Estimate type"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Type of statistical estimate reported for the observation, such as point estimate, lower bound, or upper bound."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VLS_PCT.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VL_UNSUPP.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VL_UNSUPP.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VL_UNSUPP.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VL_UNSUPP.csv",
+      "concept": "AGE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Age band",
+          "now": "Age"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Age disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VL_UNSUPP.csv",
+      "concept": "SEX",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Sex disaggregation of the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VL_UNSUPP.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VL_UNSUPP.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VL_UNSUPP.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VL_UNSUPP.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VL_UNSUPP.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VL_UNSUPP.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VL_UNSUPP.csv",
+      "concept": "FOOTNOTE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: FOOTNOTE]",
+          "now": "Footnote"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Interpretive note associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VL_UNSUPP.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ACQ.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ACQ.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ACQ.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ACQ.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ACQ.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ACQ.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ACQ.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ACQ.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ACQ.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ACQ.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ART.csv",
+      "concept": "SERIES",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "UNAIDS indicator code (source-faithful <Indicator_GId>.<Unit>; curated short codes assigned at conformance)",
+          "now": "Series"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Identifies the analytical series to which the observation belongs."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ART.csv",
+      "concept": "GEOGRAPHY",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Reference area",
+          "now": "Geography"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Primary spatial reference area for the observation."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ART.csv",
+      "concept": "TIME_PERIOD",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Temporal reference of the observation, expressed using the accepted ISO 8601 time-period forms."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ART.csv",
+      "concept": "OBS_VALUE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The actual measured numeric value."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ART.csv",
+      "concept": "UNIT_MEASURE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Unit of measure (canonical, per-(Indicator_GId, Unit) pair via indicator_unit_resolution.csv)",
+          "now": "Unit of measure"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "The unit in which the observation value is expressed."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ART.csv",
+      "concept": "UNIT_MULT",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Scale factor applied to the observation value (e.g. thousands, millions)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ART.csv",
+      "concept": "CENSORED_VALUE_TYPE",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Status code indicating the censoring relation that qualifies the observation value, or that no censoring relation applies."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ART.csv",
+      "concept": "GEO_ADMIN_LEVEL",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "Geography tier",
+          "now": "Administrative level"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Administrative level of the referenced geography, such as national, regional, or local."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ART.csv",
+      "concept": "FREQUENCY",
+      "changed_fields": {
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Reporting frequency of the observation (annual, quarterly, monthly, daily, \u2026)."
+        }
+      }
+    },
+    {
+      "dsd": "UNAIDS_2026-05-12_DSD_VT_MAT_ART.csv",
+      "concept": "SOURCE",
+      "changed_fields": {
+        "NAME_EN": {
+          "was": "[NAME MISSING: SOURCE]",
+          "now": "Source"
+        },
+        "DESCRIPTION": {
+          "was": "",
+          "now": "Source or provenance statement associated with the observation."
+        }
+      }
+    }
+  ],
+  "concepts_unchanged": [
+    "HIV_CHILD_INFECTION_PERIOD",
+    "HIV_MATERNAL_ART_PATHWAY",
+    "HIV_MATERNAL_INFECTION_PERIOD"
+  ],
+  "concepts_not_in_registry": []
+}
