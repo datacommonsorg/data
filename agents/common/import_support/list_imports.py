@@ -103,6 +103,8 @@ def _record_from_spec(repo_root: Path, manifest_path: Path, spec_index: int,
     import_directory = manifest_path.parent
     relative_directory = import_directory.relative_to(repo_root).as_posix()
     cron_schedule = spec.get('cron_schedule')
+    # TODO: Keep this format aligned with import-automation's absolute import
+    # name contract.
     return ImportRecord(
         import_name=import_name,
         manifest_path=manifest_path.relative_to(repo_root).as_posix(),
