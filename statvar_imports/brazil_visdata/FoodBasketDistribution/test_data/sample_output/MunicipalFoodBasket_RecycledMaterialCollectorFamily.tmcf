@@ -1,8 +1,0 @@
-Node: E:MunicipalFoodBasket_RecycledMaterialCollectorFamily->E0
-observationAbout: C:MunicipalFoodBasket_RecycledMaterialCollectorFamily->observationAbout
-observationDate: C:MunicipalFoodBasket_RecycledMaterialCollectorFamily->observationDate
-value: C:MunicipalFoodBasket_RecycledMaterialCollectorFamily->value
-variableMeasured: C:MunicipalFoodBasket_RecycledMaterialCollectorFamily->variableMeasured
-unit: C:MunicipalFoodBasket_RecycledMaterialCollectorFamily->unit
-scalingFactor: C:MunicipalFoodBasket_RecycledMaterialCollectorFamily->scalingFactor
-typeOf: dcs:StatVarObservation

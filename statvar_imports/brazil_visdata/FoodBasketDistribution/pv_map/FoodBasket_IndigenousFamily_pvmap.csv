@@ -1,7 +1,0 @@
-key,prop,val,p1,v1,,,,,,,,,,
-Referência,observationDate,{Data},observationAbout,country/BRA,populationType,FoodBasket,householdType,IndigenousFamily,,,,,,
-Qtde de famílias indígena,value,{Number},populationType,Household,foodBasketStatus,ReceivedFoodBasket,,,name,"""Number of indigenous families that received food baskets""",alternateName,"""Qtde de famílias indígena receberam cestas de alimento@pt""",,
-Qtde de cestas de alimentos destinadas a famílias indígenas,value,{Number},foodBasketStatus,DestinedFoodBasket,,,,,name,"""Number of food baskets destined for indigenous families""",alternateName,"""Qtde de cestas de alimentos destinadas a famílias indígenas@pt""",,
-Qtde de cestas de alimentos entregues a famílias indígenas,value,{Number},foodBasketStatus,DeliveredFoodBasket,,,,,name,"""Number of food baskets delivered to indigenous families""",alternateName,"""Qtde de cestas de alimentos entregues a famílias indígenas@pt""",,
-Quilos de alimentos entregues a famílias indígenas,value,{Number},populationType,Food,unit,Kilogram,measuredProperty,amount,name,"""Kilograms of food delivered to indigenous families""",alternateName,"""Quilos de alimentos entregues a famílias indígenas@pt""",,
-Percentual de Cestas Básicas entregues a Famílias Indígenas,value,{Number},foodBasketStatus,DeliveredFoodBasket,,,measurementDenominator,"-foodBasketStatus,+foodBasketStatus=DestinedFoodBasket",name,"""Percentage of Basic Food Baskets delivered to Indigenous Families""",alternateName,"""Percentual de Cestas Básicas entregues a Famílias Indígenas@pt""",unit,Percent
