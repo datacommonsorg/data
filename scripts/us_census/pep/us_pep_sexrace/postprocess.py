@@ -225,8 +225,7 @@ def create_single_csv(output_files_names: list):
                 #os.path.join(_CODEDIR, _OUTPUTFINAL, "national_after_2000.csv")
                 file_path = os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i)
                 if not os.path.exists(file_path):
-                    logging.warning(f"File {i} not found in intermediate outputs, skipping.")
-                    continue
+                    raise FileNotFoundError(f'Required intermediate file {i} not found.')
                 df = pd.read_csv(file_path, header=0)
                 for col in df.columns:
                     df[col] = df[col].astype("str")
@@ -239,8 +238,7 @@ def create_single_csv(output_files_names: list):
             for i in state_county_before_2000:
                 file_path = os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i)
                 if not os.path.exists(file_path):
-                    logging.warning(f"File {i} not found in intermediate outputs, skipping.")
-                    continue
+                    raise FileNotFoundError(f'Required intermediate file {i} not found.')
                 df2 = pd.read_csv(file_path, header=0)
                 for col in df2.columns:
                     df2[col] = df2[col].astype("str")
@@ -253,8 +251,7 @@ def create_single_csv(output_files_names: list):
             for i in state_county_after_2000:
                 file_path = os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i)
                 if not os.path.exists(file_path):
-                    logging.warning(f"File {i} not found in intermediate outputs, skipping.")
-                    continue
+                    raise FileNotFoundError(f'Required intermediate file {i} not found.')
                 df6 = pd.read_csv(file_path, header=0)
                 for col in df6.columns:
                     df6[col] = df6[col].astype("str")
@@ -267,8 +264,7 @@ def create_single_csv(output_files_names: list):
             for i in national_after_2000:
                 file_path = os.path.join(_CODEDIR, _OUTPUTINTERMEDIATE, i)
                 if not os.path.exists(file_path):
-                    logging.warning(f"File {i} not found in intermediate outputs, skipping.")
-                    continue
+                    raise FileNotFoundError(f'Required intermediate file {i} not found.')
                 df4 = pd.read_csv(file_path, header=0)
                 for col in df4.columns:
                     df4[col] = df4[col].astype("str")
