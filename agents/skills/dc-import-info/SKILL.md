@@ -124,6 +124,7 @@ description: Retrieves read-only information about Data Commons imports, includi
 | Read one run summary | [Read run summary](../../common/recipes/gcp/gcs/read-run-summary.md) |
 | List one version's files | [List version artifacts](../../common/recipes/gcp/gcs/list-version-artifacts.md) |
 | Find an older summary | [Find historical summary](../../common/recipes/gcp/gcs/find-historical-summary.md) |
+| Correlate import history or one version | [Correlate import history and versions](../../common/recipes/gcp/imports/correlate-import-runs.md) |
 | Resolve Spanner coordinates | [Describe ingestion helper](../../common/recipes/gcp/cloud-run/describe-ingestion-helper.md) |
 | Read one Spanner record type | [Read import records](../../common/recipes/gcp/spanner/read-import-records.md) |
 | Recover runtime source | [Resolve runtime provenance](../../common/recipes/gcp/cloud-build/resolve-runtime-provenance.md) |

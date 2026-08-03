@@ -40,9 +40,15 @@ Use this path when the user supplies one import name or name-like query.
    - Query current `ImportStatus` and accept it only if `JobId` matches; or
    - Read `staging_version.txt`, then its exact `import_summary.json`, and verify
      both import name and job ID.
-10. Fetch Batch, tasks, logs, artifacts, ingestion history, or provenance only
+10. For bounded version history or correlation of one known version, use the
+    [correlate import runs recipe](../../../common/recipes/gcp/imports/correlate-import-runs.md).
+    Use `import_history` when the import is the entry point and
+    `import_version` when the version is already known. This correlation does
+    not replace Workflow history for attempts that failed before version
+    metadata was written.
+11. Fetch Batch, tasks, logs, artifacts, ingestion history, or provenance only
    when the question requires those details.
-11. End with `Infrastructure actually used`, including skipped and unresolved
+12. End with `Infrastructure actually used`, including skipped and unresolved
     components.
 
 ## Clarify instead of guessing

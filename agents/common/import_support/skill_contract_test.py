@@ -162,6 +162,17 @@ class SkillContractTest(unittest.TestCase):
         self.assertIn('finishTime<', builds)
         self.assertIn('--limit=<LIMIT>', builds)
 
+    def test_import_correlation_recipe_is_bounded_and_composite(self):
+        recipe = (self._repo_root / 'agents/common/recipes/gcp/imports' /
+                  'correlate-import-runs.md').read_text(encoding='utf-8')
+
+        for required in ('--mode=import_history', '--mode=import_version',
+                         '1 through 20', './agents/common/run_python.sh'):
+            with self.subTest(required=required):
+                self.assertIn(required, recipe)
+        self.assertIn('does not call\nWorkflow or Batch APIs', recipe)
+        self.assertNotIn('<IMPORT_PREFIX>/**', recipe)
+
     def test_python_wrapper_uses_repository_environment_without_minor_pin(self):
         wrapper = (self._repo_root /
                    'agents/common/run_python.sh').read_text(encoding='utf-8')
