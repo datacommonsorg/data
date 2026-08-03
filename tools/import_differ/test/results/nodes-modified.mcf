@@ -1,0 +1,24 @@
+Node: treasury_constant_maturity_rates/E10/115adaef-1547-4f5b-cabb-116d14c7a1ed
+variableMeasured: dcid:InterestRate_TreasuryBond_20Year
+observationAbout: dcid:country/USA
+observationDate: "2025-01-30"
+measurementMethod: dcid:ConstantMaturityRate
+unit: dcid:Percent
+value: 4.85
+typeOf: StatVarObservation
+
+dcid: InterestRate_TreasuryBill_1Year
+maturity: [1 Year]
+measuredProperty: dcs:interestRate
+name: "InterestRate_TreasuryBill_1Year"
+populationType: dcs:TreasuryBill
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+dcid: InterestRate_TreasuryNote_2Year
+maturity: [2 Year]
+measuredProperty: dcs:interestRate
+name: "InterestRate_TreasuryNote_2Year"
+populationType: dcs:TreasuryNote
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable

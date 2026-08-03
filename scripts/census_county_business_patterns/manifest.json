@@ -20,7 +20,13 @@
                     "cleaned_csv": "gcs_output/output/*.csv"
                 }
             ],
-            "cron_schedule": "0 9 5,25 * *"
+            "cron_schedule": "0 9 5,25 * *",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 64,
+                "memory": 512,
+                "disk": 4096
+            }
         }
     ]
 }

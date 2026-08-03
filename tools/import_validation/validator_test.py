@@ -76,40 +76,41 @@ class TestDeletedRecordsCountValidation(unittest.TestCase):
         self.validator = Validator()
 
     def test_deleted_records_count_fails_when_over_threshold(self):
-        test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
+        summary = {'deleted_obs_count': 2}
         params = {'threshold': 1}
-        result = self.validator.validate_deleted_records_count(test_df, params)
+        result = self.validator.validate_deleted_records_count(summary, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.details['deleted_records_count'], 2)
         self.assertEqual(result.details['threshold'], 1)
-        self.assertEqual(result.details['rows_processed'], 2)
-        self.assertEqual(result.details['rows_succeeded'], 0)
-        self.assertEqual(result.details['rows_failed'], 2)
 
     def test_deleted_records_count_passes_when_at_threshold(self):
-        test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
+        summary = {'deleted_obs_count': 2}
         params = {'threshold': 2}
-        result = self.validator.validate_deleted_records_count(test_df, params)
+        result = self.validator.validate_deleted_records_count(summary, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
-        self.assertEqual(result.details['rows_processed'], 2)
-        self.assertEqual(result.details['rows_succeeded'], 2)
-        self.assertEqual(result.details['rows_failed'], 0)
+        self.assertEqual(result.details['deleted_records_count'], 2)
+        self.assertEqual(result.details['threshold'], 2)
 
-    def test_deleted_records_count_passes_on_empty_dataframe(self):
-        test_df = pd.DataFrame({'DELETED': []})
+    def test_deleted_records_count_passes_on_empty_deleted_count(self):
+        summary = {'deleted_obs_count': 0}
         params = {'threshold': 0}
-        result = self.validator.validate_deleted_records_count(test_df, params)
+        result = self.validator.validate_deleted_records_count(summary, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
-        self.assertEqual(result.details['rows_processed'], 0)
-        self.assertEqual(result.details['rows_succeeded'], 0)
-        self.assertEqual(result.details['rows_failed'], 0)
+        self.assertEqual(result.details['deleted_records_count'], 0)
+        self.assertEqual(result.details['threshold'], 0)
 
-    def test_deleted_records_count_fails_on_missing_column(self):
-        test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'DELETED'
+    def test_deleted_records_count_passes_on_missing_column(self):
+        summary = {'previous_obs_count': 100}  # Missing 'deleted_obs_count'
         params = {'threshold': 1}
-        result = self.validator.validate_deleted_records_count(test_df, params)
-        self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
-        self.assertIn('missing required column', result.message)
+        result = self.validator.validate_deleted_records_count(summary, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['deleted_records_count'], 0)
+
+    def test_deleted_records_count_passes_on_missing_summary(self):
+        params = {'threshold': 1}
+        result = self.validator.validate_deleted_records_count(None, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['deleted_records_count'], 0)
 
 
 class TestDeletedRecordsPercentValidation(unittest.TestCase):
@@ -120,63 +121,56 @@ class TestDeletedRecordsPercentValidation(unittest.TestCase):
 
     def test_deleted_records_percent_fails_when_over_threshold(self):
         # 10 records, 2 deleted => 20%
-        test_df = pd.DataFrame({'DELETED': [1, 1]})
-        summary = {'previous_obs_size': 10}
+        summary = {'previous_obs_count': 10, 'deleted_obs_count': 2}
         params = {'threshold': 10}  # Threshold 10%
 
         result = self.validator.validate_deleted_records_percent(
-            test_df, summary, params)
+            summary, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.details['percent'], 20.0)
         self.assertEqual(result.details['threshold'], 10)
 
     def test_deleted_records_percent_passes_when_below_threshold(self):
         # 100 records, 1 deleted => 1%
-        test_df = pd.DataFrame({'DELETED': [1]})
-        summary = {'previous_obs_size': 100}
+        summary = {'previous_obs_count': 100, 'deleted_obs_count': 1}
         params = {'threshold': 10}
 
         result = self.validator.validate_deleted_records_percent(
-            test_df, summary, params)
+            summary, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['percent'], 1.0)
 
     def test_deleted_records_percent_passes_when_no_deleted(self):
-        test_df = pd.DataFrame({'DELETED': []})
-        summary = {'previous_obs_size': 100}
+        summary = {'previous_obs_count': 100, 'deleted_obs_count': 0}
         params = {'threshold': 10}
 
         result = self.validator.validate_deleted_records_percent(
-            test_df, summary, params)
+            summary, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['percent'], 0.0)
 
     def test_deleted_records_percent_handles_zero_data_size(self):
         # 0 records, 0 deleted => 0%
-        test_df = pd.DataFrame({'DELETED': []})
-        summary = {'previous_obs_size': 0}
+        summary = {'previous_obs_count': 0, 'deleted_obs_count': 0}
         params = {'threshold': 10}
 
         result = self.validator.validate_deleted_records_percent(
-            test_df, summary, params)
+            summary, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.details['percent'], 0.0)
 
     def test_deleted_records_percent_fails_on_missing_summary(self):
-        test_df = pd.DataFrame({'DELETED': [1]})
         params = {'threshold': 10}
 
-        result = self.validator.validate_deleted_records_percent(
-            test_df, None, params)
+        result = self.validator.validate_deleted_records_percent(None, params)
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
 
     def test_deleted_records_percent_fails_on_missing_size_in_summary(self):
-        test_df = pd.DataFrame({'DELETED': [1]})
-        summary = {}  # Missing previous_obs_size
+        summary = {}  # Missing previous_obs_count
         params = {'threshold': 10}
 
         result = self.validator.validate_deleted_records_percent(
-            test_df, summary, params)
+            summary, params)
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
 
 
