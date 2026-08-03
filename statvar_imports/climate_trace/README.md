@@ -2,6 +2,8 @@
 
 The ClimateTrace dataset offers comprehensive and up-to-date greenhouse gas emissions data, derived from satellite imagery and various public sources, for countries worldwide.
 
+**Note: This import is now being handled through the statvar processor.**
+
 This project is designed to download, process, and segregate this data. It automates the collection of country-specific and gas-specific emissions data, transforms it into a standardized format, and prepares it for further analysis or ingestion into systems like Data Commons.
 
 ## Data Aggregation
