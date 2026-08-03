@@ -13,7 +13,8 @@ exact absolute import name.
 
 ## Clarify when
 
-The Scheduler target cannot identify exactly one Workflow.
+The effective environment and prompt overrides do not resolve to exactly one
+full Workflow resource.
 
 ## Read-only operation
 

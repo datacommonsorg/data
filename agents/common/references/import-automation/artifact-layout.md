@@ -58,5 +58,6 @@ objects prove that path.
   `STAGING` data.
 - A run that fails before summary creation can update neither pointer.
 
-Resolve configured names and verify the live objects. Do not assume a support
-request mentioning `latest.txt` refers to a real object.
+Use these repository-defined names for the current support path and verify the
+live objects. They are ET artifact conventions, not environment coordinates.
+Do not assume a support request mentioning `latest.txt` refers to a real object.

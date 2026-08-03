@@ -23,10 +23,6 @@ environments:
       client_project: datcom-204919
       output_bucket: datcom-prod-imports
       mount_bucket: datcom-volume-mount
-      import_prefix_template: "{manifest_directory}/{import_name}"
-      staging_pointer: staging_version.txt
-      accepted_pointer: latest_version.txt
-      run_summary_filename: import_summary.json
 
     ingestion_helper:
       project: datcom-import-automation-prod
@@ -57,10 +53,6 @@ environments:
       client_project: datcom-ci
       output_bucket: datcom-ci-test
       mount_bucket: datcom-ci-test
-      import_prefix_template: "{manifest_directory}/{import_name}"
-      staging_pointer: staging_version.txt
-      accepted_pointer: latest_version.txt
-      run_summary_filename: import_summary.json
 
     ingestion_helper:
       project: datcom-ci
@@ -71,4 +63,3 @@ environments:
       project: datcom-ci
       instance: datcom-spanner-test
       database: dc-test-db
-

@@ -18,6 +18,8 @@ from pathlib import Path
 import re
 import unittest
 
+import yaml
+
 _MARKDOWN_LINK = re.compile(r'\[[^]]+\]\(([^)]+)\)')
 _TEXT_SUFFIXES = {'.json', '.md', '.py', '.sh', '.yaml', '.yml'}
 _RECIPE_HEADINGS = (
@@ -105,8 +107,10 @@ class SkillContractTest(unittest.TestCase):
                 self.assertIn(required, skill)
 
     def test_skill_uses_simple_runtime_environment_registry(self):
-        registry = (self._repo_root / 'agents/common/config' /
-                    'import-environments.yaml').read_text(encoding='utf-8')
+        registry_path = (self._repo_root / 'agents/common/config' /
+                         'import-environments.yaml')
+        registry_text = registry_path.read_text(encoding='utf-8')
+        registry = yaml.safe_load(registry_text)
         skill = (self._repo_root /
                  'agents/skills/dc-import-info/SKILL.md').read_text(
                      encoding='utf-8')
@@ -119,24 +123,62 @@ class SkillContractTest(unittest.TestCase):
                    'read-import-records.md').read_text(encoding='utf-8')
         helper = (self._repo_root / 'agents/common/recipes/gcp/cloud-run' /
                   'describe-ingestion-helper.md').read_text(encoding='utf-8')
+        workflow_list = (self._repo_root / 'agents/common/recipes/gcp' /
+                         'workflows/list-import-executions.md').read_text(
+                             encoding='utf-8')
+        single_import = (self._repo_root / 'agents/skills/dc-import-info' /
+                         'references/single-import.md').read_text(
+                             encoding='utf-8')
+        artifact_layout = (self._repo_root / 'agents/common/references' /
+                           'import-automation/artifact-layout.md').read_text(
+                               encoding='utf-8')
+        correlation = (self._repo_root / 'agents/common/import_support' /
+                       'correlate_import_runs.py').read_text(encoding='utf-8')
 
         self.assertIn('../../common/config/import-environments.yaml', skill)
-        for required in ('default_environment: prod', '  prod:', '  staging:',
-                         'scheduler:', 'workflow:', 'batch:', 'gcs:',
-                         'ingestion_helper:', 'spanner:'):
-            with self.subTest(required=required):
-                self.assertIn(required, registry)
-        for sync_metadata in ('sources:', 'selectors:', 'provenance:'):
-            with self.subTest(sync_metadata=sync_metadata):
-                self.assertNotIn(sync_metadata, registry)
+        self.assertEqual({'default_environment', 'environments'}, set(registry))
+        self.assertEqual('prod', registry['default_environment'])
+        self.assertEqual({'prod', 'staging'}, set(registry['environments']))
+
+        required_fields = {
+            'scheduler': {'project', 'location'},
+            'workflow': {
+                'project', 'location', 'import_workflow', 'ingestion_workflow'
+            },
+            'batch': {'project', 'location'},
+            'gcs': {'client_project', 'output_bucket', 'mount_bucket'},
+            'ingestion_helper': {'project', 'region', 'service'},
+            'spanner': {'project', 'instance', 'database'},
+        }
+        for environment_name, environment in registry['environments'].items():
+            with self.subTest(environment=environment_name):
+                self.assertEqual(set(required_fields), set(environment))
+                for section, fields in required_fields.items():
+                    self.assertEqual(fields, set(environment[section]))
+                    for field in fields:
+                        value = environment[section][field]
+                        self.assertIsInstance(value, str)
+                        self.assertTrue(value)
 
         self.assertIn('explicit prompt override', resolution)
         self.assertIn('environment_config', resolution)
         self.assertNotIn('configs.py', preview)
         self.assertIn('from the effective environment', spanner)
         self.assertIn('Do not use this recipe merely', helper)
+        self.assertIn('effective environment and prompt overrides',
+                      workflow_list)
+        self.assertNotIn('Scheduler target cannot identify', workflow_list)
+        for artifact_name in ('staging_version.txt', 'latest_version.txt',
+                              'import_summary.json'):
+            with self.subTest(artifact_name=artifact_name):
+                self.assertIn(artifact_name, artifact_layout)
+        self.assertIn('staging_version.txt', single_import)
+        self.assertIn('import_summary.json', single_import)
+        self.assertIn("_SUMMARY_FILENAME = 'import_summary.json'", correlation)
 
-        runtime_docs = '\n'.join((skill, resolution, preview, spanner, helper))
+        runtime_docs = '\n'.join(
+            (skill, resolution, preview, spanner, helper, workflow_list,
+             single_import, artifact_layout))
         self.assertNotIn('import-environment-sync-selectors.yaml', runtime_docs)
 
     def test_skill_and_recipes_do_not_reference_removed_helpers(self):
@@ -186,7 +228,7 @@ class SkillContractTest(unittest.TestCase):
                   'cloud-build/resolve-runtime-provenance.md').read_text(
                       encoding='utf-8')
 
-        self.assertIn('<YYYY_MM_DD>*/<SUMMARY_FILENAME>', historical)
+        self.assertIn('<YYYY_MM_DD>*/import_summary.json', historical)
         self.assertNotIn('<IMPORT_PREFIX>/**/', historical)
         self.assertIn('<IMPORT_PREFIX>/<VERSION>/**', artifacts)
         self.assertIn('--limit=<LIMIT_PLUS_ONE>', artifacts)

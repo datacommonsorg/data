@@ -8,8 +8,8 @@ The current staging attempt or accepted version must be identified.
 
 ## Required inputs
 
-GCS project, bucket, import-prefix template, and exact pointer filename from the
-effective environment, plus the resolved manifest directory and import name.
+GCS project and bucket from the effective environment, plus the exact import
+identity and repository-defined pointer role.
 
 ## Clarify when
 

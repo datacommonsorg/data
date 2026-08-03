@@ -9,8 +9,8 @@ run.
 
 ## Required inputs
 
-GCS project, bucket, and import-prefix template from the effective environment;
-exact version; and result limit.
+GCS project and bucket from the effective environment, exact import identity,
+exact version, and result limit.
 
 ## Clarify when
 

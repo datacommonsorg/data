@@ -20,6 +20,11 @@ when only one coordinate is overridden. Record every effective value as
 live resources, such as Workflow execution and Batch job IDs, are
 `runtime_identifier`.
 
+Apply this override rule to infrastructure coordinates only. Import prefixes,
+pointer names, and summary filenames are repository-defined ET artifact
+conventions documented by the artifact-layout reference, not environment
+fields.
+
 For an unknown environment, require explicit values for every coordinate used
 by the planned recipes. Two different explicit values for the same field are a
 conflict and require clarification.

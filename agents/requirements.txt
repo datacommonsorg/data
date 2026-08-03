@@ -2,3 +2,4 @@
 google-cloud-spanner
 google-cloud-storage
 google-cloud-workflows
+pyyaml
