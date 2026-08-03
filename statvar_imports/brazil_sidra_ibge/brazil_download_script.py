@@ -29,6 +29,14 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 
+from vars import (
+    LOCATIONS,
+    get_panel_1_specs,
+    get_panel_2_specs,
+    get_panel_3_specs,
+    get_panel_4_specs,
+)
+
 # --- Robust Session Setup ---
 def get_robust_session() -> requests.Session:
     """Configures a global requests Session with automated retries and connection pooling.
@@ -58,43 +66,6 @@ PANEL_FOLDER_MAP = {
     2: "Population_Economic_sector",
     3: "Average_Real_Income",
     4: "Mass_Income"
-}
-
-# Mapping of Brazilian location display names to IBGE geo-location codes
-LOCATIONS = {
-    "Brasil": "N1[1]",
-    "Norte": "N2[1]",
-    "Nordeste": "N2[2]",
-    "Sudeste": "N2[3]",
-    "Sul": "N2[4]",
-    "Centro-Oeste": "N2[5]",
-    "Rondônia": "N3[11]",
-    "Acre": "N3[12]",
-    "Amazonas": "N3[13]",
-    "Roraima": "N3[14]",
-    "Pará": "N3[15]",
-    "Amapá": "N3[16]",
-    "Tocantins": "N3[17]",
-    "Maranhão": "N3[21]",
-    "Piauí": "N3[22]",
-    "Ceará": "N3[23]",
-    "Rio Grande do Norte": "N3[24]",
-    "Paraíba": "N3[25]",
-    "Pernambuco": "N3[26]",
-    "Alagoas": "N3[27]",
-    "Sergipe": "N3[28]",
-    "Bahia": "N3[29]",
-    "Minas Gerais": "N3[31]",
-    "Espírito Santo": "N3[32]",
-    "Rio de Janeiro": "N3[33]",
-    "São Paulo": "N3[35]",
-    "Paraná": "N3[41]",
-    "Santa Catarina": "N3[42]",
-    "Rio Grande do Sul": "N3[43]",
-    "Mato Grosso do Sul": "N3[50]",
-    "Mato Grosso": "N3[51]",
-    "Goiás": "N3[52]",
-    "Distrito Federal": "N3[53]"
 }
 
 # The starting quarter code (YYYYQQ) for filtering period metadata
@@ -254,7 +225,7 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
             subtitle_row = f"População - Indicadores selecionados - Últimos {len(periods)} trimestres"
         elif panel_index == 3:
             subtitle_row = f"Rendimento - Indicadores selecionados - Últimos {len(periods)} trimestres"
-        else:
+        elif panel_index == 4:
             subtitle_row = f"Massa de rendimento - Indicadores selecionados - Últimos {len(periods)} trimestres"
 
         # Build table metadata header block
@@ -273,12 +244,7 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
             s3 = fetch_aggregate_series(6467, 4098, geo_code, period_query).get("Total", {})
             s4 = fetch_aggregate_series(6468, 4099, geo_code, period_query).get("Total", {})
 
-            ind_specs = [
-                ("Taxa de participação na força de trabalho das pessoas de 14 anos ou mais de idade, na semana de referência (%)", s1),
-                ("Nível da ocupação das pessoas de 14 anos ou mais de idade, na semana de referência (%)", s2),
-                ("Nível da desocupação das pessoas de 14 anos ou mais de idade, na semana de referência (%)", s3),
-                ("Taxa de desocupação das pessoas de 14 anos ou mais de idade, na semana de referência (%)", s4),
-            ]
+            ind_specs = get_panel_1_specs(s1, s2, s3, s4)
             for name, serie in ind_specs:
                 vals = [serie.get(pid, '') for pid in period_ids]
                 rows.append([name] + vals)
@@ -294,33 +260,7 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
             m_6464 = fetch_aggregate_series(6464, 4090, geo_code, period_query, classif="11913[all]")
             m_6465 = fetch_aggregate_series(6465, 4090, geo_code, period_query, classif="888[all]")
 
-            ind_specs = [
-                ("População total (milhares)", s_pop),
-                ("Pessoas de 14 anos ou mais de idade (milhares)", m_6463.get("32385", {})),
-                ("Pessoas de 14 anos ou mais de idade, na força de trabalho, na semana de referência (milhares)", m_6463.get("32386", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência (milhares)", m_6463.get("32387", {})),
-                ("Pessoas de 14 anos ou mais de idade, desocupadas na semana de referência (milhares)", m_6463.get("32446", {})),
-                ("Pessoas de 14 anos ou mais de idade, fora da força de trabalho, na semana de referência (milhares)", m_6463.get("32447", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência como Empregado no setor privado com carteira de trabalho assinada (milhares)", m_6464.get("31722", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência como Empregado no setor privado sem carteira de trabalho assinada (milhares)", m_6464.get("31723", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência como Trabalhador doméstico (milhares)", m_6464.get("31724", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência como Empregado no setor público (inclusive servidor estatutário e militar) (milhares)", m_6464.get("31727", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência como Empregador (milhares)", m_6464.get("96170", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência como Conta-própria (milhares)", m_6464.get("96171", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência como Trabalhador familiar auxiliar (milhares)", m_6464.get("31731", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência no grupamento de atividade Agricultura, pecuária, produção florestal, pesca e aquicultura (milhares)", m_6465.get("47947", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência no grupamento de atividade Indústria geral (milhares)", m_6465.get("47948", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência no grupamento de atividade Indústria de transformação (milhares)", {}),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência no grupamento de atividade Construção (milhares)", m_6465.get("47949", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência no grupamento de atividade Comércio, reparação de veículos automotores e motocicletas (milhares)", m_6465.get("47950", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência no grupamento de atividade Transporte, armazenagem e correio (milhares)", m_6465.get("56622", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência no grupamento de atividade Alojamento e alimentação (milhares)", m_6465.get("56623", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência no grupamento de atividade Informação, comunicação e atividades financeiras, imobiliárias, profissionais e administrativas (milhares)", m_6465.get("56624", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência no grupamento de atividade Administração pública, defesa, seguridade social, educação, saúde humana e serviços sociais (milhares)", m_6465.get("60032", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência no grupamento de atividade Outros serviços (milhares)", m_6465.get("56627", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência no grupamento de atividade Serviços Domésticos (milhares)", m_6465.get("56628", {})),
-                ("Pessoas de 14 anos ou mais de idade, ocupadas na semana de referência no grupamento de atividade Atividades mal definidas (milhares)", {}),
-            ]
+            ind_specs = get_panel_2_specs(s_pop, m_6463, m_6464, m_6465)
             for name, serie in ind_specs:
                 vals = [serie.get(pid, '') for pid in period_ids]
                 rows.append([name] + vals)
@@ -335,30 +275,7 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
             s_main_eff = fetch_aggregate_series(6470, 5934, geo_code, period_query).get("Total", {})
             m_6473 = fetch_aggregate_series(6473, 5932, geo_code, period_query, classif="888[all]")
 
-            ind_specs = [
-                ("Rendimento médio real de todos os trabalhos, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho (R$)", s_all_usual),
-                ("Rendimento médio real de todos os trabalhos, efetivamente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho (R$)", s_all_eff),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho (R$)", m_6471.get("96165", {})),
-                ("Rendimento médio real do trabalho principal, efetivamente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho (R$)", s_main_eff),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, como Empregado no setor privado com carteira de trabalho assinada (R$)", m_6471.get("31722", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, como Empregado no setor privado sem carteira de trabalho assinada (R$)", m_6471.get("31723", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, como Trabalhador doméstico (R$)", m_6471.get("31724", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, como Empregado no setor público (inclusive servidor estatutário e militar) (R$)", m_6471.get("31727", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, como Empregador (R$)", m_6471.get("96170", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, como Conta-própria (R$)", m_6471.get("96171", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, no grupamento de atividade Agricultura, pecuária, produção florestal, pesca e aquicultura (R$)", m_6473.get("47947", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, no grupamento de atividade Indústria geral (R$)", m_6473.get("47948", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, no grupamento de atividade Indústria de transformação (R$)", {}),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, no grupamento de atividade Construção (R$)", m_6473.get("47949", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, no grupamento de atividade Comércio, reparação de veículos automotores e motocicletas (R$)", m_6473.get("47950", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, no grupamento de atividade Transporte, armazenagem e correio (R$)", m_6473.get("56622", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho,no grupamento de atividade Alojamento e alimentação (R$)", m_6473.get("56623", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, no grupamento de atividade Informação, comunicação e atividades financeiras, imobiliárias, profissionais e administrativas (R$)", m_6473.get("56624", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, no grupamento de atividade Administração pública, defesa, seguridade social, educação, saúde humana e serviços sociais (R$)", m_6473.get("60032", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, no grupamento de atividade Outros serviços (R$)", m_6473.get("56627", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, no grupamento de atividade Serviços Domésticos (R$)", m_6473.get("56628", {})),
-                ("Rendimento médio real do trabalho principal, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho, no grupamento de atividade Atividades mal definidas (R$)", {}),
-            ]
+            ind_specs = get_panel_3_specs(s_all_usual, s_all_eff, m_6471, s_main_eff, m_6473)
             for name, serie in ind_specs:
                 vals = [serie.get(pid, '') for pid in period_ids]
                 rows.append([name] + vals)
@@ -370,10 +287,7 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
             s_mass_usual = fetch_aggregate_series(6474, 6293, geo_code, period_query).get("Total", {})
             s_mass_eff = fetch_aggregate_series(6475, 6295, geo_code, period_query).get("Total", {})
 
-            ind_specs = [
-                ("Massa de rendimento real de todos os trabalhos, habitualmente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho (milhões de R$)", s_mass_usual),
-                ("Massa de rendimento real de todos os trabalhos, efetivamente recebido por mês, pelas pessoas de 14 anos ou mais de idade, ocupadas na semana de referência, com rendimento de trabalho (milhões de R$)", s_mass_eff),
-            ]
+            ind_specs = get_panel_4_specs(s_mass_usual, s_mass_eff)
             for name, serie in ind_specs:
                 vals = [serie.get(pid, '') for pid in period_ids]
                 rows.append([name] + vals)
