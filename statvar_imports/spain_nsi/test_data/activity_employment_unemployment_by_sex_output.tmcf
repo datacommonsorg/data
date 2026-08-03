@@ -1,0 +1,9 @@
+Node: E:activity_employment_unemployment_by_sex_output->E0
+observationAbout: C:activity_employment_unemployment_by_sex_output->observationAbout
+observationPeriod: C:activity_employment_unemployment_by_sex_output->observationPeriod
+observationDate: C:activity_employment_unemployment_by_sex_output->observationDate
+value: C:activity_employment_unemployment_by_sex_output->value
+variableMeasured: C:activity_employment_unemployment_by_sex_output->variableMeasured
+unit: C:activity_employment_unemployment_by_sex_output->unit
+scalingFactor: C:activity_employment_unemployment_by_sex_output->scalingFactor
+typeOf: dcs:StatVarObservation
