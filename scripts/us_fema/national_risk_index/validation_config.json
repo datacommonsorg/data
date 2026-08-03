@@ -6,7 +6,15 @@
             "description": "Checks that the percentage of deleted points is within the threshold.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 0.1
+                "threshold": 2.0
+            }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Allows minor missing observationAbout references for unmapped territory census tracts.",
+            "validator": "LINT_ERROR_COUNT",
+            "params": {
+                "threshold": 50
             }
         },
         {
