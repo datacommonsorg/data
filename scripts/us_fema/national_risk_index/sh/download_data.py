@@ -2,12 +2,27 @@ import csv
 import json
 import os
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 COUNTIES_API = "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/National_Risk_Index_Counties/FeatureServer/0/query"
 TRACTS_API = "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/National_Risk_Index_Census_Tracts/FeatureServer/0/query"
 DEST_DIR = "source_data"
 
-def download_dataset(api_url, output_csv_name):
+
+def get_retry_session():
+    session = requests.Session()
+    retries = Retry(
+        total=5,
+        backoff_factor=1,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=["GET"]
+    )
+    session.mount("https://", HTTPAdapter(max_retries=retries))
+    return session
+
+
+def download_dataset(session, api_url, output_csv_name):
     print(f"Downloading from {api_url} to {output_csv_name}...")
     offset = 0
     record_count = 2000  # Fetch in batches of 2000
@@ -27,7 +42,7 @@ def download_dataset(api_url, output_csv_name):
                 "returnGeometry": "false",  # Exclude heavy map geometry coordinates
                 "f": "json"
             }
-            response = requests.get(api_url, params=params, timeout=120)
+            response = session.get(api_url, params=params, timeout=120)
             response.raise_for_status()
             data = response.json()
             
@@ -38,7 +53,7 @@ def download_dataset(api_url, output_csv_name):
             if not writer:
                 # Extract the attribute field names as CSV headers
                 headers = list(features[0]["attributes"].keys())
-                writer = csv.DictWriter(csvfile, fieldnames=headers)
+                writer = csv.DictWriter(csvfile, fieldnames=headers, extrasaction="ignore")
                 writer.writeheader()
                 
             for feature in features:
@@ -50,6 +65,7 @@ def download_dataset(api_url, output_csv_name):
             offset += record_count
 
 os.makedirs(DEST_DIR, exist_ok=True)
-download_dataset(COUNTIES_API, "NRI_Table_Counties.csv")
-download_dataset(TRACTS_API, "NRI_Table_CensusTracts.csv")
+session = get_retry_session()
+download_dataset(session, COUNTIES_API, "NRI_Table_Counties.csv")
+download_dataset(session, TRACTS_API, "NRI_Table_CensusTracts.csv")
 print("All downloads completed successfully.")

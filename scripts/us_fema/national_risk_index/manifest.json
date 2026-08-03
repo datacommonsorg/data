@@ -8,7 +8,7 @@
             "provenance_url": "https://hazards.fema.gov/nri/data-resources",
             "provenance_description": "USFEMA National RiskIndex",
             "scripts": [
-                "sh/download_data.sh",
+                "sh/download_data.py",
                 "sh/e2e.sh"
             ],
             "import_inputs": [
