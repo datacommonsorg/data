@@ -1,0 +1,74 @@
+# Repository-configured defaults used by dc-import-info. Explicit values in a
+# request override the corresponding field for that request.
+
+default_environment: prod
+
+environments:
+  prod:
+    scheduler:
+      project: datcom-import-automation-prod
+      location: us-central1
+
+    workflow:
+      project: datcom-import-automation-prod
+      location: us-central1
+      import_workflow: import-automation-workflow
+      ingestion_workflow: spanner-ingestion-workflow
+
+    batch:
+      project: datcom-import-automation-prod
+      location: us-central1
+
+    gcs:
+      client_project: datcom-204919
+      output_bucket: datcom-prod-imports
+      mount_bucket: datcom-volume-mount
+      import_prefix_template: "{manifest_directory}/{import_name}"
+      staging_pointer: staging_version.txt
+      accepted_pointer: latest_version.txt
+      run_summary_filename: import_summary.json
+
+    ingestion_helper:
+      project: datcom-import-automation-prod
+      region: us-central1
+      service: ingestion-helper-service
+
+    spanner:
+      project: datcom-store
+      instance: dc-graph-staging
+      database: dc_graph_1
+
+  staging:
+    scheduler:
+      project: datcom-ci
+      location: us-central1
+
+    workflow:
+      project: datcom-ci
+      location: us-central1
+      import_workflow: import-automation-workflow
+      ingestion_workflow: spanner-ingestion-workflow
+
+    batch:
+      project: datcom-ci
+      location: us-central1
+
+    gcs:
+      client_project: datcom-ci
+      output_bucket: datcom-ci-test
+      mount_bucket: datcom-ci-test
+      import_prefix_template: "{manifest_directory}/{import_name}"
+      staging_pointer: staging_version.txt
+      accepted_pointer: latest_version.txt
+      run_summary_filename: import_summary.json
+
+    ingestion_helper:
+      project: datcom-ci
+      region: us-central1
+      service: ingestion-helper-service
+
+    spanner:
+      project: datcom-ci
+      instance: datcom-spanner-test
+      database: dc-test-db
+
