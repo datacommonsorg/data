@@ -47,7 +47,10 @@ Use this path when the user supplies one import name or name-like query.
     Use `import_history` when the import is the entry point and
     `import_version` when the version is already known. This correlation does
     not replace Workflow history for attempts that failed before version
-    metadata was written.
+    metadata was written. Treat its returned Workflow, Batch, and GCS values as
+    ET glue; invoke their detail recipes only when the question requires more.
+    State the effective limit and optional UTC range from the invocation with
+    the result because the minimal JSON does not repeat them.
 11. Fetch Batch, tasks, logs, artifacts, ingestion history, or provenance only
    when the question requires those details.
 12. End with `Infrastructure actually used`, including skipped and unresolved

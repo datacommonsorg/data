@@ -244,11 +244,16 @@ class SkillContractTest(unittest.TestCase):
                   'correlate-import-runs.md').read_text(encoding='utf-8')
 
         for required in ('--mode=import_history', '--mode=import_version',
-                         '1 through 20', './agents/common/run_python.sh'):
+                         'gcs_base_path', 'workflow_execution_id',
+                         'batch_job_id', 'counts unique versions',
+                         'caller must state the effective limit',
+                         'bounded version-discovery query', '1 through 20',
+                         './agents/common/run_python.sh'):
             with self.subTest(required=required):
                 self.assertIn(required, recipe)
         self.assertIn('does not call\nWorkflow or Batch APIs', recipe)
         self.assertNotIn('<IMPORT_PREFIX>/**', recipe)
+        self.assertNotIn('Spanner name candidates', recipe)
 
     def test_python_wrapper_uses_repository_environment_without_minor_pin(self):
         wrapper = (self._repo_root /

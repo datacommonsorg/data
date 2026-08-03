@@ -46,7 +46,9 @@ _IMPORT_NAME_PATTERN = re.compile(
 _WORKFLOW_COMMENT_PATTERN = re.compile(
     r'(?P<kind>import-workflow|ingestion-workflow):(?P<id>[^\s]+)')
 _MODES = ('import_history', 'import_version')
-_MAX_LIMIT = 20
+_MAX_RUN_LIMIT = 20
+_MAX_VERSION_DISCOVERY_LIMIT = 100
+_MAX_EVENT_SCAN_LIMIT = 100
 _SUMMARY_FILENAME = 'import_summary.json'
 
 
@@ -145,6 +147,82 @@ def _serialize(value: Any) -> Any:
     return value
 
 
+def _validate_time_range(start_time: datetime | None,
+                         end_time: datetime | None) -> None:
+    if (start_time is None) != (end_time is None):
+        raise ImportRunCorrelationError(
+            'start_time and end_time must be supplied together.')
+    if start_time is not None and start_time >= end_time:
+        raise ImportRunCorrelationError('start_time must precede end_time.')
+
+
+def _execute_query(project: str, instance: str, database: str, sql: str,
+                   params: dict[str, Any], param_types: dict[str, Any],
+                   client: Any | None) -> list[Any]:
+    spanner_client = client or spanner.Client(project=project,
+                                              disable_builtin_metrics=True)
+    database_client = spanner_client.instance(instance).database(database)
+    try:
+        with database_client.snapshot() as snapshot:
+            return list(
+                snapshot.execute_sql(sql,
+                                     params=params,
+                                     param_types=param_types))
+    except Exception as exc:
+        error = ImportRunCorrelationError(
+            f'Unable to read ImportVersionHistory: {exc}')
+        error.add_note(
+            f'Database: projects/{project}/instances/{instance}/databases/{database}'
+        )
+        raise error from exc
+
+
+def query_latest_versions(project: str,
+                          instance: str,
+                          database: str,
+                          import_names: list[str],
+                          limit: int,
+                          start_time: datetime | None = None,
+                          end_time: datetime | None = None,
+                          client: Any | None = None) -> dict[str, Any]:
+    """Discovers a bounded set of raw versions ordered by latest event."""
+    if limit < 1 or limit > _MAX_VERSION_DISCOVERY_LIMIT:
+        raise ImportRunCorrelationError(
+            'version discovery limit must be between 1 and '
+            f'{_MAX_VERSION_DISCOVERY_LIMIT}.')
+    _validate_time_range(start_time, end_time)
+
+    predicates = ['ImportName IN UNNEST(@import_names)']
+    params: dict[str, Any] = {
+        'import_names': import_names,
+        'limit': limit + 1,
+    }
+    param_types: dict[str, Any] = {
+        'import_names': spanner.param_types.Array(spanner.param_types.STRING),
+        'limit': spanner.param_types.INT64,
+    }
+    if start_time is not None:
+        predicates.extend(
+            ('UpdateTimestamp >= @start_time', 'UpdateTimestamp < @end_time'))
+        params.update({'start_time': start_time, 'end_time': end_time})
+        param_types.update({
+            'start_time': spanner.param_types.TIMESTAMP,
+            'end_time': spanner.param_types.TIMESTAMP,
+        })
+
+    sql = ('SELECT Version, MAX(UpdateTimestamp) AS LatestUpdateTimestamp '
+           'FROM ImportVersionHistory WHERE ' + ' AND '.join(predicates) +
+           ' GROUP BY Version '
+           'ORDER BY LatestUpdateTimestamp DESC, Version LIMIT @limit')
+    raw_rows = _execute_query(project, instance, database, sql, params,
+                              param_types, client)
+    rows = [{
+        'Version': _serialize(row[0]),
+        'LatestUpdateTimestamp': _serialize(row[1]),
+    } for row in raw_rows[:limit]]
+    return {'rows': rows, 'truncated': len(raw_rows) > limit}
+
+
 def query_version_history(project: str,
                           instance: str,
                           database: str,
@@ -155,14 +233,10 @@ def query_version_history(project: str,
                           versions: list[str] | None = None,
                           client: Any | None = None) -> dict[str, Any]:
     """Runs one bounded, parameterized ImportVersionHistory query."""
-    if limit < 1 or limit > _MAX_LIMIT:
+    if limit < 1 or limit > _MAX_EVENT_SCAN_LIMIT:
         raise ImportRunCorrelationError(
-            f'limit must be between 1 and {_MAX_LIMIT}.')
-    if (start_time is None) != (end_time is None):
-        raise ImportRunCorrelationError(
-            'start_time and end_time must be supplied together.')
-    if start_time is not None and start_time >= end_time:
-        raise ImportRunCorrelationError('start_time must precede end_time.')
+            f'event scan limit must be between 1 and {_MAX_EVENT_SCAN_LIMIT}.')
+    _validate_time_range(start_time, end_time)
 
     columns = ', '.join(_HISTORY_COLUMNS)
     predicates = ['ImportName IN UNNEST(@import_names)']
@@ -191,22 +265,8 @@ def query_version_history(project: str,
     sql = (f'SELECT {columns} FROM ImportVersionHistory WHERE ' +
            ' AND '.join(predicates) +
            ' ORDER BY UpdateTimestamp DESC, ImportName, Version LIMIT @limit')
-    spanner_client = client or spanner.Client(project=project,
-                                              disable_builtin_metrics=True)
-    database_client = spanner_client.instance(instance).database(database)
-    try:
-        with database_client.snapshot() as snapshot:
-            raw_rows = list(
-                snapshot.execute_sql(sql,
-                                     params=params,
-                                     param_types=param_types))
-    except Exception as exc:
-        error = ImportRunCorrelationError(
-            f'Unable to read ImportVersionHistory: {exc}')
-        error.add_note(
-            f'Database: projects/{project}/instances/{instance}/databases/{database}'
-        )
-        raise error from exc
+    raw_rows = _execute_query(project, instance, database, sql, params,
+                              param_types, client)
 
     rows = [
         dict(zip(_HISTORY_COLUMNS, _serialize(tuple(row))))
@@ -216,11 +276,11 @@ def query_version_history(project: str,
 
 
 def _summary_projection(summary: dict[str, Any]) -> dict[str, Any]:
-    fields = ('import_name', 'status', 'latest_version', 'graph_path',
-              'next_refresh', 'execution_time', 'data_volume', 'import_stats')
-    result = {field: _serialize(summary.get(field)) for field in fields}
-    result['batch_job_id'] = _serialize(summary.get('job_id'))
-    return result
+    return {
+        'import_name': _serialize(summary.get('import_name')),
+        'latest_version': _serialize(summary.get('latest_version')),
+        'batch_job_id': _serialize(summary.get('job_id')),
+    }
 
 
 def read_gcs_summary(project: str,
@@ -236,7 +296,8 @@ def read_gcs_summary(project: str,
         'normalized_version': version,
         'summary_uri': summary_uri,
         'summary_found': False,
-        'source': 'gcs_import_summary',
+        'batch_job_id': None,
+        'object_create_time': None,
         'missing': [],
         'warnings': [],
     }
@@ -330,30 +391,62 @@ def _history_event(row: dict[str, Any], bucket: str,
     version, warnings = normalize_stored_version(row.get('Version'), bucket,
                                                  gcs_prefix)
     workflow = classify_workflow_reference(row)
-    missing = []
-    if version is None:
-        missing.append('version')
-    if (workflow['typed_execution_id'] is None and
-            workflow['comment_execution_id'] is None):
-        missing.append('workflow_execution_id')
     return {
-        'stored_import_name': row.get('ImportName'),
-        'stored_version': row.get('Version'),
-        'normalized_version': version,
+        'version': version,
         'update_timestamp': row.get('UpdateTimestamp'),
-        'status': row.get('Status'),
-        'execution_time': row.get('ExecutionTime'),
-        'node_count': row.get('NodeCount'),
-        'edge_count': row.get('EdgeCount'),
-        'observation_count': row.get('ObservationCount'),
-        'time_series_count': row.get('TimeSeriesCount'),
-        'comment': row.get('Comment'),
         'workflow': workflow,
-        'source': 'ImportVersionHistory',
-        'gcs_summary_eligible': version is not None and not warnings,
-        'missing': missing,
         'warnings': warnings,
     }
+
+
+def _select_import_workflow(
+        events: list[dict[str, Any]]) -> tuple[str | None, Any, list[str]]:
+    """Selects one unambiguous ET Workflow reference for a version."""
+    references: dict[str, Any] = {}
+    issues = []
+    for event in events:
+        workflow = event['workflow']
+        if workflow['kind'] != 'import_workflow':
+            continue
+        if workflow['confidence'] == 'ambiguous':
+            issues.append('conflicting_import_workflow_fields')
+            continue
+        execution_id = workflow['execution_id']
+        if execution_id and execution_id not in references:
+            references[execution_id] = event['update_timestamp']
+    if len(references) == 1:
+        return (*next(iter(references.items())), issues)
+    if len(references) > 1:
+        issues.append('multiple_import_workflow_executions')
+    return None, None, issues
+
+
+def _run_record(version: str, gcs_bucket: str, gcs_prefix: str,
+                events: list[dict[str, Any]],
+                summary: dict[str, Any]) -> dict[str, Any]:
+    """Builds one minimal ET run record from correlated evidence."""
+    workflow_id, workflow_time, issues = _select_import_workflow(events)
+    batch_job_id = summary.get('batch_job_id')
+    missing = []
+    if workflow_id is None:
+        missing.append('workflow_execution_id')
+    if not summary.get('summary_found'):
+        missing.append('gcs_import_summary')
+    if not batch_job_id:
+        missing.append('batch_job_id')
+    issues.extend(summary.get('warnings', []))
+    result = {
+        'version': version,
+        'gcs_base_path': expected_version_uri(gcs_bucket, gcs_prefix, version),
+        'workflow_execution_id': workflow_id,
+        'batch_job_id': batch_job_id,
+        'workflow_recorded_at': workflow_time,
+        'gcs_summary_created_at': summary.get('object_create_time'),
+        'missing': missing,
+    }
+    if issues:
+        result['issues'] = list(dict.fromkeys(issues))
+    return result
 
 
 def correlate_import_runs(mode: str,
@@ -373,13 +466,14 @@ def correlate_import_runs(mode: str,
     """Correlates bounded Spanner history with exact GCS summaries."""
     if mode not in _MODES:
         raise ImportRunCorrelationError(f'Unsupported mode: {mode}')
-    if limit is not None and (limit < 1 or limit > _MAX_LIMIT):
+    if limit is not None and (limit < 1 or limit > _MAX_RUN_LIMIT):
         raise ImportRunCorrelationError(
-            f'limit must be between 1 and {_MAX_LIMIT}.')
+            f'limit must be between 1 and {_MAX_RUN_LIMIT}.')
     identity = normalize_import_name(absolute_import_name, gcs_output_prefix)
-    normalized_input_version = None
-    stored_version_candidates = None
-    query_limit = limit or 1
+    run_limit = limit or 1
+    selected_versions = []
+    discovery_truncated = False
+    issues = []
     if mode == 'import_version':
         if start_time is not None or end_time is not None:
             raise ImportRunCorrelationError(
@@ -387,64 +481,88 @@ def correlate_import_runs(mode: str,
         if version is None:
             raise ImportRunCorrelationError(
                 'version is required for import_version mode.')
-        normalized_input_version = validate_version(version)
-        stored_version_candidates = version_candidates(
-            gcs_bucket, identity['gcs_prefix'], normalized_input_version)
-        query_limit = limit or _MAX_LIMIT
+        selected_versions.append(validate_version(version))
     elif version is not None:
         raise ImportRunCorrelationError(
             'version is only valid for import_version mode.')
+    else:
+        discovery = query_latest_versions(spanner_project,
+                                          spanner_instance,
+                                          spanner_database,
+                                          identity['spanner_name_candidates'],
+                                          _MAX_VERSION_DISCOVERY_LIMIT,
+                                          start_time=start_time,
+                                          end_time=end_time,
+                                          client=spanner_client)
+        normalized_versions = []
+        rejected_before_limit = False
+        for row in discovery['rows']:
+            discovered_version, warnings = normalize_stored_version(
+                row.get('Version'), gcs_bucket, identity['gcs_prefix'])
+            if discovered_version is None or warnings:
+                if len(normalized_versions) < run_limit:
+                    rejected_before_limit = True
+                continue
+            if discovered_version not in normalized_versions:
+                normalized_versions.append(discovered_version)
+        selected_versions.extend(normalized_versions[:run_limit])
+        discovery_truncated = (discovery['truncated'] or
+                               len(normalized_versions) > run_limit or
+                               rejected_before_limit)
+        if rejected_before_limit:
+            issues.append('newer_history_version_rejected')
 
-    history = query_version_history(spanner_project,
-                                    spanner_instance,
-                                    spanner_database,
-                                    identity['spanner_name_candidates'],
-                                    query_limit,
-                                    start_time=start_time,
-                                    end_time=end_time,
-                                    versions=stored_version_candidates,
-                                    client=spanner_client)
+    detail_version_candidates = [
+        candidate for selected_version in selected_versions for candidate in
+        version_candidates(gcs_bucket, identity['gcs_prefix'], selected_version)
+    ]
+    history = {'rows': [], 'truncated': False}
+    if detail_version_candidates:
+        history = query_version_history(spanner_project,
+                                        spanner_instance,
+                                        spanner_database,
+                                        identity['spanner_name_candidates'],
+                                        _MAX_EVENT_SCAN_LIMIT,
+                                        start_time=start_time,
+                                        end_time=end_time,
+                                        versions=detail_version_candidates,
+                                        client=spanner_client)
     events = [
         _history_event(row, gcs_bucket, identity['gcs_prefix'])
         for row in history['rows']
     ]
 
-    versions_to_read = []
-    if normalized_input_version:
-        versions_to_read.append(normalized_input_version)
+    events_by_version: dict[str, list[dict[str, Any]]] = {}
     for event in events:
-        event_version = event['normalized_version']
-        if (event['gcs_summary_eligible'] and
-                event_version not in versions_to_read):
-            versions_to_read.append(event_version)
+        event_version = event['version']
+        if event_version and not event['warnings']:
+            events_by_version.setdefault(event_version, []).append(event)
+
     summaries = [
         read_gcs_summary(gcs_project,
                          gcs_bucket,
                          identity['gcs_prefix'],
                          item,
                          identity['simple_import_name'],
-                         client=storage_client) for item in versions_to_read
+                         client=storage_client) for item in selected_versions
     ]
-    return {
-        'mode':
-            mode,
-        'input': {
-            **identity,
-            'version': normalized_input_version,
-            'start_time': _serialize(start_time),
-            'end_time': _serialize(end_time),
-        },
-        'spanner_database':
-            f'projects/{spanner_project}/instances/{spanner_instance}/databases/{spanner_database}',
-        'limit':
-            query_limit,
-        'truncated':
-            history['truncated'],
-        'history_events':
-            events,
-        'gcs_summaries':
-            summaries,
+    summaries_by_version = {
+        summary['normalized_version']: summary for summary in summaries
     }
+    runs = [
+        _run_record(item, gcs_bucket, identity['gcs_prefix'],
+                    events_by_version.get(item, []), summaries_by_version[item])
+        for item in selected_versions
+    ]
+    result = {
+        'mode': mode,
+        'import_name': absolute_import_name,
+        'runs': runs,
+        'truncated': discovery_truncated or history['truncated'],
+    }
+    if issues:
+        result['issues'] = issues
+    return result
 
 
 def _parser() -> argparse.ArgumentParser:
