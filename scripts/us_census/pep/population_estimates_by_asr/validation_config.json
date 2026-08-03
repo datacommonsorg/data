@@ -17,7 +17,7 @@
             }
         },
         {
-            "rule_id": "Check_goldens_output_csv",
+            "rule_id": "check_goldens_output_csv",
             "description": "Verifies the generated output CSV data matches established critical golden records",
             "validator": "GOLDENS_CHECK",
             "params": {
