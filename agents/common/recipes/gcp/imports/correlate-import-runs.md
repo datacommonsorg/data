@@ -9,9 +9,9 @@ version to its recorded Batch and Workflow identifiers.
 
 ## Required inputs
 
-Mode, exact absolute import name, verified Spanner project/instance/database,
-verified GCS project/bucket, optional deployment-specific GCS output prefix,
-and either a history limit or exact version.
+Mode, exact absolute import name, Spanner project/instance/database and GCS
+project/bucket from the effective environment, optional configured GCS output
+prefix, and either a history limit or exact version.
 
 ## Clarify when
 
@@ -54,8 +54,8 @@ For one exact version:
   --gcs_bucket=<GCS_BUCKET>
 ```
 
-Pass `--gcs_output_prefix=<PREFIX>` only when verified for the selected live
-deployment.
+Pass `--gcs_output_prefix=<PREFIX>` only when present in the effective
+environment.
 
 ## Preferred invocation
 

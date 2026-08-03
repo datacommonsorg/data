@@ -8,11 +8,13 @@ The current staging attempt or accepted version must be identified.
 
 ## Required inputs
 
-Verified GCS project, bucket, import prefix, and exact pointer filename.
+GCS project, bucket, import-prefix template, and exact pointer filename from the
+effective environment, plus the resolved manifest directory and import name.
 
 ## Clarify when
 
-The bucket/prefix is inferred rather than tied to the selected deployment.
+A required effective coordinate is missing or the import prefix cannot be
+constructed from the exact import identity.
 
 ## Read-only operation
 
@@ -47,5 +49,4 @@ permission denied, or a stale pointer.
 
 ## Related repository sources
 
-`import-automation/executor/app/configs.py` and
-`import-automation/executor/app/executor/import_executor.py`.
+The runtime environment file and artifact-layout reference.

@@ -9,11 +9,12 @@ its exact Workflow target.
 
 ## Required inputs
 
-Simple import name, absolute import name, Scheduler project, and location.
+Simple import name, absolute import name, Scheduler project/location, and the
+configured Workflow resource from the effective environment.
 
 ## Clarify when
 
-Project/location is missing or user, repository, and live scope conflict.
+A required effective coordinate is missing or explicit prompt values conflict.
 
 ## Read-only operation
 
@@ -32,8 +33,10 @@ jq '{name, description, state, schedule, timeZone, attemptDeadline,
 ## Preferred invocation
 
 Run the command once. Verify both `description` and `target_import_name` equal
-the resolved absolute import name. Do not retain the complete request body,
-headers, or OAuth configuration.
+the resolved absolute import name and `target_uri` identifies the configured
+Workflow. Report infrastructure drift and stop if it points outside the
+effective scope. Do not retain the complete request body, headers, or OAuth
+configuration.
 
 ## Expected output
 
@@ -52,7 +55,7 @@ schedule, and observation time.
 ## Common failures
 
 Missing or paused job, permission denied, body decoding failure, name-only
-match, or non-Workflow target.
+match, non-Workflow target, or target/configuration drift.
 
 ## Related repository sources
 

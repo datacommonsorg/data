@@ -30,8 +30,10 @@ Use this path when the user supplies one import name or name-like query.
    - Last ten runs: Scheduler verification and ten matching Workflow executions.
    - Current publication state: add one current Spanner query.
    - Selected run artifacts: add one version pointer or exact version listing.
-6. Preview only the resources needed by that plan and follow the cloud approval
-   gate in `SKILL.md`.
+6. Load the selected environment from
+   `agents/common/config/import-environments.yaml`, apply explicit prompt
+   overrides field by field, preview only the resources needed by the plan, and
+   follow the cloud approval gate in `SKILL.md`.
 7. Invoke the selected recipes in dependency order. Stop as soon as the answer
    is supported.
 8. Default a request for “the last run” to one matching execution within the
@@ -53,10 +55,9 @@ Use this path when the user supplies one import name or name-like query.
 
 ## Clarify instead of guessing
 
-Ask when Scheduler project/location cannot be resolved, more than one live
-deployment matches, explicit sources conflict, or live evidence conflicts with
-the selected scope. A missing resource or permission is a result, not permission
-to search every project.
+Ask when a required environment field is missing, explicit prompt values
+conflict, or live evidence points outside the effective scope. A missing
+resource or permission is a result, not permission to search every project.
 
 ## Do not diagnose
 

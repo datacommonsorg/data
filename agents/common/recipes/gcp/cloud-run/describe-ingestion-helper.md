@@ -4,16 +4,17 @@ Recipe ID: `gcp.cloud-run.describe-ingestion-helper`
 
 ## Use when
 
-Resolving GCS or Spanner coordinates required by a selected recipe.
+Inspecting the configured ingestion-helper deployment when the user asks about
+it or another live resource reports an infrastructure mismatch.
 
 ## Required inputs
 
-Cloud Run project, region, and exact helper service name derived from the live
-Workflow.
+Cloud Run project, region, and exact helper service name from the effective
+environment.
 
 ## Clarify when
 
-The Workflow does not identify a unique helper or user/live scopes conflict.
+A required effective coordinate is missing or explicit prompt values conflict.
 
 ## Read-only operation
 
@@ -38,7 +39,9 @@ jq '{name: .metadata.name,
 ## Preferred invocation
 
 Describe one exact service and immediately project only allowlisted coordinates.
-Do not retain the raw service response or any other environment variable.
+Do not use this recipe merely to discover GCS or Spanner coordinates; obtain
+those from the effective environment. Do not retain the raw service response or
+any other environment variable.
 
 ## Expected output
 
@@ -61,4 +64,5 @@ absent, or a coordinate provided indirectly through a secret reference.
 
 ## Related repository sources
 
-The live Workflow source and a supplied sibling ingestion-helper deployment.
+The runtime environment file and, when implementation details are requested,
+an optional sibling ingestion-helper checkout.

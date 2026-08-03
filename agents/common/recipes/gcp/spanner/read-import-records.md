@@ -9,12 +9,12 @@ history is specifically required.
 
 ## Required inputs
 
-Verified Spanner project, instance, database, exact simple import name, one
-query type, and row limit.
+Spanner project, instance, and database from the effective environment; exact
+simple import name; one query type; and row limit.
 
 ## Clarify when
 
-Coordinates cannot be derived from the selected live helper deployment.
+A required effective coordinate is missing or explicit prompt values conflict.
 
 ## Read-only operation
 
@@ -57,5 +57,5 @@ absent current row, or history that legitimately omits failed attempts.
 
 ## Related repository sources
 
-A supplied sibling `ingestion-helper/clients/schema.sql`, live database
-metadata, and the run/status reference.
+The runtime environment file, live database metadata, and the run/status
+reference. An optional sibling schema can explain implementation details.

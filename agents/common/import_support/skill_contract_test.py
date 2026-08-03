@@ -104,6 +104,41 @@ class SkillContractTest(unittest.TestCase):
             with self.subTest(required=required):
                 self.assertIn(required, skill)
 
+    def test_skill_uses_simple_runtime_environment_registry(self):
+        registry = (self._repo_root / 'agents/common/config' /
+                    'import-environments.yaml').read_text(encoding='utf-8')
+        skill = (self._repo_root /
+                 'agents/skills/dc-import-info/SKILL.md').read_text(
+                     encoding='utf-8')
+        resolution = (self._repo_root / 'agents/common/references' /
+                      'import-automation/environment-resolution.md').read_text(
+                          encoding='utf-8')
+        preview = (self._repo_root / 'agents/common/recipes/repository' /
+                   'preview-infrastructure.md').read_text(encoding='utf-8')
+        spanner = (self._repo_root / 'agents/common/recipes/gcp/spanner' /
+                   'read-import-records.md').read_text(encoding='utf-8')
+        helper = (self._repo_root / 'agents/common/recipes/gcp/cloud-run' /
+                  'describe-ingestion-helper.md').read_text(encoding='utf-8')
+
+        self.assertIn('../../common/config/import-environments.yaml', skill)
+        for required in ('default_environment: prod', '  prod:', '  staging:',
+                         'scheduler:', 'workflow:', 'batch:', 'gcs:',
+                         'ingestion_helper:', 'spanner:'):
+            with self.subTest(required=required):
+                self.assertIn(required, registry)
+        for sync_metadata in ('sources:', 'selectors:', 'provenance:'):
+            with self.subTest(sync_metadata=sync_metadata):
+                self.assertNotIn(sync_metadata, registry)
+
+        self.assertIn('explicit prompt override', resolution)
+        self.assertIn('environment_config', resolution)
+        self.assertNotIn('configs.py', preview)
+        self.assertIn('from the effective environment', spanner)
+        self.assertIn('Do not use this recipe merely', helper)
+
+        runtime_docs = '\n'.join((skill, resolution, preview, spanner, helper))
+        self.assertNotIn('import-environment-sync-selectors.yaml', runtime_docs)
+
     def test_skill_and_recipes_do_not_reference_removed_helpers(self):
         paths = [
             self._repo_root / 'agents/skills/dc-import-info/SKILL.md',
@@ -151,7 +186,7 @@ class SkillContractTest(unittest.TestCase):
                   'cloud-build/resolve-runtime-provenance.md').read_text(
                       encoding='utf-8')
 
-        self.assertIn('<YYYY_MM_DD>*/import_summary.json', historical)
+        self.assertIn('<YYYY_MM_DD>*/<SUMMARY_FILENAME>', historical)
         self.assertNotIn('<IMPORT_PREFIX>/**/', historical)
         self.assertIn('<IMPORT_PREFIX>/<VERSION>/**', artifacts)
         self.assertIn('--limit=<LIMIT_PLUS_ONE>', artifacts)

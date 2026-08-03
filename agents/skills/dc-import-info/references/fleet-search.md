@@ -15,8 +15,9 @@ Report every scan and result limit.
 
 ## Procedure
 
-1. Resolve production Workflow candidates from repository configuration or use
-   explicit request-scoped infrastructure values.
+1. Load the production Workflow from
+   `agents/common/config/import-environments.yaml` or use the selected
+   environment and explicit field-level prompt overrides.
 2. Preview the Workflow resource, UTC window, scan limit, result limit, and any
    later evidence sources required for semantic classification. Follow the cloud
    approval gate in `SKILL.md`.

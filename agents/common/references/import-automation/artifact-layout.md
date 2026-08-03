@@ -1,7 +1,7 @@
 # Import artifact layout
 
-For the current Cloud Batch executor, derive a candidate base from the verified
-output bucket and absolute import name:
+For the current Cloud Batch executor, derive a candidate base from the effective
+environment's output bucket and the absolute import name:
 
 ```text
 gs://<bucket>/<manifest-directory>/<import-name>/

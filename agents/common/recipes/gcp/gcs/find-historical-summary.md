@@ -9,8 +9,9 @@ was not recorded elsewhere.
 
 ## Required inputs
 
-Verified GCS project, bucket, import prefix, expected import name, expected
-Batch job ID, Workflow start time, and candidate limit.
+GCS project, bucket, import-prefix template, and summary filename from the
+effective environment; expected import name; expected Batch job ID; Workflow
+start time; and candidate limit.
 
 ## Clarify when
 
@@ -25,7 +26,7 @@ near midnight:
 
 ```bash
 gcloud storage objects list \
-  'gs://<BUCKET>/<IMPORT_PREFIX>/<YYYY_MM_DD>*/import_summary.json' \
+  'gs://<BUCKET>/<IMPORT_PREFIX>/<YYYY_MM_DD>*/<SUMMARY_FILENAME>' \
   --project=<PROJECT> \
   --sort-by='~updateTime' \
   --limit=<CANDIDATE_LIMIT> \

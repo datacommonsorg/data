@@ -39,17 +39,20 @@ available recorded identifier:
 - `import-automation/executor/main.py` and
   `import-automation/executor/app/executor/import_executor.py`: runtime config,
   stages, outputs, logs, and summary creation.
-- `import-automation/executor/app/configs.py`: repository defaults and config
-  field names. These are configured intent, not proof of live deployment.
-- A supplied sibling `import` checkout can explain Workflow/helper behavior,
-  but live Workflow revisions and live database metadata remain runtime truth.
+- `agents/common/config/import-environments.yaml`: support-tool coordinates for
+  production and staging. Explicit request-scoped overrides take precedence.
+- `import-automation/executor/app/configs.py`: executor defaults and config field
+  names, not the support skill's environment lookup path.
+- An optional sibling `import` checkout can explain Workflow/helper and loader
+  implementation, but routine support does not require it for coordinates.
 
 ## Source of truth
 
-Use live read-only GCP state for what is deployed and running. Use repository
-sources for versioned intent and interpretation. Use support documents only for
-navigation and stable semantics. Record disagreements instead of applying a
-silent precedence rule.
+Use the environment file plus explicit prompt overrides for query coordinates.
+Use live read-only GCP state for what is deployed and running, not to discover
+replacement coordinates. Use repository sources for versioned intent and
+interpretation. Report scope disagreements instead of following unexpected
+resources.
 
 ## Execution paths
 

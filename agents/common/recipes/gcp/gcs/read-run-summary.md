@@ -9,8 +9,9 @@ version.
 
 ## Required inputs
 
-Verified GCS project, bucket, import prefix, version, expected simple import
-name, and expected Batch job ID.
+GCS project, bucket, import-prefix template, and summary filename from the
+effective environment; exact version; expected simple import name; and expected
+Batch job ID.
 
 ## Clarify when
 
@@ -20,7 +21,7 @@ The version was not obtained from a pointer or bounded historical match.
 
 ```bash
 gcloud storage cat \
-  'gs://<BUCKET>/<IMPORT_PREFIX>/<VERSION>/import_summary.json' \
+  'gs://<BUCKET>/<IMPORT_PREFIX>/<VERSION>/<SUMMARY_FILENAME>' \
   --project=<PROJECT> | \
 jq '{import_name,job_id,status,latest_version,graph_path,next_refresh,
      execution_time,data_volume,import_stats}'
@@ -28,8 +29,9 @@ jq '{import_name,job_id,status,latest_version,graph_path,next_refresh,
 
 ## Preferred invocation
 
-Read one exact summary and require both `import_name` and `job_id` to match the
-selected run before using any status or statistics.
+Read the configured summary filename for one exact version and require both
+`import_name` and `job_id` to match the selected run before using any status or
+statistics.
 
 ## Expected output
 

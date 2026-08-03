@@ -16,6 +16,10 @@ description: Retrieves read-only information about Data Commons imports, includi
 - Retain only allowlisted structured log fields. Never return arbitrary log
   messages or text payloads.
 - Use explicit project, location, time, and result bounds for every cloud query.
+- Use the selected block in
+  [import environment defaults](../../common/config/import-environments.yaml)
+  unless the prompt explicitly overrides a field. Never discover replacement
+  coordinates by searching other resources or projects.
 - Use the smallest applicable recipe. Never replace a missing identifier with a
   broad project, log, build, bucket, or database search.
 - Never use MCP tools, IDE database connections, plugins, connectors, or ambient
@@ -30,10 +34,12 @@ description: Retrieves read-only information about Data Commons imports, includi
    Verify `statvar_imports/`, `scripts/`, `import-automation/`,
    `requirements_all.txt`, and `run_tests.sh` exist.
 2. Read [Import automation architecture](../../common/references/import-automation/architecture.md).
-3. Treat pasted infrastructure information or a user-provided file as
+3. Verify `agents/common/config/import-environments.yaml` exists. Read it only
+   for cloud-backed requests.
+4. Treat pasted infrastructure information or a user-provided file as
    request-scoped data. Extract explicit values, never persist it, and ask when
    values are missing, ambiguous, or conflicting.
-4. Invoke repository Python helpers only through
+5. Invoke repository Python helpers only through
    `./agents/common/run_python.sh`. If `.env` is missing, stop and tell the user
    to run `./run_tests.sh -r`.
 
@@ -53,18 +59,20 @@ description: Retrieves read-only information about Data Commons imports, includi
    follow-up evidence.
 3. Keep code, manifest, configured schedule, validation, and repository catalog
    requests local-only.
-4. For cloud-backed requests, read
+4. For cloud-backed requests, select `prod` by default or the requested
+   environment from the runtime environment file, then read
    [Environment resolution](../../common/references/import-automation/environment-resolution.md)
    and follow
    [Preview infrastructure](../../common/recipes/repository/preview-infrastructure.md).
-5. Print the environment, resource candidates and sources, planned operations,
+5. Apply explicit prompt overrides field by field. Do not inspect deployment
+   source or live resources to fill missing coordinates.
+6. Print the environment, effective resources and sources, planned operations,
    UTC window, and limits before the first cloud call. Include only resources
    required by the selected recipes.
-6. Ask once for approval in an interactive session. Only when the prompt
+7. Ask once for approval in an interactive session. Only when the prompt
    explicitly declares a headless run, print `review: skipped (headless)` and
    continue without pausing.
-7. Never guess unresolved non-production coordinates or choose between
-   conflicting explicit values.
+8. Stop when required values are unresolved or explicit values conflict.
 
 ## Collect incrementally
 
@@ -75,7 +83,8 @@ description: Retrieves read-only information about Data Commons imports, includi
    before interpreting fields. A cron schedule proves configured intent, not a
    deployed Scheduler job.
 3. Verify deployment with the exact Scheduler description and decoded
-   `argument.importName`, then follow its target to the exact Workflow.
+   `argument.importName`. Require its target to equal the configured Workflow;
+   report infrastructure drift and stop if it does not.
 4. Treat one Workflow execution as one logical run. Use the bounded FULL-view
    Workflow helper because `gcloud workflows executions list` omits arguments.
 5. Stop when the selected evidence answers the question. In particular:
@@ -125,7 +134,7 @@ description: Retrieves read-only information about Data Commons imports, includi
 | List one version's files | [List version artifacts](../../common/recipes/gcp/gcs/list-version-artifacts.md) |
 | Find an older summary | [Find historical summary](../../common/recipes/gcp/gcs/find-historical-summary.md) |
 | Correlate import history or one version | [Correlate import history and versions](../../common/recipes/gcp/imports/correlate-import-runs.md) |
-| Resolve Spanner coordinates | [Describe ingestion helper](../../common/recipes/gcp/cloud-run/describe-ingestion-helper.md) |
+| Inspect ingestion-helper deployment | [Describe ingestion helper](../../common/recipes/gcp/cloud-run/describe-ingestion-helper.md) |
 | Read one Spanner record type | [Read import records](../../common/recipes/gcp/spanner/read-import-records.md) |
 | Recover runtime source | [Resolve runtime provenance](../../common/recipes/gcp/cloud-build/resolve-runtime-provenance.md) |
 

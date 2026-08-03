@@ -13,40 +13,41 @@ UTC window, limits, and any explicit user-provided infrastructure values.
 
 ## Clarify when
 
-Required values remain unresolved, two explicit sources disagree, or a
-non-production environment has no canonical repository deployment definition.
+The environment is unknown, a required field remains unresolved, or two
+explicit prompt values disagree.
 
 ## Read-only operation
 
-Read production candidates from their repository source rather than copying
-them into the skill:
+Read the runtime environment file:
 
 ```bash
-rg -n \
-  'gcp_project_id:|gcs_project_id:|storage_prod_bucket_name:|scheduler_location:|cloud_workflow_id:' \
-  import-automation/executor/app/configs.py
+sed -n '1,200p' agents/common/config/import-environments.yaml
 ```
 
-Read an exact user-provided file only when the user supplies its path. Do not
-execute it. Then print a review table with these columns:
+Select `prod` by default or the environment requested by the user, then apply
+explicit prompt overrides field by field. Read an exact user-provided file only
+when the user supplies its path; do not execute it. Print a review table with
+these columns:
 
 ```text
-operation | resource type | candidate value | source | UTC bounds | limit
+operation | resource type | effective value | source | UTC bounds | limit
 ```
 
-Include only resources required by the planned recipes. Mark downstream values
-such as Batch job, version, or Spanner database as `derive after selected live
-read` instead of resolving them upfront.
+Use `environment_config` and `prompt_override` as coordinate sources. Include
+only resources required by the planned recipes. Mark run-specific values such
+as Workflow execution, Batch job, and GCS version as `runtime_identifier` to be
+obtained by the selected bounded recipe.
 
 ## Preferred invocation
 
-Use repository reads and the review table above. Do not call a collector or any
-cloud API during preview. Ask once in an interactive session. In a
-prompt-declared headless run, print `review: skipped (headless)` after the table.
+Use the environment file and review table above. Do not inspect deployment
+source or call a collector or cloud API during preview. Ask once in an
+interactive session. In a prompt-declared headless run, print
+`review: skipped (headless)` after the table.
 
 ## Expected output
 
-Selected environment, planned operations, resource candidates with source
+Selected environment, planned operations, effective resources with source
 labels, unresolved fields, UTC bounds, limits, and whether review was approved
 or skipped.
 
@@ -62,10 +63,10 @@ fact that no cloud access occurred during preview.
 
 ## Common failures
 
-Missing repository configuration, incomplete non-production coordinates,
-conflicting explicit values, or a planned operation with no bounded recipe.
+Missing environment file or environment, incomplete coordinates, conflicting
+explicit values, or a planned operation with no bounded recipe.
 
 ## Related repository sources
 
-`import-automation/executor/app/configs.py`, deployment definitions under
-`import-automation/`, and the shared environment-resolution reference.
+The [runtime environment file](../../config/import-environments.yaml) and the
+shared environment-resolution reference.
