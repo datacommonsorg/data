@@ -13,97 +13,167 @@
 # limitations under the License.
 """Tests for repository import catalog queries."""
 
+import json
 from pathlib import Path
+import tempfile
 import unittest
 
+from agents.common.import_support.list_imports import build_import_catalog
+from agents.common.import_support.list_imports import ImportCatalogError
+from agents.common.import_support.list_imports import ImportRecord
 from agents.common.import_support.list_imports import list_imports
-from agents.common.import_support.resolve_import import build_import_catalog
-from agents.common.import_support.resolve_import import ImportRecord
-from agents.common.import_support.resolve_import import ImportResolutionError
 
 
-def _record(import_name: str, cron_schedule: str | None) -> ImportRecord:
+def _record(import_name: str, cron_schedule: str | None = None) -> ImportRecord:
     directory = f'statvar_imports/{import_name.lower()}'
     return ImportRecord(import_name=import_name,
                         manifest_path=f'{directory}/manifest.json',
                         import_directory=directory,
                         absolute_import_name=f'{directory}:{import_name}',
-                        spec_index=0,
-                        cron_schedule=cron_schedule,
-                        scripts=(),
-                        source_files=(),
-                        provenance_url=None,
-                        provenance_description=None,
-                        import_inputs=(),
-                        validation_config_file=None,
-                        user_script_timeout=None,
-                        resource_limits={},
-                        config_override_keys=(),
-                        source_paths=())
+                        cron_schedule=cron_schedule)
 
 
 class ListImportsTest(unittest.TestCase):
 
-    def test_filters_name_and_configured_autorefresh(self):
+    def _write_manifest(self, root: Path, relative_path: str,
+                        specifications: list[object]) -> None:
+        directory = root / relative_path
+        directory.mkdir(parents=True)
+        manifest = {'import_specifications': specifications}
+        (directory / 'manifest.json').write_text(json.dumps(manifest),
+                                                 encoding='utf-8')
+
+    def test_builds_catalog_from_both_approved_roots(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            self._write_manifest(root, 'statvar_imports/agency/one', [{
+                'import_name': 'One',
+                'cron_schedule': '0 1 * * *',
+            }])
+            self._write_manifest(root, 'scripts/agency/two', [{
+                'import_name': 'Two',
+            }])
+
+            catalog = build_import_catalog(root)
+
+            self.assertEqual({'One', 'Two'}, set(catalog))
+            self.assertEqual('scripts/agency/two:Two',
+                             catalog['Two'][0].absolute_import_name)
+
+    def test_rejects_malformed_manifests_and_specifications(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            path = root / 'scripts/import_one/manifest.json'
+            path.parent.mkdir(parents=True)
+            path.write_text('{not-json', encoding='utf-8')
+            with self.assertRaisesRegex(ImportCatalogError, 'Unable to parse'):
+                build_import_catalog(root)
+
+        for specification, expected_error in (([], 'Invalid specification'), ({
+                'import_name': ''
+        }, 'Empty import_name')):
+            with self.subTest(specification=specification):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    root = Path(temp_dir)
+                    self._write_manifest(root, 'scripts/import_one',
+                                         [specification])
+                    with self.assertRaisesRegex(ImportCatalogError,
+                                                expected_error):
+                        build_import_catalog(root)
+
+    def test_uses_strongest_query_strategy(self):
         catalog = {
-            'ZuluCentral': [_record('ZuluCentral', '0 1 * * *')],
-            'alphaCentral': [_record('alphaCentral', None)],
-            'Other': [_record('Other', '0 2 * * *')],
+            'UNData': [_record('UNData')],
+            'UNDatabase': [_record('UNDatabase')],
+            'PopulationData': [_record('PopulationData')],
+            'Other': [_record('Other')],
         }
 
-        result = list_imports(catalog,
-                              name_contains='CENTRAL',
-                              autorefresh='configured')
+        cases = (
+            ('UNData', 'exact', ['UNData']),
+            ('undata', 'case_insensitive_exact', ['UNData']),
+            ('und', 'prefix', ['UNData', 'UNDatabase']),
+            ('lationd', 'substring', ['PopulationData']),
+        )
+        for query, strategy, expected_names in cases:
+            with self.subTest(query=query):
+                result = list_imports(catalog, query=query)
+                self.assertEqual(strategy, result['match_strategy'])
+                self.assertEqual(
+                    expected_names,
+                    [item['import_name'] for item in result['results']])
 
-        self.assertEqual(3, result['scanned_import_count'])
-        self.assertEqual(1, result['matched_import_count'])
-        self.assertEqual('ZuluCentral', result['results'][0]['import_name'])
-        self.assertTrue(result['results'][0]['configured_autorefresh'])
-
-        result = list_imports(catalog,
-                              name_contains='central',
-                              autorefresh='not_configured')
-
-        self.assertEqual('alphaCentral', result['results'][0]['import_name'])
-        self.assertFalse(result['results'][0]['configured_autorefresh'])
-
-    def test_sorts_and_reports_truncation(self):
+    def test_fuzzy_query_returns_credible_typo_match(self):
         catalog = {
-            'zulu': [_record('zulu', None)],
-            'Alpha': [_record('Alpha', None)],
-            'beta': [_record('beta', None)],
+            'UNData': [_record('UNData')],
+            'Other': [_record('Other')],
         }
 
-        result = list_imports(catalog, limit=2)
+        result = list_imports(catalog, query='undtaa')
 
-        self.assertEqual(['Alpha', 'beta'],
+        self.assertEqual('fuzzy', result['match_strategy'])
+        self.assertEqual(['UNData'],
                          [item['import_name'] for item in result['results']])
-        self.assertEqual(3, result['matched_import_count'])
-        self.assertEqual(2, result['returned_import_count'])
+
+        result = list_imports(catalog, query='zz')
+        self.assertEqual('none', result['match_strategy'])
+        self.assertEqual([], result['results'])
+
+        result = list_imports(catalog, query='zzzzzz')
+        self.assertEqual('none', result['match_strategy'])
+        self.assertEqual([], result['results'])
+
+    def test_applies_autorefresh_after_selecting_query_strategy(self):
+        catalog = {
+            'Exact': [_record('Exact')],
+            'ExactConfigured': [_record('ExactConfigured', '0 1 * * *')],
+        }
+
+        result = list_imports(catalog, query='Exact', autorefresh='configured')
+
+        self.assertEqual('exact', result['match_strategy'])
+        self.assertEqual(0, result['matched_import_count'])
+        self.assertEqual([], result['results'])
+
+    def test_defaults_to_five_deterministic_results(self):
+        catalog = {
+            name: [_record(name)]
+            for name in ('zulu', 'Echo', 'delta', 'Alpha', 'charlie', 'beta')
+        }
+
+        result = list_imports(catalog)
+
+        self.assertEqual('all', result['match_strategy'])
+        self.assertEqual(['Alpha', 'beta', 'charlie', 'delta', 'Echo'],
+                         [item['import_name'] for item in result['results']])
+        self.assertEqual(6, result['matched_import_count'])
+        self.assertEqual(5, result['returned_import_count'])
         self.assertTrue(result['result_truncated'])
 
-    def test_rejects_invalid_limit_and_duplicate_names(self):
+    def test_rejects_invalid_limit_autorefresh_and_duplicate_names(self):
         for limit in (0, 101):
             with self.subTest(limit=limit):
-                with self.assertRaisesRegex(ImportResolutionError,
+                with self.assertRaisesRegex(ImportCatalogError,
                                             'limit must be between'):
                     list_imports({}, limit=limit)
 
-        record = _record('Duplicate', None)
-        with self.assertRaisesRegex(ImportResolutionError, 'not unique'):
+        with self.assertRaisesRegex(ImportCatalogError, 'autorefresh must be'):
+            list_imports({}, autorefresh='invalid')
+
+        record = _record('Duplicate')
+        with self.assertRaisesRegex(ImportCatalogError, 'not unique'):
             list_imports({'Duplicate': [record, record]})
 
-    def test_repository_catalog_contains_bis_import(self):
+    def test_repository_query_finds_undata(self):
         repo_root = Path(__file__).parents[3]
-        result = list_imports(build_import_catalog(repo_root),
-                              name_contains='CentralBankPolicyRate',
-                              autorefresh='configured',
-                              limit=20)
 
+        result = list_imports(build_import_catalog(repo_root), query='undata')
+
+        self.assertEqual('case_insensitive_exact', result['match_strategy'])
         self.assertEqual(1, result['matched_import_count'])
-        self.assertEqual('BIS_CentralBankPolicyRate',
-                         result['results'][0]['import_name'])
-        self.assertEqual('0 05 * * 6', result['results'][0]['cron_schedule'])
+        self.assertEqual('UNData', result['results'][0]['import_name'])
+        self.assertEqual('statvar_imports/undata/manifest.json',
+                         result['results'][0]['manifest_path'])
 
 
 if __name__ == '__main__':

@@ -1,13 +1,14 @@
 # Repository catalog
 
 Use this path for bounded questions that can be answered entirely from import
-manifests, such as matching import names or configured cron intent.
+manifests, such as finding canonical import names or configured cron intent.
 
 ## Supported criteria
 
-- Case-insensitive `import_name` substring.
+- Ranked `import_name` query: exact, case-insensitive exact, prefix, substring,
+  then fuzzy.
 - Cron configured, cron not configured, or either.
-- At most 100 returned imports.
+- At most 100 returned imports; use 5 for import selection.
 
 ## Procedure
 
@@ -16,16 +17,23 @@ manifests, such as matching import names or configured cron intent.
    ```bash
    ./agents/common/run_python.sh \
      agents/common/import_support/list_imports.py \
-     --name_contains=<SUBSTRING> \
+     --query=<IMPORT_NAME_QUERY> \
      --autorefresh=<any|configured|not_configured> \
      --limit=<LIMIT>
    ```
 
-2. Return the bounded, sorted results and all top-level helper metadata:
-   `mode`, filters, scan/match/return counts, limit, and truncation. Preserve
+2. Automatically select one unique `exact` or `case_insensitive_exact` result.
+   For `prefix`, `substring`, or `fuzzy`, use the user's context and clarify if
+   multiple candidates remain plausible. Do not select from an empty result.
+3. Read the selected `manifest_path`, choose the specification whose
+   case-sensitive `import_name` matches the result, and consult the
+   [import manifest reference](../../../common/references/import-automation/manifest.md)
+   before interpreting its fields.
+4. Return the bounded results and all top-level helper metadata: `mode`, match
+   strategy, filters, scan/match/return counts, limit, and truncation. Preserve
    repository-relative manifest paths as inline code rather than shortening
    them to basenames or using basename-only link labels.
-3. Label every result `repository-configured`. A non-empty cron schedule proves
+5. Label every result `repository-configured`. A non-empty cron schedule proves
    configured auto-refresh intent only.
 
 ## Boundaries

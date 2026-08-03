@@ -4,41 +4,45 @@ Recipe ID: `repository.list-imports`
 
 ## Use when
 
-Imports must be filtered by manifest name or configured cron intent without
-querying live infrastructure.
+One or more imports must be identified by a possibly incomplete, differently
+cased, or misspelled manifest name, or filtered by configured cron intent,
+without querying live infrastructure.
 
 ## Required inputs
 
-- Optional case-insensitive `import_name` substring.
+- Optional `import_name` query.
 - Auto-refresh filter: `any`, `configured`, or `not_configured`.
-- Result limit from 1 through 100.
+- Result limit from 1 through 100; use 5 for import selection.
 - `data` repository as the working directory.
 
 ## Clarify when
 
-The user asks for execution time, operational status, or repeated failures;
-those criteria require live fleet search.
+Multiple prefix, substring, or fuzzy candidates remain plausible after using
+the user's context. Execution time, operational status, and repeated failures
+require live fleet search.
 
 ## Read-only operation
 
 ```bash
 ./agents/common/run_python.sh \
   agents/common/import_support/list_imports.py \
-  --name_contains=<SUBSTRING> \
+  --query=<IMPORT_NAME_QUERY> \
   --autorefresh=<any|configured|not_configured> \
   --limit=<LIMIT>
 ```
 
 ## Preferred invocation
 
-Use the command above. Do not replace it with ad hoc manifest searches.
+Use the command above with `--limit=5` for import selection. Do not replace it
+with ad hoc manifest searches.
 
 ## Expected output
 
-Deterministic JSON with mode, applied filters, bounded sorted results,
-repository-relative manifest paths, scan/match/return counts, limit, and
-truncation status. Render manifest paths as inline code so the complete value is
-visible.
+Deterministic JSON with the selected name-match strategy, applied filters,
+bounded compact results, repository-relative manifest paths, scan/match/return
+counts, limit, and truncation status. A unique exact or case-insensitive exact
+match may be selected automatically. Use user context for weaker matches and
+clarify when multiple candidates remain plausible.
 
 ## Required bounds
 
@@ -47,14 +51,16 @@ Scan only `statvar_imports/**/manifest.json` and
 
 ## Evidence to retain
 
-Manifest path, absolute import name, cron schedule, configured-auto-refresh
-classification, counts, limit, and truncation.
+Query, match strategy, manifest path, absolute import name, cron schedule,
+configured-auto-refresh classification, counts, limit, and truncation.
 
 ## Common failures
 
-Duplicate import names, malformed manifests, or an invalid result limit.
+No credible match, ambiguous weak matches, duplicate import names, malformed
+manifests, or an invalid result limit.
 
 ## Related repository sources
 
-`agents/common/import_support/resolve_import.py` provides the shared manifest
-catalog and canonical import records.
+After selecting an import, read its exact manifest specification and use the
+[import manifest reference](../../references/import-automation/manifest.md) to
+interpret fields.

@@ -39,7 +39,7 @@ description: Retrieves read-only information about Data Commons imports, includi
 
 ## Select the request path
 
-- For one globally unique `import_name`, read
+- For one import name or name-like query, read
   [Single-import inspection](references/single-import.md).
 - For manifest-only searches, read
   [Repository catalog](references/repository-catalog.md).
@@ -68,10 +68,12 @@ description: Retrieves read-only information about Data Commons imports, includi
 
 ## Collect incrementally
 
-1. Resolve an exact import with `resolve_import.py`, or run a bounded local
-   catalog query with `list_imports.py`.
-2. Read the resolved manifest and referenced local files. A cron schedule proves
-   configured intent, not a deployed Scheduler job.
+1. Find imports with a bounded `list_imports.py --query` catalog query and
+   select or clarify candidates according to its match strategy.
+2. Read the selected manifest and referenced local files. Use the
+   [import manifest reference](../../common/references/import-automation/manifest.md)
+   before interpreting fields. A cron schedule proves configured intent, not a
+   deployed Scheduler job.
 3. Verify deployment with the exact Scheduler description and decoded
    `argument.importName`, then follow its target to the exact Workflow.
 4. Treat one Workflow execution as one logical run. Use the bounded FULL-view
@@ -103,13 +105,14 @@ description: Retrieves read-only information about Data Commons imports, includi
   [Runtime provenance](../../common/references/import-automation/runtime-provenance.md).
 - For permissions, read
   [Identity and access](../../common/references/import-automation/identity-and-access.md).
+- For manifest fields, read
+  [Import manifest reference](../../common/references/import-automation/manifest.md).
 
 ## Route exact operations
 
 | Need | Read and follow |
 |---|---|
-| Resolve an import | [Resolve import](../../common/recipes/repository/resolve-import.md) |
-| Search configured imports | [List repository imports](../../common/recipes/repository/list-imports.md) |
+| Find or select imports | [List repository imports](../../common/recipes/repository/list-imports.md) |
 | Review cloud candidates | [Preview infrastructure](../../common/recipes/repository/preview-infrastructure.md) |
 | Verify Scheduler and target | [Describe Scheduler job](../../common/recipes/gcp/scheduler/describe-job.md) |
 | List logical runs | [List import executions](../../common/recipes/gcp/workflows/list-import-executions.md) |

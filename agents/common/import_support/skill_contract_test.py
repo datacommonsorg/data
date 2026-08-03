@@ -104,7 +104,7 @@ class SkillContractTest(unittest.TestCase):
             with self.subTest(required=required):
                 self.assertIn(required, skill)
 
-    def test_skill_and_recipes_do_not_reference_removed_collectors(self):
+    def test_skill_and_recipes_do_not_reference_removed_helpers(self):
         paths = [
             self._repo_root / 'agents/skills/dc-import-info/SKILL.md',
             *self._repo_root.glob(
@@ -118,6 +118,9 @@ class SkillContractTest(unittest.TestCase):
                 self.assertNotIn('collect_import_snapshot.py', text)
                 self.assertNotIn('collect_provenance.py', text)
                 self.assertNotIn('snapshot collector', text.lower())
+                self.assertNotIn('resolve_import', text)
+                self.assertNotIn('repository.resolve-import', text)
+                self.assertNotIn('name_contains', text)
 
     def test_recipes_do_not_document_mutating_gcloud_commands(self):
         recipes = '\n'.join(

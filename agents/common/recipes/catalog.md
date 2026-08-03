@@ -5,8 +5,7 @@ specific recipe needed instead of loading this catalog in full.
 
 | Recipe ID | Outcome |
 |---|---|
-| `repository.resolve-import` | Resolve a unique import name and local code |
-| `repository.list-imports` | Search bounded repository-configured imports |
+| `repository.list-imports` | Find bounded repository-configured imports |
 | `repository.preview-infrastructure` | Review required cloud resources before access |
 | `gcp.scheduler.describe-job` | Verify Scheduler and decode its Workflow target |
 | `gcp.workflows.list-import-executions` | List bounded logical runs |
