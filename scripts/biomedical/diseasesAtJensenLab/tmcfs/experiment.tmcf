@@ -1,0 +1,28 @@
+Node: E:experiment->E1
+typeOf: dcs:Disease
+dcid: C:experiment->DOID_dcid
+name: C:experiment->Disease_Name
+diseaseOntologyID: C:experiment->DOID
+
+Node: E:codingGenes-manual->E2
+typeOf: dcs:ICD10Code
+dcid: C:codingGenes-manual->ICD10_dcid
+name: C:codingGenes-manual->Disease_Name
+identifier: C:codingGenes-manual->ICD10
+
+Node: E:experiment->E3
+typeOf: dcs:Gene
+dcid: C:experiment->Gene_dcid
+name: C:experiment->Gene	
+ensemblID: C:experiment->ensemblID
+
+Node: E:experiment->E4
+typeOf: dcs:DiseaseGeneAssociation
+dcid: C:experiment->dcid
+name: C:experiment->name
+associationType: C:experiment->associationType
+associationSource: C:experiment->score-db
+confidence: C:experiment->confidence
+diseaseID: C:experiment->Disease_dcid
+geneID: E:experiment->E3
+zScore: C:experiment->source-score
