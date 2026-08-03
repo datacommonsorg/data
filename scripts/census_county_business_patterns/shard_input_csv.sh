@@ -92,9 +92,15 @@ for source_file in "$INPUT_DIR"/*.csv; do
 done
 echo "--- Step 1: Sharding complete. ---" >&2
 
+# --- Pre-fetch stat_vars.mcf from GCS once to avoid 150+ redundant network downloads ---
+echo "--- Pre-fetching stat_vars.mcf to avoid repeated network calls during sharding ---" >&2
+LOCAL_STATVAR_MCF="$DEBUG_DIR/stat_vars.mcf"
+gsutil cp gs://unresolved_mcf/scripts/statvar/stat_vars.mcf "$LOCAL_STATVAR_MCF" || gcloud storage cp gs://unresolved_mcf/scripts/statvar/stat_vars.mcf "$LOCAL_STATVAR_MCF"
+echo "--- Pre-fetch complete. ---" >&2
+
 # --- Step 2: Process the generated shards in parallel ---
 # This loop iterates over all the newly created shard files and processes them
-# using your `statvar_processpr.py` script.
+# using your `statvar_processor.py` script.
 echo "--- Step 2: Processing generated CSV shards in parallel ---" >&2
 # Loop over all files that match the shard pattern
 # Assuming shards are created in INPUT_DIR with a '_shard_' pattern.
@@ -106,23 +112,15 @@ for file in "$SHARD_DIR"/*_shard_*.csv; do
         
         echo "INFO: Processing shard: $file (Prefix: $prefix)" >&2
         
-        # Execute the Python processing script in the background (&)
-        # We assume statvar_processpr.py takes these arguments.
-        # If there are other arguments (the '...' in your original snippet), add them here.
+        # Execute the Python processing script
         python3 "$STATVAR_PROCESSOR_SCRIPT" \
             --input_data="$file" \
-            --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+            --existing_statvar_mcf="$LOCAL_STATVAR_MCF" \
             --pv_map="censuscountybusinesspatterns_pvmap.csv" \
             --config_file="censuscountybusinesspatterns_metadata.csv" \
             --output_path="$OUTPUT_FINAL_DIR/output_${prefix}" \
             --counters_print_interval=-1
-            # --output_counters="$DEBUG_DIR/counters_${prefix}" \ # uncomment this line to debug the script like to get the details like memory utlization etc.
-            # Add any other required arguments for statvar_processpr.py here \
-            # Run in background
         
-        # Manage parallelism: pause if too many jobs are running
-        # We monitor the 'statvar_processpr.py' script's processes.
-        # sleep_while_active "$PARALLELISM" "$STATVAR_PROCESSOR_SCRIPT"
     else
         echo "WARNING: No shard files found matching '$INPUT_DIR/*_shard_*.csv' or '$file' is not a regular file."
         echo "Please ensure your 'split_csv.sh' generates files in the '$INPUT_DIR' and follows the '*_shard_*.csv' naming convention."
@@ -133,6 +131,19 @@ done
 echo "--- Step 2: All processing jobs submitted. Waiting for them to finish... ---"
 wait
 echo "--- Step 2: All parallel processing complete. ---"
+
+# --- Verify all shards produced valid output files ---
+echo "--- Verifying all shards generated output files ---" >&2
+for file in "$SHARD_DIR"/*_shard_*.csv; do
+    [ -f "$file" ] || continue
+    prefix=$(basename "$file" | cut -d'.' -f1)
+    out_file="$OUTPUT_FINAL_DIR/output_${prefix}.csv"
+    if [ ! -s "$out_file" ]; then
+        echo "ERROR: Output file $out_file is missing or empty for shard $file!" >&2
+        exit 1
+    fi
+done
+echo "--- Verification passed: all shard outputs exist and are non-empty. ---" >&2
 
 # --- Final Cleanup / Summary (Optional) ---
 echo "--- Workflow Complete ---"
