@@ -41,7 +41,12 @@ if [[ ! -x "$python_bin" ]]; then
 fi
 
 script_path="$repo_root/$1"
-resolved_script="$(realpath -m "$script_path")"
+if [[ ! -f "$script_path" ]]; then
+  echo "Python script does not exist: $1" >&2
+  exit 2
+fi
+
+resolved_script="$(realpath "$script_path")"
 case "$resolved_script" in
   "$repo_root"/*) ;;
   *)
@@ -49,11 +54,6 @@ case "$resolved_script" in
     exit 2
     ;;
 esac
-
-if [[ ! -f "$resolved_script" ]]; then
-  echo "Python script does not exist: $1" >&2
-  exit 2
-fi
 
 shift
 export PYTHONPATH="$repo_root${PYTHONPATH:+:$PYTHONPATH}"
