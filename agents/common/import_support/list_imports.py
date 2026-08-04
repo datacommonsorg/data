@@ -23,25 +23,22 @@ from typing import Any
 from absl import app
 from absl import flags
 
-_FLAGS = flags.FlagValues()
-_QUERY = flags.DEFINE_string(
-    'query',
-    '',
-    'Optional import_name query with case-insensitive and fuzzy matching.',
-    flag_values=_FLAGS)
-_AUTOREFRESH = flags.DEFINE_enum('autorefresh',
-                                 'any', ('any', 'configured', 'not_configured'),
-                                 'Filter by repository-configured cron intent.',
-                                 flag_values=_FLAGS)
-_LIMIT = flags.DEFINE_integer('limit',
-                              5,
-                              'Maximum number of imports to return.',
-                              flag_values=_FLAGS)
+_FLAGS = flags.FLAGS
 
 _MANIFEST_ROOTS = ('statvar_imports', 'scripts')
 _MAX_LIMIT = 100
 _MIN_FUZZY_QUERY_LENGTH = 3
 _MIN_FUZZY_SIMILARITY = 0.6
+
+
+def _define_flags() -> None:
+    flags.DEFINE_string(
+        'query', '',
+        'Optional import_name query with case-insensitive and fuzzy matching.')
+    flags.DEFINE_enum('autorefresh', 'any',
+                      ('any', 'configured', 'not_configured'),
+                      'Filter by repository-configured cron intent.')
+    flags.DEFINE_integer('limit', 5, 'Maximum number of imports to return.')
 
 
 class ImportCatalogError(ValueError):
@@ -256,19 +253,15 @@ def main(argv: list[str]) -> None:
         raise app.UsageError('Unexpected positional arguments.')
     try:
         output = list_imports(build_import_catalog(find_repository_root()),
-                              query=_QUERY.value,
-                              autorefresh=_AUTOREFRESH.value,
-                              limit=_LIMIT.value)
+                              query=_FLAGS.query,
+                              autorefresh=_FLAGS.autorefresh,
+                              limit=_FLAGS.limit)
     except ImportCatalogError as exc:
         print(json.dumps({'error': str(exc)}, indent=2), file=sys.stderr)
         raise SystemExit(2) from exc
     print(json.dumps(output, indent=2, sort_keys=True))
 
 
-def _parse_flags(argv: list[str]) -> list[str]:
-    remaining = flags.FLAGS(argv, known_only=True)
-    return _FLAGS(remaining)
-
-
 if __name__ == '__main__':
-    app.run(main, flags_parser=_parse_flags)
+    _define_flags()
+    app.run(main)

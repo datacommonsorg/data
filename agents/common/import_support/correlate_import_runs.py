@@ -13,7 +13,6 @@
 # limitations under the License.
 """Correlates import version history with exact GCS run summaries."""
 
-import argparse
 from datetime import datetime
 from datetime import timezone
 import json
@@ -23,10 +22,14 @@ import sys
 from typing import Any
 from urllib.parse import urlparse
 
+from absl import app
+from absl import flags
 from google.api_core import exceptions
 from google.auth import exceptions as auth_exceptions
 from google.cloud import spanner
 from google.cloud import storage
+
+_FLAGS = flags.FLAGS
 
 _HISTORY_COLUMNS = (
     'Version',
@@ -43,6 +46,39 @@ _MAX_RUN_LIMIT = 20
 _MAX_VERSION_DISCOVERY_LIMIT = 100
 _MAX_EVENT_SCAN_LIMIT = 100
 _SUMMARY_FILENAME = 'import_summary.json'
+
+
+def _define_flags() -> None:
+    flags.DEFINE_enum('mode', None, _MODES, 'Import evidence mode to query.')
+    flags.mark_flag_as_required('mode')
+    flags.DEFINE_string('absolute_import_name', None,
+                        'Absolute Data Commons import identity.')
+    flags.mark_flag_as_required('absolute_import_name')
+    flags.DEFINE_string('spanner_project', None,
+                        'Google Cloud project containing Spanner history.')
+    flags.mark_flag_as_required('spanner_project')
+    flags.DEFINE_string('spanner_instance', None,
+                        'Spanner instance containing import history.')
+    flags.mark_flag_as_required('spanner_instance')
+    flags.DEFINE_string('spanner_database', None,
+                        'Spanner database containing import history.')
+    flags.mark_flag_as_required('spanner_database')
+    flags.DEFINE_string('gcs_project', None,
+                        'Google Cloud project containing run summaries.')
+    flags.mark_flag_as_required('gcs_project')
+    flags.DEFINE_string('gcs_bucket', None,
+                        'GCS bucket containing import artifacts.')
+    flags.mark_flag_as_required('gcs_bucket')
+    flags.DEFINE_string('gcs_output_prefix', '',
+                        'Optional output prefix within the GCS bucket.')
+    flags.DEFINE_string('version', None,
+                        'Import version for import_version mode.')
+    flags.DEFINE_integer('limit', None,
+                         'Maximum number of import runs to return.')
+    flags.DEFINE_string('start_time', None,
+                        'Optional inclusive RFC3339 history start time.')
+    flags.DEFINE_string('end_time', None,
+                        'Optional exclusive RFC3339 history end time.')
 
 
 class ImportRunCorrelationError(ValueError):
@@ -566,41 +602,26 @@ def correlate_import_runs(mode: str,
     return result
 
 
-def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description='Correlate import version history with GCS summaries.')
-    parser.add_argument('--mode', required=True, choices=_MODES)
-    parser.add_argument('--absolute_import_name', required=True)
-    parser.add_argument('--spanner_project', required=True)
-    parser.add_argument('--spanner_instance', required=True)
-    parser.add_argument('--spanner_database', required=True)
-    parser.add_argument('--gcs_project', required=True)
-    parser.add_argument('--gcs_bucket', required=True)
-    parser.add_argument('--gcs_output_prefix', default='')
-    parser.add_argument('--version')
-    parser.add_argument('--limit', type=int)
-    parser.add_argument('--start_time')
-    parser.add_argument('--end_time')
-    return parser
-
-
-def main(argv: list[str] | None = None) -> None:
-    args = _parser().parse_args(argv)
+def main(argv: list[str]) -> None:
+    if len(argv) > 1:
+        raise app.UsageError('Unexpected positional arguments.')
     try:
-        start_time = parse_rfc3339(args.start_time) if args.start_time else None
-        end_time = parse_rfc3339(args.end_time) if args.end_time else None
-        result = correlate_import_runs(args.mode,
-                                       args.absolute_import_name,
-                                       args.spanner_project,
-                                       args.spanner_instance,
-                                       args.spanner_database,
-                                       args.gcs_project,
-                                       args.gcs_bucket,
-                                       gcs_output_prefix=args.gcs_output_prefix,
-                                       version=args.version,
-                                       limit=args.limit,
-                                       start_time=start_time,
-                                       end_time=end_time)
+        start_time = (parse_rfc3339(_FLAGS.start_time)
+                      if _FLAGS.start_time else None)
+        end_time = (parse_rfc3339(_FLAGS.end_time) if _FLAGS.end_time else None)
+        result = correlate_import_runs(
+            _FLAGS.mode,
+            _FLAGS.absolute_import_name,
+            _FLAGS.spanner_project,
+            _FLAGS.spanner_instance,
+            _FLAGS.spanner_database,
+            _FLAGS.gcs_project,
+            _FLAGS.gcs_bucket,
+            gcs_output_prefix=_FLAGS.gcs_output_prefix,
+            version=_FLAGS.version,
+            limit=_FLAGS.limit,
+            start_time=start_time,
+            end_time=end_time)
     except ImportRunCorrelationError as exc:
         print(json.dumps({'error': str(exc)}, indent=2), file=sys.stderr)
         raise SystemExit(3) from exc
@@ -608,4 +629,5 @@ def main(argv: list[str] | None = None) -> None:
 
 
 if __name__ == '__main__':
-    main()
+    _define_flags()
+    app.run(main)

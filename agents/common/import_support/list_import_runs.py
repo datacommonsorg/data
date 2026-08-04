@@ -13,18 +13,39 @@
 # limitations under the License.
 """Lists bounded Workflow executions with their exact import identities."""
 
-import argparse
 from datetime import datetime
 from datetime import timezone
 import json
 import sys
 from typing import Any
 
+from absl import app
+from absl import flags
 from google.cloud.workflows import executions_v1
+
+_FLAGS = flags.FLAGS
 
 _MAX_RUN_LIMIT = 100
 _MAX_SCAN_LIMIT = 5000
 _MAX_ERROR_LENGTH = 4000
+
+
+def _define_flags() -> None:
+    flags.DEFINE_string('workflow_resource', None,
+                        'Full Google Cloud Workflow resource name.')
+    flags.mark_flag_as_required('workflow_resource')
+    flags.DEFINE_string('start_time', None,
+                        'Inclusive RFC3339 execution start time.')
+    flags.mark_flag_as_required('start_time')
+    flags.DEFINE_string('end_time', None,
+                        'Inclusive RFC3339 execution end time.')
+    flags.mark_flag_as_required('end_time')
+    flags.DEFINE_string('absolute_import_name', '',
+                        'Optional exact Data Commons import identity.')
+    flags.DEFINE_integer('run_limit', 10,
+                         'Maximum number of matching runs to return.')
+    flags.DEFINE_integer('scan_limit', _MAX_SCAN_LIMIT,
+                         'Maximum number of Workflow executions to scan.')
 
 
 class WorkflowExecutionError(RuntimeError):
@@ -203,29 +224,18 @@ def select_runs(execution_result: dict[str, Any],
     return result
 
 
-def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description=('List bounded Workflow executions and optionally filter '
-                     'them by exact Data Commons import identity.'))
-    parser.add_argument('--workflow_resource', required=True)
-    parser.add_argument('--start_time', required=True)
-    parser.add_argument('--end_time', required=True)
-    parser.add_argument('--absolute_import_name', default='')
-    parser.add_argument('--run_limit', type=int, default=10)
-    parser.add_argument('--scan_limit', type=int, default=_MAX_SCAN_LIMIT)
-    return parser
-
-
-def main(argv: list[str] | None = None) -> None:
-    args = _parser().parse_args(argv)
+def main(argv: list[str]) -> None:
+    if len(argv) > 1:
+        raise app.UsageError('Unexpected positional arguments.')
     try:
         listed = list_workflow_execution_records(
-            args.workflow_resource,
-            parse_rfc3339(args.start_time),
-            parse_rfc3339(args.end_time),
-            scan_limit=args.scan_limit,
+            _FLAGS.workflow_resource,
+            parse_rfc3339(_FLAGS.start_time),
+            parse_rfc3339(_FLAGS.end_time),
+            scan_limit=_FLAGS.scan_limit,
         )
-        result = select_runs(listed, args.absolute_import_name, args.run_limit)
+        result = select_runs(listed, _FLAGS.absolute_import_name,
+                             _FLAGS.run_limit)
     except WorkflowExecutionError as exc:
         print(json.dumps({'error': str(exc)}, indent=2), file=sys.stderr)
         raise SystemExit(3) from exc
@@ -233,4 +243,5 @@ def main(argv: list[str] | None = None) -> None:
 
 
 if __name__ == '__main__':
-    main()
+    _define_flags()
+    app.run(main)
