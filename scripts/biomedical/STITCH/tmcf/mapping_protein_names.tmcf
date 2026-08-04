@@ -1,0 +1,8 @@
+Node: E:mapping->E1
+typeOf: dcs:Protein
+dcid: C:mapping->dcid
+name: C:mapping->UniProtKB-ID
+uniProtID: C:mapping->UniProtKB-ID
+alternateEnsemblProteinID: C:mapping->Ensembl_PRO
+string: C:mapping->STRING
+ensemblProteinID: C:mapping->Protein stable ID
