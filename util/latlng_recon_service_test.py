@@ -34,7 +34,35 @@ class LatlngReconServiceTest(unittest.TestCase):
             f"The following items were expected but not found: {sorted(list(missing_items))}"
         )
 
-    def test_basic(self):
+    @mock.patch('util.latlng_recon_service.dc_api_resolve_latlng')
+    def test_basic(self, mock_dc_api_resolve_latlng):
+        mock_dc_api_resolve_latlng.return_value = {
+            'placeCoordinates': [
+                {
+                    'latitude': 37.391,
+                    'longitude': -122.081,
+                    'placeDcids': [
+                        'zip/94041', 'ipcc_50/37.25_-122.25_USA', 'geoId/sch0626280',
+                        'geoId/0649670', 'geoId/0618', 'geoId/0608592830',
+                        'geoId/060855096001', 'geoId/06085509600', 'geoId/06085',
+                        'geoId/06', 'country/USA'
+                    ]
+                },
+                {
+                    'latitude': 12.998,
+                    'longitude': 80.272,
+                    'placeDcids': [
+                        'wikidataId/Q15116', 'wikidataId/Q1445', 'ipcc_50/12.75_80.25_IND',
+                        'country/IND'
+                    ]
+                },
+                {
+                    'latitude': 37.700,
+                    'longitude': -123.015,
+                    'placeDcids': []
+                }
+            ]
+        }
         idmap_in = {
             'cascal_mtv': (37.391, -122.081),
             'besant_beach_chennai': (12.998, 80.272),
@@ -53,7 +81,27 @@ class LatlngReconServiceTest(unittest.TestCase):
         ])
         self.assertEqual(idmap_out['farallon_islands'], [])
 
-    def test_filter(self):
+    @mock.patch('util.latlng_recon_service.dc_api_resolve_latlng')
+    def test_filter(self, mock_dc_api_resolve_latlng):
+        mock_dc_api_resolve_latlng.return_value = {
+            'placeCoordinates': [
+                {
+                    'latitude': 37.391,
+                    'longitude': -122.081,
+                    'placeDcids': [
+                        'zip/94041', 'ipcc_50/37.25_-122.25_USA', 'geoId/sch0626280',
+                        'geoId/0649670', 'geoId/0618', 'geoId/0608592830',
+                        'geoId/060855096001', 'geoId/06085509600', 'geoId/06085',
+                        'geoId/06', 'country/USA'
+                    ]
+                },
+                {
+                    'latitude': 37.700,
+                    'longitude': -123.015,
+                    'placeDcids': []
+                }
+            ]
+        }
         idmap_in = {
             'cascal_mtv': (37.391, -122.081),
             'farallon_islands': (37.700, -123.015)

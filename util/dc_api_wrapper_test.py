@@ -244,8 +244,18 @@ class TestDCAPIWrapper(unittest.TestCase):
         self.assertEqual(response['ChIJT3IGqvxznW4Rqgw7pv9zYz8'],
                          'wikidataId/Q9727')
 
-    def test_dc_api_resolve_latlng(self):
+    @mock.patch('dc_api_wrapper.request_url')
+    def test_dc_api_resolve_latlng(self, mock_request_url):
         """Test API wrapper for latlng resolution."""
+        mock_request_url.return_value = {
+            "entities": [{
+                "node": "37.42#-122.08",
+                "candidates": [{
+                    "dcid": "geoId/0649670",
+                    "dominantType": "City"
+                }]
+            }]
+        }
         latlngs = [{'latitude': 37.42, 'longitude': -122.08}]
         response = dc_api.dc_api_resolve_latlng(latlngs)
 
