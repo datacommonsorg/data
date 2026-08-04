@@ -22,32 +22,39 @@ gcloud batch tasks list \
   --job=<JOB_ID> \
   --project=<PROJECT> \
   --location=<LOCATION> \
-  --limit=<LIMIT> \
+  --limit=<LIMIT_PLUS_ONE> \
   --format=json | \
-jq '[.[] |
-     {name,
-      status:
-        {state: .status.state,
-         events: [.status.statusEvents[]?
-                  | {type, eventTime, taskState}]}}]'
+jq --argjson limit '<LIMIT>' '
+  {truncated: (length > $limit),
+   tasks:
+     [.[0:$limit][] |
+      {name,
+       status:
+         {state: .status.state,
+          events: [.status.statusEvents[]?
+                   | {type, eventTime, taskState,
+                      exitCode: .taskExecution.exitCode}]}}]}'
 ```
 
 ## Preferred invocation
 
-Run only after job-level evidence is insufficient or provenance needs the
-earliest task `RUNNING` event.
+Run only when job-level evidence does not answer the task-level state or
+runtime-start question.
 
 ## Expected output
 
-Bounded task resources, states, and status events.
+Bounded task resources, states, status events, task-execution exit codes when
+present, and explicit truncation.
 
 ## Required bounds
 
-Use one exact job and an explicit limit. Report result truncation.
+Use one exact job and an explicit limit. Request `LIMIT_PLUS_ONE`, return at
+most `LIMIT` tasks, and report whether the extra task exists.
 
 ## Evidence to retain
 
-Task resource, state, status events used, result limit, and truncation.
+Task resource, state, status events used, task-execution exit code when present,
+result limit, and truncation.
 
 ## Common failures
 

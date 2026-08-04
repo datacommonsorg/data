@@ -18,9 +18,9 @@ import unittest
 
 from google.api_core import exceptions
 
-from agents.common.import_support.list_import_summaries import ImportSummaryListError
-from agents.common.import_support.list_import_summaries import list_import_summaries
-from agents.common.import_support.list_import_summaries import normalize_import_name
+from agents.common.scripts.list_import_summaries import ImportSummaryListError
+from agents.common.scripts.list_import_summaries import list_import_summaries
+from agents.common.scripts.list_import_summaries import normalize_import_name
 
 
 class _Blob:
@@ -91,8 +91,8 @@ class ListImportSummariesTest(unittest.TestCase):
 
     def test_returns_newest_five_with_date_and_batch_job_id(self):
         versions = [
-            f'2026_08_0{day}T01_02_03_123456_07_00'
-            for day in (3, 1, 7, 2, 6, 4, 5)
+            f'2026_08_0{day}T01_02_03_123456_07_00' for day in (3, 1, 7, 2, 6,
+                                                                4, 5)
         ]
         blobs = [_blob(version) for version in versions]
 

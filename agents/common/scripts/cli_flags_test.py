@@ -19,13 +19,12 @@ import sys
 import unittest
 
 _REPO_ROOT = Path(__file__).parents[3]
-_SCRIPT_ROOT = _REPO_ROOT / 'agents/common/import_support'
+_SCRIPT_ROOT = _REPO_ROOT / 'agents/common/scripts'
 
 
 class CliFlagsTest(unittest.TestCase):
 
-    def _run(self, script_name: str, *args:
-             str) -> subprocess.CompletedProcess:
+    def _run(self, script_name: str, *args: str) -> subprocess.CompletedProcess:
         return subprocess.run(
             [sys.executable,
              str(_SCRIPT_ROOT / script_name), *args],
@@ -37,8 +36,8 @@ class CliFlagsTest(unittest.TestCase):
     def test_help_lists_script_flags(self):
         cases = (
             ('list_imports.py', ('query', 'autorefresh', 'limit')),
-            ('list_import_summaries.py',
-             ('absolute_import_name', 'gcs_project', 'gcs_bucket', 'limit')),
+            ('list_import_summaries.py', ('absolute_import_name', 'gcs_project',
+                                          'gcs_bucket', 'limit')),
         )
 
         for script_name, expected_flags in cases:

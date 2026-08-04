@@ -30,9 +30,10 @@ gcloud logging read \
 
 ## Preferred invocation
 
-Run only for a selected job when Workflow, Batch, and summary state do not
-answer the question. Request one more row than the display limit to detect
-truncation, then return at most the requested limit in chronological order.
+Run only for a selected job when structured pipeline stage or status events
+are required beyond job-level state and summary evidence. Request one more row
+than the display limit to detect truncation, then return at most the requested
+limit in chronological order.
 
 ## Expected output
 

@@ -4,8 +4,8 @@ Recipe ID: `gcp.gcs.list-version-artifacts`
 
 ## Use when
 
-The user asks for input, output, MCF, validation, or differ files from a selected
-run.
+Artifact metadata for input, output, MCF, validation, or differ files is needed
+for one selected run.
 
 ## Required inputs
 

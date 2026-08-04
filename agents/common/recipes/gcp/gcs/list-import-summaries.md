@@ -20,7 +20,7 @@ The import identity or GCS resource is unresolved.
 
 ```bash
 ./agents/common/run_python.sh \
-  agents/common/import_support/list_import_summaries.py \
+  agents/common/scripts/list_import_summaries.py \
   --absolute_import_name='<DIRECTORY>:<IMPORT_NAME>' \
   --gcs_project='<PROJECT>' \
   --gcs_bucket='<BUCKET>' \
@@ -67,4 +67,4 @@ finalized-version history, not complete attempt history.
 
 [Artifact layout](../../../references/import-automation/artifact-layout.md),
 [import evidence flow](../../../references/import-automation/import-evidence-flow.md),
-and the [summary-list helper](../../../import_support/list_import_summaries.py).
+and the [summary-list helper](../../../scripts/list_import_summaries.py).

@@ -35,7 +35,7 @@ Read `import_summary.json` for one exact version and require `import_name` to
 match the selected import before using any status or statistics. When a Batch
 job ID is already known, also require `job_id` to match. Otherwise retain the
 summary's `job_id` as a discovered identifier and follow only that exact ID.
-When the user supplies an exact version, construct its URI using the
+When an exact version is supplied independently, construct its URI using the
 [import evidence flow](../../../references/import-automation/import-evidence-flow.md);
 do not run the summary-list helper first.
 

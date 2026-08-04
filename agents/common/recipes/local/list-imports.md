@@ -25,7 +25,7 @@ require cloud evidence.
 
 ```bash
 ./agents/common/run_python.sh \
-  agents/common/import_support/list_imports.py \
+  agents/common/scripts/list_imports.py \
   --query='<IMPORT_NAME_QUERY>' \
   --autorefresh=<any|configured|not_configured> \
   --limit=<LIMIT>
@@ -57,8 +57,8 @@ Deterministic JSON with the selected name-match strategy, applied filters,
 bounded compact results, repository-relative manifest paths, absolute import
 names, bucket-relative GCS object prefixes, scan/match/return counts, limit,
 and truncation status. A unique exact or case-insensitive exact match may be
-selected automatically. Use user context for weaker matches and clarify when
-multiple candidates remain plausible.
+selected automatically. Use surrounding import context for weaker matches and
+clarify when multiple candidates remain plausible.
 
 ## Required bounds
 

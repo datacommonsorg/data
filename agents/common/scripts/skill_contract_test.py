@@ -63,6 +63,33 @@ class SkillContractTest(unittest.TestCase):
         self.assertEqual(['agents/skills/dc-import-info'], paths)
         self.assertTrue((self._repo_root / paths[0] / 'SKILL.md').is_file())
 
+    def test_common_helpers_live_under_scripts(self):
+        scripts_root = self._repo_root / 'agents/common/scripts'
+        for filename in ('__init__.py', 'cli_flags_test.py', 'list_imports.py',
+                         'list_imports_test.py', 'list_import_summaries.py',
+                         'list_import_summaries_test.py',
+                         'skill_contract_test.py'):
+            with self.subTest(filename=filename):
+                self.assertTrue((scripts_root / filename).is_file())
+
+        old_name = 'import_' + 'support'
+        self.assertFalse(
+            (self._repo_root / 'agents/common' / old_name).exists())
+
+        agent_text = '\n'.join(
+            path.read_text(encoding='utf-8')
+            for path in (self._repo_root / 'agents').rglob('*')
+            if path.is_file() and path.suffix in _TEXT_SUFFIXES)
+        self.assertNotIn(f'agents/common/{old_name}', agent_text)
+        self.assertNotIn(f'agents.common.{old_name}', agent_text)
+
+        self.assertIn('agents/common/scripts/list_imports.py',
+                      self._read('agents/common/recipes/local/list-imports.md'))
+        self.assertIn(
+            'agents/common/scripts/list_import_summaries.py',
+            self._read(
+                'agents/common/recipes/gcp/gcs/list-import-summaries.md'))
+
     def test_recipes_have_invocation_contract(self):
         recipe_paths = [
             path for path in self._recipe_root.glob('**/*.md')
@@ -79,17 +106,22 @@ class SkillContractTest(unittest.TestCase):
 
     def test_recipe_taxonomy_separates_local_and_gcp_services(self):
         readme = self._read('agents/common/recipes/README.md')
+        normalized_readme = re.sub(r'\s+', ' ', readme)
         skill = self._skill_path.read_text(encoding='utf-8')
         local_recipe = self._read('agents/common/recipes/local/list-imports.md')
         spanner_recipe = self._read(
             'agents/common/recipes/gcp/spanner/query-import-status.md')
 
-        for required in ('`local/`', '`gcp/<service>/`', 'primary GCP service',
-                         'cross-service investigation from atomic recipes',
-                         'must not copy the other service\'s commands',
-                         'does not load this README during normal execution'):
+        for required in (
+                '`local/`', '`gcp/<service>/`', 'primary GCP service',
+                'Python helper implementations in `agents/common/scripts/`',
+                'recipe that invokes a helper',
+                'cross-service evidence path from atomic recipes',
+                'must not copy the other service\'s commands',
+                'Upstream skills and playbooks link directly',
+                'do not load this README during normal execution'):
             with self.subTest(required=required):
-                self.assertIn(required, readme)
+                self.assertIn(required, normalized_readme)
 
         expected_paths = (
             'agents/common/recipes/local/list-imports.md',
@@ -113,6 +145,7 @@ class SkillContractTest(unittest.TestCase):
                       spanner_recipe)
         self.assertIn('bucket-relative GCS object prefixes', local_recipe)
         self.assertNotIn('../../common/recipes/README.md', skill)
+        self.assertNotIn('dc-import-info', readme)
         self.assertNotIn('repository.list-imports', local_recipe + skill)
         self.assertNotIn('gcp.imports.query-import-status',
                          spanner_recipe + skill)
@@ -214,8 +247,7 @@ class SkillContractTest(unittest.TestCase):
         )
 
         self.assertIn('../../common/config/import-environments.yaml', skill)
-        self.assertEqual({'default_environment', 'environments'},
-                         set(registry))
+        self.assertEqual({'default_environment', 'environments'}, set(registry))
         self.assertEqual('prod', registry['default_environment'])
         self.assertEqual({'prod', 'staging'}, set(registry['environments']))
 
@@ -386,8 +418,7 @@ class SkillContractTest(unittest.TestCase):
         recipe = self._read(
             'agents/common/recipes/gcp/gcs/list-import-summaries.md')
         normalized_recipe = re.sub(r'\s+', ' ', recipe)
-        helper = self._read(
-            'agents/common/import_support/list_import_summaries.py')
+        helper = self._read('agents/common/scripts/list_import_summaries.py')
         artifact_layout = re.sub(
             r'\s+', ' ',
             self._read(
@@ -423,12 +454,12 @@ class SkillContractTest(unittest.TestCase):
     def test_removed_history_and_workflow_lookup_paths_are_absent(self):
         deleted_paths = (
             'agents/common/references/import-automation/run-and-status-model.md',
-            'agents/common/import_support/read_import_records.py',
-            'agents/common/import_support/read_import_records_test.py',
-            'agents/common/import_support/list_import_runs.py',
-            'agents/common/import_support/list_import_runs_test.py',
-            'agents/common/import_support/correlate_import_runs.py',
-            'agents/common/import_support/correlate_import_runs_test.py',
+            'agents/common/scripts/read_import_records.py',
+            'agents/common/scripts/read_import_records_test.py',
+            'agents/common/scripts/list_import_runs.py',
+            'agents/common/scripts/list_import_runs_test.py',
+            'agents/common/scripts/correlate_import_runs.py',
+            'agents/common/scripts/correlate_import_runs_test.py',
             'agents/common/recipes/gcp/spanner/read-import-records.md',
             'agents/common/recipes/gcp/imports/correlate-import-runs.md',
             'agents/common/recipes/gcp/imports/query-import-version-history.md',
@@ -510,6 +541,7 @@ class SkillContractTest(unittest.TestCase):
         artifacts = self._read(
             'agents/common/recipes/gcp/gcs/list-version-artifacts.md')
         batch = self._read('agents/common/recipes/gcp/batch/describe-job.md')
+        tasks = self._read('agents/common/recipes/gcp/batch/list-tasks.md')
         logs = self._read(
             'agents/common/recipes/gcp/logging/fetch-batch-logs.md')
 
@@ -518,13 +550,18 @@ class SkillContractTest(unittest.TestCase):
         self.assertIn('ImportStatus.JobId', batch)
         self.assertIn('summary `job_id`', batch)
         self.assertIn('Do not list candidate jobs', batch)
+        for required in ('--limit=<LIMIT_PLUS_ONE>',
+                         "--argjson limit '<LIMIT>'",
+                         'truncated: (length > $limit)', '.[0:$limit][]',
+                         'exitCode: .taskExecution.exitCode'):
+            with self.subTest(required=required):
+                self.assertIn(required, tasks)
         for required in ('labels.job_uid', 'timestamp>=', 'timestamp<=',
                          '--limit=<LIMIT_PLUS_ONE>', 'jsonPayload.log_type'):
             with self.subTest(required=required):
                 self.assertIn(required, logs)
 
-    def test_python_wrapper_uses_repository_environment_without_minor_pin(
-            self):
+    def test_python_wrapper_uses_repository_environment_without_minor_pin(self):
         wrapper = self._read('agents/common/run_python.sh')
 
         self.assertIn('.env/bin/python', wrapper)

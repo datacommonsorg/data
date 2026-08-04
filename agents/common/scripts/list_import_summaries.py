@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Lists a bounded set of finalized import summaries from GCS."""
+"""Provides a bounded set of finalized import summaries from GCS."""
 
 from datetime import date
 import json
@@ -108,10 +108,7 @@ def _read_batch_job_id(
     except exceptions.Forbidden:
         return None, {'code': 'summary_permission_denied', 'version': version}
     except auth_exceptions.DefaultCredentialsError:
-        return None, {
-            'code': 'gcs_credentials_unavailable',
-            'version': version
-        }
+        return None, {'code': 'gcs_credentials_unavailable', 'version': version}
     except exceptions.GoogleAPICallError:
         return None, {'code': 'summary_read_failed', 'version': version}
     except (UnicodeDecodeError, json.JSONDecodeError):
@@ -185,8 +182,8 @@ def list_import_summaries(absolute_import_name: str,
 
     candidates.sort(key=lambda item: item[0], reverse=True)
     for version, version_date, blob in candidates[:limit]:
-        batch_job_id, issue = _read_batch_job_id(
-            blob, version, identity['simple_import_name'])
+        batch_job_id, issue = _read_batch_job_id(blob, version,
+                                                 identity['simple_import_name'])
         gcs_version_uri = (
             f'gs://{gcs_bucket}/{posixpath.join(prefix, version)}')
         output['results'].append({
