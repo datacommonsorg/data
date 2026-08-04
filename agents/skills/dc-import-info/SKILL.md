@@ -111,6 +111,17 @@ is out of scope.
 - For manifest fields, read the
   [import manifest reference](../../common/references/import-automation/manifest.md).
 
+## Ground commands in recipes
+
+Before presenting or executing a cloud or support command:
+
+1. Select the operation from the route table.
+2. Open and read its linked recipe during the current turn.
+3. Use the recipe's command structure and literal resource or artifact names.
+4. Resolve placeholders only from declared inputs or linked references.
+5. If a required value remains unresolved, stop. Never reconstruct a command
+   from memory or a generic cloud convention.
+
 ## Route exact operations
 
 | Need | Read and follow |
@@ -133,6 +144,9 @@ is out of scope.
 - For results spanning imports, start with a compact table.
 - Report `current_status`, `summary_status`, `is_current`, and `batch_state` as
   separate fields. Do not synthesize an overall status.
+- Define `is_current` as whether the selected version equals the current
+  accepted ET-output pointer. It does not establish loader completion or
+  serving availability.
 - Treat `VALIDATION` as failed ET validation and `SKIP` as completed no-change.
   A `STAGING` summary means eligible for acceptance, not necessarily current.
 - Label GCS-list results as finalized ET versions, not Workflow or Batch attempt

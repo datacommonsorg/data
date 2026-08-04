@@ -42,6 +42,8 @@ class SkillContractTest(unittest.TestCase):
         self._repo_root = Path(__file__).parents[3]
         self._skill_path = (self._repo_root /
                             'agents/skills/dc-import-info/SKILL.md')
+        self._prompt_path = (self._repo_root /
+                             'agents/prompts/dc-import-info.md')
         self._reference_root = (self._repo_root / 'agents/common/references' /
                                 'import-automation')
         self._recipe_root = self._repo_root / 'agents/common/recipes'
@@ -69,6 +71,7 @@ class SkillContractTest(unittest.TestCase):
     def test_agent_documentation_links_exist(self):
         paths = [
             self._skill_path,
+            self._prompt_path,
             *self._reference_root.glob('*.md'),
             *self._recipe_root.glob('**/*.md'),
         ]
@@ -111,6 +114,47 @@ class SkillContractTest(unittest.TestCase):
 
         self.assertNotIn('architecture.md). 3.', normalized)
         self.assertNotIn('## Contents', skill)
+
+    def test_manual_prompt_and_command_grounding_contract(self):
+        prompt = self._prompt_path.read_text(encoding='utf-8')
+        skill = self._skill_path.read_text(encoding='utf-8')
+        normalized_skill = re.sub(r'\s+', ' ', skill)
+        pointer_recipe = self._read(
+            'agents/common/recipes/gcp/gcs/read-version-pointer.md')
+
+        self.assertLessEqual(len(prompt.split()), 130)
+        for required in (
+                '`dc-import-info`',
+                'Read the exact linked recipe during this turn',
+                'Never invent a resource, filename, field, or meaning',
+                'loader and serving status',
+                'recipe ID or repository path',
+        ):
+            with self.subTest(prompt_requirement=required):
+                self.assertIn(required, prompt)
+
+        for required in (
+                '## Ground commands in recipes',
+                'Open and read its linked recipe during the current turn',
+                'Never reconstruct a command from memory',
+                '`is_current`',
+                'serving availability',
+        ):
+            with self.subTest(skill_requirement=required):
+                self.assertIn(required, normalized_skill)
+
+        self.assertNotIn('.agents/rules', prompt + skill)
+        self.assertIn("/<IMPORT_PREFIX>/staging_version.txt'", pointer_recipe)
+        self.assertIn("/<IMPORT_PREFIX>/latest_version.txt'", pointer_recipe)
+        self.assertIn('`is_current`', pointer_recipe)
+        self.assertIn(
+            'This does not prove loader completion or serving availability.',
+            re.sub(r'\s+', ' ', pointer_recipe),
+        )
+        self.assertNotIn('<POINTER_FILENAME>', pointer_recipe)
+        self.assertIsNone(
+            re.search(r'(?<![_A-Za-z0-9])version\.txt(?![_A-Za-z0-9])',
+                      pointer_recipe))
 
     def test_runtime_environment_registry_remains_minimal_and_complete(self):
         registry = yaml.safe_load(
