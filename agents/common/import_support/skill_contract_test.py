@@ -11,7 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Tests for the repository-local agent skill contract."""
+"""Tests the repository-local contract presented to import-support agents.
+
+These tests catch drift in local links, routing rules, safety guardrails,
+recipe structure, and helper/documentation agreements. They do not exercise
+live GCP resources or verify production import behavior.
+"""
 
 import json
 from pathlib import Path
@@ -299,11 +304,13 @@ class SkillContractTest(unittest.TestCase):
                 'Use Scheduler only for a deployed schedule or target question',
                 'Cloud Spanner `ImportStatus` table only as a mutable current snapshot',
                 'previous seven days', 'at most 100 returned rows',
-                'GCS summary-list helper', 'scans at most 100 summary names',
-                'up to five recent finalized versions',
-                'exact GCS version URI',
+                'GCS summary-list helper',
+                '100 matching summary object names plus one overflow sentinel',
+                'up to five recent finalized versions', 'exact GCS version URI',
                 'A Batch failure before `import_summary.json` exists is absent',
                 'Describe Batch, tasks, or logs only from an exact',
+                'only when explicitly requested',
+                'trace-batch-job-source-commit.md',
                 'List recent import summaries', 'Query current import status'):
             with self.subTest(required=required):
                 self.assertIn(required, normalized)
@@ -314,8 +321,7 @@ class SkillContractTest(unittest.TestCase):
                                 'list-import-executions.md',
                                 'find-historical-summary.md',
                                 'read-import-records.md',
-                                'describe-ingestion-helper.md',
-                                'trace-batch-job-source-commit.md'):
+                                'describe-ingestion-helper.md'):
             with self.subTest(forbidden_route=forbidden_route):
                 self.assertNotIn(forbidden_route, skill)
 
@@ -354,6 +360,7 @@ class SkillContractTest(unittest.TestCase):
         for required in (
                 'Artifact Registry `DockerImage` resource',
                 'Inspect only that resource\'s `tags[]`',
+                '<RESOLVED_IMAGE_AT_DIGEST>', '<IMAGE>@<DIGEST>',
                 '<URL_ENCODED_IMAGE_AT_DIGEST>',
                 'one Artifact Registry request',
                 'Another exact tag requires at most two',
@@ -361,7 +368,7 @@ class SkillContractTest(unittest.TestCase):
                 'nearest_local_commit_before_launch',
                 'correlation_method: heuristic_by_time',
                 'Never call it the commit that ran',
-                'Unless the user explicitly requested exact provenance',
+                'When exact provenance is not required',
                 'do not substitute this time candidate for missing digest evidence',
                 'Do not resolve `stable` or `latest`',
                 'Never query Cloud Build'):
@@ -370,7 +377,8 @@ class SkillContractTest(unittest.TestCase):
 
         for forbidden in ('gcloud artifacts versions describe',
                           'TAG_LIMIT_PLUS_ONE', 'VERSION_RESOURCE',
-                          'gcloud builds list', 'gcloud builds describe'):
+                          '<IMAGE>@sha256:<DIGEST>', 'gcloud builds list',
+                          'gcloud builds describe'):
             with self.subTest(forbidden=forbidden):
                 self.assertNotIn(forbidden, recipe)
 
@@ -380,18 +388,27 @@ class SkillContractTest(unittest.TestCase):
         normalized_recipe = re.sub(r'\s+', ' ', recipe)
         helper = self._read(
             'agents/common/import_support/list_import_summaries.py')
+        artifact_layout = re.sub(
+            r'\s+', ' ',
+            self._read(
+                'agents/common/references/import-automation/artifact-layout.md')
+        )
 
         for required in (
                 'list_import_summaries.py', '--absolute_import_name',
                 '--gcs_project', '--gcs_bucket', '--limit',
-                'Scan at most 101 matching summary names', 'at most five',
-                'scan_truncated=true',
+                '100 matching summary object names plus one overflow sentinel',
+                '101 names maximum', 'at most five', 'scan_truncated=true',
                 'finalized-version history, not complete attempt history',
                 'gcs_version_uri',
                 'Batch failure before summary creation is intentionally absent'
         ):
             with self.subTest(required=required):
                 self.assertIn(required, normalized_recipe)
+
+        self.assertIn(
+            '100 matching summary object names plus one overflow sentinel',
+            artifact_layout)
 
         self.assertNotIn('gcs_output_prefix', recipe + helper)
 

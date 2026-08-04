@@ -1,6 +1,6 @@
 ---
 name: dc-import-info
-description: Retrieves read-only information about the extract-and-transform (ET) phase of Data Commons imports, including repository definitions, configured and deployed schedules, current ImportStatus state, recent finalized GCS versions, exact summaries, accepted-output pointers, and exact known Batch jobs, tasks, and logs. Use for inspecting one import or a bounded set of current import snapshots. Do not use for root-cause analysis, complete attempt history, runtime-image source provenance, loader status, or remediation.
+description: Retrieves read-only information about the extract-and-transform (ET) phase of Data Commons imports, including repository definitions, configured and deployed schedules, current ImportStatus state, recent finalized GCS versions, exact summaries, accepted-output pointers, exact known Batch jobs, tasks, and logs, and explicitly requested runtime-image or source-commit evidence for an exact Batch job. Use for inspecting one import or a bounded set of current import snapshots. Do not use for root-cause analysis, complete attempt history, loader status, or remediation.
 ---
 
 # Inspect Data Commons import ET information
@@ -46,11 +46,12 @@ is out of scope.
    only the selected manifest or requested code, answer, and stop. Do not load
    architecture, environment configuration, or cloud recipes.
 3. For architecture or runtime questions—deployed schedule, current status,
-   finalized versions, Batch, logs, artifacts, or current ET output—read
+   finalized versions, Batch, logs, artifacts, current ET output, or Batch
+   source-commit evidence—read
    [Import automation architecture](../../common/references/import-automation/architecture.md).
 4. Treat complete attempt history, Workflow execution inspection, historical
-   failures that produced no summary, runtime-image source provenance, loader
-   status, and remediation as unsupported by this skill.
+   failures that produced no summary, loader status, and remediation as
+   unsupported by this skill.
 5. Read `agents/common/config/import-environments.yaml` only when the selected
    route performs a cloud operation.
 6. Invoke repository Python helpers only through
@@ -91,9 +92,9 @@ is out of scope.
   events. Unless the user supplies bounds, use production, the previous seven
   days, and at most 100 returned rows.
 - Use the GCS summary-list helper for up to five recent finalized versions of
-  one import. It scans at most 100 summary names and returns version, date, the
-  exact GCS version URI, and Batch job ID. If the scan is truncated, return no
-  history.
+  one import. It scans up to 100 matching summary object names plus one overflow
+  sentinel and returns version, date, the exact GCS version URI, and Batch job
+  ID. If the scan is truncated, return no history.
 - GCS summary history is not attempt history. It includes only attempts that
   reached version-summary creation. A Batch failure before
   `import_summary.json` exists is absent; older such failures are unsupported.
@@ -101,6 +102,9 @@ is out of scope.
   current-output pointer only when acceptance or currentness matters.
 - Describe Batch, tasks, or logs only from an exact `ImportStatus.JobId` or
   selected summary `job_id`. Never list jobs to discover an identifier.
+- Trace runtime-image or source-commit evidence only when explicitly requested
+  and only after selecting one exact Batch job. Do not collect it during routine
+  status, version, artifact, Batch, task, or log inspection.
 - Do not query database history tables or Workflow execution history.
 
 ## Load detailed references only when needed
@@ -137,6 +141,7 @@ Before presenting or executing a cloud or support command:
 | Inspect one exact Batch job | [Describe Batch job](../../common/recipes/gcp/batch/describe-job.md) |
 | Inspect tasks for one exact Batch job | [List Batch tasks](../../common/recipes/gcp/batch/list-tasks.md) |
 | Fetch bounded structured logs for one exact Batch job | [Fetch Batch logs](../../common/recipes/gcp/logging/fetch-batch-logs.md) |
+| Trace an exact Batch job to runtime-image or source-commit evidence, only when explicitly requested | [Trace Batch job to source commit](../../common/recipes/gcp/batch/trace-batch-job-source-commit.md) |
 
 ## Report without merging unlike evidence
 

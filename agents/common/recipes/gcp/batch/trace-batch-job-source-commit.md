@@ -4,12 +4,10 @@ Recipe ID: `gcp.batch.trace-batch-job-source-commit`
 
 ## Use when
 
-An ET debugging task starts from one exact Batch job and needs source-commit
-evidence. Use the recorded image reference first, then use a local time
-candidate as the default fallback. Query Artifact Registry only when the user
-explicitly requests the strongest available provenance or an exact digest must
-be correlated with its attached tags. This is not a routine `dc-import-info`
-operation.
+Trace one exact Batch job to runtime-image or source-commit evidence. Use the
+recorded image reference first, then use a local time candidate as the default
+fallback. Query Artifact Registry only when exact provenance is required or an
+exact digest must be correlated with its attached tags.
 
 ## Required inputs
 
@@ -20,14 +18,15 @@ name, and digest are required only for an exact-image lookup.
 
 ## Clarify when
 
-The Batch job is not exact, the requested local Git ref is ambiguous, an exact
-provenance request has no immutable digest evidence, or more than one
-repository commit-shaped tag is attached to an exact image.
+The Batch job is not exact, the requested local Git ref is ambiguous, exact
+provenance is required but immutable digest evidence is absent, or more than
+one repository commit-shaped tag is attached to an exact image.
 
 ## Read-only operation
 
-First follow the Batch recipe for one exact job. Retain only its `createTime`
-and requested container `imageUri`, then classify the image reference.
+First follow [Describe Batch job](describe-job.md) for one exact job. Retain
+only its `createTime` and requested container `imageUri`, then classify the
+image reference.
 
 ### Commit tag already recorded
 
@@ -51,8 +50,10 @@ setting or other immutable provenance proves that property.
 ### Exact digest recorded or resolved
 
 An image digest has the form `sha256:<64 lowercase hexadecimal characters>`.
-If the Batch image URI already contains the digest, do not describe it again.
-If the URI contains another exact tag, resolve only that tag to its digest:
+Throughout this recipe, `<DIGEST>` means that complete value, including the
+`sha256:` prefix. If the Batch image URI already contains the digest, do not
+describe it again. If the URI contains another exact tag, resolve only that tag
+to its digest:
 
 ```bash
 gcloud artifacts docker images describe '<IMAGE_URI>' \
@@ -60,11 +61,15 @@ gcloud artifacts docker images describe '<IMAGE_URI>' \
   --format='value(image_summary.fully_qualified_digest)'
 ```
 
+Treat the command result as `<RESOLVED_IMAGE_AT_DIGEST>` in the exact form
+`<IMAGE>@<DIGEST>`. Require `<IMAGE>` to equal the requested image name, then
+retain the suffix after `@` as `<DIGEST>`.
+
 Do not resolve `stable` or `latest` with this command. Their current values do
 not establish which image an older Batch job pulled.
 
 For the known digest, read the exact Artifact Registry `DockerImage` resource.
-Percent-encode `<IMAGE>@sha256:<DIGEST>` as one path component to obtain
+Percent-encode `<IMAGE>@<DIGEST>` as one path component to obtain
 `<URL_ENCODED_IMAGE_AT_DIGEST>`. Feed the access token to `curl` through
 standard input; never print or persist it:
 
@@ -91,9 +96,9 @@ tag requires at most two: resolve the tag, then read the exact digest resource.
 ### Mutable or unusable image tag
 
 For `stable`, `latest`, a missing image URI, or a tag that cannot be resolved,
-report `runtime_source_commit: unknown`. Unless the user explicitly requested
-exact provenance, find the nearest commit on the selected local ref before the
-Batch job's validated RFC3339 `createTime`:
+report `runtime_source_commit: unknown`. When exact provenance is not required,
+find the nearest commit on the selected local ref before the Batch job's
+validated RFC3339 `createTime`:
 
 ```bash
 git -C <DATA_REPOSITORY_ROOT> log \
@@ -106,8 +111,8 @@ git -C <DATA_REPOSITORY_ROOT> log \
 Report that result separately as `nearest_local_commit_before_launch`, with
 `correlation_method: heuristic_by_time`. Never call it the commit that ran.
 The image may have been built earlier, from another ref, or from Git history
-that is absent or stale locally. For an explicit exact-provenance request, do
-not substitute this time candidate for missing digest evidence.
+that is absent or stale locally. When exact provenance is required, do not
+substitute this time candidate for missing digest evidence.
 
 ## Preferred invocation
 
