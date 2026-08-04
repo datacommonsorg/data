@@ -65,7 +65,10 @@ class SkillContractTest(unittest.TestCase):
 
     def test_common_helpers_live_under_scripts(self):
         scripts_root = self._repo_root / 'agents/common/scripts'
-        for filename in ('__init__.py', 'cli_flags_test.py', 'list_imports.py',
+        for filename in ('__init__.py', 'check_dependencies_test.py',
+                         'check_python_dependencies.py',
+                         'check_python_dependencies_test.py',
+                         'cli_flags_test.py', 'list_imports.py',
                          'list_imports_test.py', 'list_import_summaries.py',
                          'list_import_summaries_test.py',
                          'skill_contract_test.py'):
@@ -89,6 +92,64 @@ class SkillContractTest(unittest.TestCase):
             'agents/common/scripts/list_import_summaries.py',
             self._read(
                 'agents/common/recipes/gcp/gcs/list-import-summaries.md'))
+
+    def test_dependency_readiness_is_shared_and_failure_routed(self):
+        checker = self._read('agents/check_dependencies.sh')
+        python_checker = self._read(
+            'agents/common/scripts/check_python_dependencies.py')
+        readme = self._read('agents/README.md')
+        setup = self._read('agents/dependency-setup.md')
+        normalized_setup = re.sub(r'\s+', ' ', setup)
+        requirements = self._read('agents/requirements.txt')
+        skill = self._skill_path.read_text(encoding='utf-8')
+        normalized_skill = re.sub(r'\s+', ' ', skill)
+
+        for relative_path in (
+                'agents/check_dependencies.sh',
+                'agents/common/scripts/check_python_dependencies.py',
+                'agents/README.md', 'agents/dependency-setup.md'):
+            with self.subTest(relative_path=relative_path):
+                self.assertTrue((self._repo_root / relative_path).is_file())
+
+        for required in ('REQUIRED_COMMANDS=(', 'GCLOUD_COMMANDS=(',
+                         "'auth print-access-token'",
+                         "'auth application-default print-access-token'",
+                         '"$1" == \'--local\'', 'set -uo pipefail',
+                         'generic loop checks each with command -v',
+                         'generic loop appends --help'):
+            with self.subTest(checker_requirement=required):
+                self.assertIn(required, checker)
+
+        for required in ("('absl-py', 'absl')",
+                         "('google-api-core', 'google.api_core')",
+                         "('google-auth', 'google.auth')",
+                         "('google-cloud-storage', 'google.cloud.storage')",
+                         "('pyopenssl', 'OpenSSL')", "('pyyaml', 'yaml')",
+                         'synchronized with agents/requirements.txt'):
+            with self.subTest(python_requirement=required):
+                self.assertIn(required, python_checker)
+
+        for required in ('./agents/check_dependencies.sh --local',
+                         './run_tests.sh -r', 'gcloud auth login',
+                         'gcloud auth application-default login',
+                         'IAM permissions', 'non-interactive Bash process',
+                         'might not be loaded',
+                         'do not rely solely on personal aliases'):
+            with self.subTest(setup_requirement=required):
+                self.assertIn(required, normalized_setup)
+
+        self.assertIn('[dependency setup](dependency-setup.md)', readme)
+        self.assertNotIn('./agents/check_dependencies.sh', readme)
+        self.assertNotIn('## Maintaining dependency lists', setup)
+        self.assertIn('synchronized with REQUIRED_MODULES', requirements)
+        self.assertIn('command -v "$command_name"', checker)
+        self.assertNotIn('type -P', checker)
+        self.assertIn('[agent dependency setup](../../dependency-setup.md)',
+                      skill)
+        self.assertIn('Do not run the readiness checker on every request',
+                      normalized_skill)
+        self.assertNotIn('gcloud auth login', skill)
+        self.assertNotIn('gcloud auth application-default login', skill)
 
     def test_recipes_have_invocation_contract(self):
         recipe_paths = [
@@ -152,6 +213,8 @@ class SkillContractTest(unittest.TestCase):
 
     def test_agent_documentation_links_exist(self):
         paths = [
+            self._repo_root / 'agents/README.md',
+            self._repo_root / 'agents/dependency-setup.md',
             self._skill_path,
             self._prompt_path,
             *self._reference_root.glob('*.md'),

@@ -55,8 +55,10 @@ is out of scope.
 5. Read `agents/common/config/import-environments.yaml` only when the selected
    route performs a cloud operation.
 6. Invoke repository Python helpers only through
-   `./agents/common/run_python.sh`. If `.env` is missing, stop and tell the user
-   to run `./run_tests.sh -r`.
+   `./agents/common/run_python.sh`. If a command, Python dependency, `.env`, or
+   authentication prerequisite is missing, stop and direct the user to
+   [agent dependency setup](../../dependency-setup.md). Do not run the readiness
+   checker on every request, install dependencies, or initiate login.
 
 ## Review cloud operations
 
