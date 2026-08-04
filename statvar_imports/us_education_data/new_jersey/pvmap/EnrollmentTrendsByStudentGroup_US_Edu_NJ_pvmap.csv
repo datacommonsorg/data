@@ -1,0 +1,13 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7,,
+ObservationAbout,observationAbout,{Data},,,,,,,,,,,,,,
+Female,populationType,Student,measuredProperty,count,gender,Female,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-gender,,
+Male,populationType,Student,measuredProperty,count,gender,Male,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-gender,,
+Non-Binary/Undesignated Gender,populationType,Student,measuredProperty,count,gender,GenderNonConforming,value,{Variable1},#Regex,[^0-9\.]*(?P<RateUP>[0-9\.]+),#Eval,Variable1=RateUP if float(RateUP) < 1 else float(RateUP)/100,unit,Percent,measurementDenominator,-gender
+Economically Disadvantaged Students,populationType,Student,measuredProperty,count,socialVulnerabilityStatus,EconomicallyDisadvantaged,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-socialVulnerabilityStatus,,
+Students with Disabilities,populationType,Student,measuredProperty,count,disabilityStatus,AnyDisability,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-disabilityStatus,,
+English Learners,populationType,Student,measuredProperty,count,languageLearned,EnglishLearner,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-languageLearned,,
+Homeless Students,populationType,Student,measuredProperty,count,socialVulnerabilityStatus,Homeless,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-socialVulnerabilityStatus,,
+Students in Foster Care,populationType,Student,measuredProperty,count,socialVulnerabilityStatus,Foster,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-socialVulnerabilityStatus,,
+Military-Connected Students,populationType,Student,measuredProperty,count,armedForcesStatus,FamilyOfArmedForces,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-armedForcesStatus,,
+Migrant Students,populationType,Student,measuredProperty,count,socialVulnerabilityStatus,Migrant,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-socialVulnerabilityStatus,,
+Year,observationDate,{Number},,,,,,,,,,,,,,
