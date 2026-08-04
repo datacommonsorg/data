@@ -111,11 +111,16 @@ class ListImportSummariesTest(unittest.TestCase):
             '2026_08_03T01_02_03_123456_07_00',
         ], [item['version'] for item in result['results']])
         self.assertEqual('2026-08-07', result['results'][0]['date'])
+        self.assertEqual(
+            'gs://bucket/output/scripts/a/Import/'
+            '2026_08_07T01_02_03_123456_07_00',
+            result['results'][0]['gcs_version_uri'])
         self.assertEqual('job-2026_08_07T01_02_03_123456_07_00',
                          result['results'][0]['batch_job_id'])
         self.assertTrue(
             all(
-                set(item) == {'version', 'date', 'batch_job_id'}
+                set(item) ==
+                {'version', 'date', 'gcs_version_uri', 'batch_job_id'}
                 for item in result['results']))
         self.assertEqual(5, result['returned_summary_count'])
         self.assertEqual(5, sum(blob.download_count for blob in blobs))
@@ -134,6 +139,21 @@ class ListImportSummariesTest(unittest.TestCase):
         self.assertEqual(1, result['skipped_non_timestamp_count'])
         self.assertEqual(0, overridden.download_count)
         self.assertEqual(1, canonical.download_count)
+
+    def test_builds_version_uri_without_output_prefix(self):
+        version = '2026_08_04T01_02_03_123456_07_00'
+        blob = _Blob(f'scripts/a/Import/{version}/import_summary.json', {
+            'import_name': 'Import',
+            'job_id': 'job-id',
+        })
+
+        result = list_import_summaries('scripts/a:Import',
+                                       'project',
+                                       'bucket',
+                                       client=_StorageClient([blob]))
+
+        self.assertEqual(f'gs://bucket/scripts/a/Import/{version}',
+                         result['results'][0]['gcs_version_uri'])
 
     def test_reports_invalid_or_mismatched_selected_summaries(self):
         prefix = 'output/scripts/a/Import'
@@ -160,6 +180,9 @@ class ListImportSummariesTest(unittest.TestCase):
 
         self.assertEqual([None, None, None, None],
                          [item['batch_job_id'] for item in result['results']])
+        self.assertEqual(
+            [f'gs://bucket/{prefix}/{version}' for version in versions],
+            [item['gcs_version_uri'] for item in result['results']])
         self.assertEqual([
             'invalid_summary_json', 'summary_import_mismatch',
             'summary_job_id_missing', 'summary_missing'

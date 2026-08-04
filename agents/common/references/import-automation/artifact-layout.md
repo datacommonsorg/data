@@ -30,8 +30,9 @@ For the most recent finalized candidate, read `staging_version.txt` and then
 the exact `<version>/import_summary.json`. Verify its import identity before
 using the summary or its `job_id`. For up to five recent finalized versions,
 use the bounded summary-list helper; it scans at most 100 exact summary names
-and downloads only the selected summaries. Never list every object below the
-import prefix.
+and returns each exact GCS version URI while downloading only the selected
+summaries. Use that URI as the base for exact summary or artifact inspection.
+Never list every object below the import prefix.
 
 This GCS history contains only attempts that reached summary creation. A Batch
 failure before `import_summary.json` exists has no version-summary entry, so a

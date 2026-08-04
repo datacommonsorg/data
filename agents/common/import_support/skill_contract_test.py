@@ -208,6 +208,7 @@ class SkillContractTest(unittest.TestCase):
                 'previous seven days', 'at most 100 returned rows',
                 'GCS summary-list helper', 'scans at most 100 summary names',
                 'up to five recent finalized versions',
+                'exact GCS version URI',
                 'A Batch failure before `import_summary.json` exists is absent',
                 'Describe Batch, tasks, or logs only from an exact',
                 'List recent import summaries', 'Query current import status'):
@@ -258,6 +259,7 @@ class SkillContractTest(unittest.TestCase):
                 '--limit', 'at most 100', 'at most five',
                 'scan_truncated=true',
                 'finalized-version history, not complete attempt history',
+                'gcs_version_uri',
                 'Batch failure before summary creation is intentionally absent'
         ):
             with self.subTest(required=required):
@@ -267,7 +269,7 @@ class SkillContractTest(unittest.TestCase):
                          'max_results=_SCAN_LIMIT + 1',
                          "fields='items(name),nextPageToken'",
                          "'version': version", "'date': version_date",
-                         "'batch_job_id': batch_job_id"):
+                         "'gcs_version_uri':", "'batch_job_id': batch_job_id"):
             with self.subTest(required=required):
                 self.assertIn(required, helper)
 

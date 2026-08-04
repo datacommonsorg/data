@@ -48,7 +48,9 @@ broader bucket, Workflow, or Batch search.
 
 Top-level identity, requested and scan limits, scanned/returned counts,
 truncation, skipped override count, and bounded issues. Each result contains
-only `version`, date derived from the version name, and `batch_job_id`.
+`version`, date derived from the version name, the exact `gcs_version_uri`
+without a trailing slash, and `batch_job_id`. Append `/import_summary.json` to
+the version URI only when the exact summary is needed.
 
 ## Required bounds
 
@@ -58,8 +60,8 @@ most five timestamp-named versions and download at most those five summaries.
 ## Evidence to retain
 
 Exact import prefix, project and bucket, requested limit, scan count,
-truncation, skipped override count, selected versions, dates, Batch job IDs, and
-issues.
+truncation, skipped override count, selected versions, dates, exact GCS version
+URIs, Batch job IDs, and issues.
 
 ## Common failures
 

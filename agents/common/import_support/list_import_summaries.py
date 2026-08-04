@@ -198,9 +198,12 @@ def list_import_summaries(absolute_import_name: str,
     for version, version_date, blob in candidates[:limit]:
         batch_job_id, issue = _read_batch_job_id(
             blob, version, identity['simple_import_name'])
+        gcs_version_uri = (
+            f'gs://{gcs_bucket}/{posixpath.join(prefix, version)}')
         output['results'].append({
             'version': version,
             'date': version_date,
+            'gcs_version_uri': gcs_version_uri,
             'batch_job_id': batch_job_id,
         })
         if issue:

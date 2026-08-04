@@ -32,11 +32,11 @@ executions or Batch jobs.
 
 The helper uses reverse lexicographic timestamp-folder order, scans no more than
 100 summary names, skips non-timestamp override names, returns at most five
-versions, and reads only those selected summaries for their Batch job IDs. This
-ordering is an intentional operational approximation: Pacific timestamps can
-misorder versions within the repeated hour at DST fall-back. If the scan exceeds
-100, the helper returns no history rather than mislabeling the oldest scanned
-results as the newest.
+versions with their exact GCS version URIs, and reads only those selected
+summaries for their Batch job IDs. This ordering is an intentional operational
+approximation: Pacific timestamps can misorder versions within the repeated
+hour at DST fall-back. If the scan exceeds 100, the helper returns no history
+rather than mislabeling the oldest scanned results as the newest.
 
 ## Keep status fields separate
 

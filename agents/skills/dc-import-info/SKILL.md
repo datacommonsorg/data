@@ -90,8 +90,9 @@ is out of scope.
   events. Unless the user supplies bounds, use production, the previous seven
   days, and at most 100 returned rows.
 - Use the GCS summary-list helper for up to five recent finalized versions of
-  one import. It scans at most 100 summary names and returns only version, date,
-  and Batch job ID. If the scan is truncated, return no history.
+  one import. It scans at most 100 summary names and returns version, date, the
+  exact GCS version URI, and Batch job ID. If the scan is truncated, return no
+  history.
 - GCS summary history is not attempt history. It includes only attempts that
   reached version-summary creation. A Batch failure before
   `import_summary.json` exists is absent; older such failures are unsupported.
@@ -117,7 +118,7 @@ is out of scope.
 | Find or select imports | [List repository imports](../../common/recipes/repository/list-imports.md) |
 | Verify deployed Scheduler schedule and Workflow target | [Describe Scheduler job](../../common/recipes/gcp/scheduler/describe-job.md) |
 | Read current status for one import or bounded current snapshots across imports | [Query current import status](../../common/recipes/gcp/imports/query-import-status.md) |
-| List up to five recent finalized versions and their Batch IDs | [List recent import summaries](../../common/recipes/gcp/gcs/list-import-summaries.md) |
+| List up to five recent finalized versions, GCS paths, and Batch IDs | [List recent import summaries](../../common/recipes/gcp/gcs/list-import-summaries.md) |
 | Read one selected version's summary | [Read run summary](../../common/recipes/gcp/gcs/read-run-summary.md) |
 | Read the current candidate or accepted-output pointer | [Read version pointer](../../common/recipes/gcp/gcs/read-version-pointer.md) |
 | List one selected version's files | [List version artifacts](../../common/recipes/gcp/gcs/list-version-artifacts.md) |
