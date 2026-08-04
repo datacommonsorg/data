@@ -74,7 +74,7 @@ Percent-encode `<IMAGE>@<DIGEST>` as one path component to obtain
 standard input; never print or persist it:
 
 ```bash
-gcloud auth print-access-token | \
+(gcloud auth application-default print-access-token 2>/dev/null || gcloud auth print-access-token) | \
   sed -e 's/^/header = "Authorization: Bearer /' -e 's/$/"/' | \
   curl --config - \
     --fail-with-body \
@@ -158,9 +158,11 @@ or ambiguous conditions.
 ## Common failures
 
 Mutable `stable` or `latest`, missing or expired Batch job, invalid image URI or
-digest, deleted image, permission denied, returned digest mismatch, no or
-multiple commit-shaped tags, missing local commit, or an unavailable local
-time candidate.
+digest, deleted image, permission denied (including CBA restrictions causing a
+`401 Unauthorized` on `print-access-token`; fall back to Application Default
+Credentials with `gcloud auth application-default print-access-token`),
+returned digest mismatch, no or multiple commit-shaped tags, missing local
+commit, or an unavailable local time candidate.
 
 ## Related repository sources
 
