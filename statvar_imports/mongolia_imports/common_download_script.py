@@ -187,8 +187,9 @@ HEALTH_TABLES = [{
 
 
 
+_API_CACHE = {}
+
 def find_table_path(session, table_id):
-    import functools
     import re
     tid = table_id.upper()
     if tid.endswith(".PX"):
@@ -198,14 +199,22 @@ def find_table_path(session, table_id):
     base_match = re.match(r"(DT_NSO_\d+_\d+)V\d+", tid)
     base_id = base_match.group(1) if base_match else tid
     
+    def get_cached_json(url):
+        if url not in _API_CACHE:
+            try:
+                r = session.get(url, timeout=60)
+                if r.status_code == 200:
+                    _API_CACHE[url] = r.json()
+                else:
+                    _API_CACHE[url] = None
+            except Exception as e:
+                logging.error(f"Failed to fetch {url}: {e}")
+                _API_CACHE[url] = None
+        return _API_CACHE[url]
+
     sectors_url = "https://data.1212.mn/api/v1/en/NSO"
-    try:
-        r = session.get(sectors_url, timeout=60)
-        if r.status_code != 200:
-            return None
-        sectors = r.json()
-    except Exception as e:
-        logging.error(f"Failed to fetch sectors: {e}")
+    sectors = get_cached_json(sectors_url)
+    if not sectors:
         return None
         
     candidates = []
@@ -214,12 +223,8 @@ def find_table_path(session, table_id):
         if not sector_id:
             continue
         subsectors_url = f"https://data.1212.mn/api/v1/en/NSO/{sector_id}"
-        try:
-            r = session.get(subsectors_url, timeout=60)
-            if r.status_code != 200:
-                continue
-            subsectors = r.json()
-        except Exception:
+        subsectors = get_cached_json(subsectors_url)
+        if not subsectors:
             continue
             
         for subsector in subsectors:
@@ -227,12 +232,8 @@ def find_table_path(session, table_id):
             if not subsector_id:
                 continue
             tables_url = f"https://data.1212.mn/api/v1/en/NSO/{sector_id}/{subsector_id}"
-            try:
-                r = session.get(tables_url, timeout=60)
-                if r.status_code != 200:
-                    continue
-                tables = r.json()
-            except Exception:
+            tables = get_cached_json(tables_url)
+            if not tables:
                 continue
                 
             for table in tables:
@@ -270,7 +271,7 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
     """
     logging.info(f"Processing {table_id} -> {csv_filepath}...")
 
-    retry_logic = Retry(total=5, backoff_factor=1, allowed_methods=["GET", "POST"])
+    retry_logic = Retry(total=10, backoff_factor=1, allowed_methods=["GET", "POST"])
     adapter = HTTPAdapter(max_retries=retry_logic)
     session = requests.Session()
     session.mount("https://", adapter)
@@ -340,7 +341,29 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
                     
             N = len(class_vars)
             
-            # Map POST response data to data_list format
+            # Pre-build lookups for period and class variables to avoid O(L) index lookups in the loop
+            period_lookup = {}
+            if period_var_idx != -1:
+                en_var = en_meta.get("variables", [])[period_var_idx] if period_var_idx < len(en_meta.get("variables", [])) else None
+                if en_var:
+                    en_values = en_var.get("values", [])
+                    en_texts = en_var.get("valueTexts", [])
+                    for idx, val in enumerate(en_values):
+                        period_lookup[val] = en_texts[idx] if idx < len(en_texts) else val
+
+            class_var_lookups = []
+            for var_idx, en_v, mn_v in class_vars:
+                en_values = en_v.get("values", []) if en_v else []
+                en_texts = en_v.get("valueTexts", []) if en_v else []
+                mn_texts = mn_v.get("valueTexts", []) if mn_v else []
+                lookup = {}
+                for idx, val in enumerate(en_values):
+                    en_t = en_texts[idx] if idx < len(en_texts) else val
+                    mn_t = mn_texts[idx] if idx < len(mn_texts) else val
+                    lookup[val] = (en_t, mn_t)
+                class_var_lookups.append((var_idx, lookup))
+
+            import re
             data_list = []
             for item in response_data.get("data", []):
                 keys = item.get("key", [])
@@ -353,34 +376,17 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
                 
                 if period_var_idx != -1 and period_var_idx < len(keys):
                     period_key = keys[period_var_idx]
-                    en_var = en_meta.get("variables", [])[period_var_idx] if period_var_idx < len(en_meta.get("variables", [])) else None
-                    en_values = en_var.get("values", []) if en_var else []
-                    en_texts = en_var.get("valueTexts", []) if en_var else []
-                    try:
-                        val_idx = en_values.index(period_key)
-                        p_val = en_texts[val_idx] if val_idx < len(en_texts) else period_key
-                    except ValueError:
-                        p_val = period_key
-                    import re
+                    p_val = period_lookup.get(period_key, period_key)
                     if re.match(r"^\d{4}-\d{2}$", p_val):
                         p_val = p_val.replace("-", "")
                     row_data["Period"] = p_val
                 else:
                     row_data["Period"] = ""
                     
-                for i, (var_idx, en_v, mn_v) in enumerate(class_vars):
+                for i, (var_idx, lookup) in enumerate(class_var_lookups):
                     suffix = str(N - 1 - i) if i < N - 1 else ""
                     key_val = keys[var_idx] if var_idx < len(keys) else ""
-                    en_values = en_v.get("values", []) if en_v else []
-                    en_texts = en_v.get("valueTexts", []) if en_v else []
-                    mn_texts = mn_v.get("valueTexts", []) if mn_v else []
-                    try:
-                        val_idx = en_values.index(key_val)
-                        en_text = en_texts[val_idx] if val_idx < len(en_texts) else key_val
-                        mn_text = mn_texts[val_idx] if val_idx < len(mn_texts) else key_val
-                    except ValueError:
-                        en_text = key_val
-                        mn_text = key_val
+                    en_text, mn_text = lookup.get(key_val, (key_val, key_val))
                     row_data[f"CODE{suffix}"] = key_val
                     row_data[f"SCR_ENG{suffix}"] = en_text
                     row_data[f"SCR_MN{suffix}"] = mn_text
@@ -408,7 +414,7 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
             for item in data_list:
                 period = item.get("Period", "")
                 row_keys = [
-                    item.get(key, "") for key in header_mapping['keys']
+                    str(item.get(key, "")).strip() for key in header_mapping['keys']
                 ]
                 dtval_co = item.get("DTVAL_CO", "")
                 row_key = tuple(row_keys)
