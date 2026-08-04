@@ -3,6 +3,8 @@ import os
 import logging
 import requests
 import time
+import sys
+import traceback
 from datetime import datetime
 from google.cloud import storage
 import io
@@ -13,11 +15,10 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 # --- CONFIGURATION ---
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 
-# GCS Template Path
-GCS_TEMPLATE_PATH = "gs://datcom-prod-imports/statvar_imports/statistics_poland/poland_data_sample/StatisticsPoland_input.csv"
-
-# Local Output Directory
+# Outputs exactly to source_files to match your manifest.json
 OUTPUT_DIR = os.path.join(BASE_PATH, "source_files")
+
+GCS_TEMPLATE_PATH = "gs://datcom-prod-imports/statvar_imports/statistics_poland/poland_data_sample/StatisticsPoland_input.csv"
 
 API_BASE_URL = "https://bdl.stat.gov.pl/api/v1"
 API_KEY = "c9a9da02-47ab-4391-dff1-08de66e5ba7b"
@@ -47,14 +48,7 @@ def load_template_from_gcs(gcs_path):
     """Loads the template CSV directly from GCS."""
     try:
         logging.info(f"Reading template from {gcs_path}...")
-        
-        # Method 1: Direct Pandas Read (requires gcsfs)
-        # return pd.read_csv(gcs_path, header=[0,1,2,3], index_col=[0,1])
-        
-        # Method 2: Google Cloud Storage Client (More robust if gcsfs isn't configured)
         storage_client = storage.Client()
-        
-        # Parse bucket and blob
         path_parts = gcs_path.replace("gs://", "").split("/", 1)
         bucket_name = path_parts[0]
         blob_name = path_parts[1]
@@ -64,7 +58,6 @@ def load_template_from_gcs(gcs_path):
         content = blob.download_as_text()
         
         return pd.read_csv(io.StringIO(content), header=[0,1,2,3], index_col=[0,1])
-        
     except Exception as e:
         logging.error(f"Failed to load template from GCS: {e}")
         return None
@@ -82,7 +75,6 @@ def fetch_variables():
     logging.info(f"Downloading variable list for Subject {SUBJECT_ID}...")
     v_map = {}
     
-    # Check pages 0-10 to ensure we get ALL variables
     for page in range(10): 
         url = f"{API_BASE_URL}/variables?subject-id={SUBJECT_ID}&page-size=100&lang=pl&page={page}"
         try:
@@ -106,13 +98,20 @@ def fetch_variables():
     return v_map
 
 def download_and_process():
-    if not os.path.exists(OUTPUT_DIR): os.makedirs(OUTPUT_DIR)
+    global OUTPUT_DIR
     
-    # 1. LOAD TEMPLATE FROM GCS
+    # Safely create output directory
+    try:
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
+    except PermissionError:
+        logging.warning(f"Permission denied for {OUTPUT_DIR}. Falling back to /tmp/source_files")
+        OUTPUT_DIR = "/tmp/source_files"
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
+    
     template_df = load_template_from_gcs(GCS_TEMPLATE_PATH)
-    if template_df is None: return
+    if template_df is None: 
+        raise ValueError("Template DataFrame failed to load from GCS.")
 
-    # Force index to strings
     template_df.index = template_df.index.set_levels([
         template_df.index.levels[0].astype(str), 
         template_df.index.levels[1].astype(str)
@@ -120,15 +119,14 @@ def download_and_process():
     
     region_map = get_template_map(template_df)
     v_metadata = fetch_variables()
-    if not v_metadata: return
+    if not v_metadata: 
+        raise ValueError("Variable metadata failed to download.")
 
     master_data = []
     unique_cols = template_df.columns.droplevel('Year').unique()
     current_year = datetime.now().year
     
-    # 2. MATCH & DOWNLOAD (Specific Ages Only)
     for age, sex, loc in unique_cols:
-        # SKIP TOTALS HERE -> We will calculate them later!
         if pd.isna(age) or str(age).strip() == '' or str(age).lower() == 'total':
             continue
 
@@ -161,7 +159,6 @@ def download_and_process():
             
         logging.info(f"MATCH: {age}|{sex}|{loc} -> ID {var_id}")
         
-        # Download Loop
         for lv in ["0", "2"]:
             api_url = f"{API_BASE_URL}/data/by-variable/{var_id}"
             params = [('unit-level', lv), ('page-size', '100')]
@@ -206,26 +203,23 @@ def download_and_process():
         time.sleep(0.05)
 
     if not master_data:
-        logging.error("No data collected.")
-        return
+        raise ValueError("No data collected during the download loop.")
 
-    # 3. PROCESS & CALCULATE TOTALS
     full_df = pd.DataFrame(master_data)
     
     for year in sorted(full_df['Year'].unique()):
         year_df = full_df[full_df['Year'] == year]
         
-        # Pivot specific ages
         pivot_df = year_df.pivot_table(
             index=['Code', 'Name'],
             columns=['Age', 'Sex', 'Location', 'Year'],
             values='Value'
         )
         
-        # Sum Age columns to create "Total" Age column
-        totals = pivot_df.groupby(level=['Sex', 'Location', 'Year'], axis=1).sum()
+        # CLOUD FIX: Replaced 'axis=1' grouping which crashes in modern Pandas environments.
+        # Transposing before and after groupby achieves the exact same result safely.
+        totals = pivot_df.T.groupby(level=['Sex', 'Location', 'Year']).sum().T
         
-        # Map calculated totals to the 'Age' level (using 'total' label for now)
         new_columns = pd.MultiIndex.from_tuples(
             [('total', s, l, y) for s, l, y in totals.columns],
             names=['Age', 'Sex', 'Location', 'Year']
@@ -234,35 +228,22 @@ def download_and_process():
         
         combined_df = pd.concat([pivot_df, totals], axis=1)
 
-        # 4. REINDEX AGAINST TEMPLATE
-        # Construct expected columns based on template structure for THIS year
         target_columns = []
         for col in template_df.columns:
             t_age, t_sex, t_loc, _ = col
-            
-            # Map Template Age to Our Age
-            if pd.isna(t_age) or str(t_age).strip() == '':
-                lookup_age = 'total'
-            else:
-                lookup_age = t_age
-                
+            lookup_age = 'total' if pd.isna(t_age) or str(t_age).strip() == '' else t_age
             target_columns.append((lookup_age, t_sex, t_loc, str(year)))
 
-        # Reindex rows (Code/Name)
         final_df = combined_df.reindex(template_df.index)
         
-        # Reindex columns to match template order
         try:
             final_df = final_df[target_columns]
-            
-            # Restore original headers (e.g. putting back empty strings for Total Age)
             final_headers = []
             for col in template_df.columns:
                  t_age, t_sex, t_loc, _ = col
                  final_headers.append((t_age, t_sex, t_loc, str(year)))
             
             final_df.columns = pd.MultiIndex.from_tuples(final_headers, names=['Age', 'Sex', 'Location', 'Year'])
-            
         except KeyError as e:
             logging.warning(f"Column alignment warning for {year}: {e}")
             pass
@@ -272,4 +253,11 @@ def download_and_process():
         logging.info(f"Generated: {out_path}")
 
 if __name__ == "__main__":
-    download_and_process()
+    try:
+        download_and_process()
+    except Exception as e:
+        # CLOUD FIX: Catch any unhandled exceptions to prevent silent exit 1 failures.
+        # This pushes the exact stack trace directly into Cloud Logging.
+        logging.critical(f"FATAL SCRIPT ERROR: {e}")
+        logging.critical(traceback.format_exc())
+        sys.exit(1)

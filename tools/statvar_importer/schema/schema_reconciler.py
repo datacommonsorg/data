@@ -89,6 +89,19 @@ flags.DEFINE_list('recon_property', [],
                   'List of properties to be looked up for reconciliation.')
 flags.DEFINE_bool('recon_keep_legacy_svobs', True,
                   'Keep the legacy value when reconciling nodes.')
+flags.DEFINE_bool('recon_lookup_api', False,
+                  'Enable or disable API lookup for schema definition.')
+
+
+def _is_bool_true(val, default: bool = False) -> bool:
+    """Returns boolean value from bool, string or int."""
+    if val is None:
+        return default
+    if isinstance(val, bool):
+        return val
+    if isinstance(val, str):
+        return val.lower() not in ('false', '0', 'no', '')
+    return bool(val)
 
 
 def get_default_recon_config() -> dict:
@@ -99,6 +112,7 @@ def get_default_recon_config() -> dict:
     return {
         'recon_property': _FLAGS.recon_property,
         'recon_keep_legacy_svobs': _FLAGS.recon_keep_legacy_svobs,
+        'recon_lookup_api': _FLAGS.recon_lookup_api,
     }
 
 
@@ -314,9 +328,9 @@ class SchemaReconciler:
                 # Check if any of the values for this property have replacements in the cached schema.
                 values = get_value_list(value)
                 for val in values:
-                    if val.startswith('#') or val.startswith('"') or ' ' in val:
-                        # ignore value that is a quoted string and not a
-                        # reference to another node
+                    if (val.startswith('#') or val.startswith('"') or ' ' in val
+                            or val.replace('.', '', 1).replace('-', '', 1).isdigit()):
+                        # ignore value that is a quoted string, number, or comment
                         continue
                     schema_node = self.get_schema_node(val)
                     if not schema_node:
@@ -327,7 +341,8 @@ class SchemaReconciler:
                             remapped_dcids[add_namespace(val)] = remapped_val
 
         # If some DCIDs are not found in the local schema cache, fetch them using the DC API.
-        if lookup_dcids and not self._config.get('recon_lookup_api', True):
+        if lookup_dcids and not _is_bool_true(
+                self._config.get('recon_lookup_api'), default=False):
             # DC API lookup is disabled.
             # Use any remapped dcids collected from existing schema.
             logging.warning(
