@@ -93,12 +93,28 @@ Accept a source tag only when exactly one tag basename matches
 An already-known digest requires one Artifact Registry request. Another exact
 tag requires at most two: resolve the tag, then read the exact digest resource.
 
-### Mutable or unusable image tag
+### Mutable tag with log-resolved digest
 
-For `stable`, `latest`, a missing image URI, or a tag that cannot be resolved,
-report `runtime_source_commit: unknown`. When exact provenance is not required,
-find the nearest commit on the selected local ref before the Batch job's
-validated RFC3339 `createTime`:
+When the Batch image URI uses `stable` or `latest`, do not immediately report
+`unknown`. First inspect the job's startup logs using
+[Fetch bounded Batch logs](../logging/fetch-batch-logs.md):
+
+- Set `<JOB_UID>` to the exact Batch job UID.
+- Set `<START>` to `<BATCH_CREATE_TIME>` and `<END>` to 5 minutes after launch.
+- Set `<QUERY_TERM>` to `"sha256"` and use `--format=json`.
+
+If a container pull event containing `sha256:<64 lowercase hexadecimal characters>`
+is returned in `textPayload`, use that digest in the Artifact Registry
+`DockerImage` read operation above to identify the attached `^[0-9a-f]{40}$` Git
+tag. Report `correlation_method: log_resolved_digest_tag` and
+`confidence: strongly_correlated`.
+
+### Unresolvable tag or missing log digest (heuristic fallback)
+
+For a missing image URI, a tag that cannot be resolved, or when mutable-tag log
+evidence is absent or expired, report `runtime_source_commit: unknown`. When
+exact provenance is not required, find the nearest commit on the selected
+local ref before the Batch job's validated RFC3339 `createTime`:
 
 ```bash
 git -C <DATA_REPOSITORY_ROOT> log \
@@ -122,7 +138,8 @@ Use the smallest applicable branch:
 Batch image has commit tag -> local verification
 Batch image has digest     -> one exact DockerImage read -> tags[] -> Git
 Batch image has other tag  -> exact digest -> one exact DockerImage read
-Batch image is mutable      -> exact commit unknown; default time candidate
+Batch image is mutable      -> check Batch logs for pulled digest -> one exact DockerImage read
+Log digest unavailable     -> exact commit unknown; default time candidate
 ```
 
 Never query Cloud Build, search builds or images by time, add a Python helper,
@@ -136,28 +153,29 @@ separate time candidate, `correlation_method`, `artifact_registry_lookups`, and
 one confidence result:
 
 - Exact digest identity: `exact`.
-- Unique digest-attached Git tag or recorded commit tag: `strongly_correlated`.
+- Unique digest-attached Git tag, recorded commit tag, or log-resolved digest tag: `strongly_correlated`.
 - Nearest commit before Batch creation: `heuristic`.
-- Mutable tag, no commit-shaped tag, or missing local commit: `unknown`.
+- Mutable tag without log digest, no commit-shaped tag, or missing local commit: `unknown`.
 - Multiple commit-shaped tags: `ambiguous`.
 
 ## Required bounds
 
 Describe one exact Batch job. Use zero Artifact Registry requests for a
-recorded commit tag, one exact `DockerImage` request for a known digest, or at
-most two exact requests for another tag. Never list packages, versions, tags,
-repositories, builds, or nearby images.
+recorded commit tag, one exact `DockerImage` request for a known digest or a
+log-resolved digest, or at most two exact requests for another tag. Never list
+packages, versions, tags, repositories, builds, or nearby images.
 
 ## Evidence to retain
 
 Batch job resource and `createTime`, recorded image URI, digest and exact
 `DockerImage` URI when used, returned `tags[]`, selected Git SHA, local Git ref
-and verification, lookup count, correlation method, confidence, and unresolved
+and verification, lookup count, correlation method (`image_digest_tag`,
+`log_resolved_digest_tag`, or `heuristic_by_time`), confidence, and unresolved
 or ambiguous conditions.
 
 ## Common failures
 
-Mutable `stable` or `latest`, missing or expired Batch job, invalid image URI or
+Mutable `stable` or `latest` with expired/missing logs, missing or expired Batch job, invalid image URI or
 digest, deleted image, permission denied (including CBA restrictions causing a
 `401 Unauthorized` on `print-access-token`; fall back to Application Default
 Credentials with `gcloud auth application-default print-access-token`),
