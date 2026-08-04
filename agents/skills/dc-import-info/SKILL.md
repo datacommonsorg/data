@@ -95,8 +95,17 @@ not indicate that loading completed.
 - Start with the recipe that directly answers the request and stop when the
   requested fact is established.
 - Use Scheduler only for questions about its deployed schedule or configured
-  Workflow target. Use Workflow for execution history; Scheduler evidence is
-  not a prerequisite.
+  Workflow target. Scheduler evidence is not a prerequisite for run history.
+- For routine single-import run history or latest checkpointed-run status, start
+  with bounded correlated checkpoint history. Do not list Workflow executions
+  merely because checkpoint history is not exhaustive.
+- Use Workflow history for running attempts, failures before checkpointing,
+  complete attempt history, status across multiple imports, or a required fact
+  that structured correlation cannot provide. If correlation returns a
+  Workflow execution ID, describe that exact execution instead of listing
+  Workflow history.
+- If correlation returns no record, fall back to bounded Workflow history only
+  when the request still requires an attempt-level answer.
 - Follow a selected Workflow execution only through exact identifiers:
   Workflow `result.jobId` → Batch; import name + Batch job ID → GCS summary.
   Read tasks, logs, artifacts, or correlation only when required.
@@ -123,15 +132,15 @@ not indicate that loading completed.
 |---|---|
 | Find or select imports | [List repository imports](../../common/recipes/repository/list-imports.md) |
 | Verify Scheduler schedule and Workflow target | [Describe Scheduler job](../../common/recipes/gcp/scheduler/describe-job.md) |
-| List Workflow executions (ET attempts) or describe one exact execution | [Inspect import executions](../../common/recipes/gcp/workflows/list-import-executions.md) |
+| Read routine bounded run history or latest checkpointed-run status for one import | [Correlate import history and versions](../../common/recipes/gcp/imports/correlate-import-runs.md) |
+| Inspect running, uncheckpointed, multiple-import, or explicit Workflow attempts; or describe one exact execution | [Inspect import executions](../../common/recipes/gcp/workflows/list-import-executions.md) |
 | Inspect Batch compute | [Describe Batch job](../../common/recipes/gcp/batch/describe-job.md) |
 | Inspect Batch tasks | [List Batch tasks](../../common/recipes/gcp/batch/list-tasks.md) |
 | Fetch bounded stage logs | [Fetch Batch logs](../../common/recipes/gcp/logging/fetch-batch-logs.md) |
-| Read a version pointer | [Read version pointer](../../common/recipes/gcp/gcs/read-version-pointer.md) |
+| Read the current accepted ET-output pointer | [Read version pointer](../../common/recipes/gcp/gcs/read-version-pointer.md) |
 | Read one run summary | [Read run summary](../../common/recipes/gcp/gcs/read-run-summary.md) |
 | List one version's files | [List version artifacts](../../common/recipes/gcp/gcs/list-version-artifacts.md) |
 | Find an older summary | [Find historical summary](../../common/recipes/gcp/gcs/find-historical-summary.md) |
-| Correlate version/output history | [Correlate import history and versions](../../common/recipes/gcp/imports/correlate-import-runs.md) |
 
 ## Report results
 
@@ -144,6 +153,9 @@ not indicate that loading completed.
   semantic success from Workflow or Batch success.
 - Treat an incomplete latest-success search as `unknown`, not proof that an
   import has never succeeded.
+- Label correlation-only results as checkpointed ET runs. If none are found,
+  report `No checkpointed ET run found`, not `No ET attempt occurred`, unless
+  an attempt-level answer required the bounded Workflow fallback.
 - Show canonical resource names and generated console links.
 - Include `Infrastructure actually used` for every cloud-backed answer. List
   each queried resource, its evidence source, and relevant resources not queried

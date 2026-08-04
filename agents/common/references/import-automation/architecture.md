@@ -14,6 +14,32 @@ scripts, validation settings, resources, and optional `cron_schedule` define
 repository intent. Editing the manifest does not by itself prove that
 production was updated; deployment or scheduling is a separate event.
 
+## ET lifecycle concepts
+
+- An **ET attempt** is one invocation of the shared ET Workflow. It may stop
+  before producing complete output.
+- A **candidate ET version** is versioned output plus its exact summary after an
+  attempt reaches finalization. Candidate means generated, not yet selected as
+  the current ET output.
+- **Acceptance** is the ET-only transition that selects an eligible candidate as
+  the current ET output. It is not human approval and does not run the loader.
+- The **current ET output**, also called the accepted ET output, is the selected
+  version available for downstream selection. Being eligible downstream does
+  not mean the loader ran or serving data changed.
+
+```text
+ET attempt
+  -> finalized candidate ET version
+       STAGING -> eligible for ET acceptance
+          -> current ET output
+          -> eligible for downstream selection
+       VALIDATION -> not eligible; current output unchanged
+       SKIP -> no new output to accept; current output unchanged
+
+technical failure -> may stop before a complete candidate
+separate loader pipeline consumes eligible output (out of scope)
+```
+
 ## Definition-to-run flow
 
 ```text
@@ -36,40 +62,37 @@ production was updated; deployment or scheduling is a separate event.
    one Workflow execution represents one logical ET attempt
    if execution reaches compute creation, it starts a Cloud Batch job and task
 
-5. Produce a candidate ET version
+5. Finalize and classify a candidate ET version
    the executor reads the selected definition and source data
    it transforms, generates, and validates Data Commons-compatible artifacts
-   it writes artifacts under one GCS version directory
-   if finalization is reached, it writes staging_version.txt and import_summary.json
+   if finalization is reached, it writes one GCS version, staging_version.txt,
+   and the candidate's exact import_summary.json
    the summary classifies the candidate as STAGING, VALIDATION, or SKIP
 
-6. Decide whether to accept the candidate version
+6. Apply ET acceptance
    after Batch succeeds, the Workflow invokes the version-update helper
    the helper reads staging_version.txt and the candidate's exact summary
-   STAGING updates latest_version.txt and adds a new ImportVersionHistory event
-   VALIDATION or SKIP leaves latest_version.txt on the previously accepted version
+   only STAGING is eligible for acceptance
+   successful acceptance advances the configured current-output pointer
+   (normally latest_version.txt) and records a corresponding ET version
+   checkpoint in database metadata
+   VALIDATION or SKIP leaves the previous current ET output unchanged
 
-accepted ET output
-  - - separate handoff - -> loader pipeline (out of scope)
+current ET output
+  -> eligible for downstream selection
+  -> separate loader pipeline (out of scope)
 ```
 
 The Workflow is shared by the environment; there is not one Workflow definition
 per import.
 
-## ImportVersionHistory stages
-
-`ImportVersionHistory` is an event history, not the mutable current-state
-record. In the normal automated flow:
-
-- ET acceptance adds a `STAGING` event for the accepted version, linked to the
-  import Workflow execution through its comment.
-- `VALIDATION`, `SKIP`, and failures do not add an ET-acceptance event.
-- The separate loader can later add a `SUCCESS` event for the same version. That
-  event is loader evidence and is outside this ET flow.
-
-Operational overrides and rollbacks can also add `STAGING` events. Use the
-event's status, comment, and Workflow execution ID together when identifying
-its source.
+ET evidence is checkpointed progressively. Workflow history records attempts,
+GCS records finalized candidates and the current-output pointer, and Spanner
+version metadata such as `ImportVersionHistory` provides queryable version
+checkpoints. Not every attempt reaches every checkpoint, and these records are
+created separately. Treat partial or conflicting evidence as incomplete or
+`unknown`; read the [run and status model](run-and-status-model.md) for lookup
+and interpretation rules.
 
 ## Resource cardinality
 
@@ -78,7 +101,7 @@ per environment:       one shared import-automation-workflow deployment
 per scheduled import:  one Cloud Scheduler job
 per ET attempt:        one Workflow execution
 per Batch-backed run:  normally one Batch job and task
-per uploaded attempt:  one GCS version directory and import_summary.json
+per finalized candidate: one GCS version directory and import_summary.json
 ```
 
 ## Evidence chain
@@ -90,8 +113,9 @@ per uploaded attempt:  one GCS version directory and import_summary.json
 | Workflow execution | Logical ET attempt, exact argument, historical revision, state, timestamps, and returned Batch job ID when successful |
 | Batch job/task | Actual compute request, requested image URI, resources, events, and task outcome |
 | Structured logs | Stage-level executor evidence |
-| GCS version and `import_summary.json` | Output identity, pipeline status, version, and metrics |
-| Accepted pointer or version history | Whether that ET version became the accepted ET output |
+| GCS version and `import_summary.json` | Finalized candidate identity, classification, version, and metrics |
+| Current-output pointer (normally `latest_version.txt`) | Which version is the current ET output at read time |
+| Spanner version metadata | Queryable version checkpoints and correlation identifiers, not complete attempt history |
 
 Join only through recorded identifiers. Verify the absolute import name,
 Workflow `result.jobId`, Batch import/job identity, and summary import/job
@@ -116,7 +140,18 @@ job can succeed while the summary reports `VALIDATION` or `SKIP`.
 - Batch records the requested image URI. Resolving that image to historical
   source is a separate debugging operation.
 
-## Read code only when needed
+## Conditional references
+
+### Read detailed references only when needed
+
+- For status dimensions, checkpoint semantics, and evidence lookup order, read
+  the [run and status model](run-and-status-model.md).
+- For version directories, summaries, and pointer names, read
+  [artifact layout](artifact-layout.md).
+- For exact import-definition fields, read the
+  [manifest reference](manifest.md).
+
+### Read code only when needed
 
 | Implementation question | Read on demand |
 |---|---|

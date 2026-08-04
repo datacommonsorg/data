@@ -1,7 +1,14 @@
 # Run and status model
 
-One Workflow execution is one logical extract-and-transform (ET) attempt. Keep
-these status dimensions separate:
+One Workflow execution is one logical extract-and-transform (ET) attempt. A
+checkpointed ET run is a version recorded in Spanner version metadata. The
+correlation path joins it to its exact GCS summary when available. Checkpointed
+runs are fast to query, but they are not an exhaustive attempt ledger because
+an attempt can fail before creating those records.
+
+## Status dimensions
+
+Keep these dimensions separate:
 
 | Dimension | Meaning |
 |---|---|
@@ -10,10 +17,12 @@ these status dimensions separate:
 | Batch/task | Compute allocation and container execution |
 | Pipeline | Executor summary such as `STAGING`, `VALIDATION`, or `SKIP` |
 | Semantic validation | Whether generated data passed import validation |
-| Accepted ET output | Whether the selected ET version became the accepted result |
+| Current (accepted) ET output | Whether a candidate became the selected ET result |
 
 A Workflow and Batch job can succeed while the pipeline result is `VALIDATION`
 or `SKIP`.
+
+## Candidate classification and acceptance
 
 - `STAGING`: a new version completed and is eligible to become the accepted ET
   output.
@@ -24,31 +33,48 @@ or `SKIP`.
 - Failure before summary: rely on Workflow, Batch, task, and logs; no GCS
   summary or version event may exist.
 
-Define the latest successful refresh as the newest run with a `STAGING` summary
-plus either the configured accepted pointer referencing that same version or an
-accepted `ImportVersionHistory` event tied to
-`import-workflow:<execution-id>`. When either signal is missing or conflicts,
+A `STAGING` summary proves eligibility, not acceptance. Define the latest
+checkpointed successful refresh as the newest correlated version with an exact
+`STAGING` summary and an unambiguous ET acceptance checkpoint. For the current
+ET output, read the configured current-output pointer and that version's exact
+summary. A historical checkpoint does not by itself prove that the version is
+still current.
+
+When queried summary, pointer, or checkpoint evidence is missing or conflicts,
 return the individual states and an overall status of `unknown`. If bounded
 evidence has no success, mark the result incomplete rather than claiming the
 import never succeeded.
 
-## History sources
+## Evidence sources and lookup order
 
 - Workflow executions: retained ET attempts, including failures before output.
 - Batch jobs/tasks: retained compute attempts.
-- GCS pointers and exact summaries: pipeline status and current accepted-output
-  evidence.
-- `ImportVersionHistory`: accepted version/output events; failed and skipped
-  attempts may be absent. Use only through bounded correlation.
+- GCS summaries: candidate classification and output details.
+- GCS current-output pointer: which accepted ET output is current at read time.
+- `ImportVersionHistory`: queryable version-event checkpoint history. Use
+  bounded correlation to select relevant ET evidence; do not treat every event
+  as an ET attempt or automated acceptance.
 
-Correlation history does not replace Workflow execution history.
+For routine single-import history and status, start with bounded correlated
+checkpoint history. This limitation does not justify listing Workflow
+executions merely because some attempts may be absent. Query Workflow only when
+the request requires running attempts, failures before checkpointing, complete
+attempt history, multiple-import status, or another fact that structured
+correlation cannot provide. When correlation returns a Workflow execution ID,
+describe that exact execution instead of listing Workflow history.
+
+If correlation returns no record and the request still requires an attempt-level
+answer, use bounded Workflow history. Otherwise report
+`No checkpointed ET run found` for the queried bounds. Do not translate that
+result into `No ET attempt occurred`.
 
 ## Status across multiple imports
 
 For a query across multiple imports, default to production, the previous 24
-hours, and at most 100 returned Workflow executions. List FULL-view executions
-once without an exact-import filter, apply an optional case-insensitive
-import-name filter locally, and report a compact table before row details.
+hours, and at most 100 returned Workflow executions. The single-import
+checkpoint path is not a multiple-import index. List FULL-view executions once
+without an exact-import filter, apply an optional case-insensitive import-name
+filter locally, and report a compact table before row details.
 
 - `failed`: Workflow or Batch technical failure, or pipeline `VALIDATION` or
   failure.

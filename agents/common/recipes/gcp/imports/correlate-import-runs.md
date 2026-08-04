@@ -4,8 +4,8 @@ Recipe ID: `gcp.imports.correlate-import-runs`
 
 ## Use when
 
-Returning bounded version history for one import or tracing one exact GCS
-version to its recorded Batch and Workflow identifiers.
+Returning bounded checkpointed ET history for one import or tracing one exact
+GCS version to its recorded Batch and Workflow identifiers.
 
 ## Required inputs
 
@@ -69,11 +69,11 @@ state is requested.
 
 ## Expected output
 
-Minimal output containing the absolute import name and one ET record per
-selected version. Each record has the version, exact GCS base path, import
-Workflow execution ID, Batch job ID, exact summary status, Workflow-history
-timestamp, GCS-summary creation timestamp, and missing identifiers. The
-top-level result also reports truncation and, only when needed,
+Minimal output containing the absolute import name and one checkpointed ET
+record per selected version. Each record has the version, exact GCS base path,
+import Workflow execution ID, Batch job ID, exact summary status,
+Workflow-history timestamp, GCS-summary creation timestamp, and missing
+identifiers. The top-level result also reports truncation and, only when needed,
 incomplete-history issues. Name and version normalization and non-ET version
 events remain internal.
 
@@ -88,10 +88,10 @@ Use returned fields for optional detail lookups only when requested:
 
 ## Required bounds
 
-`import_history` defaults to the newest run when `--limit` is omitted. Its limit
-counts unique versions and must be 1 through 20. `import_version` returns one
-exact version. Never list the import prefix or query all imports. A UTC range
-applies only to the selected import's history.
+`import_history` defaults to the newest checkpointed version when `--limit` is
+omitted. Its limit counts unique versions and must be 1 through 20.
+`import_version` returns one exact version. Never list the import prefix or
+query all imports. A UTC range applies only to the selected import's history.
 
 The caller must state the effective limit and optional UTC range alongside the
 result. Those invocation bounds are intentionally not duplicated in the

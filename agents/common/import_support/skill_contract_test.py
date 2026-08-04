@@ -172,6 +172,8 @@ class SkillContractTest(unittest.TestCase):
         status_model = (self._repo_root / 'agents/common/references' /
                         'import-automation/run-and-status-model.md').read_text(
                             encoding='utf-8')
+        normalized_architecture = re.sub(r'\s+', ' ', architecture)
+        normalized_status_model = re.sub(r'\s+', ' ', status_model)
         pointer_recipe = (self._repo_root / 'agents/common/recipes/gcp/gcs' /
                           'read-version-pointer.md').read_text(
                               encoding='utf-8')
@@ -198,30 +200,48 @@ class SkillContractTest(unittest.TestCase):
         for required in (
                 'Define the import in Git',
                 '<directory-from-repository-root>:<import_name>',
-                ('scripts/census_county_business_patterns:'
-                 'CensusCountyBusinessPatterns'),
+            ('scripts/census_county_business_patterns:'
+             'CensusCountyBusinessPatterns'),
                 'creates or updates one Cloud Scheduler job',
                 'one Workflow execution represents one logical ET attempt',
+                '## ET lifecycle concepts',
+                'Candidate means generated, not yet selected',
+                'Acceptance** is the ET-only transition',
+                'does not mean the loader ran or serving',
                 'executor reads the selected definition and source data',
-                'writes staging_version.txt and import_summary.json',
-                ('STAGING updates latest_version.txt and adds a new '
-                 'ImportVersionHistory event'),
-                'VALIDATION or SKIP leaves latest_version.txt',
-                'ImportVersionHistory` is an event history',
-                'ET acceptance adds a `STAGING` event',
-                'failures do not add an ET-acceptance event',
-                'loader can later add a `SUCCESS` event',
+                'Finalize and classify a candidate ET version',
+                'Apply ET acceptance',
+                'only STAGING is eligible for acceptance',
+                'records a corresponding ET version checkpoint',
+                'VALIDATION or SKIP leaves the previous current ET output',
+                'provides queryable version checkpoints',
+                'records are created separately',
+                '[run and status model](run-and-status-model.md)',
                 'loader pipeline (out of scope)',
                 'live read-only Scheduler, Workflow, Batch, GCS, and database metadata',
                 'supplied sibling `import` checkout'):
             with self.subTest(architecture_required=required):
-                self.assertIn(required, architecture)
+                self.assertIn(required, normalized_architecture)
         for forbidden in ('spanner-ingestion-workflow', 'Dataflow',
                           'IngestionHistory', 'ImportStatus',
                           'Downstream ingestion', '| Publication |',
-                          '`dc-import-info`', 'Load this reference'):
+                          '`dc-import-info`', 'Load this reference',
+                          '## ImportVersionHistory stages',
+                          'loader can later add a `SUCCESS` event'):
             with self.subTest(forbidden=forbidden):
                 self.assertNotIn(forbidden, architecture + '\n' + status_model)
+        for required in (
+                'checkpointed ET run is a version recorded',
+                'not an exhaustive attempt ledger',
+                'A `STAGING` summary proves eligibility, not acceptance',
+                'queryable version-event checkpoint history',
+                'does not justify listing Workflow executions',
+                'describe that exact execution instead of listing',
+                'No checkpointed ET run found',
+                'request still requires an attempt-level answer',
+                'Do not translate that result into `No ET attempt occurred`'):
+            with self.subTest(status_model_required=required):
+                self.assertIn(required, normalized_status_model)
         self.assertIn('current accepted ET-output question', pointer_recipe)
         self.assertNotIn('publication question', pointer_recipe)
 
@@ -229,6 +249,7 @@ class SkillContractTest(unittest.TestCase):
         skill_path = (self._repo_root /
                       'agents/skills/dc-import-info/SKILL.md')
         skill = skill_path.read_text(encoding='utf-8')
+        normalized_skill = re.sub(r'\s+', ' ', skill)
         status_model = (self._repo_root / 'agents/common/references' /
                         'import-automation/run-and-status-model.md').read_text(
                             encoding='utf-8')
@@ -268,7 +289,18 @@ class SkillContractTest(unittest.TestCase):
                       list_imports)
         self.assertIn('Read manifest-referenced code only when', list_imports)
         self.assertIn('Scheduler evidence is not a prerequisite',
-                      re.sub(r'\s+', ' ', skill))
+                      normalized_skill)
+        for required in (
+                'routine single-import run history or latest checkpointed-run status',
+                'Do not list Workflow executions merely because checkpoint',
+                'failures before checkpointing',
+                'describe that exact execution instead of listing',
+                'fall back to bounded Workflow history only',
+            ('Read routine bounded run history or latest checkpointed-run '
+             'status for one import'),
+                'Label correlation-only results as checkpointed ET runs'):
+            with self.subTest(skill_routing_required=required):
+                self.assertIn(required, normalized_skill)
         for forbidden_route in ('describe-ingestion-helper.md',
                                 'read-import-records.md',
                                 'resolve-runtime-provenance.md'):
@@ -280,7 +312,7 @@ class SkillContractTest(unittest.TestCase):
         for required in ('previous 24 hours',
                          'at most 100 returned Workflow executions',
                          'compact table',
-                         'does not replace Workflow execution history',
+                         'not an exhaustive attempt ledger',
                          '`unknown`'):
             with self.subTest(required=required):
                 self.assertIn(required, combined)
@@ -436,6 +468,8 @@ class SkillContractTest(unittest.TestCase):
         for required in ('--mode=import_history', '--mode=import_version',
                          'gcs_base_path', 'workflow_execution_id',
                          'batch_job_id', 'summary status',
+                         'bounded checkpointed ET history',
+                         'one checkpointed ET',
                          'counts unique versions',
                          'caller must state the effective limit',
                          'bounded version-discovery query', '1 through 20',
