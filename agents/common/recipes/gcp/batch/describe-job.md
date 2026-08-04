@@ -4,12 +4,12 @@ Recipe ID: `gcp.batch.describe-job`
 
 ## Use when
 
-A selected Workflow execution created Batch compute and job-level evidence is
-needed.
+Job-level evidence is needed for an exact Batch job identified by current
+`ImportStatus.JobId` or a validated GCS summary `job_id`.
 
 ## Required inputs
 
-Exact Batch job ID from Workflow result, project, and location.
+Exact Batch job ID, its evidence source, project, and location.
 
 ## Clarify when
 
@@ -53,20 +53,18 @@ resources, and container image URI.
 
 ## Required bounds
 
-Describe one exact job. Do not list candidate jobs when Workflow recorded an
-ID.
+Describe one exact job. Do not list candidate jobs when no exact ID is known.
 
 ## Evidence to retain
 
 Full job resource, UID, exact import match, state, timestamps, resources, image
-URI, and Workflow job-ID correlation.
+URI, and the `ImportStatus` or summary job-ID correlation.
 
 ## Common failures
 
-Expired job, permission denied, wrong project/location, or Workflow failure
-before job creation.
+Expired job, permission denied, wrong project/location, or an attempt that
+failed before an exact Batch job ID was recorded.
 
 ## Related repository sources
 
-`import-automation/executor/app/executor/cloud_batch.py` and the live Workflow
-revision.
+`import-automation/executor/app/executor/cloud_batch.py`.

@@ -24,7 +24,8 @@ _SCRIPT_ROOT = _REPO_ROOT / 'agents/common/import_support'
 
 class CliFlagsTest(unittest.TestCase):
 
-    def _run(self, script_name: str, *args: str) -> subprocess.CompletedProcess:
+    def _run(self, script_name: str, *args:
+             str) -> subprocess.CompletedProcess:
         return subprocess.run(
             [sys.executable,
              str(_SCRIPT_ROOT / script_name), *args],
@@ -34,19 +35,14 @@ class CliFlagsTest(unittest.TestCase):
             text=True)
 
     def test_help_lists_script_flags(self):
-        cases = {
-            'list_imports.py': ('query', 'autorefresh', 'limit'),
-            'list_import_runs.py':
-                ('workflow_resource', 'start_time', 'end_time',
-                 'absolute_import_name', 'run_limit', 'scan_limit'),
-            'correlate_import_runs.py':
-                ('mode', 'absolute_import_name', 'spanner_project',
-                 'spanner_instance', 'spanner_database', 'gcs_project',
-                 'gcs_bucket', 'gcs_output_prefix', 'version', 'limit',
-                 'start_time', 'end_time'),
-        }
+        cases = (
+            ('list_imports.py', ('query', 'autorefresh', 'limit')),
+            ('list_import_summaries.py',
+             ('absolute_import_name', 'gcs_project', 'gcs_bucket',
+              'gcs_output_prefix', 'limit')),
+        )
 
-        for script_name, expected_flags in cases.items():
+        for script_name, expected_flags in cases:
             with self.subTest(script_name=script_name):
                 result = self._run(script_name, '--help')
                 output = result.stdout + result.stderr
@@ -63,34 +59,15 @@ class CliFlagsTest(unittest.TestCase):
                 '--limit',
                 '5',
             ),
-            'list_import_runs.py': (
-                '--workflow_resource',
-                'projects/p/locations/l/workflows/w',
-                '--start_time=2026-01-01T00:00:00Z',
-                '--end_time',
-                '2026-01-02T00:00:00Z',
-                '--absolute_import_name=scripts/a:Import',
-                '--run_limit',
-                '10',
-                '--scan_limit=100',
-            ),
-            'correlate_import_runs.py': (
-                '--mode=import_history',
+            'list_import_summaries.py': (
                 '--absolute_import_name',
                 'scripts/a:Import',
-                '--spanner_project=p',
-                '--spanner_instance',
-                'i',
-                '--spanner_database=d',
                 '--gcs_project',
                 'p',
                 '--gcs_bucket=b',
                 '--gcs_output_prefix',
                 'imports',
                 '--limit=5',
-                '--start_time',
-                '2026-01-01T00:00:00Z',
-                '--end_time=2026-01-02T00:00:00Z',
             ),
         }
 
@@ -103,8 +80,7 @@ class CliFlagsTest(unittest.TestCase):
 
     def test_rejects_missing_required_flags(self):
         cases = {
-            'list_import_runs.py': '--workflow_resource',
-            'correlate_import_runs.py': '--mode',
+            'list_import_summaries.py': '--absolute_import_name',
         }
 
         for script_name, required_flag in cases.items():
@@ -113,21 +89,17 @@ class CliFlagsTest(unittest.TestCase):
                 self.assertNotEqual(0, result.returncode)
                 self.assertIn(required_flag, result.stderr)
 
-    def test_rejects_invalid_correlation_mode(self):
+    def test_rejects_invalid_summary_limit_before_cloud_access(self):
         result = self._run(
-            'correlate_import_runs.py',
-            '--mode=invalid',
+            'list_import_summaries.py',
             '--absolute_import_name=scripts/a:Import',
-            '--spanner_project=p',
-            '--spanner_instance=i',
-            '--spanner_database=d',
             '--gcs_project=p',
             '--gcs_bucket=b',
-            '--only_check_args',
+            '--limit=6',
         )
 
-        self.assertNotEqual(0, result.returncode)
-        self.assertIn('--mode', result.stderr)
+        self.assertEqual(2, result.returncode)
+        self.assertIn('limit must be between 1 and 5', result.stderr)
 
 
 if __name__ == '__main__':

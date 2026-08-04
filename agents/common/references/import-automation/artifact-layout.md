@@ -26,10 +26,16 @@ This is a candidate template. List actual objects and report only those found.
 Preserve `input<N>` because one manifest specification can contain multiple
 `import_inputs`.
 
-For the latest completed attempt, read `staging_version.txt` and then the exact
-`<version>/import_summary.json`. Verify its import and job IDs before using it.
-For an older run, use date-scoped summary candidates and stop when one exact job
-ID matches. Never list every summary or every object below the import prefix.
+For the most recent finalized candidate, read `staging_version.txt` and then
+the exact `<version>/import_summary.json`. Verify its import identity before
+using the summary or its `job_id`. For up to five recent finalized versions,
+use the bounded summary-list helper; it scans at most 100 exact summary names
+and downloads only the selected summaries. Never list every object below the
+import prefix.
+
+This GCS history contains only attempts that reached summary creation. A Batch
+failure before `import_summary.json` exists has no version-summary entry, so a
+missing summary does not prove that no attempt occurred.
 
 List artifacts only below an already selected `<version>/` directory. Summary
 status and artifact inventory are separate operations; do not list artifacts
@@ -51,7 +57,7 @@ objects prove that path.
 ## Version pointers
 
 - `staging_version.txt` is written when an attempt reaches summary creation,
-  including `VALIDATION` and `SKIP`.
+  including `VALIDATION` and `SKIP`; it is not necessarily the latest attempt.
 - The configured accepted pointer is currently named by
   `storage_version_filename`, whose repository default is
   `latest_version.txt`. It advances only for accepted `STAGING` data.

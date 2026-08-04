@@ -16,9 +16,8 @@ explicit prompt override
 
 Apply prompt overrides field by field; do not replace the entire environment
 when only one field is overridden. Record every effective value as
-`prompt_override` or `environment_config`. Run-specific identifiers returned by
-live resources, such as Workflow execution and Batch job IDs, are
-`runtime_identifier`.
+`prompt_override` or `environment_config`. An exact Batch job ID returned by a
+selected current-status row or GCS summary is a `runtime_identifier`.
 
 Apply this override rule to infrastructure fields only. Import prefixes,
 pointer names, and summary filenames are repository-defined ET artifact
@@ -57,5 +56,5 @@ missing value.
 ## Sensitive configuration
 
 Do not access Secret Manager during routine collection. Parse only allowlisted
-fields from Scheduler bodies, Batch commands, Workflow environments, and logs.
-Redact keys or values that may contain credentials.
+fields from Scheduler bodies, Batch commands, and logs. Redact keys or values
+that may contain credentials.

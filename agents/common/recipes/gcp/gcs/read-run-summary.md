@@ -4,17 +4,18 @@ Recipe ID: `gcp.gcs.read-run-summary`
 
 ## Use when
 
-Pipeline status or summary statistics are needed for an already selected
-version.
+Candidate classification, Batch job ID, or summary statistics are needed for
+an already selected finalized version.
 
 ## Required inputs
 
 GCS project and bucket from the effective environment; exact import identity
-and version; expected simple import name; and expected Batch job ID.
+and version; expected simple import name; and, when already known, the expected
+Batch job ID.
 
 ## Clarify when
 
-The version was not obtained from a pointer or bounded historical match.
+The version was not obtained from a pointer or bounded summary-list result.
 
 ## Read-only operation
 
@@ -28,8 +29,10 @@ jq '{import_name,job_id,status,latest_version,graph_path,next_refresh,
 
 ## Preferred invocation
 
-Read `import_summary.json` for one exact version and require both `import_name`
-and `job_id` to match the selected run before using any status or statistics.
+Read `import_summary.json` for one exact version and require `import_name` to
+match the selected import before using any status or statistics. When a Batch
+job ID is already known, also require `job_id` to match. Otherwise retain the
+summary's `job_id` as a discovered identifier and follow only that exact ID.
 
 ## Expected output
 
@@ -47,8 +50,9 @@ answer.
 
 ## Common failures
 
-Attempt failed before summary creation, pointer changed after the selected run,
-identity mismatch, invalid JSON, missing object, or permission denied.
+Attempt or Batch failed before summary creation, pointer changed after the
+selected run, identity mismatch, invalid JSON, missing object, or permission
+denied. A missing summary is not proof that no attempt occurred.
 
 ## Related repository sources
 

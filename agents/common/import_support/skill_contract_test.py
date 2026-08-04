@@ -40,19 +40,24 @@ class SkillContractTest(unittest.TestCase):
 
     def setUp(self):
         self._repo_root = Path(__file__).parents[3]
+        self._skill_path = (self._repo_root /
+                            'agents/skills/dc-import-info/SKILL.md')
+        self._reference_root = (self._repo_root / 'agents/common/references' /
+                                'import-automation')
+        self._recipe_root = self._repo_root / 'agents/common/recipes'
+
+    def _read(self, relative_path: str) -> str:
+        return (self._repo_root / relative_path).read_text(encoding='utf-8')
 
     def test_registry_points_to_versioned_skill(self):
-        registry = json.loads(
-            (self._repo_root /
-             '.agents/skills.json').read_text(encoding='utf-8'))
+        registry = json.loads(self._read('.agents/skills.json'))
         paths = [entry['path'] for entry in registry['entries']]
 
         self.assertEqual(['agents/skills/dc-import-info'], paths)
         self.assertTrue((self._repo_root / paths[0] / 'SKILL.md').is_file())
 
     def test_recipes_have_invocation_contract(self):
-        recipes = self._repo_root / 'agents/common/recipes'
-        recipe_paths = list(recipes.glob('**/*.md'))
+        recipe_paths = list(self._recipe_root.glob('**/*.md'))
 
         self.assertGreater(len(recipe_paths), 1)
         for path in recipe_paths:
@@ -62,13 +67,10 @@ class SkillContractTest(unittest.TestCase):
                     self.assertIn(heading, text)
 
     def test_agent_documentation_links_exist(self):
-        skill_root = self._repo_root / 'agents/skills/dc-import-info'
-        common_root = self._repo_root / 'agents/common'
         paths = [
-            skill_root / 'SKILL.md',
-            *skill_root.glob('references/*.md'),
-            *common_root.glob('references/**/*.md'),
-            *common_root.glob('recipes/**/*.md'),
+            self._skill_path,
+            *self._reference_root.glob('*.md'),
+            *self._recipe_root.glob('**/*.md'),
         ]
 
         for path in paths:
@@ -93,35 +95,30 @@ class SkillContractTest(unittest.TestCase):
                         path.read_text(encoding='utf-8').lower(),
                     )
 
-    def test_skill_requires_review_and_repository_tools_for_cloud_access(self):
-        skill = (self._repo_root /
-                 'agents/skills/dc-import-info/SKILL.md').read_text(
-                     encoding='utf-8')
+    def test_skill_keeps_safety_and_conditional_navigation(self):
+        skill = self._skill_path.read_text(encoding='utf-8')
+        normalized = re.sub(r'\s+', ' ', skill)
 
-        for required in ('review: skipped (headless)',
-                         'Infrastructure actually used', 'Never use MCP tools'):
+        for required in (
+                'review: skipped (headless)', 'Infrastructure actually used',
+                'Never use MCP tools', "caller's existing GCP authentication",
+                'Classify the request before loading context',
+                'Do not load architecture, environment configuration, or cloud recipes',
+                '../../common/recipes/repository/list-imports.md',
+                'read only the selected manifest or requested code'):
             with self.subTest(required=required):
-                self.assertIn(required, skill)
+                self.assertIn(required, normalized)
 
-    def test_skill_uses_simple_runtime_environment_registry(self):
-        registry_path = (self._repo_root / 'agents/common/config' /
-                         'import-environments.yaml')
-        registry_text = registry_path.read_text(encoding='utf-8')
-        registry = yaml.safe_load(registry_text)
-        skill = (self._repo_root /
-                 'agents/skills/dc-import-info/SKILL.md').read_text(
-                     encoding='utf-8')
-        resolution = (self._repo_root / 'agents/common/references' /
-                      'import-automation/environment-resolution.md').read_text(
-                          encoding='utf-8')
-        workflow_list = (self._repo_root / 'agents/common/recipes/gcp' /
-                         'workflows/list-import-executions.md').read_text(
-                             encoding='utf-8')
-        artifact_layout = (self._repo_root / 'agents/common/references' /
-                           'import-automation/artifact-layout.md').read_text(
-                               encoding='utf-8')
-        correlation = (self._repo_root / 'agents/common/import_support' /
-                       'correlate_import_runs.py').read_text(encoding='utf-8')
+        self.assertNotIn('architecture.md). 3.', normalized)
+        self.assertNotIn('## Contents', skill)
+
+    def test_runtime_environment_registry_remains_minimal_and_complete(self):
+        registry = yaml.safe_load(
+            self._read('agents/common/config/import-environments.yaml'))
+        skill = self._skill_path.read_text(encoding='utf-8')
+        resolution = self._read(
+            'agents/common/references/import-automation/environment-resolution.md'
+        )
 
         self.assertIn('../../common/config/import-environments.yaml', skill)
         self.assertEqual({'default_environment', 'environments'},
@@ -142,232 +139,181 @@ class SkillContractTest(unittest.TestCase):
                 for section, fields in required_fields.items():
                     self.assertEqual(fields, set(environment[section]))
                     for field in fields:
-                        value = environment[section][field]
-                        self.assertIsInstance(value, str)
-                        self.assertTrue(value)
+                        self.assertIsInstance(environment[section][field], str)
+                        self.assertTrue(environment[section][field])
 
         self.assertIn('explicit prompt override', resolution)
         self.assertIn('environment_config', resolution)
-        self.assertIn('effective environment and prompt overrides',
-                      workflow_list)
-        self.assertNotIn('Scheduler target cannot identify', workflow_list)
-        for artifact_name in ('staging_version.txt', 'latest_version.txt',
-                              'import_summary.json'):
-            with self.subTest(artifact_name=artifact_name):
-                self.assertIn(artifact_name, artifact_layout)
-        self.assertIn("_SUMMARY_FILENAME = 'import_summary.json'", correlation)
 
-        runtime_docs = '\n'.join(
-            (skill, resolution, workflow_list, artifact_layout))
-        self.assertNotIn('import-environment-sync-selectors.yaml',
-                         runtime_docs)
-
-    def test_architecture_and_shared_policy_are_et_only(self):
-        skill = (self._repo_root /
-                 'agents/skills/dc-import-info/SKILL.md').read_text(
-                     encoding='utf-8')
-        architecture = (self._repo_root / 'agents/common/references' /
-                        'import-automation/architecture.md').read_text(
-                            encoding='utf-8')
-        status_model = (self._repo_root / 'agents/common/references' /
-                        'import-automation/run-and-status-model.md').read_text(
-                            encoding='utf-8')
-        normalized_architecture = re.sub(r'\s+', ' ', architecture)
-        normalized_status_model = re.sub(r'\s+', ' ', status_model)
-        pointer_recipe = (self._repo_root / 'agents/common/recipes/gcp/gcs' /
-                          'read-version-pointer.md').read_text(
-                              encoding='utf-8')
-        deleted_paths = (
-            self._repo_root / 'agents/common/recipes/repository' /
-            'preview-infrastructure.md',
-            self._repo_root / 'agents/common/references/import-automation' /
-            'identity-and-access.md',
-            self._repo_root / 'agents/common/references/import-automation' /
-            'runtime-provenance.md',
-        )
-
-        for path in deleted_paths:
-            with self.subTest(path=path):
-                self.assertFalse(path.exists())
-                self.assertNotIn(path.name, skill)
+    def test_architecture_explains_et_lifecycle_and_partial_evidence(self):
+        architecture = self._read(
+            'agents/common/references/import-automation/architecture.md')
+        normalized = re.sub(r'\s+', ' ', architecture)
 
         for required in (
-                'operation | resource type | effective value | source',
-                'Ask once for approval',
-                "caller's existing GCP authentication"):
-            with self.subTest(skill_required=required):
-                self.assertIn(required, skill)
-        for required in (
-                'Define the import in Git',
+                'extraction and transformation (ET)',
                 '<directory-from-repository-root>:<import_name>',
-            ('scripts/census_county_business_patterns:'
-             'CensusCountyBusinessPatterns'),
-                'creates or updates one Cloud Scheduler job',
-                'one Workflow execution represents one logical ET attempt',
-                '## ET lifecycle concepts',
-                'Candidate means generated, not yet selected',
-                'Acceptance** is the ET-only transition',
-                'does not mean the loader ran or serving',
-                'executor reads the selected definition and source data',
-                'Finalize and classify a candidate ET version',
-                'Apply ET acceptance',
-                'only STAGING is eligible for acceptance',
-                'records a corresponding ET version checkpoint',
-                'VALIDATION or SKIP leaves the previous current ET output',
-                'provides queryable version checkpoints',
-                'records are created separately',
+                'scripts/census_county_business_patterns:CensusCountyBusinessPatterns',
+                'there is not one Workflow definition per import',
+                'STAGING -> eligible for acceptance',
+                'VALIDATION -> validation failed',
+                'SKIP -> no meaningful change',
+                'eligible for downstream loading',
+                'It does not mean the loader ran or serving data changed',
+                'one GCS version directory and import_summary.json',
+                '`ImportStatus` is a mutable current snapshot',
+                'a Batch failure before `import_summary.json` is written has no GCS history entry',
+                'Do not interpret a missing summary as proof that no attempt occurred',
                 '[run and status model](run-and-status-model.md)',
-                'loader pipeline (out of scope)',
-                'live read-only Scheduler, Workflow, Batch, GCS, and database metadata',
                 'supplied sibling `import` checkout'):
-            with self.subTest(architecture_required=required):
-                self.assertIn(required, normalized_architecture)
-        for forbidden in ('spanner-ingestion-workflow', 'Dataflow',
-                          'IngestionHistory', 'ImportStatus',
-                          'Downstream ingestion', '| Publication |',
-                          '`dc-import-info`', 'Load this reference',
-                          '## ImportVersionHistory stages',
-                          'loader can later add a `SUCCESS` event'):
+            with self.subTest(required=required):
+                self.assertIn(required, normalized)
+
+        for forbidden in ('IngestionHistory', 'Dataflow', '## Contents',
+                          '`dc-import-info`'):
             with self.subTest(forbidden=forbidden):
-                self.assertNotIn(forbidden, architecture + '\n' + status_model)
-        for required in (
-                'checkpointed ET run is a version recorded',
-                'not an exhaustive attempt ledger',
-                'A `STAGING` summary proves eligibility, not acceptance',
-                'queryable version-event checkpoint history',
-                'does not justify listing Workflow executions',
-                'describe that exact execution instead of listing',
-                'No checkpointed ET run found',
-                'request still requires an attempt-level answer',
-                'Do not translate that result into `No ET attempt occurred`'):
-            with self.subTest(status_model_required=required):
-                self.assertIn(required, normalized_status_model)
-        self.assertIn('current accepted ET-output question', pointer_recipe)
-        self.assertNotIn('publication question', pointer_recipe)
+                self.assertNotIn(forbidden, architecture)
 
-    def test_skill_routes_local_requests_without_architecture_or_cloud(self):
-        skill_path = (self._repo_root /
-                      'agents/skills/dc-import-info/SKILL.md')
-        skill = skill_path.read_text(encoding='utf-8')
-        normalized_skill = re.sub(r'\s+', ' ', skill)
-        status_model = (self._repo_root / 'agents/common/references' /
-                        'import-automation/run-and-status-model.md').read_text(
-                            encoding='utf-8')
-        workflow_list = (self._repo_root / 'agents/common/recipes/gcp' /
-                         'workflows/list-import-executions.md').read_text(
-                             encoding='utf-8')
-        historical_summary = (self._repo_root / 'agents/common/recipes/gcp' /
-                              'gcs/find-historical-summary.md').read_text(
-                                  encoding='utf-8')
-        deleted_paths = (
-            self._repo_root / 'agents/skills/dc-import-info/references' /
-            'single-import.md',
-            self._repo_root / 'agents/skills/dc-import-info/references' /
-            'fleet-search.md',
-            self._repo_root / 'agents/skills/dc-import-info/references' /
-            'repository-catalog.md',
-            self._repo_root / 'agents/common/recipes/catalog.md',
+    def test_status_model_separates_current_state_and_finalized_versions(self):
+        model = self._read(
+            'agents/common/references/import-automation/run-and-status-model.md'
         )
+        normalized = re.sub(r'\s+', ' ', model)
 
-        for path in deleted_paths:
-            with self.subTest(path=path):
-                self.assertFalse(path.exists())
-                self.assertNotIn(path.name, skill)
-
-        self.assertIn('Classify the request before loading references', skill)
-        self.assertIn(
-            'Do not load architecture, environment configuration, or cloud recipes',
-            skill)
-        self.assertNotIn('## Repository-only path', skill)
-        self.assertNotIn('2. Read [Import automation architecture]', skill)
-        self.assertIn('../../common/recipes/repository/list-imports.md', skill)
-        self.assertIn('follow its manifest handoff', skill)
-        list_imports = (self._repo_root / 'agents/common/recipes/repository' /
-                        'list-imports.md').read_text(encoding='utf-8')
-        self.assertIn('read its exact manifest specification', list_imports)
-        self.assertIn('../../references/import-automation/manifest.md',
-                      list_imports)
-        self.assertIn('Read manifest-referenced code only when', list_imports)
-        self.assertIn('Scheduler evidence is not a prerequisite',
-                      normalized_skill)
         for required in (
-                'routine single-import run history or latest checkpointed-run status',
-                'Do not list Workflow executions merely because checkpoint',
-                'failures before checkpointing',
-                'describe that exact execution instead of listing',
-                'fall back to bounded Workflow history only',
-            ('Read routine bounded run history or latest checkpointed-run '
-             'status for one import'),
-                'Label correlation-only results as checkpointed ET runs'):
-            with self.subTest(skill_routing_required=required):
-                self.assertIn(required, normalized_skill)
-        for forbidden_route in ('describe-ingestion-helper.md',
+                'current mutable snapshot and bounded finalized-version evidence',
+                'Return its `State` without reinterpretation as `current_status`',
+                'Its `JobId` is the ET Batch identifier',
+                'never select, return, or follow it in this skill',
+                'A technical failure can stop before a version or summary is complete',
+                'Older pre-summary failures are unsupported',
+                'reverse lexicographic timestamp-folder order',
+                'repeated hour at DST fall-back',
+                'scans no more than 100 summary names',
+                'returns at most five versions', 'If the scan exceeds 100',
+                'returns no history', 'Do not create an overall status',
+                'STAGING', 'VALIDATION', 'SKIP',
+                'It does not mean every failure event that occurred during that week',
+                'previous seven days', 'at most 100 returned current rows'):
+            with self.subTest(required=required):
+                self.assertIn(required, normalized)
+
+    def test_skill_routes_only_supported_runtime_evidence(self):
+        skill = self._skill_path.read_text(encoding='utf-8')
+        normalized = re.sub(r'\s+', ' ', skill)
+
+        for required in (
+                'Use Scheduler only for a deployed schedule or target question',
+                '`ImportStatus` only as a mutable current snapshot',
+                'previous seven days', 'at most 100 returned rows',
+                'GCS summary-list helper', 'scans at most 100 summary names',
+                'up to five recent finalized versions',
+                'A Batch failure before `import_summary.json` exists is absent',
+                'Describe Batch, tasks, or logs only from an exact',
+                'List recent import summaries', 'Query current import status'):
+            with self.subTest(required=required):
+                self.assertIn(required, normalized)
+
+        for forbidden_route in ('correlate-import-runs.md',
+                                'query-import-version-history.md',
+                                'describe-execution.md',
+                                'list-import-executions.md',
+                                'find-historical-summary.md',
                                 'read-import-records.md',
-                                'resolve-runtime-provenance.md'):
+                                'describe-ingestion-helper.md',
+                                'resolve-runtime-image.md'):
             with self.subTest(forbidden_route=forbidden_route):
                 self.assertNotIn(forbidden_route, skill)
 
-        self.assertIn('previous 90 days', workflow_list)
-        combined = re.sub(r'\s+', ' ', skill + '\n' + status_model)
-        for required in ('previous 24 hours',
-                         'at most 100 returned Workflow executions',
-                         'compact table',
-                         'not an exhaustive attempt ledger',
-                         '`unknown`'):
+    def test_current_status_recipe_excludes_loader_workflow_id(self):
+        recipe = self._read(
+            'agents/common/recipes/gcp/imports/query-import-status.md')
+        normalized = re.sub(r'\s+', ' ', recipe)
+
+        for required in (
+                'current mutable snapshot', 'StatusUpdateTimestamp',
+                '`current_status`', 'previous seven days',
+                'at most 100 returned rows',
+                'current rows, not historical events',
+                'Never select, return, or follow `ImportStatus.WorkflowId`',
+                'Use `JobId` only as the exact ET Batch identifier',
+                'LIMIT <LIMIT_PLUS_ONE>'):
             with self.subTest(required=required):
-                self.assertIn(required, combined)
+                self.assertIn(required, normalized)
 
-        self.assertNotIn('## Collect incrementally', skill)
-        collect_section = skill.split(
-            '## Collect only required runtime evidence', maxsplit=1)[1]
-        collect_section = collect_section.split(
-            '## Load detailed knowledge only when needed', maxsplit=1)[0]
-        collect_section = re.sub(r'\s+', ' ', collect_section)
-        for required in ('recipe that directly answers the request',
-                         'deployed schedule or configured Workflow target',
-                         'Workflow `result.jobId` → Batch',
-                         'import name + Batch job ID → GCS summary',
-                         'run and status model'):
-            with self.subTest(collect_required=required):
-                self.assertIn(required, collect_section)
-        self.assertIn('terminal runs newest to oldest', status_model)
-        self.assertIn('requested minimum', status_model)
-        self.assertNotIn('Spanner row', historical_summary)
+        sql_lines = [line for line in recipe.splitlines() if '--sql=' in line]
+        self.assertEqual(2, len(sql_lines))
+        self.assertTrue(all('WorkflowId' not in line for line in sql_lines))
 
-        runtime_text = '\n'.join(
-            path.read_text(encoding='utf-8')
-            for path in self._repo_root.glob('agents/**/*.md'))
-        self.assertNotRegex(runtime_text, r'\bfleet\b')
-        self.assertNotRegex(runtime_text, r'\bcomposite\b')
-        for unclear_term in ('resource coordinate',
-                             'infrastructure coordinates',
-                             'missing coordinates', 'headless run'):
-            with self.subTest(unclear_term=unclear_term):
-                self.assertNotIn(unclear_term, runtime_text)
-        self.assertNotIn('the runtime-provenance reference', runtime_text)
+    def test_summary_helper_recipe_is_bounded_and_explicitly_partial(self):
+        recipe = self._read(
+            'agents/common/recipes/gcp/gcs/list-import-summaries.md')
+        normalized_recipe = re.sub(r'\s+', ' ', recipe)
+        helper = self._read(
+            'agents/common/import_support/list_import_summaries.py')
 
-    def test_skill_and_recipes_do_not_reference_removed_helpers(self):
-        paths = [
-            self._repo_root / 'agents/skills/dc-import-info/SKILL.md',
-            *self._repo_root.glob(
-                'agents/skills/dc-import-info/references/*.md'),
-            *self._repo_root.glob('agents/common/recipes/**/*.md'),
+        for required in (
+                'list_import_summaries.py', '--absolute_import_name',
+                '--gcs_project', '--gcs_bucket', '--gcs_output_prefix',
+                '--limit', 'at most 100', 'at most five',
+                'scan_truncated=true',
+                'finalized-version history, not complete attempt history',
+                'Batch failure before summary creation is intentionally absent'
+        ):
+            with self.subTest(required=required):
+                self.assertIn(required, normalized_recipe)
+
+        for required in ('_MAX_RESULT_LIMIT = 5', '_SCAN_LIMIT = 100',
+                         'max_results=_SCAN_LIMIT + 1',
+                         "fields='items(name),nextPageToken'",
+                         "'version': version", "'date': version_date",
+                         "'batch_job_id': batch_job_id"):
+            with self.subTest(required=required):
+                self.assertIn(required, helper)
+
+    def test_removed_history_and_workflow_lookup_paths_are_absent(self):
+        deleted_paths = (
+            'agents/common/import_support/read_import_records.py',
+            'agents/common/import_support/read_import_records_test.py',
+            'agents/common/import_support/list_import_runs.py',
+            'agents/common/import_support/list_import_runs_test.py',
+            'agents/common/import_support/correlate_import_runs.py',
+            'agents/common/import_support/correlate_import_runs_test.py',
+            'agents/common/recipes/gcp/spanner/read-import-records.md',
+            'agents/common/recipes/gcp/imports/correlate-import-runs.md',
+            'agents/common/recipes/gcp/imports/query-import-version-history.md',
+            'agents/common/recipes/gcp/workflows/list-import-executions.md',
+            'agents/common/recipes/gcp/workflows/describe-execution.md',
+            'agents/common/recipes/gcp/gcs/find-historical-summary.md',
+            'agents/common/recipes/gcp/cloud-run/describe-ingestion-helper.md',
+        )
+        for relative_path in deleted_paths:
+            with self.subTest(path=relative_path):
+                self.assertFalse((self._repo_root / relative_path).exists())
+
+        runtime_paths = [
+            self._skill_path,
+            *self._reference_root.glob('*.md'),
+            *self._recipe_root.glob('**/*.md'),
         ]
+        runtime_guidance = '\n'.join(
+            path.read_text(encoding='utf-8') for path in runtime_paths)
+        for forbidden in ('ImportVersionHistory',
+                          'gcloud workflows executions list',
+                          'gcloud workflows executions describe',
+                          'correlate_import_runs.py', 'list_import_runs.py'):
+            with self.subTest(forbidden=forbidden):
+                self.assertNotIn(forbidden, runtime_guidance)
 
-        for path in paths:
-            text = path.read_text(encoding='utf-8')
-            with self.subTest(path=path):
-                self.assertNotIn('collect_import_snapshot.py', text)
-                self.assertNotIn('collect_provenance.py', text)
-                self.assertNotIn('snapshot collector', text.lower())
-                self.assertNotIn('resolve_import', text)
-                self.assertNotIn('repository.resolve-import', text)
-                self.assertNotIn('name_contains', text)
+        requirements = self._read('agents/requirements.txt')
+        self.assertNotIn('google-cloud-spanner', requirements)
+        self.assertNotIn('google-cloud-workflows', requirements)
+        self.assertIn('google-cloud-storage', requirements)
 
     def test_recipes_do_not_document_mutating_gcloud_commands(self):
         recipes = '\n'.join(
             path.read_text(encoding='utf-8')
-            for path in self._repo_root.glob('agents/common/recipes/**/*.md'))
+            for path in self._recipe_root.glob('**/*.md'))
         forbidden = (
             'gcloud scheduler jobs run',
             'gcloud workflows execute',
@@ -381,109 +327,26 @@ class SkillContractTest(unittest.TestCase):
             with self.subTest(command=command):
                 self.assertNotIn(command, recipes)
 
-    def test_expensive_recipes_are_targeted_and_bounded(self):
-        recipe_root = self._repo_root / 'agents/common/recipes/gcp'
-        historical = (recipe_root /
-                      'gcs/find-historical-summary.md').read_text(
-                          encoding='utf-8')
-        artifacts = (recipe_root / 'gcs/list-version-artifacts.md').read_text(
-            encoding='utf-8')
-        logs = (recipe_root /
-                'logging/fetch-batch-logs.md').read_text(encoding='utf-8')
-        runtime_image = (recipe_root / 'artifact-registry' /
-                         'resolve-runtime-image.md').read_text(
-                             encoding='utf-8')
+    def test_exact_artifact_batch_and_log_recipes_remain_bounded(self):
+        artifacts = self._read(
+            'agents/common/recipes/gcp/gcs/list-version-artifacts.md')
+        batch = self._read('agents/common/recipes/gcp/batch/describe-job.md')
+        logs = self._read(
+            'agents/common/recipes/gcp/logging/fetch-batch-logs.md')
 
-        self.assertIn('<YYYY_MM_DD>*/import_summary.json', historical)
-        self.assertNotIn('<IMPORT_PREFIX>/**/', historical)
         self.assertIn('<IMPORT_PREFIX>/<VERSION>/**', artifacts)
         self.assertIn('--limit=<LIMIT_PLUS_ONE>', artifacts)
+        self.assertIn('ImportStatus.JobId', batch)
+        self.assertIn('summary `job_id`', batch)
+        self.assertIn('Do not list candidate jobs', batch)
         for required in ('labels.job_uid', 'timestamp>=', 'timestamp<=',
                          '--limit=<LIMIT_PLUS_ONE>', 'jsonPayload.log_type'):
-            with self.subTest(log_required=required):
-                self.assertIn(required, logs)
-        for required in ('gcloud artifacts docker images describe',
-                         'gcloud artifacts versions describe',
-                         'gcloud auth print-access-token', 'curl --config -',
-                         'filter=version="<VERSION_RESOURCE>"',
-                         'pageSize=<TAG_LIMIT_PLUS_ONE>', 'nextPageToken',
-                         '^[0-9a-f]{40}$',
-                         "cat-file -e '<GIT_SHA>^{commit}'",
-                         'Do not resolve the current value',
-                         'Never query Cloud Build', 'strongly_correlated'):
-            with self.subTest(image_required=required):
-                self.assertIn(required, runtime_image)
-        for forbidden in ('gcloud builds list', 'gcloud builds describe'):
-            with self.subTest(image_forbidden=forbidden):
-                self.assertNotIn(forbidden, runtime_image)
-        docker_describe = runtime_image.split(
-            "gcloud artifacts docker images describe", maxsplit=1)[1]
-        docker_describe = docker_describe.split('```', maxsplit=1)[0]
-        self.assertNotIn('--location=', docker_describe)
-        self.assertNotIn('metadata.name', runtime_image)
-        self.assertNotIn('gcloud artifacts tags list', runtime_image)
-
-    def test_duplicate_helpers_and_recipes_are_removed(self):
-        deleted_paths = (
-            self._repo_root / 'agents/common/import_support' /
-            'read_import_records.py',
-            self._repo_root / 'agents/common/import_support' /
-            'read_import_records_test.py',
-            self._repo_root / 'agents/common/recipes/gcp/spanner' /
-            'read-import-records.md',
-            self._repo_root / 'agents/common/recipes/gcp/cloud-run' /
-            'describe-ingestion-helper.md',
-            self._repo_root / 'agents/common/recipes/gcp/cloud-build' /
-            'resolve-runtime-provenance.md',
-            self._repo_root / 'agents/common/recipes/gcp/workflows' /
-            'describe-execution.md',
-        )
-        for path in deleted_paths:
-            with self.subTest(path=path):
-                self.assertFalse(path.exists())
-
-        workflow_recipe = (self._repo_root / 'agents/common/recipes/gcp' /
-                           'workflows/list-import-executions.md').read_text(
-                               encoding='utf-8')
-        for required in ('gcloud workflows executions describe',
-                         'do not describe that execution again',
-                         'caller starts from an exact execution ID'):
-            with self.subTest(workflow_required=required):
-                self.assertIn(required, workflow_recipe)
-
-        runtime_guidance = '\n'.join(
-            path.read_text(encoding='utf-8')
-            for path in self._repo_root.glob('agents/**/*.md'))
-        for forbidden in ('gcloud builds list', 'gcloud builds describe',
-                          'read_import_records.py',
-                          'describe-ingestion-helper.md'):
-            with self.subTest(runtime_forbidden=forbidden):
-                self.assertNotIn(forbidden, runtime_guidance)
-
-    def test_import_correlation_recipe_is_bounded_and_returns_run_evidence(
-            self):
-        recipe = (self._repo_root / 'agents/common/recipes/gcp/imports' /
-                  'correlate-import-runs.md').read_text(encoding='utf-8')
-
-        for required in ('--mode=import_history', '--mode=import_version',
-                         'gcs_base_path', 'workflow_execution_id',
-                         'batch_job_id', 'summary status',
-                         'bounded checkpointed ET history',
-                         'one checkpointed ET',
-                         'counts unique versions',
-                         'caller must state the effective limit',
-                         'bounded version-discovery query', '1 through 20',
-                         './agents/common/run_python.sh'):
             with self.subTest(required=required):
-                self.assertIn(required, recipe)
-        self.assertIn('does not call\nWorkflow or Batch APIs', recipe)
-        self.assertNotIn('<IMPORT_PREFIX>/**', recipe)
-        self.assertNotIn('Spanner name candidates', recipe)
+                self.assertIn(required, logs)
 
     def test_python_wrapper_uses_repository_environment_without_minor_pin(
             self):
-        wrapper = (self._repo_root /
-                   'agents/common/run_python.sh').read_text(encoding='utf-8')
+        wrapper = self._read('agents/common/run_python.sh')
 
         self.assertIn('.env/bin/python', wrapper)
         self.assertNotIn('Expected Python 3.12', wrapper)
