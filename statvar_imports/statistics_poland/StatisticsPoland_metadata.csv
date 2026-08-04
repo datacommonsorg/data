@@ -2,7 +2,7 @@ config,value
 provenance_url,https://bdl.stat.gov.pl/bdl/dane/podgrup/tablica
 output_columns,"observationDate,observationAbout,value,variableMeasured"
 places_within,country/POL
-recon_lookup_api,False
+recon_property,"variableMeasured,measurementMethod"
 #place_types,"AdministrativeArea,AdministrativeArea1,AdministrativeArea2,State"
 #debug,1
 #input_rows,100
