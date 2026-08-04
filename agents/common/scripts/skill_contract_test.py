@@ -49,7 +49,9 @@ class SkillContractTest(unittest.TestCase):
                             'agents/skills/dc-import-info/SKILL.md')
         self._prompt_path = (self._repo_root /
                              'agents/prompts/dc-import-info.md')
-        self._reference_root = (self._repo_root / 'agents/common/references' /
+        self._common_reference_root = (self._repo_root /
+                                       'agents/common/references')
+        self._reference_root = (self._common_reference_root /
                                 'import-automation')
         self._recipe_root = self._repo_root / 'agents/common/recipes'
 
@@ -179,6 +181,8 @@ class SkillContractTest(unittest.TestCase):
                 'recipe that invokes a helper',
                 'cross-service evidence path from atomic recipes',
                 'must not copy the other service\'s commands',
+                'product recipe may apply a shared service reference',
+                'complete product-specific parameters',
                 'Upstream skills and playbooks link directly',
                 'do not load this README during normal execution'):
             with self.subTest(required=required):
@@ -217,7 +221,7 @@ class SkillContractTest(unittest.TestCase):
             self._repo_root / 'agents/dependency-setup.md',
             self._skill_path,
             self._prompt_path,
-            *self._reference_root.glob('*.md'),
+            *self._common_reference_root.glob('**/*.md'),
             *self._recipe_root.glob('**/*.md'),
         ]
 
@@ -605,8 +609,13 @@ class SkillContractTest(unittest.TestCase):
             'agents/common/recipes/gcp/gcs/list-version-artifacts.md')
         batch = self._read('agents/common/recipes/gcp/batch/describe-job.md')
         tasks = self._read('agents/common/recipes/gcp/batch/list-tasks.md')
+        logging_reference = self._read(
+            'agents/common/references/gcp/logging.md')
         logs = self._read(
             'agents/common/recipes/gcp/logging/fetch-batch-logs.md')
+        skill = self._skill_path.read_text(encoding='utf-8')
+        normalized_logging_reference = re.sub(r'\s+', ' ', logging_reference)
+        normalized_logs = re.sub(r'\s+', ' ', logs)
 
         self.assertIn('<IMPORT_PREFIX>/<VERSION>/**', artifacts)
         self.assertIn('--limit=<LIMIT_PLUS_ONE>', artifacts)
@@ -619,10 +628,53 @@ class SkillContractTest(unittest.TestCase):
                          'exitCode: .taskExecution.exitCode'):
             with self.subTest(required=required):
                 self.assertIn(required, tasks)
-        for required in ('labels.job_uid', 'timestamp>=', 'timestamp<=',
-                         '--limit=<LIMIT_PLUS_ONE>', 'jsonPayload.log_type'):
+        for required in ("gcloud logging read '<FILTER>'", '<PROJECT>',
+                         '<ORDER>', '<LIMIT>', '<FORMAT>',
+                         'timestamp >= "<START>" AND timestamp < "<END>"',
+                         "--freshness='<FRESHNESS>'", 'default freshness',
+                         'works only with descending order', 'logName =',
+                         'resource.type =', 'resource.labels.<KEY> =',
+                         'labels.<KEY> =', 'severity >=',
+                         'jsonPayload.<FIELD> =', 'textPayload :',
+                         'uppercase `AND` or `OR`', 'Prefer a finite limit',
+                         'known identifier when practical',
+                         'only the fields needed',
+                         '`DEFAULT`, `DEBUG`, `INFO`, `NOTICE`, `WARNING`, '
+                         '`ERROR`, `CRITICAL`, `ALERT`, and `EMERGENCY`',
+                         'matches a substring while `=` matches the whole '
+                         'field', 'complete filter in single shell quotes',
+                         'severity >= "ERROR"',
+                         '(textPayload : "<TERM_1>" OR textPayload : '
+                         '"<TERM_2>")',
+                         "--format='json(timestamp,severity,textPayload)'"):
+            with self.subTest(required=required):
+                self.assertIn(required, normalized_logging_reference)
+        for forbidden in ('batch_task_logs', 'labels.job_uid',
+                          'auto-import-job-stage', 'LIMIT_PLUS_ONE'):
+            with self.subTest(forbidden=forbidden):
+                self.assertNotIn(forbidden, logging_reference)
+        self.assertIn('../../../references/gcp/logging.md', logs)
+        self.assertNotIn('gcloud logging read', logs)
+        self.assertIn('inclusive UTC start timestamp', normalized_logs)
+        self.assertIn('exclusive UTC end timestamp', normalized_logs)
+        self.assertNotIn('[AND timestamp', logs)
+        self.assertEqual(2, logs.count('timestamp >= "<START>"'))
+        self.assertEqual(2, logs.count('timestamp < "<END>"'))
+        for parameter in ('FILTER', 'PROJECT', 'ORDER', 'LIMIT', 'FORMAT'):
+            with self.subTest(parameter=parameter):
+                self.assertEqual(
+                    2,
+                    len(re.findall(rf'^{parameter} =', logs,
+                                   flags=re.MULTILINE)))
+        for required in ('batch_task_logs', 'labels.job_uid',
+                         'timestamp >= "<START>"', 'timestamp < "<END>"',
+                         'LIMIT = <LIMIT_PLUS_ONE>', 'jsonPayload.log_type',
+                         'FORMAT = json'):
             with self.subTest(required=required):
                 self.assertIn(required, logs)
+        self.assertIn('../../common/recipes/gcp/logging/fetch-batch-logs.md',
+                      skill)
+        self.assertNotIn('common/references/gcp/logging.md', skill)
 
     def test_python_wrapper_uses_repository_environment_without_minor_pin(self):
         wrapper = self._read('agents/common/run_python.sh')

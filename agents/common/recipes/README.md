@@ -38,6 +38,10 @@ to a recipe in another service folder when an observed exact identifier can
 seed that operation, but it must not copy the other service's commands or run
 the linked operation automatically.
 
+A product recipe may apply a shared service reference for generic command
+syntax. It must supply the complete product-specific parameters, bounds,
+output fields, and interpretation.
+
 The [import evidence flow](../references/import-automation/import-evidence-flow.md)
 owns the end-to-end navigation sequence. Upstream skills and playbooks link
 directly to operational recipes and do not load this README during normal
