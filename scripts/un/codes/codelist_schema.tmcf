@@ -1,0 +1,17 @@
+Node: E:UN->E0
+typeOf: C:UN->ConstraintPropEnum
+dcid: C:UN->ConstraintPropValue
+unCode: C:UN->UnCode
+name: C:UN->ConstraintValueName
+description: C:UN->ConstraintValueDescription
+
+Node: E:UN->E1
+typeOf: C:UN->UnConceptProp
+dcid: C:UN->ConstraintProp
+unConcept: C:UN->UnConcept
+rangeIncludes: C:UN->ConstraintPropEnum
+
+Node: E:UN->E2
+typeOf: schema:Class
+dcid: C:UN->ConstraintPropEnum
+subClassOf: schema:Enumeration
