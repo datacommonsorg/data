@@ -249,7 +249,8 @@ class TestDCAPIWrapper(unittest.TestCase):
         """Test API wrapper for latlng resolution."""
         mock_request_url.return_value = {
             "entities": [{
-                "node": "37.42#-122.08",
+                "node":
+                    "37.42#-122.08",
                 "candidates": [{
                     "dcid": "geoId/0649670",
                     "dominantType": "City"
