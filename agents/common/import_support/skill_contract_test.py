@@ -59,14 +59,58 @@ class SkillContractTest(unittest.TestCase):
         self.assertTrue((self._repo_root / paths[0] / 'SKILL.md').is_file())
 
     def test_recipes_have_invocation_contract(self):
-        recipe_paths = list(self._recipe_root.glob('**/*.md'))
+        recipe_paths = [
+            path for path in self._recipe_root.glob('**/*.md')
+            if path.name != 'README.md'
+        ]
 
         self.assertGreater(len(recipe_paths), 1)
+        self.assertTrue((self._recipe_root / 'README.md').is_file())
         for path in recipe_paths:
             text = path.read_text(encoding='utf-8')
             with self.subTest(path=path):
                 for heading in _RECIPE_HEADINGS:
                     self.assertIn(heading, text)
+
+    def test_recipe_taxonomy_separates_local_and_gcp_services(self):
+        readme = self._read('agents/common/recipes/README.md')
+        skill = self._skill_path.read_text(encoding='utf-8')
+        local_recipe = self._read('agents/common/recipes/local/list-imports.md')
+        spanner_recipe = self._read(
+            'agents/common/recipes/gcp/spanner/query-import-status.md')
+
+        for required in ('`local/`', '`gcp/<service>/`', 'primary GCP service',
+                         'cross-service investigation from atomic recipes',
+                         'must not copy the other service\'s commands',
+                         'does not load this README during normal execution'):
+            with self.subTest(required=required):
+                self.assertIn(required, readme)
+
+        expected_paths = (
+            'agents/common/recipes/local/list-imports.md',
+            'agents/common/recipes/gcp/spanner/query-import-status.md',
+        )
+        for relative_path in expected_paths:
+            with self.subTest(path=relative_path):
+                self.assertTrue((self._repo_root / relative_path).is_file())
+
+        removed_paths = (
+            'agents/common/recipes/repository/list-imports.md',
+            'agents/common/recipes/gcp/imports/query-import-status.md',
+        )
+        for relative_path in removed_paths:
+            with self.subTest(path=relative_path):
+                self.assertFalse((self._repo_root / relative_path).exists())
+
+        self.assertIn('Recipe ID: `local.list-imports`', local_recipe)
+        self.assertIn("--query='<IMPORT_NAME_QUERY>'", local_recipe)
+        self.assertIn('Recipe ID: `gcp.spanner.query-import-status`',
+                      spanner_recipe)
+        self.assertIn('bucket-relative GCS object prefixes', local_recipe)
+        self.assertNotIn('../../common/recipes/README.md', skill)
+        self.assertNotIn('repository.list-imports', local_recipe + skill)
+        self.assertNotIn('gcp.imports.query-import-status',
+                         spanner_recipe + skill)
 
     def test_agent_documentation_links_exist(self):
         paths = [
@@ -107,7 +151,7 @@ class SkillContractTest(unittest.TestCase):
                 'Never use MCP tools', "caller's existing GCP authentication",
                 'Classify the request before loading context',
                 'Do not load architecture, environment configuration, or cloud recipes',
-                '../../common/recipes/repository/list-imports.md',
+                '../../common/recipes/local/list-imports.md',
                 'read only the selected manifest or requested code'):
             with self.subTest(required=required):
                 self.assertIn(required, normalized)
@@ -205,10 +249,10 @@ class SkillContractTest(unittest.TestCase):
                 'eligible for downstream loading',
                 'It does not mean the loader ran or serving data changed',
                 'one GCS version directory and import_summary.json',
-                '`ImportStatus` is a mutable current snapshot',
+                'Cloud Spanner `ImportStatus` is a mutable current snapshot',
                 'a Batch failure before `import_summary.json` is written has no GCS history entry',
                 'Do not interpret a missing summary as proof that no attempt occurred',
-                '[run and status model](run-and-status-model.md)',
+                '[import evidence flow](import-evidence-flow.md)',
                 'supplied sibling `import` checkout'):
             with self.subTest(required=required):
                 self.assertIn(required, normalized)
@@ -218,29 +262,34 @@ class SkillContractTest(unittest.TestCase):
             with self.subTest(forbidden=forbidden):
                 self.assertNotIn(forbidden, architecture)
 
-    def test_status_model_separates_current_state_and_finalized_versions(self):
-        model = self._read(
-            'agents/common/references/import-automation/run-and-status-model.md'
+    def test_evidence_flow_composes_identity_and_runtime_evidence(self):
+        flow = self._read(
+            'agents/common/references/import-automation/import-evidence-flow.md'
         )
-        normalized = re.sub(r'\s+', ' ', model)
+        normalized = re.sub(r'\s+', ' ', flow)
 
         for required in (
-                'current mutable snapshot and bounded finalized-version evidence',
-                'Return its `State` without reinterpretation as `current_status`',
+                'gcs_object_prefix',
+                'scripts/census_county_business_patterns/CensusCountyBusinessPatterns',
+                'gs://<output_bucket>/<gcs_object_prefix>',
+                'bucket-relative and is not a complete GCS URI',
+                'Do not interpret `scripts` or `statvar_imports` as a bucket name',
+                'Cloud Spanner table containing one mutable current row',
+                'best starting point for current status',
+                'it is not complete attempt history',
                 'Its `JobId` is the ET Batch identifier',
-                'never select, return, or follow it in this skill',
-                'A technical failure can stop before a version or summary is complete',
-                'Older pre-summary failures are unsupported',
-                'reverse lexicographic timestamp-folder order',
-                'repeated hour at DST fall-back',
-                'scans no more than 100 summary names',
-                'returns at most five versions', 'If the scan exceeds 100',
-                'returns no history', 'Do not create an overall status',
-                'STAGING', 'VALIDATION', 'SKIP',
-                'It does not mean every failure event that occurred during that week',
-                'previous seven days', 'at most 100 returned current rows'):
+                'never select or follow it',
+                'pre-summary Batch failure is absent',
+                '`current_status`, `summary_status`, `is_current`, and `batch_state`',
+                'acceptance, and eligibility for downstream loading'):
             with self.subTest(required=required):
                 self.assertIn(required, normalized)
+
+        self.assertLess(len(flow.splitlines()), 100)
+        self.assertNotIn('## Contents', flow)
+        self.assertNotIn('reverse lexicographic', flow)
+        self.assertFalse(
+            (self._reference_root / 'run-and-status-model.md').exists())
 
     def test_skill_routes_only_supported_runtime_evidence(self):
         skill = self._skill_path.read_text(encoding='utf-8')
@@ -248,7 +297,7 @@ class SkillContractTest(unittest.TestCase):
 
         for required in (
                 'Use Scheduler only for a deployed schedule or target question',
-                '`ImportStatus` only as a mutable current snapshot',
+                'Cloud Spanner `ImportStatus` table only as a mutable current snapshot',
                 'previous seven days', 'at most 100 returned rows',
                 'GCS summary-list helper', 'scans at most 100 summary names',
                 'up to five recent finalized versions',
@@ -272,13 +321,19 @@ class SkillContractTest(unittest.TestCase):
 
     def test_current_status_recipe_excludes_loader_workflow_id(self):
         recipe = self._read(
-            'agents/common/recipes/gcp/imports/query-import-status.md')
+            'agents/common/recipes/gcp/spanner/query-import-status.md')
         normalized = re.sub(r'\s+', ' ', recipe)
 
         for required in (
+                'Cloud Spanner table keyed by `ImportName`',
                 'current mutable snapshot', 'StatusUpdateTimestamp',
-                '`current_status`', 'previous seven days',
-                'at most 100 returned rows',
+                'DataImportTimestamp', '`current_status`',
+                'full exact `gcs_version_uri`',
+                "LatestVersion = '<GCS_VERSION_URI>'",
+                'reverse-lookup only current snapshots', 'not version history',
+                'must not use a bare version',
+                'Do not run a state-only query without the UTC window',
+                'previous seven days', 'at most 100 returned rows',
                 'current rows, not historical events',
                 'Never select, return, or follow `ImportStatus.WorkflowId`',
                 'Use `JobId` only as the exact ET Batch identifier',
@@ -287,7 +342,7 @@ class SkillContractTest(unittest.TestCase):
                 self.assertIn(required, normalized)
 
         sql_lines = [line for line in recipe.splitlines() if '--sql=' in line]
-        self.assertEqual(2, len(sql_lines))
+        self.assertEqual(3, len(sql_lines))
         self.assertTrue(all('WorkflowId' not in line for line in sql_lines))
 
     def test_summary_helper_recipe_is_bounded_and_explicitly_partial(self):
@@ -299,8 +354,8 @@ class SkillContractTest(unittest.TestCase):
 
         for required in (
                 'list_import_summaries.py', '--absolute_import_name',
-                '--gcs_project', '--gcs_bucket', '--gcs_output_prefix',
-                '--limit', 'at most 100', 'at most five',
+                '--gcs_project', '--gcs_bucket', '--limit', 'at most 100',
+                'at most five',
                 'scan_truncated=true',
                 'finalized-version history, not complete attempt history',
                 'gcs_version_uri',
@@ -308,6 +363,8 @@ class SkillContractTest(unittest.TestCase):
         ):
             with self.subTest(required=required):
                 self.assertIn(required, normalized_recipe)
+
+        self.assertNotIn('gcs_output_prefix', recipe + helper)
 
         for required in ('_MAX_RESULT_LIMIT = 5', '_SCAN_LIMIT = 100',
                          'max_results=_SCAN_LIMIT + 1',
@@ -319,6 +376,7 @@ class SkillContractTest(unittest.TestCase):
 
     def test_removed_history_and_workflow_lookup_paths_are_absent(self):
         deleted_paths = (
+            'agents/common/references/import-automation/run-and-status-model.md',
             'agents/common/import_support/read_import_records.py',
             'agents/common/import_support/read_import_records_test.py',
             'agents/common/import_support/list_import_runs.py',
@@ -344,7 +402,7 @@ class SkillContractTest(unittest.TestCase):
         ]
         runtime_guidance = '\n'.join(
             path.read_text(encoding='utf-8') for path in runtime_paths)
-        for forbidden in ('ImportVersionHistory',
+        for forbidden in ('ImportVersionHistory', 'IngestionHistory',
                           'gcloud workflows executions list',
                           'gcloud workflows executions describe',
                           'correlate_import_runs.py', 'list_import_runs.py'):

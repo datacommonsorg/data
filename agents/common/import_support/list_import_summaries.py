@@ -48,8 +48,6 @@ def _define_flags() -> None:
     flags.DEFINE_string('gcs_bucket', None,
                         'GCS bucket containing import artifacts.')
     flags.mark_flag_as_required('gcs_bucket')
-    flags.DEFINE_string('gcs_output_prefix', '',
-                        'Optional output prefix within the GCS bucket.')
     flags.DEFINE_integer('limit', 5,
                          'Maximum number of summaries to return (1-5).')
 
@@ -58,8 +56,7 @@ class ImportSummaryListError(ValueError):
     """Raised when import summaries cannot be listed safely."""
 
 
-def normalize_import_name(absolute_import_name: str,
-                          gcs_output_prefix: str = '') -> dict[str, str]:
+def normalize_import_name(absolute_import_name: str) -> dict[str, str]:
     """Validates an absolute import name and derives its exact GCS prefix."""
     match = _IMPORT_NAME_PATTERN.fullmatch(absolute_import_name)
     if not match:
@@ -71,14 +68,7 @@ def normalize_import_name(absolute_import_name: str,
         raise ImportSummaryListError(
             'Manifest directory must contain non-empty path components.')
     simple_name = match.group('name')
-    output_prefix = gcs_output_prefix.strip('/')
-    if any(part in ('.', '..') for part in output_prefix.split('/')):
-        raise ImportSummaryListError(
-            'gcs_output_prefix contains an unsafe path.')
-
     prefix = posixpath.join(directory, simple_name)
-    if output_prefix:
-        prefix = posixpath.join(output_prefix, prefix)
     return {
         'absolute_import_name': absolute_import_name,
         'simple_import_name': simple_name,
@@ -140,14 +130,13 @@ def _read_batch_job_id(
 def list_import_summaries(absolute_import_name: str,
                           gcs_project: str,
                           gcs_bucket: str,
-                          gcs_output_prefix: str = '',
                           limit: int = 5,
                           client: Any | None = None) -> dict[str, Any]:
     """Returns recent timestamp-named summaries without scanning unbounded data."""
     if limit < 1 or limit > _MAX_RESULT_LIMIT:
         raise ImportSummaryListError(
             f'limit must be between 1 and {_MAX_RESULT_LIMIT}.')
-    identity = normalize_import_name(absolute_import_name, gcs_output_prefix)
+    identity = normalize_import_name(absolute_import_name)
     prefix = identity['gcs_prefix']
     match_glob = f'{prefix}*/{_SUMMARY_FILENAME}'
 
@@ -220,7 +209,6 @@ def main(argv: list[str]) -> None:
             absolute_import_name=_FLAGS.absolute_import_name,
             gcs_project=_FLAGS.gcs_project,
             gcs_bucket=_FLAGS.gcs_bucket,
-            gcs_output_prefix=_FLAGS.gcs_output_prefix,
             limit=_FLAGS.limit)
     except ImportSummaryListError as exc:
         print(json.dumps({'error': str(exc)}, indent=2), file=sys.stderr)

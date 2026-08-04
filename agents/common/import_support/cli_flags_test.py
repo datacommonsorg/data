@@ -38,8 +38,7 @@ class CliFlagsTest(unittest.TestCase):
         cases = (
             ('list_imports.py', ('query', 'autorefresh', 'limit')),
             ('list_import_summaries.py',
-             ('absolute_import_name', 'gcs_project', 'gcs_bucket',
-              'gcs_output_prefix', 'limit')),
+             ('absolute_import_name', 'gcs_project', 'gcs_bucket', 'limit')),
         )
 
         for script_name, expected_flags in cases:
@@ -65,8 +64,6 @@ class CliFlagsTest(unittest.TestCase):
                 '--gcs_project',
                 'p',
                 '--gcs_bucket=b',
-                '--gcs_output_prefix',
-                'imports',
                 '--limit=5',
             ),
         }

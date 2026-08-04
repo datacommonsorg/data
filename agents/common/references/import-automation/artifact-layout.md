@@ -1,10 +1,18 @@
 # Import artifact layout
 
-For the current Cloud Batch executor, derive a candidate base from the effective
-environment's output bucket and the absolute import name:
+For the current Cloud Batch executor, derive the bucket-relative prefix and
+candidate base from the effective environment and selected import:
 
 ```text
-gs://<bucket>/<manifest-directory>/<import-name>/
+gcs_object_prefix = <manifest-directory>/<import-name>
+gcs_import_base_uri =
+  gs://<bucket>/<gcs_object_prefix>
+```
+
+Under that base, expect:
+
+```text
+<gcs_import_base_uri>/
 ├── staging_version.txt
 ├── latest_version.txt
 └── <version>/
@@ -24,7 +32,7 @@ gs://<bucket>/<manifest-directory>/<import-name>/
 
 This is a candidate template. List actual objects and report only those found.
 Preserve `input<N>` because one manifest specification can contain multiple
-`import_inputs`.
+`import_inputs`. `gcs_object_prefix` contains no bucket or `gs://` scheme.
 
 For the most recent finalized candidate, read `staging_version.txt` and then
 the exact `<version>/import_summary.json`. Verify its import identity before

@@ -83,9 +83,10 @@ deployed.
 
 Runtime records do not form one complete ledger:
 
-- `ImportStatus` is a mutable current snapshot. It can expose the current raw
-  state, recorded version, and ET Batch job ID, including a current failure.
-  It is not history, and some fields can be updated by the separate loader.
+- Cloud Spanner `ImportStatus` is a mutable current snapshot. It can expose the
+  current raw state, recorded version, and ET Batch job ID, including a current
+  failure. It is not history, and some fields can be updated by the separate
+  loader.
 - GCS version directories and summaries preserve finalized candidates.
   `staging_version.txt` identifies the most recent finalized candidate;
   `latest_version.txt` normally identifies the current ET output.
@@ -96,7 +97,7 @@ particular, a Batch failure before `import_summary.json` is written has no GCS
 history entry. It may be visible only while represented by the current
 `ImportStatus` snapshot and retained Batch resource. Do not interpret a missing
 summary as proof that no attempt occurred. Read the
-[run and status model](run-and-status-model.md) for evidence-selection rules.
+[import evidence flow](import-evidence-flow.md) for evidence-selection rules.
 
 ## Resource cardinality
 
@@ -116,7 +117,7 @@ per import:                one mutable ImportStatus snapshot when present
 | Manifest | Versioned import definition and configured schedule intent |
 | Scheduler | Deployed trigger and Workflow target, not ET completion |
 | Shared Workflow | Orchestration design and one execution per logical attempt |
-| `ImportStatus` | Mutable current state, ET Batch job ID, and recorded version; not history |
+| Cloud Spanner `ImportStatus` | Mutable current state, ET Batch job ID, and recorded version; not history |
 | Batch job/task | Technical compute request, state, resources, and task outcome for an exact job ID |
 | Structured Batch logs | Bounded stage-level executor evidence for an exact job |
 | GCS version and summary | Finalized candidate identity, classification, Batch job ID, and metrics |
@@ -134,8 +135,8 @@ missing run.
   intent.
 - Use the selected environment block plus explicit prompt overrides for cloud
   coordinates.
-- Use live Scheduler, current `ImportStatus`, exact Batch resources, GCS, and
-  structured logs for deployed or runtime facts.
+- Use live Scheduler, current Cloud Spanner `ImportStatus`, exact Batch
+  resources, GCS, and structured logs for deployed or runtime facts.
 - A supplied sibling `import` checkout can explain Workflow or helper behavior
   when that implementation detail is specifically needed. The deployed
   Workflow revision and live metadata remain runtime truth.
@@ -145,7 +146,7 @@ missing run.
 ## Read details only when needed
 
 - For current-status, finalized-version, and missing-evidence semantics, read
-  the [run and status model](run-and-status-model.md).
+  the [import evidence flow](import-evidence-flow.md).
 - For version directories, summaries, and pointer names, read
   [artifact layout](artifact-layout.md).
 - For exact import-definition fields, read the

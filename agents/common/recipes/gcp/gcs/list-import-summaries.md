@@ -10,8 +10,7 @@ exact import.
 ## Required inputs
 
 Exact absolute import name; GCS project and bucket from the effective
-environment; optional explicit output prefix, empty by default; result limit
-from 1 through 5.
+environment; result limit from 1 through 5.
 
 ## Clarify when
 
@@ -26,7 +25,6 @@ names match, stop and report that the bounded history is unavailable.
   --absolute_import_name='<DIRECTORY>:<IMPORT_NAME>' \
   --gcs_project='<PROJECT>' \
   --gcs_bucket='<BUCKET>' \
-  --gcs_output_prefix='<OPTIONAL_PREFIX>' \
   --limit='<1_TO_5>'
 ```
 
@@ -73,5 +71,5 @@ is finalized-version history, not complete attempt history.
 ## Related repository sources
 
 [Artifact layout](../../../references/import-automation/artifact-layout.md),
-[run and status model](../../../references/import-automation/run-and-status-model.md),
+[import evidence flow](../../../references/import-automation/import-evidence-flow.md),
 and `agents/common/import_support/list_import_summaries.py`.

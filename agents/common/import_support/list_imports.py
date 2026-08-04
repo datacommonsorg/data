@@ -136,6 +136,7 @@ def _compact_record(record: ImportRecord) -> dict[str, Any]:
         'absolute_import_name': record.absolute_import_name,
         'configured_autorefresh': _has_configured_autorefresh(record),
         'cron_schedule': record.cron_schedule,
+        'gcs_object_prefix': f'{record.import_directory}/{record.import_name}',
         'import_directory': record.import_directory,
         'import_name': record.import_name,
         'manifest_path': record.manifest_path,

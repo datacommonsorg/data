@@ -1,6 +1,6 @@
 # List repository-configured Data Commons imports
 
-Recipe ID: `repository.list-imports`
+Recipe ID: `local.list-imports`
 
 ## Use when
 
@@ -19,14 +19,14 @@ without querying live infrastructure.
 
 Multiple prefix, substring, or fuzzy candidates remain plausible after using
 the user's context. Execution time, operational status, and repeated failures
-require live Workflow or status queries.
+require cloud evidence.
 
 ## Read-only operation
 
 ```bash
 ./agents/common/run_python.sh \
   agents/common/import_support/list_imports.py \
-  --query=<IMPORT_NAME_QUERY> \
+  --query='<IMPORT_NAME_QUERY>' \
   --autorefresh=<any|configured|not_configured> \
   --limit=<LIMIT>
 ```
@@ -41,13 +41,24 @@ After selecting an import, read its exact manifest specification. Read the
 before interpreting manifest fields. Read manifest-referenced code only when
 the request requires it.
 
+The returned `gcs_object_prefix` is bucket-relative:
+
+```text
+<import_directory>/<import_name>
+```
+
+It contains no bucket or `gs://` scheme. For a cloud question, combine it later
+with the effective environment as described by the
+[import evidence flow](../../references/import-automation/import-evidence-flow.md).
+
 ## Expected output
 
 Deterministic JSON with the selected name-match strategy, applied filters,
-bounded compact results, repository-relative manifest paths, scan/match/return
-counts, limit, and truncation status. A unique exact or case-insensitive exact
-match may be selected automatically. Use user context for weaker matches and
-clarify when multiple candidates remain plausible.
+bounded compact results, repository-relative manifest paths, absolute import
+names, bucket-relative GCS object prefixes, scan/match/return counts, limit,
+and truncation status. A unique exact or case-insensitive exact match may be
+selected automatically. Use user context for weaker matches and clarify when
+multiple candidates remain plausible.
 
 ## Required bounds
 
@@ -56,8 +67,9 @@ Scan only `statvar_imports/**/manifest.json` and
 
 ## Evidence to retain
 
-Query, match strategy, manifest path, absolute import name, cron schedule,
-configured-auto-refresh classification, counts, limit, and truncation.
+Query, match strategy, manifest path, absolute import name,
+`gcs_object_prefix`, cron schedule, configured-auto-refresh classification,
+counts, limit, and truncation.
 
 ## Common failures
 
@@ -67,4 +79,6 @@ manifests, or an invalid result limit.
 ## Related repository sources
 
 The [import manifest reference](../../references/import-automation/manifest.md)
-defines the selected-specification and field-interpretation contract.
+defines the selected-specification and field-interpretation contract. The
+[import evidence flow](../../references/import-automation/import-evidence-flow.md)
+defines how repository identity seeds cloud evidence.

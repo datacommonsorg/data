@@ -60,7 +60,7 @@ def _blob(version: str,
           import_name: str = 'Import',
           job_id: str | None = None) -> _Blob:
     job_id = job_id if job_id is not None else f'job-{version}'
-    return _Blob(f'output/scripts/a/Import/{version}/import_summary.json', {
+    return _Blob(f'scripts/a/Import/{version}/import_summary.json', {
         'import_name': import_name,
         'job_id': job_id,
         'status': 'STAGING',
@@ -75,7 +75,6 @@ class ListImportSummariesTest(unittest.TestCase):
         result = list_import_summaries('scripts/a:Import',
                                        'project',
                                        'bucket',
-                                       gcs_output_prefix='output',
                                        client=client)
 
         self.assertEqual('scripts/a:Import', result['absolute_import_name'])
@@ -83,8 +82,8 @@ class ListImportSummariesTest(unittest.TestCase):
         self.assertEqual(1, len(client.calls))
         bucket, kwargs = client.calls[0]
         self.assertEqual('bucket', bucket)
-        self.assertEqual('output/scripts/a/Import/', kwargs['prefix'])
-        self.assertEqual('output/scripts/a/Import/*/import_summary.json',
+        self.assertEqual('scripts/a/Import/', kwargs['prefix'])
+        self.assertEqual('scripts/a/Import/*/import_summary.json',
                          kwargs['match_glob'])
         self.assertEqual(101, kwargs['max_results'])
         self.assertEqual(101, kwargs['page_size'])
@@ -100,7 +99,6 @@ class ListImportSummariesTest(unittest.TestCase):
         result = list_import_summaries('scripts/a:Import',
                                        'project',
                                        'bucket',
-                                       gcs_output_prefix='output',
                                        client=_StorageClient(blobs))
 
         self.assertEqual([
@@ -112,7 +110,7 @@ class ListImportSummariesTest(unittest.TestCase):
         ], [item['version'] for item in result['results']])
         self.assertEqual('2026-08-07', result['results'][0]['date'])
         self.assertEqual(
-            'gs://bucket/output/scripts/a/Import/'
+            'gs://bucket/scripts/a/Import/'
             '2026_08_07T01_02_03_123456_07_00',
             result['results'][0]['gcs_version_uri'])
         self.assertEqual('job-2026_08_07T01_02_03_123456_07_00',
@@ -132,7 +130,6 @@ class ListImportSummariesTest(unittest.TestCase):
         result = list_import_summaries('scripts/a:Import',
                                        'project',
                                        'bucket',
-                                       gcs_output_prefix='output',
                                        client=_StorageClient(
                                            [overridden, canonical]))
 
@@ -140,7 +137,7 @@ class ListImportSummariesTest(unittest.TestCase):
         self.assertEqual(0, overridden.download_count)
         self.assertEqual(1, canonical.download_count)
 
-    def test_builds_version_uri_without_output_prefix(self):
+    def test_builds_version_uri(self):
         version = '2026_08_04T01_02_03_123456_07_00'
         blob = _Blob(f'scripts/a/Import/{version}/import_summary.json', {
             'import_name': 'Import',
@@ -156,7 +153,7 @@ class ListImportSummariesTest(unittest.TestCase):
                          result['results'][0]['gcs_version_uri'])
 
     def test_reports_invalid_or_mismatched_selected_summaries(self):
-        prefix = 'output/scripts/a/Import'
+        prefix = 'scripts/a/Import'
         versions = [
             '2026_08_04T04_00_00_123456_07_00',
             '2026_08_04T03_00_00_123456_07_00',
@@ -175,7 +172,6 @@ class ListImportSummariesTest(unittest.TestCase):
         result = list_import_summaries('scripts/a:Import',
                                        'project',
                                        'bucket',
-                                       gcs_output_prefix='output',
                                        client=_StorageClient(blobs))
 
         self.assertEqual([None, None, None, None],
@@ -197,7 +193,6 @@ class ListImportSummariesTest(unittest.TestCase):
         result = list_import_summaries('scripts/a:Import',
                                        'project',
                                        'bucket',
-                                       gcs_output_prefix='output',
                                        client=_StorageClient(blobs))
 
         self.assertTrue(result['scan_truncated'])
@@ -219,14 +214,11 @@ class ListImportSummariesTest(unittest.TestCase):
         self.assertEqual([], result['results'])
         self.assertEqual([], result['issues'])
 
-    def test_rejects_invalid_identity_prefix_and_limit(self):
+    def test_rejects_invalid_identity_and_limit(self):
         for absolute_import_name in ('Import', 'scripts//a:Import'):
             with self.subTest(absolute_import_name=absolute_import_name):
                 with self.assertRaises(ImportSummaryListError):
                     normalize_import_name(absolute_import_name)
-
-        with self.assertRaisesRegex(ImportSummaryListError, 'unsafe path'):
-            normalize_import_name('scripts/a:Import', '../output')
 
         for limit in (0, 6):
             with self.subTest(limit=limit):

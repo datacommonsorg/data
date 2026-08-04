@@ -167,6 +167,23 @@ class ListImportsTest(unittest.TestCase):
         self.assertEqual(5, result['returned_import_count'])
         self.assertTrue(result['result_truncated'])
 
+    def test_returns_bucket_relative_gcs_object_prefix(self):
+        record = ImportRecord(
+            import_name='ExampleImport',
+            manifest_path='scripts/example/manifest.json',
+            import_directory='scripts/example',
+            absolute_import_name='scripts/example:ExampleImport',
+            cron_schedule=None,
+        )
+
+        result = list_imports({'ExampleImport': [record]},
+                              query='ExampleImport')
+
+        selected = result['results'][0]
+        self.assertEqual('scripts/example/ExampleImport',
+                         selected['gcs_object_prefix'])
+        self.assertFalse(selected['gcs_object_prefix'].startswith('gs://'))
+
     def test_rejects_invalid_limit_autorefresh_and_duplicate_names(self):
         for limit in (0, 101):
             with self.subTest(limit=limit):
@@ -191,6 +208,8 @@ class ListImportsTest(unittest.TestCase):
         self.assertEqual('UNData', result['results'][0]['import_name'])
         self.assertEqual('statvar_imports/undata/manifest.json',
                          result['results'][0]['manifest_path'])
+        self.assertEqual('statvar_imports/undata/UNData',
+                         result['results'][0]['gcs_object_prefix'])
 
 
 if __name__ == '__main__':

@@ -42,7 +42,7 @@ is out of scope.
    `requirements_all.txt`, and `run_tests.sh` exist.
 2. For repository-only questions—find an import, read its manifest, report its
    configured cron, or locate manifest-referenced code—go directly to the
-   [list-imports recipe](../../common/recipes/repository/list-imports.md), read
+   [list-imports recipe](../../common/recipes/local/list-imports.md), read
    only the selected manifest or requested code, answer, and stop. Do not load
    architecture, environment configuration, or cloud recipes.
 3. For architecture or runtime questions—deployed schedule, current status,
@@ -82,9 +82,10 @@ is out of scope.
 
 - Use Scheduler only for a deployed schedule or target question. The manifest
   cron is configured intent; the live Scheduler job is deployed state.
-- Use `ImportStatus` only as a mutable current snapshot. Its raw `State` becomes
-  `current_status`; its `JobId` is the ET Batch identifier. Never select or use
-  `ImportStatus.WorkflowId`: it is loader-owned and may refer to an earlier run.
+- Use the Cloud Spanner `ImportStatus` table only as a mutable current snapshot.
+  Its raw `State` becomes `current_status`; its `JobId` is the ET Batch
+  identifier. Never select or use `ImportStatus.WorkflowId`: it is loader-owned
+  and may refer to an earlier run.
 - For a query across imports, filter the current `ImportStatus` rows. A time
   window applies to `StatusUpdateTimestamp`; it does not reconstruct historical
   events. Unless the user supplies bounds, use production, the previous seven
@@ -104,8 +105,8 @@ is out of scope.
 
 ## Load detailed references only when needed
 
-- For current-state, finalized-version, status, and missing-evidence semantics,
-  read the [run and status model](../../common/references/import-automation/run-and-status-model.md).
+- For current-state, finalized-version, artifact, or Batch navigation, read the
+  [import evidence flow](../../common/references/import-automation/import-evidence-flow.md).
 - For GCS paths, summaries, and pointers, read
   [artifact layout](../../common/references/import-automation/artifact-layout.md).
 - For manifest fields, read the
@@ -126,9 +127,9 @@ Before presenting or executing a cloud or support command:
 
 | Need | Read and follow |
 |---|---|
-| Find or select imports | [List repository imports](../../common/recipes/repository/list-imports.md) |
+| Find or select imports | [List repository imports](../../common/recipes/local/list-imports.md) |
 | Verify deployed Scheduler schedule and Workflow target | [Describe Scheduler job](../../common/recipes/gcp/scheduler/describe-job.md) |
-| Read current status for one import or bounded current snapshots across imports | [Query current import status](../../common/recipes/gcp/imports/query-import-status.md) |
+| Read current status for one import, exact current version, or bounded current snapshots across imports | [Query current import status](../../common/recipes/gcp/spanner/query-import-status.md) |
 | List up to five recent finalized versions, GCS paths, and Batch IDs | [List recent import summaries](../../common/recipes/gcp/gcs/list-import-summaries.md) |
 | Read one selected version's summary | [Read run summary](../../common/recipes/gcp/gcs/read-run-summary.md) |
 | Read the current candidate or accepted-output pointer | [Read version pointer](../../common/recipes/gcp/gcs/read-version-pointer.md) |
