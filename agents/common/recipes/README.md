@@ -9,7 +9,6 @@ recipes/
 ├── local/
 │   └── list-imports.md
 └── gcp/
-    ├── artifact-registry/
     ├── batch/
     ├── gcs/
     ├── logging/

@@ -50,7 +50,7 @@ helper. Construct it only when an exact version was supplied separately.
 | Current recorded state, version, Batch ID, or timestamps | [Cloud Spanner `ImportStatus`](../../recipes/gcp/spanner/query-import-status.md) |
 | Imports currently in a selected state and updated in a window | [Bounded `ImportStatus` query](../../recipes/gcp/spanner/query-import-status.md) |
 | Up to five recent finalized versions | [GCS summary-list helper](../../recipes/gcp/gcs/list-import-summaries.md) |
-| Classification or metrics for one version | [Exact `import_summary.json`](../../recipes/gcp/gcs/read-run-summary.md) |
+| Classification or metrics for one version | [Exact `import_summary.json`](../../recipes/gcp/gcs/read-version-summary.md) |
 | Whether a version is the current ET output | [Exact current-output pointer](../../recipes/gcp/gcs/read-version-pointer.md) |
 | Technical state or logs | [Exact Batch job](../../recipes/gcp/batch/describe-job.md) from `ImportStatus.JobId` or a validated summary |
 

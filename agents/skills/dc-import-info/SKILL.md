@@ -131,7 +131,7 @@ Before presenting or executing a cloud or support command:
 | Verify deployed Scheduler schedule and Workflow target | [Describe Scheduler job](../../common/recipes/gcp/scheduler/describe-job.md) |
 | Read current status for one import, exact current version, or bounded current snapshots across imports | [Query current import status](../../common/recipes/gcp/spanner/query-import-status.md) |
 | List up to five recent finalized versions, GCS paths, and Batch IDs | [List recent import summaries](../../common/recipes/gcp/gcs/list-import-summaries.md) |
-| Read one selected version's summary | [Read run summary](../../common/recipes/gcp/gcs/read-run-summary.md) |
+| Read one supplied or selected version's summary | [Read version summary](../../common/recipes/gcp/gcs/read-version-summary.md) |
 | Read the current candidate or accepted-output pointer | [Read version pointer](../../common/recipes/gcp/gcs/read-version-pointer.md) |
 | List one selected version's files | [List version artifacts](../../common/recipes/gcp/gcs/list-version-artifacts.md) |
 | Inspect one exact Batch job | [Describe Batch job](../../common/recipes/gcp/batch/describe-job.md) |

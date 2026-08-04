@@ -125,6 +125,6 @@ a recorded version that no longer matches a GCS pointer.
 ## Related repository sources
 
 [Import evidence flow](../../../references/import-automation/import-evidence-flow.md),
-[read one run summary](../gcs/read-run-summary.md),
+[read one version summary](../gcs/read-version-summary.md),
 [read one version pointer](../gcs/read-version-pointer.md), and
 [describe one Batch job](../batch/describe-job.md).

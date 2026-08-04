@@ -62,4 +62,5 @@ permission denied, or a stale pointer.
 
 ## Related repository sources
 
-The runtime environment file and artifact-layout reference.
+[Import environment defaults](../../../config/import-environments.yaml) and
+[artifact layout](../../../references/import-automation/artifact-layout.md).

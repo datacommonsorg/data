@@ -315,7 +315,7 @@ class SkillContractTest(unittest.TestCase):
                                 'find-historical-summary.md',
                                 'read-import-records.md',
                                 'describe-ingestion-helper.md',
-                                'resolve-runtime-image.md'):
+                                'trace-batch-job-source-commit.md'):
             with self.subTest(forbidden_route=forbidden_route):
                 self.assertNotIn(forbidden_route, skill)
 
@@ -345,6 +345,35 @@ class SkillContractTest(unittest.TestCase):
         self.assertEqual(3, len(sql_lines))
         self.assertTrue(all('WorkflowId' not in line for line in sql_lines))
 
+    def test_batch_source_commit_recipe_uses_exact_digest_tags_and_labeled_heuristic(
+            self):
+        recipe = self._read(
+            'agents/common/recipes/gcp/batch/trace-batch-job-source-commit.md')
+        normalized = re.sub(r'\s+', ' ', recipe)
+
+        for required in (
+                'Artifact Registry `DockerImage` resource',
+                'Inspect only that resource\'s `tags[]`',
+                '<URL_ENCODED_IMAGE_AT_DIGEST>',
+                'one Artifact Registry request',
+                'Another exact tag requires at most two',
+                'artifact_registry_lookups: 0',
+                'nearest_local_commit_before_launch',
+                'correlation_method: heuristic_by_time',
+                'Never call it the commit that ran',
+                'Unless the user explicitly requested exact provenance',
+                'do not substitute this time candidate for missing digest evidence',
+                'Do not resolve `stable` or `latest`',
+                'Never query Cloud Build'):
+            with self.subTest(required=required):
+                self.assertIn(required, normalized)
+
+        for forbidden in ('gcloud artifacts versions describe',
+                          'TAG_LIMIT_PLUS_ONE', 'VERSION_RESOURCE',
+                          'gcloud builds list', 'gcloud builds describe'):
+            with self.subTest(forbidden=forbidden):
+                self.assertNotIn(forbidden, recipe)
+
     def test_summary_helper_recipe_is_bounded_and_explicitly_partial(self):
         recipe = self._read(
             'agents/common/recipes/gcp/gcs/list-import-summaries.md')
@@ -354,8 +383,8 @@ class SkillContractTest(unittest.TestCase):
 
         for required in (
                 'list_import_summaries.py', '--absolute_import_name',
-                '--gcs_project', '--gcs_bucket', '--limit', 'at most 100',
-                'at most five',
+                '--gcs_project', '--gcs_bucket', '--limit',
+                'Scan at most 101 matching summary names', 'at most five',
                 'scan_truncated=true',
                 'finalized-version history, not complete attempt history',
                 'gcs_version_uri',
@@ -430,6 +459,35 @@ class SkillContractTest(unittest.TestCase):
         for command in forbidden:
             with self.subTest(command=command):
                 self.assertNotIn(command, recipes)
+
+    def test_gcs_recipes_keep_distinct_version_operations(self):
+        summary_list = self._read(
+            'agents/common/recipes/gcp/gcs/list-import-summaries.md')
+        version_summary = self._read(
+            'agents/common/recipes/gcp/gcs/read-version-summary.md')
+        pointer = self._read(
+            'agents/common/recipes/gcp/gcs/read-version-pointer.md')
+        artifacts = self._read(
+            'agents/common/recipes/gcp/gcs/list-version-artifacts.md')
+
+        for recipe_id, recipe in (
+            ('gcp.gcs.list-import-summaries', summary_list),
+            ('gcp.gcs.read-version-summary', version_summary),
+            ('gcp.gcs.read-version-pointer', pointer),
+            ('gcp.gcs.list-version-artifacts', artifacts),
+        ):
+            with self.subTest(recipe_id=recipe_id):
+                self.assertIn(f'Recipe ID: `{recipe_id}`', recipe)
+
+        self.assertLess(len(summary_list.splitlines()), 75)
+        self.assertIn("Read one supplied or selected version's summary",
+                      self._skill_path.read_text(encoding='utf-8'))
+        self.assertIn('exact version supplied\nby the user', version_summary)
+        self.assertIn('do not run the summary-list helper first',
+                      version_summary)
+        self.assertNotIn('pointer changed after', version_summary)
+        self.assertFalse(
+            (self._recipe_root / 'gcp/gcs/read-run-summary.md').exists())
 
     def test_exact_artifact_batch_and_log_recipes_remain_bounded(self):
         artifacts = self._read(

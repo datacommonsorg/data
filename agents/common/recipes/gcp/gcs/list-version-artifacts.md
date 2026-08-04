@@ -52,5 +52,5 @@ selected limit.
 
 ## Related repository sources
 
-`import-automation/executor/app/executor/import_executor.py` and the artifact
-layout reference.
+The [import executor](../../../../../import-automation/executor/app/executor/import_executor.py)
+and [artifact layout](../../../references/import-automation/artifact-layout.md).

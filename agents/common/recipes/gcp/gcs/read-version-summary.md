@@ -1,6 +1,6 @@
-# Read one import run summary
+# Read one import version summary
 
-Recipe ID: `gcp.gcs.read-run-summary`
+Recipe ID: `gcp.gcs.read-version-summary`
 
 ## Use when
 
@@ -15,7 +15,9 @@ Batch job ID.
 
 ## Clarify when
 
-The version was not obtained from a pointer or bounded summary-list result.
+The import identity or version is ambiguous. Accept an exact version supplied
+by the user or obtained from a pointer or bounded summary-list result. Keep the
+read scoped to the selected import's GCS prefix.
 
 ## Read-only operation
 
@@ -33,6 +35,9 @@ Read `import_summary.json` for one exact version and require `import_name` to
 match the selected import before using any status or statistics. When a Batch
 job ID is already known, also require `job_id` to match. Otherwise retain the
 summary's `job_id` as a discovered identifier and follow only that exact ID.
+When the user supplies an exact version, construct its URI using the
+[import evidence flow](../../../references/import-automation/import-evidence-flow.md);
+do not run the summary-list helper first.
 
 ## Expected output
 
@@ -50,11 +55,11 @@ answer.
 
 ## Common failures
 
-Attempt or Batch failed before summary creation, pointer changed after the
-selected run, identity mismatch, invalid JSON, missing object, or permission
-denied. A missing summary is not proof that no attempt occurred.
+Attempt or Batch failure before summary creation, identity mismatch, invalid
+JSON, missing object, or permission denied. A missing summary is not proof that
+no attempt occurred.
 
 ## Related repository sources
 
-`ImportStatusSummary` and `_update_latest_version()` in
-`import-automation/executor/app/executor/import_executor.py`.
+The [import executor](../../../../../import-automation/executor/app/executor/import_executor.py)
+defines `ImportStatusSummary` and `_update_latest_version()`.
