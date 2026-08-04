@@ -89,11 +89,11 @@ flags.DEFINE_list('recon_property', [],
                   'List of properties to be looked up for reconciliation.')
 flags.DEFINE_bool('recon_keep_legacy_svobs', True,
                   'Keep the legacy value when reconciling nodes.')
-flags.DEFINE_bool('recon_lookup_api', False,
+flags.DEFINE_bool('recon_lookup_api', True,
                   'Enable or disable API lookup for schema definition.')
 
 
-def _is_bool_true(val, default: bool = False) -> bool:
+def _is_bool_true(val, default: bool = True) -> bool:
     """Returns boolean value from bool, string or int."""
     if val is None:
         return default
@@ -328,8 +328,9 @@ class SchemaReconciler:
                 # Check if any of the values for this property have replacements in the cached schema.
                 values = get_value_list(value)
                 for val in values:
-                    if (val.startswith('#') or val.startswith('"') or ' ' in val
-                            or val.replace('.', '', 1).replace('-', '', 1).isdigit()):
+                    if (val.startswith('#') or val.startswith('"') or
+                            ' ' in val or val.replace('.', '', 1).replace(
+                                '-', '', 1).isdigit()):
                         # ignore value that is a quoted string, number, or comment
                         continue
                     schema_node = self.get_schema_node(val)
@@ -342,7 +343,7 @@ class SchemaReconciler:
 
         # If some DCIDs are not found in the local schema cache, fetch them using the DC API.
         if lookup_dcids and not _is_bool_true(
-                self._config.get('recon_lookup_api'), default=False):
+                self._config.get('recon_lookup_api'), default=True):
             # DC API lookup is disabled.
             # Use any remapped dcids collected from existing schema.
             logging.warning(

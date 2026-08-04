@@ -98,15 +98,8 @@ def fetch_variables():
     return v_map
 
 def download_and_process():
-    global OUTPUT_DIR
-    
     # Safely create output directory
-    try:
-        os.makedirs(OUTPUT_DIR, exist_ok=True)
-    except PermissionError:
-        logging.warning(f"Permission denied for {OUTPUT_DIR}. Falling back to /tmp/source_files")
-        OUTPUT_DIR = "/tmp/source_files"
-        os.makedirs(OUTPUT_DIR, exist_ok=True)
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
     
     template_df = load_template_from_gcs(GCS_TEMPLATE_PATH)
     if template_df is None: 
