@@ -28,13 +28,11 @@ from agents.common.import_support.correlate_import_runs import query_latest_vers
 from agents.common.import_support.correlate_import_runs import query_version_history
 
 
-def _history_row(import_name='Import',
-                 version='2026_01_02',
+def _history_row(version='2026_01_02',
                  workflow_id=None,
                  comment='import-workflow:workflow-1',
                  update_timestamp=datetime(2026, 1, 2, tzinfo=timezone.utc)):
-    return (import_name, version, update_timestamp, workflow_id, 'STAGING', 10,
-            1, 2, 3, 4, comment)
+    return (version, update_timestamp, workflow_id, comment)
 
 
 class _Snapshot:
@@ -55,15 +53,15 @@ class _Snapshot:
         if 'MAX(UpdateTimestamp)' in sql:
             latest_by_version = {}
             for row in rows:
-                version = row[1]
-                update_timestamp = row[2]
+                version = row[0]
+                update_timestamp = row[1]
                 if (version not in latest_by_version or
                         update_timestamp > latest_by_version[version]):
                     latest_by_version[version] = update_timestamp
             rows = sorted(latest_by_version.items(), key=lambda item: item[0])
             rows.sort(key=lambda item: item[1], reverse=True)
         elif 'versions' in params:
-            rows = [row for row in rows if row[1] in params['versions']]
+            rows = [row for row in rows if row[0] in params['versions']]
         return rows[:params['limit']]
 
 
@@ -158,6 +156,10 @@ class CorrelateImportRunsTest(unittest.TestCase):
         self.assertIn('ImportName IN UNNEST(@import_names)', sql)
         self.assertIn('UpdateTimestamp >= @start_time', sql)
         self.assertIn('UpdateTimestamp < @end_time', sql)
+        expected_columns = (
+            'SELECT Version, UpdateTimestamp, WorkflowExecutionID, Comment '
+            'FROM ImportVersionHistory')
+        self.assertIn(expected_columns, sql)
         self.assertEqual(2, params['limit'])
         self.assertEqual(['scripts/a:Import', 'Import'], params['import_names'])
         self.assertEqual(1, len(result['rows']))
@@ -200,6 +202,7 @@ class CorrelateImportRunsTest(unittest.TestCase):
                 _Blob({
                     'import_name': 'Import',
                     'job_id': 'batch-1',
+                    'status': 'STAGING',
                     'latest_version': 'gs://bucket/scripts/a/Import/2026_01_02',
                 })
         })
@@ -227,6 +230,7 @@ class CorrelateImportRunsTest(unittest.TestCase):
                 'gcs_base_path': 'gs://bucket/scripts/a/Import/2026_01_02',
                 'workflow_execution_id': None,
                 'batch_job_id': 'batch-1',
+                'summary_status': 'STAGING',
                 'workflow_recorded_at': None,
                 'gcs_summary_created_at': '2026-01-02T00:00:00+00:00',
                 'missing': ['workflow_execution_id'],
@@ -262,9 +266,45 @@ class CorrelateImportRunsTest(unittest.TestCase):
         self.assertEqual('workflow-1',
                          result['runs'][0]['workflow_execution_id'])
         self.assertEqual('batch-1', result['runs'][0]['batch_job_id'])
+        self.assertIsNone(result['runs'][0]['summary_status'])
         self.assertNotIn('history_events', result)
         self.assertNotIn('gcs_summaries', result)
         self.assertEqual(2, len(snapshot.calls))
+
+    def test_identity_mismatch_suppresses_summary_status(self):
+        cases = ({
+            'import_name': 'OtherImport',
+            'job_id': 'batch-1',
+            'status': 'STAGING',
+            'latest_version': 'gs://bucket/scripts/a/Import/2026_01_02',
+        }, {
+            'import_name': 'Import',
+            'job_id': 'batch-1',
+            'status': 'STAGING',
+            'latest_version': 'gs://bucket/scripts/a/Import/other-version',
+        })
+
+        for summary in cases:
+            with self.subTest(summary=summary):
+                snapshot = _Snapshot([])
+                bucket = _Bucket({
+                    'scripts/a/Import/2026_01_02/import_summary.json':
+                        _Blob(summary)
+                })
+                result = correlate_import_runs(
+                    'import_version',
+                    'scripts/a:Import',
+                    'project',
+                    'instance',
+                    'database',
+                    'project',
+                    'bucket',
+                    version='2026_01_02',
+                    spanner_client=_SpannerClient(snapshot),
+                    storage_client=_StorageClient(bucket))
+
+                self.assertIsNone(result['runs'][0]['summary_status'])
+                self.assertTrue(result['runs'][0]['issues'])
 
     def test_missing_summary_and_workflow_are_partial_results(self):
         snapshot = _Snapshot([_history_row(comment='')])

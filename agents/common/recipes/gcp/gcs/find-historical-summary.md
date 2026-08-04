@@ -37,8 +37,8 @@ at the first exact import-name and job-ID match.
 
 ## Preferred invocation
 
-Use this only after exact pointers, Workflow results, and a matching current
-Spanner row cannot provide the requested historical semantic status.
+Use this only after exact pointers, Workflow results, and bounded import/version
+correlation cannot provide the requested historical semantic status.
 
 ## Expected output
 

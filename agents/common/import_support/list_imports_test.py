@@ -60,6 +60,23 @@ class ListImportsTest(unittest.TestCase):
             self.assertEqual('scripts/agency/two:Two',
                              catalog['Two'][0].absolute_import_name)
 
+    def test_builds_catalog_from_multiple_specs_in_one_manifest(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            self._write_manifest(root, 'scripts/agency/imports', [{
+                'import_name': 'One',
+            }, {
+                'import_name': 'Two',
+            }])
+
+            catalog = build_import_catalog(root)
+
+            self.assertEqual({'One', 'Two'}, set(catalog))
+            self.assertEqual('scripts/agency/imports:One',
+                             catalog['One'][0].absolute_import_name)
+            self.assertEqual('scripts/agency/imports:Two',
+                             catalog['Two'][0].absolute_import_name)
+
     def test_rejects_malformed_manifests_and_specifications(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)

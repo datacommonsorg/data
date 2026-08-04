@@ -54,10 +54,10 @@ objects prove that path.
   including `VALIDATION` and `SKIP`.
 - The configured accepted pointer is currently named by
   `storage_version_filename`, whose repository default is
-  `latest_version.txt`. The ingestion helper updates it only for accepted
-  `STAGING` data.
+  `latest_version.txt`. It advances only for accepted `STAGING` data.
 - A run that fails before summary creation can update neither pointer.
 
 Use these repository-defined names for the current support path and verify the
-live objects. They are ET artifact conventions, not environment coordinates.
-Do not assume a support request mentioning `latest.txt` refers to a real object.
+live objects. They are ET artifact conventions, not fields selected from the
+environment configuration. Do not assume a support request mentioning
+`latest.txt` refers to a real object.

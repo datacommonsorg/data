@@ -15,8 +15,8 @@ prefix, and either a history limit or exact version.
 
 ## Clarify when
 
-The absolute import name is unresolved, Spanner or GCS coordinates conflict,
-the GCS output prefix is unknown for a deployment that uses one, or the caller
+The absolute import name is unresolved; Spanner project, instance, or database
+values conflict; GCS project, bucket, or prefix values conflict; or the caller
 requests an unbounded history.
 
 ## Read-only operation
@@ -71,10 +71,11 @@ state is requested.
 
 Minimal output containing the absolute import name and one ET record per
 selected version. Each record has the version, exact GCS base path, import
-Workflow execution ID, Batch job ID, Workflow-history timestamp, GCS-summary
-creation timestamp, and missing identifiers. The top-level result also reports
-truncation and, only when needed, incomplete-history issues. Name and version
-normalization and loader Workflow events remain internal.
+Workflow execution ID, Batch job ID, exact summary status, Workflow-history
+timestamp, GCS-summary creation timestamp, and missing identifiers. The
+top-level result also reports truncation and, only when needed,
+incomplete-history issues. Name and version normalization and non-ET version
+events remain internal.
 
 Use returned fields for optional detail lookups only when requested:
 
@@ -99,8 +100,8 @@ minimal JSON output.
 ## Evidence to retain
 
 Absolute import name, version, exact GCS base path, ET Workflow execution ID,
-Batch job ID, returned timestamps, missing evidence, caller-supplied bounds,
-issues, and truncation.
+Batch job ID, summary status, returned timestamps, missing evidence,
+caller-supplied bounds, issues, and truncation.
 
 ## Common failures
 
@@ -112,5 +113,5 @@ per-version evidence can be a valid partial result.
 ## Related repository sources
 
 `agents/common/import_support/correlate_import_runs.py`, the artifact-layout and
-run/status references, and the supplied sibling ingestion-helper schema and
-storage implementation.
+run/status references, live `ImportVersionHistory` metadata, and exact GCS
+summaries.

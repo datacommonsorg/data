@@ -14,7 +14,7 @@ configured Workflow resource from the effective environment.
 
 ## Clarify when
 
-A required effective coordinate is missing or explicit prompt values conflict.
+A required input is missing or explicit prompt values conflict.
 
 ## Read-only operation
 

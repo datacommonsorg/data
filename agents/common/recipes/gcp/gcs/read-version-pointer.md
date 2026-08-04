@@ -13,8 +13,8 @@ identity and repository-defined pointer role.
 
 ## Clarify when
 
-A required effective coordinate is missing or the import prefix cannot be
-constructed from the exact import identity.
+A required project, bucket, import identity, or pointer role is missing, or the
+import prefix cannot be constructed from the exact import identity.
 
 ## Read-only operation
 
@@ -28,7 +28,7 @@ gcloud storage cat \
 
 Read `staging_version.txt` for the most recent attempt that wrote a summary.
 Read the configured accepted pointer, normally `latest_version.txt`, only for a
-publication question.
+current accepted ET-output question.
 
 ## Expected output
 

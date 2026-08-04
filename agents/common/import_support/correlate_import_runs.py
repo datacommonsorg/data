@@ -29,16 +29,9 @@ from google.cloud import spanner
 from google.cloud import storage
 
 _HISTORY_COLUMNS = (
-    'ImportName',
     'Version',
     'UpdateTimestamp',
     'WorkflowExecutionID',
-    'Status',
-    'ExecutionTime',
-    'NodeCount',
-    'EdgeCount',
-    'ObservationCount',
-    'TimeSeriesCount',
     'Comment',
 )
 _IMPORT_NAME_PATTERN = re.compile(
@@ -280,6 +273,7 @@ def _summary_projection(summary: dict[str, Any]) -> dict[str, Any]:
         'import_name': _serialize(summary.get('import_name')),
         'latest_version': _serialize(summary.get('latest_version')),
         'batch_job_id': _serialize(summary.get('job_id')),
+        'summary_status': _serialize(summary.get('status')),
     }
 
 
@@ -297,6 +291,7 @@ def read_gcs_summary(project: str,
         'summary_uri': summary_uri,
         'summary_found': False,
         'batch_job_id': None,
+        'summary_status': None,
         'object_create_time': None,
         'missing': [],
         'warnings': [],
@@ -335,12 +330,17 @@ def read_gcs_summary(project: str,
         'object_update_time': _serialize(getattr(blob, 'updated', None)),
         'generation': _serialize(getattr(blob, 'generation', None)),
     })
+    identity_mismatch = False
     if result['import_name'] != simple_import_name:
         result['warnings'].append('summary_import_name_mismatch')
+        identity_mismatch = True
     expected_uri = expected_version_uri(bucket_name, gcs_prefix, version)
     latest_version = result['latest_version']
     if latest_version and latest_version.rstrip('/') != expected_uri:
         result['warnings'].append('summary_latest_version_mismatch')
+        identity_mismatch = True
+    if identity_mismatch:
+        result['summary_status'] = None
     if not result['batch_job_id']:
         result['missing'].append('batch_job_id')
     return result
@@ -440,6 +440,7 @@ def _run_record(version: str, gcs_bucket: str, gcs_prefix: str,
         'gcs_base_path': expected_version_uri(gcs_bucket, gcs_prefix, version),
         'workflow_execution_id': workflow_id,
         'batch_job_id': batch_job_id,
+        'summary_status': summary.get('summary_status'),
         'workflow_recorded_at': workflow_time,
         'gcs_summary_created_at': summary.get('object_create_time'),
         'missing': missing,

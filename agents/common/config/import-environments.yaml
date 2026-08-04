@@ -13,7 +13,6 @@ environments:
       project: datcom-import-automation-prod
       location: us-central1
       import_workflow: import-automation-workflow
-      ingestion_workflow: spanner-ingestion-workflow
 
     batch:
       project: datcom-import-automation-prod
@@ -22,12 +21,6 @@ environments:
     gcs:
       client_project: datcom-204919
       output_bucket: datcom-prod-imports
-      mount_bucket: datcom-volume-mount
-
-    ingestion_helper:
-      project: datcom-import-automation-prod
-      region: us-central1
-      service: ingestion-helper-service
 
     spanner:
       project: datcom-store
@@ -43,7 +36,6 @@ environments:
       project: datcom-ci
       location: us-central1
       import_workflow: import-automation-workflow
-      ingestion_workflow: spanner-ingestion-workflow
 
     batch:
       project: datcom-ci
@@ -52,12 +44,6 @@ environments:
     gcs:
       client_project: datcom-ci
       output_bucket: datcom-ci-test
-      mount_bucket: datcom-ci-test
-
-    ingestion_helper:
-      project: datcom-ci
-      region: us-central1
-      service: ingestion-helper-service
 
     spanner:
       project: datcom-ci

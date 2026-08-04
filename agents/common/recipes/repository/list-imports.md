@@ -19,7 +19,7 @@ without querying live infrastructure.
 
 Multiple prefix, substring, or fuzzy candidates remain plausible after using
 the user's context. Execution time, operational status, and repeated failures
-require live fleet search.
+require live Workflow or status queries.
 
 ## Read-only operation
 
@@ -35,6 +35,11 @@ require live fleet search.
 
 Use the command above with `--limit=5` for import selection. Do not replace it
 with ad hoc manifest searches.
+
+After selecting an import, read its exact manifest specification. Read the
+[import manifest reference](../../references/import-automation/manifest.md)
+before interpreting manifest fields. Read manifest-referenced code only when
+the request requires it.
 
 ## Expected output
 
@@ -61,6 +66,5 @@ manifests, or an invalid result limit.
 
 ## Related repository sources
 
-After selecting an import, read its exact manifest specification and use the
-[import manifest reference](../../references/import-automation/manifest.md) to
-interpret fields.
+The [import manifest reference](../../references/import-automation/manifest.md)
+defines the selected-specification and field-interpretation contract.
