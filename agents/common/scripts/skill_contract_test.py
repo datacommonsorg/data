@@ -575,6 +575,19 @@ class SkillContractTest(unittest.TestCase):
             with self.subTest(command=command):
                 self.assertNotIn(command, recipes)
 
+    def test_scheduler_recipe_reports_missing_body_without_hiding_bad_body(
+            self):
+        recipe = self._read(
+            'agents/common/recipes/gcp/scheduler/describe-job.md')
+        normalized = re.sub(r'\s+', ' ', recipe)
+
+        self.assertIn('if .httpTarget.body then', normalized)
+        self.assertIn('else null end', normalized)
+        self.assertIn('target_import_name: null', normalized)
+        self.assertIn('Invalid Base64 or JSON remains a decoding failure',
+                      normalized)
+        self.assertNotIn('try ', recipe)
+
     def test_gcs_recipes_keep_distinct_version_operations(self):
         summary_list = self._read(
             'agents/common/recipes/gcp/gcs/list-import-summaries.md')

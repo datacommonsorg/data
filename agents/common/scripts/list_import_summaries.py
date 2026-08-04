@@ -58,7 +58,8 @@ class ImportSummaryListError(ValueError):
 
 def normalize_import_name(absolute_import_name: str) -> dict[str, str]:
     """Validates an absolute import name and derives its exact GCS prefix."""
-    match = _IMPORT_NAME_PATTERN.fullmatch(absolute_import_name)
+    canonical_import_name = absolute_import_name.strip()
+    match = _IMPORT_NAME_PATTERN.fullmatch(canonical_import_name)
     if not match:
         raise ImportSummaryListError(
             'absolute_import_name must be <manifest-directory>:<import-name>.')
@@ -70,7 +71,7 @@ def normalize_import_name(absolute_import_name: str) -> dict[str, str]:
     simple_name = match.group('name')
     prefix = posixpath.join(directory, simple_name)
     return {
-        'absolute_import_name': absolute_import_name,
+        'absolute_import_name': canonical_import_name,
         'simple_import_name': simple_name,
         'gcs_prefix': f'{prefix}/',
     }
@@ -157,7 +158,7 @@ def list_import_summaries(absolute_import_name: str,
             f'Unable to list import summaries: {type(exc).__name__}.') from exc
 
     output: dict[str, Any] = {
-        'absolute_import_name': absolute_import_name,
+        'absolute_import_name': identity['absolute_import_name'],
         'limit': limit,
         'scan_limit': _SCAN_LIMIT,
         'scanned_summary_count': len(blobs),

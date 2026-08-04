@@ -72,7 +72,7 @@ class ListImportSummariesTest(unittest.TestCase):
     def test_derives_exact_prefix_and_bounded_glob(self):
         client = _StorageClient([])
 
-        result = list_import_summaries('scripts/a:Import',
+        result = list_import_summaries('  scripts/a:Import  ',
                                        'project',
                                        'bucket',
                                        client=client)
@@ -215,7 +215,8 @@ class ListImportSummariesTest(unittest.TestCase):
         self.assertEqual([], result['issues'])
 
     def test_rejects_invalid_identity_and_limit(self):
-        for absolute_import_name in ('Import', 'scripts//a:Import'):
+        for absolute_import_name in ('Import', 'scripts//a:Import',
+                                     'scripts/a:Import Name'):
             with self.subTest(absolute_import_name=absolute_import_name):
                 with self.assertRaises(ImportSummaryListError):
                     normalize_import_name(absolute_import_name)

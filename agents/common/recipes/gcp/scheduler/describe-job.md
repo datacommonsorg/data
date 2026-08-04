@@ -27,7 +27,10 @@ jq '{name, description, state, schedule, timeZone, attemptDeadline,
      retryConfig, lastAttemptTime, status,
      target_uri: .httpTarget.uri,
      target_import_name:
-       (.httpTarget.body | @base64d | fromjson | .argument.importName)}'
+       (if .httpTarget.body
+        then (.httpTarget.body | @base64d | fromjson | .argument.importName)
+        else null
+        end)}'
 ```
 
 ## Preferred invocation
@@ -41,7 +44,8 @@ configuration.
 ## Expected output
 
 Allowlisted schedule/delivery fields, exact Workflow target URI, and decoded
-import identity.
+import identity. A missing HTTP body produces `target_import_name: null`; treat
+that as target drift, not successful verification.
 
 ## Required bounds
 
@@ -54,8 +58,9 @@ schedule, and observation time.
 
 ## Common failures
 
-Missing or paused job, permission denied, body decoding failure, name-only
-match, non-Workflow target, or target/configuration drift.
+Missing or paused job, permission denied, missing body, body decoding failure,
+name-only match, non-Workflow target, or target/configuration drift. Invalid
+Base64 or JSON remains a decoding failure rather than being converted to null.
 
 ## Related repository sources
 
