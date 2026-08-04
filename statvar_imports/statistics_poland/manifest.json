@@ -34,6 +34,7 @@
         "invoke_import_validation": true,
         "invoke_import_tool": true,
         "invoke_differ_tool": true,
+        "use_autopush_dc_api": false,
         "skip_input_upload": false,
         "skip_gcs_upload": false,
         "cleanup_gcs_volume_mount": false
