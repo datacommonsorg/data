@@ -70,7 +70,8 @@ class SkillContractTest(unittest.TestCase):
         self._repo_root = Path(__file__).parents[3]
         self._agents_root = self._repo_root / 'agents'
         self._skill_path = self._agents_root / 'skills/dc-import-info/SKILL.md'
-        self._prompt_path = self._agents_root / 'prompts/dc-import-info.md'
+        self._prompt_path = (self._agents_root /
+                             'prompts/dc-import-info-starter.md')
 
     def _read(self, relative_path: str) -> str:
         return (self._repo_root / relative_path).read_text(encoding='utf-8')
