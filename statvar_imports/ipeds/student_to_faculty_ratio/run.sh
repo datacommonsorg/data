@@ -32,6 +32,7 @@ MAX_CONCURRENT_JOBS=4
 # =================================================================
 
 mkdir -p "$OUTPUT_DIR"
+mkdir -p counters
 
 if [ ! -d "$INPUT_DIR" ]; then
     echo "Error: Input directory '$INPUT_DIR' not found."
@@ -69,6 +70,7 @@ for input_file in "$INPUT_DIR"/*; do
             --config_file="$CONFIG_FILE" \
             --existing_statvar_mcf="$EXISTING_MCF" \
             --output_path="$output_base_path" \
+            --output_counters="counters/student_faculty_ratio.csv" \
             --log_level=-2 \
             --log_every_n=1000 &
         
