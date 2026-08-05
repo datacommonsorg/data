@@ -44,7 +44,6 @@ The data has been officially removed from the source system. In this case, the s
   * In instances of large data removal, ensure that all deleted records are preserved as historical data.
 
 1. In case of deletions, we check for generated o/p CSV \-\> in o/p folder of an import/timestamp folder  
-2. 
 
    For example, Historical has been stored in  [EurostatData\_Employment\_Per\_Sector](https://docs.google.com/document/d/1CPyqi9DBjv0t4eWanNYMRfJTIGjhubN6Op2Sao5S-9Y/edit?resourcekey=0-lNpBO1oS4JQOJaGE2uj2Rg&tab=t.0#heading=h.by7ahuiow2gz)   & latest\_version.txt has been updated in [EIA\_NuclearOutages](https://docs.google.com/document/d/1GfF_sdUCg4d3fmkJoRCarQpFoGtLIPfezoKwoEXXL84/edit?tab=t.0#heading=h.10kuxd1t3o0u) 
 

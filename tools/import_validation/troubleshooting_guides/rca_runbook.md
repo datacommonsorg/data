@@ -67,12 +67,12 @@ Step 5:  Next, traverse the logs of the pipelines and search for the respective 
 
 Step 6: Based on RCA, plan the error resolution. Discuss issues with the CORE TEAM on a need basis. Also, prepare a document capturing the issues and the next actions. [Template](https://docs.google.com/document/d/1PyBmcN-1C_p9y-ML93eaBFyspg1XD5zwkT7EqeTsQsI/edit?resourcekey=0-B5pj3_KBQDpdfNs6AGllXQ&tab=t.0#heading=h.ne6ee5rvmv4h)
 
-Step 7: Change the code (if required) and raise [CL/PR](http://cl/PR) as appropriate. 
+Step 7: Change the code (if required) and raise [CL/PR] as appropriate. 
 
 Step 8: Once the code is merged with production, force execute the production pipelines using the command below:
 
 ```
-~/Desktop/DataCommons/data/import-automation/executor/run_import.sh -p <project name> -d dc-test-executor-$USER -cloud -a <docker artifact> <path to manifest file> -batch
+<path_to_repo>/import-automation/executor/run_import.sh -p <project name> -d dc-test-executor-$USER -cloud -a <docker artifact> <path to manifest file> -batch
 ```
 
  

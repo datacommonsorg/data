@@ -63,12 +63,6 @@ This runbook outlines resolutions for production failures, serving as a continuo
 
 **Note:** If a folder for historical data already exists for this import, place the new file inside it. If not, create a new folder.
 
- 
-
-## 
-
-## 
-
 ## **LINT ERROR**
 
 | When dcid/mapping is missing in Data Commons |
@@ -109,10 +103,4 @@ Existence\_FailedDcCall\_observationAbout
 1. Restart the job in the cloud environment; if it succeeds, the previous failure likely resulted from a transient environmental problem.  
 2. If the issue persists after re-triggering the job, execute the process in a local environment to identify and resolve code defects.
 
-## **FALSE NEGATIVE**
-
-| When the code fails due to any  random temporary issue |
-| :---- |
-
-1. 
 

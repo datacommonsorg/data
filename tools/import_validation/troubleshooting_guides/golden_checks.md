@@ -2,7 +2,7 @@
 
 ## **1\. Overview**
 
-Due to recurring data deletion failures, we protect our imports using **Golden Set Validations (`GOLDENS_CHECK`)**. This guide helps understand how to generate "golden files" (baselines of expected data) and configure the automated validation system to prevent accidental data regressions.
+Due to recurring data deletion failures, we protect our imports using **Golden Set Validations (`GOLDENS_CHECK`)**. This guide helps understand how to generate "golden files" (baselines of expected data) and configure the automated validation system to prevent accidental data regressions for each of the script output csv files listed in the manifest.
 
 Currently, to mitigate issues related to data loss, we implement two primary validations supported by specific golden baselines:
 
@@ -35,13 +35,23 @@ Golden files are created by extracting a snapshot of known-good data using the s
 
 This step tracks metadata properties like Statistical Variables (StatVars), the number of places, and date ranges to ensure future runs don't accidentally drop the entire series.
 
+Specifically over here, we need to take into consideration the columns that don't change over time in every execution. For eg. 
+
+1. observationPeriods
+2. units
+3. scalingFactors
+4. measurementMethods
+5. NumPlaces
+6. MinDate
+
 From the data/tools/import\_validation/validator\_goldens.py directory, execute the following command:
 
 ```
 python3 validator_goldens.py --validate_goldens_input=summary_report.csv  --generate_goldens=golden_data/golden_summary_report.csv  --generate_goldens_property_sets="StatVar|NumPlaces|MinDate|MeasurementMethods|Units|ScalingFactors|observationPeriods"
 ```
+Note: A separate rule can also be created in case the values expected for particular stavars are range bounded. For eg. a stavar having the unit "Percent" will mostly be between 0-100.
 
-### **Step 3.2: Generate the Output Data Golden File (only use if needed)** 
+### **Step 3.2: Create separate golden outputs for prominent places in observationAbout and statvars (only use if needed)** 
 
 This step targets critical combinations of highly utilized StatVars and top geographical regions to ensure key data points are always preserved.
 
@@ -58,7 +68,7 @@ Create a file named `validation_config.json` in your import script directory. Pa
 This configuration does two things:
 
 * Overrides the default deletion tolerance rule (`check_deleted_records_percent`) to a  threshold as per history deletions & current deletions should not be more than  **0.1%**.  
-* Activates the two required golden check rules pointing to the files you created in Section 3\.
+* Activates the golden check rules pointing to the files you created in Section 3.
 
 JSON
 
