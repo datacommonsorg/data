@@ -44,7 +44,7 @@ This runbook outlines resolutions for production failures, serving as a continuo
 
 **Resolution Steps**
 
-1. Review the latest run of the job in the `datcom-prod-imports` bucket under the `datcom` project using the import name.  
+1. Review the latest run of the job in the `[<PROD_BUCKET>](gcp_variables.md#prod_bucket)` bucket under the `[<BASE_PROJECT>](gcp_variables.md#base_project)` project using the import name.  
 2. If the job folder timestamp is older than one week, re-trigger the job to generate the latest output.  
 3. Examine `input0/validation/nodes_deleted.mcf` to review deletion details.  
 4. Validate whether the deletions originated from the source or were caused by a pipeline/code issue.  
@@ -68,7 +68,7 @@ This runbook outlines resolutions for production failures, serving as a continuo
 | When dcid/mapping is missing in Data Commons |
 | :---- |
 
-1. Review the latest run of the job in the `datcom-prod-imports` bucket under the `datcom` project using the import name.  
+1. Review the latest run of the job in the `[<PROD_BUCKET>](gcp_variables.md#prod_bucket)` bucket under the `[<BASE_PROJECT>](gcp_variables.md#base_project)` project using the import name.  
 2. If the job folder timestamp is older than one week, re-trigger the job to generate the latest output.  
 3. Check for **Existence\_MissingReference\_observationAbout** in the report.json inside the input0/genmcf/report.json  
 4. Look for the observationAbouts’s that are throwing the error  
@@ -88,7 +88,7 @@ Existence\_FailedDcCall\_observationAbout
 | When SV or schema is missing in Data Commons |
 | :---- |
 
-1. Review the latest run of the job in the `datcom-prod-imports` bucket under the `datcom` project using the import name.  
+1. Review the latest run of the job in the `[<PROD_BUCKET>](gcp_variables.md#prod_bucket)` bucket under the `[<BASE_PROJECT>](gcp_variables.md#base_project)` project using the import name.  
 2. If the job folder timestamp is older than one week, re-trigger the job to generate the latest output.  
 3. Check for **Existence\_MissingReference\_variableMeasured** in the report.json inside the input0/genmcf/report.json  
 4. Look for the Variable measured (value-ref) that are throwing the warnings  

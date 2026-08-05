@@ -8,20 +8,20 @@ First, we need to find out why the job failed by looking at the cloud logs and t
 
 1. **Check the Cloud Batch Job:**  
    Go to the Cloud Batch Jobs console and find the latest run for the import.  
-   * Here is the job I looked at for this import: Cloud Batch Job: `worlddevelopmentindicators-1781002802` (Project: `datcom-import-automation-prod`, Region: `us-central1`)  
+   * Here is the job I looked at for this import: Cloud Batch Job: `worlddevelopmentindicators-1781002802` (Project: `[<AUTO_REFRESH_PROJECT>](gcp_variables.md#auto_refresh_project)`, Region: `us-central1`)  
 2. **Look for Errors in the Logs:**  
    Even if the job status says "Succeeded," it might still have errors. Look through the logs (you can use the errors filter to jump straight to them). In my case, the job failed some validation checks because of deletions.  
    * **Error Message:** Found 0.87% deleted records, which is over the threshold of 0%.  
 3. **Check the Production Bucket:**  
    Next, head over to the production cloud bucket to find the specific files for this job run. Navigate down the correct path for the import:  
-   Project: `datcom-204919`, Bucket: `datcom-prod-imports`, Path: `scripts/world_bank/wdi/WorldDevelopmentIndicators`
+   Project: `[<PROD_PROJECT>](gcp_variables.md#prod_project)`, Bucket: `[<PROD_BUCKET>](gcp_variables.md#prod_bucket)`, Path: `scripts/world_bank/wdi/WorldDevelopmentIndicators`
    * Go to the folder with the latest timestamp as the job you just looked at: 2026\_06\_09T04\_07\_31\_200635\_07\_00  
 4. **Review the Validation Files:**  
    Go into the input0/validation/ folder. Here, you want to look at two specific files:  
    * **validation\_output.csv:** This tells you the exact reason the checks failed. In my case, 3 checks passed, but the check\_deleted\_records\_percent failed because 3,908 records were deleted. (See table below)  
-      * Location: Project: `datcom-204919`, Bucket: `datcom-prod-imports`, Path: `scripts/world_bank/wdi/WorldDevelopmentIndicators/2026_06_09T04_07_31_200635_07_00/input0/validation/validation_output.csv`
+      * Location: Project: `[<PROD_PROJECT>](gcp_variables.md#prod_project)`, Bucket: `[<PROD_BUCKET>](gcp_variables.md#prod_bucket)`, Path: `scripts/world_bank/wdi/WorldDevelopmentIndicators/2026_06_09T04_07_31_200635_07_00/input0/validation/validation_output.csv`
    * **Nodes\_deleted.mcf:** This file shows you the actual list of records that were deleted.  
-      * Location: Project: `datcom-204919`, Bucket: `datcom-prod-imports`, Path: `scripts/world_bank/wdi/WorldDevelopmentIndicators/2026_06_09T04_07_31_200635_07_00/input0/validation/obs_diff_log.csv`
+      * Location: Project: `[<PROD_PROJECT>](gcp_variables.md#prod_project)`, Bucket: `[<PROD_BUCKET>](gcp_variables.md#prod_bucket)`, Path: `scripts/world_bank/wdi/WorldDevelopmentIndicators/2026_06_09T04_07_31_200635_07_00/input0/validation/obs_diff_log.csv`
 
 ## **Run the Import Locally**
 
@@ -70,7 +70,7 @@ If you prefer to run the individual steps of the pipeline manually:
    * java \-jar java-jar.jar genmcf output.csv output.tmcf  
 4. **Get the Previous Data:**  
    To run the differ tool, we need to compare the table.mcf file we just created (the current data) with the table.mcf file from the previous successful run.  
-   * Find the timestamp of the last successful run by checking the `latest_version.txt` file in the cloud bucket. GCS Location: Project: `datcom-204919`, Bucket: `datcom-prod-imports`, Path: `scripts/world_bank/wdi/WorldDevelopmentIndicators/latest_version.txt`
+   * Find the timestamp of the last successful run by checking the `latest_version.txt` file in the cloud bucket. GCS Location: Project: `[<PROD_PROJECT>](gcp_variables.md#prod_project)`, Bucket: `[<PROD_BUCKET>](gcp_variables.md#prod_bucket)`, Path: `scripts/world_bank/wdi/WorldDevelopmentIndicators/latest_version.txt`
    * Go to that timestamp's folder in the bucket and download its table.mcf file.  
 5. **Run the Differ Tool:**  
    Now, run this command to compare the two files:  
@@ -83,7 +83,7 @@ If you prefer to run the individual steps of the pipeline manually:
 Now that we know the deletions are real, we need to validate them against the original data source to confirm the source actually removed the data.
 
 1. **Locate the Textproto File:** To find out exactly where the data came from, check the `textproto` file for this import. For WorldDevelopmentIndicators, the file path is: `google3/datacommons/import/mcf/manifest/international_stats/WorldDevelopmentIndicators.textproto`  
-   * You can search for this file using Google Code Search: [WorldDevelopmentIndicators.textproto Link](https://source.corp.google.com/piper///depot/google3/datacommons/import/mcf/manifest/international_stats/WorldDevelopmentIndicators.textproto;l=2?q=worlddevelopmentindicators&sq=package:piper%20file:%2F%2Fdepot%2Fgoogle3%20-file:google3%2Fexperimental)  
+   * You can search for this file using Google Code Search: [WorldDevelopmentIndicators.textproto Link](screens/wdi_textproto_source.png  
 2. **Find the Source URL:** Open the `textproto` file and look for the line that says: `provenance_url: "https://datatopics.worldbank.org/world-development-indicators/"` This URL tells us exactly where the data is downloaded from.  
 3. **Navigate the Source Website:** Open that source URL. On the World Bank website, click on the **Explore Data** option, and then click on **Access Data**. This will allow you to see their entire dataset.  
 4. **Manually Verify Deleted Records:** check at your `nodes_deleted.mcf` file and pick out 5 to 6 specific deleted records. Go back to the World Bank website and manually filter the data by entering the parameters for those specific records.  
@@ -92,22 +92,22 @@ Now that we know the deletions are real, we need to validate them against the or
    *Example :* The job failed because some specific data points present in the previous production version are missing in the current version.
 
 * **Source Deletion:** The record  has been removed from the source.  
-1) [Source Screenshot](https://screenshot.googleplex.com/3oK73RXvox3xeTM) | [Differ Screenshot](https://screenshot.googleplex.com/BWYDfWvTNZoixSE)   
-2) [Source Screenshot](https://screenshot.googleplex.com/8znJ3XadmGGRmdL) | [Differ Screenshot](https://screenshot.googleplex.com/4JKbhAxnJz6SGbJ)  
-3) [Source Screenshot](https://screenshot.googleplex.com/5Nw3dA9a3iH7GAM) | [Differ Screenshot](https://screenshot.googleplex.com/7ovdMycUe7tiADw)   
+1) [Source Screenshot](screens/3oK73RXvox3xeTM.png) | [Differ Screenshot](screens/BWYDfWvTNZoixSE.png)   
+2) [Source Screenshot](screens/8znJ3XadmGGRmdL.png) | [Differ Screenshot](screens/4JKbhAxnJz6SGbJ.png)  
+3) [Source Screenshot](screens/5Nw3dA9a3iH7GAM.png) | [Differ Screenshot](screens/7ovdMycUe7tiADw.png)   
 * These deletions are confirmed as intentional source-side changes from the World Bank’s April 2026 update.
 
-  WDI April 8, 2026 Changelog [Screenshot](https://screenshot.googleplex.com/497zku465XJzsJt) | [Link](https://datatopics.worldbank.org/world-development-indicators/release-note/apr-2026.html)
+  WDI April 8, 2026 Changelog [Screenshot](screens/497zku465XJzsJt.png) | [Link](https://datatopics.worldbank.org/world-development-indicators/release-note/apr-2026.html)
 
 5. In my case, the amount of data getting deleted from the source was very huge. When this happens, we cannot just ignore it. We need to:  
-   * **Create a validation error document:** Document the massive deletion properly so there is a clear record of why the job threshold failed and what was removed. [BLS\_CES\_State\_20\_04\_2026](https://docs.google.com/document/d/1QK9pMoSFR7STb78aFgN_NOupcJzU_IdWp4tyIvzrwis/edit?resourcekey=0-VWdGo38x-FfuyBd8xGu68w&tab=t.0#heading=h.shg2oxa69t3d)  
+   * **Create a validation error document:** Document the massive deletion properly so there is a clear record of why the job threshold failed and what was removed. [BLS\_CES\_State\_20\_04\_2026](docs_summary/bls_ces_state_deletion_resolution.md  
    * **Store the data historically:** Keep a record of the deleted data. (need approval from core team)  
-6. Check for the affected SVs deleted that we find out by taking unique deleted SVs  from the differ & check in BigQuery (Table: `datcom-store.dc_kg_latest.NLStatVars`) if these Svs are present in the NL SVs table.  
+6. Check for the affected SVs deleted that we find out by taking unique deleted SVs  from the differ & check in BigQuery (Table: `[<BQ_PROJECT>](gcp_variables.md#bq_project).dc_kg_latest.NLStatVars`) if these Svs are present in the NL SVs table.  
 7. Because the deletions are minor & from the source the next would be store Historical data & because it had recurring failure  golden checks \+ threshold increase as per history deletions will also be implemented ( All these steps must be mentioned in the validation error document because we need core team approval to store historical & update the latest\_version.txt)
 
    ## **How to implement golden checks?**
 
-   Consult the following resource for instructions on incorporating goldens into your import process: [Implementation Guide: Golden Set Validations](https://docs.google.com/document/d/14Fpe5e9jSzzJ5_QTcqQ1AFb2oqjJzXuc1_BmQCX-uns/edit?tab=t.0#heading=h.4n225wbxsh8v)
+   Consult the following resource for instructions on incorporating goldens into your import process: [Implementation Guide: Golden Set Validations](docs_summary/golden_set_validations_implementation_guide.md
 
    ## **How to store historical data ?**
 
@@ -120,17 +120,17 @@ Now that we know the deletions are real, we need to validate them against the or
       5. Once the deleted rows are identified & no deletions with this historical file through the comparison, save them to a file and upload it to CNS as a historical record, path shown below.
 
 ```
-mcf_proto_url: "/cns/jv-d/home/datcom/v3_resolved_mcf/us_bls/ces/state/latest/historical_data/graph.tfrecord@1.gz"
+mcf_proto_url: "/cns/jv-d/home/[<BASE_PROJECT>](gcp_variables.md#base_project)/v3_resolved_mcf/us_bls/ces/state/latest/historical_data/graph.tfrecord@1.gz"
  table {
-   mapping_path: "/cns/jv-d/home/datcom/v3_mcf/wdi/WorldDevelopmentIndicators/historical_data/worldbank.tmcf"
-   csv_path: "/cns/jv-d/home/datcom/v3_mcf/wdi/WorldDevelopmentIndicators/historical_data/*.csv"
+   mapping_path: "/cns/jv-d/home/[<BASE_PROJECT>](gcp_variables.md#base_project)/v3_mcf/wdi/WorldDevelopmentIndicators/historical_data/worldbank.tmcf"
+   csv_path: "/cns/jv-d/home/[<BASE_PROJECT>](gcp_variables.md#base_project)/v3_mcf/wdi/WorldDevelopmentIndicators/historical_data/*.csv"
  }
 ```
 
    b. To stop these “Deleted” flags from appearing as errors, **the latest\_version.txt file must be updated only after the core team approves.**  This ensures the differ recognizes the change as deliberate to the dataset rather than a data loss error. 
 
 ```
-experimental/users/ajaits/datcom/scripts/import_info.sh -i WorldDevelopmentIndicator-set_latest 2026_04_20_02_42_50_536488_08_00 -note 'details of deletion analysis in b/500945912 reviewed by: <ldap of the approver>'
+experimental/users/ajaits/[<BASE_PROJECT>](gcp_variables.md#base_project)/scripts/import_info.sh -i WorldDevelopmentIndicator-set_latest 2026_04_20_02_42_50_536488_08_00 -note 'details of deletion analysis in b/500945912 reviewed by: <ldap of the approver>'
 ```
 
    C. Rerun the pipeline to verify it finishes without issues and check that all tests in *validation\_output.csv* have passed.

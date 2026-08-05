@@ -8,20 +8,20 @@ First, we need to find out why the job failed by looking at the cloud logs and t
 
 1. **Check the Cloud Batch Job:**  
    Go to the Cloud Batch Jobs console and find the latest run for the import.  
-   * Here is the job I looked at for this import: Cloud Batch Job: `eurostatdata-fertility-1781582401` (Project: `datcom-import-automation-prod`, Region: `us-central1`)  
+   * Here is the job I looked at for this import: Cloud Batch Job: `eurostatdata-fertility-1781582401` (Project: `[<AUTO_REFRESH_PROJECT>](gcp_variables.md#auto_refresh_project)`, Region: `us-central1`)  
 2. **Look for Errors in the Logs:**  
    Even if the job status says "Succeeded," it might still have errors. Look through the logs (you can use the errors filter to jump straight to them). In my case, the job failed some validation checks because of deletions.  
    * **Error Message:** Found 0.06% deleted records, which is over the threshold of 0%.  
 3. **Check the Production Bucket:**  
    Next, head over to the Datacom production cloud bucket to find the specific files for this job run. Navigate down the correct path for the import:  
-   Project: `datcom-204919`, Bucket: `datcom-prod-imports`, Path: `scripts/eurostat/regional_statistics_by_nuts/fertility_rate_mother_age/EurostatData_Fertility/`
+   Project: `[<PROD_PROJECT>](gcp_variables.md#prod_project)`, Bucket: `[<PROD_BUCKET>](gcp_variables.md#prod_bucket)`, Path: `scripts/eurostat/regional_statistics_by_nuts/fertility_rate_mother_age/EurostatData_Fertility/`
    * Go to the folder with the latest timestamp as the job you just looked at: 2026\_06\_15T04\_07\_31\_200635\_07\_00  
 4. **Review the Validation Files:**  
    Go into the input0/validation/ folder. Here, you want to look at two specific files:  
    * **validation\_output.csv:** This tells you the exact reason the checks failed. In my case, 3 checks passed, but the check\_deleted\_records\_percent failed because 36 records were deleted. (See table below)  
-      * Location: Project: `datcom-204919`, Bucket: `datcom-prod-imports`, Path: `scripts/eurostat/regional_statistics_by_nuts/fertility_rate_mother_age/EurostatData_Fertility/2026_06_15T21_03_10_391174_07_00/input0/validation/validation_output.csv`
+      * Location: Project: `[<PROD_PROJECT>](gcp_variables.md#prod_project)`, Bucket: `[<PROD_BUCKET>](gcp_variables.md#prod_bucket)`, Path: `scripts/eurostat/regional_statistics_by_nuts/fertility_rate_mother_age/EurostatData_Fertility/2026_06_15T21_03_10_391174_07_00/input0/validation/validation_output.csv`
    * **obs\_diff\_log.csv:** This file shows you the actual list of records that were deleted.  
-      * Location: Project: `datcom-204919`, Bucket: `datcom-prod-imports`, Path: `scripts/eurostat/regional_statistics_by_nuts/fertility_rate_mother_age/EurostatData_Fertility/2026_06_15T21_03_10_391174_07_00/input0/validation/obs_diff_log.csv`
+      * Location: Project: `[<PROD_PROJECT>](gcp_variables.md#prod_project)`, Bucket: `[<PROD_BUCKET>](gcp_variables.md#prod_bucket)`, Path: `scripts/eurostat/regional_statistics_by_nuts/fertility_rate_mother_age/EurostatData_Fertility/2026_06_15T21_03_10_391174_07_00/input0/validation/obs_diff_log.csv`
 
 ## **Run the Import Locally**
 
@@ -42,7 +42,7 @@ Now, we need to run the whole import process on our own computer. This helps us 
    * java \-jar java-jar.jar genmcf output.csv output.tmcf  
 4. **Get the Previous Data:**  
    To run the differ tool, we need to compare the table.mcf file we just created (the current data) with the table.mcf file from the previous successful run.  
-   * Find the timestamp of the last successful run by checking the `latest_version.txt` file in the cloud bucket. GCS Location: Project: `datcom-204919`, Bucket: `datcom-prod-imports`, Path: `scripts/eurostat/regional_statistics_by_nuts/fertility_rate_mother_age/EurostatData_Fertility/latest_version.txt`
+   * Find the timestamp of the last successful run by checking the `latest_version.txt` file in the cloud bucket. GCS Location: Project: `[<PROD_PROJECT>](gcp_variables.md#prod_project)`, Bucket: `[<PROD_BUCKET>](gcp_variables.md#prod_bucket)`, Path: `scripts/eurostat/regional_statistics_by_nuts/fertility_rate_mother_age/EurostatData_Fertility/latest_version.txt`
    * Go to that timestamp's folder in the bucket and download its table.mcf file.  
 5. **Run the Differ Tool:**  
    Now, run this command to compare the two files:  
@@ -55,7 +55,7 @@ Now, we need to run the whole import process on our own computer. This helps us 
 Now that we know the deletions are real, we need to validate them against the original data source to confirm the source actually removed the data.
 
 1. **Locate the Textproto File:** To find out exactly where the data came from, check the `textproto` file for this import. For EurostatData_Fertility, the file path is: `datacommons/import/mcf/manifest/international_stats/EurostatData_Fertility.textproto`  
-   * You can search for this file using Google Code Search: [EurostatData\_Fertility.textproto Link](https://source.corp.google.com/piper///depot/google3/datacommons/import/mcf/manifest/international_stats/EurostatData_Fertility.textproto;l=2?q=eurostatdata&sq=package:piper%20file:%2F%2Fdepot%2Fgoogle3%20-file:google3%2Fexperimental)  
+   * You can search for this file using Google Code Search: [EurostatData\_Fertility.textproto Link](screens/eurostat_fertility_textproto_source.png  
 2. **Find the Source URL:** Open the `textproto` file and look for the line that says: `provenance_url: "https://ec.europa.eu/eurostat/databrowser/view/demo_r_find3/default/table?lang=en"` This URL tells us exactly where the data is downloaded from.  
 3. **Navigate the Source Website:** Open that source URL. On the Eurostat website, click on the **Explore Data** option, and then click on **Access Data**. This will allow you to see their entire dataset.  
 4. **Manually Verify Deleted Records:** check at your `obs_diff_logs.csv` file and pick out 5 to 6 specific deleted records. Go back to the EurostatData website and manually filter the data by entering the parameters for those specific records.  
@@ -65,7 +65,7 @@ Now that we know the deletions are real, we need to validate them against the or
 
 * **Source Deletion:** The record  has been removed from the source.
 
-  [Source Screenshot](https://screenshot.googleplex.com/3VNMybHoDVt6kFR) | [Differ Screenshot](https://screenshot.googleplex.com/B25DugjwV2js2TJ) 
+  [Source Screenshot](screens/3VNMybHoDVt6kFR.png) | [Differ Screenshot](screens/B25DugjwV2js2TJ.png) 
 
 
 * These deletions are confirmed as intentional source-side changes from the Eurostat Official Website.  
@@ -73,12 +73,12 @@ Now that we know the deletions are real, we need to validate them against the or
 5. In my case, the amount of data getting deleted from the source was very less. When this happens, we  just ignore it. We need to:  
    * **Create a validation error document:** Document the deletion properly so there is a clear record of why the job threshold failed and what was removed.   
    * Add goldens checks & increase minor threshold   
-6. Check for the affected SVs deleted that we find out by taking unique deleted SVs  from the differ & check in [bigquery](https://screenshot.googleplex.com/4pprS7vyu4Cba6C) if these SVs are present in the NL SVs table.  
+6. Check for the affected SVs deleted that we find out by taking unique deleted SVs  from the differ & check in [bigquery](screens/4pprS7vyu4Cba6C.png) if these SVs are present in the NL SVs table.  
    
 
    ## **How to implement golden checks?**
 
-   Consult the following resource for instructions on incorporating goldens into your import process: [Implementation Guide: Golden Set Validations](https://docs.google.com/document/d/14Fpe5e9jSzzJ5_QTcqQ1AFb2oqjJzXuc1_BmQCX-uns/edit?tab=t.0#heading=h.4n225wbxsh8v)  
+   Consult the following resource for instructions on incorporating goldens into your import process: [Implementation Guide: Golden Set Validations](docs_summary/golden_set_validations_implementation_guide.md  
  
 
 

@@ -3,7 +3,7 @@
 ## 1\. Overview
 
 This document outlines several recurring production job failures, some of these failures are caused by minor or temporary data deletions. By increasing the threshold, we can prevent these jobs from failing due to non-permanent issues. However, before adjusting these thresholds, we will implement new validation rules to ensure that crucial data is never lost, even during minor deletions.  
-More details can be found here [DC - Imports Execution Learnings ](https://docs.google.com/spreadsheets/d/1lAm-EPB6o9U9btQHbdRruGhx_DFerlhQF43Ba6skI4Q/edit?gid=1651779522#gid=1651779522)
+More details can be found here [DC - Imports Execution Learnings ](docs_summary/dc_imports_execution_learnings.md
 
 ## 2\. Most Recurring Job Failures
 
@@ -11,17 +11,17 @@ In the previous quarter, the following production jobs experienced the highest f
 
 | Import name | Occurrences | Bug IDs |
 | :---- | :---- | :---- |
-| BLS\_CES\_State | 4 | [b/482946661](http://b/482946661), [b/500945912](http://b/500945912), [b/502090898](http://b/502090898) |
-| USCensusPEP\_Sex | 5 | [b/472605922](http://b/472605922), [b/478186511](http://b/478186511), [b/483219293](http://b/483219293) |
-| WorldDevelopmentIndicators | 3 | [b/470415967](http://b/470415967), [b/482902862,](http://b/482902862) [b/489948342](http://b/489948342) |
-| EurostatData\_Education\_Enrollment | 3 | [b/474326901](http://b/474326901), [b/481243356,](http://b/481243356) [b/496059688](http://b/496059688) |
-| USCensusPEP\_By\_Sex\_Race | 5 | [b/485260648](http://b/485260648), [b/502079403](http://b/502079403) |
-| USCensusPEP\_PopulationEstimatebyRace | 5 | [b/486801970](http://b/486801970), [b/493190090](http://b/493190090), [b/497802532](http://b/497802532) |
-| EurostatData\_Education\_Attainment | 3 | [b/472606851](http://b/472606851), [b/481245546](http://b/481245546), [b/504879314](http://b/504879314) |
-| WorldBankDatasets | 3 | [b/472258775](http://b/472258775), [b/506961224](http://b/506961224) |
-| EurostatData\_Fertility | 3 | [b/498154643](http://b/498154643) |
-| USCensusPEP\_AgeSexRace | 3 | [b/500622108](http://b/500622108) |
-| USCensusPEP\_Annual\_Population | 3 | [b/479399481](http://b/479399481), [b/4935600377](http://b/4935600377) |
+| BLS\_CES\_State | 4 | [b/482946661](bugs_summary/482946661.md), [b/500945912](bugs_summary/500945912.md), [b/502090898](bugs_summary/502090898.md) |
+| USCensusPEP\_Sex | 5 | [b/472605922](bugs_summary/472605922.md), [b/478186511](bugs_summary/478186511.md), [b/483219293](bugs_summary/483219293.md) |
+| WorldDevelopmentIndicators | 3 | [b/470415967](bugs_summary/470415967.md), [b/482902862,](bugs_summary/482902862.md) [b/489948342](bugs_summary/489948342.md) |
+| EurostatData\_Education\_Enrollment | 3 | [b/474326901](bugs_summary/474326901.md), [b/481243356,](bugs_summary/481243356.md) [b/496059688](bugs_summary/496059688.md) |
+| USCensusPEP\_By\_Sex\_Race | 5 | [b/485260648](bugs_summary/485260648.md), [b/502079403](bugs_summary/502079403.md) |
+| USCensusPEP\_PopulationEstimatebyRace | 5 | [b/486801970](bugs_summary/486801970.md), [b/493190090](bugs_summary/493190090.md), [b/497802532](bugs_summary/497802532.md) |
+| EurostatData\_Education\_Attainment | 3 | [b/472606851](bugs_summary/472606851.md), [b/481245546](bugs_summary/481245546.md), [b/504879314](bugs_summary/504879314.md) |
+| WorldBankDatasets | 3 | [b/472258775](bugs_summary/472258775.md), [b/506961224](bugs_summary/506961224.md) |
+| EurostatData\_Fertility | 3 | [b/498154643](bugs_summary/498154643.md) |
+| USCensusPEP\_AgeSexRace | 3 | [b/500622108](bugs_summary/500622108.md) |
+| USCensusPEP\_Annual\_Population | 3 | [b/479399481](bugs_summary/479399481.md), [b/4935600377](bugs_summary/4935600377.md) |
 
 ### 2.1 Minor Deletions imports
 
