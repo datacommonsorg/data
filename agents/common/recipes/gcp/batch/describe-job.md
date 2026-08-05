@@ -1,7 +1,5 @@
 # Describe one Batch job
 
-Recipe ID: `gcp.batch.describe-job`
-
 ## Use when
 
 Job-level evidence is needed for an exact Batch job identified by current

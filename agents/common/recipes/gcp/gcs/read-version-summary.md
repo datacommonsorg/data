@@ -1,7 +1,5 @@
 # Read one import version summary
 
-Recipe ID: `gcp.gcs.read-version-summary`
-
 ## Use when
 
 Candidate classification, Batch job ID, or summary statistics are needed for

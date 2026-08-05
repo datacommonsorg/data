@@ -1,7 +1,5 @@
 # Query the current import-status snapshot
 
-Recipe ID: `gcp.spanner.query-import-status`
-
 ## Use when
 
 The current mutable snapshot is needed by import name or exact current version,

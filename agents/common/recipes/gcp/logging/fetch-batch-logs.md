@@ -1,7 +1,5 @@
 # Fetch bounded Batch logs
 
-Recipe ID: `gcp.logging.fetch-batch-logs`
-
 ## Use when
 
 Structured pipeline stage/status evidence is required for a known Batch job.

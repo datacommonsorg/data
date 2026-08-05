@@ -1,7 +1,5 @@
 # Describe and verify a Scheduler job
 
-Recipe ID: `gcp.scheduler.describe-job`
-
 ## Use when
 
 Checking whether an import is deployed for automatic refresh and identifying

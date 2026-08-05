@@ -1,7 +1,5 @@
 # Trace a Batch job to source-commit evidence
 
-Recipe ID: `gcp.batch.trace-batch-job-source-commit`
-
 ## Use when
 
 Trace one exact Batch job to runtime-image or source-commit evidence. Use the

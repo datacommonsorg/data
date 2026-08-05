@@ -1,7 +1,5 @@
 # List artifacts for one import version
 
-Recipe ID: `gcp.gcs.list-version-artifacts`
-
 ## Use when
 
 Artifact metadata for input, output, MCF, validation, or differ files is needed

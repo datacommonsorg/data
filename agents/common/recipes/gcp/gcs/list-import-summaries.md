@@ -1,7 +1,5 @@
 # List recent finalized import summaries
 
-Recipe ID: `gcp.gcs.list-import-summaries`
-
 ## Use when
 
 Up to five recent finalized versions and their Batch job IDs are needed for one

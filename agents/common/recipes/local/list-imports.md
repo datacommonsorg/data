@@ -1,7 +1,5 @@
 # List repository-configured Data Commons imports
 
-Recipe ID: `local.list-imports`
-
 ## Use when
 
 One or more imports must be identified by a possibly incomplete, differently

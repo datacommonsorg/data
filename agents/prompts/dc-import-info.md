@@ -14,4 +14,4 @@ Before presenting or executing a command:
    Never invent a resource, filename, field, or meaning from memory or a generic
    cloud convention.
 6. Keep ET-output status separate from loader and serving status.
-7. For each command, state the recipe ID or repository path that grounds it.
+7. For each command, state the exact repository recipe path that grounds it.

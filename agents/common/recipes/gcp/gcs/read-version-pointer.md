@@ -1,7 +1,5 @@
 # Read one import version pointer
 
-Recipe ID: `gcp.gcs.read-version-pointer`
-
 ## Use when
 
 The most recent finalized candidate or current accepted ET output must be

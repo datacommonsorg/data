@@ -1,7 +1,5 @@
 # List tasks for one Batch job
 
-Recipe ID: `gcp.batch.list-tasks`
-
 ## Use when
 
 Task-level state, exit status, or runtime start time is required for a selected
