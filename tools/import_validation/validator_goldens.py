@@ -498,18 +498,6 @@ def validate_goldens(inputs: str | dict,
     golden_files_list = file_util.file_get_matching(golden_files)
     golden_nodes = load_nodes_from_file(golden_files_list)
 
-    # Normalize list-like string values (e.g. [A, B]) so sequence doesn't matter.
-    for nodes in [input_nodes, golden_nodes]:
-        for node in nodes.values():
-            for k, v in node.items():
-                if isinstance(v, str) and v.startswith('[') and v.endswith(']'):
-                    content = v[1:-1].strip()
-                    if content:
-                        parts = sorted([p.strip() for p in content.split(',')])
-                        node[k] = '[' + ', '.join(parts) + ']'
-                    else:
-                        node[k] = '[]'
-
     # Run the core comparison logic.
     missing_goldens = validator_compare_nodes(input_nodes, golden_nodes, config,
                                               counters)

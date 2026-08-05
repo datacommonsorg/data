@@ -299,7 +299,16 @@ def fingerprint_node(pvs: dict,
     for p in sorted(normalized_pvs.keys()):
         if p not in ignore_props:
             if not compare_props or p in compare_props:
-                fp.append(f'{p}={normalized_pvs[p]}')
+                val = normalized_pvs[p]
+                # Normalize list-like string values (e.g. [A, B]) so sequence doesn't matter.
+                if isinstance(val, str) and val.startswith('[') and val.endswith(']'):
+                    content = val[1:-1].strip()
+                    if content:
+                        parts = sorted([p.strip() for p in content.split(',')])
+                        val = '[' + ', '.join(parts) + ']'
+                    else:
+                        val = '[]'
+                fp.append(f'{p}={val}')
     return ';'.join(fp)
 
 
