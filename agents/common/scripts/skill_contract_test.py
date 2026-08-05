@@ -26,7 +26,32 @@ import unittest
 import yaml
 
 _MARKDOWN_LINK = re.compile(r'\[[^]]+\]\(([^)]+)\)')
+_ROUTE_ROW = re.compile(
+    r'^\| (?P<need>[^|]+) \| \[[^]]+\]\((?P<target>[^)]+)\) \|$', re.MULTILINE)
 _TEXT_SUFFIXES = {'.json', '.md', '.py', '.sh', '.yaml', '.yml'}
+_EXPECTED_SKILL_ROUTES = (
+    ('Find or select imports', '../../common/recipes/local/list-imports.md'),
+    ('Verify deployed Scheduler schedule and Workflow target',
+     '../../common/recipes/gcp/scheduler/describe-job.md'),
+    ('Read current status for one import, exact current version, or bounded current snapshots across imports',
+     '../../common/recipes/gcp/spanner/query-import-status.md'),
+    ('List recent finalized versions, GCS paths, and Batch IDs',
+     '../../common/recipes/gcp/gcs/list-import-summaries.md'),
+    ("Read one supplied or selected version's summary",
+     '../../common/recipes/gcp/gcs/read-version-summary.md'),
+    ('Read the current candidate or accepted-output pointer',
+     '../../common/recipes/gcp/gcs/read-version-pointer.md'),
+    ("List one selected version's files",
+     '../../common/recipes/gcp/gcs/list-version-artifacts.md'),
+    ('Inspect one exact Batch job',
+     '../../common/recipes/gcp/batch/describe-job.md'),
+    ('Inspect tasks for one exact Batch job',
+     '../../common/recipes/gcp/batch/list-tasks.md'),
+    ('Fetch bounded structured logs for one exact Batch job',
+     '../../common/recipes/gcp/logging/fetch-batch-logs.md'),
+    ('Trace an exact Batch job to runtime-image or source-commit evidence, only when explicitly requested',
+     '../../common/recipes/gcp/batch/trace-batch-job-source-commit.md'),
+)
 _RECIPE_HEADINGS = (
     '## Use when',
     '## Required inputs',
@@ -286,8 +311,6 @@ class SkillContractTest(unittest.TestCase):
                 '## Ground commands in recipes',
                 'Open and read its linked recipe during the current turn',
                 'Never reconstruct a command from memory',
-                '`is_current`',
-                'serving availability',
         ):
             with self.subTest(skill_requirement=required):
                 self.assertIn(required, normalized_skill)
@@ -381,10 +404,10 @@ class SkillContractTest(unittest.TestCase):
                 'Cloud Spanner table containing one mutable current row',
                 'best starting point for current status',
                 'it is not complete attempt history',
-                'Its `JobId` is the ET Batch identifier',
-                'never select or follow it',
-                'pre-summary Batch failure is absent',
-                '`current_status`, `summary_status`, `is_current`, and `batch_state`',
+                'linked recipe owns its supported fields',
+                'GCS summaries represent finalized candidates',
+                'Batch represents technical state',
+                'none establishes facts owned by another source',
                 'acceptance, and eligibility for downstream loading'):
             with self.subTest(required=required):
                 self.assertIn(required, normalized)
@@ -398,21 +421,40 @@ class SkillContractTest(unittest.TestCase):
     def test_skill_routes_only_supported_runtime_evidence(self):
         skill = self._skill_path.read_text(encoding='utf-8')
         normalized = re.sub(r'\s+', ' ', skill)
+        routes = tuple((match.group('need').strip(), match.group('target'))
+                       for match in _ROUTE_ROW.finditer(skill))
+
+        self.assertEqual(_EXPECTED_SKILL_ROUTES, routes)
 
         for required in (
-                'Use Scheduler only for a deployed schedule or target question',
-                'Cloud Spanner `ImportStatus` table only as a mutable current snapshot',
-                'previous seven days', 'at most 100 returned rows',
-                'GCS summary-list helper',
-                '100 matching summary object names plus one overflow sentinel',
-                'up to five recent finalized versions', 'exact GCS version URI',
-                'A Batch failure before `import_summary.json` exists is absent',
-                'Describe Batch, tasks, or logs only from an exact',
+                '## Select an operation',
+                'Linked recipes own their required inputs, supported fields, defaults, bounds, and failure behavior',
+                'For questions combining current status, GCS versions, and Batch evidence',
+                'Use the smallest applicable recipe',
+                'Never replace a missing identifier with a broad project',
+                'complete attempt history, Workflow execution inspection',
+                'List recent finalized versions, GCS paths, and Batch IDs',
                 'only when explicitly requested',
                 'trace-batch-job-source-commit.md',
-                'List recent import summaries', 'Query current import status'):
+                'List recent import summaries', 'Query current import status',
+                '## Report evidence',
+                'Do not synthesize an overall status from separate evidence sources',
+                'Infrastructure actually used',
+                'exact identifier used for cross-system correlation'):
             with self.subTest(required=required):
                 self.assertIn(required, normalized)
+
+        for implementation_detail in (
+                '## Select evidence by question', 'StatusUpdateTimestamp',
+                'DataImportTimestamp', 'ImportStatus.WorkflowId',
+                'ImportStatus.JobId', 'previous seven days',
+                'at most 100 returned rows',
+                '100 matching summary object names plus one overflow sentinel',
+                'up to five recent finalized versions', '`current_status`',
+                '`summary_status`', '`is_current`', '`batch_state`',
+                '`STAGING`', '`VALIDATION`', '`SKIP`'):
+            with self.subTest(implementation_detail=implementation_detail):
+                self.assertNotIn(implementation_detail, normalized)
 
         for forbidden_route in ('correlate-import-runs.md',
                                 'query-import-version-history.md',
@@ -504,9 +546,8 @@ class SkillContractTest(unittest.TestCase):
             with self.subTest(required=required):
                 self.assertIn(required, normalized_recipe)
 
-        self.assertIn(
-            '100 matching summary object names plus one overflow sentinel',
-            artifact_layout)
+        self.assertNotIn('100 matching summary object names', artifact_layout)
+        self.assertNotIn('overflow sentinel', artifact_layout)
 
         self.assertNotIn('gcs_output_prefix', recipe + helper)
 

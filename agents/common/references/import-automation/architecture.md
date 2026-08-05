@@ -117,16 +117,15 @@ per import:                one mutable ImportStatus snapshot when present
 | Manifest | Versioned import definition and configured schedule intent |
 | Scheduler | Deployed trigger and Workflow target, not ET completion |
 | Shared Workflow | Orchestration design and one execution per logical attempt |
-| Cloud Spanner `ImportStatus` | Mutable current state, ET Batch job ID, and recorded version; not history |
+| Cloud Spanner `ImportStatus` | Mutable current state with recorded ET linkage when present; not history |
 | Batch job/task | Technical compute request, state, resources, and task outcome for an exact job ID |
 | Structured Batch logs | Bounded stage-level executor evidence for an exact job |
-| GCS version and summary | Finalized candidate identity, classification, Batch job ID, and metrics |
+| GCS version and summary | Finalized candidate identity, classification, recorded ET linkage, and metrics |
 | Current-output pointer | Which finalized candidate is the current ET output at read time |
 
-Join systems only through recorded identifiers. Use `ImportStatus.JobId` or an
-exact summary's `job_id` to inspect the corresponding Batch job. Verify the
-summary `import_name` before using its job ID. Do not correlate by similar names
-or timestamps, and do not list Workflow executions or Batch jobs to discover a
+Join systems only through exact identifiers returned by the selected evidence;
+linked recipes define the valid fields. Do not correlate by similar names or
+timestamps, and do not list Workflow executions or Batch jobs to discover a
 missing run.
 
 ## Sources of truth

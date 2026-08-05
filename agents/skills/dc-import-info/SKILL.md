@@ -81,34 +81,6 @@ is out of scope.
    `review: skipped (headless)` and continue without pausing.
 6. Stop when required values are unresolved or explicit values conflict.
 
-## Select evidence by question
-
-- Use Scheduler only for a deployed schedule or target question. The manifest
-  cron is configured intent; the live Scheduler job is deployed state.
-- Use the Cloud Spanner `ImportStatus` table only as a mutable current snapshot.
-  Its raw `State` becomes `current_status`; its `JobId` is the ET Batch
-  identifier. Never select or use `ImportStatus.WorkflowId`: it is loader-owned
-  and may refer to an earlier run.
-- For a query across imports, filter the current `ImportStatus` rows. A time
-  window applies to `StatusUpdateTimestamp`; it does not reconstruct historical
-  events. Unless the user supplies bounds, use production, the previous seven
-  days, and at most 100 returned rows.
-- Use the GCS summary-list helper for up to five recent finalized versions of
-  one import. It scans up to 100 matching summary object names plus one overflow
-  sentinel and returns version, date, the exact GCS version URI, and Batch job
-  ID. If the scan is truncated, return no history.
-- GCS summary history is not attempt history. It includes only attempts that
-  reached version-summary creation. A Batch failure before
-  `import_summary.json` exists is absent; older such failures are unsupported.
-- Read an exact summary when its classification or metrics are needed. Read the
-  current-output pointer only when acceptance or currentness matters.
-- Describe Batch, tasks, or logs only from an exact `ImportStatus.JobId` or
-  selected summary `job_id`. Never list jobs to discover an identifier.
-- Trace runtime-image or source-commit evidence only when explicitly requested
-  and only after selecting one exact Batch job. Do not collect it during routine
-  status, version, artifact, Batch, task, or log inspection.
-- Do not query database history tables or Workflow execution history.
-
 ## Load detailed references only when needed
 
 - For current-state, finalized-version, artifact, or Batch navigation, read the
@@ -129,14 +101,20 @@ Before presenting or executing a cloud or support command:
 5. If a required value remains unresolved, stop. Never reconstruct a command
    from memory or a generic cloud convention.
 
-## Route exact operations
+## Select an operation
+
+Use the smallest applicable operation from the route table. Linked recipes own
+their required inputs, supported fields, defaults, bounds, and failure
+behavior. For questions combining current status, GCS versions, and Batch
+evidence, first read the
+[import evidence flow](../../common/references/import-automation/import-evidence-flow.md).
 
 | Need | Read and follow |
 |---|---|
 | Find or select imports | [List repository imports](../../common/recipes/local/list-imports.md) |
 | Verify deployed Scheduler schedule and Workflow target | [Describe Scheduler job](../../common/recipes/gcp/scheduler/describe-job.md) |
 | Read current status for one import, exact current version, or bounded current snapshots across imports | [Query current import status](../../common/recipes/gcp/spanner/query-import-status.md) |
-| List up to five recent finalized versions, GCS paths, and Batch IDs | [List recent import summaries](../../common/recipes/gcp/gcs/list-import-summaries.md) |
+| List recent finalized versions, GCS paths, and Batch IDs | [List recent import summaries](../../common/recipes/gcp/gcs/list-import-summaries.md) |
 | Read one supplied or selected version's summary | [Read version summary](../../common/recipes/gcp/gcs/read-version-summary.md) |
 | Read the current candidate or accepted-output pointer | [Read version pointer](../../common/recipes/gcp/gcs/read-version-pointer.md) |
 | List one selected version's files | [List version artifacts](../../common/recipes/gcp/gcs/list-version-artifacts.md) |
@@ -145,25 +123,16 @@ Before presenting or executing a cloud or support command:
 | Fetch bounded structured logs for one exact Batch job | [Fetch Batch logs](../../common/recipes/gcp/logging/fetch-batch-logs.md) |
 | Trace an exact Batch job to runtime-image or source-commit evidence, only when explicitly requested | [Trace Batch job to source commit](../../common/recipes/gcp/batch/trace-batch-job-source-commit.md) |
 
-## Report without merging unlike evidence
+## Report evidence
 
-- State the environment, UTC window when used, limits, truncation, and missing
-  access.
+- State the selected environment. For each operation, include applicable UTC
+  bounds, result limit, truncation, and missing access.
 - For results spanning imports, start with a compact table.
-- Report `current_status`, `summary_status`, `is_current`, and `batch_state` as
-  separate fields. Do not synthesize an overall status.
-- Define `is_current` as whether the selected version equals the current
-  accepted ET-output pointer. It does not establish loader completion or
-  serving availability.
-- Treat `VALIDATION` as failed ET validation and `SKIP` as completed no-change.
-  A `STAGING` summary means eligible for acceptance, not necessarily current.
-- Label GCS-list results as finalized ET versions, not Workflow or Batch attempt
-  history. If no summary exists, say that no finalized version was found within
-  the bounded scan; do not say no attempt occurred.
-- If a requested historical failure could have stopped before summary creation,
-  report that the available GCS history cannot answer it.
-- Include `Infrastructure actually used` for every cloud-backed answer, listing
-  queried resources and relevant resources not queried or unresolved.
-- Cite repository files, cloud resources, logs, and GCS objects used. For each
-  cross-system match, state the exact identifier used; otherwise report
+- Follow the evidence boundaries in
+  [import evidence flow](../../common/references/import-automation/import-evidence-flow.md).
+  Do not synthesize an overall status from separate evidence sources.
+- Include `Infrastructure actually used` for every cloud-backed answer,
+  identifying queried and unresolved resources.
+- Cite the repository files, cloud resources, logs, and GCS objects used. State
+  the exact identifier used for cross-system correlation; otherwise report
   `ambiguous` or `unknown`.

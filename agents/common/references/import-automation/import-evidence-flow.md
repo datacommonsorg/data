@@ -49,10 +49,10 @@ helper. Construct it only when an exact version was supplied separately.
 |---|---|
 | Current recorded state, version, Batch ID, or timestamps | [Cloud Spanner `ImportStatus`](../../recipes/gcp/spanner/query-import-status.md) |
 | Imports currently in a selected state and updated in a window | [Bounded `ImportStatus` query](../../recipes/gcp/spanner/query-import-status.md) |
-| Up to five recent finalized versions | [GCS summary-list helper](../../recipes/gcp/gcs/list-import-summaries.md) |
+| Recent finalized versions | [GCS summary-list helper](../../recipes/gcp/gcs/list-import-summaries.md) |
 | Classification or metrics for one version | [Exact `import_summary.json`](../../recipes/gcp/gcs/read-version-summary.md) |
 | Whether a version is the current ET output | [Exact current-output pointer](../../recipes/gcp/gcs/read-version-pointer.md) |
-| Technical state or logs | [Exact Batch job](../../recipes/gcp/batch/describe-job.md) from `ImportStatus.JobId` or a validated summary |
+| Technical state or logs | [Exact Batch job](../../recipes/gcp/batch/describe-job.md) selected through an identifier returned by existing evidence |
 
 Follow only an exact identifier returned by the selected evidence. Do not list
 Workflow executions or Batch jobs to discover a missing run.
@@ -62,14 +62,13 @@ Workflow executions or Batch jobs to discover a missing run.
 `ImportStatus` is a Cloud Spanner table containing one mutable current row per
 recorded import. It is the best starting point for current status, including a
 current failure that produced no GCS summary, but it is not complete attempt
-history. Its `JobId` is the ET Batch identifier. Its `WorkflowId` is
-loader-owned, may describe an earlier loader run, and is not an ET Workflow
-execution ID; never select or follow it.
+history. The linked recipe owns its supported fields, query forms, exclusions,
+and bounds.
 
-GCS summary history contains only attempts that reached summary creation. A
-pre-summary Batch failure is absent, so missing GCS summary evidence does not
-mean no attempt occurred.
+GCS summaries represent finalized candidates, while Batch represents technical
+state for one exact selected job. These sources answer different questions and
+none establishes facts owned by another source.
 
-Keep `current_status`, `summary_status`, `is_current`, and `batch_state`
-separate. Read the architecture overview for `STAGING`, `VALIDATION`, `SKIP`,
-acceptance, and eligibility for downstream loading.
+Read the architecture overview for candidate classification, partial evidence,
+acceptance, and eligibility for downstream loading. Read each linked recipe for
+the exact fields and operational behavior of its evidence source.
