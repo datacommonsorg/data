@@ -1,0 +1,8 @@
+Node: E:under5_output->E0
+observationAbout: C:under5_output->observationAbout
+observationDate: C:under5_output->observationDate
+value: C:under5_output->value
+variableMeasured: C:under5_output->variableMeasured
+observationPeriod: C:under5_output->observationPeriod
+unit: C:under5_output->unit
+typeOf: dcs:StatVarObservation

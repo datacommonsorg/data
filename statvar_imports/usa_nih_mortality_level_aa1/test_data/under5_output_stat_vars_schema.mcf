@@ -1,0 +1,756 @@
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_65To74Years_HeartDisease_HispanicOrLatino_Male_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 65 To 74 Years_ Heart Disease_ Hispanic Or Latino_ Male_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:HeartDisease
+typeOf: dcid:CauseOfDeathAndDisabilityEnum
+name: "Heart Disease"
+isProvisional: dcs:True
+
+Node: dcid:ethnicity
+typeOf: dcs:Property
+name: "ethnicity"
+domainIncludes: dcid:MortalityEvent
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_65To74Years_HeartDisease_HispanicOrLatino_Male_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 65 To 74 Years_ Heart Disease_ Hispanic Or Latino_ Male_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_65To74Years_HeartDisease_HispanicOrLatino_Male_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 65 To 74 Years_ Heart Disease_ Hispanic Or Latino_ Male_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_65To74Years_HeartDisease_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 65 To 74 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_65To74Years_HeartDisease_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 65 To 74 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_65To74Years_HeartDisease_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 65 To 74 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_65To74Years_HeartDisease_HispanicOrLatino_Male_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 65 To 74 Years_ Heart Disease_ Hispanic Or Latino_ Male_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_65OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Female_Urban_BlackOrAfricanAmericanAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 65 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Female_ Urban_ Black Or African American Alone"
+isProvisional: dcs:True
+
+Node: dcid:race
+typeOf: dcs:Property
+name: "race"
+domainIncludes: dcid:MortalityEvent
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_65OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Female_Urban_BlackOrAfricanAmericanAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 65 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Female_ Urban_ Black Or African American Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_65OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Female_Urban_BlackOrAfricanAmericanAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 65 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Female_ Urban_ Black Or African American Alone"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_65OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 65 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_65OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 65 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_65OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 65 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_65OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Female_Urban_BlackOrAfricanAmericanAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 65 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Female_ Urban_ Black Or African American Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:RaceCodeEnum
+name: "Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_65OrMoreYears_Cancer_NotHispanicOrLatino_Male_Rural_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 65 Or More Years_ Cancer_ Not Hispanic Or Latino_ Male_ Rural_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:causeOfDeath
+typeOf: dcs:Property
+name: "causeOfDeath"
+rangeIncludes: dcid:CauseOfDeathAndDisabilityEnum,dcid:HealthOutcomeEnum,dcid:ICD10_113CausesOfDeath,dcid:MedicalConditionIncidentTypeEnum,dcid:PollutantHealthRiskEnum
+
+Node: dcid:placeOfResidenceClassification
+typeOf: dcs:Property
+name: "placeOfResidenceClassification"
+rangeIncludes: dcid:HumanSettlementClassificationEnum,dcid:LocationClassificationEnum
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_65OrMoreYears_Cancer_NotHispanicOrLatino_Male_Rural_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 65 Or More Years_ Cancer_ Not Hispanic Or Latino_ Male_ Rural_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_65OrMoreYears_Cancer_NotHispanicOrLatino_Male_Rural_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 65 Or More Years_ Cancer_ Not Hispanic Or Latino_ Male_ Rural_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_65OrMoreYears_Cancer_NotHispanicOrLatino_Male_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 65 Or More Years_ Cancer_ Not Hispanic Or Latino_ Male_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_65OrMoreYears_Cancer_NotHispanicOrLatino_Male_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 65 Or More Years_ Cancer_ Not Hispanic Or Latino_ Male_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_65OrMoreYears_Cancer_NotHispanicOrLatino_Male_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 65 Or More Years_ Cancer_ Not Hispanic Or Latino_ Male_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_65OrMoreYears_Cancer_NotHispanicOrLatino_Male_Rural_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 65 Or More Years_ Cancer_ Not Hispanic Or Latino_ Male_ Rural_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_75To84Years_HeartDisease_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 75 To 84 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_75To84Years_HeartDisease_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 75 To 84 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_75To84Years_HeartDisease_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 75 To 84 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_75To84Years_HeartDisease_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 75 To 84 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_75To84Years_HeartDisease_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 75 To 84 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_75To84Years_HeartDisease_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 75 To 84 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_75To84Years_HeartDisease_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 75 To 84 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_85OrMoreYears_HeartDisease_HispanicOrLatino_Female_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 85 Or More Years_ Heart Disease_ Hispanic Or Latino_ Female_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_85OrMoreYears_HeartDisease_HispanicOrLatino_Female_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 85 Or More Years_ Heart Disease_ Hispanic Or Latino_ Female_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_85OrMoreYears_HeartDisease_HispanicOrLatino_Female_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 85 Or More Years_ Heart Disease_ Hispanic Or Latino_ Female_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_85OrMoreYears_HeartDisease_HispanicOrLatino_Female_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 85 Or More Years_ Heart Disease_ Hispanic Or Latino_ Female_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_65To74Years_HeartDisease_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 65 To 74 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_65To74Years_HeartDisease_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 65 To 74 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_65To74Years_HeartDisease_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 65 To 74 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_65To74Years_HeartDisease_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 65 To 74 Years_ Heart Disease_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_65OrMoreYears_DiabetesMellitus_NotHispanicOrLatino_Male_Urban_BlackOrAfricanAmericanAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 65 Or More Years_ Diabetes Mellitus_ Not Hispanic Or Latino_ Male_ Urban_ Black Or African American Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_65OrMoreYears_DiabetesMellitus_NotHispanicOrLatino_Male_Urban_BlackOrAfricanAmericanAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 65 Or More Years_ Diabetes Mellitus_ Not Hispanic Or Latino_ Male_ Urban_ Black Or African American Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_65OrMoreYears_DiabetesMellitus_NotHispanicOrLatino_Male_Urban_BlackOrAfricanAmericanAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 65 Or More Years_ Diabetes Mellitus_ Not Hispanic Or Latino_ Male_ Urban_ Black Or African American Alone"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_65OrMoreYears_DiabetesMellitus_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 65 Or More Years_ Diabetes Mellitus_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_65OrMoreYears_DiabetesMellitus_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 65 Or More Years_ Diabetes Mellitus_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_65OrMoreYears_DiabetesMellitus_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 65 Or More Years_ Diabetes Mellitus_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_65OrMoreYears_DiabetesMellitus_NotHispanicOrLatino_Male_Urban_BlackOrAfricanAmericanAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 65 Or More Years_ Diabetes Mellitus_ Not Hispanic Or Latino_ Male_ Urban_ Black Or African American Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_65OrMoreYears_Pneumonia_NotHispanicOrLatino_Female_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 65 Or More Years_ Pneumonia_ Not Hispanic Or Latino_ Female_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_65OrMoreYears_Pneumonia_NotHispanicOrLatino_Female_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 65 Or More Years_ Pneumonia_ Not Hispanic Or Latino_ Female_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_65OrMoreYears_Pneumonia_NotHispanicOrLatino_Female_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 65 Or More Years_ Pneumonia_ Not Hispanic Or Latino_ Female_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_65OrMoreYears_Pneumonia_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 65 Or More Years_ Pneumonia_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_65OrMoreYears_Pneumonia_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 65 Or More Years_ Pneumonia_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_65OrMoreYears_Pneumonia_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 65 Or More Years_ Pneumonia_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_65OrMoreYears_Pneumonia_NotHispanicOrLatino_Female_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 65 Or More Years_ Pneumonia_ Not Hispanic Or Latino_ Female_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_20To39Years_HomicideAndLegalIntervention_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 20 To 39 Years_ Homicide And Legal Intervention_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:HomicideAndLegalIntervention
+typeOf: dcid:CauseOfDeathAndDisabilityEnum
+name: "Homicide And Legal Intervention"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_20To39Years_HomicideAndLegalIntervention_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 20 To 39 Years_ Homicide And Legal Intervention_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_20To39Years_HomicideAndLegalIntervention_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 20 To 39 Years_ Homicide And Legal Intervention_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_20To39Years_HomicideAndLegalIntervention_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 20 To 39 Years_ Homicide And Legal Intervention_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_20To39Years_HomicideAndLegalIntervention_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 20 To 39 Years_ Homicide And Legal Intervention_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_20To39Years_HomicideAndLegalIntervention_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 20 To 39 Years_ Homicide And Legal Intervention_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_20To39Years_HomicideAndLegalIntervention_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 20 To 39 Years_ Homicide And Legal Intervention_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_85OrMoreYears_HeartDisease_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 85 Or More Years_ Heart Disease_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_40To64Years_AccidentsAndAdverseEffects_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 40 To 64 Years_ Accidents And Adverse Effects_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AccidentsAndAdverseEffects
+typeOf: dcid:CauseOfDeathAndDisabilityEnum
+name: "Accidents And Adverse Effects"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_40To64Years_AccidentsAndAdverseEffects_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 40 To 64 Years_ Accidents And Adverse Effects_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_40To64Years_AccidentsAndAdverseEffects_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 40 To 64 Years_ Accidents And Adverse Effects_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_40To64Years_AccidentsAndAdverseEffects_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 40 To 64 Years_ Accidents And Adverse Effects_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_40To64Years_AccidentsAndAdverseEffects_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 40 To 64 Years_ Accidents And Adverse Effects_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_40To64Years_AccidentsAndAdverseEffects_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 40 To 64 Years_ Accidents And Adverse Effects_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_40To64Years_AccidentsAndAdverseEffects_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 40 To 64 Years_ Accidents And Adverse Effects_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_65To74Years_Cancer_NotHispanicOrLatino_Female_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Female_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_65To74Years_Cancer_NotHispanicOrLatino_Female_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Female_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_65To74Years_Cancer_NotHispanicOrLatino_Female_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Female_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_65To74Years_Cancer_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_65To74Years_Cancer_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_65To74Years_Cancer_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_65To74Years_Cancer_NotHispanicOrLatino_Female_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Female_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_75To84Years_Alzheimers_NotHispanicOrLatino_Male_Urban_BlackOrAfricanAmericanAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 75 To 84 Years_ Alzheimers_ Not Hispanic Or Latino_ Male_ Urban_ Black Or African American Alone"
+isProvisional: dcs:True
+
+Node: dcid:Alzheimers
+typeOf: dcid:CauseOfDeathAndDisabilityEnum
+name: "Alzheimers"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_75To84Years_Alzheimers_NotHispanicOrLatino_Male_Urban_BlackOrAfricanAmericanAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 75 To 84 Years_ Alzheimers_ Not Hispanic Or Latino_ Male_ Urban_ Black Or African American Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_75To84Years_Alzheimers_NotHispanicOrLatino_Male_Urban_BlackOrAfricanAmericanAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 75 To 84 Years_ Alzheimers_ Not Hispanic Or Latino_ Male_ Urban_ Black Or African American Alone"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_75To84Years_Alzheimers_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 75 To 84 Years_ Alzheimers_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_75To84Years_Alzheimers_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 75 To 84 Years_ Alzheimers_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_75To84Years_Alzheimers_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 75 To 84 Years_ Alzheimers_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_75To84Years_Alzheimers_NotHispanicOrLatino_Male_Urban_BlackOrAfricanAmericanAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 75 To 84 Years_ Alzheimers_ Not Hispanic Or Latino_ Male_ Urban_ Black Or African American Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_65To74Years_DiabetesMellitus_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 65 To 74 Years_ Diabetes Mellitus_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_65To74Years_DiabetesMellitus_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 65 To 74 Years_ Diabetes Mellitus_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_65To74Years_DiabetesMellitus_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 65 To 74 Years_ Diabetes Mellitus_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_65To74Years_DiabetesMellitus_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 65 To 74 Years_ Diabetes Mellitus_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_65To74Years_Cancer_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_65To74Years_Cancer_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_65To74Years_Cancer_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_65To74Years_Cancer_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_65To74Years_Cancer_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_65To74Years_Cancer_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_65To74Years_Cancer_NotHispanicOrLatino_Male_Urban_AmericanIndianOrAlaskaNative
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 65 To 74 Years_ Cancer_ Not Hispanic Or Latino_ Male_ Urban_ American Indian Or Alaska Native"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_85OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 85 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_85OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 85 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_85OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 85 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_85OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 85 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_85OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 85 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_85OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 85 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_85OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 85 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_65OrMoreYears_AccidentsAndAdverseEffects_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 65 Or More Years_ Accidents And Adverse Effects_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_65OrMoreYears_AccidentsAndAdverseEffects_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 65 Or More Years_ Accidents And Adverse Effects_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_65OrMoreYears_AccidentsAndAdverseEffects_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 65 Or More Years_ Accidents And Adverse Effects_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_65OrMoreYears_AccidentsAndAdverseEffects_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 65 Or More Years_ Accidents And Adverse Effects_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_65OrMoreYears_Septicemia_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 65 Or More Years_ Septicemia_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_65OrMoreYears_Septicemia_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 65 Or More Years_ Septicemia_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_65OrMoreYears_Septicemia_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 65 Or More Years_ Septicemia_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_65OrMoreYears_Septicemia_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 65 Or More Years_ Septicemia_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_65OrMoreYears_Septicemia_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 65 Or More Years_ Septicemia_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_65OrMoreYears_Septicemia_NotHispanicOrLatino_Male_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 65 Or More Years_ Septicemia_ Not Hispanic Or Latino_ Male_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_65OrMoreYears_Septicemia_NotHispanicOrLatino_Male_Urban_AsianAndNativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 65 Or More Years_ Septicemia_ Not Hispanic Or Latino_ Male_ Urban_ Asian And Native Hawaiian Or Other Pacific Islander Alone"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_85OrMoreYears_Cancer_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 85 Or More Years_ Cancer_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_85OrMoreYears_Cancer_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 85 Or More Years_ Cancer_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_85OrMoreYears_Cancer_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 85 Or More Years_ Cancer_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_85OrMoreYears_Cancer_NotHispanicOrLatino_Female_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 85 Or More Years_ Cancer_ Not Hispanic Or Latino_ Female_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_85OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Male_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 85 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Male_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_85OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Male_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 85 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Male_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_85OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Male_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 85 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Male_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_85OrMoreYears_CerebrovascularDiseases_NotHispanicOrLatino_Male_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 85 Or More Years_ Cerebrovascular Diseases_ Not Hispanic Or Latino_ Male_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_65To74Years_SuicideAndSelfInflictedInjury_NotHispanicOrLatino_Male_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 65 To 74 Years_ Suicide And Self Inflicted Injury_ Not Hispanic Or Latino_ Male_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:SuicideAndSelfInflictedInjury
+typeOf: dcid:CauseOfDeathAndDisabilityEnum
+name: "Suicide And Self Inflicted Injury"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_65To74Years_SuicideAndSelfInflictedInjury_NotHispanicOrLatino_Male_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 65 To 74 Years_ Suicide And Self Inflicted Injury_ Not Hispanic Or Latino_ Male_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_65To74Years_SuicideAndSelfInflictedInjury_NotHispanicOrLatino_Male_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 65 To 74 Years_ Suicide And Self Inflicted Injury_ Not Hispanic Or Latino_ Male_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_65To74Years_SuicideAndSelfInflictedInjury_NotHispanicOrLatino_Male_Rural_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 65 To 74 Years_ Suicide And Self Inflicted Injury_ Not Hispanic Or Latino_ Male_ Rural_ White"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_Count_Person_65OrMoreYears_Cancer_HispanicOrLatino_Female_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Count_ Person_ 65 Or More Years_ Cancer_ Hispanic Or Latino_ Female_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalLowerLimit_Person_65OrMoreYears_Cancer_HispanicOrLatino_Female_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Lower Limit_ Person_ 65 Or More Years_ Cancer_ Hispanic Or Latino_ Female_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:AgeAdjusted_ConfidenceIntervalUpperLimit_Person_65OrMoreYears_Cancer_HispanicOrLatino_Female_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Age Adjusted_ Confidence Interval Upper Limit_ Person_ 65 Or More Years_ Cancer_ Hispanic Or Latino_ Female_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_65OrMoreYears_Cancer_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 65 Or More Years_ Cancer_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalLowerLimit_Person_65OrMoreYears_Cancer_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Lower Limit_ Person_ 65 Or More Years_ Cancer_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:ConfidenceIntervalUpperLimit_Person_65OrMoreYears_Cancer_NotHispanicOrLatino_Female_Urban_White
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Confidence Interval Upper Limit_ Person_ 65 Or More Years_ Cancer_ Not Hispanic Or Latino_ Female_ Urban_ White"
+isProvisional: dcs:True
+
+Node: dcid:Annual_Mean_Count_Person_65OrMoreYears_Cancer_HispanicOrLatino_Female_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Annual_ Mean_ Count_ Person_ 65 Or More Years_ Cancer_ Hispanic Or Latino_ Female_ Urban"
+isProvisional: dcs:True
+
