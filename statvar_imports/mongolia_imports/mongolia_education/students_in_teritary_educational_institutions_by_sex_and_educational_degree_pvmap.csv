@@ -3,6 +3,7 @@ key,p1,v1,p2,v2,,
 Professional fields,schoolGradeLevel,TertiaryEducation,populationType,Student,observationAbout,country/MNG
 Of which: Female,gender,Female,schoolGradeLevel,TertiaryEducation,,
 Bachelor,enrollmentLevel,BachelorsDegree,schoolGradeLevel,TertiaryEducation,#Header,enrollmentLevel
+Bachelor¹,enrollmentLevel,BachelorsDegree,schoolGradeLevel,TertiaryEducation,#Header,enrollmentLevel
 Master,enrollmentLevel,MastersDegree,schoolGradeLevel,TertiaryEducation,#Header,enrollmentLevel
 Ph.D,enrollmentLevel,DoctorateDegree,schoolGradeLevel,TertiaryEducation,#Header,enrollmentLevel
 Upper diploma,enrollmentLevel,UpperDiploma,schoolGradeLevel,TertiaryEducation,#Header,enrollmentLevel
