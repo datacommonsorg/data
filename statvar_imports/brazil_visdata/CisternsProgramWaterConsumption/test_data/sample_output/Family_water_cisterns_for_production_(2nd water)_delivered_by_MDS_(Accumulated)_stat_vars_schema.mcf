@@ -1,0 +1,59 @@
+Node: dcid:containerType
+typeOf: dcs:Property
+name: "containerType"
+domainIncludes: dcid:Household
+rangeIncludes: dcid:ContainerTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:ContainerTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "ContainerTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:Cisterns
+typeOf: dcid:ContainerTypeEnum
+name: "Cisterns"
+isProvisional: dcs:True
+
+Node: dcid:distributionPartner
+typeOf: dcs:Property
+name: "distributionPartner"
+domainIncludes: dcid:Household
+rangeIncludes: dcid:DistributionPartnerEnum
+isProvisional: dcs:True
+
+Node: dcid:DistributionPartnerEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "DistributionPartnerEnum"
+isProvisional: dcs:True
+
+Node: dcid:Brazil_MinistrySocialDevelopmentAndFightAgainstHunger
+typeOf: dcid:DistributionPartnerEnum
+name: "Brazil_ Ministry Social Development And Fight Against Hunger"
+isProvisional: dcs:True
+
+Node: dcid:consumptionType
+typeOf: dcs:Property
+name: "consumptionType"
+domainIncludes: dcid:Household
+rangeIncludes: dcid:ConsumptionTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:ConsumptionTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "ConsumptionTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:SecondWater
+typeOf: dcid:ConsumptionTypeEnum
+name: "Second Water"
+isProvisional: dcs:True
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Household
+
