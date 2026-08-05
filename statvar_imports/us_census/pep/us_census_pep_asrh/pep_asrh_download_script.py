@@ -52,10 +52,15 @@ def _check_and_add_url(url_to_check: str, key: str, files_to_download: dict):
     Helper function to check if a URL is accessible and add it to the download list.
     """
     logging.info(f"checking url: {url_to_check}")
+    import time
+    time.sleep(1)
     try:
         # TODO b/432163402 : Provide a custom certificate bundle instead of disabling verification.
         check_url = requests.head(
-            url_to_check, allow_redirects=True, verify=False
+            url_to_check,
+            allow_redirects=True,
+            verify=False,
+            headers={"User-Agent": "Mozilla/5.0"},
         )
         if check_url.status_code == 200:
             files_to_download[key].append(url_to_check)
@@ -119,9 +124,15 @@ def download_files(files_to_download_dict:dict, download_base_path: str):
     for url in value:
       output_file_name = url.split("/")[-1]
       output_file_path = os.path.join(download_folder, output_file_name)
-      # Send GET request
+      # Send GET request with a polite delay
+      import time
+      time.sleep(1)
       try:
-        response = requests.get(url, verify="/etc/ssl/certs/ca-certificates.crt")
+        response = requests.get(
+            url,
+            verify="/etc/ssl/certs/ca-certificates.crt",
+            headers={"User-Agent": "Mozilla/5.0"},
+          )
       except requests.exceptions.RequestException as e:
         logging.fatal(f"Error downloading {url}: {e}")
         continue
