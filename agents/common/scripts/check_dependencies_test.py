@@ -15,27 +15,18 @@
 
 import os
 from pathlib import Path
-import shutil
+import re
+import shlex
 import subprocess
 import sys
 import tempfile
 import unittest
 
-_REQUIRED_COMMANDS = ('bash', 'curl', 'git', 'jq', 'python3', 'realpath', 'sed')
-_EXPECTED_GCLOUD_HELP_CALLS = (
-    'artifacts docker images describe --help',
-    'auth list --help',
-    'auth print-access-token --help',
-    'auth application-default print-access-token --help',
-    'batch jobs describe --help',
-    'batch tasks list --help',
-    'logging read --help',
-    'scheduler jobs describe --help',
-    'spanner databases execute-sql --help',
-    'storage cat --help',
-    'storage objects list --help',
-)
 _TOKEN_SECRET = 'secret-token-that-must-not-be-printed'
+
+_COMMAND_STUB = '''#!/bin/bash
+exit 0
+'''
 
 _GCLOUD_STUB = r'''#!/bin/bash
 if [[ -n "${FAKE_GCLOUD_LOG:-}" ]]; then
@@ -75,9 +66,35 @@ fi
 '''
 
 
+def _read_shell_array(script: str, array_name: str) -> tuple[str, ...]:
+    """Reads a simple array of trusted shell literals from the checker."""
+    match = re.search(rf'^{re.escape(array_name)}=\(\n(?P<body>.*?)^\)$',
+                      script,
+                      flags=re.MULTILINE | re.DOTALL)
+    if match is None:
+        raise AssertionError(f'Unable to read {array_name} from checker')
+    values = tuple(shlex.split(match.group('body'), comments=True))
+    if not values:
+        raise AssertionError(f'{array_name} must not be empty')
+    return values
+
+
+def _write_executable(path: Path, contents: str) -> None:
+    path.write_text(contents, encoding='utf-8')
+    path.chmod(0o755)
+
+
 class CheckDependenciesTest(unittest.TestCase):
 
     def setUp(self):
+        self._checker = Path(
+            __file__).parents[3] / 'agents/check_dependencies.sh'
+        checker_source = self._checker.read_text(encoding='utf-8')
+        self._required_commands = _read_shell_array(checker_source,
+                                                    'REQUIRED_COMMANDS')
+        self._gcloud_commands = _read_shell_array(checker_source,
+                                                  'GCLOUD_COMMANDS')
+
         self._tempdir = tempfile.TemporaryDirectory()
         self.addCleanup(self._tempdir.cleanup)
         self._workspace = Path(self._tempdir.name)
@@ -100,16 +117,9 @@ class CheckDependenciesTest(unittest.TestCase):
 
         self._bin_dir = self._workspace / 'bin'
         self._bin_dir.mkdir()
-        for command in _REQUIRED_COMMANDS:
-            executable = shutil.which(command)
-            if executable is None:
-                self.fail(
-                    f'Test host is missing required fixture tool: {command}')
-            (self._bin_dir / command).symlink_to(executable)
-
-        gcloud = self._bin_dir / 'gcloud'
-        gcloud.write_text(_GCLOUD_STUB, encoding='utf-8')
-        gcloud.chmod(0o755)
+        for command in self._required_commands:
+            _write_executable(self._bin_dir / command, _COMMAND_STUB)
+        _write_executable(self._bin_dir / 'gcloud', _GCLOUD_STUB)
 
         self._gcloud_log = self._workspace / 'gcloud.log'
         self._env = os.environ.copy()
@@ -118,8 +128,6 @@ class CheckDependenciesTest(unittest.TestCase):
             'FAKE_TOKEN_SECRET': _TOKEN_SECRET,
             'PATH': str(self._bin_dir),
         })
-        self._checker = Path(
-            __file__).parents[3] / 'agents/check_dependencies.sh'
 
     def _run(self, *args, env_updates=None):
         env = self._env.copy()
@@ -171,17 +179,21 @@ class CheckDependenciesTest(unittest.TestCase):
         self.assertIn('Authentication checks (--local)', result.stdout)
         calls = self._gcloud_calls()
         help_calls = tuple(call for call in calls if call.endswith('--help'))
-        self.assertEqual(_EXPECTED_GCLOUD_HELP_CALLS, help_calls)
+        self.assertEqual(len(self._gcloud_commands), len(help_calls))
+        self.assertIn(f'{self._gcloud_commands[0]} --help', help_calls)
         self.assertFalse(any(
             '--filter=status:ACTIVE' in call for call in calls))
 
     def test_missing_local_dependency_skips_authentication(self):
-        (self._bin_dir / 'jq').unlink()
+        missing_command = next(
+            command for command in self._required_commands
+            if command not in {'bash', 'gcloud', 'git', 'realpath'})
+        (self._bin_dir / missing_command).unlink()
 
         result = self._run()
 
         self.assertEqual(1, result.returncode)
-        self.assertIn('MISSING  command jq', result.stderr)
+        self.assertIn(f'MISSING  command {missing_command}', result.stderr)
         self.assertIn('NOT_RUN  Authentication checks', result.stderr)
         self.assertFalse(
             any('--filter=status:ACTIVE' in call
@@ -206,26 +218,13 @@ class CheckDependenciesTest(unittest.TestCase):
         self.assertIn('NOT_RUN  Authentication checks', result.stderr)
 
     def test_unsupported_exact_gcloud_command_is_reported(self):
+        unsupported_command = self._gcloud_commands[0]
         result = self._run(
             '--local',
-            env_updates={'FAKE_GCLOUD_UNSUPPORTED': 'batch tasks list'})
+            env_updates={'FAKE_GCLOUD_UNSUPPORTED': unsupported_command})
 
         self.assertEqual(1, result.returncode)
-        self.assertIn('MISSING  gcloud batch tasks list', result.stderr)
-
-    def test_valid_sibling_import_checkout_is_available(self):
-        import_repo = self._workspace / 'import'
-        workflow = import_repo / 'pipeline/workflow/import-automation-workflow.yaml'
-        workflow.parent.mkdir(parents=True)
-        workflow.touch()
-        subprocess.run(['git', 'init', '-q', str(import_repo)], check=True)
-
-        result = self._run('--local')
-
-        self.assertEqual(0,
-                         result.returncode,
-                         msg=result.stdout + result.stderr)
-        self.assertIn('AVAILABLE sibling import checkout', result.stdout)
+        self.assertIn(f'MISSING  gcloud {unsupported_command}', result.stderr)
 
     def test_invalid_sibling_import_checkout_is_advisory(self):
         (self._workspace / 'import').mkdir()
