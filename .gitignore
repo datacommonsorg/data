@@ -24,4 +24,9 @@ import-automation/executor/config_override.json
 
 .venv/
 
+# Track only the Antigravity skill registry under .agents. The directory can
+# otherwise be ignored by a developer's global Git configuration.
+!.agents/
+.agents/*
+!.agents/skills.json
 
