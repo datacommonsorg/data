@@ -13,6 +13,16 @@ sys.path.append(os.path.join(_DATA_DIR, 'util'))
 from file_util import FileIO
 from file_util import file_get_matching
 
+_MCF_VALUE_SPLIT_RE = re.compile(r'\s*(?:"[^"\\]*(?:\\.[^"\\]*)*"|[^,]+)')
+
+
+def _parse_mcf_value(val: str):
+    val = val.strip()
+    if ',' not in val:
+        return val
+    parts = [p.strip() for p in _MCF_VALUE_SPLIT_RE.findall(val) if p.strip()]
+    return parts if len(parts) > 1 else val
+
 
 def load_mcf_file(file: str):
     """ Reads an MCF text file and returns mcf nodes."""
@@ -28,7 +38,9 @@ def load_mcf_file(file: str):
         for line in node.split('\n'):
             parsed_line = mcf_line.match(line)
             if parsed_line is not None:
-                current_mcf_node[parsed_line.group(1)] = parsed_line.group(2)
+                prop = parsed_line.group(1)
+                val = parsed_line.group(2).strip()
+                current_mcf_node[prop] = _parse_mcf_value(val)
         if current_mcf_node:
             mcf_nodes.append(current_mcf_node)
 
