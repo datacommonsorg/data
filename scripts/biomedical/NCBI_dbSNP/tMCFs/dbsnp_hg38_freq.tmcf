@@ -1,0 +1,13 @@
+Node: E:dbsnp_hg38_freq->E1
+typeOf: dcs:GeneticVariant
+dcid: C:dbsnp_hg38_freq->dcid
+
+Node: E:dbsnp_hg38_freq->E2
+typeOf: dcs:GeneticVariantPopulationFrequency
+dcid: C:dbsnp_hg38_freq->dcid_freq
+name: C:dbsnp_hg38_freq->name_freq
+alleleFrequency: C:dbsnp_hg38_freq->alleleFrequency
+geneticVaraintID: E:dbsnp_hg38_freq->E1
+measuredPopulation: C:dbsnp_hg38_freq->measuredPopulation
+measuredProperty: schema:frequency
+rsID: C:dbsnp_hg38_freq->rsID
