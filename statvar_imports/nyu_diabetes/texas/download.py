@@ -30,7 +30,7 @@ OUTPUT_CSV = os.path.join(INPUT_DIR, "Death_Data_Cross_Tabulation_data.csv")
 SOURCE_URL = "https://wonder.cdc.gov/controller/saved/D158/D516F171"
 
 
-@retry(tries=3, delay=5, backoff=2)
+@retry(tries=10, delay=5, backoff=2)
 def download_cdc_wonder_data(saved_url: str) -> str:
     """Automates CDC WONDER saved request session and downloads dataset as TSV/CSV text.
 
