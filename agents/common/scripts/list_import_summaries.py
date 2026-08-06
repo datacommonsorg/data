@@ -185,7 +185,7 @@ def list_import_summaries(absolute_import_name: str,
             continue
         candidates.append((version, version_date, blob))
 
-    candidates.sort(key=lambda item: item[0], reverse=True)
+    candidates.sort(key=lambda item: item[0].replace('_', '-'), reverse=True)
     for version, version_date, blob in candidates[:limit]:
         batch_job_id, issue = _read_batch_job_id(blob, version,
                                                  identity['simple_import_name'])

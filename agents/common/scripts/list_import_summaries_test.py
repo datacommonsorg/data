@@ -202,6 +202,23 @@ class ListImportSummariesTest(unittest.TestCase):
         ], [item['version'] for item in result['results']])
         self.assertEqual('2026-08-07', result['results'][0]['date'])
 
+    def test_sorts_mixed_version_formats_by_date(self):
+        versions = [
+            '2026_08_03T01_02_03_123456_07_00',
+            '2026-08-04',
+        ]
+
+        result = list_import_summaries(
+            'scripts/a:Import',
+            'project',
+            'bucket',
+            client=_StorageClient([_blob(version) for version in versions]))
+
+        self.assertEqual([
+            '2026-08-04',
+            '2026_08_03T01_02_03_123456_07_00',
+        ], [item['version'] for item in result['results']])
+
     def test_returns_no_history_when_scan_limit_is_exceeded(self):
         blobs = [
             _blob(f'2026_07_{(index % 28) + 1:02d}T01_02_03_{index:06d}_07_00')
