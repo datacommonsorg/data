@@ -3,7 +3,7 @@
 ## 1\. Overview
 
 This document outlines several recurring production job failures, some of these failures are caused by minor or temporary data deletions. By increasing the threshold, we can prevent these jobs from failing due to non-permanent issues. However, before adjusting these thresholds, we will implement new validation rules to ensure that crucial data is never lost, even during minor deletions.  
-More details can be found here [DC - Imports Execution Learnings ](docs_summary/dc_imports_execution_learnings.md)
+More details can be found here [DC - Imports Execution Learnings](docs_summary/dc_imports_execution_learnings.md)
 
 ## 2\. Most Recurring Job Failures
 

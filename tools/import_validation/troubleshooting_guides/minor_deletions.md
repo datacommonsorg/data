@@ -54,8 +54,7 @@ Now, we need to run the whole import process on our own computer. This helps us 
 
 Now that we know the deletions are real, we need to validate them against the original data source to confirm the source actually removed the data.
 
-1. **Locate the Textproto File:** To find out exactly where the data came from, check the `textproto` file for this import. For EurostatData_Fertility, the file path is: `datacommons/import/mcf/manifest/international_stats/EurostatData_Fertility.textproto`  
-   * You can search for this file using Google Code Search: [EurostatData\_Fertility.textproto Link](screens/eurostat_fertility_textproto_source.png)
+1. **Locate the Textproto File:** To find out exactly where the data came from, check the file <import_name>.textproto file in Google's internal code base. For EurostatData_Fertility, the file path is: `datacommons/import/mcf/manifest/international_stats/EurostatData_Fertility.textproto`
 2. **Find the Source URL:** Open the `textproto` file and look for the line that says: `provenance_url: "https://ec.europa.eu/eurostat/databrowser/view/demo_r_find3/default/table?lang=en"` This URL tells us exactly where the data is downloaded from.  
 3. **Navigate the Source Website:** Open that source URL. On the Eurostat website, click on the **Explore Data** option, and then click on **Access Data**. This will allow you to see their entire dataset.  
 4. **Manually Verify Deleted Records:** check at your `obs_diff_logs.csv` file and pick out 5 to 6 specific deleted records. Go back to the EurostatData website and manually filter the data by entering the parameters for those specific records.  

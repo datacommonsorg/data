@@ -4,7 +4,7 @@
 
 Pipeline disruptions frequently arise from unexpected modifications to source data structures. These breaking changes—including altered formats, deleted records, or revised schema definitions—interfere with established ingestion and processing workflows.
 
-Information regarding the most frequent types of import failures can be found [DC - Imports Execution Learnings ](docs_summary/dc_imports_execution_learnings.md)
+Information regarding the most frequent types of import failures can be found [DC - Imports Execution Learnings](docs_summary/dc_imports_execution_learnings.md)
 
 *Historical instances requiring code adjustments:*
 
@@ -22,9 +22,9 @@ Information regarding the most frequent types of import failures can be found [D
 Modifications to source data are causing pipeline failures. When a data source alters its format, removes records, or changes schema definitions without notice, it introduces breaking changes that disrupt our ingestion and processing workflows.  
 For example, code fixes were required after changes occurred in the following datasets:
 
-1. WorldBankDatasets: [WorldBankDatasets ](docs_summary/world_bank_datasets_summary.md)  
-2. EurostatData\_lifeexpectency: [EurostatData\_LifeExpectancy](docs_summary/eurostat_life_expectancy_summary.md)  
-3. UsMontlyRetailSales : [ USMontlyRetailsales](docs_summary/us_monthly_retail_sales_summary.md)
+1. WorldBankDatasets: [WorldBankDatasets](docs_summary/world_bank_datasets_summary.md)  
+2. EurostatData\_lifeexpectency: [EurostatData_LifeExpectancy](docs_summary/eurostat_life_expectancy_summary.md)  
+3. UsMontlyRetailSales : [USMontlyRetailsales](docs_summary/us_monthly_retail_sales_summary.md)
 
    
 
@@ -45,7 +45,7 @@ The data has been officially removed from the source system. In this case, the s
 
 1. In case of deletions, we check for generated o/p CSV \-\> in o/p folder of an import/timestamp folder  
 
-   For example, Historical has been stored in [EurostatData\_Employment\_Per\_Sector](docs_summary/eurostat_employment_per_sector_summary.md) & latest\_version.txt has been updated in [EIA\_NuclearOutages](docs_summary/eia_nuclear_outages_summary.md)
+   For example, Historical has been stored in [EurostatData_Employment_Per_Sector](docs_summary/eurostat_employment_per_sector_summary.md) & latest\_version.txt has been updated in [EIA_NuclearOutages](docs_summary/eia_nuclear_outages_summary.md)
 
 **Standard procedures for addressing the problem**
 
@@ -63,7 +63,7 @@ These failures are typically caused by one of the following reasons:
 * The external source changed the URL structure or moved the data to a new location.  
 * The external source's server is temporarily unresponsive.  
 * A firewall is blocking our connection to the source URL.  
-  The `UsCensusPep_xxx` data import pipeline has experienced frequent failures (28 occurrences to date) due to issues with the source URLs. eg: [USCensusPEP\_AgeSexRace](docs_summary/uscensuspep_agesexrace_summary.md)
+  The `UsCensusPep_xxx` data import pipeline has experienced frequent failures (28 occurrences to date) due to issues with the source URLs. eg: [USCensusPEP_AgeSexRace](docs_summary/uscensuspep_agesexrace_summary.md)
 
 **Standard procedures for addressing the problem**
 
@@ -88,7 +88,7 @@ The BLS\_CES import process utilizes an API for data retrieval; however, executi
 
 The pipeline fails with a `missingReferenceObservationAbout` or `missingReferencesVariableMeasured` error when the source website adds new data (like new locations or new variables) that do not exist in our system yet. Because Data Commons doesn't recognize these new entities, the import fails.
 
-The EIA\_SEDS  & US\_SAT\_ACT\_Participation imports  has some data additions [EIA\_SEDS-2026-](docs_summary/eia_seds_summary.md) & [Support P2 - Auto Refresh Failed Imports: US\_SAT\_ACT\_Participation](bugs_summary/507394518.md)
+The EIA\_SEDS  & US\_SAT\_ACT\_Participation imports  has some data additions [EIA_SEDS-2026-](docs_summary/eia_seds_summary.md) & [Support P2 - Auto Refresh Failed Imports: US_SAT_ACT_Participation](bugs_summary/507394518.md)
 
 **Standard procedures for addressing the problem**
 

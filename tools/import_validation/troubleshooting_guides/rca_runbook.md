@@ -36,7 +36,7 @@ Step 1: Go to the looker [dashboard](https://lookerstudio.google.com/c/reporting
 
 Pipelines having the state as “VALIDATION” or “FAILED” are the candidates for performing RCA.
 
-Step 2: Next, for each failed pipeline check the priority status. The same can be determined from the [Code Search](screens/code_search_portal.png)  portal. Search for the import name in the Code Search portal and determine the respective import group for each of the pipelines from the respective manifest.json files.
+Step 2: Next, for each failed pipeline check the priority status. The same can be determined from the Google's internal codebase (G3)  Search for the import name in the Code Search portal and determine the respective import group for each of the pipelines from the respective <import_name>.txtproto files.
 
 | Classification | Priority Ranking | import\_groups |
 | :---- | :---- | :---- |
