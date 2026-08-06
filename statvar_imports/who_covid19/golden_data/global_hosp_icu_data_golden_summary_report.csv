@@ -1,0 +1,3 @@
+"observationPeriods","MinDate","MeasurementMethods","StatVar","ScalingFactors","NumPlaces","Units"
+"[P1W, P1M]","2020-01-05","[]","Count_MedicalConditionIncident_COVID_19_PatientHospitalized","[]","183","[]"
+"[P1W, P1M]","2020-01-05","[]","Count_MedicalConditionIncident_COVID_19_PatientInICU","[]","153","[]"
