@@ -1,6 +1,6 @@
 ---
 name: dc-import-postmortem-doc
-description: Generates standardized troubleshooting post-mortem documents from conversation context after diagnosing or fixing an import failure. Captures discovered infrastructure identifiers, root causes, CI/CD gaps, fixes, and long-term preventions into agents/troubleshooting/YYYY-MM-DD/<import_name>_YYYYMMDD.md for offline review and pattern extraction.
+description: Generates standardized troubleshooting post-mortem documents from conversation context after diagnosing or fixing an import failure. Captures discovered infrastructure identifiers, root causes, CI/CD gaps, fixes, and long-term preventions into agents/troubleshooting/YYYY-MM-DD/<import_name>_YYYYMMDD_HHMMSS.md for offline review and pattern extraction.
 ---
 
 # Generate Import Troubleshooting Post-Mortem Documentation
@@ -15,14 +15,15 @@ These documents form an offline repository in `agents/troubleshooting/` to help 
 
 Always create the post-mortem report at:
 ```text
-agents/troubleshooting/<YYYY-MM-DD>/<import_name>_<YYYYMMDD>.md
+agents/troubleshooting/<YYYY-MM-DD>/<import_name>_<YYYYMMDD>_<HHMMSS>.md
 ```
-* `<YYYY-MM-DD>`: The date the incident occurred or was investigated (e.g. `2026-08-06`).
+* `<YYYY-MM-DD>`: The date the incident occurred or was investigated in UTC (e.g. `2026-08-06`).
 * `<import_name>`: The exact simple name of the import (e.g. `USCensusPEP_Sex`).
-* `<YYYYMMDD>`: The date without dashes (e.g. `20260806`).
+* `<YYYYMMDD>`: The UTC date without dashes (e.g. `20260806`).
+* `<HHMMSS>`: The current UTC time of document generation (24-hour format, e.g. `102735` for 10:27:35 UTC). This ensures unique filenames even if multiple investigations or runs occur on the same day.
 
 Example:
-`agents/troubleshooting/2026-08-06/USCensusPEP_Sex_20260806.md`
+`agents/troubleshooting/2026-08-06/USCensusPEP_Sex_20260806_102735.md`
 
 ---
 
@@ -65,6 +66,7 @@ Every generated troubleshooting document must strictly conform to the following 
 ---
 import_name: "<IMPORT_NAME>"
 date: "<YYYY-MM-DD>"
+created_at: "<YYYY-MM-DDTHH:MM:SSZ>"
 status: "FAILURE"
 resolution_status: "<RESOLVED|UNRESOLVED|IN_PROGRESS>"
 failure_category: "<CATEGORY_FROM_TAXONOMY>"
@@ -93,7 +95,7 @@ execution_end_time: <UTC_TIMESTAMP_OR_NULL>
 | Field | Value | Source / Discovery Method |
 |---|---|---|
 | **Import Name** | `<import_name>` | Repository Manifest / Spanner |
-| **Manifest Path** | [`<path>`](<repo_relative_path>) | Local repository catalog |
+| **Manifest Path** | `<manifest_path>` | Local repository catalog |
 | **Spanner State** | `FAILURE` | Cloud Spanner `ImportStatus` |
 | **Batch Job ID** | `<job_id>` | Spanner / Batch API |
 | **Batch Job UID** | `<job_uid>` | `gcloud batch jobs describe` |
