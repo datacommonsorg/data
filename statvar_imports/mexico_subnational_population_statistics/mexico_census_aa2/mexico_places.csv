@@ -1,5 +1,6 @@
 place_name,dcid,placeId,name,alternateName,typeOf,containedInPlace
 Mexico,country/MEX,,Mexico,United Mexican States,Country,"northamerica,Earth"
+MX,country/MEX,,Mexico,United Mexican States,Country,"northamerica,Earth"
 MX01,wikidataId/Q79952,,Aguascalientes,Estado de Aguascalientes,AdministrativeArea1,"country/MEX,Earth,northamerica"
 MX02,wikidataId/Q58731,,Baja California,Estado de Baja California,AdministrativeArea1,"country/MEX,Earth,northamerica"
 MX03,wikidataId/Q46508,,Baja California Sur,South Territory of Baja California,AdministrativeArea1,"country/MEX,Earth,northamerica"
