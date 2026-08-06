@@ -1101,7 +1101,8 @@ class PopulationEstimateBySex:
                 value_vars=['Count_Person_Male', 'Count_Person_Female'],
                 var_name="SV",
                 value_name="Observation")
-            final_df['Observation'] = final_df['Observation'].astype('int64')
+            final_df['Observation'] = pd.to_numeric(
+                final_df['Observation'], errors='coerce').astype('Int64')
             subset_cols = ['Year', 'geo_ID', 'Measurement_Method', 'SV']
             # 2. Drop duplicates based on those columns, keeping the first occurrence
             final_df.drop_duplicates(subset=subset_cols,
