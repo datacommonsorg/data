@@ -45,7 +45,7 @@ YEAR_HEADER_PATTERN = re.compile(r'^\s*(\d{4})[a-zA-Z*#]+\s*$')
 def resolve_url(landing_url=LANDING_PAGE_URL,
                 file_pattern=FILE_PATTERN,
                 headers=None,
-                tries=3,
+                tries=10,
                 delay=5,
                 backoff=2):
     """
@@ -151,7 +151,7 @@ def main(_):
         logging.error("Failed to resolve URL from landing page.")
         sys.exit(1)
 
-    if not download_file(resolved_url, OUTPUT_FOLDER, False, None):
+    if not download_file(resolved_url, OUTPUT_FOLDER, False, None, tries=10):
         logging.error(
             "File download or processing failed. Check logs for details.")
         sys.exit(1)
