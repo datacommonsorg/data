@@ -337,6 +337,8 @@ def extract_properties_from_ind_hazard_row(row):
     # solve by renaming to match existing DC class
     if hazard_type == "CoastalFloodingEvent":
         hazard_type = "CoastalFloodEvent"
+    elif hazard_type == "InlandFloodingEvent":
+        hazard_type = "RiverineFloodingEvent"
     measured_property = apply_datacommon_alias(
         get_nth_dash_from_field_alias(row, 1))
 
