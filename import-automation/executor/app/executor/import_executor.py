@@ -655,9 +655,9 @@ class ImportExecutor:
                     import_input=import_input,
                     absolute_import_dir=absolute_import_dir)
                 if differ_summary is not None:
-                    diff_found = (differ_summary.get('obs_diff_size', 1) != 0 or
-                                  differ_summary.get('schema_diff_size',
-                                                     1) != 0)
+                    diff_found = (
+                        differ_summary.get('obs_diff_count', 1) != 0 or
+                        differ_summary.get('schema_diff_count', 1) != 0)
                     differ_output = validation_output_path
             else:
                 logging.error('Skipping differ tool as per import config')
