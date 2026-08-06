@@ -78,15 +78,15 @@ class ListImportSummariesTest(unittest.TestCase):
                                        client=client)
 
         self.assertEqual('scripts/a:Import', result['absolute_import_name'])
-        self.assertEqual(100, result['scan_limit'])
+        self.assertEqual(1000, result['scan_limit'])
         self.assertEqual(1, len(client.calls))
         bucket, kwargs = client.calls[0]
         self.assertEqual('bucket', bucket)
         self.assertEqual('scripts/a/Import/', kwargs['prefix'])
         self.assertEqual('scripts/a/Import/*/import_summary.json',
                          kwargs['match_glob'])
-        self.assertEqual(101, kwargs['max_results'])
-        self.assertEqual(101, kwargs['page_size'])
+        self.assertEqual(1001, kwargs['max_results'])
+        self.assertEqual(1001, kwargs['page_size'])
         self.assertEqual('items(name),nextPageToken', kwargs['fields'])
 
     def test_returns_newest_five_with_date_and_batch_job_id(self):
@@ -184,10 +184,28 @@ class ListImportSummariesTest(unittest.TestCase):
             'summary_job_id_missing', 'summary_missing'
         ], [issue['code'] for issue in result['issues']])
 
+    def test_returns_date_only_versions(self):
+        versions = [f'2026-08-0{day}' for day in (3, 1, 7, 2, 6, 4, 5)]
+        blobs = [_blob(version) for version in versions]
+
+        result = list_import_summaries('scripts/a:Import',
+                                       'project',
+                                       'bucket',
+                                       client=_StorageClient(blobs))
+
+        self.assertEqual([
+            '2026-08-07',
+            '2026-08-06',
+            '2026-08-05',
+            '2026-08-04',
+            '2026-08-03',
+        ], [item['version'] for item in result['results']])
+        self.assertEqual('2026-08-07', result['results'][0]['date'])
+
     def test_returns_no_history_when_scan_limit_is_exceeded(self):
         blobs = [
             _blob(f'2026_07_{(index % 28) + 1:02d}T01_02_03_{index:06d}_07_00')
-            for index in range(101)
+            for index in range(1001)
         ]
 
         result = list_import_summaries('scripts/a:Import',
@@ -196,7 +214,7 @@ class ListImportSummariesTest(unittest.TestCase):
                                        client=_StorageClient(blobs))
 
         self.assertTrue(result['scan_truncated'])
-        self.assertEqual(101, result['scanned_summary_count'])
+        self.assertEqual(1001, result['scanned_summary_count'])
         self.assertEqual([], result['results'])
         self.assertEqual(0, sum(blob.download_count for blob in blobs))
         self.assertEqual('summary_scan_limit_exceeded',
