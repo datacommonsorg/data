@@ -23,9 +23,16 @@ from absl import flags
 
 # module_dir is the path to where this test is running from.
 MODULE_DIR = os.path.dirname(__file__)
-sys.path.insert(0, MODULE_DIR)
+_SCRIPTS_DIR = os.path.abspath(os.path.join(MODULE_DIR, '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPTS_DIR)
+sys.path.insert(1, MODULE_DIR)
+
 # pylint: disable=wrong-import-position
-from process import PopulationEstimateBySex
+try:
+    from us_census.pep.us_pep_sex.process import PopulationEstimateBySex
+except ImportError:
+    from process import PopulationEstimateBySex
 # pylint: enable=wrong-import-position
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")

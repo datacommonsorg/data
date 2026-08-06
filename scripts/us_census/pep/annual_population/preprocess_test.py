@@ -21,11 +21,19 @@ import unittest
 import tempfile
 # _MODULE_DIR is the path to where this test is running from.
 _MODULE_DIR = os.path.dirname(__file__)
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPTS_DIR)
 sys.path.insert(1, _MODULE_DIR)
+
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
-from preprocess import process
-from constants import TEST_DATA_DIR
+try:
+    from us_census.pep.annual_population.preprocess import process
+    from us_census.pep.annual_population.constants import TEST_DATA_DIR
+except ImportError:
+    from preprocess import process
+    from constants import TEST_DATA_DIR
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 
