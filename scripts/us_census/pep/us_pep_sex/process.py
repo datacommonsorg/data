@@ -34,9 +34,11 @@ import tempfile
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_string('config_path', '',
-                    'Path to the configuration file in the GCS bucket.')
+if 'mode' not in flags.FLAGS:
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+if 'config_path' not in flags.FLAGS:
+    flags.DEFINE_string('config_path', '',
+                        'Path to the configuration file in the GCS bucket.')
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
@@ -58,7 +60,9 @@ _USSTATE_SHORT_FORM = statetoshortform.USSTATE_MAP
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "gcs_folder/us_pep_sex_source_files")
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+if 'input_path' not in flags.FLAGS:
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                  "typeOf: dcs:StatisticalVariable\n"
@@ -441,12 +445,12 @@ def _state_1980_1990(file_path: str) -> pd.DataFrame:
         if year == 1987:
             df = pd.read_table(file_path,
                                skiprows=29,
-                               delim_whitespace=True,
+                               sep=r'\s+',
                                names=column_names)
         else:
             df = pd.read_table(file_path,
                                skiprows=28,
-                               delim_whitespace=True,
+                               sep=r'\s+',
                                names=column_names)
         df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(2)
         df['Year'] = year
@@ -691,6 +695,11 @@ def _county_1980_1990(file_path: str) -> pd.DataFrame:
     """
     try:
         df = pd.read_csv(file_path, skiprows=5)
+        df = df.dropna(
+            subset=['Year of Estimate', 'FIPS State and County Codes'])
+        df['Year of Estimate'] = df['Year of Estimate'].astype('int64')
+        df['FIPS State and County Codes'] = df[
+            'FIPS State and County Codes'].astype('int64')
         # adding age groups to get total value
         df['Total'] = df[_COLUMNS_TO_SUM].sum(axis=1)
         df = df.drop(columns=_COLUMNS_TO_SUM)
@@ -736,7 +745,7 @@ def _county_1990_2000(file_path: str) -> pd.DataFrame:
     """
     try:
         column_names = ['Year', 'geo_ID', 'Age', 'Race-Sex', 'Ethnic', 'Value']
-        df = pd.read_table(file_path, delim_whitespace=True, header=None)
+        df = pd.read_table(file_path, sep=r'\s+', header=None)
         df.columns = column_names
         df['Year'] = '19' + df['Year'].astype(str)
         df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(5)
@@ -1092,6 +1101,7 @@ class PopulationEstimateBySex:
                 value_vars=['Count_Person_Male', 'Count_Person_Female'],
                 var_name="SV",
                 value_name="Observation")
+            final_df['Observation'] = final_df['Observation'].astype('int64')
             subset_cols = ['Year', 'geo_ID', 'Measurement_Method', 'SV']
             # 2. Drop duplicates based on those columns, keeping the first occurrence
             final_df.drop_duplicates(subset=subset_cols,

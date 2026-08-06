@@ -42,24 +42,22 @@ class TestPreprocess(unittest.TestCase):
 
         files_dir = os.path.join(_MODULE_DIR, TEST_DATA_DIR, "datasets")
 
-        data_file_path = os.path.join(_MODULE_DIR, TEST_DATA_DIR,
-                                      "output_files")
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            cleaned_csv_path = os.path.join(tmp_dir,
+                                            "usa_annual_population.csv")
+            mcf_path = os.path.join(tmp_dir, "usa_annual_population.mcf")
+            tmcf_path = os.path.join(tmp_dir, "usa_annual_population.tmcf")
 
-        cleaned_csv_path = os.path.join(data_file_path,
-                                        "usa_annual_population.csv")
-        mcf_path = os.path.join(data_file_path, "usa_annual_population.mcf")
-        tmcf_path = os.path.join(data_file_path, "usa_annual_population.tmcf")
+            process(files_dir, cleaned_csv_path, mcf_path, tmcf_path, False)
 
-        process(files_dir, cleaned_csv_path, mcf_path, tmcf_path, False)
+            with open(mcf_path, encoding="UTF-8") as mcf_file:
+                self._actual_mcf_data = mcf_file.read()
 
-        with open(mcf_path, encoding="UTF-8") as mcf_file:
-            self._actual_mcf_data = mcf_file.read()
+            with open(tmcf_path, encoding="UTF-8") as tmcf_file:
+                self._actual_tmcf_data = tmcf_file.read()
 
-        with open(tmcf_path, encoding="UTF-8") as tmcf_file:
-            self._actual_tmcf_data = tmcf_file.read()
-
-        with open(cleaned_csv_path, encoding="utf-8") as csv_file:
-            self._actual_csv_data = csv_file.read()
+            with open(cleaned_csv_path, encoding="utf-8") as csv_file:
+                self._actual_csv_data = csv_file.read()
 
     def test_mcf_tmcf_files(self):
         """
