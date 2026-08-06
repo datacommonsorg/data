@@ -65,6 +65,24 @@ flags.DEFINE_string('api_key',
                     'directory where api key exists')
 
 
+def _get_mode():
+    if _FLAGS.is_parsed():
+        return _FLAGS.mode
+    return ""
+
+
+def _get_start_year():
+    if _FLAGS.is_parsed():
+        return _FLAGS.start_year
+    return 2024
+
+
+def _get_api_key_path():
+    if _FLAGS.is_parsed():
+        return _FLAGS.api_key
+    return 'gs://unresolved_mcf/us_usda/ag_survey/api_key.json'
+
+
 def process_survey_data(year, svs, input_dir, out_dir):
     """
     Processes survey data for the given year and saves the results.
@@ -81,7 +99,7 @@ def process_survey_data(year, svs, input_dir, out_dir):
     logging.info(f'Start, {year}, =, {start}')
     try:
         logging.info(f"start processing data for the year : {year}")
-        if _FLAGS.mode == "" or _FLAGS.mode == "download":
+        if _get_mode() == "" or _get_mode() == "download":
             os.makedirs(get_parts_dir(input_dir, year), exist_ok=True)
             os.makedirs(get_response_dir(input_dir, year), exist_ok=True)
             os.makedirs(out_dir, exist_ok=True)
@@ -98,7 +116,7 @@ def process_survey_data(year, svs, input_dir, out_dir):
                     zip(county_names, repeat(year), repeat(svs),
                         repeat(input_dir)))
 
-        if _FLAGS.mode == "" or _FLAGS.mode == "process":
+        if _get_mode() == "" or _get_mode() == "process":
             write_aggregate_csv(year, input_dir, out_dir)
 
         end = datetime.datetime.now()
@@ -209,7 +227,7 @@ def get_survey_county_data(year, county, input_dir):
     logging.info(f"Fetching survey data for county: {county} and year: {year}")
 
     response_file = get_response_file_path(input_dir, year, county)
-    if _FLAGS.mode == "process":
+    if _get_mode() == "process":
         try:
             if os.path.exists(response_file):
                 logging.info(f"Reading response from file: {response_file}")
@@ -224,7 +242,7 @@ def get_survey_county_data(year, county, input_dir):
             )
             return {'data': []}
 
-    if _FLAGS.mode == "" or _FLAGS.mode == "download":
+    if _get_mode() == "" or _get_mode() == "download":
 
         params = {
             'key': get_usda_api_key(),
@@ -236,9 +254,12 @@ def get_survey_county_data(year, county, input_dir):
             response = get_data(params)
             if response is None:
                 logging.error(
-                    f"get_data() returned None for county: {county}. Raising error to prevent silent data loss.")
-                raise RuntimeError(f"get_data() returned None for county: {county}")
+                    f"get_data() returned None for county: {county}. Raising error to prevent silent data loss."
+                )
+                raise RuntimeError(
+                    f"get_data() returned None for county: {county}")
 
+            os.makedirs(os.path.dirname(response_file), exist_ok=True)
             with open(response_file, 'w') as f:
                 logging.info(f"Writing response to file: {response_file}")
                 json.dump(response, f, indent=2)
@@ -300,8 +321,7 @@ def get_data(params):
             except Exception:
                 pass
             logging.warning(
-                f"API returned 400 status code with error: {response.text}"
-            )
+                f"API returned 400 status code with error: {response.text}")
             raise requests.exceptions.RequestException(
                 f"Status 400 error: {response.text}")
 
@@ -422,7 +442,8 @@ def to_csv_rows(api_data, svs):
 
 def load_svs():
     svs = {}
-    with open("sv.csv", newline='') as csvfile:
+    sv_path = os.path.join(_SCRIPT_PATH, "sv.csv")
+    with open(sv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             svs[row['name']] = row
@@ -443,7 +464,7 @@ def get_multiple_years():
     start = datetime.datetime.now()
     logging.info(f'Start, {start}')
     svs = load_svs()
-    start_year = _FLAGS.start_year
+    start_year = _get_start_year()
     for year in range(start_year, datetime.datetime.now().year + 1):
         process_survey_data(year, svs, "input", "output")
     end = datetime.datetime.now()
@@ -466,7 +487,7 @@ def load_usda_api_key():
 def get_usda_api_key():
     """Reads the USDA API key from the bucket path."""
     # This function now correctly returns the key from the config module.
-    file_config = file_util.file_load_py_dict(_FLAGS.api_key)
+    file_config = file_util.file_load_py_dict(_get_api_key_path())
     api_key = file_config.get('api_key')
     return api_key
 
