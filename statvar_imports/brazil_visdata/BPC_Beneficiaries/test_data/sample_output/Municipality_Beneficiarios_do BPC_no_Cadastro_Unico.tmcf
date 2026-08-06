@@ -1,0 +1,8 @@
+Node: E:Municipality_Beneficiarios_do BPC_no_Cadastro_Unico->E0
+observationAbout: C:Municipality_Beneficiarios_do BPC_no_Cadastro_Unico->observationAbout
+observationDate: C:Municipality_Beneficiarios_do BPC_no_Cadastro_Unico->observationDate
+value: C:Municipality_Beneficiarios_do BPC_no_Cadastro_Unico->value
+variableMeasured: C:Municipality_Beneficiarios_do BPC_no_Cadastro_Unico->variableMeasured
+unit: C:Municipality_Beneficiarios_do BPC_no_Cadastro_Unico->unit
+scalingFactor: C:Municipality_Beneficiarios_do BPC_no_Cadastro_Unico->scalingFactor
+typeOf: dcs:StatVarObservation
