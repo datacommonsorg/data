@@ -31,6 +31,7 @@ Example:
 - **Rely on Context**: Synthesize the post-mortem exclusively from facts, logs, exit codes, and infrastructure identifiers surfaced during the current conversation session.
 - **No Extra Cloud Queries**: Do not run additional cloud commands during documentation generation.
 - **Explicit Unresolved Values**: If a particular piece of metadata was not queried or discovered (e.g., source commit, workflow ID), record it explicitly as `null` or `not_discovered`. Never invent or guess values.
+- **Null Value Formatting**: When values are null or unresolved, write unquoted `null` in the YAML frontmatter (not `"null"`) so YAML parsers treat them as true null values rather than literal strings.
 - **Use Repository-Relative Paths**: Do NOT use local machine-specific absolute filesystem paths (e.g. `/usr/local/google/home/...`). Always cite files relative to the repository root (e.g. `scripts/us_census/pep/us_pep_sex/process.py`) so documents remain portable across environments.
 - **Handle Partial or Unresolved Sessions**: Troubleshooting sessions do not always conclude with a fix or definitive root cause.
   - Set `resolution_status: "RESOLVED"`, `"UNRESOLVED"`, or `"IN_PROGRESS"` in the frontmatter.
@@ -47,6 +48,7 @@ Populate `failure_category` in the YAML frontmatter with one of the standard cat
 |---|---|---|
 | `dependency_drift` | Package/library updates, version mismatches, or deprecated APIs | `pandas_delim_whitespace_removed` |
 | `oom_memory_pressure` | Task ran out of memory, kernel OOM-killer invoked, VM hung/unresponsive | `batch_50002_mcf_load_oom` |
+| `permission_or_auth_error` | Insufficient IAM permissions, authentication failures, expired API tokens | `gcs_permission_denied` |
 | `upstream_source_error` | External data source unavailable, download 404/500, format changed | `download_url_404` |
 | `schema_mismatch` | MCF/TMCF syntax errors, unknown StatVar properties or nodes | `unresolved_statvar_property` |
 | `code_logic_error` | Python syntax error, unhandled exception, regex mismatch, parsing bug | `index_out_of_range` |
@@ -67,18 +69,18 @@ status: "FAILURE"
 resolution_status: "<RESOLVED|UNRESOLVED|IN_PROGRESS>"
 failure_category: "<CATEGORY_FROM_TAXONOMY>"
 sub_category: "<SPECIFIC_SUB_CATEGORY>"
-manifest_path: "<REPO_RELATIVE_PATH_OR_NULL>"
-absolute_import_name: "<DIRECTORY:IMPORT_NAME_OR_NULL>"
+manifest_path: <REPO_RELATIVE_PATH_OR_NULL>
+absolute_import_name: <DIRECTORY_IMPORT_NAME_OR_NULL>
 environment: "<prod|staging>"
-job_id: "<BATCH_JOB_ID_OR_NULL>"
-job_uid: "<BATCH_JOB_UID_OR_NULL>"
+job_id: <BATCH_JOB_ID_OR_NULL>
+job_uid: <BATCH_JOB_UID_OR_NULL>
 exit_code: <INTEGER_OR_NULL>
-image_uri: "<DOCKER_IMAGE_URI_OR_NULL>"
-source_commit: "<GIT_COMMIT_OR_NULL>"
-workflow_id: "<WORKFLOW_EXECUTION_ID_OR_NULL>"
-gcs_latest_version: "<GCS_VERSION_URI_OR_NULL>"
-execution_start_time: "<UTC_TIMESTAMP_OR_NULL>"
-execution_end_time: "<UTC_TIMESTAMP_OR_NULL>"
+image_uri: <DOCKER_IMAGE_URI_OR_NULL>
+source_commit: <GIT_COMMIT_OR_NULL>
+workflow_id: <WORKFLOW_EXECUTION_ID_OR_NULL>
+gcs_latest_version: <GCS_VERSION_URI_OR_NULL>
+execution_start_time: <UTC_TIMESTAMP_OR_NULL>
+execution_end_time: <UTC_TIMESTAMP_OR_NULL>
 ---
 
 # Troubleshooting Post-Mortem: <IMPORT_NAME>
