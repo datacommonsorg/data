@@ -41,28 +41,31 @@ class TestProcess(unittest.TestCase):
     Comparing the data with the expected files.
     """
 
-    def __init__(self, methodName: str = ...) -> None:
-        super().__init__(methodName)
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp_dir_obj = tempfile.TemporaryDirectory()
+        tmp_dir = cls.tmp_dir_obj.name
+        cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
+        mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
+        tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
-            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
-            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+        base = PopulationEstimateBySex(TEST_DATASET_DIR, cleaned_csv_file_path,
+                                       mcf_file_path, tmcf_file_path)
+        base.process()
 
-            base = PopulationEstimateBySex(TEST_DATASET_DIR,
-                                           cleaned_csv_file_path, mcf_file_path,
-                                           tmcf_file_path)
-            base.process()
+        with open(mcf_file_path, mode='r', encoding="UTF-8") as mcf_file:
+            cls.actual_mcf_data = mcf_file.read()
 
-            with open(mcf_file_path, mode='r', encoding="UTF-8") as mcf_file:
-                self.actual_mcf_data = mcf_file.read()
+        with open(tmcf_file_path, mode='r', encoding="UTF-8") as tmcf_file:
+            cls.actual_tmcf_data = tmcf_file.read()
 
-            with open(tmcf_file_path, mode='r', encoding="UTF-8") as tmcf_file:
-                self.actual_tmcf_data = tmcf_file.read()
+        with open(cleaned_csv_file_path, mode='r',
+                  encoding="utf-8-sig") as csv_file:
+            cls.actual_csv_data = csv_file.read()
 
-            with open(cleaned_csv_file_path, mode='r',
-                      encoding="utf-8-sig") as csv_file:
-                self.actual_csv_data = csv_file.read()
+    @classmethod
+    def tearDownClass(cls):
+        cls.tmp_dir_obj.cleanup()
 
     def test_mcf_tmcf_files(self):
         """
