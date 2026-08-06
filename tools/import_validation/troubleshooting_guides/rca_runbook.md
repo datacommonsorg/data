@@ -65,7 +65,7 @@ Step 5:  Next, traverse the logs of the pipelines and search for the respective 
 2. Validation and lint errors: Signifies that the pipeline failed because of validation and lint errors. [Screenshot](screens/3nosGztEJKr2pZV.png)  
 3.  Pre processing script failed: Signifies that the script responsible for either downloading the data or processing the data has failed. [Screenshot](screens/9KjTNR3EF8644v8.png)
 
-Step 6: Based on RCA, plan the error resolution. Discuss issues with the CORE TEAM on a need basis. Also, prepare a document capturing the issues and the next actions. [Template](docs_summary/wdi_auto_failure_validation_template.md
+Step 6: Based on RCA, plan the error resolution. Discuss issues with the CORE TEAM on a need basis. Also, prepare a document capturing the issues and the next actions. [Template](docs_summary/wdi_auto_failure_validation_template.md)
 
 Step 7: Change the code (if required) and raise [CL/PR] as appropriate. 
 

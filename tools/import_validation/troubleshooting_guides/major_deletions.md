@@ -83,7 +83,7 @@ If you prefer to run the individual steps of the pipeline manually:
 Now that we know the deletions are real, we need to validate them against the original data source to confirm the source actually removed the data.
 
 1. **Locate the Textproto File:** To find out exactly where the data came from, check the `textproto` file for this import. For WorldDevelopmentIndicators, the file path is: `google3/datacommons/import/mcf/manifest/international_stats/WorldDevelopmentIndicators.textproto`  
-   * You can search for this file using Google Code Search: [WorldDevelopmentIndicators.textproto Link](screens/wdi_textproto_source.png  
+   * You can search for this file using Google Code Search: [WorldDevelopmentIndicators.textproto Link](screens/wdi_textproto_source.png)
 2. **Find the Source URL:** Open the `textproto` file and look for the line that says: `provenance_url: "https://datatopics.worldbank.org/world-development-indicators/"` This URL tells us exactly where the data is downloaded from.  
 3. **Navigate the Source Website:** Open that source URL. On the World Bank website, click on the **Explore Data** option, and then click on **Access Data**. This will allow you to see their entire dataset.  
 4. **Manually Verify Deleted Records:** check at your `nodes_deleted.mcf` file and pick out 5 to 6 specific deleted records. Go back to the World Bank website and manually filter the data by entering the parameters for those specific records.  
@@ -100,14 +100,14 @@ Now that we know the deletions are real, we need to validate them against the or
   WDI April 8, 2026 Changelog [Screenshot](screens/497zku465XJzsJt.png) | [Link](https://datatopics.worldbank.org/world-development-indicators/release-note/apr-2026.html)
 
 5. In my case, the amount of data getting deleted from the source was very huge. When this happens, we cannot just ignore it. We need to:  
-   * **Create a validation error document:** Document the massive deletion properly so there is a clear record of why the job threshold failed and what was removed. [BLS\_CES\_State\_20\_04\_2026](docs_summary/bls_ces_state_deletion_resolution.md  
+   * **Create a validation error document:** Document the massive deletion properly so there is a clear record of why the job threshold failed and what was removed. [BLS\_CES\_State\_20\_04\_2026](docs_summary/bls_ces_state_deletion_resolution.md)
    * **Store the data historically:** Keep a record of the deleted data. (need approval from core team)  
 6. Check for the affected SVs deleted that we find out by taking unique deleted SVs  from the differ & check in BigQuery (Table: `[<BQ_PROJECT>](gcp_variables.md#bq_project).dc_kg_latest.NLStatVars`) if these Svs are present in the NL SVs table.  
 7. Because the deletions are minor & from the source the next would be store Historical data & because it had recurring failure  golden checks \+ threshold increase as per history deletions will also be implemented ( All these steps must be mentioned in the validation error document because we need core team approval to store historical & update the latest\_version.txt)
 
    ## **How to implement golden checks?**
 
-   Consult the following resource for instructions on incorporating goldens into your import process: [Implementation Guide: Golden Set Validations](docs_summary/golden_set_validations_implementation_guide.md
+   Consult the following resource for instructions on incorporating goldens into your import process: [Implementation Guide: Golden Set Validations](docs_summary/golden_set_validations_implementation_guide.md)
 
    ## **How to store historical data ?**
 
