@@ -4,13 +4,13 @@ observationAbout: dcid:country/USA
 observationDate: "2025-01-30"
 measurementMethod: dcid:ConstantMaturityRate
 unit: dcid:Percent
-value: 4.85
+value: 4.81
 typeOf: StatVarObservation
 
 dcid: InterestRate_TreasuryBill_1Year
 maturity: [1 Year]
 measuredProperty: dcid:interestRate
-name: "InterestRate_TreasuryBill_1Year"
+name: "InterestRate_TreasuryBill_01Year"
 populationType: dcid:TreasuryBill
 statType: dcid:measuredValue
 typeOf: dcid:StatisticalVariable
@@ -18,7 +18,7 @@ typeOf: dcid:StatisticalVariable
 dcid: InterestRate_TreasuryNote_2Year
 maturity: [2 Year]
 measuredProperty: dcid:interestRate
-name: "InterestRate_TreasuryNote_2Year"
+name: "InterestRate_TreasuryNote_02Year"
 populationType: dcid:TreasuryNote
 statType: dcid:measuredValue
 typeOf: dcid:StatisticalVariable

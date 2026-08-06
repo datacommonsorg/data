@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.5
+      }
+    },
+    {
+      "rule_id": "check_goldens_nndss_weekly_summary",
+      "description": "Validates NNDSS weekly data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/nndss_weekly_output_golden_summary_report.csv",
+        "input_files": "../../input0/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_nndss_weekly",
+      "description": "Verifies the generated output CSV data matches established critical golden records for NNDSS weekly",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/nndss_weekly_output_golden_observations.csv",
+        "input_files": "../../../../output/nndss_weekly_output.csv"
+      }
+    }
+  ]
+}
