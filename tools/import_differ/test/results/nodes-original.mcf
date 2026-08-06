@@ -9,16 +9,16 @@ typeOf: StatVarObservation
 
 dcid: InterestRate_TreasuryBill_1Year
 maturity: [1 Year]
-measuredProperty: dcs:interestRate
+measuredProperty: dcid:interestRate
 name: "InterestRate_TreasuryBill_01Year"
-populationType: dcs:TreasuryBill
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
+populationType: dcid:TreasuryBill
+statType: dcid:measuredValue
+typeOf: dcid:StatisticalVariable
 
 dcid: InterestRate_TreasuryNote_2Year
 maturity: [2 Year]
-measuredProperty: dcs:interestRate
+measuredProperty: dcid:interestRate
 name: "InterestRate_TreasuryNote_02Year"
-populationType: dcs:TreasuryNote
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
+populationType: dcid:TreasuryNote
+statType: dcid:measuredValue
+typeOf: dcid:StatisticalVariable

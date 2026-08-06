@@ -9,55 +9,24 @@ import sys
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.join(_DATA_DIR, 'util'))
+sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
 
 from file_util import FileIO
 from file_util import file_get_matching
-
-_MCF_VALUE_SPLIT_RE = re.compile(r'\s*(?:"[^"\\]*(?:\\.[^"\\]*)*"|[^,]+)')
-
-
-def _parse_mcf_value(val: str):
-    val = val.strip()
-    if ',' not in val:
-        return val
-    parts = [p.strip() for p in _MCF_VALUE_SPLIT_RE.findall(val) if p.strip()]
-    return parts if len(parts) > 1 else val
+from mcf_file_util import load_mcf_nodes
 
 
-def load_mcf_file(file: str):
+def load_mcf_file(file: str) -> list:
     """ Reads an MCF text file and returns mcf nodes."""
-    with FileIO(file, 'r', encoding='utf-8') as mcf_file:
-        mcf_contents = mcf_file.read()
-    # nodes separated by a blank line
-    mcf_nodes_text = mcf_contents.split('\n\n')
-    # lines seprated as property: constraint
-    mcf_line = re.compile(r'^(\w+)\s*:\s*(.*)$')
-    mcf_nodes = []
-    for node in mcf_nodes_text:
-        current_mcf_node = {}
-        for line in node.split('\n'):
-            parsed_line = mcf_line.match(line)
-            if parsed_line is not None:
-                prop = parsed_line.group(1)
-                val = parsed_line.group(2).strip()
-                current_mcf_node[prop] = _parse_mcf_value(val)
-        if current_mcf_node:
-            mcf_nodes.append(current_mcf_node)
-
-    logging.info(f'Loaded {len(mcf_nodes)} nodes from file {file}')
-    return mcf_nodes
+    nodes_dict = load_mcf_nodes(file)
+    return list(nodes_dict.values())
 
 
-def load_mcf_files(path: str) -> pd.DataFrame:
+def load_mcf_files(path: str) -> list:
     """ Loads all sharded mcf files in the given directory and 
     returns a combined MCF node list."""
-    node_list = []
-    filenames = file_get_matching(path)
-    logging.info(f'Loading {len(filenames)} files from path {path}')
-    for filename in filenames:
-        nodes = load_mcf_file(filename)
-        node_list.extend(nodes)
-    return node_list
+    nodes_dict = load_mcf_nodes(path)
+    return list(nodes_dict.values())
 
 
 def load_csv_data(path: str, tmp_dir: str) -> pd.DataFrame:

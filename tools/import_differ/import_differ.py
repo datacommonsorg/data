@@ -31,9 +31,12 @@ from absl import logging
 from googleapiclient.discovery import build
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
 
 import differ_utils
+from mcf_file_util import normalize_value
 
 _DATAFLOW_TEMPLATE_URL = 'gs://datcom-templates/templates/flex/differ.json'
 
@@ -78,13 +81,12 @@ flags.DEFINE_string('project_id', '', 'GCP project id for the dataflow job.')
 
 
 def val_str(value) -> str:
+    """Normalizes and stringifies a property value for diff comparison."""
     if isinstance(value, list):
-        return ", ".join([val_str(v) for v in value])
-    if (value and isinstance(value, str) and " " in value and
-            value[0].isalpha() and
-            not (value.startswith('"') and value.endswith('"'))):
-        return '"' + value + '"'
-    return str(value)
+        return ", ".join(sorted([val_str(v) for v in value]))
+    if isinstance(value, str):
+        return str(normalize_value(value))
+    return str(value) if value is not None else ''
 
 
 class ImportDiffer:
