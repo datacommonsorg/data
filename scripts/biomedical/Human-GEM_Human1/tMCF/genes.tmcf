@@ -1,0 +1,11 @@
+Node: E:genes->E1
+typeOf: dcs:Gene
+ensemblID: C:genes->ensemblID
+systemsBiologyOntologyTerm: C:genes->systemsBiologyOntologyTerm
+dcid: C:genes->hm_38_gene
+
+Node: E:genes->E2
+typeOf: dcs:Gene
+ensemblID: C:genes->ensemblID
+systemsBiologyOntologyTerm: C:genes->systemsBiologyOntologyTerm
+dcid: C:genes->hm_19_gene
