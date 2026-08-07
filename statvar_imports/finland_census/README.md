@@ -1,10 +1,10 @@
 # Finland Demographics Dataset
 ## Overview
 
-This dataset contains demographic information from Finland sourced from Statistics Finland (Tilastokeskus). It provides comprehensive longitudinal coverage of Finland’s national demographics featuring annual data from 1990 to present. The geographic scope is standardized according to the latest regional division, ensuring consistency across the time series despite historical administrative changes. It offers high-resolution granularity through 43 unique statistical metrics that encompass population growth, age distribution, linguistic diversity, religious affiliation and urban-rural classification. Data is reported in multiple units for versatile analysis, including absolute counts, percentages (%), and population density (persons/km²), allowing for both scale-based and proportional statistical modeling.
+This dataset contains demographic information from Finland sourced from Statistics Finland (Tilastokeskus). It provides comprehensive longitudinal coverage of Finland’s national demographics featuring annual data from 1990 to present date. The geographic scope is standardized according to the latest regional division, ensuring consistency across the time series despite historical administrative changes. It offers high-resolution granularity through 43 unique statistical metrics that encompass population growth, age distribution, linguistic diversity, religious affiliation and urban-rural classification. Data is reported in multiple units for versatile analysis, including absolute counts, percentages (%), and population density (persons/km²), allowing for both scale-based and proportional statistical modeling.
 
 **type of place:** Country
-**years:** 1990 to present
+**years:** 1990 to present date
 
 ## Data Source
 **Source URL:**
@@ -22,16 +22,7 @@ The [Statistics Finland Terms of Use](https://stat.fi/en/about-us/get-to-know-st
 ## Refresh Type
 Automatic Refresh
 
-The refresh is automated using the provided `run.sh` script, which handles both data download and processing.
-
-## Processing Instructions
-
-To execute the complete import process (download and processing), run:
-```bash
-./run.sh
-```
-
-### Download & Processing Details:
+## Download & Processing Details:
 - **Download (`data_download.py`)**: Fetches data dynamically from the Statistics Finland PxWeb API through the following steps:
   1. **Metadata Resolution**: Sends a GET request to the PxWeb table metadata endpoint to dynamically identify and map structural dimension codes for `Area`, `Information`, and `Year`.
   2. **POST Query Execution**: Constructs a JSON POST request payload querying the whole country (`SSS`) for all available metrics (`*`) and all historical years (`*`).
@@ -50,7 +41,6 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
 ```
 
 ## Key Files
-- `run.sh`: Main execution script for download and processing.
 - `data_download.py`: Downloads the data from Finland's official database, formats it, and saves it to input_files directory
 - `finland_census_pvmap.csv`: Property-Value mapping for StatVar definitions and dimensions.
 - `finland_census_metadata.csv`: Configuration parameters for the processor.
