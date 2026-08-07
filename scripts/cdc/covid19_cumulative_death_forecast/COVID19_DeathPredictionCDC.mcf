@@ -1,0 +1,1642 @@
+Node: E:COVID19DeathPredictionCDC->E0
+typeOf: dcs:State
+dcid: C:COVID19DeathPredictionCDC->location
+
+Node: E:COVID19DeathPredictionCDC->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Auquan_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Auquan_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Auquan_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Auquan_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Auquan_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Auquan_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Auquan_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Auquan_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CAN_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CAN_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CAN_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CAN_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CAN_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CAN_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CAN_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CAN_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVIDhub-ensemble_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->COVIDhub-ensemble_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVIDhub-ensemble_1WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->COVIDhub-ensemble_1WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVIDhub-ensemble_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->COVIDhub-ensemble_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVIDhub-ensemble_2WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->COVIDhub-ensemble_2WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E13
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVIDhub-ensemble_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->COVIDhub-ensemble_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E14
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVIDhub-ensemble_3WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->COVIDhub-ensemble_3WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E15
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVIDhub-ensemble_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->COVIDhub-ensemble_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E16
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVIDhub-ensemble_4WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->COVIDhub-ensemble_4WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E17
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-60contact_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-60contact_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E18
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-60contact_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-60contact_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E19
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-60contact_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-60contact_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E20
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-60contact_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-60contact_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E21
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-60contact_5WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-60contact_5WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E22
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-60contact_6WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-60contact_6WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E23
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-70contact_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-70contact_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E24
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-70contact_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-70contact_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E25
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-70contact_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-70contact_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E26
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-70contact_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-70contact_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E27
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-70contact_5WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-70contact_5WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E28
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-70contact_6WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-70contact_6WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E29
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contact_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contact_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E30
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contact_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contact_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E31
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contact_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contact_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E32
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contact_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contact_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E33
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contact_5WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contact_5WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E34
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contact_6WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contact_6WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E35
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contact_1x_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contact_1x_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E36
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contact_1x_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contact_1x_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E37
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contact_1x_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contact_1x_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E38
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contact_1x_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contact_1x_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E39
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contact_1x_5WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contact_1x_5WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E40
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contact_1x_6WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contact_1x_6WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E41
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contactw_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contactw_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E42
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contactw_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contactw_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E43
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contactw_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contactw_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E44
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contactw_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contactw_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E45
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contactw_5WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contactw_5WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E46
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU-80contactw_6WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU-80contactw_6WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E47
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU20%contactreduction_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU20%contactreduction_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E48
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU20%contactreduction_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU20%contactreduction_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E49
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU20%contactreduction_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU20%contactreduction_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E50
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU20%contactreduction_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU20%contactreduction_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E51
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU30%contactreduction_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU30%contactreduction_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E52
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU30%contactreduction_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU30%contactreduction_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E53
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU30%contactreduction_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU30%contactreduction_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E54
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU30%contactreduction_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU30%contactreduction_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E55
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU40%contactreduction_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU40%contactreduction_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E56
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU40%contactreduction_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU40%contactreduction_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E57
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU40%contactreduction_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU40%contactreduction_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E58
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CU40%contactreduction_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CU40%contactreduction_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E59
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Columbia_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Columbia_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E60
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Columbia_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Columbia_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E61
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Columbia_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Columbia_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E62
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Columbia_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Columbia_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E63
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CovidSim_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CovidSim_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E64
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CovidSim_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CovidSim_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E65
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CovidSim_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CovidSim_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E66
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CovidSim_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->CovidSim_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E67
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ERDC_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->ERDC_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E68
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ERDC_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->ERDC_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E69
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ERDC_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->ERDC_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E70
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ERDC_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->ERDC_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E71
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Ensemble_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Ensemble_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E72
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Ensemble_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Ensemble_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E73
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Ensemble_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Ensemble_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E74
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Ensemble_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Ensemble_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E75
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:GA_Tech_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->GA_Tech_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E76
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:GA_Tech_1WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->GA_Tech_1WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E77
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:GA_Tech_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->GA_Tech_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E78
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:GA_Tech_2WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->GA_Tech_2WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E79
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:GA_Tech_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->GA_Tech_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E80
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:GA_Tech_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->GA_Tech_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E81
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:GT_CHHS_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->GT_CHHS_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E82
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:GT_CHHS_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->GT_CHHS_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E83
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:GT_CHHS_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->GT_CHHS_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E84
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:GT_CHHS_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->GT_CHHS_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E85
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Geneva_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Geneva_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E86
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E87
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_10WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_10WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E88
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_11WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_11WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E89
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_12WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_12WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E90
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_13WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_13WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E91
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_14WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_14WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E92
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_15WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_15WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E93
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_16WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_16WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E94
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E95
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E96
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E97
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_5WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_5WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E98
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_6WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_6WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E99
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_7WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_7WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E100
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_8WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_8WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E101
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:IHME_9WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->IHME_9WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E102
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ISU_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->ISU_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E103
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ISU_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->ISU_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E104
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ISU_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->ISU_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E105
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ISU_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->ISU_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E106
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Imperial_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Imperial_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E107
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Imperial1_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Imperial1_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E108
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Imperial1_1WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Imperial1_1WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E109
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Imperial2_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Imperial2_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E110
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Imperial2_1WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->Imperial2_1WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E111
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:JHU_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->JHU_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E112
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:JHU_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->JHU_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E113
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:JHU_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->JHU_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E114
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:JHU_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->JHU_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E115
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LANL_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->LANL_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E116
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LANL_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->LANL_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E117
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LANL_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->LANL_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E118
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LANL_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->LANL_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E119
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LANL_5WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->LANL_5WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E120
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LANL_6WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->LANL_6WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E121
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:LANL_7WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->LANL_7WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E122
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MIT_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MIT_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E123
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MIT_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MIT_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E124
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MIT_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MIT_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E125
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MIT_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MIT_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E126
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MIT_5WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MIT_5WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E127
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MIT_6WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MIT_6WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E128
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MOBS_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MOBS_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E129
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MOBS_1WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MOBS_1WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E130
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MOBS_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MOBS_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E131
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MOBS_2WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MOBS_2WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E132
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MOBS_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MOBS_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E133
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MOBS_3WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MOBS_3WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E134
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MOBS_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MOBS_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E135
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:MOBS_4WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->MOBS_4WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E136
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NotreDame_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->NotreDame_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E137
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NotreDame_1WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->NotreDame_1WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E138
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NotreDame_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->NotreDame_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E139
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NotreDame_2WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->NotreDame_2WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E140
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NotreDame_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->NotreDame_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E141
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NotreDame_3WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->NotreDame_3WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E142
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NotreDame_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->NotreDame_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E143
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NotreDame_4WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->NotreDame_4WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E144
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NotreDame_5WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->NotreDame_5WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E145
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NotreDame_5WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->NotreDame_5WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E146
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NotreDame_6WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->NotreDame_6WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E147
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NotreDame_6WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->NotreDame_6WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E148
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PSI_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->PSI_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E149
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PSI_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->PSI_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E150
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PSI_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->PSI_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E151
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PSI_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->PSI_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E152
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:SWC_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->SWC_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E153
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:SWC_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->SWC_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E154
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:SWC_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->SWC_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E155
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:SWC_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->SWC_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E156
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UA_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UA_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E157
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UA_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UA_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E158
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UA_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UA_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E159
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UA_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UA_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E160
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E161
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_10WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_10WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E162
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_11WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_11WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E163
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_12WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_12WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E164
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_13WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_13WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E165
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_14WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_14WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E166
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E167
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E168
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E169
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_5WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_5WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E170
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_6WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_6WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E171
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_7WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_7WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E172
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_8WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_8WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E173
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UCLA_9WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UCLA_9WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E174
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_10_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_10_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E175
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_10_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_10_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E176
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_10_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_10_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E177
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_10_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_10_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E178
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_100_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_100_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E179
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_100_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_100_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E180
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_100_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_100_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E181
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_100_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_100_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E182
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_40_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_40_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E183
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_40_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_40_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E184
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_40_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_40_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E185
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_40_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_40_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E186
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_60_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_60_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E187
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_60_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_60_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E188
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_60_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_60_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E189
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_60_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_60_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E190
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_80_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_80_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E191
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_80_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_80_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E192
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_80_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_80_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E193
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UChicago_80_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UChicago_80_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E194
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UMass-MB_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UMass-MB_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E195
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UMass-MB_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UMass-MB_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E196
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UMass-MB_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UMass-MB_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E197
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UMass-MB_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UMass-MB_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E198
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UT_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UT_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E199
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UT_1WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UT_1WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E200
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UT_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UT_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E201
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UT_2WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UT_2WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E202
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UT_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UT_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E203
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UT_3WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UT_3WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E204
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UT_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UT_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E205
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UT_4WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UT_4WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E206
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UT_5WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UT_5WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E207
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UT_5WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UT_5WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E208
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UT_6WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UT_6WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E209
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:UT_6WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->UT_6WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E210
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E211
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_1WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_1WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E212
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_10WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_10WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E213
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_10WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_10WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E214
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E215
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_2WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_2WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E216
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E217
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_3WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_3WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E218
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E219
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_4WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_4WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E220
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_5WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_5WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E221
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_5WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_5WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E222
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_6WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_6WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E223
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_6WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_6WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E224
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_7WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_7WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E225
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_7WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_7WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E226
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_8WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_8WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E227
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_8WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_8WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E228
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_9WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_9WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E229
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:YYG_9WeekForecastCovid19IncrDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->YYG_9WeekForecastCovid19IncrDeath
+
+Node: E:COVID19DeathPredictionCDC->E230
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ensembleforecast_1WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->ensembleforecast_1WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E231
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ensembleforecast_2WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->ensembleforecast_2WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E232
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ensembleforecast_3WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->ensembleforecast_3WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E233
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ensembleforecast_4WeekForecastCovid19CumuDeath
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->ensembleforecast_4WeekForecastCovid19CumuDeath
+
+Node: E:COVID19DeathPredictionCDC->E234
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:observeddata_observedCovid19Death
+observationAbout: E:COVID19DeathPredictionCDC->E0
+observationDate: C:COVID19DeathPredictionCDC->target_date
+value: C:COVID19DeathPredictionCDC->observeddata_observedCovid19Death
+
