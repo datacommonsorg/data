@@ -441,12 +441,12 @@ def _state_1980_1990(file_path: str) -> pd.DataFrame:
         if year == 1987:
             df = pd.read_table(file_path,
                                skiprows=29,
-                               delim_whitespace=True,
+                               sep=r'\s+',
                                names=column_names)
         else:
             df = pd.read_table(file_path,
                                skiprows=28,
-                               delim_whitespace=True,
+                               sep=r'\s+',
                                names=column_names)
         df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(2)
         df['Year'] = year
@@ -736,7 +736,7 @@ def _county_1990_2000(file_path: str) -> pd.DataFrame:
     """
     try:
         column_names = ['Year', 'geo_ID', 'Age', 'Race-Sex', 'Ethnic', 'Value']
-        df = pd.read_table(file_path, delim_whitespace=True, header=None)
+        df = pd.read_table(file_path, sep=r'\s+', header=None)
         df.columns = column_names
         df['Year'] = '19' + df['Year'].astype(str)
         df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(5)

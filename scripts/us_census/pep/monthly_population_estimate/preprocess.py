@@ -241,8 +241,7 @@ class CensusUSACountryPopulation:
         final_cols = [col for col in df.columns if 'year' not in col.lower()]
         # _return_year("1999") or _return_year("1999 [1]"): 1999
         # _return_year(".07 1"): pd.NA
-        df['Year'] = df['Year and Month'].apply(_return_year).fillna(
-            method='ffill', limit=12)
+        df['Year'] = df['Year and Month'].apply(_return_year).ffill(limit=12)
         # _return_year("1999") or _return_year("1999 [1]"): pd.NA
         # _return_year(".07 1"): 07
         df['Month'] = df['Year and Month'].apply(_return_month)
@@ -568,8 +567,8 @@ def _mulitply_scaling_factor(col: pd.Series) -> pd.Series:
         Series: A DataFrame column with values multiplied by the scaling factor.
     """
     res = col
-    if col not in [None, np.nan]:
-        if col.isdigit():
+    if not pd.isna(col) and col is not None:
+        if isinstance(col, str) and col.isdigit():
             res = int(col) * _SCALING_FACTOR_TXT_FILE
     return res
 
@@ -585,10 +584,10 @@ def _concat_cols(col: pd.Series) -> pd.Series:
     Returns:
         res (Series) : Concatenated DataFrame Columns
     """
-    res = col[0]
-    if col[1] is None:
+    res = col.iloc[0]
+    if pd.isna(col.iloc[1]) or col.iloc[1] is None:
         return res
-    res = col[0] + ' ' + col[1]
+    res = str(col.iloc[0]) + ' ' + str(col.iloc[1])
     return res
 
 
@@ -654,7 +653,7 @@ def download_files():
                     ]
                     df = pd.read_table(url,
                                        index_col=False,
-                                       delim_whitespace=True,
+                                       sep=r'\s+',
                                        engine='python',
                                        skiprows=17,
                                        names=cols)
