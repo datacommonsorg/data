@@ -105,7 +105,7 @@ def process_survey_data(year, svs, input_dir, out_dir):
         logging.info(f'End, {year}, =, {end}')
         logging.info(f'Duration, {year}, =, {str(end - start)}')
     except Exception as e:
-        logging.fatal(f"Error while processing the data for year: {e}")
+        logging.error(f"Error while processing the data for year: {e}")
         raise RuntimeError(
             f"Failed to process data for year due to: {e}") from e
 
@@ -156,7 +156,8 @@ def write_aggregate_csv(year, input_dir, out_dir):
                     with open(f"{parts_dir}/{part_file}", 'r') as part:
                         csv_writer.writerows(csv.DictReader(part))
     except Exception as e:
-        logging.fatal(f"Error in write_aggregate_csv for year {year}: {e}")
+        logging.error(f"Error in write_aggregate_csv for year {year}: {e}")
+        raise
 
 
 def fetch_and_write(county_name, year, svs, input_dir):
@@ -187,8 +188,9 @@ def fetch_and_write(county_name, year, svs, input_dir):
                 f"No data to write for county {county_name}. Skipping file creation."
             )
     except Exception as e:
-        logging.fatal(
+        logging.error(
             f"Error processing data for county: {county_name}. Error: {e}")
+        raise
 
 
 def get_survey_county_data(year, county, input_dir):
@@ -234,9 +236,8 @@ def get_survey_county_data(year, county, input_dir):
             response = get_data(params)
             if response is None:
                 logging.error(
-                    f"get_data() returned None. Check logs for details.")
-                logging.warning(f"No data found for: {county}")
-                return {'data': []}
+                    f"get_data() returned None for county: {county}. Raising error to prevent silent data loss.")
+                raise RuntimeError(f"get_data() returned None for county: {county}")
 
             with open(response_file, 'w') as f:
                 logging.info(f"Writing response to file: {response_file}")
@@ -250,10 +251,9 @@ def get_survey_county_data(year, county, input_dir):
             return response
 
         except Exception as e:
-            logging.fatal(
+            logging.error(
                 f"Error while fetching data for county: {county} - {e}")
-            # Return a default value in case of any exception
-            return {'data': []}
+            raise
 
 
 MAX_REQUESTS_PER_WINDOW = 2  # Maximum requests per window (1 request)
@@ -290,6 +290,21 @@ def get_data(params):
 
     try:
         response = requests.get(f'{API_BASE}/api_GET', params=params)
+        if response.status_code == 400:
+            try:
+                err_json = response.json()
+                err_text = str(err_json.get("error", "")).lower()
+                if "bad request" in err_text or "no data found" in err_text or "invalid query" in err_text:
+                    logging.info(f"No records found for query: {params}")
+                    return {'data': []}
+            except Exception:
+                pass
+            logging.warning(
+                f"API returned 400 status code with error: {response.text}"
+            )
+            raise requests.exceptions.RequestException(
+                f"Status 400 error: {response.text}")
+
         response.raise_for_status()
 
         if response.status_code != 200:
@@ -304,6 +319,7 @@ def get_data(params):
 
     except requests.exceptions.RequestException as e:
         logging.error(f"Error fetching data: {e}")
+        raise
 
 
 def get_param_values(param):
