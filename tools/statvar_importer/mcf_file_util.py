@@ -826,7 +826,7 @@ def normalize_list(value: str, sort: bool = True) -> str:
             value_list = get_value_list(value)
             has_quotes = True
         else:
-            value_list = value.split(',')
+            value_list = [v.strip() for v in value.split(',')]
         values = []
         if sort:
             value_list = sorted(value_list)
@@ -931,6 +931,10 @@ def normalize_value(
             if value[0] == '"' and value[-1] == '"' and len(value) > 100:
                 # Retain very long strings, such as geoJsonCoordinates, as is.
                 return value
+            if value.startswith('[') and value.endswith(']') and ',' in value:
+                inner_list = value[1:-1].strip()
+                normalized_list = normalize_list(inner_list)
+                return f'[{normalized_list}]'
             if ',' in value and maybe_list:
                 return normalize_list(value)
             if value[0] == '[':

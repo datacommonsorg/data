@@ -191,7 +191,8 @@ class ValidationRunner:
                     stats[current_var][diff_type] += 1
 
         if not stats:
-            return pd.DataFrame()
+            return pd.DataFrame(
+                columns=['StatVar', 'ADDED', 'DELETED', 'MODIFIED'])
 
         rows = []
         for var, counts in stats.items():
