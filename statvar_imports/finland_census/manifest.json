@@ -8,7 +8,8 @@
             "provenance_url": "https://pxdata.stat.fi/PxWeb/pxweb/en/StatFin/StatFin__vaerak/",
             "provenance_description": "National statistical data and socio-economic indicators for Finland, provided by Statistics Finland",
             "scripts": [
-                "run.sh"
+                "data_download.py --output_path=./input_files/finland_census_input.csv",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=finland_census_pvmap.csv --config_file=finland_census_metadata.csv --output_path=output_files/finland_census_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/finland_census.csv"
             ],
             "import_inputs": [
                 {
@@ -22,7 +23,6 @@
                 "counters/*.csv"
             ],
             "cron_schedule": "30 5 1 * *",
-            "resource_limits": {"cpu": 8, "memory": 32, "disk":100},
             "validation_config_file": "validation_config.json"
         }
     ]

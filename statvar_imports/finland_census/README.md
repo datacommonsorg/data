@@ -1,10 +1,10 @@
 # Finland Demographics Dataset
 ## Overview
 
-This dataset contains demographic information from Finland sourced from Statistics Finland (Tilastokeskus). This dataset provides comprehensive longitudinal coverage of Finland’s national demographics over a 34-year span, featuring annual data from 1990 to 2025. The geographic scope is standardized according to the January 1, 2025 regional division, ensuring consistency across the time series despite historical administrative changes. It offers high-resolution granularity through 43 unique statistical metrics that encompass population growth, age distribution, linguistic diversity, religious affiliation and urban-rural classification. Data is reported in multiple units for versatile analysis, including absolute counts, percentages (%), and population density (persons/km²), allowing for both scale-based and proportional statistical modeling.
+This dataset contains demographic information from Finland sourced from Statistics Finland (Tilastokeskus). It provides comprehensive longitudinal coverage of Finland’s national demographics featuring annual data from 1990 to present. The geographic scope is standardized according to the latest regional division, ensuring consistency across the time series despite historical administrative changes. It offers high-resolution granularity through 43 unique statistical metrics that encompass population growth, age distribution, linguistic diversity, religious affiliation and urban-rural classification. Data is reported in multiple units for versatile analysis, including absolute counts, percentages (%), and population density (persons/km²), allowing for both scale-based and proportional statistical modeling.
 
 **type of place:** Country
-**years:** 1990 to 2025
+**years:** 1990 to present
 
 ## Data Source
 **Source URL:**
@@ -31,9 +31,12 @@ To execute the complete import process (download and processing), run:
 ./run.sh
 ```
 
-### Script Details:
-- **Download**: The download is handled by `data_download.py` script which downloads census data from Finland's official database, formats it, and saves it to the designated file path (input_files).
-- **Processing**: Uses `stat_var_processor.py` to map raw data to Data Commons StatVarObservations using the PV map and metadata configuration.
+### Download & Processing Details:
+- **Download (`data_download.py`)**: Fetches data dynamically from the Statistics Finland PxWeb API through the following steps:
+  1. **Metadata Resolution**: Sends a GET request to the PxWeb table metadata endpoint to dynamically identify and map structural dimension codes for `Area`, `Information`, and `Year`.
+  2. **POST Query Execution**: Constructs a JSON POST request payload querying the whole country (`SSS`) for all available metrics (`*`) and all historical years (`*`).
+  3. **CSV Formatting**: Decodes the response bytes, prepends the dataset title rows to match the PV map layout, ensures the `input_files/` directory exists, and saves the formatted CSV locally.
+- **Processing (`stat_var_processor.py`)**: Maps the raw input CSV to Data Commons StatVarObservations and Template MCF using `finland_census_pvmap.csv` and `finland_census_metadata.csv`.
 
 For Test Data Run
 

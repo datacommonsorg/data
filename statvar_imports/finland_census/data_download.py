@@ -97,6 +97,10 @@ def format_csv_content(raw_csv_content: str) -> str:
 
 def download_data(output_path: str) -> None:
     """Downloads, formats, and saves the Finland Census CSV data."""
+    # Ensure input_files directory exists.
+    if not os.path.exists('input_files'):
+        os.makedirs('input_files', exist_ok=True)
+
     area_code, info_code, year_code = get_variable_codes()
     logging.info(
         'Mapped variable codes -> Area: %s, Info: %s, Year: %s',
