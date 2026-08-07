@@ -1,0 +1,31 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted points is within the threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
+            "rule_id": "check_goldens_summary_report",
+            "description": "Validates summary report against golden summary report.",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_summary_report.csv",
+                "input_files": "../genmcf/summary_report.csv"
+            }
+        },
+        {
+            "rule_id": "check_goldens_observations",
+            "description": "Verifies output observations match established golden records.",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../processed_output/student_faculty_ratio_*.csv"
+            }
+        }
+    ]
+}
