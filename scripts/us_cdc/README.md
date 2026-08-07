@@ -5,6 +5,12 @@ Centers for Disease Control and Prevention (CDC) into Data Commons.
 
 ## Datasets
 
+### National Center for Immunization and Respiratory Diseases (NCIRD)
+
+The [`covid19_seroprevalence`](https://github.com/datacommonsorg/data/tree/master/scripts/us_cdc/covid19_seroprevalence) directory contains information on data that was collected by the [National Center for Immunization and Respiratory Diseases (NCIRD)](https://www.cdc.gov/ncird/index.html).
+
+Data includes estimates of the percentage of people who were previously infected with SARS-CoV-2, the virus that causes COVID-19 disease, from February 2020 to June 2021.
+
 ### National Center for Chronic Disease Prevention and Health Promotion
 
 The [`500_places`](https://github.com/datacommonsorg/data/tree/master/scripts/us_cdc/500_places) directory contains information on data that was collected by the [National Center for Chronic Disease Prevention and Health Promotion](https://www.cdc.gov/chronicdisease/index.htm).
