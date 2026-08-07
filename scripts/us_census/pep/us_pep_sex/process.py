@@ -34,12 +34,6 @@ import tempfile
 
 _FLAGS = flags.FLAGS
 
-if 'mode' not in flags.FLAGS:
-    flags.DEFINE_string('mode', '', 'Options: download or process')
-if 'config_path' not in flags.FLAGS:
-    flags.DEFINE_string('config_path', '',
-                        'Path to the configuration file in the GCS bucket.')
-
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _INPUT_URL_JSON = "input_url.json"
@@ -60,9 +54,15 @@ _USSTATE_SHORT_FORM = statetoshortform.USSTATE_MAP
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "gcs_folder/us_pep_sex_source_files")
-if 'input_path' not in flags.FLAGS:
+
+
+def _define_flags():
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string('config_path', '',
+                        'Path to the configuration file in the GCS bucket.')
     flags.DEFINE_string("input_path", default_input_path,
                         "Import Data File's List")
+
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                  "typeOf: dcs:StatisticalVariable\n"
@@ -1410,4 +1410,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)
