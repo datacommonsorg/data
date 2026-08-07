@@ -32,10 +32,11 @@ BASE_URL_LEGACY = "https://nces.ed.gov/ipeds/datacenter/data/EF{year}D.zip"
 BASE_URL_COMPLETE = "https://nces.ed.gov/ipeds/complete-data-files/EF{year}D.zip"
 BASE_URL_PROV = "https://nces.ed.gov/ipeds/data-generator?year={year}&tableName=EF{year}D&HasRV=0&type=csv"
 
+#the order of the templates is important. It is the order in which the script will try to download the data.
 BASE_URL_TEMPLATES = [
-    BASE_URL_RV,
-    BASE_URL_LEGACY,
     BASE_URL_COMPLETE,
+    BASE_URL_LEGACY,
+    BASE_URL_RV,
     BASE_URL_PROV,
 ]
 
