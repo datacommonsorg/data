@@ -1,0 +1,998 @@
+"Notes","Disease","Disease Code","Year","Year Code","Race","Race Code",Case Count
+,"Anthrax","10350","2023","2023","American Indian or Alaska Native","1",0
+,"Anthrax","10350","2023","2023","Asian or Pacific Islander","2",0
+,"Anthrax","10350","2023","2023","Black or African American","3",0
+,"Anthrax","10350","2023","2023","White","4",0
+,"Anthrax","10350","2023","2023","Other or Multi-Race","5",0
+,"Anthrax","10350","2023","2023","Unknown","99",0
+,"Anthrax","10350","2023","2023","Suppressed","98",0
+"Total","Anthrax","10350","2023","2023",,,0
+"Total","Anthrax","10350",,,,,0
+,"Arboviral diseases, Chikungunya virus disease","10073","2023","2023","American Indian or Alaska Native","1",0
+,"Arboviral diseases, Chikungunya virus disease","10073","2023","2023","Asian or Pacific Islander","2",37
+,"Arboviral diseases, Chikungunya virus disease","10073","2023","2023","Black or African American","3",11
+,"Arboviral diseases, Chikungunya virus disease","10073","2023","2023","White","4",49
+,"Arboviral diseases, Chikungunya virus disease","10073","2023","2023","Other or Multi-Race","5",17
+,"Arboviral diseases, Chikungunya virus disease","10073","2023","2023","Unknown","99",36
+,"Arboviral diseases, Chikungunya virus disease","10073","2023","2023","Suppressed","98",0
+"Total","Arboviral diseases, Chikungunya virus disease","10073","2023","2023",,,150
+"Total","Arboviral diseases, Chikungunya virus disease","10073",,,,,150
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive","10053","2023","2023","American Indian or Alaska Native","1",0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive","10053","2023","2023","Asian or Pacific Islander","2",0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive","10053","2023","2023","Black or African American","3",0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive","10053","2023","2023","White","4",0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive","10053","2023","2023","Other or Multi-Race","5",0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive","10053","2023","2023","Unknown","99",0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive","10053","2023","2023","Suppressed","98",7
+"Total","Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive","10053","2023","2023",,,7
+"Total","Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive","10053",,,,,7
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive","10062","2023","2023","American Indian or Alaska Native","1",0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive","10062","2023","2023","Asian or Pacific Islander","2",0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive","10062","2023","2023","Black or African American","3",0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive","10062","2023","2023","White","4",0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive","10062","2023","2023","Other or Multi-Race","5",0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive","10062","2023","2023","Unknown","99",0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive","10062","2023","2023","Suppressed","98",0
+"Total","Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive","10062","2023","2023",,,0
+"Total","Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive","10062",,,,,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive","10078","2023","2023","American Indian or Alaska Native","1",0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive","10078","2023","2023","Asian or Pacific Islander","2",0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive","10078","2023","2023","Black or African American","3",0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive","10078","2023","2023","White","4",0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive","10078","2023","2023","Other or Multi-Race","5",0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive","10078","2023","2023","Unknown","99",0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive","10078","2023","2023","Suppressed","98",20
+"Total","Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive","10078","2023","2023",,,20
+"Total","Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive","10078",,,,,20
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive","10079","2023","2023","American Indian or Alaska Native","1",0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive","10079","2023","2023","Asian or Pacific Islander","2",0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive","10079","2023","2023","Black or African American","3",0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive","10079","2023","2023","White","4",0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive","10079","2023","2023","Other or Multi-Race","5",0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive","10079","2023","2023","Unknown","99",0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive","10079","2023","2023","Suppressed","98",7
+"Total","Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive","10079","2023","2023",,,7
+"Total","Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive","10079",,,,,7
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive","10081","2023","2023","American Indian or Alaska Native","1",1
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive","10081","2023","2023","Asian or Pacific Islander","2",0
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive","10081","2023","2023","Black or African American","3",3
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive","10081","2023","2023","White","4",26
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive","10081","2023","2023","Other or Multi-Race","5",0
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive","10081","2023","2023","Unknown","99",4
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive","10081","2023","2023","Suppressed","98",0
+"Total","Arboviral diseases, La Crosse  virus disease, Neuroinvasive","10081","2023","2023",,,34
+"Total","Arboviral diseases, La Crosse  virus disease, Neuroinvasive","10081",,,,,34
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive","10082","2023","2023","American Indian or Alaska Native","1",0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive","10082","2023","2023","Asian or Pacific Islander","2",0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive","10082","2023","2023","Black or African American","3",0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive","10082","2023","2023","White","4",0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive","10082","2023","2023","Other or Multi-Race","5",0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive","10082","2023","2023","Unknown","99",0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive","10082","2023","2023","Suppressed","98",1
+"Total","Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive","10082","2023","2023",,,1
+"Total","Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive","10082",,,,,1
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive","10057","2023","2023","American Indian or Alaska Native","1",0
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive","10057","2023","2023","Asian or Pacific Islander","2",0
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive","10057","2023","2023","Black or African American","3",0
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive","10057","2023","2023","White","4",44
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive","10057","2023","2023","Other or Multi-Race","5",0
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive","10057","2023","2023","Unknown","99",3
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive","10057","2023","2023","Suppressed","98",0
+"Total","Arboviral diseases, Powassan virus disease, Neuroinvasive","10057","2023","2023",,,47
+"Total","Arboviral diseases, Powassan virus disease, Neuroinvasive","10057",,,,,47
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive","10063","2023","2023","American Indian or Alaska Native","1",0
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive","10063","2023","2023","Asian or Pacific Islander","2",0
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive","10063","2023","2023","Black or African American","3",0
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive","10063","2023","2023","White","4",0
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive","10063","2023","2023","Other or Multi-Race","5",0
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive","10063","2023","2023","Unknown","99",0
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive","10063","2023","2023","Suppressed","98",2
+"Total","Arboviral diseases, Powassan virus disease, Non-neuroinvasive","10063","2023","2023",,,2
+"Total","Arboviral diseases, Powassan virus disease, Non-neuroinvasive","10063",,,,,2
+,"Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive","10051","2023","2023","American Indian or Alaska Native","1",0
+,"Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive","10051","2023","2023","Asian or Pacific Islander","2",0
+,"Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive","10051","2023","2023","Black or African American","3",0
+,"Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive","10051","2023","2023","White","4",0
+,"Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive","10051","2023","2023","Other or Multi-Race","5",0
+,"Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive","10051","2023","2023","Unknown","99",0
+,"Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive","10051","2023","2023","Suppressed","98",14
+"Total","Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive","10051","2023","2023",,,14
+"Total","Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive","10051",,,,,14
+,"Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive","10064","2023","2023","American Indian or Alaska Native","1",0
+,"Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive","10064","2023","2023","Asian or Pacific Islander","2",0
+,"Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive","10064","2023","2023","Black or African American","3",0
+,"Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive","10064","2023","2023","White","4",0
+,"Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive","10064","2023","2023","Other or Multi-Race","5",0
+,"Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive","10064","2023","2023","Unknown","99",0
+,"Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive","10064","2023","2023","Suppressed","98",7
+"Total","Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive","10064","2023","2023",,,7
+"Total","Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive","10064",,,,,7
+,"Arboviral diseases, West Nile virus disease, Neuroinvasive","10056","2023","2023","American Indian or Alaska Native","1",17
+,"Arboviral diseases, West Nile virus disease, Neuroinvasive","10056","2023","2023","Asian or Pacific Islander","2",20
+,"Arboviral diseases, West Nile virus disease, Neuroinvasive","10056","2023","2023","Black or African American","3",90
+,"Arboviral diseases, West Nile virus disease, Neuroinvasive","10056","2023","2023","White","4",1361
+,"Arboviral diseases, West Nile virus disease, Neuroinvasive","10056","2023","2023","Other or Multi-Race","5",181
+,"Arboviral diseases, West Nile virus disease, Neuroinvasive","10056","2023","2023","Unknown","99",122
+,"Arboviral diseases, West Nile virus disease, Neuroinvasive","10056","2023","2023","Suppressed","98",0
+"Total","Arboviral diseases, West Nile virus disease, Neuroinvasive","10056","2023","2023",,,1791
+"Total","Arboviral diseases, West Nile virus disease, Neuroinvasive","10056",,,,,1791
+,"Arboviral diseases, West Nile virus disease, Non-neuroinvasive","10049","2023","2023","American Indian or Alaska Native","1",12
+,"Arboviral diseases, West Nile virus disease, Non-neuroinvasive","10049","2023","2023","Asian or Pacific Islander","2",12
+,"Arboviral diseases, West Nile virus disease, Non-neuroinvasive","10049","2023","2023","Black or African American","3",5
+,"Arboviral diseases, West Nile virus disease, Non-neuroinvasive","10049","2023","2023","White","4",632
+,"Arboviral diseases, West Nile virus disease, Non-neuroinvasive","10049","2023","2023","Other or Multi-Race","5",115
+,"Arboviral diseases, West Nile virus disease, Non-neuroinvasive","10049","2023","2023","Unknown","99",63
+,"Arboviral diseases, West Nile virus disease, Non-neuroinvasive","10049","2023","2023","Suppressed","98",0
+"Total","Arboviral diseases, West Nile virus disease, Non-neuroinvasive","10049","2023","2023",,,839
+"Total","Arboviral diseases, West Nile virus disease, Non-neuroinvasive","10049",,,,,839
+,"Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive","10052","2023","2023","American Indian or Alaska Native","1",0
+,"Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive","10052","2023","2023","Asian or Pacific Islander","2",0
+,"Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive","10052","2023","2023","Black or African American","3",0
+,"Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive","10052","2023","2023","White","4",0
+,"Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive","10052","2023","2023","Other or Multi-Race","5",0
+,"Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive","10052","2023","2023","Unknown","99",0
+,"Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive","10052","2023","2023","Suppressed","98",0
+"Total","Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive","10052","2023","2023",,,0
+"Total","Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive","10052",,,,,0
+,"Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive","10065","2023","2023","American Indian or Alaska Native","1",0
+,"Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive","10065","2023","2023","Asian or Pacific Islander","2",0
+,"Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive","10065","2023","2023","Black or African American","3",0
+,"Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive","10065","2023","2023","White","4",0
+,"Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive","10065","2023","2023","Other or Multi-Race","5",0
+,"Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive","10065","2023","2023","Unknown","99",0
+,"Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive","10065","2023","2023","Suppressed","98",0
+"Total","Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive","10065","2023","2023",,,0
+"Total","Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive","10065",,,,,0
+,"Babesiosis, Total","12010","2023","2023","American Indian or Alaska Native","1",9
+,"Babesiosis, Total","12010","2023","2023","Asian or Pacific Islander","2",125
+,"Babesiosis, Total","12010","2023","2023","Black or African American","3",63
+,"Babesiosis, Total","12010","2023","2023","White","4",2412
+,"Babesiosis, Total","12010","2023","2023","Other or Multi-Race","5",193
+,"Babesiosis, Total","12010","2023","2023","Unknown","99",784
+,"Babesiosis, Total","12010","2023","2023","Suppressed","98",0
+"Total","Babesiosis, Total","12010","2023","2023",,,3586
+"Total","Babesiosis, Total","12010",,,,,3586
+,"Babesiosis, Confirmed","12011","2023","2023","American Indian or Alaska Native","1",7
+,"Babesiosis, Confirmed","12011","2023","2023","Asian or Pacific Islander","2",111
+,"Babesiosis, Confirmed","12011","2023","2023","Black or African American","3",58
+,"Babesiosis, Confirmed","12011","2023","2023","White","4",2133
+,"Babesiosis, Confirmed","12011","2023","2023","Other or Multi-Race","5",174
+,"Babesiosis, Confirmed","12011","2023","2023","Unknown","99",633
+,"Babesiosis, Confirmed","12011","2023","2023","Suppressed","98",0
+"Total","Babesiosis, Confirmed","12011","2023","2023",,,3116
+"Total","Babesiosis, Confirmed","12011",,,,,3116
+,"Babesiosis, Probable","12012","2023","2023","American Indian or Alaska Native","1",2
+,"Babesiosis, Probable","12012","2023","2023","Asian or Pacific Islander","2",14
+,"Babesiosis, Probable","12012","2023","2023","Black or African American","3",5
+,"Babesiosis, Probable","12012","2023","2023","White","4",279
+,"Babesiosis, Probable","12012","2023","2023","Other or Multi-Race","5",19
+,"Babesiosis, Probable","12012","2023","2023","Unknown","99",151
+,"Babesiosis, Probable","12012","2023","2023","Suppressed","98",0
+"Total","Babesiosis, Probable","12012","2023","2023",,,470
+"Total","Babesiosis, Probable","12012",,,,,470
+,"Botulism, Total","10360","2023","2023","American Indian or Alaska Native","1",4
+,"Botulism, Total","10360","2023","2023","Asian or Pacific Islander","2",9
+,"Botulism, Total","10360","2023","2023","Black or African American","3",8
+,"Botulism, Total","10360","2023","2023","White","4",117
+,"Botulism, Total","10360","2023","2023","Other or Multi-Race","5",27
+,"Botulism, Total","10360","2023","2023","Unknown","99",40
+,"Botulism, Total","10360","2023","2023","Suppressed","98",0
+"Total","Botulism, Total","10360","2023","2023",,,205
+"Total","Botulism, Total","10360",,,,,205
+,"Botulism, Foodborne","10530","2023","2023","American Indian or Alaska Native","1",0
+,"Botulism, Foodborne","10530","2023","2023","Asian or Pacific Islander","2",0
+,"Botulism, Foodborne","10530","2023","2023","Black or African American","3",0
+,"Botulism, Foodborne","10530","2023","2023","White","4",0
+,"Botulism, Foodborne","10530","2023","2023","Other or Multi-Race","5",0
+,"Botulism, Foodborne","10530","2023","2023","Unknown","99",0
+,"Botulism, Foodborne","10530","2023","2023","Suppressed","98",17
+"Total","Botulism, Foodborne","10530","2023","2023",,,17
+"Total","Botulism, Foodborne","10530",,,,,17
+,"Botulism, Infant","10540","2023","2023","American Indian or Alaska Native","1",0
+,"Botulism, Infant","10540","2023","2023","Asian or Pacific Islander","2",6
+,"Botulism, Infant","10540","2023","2023","Black or African American","3",7
+,"Botulism, Infant","10540","2023","2023","White","4",103
+,"Botulism, Infant","10540","2023","2023","Other or Multi-Race","5",25
+,"Botulism, Infant","10540","2023","2023","Unknown","99",33
+,"Botulism, Infant","10540","2023","2023","Suppressed","98",0
+"Total","Botulism, Infant","10540","2023","2023",,,174
+"Total","Botulism, Infant","10540",,,,,174
+,"Botulism, Other (wound & unspecified)","10550","2023","2023","American Indian or Alaska Native","1",0
+,"Botulism, Other (wound & unspecified)","10550","2023","2023","Asian or Pacific Islander","2",0
+,"Botulism, Other (wound & unspecified)","10550","2023","2023","Black or African American","3",0
+,"Botulism, Other (wound & unspecified)","10550","2023","2023","White","4",0
+,"Botulism, Other (wound & unspecified)","10550","2023","2023","Other or Multi-Race","5",0
+,"Botulism, Other (wound & unspecified)","10550","2023","2023","Unknown","99",0
+,"Botulism, Other (wound & unspecified)","10550","2023","2023","Suppressed","98",14
+"Total","Botulism, Other (wound & unspecified)","10550","2023","2023",,,14
+"Total","Botulism, Other (wound & unspecified)","10550",,,,,14
+,"Brucellosis","10020","2023","2023","American Indian or Alaska Native","1",0
+,"Brucellosis","10020","2023","2023","Asian or Pacific Islander","2",5
+,"Brucellosis","10020","2023","2023","Black or African American","3",3
+,"Brucellosis","10020","2023","2023","White","4",73
+,"Brucellosis","10020","2023","2023","Other or Multi-Race","5",41
+,"Brucellosis","10020","2023","2023","Unknown","99",23
+,"Brucellosis","10020","2023","2023","Suppressed","98",0
+"Total","Brucellosis","10020","2023","2023",,,145
+"Total","Brucellosis","10020",,,,,145
+,"Campylobacteriosis","11020","2023","2023","American Indian or Alaska Native","1",703
+,"Campylobacteriosis","11020","2023","2023","Asian or Pacific Islander","2",3061
+,"Campylobacteriosis","11020","2023","2023","Black or African American","3",4689
+,"Campylobacteriosis","11020","2023","2023","White","4",53255
+,"Campylobacteriosis","11020","2023","2023","Other or Multi-Race","5",6878
+,"Campylobacteriosis","11020","2023","2023","Unknown","99",12961
+,"Campylobacteriosis","11020","2023","2023","Suppressed","98",0
+"Total","Campylobacteriosis","11020","2023","2023",,,81547
+"Total","Campylobacteriosis","11020",,,,,81547
+,"Candida auris, clinical","50263","2023","2023","American Indian or Alaska Native","1",13
+,"Candida auris, clinical","50263","2023","2023","Asian or Pacific Islander","2",107
+,"Candida auris, clinical","50263","2023","2023","Black or African American","3",925
+,"Candida auris, clinical","50263","2023","2023","White","4",1447
+,"Candida auris, clinical","50263","2023","2023","Other or Multi-Race","5",307
+,"Candida auris, clinical","50263","2023","2023","Unknown","99",401
+,"Candida auris, clinical","50263","2023","2023","Suppressed","98",0
+"Total","Candida auris, clinical","50263","2023","2023",,,3200
+"Total","Candida auris, clinical","50263",,,,,3200
+,"Candida auris, screening","50264","2023","2023","American Indian or Alaska Native","1",8
+,"Candida auris, screening","50264","2023","2023","Asian or Pacific Islander","2",78
+,"Candida auris, screening","50264","2023","2023","Black or African American","3",1392
+,"Candida auris, screening","50264","2023","2023","White","4",1877
+,"Candida auris, screening","50264","2023","2023","Other or Multi-Race","5",402
+,"Candida auris, screening","50264","2023","2023","Unknown","99",609
+,"Candida auris, screening","50264","2023","2023","Suppressed","98",0
+"Total","Candida auris, screening","50264","2023","2023",,,4366
+"Total","Candida auris, screening","50264",,,,,4366
+,"Carbapenemase-producing carbapenem-resistant Enterobacteriaceae","50244","2023","2023","American Indian or Alaska Native","1",0
+,"Carbapenemase-producing carbapenem-resistant Enterobacteriaceae","50244","2023","2023","Asian or Pacific Islander","2",0
+,"Carbapenemase-producing carbapenem-resistant Enterobacteriaceae","50244","2023","2023","Black or African American","3",0
+,"Carbapenemase-producing carbapenem-resistant Enterobacteriaceae","50244","2023","2023","White","4",0
+,"Carbapenemase-producing carbapenem-resistant Enterobacteriaceae","50244","2023","2023","Other or Multi-Race","5",0
+,"Carbapenemase-producing carbapenem-resistant Enterobacteriaceae","50244","2023","2023","Unknown","99",0
+,"Carbapenemase-producing carbapenem-resistant Enterobacteriaceae","50244","2023","2023","Suppressed","98",0
+"Total","Carbapenemase-producing carbapenem-resistant Enterobacteriaceae","50244","2023","2023",,,0
+"Total","Carbapenemase-producing carbapenem-resistant Enterobacteriaceae","50244",,,,,0
+,"Carbapenemase-Producing Organisms (CPO),Total","50272","2023","2023","American Indian or Alaska Native","1",59
+,"Carbapenemase-Producing Organisms (CPO),Total","50272","2023","2023","Asian or Pacific Islander","2",297
+,"Carbapenemase-Producing Organisms (CPO),Total","50272","2023","2023","Black or African American","3",1330
+,"Carbapenemase-Producing Organisms (CPO),Total","50272","2023","2023","White","4",3406
+,"Carbapenemase-Producing Organisms (CPO),Total","50272","2023","2023","Other or Multi-Race","5",737
+,"Carbapenemase-Producing Organisms (CPO),Total","50272","2023","2023","Unknown","99",1081
+,"Carbapenemase-Producing Organisms (CPO),Total","50272","2023","2023","Suppressed","98",0
+"Total","Carbapenemase-Producing Organisms (CPO),Total","50272","2023","2023",,,6910
+"Total","Carbapenemase-Producing Organisms (CPO),Total","50272",,,,,6910
+,"Chancroid","10273","2023","2023","American Indian or Alaska Native","1",0
+,"Chancroid","10273","2023","2023","Asian or Pacific Islander","2",0
+,"Chancroid","10273","2023","2023","Black or African American","3",0
+,"Chancroid","10273","2023","2023","White","4",0
+,"Chancroid","10273","2023","2023","Other or Multi-Race","5",0
+,"Chancroid","10273","2023","2023","Unknown","99",0
+,"Chancroid","10273","2023","2023","Suppressed","98",4
+"Total","Chancroid","10273","2023","2023",,,4
+"Total","Chancroid","10273",,,,,4
+,"Chlamydia trachomatis infection","10274","2023","2023","American Indian or Alaska Native","1",19729
+,"Chlamydia trachomatis infection","10274","2023","2023","Asian or Pacific Islander","2",27530
+,"Chlamydia trachomatis infection","10274","2023","2023","Black or African American","3",502132
+,"Chlamydia trachomatis infection","10274","2023","2023","White","4",478755
+,"Chlamydia trachomatis infection","10274","2023","2023","Other or Multi-Race","5",161795
+,"Chlamydia trachomatis infection","10274","2023","2023","Unknown","99",458503
+,"Chlamydia trachomatis infection","10274","2023","2023","Suppressed","98",0
+"Total","Chlamydia trachomatis infection","10274","2023","2023",,,1648444
+"Total","Chlamydia trachomatis infection","10274",,,,,1648444
+,"Cholera","10470","2023","2023","American Indian or Alaska Native","1",0
+,"Cholera","10470","2023","2023","Asian or Pacific Islander","2",0
+,"Cholera","10470","2023","2023","Black or African American","3",0
+,"Cholera","10470","2023","2023","White","4",0
+,"Cholera","10470","2023","2023","Other or Multi-Race","5",0
+,"Cholera","10470","2023","2023","Unknown","99",0
+,"Cholera","10470","2023","2023","Suppressed","98",19
+"Total","Cholera","10470","2023","2023",,,19
+"Total","Cholera","10470",,,,,19
+,"Coccidioidomycosis","11900","2023","2023","American Indian or Alaska Native","1",320
+,"Coccidioidomycosis","11900","2023","2023","Asian or Pacific Islander","2",770
+,"Coccidioidomycosis","11900","2023","2023","Black or African American","3",818
+,"Coccidioidomycosis","11900","2023","2023","White","4",7400
+,"Coccidioidomycosis","11900","2023","2023","Other or Multi-Race","5",2157
+,"Coccidioidomycosis","11900","2023","2023","Unknown","99",9547
+,"Coccidioidomycosis","11900","2023","2023","Suppressed","98",0
+"Total","Coccidioidomycosis","11900","2023","2023",,,21012
+"Total","Coccidioidomycosis","11900",,,,,21012
+,"Coccidioidomycosis, confirmed","11901","2023","2023","American Indian or Alaska Native","1",301
+,"Coccidioidomycosis, confirmed","11901","2023","2023","Asian or Pacific Islander","2",759
+,"Coccidioidomycosis, confirmed","11901","2023","2023","Black or African American","3",794
+,"Coccidioidomycosis, confirmed","11901","2023","2023","White","4",7223
+,"Coccidioidomycosis, confirmed","11901","2023","2023","Other or Multi-Race","5",2124
+,"Coccidioidomycosis, confirmed","11901","2023","2023","Unknown","99",9484
+,"Coccidioidomycosis, confirmed","11901","2023","2023","Suppressed","98",0
+"Total","Coccidioidomycosis, confirmed","11901","2023","2023",,,20685
+"Total","Coccidioidomycosis, confirmed","11901",,,,,20685
+,"Coccidioidomycosis, probable","11902","2023","2023","American Indian or Alaska Native","1",19
+,"Coccidioidomycosis, probable","11902","2023","2023","Asian or Pacific Islander","2",11
+,"Coccidioidomycosis, probable","11902","2023","2023","Black or African American","3",24
+,"Coccidioidomycosis, probable","11902","2023","2023","White","4",177
+,"Coccidioidomycosis, probable","11902","2023","2023","Other or Multi-Race","5",33
+,"Coccidioidomycosis, probable","11902","2023","2023","Unknown","99",63
+,"Coccidioidomycosis, probable","11902","2023","2023","Suppressed","98",0
+"Total","Coccidioidomycosis, probable","11902","2023","2023",,,327
+"Total","Coccidioidomycosis, probable","11902",,,,,327
+,"Coronavirus Disease 2019 (COVID-19), Total","11065","2023","2023","American Indian or Alaska Native","1",91087
+,"Coronavirus Disease 2019 (COVID-19), Total","11065","2023","2023","Asian or Pacific Islander","2",279241
+,"Coronavirus Disease 2019 (COVID-19), Total","11065","2023","2023","Black or African American","3",888685
+,"Coronavirus Disease 2019 (COVID-19), Total","11065","2023","2023","White","4",3833512
+,"Coronavirus Disease 2019 (COVID-19), Total","11065","2023","2023","Other or Multi-Race","5",807414
+,"Coronavirus Disease 2019 (COVID-19), Total","11065","2023","2023","Unknown","99",1470483
+,"Coronavirus Disease 2019 (COVID-19), Total","11065","2023","2023","Suppressed","98",0
+"Total","Coronavirus Disease 2019 (COVID-19), Total","11065","2023","2023",,,7370422
+"Total","Coronavirus Disease 2019 (COVID-19), Total","11065",,,,,7370422
+,"Coronavirus Disease 2019 (COVID-19), Confirmed","11067","2023","2023","American Indian or Alaska Native","1",72932
+,"Coronavirus Disease 2019 (COVID-19), Confirmed","11067","2023","2023","Asian or Pacific Islander","2",203815
+,"Coronavirus Disease 2019 (COVID-19), Confirmed","11067","2023","2023","Black or African American","3",606485
+,"Coronavirus Disease 2019 (COVID-19), Confirmed","11067","2023","2023","White","4",2439275
+,"Coronavirus Disease 2019 (COVID-19), Confirmed","11067","2023","2023","Other or Multi-Race","5",542140
+,"Coronavirus Disease 2019 (COVID-19), Confirmed","11067","2023","2023","Unknown","99",1031604
+,"Coronavirus Disease 2019 (COVID-19), Confirmed","11067","2023","2023","Suppressed","98",0
+"Total","Coronavirus Disease 2019 (COVID-19), Confirmed","11067","2023","2023",,,4896251
+"Total","Coronavirus Disease 2019 (COVID-19), Confirmed","11067",,,,,4896251
+,"Coronavirus Disease 2019 (COVID-19), Probable","11068","2023","2023","American Indian or Alaska Native","1",18155
+,"Coronavirus Disease 2019 (COVID-19), Probable","11068","2023","2023","Asian or Pacific Islander","2",75426
+,"Coronavirus Disease 2019 (COVID-19), Probable","11068","2023","2023","Black or African American","3",282200
+,"Coronavirus Disease 2019 (COVID-19), Probable","11068","2023","2023","White","4",1394237
+,"Coronavirus Disease 2019 (COVID-19), Probable","11068","2023","2023","Other or Multi-Race","5",265274
+,"Coronavirus Disease 2019 (COVID-19), Probable","11068","2023","2023","Unknown","99",438879
+,"Coronavirus Disease 2019 (COVID-19), Probable","11068","2023","2023","Suppressed","98",0
+"Total","Coronavirus Disease 2019 (COVID-19), Probable","11068","2023","2023",,,2474171
+"Total","Coronavirus Disease 2019 (COVID-19), Probable","11068",,,,,2474171
+,"Cryptosporidiosis, Total","11580","2023","2023","American Indian or Alaska Native","1",92
+,"Cryptosporidiosis, Total","11580","2023","2023","Asian or Pacific Islander","2",281
+,"Cryptosporidiosis, Total","11580","2023","2023","Black or African American","3",1115
+,"Cryptosporidiosis, Total","11580","2023","2023","White","4",9422
+,"Cryptosporidiosis, Total","11580","2023","2023","Other or Multi-Race","5",897
+,"Cryptosporidiosis, Total","11580","2023","2023","Unknown","99",1503
+,"Cryptosporidiosis, Total","11580","2023","2023","Suppressed","98",0
+"Total","Cryptosporidiosis, Total","11580","2023","2023",,,13310
+"Total","Cryptosporidiosis, Total","11580",,,,,13310
+,"Cryptosporidiosis, Confirmed","11582","2023","2023","American Indian or Alaska Native","1",77
+,"Cryptosporidiosis, Confirmed","11582","2023","2023","Asian or Pacific Islander","2",217
+,"Cryptosporidiosis, Confirmed","11582","2023","2023","Black or African American","3",866
+,"Cryptosporidiosis, Confirmed","11582","2023","2023","White","4",7391
+,"Cryptosporidiosis, Confirmed","11582","2023","2023","Other or Multi-Race","5",766
+,"Cryptosporidiosis, Confirmed","11582","2023","2023","Unknown","99",1267
+,"Cryptosporidiosis, Confirmed","11582","2023","2023","Suppressed","98",0
+"Total","Cryptosporidiosis, Confirmed","11582","2023","2023",,,10584
+"Total","Cryptosporidiosis, Confirmed","11582",,,,,10584
+,"Cryptosporidiosis, Probable","11583","2023","2023","American Indian or Alaska Native","1",15
+,"Cryptosporidiosis, Probable","11583","2023","2023","Asian or Pacific Islander","2",64
+,"Cryptosporidiosis, Probable","11583","2023","2023","Black or African American","3",249
+,"Cryptosporidiosis, Probable","11583","2023","2023","White","4",2031
+,"Cryptosporidiosis, Probable","11583","2023","2023","Other or Multi-Race","5",131
+,"Cryptosporidiosis, Probable","11583","2023","2023","Unknown","99",236
+,"Cryptosporidiosis, Probable","11583","2023","2023","Suppressed","98",0
+"Total","Cryptosporidiosis, Probable","11583","2023","2023",,,2726
+"Total","Cryptosporidiosis, Probable","11583",,,,,2726
+,"Cyclosporiasis","11575","2023","2023","American Indian or Alaska Native","1",21
+,"Cyclosporiasis","11575","2023","2023","Asian or Pacific Islander","2",177
+,"Cyclosporiasis","11575","2023","2023","Black or African American","3",213
+,"Cyclosporiasis","11575","2023","2023","White","4",3040
+,"Cyclosporiasis","11575","2023","2023","Other or Multi-Race","5",310
+,"Cyclosporiasis","11575","2023","2023","Unknown","99",702
+,"Cyclosporiasis","11575","2023","2023","Suppressed","98",0
+"Total","Cyclosporiasis","11575","2023","2023",,,4463
+"Total","Cyclosporiasis","11575",,,,,4463
+,"Dengue virus infections, Dengue","10680","2023","2023","American Indian or Alaska Native","1",7
+,"Dengue virus infections, Dengue","10680","2023","2023","Asian or Pacific Islander","2",202
+,"Dengue virus infections, Dengue","10680","2023","2023","Black or African American","3",128
+,"Dengue virus infections, Dengue","10680","2023","2023","White","4",1112
+,"Dengue virus infections, Dengue","10680","2023","2023","Other or Multi-Race","5",215
+,"Dengue virus infections, Dengue","10680","2023","2023","Unknown","99",280
+,"Dengue virus infections, Dengue","10680","2023","2023","Suppressed","98",0
+"Total","Dengue virus infections, Dengue","10680","2023","2023",,,1944
+"Total","Dengue virus infections, Dengue","10680",,,,,1944
+,"Dengue virus infections, Dengue-like illness","11704","2023","2023","American Indian or Alaska Native","1",0
+,"Dengue virus infections, Dengue-like illness","11704","2023","2023","Asian or Pacific Islander","2",0
+,"Dengue virus infections, Dengue-like illness","11704","2023","2023","Black or African American","3",0
+,"Dengue virus infections, Dengue-like illness","11704","2023","2023","White","4",0
+,"Dengue virus infections, Dengue-like illness","11704","2023","2023","Other or Multi-Race","5",0
+,"Dengue virus infections, Dengue-like illness","11704","2023","2023","Unknown","99",0
+,"Dengue virus infections, Dengue-like illness","11704","2023","2023","Suppressed","98",23
+"Total","Dengue virus infections, Dengue-like illness","11704","2023","2023",,,23
+"Total","Dengue virus infections, Dengue-like illness","11704",,,,,23
+,"Dengue virus infections, Severe dengue","11705","2023","2023","American Indian or Alaska Native","1",0
+,"Dengue virus infections, Severe dengue","11705","2023","2023","Asian or Pacific Islander","2",4
+,"Dengue virus infections, Severe dengue","11705","2023","2023","Black or African American","3",7
+,"Dengue virus infections, Severe dengue","11705","2023","2023","White","4",33
+,"Dengue virus infections, Severe dengue","11705","2023","2023","Other or Multi-Race","5",5
+,"Dengue virus infections, Severe dengue","11705","2023","2023","Unknown","99",4
+,"Dengue virus infections, Severe dengue","11705","2023","2023","Suppressed","98",0
+"Total","Dengue virus infections, Severe dengue","11705","2023","2023",,,53
+"Total","Dengue virus infections, Severe dengue","11705",,,,,53
+,"Diphtheria","10040","2023","2023","American Indian or Alaska Native","1",0
+,"Diphtheria","10040","2023","2023","Asian or Pacific Islander","2",0
+,"Diphtheria","10040","2023","2023","Black or African American","3",0
+,"Diphtheria","10040","2023","2023","White","4",0
+,"Diphtheria","10040","2023","2023","Other or Multi-Race","5",0
+,"Diphtheria","10040","2023","2023","Unknown","99",0
+,"Diphtheria","10040","2023","2023","Suppressed","98",2
+"Total","Diphtheria","10040","2023","2023",,,2
+"Total","Diphtheria","10040",,,,,2
+,"Ehrlichiosis and Anaplasmosis, Anaplasma phagocytophilum infection","11090","2023","2023","American Indian or Alaska Native","1",37
+,"Ehrlichiosis and Anaplasmosis, Anaplasma phagocytophilum infection","11090","2023","2023","Asian or Pacific Islander","2",42
+,"Ehrlichiosis and Anaplasmosis, Anaplasma phagocytophilum infection","11090","2023","2023","Black or African American","3",45
+,"Ehrlichiosis and Anaplasmosis, Anaplasma phagocytophilum infection","11090","2023","2023","White","4",5656
+,"Ehrlichiosis and Anaplasmosis, Anaplasma phagocytophilum infection","11090","2023","2023","Other or Multi-Race","5",198
+,"Ehrlichiosis and Anaplasmosis, Anaplasma phagocytophilum infection","11090","2023","2023","Unknown","99",1301
+,"Ehrlichiosis and Anaplasmosis, Anaplasma phagocytophilum infection","11090","2023","2023","Suppressed","98",0
+"Total","Ehrlichiosis and Anaplasmosis, Anaplasma phagocytophilum infection","11090","2023","2023",,,7279
+"Total","Ehrlichiosis and Anaplasmosis, Anaplasma phagocytophilum infection","11090",,,,,7279
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia chaffeensis infection","11088","2023","2023","American Indian or Alaska Native","1",2
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia chaffeensis infection","11088","2023","2023","Asian or Pacific Islander","2",16
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia chaffeensis infection","11088","2023","2023","Black or African American","3",49
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia chaffeensis infection","11088","2023","2023","White","4",1460
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia chaffeensis infection","11088","2023","2023","Other or Multi-Race","5",108
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia chaffeensis infection","11088","2023","2023","Unknown","99",272
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia chaffeensis infection","11088","2023","2023","Suppressed","98",0
+"Total","Ehrlichiosis and Anaplasmosis, Ehrlichia chaffeensis infection","11088","2023","2023",,,1907
+"Total","Ehrlichiosis and Anaplasmosis, Ehrlichia chaffeensis infection","11088",,,,,1907
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia ewingii infection","11089","2023","2023","American Indian or Alaska Native","1",0
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia ewingii infection","11089","2023","2023","Asian or Pacific Islander","2",0
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia ewingii infection","11089","2023","2023","Black or African American","3",1
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia ewingii infection","11089","2023","2023","White","4",19
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia ewingii infection","11089","2023","2023","Other or Multi-Race","5",0
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia ewingii infection","11089","2023","2023","Unknown","99",6
+,"Ehrlichiosis and Anaplasmosis, Ehrlichia ewingii infection","11089","2023","2023","Suppressed","98",0
+"Total","Ehrlichiosis and Anaplasmosis, Ehrlichia ewingii infection","11089","2023","2023",,,26
+"Total","Ehrlichiosis and Anaplasmosis, Ehrlichia ewingii infection","11089",,,,,26
+,"Ehrlichiosis and Anaplasmosis, Undetermined ehrlichiosis/anaplasmosis","11091","2023","2023","American Indian or Alaska Native","1",1
+,"Ehrlichiosis and Anaplasmosis, Undetermined ehrlichiosis/anaplasmosis","11091","2023","2023","Asian or Pacific Islander","2",0
+,"Ehrlichiosis and Anaplasmosis, Undetermined ehrlichiosis/anaplasmosis","11091","2023","2023","Black or African American","3",2
+,"Ehrlichiosis and Anaplasmosis, Undetermined ehrlichiosis/anaplasmosis","11091","2023","2023","White","4",77
+,"Ehrlichiosis and Anaplasmosis, Undetermined ehrlichiosis/anaplasmosis","11091","2023","2023","Other or Multi-Race","5",3
+,"Ehrlichiosis and Anaplasmosis, Undetermined ehrlichiosis/anaplasmosis","11091","2023","2023","Unknown","99",6
+,"Ehrlichiosis and Anaplasmosis, Undetermined ehrlichiosis/anaplasmosis","11091","2023","2023","Suppressed","98",0
+"Total","Ehrlichiosis and Anaplasmosis, Undetermined ehrlichiosis/anaplasmosis","11091","2023","2023",,,89
+"Total","Ehrlichiosis and Anaplasmosis, Undetermined ehrlichiosis/anaplasmosis","11091",,,,,89
+,"Giardiasis","11570","2023","2023","American Indian or Alaska Native","1",114
+,"Giardiasis","11570","2023","2023","Asian or Pacific Islander","2",430
+,"Giardiasis","11570","2023","2023","Black or African American","3",1102
+,"Giardiasis","11570","2023","2023","White","4",9384
+,"Giardiasis","11570","2023","2023","Other or Multi-Race","5",1378
+,"Giardiasis","11570","2023","2023","Unknown","99",3770
+,"Giardiasis","11570","2023","2023","Suppressed","98",0
+"Total","Giardiasis","11570","2023","2023",,,16178
+"Total","Giardiasis","11570",,,,,16178
+,"Gonorrhea","10280","2023","2023","American Indian or Alaska Native","1",8158
+,"Gonorrhea","10280","2023","2023","Asian or Pacific Islander","2",10942
+,"Gonorrhea","10280","2023","2023","Black or African American","3",239055
+,"Gonorrhea","10280","2023","2023","White","4",174329
+,"Gonorrhea","10280","2023","2023","Other or Multi-Race","5",54658
+,"Gonorrhea","10280","2023","2023","Unknown","99",114120
+,"Gonorrhea","10280","2023","2023","Suppressed","98",0
+"Total","Gonorrhea","10280","2023","2023",,,601262
+"Total","Gonorrhea","10280",,,,,601262
+,"Haemophilus influenzae, invasive disease, All ages, all serotypes","10590","2023","2023","American Indian or Alaska Native","1",72
+,"Haemophilus influenzae, invasive disease, All ages, all serotypes","10590","2023","2023","Asian or Pacific Islander","2",132
+,"Haemophilus influenzae, invasive disease, All ages, all serotypes","10590","2023","2023","Black or African American","3",1076
+,"Haemophilus influenzae, invasive disease, All ages, all serotypes","10590","2023","2023","White","4",4531
+,"Haemophilus influenzae, invasive disease, All ages, all serotypes","10590","2023","2023","Other or Multi-Race","5",249
+,"Haemophilus influenzae, invasive disease, All ages, all serotypes","10590","2023","2023","Unknown","99",767
+,"Haemophilus influenzae, invasive disease, All ages, all serotypes","10590","2023","2023","Suppressed","98",0
+"Total","Haemophilus influenzae, invasive disease, All ages, all serotypes","10590","2023","2023",,,6827
+"Total","Haemophilus influenzae, invasive disease, All ages, all serotypes","10590",,,,,6827
+,"Haemophilus influenzae, invasive disease, Age <5 years, Serotype b","10591","2023","2023","American Indian or Alaska Native","1",2
+,"Haemophilus influenzae, invasive disease, Age <5 years, Serotype b","10591","2023","2023","Asian or Pacific Islander","2",1
+,"Haemophilus influenzae, invasive disease, Age <5 years, Serotype b","10591","2023","2023","Black or African American","3",1
+,"Haemophilus influenzae, invasive disease, Age <5 years, Serotype b","10591","2023","2023","White","4",25
+,"Haemophilus influenzae, invasive disease, Age <5 years, Serotype b","10591","2023","2023","Other or Multi-Race","5",3
+,"Haemophilus influenzae, invasive disease, Age <5 years, Serotype b","10591","2023","2023","Unknown","99",2
+,"Haemophilus influenzae, invasive disease, Age <5 years, Serotype b","10591","2023","2023","Suppressed","98",0
+"Total","Haemophilus influenzae, invasive disease, Age <5 years, Serotype b","10591","2023","2023",,,34
+"Total","Haemophilus influenzae, invasive disease, Age <5 years, Serotype b","10591",,,,,34
+,"Haemophilus influenzae, invasive disease, Age <5 years, Non-b serotype","10593","2023","2023","American Indian or Alaska Native","1",6
+,"Haemophilus influenzae, invasive disease, Age <5 years, Non-b serotype","10593","2023","2023","Asian or Pacific Islander","2",1
+,"Haemophilus influenzae, invasive disease, Age <5 years, Non-b serotype","10593","2023","2023","Black or African American","3",31
+,"Haemophilus influenzae, invasive disease, Age <5 years, Non-b serotype","10593","2023","2023","White","4",76
+,"Haemophilus influenzae, invasive disease, Age <5 years, Non-b serotype","10593","2023","2023","Other or Multi-Race","5",10
+,"Haemophilus influenzae, invasive disease, Age <5 years, Non-b serotype","10593","2023","2023","Unknown","99",15
+,"Haemophilus influenzae, invasive disease, Age <5 years, Non-b serotype","10593","2023","2023","Suppressed","98",0
+"Total","Haemophilus influenzae, invasive disease, Age <5 years, Non-b serotype","10593","2023","2023",,,139
+"Total","Haemophilus influenzae, invasive disease, Age <5 years, Non-b serotype","10593",,,,,139
+,"Haemophilus influenzae, invasive disease, Age <5 years, Nontypeable","10592","2023","2023","American Indian or Alaska Native","1",6
+,"Haemophilus influenzae, invasive disease, Age <5 years, Nontypeable","10592","2023","2023","Asian or Pacific Islander","2",9
+,"Haemophilus influenzae, invasive disease, Age <5 years, Nontypeable","10592","2023","2023","Black or African American","3",58
+,"Haemophilus influenzae, invasive disease, Age <5 years, Nontypeable","10592","2023","2023","White","4",126
+,"Haemophilus influenzae, invasive disease, Age <5 years, Nontypeable","10592","2023","2023","Other or Multi-Race","5",24
+,"Haemophilus influenzae, invasive disease, Age <5 years, Nontypeable","10592","2023","2023","Unknown","99",32
+,"Haemophilus influenzae, invasive disease, Age <5 years, Nontypeable","10592","2023","2023","Suppressed","98",0
+"Total","Haemophilus influenzae, invasive disease, Age <5 years, Nontypeable","10592","2023","2023",,,255
+"Total","Haemophilus influenzae, invasive disease, Age <5 years, Nontypeable","10592",,,,,255
+,"Haemophilus influenzae, invasive disease, Age <5 years, Unknown serotype","10597","2023","2023","American Indian or Alaska Native","1",1
+,"Haemophilus influenzae, invasive disease, Age <5 years, Unknown serotype","10597","2023","2023","Asian or Pacific Islander","2",7
+,"Haemophilus influenzae, invasive disease, Age <5 years, Unknown serotype","10597","2023","2023","Black or African American","3",52
+,"Haemophilus influenzae, invasive disease, Age <5 years, Unknown serotype","10597","2023","2023","White","4",115
+,"Haemophilus influenzae, invasive disease, Age <5 years, Unknown serotype","10597","2023","2023","Other or Multi-Race","5",12
+,"Haemophilus influenzae, invasive disease, Age <5 years, Unknown serotype","10597","2023","2023","Unknown","99",41
+,"Haemophilus influenzae, invasive disease, Age <5 years, Unknown serotype","10597","2023","2023","Suppressed","98",0
+"Total","Haemophilus influenzae, invasive disease, Age <5 years, Unknown serotype","10597","2023","2023",,,228
+"Total","Haemophilus influenzae, invasive disease, Age <5 years, Unknown serotype","10597",,,,,228
+,"Hansen's disease","10380","2023","2023","American Indian or Alaska Native","1",0
+,"Hansen's disease","10380","2023","2023","Asian or Pacific Islander","2",12
+,"Hansen's disease","10380","2023","2023","Black or African American","3",3
+,"Hansen's disease","10380","2023","2023","White","4",46
+,"Hansen's disease","10380","2023","2023","Other or Multi-Race","5",1
+,"Hansen's disease","10380","2023","2023","Unknown","99",26
+,"Hansen's disease","10380","2023","2023","Suppressed","98",0
+"Total","Hansen's disease","10380","2023","2023",,,88
+"Total","Hansen's disease","10380",,,,,88
+,"Hantavirus infection, non-hantavirus pulmonary syndrome","11610","2023","2023","American Indian or Alaska Native","1",0
+,"Hantavirus infection, non-hantavirus pulmonary syndrome","11610","2023","2023","Asian or Pacific Islander","2",0
+,"Hantavirus infection, non-hantavirus pulmonary syndrome","11610","2023","2023","Black or African American","3",0
+,"Hantavirus infection, non-hantavirus pulmonary syndrome","11610","2023","2023","White","4",0
+,"Hantavirus infection, non-hantavirus pulmonary syndrome","11610","2023","2023","Other or Multi-Race","5",0
+,"Hantavirus infection, non-hantavirus pulmonary syndrome","11610","2023","2023","Unknown","99",0
+,"Hantavirus infection, non-hantavirus pulmonary syndrome","11610","2023","2023","Suppressed","98",1
+"Total","Hantavirus infection, non-hantavirus pulmonary syndrome","11610","2023","2023",,,1
+"Total","Hantavirus infection, non-hantavirus pulmonary syndrome","11610",,,,,1
+,"Hantavirus pulmonary syndrome","11590","2023","2023","American Indian or Alaska Native","1",12
+,"Hantavirus pulmonary syndrome","11590","2023","2023","Asian or Pacific Islander","2",0
+,"Hantavirus pulmonary syndrome","11590","2023","2023","Black or African American","3",0
+,"Hantavirus pulmonary syndrome","11590","2023","2023","White","4",11
+,"Hantavirus pulmonary syndrome","11590","2023","2023","Other or Multi-Race","5",0
+,"Hantavirus pulmonary syndrome","11590","2023","2023","Unknown","99",3
+,"Hantavirus pulmonary syndrome","11590","2023","2023","Suppressed","98",0
+"Total","Hantavirus pulmonary syndrome","11590","2023","2023",,,26
+"Total","Hantavirus pulmonary syndrome","11590",,,,,26
+,"Hemolytic uremic syndrome post-diarrheal","11550","2023","2023","American Indian or Alaska Native","1",1
+,"Hemolytic uremic syndrome post-diarrheal","11550","2023","2023","Asian or Pacific Islander","2",7
+,"Hemolytic uremic syndrome post-diarrheal","11550","2023","2023","Black or African American","3",15
+,"Hemolytic uremic syndrome post-diarrheal","11550","2023","2023","White","4",216
+,"Hemolytic uremic syndrome post-diarrheal","11550","2023","2023","Other or Multi-Race","5",23
+,"Hemolytic uremic syndrome post-diarrheal","11550","2023","2023","Unknown","99",14
+,"Hemolytic uremic syndrome post-diarrheal","11550","2023","2023","Suppressed","98",0
+"Total","Hemolytic uremic syndrome post-diarrheal","11550","2023","2023",,,276
+"Total","Hemolytic uremic syndrome post-diarrheal","11550",,,,,276
+,"Hepatitis, A","10110","2023","2023","American Indian or Alaska Native","1",12
+,"Hepatitis, A","10110","2023","2023","Asian or Pacific Islander","2",150
+,"Hepatitis, A","10110","2023","2023","Black or African American","3",135
+,"Hepatitis, A","10110","2023","2023","White","4",1029
+,"Hepatitis, A","10110","2023","2023","Other or Multi-Race","5",209
+,"Hepatitis, A","10110","2023","2023","Unknown","99",108
+,"Hepatitis, A","10110","2023","2023","Suppressed","98",0
+"Total","Hepatitis, A","10110","2023","2023",,,1643
+"Total","Hepatitis, A","10110",,,,,1643
+,"Hepatitis, B, acute","10100","2023","2023","American Indian or Alaska Native","1",13
+,"Hepatitis, B, acute","10100","2023","2023","Asian or Pacific Islander","2",78
+,"Hepatitis, B, acute","10100","2023","2023","Black or African American","3",482
+,"Hepatitis, B, acute","10100","2023","2023","White","4",1384
+,"Hepatitis, B, acute","10100","2023","2023","Other or Multi-Race","5",144
+,"Hepatitis, B, acute","10100","2023","2023","Unknown","99",111
+,"Hepatitis, B, acute","10100","2023","2023","Suppressed","98",0
+"Total","Hepatitis, B, acute","10100","2023","2023",,,2212
+"Total","Hepatitis, B, acute","10100",,,,,2212
+,"Hepatitis, B, perinatal infection","10104","2023","2023","American Indian or Alaska Native","1",0
+,"Hepatitis, B, perinatal infection","10104","2023","2023","Asian or Pacific Islander","2",0
+,"Hepatitis, B, perinatal infection","10104","2023","2023","Black or African American","3",0
+,"Hepatitis, B, perinatal infection","10104","2023","2023","White","4",0
+,"Hepatitis, B, perinatal infection","10104","2023","2023","Other or Multi-Race","5",0
+,"Hepatitis, B, perinatal infection","10104","2023","2023","Unknown","99",0
+,"Hepatitis, B, perinatal infection","10104","2023","2023","Suppressed","98",7
+"Total","Hepatitis, B, perinatal infection","10104","2023","2023",,,7
+"Total","Hepatitis, B, perinatal infection","10104",,,,,7
+,"Hepatitis, C, acute","10101","2023","2023","American Indian or Alaska Native","1",80
+,"Hepatitis, C, acute","10101","2023","2023","Asian or Pacific Islander","2",95
+,"Hepatitis, C, acute","10101","2023","2023","Black or African American","3",786
+,"Hepatitis, C, acute","10101","2023","2023","White","4",3704
+,"Hepatitis, C, acute","10101","2023","2023","Other or Multi-Race","5",400
+,"Hepatitis, C, acute","10101","2023","2023","Unknown","99",473
+,"Hepatitis, C, acute","10101","2023","2023","Suppressed","98",0
+"Total","Hepatitis, C, acute","10101","2023","2023",,,5538
+"Total","Hepatitis, C, acute","10101",,,,,5538
+,"Hepatitis, C, acute, Confirmed","50228","2023","2023","American Indian or Alaska Native","1",76
+,"Hepatitis, C, acute, Confirmed","50228","2023","2023","Asian or Pacific Islander","2",90
+,"Hepatitis, C, acute, Confirmed","50228","2023","2023","Black or African American","3",744
+,"Hepatitis, C, acute, Confirmed","50228","2023","2023","White","4",3254
+,"Hepatitis, C, acute, Confirmed","50228","2023","2023","Other or Multi-Race","5",361
+,"Hepatitis, C, acute, Confirmed","50228","2023","2023","Unknown","99",439
+,"Hepatitis, C, acute, Confirmed","50228","2023","2023","Suppressed","98",0
+"Total","Hepatitis, C, acute, Confirmed","50228","2023","2023",,,4964
+"Total","Hepatitis, C, acute, Confirmed","50228",,,,,4964
+,"Hepatitis, C, acute, Probable","50229","2023","2023","American Indian or Alaska Native","1",4
+,"Hepatitis, C, acute, Probable","50229","2023","2023","Asian or Pacific Islander","2",5
+,"Hepatitis, C, acute, Probable","50229","2023","2023","Black or African American","3",42
+,"Hepatitis, C, acute, Probable","50229","2023","2023","White","4",450
+,"Hepatitis, C, acute, Probable","50229","2023","2023","Other or Multi-Race","5",39
+,"Hepatitis, C, acute, Probable","50229","2023","2023","Unknown","99",34
+,"Hepatitis, C, acute, Probable","50229","2023","2023","Suppressed","98",0
+"Total","Hepatitis, C, acute, Probable","50229","2023","2023",,,574
+"Total","Hepatitis, C, acute, Probable","50229",,,,,574
+,"Hepatitis, C, perinatal infection","50248","2023","2023","American Indian or Alaska Native","1",1
+,"Hepatitis, C, perinatal infection","50248","2023","2023","Asian or Pacific Islander","2",5
+,"Hepatitis, C, perinatal infection","50248","2023","2023","Black or African American","3",11
+,"Hepatitis, C, perinatal infection","50248","2023","2023","White","4",159
+,"Hepatitis, C, perinatal infection","50248","2023","2023","Other or Multi-Race","5",29
+,"Hepatitis, C, perinatal infection","50248","2023","2023","Unknown","99",30
+,"Hepatitis, C, perinatal infection","50248","2023","2023","Suppressed","98",0
+"Total","Hepatitis, C, perinatal infection","50248","2023","2023",,,235
+"Total","Hepatitis, C, perinatal infection","50248",,,,,235
+,"Human immunodeficiency virus diagnoses","10560","2023","2023","American Indian or Alaska Native","1",203
+,"Human immunodeficiency virus diagnoses","10560","2023","2023","Asian or Pacific Islander","2",872
+,"Human immunodeficiency virus diagnoses","10560","2023","2023","Black or African American","3",14781
+,"Human immunodeficiency virus diagnoses","10560","2023","2023","White","4",8911
+,"Human immunodeficiency virus diagnoses","10560","2023","2023","Other or Multi-Race","5",14083
+,"Human immunodeficiency virus diagnoses","10560","2023","2023","Unknown","99",0
+,"Human immunodeficiency virus diagnoses","10560","2023","2023","Suppressed","98",0
+"Total","Human immunodeficiency virus diagnoses","10560","2023","2023",,,38850
+"Total","Human immunodeficiency virus diagnoses","10560",,,,,38850
+,"Influenza-associated pediatric mortality","11061","2023","2023","American Indian or Alaska Native","1",3
+,"Influenza-associated pediatric mortality","11061","2023","2023","Asian or Pacific Islander","2",3
+,"Influenza-associated pediatric mortality","11061","2023","2023","Black or African American","3",31
+,"Influenza-associated pediatric mortality","11061","2023","2023","White","4",80
+,"Influenza-associated pediatric mortality","11061","2023","2023","Other or Multi-Race","5",4
+,"Influenza-associated pediatric mortality","11061","2023","2023","Unknown","99",21
+,"Influenza-associated pediatric mortality","11061","2023","2023","Suppressed","98",0
+"Total","Influenza-associated pediatric mortality","11061","2023","2023",,,142
+"Total","Influenza-associated pediatric mortality","11061",,,,,142
+,"Invasive pneumococcal disease, All ages","11723","2023","2023","American Indian or Alaska Native","1",447
+,"Invasive pneumococcal disease, All ages","11723","2023","2023","Asian or Pacific Islander","2",317
+,"Invasive pneumococcal disease, All ages","11723","2023","2023","Black or African American","3",3739
+,"Invasive pneumococcal disease, All ages","11723","2023","2023","White","4",13027
+,"Invasive pneumococcal disease, All ages","11723","2023","2023","Other or Multi-Race","5",712
+,"Invasive pneumococcal disease, All ages","11723","2023","2023","Unknown","99",2909
+,"Invasive pneumococcal disease, All ages","11723","2023","2023","Suppressed","98",0
+"Total","Invasive pneumococcal disease, All ages","11723","2023","2023",,,21151
+"Total","Invasive pneumococcal disease, All ages","11723",,,,,21151
+,"Invasive pneumococcal disease, All ages, Confirmed","50230","2023","2023","American Indian or Alaska Native","1",444
+,"Invasive pneumococcal disease, All ages, Confirmed","50230","2023","2023","Asian or Pacific Islander","2",303
+,"Invasive pneumococcal disease, All ages, Confirmed","50230","2023","2023","Black or African American","3",3641
+,"Invasive pneumococcal disease, All ages, Confirmed","50230","2023","2023","White","4",12654
+,"Invasive pneumococcal disease, All ages, Confirmed","50230","2023","2023","Other or Multi-Race","5",691
+,"Invasive pneumococcal disease, All ages, Confirmed","50230","2023","2023","Unknown","99",2818
+,"Invasive pneumococcal disease, All ages, Confirmed","50230","2023","2023","Suppressed","98",0
+"Total","Invasive pneumococcal disease, All ages, Confirmed","50230","2023","2023",,,20551
+"Total","Invasive pneumococcal disease, All ages, Confirmed","50230",,,,,20551
+,"Invasive pneumococcal disease, All ages, Probable","50231","2023","2023","American Indian or Alaska Native","1",3
+,"Invasive pneumococcal disease, All ages, Probable","50231","2023","2023","Asian or Pacific Islander","2",14
+,"Invasive pneumococcal disease, All ages, Probable","50231","2023","2023","Black or African American","3",98
+,"Invasive pneumococcal disease, All ages, Probable","50231","2023","2023","White","4",373
+,"Invasive pneumococcal disease, All ages, Probable","50231","2023","2023","Other or Multi-Race","5",21
+,"Invasive pneumococcal disease, All ages, Probable","50231","2023","2023","Unknown","99",91
+,"Invasive pneumococcal disease, All ages, Probable","50231","2023","2023","Suppressed","98",0
+"Total","Invasive pneumococcal disease, All ages, Probable","50231","2023","2023",,,600
+"Total","Invasive pneumococcal disease, All ages, Probable","50231",,,,,600
+,"Invasive pneumococcal disease, Age <5 years","11722","2023","2023","American Indian or Alaska Native","1",20
+,"Invasive pneumococcal disease, Age <5 years","11722","2023","2023","Asian or Pacific Islander","2",51
+,"Invasive pneumococcal disease, Age <5 years","11722","2023","2023","Black or African American","3",273
+,"Invasive pneumococcal disease, Age <5 years","11722","2023","2023","White","4",594
+,"Invasive pneumococcal disease, Age <5 years","11722","2023","2023","Other or Multi-Race","5",69
+,"Invasive pneumococcal disease, Age <5 years","11722","2023","2023","Unknown","99",174
+,"Invasive pneumococcal disease, Age <5 years","11722","2023","2023","Suppressed","98",0
+"Total","Invasive pneumococcal disease, Age <5 years","11722","2023","2023",,,1181
+"Total","Invasive pneumococcal disease, Age <5 years","11722",,,,,1181
+,"Invasive pneumococcal disease, Age <5 years, Confirmed","50232","2023","2023","American Indian or Alaska Native","1",20
+,"Invasive pneumococcal disease, Age <5 years, Confirmed","50232","2023","2023","Asian or Pacific Islander","2",46
+,"Invasive pneumococcal disease, Age <5 years, Confirmed","50232","2023","2023","Black or African American","3",263
+,"Invasive pneumococcal disease, Age <5 years, Confirmed","50232","2023","2023","White","4",552
+,"Invasive pneumococcal disease, Age <5 years, Confirmed","50232","2023","2023","Other or Multi-Race","5",67
+,"Invasive pneumococcal disease, Age <5 years, Confirmed","50232","2023","2023","Unknown","99",166
+,"Invasive pneumococcal disease, Age <5 years, Confirmed","50232","2023","2023","Suppressed","98",0
+"Total","Invasive pneumococcal disease, Age <5 years, Confirmed","50232","2023","2023",,,1114
+"Total","Invasive pneumococcal disease, Age <5 years, Confirmed","50232",,,,,1114
+,"Invasive pneumococcal disease, Age <5 years, Probable","50233","2023","2023","American Indian or Alaska Native","1",0
+,"Invasive pneumococcal disease, Age <5 years, Probable","50233","2023","2023","Asian or Pacific Islander","2",5
+,"Invasive pneumococcal disease, Age <5 years, Probable","50233","2023","2023","Black or African American","3",10
+,"Invasive pneumococcal disease, Age <5 years, Probable","50233","2023","2023","White","4",42
+,"Invasive pneumococcal disease, Age <5 years, Probable","50233","2023","2023","Other or Multi-Race","5",2
+,"Invasive pneumococcal disease, Age <5 years, Probable","50233","2023","2023","Unknown","99",8
+,"Invasive pneumococcal disease, Age <5 years, Probable","50233","2023","2023","Suppressed","98",0
+"Total","Invasive pneumococcal disease, Age <5 years, Probable","50233","2023","2023",,,67
+"Total","Invasive pneumococcal disease, Age <5 years, Probable","50233",,,,,67
+,"Legionellosis","10490","2023","2023","American Indian or Alaska Native","1",43
+,"Legionellosis","10490","2023","2023","Asian or Pacific Islander","2",140
+,"Legionellosis","10490","2023","2023","Black or African American","3",1658
+,"Legionellosis","10490","2023","2023","White","4",5304
+,"Legionellosis","10490","2023","2023","Other or Multi-Race","5",475
+,"Legionellosis","10490","2023","2023","Unknown","99",481
+,"Legionellosis","10490","2023","2023","Suppressed","98",0
+"Total","Legionellosis","10490","2023","2023",,,8101
+"Total","Legionellosis","10490",,,,,8101
+,"Leptospirosis","10390","2023","2023","American Indian or Alaska Native","1",0
+,"Leptospirosis","10390","2023","2023","Asian or Pacific Islander","2",12
+,"Leptospirosis","10390","2023","2023","Black or African American","3",0
+,"Leptospirosis","10390","2023","2023","White","4",53
+,"Leptospirosis","10390","2023","2023","Other or Multi-Race","5",9
+,"Leptospirosis","10390","2023","2023","Unknown","99",20
+,"Leptospirosis","10390","2023","2023","Suppressed","98",0
+"Total","Leptospirosis","10390","2023","2023",,,94
+"Total","Leptospirosis","10390",,,,,94
+,"Listeriosis, Total","10640","2023","2023","American Indian or Alaska Native","1",6
+,"Listeriosis, Total","10640","2023","2023","Asian or Pacific Islander","2",76
+,"Listeriosis, Total","10640","2023","2023","Black or African American","3",93
+,"Listeriosis, Total","10640","2023","2023","White","4",621
+,"Listeriosis, Total","10640","2023","2023","Other or Multi-Race","5",77
+,"Listeriosis, Total","10640","2023","2023","Unknown","99",125
+,"Listeriosis, Total","10640","2023","2023","Suppressed","98",0
+"Total","Listeriosis, Total","10640","2023","2023",,,998
+"Total","Listeriosis, Total","10640",,,,,998
+,"Listeriosis, Confirmed","10641","2023","2023","American Indian or Alaska Native","1",6
+,"Listeriosis, Confirmed","10641","2023","2023","Asian or Pacific Islander","2",72
+,"Listeriosis, Confirmed","10641","2023","2023","Black or African American","3",90
+,"Listeriosis, Confirmed","10641","2023","2023","White","4",580
+,"Listeriosis, Confirmed","10641","2023","2023","Other or Multi-Race","5",71
+,"Listeriosis, Confirmed","10641","2023","2023","Unknown","99",115
+,"Listeriosis, Confirmed","10641","2023","2023","Suppressed","98",0
+"Total","Listeriosis, Confirmed","10641","2023","2023",,,934
+"Total","Listeriosis, Confirmed","10641",,,,,934
+,"Listeriosis, Probable","10642","2023","2023","American Indian or Alaska Native","1",0
+,"Listeriosis, Probable","10642","2023","2023","Asian or Pacific Islander","2",4
+,"Listeriosis, Probable","10642","2023","2023","Black or African American","3",3
+,"Listeriosis, Probable","10642","2023","2023","White","4",41
+,"Listeriosis, Probable","10642","2023","2023","Other or Multi-Race","5",6
+,"Listeriosis, Probable","10642","2023","2023","Unknown","99",10
+,"Listeriosis, Probable","10642","2023","2023","Suppressed","98",0
+"Total","Listeriosis, Probable","10642","2023","2023",,,64
+"Total","Listeriosis, Probable","10642",,,,,64
+,"Lyme disease, Total","11080","2023","2023","American Indian or Alaska Native","1",185
+,"Lyme disease, Total","11080","2023","2023","Asian or Pacific Islander","2",656
+,"Lyme disease, Total","11080","2023","2023","Black or African American","3",902
+,"Lyme disease, Total","11080","2023","2023","White","4",47211
+,"Lyme disease, Total","11080","2023","2023","Other or Multi-Race","5",1544
+,"Lyme disease, Total","11080","2023","2023","Unknown","99",38970
+,"Lyme disease, Total","11080","2023","2023","Suppressed","98",0
+"Total","Lyme disease, Total","11080","2023","2023",,,89468
+"Total","Lyme disease, Total","11080",,,,,89468
+,"Lyme disease, Confirmed","11081","2023","2023","American Indian or Alaska Native","1",14
+,"Lyme disease, Confirmed","11081","2023","2023","Asian or Pacific Islander","2",39
+,"Lyme disease, Confirmed","11081","2023","2023","Black or African American","3",37
+,"Lyme disease, Confirmed","11081","2023","2023","White","4",2708
+,"Lyme disease, Confirmed","11081","2023","2023","Other or Multi-Race","5",107
+,"Lyme disease, Confirmed","11081","2023","2023","Unknown","99",625
+,"Lyme disease, Confirmed","11081","2023","2023","Suppressed","98",0
+"Total","Lyme disease, Confirmed","11081","2023","2023",,,3530
+"Total","Lyme disease, Confirmed","11081",,,,,3530
+,"Lyme disease, Probable","11082","2023","2023","American Indian or Alaska Native","1",171
+,"Lyme disease, Probable","11082","2023","2023","Asian or Pacific Islander","2",617
+,"Lyme disease, Probable","11082","2023","2023","Black or African American","3",865
+,"Lyme disease, Probable","11082","2023","2023","White","4",44503
+,"Lyme disease, Probable","11082","2023","2023","Other or Multi-Race","5",1437
+,"Lyme disease, Probable","11082","2023","2023","Unknown","99",38345
+,"Lyme disease, Probable","11082","2023","2023","Suppressed","98",0
+"Total","Lyme disease, Probable","11082","2023","2023",,,85938
+"Total","Lyme disease, Probable","11082",,,,,85938
+,"Malaria","10130","2023","2023","American Indian or Alaska Native","1",3
+,"Malaria","10130","2023","2023","Asian or Pacific Islander","2",101
+,"Malaria","10130","2023","2023","Black or African American","3",1703
+,"Malaria","10130","2023","2023","White","4",303
+,"Malaria","10130","2023","2023","Other or Multi-Race","5",229
+,"Malaria","10130","2023","2023","Unknown","99",267
+,"Malaria","10130","2023","2023","Suppressed","98",0
+"Total","Malaria","10130","2023","2023",,,2606
+"Total","Malaria","10130",,,,,2606
+,"Measles, Total","10140","2023","2023","American Indian or Alaska Native","1",0
+,"Measles, Total","10140","2023","2023","Asian or Pacific Islander","2",10
+,"Measles, Total","10140","2023","2023","Black or African American","3",8
+,"Measles, Total","10140","2023","2023","White","4",21
+,"Measles, Total","10140","2023","2023","Other or Multi-Race","5",13
+,"Measles, Total","10140","2023","2023","Unknown","99",12
+,"Measles, Total","10140","2023","2023","Suppressed","98",0
+"Total","Measles, Total","10140","2023","2023",,,64
+"Total","Measles, Total","10140",,,,,64
+,"Measles, Indigenous","10500","2023","2023","American Indian or Alaska Native","1",0
+,"Measles, Indigenous","10500","2023","2023","Asian or Pacific Islander","2",3
+,"Measles, Indigenous","10500","2023","2023","Black or African American","3",6
+,"Measles, Indigenous","10500","2023","2023","White","4",16
+,"Measles, Indigenous","10500","2023","2023","Other or Multi-Race","5",10
+,"Measles, Indigenous","10500","2023","2023","Unknown","99",7
+,"Measles, Indigenous","10500","2023","2023","Suppressed","98",0
+"Total","Measles, Indigenous","10500","2023","2023",,,42
+"Total","Measles, Indigenous","10500",,,,,42
+,"Measles, Imported","10510","2023","2023","American Indian or Alaska Native","1",0
+,"Measles, Imported","10510","2023","2023","Asian or Pacific Islander","2",7
+,"Measles, Imported","10510","2023","2023","Black or African American","3",2
+,"Measles, Imported","10510","2023","2023","White","4",5
+,"Measles, Imported","10510","2023","2023","Other or Multi-Race","5",3
+,"Measles, Imported","10510","2023","2023","Unknown","99",5
+,"Measles, Imported","10510","2023","2023","Suppressed","98",0
+"Total","Measles, Imported","10510","2023","2023",,,22
+"Total","Measles, Imported","10510",,,,,22
+,"Melioidosis","11585","2023","2023","American Indian or Alaska Native","1",0
+,"Melioidosis","11585","2023","2023","Asian or Pacific Islander","2",0
+,"Melioidosis","11585","2023","2023","Black or African American","3",0
+,"Melioidosis","11585","2023","2023","White","4",0
+,"Melioidosis","11585","2023","2023","Other or Multi-Race","5",0
+,"Melioidosis","11585","2023","2023","Unknown","99",0
+,"Melioidosis","11585","2023","2023","Suppressed","98",6
+"Total","Melioidosis","11585","2023","2023",,,6
+"Total","Melioidosis","11585",,,,,6
+,"Meningococcal disease, All serogroups","10150","2023","2023","American Indian or Alaska Native","1",4
+,"Meningococcal disease, All serogroups","10150","2023","2023","Asian or Pacific Islander","2",11
+,"Meningococcal disease, All serogroups","10150","2023","2023","Black or African American","3",147
+,"Meningococcal disease, All serogroups","10150","2023","2023","White","4",206
+,"Meningococcal disease, All serogroups","10150","2023","2023","Other or Multi-Race","5",30
+,"Meningococcal disease, All serogroups","10150","2023","2023","Unknown","99",40
+,"Meningococcal disease, All serogroups","10150","2023","2023","Suppressed","98",0
+"Total","Meningococcal disease, All serogroups","10150","2023","2023",,,438
+"Total","Meningococcal disease, All serogroups","10150",,,,,438
+,"Meningococcal disease, Serogroups ACWY","10151","2023","2023","American Indian or Alaska Native","1",3
+,"Meningococcal disease, Serogroups ACWY","10151","2023","2023","Asian or Pacific Islander","2",6
+,"Meningococcal disease, Serogroups ACWY","10151","2023","2023","Black or African American","3",112
+,"Meningococcal disease, Serogroups ACWY","10151","2023","2023","White","4",111
+,"Meningococcal disease, Serogroups ACWY","10151","2023","2023","Other or Multi-Race","5",16
+,"Meningococcal disease, Serogroups ACWY","10151","2023","2023","Unknown","99",12
+,"Meningococcal disease, Serogroups ACWY","10151","2023","2023","Suppressed","98",0
+"Total","Meningococcal disease, Serogroups ACWY","10151","2023","2023",,,260
+"Total","Meningococcal disease, Serogroups ACWY","10151",,,,,260
+,"Meningococcal disease, Serogroup B","10152","2023","2023","American Indian or Alaska Native","1",1
+,"Meningococcal disease, Serogroup B","10152","2023","2023","Asian or Pacific Islander","2",2
+,"Meningococcal disease, Serogroup B","10152","2023","2023","Black or African American","3",1
+,"Meningococcal disease, Serogroup B","10152","2023","2023","White","4",33
+,"Meningococcal disease, Serogroup B","10152","2023","2023","Other or Multi-Race","5",5
+,"Meningococcal disease, Serogroup B","10152","2023","2023","Unknown","99",2
+,"Meningococcal disease, Serogroup B","10152","2023","2023","Suppressed","98",0
+"Total","Meningococcal disease, Serogroup B","10152","2023","2023",,,44
+"Total","Meningococcal disease, Serogroup B","10152",,,,,44
+,"Meningococcal disease, Other serogroups","10153","2023","2023","American Indian or Alaska Native","1",0
+,"Meningococcal disease, Other serogroups","10153","2023","2023","Asian or Pacific Islander","2",1
+,"Meningococcal disease, Other serogroups","10153","2023","2023","Black or African American","3",9
+,"Meningococcal disease, Other serogroups","10153","2023","2023","White","4",14
+,"Meningococcal disease, Other serogroups","10153","2023","2023","Other or Multi-Race","5",6
+,"Meningococcal disease, Other serogroups","10153","2023","2023","Unknown","99",3
+,"Meningococcal disease, Other serogroups","10153","2023","2023","Suppressed","98",0
+"Total","Meningococcal disease, Other serogroups","10153","2023","2023",,,33
+"Total","Meningococcal disease, Other serogroups","10153",,,,,33
+,"Meningococcal disease, Unknown serogroup","10154","2023","2023","American Indian or Alaska Native","1",0
+,"Meningococcal disease, Unknown serogroup","10154","2023","2023","Asian or Pacific Islander","2",2
+,"Meningococcal disease, Unknown serogroup","10154","2023","2023","Black or African American","3",25
+,"Meningococcal disease, Unknown serogroup","10154","2023","2023","White","4",48
+,"Meningococcal disease, Unknown serogroup","10154","2023","2023","Other or Multi-Race","5",3
+,"Meningococcal disease, Unknown serogroup","10154","2023","2023","Unknown","99",23
+,"Meningococcal disease, Unknown serogroup","10154","2023","2023","Suppressed","98",0
+"Total","Meningococcal disease, Unknown serogroup","10154","2023","2023",,,101
+"Total","Meningococcal disease, Unknown serogroup","10154",,,,,101
+,"Mpox","11801","2023","2023","American Indian or Alaska Native","1",17
+,"Mpox","11801","2023","2023","Asian or Pacific Islander","2",59
+,"Mpox","11801","2023","2023","Black or African American","3",391
+,"Mpox","11801","2023","2023","White","4",898
+,"Mpox","11801","2023","2023","Other or Multi-Race","5",161
+,"Mpox","11801","2023","2023","Unknown","99",204
+,"Mpox","11801","2023","2023","Suppressed","98",0
+"Total","Mpox","11801","2023","2023",,,1730
+"Total","Mpox","11801",,,,,1730
+,"Mumps","10180","2023","2023","American Indian or Alaska Native","1",1
+,"Mumps","10180","2023","2023","Asian or Pacific Islander","2",31
+,"Mumps","10180","2023","2023","Black or African American","3",43
+,"Mumps","10180","2023","2023","White","4",226
+,"Mumps","10180","2023","2023","Other or Multi-Race","5",34
+,"Mumps","10180","2023","2023","Unknown","99",98
+,"Mumps","10180","2023","2023","Suppressed","98",0
+"Total","Mumps","10180","2023","2023",,,433
+"Total","Mumps","10180",,,,,433
+,"Novel Influenza A virus infections","11062","2023","2023","American Indian or Alaska Native","1",0
+,"Novel Influenza A virus infections","11062","2023","2023","Asian or Pacific Islander","2",0
+,"Novel Influenza A virus infections","11062","2023","2023","Black or African American","3",0
+,"Novel Influenza A virus infections","11062","2023","2023","White","4",0
+,"Novel Influenza A virus infections","11062","2023","2023","Other or Multi-Race","5",0
+,"Novel Influenza A virus infections","11062","2023","2023","Unknown","99",0
+,"Novel Influenza A virus infections","11062","2023","2023","Suppressed","98",3
+"Total","Novel Influenza A virus infections","11062","2023","2023",,,3
+"Total","Novel Influenza A virus infections","11062",,,,,3
+,"Paratyphoid fever","50236","2023","2023","American Indian or Alaska Native","1",0
+,"Paratyphoid fever","50236","2023","2023","Asian or Pacific Islander","2",0
+,"Paratyphoid fever","50236","2023","2023","Black or African American","3",0
+,"Paratyphoid fever","50236","2023","2023","White","4",0
+,"Paratyphoid fever","50236","2023","2023","Other or Multi-Race","5",0
+,"Paratyphoid fever","50236","2023","2023","Unknown","99",0
+,"Paratyphoid fever","50236","2023","2023","Suppressed","98",0
+"Total","Paratyphoid fever","50236","2023","2023",,,0
+"Total","Paratyphoid fever","50236",,,,,0
+,"Pertussis","10190","2023","2023","American Indian or Alaska Native","1",30
+,"Pertussis","10190","2023","2023","Asian or Pacific Islander","2",168
+,"Pertussis","10190","2023","2023","Black or African American","3",235
+,"Pertussis","10190","2023","2023","White","4",4590
+,"Pertussis","10190","2023","2023","Other or Multi-Race","5",421
+,"Pertussis","10190","2023","2023","Unknown","99",1619
+,"Pertussis","10190","2023","2023","Suppressed","98",0
+"Total","Pertussis","10190","2023","2023",,,7063
+"Total","Pertussis","10190",,,,,7063
+,"Plague","10440","2023","2023","American Indian or Alaska Native","1",0
+,"Plague","10440","2023","2023","Asian or Pacific Islander","2",0
+,"Plague","10440","2023","2023","Black or African American","3",0
+,"Plague","10440","2023","2023","White","4",0
+,"Plague","10440","2023","2023","Other or Multi-Race","5",0
+,"Plague","10440","2023","2023","Unknown","99",0
+,"Plague","10440","2023","2023","Suppressed","98",2
+"Total","Plague","10440","2023","2023",,,2
+"Total","Plague","10440",,,,,2
+,"Poliomyelitis, paralytic","10410","2023","2023","American Indian or Alaska Native","1",0
+,"Poliomyelitis, paralytic","10410","2023","2023","Asian or Pacific Islander","2",0
+,"Poliomyelitis, paralytic","10410","2023","2023","Black or African American","3",0
+,"Poliomyelitis, paralytic","10410","2023","2023","White","4",0
+,"Poliomyelitis, paralytic","10410","2023","2023","Other or Multi-Race","5",0
+,"Poliomyelitis, paralytic","10410","2023","2023","Unknown","99",0
+,"Poliomyelitis, paralytic","10410","2023","2023","Suppressed","98",0
+"Total","Poliomyelitis, paralytic","10410","2023","2023",,,0
+"Total","Poliomyelitis, paralytic","10410",,,,,0
+,"Poliovirus infection, nonparalytic","10405","2023","2023","American Indian or Alaska Native","1",0
+,"Poliovirus infection, nonparalytic","10405","2023","2023","Asian or Pacific Islander","2",0
+,"Poliovirus infection, nonparalytic","10405","2023","2023","Black or African American","3",0
+,"Poliovirus infection, nonparalytic","10405","2023","2023","White","4",0
+,"Poliovirus infection, nonparalytic","10405","2023","2023","Other or Multi-Race","5",0
+,"Poliovirus infection, nonparalytic","10405","2023","2023","Unknown","99",0
+,"Poliovirus infection, nonparalytic","10405","2023","2023","Suppressed","98",0
+"Total","Poliovirus infection, nonparalytic","10405","2023","2023",,,0
+"Total","Poliovirus infection, nonparalytic","10405",,,,,0
+,"Psittacosis","10450","2023","2023","American Indian or Alaska Native","1",0
+,"Psittacosis","10450","2023","2023","Asian or Pacific Islander","2",0
+,"Psittacosis","10450","2023","2023","Black or African American","3",0
+,"Psittacosis","10450","2023","2023","White","4",0
+,"Psittacosis","10450","2023","2023","Other or Multi-Race","5",0
+,"Psittacosis","10450","2023","2023","Unknown","99",0
+,"Psittacosis","10450","2023","2023","Suppressed","98",1
+"Total","Psittacosis","10450","2023","2023",,,1
+"Total","Psittacosis","10450",,,,,1
+,"Q fever, Total","10259","2023","2023","American Indian or Alaska Native","1",1
+,"Q fever, Total","10259","2023","2023","Asian or Pacific Islander","2",7
+,"Q fever, Total","10259","2023","2023","Black or African American","3",9
+,"Q fever, Total","10259","2023","2023","White","4",134
+,"Q fever, Total","10259","2023","2023","Other or Multi-Race","5",31
+,"Q fever, Total","10259","2023","2023","Unknown","99",37
+,"Q fever, Total","10259","2023","2023","Suppressed","98",0
+"Total","Q fever, Total","10259","2023","2023",,,219
+"Total","Q fever, Total","10259",,,,,219
+,"Q fever, Acute","10257","2023","2023","American Indian or Alaska Native","1",1
+,"Q fever, Acute","10257","2023","2023","Asian or Pacific Islander","2",7
+,"Q fever, Acute","10257","2023","2023","Black or African American","3",8
+,"Q fever, Acute","10257","2023","2023","White","4",107
+,"Q fever, Acute","10257","2023","2023","Other or Multi-Race","5",28
+,"Q fever, Acute","10257","2023","2023","Unknown","99",30
+,"Q fever, Acute","10257","2023","2023","Suppressed","98",0
+"Total","Q fever, Acute","10257","2023","2023",,,181
+"Total","Q fever, Acute","10257",,,,,181
+,"Q fever, Chronic","10258","2023","2023","American Indian or Alaska Native","1",0
+,"Q fever, Chronic","10258","2023","2023","Asian or Pacific Islander","2",0
+,"Q fever, Chronic","10258","2023","2023","Black or African American","3",1
+,"Q fever, Chronic","10258","2023","2023","White","4",27
+,"Q fever, Chronic","10258","2023","2023","Other or Multi-Race","5",3
+,"Q fever, Chronic","10258","2023","2023","Unknown","99",7
+,"Q fever, Chronic","10258","2023","2023","Suppressed","98",0
+"Total","Q fever, Chronic","10258","2023","2023",,,38
+"Total","Q fever, Chronic","10258",,,,,38
+,"Rabies, Animal","10340","2023","2023","American Indian or Alaska Native","1",0
+,"Rabies, Animal","10340","2023","2023","Asian or Pacific Islander","2",0
+,"Rabies, Animal","10340","2023","2023","Black or African American","3",0
+,"Rabies, Animal","10340","2023","2023","White","4",0
+,"Rabies, Animal","10340","2023","2023","Other or Multi-Race","5",0
+,"Rabies, Animal","10340","2023","2023","Unknown","99",3709
+,"Rabies, Animal","10340","2023","2023","Suppressed","98",0
+"Total","Rabies, Animal","10340","2023","2023",,,3709
+"Total","Rabies, Animal","10340",,,,,3709
+,"Rabies, Human","10460","2023","2023","American Indian or Alaska Native","1",0
+,"Rabies, Human","10460","2023","2023","Asian or Pacific Islander","2",0
+,"Rabies, Human","10460","2023","2023","Black or African American","3",0
+,"Rabies, Human","10460","2023","2023","White","4",0
+,"Rabies, Human","10460","2023","2023","Other or Multi-Race","5",0
+,"Rabies, Human","10460","2023","2023","Unknown","99",0
+,"Rabies, Human","10460","2023","2023","Suppressed","98",0
+"Total","Rabies, Human","10460","2023","2023",,,0
+"Total","Rabies, Human","10460",,,,,0
+,"Rubella","10200","2023","2023","American Indian or Alaska Native","1",0
+,"Rubella","10200","2023","2023","Asian or Pacific Islander","2",0
+,"Rubella","10200","2023","2023","Black or African American","3",0
+,"Rubella","10200","2023","2023","White","4",0
+,"Rubella","10200","2023","2023","Other or Multi-Race","5",0
+,"Rubella","10200","2023","2023","Unknown","99",0
+,"Rubella","10200","2023","2023","Suppressed","98",11
+"Total","Rubella","10200","2023","2023",,,11
+"Total","Rubella","10200",,,,,11
+,"Rubella, congenital syndrome","10370","2023","2023","American Indian or Alaska Native","1",0
+,"Rubella, congenital syndrome","10370","2023","2023","Asian or Pacific Islander","2",0
+,"Rubella, congenital syndrome","10370","2023","2023","Black or African American","3",0
+,"Rubella, congenital syndrome","10370","2023","2023","White","4",0
+,"Rubella, congenital syndrome","10370","2023","2023","Other or Multi-Race","5",0
+,"Rubella, congenital syndrome","10370","2023","2023","Unknown","99",0
+,"Rubella, congenital syndrome","10370","2023","2023","Suppressed","98",1
+"Total","Rubella, congenital syndrome","10370","2023","2023",,,1
+"Total","Rubella, congenital syndrome","10370",,,,,1
+,"Salmonella Paratyphi infection","50266","2023","2023","American Indian or Alaska Native","1",2
+,"Salmonella Paratyphi infection","50266","2023","2023","Asian or Pacific Islander","2",76
+,"Salmonella Paratyphi infection","50266","2023","2023","Black or African American","3",6
+,"Salmonella Paratyphi infection","50266","2023","2023","White","4",41
+,"Salmonella Paratyphi infection","50266","2023","2023","Other or Multi-Race","5",29
+,"Salmonella Paratyphi infection","50266","2023","2023","Unknown","99",27
+,"Salmonella Paratyphi infection","50266","2023","2023","Suppressed","98",0
