@@ -9,10 +9,11 @@
       "provenance_description": "This import utilizes official diabetes mortality data from CDC WONDER, detailing county-level death statistics.",
       "scripts": [
         "download.py",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=Death_Data_Cross_Tabulation_pvmap.csv --config_file=Death_Data_Cross_Tabulation_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=place_resolver.csv --output_path=output_files/Texas_Diabetes"
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=Death_Data_Cross_Tabulation_pvmap.csv --config_file=Death_Data_Cross_Tabulation_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=place_resolver.csv --output_path=output_files/Texas_Diabetes --output_counters=counters/Texas_Diabetes_counters.csv"
       ],
       "source_files": [
-        "input_files/*.csv"
+        "input_files/*.csv",
+        "counters/*.csv"
       ],
       "import_inputs": [
         {
