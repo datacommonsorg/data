@@ -23,3 +23,7 @@ This file defines the Google Cloud Platform (GCP) projects and Cloud Storage (GC
 ### `BASE_PROJECT`
 * **Value:** `datcom`
 * **Description:** The base container project referencing general storage and service operations.
+
+### `LOOKER_DASHBOARD`
+* **Value:** `https://lookerstudio.google.com/c/reporting/e88fda74-50c9-46c6-88aa-c84342ceba48/page/eaXdF`
+* **Description:** The Looker Studio dashboard displaying the latest execution status of all auto refresh data pipelines.

@@ -26,7 +26,7 @@ The process to tackle each of these issues can be different. However, the steps 
 
 This section highlights the steps that can be taken to perform RCA for the failed production pipelines. 
 
-Step 1: Go to the looker [dashboard](https://lookerstudio.google.com/c/reporting/e88fda74-50c9-46c6-88aa-c84342ceba48/page/eaXdF) and get the latest status of all the pipelines from the dashboard. The probable different states of each pipelines could be as below:
+Step 1: Go to the Looker Studio dashboard at `[<LOOKER_DASHBOARD>](gcp_variables.md#looker_dashboard)` and get the latest status of all the pipelines from the dashboard. The probable different states of each pipelines could be as below:
 
 1. VALIDATION: Data validation failure.  
 2. FAILURE: Import job failed.  
