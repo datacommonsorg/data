@@ -6,7 +6,7 @@
             "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 0.5
+                "threshold": 0.1
             }
         },
         {
