@@ -5,7 +5,7 @@ SCRIPT_PATH=$(realpath "$(dirname "$0")")
 
 mkdir -p "input_files" "$SCRIPT_PATH/counters"
 
-gsutil cp gs://unresolved_mcf/country/mongolia/mongolia_employment/latest/input_files/*.csv "$SCRIPT_PATH/input_files"
+gcloud storage cp gs://unresolved_mcf/country/mongolia/mongolia_employment/latest/input_files/*.csv "$SCRIPT_PATH/input_files"
 
 python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=$SCRIPT_PATH/input_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup.csv --pv_map=$SCRIPT_PATH/employment_by_classification_of_economic_activities_region_gender_and_agegroup_pvmap.csv --config_file=$SCRIPT_PATH/metadata.csv --output_path=$SCRIPT_PATH/output_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=$SCRIPT_PATH/places_resolved.csv --output_counters=$SCRIPT_PATH/counters/employment_by_classification_of_economic_activities_region_gender_and_agegroup_counters.csv || { echo "Error: Processing employment_by_classification_of_economic_activities_region_gender_and_agegroup failed!"; exit 1; }
 
