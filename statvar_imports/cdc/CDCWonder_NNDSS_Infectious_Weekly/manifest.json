@@ -14,8 +14,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/nndss_weekly_output.tmcf",
-                    "cleaned_csv": "output/nndss_weekly_output.csv",
-                    "node_mcf": "output/*.mcf"
+                    "cleaned_csv": "output/nndss_weekly_output.csv"
                 }
             ],
             "source_files": [
