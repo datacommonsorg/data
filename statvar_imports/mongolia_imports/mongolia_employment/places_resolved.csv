@@ -1,28 +1,135 @@
 place_name,dcid
-,
-Western region,
-Bayan-Ulgii,wikidataId/Q191792
-Govi-Altai,wikidataId/Q192945
-Zavkhan,wikidataId/Q167764
-Uvs,wikidataId/Q192942
-Khovd,wikidataId/Q194098
-Khangai region,
+       Arkhangai,wikidataId/Q207809
+    Arkhangai,wikidataId/Q207809
+ Arkhangai,wikidataId/Q207809
 Arkhangai,wikidataId/Q207809
+          Baganuur Bagakhangai,wikidataId/Q800043
+ Baganuur Bagakhangai,wikidataId/Q800043
+        Bayan-Ulgii,wikidataId/Q191792
+    Bayan-Ulgii,wikidataId/Q191792
+ Bayan-Ulgii,wikidataId/Q191792
+Bayan-Ulgii,wikidataId/Q191792
+          Bayangol,wikidataId/Q2044810
+ Bayangol,wikidataId/Q2044810
+       Bayankhongor,wikidataId/Q276200
+    Bayankhongor,wikidataId/Q276200
+ Bayankhongor,wikidataId/Q276200
 Bayankhongor,wikidataId/Q276200
+          Bayanzurkh,wikidataId/Q2044795
+ Bayanzurkh,wikidataId/Q2044795
+       Bulgan,wikidataId/Q209774
+    Bulgan,wikidataId/Q209774
+ Bulgan,wikidataId/Q209774
 Bulgan,wikidataId/Q209774
-Orkhon,wikidataId/Q234710
-Uvurkhangai,wikidataId/Q234713
-Khuvsgul,wikidataId/Q244788
-Central region,
-Govisumber,wikidataId/Q236333
+    Central region,NA
+ Central region,NA
+Central region,NA
+Centrel,NA
+          Chingeltei,wikidataId/Q2044802
+ Chingeltei,wikidataId/Q2044802
+       Darkhan-Uul,wikidataId/Q18827
+    Darkhan-Uul,wikidataId/Q18827
+ Darkhan-Uul,wikidataId/Q18827
 Darkhan-Uul,wikidataId/Q18827
-Dornogovi,wikidataId/Q213272
-Dundgovi,wikidataId/Q211835
-Umnugovi,wikidataId/Q235579
-Selenge,wikidataId/Q234680
-Tuv,wikidataId/Q276195
-Eastern region,
+       Dornod,wikidataId/Q207795
+    Dornod,wikidataId/Q207795
+ Dornod,wikidataId/Q207795
 Dornod,wikidataId/Q207795
-Sukhbaatar,wikidataId/Q244804
+       Dornogovi,wikidataId/Q213272
+    Dornogovi,wikidataId/Q213272
+ Dornogovi,wikidataId/Q213272
+Dornogovi,wikidataId/Q213272
+       Dundgovi,wikidataId/Q211835
+    Dundgovi,wikidataId/Q211835
+ Dundgovi,wikidataId/Q211835
+Dundgovi,wikidataId/Q211835
+Eastern,NA
+    Eastern region,NA
+ Eastern region,NA
+Eastern region,NA
+        Govi-Altai,wikidataId/Q192945
+    Govi-Altai,wikidataId/Q192945
+ Govi-Altai,wikidataId/Q192945
+Govi-Altai,wikidataId/Q192945
+       Govisumber,wikidataId/Q236333
+    Govisumber,wikidataId/Q236333
+ Govisumber,wikidataId/Q236333
+Govisumber,wikidataId/Q236333
+          Khan-Uul,wikidataId/Q2044820
+ Khan-Uul,wikidataId/Q2044820
+Khangai,NA
+     Khangai region,NA
+ Khangai region,NA
+Khangai region,NA
+        Khentii,wikidataId/Q239040
+    Khentii,wikidataId/Q239040
+ Khentii,wikidataId/Q239040
 Khentii,wikidataId/Q239040
+        Khovd,wikidataId/Q194098
+    Khovd,wikidataId/Q194098
+ Khovd,wikidataId/Q194098
+Khovd,wikidataId/Q194098
+        Khuvsgul,wikidataId/Q244788
+    Khuvsgul,wikidataId/Q244788
+ Khuvsgul,wikidataId/Q244788
+Khuvsgul,wikidataId/Q244788
+          Nalaikh,wikidataId/Q1854445
+ Nalaikh,wikidataId/Q1854445
+National result,country/MNG
+        Orkhon,wikidataId/Q234710
+    Orkhon,wikidataId/Q234710
+ Orkhon,wikidataId/Q234710
+Orkhon,wikidataId/Q234710
+       Selenge,wikidataId/Q234680
+    Selenge,wikidataId/Q234680
+ Selenge,wikidataId/Q234680
+Selenge,wikidataId/Q234680
+          Songinokhairkhan,wikidataId/Q2044816
+ Songinokhairkhan,wikidataId/Q2044816
+          Sukhbaatar,wikidataId/Q244804
+       Sukhbaatar,wikidataId/Q244804
+    Sukhbaatar,wikidataId/Q244804
+   Sukhbaatar,wikidataId/Q244804
+ Sukhbaatar,wikidataId/Q244804
+Sukhbaatar,wikidataId/Q244804
+Total,country/MNG
+       Tuv,wikidataId/Q276195
+    Tuv,wikidataId/Q276195
+ Tuv,wikidataId/Q276195
+Tuv,wikidataId/Q276195
+      Ulaanbaatar,wikidataId/Q23430
+    Ulaanbaatar,wikidataId/Q23430
+  Ulaanbaatar,wikidataId/Q23430
+ Ulaanbaatar,wikidataId/Q23430
 Ulaanbaatar,wikidataId/Q23430
+       Umnugovi,wikidataId/Q235579
+    Umnugovi,wikidataId/Q235579
+ Umnugovi,wikidataId/Q235579
+Umnugovi,wikidataId/Q235579
+        Uvs,wikidataId/Q192942
+    Uvs,wikidataId/Q192942
+ Uvs,wikidataId/Q192942
+Uvs,wikidataId/Q192942
+       Uvurkhangai,wikidataId/Q234713
+    Uvurkhangai,wikidataId/Q234713
+ Uvurkhangai,wikidataId/Q234713
+Uvurkhangai,wikidataId/Q234713
+Western,NA
+     Western region,NA
+ Western region,NA
+Western region,NA
+        Zavkhan,wikidataId/Q167764
+    Zavkhan,wikidataId/Q167764
+ Zavkhan,wikidataId/Q167764
+Zavkhan,wikidataId/Q167764
+Багануур Багахангай,wikidataId/Q800043
+Баянгол,wikidataId/Q2044810
+Баянзүрх,wikidataId/Q2044795
+Налайх,wikidataId/Q1854445
+Сонгинохайрхан,wikidataId/Q2044816
+  Сүхбаатар,wikidataId/Q244804
+Сүхбаатар,wikidataId/Q244804
+  Улаанбаатар,wikidataId/Q23430
+Улаанбаатар,wikidataId/Q23430
+Хан-Уул,wikidataId/Q2044820
+Чингэлтэй,wikidataId/Q2044802
