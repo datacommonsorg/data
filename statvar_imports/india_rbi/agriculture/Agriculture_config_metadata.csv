@@ -1,0 +1,17 @@
+parameter,value
+url,https://www.rbi.org.in/Scripts/PublicationsView.aspx?id=22170
+description,TABLE 106: STATE-WISE AVERAGE INFLATION (CPI) - GENERAL
+#place_type,AdministrativeArea1
+#places_within,country/IND
+start_date,2015
+end_date,2023
+release_frequency,Yearly
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod"
+#places_resolved_csv,https://docs.google.com/spreadsheets/d/1xsMhMkIx6-AcXWTypVmWLl9nPw8K-ZOoJwHjXerb8eE/edit?resourcekey=0-YTMLneQOscG_0kKNYDqP9A#gid=0
+#pv_map,https://docs.google.com/spreadsheets/d/1TgPvEhdd8W0HL_gCGd8FhSfnUVAZ1Fi5PBpYeyvTD44/edit#gid=0
+header_rows,4
+mapped_rows,4
+mapped_columns,2
+#input_rows,10
