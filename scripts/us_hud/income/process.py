@@ -146,15 +146,28 @@ def process_all():
 
     if FLAGS.mode == "" or FLAGS.mode == "download":
         logging.info("Starting download phase...")
-        for year in range(2006, today.year):
+        for year in range(2006, today.year + 1):
             url = get_url(year)
             if url:
                 filename = f"Section8-FY{year}.xlsx" if year > 2016 else f"Section8-FY{year}.xls"
+                if year == today.year:
+                    try:
+                        headers = {
+                            'User-Agent':
+                                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+                        }
+                        resp = requests.get(url, headers=headers, timeout=10, stream=True)
+                        if resp.status_code != 200:
+                            logging.warning(f"HUD income limits for {year} are not yet available. Skipping.")
+                            continue
+                    except Exception as e:
+                        logging.warning(f"Could not check availability for {year}: {e}. Skipping.")
+                        continue
                 download_file(url, filename, input_folder)
 
     if FLAGS.mode == "" or FLAGS.mode == "process":
         logging.info("Starting processing phase...")
-        for year in range(2006, today.year):
+        for year in range(2006, today.year + 1):
             if not os.path.exists(
                     os.path.join(
                         input_folder, f"Section8-FY{year}.xlsx"
