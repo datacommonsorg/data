@@ -1,4 +1,4 @@
-Sort,Field Name,Field Alias,Type,Length,Relevant Layer,Metric Type,Version
+Sort,Field Name,Field Alias,Type,Length,Relevant Layer,Metric Type,Version Date
 1,OBJECTID,OBJECTID,Integer,4,n/a,n/a,November 2021
 2,Shape,Shape,Geometry,n/a,n/a,n/a,November 2021
 3,Shape_Length,Shape_Length,Double,8,n/a,n/a,November 2021
