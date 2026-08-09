@@ -24,7 +24,7 @@ nodes that are still missing.
 Usage:
     python3 generate_provisional_nodes.py --directory=/path/to/mcf/files \
         --spanner_project=datcom-store \
-        --spanner_instance=dc-graph-prod\
+        --spanner_instance=dc-graph-staging\
         --spanner_database=dc_graph
 """
 import os
@@ -46,7 +46,8 @@ flags.DEFINE_string("directory",
                     allow_override=True)
 flags.DEFINE_bool("no_spanner", False, "Skip Spanner check")
 flags.DEFINE_string("spanner_project", "datcom-store", "Spanner project ID")
-flags.DEFINE_string("spanner_instance", "dc-graph-prod", "Spanner instance ID")
+flags.DEFINE_string("spanner_instance", "dc-graph-staging",
+                    "Spanner instance ID")
 flags.DEFINE_string("spanner_database", "dc_graph", "Spanner database ID")
 
 logging.basicConfig(level=logging.INFO,
@@ -164,7 +165,7 @@ def check_spanner_nodes(node_ids, project, instance_id, database_id):
 def generate_provisional_nodes(scan_dir,
                                no_spanner=False,
                                spanner_project="datcom-store",
-                               spanner_instance="dc-graph-prod",
+                               spanner_instance="dc-graph-staging",
                                spanner_database="dc_graph"):
     """
     Scans a directory of MCF files to find undefined nodes referenced in properties.
