@@ -1,0 +1,4 @@
+"StatVar","NumPlaces","Units","MinDate","MeasurementMethods","observationPeriods","ScalingFactors"
+"Count_MortalityEvent_DiabetesMellitus","75","[]","2019","[]","[]","[]"
+"AgeAdjusted_Count_MortalityEvent_DiabetesMellitus_AsAFractionOf_AgeAdjusted_Count_Person_DiabetesMellitus","75","[Per100000Persons]","2019","[]","[]","[]"
+"Count_MortalityEvent_DiabetesMellitus_AsAFractionOf_Count_Person_DiabetesMellitus","75","[Per100000Persons]","2019","[]","[]","[]"

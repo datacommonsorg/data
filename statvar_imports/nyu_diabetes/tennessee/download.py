@@ -14,28 +14,51 @@
 
 
 import os
-import requests
-from urllib.parse import urlparse
-from tqdm import tqdm  
-from retry import retry
-from pathlib import Path
 from datetime import date
-from absl import logging, app
-import pandas as pd
+from pathlib import Path
 import re
+from urllib.parse import urlparse
+
+from absl import app, logging
+import pandas as pd
+import requests
+from requests.adapters import HTTPAdapter
+from retry import retry
+from tqdm import tqdm
+from urllib3.util.retry import Retry
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(script_dir, "input_files")
 Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 
-@retry(tries=3, delay=5, backoff=2)
-def retry_method(url, headers=None):
-    response = requests.get(url, headers=headers, timeout=120)
-    response.raise_for_status()
-    return response
+def get_session():
+    session = requests.Session()
+    retries = Retry(
+        total=5,
+        backoff_factor=2,
+        status_forcelist=[429, 500, 502, 503, 504],
+        raise_on_status=False,
+    )
+    session.mount('https://', HTTPAdapter(max_retries=retries))
+    headers = {
+        'User-Agent': (
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+            '(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        ),
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9'
+    }
+    session.headers.update(headers)
+    return session
+
+@retry(tries=4, delay=3, backoff=2)
+def _fetch_url(session, url):
+    return session.get(url, timeout=60)
 
 def download_files(url_list, save_folder):
     os.makedirs(os.path.join(save_folder), exist_ok=True)
+    session = get_session()
+    downloaded_count = 0
 
     for url in url_list:
         try:
@@ -45,7 +68,12 @@ def download_files(url_list, save_folder):
 
             logging.info(f"Downloading: {filename}")
 
-            response = retry_method(url)
+            response = _fetch_url(session, url)
+            if response.status_code == 404:
+                logging.info(f"File not yet available (HTTP 404): {url}")
+                continue
+            response.raise_for_status()
+
             with response as r:
                 total_size = int(r.headers.get('content-length', 0))
                 block_size = 1024
@@ -56,8 +84,13 @@ def download_files(url_list, save_folder):
                         f.write(chunk)
                         progress_bar.update(len(chunk))
             logging.info(f"Saved: {file_path}\n")
+            downloaded_count += 1
         except Exception as e:
-            logging.error(f"Failed to download {url} after retries: {e}\n")
+            logging.error(f"Failed to download {url}: {e}\n")
+            raise RuntimeError(f"Failed to download required file {url}: {e}") from e
+
+    if downloaded_count == 0:
+        raise RuntimeError("No files were successfully downloaded.")
 
 def generate_urls(start_year, end_year, url_template):
     url_list = []
