@@ -99,24 +99,34 @@ def process_survey_data(year, svs, input_dir, out_dir):
     logging.info(f'Start, {year}, =, {start}')
     try:
         logging.info(f"start processing data for the year : {year}")
-        if _get_mode() == "" or _get_mode() == "download":
-            os.makedirs(get_parts_dir(input_dir, year), exist_ok=True)
-            os.makedirs(get_response_dir(input_dir, year), exist_ok=True)
-            os.makedirs(out_dir, exist_ok=True)
+        os.makedirs(get_parts_dir(input_dir, year), exist_ok=True)
+        os.makedirs(get_response_dir(input_dir, year), exist_ok=True)
+        os.makedirs(out_dir, exist_ok=True)
 
-            logging.info('Getting county names')
-            county_names = get_param_values('county_name')
+        mode = _get_mode()
+        if mode == "" or mode == "download" or mode == "process":
+            response_dir = get_response_dir(input_dir, year)
+            if mode == "process" and os.path.exists(response_dir):
+                county_names = [
+                    os.path.splitext(f)[0]
+                    for f in os.listdir(response_dir)
+                    if f.endswith('.json')
+                ]
+            else:
+                logging.info('Getting county names')
+                county_names = get_param_values('county_name')
+
             logging.info(f'# counties =, {len(county_names)}')
 
-            pool_size = 2
+            if county_names:
+                pool_size = 2
+                with multiprocessing.Pool(pool_size) as pool:
+                    pool.starmap(
+                        fetch_and_write,
+                        zip(county_names, repeat(year), repeat(svs),
+                            repeat(input_dir)))
 
-            with multiprocessing.Pool(pool_size) as pool:
-                pool.starmap(
-                    fetch_and_write,
-                    zip(county_names, repeat(year), repeat(svs),
-                        repeat(input_dir)))
-
-        if _get_mode() == "" or _get_mode() == "process":
+        if mode == "" or mode == "process":
             write_aggregate_csv(year, input_dir, out_dir)
 
         end = datetime.datetime.now()
@@ -159,7 +169,13 @@ def write_aggregate_csv(year, input_dir, out_dir):
     logging.info(f"Aggregation starts for the year: {year}")
     try:
         parts_dir = get_parts_dir(input_dir, year)
+        if not os.path.exists(parts_dir):
+            logging.warning(
+                f"Parts directory {parts_dir} does not exist. Skipping aggregation."
+            )
+            return
         part_files = os.listdir(parts_dir)
+        os.makedirs(out_dir, exist_ok=True)
         out_file = f"{out_dir}/ag-{year}.csv"
 
         logging.info(f'Writing aggregate CSV, {out_file}')
@@ -478,6 +494,8 @@ def load_usda_api_key():
     Since we are reading from a config file, this function simply
     ensures the key is available.
     """
+    if _get_mode() == "process":
+        return "mock-key-for-process-mode"
     api_key = get_usda_api_key()
     if not api_key:
         raise ValueError("USDA API key not found in bucket path.")

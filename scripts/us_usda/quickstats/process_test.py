@@ -90,20 +90,28 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
 
     @mock.patch('process.requests.get')
     @mock.patch('process.is_rate_limited', return_value=False)
-    def test_get_data_400_no_data_found(self, mock_rate_limit, mock_requests_get):
+    def test_get_data_400_no_data_found(self, mock_rate_limit,
+                                        mock_requests_get):
         """Tests that get_data returns {'data': []} cleanly when API returns 400 'no data found'."""
         from process import get_data
         mock_resp = mock.Mock()
         mock_resp.status_code = 400
-        mock_resp.json.return_value = {"error": ["bad request - unsupported query / no data found"]}
+        mock_resp.json.return_value = {
+            "error": ["bad request - unsupported query / no data found"]
+        }
         mock_requests_get.return_value = mock_resp
 
-        result = get_data({'source_desc': 'SURVEY', 'year': 2024, 'county_name': 'FAKECOUNTY'})
+        result = get_data({
+            'source_desc': 'SURVEY',
+            'year': 2024,
+            'county_name': 'FAKECOUNTY'
+        })
         self.assertEqual(result, {'data': []})
 
     @mock.patch('process.requests.get')
     @mock.patch('process.is_rate_limited', return_value=False)
-    def test_get_data_400_invalid_query(self, mock_rate_limit, mock_requests_get):
+    def test_get_data_400_invalid_query(self, mock_rate_limit,
+                                        mock_requests_get):
         """Tests that get_data returns {'data': []} cleanly when API returns 400 'invalid query' (e.g. WASHABAUGH)."""
         from process import get_data
         mock_resp = mock.Mock()
@@ -111,23 +119,32 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
         mock_resp.json.return_value = {"error": ["bad request - invalid query"]}
         mock_requests_get.return_value = mock_resp
 
-        result = get_data({'source_desc': 'SURVEY', 'year': 2024, 'county_name': 'WASHABAUGH'})
+        result = get_data({
+            'source_desc': 'SURVEY',
+            'year': 2024,
+            'county_name': 'WASHABAUGH'
+        })
         self.assertEqual(result, {'data': []})
-
 
     @mock.patch('process.requests.get')
     @mock.patch('process.is_rate_limited', return_value=False)
-    def test_get_data_500_raises_error(self, mock_rate_limit, mock_requests_get):
+    def test_get_data_500_raises_error(self, mock_rate_limit,
+                                       mock_requests_get):
         """Tests that get_data raises RequestException after retries on 500 error."""
         import requests
         from process import get_data
         mock_resp = mock.Mock()
         mock_resp.status_code = 500
-        mock_resp.raise_for_status.side_effect = requests.exceptions.HTTPError("500 Server Error")
+        mock_resp.raise_for_status.side_effect = requests.exceptions.HTTPError(
+            "500 Server Error")
         mock_requests_get.return_value = mock_resp
 
         with self.assertRaises(requests.exceptions.RequestException):
-            get_data({'source_desc': 'SURVEY', 'year': 2024, 'county_name': 'FAKECOUNTY'})
+            get_data({
+                'source_desc': 'SURVEY',
+                'year': 2024,
+                'county_name': 'FAKECOUNTY'
+            })
 
     @mock.patch('process.get_data', return_value=None)
     @mock.patch('process.get_usda_api_key', return_value='mock-api-key')
@@ -139,4 +156,3 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
 
 if __name__ == '__main__':
     absltest.main()
-
