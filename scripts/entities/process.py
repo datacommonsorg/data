@@ -1,4 +1,5 @@
 # Copyright 2025 Google LLC
+
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +29,6 @@ script_dir = os.path.abspath(
                  'executor', 'scripts'))
 sys.path.append(script_dir)
 import generate_provisional_nodes
-import convert_dc_manifest
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string("entity", "", "Entity type (Schema/Place).")
@@ -39,11 +39,6 @@ def process(entity_type: str, version: str):
     logging.info(f'Processing import {entity_type} for version {version}')
     local_path = os.path.abspath(
         os.path.join(os.path.dirname(__file__), entity_type, version))
-
-    if entity_type == 'Provenance':
-        # Local path to Provenance data
-        logging.info(f'Processing DC manifest files in {local_path}')
-        convert_dc_manifest.process_directory(local_path)
 
     # Local path to data
     logging.info(
