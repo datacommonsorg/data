@@ -619,7 +619,7 @@ def file_write_csv_dict(py_dict: dict,
                         filename: str,
                         columns: list = None,
                         key_column_name: str = 'key') -> list:
-    """Returns the filename after writing py_dict with a csv row per item.
+    """Returns the list of columns after writing py_dict with a csv row per item.
 
   Each dictionary items is written as a row in the CSV file.
 
@@ -674,9 +674,11 @@ def file_write_csv_dict(py_dict: dict,
                     if col not in columns:
                         columns.append(col)
     if len(columns) == 1:
-        # Value is not a dict. Write it as a column name value.
-        value_column_name = 'value'
-        columns.append(value_column_name)
+        # Check if values are dicts. If they are, it's not a primitive value.
+        if not any(isinstance(value, dict) for value in py_dict.values()):
+            # Value is not a dict. Write it as a column name value.
+            value_column_name = 'value'
+            columns.append(value_column_name)
     # Use the first column for the key.
     if key_column_name == '':
         key_column_name = columns[0]

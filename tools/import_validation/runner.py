@@ -41,6 +41,7 @@ class ValidationRunner:
 
     def __init__(self, validation_config_path: str, differ_output: str,
                  stats_summary: str, lint_report: str, validation_output: str):
+        self.validation_config_path = validation_config_path
         self.config = ValidationConfig(validation_config_path)
         self.validation_output = validation_output
         self.validator = Validator()
@@ -246,6 +247,12 @@ class ValidationRunner:
                     output_dir = os.path.dirname(output_dir)
                 if output_dir:
                     rule_params.setdefault('output_path', output_dir)
+
+                # Inject the directory containing the validation config file as config_dir.
+                # This allows individual validators to resolve relative paths relative to the config file's directory.
+                config_dir = os.path.dirname(
+                    os.path.abspath(self.validation_config_path))
+                rule_params.setdefault('config_dir', config_dir)
 
             if validator_name == 'SQL_VALIDATOR':
                 result = validation_func(self.data_sources['stats'],
