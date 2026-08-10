@@ -45,7 +45,7 @@ the version URI only when the exact summary is needed.
 
 ## Required bounds
 
-Scan up to 100 matching summary object names plus one overflow sentinel (101
+Scan up to 1000 matching summary object names plus one overflow sentinel (1001
 names maximum). Return at most five timestamp-named versions and download at
 most those five summaries.
 
