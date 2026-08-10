@@ -64,7 +64,7 @@ SELECT DISTINCT * FROM (
     observation_date, 
     CONCAT('dcAggregate/', measurement_method) AS measurement_method,
     population_statvar,
-    SUM(CAST(pop_count AS FLOAT64)) * 100 / SUM(CAST(population AS FLOAT64)) AS percent
+    SAFE_DIVIDE(SUM(CAST(pop_count AS FLOAT64)) * 100, SUM(CAST(population AS FLOAT64))) AS percent
   FROM (
     SELECT
       p.statvar,
