@@ -17,7 +17,6 @@ import os
 import requests
 from urllib.parse import urlparse
 from tqdm import tqdm  
-from retry import retry
 from pathlib import Path
 from datetime import date
 from absl import logging, app
@@ -31,18 +30,12 @@ Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-class RetryableHTTPError(requests.exceptions.HTTPError):
-    pass
-
-@retry(exceptions=(requests.exceptions.ConnectionError, requests.exceptions.Timeout, RetryableHTTPError), tries=3, delay=5, backoff=2)
 def retry_method(url, headers=None):
     if headers is None:
         headers = {}
     if "User-Agent" not in headers:
         headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     response = requests.get(url, headers=headers, timeout=120, stream=True, verify=False)
-    if response.status_code >= 500 or response.status_code == 429:
-        raise RetryableHTTPError(f"Retryable status code {response.status_code}", response=response)
     response.raise_for_status()
     return response
 
