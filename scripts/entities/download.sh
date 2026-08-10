@@ -30,23 +30,12 @@ for i in "$@"; do
   esac
 done
 
+DIR_NAME="entities"
 BUCKET_NAME="datcom-prod-imports"
-DIR_NAME=$(basename "$(pwd)")
-GCS_FOLDER_PREFIX="scripts/${DIR_NAME}/${ENTITY}"
+GCS_FOLDER_PREFIX="scripts/entities/${ENTITY}"
 GCS_PATH="gs://${BUCKET_NAME}/${GCS_FOLDER_PREFIX}/${VERSION}"
 
 echo "Downloading import ${ENTITY} for version ${VERSION} from ${GCS_PATH} to $(pwd)"
 mkdir -p "${ENTITY}"
 gcloud storage cp -r "${GCS_PATH}" "${ENTITY}/" &> copy.log
 echo "Successfully downloaded ${ENTITY} version ${VERSION}"
-
-# TODO: remove after scrpts are checked in
-# Download scripts from GCS
-SCRIPTS_GCS_PATH="gs://${BUCKET_NAME}/scripts/${DIR_NAME}/process/*"
-SCRIPTS_LOCAL_PATH="../../import-automation/executor/scripts"
-echo "Downloading scripts from ${SCRIPTS_GCS_PATH} to ${SCRIPTS_LOCAL_PATH}"
-mkdir -p "${SCRIPTS_LOCAL_PATH}"
-gcloud storage cp -r "${SCRIPTS_GCS_PATH}" "${SCRIPTS_LOCAL_PATH}/"
-
-
-
