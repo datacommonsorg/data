@@ -125,21 +125,21 @@ class USAirEmissionTrends:
             df.rename(columns=replacement_08_11, inplace=True)
             df['pollutant type(s)'] = 'nan'
             if 'event' in file_path:
-                df.loc[:, 'emissions type code'] = ''
+                df['emissions type code'] = ''
             elif 'process' in file_path:
                 df = df.dropna(subset=['fips code'])
-                df.loc[:, 'emissions type code'] = ''
+                df['emissions type code'] = ''
             if '2008' in file_path:
-                df.loc[:, 'year'] = '2008'
+                df['year'] = '2008'
             else:
-                df.loc[:, 'year'] = '2011'
+                df['year'] = '2011'
         elif '2017' in file_path:
             if 'Event' in file_path:
                 df['pollutant type(s)'] = 'nan'
             elif 'point' in file_path:
                 if 'unknown' in file_path or '678910' in file_path:
                     df.rename(columns=replacement_point_17, inplace=True)
-                df.loc[:, 'emissions type code'] = ''
+                df['emissions type code'] = ''
             df['year'] = '2017'
         elif '2020' in file_path:
             if 'Event' in file_path:
@@ -147,7 +147,7 @@ class USAirEmissionTrends:
             elif 'point' in file_path:
                 if 'unknown' in file_path:
                     df.rename(columns=replacement_20, inplace=True)
-                df.loc[:, 'emissions type code'] = ''
+                df['emissions type code'] = ''
             df['year'] = '2020'
         elif 'tribes' in file_path:
             df.rename(columns=replacement_tribes, inplace=True)
@@ -157,7 +157,7 @@ class USAirEmissionTrends:
         else:
             df.rename(columns=replacement_14, inplace=True)
             if 'event' in file_path or 'process' in file_path:
-                df.loc[:, 'emissions type code'] = ''
+                df['emissions type code'] = ''
             df['pollutant type(s)'] = 'nan'
             df['year'] = '2014'
 
@@ -325,7 +325,7 @@ class USAirEmissionTrends:
 
         self.final_df = self.final_df.sort_values(
             by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
-        self.final_df['observation'].replace('', np.nan, inplace=True)
+        self.final_df['observation'] = self.final_df['observation'].replace('', np.nan)
         self.final_df.dropna(subset=['observation'], inplace=True)
         self.final_df['observation'] = np.where(
             self.final_df['unit'] == 'Pound',
