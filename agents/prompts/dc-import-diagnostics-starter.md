@@ -1,6 +1,7 @@
-# Start a Data Commons import inspection
+# Start a Data Commons import inspection or troubleshooting
 
-Use the `dc-import-info` skill to answer the request below.
+Use the `dc-import-diagnostics` skill to inspect or troubleshoot the request
+below.
 
 - Follow the skill's scope, safety rules, progressive loading, and operation
   routing.
