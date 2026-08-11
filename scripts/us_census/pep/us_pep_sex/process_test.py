@@ -22,17 +22,14 @@ import tempfile
 from absl import flags
 
 # module_dir is the path to where this test is running from.
-MODULE_DIR = os.path.dirname(__file__)
+MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _SCRIPTS_DIR = os.path.abspath(os.path.join(MODULE_DIR, '../../../'))
-if _SCRIPTS_DIR not in sys.path:
-    sys.path.insert(0, _SCRIPTS_DIR)
-sys.path.insert(1, MODULE_DIR)
+for path in (_SCRIPTS_DIR, MODULE_DIR):
+    if path not in sys.path:
+        sys.path.append(path)
 
 # pylint: disable=wrong-import-position
-try:
-    from us_census.pep.us_pep_sex.process import PopulationEstimateBySex
-except ImportError:
-    from process import PopulationEstimateBySex
+from us_census.pep.us_pep_sex.process import PopulationEstimateBySex
 # pylint: enable=wrong-import-position
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
