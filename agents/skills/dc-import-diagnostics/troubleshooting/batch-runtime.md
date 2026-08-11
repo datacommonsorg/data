@@ -30,11 +30,12 @@ Confirm Java garbage-collection thrashing only when Java runtime evidence shows
 repeated garbage collection with little useful import progress. A long-running
 job or high CPU usage without GC evidence is not sufficient.
 
-Increasing the Cloud Batch memory limit gives processes in the container,
-including Java processes, a larger available memory budget. When GC thrashing
-is confirmed, recommend increasing `resource_limits.memory` for the affected
-import specification, preserving its existing CPU and disk settings, and
-rerunning the import after the manifest change.
+For the Data Commons import-tool path, Java heap sizing scales with the
+container's available memory. Increasing `resource_limits.memory` therefore
+increases the heap available to Java. When GC thrashing is confirmed, recommend
+increasing `resource_limits.memory` for the affected import specification,
+preserving its existing CPU and disk settings, and rerunning the import after
+the manifest change.
 
 ## Report the diagnosis
 
