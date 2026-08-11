@@ -15,6 +15,7 @@
 import os
 import unittest
 import filecmp
+import datetime
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -42,9 +43,8 @@ class ProcessTest(unittest.TestCase):
         )
         year = 1997
         self.assertEqual(process.get_url(year), '')
-        
+
         # Test the current year URL generation, as process.py now supports processing up to the current year
-        import datetime
         current_year = datetime.date.today().year
         suffix = str(current_year)[-2:]
         self.assertEqual(
