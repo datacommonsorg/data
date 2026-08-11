@@ -98,6 +98,37 @@ class SkillContractTest(unittest.TestCase):
                     self.assertTrue(
                         (source.parent / target).resolve().is_file())
 
+    def test_troubleshooting_guides_are_reachable_from_entrypoint(self):
+        troubleshooting_root = (
+            self._agents_root /
+            'skills/dc-import-diagnostics/troubleshooting').resolve()
+        entrypoint = troubleshooting_root / 'troubleshooting.md'
+        all_guides = {
+            path.resolve() for path in troubleshooting_root.rglob('*.md')
+        }
+        reachable = set()
+        pending = [entrypoint]
+
+        while pending:
+            source = pending.pop()
+            if source in reachable:
+                continue
+
+            reachable.add(source)
+            text = source.read_text(encoding='utf-8')
+            for target in _local_markdown_targets(text):
+                linked_path = (source.parent / target).resolve()
+                if linked_path in all_guides and linked_path not in reachable:
+                    pending.append(linked_path)
+
+        unreachable = sorted(
+            str(path.relative_to(troubleshooting_root))
+            for path in all_guides - reachable)
+        self.assertFalse(
+            unreachable,
+            'Troubleshooting guides are not reachable from troubleshooting.md: '
+            f'{unreachable}')
+
     def test_skill_keeps_safety_and_progressive_loading(self):
         skill = self._skill_path.read_text(encoding='utf-8')
         normalized = re.sub(r'\s+', ' ', skill)
