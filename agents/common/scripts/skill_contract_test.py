@@ -69,9 +69,10 @@ class SkillContractTest(unittest.TestCase):
     def setUp(self):
         self._repo_root = Path(__file__).parents[3]
         self._agents_root = self._repo_root / 'agents'
-        self._skill_path = self._agents_root / 'skills/dc-import-info/SKILL.md'
+        self._skill_path = (self._agents_root /
+                            'skills/dc-import-diagnostics/SKILL.md')
         self._prompt_path = (self._agents_root /
-                             'prompts/dc-import-info-starter.md')
+                             'prompts/dc-import-diagnostics-starter.md')
 
     def _read(self, relative_path: str) -> str:
         return (self._repo_root / relative_path).read_text(encoding='utf-8')
@@ -80,7 +81,7 @@ class SkillContractTest(unittest.TestCase):
         registry = json.loads(self._read('.agents/skills.json'))
         paths = [entry['path'] for entry in registry['entries']]
 
-        self.assertIn('agents/skills/dc-import-info', paths)
+        self.assertIn('agents/skills/dc-import-diagnostics', paths)
         self.assertEqual(len(paths), len(set(paths)))
         for path in paths:
             with self.subTest(path=path):
@@ -112,7 +113,7 @@ class SkillContractTest(unittest.TestCase):
                 'Treat GCP and the data repository as read-only',
                 'Never replace a missing identifier with a broad',
                 'complete attempt history, Workflow execution inspection',
-                'loader status, and remediation as unsupported',
+                'loader status, and execution of remediation as unsupported',
                 'Do not load architecture, environment configuration, or cloud recipes'
         ):
             with self.subTest(guardrail=guardrail):

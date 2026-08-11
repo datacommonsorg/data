@@ -1,7 +1,7 @@
 {
   "entries": [
     {
-      "path": "agents/skills/dc-import-info"
+      "path": "agents/skills/dc-import-diagnostics"
     }
   ]
 }
