@@ -60,8 +60,15 @@ URI, and the `ImportStatus` or summary job-ID correlation.
 
 ## Common failures
 
-Expired job, permission denied, wrong project/location, or an attempt that
-failed before an exact Batch job ID was recorded.
+Permission denied or an attempt that failed before an exact Batch job ID was
+recorded.
+
+Batch automatically deletes completed jobs after 60 days and may delete them
+earlier on request. If the exact job is not found, verify its project, location,
+and ID once; do not search for or guess another job. Use the
+[bounded Batch logs recipe](../logging/fetch-batch-logs.md) only when a verified
+job UID and time range are available. Otherwise report the Batch evidence as
+unavailable.
 
 ## Related repository sources
 
