@@ -1,6 +1,8 @@
 ---
 name: dc-import-postmortem-doc
-description: Generates standardized troubleshooting post-mortem documents from conversation context after diagnosing or fixing an import failure. Captures discovered infrastructure identifiers, root causes, CI/CD gaps, fixes, and long-term preventions into agents/troubleshooting/YYYY-MM-DD/<import_name>_YYYYMMDD_HHMMSS.md for offline review and pattern extraction.
+description: >-
+  Use this skill to generate a standardized troubleshooting post-mortem document
+  from the conversation context after diagnosing or fixing a Data Commons import failure.
 ---
 
 # Generate Import Troubleshooting Post-Mortem Documentation
@@ -15,15 +17,14 @@ These documents form an offline repository in `agents/troubleshooting/` to help 
 
 Always create the post-mortem report at:
 ```text
-agents/troubleshooting/<YYYY-MM-DD>/<import_name>_<YYYYMMDD>_<HHMMSS>.md
+agents/troubleshooting/<import_name>/<import_name>_<YYYYMMDD>_<HHMMSS>.md
 ```
-* `<YYYY-MM-DD>`: The date the incident occurred or was investigated in UTC (e.g. `2026-08-06`).
 * `<import_name>`: The exact simple name of the import (e.g. `USCensusPEP_Sex`).
 * `<YYYYMMDD>`: The UTC date without dashes (e.g. `20260806`).
 * `<HHMMSS>`: The current UTC time of document generation (24-hour format, e.g. `102735` for 10:27:35 UTC). This ensures unique filenames even if multiple investigations or runs occur on the same day.
 
 Example:
-`agents/troubleshooting/2026-08-06/USCensusPEP_Sex_20260806_102735.md`
+`agents/troubleshooting/USCensusPEP_Sex/USCensusPEP_Sex_20260806_102735.md`
 
 ---
 
