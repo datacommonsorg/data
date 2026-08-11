@@ -1,5 +1,5 @@
-# Repository-configured defaults used by dc-import-info. Explicit values in a
-# request override the corresponding field for that request.
+# Repository-configured defaults used by dc-import-diagnostics. Explicit values
+# in a request override the corresponding field for that request.
 
 default_environment: prod
 
