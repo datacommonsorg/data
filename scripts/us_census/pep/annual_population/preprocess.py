@@ -129,7 +129,7 @@ def _load_data_df(path: str,
     elif file_format.lower() == "txt":
         data_df = pd.read_table(path,
                                 index_col=False,
-                                delim_whitespace=True,
+                                sep=r'\s+',
                                 engine='python',
                                 header=header,
                                 skiprows=skip_rows)
@@ -148,7 +148,7 @@ def _geo_id(val: pd.Series) -> str:
         str: State/County GeoId
     """
     res = "geoId/"
-    state, county = val[0], val[1]
+    state, county = val.iloc[0], val.iloc[1]
     if county == "000":
         return res + state
     return res + state + county
