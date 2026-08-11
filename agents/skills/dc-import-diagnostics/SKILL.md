@@ -50,9 +50,10 @@ is out of scope.
    source-commit evidence—read
    [Import automation architecture](../../common/references/import-automation/architecture.md).
 4. For requests asking why an import failed, is stuck, or produced unexpected
-   output, first use the applicable information routes below, then read and
-   follow [Import troubleshooting](troubleshooting/troubleshooting.md). Do not
-   load troubleshooting guidance for factual inspection requests.
+   output, read and follow
+   [Import troubleshooting](troubleshooting/troubleshooting.md). It selects the
+   applicable information routes. Do not load troubleshooting guidance for
+   factual inspection requests.
 5. Treat complete attempt history, Workflow execution inspection, historical
    failures that produced no summary, loader status, and execution of
    remediation as unsupported by this skill.

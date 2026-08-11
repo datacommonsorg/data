@@ -3,16 +3,21 @@
 Primary troubleshooting guide for diagnostic requests routed from
 [the import diagnostics skill](../SKILL.md).
 
-## Investigation flow
+## Initial triage
 
-1. Understand the reported symptom and affected import.
-2. Use the main skill's information routes and shared recipes to resolve
-   required identifiers and gather facts.
-3. Identify the last known successful stage or likely failure area.
-4. Open the most relevant troubleshooting guide below when one matches.
-5. Apply the guide to the observed evidence.
-6. Report the likely cause, supporting evidence, remaining unknowns, and next
-   action.
+When the scenario is not already established by supplied evidence:
+
+1. Identify the affected import and symptom.
+2. Use the main skill's current-status route to read the recorded state,
+   version, and exact Batch job ID.
+3. Follow only the recorded evidence needed to locate the failure area:
+   - For an exact Batch job ID, inspect the job, then its tasks or bounded logs
+     only when needed.
+   - When a scheduled run has no Batch job ID, inspect the deployed Scheduler
+     job and report that further attempt visibility is unsupported.
+   - When Batch succeeded but output is unexpected, inspect the exact summary,
+     pointer, or artifacts only as needed.
+4. Classify the broad failure area and open the matching guide below.
 
 Load only the guide relevant to the observed issue. Do not read every guide.
 
@@ -20,7 +25,7 @@ Load only the guide relevant to the observed issue. Do not read every guide.
 
 | Scenario | Guide |
 |---|---|
-| Cloud Batch task fails or stalls with evidence of memory pressure | [Cloud Batch memory issues](batch-memory.md) |
+| Cloud Batch job failed or stopped making progress | [Cloud Batch runtime issues](batch-runtime.md) |
 
 ## When no guide matches
 

@@ -1,8 +1,7 @@
-# Cloud Batch memory issues
+# Cloud Batch runtime issues
 
-Use this guide when a Cloud Batch task fails or stops making progress and the
-available evidence indicates an out-of-memory failure or Java garbage-collection
-thrashing.
+Use this guide when a selected Cloud Batch job failed or stopped making
+progress.
 
 ## Select the issue
 
@@ -10,6 +9,9 @@ thrashing.
 |---|---|
 | The task terminates with explicit out-of-memory or memory-limit evidence | [Out of memory](#out-of-memory) |
 | The Java process remains active but repeatedly performs garbage collection with little import progress | [Java GC thrashing](#java-gc-thrashing) |
+
+If neither pattern matches, report the Batch runtime issue as unclassified and
+return to the parent troubleshooting fallback. Do not force a memory diagnosis.
 
 ## Out of memory
 
