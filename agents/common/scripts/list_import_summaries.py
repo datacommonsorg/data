@@ -33,9 +33,11 @@ _IMPORT_NAME_PATTERN = re.compile(
 _VERSION_PATTERN = re.compile(
     r'^(?P<year>\d{4})_(?P<month>\d{2})_(?P<day>\d{2})T'
     r'\d{2}_\d{2}_\d{2}(?:_\d{1,6})?_\d{2}_\d{2}$')
+_DATE_VERSION_PATTERN = re.compile(
+    r'^(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})$')
 _SUMMARY_FILENAME = 'import_summary.json'
 _MAX_RESULT_LIMIT = 5
-_SCAN_LIMIT = 100
+_SCAN_LIMIT = 1000
 
 
 def _define_flags() -> None:
@@ -79,6 +81,8 @@ def normalize_import_name(absolute_import_name: str) -> dict[str, str]:
 
 def _version_date(version: str) -> str | None:
     match = _VERSION_PATTERN.fullmatch(version)
+    if not match:
+        match = _DATE_VERSION_PATTERN.fullmatch(version)
     if not match:
         return None
     try:
@@ -181,7 +185,7 @@ def list_import_summaries(absolute_import_name: str,
             continue
         candidates.append((version, version_date, blob))
 
-    candidates.sort(key=lambda item: item[0], reverse=True)
+    candidates.sort(key=lambda item: item[0].replace('_', '-'), reverse=True)
     for version, version_date, blob in candidates[:limit]:
         batch_job_id, issue = _read_batch_job_id(blob, version,
                                                  identity['simple_import_name'])
