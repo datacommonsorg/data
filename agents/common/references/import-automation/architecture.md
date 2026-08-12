@@ -38,6 +38,21 @@ Acceptance is automatic ET behavior, not human approval. A `STAGING` summary
 shows that a candidate is eligible; the current-output pointer proves which
 eligible version is current at read time.
 
+### Runtime terminology
+
+Use these meanings unless the user explicitly asks about technical Batch
+status:
+
+| User wording | Lifecycle meaning | Starting evidence |
+|---|---|---|
+| `latest run`, `current run`, `latest attempt`, or `current status` | Current mutable recorded ET snapshot; it can include an attempt that failed before finalization. | Cloud Spanner `ImportStatus` |
+| `latest finalized run` or `latest candidate` | Most recent attempt that produced `import_summary.json`; its status can be `STAGING`, `VALIDATION`, or `SKIP`. | `staging_version.txt`, then the exact summary |
+| `checks passed` or `eligible for acceptance` | Finalized candidate whose exact summary has `status=STAGING`; eligibility does not prove acceptance. | Candidate pointer and exact summary |
+| `last successful run`, `accepted run`, or `current ET output` | Most recently accepted `STAGING` candidate. | `latest_version.txt` |
+
+Here, successful means accepted as the current ET output. Technical Batch
+success is a separate fact that requires exact Batch evidence.
+
 ## Definition-to-run flow
 
 ```text
