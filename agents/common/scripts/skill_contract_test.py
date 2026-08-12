@@ -22,7 +22,8 @@ import yaml
 
 _MARKDOWN_LINK = re.compile(r'\[[^]]+\]\(([^)]+)\)')
 _ROUTE_ROW = re.compile(
-    r'^\| (?P<need>[^|]+) \| \[[^]]+\]\((?P<target>[^)]+)\) \|$', re.MULTILINE)
+    r'^\| (?P<need>[^|]+) \| \[(?P<label>[^]]+)\]\((?P<target>[^)]+)\) \|$',
+    re.MULTILINE)
 _EXPECTED_SKILL_ROUTES = (
     ('Find or select imports', 'references/imports.md'),
     ('Verify deployed Scheduler schedule and Workflow target',
@@ -156,6 +157,19 @@ class SkillContractTest(unittest.TestCase):
                        for match in _ROUTE_ROW.finditer(skill))
 
         self.assertEqual(_EXPECTED_SKILL_ROUTES, routes)
+
+    def test_skill_route_labels_match_operation_headings(self):
+        skill = self._skill_path.read_text(encoding='utf-8')
+
+        for match in _ROUTE_ROW.finditer(skill):
+            label = match.group('label')
+            target = match.group('target')
+            reference = (self._skill_path.parent /
+                         target).read_text(encoding='utf-8')
+            with self.subTest(label=label, target=target):
+                self.assertRegex(
+                    reference,
+                    re.compile(rf'^#{{1,2}} {re.escape(label)}$', re.MULTILINE))
 
     def test_runtime_terms_distinguish_current_finalized_and_accepted(self):
         skill = self._skill_path.read_text(encoding='utf-8')

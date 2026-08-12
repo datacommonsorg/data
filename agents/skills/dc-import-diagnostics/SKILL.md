@@ -122,17 +122,17 @@ not substitute finalized GCS evidence.
 
 | Need | Read and follow |
 |---|---|
-| Find or select imports | [List repository imports](references/imports.md) |
-| Verify deployed Scheduler schedule and Workflow target | [Describe Scheduler job](references/scheduler.md) |
-| Read the latest run, current run, or current status for one import; read an exact current version; or read bounded current snapshots across imports | [Query current import status](references/spanner.md) |
-| List recent finalized versions, GCS paths, and Batch IDs | [List recent import summaries](references/gcs.md) |
-| Read one supplied or selected version's summary | [Read version summary](references/gcs.md) |
-| Read the latest finalized candidate or accepted-output (last successful) version pointer | [Read version pointer](references/gcs.md) |
-| List one selected version's files | [List version artifacts](references/gcs.md) |
-| Inspect one exact Batch job | [Describe Batch job](references/batch.md) |
-| Inspect tasks for one exact Batch job | [List Batch tasks](references/batch.md) |
-| Fetch bounded structured logs for one exact Batch job | [Fetch Batch logs](references/batch.md) |
-| Trace an exact Batch job to runtime-image or source-commit evidence, only when explicitly requested | [Trace Batch job to source commit](references/batch.md) |
+| Find or select imports | [List repository-configured Data Commons imports](references/imports.md) |
+| Verify deployed Scheduler schedule and Workflow target | [Describe and verify a Scheduler job](references/scheduler.md) |
+| Read the latest run, current run, or current status for one import; read an exact current version; or read bounded current snapshots across imports | [Query the current import-status snapshot](references/spanner.md) |
+| List recent finalized versions, GCS paths, and Batch IDs | [List recent finalized import summaries](references/gcs.md) |
+| Read one supplied or selected version's summary | [Read one import version summary](references/gcs.md) |
+| Read the latest finalized candidate or accepted-output (last successful) version pointer | [Read one import version pointer](references/gcs.md) |
+| List one selected version's files | [List artifacts for one import version](references/gcs.md) |
+| Inspect one exact Batch job | [Describe one Batch job](references/batch.md) |
+| Inspect tasks for one exact Batch job | [List tasks for one Batch job](references/batch.md) |
+| Fetch bounded structured logs for one exact Batch job | [Fetch bounded Batch logs](references/batch.md) |
+| Trace an exact Batch job to runtime-image or source-commit evidence, only when explicitly requested | [Trace a Batch job to source-commit evidence](references/batch.md) |
 
 ## Report evidence
 
