@@ -1143,7 +1143,7 @@ def is_valid_url(url):
                 return False
         return True
     except Exception as e:
-        logging.fatal(f"Error checking URL: {url} - {e}")
+        logging.warning(f"Error checking URL: {url} - {e}")
         return False
 
 
