@@ -121,7 +121,7 @@ evidence, first read the
 | Read current status for one import, exact current version, or bounded current snapshots across imports | [Query current import status](../../common/recipes/gcp/spanner/query-import-status.md) |
 | List recent finalized versions, GCS paths, and Batch IDs | [List recent import summaries](../../common/recipes/gcp/gcs/list-import-summaries.md) |
 | Read one supplied or selected version's summary | [Read version summary](../../common/recipes/gcp/gcs/read-version-summary.md) |
-| Read the current candidate or accepted-output pointer | [Read version pointer](../../common/recipes/gcp/gcs/read-version-pointer.md) |
+| Read the current candidate or accepted-output (latest successful) version pointer | [Read version pointer](../../common/recipes/gcp/gcs/read-version-pointer.md) |
 | List one selected version's files | [List version artifacts](../../common/recipes/gcp/gcs/list-version-artifacts.md) |
 | Inspect one exact Batch job | [Describe Batch job](../../common/recipes/gcp/batch/describe-job.md) |
 | Inspect tasks for one exact Batch job | [List Batch tasks](../../common/recipes/gcp/batch/list-tasks.md) |

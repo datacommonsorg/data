@@ -2,7 +2,7 @@
 
 ## Use when
 
-The most recent finalized candidate or current accepted ET output must be
+The most recent finalized candidate or current accepted ET output (latest successful version) must be
 identified.
 
 ## Required inputs
