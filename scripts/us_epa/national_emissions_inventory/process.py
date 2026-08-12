@@ -325,7 +325,6 @@ class USAirEmissionTrends:
 
         self.final_df = self.final_df.sort_values(
             by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
-        self.final_df['observation'] = self.final_df['observation'].replace('', np.nan)
         self.final_df.dropna(subset=['observation'], inplace=True)
         self.final_df['observation'] = np.where(
             self.final_df['unit'] == 'Pound',
