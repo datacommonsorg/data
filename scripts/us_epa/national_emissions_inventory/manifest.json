@@ -13,7 +13,7 @@
             ],
             "source_files": [
                 "gcs_output/input_files/*/*.csv",
-                "gcs_output/golden_files/*csv"
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
