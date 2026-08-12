@@ -30,6 +30,6 @@ Load only the guide relevant to the observed issue. Do not read every guide.
 ## When no guide matches
 
 Continue with a bounded, evidence-first investigation using the main skill's
-information routes and shared recipes. Report that no specific troubleshooting
-guide matched, distinguish observed evidence from inference, and do not guess a
-root cause.
+information routes and operational references. Report that no specific
+troubleshooting guide matched, distinguish observed evidence from inference,
+and do not guess a root cause.

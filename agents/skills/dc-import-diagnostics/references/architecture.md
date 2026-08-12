@@ -139,9 +139,9 @@ per import:                one mutable ImportStatus snapshot when present
 | Current-output pointer | Which finalized candidate is the current ET output at read time |
 
 Join systems only through exact identifiers returned by the selected evidence;
-linked recipes define the valid fields. Do not correlate by similar names or
-timestamps, and do not list Workflow executions or Batch jobs to discover a
-missing run.
+linked operational references define the valid fields. Do not correlate by
+similar names or timestamps, and do not list Workflow executions or Batch jobs
+to discover a missing run.
 
 ## Sources of truth
 

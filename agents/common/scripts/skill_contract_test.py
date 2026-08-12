@@ -24,27 +24,23 @@ _MARKDOWN_LINK = re.compile(r'\[[^]]+\]\(([^)]+)\)')
 _ROUTE_ROW = re.compile(
     r'^\| (?P<need>[^|]+) \| \[[^]]+\]\((?P<target>[^)]+)\) \|$', re.MULTILINE)
 _EXPECTED_SKILL_ROUTES = (
-    ('Find or select imports', '../../common/recipes/local/list-imports.md'),
+    ('Find or select imports', 'references/imports.md'),
     ('Verify deployed Scheduler schedule and Workflow target',
-     '../../common/recipes/gcp/scheduler/describe-job.md'),
+     'references/scheduler.md'),
     ('Read the latest run, current run, or current status for one import; read an exact current version; or read bounded current snapshots across imports',
-     '../../common/recipes/gcp/spanner/query-import-status.md'),
+     'references/spanner.md'),
     ('List recent finalized versions, GCS paths, and Batch IDs',
-     '../../common/recipes/gcp/gcs/list-import-summaries.md'),
-    ("Read one supplied or selected version's summary",
-     '../../common/recipes/gcp/gcs/read-version-summary.md'),
+     'references/gcs.md'),
+    ("Read one supplied or selected version's summary", 'references/gcs.md'),
     ('Read the latest finalized candidate or accepted-output (last successful) version pointer',
-     '../../common/recipes/gcp/gcs/read-version-pointer.md'),
-    ("List one selected version's files",
-     '../../common/recipes/gcp/gcs/list-version-artifacts.md'),
-    ('Inspect one exact Batch job',
-     '../../common/recipes/gcp/batch/describe-job.md'),
-    ('Inspect tasks for one exact Batch job',
-     '../../common/recipes/gcp/batch/list-tasks.md'),
+     'references/gcs.md'),
+    ("List one selected version's files", 'references/gcs.md'),
+    ('Inspect one exact Batch job', 'references/batch.md'),
+    ('Inspect tasks for one exact Batch job', 'references/batch.md'),
     ('Fetch bounded structured logs for one exact Batch job',
-     '../../common/recipes/gcp/logging/fetch-batch-logs.md'),
+     'references/batch.md'),
     ('Trace an exact Batch job to runtime-image or source-commit evidence, only when explicitly requested',
-     '../../common/recipes/gcp/batch/trace-batch-job-source-commit.md'),
+     'references/batch.md'),
 )
 
 
@@ -145,17 +141,16 @@ class SkillContractTest(unittest.TestCase):
                 'Never replace a missing identifier with a broad',
                 'complete attempt history, Workflow execution inspection',
                 'loader status, and execution of remediation as unsupported',
-                'Do not load architecture, environment configuration, or cloud recipes'
+                'Do not load architecture, environment configuration, or cloud operational references'
         ):
             with self.subTest(guardrail=guardrail):
                 self.assertIn(guardrail, normalized)
 
-        self.assertIn('../../common/recipes/local/list-imports.md', skill)
-        self.assertIn(
-            '../../common/references/import-automation/architecture.md', skill)
+        self.assertIn('references/imports.md', skill)
+        self.assertIn('references/architecture.md', skill)
         self.assertIn('../../dependency-setup.md', skill)
 
-    def test_skill_routes_map_to_exact_recipe_paths(self):
+    def test_skill_routes_map_to_exact_reference_paths(self):
         skill = self._skill_path.read_text(encoding='utf-8')
         routes = tuple((match.group('need').strip(), match.group('target'))
                        for match in _ROUTE_ROW.finditer(skill))
@@ -165,7 +160,7 @@ class SkillContractTest(unittest.TestCase):
     def test_runtime_terms_distinguish_current_finalized_and_accepted(self):
         skill = self._skill_path.read_text(encoding='utf-8')
         architecture = self._read(
-            'agents/common/references/import-automation/architecture.md')
+            'agents/skills/dc-import-diagnostics/references/architecture.md')
 
         for contract in (
                 'Current mutable recorded ET snapshot',
@@ -179,15 +174,13 @@ class SkillContractTest(unittest.TestCase):
             with self.subTest(contract=contract):
                 self.assertIn(contract, architecture)
 
-        self.assertIn(
-            '../../common/references/import-automation/architecture.md#runtime-terminology',
-            skill)
+        self.assertIn('references/architecture.md#runtime-terminology', skill)
 
     def test_manual_prompt_grounds_commands_by_repository_path(self):
         prompt = self._prompt_path.read_text(encoding='utf-8')
 
-        self.assertIn('exact repository recipe path', prompt)
-        self.assertNotRegex(prompt, re.compile(r'recipe ID', re.IGNORECASE))
+        self.assertIn('exact repository reference path', prompt)
+        self.assertNotRegex(prompt, re.compile(r'recipe', re.IGNORECASE))
 
     def test_runtime_environment_registry_is_minimal_and_complete(self):
         registry = yaml.safe_load(

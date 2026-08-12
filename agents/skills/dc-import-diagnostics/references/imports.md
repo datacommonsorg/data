@@ -35,7 +35,7 @@ Use the command above with `--limit=5` for import selection. Do not replace it
 with ad hoc manifest searches.
 
 After selecting an import, read its exact manifest specification. Read the
-[import manifest reference](../../references/import-automation/manifest.md)
+[import manifest reference](manifest.md)
 before interpreting manifest fields. Read manifest-referenced code only when
 the request requires it.
 
@@ -47,7 +47,7 @@ The returned `gcs_object_prefix` is bucket-relative:
 
 It contains no bucket or `gs://` scheme. For a cloud question, combine it later
 with the effective environment as described by the
-[import evidence flow](../../references/import-automation/import-evidence-flow.md).
+[import evidence flow](import-evidence-flow.md).
 
 ## Expected output
 
@@ -76,7 +76,7 @@ manifests, or an invalid result limit.
 
 ## Related repository sources
 
-The [import manifest reference](../../references/import-automation/manifest.md)
+The [import manifest reference](manifest.md)
 defines the selected-specification and field-interpretation contract. The
-[import evidence flow](../../references/import-automation/import-evidence-flow.md)
+[import evidence flow](import-evidence-flow.md)
 defines how repository identity seeds cloud evidence.

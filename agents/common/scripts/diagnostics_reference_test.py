@@ -11,23 +11,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Tests structural and executable contracts for agent recipes."""
+"""Tests executable contracts for import-diagnostics references."""
 
 from pathlib import Path
 import unittest
 
-_RECIPE_HEADINGS = (
-    '## Use when',
-    '## Required inputs',
-    '## Clarify when',
-    '## Read-only operation',
-    '## Preferred invocation',
-    '## Expected output',
-    '## Required bounds',
-    '## Evidence to retain',
-    '## Common failures',
-    '## Related repository sources',
-)
 _MUTATING_GCLOUD_COMMANDS = (
     'gcloud scheduler jobs run',
     'gcloud workflows execute',
@@ -40,46 +28,45 @@ _MUTATING_GCLOUD_COMMANDS = (
 )
 
 
-class RecipeContractTest(unittest.TestCase):
+class DiagnosticsReferenceTest(unittest.TestCase):
 
     def setUp(self):
         self._repo_root = Path(__file__).parents[3]
-        self._recipe_root = self._repo_root / 'agents/common/recipes'
-        self._recipe_paths = tuple(
-            path for path in self._recipe_root.rglob('*.md')
-            if path.name != 'README.md')
+        self._reference_root = (
+            self._repo_root / 'agents/skills/dc-import-diagnostics/references')
 
-    def _read_recipe(self, relative_path: str) -> str:
-        return (self._recipe_root / relative_path).read_text(encoding='utf-8')
+    def _read_reference(self, name: str) -> str:
+        return (self._reference_root / name).read_text(encoding='utf-8')
 
-    def test_recipes_have_standard_structure_and_placement(self):
-        self.assertGreater(len(self._recipe_paths), 1)
-        self.assertTrue((self._recipe_root / 'README.md').is_file())
+    def _read_operation(self, name: str, heading: str) -> str:
+        reference = self._read_reference(name)
+        marker = f'\n## {heading}\n'
+        self.assertIn(marker, reference)
+        operation = reference.split(marker, maxsplit=1)[1]
+        return operation.split('\n## ', maxsplit=1)[0]
 
-        for path in self._recipe_paths:
-            relative = path.relative_to(self._recipe_root)
-            text = path.read_text(encoding='utf-8')
-            with self.subTest(path=relative):
-                if relative.parts[0] == 'local':
-                    self.assertGreaterEqual(len(relative.parts), 2)
-                else:
-                    self.assertEqual('gcp', relative.parts[0])
-                    self.assertGreaterEqual(len(relative.parts), 3)
-                for heading in _RECIPE_HEADINGS:
-                    self.assertIn(heading, text)
-
-    def test_recipes_do_not_document_mutating_gcloud_commands(self):
-        recipes = '\n'.join(
-            path.read_text(encoding='utf-8') for path in self._recipe_paths)
+    def test_operational_references_do_not_document_mutating_gcloud_commands(
+            self):
+        references = '\n'.join(
+            self._read_reference(name) for name in (
+                'imports.md',
+                'scheduler.md',
+                'spanner.md',
+                'gcs.md',
+                'batch.md',
+            ))
 
         for command in _MUTATING_GCLOUD_COMMANDS:
             with self.subTest(command=command):
-                self.assertNotIn(command, recipes)
+                self.assertNotIn(command, references)
 
-    def test_spanner_recipe_supports_only_bounded_current_snapshot_queries(
+    def test_spanner_reference_supports_only_bounded_current_snapshot_queries(
             self):
-        recipe = self._read_recipe('gcp/spanner/query-import-status.md')
-        sql_lines = [line for line in recipe.splitlines() if '--sql=' in line]
+        operation = self._read_operation(
+            'spanner.md', 'Query the current import-status snapshot')
+        sql_lines = [
+            line for line in operation.splitlines() if '--sql=' in line
+        ]
 
         self.assertEqual(3, len(sql_lines))
         self.assertTrue(all('WorkflowId' not in line for line in sql_lines))
@@ -93,35 +80,43 @@ class RecipeContractTest(unittest.TestCase):
         self.assertIn("StatusUpdateTimestamp < TIMESTAMP('<END_RFC3339_UTC>')",
                       sql_lines[2])
         self.assertIn('LIMIT <LIMIT_PLUS_ONE>', sql_lines[2])
-        self.assertIn("AND State = '<STATE>'", recipe)
+        self.assertIn("AND State = '<STATE>'", operation)
 
-    def test_scheduler_recipe_keeps_missing_body_distinct_from_bad_body(self):
-        recipe = self._read_recipe('gcp/scheduler/describe-job.md')
+    def test_scheduler_reference_keeps_missing_body_distinct_from_bad_body(
+            self):
+        operation = self._read_operation('scheduler.md',
+                                         'Describe and verify a Scheduler job')
 
-        self.assertIn('gcloud scheduler jobs describe <IMPORT_NAME>', recipe)
-        self.assertIn('if .httpTarget.body', recipe)
-        self.assertIn('else null', recipe)
-        self.assertIn('| @base64d | fromjson |', recipe)
-        self.assertNotIn('fromjson?', recipe)
-        self.assertNotIn('try ', recipe)
+        self.assertIn('gcloud scheduler jobs describe <IMPORT_NAME>', operation)
+        self.assertIn('if .httpTarget.body', operation)
+        self.assertIn('else null', operation)
+        self.assertIn('| @base64d | fromjson |', operation)
+        self.assertNotIn('fromjson?', operation)
+        self.assertNotIn('try ', operation)
 
-    def test_provenance_recipe_uses_exact_batch_and_image_resources(self):
-        recipe = self._read_recipe('gcp/batch/trace-batch-job-source-commit.md')
+    def test_provenance_operation_uses_exact_batch_and_image_resources(self):
+        operation = self._read_operation(
+            'batch.md', 'Trace a Batch job to source-commit evidence')
 
-        self.assertIn('[Describe Batch job](describe-job.md)', recipe)
+        self.assertIn('[Describe Batch job](#describe-one-batch-job)',
+                      operation)
         self.assertIn("gcloud artifacts docker images describe '<IMAGE_URI>'",
-                      recipe)
-        self.assertIn('/dockerImages/<URL_ENCODED_IMAGE_AT_DIGEST>', recipe)
-        self.assertIn("cat-file -e '<GIT_SHA>^{commit}'", recipe)
-        self.assertNotIn('gcloud builds list', recipe)
-        self.assertNotIn('gcloud builds describe', recipe)
-        self.assertNotIn('gcloud artifacts versions describe', recipe)
+                      operation)
+        self.assertIn('/dockerImages/<URL_ENCODED_IMAGE_AT_DIGEST>', operation)
+        self.assertIn("cat-file -e '<GIT_SHA>^{commit}'", operation)
+        self.assertNotIn('gcloud builds list', operation)
+        self.assertNotIn('gcloud builds describe', operation)
+        self.assertNotIn('gcloud artifacts versions describe', operation)
 
-    def test_gcs_recipes_keep_distinct_bounded_operations(self):
-        summary_list = self._read_recipe('gcp/gcs/list-import-summaries.md')
-        version_summary = self._read_recipe('gcp/gcs/read-version-summary.md')
-        pointer = self._read_recipe('gcp/gcs/read-version-pointer.md')
-        artifacts = self._read_recipe('gcp/gcs/list-version-artifacts.md')
+    def test_gcs_reference_keeps_distinct_bounded_operations(self):
+        summary_list = self._read_operation(
+            'gcs.md', 'List recent finalized import summaries')
+        version_summary = self._read_operation(
+            'gcs.md', 'Read one import version summary')
+        pointer = self._read_operation('gcs.md',
+                                       'Read one import version pointer')
+        artifacts = self._read_operation(
+            'gcs.md', 'List artifacts for one import version')
 
         for required in ('./agents/common/run_python.sh',
                          'agents/common/scripts/list_import_summaries.py',
@@ -140,9 +135,9 @@ class RecipeContractTest(unittest.TestCase):
         self.assertIn('--limit=<LIMIT_PLUS_ONE>', artifacts)
 
     def test_batch_task_and_log_operations_require_exact_bounds(self):
-        batch = self._read_recipe('gcp/batch/describe-job.md')
-        tasks = self._read_recipe('gcp/batch/list-tasks.md')
-        logs = self._read_recipe('gcp/logging/fetch-batch-logs.md')
+        batch = self._read_operation('batch.md', 'Describe one Batch job')
+        tasks = self._read_operation('batch.md', 'List tasks for one Batch job')
+        logs = self._read_operation('batch.md', 'Fetch bounded Batch logs')
         logging_reference = (
             self._repo_root /
             'agents/common/references/gcp/logging.md').read_text(
@@ -155,7 +150,7 @@ class RecipeContractTest(unittest.TestCase):
         self.assertIn('--limit=<LIMIT_PLUS_ONE>', tasks)
         self.assertIn('truncated: (length > $limit)', tasks)
 
-        self.assertIn('../../../references/gcp/logging.md', logs)
+        self.assertIn('../../../common/references/gcp/logging.md', logs)
         self.assertIn('labels.job_uid="<JOB_UID>"', logs)
         self.assertIn('timestamp >= "<START>"', logs)
         self.assertIn('timestamp < "<END>"', logs)
