@@ -1,7 +1,10 @@
 {
   "entries": [
     {
-      "path": "agents/skills/dc-import-info"
+      "path": "agents/skills/dc-import-diagnostics"
+    },
+    {
+      "path": "agents/skills/dc-import-postmortem-doc"      
     }
   ]
 }

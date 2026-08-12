@@ -1,9 +1,9 @@
 ---
-name: dc-import-info
-description: Retrieves read-only information about the extract-and-transform (ET) phase of Data Commons imports, including repository definitions, configured and deployed schedules, current ImportStatus state, recent finalized GCS versions, exact summaries, accepted-output pointers, exact known Batch jobs, tasks, and logs, and explicitly requested runtime-image or source-commit evidence for an exact Batch job. Use for inspecting one import or a bounded set of current import snapshots. Do not use for root-cause analysis, complete attempt history, loader status, or remediation.
+name: dc-import-diagnostics
+description: Inspects and troubleshoots the extract-and-transform (ET) phase of Data Commons imports. Use when a user asks about an import's configuration, schedule, status, recent output, or runtime behavior, or asks why an import failed, is stuck, or produced unexpected output. Do not use for loader or serving-system issues.
 ---
 
-# Inspect Data Commons import ET information
+# Inspect and diagnose Data Commons import ET
 
 This skill covers extraction and transformation (ET): read source data,
 transform and validate it, and produce Data Commons-compatible artifacts.
@@ -32,8 +32,8 @@ is out of scope.
   database configuration for import infrastructure.
 - Use the caller's existing GCP authentication. Do not log in, distribute keys,
   impersonate another account, grant roles, or create access tokens.
-- Report missing permission or evidence. Provide facts only; do not diagnose a
-  failure or investigate loader or serving-system behavior.
+- Report missing permission or evidence. Base diagnoses on cited evidence,
+  state unknowns, and do not investigate loader or serving-system behavior.
 
 ## Classify the request before loading context
 
@@ -49,12 +49,17 @@ is out of scope.
    finalized versions, Batch, logs, artifacts, current ET output, or Batch
    source-commit evidence—read
    [Import automation architecture](../../common/references/import-automation/architecture.md).
-4. Treat complete attempt history, Workflow execution inspection, historical
-   failures that produced no summary, loader status, and remediation as
-   unsupported by this skill.
-5. Read `agents/common/config/import-environments.yaml` only when the selected
+4. For requests asking why an import failed, is stuck, or produced unexpected
+   output, read and follow
+   [Import troubleshooting](troubleshooting/troubleshooting.md). It selects the
+   applicable information routes. Do not load troubleshooting guidance for
+   factual inspection requests.
+5. Treat complete attempt history, Workflow execution inspection, historical
+   failures that produced no summary, loader status, and execution of
+   remediation as unsupported by this skill.
+6. Read `agents/common/config/import-environments.yaml` only when the selected
    route performs a cloud operation.
-6. Invoke repository Python helpers only through
+7. Invoke repository Python helpers only through
    `./agents/common/run_python.sh`. If a command, Python dependency, `.env`, or
    authentication prerequisite is missing, stop and direct the user to
    [agent dependency setup](../../dependency-setup.md). Do not run the readiness
