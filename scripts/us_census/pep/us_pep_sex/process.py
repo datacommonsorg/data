@@ -1157,6 +1157,10 @@ def add_future_year_urls():
     global _FILES_TO_DOWNLOAD
     # Initialize the list to store files to download
     _FILES_TO_DOWNLOAD = []
+
+    # Use a requests session for connection pooling to improve efficiency
+    # when making hundreds of HEAD requests.
+    session = requests.Session()
     with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
         _FILES_TO_DOWNLOAD = json.load(inpit_file)
 
@@ -1199,9 +1203,9 @@ def add_future_year_urls():
         gatekeeper_url = urls_to_scan[0].format(YEAR=future_year)
         try:
             # Use a short 5-second timeout for the check
-            response = requests.head(gatekeeper_url,
-                                     allow_redirects=True,
-                                     timeout=5)
+            response = session.head(gatekeeper_url,
+                                    allow_redirects=True,
+                                    timeout=5)
             if response.status_code != 200:
                 logging.info(
                     f"Skipping year {future_year}: National file not found (status code: {response.status_code})."
@@ -1224,9 +1228,9 @@ def add_future_year_urls():
 
                     try:
                         # HEAD calls only fetch headers and should complete quickly.
-                        check_url = requests.head(url_to_check,
-                                                  allow_redirects=True,
-                                                  timeout=5)
+                        check_url = session.head(url_to_check,
+                                                 allow_redirects=True,
+                                                 timeout=5)
                         if check_url.status_code == 200:
                             _FILES_TO_DOWNLOAD.append(
                                 {"download_path": url_to_check})
@@ -1244,9 +1248,9 @@ def add_future_year_urls():
 
                 try:
                     # HEAD calls only fetch headers and should complete quickly.
-                    check_url = requests.head(url_to_check,
-                                              allow_redirects=True,
-                                              timeout=5)
+                    check_url = session.head(url_to_check,
+                                             allow_redirects=True,
+                                             timeout=5)
                     if check_url.status_code == 200:
                         _FILES_TO_DOWNLOAD.append(
                             {"download_path": url_to_check})
