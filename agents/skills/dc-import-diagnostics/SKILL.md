@@ -46,10 +46,12 @@ is out of scope.
    [repository import operations](references/imports.md), read
    only the selected manifest or requested code, answer, and stop. Do not load
    architecture, environment configuration, or cloud operational references.
-3. For architecture or runtime questions—deployed schedule, current status,
-   finalized versions, Batch, logs, artifacts, current ET output, or Batch
-   source-commit evidence—read
-   [Import automation architecture](references/architecture.md).
+3. For questions about the ET lifecycle, evidence boundaries, the relationship
+   between attempts, versions, and accepted output, or multiple runtime
+   evidence sources, read
+   [Import automation architecture](references/architecture.md). For a direct
+   factual request with an unambiguous operation below, use that route without
+   loading the architecture reference.
 4. For requests asking why an import failed, is stuck, or produced unexpected
    output, read and follow
    [Import troubleshooting](troubleshooting/troubleshooting.md). It selects the
@@ -89,9 +91,9 @@ is out of scope.
 
 ## Load detailed references only when needed
 
-- For current-state, finalized-version, artifact, or Batch navigation, read the
+- For current-status, recent-version, artifact, or Batch navigation, read the
   [import evidence flow](references/import-evidence-flow.md).
-- For GCS paths, summaries, and pointers, read
+- For GCS version paths, summaries, and artifact names, read
   [artifact layout](references/artifact-layout.md).
 - For manifest fields, read the
   [import manifest reference](references/manifest.md).
@@ -100,9 +102,10 @@ is out of scope.
 
 Before presenting or executing a cloud or support command:
 
-1. Select the operation from the route table.
-2. Open its linked service reference during the current turn and select only
-   the named operation section.
+1. Select the operation or comparison flow from the route table.
+2. For a comparison flow, follow it to select the concrete operations. For
+   each operation, open its linked service reference during the current turn
+   and select only the named operation section.
 3. Use that section's command structure and literal resource or artifact names.
 4. Resolve placeholders only from declared inputs or linked references.
 5. If a required value remains unresolved, stop. Never reconstruct a command
@@ -115,19 +118,22 @@ sections own their required inputs, supported fields, defaults, bounds, and
 failure behavior. For questions combining current status, GCS versions, and Batch
 evidence, first read the
 [import evidence flow](references/import-evidence-flow.md).
-Before selecting a runtime operation, apply the architecture's
-[runtime terminology](references/architecture.md#runtime-terminology).
-Start `latest run`, `current run`, and `current status` with Cloud Spanner; do
-not substitute finalized GCS evidence.
+
+Treat a run or attempt as an execution. Treat a version as output that produced
+an import summary. Route explicit wording using the table below. Ask for
+clarification rather than assuming when the user does not distinguish a run
+from a version or does not identify whether a version is from the current
+attempt, the most recent summary, or the last successful output.
 
 | Need | Read and follow |
 |---|---|
 | Find or select imports | [List repository-configured Data Commons imports](references/imports.md) |
 | Verify deployed Scheduler schedule and Workflow target | [Describe and verify a Scheduler job](references/scheduler.md) |
-| Read the latest run, current run, or current status for one import; read an exact current version; or read bounded current snapshots across imports | [Query the current import-status snapshot](references/spanner.md) |
-| List recent finalized versions, GCS paths, and Batch IDs | [List recent finalized import summaries](references/gcs.md) |
+| Read current status, the current or latest run or attempt, or the version recorded for the current attempt; or read bounded current snapshots across imports | [Query the current import-status snapshot](references/spanner.md) |
+| List recent or latest import versions, GCS paths, and Batch IDs | [List recent import versions](references/gcs.md) |
 | Read one supplied or selected version's summary | [Read one import version summary](references/gcs.md) |
-| Read the latest finalized candidate or accepted-output (last successful) version pointer | [Read one import version pointer](references/gcs.md) |
+| Find the last successful or accepted import version | [Find the last successful import version](references/gcs.md) |
+| Compare a current or selected import version with the last successful version | [Compare an import version with the last successful version](references/import-evidence-flow.md) |
 | List one selected version's files | [List artifacts for one import version](references/gcs.md) |
 | Inspect one exact Batch job | [Describe one Batch job](references/batch.md) |
 | Inspect tasks for one exact Batch job | [List tasks for one Batch job](references/batch.md) |

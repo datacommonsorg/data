@@ -109,12 +109,12 @@ class DiagnosticsReferenceTest(unittest.TestCase):
         self.assertNotIn('gcloud artifacts versions describe', operation)
 
     def test_gcs_reference_keeps_distinct_bounded_operations(self):
-        summary_list = self._read_operation(
-            'gcs.md', 'List recent finalized import summaries')
+        summary_list = self._read_operation('gcs.md',
+                                            'List recent import versions')
         version_summary = self._read_operation(
             'gcs.md', 'Read one import version summary')
-        pointer = self._read_operation('gcs.md',
-                                       'Read one import version pointer')
+        last_successful = self._read_operation(
+            'gcs.md', 'Find the last successful import version')
         artifacts = self._read_operation(
             'gcs.md', 'List artifacts for one import version')
 
@@ -128,8 +128,8 @@ class DiagnosticsReferenceTest(unittest.TestCase):
 
         self.assertIn('gcloud storage cat', version_summary)
         self.assertIn('/<VERSION>/import_summary.json', version_summary)
-        self.assertIn('/staging_version.txt', pointer)
-        self.assertIn('/latest_version.txt', pointer)
+        self.assertIn('/latest_version.txt', last_successful)
+        self.assertNotIn('/staging_version.txt', last_successful)
         self.assertIn('gcloud storage objects list', artifacts)
         self.assertIn('/<VERSION>/**', artifacts)
         self.assertIn('--limit=<LIMIT_PLUS_ONE>', artifacts)

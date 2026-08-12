@@ -1,16 +1,16 @@
 # GCS operations
 
-- [List recent finalized import summaries](#list-recent-finalized-import-summaries)
+- [List recent import versions](#list-recent-import-versions)
 - [Read one import version summary](#read-one-import-version-summary)
-- [Read one import version pointer](#read-one-import-version-pointer)
+- [Find the last successful import version](#find-the-last-successful-import-version)
 - [List artifacts for one import version](#list-artifacts-for-one-import-version)
 
-## List recent finalized import summaries
+## List recent import versions
 
 ### Use when
 
-Up to five recent finalized versions and their Batch job IDs are needed for one
-exact import.
+Up to five recent versions that produced `import_summary.json`, together with
+their Batch job IDs, are needed for one exact import.
 
 ### Required inputs
 
@@ -66,7 +66,7 @@ version fields, and issues.
 Permission denied, missing credentials, scan-limit overflow, invalid JSON,
 summary identity mismatch, missing Batch job ID, or only non-timestamp names.
 A Batch failure before summary creation is intentionally absent: this is
-finalized-version history, not complete attempt history.
+version history, not complete attempt history.
 
 ### Related repository sources
 
@@ -78,7 +78,7 @@ and the [summary-list helper](../../../common/scripts/list_import_summaries.py).
 ### Use when
 
 Candidate classification, Batch job ID, or summary statistics are needed for
-an already selected finalized version.
+an already selected version.
 
 ### Required inputs
 
@@ -89,8 +89,9 @@ Batch job ID.
 ### Clarify when
 
 The import identity or version is ambiguous. Accept an exact version supplied
-by the user or obtained from a pointer or bounded summary-list result. Keep the
-read scoped to the selected import's GCS prefix.
+by the user or obtained from the current status, last-successful-version, or
+bounded recent-version operation. Keep the read scoped to the selected import's
+GCS prefix.
 
 ### Read-only operation
 
@@ -137,33 +138,25 @@ no attempt occurred.
 The [import executor](../../../../import-automation/executor/app/executor/import_executor.py)
 defines `ImportStatusSummary` and `_update_latest_version()`.
 
-## Read one import version pointer
+## Find the last successful import version
 
 ### Use when
 
-The most recent finalized candidate or current accepted ET output (latest successful version) must be
-identified.
+The last successful or accepted ET version must be identified.
 
 ### Required inputs
 
 GCS project and bucket from the effective environment, plus the exact import
-identity and one pointer role: most recent finalized candidate or current
-accepted ET output.
+identity.
 
 ### Clarify when
 
-A required project, bucket, import identity, or pointer role is missing, or the
-import prefix cannot be constructed from the exact import identity.
+A required project, bucket, or import identity is missing, or the import prefix
+cannot be constructed from the exact import identity.
 
 ### Read-only operation
 
 ```bash
-# Most recent finalized candidate
-gcloud storage cat \
-  'gs://<BUCKET>/<IMPORT_PREFIX>/staging_version.txt' \
-  --project=<PROJECT>
-
-# Current accepted ET output
 gcloud storage cat \
   'gs://<BUCKET>/<IMPORT_PREFIX>/latest_version.txt' \
   --project=<PROJECT>
@@ -171,17 +164,15 @@ gcloud storage cat \
 
 ### Preferred invocation
 
-Run only the command for the requested role. Read `staging_version.txt` for the
-most recent finalized candidate. Read `latest_version.txt` for the current
-accepted ET output.
-
-To calculate `is_current`, compare the selected version exactly with the value
-in `latest_version.txt`. This does not prove loader completion or serving
-availability.
+Read `latest_version.txt` for the last successful version accepted as the
+current ET output. To determine whether a selected version is the last
+successful version, compare it exactly with this value. This does not prove
+loader completion or serving availability.
 
 ### Expected output
 
-One version string from one exact object, labeled with its pointer role.
+One version string from one exact object, labeled as the last successful
+version.
 
 ### Required bounds
 
@@ -189,13 +180,12 @@ Read one exact object. Never list the import prefix to discover pointer names.
 
 ### Evidence to retain
 
-Exact object URI including the pointer filename, pointer role, returned version,
-and observation time.
+Exact object URI, returned version, and observation time.
 
 ### Common failures
 
 Failure before summary creation, missing accepted version, wrong bucket/prefix,
-permission denied, or a stale pointer.
+permission denied, or a stale value.
 
 ### Related repository sources
 

@@ -16,7 +16,7 @@ When the scenario is not already established by supplied evidence:
    - When a scheduled run has no Batch job ID, inspect the deployed Scheduler
      job and report that further attempt visibility is unsupported.
    - When Batch succeeded but output is unexpected, inspect the exact summary,
-     pointer, or artifacts only as needed.
+     last successful version, or artifacts only as needed.
 4. Classify the broad failure area and open the matching guide below.
 
 Load only the guide relevant to the observed issue. Do not read every guide.

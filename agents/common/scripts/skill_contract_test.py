@@ -28,13 +28,15 @@ _EXPECTED_SKILL_ROUTES = (
     ('Find or select imports', 'references/imports.md'),
     ('Verify deployed Scheduler schedule and Workflow target',
      'references/scheduler.md'),
-    ('Read the latest run, current run, or current status for one import; read an exact current version; or read bounded current snapshots across imports',
+    ('Read current status, the current or latest run or attempt, or the version recorded for the current attempt; or read bounded current snapshots across imports',
      'references/spanner.md'),
-    ('List recent finalized versions, GCS paths, and Batch IDs',
+    ('List recent or latest import versions, GCS paths, and Batch IDs',
      'references/gcs.md'),
     ("Read one supplied or selected version's summary", 'references/gcs.md'),
-    ('Read the latest finalized candidate or accepted-output (last successful) version pointer',
+    ('Find the last successful or accepted import version',
      'references/gcs.md'),
+    ('Compare a current or selected import version with the last successful version',
+     'references/import-evidence-flow.md'),
     ("List one selected version's files", 'references/gcs.md'),
     ('Inspect one exact Batch job', 'references/batch.md'),
     ('Inspect tasks for one exact Batch job', 'references/batch.md'),
@@ -171,24 +173,27 @@ class SkillContractTest(unittest.TestCase):
                     reference,
                     re.compile(rf'^#{{1,2}} {re.escape(label)}$', re.MULTILINE))
 
-    def test_runtime_terms_distinguish_current_finalized_and_accepted(self):
+    def test_version_terms_route_user_intent_without_duplicating_architecture(
+            self):
         skill = self._skill_path.read_text(encoding='utf-8')
         architecture = self._read(
             'agents/skills/dc-import-diagnostics/references/architecture.md')
 
         for contract in (
-                'Current mutable recorded ET snapshot',
-                'Most recent attempt that produced `import_summary.json`',
-                'status can be `STAGING`, `VALIDATION`, or `SKIP`',
-                'eligibility does not prove acceptance',
-                'Most recently accepted `STAGING` candidate',
+                'An **ET attempt**',
+                'A **candidate ET version**',
+                'A **current ET output**',
+                'Successful Batch completion proves only the technical compute outcome',
                 '`staging_version.txt`',
                 '`latest_version.txt`',
         ):
             with self.subTest(contract=contract):
                 self.assertIn(contract, architecture)
 
-        self.assertIn('references/architecture.md#runtime-terminology', skill)
+        self.assertNotIn('### Runtime terminology', architecture)
+        self.assertIn(
+            'does not distinguish a run from a version or does not identify whether a version',
+            re.sub(r'\s+', ' ', skill))
 
     def test_manual_prompt_grounds_commands_by_repository_path(self):
         prompt = self._prompt_path.read_text(encoding='utf-8')
