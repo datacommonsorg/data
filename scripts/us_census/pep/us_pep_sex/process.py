@@ -1223,8 +1223,10 @@ def add_future_year_urls():
                     logging.info(f"checking url: {url_to_check}")
 
                     try:
+                        # HEAD calls only fetch headers and should complete quickly.
                         check_url = requests.head(url_to_check,
-                                                  allow_redirects=True)
+                                                  allow_redirects=True,
+                                                  timeout=5)
                         if check_url.status_code == 200:
                             _FILES_TO_DOWNLOAD.append(
                                 {"download_path": url_to_check})
@@ -1241,8 +1243,10 @@ def add_future_year_urls():
                     continue  # Skip this URL if it's already processed
 
                 try:
+                    # HEAD calls only fetch headers and should complete quickly.
                     check_url = requests.head(url_to_check,
-                                              allow_redirects=True)
+                                              allow_redirects=True,
+                                              timeout=5)
                     if check_url.status_code == 200:
                         _FILES_TO_DOWNLOAD.append(
                             {"download_path": url_to_check})
