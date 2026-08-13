@@ -1,8 +1,9 @@
 # Data Commons import diagnostics golden queries
 
 Use these cases to evaluate request classification and operation routing for
-`dc-import-diagnostics`. Replace `<IMPORT>` with an exact absolute import name
-and `<VERSION>` with an exact version when running a case.
+`dc-import-diagnostics`. Replace `<IMPORT>` with an exact absolute import name,
+`<VERSION>` with an exact version, and `<JOB_ID>` with an exact Batch job ID
+when running a case.
 
 These are routing goldens. They do not prescribe exact answer text or live
 cloud results.
@@ -43,3 +44,23 @@ cloud results.
 | `workflow-inspection` | Inspect the Workflow execution for the latest run of `<IMPORT>`. | Unsupported | Report that Workflow execution inspection is unsupported. |
 | `serving-comparison` | Compare the current ET output of `<IMPORT>` with what is currently served. | Unsupported | Keep loader and serving-system investigation out of scope. |
 | `execute-remediation` | Rerun the latest failed attempt of `<IMPORT>`. | Unsupported | Do not execute remediation or mutate cloud resources. |
+
+## Troubleshooting routes
+
+| ID | Query | Expected route | Expected behavior |
+|---|---|---|---|
+| `failed-import-triage` | Why did the current attempt of `<IMPORT>` fail? | `Import troubleshooting` | Read current `ImportStatus`, gather only enough evidence to identify the failure domain, and do not assume a cause. |
+| `factual-batch-inspection` | Show the current state and resources for Batch job `<JOB_ID>`. | `Describe one Batch job` | Treat this as factual inspection and do not load troubleshooting guidance. |
+| `scheduled-no-batch-id` | The scheduled run for `<IMPORT>` did not start, and current `ImportStatus` has no Batch job ID. Diagnose it. | `Describe and verify a Scheduler job` | Inspect Scheduler and report unsupported attempt visibility; do not search Workflow or Batch. |
+| `failed-batch-runtime` | Current `ImportStatus` links `<IMPORT>` to Batch job `<JOB_ID>`, and the exact job failed. Why? | `Cloud Batch runtime issues` | Inspect the selected job baseline and test only plausible runtime hypotheses. |
+| `stalled-batch-runtime` | Batch job `<JOB_ID>` for `<IMPORT>` is still active but has stopped making progress. Diagnose it. | `Cloud Batch runtime issues` | Inspect the selected job baseline and prioritize hypotheses for an active stalled job. |
+| `explicit-oom-hypothesis` | Check whether Batch job `<JOB_ID>` for `<IMPORT>` failed because it ran out of memory. | `Out of memory` | Test OOM first, but do not treat the user's hypothesis as confirmation. |
+| `confirmed-oom-evidence` | Batch job `<JOB_ID>` failed, and its task event explicitly reports `OOMKilled`. Diagnose it. | `Out of memory` | Confirm OOM from the explicit task evidence and recommend increasing `resource_limits.memory`. |
+| `exit-137-only` | Batch job `<JOB_ID>` failed with exit code 137, and no memory-related event or log is available. Was it OOM? | `Out of memory` | Report OOM as not confirmed; exit code 137 alone is insufficient. |
+| `explicit-gc-hypothesis` | Check whether Batch job `<JOB_ID>` for `<IMPORT>` is experiencing Java GC thrashing. | `Java GC thrashing` | Test GC thrashing first, but do not treat the user's hypothesis as confirmation. |
+| `confirmed-gc-thrashing` | Bounded logs for Batch job `<JOB_ID>` show repeated Java garbage collection and stage evidence shows little useful progress. Diagnose it. | `Java GC thrashing` | Confirm GC thrashing from both evidence patterns and recommend increasing `resource_limits.memory`. |
+| `gc-indirect-only` | Batch job `<JOB_ID>` has run for a long time with high CPU, but no Java GC evidence is available. Is it GC thrashing? | `Java GC thrashing` | Do not confirm GC thrashing; report the result as unknown when runtime evidence is unavailable. |
+| `validation-domain` | Batch succeeded for `<IMPORT>`, and the exact import summary reports `status=VALIDATION`. Diagnose the failure. | Bounded troubleshooting fallback | Classify the validation domain without inventing a validation playbook or root cause. |
+| `unexpected-output` | Batch succeeded for `<IMPORT>`, but version `<VERSION>` produced unexpected output. Diagnose the difference from the last successful version. | `Compare an import version with the last successful version` | Inspect only the exact summary or selected artifacts needed for the comparison. |
+| `unclassified-batch` | Batch job `<JOB_ID>` failed, but the evidence matches neither OOM nor Java GC thrashing. Diagnose it. | Bounded troubleshooting fallback | Report an unclassified Batch runtime problem and do not force a memory diagnosis. |
+| `missing-runtime-evidence` | Determine whether Batch job `<JOB_ID>` failed from memory pressure, but its task and log evidence are unavailable. | `Out of memory` | Report the hypothesis result as unknown and do not recommend memory as a confirmed fix. |
