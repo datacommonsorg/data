@@ -8,6 +8,8 @@ import traceback
 from datetime import datetime
 from google.cloud import storage
 import io
+from urllib3.util import Retry
+from requests.adapters import HTTPAdapter
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -70,14 +72,14 @@ def get_template_map(template_df):
         name_to_code[clean_name] = str(code).strip()
     return name_to_code
 
-from urllib3.util import Retry
-from requests.adapters import HTTPAdapter
-
-def get_http_session(retries=5, backoff_factor=2):
+def get_http_session(retries=10, backoff_factor=1.5):
     """Creates a requests session with automatic HTTP retries and backoff."""
     session = requests.Session()
     retry_strategy = Retry(
         total=retries,
+        connect=retries,
+        read=retries,
+        status=retries,
         backoff_factor=backoff_factor,
         status_forcelist=[429, 500, 502, 503, 504],
         allowed_methods=["GET"],
@@ -88,26 +90,13 @@ def get_http_session(retries=5, backoff_factor=2):
     session.mount("http://", adapter)
     return session
 
-def make_request(session, url, headers=None, params=None, timeout=60, max_attempts=5):
-    """Makes an HTTP GET request with exponential backoff on timeouts, connection errors, and 429/5xx status codes."""
-    for attempt in range(1, max_attempts + 1):
-        try:
-            resp = session.get(url, headers=headers, params=params, timeout=timeout)
-            if resp.status_code == 200:
-                return resp
-            if resp.status_code in [429, 500, 502, 503, 504]:
-                retry_after = int(resp.headers.get('Retry-After', 2 ** attempt))
-                logging.warning(f"HTTP {resp.status_code} received for {url} (attempt {attempt}/{max_attempts}). Backing off for {retry_after}s...")
-                time.sleep(retry_after)
-                continue
-            logging.warning(f"HTTP {resp.status_code} received for {url}: {resp.text[:200]}")
-            return resp
-        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError, requests.exceptions.RequestException) as e:
-            logging.warning(f"Request attempt {attempt}/{max_attempts} failed for {url}: {e}")
-            if attempt == max_attempts:
-                raise
-            time.sleep(2 ** attempt)
-    return None
+def make_request(session, url, headers=None, params=None, timeout=60):
+    """Makes an HTTP GET request using the session's configured retry strategy and timeout."""
+    try:
+        return session.get(url, headers=headers, params=params, timeout=timeout)
+    except Exception as e:
+        logging.error(f"HTTP GET failed for {url}: {e}")
+        return None
 
 def fetch_variables(session):
     """Fetches all variables for Subject P3447 with retries."""
