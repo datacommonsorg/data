@@ -16,12 +16,13 @@
 import json
 from pathlib import Path
 import re
+import tempfile
 import unittest
 
 import yaml
 
 _MARKDOWN_LINK = re.compile(r'\[[^]]+\]\(([^)]+)\)')
-_MARKDOWN_HEADING = re.compile(r'^\s{0,3}#{1,6}[ \t]+(.+?)(?:[ \t]+#+)?[ \t]*$')
+_PLAIN_MARKDOWN_HEADING = re.compile(r'^#{1,6} ([A-Za-z0-9][A-Za-z0-9 -]*)$')
 _MARKDOWN_FENCE = re.compile(r'^\s{0,3}(`{3,}|~{3,})')
 _ROUTE_ROW = re.compile(
     r'^\| (?P<need>[^|]+) \| \[(?P<label>[^]]+)\]\((?P<target>[^)]+)\) \|$',
@@ -49,29 +50,11 @@ _EXPECTED_SKILL_ROUTES = (
 )
 
 
-def _local_markdown_links(text: str):
-    """Yields file and fragment portions of local Markdown links."""
-    for raw_target in _MARKDOWN_LINK.findall(text):
-        target = raw_target.strip()
-        if target.startswith('<') and '>' in target:
-            target = target[1:target.index('>')]
-        else:
-            target = target.split(maxsplit=1)[0]
-        if (not target or '://' in target or target.startswith(
-            ('mailto:', 'chatgpt-conversation:'))):
-            continue
-        path, _, fragment = target.partition('#')
-        if path or fragment:
-            yield path, fragment
-
-
-def _markdown_heading_fragments(text: str):
-    """Returns GitHub-style fragments for Markdown headings."""
-    fragments = set()
-    fragment_counts = {}
+def _markdown_lines_outside_fences(text: str):
+    """Yields line numbers and Markdown outside fenced code blocks."""
     fence = None
 
-    for line in text.splitlines():
+    for line_number, line in enumerate(text.splitlines(), start=1):
         fence_match = _MARKDOWN_FENCE.match(line)
         if fence_match:
             marker = fence_match.group(1)
@@ -83,19 +66,172 @@ def _markdown_heading_fragments(text: str):
         if fence is not None:
             continue
 
-        heading_match = _MARKDOWN_HEADING.match(line)
+        yield line_number, line
+
+
+def _local_markdown_links(text: str):
+    """Yields local Markdown link paths, fragments, and original targets."""
+    for _, line in _markdown_lines_outside_fences(text):
+        for raw_target in _MARKDOWN_LINK.findall(line):
+            target = raw_target.strip()
+            if target.startswith('<') and '>' in target:
+                target = target[1:target.index('>')]
+            else:
+                target = target.split(maxsplit=1)[0]
+            if (not target or '://' in target or target.startswith(
+                ('mailto:', 'chatgpt-conversation:'))):
+                continue
+            path, _, fragment = target.partition('#')
+            if path or fragment:
+                yield path, fragment, target
+
+
+def _plain_heading_fragments(text: str):
+    """Maps fragments for the supported plain ATX heading convention."""
+    fragments = {}
+
+    for line_number, line in _markdown_lines_outside_fences(text):
+        heading_match = _PLAIN_MARKDOWN_HEADING.match(line)
         if not heading_match:
             continue
         heading = heading_match.group(1).lower()
-        base_fragment = re.sub(r'[^\w\- ]', '', heading)
-        base_fragment = re.sub(r'\s+', '-', base_fragment)
-        duplicate_index = fragment_counts.get(base_fragment, 0)
-        fragment_counts[base_fragment] = duplicate_index + 1
-        fragment = (base_fragment if duplicate_index == 0 else
-                    f'{base_fragment}-{duplicate_index}')
-        fragments.add(fragment)
+        fragment = re.sub(r' +', '-', heading)
+        fragments.setdefault(fragment, []).append(line_number)
 
     return fragments
+
+
+def _local_markdown_link_errors(repo_root: Path, entrypoints):
+    """Returns errors for reachable local Markdown links."""
+    repo_root = repo_root.resolve()
+    pending = [path.resolve() for path in entrypoints]
+    visited = set()
+    heading_fragments = {}
+    errors = []
+
+    while pending:
+        source = pending.pop()
+        if source in visited:
+            continue
+        visited.add(source)
+
+        try:
+            source_name = source.relative_to(repo_root)
+        except ValueError:
+            errors.append(f'Entry point resolves outside repository: {source}')
+            continue
+        if not source.is_file():
+            errors.append(f'Markdown entry point does not exist: {source_name}')
+            continue
+
+        text = source.read_text(encoding='utf-8')
+        for target, fragment, raw_target in _local_markdown_links(text):
+            linked_path = ((source.parent /
+                            target).resolve() if target else source)
+            try:
+                linked_name = linked_path.relative_to(repo_root)
+            except ValueError:
+                errors.append(
+                    f'{source_name}: local link "{raw_target}" resolves '
+                    f'outside repository: {linked_path}')
+                continue
+
+            if not linked_path.is_file():
+                errors.append(
+                    f'{source_name}: local link "{raw_target}" targets '
+                    f'missing file: {linked_name}')
+                continue
+
+            if fragment:
+                if linked_path.suffix.lower() != '.md':
+                    errors.append(
+                        f'{source_name}: local link "{raw_target}" uses a '
+                        f'fragment for non-Markdown file: {linked_name}')
+                else:
+                    if linked_path not in heading_fragments:
+                        linked_text = linked_path.read_text(encoding='utf-8')
+                        heading_fragments[linked_path] = (
+                            _plain_heading_fragments(linked_text))
+                    matching_lines = heading_fragments[linked_path].get(
+                        fragment, [])
+                    if not matching_lines:
+                        errors.append(
+                            f'{source_name}: local link "{raw_target}" '
+                            f'does not match a plain heading in {linked_name}. '
+                            'Referenced headings must use plain "# Heading" '
+                            'syntax with only letters, numbers, spaces, and '
+                            'hyphens.')
+                    elif len(matching_lines) > 1:
+                        errors.append(
+                            f'{source_name}: local link "{raw_target}" '
+                            f'matches {len(matching_lines)} plain headings in '
+                            f'{linked_name} at lines {matching_lines}. '
+                            'Headings used as fragment destinations must be '
+                            'unique within their file.')
+
+            if (linked_path.suffix.lower() == '.md' and
+                    linked_path not in visited):
+                pending.append(linked_path)
+
+    return errors
+
+
+class MarkdownLinkContractTest(unittest.TestCase):
+
+    def test_reachable_links_follow_plain_unique_headings_lazily(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir) / 'repo'
+            skill = repo_root / 'agents/skills/example/SKILL.md'
+            reference = repo_root / 'docs/reference.md'
+            unrelated = repo_root / 'agents/unrelated.md'
+            skill.parent.mkdir(parents=True)
+            reference.parent.mkdir(parents=True)
+            unrelated.parent.mkdir(parents=True, exist_ok=True)
+            skill.write_text(
+                '[Reference](../../../docs/reference.md#stable-section)\n',
+                encoding='utf-8')
+            reference.write_text(
+                '# Reference\n\n'
+                '[Details](#details)\n\n'
+                '## Stable section\n\n'
+                '### Use when\n\n'
+                '### Use when\n\n'
+                '## Details\n',
+                encoding='utf-8')
+            unrelated.write_text('[Broken](missing.md)\n', encoding='utf-8')
+
+            self.assertEqual([],
+                             _local_markdown_link_errors(repo_root, [skill]))
+
+    def test_referenced_heading_failures_are_actionable(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            repo_root = temp_root / 'repo'
+            skill = repo_root / 'agents/skills/example/SKILL.md'
+            reference = repo_root / 'docs/reference.md'
+            outside = temp_root / 'outside.md'
+            skill.parent.mkdir(parents=True)
+            reference.parent.mkdir(parents=True)
+            outside.write_text('# Outside\n', encoding='utf-8')
+            skill.write_text(
+                '[Duplicate](../../../docs/reference.md#duplicate-section)\n'
+                '[Formatted](../../../docs/reference.md#formatted-section)\n'
+                '[Outside](../../../../outside.md)\n',
+                encoding='utf-8')
+            reference.write_text(
+                '## Duplicate section\n\n'
+                '## Duplicate section\n\n'
+                '## Formatted *section*\n',
+                encoding='utf-8')
+
+            errors = _local_markdown_link_errors(repo_root, [skill])
+            message = '\n'.join(errors)
+
+            self.assertIn('matches 2 plain headings', message)
+            self.assertIn('does not match a plain heading', message)
+            self.assertIn('Referenced headings must use plain', message)
+            self.assertIn('resolves outside repository', message)
+            self.assertIn('SKILL.md', message)
 
 
 class SkillContractTest(unittest.TestCase):
@@ -121,27 +257,17 @@ class SkillContractTest(unittest.TestCase):
             with self.subTest(path=path):
                 self.assertTrue((self._repo_root / path / 'SKILL.md').is_file())
 
-    def test_all_agent_markdown_links_resolve(self):
-        markdown_paths = tuple(self._agents_root.rglob('*.md'))
-        heading_fragments = {}
+    def test_reachable_agent_markdown_links_resolve(self):
+        registry = json.loads(self._read('.agents/skills.json'))
+        entrypoints = [
+            self._repo_root / entry['path'] / 'SKILL.md'
+            for entry in registry['entries']
+        ]
+        entrypoints.append(self._agents_root / 'README.md')
 
-        self.assertGreater(len(markdown_paths), 1)
-        for source in markdown_paths:
-            text = source.read_text(encoding='utf-8')
-            for target, fragment in _local_markdown_links(text):
-                linked_path = ((source.parent / target).resolve()
-                               if target else source.resolve())
-                with self.subTest(source=source,
-                                  target=target,
-                                  fragment=fragment):
-                    self.assertTrue(linked_path.is_file())
-                    if fragment:
-                        if linked_path not in heading_fragments:
-                            linked_text = linked_path.read_text(
-                                encoding='utf-8')
-                            heading_fragments[linked_path] = (
-                                _markdown_heading_fragments(linked_text))
-                        self.assertIn(fragment, heading_fragments[linked_path])
+        errors = _local_markdown_link_errors(self._repo_root, entrypoints)
+
+        self.assertFalse(errors, '\n'.join(errors))
 
     def test_troubleshooting_guides_are_reachable_from_entrypoint(self):
         troubleshooting_root = (
@@ -161,7 +287,7 @@ class SkillContractTest(unittest.TestCase):
 
             reachable.add(source)
             text = source.read_text(encoding='utf-8')
-            for target, _ in _local_markdown_links(text):
+            for target, _, _ in _local_markdown_links(text):
                 if not target:
                     continue
                 linked_path = (source.parent / target).resolve()
