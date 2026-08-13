@@ -89,10 +89,18 @@ def get_http_session(retries=5, backoff_factor=2):
     return session
 
 def make_request(session, url, headers=None, params=None, timeout=60, max_attempts=5):
-    """Makes an HTTP GET request with exponential backoff on timeouts/connection errors."""
+    """Makes an HTTP GET request with exponential backoff on timeouts, connection errors, and 429/5xx status codes."""
     for attempt in range(1, max_attempts + 1):
         try:
             resp = session.get(url, headers=headers, params=params, timeout=timeout)
+            if resp.status_code == 200:
+                return resp
+            if resp.status_code in [429, 500, 502, 503, 504]:
+                retry_after = int(resp.headers.get('Retry-After', 2 ** attempt))
+                logging.warning(f"HTTP {resp.status_code} received for {url} (attempt {attempt}/{max_attempts}). Backing off for {retry_after}s...")
+                time.sleep(retry_after)
+                continue
+            logging.warning(f"HTTP {resp.status_code} received for {url}: {resp.text[:200]}")
             return resp
         except (requests.exceptions.Timeout, requests.exceptions.ConnectionError, requests.exceptions.RequestException) as e:
             logging.warning(f"Request attempt {attempt}/{max_attempts} failed for {url}: {e}")
@@ -197,7 +205,9 @@ def download_and_process():
             
             try:
                 resp = make_request(session, api_url, headers=HEADERS, params=params, timeout=60)
-                if resp is None or resp.status_code != 200: continue
+                if resp is None or resp.status_code != 200:
+                    logging.error(f"Download returned status {resp.status_code if resp else 'None'} for var {var_id} level {lv}")
+                    continue
                 results = resp.json().get('results', [])
                 if not results: continue
                 
@@ -229,7 +239,8 @@ def download_and_process():
                             })
             except Exception as e:
                 logging.error(f"Download Error on {var_id}: {e}")
-        time.sleep(0.05)
+            time.sleep(0.1)
+        time.sleep(0.1)
 
     if not master_data:
         raise ValueError("No data collected during the download loop.")
