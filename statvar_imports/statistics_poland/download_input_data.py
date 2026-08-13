@@ -70,28 +70,63 @@ def get_template_map(template_df):
         name_to_code[clean_name] = str(code).strip()
     return name_to_code
 
-def fetch_variables():
-    """Fetches all variables for Subject P3447."""
+from urllib3.util import Retry
+from requests.adapters import HTTPAdapter
+
+def get_http_session(retries=5, backoff_factor=2):
+    """Creates a requests session with automatic HTTP retries and backoff."""
+    session = requests.Session()
+    retry_strategy = Retry(
+        total=retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=["GET"],
+        raise_on_status=False
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    return session
+
+def make_request(session, url, headers=None, params=None, timeout=60, max_attempts=5):
+    """Makes an HTTP GET request with exponential backoff on timeouts/connection errors."""
+    for attempt in range(1, max_attempts + 1):
+        try:
+            resp = session.get(url, headers=headers, params=params, timeout=timeout)
+            return resp
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError, requests.exceptions.RequestException) as e:
+            logging.warning(f"Request attempt {attempt}/{max_attempts} failed for {url}: {e}")
+            if attempt == max_attempts:
+                raise
+            time.sleep(2 ** attempt)
+    return None
+
+def fetch_variables(session):
+    """Fetches all variables for Subject P3447 with retries."""
     logging.info(f"Downloading variable list for Subject {SUBJECT_ID}...")
     v_map = {}
     
     for page in range(10): 
         url = f"{API_BASE_URL}/variables?subject-id={SUBJECT_ID}&page-size=100&lang=pl&page={page}"
         try:
-            resp = requests.get(url, headers=HEADERS, timeout=20)
-            if resp.status_code != 200: break
+            resp = make_request(session, url, headers=HEADERS, timeout=60)
+            if resp is None or resp.status_code != 200:
+                logging.warning(f"Metadata page {page} returned status {resp.status_code if resp else 'None'}")
+                break
             data = resp.json()
             results = data.get('results', [])
-            if not results: break
+            if not results:
+                break
             
             for item in results:
                 full_name_parts = [str(v) for k, v in item.items() if k.startswith('n') and v]
                 full_name = " ".join(full_name_parts).lower()
                 v_map[str(item['id'])] = full_name
             
-            if len(results) < 100: break
+            if len(results) < 100:
+                break
         except Exception as e:
-            logging.error(f"Metadata error page {page}: {e}")
+            logging.error(f"Metadata error page {page} after retries: {e}")
             break
             
     logging.info(f"Indexed {len(v_map)} variables.")
@@ -110,8 +145,9 @@ def download_and_process():
         template_df.index.levels[1].astype(str)
     ])
     
+    session = get_http_session()
     region_map = get_template_map(template_df)
-    v_metadata = fetch_variables()
+    v_metadata = fetch_variables(session)
     if not v_metadata: 
         raise ValueError("Variable metadata failed to download.")
 
@@ -160,8 +196,8 @@ def download_and_process():
                 params.append(('year', str(y)))
             
             try:
-                resp = requests.get(api_url, headers=HEADERS, params=params, timeout=20)
-                if resp.status_code != 200: continue
+                resp = make_request(session, api_url, headers=HEADERS, params=params, timeout=60)
+                if resp is None or resp.status_code != 200: continue
                 results = resp.json().get('results', [])
                 if not results: continue
                 
