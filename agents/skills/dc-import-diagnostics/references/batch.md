@@ -3,6 +3,7 @@
 - [Describe one Batch job](#describe-one-batch-job)
 - [List tasks for one Batch job](#list-tasks-for-one-batch-job)
 - [Fetch bounded Batch logs](#fetch-bounded-batch-logs)
+- [Find memory-exhaustion signals](#find-memory-exhaustion-signals)
 - [Trace a Batch job to source-commit evidence](#trace-a-batch-job-to-source-commit-evidence)
 
 ## Describe one Batch job
@@ -236,6 +237,21 @@ returned), or truncation.
 
 `import-automation/executor/app/executor/import_executor.py` constants
 `AUTO_IMPORT_JOB_STAGE`, `AUTO_IMPORT_JOB_STATUS`, and `log_import_status()`.
+
+## Find memory-exhaustion signals
+
+Use the optional text/payload search in
+[Fetch bounded Batch logs](#fetch-bounded-batch-logs) for the exact Batch job.
+Replace `AND "<QUERY_TERM>"` with:
+
+```text
+AND ("OutOfMemoryError" OR "OOMKilled" OR "oom-kill"
+     OR "out of memory" OR "memory limit" OR "memory-limit")
+```
+
+Keep the verified job UID, UTC bounds, result limit, and JSON format from the
+linked operation. Retain the matching evidence for interpretation by the
+runtime troubleshooting guide.
 
 ## Trace a Batch job to source-commit evidence
 

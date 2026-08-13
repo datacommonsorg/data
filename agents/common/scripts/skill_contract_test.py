@@ -21,6 +21,8 @@ import unittest
 import yaml
 
 _MARKDOWN_LINK = re.compile(r'\[[^]]+\]\(([^)]+)\)')
+_MARKDOWN_HEADING = re.compile(r'^\s{0,3}#{1,6}[ \t]+(.+?)(?:[ \t]+#+)?[ \t]*$')
+_MARKDOWN_FENCE = re.compile(r'^\s{0,3}(`{3,}|~{3,})')
 _ROUTE_ROW = re.compile(
     r'^\| (?P<need>[^|]+) \| \[(?P<label>[^]]+)\]\((?P<target>[^)]+)\) \|$',
     re.MULTILINE)
@@ -47,20 +49,53 @@ _EXPECTED_SKILL_ROUTES = (
 )
 
 
-def _local_markdown_targets(text: str):
-    """Yields file portions of local Markdown links."""
+def _local_markdown_links(text: str):
+    """Yields file and fragment portions of local Markdown links."""
     for raw_target in _MARKDOWN_LINK.findall(text):
         target = raw_target.strip()
         if target.startswith('<') and '>' in target:
             target = target[1:target.index('>')]
         else:
             target = target.split(maxsplit=1)[0]
-        if (not target or target.startswith('#') or '://' in target or
-                target.startswith(('mailto:', 'chatgpt-conversation:'))):
+        if (not target or '://' in target or target.startswith(
+            ('mailto:', 'chatgpt-conversation:'))):
             continue
-        target = target.split('#', maxsplit=1)[0]
-        if target:
-            yield target
+        path, _, fragment = target.partition('#')
+        if path or fragment:
+            yield path, fragment
+
+
+def _markdown_heading_fragments(text: str):
+    """Returns GitHub-style fragments for Markdown headings."""
+    fragments = set()
+    fragment_counts = {}
+    fence = None
+
+    for line in text.splitlines():
+        fence_match = _MARKDOWN_FENCE.match(line)
+        if fence_match:
+            marker = fence_match.group(1)
+            if fence is None:
+                fence = marker
+            elif marker[0] == fence[0] and len(marker) >= len(fence):
+                fence = None
+            continue
+        if fence is not None:
+            continue
+
+        heading_match = _MARKDOWN_HEADING.match(line)
+        if not heading_match:
+            continue
+        heading = heading_match.group(1).lower()
+        base_fragment = re.sub(r'[^\w\- ]', '', heading)
+        base_fragment = re.sub(r'\s+', '-', base_fragment)
+        duplicate_index = fragment_counts.get(base_fragment, 0)
+        fragment_counts[base_fragment] = duplicate_index + 1
+        fragment = (base_fragment if duplicate_index == 0 else
+                    f'{base_fragment}-{duplicate_index}')
+        fragments.add(fragment)
+
+    return fragments
 
 
 class SkillContractTest(unittest.TestCase):
@@ -88,14 +123,25 @@ class SkillContractTest(unittest.TestCase):
 
     def test_all_agent_markdown_links_resolve(self):
         markdown_paths = tuple(self._agents_root.rglob('*.md'))
+        heading_fragments = {}
 
         self.assertGreater(len(markdown_paths), 1)
         for source in markdown_paths:
             text = source.read_text(encoding='utf-8')
-            for target in _local_markdown_targets(text):
-                with self.subTest(source=source, target=target):
-                    self.assertTrue(
-                        (source.parent / target).resolve().is_file())
+            for target, fragment in _local_markdown_links(text):
+                linked_path = ((source.parent / target).resolve()
+                               if target else source.resolve())
+                with self.subTest(source=source,
+                                  target=target,
+                                  fragment=fragment):
+                    self.assertTrue(linked_path.is_file())
+                    if fragment:
+                        if linked_path not in heading_fragments:
+                            linked_text = linked_path.read_text(
+                                encoding='utf-8')
+                            heading_fragments[linked_path] = (
+                                _markdown_heading_fragments(linked_text))
+                        self.assertIn(fragment, heading_fragments[linked_path])
 
     def test_troubleshooting_guides_are_reachable_from_entrypoint(self):
         troubleshooting_root = (
@@ -115,7 +161,9 @@ class SkillContractTest(unittest.TestCase):
 
             reachable.add(source)
             text = source.read_text(encoding='utf-8')
-            for target in _local_markdown_targets(text):
+            for target, _ in _local_markdown_links(text):
+                if not target:
+                    continue
                 linked_path = (source.parent / target).resolve()
                 if linked_path in all_guides and linked_path not in reachable:
                     pending.append(linked_path)

@@ -6,9 +6,12 @@ Use this guide when a selected Cloud Batch job:
 - stopped making progress; or
 - has a suspected runtime cause.
 
+Use [Cloud Batch operations](../references/batch.md) for job, task, and log
+evidence.
+
 For an unclassified Batch problem:
 
-- Inspect the exact job.
+- [Describe one Batch job](../references/batch.md#describe-one-batch-job).
 - Use task events or bounded logs as needed to test the hypotheses below.
 
 ## Hypotheses
@@ -26,13 +29,12 @@ For an unclassified Batch problem:
   exhaustion.
 - Accept signals such as `OutOfMemoryError`, `OOMKilled`, `oom-kill`,
   `out of memory`, or a memory-limit failure.
-- Inspect task events first.
-- Use bounded Batch logs when task evidence is insufficient.
-- Do not confirm OOM from exit code 137, SIGKILL, high memory use, or abrupt
-  termination alone.
+- Follow
+  [Find memory-exhaustion signals](../references/batch.md#find-memory-exhaustion-signals).
+- Treat exit code 137, SIGKILL, high memory utilization, or abrupt termination
+  as supporting evidence only.
+- None confirms OOM by itself.
 - Treat missing evidence as unknown, not refuted.
-- Do not use monitoring evidence until the skill has a supported monitoring
-  operation.
 
 ### Mitigation when confirmed
 
@@ -48,6 +50,8 @@ When OOM is confirmed:
 
 ### Confirm or reject
 
+- Use [Fetch bounded Batch logs](../references/batch.md#fetch-bounded-batch-logs)
+  for runtime and stage or status evidence.
 - Confirm GC thrashing only when bounded runtime evidence shows repeated Java
   garbage collection and bounded stage or status evidence shows little useful
   import progress.
