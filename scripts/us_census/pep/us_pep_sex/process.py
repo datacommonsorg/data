@@ -34,10 +34,6 @@ import tempfile
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_string('config_path', '',
-                    'Path to the configuration file in the GCS bucket.')
-
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _INPUT_URL_JSON = "input_url.json"
@@ -58,7 +54,15 @@ _USSTATE_SHORT_FORM = statetoshortform.USSTATE_MAP
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "gcs_folder/us_pep_sex_source_files")
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+
+
+def _define_flags():
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string('config_path', '',
+                        'Path to the configuration file in the GCS bucket.')
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
+
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                  "typeOf: dcs:StatisticalVariable\n"
@@ -441,12 +445,12 @@ def _state_1980_1990(file_path: str) -> pd.DataFrame:
         if year == 1987:
             df = pd.read_table(file_path,
                                skiprows=29,
-                               delim_whitespace=True,
+                               sep=r'\s+',
                                names=column_names)
         else:
             df = pd.read_table(file_path,
                                skiprows=28,
-                               delim_whitespace=True,
+                               sep=r'\s+',
                                names=column_names)
         df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(2)
         df['Year'] = year
@@ -691,6 +695,11 @@ def _county_1980_1990(file_path: str) -> pd.DataFrame:
     """
     try:
         df = pd.read_csv(file_path, skiprows=5)
+        df = df.dropna(
+            subset=['Year of Estimate', 'FIPS State and County Codes'])
+        df['Year of Estimate'] = df['Year of Estimate'].astype('int64')
+        df['FIPS State and County Codes'] = df[
+            'FIPS State and County Codes'].astype('int64')
         # adding age groups to get total value
         df['Total'] = df[_COLUMNS_TO_SUM].sum(axis=1)
         df = df.drop(columns=_COLUMNS_TO_SUM)
@@ -736,7 +745,7 @@ def _county_1990_2000(file_path: str) -> pd.DataFrame:
     """
     try:
         column_names = ['Year', 'geo_ID', 'Age', 'Race-Sex', 'Ethnic', 'Value']
-        df = pd.read_table(file_path, delim_whitespace=True, header=None)
+        df = pd.read_table(file_path, sep=r'\s+', header=None)
         df.columns = column_names
         df['Year'] = '19' + df['Year'].astype(str)
         df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(5)
@@ -1092,6 +1101,8 @@ class PopulationEstimateBySex:
                 value_vars=['Count_Person_Male', 'Count_Person_Female'],
                 var_name="SV",
                 value_name="Observation")
+            final_df['Observation'] = pd.to_numeric(
+                final_df['Observation'], errors='coerce').astype('Int64')
             subset_cols = ['Year', 'geo_ID', 'Measurement_Method', 'SV']
             # 2. Drop duplicates based on those columns, keeping the first occurrence
             final_df.drop_duplicates(subset=subset_cols,
@@ -1132,7 +1143,7 @@ def is_valid_url(url):
                 return False
         return True
     except Exception as e:
-        logging.fatal(f"Error checking URL: {url} - {e}")
+        logging.warning(f"Error checking URL: {url} - {e}")
         return False
 
 
@@ -1146,6 +1157,10 @@ def add_future_year_urls():
     global _FILES_TO_DOWNLOAD
     # Initialize the list to store files to download
     _FILES_TO_DOWNLOAD = []
+
+    # Use a requests session for connection pooling to improve efficiency
+    # when making hundreds of HEAD requests.
+    session = requests.Session()
     with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
         _FILES_TO_DOWNLOAD = json.load(inpit_file)
 
@@ -1188,9 +1203,9 @@ def add_future_year_urls():
         gatekeeper_url = urls_to_scan[0].format(YEAR=future_year)
         try:
             # Use a short 5-second timeout for the check
-            response = requests.head(gatekeeper_url,
-                                     allow_redirects=True,
-                                     timeout=5)
+            response = session.head(gatekeeper_url,
+                                    allow_redirects=True,
+                                    timeout=5)
             if response.status_code != 200:
                 logging.info(
                     f"Skipping year {future_year}: National file not found (status code: {response.status_code})."
@@ -1212,8 +1227,10 @@ def add_future_year_urls():
                     logging.info(f"checking url: {url_to_check}")
 
                     try:
-                        check_url = requests.head(url_to_check,
-                                                  allow_redirects=True)
+                        # HEAD calls only fetch headers and should complete quickly.
+                        check_url = session.head(url_to_check,
+                                                 allow_redirects=True,
+                                                 timeout=5)
                         if check_url.status_code == 200:
                             _FILES_TO_DOWNLOAD.append(
                                 {"download_path": url_to_check})
@@ -1230,8 +1247,10 @@ def add_future_year_urls():
                     continue  # Skip this URL if it's already processed
 
                 try:
-                    check_url = requests.head(url_to_check,
-                                              allow_redirects=True)
+                    # HEAD calls only fetch headers and should complete quickly.
+                    check_url = session.head(url_to_check,
+                                             allow_redirects=True,
+                                             timeout=5)
                     if check_url.status_code == 200:
                         _FILES_TO_DOWNLOAD.append(
                             {"download_path": url_to_check})
@@ -1399,4 +1418,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

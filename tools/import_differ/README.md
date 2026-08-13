@@ -60,3 +60,4 @@ Detailed diff output is written to MCF files in the output directory:
 - nodes-added.mcf: MCF nodes added in the current version
 - nodes-deleted.mcf: MCF nodes deleted in the current version
 - nodes-modified.mcf: MCF nodes modified in the current version
+- nodes-original.mcf: MCF nodes before modification (original values of modified nodes)
