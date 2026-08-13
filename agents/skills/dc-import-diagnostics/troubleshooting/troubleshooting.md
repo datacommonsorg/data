@@ -1,13 +1,14 @@
 # Data Commons import troubleshooting
 
-Primary troubleshooting guide for diagnostic requests routed from
+Use this entry point for diagnostic requests routed from
 [the import diagnostics skill](../SKILL.md).
 
 ## Route the issue
 
-If the request names a failure domain or suspected cause, use its guide
-directly. Otherwise, use current `ImportStatus` and inspect the exact Batch job
-or import summary needed to identify the failure domain.
+- If the request names a failure domain or suspected cause, open its guide.
+- Otherwise, use current `ImportStatus` to identify the exact job or version.
+- Inspect only the Batch job or import summary needed to identify the failure
+  domain.
 
 | Scenario | Route |
 |---|---|
@@ -17,7 +18,8 @@ or import summary needed to identify the failure domain.
 
 ## When no guide matches
 
-Continue with a bounded, evidence-first investigation using the main skill's
-information routes and operational references. Report that no specific
-troubleshooting guide matched, distinguish observed evidence from inference,
-and do not guess a root cause.
+- Continue a bounded, evidence-first investigation.
+- Use the main skill's information routes and operational references.
+- Report that no specific troubleshooting guide matched.
+- Distinguish observed evidence from inference.
+- Do not guess a root cause.

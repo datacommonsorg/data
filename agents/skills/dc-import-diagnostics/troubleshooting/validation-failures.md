@@ -3,10 +3,16 @@
 Use this guide when the user reports a validation failure or an exact import
 summary reports `status=VALIDATION`.
 
-Use the exact import summary to confirm the selected version's status, then
-inspect only its relevant validation artifacts. Report the observed validation
-category or error, supporting evidence, unknowns, and the next investigation
-step. Do not infer a cause from `VALIDATION` alone.
+## Investigate
 
-If the available evidence does not establish a cause, report the validation
-failure as unclassified and return to the parent troubleshooting fallback.
+1. Confirm the selected version's status from the exact import summary.
+2. Inspect only its relevant validation artifacts.
+3. Report the observed validation category or error, supporting evidence,
+   unknowns, and the next investigation step.
+
+Do not infer a cause from `VALIDATION` alone.
+
+## When no cause is established
+
+- Report the validation failure as unclassified.
+- Return to the parent troubleshooting fallback.
