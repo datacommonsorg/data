@@ -99,8 +99,7 @@ Therefore, GCS history covers finalized versions, not all attempts. In
 particular, a Batch failure before `import_summary.json` is written has no GCS
 history entry. It may be visible only while represented by the current
 `ImportStatus` snapshot and retained Batch resource. Do not interpret a missing
-summary as proof that no attempt occurred. Read the
-[import evidence flow](import-evidence-flow.md) for evidence-selection rules.
+summary as proof that no attempt occurred.
 
 ## Resource cardinality
 
@@ -147,8 +146,6 @@ to discover a missing run.
 
 ## Read details only when needed
 
-- For current-status, finalized-version, and missing-evidence semantics, read
-  the [import evidence flow](import-evidence-flow.md).
 - For version directories, summaries, and pointer names, read
   [artifact layout](artifact-layout.md).
 - For exact import-definition fields, read the

@@ -269,6 +269,31 @@ class SkillContractTest(unittest.TestCase):
 
         self.assertFalse(errors, '\n'.join(errors))
 
+    def test_common_references_do_not_depend_on_skills(self):
+        common_references = self._agents_root / 'common/references'
+        skills_root = (self._agents_root / 'skills').resolve()
+        violations = []
+
+        for source in common_references.rglob('*.md'):
+            source_name = source.relative_to(self._repo_root)
+            text = source.read_text(encoding='utf-8')
+            for target, _, raw_target in _local_markdown_links(text):
+                if not target:
+                    continue
+                linked_path = (source.parent / target).resolve()
+                try:
+                    linked_name = linked_path.relative_to(skills_root)
+                except ValueError:
+                    continue
+                violations.append(
+                    f'{source_name} -> agents/skills/{linked_name} '
+                    f'(link: {raw_target})')
+
+        self.assertFalse(
+            violations,
+            'Common references must not depend on skill-owned files:\n' +
+            '\n'.join(violations))
+
     def test_troubleshooting_guides_are_reachable_from_entrypoint(self):
         troubleshooting_root = (
             self._agents_root /
@@ -324,7 +349,8 @@ class SkillContractTest(unittest.TestCase):
                 self.assertIn(guardrail, normalized)
 
         self.assertIn('references/imports.md', skill)
-        self.assertIn('references/architecture.md', skill)
+        self.assertIn(
+            '../../common/references/import-automation/architecture.md', skill)
         self.assertIn('../../dependency-setup.md', skill)
 
     def test_skill_routes_map_to_exact_reference_paths(self):
@@ -351,7 +377,7 @@ class SkillContractTest(unittest.TestCase):
             self):
         skill = self._skill_path.read_text(encoding='utf-8')
         architecture = self._read(
-            'agents/skills/dc-import-diagnostics/references/architecture.md')
+            'agents/common/references/import-automation/architecture.md')
 
         for contract in (
                 'An **ET attempt**',

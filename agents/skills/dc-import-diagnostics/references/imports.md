@@ -35,7 +35,7 @@ Use the command above with `--limit=5` for import selection. Do not replace it
 with ad hoc manifest searches.
 
 After selecting an import, read its exact manifest specification. Read the
-[import manifest reference](manifest.md)
+[import manifest reference](../../../common/references/import-automation/manifest.md)
 before interpreting manifest fields. Read manifest-referenced code only when
 the request requires it.
 
@@ -76,7 +76,7 @@ manifests, or an invalid result limit.
 
 ## Related repository sources
 
-The [import manifest reference](manifest.md)
+The [import manifest reference](../../../common/references/import-automation/manifest.md)
 defines the selected-specification and field-interpretation contract. The
 [import evidence flow](import-evidence-flow.md)
 defines how repository identity seeds cloud evidence.

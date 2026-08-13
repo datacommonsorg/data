@@ -49,7 +49,8 @@ is out of scope.
 3. For questions about the ET lifecycle, evidence boundaries, the relationship
    between attempts, versions, and accepted output, or multiple runtime
    evidence sources, read
-   [Import automation architecture](references/architecture.md). For a direct
+   [Import automation architecture](../../common/references/import-automation/architecture.md).
+   For a direct
    factual request with an unambiguous operation below, use that route without
    loading the architecture reference.
 4. For requests asking why an import failed, is stuck, or produced unexpected
@@ -94,9 +95,9 @@ is out of scope.
 - For current-status, recent-version, artifact, or Batch navigation, read the
   [import evidence flow](references/import-evidence-flow.md).
 - For GCS version paths, summaries, and artifact names, read
-  [artifact layout](references/artifact-layout.md).
+  [artifact layout](../../common/references/import-automation/artifact-layout.md).
 - For manifest fields, read the
-  [import manifest reference](references/manifest.md).
+  [import manifest reference](../../common/references/import-automation/manifest.md).
 
 ## Ground commands in operational references
 

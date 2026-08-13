@@ -70,7 +70,8 @@ version history, not complete attempt history.
 
 ### Related repository sources
 
-[Artifact layout](artifact-layout.md), [import evidence flow](import-evidence-flow.md),
+[Artifact layout](../../../common/references/import-automation/artifact-layout.md),
+[import evidence flow](import-evidence-flow.md),
 and the [summary-list helper](../../../common/scripts/list_import_summaries.py).
 
 ## Read one import version summary
@@ -190,7 +191,7 @@ permission denied, or a stale value.
 ### Related repository sources
 
 [Import environment defaults](../../../common/config/import-environments.yaml)
-and [artifact layout](artifact-layout.md).
+and [artifact layout](../../../common/references/import-automation/artifact-layout.md).
 
 ## List artifacts for one import version
 
@@ -245,4 +246,4 @@ selected limit.
 ### Related repository sources
 
 The [import executor](../../../../import-automation/executor/app/executor/import_executor.py)
-and [artifact layout](artifact-layout.md).
+and [artifact layout](../../../common/references/import-automation/artifact-layout.md).
