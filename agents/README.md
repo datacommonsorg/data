@@ -44,3 +44,11 @@ capabilities used by the skill. The mining skill does not require standalone
 `jq`, Python, Google Cloud CLI, GCS access, or write access to the Data Commons
 repository. Its GitHub commands were tested with GitHub CLI 2.74.2; the checker
 reports the installed version without treating 2.74.2 as a minimum.
+
+## Merge import review signals
+
+To merge considered signals into the import code-review guidelines, use the
+[`import review signal merge prompt`](prompts/import-review-signal-merge.md).
+Provide the miner output directory and the data repository path. The prompt
+requires a clean current branch, leaves guideline edits uncommitted, and writes
+a decision report beside the miner output.
