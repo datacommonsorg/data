@@ -1,13 +1,15 @@
-# Query the current import-status snapshot
+# Cloud Spanner operations
 
-## Use when
+## Query the current import-status snapshot
+
+### Use when
 
 The current mutable snapshot is needed by import name or exact current version,
 or a bounded query must find current imports updated in a time window.
 `ImportStatus` is a Cloud Spanner table keyed by `ImportName`. A current failure
 can exist here even when the attempt produced no GCS summary.
 
-## Required inputs
+### Required inputs
 
 Spanner project, instance, and database from the effective environment, plus
 the inputs for exactly one query form:
@@ -17,13 +19,13 @@ the inputs for exactly one query form:
 - current snapshots: inclusive UTC start, exclusive UTC end, result limit, and
   optional exact raw `State`.
 
-## Clarify when
+### Clarify when
 
 The query form, environment, identity, exact version URI, time window, state,
 or limit is unresolved or conflicting. A bare version name is insufficient for
 an exact-version query.
 
-## Read-only operation
+### Read-only operation
 
 Validate all substituted values first. Project, instance, and database values
 must match `^[A-Za-z0-9][A-Za-z0-9._-]*$`. Absolute import names must match
@@ -70,7 +72,7 @@ For an exact state filter, add only the validated predicate
 `AND State = '<STATE>'` immediately before `ORDER BY`. Do not run a state-only
 query without the UTC window.
 
-## Preferred invocation
+### Preferred invocation
 
 Use the exact-import query for current status. Use the exact-version query only
 to find a current row whose `LatestVersion` equals the complete GCS URI; it is
@@ -91,38 +93,36 @@ Never select, return, or follow `ImportStatus.WorkflowId`. It is loader-owned,
 may belong to an earlier loader run, and is not the ET Workflow execution ID.
 Use `JobId` only as the exact ET Batch identifier.
 
-Open a linked GCS or Batch recipe only if the requested fact requires that
+Open a linked GCS or Batch operation only if the requested fact requires that
 additional operation; never run it automatically.
 
-## Expected output
+### Expected output
 
 Separate fields for `current_status` (raw `State`), ET Batch `job_id`, recorded
 latest version, status-update time, data-import time, execution time, data
 volume, and next refresh. Retain the stored `ImportName`; if an exact query
 returns multiple rows, report ambiguity rather than silently choosing one.
 
-## Required bounds
+### Required bounds
 
 Exact-import and exact-version queries return at most two rows. An
 across-import query requires a start-inclusive, end-exclusive UTC window and
 returns at most 100 requested rows. Query `LIMIT_PLUS_ONE`, return only
 `LIMIT`, and report truncation when the extra row exists.
 
-## Evidence to retain
+### Evidence to retain
 
 Database resource, query purpose, exact identity/version or UTC bounds,
 requested limit, truncation, `current_status`, `JobId`, `LatestVersion`,
 `StatusUpdateTimestamp`, and `DataImportTimestamp`.
 
-## Common failures
+### Common failures
 
 Permission denied, schema drift, invalid placeholder substitution, no current
 snapshot, duplicate identity forms, multiple current rows for one version, or
 a recorded version that no longer matches a GCS pointer.
 
-## Related repository sources
+### Related repository sources
 
-[Import evidence flow](../../../references/import-automation/import-evidence-flow.md),
-[read one version summary](../gcs/read-version-summary.md),
-[read one version pointer](../gcs/read-version-pointer.md), and
-[describe one Batch job](../batch/describe-job.md).
+[Import evidence flow](import-evidence-flow.md), [GCS operations](gcs.md), and
+[Cloud Batch operations](batch.md).

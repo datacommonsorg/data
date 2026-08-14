@@ -57,7 +57,7 @@ are applied through `config_override` when used as per-import overrides.
 - Read referenced scripts and inputs only when the question requires their
   behavior. Do not rely on a helper-generated interpretation of their content.
 - Verify Scheduler, Workflow, Batch, artifact, or Spanner state with the
-  corresponding bounded recipe before making live claims.
+  corresponding bounded operational reference before making live claims.
 
 ## Implementation evidence
 
