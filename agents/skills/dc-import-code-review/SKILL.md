@@ -95,6 +95,13 @@ is needed:
 - Continue to use the pull request diff to identify changed lines when it is
   complete. If it is unavailable or incomplete, compare the verified base and
   head commits locally and report that fallback as a limitation.
+- Run Python checks with the temporary worktree root as the working directory.
+  Prefer `./run_tests.sh -p <repository-relative-test-directory>`; it creates
+  and uses that worktree's `.env`. Pass a test directory, not a test file.
+- Do not use global Python or an environment from another checkout. If a direct
+  Python command is necessary, run `./run_tests.sh -r` first and then use
+  `.env/bin/python`. If setup fails, report the check as not run instead of
+  falling back to another Python environment.
 - Remove the detached worktree with `git worktree remove` after the review.
   Remove no path that was not created and validated by this run.
 
