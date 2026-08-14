@@ -428,5 +428,78 @@ class SkillContractTest(unittest.TestCase):
                         self.assertTrue(environment[section][field])
 
 
+class ImportCodeReviewSkillContractTest(unittest.TestCase):
+
+    def setUp(self):
+        self._repo_root = Path(__file__).parents[3]
+        self._agents_root = self._repo_root / 'agents'
+        self._skill_root = (self._agents_root / 'skills/dc-import-code-review')
+        self._skill_path = self._skill_root / 'SKILL.md'
+        self._prompt_path = (self._agents_root /
+                             'prompts/dc-import-code-review-starter.md')
+
+    def _read(self, relative_path: str) -> str:
+        return (self._repo_root / relative_path).read_text(encoding='utf-8')
+
+    def test_review_skill_is_registered_and_discoverable(self):
+        registry = json.loads(self._read('.agents/skills.json'))
+        paths = [entry['path'] for entry in registry['entries']]
+        readme = self._read('agents/README.md')
+        prompt = self._prompt_path.read_text(encoding='utf-8')
+
+        self.assertIn('agents/skills/dc-import-code-review', paths)
+        self.assertIn('prompts/dc-import-code-review-starter.md', readme)
+        self.assertIn('`dc-import-code-review` skill', prompt)
+
+    def test_review_skill_keeps_scope_safety_and_output_contract(self):
+        skill = self._skill_path.read_text(encoding='utf-8')
+        normalized = re.sub(r'\s+', ' ', skill)
+
+        for contract in (
+                'Report findings only for changed files under `scripts/**` and `statvar_imports/**`',
+                'Treat the repository and GitHub as read-only',
+                'If the review target is ambiguous',
+                'Never run `gh pr checkout` over the active worktree',
+                'Do not run tests that call live source, Data Commons, or cloud APIs',
+                'references/guidelines.md',
+                '../../common/references/import-automation/manifest.md',
+        ):
+            with self.subTest(contract=contract):
+                self.assertIn(contract, normalized)
+
+        for heading in ('## Review scope', '## Findings',
+                        '## Positive findings', '## Coverage',
+                        '## Verification and limitations'):
+            with self.subTest(heading=heading):
+                self.assertIn(heading, skill)
+
+        for priority in ('| P0 |', '| P1 |', '| P2 |', '| P3 |'):
+            with self.subTest(priority=priority):
+                self.assertIn(priority, skill)
+
+        for field in ('Finding', 'Impact', 'Recommendation'):
+            with self.subTest(field=field):
+                self.assertIn(f'- {field}:', skill)
+
+        self.assertIn('Finding: Good - <WHAT WAS DONE CORRECTLY>', skill)
+        self.assertIn('| File | Status | Result |', skill)
+
+    def test_review_guidance_stays_single_and_lightweight(self):
+        references = sorted(path.name for path in (self._skill_root /
+                                                   'references').glob('*.md'))
+        guidelines = (self._skill_root /
+                      'references/guidelines.md').read_text(encoding='utf-8')
+
+        self.assertEqual(['guidelines.md'], references)
+        self.assertFalse((self._skill_root / 'README.md').exists())
+        self.assertFalse((self._skill_root / 'scripts').exists())
+
+        for stale_content in ('DCIR-', 'Evidence:', 'Last verified:',
+                              '["support@datacommons.org"]', 'logging.fatal()',
+                              'exit(1)'):
+            with self.subTest(stale_content=stale_content):
+                self.assertNotIn(stale_content, guidelines)
+
+
 if __name__ == '__main__':
     unittest.main()

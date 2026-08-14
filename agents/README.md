@@ -14,6 +14,14 @@ Copy the prompt into the agent conversation and append the specific import
 question. The prompt routes the request through the repository-owned
 `dc-import-diagnostics` skill and its bounded operational references.
 
+## Review import changes
+
+For a read-only review of staged, unstaged, branch-comparison, or pull request
+changes under `scripts/**` and `statvar_imports/**`, use the
+[`dc-import-code-review` starter prompt](prompts/dc-import-code-review-starter.md).
+The skill returns P0-P3 findings, meaningful positive findings, coverage, and
+verification.
+
 ## Mine import review signals
 
 To collect positive and corrective review signals from merged import pull
