@@ -345,7 +345,7 @@ class TestAddPVToNode(unittest.TestCase):
                                      normalize=True)
         self.assertEqual(node, {"prop1": "dcid:value1,dcid:value2,dcid:value3"})
 
-    def test_add_pv_to_node_normalize_list_values(self):
+    def test_add_pv_to_node_normalize_list_values_false(self):
         node = {}
         mcf_file_util.add_pv_to_node("prop1", ["value1", "value2"],
                                      node,

@@ -822,14 +822,12 @@ def normalize_list(value: str, sort: bool = True) -> str:
                 if '{' in value or '[' in value:
                     # Retain dict value strings such as geoJsonCoordinates  as is.
                     return value
-            # Sort comma separated text values.
+            # Get comma separated text values.
             value_list = get_value_list(value)
             has_quotes = True
         else:
-            value_list = [v.strip() for v in value.split(',')]
+            value_list = value.split(',')
         values = []
-        if sort:
-            value_list = sorted(value_list)
         for v in value_list:
             if v not in values:
                 normalized_v = normalize_value(
@@ -840,6 +838,9 @@ def normalize_list(value: str, sort: bool = True) -> str:
                 )
                 normalized_v = str(normalized_v)
                 values.append(normalized_v)
+        # Sort normalized values to ensure consistent order and avoid leading space issues.
+        if sort:
+            values = sorted(values)
         return ','.join(values)
     else:
         return value
