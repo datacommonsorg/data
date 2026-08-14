@@ -50,7 +50,7 @@ All downloaded files will be stored in the directory `input_files`.
 
 ### Autorefresh type
 
-The manifest uses the semi-manual GCS mode. Run `python3 download.py` directly to use TN.gov instead.
+The manifest uses the fully automated TN.gov mode. Set its first script to `download.py --download_source=gcs` to enable the semi-manual GCS mode.
 
 -----
 
