@@ -18,6 +18,8 @@ repository contracts and instructions take precedence.
 - Document the source, dataset coverage, prerequisites, working directory,
   download and processing steps, important files, testing, and refresh
   procedure in `README.md`.
+- Preserve downloaded source files unchanged, and write transformed data to
+  separate files.
 - Use consistent, descriptive names for new import files; prefer lowercase
   unless source naming or an established import convention requires otherwise.
 - Keep test inputs and expected CSV or TMCF outputs clearly paired without
@@ -26,6 +28,10 @@ repository contracts and instructions take precedence.
 
 ## Execution and failure handling
 
+- Keep module imports side-effect free by putting executable script logic behind
+  a guarded `main` entry point.
+- Resolve import file paths relative to the script location rather than the
+  repository working directory.
 - Ensure critical download or processing failures propagate and produce a
   failing job rather than partial success.
 - Catch specific exceptions only when handling or enriching them; preserve the
@@ -45,6 +51,9 @@ repository contracts and instructions take precedence.
   explicit and testable; avoid arbitrary future-year cutoffs.
 
 ## Import validation
+
+- Configure `stat_var_processor` invocations to persist output counters for
+  validation.
 
 When reviewing `validation_config*.json` or a manifest change to
 `validation_config_file`, read:
@@ -66,3 +75,5 @@ When reviewing `validation_config*.json` or a manifest change to
 
 - Test important success, failure, retry, pagination, and data-transformation
   paths with representative fixtures.
+- Keep checked-in fixtures representative and generally no more than 100
+  records.
