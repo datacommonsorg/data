@@ -5,7 +5,7 @@
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www.tn.gov/health/health-program-areas/statistics/health-data/death-statistics.html",
       "provenance_description": "This import utilizes official diabetes mortality data from the Tennessee Department of Health, detailing county-level death statistics.",
-      "scripts": ["download.py",
+      "scripts": ["download.py --download_source=gcs",
         "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.xlsx --pv_map=pvmap.csv --config_file=metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=place_resolver.csv --output_path=output_files/tennessee_output"
       ] ,
       "source_files": [
@@ -21,4 +21,3 @@
     }
   ]
 }
-
