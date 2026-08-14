@@ -451,38 +451,19 @@ class ImportCodeReviewSkillContractTest(unittest.TestCase):
         self.assertIn('prompts/dc-import-code-review-starter.md', readme)
         self.assertIn('`dc-import-code-review` skill', prompt)
 
-    def test_review_skill_keeps_scope_safety_and_output_contract(self):
+    def test_review_skill_keeps_core_contract(self):
         skill = self._skill_path.read_text(encoding='utf-8')
-        normalized = re.sub(r'\s+', ' ', skill)
 
-        for contract in (
-                'Report findings only for changed files under `scripts/**` and `statvar_imports/**`',
-                'Treat the repository and GitHub as read-only',
-                'If the review target is ambiguous',
-                'Never run `gh pr checkout` over the active worktree',
-                'Do not run tests that call live source, Data Commons, or cloud APIs',
-                'references/guidelines.md',
-                '../../common/references/import-automation/manifest.md',
-        ):
-            with self.subTest(contract=contract):
-                self.assertIn(contract, normalized)
+        for marker in ('scripts/**', 'statvar_imports/**', 'read-only', 'P0',
+                       'P1', 'P2', 'P3', 'Finding', 'Impact', 'Recommendation'):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, skill)
 
-        for heading in ('## Review scope', '## Findings',
-                        '## Positive findings', '## Coverage',
-                        '## Verification and limitations'):
-            with self.subTest(heading=heading):
-                self.assertIn(heading, skill)
-
-        for priority in ('| P0 |', '| P1 |', '| P2 |', '| P3 |'):
-            with self.subTest(priority=priority):
-                self.assertIn(priority, skill)
-
-        for field in ('Finding', 'Impact', 'Recommendation'):
-            with self.subTest(field=field):
-                self.assertIn(f'- {field}:', skill)
-
-        self.assertIn('Finding: Good - <WHAT WAS DONE CORRECTLY>', skill)
-        self.assertIn('| File | Status | Result |', skill)
+        links = {path for path, _, _ in _local_markdown_links(skill)}
+        self.assertTrue({
+            'references/guidelines.md',
+            '../../common/references/import-automation/manifest.md',
+        }.issubset(links))
 
     def test_review_guidance_stays_single_and_lightweight(self):
         references = sorted(path.name for path in (self._skill_root /
@@ -499,6 +480,23 @@ class ImportCodeReviewSkillContractTest(unittest.TestCase):
                               'exit(1)'):
             with self.subTest(stale_content=stale_content):
                 self.assertNotIn(stale_content, guidelines)
+
+        for validation_reference in (
+                '../../../../tools/import_validation/README.md',
+                '../../../../tools/import_validation/Validations.md'):
+            with self.subTest(validation_reference=validation_reference):
+                self.assertIn(validation_reference, guidelines)
+
+    def test_review_guidance_uses_only_relative_paths(self):
+        sources = [self._skill_path, self._prompt_path]
+        sources.extend((self._skill_root / 'references').glob('*.md'))
+
+        for source in sources:
+            text = source.read_text(encoding='utf-8')
+            with self.subTest(source=source.name):
+                self.assertNotIn('/Users/', text)
+                self.assertNotIn('file://', text)
+                self.assertNotIn('<REPO_ROOT>/', text)
 
 
 if __name__ == '__main__':

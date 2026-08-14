@@ -44,6 +44,14 @@ repository contracts and instructions take precedence.
 - Make aggregation, filtering, outlier handling, and date-range decisions
   explicit and testable; avoid arbitrary future-year cutoffs.
 
+## Import validation
+
+When reviewing `validation_config*.json` or a manifest change to
+`validation_config_file`, read:
+
+- [Import validation framework](../../../../tools/import_validation/README.md)
+- [Validation configuration and golden checks](../../../../tools/import_validation/Validations.md)
+
 ## Download and processing reliability
 
 - Consume every page from paginated sources.

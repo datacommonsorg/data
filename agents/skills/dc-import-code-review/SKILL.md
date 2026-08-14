@@ -11,9 +11,9 @@ unchanged.
 
 ## Safety and scope
 
-- Resolve the repository root with `git rev-parse --show-toplevel`. Verify that
-  `<REPO_ROOT>/scripts/` and `<REPO_ROOT>/statvar_imports/` exist, and run
-  repository-relative Git operations from `<REPO_ROOT>`.
+- Resolve the repository root with `git rev-parse --show-toplevel`. From that
+  root, verify that `scripts/` and `statvar_imports/` exist, and run Git
+  operations using repository-relative paths.
 - Treat the repository and GitHub as read-only. Never edit the import, post or
   resolve review comments, approve a pull request, stage files, discard local
   changes, or change the active branch.
@@ -104,16 +104,21 @@ limitation instead of claiming complete coverage.
 ## Load review guidance
 
 Read [import code review guidelines](references/guidelines.md) for every
-review. Apply a recommendation only when it is relevant to the changed
-behavior.
+review. Follow its links to repository documentation when relevant to the
+changed import files. Apply a recommendation only when it is relevant to the
+changed behavior.
 
 When any in-scope `manifest.json` changes, also read the current shared
 [import manifest reference](../../common/references/import-automation/manifest.md).
-The shared reference is authoritative for current fields and requirements; do
-not reconstruct the manifest contract from historical guidance.
+Use the shared reference for current fields and requirements; do not
+reconstruct the manifest contract from historical guidance.
 
 Apply repository instructions to changed import code without duplicating their
 generic language and style rules in the import guidelines.
+
+If documentation conflicts with the current implementation, treat the code as
+the implementation truth. Call out the conflict and its implications in the
+review; do not resolve it silently.
 
 ## Review changed behavior
 
