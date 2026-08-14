@@ -37,9 +37,9 @@ Preserve `input<N>` because one manifest specification can contain multiple
 For the most recent finalized candidate, read `staging_version.txt` and then
 the exact `<version>/import_summary.json`. Verify its import identity before
 using the summary or its `job_id`. For recent finalized versions, use the
-bounded summary-list helper and follow its recipe. Use each selected version
-URI as the base for exact summary or artifact inspection. Never list every
-object below the import prefix.
+bounded summary-list helper and follow its operational reference. Use each
+selected version URI as the base for exact summary or artifact inspection.
+Never list every object below the import prefix.
 
 This GCS history contains only attempts that reached summary creation. A Batch
 failure before `import_summary.json` exists has no version-summary entry, so a

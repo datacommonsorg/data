@@ -1,45 +1,78 @@
 # Cloud Batch runtime issues
 
-Use this guide when a selected Cloud Batch job failed or stopped making
-progress.
+Use this guide when a selected Cloud Batch job:
 
-## Select the issue
+- failed;
+- stopped making progress; or
+- has a suspected runtime cause.
 
-| Observed behavior | Section |
-|---|---|
-| The task terminates with explicit out-of-memory or memory-limit evidence | [Out of memory](#out-of-memory) |
-| The Java process remains active but repeatedly performs garbage collection with little import progress | [Java GC thrashing](#java-gc-thrashing) |
+Use [Cloud Batch operations](../references/batch.md) for job, task, and log
+evidence.
 
-If neither pattern matches, report the Batch runtime issue as unclassified and
-return to the parent troubleshooting fallback. Do not force a memory diagnosis.
+For an unclassified Batch problem:
+
+- [Describe one Batch job](../references/batch.md#describe-one-batch-job).
+- Use task events or bounded logs as needed to test the hypotheses below.
+
+## Hypotheses
+
+| Hypothesis | Consider first when | Section |
+|---|---|---|
+| Out of memory | Unexpected termination, a killed task, exit code 137, or suspected memory exhaustion | [Out of memory](#out-of-memory) |
+| Java GC thrashing | Java remains active but makes little useful import progress | [Java GC thrashing](#java-gc-thrashing) |
 
 ## Out of memory
 
-Confirm out of memory only when task events or logs explicitly identify an
-out-of-memory or memory-limit failure. A nonzero exit code without supporting
-memory evidence is not sufficient.
+### Confirm or reject
 
-When confirmed, recommend increasing `resource_limits.memory` for the affected
-import specification. Preserve its existing CPU and disk settings, state the
-current and proposed memory values in GiB, and recommend rerunning the import
-after the manifest change.
+- Confirm OOM only when task events or bounded logs explicitly report memory
+  exhaustion.
+- Accept signals such as `OutOfMemoryError`, `OOMKilled`, `oom-kill`,
+  `out of memory`, or a memory-limit failure.
+- Follow
+  [Find memory-exhaustion signals](../references/batch.md#find-memory-exhaustion-signals).
+- Treat exit code 137, SIGKILL, high memory utilization, or abrupt termination
+  as supporting evidence only.
+- None confirms OOM by itself.
+- Treat missing evidence as unknown, not refuted.
+
+### Mitigation when confirmed
+
+When OOM is confirmed:
+
+- Recommend increasing `resource_limits.memory` for the affected import
+  specification.
+- Preserve its existing CPU and disk settings.
+- State the current and proposed memory values in GiB.
+- Recommend rerunning the import after the manifest change.
 
 ## Java GC thrashing
 
-Confirm Java garbage-collection thrashing only when Java runtime evidence shows
-repeated garbage collection with little useful import progress. A long-running
-job or high CPU usage without GC evidence is not sufficient.
+### Confirm or reject
+
+- Use [Fetch bounded Batch logs](../references/batch.md#fetch-bounded-batch-logs)
+  for runtime and stage or status evidence.
+- Confirm GC thrashing only when bounded runtime evidence shows repeated Java
+  garbage collection and bounded stage or status evidence shows little useful
+  import progress.
+- Treat long runtime or high CPU alone as insufficient.
+- Treat missing runtime evidence as unknown, not refuted.
+
+### Mitigation when confirmed
 
 For the Data Commons import-tool path, Java heap sizing scales with the
 container's available memory. Increasing `resource_limits.memory` therefore
-increases the heap available to Java. When GC thrashing is confirmed, recommend
-increasing `resource_limits.memory` for the affected import specification,
-preserving its existing CPU and disk settings, and rerunning the import after
-the manifest change.
+increases the heap available to Java.
 
-## Report the diagnosis
+When GC thrashing is confirmed:
 
-Report the issue classification, supporting Batch and runtime evidence, current
-and proposed memory values, remaining unknowns, and the recommended rerun. If
-the evidence is inconclusive, label memory pressure as suspected and do not
-present the memory increase as a confirmed fix.
+- Recommend increasing `resource_limits.memory` for the affected import
+  specification.
+- Preserve its existing CPU and disk settings.
+- Recommend rerunning the import after the manifest change.
+
+## When no hypothesis matches
+
+- Report the Batch runtime problem as unclassified.
+- Return to the parent troubleshooting fallback.
+- Do not force a memory diagnosis.

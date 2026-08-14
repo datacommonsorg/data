@@ -1,6 +1,6 @@
 # Environment resolution
 
-Use [import environment defaults](../../config/import-environments.yaml) for
+Use [import environment defaults](../../../common/config/import-environments.yaml) for
 cloud resource settings. Production is the default environment; normalize
 `production` to `prod`. Use `staging` only when requested.
 
@@ -25,7 +25,7 @@ conventions documented by the artifact-layout reference, not environment
 fields.
 
 For an unknown environment, require explicit values for every field used
-by the planned recipes. Two different explicit values for the same field are a
+by the planned operations. Two different explicit values for the same field are a
 conflict and require clarification.
 
 The environment file removes infrastructure discovery. Do not inspect

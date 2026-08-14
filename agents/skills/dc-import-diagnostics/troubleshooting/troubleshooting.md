@@ -1,35 +1,25 @@
 # Data Commons import troubleshooting
 
-Primary troubleshooting guide for diagnostic requests routed from
+Use this entry point for diagnostic requests routed from
 [the import diagnostics skill](../SKILL.md).
 
-## Initial triage
+## Route the issue
 
-When the scenario is not already established by supplied evidence:
+- If the request names a failure domain or suspected cause, open its guide.
+- Otherwise, use current `ImportStatus` to identify the exact job or version.
+- Inspect only the Batch job or import summary needed to identify the failure
+  domain.
 
-1. Identify the affected import and symptom.
-2. Use the main skill's current-status route to read the recorded state,
-   version, and exact Batch job ID.
-3. Follow only the recorded evidence needed to locate the failure area:
-   - For an exact Batch job ID, inspect the job, then its tasks or bounded logs
-     only when needed.
-   - When a scheduled run has no Batch job ID, inspect the deployed Scheduler
-     job and report that further attempt visibility is unsupported.
-   - When Batch succeeded but output is unexpected, inspect the exact summary,
-     pointer, or artifacts only as needed.
-4. Classify the broad failure area and open the matching guide below.
-
-Load only the guide relevant to the observed issue. Do not read every guide.
-
-## Troubleshooting guides
-
-| Scenario | Guide |
+| Scenario | Route |
 |---|---|
-| Cloud Batch job failed or stopped making progress | [Cloud Batch runtime issues](batch-runtime.md) |
+| A scheduled run did not start and no Batch job ID is recorded | Inspect the deployed Scheduler job. |
+| A Batch job failed, stopped making progress, or has a suspected runtime cause | Open [Cloud Batch runtime issues](batch-runtime.md). |
+| The user reports a validation failure, or an exact import summary reports `status=VALIDATION` | Open [Import validation failures](validation-failures.md). |
 
 ## When no guide matches
 
-Continue with a bounded, evidence-first investigation using the main skill's
-information routes and shared recipes. Report that no specific troubleshooting
-guide matched, distinguish observed evidence from inference, and do not guess a
-root cause.
+- Continue a bounded, evidence-first investigation.
+- Use the main skill's information routes and operational references.
+- Report that no specific troubleshooting guide matched.
+- Distinguish observed evidence from inference.
+- Do not guess a root cause.
