@@ -7,6 +7,7 @@ connect to a source or complete a request.
 
 | Evidence | Investigate |
 |---|---|
+| Connection-level error | [Connection failure](#connection-failure) |
 | Request or client timeout | [Timeout](#timeout) |
 | Certificate-verification error | [TLS certificate verification failure](#tls-certificate-verification-failure) |
 
@@ -19,6 +20,39 @@ connect to a source or complete a request.
 - Inspect the requesting code for timeout, streaming, retry, and exception
   handling behavior.
 - Determine whether the failure stopped execution or was caught and skipped.
+
+## Connection failure
+
+Confirm the failure from a connection-level error, such as name-resolution
+failure, connection refused, network unreachable, or connection reset.
+
+### Investigate and mitigate
+
+- Retry the connection a few times to determine whether the failure is
+  transient. If it is, recommend bounded retries with backoff in the import
+  code.
+- If the connection fails consistently, check whether the configured source
+  host or endpoint has moved or is no longer available.
+
+#### Browser-only access
+
+- Confirm that a browser succeeds while the normal client fails from the same
+  machine and network.
+- Try the exact request with a browser-impersonating client, such as Python
+  `curl_cffi`.
+- If browser impersonation still fails but the browser works, try browser
+  automation as a possible workaround.
+
+#### Cloud or runtime blocking
+
+- Confirm that the same client and request work from a local machine but fail
+  from the cloud or GCP runtime.
+- If confirmed, investigate source-side cloud blocking or runtime network
+  restrictions.
+- Suggest local-network execution as a workaround and check whether the source
+  offers another endpoint or can allow the cloud environment.
+
+Investigate other connection causes supported by the available evidence.
 
 ## Timeout
 
