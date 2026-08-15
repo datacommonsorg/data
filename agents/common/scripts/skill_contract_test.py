@@ -258,11 +258,8 @@ class SkillContractTest(unittest.TestCase):
                 self.assertTrue((self._repo_root / path / 'SKILL.md').is_file())
 
     def test_reachable_agent_markdown_links_resolve(self):
-        registry = json.loads(self._read('.agents/skills.json'))
-        entrypoints = [
-            self._repo_root / entry['path'] / 'SKILL.md'
-            for entry in registry['entries']
-        ]
+        entrypoints = sorted(
+            (self._agents_root / 'skills').glob('*/SKILL.md'))
         entrypoints.append(self._agents_root / 'README.md')
 
         errors = _local_markdown_link_errors(self._repo_root, entrypoints)
