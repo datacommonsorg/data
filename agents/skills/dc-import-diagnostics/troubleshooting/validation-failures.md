@@ -12,6 +12,10 @@ summary reports `status=VALIDATION`.
 
 Do not infer a cause from `VALIDATION` alone.
 
+If validation artifacts indicate missing or partial source input, inspect the
+associated execution evidence. When that evidence indicates a network-related
+failure, follow [Network failures](network-failures.md).
+
 ## When no cause is established
 
 - Report the validation failure as unclassified.

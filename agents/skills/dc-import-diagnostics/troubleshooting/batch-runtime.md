@@ -18,6 +18,7 @@ For an unclassified Batch problem:
 
 | Hypothesis | Consider first when | Section |
 |---|---|---|
+| Network failure | Batch evidence reports a network, URL-fetch, download, timeout, or TLS/SSL failure | [Network failures](network-failures.md) |
 | Out of memory | Unexpected termination, a killed task, exit code 137, or suspected memory exhaustion | [Out of memory](#out-of-memory) |
 | Java GC thrashing | Java remains active but makes little useful import progress | [Java GC thrashing](#java-gc-thrashing) |
 
