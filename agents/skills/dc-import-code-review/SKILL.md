@@ -6,17 +6,24 @@ description: Reviews staged, unstaged, branch-comparison, or GitHub pull request
 # Review Data Commons import changes
 
 Review one explicitly selected import change set. Inspect every in-scope changed
-hunk, report only supported findings, and leave the repository and GitHub
-unchanged.
+hunk, report only supported findings, and leave the repository unchanged. Leave
+GitHub unchanged unless the user explicitly authorizes publishing under
+[Publish an explicitly authorized review](#publish-an-explicitly-authorized-review).
 
 ## Safety and scope
 
 - Resolve the repository root with `git rev-parse --show-toplevel`. From that
   root, verify that `scripts/` and `statvar_imports/` exist, and run Git
   operations using repository-relative paths.
-- Treat the repository and GitHub as read-only. Never edit the import, post or
-  resolve review comments, approve a pull request, stage files, discard local
-  changes, or change the active branch.
+- Treat the repository as read-only. Never edit the import, stage files,
+  discard local changes, or change the active branch.
+- Treat GitHub as read-only by default. Publish the completed review only when
+  the user explicitly and unambiguously asks to post it to the selected pull
+  request. A request to review a pull request does not authorize publishing. If
+  publishing intent is unclear, ask before any GitHub write.
+- Even when publishing is authorized, never approve or request changes, resolve
+  review comments, merge or close a pull request, or edit or delete GitHub
+  content. Publishing is limited to one comment-only review.
 - Enumerate every changed path before filtering the review.
 - Report findings only for changed files under `scripts/**` and
   `statvar_imports/**`.
@@ -208,3 +215,61 @@ include `Finding`, `Impact`, and `Recommendation`. Every positive finding must
 include `Finding: Good - <WHAT WAS DONE CORRECTLY>`. Use the exact `File`,
 `Status`, and `Result` coverage columns shown above, and include every in-scope
 changed file, including files with no findings.
+
+## Publish an explicitly authorized review
+
+Apply this section only to a pull request review. Complete the review before
+performing any GitHub write.
+
+An explicit publishing request in the original request or a later follow-up is
+sufficient authorization; do not ask again. If the user asks only for a review,
+mentions publishing as an option, or otherwise leaves the action unclear, ask
+whether to publish and wait for the answer.
+
+Immediately before publishing, fetch the pull request's `headRefOid` again with
+`gh pr view`. Compare it with the head SHA that was reviewed. If they differ, do
+not publish stale findings; report the change and ask whether to review the new
+head.
+
+Prepare one comment-only review:
+
+- Post actionable findings inline only when they can be anchored to a changed
+  line in the current pull request diff.
+- Put unanchored findings, positive findings, coverage, verification, and
+  limitations in the review body. Do not post positive findings inline.
+- Use repository-relative paths, the verified head SHA as `commit_id`, and
+  `line` with `side`: `RIGHT` for an added line and `LEFT` for a deleted line.
+- Use `event: COMMENT`. Never use `APPROVE` or `REQUEST_CHANGES`.
+
+Create a single review so its body and inline comments are submitted together:
+
+```bash
+gh api --method POST \
+  repos/datacommonsorg/data/pulls/<PR_NUMBER>/reviews \
+  --input <PAYLOAD_FILE> \
+  --jq '{id, state, html_url, commit_id}'
+```
+
+Use this payload shape. Omit `comments` when there are no inline findings.
+
+```json
+{
+  "commit_id": "<VERIFIED_HEAD_SHA>",
+  "event": "COMMENT",
+  "body": "<REVIEW_SUMMARY>",
+  "comments": [
+    {
+      "path": "scripts/source/import/process.py",
+      "line": 42,
+      "side": "RIGHT",
+      "body": "**[P1] Finding title**\n\nFinding: ...\n\nImpact: ...\n\nRecommendation: ..."
+    }
+  ]
+}
+```
+
+If the execution environment requires approval for the GitHub write, request
+it. If approval is denied or authentication lacks write permission, report that
+nothing was published. After a successful response, report the review URL and
+the number of inline comments. If the result is uncertain, inspect existing
+reviews for the verified head before retrying so the review is not duplicated.
