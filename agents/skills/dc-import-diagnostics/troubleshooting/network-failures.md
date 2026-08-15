@@ -3,6 +3,14 @@
 Use this guide when execution evidence indicates that an import could not
 connect to a source or complete a request.
 
+## Choose a hypothesis
+
+| Evidence | Investigate |
+|---|---|
+| Request or client timeout | [Timeout](#timeout) |
+| TLS handshake or certificate failure | [TLS or SSL failure](#tls-or-ssl-failure) |
+| Another network failure | [No matching hypothesis](#when-no-hypothesis-matches) |
+
 ## Gather context
 
 - Inspect relevant execution evidence, such as logs or monitoring signals, for
@@ -15,54 +23,25 @@ connect to a source or complete a request.
 
 ## Timeout
 
-### Confirm or reject
+### Confirm
 
-- Confirm a timeout only from request-related evidence or a client exception.
-- Determine the client's timeout semantics before classifying the failure.
-- For Python `requests`, distinguish connection timeout from read timeout. A
-  read timeout measures inactivity between received bytes, not the duration of
-  the complete download.
-- Distinguish these timeout stages:
+- Confirm the timeout from request-related evidence or a client exception.
+- Interpret it using the actual client library's timeout semantics. For Python
+  `requests`, a read timeout measures inactivity between received bytes, not
+  the duration of the complete download.
+- Do not treat browser navigation, page-load, or element-wait timeouts as
+  network timeouts without request-level evidence.
 
-  | Stage | Evidence |
-  |---|---|
-  | Connection | The client did not establish the connection before its connection timeout. |
-  | First byte | The connection succeeded, but no response bytes arrived before the read timeout. |
-  | Interrupted transfer | Some response data arrived, followed by enough inactivity to trigger the read timeout. |
-  | Total operation | An outer deadline expired while the request or transfer was still running. |
-  | Browser automation | A browser request failed; do not treat navigation, page-load, or element-wait timeouts alone as network evidence. |
+### Mitigate
 
-### Check efficiently
-
-- Start with source reachability and a lightweight request to the exact
-  resource.
-- Try `HEAD` when the source supports it. Otherwise use a Range request or a
-  bounded streaming request and stop after enough data arrives to establish
-  progress.
-- Preserve request parameters, redirects, and ordinary headers required by the
-  import. A successful request to a different resource does not establish that
-  the import's resource is available.
-- Record the response status, redirects, time to first byte, and whether data
-  continues arriving.
-- Treat a successful current check as supporting evidence only. It does not
-  refute a transient or execution-environment-specific failure.
-
-### Mitigation when confirmed
-
-- Do not recommend increasing a timeout solely because a timeout occurred.
-- Recommend increasing the applicable timeout only when evidence shows useful
-  progress and that the current limit is the constraint.
-- If no response data arrives, investigate the source and request before
-  increasing the timeout. Use bounded retries with backoff only when the
-  failure appears transient.
-- If a transfer begins and then stalls, consider a larger read timeout only
-  when a longer check shows that progress resumes. Consider bounded retry or
-  resumable download behavior for interrupted transfers.
-- If an outer deadline expires during steady progress, adjust that deadline
-  using the expected size and observed transfer behavior.
-- If the import catches the timeout and skips a required input, recommend
-  failing the operation or enforcing an explicit completeness check. Do not
-  treat a partial result as a successful download.
+- When practical, test the exact request using the current and a reasonable
+  higher value for the applicable timeout.
+- Recommend increasing the timeout only when the higher value completes the
+  request or makes progress that the current value does not.
+- If comparison is not practical, propose a bounded increase as an unverified
+  experiment and use the next execution to confirm whether it helps.
+- If the larger timeout makes no additional progress, investigate another
+  cause.
 
 ## TLS or SSL failure
 
