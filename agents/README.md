@@ -8,7 +8,7 @@ optional sibling checkout, see [dependency setup](dependency-setup.md).
 
 For authoring conventions, see [agent skill authoring](docs/skill-authoring.md).
 For diagnostics-specific structure, see
-[DC import diagnostics authoring](docs/dc-import-diagnostics.md).
+[DC import diagnostics authoring](docs/dc-import-diagnostics-authoring.md).
 
 ## Inspect or diagnose imports
 

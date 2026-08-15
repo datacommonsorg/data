@@ -68,7 +68,7 @@ when they differ.
 - Improve skills based on observed failures.
 
 For diagnostics-specific routing and troubleshooting conventions, see
-[DC import diagnostics authoring](dc-import-diagnostics.md).
+[DC import diagnostics authoring](dc-import-diagnostics-authoring.md).
 
 ## Validate changes
 
