@@ -99,29 +99,16 @@ is out of scope.
 - For manifest fields, read the
   [import manifest reference](../../common/references/import-automation/manifest.md).
 
-## Ground reusable operations
-
-Use route-table operations and linked references for cloud commands and
-reusable support workflows. Troubleshooting guides may keep short,
-conventional, read-only diagnostic actions inline when their target, scope, and
-stopping condition are clear.
-
-For a routed operation:
-
-1. Select it from the route table. Follow comparison flows to their concrete
-   operations.
-2. Open the linked reference and use the named operation's command structure
-   and literal resource or artifact names.
-3. Resolve placeholders only from declared inputs or linked references.
-4. Stop when a required value is unresolved. Never reconstruct a command from
-   memory or a generic cloud convention.
-
 ## Select an operation
 
-Use the smallest applicable operation from the route table. Linked operation
-sections own their required inputs, supported fields, defaults, bounds, and
-failure behavior. For questions combining current status, GCS versions, and Batch
-evidence, first read the
+- For cloud commands and reusable support workflows, use the smallest
+  applicable route and its linked reference.
+- Stop when a required input is unresolved.
+- Keep short, conventional, read-only diagnostic actions inline when their
+  target, scope, and stopping condition are clear.
+
+For questions combining current status, GCS versions, and Batch evidence,
+first read the
 [import evidence flow](references/import-evidence-flow.md).
 
 Treat a run or attempt as an execution. Treat a version as output that produced

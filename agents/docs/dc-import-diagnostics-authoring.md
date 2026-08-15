@@ -68,15 +68,20 @@ Example:
 
 ### Separate diagnosis from evidence collection
 
+A domain guide explains what evidence means and what to do next. An operational
+reference explains how to collect reusable or service-specific evidence. For
+example, [Network failures](../skills/dc-import-diagnostics/troubleshooting/network-failures.md)
+interprets timeout or TLS evidence, while
+[Cloud Batch operations](../skills/dc-import-diagnostics/references/batch.md)
+defines how to retrieve bounded logs for one exact Batch job.
+
 - Keep hypotheses, evidence interpretation, mitigation, and short,
   conventional, read-only diagnostic actions in the domain guide.
 - Use an operational reference when evidence collection requires
   service-specific identifiers, multiple coordinated commands, non-obvious
   bounds, sensitive inputs, reuse across guides, or consistent failure
   handling.
-- Link the hypothesis to that operation. For example, keep bounded Batch log
-  commands, filters, and bounds in
-  [Cloud Batch operations](../skills/dc-import-diagnostics/references/batch.md).
+- Link a hypothesis to any operational reference it uses.
 - Do not repeat skill-wide safety or remediation policy in each guide.
 - Do not impose a fixed playbook schema. Use the smallest structure that makes
   the issue clear.
