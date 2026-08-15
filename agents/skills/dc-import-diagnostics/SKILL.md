@@ -99,18 +99,22 @@ is out of scope.
 - For manifest fields, read the
   [import manifest reference](../../common/references/import-automation/manifest.md).
 
-## Ground commands in operational references
+## Ground reusable operations
 
-Before presenting or executing a cloud or support command:
+Use route-table operations and linked references for cloud commands and
+reusable support workflows. Troubleshooting guides may keep short,
+conventional, read-only diagnostic actions inline when their target, scope, and
+stopping condition are clear.
 
-1. Select the operation or comparison flow from the route table.
-2. For a comparison flow, follow it to select the concrete operations. For
-   each operation, open its linked service reference during the current turn
-   and select only the named operation section.
-3. Use that section's command structure and literal resource or artifact names.
-4. Resolve placeholders only from declared inputs or linked references.
-5. If a required value remains unresolved, stop. Never reconstruct a command
-   from memory or a generic cloud convention.
+For a routed operation:
+
+1. Select it from the route table. Follow comparison flows to their concrete
+   operations.
+2. Open the linked reference and use the named operation's command structure
+   and literal resource or artifact names.
+3. Resolve placeholders only from declared inputs or linked references.
+4. Stop when a required value is unresolved. Never reconstruct a command from
+   memory or a generic cloud convention.
 
 ## Select an operation
 

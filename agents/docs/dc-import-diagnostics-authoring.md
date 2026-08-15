@@ -68,15 +68,15 @@ Example:
 
 ### Separate diagnosis from evidence collection
 
-| Location | Owns |
-|---|---|
-| Domain guide | Hypotheses, evidence interpretation, and mitigation |
-| Operational reference, such as [Cloud Batch operations](../skills/dc-import-diagnostics/references/batch.md) | Commands, identifiers, bounds, and evidence-retrieval failure handling |
-
-- Add a new evidence operation to its operational reference, then link the
-  hypothesis to it.
-- For example, a troubleshooting guide may request bounded Batch logs. Keep
-  the command, filters, and bounds in `batch.md`.
+- Keep hypotheses, evidence interpretation, mitigation, and short,
+  conventional, read-only diagnostic actions in the domain guide.
+- Use an operational reference when evidence collection requires
+  service-specific identifiers, multiple coordinated commands, non-obvious
+  bounds, sensitive inputs, reuse across guides, or consistent failure
+  handling.
+- Link the hypothesis to that operation. For example, keep bounded Batch log
+  commands, filters, and bounds in
+  [Cloud Batch operations](../skills/dc-import-diagnostics/references/batch.md).
 - Do not repeat skill-wide safety or remediation policy in each guide.
 - Do not impose a fixed playbook schema. Use the smallest structure that makes
   the issue clear.
@@ -86,7 +86,8 @@ Example:
 1. Add one guide for a coherent failure domain or related set of issues.
 2. Link it from `troubleshooting/troubleshooting.md` using the symptom language
    users will provide.
-3. Link its evidence steps to the relevant operational reference sections.
+3. Link reusable or service-specific evidence operations to their operational
+   reference sections.
 4. Add representative cases to the
    [diagnostics golden queries](../evals/dc-import-diagnostics.md).
 
