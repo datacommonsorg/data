@@ -3,13 +3,12 @@
 Use this guide when execution evidence indicates that an import could not
 connect to a source or complete a request.
 
-## Choose a hypothesis
+## Common hypotheses
 
 | Evidence | Investigate |
 |---|---|
 | Request or client timeout | [Timeout](#timeout) |
-| TLS handshake or certificate failure | [TLS or SSL failure](#tls-or-ssl-failure) |
-| Another network failure | [No matching hypothesis](#when-no-hypothesis-matches) |
+| Certificate-verification error | [TLS certificate verification failure](#tls-certificate-verification-failure) |
 
 ## Gather context
 
@@ -43,30 +42,31 @@ connect to a source or complete a request.
 - If the larger timeout makes no additional progress, investigate another
   cause.
 
-## TLS or SSL failure
+## TLS certificate verification failure
 
-### Confirm or reject
+### Confirm
 
-- Confirm the failure from TLS handshake or certificate-validation evidence.
-- Treat certificate expiry, hostname mismatch, an incomplete or untrusted
-  certificate chain, protocol incompatibility, and handshake failure as
-  distinct possible causes.
-- Treat a generic timeout as insufficient unless evidence places it in the TLS
-  handshake stage.
+- Confirm the failure from a certificate-verification error.
+- If needed, repeat the exact request with certificate verification disabled
+  as a diagnostic comparison.
+- If that request succeeds, treat certificate verification as the blocker. It
+  does not establish whether the server or client is responsible.
 
-### Investigate and mitigate
+### Determine the cause and mitigate
 
-- Check the certificate hostname, validity period, chain, and runtime trust
-  store as applicable.
-- Check whether redirects, proxies, or browser-like client behavior change the
-  hostname or TLS path.
-- Correct the source certificate, request URL, trust configuration, protocol,
-  or proxy behavior supported by the evidence.
-- Do not recommend disabling certificate verification as a general fix.
+| Evidence | Likely cause | Mitigation |
+|---|---|---|
+| The certificate is expired, does not match the hostname, or the server omits part of the required chain | Server or source configuration | Use the correct endpoint or have the source correct its certificate or served chain. |
+| The served certificate is valid, or the URL works in a browser, but the import client cannot verify it | Client trust configuration is plausible | For Python `requests`, test an updated `certifi` or the appropriate CA bundle with verification enabled in the import runtime. |
 
-## When no hypothesis matches
+- Confirm a client-side cause only when the exact request succeeds with
+  verification enabled after changing the trust configuration.
+- If no secure correction is confirmed, report the cause as unknown.
+- If disabling verification was the only successful test, include it as a
+  possible insecure workaround. Do not recommend it for ongoing use.
 
-- Report the network failure as unclassified.
-- Return to the parent troubleshooting fallback.
-- State which evidence is unavailable and do not force a timeout or TLS
-  diagnosis.
+## Other network failures
+
+Investigate other network causes supported by the available evidence. If no
+cause can be established, report the failure as unclassified and return to the
+parent troubleshooting fallback.
