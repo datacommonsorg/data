@@ -6,6 +6,10 @@ configuration, and support scripts.
 For local tools, Python dependencies, Google Cloud authentication, and the
 optional sibling checkout, see [dependency setup](dependency-setup.md).
 
+For authoring conventions, see [agent skill authoring](docs/skill-authoring.md).
+For diagnostics-specific structure, see
+[DC import diagnostics authoring](docs/dc-import-diagnostics.md).
+
 ## Inspect or diagnose imports
 
 For read-only ET import information or diagnosis, use the
