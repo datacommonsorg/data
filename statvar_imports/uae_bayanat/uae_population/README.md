@@ -1,6 +1,6 @@
 # UAE_Population
 
-- source: https://bayanat.ae/api/DatasetResources/DownloadSingle?resourceID=FT1CGOdcLYt6KdUJnFHWwOdTWpeao-LX539QkMLeAKA&fileName=UAE%20Population%20By%20Emirates%20Nationality%20and%20gender,
+- source: https://bayanat.ae/api/DatasetResources/DownloadSingle?resourceID=FT1CGOdcLYt6KdUJnFHWwOdTWpeao-LX539QkMLeAKA&fileName=UAE%20Population%20By%20Emirates%20Nationality%20and%20gender
 
 - how to download data: Download script (uae_download.py).
     To download the data, you'll need to use the provided download script, download_script/uae_download.py. This script will download a file to be processed. The script also requires a configuration file (config.ini) to function correctly.
