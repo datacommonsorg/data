@@ -23,6 +23,13 @@ fallback.
 | "Why did this import fail?" | Open the troubleshooting entry point. |
 | "Check whether this Batch job ran out of memory." | Open the Batch runtime guide and test that hypothesis first. |
 
+## Prefer component-owned contracts
+
+Prefer documentation beside the component that defines a format, parameter, or
+behavior. Link to that documentation instead of repeating its contract in a
+diagnostic guide. Keep only the context needed to route and interpret the
+investigation.
+
 ## Keep diagnosis hypothesis-driven
 
 ### Investigation loop

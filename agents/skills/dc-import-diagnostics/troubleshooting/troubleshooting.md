@@ -15,6 +15,7 @@ Use this entry point for diagnostic requests routed from
 | The request or available evidence identifies a network, URL-fetch, or download failure | Open [Network failures](network-failures.md). |
 | A scheduled run did not start and no Batch job ID is recorded | Inspect the deployed Scheduler job. |
 | A Batch job failed, stopped making progress, or has a suspected runtime cause | Open [Cloud Batch runtime issues](batch-runtime.md). |
+| The request asks to debug deleted observations, or a `FAILED` rule maps to `DELETED_RECORDS_COUNT` or `DELETED_RECORDS_PERCENT` | Open [Deleted observation debugging](deleted-observations.md). |
 | The user reports a validation failure, or an exact import summary reports `status=VALIDATION` | Open [Import validation failures](validation-failures.md). |
 
 ## When no guide matches
