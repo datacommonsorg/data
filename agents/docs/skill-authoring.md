@@ -49,6 +49,22 @@ directories.
 - Use source-relative Markdown links. Referenced sections must have unique,
   plain ATX headings; link text does not need to match the heading.
 
+## Document external inputs when useful
+
+- Use `Required inputs` for values needed before work can begin.
+- Use `Inputs resolved when needed` for values that only some flows require.
+- Place input sections near the top, before safety and workflow instructions.
+- Omit empty input sections.
+- Prefer values supplied by the user.
+- Use stable `<NAME>` placeholders throughout the skill.
+- Keep resolution and validation instructions together.
+
+A table is useful when a skill has multiple inputs:
+
+| Input | Resolution |
+|---|---|
+| `<INPUT_NAME>` | Describe how to resolve and validate the value. |
+
 ## Useful authoring tips
 
 These tips complement the target agent's guidance. Follow client-specific rules

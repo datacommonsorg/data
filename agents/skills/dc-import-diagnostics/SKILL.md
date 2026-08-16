@@ -10,6 +10,16 @@ transform and validate it, and produce Data Commons-compatible artifacts.
 Loading an eligible output into the serving system is a separate pipeline and
 is out of scope.
 
+## Inputs resolved when needed
+
+- Prefer values supplied by the user.
+- Resolve other values only when needed.
+- Use each input name as its placeholder throughout the skill.
+
+| Input | Resolution |
+|---|---|
+| `<IMPORT_REPO>` | Use the supplied path. Otherwise, use a valid Git checkout at `../import` containing `pipeline/workflow/import-automation-workflow.yaml`. If unavailable when needed, ask the user. |
+
 ## Safety
 
 - Treat GCP and the data repository as read-only.
