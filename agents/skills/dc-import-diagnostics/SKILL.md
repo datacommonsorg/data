@@ -82,26 +82,17 @@ is out of scope.
    [agent dependency setup](../../dependency-setup.md). Do not run the
    readiness checker on every request or initiate login.
 
-## Review cloud operations
+## Review cloud configuration
 
-1. Select only the operations needed to answer the request. Do not prefetch
-   possible follow-up evidence.
-2. Select `prod` by default or the requested environment, then read
-   [Environment resolution](references/environment-resolution.md).
-3. Apply explicit prompt overrides field by field. Do not inspect live resources
-   to fill missing project, location, or resource names.
-4. Before the first cloud call, print only the selected operations:
-
-   ```text
-   operation | resource type | effective value | source | UTC bounds | limit
-   ```
-
-   Use `environment_config`, `prompt_override`, and `runtime_identifier` as
-   source labels. State unresolved values.
-5. Ask once for approval in an interactive session. Only when the prompt
-   explicitly declares a non-interactive run, print
-   `review: skipped (headless)` and continue without pausing.
-6. Stop when required values are unresolved or explicit values conflict.
+1. Resolve prompt overrides first; otherwise use the selected block in
+   [import environment defaults](../../common/config/import-environments.yaml).
+   Ask if a required value is ambiguous, conflicting, or unresolved. Do not
+   guess.
+2. Before the first cloud call, show the configuration source, effective
+   values, and bounded operations. Proceed with defaults; confirm overrides
+   once.
+3. Reuse the same configuration for subsequent read-only operations without
+   further approval. Repeat the review only if the configuration changes.
 
 ## Load detailed references only when needed
 

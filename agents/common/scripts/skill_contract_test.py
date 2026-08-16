@@ -329,8 +329,8 @@ class SkillContractTest(unittest.TestCase):
 
         for heading in ('## Safety',
                         '## Classify the request before loading context',
-                        '## Review cloud operations', '## Select an operation',
-                        '## Report evidence'):
+                        '## Review cloud configuration',
+                        '## Select an operation', '## Report evidence'):
             with self.subTest(heading=heading):
                 self.assertIn(heading, skill)
 
