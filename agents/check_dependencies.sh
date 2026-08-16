@@ -72,8 +72,6 @@ done
 
 local_failures=0
 gcloud_available=true
-git_available=true
-realpath_available=true
 
 for command_name in "${REQUIRED_COMMANDS[@]}"; do
   if ! command -v "$command_name" >/dev/null 2>&1; then
@@ -82,8 +80,6 @@ for command_name in "${REQUIRED_COMMANDS[@]}"; do
     local_failures=$((local_failures + 1))
     case "$command_name" in
       gcloud) gcloud_available=false ;;
-      git) git_available=false ;;
-      realpath) realpath_available=false ;;
     esac
   fi
 done
@@ -138,27 +134,6 @@ elif [[ ! -f "$python_checker" ]]; then
   local_failures=$((local_failures + 1))
 elif ! "$python_bin" "$python_checker"; then
   local_failures=$((local_failures + 1))
-fi
-
-import_repository="$repo_root/../import"
-if [[ ! -d "$import_repository" ]]; then
-  echo 'SUGGESTED sibling import checkout at ../import'
-elif [[ "$git_available" != true || "$realpath_available" != true ]]; then
-  echo 'SUGGESTED sibling import checkout could not be validated'
-else
-  expected_import_root="$(realpath "$import_repository" 2>/dev/null || true)"
-  actual_import_root="$(
-    git -C "$import_repository" rev-parse --show-toplevel 2>/dev/null || true
-  )"
-  if [[ -n "$actual_import_root" ]]; then
-    actual_import_root="$(realpath "$actual_import_root" 2>/dev/null || true)"
-  fi
-  workflow_source="$import_repository/pipeline/workflow/import-automation-workflow.yaml"
-  if [[ -n "$expected_import_root" && "$actual_import_root" == "$expected_import_root" && -f "$workflow_source" ]]; then
-    echo 'AVAILABLE sibling import checkout'
-  else
-    echo 'SUGGESTED sibling import checkout at ../import is invalid'
-  fi
 fi
 
 if [[ $local_failures -ne 0 ]]; then

@@ -80,19 +80,3 @@ CLI and ADC identities are not required to match.
 Passing authentication checks establishes only that each credential path can
 produce a non-empty token. It does not establish IAM permissions, enabled APIs,
 quota-project configuration, or the existence of any target resource.
-
-## Optional sibling import checkout
-
-For additional Workflow and helper source navigation, the checker recognizes
-this optional layout:
-
-```text
-<workspace>/
-├── data/       # current repository
-└── import/     # optional Git checkout
-    └── pipeline/workflow/import-automation-workflow.yaml
-```
-
-The resolved Git root must be exactly `<workspace>/import`. An absent or invalid
-sibling is reported as `SUGGESTED` and never makes readiness fail. Live cloud
-revisions and metadata remain runtime truth.
