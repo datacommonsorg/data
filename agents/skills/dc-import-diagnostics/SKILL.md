@@ -26,7 +26,6 @@ is out of scope.
 - Never run, retry, update, pause, resume, delete, deploy, or mutate a cloud
   resource.
 - Never edit repository files or persist output unless the user explicitly asks.
-- Run local Python from the repository `.env`.
 - Ask before downloading or installing any library, command-line tool, browser
   binary, or executable.
 - Never access Secret Manager payloads or print credentials, tokens, API keys,
@@ -48,6 +47,23 @@ is out of scope.
   impersonate another account, grant roles, or create access tokens.
 - Report missing permission or evidence. Base diagnoses on cited evidence,
   state unknowns, and do not investigate loader or serving-system behavior.
+
+## Important: Python execution
+
+- If the user provides a Python executable or virtual environment, use that
+  interpreter for all Python commands.
+- Otherwise:
+  - Run repository helper scripts with `./agents/common/run_python.sh`. It uses
+    `.env/bin/python` from the data repository root.
+  - Run repository tests with `./run_tests.sh -p <directory>`.
+  - Run other Python commands with `.env/bin/python` from the data repository
+    root.
+- `.env/` is the repository-local Python virtual environment directory.
+- If the repository virtual environment is missing, ask the user to run
+  `./run_tests.sh -r`.
+- If a user-provided environment is unavailable or missing dependencies, report
+  the failure. Do not switch environments.
+- Never fall back to global `python` or `python3`.
 
 ## Classify the request before loading context
 
@@ -76,9 +92,8 @@ is out of scope.
    remediation as unsupported by this skill.
 6. Read `agents/common/config/import-environments.yaml` only when the selected
    route performs a cloud operation.
-7. Invoke repository Python helpers only through
-   `./agents/common/run_python.sh`. If `.env`, a command, or an authentication
-   prerequisite is missing, stop and direct the user to
+7. If a required command or authentication prerequisite is missing, stop and
+   direct the user to
    [agent dependency setup](../../dependency-setup.md). Do not run the
    readiness checker on every request or initiate login.
 
