@@ -18,7 +18,7 @@ is out of scope.
 
 | Input | Resolution |
 |---|---|
-| `<IMPORT_REPO>` | Use the supplied path. Otherwise, use a valid Git checkout at `../import` containing `pipeline/workflow/import-automation-workflow.yaml`. If unavailable when needed, ask the user. |
+| `<IMPORT_REPO>` | Use the supplied path. Otherwise, when needed, shallow-clone `datacommonsorg/import` with depth 1 into a temporary directory. |
 
 ## Safety
 
