@@ -57,7 +57,14 @@ directories.
 - Omit empty input sections.
 - Prefer values supplied by the user.
 - Use stable `<NAME>` placeholders throughout the skill.
+- Write unresolved cross-repository paths as inline code rather than Markdown
+  links. Use a Markdown link after the destination is resolved.
 - Keep resolution and validation instructions together.
+
+For example:
+
+- Unresolved: `<IMPORT_REPO>/docs/usage.md`
+- Resolved: [Import tool usage](https://github.com/datacommonsorg/import/blob/master/docs/usage.md)
 
 A table is useful when a skill has multiple inputs:
 
