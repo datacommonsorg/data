@@ -26,6 +26,9 @@ is out of scope.
 - Never run, retry, update, pause, resume, delete, deploy, or mutate a cloud
   resource.
 - Never edit repository files or persist output unless the user explicitly asks.
+- Run local Python from the repository `.env`.
+- Ask before downloading or installing any library, command-line tool, browser
+  binary, or executable.
 - Never access Secret Manager payloads or print credentials, tokens, API keys,
   complete Scheduler bodies, Batch commands, or complete service environments.
 - Retain only allowlisted structured-log fields. Never return arbitrary log
@@ -74,10 +77,10 @@ is out of scope.
 6. Read `agents/common/config/import-environments.yaml` only when the selected
    route performs a cloud operation.
 7. Invoke repository Python helpers only through
-   `./agents/common/run_python.sh`. If a command, Python dependency, `.env`, or
-   authentication prerequisite is missing, stop and direct the user to
-   [agent dependency setup](../../dependency-setup.md). Do not run the readiness
-   checker on every request, install dependencies, or initiate login.
+   `./agents/common/run_python.sh`. If `.env`, a command, or an authentication
+   prerequisite is missing, stop and direct the user to
+   [agent dependency setup](../../dependency-setup.md). Do not run the
+   readiness checker on every request or initiate login.
 
 ## Review cloud operations
 
