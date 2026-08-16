@@ -27,7 +27,7 @@ is out of scope.
   resource.
 - Never edit repository files or persist output unless the user explicitly asks.
 - Ask before downloading or installing any library, command-line tool, browser
-  binary, or executable.
+  binary, or executable, except for the repository dependency refresh below.
 - Never access Secret Manager payloads or print credentials, tokens, API keys,
   complete Scheduler bodies, Batch commands, or complete service environments.
 - Retain only allowlisted structured-log fields. Never return arbitrary log
@@ -50,20 +50,17 @@ is out of scope.
 
 ## Important: Python execution
 
-- If the user provides a Python executable or virtual environment, use that
-  interpreter for all Python commands.
-- Otherwise:
-  - Run repository helper scripts with `./agents/common/run_python.sh`. It uses
-    `.env/bin/python` from the data repository root.
-  - Run repository tests with `./run_tests.sh -p <directory>`.
-  - Run other Python commands with `.env/bin/python` from the data repository
-    root.
-- `.env/` is the repository-local Python virtual environment directory.
-- If the repository virtual environment is missing, ask the user to run
-  `./run_tests.sh -r`.
-- If a user-provided environment is unavailable or missing dependencies, report
-  the failure. Do not switch environments.
-- Never fall back to global `python` or `python3`.
+- Use a user-provided Python environment when supplied. Otherwise, use the
+  repository-local Python virtual environment at `.env/`.
+- With the repository environment:
+  - Run helper scripts with `./agents/common/run_python.sh`.
+  - Run tests with `./run_tests.sh -p <directory>`.
+  - Run other Python commands with `.env/bin/python`.
+  - If dependencies are missing or stale, run `./run_tests.sh -r`, then retry.
+- Before running an import script, install its `requirements.txt`, if present.
+  Ask before installing dependencies.
+- Report an unusable environment. Never fall back to global `python` or
+  `python3`.
 
 ## Classify the request before loading context
 

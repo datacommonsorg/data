@@ -98,19 +98,16 @@ For diagnostics-specific routing and troubleshooting conventions, see
 When authoring or updating a skill that runs Python, make its runtime
 instructions follow these rules:
 
-- Give a user-provided Python executable or virtual environment highest
-  priority.
-- When no environment is provided:
-  - Run repository helper scripts with `./agents/common/run_python.sh`.
-  - Run repository tests with `./run_tests.sh -p <directory>`.
-  - Run other Python commands with `.env/bin/python` from the repository root.
-- Describe `.env/` as the repository-local Python virtual environment
-  directory.
-- If that environment is missing, instruct the user to run
-  `./run_tests.sh -r`.
-- If a user-provided environment is unavailable or missing dependencies, report
-  the failure. Do not switch environments.
-- Never fall back to global `python` or `python3`.
+- Give a user-provided Python environment highest priority. Otherwise, use the
+  repository-local Python virtual environment at `.env/`.
+- With the repository environment:
+  - Run helper scripts with `./agents/common/run_python.sh`.
+  - Run tests with `./run_tests.sh -p <directory>`.
+  - Run other Python commands with `.env/bin/python`.
+  - If dependencies are missing or stale, run `./run_tests.sh -r`, then retry.
+- Ask before other dependency installations.
+- Report an unusable environment. Never fall back to global `python` or
+  `python3`.
 
 ## Validate changes
 
