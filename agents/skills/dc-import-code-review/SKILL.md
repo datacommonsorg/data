@@ -10,6 +10,15 @@ hunk, report only supported findings, and leave the repository unchanged. Leave
 GitHub unchanged unless the user explicitly authorizes publishing under
 [Publish an explicitly authorized review](#publish-an-explicitly-authorized-review).
 
+## Required inputs
+
+- Prefer values supplied by the user.
+- Use each input name as its placeholder throughout the skill.
+
+| Input | Resolution |
+|---|---|
+| `<REVIEW_TARGET>` | Use the supplied review target. If missing or ambiguous, clarify it using [Resolve the review target](#resolve-the-review-target) before reviewing. |
+
 ## Safety and scope
 
 - Resolve the repository root with `git rev-parse --show-toplevel`. From that
@@ -35,7 +44,7 @@ GitHub unchanged unless the user explicitly authorizes publishing under
 
 ## Resolve the review target
 
-Require exactly one target before reviewing:
+Resolve `<REVIEW_TARGET>` to exactly one of:
 
 | User intent | Change set |
 |---|---|
@@ -45,7 +54,7 @@ Require exactly one target before reviewing:
 | Changes against a branch | Merge base of the explicit base ref and `HEAD` through `HEAD` |
 | Pull request | Exact pull request diff and head commit |
 
-If the review target is ambiguous, ask whether to review staged, unstaged, all
+If `<REVIEW_TARGET>` is ambiguous, ask whether to review staged, unstaged, all
 local, branch-comparison, or pull request changes. If a branch comparison lacks
 an exact base ref, ask for it. Do not infer `master`, `main`, a remote, or a
 combination of local changes.
