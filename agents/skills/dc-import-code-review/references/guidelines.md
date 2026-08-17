@@ -63,12 +63,28 @@ repository contracts and instructions take precedence.
   counters to a file (e.g. under `counters/`), and ensure those counter files are
   included in the manifest's `source_files` so they are copied to GCS for
   validation.
+- Require explicit date validation in `validation_config.json` to ensure freshness
+  and date consistency across refreshes (since `golden_summary_report.csv`
+  intentionally excludes `MaxDate`):
+  - Inspect the import's latest summary in GCS (e.g.,
+    `<version>/input<N>/genmcf/summary_report.csv` resolved via
+    `latest_version.txt` as described in
+    [Import artifact layout](../../../common/references/import-automation/artifact-layout.md)).
+  - When `MaxDate` is uniform across StatVars in `summary_report.csv`, require a
+    `MAX_DATE_CONSISTENT` check.
+  - Require a date freshness check: use `MAX_DATE_LATEST` for current-year data,
+    or a `SQL_VALIDATOR` rule verifying that `MaxDate` is within expected source
+    lag (months/years) for the dataset's refresh schedule.
+  - For imports where StatVars have different maximum dates (e.g., staggered
+    releases), require scoped `SQL_VALIDATOR` rules or per-StatVar checks
+    instead of a blanket `MAX_DATE_CONSISTENT`.
 
 When reviewing `validation_config*.json` or a manifest change to
 `validation_config_file`, read:
 
 - [Import validation framework](../../../../tools/import_validation/README.md)
 - [Validation configuration and golden checks](../../../../tools/import_validation/Validations.md)
+- [Import artifact layout](../../../common/references/import-automation/artifact-layout.md)
 - Resolve local `GOLDENS_CHECK` paths relative to the validation config file
   passed to the runner, and verify that every `golden_files` path or glob
   matches at least one intended golden file.
