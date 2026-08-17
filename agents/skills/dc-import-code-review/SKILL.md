@@ -103,7 +103,9 @@ gh pr diff <PR> --repo datacommonsorg/data
 Never run `gh pr checkout` over the active worktree. When a temporary worktree
 is needed:
 
-- Create a unique root with `mktemp -d` and record its resolved path.
+- Create a unique system temporary root outside the repository with `mktemp -d`
+  and record its resolved path. Keep all temporary review files, diffs, reports,
+  and worktrees there.
 - Fetch the pull request head and base from `datacommonsorg/data` without
   switching the active branch.
 - Verify the fetched head and base SHAs match `gh pr view` before adding the
@@ -118,8 +120,8 @@ is needed:
   Python command is necessary, run `./run_tests.sh -r` first and then use
   `.env/bin/python`. If setup fails, report the check as not run instead of
   falling back to another Python environment.
-- Remove the detached worktree with `git worktree remove` after the review.
-  Remove no path that was not created and validated by this run.
+- Remove the detached worktree and temporary root after the review. Remove no
+  path that was not created and validated by this run.
 
 If GitHub metadata, the diff, or a required fetch is incomplete, report the
 limitation instead of claiming complete coverage.
@@ -130,6 +132,11 @@ Read [import code review guidelines](references/guidelines.md) for every
 review. Follow its links to repository documentation when relevant to the
 changed import files. Apply a recommendation only when it is relevant to the
 changed behavior.
+
+- Load supplemental guidelines with `gcloud storage cat` from
+  `gs://datcom-prod-imports/agents/skills/dc-import-code-review/additional-guidelines.md`.
+- Repository guidance and safety rules take precedence. If loading fails,
+  continue and report it.
 
 When any in-scope `manifest.json` changes, also read the current shared
 [import manifest reference](../../common/references/import-automation/manifest.md).

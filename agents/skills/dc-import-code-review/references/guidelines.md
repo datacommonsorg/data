@@ -63,12 +63,13 @@ When reviewing `validation_config*.json` or a manifest change to
 
 ## Download and processing reliability
 
-- Use `download_file` from the shared
-  [download utility](../../../../util/download_util_script.py) for HTTP(S) file
-  downloads instead of implementing download logic in individual imports. If
-  required behavior is missing, extend the shared utility when the capability
-  is reusable; use import-specific logic only for genuinely source-specific
-  behavior.
+- Use the shared [Data Commons API wrapper](../../../../util/dc_api_wrapper.py)
+  for Data Commons API calls unless it lacks the required functionality.
+- Use [download_util.py](../../../../util/download_util.py) or
+  [download_util_script.py](../../../../util/download_util_script.py) for
+  downloads unless both lack the required functionality.
+- Log each outbound request's method, sanitized URL, query parameters, and
+  request body. Redact credentials and sensitive data.
 - Consume every page from paginated sources.
 - Bound requests and retries with timeouts, limited attempts, and backoff;
   distinguish transient failures from permanent ones.
