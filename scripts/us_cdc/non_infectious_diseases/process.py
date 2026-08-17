@@ -76,10 +76,10 @@ domain = "data.cdc.gov"
 client = Socrata(domain, None)
 filename = "NationalOutbreakPublicDataTool.xlsx"
 sheet_name = "Outbreak Data"
-base_path = "./data"
-schema_map_path = f"{base_path}/col_map_exc_food.json"
-input_directory = f"{base_path}/input_files"
-output_directory = f"{base_path}/output"
+base_path = os.path.join(_SCRIPT_PATH, "data")
+schema_map_path = os.path.join(base_path, "col_map_exc_food.json")
+input_directory = os.path.join(base_path, "input_files")
+output_directory = os.path.join(base_path, "output")
 sheet_name = "Outbreak Data"
 os.makedirs(input_directory, exist_ok=True)
 os.makedirs(output_directory, exist_ok=True)
@@ -176,17 +176,17 @@ def generate_aggregates(df: pd.DataFrame,
         country_stat_df = country_stat_df[cols]
         country_stat_df = country_stat_df.groupby(groupby_cols,
                                                   as_index=False).agg({
-                                                      'Illnesses': sum,
-                                                      'Hospitalizations': sum,
-                                                      'Deaths': sum
+                                                      'Illnesses': 'sum',
+                                                      'Hospitalizations': 'sum',
+                                                      'Deaths': 'sum'
                                                   })
 
         # aggreagte stats for US states and territories
         aggregate_df = df[~(df['observationAbout'].str.contains('country'))]
         aggregate_df = aggregate_df.groupby(groupby_cols, as_index=False).agg({
-            'Illnesses': sum,
-            'Hospitalizations': sum,
-            'Deaths': sum
+            'Illnesses': 'sum',
+            'Hospitalizations': 'sum',
+            'Deaths': 'sum'
         })
 
         # aggregate for US at country level
@@ -195,9 +195,9 @@ def generate_aggregates(df: pd.DataFrame,
         ]
         us_aggreagte_df = aggregate_df.groupby(country_group_by,
                                                as_index=False).agg({
-                                                   'Illnesses': sum,
-                                                   'Hospitalizations': sum,
-                                                   'Deaths': sum
+                                                   'Illnesses': 'sum',
+                                                   'Hospitalizations': 'sum',
+                                                   'Deaths': 'sum'
                                                })
         us_aggreagte_df['observationAbout'] = 'country/USA'
 
@@ -327,15 +327,25 @@ def fix_place_names(clean_df):
         logging.error(f"Error while fixing place name : {e}")
 
 
-def process_non_infectious_data() -> None:
+def process_non_infectious_data(input_file_path: str = None,
+                                sheet: str = None,
+                                schema_path: str = None,
+                                output_dir: str = None) -> None:
     try:
         logging.info(f"Processing starts.")
-        f = open(schema_map_path, 'r')
-        PV_MAP = json.load(f)
-        f.close()
-        df = pd.read_excel(input_path, sheet_name=sheet_name)
-        # The dataset is sparse and hence, all null or empty values are replaced with empty string for easier processing and data manipulation
-        df = df[~df.isna()]
+        target_schema = schema_path if schema_path else schema_map_path
+        target_input = input_file_path if input_file_path else input_path
+        target_sheet = sheet if sheet else sheet_name
+        target_output = output_dir if output_dir else output_directory
+
+        with open(target_schema, 'r') as f:
+            PV_MAP = json.load(f)
+
+        df = pd.read_excel(target_input, sheet_name=target_sheet)
+        for col in _STAT_COLS:
+            if col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
+
         # fix the date format and resolve the place to dcids
         df = fix_date_format(df)
         df = fix_place_names(df)
@@ -385,7 +395,7 @@ def process_non_infectious_data() -> None:
 
         # write statvar_dct to mcf file
         sv_dict_list = sv_df['sv_dict'].values.tolist()
-        mcf_file_path = os.path.join(output_directory, f'{_FILE_PREFIX}.mcf')
+        mcf_file_path = os.path.join(target_output, f'{_FILE_PREFIX}.mcf')
         write_svdicts_to_file(sv_dict_list, mcf_file_path)
 
         sv_df = sv_df[[
@@ -403,21 +413,25 @@ def process_non_infectious_data() -> None:
             ],
             how='left')
 
-        # empty strings for  null etiology and etiology status values
-        clean_df = clean_df.fillna('')
-        clean_df = clean_df[(clean_df['value'] != '') |
-                            (clean_df['observationAbout'] != '')]
+        # empty strings for null etiology and etiology status values
+        for c in ['Etiology', 'Etiology Status', 'Primary Mode']:
+            if c in clean_df.columns:
+                clean_df[c] = clean_df[c].fillna('')
+
+        clean_df = clean_df.dropna(subset=['value'])
+        clean_df = clean_df[clean_df['value'] != '']
         # another check to ensure there is only 1 Etiology in the clean_csv
         clean_df = clean_df[~(clean_df['Etiology'].str.contains(';'))]
         # removing unused columns
         clean_df.drop(
             columns=['variable', 'Primary Mode', 'Etiology', 'Etiology Status'],
             inplace=True)
-        clean_df.to_csv(f'{output_directory}/{_FILE_PREFIX}.csv', index=False)
+        clean_df.to_csv(os.path.join(target_output, f'{_FILE_PREFIX}.csv'),
+                        index=False)
 
-        f = open(f"{output_directory}/{_FILE_PREFIX}.tmcf", "w")
-        f.write(_TEMPLATE_MCF)
-        f.close()
+        with open(os.path.join(target_output, f"{_FILE_PREFIX}.tmcf"),
+                  "w") as f:
+            f.write(_TEMPLATE_MCF)
     except Exception as e:
         logging.fatal(f"Error while processing : {e}")
 
@@ -453,3 +467,4 @@ def main(_) -> None:
 
 if __name__ == '__main__':
     app.run(main)
+
