@@ -29,7 +29,6 @@ script_dir = os.path.abspath(
                  'executor', 'scripts'))
 sys.path.append(script_dir)
 import generate_provisional_nodes
-import manifest_to_mcf
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string("entity", "", "Entity type (Schema/Place).")
@@ -40,7 +39,11 @@ def process(entity_type: str, version: str):
     logging.info(f'Processing import {entity_type} for version {version}')
     local_path = os.path.abspath(
         os.path.join(os.path.dirname(__file__), entity_type, version))
-    # Add any processing required
+
+    # Local path to data
+    logging.info(
+        f'Generating provisional nodes for {entity_type} in {local_path}')
+    generate_provisional_nodes.generate_provisional_nodes(local_path)
     return 0
 
 

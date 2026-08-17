@@ -26,6 +26,7 @@ import shlex
 import sys
 import subprocess
 import tempfile
+import threading
 import time
 import traceback
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
@@ -1182,15 +1183,27 @@ def _run_with_timeout_async(args: List[str],
         )
 
         # Log output continuously until the command completes.
-        for line in process.stderr:
-            stderr.append(line)
-            logging.info(f'Process stderr:{name}: {line}')
-        for line in process.stdout:
-            stdout.append(line)
-            logging.info(f'Process stdout:{name}: {line}')
+        def drain_stream(stream, output, stream_name):
+            for line in stream:
+                output.append(line)
+                logging.info(f'Process {stream_name}:{name}: {line}')
+
+        stdout_thread = threading.Thread(
+            target=drain_stream,
+            args=(process.stdout, stdout, 'stdout'),
+        )
+        stderr_thread = threading.Thread(
+            target=drain_stream,
+            args=(process.stderr, stderr, 'stderr'),
+        )
+
+        stdout_thread.start()
+        stderr_thread.start()
 
         # Wait in case script has closed stderr/stdout early.
         process.wait()
+        stdout_thread.join()
+        stderr_thread.join()
         end_time = time.time()
 
         return_code = process.returncode
