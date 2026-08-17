@@ -7,6 +7,8 @@ repository contracts and instructions take precedence.
 
 - Validate the selected manifest specification against the current shared
   manifest contract, and verify that every referenced script and input exists.
+- Ensure `manifest.json` includes `node_mcf` under `import_inputs` pointing to
+  generated schema/statvar MCF files (e.g., `output/*.mcf`).
 - Always retain downloaded source files in GCS via `source_files`, alongside
   other operational artifacts (e.g., counter files from `--output_counters`,
   `manifest.json`, or configs); do not confuse source artifacts with import
