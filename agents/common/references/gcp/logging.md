@@ -1,8 +1,8 @@
 # Read Cloud Logging entries
 
-Use this shared reference when a product recipe needs `gcloud logging read`.
-The product recipe supplies the concrete filter, defaults, bounds, output
-fields, and interpretation.
+Use this shared reference when a product operation needs `gcloud logging read`.
+The product-specific reference supplies the concrete filter, defaults, bounds,
+output fields, and interpretation.
 
 ```bash
 gcloud logging read '<FILTER>' \
@@ -19,7 +19,7 @@ gcloud logging read '<FILTER>' \
 - `FORMAT` selects the returned representation or fields.
 
 These parameters are available building blocks, not universal requirements.
-The product recipe states which values and filters apply.
+The product-specific operation states which values and filters apply.
 
 ## Time selection
 
@@ -31,7 +31,8 @@ timestamp >= "<START>" AND timestamp < "<END>"
 ```
 
 Without a timestamp filter, `gcloud logging read` applies a default freshness
-of one day. A product recipe can choose another relative window by adding:
+of one day. A product-specific operation can choose another relative window by
+adding:
 
 ```text
 --freshness='<FRESHNESS>'
