@@ -66,18 +66,15 @@ repository contracts and instructions take precedence.
 - Require explicit date validation in `validation_config.json` to ensure freshness
   and date consistency across refreshes (since `golden_summary_report.csv`
   intentionally excludes `MaxDate`):
-  - Inspect the import's latest summary in GCS (e.g.,
-    `<version>/input<N>/genmcf/summary_report.csv` resolved via
-    `latest_version.txt` as described in
-    [Import artifact layout](../../../common/references/import-automation/artifact-layout.md)).
-  - When `MaxDate` is uniform across StatVars in `summary_report.csv`, require a
-    `MAX_DATE_CONSISTENT` check.
-  - Require a date freshness check: use `MAX_DATE_LATEST` for current-year data,
-    or a `SQL_VALIDATOR` rule verifying that `MaxDate` is within expected source
-    lag (months/years) for the dataset's refresh schedule.
-  - For imports where StatVars have different maximum dates (e.g., staggered
-    releases), require scoped `SQL_VALIDATOR` rules or per-StatVar checks
-    instead of a blanket `MAX_DATE_CONSISTENT`.
+  - Read the latest accepted version from GCS:
+    `gcloud storage cat gs://<output_bucket>/<import_prefix>/latest_version.txt`
+    (use `datcom-prod-imports` by default).
+  - Read the latest summary report:
+    `gcloud storage cat gs://<output_bucket>/<import_prefix>/<latest_version>/input<N>/genmcf/summary_report.csv`
+  - Inspect the `MaxDate` column across all StatVars in that `summary_report.csv`:
+    - When `MaxDate` is uniform across StatVars, require `MAX_DATE_CONSISTENT`. If missing from `validation_config.json`, report a P2 finding.
+    - Require a date freshness check: use `MAX_DATE_LATEST` for current-year data, or a `SQL_VALIDATOR` rule verifying that `MaxDate` is within allowable lag (months/years) for the dataset's refresh schedule.
+    - For imports where StatVars have differing maximum dates across StatVars in `summary_report.csv`, require scoped `SQL_VALIDATOR` rules or per-StatVar checks instead of a blanket `MAX_DATE_CONSISTENT`.
 
 When reviewing `validation_config*.json` or a manifest change to
 `validation_config_file`, read:

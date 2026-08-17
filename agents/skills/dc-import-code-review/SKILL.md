@@ -164,10 +164,11 @@ review; do not resolve it silently.
   turn pre-existing problems into review findings.
 - Run only focused checks useful for the selected import. State exactly what
   ran, what passed or failed, and what could not run.
-- Prefer hermetic checks. Do not run tests that call live source, Data Commons,
-  or cloud APIs or require credentials unless the user explicitly requests
-  them and the prerequisites are available. Bound each check, and stop and
-  report a stalled check instead of waiting indefinitely.
+- Allow bounded, read-only cloud and Data Commons inspection (such as reading
+  GCS artifacts or querying read-only Data Commons APIs), but do not run mutating
+  operations or live-source downloads unless the user explicitly requests them
+  and prerequisites are available. Bound each check, and stop and report a
+  stalled check instead of waiting indefinitely.
 - Prefer no finding over a speculative finding. State missing context as a
   limitation.
 - Report a positive finding only for a meaningful, reusable import practice.
