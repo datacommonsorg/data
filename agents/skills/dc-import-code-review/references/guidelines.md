@@ -7,8 +7,10 @@ repository contracts and instructions take precedence.
 
 - Validate the selected manifest specification against the current shared
   manifest contract, and verify that every referenced script and input exists.
-- Use `source_files` for source artifacts that must be retained; do not confuse
-  source artifacts with import inputs.
+- Always retain downloaded source files in GCS via `source_files`, alongside
+  other operational artifacts (e.g., counter files from `--output_counters`,
+  `manifest.json`, or configs); do not confuse source artifacts with import
+  inputs.
 - Add `cron_schedule`, `user_script_timeout`, and `resource_limits` only when
   the import needs scheduling or an override, and validate them when present.
 - Keep curator contacts valid without prescribing one fixed email value.
@@ -47,12 +49,17 @@ repository contracts and instructions take precedence.
 
 - Verify that StatisticalVariable names, mappings, units, and generated schema
   output remain consistent with the transformation.
+- When using `stat_var_processor`, pass `--existing_statvar_mcf` (e.g.,
+  `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`) to reuse existing
+  StatisticalVariables and avoid creating duplicate statvar definitions.
 - Make aggregation, filtering, outlier handling, and date-range decisions
   explicit and testable; avoid arbitrary future-year cutoffs.
 
 ## Import validation
 
-- Configure `stat_var_processor` invocations to persist output counters for
+- Configure `stat_var_processor` invocations with `--output_counters` to write
+  counters to a file (e.g. under `counters/`), and ensure those counter files are
+  included in the manifest's `source_files` so they are copied to GCS for
   validation.
 
 When reviewing `validation_config*.json` or a manifest change to
@@ -78,6 +85,9 @@ When reviewing `validation_config*.json` or a manifest change to
 - Log each outbound request's method, sanitized URL, query parameters, and
   request body. Redact credentials and sensitive data.
 - Consume every page from paginated sources.
+- Reuse HTTP connections via `requests.Session` when issuing frequent
+  availability checks (e.g., repeated `HEAD` requests) to avoid connection
+  overhead and server throttling.
 - Bound requests and retries with timeouts, limited attempts, and backoff;
   distinguish transient failures from permanent ones.
 - Make resume behavior idempotent, and ensure counters count unique successful
