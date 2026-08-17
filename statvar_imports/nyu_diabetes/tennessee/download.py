@@ -13,15 +13,33 @@
 # limitations under the License.
 
 
+from datetime import date
 import os
 import requests
 from urllib.parse import urlparse
 from tqdm import tqdm  
 from pathlib import Path
-from datetime import date
-from absl import logging, app
-import pandas as pd
 import re
+from urllib.parse import urlparse
+
+from absl import app
+from absl import flags
+from absl import logging
+from google.api_core import exceptions
+from google.cloud import storage
+import pandas as pd
+import requests
+from retry import retry
+from tqdm import tqdm
+
+FLAGS = flags.FLAGS
+
+flags.DEFINE_enum(
+    'download_source',
+    'tn',
+    ['tn', 'gcs'],
+    'Source from which input files are downloaded.',
+)
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(script_dir, "input_files")
@@ -48,7 +66,8 @@ def download_files(url_list, save_folder):
             filename = os.path.basename(parsed_url.path)
             file_path = os.path.join(save_folder, filename)
 
-            logging.info(f"Downloading: {filename}")
+            logging.info(
+                f"Starting download: source={url}, destination={file_path}")
 
             response = retry_method(url)
             with response as r:
@@ -60,14 +79,56 @@ def download_files(url_list, save_folder):
                     for chunk in r.iter_content(block_size):
                         f.write(chunk)
                         progress_bar.update(len(chunk))
-            logging.info(f"Saved: {file_path}\n")
+            file_size = os.path.getsize(file_path)
+            logging.info(
+                f"Completed download: source={url}, destination={file_path}, size_bytes={file_size}"
+            )
         except Exception as e:
-            logging.error(f"Failed to download {url} after retries: {e}\n")
+            logging.error(
+                f"Download failed: source={url}, destination={file_path}, error={e}"
+            )
+
+
+def download_files_from_gcs(url_list, save_folder):
+    os.makedirs(save_folder, exist_ok=True)
+    storage_client = storage.Client()
+    downloaded_count = 0
+
+    for url in url_list:
+        parsed_url = urlparse(url)
+        filename = os.path.basename(parsed_url.path)
+        file_path = os.path.join(save_folder, filename)
+        Path(file_path).unlink(missing_ok=True)
+
+        logging.info(
+            f"Starting download: source={url}, destination={file_path}")
+
+        try:
+            blob = storage_client.bucket(parsed_url.netloc).blob(
+                parsed_url.path.lstrip('/'))
+            blob.download_to_filename(file_path)
+        except exceptions.NotFound:
+            Path(file_path).unlink(missing_ok=True)
+            logging.warning(f"GCS object not found, skipping: source={url}")
+            continue
+        except Exception as e:
+            Path(file_path).unlink(missing_ok=True)
+            e.add_note(f"Failed to download GCS object {url}")
+            raise
+
+        file_size = os.path.getsize(file_path)
+        logging.info(
+            f"Completed download: source={url}, destination={file_path}, size_bytes={file_size}"
+        )
+        downloaded_count += 1
+
+    if downloaded_count == 0:
+        raise RuntimeError('No files were downloaded from GCS.')
 
 def generate_urls(start_year, end_year, url_template):
     url_list = []
     for year in range(start_year,end_year+1):
-        formatted_url = url_template.format(year,year)
+        formatted_url = url_template.format(year=year)
         url_list.append(formatted_url)
     return url_list
 
@@ -115,12 +176,17 @@ def process_excel_files(input_dir):
     logging.info("\nExcel file processing complete. 'year' column added to all processed files.")
 
 def main(_):
-    url_template ="https://www.tn.gov/content/dam/tn/health/documents/vital-statistics/death/{}/Diabetes_County_{}.xlsx"
+    tn_url_template = "https://www.tn.gov/content/dam/tn/health/documents/vital-statistics/death/{year}/Diabetes_County_{year}.xlsx"
+    gcs_url_template = "gs://unresolved_mcf/nyu_diabetes/tennessee/latest/input_files/Diabetes_County_{year}.xlsx"
     start_year = 2019
     current_year = date.today().year
-    final_urls = generate_urls(start_year, current_year,url_template)
-    
-    download_files(final_urls, save_folder=INPUT_DIR)
+
+    if FLAGS.download_source == 'gcs':
+        final_urls = generate_urls(start_year, current_year, gcs_url_template)
+        download_files_from_gcs(final_urls, save_folder=INPUT_DIR)
+    else:
+        final_urls = generate_urls(start_year, current_year, tn_url_template)
+        download_files(final_urls, save_folder=INPUT_DIR)
     process_excel_files(INPUT_DIR)
 
 if __name__ == "__main__":
