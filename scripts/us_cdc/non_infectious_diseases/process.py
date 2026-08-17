@@ -91,6 +91,7 @@ def download_data_from_api(column_mapping=None):
         logging.info('Downloading starts')
         # Get the total number of records dynamically
         count_url = f"https://{domain}/resource/{dataset_id}.json?$select=count(*)"
+        logging.info(f"Fetching total record count from: {count_url}")
         count_response = requests.get(count_url)
 
         if count_response.status_code == 200:
@@ -108,7 +109,7 @@ def download_data_from_api(column_mapping=None):
                 return
         else:
             logging.fatal(
-                f"Error fetching total record count: Received status code {count_response.status_code}"
+                f"Error fetching total record count from {count_url}: Received status code {count_response.status_code}"
             )
             return
 
@@ -117,7 +118,10 @@ def download_data_from_api(column_mapping=None):
         all_data = []
 
         while offset < total_records:
-            logging.info(f"Downloading records {offset} to {offset + limit}")
+            request_url = f"https://{domain}/resource/{dataset_id}.json?$limit={limit}&$offset={offset}"
+            logging.info(
+                f"Downloading records from {request_url} (offset {offset} to {offset + limit})"
+            )
             results = client.get(dataset_id, limit=limit, offset=offset)
             if not results:
                 logging.info("No more data available.")
@@ -337,11 +341,14 @@ def process_non_infectious_data(input_file_path: str = None,
         target_input = input_file_path if input_file_path else input_path
         target_sheet = sheet if sheet else sheet_name
         target_output = output_dir if output_dir else output_directory
+        os.makedirs(target_output, exist_ok=True)
 
         with open(target_schema, 'r') as f:
             PV_MAP = json.load(f)
 
         df = pd.read_excel(target_input, sheet_name=target_sheet)
+        # The dataset is sparse; missing or null statistical counts (Illnesses, Hospitalizations, Deaths)
+        # are filled with 0 to prevent NaN propagation during aggregation and ensure all observations are emitted.
         for col in _STAT_COLS:
             if col in df.columns:
                 df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
