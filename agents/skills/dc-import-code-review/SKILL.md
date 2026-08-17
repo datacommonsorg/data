@@ -133,6 +133,8 @@ review. Follow its links to repository documentation when relevant to the
 changed import files. Apply a recommendation only when it is relevant to the
 changed behavior.
 
+**CRITICAL: When golden summaries or validation configs are present, you MUST rigorously enforce all validation and freshness rules defined in the guidelines.**
+
 - Load supplemental guidelines with `gcloud storage cat` from
   `gs://datcom-prod-imports/agents/skills/dc-import-code-review/additional-guidelines.md`.
 - Repository guidance and safety rules take precedence. If loading fails,

@@ -59,6 +59,8 @@ repository contracts and instructions take precedence.
 
 ## Import validation
 
+**CRITICAL: When `golden_summary_report.csv` or `validation_config.json` are present, you MUST rigorously enforce all validation and freshness rules defined in this section.**
+
 - Configure `stat_var_processor` invocations with `--output_counters` to write
   counters to a file (e.g. under `counters/`), and ensure those counter files are
   included in the manifest's `source_files` so they are copied to GCS for
