@@ -60,6 +60,13 @@ When reviewing `validation_config*.json` or a manifest change to
 
 - [Import validation framework](../../../../tools/import_validation/README.md)
 - [Validation configuration and golden checks](../../../../tools/import_validation/Validations.md)
+- Resolve local `GOLDENS_CHECK` paths relative to the validation config file
+  passed to the runner, and verify that every `golden_files` path or glob
+  matches at least one intended golden file.
+- For auto-refresh, use the generated
+  `<import>/<ImportName>/<version>/input<N>/validation/merged_validation_config.json`
+  as the base. For example, reference `<import>/golden_data/golden_summary_report.csv`
+  as `../../../../golden_data/golden_summary_report.csv`.
 
 ## Download and processing reliability
 
