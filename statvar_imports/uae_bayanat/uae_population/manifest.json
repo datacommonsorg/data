@@ -5,7 +5,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://admin.bayanat.ae/Dataset/DownloadDatasetResource?fileId=26585eaf-9a9c-486d-b773-fc51ef0204c9&resourceID=11243",
+            "provenance_url": "https://bayanat.ae/api/DatasetResources/DownloadSingle?resourceID=FT1CGOdcLYt6KdUJnFHWwOdTWpeao-LX539QkMLeAKA&fileName=UAE%20Population%20By%20Emirates%20Nationality%20and%20gender",
             "provenance_description": "UAE_Population statical data",
             "scripts": [
                 "uae_download.py",
