@@ -20,6 +20,7 @@ import pandas as pd
 from absl import app, flags, logging
 from sodapy import Socrata
 import requests
+import re
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -92,7 +93,8 @@ def download_data_from_api(column_mapping=None):
         # Get the total number of records dynamically
         count_url = f"https://{domain}/resource/{dataset_id}.json?$select=count(*)"
         logging.info(f"Fetching total record count from: {count_url}")
-        count_response = requests.get(count_url)
+        # add a timeout to the request to avoid hanging indefinitely
+        count_response = requests.get(count_url, timeout=30)
 
         if count_response.status_code == 200:
             total_records_data = count_response.json()
@@ -163,7 +165,8 @@ def fix_date_format(df: pd.DataFrame) -> pd.DataFrame:
         df.drop(columns=['Year', 'Month'], inplace=True)
         return df
     except Exception as e:
-        logging.error(f"Error while generating observationDate : {e}")
+        logging.fatal(f"Error while generating observationDate : {e}")
+        raise
 
 
 def generate_aggregates(df: pd.DataFrame,
@@ -180,7 +183,7 @@ def generate_aggregates(df: pd.DataFrame,
     """
     try:
         logging.info(f"Generating aggregates grouped by: {groupby_cols}")
-        country_stat_df = df[df['observationAbout'].str.contains('country')]
+        country_stat_df = df[df['observationAbout'].str.contains('country', na=False)]
         cols = groupby_cols + _STAT_COLS
         country_stat_df = country_stat_df[cols]
         country_stat_df = country_stat_df.groupby(groupby_cols,
@@ -191,7 +194,7 @@ def generate_aggregates(df: pd.DataFrame,
                                                   })
 
         # aggreagte stats for US states and territories
-        aggregate_df = df[~(df['observationAbout'].str.contains('country'))]
+        aggregate_df = df[~(df['observationAbout'].str.contains('country', na=False))]
         aggregate_df = aggregate_df.groupby(groupby_cols, as_index=False).agg({
             'Illnesses': 'sum',
             'Hospitalizations': 'sum',
@@ -223,6 +226,7 @@ def generate_aggregates(df: pd.DataFrame,
         return aggregate_df
     except Exception as e:
         logging.fatal(f"An error occurred during aggregate generation: {e}")
+        raise
 
 
 def make_stat_vars(row, PV_MAP):
@@ -290,6 +294,7 @@ def make_stat_vars(row, PV_MAP):
         return row
     except Exception as e:
         logging.fatal(f"An error occurred, while generating statvar: {e}")
+        raise
 
 
 def write_svdicts_to_file(dict_list, file_path):
@@ -302,18 +307,24 @@ def write_svdicts_to_file(dict_list, file_path):
     """
     try:
         logging.info(f"writing svs in a file .. ")
-        unique_dict = [
-            dict(tup) for tup in {tuple(d.items()) for d in dict_list}
-        ]
-        f = open(file_path, "w")
-        for udict in unique_dict:
-            for p, v in udict.items():
-                f.write(p + ": " + v + "\n")
-            f.write('\n')
-        f.close()
+        # Deduplicate deterministically using JSON with sorted keys
+        seen = set()
+        unique_dicts = []
+        for d in dict_list:
+            sd = json.dumps(d, sort_keys=True)
+            if sd not in seen:
+                seen.add(sd)
+                unique_dicts.append(d)
+
+        with open(file_path, "w") as f:
+            for udict in unique_dicts:
+                for p, v in udict.items():
+                    f.write(p + ": " + str(v) + "\n")
+                f.write('\n')
 
     except Exception as e:
         logging.fatal(f"An error occurred, while writing to file . : {e}")
+        raise
 
 
 def fix_place_names(clean_df):
@@ -333,7 +344,8 @@ def fix_place_names(clean_df):
         clean_df.drop(columns=['State'], inplace=True)
         return clean_df
     except Exception as e:
-        logging.error(f"Error while fixing place name : {e}")
+        logging.fatal(f"Error while fixing place name : {e}")
+        raise
 
 
 def process_non_infectious_data(input_file_path: str = None,
@@ -446,6 +458,7 @@ def process_non_infectious_data(input_file_path: str = None,
             f.write(_TEMPLATE_MCF)
     except Exception as e:
         logging.fatal(f"Error while processing : {e}")
+        raise
 
 
 def main(_) -> None:
