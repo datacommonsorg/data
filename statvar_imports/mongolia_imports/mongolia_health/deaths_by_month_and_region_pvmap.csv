@@ -117,6 +117,7 @@ Region,observationAbout,{Data},,,,,,
 2025-06,observationDate,2025-06,value,{Number},populationType,MortalityEvent,measuredProperty,count
 2025-07,observationDate,2025-07,value,{Number},populationType,MortalityEvent,measuredProperty,count
 2025-08,observationDate,2025-08,value,{Number},populationType,MortalityEvent,measuredProperty,count
+2025-8,observationDate,2025-08,value,{Number},populationType,MortalityEvent,measuredProperty,count
 2025-09,observationDate,2025-09,value,{Number},populationType,MortalityEvent,measuredProperty,count
 2025-10,observationDate,2025-10,value,{Number},populationType,MortalityEvent,measuredProperty,count
 2025-11,observationDate,2025-11,value,{Number},populationType,MortalityEvent,measuredProperty,count
