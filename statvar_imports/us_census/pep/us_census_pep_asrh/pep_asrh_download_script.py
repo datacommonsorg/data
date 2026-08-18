@@ -61,6 +61,7 @@ def _check_and_add_url(url_to_check: str, key: str, files_to_download: dict):
             allow_redirects=True,
             verify=False,
             headers={"User-Agent": "Mozilla/5.0"},
+            timeout=(10, 60),
         )
         if check_url.status_code == 200:
             files_to_download[key].append(url_to_check)
@@ -131,10 +132,12 @@ def download_files(files_to_download_dict:dict, download_base_path: str):
             url,
             verify="/etc/ssl/certs/ca-certificates.crt",
             headers={"User-Agent": "Mozilla/5.0"},
+            timeout=(10, 60),
           )
+        response.raise_for_status()
       except requests.exceptions.RequestException as e:
         logging.fatal(f"Error downloading {url}: {e}")
-        continue
+        raise e
       
       # Save the file content
       with open(output_file_path, "wb") as f:
