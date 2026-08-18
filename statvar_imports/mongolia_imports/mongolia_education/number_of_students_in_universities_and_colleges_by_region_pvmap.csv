@@ -1,6 +1,6 @@
 key,p1,v1,p2,v2,,
 Sex,populationType,Student,schoolGradeLevel,UniversityEducation,measuredProperty,count
-Aimag,observationAbout,{Data},,,,
+Region,observationAbout,{Data},,,,
 Male,gender,Male,,,,
 Female,gender,Female,,,,
 ,,,,,,

@@ -1,5 +1,5 @@
 key,p1,v1,p2,v2,,,,
-Aimag,observationAbout,{Data},schoolGradeLevel,Kindergarten,populationType,School,measuredProperty,count
+Region,observationAbout,{Data},schoolGradeLevel,Kindergarten,populationType,School,measuredProperty,count
 2000,observationDate,2000,value,{Number},,,,
 2001,observationDate,2001,value,{Number},,,,
 2002,observationDate,2002,value,{Number},,,,
