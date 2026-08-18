@@ -18,8 +18,8 @@
             }
         },
         {
-            "rule_id": "check_goldens_output_csv",
-            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "rule_id": "check_goldens_observations",
+            "description": "Verifies that prominent place DCIDs in golden_observations.csv are present in the output dataset",
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/golden_observations.csv",
