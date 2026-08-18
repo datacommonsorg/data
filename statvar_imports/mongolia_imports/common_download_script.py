@@ -57,11 +57,21 @@ HEALTH_TABLES = [
     {"url": "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Health/DT_NSO_2100_015V1.px", "filename": "infant_mortality_per_1000_live_births_by_month_region.csv"},
     {"url": "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Health/DT_NSO_2100_017V3.px", "filename": "number_of_mothers_delivered_child_by_month_region.csv"},
     {"url": "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Births%2C%20deaths/DT_NSO_2100_018V5.px", "filename": "live_births_by_month_region.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Health/DT_NSO_2100_005V3.px", "filename": "number_of_hospital_beds_by_type.csv"},
+    {
+        "url": "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Health/DT_NSO_2100_005V3.px",
+        "filename": "number_of_hospital_beds_by_type.csv",
+        "query": [{
+            "code": "Бүс",
+            "selection": {
+                "filter": "item",
+                "values": ["0"]
+            }
+        }]
+    },
     {"url": "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Births%2C%20deaths/DT_NSO_2100_027V2.px", "filename": "deaths_by_month_and_region.csv"}
 ]
 
-def fetch_and_save_data(url, csv_filepath):
+def fetch_and_save_data(url, csv_filepath, query=None):
     """
     Fetches exactly formatted CSV data from the PxWeb API.
     """
@@ -69,7 +79,7 @@ def fetch_and_save_data(url, csv_filepath):
     
     # Request PxWeb to output as CSV pre-pivoted by period
     pxweb_json_payload = {
-        "query": [],
+        "query": query or [],
         "response": {
             "format": "csv"
         }
@@ -126,7 +136,7 @@ def main(_):
     os.makedirs(health_dir, exist_ok=True)
     for table in HEALTH_TABLES:
         filepath = os.path.join(health_dir, table['filename'])
-        fetch_and_save_data(table['url'], filepath)
+        fetch_and_save_data(table['url'], filepath, table.get('query'))
 
     logging.info("All tasks completed")
 
