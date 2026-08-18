@@ -1,430 +1,430 @@
-"observationPeriods","ScalingFactors","StatVar","MeasurementMethods","NumPlaces","Units","MinDate"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CRC","[]","1","[CRC]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NGN","[]","1","[NGN]","1973"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PAB","[]","1","[PAB]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PKR","[]","2","[PKR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ANG","[]","3","[ANG]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SGD","[]","1","[SGD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ROL","[]","1","[ROL]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RON","[]","1","[RON]","2005-01"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TTD","[]","1","[TTD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SRD","[]","1","[SRD]","2004"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SRG","[]","1","[SRG]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CHF","[]","2","[CHF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DJF","[]","1","[DJF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KYD","[]","1","[KYD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MDL","[]","1","[MDL]","1994-05"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BOB","[]","1","[BOB]","1987"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AMD","[]","1","[AMD]","1993-02"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LBP","[]","1","[LBP]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MDC","[]","1","[MDC]","1993"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TRL","[]","1","[TRL]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VND","[]","1","[VND]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GYD","[]","1","[GYD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BOP","[]","1","[BOP]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DKK","[]","3","[DKK]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TRY","[]","1","[TRY]","2005"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MDR","[]","1","[MDR]","1991"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TJS","[]","1","[TJS]","1990"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AED","[]","1","[AED]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_EUR","[]","35","[EUR]","1999"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ETB","[]","2","[ETB]","1976"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LAK","[]","1","[LAK]","1979-02"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LAJ","[]","1","[LAJ]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ETD","[]","2","[ETD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BND","[]","1","[BND]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VUV","[]","1","[VUV]","1981-01"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SOS","[]","1","[SOS]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XOF","[]","8","[XOF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_QAR","[]","1","[QAR]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MZN","[]","1","[MZN]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GNF","[]","1","[GNF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SEK","[]","1","[SEK]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ALL","[]","1","[ALL]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KWD","[]","1","[KWD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LYD","[]","1","[LYD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PHP","[]","1","[PHP]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BDT","[]","1","[BDT]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BMD","[]","1","[BMD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_THB","[]","1","[THB]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CNY","[]","1","[CNY]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XPF","[]","2","[XPF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IRR","[]","1","[IRR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_COP","[]","1","[COP]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ISK","[]","1","[ISK]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GWP","[]","1","[GWP]","1975"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ESP","[]","1","[ESP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PGK","[]","1","[PGK]","1975-02"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NZD","[]","2","[NZD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TOP","[]","1","[TOP]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BAM","[]","1","[BAM]","1990"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_EGP","[]","1","[EGP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MAD","[]","1","[MAD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UGX","[]","1","[UGX]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HNL","[]","1","[HNL]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CDF","[]","1","[CDF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SCR","[]","1","[SCR]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BBD","[]","1","[BBD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TPE","[]","1","[TPE]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MXN","[]","1","[MXN]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_FJD","[]","1","[FJD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ERN","[]","1","[ERN]","1997"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SDG","[]","1","[SDG]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SLL","[]","1","[SLL]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SLE","[]","1","[SLE]","2021"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MYR","[]","1","[MYR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DOP","[]","1","[DOP]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GMD","[]","1","[GMD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AIF","[]","1","[AIF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IQD","[]","1","[IQD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TMM","[]","1","[TMM]","1993-11"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PEI","[]","1","[PEI]","1985"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SKK","[]","1","[SKK]","1993"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_WST","[]","1","[WST]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_FRF","[]","9","[FRF]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PEN","[]","1","[PEN]","1991-01"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GIP","[]","1","[GIP]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MUR","[]","1","[MUR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NAD","[]","1","[NAD]","1993-01"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GTQ","[]","1","[GTQ]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CLP","[]","1","[CLP]","1975"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TND","[]","1","[TND]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SAR","[]","1","[SAR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CLE","[]","1","[CLE]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TMT","[]","1","[TMT]","2002"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PES","[]","1","[PES]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SBD","[]","1","[SBD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_JPY","[]","1","[JPY]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HUF","[]","1","[HUF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_INR","[]","1","[INR]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KRW","[]","1","[KRW]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MVR","[]","1","[MVR]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MWK","[]","1","[MWK]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BIF","[]","1","[BIF]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CZK","[]","1","[CZK]","1993"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LAK","[]","1","[LAK]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IEP","[]","1","[IEP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LKR","[]","1","[LKR]","1972"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BND","[]","1","[BND]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VUV","[]","1","[VUV]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SOS","[]","1","[SOS]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ETB","[]","1","[ETB]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XCD","[]","9","[XCD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MMK","[]","1","[MMK]","1989"
-"[P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XPGR","[]","1","[XPGR]","1970-01"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_YER","[]","1","[YER]","1989"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SZL","[]","1","[SZL]","1970-01"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrencyUSD","[]","12","[USD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ALL","[]","1","[ALL]","1970"
-"[P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XCG","[]","2","[XCG]","2025-10"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PTE","[]","3","[PTE]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MDL","[]","1","[MDL]","1990"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BOB","[]","1","[BOB]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AMD","[]","1","[AMD]","1990"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KHR","[]","1","[KHR]","1980"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GYD","[]","1","[GYD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IDR","[]","2","[IDR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CYP","[]","1","[CYP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TZS","[]","1","[TZS]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AUD","[]","6","[AUD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KHO","[]","1","[KHO]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_EUR","[]","34","[EUR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SYP","[]","1","[SYP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NOK","[]","1","[NOK]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BWP","[]","1","[BWP]","1976"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LBP","[]","1","[LBP]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TRY","[]","1","[TRY]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RWF","[]","1","[RWF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TOP","[]","1","[TOP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KGS","[]","1","[KGS]","1993-05"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PGK","[]","1","[PGK]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MAD","[]","1","[MAD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DZD","[]","1","[DZD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RUR","[]","9","[RUR]","1992"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MLF","[]","1","[MLF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ERN","[]","1","[ERN]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XAF","[]","6","[XAF]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ATS","[]","1","[ATS]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PHP","[]","1","[PHP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BUK","[]","1","[BUK]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CNY","[]","1","[CNY]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UZS","[]","1","[UZS]","1994-07"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MKD","[]","2","[MKD]","1993-12"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_COP","[]","1","[COP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RUB","[]","1","[RUB]","1998"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BMD","[]","1","[BMD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_OMR","[]","1","[OMR]","1972-02"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_WST","[]","1","[WST]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_OMS","[]","1","[OMS]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NAD","[]","1","[NAD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KES","[]","1","[KES]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UYP","[]","1","[UYP]","1975-01"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SUR","[]","8","[SUR]","1990"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ARA","[]","1","[ARA]","1985"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CVE","[]","1","[CVE]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UYU","[]","1","[UYU]","1993"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CLP","[]","1","[CLP]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ARY","[]","1","[ARY]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GTQ","[]","1","[GTQ]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NLG","[]","1","[NLG]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BTN","[]","1","[BTN]","1974"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SVC","[]","1","[SVC]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ARP","[]","1","[ARP]","1983"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PEN","[]","1","[PEN]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ARS","[]","1","[ARS]","1992"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TMT","[]","1","[TMT]","1990"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BSD","[]","1","[BSD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZAR","[]","5","[ZAR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_STN","[]","1","[STN]","1977-02"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TND","[]","1","[TND]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SLE","[]","1","[SLE]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RSD","[]","1","[RSD]","2006"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DOP","[]","1","[DOP]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UYN","[]","1","[UYN]","1975"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CUP","[]","1","[CUP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UYF","[]","1","[UYF]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TWD","[]","1","[TWD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NIO","[]","1","[NIO]","1991"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XMCF","[]","1","[XMCF]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRC","[]","1","[BRC]","1986-02"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRE","[]","1","[BRE]","1990-02"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_YUN","[]","1","[YUN]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NIG","[]","1","[NIG]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MGF","[]","1","[MGF]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SSP","[]","1","[SSP]","2008"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BGN","[]","1","[BGN]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRB","[]","1","[BRB]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_STE","[]","1","[STE]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KZT","[]","1","[KZT]","1990"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_STD","[]","1","[STD]","1978"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZAL","[]","1","[ZAL]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRL","[]","1","[BRL]","1994-01"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BHD","[]","1","[BHD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRN","[]","1","[BRN]","1989-02"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRR","[]","1","[BRR]","1993-01"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HTG","[]","1","[HTG]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CSD","[]","1","[CSD]","2003"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AOA","[]","1","[AOA]","1999-01"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NHF","[]","1","[NHF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AFN","[]","1","[AFN]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PLN","[]","1","[PLN]","1995"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AOR","[]","1","[AOR]","1995"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AOS","[]","1","[AOS]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NIC","[]","1","[NIC]","1988"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MGA","[]","1","[MGA]","2005"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CSK","[]","1","[CSK]","1971"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PLZ","[]","1","[PLZ]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AOK","[]","1","[AOK]","1977"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BIF","[]","1","[BIF]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AON","[]","1","[AON]","1990-02"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HUF","[]","1","[HUF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KGS","[]","1","[KGS]","1990"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MYAD","[]","1","[MYAD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DZD","[]","1","[DZD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_EEK","[]","1","[EEK]","1992"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GIP","[]","1","[GIP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LTL","[]","1","[LTL]","1993-02"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SAR","[]","2","[SAR]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MVQ","[]","1","[MVQ]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MVR","[]","1","[MVR]","1981-01"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XAF","[]","6","[XAF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KHR","[]","1","[KHR]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IDR","[]","1","[IDR]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TZS","[]","1","[TZS]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AUD","[]","4","[AUD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ILP","[]","2","[ILP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ILS","[]","2","[ILS]","1985-02"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ILR","[]","2","[ILR]","1981"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GHS","[]","1","[GHS]","2007-01"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KPW","[]","1","[KPW]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GHR","[]","1","[GHR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CAD","[]","1","[CAD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LSL","[]","1","[LSL]","1980"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RWF","[]","1","[RWF]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MUR","[]","1","[MUR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_JOD","[]","1","[JOD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HKD","[]","1","[HKD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BWP","[]","1","[BWP]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VEB","[]","1","[VEB]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VED","[]","1","[VED]","2018"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ECS","[]","1","[ECS]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZMK","[]","1","[ZMK]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CVE","[]","1","[CVE]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VEF","[]","1","[VEF]","2008"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UYU","[]","1","[UYU]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_OMR","[]","1","[OMR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZMW","[]","1","[ZMW]","2013"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VES","[]","1","[VES]","1970-01"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MTL","[]","1","[MTL]","1970-01"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ARS","[]","1","[ARS]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MTP","[]","1","[MTP]","1972"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LRD","[]","1","[LRD]","1970-01"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KES","[]","1","[KES]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GHC","[]","1","[GHC]","1979"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BTN","[]","1","[BTN]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UZS","[]","1","[UZS]","1990"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MRU","[]","1","[MRU]","2018"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MKD","[]","1","[MKD]","1990"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PYG","[]","1","[PYG]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RUB","[]","1","[RUB]","1990"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_JMD","[]","2","[JMD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AZM","[]","1","[AZM]","1993-03"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AZN","[]","1","[AZN]","2006-01"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NIO","[]","1","[NIO]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SSP","[]","1","[SSP]","2008"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GEL","[]","1","[GEL]","1995-10"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GEK","[]","1","[GEK]","1994"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MRO","[]","1","[MRO]","1973"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UAH","[]","1","[UAH]","1996-02"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UAK","[]","1","[UAK]","1992-12"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRL","[]","1","[BRL]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BSD","[]","1","[BSD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_STN","[]","1","[STN]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LNR","[]","1","[LNR]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZAR","[]","1","[ZAR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KMF","[]","1","[KMF]","1975-02"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TWD","[]","1","[TWD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RSD","[]","1","[RSD]","1990"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CUP","[]","1","[CUP]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NGN","[]","1","[NGN]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PKR","[]","1","[PKR]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RON","[]","1","[RON]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CRC","[]","1","[CRC]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BZD","[]","1","[BZD]","1974"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MOP","[]","1","[MOP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BZH","[]","1","[BZH]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrencyUSD","[]","13","[USD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SRD","[]","1","[SRD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TTD","[]","1","[TTD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ANG","[]","3","[ANG]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MNT","[]","1","[MNT]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GBP","[]","6","[GBP]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PLN","[]","1","[PLN]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BYN","[]","1","[BYN]","2017"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AOA","[]","1","[AOA]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BYB","[]","1","[BYB]","1992"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NPR","[]","1","[NPR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AWG","[]","1","[AWG]","1986"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MGA","[]","1","[MGA]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BYR","[]","1","[BYR]","2000-01"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CSK","[]","1","[CSK]","1971"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VED","[]","1","[VED]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZWR","[]","1","[ZWR]","2008"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XSS","[]","1","[XSS]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GRD","[]","1","[GRD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SIB","[]","1","[SIB]","1991"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZWL","[]","1","[ZWL]","2009"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_YUN","[]","2","[YUN]","1990"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZWN","[]","1","[ZWN]","2006"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_YUM","[]","2","[YUM]","1993"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KZT","[]","1","[KZT]","1993-11"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZMW","[]","1","[ZMW]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AFN","[]","1","[AFN]","2002-02"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AFA","[]","1","[AFA]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HTG","[]","1","[HTG]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SIT","[]","1","[SIT]","1992"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BHD","[]","2","[BHD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VNN","[]","1","[VNN]","1978"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KYD","[]","1","[KYD]","1971-01"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GHS","[]","1","[GHS]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KPW","[]","1","[KPW]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VND","[]","1","[VND]","1985-08"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VNC","[]","1","[VNC]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ILS","[]","1","[ILS]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ADP","[]","1","[ADP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DKK","[]","3","[DKK]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CAD","[]","1","[CAD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LSL","[]","1","[LSL]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZWC","[]","1","[ZWC]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_YUD","[]","1","[YUD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZWD","[]","1","[ZWD]","1980"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HKD","[]","1","[HKD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BGL","[]","1","[BGL]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZWG","[]","1","[ZWG]","2024-04"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BGN","[]","1","[BGN]","1999-01"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TJR","[]","1","[TJR]","1995-02"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TJS","[]","1","[TJS]","2001"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_JOD","[]","1","[JOD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AED","[]","1","[AED]","1973"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AZN","[]","1","[AZN]","1990"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HRD","[]","1","[HRD]","1992"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GEL","[]","1","[GEL]","1990"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SGD","[]","1","[SGD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PAB","[]","1","[PAB]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DJF","[]","1","[DJF]","1977-02"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UAH","[]","1","[UAH]","1990"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HRK","[]","1","[HRK]","1994-02"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CHF","[]","2","[CHF]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ITL","[]","3","[ITL]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KWD","[]","1","[KWD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LYD","[]","1","[LYD]","1971"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GNS","[]","1","[GNS]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_THB","[]","1","[THB]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MRU","[]","1","[MRU]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XPF","[]","2","[XPF]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BDT","[]","1","[BDT]","1972"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LYP","[]","1","[LYP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BEF","[]","1","[BEF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_JMD","[]","1","[JMD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PYG","[]","1","[PYG]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ISJ","[]","1","[ISJ]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ISK","[]","1","[ISK]","1981"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MZE","[]","1","[MZE]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SEK","[]","1","[SEK]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MOP","[]","1","[MOP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XOF","[]","9","[XOF]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BZD","[]","1","[BZD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IRR","[]","1","[IRR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MZM","[]","1","[MZM]","1980"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GNF","[]","1","[GNF]","1986"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_QAR","[]","1","[QAR]","1973-02"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GNI","[]","1","[GNI]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MZN","[]","1","[MZN]","2006"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SDD","[]","1","[SDD]","1992"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SDG","[]","2","[SDG]","2007"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZRN","[]","1","[ZRN]","1993-01"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MYR","[]","1","[MYR]","1970-01"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KMF","[]","1","[KMF]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IQD","[]","1","[IQD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GMD","[]","1","[GMD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SDP","[]","1","[SDP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZRZ","[]","1","[ZRZ]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NZD","[]","2","[NZD]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CZK","[]","1","[CZK]","1990"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LKR","[]","1","[LKR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DEM","[]","2","[DEM]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BAM","[]","1","[BAM]","1997"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_EGP","[]","1","[EGP]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SYP","[]","1","[SYP]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NOK","[]","1","[NOK]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BAN","[]","1","[BAN]","1995"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MMK","[]","1","[MMK]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BBD","[]","1","[BBD]","1973-02"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MXN","[]","1","[MXN]","1993"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SZL","[]","1","[SZL]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UGX","[]","1","[UGX]","1987"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HNL","[]","1","[HNL]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CDF","[]","1","[CDF]","1997"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_YER","[]","1","[YER]","1989"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MXP","[]","1","[MXP]","1970"
-"[P1Y]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LVR","[]","1","[LVR]","1992"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_FJD","[]","1","[FJD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LVL","[]","1","[LVL]","1992"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SCR","[]","1","[SCR]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XCD","[]","8","[XCD]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UGS","[]","1","[UGS]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_JPY","[]","1","[JPY]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GBP","[]","4","[GBP]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BYN","[]","1","[BYN]","1990"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SBD","[]","1","[SBD]","1977"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AWG","[]","1","[AWG]","1970"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MNT","[]","1","[MNT]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LTT","[]","1","[LTT]","1992"
-"[P1Y]","[]","StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NPR","[]","1","[NPR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DDM","[]","1","[DDM]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_INR","[]","2","[INR]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KRW","[]","1","[KRW]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MWP","[]","1","[MWP]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_FIM","[]","1","[FIM]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LUF","[]","1","[LUF]","1970"
-"[P1Y, P1M]","[]","LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MWK","[]","1","[MWK]","1971"
+StatVar,NumPlaces,NumObservations,MinValue,MaxValue,NumObservationsDates,MinDate,MaxDate,MeasurementMethods,Units,ScalingFactors,observationPeriods
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CRC,1,731,6.625,689.03267,731,1970,2026-03,[],[CRC],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NGN,1,620,0.52989,1670.77643,620,1973,2026-03,[],[NGN],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PAB,1,56,1.0,1.0,56,1970,2025,[],[PAB],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PKR,2,736,4.7619,297.69204,731,1970,2026-03,[],[PKR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ANG,3,891,1.79,1.93228,692,1970,2026-03,[],[ANG],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SGD,1,56,1.24968,3.06122,56,1970,2025,[],[SGD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ROL,1,456,5.5E-4,33200.07083,456,1970,2005,[],[ROL],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RON,1,275,2.2687,5.014,275,2005-01,2026-03,[],[RON],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TTD,1,731,1.84211,6.7832,731,1970,2026-03,[],[TTD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SRD,1,289,2.715,39.04788,289,2004,2026-03,[],[SRD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SRG,1,95,0.00178,2601.33333,95,1970,2003,[],[SRG],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CHF,2,112,0.83135,4.37295,56,1970,2025,[],[CHF],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DJF,1,56,177.72099,214.392,56,1970,2025,[],[DJF],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KYD,1,56,0.79936,0.83883,56,1970,2025,[],[KYD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MDL,1,402,3.66735,20.31329,402,1994-05,2026-03,[],[MDL],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BOB,1,498,2.07035,8.09,498,1987,2026-03,[],[BOB],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AMD,1,418,2.85,590.4,418,1993-02,2026-03,[],[AMD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LBP,1,671,2.2267,89500.0,671,1970,2026-03,[],[LBP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MDC,1,2,732.24637,2699.46761,2,1993,1994,[],[MDC],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TRL,1,455,1.0E-5,1507226.417,455,1970,2004-12,[],[TRL],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VND,1,56,1.0,25979.03906,56,1970,2025,[],[VND],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GYD,1,731,1.92539,208.5,731,1970,2026-03,[],[GYD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BOP,1,210,1.0E-5,1851601.264,210,1970,1986-01,[],[BOP],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DKK,3,168,5.09813,10.59639,56,1970,2025,[],[DKK],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TRY,1,276,1.17161,44.155,276,2005,2026-03,[],[TRY],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MDR,1,2,7.64469,78.08515,2,1991,1992,[],[MDR],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TJS,1,36,3.0E-5,11.30885,36,1990,2025,[],[TJS],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AED,1,56,3.671,4.7619,56,1970,2025,[],[AED],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_EUR,35,9981,0.63413,1.1721,354,1999,2026-03,[],[EUR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ETB,2,933,2.07,155.641,652,1976,2026-03,[],[ETB],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LAK,1,360,10.0,21810.0,360,1979-02,2026-03,[],[LAK],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LAJ,1,10,141.81526,659.31584,10,1970,1979,[],[LAJ],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ETD,2,159,2.07,2.5022,80,1970,1976-01,[],[ETD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BND,1,731,1.20877,3.06122,731,1970,2026-03,[],[BND],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VUV,1,575,75.00768,148.65,575,1981-01,2026-03,[],[VUV],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SOS,1,352,6.17,33593.26923,352,1970,2026-03,[],[SOS],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XOF,8,448,0.37716,732.39769,56,1970,2025,[],[XOF],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_QAR,1,56,3.64,4.7619,56,1970,2025,[],[QAR],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MZN,1,56,0.02452,69.465,56,1970,2025,[],[MZN],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GNF,1,56,92.23576,9795.70583,56,1970,2025,[],[GNF],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SEK,1,56,4.15219,10.61016,56,1970,2025,[],[SEK],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ALL,1,443,5.0,179.07,443,1970,2026-03,[],[ALL],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KWD,1,56,0.26883,0.35714,56,1970,2025,[],[KWD],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LYD,1,56,0.28073,5.30257,56,1970,2025,[],[LYD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PHP,1,731,3.9,59.4069,731,1970,2026-03,[],[PHP],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BDT,1,56,6.34618,121.92084,56,1970,2025,[],[BDT],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BMD,1,730,1.0,1.0,730,1970,2026-03,[],[BMD],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_THB,1,56,20.3361,44.4319,56,1970,2025,[],[THB],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CNY,1,731,1.4525,8.7028,731,1970,2026-03,[],[CNY],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XPF,2,112,76.82856,163.36756,56,1970,2025,[],[XPF],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IRR,1,56,67.64134,733951.5625,56,1970,2025,[],[IRR],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_COP,1,455,17.9,4922.3,455,1970,2026-03,[],[COP],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ISK,1,56,0.88,137.95803,56,1970,2025,[],[ISK],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GWP,1,234,25.54325,9582.90616,234,1975,1993-12,[],[GWP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ESP,1,377,55.786,183.258,377,1970,1998-12,[],[ESP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PGK,1,664,0.64358,4.28633,664,1975-02,2026-03,[],[PGK],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NZD,2,112,0.7154,2.37875,56,1970,2025,[],[NZD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TOP,1,731,0.67173,2.43838,731,1970,2026-03,[],[TOP],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BAM,1,36,1.1E-4,2.18566,36,1990,2025,[],[BAM],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_EGP,1,56,0.3913,49.22776,56,1970,2025,[],[EGP],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MAD,1,731,3.74225,11.8808,731,1970,2026-03,[],[MAD],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UGX,1,56,0.07021,3757.26253,56,1970,2025,[],[UGX],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HNL,1,56,2.0,25.95267,56,1970,2025,[],[HNL],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CDF,1,56,0.0,2772.66284,56,1970,2025,[],[CDF],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SCR,1,56,4.76197,17.61652,56,1970,2025,[],[SCR],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BBD,1,56,1.92128,2.05323,56,1970,2025,[],[BBD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TPE,1,68,1.0,1.0,68,1970,1976,[],[TPE],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MXN,1,56,0.0125,21.48561,56,1970,2025,[],[MXN],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_FJD,1,56,0.79422,2.29903,56,1970,2025,[],[FJD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ERN,1,379,6.60892,15.375,379,1997,2026-03,[],[ERN],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SDG,1,53,3.5E-4,2209.63989,53,1970,2025,[],[SDG],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SLL,1,678,0.76307,14047.64979,678,1970,2023,[],[SLL],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SLE,1,68,10.18776,23.84333,68,2021,2026-03,[],[SLE],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MYR,1,56,2.17688,4.57643,56,1970,2025,[],[MYR],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DOP,1,503,1.0,63.8935,503,1970,2026-03,[],[DOP],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GMD,1,56,1.7024,71.28938,56,1970,2025,[],[GMD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AIF,1,93,177.721,214.392,93,1970,1977-01,[],[AIF],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IQD,1,56,1.47033,2394.31809,56,1970,2025,[],[IQD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TMM,1,113,1.98,11436.29032,113,1993-11,2008,[],[TMM],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PEI,1,78,1.0E-5,772500.0,78,1985,1991,[],[PEI],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SKK,1,197,21.36142,50.957,197,1993,2008-01,[],[SKK],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_WST,1,731,0.60658,3.54484,731,1970,2026-03,[],[WST],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_FRF,9,1650,1.97504,10.1115,377,1970,1998-12,[],[FRF],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PEN,1,457,0.53,4.10748,457,1991-01,2026-03,[],[PEN],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GIP,1,56,0.40039,0.8113,56,1970,2025,[],[GIP],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MUR,1,56,5.33853,46.41468,56,1970,2025,[],[MUR],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NAD,1,431,3.06946,19.0527,431,1993-01,2026-03,[],[NAD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GTQ,1,731,1.0,8.36792,731,1970,2026-03,[],[GTQ],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CLP,1,665,2.225,999.8465,665,1975,2026-03,[],[CLP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TND,1,731,0.3783,3.2984,731,1970,2026-03,[],[TND],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SAR,1,56,3.32674,4.5,56,1970,2025,[],[SAR],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CLE,1,66,0.00988,592.82626,66,1970,1975-01,[],[CLE],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TMT,1,24,1.04,3.5,24,2002,2025,[],[TMT],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PES,1,195,0.0,3466.85417,195,1970,1984-12,[],[PES],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SBD,1,56,0.69809,8.45484,56,1970,2025,[],[SBD],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_JPY,1,56,79.79046,360.0,56,1970,2025,[],[JPY],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HUF,1,731,31.7855,426.1,731,1970,2026-03,[],[HUF],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_INR,1,56,7.49194,87.15845,56,1970,2025,[],[INR],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KRW,1,56,310.55583,1422.44083,56,1970,2025,[],[KRW],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MVR,1,56,3.93,15.41568,56,1970,2025,[],[MVR],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MWK,1,56,0.80156,1748.83997,56,1970,2025,[],[MWK],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BIF,1,731,78.75,2983.08,731,1970,2026-03,[],[BIF],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CZK,1,432,14.92,41.125,432,1993,2026-03,[],[CZK],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LAK,1,56,1.41802,21721.69336,56,1970,2025,[],[LAK],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IEP,1,377,0.38153,1.06048,377,1970,1998-12,[],[IEP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LKR,1,620,5.97032,363.394,620,1972,2026-03,[],[LKR],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BND,1,56,1.24957,3.06122,56,1970,2025,[],[BND],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VUV,1,56,68.29212,145.3125,56,1970,2025,[],[VUV],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SOS,1,56,6.2815,31558.90548,56,1970,2025,[],[SOS],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ETB,1,56,2.07,137.16136,56,1970,2025,[],[ETB],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XCD,9,5890,1.83137,2.72258,731,1970,2026-03,[],[XCD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MMK,1,172,25.67565,4400.0,172,1989,2026-03,[],[MMK],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XPGR,1,1,0.41667,0.41667,1,1970-01,1970-01,[],[XPGR],[],[P1M]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_YER,1,364,36.22639,2837.73,364,1989,2026-03,[],[YER],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SZL,1,727,0.66669,19.0527,727,1970-01,2026-03,[],[SZL],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrencyUSD,12,2826,1.0,1.0,731,1970,2026-03,[],[USD],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ALL,1,56,5.0,150.63333,56,1970,2025,[],[ALL],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XCG,2,12,1.79,1.79,6,2025-10,2026-03,[],[XCG],[],[P1M]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PTE,3,492,0.02232,277.65606,377,1970,1998-12,[],[PTE],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MDL,1,36,0.00335,19.92383,36,1990,2025,[],[MDL],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BOB,1,56,1.0E-5,8.06606,56,1970,2025,[],[BOB],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AMD,1,36,0.02186,578.76295,36,1990,2025,[],[AMD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KHR,1,469,11.92428,4235.0,469,1980,2026-03,[],[KHR],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GYD,1,56,1.98866,208.5,56,1970,2025,[],[GYD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IDR,2,1045,1.0,16911.52941,731,1970,2026-03,[],[IDR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CYP,1,494,0.33418,0.67527,494,1970,2007-12,[],[CYP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TZS,1,671,6.9,2715.008,671,1970,2026-03,[],[TZS],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AUD,6,2408,0.672,1.99608,731,1970,2026-03,[],[AUD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KHO,1,66,12.06761,418.0,66,1970,1979,[],[KHO],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_EUR,34,1692,0.00267,1.88949,56,1970,2025,[],[EUR],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SYP,1,395,3.7,13950.0,395,1970,2026-03,[],[SYP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NOK,1,731,4.8183,11.34,731,1970,2026-03,[],[NOK],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BWP,1,652,0.74544,15.6165,652,1976,2026-03,[],[BWP],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LBP,1,56,2.30198,89500.0,56,1970,2025,[],[LBP],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TRY,1,56,1.0E-5,39.45481,56,1970,2025,[],[TRY],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RWF,1,695,71.90316,1456.41844,695,1970,2026-03,[],[RWF],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TOP,1,56,0.69585,2.41053,56,1970,2025,[],[TOP],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KGS,1,415,3.9817,98.76026,415,1993-05,2026-03,[],[KGS],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PGK,1,56,0.67095,4.12272,56,1970,2025,[],[PGK],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MAD,1,56,3.89913,11.30297,56,1970,2025,[],[MAD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DZD,1,731,3.60412,146.3142,731,1970,2026-03,[],[DZD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RUR,9,119,0.00136,9299.98243,75,1992,1998-01,[],[RUR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MLF,1,183,200.21576,873.91333,183,1970,1984,[],[MLF],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ERN,1,56,2.07197,15.375,56,1970,2025,[],[ERN],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XAF,6,1818,200.21576,732.39769,503,1970,2026-03,[],[XAF],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ATS,1,377,9.70989,26.0,377,1970,1998-12,[],[ATS],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PHP,1,56,5.90435,57.5051,56,1970,2025,[],[PHP],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BUK,1,247,4.7619,16.92134,247,1970,1988-12,[],[BUK],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CNY,1,56,1.49839,8.61874,56,1970,2025,[],[CNY],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UZS,1,258,9.4,12957.86,258,1994-07,2026-03,[],[UZS],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MKD,2,744,0.63413,71.4324,420,1993-12,2026-03,[],[MKD],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_COP,1,56,18.4431,4325.95508,56,1970,2025,[],[COP],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RUB,1,355,9.70508,107.01867,355,1998,2026-03,[],[RUB],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BMD,1,56,1.0,1.0,56,1970,2025,[],[BMD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_OMR,1,703,0.3454,0.3845,703,1972-02,2026-03,[],[OMR],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_WST,1,56,0.60658,3.47804,56,1970,2025,[],[WST],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_OMS,1,27,0.38377,0.41667,27,1970,1972-01,[],[OMS],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NAD,1,56,0.67948,18.44631,56,1970,2025,[],[NAD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KES,1,731,6.9,159.69403,731,1970,2026-03,[],[KES],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UYP,1,233,0.00168,3024.81167,233,1975-01,1992-12,[],[UYP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SUR,8,16,0.64527,412.71364,4,1990,1993,[],[SUR],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ARA,1,90,2.0E-5,9535.54417,90,1985,1991-12,[],[ARA],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CVE,1,671,22.317,129.23,671,1970,2026-03,[],[CVE],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UYU,1,432,3.52116,45.00875,432,1993,2026-03,[],[UYU],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CLP,1,56,0.01128,951.32945,56,1970,2025,[],[CLP],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ARY,1,13,3.79167,27206.67158,13,1970,1982,[],[ARY],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GTQ,1,56,1.0,8.16156,56,1970,2025,[],[GTQ],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NLG,1,377,1.54632,3.7412,377,1970,1998-12,[],[NLG],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BTN,1,679,7.7101,92.64942,679,1974,2026-03,[],[BTN],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SVC,1,584,1.0,8.92,584,1970,2016-01,[],[SVC],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ARP,1,27,0.0,86.12232,27,1983,1985-01,[],[ARP],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PEN,1,56,0.0,3.88055,56,1970,2025,[],[PEN],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ARS,1,445,0.9905,1444.4524,445,1992,2026-03,[],[ARS],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TMT,1,36,0.0,3.5,36,1990,2025,[],[TMT],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BSD,1,731,1.0,1.0017,731,1970,2026-03,[],[BSD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZAR,5,1219,0.66669,19.0527,729,1970,2026-03,[],[ZAR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_STN,1,597,0.03289,24.95727,597,1977-02,2026-03,[],[STN],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TND,1,56,0.40227,3.10745,56,1970,2025,[],[TND],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SLE,1,56,8.0E-4,23.65804,56,1970,2025,[],[SLE],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RSD,1,263,49.6878,119.2194,263,2006,2026-03,[],[RSD],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DOP,1,56,1.0,61.98657,56,1970,2025,[],[DOP],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UYN,1,1,0.00224,0.00224,1,1975,1975,[],[UYN],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CUP,1,56,0.72,1.0,56,1970,2025,[],[CUP],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UYF,1,66,2.5E-4,2235.83333,66,1970,1975,[],[UYF],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TWD,1,731,24.764,40.479,731,1970,2026-03,[],[TWD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NIO,1,441,0.93893,36.6243,441,1991,2024-12,[],[NIO],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XMCF,1,67,202.72905,277.65371,67,1970,1975-01,[],[XMCF],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRC,1,39,0.0,3372.56545,39,1986-02,1989-01,[],[BRC],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRE,1,38,1.0E-5,105260.68,38,1990-02,1993,[],[BRE],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_YUN,1,21,0.00125,4.20209,21,1970,1990,[],[YUN],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NIG,1,235,0.0,1572.50958,235,1970,1988-01,[],[NIG],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MGF,1,35,211.27875,9344.28917,35,1970,2004,[],[MGF],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SSP,1,123,2.09016,4583.6738,123,2008,2026-03,[],[SSP],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BGN,1,56,9.7E-4,2.18471,56,1970,2025,[],[BGN],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRB,1,209,0.0,16251.62624,209,1970,1986-01,[],[BRB],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_STE,1,8,24.51517,38.27695,8,1970,1977,[],[STE],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KZT,1,36,0.00323,521.035,36,1990,2025,[],[KZT],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_STD,1,40,34.7714,22148.86063,40,1978,2017,[],[STD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZAL,1,26,0.67948,3.62709,26,1970,1995,[],[ZAL],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRL,1,418,0.16914,6.0964,418,1994-01,2026-03,[],[BRL],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BHD,1,56,0.376,0.47619,56,1970,2025,[],[BHD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRN,1,13,0.0,81.28249,13,1989-02,1990-01,[],[BRN],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRR,1,13,0.00608,1827.87966,13,1993-01,1994,[],[BRR],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HTG,1,56,5.0,141.03592,56,1970,2025,[],[HTG],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CSD,1,3,57.59004,66.71783,3,2003,2005,[],[CSD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AOA,1,353,0.6965,926.49595,353,1999-01,2026-03,[],[AOA],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NHF,1,144,64.71596,100.985,144,1970,1981,[],[NHF],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AFN,1,56,0.04373,90.54264,56,1970,2025,[],[AFN],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PLN,1,406,2.0674,4.8939,406,1995,2026-03,[],[PLN],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AOR,1,53,5.3E-4,2790706.167,53,1995,1999,[],[AOR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AOS,1,80,0.0,29.38362,80,1970,1976-01,[],[AOS],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NIC,1,39,0.0,704612.0833,39,1988,1991-01,[],[NIC],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MGA,1,264,1575.98,4700.2555,264,2005,2026-03,[],[MGA],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CSK,1,154,13.0,31.0,154,1971,1992-12,[],[CSK],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PLZ,1,314,3.3E-4,22722.76667,314,1970,1994-01,[],[PLZ],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AOK,1,170,0.0,29.918,170,1977,1990-01,[],[AOK],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BIF,1,56,78.75,2943.1375,56,1970,2025,[],[BIF],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AON,1,58,0.0,59515.0,58,1990-02,1994-12,[],[AON],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HUF,1,56,32.53228,372.59583,56,1970,2025,[],[HUF],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KGS,1,36,0.01641,87.85612,36,1990,2025,[],[KGS],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MYAD,1,23,2.17688,3.06122,23,1970,1992,[],[MYAD],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DZD,1,56,3.83745,141.99498,56,1970,2025,[],[DZD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_EEK,1,231,3.24166,18.3196,231,1992,2010-01,[],[EEK],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GIP,1,731,0.38153,0.91266,731,1970,2026-03,[],[GIP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LTL,1,273,2.1867,5.1433,273,1993-02,2014-01,[],[LTL],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SAR,2,735,3.30136,4.7619,731,1970,2026-03,[],[SAR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MVQ,1,13,3.93,8.96875,13,1970,1982,[],[MVQ],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MVR,1,586,7.05,15.42,586,1981-01,2026-03,[],[MVR],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XAF,6,336,211.27956,732.39769,56,1970,2025,[],[XAF],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KHR,1,56,11.92365,4184.91667,56,1970,2025,[],[KHR],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IDR,1,56,362.83333,16477.86518,56,1970,2025,[],[IDR],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TZS,1,56,7.02145,2597.90042,56,1970,2025,[],[TZS],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AUD,4,224,0.69667,1.93344,56,1970,2025,[],[AUD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ILP,2,143,3.5E-4,51.24292,132,1970,1980-01,[],[ILP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ILS,2,574,0.71971,1487.84167,534,1985-02,2026-03,[],[ILS],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ILR,2,10,11.43057,1178.84933,5,1981,1985,[],[ILR],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GHS,1,249,0.92116,15.9889,249,2007-01,2026-03,[],[GHS],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KPW,1,56,2.1,150.0,56,1970,2025,[],[KPW],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GHR,1,118,1.0E-4,14.87069,118,1970,1979-01,[],[GHR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CAD,1,731,0.9553,1.60029,731,1970,2026-03,[],[CAD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LSL,1,600,0.7484,19.0527,600,1980,2026-03,[],[LSL],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RWF,1,56,76.44774,1428.47828,56,1970,2025,[],[RWF],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MUR,1,731,5.0871,47.0677,731,1970,2026-03,[],[MUR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_JOD,1,731,0.2915,0.71364,731,1970,2026-03,[],[JOD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HKD,1,731,4.611,8.103,731,1970,2026-03,[],[HKD],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BWP,1,56,0.67948,13.59638,56,1970,2025,[],[BWP],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VEB,1,38,4.3,2147.0,38,1970,2007,[],[VEB],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VED,1,8,1.0E-5,39.61357,8,2018,2025,[],[VED],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ECS,1,390,18.0,25000.0,390,1970,1999-12,[],[ECS],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZMK,1,548,6.4E-4,5147.5,548,1970,2012-01,[],[ZMK],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CVE,1,56,24.51517,123.21333,56,1970,2025,[],[CVE],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VEF,1,7,2.147,1341824.724,7,2008,2018,[],[VEF],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UYU,1,56,2.5E-4,43.55457,56,1970,2025,[],[UYU],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_OMR,1,56,0.3454,0.41667,56,1970,2025,[],[OMR],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZMW,1,172,5.2878,28.69077,172,2013,2026-03,[],[ZMW],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VES,1,585,0.0043,701786.7441,585,1970-01,2021,[],[VES],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MTL,1,492,0.2907,0.50695,492,1970-01,2007-12,[],[MTL],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ARS,1,56,0.0,1240.85125,56,1970,2025,[],[ARS],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MTP,1,12,0.34543,0.43245,12,1972,1983,[],[MTP],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LRD,1,727,1.0,211.1409,727,1970-01,2026-03,[],[LRD],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KES,1,56,7.00119,139.84639,56,1970,2025,[],[KES],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GHC,1,364,2.7E-4,9326.19195,364,1979,2007,[],[GHC],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BTN,1,56,7.49194,87.15845,56,1970,2025,[],[BTN],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UZS,1,36,0.0022,12652.28682,36,1990,2025,[],[UZS],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MRU,1,8,35.6775,39.74016,8,2018,2025,[],[MRU],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MKD,1,36,0.17452,68.03713,36,1990,2025,[],[MKD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PYG,1,659,126.0,8006.00075,659,1970,2026-03,[],[PYG],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RUB,1,36,0.00105,92.5524,36,1990,2025,[],[RUB],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_JMD,2,734,0.76746,160.5193,719,1970,2026-03,[],[JMD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AZM,1,153,0.01328,4913.4775,153,1993-03,2006,[],[AZM],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AZN,1,262,0.7843,1.81794,262,2006-01,2026-03,[],[AZN],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NIO,1,55,0.0,36.6243,55,1970,2024,[],[NIO],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SSP,1,18,2.09016,4471.63281,18,2008,2025,[],[SSP],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GEL,1,396,1.2431,3.4367,396,1995-10,2026-03,[],[GEL],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GEK,1,2,665336.335,1366319.234,2,1994,1995,[],[GEK],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MRO,1,664,4.0546,357.94417,664,1973,2026-03,[],[MRO],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UAH,1,391,1.76,43.8314,391,1996-02,2026-03,[],[UAH],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UAK,1,6,0.00631,182946.8558,6,1992-12,1996,[],[UAK],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BRL,1,55,0.0,5.58729,55,1970,2025,[],[BRL],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BSD,1,56,1.0,1.0,56,1970,2025,[],[BSD],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_STN,1,56,0.02452,23.2904,56,1970,2025,[],[STN],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LNR,1,99,5.48247,15.755,99,1970,1978-01,[],[LNR],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZAR,1,56,0.67948,18.45024,56,1970,2025,[],[ZAR],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KMF,1,484,200.21407,549.29827,484,1975-02,2026-03,[],[KMF],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TWD,1,56,25.16408,40.06517,56,1970,2025,[],[TWD],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RSD,1,36,0.0,111.66218,36,1990,2025,[],[RSD],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CUP,1,56,0.72,1.0,56,1970,2025,[],[CUP],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NGN,1,56,0.54678,1518.38095,56,1970,2025,[],[NGN],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PKR,1,56,4.7619,281.143,56,1970,2025,[],[PKR],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_RON,1,56,0.00143,4.68848,56,1970,2025,[],[RON],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CRC,1,56,6.625,647.13582,56,1970,2025,[],[CRC],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BZD,1,679,1.6546,2.44455,679,1974,2026-03,[],[BZD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MOP,1,731,4.49492,8.36,731,1970,2026-03,[],[MOP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BZH,1,52,1.52614,1.72488,52,1970,1973-12,[],[BZH],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrencyUSD,13,728,1.0,191.30667,56,1970,2025,[],[USD],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SRD,1,56,0.00178,37.26018,56,1970,2025,[],[SRD],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TTD,1,56,1.92128,6.77952,56,1970,2025,[],[TTD],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ANG,3,101,1.74903,1.93228,56,1970,2025,[],[ANG],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MNT,1,437,5.33,3593.79682,437,1970,2026-03,[],[MNT],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GBP,6,2855,0.32895,0.91266,731,1970,2026-03,[],[GBP],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PLN,1,56,0.0033,4.45776,56,1970,2025,[],[PLN],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BYN,1,120,1.8664,3.4614,120,2017,2026-03,[],[BYN],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AOA,1,56,0.0,911.99304,56,1970,2025,[],[AOA],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BYB,1,81,7.0E-5,876750.0,81,1992,2000,[],[BYB],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NPR,1,719,10.125,146.00467,719,1970,2026-03,[],[NPR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AWG,1,523,1.79,1.79,523,1986,2026-03,[],[AWG],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MGA,1,56,42.25575,4529.75125,56,1970,2025,[],[MGA],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BYR,1,209,0.0571,19895.62833,209,2000-01,2016-01,[],[BYR],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CSK,1,22,13.25,29.4775,22,1971,1992,[],[CSK],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VED,1,55,0.0,39.61357,55,1970,2025,[],[VED],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZWR,1,1,6.723052073E9,6.723052073E9,1,2008,2008,[],[ZWR],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XSS,1,14,0.41667,0.41667,14,1970,1971-01,[],[XSS],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GRD,1,403,28.07,397.34619,403,1970,2000-12,[],[GRD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SIB,1,4,27.5712,58.8696,4,1991,1992-01,[],[SIB],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZWL,1,86,2.50177,18365.495,86,2009,2025-09,[],[ZWL],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_YUN,2,16,4.20209,64.8726,15,1990,1992-01,[],[YUN],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZWN,1,32,35.0,6.9078379717E10,32,2006,2008-12,[],[ZWN],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_YUM,2,15,1.43313,66.91366,10,1993,2002,[],[YUM],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KZT,1,397,4.69,540.74,397,1993-11,2026-03,[],[KZT],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZMW,1,56,6.4E-4,26.16642,56,1970,2025,[],[ZMW],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AFN,1,313,45.1072,93.14456,313,2002-02,2026-03,[],[AFN],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AFA,1,418,32.2129,47500.01452,418,1970,2002-01,[],[AFA],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HTG,1,731,5.0,155.69897,731,1970,2026-03,[],[HTG],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SIT,1,194,74.4996,256.6023,194,1992,2006-12,[],[SIT],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BHD,2,771,0.376,4.7619,731,1970,2026-03,[],[BHD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VNN,1,30,0.97561,291.95908,30,1978,1985,[],[VNN],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KYD,1,716,0.76746,0.89928,716,1971-01,2026-03,[],[KYD],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GHS,1,56,1.0E-4,14.18194,56,1970,2025,[],[GHS],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KPW,1,56,2.1,150.0,56,1970,2025,[],[KPW],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VND,1,456,1.27426,26380.33333,456,1985-08,2026-03,[],[VND],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_VNC,1,8,10.0,10.0,8,1970,1977,[],[VNC],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ILS,1,56,3.5E-4,4.73782,56,1970,2025,[],[ILS],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ADP,1,29,57.40692,170.04408,29,1970,1998,[],[ADP],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DKK,3,2089,4.7307,11.8291,731,1970,2026-03,[],[DKK],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CAD,1,56,0.97802,1.57034,56,1970,2025,[],[CAD],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LSL,1,56,0.67948,18.45024,56,1970,2025,[],[LSL],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZWC,1,130,5.3E-4,7.1E-4,130,1970,1979-12,[],[ZWC],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_YUD,1,260,0.00125,24960.36143,260,1970,1989-12,[],[YUD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZWD,1,344,6.3E-4,164547.3565,344,1980,2006-06,[],[ZWD],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HKD,1,56,4.662,7.8385,56,1970,2025,[],[HKD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BGL,1,199,8.3E-4,2123.275,199,1970,2000,[],[BGL],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZWG,1,25,13.3967,26.91249,25,2024-04,2026-03,[],[ZWG],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BGN,1,353,0.8458,2.2925,353,1999-01,2026-03,[],[BGN],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TJR,1,65,0.04733,2076.25,65,1995-02,2000-01,[],[TJR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_TJS,1,328,2.22,12.5426,328,2001,2026-03,[],[TJS],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_JOD,1,56,0.29792,0.71,56,1970,2025,[],[JOD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AED,1,691,3.671,4.09566,691,1973,2026-03,[],[AED],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AZN,1,36,5.0E-5,1.72115,36,1990,2025,[],[AZN],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HRD,1,28,0.08649,5998.01142,28,1992,1994-01,[],[HRD],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GEL,1,36,0.0,3.22156,36,1990,2025,[],[GEL],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SGD,1,731,1.2088,3.06122,731,1970,2026-03,[],[SGD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PAB,1,731,1.0,1.0,731,1970,2026-03,[],[PAB],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DJF,1,638,177.72099,177.721,638,1977-02,2026-03,[],[DJF],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UAH,1,36,2.0E-5,41.68907,36,1990,2025,[],[UAH],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HRK,1,375,4.58046,8.8353,375,1994-02,2022-12,[],[HRK],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CHF,2,787,0.77275,4.37295,731,1970,2026-03,[],[CHF],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ITL,3,432,564.45,2083.67,377,1970,1998-12,[],[ITL],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KWD,1,723,0.26527,0.35714,723,1970,2026-03,[],[KWD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LYD,1,718,0.26573,6.381,718,1971,2026-03,[],[LYD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GNS,1,183,18.59491,195.47196,183,1970,1985-12,[],[GNS],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_THB,1,719,20.2001,53.81,719,1970,2026-03,[],[THB],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MRU,1,56,4.31043,39.74016,56,1970,2025,[],[MRU],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XPF,2,1138,72.80538,183.84527,659,1970,2026-03,[],[XPF],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BDT,1,645,6.34618,122.87231,645,1972,2026-03,[],[BDT],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LYP,1,13,0.35714,0.35714,13,1970,1970-12,[],[LYP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BEF,1,377,27.979,66.529,377,1970,1998-12,[],[BEF],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_JMD,1,56,0.76746,159.09643,56,1970,2025,[],[JMD],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_PYG,1,56,126.0,7560.24759,56,1970,2025,[],[PYG],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ISJ,1,132,0.84,479.76417,132,1970,1980-01,[],[ISJ],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ISK,1,588,6.239,144.445,588,1981,2026-03,[],[ISK],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MZE,1,131,0.02232,30.40725,131,1970,1980-01,[],[MZE],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SEK,1,731,3.9165,11.14597,731,1970,2026-03,[],[SEK],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MOP,1,56,4.92875,8.07251,56,1970,2025,[],[MOP],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XOF,9,3809,5.0022,732.39769,539,1970,2026-03,[],[XOF],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BZD,1,56,1.60156,2.22567,56,1970,2025,[],[BZD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IRR,1,527,66.6571,1371772.971,527,1970,2026-03,[],[IRR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MZM,1,337,0.03197,23782.2675,337,1980,2005-12,[],[MZM],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GNF,1,523,238.93,10085.72869,523,1986,2026-03,[],[GNF],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_QAR,1,690,3.64,4.09566,690,1973-02,2026-03,[],[QAR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GNI,1,25,23.81802,24.685,25,1970,1971-12,[],[GNI],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MZN,1,263,23.907,78.012,263,2006,2026-03,[],[MZN],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SDD,1,228,0.015,2480.0,228,1992,2025-09,[],[SDD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SDG,2,62,2.0161,2400.0,58,2007,2026-03,[],[SDG],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZRN,1,63,1.0E-5,50184.9175,63,1993-01,1997-12,[],[ZRN],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MYR,1,708,2.1234,4.77229,708,1970-01,2026-03,[],[MYR],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KMF,1,56,211.27776,549.29827,56,1970,2025,[],[KMF],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_IQD,1,284,1.47033,3500.0,284,1970,2026-03,[],[IQD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GMD,1,707,1.5528,72.615,707,1970,2026-03,[],[GMD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SDP,1,286,3.5E-4,32.60581,286,1970,1991-12,[],[SDP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_ZRZ,1,298,0.0,645408.7808,298,1970,1993,[],[ZRZ],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NZD,2,766,0.67568,2.50764,731,1970,2026-03,[],[NZD],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CZK,1,36,17.07167,38.59842,36,1990,2025,[],[CZK],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LKR,1,56,5.93495,327.50653,56,1970,2025,[],[LKR],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DEM,2,140,1.38059,3.66,140,1970,2001,[],[DEM],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BAM,1,380,1.24029,2.29255,380,1997,2026-03,[],[BAM],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_EGP,1,611,0.3913,51.60933,611,1970,2026-03,[],[EGP],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SYP,1,56,3.9,13139.58301,56,1970,2025,[],[SYP],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NOK,1,56,4.93922,10.74583,56,1970,2025,[],[NOK],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BAN,1,2,1.44167,1.49667,2,1995,1996,[],[BAN],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MMK,1,56,4.7619,4126.2002,56,1970,2025,[],[MMK],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BBD,1,689,1.86335,2.15827,689,1973-02,2026-03,[],[BBD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MXN,1,432,3.0955,24.2579,432,1993,2026-03,[],[MXN],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SZL,1,56,0.67948,18.45359,56,1970,2025,[],[SZL],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UGX,1,497,14.0,3895.77974,497,1987,2026-03,[],[UGX],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_HNL,1,611,2.0,26.51868,611,1970,2026-03,[],[HNL],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_CDF,1,368,1.14524,2873.12034,368,1997,2026-03,[],[CDF],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_YER,1,37,36.22639,2406.25366,37,1989,2025,[],[YER],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MXP,1,288,0.0125,3094.89833,288,1970,1992-01,[],[MXP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LVR,1,1,38.31609,38.31609,1,1992,1992,[],[LVR],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_FJD,1,731,0.76863,2.3483,731,1970,2026-03,[],[FJD],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LVL,1,262,0.19158,0.819,262,1992,2013-01,[],[LVL],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SCR,1,731,4.5916,21.60048,731,1970,2026-03,[],[SCR],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_XCD,8,448,1.92128,2.7,56,1970,2025,[],[XCD],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_UGS,1,222,0.069,1400.0,222,1970,1987-01,[],[UGS],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_JPY,1,731,76.772,360.0,731,1970,2026-03,[],[JPY],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_GBP,4,224,0.40039,0.8113,56,1970,2025,[],[GBP],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BYN,1,36,0.0,3.24619,36,1990,2025,[],[BYN],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_SBD,1,639,0.79308,8.53872,639,1977,2026-03,[],[SBD],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_AWG,1,56,1.79,1.79,56,1970,2025,[],[AWG],[],[P1Y]
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MNT,1,56,10.76185,3545.14357,56,1970,2025,[],[MNT],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LTT,1,4,3.22,175.09567,4,1992,1993-01,[],[LTT],[],"[P1Y, P1M]"
+StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_NPR,1,56,10.125,139.11544,56,1970,2025,[],[NPR],[],[P1Y]
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_DDM,1,261,1.61819,3.66,261,1970,1990,[],[DDM],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_INR,2,783,7.23694,92.64942,731,1970,2026-03,[],[INR],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_KRW,1,467,304.85,1479.49667,467,1970,2026-03,[],[KRW],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MWP,1,14,0.83333,0.83333,14,1970,1971-01,[],[MWP],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_FIM,1,377,3.497,6.853,377,1970,1998-12,[],[FIM],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_LUF,1,377,27.979,66.529,377,1970,1998-12,[],[LUF],[],"[P1Y, P1M]"
+LocalCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_MWK,1,693,0.76755,1751.0,693,1971,2026-03,[],[MWK],[],"[P1Y, P1M]"
