@@ -25,6 +25,15 @@
                 "golden_files": "../../../../golden_data/golden_observations.csv",
                 "input_files": "../../../../data/output/NORS_NonInfectious_Disease.csv"
             }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that the dataset's maximum observation date meets freshness requirements (>= 2023-12)",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT MAX(MaxDate) AS latest_date FROM stats",
+                "condition": "latest_date >= '2023-12'"
+            }
         }
     ]
 }

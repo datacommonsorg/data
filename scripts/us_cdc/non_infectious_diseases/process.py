@@ -106,12 +106,16 @@ def download_data_from_api(column_mapping=None):
                 logging.error(
                     "Could not retrieve the total number of records from the API."
                 )
-                return
+                raise RuntimeError(
+                    "Could not retrieve the total number of records from the API."
+                )
         else:
             logging.fatal(
                 f"Error fetching total record count from {count_url}: Received status code {count_response.status_code}"
             )
-            return
+            raise RuntimeError(
+                f"Error fetching total record count from {count_url}: Received status code {count_response.status_code}"
+            )
 
         limit = 10000  # Set a reasonable limit for each request
         offset = 0
@@ -143,6 +147,7 @@ def download_data_from_api(column_mapping=None):
 
     except Exception as e:
         logging.fatal(f"Error while downloading : {e}")
+        raise
 
 
 def fix_date_format(df: pd.DataFrame) -> pd.DataFrame:
