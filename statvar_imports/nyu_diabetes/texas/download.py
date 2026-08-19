@@ -1,4 +1,4 @@
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -120,9 +120,12 @@ def save_tsv_as_csv(raw_text: str, output_filepath: str):
     with open(temp_filepath, "w", newline="", encoding="utf-8") as f:
         csv_writer = csv.writer(f)
         for row in tsv_reader:
-            if row:
-                csv_writer.writerow(row)
-                row_count += 1
+            if not row:
+                continue
+            if row[0].startswith("---") or (len(row) > 1 and row[1].startswith("---")):
+                break
+            csv_writer.writerow(row)
+            row_count += 1
 
     os.replace(temp_filepath, output_filepath)
     logging.info(f"Successfully saved {row_count} rows to {output_filepath}")
@@ -134,7 +137,6 @@ def main(_):
 
     if not raw_data or "County Code" not in raw_data:
         logging.fatal("Downloaded data is empty or missing expected headers.")
-        sys.exit(1)
 
     save_tsv_as_csv(raw_data, OUTPUT_CSV)
     logging.info(f"CDC WONDER download finished successfully: {OUTPUT_CSV}")
