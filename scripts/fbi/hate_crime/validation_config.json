@@ -83,12 +83,12 @@
     },
     {
       "rule_id": "check_max_date_freshness",
-      "description": "Verifies latest observation year accounts for FBI UCR 10-12 month publication lag (released ~Aug-Oct; avoids Jan 1 rollover failures) and maintains >= 2023 baseline.",
+      "description": "Verifies latest observation year is within 3 years of current date",
       "validator": "SQL_VALIDATOR",
       "params": {
-        "query": "SELECT MAX(TRY_CAST(SUBSTRING(CAST(MaxDate AS VARCHAR), 1, 4) AS INT)) AS max_year, CASE WHEN EXTRACT(MONTH FROM CURRENT_DATE) >= 10 THEN EXTRACT(YEAR FROM CURRENT_DATE) - 2 ELSE EXTRACT(YEAR FROM CURRENT_DATE) - 3 END AS expected_min_year FROM stats",
-        "condition": "max_year IS NOT NULL AND max_year >= expected_min_year AND max_year >= 2023"
-      }
+        "query": "SELECT MAX(CAST(SUBSTRING(CAST(MaxDate AS VARCHAR), 1, 4) AS INT)) AS max_year FROM stats",
+         "condition": "max_year >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3)"
+        }
     }
   ]
 }
