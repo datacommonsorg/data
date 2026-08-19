@@ -28,6 +28,7 @@ def national1960(output_folder: str):
     # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
     # The numbers 60 to 80 signify the available files as per year numbers
+    session = requests.Session()
     for i in range(60, 80):
         url = 'https://www2.census.gov/programs-surveys/popest/tables/'+\
             '1900-1980/national/asrh/pe-11-19'+str(i)+'.csv'
@@ -42,7 +43,7 @@ def national1960(output_folder: str):
         # Skipping unwanted rows from top and bottom.
         try:
             # Check if the URL is accessible
-            response = requests.head(url, allow_redirects=True)
+            response = session.head(url, allow_redirects=True, timeout=5)
             if response.status_code != 200:
                 logging.warning(f"Skipping {url} as it is not accessible.")
                 continue
