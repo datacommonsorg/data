@@ -462,13 +462,14 @@ def add_future_year_urls():
     ]
     # This method checks for URLs from 2030 down to 2021. If a valid URL is found for any year, the method stops and adds it to the download URL.
     #
+    session = requests.Session()
     for url in urls_to_scan:
         for future_year in range(2030, 2021, -1):
             YEAR = future_year
 
             url_to_check = url.format(YEAR=YEAR)
             try:
-                check_url = requests.head(url_to_check)
+                check_url = session.head(url_to_check, timeout=5)
                 if check_url.status_code == 200:
                     _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
                     break
