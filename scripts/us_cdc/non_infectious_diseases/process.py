@@ -174,7 +174,8 @@ def generate_aggregates(df: pd.DataFrame,
     """
     try:
         logging.info(f"Generating aggregates grouped by: {groupby_cols}")
-        country_stat_df = df[df['observationAbout'].str.contains('country', na=False)]
+        country_stat_df = df[df['observationAbout'].str.contains('country',
+                                                                 na=False)]
         cols = groupby_cols + _STAT_COLS
         country_stat_df = country_stat_df[cols]
         country_stat_df = country_stat_df.groupby(groupby_cols,
@@ -185,7 +186,8 @@ def generate_aggregates(df: pd.DataFrame,
                                                   })
 
         # aggreagte stats for US states and territories
-        aggregate_df = df[~(df['observationAbout'].str.contains('country', na=False))]
+        aggregate_df = df[~(
+            df['observationAbout'].str.contains('country', na=False))]
         aggregate_df = aggregate_df.groupby(groupby_cols, as_index=False).agg({
             'Illnesses': 'sum',
             'Hospitalizations': 'sum',
@@ -478,4 +480,3 @@ def main(_) -> None:
 
 if __name__ == '__main__':
     app.run(main)
-
