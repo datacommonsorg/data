@@ -111,23 +111,20 @@ def download_cdc_wonder_data(saved_url: str) -> str:
 
 
 def save_tsv_as_csv(raw_text: str, output_filepath: str):
-    """Converts TSV text from CDC WONDER into CSV format and writes to disk.
-
-    Args:
-        raw_text: TSV content string.
-        output_filepath: Target CSV file path.
-    """
+    """Converts TSV text from CDC WONDER into CSV format and writes to disk."""
     Path(os.path.dirname(output_filepath)).mkdir(parents=True, exist_ok=True)
     tsv_reader = csv.reader(io.StringIO(raw_text), delimiter="\t")
 
+    temp_filepath = f"{output_filepath}.tmp"
     row_count = 0
-    with open(output_filepath, "w", newline="", encoding="utf-8") as f:
+    with open(temp_filepath, "w", newline="", encoding="utf-8") as f:
         csv_writer = csv.writer(f)
         for row in tsv_reader:
             if row:
                 csv_writer.writerow(row)
                 row_count += 1
 
+    os.replace(temp_filepath, output_filepath)
     logging.info(f"Successfully saved {row_count} rows to {output_filepath}")
 
 

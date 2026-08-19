@@ -16,8 +16,7 @@
 
 ## NYU_Texas_Diabetes Import
 
-This import utilizes official mortality data from the Texas Department of Health, detailing county-level death statistics.
-
+This import utilizes official diabetes mortality data from CDC WONDER, detailing county-level death statistics.
 -----
 
 ### ⚙️ Workflow
