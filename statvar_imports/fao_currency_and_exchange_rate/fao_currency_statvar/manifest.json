@@ -14,6 +14,7 @@
             ],
             "source_files": [
                 "input_data/Exchange_rate_E_All_Data.csv",
+                "golden_data/*.csv",
                 "counters/*.csv"
             ],
             "import_inputs": [

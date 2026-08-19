@@ -14,7 +14,7 @@
             "description": "Ensure active currencies (EUR, INR, GBP, JPY, CAD, AUD, CHF, CNY) have MaxDate at or after 2025 to catch import stagnation.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar LIKE '%_ToCurrency_EUR' OR StatVar LIKE '%_ToCurrency_INR' OR StatVar LIKE '%_ToCurrency_GBP' OR StatVar LIKE '%_ToCurrency_JPY' OR StatVar LIKE '%_ToCurrency_CAD' OR StatVar LIKE '%_ToCurrency_AUD' OR StatVar LIKE '%_ToCurrency_CHF' OR StatVar LIKE '%_ToCurrency_CNY'",
+                "query": "SELECT StatVar, MaxDate FROM stats WHERE regexp_matches(StatVar, '_ToCurrency_(EUR|INR|GBP|JPY|CAD|AUD|CHF|CNY)$')",
                 "condition": "SUBSTR(MaxDate, 1, 4) >= '2025'"
             }
         },
