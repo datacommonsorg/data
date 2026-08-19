@@ -104,17 +104,11 @@ def download_data_from_api(column_mapping=None):
                 total_records = int(total_records_data[0]["count"])
                 logging.info(f"Total records available: {total_records}")
             else:
-                logging.error(
-                    "Could not retrieve the total number of records from the API."
-                )
-                raise RuntimeError(
+                logging.fatal(
                     "Could not retrieve the total number of records from the API."
                 )
         else:
             logging.fatal(
-                f"Error fetching total record count from {count_url}: Received status code {count_response.status_code}"
-            )
-            raise RuntimeError(
                 f"Error fetching total record count from {count_url}: Received status code {count_response.status_code}"
             )
 
@@ -148,7 +142,6 @@ def download_data_from_api(column_mapping=None):
 
     except Exception as e:
         logging.fatal(f"Error while downloading : {e}")
-        raise
 
 
 def fix_date_format(df: pd.DataFrame) -> pd.DataFrame:
@@ -165,7 +158,6 @@ def fix_date_format(df: pd.DataFrame) -> pd.DataFrame:
         return df
     except Exception as e:
         logging.fatal(f"Error while generating observationDate : {e}")
-        raise
 
 
 def generate_aggregates(df: pd.DataFrame,
@@ -225,7 +217,6 @@ def generate_aggregates(df: pd.DataFrame,
         return aggregate_df
     except Exception as e:
         logging.fatal(f"An error occurred during aggregate generation: {e}")
-        raise
 
 
 def make_stat_vars(row, PV_MAP):
@@ -292,7 +283,6 @@ def make_stat_vars(row, PV_MAP):
         return row
     except Exception as e:
         logging.fatal(f"An error occurred, while generating statvar: {e}")
-        raise
 
 
 def write_svdicts_to_file(dict_list, file_path):
@@ -322,7 +312,6 @@ def write_svdicts_to_file(dict_list, file_path):
 
     except Exception as e:
         logging.fatal(f"An error occurred, while writing to file . : {e}")
-        raise
 
 
 def fix_place_names(clean_df):
@@ -343,7 +332,6 @@ def fix_place_names(clean_df):
         return clean_df
     except Exception as e:
         logging.fatal(f"Error while fixing place name : {e}")
-        raise
 
 
 def process_non_infectious_data(input_file_path: str = None,
@@ -457,7 +445,6 @@ def process_non_infectious_data(input_file_path: str = None,
             f.write(_TEMPLATE_MCF)
     except Exception as e:
         logging.fatal(f"Error while processing : {e}")
-        raise
 
 
 def main(_) -> None:
