@@ -1,5 +1,6 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4
 Region,observationAbout,country/MNG,,,,,,
+Total,populationType,HospitalBed,measuredProperty,count,,,,
 Internal medicine,healthDepartmentType,InternalMedicine,,,,,,
 Beds per 1000 population,measurementDenominator,Count_Person,unit,Per1000Persons,,,,
 Surgery and traumatology,healthDepartmentType,SurgeryAndTraumatology,,,,,,
