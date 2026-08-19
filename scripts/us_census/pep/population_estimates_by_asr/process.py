@@ -69,7 +69,9 @@ def add_future_year_urls():
         for YEAR in range(2030, 2020, -1):
             url_to_check = url.format(YEAR=YEAR)
             try:
-                check_url = session.head(url_to_check, allow_redirects=True, timeout=5)
+                check_url = session.head(url_to_check,
+                                         allow_redirects=True,
+                                         timeout=5)
                 if check_url.status_code == 200:
                     _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
                     break
@@ -275,7 +277,8 @@ class USCensusPEPByASR:
             final_df.drop(columns=['Unnamed: 0'], inplace=True)
             final_df = final_df.dropna()
             final_df['Year'] = final_df['Year'].astype(float).astype(int)
-            final_df['observation'] = final_df['observation'].astype(float).astype(int)
+            final_df['observation'] = final_df['observation'].astype(
+                float).astype(int)
             logging.info(f"Sorting data {final_df.shape} by year, geo-id")
             final_df = final_df.sort_values(by=['Year', 'geo_ID'])
             logging.info(f"Setting measurement method")

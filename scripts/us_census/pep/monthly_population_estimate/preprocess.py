@@ -469,9 +469,12 @@ def add_future_year_urls():
 
                 url_to_check = url.format(YEAR=YEAR)
                 try:
-                    check_url = session.head(url_to_check, allow_redirects=True, timeout=5)
+                    check_url = session.head(url_to_check,
+                                             allow_redirects=True,
+                                             timeout=5)
                     if check_url.status_code == 200:
-                        _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+                        _FILES_TO_DOWNLOAD.append(
+                            {"download_path": url_to_check})
                         break
 
                 except requests.exceptions.RequestException as e:
