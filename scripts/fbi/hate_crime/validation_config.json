@@ -87,7 +87,7 @@
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT MAX(TRY_CAST(SUBSTRING(CAST(MaxDate AS VARCHAR), 1, 4) AS INT)) AS max_year, CASE WHEN EXTRACT(MONTH FROM CURRENT_DATE) >= 10 THEN EXTRACT(YEAR FROM CURRENT_DATE) - 2 ELSE EXTRACT(YEAR FROM CURRENT_DATE) - 3 END AS expected_min_year FROM stats",
-        "condition": "max_year >= expected_min_year AND max_year >= 2023"
+        "condition": "max_year IS NOT NULL AND max_year >= expected_min_year AND max_year >= 2023"
       }
     }
   ]
