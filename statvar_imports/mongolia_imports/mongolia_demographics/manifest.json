@@ -41,6 +41,7 @@
           "cleaned_csv": "output_files/total_population_by_sex_and_urban_rural_output.csv"
         }
       ],
+      "validation_config_file": "validation_config.json",
       "cron_schedule": "0 04 * * 6"
     }
   ]
