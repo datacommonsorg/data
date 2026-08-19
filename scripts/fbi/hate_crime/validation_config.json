@@ -5,7 +5,9 @@
       "rule_id": "check_deleted_records_percent",
       "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
       "validator": "DELETED_RECORDS_PERCENT",
-      "params": { "threshold": 0.1}
+      "params": {
+        "threshold": 0.1
+      }
     },
     {
       "rule_id": "check_goldens_tablet1t10",
@@ -77,6 +79,15 @@
       "params": {
         "golden_files": "../../../../golden_data/golden_observations_table14.csv",
         "input_files": "../../../../table14/table14_output.csv"
+      }
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Verifies latest observation year accounts for FBI UCR 10-12 month publication lag (released ~Aug-Oct; avoids Jan 1 rollover failures) and maintains >= 2023 baseline.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT MAX(TRY_CAST(SUBSTRING(CAST(MaxDate AS VARCHAR), 1, 4) AS INT)) AS max_year, CASE WHEN EXTRACT(MONTH FROM CURRENT_DATE) >= 10 THEN EXTRACT(YEAR FROM CURRENT_DATE) - 2 ELSE EXTRACT(YEAR FROM CURRENT_DATE) - 3 END AS expected_min_year FROM stats",
+        "condition": "max_year >= expected_min_year AND max_year >= 2023"
       }
     }
   ]
