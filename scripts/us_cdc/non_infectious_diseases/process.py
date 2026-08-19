@@ -73,7 +73,7 @@ _SV_BASE_MAP = {
 }
 dataset_id = "5xkq-dg7x"
 domain = "data.cdc.gov"
-client = Socrata(domain, None)
+client = Socrata(domain, None, timeout=60)
 filename = "NationalOutbreakPublicDataTool.xlsx"
 sheet_name = "Outbreak Data"
 base_path = os.path.join(_SCRIPT_PATH, "data")
@@ -104,11 +104,17 @@ def download_data_from_api(column_mapping=None):
                 total_records = int(total_records_data[0]["count"])
                 logging.info(f"Total records available: {total_records}")
             else:
-                logging.fatal(
+                logging.error(
+                    "Could not retrieve the total number of records from the API."
+                )
+                raise RuntimeError(
                     "Could not retrieve the total number of records from the API."
                 )
         else:
             logging.fatal(
+                f"Error fetching total record count from {count_url}: Received status code {count_response.status_code}"
+            )
+            raise RuntimeError(
                 f"Error fetching total record count from {count_url}: Received status code {count_response.status_code}"
             )
 
@@ -142,6 +148,7 @@ def download_data_from_api(column_mapping=None):
 
     except Exception as e:
         logging.fatal(f"Error while downloading : {e}")
+        raise
 
 
 def fix_date_format(df: pd.DataFrame) -> pd.DataFrame:
@@ -158,6 +165,7 @@ def fix_date_format(df: pd.DataFrame) -> pd.DataFrame:
         return df
     except Exception as e:
         logging.fatal(f"Error while generating observationDate : {e}")
+        raise
 
 
 def generate_aggregates(df: pd.DataFrame,
@@ -217,6 +225,7 @@ def generate_aggregates(df: pd.DataFrame,
         return aggregate_df
     except Exception as e:
         logging.fatal(f"An error occurred during aggregate generation: {e}")
+        raise
 
 
 def make_stat_vars(row, PV_MAP):
@@ -229,7 +238,6 @@ def make_stat_vars(row, PV_MAP):
         dict: A dictionary of statistical variables.
     """
     try:
-        logging.info(f"Generating Statvars.")
         row['variableMeasured'] = ''
         row['sv_dict'] = {}
         sv_dict = _SV_BASE_MAP[row['variable']].copy()
@@ -284,6 +292,7 @@ def make_stat_vars(row, PV_MAP):
         return row
     except Exception as e:
         logging.fatal(f"An error occurred, while generating statvar: {e}")
+        raise
 
 
 def write_svdicts_to_file(dict_list, file_path):
@@ -313,6 +322,7 @@ def write_svdicts_to_file(dict_list, file_path):
 
     except Exception as e:
         logging.fatal(f"An error occurred, while writing to file . : {e}")
+        raise
 
 
 def fix_place_names(clean_df):
@@ -333,6 +343,7 @@ def fix_place_names(clean_df):
         return clean_df
     except Exception as e:
         logging.fatal(f"Error while fixing place name : {e}")
+        raise
 
 
 def process_non_infectious_data(input_file_path: str = None,
@@ -402,6 +413,7 @@ def process_non_infectious_data(input_file_path: str = None,
             'variable', 'Primary Mode', 'Etiology', 'Etiology Status'
         ]]
         sv_df = sv_df.drop_duplicates()
+        logging.info("Generating Statvars.")
         sv_df = sv_df.apply(make_stat_vars, args=(PV_MAP,), axis=1)
 
         # write statvar_dct to mcf file
@@ -445,6 +457,7 @@ def process_non_infectious_data(input_file_path: str = None,
             f.write(_TEMPLATE_MCF)
     except Exception as e:
         logging.fatal(f"Error while processing : {e}")
+        raise
 
 
 def main(_) -> None:
