@@ -7,7 +7,8 @@
       "provenance_description": "Data related to the Mongolia's education at country level",
       "scripts": ["../common_download_script.py", "run.sh"],
       "source_files": [
-        "input_files/*.csv"
+        "input_files/*.csv",
+        "counters/*.csv"
       ],
       "import_inputs": [
         {
