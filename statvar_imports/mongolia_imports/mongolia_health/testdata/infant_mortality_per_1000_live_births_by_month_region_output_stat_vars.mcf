@@ -1,0 +1,11 @@
+# Auto generated using command: "/usr/local/google/home/samnotra/19aug/mongolia-imports/data/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_health/testdata/infant_mortality_per_1000_live_births_by_month_region_input.csv --pv_map=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_health/infant_mortality_per_1000_live_births_by_month_region_pvmap.csv --config_file=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_health/mongolia_metadata.csv --output_path=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_health/testdata/infant_mortality_per_1000_live_births_by_month_region_output --existing_statvar_mcf=/tmp/stat_vars.mcf --places_resolved_csv=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_health/mongolia_place_resolver.csv" on 2026-08-19 11:48:00.071321
+
+Node: dcid:Count_MortalityEvent_Infant_AsAFractionOf_Count_BirthEvent_LiveBirth
+typeOf: dcid:StatisticalVariable
+name: "Infant deaths as a fraction of live births"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_LiveBirth
+ageGroupClassification: dcid:Infant
+

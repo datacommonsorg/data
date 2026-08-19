@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Strictly enforce historical deletion average threshold of 10%",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.1
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report_input0",
+      "description": "Validates summary_report.csv for input0 (students_of_universities_and_colleges_by_professional_field) against its golden summary data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input0_golden_summary_report.csv",
+        "input_files": "../../input0/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report_input1",
+      "description": "Validates summary_report.csv for input1 (students_in_teritary_educational_institutions_by_sex_and_educational_degree) against its golden summary data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input1_golden_summary_report.csv",
+        "input_files": "../../input1/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report_input2",
+      "description": "Validates summary_report.csv for input2 (number_of_students_in_universities_and_colleges_by_region) against its golden summary data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input2_golden_summary_report.csv",
+        "input_files": "../../input2/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report_input3",
+      "description": "Validates summary_report.csv for input3 (number_of_kindergartens_by_region) against its golden summary data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input3_golden_summary_report.csv",
+        "input_files": "../../input3/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report_input4",
+      "description": "Validates summary_report.csv for input4 (number_of_full_time_teachers_in_universities_and_colleges_by_sex) against its golden summary data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input4_golden_summary_report.csv",
+        "input_files": "../../input4/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_report_input5",
+      "description": "Validates summary_report.csv for input5 (graduates_of_universities_and_colleges_by_professional_field) against its golden summary data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/input5_golden_summary_report.csv",
+        "input_files": "../../input5/genmcf/summary_report.csv"
+      }
+    }
+  ]
+}

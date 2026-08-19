@@ -1,0 +1,22 @@
+Node: dcid:collegeOrGraduateSchoolEnrollment
+typeOf: dcs:Property
+name: "collegeOrGraduateSchoolEnrollment"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:USC_CollegeOrGraduateSchoolEnrollmentEnum,dcid:USC_LevelOfSchoolEnum
+
+Node: dcid:bachelorsDegreeMajor
+typeOf: dcs:Property
+name: "bachelorsDegreeMajor"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:ProvisionalNode
+
+Node: dcid:SocialSciencesMajor__CommunicationJournalismAndRelatedMajor
+typeOf: dcid:EducationalMajorEnum
+name: "Social Sciences Major__ Communication Journalism And Related Major"
+isProvisional: dcs:True
+
+Node: dcid:NaturalSciences__MathAndStatisticsMajor
+typeOf: dcid:EducationalMajorEnum
+name: "Natural Sciences__ Math And Statistics Major"
+isProvisional: dcs:True
+

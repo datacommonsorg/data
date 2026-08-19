@@ -1,0 +1,10 @@
+# Auto generated using command: "/usr/local/google/home/samnotra/19aug/mongolia-imports/data/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/testdata/total_population_by_age_group_and_sex_input.csv --pv_map=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/total_population_by_age_group_and_sex_pvmap.csv --config_file=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/mongolia_metadata.csv --output_path=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/testdata/total_population_by_age_group_and_sex_output --existing_statvar_mcf=/tmp/stat_vars.mcf" on 2026-08-19 11:51:38.345719
+
+Node: dcid:Count_Person_0To4Years
+typeOf: dcid:StatisticalVariable
+name: "Population: 0 - 4 Years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 4 Years]
+

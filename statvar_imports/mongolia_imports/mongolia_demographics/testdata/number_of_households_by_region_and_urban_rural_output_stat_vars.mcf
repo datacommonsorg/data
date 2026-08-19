@@ -1,0 +1,9 @@
+# Auto generated using command: "/usr/local/google/home/samnotra/19aug/mongolia-imports/data/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/testdata/number_of_households_by_region_and_urban_rural_input.csv --pv_map=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/number_of_households_by_region_and_urban_rural_pvmap.csv --config_file=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/mongolia_metadata.csv --output_path=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/testdata/number_of_households_by_region_and_urban_rural_output --existing_statvar_mcf=/tmp/stat_vars.mcf --places_resolved_csv=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/mongolia_place_resolver.csv" on 2026-08-19 11:50:41.259400
+
+Node: dcid:Count_Household
+typeOf: dcid:StatisticalVariable
+name: "Households"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+

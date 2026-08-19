@@ -1,0 +1,48 @@
+# Auto generated using command: "/usr/local/google/home/samnotra/19aug/mongolia-imports/data/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/testdata/resident_population_by_agegroup_15_and_over_and_maritalstatus_input.csv --pv_map=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/resident_population_by_agegroup_15_and_over_and_maritalstatus_pvmap.csv --config_file=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/mongolia_metadata.csv --output_path=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/testdata/resident_population_by_agegroup_15_and_over_and_maritalstatus_output --existing_statvar_mcf=/tmp/stat_vars.mcf" on 2026-08-19 11:50:43.296582
+
+Node: dcid:Count_Person_15OrMoreYears_Female
+typeOf: dcid:StatisticalVariable
+name: "Population: 15 Years or More, Female"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_15OrMoreYears_Male
+typeOf: dcid:StatisticalVariable
+name: "Population: 15 Years or More, Male"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_15OrMoreYears_Male_DivorcedOrSeparated
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+gender: dcid:Male
+maritalStatus: dcid:DivorcedOrSeparated
+
+Node: dcid:Count_Person_DivorcedOrSeparated
+typeOf: dcid:StatisticalVariable
+name: "Population: Divorced or Separated"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+maritalStatus: dcid:DivorcedOrSeparated
+
+Node: dcid:dc/70zj83ev915f8
+typeOf: dcid:StatisticalVariable
+name: "Population: Male, Now Married"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+gender: dcid:Male
+maritalStatus: dcid:NowMarried
+

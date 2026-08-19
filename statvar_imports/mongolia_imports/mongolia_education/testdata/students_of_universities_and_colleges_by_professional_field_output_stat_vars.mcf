@@ -1,0 +1,29 @@
+# Auto generated using command: "/usr/local/google/home/samnotra/19aug/mongolia-imports/data/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_education/testdata/students_of_universities_and_colleges_by_professional_field_input.csv --pv_map=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_education/students_of_universities_and_colleges_by_professional_field_pvmap.csv --config_file=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_education/mongolia_metadata.csv --output_path=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_education/testdata/students_of_universities_and_colleges_by_professional_field_output --existing_statvar_mcf=/tmp/stat_vars.mcf --places_resolved_csv=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_education/mongolia_place_resolver.csv" on 2026-08-19 11:47:59.754910
+
+Node: dcid:Count_Student_BachelorOfBusinessAdministrationAndManagementOrLegalProfessionsAndStudiesMajor_EnrolledInCollegeOrGraduateSchool
+typeOf: dcid:StatisticalVariable
+name: "Count of student with bachelor's degree in business administration and management or legal professions and studies major and enrolled in college or graduate school"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+bachelorsDegreeMajor: dcid:BusinessAdministrationAndManagement__LegalProfessionsAndStudiesMajor
+collegeOrGraduateSchoolEnrollment: dcid:EnrolledInCollegeOrGraduateSchool
+
+Node: dcid:Count_Student_BachelorOfNaturalSciencesOrMathAndStatisticsMajor_EnrolledInCollegeOrGraduateSchool
+typeOf: dcid:StatisticalVariable
+name: "Count of student with bachelor's degree in natural sciences or math and statistics major and enrolled in college or graduate school"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+bachelorsDegreeMajor: dcid:MathAndStatisticsMajor__NaturalSciences
+collegeOrGraduateSchoolEnrollment: dcid:EnrolledInCollegeOrGraduateSchool
+
+Node: dcid:Count_Student_BachelorOfSocialSciencesMajorOrCommunicationJournalismAndRelatedMajor_EnrolledInCollegeOrGraduateSchool
+typeOf: dcid:StatisticalVariable
+name: "Count of student with bachelor's degree in social sciences major or communication journalism and related major and enrolled in college or graduate school"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+bachelorsDegreeMajor: dcid:CommunicationJournalismAndRelatedMajor__SocialSciencesMajor
+collegeOrGraduateSchoolEnrollment: dcid:EnrolledInCollegeOrGraduateSchool
+

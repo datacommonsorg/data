@@ -1,0 +1,18 @@
+# Auto generated using command: "/usr/local/google/home/samnotra/19aug/mongolia-imports/data/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/testdata/total_population_by_sex_and_urban_rural_input.csv --pv_map=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/total_population_by_sex_and_urban_rural_pvmap.csv --config_file=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/total_population_by_sex_and_urban_rural_metadata.csv --output_path=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_demographics/testdata/total_population_by_sex_and_urban_rural_output --existing_statvar_mcf=/tmp/stat_vars.mcf" on 2026-08-19 11:51:38.721693
+
+Node: dcid:Count_Person_Rural
+typeOf: dcid:StatisticalVariable
+name: "Population Living in Rural Areas"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Urban
+typeOf: dcid:StatisticalVariable
+name: "Population Living in Urban Areas"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:Urban
+
