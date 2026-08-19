@@ -25,7 +25,8 @@
         },
         {
           "template_mcf": "output_files/resident_population_by_agegroup_15_and_over_and_maritalstatus_output.tmcf",
-          "cleaned_csv": "output_files/resident_population_by_agegroup_15_and_over_and_maritalstatus_output.csv"
+          "cleaned_csv": "output_files/resident_population_by_agegroup_15_and_over_and_maritalstatus_output.csv",
+          "node_mcf": "output_files/resident_population_by_agegroup_15_and_over_and_maritalstatus_output*.mcf"
         },
         {
           "template_mcf": "output_files/total_population_by_age_group_and_sex_output.tmcf",
