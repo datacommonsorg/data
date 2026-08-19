@@ -25,6 +25,12 @@ is out of scope.
 - Treat GCP and the data repository as read-only.
 - Never run, retry, update, pause, resume, delete, deploy, or mutate a cloud
   resource.
+- If a short-lived BigQuery table would help, give the user the exact
+  command using
+  [create_short_lived_bq_table.sh](scripts/create_short_lived_bq_table.sh).
+  Use its `--help` option for usage. Ask the user to run the table-creating
+  command and return the full table name. Never run that command yourself or
+  delete any table.
 - Never edit repository files or persist output unless the user explicitly asks.
 - Ask before downloading or installing any library, command-line tool, browser
   binary, or executable, except for the repository dependency refresh below.

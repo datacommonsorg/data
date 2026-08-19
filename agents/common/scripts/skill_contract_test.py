@@ -336,6 +336,7 @@ class SkillContractTest(unittest.TestCase):
 
         for guardrail in (
                 'Treat GCP and the data repository as read-only',
+                'Never run that command yourself or delete any table',
                 'Never replace a missing identifier with a broad',
                 'complete attempt history, Workflow execution inspection',
                 'loader status, and execution of remediation as unsupported',
