@@ -3,10 +3,10 @@
     "rules": [
         {
             "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted points is within the 10% threshold.",
+            "description": "Checks that the percentage of deleted points is within the 0.1% threshold.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 10
+                "threshold": 0.1
             }
         },
         {
@@ -22,7 +22,7 @@
             "rule_id": "check_goldens_summary_report",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/golden_summary.csv"
+                "golden_files": "../../../../golden_data/golden_summary_report.csv"
             }
         },
         {
@@ -30,7 +30,7 @@
             "description": "Verifies the generated output CSV data matches established critical golden records",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/golden_observation.csv",
+                "golden_files": "../../../../golden_data/golden_observations.csv",
                 "input_files": "../../../../output_files/CurrencyFAO_output.csv"
             }
         }
