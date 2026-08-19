@@ -1,0 +1,32 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "CDCWonder_NNDSS_InfectiousAnnual",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://wonder.cdc.gov/nndss-annual-summary.html",
+            "provenance_description": "Notifiable Infectious Diseases Data: Annual tables from CDC WONDER which has the incident counts of different infectious diseases per year and are aggregated based on demographic factors. The statistics are reported by the 50 states, New York City, the District of Columbia, and the U.S. territories.",
+            "scripts": [
+                "download_nndss_annual_data.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/race/NNDSS_Annual_Summary_Data_*.csv --pv_map=race_region_sex_ethnicity_pvmap.csv --config_file=common_metadata.csv --output_path=./output/output_race --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/region/NNDSS_Annual_Summary_Data_*.csv --pv_map=race_region_sex_ethnicity_pvmap.csv --config_file=common_metadata.csv --output_path=./output/output_region --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/sex/NNDSS_Annual_Summary_Data_*.csv --pv_map=race_region_sex_ethnicity_pvmap.csv --config_file=common_metadata.csv --output_path=./output/output_sex --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/ethnicity/NNDSS_Annual_Summary_Data_*.csv --pv_map=race_region_sex_ethnicity_pvmap.csv --config_file=common_metadata.csv --output_path=./output/output_ethnicity --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/age/NNDSS_Annual_Summary_Data_*.csv --pv_map=age_pvmap.csv --config_file=common_metadata.csv --output_path=./output/output_age --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=./input_files/region_state/NNDSS_Annual_Summary_Data_*.csv --pv_map=region_state_pvmap.csv --config_file=common_metadata.csv --output_path=./output/output_region_state --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/output_age.tmcf",
+                    "cleaned_csv": "output/output_*.csv"
+                }
+            ],
+            "source_files": [
+                "./input_files/*/NNDSS_Annual_Summary_Data_*.csv"
+            ],
+            "cron_schedule": "0 0 1 7 *",
+            "validation_config_file": "validation_config.json"
+        }
+    ]
+}
