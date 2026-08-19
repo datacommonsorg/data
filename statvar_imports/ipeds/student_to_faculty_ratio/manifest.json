@@ -24,19 +24,7 @@
                 "counters/*.csv"
             ],
             "cron_schedule": "0 0 1,15 * *",
-            "validation_config_file": "validation_config.json",
-            "resource_limits": {
-                "cpu": 8,
-                "memory": 32,
-                "disk": 200
-            },
-            "config_override": {
-                "invoke_import_validation": true,
-                "invoke_import_tool": true,
-                "invoke_differ_tool": true,
-                "skip_gcs_upload": false,
-                "cleanup_gcs_volume_mount": false
-            }
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

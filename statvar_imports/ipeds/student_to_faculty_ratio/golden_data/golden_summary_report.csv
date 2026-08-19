@@ -1,2 +1,2 @@
-StatVar,NumPlaces,NumObservations,MinValue,MaxValue,NumObservationsDates,MinDate,MaxDate,MeasurementMethods,Units,ScalingFactors,observationPeriods
-Percent_Student_AsAFractionOf_Count_Teacher,8714,102344,1.0,446.0,16,2009,2024,"[, NCES_ProvisionalEstimate]",[],[],[]
+"Units","StatVar","MinDate","ScalingFactors","NumPlaces","observationPeriods","MeasurementMethods"
+"[]","Percent_Student_AsAFractionOf_Count_Teacher","2009","[]","8714","[]","[, NCES_ProvisionalEstimate]"

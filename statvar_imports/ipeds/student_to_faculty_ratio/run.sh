@@ -70,7 +70,7 @@ for input_file in "$INPUT_DIR"/*; do
             --config_file="$CONFIG_FILE" \
             --existing_statvar_mcf="$EXISTING_MCF" \
             --output_path="$output_base_path" \
-            --output_counters="counters/student_faculty_ratio.csv" \
+            --output_counters="counters/${clean_base}_counters.csv" \
             --log_level=-2 \
             --log_every_n=1000 &
         
