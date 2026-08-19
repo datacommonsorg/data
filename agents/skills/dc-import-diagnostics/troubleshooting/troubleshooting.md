@@ -12,7 +12,8 @@ Use this entry point for diagnostic requests routed from
 
 | Scenario | Route |
 |---|---|
-| The request or available evidence identifies a network, URL-fetch, or download failure | Open [Network failures](network-failures.md). |
+| The request asks whether all required source files or requests were acquired | Open [Source acquisition completeness](source-acquisition.md). |
+| The request identifies a network, URL-fetch, or download failure without asking about overall acquisition completeness | Open [Network failures](network-failures.md). |
 | A scheduled run did not start and no Batch job ID is recorded | Inspect the deployed Scheduler job. |
 | A Batch job failed, stopped making progress, or has a suspected runtime cause | Open [Cloud Batch runtime issues](batch-runtime.md). |
 | The request asks to debug deleted observations, or a `FAILED` rule maps to `DELETED_RECORDS_COUNT` or `DELETED_RECORDS_PERCENT` | Open [Deleted observation debugging](deleted-observations.md). |

@@ -9,16 +9,23 @@ validation rule maps to `DELETED_RECORDS_COUNT` or
 exceeded the configured threshold; it does not identify the root cause or prove
 that a whole series was deleted.
 
+## Check source acquisition first when relevant
+
+If an incomplete download is plausible, follow
+[Source acquisition completeness](source-acquisition.md). Stop to investigate
+a confirmed required download failure. If acquisition passes, treat checking
+whether the retained source contains the deleted data as a separate phase.
+
 ## Questions to resolve
 
 - Which persisted artifacts are required before diagnosis can begin?
 - Which StatVar, place, StatVar-place, and series summaries should be derived?
 - What evidence is sufficient to classify a whole-series deletion?
 - How should delete-plus-add replacements be distinguished from true deletion?
-- When should the investigation continue into source acquisition or processing?
+- When should the investigation continue into processing?
 - Which commands or helper scripts are reliable enough to include?
 
-Until this guide is completed, report the confirmed threshold failure and use
-the [Import Differ documentation](../../../../tools/import_differ/README.md) for
-the current artifact and comparison contracts. Do not claim a deletion root
-cause or whole-series deletion.
+For the unresolved deletion questions, report the confirmed threshold failure
+and use the [Import Differ documentation](../../../../tools/import_differ/README.md)
+for the current artifact and comparison contracts. Do not claim a deletion
+root cause or whole-series deletion.
