@@ -14,11 +14,9 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/underlyingcauseofdeath_singlerace.tmcf",
-                    "node_mcf": "output/underlyingcauseofdeath_singlerace_stat_vars.mcf",
                     "cleaned_csv": "output/underlyingcauseofdeath_singlerace.csv"
                 }
             ],
-            "validation_config_file": "validation_config.json",
             "source_files": [
                 "input_files/*.csv",
                 "counters/*.csv"
