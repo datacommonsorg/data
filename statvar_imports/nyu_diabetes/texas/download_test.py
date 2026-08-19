@@ -109,7 +109,7 @@ class DownloadTest(unittest.TestCase):
         with self.assertRaisesRegex(
             ValueError, "Could not find initial wonderform on CDC WONDER page."
         ):
-            download.download_cdc_wonder_data(download.SOURCE_URL)
+            download.download_cdc_wonder_data.__wrapped__(download.SOURCE_URL)
 
     @mock.patch.object(download.requests, 'Session')
     def test_download_cdc_wonder_data_missing_request_form(self, mock_session_cls):
@@ -130,7 +130,7 @@ class DownloadTest(unittest.TestCase):
         with self.assertRaisesRegex(
             ValueError, "Could not find request form after agreeing to terms."
         ):
-            download.download_cdc_wonder_data(download.SOURCE_URL)
+            download.download_cdc_wonder_data.__wrapped__(download.SOURCE_URL)
 
     @mock.patch.object(download.requests, 'Session')
     def test_download_cdc_wonder_data_http_error(self, mock_session_cls):
