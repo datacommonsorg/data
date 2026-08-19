@@ -126,7 +126,7 @@
                 }
             ],
             "resource_limits": {
-                "cpu": 32,
+                "cpu": 16,
                 "memory": 512,
                 "disk": 500
             },
