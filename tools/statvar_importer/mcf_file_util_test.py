@@ -111,6 +111,21 @@ class TestMCFFileUtil(unittest.TestCase):
         self.assertEqual('dcid:Upto20',
                          mcf_file_util.normalize_value('[ - 20 ]', True))
 
+    def test_normalize_value_list_with_brackets(self):
+        # Test bracketed lists of values with commas.
+        self.assertEqual(
+            '[dcid:A,dcid:B]',
+            mcf_file_util.normalize_value('[dcid:B,dcid:A]'),
+        )
+        self.assertEqual(
+            '[dcid:A,dcid:B]',
+            mcf_file_util.normalize_value('[ dcid:B, dcid:A ]'),
+        )
+        self.assertEqual(
+            '["ValueA","ValueB"]',
+            mcf_file_util.normalize_value('[ "ValueB", "ValueA" ]'),
+        )
+
     def test_load_mcf_file(self):
         mcf_nodes = mcf_file_util.load_mcf_nodes(
             os.path.join(_module_dir_, 'test_data',

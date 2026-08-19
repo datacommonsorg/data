@@ -1,0 +1,25 @@
+# Data Commons import troubleshooting
+
+Use this entry point for diagnostic requests routed from
+[the import diagnostics skill](../SKILL.md).
+
+## Route the issue
+
+- If the request names a failure domain or suspected cause, open its guide.
+- Otherwise, use current `ImportStatus` to identify the exact job or version.
+- Inspect only the Batch job or import summary needed to identify the failure
+  domain.
+
+| Scenario | Route |
+|---|---|
+| A scheduled run did not start and no Batch job ID is recorded | Inspect the deployed Scheduler job. |
+| A Batch job failed, stopped making progress, or has a suspected runtime cause | Open [Cloud Batch runtime issues](batch-runtime.md). |
+| The user reports a validation failure, or an exact import summary reports `status=VALIDATION` | Open [Import validation failures](validation-failures.md). |
+
+## When no guide matches
+
+- Continue a bounded, evidence-first investigation.
+- Use the main skill's information routes and operational references.
+- Report that no specific troubleshooting guide matched.
+- Distinguish observed evidence from inference.
+- Do not guess a root cause.
