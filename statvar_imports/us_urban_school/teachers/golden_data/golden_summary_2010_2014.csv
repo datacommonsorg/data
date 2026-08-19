@@ -1,0 +1,8 @@
+"NumPlaces","MinValue","StatVar","ScalingFactors","Units","MaxDate","MeasurementMethods","MaxValue","observationPeriods","NumObservations","NumObservationsDates","MinDate"
+"106268","0.0","Count_Teacher_FullTimeEmployee","[]","[]","2014","[]","165165.0","[]","263243","3","2010"
+"104818","0.0","Count_Faculty_FullTimeEmployee_SchoolCounselor","[]","[]","2014","[]","2123.25","[]","195981","3","2010"
+"95427","0.0","Count_Teacher_AbsentMoreThan10Days_FullTimeEmployee","[]","[]","2014","[]","183.0","[]","95427","1","2014"
+"106270","0.0","Count_Teacher_FullTimeEmployee_FirstYear","[]","[]","2014","[]","1300.0","[]","263244","3","2010"
+"106270","0.0","Count_Teacher_FullTimeEmployee_SecondYear","[]","[]","2014","[]","1500.0","[]","263244","3","2010"
+"106268","0.0","Count_Teacher_Certified_FullTimeEmployee","[]","[]","2014","[]","165165.0","[]","263238","3","2010"
+"95477","0.0","Count_Teacher_NotCertified_FullTimeEmployee","[]","[]","2014","[]","293.25","[]","95477","1","2014"

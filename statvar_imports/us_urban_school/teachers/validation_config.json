@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 0.3
+      }
+    },
+    {
+      "rule_id": "check_goldens_teachers_and_staff_2010_2014",
+      "description": "Validates teachers_and_staff_2010_2014 data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_2010_2014.csv",
+        "input_files": "../../input0/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_teachers_and_staff_2016",
+      "description": "Validates teachers_and_staff_2016 data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_2016.csv",
+        "input_files": "../../input1/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_teachers_and_staff_2018_2022",
+      "description": "Validates teachers_and_staff_2018_2022 data against its golden summary report.",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_2018_2022.csv",
+        "input_files": "../../input2/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observation_teachers_and_staff_2010_2014",
+      "description": "Verifies the generated output CSV data matches established critical golden records for teachers_and_staff_2010_2014 data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_2010_2014.csv",
+        "input_files": "../../../../output_files/teachers_and_staff_2010_2014_output.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_teachers_and_staff_2016",
+      "description": "Verifies the generated output CSV data matches established critical golden records for teachers_and_staff_2016 data ",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_2016.csv",
+        "input_files": "../../../../output_files/teachers_and_staff_2016_output.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_teachers_and_staff_2018_2022",
+      "description": "Verifies the generated output CSV data matches established critical golden records for teachers_and_staff_2018_2022 data",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_2018_2022.csv",
+        "input_files": "../../../../output_files/teachers_and_staff_2018_2022_output.csv"
+      }
+    }
+  ]
+}
