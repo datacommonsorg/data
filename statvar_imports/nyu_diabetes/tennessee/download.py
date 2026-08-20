@@ -15,12 +15,10 @@
 
 from datetime import date
 import os
-import requests
-from urllib.parse import urlparse
-from tqdm import tqdm  
 from pathlib import Path
 import re
 from urllib.parse import urlparse
+import urllib3
 
 from absl import app
 from absl import flags
@@ -31,6 +29,8 @@ import pandas as pd
 import requests
 from retry import retry
 from tqdm import tqdm
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 FLAGS = flags.FLAGS
 
@@ -45,9 +45,8 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(script_dir, "input_files")
 Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 
-import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+@retry(tries=3, delay=5, backoff=2)
 def retry_method(url, headers=None):
     if headers is None:
         headers = {}
