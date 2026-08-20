@@ -4,7 +4,7 @@ This project processes and imports the Student to Faculty Ratio data from the In
 
 # Import Name: IPEDS_StudentToFacultyRatio
 
-Source URL: ``https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true&sid=859539d0-db09-4d03-a36a-eabf93d07355&rtid=7`
+Source URL: https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?gotoReportId=7&fromIpeds=true&sid=859539d0-db09-4d03-a36a-eabf93d07355&rtid=7
 
 Provenance Description: Integrated Postsecondary Education Data System (IPEDS) is the official online home for the primary federal source of data on U.S. colleges, universities, and technical/vocational institutions. This import focuses on Student to Faculty Ratio data.
 
@@ -46,7 +46,7 @@ This import is designed to be autorefreshed via a Cloud Scheduler job.
 
 # Scripts Executed: `download.py, preprocess.py, run.sh`
 
-Schedule: 0 0 15 7 * (Runs at 00:00 on day 15 of July, i.e., annually on July 15th).
+Schedule: 0 0 1,15 * * (Runs at 00:00 on the 1st and 15th of every month).
 
 ## Steps:
 
@@ -58,7 +58,7 @@ The shell script run.sh then runs the `stat_var_processor.py` tool to process th
 
 The final, validated output files are uploaded to a GCS bucket for ingestion into the Data Commons Knowledge Graph.
 
-# pre   Script Execution Details
+## Script Execution Details
 To run the import manually, follow these steps in order.
 
 **Step 1:** Download and Preprocess Raw Data
@@ -67,11 +67,10 @@ This script downloads all available data files, unzips them, filters for relevan
 # Usage:
 
 ```Bash
-
 python3 download.py
-
-The processed source files will be located in input_files/.
 ```
+
+The processed source files will be located in `input_files/`.
 
 **Step 2:** 
 # Process the Data
@@ -83,15 +82,13 @@ The shell script run.sh runs the stat_var_processor.py tool on all the files in 
 # Usage:
 
 ```Bash
-
-sh run.sh
+bash run.sh
 ```
 
 A generic command for the processor looks like:
 
 ```Bash
-
-python3 ../../../../tools/statvar_importer/stat_var_processor.py --input_data="input/student_faculty_ratio_data_<year>.csv" --pv_map="student_faculty_ratio_pvmap.csv" --config_file="student_faculty_ratio_metadata.csv" --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path="output/student_to_faculty_ratio_<year>"
+python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data="input_files/student_faculty_ratio_data_<year>.csv" --pv_map="student_faculty_ratio_pvmap.csv" --config_file="student_faculty_ratio_metadata.csv" --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path="processed_output/student_faculty_ratio_<year>"
 ```
 
 **Step 3:** 
@@ -101,8 +98,7 @@ This command validates the generated files for formatting and semantic consisten
 # Usage:
 
 ```Bash
-
-java -jar /path/to/datacommons-import-tool.jar lint -d 'output/'
+java -jar /path/to/datacommons-import-tool.jar lint -d 'processed_output/'
 ```
 
 This step ensures that the generated artifacts are ready for ingestion into Data Commons.

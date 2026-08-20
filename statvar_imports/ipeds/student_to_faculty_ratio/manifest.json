@@ -15,8 +15,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "processed_output/student_faculty_ratio.tmcf",
-                    "cleaned_csv": "processed_output/*.csv",
-                    "node_mcf": "processed_output/*.mcf"
+                    "cleaned_csv": "processed_output/*.csv"
                 }
             ],
             "source_files": [

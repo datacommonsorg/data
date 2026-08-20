@@ -40,13 +40,6 @@ BASE_URL_TEMPLATES = [
     BASE_URL_PROV,
 ]
 
-DOWNLOAD_DIR = "input_files"
-# Pattern to match files ending in '_rv' followed by a file extension
-RV_PATTERN = re.compile(r'_rv\.[a-z0-9]+$', re.IGNORECASE)
-# Pattern to match provisional files (e.g. ef2023d.csv, ef2024d.csv)
-PROVISIONAL_PATTERN = re.compile(r'^ef\d{4}d\.[a-z0-9]+$', re.IGNORECASE)
-# ---------------------
-
 # --- Path Adjustment for Utility Import ---
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
@@ -55,6 +48,32 @@ try:
     from download_util_script import download_file
 except ImportError as e:
     logging.fatal("Could not import 'download_file'. Please ensure the utility script is accessible. Original error: %s", e)
+
+DOWNLOAD_DIR = os.path.join(_SCRIPT_PATH, "input_files")
+# Pattern to match files ending in '_rv' followed by a file extension
+RV_PATTERN = re.compile(r'_rv\.[a-z0-9]+$', re.IGNORECASE)
+# Pattern to match provisional files (e.g. ef2023d.csv, ef2024d.csv)
+PROVISIONAL_PATTERN = re.compile(r'^ef\d{4}d\.[a-z0-9]+$', re.IGNORECASE)
+REQUIRED_COLUMNS = {"UNITID", "STUFACR"}
+# ---------------------
+
+
+def is_valid_csv(file_path: str) -> bool:
+    """
+    Validates that file_path is a valid CSV containing required IPEDS headers (UNITID, STUFACR).
+    """
+    if not os.path.exists(file_path) or os.path.getsize(file_path) == 0:
+        return False
+    try:
+        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+            first_line = f.readline()
+            if not first_line or "<html" in first_line.lower() or "<!doctype" in first_line.lower():
+                return False
+            headers = {h.strip().upper().strip('"') for h in first_line.split(',')}
+            return REQUIRED_COLUMNS.issubset(headers)
+    except Exception as e:
+        logging.warning("Failed to validate CSV %s: %s", file_path, e)
+        return False
 
 
 def process_and_filter_zip(zip_path: str, output_dir: str) -> bool:
@@ -89,9 +108,11 @@ def process_and_filter_zip(zip_path: str, output_dir: str) -> bool:
             return True
 
     except zipfile.BadZipFile:
-        logging.fatal("  FATAL ERROR: %s is a corrupted or empty zip file. Cannot proceed.", zip_filename)
+        logging.warning("  %s is a corrupted or empty zip file. Trying next URL...", zip_filename)
+        return False
     except Exception as e:
-        logging.fatal("  FATAL ERROR: An unexpected error occurred during unzipping/extraction of %s: %s", zip_filename, e)
+        logging.warning("  An unexpected error occurred during unzipping/extraction of %s: %s", zip_filename, e)
+        return False
     finally:
         if os.path.exists(zip_path):
             try:
@@ -144,19 +165,27 @@ def download_for_year(year: int) -> bool:
                             return True
                     else:
                         # Direct CSV download (e.g. from data-generator)
-                        target_name = f"ef{year}d_rv.csv" if "HasRV=1" in url else f"ef{year}d.csv"
-                        target_path = os.path.join(DOWNLOAD_DIR, target_name)
-                        if os.path.exists(target_path):
-                            os.remove(target_path)
-                        os.rename(actual_download_path, target_path)
-                        logging.info("  Successfully fetched direct CSV dataset for year %d.", year)
-                        return True
+                        if is_valid_csv(actual_download_path):
+                            target_name = f"ef{year}d_rv.csv" if "HasRV=1" in url else f"ef{year}d.csv"
+                            target_path = os.path.join(DOWNLOAD_DIR, target_name)
+                            if os.path.exists(target_path):
+                                os.remove(target_path)
+                            os.rename(actual_download_path, target_path)
+                            logging.info("  Successfully fetched direct CSV dataset for year %d.", year)
+                            return True
+                        else:
+                            logging.warning("  Downloaded file from %s is not a valid CSV dataset with expected columns.", url)
+                            if os.path.exists(actual_download_path):
+                                try:
+                                    os.remove(actual_download_path)
+                                except OSError:
+                                    pass
         except requests.exceptions.RequestException as e:
-            logging.info("  Network error for candidate URL %s: %s", url, e)
+            logging.warning("  Network error for candidate URL %s: %s", url, e)
         except Exception as e:
-            logging.info("  Candidate URL %s failed: %s", url, e)
+            logging.warning("  Candidate URL %s failed: %s", url, e)
 
-    logging.info("Warning: No dataset found for year %d across candidate URLs.", year)
+    logging.warning("Warning: No dataset found for year %d across candidate URLs.", year)
     return False
 
 
