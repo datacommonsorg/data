@@ -1,5 +1,0 @@
-Node: dcid:ageGroupClassification
-typeOf: dcs:Property
-name: "ageGroupClassification"
-rangeIncludes: dcid:AgeGroupClassificationEnum,dcid:Class
-

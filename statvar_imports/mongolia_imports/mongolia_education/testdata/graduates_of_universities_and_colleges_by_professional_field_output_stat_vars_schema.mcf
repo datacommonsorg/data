@@ -8,23 +8,3 @@ typeOf: dcid:EducationalMajorEnum
 name: "Social Sciences Major__ Communication Journalism And Related Major"
 isProvisional: dcs:True
 
-Node: dcid:bachelorsDegreeMajor
-typeOf: dcs:Property
-name: "bachelorsDegreeMajor"
-rangeIncludes: dcid:ProvisionalNode
-
-Node: dcid:NaturalSciencesMajor__MathAndStatisticsMajor
-typeOf: dcid:EducationalMajorEnum
-name: "Natural Sciences Major__ Math And Statistics Major"
-isProvisional: dcs:True
-
-Node: dcid:EngineeringMajor__EngineeringManufacturing__ConstructionEngineering
-typeOf: dcid:EducationalMajorEnum
-name: "Engineering Major__ Engineering Manufacturing__ Construction Engineering"
-isProvisional: dcs:True
-
-Node: dcid:AgriculturalEngineering__ForestryEngineering__Fisheries__Veterinary
-typeOf: dcid:EducationalMajorEnum
-name: "Agricultural Engineering__ Forestry Engineering__ Fisheries__ Veterinary"
-isProvisional: dcs:True
-

@@ -20,10 +20,7 @@ class MongoliaImportTestBase(unittest.TestCase):
 
     def setUp(self):
         self.maxDiff = None
-        if os.path.exists('/tmp/stat_vars.mcf'):
-            self.existing_statvar_mcf = '/tmp/stat_vars.mcf'
-        else:
-            self.existing_statvar_mcf = '/dev/null'
+        self.existing_statvar_mcf = '/dev/null'
 
     def compare_mcf_files(self, actual_file: str, expected_file: str):
         """Compare files with MCF nodes allowing reordering of nodes and properties."""

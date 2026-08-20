@@ -1,10 +1,5 @@
-Marital status,Age group,Sex,2020,2015,2010,2000,1989,1979,1969
-Total,Total,Total,2152109,2074486,1905969,1524372,1051952,778732,619006
-Total,Total,Male,1039588,0,937271,749890,0,0,0
-Total,Total,Female,1112521,0,968698,774482,0,0,0
-Total,15-19,Total,215816,235466,257645,263358,85259,74344,0
-Total,15-19,Male,109682,0,130560,133327,0,0,0
-Legally registered/Unregistered married,Total,Total,1303751,1218616,1146238,880444,692476,509126,399370
-Legally registered/Unregistered married,Total,Male,633932,0,568943,438585,0,0,0
-Divorced/Separated,Total,Total,51507,50530,59007,41444,17148,14449,13430
-Divorced/Separated,Total,Male,20295,0,25172,15776,0,0,0
+Marital status,Age group,Sex,2020,2015
+Total,Total,Total,2152109,2074486
+Total,Total,Male,1039588,0
+Total,Total,Female,1112521,0
+Total,15-19,Total,215816,235466

@@ -1,40 +1,4 @@
-# Auto generated using command: "/usr/local/google/home/samnotra/19aug/mongolia-imports/data/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/testdata/employment_to_population_ratio_by_region_gender_and_agegroup_input.csv --pv_map=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/employment_to_population_ratio_by_region_gender_and_agegroup_pvmap.csv --config_file=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/employment_to_population_ratio_by_region_gender_and_agegroup_metadata.csv --output_path=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/testdata/employment_to_population_ratio_by_region_gender_and_agegroup_output --existing_statvar_mcf=/tmp/stat_vars.mcf --places_resolved_csv=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/places_resolved.csv" on 2026-08-19 12:25:25.112745
-
-Node: dcid:Count_Person_20To24Years_Employed
-typeOf: dcid:StatisticalVariable
-name: "Population: 20 - 24 Years, Employed"
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [20 24 Years]
-employmentStatus: dcid:Employed
-
-Node: dcid:Count_Person_25To29Years_Employed
-typeOf: dcid:StatisticalVariable
-name: "Population: 25 - 29 Years, Employed"
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [25 29 Years]
-employmentStatus: dcid:Employed
-
-Node: dcid:Count_Person_30To34Years_Employed
-typeOf: dcid:StatisticalVariable
-name: "Population: 30 - 34 Years, Employed"
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [30 34 Years]
-employmentStatus: dcid:Employed
-
-Node: dcid:Count_Person_35To39Years_Employed
-typeOf: dcid:StatisticalVariable
-name: "Population: 35 - 39 Years, Employed"
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-age: [35 39 Years]
-employmentStatus: dcid:Employed
+# Auto generated using command: "/usr/local/google/home/samnotra/19aug/mongolia-imports/data/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/testdata/employment_to_population_ratio_by_region_gender_and_agegroup_input.csv --pv_map=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/employment_to_population_ratio_by_region_gender_and_agegroup_pvmap.csv --config_file=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/employment_to_population_ratio_by_region_gender_and_agegroup_metadata.csv --output_path=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/testdata/employment_to_population_ratio_by_region_gender_and_agegroup_output --existing_statvar_mcf=/dev/null --places_resolved_csv=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/places_resolved.csv" on 2026-08-20 09:59:30.079876
 
 Node: dcid:Count_Person_Employed
 typeOf: dcid:StatisticalVariable
@@ -42,24 +6,4 @@ populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 employmentStatus: dcid:Employed
-
-Node: dcid:Count_Person_Employed_Female_AsAFractionOf_Count_Person_Female
-typeOf: dcid:StatisticalVariable
-name: "Population: Employed, Female (As Fraction of Count Person Female)"
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-measurementDenominator: dcid:Count_Person_Female
-employmentStatus: dcid:Employed
-gender: dcid:Female
-
-Node: dcid:Count_Person_Employed_Male_AsAFractionOf_Count_Person_Male
-typeOf: dcid:StatisticalVariable
-name: "Population: Employed, Male (As Fraction of Count Person Male)"
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-measurementDenominator: dcid:Count_Person_Male
-employmentStatus: dcid:Employed
-gender: dcid:Male
 
