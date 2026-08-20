@@ -401,38 +401,35 @@ class SkillContractTest(unittest.TestCase):
         registry = yaml.safe_load(
             self._read('agents/common/config/import-environments.yaml'))
         skill = self._skill_path.read_text(encoding='utf-8')
-        prod_required_fields = {
-            'scheduler': {'project', 'location'},
-            'workflow': {'project', 'location', 'import_workflow'},
-            'batch': {'project', 'location'},
-            'gcs': {'client_project', 'output_bucket'},
-            'spanner': {'project', 'instance', 'database'},
-        }
-        test_required_fields = {
-            'batch': {'project', 'location'},
-            'gcs': {'output_bucket'},
+        expected_environments = {
+            'prod': {
+                'scheduler': {'project', 'location'},
+                'workflow': {'project', 'location', 'import_workflow'},
+                'batch': {'project', 'location'},
+                'gcs': {'client_project', 'output_bucket'},
+                'spanner': {'project', 'instance', 'database'},
+            },
+            'test': {
+                'batch': {'project', 'location'},
+                'gcs': {'output_bucket'},
+            },
         }
 
         self.assertIn('../../common/config/import-environments.yaml', skill)
         self.assertEqual({'default_environment', 'environments'}, set(registry))
         self.assertEqual('prod', registry['default_environment'])
-        self.assertEqual({'prod', 'test'}, set(registry['environments']))
+        self.assertEqual(
+            set(expected_environments), set(registry['environments']))
 
-        prod = registry['environments']['prod']
-        self.assertEqual(set(prod_required_fields), set(prod))
-        for section, fields in prod_required_fields.items():
-            self.assertEqual(fields, set(prod[section]))
-            for field in fields:
-                self.assertIsInstance(prod[section][field], str)
-                self.assertTrue(prod[section][field])
-
-        test = registry['environments']['test']
-        self.assertEqual(set(test_required_fields), set(test))
-        for section, fields in test_required_fields.items():
-            self.assertEqual(fields, set(test[section]))
-            for field in fields:
-                self.assertIsInstance(test[section][field], str)
-                self.assertTrue(test[section][field])
+        for name, required_fields in expected_environments.items():
+            with self.subTest(environment=name):
+                environment = registry['environments'][name]
+                self.assertEqual(set(required_fields), set(environment))
+                for section, fields in required_fields.items():
+                    self.assertEqual(fields, set(environment[section]))
+                    for field in fields:
+                        self.assertIsInstance(environment[section][field], str)
+                        self.assertTrue(environment[section][field])
 
 
 class ImportCodeReviewSkillContractTest(unittest.TestCase):
