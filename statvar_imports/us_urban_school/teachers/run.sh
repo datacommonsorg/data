@@ -21,6 +21,7 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
 --output_path=$SCRIPT_PATH/output_files/teachers_and_staff_2010_2014_output \
+--output_counters="$SCRIPT_PATH/counters/teachers_and_staff_2010_2014_counters.csv" \
 --log_level=-2 \
 --log_every_n=1000 || \
 { echo "Error: Processing teachers_and_staff files for the year 2010 to 2014 failed!"; exit 1; }
@@ -34,6 +35,7 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
 --output_path=$SCRIPT_PATH/output_files/teachers_and_staff_2016_output \
+--output_counters="$SCRIPT_PATH/counters/teachers_and_staff_2016_counters.csv" \
 --log_level=-2 \
 --log_every_n=1000 || \
 { echo "Error: Processing teachers_and_staff files for the year 2016 failed!"; exit 1; }
@@ -49,6 +51,7 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 --config_file=$SCRIPT_PATH/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
 --output_path=$SCRIPT_PATH/output_files/teachers_and_staff_2018_2022_output \
+--output_counters="$SCRIPT_PATH/counters/teachers_and_staff_2018_2022_counters.csv" \
 --log_level=-2 \
 --log_every_n=1000 || \
 { echo "Error: Processing teachers_and_staff files for the year 2018 to 2022 failed!"; exit 1; }
