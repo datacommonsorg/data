@@ -8,7 +8,8 @@
       "scripts": ["../common_download_script.py", "run.sh"],
       "source_files": [
         "input_files/*.csv",
-        "counters/*.csv"
+        "counters/*.csv",
+        "golden_data/*.csv"
       ],
       "import_inputs": [
         {

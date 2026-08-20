@@ -71,6 +71,15 @@ HEALTH_TABLES = [
     {"url": "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Births%2C%20deaths/DT_NSO_2100_027V2.px", "filename": "deaths_by_month_and_region.csv"}
 ]
 
+EMPLOYMENT_TABLES = [
+    {"url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_035V7_1.px", "filename": "employment_by_classification_of_economic_activities_region_gender_and_agegroup.csv"},
+    {"url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_006V12_1.px", "filename": "employment_by_occupation_by_region_gender_and_agegroup.csv"},
+    {"url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_015V1.px", "filename": "employment_to_population_ratio_by_region_gender_and_agegroup.csv"},
+    {"url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_005V1.px", "filename": "labour_force_by_region_gender_and_agegroup.csv"},
+    {"url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_036V1.px", "filename": "labour_underutilization_by_region_gender_and_agegroup.csv"},
+    {"url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_011V1.px", "filename": "registered_unemployed_by_education_level_region_gender_month.csv"}
+]
+
 def fetch_and_save_data(url, csv_filepath, query=None):
     """
     Fetches exactly formatted CSV data from the PxWeb API.
@@ -104,14 +113,14 @@ def fetch_and_save_data(url, csv_filepath, query=None):
             error_msg = (
                 f"FATAL ERROR: Failed to download valid file {csv_filepath} from {url}"
             )
-            logging.fatal(error_msg)
+            logging.error(error_msg)
             raise RuntimeError(error_msg)
             
         logging.info(f"Successfully downloaded CSV file: {csv_filepath}")
 
     except Exception as e:
         error_msg = f"FATAL ERROR: Failed to download from {url}: {e}"
-        logging.fatal(error_msg)
+        logging.error(error_msg)
         raise RuntimeError(error_msg)
 
 def main(_):
@@ -137,6 +146,13 @@ def main(_):
     for table in HEALTH_TABLES:
         filepath = os.path.join(health_dir, table['filename'])
         fetch_and_save_data(table['url'], filepath, table.get('query'))
+
+    # Employment Data
+    employment_dir = os.path.join(_SCRIPT_DIR, "mongolia_employment", "input_files")
+    os.makedirs(employment_dir, exist_ok=True)
+    for table in EMPLOYMENT_TABLES:
+        filepath = os.path.join(employment_dir, table['filename'])
+        fetch_and_save_data(table['url'], filepath)
 
     logging.info("All tasks completed")
 
