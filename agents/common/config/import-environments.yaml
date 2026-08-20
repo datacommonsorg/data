@@ -25,27 +25,19 @@ environments:
     spanner:
       project: datcom-store
       instance: dc-graph-staging
-      database: dc_graph_1
+      database: dc_graph
 
-  staging:
-    scheduler:
-      project: datcom-ci
-      location: us-central1
-
-    workflow:
-      project: datcom-ci
-      location: us-central1
-      import_workflow: import-automation-workflow
+  # Test environment (sometimes called dev environment, used for testing import changes).
+  # Batch jobs are run directly and outputs are checked in GCS.
+  test:
+    # Scheduler: not configured in test
+    # Workflow: not configured in test
 
     batch:
-      project: datcom-ci
+      project: datcom-infosys-dev
       location: us-central1
 
     gcs:
-      client_project: datcom-ci
-      output_bucket: datcom-ci-test
+      output_bucket: datcom-import-test
 
-    spanner:
-      project: datcom-ci
-      instance: datcom-spanner-test
-      database: dc-test-db
+    # Spanner: not configured in test
