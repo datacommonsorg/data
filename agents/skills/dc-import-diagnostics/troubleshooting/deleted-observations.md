@@ -6,7 +6,8 @@ Use this guide to debug deleted observations or when a `FAILED` validation rule 
 
 - [Source acquisition was incomplete](#source-acquisition-was-incomplete)
 - [Retained source no longer contains the data](#retained-source-no-longer-contains-the-data)
-- [Processing or mapping changed the observations](#processing-or-mapping-changed-the-observations)
+- [StatVar Processor changed or dropped observations](#statvar-processor-changed-or-dropped-observations)
+- [Other transformation code changed or dropped observations](#other-transformation-code-changed-or-dropped-observations)
 
 ## Understand what was deleted
 
@@ -24,24 +25,12 @@ Choose checks based on the deletion pattern and artifact sizes.
 - To find patterns in deleted observations, group by `variableMeasured`,
   `observationAbout`, StatVar-place, `observationDate`, or facet. These are
   examples; choose the views that fit the deletion pattern.
-- For manageable MCF files, download to a system temporary directory, convert
-  them with
-  [mcf_file_util.py](../../../../tools/statvar_importer/mcf_file_util.py) and
-  query the CSV with the DuckDB CLI or repository Python. The converter loads
-  the MCF into memory, so avoid it for files above roughly 2 GB.
 - Compare candidate and previous `summary_report.csv` files for missing
   StatVars or changes in observation, place, date, date-range, and facet
   counts. Use the previous input named in `differ_summary.json`.
-- For StatVar Processor imports, compare the `cleaned_csv` files identified by
-  `manifest.json` for the candidate and previous version. These are final
-  tabular processor outputs that are converted to MCF, not source data. Query
-  them directly instead of converting the corresponding MCF back to CSV.
-  Choose local queries or the short-lived BigQuery table based on size. Use the
-  processor command and `source_files` to trace raw inputs and mappings.
-- For large GCS CSV, Parquet, or Avro files, consult
-  [create_short_lived_bq_table.sh](../scripts/create_short_lived_bq_table.sh)
-  with `--help`, then give the user the exact command and ask for the returned
-  table name. Never run the table-creating command or delete a table.
+- Use [Query import artifacts](../references/querying-artifacts.md) to choose
+  local DuckDB, MCF-to-CSV conversion, or a user-created short-lived BigQuery
+  table.
 
 See [Import Differ](../../../../tools/import_differ/README.md) for artifact
 semantics. It does not persist deletion summaries by StatVar, place, or
@@ -65,15 +54,30 @@ StatVar-place.
 - **Mitigate:** Identify the source, endpoint, or query change when the rows are
   absent.
 
-### Processing or mapping changed the observations
+### StatVar Processor changed or dropped observations
 
-- **Confirm or refute:** When the source rows exist, check whether their current
-  generated observations are missing or have a different observation identity.
-  Use the PV map and StatVar Processor evidence for StatVar Processor imports;
-  use the transformation code and its evidence for other imports. Compare
-  `nodes-added.mcf` when the change may be a delete-plus-add replacement.
-- **Mitigate:** Correct the mapping or processing issue. If the identity change
-  is intentional, report a replacement instead of a true deletion.
+- **Confirm or refute:** Compare the candidate and previous `cleaned_csv` files
+  identified by `manifest.json`. These are the final tabular processor outputs
+  supplied to `genmcf`, not raw source data. Compare retained counters for
+  unusual changes in input, ignored, dropped, generated, or output rows. When
+  `#input` is present, use it to trace representative observations to source
+  context. Inspect the PV map and processor configuration for the affected
+  rows. See the [StatVar Processor](../../../../tools/statvar_importer/README.md)
+  for output and counter semantics.
+- **Mitigate:** Correct the mapping, configuration, or processing condition. If
+  the observation identity changed intentionally, report a replacement rather
+  than a true deletion.
+
+### Other transformation code changed or dropped observations
+
+- **Confirm or refute:** When a complete final CSV is retained, compare the
+  candidate and previous CSV directly. Otherwise compare the generated MCF
+  under each version's `input<N>/genmcf/` directory. Trace representative
+  deletions through the transformation code. Compare `nodes-added.mcf` when the
+  change may be a delete-plus-add replacement.
+- **Mitigate:** Correct the transformation or mapping. If the observation
+  identity changed intentionally, report a replacement rather than a true
+  deletion.
 
 ## Classify the impact
 
