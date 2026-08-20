@@ -5,7 +5,10 @@
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www.1212.mn/en/statcate",
       "provenance_description": "Data related to the Mongolia's labour and business at country level",
-      "scripts": ["run.sh"],
+      "scripts": [
+        "../common_download_script.py",
+        "run.sh"
+      ],
       "source_files": [
         "input_files/*.csv",
         "counters/*.csv",

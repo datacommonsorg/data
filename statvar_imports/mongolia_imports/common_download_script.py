@@ -72,12 +72,30 @@ HEALTH_TABLES = [
 ]
 
 EMPLOYMENT_TABLES = [
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_035V7_1.px", "filename": "employment_by_classification_of_economic_activities_region_gender_and_agegroup.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_006V12_1.px", "filename": "employment_by_occupation_by_region_gender_and_agegroup.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_015V1.px", "filename": "employment_to_population_ratio_by_region_gender_and_agegroup.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_005V1.px", "filename": "labour_force_by_region_gender_and_agegroup.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_036V1.px", "filename": "labour_underutilization_by_region_gender_and_agegroup.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_011V1.px", "filename": "registered_unemployed_by_education_level_region_gender_month.csv"}
+    {
+        "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/EMPLOYMENT%2C%20by%20economic%20activities%2C%20sex%2C%20age%20group%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_035V7_1.px",
+        "filename": "employment_by_classification_of_economic_activities_region_gender_and_agegroup.csv"
+    },
+    {
+        "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/EMPLOYMENT%2C%20by%20occupation%2C%20sex%2C%20age%20group%2C%20region%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_006V12_1.px",
+        "filename": "employment_by_occupation_by_region_gender_and_agegroup.csv"
+    },
+    {
+        "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/EMPLOYMENT%20TO%20POPULATION%20RATIO%2C%20by%20sex%2C%20age%20group%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_035V3_1.px",
+        "filename": "employment_to_population_ratio_by_region_gender_and_agegroup.csv"
+    },
+    {
+        "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/LABOUR%20FORCE%2C%20by%20sex%2C%20age%20group%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_012V1_1.px",
+        "filename": "labour_force_by_region_gender_and_agegroup.csv"
+    },
+    {
+        "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/LABOUR%20UNDERUTILIZATION%2C%20by%20sex%2C%20age%20group%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_014V3_1.px",
+        "filename": "labour_underutilization_by_region_gender_and_agegroup.csv"
+    },
+    {
+        "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_002V5.px",
+        "filename": "registered_unemployed_by_education_level_region_gender_month.csv"
+    }
 ]
 
 def fetch_and_save_data(url, csv_filepath, query=None):
