@@ -1,7 +1,0 @@
-Node: E:live_births_by_month_region_output->E0
-observationAbout: C:live_births_by_month_region_output->observationAbout
-observationDate: C:live_births_by_month_region_output->observationDate
-value: C:live_births_by_month_region_output->value
-variableMeasured: C:live_births_by_month_region_output->variableMeasured
-unit: C:live_births_by_month_region_output->unit
-typeOf: dcs:StatVarObservation

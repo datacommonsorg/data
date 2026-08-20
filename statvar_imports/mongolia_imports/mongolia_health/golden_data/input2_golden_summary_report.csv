@@ -1,2 +1,2 @@
-"observationPeriods","NumPlaces","Units","StatVar","ScalingFactors","MinDate","MeasurementMethods"
-"[]","23","[]","Count_BirthEvent_LiveBirth","[]","2016-01","[]"
+"Units","StatVar","MeasurementMethods","observationPeriods","ScalingFactors","MinDate","NumPlaces"
+"[]","Count_BirthEvent_LiveBirth","[]","[]","[]","2016-01","23"

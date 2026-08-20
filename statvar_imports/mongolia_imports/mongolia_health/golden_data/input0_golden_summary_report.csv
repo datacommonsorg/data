@@ -1,2 +1,2 @@
-"NumPlaces","observationPeriods","ScalingFactors","Units","StatVar","MinDate","MeasurementMethods"
-"23","[]","[]","[]","Count_Death","2016-01","[]"
+"MeasurementMethods","ScalingFactors","observationPeriods","StatVar","MinDate","NumPlaces","Units"
+"[]","[]","[]","Count_Death","2016-01","23","[]"

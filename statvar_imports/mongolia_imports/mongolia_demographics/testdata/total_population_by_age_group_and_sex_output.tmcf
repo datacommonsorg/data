@@ -1,6 +1,0 @@
-Node: E:total_population_by_age_group_and_sex_output->E0
-observationAbout: C:total_population_by_age_group_and_sex_output->observationAbout
-observationDate: C:total_population_by_age_group_and_sex_output->observationDate
-value: C:total_population_by_age_group_and_sex_output->value
-variableMeasured: C:total_population_by_age_group_and_sex_output->variableMeasured
-typeOf: dcs:StatVarObservation

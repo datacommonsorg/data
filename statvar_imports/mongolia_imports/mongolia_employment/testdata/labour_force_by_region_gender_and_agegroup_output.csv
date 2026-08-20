@@ -1,9 +1,0 @@
-observationAbout,observationDate,value,variableMeasured,unit,scalingFactor
-dcid:wikidataId/Q191792,1992,32936,dcid:Count_Person_InLaborForce,,
-dcid:wikidataId/Q191792,1993,27396,dcid:Count_Person_InLaborForce,,
-dcid:wikidataId/Q191792,1992,17834,dcid:Count_Person_InLaborForce_Male,,
-dcid:wikidataId/Q191792,1993,15054,dcid:Count_Person_InLaborForce_Male,,
-dcid:wikidataId/Q191792,1992,15102,dcid:Count_Person_InLaborForce_Female,,
-dcid:wikidataId/Q191792,1993,12342,dcid:Count_Person_InLaborForce_Female,,
-dcid:wikidataId/Q192945,1992,28873,dcid:Count_Person_InLaborForce,,
-dcid:wikidataId/Q192945,1993,27636,dcid:Count_Person_InLaborForce,,

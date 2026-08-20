@@ -1,2 +1,2 @@
-"ScalingFactors","StatVar","MinDate","MeasurementMethods","observationPeriods","Units","NumPlaces"
-"[]","Count_Person","1990","[]","[]","[]","22"
+"StatVar","observationPeriods","NumPlaces","MeasurementMethods","Units","ScalingFactors","MinDate"
+"Count_Person","[]","22","[]","[]","[]","1990"

@@ -1,9 +1,0 @@
-observationAbout,observationDate,value,variableMeasured,unit
-country/MNG,2015,21720,dcid:Count_HospitalBed,
-country/MNG,2016,22960,dcid:Count_HospitalBed,
-country/MNG,2015,6610,dcid:Count_HospitalBed_InternalMedicine,
-country/MNG,2016,6610,dcid:Count_HospitalBed_InternalMedicine,
-country/MNG,2015,1473,dcid:Count_HospitalBed_Surgery,
-country/MNG,2016,1473,dcid:Count_HospitalBed_Surgery,
-country/MNG,2015,1738,dcid:Count_HospitalBed_Obstetrics,
-country/MNG,2016,1738,dcid:Count_HospitalBed_Obstetrics,

@@ -1,9 +1,0 @@
-# Auto generated using command: "/usr/local/google/home/samnotra/19aug/mongolia-imports/data/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/testdata/employment_to_population_ratio_by_region_gender_and_agegroup_input.csv --pv_map=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/employment_to_population_ratio_by_region_gender_and_agegroup_pvmap.csv --config_file=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/employment_to_population_ratio_by_region_gender_and_agegroup_metadata.csv --output_path=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/testdata/employment_to_population_ratio_by_region_gender_and_agegroup_output --existing_statvar_mcf=/dev/null --places_resolved_csv=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_employment/places_resolved.csv" on 2026-08-20 09:59:30.079876
-
-Node: dcid:Count_Person_Employed
-typeOf: dcid:StatisticalVariable
-populationType: dcid:Person
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-employmentStatus: dcid:Employed
-

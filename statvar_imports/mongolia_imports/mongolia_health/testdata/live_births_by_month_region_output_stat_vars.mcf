@@ -1,9 +1,0 @@
-# Auto generated using command: "/usr/local/google/home/samnotra/19aug/mongolia-imports/data/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_health/testdata/live_births_by_month_region_input.csv --pv_map=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_health/live_births_by_month_region_pvmap.csv --config_file=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_health/mongolia_metadata.csv --output_path=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_health/testdata/live_births_by_month_region_output --existing_statvar_mcf=/dev/null --places_resolved_csv=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_health/mongolia_place_resolver.csv" on 2026-08-20 09:58:25.690074
-
-Node: dcid:Count_BirthEvent_LiveBirth
-typeOf: dcid:StatisticalVariable
-populationType: dcid:BirthEvent
-measuredProperty: dcid:count
-statType: dcid:measuredValue
-medicalStatus: dcid:LiveBirth
-

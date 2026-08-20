@@ -1,5 +1,0 @@
-Node: dcid:educationalAttainment
-typeOf: dcs:Property
-name: "educationalAttainment"
-rangeIncludes: dcid:ProvisionalNode
-
