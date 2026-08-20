@@ -54,10 +54,13 @@ from retry import retry
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_bool(
-    'is_summary_levels', False,
-    'Options: True for all summary_levels and False for only 162')
+
+def _define_flags():
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_bool(
+        'is_summary_levels', False,
+        'Options: True for all summary_levels and False for only 162')
+
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
@@ -1184,4 +1187,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)
