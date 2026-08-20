@@ -10,46 +10,42 @@ Use this guide to debug deleted observations or when a `FAILED` validation rule 
 
 ## Understand what was deleted
 
-Use these as possible investigations. Choose checks based on the observed
-pattern and artifact sizes.
+Choose checks based on the deletion pattern and artifact sizes.
 
-- Find the exact candidate's files with
-  [List artifacts for one import version](../references/gcs.md#list-artifacts-for-one-import-version).
-  The [artifact layout](../../../common/references/import-automation/artifact-layout.md)
-  shows where validation and generated files are stored.
-- Read `differ_summary.json` for overall counts and the current and previous
-  inputs. Read `validation_output.csv` for the failed rule, threshold, and
-  reported deletion count or percentage.
-- Use `nodes-deleted.mcf` to inspect the previous-version representation of
-  deleted nodes. It may be large and can contain non-observation nodes, so
-  check its size and filter `StatVarObservation` nodes when appropriate.
-- Useful deletion views include counts by `variableMeasured`,
-  `observationAbout`, StatVar-place, `observationDate`, or observation facet.
-  These are examples rather than a required checklist.
-- For manageable MCF files, download to a system temporary directory and
-  convert them to CSV with
-  [mcf_file_util.py](../../../../tools/statvar_importer/mcf_file_util.py).
-  Query the CSV with the DuckDB CLI when available, or repository Python with
-  DuckDB otherwise. The converter loads each MCF into memory, so prefer another
-  approach for files above roughly 2 GB.
-- Compare the candidate and previous `summary_report.csv` files for missing
+- Start with the exact candidate's
+  [artifacts](../references/gcs.md#list-artifacts-for-one-import-version) and the
+  [artifact layout](../../../common/references/import-automation/artifact-layout.md).
+  Read `differ_summary.json` for overall counts and the exact current and
+  previous inputs. Read `validation_output.csv` for the failed rule, threshold,
+  and deletion count or percentage.
+- Inspect `nodes-deleted.mcf` for deleted nodes from the previous version.
+  It may be large and include non-observation nodes. Filter
+  `StatVarObservation` nodes when needed.
+- To find patterns in deleted observations, group by `variableMeasured`,
+  `observationAbout`, StatVar-place, `observationDate`, or facet. These are
+  examples; choose the views that fit the deletion pattern.
+- For manageable MCF files, download to a system temporary directory, convert
+  them with
+  [mcf_file_util.py](../../../../tools/statvar_importer/mcf_file_util.py) and
+  query the CSV with the DuckDB CLI or repository Python. The converter loads
+  the MCF into memory, so avoid it for files above roughly 2 GB.
+- Compare candidate and previous `summary_report.csv` files for missing
   StatVars or changes in observation, place, date, date-range, and facet
-  counts. Use the previous input recorded in `differ_summary.json`.
-- For StatVar Processor imports, use `manifest.json` to identify generated
-  `cleaned_csv` files. Treat them as the source datasets when comparing the
-  candidate and previous version. They may be large, so choose local querying
-  or the short-lived BigQuery table based on their size. Use the processor
-  command and `source_files` to identify the raw inputs and mappings.
-- To load large GCS CSV, Parquet, or Avro files into a short-lived BigQuery
-  table, read or run
+  counts. Use the previous input named in `differ_summary.json`.
+- For StatVar Processor imports, compare the `cleaned_csv` files identified by
+  `manifest.json` for the candidate and previous version. These are final
+  tabular processor outputs that are converted to MCF, not source data. Query
+  them directly instead of converting the corresponding MCF back to CSV.
+  Choose local queries or the short-lived BigQuery table based on size. Use the
+  processor command and `source_files` to trace raw inputs and mappings.
+- For large GCS CSV, Parquet, or Avro files, consult
   [create_short_lived_bq_table.sh](../scripts/create_short_lived_bq_table.sh)
-  with `--help`. Give the user the exact command and ask them to return the full
+  with `--help`, then give the user the exact command and ask for the returned
   table name. Never run the table-creating command or delete a table.
 
-For artifact and comparison semantics, use the
-[Import Differ documentation](../../../../tools/import_differ/README.md).
-Import Differ does not persist deletion summaries grouped by StatVar, place,
-or StatVar-place.
+See [Import Differ](../../../../tools/import_differ/README.md) for artifact
+semantics. It does not persist deletion summaries by StatVar, place, or
+StatVar-place.
 
 ## Hypotheses
 
