@@ -1,4 +1,3 @@
-
 # India NSS Health Ailments
 
 ## 1. Import Overview
@@ -20,14 +19,14 @@ Before ingestion, the following preprocessing is done:
 * **Input files**:
 
   * `india_nss_health_ailments.csv`: Raw input data
-  * `pvmap.csv`: Property-value mapping
-  * `place_resolved.csv`: Geo resolution data for Indian states/UTs
-  * `metadata.csv`: StatVar metadata (used by `stat_var_processor.py`)
+  * `india_nss_health_ailments_pvmap.csv`: Property-value mapping
+  * `india_nss_health_ailments_place_resolved.csv`: Geo resolution data for Indian states/UTs
+  * `india_nss_health_ailments_metadata.csv`: StatVar metadata (used by `stat_var_processor.py`)
 * **Transformation pipeline**:
 
   * Columns are cleaned and standardized to match StatVar expectations.
   * StatVars are generated using `stat_var_processor.py`.
-  * Output is written to `india_nss_health_ailments.csv` and corresponding `india_nss_health_ailments.tmcf`.
+  * Output is written to `output/IndiaNSS_HealthAilments_output.csv` and corresponding `output/IndiaNSS_HealthAilments_output.tmcf`.
 * **Data Quality Checks**:
 
   * Linting is performed using the DataCommons import tool JAR
@@ -63,15 +62,16 @@ Before ingestion, the following preprocessing is done:
 
 ```bash
 python3 stat_var_processor.py \
-  --input_data='/path/to/india_nss_health_ailments.csv' \
-  --pv_map='/path/to/pvmap.csv' \
-  --places_resolved_csv='/path/to/place_resolved.csv' \
-  --config_file='/path/to/metadata.csv' \
-  --output_path='/path/to/output/health_nss' \
+  --input_data='india_nss_health_ailments.csv' \
+  --pv_map='india_nss_health_ailments_pvmap.csv' \
+  --places_resolved_csv='india_nss_health_ailments_place_resolved.csv' \
+  --config_file='india_nss_health_ailments_metadata.csv' \
+  --output_path=output/IndiaNSS_HealthAilments_output \
+  --output_counters=counters/IndiaNSS_HealthAilments_counters.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
-**Purpose**: Generates StatVar MCF and cleaned observation CSV (`india_nss_health_ailments.csv`, `india_nss_health_ailments.tmcf`)
+**Purpose**: Generates StatVar MCF and cleaned observation CSV (`output/IndiaNSS_HealthAilments_output.csv`, `output/IndiaNSS_HealthAilments_output.tmcf`)
 
 ---
 
@@ -81,8 +81,8 @@ python3 stat_var_processor.py \
 
 ```bash
 java -jar '/path/to/datacommons-import-tool.jar' lint \
-  '/path/to/india_nss_health_ailments.csv' \
-  '/path/to/india_nss_health_ailments.tmcf'
+  'output/IndiaNSS_HealthAilments_output.csv' \
+  'output/IndiaNSS_HealthAilments_output.tmcf'
 ```
 
 **Purpose**: Validates final CSV+TMCF for formatting and semantic consistency before ingestion
@@ -99,4 +99,3 @@ python3 download_script.py
 **Output**: `india_nss_health_ailments.csv`
 
 **Purpose**: Downloads the raw data from the NDAP API and saves it as `india_nss_health_ailments.csv`.
-

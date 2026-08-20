@@ -34,11 +34,12 @@ flags.DEFINE_string(
 # --- ROBUST PATH RESOLUTION START ---
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
+
 def _add_util_to_path():
     """Adds the repo 'util' directory to sys.path dynamically."""
     path_3_up = os.path.abspath(os.path.join(_SCRIPT_PATH, '../../../util/'))
     path_2_up = os.path.abspath(os.path.join(_SCRIPT_PATH, '../../util/'))
-    
+
     if os.path.exists(os.path.join(path_3_up, 'file_util.py')):
         sys.path.append(path_3_up)
     elif os.path.exists(os.path.join(path_2_up, 'file_util.py')):
@@ -52,6 +53,7 @@ def _add_util_to_path():
                 return
             curr = os.path.dirname(curr)
         logging.error("Could not find 'util' directory containing file_util.py")
+
 
 _add_util_to_path()
 
@@ -78,6 +80,7 @@ _OUTPUT_COLUMNS = [
     'Year',
 ]
 
+
 def load_config(path: str) -> dict:
     """Loads configuration from GCS or local disk."""
     if path.startswith('gs://'):
@@ -88,13 +91,14 @@ def load_config(path: str) -> dict:
         return json.loads(blob.download_as_string())
     return file_util.file_load_py_dict(path)
 
+
 def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
     """Downloads data using configuration."""
     file_config = load_config(config_file_path)
     url = file_config.get('url')
     # We ignore the 'input_files' from config to save in the current directory
-    output_dir = '' 
-    
+    output_dir = ''
+
     if not url:
         return [], ''
 
@@ -105,6 +109,7 @@ def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
         response = _retry_method(api_url, None, 3, 5, 2)
         if not response:
             logging.fatal('Failed to retrieve data from page %d', page_num)
+            raise RuntimeError(f'Failed to retrieve data from page {page_num}')
 
         try:
             response_data = response.json()
@@ -137,6 +142,7 @@ def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
 
     return all_data, output_dir
 
+
 def preprocess_and_save(data: List[Tuple], output_dir: str) -> None:
     """Saves data to CSV directly in the script directory."""
     if not data:
@@ -144,9 +150,9 @@ def preprocess_and_save(data: List[Tuple], output_dir: str) -> None:
         return
 
     df = pd.DataFrame(data, columns=_OUTPUT_COLUMNS)
-    
+
     # Save directly in _SCRIPT_PATH (statvar_imports/india_ndap/india_nss_health_ailments)
-    output_path = os.path.join(_SCRIPT_PATH, 'india_nss_health_ailments.csv')  
+    output_path = os.path.join(_SCRIPT_PATH, 'india_nss_health_ailments.csv')
     df.to_csv(output_path, index=False)
     logging.info('Data saved to %s', output_path)
 
@@ -155,6 +161,7 @@ def main(_) -> None:
     raw_data, output_dir = download_data(_FLAGS.config_file_path)
     if raw_data:
         preprocess_and_save(raw_data, output_dir)
+
 
 if __name__ == '__main__':
     app.run(main)

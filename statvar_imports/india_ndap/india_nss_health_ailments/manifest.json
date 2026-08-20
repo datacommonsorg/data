@@ -9,7 +9,7 @@
             "provenance_description": "A quantitative dataset from the NSS Report No. 556 on Health in India, providing a profile of ailments, healthcare facility usage, and expenditures based on a survey",
             "scripts": [
                 "download_script.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=india_nss_health_ailments.csv --pv_map=india_nss_health_ailments_pvmap.csv --places_resolved_csv=india_nss_health_ailments_place_resolved.csv --config_file=india_nss_health_ailments_metadata.csv --output_path=output/IndiaNSS_HealthAilments_output"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=india_nss_health_ailments.csv --pv_map=india_nss_health_ailments_pvmap.csv --places_resolved_csv=india_nss_health_ailments_place_resolved.csv --config_file=india_nss_health_ailments_metadata.csv --output_path=output/IndiaNSS_HealthAilments_output --output_counters=counters/IndiaNSS_HealthAilments_counters.csv"
             ],
             "import_inputs": [
                 {
@@ -18,7 +18,9 @@
                 }
             ],
             "source_files": [
-                "india_nss_health_ailments.csv"
+                "india_nss_health_ailments.csv",
+                "golden_data/*.csv",
+                "counters/*.csv"
             ],
             "cron_schedule": "0 0 1 1 *",
             "validation_config_file": "validation_config.json"
