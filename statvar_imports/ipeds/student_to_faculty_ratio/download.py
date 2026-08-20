@@ -20,7 +20,7 @@ import time
 import requests
 from datetime import date
 from urllib.parse import urlparse
-from absl import logging
+from absl import app, logging
 
 # --- Configuration ---
 START_YEAR = 2009
@@ -55,7 +55,6 @@ try:
     from download_util_script import download_file
 except ImportError as e:
     logging.fatal("Could not import 'download_file'. Please ensure the utility script is accessible. Original error: %s", e)
-    raise RuntimeError(f"FATAL: Missing utility script dependency: {e}")
 
 
 def process_and_filter_zip(zip_path: str, output_dir: str) -> bool:
@@ -91,10 +90,8 @@ def process_and_filter_zip(zip_path: str, output_dir: str) -> bool:
 
     except zipfile.BadZipFile:
         logging.fatal("  FATAL ERROR: %s is a corrupted or empty zip file. Cannot proceed.", zip_filename)
-        raise RuntimeError(f"Corrupted or empty zip file encountered: {zip_filename}")
     except Exception as e:
         logging.fatal("  FATAL ERROR: An unexpected error occurred during unzipping/extraction of %s: %s", zip_filename, e)
-        raise RuntimeError(f"Extraction failed for {zip_filename}: {e}")
     finally:
         if os.path.exists(zip_path):
             try:
@@ -163,9 +160,10 @@ def download_for_year(year: int) -> bool:
     return False
 
 
-def main():
+def main(_):
     """
     Iterates through year range downloading datasets (preferring revised, falling back to provisional).
+    Tracks successful downloads across all iterations and verifies that at least one dataset was fetched.
     """
 
     # 1. Create target directory if it doesn't exist
@@ -175,18 +173,38 @@ def main():
             logging.info("Created directory: %s", DOWNLOAD_DIR)
         except OSError as e:
             logging.fatal("FATAL ERROR: Could not create directory %s: %s", DOWNLOAD_DIR, e)
-            raise RuntimeError(f"FATAL: Directory creation failed for {DOWNLOAD_DIR}: {e}")
 
-    # 2. Iterate through required year range
+    # 2. Iterate through required year range and track results
+    successful_years = []
+    failed_years = []
+
     for year in range(START_YEAR, END_YEAR + 1):
-        download_for_year(year)
+        if download_for_year(year):
+            successful_years.append(year)
+        else:
+            failed_years.append(year)
         time.sleep(1)
+
+    # 3. Fail fast if zero datasets were fetched across all years
+    if not successful_years:
+        logging.fatal(
+            "FATAL ERROR: Zero datasets were successfully downloaded across years %d-%d.",
+            START_YEAR, END_YEAR
+        )
+
+    if failed_years:
+        logging.info(
+            "No datasets downloaded for year(s): %s",
+            failed_years
+        )
+
+    logging.info(
+        "\nDownload summary: Successfully fetched %d dataset(s) for years: %s",
+        len(successful_years),
+        successful_years
+    )
+    logging.info("\nScript finished. Filtered files extracted to the '%s' folder.", DOWNLOAD_DIR)
 
 
 if __name__ == "__main__":
-    logging.set_verbosity(logging.INFO)
-    try:
-        main()
-        logging.info("\nScript finished. Filtered files extracted to the '%s' folder.", DOWNLOAD_DIR)
-    except Exception as e:
-        logging.fatal("\nFATAL ERROR in main execution: %s", e)
+    app.run(main)

@@ -15,11 +15,8 @@
 import os
 import pandas as pd
 import re
-from absl import logging
+from absl import app, logging
 
-
-# Set verbosity level to 2
-logging.set_verbosity(2)
 
 # Folder containing input files
 input_folder = "input_files"
@@ -82,7 +79,6 @@ def process_files():
 
             except Exception as e:
                 logging.fatal(f"Error renaming file {selected_filename}: {e}")
-                raise e
 
             try:
                 # Load CSV
@@ -112,12 +108,12 @@ def process_files():
 
             except Exception as e:
                 logging.fatal(f"Error processing CSV {new_filename}: {e}")
-                raise e
 
     except Exception as e:
         logging.fatal(f"Unexpected error: {e}")
-        raise e
 
-if __name__ == "__main__":
+def main(_):
     process_files()
 
+if __name__ == "__main__":
+    app.run(main)
