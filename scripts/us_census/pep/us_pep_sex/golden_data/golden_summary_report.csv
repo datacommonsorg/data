@@ -1,0 +1,3 @@
+"MinDate","Units","ScalingFactors","observationPeriods","StatVar","NumPlaces","MeasurementMethods"
+"1900","[]","[]","[P1Y]","Count_Person_Female","3231","[dcAggregate/CensusPEPSurvey_PartialAggregate, CensusPEPSurvey]"
+"1900","[]","[]","[P1Y]","Count_Person_Male","3231","[dcAggregate/CensusPEPSurvey_PartialAggregate, CensusPEPSurvey]"
