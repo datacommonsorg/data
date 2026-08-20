@@ -1,0 +1,9 @@
+Node: E:Investment_output->E0
+observationAbout: C:Investment_output->observationAbout
+observationDate: C:Investment_output->observationDate
+variableMeasured: C:Investment_output->variableMeasured
+value: C:Investment_output->value
+unit: C:Investment_output->unit
+scalingFactor: C:Investment_output->scalingFactor
+measurementMethod: C:Investment_output->measurementMethod
+typeOf: dcs:StatVarObservation
