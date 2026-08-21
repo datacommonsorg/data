@@ -21,7 +21,7 @@ def download_file(url, filename):
         raise
 
 def clean_values(df):
-    return df.applymap(lambda x: pd.NA if isinstance(x, str) and ("..." in x or "…" in x or x.strip() in ["...", "..", "…"]) else x)
+    return df.map(lambda x: pd.NA if isinstance(x, str) and ("..." in x or "…" in x or x.strip() in ["...", "..", "…"]) else x)
 
 def process_xlsx(file_path):
     try:
@@ -70,7 +70,7 @@ def process_xlsx(file_path):
 
                 header_rows = header_rows.ffill(axis=0).infer_objects(copy=False)
                 header_rows = header_rows.fillna('').astype(str)
-                header_rows = header_rows.applymap(lambda x: ' '.join(x.split()))
+                header_rows = header_rows.map(lambda x: ' '.join(x.split()))
                 combined_header = header_rows.apply(lambda x: ' '.join(dict.fromkeys(x)).strip(), axis=0)
                 combined_header = combined_header.str.replace(' +', ' ', regex=True)
                 data_df.columns = combined_header.values
@@ -92,7 +92,7 @@ def process_xlsx(file_path):
 
                 header_rows = header_rows.ffill(axis=0).infer_objects(copy=False)
                 header_rows = header_rows.fillna('').astype(str)
-                header_rows = header_rows.applymap(lambda x: ' '.join(x.split()))
+                header_rows = header_rows.map(lambda x: ' '.join(x.split()))
                 combined_header = header_rows.apply(lambda x: ' '.join(dict.fromkeys(x)).strip(), axis=0)
                 combined_header = combined_header.str.replace(' +', ' ', regex=True)
                 data_df.columns = combined_header.values
@@ -114,7 +114,8 @@ def process_xlsx(file_path):
                 logging.info(f"Skipping unrecognized sheet: {sheet_name}")
 
     except Exception as e:
-        logging.error(f"Failed to process {file_path}: {e}")
+        logging.exception(f"Failed to process {file_path}")
+        raise
 
 def main():
     logging.set_verbosity(logging.DEBUG)

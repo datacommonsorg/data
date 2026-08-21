@@ -3,9 +3,9 @@
 The default validations in [validation_config.json](validation_config.json) are
 applied for all imports in auto refresh.
 
-To add additional  import specific validations, create a validation_config.json
-in the import script folder and add it to the
-config_overrides.validation_config_file parameter in the manifest.json.
+To add import-specific validations, create a `validation_config.json` in the
+import directory and set `validation_config_file` on the relevant import
+specification in `manifest.json` to its import-relative path.
 
 To override or disable a default validation rule, copy the rule to the
 import specific config with the same rule id and
@@ -27,7 +27,7 @@ disable lint check for a specific import.
         },
         {
             "rule_id": "check_lint_error_count",
-            "enabled": false,
+            "enabled": false
         }
     ]
 }
@@ -46,9 +46,12 @@ in the input, the validation is treated as a failure.
 The missing golden rows are listed in the validation report json.
 
 ### Configuration Parameters
-- `golden_files`: A list or glob pattern of golden MCF or CSV files to compare against.
+- `golden_files`: A path, glob pattern, or list of paths or patterns for golden
+  MCF or CSV files to compare against.
 - `goldens_key_property`: A list of properties to match on. If not specified, all properties in the golden record must match.
-- `input_files`: (Optional) A list of glob pattern of input files to be compared with goldens. If not provided, the data source defined in the rule's `scope` is used.
+- `input_files`: (Optional) A path, glob pattern, or list of paths or patterns
+  for input files to compare with goldens. If not provided, the data source
+  defined in the rule's `scope` is used.
 
 ### GOLDENS_CHECK Validator Example
 
@@ -72,11 +75,21 @@ To generate goldens for the summary_report.csv to verify that all the expected
 StatVars are generated with the corresponding number of places and dates, run
 the following:
 
+This will generate the golden files using summary_report.csv as the default input:
+
 ```shell
     python3 validator_goldens.py \
       --validate_goldens_input=summary_report.csv \
       --generate_goldens=goldens_data/golden_summary_report.csv \
       --generate_goldens_property_sets="StatVar|NumPlaces|MinDate|MeasurementMethods|Units|ScalingFactors|observationPeriods"
+```
+
+To validate summary_report.csv against a golden file run the below command:
+
+```shell
+   python3 validator_goldens.py \
+      --validate_goldens_input=summary_report.csv \
+      --validate_goldens=goldens_data/golden_summary_report.csv 
 ```
 
 To generate goldens for observations that include important
@@ -93,7 +106,7 @@ place dcids loaded from txt files:
 
 To enable goldens validation with files generated above
 while relaxing the default deleted records threshold, add the following
-valiation rules to the validation config:
+validation rules to the validation config:
 
 ```json
 {
@@ -118,14 +131,12 @@ valiation rules to the validation config:
             "rule_id": "check_golden_observations_statvar_places_dates",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "golden_data/golden_observations.csv"
+                "golden_files": "golden_data/golden_observations.csv",
                 "input_files": "output/observations.csv"
             }
         }
     ]
 }
 ```
-
-
 
 

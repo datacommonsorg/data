@@ -92,7 +92,7 @@ def process_csv(input_path, output_path, csv_structure_f, out_put_file_name):
         os.makedirs(output_path, exist_ok=True)
         with open(csv_structure_f, "r") as json_file:
             csv_structure = json.load(json_file)
-        normalized_table = data_table[csv_structure]
+        normalized_table = data_table[csv_structure].copy()
         nri_month_year = convert_month_year(nri_ver)
         normalized_table["OBSER_DATE"] = nri_month_year
 
