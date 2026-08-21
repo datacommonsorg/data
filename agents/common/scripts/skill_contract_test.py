@@ -418,8 +418,8 @@ class SkillContractTest(unittest.TestCase):
         self.assertIn('../../common/config/import-environments.yaml', skill)
         self.assertEqual({'default_environment', 'environments'}, set(registry))
         self.assertEqual('prod', registry['default_environment'])
-        self.assertEqual(
-            set(expected_environments), set(registry['environments']))
+        self.assertEqual(set(expected_environments),
+                         set(registry['environments']))
 
         for name, required_fields in expected_environments.items():
             with self.subTest(environment=name):
