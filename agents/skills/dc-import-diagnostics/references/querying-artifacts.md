@@ -8,7 +8,7 @@ memory.
 | Manageable CSV | Query it locally with DuckDB. |
 | Manageable Parquet | Query it directly with DuckDB. |
 | Manageable MCF | Convert it to CSV, then query the CSV with DuckDB. |
-| Large GCS CSV, Parquet, or Avro | Ask the user to load it into a short-lived BigQuery table. |
+| Large GCS CSV, Parquet, or Avro | With explicit user approval, load it into a short-lived BigQuery table. |
 
 Use a system temporary directory for local downloads and generated CSV files.
 Check the object size before downloading or converting it.
@@ -50,8 +50,11 @@ For a large CSV, Parquet, or Avro file already in GCS, consult
 with `--help`. The helper loads a native BigQuery table and applies a time to
 live.
 
-Give the user the exact command and ask them to return the full table name.
-Never run the table-creating command or delete a table.
+- Show the user the exact command before running it.
+- Run the helper only after the user explicitly approves that command.
+- If the table already exists, report its full name and do not alter it.
+- Query the table with read-only statements.
+- Never update or delete the table. Allow its configured TTL to expire it.
 
 The helper does not accept MCF. If a large MCF cannot be safely converted with
 an available repository tool, narrow the artifact or report that efficient

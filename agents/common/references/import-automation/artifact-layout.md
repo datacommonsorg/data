@@ -64,6 +64,21 @@ merely to determine status.
 - Generated/resolved MCF: actual MCF output below `input<N>/genmcf/`.
 - Validation/differ artifacts: actual files below `input<N>/validation/`.
 
+## Determine whether an artifact was retained
+
+- Read the exact version's manifest to identify the configured scripts,
+  generated inputs, and source-file upload patterns.
+- Use `import_inputs` to identify files normally uploaded to the version root.
+- Use `source_files` to identify files intended for upload under
+  `source_files/`.
+- GenMCF and validation stages upload their artifacts under `input<N>/genmcf/`
+  and `input<N>/validation/`.
+- List the exact version's GCS objects to confirm which artifacts are
+  available.
+
+A missing object is unavailable for historical debugging. Its absence does not
+prove that the runtime never created it.
+
 For artifact fields and generation rules, use the component-owned contracts:
 
 - [Validation framework](../../../../tools/import_validation/README.md)

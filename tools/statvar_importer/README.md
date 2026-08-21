@@ -11,9 +11,6 @@ and StatVarObservations that the Data Commons import tool can consume.
 - `--existing_statvar_mcf` optionally supplies known StatisticalVariables for
   reuse.
 
-An import's `manifest.json` shows the effective command, input patterns, and
-which generated files are passed to the import tool.
-
 ## Processing flow
 
 The processor reads the selected rows and columns, applies the PV map and
@@ -35,12 +32,27 @@ Unless overridden by configuration, `--output_path=<prefix>` can produce:
 The observation CSV and TMCF are normally used together as one import input.
 The CSV is a final processor output rather than a copy of the raw source data.
 
-### Input provenance
+### Trace source data to processor output
 
-The processor internally records source context in `#input` as a file, line,
-and column reference. The column is normally omitted from the output CSV. When
-an import preserves it through debug or output-column configuration, use it to
-trace an observation back to the corresponding source context.
+- `input_reference_column` names the source-trace field. Its default is
+  `#input`.
+- Use the trace field, when retained, to identify the input file, line, and
+  column context associated with an observation.
+- Use the PV map and processor configuration to understand how source columns
+  and values become output properties.
+- Account for preprocessing or aggregation when an exact one-to-one source-row
+  mapping is unavailable.
+
+## Place resolution
+
+- The processor accepts an `observationAbout` value that is already a place
+  DCID.
+- Otherwise, it tries to resolve the place through the PV map.
+- `places_csv` supplies known place names and DCIDs for local matching.
+- `places_resolved_csv` supplies cached place-name resolutions for reuse.
+- When enabled, the place resolver can use configured resolution services for
+  remaining place names.
+- An observation can be dropped when its required place remains unresolved.
 
 ## Counters
 
@@ -53,21 +65,18 @@ and configuration. The most useful groups for deletion debugging are:
 | `input-files-processed` and `num-rows-<file>` | Files opened and estimated rows found in each file. |
 | `input-rows-skipped` | Leading rows excluded by skip configuration. |
 | `input-rows-ignored*` | Rows excluded by row selection, preprocessing, or basic row requirements. |
-| `ignored-svobs-pvs` and `filter-dropped-svobs-pvs` | Candidate observations excluded by configured property-value rules. |
+| `ignored-svobs-pvs` and `filter-dropped-svobs-pvs` | Potential observations excluded by configured property-value rules. |
 | `dropped-svobs-unresolved-date` and `dropped-svobs-unresolved-place` | Observations dropped because required date or place values could not be resolved. |
 | `dropped-svobs-with-invalid-statvar` and `dropped-svobs-invalid` | Observations dropped because their StatisticalVariable or observation properties were invalid. |
 | `generated-svobs` | Observations accepted during input processing. |
 | `output-svobs-csv-rows` | Observation rows written to the final CSV. |
 | `output-svobs-unique-<property>` | Distinct output values for properties such as StatVar, place, date, or facet. |
 
-Compare counters from the candidate and previous version to locate an unusual
-processing stage. A counter difference is a clue, not proof of the deletion's
-cause.
-
-The processor writes a counters file only when `--output_counters` supplies a
-path. Auto-refresh retains that file only when `manifest.json` includes it in
-`source_files`. If either condition is absent, historical counters are
-unavailable.
+- Use ignored and dropped observation counters to identify data excluded during
+  processing.
+- Compare counters from the current and baseline versions to locate an unusual
+  processing stage.
+- Treat a counter difference as a clue, not proof of the deletion's cause.
 
 ## Implementation pointers
 
@@ -75,6 +84,10 @@ unavailable.
   filters input rows.
 - [`StatVarDataProcessor.process_stat_var_obs_pvs`](stat_var_processor.py)
   resolves and validates observations and updates drop counters.
+- [`StatVarDataProcessor.resolve_svobs_place`](stat_var_processor.py) applies
+  PV-map and configured place resolution.
+- [`PlaceResolver`](place/place_resolver.py) implements place-name matching,
+  caching, and resolution services.
 - [`StatVarDataProcessor.write_outputs`](stat_var_processor.py) writes the
   generated artifacts and counters.
 - [`get_default_config`](config_flags.py) defines processor defaults and flag
