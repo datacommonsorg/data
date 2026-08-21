@@ -81,22 +81,22 @@ def preprocess_files(directory_path):
         logging.info(f"Processing file: {file_path}")
         try:
             all_sheets_data = pd.read_excel(file_path, sheet_name=None, header=None)
+            def safe_to_numeric(val):
+                val_str = str(val)
+                if val_str.isdigit():
+                    return int(val_str)
+                try:
+                    float_val = float(val_str)
+                    return float_val
+                except ValueError:
+                    return val
+
             for sheet_name, df in all_sheets_data.items():
                 df = df.map(lambda x: str(x).replace('*', '').replace('@', '').strip())
                 mask = df.eq('State/Union Territory').any(axis=1)
                 state_positions = df[mask] == 'State/Union Territory'
 
-                def safe_to_numeric(val):
-                    val_str = str(val)
-                    if val_str.isdigit():
-                        return int(val_str)
-                    try:
-                        float_val = float(val_str)
-                        return float_val
-                    except ValueError:
-                        return val
-
-                df_num = df[mask].applymap(safe_to_numeric)
+                df_num = df[mask].map(safe_to_numeric)
                 converted = df_num.mask(state_positions, 'State/Union Territory')
                 df.loc[mask, :] = converted
                 all_sheets_data[sheet_name] = df
