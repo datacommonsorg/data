@@ -37,30 +37,12 @@
       }
     },
     {
-      "rule_id": "check_max_date_freshness_2010_2014",
-      "description": "Verifies that 2010-2014 data contains observations up to at least 2014.",
+      "rule_id": "check_max_date_freshness_all_inputs",
+      "description": "Verifies that each input contains non-empty data meeting its expected freshness threshold.",
       "validator": "SQL_VALIDATOR",
       "params": {
-        "query": "SELECT MAX(MaxDate) AS latest_date FROM stats WHERE MinDate <= '2014' HAVING COUNT(*) > 0",
-        "condition": "latest_date >= '2014'"
-      }
-    },
-    {
-      "rule_id": "check_max_date_freshness_2016",
-      "description": "Verifies that 2016 data contains observations up to at least 2016.",
-      "validator": "SQL_VALIDATOR",
-      "params": {
-        "query": "SELECT MAX(MaxDate) AS latest_date FROM stats WHERE MinDate = '2016' HAVING COUNT(*) > 0",
-        "condition": "latest_date >= '2016'"
-      }
-    },
-    {
-      "rule_id": "check_max_date_freshness_2018_2022",
-      "description": "Verifies that latest data contains observations up to at least 2022.",
-      "validator": "SQL_VALIDATOR",
-      "params": {
-        "query": "SELECT MAX(MaxDate) AS latest_date FROM stats WHERE MinDate >= '2018' HAVING COUNT(*) > 0",
-        "condition": "latest_date >= '2022'"
+        "query": "SELECT CASE WHEN MIN(MinDate) <= '2014' AND MAX(MinDate) <= '2014' THEN MAX(MaxDate) >= '2014' WHEN MIN(MinDate) = '2016' THEN MAX(MaxDate) >= '2016' WHEN MAX(MinDate) >= '2018' THEN MAX(MaxDate) >= '2022' ELSE FALSE END AS is_fresh, COUNT(*) AS row_cnt FROM stats",
+        "condition": "is_fresh = TRUE AND row_cnt > 0"
       }
     }
   ]

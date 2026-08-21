@@ -11,16 +11,18 @@ set -e
 
 SCRIPT_PATH=$(realpath "$(dirname "$0")")
 
+mkdir -p "$SCRIPT_PATH/output_files" "$SCRIPT_PATH/counters"
+
 # --- 1. Process 2010, 2012, and 2014 Files (Comma-separated XLSX format) ---
-LEGACY_XLSX_FILES="$SCRIPT_PATH/input_files/*2010_Teachers.xlsx,$SCRIPT_PATH/input_files/*2012_Teachers.xlsx,$SCRIPT_PATH/input_files/*2014_Teachers.xlsx"
+LEGACY_XLSX_FILES="$SCRIPT_PATH/input_files/2010_Teachers.xlsx,$SCRIPT_PATH/input_files/2012_Teachers.xlsx,$SCRIPT_PATH/input_files/2014_Teachers.xlsx"
 
 # teachers_and_staff (2010-2014)
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
+python3 "$SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py" \
 --input_data="$LEGACY_XLSX_FILES" \
---pv_map=$SCRIPT_PATH/teachers_and_staff_pvmap.csv \
---config_file=$SCRIPT_PATH/metadata.csv \
+--pv_map="$SCRIPT_PATH/teachers_and_staff_pvmap.csv" \
+--config_file="$SCRIPT_PATH/metadata.csv" \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/teachers_and_staff_2010_2014_output \
+--output_path="$SCRIPT_PATH/output_files/teachers_and_staff_2010_2014_output" \
 --output_counters="$SCRIPT_PATH/counters/teachers_and_staff_2010_2014_counters.csv" \
 --log_level=-2 \
 --log_every_n=1000 || \
@@ -29,12 +31,12 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 # --- 2. Process 2016 File (Separate CSV) ---
 SINGLE_2016_FILE="$SCRIPT_PATH/input_files/2016_Teachers.csv"
 
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
+python3 "$SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py" \
 --input_data="$SINGLE_2016_FILE" \
---pv_map=$SCRIPT_PATH/teachers_and_staff_pvmap.csv \
---config_file=$SCRIPT_PATH/metadata.csv \
+--pv_map="$SCRIPT_PATH/teachers_and_staff_pvmap.csv" \
+--config_file="$SCRIPT_PATH/metadata.csv" \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/teachers_and_staff_2016_output \
+--output_path="$SCRIPT_PATH/output_files/teachers_and_staff_2016_output" \
 --output_counters="$SCRIPT_PATH/counters/teachers_and_staff_2016_counters.csv" \
 --log_level=-2 \
 --log_every_n=1000 || \
@@ -44,13 +46,18 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
 # This is dynamic and will include 2018, 2021, 2022, and any future files.
 CSV_FILES_2018_ONWARD=$(find "$SCRIPT_PATH/input_files" -maxdepth 1 -name "*.csv" | grep -v "2016_Teachers.csv" | sort | paste -sd, -)
 
+if [ -z "$CSV_FILES_2018_ONWARD" ]; then
+  echo "Error: No CSV files found for 2018 onward in $SCRIPT_PATH/input_files!"
+  exit 1
+fi
+
 # Teachers and Staff (2018 onwards)
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py \
+python3 "$SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py" \
 --input_data="$CSV_FILES_2018_ONWARD" \
---pv_map=$SCRIPT_PATH/teachers_and_staff_pvmap.csv \
---config_file=$SCRIPT_PATH/metadata.csv \
+--pv_map="$SCRIPT_PATH/teachers_and_staff_pvmap.csv" \
+--config_file="$SCRIPT_PATH/metadata.csv" \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
---output_path=$SCRIPT_PATH/output_files/teachers_and_staff_2018_2022_output \
+--output_path="$SCRIPT_PATH/output_files/teachers_and_staff_2018_2022_output" \
 --output_counters="$SCRIPT_PATH/counters/teachers_and_staff_2018_2022_counters.csv" \
 --log_level=-2 \
 --log_every_n=1000 || \
