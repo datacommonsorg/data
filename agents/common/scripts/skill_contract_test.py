@@ -78,8 +78,7 @@ def _local_markdown_links(text: str):
                 target = target[1:target.index('>')]
             else:
                 target = target.split(maxsplit=1)[0]
-            if (not target or '://' in target or target.startswith(
-                ('mailto:', 'chatgpt-conversation:'))):
+            if not target or '://' in target or target.startswith('mailto:'):
                 continue
             path, _, fragment = target.partition('#')
             if path or fragment:
