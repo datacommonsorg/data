@@ -154,12 +154,16 @@ review; do not resolve it silently.
 
 ## Review changed behavior
 
+- Adhere strictly to all review instructions and constraints; do not make
+  unverified assumptions.
 - Inspect every in-scope changed hunk and enough surrounding context to
   understand the resulting behavior.
 - Trace changed manifests to referenced scripts and inputs when those
   relationships are affected.
 - Trace downloads and transformations far enough to evaluate completeness,
   failure handling, retries, data loss, mappings, validation, and tests.
+- Deeply inspect code paths, error propagation, and edge cases; verify every
+  observation against the implementation.
 - Anchor each finding to a changed line whenever possible. Unchanged context
   may support a finding but may not become an unrelated finding.
 - Report only issues introduced or exposed by the selected change set. Do not
