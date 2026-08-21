@@ -35,6 +35,33 @@
         "golden_files": "../../../../golden_data/golden_summary_2018_2022.csv",
         "input_files": "../../input2/genmcf/summary_report.csv"
       }
+    },
+    {
+      "rule_id": "check_max_date_freshness_2010_2014",
+      "description": "Verifies that 2010-2014 data contains observations up to at least 2014.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT MAX(MaxDate) AS latest_date FROM stats WHERE MinDate <= '2014' HAVING COUNT(*) > 0",
+        "condition": "latest_date >= '2014'"
+      }
+    },
+    {
+      "rule_id": "check_max_date_freshness_2016",
+      "description": "Verifies that 2016 data contains observations up to at least 2016.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT MAX(MaxDate) AS latest_date FROM stats WHERE MinDate = '2016' HAVING COUNT(*) > 0",
+        "condition": "latest_date >= '2016'"
+      }
+    },
+    {
+      "rule_id": "check_max_date_freshness_2018_2022",
+      "description": "Verifies that latest data contains observations up to at least 2022.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT MAX(MaxDate) AS latest_date FROM stats WHERE MinDate >= '2018' HAVING COUNT(*) > 0",
+        "condition": "latest_date >= '2022'"
+      }
     }
   ]
 }
