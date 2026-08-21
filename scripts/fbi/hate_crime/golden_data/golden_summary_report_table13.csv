@@ -1,0 +1,8 @@
+"StatVar","NumPlaces","MeasurementMethods","MinDate","ScalingFactors","observationPeriods","Units"
+"Count_CriminalIncidents_BiasMotivationReligion_IsHateCrime","4096","[]","2020","[]","[P1Y]","[]"
+"Count_CriminalIncidents_BiasMotivationDisabilityStatus_IsHateCrime","4096","[]","2020","[]","[P1Y]","[]"
+"Count_CriminalIncidents_BiasMotivationGender_IsHateCrime","4096","[]","2020","[]","[P1Y]","[]"
+"Count_CriminalIncidents_IsHateCrime","4045","[]","2020-03","[]","[P3M]","[]"
+"Count_CriminalIncidents_BiasMotivationRaceOrEthnicity_IsHateCrime","4096","[]","2020","[]","[P1Y]","[]"
+"Count_CriminalIncidents_BiasMotivationSexualOrientation_IsHateCrime","4096","[]","2020","[]","[P1Y]","[]"
+"Count_CriminalIncidents_BiasMotivationTransgenderOrGenderNonConforming_IsHateCrime","4096","[]","2020","[]","[P1Y]","[]"

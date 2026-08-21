@@ -38,6 +38,9 @@ Acceptance is automatic ET behavior, not human approval. A `STAGING` summary
 shows that a candidate is eligible; the current-output pointer proves which
 eligible version is current at read time.
 
+Successful Batch completion proves only the technical compute outcome. It does
+not by itself prove that a version was accepted as the current ET output.
+
 ## Definition-to-run flow
 
 ```text
@@ -96,8 +99,7 @@ Therefore, GCS history covers finalized versions, not all attempts. In
 particular, a Batch failure before `import_summary.json` is written has no GCS
 history entry. It may be visible only while represented by the current
 `ImportStatus` snapshot and retained Batch resource. Do not interpret a missing
-summary as proof that no attempt occurred. Read the
-[import evidence flow](import-evidence-flow.md) for evidence-selection rules.
+summary as proof that no attempt occurred.
 
 ## Resource cardinality
 
@@ -124,9 +126,9 @@ per import:                one mutable ImportStatus snapshot when present
 | Current-output pointer | Which finalized candidate is the current ET output at read time |
 
 Join systems only through exact identifiers returned by the selected evidence;
-linked recipes define the valid fields. Do not correlate by similar names or
-timestamps, and do not list Workflow executions or Batch jobs to discover a
-missing run.
+linked operational references define the valid fields. Do not correlate by
+similar names or timestamps, and do not list Workflow executions or Batch jobs
+to discover a missing run.
 
 ## Sources of truth
 
@@ -144,8 +146,6 @@ missing run.
 
 ## Read details only when needed
 
-- For current-status, finalized-version, and missing-evidence semantics, read
-  the [import evidence flow](import-evidence-flow.md).
 - For version directories, summaries, and pointer names, read
   [artifact layout](artifact-layout.md).
 - For exact import-definition fields, read the
