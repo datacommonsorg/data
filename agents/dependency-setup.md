@@ -18,7 +18,7 @@ authentication failure. Agent workflows should not run it before every task.
 
 ## System tools
 
-The local phase requires `bash`, `curl`, `git`, `gcloud`, `jq`, `python3`,
+The local phase requires `bash`, `bq`, `curl`, `git`, `gcloud`, `jq`, `python3`,
 `realpath`, and `sed` on `PATH`.
 
 The checker uses `command -v` from a non-interactive Bash process. Personal

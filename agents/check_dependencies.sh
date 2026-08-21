@@ -19,6 +19,7 @@ set -uo pipefail
 # Add required executables here; the generic loop checks each with command -v.
 REQUIRED_COMMANDS=(
   bash
+  bq
   curl
   git
   gcloud
