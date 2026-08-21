@@ -14,13 +14,14 @@
             ],
             "source_files": [
                 "input_data/Exchange_rate_E_All_Data.csv",
-                "golden_data/*.csv",
-                "counters/*.csv"
+                "counters/*.csv",
+                "golden_data/*.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "output_files/CurrencyFAO_output.tmcf",
-                    "cleaned_csv": "output_files/CurrencyFAO_output.csv"
+                    "cleaned_csv": "output_files/CurrencyFAO_output.csv",
+                    "node_mcf": "output_files/CurrencyFAO_output_stat_vars.mcf"
                 }
             ],
             "cron_schedule": "0 07 * * 4",

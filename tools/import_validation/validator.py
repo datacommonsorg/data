@@ -58,6 +58,8 @@ class Validator:
         try:
             con = duckdb.connect(database=':memory:', read_only=False)
             con.register('stats', stats_df)
+            if differ_df.empty:
+                differ_df = pd.DataFrame(columns=['StatVar', 'ADDED', 'DELETED', 'MODIFIED'])
             con.register('differ', differ_df)
 
             final_query = f"""
