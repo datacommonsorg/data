@@ -81,6 +81,14 @@ when they differ.
   example, "Why did this import fail?" should route to troubleshooting.
 - Focus on repository knowledge, procedures, and non-obvious edge cases. Skip
   background the agent already handles well.
+- Use bullet points for distinct constraints and directives: LLMs treat bullet
+  items as actionable checklists, whereas rules buried in paragraphs are easily
+  overlooked.
+- Keep instructions punchy, imperative, and scannable: Short, direct commands
+  give rules maximum instruction-following weight.
+- Explicitly ban unverified assumptions: Instruct the agent to trace code paths,
+  verify edge cases, and ground findings in actual tool/code output rather than
+  guessing.
 - State the situation and action together. For example, "If no Batch job ID
   exists, inspect Scheduler."
 - Use short sentences and consistent terms.
