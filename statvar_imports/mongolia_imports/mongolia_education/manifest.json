@@ -7,7 +7,8 @@
       "provenance_description": "Data related to the Mongolia's education at country level",
       "scripts": ["../common_download_script.py", "run.sh"],
       "source_files": [
-        "input_files/*.csv"
+        "input_files/*.csv",
+        "counters/*.csv"
       ],
       "import_inputs": [
         {
@@ -28,11 +29,13 @@
         },
         {
           "template_mcf": "output_files/number_of_full_time_teachers_in_universities_and_colleges_by_sex_output.tmcf",
-          "cleaned_csv": "output_files/number_of_full_time_teachers_in_universities_and_colleges_by_sex_output.csv"
+          "cleaned_csv": "output_files/number_of_full_time_teachers_in_universities_and_colleges_by_sex_output.csv",
+          "node_mcf": "output_files/number_of_full_time_teachers_in_universities_and_colleges_by_sex_output*.mcf"
         },
         {
           "template_mcf": "output_files/graduates_of_universities_and_colleges_by_professional_field_output.tmcf",
-          "cleaned_csv": "output_files/graduates_of_universities_and_colleges_by_professional_field_output.csv"
+          "cleaned_csv": "output_files/graduates_of_universities_and_colleges_by_professional_field_output.csv",
+          "node_mcf": "output_files/graduates_of_universities_and_colleges_by_professional_field_output*.mcf"
         }
       ],
       "cron_schedule": "0 04 * * 6"

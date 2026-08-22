@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Allows reviewed deletions from corrected demographic StatisticalVariables.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": {
+        "threshold": 1.0
+      }
+    }
+  ]
+}

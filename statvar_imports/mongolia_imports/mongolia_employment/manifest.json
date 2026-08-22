@@ -7,12 +7,14 @@
       "provenance_description": "Data related to the Mongolia's labour and business at country level",
       "scripts": ["run.sh"],
       "source_files": [
-        "input_files/*.csv"
+        "input_files/*.csv",
+        "counters/*.csv"
       ],
       "import_inputs": [
         {
           "template_mcf": "output_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup_output.tmcf",
-          "cleaned_csv": "output_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup_output.csv"
+          "cleaned_csv": "output_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup_output.csv",
+          "node_mcf": "output_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup_output*.mcf"
         },
         {
           "template_mcf": "output_files/employment_by_occupation_by_region_gender_and_agegroup_output.tmcf",
@@ -39,4 +41,3 @@
     }
   ]
 }
-
