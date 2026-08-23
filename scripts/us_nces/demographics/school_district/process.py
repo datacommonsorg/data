@@ -102,3 +102,4 @@ if __name__ == '__main__':
         error_msg = str(e)[:1000]
         logging.fatal(
             f"Error While Running District School Process: {error_msg}")
+        raise
