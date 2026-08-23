@@ -10,13 +10,24 @@ Single,maritalStatus,Unmarried,,,,,,,,
 2000,observationDate,2000,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
 2010,observationDate,2010,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
 2015,observationDate,2015,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
+2020,observationDate,2020,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
+2021,observationDate,2021,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
+2022,observationDate,2022,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
+2023,observationDate,2023,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
+2024,observationDate,2024,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
+2025,observationDate,2025,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
+2026,observationDate,2026,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
+2027,observationDate,2027,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
+2028,observationDate,2028,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
+2029,observationDate,2029,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
+2030,observationDate,2030,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
 ,,,,,,,,,,
-Age Group:Population aged 15 and over-Total,age,[15 - Years],,,,,,,,
-Age Group:15-19,#ignore,skip,,,,,,,,
-Age Group:70+,#ignore,skip,,,,,,,,
+Age Group:Total,age,[15 - Years],,,,,,,,
+Age Group:20-29,age,[20 29 Years],,,,,,,,
+Age Group:30-39,age,[30 39 Years],,,,,,,,
+Age Group:40-49,age,[40 49 Years],,,,,,,,
+Age Group:50-59,age,[50 59 Years],,,,,,,,
+Age Group:60-69,age,[60 69 Years],,,,,,,,
 ,,,,,,,,,,
-20-29,age,[20 29 Years],,,,,,,,
-30-39,age,[30 39 Years],,,,,,,,
-40-49,age,[40 49 Years],,,,,,,,
-50-59,age,[50 59 Years],,,,,,,,
-60-69,age,[60 69 Years],,,,,,,,
+Male,#ignore,skip,,,,,,,,
+Female,#ignore,skip,,,,,,,,

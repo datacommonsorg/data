@@ -12,27 +12,33 @@
       "import_inputs": [
         {
           "template_mcf": "output_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup_output.tmcf",
-          "cleaned_csv": "output_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup_output.csv"
+          "cleaned_csv": "output_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup_output.csv",
+          "statvar_mcf": "output_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup_output.mcf"
         },
         {
           "template_mcf": "output_files/employment_by_occupation_by_region_gender_and_agegroup_output.tmcf",
-          "cleaned_csv": "output_files/employment_by_occupation_by_region_gender_and_agegroup_output.csv"
+          "cleaned_csv": "output_files/employment_by_occupation_by_region_gender_and_agegroup_output.csv",
+          "statvar_mcf": "output_files/employment_by_occupation_by_region_gender_and_agegroup_output.mcf"
         },
         {
           "template_mcf": "output_files/employment_to_population_ratio_by_region_gender_and_agegroup_output.tmcf",
-          "cleaned_csv": "output_files/employment_to_population_ratio_by_region_gender_and_agegroup_output.csv"
+          "cleaned_csv": "output_files/employment_to_population_ratio_by_region_gender_and_agegroup_output.csv",
+          "statvar_mcf": "output_files/employment_to_population_ratio_by_region_gender_and_agegroup_output.mcf"
         },
         {
           "template_mcf": "output_files/labour_force_by_region_gender_and_agegroup_output.tmcf",
-          "cleaned_csv": "output_files/labour_force_by_region_gender_and_agegroup_output.csv"
+          "cleaned_csv": "output_files/labour_force_by_region_gender_and_agegroup_output.csv",
+          "statvar_mcf": "output_files/labour_force_by_region_gender_and_agegroup_output.mcf"
         },
         {
           "template_mcf": "output_files/labour_underutilization_by_region_gender_and_agegroup_output.tmcf",
-          "cleaned_csv": "output_files/labour_underutilization_by_region_gender_and_agegroup_output.csv"
+          "cleaned_csv": "output_files/labour_underutilization_by_region_gender_and_agegroup_output.csv",
+          "statvar_mcf": "output_files/labour_underutilization_by_region_gender_and_agegroup_output.mcf"
         },
         {
           "template_mcf": "output_files/registered_unemployed_by_education_level_region_gender_month_output.tmcf",
-          "cleaned_csv": "output_files/registered_unemployed_by_education_level_region_gender_month_output.csv"
+          "cleaned_csv": "output_files/registered_unemployed_by_education_level_region_gender_month_output.csv",
+          "statvar_mcf": "output_files/registered_unemployed_by_education_level_region_gender_month_output.mcf"
         }
       ],
       "cron_schedule": "0 02 * * 6"
