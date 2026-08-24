@@ -87,7 +87,7 @@ Case Count,value,{Number},measurementMethod,CDC_NNDSS_Diseases_AnnualTables,obse
 10591,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serotype,SerotypeB
 10593,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serotype,NonSerotypeB
 10592,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serogroup,OtherSerogroups
-10597,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serotype,UnknownSerogroups
+10597,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serotype,UnknownSerotype
 10380,medicalCondition,Leprosy,,,,
 11610,medicalCondition,HaemophilusMeningitis,,,,
 11590,medicalCondition,HantavirusPulmonarySyndrome,,,,
