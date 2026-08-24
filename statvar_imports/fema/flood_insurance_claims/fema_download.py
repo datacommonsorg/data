@@ -31,12 +31,16 @@ from absl import flags
 flags.DEFINE_string('api_url',
                     'https://www.fema.gov/api/open/v2/FimaNfipClaims',
                     'The base URL of the API endpoint to download data from.')
+flags.DEFINE_string(
+    'bulk_url',
+    'https://www.fema.gov/about/reports-and-data/openfema/FimaNfipClaims.csv',
+    'The direct bulk download URL for the full dataset.')
 flags.DEFINE_string('temp_dir', 'temp_fema_data',
                     'The temporary directory to store downloaded chunks.')
 _FLAGS = flags.FLAGS
 
 # Define the page size for each API request.
-PAGE_SIZE = 1000
+PAGE_SIZE = 10000
 
 
 def get_total_records(api_url):
@@ -75,27 +79,68 @@ def get_total_records(api_url):
             'Failed to parse the total record count from the response.')
 
 
-def download_data(api_url: str, temp_dir: str):
+def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
     """
-    Downloads data from the FEMA API, handling pagination and file merging.
+    Downloads data from the FEMA API, handling direct bulk download and pagination fallback.
 
     Args:
         api_url (str): The base URL of the API endpoint.
         temp_dir (str): The path to the temporary directory for downloaded chunks.
+        bulk_url (str): The direct bulk download URL for the full dataset.
     """
     filename = "fema_nfip_claims.csv"
 
     output_dir = "input_file"
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    filename = os.path.join(output_dir, filename)
+    final_filepath = os.path.join(output_dir, filename)
 
     logging.set_verbosity(logging.INFO)
 
-    # Define the page size for each API request.
+    # 1. Attempt direct bulk download first for speed and reliability
+    if bulk_url:
+        logging.info("Attempting direct bulk download from: %s", bulk_url)
+        try:
+            if os.path.exists(temp_dir):
+                shutil.rmtree(temp_dir)
+            os.makedirs(temp_dir)
+
+            download_success = download_file(url=bulk_url,
+                                             output_folder=temp_dir,
+                                             unzip=False,
+                                             tries=5,
+                                             delay=5,
+                                             backoff=2)
+            if download_success:
+                downloaded_files = [
+                    os.path.join(temp_dir, f)
+                    for f in os.listdir(temp_dir)
+                    if os.path.isfile(os.path.join(temp_dir, f))
+                ]
+                if downloaded_files:
+                    src_file = downloaded_files[0]
+                    if os.path.exists(final_filepath):
+                        os.remove(final_filepath)
+                    shutil.move(src_file, final_filepath)
+                    logging.info(
+                        "Direct bulk download complete. Saved to: %s",
+                        final_filepath)
+                    return
+        except Exception as e:
+            logging.warning(
+                "Direct bulk download failed (%s). Falling back to API pagination.",
+                e)
+        finally:
+            if os.path.exists(temp_dir):
+                shutil.rmtree(temp_dir)
+
+    # 2. Fallback to API pagination
+    # Remove previous partial/incomplete file if it exists
+    if os.path.exists(final_filepath):
+        os.remove(final_filepath)
+
     skip_count = 0
     records_downloaded = 0
-    final_filepath = filename
 
     # Get the total number of records from the API for a reliable failsafe.
     total_records = get_total_records(api_url)
@@ -114,7 +159,7 @@ def download_data(api_url: str, temp_dir: str):
 
         # The main download loop for pagination
         while total_records == 0 or records_downloaded < total_records:
-            csv_url = f"{api_url}?$format=csv&$skip={skip_count}"
+            csv_url = f"{api_url}?$format=csv&$top={PAGE_SIZE}&$skip={skip_count}"
             logging.info("Requesting data from: %s", csv_url)
 
             # The download utility incorrectly appends an .xlsx extension.
@@ -133,8 +178,10 @@ def download_data(api_url: str, temp_dir: str):
 
             if not download_success or not os.path.exists(util_output_path):
                 logging.fatal(
-                    "Failed to download chunk or file not found. Exiting.")
-                break
+                    "Failed to download chunk at skip=%s or file not found. Exiting.",
+                    skip_count)
+                raise RuntimeError(
+                    f"Failed to download chunk at skip={skip_count}.")
 
             os.rename(util_output_path, chunk_filepath)
 
@@ -147,13 +194,18 @@ def download_data(api_url: str, temp_dir: str):
             with open(final_filepath, 'ab') as f_final:
                 if skip_count == 0:
                     f_final.write(content)
+                    if not content.endswith(b'\n'):
+                        f_final.write(b'\n')
                 else:
                     split_content = content.split(b'\n', 1)
                     if len(split_content) > 1:
                         content_without_header = split_content[1]
-                        f_final.write(b'\n' + content_without_header)
+                        f_final.write(content_without_header)
+                        if not content_without_header.endswith(b'\n'):
+                            f_final.write(b'\n')
 
-            num_records_in_chunk = len(content.split(b'\n')) - 1
+            lines = content.strip(b'\r\n').split(b'\n')
+            num_records_in_chunk = max(0, len(lines) - 1) if lines and lines[0] else 0
             records_downloaded += num_records_in_chunk
 
             logging.info("Downloaded %s of %s records.", records_downloaded,
@@ -167,12 +219,21 @@ def download_data(api_url: str, temp_dir: str):
 
             skip_count += PAGE_SIZE
 
+        if total_records > 0 and records_downloaded < total_records:
+            logging.fatal(
+                "Download incomplete: only %s of %s records downloaded.",
+                records_downloaded, total_records)
+            raise RuntimeError(
+                f"Download incomplete: only {records_downloaded} of {total_records} records downloaded."
+            )
+
         logging.info(
-            "Total download complete. All available records saved to: %s",
-            final_filepath)
+            "Total download complete. All %s available records saved to: %s",
+            records_downloaded, final_filepath)
 
     except IOError as e:
         logging.error("An error occurred while writing the file: %s", e)
+        raise
     finally:
         if os.path.exists(temp_dir):
             shutil.rmtree(temp_dir)
@@ -185,7 +246,7 @@ def main(argv):
     Args:
         argv: List of command line arguments, as provided by absl.
     """
-    download_data(_FLAGS.api_url, _FLAGS.temp_dir)
+    download_data(_FLAGS.api_url, _FLAGS.temp_dir, _FLAGS.bulk_url)
 
 
 if __name__ == "__main__":

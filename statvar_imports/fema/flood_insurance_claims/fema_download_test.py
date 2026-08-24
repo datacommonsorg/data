@@ -138,6 +138,34 @@ class FemaDownloadTest(unittest.TestCase):
             # Restore the original PAGE_SIZE to avoid side effects in other tests
             fema_download.PAGE_SIZE = original_page_size
 
+    @patch('fema_download.shutil.rmtree')
+    @patch('fema_download.download_file')
+    def test_download_data_bulk_success(self, mock_download_file, mock_rmtree):
+        """Test successful direct bulk download."""
+        def download_side_effect(url, output_folder, **kwargs):
+            os.makedirs(output_folder, exist_ok=True)
+            with open(os.path.join(output_folder, "FimaNfipClaims.csv"), 'wb') as f:
+                f.write(b"colA,colB\n1,X\n2,Y\n")
+            return True
+
+        mock_download_file.side_effect = download_side_effect
+
+        original_cwd = os.getcwd()
+        os.chdir(self.test_dir)
+        try:
+            fema_download.download_data('http://fake-api.com',
+                                        'temp_fema_data',
+                                        bulk_url='http://fake-bulk.com/FimaNfipClaims.csv')
+
+            final_filepath = os.path.join('input_file', 'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
+            self.assertEqual(content.strip(), b"colA,colB\n1,X\n2,Y")
+            mock_download_file.assert_called_once()
+        finally:
+            os.chdir(original_cwd)
+
 
 if __name__ == '__main__':
     unittest.main()
