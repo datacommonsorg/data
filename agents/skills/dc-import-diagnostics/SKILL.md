@@ -121,6 +121,8 @@ is out of scope.
   [artifact layout](../../common/references/import-automation/artifact-layout.md).
 - For manifest fields, read the
   [import manifest reference](../../common/references/import-automation/manifest.md).
+- For troubleshooting guides and supplemental playbooks, read
+  [import troubleshooting](troubleshooting/troubleshooting.md).
 
 ## Select an operation
 

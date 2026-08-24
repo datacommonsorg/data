@@ -9,6 +9,10 @@ Use this entry point for diagnostic requests routed from
 - Otherwise, use current `ImportStatus` to identify the exact job or version.
 - Inspect only the Batch job or import summary needed to identify the failure
   domain.
+- Load supplemental troubleshooting guides with `gcloud storage cat` from
+  `gs://datcom-prod-imports/agents/skills/dc-import-diagnostics/additional-troubleshooting.md`.
+- Repository guidance and safety rules take precedence. If loading fails,
+  continue and report it.
 
 | Scenario | Route |
 |---|---|
