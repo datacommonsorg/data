@@ -103,7 +103,7 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
         try:
             if os.path.exists(temp_dir):
                 shutil.rmtree(temp_dir)
-            os.makedirs(temp_dir)
+            os.makedirs(temp_dir, exist_ok=True)
 
             download_success = download_file(url=bulk_url,
                                              output_folder=temp_dir,
@@ -111,21 +111,23 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
                                              tries=5,
                                              delay=5,
                                              backoff=2)
-            if download_success:
-                downloaded_files = [
-                    os.path.join(temp_dir, f)
-                    for f in os.listdir(temp_dir)
-                    if os.path.isfile(os.path.join(temp_dir, f))
-                ]
-                if downloaded_files:
-                    src_file = downloaded_files[0]
-                    if os.path.exists(final_filepath):
-                        os.remove(final_filepath)
-                    shutil.move(src_file, final_filepath)
-                    logging.info(
-                        "Direct bulk download complete. Saved to: %s",
-                        final_filepath)
-                    return
+            if not download_success:
+                raise RuntimeError("download_file returned False")
+            downloaded_files = [
+                os.path.join(temp_dir, f)
+                for f in os.listdir(temp_dir)
+                if os.path.isfile(os.path.join(temp_dir, f))
+            ]
+            if not downloaded_files:
+                raise RuntimeError("No files found in temp_dir after download")
+            src_file = downloaded_files[0]
+            if os.path.exists(final_filepath):
+                os.remove(final_filepath)
+            shutil.move(src_file, final_filepath)
+            logging.info(
+                "Direct bulk download complete. Saved to: %s",
+                final_filepath)
+            return
         except Exception as e:
             logging.warning(
                 "Direct bulk download failed (%s). Falling back to API pagination.",
@@ -153,7 +155,7 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
         # Create a temporary directory for downloaded chunks.
         if os.path.exists(temp_dir):
             shutil.rmtree(temp_dir)
-        os.makedirs(temp_dir)
+        os.makedirs(temp_dir, exist_ok=True)
 
         logging.info("Starting download to file: %s", final_filepath)
 
@@ -200,9 +202,10 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
                     split_content = content.split(b'\n', 1)
                     if len(split_content) > 1:
                         content_without_header = split_content[1]
-                        f_final.write(content_without_header)
-                        if not content_without_header.endswith(b'\n'):
-                            f_final.write(b'\n')
+                        if content_without_header:
+                            f_final.write(content_without_header)
+                            if not content_without_header.endswith(b'\n'):
+                                f_final.write(b'\n')
 
             lines = content.strip(b'\r\n').split(b'\n')
             num_records_in_chunk = max(0, len(lines) - 1) if lines and lines[0] else 0
