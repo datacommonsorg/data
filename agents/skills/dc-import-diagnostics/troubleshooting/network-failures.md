@@ -20,6 +20,11 @@ connect to a source or complete a request.
 - Inspect the requesting code for timeout, streaming, retry, and exception
   handling behavior.
 - Determine whether the failure stopped execution or was caught and skipped.
+- When failures recur and exact historical jobs are known, compare their
+  retained logs for recurring time windows, throttling, source availability,
+  or cloud/IP blocking.
+- Treat a recurring pattern as a clue unless direct evidence confirms its
+  cause.
 
 ## Connection failure
 

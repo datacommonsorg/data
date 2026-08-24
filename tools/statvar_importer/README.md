@@ -65,6 +65,7 @@ and configuration. The most useful groups for deletion debugging are:
 | `input-files-processed` and `num-rows-<file>` | Files opened and estimated rows found in each file. |
 | `input-rows-skipped` | Leading rows excluded by skip configuration. |
 | `input-rows-ignored*` | Rows excluded by row selection, preprocessing, or basic row requirements. |
+| `warning-missing-property-key` | PV-map lookup attempts with no match. Detailed keys require debug counters; the total does not count dropped rows. |
 | `ignored-svobs-pvs` and `filter-dropped-svobs-pvs` | Potential observations excluded by configured property-value rules. |
 | `dropped-svobs-unresolved-date` and `dropped-svobs-unresolved-place` | Observations dropped because required date or place values could not be resolved. |
 | `dropped-svobs-with-invalid-statvar` and `dropped-svobs-invalid` | Observations dropped because their StatisticalVariable or observation properties were invalid. |
