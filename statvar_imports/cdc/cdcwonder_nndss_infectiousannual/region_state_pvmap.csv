@@ -84,10 +84,10 @@ Case Count,value,{Number},measurementMethod,CDC_NNDSS_Diseases_AnnualTables,obse
 11570,medicalCondition,Giardiasis,,,,
 10280,medicalCondition,Gonorrhea,,,,
 10590,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,,,,
-10591,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serogroup,SerotypeB
-10593,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serogroup,NonSerotypeB
-10592,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serogroup,OtherSerogroups
-10597,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serogroup,UnknownSerogroups
+10591,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serotype,SerotypeB
+10593,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serotype,NonSerotypeB
+10592,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serotype,OtherSerogroups
+10597,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,age,YearsUpto5,serotype,UnknownSerogroups
 10380,medicalCondition,Leprosy,,,,
 11610,medicalCondition,HaemophilusMeningitis,,,,
 11590,medicalCondition,HantavirusPulmonarySyndrome,,,,
