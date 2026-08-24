@@ -438,7 +438,6 @@ class USEducation:
             'dc_api_retries': 3,
             'dc_api_retry_sec': 5,
             'dc_api_use_cache': False
-            # 'dc_api_root': None  # Inherits os.environ['DC_API_ROOT'] (autopush in test env / prod in prod env)
         }
         # Passing the list through API call for checking its existance.
         dcid_check_zip = dc_api_is_defined_dcid(zip_list, config)
@@ -583,7 +582,6 @@ class USEducation:
             'dc_api_retries': 3,
             'dc_api_retry_sec': 5,
             'dc_api_use_cache': False
-            # 'dc_api_root': None  # Inherits os.environ['DC_API_ROOT'] (autopush in test env / prod in prod env)
         }
 
         # Only call API if lists are not empty
@@ -748,7 +746,6 @@ class USEducation:
             'dc_api_retries': 3,
             'dc_api_retry_sec': 5,
             'dc_api_use_cache': False
-            # 'dc_api_root': None  # Inherits os.environ['DC_API_ROOT'] (autopush in test env / prod in prod env)
         }
 
         # Only call API if we actually have states to check
@@ -1052,13 +1049,6 @@ class USEducation:
                                                     SV_PROP_ORDER, FORM_STATVAR)
                     df_parsed = self._generate_stat_var_and_mcf(
                         df_parsed, SV_PROP_ORDER)
-                # Commented out: _GENDER in replacement_functions now uses word boundaries (\bfemale\b)
-                # so "FeMale" is never generated.
-                #     for col in df_parsed.columns.values.tolist():
-                #         df_parsed[col] = df_parsed[col].astype(
-                #             'str').str.replace("FeMale", "Female")
-                # Adding new columns scaling_factor:100 and unit:dcs:Percent
-                #  wherever the SV is Percent.
                     df_parsed["scaling_factor"] = np.where(
                         df_parsed["sv_name"].str.contains("Percent"), '100', '')
                     df_parsed["unit"] = np.where(

@@ -372,8 +372,6 @@ COLUMNS = {
     "Phone Number": "PhoneNumber"
 }
 
-# Original without word boundary caused "female" -> "FeMale":
-# _GENDER = {"female": "Female", "male": "Male"}
 _GENDER = {r"\bfemale\b": "Female", r"\bmale\b": "Male"}
 
 _LOCALE = {
