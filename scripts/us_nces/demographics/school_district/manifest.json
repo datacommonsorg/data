@@ -17,13 +17,12 @@
             "import_inputs": [
                 {
                     "template_mcf": "gcs_folder/output_files/us_nces_demographics_district_school.tmcf",
-                    "cleaned_csv": "gcs_folder/output_files/us_nces_demographics_district_school.csv"
+                    "cleaned_csv": "gcs_folder/output_files/us_nces_demographics_district_school.csv",
+                    "node_mcf": "gcs_folder/output_files/us_nces_demographics_district_school.mcf"
                 },
                 {
                     "template_mcf": "gcs_folder/output_place/us_nces_demographics_district_place.tmcf",
-                    "cleaned_csv": "gcs_folder/output_place/us_nces_demographics_district_place.csv",
-                    "node_mcf": "ProvisionalNodePlaces.mcf"
-                }
+                    "cleaned_csv": "gcs_folder/output_place/us_nces_demographics_district_place.csv"                }
             ],
             "cron_schedule": "30 3 3 3,6,9,12 *",
             "validation_config_file": "validation_config.json",
