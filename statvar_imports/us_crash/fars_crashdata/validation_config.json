@@ -23,6 +23,15 @@
                 "golden_files": "../../../../golden_data/golden_observations.csv",
                 "input_files": "../../../../gcs_output/output/*.csv"
             }
+        },
+        {
+            "rule_id": "check_date_freshness_core_statvars",
+            "description": "Verifies that core StatVars reach the expected reporting year/lag",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats WHERE StatVar IN ('Count_VehicleCrashIncident', 'Count_MortalityEvent_VehicleCrashIncident')",
+                "condition": "MaxDate >= '2024'"
+            }
         }
     ]
 }

@@ -12,6 +12,7 @@
                 "run.sh"
             ],
             "source_files": [
+                "counters/*.csv",
                 "gcs_output/input_files/*",
                 "golden_data/*.csv"
             ],
