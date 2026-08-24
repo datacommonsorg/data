@@ -3,4 +3,4 @@ parameter,value
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
 header_rows,1
 url,"https://www.1212.mn/en/statcate/table-view/Labour%2C%20business/Labour/DT_NSO_0400_006V12_1.px?subtables=EMPLOYMENT,%20by%20occupation,%20sex,%20age%20group,%20region,%20aimag%20and%20the%20capital"
-mapped_columns,5
+input_encoding,utf-8-sig
