@@ -179,7 +179,7 @@ class FemaDownloadTest(unittest.TestCase):
             mock_get_total_records.return_value = 2
 
             def download_side_effect(url, output_folder, **kwargs):
-                if 'fake-bulk.com' in url:
+                if url == 'http://fake-bulk.com/FimaNfipClaims.csv':
                     return False
                 util_output_path = os.path.join(output_folder,
                                                 "FimaNfipClaims.xlsx")
