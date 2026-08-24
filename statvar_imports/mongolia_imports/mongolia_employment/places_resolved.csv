@@ -1,234 +1,574 @@
 place_name,dcid
-          Baganuur Bagakhangai,wikidataId/Q23430
-          Bayangol,wikidataId/Q23430
-          Bayanzurkh,wikidataId/Q23430
-          Chingeltei,wikidataId/Q23430
-          Khan-Uul,wikidataId/Q23430
-          Nalaikh,wikidataId/Q23430
-          Songinokhairkhan,wikidataId/Q23430
-          Sukhbaatar,wikidataId/Q244804
-        Bayan-Ulgii,wikidataId/Q191792
-        Govi-Altai,wikidataId/Q192945
-        Khentii,wikidataId/Q239040
-        Khovd,wikidataId/Q194098
-        Khuvsgul,wikidataId/Q244788
-        Orkhon,wikidataId/Q234710
-        Uvs,wikidataId/Q192942
-        Zavkhan,wikidataId/Q167764
-       Arkhangai,wikidataId/Q207809
-       Bayankhongor,wikidataId/Q276200
-       Bulgan,wikidataId/Q209774
-       Darkhan-Uul,wikidataId/Q18827
-       Dornod,wikidataId/Q207795
-       Dornogovi,wikidataId/Q213272
-       Dundgovi,wikidataId/Q211835
-       Govisumber,wikidataId/Q236333
-       Selenge,wikidataId/Q234680
-       Sukhbaatar,wikidataId/Q244804
-       Tuv,wikidataId/Q276195
-       Umnugovi,wikidataId/Q235579
-       Uvurkhangai,wikidataId/Q234713
-      Ulaanbaatar,wikidataId/Q23430
-     Arkhangai,wikidataId/Q207809
-     Bayan-Ulgii,wikidataId/Q191792
-     Bayankhongor,wikidataId/Q276200
-     Bulgan,wikidataId/Q209774
-     Darkhan-Uul,wikidataId/Q18827
-     Dornod,wikidataId/Q207795
-     Dornogovi,wikidataId/Q213272
-     Dundgovi,wikidataId/Q211835
-     Govi-Altai,wikidataId/Q192945
-     Govisumber,wikidataId/Q236333
-     Khangai region,dc/aggregate/KhangaiRegion
-     Khentii,wikidataId/Q239040
-     Khovd,wikidataId/Q194098
-     Khuvsgul,wikidataId/Q244788
-     Orkhon,wikidataId/Q234710
-     Selenge,wikidataId/Q234680
-     Sukhbaatar,wikidataId/Q244804
-     Tuv,wikidataId/Q276195
-     Umnugovi,wikidataId/Q235579
-     Uvs,wikidataId/Q192942
-     Uvurkhangai,wikidataId/Q234713
-     Western region,dc/aggregate/WesternRegion
-     Zavkhan,wikidataId/Q167764
-    Arkhangai,wikidataId/Q207809
-    Bayan-Ulgii,wikidataId/Q191792
-    Bayankhongor,wikidataId/Q276200
-    Bulgan,wikidataId/Q209774
-    Central region,dc/aggregate/CentralRegion
-    Darkhan-Uul,wikidataId/Q18827
-    Dornod,wikidataId/Q207795
-    Dornogovi,wikidataId/Q213272
-    Dundgovi,wikidataId/Q211835
-    Eastern region,dc/aggregate/EasternRegion
-    Govi-Altai,wikidataId/Q192945
-    Govisumber,wikidataId/Q236333
-    Khentii,wikidataId/Q239040
-    Khovd,wikidataId/Q194098
-    Khuvsgul,wikidataId/Q244788
-    Orkhon,wikidataId/Q234710
-    Selenge,wikidataId/Q234680
-    Sukhbaatar,wikidataId/Q244804
-    Tuv,wikidataId/Q276195
-    Ulaanbaatar,wikidataId/Q23430
-    Umnugovi,wikidataId/Q235579
-    Uvs,wikidataId/Q192942
-    Uvurkhangai,wikidataId/Q234713
-    Zavkhan,wikidataId/Q167764
-   Sukhbaatar,wikidataId/Q244804
-  Central region,dc/aggregate/CentralRegion
-  Eastern region,dc/aggregate/EasternRegion
-  Khangai region,dc/aggregate/KhangaiRegion
-  Ulaanbaatar,wikidataId/Q23430
-  Western region,dc/aggregate/WesternRegion
-  Сүхбаатар,wikidataId/Q244804
-  Улаанбаатар,wikidataId/Q23430
- Arkhangai,wikidataId/Q207809
- Baganuur Bagakhangai,wikidataId/Q23430
- Bayan-Ulgii,wikidataId/Q191792
- Bayangol,wikidataId/Q23430
- Bayankhongor,wikidataId/Q276200
- Bayanzurkh,wikidataId/Q23430
- Bulgan,wikidataId/Q209774
- Central region,dc/aggregate/CentralRegion
- Chingeltei,wikidataId/Q23430
- Darkhan-Uul,wikidataId/Q18827
- Dornod,wikidataId/Q207795
- Dornogovi,wikidataId/Q213272
- Dundgovi,wikidataId/Q211835
- Eastern region,dc/aggregate/EasternRegion
- Govi-Altai,wikidataId/Q192945
- Govisumber,wikidataId/Q236333
- Khan-Uul,wikidataId/Q23430
- Khangai region,dc/aggregate/KhangaiRegion
- Khentii,wikidataId/Q239040
- Khovd,wikidataId/Q194098
- Khuvsgul,wikidataId/Q244788
- Nalaikh,wikidataId/Q23430
- Orkhon,wikidataId/Q234710
- Selenge,wikidataId/Q234680
- Songinokhairkhan,wikidataId/Q23430
- Sukhbaatar,wikidataId/Q244804
- Tuv,wikidataId/Q276195
- Ulaanbaatar,wikidataId/Q23430
- Umnugovi,wikidataId/Q235579
- Uvs,wikidataId/Q192942
- Uvurkhangai,wikidataId/Q234713
- Western region,dc/aggregate/WesternRegion
- Zavkhan,wikidataId/Q167764
-Arkhangai,wikidataId/Q207809
-Baganuur Bagakhangai,wikidataId/Q23430
-Baganuur bagakhangai,wikidataId/Q23430
-Bayan-Ulgii,wikidataId/Q191792
-Bayan-ulgii,wikidataId/Q191792
-Bayangol,wikidataId/Q23430
-Bayankhongor,wikidataId/Q276200
-Bayanulgii,wikidataId/Q191792
-Bayanzurkh,wikidataId/Q23430
-Bulgan,wikidataId/Q209774
-Central Region,dc/aggregate/CentralRegion
-Central region,dc/aggregate/CentralRegion
-Centrel,dc/aggregate/CentralRegion
-Chingeltei,wikidataId/Q23430
-Darkhan-Uul,wikidataId/Q18827
-Darkhan-uul,wikidataId/Q18827
-Dornod,wikidataId/Q207795
-Dornogovi,wikidataId/Q213272
-Dundgovi,wikidataId/Q211835
-Eastern,dc/aggregate/EasternRegion
-Eastern Region,dc/aggregate/EasternRegion
-Eastern region,dc/aggregate/EasternRegion
-Gobi-Altai,wikidataId/Q192945
-Gobi-altai,wikidataId/Q192945
-Gobisumber,wikidataId/Q236333
-Govi-Altai,wikidataId/Q192945
-Govi-altai,wikidataId/Q192945
-Govisumber,wikidataId/Q236333
-Khan-Uul,wikidataId/Q23430
-Khan-uul,wikidataId/Q23430
-Khangai,dc/aggregate/KhangaiRegion
-Khangai Region,dc/aggregate/KhangaiRegion
-Khangai region,dc/aggregate/KhangaiRegion
-Khentii,wikidataId/Q239040
-Khovd,wikidataId/Q194098
-Khuvsgul,wikidataId/Q244788
-Nalaikh,wikidataId/Q23430
-National Result,country/MNG
-National result,country/MNG
-Orkhon,wikidataId/Q234710
-Selenge,wikidataId/Q234680
-Songinokhairkhan,wikidataId/Q23430
-Sukhbaatar,wikidataId/Q244804
 Total,country/MNG
-Tuv,wikidataId/Q276195
-Ulaanbaatar,wikidataId/Q23430
-Umnugovi,wikidataId/Q235579
-Uvs,wikidataId/Q192942
-Uvurkhangai,wikidataId/Q234713
-Western,dc/aggregate/WesternRegion
-Western Region,dc/aggregate/WesternRegion
-Western region,dc/aggregate/WesternRegion
-Zavkhan,wikidataId/Q167764
-arkhangai,wikidataId/Q207809
-baganuur bagakhangai,wikidataId/Q23430
+Bayan-Ulgii,wikidataId/Q191792
 bayan-ulgii,wikidataId/Q191792
-bayangol,wikidataId/Q23430
-bayankhongor,wikidataId/Q276200
-bayanulgii,wikidataId/Q191792
-bayanzurkh,wikidataId/Q23430
-bulgan,wikidataId/Q209774
-central region,dc/aggregate/CentralRegion
-centrel,dc/aggregate/CentralRegion
-chingeltei,wikidataId/Q23430
-darkhan-uul,wikidataId/Q18827
-dornod,wikidataId/Q207795
-dornogovi,wikidataId/Q213272
-dundgovi,wikidataId/Q211835
-eastern,dc/aggregate/EasternRegion
-eastern region,dc/aggregate/EasternRegion
-gobi-altai,wikidataId/Q192945
-gobisumber,wikidataId/Q236333
+ Bayan-Ulgii,wikidataId/Q191792
+ bayan-ulgii,wikidataId/Q191792
+  Bayan-Ulgii,wikidataId/Q191792
+  bayan-ulgii,wikidataId/Q191792
+   Bayan-Ulgii,wikidataId/Q191792
+   bayan-ulgii,wikidataId/Q191792
+    Bayan-Ulgii,wikidataId/Q191792
+    bayan-ulgii,wikidataId/Q191792
+     Bayan-Ulgii,wikidataId/Q191792
+     bayan-ulgii,wikidataId/Q191792
+      Bayan-Ulgii,wikidataId/Q191792
+      bayan-ulgii,wikidataId/Q191792
+          Bayan-Ulgii,wikidataId/Q191792
+          bayan-ulgii,wikidataId/Q191792
+Govi-Altai,wikidataId/Q192945
 govi-altai,wikidataId/Q192945
-govisumber,wikidataId/Q236333
-khan-uul,wikidataId/Q23430
-khangai,dc/aggregate/KhangaiRegion
-khangai region,dc/aggregate/KhangaiRegion
-khentii,wikidataId/Q239040
-khovd,wikidataId/Q194098
-khuvsgul,wikidataId/Q244788
-nalaikh,wikidataId/Q23430
-national result,country/MNG
-orkhon,wikidataId/Q234710
-selenge,wikidataId/Q234680
-songinokhairkhan,wikidataId/Q23430
-sukhbaatar,wikidataId/Q244804
-total,country/MNG
-tuv,wikidataId/Q276195
-ulaanbaatar,wikidataId/Q23430
-umnugovi,wikidataId/Q235579
-uvs,wikidataId/Q192942
-uvurkhangai,wikidataId/Q234713
-western,dc/aggregate/WesternRegion
-western region,dc/aggregate/WesternRegion
+ Govi-Altai,wikidataId/Q192945
+ govi-altai,wikidataId/Q192945
+  Govi-Altai,wikidataId/Q192945
+  govi-altai,wikidataId/Q192945
+   Govi-Altai,wikidataId/Q192945
+   govi-altai,wikidataId/Q192945
+    Govi-Altai,wikidataId/Q192945
+    govi-altai,wikidataId/Q192945
+     Govi-Altai,wikidataId/Q192945
+     govi-altai,wikidataId/Q192945
+      Govi-Altai,wikidataId/Q192945
+      govi-altai,wikidataId/Q192945
+          Govi-Altai,wikidataId/Q192945
+          govi-altai,wikidataId/Q192945
+Zavkhan,wikidataId/Q167764
 zavkhan,wikidataId/Q167764
-Багануур Багахангай,wikidataId/Q23430
-Багануур багахангай,wikidataId/Q23430
-Баянгол,wikidataId/Q23430
-Баянзүрх,wikidataId/Q23430
-Налайх,wikidataId/Q23430
-Сонгинохайрхан,wikidataId/Q23430
+ Zavkhan,wikidataId/Q167764
+ zavkhan,wikidataId/Q167764
+  Zavkhan,wikidataId/Q167764
+  zavkhan,wikidataId/Q167764
+   Zavkhan,wikidataId/Q167764
+   zavkhan,wikidataId/Q167764
+    Zavkhan,wikidataId/Q167764
+    zavkhan,wikidataId/Q167764
+     Zavkhan,wikidataId/Q167764
+     zavkhan,wikidataId/Q167764
+      Zavkhan,wikidataId/Q167764
+      zavkhan,wikidataId/Q167764
+          Zavkhan,wikidataId/Q167764
+          zavkhan,wikidataId/Q167764
+Uvs,wikidataId/Q192942
+uvs,wikidataId/Q192942
+ Uvs,wikidataId/Q192942
+ uvs,wikidataId/Q192942
+  Uvs,wikidataId/Q192942
+  uvs,wikidataId/Q192942
+   Uvs,wikidataId/Q192942
+   uvs,wikidataId/Q192942
+    Uvs,wikidataId/Q192942
+    uvs,wikidataId/Q192942
+     Uvs,wikidataId/Q192942
+     uvs,wikidataId/Q192942
+      Uvs,wikidataId/Q192942
+      uvs,wikidataId/Q192942
+          Uvs,wikidataId/Q192942
+          uvs,wikidataId/Q192942
+Khovd,wikidataId/Q194098
+khovd,wikidataId/Q194098
+ Khovd,wikidataId/Q194098
+ khovd,wikidataId/Q194098
+  Khovd,wikidataId/Q194098
+  khovd,wikidataId/Q194098
+   Khovd,wikidataId/Q194098
+   khovd,wikidataId/Q194098
+    Khovd,wikidataId/Q194098
+    khovd,wikidataId/Q194098
+     Khovd,wikidataId/Q194098
+     khovd,wikidataId/Q194098
+      Khovd,wikidataId/Q194098
+      khovd,wikidataId/Q194098
+          Khovd,wikidataId/Q194098
+          khovd,wikidataId/Q194098
+Arkhangai,wikidataId/Q207809
+arkhangai,wikidataId/Q207809
+ Arkhangai,wikidataId/Q207809
+ arkhangai,wikidataId/Q207809
+  Arkhangai,wikidataId/Q207809
+  arkhangai,wikidataId/Q207809
+   Arkhangai,wikidataId/Q207809
+   arkhangai,wikidataId/Q207809
+    Arkhangai,wikidataId/Q207809
+    arkhangai,wikidataId/Q207809
+     Arkhangai,wikidataId/Q207809
+     arkhangai,wikidataId/Q207809
+      Arkhangai,wikidataId/Q207809
+      arkhangai,wikidataId/Q207809
+          Arkhangai,wikidataId/Q207809
+          arkhangai,wikidataId/Q207809
+Bayankhongor,wikidataId/Q276200
+bayankhongor,wikidataId/Q276200
+ Bayankhongor,wikidataId/Q276200
+ bayankhongor,wikidataId/Q276200
+  Bayankhongor,wikidataId/Q276200
+  bayankhongor,wikidataId/Q276200
+   Bayankhongor,wikidataId/Q276200
+   bayankhongor,wikidataId/Q276200
+    Bayankhongor,wikidataId/Q276200
+    bayankhongor,wikidataId/Q276200
+     Bayankhongor,wikidataId/Q276200
+     bayankhongor,wikidataId/Q276200
+      Bayankhongor,wikidataId/Q276200
+      bayankhongor,wikidataId/Q276200
+          Bayankhongor,wikidataId/Q276200
+          bayankhongor,wikidataId/Q276200
+Bulgan,wikidataId/Q209774
+bulgan,wikidataId/Q209774
+ Bulgan,wikidataId/Q209774
+ bulgan,wikidataId/Q209774
+  Bulgan,wikidataId/Q209774
+  bulgan,wikidataId/Q209774
+   Bulgan,wikidataId/Q209774
+   bulgan,wikidataId/Q209774
+    Bulgan,wikidataId/Q209774
+    bulgan,wikidataId/Q209774
+     Bulgan,wikidataId/Q209774
+     bulgan,wikidataId/Q209774
+      Bulgan,wikidataId/Q209774
+      bulgan,wikidataId/Q209774
+          Bulgan,wikidataId/Q209774
+          bulgan,wikidataId/Q209774
+Orkhon,wikidataId/Q234710
+orkhon,wikidataId/Q234710
+ Orkhon,wikidataId/Q234710
+ orkhon,wikidataId/Q234710
+  Orkhon,wikidataId/Q234710
+  orkhon,wikidataId/Q234710
+   Orkhon,wikidataId/Q234710
+   orkhon,wikidataId/Q234710
+    Orkhon,wikidataId/Q234710
+    orkhon,wikidataId/Q234710
+     Orkhon,wikidataId/Q234710
+     orkhon,wikidataId/Q234710
+      Orkhon,wikidataId/Q234710
+      orkhon,wikidataId/Q234710
+          Orkhon,wikidataId/Q234710
+          orkhon,wikidataId/Q234710
+Uvurkhangai,wikidataId/Q234713
+uvurkhangai,wikidataId/Q234713
+ Uvurkhangai,wikidataId/Q234713
+ uvurkhangai,wikidataId/Q234713
+  Uvurkhangai,wikidataId/Q234713
+  uvurkhangai,wikidataId/Q234713
+   Uvurkhangai,wikidataId/Q234713
+   uvurkhangai,wikidataId/Q234713
+    Uvurkhangai,wikidataId/Q234713
+    uvurkhangai,wikidataId/Q234713
+     Uvurkhangai,wikidataId/Q234713
+     uvurkhangai,wikidataId/Q234713
+      Uvurkhangai,wikidataId/Q234713
+      uvurkhangai,wikidataId/Q234713
+          Uvurkhangai,wikidataId/Q234713
+          uvurkhangai,wikidataId/Q234713
+Khuvsgul,wikidataId/Q244788
+khuvsgul,wikidataId/Q244788
+ Khuvsgul,wikidataId/Q244788
+ khuvsgul,wikidataId/Q244788
+  Khuvsgul,wikidataId/Q244788
+  khuvsgul,wikidataId/Q244788
+   Khuvsgul,wikidataId/Q244788
+   khuvsgul,wikidataId/Q244788
+    Khuvsgul,wikidataId/Q244788
+    khuvsgul,wikidataId/Q244788
+     Khuvsgul,wikidataId/Q244788
+     khuvsgul,wikidataId/Q244788
+      Khuvsgul,wikidataId/Q244788
+      khuvsgul,wikidataId/Q244788
+          Khuvsgul,wikidataId/Q244788
+          khuvsgul,wikidataId/Q244788
+Govisumber,wikidataId/Q236333
+govisumber,wikidataId/Q236333
+ Govisumber,wikidataId/Q236333
+ govisumber,wikidataId/Q236333
+  Govisumber,wikidataId/Q236333
+  govisumber,wikidataId/Q236333
+   Govisumber,wikidataId/Q236333
+   govisumber,wikidataId/Q236333
+    Govisumber,wikidataId/Q236333
+    govisumber,wikidataId/Q236333
+     Govisumber,wikidataId/Q236333
+     govisumber,wikidataId/Q236333
+      Govisumber,wikidataId/Q236333
+      govisumber,wikidataId/Q236333
+          Govisumber,wikidataId/Q236333
+          govisumber,wikidataId/Q236333
+Darkhan-Uul,wikidataId/Q18827
+darkhan-uul,wikidataId/Q18827
+ Darkhan-Uul,wikidataId/Q18827
+ darkhan-uul,wikidataId/Q18827
+  Darkhan-Uul,wikidataId/Q18827
+  darkhan-uul,wikidataId/Q18827
+   Darkhan-Uul,wikidataId/Q18827
+   darkhan-uul,wikidataId/Q18827
+    Darkhan-Uul,wikidataId/Q18827
+    darkhan-uul,wikidataId/Q18827
+     Darkhan-Uul,wikidataId/Q18827
+     darkhan-uul,wikidataId/Q18827
+      Darkhan-Uul,wikidataId/Q18827
+      darkhan-uul,wikidataId/Q18827
+          Darkhan-Uul,wikidataId/Q18827
+          darkhan-uul,wikidataId/Q18827
+Dornogovi,wikidataId/Q213272
+dornogovi,wikidataId/Q213272
+ Dornogovi,wikidataId/Q213272
+ dornogovi,wikidataId/Q213272
+  Dornogovi,wikidataId/Q213272
+  dornogovi,wikidataId/Q213272
+   Dornogovi,wikidataId/Q213272
+   dornogovi,wikidataId/Q213272
+    Dornogovi,wikidataId/Q213272
+    dornogovi,wikidataId/Q213272
+     Dornogovi,wikidataId/Q213272
+     dornogovi,wikidataId/Q213272
+      Dornogovi,wikidataId/Q213272
+      dornogovi,wikidataId/Q213272
+          Dornogovi,wikidataId/Q213272
+          dornogovi,wikidataId/Q213272
+Dundgovi,wikidataId/Q211835
+dundgovi,wikidataId/Q211835
+ Dundgovi,wikidataId/Q211835
+ dundgovi,wikidataId/Q211835
+  Dundgovi,wikidataId/Q211835
+  dundgovi,wikidataId/Q211835
+   Dundgovi,wikidataId/Q211835
+   dundgovi,wikidataId/Q211835
+    Dundgovi,wikidataId/Q211835
+    dundgovi,wikidataId/Q211835
+     Dundgovi,wikidataId/Q211835
+     dundgovi,wikidataId/Q211835
+      Dundgovi,wikidataId/Q211835
+      dundgovi,wikidataId/Q211835
+          Dundgovi,wikidataId/Q211835
+          dundgovi,wikidataId/Q211835
+Umnugovi,wikidataId/Q235579
+umnugovi,wikidataId/Q235579
+ Umnugovi,wikidataId/Q235579
+ umnugovi,wikidataId/Q235579
+  Umnugovi,wikidataId/Q235579
+  umnugovi,wikidataId/Q235579
+   Umnugovi,wikidataId/Q235579
+   umnugovi,wikidataId/Q235579
+    Umnugovi,wikidataId/Q235579
+    umnugovi,wikidataId/Q235579
+     Umnugovi,wikidataId/Q235579
+     umnugovi,wikidataId/Q235579
+      Umnugovi,wikidataId/Q235579
+      umnugovi,wikidataId/Q235579
+          Umnugovi,wikidataId/Q235579
+          umnugovi,wikidataId/Q235579
+Selenge,wikidataId/Q234680
+selenge,wikidataId/Q234680
+ Selenge,wikidataId/Q234680
+ selenge,wikidataId/Q234680
+  Selenge,wikidataId/Q234680
+  selenge,wikidataId/Q234680
+   Selenge,wikidataId/Q234680
+   selenge,wikidataId/Q234680
+    Selenge,wikidataId/Q234680
+    selenge,wikidataId/Q234680
+     Selenge,wikidataId/Q234680
+     selenge,wikidataId/Q234680
+      Selenge,wikidataId/Q234680
+      selenge,wikidataId/Q234680
+          Selenge,wikidataId/Q234680
+          selenge,wikidataId/Q234680
+Tuv,wikidataId/Q276195
+tuv,wikidataId/Q276195
+ Tuv,wikidataId/Q276195
+ tuv,wikidataId/Q276195
+  Tuv,wikidataId/Q276195
+  tuv,wikidataId/Q276195
+   Tuv,wikidataId/Q276195
+   tuv,wikidataId/Q276195
+    Tuv,wikidataId/Q276195
+    tuv,wikidataId/Q276195
+     Tuv,wikidataId/Q276195
+     tuv,wikidataId/Q276195
+      Tuv,wikidataId/Q276195
+      tuv,wikidataId/Q276195
+          Tuv,wikidataId/Q276195
+          tuv,wikidataId/Q276195
+Dornod,wikidataId/Q207795
+dornod,wikidataId/Q207795
+ Dornod,wikidataId/Q207795
+ dornod,wikidataId/Q207795
+  Dornod,wikidataId/Q207795
+  dornod,wikidataId/Q207795
+   Dornod,wikidataId/Q207795
+   dornod,wikidataId/Q207795
+    Dornod,wikidataId/Q207795
+    dornod,wikidataId/Q207795
+     Dornod,wikidataId/Q207795
+     dornod,wikidataId/Q207795
+      Dornod,wikidataId/Q207795
+      dornod,wikidataId/Q207795
+          Dornod,wikidataId/Q207795
+          dornod,wikidataId/Q207795
+Sukhbaatar,wikidataId/Q244804
+sukhbaatar,wikidataId/Q244804
+ Sukhbaatar,wikidataId/Q244804
+ sukhbaatar,wikidataId/Q244804
+  Sukhbaatar,wikidataId/Q244804
+  sukhbaatar,wikidataId/Q244804
+   Sukhbaatar,wikidataId/Q244804
+   sukhbaatar,wikidataId/Q244804
+    Sukhbaatar,wikidataId/Q244804
+    sukhbaatar,wikidataId/Q244804
+     Sukhbaatar,wikidataId/Q244804
+     sukhbaatar,wikidataId/Q244804
+      Sukhbaatar,wikidataId/Q244804
+      sukhbaatar,wikidataId/Q244804
+          Sukhbaatar,wikidataId/Q244804
+          sukhbaatar,wikidataId/Q244804
+Khentii,wikidataId/Q239040
+khentii,wikidataId/Q239040
+ Khentii,wikidataId/Q239040
+ khentii,wikidataId/Q239040
+  Khentii,wikidataId/Q239040
+  khentii,wikidataId/Q239040
+   Khentii,wikidataId/Q239040
+   khentii,wikidataId/Q239040
+    Khentii,wikidataId/Q239040
+    khentii,wikidataId/Q239040
+     Khentii,wikidataId/Q239040
+     khentii,wikidataId/Q239040
+      Khentii,wikidataId/Q239040
+      khentii,wikidataId/Q239040
+          Khentii,wikidataId/Q239040
+          khentii,wikidataId/Q239040
+Ulaanbaatar,wikidataId/Q23430
+ulaanbaatar,wikidataId/Q23430
+ Ulaanbaatar,wikidataId/Q23430
+ ulaanbaatar,wikidataId/Q23430
+  Ulaanbaatar,wikidataId/Q23430
+  ulaanbaatar,wikidataId/Q23430
+   Ulaanbaatar,wikidataId/Q23430
+   ulaanbaatar,wikidataId/Q23430
+    Ulaanbaatar,wikidataId/Q23430
+    ulaanbaatar,wikidataId/Q23430
+     Ulaanbaatar,wikidataId/Q23430
+     ulaanbaatar,wikidataId/Q23430
+      Ulaanbaatar,wikidataId/Q23430
+      ulaanbaatar,wikidataId/Q23430
+          Ulaanbaatar,wikidataId/Q23430
+          ulaanbaatar,wikidataId/Q23430
+Баян-Өлгий,wikidataId/Q191792
+баян-өлгий,wikidataId/Q191792
+ Баян-Өлгий,wikidataId/Q191792
+ баян-өлгий,wikidataId/Q191792
+  Баян-Өлгий,wikidataId/Q191792
+  баян-өлгий,wikidataId/Q191792
+   Баян-Өлгий,wikidataId/Q191792
+   баян-өлгий,wikidataId/Q191792
+    Баян-Өлгий,wikidataId/Q191792
+    баян-өлгий,wikidataId/Q191792
+Говь-Алтай,wikidataId/Q192945
+говь-алтай,wikidataId/Q192945
+ Говь-Алтай,wikidataId/Q192945
+ говь-алтай,wikidataId/Q192945
+  Говь-Алтай,wikidataId/Q192945
+  говь-алтай,wikidataId/Q192945
+   Говь-Алтай,wikidataId/Q192945
+   говь-алтай,wikidataId/Q192945
+    Говь-Алтай,wikidataId/Q192945
+    говь-алтай,wikidataId/Q192945
+Завхан,wikidataId/Q167764
+завхан,wikidataId/Q167764
+ Завхан,wikidataId/Q167764
+ завхан,wikidataId/Q167764
+  Завхан,wikidataId/Q167764
+  завхан,wikidataId/Q167764
+   Завхан,wikidataId/Q167764
+   завхан,wikidataId/Q167764
+    Завхан,wikidataId/Q167764
+    завхан,wikidataId/Q167764
+Увс,wikidataId/Q192942
+увс,wikidataId/Q192942
+ Увс,wikidataId/Q192942
+ увс,wikidataId/Q192942
+  Увс,wikidataId/Q192942
+  увс,wikidataId/Q192942
+   Увс,wikidataId/Q192942
+   увс,wikidataId/Q192942
+    Увс,wikidataId/Q192942
+    увс,wikidataId/Q192942
+Ховд,wikidataId/Q194098
+ховд,wikidataId/Q194098
+ Ховд,wikidataId/Q194098
+ ховд,wikidataId/Q194098
+  Ховд,wikidataId/Q194098
+  ховд,wikidataId/Q194098
+   Ховд,wikidataId/Q194098
+   ховд,wikidataId/Q194098
+    Ховд,wikidataId/Q194098
+    ховд,wikidataId/Q194098
+Архангай,wikidataId/Q207809
+архангай,wikidataId/Q207809
+ Архангай,wikidataId/Q207809
+ архангай,wikidataId/Q207809
+  Архангай,wikidataId/Q207809
+  архангай,wikidataId/Q207809
+   Архангай,wikidataId/Q207809
+   архангай,wikidataId/Q207809
+    Архангай,wikidataId/Q207809
+    архангай,wikidataId/Q207809
+Баянхонгор,wikidataId/Q276200
+баянхонгор,wikidataId/Q276200
+ Баянхонгор,wikidataId/Q276200
+ баянхонгор,wikidataId/Q276200
+  Баянхонгор,wikidataId/Q276200
+  баянхонгор,wikidataId/Q276200
+   Баянхонгор,wikidataId/Q276200
+   баянхонгор,wikidataId/Q276200
+    Баянхонгор,wikidataId/Q276200
+    баянхонгор,wikidataId/Q276200
+Булган,wikidataId/Q209774
+булган,wikidataId/Q209774
+ Булган,wikidataId/Q209774
+ булган,wikidataId/Q209774
+  Булган,wikidataId/Q209774
+  булган,wikidataId/Q209774
+   Булган,wikidataId/Q209774
+   булган,wikidataId/Q209774
+    Булган,wikidataId/Q209774
+    булган,wikidataId/Q209774
+Орхон,wikidataId/Q234710
+орхон,wikidataId/Q234710
+ Орхон,wikidataId/Q234710
+ орхон,wikidataId/Q234710
+  Орхон,wikidataId/Q234710
+  орхон,wikidataId/Q234710
+   Орхон,wikidataId/Q234710
+   орхон,wikidataId/Q234710
+    Орхон,wikidataId/Q234710
+    орхон,wikidataId/Q234710
+Өвөрхангай,wikidataId/Q234713
+өвөрхангай,wikidataId/Q234713
+ Өвөрхангай,wikidataId/Q234713
+ өвөрхангай,wikidataId/Q234713
+  Өвөрхангай,wikidataId/Q234713
+  өвөрхангай,wikidataId/Q234713
+   Өвөрхангай,wikidataId/Q234713
+   өвөрхангай,wikidataId/Q234713
+    Өвөрхангай,wikidataId/Q234713
+    өвөрхангай,wikidataId/Q234713
+Хөвсгөл,wikidataId/Q244788
+хөвсгөл,wikidataId/Q244788
+ Хөвсгөл,wikidataId/Q244788
+ хөвсгөл,wikidataId/Q244788
+  Хөвсгөл,wikidataId/Q244788
+  хөвсгөл,wikidataId/Q244788
+   Хөвсгөл,wikidataId/Q244788
+   хөвсгөл,wikidataId/Q244788
+    Хөвсгөл,wikidataId/Q244788
+    хөвсгөл,wikidataId/Q244788
+Говьсүмбэр,wikidataId/Q236333
+говьсүмбэр,wikidataId/Q236333
+ Говьсүмбэр,wikidataId/Q236333
+ говьсүмбэр,wikidataId/Q236333
+  Говьсүмбэр,wikidataId/Q236333
+  говьсүмбэр,wikidataId/Q236333
+   Говьсүмбэр,wikidataId/Q236333
+   говьсүмбэр,wikidataId/Q236333
+    Говьсүмбэр,wikidataId/Q236333
+    говьсүмбэр,wikidataId/Q236333
+Дархан-Уул,wikidataId/Q18827
+дархан-уул,wikidataId/Q18827
+ Дархан-Уул,wikidataId/Q18827
+ дархан-уул,wikidataId/Q18827
+  Дархан-Уул,wikidataId/Q18827
+  дархан-уул,wikidataId/Q18827
+   Дархан-Уул,wikidataId/Q18827
+   дархан-уул,wikidataId/Q18827
+    Дархан-Уул,wikidataId/Q18827
+    дархан-уул,wikidataId/Q18827
+Дорноговь,wikidataId/Q213272
+дорноговь,wikidataId/Q213272
+ Дорноговь,wikidataId/Q213272
+ дорноговь,wikidataId/Q213272
+  Дорноговь,wikidataId/Q213272
+  дорноговь,wikidataId/Q213272
+   Дорноговь,wikidataId/Q213272
+   дорноговь,wikidataId/Q213272
+    Дорноговь,wikidataId/Q213272
+    дорноговь,wikidataId/Q213272
+Дундговь,wikidataId/Q211835
+дундговь,wikidataId/Q211835
+ Дундговь,wikidataId/Q211835
+ дундговь,wikidataId/Q211835
+  Дундговь,wikidataId/Q211835
+  дундговь,wikidataId/Q211835
+   Дундговь,wikidataId/Q211835
+   дундговь,wikidataId/Q211835
+    Дундговь,wikidataId/Q211835
+    дундговь,wikidataId/Q211835
+Өмнөговь,wikidataId/Q235579
+өмнөговь,wikidataId/Q235579
+ Өмнөговь,wikidataId/Q235579
+ өмнөговь,wikidataId/Q235579
+  Өмнөговь,wikidataId/Q235579
+  өмнөговь,wikidataId/Q235579
+   Өмнөговь,wikidataId/Q235579
+   өмнөговь,wikidataId/Q235579
+    Өмнөговь,wikidataId/Q235579
+    өмнөговь,wikidataId/Q235579
+Сэлэнгэ,wikidataId/Q234680
+сэлэнгэ,wikidataId/Q234680
+ Сэлэнгэ,wikidataId/Q234680
+ сэлэнгэ,wikidataId/Q234680
+  Сэлэнгэ,wikidataId/Q234680
+  сэлэнгэ,wikidataId/Q234680
+   Сэлэнгэ,wikidataId/Q234680
+   сэлэнгэ,wikidataId/Q234680
+    Сэлэнгэ,wikidataId/Q234680
+    сэлэнгэ,wikidataId/Q234680
+Төв,wikidataId/Q276195
+төв,wikidataId/Q276195
+ Төв,wikidataId/Q276195
+ төв,wikidataId/Q276195
+  Төв,wikidataId/Q276195
+  төв,wikidataId/Q276195
+   Төв,wikidataId/Q276195
+   төв,wikidataId/Q276195
+    Төв,wikidataId/Q276195
+    төв,wikidataId/Q276195
+Дорнод,wikidataId/Q207795
+дорнод,wikidataId/Q207795
+ Дорнод,wikidataId/Q207795
+ дорнод,wikidataId/Q207795
+  Дорнод,wikidataId/Q207795
+  дорнод,wikidataId/Q207795
+   Дорнод,wikidataId/Q207795
+   дорнод,wikidataId/Q207795
+    Дорнод,wikidataId/Q207795
+    дорнод,wikidataId/Q207795
 Сүхбаатар,wikidataId/Q244804
-Улаанбаатар,wikidataId/Q23430
-Хан-Уул,wikidataId/Q23430
-Хан-уул,wikidataId/Q23430
-Чингэлтэй,wikidataId/Q23430
-багануур багахангай,wikidataId/Q23430
-баянгол,wikidataId/Q23430
-баянзүрх,wikidataId/Q23430
-налайх,wikidataId/Q23430
-сонгинохайрхан,wikidataId/Q23430
 сүхбаатар,wikidataId/Q244804
+ Сүхбаатар,wikidataId/Q244804
+ сүхбаатар,wikidataId/Q244804
+  Сүхбаатар,wikidataId/Q244804
+  сүхбаатар,wikidataId/Q244804
+   Сүхбаатар,wikidataId/Q244804
+   сүхбаатар,wikidataId/Q244804
+    Сүхбаатар,wikidataId/Q244804
+    сүхбаатар,wikidataId/Q244804
+Хэнтий,wikidataId/Q239040
+хэнтий,wikidataId/Q239040
+ Хэнтий,wikidataId/Q239040
+ хэнтий,wikidataId/Q239040
+  Хэнтий,wikidataId/Q239040
+  хэнтий,wikidataId/Q239040
+   Хэнтий,wikidataId/Q239040
+   хэнтий,wikidataId/Q239040
+    Хэнтий,wikidataId/Q239040
+    хэнтий,wikidataId/Q239040
+Улаанбаатар,wikidataId/Q23430
 улаанбаатар,wikidataId/Q23430
-хан-уул,wikidataId/Q23430
-чингэлтэй,wikidataId/Q23430
+ Улаанбаатар,wikidataId/Q23430
+ улаанбаатар,wikidataId/Q23430
+  Улаанбаатар,wikidataId/Q23430
+  улаанбаатар,wikidataId/Q23430
+   Улаанбаатар,wikidataId/Q23430
+   улаанбаатар,wikidataId/Q23430
+    Улаанбаатар,wikidataId/Q23430
+    улаанбаатар,wikidataId/Q23430
