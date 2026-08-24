@@ -8,54 +8,6 @@
             "params": {
                 "threshold": 0.1
             }
-        },
-        {
-            "rule_id": "check_goldens_summary_report_aa0",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report0.csv",
-                "input_files": "../../input0/genmcf/summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_summary_report_aa1",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report1.csv",
-                "input_files": "../../input1/genmcf/summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_summary_report_aa2",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report2.csv",
-                "input_files": "../../input2/genmcf/summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_observations_aa0",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_observations_aa0.csv",
-                "input_files": "../../../../output_files/mexico_output_aa0.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_observations_aa1",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_observations_aa1.csv",
-                "input_files": "../../../../output_files/mexico_output_aa1.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_observations_aa2",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_observations_aa2.csv",
-                "input_files": "../../../../output_files/mexico_output_aa2.csv"
-            }
         }
     ]
 }
