@@ -1,9 +1,10 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
-Aimag,observationAbout,{Data},employmentStatus,Employed,,,,,,,,
-,,,,,,,,,,,,
+Region,observationAbout,{Data},employmentStatus,Employed,,,,,,,,
+Region:Total,observationAbout,country/MNG,,,,,,,,
+Female,gender,Female,measurementDenominator,-employmentStatus,,,,,,,,
 Women,gender,Female,measurementDenominator,-employmentStatus,,,,,,,,
+Male,gender,Male,measurementDenominator,-employmentStatus,,,,,,,,
 Men,gender,Male,measurementDenominator,-employmentStatus,,,,,,,,
-,,,,,,,,,,,,
 15-19,age,[15 19 Years],,,,,,,,,,
 20-24,age,[20 24 Years],,,,,,,,,,
 25-29,age,[25 29 Years],,,,,,,,,,
@@ -16,7 +17,6 @@ Men,gender,Male,measurementDenominator,-employmentStatus,,,,,,,,
 60-64,age,[60 64 Years],,,,,,,,,,
 65-69,age,[65 69 Years],,,,,,,,,,
 70+,age,[70 - Years],,,,,,,,,,
-,,,,,,,,,,,,
 1992,observationDate,1992,populationType,Person,measuredProperty,count,value,{Number},unit,Percent,scalingFactor,100
 1993,observationDate,1993,populationType,Person,measuredProperty,count,value,{Number},unit,Percent,scalingFactor,100
 1994,observationDate,1994,populationType,Person,measuredProperty,count,value,{Number},unit,Percent,scalingFactor,100

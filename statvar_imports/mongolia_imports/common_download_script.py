@@ -99,11 +99,9 @@ EMPLOYMENT_TABLES = [
 ]
 
 def fetch_and_save_data(url, csv_filepath, query=None):
-    """
-    Fetches exactly formatted CSV data from the PxWeb API.
-    """
+    """Fetches exactly formatted CSV data from the PxWeb API."""
     logging.info(f"Downloading {url} -> {csv_filepath}...")
-    
+
     # Request PxWeb to output as CSV pre-pivoted by period
     pxweb_json_payload = {
         "query": query or [],
@@ -128,15 +126,27 @@ def fetch_and_save_data(url, csv_filepath, query=None):
             or not os.path.exists(csv_filepath)
             or os.path.getsize(csv_filepath) <= 10
         ):
+            file_size = (
+                os.path.getsize(csv_filepath)
+                if os.path.exists(csv_filepath)
+                else 0
+            )
+            warning_msg = (
+                f"Download attempt failed for URL: {url} -> {csv_filepath} "
+                f"(downloaded={downloaded}, exists={os.path.exists(csv_filepath)}, "
+                f"size={file_size} bytes)"
+            )
+            logging.warning(warning_msg)
             error_msg = (
                 f"FATAL ERROR: Failed to download valid file {csv_filepath} from {url}"
             )
             logging.error(error_msg)
             raise RuntimeError(error_msg)
-            
+
         logging.info(f"Successfully downloaded CSV file: {csv_filepath}")
 
     except Exception as e:
+        logging.warning(f"Exception during download for URL {url}: {e}")
         error_msg = f"FATAL ERROR: Failed to download from {url}: {e}"
         logging.error(error_msg)
         raise RuntimeError(error_msg)
