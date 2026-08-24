@@ -1049,6 +1049,8 @@ class USEducation:
                                                     SV_PROP_ORDER, FORM_STATVAR)
                     df_parsed = self._generate_stat_var_and_mcf(
                         df_parsed, SV_PROP_ORDER)
+                    # Adding new columns scaling_factor:100 and unit:dcs:Percent
+                    # wherever the SV is Percent.
                     df_parsed["scaling_factor"] = np.where(
                         df_parsed["sv_name"].str.contains("Percent"), '100', '')
                     df_parsed["unit"] = np.where(

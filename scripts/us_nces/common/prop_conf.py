@@ -132,11 +132,11 @@ _SCHOOL_GRADE_PROP = {"Ungraded Students": "NCESUngradedClasses"}
 MELT_VAR_COL = "sv_name"
 
 def _PV_FORMAT(pv):
-    """Formats property-value pairs for MCF nodes."""
+    """Formats property-value pairs for MCF nodes; modified based on column."""
     t = tuple(pv)
     return f'"{t[0]}": "dcs:{t[1]}"' if 'None' not in str(t[1]) else ""
+
 # pylint:disable=unnecessary-lambda-assignment
-# Creating property pattern and the pattern is modified if required based on column.
 _UPDATE_MEASUREMENT_DENO = lambda prop: _DENOMINATOR_PROP.get(prop, prop)
 _UPDATE_POPULATION_TYPE = lambda prop: _POPULATION_PROP.get(prop, "Student")
 _UPDATE_GRADE_LEVEL = lambda prop: _SCHOOL_GRADE_PROP.get(prop, prop)
