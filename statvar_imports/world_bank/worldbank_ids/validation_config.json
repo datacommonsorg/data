@@ -44,7 +44,7 @@
       }
     },
     {
-      "rule_id": "Check_goldens_output_csv_currency",
+      "rule_id": "check_goldens_output_csv_currency",
       "description": "Verifies the generated output CSV data matches established critical golden records",
       "validator": "GOLDENS_CHECK",
       "params": {
@@ -53,7 +53,7 @@
       }
     },
     {
-      "rule_id": "Check_goldens_output_csv_disbursed",
+      "rule_id": "check_goldens_output_csv_disbursed",
       "description": "Verifies the generated output CSV data matches established critical golden records",
       "validator": "GOLDENS_CHECK",
       "params": {
@@ -62,7 +62,7 @@
       }
     },
     {
-      "rule_id": "Check_goldens_output_csv_interest",
+      "rule_id": "check_goldens_output_csv_interest",
       "description": "Verifies the generated output CSV data matches established critical golden records",
       "validator": "GOLDENS_CHECK",
       "params": {
@@ -71,7 +71,7 @@
       }
     },
     {
-      "rule_id": "Check_goldens_output_csv_principal",
+      "rule_id": "check_goldens_output_csv_principal",
       "description": "Verifies the generated output CSV data matches established critical golden records",
       "validator": "GOLDENS_CHECK",
       "params": {
