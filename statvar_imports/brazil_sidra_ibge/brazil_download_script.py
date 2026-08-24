@@ -29,7 +29,7 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 
-from vars import (
+from panel_specs import (
     LOCATIONS,
     get_panel_1_specs,
     get_panel_2_specs,
@@ -41,13 +41,13 @@ from vars import (
 def get_robust_session() -> requests.Session:
     """Configures a global requests Session with automated retries and connection pooling.
     
-    Retries up to 10 times with exponential backoff on common server error codes (500, 502, 503, 504).
+    Retries up to 10 times with exponential backoff on common server error codes (429, 500, 502, 503, 504).
     """
     session = requests.Session()
     retries = Retry(
         total=10,
         backoff_factor=1,
-        status_forcelist=[500, 502, 503, 504],
+        status_forcelist=[429, 500, 502, 503, 504],
         raise_on_status=False
     )
     session.mount("https://", HTTPAdapter(max_retries=retries))
@@ -232,6 +232,11 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
     period_ids = [p["id"] for p in periods]
     period_labels = [format_quarter_label(p) for p in periods]
     period_query = "|".join(period_ids)
+
+    if panel_index not in PANEL_FOLDER_MAP:
+        err_msg = f"Invalid panel_index: {panel_index} for place: {place_name}"
+        logging.fatal(err_msg)
+        raise ValueError(err_msg)
 
     folder_name = PANEL_FOLDER_MAP[panel_index]
     dest_dir = os.path.join(DOWNLOAD_DIR, folder_name)

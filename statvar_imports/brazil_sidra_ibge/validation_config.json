@@ -10,6 +10,18 @@
             }
         },
         {
+            "rule_id": "check_max_date_latest",
+            "description": "Checks that the latest date in the stats summary is from the current year.",
+            "validator": "MAX_DATE_LATEST",
+            "params": {}
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Checks if the MaxDate is the same for all StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        },
+        {
             "rule_id": "check_goldens_average_real_income",
             "description": "Validates average real income data against its golden summary report.",
             "validator": "GOLDENS_CHECK",
