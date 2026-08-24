@@ -1,0 +1,9 @@
+Node: E:Poverty_output->E0
+observationAbout: C:Poverty_output->observationAbout
+observationDate: C:Poverty_output->observationDate
+variableMeasured: C:Poverty_output->variableMeasured
+value: C:Poverty_output->value
+unit: C:Poverty_output->unit
+scalingFactor: C:Poverty_output->scalingFactor
+measurementMethod: C:Poverty_output->measurementMethod
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,12 @@
+parameter,value
+url,https://www.cdfifund.gov/
+description,Persistent Poverty County Status (sourced from Treasury CDFI Fund)
+#place_type,AdministrativeArea1
+#places_within,country/USA
+#start_date,1990
+#end_date,2021
+release_frequency,Decadal
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,measurementMethod"
+header_rows,1

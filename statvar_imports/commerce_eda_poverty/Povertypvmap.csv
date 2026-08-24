@@ -1,0 +1,5 @@
+key,prop,value,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+GEOID,observationAbout,geoId/{Data},unit,Percent,measuredProperty,count,statType,measuredValue,populationType,Person,,,,
+"1990 Decennial Census, % in Poverty",observationDate,1990,povertyStatus,BelowPovertyLevelInThePast12Months,value,{Number},populationType,Person,measurementDenominator,-povertyStatus,scalingFactor,100,,
+"2000 Decennial Census, % in Poverty",observationDate,2000,povertyStatus,BelowPovertyLevelInThePast12Months,value,{Number},populationType,Person,measurementDenominator,-povertyStatus,scalingFactor,100,,
+"Most Recent Estimate, % in Poverty*",observationDate,2021,measurementMethod,EDA_Estimate,povertyStatus,BelowPovertyLevelInThePast12Months,value,{Number},populationType,Person,measurementDenominator,-povertyStatus,scalingFactor,100
