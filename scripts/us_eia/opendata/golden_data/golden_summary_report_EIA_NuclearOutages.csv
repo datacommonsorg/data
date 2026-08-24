@@ -1,0 +1,4 @@
+"observationPeriods","MinDate","MeasurementMethods","StatVar","ScalingFactors","Units","NumPlaces"
+"[]","2007-01-01","[]","Daily_CapacityOutage_Nuclear_ForEnergyGeneration_AsAFractionOf_Capacity","[]","[]","174"
+"[]","2007-01-01","[]","Daily_CapacityOutage_Nuclear_ForEnergyGeneration","[]","[Megawatt]","174"
+"[]","2007-01-01","[]","Daily_Capacity_Nuclear_ForEnergyGeneration","[]","[Megawatt]","174"
