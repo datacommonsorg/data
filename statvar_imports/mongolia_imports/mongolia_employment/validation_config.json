@@ -3,7 +3,7 @@
   "rules": [
     {
       "rule_id": "check_deleted_records_percent",
-      "description": "Strictly enforce historical deletion average threshold of 10%",
+      "description": "Strictly enforce historical deletion average threshold of 0.1%",
       "validator": "DELETED_RECORDS_PERCENT",
       "params": {
         "threshold": 0.1
