@@ -15,14 +15,13 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/oecd_wastewatertreatment.tmcf",
-                    "cleaned_csv": "output/oecd_wastewatertreatment_merged.csv"
+                    "cleaned_csv": "output/oecd_wastewatertreatment.csv"
                 }
             ],
             "cron_schedule": "0 10 1,15 * *",
             "validation_config_file": "validation_config.json",
             "source_files": [
                 "input/*.csv",
-                "golden_data/*.csv",
                 "counters/*.csv"
             ]
         }
