@@ -12,18 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os, sys, time
-import pandas as pd
-import requests
-import urllib3
-from absl import app, logging
+import os, sys
 from pathlib import Path
+import pandas as pd
+from absl import app, logging
 import config
 
-# Suppress InsecureRequestWarning when verify=False is used
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
 script_dir = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.append(os.path.join(script_dir, '../../../util'))
+
+from download_util_script import download_file
 
 Commerce_NTIA_URL = config.Commerce_NTIA_URL
 
@@ -44,45 +43,6 @@ HEADERS = {
     ),
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 }
-
-
-def download_dataset(url: str,
-                     output_file: str,
-                     tries: int = 3,
-                     delay: int = 5,
-                     backoff: int = 2) -> bool:
-    """Downloads dataset with browser headers, SSL verification disabled, and retries."""
-    current_delay = delay
-    for attempt in range(1, tries + 1):
-        try:
-            logging.info(
-                f"Attempt {attempt}/{tries}: Downloading from {url} (verify=False)"
-            )
-            response = requests.get(
-                url,
-                headers=HEADERS,
-                verify=False,
-                timeout=60,
-                stream=True,
-            )
-            response.raise_for_status()
-            with open(output_file, "wb") as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    f.write(chunk)
-            logging.info(f"Successfully downloaded dataset to {output_file}")
-            return True
-        except Exception as e:
-            logging.warning(f"Download attempt {attempt} failed: {e}")
-            if os.path.exists(output_file):
-                try:
-                    os.remove(output_file)
-                except OSError:
-                    pass
-            if attempt < tries:
-                time.sleep(current_delay)
-                current_delay *= backoff
-    logging.error(f"All {tries} download attempts failed for {url}")
-    return False
 
 
 def move_column_left(df, column_to_move, target_column):
@@ -123,13 +83,16 @@ def preprocess_data():
 
     except Exception as e:
         logging.fatal(f"An error occurred while preprocessing the input data: {e}")
-        return None
+        sys.exit(1)
+
 
 def main(argv):
     try:
-        success = download_dataset(
+        success = download_file(
             url=Commerce_NTIA_URL,
-            output_file=INPUT_FILE,
+            output_folder=INPUT_DIR,
+            unzip=False,
+            headers=HEADERS,
             tries=3,
             delay=5,
             backoff=2,
@@ -140,7 +103,9 @@ def main(argv):
     except Exception as e:
         logging.fatal(f"Failed to download Commerce_NTIA file: {e}")
         sys.exit(1)
+
     preprocess_data()
+
 
 if __name__ == "__main__":
     app.run(main)
