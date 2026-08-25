@@ -96,7 +96,7 @@ if [ $EXIT_STATUS -eq 0 ]; then
     echo "Processing successful. Finalizing file names..."
 
     # 1. Dynamically pick the first available .tmcf file and rename it to student_faculty_ratio.tmcf
-    FIRST_TMCF=$(find "$OUTPUT_DIR" -type f -name "*.tmcf" | head -n 1)
+    FIRST_TMCF=$(find "$OUTPUT_DIR" -type f -name "*.tmcf" | sort | head -n 1)
     if [ -n "$FIRST_TMCF" ]; then
         if [ "$FIRST_TMCF" != "$OUTPUT_DIR/student_faculty_ratio.tmcf" ]; then
             mv "$FIRST_TMCF" "$OUTPUT_DIR/student_faculty_ratio.tmcf"

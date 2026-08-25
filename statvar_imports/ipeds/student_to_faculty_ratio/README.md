@@ -23,11 +23,11 @@ The import process is divided into two main stages: downloading the raw data, pr
 
 Transformation pipeline:
 
-download.py downloads the yearly data releases, unzips them, filters for relevant files, renames them, and saves them as CSV files in the input_files/ directory.
+download.py downloads the yearly data releases, unzips them, filters for relevant files, and saves them as CSV files in the input_files/ directory.
 
-preprocess.py is executed for additional cleaning/transformation.
+preprocess.py is executed for additional cleaning/transformation (renaming to standard filenames, adding 'Year' column, and tagging provisional estimates).
 
-After the download is complete, the stat_var_processor.py tool is run on the cleaned CSV files in the input_files directory using the shell script run.sh.
+After the download and preprocessing are complete, the stat_var_processor.py tool is run on the cleaned CSV files in the input_files directory using the shell script run.sh.
 
 The processor uses `metadata and pv_map` files (not explicitly named for IPEDS here) to generate the final .csv and .tmcf files, placing them in the processed_output/ directory.
 
@@ -61,8 +61,8 @@ The final, validated output files are uploaded to a GCS bucket for ingestion int
 ## Script Execution Details
 To run the import manually, follow these steps in order.
 
-**Step 1:** Download and Preprocess Raw Data
-This script downloads all available data files, unzips them, filters for relevant files, renames them, and adds 'year'.
+**Step 1:** Download Raw Data
+This script downloads all available data files, unzips them, and filters for relevant CSV files.
 
 # Usage:
 
@@ -70,9 +70,18 @@ This script downloads all available data files, unzips them, filters for relevan
 python3 download.py
 ```
 
-The processed source files will be located in `input_files/`.
+The raw source files will be located in `input_files/`.
 
-**Step 2:** 
+**Step 2:** Preprocess Raw Data
+This script standardizes filenames, injects the 'Year' column, and tags provisional estimates.
+
+# Usage:
+
+```Bash
+python3 preprocess.py
+```
+
+**Step 3:** 
 # Process the Data
 This script processes all cleaned input files to generate the final CSV and TMCF files.
 
@@ -91,7 +100,7 @@ A generic command for the processor looks like:
 python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data="input_files/student_faculty_ratio_data_<year>.csv" --pv_map="student_faculty_ratio_pvmap.csv" --config_file="student_faculty_ratio_metadata.csv" --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path="processed_output/student_faculty_ratio_<year>"
 ```
 
-**Step 3:** 
+**Step 4:** 
 # Validate the Output Files
 This command validates the generated files for formatting and semantic consistency before ingestion.
 
