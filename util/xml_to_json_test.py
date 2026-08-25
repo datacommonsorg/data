@@ -91,6 +91,12 @@ class XMLToJsonConverterTest(unittest.TestCase):
             xml_to_json.convert_xml_to_json(self.input_xml_path,
                                             self.output_json_path)
 
+    def test_whitespace_only_xml_writes_empty_json(self):
+        self._create_xml_file('   \n   ')
+        xml_to_json.convert_xml_to_json(self.input_xml_path,
+                                        self.output_json_path)
+        self.assertEqual(self._read_json_file(), {})
+
 
 if __name__ == "__main__":
     unittest.main()

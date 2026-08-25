@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import json
-import sys
 from absl import app
 from absl import logging
 import xmltodict
@@ -30,25 +29,24 @@ def convert_xml_to_json(input_xml_path: str, output_json_path: str) -> None:
         FileNotFoundError: If the input XML file is not found.
         Exception: If an error occurs during XML parsing or file writing.
     """
-    with open(input_xml_path, 'r') as xml_file:
+    with open(input_xml_path, 'r', encoding='utf-8') as xml_file:
         xml_data = xml_file.read()
 
-    if xml_data:
+    if xml_data.strip():
         data_dict = xmltodict.parse(xml_data)
         json_data = json.dumps(data_dict, indent=4)
-        with open(output_json_path, 'w') as json_file:
+        with open(output_json_path, 'w', encoding='utf-8') as json_file:
             json_file.write(json_data)
     else:
-        with open(output_json_path, 'w') as json_file:
+        with open(output_json_path, 'w', encoding='utf-8') as json_file:
             json_file.write('{}')
 
 
 def main(argv: list[str]) -> None:
     """Entry point for CLI execution."""
-    if len(argv) < 3:
-        logging.fatal(
-            "Usage: python xml_to_json.py <input_xml_file> <output_json_file>")
-        sys.exit(1)
+    if len(argv) != 3:
+        raise app.UsageError(
+            'Expected <input_xml_file> and <output_json_file>.')
     input_xml_file = argv[1]
     output_json_file = argv[2]
     logging.info(
