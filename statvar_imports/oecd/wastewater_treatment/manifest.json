@@ -15,7 +15,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/oecd_wastewatertreatment.tmcf",
-                    "cleaned_csv": "output/oecd_wastewatertreatment.csv"
+                    "cleaned_csv": "output/oecd_wastewatertreatment.csv",
+                    "node_mcf": "output/*.mcf"
                 }
             ],
             "cron_schedule": "0 10 1,15 * *",
