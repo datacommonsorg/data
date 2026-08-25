@@ -13,11 +13,10 @@
 # limitations under the License.
 
 import json
-from absl import app
-from absl import flags
-import xmltodict
-from absl import logging
 import sys
+from absl import app
+from absl import logging
+import xmltodict
 
 
 def convert_xml_to_json(input_xml_path: str, output_json_path: str) -> None:
@@ -26,33 +25,37 @@ def convert_xml_to_json(input_xml_path: str, output_json_path: str) -> None:
     Args:
         input_xml_path: The path to the input XML file.
         output_json_path: The path to the output JSON file.
-    """
-    try:
-        with open(input_xml_path, 'r') as xml_file:
-            xml_data = xml_file.read()
 
-        if xml_data:
-            data_dict = xmltodict.parse(xml_data)
-            json_data = json.dumps(data_dict, indent=4)
-            with open(output_json_path, 'w') as json_file:
-                json_file.write(json_data)
-        else:
-            with open(output_json_path, 'w') as json_file:
-                json_file.write('{}')
-    except FileNotFoundError:
-        logging.fatal(f"Error: Input XML file not found at '{input_xml_path}'")
-        #sys.exit(1)
-    except Exception as e:
-        logging.fatal(f"An error occurred during conversion: {e}")
-        #sys.exit(1)
+    Raises:
+        FileNotFoundError: If the input XML file is not found.
+        Exception: If an error occurs during XML parsing or file writing.
+    """
+    with open(input_xml_path, 'r') as xml_file:
+        xml_data = xml_file.read()
+
+    if xml_data:
+        data_dict = xmltodict.parse(xml_data)
+        json_data = json.dumps(data_dict, indent=4)
+        with open(output_json_path, 'w') as json_file:
+            json_file.write(json_data)
+    else:
+        with open(output_json_path, 'w') as json_file:
+            json_file.write('{}')
+
+
+def main(argv: list[str]) -> None:
+    """Entry point for CLI execution."""
+    if len(argv) < 3:
+        logging.fatal(
+            "Usage: python xml_to_json.py <input_xml_file> <output_json_file>")
+        sys.exit(1)
+    input_xml_file = argv[1]
+    output_json_file = argv[2]
+    logging.info(
+        f"Started with convert_xml_to_json with xml path {input_xml_file} and output path {output_json_file}"
+    )
+    convert_xml_to_json(input_xml_file, output_json_file)
 
 
 if __name__ == "__main__":
-    """calling this script from a bash script where we are passing 2 parameter"""
-    if len(sys.argv) > 0:
-        input_xml_file = sys.argv[1]
-        output_json_file = sys.argv[2]
-        logging.info(
-            f"Started with convert_xml_to_json with xml path {input_xml_file} and  output path {output_json_file}"
-        )
-        convert_xml_to_json(input_xml_file, sys.argv[2])
+    app.run(main)

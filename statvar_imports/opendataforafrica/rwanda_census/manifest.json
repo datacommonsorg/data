@@ -8,7 +8,7 @@
             "provenance_url": "https://rwanda.opendataforafrica.org/",
             "provenance_description": "Rwanda Census: Demographics, Economy, Education",
             "scripts": [
-                "../../../scripts/opendataafrica/download_folder/download.sh 'rwanda' 'edvtatd,eoefmac,hivlaeg,kbadgkf,kwekfdd,mnoirpd,shdirje,uymcezb,vafqyfg,ztaoyl,qavhudd' 'gcs_output/input_files'",
+                "download.sh",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/edvtatd.csv --pv_map=edvtatd_pv_map.csv --config_file=edvtatd_metadata.csv --output_path=gcs_output/output/edvtatd --statvar_dcid_remap_csv=edvtatd_statvar_remap.csv",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/eoefmac.csv --pv_map=eoefmac_pv_map.csv --config_file=eoefmac_metadata.csv --output_path=gcs_output/output/eoefmac",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/hivlaeg.csv --pv_map=hivlaeg_pv_map.csv --config_file=hivlaeg_metadata.csv --output_path=gcs_output/output/hivlaeg",

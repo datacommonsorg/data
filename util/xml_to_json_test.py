@@ -16,10 +16,6 @@ import json
 import os
 import tempfile
 import unittest
-import pandas as pd
-import xml.etree.ElementTree as ET
-from io import StringIO
-from unittest.mock import patch
 
 import xml_to_json
 
@@ -33,9 +29,12 @@ class XMLToJsonConverterTest(unittest.TestCase):
         self.output_json_path = os.path.join(self.temp_dir, 'output.json')
 
     def tearDown(self):
-        os.remove(self.input_xml_path)
-        os.remove(self.output_json_path)
-        os.rmdir(self.temp_dir)
+        if os.path.exists(self.input_xml_path):
+            os.remove(self.input_xml_path)
+        if os.path.exists(self.output_json_path):
+            os.remove(self.output_json_path)
+        if os.path.exists(self.temp_dir):
+            os.rmdir(self.temp_dir)
 
     def _create_xml_file(self, content):
         with open(self.input_xml_path, 'w') as f:
@@ -79,6 +78,18 @@ class XMLToJsonConverterTest(unittest.TestCase):
 
         # Compare the actual JSON with the expected JSON
         self.assertEqual(actual_json, expected_json)
+
+    def test_missing_file_raises_file_not_found_error(self):
+        non_existent_file = os.path.join(self.temp_dir, 'does_not_exist.xml')
+        with self.assertRaises(FileNotFoundError):
+            xml_to_json.convert_xml_to_json(non_existent_file,
+                                            self.output_json_path)
+
+    def test_invalid_xml_raises_exception(self):
+        self._create_xml_file("<html><body>Not valid XML for SDMX</body")
+        with self.assertRaises(Exception):
+            xml_to_json.convert_xml_to_json(self.input_xml_path,
+                                            self.output_json_path)
 
 
 if __name__ == "__main__":
