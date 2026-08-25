@@ -40,7 +40,7 @@ Case Count,value,{Number},measurementMethod,CDC_NNDSS_Diseases_AnnualTables,obse
 10350,medicalCondition,AnthraxDisease,,,,
 10073,medicalCondition,Chikungunya,,,,
 10053,medicalCondition,NeuroinvasiveDisease__EasternEquineEncephalitis,,,,
-10078,medicalCondition,NeuroinvasiveDisease__JamestownCanyonVirusDisease,,,,
+10078,medicalCondition,JamestownCanyonVirusDisease,,,,
 10079,medicalCondition,NonNeuroinvasiveDisease__JamestownCanyonVirusDisease,,,,
 10081,medicalCondition,NeuroinvasiveDisease__LaCrosseVirusDisease,,,,
 10082,medicalCondition,NonNeuroinvasiveDisease__LaCrosseVirusDisease,
