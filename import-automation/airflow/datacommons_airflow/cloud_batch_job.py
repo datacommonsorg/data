@@ -14,6 +14,7 @@
 """Cloud Batch job configuration shared by the container-command DAG."""
 
 import hashlib
+import re
 from collections.abc import Mapping
 
 MACHINE_TYPE = 'e2-standard-4'
@@ -34,16 +35,31 @@ def get_required_environment(environ: Mapping[str, str], name: str) -> str:
     return value
 
 
-def make_batch_job_id(run_id: str, try_number: int) -> str:
+def sanitize_job_prefix(name: str) -> str:
+    """Sanitizes an import name into a GCP Cloud Batch compliant prefix."""
+    if not name:
+        return 'airflow'
+    sanitized = re.sub(r'[^a-zA-Z0-9]+', '-', name).strip('-').lower()
+    if not sanitized:
+        return 'airflow'
+    if not sanitized[0].isalpha():
+        sanitized = f'dc-{sanitized}'
+    return sanitized[:24].rstrip('-')
+
+
+def make_batch_job_id(run_id: str,
+                      try_number: int,
+                      import_name: str = '') -> str:
     """Returns a valid, deterministic Batch job ID for one task attempt."""
     if not run_id:
         raise ValueError('run_id must not be empty')
     if try_number < 1:
         raise ValueError('try_number must be positive')
 
-    identity = f'{run_id}:{try_number}'.encode('utf-8')
-    digest = hashlib.sha256(identity).hexdigest()[:32]
-    return f'airflow-{digest}'
+    prefix = sanitize_job_prefix(import_name)
+    identity = f'{run_id}:{try_number}:{import_name}'.encode('utf-8')
+    digest = hashlib.sha256(identity).hexdigest()[:24]
+    return f'{prefix}-{digest}'
 
 
 def build_job(image_uri: str, command: str, service_account_email: str) -> dict:

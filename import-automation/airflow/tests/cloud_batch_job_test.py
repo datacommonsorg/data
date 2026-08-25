@@ -32,18 +32,43 @@ class CloudBatchJobTest(unittest.TestCase):
             cloud_batch_job.get_required_environment(
                 {}, 'CLOUD_BATCH_SERVICE_ACCOUNT')
 
+    def test_sanitize_job_prefix(self):
+        self.assertEqual('airflow', cloud_batch_job.sanitize_job_prefix(''))
+        self.assertEqual('india-census',
+                         cloud_batch_job.sanitize_job_prefix('india_census'))
+        self.assertEqual('world-bank-gdp',
+                         cloud_batch_job.sanitize_job_prefix('world@bank#gdp'))
+        self.assertEqual('dc-2026-census',
+                         cloud_batch_job.sanitize_job_prefix('2026_census'))
+        self.assertEqual('a-very-long-import-name',
+                         cloud_batch_job.sanitize_job_prefix(
+                             'a-very-long-import-name-that-exceeds-twenty-four'))
+
     def test_make_batch_job_id_is_valid_and_deterministic(self):
         job_id = cloud_batch_job.make_batch_job_id('manual__example', 1)
 
         self.assertEqual(
             job_id, cloud_batch_job.make_batch_job_id('manual__example', 1))
+        self.assertTrue(job_id.startswith('airflow-'))
         self.assertLessEqual(len(job_id), 63)
-        self.assertRegex(job_id, re.compile(r'^[a-z][a-z0-9-]*$'))
+        self.assertRegex(job_id, re.compile(r'^[a-z][a-z0-9-]*[a-z0-9]$'))
+
+    def test_make_batch_job_id_with_import_name(self):
+        job_id = cloud_batch_job.make_batch_job_id('manual__example', 1,
+                                                    'india_census')
+
+        self.assertTrue(job_id.startswith('india-census-'))
+        self.assertEqual(
+            job_id,
+            cloud_batch_job.make_batch_job_id('manual__example', 1,
+                                              'india_census'))
+        self.assertLessEqual(len(job_id), 63)
+        self.assertRegex(job_id, re.compile(r'^[a-z][a-z0-9-]*[a-z0-9]$'))
 
     def test_make_batch_job_id_changes_with_attempt(self):
         self.assertNotEqual(
-            cloud_batch_job.make_batch_job_id('manual__example', 1),
-            cloud_batch_job.make_batch_job_id('manual__example', 2))
+            cloud_batch_job.make_batch_job_id('manual__example', 1, 'my_import'),
+            cloud_batch_job.make_batch_job_id('manual__example', 2, 'my_import'))
 
     def test_build_job(self):
         job = cloud_batch_job.build_job(

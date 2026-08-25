@@ -5,10 +5,11 @@ moving import automation to Airflow. The `cloud_batch_container_command` DAG
 submits one Cloud Batch job, waits for it to finish, and pauses for human
 review.
 
-Each DAG run supplies two required parameters:
+Each DAG run supplies the following parameters:
 
-- `image_uri`: container image for the Batch runnable
-- `command`: command executed inside that container with `/bin/sh -c`
+- `import_name` (optional): descriptive name for the import workload (used as a prefix for Batch job IDs and logs, default: `custom-import`)
+- `image_uri` (required): container image for the Batch runnable
+- `command` (required): command executed inside that container with `/bin/sh -c`
 
 The DAG is manually triggered (`schedule=None`). Different runs of the same DAG
 can use different parameter values.
@@ -251,6 +252,7 @@ In the Airflow UI:
 Example values:
 
 ```text
+import_name: test-import
 image_uri: gcr.io/google-containers/busybox
 command: echo "hello from Cloud Batch"
 ```
@@ -264,7 +266,7 @@ gcloud composer environments run ENVIRONMENT_NAME \
   --project PROJECT_ID \
   --location COMPOSER_REGION \
   dags trigger -- \
-  --conf='{"image_uri":"gcr.io/google-containers/busybox","command":"echo hello from Cloud Batch"}' \
+  --conf='{"import_name":"test-import","image_uri":"gcr.io/google-containers/busybox","command":"echo hello from Cloud Batch"}' \
   cloud_batch_container_command
 ```
 

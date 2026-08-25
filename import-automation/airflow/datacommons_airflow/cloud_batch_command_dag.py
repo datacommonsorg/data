@@ -36,10 +36,19 @@ SERVICE_ACCOUNT_EMAIL = get_required_environment(os.environ,
                                                  SERVICE_ACCOUNT_ENV)
 
 DAG_ID = 'cloud_batch_container_command'
+IMPORT_NAME_TEMPLATE = '{{ params.import_name }}'
 IMAGE_URI_TEMPLATE = '{{ params.image_uri }}'
 COMMAND_TEMPLATE = '{{ params.command }}'
-JOB_ID_TEMPLATE = '{{ batch_job_id(run_id, ti.try_number) }}'
+JOB_ID_TEMPLATE = '{{ batch_job_id(run_id, ti.try_number, params.import_name) }}'
 
+IMPORT_NAME_PARAM = Param(
+    default='custom-import',
+    type='string',
+    minLength=1,
+    maxLength=100,
+    title='Import name',
+    description='Descriptive name for the import workload (used in Batch job IDs and logs).',
+)
 IMAGE_URI_PARAM = Param(
     type='string',
     minLength=1,
@@ -55,6 +64,7 @@ COMMAND_PARAM = Param(
     description='Command executed by /bin/sh -c inside the container.',
 )
 DAG_PARAMS = {
+    'import_name': IMPORT_NAME_PARAM,
     'image_uri': IMAGE_URI_PARAM,
     'command': COMMAND_PARAM,
 }
@@ -102,7 +112,12 @@ with DAG(
     rerun_container_command = TriggerDagRunOperator(
         task_id='rerun_container_command',
         trigger_dag_id=DAG_ID,
+        trigger_run_id=(
+            '{{ params.import_name }}__{{ macros.datetime.now().strftime("%Y%m%dT%H%M%S") }}'
+            '__retry_{{ ti.try_number }}'
+        ),
         conf={
+            'import_name': IMPORT_NAME_TEMPLATE,
             'image_uri': IMAGE_URI_TEMPLATE,
             'command': COMMAND_TEMPLATE,
         },
