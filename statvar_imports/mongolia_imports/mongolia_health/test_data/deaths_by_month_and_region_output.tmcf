@@ -1,0 +1,7 @@
+Node: E:deaths_by_month_and_region_output->E0
+observationAbout: C:deaths_by_month_and_region_output->observationAbout
+observationDate: C:deaths_by_month_and_region_output->observationDate
+value: C:deaths_by_month_and_region_output->value
+variableMeasured: C:deaths_by_month_and_region_output->variableMeasured
+unit: C:deaths_by_month_and_region_output->unit
+typeOf: dcs:StatVarObservation
