@@ -11,17 +11,19 @@
                 "./download.sh --entity=Schema",
                 "./process.py --entity=Schema"
             ],
+            "source_files": [
+                "provisional_nodes.mcf"
+            ],
             "import_inputs": [
                 {
-                    "node_mcf": "**/*.mcf*"
+                    "node_mcf": "Schema/**/*.mcf*"
                 }
             ],
-            "source_files": [],
             "config_override": {
                 "invoke_import_validation": true,
                 "invoke_import_tool": true,
                 "invoke_differ_tool": true,
-                "skip_input_upload": true
+                "skip_input_upload": false
             }
         },
         {
