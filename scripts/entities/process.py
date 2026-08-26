@@ -33,23 +33,33 @@ import generate_provisional_nodes
 FLAGS = flags.FLAGS
 flags.DEFINE_string("entity", "", "Entity type (Schema/Place).")
 flags.DEFINE_string("version", "", "Import version.")
+flags.DEFINE_string(
+    "output_dir", "",
+    "Directory to write output files (default: directory containing manifest.json)."
+)
 
 
-def process(entity_type: str, version: str):
+def process(entity_type: str, version: str, output_dir: str = ""):
     logging.info(f'Processing import {entity_type} for version {version}')
     local_path = os.path.abspath(
         os.path.join(os.path.dirname(__file__), entity_type, version))
 
+    # Default output directory to the folder containing manifest.json (os.path.dirname(__file__))
+    if not output_dir:
+        output_dir = os.path.abspath(os.path.dirname(__file__))
+
     # Local path to data
     logging.info(
-        f'Generating provisional nodes for {entity_type} in {local_path}')
-    generate_provisional_nodes.generate_provisional_nodes(local_path)
+        f'Generating provisional nodes for {entity_type} in {local_path} (output: {output_dir})'
+    )
+    generate_provisional_nodes.generate_provisional_nodes(local_path,
+                                                          output_dir=output_dir)
     return 0
 
 
 def main(_):
     """Runs the code."""
-    process(FLAGS.entity, FLAGS.version)
+    process(FLAGS.entity, FLAGS.version, FLAGS.output_dir)
 
 
 if __name__ == "__main__":

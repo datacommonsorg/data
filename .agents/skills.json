@@ -4,6 +4,9 @@
       "path": "agents/skills/dc-import-diagnostics"
     },
     {
+      "path": "agents/skills/dc-import-code-review"
+    },
+    {
       "path": "agents/skills/dc-import-postmortem-doc"      
     }
   ]
