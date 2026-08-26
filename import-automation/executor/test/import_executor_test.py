@@ -225,10 +225,16 @@ class ImportExecutorTest(unittest.TestCase):
     @mock.patch.object(import_executor, 'log_import_status')
     @mock.patch.object(import_executor, 'log_metric')
     @mock.patch.object(import_executor, 'ValidationRunner')
-    def test_validation_with_no_rules_logs_empty_results(
+    def test_successful_validation_logs_results_when_an_input_has_no_rules(
             self, mock_validation_runner, _, mock_log_import_status):
-        mock_validation_runner.return_value.run_validations.return_value = (
-            True, [])
+        mock_validation_runner.return_value.run_validations.side_effect = [
+            (True, []),
+            (True, [
+                ValidationResult(ValidationStatus.PASSED,
+                                 'check_missing_refs',
+                                 details={'missing_refs_count': 0})
+            ]),
+        ]
         config = mock.Mock(invoke_differ_tool=False,
                            ignore_validation_status=False,
                            enable_skip_status=False)
@@ -243,14 +249,21 @@ class ImportExecutorTest(unittest.TestCase):
             status = executor._invoke_import_validation(
                 'repo', 'relative', import_dir, {
                     'import_name': 'test_import',
-                    'import_inputs': [{}],
+                    'import_inputs': [{}, {}],
                 }, 'version', import_summary)
 
         self.assertTrue(status)
         self.assertEqual(ImportStatus.SUCCESS,
                          mock_log_import_status.call_args.args[2])
-        self.assertEqual([], mock_log_import_status.call_args.kwargs[
-            'validation_results'])
+        self.assertEqual([{
+            'input_prefix': 'input1',
+            'rule_id': 'check_missing_refs',
+            'status': 'PASSED',
+            'details': [{
+                'field': 'missing_refs_count',
+                'number_value': 0.0,
+            }],
+        }], mock_log_import_status.call_args.kwargs['validation_results'])
 
     @mock.patch.object(import_executor, 'log_metric')
     def test_log_import_status_includes_validation_results(
