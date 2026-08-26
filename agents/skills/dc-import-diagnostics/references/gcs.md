@@ -228,6 +228,12 @@ artifact category; do not download data or MCF contents by default.
 
 Bounded object URIs, sizes, update times, generations, and truncation.
 
+Object presence confirms that an artifact was retained for the selected
+version. If an expected artifact is absent, use the
+[manifest reference](../../../common/references/import-automation/manifest.md)
+and [artifact layout](../../../common/references/import-automation/artifact-layout.md)
+to interpret whether it was selected for upload.
+
 ### Required bounds
 
 Use one exact version and an explicit result limit. Request one extra object to

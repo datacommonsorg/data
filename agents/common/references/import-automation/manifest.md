@@ -38,6 +38,23 @@ noted otherwise.
 | `resource_limits` | Optional object | Requested `cpu`, `memory`, and `disk` overrides. Effective fields depend on the configured executor type. |
 | `config_override` | Optional object | Overrides of executor configuration fields for this import specification. Interpret individual keys using `ExecutorConfig`. |
 
+## Generated files and upload intent
+
+- `scripts` may create files during execution. Creating a file does not retain
+  it after the runtime ends.
+- `import_inputs` selects files consumed by the import tool. When input upload
+  is enabled, these files are copied to the version root.
+- `source_files` selects additional files or globs for upload under
+  `<version>/source_files/`.
+- A file created by a user script may exist only during execution when neither
+  `import_inputs` nor `source_files` selects it.
+- Use the retained manifest to determine upload intent. Use the exact version's
+  GCS objects to confirm which files were retained.
+
+For example, a StatVar Processor command may write a counter file. A matching
+`source_files` entry indicates that the counter file is intended to be
+retained.
+
 ## Specialized or legacy fields
 
 The current manifests also contain `gcs_bucket`, `import_type`, `source_file`,
