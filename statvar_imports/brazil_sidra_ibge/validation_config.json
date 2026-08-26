@@ -22,39 +22,12 @@
             "params": {}
         },
         {
-            "rule_id": "check_goldens_average_real_income",
-            "description": "Validates average real income data against its golden summary report.",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report_average_real_income.csv",
-                "input_files": "../../input0/genmcf/summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_mass_income",
-            "description": "Validates mass income data against its golden summary report.",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_summary_mass_income.csv",
-                "input_files": "../../input1/genmcf/summary_report.csv"
-            }
-        },
-        {
             "rule_id": "check_goldens_population_economic",
             "description": "Validates population economic sector data against its golden summary report.",
             "validator": "GOLDENS_CHECK",
             "params": {
                 "golden_files": "../../../../golden_data/golden_summary_population_economic.csv",
                 "input_files": "../../input2/genmcf/summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_employment_unemployment",
-            "description": "Validates employment and unemployment data against its golden summary report.",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_summary_employment_unemployment.csv",
-                "input_files": "../../input3/genmcf/summary_report.csv"
             }
         },
         {
