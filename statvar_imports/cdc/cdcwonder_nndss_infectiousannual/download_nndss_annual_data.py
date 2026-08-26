@@ -21,13 +21,15 @@ downstream processing with stat_var_processor.py.
 
 import argparse
 import csv
+import datetime
 import logging
 import os
 import re
-import subprocess
+import tempfile
 import time
-import urllib.parse
 import xml.etree.ElementTree as ET
+
+import requests
 
 # CDC WONDER Endpoint and Database Constants
 CDC_WONDER_ENDPOINT = "https://wonder.cdc.gov/controller/datarequest/D130"
@@ -81,6 +83,15 @@ VERTICAL_CONFIGS = {
 }
 
 _last_request_time = 0.0
+_session = None
+
+
+def get_session() -> requests.Session:
+    """Returns a shared requests.Session instance for connection pooling."""
+    global _session
+    if _session is None:
+        _session = requests.Session()
+    return _session
 
 
 def _rate_limit_wait():
@@ -129,18 +140,19 @@ def build_request_xml(vertical: str, year: str) -> str:
     return xml_parameters
 
 
-def query_cdc_wonder(xml_payload: str, max_retries: int = 3) -> str:
+def query_cdc_wonder(xml_payload: str, max_retries: int = 3, session: requests.Session = None) -> str:
     """Sends an HTTP POST query to CDC WONDER API with retry handling."""
+    if session is None:
+        session = get_session()
+    data = {
+        'request_xml': xml_payload,
+        'accept_datause_restrictions': 'true',
+    }
     for attempt in range(1, max_retries + 1):
         _rate_limit_wait()
-        cmd = [
-            'curl', '-s', '-L', '-X', 'POST',
-            CDC_WONDER_ENDPOINT,
-            '-d', f'request_xml={urllib.parse.quote(xml_payload)}',
-            '-d', 'accept_datause_restrictions=true'
-        ]
         try:
-            res = subprocess.check_output(cmd).decode('utf-8', errors='ignore')
+            resp = session.post(CDC_WONDER_ENDPOINT, data=data, timeout=300)
+            res = resp.text
             if '<title>Processing Error</title>' in res:
                 if 'rate exceeded' in res.lower():
                     logging.warning(f"Rate limit hit (attempt {attempt}/{max_retries}), backing off 25s...")
@@ -149,8 +161,9 @@ def query_cdc_wonder(xml_payload: str, max_retries: int = 3) -> str:
                 else:
                     logging.error(f"CDC WONDER Processing Error: {res}")
                     raise RuntimeError(f"CDC WONDER processing error: {res}")
+            resp.raise_for_status()
             return res
-        except subprocess.CalledProcessError as e:
+        except requests.RequestException as e:
             logging.warning(f"Network error (attempt {attempt}/{max_retries}): {e}")
             time.sleep(10 * attempt)
     raise RuntimeError("Failed to fetch data from CDC WONDER after maximum retries.")
@@ -237,34 +250,44 @@ def parse_xml_to_csv_rows(xml_response: str, vertical: str) -> list:
     return rows
 
 
-def download_vertical_year(vertical: str, year: str, output_dir: str):
+def download_vertical_year(vertical: str, year: str, output_dir: str, session: requests.Session = None):
     """Downloads and writes CSV for a specific vertical breakdown and year."""
     logging.info(f"Downloading vertical '{vertical}' for year {year}...")
     xml_payload = build_request_xml(vertical, year)
-    xml_response = query_cdc_wonder(xml_payload)
+    xml_response = query_cdc_wonder(xml_payload, session=session)
     rows = parse_xml_to_csv_rows(xml_response, vertical)
 
     target_dir = os.path.join(output_dir, vertical)
     os.makedirs(target_dir, exist_ok=True)
     target_csv = os.path.join(target_dir, f"NNDSS_Annual_Summary_Data_{year}.csv")
 
-    with open(target_csv, 'w', newline='', encoding='utf-8') as f:
-        writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
-        for r in rows:
-            # Match CDC WONDER quote format: quote non-empty string fields
-            writer.writerow(r)
+    temp_path = None
+    try:
+        with tempfile.NamedTemporaryFile('w', dir=target_dir, delete=False, newline='', encoding='utf-8') as f:
+            temp_path = f.name
+            writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
+            for r in rows:
+                # Match CDC WONDER quote format: quote non-empty string fields
+                writer.writerow(r)
+        os.replace(temp_path, target_csv)
+        temp_path = None
+    finally:
+        if temp_path and os.path.exists(temp_path):
+            os.remove(temp_path)
 
     logging.info(f"Saved {len(rows)-1} records to {target_csv}")
 
 
-def download_all(verticals: list, years: list, output_dir: str):
+def download_all(verticals: list, years: list, output_dir: str, session: requests.Session = None):
     """Downloads all requested verticals and years sequentially."""
+    if session is None:
+        session = get_session()
     total_tasks = len(verticals) * len(years)
     idx = 1
     for v in verticals:
         for y in years:
             logging.info(f"[{idx}/{total_tasks}] Processing {v} ({y})...")
-            download_vertical_year(v, str(y), output_dir)
+            download_vertical_year(v, str(y), output_dir, session=session)
             idx += 1
     logging.info("All downloads completed successfully!")
 
@@ -296,7 +319,7 @@ def main():
         selected_verticals = [v.strip() for v in args.verticals.split(',') if v.strip()]
 
     if args.years.lower() == 'all':
-        selected_years = [str(y) for y in range(2016, 2024)]
+        selected_years = [str(y) for y in range(2016, datetime.date.today().year - 2)]
     else:
         selected_years = [y.strip() for y in args.years.split(',') if y.strip()]
 
