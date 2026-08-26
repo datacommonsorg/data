@@ -37,12 +37,12 @@ def download_and_process_zip(url, country_iso, gas):
     except requests.exceptions.HTTPError as e:
         if e.response is not None and e.response.status_code == 404:
             logging.warning(f"    -> Not found (404) for {country_iso} ({gas}) at {url}")
-        else:
-            logging.error(f"    -> HTTP Error for {country_iso} ({gas}) at {url}: {e}")
-        return None
+            return None
+        logging.error(f"    -> HTTP Error for {country_iso} ({gas}) at {url}: {e}")
+        raise
     except Exception as e:
         logging.error(f"    -> Unexpected error for {country_iso} ({gas}) at {url}: {e}")
-        return None
+        raise
 
 def download_and_segregate_by_gas():
     """
@@ -107,6 +107,7 @@ def download_and_segregate_by_gas():
                 gas_specific_urls.append({"iso": iso, "url": gas_data[gas]})
 
         gas_dataframes = []
+        critical_errors = []
         with ThreadPoolExecutor(max_workers=10) as executor:
             future_to_item = {
                 executor.submit(download_and_process_zip, item['url'], item['iso'], gas): item
@@ -121,8 +122,11 @@ def download_and_segregate_by_gas():
                     else:
                         failed_downloads.append(f"{item['iso']} ({gas})")
                 except Exception as e:
-                    logging.error(f"Unhandled error for {item['iso']} ({gas}): {e}")
-                    failed_downloads.append(f"{item['iso']} ({gas}) - Error: {e}")
+                    logging.error(f"Critical error for {item['iso']} ({gas}): {e}")
+                    critical_errors.append(f"{item['iso']} ({gas}) - Error: {e}")
+
+        if critical_errors:
+            raise RuntimeError(f"Critical download failures for {gas}:\n" + "\n".join(critical_errors))
 
         if not gas_dataframes:
             logging.info(f"No data was downloaded for {gas}. The output file will not be created.")
@@ -150,7 +154,7 @@ def download_and_segregate_by_gas():
 
     logging.info("--- All processing complete. ---")
     if failed_downloads:
-        logging.warning(f"The following {len(failed_downloads)} downloads failed:")
+        logging.warning(f"The following {len(failed_downloads)} downloads were not found (404) or empty:")
         for failure in sorted(failed_downloads):
             logging.warning(f"  - {failure}")
     else:
