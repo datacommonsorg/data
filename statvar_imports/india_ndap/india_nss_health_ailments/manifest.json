@@ -14,7 +14,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/IndiaNSS_HealthAilments_output.tmcf",
-                    "cleaned_csv": "output/IndiaNSS_HealthAilments_output.csv"
+                    "cleaned_csv": "output/IndiaNSS_HealthAilments_output.csv",
+                    "node_mcf": "output/*.mcf"
                 }
             ],
             "source_files": [
