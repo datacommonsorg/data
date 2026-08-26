@@ -16,7 +16,8 @@
       "import_inputs": [
         {
           "template_mcf": "output_files/tennessee_output.tmcf",
-          "cleaned_csv": "output_files/tennessee_output.csv"
+          "cleaned_csv": "output_files/tennessee_output.csv",
+          "node_mcf": "output/tennessee_output.mcf"
         }
       ],
       "cron_schedule": "0 05 * * 5",
