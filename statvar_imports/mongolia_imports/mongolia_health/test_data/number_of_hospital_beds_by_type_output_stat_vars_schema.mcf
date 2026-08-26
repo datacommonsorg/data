@@ -1,0 +1,5 @@
+Node: dcid:Surgery
+typeOf: dcid:HealthDepartmentTypeEnum
+name: "Surgery"
+isProvisional: dcs:True
+
