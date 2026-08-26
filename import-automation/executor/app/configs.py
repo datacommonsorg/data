@@ -156,7 +156,7 @@ class ExecutorConfig:
     # Override cron schedule in import spec.
     cron_schedule_override: str = ''
     # Relative path to version folder for graph files.
-    graph_data_path: str = '/*/*/*.mcf'
+    graph_data_path: str = '/*/genmcf/*.mcf*'
     # Maximum time venv creation can take in seconds.
     venv_create_timeout: float = 3600
     # Maximum time downloading a file can take in seconds.

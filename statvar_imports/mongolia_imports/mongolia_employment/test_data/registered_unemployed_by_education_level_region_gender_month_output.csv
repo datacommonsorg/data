@@ -1,0 +1,9 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor
+dcid:wikidataId/Q244788,2008-06,10,dcid:Count_Person_Unemployed_Male_UpperSecondaryEducation,,
+dcid:wikidataId/Q244788,2008-01,0,dcid:Count_Person_Unemployed_Male_UpperSecondaryEducation,,
+dcid:wikidataId/Q244788,2008-06,10,dcid:Count_Person_Unemployed_Male_SpecializedSecondarySchool,,
+dcid:wikidataId/Q244788,2008-01,0,dcid:Count_Person_Unemployed_Male_SpecializedSecondarySchool,,
+dcid:wikidataId/Q244788,2008-06,10,dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrDiploma_Unemployed_Male,,
+dcid:wikidataId/Q244788,2008-01,0,dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrDiploma_Unemployed_Male,,
+dcid:wikidataId/Q244788,2008-06,10,dcid:Count_Person_EducationalAttainmentMastersDegreeOrDoctorateDegree_Unemployed_Male,,
+dcid:wikidataId/Q244788,2008-01,0,dcid:Count_Person_EducationalAttainmentMastersDegreeOrDoctorateDegree_Unemployed_Male,,
