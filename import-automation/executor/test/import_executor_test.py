@@ -128,15 +128,24 @@ class ImportExecutorTest(unittest.TestCase):
     def test_validation_metrics_include_deleted_percent_for_each_input(
             self, mock_validation_runner, mock_log_metric, _):
         validation_runners = []
+        input_statuses = (False, True)
         for input_index, percent in enumerate((10.0, 20.0)):
             rule_id = f'deleted_percent_{input_index}'
             runner = mock.Mock()
-            runner.config.rules = [{
-                'rule_id': rule_id,
-                'validator': 'DELETED_RECORDS_PERCENT',
-            }]
-            runner.run_validations.return_value = (False, [
-                ValidationResult(ValidationStatus.FAILED,
+            runner.config.rules = [
+                {
+                    'validator': 'UNKNOWN_VALIDATOR',
+                },
+                {
+                    'rule_id': rule_id,
+                    'validator': 'DELETED_RECORDS_PERCENT',
+                },
+            ]
+            input_status = input_statuses[input_index]
+            result_status = (ValidationStatus.PASSED
+                             if input_status else ValidationStatus.FAILED)
+            runner.run_validations.return_value = (input_status, [
+                ValidationResult(result_status,
                                  rule_id,
                                  details={
                                      'percent': percent,
@@ -172,9 +181,13 @@ class ImportExecutorTest(unittest.TestCase):
         self.assertFalse(status)
         self.assertEqual(2, mock_log_metric.call_count)
         for input_index, call in enumerate(mock_log_metric.call_args_list):
-            self.assertEqual('ERROR', call.args[1])
+            expected_level = 'INFO' if input_statuses[input_index] else 'ERROR'
+            expected_status = ('SUCCESS'
+                               if input_statuses[input_index] else 'FAILURE')
+            self.assertEqual(expected_level, call.args[1])
             self.assertEqual(f'input{input_index}',
                              call.args[3]['import_input'])
+            self.assertEqual(expected_status, call.args[3]['status'])
             self.assertEqual((input_index + 1) * 10.0,
                              call.args[3]['deleted_records_percent'])
             self.assertEqual(input_index + 1,

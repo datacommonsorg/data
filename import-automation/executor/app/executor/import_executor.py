@@ -691,9 +691,9 @@ class ImportExecutor:
                     validation_status = overall_status
 
                 validator_by_rule_id = {
-                    rule['rule_id']: rule['validator']
+                    rule['rule_id']: rule.get('validator')
                     for rule in validation.config.rules
-                    if rule.get('enabled', True)
+                    if rule.get('enabled', True) and rule.get('rule_id')
                 }
                 for result in current_results:
                     if (validator_by_rule_id.get(
