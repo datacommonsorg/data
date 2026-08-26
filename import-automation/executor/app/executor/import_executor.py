@@ -666,6 +666,11 @@ class ImportExecutor:
             if not differ_status:
                 differ_status = diff_found
             timer = Timer()
+            input_validation_status = False
+            validation_metrics = {
+                "stage": import_stage.name,
+                "import_input": import_prefix,
+            }
             try:
                 config_file_path = self._get_validation_config_file(
                     repo_dir, absolute_import_dir, import_spec,
@@ -680,23 +685,43 @@ class ImportExecutor:
                     lint_report=report_json,
                     validation_output=validation_output_file)
                 overall_status, current_results = validation.run_validations()
+                input_validation_status = overall_status
                 validation_results.extend(current_results)
                 if validation_status:
                     validation_status = overall_status
+
+                validator_by_rule_id = {
+                    rule['rule_id']: rule['validator']
+                    for rule in validation.config.rules
+                    if rule.get('enabled', True)
+                }
+                for result in current_results:
+                    if (validator_by_rule_id.get(
+                            result.name) == 'DELETED_RECORDS_PERCENT'):
+                        validation_metrics.update({
+                            'deleted_records_percent':
+                                result.details.get('percent'),
+                            'deleted_records_count':
+                                result.details.get('deleted_records_count'),
+                            'previous_obs_count':
+                                result.details.get('previous_obs_count'),
+                        })
+                        break
             except ValueError as e:
                 logging.error('ValidationRunner failed: %s', e)
                 validation_status = False
+            validation_metrics.update({
+                "latency":
+                    timer.time(),
+                "status":
+                    ImportStatus.SUCCESS.name
+                    if input_validation_status else ImportStatus.FAILURE.name,
+            })
             log_metric(
-                AUTO_IMPORT_JOB_STAGE, "INFO" if validation_status else "ERROR",
-                f"Import: {import_name}, validation: {validation_status}", {
-                    "stage":
-                        import_stage.name,
-                    "latency":
-                        timer.time(),
-                    "status":
-                        ImportStatus.SUCCESS.name
-                        if validation_status else ImportStatus.FAILURE.name,
-                })
+                AUTO_IMPORT_JOB_STAGE,
+                "INFO" if input_validation_status else "ERROR",
+                f"Import: {import_name}, input: {import_prefix}, validation: {input_validation_status}",
+                validation_metrics)
 
             if os.path.exists(validation_output_path):
                 # Upload output to GCS.

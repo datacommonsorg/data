@@ -22,7 +22,8 @@ import tempfile
 import threading
 
 from app.executor import import_executor
-from app.executor.import_executor import ImportStatus
+from app.executor.import_executor import ImportStatus, ImportStatusSummary
+from tools.import_validation.result import ValidationResult, ValidationStatus
 
 
 class ImportExecutorTest(unittest.TestCase):
@@ -120,3 +121,62 @@ class ImportExecutorTest(unittest.TestCase):
                     '[Subprocess command]: exit 0\n'
                     '[Subprocess return code]: 0')
         self.assertEqual(expected, message)
+
+    @mock.patch.object(import_executor, 'log_import_status')
+    @mock.patch.object(import_executor, 'log_metric')
+    @mock.patch.object(import_executor, 'ValidationRunner')
+    def test_validation_metrics_include_deleted_percent_for_each_input(
+            self, mock_validation_runner, mock_log_metric, _):
+        validation_runners = []
+        for input_index, percent in enumerate((10.0, 20.0)):
+            rule_id = f'deleted_percent_{input_index}'
+            runner = mock.Mock()
+            runner.config.rules = [{
+                'rule_id': rule_id,
+                'validator': 'DELETED_RECORDS_PERCENT',
+            }]
+            runner.run_validations.return_value = (False, [
+                ValidationResult(ValidationStatus.FAILED,
+                                 rule_id,
+                                 details={
+                                     'percent': percent,
+                                     'deleted_records_count': input_index + 1,
+                                     'previous_obs_count': 10,
+                                 })
+            ])
+            validation_runners.append(runner)
+        mock_validation_runner.side_effect = validation_runners
+
+        config = mock.Mock(invoke_differ_tool=True,
+                           ignore_validation_status=False,
+                           enable_skip_status=True)
+        executor = import_executor.ImportExecutor(mock.Mock(), mock.Mock(),
+                                                  config)
+        executor._get_latest_version = mock.Mock(return_value='previous')
+        executor._invoke_differ_summary = mock.Mock(return_value={
+            'obs_diff_count': 1,
+            'schema_diff_count': 0,
+        })
+        executor._get_validation_config_file = mock.Mock(
+            return_value='validation_config.json')
+        executor._upload_file_helper = mock.Mock()
+        import_summary = ImportStatusSummary('test_import')
+
+        with tempfile.TemporaryDirectory() as import_dir:
+            status = executor._invoke_import_validation(
+                'repo', 'relative', import_dir, {
+                    'import_name': 'test_import',
+                    'import_inputs': [{}, {}],
+                }, 'version', import_summary)
+
+        self.assertFalse(status)
+        self.assertEqual(2, mock_log_metric.call_count)
+        for input_index, call in enumerate(mock_log_metric.call_args_list):
+            self.assertEqual('ERROR', call.args[1])
+            self.assertEqual(f'input{input_index}',
+                             call.args[3]['import_input'])
+            self.assertEqual((input_index + 1) * 10.0,
+                             call.args[3]['deleted_records_percent'])
+            self.assertEqual(input_index + 1,
+                             call.args[3]['deleted_records_count'])
+            self.assertEqual(10, call.args[3]['previous_obs_count'])
