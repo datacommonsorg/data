@@ -91,9 +91,3 @@ observationDate,observationAbout,variableMeasured,value,measurementMethod,observ
 2023,geoId/46,dcid:Count_MedicalConditionIncident_ConditionChikungunya,0,CDC_NNDSS_Diseases_AnnualTables,P1Y,./test_data/region_state/NNDSS_Annual_Summary_Data_2023.csv:97:7
 2023,usc/SouthAtlanticDivision,dcid:Count_MedicalConditionIncident_ConditionChikungunya,21,CDC_NNDSS_Diseases_AnnualTables,P1Y,./test_data/region_state/NNDSS_Annual_Summary_Data_2023.csv:98:7
 2023,geoId/10,dcid:Count_MedicalConditionIncident_ConditionChikungunya,0,CDC_NNDSS_Diseases_AnnualTables,P1Y,./test_data/region_state/NNDSS_Annual_Summary_Data_2023.csv:99:7
-2023,geoId/11,dcid:Count_MedicalConditionIncident_ConditionChikungunya,0,CDC_NNDSS_Diseases_AnnualTables,P1Y,./test_data/region_state/NNDSS_Annual_Summary_Data_2023.csv:100:7
-2023,geoId/12,dcid:Count_MedicalConditionIncident_ConditionChikungunya,4,CDC_NNDSS_Diseases_AnnualTables,P1Y,./test_data/region_state/NNDSS_Annual_Summary_Data_2023.csv:101:7
-2023,geoId/13,dcid:Count_MedicalConditionIncident_ConditionChikungunya,0,CDC_NNDSS_Diseases_AnnualTables,P1Y,./test_data/region_state/NNDSS_Annual_Summary_Data_2023.csv:102:7
-2023,geoId/24,dcid:Count_MedicalConditionIncident_ConditionChikungunya,6,CDC_NNDSS_Diseases_AnnualTables,P1Y,./test_data/region_state/NNDSS_Annual_Summary_Data_2023.csv:103:7
-2023,geoId/37,dcid:Count_MedicalConditionIncident_ConditionChikungunya,6,CDC_NNDSS_Diseases_AnnualTables,P1Y,./test_data/region_state/NNDSS_Annual_Summary_Data_2023.csv:104:7
-2023,geoId/45,dcid:Count_MedicalConditionIncident_ConditionChikungunya,1,CDC_NNDSS_Diseases_AnnualTables,P1Y,./test_data/region_state/NNDSS_Annual_Summary_Data_2023.csv:105:7
