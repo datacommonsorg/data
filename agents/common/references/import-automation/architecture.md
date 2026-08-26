@@ -138,7 +138,7 @@ to discover a missing run.
   coordinates.
 - Use live Scheduler, current Cloud Spanner `ImportStatus`, exact Batch
   resources, GCS, and structured logs for deployed or runtime facts.
-- A supplied sibling `import` checkout can explain Workflow or helper behavior
+- A resolved `<IMPORT_REPO>` checkout can explain Workflow or helper behavior
   when that implementation detail is specifically needed. The deployed
   Workflow revision and live metadata remain runtime truth.
 - Batch records the requested image URI. Historical source resolution is a
@@ -155,13 +155,13 @@ to discover a missing run.
 |---|---|
 | How is a manifest schedule turned into a Scheduler request? | `import-automation/executor/app/executor/scheduler_job_manager.py` and `cloud_scheduler.py` |
 | How are ET Workflow arguments constructed? | `import-automation/executor/app/executor/cloud_batch.py` |
-| How does the shared Workflow create Batch or invoke accepted-output handling? | Optional sibling `../import/pipeline/workflow/import-automation-workflow.yaml` |
+| How does the shared Workflow create Batch or invoke accepted-output handling? | `<IMPORT_REPO>/pipeline/workflow/import-automation-workflow.yaml` |
 | What happens inside the ET container? | `import-automation/executor/main.py` and `import-automation/executor/app/executor/import_executor.py` |
 | How are versions, summaries, and pointers produced? | `import_executor.py` plus `artifact-layout.md` |
 
-Read the sibling Workflow only for an internal orchestration question. It is not
-required for repository lookup, Scheduler verification, current status, GCS
-versions, or exact Batch inspection.
+Read the Workflow from `<IMPORT_REPO>` only for an internal orchestration
+question. It is not required for repository lookup, Scheduler verification,
+current status, GCS versions, or exact Batch inspection.
 
 This flow describes the `CLOUD_BATCH` path. GKE, GAE, and Cloud Run have
 different execution paths and must not be interpreted as Batch without

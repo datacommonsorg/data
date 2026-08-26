@@ -1,4 +1,4 @@
-# Validation Config.
+# Validation Configuration
 
 The default validations in [validation_config.json](validation_config.json) are
 applied for all imports in auto refresh.
@@ -7,9 +7,18 @@ To add import-specific validations, create a `validation_config.json` in the
 import directory and set `validation_config_file` on the relevant import
 specification in `manifest.json` to its import-relative path.
 
-To override or disable a default validation rule, copy the rule to the
-import specific config with the same rule id and
-set the `enabled` setting to false.
+The default and import-specific configurations are merged as follows:
+
+- Rules are matched by `rule_id`.
+- A matching import-specific rule is deep-merged into the default rule.
+- A new `rule_id` adds a rule.
+- `definitions` are deep-merged.
+- The import-specific `schema_version` takes precedence when provided.
+
+To override a default validation rule, provide the changed fields under the
+same `rule_id`. To disable it, set `enabled` to `false`. Fields inherited from
+the default rule, such as `validator`, do not need to be repeated when a rule
+is disabled.
 
 Here is an example to override the deleted records threshold and
 disable lint check for a specific import.
@@ -33,7 +42,30 @@ disable lint check for a specific import.
 }
 ```
 
-Here are some additional details for each validation rule.
+## Rule Fields
+
+Each entry in `rules` can contain:
+
+- `rule_id`: Unique identifier used to merge rules and reported as
+  `ValidationName`.
+- `validator`: Supported validator name. See the
+  [validator catalog](README.md#supported-validations).
+- `description`: Optional human-readable description.
+- `enabled`: Optional boolean controlling whether the rule runs; defaults to
+  `true`.
+- `scope`: Optional inline scope or named scope reference, such as
+  `@population_scope`.
+- `params`: Optional validator-specific parameters.
+
+Reusable named scopes can be declared under `definitions.scopes`. An unknown
+validator name is logged and skipped. A recognized validator can return
+`CONFIG_ERROR` for invalid parameters or `DATA_ERROR` when required input data
+is missing or incompatible. These results make the overall validation result
+false. See the [framework documentation](README.md) for inputs, execution, and
+report formats.
+
+The following section provides additional configuration details for golden
+validation.
 
 ## Golden Set Validation with `GOLDENS_CHECK`
 
@@ -138,5 +170,4 @@ validation rules to the validation config:
     ]
 }
 ```
-
 
