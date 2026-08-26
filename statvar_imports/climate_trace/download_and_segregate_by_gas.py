@@ -2,7 +2,6 @@ import requests
 import zipfile
 import pandas as pd
 import io
-import json
 import os
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -15,7 +14,7 @@ def download_and_process_zip(url, country_iso, gas):
     """
     try:
         logging.info(f"  Downloading: {country_iso} for {gas}...")
-        response = requests.get(url)
+        response = requests.get(url, timeout=60)
         response.raise_for_status()
 
         with zipfile.ZipFile(io.BytesIO(response.content)) as zip_ref:
@@ -36,7 +35,7 @@ def download_and_process_zip(url, country_iso, gas):
                 logging.warning(f"    -> No relevant CSV files found in zip for {country_iso} ({gas})")
                 return None
     except requests.exceptions.HTTPError as e:
-        if e.response.status_code == 404:
+        if e.response is not None and e.response.status_code == 404:
             logging.warning(f"    -> Not found (404) for {country_iso} ({gas}) at {url}")
         else:
             logging.error(f"    -> HTTP Error for {country_iso} ({gas}) at {url}: {e}")
@@ -51,12 +50,13 @@ def download_and_segregate_by_gas():
     data, saving a separate concatenated CSV for each gas.
     """
     failed_downloads = []
+    script_dir = os.path.dirname(os.path.abspath(__file__))
     
     logging.info("--- Step 1: Generating Country URL List ---")
     api_country_codes = set()
     try:
         countries_url = "https://api.climatetrace.org/v7/admins?level=0"
-        response = requests.get(countries_url)
+        response = requests.get(countries_url, timeout=60)
         response.raise_for_status()
         countries = response.json()
         api_country_codes = {country['id'] for country in countries}
@@ -67,7 +67,7 @@ def download_and_segregate_by_gas():
 
     local_country_codes = set()
     try:
-        with open('check_country.csv', 'r') as f:
+        with open(os.path.join(script_dir, 'check_country.csv'), 'r') as f:
             local_country_codes = {line.strip() for line in f if line.strip()}
         logging.info(f"Read {len(local_country_codes)} countries from 'check_country.csv'.")
     except FileNotFoundError:
@@ -76,7 +76,7 @@ def download_and_segregate_by_gas():
     combined_codes = sorted(list(api_country_codes.union(local_country_codes)))
     if not combined_codes:
         logging.error("No countries to process. Exiting.")
-        return
+        raise RuntimeError("No country codes found from API or check_country.csv.")
 
     logging.info(f"Total unique countries to process: {len(combined_codes)}")
 
@@ -92,7 +92,7 @@ def download_and_segregate_by_gas():
     logging.info("--- Step 1 Complete: URL List Generated ---\n")
     logging.info("--- Step 2: Downloading and Processing Data ---")
     
-    output_dir = "input_files"
+    output_dir = os.path.join(script_dir, "input_files")
     os.makedirs(output_dir, exist_ok=True)
 
     all_gases = sorted(list(set(gas for gases in country_urls.values() for gas in gases)))
@@ -146,6 +146,7 @@ def download_and_segregate_by_gas():
             logging.info(f"  -> Successfully created {output_filename} with {len(final_df)} rows.\n")
         except Exception as e:
             logging.error(f"  -> An error occurred during the final processing for {gas}: {e}\n")
+            raise
 
     logging.info("--- All processing complete. ---")
     if failed_downloads:
