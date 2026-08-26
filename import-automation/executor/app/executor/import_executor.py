@@ -693,7 +693,8 @@ class ImportExecutor:
                 validator_by_rule_id = {
                     rule['rule_id']: rule.get('validator')
                     for rule in validation.config.rules
-                    if rule.get('enabled', True) and rule.get('rule_id')
+                    if isinstance(rule, dict) and rule.get('enabled', True) and
+                    isinstance(rule.get('rule_id'), str)
                 }
                 for result in current_results:
                     if (validator_by_rule_id.get(
@@ -710,6 +711,7 @@ class ImportExecutor:
             except ValueError as e:
                 logging.error('ValidationRunner failed: %s', e)
                 validation_status = False
+                input_validation_status = False
             validation_metrics.update({
                 "latency":
                     timer.time(),

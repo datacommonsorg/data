@@ -133,7 +133,12 @@ class ImportExecutorTest(unittest.TestCase):
             rule_id = f'deleted_percent_{input_index}'
             runner = mock.Mock()
             runner.config.rules = [
+                'INVALID_RULE',
                 {
+                    'validator': 'UNKNOWN_VALIDATOR',
+                },
+                {
+                    'rule_id': ['invalid'],
                     'validator': 'UNKNOWN_VALIDATOR',
                 },
                 {
@@ -154,6 +159,16 @@ class ImportExecutorTest(unittest.TestCase):
                                  })
             ])
             validation_runners.append(runner)
+
+        class InvalidValidationResults:
+
+            def __iter__(self):
+                raise ValueError('invalid validation results')
+
+        error_runner = mock.Mock()
+        error_runner.run_validations.return_value = (True,
+                                                     InvalidValidationResults())
+        validation_runners.append(error_runner)
         mock_validation_runner.side_effect = validation_runners
 
         config = mock.Mock(invoke_differ_tool=True,
@@ -175,12 +190,12 @@ class ImportExecutorTest(unittest.TestCase):
             status = executor._invoke_import_validation(
                 'repo', 'relative', import_dir, {
                     'import_name': 'test_import',
-                    'import_inputs': [{}, {}],
+                    'import_inputs': [{}, {}, {}],
                 }, 'version', import_summary)
 
         self.assertFalse(status)
-        self.assertEqual(2, mock_log_metric.call_count)
-        for input_index, call in enumerate(mock_log_metric.call_args_list):
+        self.assertEqual(3, mock_log_metric.call_count)
+        for input_index, call in enumerate(mock_log_metric.call_args_list[:2]):
             expected_level = 'INFO' if input_statuses[input_index] else 'ERROR'
             expected_status = ('SUCCESS'
                                if input_statuses[input_index] else 'FAILURE')
@@ -193,3 +208,8 @@ class ImportExecutorTest(unittest.TestCase):
             self.assertEqual(input_index + 1,
                              call.args[3]['deleted_records_count'])
             self.assertEqual(10, call.args[3]['previous_obs_count'])
+
+        error_call = mock_log_metric.call_args_list[2]
+        self.assertEqual('ERROR', error_call.args[1])
+        self.assertEqual('input2', error_call.args[3]['import_input'])
+        self.assertEqual('FAILURE', error_call.args[3]['status'])
