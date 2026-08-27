@@ -45,20 +45,18 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(script_dir, "input_files")
 Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 
-import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
 def retry_method(url, headers=None):
     if headers is None:
         headers = {}
     if "User-Agent" not in headers:
         headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    response = requests.get(url, headers=headers, timeout=120, stream=True, verify=False)
+    response = requests.get(url, headers=headers, timeout=120, stream=True)
     response.raise_for_status()
     return response
 
 def download_files(url_list, save_folder):
     os.makedirs(os.path.join(save_folder), exist_ok=True)
+    downloaded_count = 0
 
     for url in url_list:
         try:
@@ -83,10 +81,14 @@ def download_files(url_list, save_folder):
             logging.info(
                 f"Completed download: source={url}, destination={file_path}, size_bytes={file_size}"
             )
+            downloaded_count += 1
         except Exception as e:
             logging.error(
                 f"Download failed: source={url}, destination={file_path}, error={e}"
             )
+
+    if url_list and downloaded_count == 0:
+        raise RuntimeError("No files were successfully downloaded.")
 
 
 def download_files_from_gcs(url_list, save_folder):
