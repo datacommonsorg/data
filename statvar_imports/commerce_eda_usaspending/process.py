@@ -93,7 +93,7 @@ CFDA_PROGRAMS = {
     "11.307": "Economic Adjustment Assistance",
     "11.310": "Trade Adjustment Assistance for Firms",
     "11.312": "Research and National Technical Assistance",
-    "11.313": "Regional Innovation Strategies",
+    "11.313": "Trade Adjustment Assistance for Firms",
     "11.024": "Regional Innovation Strategies",
     "11.020": "Technical Assistance"
 }
@@ -116,6 +116,8 @@ def get_fiscal_year(date_str):
         return None
     parts = date_str.split("-")
     if len(parts) < 2:
+        return None
+    if not (parts[0].isdigit() and parts[1].isdigit()):
         return None
     year = int(parts[0])
     month = int(parts[1])
@@ -155,8 +157,10 @@ def fetch_usaspending_data(start_year, end_year, session=None):
                 "Award ID", "Start Date", "Award Amount",
                 "Place of Performance State Code", "CFDA Number"
             ],
-            "limit": 100,
-            "page": page
+            "limit":
+            100,
+            "page":
+            page
         }
         logging.info(f"Fetching page {page}...")
 
@@ -208,7 +212,7 @@ def process_data(awards, start_year, end_year, output_path):
         if not fy or fy < start_year or fy > end_year:
             continue
 
-        amount = a.get("Award Amount", 0.0)
+        amount = float(a.get("Award Amount") or 0.0)
         data_rows.append({
             "Place": state_name,
             "Category": category,

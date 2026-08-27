@@ -14,11 +14,16 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/Investment_output.tmcf",
-                    "cleaned_csv": "output/Investment_output.csv"
+                    "cleaned_csv": "output/Investment_output.csv",
+                    "node_mcf": "output/Investment_output.mcf"
                 }
             ],
             "source_files": [
-                "output/Investment_cleaned.csv"
+                "output/Investment_cleaned.csv",
+                "counters/Investment_counters.csv",
+                "Investmentmetadata.csv",
+                "Investmentpvmap.csv",
+                "manifest.json"
             ],
             "cron_schedule": "30 05 * * 1"
         }

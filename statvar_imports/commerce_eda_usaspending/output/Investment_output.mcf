@@ -45,3 +45,18 @@ statType: dcs:measuredValue
 investmentProgram: dcs:TechnicalAssistance
 name: "Amount of Investment: Technical Assistance"
 
+Node: dcid:Amount_Investment_ResearchNationalTechnicalAssistance
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Investment
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+investmentProgram: dcs:ResearchNationalTechnicalAssistance
+name: "Amount of Investment: Research and National Technical Assistance"
+
+Node: dcid:Amount_Investment_TradeAdjustmentAssistance
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Investment
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+investmentProgram: dcs:TradeAdjustmentAssistance
+name: "Amount of Investment: Trade Adjustment Assistance"

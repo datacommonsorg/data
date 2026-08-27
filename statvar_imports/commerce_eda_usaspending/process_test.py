@@ -167,10 +167,10 @@ class TestProcessUSASpending(unittest.TestCase):
 
     def test_new_programs(self):
         mock_awards = [
-            # CFDA 11.310 -> Trade Adjustment Assistance for Firms
+            # CFDA 11.313 -> Trade Adjustment Assistance for Firms
             {
                 "Place of Performance State Code": "CA",
-                "CFDA Number": "11.310",
+                "CFDA Number": "11.313",
                 "Start Date": "2020-01-15",
                 "Award Amount": 10000.0,
             },
@@ -188,6 +188,13 @@ class TestProcessUSASpending(unittest.TestCase):
                 "Start Date": "2020-03-15",
                 "Award Amount": 30000.0,
             },
+            # CFDA 11.024 -> Regional Innovation Strategies
+            {
+                "Place of Performance State Code": "CA",
+                "CFDA Number": "11.024",
+                "Start Date": "2020-04-15",
+                "Award Amount": 15000.0,
+            },
         ]
 
         process_data(
@@ -200,15 +207,19 @@ class TestProcessUSASpending(unittest.TestCase):
         self.assertTrue(os.path.exists(self.output_csv))
         df_actual = pd.read_csv(self.output_csv)
         df_expected = pd.DataFrame({
-            "Place": ["California", "California", "California", "California"],
+            "Place": [
+                "California", "California", "California", "California",
+                "California"
+            ],
             "State or Territory / EDA Program": [
                 "Total",
                 "Public Works",
+                "Regional Innovation Strategies",
                 "Research and National Technical Assistance",
                 "Trade Adjustment Assistance for Firms",
             ],
-            "Year": [2020, 2020, 2020, 2020],
-            "Value": [60000, 30000, 20000, 10000],
+            "Year": [2020, 2020, 2020, 2020, 2020],
+            "Value": [75000, 30000, 15000, 20000, 10000],
         })
         pd.testing.assert_frame_equal(df_actual, df_expected)
 
@@ -287,9 +298,8 @@ class TestProcessUSASpending(unittest.TestCase):
         # Total is 1234.6 + 5678.4 = 6913.0 -> 6913
         df_expected = pd.DataFrame({
             "Place": ["Texas", "Texas", "Texas"],
-            "State or Territory / EDA Program": [
-                "Total", "Planning", "Public Works"
-            ],
+            "State or Territory / EDA Program":
+            ["Total", "Planning", "Public Works"],
             "Year": [2022, 2022, 2022],
             "Value": [6913, 5678, 1235],
         })
@@ -317,6 +327,53 @@ class TestProcessUSASpending(unittest.TestCase):
             output_path=self.output_csv,
         )
         self.assertFalse(os.path.exists(self.output_csv))
+
+    def test_date_parsing_and_amount_guards(self):
+        mock_awards = [
+            # Malformed date string (should be safely skipped)
+            {
+                "Place of Performance State Code": "NY",
+                "CFDA Number": "11.300",
+                "Start Date": "invalid-date",
+                "Award Amount": 50000.0,
+            },
+            # Missing / None date string (should be safely skipped)
+            {
+                "Place of Performance State Code": "NY",
+                "CFDA Number": "11.300",
+                "Start Date": None,
+                "Award Amount": 50000.0,
+            },
+            # None Award Amount (should default to 0.0 and be dropped by positive amount filter)
+            {
+                "Place of Performance State Code": "NY",
+                "CFDA Number": "11.300",
+                "Start Date": "2022-05-15",
+                "Award Amount": None,
+            },
+            # Valid award
+            {
+                "Place of Performance State Code": "NY",
+                "CFDA Number": "11.300",
+                "Start Date": "2022-05-15",
+                "Award Amount": 120000.0,
+            },
+        ]
+        process_data(
+            mock_awards,
+            start_year=2021,
+            end_year=2023,
+            output_path=self.output_csv,
+        )
+        self.assertTrue(os.path.exists(self.output_csv))
+        df_actual = pd.read_csv(self.output_csv)
+        df_expected = pd.DataFrame({
+            "Place": ["New York", "New York"],
+            "State or Territory / EDA Program": ["Total", "Public Works"],
+            "Year": [2022, 2022],
+            "Value": [120000, 120000],
+        })
+        pd.testing.assert_frame_equal(df_actual, df_expected)
 
 
 if __name__ == "__main__":
