@@ -15,7 +15,7 @@ https://hazards.fema.gov/nri/Content/StaticDocuments/DataDownload//NRI_Table_Cen
 
 Run `sh/e2e.sh`
 
-Under the hood, this will download the files from source using `sh/download_data.sh` and process
+Under the hood, this will download the files from source using `sh/download_data.py` and process
 them using `sh/process_data.sh`.
 
 As a result, the following files will be in the `output` directory
