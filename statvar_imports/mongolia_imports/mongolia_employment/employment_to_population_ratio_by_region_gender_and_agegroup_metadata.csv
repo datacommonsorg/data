@@ -4,3 +4,4 @@ output_columns,"observationAbout,observationDate,value,variableMeasured,unit,sca
 header_rows,1
 url,"https://www.1212.mn/en/statcate/table-view/Labour%2C%20business/Labour/DT_NSO_0400_035V3_1.px?subtables=EMPLOYMENT%20TO%20POPULATION%20RATIO,%20by%20sex,%20age%20group,%20aimags%20and%20the%20Capital"
 input_encoding,utf-8-sig
+output_only_new_statvars,False

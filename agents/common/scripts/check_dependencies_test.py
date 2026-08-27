@@ -175,7 +175,6 @@ class CheckDependenciesTest(unittest.TestCase):
                          msg=result.stdout + result.stderr)
         self.assertIn('Google Cloud SDK 999.0.0', result.stdout)
         self.assertIn('Required gcloud commands', result.stdout)
-        self.assertIn('SUGGESTED sibling import checkout', result.stdout)
         self.assertIn('Authentication checks (--local)', result.stdout)
         calls = self._gcloud_calls()
         help_calls = tuple(call for call in calls if call.endswith('--help'))
@@ -185,9 +184,8 @@ class CheckDependenciesTest(unittest.TestCase):
             '--filter=status:ACTIVE' in call for call in calls))
 
     def test_missing_local_dependency_skips_authentication(self):
-        missing_command = next(
-            command for command in self._required_commands
-            if command not in {'bash', 'gcloud', 'git', 'realpath'})
+        missing_command = next(command for command in self._required_commands
+                               if command not in {'bash', 'gcloud'})
         (self._bin_dir / missing_command).unlink()
 
         result = self._run()
@@ -225,16 +223,6 @@ class CheckDependenciesTest(unittest.TestCase):
 
         self.assertEqual(1, result.returncode)
         self.assertIn(f'MISSING  gcloud {unsupported_command}', result.stderr)
-
-    def test_invalid_sibling_import_checkout_is_advisory(self):
-        (self._workspace / 'import').mkdir()
-
-        result = self._run('--local')
-
-        self.assertEqual(0,
-                         result.returncode,
-                         msg=result.stdout + result.stderr)
-        self.assertIn('SUGGESTED sibling import checkout', result.stdout)
 
     def test_default_checks_both_authentication_paths_without_leaking_tokens(
             self):

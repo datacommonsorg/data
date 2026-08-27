@@ -3,3 +3,4 @@ parameter,value
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
 header_rows,1
 input_encoding,utf-8-sig
+output_only_new_statvars,False
