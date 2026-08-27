@@ -10,6 +10,7 @@
             "scripts": [
                 "process.py"
             ],
+            
             "import_inputs": [
                 {
                     "template_mcf": "hud.tmcf",
@@ -19,7 +20,8 @@
             "source_files": [
                 "input_files/*"
             ],
-            "cron_schedule": "15 23 * * 7"
+            "cron_schedule": "15 23 * * 7",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }
