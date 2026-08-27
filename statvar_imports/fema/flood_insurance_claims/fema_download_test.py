@@ -28,10 +28,13 @@ class FemaDownloadTest(unittest.TestCase):
     def setUp(self):
         """Set up a temporary directory for testing."""
         self.test_dir = tempfile.mkdtemp()
+        self.test_input_dir = os.path.join(self.test_dir, 'input_file')
+        self.test_temp_dir = os.path.join(self.test_dir, 'temp_fema_data')
 
     def tearDown(self):
         """Remove the temporary directory after tests."""
-        shutil.rmtree(self.test_dir)
+        if os.path.exists(self.test_dir):
+            shutil.rmtree(self.test_dir)
 
     @patch('fema_download.requests.get')
     def test_get_total_records_success(self, mock_get):
@@ -66,6 +69,18 @@ class FemaDownloadTest(unittest.TestCase):
                 'Failed to parse the total record count from the response.'):
             fema_download.get_total_records('http://fake-api.com')
 
+    @patch('fema_download.get_total_records')
+    def test_download_data_zero_records_fails(self, mock_get_total_records):
+        """Test failure when total record count is 0."""
+        mock_get_total_records.return_value = 0
+        with self.assertRaisesRegex(
+                RuntimeError,
+                'Download failed: API metadata reported 0 records.'):
+            fema_download.download_data(
+                api_url='http://fake-api.com',
+                temp_dir=self.test_temp_dir,
+                output_dir=self.test_input_dir)
+
     @patch('fema_download.shutil.rmtree')
     @patch('fema_download.download_file')
     @patch('fema_download.get_total_records')
@@ -74,8 +89,6 @@ class FemaDownloadTest(unittest.TestCase):
         """
         Test the integrated logic of downloading, merging, and cleaning up.
         """
-        # Temporarily change the PAGE_SIZE for this test to a small value
-        # to control the pagination logic without creating massive dummy files.
         original_page_size = fema_download.PAGE_SIZE
         fema_download.PAGE_SIZE = 2
 
@@ -87,55 +100,37 @@ class FemaDownloadTest(unittest.TestCase):
             # Chunk 2 has the remaining 1 record.
             chunk2_content = b"headerA,headerB\n3,C"
 
-            # This side effect simulates the download_file utility's behavior
             def download_side_effect(url, output_folder, **kwargs):
                 util_output_path = os.path.join(output_folder,
                                                 "FimaNfipClaims.xlsx")
-                # The skip_count in the URL should correspond to the test's PAGE_SIZE
                 if "$skip=0" in url:
                     with open(util_output_path, 'wb') as f:
                         f.write(chunk1_content)
-                elif f"$skip={fema_download.PAGE_SIZE}" in url:  # e.g., $skip=2
+                elif f"$skip={fema_download.PAGE_SIZE}" in url:
                     with open(util_output_path, 'wb') as f:
                         f.write(chunk2_content)
                 else:
-                    return False  # Fail for any unexpected URL
+                    return False
                 return True
 
             mock_download_file.side_effect = download_side_effect
 
-            # The function writes to directories relative to the current working directory.
-            # We change into our temporary test directory to isolate file operations.
-            original_cwd = os.getcwd()
-            os.chdir(self.test_dir)
+            fema_download.download_data('http://fake-api.com',
+                                        self.test_temp_dir,
+                                        output_dir=self.test_input_dir)
 
-            try:
-                fema_download.download_data('http://fake-api.com',
-                                            'temp_fema_data')
+            final_filepath = os.path.join(self.test_input_dir,
+                                          'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
 
-                # Verify the final merged file exists and has the correct content
-                final_filepath = os.path.join('input_file',
-                                              'fema_nfip_claims.csv')
-                self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
 
-                with open(final_filepath, 'rb') as f:
-                    content = f.read()
-
-                # Should contain the header from the first chunk and data from both
-                expected_content = b"headerA,headerB\n1,A\n2,B\n3,C"
-                self.assertEqual(content.strip(), expected_content)
-
-                # Verify that download_file was called twice
-                self.assertEqual(mock_download_file.call_count, 2)
-
-                # Verify the temporary directory was removed
-                mock_rmtree.assert_called_with('temp_fema_data')
-
-            finally:
-                # Restore the original working directory
-                os.chdir(original_cwd)
+            expected_content = b"headerA,headerB\n1,A\n2,B\n3,C"
+            self.assertEqual(content.strip(), expected_content)
+            self.assertEqual(mock_download_file.call_count, 2)
+            mock_rmtree.assert_called_with(self.test_temp_dir)
         finally:
-            # Restore the original PAGE_SIZE to avoid side effects in other tests
             fema_download.PAGE_SIZE = original_page_size
 
     @patch('fema_download.shutil.rmtree')
@@ -150,21 +145,19 @@ class FemaDownloadTest(unittest.TestCase):
 
         mock_download_file.side_effect = download_side_effect
 
-        original_cwd = os.getcwd()
-        os.chdir(self.test_dir)
-        try:
-            fema_download.download_data('http://fake-api.com',
-                                        'temp_fema_data',
-                                        bulk_url='http://fake-bulk.com/FimaNfipClaims.csv')
+        fema_download.download_data(
+            'http://fake-api.com',
+            self.test_temp_dir,
+            bulk_url='http://fake-bulk.com/FimaNfipClaims.csv',
+            output_dir=self.test_input_dir)
 
-            final_filepath = os.path.join('input_file', 'fema_nfip_claims.csv')
-            self.assertTrue(os.path.exists(final_filepath))
-            with open(final_filepath, 'rb') as f:
-                content = f.read()
-            self.assertEqual(content.strip(), b"colA,colB\n1,X\n2,Y")
-            mock_download_file.assert_called_once()
-        finally:
-            os.chdir(original_cwd)
+        final_filepath = os.path.join(self.test_input_dir, 'fema_nfip_claims.csv')
+        self.assertTrue(os.path.exists(final_filepath))
+        with open(final_filepath, 'rb') as f:
+            content = f.read()
+        self.assertEqual(content.strip(), b"colA,colB\n1,X\n2,Y")
+        mock_download_file.assert_called_once()
+        mock_rmtree.assert_called_with(self.test_temp_dir)
 
     @patch('fema_download.shutil.rmtree')
     @patch('fema_download.download_file')
@@ -189,23 +182,18 @@ class FemaDownloadTest(unittest.TestCase):
 
             mock_download_file.side_effect = download_side_effect
 
-            original_cwd = os.getcwd()
-            os.chdir(self.test_dir)
-            try:
-                fema_download.download_data(
-                    'http://fake-api.com',
-                    'temp_fema_data',
-                    bulk_url='http://fake-bulk.com/FimaNfipClaims.csv')
+            fema_download.download_data(
+                'http://fake-api.com',
+                self.test_temp_dir,
+                bulk_url='http://fake-bulk.com/FimaNfipClaims.csv',
+                output_dir=self.test_input_dir)
 
-                final_filepath = os.path.join('input_file',
-                                              'fema_nfip_claims.csv')
-                self.assertTrue(os.path.exists(final_filepath))
-                with open(final_filepath, 'rb') as f:
-                    content = f.read()
-                self.assertEqual(content.strip(),
-                                 b"headerA,headerB\n1,A\n2,B")
-            finally:
-                os.chdir(original_cwd)
+            final_filepath = os.path.join(self.test_input_dir,
+                                          'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
+            self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
         finally:
             fema_download.PAGE_SIZE = original_page_size
 
@@ -227,27 +215,22 @@ class FemaDownloadTest(unittest.TestCase):
                     with open(util_output_path, 'wb') as f:
                         f.write(b"headerA,headerB\n1,A\n2,B\n")
                 else:
-                    # Second chunk contains only header
                     with open(util_output_path, 'wb') as f:
                         f.write(b"headerA,headerB\n")
                 return True
 
             mock_download_file.side_effect = download_side_effect
 
-            original_cwd = os.getcwd()
-            os.chdir(self.test_dir)
-            try:
-                fema_download.download_data('http://fake-api.com',
-                                            'temp_fema_data')
+            fema_download.download_data('http://fake-api.com',
+                                        self.test_temp_dir,
+                                        output_dir=self.test_input_dir)
 
-                final_filepath = os.path.join('input_file',
-                                              'fema_nfip_claims.csv')
-                self.assertTrue(os.path.exists(final_filepath))
-                with open(final_filepath, 'rb') as f:
-                    content = f.read()
-                self.assertEqual(content, b"headerA,headerB\n1,A\n2,B\n")
-            finally:
-                os.chdir(original_cwd)
+            final_filepath = os.path.join(self.test_input_dir,
+                                          'fema_nfip_claims.csv')
+            self.assertTrue(os.path.exists(final_filepath))
+            with open(final_filepath, 'rb') as f:
+                content = f.read()
+            self.assertEqual(content, b"headerA,headerB\n1,A\n2,B\n")
         finally:
             fema_download.PAGE_SIZE = original_page_size
 

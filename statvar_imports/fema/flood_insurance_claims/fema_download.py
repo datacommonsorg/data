@@ -79,7 +79,10 @@ def get_total_records(api_url):
             'Failed to parse the total record count from the response.')
 
 
-def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
+def download_data(api_url: str,
+                  temp_dir: str,
+                  bulk_url: str = None,
+                  output_dir: str = None):
     """
     Downloads data from the FEMA API, handling direct bulk download and pagination fallback.
 
@@ -87,12 +90,19 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
         api_url (str): The base URL of the API endpoint.
         temp_dir (str): The path to the temporary directory for downloaded chunks.
         bulk_url (str): The direct bulk download URL for the full dataset.
+        output_dir (str): Optional directory for output file. Defaults to 'input_file' relative to script.
     """
     filename = "fema_nfip_claims.csv"
 
-    output_dir = "input_file"
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+    if output_dir is None:
+        output_dir = os.path.join(script_dir, "input_file")
+    elif not os.path.isabs(output_dir):
+        output_dir = os.path.abspath(output_dir)
+
+    if not os.path.isabs(temp_dir):
+        temp_dir = os.path.join(os.path.dirname(output_dir), temp_dir)
+
+    os.makedirs(output_dir, exist_ok=True)
     final_filepath = os.path.join(output_dir, filename)
 
     logging.set_verbosity(logging.INFO)
@@ -137,19 +147,21 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
                 shutil.rmtree(temp_dir)
 
     # 2. Fallback to API pagination
-    # Remove previous partial/incomplete file if it exists
-    if os.path.exists(final_filepath):
-        os.remove(final_filepath)
-
-    skip_count = 0
-    records_downloaded = 0
-
     # Get the total number of records from the API for a reliable failsafe.
     total_records = get_total_records(api_url)
     if total_records is None:
-        logging.fatal("Could not get the total record count. Cannot proceed.")
+        logging.error("Could not get the total record count. Cannot proceed.")
         raise RuntimeError(
             'Download failed due to could not get the total record count.')
+    if total_records == 0:
+        logging.error(
+            "Total records returned 0 from API metadata. Cannot proceed.")
+        raise RuntimeError(
+            'Download failed: API metadata reported 0 records.')
+
+    skip_count = 0
+    records_downloaded = 0
+    temp_merged_filepath = os.path.join(temp_dir, f"merged_{filename}")
 
     try:
         # Create a temporary directory for downloaded chunks.
@@ -157,14 +169,15 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
             shutil.rmtree(temp_dir)
         os.makedirs(temp_dir, exist_ok=True)
 
-        logging.info("Starting download to file: %s", final_filepath)
+        logging.info("Starting paginated download into temporary staging: %s",
+                     temp_merged_filepath)
 
         # The main download loop for pagination
-        while total_records == 0 or records_downloaded < total_records:
+        while records_downloaded < total_records:
             csv_url = f"{api_url}?$format=csv&$top={PAGE_SIZE}&$skip={skip_count}"
             logging.info("Requesting data from: %s", csv_url)
 
-            # The download utility incorrectly appends an .xlsx extension.
+            # The download utility appends an .xlsx extension when format is in query param.
             util_output_filename = "FimaNfipClaims.xlsx"
             util_output_path = os.path.join(temp_dir, util_output_filename)
 
@@ -179,7 +192,7 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
                                              backoff=2)
 
             if not download_success or not os.path.exists(util_output_path):
-                logging.fatal(
+                logging.error(
                     "Failed to download chunk at skip=%s or file not found. Exiting.",
                     skip_count)
                 raise RuntimeError(
@@ -187,25 +200,23 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
 
             os.rename(util_output_path, chunk_filepath)
 
-            # The file is a plain text CSV, but we read it in binary mode ('rb')
-            # to handle potential issues with different line endings (e.g., '\r\n')
-            # and ensure the bytes are written exactly as they were read.
+            # Read in binary mode to handle byte-accurate line endings.
             with open(chunk_filepath, 'rb') as f_chunk:
                 content = f_chunk.read()
 
-            with open(final_filepath, 'ab') as f_final:
+            with open(temp_merged_filepath, 'ab') as f_temp:
                 if skip_count == 0:
-                    f_final.write(content)
+                    f_temp.write(content)
                     if not content.endswith(b'\n'):
-                        f_final.write(b'\n')
+                        f_temp.write(b'\n')
                 else:
                     split_content = content.split(b'\n', 1)
                     if len(split_content) > 1:
                         content_without_header = split_content[1]
                         if content_without_header:
-                            f_final.write(content_without_header)
+                            f_temp.write(content_without_header)
                             if not content_without_header.endswith(b'\n'):
-                                f_final.write(b'\n')
+                                f_temp.write(b'\n')
 
             lines = content.strip(b'\r\n').split(b'\n')
             num_records_in_chunk = max(0, len(lines) - 1) if lines and lines[0] else 0
@@ -222,13 +233,18 @@ def download_data(api_url: str, temp_dir: str, bulk_url: str = None):
 
             skip_count += PAGE_SIZE
 
-        if total_records > 0 and records_downloaded < total_records:
-            logging.fatal(
+        if records_downloaded < total_records:
+            logging.error(
                 "Download incomplete: only %s of %s records downloaded.",
                 records_downloaded, total_records)
             raise RuntimeError(
                 f"Download incomplete: only {records_downloaded} of {total_records} records downloaded."
             )
+
+        # Atomically replace final file only on full completion
+        if os.path.exists(final_filepath):
+            os.remove(final_filepath)
+        shutil.move(temp_merged_filepath, final_filepath)
 
         logging.info(
             "Total download complete. All %s available records saved to: %s",
