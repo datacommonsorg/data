@@ -16,6 +16,8 @@ import os
 import time
 import pandas as pd
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from absl import app
 from absl import logging
 
@@ -44,6 +46,19 @@ CFDA_PROGRAMS = {
     "11.020": "Technical Assistance"
 }
 
+def get_session():
+    session = requests.Session()
+    retries = Retry(
+        total=5,
+        backoff_factor=1,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=["POST"]
+    )
+    adapter = HTTPAdapter(max_retries=retries)
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    return session
+
 def get_fiscal_year(date_str):
     if not date_str:
         return None
@@ -56,7 +71,9 @@ def get_fiscal_year(date_str):
         return year + 1
     return year
 
-def fetch_usaspending_data(start_year, end_year):
+def fetch_usaspending_data(start_year, end_year, session=None):
+    if session is None:
+        session = get_session()
     url = "https://api.usaspending.gov/api/v2/search/spending_by_award/"
     page = 1
     all_awards = []
@@ -86,13 +103,11 @@ def fetch_usaspending_data(start_year, end_year):
         }
         logging.info(f"Fetching page {page}...")
         try:
-            response = requests.post(url, json=payload, timeout=30)
-            if response.status_code != 200:
-                logging.error(f"Error fetching page {page}: {response.status_code} - {response.text}")
-                break
+            response = session.post(url, json=payload, timeout=30)
+            response.raise_for_status()
         except Exception as err:
-            logging.error(f"Exception during API call: {err}")
-            break
+            logging.error(f"Exception during API call on page {page}: {err}")
+            raise
             
         data = response.json()
         results = data.get("results", [])
