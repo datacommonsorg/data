@@ -31,6 +31,7 @@ WITH cdc_sv AS (
     AND variable_measured LIKE 'Percent_%'
   GROUP BY cdc500, pop_statvar
 ),
+
 svo_percent AS (
   SELECT
     O.variable_measured AS statvar,
@@ -40,49 +41,49 @@ svo_percent AS (
     T.measurement_method AS measurement_method,
     cdc_sv.pop_statvar
   FROM `datcom-store.spanner_dc_graph_prod_DEFAULT.Observation` AS O
-  JOIN `datcom-store.spanner_dc_graph_prod_DEFAULT.TimeSeries` AS T
+  INNER JOIN `datcom-store.spanner_dc_graph_prod_DEFAULT.TimeSeries` AS T
     ON O.variable_measured = T.variable_measured
     AND O.entity1 = T.entity1
     AND O.facet_id = T.facet_id
-  JOIN cdc_sv ON O.variable_measured = cdc_sv.cdc500
+    AND T.provenance = 'dc/base/CDC500'
+    AND T.variable_measured LIKE 'Percent_%'
+  INNER JOIN cdc_sv
+    ON O.variable_measured = cdc_sv.cdc500
   WHERE O.entity1 LIKE 'geoId/%'
+    AND O.variable_measured LIKE 'Percent_%'
 ),
+
 svo_count AS (
   SELECT
-    variable_measured AS population_statvar,
-    entity1 AS observation_about,
-    date AS observation_date,
-    value AS population
-  FROM `datcom-store.spanner_dc_graph_prod_DEFAULT.Observation`
-  WHERE entity1 LIKE 'geoId/%'
-    AND variable_measured IN (SELECT DISTINCT pop_statvar FROM cdc_sv)
+    O.variable_measured AS population_statvar,
+    O.entity1 AS observation_about,
+    O.date AS observation_date,
+    O.value AS population
+  FROM `datcom-store.spanner_dc_graph_prod_DEFAULT.Observation` AS O
+  INNER JOIN (
+    SELECT DISTINCT pop_statvar
+    FROM cdc_sv
+  ) AS pop
+    ON O.variable_measured = pop.pop_statvar
+  WHERE O.entity1 LIKE 'geoId/%'
 )
-SELECT DISTINCT * FROM (
-  SELECT 
-    statvar, 
-    SUBSTR(observation_about, 0, 8) AS observation_about,
-    observation_date, 
-    CONCAT('dcAggregate/', measurement_method) AS measurement_method,
-    population_statvar,
-    SAFE_DIVIDE(SUM(CAST(pop_count AS FLOAT64)) * 100, SUM(CAST(population AS FLOAT64))) AS percent
-  FROM (
-    SELECT
-      p.statvar,
-      p.observation_about,
-      p.observation_date,
-      p.percent,
-      p.measurement_method,
-      c.population_statvar,
-      c.population,
-      CAST(c.population AS FLOAT64) * CAST(p.percent AS FLOAT64) / 100 AS pop_count
-    FROM svo_percent AS p
-    JOIN svo_count AS c
-      ON p.observation_about = c.observation_about
-      AND p.observation_date = c.observation_date
-      AND p.pop_statvar = c.population_statvar
-  )
-  GROUP BY 1, 2, 3, 4, 5
-)
+
+SELECT 
+  p.statvar, 
+  SUBSTR(p.observation_about, 0, 8) AS observation_about,
+  p.observation_date, 
+  CONCAT('dcAggregate/', p.measurement_method) AS measurement_method,
+  p.pop_statvar AS population_statvar,
+  SAFE_DIVIDE(
+    SUM(CAST(c.population AS FLOAT64) * CAST(p.percent AS FLOAT64) / 100) * 100,
+    SUM(CAST(c.population AS FLOAT64))
+  ) AS percent
+FROM svo_percent AS p
+INNER JOIN svo_count AS c
+  ON p.observation_about = c.observation_about
+  AND p.observation_date = c.observation_date
+  AND p.pop_statvar = c.population_statvar
+GROUP BY 1, 2, 3, 4, 5
 """
 
 client = bigquery.Client()
