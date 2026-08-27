@@ -151,20 +151,22 @@ def query_cdc_wonder(xml_payload: str, max_retries: int = 3, session: requests.S
     for attempt in range(1, max_retries + 1):
         _rate_limit_wait()
         try:
+            logging.info(f"Sending HTTP POST request to {CDC_WONDER_ENDPOINT} (attempt {attempt}/{max_retries})...")
             resp = session.post(CDC_WONDER_ENDPOINT, data=data, timeout=300)
             res = resp.text
             if '<title>Processing Error</title>' in res:
                 if 'rate exceeded' in res.lower():
-                    logging.warning(f"Rate limit hit (attempt {attempt}/{max_retries}), backing off 25s...")
+                    logging.warning(f"Rate limit hit on POST {CDC_WONDER_ENDPOINT} (attempt {attempt}/{max_retries}), backing off 25s...")
                     time.sleep(25)
                     continue
                 else:
-                    logging.error(f"CDC WONDER Processing Error: {res}")
+                    logging.error(f"CDC WONDER Processing Error on POST {CDC_WONDER_ENDPOINT}: {res}")
                     raise RuntimeError(f"CDC WONDER processing error: {res}")
             resp.raise_for_status()
+            logging.info(f"Received HTTP {resp.status_code} from POST {CDC_WONDER_ENDPOINT}")
             return res
         except requests.RequestException as e:
-            logging.warning(f"Network error (attempt {attempt}/{max_retries}): {e}")
+            logging.warning(f"Network error on POST {CDC_WONDER_ENDPOINT} (attempt {attempt}/{max_retries}): {e}")
             time.sleep(10 * attempt)
     raise RuntimeError("Failed to fetch data from CDC WONDER after maximum retries.")
 

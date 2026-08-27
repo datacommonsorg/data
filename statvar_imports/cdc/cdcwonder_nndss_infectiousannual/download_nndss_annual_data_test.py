@@ -175,6 +175,7 @@ class DownloadNndssAnnualDataTest(unittest.TestCase):
         mock_session = mock.MagicMock(spec=requests.Session)
         mock_resp = mock.MagicMock()
         mock_resp.text = SAMPLE_XML_RESPONSE_SEX
+        mock_resp.status_code = 200
         mock_resp.ok = True
         mock_resp.raise_for_status.return_value = None
         mock_session.post.return_value = mock_resp
@@ -198,6 +199,7 @@ class DownloadNndssAnnualDataTest(unittest.TestCase):
 
         success_resp = mock.MagicMock()
         success_resp.text = SAMPLE_XML_RESPONSE_SEX
+        success_resp.status_code = 200
         success_resp.raise_for_status.return_value = None
 
         mock_session.post.side_effect = [rate_resp, success_resp]

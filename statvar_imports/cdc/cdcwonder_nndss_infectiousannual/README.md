@@ -36,8 +36,6 @@ This import processes annual summary data for Notifiable Infectious Diseases fro
 - `region_pvmap.csv`: Property-value mapping for region breakdowns.
 - `region_state_pvmap.csv`: Property-value mapping for region and state breakdowns.
 - `common_metadata.csv`: Shared metadata configuration file for `stat_var_processor.py`.
-- `output.tmcf`: Template MCF mapping output CSV columns to Data Commons `StatVarObservation` nodes.
-- `COPY`: GCS target path for unresolved MCF output (`unresolved_mcf/cdc/nndss_infectious_diseases_annual/latest`).
 - `input_files/`: Raw annual input CSV files (2016–2023) organized in subdirectories by breakdown (`age/`, `ethnicity/`, `race/`, `region/`, `region_state/`, `sex/`).
 - `golden_data/`: Contains golden files (`golden_summary_report.csv`, `golden_observations.csv`) for import validation.
 - `test_data/`: Sample input files and expected outputs across all 6 verticals (`age/`, `ethnicity/`, `race/`, `region/`, `region_state/`, `sex/`) for processor validation and testing.
