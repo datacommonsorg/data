@@ -31,38 +31,38 @@
             }
         },
         {
-            "rule_id": "Check_goldens_output_csv_average_real_income",
+            "rule_id": "check_goldens_output_csv_average_real_income",
             "description": "Verifies the generated output CSV data matches established critical golden records",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/golden_observations_average_real_income.csv",
+                "golden_files": "../../../../golden_data/golden_observations.csv",
                 "input_files": "../../../../output/average_real_income_output.csv"
             }
         },
         {
-            "rule_id": "Check_goldens_output_csv_mass_income",
+            "rule_id": "check_goldens_output_csv_mass_income",
             "description": "Verifies the generated output CSV data matches established critical golden records",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/golden_observations_mass_income.csv",
+                "golden_files": "../../../../golden_data/golden_observations.csv",
                 "input_files": "../../../../output/mass_income_output.csv"
             }
         },
         {
-            "rule_id": "Check_goldens_output_csv_population_economic",
+            "rule_id": "check_goldens_output_csv_population_economic",
             "description": "Verifies the generated output CSV data matches established critical golden records",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/golden_observations_population_economic.csv",
+                "golden_files": "../../../../golden_data/golden_observations.csv",
                 "input_files": "../../../../output/population_economic_sector_output.csv"
             }
         },
         {
-            "rule_id": "Check_goldens_output_csv_employment_unemployment",
+            "rule_id": "check_goldens_output_csv_employment_unemployment",
             "description": "Verifies the generated output CSV data matches established critical golden records",
             "validator": "GOLDENS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/golden_observations_employment_unemployment.csv",
+                "golden_files": "../../../../golden_data/golden_observations.csv",
                 "input_files": "../../../../output/employment_and_unemployment_labor_force_output.csv"
             }
         }

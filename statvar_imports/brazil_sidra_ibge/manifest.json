@@ -9,34 +9,38 @@
             "provenance_description": "Population Census on Economy Statistics for Brazil at country and state level.",
             "scripts": [
                 "brazil_download_script.py",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/Average_Real_Income/*.xlsx --pv_map=config_files/average_real_income_pvmap.csv,config_files/place_pvmap.csv --config_file=config_files/brazil_sidra_metadata.csv --output_path=output/average_real_income_output --output_counters=counters/average_real_income_counters.csv",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/Mass_Income/*.xlsx --pv_map=config_files/mass_income_pvmap.csv,config_files/place_pvmap.csv --config_file=config_files/brazil_sidra_metadata.csv --output_path=output/mass_income_output --output_counters=counters/mass_income_counters.csv",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/Population_Economic_sector/*.xlsx --pv_map=config_files/population_pvmap.csv,config_files/place_pvmap.csv --config_file=config_files/brazil_sidra_metadata.csv --output_path=output/population_economic_sector_output --output_counters=counters/population_economic_sector_counters.csv",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/Employment_And_Unemployment_Labor_Force/*.xlsx --pv_map=config_files/employment_and_unemployment_labor_force_pvmap.csv,config_files/place_pvmap.csv --config_file=config_files/brazil_sidra_metadata.csv --output_path=output/employment_and_unemployment_labor_force_output --output_counters=counters/employment_and_unemployment_labor_force_counters.csv"
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/Average_Real_Income/*.csv --pv_map=config_files/average_real_income_pvmap.csv,config_files/place_pvmap.csv --config_file=config_files/brazil_sidra_metadata.csv --output_path=output/average_real_income_output --output_counters=counters/average_real_income_counters.csv",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/Mass_Income/*.csv --pv_map=config_files/mass_income_pvmap.csv,config_files/place_pvmap.csv --config_file=config_files/brazil_sidra_metadata.csv --output_path=output/mass_income_output --output_counters=counters/mass_income_counters.csv",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/Population_Economic_sector/*.csv --pv_map=config_files/population_pvmap.csv,config_files/place_pvmap.csv --config_file=config_files/brazil_sidra_metadata.csv --output_path=output/population_economic_sector_output --output_counters=counters/population_economic_sector_counters.csv",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/Employment_And_Unemployment_Labor_Force/*.csv --pv_map=config_files/employment_and_unemployment_labor_force_pvmap.csv,config_files/place_pvmap.csv --config_file=config_files/brazil_sidra_metadata.csv --output_path=output/employment_and_unemployment_labor_force_output --output_counters=counters/employment_and_unemployment_labor_force_counters.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "output/average_real_income_output.tmcf",
-                    "cleaned_csv": "output/average_real_income_output.csv"
+                    "cleaned_csv": "output/average_real_income_output.csv",
+                    "node_mcf": "output/*.mcf"
                 },
                 {
                     "template_mcf": "output/mass_income_output.tmcf",
-                    "cleaned_csv": "output/mass_income_output.csv"
+                    "cleaned_csv": "output/mass_income_output.csv",
+                    "node_mcf": "output/*.mcf"
                 },
                 {
                     "template_mcf": "output/population_economic_sector_output.tmcf",
-                    "cleaned_csv": "output/population_economic_sector_output.csv"
+                    "cleaned_csv": "output/population_economic_sector_output.csv",
+                    "node_mcf": "output/*.mcf"
                 },
                 {
                     "template_mcf": "output/employment_and_unemployment_labor_force_output.tmcf",
-                    "cleaned_csv": "output/employment_and_unemployment_labor_force_output.csv"
+                    "cleaned_csv": "output/employment_and_unemployment_labor_force_output.csv",
+                    "node_mcf": "output/*.mcf"
                 }
             ],
             "source_files": [
-                "input_files/Average_Real_Income/*.xlsx",
-                "input_files/Mass_Income/*.xlsx",
-                "input_files/Population_Economic_sector/*.xlsx",
-                "input_files/Employment_And_Unemployment_Labor_Force/*.xlsx",
+                "input_files/Average_Real_Income/*.csv",
+                "input_files/Mass_Income/*.csv",
+                "input_files/Population_Economic_sector/*.csv",
+                "input_files/Employment_And_Unemployment_Labor_Force/*.csv",
                 "golden_data/*.csv",
                 "counters/*.csv"
             ],

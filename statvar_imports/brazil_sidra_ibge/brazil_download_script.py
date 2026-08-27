@@ -15,12 +15,11 @@
 """
 Downloads PNAD Continuous (PNADc) quarterly data directly via IBGE REST API.
 Fetches data starting from Q1 2022 to the latest available period and reshapes
-the output into Excel spreadsheets.
+the output into CSV files.
 """
 
 import os
 import time
-from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from absl import app, flags, logging
@@ -96,7 +95,7 @@ def get_available_periods() -> List[Dict[str, Any]]:
                 f"Invalid or empty period metadata response from IBGE API. "
                 f"URL: {url}, Response preview: {str(periods_data)[:200]}"
             )
-            logging.fatal(err_msg)
+            logging.error(err_msg)
             raise RuntimeError(err_msg)
             
         periods = [p for p in periods_data if isinstance(p, dict) and p.get("id", "") >= PERIOD_START]
@@ -105,22 +104,19 @@ def get_available_periods() -> List[Dict[str, Any]]:
                 f"No available periods found starting from {PERIOD_START}. "
                 f"URL: {url}, Raw count: {len(periods_data)}"
             )
-            logging.fatal(err_msg)
+            logging.error(err_msg)
             raise RuntimeError(err_msg)
 
         return periods
 
     except requests.exceptions.RequestException as req_err:
-        err_msg = f"Network error fetching period metadata from IBGE API. URL: {url}, Error: {req_err}"
-        logging.fatal(err_msg)
-        raise RuntimeError(err_msg) from req_err
+        logging.error(f"Network error fetching period metadata from IBGE API. URL: {url}, Error: {req_err}")
+        raise
     except ValueError as json_err:
-        err_msg = f"Failed to parse JSON period metadata response. URL: {url}, Error: {json_err}"
-        logging.fatal(err_msg)
-        raise RuntimeError(err_msg) from json_err
+        logging.error(f"Failed to parse JSON period metadata response. URL: {url}, Error: {json_err}")
+        raise
     except Exception as e:
-        err_msg = f"Unexpected error when retrieving available periods. URL: {url}, Error: {e}"
-        logging.fatal(err_msg)
+        logging.error(f"Unexpected error when retrieving available periods. URL: {url}, Error: {e}")
         raise
 
 
@@ -149,7 +145,9 @@ def format_quarter_label(period_item: Dict[str, Any]) -> str:
         p_id = period_item.get("id")
         if p_id:
             return str(p_id)
-        raise RuntimeError(f"Malformed period item missing 'id': {period_item}") from e
+        err_msg = f"Malformed period item missing 'id': {period_item}"
+        logging.error(err_msg)
+        raise ValueError(err_msg)
 
 
 def fetch_aggregate_series(agg_id: int, var_id: int, geo_code: str, period_query: str, classif: Optional[str] = None) -> Dict[str, Dict[str, str]]:
@@ -184,7 +182,7 @@ def fetch_aggregate_series(agg_id: int, var_id: int, geo_code: str, period_query
         # Guard check to ensure valid list structure returned from API
         if not isinstance(data, list) or not data or "resultados" not in data[0]:
             err_msg = f"Invalid or empty response structure from IBGE API. Context: {context}. Response preview: {str(data)[:300]}"
-            logging.fatal(err_msg)
+            logging.error(err_msg)
             raise RuntimeError(err_msg)
 
         result_map = {}
@@ -204,21 +202,18 @@ def fetch_aggregate_series(agg_id: int, var_id: int, geo_code: str, period_query
         return result_map
 
     except requests.exceptions.RequestException as req_err:
-        err_msg = f"Network exception downloading aggregate series from IBGE API. Context: {context}. Error: {req_err}"
-        logging.fatal(err_msg)
-        raise RuntimeError(err_msg) from req_err
+        logging.error(f"Network exception downloading aggregate series from IBGE API. Context: {context}. Error: {req_err}")
+        raise
     except ValueError as json_err:
-        err_msg = f"JSON decoding error for aggregate series from IBGE API. Context: {context}. Error: {json_err}"
-        logging.fatal(err_msg)
-        raise RuntimeError(err_msg) from json_err
+        logging.error(f"JSON decoding error for aggregate series from IBGE API. Context: {context}. Error: {json_err}")
+        raise
     except Exception as e:
-        err_msg = f"Unexpected error fetching aggregate series from IBGE API. Context: {context}. Error: {e}"
-        logging.fatal(err_msg)
+        logging.error(f"Unexpected error fetching aggregate series from IBGE API. Context: {context}. Error: {e}")
         raise
 
 
 def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: List[Dict[str, Any]]) -> None:
-    """Fetches SIDRA data for 2022Q1 to latest period, reshapes output, and writes to Excel.
+    """Fetches SIDRA data for 2022Q1 to latest period, reshapes output, and writes to CSV.
 
     Args:
         place_name: Display name of state/region.
@@ -227,7 +222,7 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
         periods: List of available periods metadata dictionaries.
 
     Raises:
-        RuntimeError: If fetching data, directory creation, or writing Excel file fails.
+        RuntimeError: If fetching data, directory creation, or writing CSV file fails.
     """
     period_ids = [p["id"] for p in periods]
     period_labels = [format_quarter_label(p) for p in periods]
@@ -235,7 +230,7 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
 
     if panel_index not in PANEL_FOLDER_MAP:
         err_msg = f"Invalid panel_index: {panel_index} for place: {place_name}"
-        logging.fatal(err_msg)
+        logging.error(err_msg)
         raise ValueError(err_msg)
 
     folder_name = PANEL_FOLDER_MAP[panel_index]
@@ -243,13 +238,13 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
 
     # Safely create target output directory
     try:
-        Path(dest_dir).mkdir(parents=True, exist_ok=True)
+        os.makedirs(dest_dir, exist_ok=True)
     except Exception as e:
         err_msg = f"Could not create destination directory '{dest_dir}' for place '{place_name}', panel {panel_index}: {e}"
-        logging.fatal(err_msg)
-        raise RuntimeError(err_msg) from e
+        logging.error(err_msg)
+        raise
 
-    filename = f"{place_name.replace(' ', '_')}_Panel_{panel_index}_Pesquisa Nacional por Amostra de Domicílios Contínua - Divulgação Trimestral.xlsx"
+    filename = f"{place_name.replace(' ', '_')}_Panel_{panel_index}_Pesquisa Nacional por Amostra de Domicílios Contínua - Divulgação Trimestral.csv"
     filepath = os.path.join(dest_dir, filename)
 
     title_row = "Pesquisa Nacional por Amostra de Domicílios Contínua - Divulgação Trimestral"
@@ -267,7 +262,7 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
         subtitle_row = f"Massa de rendimento - Indicadores selecionados - Últimos {len(periods)} trimestres"
     else:
         err_msg = f"Invalid panel_index: {panel_index} for place: {place_name}"
-        logging.fatal(err_msg)
+        logging.error(err_msg)
         raise ValueError(err_msg)
 
     # Build table metadata header block
@@ -341,15 +336,14 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
     # Convert constructed matrix to DataFrame
     df_out = pd.DataFrame(rows)
 
-    # Safely write spreadsheet out to file
+    # Safely write CSV out to file
     try:
-        with pd.ExcelWriter(filepath, engine='openpyxl') as writer:
-            df_out.to_excel(writer, sheet_name='Sheet 1', index=False, header=False)
+        df_out.to_csv(filepath, index=False, header=False, encoding='utf-8')
         logging.info(f"Saved: '{filepath}'")
     except Exception as write_err:
-        err_msg = f"Failed writing Excel file to '{filepath}' for place '{place_name}', panel {panel_index}: {write_err}"
-        logging.fatal(err_msg)
-        raise RuntimeError(err_msg) from write_err
+        err_msg = f"Failed writing CSV file to '{filepath}' for place '{place_name}', panel {panel_index}: {write_err}"
+        logging.error(err_msg)
+        raise
 
 
 def main(argv):
@@ -364,8 +358,8 @@ def main(argv):
             os.makedirs(os.path.join(DOWNLOAD_DIR, folder_name), exist_ok=True)
     except Exception as dir_err:
         err_msg = f"Could not setup target download folders in '{DOWNLOAD_DIR}': {dir_err}"
-        logging.fatal(err_msg)
-        raise RuntimeError(err_msg) from dir_err
+        logging.error(err_msg)
+        raise
 
     # Retrieve period metadata
     periods = get_available_periods()
@@ -383,9 +377,5 @@ def main(argv):
 
 
 if __name__ == "__main__":
-    try:
-        flags.FLAGS.log_dir = SCRIPT_DIR
-        app.run(main)
-    except Exception as main_err:
-        logging.fatal(f"Application terminated due to an unhandled exception: {main_err}")
-        raise
+    flags.FLAGS.log_dir = SCRIPT_DIR
+    app.run(main)

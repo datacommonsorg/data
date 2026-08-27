@@ -92,19 +92,19 @@ class BrazilDownloadScriptTest(unittest.TestCase):
 
     @patch("brazil_download_script.SESSION.get")
     def test_get_available_periods_network_error(self, mock_get):
-        """Tests that network error raises RuntimeError."""
+        """Tests that network error raises RequestException."""
         mock_get.side_effect = requests.exceptions.ConnectionError("Connection refused")
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises(requests.exceptions.RequestException):
             brazil_download_script.get_available_periods()
 
     @patch("brazil_download_script.SESSION.get")
     def test_get_available_periods_json_decode_error(self, mock_get):
-        """Tests that invalid JSON response raises RuntimeError."""
+        """Tests that invalid JSON response raises ValueError."""
         mock_response = MagicMock()
         mock_response.json.side_effect = ValueError("Invalid JSON")
         mock_get.return_value = mock_response
 
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises(ValueError):
             brazil_download_script.get_available_periods()
 
     def test_format_quarter_label_from_literals(self):
@@ -128,7 +128,7 @@ class BrazilDownloadScriptTest(unittest.TestCase):
         label = brazil_download_script.format_quarter_label(period_item)
         self.assertEqual(label, "custom_period")
 
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises(ValueError):
             brazil_download_script.format_quarter_label({"literals": None})
 
     @patch("brazil_download_script.SESSION.get")
@@ -212,9 +212,9 @@ class BrazilDownloadScriptTest(unittest.TestCase):
 
     @patch("brazil_download_script.SESSION.get")
     def test_fetch_aggregate_series_network_error(self, mock_get):
-        """Tests that network request error raises RuntimeError."""
+        """Tests that network request error raises RequestException."""
         mock_get.side_effect = requests.exceptions.Timeout("Request timed out")
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises(requests.exceptions.RequestException):
             brazil_download_script.fetch_aggregate_series(6461, 4096, "N1[1]", "202201")
 
     @patch("brazil_download_script.fetch_aggregate_series")
@@ -257,12 +257,12 @@ class BrazilDownloadScriptTest(unittest.TestCase):
                 for panel_idx in range(1, 5):
                     brazil_download_script.fetch_panel_data("Brasil", "N1[1]", panel_idx, periods)
                     folder_name = brazil_download_script.PANEL_FOLDER_MAP[panel_idx]
-                    expected_filename = f"Brasil_Panel_{panel_idx}_Pesquisa Nacional por Amostra de Domicílios Contínua - Divulgação Trimestral.xlsx"
+                    expected_filename = f"Brasil_Panel_{panel_idx}_Pesquisa Nacional por Amostra de Domicílios Contínua - Divulgação Trimestral.csv"
                     file_path = os.path.join(tmp_dir, folder_name, expected_filename)
                     self.assertTrue(os.path.exists(file_path), f"File {file_path} was not created.")
 
-                    # Verify generated Excel file contents
-                    df = pd.read_excel(file_path, header=None)
+                    # Verify generated CSV file contents
+                    df = pd.read_csv(file_path, header=None, dtype=str)
                     self.assertGreater(len(df), 5)
                     self.assertEqual(df.iloc[0, 0], "Pesquisa Nacional por Amostra de Domicílios Contínua - Divulgação Trimestral")
                     self.assertEqual(df.iloc[2, 0], "Brasil")
