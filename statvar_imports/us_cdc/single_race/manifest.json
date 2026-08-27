@@ -6,7 +6,7 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://wonder.cdc.gov/ucd-icd10-expanded.html",
-            "provenance_description": "Mortality statistics, categorized by demographic factors and specific causes of death, location, race at state level.",
+            "provenance_description": "Mortality statistics, categorized by demographic factors and specific causes of death, location, race at county level.",
             "scripts": [
                 "download.sh",
                 "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.csv --pv_map=single_race_pvmap.csv --config_file=single_race_metadata.csv --output_path=output/underlyingcauseofdeath_singlerace --output_counters=counters/underlyingcauseofdeath_singlerace.csv"
@@ -14,6 +14,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/underlyingcauseofdeath_singlerace.tmcf",
+                    "node_mcf": "output/underlyingcauseofdeath_singlerace_stat_vars.mcf",
                     "cleaned_csv": "output/underlyingcauseofdeath_singlerace.csv"
                 }
             ],

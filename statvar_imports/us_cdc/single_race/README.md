@@ -1,12 +1,12 @@
 ### This import process handles data from wonder.cdc platform.
 
-- Description: Mortality statistics, categorized by demographic factors and specific causes of death, location, race at state level.
+- Description: Mortality statistics, categorized by demographic factors and specific causes of death, location, race at county level.
 
 - Source URL: https://wonder.cdc.gov/ucd-icd10-expanded.html
 
 - Import Type: Semi-Automated
 
-- Data Availability: 2018 to 2023
+- Data Availability: 2018 onwards
 
 - Release Frequency: P1Y, which means every Year.
 
