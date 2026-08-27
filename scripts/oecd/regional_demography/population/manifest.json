@@ -13,7 +13,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "OECD_population_cleaned.tmcf",
-                    "cleaned_csv": "OECD_population_cleaned.csv"
+                    "cleaned_csv": "OECD_population_cleaned.csv",
+                    "node_mcf": "OECD_population_stat_vars.mcf"
                 }
             ],
             "source_files": [
