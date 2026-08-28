@@ -16,17 +16,18 @@
             ],
             "source_files": [
                 "input_files/mex_admpop_adm*.csv",
-                "golden_data/*.csv",
                 "counters/*.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "output_files/mexico_output_aa0.tmcf",
-                    "cleaned_csv": "output_files/mexico_output_aa0.csv"
+                    "cleaned_csv": "output_files/mexico_output_aa0.csv",
+                    "node_mcf": "output_files/mexico_output_aa0*.mcf"
                 },
                 {
                     "template_mcf": "output_files/mexico_output_aa1.tmcf",
-                    "cleaned_csv": "output_files/mexico_output_aa1.csv"
+                    "cleaned_csv": "output_files/mexico_output_aa1.csv",
+                    "node_mcf": "output_files/mexico_output_aa1*.mcf"
                 },
                 {
                     "template_mcf": "output_files/mexico_output_aa2.tmcf",
