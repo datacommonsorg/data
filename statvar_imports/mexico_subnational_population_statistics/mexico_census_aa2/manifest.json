@@ -31,7 +31,9 @@
                 },
                 {
                     "template_mcf": "output_files/mexico_output_aa2.tmcf",
-                    "cleaned_csv": "output_files/mexico_output_aa2.csv"
+                    "cleaned_csv": "output_files/mexico_output_aa2.csv",
+                    "node_mcf": "output_files/mexico_output_aa2*.mcf"
+
                 }
             ],
             "cron_schedule": "0 07 * * 3"
