@@ -14,6 +14,6 @@
             "description": "Checks if the MaxDate is the same for all StatVars.",
             "validator": "MAX_DATE_CONSISTENT",
             "params": {}
-        },
+        }
     ]
 }
