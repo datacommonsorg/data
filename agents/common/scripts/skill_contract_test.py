@@ -78,8 +78,7 @@ def _local_markdown_links(text: str):
                 target = target[1:target.index('>')]
             else:
                 target = target.split(maxsplit=1)[0]
-            if (not target or '://' in target or target.startswith(
-                ('mailto:', 'chatgpt-conversation:'))):
+            if not target or '://' in target or target.startswith('mailto:'):
                 continue
             path, _, fragment = target.partition('#')
             if path or fragment:
@@ -329,13 +328,15 @@ class SkillContractTest(unittest.TestCase):
 
         for heading in ('## Safety',
                         '## Classify the request before loading context',
-                        '## Review cloud operations', '## Select an operation',
-                        '## Report evidence'):
+                        '## Review cloud configuration',
+                        '## Select an operation', '## Report evidence'):
             with self.subTest(heading=heading):
                 self.assertIn(heading, skill)
 
         for guardrail in (
                 'Treat GCP and the data repository as read-only',
+                'run it only after the user explicitly approves that command',
+                'Never update or delete the table',
                 'Never replace a missing identifier with a broad',
                 'complete attempt history, Workflow execution inspection',
                 'loader status, and execution of remediation as unsupported',
