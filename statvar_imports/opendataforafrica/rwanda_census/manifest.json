@@ -40,6 +40,10 @@
                     "cleaned_csv": "gcs_output/output/kbadgkf.csv"
                 },
                 {
+                    "template_mcf": "gcs_output/output/kwekfdd.tmcf",
+                    "cleaned_csv": "gcs_output/output/kwekfdd.csv"
+                },
+                {
                     "template_mcf": "gcs_output/output/mnoirpd.tmcf",
                     "cleaned_csv": "gcs_output/output/mnoirpd.csv"
                 },
