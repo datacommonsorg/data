@@ -19,7 +19,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "crash_tmcf.tmcf",
-                    "cleaned_csv": "gcs_output/output/*.csv"
+                    "cleaned_csv": "gcs_output/output/*.csv",
+                    "node_mcf": "gcs_output/output/*.mcf"
                 }
             ],
             "cron_schedule": "0 05 * * 2",
