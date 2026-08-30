@@ -33,7 +33,6 @@ POSSIBLE_DATA_COLUMNS = [
     "Two or More Races.*", "Nat. Hawaiian or Other Pacific Isl.*", "Grades.*",
     "Prekindergarten and Kindergarten.*"
 ]
-
 # Excluding the unwanted columns.
 EXCLUDE_DATA_COLUMNS = [
     "Individualized Education Program Students", '(Includes AE)',

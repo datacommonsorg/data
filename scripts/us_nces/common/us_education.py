@@ -939,20 +939,12 @@ class USEducation:
                 if df_dist_tmp.shape[0] > 0:
                     #If current year data is already there in main df - merge the columns
 
-                    # Remove common columns excluding key columns so as to remove duplicates.
-                    rem_common_columns = list(
-                        set(df_place.columns.to_list()) -
-                        set(self._key_col_place))
-
-                    df_dist_tmp = df_dist_tmp.loc[:, ~df_dist_tmp.columns.
-                                                  isin(rem_common_columns)]
-
-                    # Merge the different files columns of same year with key columns
-
-                    df_dist_tmp = pd.merge(df_dist_tmp,
-                                           df_place,
-                                           how="outer",
-                                           on=self._key_col_place)
+                    # Combine place columns of the same year with key columns
+                    df_dist_tmp = (
+                        df_dist_tmp.set_index(self._key_col_place)
+                        .combine_first(df_place.set_index(self._key_col_place))
+                        .reset_index()
+                    )
 
                 else:
                     # The current year data not present in final df
