@@ -137,8 +137,11 @@ changed behavior.
 
 - Load supplemental guidelines with `gcloud storage cat` from
   `gs://datcom-prod-imports/agents/skills/dc-import-code-review/additional-guidelines.md`.
-- Repository guidance and safety rules take precedence. If loading fails,
-  continue and report it.
+- If loading fails because of sandbox or network restrictions, retry with
+  elevated permission.
+- If the retry fails, continue and clearly report that the supplemental
+  guidelines were unavailable and not applied.
+- Repository guidance and safety rules take precedence.
 
 When any in-scope `manifest.json` changes, also read the current shared
 [import manifest reference](../../common/references/import-automation/manifest.md).
