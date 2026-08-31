@@ -129,7 +129,7 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                 chunk_size = 500_000
                                 shard_idx = 0
                                 shard_written = 0
-                                first_write = [True] * num_shards
+                                first_chunk = True
 
                                 for chunk in pd.read_csv(input_file_path,
                                                          chunksize=chunk_size):
@@ -144,31 +144,36 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                     chunk["dcid"] = "geoId/" + chunk[
                                         "statefips"] + chunk["countyfips"]
 
+                                    if first_chunk:
+                                        for p in shard_paths:
+                                            pd.DataFrame(columns=chunk.columns).to_csv(
+                                                p, index=False)
+                                        first_chunk = False
+
                                     start_idx = 0
                                     while start_idx < len(chunk):
-                                        remaining_in_shard = shard_sizes[
-                                            shard_idx] - shard_written
-                                        end_idx = min(
-                                            start_idx + remaining_in_shard,
-                                            len(chunk))
+                                        if shard_idx < num_shards - 1:
+                                            remaining_in_shard = shard_sizes[
+                                                shard_idx] - shard_written
+                                            end_idx = min(
+                                                start_idx + remaining_in_shard,
+                                                len(chunk))
+                                        else:
+                                            end_idx = len(chunk)
+
                                         sub_chunk = chunk.iloc[
                                             start_idx:end_idx]
 
-                                        mode = 'w' if first_write[
-                                            shard_idx] else 'a'
-                                        header = first_write[shard_idx]
                                         sub_chunk.to_csv(
                                             shard_paths[shard_idx],
-                                            mode=mode,
-                                            header=header,
+                                            mode='a',
+                                            header=False,
                                             float_format='%.6f',
                                             index=False)
-                                        first_write[shard_idx] = False
                                         shard_written += len(sub_chunk)
                                         start_idx = end_idx
 
-                                        if shard_written >= shard_sizes[
-                                                shard_idx] and shard_idx < num_shards - 1:
+                                        if shard_idx < num_shards - 1 and shard_written >= shard_sizes[shard_idx]:
                                             shard_idx += 1
                                             shard_written = 0
 
