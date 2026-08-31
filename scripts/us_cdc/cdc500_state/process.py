@@ -127,7 +127,8 @@ def run_process(client: bigquery.Client, output_file: str) -> pd.DataFrame:
         raise
 
     output_dir = os.path.dirname(output_file)
-    os.makedirs(output_dir, exist_ok=True)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
     logging.info("Writing %d rows to %s", len(df), output_file)
     df.to_csv(output_file, index=False)
     return df

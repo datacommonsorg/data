@@ -1,0 +1,54 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted points is within the threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_missing_refs_count",
+            "description": "Checks that there are no missing entity references in lint report.",
+            "validator": "MISSING_REFS_COUNT",
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Checks that there are no lint errors during MCF generation.",
+            "validator": "LINT_ERROR_COUNT",
+            "params": {
+                "threshold": 0
+            }
+        },
+        {
+            "rule_id": "check_max_value_percentage",
+            "description": "Checks that all percentage StatVars do not exceed 100%.",
+            "validator": "MAX_VALUE_CHECK",
+            "params": {
+                "maximum": 100
+            }
+        },
+        {
+            "rule_id": "check_min_value_percentage",
+            "description": "Checks that all percentage StatVars are not below 0%.",
+            "validator": "MIN_VALUE_CHECK",
+            "params": {
+                "minimum": 0
+            }
+        },
+        {
+            "rule_id": "check_num_places_state_count",
+            "description": "Checks that state-level observations cover all 50-52 US state entities.",
+            "validator": "NUM_PLACES_COUNT",
+            "params": {
+                "minimum": 50,
+                "maximum": 52
+            }
+        }
+    ]
+}
