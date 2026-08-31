@@ -14,6 +14,7 @@
 
 import json
 import os
+import numpy as np
 import pandas as pd
 from absl import app, logging, flags
 from pathlib import Path
@@ -103,77 +104,149 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                         logging.info(f"Cleaning {input_file_name} ....")
                         logging.info(f"Cleaning {input_file_path} ....")
                         try:
-                            data = pd.read_csv(input_file_path)
-                            data["date"] = pd.to_datetime(data["date"],
-                                                          yearfirst=True)
-                            data["date"] = pd.to_datetime(data["date"],
-                                                          format="%Y-%m-%d")
+                            if "County" in input_file_name and "PM" in input_file_name:
+                                num_shards = 4
+                                base_name, ext = os.path.splitext(output_file_name)
+                                shard_paths = []
+                                for idx in range(num_shards):
+                                    shard_file_name = f"{base_name}_{idx}{ext}"
+                                    if not os.path.isabs(shard_file_name):
+                                        shard_output_path = os.path.join(
+                                            outputpath, shard_file_name)
+                                    else:
+                                        shard_output_path = shard_file_name
+                                    shard_paths.append(shard_output_path)
 
-                            if "PM2.5" in input_file_name:
-                                census_tract = "ds_pm"
-                            elif "Ozone" in input_file_name:
-                                census_tract = "ds_o3"
-                            if "Census" in input_file_name:
+                                with open(input_file_path, 'r') as f:
+                                    total_rows = sum(1 for _ in f) - 1
+                                base_size = total_rows // num_shards
+                                rem_size = total_rows % num_shards
+                                shard_sizes = [
+                                    base_size + 1 if i < rem_size else base_size
+                                    for i in range(num_shards)
+                                ]
+
+                                chunk_size = 500_000
+                                shard_idx = 0
+                                shard_written = 0
+                                first_write = [True] * num_shards
+
+                                for chunk in pd.read_csv(input_file_path,
+                                                         chunksize=chunk_size):
+                                    chunk["date"] = pd.to_datetime(
+                                        chunk["date"],
+                                        format="%d%b%Y",
+                                        errors="coerce").dt.strftime("%Y-%m-%d")
+                                    chunk["statefips"] = chunk[
+                                        "statefips"].astype(str).str.zfill(2)
+                                    chunk["countyfips"] = chunk[
+                                        "countyfips"].astype(str).str.zfill(3)
+                                    chunk["dcid"] = "geoId/" + chunk[
+                                        "statefips"] + chunk["countyfips"]
+
+                                    start_idx = 0
+                                    while start_idx < len(chunk):
+                                        remaining_in_shard = shard_sizes[
+                                            shard_idx] - shard_written
+                                        end_idx = min(
+                                            start_idx + remaining_in_shard,
+                                            len(chunk))
+                                        sub_chunk = chunk.iloc[
+                                            start_idx:end_idx]
+
+                                        mode = 'w' if first_write[
+                                            shard_idx] else 'a'
+                                        header = first_write[shard_idx]
+                                        sub_chunk.to_csv(
+                                            shard_paths[shard_idx],
+                                            mode=mode,
+                                            header=header,
+                                            float_format='%.6f',
+                                            index=False)
+                                        first_write[shard_idx] = False
+                                        shard_written += len(sub_chunk)
+                                        start_idx = end_idx
+
+                                        if shard_written >= shard_sizes[
+                                                shard_idx] and shard_idx < num_shards - 1:
+                                            shard_idx += 1
+                                            shard_written = 0
+
+                                for p in shard_paths:
+                                    logging.info(
+                                        f"Finished cleaning file {os.path.basename(p)}!"
+                                    )
+                            else:
+                                data = pd.read_csv(input_file_path)
+                                data["date"] = pd.to_datetime(
+                                    data["date"],
+                                    format="%d%b%Y",
+                                    errors="coerce").dt.strftime("%Y-%m-%d")
+
                                 if "PM2.5" in input_file_name:
-                                    data = pd.melt(
-                                        data,
-                                        id_vars=[
-                                            'year', 'date', 'statefips',
-                                            'countyfips', 'ctfips', 'latitude',
-                                            'longitude'
-                                        ],
-                                        value_vars=[
-                                            str(census_tract + '_pred'),
-                                            str(census_tract + '_stdd')
-                                        ],
-                                        var_name='StatisticalVariable',
-                                        value_name='Value')
+                                    census_tract = "ds_pm"
                                 elif "Ozone" in input_file_name:
-                                    data = pd.melt(
-                                        data,
-                                        id_vars=[
-                                            'year', 'date', 'statefips',
-                                            'countyfips', 'ctfips', 'latitude',
-                                            'longitude', census_tract + '_stdd'
-                                        ],
-                                        value_vars=[
-                                            str(census_tract + '_pred')
-                                        ],
-                                        var_name='StatisticalVariable',
-                                        value_name='Value')
-                                data.rename(
-                                    columns={census_tract + '_stdd': 'Error'},
-                                    inplace=True)
-                                max_length = data['ctfips'].astype(
-                                    str).str.len().max()
-                                data['ctfips'] = data['ctfips'].astype(
-                                    str).apply(lambda x: add_prefix_zero(
-                                        x, max_length))
-                                data["dcid"] = "geoId/" + data["ctfips"].astype(
-                                    str)
-                                data['StatisticalVariable'] = data[
-                                    'StatisticalVariable'].map(STATVARS)
-                            elif "County" in input_file_name and "PM" in input_file_name:
-                                data["statefips"] = data["statefips"].astype(
-                                    str).str.zfill(2)
-                                data["countyfips"] = data["countyfips"].astype(
-                                    str).str.zfill(3)
-                                data["dcid"] = "geoId/" + data[
-                                    "statefips"] + data["countyfips"]
-                            elif "County" in input_file_name and "Ozone" in input_file_name:
-                                data["statefips"] = data["statefips"].astype(
-                                    str).str.zfill(2)
-                                data["countyfips"] = data["countyfips"].astype(
-                                    str).str.zfill(3)
-                                data["dcid"] = "geoId/" + data[
-                                    "statefips"] + data["countyfips"]
-                            data.to_csv(output_file_path,
-                                        float_format='%.6f',
-                                        index=False)
-                            logging.info(
-                                f"Finished cleaning file {output_file_name}!")
-                        except:
-                            logging.info("Not reading input file...!")
+                                    census_tract = "ds_o3"
+                                if "Census" in input_file_name:
+                                    if "PM2.5" in input_file_name:
+                                        data = pd.melt(
+                                            data,
+                                            id_vars=[
+                                                'year', 'date', 'statefips',
+                                                'countyfips', 'ctfips',
+                                                'latitude', 'longitude'
+                                            ],
+                                            value_vars=[
+                                                str(census_tract + '_pred'),
+                                                str(census_tract + '_stdd')
+                                            ],
+                                            var_name='StatisticalVariable',
+                                            value_name='Value')
+                                    elif "Ozone" in input_file_name:
+                                        data = pd.melt(
+                                            data,
+                                            id_vars=[
+                                                'year', 'date', 'statefips',
+                                                'countyfips', 'ctfips',
+                                                'latitude', 'longitude',
+                                                census_tract + '_stdd'
+                                            ],
+                                            value_vars=[
+                                                str(census_tract + '_pred')
+                                            ],
+                                            var_name='StatisticalVariable',
+                                            value_name='Value')
+                                    data.rename(
+                                        columns={
+                                            census_tract + '_stdd': 'Error'
+                                        },
+                                        inplace=True)
+                                    max_length = data['ctfips'].astype(
+                                        str).str.len().max()
+                                    data['ctfips'] = data['ctfips'].astype(
+                                        str).apply(lambda x: add_prefix_zero(
+                                            x, max_length))
+                                    data["dcid"] = "geoId/" + data[
+                                        "ctfips"].astype(str)
+                                    data['StatisticalVariable'] = data[
+                                        'StatisticalVariable'].map(STATVARS)
+                                elif "County" in input_file_name and "Ozone" in input_file_name:
+                                    data["statefips"] = data[
+                                        "statefips"].astype(str).str.zfill(2)
+                                    data["countyfips"] = data[
+                                        "countyfips"].astype(str).str.zfill(3)
+                                    data["dcid"] = "geoId/" + data[
+                                        "statefips"] + data["countyfips"]
+                                data.to_csv(output_file_path,
+                                            float_format='%.6f',
+                                            index=False)
+                                logging.info(
+                                    f"Finished cleaning file {output_file_name}!"
+                                )
+                        except Exception as e:
+                            logging.error(
+                                f"Error cleaning {input_file_name}: {e}")
+                            raise
     except Exception as e:
         logging.fatal(f"Error while processing the data: {e}")
 
