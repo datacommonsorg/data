@@ -12,7 +12,7 @@ Author: Padma Gundapaneni @padma-g
 ## About the Dataset
 
 ### Overview
-The state level data is aggragated from city level data coming from CDC500 import. 
+The state level data is aggregated from city level data coming from CDC500 import. 
 
 To get the data for this import run:
 ```bash
@@ -24,7 +24,7 @@ $ python3 process.py
 ### Artifacts
 
 #### Scripts
-[`process.py`](https://github.com/datacommonsorg/data/blob/master//scripts/us_cdc/cdc500_state/process.py)
+[`process.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/cdc500_state/process.py)
 
 
 #### tMCFs
