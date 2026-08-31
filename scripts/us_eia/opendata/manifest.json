@@ -19,7 +19,8 @@
                     "cleaned_csv": "gcs_output/COAL/COAL.csv"
                 }
             ],
-            "cron_schedule": "0 14 5,20 * *"
+            "cron_schedule": "0 14 5,20 * *",
+            "validation_config_file": "validation_config_EIA_Coal.json"
         },
         {
             "import_name": "EIA_Electricity",
@@ -45,7 +46,8 @@
                 "memory": 64,
                 "disk": 100
             },
-            "cron_schedule": "0 7 5,20 * *"
+            "cron_schedule": "0 7 5,20 * *",
+            "validation_config_file": "validation_config_EIA_Electricity.json"
         },
         {
             "import_name": "EIA_NaturalGas",
@@ -66,7 +68,8 @@
                     "cleaned_csv": "gcs_output/NG/NG.csv"
                 }
             ],
-            "cron_schedule": "0 8 5,20 * *"
+            "cron_schedule": "0 8 5,20 * *",
+            "validation_config_file": "validation_config_EIA_NaturalGas.json"
         },
         {
             "import_name": "EIA_NuclearOutages",
@@ -87,7 +90,8 @@
                     "cleaned_csv": "gcs_output/NUC_STATUS/NUC_STATUS.csv"
                 }
             ],
-            "cron_schedule": "0 9 5,20 * *"
+            "cron_schedule": "0 9 5,20 * *",
+            "validation_config_file": "validation_config_EIA_NuclearOutages.json"
         },
         {
             "import_name": "EIA_Petroleum",
@@ -108,7 +112,8 @@
                     "cleaned_csv": "gcs_output/PET/PET.csv"
                 }
             ],
-            "cron_schedule": "0 10 5,20 * *"
+            "cron_schedule": "0 10 5,20 * *",
+            "validation_config_file": "validation_config_EIA_Petroleum.json"
         },
         {
             "import_name": "EIA_International",
@@ -129,7 +134,8 @@
                     "cleaned_csv": "gcs_output/INTL/INTL.csv"
                 }
             ],
-            "cron_schedule": "0 11 5,20 * * *"
+            "cron_schedule": "0 11 5,20 * *",
+            "validation_config_file": "validation_config_EIA_International.json"
         },
         {
             "import_name": "EIA_SEDS",
@@ -150,7 +156,8 @@
                     "cleaned_csv": "gcs_output/SEDS/SEDS.csv"
                 }
             ],
-            "cron_schedule": "0 12 5,20 * *"
+            "cron_schedule": "0 12 5,20 * *",
+            "validation_config_file": "validation_config_EIA_SEDS.json"
         },
         {
             "import_name": "EIA_TotalEnergy",
@@ -171,7 +178,8 @@
                     "cleaned_csv": "gcs_output/TOTAL/TOTAL.csv"
                 }
             ],
-            "cron_schedule": "0 13 5,20 * *"
+            "cron_schedule": "0 13 5,20 * *",
+            "validation_config_file": "validation_config_EIA_TotalEnergy.json"
         }
     ]
 }
