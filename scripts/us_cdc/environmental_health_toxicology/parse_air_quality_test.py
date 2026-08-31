@@ -11,8 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import unittest
 import os
+import shutil
+import unittest
 from .parse_air_quality import clean_air_quality_data
 
 _MODULE_DIR = os.path.dirname(__file__)
@@ -125,6 +126,10 @@ class TestParseAirQuality(unittest.TestCase):
                         expected_csv_data = expected_csv_file.read().strip()
 
                     self.assertEqual(expected_csv_data, actual_csv_data)
+
+    def tearDown(self):
+        for data in TEST_DATA:
+            shutil.rmtree(data["output_dir"], ignore_errors=True)
 
 
 if __name__ == '__main__':
