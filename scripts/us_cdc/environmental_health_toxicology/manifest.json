@@ -20,11 +20,6 @@
                 "disk": 2000
             },
             "validation_config_file": "validation_config.json",
-            "config_override": {
-                "invoke_import_tool": true,
-                "invoke_differ_tool": true,
-                "user_script_timeout": 28800
-            },
             "import_inputs": [
                 {
                     "template_mcf": "PM25CensusTractPollution_part1.tmcf",
@@ -65,11 +60,6 @@
                 "disk": 2000
             },
             "validation_config_file": "validation_config.json",
-            "config_override": {
-                "invoke_import_tool": true,
-                "invoke_differ_tool": true,
-                "user_script_timeout": 28800
-            },
             "import_inputs": [
                 {
                     "template_mcf": "OzoneCensusTractPollution_part1.tmcf",
@@ -110,11 +100,6 @@
                 "disk": 500
             },
             "validation_config_file": "validation_config.json",
-            "config_override": {
-                "invoke_import_tool": true,
-                "invoke_differ_tool": true,
-                "user_script_timeout": 28800
-            },
             "import_inputs": [
                 {
                     "template_mcf": "PM25CountyPollution_part1.tmcf",
@@ -155,11 +140,6 @@
                 "disk": 500
             },
             "validation_config_file": "validation_config.json",
-            "config_override": {
-                "invoke_import_tool": true,
-                "invoke_differ_tool": true,
-                "user_script_timeout": 28800
-            },
             "import_inputs": [
                 {
                     "template_mcf": "OzoneCountyPollution.tmcf",
