@@ -78,8 +78,7 @@ def _local_markdown_links(text: str):
                 target = target[1:target.index('>')]
             else:
                 target = target.split(maxsplit=1)[0]
-            if (not target or '://' in target or target.startswith(
-                ('mailto:', 'chatgpt-conversation:'))):
+            if not target or '://' in target or target.startswith('mailto:'):
                 continue
             path, _, fragment = target.partition('#')
             if path or fragment:
@@ -329,13 +328,15 @@ class SkillContractTest(unittest.TestCase):
 
         for heading in ('## Safety',
                         '## Classify the request before loading context',
-                        '## Review cloud operations', '## Select an operation',
-                        '## Report evidence'):
+                        '## Review cloud configuration',
+                        '## Select an operation', '## Report evidence'):
             with self.subTest(heading=heading):
                 self.assertIn(heading, skill)
 
         for guardrail in (
                 'Treat GCP and the data repository as read-only',
+                'run it only after the user explicitly approves that command',
+                'Never update or delete the table',
                 'Never replace a missing identifier with a broad',
                 'complete attempt history, Workflow execution inspection',
                 'loader status, and execution of remediation as unsupported',
@@ -401,21 +402,29 @@ class SkillContractTest(unittest.TestCase):
         registry = yaml.safe_load(
             self._read('agents/common/config/import-environments.yaml'))
         skill = self._skill_path.read_text(encoding='utf-8')
-        required_fields = {
-            'scheduler': {'project', 'location'},
-            'workflow': {'project', 'location', 'import_workflow'},
-            'batch': {'project', 'location'},
-            'gcs': {'client_project', 'output_bucket'},
-            'spanner': {'project', 'instance', 'database'},
+        expected_environments = {
+            'prod': {
+                'scheduler': {'project', 'location'},
+                'workflow': {'project', 'location', 'import_workflow'},
+                'batch': {'project', 'location'},
+                'gcs': {'client_project', 'output_bucket'},
+                'spanner': {'project', 'instance', 'database'},
+            },
+            'test': {
+                'batch': {'project', 'location'},
+                'gcs': {'output_bucket'},
+            },
         }
 
         self.assertIn('../../common/config/import-environments.yaml', skill)
         self.assertEqual({'default_environment', 'environments'}, set(registry))
         self.assertEqual('prod', registry['default_environment'])
-        self.assertEqual({'prod', 'staging'}, set(registry['environments']))
+        self.assertEqual(set(expected_environments),
+                         set(registry['environments']))
 
-        for name, environment in registry['environments'].items():
+        for name, required_fields in expected_environments.items():
             with self.subTest(environment=name):
+                environment = registry['environments'][name]
                 self.assertEqual(set(required_fields), set(environment))
                 for section, fields in required_fields.items():
                     self.assertEqual(fields, set(environment[section]))
