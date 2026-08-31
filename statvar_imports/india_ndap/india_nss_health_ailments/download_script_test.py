@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import os
 import sys
 import unittest
@@ -87,10 +88,9 @@ class DownloadScriptTest(unittest.TestCase):
         mock_retry.side_effect = [mock_response_page1, mock_response_page2]
 
         # Run the function
-        data, output_dir = download_script.download_data('gs://fake/path')
+        data = download_script.download_data('gs://fake/path')
 
         # Assertions
-        self.assertEqual(output_dir, '')
         self.assertEqual(len(data), 1)
         self.assertEqual(data[0][0], 'State1')
         self.assertEqual(data[0][8], '2017')
@@ -106,18 +106,38 @@ class DownloadScriptTest(unittest.TestCase):
     @patch('download_script.load_config')
     def test_download_data_no_url(self, mock_load_config):
         mock_load_config.return_value = {}
-        data, output_dir = download_script.download_data('gs://fake/path')
+        data = download_script.download_data('gs://fake/path')
         self.assertEqual(data, [])
-        self.assertEqual(output_dir, '')
 
     @patch('download_script.load_config')
     @patch('download_script._retry_method')
-    def test_download_data_retry_fails(self, mock_retry, mock_load_config):
+    @patch('download_script.logging.fatal')
+    def test_download_data_retry_fails(self, mock_fatal, mock_retry,
+                                       mock_load_config):
         mock_load_config.return_value = {'url': 'http://fake-api.com?param=1'}
         mock_retry.return_value = None
-        with self.assertRaises(RuntimeError) as ctx:
+        mock_fatal.side_effect = SystemExit('Fatal error')
+        with self.assertRaises(SystemExit):
             download_script.download_data('gs://fake/path')
-        self.assertIn('Failed to retrieve data from page 1', str(ctx.exception))
+        mock_fatal.assert_called_once_with(
+            'Failed to retrieve data from %s (page %d)',
+            'http://fake-api.com?param=1&pageno=1', 1)
+
+    @patch('download_script.load_config')
+    @patch('download_script._retry_method')
+    @patch('download_script.logging.fatal')
+    def test_download_data_json_decode_error(self, mock_fatal, mock_retry,
+                                            mock_load_config):
+        mock_load_config.return_value = {'url': 'http://fake-api.com?param=1'}
+        mock_response = Mock()
+        mock_response.json.side_effect = json.JSONDecodeError('Expecting value', '', 0)
+        mock_retry.return_value = mock_response
+        mock_fatal.side_effect = SystemExit('Fatal error')
+        with self.assertRaises(SystemExit):
+            download_script.download_data('gs://fake/path')
+        mock_fatal.assert_called_once()
+        self.assertIn('Failed to parse JSON from %s (page %d):',
+                      mock_fatal.call_args[0][0])
 
     @patch('pandas.DataFrame')
     def test_preprocess_and_save(self, mock_df_constructor):
@@ -126,7 +146,7 @@ class DownloadScriptTest(unittest.TestCase):
                  '2017', '2018', '2017', '2017')]
 
         # Run the function
-        download_script.preprocess_and_save(data, '')
+        download_script.preprocess_and_save(data)
 
         # Get the DataFrame instance
         self.assertEqual(mock_df_constructor.call_count, 1)
@@ -150,16 +170,16 @@ class DownloadScriptTest(unittest.TestCase):
 
     @patch('pandas.DataFrame')
     def test_preprocess_and_save_empty_data(self, mock_df_constructor):
-        download_script.preprocess_and_save([], '')
+        download_script.preprocess_and_save([])
         mock_df_constructor.assert_not_called()
 
     @patch('download_script.download_data')
     @patch('download_script.preprocess_and_save')
     def test_main(self, mock_preprocess_and_save, mock_download_data):
-        mock_download_data.return_value = ([('data',)], '')
+        mock_download_data.return_value = [('data',)]
         download_script.main(None)
         mock_download_data.assert_called_once()
-        mock_preprocess_and_save.assert_called_once_with([('data',)], '')
+        mock_preprocess_and_save.assert_called_once_with([('data',)])
 
 
 if __name__ == '__main__':

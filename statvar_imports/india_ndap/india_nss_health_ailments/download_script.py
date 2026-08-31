@@ -92,15 +92,13 @@ def load_config(path: str) -> dict:
     return file_util.file_load_py_dict(path)
 
 
-def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
+def download_data(config_file_path: str) -> List[Tuple]:
     """Downloads data using configuration."""
     file_config = load_config(config_file_path)
     url = file_config.get('url')
-    # We ignore the 'input_files' from config to save in the current directory
-    output_dir = ''
 
     if not url:
-        return [], ''
+        return []
 
     all_data = []
     page_num = 1
@@ -108,14 +106,14 @@ def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
         api_url = f'{url}&pageno={page_num}'
         response = _retry_method(api_url, None, 3, 5, 2)
         if not response:
-            logging.fatal('Failed to retrieve data from page %d', page_num)
-            raise RuntimeError(f'Failed to retrieve data from page {page_num}')
+            logging.fatal('Failed to retrieve data from %s (page %d)', api_url,
+                          page_num)
 
         try:
             response_data = response.json()
-        except json.JSONDecodeError:
-            logging.error('Failed to parse JSON from page %d', page_num)
-            break
+        except json.JSONDecodeError as e:
+            logging.fatal('Failed to parse JSON from %s (page %d): %s', api_url,
+                          page_num, e)
 
         if response_data and 'Data' in response_data and response_data['Data']:
             for item in response_data['Data']:
@@ -140,10 +138,10 @@ def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
             logging.info('No more data found on page %d.', page_num)
             break
 
-    return all_data, output_dir
+    return all_data
 
 
-def preprocess_and_save(data: List[Tuple], output_dir: str) -> None:
+def preprocess_and_save(data: List[Tuple]) -> None:
     """Saves data to CSV directly in the script directory."""
     if not data:
         logging.info('No data was retrieved from the API.')
@@ -158,9 +156,9 @@ def preprocess_and_save(data: List[Tuple], output_dir: str) -> None:
 
 
 def main(_) -> None:
-    raw_data, output_dir = download_data(_FLAGS.config_file_path)
+    raw_data = download_data(_FLAGS.config_file_path)
     if raw_data:
-        preprocess_and_save(raw_data, output_dir)
+        preprocess_and_save(raw_data)
 
 
 if __name__ == '__main__':
