@@ -40,8 +40,7 @@ def download_files(importname, configs):
         with requests.get(url, stream=True) as response:
             response.raise_for_status()
             with open(filename, 'wb') as f:
-                for chunk in response.iter_content(
-                        chunk_size=16 * 1024 * 1024):
+                for chunk in response.iter_content(chunk_size=16 * 1024 * 1024):
                     if chunk:
                         f.write(chunk)
 

@@ -106,7 +106,8 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                         try:
                             if "County" in input_file_name and "PM" in input_file_name:
                                 num_shards = 4
-                                base_name, ext = os.path.splitext(output_file_name)
+                                base_name, ext = os.path.splitext(
+                                    output_file_name)
                                 shard_paths = []
                                 for idx in range(num_shards):
                                     shard_file_name = f"{base_name}_{idx}{ext}"
@@ -146,8 +147,9 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
 
                                     if first_chunk:
                                         for p in shard_paths:
-                                            pd.DataFrame(columns=chunk.columns).to_csv(
-                                                p, index=False)
+                                            pd.DataFrame(
+                                                columns=chunk.columns).to_csv(
+                                                    p, index=False)
                                         first_chunk = False
 
                                     start_idx = 0
@@ -164,16 +166,16 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                         sub_chunk = chunk.iloc[
                                             start_idx:end_idx]
 
-                                        sub_chunk.to_csv(
-                                            shard_paths[shard_idx],
-                                            mode='a',
-                                            header=False,
-                                            float_format='%.6f',
-                                            index=False)
+                                        sub_chunk.to_csv(shard_paths[shard_idx],
+                                                         mode='a',
+                                                         header=False,
+                                                         float_format='%.6f',
+                                                         index=False)
                                         shard_written += len(sub_chunk)
                                         start_idx = end_idx
 
-                                        if shard_idx < num_shards - 1 and shard_written >= shard_sizes[shard_idx]:
+                                        if shard_idx < num_shards - 1 and shard_written >= shard_sizes[
+                                                shard_idx]:
                                             shard_idx += 1
                                             shard_written = 0
 
@@ -221,11 +223,10 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                             ],
                                             var_name='StatisticalVariable',
                                             value_name='Value')
-                                    data.rename(
-                                        columns={
-                                            census_tract + '_stdd': 'Error'
-                                        },
-                                        inplace=True)
+                                    data.rename(columns={
+                                        census_tract + '_stdd': 'Error'
+                                    },
+                                                inplace=True)
                                     max_length = data['ctfips'].astype(
                                         str).str.len().max()
                                     data['ctfips'] = data['ctfips'].astype(

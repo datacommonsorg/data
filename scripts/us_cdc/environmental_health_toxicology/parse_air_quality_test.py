@@ -68,10 +68,8 @@ TEST_DATA = [{
                      f"PM25county_{i}.csv") for i in range(4)
     ],
     "files": [{
-        "input_file_name":
-            "PM2.5County_input_0.csv",
-        "output_file_name":
-            "PM25county.csv"
+        "input_file_name": "PM2.5County_input_0.csv",
+        "output_file_name": "PM25county.csv"
     }]
 }, {
     "import_name":
