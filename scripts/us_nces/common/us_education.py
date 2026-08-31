@@ -940,11 +940,10 @@ class USEducation:
                     #If current year data is already there in main df - merge the columns
 
                     # Combine place columns of the same year with key columns
-                    df_dist_tmp = (
-                        df_dist_tmp.set_index(self._key_col_place)
-                        .combine_first(df_place.set_index(self._key_col_place))
-                        .reset_index()
-                    )
+                    df_dist_tmp = (df_dist_tmp.set_index(
+                        self._key_col_place).combine_first(
+                            df_place.set_index(
+                                self._key_col_place)).reset_index())
 
                 else:
                     # The current year data not present in final df
