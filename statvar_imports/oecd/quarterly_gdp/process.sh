@@ -28,5 +28,6 @@ python3 "$PROJECT_ROOT/tools/statvar_importer/stat_var_processor.py" \
   --input_data="$SCRIPT_DIR/input/oecd_gdp_data.csv" \
   --pv_map="$SCRIPT_DIR/pvmap.csv" \
   --config_file="$SCRIPT_DIR/metadata.csv" \
+  --existing_statvar_mcf="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" \
   --output_path="$SCRIPT_DIR/output/oecd_quarterly_gdp" \
   --output_counters="$SCRIPT_DIR/oecd_quarterly_gdp/validation/statvar_counters.csv"

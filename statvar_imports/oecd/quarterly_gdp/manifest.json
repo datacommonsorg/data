@@ -14,7 +14,8 @@
         "process.sh"
       ],
       "source_files": [
-        "input/*"
+        "input/*",
+        "counters/*"
       ],
       "import_inputs": [
         {
