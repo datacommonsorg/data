@@ -16,6 +16,8 @@
 import pandas as pd
 import re
 
+DIFFER_COLUMNS = ['StatVar', 'ADDED', 'DELETED', 'MODIFIED']
+
 
 def filter_dataframe(df: pd.DataFrame,
                      dcids: list[str] = None,

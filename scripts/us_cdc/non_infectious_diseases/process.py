@@ -73,13 +73,13 @@ _SV_BASE_MAP = {
 }
 dataset_id = "5xkq-dg7x"
 domain = "data.cdc.gov"
-client = Socrata(domain, None)
+client = Socrata(domain, None, timeout=60)
 filename = "NationalOutbreakPublicDataTool.xlsx"
 sheet_name = "Outbreak Data"
-base_path = "./data"
-schema_map_path = f"{base_path}/col_map_exc_food.json"
-input_directory = f"{base_path}/input_files"
-output_directory = f"{base_path}/output"
+base_path = os.path.join(_SCRIPT_PATH, "data")
+schema_map_path = os.path.join(base_path, "col_map_exc_food.json")
+input_directory = os.path.join(base_path, "input_files")
+output_directory = os.path.join(base_path, "output")
 sheet_name = "Outbreak Data"
 os.makedirs(input_directory, exist_ok=True)
 os.makedirs(output_directory, exist_ok=True)
@@ -91,7 +91,9 @@ def download_data_from_api(column_mapping=None):
         logging.info('Downloading starts')
         # Get the total number of records dynamically
         count_url = f"https://{domain}/resource/{dataset_id}.json?$select=count(*)"
-        count_response = requests.get(count_url)
+        logging.info(f"Fetching total record count from: {count_url}")
+        # add a timeout to the request to avoid hanging indefinitely
+        count_response = requests.get(count_url, timeout=30)
 
         if count_response.status_code == 200:
             total_records_data = count_response.json()
@@ -102,22 +104,23 @@ def download_data_from_api(column_mapping=None):
                 total_records = int(total_records_data[0]["count"])
                 logging.info(f"Total records available: {total_records}")
             else:
-                logging.error(
+                logging.fatal(
                     "Could not retrieve the total number of records from the API."
                 )
-                return
         else:
             logging.fatal(
-                f"Error fetching total record count: Received status code {count_response.status_code}"
+                f"Error fetching total record count from {count_url}: Received status code {count_response.status_code}"
             )
-            return
 
         limit = 10000  # Set a reasonable limit for each request
         offset = 0
         all_data = []
 
         while offset < total_records:
-            logging.info(f"Downloading records {offset} to {offset + limit}")
+            request_url = f"https://{domain}/resource/{dataset_id}.json?$limit={limit}&$offset={offset}"
+            logging.info(
+                f"Downloading records from {request_url} (offset {offset} to {offset + limit})"
+            )
             results = client.get(dataset_id, limit=limit, offset=offset)
             if not results:
                 logging.info("No more data available.")
@@ -154,7 +157,7 @@ def fix_date_format(df: pd.DataFrame) -> pd.DataFrame:
         df.drop(columns=['Year', 'Month'], inplace=True)
         return df
     except Exception as e:
-        logging.error(f"Error while generating observationDate : {e}")
+        logging.fatal(f"Error while generating observationDate : {e}")
 
 
 def generate_aggregates(df: pd.DataFrame,
@@ -171,22 +174,24 @@ def generate_aggregates(df: pd.DataFrame,
     """
     try:
         logging.info(f"Generating aggregates grouped by: {groupby_cols}")
-        country_stat_df = df[df['observationAbout'].str.contains('country')]
+        country_stat_df = df[df['observationAbout'].str.contains('country',
+                                                                 na=False)]
         cols = groupby_cols + _STAT_COLS
         country_stat_df = country_stat_df[cols]
         country_stat_df = country_stat_df.groupby(groupby_cols,
                                                   as_index=False).agg({
-                                                      'Illnesses': sum,
-                                                      'Hospitalizations': sum,
-                                                      'Deaths': sum
+                                                      'Illnesses': 'sum',
+                                                      'Hospitalizations': 'sum',
+                                                      'Deaths': 'sum'
                                                   })
 
         # aggreagte stats for US states and territories
-        aggregate_df = df[~(df['observationAbout'].str.contains('country'))]
+        aggregate_df = df[~(
+            df['observationAbout'].str.contains('country', na=False))]
         aggregate_df = aggregate_df.groupby(groupby_cols, as_index=False).agg({
-            'Illnesses': sum,
-            'Hospitalizations': sum,
-            'Deaths': sum
+            'Illnesses': 'sum',
+            'Hospitalizations': 'sum',
+            'Deaths': 'sum'
         })
 
         # aggregate for US at country level
@@ -195,9 +200,9 @@ def generate_aggregates(df: pd.DataFrame,
         ]
         us_aggreagte_df = aggregate_df.groupby(country_group_by,
                                                as_index=False).agg({
-                                                   'Illnesses': sum,
-                                                   'Hospitalizations': sum,
-                                                   'Deaths': sum
+                                                   'Illnesses': 'sum',
+                                                   'Hospitalizations': 'sum',
+                                                   'Deaths': 'sum'
                                                })
         us_aggreagte_df['observationAbout'] = 'country/USA'
 
@@ -226,7 +231,6 @@ def make_stat_vars(row, PV_MAP):
         dict: A dictionary of statistical variables.
     """
     try:
-        logging.info(f"Generating Statvars.")
         row['variableMeasured'] = ''
         row['sv_dict'] = {}
         sv_dict = _SV_BASE_MAP[row['variable']].copy()
@@ -293,15 +297,20 @@ def write_svdicts_to_file(dict_list, file_path):
     """
     try:
         logging.info(f"writing svs in a file .. ")
-        unique_dict = [
-            dict(tup) for tup in {tuple(d.items()) for d in dict_list}
-        ]
-        f = open(file_path, "w")
-        for udict in unique_dict:
-            for p, v in udict.items():
-                f.write(p + ": " + v + "\n")
-            f.write('\n')
-        f.close()
+        # Deduplicate deterministically using JSON with sorted keys
+        seen = set()
+        unique_dicts = []
+        for d in dict_list:
+            sd = json.dumps(d, sort_keys=True)
+            if sd not in seen:
+                seen.add(sd)
+                unique_dicts.append(d)
+
+        with open(file_path, "w") as f:
+            for udict in unique_dicts:
+                for p, v in udict.items():
+                    f.write(p + ": " + str(v) + "\n")
+                f.write('\n')
 
     except Exception as e:
         logging.fatal(f"An error occurred, while writing to file . : {e}")
@@ -324,18 +333,31 @@ def fix_place_names(clean_df):
         clean_df.drop(columns=['State'], inplace=True)
         return clean_df
     except Exception as e:
-        logging.error(f"Error while fixing place name : {e}")
+        logging.fatal(f"Error while fixing place name : {e}")
 
 
-def process_non_infectious_data() -> None:
+def process_non_infectious_data(input_file_path: str = None,
+                                sheet: str = None,
+                                schema_path: str = None,
+                                output_dir: str = None) -> None:
     try:
         logging.info(f"Processing starts.")
-        f = open(schema_map_path, 'r')
-        PV_MAP = json.load(f)
-        f.close()
-        df = pd.read_excel(input_path, sheet_name=sheet_name)
-        # The dataset is sparse and hence, all null or empty values are replaced with empty string for easier processing and data manipulation
-        df = df[~df.isna()]
+        target_schema = schema_path if schema_path else schema_map_path
+        target_input = input_file_path if input_file_path else input_path
+        target_sheet = sheet if sheet else sheet_name
+        target_output = output_dir if output_dir else output_directory
+        os.makedirs(target_output, exist_ok=True)
+
+        with open(target_schema, 'r') as f:
+            PV_MAP = json.load(f)
+
+        df = pd.read_excel(target_input, sheet_name=target_sheet)
+        # The dataset is sparse; missing or null statistical counts (Illnesses, Hospitalizations, Deaths)
+        # are filled with 0 to prevent NaN propagation during aggregation and ensure all observations are emitted.
+        for col in _STAT_COLS:
+            if col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
+
         # fix the date format and resolve the place to dcids
         df = fix_date_format(df)
         df = fix_place_names(df)
@@ -381,11 +403,12 @@ def process_non_infectious_data() -> None:
             'variable', 'Primary Mode', 'Etiology', 'Etiology Status'
         ]]
         sv_df = sv_df.drop_duplicates()
+        logging.info("Generating Statvars.")
         sv_df = sv_df.apply(make_stat_vars, args=(PV_MAP,), axis=1)
 
         # write statvar_dct to mcf file
         sv_dict_list = sv_df['sv_dict'].values.tolist()
-        mcf_file_path = os.path.join(output_directory, f'{_FILE_PREFIX}.mcf')
+        mcf_file_path = os.path.join(target_output, f'{_FILE_PREFIX}.mcf')
         write_svdicts_to_file(sv_dict_list, mcf_file_path)
 
         sv_df = sv_df[[
@@ -403,21 +426,25 @@ def process_non_infectious_data() -> None:
             ],
             how='left')
 
-        # empty strings for  null etiology and etiology status values
-        clean_df = clean_df.fillna('')
-        clean_df = clean_df[(clean_df['value'] != '') |
-                            (clean_df['observationAbout'] != '')]
+        # empty strings for null etiology and etiology status values
+        for c in ['Etiology', 'Etiology Status', 'Primary Mode']:
+            if c in clean_df.columns:
+                clean_df[c] = clean_df[c].fillna('')
+
+        clean_df = clean_df.dropna(subset=['value'])
+        clean_df = clean_df[clean_df['value'] != '']
         # another check to ensure there is only 1 Etiology in the clean_csv
         clean_df = clean_df[~(clean_df['Etiology'].str.contains(';'))]
         # removing unused columns
         clean_df.drop(
             columns=['variable', 'Primary Mode', 'Etiology', 'Etiology Status'],
             inplace=True)
-        clean_df.to_csv(f'{output_directory}/{_FILE_PREFIX}.csv', index=False)
+        clean_df.to_csv(os.path.join(target_output, f'{_FILE_PREFIX}.csv'),
+                        index=False)
 
-        f = open(f"{output_directory}/{_FILE_PREFIX}.tmcf", "w")
-        f.write(_TEMPLATE_MCF)
-        f.close()
+        with open(os.path.join(target_output, f"{_FILE_PREFIX}.tmcf"),
+                  "w") as f:
+            f.write(_TEMPLATE_MCF)
     except Exception as e:
         logging.fatal(f"Error while processing : {e}")
 
