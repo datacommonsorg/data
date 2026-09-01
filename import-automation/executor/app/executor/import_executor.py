@@ -17,6 +17,7 @@ based on manifests.
 """
 
 import dataclasses
+import fnmatch
 import glob
 import json
 import logging
@@ -888,6 +889,68 @@ class ImportExecutor:
         logging.info(f'Updated import staging version {version}')
 
     @log_function_call
+    def _ingest_historic_data(
+        self,
+        output_dir: str,
+        version: str,
+        historic_folder: str = 'historic',
+        import_summary: Optional[ImportStatusSummary] = None,
+    ) -> None:
+        """Copies historic data files from GCS to the version genmcf folder.
+
+        Copies all files from gs://<bucket>/<output_dir>/<historic_folder> to
+        gs://<bucket>/<output_dir>/<version>/historic/genmcf.
+
+        Args:
+            output_dir: Path to the output directory, as a string.
+            version: Current version string.
+            historic_folder: Folder name containing historic data, defaults to 'historic'.
+            import_summary: ImportStatusSummary object to update with stats.
+        """
+        logging.info(
+            f'Ingesting historic data for {output_dir}, version {version}')
+        copied_files_count = 0
+        historic_data_size = 0
+        if self.config.skip_gcs_upload:
+            logging.info(
+                'Skipping GCS historic data ingestion due to skip_gcs_upload=True'
+            )
+            return
+
+        try:
+            storage_client = storage.Client(self.config.gcs_project_id)
+            bucket = storage_client.bucket(self.config.storage_prod_bucket_name)
+            source_prefix = f'{output_dir}/{historic_folder}/'
+            blobs = list(bucket.list_blobs(prefix=source_prefix))
+            for blob in blobs:
+                rel_path = blob.name[len(source_prefix):]
+                if not rel_path or rel_path.endswith('/'):
+                    continue
+                if not fnmatch.fnmatch(os.path.basename(rel_path), '*.mcf*'):
+                    continue
+                if rel_path.startswith('genmcf/'):
+                    rel_path = rel_path[len('genmcf/'):]
+                dest_blob_name = f'{output_dir}/{version}/historic/genmcf/{rel_path}'
+                logging.info(
+                    f'Copying historic GCS blob {blob.name} to {dest_blob_name}'
+                )
+                bucket.copy_blob(blob, bucket, dest_blob_name)
+                copied_files_count += 1
+                if blob.size:
+                    historic_data_size += blob.size
+        except Exception as e:
+            logging.error(f'Failed to copy historic data from GCS: {e}')
+            raise
+
+        if import_summary:
+            import_summary.import_stats[
+                'historic_data_size'] = historic_data_size
+            import_summary.data_volume += historic_data_size
+        logging.info(
+            f'Completed historic data ingestion: {copied_files_count} files copied, '
+            f'{historic_data_size} bytes.')
+
+    @log_function_call
     def _import_one_helper(
         self,
         repo_dir: str,
@@ -985,6 +1048,11 @@ class ImportExecutor:
                 import_summary.import_stats.get('mcf_data_size', 0) +
                 import_summary.import_stats.get('validation_data_size', 0))
             logging.info(import_summary)
+
+            if self.config.ingest_historic_data:
+                self._ingest_historic_data(output_dir=output_dir,
+                                           version=version,
+                                           import_summary=import_summary)
 
             self._update_latest_version(version, output_dir, import_spec,
                                         import_summary)
