@@ -106,24 +106,20 @@ INNER JOIN svo_count AS c
 GROUP BY 1, 2, 3, 4, 5
 """
 
-def get_query() -> str:
-    """Returns the SQL query string for CDC 500 state aggregation."""
-    return QUERY
-
-def run_process(client: bigquery.Client, output_file: str) -> pd.DataFrame:
+def run_process(client: bigquery.Client, output_file: str) -> None:
     """Executes the BigQuery query and writes the resulting DataFrame to output_file."""
     logging.info("Running BigQuery aggregation query...")
     try:
-        query_job = client.query(get_query())
+        query_job = client.query(QUERY)
     except Exception as e:
-        logging.fatal("Failed to submit BigQuery query: %s", e)
+        logging.error("Failed to submit BigQuery query: %s", e)
         raise
 
     logging.info("Fetching query results into dataframe...")
     try:
         df = query_job.to_dataframe()
     except Exception as e:
-        logging.fatal("Failed to fetch query results into dataframe: %s", e)
+        logging.error("Failed to fetch query results into dataframe: %s", e)
         raise
 
     output_dir = os.path.dirname(output_file)
@@ -131,7 +127,6 @@ def run_process(client: bigquery.Client, output_file: str) -> pd.DataFrame:
         os.makedirs(output_dir, exist_ok=True)
     logging.info("Writing %d rows to %s", len(df), output_file)
     df.to_csv(output_file, index=False)
-    return df
 
 def main(argv):
     del argv  # Unused.

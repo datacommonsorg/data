@@ -23,8 +23,8 @@ from scripts.us_cdc.cdc500_state import process
 
 class CDC500StateProcessTest(unittest.TestCase):
 
-    def test_get_query(self):
-        query = process.get_query()
+    def test_query_constants(self):
+        query = process.QUERY
         self.assertIn("spanner_dc_graph_prod_DEFAULT.TimeSeries", query)
         self.assertIn("spanner_dc_graph_prod_DEFAULT.Observation", query)
         self.assertIn("dc/base/CDC500", query)
@@ -46,7 +46,7 @@ class CDC500StateProcessTest(unittest.TestCase):
         
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
-            result_df = process.run_process(mock_client, output_file)
+            process.run_process(mock_client, output_file)
             
             mock_client.query.assert_called_once()
             self.assertTrue(os.path.exists(output_file))
