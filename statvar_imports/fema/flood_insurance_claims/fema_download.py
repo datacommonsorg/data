@@ -70,8 +70,7 @@ def get_total_records(api_url):
         return total_count
     except requests.exceptions.RequestException as e:
         logging.error("Failed to get total record count: %s", e)
-        raise RuntimeError(
-            'Failed to get total record count.')
+        raise RuntimeError('Failed to get total record count.')
     except (ValueError, KeyError, TypeError) as e:
         logging.error(
             "Failed to parse the total record count from the response: %s", e)
@@ -124,19 +123,18 @@ def download_data(api_url: str,
             if not download_success:
                 raise RuntimeError("download_file returned False")
             downloaded_files = [
-                os.path.join(temp_dir, f)
-                for f in os.listdir(temp_dir)
+                os.path.join(temp_dir, f) for f in os.listdir(temp_dir)
                 if os.path.isfile(os.path.join(temp_dir, f))
             ]
-            if not downloaded_files:
-                raise RuntimeError("No files found in temp_dir after download")
+            if not downloaded_files or os.path.getsize(
+                    downloaded_files[0]) == 0:
+                raise RuntimeError("Bulk download file is missing or empty.")
             src_file = downloaded_files[0]
             if os.path.exists(final_filepath):
                 os.remove(final_filepath)
             shutil.move(src_file, final_filepath)
-            logging.info(
-                "Direct bulk download complete. Saved to: %s",
-                final_filepath)
+            logging.info("Direct bulk download complete. Saved to: %s",
+                         final_filepath)
             return
         except Exception as e:
             logging.warning(
@@ -156,8 +154,7 @@ def download_data(api_url: str,
     if total_records == 0:
         logging.error(
             "Total records returned 0 from API metadata. Cannot proceed.")
-        raise RuntimeError(
-            'Download failed: API metadata reported 0 records.')
+        raise RuntimeError('Download failed: API metadata reported 0 records.')
 
     skip_count = 0
     records_downloaded = 0
@@ -219,11 +216,19 @@ def download_data(api_url: str,
                                 f_temp.write(b'\n')
 
             lines = content.strip(b'\r\n').split(b'\n')
-            num_records_in_chunk = max(0, len(lines) - 1) if lines and lines[0] else 0
+            num_records_in_chunk = max(0,
+                                       len(lines) -
+                                       1) if lines and lines[0] else 0
             records_downloaded += num_records_in_chunk
 
             logging.info("Downloaded %s of %s records.", records_downloaded,
                          total_records)
+
+            if num_records_in_chunk == 0:
+                logging.warning(
+                    "Received empty chunk at skip=%s before reaching total_records (%s). Exiting loop.",
+                    skip_count, total_records)
+                break
 
             if num_records_in_chunk < PAGE_SIZE:
                 logging.info(
