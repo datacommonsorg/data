@@ -136,17 +136,21 @@ class USAirEmissionTrends:
         elif '2017' in file_path:
             if 'Event' in file_path:
                 df['pollutant type(s)'] = 'nan'
-            elif 'point' in file_path:
+            elif 'point_' in os.path.basename(file_path) or 'facility_process' in file_path:
                 if 'unknown' in file_path or '678910' in file_path:
                     df.rename(columns=replacement_point_17, inplace=True)
+                df['emissions type code'] = ''
+            elif 'nonpoint' in file_path:
                 df['emissions type code'] = ''
             df['year'] = '2017'
         elif '2020' in file_path:
             if 'Event' in file_path:
                 df['pollutant type(s)'] = 'nan'
-            elif 'point' in file_path:
+            elif 'point_' in os.path.basename(file_path) or 'facility_process' in file_path:
                 if 'unknown' in file_path:
                     df.rename(columns=replacement_20, inplace=True)
+                df['emissions type code'] = ''
+            elif 'nonpoint' in file_path:
                 df['emissions type code'] = ''
             df['year'] = '2020'
         elif 'tribes' in file_path:
@@ -227,7 +231,7 @@ class USAirEmissionTrends:
                                               errors='coerce')
             return df
         except Exception as e:
-            logging.error(f"Error processing file {file_path}: {e}")
+            logging.fatal(f"Error processing file {file_path}: {e}")
             return pd.DataFrame()
 
     def _process_file(self, file_path: str) -> None:
@@ -245,7 +249,7 @@ class USAirEmissionTrends:
                 logging.info(
                     f"Saved intermediate file at : {intermediate_file_path}")
         except Exception as e:
-            logging.error(f"Error processing file {file_path}: {e}")
+            logging.fatal(f"Error processing file {file_path}: {e}")
 
     def _mcf_property_generator(self) -> None:
         """
@@ -303,7 +307,7 @@ class USAirEmissionTrends:
         logging.info("Starting data processing across all input files.")
         with concurrent.futures.ThreadPoolExecutor(
                 max_workers=MAX_WORKERS) as executor:
-            executor.map(self._process_file, self._input_files)
+            list(executor.map(self._process_file, self._input_files))
 
         logging.info("Consolidating intermediate files.")
         intermediate_files = [
@@ -315,11 +319,10 @@ class USAirEmissionTrends:
                 dfs.append(pd.read_csv(f, low_memory=False))
                 logging.info(f"Appending {f}")
             except Exception as e:
-                logging.error(f"Error reading intermediate file {f}: {e}")
+                logging.fatal(f"Error reading intermediate file {f}: {e}")
 
         if not dfs:
-            logging.error("No dataframes to concatenate. Exiting.")
-            return
+            logging.fatal("No dataframes to concatenate. Exiting.")
 
         self.final_df = pd.concat(dfs, ignore_index=True)
 
@@ -430,7 +433,7 @@ def process_files(input_path: str, output_file_path: str,
         loader.generate_mcf()
         loader.generate_tmcf()
     except Exception as e:
-        logging.error(f"An unexpected error occurred: {e}")
+        logging.fatal(f"An unexpected error occurred: {e}")
 
 
 def main(_):
