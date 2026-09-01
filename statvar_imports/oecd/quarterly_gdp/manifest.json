@@ -15,7 +15,7 @@
       ],
       "source_files": [
         "input/*",
-        "counters/*"
+        "oecd_quarterly_gdp/validation/statvar_counters.csv"
       ],
       "import_inputs": [
         {
