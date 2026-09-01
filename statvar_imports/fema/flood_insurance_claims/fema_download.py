@@ -55,7 +55,10 @@ def get_total_records(api_url):
         api_url (str): The base URL of the API endpoint.
 
     Returns:
-        int: The total number of records, or None if the request fails.
+        int: The total number of records.
+
+    Raises:
+        RuntimeError: If the request fails or the response cannot be parsed.
     """
     count_url = f"{api_url}?$count=true"
     logging.info("Getting total record count from: %s", count_url)
@@ -130,6 +133,19 @@ def download_data(api_url: str,
                     downloaded_files[0]) == 0:
                 raise RuntimeError("Bulk download file is missing or empty.")
             src_file = downloaded_files[0]
+
+            # Validate that the bulk download file is a valid CSV and not an HTML error/maintenance page.
+            with open(src_file, 'r', encoding='utf-8', errors='replace') as f:
+                first_line = f.readline().strip()
+
+            lower_first_line = first_line.lower()
+            if lower_first_line.startswith(('<html', '<!doctype')):
+                raise RuntimeError(
+                    "Bulk download file appears to be an HTML page, not a CSV.")
+            if 'policycount' not in lower_first_line and 'dateofloss' not in lower_first_line:
+                raise RuntimeError(
+                    "Bulk download file is missing expected CSV header columns.")
+
             if os.path.exists(final_filepath):
                 os.remove(final_filepath)
             shutil.move(src_file, final_filepath)
@@ -147,10 +163,6 @@ def download_data(api_url: str,
     # 2. Fallback to API pagination
     # Get the total number of records from the API for a reliable failsafe.
     total_records = get_total_records(api_url)
-    if total_records is None:
-        logging.error("Could not get the total record count. Cannot proceed.")
-        raise RuntimeError(
-            'Download failed due to could not get the total record count.')
     if total_records == 0:
         logging.error(
             "Total records returned 0 from API metadata. Cannot proceed.")
@@ -174,12 +186,13 @@ def download_data(api_url: str,
             csv_url = f"{api_url}?$format=csv&$top={PAGE_SIZE}&$skip={skip_count}"
             logging.info("Requesting data from: %s", csv_url)
 
-            # The download utility appends an .xlsx extension when format is in query param.
-            util_output_filename = "FimaNfipClaims.xlsx"
-            util_output_path = os.path.join(temp_dir, util_output_filename)
-
-            chunk_filename = f"FimaNfipClaims_{skip_count}.csv"
-            chunk_filepath = os.path.join(temp_dir, chunk_filename)
+            # Clean up any leftover chunk files before downloading the next chunk.
+            merged_filename = os.path.basename(temp_merged_filepath)
+            for f in os.listdir(temp_dir):
+                if f != merged_filename:
+                    file_to_remove = os.path.join(temp_dir, f)
+                    if os.path.isfile(file_to_remove):
+                        os.remove(file_to_remove)
 
             download_success = download_file(url=csv_url,
                                              output_folder=temp_dir,
@@ -188,18 +201,26 @@ def download_data(api_url: str,
                                              delay=10,
                                              backoff=2)
 
-            if not download_success or not os.path.exists(util_output_path):
+            chunk_files = [
+                os.path.join(temp_dir, f)
+                for f in os.listdir(temp_dir)
+                if f != merged_filename and os.path.isfile(os.path.join(temp_dir, f))
+            ]
+
+            if not download_success or not chunk_files:
                 logging.error(
                     "Failed to download chunk at skip=%s or file not found. Exiting.",
                     skip_count)
                 raise RuntimeError(
                     f"Failed to download chunk at skip={skip_count}.")
 
-            os.rename(util_output_path, chunk_filepath)
+            chunk_filepath = chunk_files[0]
 
             # Read in binary mode to handle byte-accurate line endings.
             with open(chunk_filepath, 'rb') as f_chunk:
                 content = f_chunk.read()
+
+            os.remove(chunk_filepath)
 
             with open(temp_merged_filepath, 'ab') as f_temp:
                 if skip_count == 0:
