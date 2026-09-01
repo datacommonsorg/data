@@ -14,7 +14,7 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/underlyingcauseofdeath_singlerace.tmcf",
-                    "node_mcf": "output/underlyingcauseofdeath_singlerace_stat_vars.mcf",
+                    "node_mcf": "output/underlyingcauseofdeath_singlerace*.mcf",
                     "cleaned_csv": "output/underlyingcauseofdeath_singlerace.csv"
                 }
             ],
