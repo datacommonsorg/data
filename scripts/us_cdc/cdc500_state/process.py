@@ -18,7 +18,6 @@ from absl import app
 from absl import flags
 from absl import logging
 from google.cloud import bigquery
-import pandas as pd
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -34,8 +33,8 @@ WITH cdc_sv AS (
     CASE
       WHEN variable_measured LIKE '%Female_50To74Years%' OR variable_measured LIKE '%50To74Years_Female%' THEN 'Count_Person_Female_50To74Years'
       WHEN variable_measured LIKE '%Female_21To65Years%' OR variable_measured LIKE '%21To65Years_Female%' THEN 'Count_Person_Female_21To65Years'
-      WHEN variable_measured LIKE '%Female_65OrMoreYears%' OR variable_measured LIKE '%65OrMoreYears_Female%' THEN 'Count_Person_Female_65OrMoreYears'
-      WHEN variable_measured LIKE '%Male_65OrMoreYears%' OR variable_measured LIKE '%65OrMoreYears_Male%' THEN 'Count_Person_Male_65OrMoreYears'
+      WHEN variable_measured LIKE '%Female_65OrMoreYears%' OR variable_measured LIKE '%65OrMoreYears_Female%' THEN 'Count_Person_65OrMoreYears_Female'
+      WHEN variable_measured LIKE '%Male_65OrMoreYears%' OR variable_measured LIKE '%65OrMoreYears_Male%' THEN 'Count_Person_65OrMoreYears_Male'
       WHEN variable_measured LIKE '%65OrMoreYears%' THEN 'Count_Person_65OrMoreYears'
       WHEN variable_measured LIKE '%18To64Years%' THEN 'Count_Person_18To64Years'
       WHEN variable_measured LIKE '%18OrMoreYears%' THEN 'Count_Person_18OrMoreYears'
