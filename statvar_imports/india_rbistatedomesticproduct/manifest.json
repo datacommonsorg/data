@@ -24,7 +24,6 @@
             ],
             "cron_schedule": "0 09 4,18 * *",
             "validation_config_file": "validation_config.json"
-
         }
     ]
 }

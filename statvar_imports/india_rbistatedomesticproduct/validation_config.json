@@ -8,6 +8,12 @@
       "params": {
         "threshold": 0.1
       }
+    },
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Checks that the latest date is the same for all StatVars.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "params": {}
     }
   ]
 }
