@@ -103,7 +103,7 @@ Case Count,value,{Number},measurementMethod,CDC_NNDSS_Diseases_AnnualTables,obse
 11061,medicalCondition,Influenza,medicalStatus,PediatricMortality,,
 11723,medicalCondition,StreptococcusPneumonia,,,,
 50230,medicalCondition,StreptococcusPneumonia,medicalStatus,ConfirmedCase,,
-50231,medicalCondition,StreptococcusPneumonia,medicalStatus,ProbableCase,,
+50231,medicalCondition,StreptococcusPneumonia,medicalStatus,ProbableCase
 11722,medicalCondition,StreptococcusPneumonia,age,YearsUpto5,,
 50232,medicalCondition,StreptococcusPneumonia,medicalStatus,ConfirmedCase,age,YearsUpto5
 50233,medicalCondition,StreptococcusPneumonia,medicalStatus,ProbableCase,age,YearsUpto5
