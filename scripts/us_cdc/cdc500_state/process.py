@@ -105,7 +105,8 @@ INNER JOIN svo_count AS c
 GROUP BY 1, 2, 3, 4, 5
 """
 
-def run_process(client: bigquery.Client, output_file: str) -> None:
+
+def run_process(client: bigquery.Client, output_file: str) -> bool:
     """Executes the BigQuery query and writes the resulting DataFrame to output_file."""
     logging.info("Running BigQuery aggregation query...")
     try:
@@ -126,12 +127,15 @@ def run_process(client: bigquery.Client, output_file: str) -> None:
         os.makedirs(output_dir, exist_ok=True)
     logging.info("Writing %d rows to %s", len(df), output_file)
     df.to_csv(output_file, index=False)
+    return True
+
 
 def main(argv):
     del argv  # Unused.
     client = bigquery.Client()
     output_file = os.path.join(_FLAGS.output_dir, 'CDC500State_Output.csv')
     run_process(client, output_file)
+
 
 if __name__ == '__main__':
     app.run(main)

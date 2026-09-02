@@ -21,6 +21,7 @@ import pandas as pd
 
 from scripts.us_cdc.cdc500_state import process
 
+
 class CDC500StateProcessTest(unittest.TestCase):
 
     def test_query_constants(self):
@@ -43,11 +44,11 @@ class CDC500StateProcessTest(unittest.TestCase):
             'percent': [29.6479]
         })
         mock_client.query.return_value.to_dataframe.return_value = sample_data
-        
+
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
-            process.run_process(mock_client, output_file)
-            
+            result = process.run_process(mock_client, output_file)
+            self.assertTrue(result)
             mock_client.query.assert_called_once()
             self.assertTrue(os.path.exists(output_file))
             saved_df = pd.read_csv(output_file)
@@ -65,12 +66,14 @@ class CDC500StateProcessTest(unittest.TestCase):
     def test_run_process_dataframe_error(self):
         mock_client = mock.MagicMock()
         mock_query_job = mock.MagicMock()
-        mock_query_job.to_dataframe.side_effect = Exception("Failed to fetch dataframe")
+        mock_query_job.to_dataframe.side_effect = Exception(
+            "Failed to fetch dataframe")
         mock_client.query.return_value = mock_query_job
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
             with self.assertRaises(Exception):
                 process.run_process(mock_client, output_file)
+
 
 if __name__ == '__main__':
     unittest.main()
