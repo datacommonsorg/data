@@ -25,7 +25,7 @@ The aggregation script queries Google Cloud BigQuery graph tables in dataset `da
    - **Census ACS 5-Year Series**: Filters and joins population counts from Census ACS 5-Year Survey (`provenance = 'dc/base/CensusACS5YearSurvey'`).
 
 2. **`Observation`**:
-   - **Health Indicator Percentages**: Fetches city-level percentage values (`value AS percent`), observation dates (`date`), and city geoIds (`entity1 LIKE 'geoId/%'`) for CDC 500 StatVars.
+   - **Health Indicator Percentages**: Fetches city-level percentage values (`value AS percent`), observation dates (`date`), and city geoIds (`entity1 LIKE 'geoId/%' AND LENGTH(entity1) = 13`) for CDC 500 StatVars.
    - **City Cohort Populations**: Fetches city-level population counts (`value AS population`) for the corresponding demographic cohort StatVars.
 
 ### Aggregation Methodology

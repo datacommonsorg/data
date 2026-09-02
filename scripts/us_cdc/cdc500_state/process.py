@@ -64,6 +64,7 @@ svo_percent AS (
   INNER JOIN cdc_sv
     ON O.variable_measured = cdc_sv.cdc500
   WHERE O.entity1 LIKE 'geoId/%'
+    AND LENGTH(O.entity1) = 13
     AND O.variable_measured LIKE 'Percent_%'
 ),
 
@@ -85,6 +86,7 @@ svo_count AS (
   ) AS pop
     ON O.variable_measured = pop.pop_statvar
   WHERE O.entity1 LIKE 'geoId/%'
+    AND LENGTH(O.entity1) = 13
 )
 
 SELECT 

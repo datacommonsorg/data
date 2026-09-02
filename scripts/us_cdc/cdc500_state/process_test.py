@@ -32,6 +32,7 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertIn("dc/base/CensusACS5YearSurvey", query)
         self.assertIn("SAFE_DIVIDE", query)
         self.assertIn("SUBSTR(p.observation_about, 1, 8)", query)
+        self.assertIn("LENGTH(O.entity1) = 13", query)
 
     def test_run_process_success(self):
         mock_client = mock.MagicMock()
