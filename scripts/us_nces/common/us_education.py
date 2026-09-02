@@ -666,11 +666,10 @@ class USEducation:
                 lambda x: x.title()))
 
         # Sorting and merging non-null place columns
-        self._final_df_place = (
-            self._final_df_place.sort_values(by=["year"], ascending=False)
-            .groupby("school_state_code", as_index=False, sort=False)
-            .first()
-        )
+        self._final_df_place = (self._final_df_place.sort_values(
+            by=["year"], ascending=False).groupby("school_state_code",
+                                                  as_index=False,
+                                                  sort=False).first())
 
     @log_method_execution
     def _transform_district_place(self):
@@ -815,11 +814,10 @@ class USEducation:
                 to_replace={'': pd.NA})
             self._final_df_place[col] = "dcs:" + self._final_df_place[col]
 
-        self._final_df_place = (
-            self._final_df_place.sort_values(by=["year"], ascending=False)
-            .groupby("school_state_code", as_index=False, sort=False)
-            .first()
-        )
+        self._final_df_place = (self._final_df_place.sort_values(
+            by=["year"], ascending=False).groupby("school_state_code",
+                                                  as_index=False,
+                                                  sort=False).first())
 
     @log_method_execution
     def _parse_file(self, raw_df: pd.DataFrame) -> pd.DataFrame:
