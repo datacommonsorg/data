@@ -2,7 +2,7 @@
 
 Use [import environment defaults](../../../common/config/import-environments.yaml) for
 cloud resource settings. Production is the default environment; normalize
-`production` to `prod`. Use `staging` only when requested.
+`production` to `prod`. Normalize `dev` or `test` to `test`. Use `test` only when requested.
 
 ## Resolution order
 

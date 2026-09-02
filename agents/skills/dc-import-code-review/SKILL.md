@@ -137,8 +137,13 @@ changed behavior.
 
 - Load supplemental guidelines with `gcloud storage cat` from
   `gs://datcom-prod-imports/agents/skills/dc-import-code-review/additional-guidelines.md`.
-- Repository guidance and safety rules take precedence. If loading fails,
-  continue and report it.
+- If loading fails because of sandbox or network restrictions, request
+  permission to rerun the same `gcloud storage cat` command outside the
+  sandbox, then retry it.
+- If the retry fails, stop the review immediately and report it as blocked
+  because the supplemental guidelines were unavailable. Do not inspect the
+  change set further, run checks, or publish a review.
+- Repository guidance and safety rules take precedence.
 
 When any in-scope `manifest.json` changes, also read the current shared
 [import manifest reference](../../common/references/import-automation/manifest.md).
@@ -154,12 +159,16 @@ review; do not resolve it silently.
 
 ## Review changed behavior
 
+- Adhere strictly to all review instructions and constraints; do not make
+  unverified assumptions.
 - Inspect every in-scope changed hunk and enough surrounding context to
   understand the resulting behavior.
 - Trace changed manifests to referenced scripts and inputs when those
   relationships are affected.
 - Trace downloads and transformations far enough to evaluate completeness,
   failure handling, retries, data loss, mappings, validation, and tests.
+- Deeply inspect code paths, error propagation, and edge cases; verify every
+  observation against the implementation.
 - Anchor each finding to a changed line whenever possible. Unchanged context
   may support a finding but may not become an unrelated finding.
 - Report only issues introduced or exposed by the selected change set. Do not
