@@ -49,6 +49,29 @@ directories.
 - Use source-relative Markdown links. Referenced sections must have unique,
   plain ATX headings; link text does not need to match the heading.
 
+## Document external inputs when useful
+
+- Use `Required inputs` for values needed before work can begin.
+- Use `Inputs resolved when needed` for values that only some flows require.
+- Place input sections near the top, before safety and workflow instructions.
+- Omit empty input sections.
+- Prefer values supplied by the user.
+- Use stable `<NAME>` placeholders throughout the skill.
+- Write unresolved cross-repository paths as inline code rather than Markdown
+  links. Use a Markdown link after the destination is resolved.
+- Keep resolution and validation instructions together.
+
+For example:
+
+- Unresolved: `<IMPORT_REPO>/docs/usage.md`
+- Resolved: [Import tool usage](https://github.com/datacommonsorg/import/blob/master/docs/usage.md)
+
+A table is useful when a skill has multiple inputs:
+
+| Input | Resolution |
+|---|---|
+| `<INPUT_NAME>` | Describe how to resolve and validate the value. |
+
 ## Useful authoring tips
 
 These tips complement the target agent's guidance. Follow client-specific rules
@@ -58,6 +81,14 @@ when they differ.
   example, "Why did this import fail?" should route to troubleshooting.
 - Focus on repository knowledge, procedures, and non-obvious edge cases. Skip
   background the agent already handles well.
+- Use bullet points for distinct constraints and directives: LLMs treat bullet
+  items as actionable checklists, whereas rules buried in paragraphs are easily
+  overlooked.
+- Keep instructions punchy, imperative, and scannable: Short, direct commands
+  give rules maximum instruction-following weight.
+- Explicitly ban unverified assumptions: Instruct the agent to trace code paths,
+  verify edge cases, and ground findings in actual tool/code output rather than
+  guessing.
 - State the situation and action together. For example, "If no Batch job ID
   exists, inspect Scheduler."
 - Use short sentences and consistent terms.
@@ -69,6 +100,22 @@ when they differ.
 
 For diagnostics-specific routing and troubleshooting conventions, see
 [DC import diagnostics authoring](dc-import-diagnostics-authoring.md).
+
+## Important: Define Python execution
+
+When authoring or updating a skill that runs Python, make its runtime
+instructions follow these rules:
+
+- Give a user-provided Python environment highest priority. Otherwise, use the
+  repository-local Python virtual environment at `.env/`.
+- With the repository environment:
+  - Run helper scripts with `./agents/common/run_python.sh`.
+  - Run tests with `./run_tests.sh -p <directory>`.
+  - Run other Python commands with `.env/bin/python`.
+  - If dependencies are missing or stale, run `./run_tests.sh -r`, then retry.
+- Ask before other dependency installations.
+- Report an unusable environment. Never fall back to global `python` or
+  `python3`.
 
 ## Validate changes
 

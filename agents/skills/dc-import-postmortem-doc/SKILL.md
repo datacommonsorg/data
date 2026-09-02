@@ -76,7 +76,7 @@ failure_category: "<CATEGORY_FROM_TAXONOMY>"
 sub_category: "<SPECIFIC_SUB_CATEGORY>"
 manifest_path: <REPO_RELATIVE_PATH_OR_NULL>
 absolute_import_name: <DIRECTORY_IMPORT_NAME_OR_NULL>
-environment: "<prod|staging>"
+environment: "<prod|test>"
 job_id: <BATCH_JOB_ID_OR_NULL>
 job_uid: <BATCH_JOB_UID_OR_NULL>
 exit_code: <INTEGER_OR_NULL>
