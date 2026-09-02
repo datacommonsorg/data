@@ -3,7 +3,7 @@
     "rules": [
         {
             "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted points is within the threshold (allows up to 5% to accommodate 0.02% historical CDC county boundary recalibrations in OzoneCounty while maintaining strict guardrails against data loss).",
+            "description": "Checks that the percentage of deleted points is within the threshold.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
                 "threshold": 0.05
