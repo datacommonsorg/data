@@ -13,9 +13,9 @@
 # limitations under the License.
 
 import os, sys
+from pathlib import Path
 import pandas as pd
 from absl import app, logging
-from pathlib import Path
 import config
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -35,6 +35,14 @@ AGE_COLUMNS = ["age314Count", "age1524Count", "age2544Count", "age4564Count", "a
 INPUT_FILE = os.path.join(INPUT_DIR, "ntia-analyze-table.csv")
 INPUT_FILE_1 = os.path.join(INPUT_DIR, "ntia-data-age-only.csv")
 INPUT_FILE_2 = os.path.join(INPUT_DIR, "ntia-data.csv")
+
+HEADERS = {
+    'User-Agent': (
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
+        '(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    ),
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+}
 
 
 def move_column_left(df, column_to_move, target_column):
@@ -75,20 +83,29 @@ def preprocess_data():
 
     except Exception as e:
         logging.fatal(f"An error occurred while preprocessing the input data: {e}")
-        return None
+        sys.exit(1)
+
 
 def main(argv):
     try:
-        download_file(url=Commerce_NTIA_URL,
-                  output_folder=INPUT_DIR,
-                  unzip=False,
-                  headers= None,
-                  tries= 3,
-                  delay= 5,
-                  backoff= 2)
+        success = download_file(
+            url=Commerce_NTIA_URL,
+            output_folder=INPUT_DIR,
+            unzip=False,
+            headers=HEADERS,
+            tries=3,
+            delay=5,
+            backoff=2,
+        )
+        if not success or not os.path.exists(INPUT_FILE):
+            logging.fatal("Failed to download Commerce_NTIA file.")
+            sys.exit(1)
     except Exception as e:
         logging.fatal(f"Failed to download Commerce_NTIA file: {e}")
+        sys.exit(1)
+
     preprocess_data()
+
 
 if __name__ == "__main__":
     app.run(main)
