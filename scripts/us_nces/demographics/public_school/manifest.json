@@ -5,7 +5,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
+            "provenance_url": "https://nces.ed.gov/",
             "provenance_description": "US nces school data for public",
             "scripts": [
                 "run.sh",
