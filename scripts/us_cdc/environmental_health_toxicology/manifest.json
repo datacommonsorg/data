@@ -108,19 +108,19 @@
             "validation_config_file": "validation_config.json",
             "import_inputs": [
                 {
-                    "template_mcf": "PM25CountyPollution_part1.tmcf",
+                    "template_mcf": "PM25CountyPollution.tmcf",
                     "cleaned_csv": "output/PM25county_0.csv"
                 },
                 {
-                    "template_mcf": "PM25CountyPollution_part2.tmcf",
+                    "template_mcf": "PM25CountyPollution.tmcf",
                     "cleaned_csv": "output/PM25county_1.csv"
                 },
                 {
-                    "template_mcf": "PM25CountyPollution_part3.tmcf",
+                    "template_mcf": "PM25CountyPollution.tmcf",
                     "cleaned_csv": "output/PM25county_2.csv"
                 },
                 {
-                    "template_mcf": "PM25CountyPollution_part4.tmcf",
+                    "template_mcf": "PM25CountyPollution.tmcf",
                     "cleaned_csv": "output/PM25county_3.csv"
                 }
             ],
