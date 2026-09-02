@@ -17,17 +17,17 @@
                 {
                     "template_mcf": "gcs_output/output/county/pep_asrh_county.tmcf",
                     "cleaned_csv": "gcs_output/output/county/pep_asrh_county.csv",
-                    "node_mcf": "gcs_output/output/county/pep_asrh_county.mcf"
+                    "node_mcf": "gcs_output/output/county/*.mcf"
                 },
                 {
                     "template_mcf": "gcs_output/output/national/pep_asrh_national.tmcf",
                     "cleaned_csv": "gcs_output/output/national/pep_asrh_national.csv",
-                    "node_mcf": "gcs_output/output/national/pep_asrh_national.mcf"
+                    "node_mcf": "gcs_output/output/national/*.mcf"
                 },
                 {
                     "template_mcf": "gcs_output/output/state/pep_asrh_state.tmcf",
                     "cleaned_csv": "gcs_output/output/state/pep_asrh_state.csv",
-                    "node_mcf": "gcs_output/output/state/pep_asrh_state.mcf"
+                    "node_mcf": "gcs_output/output/state/*.mcf"
                 }
             ],
             "source_files": [
