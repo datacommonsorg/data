@@ -19,6 +19,9 @@
                 "memory": 512,
                 "disk": 2000
             },
+            "config_override": {
+                "invoke_differ_tool": false
+            },
             "validation_config_file": "validation_config.json",
             "import_inputs": [
                 {
@@ -58,6 +61,9 @@
                 "cpu": 32,
                 "memory": 512,
                 "disk": 2000
+            },
+            "config_override": {
+                "invoke_differ_tool": false
             },
             "validation_config_file": "validation_config.json",
             "import_inputs": [
