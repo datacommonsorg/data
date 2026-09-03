@@ -1,0 +1,34 @@
+{
+  "imports": {
+    "illinois_education": [
+      {
+        "url": "https://www.isbe.net/_layouts/Download.aspx?SourceUrl=/Documents/Report-Card-Public-Data-Set.xlsx",
+        "filename": "illinois_data_2018.xlsx"
+      },
+      {
+        "url": "https://www.isbe.net/_layouts/Download.aspx?SourceUrl=/Documents/2019-Report-Card-Public-Data-Set.xlsx",
+        "filename": "illinois_data_2019.xlsx"
+      },
+      {
+        "url": "https://www.isbe.net/_layouts/Download.aspx?SourceUrl=/Documents/2020-Report-Card-Public-Data-Set.xlsx",
+        "filename": "illinois_data_2020.xlsx"
+      },
+      {
+        "url": "https://www.isbe.net/_layouts/Download.aspx?SourceUrl=/Documents/2021-RC-Pub-Data-Set.xlsx",
+        "filename": "illinois_data_2021.xlsx"
+      },
+      {
+        "url": "https://www.isbe.net/_layouts/Download.aspx?SourceUrl=/Documents/2022-Report-Card-Public-Data-Set.xlsx",
+        "filename": "illinois_data_2022.xlsx"
+      },
+      {
+        "url": "https://www.isbe.net/_layouts/Download.aspx?SourceUrl=/Documents/23-RC-Pub-Data-Set.xlsx",
+        "filename": "illinois_data_2023.xlsx"
+      },
+      {
+        "url": "https://www.isbe.net/_layouts/Download.aspx?SourceUrl=/Documents/24-RC-Pub-Data-Set.xlsx",
+        "filename": "illinois_data_2024.xlsx"
+      }
+    ]
+  }
+}
