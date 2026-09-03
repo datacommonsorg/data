@@ -13,6 +13,7 @@
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=wir_2552_wiki/input_files/WIR255OD2552_rollups.csv --pv_map=wir_2552_wiki/wir_2552_wiki_pvmap.csv --config_file=wir_2552_wiki/wir_2552_wiki_metadata.csv --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=wir_2552_wiki/output/zurich_population_wir_2552_wiki --output_counters=wir_2552_wiki/counters/zurich_population_wir_2552_wiki_counters.csv"
             ],
             "source_files": [
+                "wir_2552_wiki/input_files/WIR255OD2552.csv",
                 "wir_2552_wiki/input_files/WIR255OD2552_rollups.csv",
                 "wir_2552_wiki/counters/*.csv"
             ],
@@ -20,7 +21,7 @@
                 {
                     "template_mcf": "wir_2552_wiki/output/zurich_population_wir_2552_wiki.tmcf",
                     "cleaned_csv": "wir_2552_wiki/output/zurich_population_wir_2552_wiki.csv",
-                    "node_mcf": "wir_2552_wiki/output/zurich_population_wir_2552_wiki_stat_vars.mcf"
+                    "node_mcf": "wir_2552_wiki/output/*.mcf"
                 }
             ],
             "resource_limits": {
@@ -71,7 +72,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "bev_3240_wiki/output/zurich_population_bev_3240_wiki.tmcf",
-                    "cleaned_csv": "bev_3240_wiki/output/zurich_population_bev_3240_wiki.csv"
+                    "cleaned_csv": "bev_3240_wiki/output/zurich_population_bev_3240_wiki.csv",
+                    "node_mcf": "bev_3240_wiki/output/*.mcf"
                 }
             ],
             "resource_limits": {

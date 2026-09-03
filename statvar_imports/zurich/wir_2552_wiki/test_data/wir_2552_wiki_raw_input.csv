@@ -1,0 +1,57 @@
+Jahr,RaumSort,RaumLang,RechtsformSort,RechtsformLang,BetriebsgrSort,BetriebsgrLang,Arbeitsstaetten,AnzBesch,AnzBeschW,AnzBeschM,AnzVZA,AnzVZAW,AnzVZAM
+2011,1,Ganze Stadt,0,Alle Rechtsformen,0,Alle Betriebsgrössen,39747,443621,202970,240651,339750,136406,203349
+2011,1,Ganze Stadt,1,Öffentliches Recht,0,Alle Betriebsgrössen,120,45000,20000,25000,38000,16000,22000
+2011,1,Ganze Stadt,2,Privatrechtliche Unternehmen,0,Alle Betriebsgrössen,35000,350000,160000,190000,270000,110000,160000
+2011,1,Ganze Stadt,0,Alle Rechtsformen,1,Mikrobetriebe (unter 10),30000,80000,35000,45000,60000,25000,35000
+2011,1,Ganze Stadt,0,Alle Rechtsformen,2,Kleinbetriebe (10-49),7000,120000,55000,65000,95000,40000,55000
+2011,10,Kreis 1,0,Alle Rechtsformen,0,Alle Betriebsgrössen,5249,68627,34662,33965,53138,24338,28799
+2011,10,Kreis 1,1,Öffentliches Recht,0,Alle Betriebsgrössen,50,12000,5000,7000,10000,4000,6000
+2011,10,Kreis 1,0,Alle Rechtsformen,1,Mikrobetriebe (unter 10),3500,10000,4500,5500,8000,3500,4500
+2011,11,Rathaus,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1522,10180,5492,4688,7205,3493,3710
+2011,12,Hochschulen,0,Alle Rechtsformen,0,Alle Betriebsgrössen,700,13203,7025,6178,9090,4376,4714
+2011,13,Lindenhof,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1193,15160,7649,7511,12213,5602,6608
+2011,14,City,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1834,30084,14496,15588,24633,10861,13768
+2011,20,Kreis 2,0,Alle Rechtsformen,0,Alle Betriebsgrössen,3690,42295,19218,23077,32625,12786,19844
+2011,21,Wollishofen,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1050,7578,3396,4182,5865,2271,3594
+2011,23,Leimbach,0,Alle Rechtsformen,0,Alle Betriebsgrössen,177,640,340,300,460,217,246
+2011,24,Enge,0,Alle Rechtsformen,0,Alle Betriebsgrössen,2463,34077,15482,18595,26297,10298,16002
+2011,30,Kreis 3,0,Alle Rechtsformen,0,Alle Betriebsgrössen,3716,41539,18494,23045,32146,12425,19724
+2011,31,Alt-Wiedikon,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1668,25737,10281,15456,20428,6962,13465
+2011,33,Friesenberg,0,Alle Rechtsformen,0,Alle Betriebsgrössen,358,4510,3113,1397,3523,2311,1209
+2011,34,Sihlfeld,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1690,11292,5100,6192,8196,3148,5049
+2011,40,Kreis 4,0,Alle Rechtsformen,0,Alle Betriebsgrössen,3892,36061,15217,20844,27489,10031,17459
+2011,41,Werd,0,Alle Rechtsformen,0,Alle Betriebsgrössen,984,9023,4202,4821,6753,2834,3919
+2011,42,Langstrasse,0,Alle Rechtsformen,0,Alle Betriebsgrössen,2066,19957,8639,11318,15238,5743,9495
+2011,44,Hard,0,Alle Rechtsformen,0,Alle Betriebsgrössen,842,7081,2376,4705,5497,1455,4045
+2011,50,Kreis 5,0,Alle Rechtsformen,0,Alle Betriebsgrössen,2552,44156,16755,27401,35887,11991,23902
+2011,51,Gewerbeschule,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1363,15655,7201,8454,11596,4844,6753
+2011,52,Escher Wyss,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1189,28501,9554,18947,24293,7144,17146
+2011,60,Kreis 6,0,Alle Rechtsformen,0,Alle Betriebsgrössen,2961,25736,12597,13139,18409,8037,10367
+2011,61,Unterstrass,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1931,15235,7380,7855,11198,4786,6413
+2011,63,Oberstrass,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1030,10501,5217,5284,7210,3253,3956
+2011,70,Kreis 7,0,Alle Rechtsformen,0,Alle Betriebsgrössen,3758,31803,19099,12704,23623,13268,10356
+2011,71,Fluntern,0,Alle Rechtsformen,0,Alle Betriebsgrössen,838,14560,8961,5599,11196,6607,4590
+2011,72,Hottingen,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1701,11377,6669,4708,8268,4448,3822
+2011,73,Hirslanden,0,Alle Rechtsformen,0,Alle Betriebsgrössen,715,3824,2212,1612,2678,1383,1296
+2011,74,Witikon,0,Alle Rechtsformen,0,Alle Betriebsgrössen,504,2042,1257,785,1483,833,647
+2011,80,Kreis 8,0,Alle Rechtsformen,0,Alle Betriebsgrössen,3675,28912,15351,13561,21358,10330,11025
+2011,81,Seefeld,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1526,9963,4975,4988,7537,3393,4146
+2011,82,Mühlebach,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1503,9161,4556,4605,6891,3024,3869
+2011,83,Weinegg,0,Alle Rechtsformen,0,Alle Betriebsgrössen,646,9788,5820,3968,6925,3913,3011
+2011,90,Kreis 9,0,Alle Rechtsformen,0,Alle Betriebsgrössen,3277,48818,18683,30135,38569,12314,26256
+2011,91,Albisrieden,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1024,7797,3310,4487,6040,2102,3940
+2011,92,Altstetten,0,Alle Rechtsformen,0,Alle Betriebsgrössen,2253,41021,15373,25648,32530,10215,22315
+2011,100,Kreis 10,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1983,15272,7707,7565,10589,4753,5836
+2011,101,Höngg,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1031,8233,3643,4590,5796,2281,3515
+2011,102,Wipkingen,0,Alle Rechtsformen,0,Alle Betriebsgrössen,952,7039,4064,2975,4795,2475,2322
+2011,110,Kreis 11,0,Alle Rechtsformen,0,Alle Betriebsgrössen,3902,52782,21371,31411,40609,13940,26668
+2011,111,Affoltern,0,Alle Rechtsformen,0,Alle Betriebsgrössen,800,3553,1675,1878,2671,1084,1586
+2011,115,Oerlikon,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1767,23926,10162,13764,18381,6569,11812
+2011,119,Seebach,0,Alle Rechtsformen,0,Alle Betriebsgrössen,1335,25303,9534,15769,19553,6288,13267
+2011,120,Kreis 12,0,Alle Rechtsformen,0,Alle Betriebsgrössen,945,6868,3415,3453,4762,1932,2828
+2011,121,Saatlen,0,Alle Rechtsformen,0,Alle Betriebsgrössen,183,1516,493,1023,1197,319,879
+2011,122,Schwamendingen-Mitte,0,Alle Rechtsformen,0,Alle Betriebsgrössen,464,3690,2029,1661,2305,982,1325
+2011,123,Hirzenbach,0,Alle Rechtsformen,0,Alle Betriebsgrössen,298,1662,893,769,1258,636,624
+2011,990,Kreis Unbekannt,0,Alle Rechtsformen,0,Alle Betriebsgrössen,147,752,401,351,549,258,292
+2011,999,Quartier Unbekannt,0,Alle Rechtsformen,0,Alle Betriebsgrössen,147,752,401,351,549,258,292
+2012,1,Ganze Stadt,0,Alle Rechtsformen,0,Alle Betriebsgrössen,40362,448474,205879,242595,343562,138749,204816

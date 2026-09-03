@@ -1,4 +1,11 @@
-# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/zurich/wir_2552_wiki/test_data/wir_2552_wiki_input.csv --pv_map=statvar_imports/zurich/wir_2552_wiki/wir_2552_wiki_pvmap.csv --config_file=statvar_imports/zurich/wir_2552_wiki/wir_2552_wiki_metadata.csv --output_path=statvar_imports/zurich/wir_2552_wiki/test_data/zurich_population_wir_2552_wiki_output" on 2026-08-05 11:36:15.561091
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=statvar_imports/zurich/wir_2552_wiki/test_data/wir_2552_wiki_input.csv --pv_map=statvar_imports/zurich/wir_2552_wiki/wir_2552_wiki_pvmap.csv --config_file=statvar_imports/zurich/wir_2552_wiki/wir_2552_wiki_metadata.csv --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=statvar_imports/zurich/wir_2552_wiki/test_data/zurich_population_wir_2552_wiki_output" on 2026-09-03 13:07:07.293325
+
+Node: dcid:Count_Company
+typeOf: dcid:StatisticalVariable
+name: "Count of Company"
+populationType: dcid:Company
+measuredProperty: dcid:count
+statType: dcid:measuredValue
 
 Node: dcid:Count_Person_Employed
 typeOf: dcid:StatisticalVariable
@@ -21,5 +28,31 @@ populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 employmentStatus: dcid:Employed
+gender: dcid:Male
+
+Node: dcid:Count_Person_FullTimeEmployee
+typeOf: dcid:StatisticalVariable
+name: "Population: Full Time Employee"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:FullTimeEmployee
+
+Node: dcid:Count_Person_FullTimeEmployee_Female
+typeOf: dcid:StatisticalVariable
+name: "Population: Full Time Employee, Female"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:FullTimeEmployee
+gender: dcid:Female
+
+Node: dcid:Count_Person_FullTimeEmployee_Male
+typeOf: dcid:StatisticalVariable
+name: "Population: Full Time Employee, Male"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:FullTimeEmployee
 gender: dcid:Male
 
