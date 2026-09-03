@@ -13,12 +13,13 @@
 # limitations under the License.
 
 import os
-import sys
 import shutil
-import time
-import requests
-from absl import logging
+import sys
+
 from absl import app
+from absl import flags
+from absl import logging
+import requests
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 data_dir = os.path.dirname(os.path.dirname(os.path.dirname(script_dir)))
@@ -26,7 +27,6 @@ if data_dir not in sys.path:
     sys.path.insert(0, data_dir)
 
 from util.download_util_script import download_file
-from absl import flags
 
 flags.DEFINE_string('api_url',
                     'https://www.fema.gov/api/open/v2/FimaNfipClaims',
@@ -37,6 +37,8 @@ flags.DEFINE_string(
     'The direct bulk download URL for the full dataset.')
 flags.DEFINE_string('temp_dir', 'temp_fema_data',
                     'The temporary directory to store downloaded chunks.')
+flags.DEFINE_string('output_dir', None,
+                    'The directory to store output files.')
 _FLAGS = flags.FLAGS
 
 # Define the page size for each API request.
@@ -92,7 +94,8 @@ def download_data(api_url: str,
         api_url (str): The base URL of the API endpoint.
         temp_dir (str): The path to the temporary directory for downloaded chunks.
         bulk_url (str): The direct bulk download URL for the full dataset.
-        output_dir (str): Optional directory for output file. Defaults to 'input_file' relative to script.
+        output_dir (str): Optional directory for output file. Defaults to
+            'input_file' relative to script.
     """
     filename = "fema_nfip_claims.csv"
 
@@ -134,7 +137,8 @@ def download_data(api_url: str,
                 raise RuntimeError("Bulk download file is missing or empty.")
             src_file = downloaded_files[0]
 
-            # Validate that the bulk download file is a valid CSV and not an HTML error/maintenance page.
+            # Validate that the bulk download file is a valid CSV and not an
+            # HTML error/maintenance page.
             with open(src_file, 'r', encoding='utf-8', errors='replace') as f:
                 first_line = f.readline().strip()
 
@@ -247,8 +251,9 @@ def download_data(api_url: str,
 
             if num_records_in_chunk == 0:
                 logging.warning(
-                    "Received empty chunk at skip=%s before reaching total_records (%s). Exiting loop.",
-                    skip_count, total_records)
+                    "Received empty chunk at skip=%s before reaching "
+                    "total_records (%s). Exiting loop.", skip_count,
+                    total_records)
                 break
 
             if num_records_in_chunk < PAGE_SIZE:
@@ -264,7 +269,8 @@ def download_data(api_url: str,
                 "Download incomplete: only %s of %s records downloaded.",
                 records_downloaded, total_records)
             raise RuntimeError(
-                f"Download incomplete: only {records_downloaded} of {total_records} records downloaded."
+                f"Download incomplete: only {records_downloaded} of "
+                f"{total_records} records downloaded."
             )
 
         # Atomically replace final file only on full completion
@@ -291,7 +297,8 @@ def main(argv):
     Args:
         argv: List of command line arguments, as provided by absl.
     """
-    download_data(_FLAGS.api_url, _FLAGS.temp_dir, _FLAGS.bulk_url)
+    download_data(_FLAGS.api_url, _FLAGS.temp_dir, _FLAGS.bulk_url,
+                  _FLAGS.output_dir)
 
 
 if __name__ == "__main__":

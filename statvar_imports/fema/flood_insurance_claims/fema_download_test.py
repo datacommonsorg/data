@@ -198,6 +198,7 @@ class FemaDownloadTest(unittest.TestCase):
             with open(final_filepath, 'rb') as f:
                 content = f.read()
             self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
+            mock_rmtree.assert_called_with(self.test_temp_dir)
         finally:
             fema_download.PAGE_SIZE = original_page_size
 
@@ -218,8 +219,10 @@ class FemaDownloadTest(unittest.TestCase):
                 if url == 'http://fake-bulk.com/FimaNfipClaims.csv':
                     os.makedirs(output_folder, exist_ok=True)
                     # Write an empty 0-byte file
-                    open(os.path.join(output_folder, "FimaNfipClaims.csv"),
-                         'wb').close()
+                    with open(
+                            os.path.join(output_folder, "FimaNfipClaims.csv"),
+                            'wb'):
+                        pass
                     return True
                 util_output_path = os.path.join(output_folder,
                                                 "FimaNfipClaims.xlsx")
@@ -242,6 +245,7 @@ class FemaDownloadTest(unittest.TestCase):
                 content = f.read()
             self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
             self.assertEqual(mock_download_file.call_count, 2)
+            mock_rmtree.assert_called_with(self.test_temp_dir)
         finally:
             fema_download.PAGE_SIZE = original_page_size
 
@@ -250,7 +254,7 @@ class FemaDownloadTest(unittest.TestCase):
     @patch('fema_download.get_total_records')
     def test_download_data_header_only_chunk_no_blank_lines(
             self, mock_get_total_records, mock_download_file, mock_rmtree):
-        """Test that a chunk containing only the header does not introduce blank lines and terminates cleanly."""
+        """Test that header-only chunk does not add blank lines."""
         original_page_size = fema_download.PAGE_SIZE
         fema_download.PAGE_SIZE = 2
         try:
@@ -286,6 +290,7 @@ class FemaDownloadTest(unittest.TestCase):
             with open(temp_merged_filepath, 'rb') as f:
                 content = f.read()
             self.assertEqual(content, b"headerA,headerB\n1,A\n2,B\n")
+            mock_rmtree.assert_called_with(self.test_temp_dir)
         finally:
             fema_download.PAGE_SIZE = original_page_size
 
@@ -330,6 +335,7 @@ class FemaDownloadTest(unittest.TestCase):
                 content = f.read()
             self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
             self.assertEqual(mock_download_file.call_count, 2)
+            mock_rmtree.assert_called_with(self.test_temp_dir)
         finally:
             fema_download.PAGE_SIZE = original_page_size
 
@@ -372,6 +378,7 @@ class FemaDownloadTest(unittest.TestCase):
                 content = f.read()
             self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
             self.assertEqual(mock_download_file.call_count, 2)
+            mock_rmtree.assert_called_with(self.test_temp_dir)
         finally:
             fema_download.PAGE_SIZE = original_page_size
 
@@ -408,8 +415,21 @@ class FemaDownloadTest(unittest.TestCase):
                 content = f.read()
             self.assertEqual(content.strip(), b"headerA,headerB\n1,A\n2,B")
             self.assertEqual(mock_download_file.call_count, 1)
+            mock_rmtree.assert_called_with(self.test_temp_dir)
         finally:
             fema_download.PAGE_SIZE = original_page_size
+
+    @patch('fema_download.download_data')
+    def test_main(self, mock_download_data):
+        """Test main entrypoint passing flags."""
+        fema_download.flags.FLAGS(['fema_download'])
+        fema_download.main([])
+        mock_download_data.assert_called_once_with(
+            fema_download.flags.FLAGS.api_url,
+            fema_download.flags.FLAGS.temp_dir,
+            fema_download.flags.FLAGS.bulk_url,
+            fema_download.flags.FLAGS.output_dir,
+        )
 
 
 if __name__ == '__main__':
