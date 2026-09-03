@@ -1,0 +1,47 @@
+key,property1,value1,property2,value2,property3,value3,property4,value4
+
+# Global Dataflow properties (Standard Data Commons Demographic Modeling)
+"DATAFLOW:ESTAT:DEMO_FMONTH(1.0)",populationType,dcs:BirthEvent,measuredProperty,dcs:count,statType,dcs:measuredValue,,
+
+# --- AUTOMATED CLEANUP: Ignored Columns ---
+LAST UPDATE,#ignore,"",,,,,,
+freq,#ignore,"",,,,,,
+CONF_STATUS,#ignore,"",,,,,,
+
+# Month mapping & observationPeriod variable passing (Grounded on standard ISO-8601 durations)
+month:M01,Month,01,observationPeriod,P1M,,,,
+month:M02,Month,02,observationPeriod,P1M,,,,
+month:M03,Month,03,observationPeriod,P1M,,,,
+month:M04,Month,04,observationPeriod,P1M,,,,
+month:M05,Month,05,observationPeriod,P1M,,,,
+month:M06,Month,06,observationPeriod,P1M,,,,
+month:M07,Month,07,observationPeriod,P1M,,,,
+month:M08,Month,08,observationPeriod,P1M,,,,
+month:M09,Month,09,observationPeriod,P1M,,,,
+month:M10,Month,10,observationPeriod,P1M,,,,
+month:M11,Month,11,observationPeriod,P1M,,,,
+month:M12,Month,12,observationPeriod,P1M,,,,
+month:TOTAL,Month,"",observationPeriod,P1Y,,,,
+month:UNK,#ignore,"",,,,,,
+
+
+# Time column capture (Stores year for the strict date checker)
+TIME_PERIOD,Year,{Data},,,,,,
+
+geo,observationAbout,{Data},,,,,,
+
+# Measure and Date Resolution
+OBS_VALUE,#Eval,"observationDate='{Year}-{Month}' if '{Month}' else '{Year}'",value,{Number},,,,
+
+# Safely Ignoring Transient and Composite Status Flags to Prevent Ingestion Warnings
+OBS_FLAG:b,#ignore,"",,,,,,
+OBS_FLAG:e,#ignore,"",,,,,,
+OBS_FLAG:p,#ignore,"",,,,,,
+OBS_FLAG:f,#ignore,"",,,,,,
+OBS_FLAG:n,#ignore,"",,,,,,
+OBS_FLAG:u,#ignore,"",,,,,,
+OBS_FLAG:be,#ignore,"",,,,,,
+OBS_FLAG:bep,#ignore,"",,,,,,
+
+# Missing values
+OBS_FLAG:M,MissingValue,"",,,,,,
