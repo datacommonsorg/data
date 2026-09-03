@@ -1,0 +1,8 @@
+Node: E:mesh_qual_concept_mapping->E1
+typeOf: dcs:MeSHConcept
+dcid: C:mesh_qual_concept_mapping->Preferred_Concept_dcid
+
+Node: E:mesh_qual_concept_mapping->E2
+typeOf: dcs:MeSHConcept
+dcid: C:mesh_qual_concept_mapping->Concept_dcid
+preferredMeSHConcept: E:mesh_qual_concept_mapping->E1

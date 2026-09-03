@@ -1,0 +1,13 @@
+Node: E:mesh_record->E1
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_record->Descriptor_dcid
+identifier: C:mesh_record->DescriptorID
+
+Node: E:mesh_record->E2
+typeOf: dcs:MeSHSupplementaryConceptRecord
+dcid: C:mesh_record->Record_dcid
+identifier: C:mesh_record->RecordID
+name: C:mesh_record->RecordName
+dateCreated: C:mesh_record->DateCreated
+dateRevised: C:mesh_record->DateRevised
+parent: E:mesh_record->E1
