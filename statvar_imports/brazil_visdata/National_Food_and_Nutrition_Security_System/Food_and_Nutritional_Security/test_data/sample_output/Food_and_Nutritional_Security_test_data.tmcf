@@ -1,0 +1,11 @@
+Node: E:Food_and_Nutritional_Security_test_data->E0
+observationAbout: C:Food_and_Nutritional_Security_test_data->observationAbout
+observationDate: C:Food_and_Nutritional_Security_test_data->observationDate
+value: C:Food_and_Nutritional_Security_test_data->value
+variableMeasured: C:Food_and_Nutritional_Security_test_data->variableMeasured
+observationPeriod: C:Food_and_Nutritional_Security_test_data->observationPeriod
+measurementMethod: C:Food_and_Nutritional_Security_test_data->measurementMethod
+#Aggregate: sum
+typeOf: dcs:StatVarObservation
+
+
