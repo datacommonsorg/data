@@ -57,26 +57,8 @@ if [ -f "$SCRIPT_DIR/input_files/sb_ca_all_years_normalized.txt" ]; then
     --output_counters="$SCRIPT_DIR/counters/california_school_performance_counters.csv"
 fi
 
-# Also process individual year normalized files
-for input_file in "$SCRIPT_DIR"/input_files/sb_ca[0-9]*_normalized.txt; do
-  [ -e "$input_file" ] || continue
-  
-  filename=$(basename "$input_file")
-  year=$(echo "$filename" | grep -o '[0-9]\{4\}')
-  output_path="$SCRIPT_DIR/output_files/california_school_performance_${year}_output"
-  
-  echo "--------------------------------------------------------------------------"
-  echo "Processing Year $year: $filename"
-  echo "Output:          $output_path"
-  echo "--------------------------------------------------------------------------"
-  
-  PYTHONPATH="$TOOLS_DIR" python3 "$TOOLS_DIR/stat_var_processor.py" \
-    --input_data="$input_file" \
-    --pv_map="$PVMAP" \
-    --config_file="$METADATA" \
-    --existing_statvar_mcf="$EXISTING_MCF" \
-    --output_path="$output_path"
-done
+# Individual year processing is omitted to save redundant processing time.
+# If individual year files are needed for debugging, run stat_var_processor.py manually on the desired year.
 
 
 echo ""

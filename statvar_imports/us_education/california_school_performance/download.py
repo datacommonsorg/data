@@ -118,10 +118,13 @@ def parse_years(years_str: str) -> list[int]:
     for part in years_str.split(','):
         part = part.strip()
         if '-' in part:
-            start, end = part.split('-', 1)
-            for y in range(int(start.strip()), int(end.strip()) + 1):
-                if y in YEAR_URL_MAP:
-                    years.add(y)
+            try:
+                start, end = part.split('-', 1)
+                for y in range(int(start.strip()), int(end.strip()) + 1):
+                    if y in YEAR_URL_MAP:
+                        years.add(y)
+            except ValueError:
+                logging.warning('Invalid year range format: %s', part)
         elif part.isdigit() and int(part) in YEAR_URL_MAP:
             years.add(int(part))
     return sorted(years)
@@ -146,7 +149,9 @@ def normalize_and_filter_records(raw_bytes: bytes, keep_all_entities: bool = Fal
         # Check entity level: State and County have District Code 00000 and School Code 0000000
         d_code = cleaned.get('District Code', '')
         s_code = cleaned.get('School Code', '')
-        if not keep_all_entities and (d_code != '00000' or s_code != '0000000'):
+        if not keep_all_entities and (
+            d_code.strip().lstrip('0') or s_code.strip().lstrip('0')
+        ):
             continue
 
         # Handle subgroup ID variations across eras
@@ -258,6 +263,9 @@ def main(argv):
         res = download_and_process_year(year, FLAGS.data_mode, output_dir, FLAGS.keep_all_entities)
         if res:
             all_normalized_files.append(res)
+
+    if not all_normalized_files:
+        raise RuntimeError('No files were successfully downloaded and processed.')
 
     # Combine all downloaded years into a unified master file
     master_file = os.path.join(output_dir, 'sb_ca_all_years_normalized.txt')
