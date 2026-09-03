@@ -1,0 +1,13 @@
+parameter,value
+url,https://nigeria.opendataforafrica.org/NGNBSNCPIR2017/cpi-and-inflation-report?regionId=NG-AB
+description,CPI with all countries  level data
+start_date,1995
+end_date,2024
+release_frequency,"Monthly, Annual"
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod,measurementMethod"
+mapped_rows,1
+mapped_columns,12
+header_rows,1
+drop_statvars_without_svobs,0
