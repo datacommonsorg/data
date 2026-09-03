@@ -1,0 +1,61 @@
+# Auto generated using command: "process_spreadsheet.py --input_sheet=https://docs.google.com/spreadsheets/d/18rM-5PzmSf6KSD1cAS_BhaP7Q-h3S4WwaSbi4rMhY0M/edit?resourcekey=0-DibWUXaPqfiQ29IZYJz6jg#gid=1890706892 --existing_statvar_mcf=stat_vars.mcf" on 2024-03-13 09:28:54.242993
+
+Node: dcid:Count_CriminalIncidents
+typeOf: dcid:StatisticalVariable
+populationType: dcid:CriminalIncidents
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_CriminalIncidents_CrimeAgainstPersonOrCrimeAgainstPropertyOrCrimeAgainstLawfulAuthorityOrCrimeAgainstLocalActs
+typeOf: dcid:StatisticalVariable
+name: "Total number of Cases"
+populationType: dcid:CriminalIncidents
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:CrimeAgainstPerson__CrimeAgainstProperty__CrimeAgainstLawfulAuthority__CrimeAgainstLocalActs
+
+Node: dcid:Count_CriminalIncidents_CrimeAgainstPersonOrCrimeAgainstPropertyOrCrimeAgainstLawfulAuthorityOrCrimeAgainstLocalActs_AsAFractionOf_Count_CriminalIncidents
+typeOf: dcid:StatisticalVariable
+name: "% Share of Total Cases"
+populationType: dcid:CriminalIncidents
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_CriminalIncidents
+crimeType: dcid:CrimeAgainstPerson__CrimeAgainstProperty__CrimeAgainstLawfulAuthority__CrimeAgainstLocalActs
+
+Node: dcid:Offense_Count_CriminalIncidents_CrimeAgainstLawfulAuthority
+typeOf: dcid:StatisticalVariable
+name: "Offence Against Lawfull Authority"
+populationType: dcid:CriminalIncidents
+measuredProperty: dcid:count
+measurementQualifier: dcid:Offense
+statType: dcid:measuredValue
+crimeType: dcid:CrimeAgainstLawfulAuthority
+
+Node: dcid:Offense_Count_CriminalIncidents_CrimeAgainstLocalActs
+typeOf: dcid:StatisticalVariable
+name: "Offence Against Local Acts"
+populationType: dcid:CriminalIncidents
+measuredProperty: dcid:count
+measurementQualifier: dcid:Offense
+statType: dcid:measuredValue
+crimeType: dcid:CrimeAgainstLocalActs
+
+Node: dcid:Offense_Count_CriminalIncidents_CrimeAgainstPerson
+typeOf: dcid:StatisticalVariable
+name: "Offence Against Persons"
+populationType: dcid:CriminalIncidents
+measuredProperty: dcid:count
+measurementQualifier: dcid:Offense
+statType: dcid:measuredValue
+crimeType: dcid:CrimeAgainstPerson
+
+Node: dcid:Offense_Count_CriminalIncidents_CrimeAgainstProperty
+typeOf: dcid:StatisticalVariable
+name: "Offence Against Property"
+populationType: dcid:CriminalIncidents
+measuredProperty: dcid:count
+measurementQualifier: dcid:Offense
+statType: dcid:measuredValue
+crimeType: dcid:CrimeAgainstProperty
+
