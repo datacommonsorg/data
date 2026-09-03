@@ -160,6 +160,10 @@ def build_request_xml(vertical: str, year: str) -> str:
     return xml_parameters
 
 
+class YearUnavailableError(Exception):
+    """Raised when CDC WONDER indicates that the requested year is unavailable."""
+
+
 def query_cdc_wonder(xml_payload: str, max_retries: int = 3, session: requests.Session = None) -> str:
     """Sends an HTTP POST query to CDC WONDER API with retry handling."""
     if session is None:
@@ -183,12 +187,16 @@ def query_cdc_wonder(xml_payload: str, max_retries: int = 3, session: requests.S
                 msg_match = re.search(r'<message>(.*?)</message>', res, re.DOTALL | re.IGNORECASE)
                 err_msg = msg_match.group(1).strip() if msg_match else res
                 if 'd130.v1' in res.lower() or ('year' in err_msg.lower() and ('valid' in err_msg.lower() or 'unavailable' in err_msg.lower())):
-                    raise ValueError(f"Year is unavailable in CDC WONDER: {err_msg}")
+                    raise YearUnavailableError(f"Year is unavailable in CDC WONDER: {err_msg}")
 
                 logging.error(f"CDC WONDER Processing Error on POST {CDC_WONDER_ENDPOINT}: {res}")
                 raise RuntimeError(f"CDC WONDER processing error: {res}")
             resp.raise_for_status()
             logging.info(f"Received HTTP {resp.status_code} from POST {CDC_WONDER_ENDPOINT}")
+            if '<data-table' not in res and '<message>' in res:
+                msg_match = re.search(r'<message>(.*?)</message>', res, re.DOTALL | re.IGNORECASE)
+                if msg_match and ('dataset or year is currently unavailable' in msg_match.group(1).lower() or ('year' in msg_match.group(1).lower() and 'unavailable' in msg_match.group(1).lower())):
+                    raise YearUnavailableError(f"Year is unavailable in CDC WONDER: {msg_match.group(1).strip()}")
             return res
         except requests.RequestException as e:
             logging.warning(f"Network error on POST {CDC_WONDER_ENDPOINT} (attempt {attempt}/{max_retries}): {e}")
@@ -288,13 +296,14 @@ def download_vertical_year(vertical: str, year: str, output_dir: str, session: r
     try:
         xml_payload = build_request_xml(vertical, year)
         xml_response = query_cdc_wonder(xml_payload, session=session)
-        rows = parse_xml_to_csv_rows(xml_response, vertical)
-    except ValueError as e:
+    except YearUnavailableError as e:
         logging.warning(
             f"Data unavailable for vertical '{vertical}' and year {year}: {e}. "
             f"Skipping download."
         )
         return False
+
+    rows = parse_xml_to_csv_rows(xml_response, vertical)
 
     target_dir = os.path.join(output_dir, vertical)
     os.makedirs(target_dir, exist_ok=True)
@@ -348,6 +357,8 @@ def download_all(verticals: list, years: list, output_dir: str, session: request
         f"All downloads finished: {successful_downloads} successful, "
         f"{unavailable_downloads} unavailable."
     )
+    if successful_downloads == 0:
+        logging.fatal("Zero downloads succeeded from CDC WONDER API.")
 
 
 def main(argv):
