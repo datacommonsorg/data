@@ -104,6 +104,13 @@ PROCESSING_ERROR_FATAL = """<html>
 <body><p>Invalid database parameter requested.</p></body>
 </html>"""
 
+PROCESSING_ERROR_UNAVAILABLE_YEAR = """<?xml version="1.0"?>
+<page>
+<platform>prod</platform>
+<title>Processing Error</title>
+<message>Request parameters error: Code '2024' isn't a valid code value for variable (D130.V1) Year</message>
+</page>"""
+
 
 class DownloadNndssAnnualDataTest(unittest.TestCase):
 
@@ -224,6 +231,19 @@ class DownloadNndssAnnualDataTest(unittest.TestCase):
 
     @mock.patch('download_nndss_annual_data.time.sleep')
     @mock.patch('download_nndss_annual_data._rate_limit_wait')
+    def test_query_cdc_wonder_unavailable_year_error(self, mock_rate_limit, mock_sleep):
+        mock_session = mock.MagicMock(spec=requests.Session)
+        resp = mock.MagicMock()
+        resp.text = PROCESSING_ERROR_UNAVAILABLE_YEAR
+        mock_session.post.return_value = resp
+
+        with self.assertRaises(ValueError) as ctx:
+            download_nndss_annual_data.query_cdc_wonder("<xml/>", max_retries=3, session=mock_session)
+        self.assertIn("Year is unavailable in CDC WONDER", str(ctx.exception))
+        self.assertEqual(mock_session.post.call_count, 1)
+
+    @mock.patch('download_nndss_annual_data.time.sleep')
+    @mock.patch('download_nndss_annual_data._rate_limit_wait')
     def test_query_cdc_wonder_network_error_retry(self, mock_rate_limit, mock_sleep):
         mock_session = mock.MagicMock(spec=requests.Session)
         mock_session.post.side_effect = requests.RequestException("Connection timed out")
@@ -268,11 +288,67 @@ class DownloadNndssAnnualDataTest(unittest.TestCase):
             if os.path.exists(target_dir):
                 self.assertEqual(os.listdir(target_dir), [])
 
+    @mock.patch('download_nndss_annual_data.query_cdc_wonder')
+    def test_download_vertical_year_unavailable_graceful(self, mock_query):
+        # Verify that an unavailable dataset XML response does not crash and returns False
+        mock_query.return_value = SAMPLE_XML_ERROR_RESPONSE
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            success = download_nndss_annual_data.download_vertical_year('sex', '2024', temp_dir)
+            self.assertFalse(success)
+            target_csv = os.path.join(temp_dir, 'sex', 'NNDSS_Annual_Summary_Data_2024.csv')
+            self.assertFalse(os.path.exists(target_csv))
+
+    @mock.patch('download_nndss_annual_data.query_cdc_wonder')
+    def test_download_vertical_year_unavailable_year_graceful(self, mock_query):
+        mock_query.side_effect = ValueError("Year is unavailable in CDC WONDER: Code '2024' isn't valid")
+        with tempfile.TemporaryDirectory() as temp_dir:
+            success = download_nndss_annual_data.download_vertical_year('sex', '2024', temp_dir)
+            self.assertFalse(success)
+            target_csv = os.path.join(temp_dir, 'sex', 'NNDSS_Annual_Summary_Data_2024.csv')
+            self.assertFalse(os.path.exists(target_csv))
+
+    @mock.patch('download_nndss_annual_data.download_vertical_year')
+    def test_download_all_skips_unavailable_years_across_verticals(self, mock_download_vy):
+        # 2023 succeeds for age and sex; 2024 fails for age, then sex should be skipped for 2024
+        mock_download_vy.side_effect = [True, False, True]
+        with tempfile.TemporaryDirectory() as temp_dir:
+            download_nndss_annual_data.download_all(['age', 'sex'], ['2023', '2024'], temp_dir)
+            # age(2023)->True, age(2024)->False, sex(2023)->True. sex(2024) is skipped because 2024 is in unavailable_years
+            self.assertEqual(mock_download_vy.call_count, 3)
+
     @mock.patch('download_nndss_annual_data.download_vertical_year')
     def test_download_all(self, mock_download_vy):
+        mock_download_vy.return_value = True
         with tempfile.TemporaryDirectory() as temp_dir:
             download_nndss_annual_data.download_all(['age', 'sex'], ['2022', '2023'], temp_dir)
             self.assertEqual(mock_download_vy.call_count, 4)
+
+    @mock.patch('download_nndss_annual_data.download_vertical_year')
+    def test_download_all_with_unavailable_year(self, mock_download_vy):
+        # First call succeeds, second call returns False (unavailable)
+        mock_download_vy.side_effect = [True, False]
+        with tempfile.TemporaryDirectory() as temp_dir:
+            # Must not crash or raise exception
+            download_nndss_annual_data.download_all(['sex'], ['2023', '2024'], temp_dir)
+            self.assertEqual(mock_download_vy.call_count, 2)
+
+    def test_default_years_range_includes_previous_year(self):
+        import datetime
+        current_year = datetime.date.today().year
+        selected_years = [str(y) for y in range(2016, current_year)]
+        self.assertEqual(selected_years[0], '2016')
+        self.assertEqual(selected_years[-1], str(current_year - 1))
+
+    @mock.patch('download_nndss_annual_data.download_all')
+    def test_main_execution(self, mock_download_all):
+        # Parse flags before calling main directly in test
+        download_nndss_annual_data.FLAGS(['download_nndss_annual_data.py'])
+        download_nndss_annual_data.main(['download_nndss_annual_data.py'])
+        mock_download_all.assert_called_once()
+        args, _ = mock_download_all.call_args
+        self.assertEqual(len(args[0]), 6)  # 6 verticals
+        self.assertIn('2016', args[1])
 
 
 if __name__ == '__main__':

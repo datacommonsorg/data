@@ -19,22 +19,42 @@ ethnicity, region, region_state) and formats the output into CSVs ready for
 downstream processing with stat_var_processor.py.
 """
 
-import argparse
 import csv
 import datetime
-import logging
 import os
 import re
 import tempfile
 import time
 import xml.etree.ElementTree as ET
 
+from absl import app
+from absl import flags
+from absl import logging
 import requests
 
 # CDC WONDER Endpoint and Database Constants
 CDC_WONDER_ENDPOINT = "https://wonder.cdc.gov/controller/datarequest/D130"
 DATASET_CODE = "D130"
 MIN_REQUEST_INTERVAL_SECONDS = 16.0  # CDC WONDER requires >= 15s between requests
+
+# Flags configuration
+FLAGS = flags.FLAGS
+
+flags.DEFINE_string(
+    'verticals',
+    'all',
+    'Comma-separated list of verticals (age,sex,race,ethnicity,region,region_state) or "all"'
+)
+flags.DEFINE_string(
+    'years',
+    'all',
+    'Comma-separated list of years (e.g. "2016,2017,2018,2019,2020,2021,2022,2023") or single year'
+)
+flags.DEFINE_string(
+    'output_dir',
+    './input_files',
+    'Output directory to save downloaded CSV files'
+)
 
 # Vertical breakdown configurations
 VERTICAL_CONFIGS = {
@@ -159,15 +179,21 @@ def query_cdc_wonder(xml_payload: str, max_retries: int = 3, session: requests.S
                     logging.warning(f"Rate limit hit on POST {CDC_WONDER_ENDPOINT} (attempt {attempt}/{max_retries}), backing off 25s...")
                     time.sleep(25)
                     continue
-                else:
-                    logging.error(f"CDC WONDER Processing Error on POST {CDC_WONDER_ENDPOINT}: {res}")
-                    raise RuntimeError(f"CDC WONDER processing error: {res}")
+
+                msg_match = re.search(r'<message>(.*?)</message>', res, re.DOTALL | re.IGNORECASE)
+                err_msg = msg_match.group(1).strip() if msg_match else res
+                if 'd130.v1' in res.lower() or ('year' in err_msg.lower() and ('valid' in err_msg.lower() or 'unavailable' in err_msg.lower())):
+                    raise ValueError(f"Year is unavailable in CDC WONDER: {err_msg}")
+
+                logging.error(f"CDC WONDER Processing Error on POST {CDC_WONDER_ENDPOINT}: {res}")
+                raise RuntimeError(f"CDC WONDER processing error: {res}")
             resp.raise_for_status()
             logging.info(f"Received HTTP {resp.status_code} from POST {CDC_WONDER_ENDPOINT}")
             return res
         except requests.RequestException as e:
             logging.warning(f"Network error on POST {CDC_WONDER_ENDPOINT} (attempt {attempt}/{max_retries}): {e}")
             time.sleep(10 * attempt)
+    logging.error("Failed to fetch data from CDC WONDER after maximum retries.")
     raise RuntimeError("Failed to fetch data from CDC WONDER after maximum retries.")
 
 
@@ -252,12 +278,23 @@ def parse_xml_to_csv_rows(xml_response: str, vertical: str) -> list:
     return rows
 
 
-def download_vertical_year(vertical: str, year: str, output_dir: str, session: requests.Session = None):
-    """Downloads and writes CSV for a specific vertical breakdown and year."""
+def download_vertical_year(vertical: str, year: str, output_dir: str, session: requests.Session = None) -> bool:
+    """Downloads and writes CSV for a specific vertical breakdown and year.
+
+    Returns:
+        True if download succeeded and CSV was written, False if data was unavailable.
+    """
     logging.info(f"Downloading vertical '{vertical}' for year {year}...")
-    xml_payload = build_request_xml(vertical, year)
-    xml_response = query_cdc_wonder(xml_payload, session=session)
-    rows = parse_xml_to_csv_rows(xml_response, vertical)
+    try:
+        xml_payload = build_request_xml(vertical, year)
+        xml_response = query_cdc_wonder(xml_payload, session=session)
+        rows = parse_xml_to_csv_rows(xml_response, vertical)
+    except ValueError as e:
+        logging.warning(
+            f"Data unavailable for vertical '{vertical}' and year {year}: {e}. "
+            f"Skipping download."
+        )
+        return False
 
     target_dir = os.path.join(output_dir, vertical)
     os.makedirs(target_dir, exist_ok=True)
@@ -278,6 +315,7 @@ def download_vertical_year(vertical: str, year: str, output_dir: str, session: r
             os.remove(temp_path)
 
     logging.info(f"Saved {len(rows)-1} records to {target_csv}")
+    return True
 
 
 def download_all(verticals: list, years: list, output_dir: str, session: requests.Session = None):
@@ -286,49 +324,50 @@ def download_all(verticals: list, years: list, output_dir: str, session: request
         session = get_session()
     total_tasks = len(verticals) * len(years)
     idx = 1
+    successful_downloads = 0
+    unavailable_downloads = 0
+    unavailable_years = set()
     for v in verticals:
         for y in years:
-            logging.info(f"[{idx}/{total_tasks}] Processing {v} ({y})...")
-            download_vertical_year(v, str(y), output_dir, session=session)
+            str_y = str(y)
+            logging.info(f"[{idx}/{total_tasks}] Processing {v} ({str_y})...")
+            if str_y in unavailable_years:
+                logging.info(
+                    f"Skipping {v} ({str_y}) because year {str_y} was previously determined to be unavailable."
+                )
+                unavailable_downloads += 1
+                idx += 1
+                continue
+            if download_vertical_year(v, str_y, output_dir, session=session):
+                successful_downloads += 1
+            else:
+                unavailable_years.add(str_y)
+                unavailable_downloads += 1
             idx += 1
-    logging.info("All downloads completed successfully!")
-
-
-def main():
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
-    parser = argparse.ArgumentParser(description="Download CDC WONDER NNDSS Annual Data")
-    parser.add_argument(
-        '--verticals',
-        default='all',
-        help='Comma-separated list of verticals (age,sex,race,ethnicity,region,region_state) or "all"'
-    )
-    parser.add_argument(
-        '--years',
-        default='all',
-        help='Comma-separated list of years (e.g. "2016,2017,2018,2019,2020,2021,2022,2023") or single year'
-    )
-    parser.add_argument(
-        '--output_dir',
-        default='./input_files',
-        help='Output directory to save downloaded CSV files'
+    logging.info(
+        f"All downloads finished: {successful_downloads} successful, "
+        f"{unavailable_downloads} unavailable."
     )
 
-    args = parser.parse_args()
 
-    if args.verticals.lower() == 'all':
+def main(argv):
+    del argv  # Unused.
+
+    if FLAGS.verticals.lower() == 'all':
         selected_verticals = list(VERTICAL_CONFIGS.keys())
     else:
-        selected_verticals = [v.strip() for v in args.verticals.split(',') if v.strip()]
+        selected_verticals = [v.strip() for v in FLAGS.verticals.split(',') if v.strip()]
 
-    if args.years.lower() == 'all':
-        selected_years = [str(y) for y in range(2016, datetime.date.today().year - 2)]
+    if FLAGS.years.lower() == 'all':
+        # Inclusive of published years up to datetime.date.today().year - 1
+        selected_years = [str(y) for y in range(2016, datetime.date.today().year)]
     else:
-        selected_years = [y.strip() for y in args.years.split(',') if y.strip()]
+        selected_years = [y.strip() for y in FLAGS.years.split(',') if y.strip()]
 
     logging.info(f"Starting download for verticals={selected_verticals}, years={selected_years}")
-    logging.info(f"Output directory: {args.output_dir}")
-    download_all(selected_verticals, selected_years, args.output_dir)
+    logging.info(f"Output directory: {FLAGS.output_dir}")
+    download_all(selected_verticals, selected_years, FLAGS.output_dir)
 
 
 if __name__ == '__main__':
-    main()
+    app.run(main)
