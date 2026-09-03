@@ -24,9 +24,9 @@
                 }
             ],
             "resource_limits": {
-                "cpu": 8,
-                "memory": 64,
-                "disk": 100
+                "cpu": 1,
+                "memory": 2,
+                "disk": 10
             },
             "cron_schedule": "0 2 29 * *",
             "validation_config_file": "wir_2552_wiki/validation_config.json"
@@ -75,9 +75,9 @@
                 }
             ],
             "resource_limits": {
-                "cpu": 8,
-                "memory": 64,
-                "disk": 100
+                "cpu": 1,
+                "memory": 2,
+                "disk": 10
             },
             "cron_schedule": "30 11 29 * *",
             "validation_config_file": "bev_3240_wiki/validation_config.json"

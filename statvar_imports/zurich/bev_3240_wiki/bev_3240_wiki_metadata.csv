@@ -1,7 +1,7 @@
 parameter,value
 url,https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_od3240
 description,
-place_type,Country
+place_type,City
 #places_within,
 start_date,
 end_date,

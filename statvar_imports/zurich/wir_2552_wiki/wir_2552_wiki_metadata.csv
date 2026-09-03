@@ -1,7 +1,7 @@
 parameter,value
 url,https://data.stadt-zuerich.ch/dataset/bfs_wir_statent_ast_beschaeftigte_vza_rechtsform_betrgr_jahr_od2552
 description,
-place_type,Country
+place_type,City
 #places_within,
 start_date,
 end_date,
