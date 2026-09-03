@@ -37,7 +37,7 @@ def download_files(importname, configs):
     def download_with_retry(url, input_file_name):
         logging.info(f"Downloading file from URL: {url}")
         filename = os.path.join(_INPUT_FILE_PATH, input_file_name)
-        with requests.get(url, stream=True) as response:
+        with requests.get(url, stream=True, timeout=(30, 300)) as response:
             response.raise_for_status()
             with open(filename, 'wb') as f:
                 for chunk in response.iter_content(chunk_size=16 * 1024 * 1024):
@@ -55,7 +55,8 @@ def download_files(importname, configs):
                     logging.info(f"Input File Name {input_file_name}")
 
                     get_record_count = requests.get(
-                        url_new.replace('.csv', record_count_query))
+                        url_new.replace('.csv', record_count_query),
+                        timeout=60)
                     if get_record_count.status_code == 200:
                         record_count = json.loads(
                             get_record_count.text

@@ -137,7 +137,7 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                     chunk["date"] = pd.to_datetime(
                                         chunk["date"],
                                         format="%d%b%Y",
-                                        errors="coerce").dt.strftime("%Y-%m-%d")
+                                        errors="raise").dt.strftime("%Y-%m-%d")
                                     chunk["statefips"] = chunk[
                                         "statefips"].astype(str).str.zfill(2)
                                     chunk["countyfips"] = chunk[
@@ -188,7 +188,7 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                 data["date"] = pd.to_datetime(
                                     data["date"],
                                     format="%d%b%Y",
-                                    errors="coerce").dt.strftime("%Y-%m-%d")
+                                    errors="raise").dt.strftime("%Y-%m-%d")
 
                                 if "PM2.5" in input_file_name:
                                     census_tract = "ds_pm"
