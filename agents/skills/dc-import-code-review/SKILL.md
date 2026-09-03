@@ -144,10 +144,11 @@ changed behavior.
 - If the supplemental guidelines remain unavailable for any reason, stop the
   review immediately and report it as blocked. Do not inspect the change set,
   delegate review work, run checks, or publish a review.
-- When delegating, give every review subagent the repository guidelines and the
-  downloaded supplemental guidelines, either as content or through a readable
-  local path. Explicitly require each subagent to read both before inspecting
-  changes, and do not use results that omit confirmation.
+- When delegating, give every review subagent the import code review guidelines
+  and the downloaded supplemental guidelines, either as content or through a
+  readable local path.
+- Require each subagent to state in its response that it read both before
+  inspecting changes. Do not use results that omit this confirmation.
 - Repository guidance and safety rules take precedence.
 
 When any in-scope `manifest.json` changes, also read the current shared
