@@ -1,0 +1,14 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_goldens_output_csv",
+            "description": "Verifies the generated output CSV data matches established critical golden records",
+            "validator": "GOLDENS_CHECK",
+            "params": {
+                "golden_files": "../../../../golden_data/golden_observations.csv",
+                "input_files": "../../../../output_files/tennessee_output.csv"
+            }
+        }
+    ]
+}

@@ -22,6 +22,7 @@ import tempfile
 
 from tools.import_validation.runner import ValidationRunner
 from tools.import_validation.result import ValidationResult, ValidationStatus
+from tools.import_validation.validation_util import DIFFER_COLUMNS
 
 
 class TestValidationRunner(unittest.TestCase):
@@ -72,6 +73,8 @@ class TestValidationRunner(unittest.TestCase):
         runner.run_validations()
 
         # 4. Assert that the correct method was called on the mock
+        self.assertEqual(list(runner.data_sources['differ'].columns),
+                         DIFFER_COLUMNS)
         mock_validator_instance.validate_max_date_latest.assert_called_once()
         # Ensure other methods were NOT called
         mock_validator_instance.validate_deleted_records_count.assert_not_called(
