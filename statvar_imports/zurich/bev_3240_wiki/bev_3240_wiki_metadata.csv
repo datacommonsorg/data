@@ -1,5 +1,5 @@
 parameter,value
-url,https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3240_wiki.csv
+url,https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_od3240
 description,
 place_type,Country
 #places_within,
@@ -8,7 +8,7 @@ end_date,
 release_frequency,
 process,
 comments,
-output_columns,"observationAbout,observationDate,value,variableMeasured,unit"
+output_columns,"observationAbout,observationDate,value,variableMeasured"
 header_rows,1
-#input_rows,10
-#Import_Name,Zurich_Population
+reconcile_nodes,False
+output_counters,bev_3240_wiki/counters/zurich_population_bev_3240_wiki_counters.csv

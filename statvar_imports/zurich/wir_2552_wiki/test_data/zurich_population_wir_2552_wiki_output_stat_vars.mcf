@@ -1,0 +1,25 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=statvar_imports/zurich/wir_2552_wiki/test_data/wir_2552_wiki_input.csv --pv_map=statvar_imports/zurich/wir_2552_wiki/wir_2552_wiki_pvmap.csv --config_file=statvar_imports/zurich/wir_2552_wiki/wir_2552_wiki_metadata.csv --output_path=statvar_imports/zurich/wir_2552_wiki/test_data/zurich_population_wir_2552_wiki_output" on 2026-08-05 11:36:15.561091
+
+Node: dcid:Count_Person_Employed
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_Employed_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:Employed
+gender: dcid:Female
+
+Node: dcid:Count_Person_Employed_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:Employed
+gender: dcid:Male
+

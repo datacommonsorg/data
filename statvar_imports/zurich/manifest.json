@@ -5,22 +5,31 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/wir_2552_wiki.csv",
-            "provenance_description": "Number of companys, workplaces and employees of Zurich city contains structure and organization of the city administration",
+            "provenance_url": "https://data.stadt-zuerich.ch/dataset/bfs_wir_statent_ast_beschaeftigte_vza_rechtsform_betrgr_jahr_od2552",
+            "provenance_description": "Number of companies, workplaces and employees of Zurich city contains structure and organization of the city administration",
             "scripts": [
-                "../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/wir_2552_wiki.csv --output_folder=wir_2552_wiki/input_files",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=wir_2552_wiki/input_files/wir_2552_wiki.csv --pv_map=wir_2552_wiki/wir_2552_wiki_pvmap.csv --config_file=wir_2552_wiki/wir_2552_wiki_metadata.csv --output_path=wir_2552_wiki/output/zurich_population_wir_2552_wiki"
+                "../../util/download_util_script.py --download_url=https://data.stadt-zuerich.ch/dataset/bfs_wir_statent_ast_beschaeftigte_vza_rechtsform_betrgr_jahr_od2552/download/WIR255OD2552.csv --output_folder=wir_2552_wiki/input_files",
+                "wir_2552_wiki/generate_rollups.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=wir_2552_wiki/input_files/WIR255OD2552_rollups.csv --pv_map=wir_2552_wiki/wir_2552_wiki_pvmap.csv --config_file=wir_2552_wiki/wir_2552_wiki_metadata.csv --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=wir_2552_wiki/output/zurich_population_wir_2552_wiki --output_counters=wir_2552_wiki/counters/zurich_population_wir_2552_wiki_counters.csv"
             ],
             "source_files": [
-                "wir_2552_wiki/input_files/wir_2552_wiki.csv"
+                "wir_2552_wiki/input_files/WIR255OD2552_rollups.csv",
+                "wir_2552_wiki/counters/*.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "wir_2552_wiki/output/zurich_population_wir_2552_wiki.tmcf",
-                    "cleaned_csv": "wir_2552_wiki/output/zurich_population_wir_2552_wiki.csv"
+                    "cleaned_csv": "wir_2552_wiki/output/zurich_population_wir_2552_wiki.csv",
+                    "node_mcf": "wir_2552_wiki/output/zurich_population_wir_2552_wiki_stat_vars.mcf"
                 }
             ],
-            "cron_schedule": "0 2 29 * *"
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 64,
+                "disk": 100
+            },
+            "cron_schedule": "0 2 29 * *",
+            "validation_config_file": "wir_2552_wiki/validation_config.json"
         },
         {
             "import_name": "Zurich_Population_By_Age",
@@ -49,14 +58,15 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3240_wiki.csv",
+            "provenance_url": "https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_od3240",
             "provenance_description": "Population of Zurich city contains structure and organization of the city administration",
             "scripts": [
-                "../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3240_wiki.csv --output_folder=bev_3240_wiki/input_files",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3240_wiki/input_files/bev_3240_wiki.csv --pv_map=bev_3240_wiki/bev_3240_wiki_pvmap.csv --config_file=bev_3240_wiki/bev_3240_wiki_metadata.csv --output_path=bev_3240_wiki/output/zurich_population_bev_3240_wiki"
+                "../../util/download_util_script.py --download_url=https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_od3240/download/BEV324OD3240.csv --output_folder=bev_3240_wiki/input_files",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3240_wiki/input_files/BEV324OD3240.csv --pv_map=bev_3240_wiki/bev_3240_wiki_pvmap.csv --config_file=bev_3240_wiki/bev_3240_wiki_metadata.csv --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=bev_3240_wiki/output/zurich_population_bev_3240_wiki --output_counters=bev_3240_wiki/counters/zurich_population_bev_3240_wiki_counters.csv"
             ],
             "source_files": [
-                "bev_3240_wiki/input_files/bev_3240_wiki.csv"
+                "bev_3240_wiki/input_files/BEV324OD3240.csv",
+                "bev_3240_wiki/counters/*.csv"
             ],
             "import_inputs": [
                 {
@@ -64,7 +74,13 @@
                     "cleaned_csv": "bev_3240_wiki/output/zurich_population_bev_3240_wiki.csv"
                 }
             ],
-            "cron_schedule": "30 11 29 * *"
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 64,
+                "disk": 100
+            },
+            "cron_schedule": "30 11 29 * *",
+            "validation_config_file": "bev_3240_wiki/validation_config.json"
         },
         {
             "import_name": "Zurich_Population_Number_Of_Birth_By_Origin",
