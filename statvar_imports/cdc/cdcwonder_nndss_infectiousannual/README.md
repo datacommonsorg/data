@@ -32,8 +32,7 @@ This import processes annual summary data for Notifiable Infectious Diseases fro
 - `manifest.json`: Configuration for automated pipeline execution, scheduling, scripts, inputs, source files, and validation rules.
 - `validation_config.json`: Configuration defining validation rules (deleted records percent, golden file checks).
 - `age_pvmap.csv`: Property-value mapping for age breakdowns.
-- `race_sex_ethnicity_pvmap.csv`: Property-value mapping for race, sex, and ethnicity breakdowns.
-- `region_pvmap.csv`: Property-value mapping for region breakdowns.
+- `race_region_sex_ethnicity_pvmap.csv`: Standardized property-value mapping for race, region, sex, and ethnicity breakdowns.
 - `region_state_pvmap.csv`: Property-value mapping for region and state breakdowns.
 - `common_metadata.csv`: Shared metadata configuration file for `stat_var_processor.py`.
 - `input_files/`: Raw annual input CSV files (2016–2023) organized in subdirectories by breakdown (`age/`, `ethnicity/`, `race/`, `region/`, `region_state/`, `sex/`).
@@ -49,13 +48,13 @@ This import processes annual summary data for Notifiable Infectious Diseases fro
 The automated import is orchestrated via `manifest.json`. When executed by the Data Commons import pipeline, it automatically performs the following steps:
 
 1. **Data Download:** Executes `download_nndss_annual_data.py` to fetch the latest raw data into `input_files/`.
-2. **Data Processing:** Runs `stat_var_processor.py` across all 6 breakdown verticals (`race`, `region`, `sex`, `ethnicity`, `age`, `region_state`) using their respective property-value mappings, shared metadata, and writes output counters:
-   - `race`: `input_files/race/NNDSS_Annual_Summary_Data_*.csv` -> `output/output_race`, counters: `counters/race_output_counters.csv`
-   - `region`: `input_files/region/NNDSS_Annual_Summary_Data_*.csv` -> `output/output_region`, counters: `counters/region_output_counters.csv`
-   - `sex`: `input_files/sex/NNDSS_Annual_Summary_Data_*.csv` -> `output/output_sex`, counters: `counters/sex_output_counters.csv`
-   - `ethnicity`: `input_files/ethnicity/NNDSS_Annual_Summary_Data_*.csv` -> `output/output_ethnicity`, counters: `counters/ethnicity_output_counters.csv`
-   - `age`: `input_files/age/NNDSS_Annual_Summary_Data_*.csv` -> `output/output_age`, counters: `counters/age_output_counters.csv`
-   - `region_state`: `input_files/region_state/NNDSS_Annual_Summary_Data_*.csv` -> `output/output_region_state`, counters: `counters/region_state_output_counters.csv`
+2. **Data Processing:** Runs `stat_var_processor.py` across all 6 breakdown verticals (`race`, `region`, `sex`, `ethnicity`, `age`, `region_state`) using their respective property-value mappings (`race_region_sex_ethnicity_pvmap.csv` for race, region, sex, and ethnicity; `age_pvmap.csv` for age; `region_state_pvmap.csv` for region/state), shared metadata, and writes output counters:
+   - `race`: `input_files/race/NNDSS_Annual_Summary_Data_*.csv` (pvmap: `race_region_sex_ethnicity_pvmap.csv`) -> `output/output_race`, counters: `counters/race_output_counters.csv`
+   - `region`: `input_files/region/NNDSS_Annual_Summary_Data_*.csv` (pvmap: `race_region_sex_ethnicity_pvmap.csv`) -> `output/output_region`, counters: `counters/region_output_counters.csv`
+   - `sex`: `input_files/sex/NNDSS_Annual_Summary_Data_*.csv` (pvmap: `race_region_sex_ethnicity_pvmap.csv`) -> `output/output_sex`, counters: `counters/sex_output_counters.csv`
+   - `ethnicity`: `input_files/ethnicity/NNDSS_Annual_Summary_Data_*.csv` (pvmap: `race_region_sex_ethnicity_pvmap.csv`) -> `output/output_ethnicity`, counters: `counters/ethnicity_output_counters.csv`
+   - `age`: `input_files/age/NNDSS_Annual_Summary_Data_*.csv` (pvmap: `age_pvmap.csv`) -> `output/output_age`, counters: `counters/age_output_counters.csv`
+   - `region_state`: `input_files/region_state/NNDSS_Annual_Summary_Data_*.csv` (pvmap: `region_state_pvmap.csv`) -> `output/output_region_state`, counters: `counters/region_state_output_counters.csv`
 3. **Import Inputs & Retained Outputs:**
    - Template MCF: `output/output_age.tmcf`
    - Cleaned CSV: `output/output_*.csv`
@@ -93,7 +92,7 @@ python3 download_nndss_annual_data.py --verticals=age,sex --years=2022,2023 --ou
 # Race Breakdown
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data="./input_files/race/NNDSS_Annual_Summary_Data_*.csv" \
-  --pv_map=race_sex_ethnicity_pvmap.csv \
+  --pv_map=race_region_sex_ethnicity_pvmap.csv \
   --config_file=common_metadata.csv \
   --output_path=./output/output_race \
   --output_counters=counters/race_output_counters.csv \
@@ -102,7 +101,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 # Region Breakdown
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data="./input_files/region/NNDSS_Annual_Summary_Data_*.csv" \
-  --pv_map=region_pvmap.csv \
+  --pv_map=race_region_sex_ethnicity_pvmap.csv \
   --config_file=common_metadata.csv \
   --output_path=./output/output_region \
   --output_counters=counters/region_output_counters.csv \
@@ -111,7 +110,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 # Sex Breakdown
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data="./input_files/sex/NNDSS_Annual_Summary_Data_*.csv" \
-  --pv_map=race_sex_ethnicity_pvmap.csv \
+  --pv_map=race_region_sex_ethnicity_pvmap.csv \
   --config_file=common_metadata.csv \
   --output_path=./output/output_sex \
   --output_counters=counters/sex_output_counters.csv \
@@ -120,7 +119,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 # Ethnicity Breakdown
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data="./input_files/ethnicity/NNDSS_Annual_Summary_Data_*.csv" \
-  --pv_map=race_sex_ethnicity_pvmap.csv \
+  --pv_map=race_region_sex_ethnicity_pvmap.csv \
   --config_file=common_metadata.csv \
   --output_path=./output/output_ethnicity \
   --output_counters=counters/ethnicity_output_counters.csv \
@@ -150,7 +149,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 # Race Breakdown
 python3 tools/statvar_importer/stat_var_processor.py \
   --input_data="statvar_imports/cdc/cdcwonder_nndss_infectiousannual/input_files/race/NNDSS_Annual_Summary_Data_*.csv" \
-  --pv_map=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/race_sex_ethnicity_pvmap.csv \
+  --pv_map=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/race_region_sex_ethnicity_pvmap.csv \
   --config_file=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/common_metadata.csv \
   --output_path=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/output/output_race \
   --output_counters=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/counters/race_output_counters.csv \
@@ -159,7 +158,7 @@ python3 tools/statvar_importer/stat_var_processor.py \
 # Region Breakdown
 python3 tools/statvar_importer/stat_var_processor.py \
   --input_data="statvar_imports/cdc/cdcwonder_nndss_infectiousannual/input_files/region/NNDSS_Annual_Summary_Data_*.csv" \
-  --pv_map=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/region_pvmap.csv \
+  --pv_map=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/race_region_sex_ethnicity_pvmap.csv \
   --config_file=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/common_metadata.csv \
   --output_path=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/output/output_region \
   --output_counters=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/counters/region_output_counters.csv \
@@ -168,7 +167,7 @@ python3 tools/statvar_importer/stat_var_processor.py \
 # Sex Breakdown
 python3 tools/statvar_importer/stat_var_processor.py \
   --input_data="statvar_imports/cdc/cdcwonder_nndss_infectiousannual/input_files/sex/NNDSS_Annual_Summary_Data_*.csv" \
-  --pv_map=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/race_sex_ethnicity_pvmap.csv \
+  --pv_map=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/race_region_sex_ethnicity_pvmap.csv \
   --config_file=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/common_metadata.csv \
   --output_path=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/output/output_sex \
   --output_counters=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/counters/sex_output_counters.csv \
@@ -177,7 +176,7 @@ python3 tools/statvar_importer/stat_var_processor.py \
 # Ethnicity Breakdown
 python3 tools/statvar_importer/stat_var_processor.py \
   --input_data="statvar_imports/cdc/cdcwonder_nndss_infectiousannual/input_files/ethnicity/NNDSS_Annual_Summary_Data_*.csv" \
-  --pv_map=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/race_sex_ethnicity_pvmap.csv \
+  --pv_map=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/race_region_sex_ethnicity_pvmap.csv \
   --config_file=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/common_metadata.csv \
   --output_path=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/output/output_ethnicity \
   --output_counters=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/counters/ethnicity_output_counters.csv \
@@ -204,14 +203,51 @@ python3 tools/statvar_importer/stat_var_processor.py \
 
 ### 3. Testing with Sample Data
 To test the processor using sample input data for any breakdown vertical:
+
+**From import directory (`statvar_imports/cdc/cdcwonder_nndss_infectiousannual/`):**
+```bash
+# Test Age Breakdown
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=./test_data/age/NNDSS_Annual_Summary_Data_*.csv \
+  --pv_map=age_pvmap.csv \
+  --config_file=common_metadata.csv \
+  --output_path=./test_data/age/output \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+
+# Test Race / Region / Sex / Ethnicity Breakdown (e.g., Race)
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=./test_data/race/NNDSS_Annual_Summary_Data_*.csv \
+  --pv_map=race_region_sex_ethnicity_pvmap.csv \
+  --config_file=common_metadata.csv \
+  --output_path=./test_data/race/output \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+
+# Test Region/State Breakdown
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=./test_data/region_state/NNDSS_Annual_Summary_Data_*.csv \
+  --pv_map=region_state_pvmap.csv \
+  --config_file=common_metadata.csv \
+  --output_path=./test_data/region_state/output \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+```
+
+**From repository root (`data/`):**
 ```bash
 # Test Age Breakdown
 python3 tools/statvar_importer/stat_var_processor.py \
   --input_data=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/test_data/age/NNDSS_Annual_Summary_Data_2023.csv \
   --pv_map=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/age_pvmap.csv \
   --config_file=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/common_metadata.csv \
-  --output_path=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/test_data/age/test_output \
-  --output_counters=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/test_data/age/test_counters.csv
+  --output_path=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/test_data/age/output \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+
+# Test Race / Region / Sex / Ethnicity Breakdown (e.g., Race)
+python3 tools/statvar_importer/stat_var_processor.py \
+  --input_data=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/test_data/race/NNDSS_Annual_Summary_Data_2023.csv \
+  --pv_map=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/race_region_sex_ethnicity_pvmap.csv \
+  --config_file=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/common_metadata.csv \
+  --output_path=statvar_imports/cdc/cdcwonder_nndss_infectiousannual/test_data/race/output \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
 ### 4. Running Downloader Unit Tests
