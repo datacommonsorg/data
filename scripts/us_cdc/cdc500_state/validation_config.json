@@ -1,0 +1,30 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_max_value_percentage",
+            "description": "Checks that all percentage StatVars do not exceed 100%.",
+            "validator": "MAX_VALUE_CHECK",
+            "params": {
+                "maximum": 100
+            }
+        },
+        {
+            "rule_id": "check_min_value_percentage",
+            "description": "Checks that all percentage StatVars are not below 0%.",
+            "validator": "MIN_VALUE_CHECK",
+            "params": {
+                "minimum": 0
+            }
+        },
+        {
+            "rule_id": "check_num_places_state_count",
+            "description": "Checks that state-level observations cover all 50-52 US state entities.",
+            "validator": "NUM_PLACES_COUNT",
+            "params": {
+                "minimum": 50,
+                "maximum": 52
+            }
+        }
+    ]
+}
