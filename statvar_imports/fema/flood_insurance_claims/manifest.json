@@ -7,16 +7,20 @@
         "provenance_description": "National flood insurance claims data",
         "scripts": [
             "fema_download.py",
-            "process.py --input_data='input_file/fema_nfip_claims.csv' --config_file='us_flood_nfip_config.py' --pv_map='us_flood_nfip_pv_map_floodzone.py,ratedFloodZone:us_flood_nfip_floodzone_pv_map.py,observationAbout:us_state_codes.py' --output_path='output/nfip_output'"
+            "process.py --input_data='input_file/fema_nfip_claims.csv' --config_file='us_flood_nfip_config.py' --pv_map='us_flood_nfip_pv_map_floodzone.py,ratedFloodZone:us_flood_nfip_floodzone_pv_map.py,observationAbout:us_state_codes.py' --output_path='output/nfip_output' --existing_statvar_mcf='gs://unresolved_mcf/scripts/statvar/stat_vars.mcf' --output_counters='counters/counters.txt'"
         ],
         "import_inputs": [
           {
             "template_mcf": "output/nfip_output.tmcf",
-            "cleaned_csv": "output/nfip_output.csv"
+            "cleaned_csv": "output/nfip_output.csv",
+            "node_mcf": "output/nfip_output.mcf"
           }
         ],
         "source_files": [
-          "input_file/fema_nfip_claims.csv"
+          "input_file/fema_nfip_claims.csv",
+          "golden_data/*.csv",
+          "validation_config.json",
+          "counters/*"
         ],
         "resource_limits": {
                 "cpu": 64,
@@ -28,4 +32,3 @@
       }
     ]
   }
-  
