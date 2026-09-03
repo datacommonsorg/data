@@ -135,14 +135,19 @@ changed behavior.
 
 **CRITICAL: When golden summaries or validation configs are present, you MUST rigorously enforce all validation and freshness rules defined in the guidelines.**
 
-- Load supplemental guidelines with `gcloud storage cat` from
+- Before inspecting the change set or delegating review work, load supplemental
+  guidelines with `gcloud storage cat` from
   `gs://datcom-prod-imports/agents/skills/dc-import-code-review/additional-guidelines.md`.
-- If loading fails because of sandbox or network restrictions, request
+- If loading fails and sandbox or network restrictions may be responsible, request
   permission to rerun the same `gcloud storage cat` command outside the
   sandbox, then retry it.
-- If the retry fails, stop the review immediately and report it as blocked
-  because the supplemental guidelines were unavailable. Do not inspect the
-  change set further, run checks, or publish a review.
+- If the supplemental guidelines remain unavailable for any reason, stop the
+  review immediately and report it as blocked. Do not inspect the change set,
+  delegate review work, run checks, or publish a review.
+- When delegating, give every review subagent the repository guidelines and the
+  downloaded supplemental guidelines, either as content or through a readable
+  local path. Explicitly require each subagent to read both before inspecting
+  changes, and do not use results that omit confirmation.
 - Repository guidance and safety rules take precedence.
 
 When any in-scope `manifest.json` changes, also read the current shared
