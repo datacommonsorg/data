@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "California_School_Performance",
+            "import_name": "CaliforniaSchoolPerformance",
             "curator_emails": [
                 "support@datacommons.org"
             ],
