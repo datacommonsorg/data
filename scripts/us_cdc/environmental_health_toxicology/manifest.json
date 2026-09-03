@@ -22,7 +22,6 @@
             "config_override": {
                 "invoke_differ_tool": false
             },
-            "validation_config_file": "validation_config.json",
             "import_inputs": [
                 {
                     "template_mcf": "PM25CensusTractPollution_part1.tmcf",
@@ -65,7 +64,6 @@
             "config_override": {
                 "invoke_differ_tool": false
             },
-            "validation_config_file": "validation_config.json",
             "import_inputs": [
                 {
                     "template_mcf": "OzoneCensusTractPollution_part1.tmcf",
