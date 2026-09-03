@@ -9,11 +9,12 @@
             "provenance_description": "RBI State Domestic Product data",
             "scripts": [
                 "rbi_sdp_download.py",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.xlsx --pv_map=state_domestic_product_pv_map.csv --config_file=state_domestic_product_metadata.csv --places_resolved_csv=state_domestic_product_places_resolved.csv --output_path=output/state_domestic_product_output --output_counters=counters/state_domestic_product_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.xlsx --pv_map=state_domestic_product_pv_map.csv --config_file=state_domestic_product_metadata.csv --places_resolved_csv=state_domestic_product_places_resolved.csv --output_path=output/state_domestic_product_output --output_counters=counters/state_domestic_product_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --statvar_dcid_remap_csv=statvar_remap.csv"
             ],
             "source_files": [
                 "source_files/*.xlsx",
-                "counters/*.csv"
+                "counters/*.csv",
+                "statvar_remap.csv"
             ],
             "import_inputs": [
                 {

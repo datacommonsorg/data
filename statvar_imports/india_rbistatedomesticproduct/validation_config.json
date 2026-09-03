@@ -14,6 +14,15 @@
       "description": "Checks that the latest date is the same for all StatVars.",
       "validator": "MAX_DATE_CONSISTENT",
       "params": {}
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Checks that the latest date does not regress below 2025-03.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats",
+        "condition": "MaxDate >= '2025-03'"
+      }
     }
   ]
 }
