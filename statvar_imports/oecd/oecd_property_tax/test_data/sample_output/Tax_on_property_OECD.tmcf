@@ -1,0 +1,8 @@
+Node: E:Tax_on_property_OECD->E0
+observationAbout: C:Tax_on_property_OECD->observationAbout
+observationDate: C:Tax_on_property_OECD->observationDate
+value: C:Tax_on_property_OECD->value
+variableMeasured: C:Tax_on_property_OECD->variableMeasured
+unit: C:Tax_on_property_OECD->unit
+scalingFactor: C:Tax_on_property_OECD->scalingFactor
+typeOf: dcs:StatVarObservation
