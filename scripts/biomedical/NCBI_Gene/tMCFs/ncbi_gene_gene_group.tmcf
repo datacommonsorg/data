@@ -1,0 +1,11 @@
+Node: E:ncbi_gene_gene_group->E1
+typeOf: dcs:Gene
+dcid: C:ncbi_gene_gene_group->GeneID
+genePotentialReadthroughSibling: C:ncbi_gene_gene_group->PotentialReadthroughSibling
+geneReadthroughChild: C:ncbi_gene_gene_group->ReadthroughChild
+geneReadthroughParent: C:ncbi_gene_gene_group->ReadthroughParent
+geneReadthroughSibling: C:ncbi_gene_gene_group->ReadthroughSibling
+geneRegionMember: C:ncbi_gene_gene_group->RegionMember
+geneRegionParent: C:ncbi_gene_gene_group->RegionParent
+relatedFunctionalGene: C:ncbi_gene_gene_group->RelatedFunctionalGene
+relatedPseudogene: C:ncbi_gene_gene_group->RelatedPseudogene
