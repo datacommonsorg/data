@@ -50,9 +50,12 @@ flags.DEFINE_string(
     'all',
     'Comma-separated list of years (e.g. "2016,2017,2018,2019,2020,2021,2022,2023") or single year'
 )
+_DEFAULT_OUTPUT_DIR = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'input_files'
+)
 flags.DEFINE_string(
     'output_dir',
-    './input_files',
+    _DEFAULT_OUTPUT_DIR,
     'Output directory to save downloaded CSV files'
 )
 

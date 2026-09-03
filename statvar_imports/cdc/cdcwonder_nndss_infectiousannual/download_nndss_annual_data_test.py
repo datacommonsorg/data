@@ -361,6 +361,15 @@ class DownloadNndssAnnualDataTest(unittest.TestCase):
         self.assertEqual(selected_years[0], '2016')
         self.assertEqual(selected_years[-1], str(current_year - 1))
 
+    def test_default_output_dir_resolves_relative_to_script(self):
+        expected = os.path.join(
+            os.path.dirname(os.path.abspath(download_nndss_annual_data.__file__)),
+            'input_files',
+        )
+        self.assertEqual(download_nndss_annual_data._DEFAULT_OUTPUT_DIR, expected)
+        download_nndss_annual_data.FLAGS(['download_nndss_annual_data.py'])
+        self.assertEqual(download_nndss_annual_data.FLAGS.output_dir, expected)
+
     @mock.patch('download_nndss_annual_data.download_all')
     def test_main_execution(self, mock_download_all):
         # Parse flags before calling main directly in test
@@ -370,6 +379,7 @@ class DownloadNndssAnnualDataTest(unittest.TestCase):
         args, _ = mock_download_all.call_args
         self.assertEqual(len(args[0]), 6)  # 6 verticals
         self.assertIn('2016', args[1])
+        self.assertEqual(args[2], download_nndss_annual_data._DEFAULT_OUTPUT_DIR)
 
 
 if __name__ == '__main__':
