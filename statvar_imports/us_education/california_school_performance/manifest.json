@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "California_School_Performance",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://caaspp-elpac.ets.org/caaspp/ResearchFileListSB",
+            "provenance_description": "Official public assessment data from the California Department of Education (CDE) and ETS, covering California Assessment of Student Performance and Progress (CAASPP) Smarter Balanced Summative Assessments for English Language Arts/Literacy (ELA) and Mathematics across California public schools, districts, counties, and statewide aggregates.",
+            "scripts": [
+                "download.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/sb_ca_all_years_normalized.txt --pv_map=config/california_school_performance_pvmap.csv --config_file=config/california_school_performance_metadata.csv --existing_statvar_mcf=config/california_school_performance_stat_vars.mcf --output_path=output_files/california_school_performance_all_years_output"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/california_school_performance_all_years_output.tmcf",
+                    "cleaned_csv": "output_files/california_school_performance_all_years_output.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/sb_ca_all_years_normalized.txt"
+            ],
+            "cron_schedule": "0 0 1 10 *"
+        }
+    ]
+}
