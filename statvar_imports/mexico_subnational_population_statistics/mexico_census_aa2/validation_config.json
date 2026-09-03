@@ -9,6 +9,15 @@
                 "query": "SELECT * FROM stats WHERE StatVar NOT LIKE '%65OrMoreYears%'",
                 "condition": "CAST(MaxDate AS INTEGER) >= 2024"
             }
+        },
+        {
+            "rule_id": "check_max_date_freshness_65_plus",
+            "description": "Checks that the latest observation year is at least 2021 for 65OrMoreYears StatVars.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT * FROM stats WHERE StatVar LIKE '%65OrMoreYears%'",
+                "condition": "CAST(MaxDate AS INTEGER) >= 2021"
+            }
         }
     ]
 }

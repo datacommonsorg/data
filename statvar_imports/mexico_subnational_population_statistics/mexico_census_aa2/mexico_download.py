@@ -36,8 +36,6 @@ HEADER_RENAME = {
     "ADM0_ES": "ADM0_EN",
     "ADM1_ES": "ADM1_EN",
     "ADM2_ES": "ADM2_EN",
-    "0": "ADM0_EN",
-    0: "ADM0_EN",
 }
 
 LEVEL_LEADING_COLS = {
@@ -68,6 +66,9 @@ def normalize_dataframe(df: pd.DataFrame, sheet_name: str) -> pd.DataFrame:
             break
     if not level:
         return df
+
+    if level == "adm0" and "ADM0_EN" not in df.columns:
+        df = df.rename(columns={"0": "ADM0_EN", 0: "ADM0_EN"})
 
     leading = LEVEL_LEADING_COLS[level]
     # Remove accidental subnational columns from ADM0 if present
