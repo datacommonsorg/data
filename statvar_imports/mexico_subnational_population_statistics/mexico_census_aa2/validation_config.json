@@ -8,6 +8,15 @@
             "params": {
                 "threshold": 0.1
             }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Checks that the latest observation year is at least 2024 for active StatVars.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT * FROM stats WHERE StatVar NOT LIKE '%65OrMoreYears%'",
+                "condition": "CAST(MaxDate AS INTEGER) >= 2024"
+            }
         }
     ]
 }

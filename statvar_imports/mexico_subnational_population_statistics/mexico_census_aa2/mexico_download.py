@@ -23,7 +23,6 @@ Mexico_Census_URL = config.Mexico_Census_URL
 
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                           "input_files")
-Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
 
 
 @retry(tries=3, delay=5, backoff=2)
@@ -83,6 +82,7 @@ def normalize_dataframe(df: pd.DataFrame, sheet_name: str) -> pd.DataFrame:
 
 
 def download_and_convert_excel_to_csv():
+    Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
     logging.info("Starting download and conversion of Excel files...")
     KEYWORDS = ["adm0", "adm1", "adm2"]
     try:
@@ -105,12 +105,10 @@ def download_and_convert_excel_to_csv():
                 except Exception as e:
                     logging.fatal(
                         f"Failed to process the sheet '{sheet_name}' : {e}")
-                    raise RuntimeError(e)
-                    
+
 
     except requests.exceptions.RequestException as e:
         logging.fatal(f"Failed to download Mexico Census data file: {e}")
-        raise RuntimeError(e)
         
 
 

@@ -5,7 +5,7 @@
 - how to download data: Download script (mexico_download.py).
     To download the data, you'll need to use the provided download script, mexico_download.py. This script will automatically create an "input_files" folder where you should place the file to be processed. The script also requires a configuration file (config.py) to function correctly. Future urls can be added in the same config.py file.
 
-- type of place: Demographics, Administrative Area 1 and Administrative area 2 level.
+- type of place: Country (Administrative Area 0), Administrative Area 1, and Administrative Area 2 levels.
 
 - statvars: Demographics and Subnational.
 
@@ -27,7 +27,7 @@ For Admistrative Area 0 (AA0):
 `python3 stat_var_processor.py --input_data=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/input_files/mex_admpop_adm0_*.csv --existing_statvar_mcf=stat_vars.mcf --pv_map=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/mexico_pvmap_adm0.csv --config=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/mexico_metadata.csv --places_resolved_csv=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/mexico_places.csv --output_path='/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/output_files/mexico_output_aa0'`
 
 For Admistrative Area 1 (AA1):
-`python3 stat_var_processor.py --input_data=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/input_files/mex_admpop_adm1_*.csv --existing_statvar_mcf=stat_vars.mcf --pv_map=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/mexico_pvmap_aa1.csv --config=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa1/mexico_metadata.csv --places_resolved_csv=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/mexico_places.csv --output_path='/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/output_files/mexico_output_aa1'`
+`python3 stat_var_processor.py --input_data=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/input_files/mex_admpop_adm1_*.csv --existing_statvar_mcf=stat_vars.mcf --pv_map=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/mexico_pvmap_aa1.csv --config=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/mexico_metadata.csv --places_resolved_csv=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/mexico_places.csv --output_path='/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/output_files/mexico_output_aa1'`
 
 For Admistrative Area 2 (AA2):
 `python3 stat_var_processor.py --input_data=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/input_files/mex_admpop_adm2_*.csv --existing_statvar_mcf=stat_vars.mcf --pv_map=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/mexico_pvmap_aa2.csv --config=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/mexico_metadata.csv --places_resolved_csv=/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/mexico_places.csv --output_path='/data/statvar_imports/mexico_subnational_population_statistics/mexico_census_aa2/output_files/mexico_output_aa2'`
