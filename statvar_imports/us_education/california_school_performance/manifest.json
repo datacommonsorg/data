@@ -9,18 +9,22 @@
             "provenance_description": "Official public assessment data from the California Department of Education (CDE) and ETS, covering California Assessment of Student Performance and Progress (CAASPP) Smarter Balanced Summative Assessments for English Language Arts/Literacy (ELA) and Mathematics across California public schools, districts, counties, and statewide aggregates.",
             "scripts": [
                 "download.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/sb_ca_all_years_normalized.txt --pv_map=config/california_school_performance_pvmap.csv --config_file=config/california_school_performance_metadata.csv --existing_statvar_mcf=config/california_school_performance_stat_vars.mcf --output_path=output_files/california_school_performance_all_years_output"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/sb_ca_all_years_normalized.txt --pv_map=config/california_school_performance_pvmap.csv --config_file=config/california_school_performance_metadata.csv --existing_statvar_mcf=config/california_school_performance_stat_vars.mcf --output_path=output_files/california_school_performance_all_years_output --output_counters=counters/california_school_performance_counters.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "output_files/california_school_performance_all_years_output.tmcf",
-                    "cleaned_csv": "output_files/california_school_performance_all_years_output.csv"
+                    "cleaned_csv": "output_files/california_school_performance_all_years_output.csv",
+                    "node_mcf": "output_files/*.mcf"
                 }
             ],
             "source_files": [
-                "input_files/sb_ca_all_years_normalized.txt"
+                "input_files/sb_ca_all_years_normalized.txt",
+                "golden_data/*.csv",
+                "counters/*.csv"
             ],
-            "cron_schedule": "0 0 1 10 *"
+            "cron_schedule": "0 0 1 10 *",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

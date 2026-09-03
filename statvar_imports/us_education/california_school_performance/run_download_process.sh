@@ -47,12 +47,14 @@ if [ -f "$SCRIPT_DIR/input_files/sb_ca_all_years_normalized.txt" ]; then
   echo "--------------------------------------------------------------------------"
   echo "Processing complete multi-year dataset: sb_ca_all_years_normalized.txt"
   echo "--------------------------------------------------------------------------"
+  mkdir -p "$SCRIPT_DIR/counters"
   PYTHONPATH="$TOOLS_DIR" python3 "$TOOLS_DIR/stat_var_processor.py" \
     --input_data="$SCRIPT_DIR/input_files/sb_ca_all_years_normalized.txt" \
     --pv_map="$PVMAP" \
     --config_file="$METADATA" \
     --existing_statvar_mcf="$EXISTING_MCF" \
-    --output_path="$SCRIPT_DIR/output_files/california_school_performance_all_years_output"
+    --output_path="$SCRIPT_DIR/output_files/california_school_performance_all_years_output" \
+    --output_counters="$SCRIPT_DIR/counters/california_school_performance_counters.csv"
 fi
 
 # Also process individual year normalized files
