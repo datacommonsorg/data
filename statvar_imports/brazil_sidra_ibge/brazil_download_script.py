@@ -85,6 +85,7 @@ def get_available_periods() -> List[Dict[str, Any]]:
     headers = {"User-Agent": "Mozilla/5.0"}
     
     try:
+        logging.info(f"Fetching IBGE period metadata: GET {url}")
         res = SESSION.get(url, headers=headers, timeout=30)
         res.raise_for_status()
         periods_data = res.json()
@@ -95,7 +96,6 @@ def get_available_periods() -> List[Dict[str, Any]]:
                 f"Invalid or empty period metadata response from IBGE API. "
                 f"URL: {url}, Response preview: {str(periods_data)[:200]}"
             )
-            logging.error(err_msg)
             raise RuntimeError(err_msg)
             
         periods = [p for p in periods_data if isinstance(p, dict) and p.get("id", "") >= PERIOD_START]
@@ -104,9 +104,9 @@ def get_available_periods() -> List[Dict[str, Any]]:
                 f"No available periods found starting from {PERIOD_START}. "
                 f"URL: {url}, Raw count: {len(periods_data)}"
             )
-            logging.error(err_msg)
             raise RuntimeError(err_msg)
 
+        logging.info(f"Successfully retrieved {len(periods)} periods from {url}")
         return periods
 
     except requests.exceptions.RequestException as req_err:
@@ -174,6 +174,7 @@ def fetch_aggregate_series(agg_id: int, var_id: int, geo_code: str, period_query
     context = f"URL: {url} (agg_id={agg_id}, var_id={var_id}, geo_code={geo_code}, period_query={period_query}, classif={classif})"
     headers = {"User-Agent": "Mozilla/5.0"}
     try:
+        logging.info(f"Fetching IBGE aggregate series: GET {url}")
         r = SESSION.get(url, headers=headers, timeout=30)
         r.raise_for_status()
             
@@ -182,7 +183,6 @@ def fetch_aggregate_series(agg_id: int, var_id: int, geo_code: str, period_query
         # Guard check to ensure valid list structure returned from API
         if not isinstance(data, list) or not data or "resultados" not in data[0]:
             err_msg = f"Invalid or empty response structure from IBGE API. Context: {context}. Response preview: {str(data)[:300]}"
-            logging.error(err_msg)
             raise RuntimeError(err_msg)
 
         result_map = {}
@@ -199,6 +199,7 @@ def fetch_aggregate_series(agg_id: int, var_id: int, geo_code: str, period_query
                 serie = s.get("serie", {})
                 result_map[cat_key] = serie
 
+        logging.info(f"Successfully retrieved {len(result_map)} series from {url}")
         return result_map
 
     except requests.exceptions.RequestException as req_err:
@@ -357,19 +358,27 @@ def main(argv):
         for folder_name in PANEL_FOLDER_MAP.values():
             os.makedirs(os.path.join(DOWNLOAD_DIR, folder_name), exist_ok=True)
     except Exception as dir_err:
-        err_msg = f"Could not setup target download folders in '{DOWNLOAD_DIR}': {dir_err}"
-        logging.error(err_msg)
-        raise
+        logging.fatal(f"Could not setup target download folders in '{DOWNLOAD_DIR}': {dir_err}")
+        return
 
     # Retrieve period metadata
-    periods = get_available_periods()
+    try:
+        periods = get_available_periods()
+    except Exception as fetch_err:
+        logging.fatal(f"Unrecoverable error fetching period metadata: {fetch_err}")
+        return
+
     logging.info(f"Fetched {len(periods)} available periods starting from {PERIOD_START}: {[p['id'] for p in periods]}")
 
     # Process each location and panel step-by-step
     for place_name, geo_code in LOCATIONS.items():
         logging.info(f"Processing: {place_name}")
         for panel_index in range(1, 5):
-            fetch_panel_data(place_name, geo_code, panel_index, periods)
+            try:
+                fetch_panel_data(place_name, geo_code, panel_index, periods)
+            except Exception as panel_err:
+                logging.fatal(f"Unrecoverable error processing {place_name} (Panel {panel_index}): {panel_err}")
+                return
             # Short pause to reduce load on the IBGE REST API
             time.sleep(0.1)
 

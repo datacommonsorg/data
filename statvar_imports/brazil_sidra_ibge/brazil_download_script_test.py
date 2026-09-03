@@ -80,6 +80,30 @@ class BrazilDownloadScriptTest(unittest.TestCase):
         self.assertEqual([p["id"] for p in periods],
                          ["202201", "202202", "202203"])
 
+    @patch("brazil_download_script.logging.info")
+    @patch("brazil_download_script.SESSION.get")
+    def test_get_available_periods_logging(self, mock_get, mock_log_info):
+        """Tests that outbound request and successful retrieval are logged."""
+        mock_response = MagicMock()
+        mock_response.json.return_value = [
+            {
+                "id": "202201",
+                "literals": ["1º trimestre 2022"]
+            },
+            {
+                "id": "202202",
+                "literals": ["2º trimestre 2022"]
+            },
+        ]
+        mock_get.return_value = mock_response
+
+        brazil_download_script.get_available_periods()
+        expected_url = "https://servicodados.ibge.gov.br/api/v3/agregados/6461/periodos"
+        mock_log_info.assert_any_call(
+            f"Fetching IBGE period metadata: GET {expected_url}")
+        mock_log_info.assert_any_call(
+            f"Successfully retrieved 2 periods from {expected_url}")
+
     @patch("brazil_download_script.SESSION.get")
     def test_get_available_periods_empty_or_invalid_json(self, mock_get):
         """Tests that empty or non-list response raises RuntimeError."""
@@ -186,6 +210,33 @@ class BrazilDownloadScriptTest(unittest.TestCase):
             6461, 4096, "N1[1]", "202201|202202")
         self.assertIn("Total", result)
         self.assertEqual(result["Total"], {"202201": "62.1", "202202": "62.6"})
+
+    @patch("brazil_download_script.logging.info")
+    @patch("brazil_download_script.SESSION.get")
+    def test_fetch_aggregate_series_logging(self, mock_get, mock_log_info):
+        """Tests that outbound request and successful retrieval are logged for aggregate series."""
+        mock_response = MagicMock()
+        mock_response.json.return_value = [{
+            "id":
+                "4096",
+            "resultados": [{
+                "classificacoes": [],
+                "series": [{
+                    "serie": {
+                        "202201": "62.1"
+                    }
+                }]
+            }]
+        }]
+        mock_get.return_value = mock_response
+
+        brazil_download_script.fetch_aggregate_series(
+            6461, 4096, "N1[1]", "202201")
+        expected_url = "https://servicodados.ibge.gov.br/api/v3/agregados/6461/periodos/202201/variaveis/4096?localidades=N1[1]"
+        mock_log_info.assert_any_call(
+            f"Fetching IBGE aggregate series: GET {expected_url}")
+        mock_log_info.assert_any_call(
+            f"Successfully retrieved 1 series from {expected_url}")
 
     @patch("brazil_download_script.SESSION.get")
     def test_fetch_aggregate_series_classified(self, mock_get):
@@ -415,6 +466,46 @@ class BrazilDownloadScriptTest(unittest.TestCase):
         mock_get_periods.assert_called_once()
         expected_call_count = len(panel_specs.LOCATIONS) * 4
         self.assertEqual(mock_fetch_panel.call_count, expected_call_count)
+
+    @patch("brazil_download_script.logging.fatal")
+    @patch("os.makedirs")
+    def test_main_directory_creation_fatal(self, mock_makedirs, mock_fatal):
+        """Tests that directory creation failure in main logs fatal error without uncaught raise."""
+        mock_makedirs.side_effect = OSError("Permission denied")
+        brazil_download_script.main(None)
+        mock_fatal.assert_called_once()
+        self.assertIn("Could not setup target download folders",
+                      mock_fatal.call_args[0][0])
+
+    @patch("brazil_download_script.logging.fatal")
+    @patch("brazil_download_script.get_available_periods")
+    def test_main_fetch_periods_fatal(self, mock_get_periods, mock_fatal):
+        """Tests that period fetch failure in main logs fatal error without uncaught raise."""
+        mock_get_periods.side_effect = RuntimeError("IBGE API unavailable")
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            with patch.object(brazil_download_script, "DOWNLOAD_DIR", tmp_dir):
+                brazil_download_script.main(None)
+        mock_fatal.assert_called_once()
+        self.assertIn("Unrecoverable error fetching period metadata",
+                      mock_fatal.call_args[0][0])
+
+    @patch("brazil_download_script.logging.fatal")
+    @patch("brazil_download_script.fetch_panel_data")
+    @patch("brazil_download_script.get_available_periods")
+    def test_main_fetch_panel_fatal(self, mock_get_periods, mock_fetch_panel,
+                                    mock_fatal):
+        """Tests that panel processing failure in main logs fatal error without uncaught raise."""
+        mock_get_periods.return_value = [{
+            "id": "202201",
+            "literals": ["1º trimestre 2022"]
+        }]
+        mock_fetch_panel.side_effect = RuntimeError("Panel fetch error")
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            with patch.object(brazil_download_script, "DOWNLOAD_DIR", tmp_dir):
+                brazil_download_script.main(None)
+        mock_fatal.assert_called_once()
+        self.assertIn("Unrecoverable error processing",
+                      mock_fatal.call_args[0][0])
 
     def test_test_data_csv_fixtures_structure(self):
         """Verifies test_data contains concise CSV fixtures (< 100 KB) matching current download format."""
