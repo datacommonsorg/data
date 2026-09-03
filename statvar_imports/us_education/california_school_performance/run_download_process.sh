@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+set -euo pipefail
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 cd "$SCRIPT_DIR"
@@ -40,7 +40,7 @@ TOOLS_DIR="$( cd "$SCRIPT_DIR/../../../tools/statvar_importer" && pwd )"
 CONFIG_DIR="$SCRIPT_DIR/config"
 PVMAP="$CONFIG_DIR/california_school_performance_pvmap.csv"
 METADATA="$CONFIG_DIR/california_school_performance_metadata.csv"
-EXISTING_MCF="$CONFIG_DIR/california_school_performance_stat_vars.mcf"
+EXISTING_MCF="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
 
 # If the master all-years normalized file exists, process it to generate the complete dataset
 if [ -f "$SCRIPT_DIR/input_files/sb_ca_all_years_normalized.txt" ]; then
@@ -55,11 +55,10 @@ if [ -f "$SCRIPT_DIR/input_files/sb_ca_all_years_normalized.txt" ]; then
     --existing_statvar_mcf="$EXISTING_MCF" \
     --output_path="$SCRIPT_DIR/output_files/california_school_performance_all_years_output" \
     --output_counters="$SCRIPT_DIR/counters/california_school_performance_counters.csv"
+else
+  echo "Error: Normalized master file $SCRIPT_DIR/input_files/sb_ca_all_years_normalized.txt not found!" >&2
+  exit 1
 fi
-
-# Individual year processing is omitted to save redundant processing time.
-# If individual year files are needed for debugging, run stat_var_processor.py manually on the desired year.
-
 
 echo ""
 echo "=========================================================================="
