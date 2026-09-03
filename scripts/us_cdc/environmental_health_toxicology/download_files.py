@@ -54,9 +54,9 @@ def download_files(importname, configs):
                     input_file_name = file_info["input_file_name"]
                     logging.info(f"Input File Name {input_file_name}")
 
-                    get_record_count = requests.get(
-                        url_new.replace('.csv', record_count_query),
-                        timeout=60)
+                    get_record_count = requests.get(url_new.replace(
+                        '.csv', record_count_query),
+                                                    timeout=60)
                     if get_record_count.status_code == 200:
                         record_count = json.loads(
                             get_record_count.text
