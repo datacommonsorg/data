@@ -1,0 +1,42 @@
+place_name,dcid
+Australia,country/AUS
+Austria,country/AUT
+Belgium,country/BEL
+Canada,country/CAN
+Czech Republic,country/CZE
+Denmark,country/DNK
+Finland,country/FIN
+France,country/FRA
+Germany,country/DEU
+Greece,country/GRC
+Hungary,country/HUN
+Iceland,country/ISL
+Ireland,country/IRL
+Italy,country/ITA
+Japan,country/JPN
+Korea,country/KOR
+Luxembourg,country/LUX
+Mexico,country/MEX
+Netherlands,country/NLD
+New Zealand,country/NZL
+Norway,country/NOR
+Poland,country/POL
+Portugal,country/PRT
+Slovak Republic,country/SVK
+Spain,country/ESP
+Sweden,country/SWE
+Switzerland,country/CHE
+Türkiye,country/TUR
+United Kingdom,country/GBR
+United States,country/USA
+Brazil,country/BRA
+Chile,country/CHL
+Colombia,country/COL
+Costa Rica,country/CRI
+Estonia,country/EST
+Israel,country/ISR
+Latvia,country/LVA
+Lithuania,country/LTU
+Slovenia,country/SVN
+European Union 22 members in OECD,#ignore
+OECD - Average,#ignore
