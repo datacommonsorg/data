@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_deleted_records_percent",
+      "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
+      "validator": "DELETED_RECORDS_PERCENT",
+      "params": { "threshold": 0.1}
+    },
+    {
+      "rule_id": "check_goldens_summary_county",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_county.csv",
+        "input_files": "../../input0/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_national",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_national.csv",
+        "input_files": "../../input1/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_summary_state",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_summary_report_state.csv",
+        "input_files": "../../input2/genmcf/summary_report.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observation_county",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_county.csv",
+        "input_files": "../../../../gcs_output/output/county/pep_asrh_county.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_national",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_national.csv",
+        "input_files": "../../../../gcs_output/output/national/pep_asrh_national.csv"
+      }
+    },
+    {
+      "rule_id": "check_goldens_observations_state",
+      "validator": "GOLDENS_CHECK",
+      "params": {
+        "golden_files": "../../../../golden_data/golden_observations_state.csv",
+        "input_files": "../../../../gcs_output/output/state/pep_asrh_state.csv"
+      }
+    }
+  ]
+}
+

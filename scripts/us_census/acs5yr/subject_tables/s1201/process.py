@@ -12,9 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Generic proces module to generate the csv/tmcf and csv"""
-# TODO: Add unit tests
+# Allows the sibling/parent module imports to work when running as a script or module
 import os
 import sys
+
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+_curr = _SCRIPT_PATH
+while _curr and _curr != os.path.dirname(_curr):
+    if os.path.exists(os.path.join(_curr, '.git')) or os.path.exists(
+            os.path.join(_curr, 'WORKSPACE')):
+        sys.path.append(_curr)
+        break
+    _curr = os.path.dirname(_curr)
+
+# TODO: Add unit tests
 import json
 from zipfile import ZipFile
 import pandas as pd
@@ -22,13 +33,8 @@ import pandas as pd
 from absl import app, flags
 # TODO: logs from the column map step is empty when invoked from here, needs to be checked
 
-from .generate_col_map import generate_stat_var_map, process_zip_file
-
-# Allows the following module imports to work when running as a script
-_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH,
-                             '../common'))  # for col_map_generator, data_loader
-from data_loader import process_subject_tables
+from scripts.us_census.acs5yr.subject_tables.s1201.generate_col_map import process_zip_file
+from scripts.us_census.acs5yr.subject_tables.common.data_loader import process_subject_tables
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -56,9 +62,8 @@ def set_column_map(input_path, spec_path, output_dir):
     generated_col_map = process_zip_file(input_path,
                                          spec_path,
                                          write_output=False)
-    f = open(os.path.join(output_dir, 'column_map.json'), 'w')
-    json.dump(generated_col_map, f, indent=4)
-    f.close()
+    with open(os.path.join(output_dir, 'column_map.json'), 'w') as f:
+        json.dump(generated_col_map, f, indent=4)
 
 
 def main(argv):
@@ -70,6 +75,8 @@ def main(argv):
     output_dir = FLAGS.output_dir
     has_percent = FLAGS.has_percent
     debug = FLAGS.debug
+
+    os.makedirs(output_dir, exist_ok=True)
 
     # TODO: remove the constraint of inputs being only zip file
     # context: the current implementation of the column map generator accepts

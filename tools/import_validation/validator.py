@@ -25,6 +25,7 @@ sys.path.append(os.path.join(_DATA_DIR, 'util'))
 
 from result import ValidationResult, ValidationStatus
 from counters import Counters
+from validation_util import DIFFER_COLUMNS
 import validator_goldens
 
 
