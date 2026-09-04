@@ -2,6 +2,14 @@
     "schema_version": "1.0",
     "rules": [
         {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted points is within the threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        },
+        {
             "rule_id": "check_max_date_freshness",
             "description": "Checks that the latest observation year is at least 2024 for active StatVars.",
             "validator": "SQL_VALIDATOR",
