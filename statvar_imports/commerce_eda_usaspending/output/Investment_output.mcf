@@ -1,0 +1,62 @@
+Node: dcid:Amount_Investment
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Investment
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+name: "Amount of Investment"
+
+Node: dcid:Amount_Investment_EconomicAdjustmentAssistance
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Investment
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+investmentProgram: dcs:EconomicAdjustmentAssistance
+name: "Amount of Investment: Economic Adjustment Assistance"
+
+Node: dcid:Amount_Investment_ProgramPlanning
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Investment
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+investmentProgram: dcs:ProgramPlanning
+name: "Amount of Investment: Program Planning"
+
+Node: dcid:Amount_Investment_PublicWorks
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Investment
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+investmentProgram: dcs:PublicWorks
+name: "Amount of Investment: Public Works"
+
+Node: dcid:Amount_Investment_RegionalInnovationStrategies
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Investment
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+investmentProgram: dcs:RegionalInnovationStrategies
+name: "Amount of Investment: Regional Innovation Strategies"
+
+Node: dcid:Amount_Investment_TechnicalAssistance
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Investment
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+investmentProgram: dcs:TechnicalAssistance
+name: "Amount of Investment: Technical Assistance"
+
+Node: dcid:Amount_Investment_ResearchNationalTechnicalAssistance
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Investment
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+investmentProgram: dcs:ResearchNationalTechnicalAssistance
+name: "Amount of Investment: Research and National Technical Assistance"
+
+Node: dcid:Amount_Investment_TradeAdjustmentAssistance
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Investment
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+investmentProgram: dcs:TradeAdjustmentAssistance
+name: "Amount of Investment: Trade Adjustment Assistance"

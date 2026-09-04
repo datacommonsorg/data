@@ -1,0 +1,31 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Commerce_EDA_USASpending",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://api.usaspending.gov/",
+            "provenance_description": "EDA Investments by Applicant State and Program, dynamically sourced from USASpending.gov.",
+            "scripts": [
+                "process.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=output/Investment_cleaned.csv --pv_map=Investmentpvmap.csv --config_file=Investmentmetadata.csv --output_path=output/Investment_output --output_counters=counters/Investment_counters.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/Investment_output.tmcf",
+                    "cleaned_csv": "output/Investment_output.csv",
+                    "node_mcf": "output/Investment_output.mcf"
+                }
+            ],
+            "source_files": [
+                "output/Investment_cleaned.csv",
+                "counters/Investment_counters.csv",
+                "Investmentmetadata.csv",
+                "Investmentpvmap.csv",
+                "manifest.json"
+            ],
+            "cron_schedule": "30 05 * * 1"
+        }
+    ]
+}
