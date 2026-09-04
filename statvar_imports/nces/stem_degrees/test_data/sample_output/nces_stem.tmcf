@@ -1,0 +1,10 @@
+Node: E:nces_stem->E0
+observationAbout: C:nces_stem->observationAbout
+observationDate: C:nces_stem->observationDate
+value: C:nces_stem->value
+variableMeasured: C:nces_stem->variableMeasured
+unit: C:nces_stem->unit
+scalingFactor: C:nces_stem->scalingFactor
+measurementMethod: C:nces_stem->measurementMethod
+observationPeriod: C:nces_stem->observationPeriod
+typeOf: dcs:StatVarObservation
