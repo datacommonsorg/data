@@ -82,7 +82,6 @@ def download_files(importname, configs):
 def main(_):
     """Main function to download the csv files."""
     global _INPUT_FILE_PATH
-    _INPUT_FILE_PATH = os.path.join(_FLAGS.input_file_path)
     _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.input_file_path)
     Path(_INPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
     importname = sys.argv[1]
