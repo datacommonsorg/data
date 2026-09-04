@@ -1,0 +1,12 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+ObservationAbout,observationAbout,{Data},populationType,Student,measuredProperty,count,,,,,,,,
+Year,observationDate,{Number},,,,,,,,,,,,
+Grades 6-8,schoolGradeLevel,SchoolGrade6To8,,,,,,,,,,,,
+Grades 9-12,schoolGradeLevel,SchoolGrade9To12,,,,,,,,,,,,
+AnyVisualPerformingArts,visualArtCourse,AnyVisualArt,measurementDenominator,-visualArtCourse,unit,Percent,,,,,,,,
+Music,visualArtCourse,Music,measurementDenominator,-visualArtCourse,unit,Percent,,,,,,,,
+Visual Arts,visualArtCourse,VisualArt,measurementDenominator,-visualArtCourse,unit,Percent,,,,,,,,
+Dance,visualArtCourse,Dance,measurementDenominator,-visualArtCourse,unit,Percent,,,,,,,,
+Drama,visualArtCourse,Drama,measurementDenominator,-visualArtCourse,unit,Percent,,,,,,,,
+SchoolPercent,value,{Number},,,,,,,,,,,,
+StatePercent,value,{Number},observationAbout,geoId/34,,,,,,,,,,
