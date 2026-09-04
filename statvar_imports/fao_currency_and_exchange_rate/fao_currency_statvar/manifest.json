@@ -21,7 +21,7 @@
                 {
                     "template_mcf": "output_files/CurrencyFAO_output.tmcf",
                     "cleaned_csv": "output_files/CurrencyFAO_output.csv",
-                    "node_mcf": "output_files/CurrencyFAO_output_stat_vars.mcf"
+                    "node_mcf": "output_files/*stat_vars*.mcf"
                 }
             ],
             "cron_schedule": "0 07 * * 4",
