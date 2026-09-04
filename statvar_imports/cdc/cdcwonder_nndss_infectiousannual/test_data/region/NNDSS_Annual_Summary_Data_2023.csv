@@ -1,0 +1,99 @@
+Notes,Disease,Disease Code,Year,Year Code,Regions,Regions Code,Case Count
+,Anthrax,10350,2023,2023,United States,U.S.,0
+,Anthrax,10350,2023,2023,New England,REGION1,0
+,Anthrax,10350,2023,2023,Middle Atlantic,REGION2,0
+,Anthrax,10350,2023,2023,East North Central,REGION3,0
+,Anthrax,10350,2023,2023,West North Central,REGION4,0
+,Anthrax,10350,2023,2023,South Atlantic,REGION5,0
+,Anthrax,10350,2023,2023,East South Central,REGION6,0
+,Anthrax,10350,2023,2023,West South Central,REGION7,0
+,Anthrax,10350,2023,2023,Mountain,REGION8,0
+,Anthrax,10350,2023,2023,Pacific,REGION9,0
+,Anthrax,10350,2023,2023,Territories,REGION10,0
+,Anthrax,10350,2023,2023,Non-U.S. Residents,REGION11,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,United States,U.S.,150
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,New England,REGION1,11
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Middle Atlantic,REGION2,44
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,East North Central,REGION3,15
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,West North Central,REGION4,6
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,South Atlantic,REGION5,21
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,East South Central,REGION6,1
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,West South Central,REGION7,3
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Mountain,REGION8,15
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Pacific,REGION9,34
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Territories,REGION10,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Non-U.S. Residents,REGION11,2
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,United States,U.S.,7
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,New England,REGION1,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,Middle Atlantic,REGION2,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,East North Central,REGION3,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,West North Central,REGION4,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,South Atlantic,REGION5,3
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,East South Central,REGION6,3
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,West South Central,REGION7,1
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,Mountain,REGION8,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,Pacific,REGION9,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,Territories,REGION10,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,Non-U.S. Residents,REGION11,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,United States,U.S.,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,New England,REGION1,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,Middle Atlantic,REGION2,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,East North Central,REGION3,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,West North Central,REGION4,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,South Atlantic,REGION5,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,East South Central,REGION6,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,West South Central,REGION7,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,Mountain,REGION8,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,Pacific,REGION9,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,Territories,REGION10,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,Non-U.S. Residents,REGION11,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,United States,U.S.,20
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,New England,REGION1,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,Middle Atlantic,REGION2,2
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,East North Central,REGION3,16
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,West North Central,REGION4,2
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,South Atlantic,REGION5,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,East South Central,REGION6,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,West South Central,REGION7,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,Mountain,REGION8,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,Pacific,REGION9,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,Territories,REGION10,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,Non-U.S. Residents,REGION11,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,United States,U.S.,7
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,New England,REGION1,2
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,Middle Atlantic,REGION2,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,East North Central,REGION3,5
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,West North Central,REGION4,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,South Atlantic,REGION5,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,East South Central,REGION6,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,West South Central,REGION7,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,Mountain,REGION8,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,Pacific,REGION9,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,Territories,REGION10,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,Non-U.S. Residents,REGION11,0
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,United States,U.S.,34
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,New England,REGION1,0
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,Middle Atlantic,REGION2,0
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,East North Central,REGION3,14
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,West North Central,REGION4,2
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,South Atlantic,REGION5,13
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,East South Central,REGION6,5
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,West South Central,REGION7,0
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,Mountain,REGION8,0
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,Pacific,REGION9,0
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,Territories,REGION10,0
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,Non-U.S. Residents,REGION11,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,United States,U.S.,1
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,New England,REGION1,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,Middle Atlantic,REGION2,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,East North Central,REGION3,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,West North Central,REGION4,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,South Atlantic,REGION5,1
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,East South Central,REGION6,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,West South Central,REGION7,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,Mountain,REGION8,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,Pacific,REGION9,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,Territories,REGION10,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,Non-U.S. Residents,REGION11,0
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,United States,U.S.,47
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,New England,REGION1,28

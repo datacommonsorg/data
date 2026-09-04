@@ -1,0 +1,194 @@
+prop,key,val,,,,
+Year,observationDate,{Number},populationType,MedicalConditionIncident,observationAbout,country/USA
+Sex Code:1,gender,Female,,,,
+Sex Code:2,gender,Male,,,,
+Sex Code:99,gender,CDC_GenderUnknownOrNotStated,,,,
+Age Code:1,age,YearsUpto1,
+Age Code:2,age,Years1To4,
+Age Code:3,age,Years5To14,
+Age Code:4,age,Years15To24,
+Age Code:5,age,Years25To39,
+Age Code:6,age,Years40To64,
+Age Code:7,age,Years65Onwards,
+Age Code:99,age,USC_AgeNotStated,
+Race Code:1,race,AmericanIndianAndAlaskaNativeAlone,
+Race Code:2,race,AsianOrPacificIslander,
+Race Code:3,race,BlackOrAfricanAmericanAlone,
+Race Code:4,race,WhiteAlone,
+Race Code:5,race,CDC_OtherRace,
+Race Code:99,race,CDC_RaceUnknownOrNotStated,
+Race Code:98,#ignore,Race,,
+
+Ethnicity Code:1,ethnicity,HispanicOrLatino
+Ethnicity Code:non-,ethnicity,NotHispanicOrLatino
+Ethnicity Code:99,ethnicity,CDC_EthnicityUnknownOrNotStated
+Ethnicity Code:98,#ignore,Ignore
+Regions Code:U.S.,residentStatus,USResident
+Regions Code:REGION1,#ignore,Ignore,
+Regions Code:REGION2,#ignore,Ignore,
+Regions Code:REGION3,#ignore,Ignore,
+Regions Code:REGION4,#ignore,Ignore,
+Regions Code:REGION5,#ignore,Ignore,
+Regions Code:REGION6,#ignore,Ignore,
+Regions Code:REGION7,#ignore,Ignore,
+Regions Code:REGION8,#ignore,Ignore,
+Regions Code:REGION9,#ignore,Ignore,
+Regions Code:REGION10,#ignore,Ignore,
+Regions Code:REGION11,residentStatus,NonUSResident
+
+Case Count,value,{Number},measurementMethod,CDC_NNDSS_Diseases_AnnualTables,observationPeriod,P1Y
+10350,medicalCondition,AnthraxDisease,,,,
+10073,medicalCondition,Chikungunya,,,,
+10053,medicalCondition,NeuroinvasiveDisease__EasternEquineEncephalitis,,,,
+10078,medicalCondition,NeuroinvasiveDisease__JamestownCanyonVirusDisease,,,,
+10079,medicalCondition,NonNeuroinvasiveDisease__JamestownCanyonVirusDisease,,,,
+10081,medicalCondition,NeuroinvasiveDisease__LaCrosseVirusDisease,,,,
+10082,medicalCondition,NonNeuroinvasiveDisease__LaCrosseVirusDisease,
+10057,medicalCondition,NeuroinvasiveDisease__PowassanVirusDisease,,,,
+10063,medicalCondition,NonNeuroinvasiveDisease__PowassanVirusDisease,,,,
+10051,medicalCondition,NeuroinvasiveDisease__StLouisEncephalitis,,,,
+10064,medicalCondition,NonNeuroinvasiveDisease__StLouisEncephalitis,,,,
+10056,medicalCondition,NeuroinvasiveDisease__WestNileVirusDisease,,,,
+10049,medicalCondition,NonNeuroinvasiveDisease__WestNileVirusDisease,,,,
+12010,medicalCondition,Babesiosis,,,,
+12011,medicalCondition,Babesiosis,medicalStatus,ConfirmedCase,,
+12012,medicalCondition,Babesiosis,medicalStatus,ProbableCase,,
+10360,medicalCondition,Botulism,,,,
+10530,medicalCondition,FoodborneBotulism,,,,
+10540,medicalCondition,InfantBotulism,,,,
+10550,medicalCondition,WoundBotulism,,,,
+10020,medicalCondition,Brucellosis,,,,
+11020,medicalCondition,Campylobacteriosis,,,,
+50263,medicalCondition,CandidaAuris,medicalStatus,ClinicalCase,,
+50264,medicalCondition,CandidaAuris,medicalStatus,Screening,,
+50244,medicalCondition,CarbapenemResistantEnterobacteriaceae,,,,
+10273,medicalCondition,Chancroid,,,,
+10274,medicalCondition,Chlamydia,,,,
+10470,medicalCondition,Cholera,,,,
+11900,medicalCondition,Coccidioidomycosis,,,,
+11901,medicalCondition,Coccidioidomycosis,medicalStatus,ConfirmedCase,,
+11902,medicalCondition,Coccidioidomycosis,medicalStatus,ProbableCase,,
+11065,medicalCondition,COVID19,,,,
+11580,medicalCondition,Cryptosporidiosis,,,,
+11582,medicalCondition,Cryptosporidiosis,medicalStatus,ConfirmedCase,,
+11583,medicalCondition,Cryptosporidiosis,medicalStatus,ProbableCase,,
+11575,medicalCondition,Cyclosporiasis,,,,
+10680,medicalCondition,DengueDisease,,,,
+11704,medicalCondition,DengueLikeIllness,,,,
+11705,medicalCondition,SevereDengue,,,,
+10040,medicalCondition,Diphtheria,,,,
+11090,medicalCondition,HumanGranulocyticAnaplasmosis,,,,
+11088,medicalCondition,HumanMonocyticEhrlichiosis,,,,
+11089,medicalCondition,EhrlichiaEwingiiInfection,,,,
+11091,medicalCondition,Ehrlichiosis,,,,
+11570,medicalCondition,Giardiasis,,,,
+10280,medicalCondition,Gonorrhea,,,,
+10590,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,,,,
+10591,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,serotype,SerotypeB
+10593,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,serotype,NonSerotypeB
+10592,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,serogroup,OtherSerogroups
+10597,medicalCondition,HaemophilusInfluenzae__InvasiveDisease,serotype,UnknownSerotype
+10380,medicalCondition,Leprosy,,,,
+11610,medicalCondition,HaemophilusMeningitis,,,,
+11590,medicalCondition,HantavirusPulmonarySyndrome,,,,
+11550,medicalCondition,PostDiarrheal__HemolyticUremicSyndrome,,,,
+10110,medicalCondition,AcuteCondition__HepatitisA,,,,
+10100,medicalCondition,AcuteCondition__HepatitisB,,,,
+10104,medicalCondition,PerinatalInfection__HepatitisB,,,,
+10101,medicalCondition,AcuteCondition__HepatitisC,,,,
+50228,medicalCondition,AcuteCondition__HepatitisC,medicalStatus,ConfirmedCase,,
+50229,medicalCondition,AcuteCondition__HepatitisC,medicalStatus,ProbableCase,,
+50248,medicalCondition,PerinatalInfection__HepatitisC,,,,
+10560,medicalCondition,HIV_AIDS,,,,
+11061,medicalCondition,Influenza,medicalStatus,PediatricMortality,,
+11723,medicalCondition,StreptococcusPneumonia,,,,
+50230,medicalCondition,StreptococcusPneumonia,medicalStatus,ConfirmedCase,,
+50231,medicalCondition,StreptococcusPneumonia,medicalStatus,ProbableCase
+10490,medicalCondition,LegionnairesDisease,,,,
+10390,medicalCondition,Leptospirosis,,,,
+10640,medicalCondition,Listeriosis,,,,
+10641,medicalCondition,Listeriosis,medicalStatus,ConfirmedCase,,
+10642,medicalCondition,Listeriosis,medicalStatus,ProbableCase,,
+11080,medicalCondition,LymeDisease,,,,
+11081,medicalCondition,LymeDisease,medicalStatus,ConfirmedCase,,
+11082,medicalCondition,LymeDisease,medicalStatus,ProbableCase,,
+10130,medicalCondition,Malaria,,,,
+10140,medicalCondition,Measles,,,,
+10500,medicalCondition,Measles,medicalStatus,IndigenousCase,,
+10510,medicalCondition,Measles,medicalStatus,ImportedCase,,
+10150,medicalCondition,MeningococcalMeningitis,,,
+10151,medicalCondition,MeningococcalMeningitis,serogroup,ACWYSerogroup,,
+10152,medicalCondition,MeningococcalMeningitis,serogroup,SerogroupB,,
+10153,medicalCondition,MeningococcalMeningitis,serogroup,OtherSerogroups,,
+10154,medicalCondition,MeningococcalMeningitis,serogroup,UnknownSerogroups,,
+10180,medicalCondition,Mumps,,,,
+11062,medicalCondition,NovelInfluenzaAViralInfection,,,,
+50236,medicalCondition,Paratyphoid,,,,
+10190,medicalCondition,Pertussis,,,,
+10440,medicalCondition,Plague,,,,
+10410,medicalCondition,ParalyticPoliomyelitis,,,,
+10405,medicalCondition,NonparalyticPoliomyelitis,,,,
+10450,medicalCondition,Psittacosis,,,,
+10259,medicalCondition,QFever,,,,
+10257,medicalCondition,AcuteCondition__QFever,,,,
+10258,medicalCondition,ChronicCondition__QFever,,,,
+10460,medicalCondition,Rabiesinhuman,,,,
+10200,medicalCondition,Rubella,,,,
+10370,medicalCondition,CongenitalDisease__Rubella,,,,
+50266,#ignore,Ignore,,,,
+50265,medicalCondition,SalmonellosisExceptTyphiAndParatyphi,,,,
+11563,medicalCondition,ShigaToxinEColi,,,,
+11010,medicalCondition,Shigellosis,,,,
+11800,medicalCondition,Smallpox,,,,
+10250,medicalCondition,SpottedFeverRickettsiosis,,,,
+10253,medicalCondition,SpottedFeverRickettsiosis,medicalStatus,ConfirmedCase,,
+10254,medicalCondition,SpottedFeverRickettsiosis,medicalStatus,ProbableCase,,
+11700,medicalCondition,StreptococcalToxicShockSyndrome,,,,
+10399,medicalCondition,Syphilis,,,,
+10316,medicalCondition,CongenitalSyphilis,,,,
+10310,medicalCondition,SyphilisPrimaryAndSecondary,,,,
+10210,medicalCondition,Tetanus,,,,
+10520,medicalCondition,ToxicShockSyndromExceptStreptococcal,,,,
+10270,medicalCondition,Trichinellosis,,,,
+10220,medicalCondition,Tuberculosis,,,,
+10230,medicalCondition,Tularemia,,,,
+10240,medicalCondition,TyphoidFever,,,,
+11663,medicalCondition,VancomycinIntermediateStaphylococcusAureus,,,,
+11665,medicalCondition,VancomycinResistantStaphylococcusAureus,,,,
+10030,medicalCondition,Chickenpox,,,,
+10031,medicalCondition,Chickenpox,medicalStatus,PatientDeceased,
+11545,medicalCondition,VibriosisExcludingCholera,,,,
+50234,medicalCondition,VibriosisExcludingCholera,medicalStatus,ConfirmedCase,,
+50235,medicalCondition,VibriosisExcludingCholera,medicalStatus,ProbableCase,,
+11648,medicalCondition,GuanaritoHemorrhagicFever,,,,
+11638,medicalCondition,JuninHemorrhagicFever,,,,
+11632,medicalCondition,LassaHemorrhagicFever,,,,
+10660,medicalCondition,YellowFever,,,,
+50224,medicalCondition,ZikaVirusDisease__CongenitalDisease,,,,
+50223,medicalCondition,ZikaVirusDisease__NonCongenitalDisease,,,,
+50222,medicalCondition,ZikaVirusInfection__CongenitalDisease,,,,
+50221,medicalCondition,ZikaVirusInfection__NonCongenitalDisease,,,,
+10062,#ignore,Ignore
+10052,#ignore,Ignore
+10065,#ignore,Ignore
+50272,#ignore,Ignore
+11067,#ignore,Ignore
+11068,#ignore,Ignore
+11585,#ignore,Ignore
+11801,#ignore,Ignore
+10340,#ignore,Ignore
+50267,#ignore,Ignore
+11000,#ignore,Ignore
+50242,#ignore,Ignore
+10575,#ignore,Ignore
+11647,#ignore,Ignore
+11649,#ignore,Ignore
+11640,#ignore,Ignore
+11630,#ignore,Ignore
+11644,#ignore,Ignore
+11637,#ignore,Ignore
+11631,#ignore,Ignore
+11639,#ignore,Ignore
+11722,#ignore,Ignore
+50232,#ignore,Ignore
+50233,#ignore,Ignore

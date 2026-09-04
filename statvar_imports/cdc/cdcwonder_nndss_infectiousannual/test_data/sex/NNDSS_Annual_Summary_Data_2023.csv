@@ -1,0 +1,99 @@
+Notes,Disease,Disease Code,Year,Year Code,Sex,Sex Code,Case Count
+,Anthrax,10350,2023,2023,Female,1,0
+,Anthrax,10350,2023,2023,Male,2,0
+,Anthrax,10350,2023,2023,Unknown,99,0
+Total,Anthrax,10350,2023,2023,,,0
+Total,Anthrax,10350,,,,,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Female,1,84
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Male,2,66
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,,,150
+Total,"Arboviral diseases, Chikungunya virus disease",10073,,,,,150
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,Female,1,1
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,Male,2,6
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,,,7
+Total,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,,,,,7
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,Female,1,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,Male,2,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,,,0
+Total,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,,,,,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,Female,1,4
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,Male,2,16
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,,,20
+Total,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,,,,,20
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,Female,1,3
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,Male,2,4
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,,,7
+Total,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,,,,,7
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,Female,1,14
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,Male,2,20
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,,,34
+Total,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,,,,,34
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,Female,1,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,Male,2,1
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,,,1
+Total,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,,,,,1
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,Female,1,17
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,Male,2,30
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,,,47
+Total,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,,,,,47
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive",10063,2023,2023,Female,1,0
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive",10063,2023,2023,Male,2,2
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive",10063,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive",10063,2023,2023,,,2
+Total,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive",10063,,,,,2
+,"Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive",10051,2023,2023,Female,1,4
+,"Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive",10051,2023,2023,Male,2,10
+,"Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive",10051,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive",10051,2023,2023,,,14
+Total,"Arboviral diseases, St. Louis encephalitis virus disease, Neuroinvasive",10051,,,,,14
+,"Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive",10064,2023,2023,Female,1,3
+,"Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive",10064,2023,2023,Male,2,4
+,"Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive",10064,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive",10064,2023,2023,,,7
+Total,"Arboviral diseases, St. Louis encephalitis virus disease, Non-neuroinvasive",10064,,,,,7
+,"Arboviral diseases, West Nile virus disease, Neuroinvasive",10056,2023,2023,Female,1,640
+,"Arboviral diseases, West Nile virus disease, Neuroinvasive",10056,2023,2023,Male,2,"1,151"
+,"Arboviral diseases, West Nile virus disease, Neuroinvasive",10056,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, West Nile virus disease, Neuroinvasive",10056,2023,2023,,,"1,791"
+Total,"Arboviral diseases, West Nile virus disease, Neuroinvasive",10056,,,,,"1,791"
+,"Arboviral diseases, West Nile virus disease, Non-neuroinvasive",10049,2023,2023,Female,1,326
+,"Arboviral diseases, West Nile virus disease, Non-neuroinvasive",10049,2023,2023,Male,2,513
+,"Arboviral diseases, West Nile virus disease, Non-neuroinvasive",10049,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, West Nile virus disease, Non-neuroinvasive",10049,2023,2023,,,839
+Total,"Arboviral diseases, West Nile virus disease, Non-neuroinvasive",10049,,,,,839
+,"Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive",10052,2023,2023,Female,1,0
+,"Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive",10052,2023,2023,Male,2,0
+,"Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive",10052,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive",10052,2023,2023,,,0
+Total,"Arboviral diseases, Western equine encephalitis virus disease, Neuroinvasive",10052,,,,,0
+,"Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive",10065,2023,2023,Female,1,0
+,"Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive",10065,2023,2023,Male,2,0
+,"Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive",10065,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive",10065,2023,2023,,,0
+Total,"Arboviral diseases, Western equine encephalitis virus disease, Non-neuroinvasive",10065,,,,,0
+,"Babesiosis, Total",12010,2023,2023,Female,1,"1,277"
+,"Babesiosis, Total",12010,2023,2023,Male,2,"2,309"
+,"Babesiosis, Total",12010,2023,2023,Unknown,99,0
+Total,"Babesiosis, Total",12010,2023,2023,,,"3,586"
+Total,"Babesiosis, Total",12010,,,,,"3,586"
+,"Babesiosis, Confirmed",12011,2023,2023,Female,1,"1,102"
+,"Babesiosis, Confirmed",12011,2023,2023,Male,2,"2,014"
+,"Babesiosis, Confirmed",12011,2023,2023,Unknown,99,0
+Total,"Babesiosis, Confirmed",12011,2023,2023,,,"3,116"
+Total,"Babesiosis, Confirmed",12011,,,,,"3,116"
+,"Babesiosis, Probable",12012,2023,2023,Female,1,175
+,"Babesiosis, Probable",12012,2023,2023,Male,2,295
+,"Babesiosis, Probable",12012,2023,2023,Unknown,99,0
+Total,"Babesiosis, Probable",12012,2023,2023,,,470
+Total,"Babesiosis, Probable",12012,,,,,470
+,"Botulism, Total",10360,2023,2023,Female,1,111
+,"Botulism, Total",10360,2023,2023,Male,2,93
+,"Botulism, Total",10360,2023,2023,Unknown,99,1

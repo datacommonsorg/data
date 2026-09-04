@@ -1,0 +1,99 @@
+Notes,Disease,Disease Code,Year,Year Code,Age,Age Code,Case Count
+,Anthrax,10350,2023,2023,<1  year         ,1,0
+,Anthrax,10350,2023,2023,1-4 years,2,0
+,Anthrax,10350,2023,2023,5-14 years,3,0
+,Anthrax,10350,2023,2023,15-24 years,4,0
+,Anthrax,10350,2023,2023,25-39 years,5,0
+,Anthrax,10350,2023,2023,40-64 years,6,0
+,Anthrax,10350,2023,2023,65+ years,7,0
+,Anthrax,10350,2023,2023,Unknown,99,0
+Total,Anthrax,10350,2023,2023,,,0
+Total,Anthrax,10350,,,,,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,<1  year         ,1,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,1-4 years,2,0
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,5-14 years,3,4
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,15-24 years,4,10
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,25-39 years,5,41
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,40-64 years,6,78
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,65+ years,7,17
+,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Chikungunya virus disease",10073,2023,2023,,,150
+Total,"Arboviral diseases, Chikungunya virus disease",10073,,,,,150
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,<1  year         ,1,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,1-4 years,2,1
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,5-14 years,3,1
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,15-24 years,4,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,25-39 years,5,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,40-64 years,6,2
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,65+ years,7,3
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,2023,2023,,,7
+Total,"Arboviral diseases, Eastern equine encephalitis virus disease, Neuroinvasive",10053,,,,,7
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,<1  year         ,1,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,1-4 years,2,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,5-14 years,3,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,15-24 years,4,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,25-39 years,5,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,40-64 years,6,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,65+ years,7,0
+,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,2023,2023,,,0
+Total,"Arboviral diseases, Eastern equine encephalitis virus disease, Non-neuroinvasive",10062,,,,,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,<1  year         ,1,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,1-4 years,2,1
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,5-14 years,3,2
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,15-24 years,4,2
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,25-39 years,5,1
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,40-64 years,6,6
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,65+ years,7,8
+,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,2023,2023,,,20
+Total,"Arboviral diseases, Jamestown Canyon  virus disease, Neuroinvasive",10078,,,,,20
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,<1  year         ,1,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,1-4 years,2,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,5-14 years,3,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,15-24 years,4,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,25-39 years,5,0
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,40-64 years,6,5
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,65+ years,7,2
+,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,2023,2023,,,7
+Total,"Arboviral diseases, Jamestown Canyon  virus disease, Non-neuroinvasive",10079,,,,,7
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,<1  year         ,1,0
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,1-4 years,2,9
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,5-14 years,3,23
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,15-24 years,4,0
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,25-39 years,5,1
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,40-64 years,6,0
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,65+ years,7,1
+,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,2023,2023,,,34
+Total,"Arboviral diseases, La Crosse  virus disease, Neuroinvasive",10081,,,,,34
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,<1  year         ,1,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,1-4 years,2,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,5-14 years,3,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,15-24 years,4,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,25-39 years,5,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,40-64 years,6,0
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,65+ years,7,1
+,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,2023,2023,,,1
+Total,"Arboviral diseases, La Crosse  virus disease, Non-neuroinvasive",10082,,,,,1
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,<1  year         ,1,0
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,1-4 years,2,2
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,5-14 years,3,2
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,15-24 years,4,0
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,25-39 years,5,1
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,40-64 years,6,13
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,65+ years,7,29
+,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,Unknown,99,0
+Total,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,2023,2023,,,47
+Total,"Arboviral diseases, Powassan virus disease, Neuroinvasive",10057,,,,,47
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive",10063,2023,2023,<1  year         ,1,0
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive",10063,2023,2023,1-4 years,2,0
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive",10063,2023,2023,5-14 years,3,0
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive",10063,2023,2023,15-24 years,4,0
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive",10063,2023,2023,25-39 years,5,0
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive",10063,2023,2023,40-64 years,6,2
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive",10063,2023,2023,65+ years,7,0
+,"Arboviral diseases, Powassan virus disease, Non-neuroinvasive",10063,2023,2023,Unknown,99,0
