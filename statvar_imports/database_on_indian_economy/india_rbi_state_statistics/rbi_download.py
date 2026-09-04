@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+import tempfile
 from absl import app, logging, flags
 import sys
 from google.cloud import storage
@@ -80,26 +81,33 @@ def preprocess_files(directory_path):
         logging.info(f"Processing file: {file_path}")
         try:
             all_sheets_data = pd.read_excel(file_path, sheet_name=None, header=None)
-            with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
-                for sheet_name, df in all_sheets_data.items():
-                    df = df.map(lambda x: str(x).replace('*', '').replace('@', '').strip())
-                    mask = df.eq('State/Union Territory').any(axis=1)
-                    state_positions = df[mask] == 'State/Union Territory'
-                    
-                    def safe_to_numeric(val):
-                        val_str = str(val)
-                        if val_str.isdigit():
-                            return int(val_str)
-                        try:
-                            float_val = float(val_str)
-                            return float_val
-                        except ValueError:
-                            return val
-                    
-                    df_num = df[mask].applymap(safe_to_numeric)
-                    converted = df_num.mask(state_positions, 'State/Union Territory')
-                    df.loc[mask, :] = converted
-                    df.to_excel(writer, sheet_name=sheet_name, index=False, header=False)
+            def safe_to_numeric(val):
+                val_str = str(val)
+                if val_str.isdigit():
+                    return int(val_str)
+                try:
+                    float_val = float(val_str)
+                    return float_val
+                except ValueError:
+                    return val
+
+            for sheet_name, df in all_sheets_data.items():
+                df = df.map(lambda x: str(x).replace('*', '').replace('@', '').strip())
+                mask = df.eq('State/Union Territory').any(axis=1)
+                state_positions = df[mask] == 'State/Union Territory'
+
+                df_num = df[mask].map(safe_to_numeric)
+                converted = df_num.mask(state_positions, 'State/Union Territory')
+                df = df.astype(object)
+                df.loc[mask, :] = converted
+                all_sheets_data[sheet_name] = df
+
+            with tempfile.TemporaryDirectory(dir=directory_path) as output_dir:
+                output_path = os.path.join(output_dir, file_name)
+                with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
+                    for sheet_name, df in all_sheets_data.items():
+                        df.to_excel(writer, sheet_name=sheet_name, index=False, header=False)
+                os.replace(output_path, file_path)
 
         except Exception as e:
             logging.fatal(f"Error processing {file_name}: {e}")
