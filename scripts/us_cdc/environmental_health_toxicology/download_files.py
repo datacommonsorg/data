@@ -36,24 +36,27 @@ def download_files(importname, configs):
     @retry(tries=3, delay=2, backoff=2)
     def download_with_retry(url, input_file_name):
         logging.info(f"Downloading file from URL: {url}")
-        response = requests.get(url)
-        response.raise_for_status()
-        if response.status_code == 200:
-            if not response.content:
-                logging.fatal(
-                    f"No data available for URL: {url}. Aborting download.")
-                return
-            filename = os.path.join(_INPUT_FILE_PATH, input_file_name)
-            with file_util.FileIO(filename, 'wb') as f:
-                f.write(response.content)
-        else:
-            logging.error(
-                f"Failed to download file from URL: {url}. Status code: {response.status_code}"
-            )
+        filename = os.path.join(_INPUT_FILE_PATH, input_file_name)
+        with requests.get(url, stream=True, timeout=(30, 300)) as response:
+            response.raise_for_status()
+            with open(filename, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=16 * 1024 * 1024):
+                    if chunk:
+                        f.write(chunk)
 
+    @retry(tries=3, delay=2, backoff=2)
+    def get_record_count_with_retry(count_url):
+        logging.info(f"Querying record count from URL: {count_url}")
+        resp = requests.get(count_url, timeout=60)
+        resp.raise_for_status()
+        return json.loads(resp.text)[0]['COLUMN_ALIAS_GUARD__count']
+
+    url_new = None
+    import_found = False
     try:
         for config in configs:
             if config["import_name"] == importname:
+                import_found = True
                 files = config["files"]
                 for file_info in files:
                     url_new = file_info["url"]
@@ -61,32 +64,27 @@ def download_files(importname, configs):
                     input_file_name = file_info["input_file_name"]
                     logging.info(f"Input File Name {input_file_name}")
 
-                    get_record_count = requests.get(
-                        url_new.replace('.csv', record_count_query))
-                    if get_record_count.status_code == 200:
-                        record_count = json.loads(
-                            get_record_count.text
-                        )[0]['COLUMN_ALIAS_GUARD__count']
-                        logging.info(
-                            f"Numbers of records found for the URL {url_new} is {record_count}"
-                        )
-                        url_new = f"{url_new}?$limit={record_count}&$offset=0"
-                        download_with_retry(url_new, input_file_name)
-                        logging.info(
-                            "Successfully downloaded the source data...!!!!")
-                    else:
-                        logging.error(
-                            f"Failed to download files, Status code: {get_record_count.status_code}"
-                        )
+                    count_url = url_new.replace('.csv', record_count_query)
+                    record_count = get_record_count_with_retry(count_url)
+                    logging.info(
+                        f"Numbers of records found for the URL {url_new} is {record_count}"
+                    )
+                    url_new = f"{url_new}?$limit={record_count}&$offset=0"
+                    download_with_retry(url_new, input_file_name)
+                    logging.info(
+                        "Successfully downloaded the source data...!!!!")
+        if not import_found:
+            raise ValueError(
+                f"Import name '{importname}' not found in configuration")
 
     except Exception as e:
-        logging.fatal(f"Error downloading URL {url_new} - {e}")
+        logging.fatal(f"Error downloading URL {url_new or 'unknown'} - {e}")
+        raise
 
 
 def main(_):
     """Main function to download the csv files."""
     global _INPUT_FILE_PATH
-    _INPUT_FILE_PATH = os.path.join(_FLAGS.input_file_path)
     _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.input_file_path)
     Path(_INPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
     importname = sys.argv[1]

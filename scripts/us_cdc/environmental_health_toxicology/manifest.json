@@ -12,12 +12,16 @@
                 "parse_air_quality.py CDC_PM25CensusTract"
             ],
             "source_files": [
-                "input/*.gz"
+                "input_files/*"
             ],
             "resource_limits": {
-                "cpu": 8,
-                "memory": 64,
-                "disk": 100
+                "cpu": 32,
+                "memory": 512,
+                "disk": 2000
+            },
+            "validation_config_file": "validation_config_census_tract.json",
+            "config_override": {
+                "invoke_differ_tool": false
             },
             "import_inputs": [
                 {
@@ -51,12 +55,16 @@
                 "parse_air_quality.py CDC_OzoneCensusTract"
             ],
             "source_files": [
-                "input/*.gz"
+                "input_files/*"
             ],
             "resource_limits": {
-                "cpu": 8,
-                "memory": 64,
-                "disk": 100
+                "cpu": 32,
+                "memory": 512,
+                "disk": 2000
+            },
+            "validation_config_file": "validation_config_census_tract.json",
+            "config_override": {
+                "invoke_differ_tool": false
             },
             "import_inputs": [
                 {
@@ -92,17 +100,30 @@
             "source_files": [
                 "input_files/*"
             ],
+            "resource_limits": {
+                "cpu": 32,
+                "memory": 512,
+                "disk": 500
+            },
+            "validation_config_file": "validation_config_county.json",
             "import_inputs": [
                 {
                     "template_mcf": "PM25CountyPollution.tmcf",
-                    "cleaned_csv": "output/PM25county.csv"
+                    "cleaned_csv": "output/PM25county_0.csv"
+                },
+                {
+                    "template_mcf": "PM25CountyPollution.tmcf",
+                    "cleaned_csv": "output/PM25county_1.csv"
+                },
+                {
+                    "template_mcf": "PM25CountyPollution.tmcf",
+                    "cleaned_csv": "output/PM25county_2.csv"
+                },
+                {
+                    "template_mcf": "PM25CountyPollution.tmcf",
+                    "cleaned_csv": "output/PM25county_3.csv"
                 }
             ],
-            "resource_limits": {
-                "cpu": 8,
-                "memory": 128,
-                "disk": 200
-            },
             "cron_schedule": "0 1  4 * *"
         },
         {
@@ -119,17 +140,18 @@
             "source_files": [
                 "input_files/*"
             ],
+            "resource_limits": {
+                "cpu": 32,
+                "memory": 512,
+                "disk": 500
+            },
+            "validation_config_file": "validation_config_county.json",
             "import_inputs": [
                 {
                     "template_mcf": "OzoneCountyPollution.tmcf",
                     "cleaned_csv": "output/OzoneCounty.csv"
                 }
             ],
-            "resource_limits": {
-                "cpu": 16,
-                "memory": 512,
-                "disk": 500
-            },
             "cron_schedule": "0 1  5 * *"
         }
     ]
