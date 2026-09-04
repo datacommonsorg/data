@@ -1,0 +1,9 @@
+key,p1,v1,p2,v2,,
+Unit ID,observationAbout,{Data},measuredProperty,count,populationType,Person
+Associate's Degree,educationalAttainment,AssociatesDegree,value,{Number},,
+Bachelor's Degree,educationalAttainment,BachelorsDegree,value,{Number},,
+Master's Degree,educationalAttainment,MastersDegree,value,{Number},,
+Doctor's Degree - Research/Scholarship,educationalAttainment,DoctorateDegree,doctorateDegreeMajor,Research,value,{Number}
+Doctor's Degree - Professional Practice,educationalAttainment,DoctorateDegree,doctorateDegreeMajor,Professional,value,{Number}
+Doctor's Degree - Other,educationalAttainment,DoctorateDegree,doctorateDegreeMajor,Other,value,{Number}
+Year,observationDate,{Number},,,,
