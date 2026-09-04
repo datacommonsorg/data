@@ -1,0 +1,36 @@
+Node: E:drug_mechanisms->E1
+typeOf: dcs:ChemicalCompound
+dcid: C:drug_mechanisms->dcid
+chemblID: C:drug_mechanisms->Parent Molecule
+synonyms: C:drug_mechanisms->Synonyms
+researchCodes: C:drug_mechanisms->Codes
+drugPhase: C:drug_mechanisms->Phase
+drugCompanyApplicants: C:drug_mechanisms->DrugApplicants
+drugFirstApproval: C:drug_mechanisms->First Approval
+drugIndicationClass: C:drug_mechanisms->IndicationClass
+patent: C:drug_mechanisms->Patent
+drugType: C:drug_mechanisms->Drug Type
+passesRuleOfFive: C:drug_mechanisms->Passes Rule of Five
+isFirstInClass: C:drug_mechanisms->First In Class
+chirality: C:drug_mechanisms->Chirality
+isProdrug: C:drug_mechanisms->Prodrug
+isOral: C:drug_mechanisms->Oral
+isParenteral: C:drug_mechanisms->Parenteral
+isTopical: C:drug_mechanisms->Topical
+isBlackBox: C:drug_mechanisms->Black Box
+drugvailabilityType: C:drug_mechanisms->Availability Type
+drugWithdrawnYear: C:drug_mechanisms->Withdrawn Year
+drugWithdrawnReason: C:drug_mechanisms->WithdrawnReason
+drugWithdrawnCountry: C:drug_mechanisms->WithdrawnCountry
+drugWithdrawnClass: C:drug_mechanisms->WithdrawnClass
+simplifiedMolecularInputLineEntrySystem: C:drug_mechanisms->Smiles
+
+Node: E:drug_mechanisms->E2
+typeOf: dcs:AnatomicalTherapeuticChemicalCode
+dcid: C:drug_mechanisms->ATC
+
+Node: E:drug_mechanisms->E3
+typeOf: dcs:USAdoptedNameStem
+dcid: C:drug_mechanisms->USANStem
+
+java -jar /Users/suhanabedi/Downloads/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar genmcf drug_mechanisms_output.csv drug_mechanisms.tmcf
