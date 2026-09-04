@@ -1,0 +1,17 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Disable deleted records check because differ is decoupled for high-scale Census Tracts.",
+            "enabled": false
+        },
+        {
+            "rule_id": "check_lint_error_count",
+            "description": "Tolerate transient remote network RPC drops during multi-hour existence checks.",
+            "params": {
+                "threshold": 500
+            }
+        }
+    ]
+}
