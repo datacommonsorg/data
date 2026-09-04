@@ -1,0 +1,31 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "Commerce_EDA_Poverty",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.cdfifund.gov/",
+      "provenance_description": "Treasury CDFI Fund - Persistent Poverty Counties.",
+      "scripts": [
+        "process_poverty.py",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=output/Poverty_cleaned.csv --pv_map=Povertypvmap.csv --config_file=Povertymetadata.csv --output_path=output/Poverty_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/Poverty_counters.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/Poverty_output.tmcf",
+          "cleaned_csv": "output/Poverty_output.csv",
+          "node_mcf": "output/Poverty_output.mcf"
+        }
+      ],
+      "source_files": [
+        "output/Poverty_cleaned.csv",
+        "counters/Poverty_counters.csv",
+        "Povertymetadata.csv",
+        "Povertypvmap.csv",
+        "manifest.json"
+      ],
+      "cron_schedule": "30 05 * * 1"
+    }
+  ]
+}

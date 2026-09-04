@@ -1,0 +1,10 @@
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/Poverty_cleaned.csv --pv_map=Povertypvmap.csv --config_file=Povertymetadata.csv --output_path=test_data/Poverty_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+
+Node: dcid:Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Population: Below Poverty Level in The Past 12 Months (Per Capita)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+povertyStatus: dcid:BelowPovertyLevelInThePast12Months
