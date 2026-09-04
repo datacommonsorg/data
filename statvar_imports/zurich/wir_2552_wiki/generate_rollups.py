@@ -125,7 +125,10 @@ def generate_rollups(input_csv: str, output_csv: str) -> pd.DataFrame:
 
 def main(argv):
     del argv  # Unused.
-    generate_rollups(FLAGS.input_csv, FLAGS.output_csv)
+    try:
+        generate_rollups(FLAGS.input_csv, FLAGS.output_csv)
+    except Exception as e:
+        logging.fatal("Failed to generate rollups: %s", e, exc_info=True)
 
 
 if __name__ == '__main__':

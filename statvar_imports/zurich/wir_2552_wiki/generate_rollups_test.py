@@ -17,6 +17,7 @@ import os
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 import numpy as np
 import pandas as pd
 
@@ -25,7 +26,7 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 if _MODULE_DIR not in sys.path:
     sys.path.insert(0, _MODULE_DIR)
 
-from generate_rollups import generate_rollups, process_rollups
+from generate_rollups import FLAGS, generate_rollups, main, process_rollups
 
 
 class GenerateRollupsTest(unittest.TestCase):
@@ -33,6 +34,7 @@ class GenerateRollupsTest(unittest.TestCase):
 
     def setUp(self):
         super().setUp()
+        FLAGS.mark_as_parsed()
         self.sample_raw_data = pd.DataFrame({
             'Jahr': [2020, 2020, 2020, 2020],
             'RaumSort': [1, 1, 1, 1],
@@ -151,6 +153,30 @@ class GenerateRollupsTest(unittest.TestCase):
         result_df = process_rollups(data)
         self.assertEqual(len(result_df), 1)
         self.assertEqual(result_df.iloc[0]['Arbeitsstaetten'], 100.0)
+
+    def test_main_success(self):
+        """Verifies that main executes successfully with valid flag parameters."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            input_csv = os.path.join(tmp_dir, 'input.csv')
+            output_csv = os.path.join(tmp_dir, 'output.csv')
+            self.sample_raw_data.to_csv(input_csv,
+                                        index=False,
+                                        encoding='utf-8')
+            FLAGS.input_csv = input_csv
+            FLAGS.output_csv = output_csv
+            main([])
+            self.assertTrue(os.path.exists(output_csv))
+
+    def test_main_failure_logs_fatal(self):
+        """Verifies that main logs a fatal error with exc_info on exception."""
+        FLAGS.input_csv = '/non/existent/path/file.csv'
+        FLAGS.output_csv = '/tmp/dummy_output.csv'
+        with patch('generate_rollups.logging.fatal') as mock_fatal:
+            main([])
+            mock_fatal.assert_called_once()
+            self.assertIn('Failed to generate rollups',
+                          mock_fatal.call_args[0][0])
+            self.assertTrue(mock_fatal.call_args[1].get('exc_info'))
 
 
 if __name__ == '__main__':
