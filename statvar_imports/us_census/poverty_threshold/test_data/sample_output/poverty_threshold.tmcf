@@ -1,0 +1,8 @@
+Node: E:poverty_threshold->E0
+observationAbout: C:poverty_threshold->observationAbout
+observationDate: C:poverty_threshold->observationDate
+value: C:poverty_threshold->value
+variableMeasured: C:poverty_threshold->variableMeasured
+unit: C:poverty_threshold->unit
+measurementMethod: C:poverty_threshold->measurementMethod
+typeOf: dcs:StatVarObservation
