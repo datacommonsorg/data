@@ -13,13 +13,15 @@
             "import_inputs": [
                 {
                     "template_mcf": "OECD_population_cleaned.tmcf",
-                    "cleaned_csv": "OECD_population_cleaned.csv"
+                    "cleaned_csv": "OECD_population_cleaned.csv",
+                    "node_mcf": "*.mcf"
                 }
             ],
             "source_files": [
                 "REGION_DEMOGR_population.csv"
             ],
-            "cron_schedule": "0 10 1,15 * *"
+            "cron_schedule": "0 10 1,15 * *",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }
