@@ -123,8 +123,7 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                 base_size = total_rows // num_shards
                                 rem_size = total_rows % num_shards
                                 shard_sizes = [
-                                    base_size +
-                                    1 if i < rem_size else base_size
+                                    base_size + 1 if i < rem_size else base_size
                                     for i in range(num_shards)
                                 ]
 
@@ -167,12 +166,11 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                         sub_chunk = chunk.iloc[
                                             start_idx:end_idx]
 
-                                        sub_chunk.to_csv(
-                                            shard_paths[shard_idx],
-                                            mode='a',
-                                            header=False,
-                                            float_format='%.6f',
-                                            index=False)
+                                        sub_chunk.to_csv(shard_paths[shard_idx],
+                                                         mode='a',
+                                                         header=False,
+                                                         float_format='%.6f',
+                                                         index=False)
                                         shard_written += len(sub_chunk)
                                         start_idx = end_idx
 
