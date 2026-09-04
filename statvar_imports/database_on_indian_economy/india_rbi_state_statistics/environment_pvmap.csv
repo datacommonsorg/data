@@ -6,6 +6,8 @@ Table 105: STATE-WISE EXPENDITURE ON RELIEF ON NATURAL CALAMITIES,measuredProper
 Table 106: STATE-WISE SUSTAINABLE DEVELOPMENT GOALS (SDGs) SCORE,measuredProperty,score,populationType,SustainableDevelopmentGoals,name,"""Sustainable Development Goals Score""",,,,,,,,
 State/ Union Territory,observationAbout,{Data},,,,,,,,,,,,
 State/Union Territory,observationAbout,{Data},,,,,,,,,,,,
+"Haryana, Delhi & Chandigarh",observationAbout,dcid:wikidataId/Q1174
+"Haryana, Delhi and Chandigarh",observationAbout,dcid:wikidataId/Q1174
 1987,observationDate,1987,value,{Number},,,,,,,,,,
 1989,observationDate,1989,value,{Number},,,,,,,,,,
 1991,observationDate,1991,value,{Number},,,,,,,,,,
