@@ -33,7 +33,4 @@ import-automation/executor/config_override.json
 # Ignore generated troubleshooting post-mortem documents
 agents/troubleshooting/
 
-# Local past conversation shortcuts
-past_conversations/
-
 
