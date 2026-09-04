@@ -8,15 +8,19 @@
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 import os
 import shutil
+import sys
 import unittest
-from .parse_air_quality import clean_air_quality_data
 
 _MODULE_DIR = os.path.dirname(__file__)
+sys.path.insert(0, _MODULE_DIR)
+
+try:
+    from .parse_air_quality import clean_air_quality_data
+except ImportError:
+    from parse_air_quality import clean_air_quality_data
+
 TEST_DATA_DIR = os.path.join(_MODULE_DIR, 'test_data')
 INPUT_DIR = 'input_files'
 OUTPUT_DIR = 'actual_output_files'
@@ -25,45 +29,45 @@ OUTPUT_FILES = 'expected_output_files'
 # test data for each import type
 TEST_DATA = [{
     "import_name":
-        "CDC_PM25CensusTract",
+    "CDC_PM25CensusTract",
     "input_dir":
-        os.path.join(TEST_DATA_DIR, "CDC_PM25CensusTract", INPUT_DIR),
+    os.path.join(TEST_DATA_DIR, "CDC_PM25CensusTract", INPUT_DIR),
     "output_dir":
-        os.path.join(TEST_DATA_DIR, "CDC_PM25CensusTract", OUTPUT_DIR),
+    os.path.join(TEST_DATA_DIR, "CDC_PM25CensusTract", OUTPUT_DIR),
     "expected_file":
-        os.path.join(TEST_DATA_DIR, "CDC_PM25CensusTract", OUTPUT_FILES,
-                     "PM2.5CensusTract_0.csv"),
+    os.path.join(TEST_DATA_DIR, "CDC_PM25CensusTract", OUTPUT_FILES,
+                 "PM2.5CensusTract_0.csv"),
     "files": [{
         "input_file_name":
-            "PM2.5CensusTractPollution_input_0.csv",
+        "PM2.5CensusTractPollution_input_0.csv",
         "output_file_name":
-            os.path.join(TEST_DATA_DIR, "CDC_PM25CensusTract", OUTPUT_DIR,
-                         "PM2.5CensusTract_0.csv")
+        os.path.join(TEST_DATA_DIR, "CDC_PM25CensusTract", OUTPUT_DIR,
+                     "PM2.5CensusTract_0.csv")
     }]
 }, {
     "import_name":
-        "CDC_OzoneCensusTract",
+    "CDC_OzoneCensusTract",
     "input_dir":
-        os.path.join(TEST_DATA_DIR, "CDC_OzoneCensusTract", INPUT_DIR),
+    os.path.join(TEST_DATA_DIR, "CDC_OzoneCensusTract", INPUT_DIR),
     "output_dir":
-        os.path.join(TEST_DATA_DIR, "CDC_OzoneCensusTract", OUTPUT_DIR),
+    os.path.join(TEST_DATA_DIR, "CDC_OzoneCensusTract", OUTPUT_DIR),
     "expected_file":
-        os.path.join(TEST_DATA_DIR, "CDC_OzoneCensusTract", OUTPUT_FILES,
-                     "Census_Tract_Level_Ozone_Concentrations_0.csv"),
+    os.path.join(TEST_DATA_DIR, "CDC_OzoneCensusTract", OUTPUT_FILES,
+                 "Census_Tract_Level_Ozone_Concentrations_0.csv"),
     "files": [{
         "input_file_name":
-            "Census_Tract_Level_Ozone_Concentrations_input_0.csv",
+        "Census_Tract_Level_Ozone_Concentrations_input_0.csv",
         "output_file_name":
-            os.path.join(TEST_DATA_DIR, "CDC_OzoneCensusTract", OUTPUT_DIR,
-                         "Census_Tract_Level_Ozone_Concentrations_0.csv")
+        os.path.join(TEST_DATA_DIR, "CDC_OzoneCensusTract", OUTPUT_DIR,
+                     "Census_Tract_Level_Ozone_Concentrations_0.csv")
     }]
 }, {
     "import_name":
-        "CDC_PM25County",
+    "CDC_PM25County",
     "input_dir":
-        os.path.join(TEST_DATA_DIR, "CDC_PM25County", INPUT_DIR),
+    os.path.join(TEST_DATA_DIR, "CDC_PM25County", INPUT_DIR),
     "output_dir":
-        os.path.join(TEST_DATA_DIR, "CDC_PM25County", OUTPUT_DIR),
+    os.path.join(TEST_DATA_DIR, "CDC_PM25County", OUTPUT_DIR),
     "expected_files": [
         os.path.join(TEST_DATA_DIR, "CDC_PM25County", OUTPUT_FILES,
                      f"PM25county_{i}.csv") for i in range(4)
@@ -74,20 +78,20 @@ TEST_DATA = [{
     }]
 }, {
     "import_name":
-        "CDC_OzoneCounty",
+    "CDC_OzoneCounty",
     "input_dir":
-        os.path.join(TEST_DATA_DIR, "CDC_OzoneCounty", INPUT_DIR),
+    os.path.join(TEST_DATA_DIR, "CDC_OzoneCounty", INPUT_DIR),
     "output_dir":
-        os.path.join(TEST_DATA_DIR, "CDC_OzoneCounty", OUTPUT_DIR),
+    os.path.join(TEST_DATA_DIR, "CDC_OzoneCounty", OUTPUT_DIR),
     "expected_file":
-        os.path.join(TEST_DATA_DIR, "CDC_OzoneCounty", OUTPUT_FILES,
-                     "OzoneCounty.csv"),
+    os.path.join(TEST_DATA_DIR, "CDC_OzoneCounty", OUTPUT_FILES,
+                 "OzoneCounty.csv"),
     "files": [{
         "input_file_name":
-            "OzoneCounty_input.csv",
+        "OzoneCounty_input.csv",
         "output_file_name":
-            os.path.join(TEST_DATA_DIR, "CDC_OzoneCounty", OUTPUT_DIR,
-                         "OzoneCounty.csv"),
+        os.path.join(TEST_DATA_DIR, "CDC_OzoneCounty", OUTPUT_DIR,
+                     "OzoneCounty.csv"),
     }]
 }]
 
@@ -110,7 +114,8 @@ class TestParseAirQuality(unittest.TestCase):
                 for expected_file in data["expected_files"]:
                     file_name = os.path.basename(expected_file)
                     actual_file = os.path.join(output_dir, file_name)
-                    with open(actual_file, encoding="utf-8") as actual_csv_file:
+                    with open(actual_file,
+                              encoding="utf-8") as actual_csv_file:
                         actual_csv_data = actual_csv_file.read().strip()
                     with open(expected_file,
                               encoding="utf-8") as expected_csv_file:

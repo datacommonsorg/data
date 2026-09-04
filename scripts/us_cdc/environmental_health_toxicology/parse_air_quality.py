@@ -70,8 +70,8 @@ MONTH_MAP = {
 
 
 # this method is applicable only for "census tract PM25"
-def add_prefix_zero(value, length):
-    return value.zfill(length)
+def add_prefix_zero(value, length=11):
+    return str(value).zfill(length)
 
 
 def clean_air_quality_data(configs, importname, inputpath, outputpath):
@@ -123,7 +123,8 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                 base_size = total_rows // num_shards
                                 rem_size = total_rows % num_shards
                                 shard_sizes = [
-                                    base_size + 1 if i < rem_size else base_size
+                                    base_size +
+                                    1 if i < rem_size else base_size
                                     for i in range(num_shards)
                                 ]
 
@@ -166,11 +167,12 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                         sub_chunk = chunk.iloc[
                                             start_idx:end_idx]
 
-                                        sub_chunk.to_csv(shard_paths[shard_idx],
-                                                         mode='a',
-                                                         header=False,
-                                                         float_format='%.6f',
-                                                         index=False)
+                                        sub_chunk.to_csv(
+                                            shard_paths[shard_idx],
+                                            mode='a',
+                                            header=False,
+                                            float_format='%.6f',
+                                            index=False)
                                         shard_written += len(sub_chunk)
                                         start_idx = end_idx
 
@@ -183,6 +185,35 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                     logging.info(
                                         f"Finished cleaning file {os.path.basename(p)}!"
                                     )
+                            elif "County" in input_file_name and "Ozone" in input_file_name:
+                                chunk_size = 500_000
+                                first_chunk = True
+                                for chunk in pd.read_csv(input_file_path,
+                                                         chunksize=chunk_size):
+                                    chunk["date"] = pd.to_datetime(
+                                        chunk["date"],
+                                        format="%d%b%Y",
+                                        errors="raise").dt.strftime("%Y-%m-%d")
+                                    chunk["statefips"] = chunk[
+                                        "statefips"].astype(str).str.zfill(2)
+                                    chunk["countyfips"] = chunk[
+                                        "countyfips"].astype(str).str.zfill(3)
+                                    chunk["dcid"] = "geoId/" + chunk[
+                                        "statefips"] + chunk["countyfips"]
+                                    if first_chunk:
+                                        chunk.to_csv(output_file_path,
+                                                     float_format='%.6f',
+                                                     index=False)
+                                        first_chunk = False
+                                    else:
+                                        chunk.to_csv(output_file_path,
+                                                     mode='a',
+                                                     header=False,
+                                                     float_format='%.6f',
+                                                     index=False)
+                                logging.info(
+                                    f"Finished cleaning file {output_file_name}!"
+                                )
                             else:
                                 data = pd.read_csv(input_file_path)
                                 data["date"] = pd.to_datetime(
@@ -227,22 +258,12 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                         census_tract + '_stdd': 'Error'
                                     },
                                                 inplace=True)
-                                    max_length = data['ctfips'].astype(
-                                        str).str.len().max()
                                     data['ctfips'] = data['ctfips'].astype(
-                                        str).apply(lambda x: add_prefix_zero(
-                                            x, max_length))
+                                        str).str.zfill(11)
                                     data["dcid"] = "geoId/" + data[
                                         "ctfips"].astype(str)
                                     data['StatisticalVariable'] = data[
                                         'StatisticalVariable'].map(STATVARS)
-                                elif "County" in input_file_name and "Ozone" in input_file_name:
-                                    data["statefips"] = data[
-                                        "statefips"].astype(str).str.zfill(2)
-                                    data["countyfips"] = data[
-                                        "countyfips"].astype(str).str.zfill(3)
-                                    data["dcid"] = "geoId/" + data[
-                                        "statefips"] + data["countyfips"]
                                 data.to_csv(output_file_path,
                                             float_format='%.6f',
                                             index=False)

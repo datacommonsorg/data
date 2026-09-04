@@ -40,13 +40,17 @@ def download_files(importname, configs):
         with requests.get(url, stream=True, timeout=(30, 300)) as response:
             response.raise_for_status()
             with open(filename, 'wb') as f:
-                for chunk in response.iter_content(chunk_size=16 * 1024 * 1024):
+                for chunk in response.iter_content(chunk_size=16 * 1024 *
+                                                   1024):
                     if chunk:
                         f.write(chunk)
 
+    url_new = None
+    import_found = False
     try:
         for config in configs:
             if config["import_name"] == importname:
+                import_found = True
                 files = config["files"]
                 for file_info in files:
                     url_new = file_info["url"]
@@ -57,24 +61,23 @@ def download_files(importname, configs):
                     get_record_count = requests.get(url_new.replace(
                         '.csv', record_count_query),
                                                     timeout=60)
-                    if get_record_count.status_code == 200:
-                        record_count = json.loads(
-                            get_record_count.text
-                        )[0]['COLUMN_ALIAS_GUARD__count']
-                        logging.info(
-                            f"Numbers of records found for the URL {url_new} is {record_count}"
-                        )
-                        url_new = f"{url_new}?$limit={record_count}&$offset=0"
-                        download_with_retry(url_new, input_file_name)
-                        logging.info(
-                            "Successfully downloaded the source data...!!!!")
-                    else:
-                        logging.error(
-                            f"Failed to download files, Status code: {get_record_count.status_code}"
-                        )
+                    get_record_count.raise_for_status()
+                    record_count = json.loads(
+                        get_record_count.text)[0]['COLUMN_ALIAS_GUARD__count']
+                    logging.info(
+                        f"Numbers of records found for the URL {url_new} is {record_count}"
+                    )
+                    url_new = f"{url_new}?$limit={record_count}&$offset=0"
+                    download_with_retry(url_new, input_file_name)
+                    logging.info(
+                        "Successfully downloaded the source data...!!!!")
+        if not import_found:
+            raise ValueError(
+                f"Import name '{importname}' not found in configuration")
 
     except Exception as e:
-        logging.fatal(f"Error downloading URL {url_new} - {e}")
+        logging.fatal(f"Error downloading URL {url_new or 'unknown'} - {e}")
+        raise
 
 
 def main(_):
