@@ -437,8 +437,7 @@ class USEducation:
             'dc_api_batch_size': 200,
             'dc_api_retries': 3,
             'dc_api_retry_sec': 5,
-            'dc_api_use_cache': False,
-            'dc_api_root': None
+            'dc_api_use_cache': False
         }
         # Passing the list through API call for checking its existance.
         dcid_check_zip = dc_api_is_defined_dcid(zip_list, config)
@@ -582,8 +581,7 @@ class USEducation:
             'dc_api_batch_size': 200,
             'dc_api_retries': 3,
             'dc_api_retry_sec': 5,
-            'dc_api_use_cache': False,
-            'dc_api_root': None
+            'dc_api_use_cache': False
         }
 
         # Only call API if lists are not empty
@@ -667,12 +665,11 @@ class USEducation:
             self._final_df_place["Public_School_Name"].astype(str).apply(
                 lambda x: x.title()))
 
-        # Sorting and dropping duplicates
-        self._final_df_place = self._final_df_place.sort_values(by=["year"],
-                                                                ascending=False)
-        self._final_df_place = self._final_df_place.reset_index(drop=True)
-        self._final_df_place = self._final_df_place.drop_duplicates(
-            subset=["school_state_code"]).reset_index(drop=True)
+        # Sorting and merging non-null place columns
+        self._final_df_place = (self._final_df_place.sort_values(
+            by=["year"], ascending=False).groupby("school_state_code",
+                                                  as_index=False,
+                                                  sort=False).first())
 
     @log_method_execution
     def _transform_district_place(self):
@@ -747,8 +744,7 @@ class USEducation:
             'dc_api_batch_size': 200,
             'dc_api_retries': 3,
             'dc_api_retry_sec': 5,
-            'dc_api_use_cache': False,
-            'dc_api_root': None
+            'dc_api_use_cache': False
         }
 
         # Only call API if we actually have states to check
@@ -818,10 +814,10 @@ class USEducation:
                 to_replace={'': pd.NA})
             self._final_df_place[col] = "dcs:" + self._final_df_place[col]
 
-        self._final_df_place = self._final_df_place.sort_values(by=["year"],
-                                                                ascending=False)
-        self._final_df_place = self._final_df_place.drop_duplicates(
-            subset=["school_state_code"]).reset_index(drop=True)
+        self._final_df_place = (self._final_df_place.sort_values(
+            by=["year"], ascending=False).groupby("school_state_code",
+                                                  as_index=False,
+                                                  sort=False).first())
 
     @log_method_execution
     def _parse_file(self, raw_df: pd.DataFrame) -> pd.DataFrame:
@@ -931,49 +927,8 @@ class USEducation:
                 "private_school", "district_school", "public_school"
         ]:
             df_place.loc[:, 'year'] = self._year[0:4].strip()
-
             df_place = df_place.loc[:, ~df_place.columns.duplicated()]
-            if self._final_df_place.shape[0] > 0:
-
-                #Merge the place columns for the current year which is across different files.
-                df_dist_tmp = self._final_df_place.loc[
-                    self._final_df_place['year'] == self._year[0:4].strip()]
-
-                if df_dist_tmp.shape[0] > 0:
-                    #If current year data is already there in main df - merge the columns
-
-                    # Remove common columns excluding key columns so as to remove duplicates.
-                    rem_common_columns = list(
-                        set(df_place.columns.to_list()) -
-                        set(self._key_col_place))
-
-                    df_dist_tmp = df_dist_tmp.loc[:, ~df_dist_tmp.columns.
-                                                  isin(rem_common_columns)]
-
-                    # Merge the different files columns of same year with key columns
-
-                    df_dist_tmp = pd.merge(df_dist_tmp,
-                                           df_place,
-                                           how="outer",
-                                           on=self._key_col_place)
-
-                else:
-                    # The current year data not present in final df
-
-                    df_dist_tmp = df_place
-
-                # Concat the current processing year data to final place df
-
-                self._final_df_place = pd.concat([
-                    self._final_df_place.loc[self._final_df_place['year'] !=
-                                             self._year[0:4].strip()],
-                    df_dist_tmp
-                ])
-
-            else:
-                # For the first file being processed set the final place dataframe to place columns from the current file.
-
-                self._final_df_place = df_place
+            self._final_df_place = pd.concat([self._final_df_place, df_place])
 
         if not self._generate_statvars:
             return df_cleaned[data_cols]
@@ -1052,11 +1007,8 @@ class USEducation:
                                                     SV_PROP_ORDER, FORM_STATVAR)
                     df_parsed = self._generate_stat_var_and_mcf(
                         df_parsed, SV_PROP_ORDER)
-                    for col in df_parsed.columns.values.tolist():
-                        df_parsed[col] = df_parsed[col].astype(
-                            'str').str.replace("FeMale", "Female")
-                # Adding new columns scaling_factor:100 and unit:dcs:Percent
-                #  wherever the SV is Percent.
+                    # Adding new columns scaling_factor:100 and unit:dcs:Percent
+                    # wherever the SV is Percent.
                     df_parsed["scaling_factor"] = np.where(
                         df_parsed["sv_name"].str.contains("Percent"), '100', '')
                     df_parsed["unit"] = np.where(

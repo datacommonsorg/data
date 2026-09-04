@@ -5,7 +5,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
+            "provenance_url": "https://nces.ed.gov/",
             "provenance_description": "US nces school data for district",
             "scripts": [
                 "run.sh",
@@ -17,7 +17,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "gcs_folder/output_files/us_nces_demographics_district_school.tmcf",
-                    "cleaned_csv": "gcs_folder/output_files/us_nces_demographics_district_school.csv"
+                    "cleaned_csv": "gcs_folder/output_files/us_nces_demographics_district_school.csv",
+                    "node_mcf": "gcs_folder/output_files/us_nces_demographics_district_school.mcf"
                 },
                 {
                     "template_mcf": "gcs_folder/output_place/us_nces_demographics_district_place.tmcf",
@@ -25,6 +26,7 @@
                 }
             ],
             "cron_schedule": "30 3 3 3,6,9,12 *",
+            "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 32,
                 "memory": 512,
