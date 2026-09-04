@@ -1,0 +1,999 @@
+COU,Measure,Land cover class,Year,Value
+AUS,Square kilometers (000's),Tree cover,1992,911.8906866
+AUS,Square kilometers (000's),Tree cover,2004,890.5596071
+AUS,Square kilometers (000's),Tree cover,2015,896.5240771
+AUS,Square kilometers (000's),Tree cover,2018,904.7065978
+AUS,Square kilometers (000's),Tree cover,2019,916.9778286
+AUS,Square kilometers (000's),Grassland,1992,1205.405426
+AUS,Square kilometers (000's),Grassland,2004,1221.284738
+AUS,Square kilometers (000's),Grassland,2015,1223.584942
+AUS,Square kilometers (000's),Grassland,2018,1297.844432
+AUS,Square kilometers (000's),Grassland,2019,1309.643458
+AUS,Square kilometers (000's),Sparse vegetation,1992,2795.746536
+AUS,Square kilometers (000's),Sparse vegetation,2004,2809.424799
+AUS,Square kilometers (000's),Sparse vegetation,2015,2831.480416
+AUS,Square kilometers (000's),Sparse vegetation,2018,2756.868897
+AUS,Square kilometers (000's),Sparse vegetation,2019,2741.921167
+AUS,Square kilometers (000's),Cropland,1992,597.9565095
+AUS,Square kilometers (000's),Cropland,2004,630.1993943
+AUS,Square kilometers (000's),Cropland,2015,630.7411551
+AUS,Square kilometers (000's),Cropland,2018,631.3132113
+AUS,Square kilometers (000's),Cropland,2019,631.3353918
+AUS,Percent of total country area,Artificial surfaces,1992,0.1000152376
+AUS,Percent of total country area,Artificial surfaces,2004,0.1364822549
+AUS,Percent of total country area,Artificial surfaces,2015,0.1549295098
+AUS,Percent of total country area,Artificial surfaces,2018,0.1593185669
+AUS,Percent of total country area,Artificial surfaces,2019,0.1617053169
+AUS,Percent of total country area,Inland water,1992,0.1713053781
+AUS,Percent of total country area,Inland water,2004,0.1658160533
+AUS,Percent of total country area,Inland water,2015,0.1640750473
+AUS,Percent of total country area,Inland water,2018,0.1643723899
+AUS,Percent of total country area,Inland water,2019,0.1636926066
+AUT,Square kilometers (000's),Tree cover,1992,47.32841246
+AUT,Square kilometers (000's),Tree cover,2004,45.84394139
+AUT,Square kilometers (000's),Tree cover,2015,45.13493798
+AUT,Square kilometers (000's),Tree cover,2018,45.04072878
+AUT,Square kilometers (000's),Tree cover,2019,44.99598134
+AUT,Square kilometers (000's),Grassland,1992,11.3418907
+AUT,Square kilometers (000's),Grassland,2004,12.26976241
+AUT,Square kilometers (000's),Grassland,2015,12.75750173
+AUT,Square kilometers (000's),Grassland,2018,12.85742994
+AUT,Square kilometers (000's),Grassland,2019,12.91585665
+AUT,Square kilometers (000's),Shrubland,1992,0
+AUT,Square kilometers (000's),Shrubland,2004,0
+AUT,Square kilometers (000's),Shrubland,2015,0
+AUT,Square kilometers (000's),Shrubland,2018,0
+AUT,Square kilometers (000's),Shrubland,2019,0
+BEL,Square kilometers (000's),Tree cover,1992,7.385027188
+BEL,Square kilometers (000's),Tree cover,2004,6.86320562
+BEL,Square kilometers (000's),Tree cover,2015,6.822399668
+BEL,Square kilometers (000's),Tree cover,2018,6.878507852
+BEL,Square kilometers (000's),Tree cover,2019,6.920163928
+BEL,Square kilometers (000's),Shrubland,1992,0
+BEL,Square kilometers (000's),Shrubland,2004,0
+BEL,Square kilometers (000's),Shrubland,2015,0
+BEL,Square kilometers (000's),Shrubland,2018,0
+BEL,Square kilometers (000's),Shrubland,2019,0
+BEL,Percent of total country area,Bare area,1992,0.0133744493
+BEL,Percent of total country area,Bare area,2004,0.0131221012
+BEL,Percent of total country area,Bare area,2015,0.017916715
+BEL,Percent of total country area,Bare area,2018,0.0166549745
+BEL,Percent of total country area,Bare area,2019,0.0166549745
+CAN,Square kilometers (000's),Tree cover,1992,4592.490334
+CAN,Square kilometers (000's),Tree cover,2004,4658.165581
+CAN,Square kilometers (000's),Tree cover,2015,4651.141393
+CAN,Square kilometers (000's),Tree cover,2018,4637.862456
+CAN,Square kilometers (000's),Tree cover,2019,4626.398302
+CAN,Square kilometers (000's),Grassland,1992,252.9351525
+CAN,Square kilometers (000's),Grassland,2004,247.3971356
+CAN,Square kilometers (000's),Grassland,2015,242.3408299
+CAN,Square kilometers (000's),Grassland,2018,243.2152984
+CAN,Square kilometers (000's),Grassland,2019,244.3603381
+CAN,Square kilometers (000's),Shrubland,1992,383.0709751
+CAN,Square kilometers (000's),Shrubland,2004,379.8222649
+CAN,Square kilometers (000's),Shrubland,2015,391.2953066
+CAN,Square kilometers (000's),Shrubland,2018,398.8567731
+CAN,Square kilometers (000's),Shrubland,2019,404.8397913
+CAN,Square kilometers (000's),Artificial surfaces,1992,7.329846412
+CAN,Square kilometers (000's),Artificial surfaces,2004,10.5845075
+CAN,Square kilometers (000's),Artificial surfaces,2015,11.64113435
+CAN,Square kilometers (000's),Artificial surfaces,2018,12.38012396
+CAN,Square kilometers (000's),Artificial surfaces,2019,12.63191523
+CAN,Percent of total country area,Tree cover,1992,46.62061759
+CAN,Percent of total country area,Tree cover,2004,47.28731918
+CAN,Percent of total country area,Tree cover,2015,47.2160132
+CAN,Percent of total country area,Tree cover,2018,47.08121221
+CAN,Percent of total country area,Tree cover,2019,46.96483397
+CAN,Percent of total country area,Shrubland,1992,3.888740997
+CAN,Percent of total country area,Shrubland,2004,3.855761749
+CAN,Percent of total country area,Shrubland,2015,3.972230212
+CAN,Percent of total country area,Shrubland,2018,4.04899036
+CAN,Percent of total country area,Shrubland,2019,4.109726907
+CZE,Square kilometers (000's),Shrubland,1992,0
+CZE,Square kilometers (000's),Shrubland,2004,0
+CZE,Square kilometers (000's),Shrubland,2015,0
+CZE,Square kilometers (000's),Shrubland,2018,0
+CZE,Square kilometers (000's),Shrubland,2019,0
+CZE,Square kilometers (000's),Sparse vegetation,1992,0.048379784
+CZE,Square kilometers (000's),Sparse vegetation,2004,0.048379784
+CZE,Square kilometers (000's),Sparse vegetation,2015,0.047452376
+CZE,Square kilometers (000's),Sparse vegetation,2018,0.047065956
+CZE,Square kilometers (000's),Sparse vegetation,2019,0.048147932
+CZE,Percent of total country area,Sparse vegetation,1992,0.0614065032
+CZE,Percent of total country area,Sparse vegetation,2004,0.0614065032
+CZE,Percent of total country area,Sparse vegetation,2015,0.0602293817
+CZE,Percent of total country area,Sparse vegetation,2018,0.0597389145
+CZE,Percent of total country area,Sparse vegetation,2019,0.0611122228
+DNK,Square kilometers (000's),Shrubland,1992,0
+DNK,Square kilometers (000's),Shrubland,2004,0
+DNK,Square kilometers (000's),Shrubland,2015,0
+DNK,Square kilometers (000's),Shrubland,2018,0
+DNK,Square kilometers (000's),Shrubland,2019,0
+DNK,Square kilometers (000's),Sparse vegetation,1992,0.012210872
+DNK,Square kilometers (000's),Sparse vegetation,2004,0.011438032
+DNK,Square kilometers (000's),Sparse vegetation,2015,0.011438032
+DNK,Square kilometers (000's),Sparse vegetation,2018,0.011438032
+DNK,Square kilometers (000's),Sparse vegetation,2019,0.011438032
+DNK,Square kilometers (000's),Cropland,1992,32.29868385
+DNK,Square kilometers (000's),Cropland,2004,31.615416
+DNK,Square kilometers (000's),Cropland,2015,31.56371301
+DNK,Square kilometers (000's),Cropland,2018,31.35419608
+DNK,Square kilometers (000's),Cropland,2019,31.2338649
+DNK,Square kilometers (000's),Inland water,1992,0.996036192
+DNK,Square kilometers (000's),Inland water,2004,0.92624874
+DNK,Square kilometers (000's),Inland water,2015,0.924548492
+DNK,Square kilometers (000's),Inland water,2018,0.924780344
+DNK,Square kilometers (000's),Inland water,2019,0.924780344
+DNK,Percent of total country area,Sparse vegetation,1992,0.028357033
+DNK,Percent of total country area,Sparse vegetation,2004,0.0265622841
+DNK,Percent of total country area,Sparse vegetation,2015,0.0265622841
+DNK,Percent of total country area,Sparse vegetation,2018,0.0265622841
+DNK,Percent of total country area,Sparse vegetation,2019,0.0265622841
+FIN,Square kilometers (000's),Tree cover,1992,239.4159396
+FIN,Square kilometers (000's),Tree cover,2004,241.9619065
+FIN,Square kilometers (000's),Tree cover,2015,242.5875977
+FIN,Square kilometers (000's),Tree cover,2018,240.2863121
+FIN,Square kilometers (000's),Tree cover,2019,238.1317887
+FIN,Square kilometers (000's),Wetland,1992,31.07133664
+FIN,Square kilometers (000's),Wetland,2004,25.80296365
+FIN,Square kilometers (000's),Wetland,2015,23.88291995
+FIN,Square kilometers (000's),Wetland,2018,24.37398249
+FIN,Square kilometers (000's),Wetland,2019,25.4240402
+FIN,Square kilometers (000's),Sparse vegetation,1992,6.626948432
+FIN,Square kilometers (000's),Sparse vegetation,2004,5.776979
+FIN,Square kilometers (000's),Sparse vegetation,2015,4.711155356
+FIN,Square kilometers (000's),Sparse vegetation,2018,4.587269104
+FIN,Square kilometers (000's),Sparse vegetation,2019,4.6969351
+FIN,Square kilometers (000's),Inland water,1992,32.23647023
+FIN,Square kilometers (000's),Inland water,2004,32.74662191
+FIN,Square kilometers (000's),Inland water,2015,32.86965804
+FIN,Square kilometers (000's),Inland water,2018,32.79971602
+FIN,Square kilometers (000's),Inland water,2019,32.80953109
+FIN,Percent of total country area,Shrubland,1992,0.0676319415
+FIN,Percent of total country area,Shrubland,2004,0.0723691669
+FIN,Percent of total country area,Shrubland,2015,0.0992057789
+FIN,Percent of total country area,Shrubland,2018,0.115418128
+FIN,Percent of total country area,Shrubland,2019,0.1493605781
+FIN,Percent of total country area,Cropland,1992,7.356842083
+FIN,Percent of total country area,Cropland,2004,8.215544676
+FIN,Percent of total country area,Cropland,2015,8.599328924
+FIN,Percent of total country area,Cropland,2018,9.149536959
+FIN,Percent of total country area,Cropland,2019,9.348155483
+FIN,Percent of total country area,Inland water,1992,9.592122592
+FIN,Percent of total country area,Inland water,2004,9.743920772
+FIN,Percent of total country area,Inland water,2015,9.780530785
+FIN,Percent of total country area,Inland water,2018,9.759719188
+FIN,Percent of total country area,Inland water,2019,9.762639711
+FRA,Square kilometers (000's),Grassland,1992,88.14077904
+FRA,Square kilometers (000's),Grassland,2004,91.02640903
+FRA,Square kilometers (000's),Grassland,2015,91.040552
+FRA,Square kilometers (000's),Grassland,2018,90.83845434
+FRA,Square kilometers (000's),Grassland,2019,91.00075074
+FRA,Square kilometers (000's),Shrubland,1992,2.906805808
+FRA,Square kilometers (000's),Shrubland,2004,3.184564504
+FRA,Square kilometers (000's),Shrubland,2015,3.26988604
+FRA,Square kilometers (000's),Shrubland,2018,3.279237404
+FRA,Square kilometers (000's),Shrubland,2019,3.295080624
+FRA,Square kilometers (000's),Bare area,1992,2.452144036
+FRA,Square kilometers (000's),Bare area,2004,2.559027808
+FRA,Square kilometers (000's),Bare area,2015,2.554545336
+FRA,Square kilometers (000's),Bare area,2018,2.543725576
+FRA,Square kilometers (000's),Bare area,2019,2.542952736
+FRA,Percent of total country area,Sparse vegetation,1992,0.392510952
+FRA,Percent of total country area,Sparse vegetation,2004,0.4060754374
+FRA,Percent of total country area,Sparse vegetation,2015,0.4048049013
+FRA,Percent of total country area,Sparse vegetation,2018,0.4015741095
+FRA,Percent of total country area,Sparse vegetation,2019,0.4033891611
+FRA,Percent of total country area,Inland water,1992,0.6844317461
+FRA,Percent of total country area,Inland water,2004,0.7546984425
+FRA,Percent of total country area,Inland water,2015,0.7408314485
+FRA,Percent of total country area,Inland water,2018,0.7418599777
+FRA,Percent of total country area,Inland water,2019,0.742573898
+DEU,Percent of total country area,Tree cover,1992,31.70713341
+DEU,Percent of total country area,Tree cover,2004,32.10445821
+DEU,Percent of total country area,Tree cover,2015,32.01922444
+DEU,Percent of total country area,Tree cover,2018,32.19090372
+DEU,Percent of total country area,Tree cover,2019,32.32278994
+DEU,Percent of total country area,Wetland,1992,0.3282765772
+DEU,Percent of total country area,Wetland,2004,0.3321931325
+DEU,Percent of total country area,Wetland,2015,0.3299643745
+DEU,Percent of total country area,Wetland,2018,0.324013807
+DEU,Percent of total country area,Wetland,2019,0.3239488918
+DEU,Percent of total country area,Sparse vegetation,1992,0.0876356297
+DEU,Percent of total country area,Sparse vegetation,2004,0.0663650558
+DEU,Percent of total country area,Sparse vegetation,2015,0.0631625686
+DEU,Percent of total country area,Sparse vegetation,2018,0.0628163538
+DEU,Percent of total country area,Sparse vegetation,2019,0.0638117214
+GRC,Square kilometers (000's),Grassland,1992,7.158353216
+GRC,Square kilometers (000's),Grassland,2004,7.299782936
+GRC,Square kilometers (000's),Grassland,2015,7.295686884
+GRC,Square kilometers (000's),Grassland,2018,7.268019212
+GRC,Square kilometers (000's),Grassland,2019,7.285330828
+GRC,Square kilometers (000's),Wetland,1992,0.249781888
+GRC,Square kilometers (000's),Wetland,2004,0.253027816
+GRC,Square kilometers (000's),Wetland,2015,0.25233226
+GRC,Square kilometers (000's),Wetland,2018,0.251327568
+GRC,Square kilometers (000's),Wetland,2019,0.251250284
+GRC,Square kilometers (000's),Sparse vegetation,1992,0.729483676
+GRC,Square kilometers (000's),Sparse vegetation,2004,0.718432064
+GRC,Square kilometers (000's),Sparse vegetation,2015,0.712481196
+GRC,Square kilometers (000's),Sparse vegetation,2018,0.69285106
+GRC,Square kilometers (000's),Sparse vegetation,2019,0.693392048
+GRC,Square kilometers (000's),Inland water,1992,2.106993692
+GRC,Square kilometers (000's),Inland water,2004,2.202362148
+GRC,Square kilometers (000's),Inland water,2015,2.204371532
+GRC,Square kilometers (000's),Inland water,2018,2.209085856
+GRC,Square kilometers (000's),Inland water,2019,2.210631536
+GRC,Percent of total country area,Shrubland,1992,18.97661428
+GRC,Percent of total country area,Shrubland,2004,18.78899669
+GRC,Percent of total country area,Shrubland,2015,18.82572358
+GRC,Percent of total country area,Shrubland,2018,18.65515149
+GRC,Percent of total country area,Shrubland,2019,18.62217344
+GRC,Percent of total country area,Bare area,1992,2.2101153
+GRC,Percent of total country area,Bare area,2004,2.108428089
+GRC,Percent of total country area,Bare area,2015,1.987059482
+GRC,Percent of total country area,Bare area,2018,1.95765454
+GRC,Percent of total country area,Bare area,2019,1.955077214
+GRC,Percent of total country area,Inland water,1992,1.596946103
+GRC,Percent of total country area,Inland water,2004,1.669228372
+GRC,Percent of total country area,Inland water,2015,1.670751337
+GRC,Percent of total country area,Inland water,2018,1.674324448
+GRC,Percent of total country area,Inland water,2019,1.67549596
+HUN,Percent of total country area,Grassland,1992,7.143219375
+HUN,Percent of total country area,Grassland,2004,7.124347701
+HUN,Percent of total country area,Grassland,2015,7.115369108
+HUN,Percent of total country area,Grassland,2018,7.11395581
+HUN,Percent of total country area,Grassland,2019,7.109383379
+ISL,Percent of total country area,Wetland,1992,7.094497568
+ISL,Percent of total country area,Wetland,2004,7.094421989
+ISL,Percent of total country area,Wetland,2015,7.094421989
+ISL,Percent of total country area,Wetland,2018,7.094497568
+ISL,Percent of total country area,Wetland,2019,7.094421989
+ISL,Percent of total country area,Artificial surfaces,1992,0.0263013897
+ISL,Percent of total country area,Artificial surfaces,2004,0.0411903949
+ISL,Percent of total country area,Artificial surfaces,2015,0.0411903949
+ISL,Percent of total country area,Artificial surfaces,2018,0
+ISL,Percent of total country area,Artificial surfaces,2019,0.0411903949
+IRL,Percent of total country area,Inland water,1992,2.243949209
+IRL,Percent of total country area,Inland water,2004,2.34093458
+IRL,Percent of total country area,Inland water,2015,2.359755942
+IRL,Percent of total country area,Inland water,2018,2.360198798
+IRL,Percent of total country area,Inland water,2019,2.360198798
+ITA,Square kilometers (000's),Wetland,1992,0.300325624
+ITA,Square kilometers (000's),Wetland,2004,0.296152288
+ITA,Square kilometers (000's),Wetland,2015,0.294761176
+ITA,Square kilometers (000's),Wetland,2018,0.294993028
+ITA,Square kilometers (000's),Wetland,2019,0.295147596
+ITA,Square kilometers (000's),Shrubland,1992,5.410498272
+ITA,Square kilometers (000's),Shrubland,2004,6.084878456
+ITA,Square kilometers (000's),Shrubland,2015,6.046622876
+ITA,Square kilometers (000's),Shrubland,2018,5.976912708
+ITA,Square kilometers (000's),Shrubland,2019,5.947544788
+ITA,Square kilometers (000's),Bare area,1992,9.358164992
+ITA,Square kilometers (000's),Bare area,2004,7.697254548
+ITA,Square kilometers (000's),Bare area,2015,6.743492704
+ITA,Square kilometers (000's),Bare area,2018,6.652529436
+ITA,Square kilometers (000's),Bare area,2019,6.657707464
+ITA,Percent of total country area,Sparse vegetation,1992,0.7905299806
+ITA,Percent of total country area,Sparse vegetation,2004,0.8153745479
+ITA,Percent of total country area,Sparse vegetation,2015,0.8139357726
+ITA,Percent of total country area,Sparse vegetation,2018,0.8108012977
+ITA,Percent of total country area,Sparse vegetation,2019,0.8109297598
+JPN,Percent of total country area,Wetland,1992,0.1908180878
+JPN,Percent of total country area,Wetland,2004,0.2066316271
+JPN,Percent of total country area,Wetland,2015,0.2159665829
+JPN,Percent of total country area,Wetland,2018,0.216028678
+JPN,Percent of total country area,Wetland,2019,0.2154698225
+JPN,Percent of total country area,Sparse vegetation,1992,0.0272804252
+JPN,Percent of total country area,Sparse vegetation,2004,0.025852239
+JPN,Percent of total country area,Sparse vegetation,2015,0.0131020555
+JPN,Percent of total country area,Sparse vegetation,2018,0.012481105
+JPN,Percent of total country area,Sparse vegetation,2019,0.0122120264
+JPN,Percent of total country area,Cropland,1992,26.01285823
+JPN,Percent of total country area,Cropland,2004,26.9804026
+JPN,Percent of total country area,Cropland,2015,24.61180762
+JPN,Percent of total country area,Cropland,2018,24.72434455
+JPN,Percent of total country area,Cropland,2019,24.71525797
+KOR,Square kilometers (000's),Inland water,1992,2.19216066
+KOR,Square kilometers (000's),Inland water,2004,2.17013472
+KOR,Square kilometers (000's),Inland water,2015,2.095864796
+KOR,Square kilometers (000's),Inland water,2018,2.095864796
+KOR,Square kilometers (000's),Inland water,2019,2.099960848
+LUX,Square kilometers (000's),Grassland,1992,0.599105568
+LUX,Square kilometers (000's),Grassland,2004,0.62136336
+LUX,Square kilometers (000's),Grassland,2015,0.62638682
+LUX,Square kilometers (000's),Grassland,2018,0.624609288
+LUX,Square kilometers (000's),Grassland,2019,0.622677188
+LUX,Square kilometers (000's),Bare area,1992,0
+LUX,Square kilometers (000's),Bare area,2004,0
+LUX,Square kilometers (000's),Bare area,2015,0
+LUX,Square kilometers (000's),Bare area,2018,0
+LUX,Square kilometers (000's),Bare area,2019,0
+LUX,Percent of total country area,Cropland,1992,38.76005961
+LUX,Percent of total country area,Cropland,2004,36.07153502
+LUX,Percent of total country area,Cropland,2015,36.3099851
+LUX,Percent of total country area,Cropland,2018,35.68107303
+LUX,Percent of total country area,Cropland,2019,35.58867362
+LUX,Percent of total country area,Inland water,1992,0.2473919523
+LUX,Percent of total country area,Inland water,2004,0.2473919523
+LUX,Percent of total country area,Inland water,2015,0.2473919523
+LUX,Percent of total country area,Inland water,2018,0.2473919523
+LUX,Percent of total country area,Inland water,2019,0.2473919523
+MEX,Square kilometers (000's),Sparse vegetation,1992,0.617190024
+MEX,Square kilometers (000's),Sparse vegetation,2004,0.604824584
+MEX,Square kilometers (000's),Sparse vegetation,2015,0.602660632
+MEX,Square kilometers (000's),Sparse vegetation,2018,0.623759164
+MEX,Square kilometers (000's),Sparse vegetation,2019,0.645553252
+MEX,Square kilometers (000's),Cropland,1992,324.3333576
+MEX,Square kilometers (000's),Cropland,2004,324.6823722
+MEX,Square kilometers (000's),Cropland,2015,323.3357757
+MEX,Square kilometers (000's),Cropland,2018,323.1232447
+MEX,Square kilometers (000's),Cropland,2019,324.1052925
+MEX,Percent of total country area,Inland water,1992,1.326879937
+MEX,Percent of total country area,Inland water,2004,1.382005486
+MEX,Percent of total country area,Inland water,2015,1.405378312
+MEX,Percent of total country area,Inland water,2018,1.405131499
+MEX,Percent of total country area,Inland water,2019,1.405151087
+NLD,Square kilometers (000's),Cropland,1992,15.7191019
+NLD,Square kilometers (000's),Cropland,2004,13.98461708
+NLD,Square kilometers (000's),Cropland,2015,13.88499801
+NLD,Square kilometers (000's),Cropland,2018,13.68970134
+NLD,Square kilometers (000's),Cropland,2019,13.66512503
+NZL,Square kilometers (000's),Grassland,1992,138.5909241
+NZL,Square kilometers (000's),Grassland,2004,141.1460877
+NZL,Square kilometers (000's),Grassland,2015,141.325773
+NZL,Square kilometers (000's),Grassland,2018,140.9963886
+NZL,Square kilometers (000's),Grassland,2019,140.8762893
+NZL,Square kilometers (000's),Shrubland,1992,15.66701248
+NZL,Square kilometers (000's),Shrubland,2004,15.75859402
+NZL,Square kilometers (000's),Shrubland,2015,16.0832641
+NZL,Square kilometers (000's),Shrubland,2018,16.11085449
+NZL,Square kilometers (000's),Shrubland,2019,16.11410042
+NZL,Square kilometers (000's),Bare area,1992,10.77114836
+NZL,Square kilometers (000's),Bare area,2004,10.82640642
+NZL,Square kilometers (000's),Bare area,2015,10.98244282
+NZL,Square kilometers (000's),Bare area,2018,10.95802108
+NZL,Square kilometers (000's),Bare area,2019,10.94604206
+NZL,Percent of total country area,Wetland,1992,0.3983414719
+NZL,Percent of total country area,Wetland,2004,0.4211655172
+NZL,Percent of total country area,Wetland,2015,0.4333402602
+NZL,Percent of total country area,Wetland,2018,0.4538617536
+NZL,Percent of total country area,Wetland,2019,0.4558189227
+NOR,Square kilometers (000's),Grassland,1992,35.84748784
+NOR,Square kilometers (000's),Grassland,2004,37.61134058
+NOR,Square kilometers (000's),Grassland,2015,39.33400094
+NOR,Square kilometers (000's),Grassland,2018,39.29497252
+NOR,Square kilometers (000's),Grassland,2019,39.33832884
+NOR,Square kilometers (000's),Cropland,1992,13.4092377
+NOR,Square kilometers (000's),Cropland,2004,13.38574337
+NOR,Square kilometers (000's),Cropland,2015,14.52483224
+NOR,Square kilometers (000's),Cropland,2018,15.08073606
+NOR,Square kilometers (000's),Cropland,2019,15.33901918
+NOR,Square kilometers (000's),Bare area,1992,20.17730672
+NOR,Square kilometers (000's),Bare area,2004,20.29632408
+NOR,Square kilometers (000's),Bare area,2015,20.23140552
+NOR,Square kilometers (000's),Bare area,2018,20.00813204
+NOR,Square kilometers (000's),Bare area,2019,19.91732334
+NOR,Square kilometers (000's),Inland water,1992,16.24053704
+NOR,Square kilometers (000's),Inland water,2004,14.80212724
+NOR,Square kilometers (000's),Inland water,2015,14.93296905
+NOR,Square kilometers (000's),Inland water,2018,14.94958511
+NOR,Square kilometers (000's),Inland water,2019,14.95870462
+NOR,Percent of total country area,Grassland,1992,11.13720822
+NOR,Percent of total country area,Grassland,2004,11.68520743
+NOR,Percent of total country area,Grassland,2015,12.22040887
+NOR,Percent of total country area,Grassland,2018,12.2082834
+NOR,Percent of total country area,Grassland,2019,12.22175348
+NOR,Percent of total country area,Artificial surfaces,1992,0.5244926091
+NOR,Percent of total country area,Artificial surfaces,2004,0.8843429448
+NOR,Percent of total country area,Artificial surfaces,2015,1.087834744
+NOR,Percent of total country area,Artificial surfaces,2018,1.091316315
+NOR,Percent of total country area,Artificial surfaces,2019,1.09407756
+POL,Square kilometers (000's),Sparse vegetation,1992,0.11090254
+POL,Square kilometers (000's),Sparse vegetation,2004,0.094441048
+POL,Square kilometers (000's),Sparse vegetation,2015,0.091040552
+POL,Square kilometers (000's),Sparse vegetation,2018,0.09042228
+POL,Square kilometers (000's),Sparse vegetation,2019,0.092045244
+POL,Square kilometers (000's),Bare area,1992,0.025194584
+POL,Square kilometers (000's),Bare area,2004,0.02589014
+POL,Square kilometers (000's),Bare area,2015,0.02589014
+POL,Square kilometers (000's),Bare area,2018,0.025581004
+POL,Square kilometers (000's),Bare area,2019,0.025581004
+POL,Percent of total country area,Cropland,1992,61.26667251
+POL,Percent of total country area,Cropland,2004,58.9146517
+POL,Percent of total country area,Cropland,2015,58.58521734
+POL,Percent of total country area,Cropland,2018,58.26814701
+POL,Percent of total country area,Cropland,2019,58.16786926
+PRT,Square kilometers (000's),Bare area,1992,0.422666196
+PRT,Square kilometers (000's),Bare area,2004,0.416251624
+PRT,Square kilometers (000's),Bare area,2015,0.386960988
+PRT,Square kilometers (000's),Bare area,2018,0.377996044
+PRT,Square kilometers (000's),Bare area,2019,0.37714592
+PRT,Square kilometers (000's),Inland water,1992,1.049362152
+PRT,Square kilometers (000's),Inland water,2004,1.000982368
+PRT,Square kilometers (000's),Inland water,2015,1.00585126
+PRT,Square kilometers (000's),Inland water,2018,1.032668808
+PRT,Square kilometers (000's),Inland water,2019,1.033828068
+PRT,Percent of total country area,Wetland,1992,0.1546947592
+PRT,Percent of total country area,Wetland,2004,0.1610773877
+PRT,Percent of total country area,Wetland,2015,0.1612453516
+PRT,Percent of total country area,Wetland,2018,0.1601535862
+PRT,Percent of total country area,Wetland,2019,0.1600696042
+PRT,Percent of total country area,Bare area,1992,0.4592973062
+PRT,Percent of total country area,Bare area,2004,0.452326804
+PRT,Percent of total country area,Bare area,2015,0.4204976435
+PRT,Percent of total country area,Bare area,2018,0.4107557368
+PRT,Percent of total country area,Bare area,2019,0.4098319353
+SVK,Percent of total country area,Shrubland,1992,0
+SVK,Percent of total country area,Shrubland,2004,0
+SVK,Percent of total country area,Shrubland,2015,0
+SVK,Percent of total country area,Shrubland,2018,0
+SVK,Percent of total country area,Shrubland,2019,0
+ESP,Percent of total country area,Artificial surfaces,1992,0.600213283
+ESP,Percent of total country area,Artificial surfaces,2004,0.9444258826
+ESP,Percent of total country area,Artificial surfaces,2015,1.449226277
+ESP,Percent of total country area,Artificial surfaces,2018,1.611690596
+ESP,Percent of total country area,Artificial surfaces,2019,1.620539249
+SWE,Square kilometers (000's),Grassland,1992,17.46641585
+SWE,Square kilometers (000's),Grassland,2004,18.11467404
+SWE,Square kilometers (000's),Grassland,2015,18.54104987
+SWE,Square kilometers (000's),Grassland,2018,19.07454132
+SWE,Square kilometers (000's),Grassland,2019,19.48290998
+SWE,Percent of total country area,Wetland,1992,7.254553583
+SWE,Percent of total country area,Wetland,2004,7.443493571
+SWE,Percent of total country area,Wetland,2015,7.138584117
+SWE,Percent of total country area,Wetland,2018,7.591194603
+SWE,Percent of total country area,Wetland,2019,8.046841933
+SWE,Percent of total country area,Bare area,1992,0.6494186601
+SWE,Percent of total country area,Bare area,2004,0.6535598105
+SWE,Percent of total country area,Bare area,2015,0.6620146593
+SWE,Percent of total country area,Bare area,2018,0.6620664237
+SWE,Percent of total country area,Bare area,2019,0.6632397497
+CHE,Square kilometers (000's),Shrubland,1992,0
+CHE,Square kilometers (000's),Shrubland,2004,0
+CHE,Square kilometers (000's),Shrubland,2015,0
+CHE,Square kilometers (000's),Shrubland,2018,0
+CHE,Square kilometers (000's),Shrubland,2019,0
+CHE,Square kilometers (000's),Artificial surfaces,1992,0.870758828
+CHE,Square kilometers (000's),Artificial surfaces,2004,1.736880616
+CHE,Square kilometers (000's),Artificial surfaces,2015,1.780468792
+CHE,Square kilometers (000's),Artificial surfaces,2018,1.784255708
+CHE,Square kilometers (000's),Artificial surfaces,2019,1.785492252
+CHE,Percent of total country area,Artificial surfaces,1992,2.109853975
+CHE,Percent of total country area,Artificial surfaces,2004,4.208472374
+CHE,Percent of total country area,Artificial surfaces,2015,4.314086791
+CHE,Percent of total country area,Artificial surfaces,2018,4.323262512
+CHE,Percent of total country area,Artificial surfaces,2019,4.326258665
+TUR,Square kilometers (000's),Grassland,1992,77.70875286
+TUR,Square kilometers (000's),Grassland,2004,78.85016026
+TUR,Square kilometers (000's),Grassland,2015,77.5762108
+TUR,Square kilometers (000's),Grassland,2018,76.70174234
+TUR,Square kilometers (000's),Grassland,2019,76.39855721
+TUR,Percent of total country area,Shrubland,1992,0.781460928
+TUR,Percent of total country area,Shrubland,2004,0.7871396753
+TUR,Percent of total country area,Shrubland,2015,0.7838551037
+TUR,Percent of total country area,Shrubland,2018,0.7755348485
+TUR,Percent of total country area,Shrubland,2019,0.7719633715
+GBR,Square kilometers (000's),Tree cover,1992,18.799333
+GBR,Square kilometers (000's),Tree cover,2004,21.01869763
+GBR,Square kilometers (000's),Tree cover,2015,21.18006662
+GBR,Square kilometers (000's),Tree cover,2018,21.32319659
+GBR,Square kilometers (000's),Tree cover,2019,21.44801025
+GBR,Square kilometers (000's),Wetland,1992,14.73458102
+GBR,Square kilometers (000's),Wetland,2004,13.11092146
+GBR,Square kilometers (000's),Wetland,2015,13.0537313
+GBR,Square kilometers (000's),Wetland,2018,13.04422537
+GBR,Square kilometers (000's),Wetland,2019,13.0470076
+GBR,Square kilometers (000's),Inland water,1992,3.474843208
+GBR,Square kilometers (000's),Inland water,2004,3.483344448
+GBR,Square kilometers (000's),Inland water,2015,3.468583204
+GBR,Square kilometers (000's),Inland water,2018,3.470515304
+GBR,Square kilometers (000's),Inland water,2019,3.472679256
+GBR,Percent of total country area,Grassland,1992,48.46451793
+GBR,Percent of total country area,Grassland,2004,46.43516568
+GBR,Percent of total country area,Grassland,2015,46.79994679
+GBR,Percent of total country area,Grassland,2018,46.92539374
+GBR,Percent of total country area,Grassland,2019,46.88507717
+GBR,Percent of total country area,Wetland,1992,6.038143981
+GBR,Percent of total country area,Wetland,2004,5.372777917
+GBR,Percent of total country area,Wetland,2015,5.349341728
+GBR,Percent of total country area,Wetland,2018,5.345446254
+GBR,Percent of total country area,Wetland,2019,5.346586392
+GBR,Percent of total country area,Artificial surfaces,1992,3.664628141
+GBR,Percent of total country area,Artificial surfaces,2004,5.411447628
+GBR,Percent of total country area,Artificial surfaces,2015,5.492872548
+GBR,Percent of total country area,Artificial surfaces,2018,5.507092614
+GBR,Percent of total country area,Artificial surfaces,2019,5.518715697
+GBR,Percent of total country area,Bare area,1992,0.2930790401
+GBR,Percent of total country area,Bare area,2004,0.2507355479
+GBR,Percent of total country area,Bare area,2015,0.248866987
+GBR,Percent of total country area,Bare area,2018,0.2497220911
+GBR,Percent of total country area,Bare area,2019,0.2485186112
+USA,Percent of total country area,Shrubland,1992,19.98711232
+USA,Percent of total country area,Shrubland,2004,19.72097178
+USA,Percent of total country area,Shrubland,2015,19.77311809
+USA,Percent of total country area,Shrubland,2018,19.78442108
+USA,Percent of total country area,Shrubland,2019,19.79156034
+ALB,Percent of total country area,Artificial surfaces,1992,0.6072727955
+ALB,Percent of total country area,Artificial surfaces,2004,0.76626298
+ALB,Percent of total country area,Artificial surfaces,2015,1.009708321
+ALB,Percent of total country area,Artificial surfaces,2018,1.076736224
+ALB,Percent of total country area,Artificial surfaces,2019,1.078076782
+ALB,Percent of total country area,Bare area,1992,1.840586199
+ALB,Percent of total country area,Bare area,2004,1.795275337
+ALB,Percent of total country area,Bare area,2015,1.751036922
+ALB,Percent of total country area,Bare area,2018,1.68240035
+ALB,Percent of total country area,Bare area,2019,1.678378676
+DZA,Square kilometers (000's),Tree cover,1992,17.72794491
+DZA,Square kilometers (000's),Tree cover,2004,17.90345687
+DZA,Square kilometers (000's),Tree cover,2015,19.88957839
+DZA,Square kilometers (000's),Tree cover,2018,20.07536912
+DZA,Square kilometers (000's),Tree cover,2019,20.27468456
+DZA,Square kilometers (000's),Wetland,1992,0.021175816
+DZA,Square kilometers (000's),Wetland,2004,0.020943964
+DZA,Square kilometers (000's),Wetland,2015,0.02241236
+DZA,Square kilometers (000's),Wetland,2018,0.02241236
+DZA,Square kilometers (000's),Wetland,2019,0.02241236
+DZA,Percent of total country area,Sparse vegetation,1992,3.93312228
+DZA,Percent of total country area,Sparse vegetation,2004,3.561567906
+DZA,Percent of total country area,Sparse vegetation,2015,3.528264116
+DZA,Percent of total country area,Sparse vegetation,2018,3.637610338
+DZA,Percent of total country area,Sparse vegetation,2019,3.653741966
+ASM,Percent of total country area,Sparse vegetation,1992,0.0770119369
+ASM,Percent of total country area,Sparse vegetation,2004,0.0770119369
+ASM,Percent of total country area,Sparse vegetation,2015,0.0770119369
+ASM,Percent of total country area,Sparse vegetation,2018,0.0770119369
+ASM,Percent of total country area,Sparse vegetation,2019,0.0770119369
+AND,Square kilometers (000's),Tree cover,1992,0.28865574
+AND,Square kilometers (000's),Tree cover,2004,0.273894496
+AND,Square kilometers (000's),Tree cover,2015,0.274203632
+AND,Square kilometers (000's),Tree cover,2018,0.272657952
+AND,Square kilometers (000's),Tree cover,2019,0.272657952
+AND,Percent of total country area,Artificial surfaces,1992,0.4405286344
+AND,Percent of total country area,Artificial surfaces,2004,0.6269061335
+AND,Percent of total country area,Artificial surfaces,2015,0.8810572687
+AND,Percent of total country area,Artificial surfaces,2018,0.8810572687
+AND,Percent of total country area,Artificial surfaces,2019,0.8810572687
+AGO,Square kilometers (000's),Artificial surfaces,1992,0.32381996
+AGO,Square kilometers (000's),Artificial surfaces,2004,0.615026072
+AGO,Square kilometers (000's),Artificial surfaces,2015,0.926712444
+AGO,Square kilometers (000's),Artificial surfaces,2018,1.264907228
+AGO,Square kilometers (000's),Artificial surfaces,2019,1.319933436
+AGO,Percent of total country area,Sparse vegetation,1992,0.0381607751
+AGO,Percent of total country area,Sparse vegetation,2004,0.0331018382
+AGO,Percent of total country area,Sparse vegetation,2015,0.025886229
+AGO,Percent of total country area,Sparse vegetation,2018,0.0380621844
+AGO,Percent of total country area,Sparse vegetation,2019,0.0381361274
+ATG,Square kilometers (000's),Cropland,1992,0.021098532
+ATG,Square kilometers (000's),Cropland,2004,0.017852604
+ATG,Square kilometers (000's),Cropland,2015,0.017543468
+ATG,Square kilometers (000's),Cropland,2018,0.01854816
+ATG,Square kilometers (000's),Cropland,2019,0.01854816
+ARG,Square kilometers (000's),Wetland,1992,84.9892148
+ARG,Square kilometers (000's),Wetland,2004,91.26398004
+ARG,Square kilometers (000's),Wetland,2015,92.15351888
+ARG,Square kilometers (000's),Wetland,2018,92.15274604
+ARG,Square kilometers (000's),Wetland,2019,91.9868173
+ARG,Percent of total country area,Inland water,1992,1.557693451
+ARG,Percent of total country area,Inland water,2004,1.557448965
+ARG,Percent of total country area,Inland water,2015,1.456737344
+ARG,Percent of total country area,Inland water,2018,1.467052992
+ARG,Percent of total country area,Inland water,2019,1.469722892
+ABW,Square kilometers (000's),Sparse vegetation,1992,0.01236544
+ABW,Square kilometers (000's),Sparse vegetation,2004,0.01236544
+ABW,Square kilometers (000's),Sparse vegetation,2015,0.010974328
+ABW,Square kilometers (000's),Sparse vegetation,2018,0.010742476
+ABW,Square kilometers (000's),Sparse vegetation,2019,0.010742476
+ABW,Square kilometers (000's),Inland water,1992,0.006337288
+ABW,Square kilometers (000's),Inland water,2004,0.006337288
+ABW,Square kilometers (000's),Inland water,2015,0.006337288
+ABW,Square kilometers (000's),Inland water,2018,0.006337288
+ABW,Square kilometers (000's),Inland water,2019,0.006337288
+ABW,Percent of total country area,Tree cover,1992,0.427167877
+ABW,Percent of total country area,Tree cover,2004,0.427167877
+ABW,Percent of total country area,Tree cover,2015,0.3844510893
+ABW,Percent of total country area,Tree cover,2018,0.2135839385
+ABW,Percent of total country area,Tree cover,2019,0.2135839385
+ABW,Percent of total country area,Wetland,1992,1.66595472
+ABW,Percent of total country area,Wetland,2004,1.66595472
+ABW,Percent of total country area,Wetland,2015,1.409653994
+ABW,Percent of total country area,Wetland,2018,1.409653994
+ABW,Percent of total country area,Wetland,2019,1.409653994
+AZE,Square kilometers (000's),Artificial surfaces,1992,0.427844224
+AZE,Square kilometers (000's),Artificial surfaces,2004,0.612630268
+AZE,Square kilometers (000's),Artificial surfaces,2015,1.298680336
+AZE,Square kilometers (000's),Artificial surfaces,2018,1.560441244
+AZE,Square kilometers (000's),Artificial surfaces,2019,1.572188412
+BHS,Square kilometers (000's),Artificial surfaces,1992,0.081689188
+BHS,Square kilometers (000's),Artificial surfaces,2004,0.108893156
+BHS,Square kilometers (000's),Artificial surfaces,2015,0.12404082
+BHS,Square kilometers (000's),Artificial surfaces,2018,0.126900328
+BHS,Square kilometers (000's),Artificial surfaces,2019,0.1275186
+BHS,Percent of total country area,Sparse vegetation,1992,0.3261153144
+BHS,Percent of total country area,Sparse vegetation,2004,0.3182885468
+BHS,Percent of total country area,Sparse vegetation,2015,0.3189407775
+BHS,Percent of total country area,Sparse vegetation,2018,0.3176363162
+BHS,Percent of total country area,Sparse vegetation,2019,0.3176363162
+BHR,Square kilometers (000's),Grassland,1992,0
+BHR,Square kilometers (000's),Grassland,2004,0
+BHR,Square kilometers (000's),Grassland,2015,0
+BHR,Square kilometers (000's),Grassland,2018,0
+BHR,Square kilometers (000's),Grassland,2019,0
+BHR,Square kilometers (000's),Shrubland,1992,0.002009384
+BHR,Square kilometers (000's),Shrubland,2004,0.002241236
+BHR,Square kilometers (000's),Shrubland,2015,0.002241236
+BHR,Square kilometers (000's),Shrubland,2018,0.002241236
+BHR,Square kilometers (000's),Shrubland,2019,0.002241236
+BHR,Square kilometers (000's),Artificial surfaces,1992,0.141352436
+BHR,Square kilometers (000's),Artificial surfaces,2004,0.19861988
+BHR,Square kilometers (000's),Artificial surfaces,2015,0.207971244
+BHR,Square kilometers (000's),Artificial surfaces,2018,0.22876064
+BHR,Square kilometers (000's),Artificial surfaces,2019,0.233165828
+BHR,Percent of total country area,Inland water,1992,9.252058554
+BHR,Percent of total country area,Inland water,2004,5.466605673
+BHR,Percent of total country area,Inland water,2015,5.455169259
+BHR,Percent of total country area,Inland water,2018,5.455169259
+BHR,Percent of total country area,Inland water,2019,5.455169259
+BGD,Square kilometers (000's),Bare area,1992,0.073187948
+BGD,Square kilometers (000's),Bare area,2004,0.120640324
+BGD,Square kilometers (000's),Bare area,2015,0.316323412
+BGD,Square kilometers (000's),Bare area,2018,0.33734466
+BGD,Square kilometers (000's),Bare area,2019,0.342445404
+BGD,Percent of total country area,Sparse vegetation,1992,0.0047858287
+BGD,Percent of total country area,Sparse vegetation,2004,0.0073712763
+BGD,Percent of total country area,Sparse vegetation,2015,0.011111924
+BGD,Percent of total country area,Sparse vegetation,2018,0.011111924
+BGD,Percent of total country area,Sparse vegetation,2019,0.011111924
+BRB,Percent of total country area,Wetland,1992,0.6395452123
+BRB,Percent of total country area,Wetland,2004,0.4796589092
+BRB,Percent of total country area,Wetland,2015,0.1421211583
+BRB,Percent of total country area,Wetland,2018,0.1421211583
+BRB,Percent of total country area,Wetland,2019,0.1421211583
+BLR,Percent of total country area,Shrubland,1992,0
+BLR,Percent of total country area,Shrubland,2004,0
+BLR,Percent of total country area,Shrubland,2015,0
+BLR,Percent of total country area,Shrubland,2018,0
+BLR,Percent of total country area,Shrubland,2019,0
+BEN,Square kilometers (000's),Grassland,1992,0.018084456
+BEN,Square kilometers (000's),Grassland,2004,0.015302232
+BEN,Square kilometers (000's),Grassland,2015,0.01120618
+BEN,Square kilometers (000's),Grassland,2018,0.012210872
+BEN,Square kilometers (000's),Grassland,2019,0.013988404
+BEN,Percent of total country area,Cropland,1992,37.98882942
+BEN,Percent of total country area,Cropland,2004,40.01897746
+BEN,Percent of total country area,Cropland,2015,41.50758832
+BEN,Percent of total country area,Cropland,2018,40.13432148
+BEN,Percent of total country area,Cropland,2019,39.72811862
+BMU,Square kilometers (000's),Bare area,1992,0
+BMU,Square kilometers (000's),Bare area,2004,0
+BMU,Square kilometers (000's),Bare area,2015,0
+BMU,Square kilometers (000's),Bare area,2018,0
+BMU,Square kilometers (000's),Bare area,2019,0
+BTN,Percent of total country area,Sparse vegetation,1992,0.1318058837
+BTN,Percent of total country area,Sparse vegetation,2004,0.1318058837
+BTN,Percent of total country area,Sparse vegetation,2015,0.1318058837
+BTN,Percent of total country area,Sparse vegetation,2018,0.1318058837
+BTN,Percent of total country area,Sparse vegetation,2019,0.1318058837
+BOL,Square kilometers (000's),Grassland,1992,94.66988592
+BOL,Square kilometers (000's),Grassland,2004,99.9610577
+BOL,Square kilometers (000's),Grassland,2015,101.6157854
+BOL,Square kilometers (000's),Grassland,2018,99.98416562
+BOL,Square kilometers (000's),Grassland,2019,99.30275259
+BOL,Square kilometers (000's),Artificial surfaces,1992,0.703516252
+BOL,Square kilometers (000's),Artificial surfaces,2004,0.89726724
+BOL,Square kilometers (000's),Artificial surfaces,2015,1.270626244
+BOL,Square kilometers (000's),Artificial surfaces,2018,1.34783296
+BOL,Square kilometers (000's),Artificial surfaces,2019,1.419475228
+BOL,Square kilometers (000's),Bare area,1992,87.83295686
+BOL,Square kilometers (000's),Bare area,2004,90.45226619
+BOL,Square kilometers (000's),Bare area,2015,88.34782287
+BOL,Square kilometers (000's),Bare area,2018,87.09381269
+BOL,Square kilometers (000's),Bare area,2019,85.2679009
+BOL,Percent of total country area,Artificial surfaces,1992,0.0645161199
+BOL,Percent of total country area,Artificial surfaces,2004,0.0822840989
+BOL,Percent of total country area,Artificial surfaces,2015,0.1165230723
+BOL,Percent of total country area,Artificial surfaces,2018,0.123603332
+BOL,Percent of total country area,Artificial surfaces,2019,0.1301733026
+BIH,Square kilometers (000's),Wetland,1992,0.057731148
+BIH,Square kilometers (000's),Wetland,2004,0.05834942
+BIH,Square kilometers (000's),Wetland,2015,0.057963
+BIH,Square kilometers (000's),Wetland,2018,0.059199544
+BIH,Square kilometers (000's),Wetland,2019,0.059740532
+BIH,Percent of total country area,Bare area,1992,0.0213813894
+BIH,Percent of total country area,Bare area,2004,0.0239592874
+BIH,Percent of total country area,Bare area,2015,0.0247174927
+BIH,Percent of total country area,Bare area,2018,0.0253240569
+BIH,Percent of total country area,Bare area,2019,0.0253240569
+BWA,Square kilometers (000's),Shrubland,1992,450.0155352
+BWA,Square kilometers (000's),Shrubland,2004,449.1451628
+BWA,Square kilometers (000's),Shrubland,2015,447.089022
+BWA,Square kilometers (000's),Shrubland,2018,445.561581
+BWA,Square kilometers (000's),Shrubland,2019,445.3847552
+BWA,Square kilometers (000's),Sparse vegetation,1992,0.548175412
+BWA,Square kilometers (000's),Sparse vegetation,2004,0.67159796
+BWA,Square kilometers (000's),Sparse vegetation,2015,0.545006768
+BWA,Square kilometers (000's),Sparse vegetation,2018,0.541065284
+BWA,Square kilometers (000's),Sparse vegetation,2019,0.540369728
+BWA,Square kilometers (000's),Artificial surfaces,1992,0.171493196
+BWA,Square kilometers (000's),Artificial surfaces,2004,0.243367316
+BWA,Square kilometers (000's),Artificial surfaces,2015,0.424134592
+BWA,Square kilometers (000's),Artificial surfaces,2018,0.569737648
+BWA,Square kilometers (000's),Artificial surfaces,2019,0.656836716
+BWA,Square kilometers (000's),Bare area,1992,9.177784136
+BWA,Square kilometers (000's),Bare area,2004,9.302365944
+BWA,Square kilometers (000's),Bare area,2015,9.053666032
+BWA,Square kilometers (000's),Bare area,2018,8.986042532
+BWA,Square kilometers (000's),Bare area,2019,8.980632652
+BWA,Percent of total country area,Inland water,1992,0.0714489208
+BWA,Percent of total country area,Inland water,2004,0.072379938
+BWA,Percent of total country area,Inland water,2015,0.1106314451
+BWA,Percent of total country area,Inland water,2018,0.1111235542
+BWA,Percent of total country area,Inland water,2019,0.111057053
+BRA,Square kilometers (000's),Grassland,1992,421.6262625
+BRA,Square kilometers (000's),Grassland,2004,445.1318047
+BRA,Square kilometers (000's),Grassland,2015,447.615867
+BRA,Square kilometers (000's),Grassland,2018,445.2089341
+BRA,Square kilometers (000's),Grassland,2019,442.7923407
+BRA,Square kilometers (000's),Shrubland,1992,1318.672934
+BRA,Square kilometers (000's),Shrubland,2004,1291.633813
+BRA,Square kilometers (000's),Shrubland,2015,1291.087338
+BRA,Square kilometers (000's),Shrubland,2018,1281.926169
+BRA,Square kilometers (000's),Shrubland,2019,1277.385734
+BRA,Square kilometers (000's),Artificial surfaces,1992,13.3164969
+BRA,Square kilometers (000's),Artificial surfaces,2004,19.72179482
+BRA,Square kilometers (000's),Artificial surfaces,2015,25.7433004
+BRA,Square kilometers (000's),Artificial surfaces,2018,26.54612659
+BRA,Square kilometers (000's),Artificial surfaces,2019,27.16153908
+BRA,Percent of total country area,Artificial surfaces,1992,0.1559954595
+BRA,Percent of total country area,Artificial surfaces,2004,0.2310300125
+BRA,Percent of total country area,Artificial surfaces,2015,0.3015686486
+BRA,Percent of total country area,Artificial surfaces,2018,0.3109733172
+BRA,Percent of total country area,Artificial surfaces,2019,0.3181825371
+BRA,Percent of total country area,Bare area,1992,0.0529804783
+BRA,Percent of total country area,Bare area,2004,0.0431620694
+BRA,Percent of total country area,Bare area,2015,0.043246266
+BRA,Percent of total country area,Bare area,2018,0.0437505402
+BRA,Percent of total country area,Bare area,2019,0.0437116106
+VGB,Square kilometers (000's),Tree cover,1992,0.076743012
+VGB,Square kilometers (000's),Tree cover,2004,0.077361284
+VGB,Square kilometers (000's),Tree cover,2015,0.07032844
+VGB,Square kilometers (000's),Tree cover,2018,0.07032844
+VGB,Square kilometers (000's),Tree cover,2019,0.07032844
+VGB,Square kilometers (000's),Artificial surfaces,1992,0.007110128
+VGB,Square kilometers (000's),Artificial surfaces,2004,0.010124204
+VGB,Square kilometers (000's),Artificial surfaces,2015,0.018780012
+VGB,Square kilometers (000's),Artificial surfaces,2018,0.018780012
+VGB,Square kilometers (000's),Artificial surfaces,2019,0.018780012
+VGB,Square kilometers (000's),Bare area,1992,0
+VGB,Square kilometers (000's),Bare area,2004,0
+VGB,Square kilometers (000's),Bare area,2015,0
+VGB,Square kilometers (000's),Bare area,2018,0
+VGB,Square kilometers (000's),Bare area,2019,0
+VGB,Percent of total country area,Grassland,1992,8.52442672
+VGB,Percent of total country area,Grassland,2004,8.374875374
+VGB,Percent of total country area,Grassland,2015,8.075772682
+VGB,Percent of total country area,Grassland,2018,8.075772682
+VGB,Percent of total country area,Grassland,2019,8.075772682
+VGB,Percent of total country area,Shrubland,1992,0
+VGB,Percent of total country area,Shrubland,2004,0
+VGB,Percent of total country area,Shrubland,2015,0
+VGB,Percent of total country area,Shrubland,2018,0
+VGB,Percent of total country area,Shrubland,2019,0
+BRN,Square kilometers (000's),Artificial surfaces,1992,0.014606676
+BRN,Square kilometers (000's),Artificial surfaces,2004,0.023880756
+BRN,Square kilometers (000's),Artificial surfaces,2015,0.094209196
+BRN,Square kilometers (000's),Artificial surfaces,2018,0.1024013
+BRN,Square kilometers (000's),Artificial surfaces,2019,0.102478584
+BGR,Square kilometers (000's),Tree cover,1992,40.2688282
+BGR,Square kilometers (000's),Tree cover,2004,41.17761076
+BGR,Square kilometers (000's),Tree cover,2015,42.52374347
+BGR,Square kilometers (000's),Tree cover,2018,42.86054714
+BGR,Square kilometers (000's),Tree cover,2019,42.84261725
+BGR,Square kilometers (000's),Grassland,1992,1.770267304
+BGR,Square kilometers (000's),Grassland,2004,1.882947376
+BGR,Square kilometers (000's),Grassland,2015,1.826684624
+BGR,Square kilometers (000's),Grassland,2018,1.821738448
+BGR,Square kilometers (000's),Grassland,2019,1.828848576
+BGR,Square kilometers (000's),Sparse vegetation,1992,0.1255865
+BGR,Square kilometers (000's),Sparse vegetation,2004,0.134706012
+BGR,Square kilometers (000's),Sparse vegetation,2015,0.135169716
+BGR,Square kilometers (000's),Sparse vegetation,2018,0.132232924
+BGR,Square kilometers (000's),Sparse vegetation,2019,0.13292848
+BGR,Square kilometers (000's),Cropland,1992,65.70415186
+BGR,Square kilometers (000's),Cropland,2004,64.20739263
+BGR,Square kilometers (000's),Cropland,2015,62.50111648
+BGR,Square kilometers (000's),Cropland,2018,62.16323083
+BGR,Square kilometers (000's),Cropland,2019,62.15673898
+BGR,Percent of total country area,Artificial surfaces,1992,1.262758067
+BGR,Percent of total country area,Artificial surfaces,2004,1.654007769
+BGR,Percent of total country area,Artificial surfaces,2015,2.059732737
+BGR,Percent of total country area,Artificial surfaces,2018,2.081028078
+BGR,Percent of total country area,Artificial surfaces,2019,2.081863189
+BGR,Percent of total country area,Inland water,1992,0.7645445094
+BGR,Percent of total country area,Inland water,2004,0.8318405717
+BGR,Percent of total country area,Inland water,2015,0.8278737924
+BGR,Percent of total country area,Inland water,2018,0.8280825703
+BGR,Percent of total country area,Inland water,2019,0.827943385
+BFA,Percent of total country area,Shrubland,1992,13.3207559
+BFA,Percent of total country area,Shrubland,2004,9.396305924
+BFA,Percent of total country area,Shrubland,2015,8.56894462
+BFA,Percent of total country area,Shrubland,2018,8.354620518
+BFA,Percent of total country area,Shrubland,2019,8.122616435
+BDI,Percent of total country area,Tree cover,1992,16.66261744
+BDI,Percent of total country area,Tree cover,2004,13.69115163
+BDI,Percent of total country area,Tree cover,2015,13.83778129
+BDI,Percent of total country area,Tree cover,2018,14.67096933
+BDI,Percent of total country area,Tree cover,2019,14.98966733
+BDI,Percent of total country area,Wetland,1992,0.8534818113
+BDI,Percent of total country area,Wetland,2004,0.8652007512
+BDI,Percent of total country area,Wetland,2015,0.8589125396
+BDI,Percent of total country area,Wetland,2018,0.8514810167
+BDI,Percent of total country area,Wetland,2019,0.8511951889
+BDI,Percent of total country area,Bare area,1992,0
+BDI,Percent of total country area,Bare area,2004,0
+BDI,Percent of total country area,Bare area,2015,0
+BDI,Percent of total country area,Bare area,2018,0
+BDI,Percent of total country area,Bare area,2019,0
+BDI,Percent of total country area,Inland water,1992,7.427521216
+BDI,Percent of total country area,Inland water,2004,7.400081747
+BDI,Percent of total country area,Inland water,2015,7.411800687
+BDI,Percent of total country area,Inland water,2018,7.411800687
+BDI,Percent of total country area,Inland water,2019,7.411800687
+KHM,Square kilometers (000's),Bare area,1992,0.01816174
+KHM,Square kilometers (000's),Bare area,2004,0.01816174
+KHM,Square kilometers (000's),Bare area,2015,0.021484952
+KHM,Square kilometers (000's),Bare area,2018,0.022257792
+KHM,Square kilometers (000's),Bare area,2019,0.022566928
+KHM,Square kilometers (000's),Inland water,1992,4.073716924
+KHM,Square kilometers (000's),Inland water,2004,4.077735692
+KHM,Square kilometers (000's),Inland water,2015,4.114445592
+KHM,Square kilometers (000's),Inland water,2018,4.215533064
+KHM,Square kilometers (000's),Inland water,2019,4.327285728
+KHM,Percent of total country area,Grassland,1992,0.6444715427
+KHM,Percent of total country area,Grassland,2004,0.6060259635
+KHM,Percent of total country area,Grassland,2015,0.657597236
+KHM,Percent of total country area,Grassland,2018,0.6529820728
+KHM,Percent of total country area,Grassland,2019,0.6532784595
+KHM,Percent of total country area,Sparse vegetation,1992,0.0014819331
+KHM,Percent of total country area,Sparse vegetation,2004,0.0014819331
+KHM,Percent of total country area,Sparse vegetation,2015,0.0013549103
+KHM,Percent of total country area,Sparse vegetation,2018,0.0019900245
+KHM,Percent of total country area,Sparse vegetation,2019,0.0019900245
+CMR,Square kilometers (000's),Wetland,1992,1.722428508
+CMR,Square kilometers (000's),Wetland,2004,1.755196924
+CMR,Square kilometers (000's),Wetland,2015,1.801412756
+CMR,Square kilometers (000's),Wetland,2018,1.774363356
+CMR,Square kilometers (000's),Wetland,2019,1.759061124
+CMR,Square kilometers (000's),Cropland,1992,66.95553439
+CMR,Square kilometers (000's),Cropland,2004,69.94673432
+CMR,Square kilometers (000's),Cropland,2015,72.54084907
+CMR,Square kilometers (000's),Cropland,2018,72.37948008
+CMR,Square kilometers (000's),Cropland,2019,72.28071112
+CMR,Square kilometers (000's),Inland water,1992,3.69649372
+CMR,Square kilometers (000's),Inland water,2004,3.758243636
+CMR,Square kilometers (000's),Inland water,2015,3.518663236
+CMR,Square kilometers (000's),Inland water,2018,3.55351832
+CMR,Square kilometers (000's),Inland water,2019,3.545944488
+CPV,Percent of total country area,Sparse vegetation,1992,1.366254832
+CPV,Percent of total country area,Sparse vegetation,2004,1.356780111
+CPV,Percent of total country area,Sparse vegetation,2015,1.377624498
+CPV,Percent of total country area,Sparse vegetation,2018,1.411733495
+CPV,Percent of total country area,Sparse vegetation,2019,1.574698704
+CPV,Percent of total country area,Inland water,1992,8.820965664
+CPV,Percent of total country area,Inland water,2004,8.822860608
+CPV,Percent of total country area,Inland water,2015,8.820965664
+CPV,Percent of total country area,Inland water,2018,8.872129159
+CPV,Percent of total country area,Inland water,2019,8.872129159
+CYM,Percent of total country area,Cropland,1992,17.08154506
+CYM,Percent of total country area,Cropland,2004,16.45207439
+CYM,Percent of total country area,Cropland,2015,14.93562232
+CYM,Percent of total country area,Cropland,2018,14.96423462
+CYM,Percent of total country area,Cropland,2019,14.96423462
+CYM,Percent of total country area,Artificial surfaces,1992,1.459227468
+CYM,Percent of total country area,Artificial surfaces,2004,2.43204578
+CYM,Percent of total country area,Artificial surfaces,2015,5.464949929
+CYM,Percent of total country area,Artificial surfaces,2018,5.636623748
+CYM,Percent of total country area,Artificial surfaces,2019,5.636623748
+CAF,Square kilometers (000's),Grassland,1992,63.97708631
+CAF,Square kilometers (000's),Grassland,2004,63.98064138
+CAF,Square kilometers (000's),Grassland,2015,63.98844706
+CAF,Square kilometers (000's),Grassland,2018,64.18358916
+CAF,Square kilometers (000's),Grassland,2019,64.6581902
+CAF,Square kilometers (000's),Bare area,1992,0.001700248
+CAF,Square kilometers (000's),Bare area,2004,0.002936792
+CAF,Square kilometers (000's),Bare area,2015,0.004714324
+CAF,Square kilometers (000's),Bare area,2018,0.005641732
+CAF,Square kilometers (000's),Bare area,2019,0.007960252
+TCD,Square kilometers (000's),Sparse vegetation,1992,68.05729509
+TCD,Square kilometers (000's),Sparse vegetation,2004,74.62442571
+TCD,Square kilometers (000's),Sparse vegetation,2015,78.30430337
+TCD,Square kilometers (000's),Sparse vegetation,2018,84.41453098
+TCD,Square kilometers (000's),Sparse vegetation,2019,88.55610325
+TCD,Square kilometers (000's),Cropland,1992,223.674039
+TCD,Square kilometers (000's),Cropland,2004,233.2390159
+TCD,Square kilometers (000's),Cropland,2015,238.7842202
+TCD,Square kilometers (000's),Cropland,2018,239.8124839
+TCD,Square kilometers (000's),Cropland,2019,241.0586111
+TCD,Percent of total country area,Grassland,1992,10.88008446
+TCD,Percent of total country area,Grassland,2004,10.27271401
+TCD,Percent of total country area,Grassland,2015,10.19903002
+TCD,Percent of total country area,Grassland,2018,10.09375936
+TCD,Percent of total country area,Grassland,2019,9.888692089
+TCD,Percent of total country area,Wetland,1992,0.5132180081
+TCD,Percent of total country area,Wetland,2004,0.5273618354
+TCD,Percent of total country area,Wetland,2015,0.5279025573
+TCD,Percent of total country area,Wetland,2018,0.5176106142
+TCD,Percent of total country area,Wetland,2019,0.5155084818
+TCD,Percent of total country area,Cropland,1992,17.5836875
+TCD,Percent of total country area,Cropland,2004,18.33561905
+TCD,Percent of total country area,Cropland,2015,18.7715442
+TCD,Percent of total country area,Cropland,2018,18.85237909
+TCD,Percent of total country area,Cropland,2019,18.95034089
+TCD,Percent of total country area,Bare area,1992,50.25908174
+TCD,Percent of total country area,Bare area,2004,50.39036174
+TCD,Percent of total country area,Bare area,2015,50.11570538
+TCD,Percent of total country area,Bare area,2018,49.73006736
+TCD,Percent of total country area,Bare area,2019,49.5250244
+TCD,Percent of total country area,Inland water,1992,0.2890492815
+TCD,Percent of total country area,Inland water,2004,0.28960823
+TCD,Percent of total country area,Inland water,2015,0.2874574933
+TCD,Percent of total country area,Inland water,2018,0.2906106919
+TCD,Percent of total country area,Inland water,2019,0.2917771932
+CHL,Square kilometers (000's),Cropland,1992,51.64487843
+CHL,Square kilometers (000's),Cropland,2004,50.09858016
+CHL,Square kilometers (000's),Cropland,2015,48.70476322
+CHL,Square kilometers (000's),Cropland,2018,49.94795364
+CHL,Square kilometers (000's),Cropland,2019,50.05916532
+CHN,Percent of total country area,Cropland,1992,28.83778637
+CHN,Percent of total country area,Cropland,2004,29.28978989
+CHN,Percent of total country area,Cropland,2015,29.06660985
+CHN,Percent of total country area,Cropland,2018,28.74048694
+CHN,Percent of total country area,Cropland,2019,28.60116705
+COL,Square kilometers (000's),Sparse vegetation,1992,5.812065936
+COL,Square kilometers (000's),Sparse vegetation,2004,5.531679584
+COL,Square kilometers (000's),Sparse vegetation,2015,5.429896556
+COL,Square kilometers (000's),Sparse vegetation,2018,5.439170636
+COL,Square kilometers (000's),Sparse vegetation,2019,5.437624956
+COM,Square kilometers (000's),Grassland,1992,0.007496548
+COM,Square kilometers (000's),Grassland,2004,0.007573832
+COM,Square kilometers (000's),Grassland,2015,0.007960252
+COM,Square kilometers (000's),Grassland,2018,0.00927408
+COM,Square kilometers (000's),Grassland,2019,0.009737784
+COM,Square kilometers (000's),Wetland,1992,0
+COM,Square kilometers (000's),Wetland,2004,0
+COM,Square kilometers (000's),Wetland,2015,0
+COM,Square kilometers (000's),Wetland,2018,0
+COM,Square kilometers (000's),Wetland,2019,0
+COM,Percent of total country area,Sparse vegetation,1992,0
+COM,Percent of total country area,Sparse vegetation,2004,0
+COM,Percent of total country area,Sparse vegetation,2015,0
+COM,Percent of total country area,Sparse vegetation,2018,0
+COM,Percent of total country area,Sparse vegetation,2019,0
+COG,Square kilometers (000's),Grassland,1992,12.64744932
+COG,Square kilometers (000's),Grassland,2004,12.53144603
+COG,Square kilometers (000's),Grassland,2015,11.78557815
+COG,Square kilometers (000's),Grassland,2018,11.51137452
+COG,Square kilometers (000's),Grassland,2019,11.4051863
+COG,Percent of total country area,Wetland,1992,0.2908923381
+COG,Percent of total country area,Wetland,2004,0.2473914693
+COG,Percent of total country area,Wetland,2015,0.24410073
+COG,Percent of total country area,Wetland,2018,0.2490142996
+COG,Percent of total country area,Wetland,2019,0.248969221
+COG,Percent of total country area,Sparse vegetation,1992,0.0008114152
+COG,Percent of total country area,Sparse vegetation,2004,0.0001577752
+COG,Percent of total country area,Sparse vegetation,2015,0
+COG,Percent of total country area,Sparse vegetation,2018,0
+COG,Percent of total country area,Sparse vegetation,2019,0
+COG,Percent of total country area,Bare area,1992,0.0000901572
+COG,Percent of total country area,Bare area,2004,0.0002253931
+COG,Percent of total country area,Bare area,2015,0.0003831683
+COG,Percent of total country area,Bare area,2018,0.0011720441
+COG,Percent of total country area,Bare area,2019,0.0011720441
+COK,Square kilometers (000's),Artificial surfaces,1992,0.000154568
+COK,Square kilometers (000's),Artificial surfaces,2004,0.000154568
+COK,Square kilometers (000's),Artificial surfaces,2015,0.000154568
+COK,Square kilometers (000's),Artificial surfaces,2018,0.000154568
+COK,Square kilometers (000's),Artificial surfaces,2019,0.000154568
+COK,Percent of total country area,Cropland,1992,42.52910737
+COK,Percent of total country area,Cropland,2004,42.52910737
+COK,Percent of total country area,Cropland,2015,42.52910737
