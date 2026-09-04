@@ -44,6 +44,13 @@ def download_files(importname, configs):
                     if chunk:
                         f.write(chunk)
 
+    @retry(tries=3, delay=2, backoff=2)
+    def get_record_count_with_retry(count_url):
+        logging.info(f"Querying record count from URL: {count_url}")
+        resp = requests.get(count_url, timeout=60)
+        resp.raise_for_status()
+        return json.loads(resp.text)[0]['COLUMN_ALIAS_GUARD__count']
+
     url_new = None
     import_found = False
     try:
@@ -57,12 +64,8 @@ def download_files(importname, configs):
                     input_file_name = file_info["input_file_name"]
                     logging.info(f"Input File Name {input_file_name}")
 
-                    get_record_count = requests.get(url_new.replace(
-                        '.csv', record_count_query),
-                                                    timeout=60)
-                    get_record_count.raise_for_status()
-                    record_count = json.loads(
-                        get_record_count.text)[0]['COLUMN_ALIAS_GUARD__count']
+                    count_url = url_new.replace('.csv', record_count_query)
+                    record_count = get_record_count_with_retry(count_url)
                     logging.info(
                         f"Numbers of records found for the URL {url_new} is {record_count}"
                     )
