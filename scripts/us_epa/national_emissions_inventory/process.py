@@ -125,29 +125,33 @@ class USAirEmissionTrends:
             df.rename(columns=replacement_08_11, inplace=True)
             df['pollutant type(s)'] = 'nan'
             if 'event' in file_path:
-                df.loc[:, 'emissions type code'] = ''
+                df['emissions type code'] = ''
             elif 'process' in file_path:
                 df = df.dropna(subset=['fips code'])
-                df.loc[:, 'emissions type code'] = ''
+                df['emissions type code'] = ''
             if '2008' in file_path:
-                df.loc[:, 'year'] = '2008'
+                df['year'] = '2008'
             else:
-                df.loc[:, 'year'] = '2011'
+                df['year'] = '2011'
         elif '2017' in file_path:
             if 'Event' in file_path:
                 df['pollutant type(s)'] = 'nan'
-            elif 'point' in file_path:
+            elif 'point_' in os.path.basename(file_path) or 'facility_process' in file_path:
                 if 'unknown' in file_path or '678910' in file_path:
                     df.rename(columns=replacement_point_17, inplace=True)
-                df.loc[:, 'emissions type code'] = ''
+                df['emissions type code'] = ''
+            elif 'nonpoint' in file_path:
+                df['emissions type code'] = ''
             df['year'] = '2017'
         elif '2020' in file_path:
             if 'Event' in file_path:
                 df['pollutant type(s)'] = 'nan'
-            elif 'point' in file_path:
+            elif 'point_' in os.path.basename(file_path) or 'facility_process' in file_path:
                 if 'unknown' in file_path:
                     df.rename(columns=replacement_20, inplace=True)
-                df.loc[:, 'emissions type code'] = ''
+                df['emissions type code'] = ''
+            elif 'nonpoint' in file_path:
+                df['emissions type code'] = ''
             df['year'] = '2020'
         elif 'tribes' in file_path:
             df.rename(columns=replacement_tribes, inplace=True)
@@ -157,7 +161,7 @@ class USAirEmissionTrends:
         else:
             df.rename(columns=replacement_14, inplace=True)
             if 'event' in file_path or 'process' in file_path:
-                df.loc[:, 'emissions type code'] = ''
+                df['emissions type code'] = ''
             df['pollutant type(s)'] = 'nan'
             df['year'] = '2014'
 
@@ -227,7 +231,7 @@ class USAirEmissionTrends:
                                               errors='coerce')
             return df
         except Exception as e:
-            logging.error(f"Error processing file {file_path}: {e}")
+            logging.fatal(f"Error processing file {file_path}: {e}")
             return pd.DataFrame()
 
     def _process_file(self, file_path: str) -> None:
@@ -245,7 +249,7 @@ class USAirEmissionTrends:
                 logging.info(
                     f"Saved intermediate file at : {intermediate_file_path}")
         except Exception as e:
-            logging.error(f"Error processing file {file_path}: {e}")
+            logging.fatal(f"Error processing file {file_path}: {e}")
 
     def _mcf_property_generator(self) -> None:
         """
@@ -303,7 +307,7 @@ class USAirEmissionTrends:
         logging.info("Starting data processing across all input files.")
         with concurrent.futures.ThreadPoolExecutor(
                 max_workers=MAX_WORKERS) as executor:
-            executor.map(self._process_file, self._input_files)
+            list(executor.map(self._process_file, self._input_files))
 
         logging.info("Consolidating intermediate files.")
         intermediate_files = [
@@ -315,17 +319,15 @@ class USAirEmissionTrends:
                 dfs.append(pd.read_csv(f, low_memory=False))
                 logging.info(f"Appending {f}")
             except Exception as e:
-                logging.error(f"Error reading intermediate file {f}: {e}")
+                logging.fatal(f"Error reading intermediate file {f}: {e}")
 
         if not dfs:
-            logging.error("No dataframes to concatenate. Exiting.")
-            return
+            logging.fatal("No dataframes to concatenate. Exiting.")
 
         self.final_df = pd.concat(dfs, ignore_index=True)
 
         self.final_df = self.final_df.sort_values(
             by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
-        self.final_df['observation'].replace('', np.nan, inplace=True)
         self.final_df.dropna(subset=['observation'], inplace=True)
         self.final_df['observation'] = np.where(
             self.final_df['unit'] == 'Pound',
@@ -431,7 +433,7 @@ def process_files(input_path: str, output_file_path: str,
         loader.generate_mcf()
         loader.generate_tmcf()
     except Exception as e:
-        logging.error(f"An unexpected error occurred: {e}")
+        logging.fatal(f"An unexpected error occurred: {e}")
 
 
 def main(_):

@@ -17,14 +17,16 @@
             "import_inputs": [
                 {
                     "template_mcf": "gcs_output/output_files/national_emissions.tmcf",
-                    "cleaned_csv": "gcs_output/output_files/national_emissions.csv"
+                    "cleaned_csv": "gcs_output/output_files/national_emissions.csv",
+                    "node_mcf": "gcs_output/output_files/national_emissions.mcf"
                 }
             ],
             "cron_schedule": "0 0 1 1-12/3 *",
+            "validation_config_file": "validation_config.json",
             "resource_limits": {
-                "cpu": 8,
-                "memory": 128,
-                "disk": 100
+                "cpu": 32,
+                "memory": 512,
+                "disk": 300
             }
         }
     ]
