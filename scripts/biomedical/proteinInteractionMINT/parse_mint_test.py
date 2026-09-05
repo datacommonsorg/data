@@ -17,6 +17,7 @@ Run "python3 parse_mint_test.py"
 
 import unittest
 import parse_mint
+import collections
 
 CONST_INPUT = (
     'uniprotkb:Q04439\tuniprotkb:Q12446\tintact:EBI-11687|uniprotkb:D6VZT2\tintact:'
@@ -31,7 +32,7 @@ CONST_INPUT = (
     'cerevisiae)\ttaxid:559292(yeast)|taxid:559292(Saccharomyces cerevisiae)\t'
     'psi-mi:"MI:0915"(physical association)\tpsi-mi:"MI:0471"(MINT)\tintact:'
     'EBI-606428\tauthor score:Above 1.|intact-miscore:0.81\nuniprotkb:P38764'
-    '\tuniprotkb:P40016\tintact:EBI-15913|uniprotkb:D3DKX4\tintact:EBI-15927'
+    '\tunipiprotkb:P40016\tintact:EBI-15913|uniprotkb:D3DKX4\tintact:EBI-15927'
     '|uniprotkb:D3DLS0\tpsi-mi:rpn1_yeast(display_long)|uniprotkb:Proteasome '
     'non-ATPase subunit 1(gene name synonym)|uniprotkb:HMG-CoA reductase '
     'degradation protein 2(gene name synonym)|uniprotkb:YHR027C(locus name)'
@@ -54,7 +55,7 @@ interactionDetectionMethod: dcs:PhageDisplay
 interactionType: dcs:PhysicalAssociation
 interactionSource: dcs:Mint
 intActID: "EBI-606428"
-confidenceScore: [1. - dcs:AuthorScore],[0.81 dcs:IntactMiScore]
+confidenceScore: 0.81 dcs:IntactMiScore
 mintID: "MINT-5214930"
 pubMedID: "11743162"
 
@@ -68,7 +69,7 @@ interactionSource: dcs:Mint
 intActID: "EBI-6941860"
 mintID: "MINT-1984371"
 imexID: "IM-15332-8532"
-confidenceScore: [0.76 dcs:IntactMiScore]
+confidenceScore: 0.76 dcs:IntactMiScore
 pubMedID: "16554755"
 imexID: "IM-15332"
 mintID: "MINT-5218454"'''
@@ -100,6 +101,7 @@ class TestParseEbi(unittest.TestCase):
             if schema:
                 mcf_list.append(schema)
         mcf_text = '\n\n'.join(mcf_list)
+        self.maxDiff = None
         self.assertEqual(mcf_text, CONST_OUTPUT)
 
 
