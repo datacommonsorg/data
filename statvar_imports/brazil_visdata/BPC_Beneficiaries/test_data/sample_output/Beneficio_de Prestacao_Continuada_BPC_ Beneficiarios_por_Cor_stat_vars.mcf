@@ -1,0 +1,98 @@
+# Auto generated using command: "tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/test_data/sample_input/Beneficio_de Prestacao_Continuada_BPC_ Beneficiarios_por_Cor - data.csv --pv_map=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/pv_map/Beneficio_de Prestacao_Continuada_BPC_ Beneficiarios_por_Cor - pvmap.csv --config_file=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/config_metadata/Beneficio_de Prestacao_Continuada_BPC_ Beneficiarios_por_Cor - metadata.csv --output_path=/usr/local/google/home/shamimansari/Brazil_BPC_Beneficiaries16062025/data/statvar_imports/brazil_visdata/BPC_Beneficiaries/test_data/sample_output/Beneficio_de Prestacao_Continuada_BPC_ Beneficiarios_por_Cor --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf" on 2025-06-16 10:30:52.805661
+
+Node: dcid:Count_Person_60OrMoreYears_BrazilContinuousCashBenefitProgram_BrazilAmarela_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Elderly(Age>60 Yrs) with Amarela Race"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único de Idosos (Idade>60 Anos) na Corrida Amarela@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+race: dcid:Brazil_Amarela
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_60OrMoreYears_BrazilContinuousCashBenefitProgram_BrazilBranca_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Elderly(Age>60 Yrs) with White Race"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único Idosos (Idade>60 Anos) de Raça Branca@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+race: dcid:Brazil_Branca
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_60OrMoreYears_BrazilContinuousCashBenefitProgram_BrazilPardo_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Elderly(Age>60 Yrs) with Parda Race"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único Idosos (Idade>60 Anos) com Corrida Parda@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+race: dcid:Brazil_Pardo
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_60OrMoreYears_BrazilContinuousCashBenefitProgram_BrazilPreto_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Elderly(Age>60 Yrs) with Black Race"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [60 - Years]
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único Idosos (Idade>60 Anos) de Raça Negra@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+race: dcid:Brazil_Preto
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_PermanentDisablity_BrazilAmarela_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Permanent Disability with Amarela Race"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único em Invalidez Permanente com Raça Amarela@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+disabilityStatus: dcid:PermanentDisablity
+race: dcid:Brazil_Amarela
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_PermanentDisablity_BrazilBranca_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Permanent Disability with White Race"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único sob Incapacidade Permanente de Raça Branca@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+disabilityStatus: dcid:PermanentDisablity
+race: dcid:Brazil_Branca
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_PermanentDisablity_BrazilPardo_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Permanent Disability with Parda Race"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único em Invalidez Permanente com Raça Parda@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+disabilityStatus: dcid:PermanentDisablity
+race: dcid:Brazil_Pardo
+registrationStatus: dcid:Brazil_SingleRegistry
+
+Node: dcid:Count_Person_BrazilContinuousCashBenefitProgram_PermanentDisablity_BrazilPreto_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+description: "Beneficiaries of BPC Registered in the Single Registry under Permanent Disability with Black Race"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Beneficiários do BPC Inscritos no Cadastro Único sob Incapacidade Permanente de Raça Negra@pt"
+benefitProgram: dcid:Brazil_ContinuousCashBenefitProgram
+disabilityStatus: dcid:PermanentDisablity
+race: dcid:Brazil_Preto
+registrationStatus: dcid:Brazil_SingleRegistry
+
