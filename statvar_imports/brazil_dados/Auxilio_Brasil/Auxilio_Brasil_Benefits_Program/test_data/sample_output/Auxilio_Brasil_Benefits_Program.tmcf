@@ -1,0 +1,8 @@
+Node: E:Auxilio_Brazil_Benefits_Program.csv->E0
+observationAbout: C:Auxilio_Brazil_Benefits_Program.csv->observationAbout
+observationDate: C:Auxilio_Brazil_Benefits_Program.csv->observationDate
+observationPeriod: C:Auxilio_Brazil_Benefits_Program.csv->observationPeriod
+value: C:Auxilio_Brazil_Benefits_Program.csv->value
+variableMeasured: C:Auxilio_Brazil_Benefits_Program.csv->variableMeasured
+unit: C:Auxilio_Brazil_Benefits_Program.csv->unit
+typeOf: dcs:StatVarObservation

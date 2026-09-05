@@ -1,0 +1,48 @@
+Node: dcid:Amount_Person_AuxilioBrasil
+typeOf: dcid:StatisticalVariable
+name: "Total amount transferred from Auxílio Brasil"
+populationType: dcid:Person
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+benefitsStatus: dcid:AuxilioBrasil
+
+Node: dcid:Amount_Person_ExtraordinaryBenefits
+typeOf: dcid:StatisticalVariable
+name: "Amounts transferred from the Extraordinary Benefit"
+populationType: dcid:Person
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+benefitsStatus: dcid:ExtraordinaryBenefits
+
+Node: dcid:Count_Household_AuxilioBrasil
+typeOf: dcid:StatisticalVariable
+name: "Number of Families Beneficiaries of Auxílio Brasil"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+benefitsStatus: dcid:AuxilioBrasil
+
+Node: dcid:Count_Household_ExtraordinaryBenefits
+typeOf: dcid:StatisticalVariable
+name: "Families benefiting from the Extraordinary Benefit"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+benefitsStatus: dcid:ExtraordinaryBenefits
+
+Node: dcid:Mean_Amount_Person_BrazilAid
+typeOf: dcid:StatisticalVariable
+name: "Average value of Brazil Aid"
+populationType: dcid:Person
+measuredProperty: dcid:amount
+statType: dcid:meanValue
+benefitsStatus: dcid:BrazilAid
+
+Node: dcid:Mean_Amount_Person_ExtraordinaryBenefits
+typeOf: dcid:StatisticalVariable
+name: "Average value of the Extraordinary Benefit"
+populationType: dcid:Person
+measuredProperty: dcid:amount
+statType: dcid:meanValue
+benefitsStatus: dcid:ExtraordinaryBenefits
+
