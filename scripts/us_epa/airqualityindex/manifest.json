@@ -16,14 +16,16 @@
             "import_inputs": [
                 {
                     "template_mcf": "EPA_AQI.tmcf",
-                    "cleaned_csv": "output/EPA_AQI.csv"
+                    "cleaned_csv": "output/EPA_AQI.csv",
+                    "node_mcf": "output/EPA_AQI.mcf"
                 }
             ],
             "cron_schedule": "15 22 10 1,7 *",
+            "validation_config_file": "validation_config.json",
             "resource_limits": {
                 "cpu": 32,
                 "memory": 128,
-                "disk": 512
+                "disk": 300
             }
         }
     ]
