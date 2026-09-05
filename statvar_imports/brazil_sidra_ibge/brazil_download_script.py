@@ -1,4 +1,4 @@
-# Copyright 2025 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,28 +12,55 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Downloads PNAD Continuous (PNADc) quarterly data directly via IBGE REST API.
+Fetches data starting from Q1 2022 to the latest available period and reshapes
+the output into Excel spreadsheets.
+"""
+
 import os
-import re
 import time
-import glob
-from absl import app, logging, flags
 from pathlib import Path
+from typing import Any, Dict, List, Optional
 
-# Import specific Selenium exceptions
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.support.ui import WebDriverWait, Select
-from selenium.webdriver.support import expected_conditions as EC
+from absl import app, flags, logging
+import pandas as pd
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util import Retry
 
+from vars import (
+    LOCATIONS,
+    get_panel_1_specs,
+    get_panel_2_specs,
+    get_panel_3_specs,
+    get_panel_4_specs,
+)
 
-# --- Configuration ---
-BASE_URL = "https://sidra.ibge.gov.br/home/pnadct/"
+# --- Robust Session Setup ---
+def get_robust_session() -> requests.Session:
+    """Configures a global requests Session with automated retries and connection pooling.
+    
+    Retries up to 10 times with exponential backoff on common server error codes (500, 502, 503, 504).
+    """
+    session = requests.Session()
+    retries = Retry(
+        total=10,
+        backoff_factor=1,
+        status_forcelist=[500, 502, 503, 504],
+        raise_on_status=False
+    )
+    session.mount("https://", HTTPAdapter(max_retries=retries))
+    return session
+
+# Global session instance
+SESSION = get_robust_session()
+
+# --- Configuration Constants ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DOWNLOAD_DIR = os.path.join(SCRIPT_DIR, "input_files")
 
-# Mapping of panel index to subfolder name
+# Maps panel indices (1 to 4) to their target folder names
 PANEL_FOLDER_MAP = {
     1: "Employment_And_Unemployment_Labor_Force",
     2: "Population_Economic_sector",
@@ -41,196 +68,289 @@ PANEL_FOLDER_MAP = {
     4: "Mass_Income"
 }
 
+# The starting quarter code (YYYYQQ) for filtering period metadata
+PERIOD_START = "202201"
 
-def setup_driver():
-    """Configures and returns a Selenium WebDriver."""
-    chrome_options = ChromeOptions()
-    prefs = {
-        "download.default_directory": DOWNLOAD_DIR,
-        "download.prompt_for_download": False,
-        "download.directory_upgrade": True,
-        "safeBrowse.enabled": True
-    }
-    chrome_options.add_experimental_option("prefs", prefs)
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--window-size=1920,1080")
-    chrome_options.add_argument("--disable-gpu")
+
+def get_available_periods() -> List[Dict[str, Any]]:
+    """Fetches available period metadata starting from Q1 2022 to the latest available period.
+
+    Returns:
+        List[Dict[str, Any]]: List of dictionary objects containing period metadata.
+    """
+    url = "https://servicodados.ibge.gov.br/api/v3/agregados/6461/periodos"
+    headers = {"User-Agent": "Mozilla/5.0"}
     
-    logging.info("WebDriver options configured.")
-    return webdriver.Chrome(options=chrome_options)
-
-
-def wait_for_downloads(timeout=30):
-    """Waits for all downloads to finish."""
-    start_time = time.time()
-    while True:
-        if not any(f.endswith(".crdownload") for f in os.listdir(DOWNLOAD_DIR)):
-            return True
-        if time.time() - start_time > timeout:
-            logging.fatal("Timeout waiting for downloads to complete. Exiting script.")
-            raise RuntimeError("Timeout waiting for downloads.") 
-        time.sleep(1)
-
-def rename_and_move_downloaded_file(place_name, panel_index):
-    """Renames the most recently downloaded file and moves it to the correct subfolder."""
     try:
-        time.sleep(1) # Give a moment for the file system to update
-
-        # Get the destination folder name from the map
-        folder_name = PANEL_FOLDER_MAP.get(panel_index)
-        if not folder_name:
-            logging.warning(f"No folder mapping found for panel index {panel_index}. Skipping file move for {place_name}.")
-            return
-
-        # Find the latest downloaded file in the main DOWNLOAD_DIR
-        list_of_files = glob.glob(os.path.join(DOWNLOAD_DIR, '*.xlsx'))
-        if not list_of_files:
-            logging.warning(f"No XLSX file found to rename for {place_name} (Panel {panel_index}).")
-            return
+        res = SESSION.get(url, headers=headers, timeout=30)
+        res.raise_for_status()
+        periods_data = res.json()
+        
+        # Verify JSON structure before filtering
+        if not isinstance(periods_data, list):
+            logging.error("API response for periods was not a valid list.")
+            return []
             
-        latest_file = max(list_of_files, key=os.path.getctime)
-        
-        # Construct the new filename
-        new_filename = f"{place_name.replace(' ', '_')}_Panel_{panel_index}_{os.path.basename(latest_file)}"
-        
-        # Construct the destination path including the subfolder
-        destination_dir = os.path.join(DOWNLOAD_DIR, folder_name)
-        Path(destination_dir).mkdir(parents=True, exist_ok=True) # Ensure subfolder exists
-        new_filepath = os.path.join(destination_dir, new_filename)
+        return [p for p in periods_data if isinstance(p, dict) and p.get("id", "") >= PERIOD_START]
 
-        # Move and rename the file
-        os.rename(latest_file, new_filepath)
-        logging.info(f"Moved and renamed file from '{os.path.basename(latest_file)}' to '{new_filepath}'")
+    except requests.exceptions.RequestException as req_err:
+        logging.error(f"Network error fetching period metadata from IBGE API: {req_err}")
+    except ValueError as json_err:
+        logging.error(f"Failed to parse JSON period metadata response: {json_err}")
     except Exception as e:
-        logging.fatal(f"Failed to rename and move file for {place_name} (Panel {panel_index}): {e}. Exiting script.")
-        raise RuntimeError(f"File operation failed: {e}")
+        logging.error(f"Unexpected error when retrieving available periods: {e}")
+
+    return []
 
 
-def download_panel(driver, panel_index, place_name):
-    """
-    Locates a panel, opens the dropdown, clicks the download button,
-    and then calls the rename and move function.
+def format_quarter_label(period_item: Dict[str, Any]) -> str:
+    """Formats period literals to match UI quarter headers (e.g., '1º trimestre 2022').
+
+    Args:
+        period_item: A dictionary containing period properties ('id', 'literals').
+
+    Returns:
+        str: Formatted string header for the quarter.
     """
     try:
-        panel_id = f"pnadct-q{panel_index}"
-        panel_div = WebDriverWait(driver, 15).until(
-            EC.presence_of_element_located((By.ID, panel_id))
-        )
-
-        dropdown_button = WebDriverWait(panel_div, 10).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, "div.janela-btn.dropdown span.dropdown-toggle"))
-        )
-        dropdown_button.click()
-
-        export_option = WebDriverWait(panel_div, 10).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, "ul.dropdown-menu li[data-item='0'] a"))
-        )
-        export_option.click()
+        # Check literals list for an explicit quarter description string
+        for lit in period_item.get("literals", []):
+            if "trimestre" in lit.lower():
+                return lit.lower().replace("  ", " ").strip()
         
-        logging.info(f" Downloading XLSX from panel {panel_id} for {place_name}")
-        time.sleep(2) # Give a moment for the download to initiate
-        rename_and_move_downloaded_file(place_name, panel_index)
-
-    except (TimeoutException, NoSuchElementException) as e:
-        logging.fatal(f" Selenium element error during download from {panel_id} for {place_name}: {e}. Exiting script.")
-        raise RuntimeError(f"Selenium element error: {e}") # Added raise
+        # Fallback parsing based on period ID structure (YYYYQQ)
+        p_id = period_item["id"]
+        year = p_id[:4]
+        q = int(p_id[4:])
+        return f"{q}º trimestre {year}"
     except Exception as e:
-        logging.fatal(f" Critical download failure from {panel_id} for {place_name}: {e}. Exiting script.")
-        raise RuntimeError(f"Critical download failure: {e}") # Added raise
+        logging.warning(f"Failed to format quarter label for {period_item}: {e}")
+        return str(period_item.get("id", "Unknown Period"))
 
 
-def get_url_slug(place_name):
-    """
-    Generates a URL slug from the place name, matching the website's pattern.
-    """
-    import unicodedata
-    slug = place_name.lower().replace(' ', '-')
-    # Normalize unicode characters to their base form
-    nfkd_form = unicodedata.normalize('NFKD', slug)
-    return "".join([c for c in nfkd_form if not unicodedata.combining(c)])
+def fetch_aggregate_series(agg_id: int, var_id: int, geo_code: str, period_query: str, classif: Optional[str] = None) -> Dict[str, Dict[str, str]]:
+    """Helper function to query IBGE aggregate API endpoint using robust SESSION with error handling.
 
-def get_place_select_element(driver):
+    Args:
+        agg_id: The aggregate code.
+        var_id: The variable code.
+        geo_code: IBGE geographical region string (e.g., 'N1[1]').
+        period_query: Pipeline-separated period string (e.g., '202201|202202').
+        classif: Optional classification parameters string.
+
+    Returns:
+        Dict[str, Dict[str, str]]: Dictionary mapping category keys to time series data.
     """
-    Waits for and returns the Select object for the place dropdown.
+    url = f"https://servicodados.ibge.gov.br/api/v3/agregados/{agg_id}/periodos/{period_query}/variaveis/{var_id}?localidades={geo_code}"
+    if classif:
+        url += f"&classificacao={classif}"
+
+    headers = {"User-Agent": "Mozilla/5.0"}
+    try:
+        r = SESSION.get(url, headers=headers, timeout=30)
+        
+        # Non-200 responses should yield gracefully without crashing the whole run
+        if r.status_code != 200:
+            logging.warning(f"HTTP {r.status_code} received for Agg {agg_id}, Var {var_id}")
+            return {}
+            
+        data = r.json()
+
+        # Guard check to ensure valid list structure returned from API
+        if not isinstance(data, list) or not data or "resultados" not in data[0]:
+            logging.warning(f"Invalid or empty response structure for Agg {agg_id}, Var {var_id}")
+            return {}
+
+        result_map = {}
+        for res in data[0]["resultados"]:
+            cat_key = "Total"
+            # Extract category classification keys if present
+            if res.get("classificacoes"):
+                cats = res["classificacoes"][0].get("categoria", {})
+                if cats:
+                    cat_key = list(cats.keys())[0]
+            
+            # Map time-series dictionary to category key
+            for s in res.get("series", []):
+                serie = s.get("serie", {})
+                result_map[cat_key] = serie
+
+        return result_map
+
+    except requests.exceptions.RequestException as req_err:
+        logging.warning(f"Network exception downloading Agg {agg_id}, Var {var_id}: {req_err}")
+    except ValueError as json_err:
+        logging.warning(f"JSON decoding error for Agg {agg_id}, Var {var_id}: {json_err}")
+    except Exception as e:
+        logging.warning(f"Unexpected error fetching Agg {agg_id}, Var {var_id}: {e}")
+
+    return {}
+
+
+def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: List[Dict[str, Any]]) -> None:
+    """Fetches SIDRA data for 2022Q1 to latest period, reshapes output, and writes to Excel.
+
+    Args:
+        place_name: Display name of state/region.
+        geo_code: IBGE spatial lookup code.
+        panel_index: Index number (1 to 4) representing the panel configuration.
+        periods: List of available periods metadata dictionaries.
     """
     try:
-        select_element = WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.ID, "codigolist-pnadct"))
-        )
-        return Select(select_element)
-    except TimeoutException:
-        logging.fatal("Timeout while waiting for the place selection dropdown. Exiting script.")
-        raise RuntimeError("Could not find the 'codigolist-pnadct' element.")
+        period_ids = [p["id"] for p in periods]
+        period_labels = [format_quarter_label(p) for p in periods]
+        period_query = "|".join(period_ids)
+
+        folder_name = PANEL_FOLDER_MAP[panel_index]
+        dest_dir = os.path.join(DOWNLOAD_DIR, folder_name)
+
+        # Safely create target output directory
+        try:
+            Path(dest_dir).mkdir(parents=True, exist_ok=True)
+        except Exception as e:
+            logging.error(f"Could not create destination directory '{dest_dir}': {e}")
+            return
+
+        filename = f"{place_name.replace(' ', '_')}_Panel_{panel_index}_Pesquisa Nacional por Amostra de Domicílios Contínua - Divulgação Trimestral.xlsx"
+        filepath = os.path.join(dest_dir, filename)
+
+        title_row = "Pesquisa Nacional por Amostra de Domicílios Contínua - Divulgação Trimestral"
+        num_cols = len(period_labels) + 1
+        rows = []
+
+        # Define subheaders by panel type
+        if panel_index == 1:
+            subtitle_row = f"Taxas e Níveis - Indicadores selecionados - Últimos {len(periods)} trimestres"
+        elif panel_index == 2:
+            subtitle_row = f"População - Indicadores selecionados - Últimos {len(periods)} trimestres"
+        elif panel_index == 3:
+            subtitle_row = f"Rendimento - Indicadores selecionados - Últimos {len(periods)} trimestres"
+        elif panel_index == 4:
+            subtitle_row = f"Massa de rendimento - Indicadores selecionados - Últimos {len(periods)} trimestres"
+
+        # Build table metadata header block
+        rows.append([title_row] + [''] * (num_cols - 1))
+        rows.append([subtitle_row] + [''] * (num_cols - 1))
+        rows.append([place_name] + [''] * (num_cols - 1))
+        rows.append(['Indicador', 'Trimestre de coleta'] + [''] * (num_cols - 2))
+        rows.append([''] + period_labels)
+
+        # ---------------------------------------------------------
+        # Panel 1: Employment and Unemployment / Labor Force
+        # ---------------------------------------------------------
+        if panel_index == 1:
+            s1 = fetch_aggregate_series(6461, 4096, geo_code, period_query).get("Total", {})
+            s2 = fetch_aggregate_series(6466, 4097, geo_code, period_query).get("Total", {})
+            s3 = fetch_aggregate_series(6467, 4098, geo_code, period_query).get("Total", {})
+            s4 = fetch_aggregate_series(6468, 4099, geo_code, period_query).get("Total", {})
+
+            ind_specs = get_panel_1_specs(s1, s2, s3, s4)
+            for name, serie in ind_specs:
+                vals = [serie.get(pid, '') for pid in period_ids]
+                rows.append([name] + vals)
+
+            rows.append(["Fonte: IBGE, Diretoria de Pesquisas, Coordenação de Trabalho e Rendimento, Pesquisa Nacional por Amostra de Domicílios Contínua"] + [''] * (num_cols - 1))
+
+        # ---------------------------------------------------------
+        # Panel 2: Population & Economic Sectors
+        # ---------------------------------------------------------
+        elif panel_index == 2:
+            s_pop = fetch_aggregate_series(6462, 606, geo_code, period_query).get("Total", {})
+            m_6463 = fetch_aggregate_series(6463, 1641, geo_code, period_query, classif="629[all]")
+            m_6464 = fetch_aggregate_series(6464, 4090, geo_code, period_query, classif="11913[all]")
+            m_6465 = fetch_aggregate_series(6465, 4090, geo_code, period_query, classif="888[all]")
+
+            ind_specs = get_panel_2_specs(s_pop, m_6463, m_6464, m_6465)
+            for name, serie in ind_specs:
+                vals = [serie.get(pid, '') for pid in period_ids]
+                rows.append([name] + vals)
+
+        # ---------------------------------------------------------
+        # Panel 3: Average Real Income
+        # ---------------------------------------------------------
+        elif panel_index == 3:
+            s_all_usual = fetch_aggregate_series(6472, 5933, geo_code, period_query).get("Total", {})
+            s_all_eff = fetch_aggregate_series(6469, 5935, geo_code, period_query).get("Total", {})
+            m_6471 = fetch_aggregate_series(6471, 5932, geo_code, period_query, classif="11913[all]")
+            s_main_eff = fetch_aggregate_series(6470, 5934, geo_code, period_query).get("Total", {})
+            m_6473 = fetch_aggregate_series(6473, 5932, geo_code, period_query, classif="888[all]")
+
+            ind_specs = get_panel_3_specs(s_all_usual, s_all_eff, m_6471, s_main_eff, m_6473)
+            for name, serie in ind_specs:
+                vals = [serie.get(pid, '') for pid in period_ids]
+                rows.append([name] + vals)
+
+        # ---------------------------------------------------------
+        # Panel 4: Mass Income
+        # ---------------------------------------------------------
+        elif panel_index == 4:
+            s_mass_usual = fetch_aggregate_series(6474, 6293, geo_code, period_query).get("Total", {})
+            s_mass_eff = fetch_aggregate_series(6475, 6295, geo_code, period_query).get("Total", {})
+
+            ind_specs = get_panel_4_specs(s_mass_usual, s_mass_eff)
+            for name, serie in ind_specs:
+                vals = [serie.get(pid, '') for pid in period_ids]
+                rows.append([name] + vals)
+
+            rows.append(["Fonte: IBGE, Diretoria de Pesquisas, Coordenação de Trabalho e Rendimento, Pesquisa Nacional por Amostra de Domicílios Contínua"] + [''] * (num_cols - 1))
+            rows.append(["Nota: 1 - O rendimento está deflacionado para o mês do meio do último trimestre de coleta divulgado."] + [''] * (num_cols - 1))
+            rows.append(["2 - O rendimento efetivo se refere ao valor recebido no mês anterior ao da coleta."] + [''] * (num_cols - 1))
+
+        # Convert constructed matrix to DataFrame
+        df_out = pd.DataFrame(rows)
+
+        # Safely write spreadsheet out to file
+        try:
+            with pd.ExcelWriter(filepath, engine='openpyxl') as writer:
+                df_out.to_excel(writer, sheet_name='Sheet 1', index=False, header=False)
+            logging.info(f"Saved: '{filepath}'")
+        except Exception as write_err:
+            logging.error(f"Failed writing Excel file to '{filepath}': {write_err}")
+
+    except Exception as general_err:
+        logging.error(f"Failed processing Panel {panel_index} for '{place_name}': {general_err}")
+
 
 def main(argv):
-    """Main function to orchestrate the scraping and downloading."""
-    del argv # Unused.
+    """Main execution function to orchestrate downloading and processing data."""
+    del argv
     logging.info("Script started.")
-    
-    # Create the main download directory and the four subfolders
-    os.makedirs(DOWNLOAD_DIR, exist_ok=True)
-    for folder_name in PANEL_FOLDER_MAP.values():
-        os.makedirs(os.path.join(DOWNLOAD_DIR, folder_name), exist_ok=True)
-    
-    driver = setup_driver()
+
+    # Safely create input base directory structure
     try:
-        driver.get(BASE_URL)
-        logging.info(f"Navigated to base URL: {BASE_URL}")
+        os.makedirs(DOWNLOAD_DIR, exist_ok=True)
+        for folder_name in PANEL_FOLDER_MAP.values():
+            os.makedirs(os.path.join(DOWNLOAD_DIR, folder_name), exist_ok=True)
+    except Exception as dir_err:
+        logging.fatal(f"Could not setup target download folders: {dir_err}")
+        return
 
-        # Use the new helper function
-        select = get_place_select_element(driver)
-        options_text = [option.text.strip() for option in select.options]
+    # Retrieve period metadata
+    periods = get_available_periods()
+    if not periods:
+        logging.error("No valid periods found or failed to retrieve periods. Exiting script.")
+        return
 
-        logging.info("\n Processing: Brasil")
-        try:
-            for panel_index in range(1, 5):
-                download_panel(driver, panel_index, 'Brasil')
-            wait_for_downloads()
-        except (TimeoutException, NoSuchElementException) as e:
-            logging.fatal(f"  Selenium element error processing 'Brasil' page. Exiting. Error: {e}")
-            raise RuntimeError(f"Selenium error for 'Brasil' page: {e}") 
-        except Exception as e:
-            logging.fatal(f"  Critical failure processing 'Brasil' page. Exiting. Error: {e}")
-            raise RuntimeError(f"Critical processing failure for 'Brasil' page: {e}") 
+    logging.info(f"Fetched {len(periods)} available periods starting from {PERIOD_START}: {[p['id'] for p in periods]}")
 
-        for place_name in options_text:
-            if not place_name:
-                continue
-            
-            logging.info(f"\n Processing: {place_name}")
-
+    # Process each location and panel step-by-step
+    for place_name, geo_code in LOCATIONS.items():
+        logging.info(f"Processing: {place_name}")
+        for panel_index in range(1, 5):
             try:
-                # Use the new helper function again
-                select = get_place_select_element(driver)
-                
-                select.select_by_visible_text(place_name)
-                
-                place_slug = get_url_slug(place_name)
-                WebDriverWait(driver, 20).until(EC.url_contains(place_slug))
-                WebDriverWait(driver, 20).until(
-                    EC.url_contains(place_slug) and
-                    EC.presence_of_element_located((By.ID, "pnadct-q1"))
-                )
+                fetch_panel_data(place_name, geo_code, panel_index, periods)
+            except Exception as p_err:
+                logging.error(f"Unhandled error for {place_name} (Panel {panel_index}): {p_err}")
+            
+            # Short pause to reduce load on the IBGE REST API
+            time.sleep(0.1)
 
-                for panel_index in range(1, 5):
-                    download_panel(driver, panel_index, place_name)
-                
-                wait_for_downloads()
+    logging.info("Script finished successfully.")
 
-            except (TimeoutException, NoSuchElementException) as e:
-                logging.fatal(f"  Selenium element error selecting or downloading for {place_name}. Exiting. Error: {e}")
-                raise RuntimeError(f"Selenium error for {place_name}: {e}") 
-            except Exception as e:
-                logging.fatal(f"  Critical failure selecting or downloading for {place_name}. Exiting. Error: {e}")
-                raise RuntimeError(f"Critical processing failure for {place_name}: {e}") 
-
-    finally:
-        driver.quit()
-        logging.info("WebDriver closed.")
-        logging.info("Script finished.")
 
 if __name__ == "__main__":
-    flags.FLAGS.log_dir = SCRIPT_DIR
-    app.run(main)
+    try:
+        flags.FLAGS.log_dir = SCRIPT_DIR
+        app.run(main)
+    except Exception as main_err:
+        logging.fatal(f"Application terminated due to an unhandled exception: {main_err}")
