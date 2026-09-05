@@ -154,8 +154,13 @@ class USAirEmissionTrends:
                 df['emissions type code'] = ''
             df['year'] = '2020'
         elif 'tribes' in file_path:
-            df.rename(columns=replacement_tribes, inplace=True)
-            df = self._data_standardize(df, 'fips code')
+            if 'fips code' not in df.columns and 'tribal name' in df.columns:
+                df.rename(columns=replacement_tribes, inplace=True)
+                df = self._data_standardize(df, 'fips code')
+            else:
+                df.rename(columns=replacement_14, inplace=True)
+                if 'event' in file_path or 'process' in file_path:
+                    df['emissions type code'] = ''
             df['pollutant type(s)'] = 'nan'
             df['year'] = '2014'
         else:
