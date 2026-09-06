@@ -237,7 +237,6 @@ class USAirEmissionTrends:
             return df
         except Exception as e:
             logging.fatal(f"Error processing file {file_path}: {e}")
-            return pd.DataFrame()
 
     def _process_file(self, file_path: str) -> None:
         """
