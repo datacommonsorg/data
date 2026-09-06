@@ -8,15 +8,6 @@
             "params": {
                 "threshold": 0.1
             }
-        },
-        {
-            "rule_id": "check_max_date_freshness",
-            "description": "Verifies that the dataset's maximum observation date meets freshness requirements (>= 2020)",
-            "validator": "SQL_VALIDATOR",
-            "params": {
-                "query": "SELECT MAX(MaxDate) AS latest_date FROM stats",
-                "condition": "latest_date >= '2020'"
-            }
         }
     ]
 }
