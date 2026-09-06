@@ -17,6 +17,7 @@ Generates cleaned CSV and template MCF files for the EPA AirData.
 Usage: python3 air_quality.py <end_year>
 '''
 import csv, os, sys, requests, io, zipfile
+from urllib3.util import Retry
 
 from absl import app
 from absl import flags
@@ -134,8 +135,8 @@ def write_csv(csv_file_path, reader):
         monitors = {}
         keys = set()
         for observation in reader:
-            # Skip cross-border monitors outside US (State Code 80 = Mexico)
-            if observation.get('State Code') == '80':
+            # Skip cross-border monitors outside US (80 = Mexico, CC = Canada)
+            if observation.get('State Code') in ('80', 'CC'):
                 continue
             # For a given site and pollutant standard, select the same monitor
             monitor_key = (
@@ -161,9 +162,10 @@ def write_csv(csv_file_path, reader):
             suffix = POLLUTANTS[observation["Parameter Code"]]
             county = ('dcid:geoId/' + observation['State Code'] +
                       observation['County Code'])
-            raw_unit = observation.get('Units of Measure', '').strip().lower()
-            unit = UNIT_MAP.get(raw_unit,
-                                get_camel_case(observation['Units of Measure']))
+            raw_unit_str = observation.get('Units of Measure', '')
+            unit = UNIT_MAP.get(raw_unit_str.strip().lower()) if raw_unit_str else ''
+            if not unit and raw_unit_str:
+                unit = get_camel_case(raw_unit_str)
             new_row = {
                 'Date':
                     observation['Date Local'],
@@ -217,8 +219,8 @@ def main(_):
     create_csv('EPA_AirQuality.csv')
     session = requests.Session()
     adapter = requests.adapters.HTTPAdapter(
-        max_retries=requests.adapters.Retry(
-            total=5,
+        max_retries=Retry(
+            total=10,
             backoff_factor=2,
             status_forcelist=[429, 500, 502, 503, 504],
             raise_on_status=False,

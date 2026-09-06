@@ -50668,27 +50668,3 @@ typeOf: dcs:AirQualitySite
 name: "# 8 Tolbod Gade"
 location: [latLong 18.343811 -64.931389]
 containedInPlace: dcid:geoId/78030
-
-Node: dcid:epa/CC0040002
-typeOf: dcs:AirQualitySite
-name: "ROOSEVELT PARK--CAMPOBELLO ISLAND, NB"
-location: [latLong 44.874774 -66.95619]
-containedInPlace: dcid:geoId/CC004
-
-Node: dcid:epa/CC0087004
-typeOf: dcs:AirQualitySite
-name: "C001"
-location: [latLong 45.004546 -74.703057]
-containedInPlace: dcid:geoId/CC008
-
-Node: dcid:epa/CC0110001
-typeOf: dcs:AirQualitySite
-name: "RAFFERTY DAM, SK"
-location: [latLong 49.145602 -103.091252]
-containedInPlace: dcid:geoId/CC011
-
-Node: dcid:epa/CC0110002
-typeOf: dcs:AirQualitySite
-name: "ESTEVAN, SK"
-location: [latLong 49.135138 -102.984855]
-containedInPlace: dcid:geoId/CC011
