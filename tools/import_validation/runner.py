@@ -29,7 +29,7 @@ from validation_config import ValidationConfig
 from report_generator import ReportGenerator
 from validator import Validator
 from result import ValidationResult, ValidationStatus
-from validation_util import filter_dataframe
+from validation_util import DIFFER_COLUMNS, filter_dataframe
 
 _FLAGS = flags.FLAGS
 
@@ -48,7 +48,7 @@ class ValidationRunner:
         self.validation_results = []
         self.data_sources = {
             'stats': pd.DataFrame(),
-            'differ': pd.DataFrame(),
+            'differ': pd.DataFrame(columns=DIFFER_COLUMNS),
             'differ_summary': {},
             'lint': {}
         }
@@ -191,8 +191,7 @@ class ValidationRunner:
                     stats[current_var][diff_type] += 1
 
         if not stats:
-            return pd.DataFrame(
-                columns=['StatVar', 'ADDED', 'DELETED', 'MODIFIED'])
+            return pd.DataFrame(columns=DIFFER_COLUMNS)
 
         rows = []
         for var, counts in stats.items():
