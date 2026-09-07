@@ -18,6 +18,8 @@ found in downloaded files and its corresponding SV name.
 While preprocessing files column names are changed to SV names as used in
 DC import
 """
+import pandas as pd
+
 # TMCF template for Demographics data. It changes based on import name.
 TMCF_TEMPLATE = (
     "Node: E:us_nces_demographics_{import_name}->E0\n"
@@ -135,7 +137,10 @@ MELT_VAR_COL = "sv_name"
 def _PV_FORMAT(pv):
     """Formats property-value pairs for MCF nodes; modified based on column."""
     t = tuple(pv)
-    return f'"{t[0]}": "dcs:{t[1]}"' if 'None' not in str(t[1]) else ""
+    val = str(t[1]).strip() if not pd.isna(t[1]) else ""
+    if not val or val in ('None', 'nan', '<NA>'):
+        return ""
+    return f'"{t[0]}": "dcs:{val}"'
 
 
 # pylint:disable=unnecessary-lambda-assignment
