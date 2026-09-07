@@ -20,7 +20,7 @@
             "description": "Verifies that MaxDate meets the expected freshness threshold for the dataset.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT MAX(MaxDate) >= '2022' AS is_fresh, COUNT(*) AS row_cnt FROM stats",
+                "query": "SELECT MAX(MaxDate) >= '2024' AS is_fresh, COUNT(*) AS row_cnt FROM stats",
                 "condition": "is_fresh = TRUE AND row_cnt > 0"
             }
         }

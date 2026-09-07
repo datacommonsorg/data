@@ -74,6 +74,11 @@ def process_rollups(df: pd.DataFrame) -> pd.DataFrame:
     betriebsgr_sort = pd.to_numeric(df['BetriebsgrSort'], errors='coerce')
     df_rollups = df[(rechtsform_sort == 0) & (betriebsgr_sort == 0)].copy()
 
+    # Filter out unknown regions (RaumSort 990: Kreis Unbekannt, 999: Quartier Unbekannt)
+    if 'RaumSort' in df_rollups.columns:
+        df_rollups = df_rollups[~df_rollups['RaumSort'].astype(str).
+                                isin(['990', '999'])].copy()
+
     if df_rollups.empty:
         raise ValueError(
             "No rows matched filter (RechtsformSort == 0 & BetriebsgrSort == 0)."

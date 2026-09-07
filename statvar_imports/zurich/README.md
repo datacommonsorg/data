@@ -4,7 +4,7 @@
 Number of companies, workplaces and employees in Zurich city at City, District (Kreise), and Quarter (Quartiere) Level.
 Source URL: [BFS WIR STATENT Data](https://data.stadt-zuerich.ch/dataset/bfs_wir_statent_ast_beschaeftigte_vza_rechtsform_betrgr_jahr_od2552)
 Import Type: Fully Autorefresh
-Source Data Availability: 2011 to 2022
+Source Data Availability: 2011 to 2024
 Release Frequency: P1Y
 
 3. Preprocessing Steps (Yes)
@@ -50,7 +50,7 @@ Fully Autorefresh:" 0 6 29 * * " (Runs at 6:00 AM on the 29th of every month).
 Total population of Zurich city by quarter and year at City, District (Kreise), and Quarter (Quartiere) Level.
 Source URL: [BEV324OD3240 Dataset](https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_od3240)
 Import Type: Fully Autorefresh
-Source Data Availability: 1941 to 2023
+Source Data Availability: 1941 to 2025
 Release Frequency: P1Y
 
 3. Preprocessing Steps (No)
