@@ -74,12 +74,6 @@ def process_rollups(df: pd.DataFrame) -> pd.DataFrame:
     betriebsgr_sort = pd.to_numeric(df['BetriebsgrSort'], errors='coerce')
     df_rollups = df[(rechtsform_sort == 0) & (betriebsgr_sort == 0)].copy()
 
-    if 'RaumSort' in df_rollups.columns:
-        raum_sort_num = pd.to_numeric(df_rollups['RaumSort'], errors='coerce')
-        df_rollups = df_rollups[~(
-            df_rollups['RaumSort'].astype(str).isin(['990', '999']) |
-            raum_sort_num.isin([990, 999]))].copy()
-
     if df_rollups.empty:
         raise ValueError(
             "No rows matched filter (RechtsformSort == 0 & BetriebsgrSort == 0)."

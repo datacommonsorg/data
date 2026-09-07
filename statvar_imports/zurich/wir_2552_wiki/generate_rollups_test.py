@@ -71,20 +71,6 @@ class GenerateRollupsTest(unittest.TestCase):
         self.assertEqual(result_df.iloc[0]['BetriebsgrLang'],
                          'Alle Betriebsgrössen')
 
-    def test_process_rollups_filters_unknown_regions(self):
-        """Verifies that unknown regions (RaumSort 990 and 999) are excluded across int, float, and string formats."""
-        data = pd.DataFrame({
-            'RaumSort': [
-                1, 990, 999, '990', '999', 990.0, 999.0, ' 990 ', ' 999 '
-            ],
-            'RechtsformSort': [0] * 9,
-            'BetriebsgrSort': [0] * 9,
-            'Arbeitsstaetten': ['100'] * 9
-        })
-        result_df = process_rollups(data)
-        self.assertEqual(len(result_df), 1)
-        self.assertEqual(result_df.iloc[0]['RaumSort'], 1)
-
     def test_process_rollups_numeric_coercion(self):
         """Verifies that metric columns are converted to numeric and markers like 'K' become NaN."""
         data = pd.DataFrame({

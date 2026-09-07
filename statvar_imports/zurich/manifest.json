@@ -20,7 +20,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "wir_2552_wiki/output/zurich_population_wir_2552_wiki.tmcf",
-                    "cleaned_csv": "wir_2552_wiki/output/zurich_population_wir_2552_wiki.csv"
+                    "cleaned_csv": "wir_2552_wiki/output/zurich_population_wir_2552_wiki.csv",
+                    "node_mcf": "wir_2552_wiki/output/*.mcf"
                 }
             ],
             "resource_limits": {
