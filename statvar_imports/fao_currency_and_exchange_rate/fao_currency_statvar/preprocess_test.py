@@ -21,7 +21,9 @@ from absl import app, logging
 
 from preprocess import melt_year_and_flag_columns
 
-input_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata/")
+input_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                         "testdata/")
+
 
 class TestPreprocess(unittest.TestCase):
     """
@@ -33,10 +35,11 @@ class TestPreprocess(unittest.TestCase):
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
 
-    
         input_file = os.path.join(input_dir, 'Exchange_rate_E_All_Data.csv')
-        self.actual_output_file = os.path.join(input_dir, 'final_input_data.csv')
-        self.expected_output_file = os.path.join(input_dir, 'final_input_data_expected.csv')
+        self.actual_output_file = os.path.join(input_dir,
+                                               'final_input_data.csv')
+        self.expected_output_file = os.path.join(
+            input_dir, 'final_input_data_expected.csv')
 
         melt_year_and_flag_columns(input_file, self.actual_output_file)
 
@@ -48,17 +51,19 @@ class TestPreprocess(unittest.TestCase):
         with open(self.actual_output_file, encoding="UTF-8") as act_input_file:
             self.actual_input_data = act_input_file.read()
 
-        with open(self.expected_output_file, encoding="utf-8") as exp_input_file:
+        with open(self.expected_output_file,
+                  encoding="utf-8") as exp_input_file:
             self.expected_input_data = exp_input_file.read()
 
         self.assertEqual(self.actual_input_data.strip(),
                          self.expected_input_data.strip())
-        
+
         logging.info("Testing completed for preprocessed input file!")
+
 
 def main(argv):
     unittest.main()
 
+
 if __name__ == '__main__':
     app.run(main)
-    
