@@ -59,19 +59,19 @@ def copy_and_process_files_from_gcs(gcs_bucket, gcs_prefix, local_base_dir):
     logging.info(f"Listing files from: {gcs_source_path_wildcard}")
     
     try:
-        result = subprocess.run(['gsutil', 'ls', gcs_source_path_wildcard], capture_output=True, text=True, check=True)
+        result = subprocess.run(['gcloud', 'storage', 'ls', gcs_source_path_wildcard], capture_output=True, text=True, check=True)
         gcs_files = result.stdout.strip().split('\n')
         if not gcs_files or gcs_files == ['']:
             logging.fatal(f"No .xlsx files found at '{gcs_source_path_wildcard}'")
             raise RuntimeError('No .xlsx files found')
             return
     except subprocess.CalledProcessError as e:
-        logging.fatal(f"Error listing files from GCS with gsutil: {e.stderr}")
+        logging.fatal(f"Error listing files from GCS with gcloud storage: {e.stderr}")
         raise RuntimeError('Error listing files from GCS')
         return
     except FileNotFoundError:
-        logging.fatal("gsutil command not found. Please ensure the Google Cloud SDK is installed and in your PATH.")
-        raise RuntimeError('gsutil command not found')
+        logging.fatal("gcloud storage command not found. Please ensure the Google Cloud SDK is installed and in your PATH.")
+        raise RuntimeError('gcloud storage command not found')
         return
 
     logging.info(f"Found {len(gcs_files)} xlsx files to copy and process.")
