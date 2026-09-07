@@ -3,7 +3,7 @@
     "rules": [
         {
             "rule_id": "check_deleted_records_percent",
-            "description": "Allow up to 5% deleted records due to OECD dataflow 2.5 NUTS 2024 regional restructuring and historical series revisions.",
+            "description": "Allow up to 4% deleted records due to OECD dataflow 2.5 NUTS 2024 regional restructuring and historical series revisions.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
                 "threshold": 4
