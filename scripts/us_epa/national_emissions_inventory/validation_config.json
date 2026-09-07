@@ -8,6 +8,15 @@
             "params": {
                 "threshold": 0.1
             }
+        },
+        {
+            "rule_id": "check_date_freshness",
+            "description": "Verifies that the dataset's observation dates meet freshness and temporal coverage requirements (MAX(MaxDate) >= 2020 and MIN(MaxDate) >= 2008)",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT MAX(MaxDate) AS max_date, MIN(MaxDate) AS min_date FROM stats",
+                "condition": "max_date >= '2020' AND min_date >= '2008'"
+            }
         }
     ]
 }

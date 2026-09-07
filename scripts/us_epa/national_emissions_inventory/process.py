@@ -19,6 +19,7 @@ and generates cleaned CSV, MCF, TMCF file.
 import os
 import sys
 import time
+import traceback
 # import shutil
 # import tempfile
 import concurrent.futures
@@ -136,7 +137,8 @@ class USAirEmissionTrends:
         elif '2017' in file_path:
             if 'Event' in file_path:
                 df['pollutant type(s)'] = 'nan'
-            elif 'point_' in os.path.basename(file_path) or 'facility_process' in file_path:
+            elif 'point_' in os.path.basename(
+                    file_path) or 'facility_process' in file_path:
                 if 'unknown' in file_path or '678910' in file_path:
                     df.rename(columns=replacement_point_17, inplace=True)
                 df['emissions type code'] = ''
@@ -146,7 +148,8 @@ class USAirEmissionTrends:
         elif '2020' in file_path:
             if 'Event' in file_path:
                 df['pollutant type(s)'] = 'nan'
-            elif 'point_' in os.path.basename(file_path) or 'facility_process' in file_path:
+            elif 'point_' in os.path.basename(
+                    file_path) or 'facility_process' in file_path:
                 if 'unknown' in file_path:
                     df.rename(columns=replacement_20, inplace=True)
                 df['emissions type code'] = ''
@@ -236,7 +239,11 @@ class USAirEmissionTrends:
                                               errors='coerce')
             return df
         except Exception as e:
-            logging.fatal(f"Error processing file {file_path}: {e}")
+            logging.exception(f"Error processing file {file_path}: {e}")
+            logging.fatal(
+                f"Error processing file {file_path}: {e}\n{traceback.format_exc()}"
+            )
+            raise
 
     def _process_file(self, file_path: str) -> None:
         """
@@ -244,7 +251,7 @@ class USAirEmissionTrends:
         """
         try:
             df = self._national_emissions(file_path)
-            if not df.empty:
+            if df is not None and not df.empty:
                 intermediate_file_path = os.path.join(
                     self.temp_dir,
                     f"{str(datetime.now().timestamp()).replace('.', '_')}_{os.path.basename(file_path)}"
@@ -253,7 +260,11 @@ class USAirEmissionTrends:
                 logging.info(
                     f"Saved intermediate file at : {intermediate_file_path}")
         except Exception as e:
-            logging.fatal(f"Error processing file {file_path}: {e}")
+            logging.exception(f"Error processing file {file_path}: {e}")
+            logging.fatal(
+                f"Error processing file {file_path}: {e}\n{traceback.format_exc()}"
+            )
+            raise
 
     def _mcf_property_generator(self) -> None:
         """
@@ -323,10 +334,15 @@ class USAirEmissionTrends:
                 dfs.append(pd.read_csv(f, low_memory=False))
                 logging.info(f"Appending {f}")
             except Exception as e:
-                logging.fatal(f"Error reading intermediate file {f}: {e}")
+                logging.exception(f"Error reading intermediate file {f}: {e}")
+                logging.fatal(
+                    f"Error reading intermediate file {f}: {e}\n{traceback.format_exc()}"
+                )
+                raise
 
         if not dfs:
             logging.fatal("No dataframes to concatenate. Exiting.")
+            raise RuntimeError("No dataframes to concatenate.")
 
         self.final_df = pd.concat(dfs, ignore_index=True)
 
@@ -413,8 +429,10 @@ def process_files(input_path: str, output_file_path: str,
             if file.lower().endswith('.csv')
         ]
     except Exception as e:
+        logging.exception(f"Error finding input files: {e}")
         logging.fatal(
-            f"Error finding input files: {e}. Run the download script first.\n")
+            f"Error finding input files: {e}. Run the download script first.\n{traceback.format_exc()}"
+        )
         sys.exit(1)
 
     # Defining Output Files
@@ -437,7 +455,10 @@ def process_files(input_path: str, output_file_path: str,
         loader.generate_mcf()
         loader.generate_tmcf()
     except Exception as e:
-        logging.fatal(f"An unexpected error occurred: {e}")
+        logging.exception(f"An unexpected error occurred: {e}")
+        logging.fatal(
+            f"An unexpected error occurred: {e}\n{traceback.format_exc()}")
+        raise
 
 
 def main(_):
