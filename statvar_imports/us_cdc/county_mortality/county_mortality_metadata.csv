@@ -1,0 +1,11 @@
+parameter,value
+url,https://wonder.cdc.gov/controller/datarequest/D158
+description,"County-level mortality statistics across all causes of death (ICD-10 113 Cause List) for all US states"
+#place_type,county level
+start_date,2018
+end_date,2024
+release_frequency,P1Y
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit"
+mapped_rows,1
+mapped_columns,11
+header_rows,1

@@ -1,0 +1,30 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "CDC_Mortality_Count",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://wonder.cdc.gov/ucd-icd10-expanded.html",
+            "provenance_description": "County-level mortality statistics for all causes of death (ICD-10 113 Cause List) across all US states from CDC WONDER.",
+            "scripts": [
+                "download.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.csv --pv_map=county_mortality_pvmap.csv --config_file=county_mortality_metadata.csv --output_path=output/underlyingcauseofdeath_county --output_counters=counters/underlyingcauseofdeath_county_counters.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/underlyingcauseofdeath_county.tmcf",
+                    "cleaned_csv": "output/underlyingcauseofdeath_county.csv",
+                    "node_mcf": "output/*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "golden_data/*.csv",
+                "counters/*.csv"
+            ],
+            "cron_schedule": "0 5 * * 5",
+            "validation_config_file": "validation_config.json"
+        }
+    ]
+}
