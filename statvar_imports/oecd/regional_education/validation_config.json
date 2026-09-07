@@ -20,7 +20,7 @@
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT StatVar, MaxDate FROM stats",
-                "condition": "CAST(MaxDate AS INTEGER) >= date_part('year', current_date) - 2"
+                "condition": "CAST(SUBSTRING(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= date_part('year', current_date) - 2"
             }
         }
     ]
