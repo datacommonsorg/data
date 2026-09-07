@@ -78,8 +78,7 @@ def _local_markdown_links(text: str):
                 target = target[1:target.index('>')]
             else:
                 target = target.split(maxsplit=1)[0]
-            if (not target or '://' in target or target.startswith(
-                ('mailto:', 'chatgpt-conversation:'))):
+            if not target or '://' in target or target.startswith('mailto:'):
                 continue
             path, _, fragment = target.partition('#')
             if path or fragment:
@@ -258,11 +257,7 @@ class SkillContractTest(unittest.TestCase):
                 self.assertTrue((self._repo_root / path / 'SKILL.md').is_file())
 
     def test_reachable_agent_markdown_links_resolve(self):
-        registry = json.loads(self._read('.agents/skills.json'))
-        entrypoints = [
-            self._repo_root / entry['path'] / 'SKILL.md'
-            for entry in registry['entries']
-        ]
+        entrypoints = sorted((self._agents_root / 'skills').glob('*/SKILL.md'))
         entrypoints.append(self._agents_root / 'README.md')
 
         errors = _local_markdown_link_errors(self._repo_root, entrypoints)
@@ -333,13 +328,15 @@ class SkillContractTest(unittest.TestCase):
 
         for heading in ('## Safety',
                         '## Classify the request before loading context',
-                        '## Review cloud operations', '## Select an operation',
-                        '## Report evidence'):
+                        '## Review cloud configuration',
+                        '## Select an operation', '## Report evidence'):
             with self.subTest(heading=heading):
                 self.assertIn(heading, skill)
 
         for guardrail in (
                 'Treat GCP and the data repository as read-only',
+                'run it only after the user explicitly approves that command',
+                'Never update or delete the table',
                 'Never replace a missing identifier with a broad',
                 'complete attempt history, Workflow execution inspection',
                 'loader status, and execution of remediation as unsupported',
@@ -405,27 +402,106 @@ class SkillContractTest(unittest.TestCase):
         registry = yaml.safe_load(
             self._read('agents/common/config/import-environments.yaml'))
         skill = self._skill_path.read_text(encoding='utf-8')
-        required_fields = {
-            'scheduler': {'project', 'location'},
-            'workflow': {'project', 'location', 'import_workflow'},
-            'batch': {'project', 'location'},
-            'gcs': {'client_project', 'output_bucket'},
-            'spanner': {'project', 'instance', 'database'},
+        expected_environments = {
+            'prod': {
+                'scheduler': {'project', 'location'},
+                'workflow': {'project', 'location', 'import_workflow'},
+                'batch': {'project', 'location'},
+                'gcs': {'client_project', 'output_bucket'},
+                'spanner': {'project', 'instance', 'database'},
+            },
+            'test': {
+                'batch': {'project', 'location'},
+                'gcs': {'output_bucket'},
+            },
         }
 
         self.assertIn('../../common/config/import-environments.yaml', skill)
         self.assertEqual({'default_environment', 'environments'}, set(registry))
         self.assertEqual('prod', registry['default_environment'])
-        self.assertEqual({'prod', 'staging'}, set(registry['environments']))
+        self.assertEqual(set(expected_environments),
+                         set(registry['environments']))
 
-        for name, environment in registry['environments'].items():
+        for name, required_fields in expected_environments.items():
             with self.subTest(environment=name):
+                environment = registry['environments'][name]
                 self.assertEqual(set(required_fields), set(environment))
                 for section, fields in required_fields.items():
                     self.assertEqual(fields, set(environment[section]))
                     for field in fields:
                         self.assertIsInstance(environment[section][field], str)
                         self.assertTrue(environment[section][field])
+
+
+class ImportCodeReviewSkillContractTest(unittest.TestCase):
+
+    def setUp(self):
+        self._repo_root = Path(__file__).parents[3]
+        self._agents_root = self._repo_root / 'agents'
+        self._skill_root = (self._agents_root / 'skills/dc-import-code-review')
+        self._skill_path = self._skill_root / 'SKILL.md'
+        self._prompt_path = (self._agents_root /
+                             'prompts/dc-import-code-review-starter.md')
+
+    def _read(self, relative_path: str) -> str:
+        return (self._repo_root / relative_path).read_text(encoding='utf-8')
+
+    def test_review_skill_is_registered_and_discoverable(self):
+        registry = json.loads(self._read('.agents/skills.json'))
+        paths = [entry['path'] for entry in registry['entries']]
+        readme = self._read('agents/README.md')
+        prompt = self._prompt_path.read_text(encoding='utf-8')
+
+        self.assertIn('agents/skills/dc-import-code-review', paths)
+        self.assertIn('prompts/dc-import-code-review-starter.md', readme)
+        self.assertIn('`dc-import-code-review` skill', prompt)
+
+    def test_review_skill_keeps_core_contract(self):
+        skill = self._skill_path.read_text(encoding='utf-8')
+
+        for marker in ('scripts/**', 'statvar_imports/**', 'read-only', 'P0',
+                       'P1', 'P2', 'P3', 'Finding', 'Impact', 'Recommendation'):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, skill)
+
+        links = {path for path, _, _ in _local_markdown_links(skill)}
+        self.assertTrue({
+            'references/guidelines.md',
+            '../../common/references/import-automation/manifest.md',
+        }.issubset(links))
+
+    def test_review_guidance_stays_single_and_lightweight(self):
+        references = sorted(path.name for path in (self._skill_root /
+                                                   'references').glob('*.md'))
+        guidelines = (self._skill_root /
+                      'references/guidelines.md').read_text(encoding='utf-8')
+
+        self.assertEqual(['guidelines.md'], references)
+        self.assertFalse((self._skill_root / 'README.md').exists())
+        self.assertFalse((self._skill_root / 'scripts').exists())
+
+        for stale_content in ('DCIR-', 'Evidence:', 'Last verified:',
+                              '["support@datacommons.org"]', 'logging.fatal()',
+                              'exit(1)'):
+            with self.subTest(stale_content=stale_content):
+                self.assertNotIn(stale_content, guidelines)
+
+        for validation_reference in (
+                '../../../../tools/import_validation/README.md',
+                '../../../../tools/import_validation/Validations.md'):
+            with self.subTest(validation_reference=validation_reference):
+                self.assertIn(validation_reference, guidelines)
+
+    def test_review_guidance_uses_only_relative_paths(self):
+        sources = [self._skill_path, self._prompt_path]
+        sources.extend((self._skill_root / 'references').glob('*.md'))
+
+        for source in sources:
+            text = source.read_text(encoding='utf-8')
+            with self.subTest(source=source.name):
+                self.assertNotIn('/Users/', text)
+                self.assertNotIn('file://', text)
+                self.assertNotIn('<REPO_ROOT>/', text)
 
 
 if __name__ == '__main__':

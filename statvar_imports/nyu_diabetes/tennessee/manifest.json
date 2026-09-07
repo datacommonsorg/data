@@ -6,18 +6,22 @@
       "provenance_url": "https://www.tn.gov/health/health-program-areas/statistics/health-data/death-statistics.html",
       "provenance_description": "This import utilizes official diabetes mortality data from the Tennessee Department of Health, detailing county-level death statistics.",
       "scripts": ["download.py",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.xlsx --pv_map=pvmap.csv --config_file=metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=place_resolver.csv --output_path=output_files/tennessee_output"
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.xlsx --pv_map=pvmap.csv --config_file=metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=place_resolver.csv --output_path=output_files/tennessee_output --output_counters=counters/tennessee_output_counters.csv"
       ] ,
       "source_files": [
-        "input_files/*.xlsx"
+        "input_files/*.xlsx",
+        "golden_data/*.csv",
+        "counters/*.csv"
       ],
       "import_inputs": [
         {
           "template_mcf": "output_files/tennessee_output.tmcf",
-          "cleaned_csv": "output_files/tennessee_output.csv"
+          "cleaned_csv": "output_files/tennessee_output.csv",
+          "node_mcf": "output_files/*.mcf"
         }
       ],
-      "cron_schedule": "0 05 * * 5"
+      "cron_schedule": "0 05 * * 5",
+      "validation_config_file": "validation_config.json"
     }
   ]
 }
