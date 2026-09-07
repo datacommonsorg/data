@@ -1,0 +1,10 @@
+Node: dcid:educationalAttainment
+typeOf: dcs:Property
+name: "educationalAttainment"
+rangeIncludes: dcid:EnrollmentLevelEnum
+
+Node: dcid:SocialSciencesMajor__CommunicationJournalismAndRelatedMajor
+typeOf: dcid:EducationalMajorEnum
+name: "Social Sciences Major__ Communication Journalism And Related Major"
+isProvisional: dcs:True
+

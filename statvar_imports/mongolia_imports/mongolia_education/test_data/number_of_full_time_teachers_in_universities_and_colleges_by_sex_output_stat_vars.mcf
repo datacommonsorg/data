@@ -1,0 +1,11 @@
+# Auto generated using command: "/usr/local/google/home/samnotra/19aug/mongolia-imports/data/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_education/testdata/number_of_full_time_teachers_in_universities_and_colleges_by_sex_input.csv --pv_map=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_education/number_of_full_time_teachers_in_universities_and_colleges_by_sex_pvmap.csv --config_file=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_education/mongolia_metadata.csv --output_path=/usr/local/google/home/samnotra/19aug/mongolia-imports/data/statvar_imports/mongolia_imports/mongolia_education/testdata/number_of_full_time_teachers_in_universities_and_colleges_by_sex_output --existing_statvar_mcf=/dev/null" on 2026-08-20 09:58:03.531127
+
+Node: dcid:Count_Teacher_FullTimeEmployee_UniversityAndCollegeTeacher_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:FullTimeEmployee
+facultyType: dcid:UniversityAndCollegeTeacher
+gender: dcid:Female
+

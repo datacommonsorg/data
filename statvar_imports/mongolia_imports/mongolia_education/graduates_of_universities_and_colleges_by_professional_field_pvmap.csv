@@ -1,6 +1,6 @@
 key,p1,v1,p2,v2,,,,
 ,,,,,,,,
-Professional fields,observationAbout,country/MNG,populationType,person,measuredProperty,count,educationalAttainment,Graduate
+Professional field,observationAbout,country/MNG,populationType,person,measuredProperty,count,educationalAttainment,Graduate
 Journalism and information,bachelorsDegreeMajor,CommunicationJournalismAndRelatedMajor,,,,,,
 Economy,bachelorsDegreeMajor,EconomyMajor,,,,,,
 Psychology,bachelorsDegreeMajor,PhilosophyMajor,,,,,,
@@ -51,3 +51,5 @@ Languages,bachelorsDegreeMajor,Languages,,,,,,
 2028,observationDate,2028,value,{Number},observationAbout,country/MNG,populationType,Person
 2029,observationDate,2029,value,{Number},observationAbout,country/MNG,populationType,Person
 2030,observationDate,2030,value,{Number},observationAbout,country/MNG,populationType,Person
+2031,observationDate,2031,value,{Number},observationAbout,country/MNG,populationType,Person
+2032,observationDate,2032,value,{Number},observationAbout,country/MNG,populationType,Person

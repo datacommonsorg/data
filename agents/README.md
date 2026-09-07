@@ -3,8 +3,8 @@
 This directory contains repository-owned agent skills, references,
 configuration, and support scripts.
 
-For local tools, Python dependencies, Google Cloud authentication, and the
-optional sibling checkout, see [dependency setup](dependency-setup.md).
+For local tools, Python dependencies, and Google Cloud authentication, see
+[dependency setup](dependency-setup.md).
 
 For authoring conventions, see [agent skill authoring](docs/skill-authoring.md).
 For diagnostics-specific structure, see

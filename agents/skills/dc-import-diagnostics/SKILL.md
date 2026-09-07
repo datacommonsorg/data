@@ -10,12 +10,31 @@ transform and validate it, and produce Data Commons-compatible artifacts.
 Loading an eligible output into the serving system is a separate pipeline and
 is out of scope.
 
+## Inputs resolved when needed
+
+- Prefer values supplied by the user.
+- Resolve other values only when needed.
+- Use each input name as its placeholder throughout the skill.
+
+| Input | Resolution |
+|---|---|
+| `<IMPORT_REPO>` | Use the supplied path. Otherwise, when needed, shallow-clone `datacommonsorg/import` with depth 1 into a temporary directory. |
+
 ## Safety
 
-- Treat GCP and the data repository as read-only.
+- Treat GCP and the data repository as read-only except for the approved
+  short-lived BigQuery table creation below.
 - Never run, retry, update, pause, resume, delete, deploy, or mutate a cloud
-  resource.
+  resource except as explicitly allowed below.
+- If a short-lived BigQuery table would help, use
+  [create_short_lived_bq_table.sh](scripts/create_short_lived_bq_table.sh).
+  Use its `--help` option for usage. Show the exact command and run it only
+  after the user explicitly approves that command.
+- After creation, query the table read-only. Never update or delete the table.
+  Allow its configured TTL to expire it.
 - Never edit repository files or persist output unless the user explicitly asks.
+- Ask before downloading or installing any library, command-line tool, browser
+  binary, or executable, except for the repository dependency refresh below.
 - Never access Secret Manager payloads or print credentials, tokens, API keys,
   complete Scheduler bodies, Batch commands, or complete service environments.
 - Retain only allowlisted structured-log fields. Never return arbitrary log
@@ -35,6 +54,20 @@ is out of scope.
   impersonate another account, grant roles, or create access tokens.
 - Report missing permission or evidence. Base diagnoses on cited evidence,
   state unknowns, and do not investigate loader or serving-system behavior.
+
+## Important: Python execution
+
+- Use a user-provided Python environment when supplied. Otherwise, use the
+  repository-local Python virtual environment at `.env/`.
+- With the repository environment:
+  - Run helper scripts with `./agents/common/run_python.sh`.
+  - Run tests with `./run_tests.sh -p <directory>`.
+  - Run other Python commands with `.env/bin/python`.
+  - If dependencies are missing or stale, run `./run_tests.sh -r`, then retry.
+- Before running an import script, install its `requirements.txt`, if present.
+  Ask before installing dependencies.
+- Report an unusable environment. Never fall back to global `python` or
+  `python3`.
 
 ## Classify the request before loading context
 
@@ -63,32 +96,22 @@ is out of scope.
    remediation as unsupported by this skill.
 6. Read `agents/common/config/import-environments.yaml` only when the selected
    route performs a cloud operation.
-7. Invoke repository Python helpers only through
-   `./agents/common/run_python.sh`. If a command, Python dependency, `.env`, or
-   authentication prerequisite is missing, stop and direct the user to
-   [agent dependency setup](../../dependency-setup.md). Do not run the readiness
-   checker on every request, install dependencies, or initiate login.
+7. If a required command or authentication prerequisite is missing, stop and
+   direct the user to
+   [agent dependency setup](../../dependency-setup.md). Do not run the
+   readiness checker on every request or initiate login.
 
-## Review cloud operations
+## Review cloud configuration
 
-1. Select only the operations needed to answer the request. Do not prefetch
-   possible follow-up evidence.
-2. Select `prod` by default or the requested environment, then read
-   [Environment resolution](references/environment-resolution.md).
-3. Apply explicit prompt overrides field by field. Do not inspect live resources
-   to fill missing project, location, or resource names.
-4. Before the first cloud call, print only the selected operations:
-
-   ```text
-   operation | resource type | effective value | source | UTC bounds | limit
-   ```
-
-   Use `environment_config`, `prompt_override`, and `runtime_identifier` as
-   source labels. State unresolved values.
-5. Ask once for approval in an interactive session. Only when the prompt
-   explicitly declares a non-interactive run, print
-   `review: skipped (headless)` and continue without pausing.
-6. Stop when required values are unresolved or explicit values conflict.
+1. Resolve prompt overrides first; otherwise use the selected block in
+   [import environment defaults](../../common/config/import-environments.yaml).
+   Ask if a required value is ambiguous, conflicting, or unresolved. Do not
+   guess.
+2. Before the first cloud call, show the configuration source, effective
+   values, and bounded operations. Proceed with defaults; confirm overrides
+   once.
+3. Reuse the same configuration for subsequent read-only operations without
+   further approval. Repeat the review only if the configuration changes.
 
 ## Load detailed references only when needed
 
@@ -98,26 +121,19 @@ is out of scope.
   [artifact layout](../../common/references/import-automation/artifact-layout.md).
 - For manifest fields, read the
   [import manifest reference](../../common/references/import-automation/manifest.md).
-
-## Ground commands in operational references
-
-Before presenting or executing a cloud or support command:
-
-1. Select the operation or comparison flow from the route table.
-2. For a comparison flow, follow it to select the concrete operations. For
-   each operation, open its linked service reference during the current turn
-   and select only the named operation section.
-3. Use that section's command structure and literal resource or artifact names.
-4. Resolve placeholders only from declared inputs or linked references.
-5. If a required value remains unresolved, stop. Never reconstruct a command
-   from memory or a generic cloud convention.
+- For troubleshooting guides and supplemental playbooks, read
+  [import troubleshooting](troubleshooting/troubleshooting.md).
 
 ## Select an operation
 
-Use the smallest applicable operation from the route table. Linked operation
-sections own their required inputs, supported fields, defaults, bounds, and
-failure behavior. For questions combining current status, GCS versions, and Batch
-evidence, first read the
+- For cloud commands and reusable support workflows, use the smallest
+  applicable route and its linked reference.
+- Stop when a required input is unresolved.
+- Keep short, conventional, read-only diagnostic actions inline when their
+  target, scope, and stopping condition are clear.
+
+For questions combining current status, GCS versions, and Batch evidence,
+first read the
 [import evidence flow](references/import-evidence-flow.md).
 
 Treat a run or attempt as an execution. Treat a version as output that produced

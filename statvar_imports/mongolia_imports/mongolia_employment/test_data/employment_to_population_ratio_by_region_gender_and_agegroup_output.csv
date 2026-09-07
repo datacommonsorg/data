@@ -1,0 +1,9 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor
+dcid:wikidataId/Q191792,1992,15.1,dcid:Count_Person_Employed,Percent,100
+dcid:wikidataId/Q191792,1993,38.2,dcid:Count_Person_Employed,Percent,100
+dcid:wikidataId/Q191792,1992,0,dcid:Count_Person_Employed_Male_AsAFractionOf_Count_Person_Male,Percent,100
+dcid:wikidataId/Q191792,1993,24.4,dcid:Count_Person_Employed_Male_AsAFractionOf_Count_Person_Male,Percent,100
+dcid:wikidataId/Q191792,1992,0,dcid:Count_Person_Employed_Female_AsAFractionOf_Count_Person_Female,Percent,100
+dcid:wikidataId/Q191792,1993,15.5,dcid:Count_Person_Employed_Female_AsAFractionOf_Count_Person_Female,Percent,100
+dcid:wikidataId/Q191792,1992,24.2,dcid:Count_Person_15To19Years_Employed,Percent,100
+dcid:wikidataId/Q191792,1993,35.8,dcid:Count_Person_15To19Years_Employed,Percent,100
