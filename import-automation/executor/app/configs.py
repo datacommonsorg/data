@@ -175,6 +175,8 @@ class ExecutorConfig:
     skip_gcs_upload: bool = False
     # Skip uploading input files to GCS.
     skip_input_upload: bool = False
+    # Ingest historic data from GCS.
+    ingest_historic_data: bool = True
     # Maximum time a blocking call to the importer to
     # perform an import can take in seconds.
     importer_import_timeout: float = 20 * 60

@@ -26,8 +26,9 @@ from google.api_core import exceptions
 from google.cloud import storage
 import pandas as pd
 import requests
-from retry import retry
+from requests.adapters import HTTPAdapter
 from tqdm import tqdm
+from urllib3.util import Retry
 
 FLAGS = flags.FLAGS
 
@@ -42,25 +43,53 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(script_dir, "input_files")
 Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 
-@retry(tries=3, delay=5, backoff=2)
-def retry_method(url, headers=None):
-    response = requests.get(url, headers=headers, timeout=120)
-    response.raise_for_status()
-    return response
+def create_retry_session(
+    retries: int = 3,
+    backoff_factor: float = 2.0,
+    status_forcelist: tuple = (429, 500, 502, 503, 504),
+) -> requests.Session:
+    session = requests.Session()
+    retry_strategy = Retry(
+        total=retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=status_forcelist,
+        allowed_methods=["HEAD", "GET", "OPTIONS"],
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(
+        max_retries=retry_strategy, pool_connections=10, pool_maxsize=10
+    )
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    session.headers.update({
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0.0.0 Safari/537.36"
+        )
+    })
+    return session
 
 def download_files(url_list, save_folder):
     os.makedirs(os.path.join(save_folder), exist_ok=True)
+    downloaded_count = 0
+    session = create_retry_session()
 
     for url in url_list:
+        parsed_url = urlparse(url)
+        filename = os.path.basename(parsed_url.path)
+        file_path = os.path.join(save_folder, filename)
+
+        logging.info(
+            f"Starting download: source={url}, destination={file_path}")
+
         try:
-            parsed_url = urlparse(url)
-            filename = os.path.basename(parsed_url.path)
-            file_path = os.path.join(save_folder, filename)
+            response = session.get(url, timeout=120, stream=True)
+            if response.status_code == 404:
+                logging.info(f"File not yet available (404), skipping: {url}")
+                continue
+            response.raise_for_status()
 
-            logging.info(
-                f"Starting download: source={url}, destination={file_path}")
-
-            response = retry_method(url)
             with response as r:
                 total_size = int(r.headers.get('content-length', 0))
                 block_size = 1024
@@ -74,10 +103,15 @@ def download_files(url_list, save_folder):
             logging.info(
                 f"Completed download: source={url}, destination={file_path}, size_bytes={file_size}"
             )
-        except Exception as e:
+            downloaded_count += 1
+        except requests.exceptions.RequestException as e:
             logging.error(
                 f"Download failed: source={url}, destination={file_path}, error={e}"
             )
+            raise
+
+    if url_list and downloaded_count == 0:
+        raise RuntimeError("No files were successfully downloaded.")
 
 
 def download_files_from_gcs(url_list, save_folder):

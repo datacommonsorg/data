@@ -1,0 +1,18 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that the percentage of deleted points is within the threshold.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 2
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        }
+    ]
+}
