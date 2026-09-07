@@ -19,9 +19,10 @@ Use this guide when adding or reorganizing skills under `agents/`.
 Keep contributor guidance in `agents/docs/`, outside runtime skill
 directories.
 
-## Register and expose skills
+## Expose skills
 
-- Register each skill's canonical directory path in `.agents/skills.json`.
+- For automatic loading in Antigravity, prefer adding the skill's canonical
+  directory path to `.agents/skills.json`.
 - Add human entry points, starter prompts, and authoring guides to
   `agents/README.md` when they need to be discoverable.
 - Remove obsolete names instead of adding aliases unless compatibility is

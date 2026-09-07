@@ -18,6 +18,7 @@ from absl import app
 from absl import logging
 from absl import flags
 import requests
+import time
 from retry import retry
 import ssl
 
@@ -47,15 +48,19 @@ _URLS_TO_SCAN = {
 
 }
 
-def _check_and_add_url(url_to_check: str, key: str, files_to_download: dict):
+def _check_and_add_url(url_to_check: str, key: str, files_to_download: dict, session: requests.Session):
     """
     Helper function to check if a URL is accessible and add it to the download list.
     """
     logging.info(f"checking url: {url_to_check}")
+    time.sleep(1)
     try:
         # TODO b/432163402 : Provide a custom certificate bundle instead of disabling verification.
-        check_url = requests.head(
-            url_to_check, allow_redirects=True, verify=False
+        check_url = session.head(
+            url_to_check,
+            allow_redirects=True,
+            verify=False,
+            timeout=(10, 60),
         )
         if check_url.status_code == 200:
             files_to_download[key].append(url_to_check)
@@ -68,7 +73,7 @@ def _check_and_add_url(url_to_check: str, key: str, files_to_download: dict):
             return False
     except requests.exceptions.RequestException as e:
         logging.fatal(f"URL is not accessible {url_to_check} due to {e}")
-        return False
+        raise e
         
 @retry(
     tries=3,
@@ -76,7 +81,7 @@ def _check_and_add_url(url_to_check: str, key: str, files_to_download: dict):
     backoff=2,
     exceptions=(requests.RequestException, Exception),
 )
-def add_future_urls(start_year: int, end_year: int,url_path_base_year: int):
+def add_future_urls(start_year: int, end_year: int, url_path_base_year: int, session: requests.Session):
   # Initialize the list to store files to download
     files_to_download = {}
     for key, value in _URLS_TO_SCAN.items():
@@ -102,15 +107,15 @@ def add_future_urls(start_year: int, end_year: int,url_path_base_year: int):
                     # Ensure i is always 2 digits (01, 02, ..., 10)
                     formatted_i = f"{i:02}"
                     url_to_check = value.format(YEAR=YEAR, i=formatted_i, URL_PATH_BASE_YEAR=url_path_base_year)
-                    if _check_and_add_url(url_to_check, key, files_to_download):
+                    if _check_and_add_url(url_to_check, key, files_to_download, session):
                         found_url_for_key = True
             else:
                 url_to_check = value.format(YEAR=YEAR, URL_PATH_BASE_YEAR=url_path_base_year)
-                if _check_and_add_url(url_to_check, key, files_to_download):
+                if _check_and_add_url(url_to_check, key, files_to_download, session):
                     break
     return files_to_download  # Return the populated dictionary
 
-def download_files(files_to_download_dict:dict, download_base_path: str):
+def download_files(files_to_download_dict: dict, download_base_path: str, session: requests.Session):
   for key, value in files_to_download_dict.items():
     download_folder = os.path.join(download_base_path, key)
     if not (os.path.exists(download_folder)):
@@ -119,12 +124,18 @@ def download_files(files_to_download_dict:dict, download_base_path: str):
     for url in value:
       output_file_name = url.split("/")[-1]
       output_file_path = os.path.join(download_folder, output_file_name)
-      # Send GET request
+      # Send GET request with a polite delay
+      time.sleep(1)
       try:
-        response = requests.get(url, verify="/etc/ssl/certs/ca-certificates.crt")
+        response = session.get(
+            url,
+            verify="/etc/ssl/certs/ca-certificates.crt",
+            timeout=(10, 60),
+          )
+        response.raise_for_status()
       except requests.exceptions.RequestException as e:
         logging.fatal(f"Error downloading {url}: {e}")
-        continue
+        raise e
       
       # Save the file content
       with open(output_file_path, "wb") as f:
@@ -166,13 +177,17 @@ def main(_):
   logging.info(f"Ensured fresh base download directory: {FLAGS.input_path}")
 
 
-  # Add future URLs 
-  logging.info(f"Generating URLs from {FLAGS.start_year} down to {end_year + 1}")
-  download_urls = add_future_urls(FLAGS.start_year,end_year,FLAGS.url_path_base_year)
-    
-  # Start download
-  logging.info("Starting download of identified files")
-  download_files(download_urls, FLAGS.input_path) # Pass the dictionary as an argument
+  # Create a persistent session for all probes and downloads
+  with requests.Session() as session:
+      session.headers.update({"User-Agent": "Mozilla/5.0"})
+
+      # Add future URLs 
+      logging.info(f"Generating URLs from {FLAGS.start_year} down to {end_year + 1}")
+      download_urls = add_future_urls(FLAGS.start_year, end_year, FLAGS.url_path_base_year, session=session)
+        
+      # Start download
+      logging.info("Starting download of identified files")
+      download_files(download_urls, FLAGS.input_path, session=session) # Pass the dictionary as an argument
 
 
 if __name__ == "__main__":
