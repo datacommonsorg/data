@@ -49,27 +49,6 @@ STATVARS = {
     "O3_pop_pred": "PopulationWeighted_Concentration_AirPollutant_Ozone"
 }
 
-# Mapping of month abbreviations to month numbers.
-MONTH_MAP = {
-    "JAN": 1,
-    "FEB": 2,
-    "MAR": 3,
-    "APR": 4,
-    "MAY": 5,
-    "JUN": 6,
-    "JUL": 7,
-    "AUG": 8,
-    "SEP": 9,
-    "OCT": 10,
-    "NOV": 11,
-    "DEC": 12
-}
-
-
-# this method is applicable only for "census tract PM25"
-def add_prefix_zero(value, length=11):
-    return str(value).zfill(length)
-
 
 def clean_air_quality_data(configs, importname, inputpath, outputpath):
     """
@@ -85,8 +64,10 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
     """
     try:
         logging.info(f"import name from command line {importname}")
+        import_found = False
         for config in configs:
             if config["import_name"] == importname:
+                import_found = True
                 files = config["files"]
                 for file_info in files:
                     output_file_name = file_info["output_file_name"]
@@ -209,6 +190,10 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                                      header=False,
                                                      float_format='%.6f',
                                                      index=False)
+                                if first_chunk:
+                                    raise ValueError(
+                                        f"Input file {input_file_path} contains no data rows."
+                                    )
                                 logging.info(
                                     f"Finished cleaning file {output_file_name}!"
                                 )
@@ -279,6 +264,10 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                                                      header=False,
                                                      float_format='%.6f',
                                                      index=False)
+                                if first_chunk:
+                                    raise ValueError(
+                                        f"Input file {input_file_path} contains no data rows."
+                                    )
                                 logging.info(
                                     f"Finished cleaning file {output_file_name}!"
                                 )
@@ -286,18 +275,22 @@ def clean_air_quality_data(configs, importname, inputpath, outputpath):
                             logging.error(
                                 f"Error cleaning {input_file_name}: {e}")
                             raise
+        if not import_found:
+            raise ValueError(
+                f"Import name '{importname}' not found in configuration")
     except Exception as e:
         logging.fatal(f"Error while processing the data: {e}")
+        raise
 
 
-def main(_):
+def main(argv):
     """Main function to generate the cleaned csv file."""
     global _INPUT_FILE_PATH, _OUTPUT_FILE_PATH
     _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.input_file_path)
     Path(_INPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
     _OUTPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.output_file_path)
     Path(_OUTPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
-    importname = sys.argv[1]
+    importname = argv[1]
     logging.info(f'Loading config: {_FLAGS.config_file}')
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         config = json.load(f)

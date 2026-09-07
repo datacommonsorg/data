@@ -82,12 +82,12 @@ def download_files(importname, configs):
         raise
 
 
-def main(_):
+def main(argv):
     """Main function to download the csv files."""
     global _INPUT_FILE_PATH
     _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.input_file_path)
     Path(_INPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
-    importname = sys.argv[1]
+    importname = argv[1]
     logging.info(f'Loading config: {_FLAGS.config_file}')
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         config = json.load(f)
