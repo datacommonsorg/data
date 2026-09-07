@@ -15,10 +15,12 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/oecd_regional_education.tmcf",
-                    "cleaned_csv": "output/oecd_regional_education.csv"
+                    "cleaned_csv": "output/oecd_regional_education.csv",
+                    "node_mcf": "output/*.mcf"
                 }
             ],
             "cron_schedule": "0 10 1,15 * *",
+            "validation_config_file": "validation_config.json",
             "source_files": [
                 "gcs_output/source_files/*.csv"
             ]
