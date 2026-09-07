@@ -66,6 +66,26 @@ class PreprocessFilesTest(absltest.TestCase):
             self.assertEqual(processed.iloc[0, 3], '2017-18')
             self.assertEqual(processed.iloc[1, 0], 'Andhra Pradesh')
 
+    def test_preprocess_files_preserves_nan(self):
+        with tempfile.TemporaryDirectory() as directory:
+            file_path = pathlib.Path(directory) / 'source.xlsx'
+            initial_df = pd.DataFrame(
+                [['State/Union Territory', '2015*', None],
+                 ['Andhra Pradesh', None, '30.5']])
+            with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
+                initial_df.to_excel(writer,
+                                    sheet_name='Sheet1',
+                                    index=False,
+                                    header=False)
+
+            rbi_download.preprocess_files(directory)
+
+            processed = pd.read_excel(file_path,
+                                      sheet_name='Sheet1',
+                                      header=None)
+            self.assertTrue(pd.isna(processed.iloc[0, 2]))
+            self.assertTrue(pd.isna(processed.iloc[1, 1]))
+
 
 if __name__ == '__main__':
     absltest.main()

@@ -92,7 +92,7 @@ def preprocess_files(directory_path):
                     return val
 
             for sheet_name, df in all_sheets_data.items():
-                df = df.map(lambda x: str(x).replace('*', '').replace('@', '').strip())
+                df = df.map(lambda x: str(x).replace('*', '').replace('@', '').strip() if pd.notna(x) else x)
                 mask = df.eq('State/Union Territory').any(axis=1)
                 state_positions = df[mask] == 'State/Union Territory'
 
