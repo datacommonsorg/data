@@ -125,18 +125,10 @@ GROUP BY 1, 2, 3, 4, 5
 def run_process(client: bigquery.Client, output_file: str) -> bool:
     """Executes the BigQuery query and writes the resulting DataFrame to output_file."""
     logging.info("Running BigQuery aggregation query...")
-    try:
-        query_job = client.query(QUERY)
-    except Exception as e:
-        logging.error("Failed to submit BigQuery query: %s", e, exc_info=True)
-        raise
+    query_job = client.query(QUERY)
 
     logging.info("Fetching query results into dataframe...")
-    try:
-        df = query_job.to_dataframe()
-    except Exception as e:
-        logging.error("Failed to fetch query results into dataframe: %s", e, exc_info=True)
-        raise
+    df = query_job.to_dataframe()
 
     if df.empty:
         raise RuntimeError("BigQuery query returned 0 rows.")

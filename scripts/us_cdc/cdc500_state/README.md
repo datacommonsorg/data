@@ -21,7 +21,7 @@ The state-level dataset calculates aggregated health indicator prevalence estima
 The aggregation script queries Google Cloud BigQuery graph tables in dataset `datcom-store.spanner_dc_graph_prod_DEFAULT`:
 
 1. **`TimeSeries`**:
-   - **CDC 500 Series**: Identifies CDC 500 Statistical Variables (`provenance = 'dc/base/CDC500'` and `variable_measured LIKE 'Percent_%'`) and extracts their measurement methods (`measurement_method`). It maps each percentage health metric to its appropriate denominator demographic cohort StatVar (e.g., `Count_Person_18OrMoreYears`, `Count_Person_Female_50To74Years`, `Count_Person_Female_21To65Years`, `Count_Person_65OrMoreYears`, etc.).
+   - **CDC 500 Series**: Identifies CDC 500 Statistical Variables (`provenance = 'dc/base/CDC500'` and `variable_measured LIKE 'Percent_%'`) and extracts their measurement methods (`measurement_method`). It maps each percentage health metric to its appropriate denominator demographic cohort StatVar (e.g., `Count_Person_18OrMoreYears`, `Count_Person_18To64Years`, `Count_Person_65OrMoreYears`, `Count_Person`, etc.).
    - **Census ACS 5-Year Series**: Filters and joins population counts from Census ACS 5-Year Survey (`provenance = 'dc/base/CensusACS5YearSurvey'`).
 
 2. **`Observation`**:

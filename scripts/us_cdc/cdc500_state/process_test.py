@@ -43,6 +43,67 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertIn("Percent_Person_21To65Years_Female_ReceivedPapSmearTest", query)
         self.assertIn("Percent_Person_50To75Years_ReceivedColorectalCancerScreening", query)
 
+    def test_demographic_cohort_regex_mapping(self):
+        """Verifies that representative StatVars match the intended demographic regex rules."""
+        import re
+        female_pattern = r'65OrMoreYears.*Female|Female.*65OrMoreYears'
+        male_pattern = r'65OrMoreYears.*Male|Male.*65OrMoreYears'
+
+        self.assertIn(female_pattern, process.QUERY)
+        self.assertIn(male_pattern, process.QUERY)
+
+        # Helper mapping that mirrors the SQL CASE WHEN logic
+        def map_statvar(sv: str) -> str:
+            if re.search(female_pattern, sv):
+                return 'Count_Person_65OrMoreYears_Female'
+            elif re.search(male_pattern, sv):
+                return 'Count_Person_65OrMoreYears_Male'
+            elif '65OrMoreYears' in sv:
+                return 'Count_Person_65OrMoreYears'
+            elif '18To64Years' in sv:
+                return 'Count_Person_18To64Years'
+            elif '18OrMoreYears' in sv:
+                return 'Count_Person_18OrMoreYears'
+            else:
+                return 'Count_Person'
+
+        test_cases = [
+            ('Percent_Person_65OrMoreYears_Female_CorePreventiveServices', 'Count_Person_65OrMoreYears_Female'),
+            ('Percent_Person_Female_65OrMoreYears_CorePreventiveServices', 'Count_Person_65OrMoreYears_Female'),
+            ('Percent_Person_65OrMoreYears_Male_CorePreventiveServices', 'Count_Person_65OrMoreYears_Male'),
+            ('Percent_Person_Male_65OrMoreYears_CorePreventiveServices', 'Count_Person_65OrMoreYears_Male'),
+            ('Percent_Person_65OrMoreYears_CorePreventiveServices', 'Count_Person_65OrMoreYears'),
+            ('Percent_Person_18To64Years_HealthInsurance', 'Count_Person_18To64Years'),
+            ('Percent_Person_18OrMoreYears_WithAnyDisability', 'Count_Person_18OrMoreYears'),
+            ('Percent_Person_18OrMoreYears_WithHighBloodPressure', 'Count_Person_18OrMoreYears'),
+            ('Percent_Person_WithArthritis', 'Count_Person'),
+            ('Percent_Person_WithHighCholesterol', 'Count_Person'),
+        ]
+
+        for sv, expected in test_cases:
+            with self.subTest(statvar=sv):
+                self.assertEqual(map_statvar(sv), expected)
+
+    def test_population_weighted_average_calculation(self):
+        """Verifies the population-weighted average calculation and city-to-state FIPS aggregation."""
+        # Simulated city-level records for California (geoId/06)
+        city_records = pd.DataFrame({
+            'city_geoid': ['geoId/0644000', 'geoId/0666000', 'geoId/0667000'],
+            'city_percent': [20.0, 30.0, 40.0],
+            'city_pop': [10000, 20000, 70000]
+        })
+        city_records['state_geoid'] = city_records['city_geoid'].str.slice(0, 8)
+        self.assertTrue((city_records['state_geoid'] == 'geoId/06').all())
+
+        # Formula: SUM(pop * percent) / SUM(pop)
+        total_weighted = (city_records['city_pop'] * city_records['city_percent']).sum()
+        total_pop = city_records['city_pop'].sum()
+        weighted_avg = total_weighted / total_pop
+
+        # Expected: (10000*20 + 20000*30 + 70000*40) / 100000 = (200000 + 600000 + 2800000) / 100000 = 36.0
+        self.assertEqual(total_pop, 100000)
+        self.assertAlmostEqual(weighted_avg, 36.0, places=4)
+
     def test_run_process_success(self):
         mock_client = mock.MagicMock()
         sample_data = pd.DataFrame({

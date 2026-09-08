@@ -2,6 +2,14 @@
     "schema_version": "1.0",
     "rules": [
         {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Override default threshold to 100% due to one-time series identity update (adding unit: Percent and scalingFactor: 100).",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 100
+            }
+        },
+        {
             "rule_id": "check_max_value_percentage",
             "description": "Checks that all percentage StatVars do not exceed 100%.",
             "validator": "MAX_VALUE_CHECK",
