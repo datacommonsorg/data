@@ -11,6 +11,11 @@ Release Frequency: P1Y
 Generate rollups from the downloaded dataset:
 python3 wir_2552_wiki/generate_rollups.py
 
+Rollup Logic & Explanation (`wir_2552_wiki/generate_rollups.py`):
+- **Total Row Filtering**: The raw dataset (`WIR255OD2552.csv`) breaks down workplaces and employees by legal form (`RechtsformSort`) and company size class (`BetriebsgrSort`). The script filters the dataset to retain only the total rollup rows (`RechtsformSort == 0` ["Alle Rechtsformen"] and `BetriebsgrSort == 0` ["Alle Betriebsgrössen"]) to produce overall totals per geographic region (City, Kreise, and Quartiere).
+- **Unknown Region Exclusion**: Filters out unknown/unassigned region rows (`RaumSort` `990` ["Kreis Unbekannt"] and `999` ["Quartier Unbekannt"]) that do not map to valid geographic places.
+- **Numeric Coercion**: Coerces metric columns (`Arbeitsstaetten`, `AnzBesch`, `AnzBeschW`, `AnzBeschM`, `AnzVZA`, `AnzVZAW`, `AnzVZAM`) to numeric values, converting non-numeric markers (e.g., `'K'` for confidential/suppressed entries) to `NaN` so they are cleanly skipped during StatVar observation generation.
+
 4. Autorefresh Type
 
 Fully Autorefresh:"0 2 29 * * " (Runs at 2:00 AM on the 29th day of every month).
