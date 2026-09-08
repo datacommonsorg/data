@@ -18,7 +18,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/nces_college.tmcf",
-                    "cleaned_csv": "output/nces_college.csv"
+                    "cleaned_csv": "output/nces_college.csv",
+                    "node_mcf": "output/*.mcf"
                 }
             ],
             "cron_schedule": "0 07 4,18 * *",
