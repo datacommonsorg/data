@@ -1,0 +1,93 @@
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --input_data=output/Investment_cleaned.csv --pv_map=Investmentpvmap.csv --config_file=Investmentmetadata.csv --output_path=output/Investment_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/Investment_counters.csv" on 2026-09-08 11:22:19.418271
+
+Node: dcid:Amount_Investment
+typeOf: dcid:StatisticalVariable
+name: "Amount of Investment"
+populationType: dcid:Investment
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+
+Node: dcid:Amount_Investment_DistressedAreaRecompetePilotProgram
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Investment
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+investmentProgram: dcid:DistressedAreaRecompetePilotProgram
+
+Node: dcid:Amount_Investment_EconomicAdjustmentAssistance
+typeOf: dcid:StatisticalVariable
+name: "Amount of Investment: Economic Adjustment Assistance"
+populationType: dcid:Investment
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+investmentProgram: dcid:EconomicAdjustmentAssistance
+
+Node: dcid:Amount_Investment_GoodJobsChallenge
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Investment
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+investmentProgram: dcid:GoodJobsChallenge
+
+Node: dcid:Amount_Investment_ProgramPlanning
+typeOf: dcid:StatisticalVariable
+name: "Amount of Investment: Program Planning"
+populationType: dcid:Investment
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+investmentProgram: dcid:ProgramPlanning
+
+Node: dcid:Amount_Investment_PublicWorks
+typeOf: dcid:StatisticalVariable
+name: "Amount of Investment: Public Works"
+populationType: dcid:Investment
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+investmentProgram: dcid:PublicWorks
+
+Node: dcid:Amount_Investment_RegionalInnovationStrategies
+typeOf: dcid:StatisticalVariable
+name: "Amount of Investment: Regional Innovation Strategies"
+populationType: dcid:Investment
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+investmentProgram: dcid:RegionalInnovationStrategies
+
+Node: dcid:Amount_Investment_RegionalTechnologyAndInnovationHubs
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Investment
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+investmentProgram: dcid:RegionalTechnologyAndInnovationHubs
+
+Node: dcid:Amount_Investment_ResearchNationalTechnicalAssistance
+typeOf: dcid:StatisticalVariable
+name: "Amount of Investment: Research National Technical Assistance"
+populationType: dcid:Investment
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+investmentProgram: dcid:ResearchNationalTechnicalAssistance
+
+Node: dcid:Amount_Investment_STEMTalentChallenge
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Investment
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+investmentProgram: dcid:STEMTalentChallenge
+
+Node: dcid:Amount_Investment_TechnicalAssistance
+typeOf: dcid:StatisticalVariable
+name: "Amount of Investment: Technical Assistance"
+populationType: dcid:Investment
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+investmentProgram: dcid:TechnicalAssistance
+
+Node: dcid:Amount_Investment_TradeAdjustmentAssistance
+typeOf: dcid:StatisticalVariable
+name: "Amount of Investment: Trade Adjustment Assistance"
+populationType: dcid:Investment
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+investmentProgram: dcid:TradeAdjustmentAssistance
+

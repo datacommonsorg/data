@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import datetime
+import json
 import os
 import time
 import pandas as pd
@@ -95,14 +96,18 @@ CFDA_PROGRAMS = {
     "11.312": "Research and National Technical Assistance",
     "11.313": "Trade Adjustment Assistance for Firms",
     "11.024": "Regional Innovation Strategies",
-    "11.020": "Technical Assistance"
+    "11.020": "Technical Assistance",
+    "11.039": "Regional Technology and Innovation Hubs",
+    "11.040": "Distressed Area Recompete Pilot Program",
+    "11.030": "Good Jobs Challenge",
+    "11.023": "STEM Talent Challenge"
 }
 
 
 def get_session():
     session = requests.Session()
-    retries = Retry(total=6,
-                    backoff_factor=2,
+    retries = Retry(total=5,
+                    backoff_factor=1,
                     status_forcelist=[429, 500, 502, 503, 504],
                     allowed_methods=["POST"])
     adapter = HTTPAdapter(max_retries=retries)
@@ -126,85 +131,88 @@ def get_fiscal_year(date_str):
     return year
 
 
-def fetch_usaspending_data(start_year, end_year, session=None):
+def fetch_usaspending_data(start_year,
+                           end_year,
+                           session=None,
+                           raw_output_path=None):
     if session is None:
         session = get_session()
     url = "https://api.usaspending.gov/api/v2/search/spending_by_award/"
-    page = 1
     all_awards = []
 
-    # Format dates to cover the full fiscal year range
-    start_date = f"{start_year - 1}-10-01"
-    end_date = f"{end_year}-09-30"
+    for fy in range(start_year, end_year + 1):
+        start_date = f"{fy - 1}-10-01"
+        end_date = f"{fy}-09-30"
+        page = 1
+        fy_awards = []
+        logging.info(f"Fetching FY {fy} awards ({start_date} to {end_date})...")
 
-    logging.info(f"Fetching awards from {start_date} to {end_date}...")
+        while True:
+            payload = {
+                "filters": {
+                    "agencies": [{
+                        "type": "awarding",
+                        "tier": "subtier",
+                        "name": "Economic Development Administration"
+                    }],
+                    "time_period": [{
+                        "start_date": start_date,
+                        "end_date": end_date
+                    }],
+                    "award_type_codes": ["02", "03", "04", "05", "F001", "F002"]
+                },
+                "fields": [
+                    "Award ID", "Start Date", "Award Amount",
+                    "Place of Performance State Code", "CFDA Number"
+                ],
+                "limit": 100,
+                "page": page
+            }
+            logging.info(f"POST {url} [FY {fy} Page {page}]")
 
-    while True:
-        payload = {
-            "filters": {
-                "agencies": [{
-                    "type": "awarding",
-                    "tier": "subtier",
-                    "name": "Economic Development Administration"
-                }],
-                "time_period": [{
-                    "start_date": start_date,
-                    "end_date": end_date
-                }],
-                "award_type_codes": ["02", "03", "04", "05", "F001", "F002"]
-            },
-            "fields": [
-                "Award ID", "Start Date", "Award Amount",
-                "Place of Performance State Code", "CFDA Number"
-            ],
-            "limit":
-            100,
-            "page":
-            page
-        }
-        logging.info(f"Fetching page {page}...")
-
-        max_page_attempts = 4
-        data = None
-        for attempt in range(1, max_page_attempts + 1):
             try:
                 response = session.post(url, json=payload, timeout=45)
                 response.raise_for_status()
                 data = response.json()
-                break
             except Exception as err:
-                logging.warning(
-                    f"Attempt {attempt}/{max_page_attempts} on page {page} failed: {err}"
-                )
-                if attempt == max_page_attempts:
-                    logging.error(
-                        f"Failed page {page} after {max_page_attempts} attempts."
-                    )
-                    raise
-                time.sleep(2**attempt)
+                logging.error(f"Failed to fetch FY {fy} page {page}: {err}")
+                raise
 
-        results = data.get("results", [])
-        all_awards.extend(results)
+            results = data.get("results", [])
+            fy_awards.extend(results)
 
-        if not data.get("page_metadata", {}).get("hasNext"):
-            break
-        page += 1
-        time.sleep(0.2)
+            if not data.get("page_metadata", {}).get("hasNext"):
+                break
+            page += 1
+            time.sleep(0.2)
+
+        logging.info(f"Retrieved {len(fy_awards)} awards for FY {fy}")
+        all_awards.extend(fy_awards)
+
+    if raw_output_path:
+        os.makedirs(os.path.dirname(raw_output_path), exist_ok=True)
+        with open(raw_output_path, "w", encoding="utf-8") as f:
+            json.dump(all_awards, f, indent=2)
+        logging.info(f"Saved {len(all_awards)} raw awards to {raw_output_path}")
 
     return all_awards
 
 
 def process_data(awards, start_year, end_year, output_path):
     data_rows = []
+    unmapped_cfdas = set()
     for a in awards:
-        state_code = a.get("Place of Performance State Code")
+        state_code = str(a.get("Place of Performance State Code")
+                         or "").strip().upper()
         state_name = STATE_ABBREV.get(state_code)
         if not state_name:
             continue
 
-        cfda = a.get("CFDA Number")
+        cfda = str(a.get("CFDA Number") or "").strip()
         category = CFDA_PROGRAMS.get(cfda)
         if not category:
+            if cfda:
+                unmapped_cfdas.add(cfda)
             continue
 
         start_date = a.get("Start Date")
@@ -220,20 +228,31 @@ def process_data(awards, start_year, end_year, output_path):
             "Amount": amount
         })
 
+    if unmapped_cfdas:
+        logging.warning(
+            f"Encountered unmapped EDA CFDAs: {sorted(list(unmapped_cfdas))}")
+
     if not data_rows:
         logging.fatal("No records processed. Output will not be generated.")
         return
 
     df = pd.DataFrame(data_rows)
-    # Aggregate
+    # Aggregate net amounts per Place, Category, Year
     agg_df = df.groupby(["Place", "Category",
                          "Year"])["Amount"].sum().reset_index()
 
-    # Calculate Totals
-    totals = agg_df.groupby(["Place", "Year"])["Amount"].sum().reset_index()
+    # Filter out non-positive program amounts (e.g. net de-obligations)
+    # so that reported Totals are mathematically equal to the sum of published components.
+    positive_agg = agg_df[agg_df["Amount"] > 0].copy()
+    positive_agg["Amount"] = positive_agg["Amount"].apply(lambda v: int(round(v)))
+    positive_agg = positive_agg[positive_agg["Amount"] > 0].copy()
+
+    # Calculate Totals from positive components
+    totals = positive_agg.groupby(["Place",
+                                   "Year"])["Amount"].sum().reset_index()
     totals["Category"] = "Total"
 
-    final_df = pd.concat([agg_df, totals], ignore_index=True)
+    final_df = pd.concat([positive_agg, totals], ignore_index=True)
 
     # Sort
     places_sorted = sorted(list(final_df["Place"].unique()))
@@ -241,11 +260,15 @@ def process_data(awards, start_year, end_year, output_path):
         lambda x: places_sorted.index(x))
     category_order = [
         "Total",
+        "Distressed Area Recompete Pilot Program",
         "Economic Adjustment Assistance",
+        "Good Jobs Challenge",
         "Planning",
         "Public Works",
         "Regional Innovation Strategies",
+        "Regional Technology and Innovation Hubs",
         "Research and National Technical Assistance",
+        "STEM Talent Challenge",
         "Technical Assistance",
         "Trade Adjustment Assistance for Firms",
     ]
@@ -260,11 +283,9 @@ def process_data(awards, start_year, end_year, output_path):
         by=["place_idx", "cat_idx", "Year"]).reset_index(drop=True)
     final_df = final_df.drop(columns=["place_idx", "cat_idx"])
 
-    # Format amount
-    final_df["Amount"] = final_df["Amount"].apply(
-        lambda val: str(int(round(val))) if val > 0 else "")
-    # Drop rows with empty amounts
-    final_df = final_df[final_df["Amount"] != ""]
+    # Format amount as integer string
+    final_df["Amount"] = final_df["Amount"].astype(str)
+
 
     final_df = final_df.rename(columns={
         "Category": "State or Territory / EDA Program",
@@ -284,9 +305,13 @@ def main(argv):
     del argv
     start_year = 2012
     end_year = datetime.datetime.now().year + 1
+    raw_output_path = os.path.join(_MODULE_DIR, "output",
+                                   "raw_usaspending_eda_awards.json")
     output_path = os.path.join(_MODULE_DIR, "output", "Investment_cleaned.csv")
 
-    awards = fetch_usaspending_data(start_year, end_year)
+    awards = fetch_usaspending_data(start_year,
+                                   end_year,
+                                   raw_output_path=raw_output_path)
     logging.info(f"Total awards retrieved: {len(awards)}")
 
     process_data(awards, start_year, end_year, output_path)
@@ -294,3 +319,4 @@ def main(argv):
 
 if __name__ == "__main__":
     app.run(main)
+

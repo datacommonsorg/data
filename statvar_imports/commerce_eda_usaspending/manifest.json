@@ -15,17 +15,20 @@
                 {
                     "template_mcf": "output/Investment_output.tmcf",
                     "cleaned_csv": "output/Investment_output.csv",
-                    "node_mcf": "output/Investment_output.mcf"
+                    "node_mcf": "output/*.mcf"
                 }
             ],
             "source_files": [
                 "output/Investment_cleaned.csv",
+                "output/raw_usaspending_eda_awards.json",
                 "counters/Investment_counters.csv",
                 "Investmentmetadata.csv",
                 "Investmentpvmap.csv",
-                "manifest.json"
+                "manifest.json",
+                "validation_config.json"
             ],
-            "cron_schedule": "30 05 * * 1"
+            "cron_schedule": "30 05 * * 1",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

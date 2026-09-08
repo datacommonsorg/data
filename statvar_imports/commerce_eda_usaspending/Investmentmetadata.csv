@@ -1,12 +1,9 @@
 parameter,value
 url,https://www.usaspending.gov/
 description,EDA Investments by Applicant State and Program (sourced from USASpending.gov)
-#place_type,AdministrativeArea1
-#places_within,country/USA
-#start_date,2012
-#end_date,2026
-release_frequency,Yearly
+release_frequency,Weekly
 process,
 comments,
-output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,measurementMethod"
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit"
 header_rows,1
+
