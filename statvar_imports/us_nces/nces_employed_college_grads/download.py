@@ -63,8 +63,7 @@ def resolve_url(landing_url: str = LANDING_PAGE_URL,
                 file_pattern: str = FILE_PATTERN,
                 headers: Optional[dict] = None,
                 tries: int = 3,
-                delay: int = 5,
-                backoff: int = 2) -> Optional[str]:
+                delay: int = 5) -> Optional[str]:
     """Scrapes landing page HTML to dynamically find matching table URL.
 
     Args:
@@ -73,7 +72,6 @@ def resolve_url(landing_url: str = LANDING_PAGE_URL,
         headers: Optional dictionary of HTTP headers to send with the request.
         tries: Number of retry attempts.
         delay: Initial delay for retries in seconds.
-        backoff: Backoff factor for retries.
 
     Returns:
         Absolute URL of the target file, or None if not found or on error.
