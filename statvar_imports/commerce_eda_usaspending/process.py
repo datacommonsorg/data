@@ -191,8 +191,10 @@ def fetch_usaspending_data(start_year,
 
     if raw_output_path:
         os.makedirs(os.path.dirname(raw_output_path), exist_ok=True)
-        with open(raw_output_path, "w", encoding="utf-8") as f:
+        tmp_raw_path = raw_output_path + ".tmp"
+        with open(tmp_raw_path, "w", encoding="utf-8") as f:
             json.dump(all_awards, f, indent=2)
+        os.replace(tmp_raw_path, raw_output_path)
         logging.info(f"Saved {len(all_awards)} raw awards to {raw_output_path}")
 
     return all_awards
@@ -297,7 +299,9 @@ def process_data(awards, start_year, end_year, output_path):
     ]]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    final_df.to_csv(output_path, index=False, header=True)
+    tmp_output_path = output_path + ".tmp"
+    final_df.to_csv(tmp_output_path, index=False, header=True)
+    os.replace(tmp_output_path, output_path)
     logging.info(f"✅ Processed data saved successfully to {output_path}")
 
 

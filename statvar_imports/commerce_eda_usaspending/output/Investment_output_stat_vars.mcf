@@ -9,6 +9,7 @@ statType: dcid:measuredValue
 
 Node: dcid:Amount_Investment_DistressedAreaRecompetePilotProgram
 typeOf: dcid:StatisticalVariable
+name: "Amount of Investment: Distressed Area Recompete Pilot Program"
 populationType: dcid:Investment
 measuredProperty: dcid:amount
 statType: dcid:measuredValue
@@ -24,6 +25,7 @@ investmentProgram: dcid:EconomicAdjustmentAssistance
 
 Node: dcid:Amount_Investment_GoodJobsChallenge
 typeOf: dcid:StatisticalVariable
+name: "Amount of Investment: Good Jobs Challenge"
 populationType: dcid:Investment
 measuredProperty: dcid:amount
 statType: dcid:measuredValue
@@ -55,6 +57,7 @@ investmentProgram: dcid:RegionalInnovationStrategies
 
 Node: dcid:Amount_Investment_RegionalTechnologyAndInnovationHubs
 typeOf: dcid:StatisticalVariable
+name: "Amount of Investment: Regional Technology and Innovation Hubs"
 populationType: dcid:Investment
 measuredProperty: dcid:amount
 statType: dcid:measuredValue
@@ -70,6 +73,7 @@ investmentProgram: dcid:ResearchNationalTechnicalAssistance
 
 Node: dcid:Amount_Investment_STEMTalentChallenge
 typeOf: dcid:StatisticalVariable
+name: "Amount of Investment: STEM Talent Challenge"
 populationType: dcid:Investment
 measuredProperty: dcid:amount
 statType: dcid:measuredValue

@@ -10,7 +10,7 @@ isProvisional: dcs:True
 
 Node: dcid:STEMTalentChallenge
 typeOf: dcid:InvestmentProgramEnum
-name: "STEMTalent Challenge"
+name: "STEM Talent Challenge"
 isProvisional: dcs:True
 
 Node: dcid:GoodJobsChallenge
