@@ -29,7 +29,7 @@
                 "memory": 2,
                 "disk": 30
             },
-            "cron_schedule": "0 2 29 * *",
+            "cron_schedule": "0 2 1,15 * *",
             "validation_config_file": "wir_2552_wiki/validation_config.json"
         },
         {
@@ -81,7 +81,7 @@
                 "memory": 2,
                 "disk": 30
             },
-            "cron_schedule": "30 11 29 * *",
+            "cron_schedule": "30 11 1,15 * *",
             "validation_config_file": "bev_3240_wiki/validation_config.json"
         },
         {

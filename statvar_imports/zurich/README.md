@@ -18,7 +18,7 @@ Rollup Logic & Explanation (`wir_2552_wiki/generate_rollups.py`):
 
 4. Autorefresh Type
 
-Fully Autorefresh:"0 2 29 * * " (Runs at 2:00 AM on the 29th day of every month).
+Fully Autorefresh:"0 2 1,15 * * " (Runs at 2:00 AM on the 1st and 15th day of every month).
 
 5. Script Execution Details
 
@@ -62,7 +62,7 @@ Release Frequency: P1Y
 
 4. Autorefresh Type
 
-Fully Autorefresh:" 30 11 29 * * " (Runs at 11:30 AM on the 29th of every month).
+Fully Autorefresh:" 30 11 1,15 * * " (Runs at 11:30 AM on the 1st and 15th of every month).
 
 5. Script Execution Details
 
