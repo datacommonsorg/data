@@ -20,8 +20,6 @@ import os
 import sys
 import time
 import traceback
-# import shutil
-# import tempfile
 import concurrent.futures
 from absl import app, flags, logging
 import pandas as pd
@@ -240,9 +238,6 @@ class USAirEmissionTrends:
             return df
         except Exception as e:
             logging.exception(f"Error processing file {file_path}: {e}")
-            logging.fatal(
-                f"Error processing file {file_path}: {e}\n{traceback.format_exc()}"
-            )
             raise
 
     def _process_file(self, file_path: str) -> None:
@@ -261,9 +256,6 @@ class USAirEmissionTrends:
                     f"Saved intermediate file at : {intermediate_file_path}")
         except Exception as e:
             logging.exception(f"Error processing file {file_path}: {e}")
-            logging.fatal(
-                f"Error processing file {file_path}: {e}\n{traceback.format_exc()}"
-            )
             raise
 
     def _mcf_property_generator(self) -> None:
@@ -338,11 +330,9 @@ class USAirEmissionTrends:
                 logging.fatal(
                     f"Error reading intermediate file {f}: {e}\n{traceback.format_exc()}"
                 )
-                raise
 
         if not dfs:
             logging.fatal("No dataframes to concatenate. Exiting.")
-            raise RuntimeError("No dataframes to concatenate.")
 
         self.final_df = pd.concat(dfs, ignore_index=True)
 
@@ -433,7 +423,6 @@ def process_files(input_path: str, output_file_path: str,
         logging.fatal(
             f"Error finding input files: {e}. Run the download script first.\n{traceback.format_exc()}"
         )
-        sys.exit(1)
 
     # Defining Output Files
     logging.info(
@@ -458,7 +447,6 @@ def process_files(input_path: str, output_file_path: str,
         logging.exception(f"An unexpected error occurred: {e}")
         logging.fatal(
             f"An unexpected error occurred: {e}\n{traceback.format_exc()}")
-        raise
 
 
 def main(_):
