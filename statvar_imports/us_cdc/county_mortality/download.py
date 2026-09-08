@@ -479,7 +479,6 @@ def is_state_downloaded(
                             found_years.add(y)
                     if len(found_years) == len(years):
                         return True
-            return False
 
         # Otherwise, check if every year in years is covered by at least one chunk file
         for y in years:

@@ -32,9 +32,35 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/*.csv \
   --pv_map=county_mortality_pvmap.csv \
   --config_file=county_mortality_metadata.csv \
-  --output_path=output/underlyingcauseofdeath_county
+  --output_path=output/underlyingcauseofdeath_county \
+  --output_counters=counters/underlyingcauseofdeath_county_counters.csv
 ```
 
 #### Output Artifacts
-* `output/underlyingcauseofdeath_county.csv`: Cleaned observations mapping FIPS (`geoId/{fips}`), year, StatVar (`Count_MortalityEvent_<Cause>`), and death count.
+* `output/underlyingcauseofdeath_county.csv`: Cleaned observations mapping FIPS (`geoId/{fips}`), year, StatVar (`Count_MortalityEvent_<Cause>`), death count, and unit.
 * `output/underlyingcauseofdeath_county.tmcf`: Template MCF mapping CSV columns to Data Commons Knowledge Graph entities.
+
+---
+
+### Important Files
+
+| File | Description |
+|---|---|
+| `download.py` | Automated live CDC WONDER downloader, session manager, and query partitioner. |
+| `download_test.py` | Comprehensive unit test suite for download session management and error handling. |
+| `county_mortality_metadata.csv` | Metadata specifying header row offsets, frequency, and output columns. |
+| `county_mortality_pvmap.csv` | Property-Value mapping resolving county FIPS and ICD-10 113 causes of death. |
+| `manifest.json` | Automation manifest declaring scripts, inputs/outputs, cron schedule, and validation config. |
+| `validation_config.json` | Configuration file defining validation rules (deleted records, date freshness, goldens). |
+| `golden_data/` | Established golden summary and observation records for automated regression validation. |
+| `test_data/` | Trimmed sample Delaware dataset and expected outputs for offline verification. |
+| `runbook.md` | Operational runbook, architecture documentation, and troubleshooting guide. |
+
+---
+
+### Testing
+
+Run the unit test suite from this directory:
+```bash
+python3 -m unittest discover -v -s . -p "*_test.py"
+```

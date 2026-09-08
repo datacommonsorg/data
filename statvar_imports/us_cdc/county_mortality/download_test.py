@@ -183,6 +183,13 @@ class DownloadTest(unittest.TestCase):
             chunk_2020.write_text("Header,col1\n" + "val1,val2\n" * 10)
             self.assertTrue(download.is_state_downloaded(temp_dir, "10", years=["2018", "2021", "2024"]))
 
+            # If an incomplete single combined file also exists (e.g. from an aborted run),
+            # but chunk files cover all requested years, it should still return True
+            f = Path(temp_dir) / "UnderlyingCauseofDeath_County_10.csv"
+            f.write_text("Header,col1\n,2018,val1\n" * 5)  # only contains 2018
+            self.assertTrue(download.is_state_downloaded(temp_dir, "10", years=["2018", "2021", "2024"]))
+            f.unlink()
+
     @mock.patch.object(download.time, "sleep")
     @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "init_session")
     def test_execute_query_429_backoff(self, mock_init, mock_sleep):
