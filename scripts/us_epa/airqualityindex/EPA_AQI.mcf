@@ -1,7 +1,0 @@
-Node: dcid:AirQualityIndex_AirPollutant
-name: "Air Quality Index"
-description: "Overall air quality index."
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Atmosphere
-measuredProperty: dcs:airQualityIndex
-statType: dcs:measuredValue
