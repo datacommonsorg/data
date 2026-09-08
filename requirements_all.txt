@@ -6,6 +6,7 @@
 # - requirements_all.txt (here): anything not related to import automation.
 
 -r import-automation/executor/requirements.txt
+-r agents/requirements.txt
 
 absl-py
 chembl-webresource-client

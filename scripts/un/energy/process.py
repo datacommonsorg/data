@@ -51,6 +51,7 @@ flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
 flags.DEFINE_integer('debug_lines', 100000, 'Print error logs every N lines')
 flags.DEFINE_bool('copy_input_columns', False,
                   'Add columns from the input csv into the output')
+flags.DEFINE_string('output_counters', '', 'File to write counters to')
 
 # Columns in the putput CSV
 # todo(ajaits): Should it include original columns like transaction code, fuel code, etc?
@@ -504,7 +505,8 @@ def rename_the_mapping_value(sv_id, mapping_names):
 def process(in_paths: list,
             out_path: str,
             debug_lines=1,
-            copy_input_columns=False) -> dict:
+            copy_input_columns=False,
+            output_counters='') -> dict:
     """Read data from CSV and create CSV,MCF with StatVars and tMCF for DC import.
     Generates the following output files:
       - .csv: File with StatVarObservations
@@ -575,6 +577,15 @@ def process(in_paths: list,
     logging.info(
         f'Processing rate: {counters["inputs_processed"] / (end_ts - start_ts):.2f} rows/sec'
     )
+    if output_counters:
+        dirname = os.path.dirname(output_counters)
+        if dirname:
+            os.makedirs(dirname, exist_ok=True)
+        with open(output_counters, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['key', 'value'])
+            for k, v in sorted(counters.items()):
+                writer.writerow([k, v])
     return counters
 
 
@@ -586,7 +597,7 @@ def main(_):
 
     if len(csv_data_files) > 0 and FLAGS.output_path != '':
         process(csv_data_files, FLAGS.output_path, FLAGS.debug_lines,
-                FLAGS.copy_input_columns)
+                FLAGS.copy_input_columns, FLAGS.output_counters)
     else:
         logging.error(
             f'Please specify files to process with --csv_data_files=<,>')

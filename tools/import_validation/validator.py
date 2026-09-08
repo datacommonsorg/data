@@ -25,6 +25,7 @@ sys.path.append(os.path.join(_DATA_DIR, 'util'))
 
 from result import ValidationResult, ValidationStatus
 from counters import Counters
+from validation_util import DIFFER_COLUMNS
 import validator_goldens
 
 
@@ -58,6 +59,9 @@ class Validator:
         try:
             con = duckdb.connect(database=':memory:', read_only=False)
             con.register('stats', stats_df)
+            if differ_df.empty:
+                differ_df = pd.DataFrame(
+                    columns=['StatVar', 'ADDED', 'DELETED', 'MODIFIED'])
             con.register('differ', differ_df)
 
             final_query = f"""

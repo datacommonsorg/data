@@ -31,9 +31,12 @@ from absl import logging
 from googleapiclient.discovery import build
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
 
 import differ_utils
+from mcf_file_util import normalize_value
 
 _DATAFLOW_TEMPLATE_URL = 'gs://datcom-templates/templates/flex/differ.json'
 
@@ -78,11 +81,12 @@ flags.DEFINE_string('project_id', '', 'GCP project id for the dataflow job.')
 
 
 def val_str(value) -> str:
+    """Normalizes and stringifies a property value for diff comparison."""
     if isinstance(value, list):
-        return ",".join([val_str(v) for v in value])
-    if value and isinstance(value, str) and " " in value and value[0].isalpha():
-        return '"' + value + '"'
-    return str(value)
+        return ", ".join(sorted([val_str(v) for v in value]))
+    if isinstance(value, str):
+        return str(normalize_value(value))
+    return str(value) if value is not None else ''
 
 
 class ImportDiffer:
@@ -111,6 +115,7 @@ class ImportDiffer:
   - nodes-added.mcf: MCF nodes added in the current version
   - nodes-deleted.mcf: MCF nodes deleted in the current version
   - nodes-modified.mcf: MCF nodes modified in the current version
+  - nodes-original.mcf: MCF nodes before modification (original values of modified nodes)
   - differ_summary.json: consolidated diff statistics 
 
   """
@@ -243,7 +248,8 @@ class ImportDiffer:
     def convert_diff_to_mcf_nodes(self,
                                   diff_df: pd.DataFrame,
                                   is_obs: bool,
-                                  diff_type: str = None) -> list:
+                                  diff_type: str = None,
+                                  suffix: str = None) -> list:
         """
         Converts the diff dataframe back to MCF format nodes.
         """
@@ -256,16 +262,17 @@ class ImportDiffer:
             if df_type.empty:
                 continue
 
+            # Determine which column suffix to use for values and node IDs
+            col_suffix = suffix if suffix else (
+                '_x' if d_type == Diff.DELETED.name else '_y')
+
             for _, row in df_type.iterrows():
                 node = {}
                 key_combined = str(row[Column.key_combined.name])
 
-                # Determine which column to use for values and node IDs
-                suffix = '_x' if d_type == Diff.DELETED.name else '_y'
-
                 # Helper to get value from row, handles cases with or without suffix
                 def get_val(base_name):
-                    col_name = base_name + suffix
+                    col_name = base_name + col_suffix
                     if col_name in row:
                         return str(row[col_name])
                     return str(row.get(base_name, ''))
@@ -435,15 +442,16 @@ class ImportDiffer:
                                              current_df_schema)
 
             logging.info('Writing diff to MCF files...')
-            for d_type, filename in [
-                (Diff.ADDED.name, 'nodes-added.mcf'),
-                (Diff.DELETED.name, 'nodes-deleted.mcf'),
-                (Diff.MODIFIED.name, 'nodes-modified.mcf'),
+            for d_type, filename, suffix in [
+                (Diff.ADDED.name, 'nodes-added.mcf', '_y'),
+                (Diff.DELETED.name, 'nodes-deleted.mcf', '_x'),
+                (Diff.MODIFIED.name, 'nodes-modified.mcf', '_y'),
+                (Diff.MODIFIED.name, 'nodes-original.mcf', '_x'),
             ]:
                 obs_nodes = self.convert_diff_to_mcf_nodes(
-                    obs_diff, True, d_type)
+                    obs_diff, True, d_type, suffix)
                 schema_nodes = self.convert_diff_to_mcf_nodes(
-                    schema_diff, False, d_type)
+                    schema_diff, False, d_type, suffix)
                 type_nodes = obs_nodes + schema_nodes
                 if type_nodes:
                     differ_utils.write_mcf_nodes(type_nodes, self.output_path,
