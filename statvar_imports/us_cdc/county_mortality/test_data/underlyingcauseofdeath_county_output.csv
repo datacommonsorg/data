@@ -31,7 +31,7 @@ geoId/10001,2023,dcid:Count_MortalityEvent_AllOtherFormsOfChronicIschemicHeartDi
 geoId/10001,2023,dcid:Count_MortalityEvent_OtherHeartDiseases,128,
 geoId/10001,2023,dcid:Count_MortalityEvent_HeartFailure,37,
 geoId/10001,2023,dcid:Count_MortalityEvent_AllOtherFormsOfHeartDisease,91,
-geoId/10001,2023,dcid:Count_MortalityEvent_Essential_Primary_HypertensionAndHypertensiveRenalDisease,17,
+geoId/10001,2023,dcid:Count_MortalityEvent_Essential(Primary)HypertensionAndHypertensiveRenalDisease,17,
 geoId/10001,2023,dcid:Count_MortalityEvent_CerebrovascularDiseases,167,
 geoId/10001,2023,dcid:Count_MortalityEvent_OtherDiseasesOfCirculatorySystem,11,
 geoId/10001,2024,dcid:Count_MortalityEvent_Septicemia,37,

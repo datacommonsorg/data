@@ -51,8 +51,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 | `county_mortality_metadata.csv` | Metadata specifying header row offsets, frequency, and output columns. |
 | `county_mortality_pvmap.csv` | Property-Value mapping resolving county FIPS and ICD-10 113 causes of death. |
 | `manifest.json` | Automation manifest declaring scripts, inputs/outputs, cron schedule, and validation config. |
-| `validation_config.json` | Configuration file defining validation rules (deleted records, date freshness, goldens). |
-| `golden_data/` | Established golden summary and observation records for automated regression validation. |
+| `validation_config.json` | Configuration file defining import validation rules (historical deleted records threshold). |
 | `test_data/` | Trimmed sample Delaware dataset and expected outputs for offline verification. |
 | `runbook.md` | Operational runbook, architecture documentation, and troubleshooting guide. |
 
