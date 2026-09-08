@@ -31,10 +31,8 @@ WITH cdc_sv AS (
   SELECT
     variable_measured AS cdc500,
     CASE
-      WHEN variable_measured LIKE '%Female_50To74Years%' OR variable_measured LIKE '%50To74Years_Female%' THEN 'Count_Person_Female_50To74Years'
-      WHEN variable_measured LIKE '%Female_21To65Years%' OR variable_measured LIKE '%21To65Years_Female%' THEN 'Count_Person_Female_21To65Years'
-      WHEN variable_measured LIKE '%Female_65OrMoreYears%' OR variable_measured LIKE '%65OrMoreYears_Female%' THEN 'Count_Person_65OrMoreYears_Female'
-      WHEN variable_measured LIKE '%Male_65OrMoreYears%' OR variable_measured LIKE '%65OrMoreYears_Male%' THEN 'Count_Person_65OrMoreYears_Male'
+      WHEN REGEXP_CONTAINS(variable_measured, r'65OrMoreYears.*Female|Female.*65OrMoreYears') THEN 'Count_Person_65OrMoreYears_Female'
+      WHEN REGEXP_CONTAINS(variable_measured, r'65OrMoreYears.*Male|Male.*65OrMoreYears') THEN 'Count_Person_65OrMoreYears_Male'
       WHEN variable_measured LIKE '%65OrMoreYears%' THEN 'Count_Person_65OrMoreYears'
       WHEN variable_measured LIKE '%18To64Years%' THEN 'Count_Person_18To64Years'
       WHEN variable_measured LIKE '%18OrMoreYears%' THEN 'Count_Person_18OrMoreYears'
@@ -43,6 +41,12 @@ WITH cdc_sv AS (
   FROM `datcom-store.spanner_dc_graph_prod_DEFAULT.TimeSeries`
   WHERE provenance = 'dc/base/CDC500'
     AND variable_measured LIKE 'Percent_%'
+    AND variable_measured NOT IN (
+      'Percent_Person_50To74Years_Female_ReceivedMammography',
+      'Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening',
+      'Percent_Person_21To65Years_Female_ReceivedPapSmearTest',
+      'Percent_Person_50To75Years_ReceivedColorectalCancerScreening'
+    )
   GROUP BY cdc500, pop_statvar
 ),
 
@@ -66,6 +70,12 @@ svo_percent AS (
   WHERE O.entity1 LIKE 'geoId/%'
     AND LENGTH(O.entity1) = 13
     AND O.variable_measured LIKE 'Percent_%'
+    AND O.variable_measured NOT IN (
+      'Percent_Person_50To74Years_Female_ReceivedMammography',
+      'Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening',
+      'Percent_Person_21To65Years_Female_ReceivedPapSmearTest',
+      'Percent_Person_50To75Years_ReceivedColorectalCancerScreening'
+    )
 ),
 
 svo_count AS (
@@ -87,6 +97,10 @@ svo_count AS (
     ON O.variable_measured = pop.pop_statvar
   WHERE O.entity1 LIKE 'geoId/%'
     AND LENGTH(O.entity1) = 13
+  QUALIFY ROW_NUMBER() OVER (
+    PARTITION BY O.variable_measured, O.entity1, O.date
+    ORDER BY O.facet_id DESC
+  ) = 1
 )
 
 SELECT 
@@ -114,21 +128,26 @@ def run_process(client: bigquery.Client, output_file: str) -> bool:
     try:
         query_job = client.query(QUERY)
     except Exception as e:
-        logging.error("Failed to submit BigQuery query: %s", e)
+        logging.error("Failed to submit BigQuery query: %s", e, exc_info=True)
         raise
 
     logging.info("Fetching query results into dataframe...")
     try:
         df = query_job.to_dataframe()
     except Exception as e:
-        logging.error("Failed to fetch query results into dataframe: %s", e)
+        logging.error("Failed to fetch query results into dataframe: %s", e, exc_info=True)
         raise
+
+    if df.empty:
+        raise RuntimeError("BigQuery query returned 0 rows.")
 
     output_dir = os.path.dirname(output_file)
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
     logging.info("Writing %d rows to %s", len(df), output_file)
-    df.to_csv(output_file, index=False)
+    temp_file = output_file + ".tmp"
+    df.to_csv(temp_file, index=False)
+    os.replace(temp_file, output_file)
     return True
 
 
@@ -141,3 +160,4 @@ def main(argv):
 
 if __name__ == '__main__':
     app.run(main)
+

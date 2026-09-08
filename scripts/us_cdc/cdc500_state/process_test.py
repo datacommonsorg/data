@@ -17,9 +17,12 @@ import os
 import tempfile
 import unittest
 from unittest import mock
+from absl import flags
 import pandas as pd
 
 from scripts.us_cdc.cdc500_state import process
+
+FLAGS = flags.FLAGS
 
 
 class CDC500StateProcessTest(unittest.TestCase):
@@ -33,6 +36,12 @@ class CDC500StateProcessTest(unittest.TestCase):
         self.assertIn("SAFE_DIVIDE", query)
         self.assertIn("SUBSTR(p.observation_about, 1, 8)", query)
         self.assertIn("LENGTH(O.entity1) = 13", query)
+        self.assertIn("REGEXP_CONTAINS", query)
+        self.assertIn("QUALIFY ROW_NUMBER() OVER", query)
+        self.assertIn("Percent_Person_50To74Years_Female_ReceivedMammography", query)
+        self.assertIn("Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening", query)
+        self.assertIn("Percent_Person_21To65Years_Female_ReceivedPapSmearTest", query)
+        self.assertIn("Percent_Person_50To75Years_ReceivedColorectalCancerScreening", query)
 
     def test_run_process_success(self):
         mock_client = mock.MagicMock()
@@ -52,29 +61,51 @@ class CDC500StateProcessTest(unittest.TestCase):
             self.assertTrue(result)
             mock_client.query.assert_called_once()
             self.assertTrue(os.path.exists(output_file))
+            self.assertFalse(os.path.exists(output_file + '.tmp'))
             saved_df = pd.read_csv(output_file)
             self.assertEqual(len(saved_df), 1)
             self.assertEqual(saved_df['observation_about'].iloc[0], 'geoId/06')
 
-    def test_run_process_query_error(self):
+    def test_run_process_empty_dataframe_raises_runtime_error(self):
         mock_client = mock.MagicMock()
-        mock_client.query.side_effect = Exception("BigQuery Access Denied")
+        mock_client.query.return_value.to_dataframe.return_value = pd.DataFrame()
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
-            with self.assertRaises(Exception):
+            with self.assertRaises(RuntimeError):
+                process.run_process(mock_client, output_file)
+
+    def test_run_process_query_error(self):
+        mock_client = mock.MagicMock()
+        mock_client.query.side_effect = RuntimeError("BigQuery Access Denied")
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
+            with self.assertRaises(RuntimeError):
                 process.run_process(mock_client, output_file)
 
     def test_run_process_dataframe_error(self):
         mock_client = mock.MagicMock()
         mock_query_job = mock.MagicMock()
-        mock_query_job.to_dataframe.side_effect = Exception(
+        mock_query_job.to_dataframe.side_effect = RuntimeError(
             "Failed to fetch dataframe")
         mock_client.query.return_value = mock_query_job
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
-            with self.assertRaises(Exception):
+            with self.assertRaises(RuntimeError):
                 process.run_process(mock_client, output_file)
+
+    @mock.patch('scripts.us_cdc.cdc500_state.process.run_process')
+    @mock.patch('google.cloud.bigquery.Client')
+    def test_main(self, mock_bq_client_cls, mock_run_process):
+        mock_client_instance = mock.MagicMock()
+        mock_bq_client_cls.return_value = mock_client_instance
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            FLAGS(['test_process', f'--output_dir={tmp_dir}'])
+            process.main([])
+            expected_output_file = os.path.join(tmp_dir, 'CDC500State_Output.csv')
+            mock_run_process.assert_called_once_with(mock_client_instance,
+                                                     expected_output_file)
 
 
 if __name__ == '__main__':
     unittest.main()
+

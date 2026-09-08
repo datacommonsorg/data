@@ -39,6 +39,16 @@ $$\text{State Percent} = \frac{\sum (\text{City Population} \times \text{City Pe
 
 The output measurement method is prefixed with `dcAggregate/` (e.g., `dcAggregate/CrudePrevalence`).
 
+#### Excluded Indicators
+
+The following age-bracketed cancer screening indicators are omitted from state-level aggregation:
+- `Percent_Person_50To74Years_Female_ReceivedMammography`
+- `Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening`
+- `Percent_Person_21To65Years_Female_ReceivedPapSmearTest`
+- `Percent_Person_50To75Years_ReceivedColorectalCancerScreening`
+
+**Rationale**: The Census ACS 5-Year Survey does not publish single composite population StatVars for these non-standard multi-year age brackets (`50To74Years`, `21To65Years`, `50To75Years`). Rather than applying arbitrary proxy weights or risking silent row omission, these indicators are explicitly excluded from state aggregation.
+
 ## About the Import
 
 ### Artifacts
@@ -57,10 +67,37 @@ The output measurement method is prefixed with `dcAggregate/` (e.g., `dcAggregat
 
 ### Import Procedure
 
-#### Data Download and Processing Steps
+#### Prerequisites
 
-To run the BigQuery aggregation and generate the output CSV:
+Ensure Google Cloud authentication is configured with access to BigQuery dataset `datcom-store.spanner_dc_graph_prod_DEFAULT`:
 
 ```bash
-$ python3 process.py
+$ gcloud auth application-default login
 ```
+
+#### Running the Script
+
+To run the BigQuery aggregation and write the output CSV to the default output directory (`CDC500State_Output/CDC500State_Output.csv`):
+
+```bash
+$ python3 scripts/us_cdc/cdc500_state/process.py
+```
+
+To specify a custom output directory:
+
+```bash
+$ python3 scripts/us_cdc/cdc500_state/process.py --output_dir=/path/to/output
+```
+
+#### Running Unit Tests
+
+Run the test suite using Python's `unittest` runner from the repository root:
+
+```bash
+$ python3 -m unittest scripts.us_cdc.cdc500_state.process_test
+```
+
+#### Automation
+
+This import is automated via Data Commons Import Automation and scheduled to run weekly via Cloud Batch every Monday at 01:00 UTC (`cron_schedule: "0 1 * * 1"` in `manifest.json`).
+

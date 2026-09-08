@@ -25,6 +25,15 @@
                 "minimum": 50,
                 "maximum": 52
             }
+        },
+        {
+            "rule_id": "check_statvar_max_dates",
+            "description": "Verifies that MaxDate meets expected vintage freshness per StatVar cohort.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, CAST(MaxDate AS INTEGER) AS max_year FROM stats",
+                "condition": "CASE WHEN StatVar = 'Percent_Person_WithAllTeethLoss' THEN max_year >= 2016 WHEN StatVar LIKE '%CorePreventiveServices%' THEN max_year >= 2020 WHEN StatVar IN ('Percent_Person_WithHighBloodPressure', 'Percent_Person_18OrMoreYears_WithHighBloodPressure_ReceivedTakingBloodPressureMedication', 'Percent_Person_WithHighCholesterol', 'Percent_Person_ReceivedCholesterolScreening', 'Percent_Person_WithChronicKidneyDisease') THEN max_year >= 2021 ELSE max_year >= 2022 END"
+            }
         }
     ]
 }
