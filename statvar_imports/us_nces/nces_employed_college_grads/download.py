@@ -30,7 +30,6 @@ from urllib.parse import urlparse
 from absl import app
 from absl import logging
 import openpyxl
-import requests
 
 # Add data/util to sys.path so we can import shared wrapper functions
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
