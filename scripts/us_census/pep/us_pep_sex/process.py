@@ -34,17 +34,13 @@ import tempfile
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_string('config_path', '',
-                    'Path to the configuration file in the GCS bucket.')
-
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _INPUT_URL_JSON = "input_url.json"
 _FILES_TO_DOWNLOAD = None
-_GCS_OUTPUT_PERSISTENT_PATH = os.path.join(
-    _MODULE_DIR, 'gcs_output/us_pep_sex_source_files')
-_GCS_BASE_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
+_GCS_FOLDER_PERSISTENT_PATH = os.path.join(
+    _MODULE_DIR, 'gcs_folder/us_pep_sex_source_files')
+_TTL_DAYS = 30  # Time-to-live for downloaded files in days
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 # pylint: disable=wrong-import-position
@@ -57,8 +53,16 @@ _USSTATE_SHORT_FORM = statetoshortform.USSTATE_MAP
 
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "gcs_output/us_pep_sex_source_files")
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+                                  "gcs_folder/us_pep_sex_source_files")
+
+
+def _define_flags():
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string('config_path', '',
+                        'Path to the configuration file in the GCS bucket.')
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
+
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                  "typeOf: dcs:StatisticalVariable\n"
@@ -441,12 +445,12 @@ def _state_1980_1990(file_path: str) -> pd.DataFrame:
         if year == 1987:
             df = pd.read_table(file_path,
                                skiprows=29,
-                               delim_whitespace=True,
+                               sep=r'\s+',
                                names=column_names)
         else:
             df = pd.read_table(file_path,
                                skiprows=28,
-                               delim_whitespace=True,
+                               sep=r'\s+',
                                names=column_names)
         df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(2)
         df['Year'] = year
@@ -691,6 +695,11 @@ def _county_1980_1990(file_path: str) -> pd.DataFrame:
     """
     try:
         df = pd.read_csv(file_path, skiprows=5)
+        df = df.dropna(
+            subset=['Year of Estimate', 'FIPS State and County Codes'])
+        df['Year of Estimate'] = df['Year of Estimate'].astype('int64')
+        df['FIPS State and County Codes'] = df[
+            'FIPS State and County Codes'].astype('int64')
         # adding age groups to get total value
         df['Total'] = df[_COLUMNS_TO_SUM].sum(axis=1)
         df = df.drop(columns=_COLUMNS_TO_SUM)
@@ -736,7 +745,7 @@ def _county_1990_2000(file_path: str) -> pd.DataFrame:
     """
     try:
         column_names = ['Year', 'geo_ID', 'Age', 'Race-Sex', 'Ethnic', 'Value']
-        df = pd.read_table(file_path, delim_whitespace=True, header=None)
+        df = pd.read_table(file_path, sep=r'\s+', header=None)
         df.columns = column_names
         df['Year'] = '19' + df['Year'].astype(str)
         df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(5)
@@ -1092,6 +1101,8 @@ class PopulationEstimateBySex:
                 value_vars=['Count_Person_Male', 'Count_Person_Female'],
                 var_name="SV",
                 value_name="Observation")
+            final_df['Observation'] = pd.to_numeric(
+                final_df['Observation'], errors='coerce').astype('Int64')
             subset_cols = ['Year', 'geo_ID', 'Measurement_Method', 'SV']
             # 2. Drop duplicates based on those columns, keeping the first occurrence
             final_df.drop_duplicates(subset=subset_cols,
@@ -1132,7 +1143,7 @@ def is_valid_url(url):
                 return False
         return True
     except Exception as e:
-        logging.fatal(f"Error checking URL: {url} - {e}")
+        logging.warning(f"Error checking URL: {url} - {e}")
         return False
 
 
@@ -1146,6 +1157,10 @@ def add_future_year_urls():
     global _FILES_TO_DOWNLOAD
     # Initialize the list to store files to download
     _FILES_TO_DOWNLOAD = []
+
+    # Use a requests session for connection pooling to improve efficiency
+    # when making hundreds of HEAD requests.
+    session = requests.Session()
     with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
         _FILES_TO_DOWNLOAD = json.load(inpit_file)
 
@@ -1184,6 +1199,24 @@ def add_future_year_urls():
     # Loop through years in reverse order from 2030 to 2023
     for future_year in range(2030, 2022, -1):  # From 2030 to 2023
 
+        # We check the National CSV first. If it's 404, the whole year is skipped.
+        gatekeeper_url = urls_to_scan[0].format(YEAR=future_year)
+        try:
+            # Use a short 5-second timeout for the check
+            response = session.head(gatekeeper_url,
+                                    allow_redirects=True,
+                                    timeout=5)
+            if response.status_code != 200:
+                logging.info(
+                    f"Skipping year {future_year}: National file not found (status code: {response.status_code})."
+                )
+                continue
+        except requests.exceptions.RequestException as e:
+            logging.warning(
+                f"Skipping year {future_year} due to an error checking the gatekeeper URL: {e}"
+            )
+            continue
+
         YEAR = future_year
         # Loop through URLs
         for url in urls_to_scan:
@@ -1194,8 +1227,10 @@ def add_future_year_urls():
                     logging.info(f"checking url: {url_to_check}")
 
                     try:
-                        check_url = requests.head(url_to_check,
-                                                  allow_redirects=True)
+                        # HEAD calls only fetch headers and should complete quickly.
+                        check_url = session.head(url_to_check,
+                                                 allow_redirects=True,
+                                                 timeout=5)
                         if check_url.status_code == 200:
                             _FILES_TO_DOWNLOAD.append(
                                 {"download_path": url_to_check})
@@ -1212,8 +1247,10 @@ def add_future_year_urls():
                     continue  # Skip this URL if it's already processed
 
                 try:
-                    check_url = requests.head(url_to_check,
-                                              allow_redirects=True)
+                    # HEAD calls only fetch headers and should complete quickly.
+                    check_url = session.head(url_to_check,
+                                             allow_redirects=True,
+                                             timeout=5)
                     if check_url.status_code == 200:
                         _FILES_TO_DOWNLOAD.append(
                             {"download_path": url_to_check})
@@ -1230,6 +1267,20 @@ def add_future_year_urls():
                         f"URL is not accessible {url_to_check} due to {e}")
 
 
+def cleanup():
+    """Delete all old files in the gcs_folder to prevent cache bloat."""
+    if os.path.exists(_GCS_FOLDER_PERSISTENT_PATH):
+        for file_name in os.listdir(_GCS_FOLDER_PERSISTENT_PATH):
+            file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH, file_name)
+            if os.path.isfile(file_path):
+                file_age = (time.time() - os.path.getmtime(file_path)) / (24 *
+                                                                          3600)
+                # Delete ANY file older than the TTL
+                if file_age > _TTL_DAYS:
+                    logging.info(f"Cleaning up old file: {file_name}")
+                    os.remove(file_path)
+
+
 @retry(tries=3,
        delay=2,
        backoff=2,
@@ -1242,8 +1293,11 @@ def download_files():
     global _FILES_TO_DOWNLOAD
     session = requests.session()
 
-    #Get set of already downloaded files
-    downloaded_files = set(os.listdir(_GCS_OUTPUT_PERSISTENT_PATH))
+    # Ensure the directory exists (it shouldn't "expect" it to be there)
+    os.makedirs(_GCS_FOLDER_PERSISTENT_PATH, exist_ok=True)
+
+    # Get set of already downloaded files
+    downloaded_files = set(os.listdir(_GCS_FOLDER_PERSISTENT_PATH))
 
     for file_to_download in _FILES_TO_DOWNLOAD:
         file_name_to_save = None
@@ -1255,6 +1309,18 @@ def download_files():
         else:
             file_name_to_save = url.split('/')[-1]
 
+        # Skip if file already exists in cache (cleanup() already removed stale files)
+        if file_name_to_save in downloaded_files:
+            file_path = os.path.join(_GCS_FOLDER_PERSISTENT_PATH,
+                                     file_name_to_save)
+            logging.info(
+                f"Skipping download, using cached file: {file_name_to_save}")
+
+            # Make sure to copy the cached file to the input directory!
+            shutil.copy(file_path,
+                        os.path.join(_INPUT_FILE_PATH, file_name_to_save))
+            continue
+
         headers = {'User-Agent': 'Mozilla/5.0'}
         try:
             with session.get(url, stream=True, timeout=120,
@@ -1263,45 +1329,38 @@ def download_files():
 
                 content_type = response.headers.get('Content-Type', '')
 
-                # Skip if file already exists
-                if file_name_to_save in downloaded_files:
-                    logging.info(
-                        f"Skipping already downloaded file: {file_name_to_save}"
+                # Minimal fix: Log error and continue to skip HTML pages
+                if 'html' in content_type.lower():
+                    logging.error(
+                        f"Server returned HTML error page for URL: {url}. Skipping."
                     )
                     continue
-                if 'html' in content_type.lower():
-                    logging.fatal(
-                        f"Server returned HTML error page for URL: {url}")
-                else:
-                    if response.status_code == 200:
-                        with tempfile.NamedTemporaryFile(
-                                delete=False) as tmp_file:
-                            # Stream the response into a temp file
-                            for chunk in response.iter_content(chunk_size=8192):
-                                if chunk:
-                                    tmp_file.write(chunk)
-                            tmp_file_path = tmp_file.name
 
-                        # Copy to local destination
-                        shutil.copy(
-                            tmp_file_path,
-                            os.path.join(_INPUT_FILE_PATH, file_name_to_save))
+                if response.status_code == 200:
+                    with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+                        for chunk in response.iter_content(chunk_size=8192):
+                            if chunk:
+                                tmp_file.write(chunk)
+                        tmp_file_path = tmp_file.name
 
-                        # Copy to gcs destination
-                        shutil.copy(
-                            tmp_file_path,
-                            os.path.join(_GCS_OUTPUT_PERSISTENT_PATH,
-                                         file_name_to_save))
+                    # Copy to local destination
+                    shutil.copy(
+                        tmp_file_path,
+                        os.path.join(_INPUT_FILE_PATH, file_name_to_save))
 
-                        # Optionally delete the temp file
-                        os.remove(tmp_file_path)
-                        file_to_download['is_downloaded'] = True
-                        logging.info(f"Downloaded file: {url}")
+                    # Move to gcs destination (optimized from shutil.copy + os.remove)
+                    shutil.move(
+                        tmp_file_path,
+                        os.path.join(_GCS_FOLDER_PERSISTENT_PATH,
+                                     file_name_to_save))
+
+                    file_to_download['is_downloaded'] = True
+                    logging.info(f"Downloaded file: {url}")
 
         except Exception as e:
             file_to_download['is_downloaded'] = False
             logging.error(f"Error downloading {url}: {e}")
-            raise  # re-raise to trigger @retry
+            raise
         time.sleep(1)
 
     return True
@@ -1325,12 +1384,15 @@ def main(_):
         os.makedirs(data_file_path, exist_ok=True)
     if not (os.path.exists(_INPUT_FILE_PATH)):
         os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
-    if not (os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH)):
-        os.makedirs(_GCS_OUTPUT_PERSISTENT_PATH, exist_ok=True)
+    if not (os.path.exists(_GCS_FOLDER_PERSISTENT_PATH)):
+        os.makedirs(_GCS_FOLDER_PERSISTENT_PATH, exist_ok=True)
 
     cleaned_csv_path = data_file_path + os.sep + csv_name
     mcf_path = data_file_path + os.sep + mcf_name
     tmcf_path = data_file_path + os.sep + tmcf_name
+
+    # Perform cleanup of old files
+    cleanup()
 
     download_status = True
     if mode == "" or mode == "download":
@@ -1350,14 +1412,11 @@ def main(_):
                                              mcf_path, tmcf_path)
             loader.process()
 
-            # Only delete if it's a subdirectory of gcs_output, and not gcs_output itself
-            if os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH) and os.path.commonpath([_GCS_OUTPUT_PERSISTENT_PATH, _GCS_BASE_DIR]) == _GCS_BASE_DIR \
-            and os.path.abspath(_GCS_OUTPUT_PERSISTENT_PATH) != os.path.abspath(_GCS_BASE_DIR):
-                shutil.rmtree(_GCS_OUTPUT_PERSISTENT_PATH)
-                logging.info(f"Deleted folder: {_GCS_OUTPUT_PERSISTENT_PATH}")
+            # The persistent folder is intentionally kept to allow for TTL caching.
         except Exception as e:
             logging.fatal(f"The processing is failed due to the error: {e}")
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

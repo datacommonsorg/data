@@ -22,7 +22,7 @@ import shutil
 import subprocess
 import sys
 from datetime import datetime
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import List, Optional
 
@@ -43,6 +43,11 @@ def _define_flags():
 
         flags.DEFINE_list('input_metadata', [],
                           'List of input metadata file paths (optional)')
+
+        flags.DEFINE_list(
+            'extra_instruction_files', [],
+            'List of extra instruction file paths to make available to Gemini '
+            '(optional)')
 
         flags.DEFINE_boolean(
             'sdmx_dataset', False,
@@ -86,6 +91,11 @@ def _define_flags():
         flags.DEFINE_string(
             'working_dir', None,
             'Working directory for the generator (default: current directory)')
+
+        flags.DEFINE_integer(
+            'extra_instruction_max_bytes', 65536,
+            'Maximum allowed size in bytes for each extra instruction file '
+            '(default: 65536)')
     except flags.DuplicateFlagError:
         pass
 
@@ -110,6 +120,8 @@ class Config:
     output_path: str = 'output/output'
     gemini_cli: Optional[str] = None
     working_dir: Optional[str] = None
+    extra_instruction_files: List[str] = field(default_factory=list)
+    extra_instruction_max_bytes: int = 65536
 
 
 @dataclass
@@ -137,6 +149,8 @@ class PVMapGenerator:
         # Copy config to avoid modifying the original
         self._config = copy.deepcopy(config)
 
+        self._validate_extra_instruction_max_bytes()
+
         # Convert input_data paths to absolute
         if self._config.data_config.input_data:
             self._config.data_config.input_data = [
@@ -149,6 +163,13 @@ class PVMapGenerator:
             self._config.data_config.input_metadata = [
                 self._validate_and_convert_path(path)
                 for path in self._config.data_config.input_metadata
+            ]
+
+        # Resolve and validate runtime extra instruction files.
+        if self._config.extra_instruction_files:
+            self._config.extra_instruction_files = [
+                self._validate_extra_instruction_file(path)
+                for path in self._config.extra_instruction_files
             ]
 
         # Parse output_path into absolute path, handling relative paths and ~ expansion
@@ -186,10 +207,7 @@ class PVMapGenerator:
 
     def _validate_and_convert_path(self, path: str) -> Path:
         """Convert path to absolute and validate it's within working directory."""
-        p = Path(path).expanduser()
-        if not p.is_absolute():
-            p = self._working_dir / p
-        real_path = p.resolve()
+        real_path = self._resolve_path(path)
         working_dir = self._working_dir.resolve()
         try:
             real_path.relative_to(working_dir)
@@ -197,6 +215,43 @@ class PVMapGenerator:
             raise ValueError(
                 f"Path '{path}' is outside working directory '{working_dir}'")
         return real_path
+
+    def _resolve_path(self, path: str) -> Path:
+        """Resolve a path against the working directory when needed."""
+        p = Path(path).expanduser()
+        if not p.is_absolute():
+            p = self._working_dir / p
+        return p.resolve()
+
+    def _validate_extra_instruction_max_bytes(self) -> None:
+        """Validate the configured size limit for extra instruction files."""
+        if self._config.extra_instruction_max_bytes < 0:
+            raise ValueError("extra_instruction_max_bytes must be non-negative")
+
+    def _validate_extra_instruction_file(self, path: str) -> Path:
+        """Resolve and validate an extra instruction file."""
+        resolved_path = self._resolve_path(path)
+        if not resolved_path.exists():
+            raise ValueError(
+                f"Extra instruction file does not exist: {resolved_path}")
+        if not resolved_path.is_file():
+            raise ValueError(
+                f"Extra instruction path is not a file: {resolved_path}")
+
+        file_size = resolved_path.stat().st_size
+        max_bytes = self._config.extra_instruction_max_bytes
+        if file_size > max_bytes:
+            raise ValueError(
+                f"Extra instruction file is larger than {max_bytes} bytes: "
+                f"{resolved_path}")
+
+        try:
+            resolved_path.read_text(encoding='utf-8')
+        except UnicodeDecodeError:
+            raise ValueError(f"Extra instruction file is not valid UTF-8 text: "
+                             f"{resolved_path}")
+
+        return resolved_path
 
     def _initialize_datacommons_dir(self) -> Path:
         """Initialize and return the .datacommons directory path."""
@@ -419,7 +474,10 @@ class PVMapGenerator:
             'output_basename':
                 self._output_basename,  # Base name for pvmap/metadata files
             'run_dir_abs':
-                str(self._run_dir)
+                str(self._run_dir),
+            'extra_instruction_files_abs': [
+                str(path) for path in self._config.extra_instruction_files
+            ] if self._config.extra_instruction_files else [],
         }
 
         # Render template with these variables
@@ -440,16 +498,19 @@ def prepare_config() -> Config:
                              input_metadata=_FLAGS.input_metadata or [],
                              is_sdmx_dataset=_FLAGS.sdmx_dataset)
 
-    return Config(data_config=data_config,
-                  dry_run=_FLAGS.dry_run,
-                  maps_api_key=_FLAGS.maps_api_key,
-                  dc_api_key=_FLAGS.dc_api_key,
-                  max_iterations=_FLAGS.max_iterations,
-                  skip_confirmation=_FLAGS.skip_confirmation,
-                  enable_sandboxing=_FLAGS.enable_sandboxing,
-                  output_path=_FLAGS.output_path,
-                  gemini_cli=_FLAGS.gemini_cli,
-                  working_dir=_FLAGS.working_dir)
+    return Config(
+        data_config=data_config,
+        dry_run=_FLAGS.dry_run,
+        maps_api_key=_FLAGS.maps_api_key,
+        dc_api_key=_FLAGS.dc_api_key,
+        max_iterations=_FLAGS.max_iterations,
+        skip_confirmation=_FLAGS.skip_confirmation,
+        enable_sandboxing=_FLAGS.enable_sandboxing,
+        output_path=_FLAGS.output_path,
+        gemini_cli=_FLAGS.gemini_cli,
+        working_dir=_FLAGS.working_dir,
+        extra_instruction_files=_FLAGS.extra_instruction_files or [],
+        extra_instruction_max_bytes=_FLAGS.extra_instruction_max_bytes)
 
 
 def main(_):

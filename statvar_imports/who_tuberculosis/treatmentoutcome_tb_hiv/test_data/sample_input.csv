@@ -1,0 +1,500 @@
+IND_ID,INDICATOR_NAME,DISAGGR_1,YEAR,COUNTRY,iso3,VALUE
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2012,Antigua and Barbuda,ATG,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2012,Antigua and Barbuda,ATG,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2012,Antigua and Barbuda,ATG,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2012,Antigua and Barbuda,ATG,50.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2012,Antigua and Barbuda,ATG,50.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2013,Antigua and Barbuda,ATG,75.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2013,Antigua and Barbuda,ATG,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2013,Antigua and Barbuda,ATG,25.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2013,Antigua and Barbuda,ATG,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2013,Antigua and Barbuda,ATG,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2012,Argentina,ARG,23.5457063711911
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2012,Argentina,ARG,0.138504155124654
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2012,Argentina,ARG,12.1883656509695
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2012,Argentina,ARG,15.2354570637119
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2012,Argentina,ARG,48.8919667590028
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2013,Argentina,ARG,31.7689530685921
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2013,Argentina,ARG,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2013,Argentina,ARG,17.1480144404332
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2013,Argentina,ARG,11.5523465703971
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2013,Argentina,ARG,39.5306859205776
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2014,Argentina,ARG,34.4017094017094
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2014,Argentina,ARG,0.427350427350427
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2014,Argentina,ARG,20.5128205128205
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2014,Argentina,ARG,12.8205128205128
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2014,Argentina,ARG,31.8376068376068
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2015,Argentina,ARG,27.9389312977099
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2015,Argentina,ARG,0.610687022900763
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2015,Argentina,ARG,12.3664122137405
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2015,Argentina,ARG,9.9236641221374
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2015,Argentina,ARG,49.1603053435115
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2016,Argentina,ARG,28.680981595092
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2016,Argentina,ARG,0.306748466257669
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2016,Argentina,ARG,15.0306748466258
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2016,Argentina,ARG,14.5705521472393
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2016,Argentina,ARG,41.4110429447853
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2017,Argentina,ARG,36.2606232294618
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2017,Argentina,ARG,0.141643059490085
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2017,Argentina,ARG,18.271954674221
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2017,Argentina,ARG,13.4560906515581
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2017,Argentina,ARG,31.8696883852691
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2018,Argentina,ARG,33.0995792426367
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2018,Argentina,ARG,0.140252454417952
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2018,Argentina,ARG,16.4095371669004
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2018,Argentina,ARG,11.781206171108
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2018,Argentina,ARG,38.5694249649369
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2019,Argentina,ARG,38.0673499267936
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2019,Argentina,ARG,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2019,Argentina,ARG,14.787701317716
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2019,Argentina,ARG,8.199121522694
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2019,Argentina,ARG,38.9458272327965
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2020,Argentina,ARG,37.6753507014028
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2020,Argentina,ARG,0.200400801603206
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2020,Argentina,ARG,19.8396793587174
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2020,Argentina,ARG,15.2304609218437
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2020,Argentina,ARG,27.0541082164329
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2021,Argentina,ARG,29.3225480283114
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2021,Argentina,ARG,0.202224469160768
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2021,Argentina,ARG,13.953488372093
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2021,Argentina,ARG,11.0212335692619
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2021,Argentina,ARG,45.5005055611729
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2022,Argentina,ARG,34.7912524850895
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2022,Argentina,ARG,0.099403578528827
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2022,Argentina,ARG,19.9801192842942
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2022,Argentina,ARG,10.1391650099404
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2022,Argentina,ARG,34.9900596421471
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2023,Argentina,ARG,36.2372567191844
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2023,Argentina,ARG,0.278035217794254
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2023,Argentina,ARG,17.1455050973123
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2023,Argentina,ARG,11.9555143651529
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2023,Argentina,ARG,34.3836886005561
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2013,Armenia,ARM,65.7894736842105
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2013,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2013,Armenia,ARM,15.7894736842105
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2013,Armenia,ARM,18.421052631579
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2013,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2014,Armenia,ARM,59.7402597402597
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2014,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2014,Armenia,ARM,27.2727272727273
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2014,Armenia,ARM,11.6883116883117
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2014,Armenia,ARM,1.2987012987013
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2015,Armenia,ARM,65.2777777777778
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2015,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2015,Armenia,ARM,25.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2015,Armenia,ARM,9.72222222222222
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2015,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2016,Armenia,ARM,60.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2016,Armenia,ARM,8.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2016,Armenia,ARM,28.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2016,Armenia,ARM,4.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2016,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2017,Armenia,ARM,54.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2017,Armenia,ARM,4.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2017,Armenia,ARM,34.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2017,Armenia,ARM,8.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2017,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2018,Armenia,ARM,63.9344262295082
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2018,Armenia,ARM,3.27868852459016
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2018,Armenia,ARM,26.2295081967213
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2018,Armenia,ARM,6.55737704918033
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2018,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2019,Armenia,ARM,65.1162790697675
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2019,Armenia,ARM,9.30232558139535
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2019,Armenia,ARM,23.2558139534884
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2019,Armenia,ARM,2.32558139534884
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2019,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2020,Armenia,ARM,73.3333333333333
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2020,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2020,Armenia,ARM,20.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2020,Armenia,ARM,3.33333333333333
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2020,Armenia,ARM,3.33333333333333
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2021,Armenia,ARM,69.5652173913044
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2021,Armenia,ARM,17.3913043478261
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2021,Armenia,ARM,13.0434782608696
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2021,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2021,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2022,Armenia,ARM,71.875
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2022,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2022,Armenia,ARM,18.75
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2022,Armenia,ARM,9.375
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2022,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2023,Armenia,ARM,66.6666666666667
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2023,Armenia,ARM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2023,Armenia,ARM,15.3846153846154
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2023,Armenia,ARM,15.3846153846154
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2023,Armenia,ARM,2.56410256410256
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2012,Australia,AUS,63.6363636363636
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2012,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2012,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2012,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2012,Australia,AUS,36.3636363636364
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2013,Australia,AUS,76.9230769230769
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2013,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2013,Australia,AUS,3.84615384615385
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2013,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2013,Australia,AUS,19.2307692307692
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2014,Australia,AUS,47.0588235294118
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2014,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2014,Australia,AUS,5.88235294117647
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2014,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2014,Australia,AUS,47.0588235294118
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2015,Australia,AUS,42.8571428571429
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2015,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2015,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2015,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2015,Australia,AUS,57.1428571428572
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2016,Australia,AUS,76.1904761904762
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2016,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2016,Australia,AUS,4.76190476190476
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2016,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2016,Australia,AUS,19.0476190476191
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2017,Australia,AUS,53.8461538461539
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2017,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2017,Australia,AUS,3.84615384615385
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2017,Australia,AUS,7.69230769230769
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2017,Australia,AUS,34.6153846153846
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2018,Australia,AUS,60.8695652173913
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2018,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2018,Australia,AUS,4.34782608695652
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2018,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2018,Australia,AUS,34.7826086956522
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2019,Australia,AUS,65.2173913043478
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2019,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2019,Australia,AUS,4.34782608695652
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2019,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2019,Australia,AUS,30.4347826086957
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2020,Australia,AUS,73.6842105263158
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2020,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2020,Australia,AUS,10.5263157894737
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2020,Australia,AUS,5.26315789473684
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2020,Australia,AUS,10.5263157894737
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2021,Australia,AUS,66.6666666666667
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2021,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2021,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2021,Australia,AUS,6.66666666666667
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2021,Australia,AUS,26.6666666666667
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2022,Australia,AUS,70.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2022,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2022,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2022,Australia,AUS,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2019,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2019,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2019,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2019,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2020,"China, Macao SAR",MAC,100.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2020,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2020,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2020,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2020,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2021,"China, Macao SAR",MAC,75.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2021,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2021,"China, Macao SAR",MAC,25.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2021,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2021,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2022,"China, Macao SAR",MAC,50.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2022,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2022,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2022,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2022,"China, Macao SAR",MAC,50.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2023,"China, Macao SAR",MAC,66.6666666666667
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2023,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2023,"China, Macao SAR",MAC,33.3333333333333
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2023,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2023,"China, Macao SAR",MAC,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2013,Colombia,COL,45.1981195433177
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2013,Colombia,COL,1.34318334452653
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2013,Colombia,COL,22.9012760241773
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2013,Colombia,COL,14.6406984553392
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2013,Colombia,COL,15.9167226326394
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2014,Colombia,COL,53.8825118163403
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2014,Colombia,COL,1.41796083727211
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2014,Colombia,COL,24.375422012154
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2014,Colombia,COL,16.8804861580014
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2014,Colombia,COL,3.44361917623228
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2015,Colombia,COL,51.0638297872341
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2015,Colombia,COL,0.257898130238556
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2015,Colombia,COL,27.2082527401676
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2015,Colombia,COL,16.7633784655061
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2015,Colombia,COL,4.70664087685364
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2016,Colombia,COL,37.9043600562588
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2016,Colombia,COL,0.210970464135021
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2016,Colombia,COL,27.4261603375527
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2016,Colombia,COL,16.7369901547117
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2016,Colombia,COL,17.7215189873418
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2017,Colombia,COL,52.0249221183801
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2017,Colombia,COL,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2017,Colombia,COL,25.778816199377
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2017,Colombia,COL,10.7476635514019
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2017,Colombia,COL,11.4485981308411
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2018,Colombia,COL,55.5925432756325
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2018,Colombia,COL,1.59786950732357
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2018,Colombia,COL,25.965379494008
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2018,Colombia,COL,12.5166444740346
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2018,Colombia,COL,4.32756324900133
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2019,Colombia,COL,52.6907155529273
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2019,Colombia,COL,0.887049083382614
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2019,Colombia,COL,26.8480189237138
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2019,Colombia,COL,16.6765227675931
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2019,Colombia,COL,2.89769367238321
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2020,Colombia,COL,50.9993552546744
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2020,Colombia,COL,0.902643455834945
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2020,Colombia,COL,32.3017408123791
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2020,Colombia,COL,13.7330754352031
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2020,Colombia,COL,2.06318504190845
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2021,Colombia,COL,54.8678272082528
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2021,Colombia,COL,1.1605415860735
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2021,Colombia,COL,28.8201160541586
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2021,Colombia,COL,12.9593810444874
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2021,Colombia,COL,2.19213410702772
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2022,Colombia,COL,53.6129358261748
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2022,Colombia,COL,1.26326427488631
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2022,Colombia,COL,25.8716523496716
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2022,Colombia,COL,15.7150075795857
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2022,Colombia,COL,3.53713996968166
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2023,Colombia,COL,53.7242472266244
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2023,Colombia,COL,1.162176439514
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2023,Colombia,COL,21.6059165346012
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2023,Colombia,COL,19.1230850501849
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2023,Colombia,COL,4.38457474907554
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2012,Comoros,COM,25.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2012,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2012,Comoros,COM,75.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2012,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2012,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2013,Comoros,COM,50.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2013,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2013,Comoros,COM,50.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2013,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2013,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2020,Comoros,COM,100.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2020,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2020,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2020,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2020,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2022,Comoros,COM,50.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2022,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2022,Comoros,COM,50.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2022,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2022,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2023,Comoros,COM,100.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2023,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2023,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2023,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2023,Comoros,COM,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2015,Congo,COG,19.8807157057654
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2015,Congo,COG,0.795228628230616
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2015,Congo,COG,1.19284294234592
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2015,Congo,COG,2.18687872763419
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2015,Congo,COG,75.9443339960239
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2017,Congo,COG,25.4010695187166
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2017,Congo,COG,0.267379679144385
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2017,Congo,COG,4.54545454545455
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2017,Congo,COG,6.95187165775401
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2017,Congo,COG,62.8342245989305
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2018,Congo,COG,29.8157453936348
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2018,Congo,COG,0.16750418760469
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2018,Congo,COG,4.18760469011725
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2018,Congo,COG,12.2278056951424
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2018,Congo,COG,53.6013400335008
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2019,Congo,COG,26.625386996904
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2019,Congo,COG,0.464396284829721
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2019,Congo,COG,7.12074303405573
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2019,Congo,COG,15.9442724458204
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2019,Congo,COG,49.8452012383901
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2020,Congo,COG,45.0180072028812
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2020,Congo,COG,0.240096038415366
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2020,Congo,COG,5.04201680672269
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2020,Congo,COG,12.7250900360144
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2020,Congo,COG,36.9747899159664
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2021,Congo,COG,45.9627329192547
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2021,Congo,COG,0.10351966873706
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2021,Congo,COG,3.20910973084886
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2021,Congo,COG,13.9751552795031
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2021,Congo,COG,36.7494824016563
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2022,Congo,COG,56.4612326043738
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2022,Congo,COG,0.298210735586481
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2022,Congo,COG,3.47912524850895
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2022,Congo,COG,13.3200795228628
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2022,Congo,COG,26.441351888668
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2023,Congo,COG,64.1857037582903
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2023,Congo,COG,0.294767870302137
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2023,Congo,COG,4.42151805453206
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2023,Congo,COG,10.5379513633014
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2023,Congo,COG,20.5600589535741
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2012,Costa Rica,CRI,59.2592592592593
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2012,Costa Rica,CRI,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2012,Costa Rica,CRI,29.6296296296296
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2012,Costa Rica,CRI,7.40740740740741
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2012,Costa Rica,CRI,3.7037037037037
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2013,Costa Rica,CRI,69.0476190476191
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2013,Costa Rica,CRI,2.38095238095238
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2013,Costa Rica,CRI,23.8095238095238
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2013,Costa Rica,CRI,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2013,Costa Rica,CRI,4.76190476190476
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2014,Costa Rica,CRI,63.8888888888889
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2014,Costa Rica,CRI,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2014,Costa Rica,CRI,16.6666666666667
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2014,Costa Rica,CRI,13.8888888888889
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2014,Costa Rica,CRI,5.55555555555556
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2015,Costa Rica,CRI,61.2903225806452
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2015,Costa Rica,CRI,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2015,Costa Rica,CRI,32.258064516129
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2015,Costa Rica,CRI,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2015,Costa Rica,CRI,6.45161290322581
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2016,Costa Rica,CRI,48.3870967741936
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2016,Costa Rica,CRI,3.2258064516129
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2016,Costa Rica,CRI,41.9354838709678
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2016,Costa Rica,CRI,6.45161290322581
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2016,Costa Rica,CRI,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2017,Costa Rica,CRI,87.0967741935484
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2017,Costa Rica,CRI,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2017,Costa Rica,CRI,9.67741935483871
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2017,Costa Rica,CRI,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2017,Costa Rica,CRI,3.2258064516129
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2018,Costa Rica,CRI,78.0487804878049
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2018,Costa Rica,CRI,2.4390243902439
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2018,Costa Rica,CRI,12.1951219512195
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2012,Guinea,GIN,6.99300699300699
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2012,Guinea,GIN,7.42334588488435
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2013,Guinea,GIN,74.9361919346606
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2013,Guinea,GIN,5.15569167942828
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2013,Guinea,GIN,7.6059213884635
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2013,Guinea,GIN,5.05359877488515
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2013,Guinea,GIN,7.24859622256253
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2014,Guinea,GIN,76.6328011611031
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2014,Guinea,GIN,1.45137880986938
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2014,Guinea,GIN,11.6594097726173
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2014,Guinea,GIN,3.870343492985
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2014,Guinea,GIN,6.38606676342525
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2015,Guinea,GIN,74.4854202401372
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2015,Guinea,GIN,1.20068610634648
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2015,Guinea,GIN,11.1492281303602
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2015,Guinea,GIN,7.03259005145798
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2015,Guinea,GIN,6.13207547169811
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2016,Guinea,GIN,83.1035840882237
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2016,Guinea,GIN,0.905868452146514
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2016,Guinea,GIN,10.6734935013785
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2016,Guinea,GIN,3.38716029933045
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2016,Guinea,GIN,1.92989365892083
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2017,Guinea,GIN,85.2221839476404
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2017,Guinea,GIN,0.792283844299001
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2017,Guinea,GIN,10.1963486048915
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2017,Guinea,GIN,2.82466414054426
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2017,Guinea,GIN,0.964519462624871
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2018,Guinea,GIN,84.996534996535
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2018,Guinea,GIN,0.762300762300762
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2018,Guinea,GIN,10.5336105336105
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2018,Guinea,GIN,2.91060291060291
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2018,Guinea,GIN,0.796950796950797
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2019,Guinea,GIN,85.9622867404969
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2019,Guinea,GIN,1.01765938341814
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2019,Guinea,GIN,8.50044896737504
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2019,Guinea,GIN,2.81352888356779
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2019,Guinea,GIN,1.70607602514217
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2020,Guinea,GIN,88.0050188205772
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2020,Guinea,GIN,2.00752823086575
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2020,Guinea,GIN,6.64993726474279
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2020,Guinea,GIN,1.45545796737767
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2020,Guinea,GIN,1.88205771643664
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2022,Guinea,GIN,88.9719067543335
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2022,Guinea,GIN,0.926479378362224
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2022,Guinea,GIN,6.96353855349671
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2022,Guinea,GIN,2.09205020920502
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2022,Guinea,GIN,1.04602510460251
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2023,Guinea,GIN,88.0501311570971
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2023,Guinea,GIN,0.786942582337511
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2023,Guinea,GIN,7.05333721946954
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2023,Guinea,GIN,2.62314194112504
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2023,Guinea,GIN,1.48644709997085
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2015,Guinea-Bissau,GNB,68.0094786729858
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2015,Guinea-Bissau,GNB,1.18483412322275
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2015,Guinea-Bissau,GNB,19.6682464454976
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2015,Guinea-Bissau,GNB,9.24170616113744
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2015,Guinea-Bissau,GNB,1.8957345971564
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2016,Guinea-Bissau,GNB,73.1225296442688
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2016,Guinea-Bissau,GNB,1.77865612648221
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2016,Guinea-Bissau,GNB,12.2529644268775
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2016,Guinea-Bissau,GNB,9.09090909090909
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2016,Guinea-Bissau,GNB,3.75494071146245
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2017,Guinea-Bissau,GNB,72.189349112426
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2017,Guinea-Bissau,GNB,1.57790927021696
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2017,Guinea-Bissau,GNB,13.0177514792899
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2017,Guinea-Bissau,GNB,7.29783037475345
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2017,Guinea-Bissau,GNB,5.91715976331361
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2018,Guinea-Bissau,GNB,63.030303030303
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2018,Guinea-Bissau,GNB,1.06060606060606
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2018,Guinea-Bissau,GNB,18.7878787878788
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2018,Guinea-Bissau,GNB,11.0606060606061
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2018,Guinea-Bissau,GNB,6.06060606060606
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2019,Guinea-Bissau,GNB,70.5521472392638
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2019,Guinea-Bissau,GNB,1.38036809815951
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2019,Guinea-Bissau,GNB,15.9509202453988
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2019,Guinea-Bissau,GNB,10.2760736196319
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2019,Guinea-Bissau,GNB,1.84049079754601
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2020,Guinea-Bissau,GNB,72.3440134907251
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2020,Guinea-Bissau,GNB,1.68634064080944
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2020,Guinea-Bissau,GNB,13.6593591905565
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2020,Guinea-Bissau,GNB,10.2866779089376
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2020,Guinea-Bissau,GNB,2.02360876897133
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2021,Guinea-Bissau,GNB,74.7276688453159
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2021,Guinea-Bissau,GNB,0.65359477124183
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2021,Guinea-Bissau,GNB,10.0217864923747
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2021,Guinea-Bissau,GNB,11.7647058823529
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2021,Guinea-Bissau,GNB,2.8322440087146
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2022,Guinea-Bissau,GNB,76.9521410579345
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2022,Guinea-Bissau,GNB,0.629722921914358
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2022,Guinea-Bissau,GNB,8.06045340050378
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2022,Guinea-Bissau,GNB,11.5869017632242
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2022,Guinea-Bissau,GNB,2.77078085642317
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2023,Guinea-Bissau,GNB,70.1086956521739
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2023,Guinea-Bissau,GNB,0.135869565217391
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2023,Guinea-Bissau,GNB,11.9565217391304
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2023,Guinea-Bissau,GNB,12.2282608695652
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2023,Guinea-Bissau,GNB,5.57065217391304
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2012,Guyana,GUY,54.9295774647887
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2012,Guyana,GUY,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2012,Guyana,GUY,30.9859154929578
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2012,Guyana,GUY,12.3239436619718
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2012,Guyana,GUY,1.76056338028169
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2013,Guyana,GUY,62.589928057554
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2013,Guyana,GUY,2.15827338129496
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2013,Guyana,GUY,22.3021582733813
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2013,Guyana,GUY,12.9496402877698
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2013,Guyana,GUY,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2014,Guyana,GUY,59.4594594594595
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2014,Guyana,GUY,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2014,Guyana,GUY,22.5225225225225
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2014,Guyana,GUY,12.6126126126126
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2014,Guyana,GUY,5.40540540540541
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2015,Guyana,GUY,48.2758620689655
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2015,Guyana,GUY,0.862068965517241
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2015,Guyana,GUY,43.9655172413793
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2015,Guyana,GUY,6.89655172413793
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2015,Guyana,GUY,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2016,Guyana,GUY,73.3870967741936
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2016,Guyana,GUY,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2016,Guyana,GUY,13.7096774193548
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2016,Guyana,GUY,8.87096774193548
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2016,Guyana,GUY,4.03225806451613
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2017,Guyana,GUY,68.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2017,Guyana,GUY,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2017,Guyana,GUY,20.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2017,Guyana,GUY,10.4
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2017,Guyana,GUY,1.6
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2018,Guyana,GUY,62.0253164556962
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2018,Guyana,GUY,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2018,Guyana,GUY,20.253164556962
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2018,Guyana,GUY,15.1898734177215
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2018,Guyana,GUY,2.53164556962025
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2019,Guyana,GUY,58.5365853658537
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2019,Guyana,GUY,1.21951219512195
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2019,Guyana,GUY,14.6341463414634
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2019,Guyana,GUY,21.9512195121951
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2019,Guyana,GUY,3.65853658536585
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2020,Guyana,GUY,50.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Treatment failed,2020,Guyana,GUY,2.27272727272727
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Died,2020,Guyana,GUY,27.2727272727273
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Lost to follow-up,2020,Guyana,GUY,20.4545454545455
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Not evaluated,2020,Guyana,GUY,0.0
+DCDC2EB625E736,Treatment outcomes of people with TB/HIV patients (new episode of TB),Successfully treated,2021,Guyana,GUY,46.3768115942029

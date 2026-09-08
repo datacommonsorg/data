@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "WHO_TuberculosisAndHIVTreatmentOutcome",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://data.who.int/indicators/i/DCDC2EB/625E736",
+            "provenance_description": "Percentage of people with TB/HIV who started dug-susceptible TB treatment and whose treatment outcome was recorded as treatment success (cured or treatment completed), treatment failed, died, lost to follow-up, or not evaluated, within the reporting period.",
+            "scripts": [
+                "tb_data_download_who.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Tuberculosis_outcome_TB_HIV.csv --pv_map=tuberculosis_outcome_pvmap.csv --config_file=metadata.csv --output_path=output/tuberculosis_hiv_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/tuberculosis_hiv_output.tmcf",
+                    "cleaned_csv": "output/tuberculosis_hiv_output.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/Tuberculosis_outcome_TB_HIV.csv"
+            ],
+            "cron_schedule": "0 10 10,21 * *"
+        }
+    ]
+}

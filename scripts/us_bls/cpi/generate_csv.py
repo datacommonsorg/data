@@ -17,8 +17,7 @@ Downloads and converts BLS CPI raw csv files to csv files of two columns:
 
 Usage: python3 generate_csv.py
 '''
-import io
-import requests
+from curl_cffi import requests
 import pandas as pd
 from absl import flags
 from absl import app
@@ -42,7 +41,8 @@ global buffer
 
 @retry(tries=3, delay=5, backoff=5)
 def retry_method(url, header):
-    return requests.get(url, headers=header)
+    # To avoid 403 errors, we use impersonate to mimic a real browser's TLS fingerprint.
+    return requests.get(url, headers=header, impersonate="chrome124")
 
 
 # Dict from series names to download links
@@ -63,10 +63,8 @@ _INPUT_FILE_PATH = None
 _OUTOUT_FILE_PATH = None
 
 header = {
-    'User-Agent':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-    'Content-Type':
-        'application/octet-stream',
+    'User-Agent': 'Individual/1.0',
+    'Accept': '*/*',
 }
 
 # Dict from series names to series IDs

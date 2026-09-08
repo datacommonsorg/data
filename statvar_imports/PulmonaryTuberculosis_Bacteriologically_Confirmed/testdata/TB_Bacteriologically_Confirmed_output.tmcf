@@ -1,0 +1,6 @@
+Node: E:TB_Bacteriologically_Confirmed_output->E0
+observationDate: C:TB_Bacteriologically_Confirmed_output->observationDate
+observationAbout: C:TB_Bacteriologically_Confirmed_output->observationAbout
+value: C:TB_Bacteriologically_Confirmed_output->value
+variableMeasured: C:TB_Bacteriologically_Confirmed_output->variableMeasured
+typeOf: dcs:StatVarObservation

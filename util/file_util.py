@@ -348,7 +348,7 @@ def file_get_matching(filepat: Union[str, list]) -> list:
         for file in input_files:
             if file_is_local(file):
                 # Expand local file pattern.
-                for f in glob.glob(file):
+                for f in glob.glob(file, recursive=True):
                     files.add(f)
             elif file_is_gcs(file):
                 bucket = file_get_gcs_bucket(file)
@@ -574,7 +574,8 @@ def file_load_csv_dict(
                 if not key_column:
                     # Use the first column as the key
                     key_column = reader.fieldnames[0]
-                if not value_column and len(reader.fieldnames) == 2:
+                if not value_column and len(
+                        reader.fieldnames) == 2 and not key_index:
                     # Use second column as value if there are only two columns.
                     value_column = reader.fieldnames[1]
             logging.info(
@@ -618,7 +619,7 @@ def file_write_csv_dict(py_dict: dict,
                         filename: str,
                         columns: list = None,
                         key_column_name: str = 'key') -> list:
-    """Returns the filename after writing py_dict with a csv row per item.
+    """Returns the list of columns after writing py_dict with a csv row per item.
 
   Each dictionary items is written as a row in the CSV file.
 
@@ -673,9 +674,11 @@ def file_write_csv_dict(py_dict: dict,
                     if col not in columns:
                         columns.append(col)
     if len(columns) == 1:
-        # Value is not a dict. Write it as a column name value.
-        value_column_name = 'value'
-        columns.append(value_column_name)
+        # Check if values are dicts. If they are, it's not a primitive value.
+        if not any(isinstance(value, dict) for value in py_dict.values()):
+            # Value is not a dict. Write it as a column name value.
+            value_column_name = 'value'
+            columns.append(value_column_name)
     # Use the first column for the key.
     if key_column_name == '':
         key_column_name = columns[0]
@@ -841,7 +844,7 @@ def file_open_google_spreadsheet(url: str,
     # Get a handle for the whole spreadsheet
     gs = retry_call(
         _file_get_gspread_client().open_by_url,
-        f_args=[url],
+        fargs=[url],
         exceptions=gspread.exceptions.APIError,
         tries=retries,
     )

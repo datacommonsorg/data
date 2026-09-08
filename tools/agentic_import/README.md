@@ -5,7 +5,7 @@ This guide describes the complete process for importing CSV data into Data Commo
 ## Table of Contents
 
 - [Agentic Import Tool for Data Commons](#agentic-import-tool-for-data-commons)
-  - [Table of Contents](#table-of-contents)
+  - [SDMX Quick Links](#sdmx-quick-links)
   - [Prerequisites](#prerequisites)
     - [Required Tools](#required-tools)
   - [Setup](#setup)
@@ -25,6 +25,12 @@ This guide describes the complete process for importing CSV data into Data Commo
   - [Debugging](#debugging)
     - [Gemini CLI Debugging](#gemini-cli-debugging)
     - [Log Structure](#log-structure)
+
+## SDMX Quick Links
+
+- [SDMX import pipeline (end-to-end)](sdmx_import_pipeline.md)
+- [SDMX Downloads (section)](#sdmx-downloads)
+- [SDMX CLI documentation](../sdmx_import/README.md)
 
 ## Prerequisites
 
@@ -112,6 +118,7 @@ working_directory/
 #### SDMX Downloads
 
 Refer to the [SDMX CLI documentation](../sdmx_import/README.md) for details on downloading SDMX data and metadata files.
+See the [SDMX import pipeline](sdmx_import_pipeline.md) for the end-to-end SDMX flow.
 
 Extract a simplified, token-efficient JSON metadata copy from `metadata.xml`, retaining the original XML for later PV map generation.
 

@@ -42,8 +42,6 @@ flags.DEFINE_string("ownership_output_path", "ownership",
 flags.DEFINE_string("svobs_output_path", "svobs",
                     "Output directory for StatVarObs.")
 
-_DC_API_URL = "https://api.datacommons.org/place/stat-vars"
-
 # V_PARENT_COMPANY_INFO table
 _TABLE_PREFIX = "D_GHG_B"
 _TABLE = "V_PARENT_COMPANY_INFO"
@@ -487,7 +485,7 @@ def generate_svobs_helper(ownership_relationships_filepath, svobs_path_info):
 
     facilities = list(facilities)
 
-    statVars = fh.get_all_statvars(_DC_API_URL, facilities)
+    statVars = fh.get_all_statvars(facilities)
     facility_sv_map, facets = fh.get_all_svobs(facilities, statVars)
     print("# SVs : %d" % len(statVars))
     print("# Facilities : %d" % len(facility_sv_map))

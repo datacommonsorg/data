@@ -20,7 +20,8 @@
                 "demo_r_find3.tsv.gz",
                 "input_files/input_file.tsv"
             ],
-            "cron_schedule": "00 04 * * 2"
+            "cron_schedule": "00 04 * * 2",
+            "validation_config_file": "validation_config.json"
         }
     ]
 }

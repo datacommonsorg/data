@@ -173,6 +173,8 @@
             # Output settings.
             "output_svobs":
                 True,
+            "omit_events_subdir":
+                True,
             "output_delimiter":
                 ",",
             "output_affected_place_polygon":

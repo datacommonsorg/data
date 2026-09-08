@@ -68,7 +68,4 @@
         5,
     'dc_api_use_cache':
         True,
-    #'dc_api_root': 'http://autopush.api.datacommons.org',
-    'dc_api_root':
-        'http://api.datacommons.org',
 }

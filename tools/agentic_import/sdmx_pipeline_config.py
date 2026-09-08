@@ -29,8 +29,8 @@ FLAG_SDMX_DATAFLOW_PARAM = "sdmx.dataflow.param"
 class SdmxDataflowConfig:
     """Configuration for SDMX dataflow."""
     id: str | None = None
-    key: str | None = None
-    param: str | None = None
+    key: tuple[str, ...] = ()
+    param: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -54,6 +54,8 @@ class RunConfig:
     dataset_prefix: str | None = None
     working_dir: str | None = None
     run_only: str | None = None
+    run_from: str | None = None
+    run_until: str | None = None
     force: bool = False
     verbose: bool = False
     skip_confirmation: bool = False

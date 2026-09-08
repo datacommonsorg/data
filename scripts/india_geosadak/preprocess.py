@@ -119,8 +119,11 @@ class GeoSadakLoader:
         else:
             self.clean_df[column] = self.clean_df[column].astype(
                 str).str.replace(",", "")
-            self.clean_df[column] = pd.to_numeric(self.clean_df[column],
-                                                  errors="ignore")
+            try:
+                self.clean_df[column] = pd.to_numeric(self.clean_df[column],
+                                                      errors="raise")
+            except (ValueError, TypeError):
+                pass
 
     def process(self):
         """

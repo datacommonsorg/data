@@ -21,10 +21,21 @@ No preprocessing required.
 fully auto refresh
 
 # Script Execution Details
-First, run `main.py` to download the data.
-flags: data_start_year - this is the default flag which refers to the start year.
-       data_end_year - this is the default flag which refers to the current year.
-       output_dir - this is also the default flag which refers to the output directory for processed output from 'main.py' script.
+The `main.py` script is used to download and process the source data.
+
+### Download and Processing Logic
+The script iterates through a range of years from `data_start_year` up to `data_end_year - 2`.
+- **Historical Data:** For years prior to the latest available data, the script expects the data to be present at the source. If a download fails for these years, it is considered a critical failure and the script will stop.
+- **Latest Year Data:** The script attempts to download data for the latest year (calculated as `data_end_year - 2`). If this data is not yet published (returning a 404 error), the script will log a warning and skip it, allowing the import to proceed with available historical data.
+- **File Extraction:** Source files are downloaded as ZIP archives, and only relevant `.txt` files are extracted for processing.
+- **In-Memory Processing:** Extracted `.txt` files are loaded into memory and processed into CSV format suitable for sharding.
+
+### Flags
+- `data_start_year`: The year to start downloading data from (default is 2016).
+- `data_end_year`: The year to process data up to (default is the current year). The script attempts to download data up to `data_end_year - 2`.
+- `output_dir`: The directory where processed CSV files will be saved.
+- `test`: A boolean flag to run the script in test mode (default is False).
+
 The `shard_input_csv.sh` script performs the following preprocessing steps:
 1.  Creates directories for shards, debug outputs, and final processed outputs.
 2.  Splits the large input CSV files into smaller shards of 500,000 rows each.
