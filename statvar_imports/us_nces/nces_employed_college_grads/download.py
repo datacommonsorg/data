@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,10 +40,10 @@ if _UTIL_DIR not in sys.path:
     sys.path.insert(0, _UTIL_DIR)
 
 try:
-    from download_util_script import _retry_method, download_file
+    from download_util import request_url
+    from download_util_script import download_file
 except ImportError:
-    logging.fatal(
-        "Could not import download_file from 'util/download_util_script.py'.")
+    logging.fatal("Could not import download utilities from 'util/'.")
 
 LANDING_PAGE_URL = (
     "https://ncses.nsf.gov/surveys/national-survey-college-graduates")
@@ -82,18 +83,21 @@ def resolve_url(landing_url: str = LANDING_PAGE_URL,
                  landing_url)
 
     try:
-        response = _retry_method(landing_url, headers, tries, delay, backoff)
-        response.raise_for_status()
-    except (requests.exceptions.RequestException, ValueError, OSError) as e:
+        content = request_url(landing_url,
+                              headers=headers or {},
+                              output='text',
+                              retries=tries,
+                              retry_secs=delay)
+    except Exception as e:
         logging.error("Failed to fetch landing page '%s': %s", landing_url, e)
         return None
-    except Exception as e:
-        logging.error(
-            "An unexpected error occurred while fetching landing page '%s': %s",
-            landing_url, e)
+
+    if not content:
+        logging.error("Failed to fetch landing page '%s': empty response.",
+                      landing_url)
         return None
 
-    matches = re.findall(file_pattern, response.text)
+    matches = re.findall(file_pattern, content)
     if not matches:
         logging.error("No link matching pattern '%s' found on '%s'.",
                       file_pattern, landing_url)
