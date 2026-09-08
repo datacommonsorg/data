@@ -163,6 +163,10 @@ class DownloadTest(unittest.TestCase):
             self.assertTrue(download.is_state_downloaded(temp_dir, "10", years=["2018", "2024"]))
             self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2025"]))
 
+            # Create file with only 2018 data, but Deaths column equals 2024 -> should NOT match 2024
+            f.write_text("Notes,Year,County,Deaths\n" + ",2018,Kent County,2024\n" * 5)
+            self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2024"]))
+
             # Test partitioned chunk files
             f.unlink()
             chunk_2024 = Path(temp_dir) / "UnderlyingCauseofDeath_County_10_2024.csv"

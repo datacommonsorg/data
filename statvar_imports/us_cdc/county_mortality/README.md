@@ -53,7 +53,6 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 | `manifest.json` | Automation manifest declaring scripts, inputs/outputs, cron schedule, and validation config. |
 | `validation_config.json` | Configuration file defining import validation rules (historical deleted records threshold). |
 | `test_data/` | Trimmed sample Delaware dataset and expected outputs for offline verification. |
-| `runbook.md` | Operational runbook, architecture documentation, and troubleshooting guide. |
 
 ---
 

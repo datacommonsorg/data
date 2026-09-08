@@ -475,7 +475,7 @@ def is_state_downloaded(
             with open(single_file, "r", encoding="utf-8", errors="replace") as f:
                 for line in f:
                     for y in years:
-                        if f",{y}," in line:
+                        if line.startswith(f",{y},"):
                             found_years.add(y)
                     if len(found_years) == len(years):
                         return True
