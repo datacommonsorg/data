@@ -40,16 +40,31 @@ The script will create separate CSV files for each gas type in the `input_files/
 
 ### Processing Data
 
-After downloading, you can process the generated CSV files using the `stat_var_processor.py` tool. Here's an example:
+After downloading, you can process the generated CSV files using the `stat_var_processor.py` tool.
+
+**For sectors:**
 
 ```bash
- ../../tools/statvar_importer/stat_var_processor.py \
+../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/all*.csv \
   --pv_map=climate_pvmap_sectors.csv \
   --config_file=common_metadata.csv \
   --output_path=output/output_sectors \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
   --output_counters=counters/sectors_counters.csv
+```
+
+**For subsectors:**
+
+```bash
+../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=input_files/all*.csv \
+  --pv_map=climate_pvmap_subsectors.csv \
+  --config_file=common_metadata.csv \
+  --output_path=output/output_subsectors \
+  --statvar_dcid_remap_csv=statvar_remap.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --output_counters=counters/subsectors_counters.csv
 ```
 
 ## Project Structure

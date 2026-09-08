@@ -1,20 +1,40 @@
-import requests
-import zipfile
-import pandas as pd
 import io
-import os
 import logging
+import os
+import zipfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
+import pandas as pd
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def download_and_process_zip(url, country_iso, gas):
+
+def get_retry_session(retries=3, backoff_factor=1):
+    """Creates a requests.Session with connection pooling and retry backoff."""
+    session = requests.Session()
+    retry = Retry(
+        total=retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=["GET"],
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry, pool_connections=10, pool_maxsize=10)
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    return session
+
+
+def download_and_process_zip(url, country_iso, gas, session=None):
     """
     Downloads a single zip file and processes it in memory, returning a DataFrame.
     """
     try:
         logging.info(f"  Downloading: {country_iso} for {gas}...")
-        response = requests.get(url, timeout=60)
+        client = session if session is not None else requests
+        response = client.get(url, timeout=60)
         response.raise_for_status()
 
         with zipfile.ZipFile(io.BytesIO(response.content)) as zip_ref:
@@ -59,13 +79,14 @@ def download_and_segregate_by_gas():
     """
     failed_downloads = []
     script_dir = os.path.dirname(os.path.abspath(__file__))
+    session = get_retry_session()
     
     logging.info("--- Step 1: Generating Country List ---")
     api_country_codes = set()
     countries_url = "https://api.climatetrace.org/v7/admins?level=0"
     logging.info(f"Fetching country list from API: {countries_url}")
     try:
-        response = requests.get(countries_url, timeout=60)
+        response = session.get(countries_url, timeout=60)
         response.raise_for_status()
         countries = response.json()
         api_country_codes = {country['id'] for country in countries}
@@ -112,7 +133,8 @@ def download_and_segregate_by_gas():
                     download_and_process_zip,
                     f"{base_url}/{gas}/{iso}.zip",
                     iso,
-                    gas
+                    gas,
+                    session
                 ): iso
                 for iso in combined_codes
             }
@@ -136,6 +158,7 @@ def download_and_segregate_by_gas():
             continue
 
         output_filename = os.path.join(output_dir, f"all_countries_{gas}.csv")
+        temp_filename = f"{output_filename}.tmp"
         logging.info(f"\n  -> All downloads for {gas} complete. Concatenating...")
         
         try:
@@ -149,12 +172,19 @@ def download_and_segregate_by_gas():
                 )
 
             logging.info(f"  -> Saving combined data to {output_filename}...")
-            final_df.to_csv(output_filename, index=False)
+            final_df.to_csv(temp_filename, index=False)
+            os.replace(temp_filename, output_filename)
             logging.info(f"  -> Successfully created {output_filename} with {len(final_df)} rows.\n")
         except Exception as e:
+            if os.path.exists(temp_filename):
+                try:
+                    os.remove(temp_filename)
+                except OSError:
+                    pass
             logging.error(f"  -> An error occurred during the final processing for {gas}: {e}\n")
             raise
 
+    session.close()
     logging.info("--- All processing complete. ---")
     if failed_downloads:
         logging.warning(f"The following {len(failed_downloads)} downloads were not found (404) or contained no relevant CSV files:")
