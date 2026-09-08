@@ -85,16 +85,8 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 
 ## 4. Testing & Validation
 
-### Run Unit Tests
-
-```bash
-
-# Using the repo test runner from the repository root
-./run_tests.sh -p statvar_imports/us_nces/nces_employed_college_grads
-```
-
 ### Lint & Formatting Check
-Verify compliance with Google style via YAPF:
+Run lint via java jar tool and verify compliance with Google style via YAPF:
 
 ```bash
 yapf --diff --style=google download.py
