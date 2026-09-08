@@ -34,6 +34,13 @@ def download_and_process_zip(url, country_iso, gas):
             else:
                 logging.warning(f"    -> No relevant CSV files found in zip for {country_iso} ({gas})")
                 return None
+    except requests.exceptions.HTTPError as e:
+        if e.response is not None and e.response.status_code == 404:
+            logging.warning(f"    -> Not found (404) for {country_iso} ({gas}) at {url}")
+            return None
+        status_code = e.response.status_code if getattr(e, 'response', None) is not None else "N/A"
+        logging.error(f"    -> HTTP Error for {country_iso} ({gas}) at {url} (Status: {status_code}): {e}")
+        raise
     except requests.exceptions.RequestException as e:
         status_code = e.response.status_code if getattr(e, 'response', None) is not None else "N/A"
         logging.error(f"    -> Request failed for {country_iso} ({gas}) at {url} (Status: {status_code}): {e}")
@@ -150,7 +157,7 @@ def download_and_segregate_by_gas():
 
     logging.info("--- All processing complete. ---")
     if failed_downloads:
-        logging.warning(f"The following {len(failed_downloads)} downloads contained no relevant CSV files:")
+        logging.warning(f"The following {len(failed_downloads)} downloads were not found (404) or contained no relevant CSV files:")
         for failure in sorted(failed_downloads):
             logging.warning(f"  - {failure}")
     else:
