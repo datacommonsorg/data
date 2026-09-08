@@ -18,13 +18,22 @@ california_school_performance/
 ├── config/
 │   ├── california_school_performance_metadata.csv     # Processor configurations (delimiters, headers, output columns)
 │   └── california_school_performance_pvmap.csv        # Property-Value mappings for subjects, grades, demographics, and metrics
+├── counters/
+│   └── california_school_performance_counters.csv     # Transformation counter summary
+├── golden_data/
+│   ├── golden_observations.csv                        # Critical golden entity/place observations
+│   └── golden_summary_report.csv                      # Golden summary report for statvar validation
+├── test_data/                                         # Test fixtures for E2E validation
+│   ├── sample_input.txt                               # Sample raw CAASPP input records
+│   ├── sample_state_output.csv                        # Expected sample CSV observations
+│   └── sample_state_output.tmcf                       # Expected sample TMCF mapping
+├── california_school_performance_test.py              # Unit tests for download and stream normalization
 ├── download.py                                        # Automated data fetch and extraction script
 ├── manifest.json                                      # Data Commons import specification
 ├── README.md                                          # Documentation and usage guide
-├── input_files/                                       # Raw downloaded files (sb_ca*.txt, StudentGroups.txt, etc.)
-├── output_files/                                      # Generated CSV, TMCF, and MCF outputs
-└── test_data/                                         # Test input samples and verified outputs
+└── validation_config.json                             # Production import validation rules
 ```
+
 
 ---
 
