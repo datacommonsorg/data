@@ -170,10 +170,18 @@ class DownloadTest(unittest.TestCase):
             # Only latest chunk present -> should be False
             self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2024"]))
 
-            # Both initial chunk and latest chunk present -> should be True
+            # Both initial chunk and latest chunk present -> should be True for 2018, 2024
             chunk_2018 = Path(temp_dir) / "UnderlyingCauseofDeath_County_10_2018_2019.csv"
             chunk_2018.write_text("Header,col1\n" + "val1,val2\n" * 10)
             self.assertTrue(download.is_state_downloaded(temp_dir, "10", years=["2018", "2024"]))
+
+            # If intermediate year (e.g. 2021) is requested but missing chunk -> should be False
+            self.assertFalse(download.is_state_downloaded(temp_dir, "10", years=["2018", "2021", "2024"]))
+
+            # Add intermediate chunk covering 2021 -> should now be True
+            chunk_2020 = Path(temp_dir) / "UnderlyingCauseofDeath_County_10_2020_2021.csv"
+            chunk_2020.write_text("Header,col1\n" + "val1,val2\n" * 10)
+            self.assertTrue(download.is_state_downloaded(temp_dir, "10", years=["2018", "2021", "2024"]))
 
     @mock.patch.object(download.time, "sleep")
     @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "init_session")
@@ -199,7 +207,6 @@ class DownloadTest(unittest.TestCase):
         mock_sleep.assert_called_with(1)
         mock_init.assert_called_once()
 
-
     @mock.patch.object(download.time, "sleep")
     @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "execute_query")
     def test_download_state_timeout_fallback_to_single_years(self, mock_query, mock_sleep):
@@ -214,6 +221,33 @@ class DownloadTest(unittest.TestCase):
 
         self.assertEqual(len(results), 3)
         self.assertEqual([r[0] for r in results], ["2018", "2019", "2020"])
+
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "init_session")
+    @mock.patch.object(download.CdcWonderCountyMortalityDownloader, "download_state")
+    def test_download_county_mortality_data_continues_and_raises_on_failure(
+        self, mock_download, mock_init
+    ):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            def side_effect(state_fips, years):
+                if state_fips == "10":
+                    raise requests.exceptions.ConnectionError("Connection dropped")
+                return [("all", "Notes\tCounty Code\tDeaths\n\t11001\t50\n")]
+
+            mock_download.side_effect = side_effect
+
+            with self.assertRaises(RuntimeError) as ctx:
+                download.download_county_mortality_data(
+                    states=["10", "11"],
+                    years=["2024"],
+                    output_dir=temp_dir,
+                    skip_existing=False,
+                )
+
+            # Assert error message contains the failed state name
+            self.assertIn("Delaware", str(ctx.exception))
+            # Assert state 11 was still attempted and saved despite state 10 failure
+            state_11_csv = Path(temp_dir) / "UnderlyingCauseofDeath_County_11.csv"
+            self.assertTrue(state_11_csv.exists())
 
 
 if __name__ == "__main__":

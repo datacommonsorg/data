@@ -468,32 +468,31 @@ def is_state_downloaded(
     if not all(f.stat().st_size > 100 for f in matches):
         return False
     if years:
-        initial_year = years[0]
-        latest_year = years[-1]
-        has_initial_chunk = any(
-            f.name.startswith(f"UnderlyingCauseofDeath_County_{state_fips}_{initial_year}")
-            for f in matches
-        )
-        has_latest_chunk = any(
-            f.name.endswith(f"_{latest_year}.csv") or f"_{latest_year}_" in f.name
-            for f in matches
-        )
-        if has_initial_chunk and has_latest_chunk:
-            return True
+        # Check if the single combined file exists and contains all years
         single_file = Path(output_dir) / f"UnderlyingCauseofDeath_County_{state_fips}.csv"
         if single_file.exists():
-            found_initial = False
-            found_latest = False
+            found_years = set()
             with open(single_file, "r", encoding="utf-8", errors="replace") as f:
                 for line in f:
-                    if not found_initial and f",{initial_year}," in line:
-                        found_initial = True
-                    if not found_latest and f",{latest_year}," in line:
-                        found_latest = True
-                    if found_initial and found_latest:
+                    for y in years:
+                        if f",{y}," in line:
+                            found_years.add(y)
+                    if len(found_years) == len(years):
                         return True
             return False
-        return False
+
+        # Otherwise, check if every year in years is covered by at least one chunk file
+        for y in years:
+            year_covered = False
+            for f in matches:
+                if f.name == single_file.name:
+                    continue
+                if f"_{y}.csv" in f.name or f"_{y}_" in f.name:
+                    year_covered = True
+                    break
+            if not year_covered:
+                return False
+        return True
     return True
 
 
@@ -515,6 +514,7 @@ def download_county_mortality_data(
     total_files = 0
     total_rows = 0
     states_in_batch = 0
+    failed_states = []
 
     for idx, state_fips in enumerate(states, start=1):
         state_name = US_STATES.get(state_fips, f"FIPS-{state_fips}")
@@ -569,9 +569,12 @@ def download_county_mortality_data(
                 states_in_batch = 0
 
         except Exception as e:
-            logging.fatal("Failed downloading state %s (FIPS %s): %s", state_name, state_fips, e)
+            logging.error("Failed downloading state %s (FIPS %s): %s", state_name, state_fips, e)
+            failed_states.append(state_name)
 
     logging.info("Download complete: Saved %d files with %d total rows in %s.", total_files, total_rows, output_dir)
+    if failed_states:
+        raise RuntimeError(f"Failed to download data for states: {', '.join(failed_states)}")
 
 
 def main(_):
