@@ -10,10 +10,19 @@
             }
         },
         {
-            "rule_id": "check_deleted_records_count",
-            "validator": "DELETED_RECORDS_COUNT",
+            "rule_id": "non_negative_investment_amounts",
+            "description": "Checks that investment amounts are non-negative.",
+            "validator": "MIN_VALUE_CHECK",
             "params": {
-                "threshold": 100
+                "minimum": 0
+            }
+        },
+        {
+            "rule_id": "minimum_observations_per_statvar",
+            "description": "Checks that each StatVar has at least one observation.",
+            "validator": "NUM_OBSERVATIONS_CHECK",
+            "params": {
+                "minimum": 1
             }
         }
     ]
