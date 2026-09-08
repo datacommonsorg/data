@@ -76,8 +76,8 @@ def process_rollups(df: pd.DataFrame) -> pd.DataFrame:
 
     # Filter out unknown regions (RaumSort 990: Kreis Unbekannt, 999: Quartier Unbekannt)
     if 'RaumSort' in df_rollups.columns:
-        df_rollups = df_rollups[~df_rollups['RaumSort'].astype(str).
-                                isin(['990', '999'])].copy()
+        df_rollups = df_rollups[~pd.to_numeric(
+            df_rollups['RaumSort'], errors='coerce').isin([990, 999])].copy()
 
     if df_rollups.empty:
         raise ValueError(

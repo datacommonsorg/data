@@ -74,10 +74,12 @@ class GenerateRollupsTest(unittest.TestCase):
     def test_process_rollups_filters_unknown_regions(self):
         """Verifies that unknown regions (RaumSort 990 and 999) are excluded."""
         data = pd.DataFrame({
-            'RaumSort': [1, 990, 999, '990', '999', 10],
-            'RechtsformSort': [0, 0, 0, 0, 0, 0],
-            'BetriebsgrSort': [0, 0, 0, 0, 0, 0],
-            'Arbeitsstaetten': ['100', '200', '300', '400', '500', '600']
+            'RaumSort': [1, 990, 999, '990', '999', 990.0, 10],
+            'RechtsformSort': [0, 0, 0, 0, 0, 0, 0],
+            'BetriebsgrSort': [0, 0, 0, 0, 0, 0, 0],
+            'Arbeitsstaetten': [
+                '100', '200', '300', '400', '500', '550', '600'
+            ]
         })
         result_df = process_rollups(data)
         self.assertEqual(len(result_df), 2)
