@@ -40,7 +40,8 @@ def download_and_process_zip(url, country_iso, gas, session=None):
         with zipfile.ZipFile(io.BytesIO(response.content)) as zip_ref:
             csv_files_info = [
                 f for f in zip_ref.infolist()
-                if "country" in f.filename.lower() and f.filename.endswith('.csv') and not f.is_dir()
+                if ("country" in f.filename.lower() and f.filename.endswith('.csv') and
+                    not f.is_dir())
             ]
 
             df_list = []
@@ -52,18 +53,28 @@ def download_and_process_zip(url, country_iso, gas, session=None):
             if df_list:
                 return pd.concat(df_list, ignore_index=True)
             else:
-                logging.warning(f"    -> No relevant CSV files found in zip for {country_iso} ({gas})")
+                logging.warning(
+                    f"    -> No relevant CSV files found in zip for {country_iso} ({gas})"
+                )
                 return None
     except requests.exceptions.HTTPError as e:
         if e.response is not None and e.response.status_code == 404:
             logging.warning(f"    -> Not found (404) for {country_iso} ({gas}) at {url}")
             return None
-        status_code = e.response.status_code if getattr(e, 'response', None) is not None else "N/A"
-        logging.error(f"    -> HTTP Error for {country_iso} ({gas}) at {url} (Status: {status_code}): {e}")
+        status_code = (
+            e.response.status_code if getattr(e, 'response', None) is not None else "N/A"
+        )
+        logging.error(
+            f"    -> HTTP Error for {country_iso} ({gas}) at {url} (Status: {status_code}): {e}"
+        )
         raise
     except requests.exceptions.RequestException as e:
-        status_code = e.response.status_code if getattr(e, 'response', None) is not None else "N/A"
-        logging.error(f"    -> Request failed for {country_iso} ({gas}) at {url} (Status: {status_code}): {e}")
+        status_code = (
+            e.response.status_code if getattr(e, 'response', None) is not None else "N/A"
+        )
+        logging.error(
+            f"    -> Request failed for {country_iso} ({gas}) at {url} (Status: {status_code}): {e}"
+        )
         raise
     except zipfile.BadZipFile as e:
         logging.error(f"    -> Bad zip file for {country_iso} ({gas}) at {url}: {e}")
@@ -90,11 +101,21 @@ def download_and_segregate_by_gas():
         response.raise_for_status()
         countries = response.json()
         api_country_codes = {country['id'] for country in countries}
-        logging.info(f"Successfully fetched {len(api_country_codes)} countries from API ({countries_url}). Status: {response.status_code}.")
+        logging.info(
+            f"Successfully fetched {len(api_country_codes)} countries from API ({countries_url}). "
+            f"Status: {response.status_code}."
+        )
     except requests.exceptions.RequestException as e:
-        status_code = e.response.status_code if getattr(e, 'response', None) is not None else "N/A"
-        response_text = e.response.text if getattr(e, 'response', None) is not None else "No response body"
-        logging.error(f"Error: Could not fetch country list from API ({countries_url}). Status: {status_code}, Response: {response_text}, Error: {e}")
+        status_code = (
+            e.response.status_code if getattr(e, 'response', None) is not None else "N/A"
+        )
+        response_text = (
+            e.response.text if getattr(e, 'response', None) is not None else "No response body"
+        )
+        logging.error(
+            f"Error: Could not fetch country list from API ({countries_url}). "
+            f"Status: {status_code}, Response: {response_text}, Error: {e}"
+        )
         # Not raising here, we might still have check_country.csv
 
     local_country_codes = set()
@@ -151,7 +172,9 @@ def download_and_segregate_by_gas():
                     critical_errors.append(f"{iso} ({gas}) - Error: {e}")
 
         if critical_errors:
-            raise RuntimeError(f"Critical download failures for {gas}:\n" + "\n".join(critical_errors))
+            raise RuntimeError(
+                f"Critical download failures for {gas}:\n" + "\n".join(critical_errors)
+            )
 
         if not gas_dataframes:
             logging.info(f"No data was downloaded for {gas}. The output file will not be created.")
@@ -174,7 +197,9 @@ def download_and_segregate_by_gas():
             logging.info(f"  -> Saving combined data to {output_filename}...")
             final_df.to_csv(temp_filename, index=False)
             os.replace(temp_filename, output_filename)
-            logging.info(f"  -> Successfully created {output_filename} with {len(final_df)} rows.\n")
+            logging.info(
+                f"  -> Successfully created {output_filename} with {len(final_df)} rows.\n"
+            )
         except Exception as e:
             if os.path.exists(temp_filename):
                 try:
@@ -187,7 +212,10 @@ def download_and_segregate_by_gas():
     session.close()
     logging.info("--- All processing complete. ---")
     if failed_downloads:
-        logging.warning(f"The following {len(failed_downloads)} downloads were not found (404) or contained no relevant CSV files:")
+        logging.warning(
+            f"The following {len(failed_downloads)} downloads were not found (404) "
+            "or contained no relevant CSV files:"
+        )
         for failure in sorted(failed_downloads):
             logging.warning(f"  - {failure}")
     else:
