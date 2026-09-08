@@ -7,7 +7,7 @@ CivilPerson,age,{Age},armedForcesStatus,Civilian,,,,,,,,,,,,
 internetAnywhere,populationType,Household,isInternetUser,True,internetUsageLocation,AnyLocation,householderAge,{Age},householderRace,{Race},householderGender,{Gender},householderEducationalAttainment,{EducationalAttainment},householderWorkStatus,{EmploymentStatus}
 internetAtHome,populationType,Household,isInternetUser,True,internetUsageLocation,Home,householderAge,{Age},householderRace,{Race},householderGender,{Gender},householderEducationalAttainment,{EducationalAttainment},householderWorkStatus,{EmploymentStatus}
 noInternetAtHome,populationType,Household,isInternetUser,False,internetUsageLocation,Home,householderAge,{Age},householderRace,{Race},householderGender,{Gender},householderEducationalAttainment,{EducationalAttainment},householderWorkStatus,{EmploymentStatus}
-adultInternetUser,populationType,Household,,,isInternetUser,True,householderAge,{Age},householderRace,{Race},householderGender,{Gender},householderEducationalAttainment,{EducationalAttainment},householderWorkStatus,{EmploymentStatus}
+adultInternetUser,populationType,Person,Age,[15 - Years],isInternetUser,True,race,{Race},gender,{Gender},educationalAttainment,{EducationalAttainment},employmentStatus,{EmploymentStatus},,,,
 ispBundle,populationType,Household,internetSubscriptionType,InternetBundle,,,householderAge,{Age},householderRace,{Race},householderGender,{Gender},householderEducationalAttainment,{EducationalAttainment},householderWorkStatus,{EmploymentStatus}
 ,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,
@@ -91,7 +91,7 @@ Uses the Internet at Someone Else's Home,#ignore,Ignore,,,,,,,,,,,,,,
 Browses the Web,DescriptionVar,Browses the Web,isInternetUser,True,internetUsagePurpose,WebBrowsingUsage,,,,,,,,,,
 Interacts with Household Equipment Using the Internet,#ignore,Ignore,,,,,,,,,,,,,,
 Participates in Online Video or Voice Calls or Conferencing,DescriptionVar,Participates in Online Video or Voice Calls or Conferencing,isInternetUser,True,internetUsagePurpose,VideoCallsUsage__AudioCallsUsage__ConferencingUsage,,,,,,,,,,
-"Streams or Downloads Music, Radio, Podcasts, etc.",DescriptionVar,"Streams or Downloads Music, Radio, Podcasts, etc.",isInternetUser,True,internetUsagePurpose,StreamingUsage__MediaDownloadUsage,,,,,,,,,,
+"Streams or Downloads Music, Radio, Podcasts, etc.",DescriptionVar,"Streams or Downloads Music, Radio, Podcasts, etc.",isInternetUser,True,internetUsagePurpose,MediaDownloadUsage__StreamingUsage,,,,,,,,,,
 Uses Health Monitoring Service that Connects to the Internet,DescriptionVar,Uses Health Monitoring Service that Connects to the Internet,isInternetUser,True,internetUsagePurpose,HealthMonitoringServicesUsage,,,,,,,,,,
 Uses Online Social Networks,DescriptionVar,Uses Online Social Networks,isInternetUser,True,internetUsagePurpose,SocialNetworksUsage,,,,,,,,,,
 Mobile Data Plan Used from Any Location,DescriptionVar,Mobile Data Plan Used from Any Location,isInternetUser,True,internetSubscriptionType,CellularDataPlan,,,,,,,,,,
@@ -118,18 +118,18 @@ age1524Count,observationAbout,country/USA,measuredProperty,count,Age,[15 24 Year
 age2544Count,observationAbout,country/USA,measuredProperty,count,Age,[25 44 Years],value,{Number},name,"""{DescriptionVar}, age between 25 and 44 years""",,,,,,
 age4564Count,observationAbout,country/USA,measuredProperty,count,Age,[45 64 Years],value,{Number},name,"""{DescriptionVar}, age between 45 and 64 years""",,,,,,
 age65pCount,observationAbout,country/USA,measuredProperty,count,Age,[65 - Years],value,{Number},name,"""{DescriptionVar}, age 65 years and above""",,,,,,
-workEmployedCount,observationAbout,country/USA,measuredProperty,count,EmploymentStatus,Employed,value,{Number},name,"""{DescriptionVar}, employed""",Age,"""""",age,"""""",houseHolderAge,""""""
-workUnemployedCount,observationAbout,country/USA,measuredProperty,count,EmploymentStatus,Unemployed,value,{Number},name,"""{DescriptionVar}, unemployed""",Age,"""""",age,"""""",houseHolderAge,""""""
-workNILFCount,observationAbout,country/USA,measuredProperty,count,EmploymentStatus,NotInLaborForce,value,{Number},name,"""{DescriptionVar}, not in Labour Force""",Age,"""""",age,"""""",houseHolderAge,""""""
+workEmployedCount,observationAbout,country/USA,measuredProperty,count,EmploymentStatus,Employed,value,{Number},name,"""{DescriptionVar}, employed""",Age,"""""",age,"""""",householderAge,""""""
+workUnemployedCount,observationAbout,country/USA,measuredProperty,count,EmploymentStatus,Unemployed,value,{Number},name,"""{DescriptionVar}, unemployed""",Age,"""""",age,"""""",householderAge,""""""
+workNILFCount,observationAbout,country/USA,measuredProperty,count,EmploymentStatus,NotInLaborForce,value,{Number},name,"""{DescriptionVar}, not in Labour Force""",Age,"""""",age,"""""",householderAge,""""""
 incomeU25Count,observationAbout,country/USA,measuredProperty,count,income,[- 25000 USDollar],value,{Number},name,"""{DescriptionVar}, income under 25000 USD""",,,,,,
 income2549Count,observationAbout,country/USA,measuredProperty,count,income,[25000 49000 USDollar],value,{Number},name,"""{DescriptionVar}, income between 25000 and 49000 USD""",,,,,,
 income5074Count,observationAbout,country/USA,measuredProperty,count,income,[50000 74000 USDollar],value,{Number},name,"""{DescriptionVar}, income between 50000 and 74000 USD""",,,,,,
 income7599Count,observationAbout,country/USA,measuredProperty,count,income,[75000 99000 USDollar],value,{Number},name,"""{DescriptionVar}, income between 75000 and 99000 USD""",,,,,,
 income100pCount,observationAbout,country/USA,measuredProperty,count,income,[100000 - USDollar],value,{Number},name,"""{DescriptionVar}, income above 100000 USD""",,,,,,
-edNoDiplomaCount,observationAbout,country/USA,measuredProperty,count,EducationalAttainment,NoDiploma,value,{Number},name,"""{DescriptionVar}, education without Diploma""",Age,"""""",age,"""""",houseHolderAge,""""""
-edHSGradCount,observationAbout,country/USA,measuredProperty,count,EducationalAttainment,HighSchoolGraduate,value,{Number},name,"""{DescriptionVar}, education up to Higher Secondary Graduate""",Age,"""""",age,"""""",houseHolderAge,""""""
-edSomeCollegeCount,observationAbout,country/USA,measuredProperty,count,EducationalAttainment,SomeCollegeOrAssociatesDegree,value,{Number},name,"""{DescriptionVar}, education up to some college""",Age,"""""",age,"""""",houseHolderAge,""""""
-edCollegeGradCount,observationAbout,country/USA,measuredProperty,count,EducationalAttainment,CollegeGraduate,value,{Number},name,"""{DescriptionVar}, education up to college Graduate""",Age,"""""",age,"""""",houseHolderAge,""""""
+edNoDiplomaCount,observationAbout,country/USA,measuredProperty,count,EducationalAttainment,NoDiploma,value,{Number},name,"""{DescriptionVar}, education without Diploma""",Age,"""""",age,"""""",householderAge,""""""
+edHSGradCount,observationAbout,country/USA,measuredProperty,count,EducationalAttainment,HighSchoolGraduate,value,{Number},name,"""{DescriptionVar}, education up to Higher Secondary Graduate""",Age,"""""",age,"""""",householderAge,""""""
+edSomeCollegeCount,observationAbout,country/USA,measuredProperty,count,EducationalAttainment,SomeCollegeOrAssociatesDegree,value,{Number},name,"""{DescriptionVar}, education up to some college""",Age,"""""",age,"""""",householderAge,""""""
+edCollegeGradCount,observationAbout,country/USA,measuredProperty,count,EducationalAttainment,CollegeGraduate,value,{Number},name,"""{DescriptionVar}, education up to college Graduate""",Age,"""""",age,"""""",householderAge,""""""
 sexMaleCount,observationAbout,country/USA,measuredProperty,count,Gender,Male,value,{Number},name,"""{DescriptionVar}, male""",,,,,,
 sexFemaleCount,observationAbout,country/USA,measuredProperty,count,Gender,Female,value,{Number},name,"""{DescriptionVar}, female""",,,,,,
 raceWhiteCount,observationAbout,country/USA,measuredProperty,count,Race,WhiteAloneNotHispanicOrLatino,value,{Number},name,"""{DescriptionVar}, White non-Hispanic""",,,,,,

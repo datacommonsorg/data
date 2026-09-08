@@ -19,11 +19,13 @@
             "import_inputs": [
                 {
                     "template_mcf": "output_files/ntia_output.tmcf",
-                    "cleaned_csv": "output_files/ntia_output.csv"
+                    "cleaned_csv": "output_files/ntia_output.csv",
+                    "node_mcf": "output_files/*.mcf"
                 },
                 {
                     "template_mcf": "output_files/ntia_age_output.tmcf",
-                    "cleaned_csv": "output_files/ntia_age_output.csv"
+                    "cleaned_csv": "output_files/ntia_age_output.csv",
+                    "node_mcf": "output_files/*.mcf"
                 }
             ],
             "cron_schedule": "0 06 * * 5"
