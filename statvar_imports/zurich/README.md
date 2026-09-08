@@ -12,7 +12,11 @@ Generate rollups from the downloaded dataset:
 python3 wir_2552_wiki/generate_rollups.py
 
 Rollup Logic & Explanation (`wir_2552_wiki/generate_rollups.py`):
-- **Total Row Filtering**: The raw dataset (`WIR255OD2552.csv`) breaks down workplaces and employees by legal form (`RechtsformSort`) and company size class (`BetriebsgrSort`). The script filters the dataset to retain only the total rollup rows (`RechtsformSort == 0` ["Alle Rechtsformen"] and `BetriebsgrSort == 0` ["Alle Betriebsgrössen"]) to produce overall totals per geographic region (City, Kreise, and Quartiere).
+- **Why Filter on Value `'0'` (`RechtsformSort == 0` & `BetriebsgrSort == 0`)**:
+  - In the upstream dataset (`WIR255OD2552.csv`), category code **`0` represents the official aggregate total row** across all sub-categories: `RechtsformSort == 0` is *"Alle Rechtsformen"* (all legal forms combined) and `BetriebsgrSort == 0` is *"Alle Betriebsgrössen"* (all company sizes combined). Non-zero values (`1`, `2`, etc.) represent granular sub-category breakdowns (e.g., public-law vs. private-law entities, micro-businesses `<10` vs. small businesses `10–49`).
+  - **Matches Target StatVar Schema**: The Data Commons StatVars emitted by this import (`Count_Company`, `Count_Person_Employed`, `Count_Person_Employed_Female`, `Count_Person_Employed_Male`, `Count_Person_FullTimeEmployee`, etc.) represent overall totals per place and year without legal form or company size constraints.
+  - **Prevents Conflicting Duplicate Observations**: Retaining non-zero breakdown rows would cause `stat_var_processor.py` to map multiple sub-category rows to the exact same `(place, year, StatVar)` tuple, causing observation collisions.
+  - **Avoids Undercounting from Suppressed Cells (`'K'`)**: Individual sub-category breakdown rows frequently contain `'K'` (confidentiality suppression for small counts). Summing non-zero breakdown rows manually would undercount true totals, whereas the official `(0, 0)` row provides the complete, authoritative total published by Statistics Zurich.
 - **Unknown Region Exclusion**: Filters out unknown/unassigned region rows (`RaumSort` `990` ["Kreis Unbekannt"] and `999` ["Quartier Unbekannt"]) that do not map to valid geographic places.
 - **Numeric Coercion**: Coerces metric columns (`Arbeitsstaetten`, `AnzBesch`, `AnzBeschW`, `AnzBeschM`, `AnzVZA`, `AnzVZAW`, `AnzVZAM`) to numeric values, converting non-numeric markers (e.g., `'K'` for confidential/suppressed entries) to `NaN` so they are cleanly skipped during StatVar observation generation.
 
